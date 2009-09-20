@@ -1,0 +1,49 @@
+trimAl/readAl v1.2. April 2009.
+
+  * Added the htmlout to track the trimAl's trimming.
+
+  * Added the possibility to delete spurious sequences from the alignment.
+
+  * Added the complementary and colnumbering options.
+
+  * Added the manual selection of columns.
+
+  * Added one new heuristic method to select the best automated trimming method.
+    * Automated1
+
+  * Added two new automated methods to work with gaps and similarity distribution.
+    * Strict
+    * Strictplus
+
+  * Select only one automated method to work with gaps distribution.
+    * Strict => Gappyout
+    * Relaxed was deleted
+
+  * Added the version/revisions system.
+
+  * Improved the file format.
+    * Added support for phylip 3.2
+    * Added support for clustal
+    * Added support for fasta
+    * Added support for nexus
+    * Added support for mega
+    * Added support for nbrf/pir
+
+  * Improved of statistics methods. 
+    * Improved the information of the available methods.
+    * Added the identity statistics.
+
+  * Improved of windows size methods. 
+    * Consistency windows size.
+
+  * Improved the similarity-matrices handling.
+
+  * Improved the support for DNA/RNA alignments.
+
+  * Added readAl.
+
+  * Fixed some bugs from the previous version.
+
+trimAl v1.1. February 2008.
+
+  * Initial public version of trimAl.
