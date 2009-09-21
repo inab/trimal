@@ -607,10 +607,6 @@ bool alignment::loadClustalAlignment(char *alignmentFile) {
   file.seekg(0);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  cerr << endl << sequenNumber << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
   /* ***** ***** ***** Allocate memory ***** ***** ***** */
   seqsName  = new string[sequenNumber];
   sequences = new string[sequenNumber];

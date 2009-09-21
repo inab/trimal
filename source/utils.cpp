@@ -396,7 +396,7 @@ bool utils::checkFile(ifstream &file) {
   begin = file.tellg();
   file.seekg(0, ios::end);
   end = file.tellg();
-	file.seekg(0, ios::beg);
+  file.seekg(0, ios::beg);
   if(!(end - begin)) return false;
   return true;
   /* ***** ***** ***** ***** ***** ***** ***** */
@@ -446,10 +446,6 @@ char* utils::readLine2(ifstream &file) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */ 
   for(nline.clear(), file.read(&c, 1); (c != '\n') && ((!file.eof())); file.read(&c, 1))
     nline.resize(nline.size() + 1, c);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */ 
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */ 
-  cerr << endl << nline << endl;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */ 
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */ 
