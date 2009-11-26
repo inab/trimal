@@ -46,7 +46,7 @@ int main(int argc, char *argv[]){
   alignment compAlig;
   int outformat = -1, i = 1;
   char *infile = NULL, *outfile = NULL;
-  bool appearErrors = false, format = false, type = false, reverse = false;
+  bool appearErrors = false, format = false, type = false, reverse = false, shortNames = false;
 
   /* Exec: readAl - Shows the menu. */
   if(argc == 1) { 
@@ -125,6 +125,11 @@ int main(int argc, char *argv[]){
    /* Option -fasta -------------------------------------------------------------------------------------- */
     else if(!strcmp(argv[i], "-fasta") && (outformat == -1))
       outformat = 8;
+	  
+   /* Option -fasta-m10 -------------------------------------------------------------------------------------- */
+    else if(!strcmp(argv[i], "-fasta-m10") && (outformat == -1)) {
+      outformat = 8; shortNames = true;
+   }
 
    /* Option -nbrf ------------------------------------------------------------------------------------ */
     else if(!strcmp(argv[i], "-nbrf") && (outformat == -1))
@@ -138,15 +143,38 @@ int main(int argc, char *argv[]){
     else if(!strcmp(argv[i], "-mega") && (outformat == -1))
       outformat = 21;
 
-   /* Option -phylip3.2 ------------------------------------------------------------------------------------ */
+   /* Option -phylip3.2 --------------------------------------------------------------------------------- */
     else if(!strcmp(argv[i], "-phylip3.2") && (outformat == -1))
       outformat = 11;
 
-   /* Option -phylip ------------------------------------------------------------------------------------ */
+   /* Option -phylip3.2-m10 ----------------------------------------------------------------------------- */
+    else if(!strcmp(argv[i], "-phylip3.2-m10") && (outformat == -1)) {
+      outformat = 11; shortNames = true;
+    }
+
+   /* Option -phylip --------------------------------------------------------------------------- */
     else if(!strcmp(argv[i], "-phylip") && (outformat == -1))
       outformat = 12;
 
-   /* Option -phylip ------------------------------------------------------------------------------------ */
+   /* Option -phylip-m10 ----------------------------------------------------------------------- */
+    else if(!strcmp(argv[i], "-phylip") && (outformat == -1)) {
+      outformat = 12; shortNames = true;
+    }
+
+   /* Option -phylip_paml ---------------------------------------------------------------------- */
+    else if(!strcmp(argv[i], "-phylip_paml") && (outformat == -1))
+      outformat = 13;
+
+   /* Option -phylip_paml-m10 ------------------------------------------------------------------ */
+    else if(!strcmp(argv[i], "-phylip_paml") && (outformat == -1)) {
+      outformat = 13; shortNames = true;
+    }
+
+   /* Option -html ---------------------------------------------------------------------------------------- */
+    else if(!strcmp(argv[i], "-html") && (outformat == -1))
+      outformat = 100;
+
+   /* Option -onlyseqs ------------------------------------------------------------------------------------ */
     else if(!strcmp(argv[i], "-onlyseqs") && (outformat == -1))
       outformat = 99;
    /* ------------------------------------------------------------------------------------------------------ */
@@ -248,7 +276,7 @@ int main(int argc, char *argv[]){
   else {
 
     /* -------------------------------------------------------------------- */
-    if(outformat != -1) compAlig.setOutputFormat(outformat);
+    if(outformat != -1) compAlig.setOutputFormat(outformat, shortNames);
     if(reverse) compAlig.setReverse();
     /* -------------------------------------------------------------------- */
 
@@ -302,11 +330,18 @@ void menu(void) {
 
   cout << "    -clustal                 " << "Output file in CLUSTAL format" << endl;
   cout << "    -fasta                   " << "Output file in FASTA format" << endl;
+  cout << "    -fasta-m10               " << "Output file in FASTA format. Sequences name length up to 10 characters." << endl;
   cout << "    -nbrf                    " << "Output file in NBRF/PIR format" << endl;
   cout << "    -nexus                   " << "Output file in NEXUS format" << endl;
   cout << "    -mega                    " << "Output file in MEGA format" << endl;
+  cout << "    -phylip_paml             " << "Output file in PHYLIP format compatible with PAML" << endl;
+  cout << "    -phylip_paml-m10         " << "Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters." << endl;
   cout << "    -phylip3.2               " << "Output file in PHYLIP3.2 format" << endl;
-  cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl << endl;
+  cout << "    -phylip3.2-m10           " << "Output file in PHYLIP3.2 format. Sequences name length up to 10 characters." << endl;
+  cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl;  
+  cout << "    -phylip-m10              " << "Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters." << endl << endl;
+
+  cout << "    -html                    " << "Output file in HTML with residues colored using the CLUSTAL scheme" << endl << endl;
 
   cout << "    -onlyseqs                " << "Output file with the sequences without gaps in FASTA format" << endl << endl;
 }

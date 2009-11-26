@@ -7,7 +7,7 @@ NAME2 = readal
 CC    = g++
 FLAGS = -Wall
 LIBM  = -lm
-DUGB  = 
+DUGB  = -O2
 
 all:			readal trimal
 

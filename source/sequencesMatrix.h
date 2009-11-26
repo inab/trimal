@@ -43,12 +43,15 @@ using namespace std;
  */
 
 class sequencesMatrix {
-  int columns;
-  int columnLength;
+  int resNumber;
+  int seqsNumber;
 
-  /* Sequences Matrix. */
+  /* Sequences Matrix */
   int **matrix;
 
+  /* Sequences Name */
+  string *seqsName;
+  
   public:
 
   /* Constructors */
@@ -61,16 +64,9 @@ class sequencesMatrix {
   sequencesMatrix(void);  
 
   /* Copy constructor */
+  sequencesMatrix(string *, string *, int, int);
 
-  /** \brief Assignment constructor.
-   * \param _alignmentMatrix Matrix containing the new alignment matrix.
-   * \param _species Number of species of the new alignment.
-   * \param _aminos Number of aminos of the new alignment.
-   *
-   * Constructor that copies all parameters to equivalent attributes of the object
-   */
-  sequencesMatrix(string *alignmentMatrix, int species, int aminos);
-
+  sequencesMatrix &operator=(const sequencesMatrix &);
 
   /* Destructor */
 
@@ -79,7 +75,6 @@ class sequencesMatrix {
    * Destruction method that frees, if exists, previously allocated memory.
    */
   ~sequencesMatrix();
-
 
   /* Basics Operations. */
 
@@ -91,23 +86,31 @@ class sequencesMatrix {
 
   /** \brief Column for looking to method.
    * \param column Column number at sequences matrix.
-   * \param columnSeqMatrix Vector where storage a column's sequences matrix.
+   * \param numResidueseqMatrix Vector where storage a column's sequences matrix.
    *
    * Method that storages a column's sequences matrix in a vector.
    */
-  void getColumn(int column, int *columnSeqMatrix);
+  void getColumn(int, int *);
 
   /** \brief Column for looking to method.
    * \param value to look in a row's sequences matrix.
    * \param row where to look for a value.
-   * \param columnSeqMatrix Vector where storage a column's sequences matrix.
+   * \param numResidueseqMatrix Vector where storage a column's sequences matrix.
    *
    * Method that looks to value in a row and storages a column's, corresponding to row, 
    * sequences matrix in a vector.
    */
-  void getColumn(int value, int row, int *columnSeqMatrix);
+  void getColumn(int, int, int *);
 
   void setOrder(int *);
+
+  void removeColumns(int, int, int *, int *);
+
+  bool getSequence(string, int *);
+
+  int getSeqNumber(void);
+	
+  int getResidNumber(void);	
 	
 };
 

@@ -1,7 +1,7 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale 
+    trimAl v1.3: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
     readAl v1.3: a tool for automated alignment conversion among different
@@ -24,7 +24,7 @@
     You should have received a copy of the GNU General Public License
     along with trimAl/readAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+ ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
  ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #ifndef ALIGNMENT_H
@@ -46,6 +46,10 @@
 #define SINGLE  1
 #define MULTI   2
 
+#define DNAType 1
+#define RNAType 2
+#define AAType  3
+
 using namespace std;
 
 /** \brief Class containing an alignment
@@ -66,6 +70,7 @@ class alignment {
 
   int iformat;
   int oformat;
+  bool shortNames;
 
   int dataType;
 
@@ -91,11 +96,11 @@ class alignment {
 
   /* New Info */
   bool oldAlignment;
-  int *residuesNumber;  
+  int *residuesNumber;
   int *saveResidues;
   int *saveSequences;
 
- private: 
+ private:
 
   /* ***** Fill the matrices from the input alignment ***** */
   bool fillMatrices(bool aligned);
@@ -121,7 +126,7 @@ class alignment {
   /* Constructors */
   alignment(void);
 
-  alignment(string, string, string *, string *, string *, int, int, int, int,
+  alignment(string, string, string *, string *, string *, int, int, int, int, bool,
             int, int, bool, int, int, int *, int *, int *, int, int, float **);
 
   /* Overlap the operator = to use it as a constructor */
@@ -135,7 +140,7 @@ class alignment {
   /** \brief Alignment load method.
    * \param alignmentFile Alignment file name.
    * \return \e true if the load is ok, \e false if the load was wrong (i.e. the file doesn't exists).
-   * 
+   *
    * Method that loads an alignment from a file.
    */
   bool loadAlignment(char *alignmentFile);
@@ -154,8 +159,8 @@ class alignment {
    * Method that prints an alignment to the standard output.
    */
   bool printAlignment(void);
-  
-  
+
+
   /* Alignment trimming. */
 
   /** \brief Alignment trimming using gap method.
@@ -249,15 +254,15 @@ class alignment {
   alignment *cleanSpuriousSeq(float, float, bool);
 
   alignment *removeColumns(int *, int, int, bool);
-  
+
   alignment *removeSequences(int *, int, int, bool);
-  
+
   alignment *getClustering(float);
-  
+
   float getCutPointClusters(int);
 
    /* Statistics calculation */
-  
+
   /** \brief Basic conservation statistics calculation.
    * \return \e true if all is ok, \e false if there were errors (i.e. there is no similarity matrix defined
    * in conservation statistics).
@@ -271,7 +276,7 @@ class alignment {
    * \return \e true if all is ok, \e false if there were errors.
    *
    * This method calculates conservation statistics using the \b sm similarity matrix.
-   */ 
+   */
   bool setSimilarityMatrix(similarityMatrix *sm);
 
   /** \brief Gap statistics calculation.
@@ -302,7 +307,7 @@ class alignment {
   void printStatisticsConservationColumns(void);
 
   /** \brief Printing accumulated conservation statistics method.
-   * This method prints the accumulated number of columns for each conservation 
+   * This method prints the accumulated number of columns for each conservation
    * value from the the alignment.
    */
   void printStatisticsConservationTotal(void);
@@ -326,6 +331,8 @@ class alignment {
    */
   void getSequences(string *);
 
+  void getSequences(string *, int *, int);
+
   bool getSeqNameOrder(string *, int *);
 
   /** \brief Gets alignment's amino acids number.
@@ -346,7 +353,6 @@ class alignment {
 
   void destroySequenMatrix(void);
 
-
   /** \brief Printing alignment's sequence matrix method.
    *
    * This method prints an alignment's sequence matrix.
@@ -354,7 +360,7 @@ class alignment {
   void printSequenMatrix(void);
 
   /** \brief Returns a column from alignment's sequence matrix.
-   * \param colum, sequence matrix index 
+   * \param colum, sequence matrix index
    * \param columnSeqMatrix, vector used to storage a column from alignment sequence matrix.
    *
    * This method returns a column from alignment sequence matrix.
@@ -366,12 +372,14 @@ class alignment {
    * \param sequence matrix row where look for a value.
    * \param columnSeqMatrix, vector used to storage a column from alignment sequence matrix.
    *
-   * Method that returns a column from the aligment's sequence matrix with the same value that 
+   * Method that returns a column from the aligment's sequence matrix with the same value that
    * "value" at matrix's position (row, i)
    */
   void getColumnSeqMatrix(int, int, int *);
 
   void setSeqMatrixOrder(int *);
+
+  sequencesMatrix *getSeqMatrix(void);
 
   /* ********** NEW CODE ********** */
   /* ********** ******** ********** */
@@ -399,7 +407,7 @@ class alignment {
   /* ********** ******** ********** */
   /* ********** ******** ********** */
 
-  /* Alignment to a stream */	
+  /* Alignment to a stream */
   void alignmentClustalToFile(ostream &);
 
   void alignmentNBRF_PirToFile(ostream &);
@@ -410,11 +418,17 @@ class alignment {
 
   void alignmentPhylipToFile(ostream &);
 
+  void alignmentPhylip_PamlToFile(ostream &);
+
   void alignmentNexusToFile(ostream &);
 
   void alignmentMegaToFile(ostream &);
 
   bool alignmentSummaryHTML(char *, int, int, int *, int *);
+
+  bool alignmentColourHTML(ostream &);
+
+  bool alignmentColourHTML(ostream &, float *, float *, float *, float *);
 
   void getSequences(ostream &);
   /* ********** ******** ********** */
@@ -425,12 +439,20 @@ class alignment {
 
   void setWindowsSize(int, int);
 
-  void setOutputFormat(int);
+  void setOutputFormat(int, bool);
 
   void setReverse(void);
 
+  int getInputFormat(void);
+
+  int getOutputFormat(void);
+
+  int getShortNames(void);
+
+  int getReverse(void);
+
   void calculateSeqIdentity(void);
-  
+
   int selectMethod(void);
 
   void printSeqIdentity(void);
@@ -446,9 +468,15 @@ class alignment {
   int *getCorrespSequences(void);
 
   bool isFileAligned(void);
-  
+
+  bool prepareCodingSequence(bool);
+
+  alignment * getTranslationCDS(int, int, int *, string *, sequencesMatrix *, alignment *);
+
+  bool checkCorrespondence(string *, int *);
+
   int *calculateRepresentativeSeq(float maximumIdent);
-  
+
 };
 
 #endif

@@ -1167,8 +1167,8 @@ bool alignment::loadMegaNonInterleavedAlignment(char *alignmentFile) {
 
 void alignment::alignmentPhylipToFile(ostream &file) {
   
+  int i, j, maxLongName;
   string *tmpMatrix;
-  int i, j;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */  
   if(!isAligned) {
@@ -1190,11 +1190,19 @@ void alignment::alignmentPhylipToFile(ostream &file) {
   /* Include in the first line the sequenNumber and the aminoacids of the alignment */
   file << " " << sequenNumber << " " << residNumber << endl;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Look for the maximum sequenNumber name size */
+  maxLongName = PHYLIPDISTANCE;
+  for(i = 0; (i < sequenNumber) && (!shortNames); i++)
+    maxLongName = utils::max(maxLongName, seqsName[i].size()); 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Put on the stream the sequenNumber names and the first 60 aminoacids block */
   for(i = 0; i < sequenNumber; i++) {
-    file << setw(PHYLIPDISTANCE + 3) << left << seqsName[i].substr(0, 10);
+	if(!shortNames)    file << setw(maxLongName + 3) << left << seqsName[i];
+	else file << setw(maxLongName + 3) << left << seqsName[i].substr(0, 10);
     file << tmpMatrix[i].substr(0, 60)  << endl;
   }
   file << endl;
@@ -1219,8 +1227,8 @@ void alignment::alignmentPhylipToFile(ostream &file) {
 
 void alignment::alignmentPhylip3_2ToFile(ostream &file) {
 
+  int i, j, k, maxLongName;
   string *tmpMatrix;
-  int i, j, k;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */  
   if(!isAligned) {
@@ -1244,9 +1252,17 @@ void alignment::alignmentPhylip3_2ToFile(ostream &file) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Look for the maximum sequenNumber name size */
+  maxLongName = PHYLIPDISTANCE;
+  for(i = 0; (i < sequenNumber) && (!shortNames); i++)
+    maxLongName = utils::max(maxLongName, seqsName[i].size()); 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Put on the stream the sequenNumber names and the first 60 aminoacids block */
   for(i = 0; i < sequenNumber; i++) {
-    file << setw(PHYLIPDISTANCE + 3) << left << seqsName[i].substr(0, 10);
+	if(!shortNames)    file << setw(maxLongName + 3) << left << seqsName[i];
+	else file << setw(maxLongName + 3) << left << seqsName[i].substr(0, 10);
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     for(j = 0; j < residNumber; j += 50) {
@@ -1256,12 +1272,63 @@ void alignment::alignmentPhylip3_2ToFile(ostream &file) {
       file << endl;
 
       if(j + 50 < residNumber) 
-        file << setw(PHYLIPDISTANCE + 3) << " ";
+        file << setw(maxLongName + 3) << " ";
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     file << endl;
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Deallocate local memory */
+  delete [] tmpMatrix;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+}
+
+
+void alignment::alignmentPhylip_PamlToFile(ostream &file) {
+
+  int i, maxLongName;
+  string *tmpMatrix;
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  if(!isAligned) {
+    cerr << endl << "ERROR: The input file does not ";
+    cerr << "have the sequences aligned." << endl << endl;
+    return;
+  }
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Allocate memory to output alignment. */   
+  tmpMatrix = new string[sequenNumber];
+  for(i = 0; i < sequenNumber; i++) {
+    if(!reverse) tmpMatrix[i] = sequences[i];
+    else tmpMatrix[i] = utils::getReverse(sequences[i]);
+  }
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Include in the first line the sequenNumber and the aminoacids of the alignment */
+  file << " " << sequenNumber << " " << residNumber << endl;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Look for the maximum sequenNumber name size */
+  maxLongName = PHYLIPDISTANCE;
+  for(i = 0; (i < sequenNumber) && (!shortNames); i++)
+    maxLongName = utils::max(maxLongName, seqsName[i].size()); 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Put on the stream the sequence name, limited to
+     the 10 first characters, and the sequence */
+  for(i = 0; i < sequenNumber; i++) {
+	if(!shortNames)    file << setw(maxLongName + 3) << left << seqsName[i];
+	else file << setw(maxLongName + 3) << left << seqsName[i].substr(0, 10);	  
+    file << sequences[i] << endl;
+  }
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  file << endl;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate local memory */
@@ -1344,7 +1411,7 @@ void alignment::alignmentNBRF_PirToFile(ostream &file) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Write the sequence name as well as the sequence type */
     file << ">";
-/*
+	
     if((seqsInfo != NULL) && (iformat == oformat))
       file << seqsInfo[i];
 
@@ -1356,7 +1423,7 @@ void alignment::alignmentNBRF_PirToFile(ostream &file) {
         case AAType:  file << "P1"; break;
       }
     }
-*/
+
     file << ";" << seqsName[i] << endl;
     file << seqsName[i] << " " << residuesNumber[i];
     file << " bases" << endl;
@@ -1398,8 +1465,11 @@ void alignment::alignmentFastaToFile(ostream &file) {
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   for(i = 0; i < sequenNumber; i++) {
+
     /* Sequence Name */
-    file << ">" << seqsName[i] << " " << dec << residuesNumber[i] << " bp" << endl;
+	if(!shortNames)    file << ">" << seqsName[i];
+	else file << ">" << seqsName[i].substr(0, 10);
+    file << " " << dec << residuesNumber[i] << " bp" << endl;
     /* Sequence Residues */
     for(j = 0; j < residuesNumber[i]; j += 60)
       file << tmpMatrix[i].substr(j, 60) << endl;
@@ -1411,8 +1481,6 @@ void alignment::alignmentFastaToFile(ostream &file) {
   delete [] tmpMatrix;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
-
-
 
 void alignment::alignmentNexusToFile(ostream &file) {
 
@@ -1672,6 +1740,193 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, int
   file.close();
   delete [] seq;
   delete [] res;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  return true;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+}
+
+
+bool alignment::alignmentColourHTML(ostream &file, float *GapsVector, float *SimilVector, float *ConsVector, float *IdentVector) {
+
+  int i, j, kj, upper, k = 0, maxLongName = 0;
+  string tmpColumn;
+    
+  tmpColumn.reserve(sequenNumber);
+  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  if(!isAligned) {
+    cerr << endl << "ERROR: The input file does not ";
+    cerr << "have the sequences aligned." << endl << endl;
+    return false;
+  }
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Look for the maximum sequenNumber name size */
+  for(i = 0; i < sequenNumber; i++)
+    maxLongName = utils::max(maxLongName, seqsName[i].size()); 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* File Header */
+  file << "<!DOCTYPE html>" << endl << "<html><head>" << endl;
+  file << "    <meta http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />" << endl;
+  file << "    <title>trimAl v1.3 Summary</title>" << endl;
+
+  file << "    <style type=\"text/css\">" << endl;
+  file << "    .w  { background-color: #FFFFFF; }\n";
+  file << "    .b  { background-color: #3366ff; }\n";
+  file << "    .r  { background-color: #cc0000; }\n";
+  file << "    .g  { background-color: #33cc00; }\n";
+  file << "    .p  { background-color: #ff6666; }\n";
+  file << "    .m  { background-color: #cc33cc; }\n";
+  file << "    .o  { background-color: #ff9900; }\n";
+  file << "    .c  { background-color: #46C7C7; }\n";
+  file << "    .y  { background-color: #FFFF00; }\n";
+  file << "    </style>\n  </head>\n\n";
+  file << "  <body>\n";
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  file << "  <pre>" << endl;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  for(j = 0, upper = 120; j < residNumber; j += 120, upper += 120) {
+
+    file << endl;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Print the sequence number identifier */
+    file << setw(maxLongName + 20) << right << (j + 10);
+    for(i = j + 20; ((i <= residNumber) && (i <= upper)); i += 10)
+      file << setw(10) << right << i;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* A pretty format */
+    file << endl << setw(maxLongName + 10);
+	for(i = j + 10; ((i < residNumber) && (i <= upper)); i += 10) {
+	 for(k = i - 9; k < i; k++) file << "=";
+     file << "+";
+	}
+	for( ; ((k < residNumber) && (k < upper)); k++) file << "=";
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    for(i = 0; i < sequenNumber; i++) {
+      file << endl << setw(maxLongName + 9) << left << seqsName[i];
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      for(k = j; ((k < residNumber) && (k < upper)); k++) {
+		for(kj = 0, tmpColumn.clear(); kj < sequenNumber; kj++)
+		  tmpColumn += sequences[kj][k];
+		file << "<span class=" << utils::determineColor(sequences[i][k], tmpColumn)
+		     << ">" << sequences[i][k] << "</span>";
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      }
+    }
+	file << endl;
+  }
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  file << "    </pre>" << endl;
+  file << "  </body>" << endl << "</html>" << endl;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  return true;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+}
+
+bool alignment::alignmentColourHTML(ostream &file) {
+
+  int i, j, kj, upper, k = 0, maxLongName = 0;
+  string tmpColumn;
+    
+  tmpColumn.reserve(sequenNumber);
+  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  if(!isAligned) {
+    cerr << endl << "ERROR: The input file does not ";
+    cerr << "have the sequences aligned." << endl << endl;
+    return false;
+  }
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Look for the maximum sequenNumber name size */
+  for(i = 0; i < sequenNumber; i++)
+    maxLongName = utils::max(maxLongName, seqsName[i].size()); 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* File Header */
+  file << "<!DOCTYPE html>" << endl << "<html><head>" << endl;
+  file << "    <meta http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />" << endl;
+  file << "    <title>trimAl v1.3 Summary</title>" << endl;
+
+  file << "    <style type=\"text/css\">" << endl;
+  file << "    .w  { background-color: #FFFFFF; }\n";
+  file << "    .b  { background-color: #3366ff; }\n";
+  file << "    .r  { background-color: #cc0000; }\n";
+  file << "    .g  { background-color: #33cc00; }\n";
+  file << "    .p  { background-color: #ff6666; }\n";
+  file << "    .m  { background-color: #cc33cc; }\n";
+  file << "    .o  { background-color: #ff9900; }\n";
+  file << "    .c  { background-color: #46C7C7; }\n";
+  file << "    .y  { background-color: #FFFF00; }\n";
+  file << "    </style>\n  </head>\n\n";
+  file << "  <body>\n";
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  file << "  <pre>" << endl;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  for(j = 0, upper = 120; j < residNumber; j += 120, upper += 120) {
+
+    file << endl;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Print the sequence number identifier */
+    file << setw(maxLongName + 20) << right << (j + 10);
+    for(i = j + 20; ((i <= residNumber) && (i <= upper)); i += 10)
+      file << setw(10) << right << i;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* A pretty format */
+    file << endl << setw(maxLongName + 10);
+	for(i = j + 10; ((i < residNumber) && (i <= upper)); i += 10) {
+	 for(k = i - 9; k < i; k++) file << "=";
+     file << "+";
+	}
+	for( ; ((k < residNumber) && (k < upper)); k++) file << "=";
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    for(i = 0; i < sequenNumber; i++) {
+      file << endl << setw(maxLongName + 9) << left << seqsName[i];
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      for(k = j; ((k < residNumber) && (k < upper)); k++) {
+		for(kj = 0, tmpColumn.clear(); kj < sequenNumber; kj++)
+		  tmpColumn += sequences[kj][k];
+		file << "<span class=" << utils::determineColor(sequences[i][k], tmpColumn)
+		     << ">" << sequences[i][k] << "</span>";
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      }
+    }
+	file << endl;
+  }
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  file << "    </pre>" << endl;
+  file << "  </body>" << endl << "</html>" << endl;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */

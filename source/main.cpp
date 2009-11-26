@@ -1,4 +1,4 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+									/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
 
     trimAl v1.3: a tool for automated alignment trimming in large-scale 
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
   /* Parameters Control */
   bool appearErrors = false, complementary = false, colnumbering = false, nogaps = false, noallgaps = false, gappyout = false,
        strict = false, strictplus = false, automated1 = false, sgc = false, sgt = false, scc = false, sct = false, sfc = false,
-       sft = false, sident = false, selectSeqs = false, selectCols = false;
+       sft = false, sident = false, selectSeqs = false, selectCols = false, shortNames = false, removestop = false;
 
 
   float conserve = -1, gapThreshold = -1, simThreshold = -1, comThreshold = -1, resOverlap = -1, seqOverlap = -1, maxIdentity = -1;
@@ -62,14 +62,16 @@ int main(int argc, char *argv[]){
 
   /* Others varibles */
   ifstream compare;
-  string nline;
   float *compareVect = NULL; 
   alignment **compAlig  = NULL;
+  string nline, *seqNames = NULL;  
+  sequencesMatrix *seqMatrix = NULL;
   similarityMatrix *similMatrix = NULL;
-  alignment *origAlig = NULL, *singleAlig = NULL;
+  alignment *origAlig = NULL, *singleAlig = NULL, *backtranslation = NULL;
 
-  int i = 1, lng, num = 0, maxAminos = 0, numfiles = 0, referFile = 0, *delColumns = NULL, *delSequences = NULL;
-  char c, *forceFile = NULL, *infile = NULL, *outfile = NULL, *outhtml = NULL, *matrix = NULL, **filesToCompare = NULL, line[256];
+  int i = 1, lng, num = 0, maxAminos = 0, numfiles = 0, referFile = 0, *delColumns = NULL, *delSequences = NULL, *seqLengths = NULL;
+  char c, *forceFile = NULL, *infile = NULL, *backtransFile = NULL, *outfile = NULL, *outhtml = NULL, *matrix = NULL,
+       **filesToCompare = NULL, line[256];
 
   /* ------------------------------------------------------------------------------------------------------ */
 
@@ -161,6 +163,11 @@ int main(int argc, char *argv[]){
    /* Option -fasta -------------------------------------------------------------------------------------- */
     else if(!strcmp(argv[i], "-fasta") && (outformat == -1))
       outformat = 8;
+	  
+   /* Option -fasta-m10 -------------------------------------------------------------------------------------- */
+    else if(!strcmp(argv[i], "-fasta-m10") && (outformat == -1)) {
+      outformat = 8; shortNames = true;
+   }
 
    /* Option -nbrf ------------------------------------------------------------------------------------ */
     else if(!strcmp(argv[i], "-nbrf") && (outformat == -1))
@@ -174,13 +181,32 @@ int main(int argc, char *argv[]){
     else if(!strcmp(argv[i], "-mega") && (outformat == -1))
       outformat = 21;
 
-   /* Option -phylip3.2 ------------------------------------------------------------------------------------ */
+   /* Option -phylip3.2 --------------------------------------------------------------------------------- */
     else if(!strcmp(argv[i], "-phylip3.2") && (outformat == -1))
       outformat = 11;
 
-   /* Option -phylip ------------------------------------------------------------------------------------ */
+   /* Option -phylip3.2-m10 ----------------------------------------------------------------------------- */
+    else if(!strcmp(argv[i], "-phylip3.2-m10") && (outformat == -1)) {
+      outformat = 11; shortNames = true;
+    }
+
+   /* Option -phylip --------------------------------------------------------------------------- */
     else if(!strcmp(argv[i], "-phylip") && (outformat == -1))
       outformat = 12;
+
+   /* Option -phylip-m10 ----------------------------------------------------------------------- */
+    else if(!strcmp(argv[i], "-phylip-m10") && (outformat == -1)) {
+      outformat = 12; shortNames = true;
+    }
+
+   /* Option -phylip_paml ---------------------------------------------------------------------- */
+    else if(!strcmp(argv[i], "-phylip_paml") && (outformat == -1))
+      outformat = 13;
+
+   /* Option -phylip_paml-m10 ------------------------------------------------------------------ */
+    else if(!strcmp(argv[i], "-phylip_paml-m10") && (outformat == -1)) {
+      outformat = 13; shortNames = true;
+    }	  
 
    /* ------------------------------------------------------------------------------------------------------ */
 
@@ -238,6 +264,21 @@ int main(int argc, char *argv[]){
         i++;
       }
     }	
+
+    /* Option -backtrans -------------------------------------------------------------------------------------- */
+    else if(!strcmp(argv[i], "-backtrans") && (i+1 != argc) && (backtransFile == NULL)) {
+
+      lng = strlen(argv[++i]);
+      backtransFile = new char[lng + 1];
+      strcpy(backtransFile, argv[i]);
+
+      backtranslation = new alignment;
+      if(!backtranslation -> loadAlignment(backtransFile)) {
+        cerr << endl << "ERROR: Alignment not loaded: \"" << backtransFile << "\" Check the file's content." << endl << endl;
+        appearErrors = true;
+      }
+    }	
+
    /* ------------------------------------------------------------------------------------------------------ */
 
    /*                                  Manual Method Values. Deleting columns                                */
@@ -334,6 +375,7 @@ int main(int argc, char *argv[]){
         }
       }
     }
+	
    /* ------------------------------------------------------------------------------------------------------ */
 
    /* Option -cons ----------------------------------------------------------------------------------------- */
@@ -932,6 +974,11 @@ int main(int argc, char *argv[]){
       colnumbering = true;
     }
 
+   /* Option -removestopcodon ------------------------------------------------------------------------------- */
+    else if((!strcmp(argv[i], "-removestopcodon")) && (removestop == false)) {
+      removestop = true;
+    }
+
    /* ------------------------------------------------------------------------------------------------------ */
 
    /*                                          Not Valids Parameters                                         */
@@ -964,7 +1011,13 @@ int main(int argc, char *argv[]){
      cerr << endl << "ERROR: You can not force the alignment selection without set"
 	      << " an alignment dataset against to compare it." << endl << endl;
      appearErrors = true;
-  }   
+  }
+  /* ------------------------------------------------------------------------------------------------------ */
+  if((!appearErrors) && (infile == NULL) && (compareset == -1) && (forceFile == NULL) && (backtransFile != NULL)) {
+     cerr << endl << "ERROR: It is impossible to use a Coding Sequences file to apply the back translation method"
+              << " without define an input alignment." << endl << endl;
+     appearErrors = true;
+  }
   /* ------------------------------------------------------------------------------------------------------ */
   if((!appearErrors) && (infile != NULL)) {
 
@@ -1086,7 +1139,7 @@ int main(int argc, char *argv[]){
       appearErrors = true;
     }
   }
-  /* **** ***** ***** ***** ***** ***** **** End of Parameters Processing **** ***** ***** ***** ***** ***** **** */
+  /* **** ***** ***** ***** ***** ***** **** **************************** **** ***** ***** ***** ***** ***** **** */
 
   /* **** ***** ***** ***** ***** ***** ***** Files Comparison Methods ***** ***** ***** ***** ***** ***** **** */
   if((compareset != -1) && (!appearErrors)) {
@@ -1163,15 +1216,48 @@ int main(int argc, char *argv[]){
     /* -------------------------------------------------------------------- */
 
     /* -------------------------------------------------------------------- */
-    for(i = 0; i < numfiles; i++)
-      compAlig[i] -> destroySequenMatrix();
-
     for(i = 0; i < numfiles; i++) {
       delete compAlig[i];
-      delete[] filesToCompare[i];
+      delete filesToCompare[i];
     }
     /* -------------------------------------------------------------------- */
   }
+
+  /* **** ***** ***** ***** ***** ***** **** **************************** **** ***** ***** ***** ***** ***** **** */
+
+  /* ------------------------------------------------------------------------------------------------------ */
+  if((!appearErrors) && (backtransFile != NULL) && (backtranslation -> getTypeAlignment() != DNAType)) {
+     cerr << endl << "ERROR: Check your Coding sequences file. It has been detected other kind of biological sequences." << endl << endl;
+     appearErrors = true;
+  }
+  /* ------------------------------------------------------------------------------------------------------ */
+  if((!appearErrors) && (backtransFile == NULL) && (removestop)) {
+     cerr << endl << "ERROR: The -removestopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
+     appearErrors = true;
+  }
+  /* ------------------------------------------------------------------------------------------------------ */  
+  if((!appearErrors) && (backtransFile != NULL) && (origAlig -> getNumSpecies() != backtranslation -> getNumSpecies())) {
+    cerr << endl << "ERROR: The input alignmnet does not have the same number of sequences than the Coding Sequences files"
+         << endl << endl;
+    appearErrors = true;
+  }
+  /* ------------------------------------------------------------------------------------------------------ */  
+  if((!appearErrors)  && (backtransFile != NULL) && (backtranslation -> prepareCodingSequence(removestop) != true))
+    appearErrors = true;
+  /* ------------------------------------------------------------------------------------------------------ */  
+  if((!appearErrors) && (backtransFile != NULL)) {
+
+    seqNames = new string[backtranslation -> getNumSpecies()];
+    seqLengths = new int[backtranslation -> getNumSpecies()];
+    backtranslation -> getSequences(seqNames, seqLengths, 3);
+
+    if(origAlig -> checkCorrespondence(seqNames, seqLengths) != true)
+      appearErrors = true;
+  }
+  /* ------------------------------------------------------------------------------------------------------ */
+  
+  /* **** ***** ***** ***** ***** ***** **** End of Parameters Processing **** ***** ***** ***** ***** ***** **** */
+
 
   /* **** ***** ***** ***** ***** ***** **** Errors Control **** ***** ***** ***** ***** ***** **** */
   if(appearErrors) {
@@ -1191,6 +1277,10 @@ int main(int argc, char *argv[]){
 
     delete[] infile;
     delete[] matrix;
+
+    if(forceFile != NULL) delete forceFile;
+    if(backtransFile != NULL) delete backtransFile;
+    if(backtranslation != NULL) delete backtranslation;
 
     return -1;
   }
@@ -1218,7 +1308,7 @@ int main(int argc, char *argv[]){
 
   /* -------------------------------------------------------------------- */
   if(outformat != -1)
-    origAlig -> setOutputFormat(outformat);
+    origAlig -> setOutputFormat(outformat, shortNames);
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
@@ -1288,6 +1378,12 @@ int main(int argc, char *argv[]){
       compareFiles::printStatisticsFileAcl(origAlig -> getNumAminos(), compareVect);
   }
   /* -------------------------------------------------------------------- */
+
+  /* -------------------------------------------------------------------- */
+  if(backtransFile != NULL)
+    seqMatrix = origAlig -> getSeqMatrix();
+  /* -------------------------------------------------------------------- */
+
   /* -------------------------------------------------------------------- */
   if(nogaps)
     singleAlig = origAlig -> cleanGaps(0, 0, complementary);
@@ -1385,13 +1481,37 @@ int main(int argc, char *argv[]){
   }  
   /* -------------------------------------------------------------------- */
 
-
   /* -------------------------------------------------------------------- */
   if(singleAlig == NULL) {
     singleAlig = origAlig;
     origAlig = NULL;
   }
+  /* -------------------------------------------------------------------- */
 
+  /* -------------------------------------------------------------------- */
+  if((outhtml != NULL) && (!appearErrors))
+    if(!origAlig -> alignmentSummaryHTML(outhtml, singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
+                                     singleAlig -> getCorrespResidues(), singleAlig -> getCorrespSequences())) {
+      cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
+      appearErrors = true;
+    }
+  /* -------------------------------------------------------------------- */
+  
+  /* -------------------------------------------------------------------- */
+  if(backtransFile != NULL) {
+
+
+	if(seqNames != NULL) delete [] seqNames;
+    seqNames = new string[singleAlig -> getNumSpecies()];
+
+	singleAlig -> getSequences(seqNames);
+	
+	singleAlig = backtranslation -> getTranslationCDS(singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
+                                                      singleAlig -> getCorrespResidues(), seqNames, seqMatrix, singleAlig);
+  }
+  /* -------------------------------------------------------------------- */
+
+  /* -------------------------------------------------------------------- */  
   if((outfile != NULL) && (!appearErrors)) {
     if(!singleAlig -> saveAlignment(outfile)) {
       cerr << endl << "ERROR: It's imposible to generate the output file." << endl << endl;
@@ -1408,16 +1528,8 @@ int main(int argc, char *argv[]){
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
-  if((outhtml != NULL) && (!appearErrors))
-    if(!origAlig -> alignmentSummaryHTML(outhtml, singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
-                                     singleAlig -> getCorrespResidues(), singleAlig -> getCorrespSequences())) {
-      cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
-      appearErrors = true;
-    }
-  /* -------------------------------------------------------------------- */
-
-  /* -------------------------------------------------------------------- */
   delete singleAlig;
+  delete origAlig;  
   delete[] compAlig;
 
   delete similMatrix;
@@ -1448,9 +1560,10 @@ void menu(void) {
        << "it under the terms of the GNU General Public License as published by " << endl
        << "the Free Software Foundation, the last available version." << endl << endl;
 
-  cout << "Please cite:\tSalvador Capella-Gutierrez, Jose M. Silla-Martinez and" << endl
-       << "            \tToni Gabaldon. trimAl: a tool for automated alignment " << endl
-       << "            \ttrimming (2009)." << endl << endl;
+  cout << "Please cite:"
+       << "\n\t\ttrimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses."
+	   << "\n\t\tSalvador Capella-Gutierrez; Jose M. Silla-Martinez; Toni Gabaldon."
+	   << "\n\t\tBioinformatics 2009, 25:1972-1973." << endl << endl;
 
   cout << "Basic usage" << endl
        << "\ttrimal -in <inputfile> -out <outputfile> -(other options)." << endl << endl;
@@ -1459,8 +1572,14 @@ void menu(void) {
   cout << "    -h                       " << "Print this information and show some examples." << endl;
   cout << "    --version                " << "Print the trimAl version." << endl << endl;
 
-  cout << "    -in <inputfile>          " << "Input file in several formats (clustal, fasta, NBRF/PIR, nexus, phylip3.2, phylip)." << endl;
+  cout << "    -in <inputfile>          " << "Input file in several formats (clustal, fasta, NBRF/PIR, nexus, phylip3.2, phylip)." << endl << endl;
+
   cout << "    -compareset <inputfile>  " << "Input list of paths for the files containing the alignments to compare." << endl;
+  cout << "    -forceselect <inputfile> " << "Force selection of the given input file in the files comparison method." << endl << endl;
+
+  cout << "    -backtrans <inputfile>   " << "Use a Coding Sequences file to get a backtranslation for a given AA alignment" << endl;
+  cout << "    -removestopcodon         " << "Skip stop codons at end of a given set/subset of Coding Sequences." << endl << endl;  
+
   cout << "    -matrix <inpufile>       " << "Input file for user-defined similarity matrix (default is Blosum62)." << endl << endl;
 
   cout << "    -out <outputfile>        " << "Output alignment in the same input format (default stdout). (default input format)" << endl;
@@ -1468,20 +1587,27 @@ void menu(void) {
 
   cout << "    -clustal                 " << "Output file in CLUSTAL format" << endl;
   cout << "    -fasta                   " << "Output file in FASTA format" << endl;
+  cout << "    -fasta-m10               " << "Output file in FASTA format. Sequences name length up to 10 characters." << endl;
   cout << "    -nbrf                    " << "Output file in NBRF/PIR format" << endl;
   cout << "    -nexus                   " << "Output file in NEXUS format" << endl;
   cout << "    -mega                    " << "Output file in MEGA format" << endl;
+  cout << "    -phylip_paml             " << "Output file in PHYLIP format compatible with PAML" << endl;
+  cout << "    -phylip_paml-m10         " << "Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters." << endl;
   cout << "    -phylip3.2               " << "Output file in PHYLIP3.2 format" << endl;
-  cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl << endl;
+  cout << "    -phylip3.2-m10           " << "Output file in PHYLIP3.2 format. Sequences name length up to 10 characters." << endl;
+  cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl;  
+  cout << "    -phylip-m10              " << "Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters." << endl << endl;
 
   cout << "    -complementary           " << "Get the complementary alignment." << endl;
   cout << "    -colnumbering            " << "Get the relationship between the columns in the old and new alignment." << endl << endl;
 
-  cout << "    -select { n,l,m-k }      " << "Selection of columns to be removed from the alignment. (see User Guide)." << endl;
-  cout << "    -gt -gapthreshold <n>    " << "1 - (fraction of sequences with a gap allowed)." << endl;
-  cout << "    -st -simthreshold <n>    " << "Minimum average similarity allowed." << endl;
-  cout << "    -ct -conthreshold <n>    " << "Minimum consistency value allowed." << endl;
-  cout << "    -cons <n>                " << "Minimum percentage of the positions in the original alignment to conserve." << endl << endl;
+  cout << "    -selectcols { n,l,m-k }  " << "Selection of columns to be removed from the alignment. Range: [0 - (Number of Columns - 1)]. (see User Guide)." << endl;
+  cout << "    -selectseqs { n,l,m-k }  " << "Selection of sequences to be removed from the alignment. Range: [0 - (Number of Sequences - 1)]. (see User Guide)." << endl << endl;  
+  
+  cout << "    -gt -gapthreshold <n>    " << "1 - (fraction of sequences with a gap allowed). Range: [0 - 1]" << endl;
+  cout << "    -st -simthreshold <n>    " << "Minimum average similarity allowed. Range: [0 - 1]" << endl;
+  cout << "    -ct -conthreshold <n>    " << "Minimum consistency value allowed.Range: [0 - 1]" << endl;
+  cout << "    -cons <n>                " << "Minimum percentage of the positions in the original alignment to conserve. Range: [0 - 100]" << endl << endl;
 
   cout << "    -nogaps                  " << "Remove all positions with gaps in the alignment." << endl;
   cout << "    -noallgaps               " << "Remove columns composed only by gaps." << endl << endl;
@@ -1497,9 +1623,12 @@ void menu(void) {
   cout << "                             " << "(Optimized for Maximum Likelihood phylogenetic tree reconstruction)."<< endl << endl;
 
   cout << "    -resoverlap              " << "Minimum overlap of a positions with other positions in the column to be considered a "
-                                          << "\"good position\". (see User Guide)." << endl;
-  cout << "    -seqoverlap              " << "Minimum percentage of \"good positions\" that a sequence must have in order to be conserved. "
+                                          << "\"good position\". Range: [0 - 1]. (see User Guide)." << endl;
+  cout << "    -seqoverlap              " << "Minimum percentage of \"good positions\" that a sequence must have in order to be conserved. Range: [0 - 100]"
                                           << "(see User Guide)." << endl << endl;
+
+  cout << "    -clusters <n>            " << "Get the most Nth representatives sequences from a given alignment. Range: [1 - (Number of sequences)]" << endl;
+  cout << "    -maxidentity <n>         " << "Get the representatives sequences for a given identity threshold. Range: [0 - 1]." << endl << endl;
 
   cout << "    -w <n>                   " << "(half) Window size, score of position i is the average of the window (i - n) to (i + n)."
                                           << endl;
@@ -1517,7 +1646,6 @@ void menu(void) {
                                           << endl;
   cout << "    -sident                  " << "Print identity statistics for all sequences in the alignemnt. (see User Guide)." 
                                           << endl << endl;
-
 }
 
 void examples(void) {
@@ -1558,10 +1686,18 @@ void examples(void) {
   cout << "7) Selection of columns to be deleted from the alignment. The selection can " << endl 
        << "   be a column's number or a column's number interval." << endl << endl;
 
-  cout << "   trimal -in <inputfile> -out <outputfile> -select { 2,3,10,45-60,68,70-78 }" << endl << endl;
+  cout << "   trimal -in <inputfile> -out <outputfile> -selectcols { 2,3,10,45-60,68,70-78 }" << endl << endl;
 
   cout << "8) Get the complementary alignment from the alignment previously trimmed." << endl << endl; 
 
-  cout << "   trimal -in <inputfile> -out <outputfile> -select { 2,3,45-60 } -complementary" << endl << endl;
+  cout << "   trimal -in <inputfile> -out <outputfile> -selectcols { 2,3,45-60 } -complementary" << endl << endl;
+
+  cout << "9) Selection of sequences to be deleted from the alignment." << endl << endl; 
+
+  cout << "   trimal -in <inputfile> -out <outputfile> -selectseqs { 1,3,8-12 } " << endl << endl;
+
+  cout << "10) Select the most 5 representative sequences from the alignment" << endl << endl; 
+
+  cout << "   trimal -in <inputfile> -out <outputfile> -clusters 5 " << endl << endl;
 }
 

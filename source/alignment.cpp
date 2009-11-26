@@ -1,7 +1,7 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale 
+    trimAl v1.3: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
     readAl v1.3: a tool for automated alignment conversion among different
@@ -24,7 +24,7 @@
     You should have received a copy of the GNU General Public License
     along with trimAl/readAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+ ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
  ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 #include <float.h>
 #include "alignment.h"
@@ -45,11 +45,12 @@ alignment::alignment(void) {
   /* Are the input sequences aligned? */
   isAligned = false;
   /* Should the output file be reversed? */
-  reverse 	= false;
+  reverse   = false;
 
   /* Input and output formats */
   iformat = 0;
   oformat = 0;
+  shortNames = false;
 
   /* Sequence datatype: DNA, RNA or Protein */
   dataType = 0;
@@ -62,22 +63,22 @@ alignment::alignment(void) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Is this alignmnet new? */
   oldAlignment  = false;
-  
+
   /* Sequence residues number */
   residuesNumber = NULL;
-  
+
   /* Columns and sequences that have been previously selected */
   saveResidues  = NULL;
   saveSequences = NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Input sequences as well as other additional information
    * such as sequences name or whatever */
   sequences = NULL;
   seqsName  = NULL;
   seqsInfo  = NULL;
-  
+
   filename = "";
   aligInfo = "";
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -85,11 +86,11 @@ alignment::alignment(void) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   identities = NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Information asses from the alignment such as 
+  /* Information asses from the alignment such as
    * gaps or similarity values distributions */
-  sgaps = 	  NULL;
+  sgaps =     NULL;
   scons =     NULL;
   seqMatrix = NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -99,18 +100,18 @@ alignment::alignment(void) {
 /* Class constructor */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, string *o_seqsName, 
-                     string *o_seqsInfo, int o_sequenNumber, int o_residNumber, int o_iformat,
-					 int o_oformat, int o_dataType, int o_isAligned, bool o_reverse, int OldSequences,
-					 int OldResidues, int *o_residuesNumber, int *o_saveResidues, int *o_saveSequences,
-					 int o_ghWindow, int o_shWindow, float **o_identities) {
-						 
+alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, string *o_seqsName,
+                     string *o_seqsInfo, int o_sequenNumber, int o_residNumber, int o_iformat, int o_oformat,
+                     bool o_shortNames, int o_dataType, int o_isAligned, bool o_reverse, int OldSequences,
+                     int OldResidues, int *o_residuesNumber, int *o_saveResidues, int *o_saveSequences,
+                     int o_ghWindow, int o_shWindow, float **o_identities) {
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   int i, j, k, ll;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   oldAlignment = true;
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Assign the parameter values to the variables */
   sequenNumber = o_sequenNumber;
@@ -118,6 +119,7 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
 
   iformat = o_iformat;
   oformat = o_oformat;
+  shortNames = o_shortNames;
 
   dataType = o_dataType;
 
@@ -126,7 +128,7 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
 
   isAligned = o_isAligned;
   reverse   = o_reverse;
-  
+
   filename = o_filename;
   aligInfo = o_aligInfo;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -139,10 +141,10 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
 
   seqsName = new string[sequenNumber];
   for(i = 0; i < sequenNumber; i++)
-	seqsName[i] = o_seqsName[i];
+    seqsName[i] = o_seqsName[i];
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   residuesNumber = new int[sequenNumber];
   if((isAligned) || (o_residuesNumber != NULL)) {
     for(i = 0; i < sequenNumber; i++)
@@ -151,9 +153,9 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
     for(i = 0; i < sequenNumber; i++)
       residuesNumber[i] = o_residuesNumber[i];
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */	
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */	
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(o_seqsInfo != NULL) {
     seqsInfo = new string[sequenNumber];
     for(i = 0; i < sequenNumber; i++)
@@ -178,25 +180,25 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
         saveSequences[j] = o_saveSequences[i];
         j++;
       }
-  }  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */	
+  }
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   identities = NULL;
   if(o_identities != NULL) {
-	identities = new float*[sequenNumber];
+    identities = new float*[sequenNumber];
     for(i = 0, j = 0; i < OldSequences; i++) {
       if(o_saveSequences[i] != -1) {
-	    identities[j] = new float[sequenNumber];
-		for(k = 0, ll = 0; k < OldSequences; k++) {
-		  if(o_saveSequences[k] != -1) {
-		    identities[j][ll] = o_identities[i][k];
-			ll++;
-		  }
-		}
-		j++;
+        identities[j] = new float[sequenNumber];
+        for(k = 0, ll = 0; k < OldSequences; k++) {
+          if(o_saveSequences[k] != -1) {
+            identities[j][ll] = o_identities[i][k];
+            ll++;
+          }
+        }
+        j++;
       }
-	}
+    }
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -208,7 +210,7 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
   scons  =     NULL;
   seqMatrix =  NULL;
   identities = NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */	
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -232,6 +234,7 @@ alignment &alignment::operator=(const alignment &old) {
 
     iformat = old.iformat;
     oformat = old.oformat;
+    shortNames = old.shortNames;
 
     dataType = old.dataType;
 
@@ -241,7 +244,7 @@ alignment &alignment::operator=(const alignment &old) {
     filename = old.filename;
     aligInfo = old.aligInfo;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     sequences = new string[sequenNumber];
     for(i = 0; i < sequenNumber; i++)
@@ -251,7 +254,7 @@ alignment &alignment::operator=(const alignment &old) {
     for(i = 0; i < sequenNumber; i++)
       seqsName[i] = old.seqsName[i];
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     delete [] residuesNumber;
     if(old.residuesNumber) {
@@ -284,16 +287,16 @@ alignment &alignment::operator=(const alignment &old) {
     } else saveSequences = NULL;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */	
-	delete [] identities;
-	if(old.identities) {
-	  identities = new float*[sequenNumber];
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    delete [] identities;
+    if(old.identities) {
+      identities = new float*[sequenNumber];
       for(i = 0; i < sequenNumber; i++) {
-		identities[i] = new float[sequenNumber];
-        for(j = 0; j < sequenNumber; j++) 
+        identities[i] = new float[sequenNumber];
+        for(j = 0; j < sequenNumber; j++)
           identities[i][j] = old.identities[i][j];
-	  }
-    } else identities = NULL;	
+      }
+    } else identities = NULL;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -305,7 +308,7 @@ alignment &alignment::operator=(const alignment &old) {
 
     delete seqMatrix;
     seqMatrix = old.seqMatrix;
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   return *this;
@@ -314,7 +317,7 @@ alignment &alignment::operator=(const alignment &old) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Class destructor */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
 alignment::~alignment(void) {
   int i;
 
@@ -327,18 +330,18 @@ alignment::~alignment(void) {
     delete [] seqsName;
   seqsName = NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(residuesNumber != NULL)
     delete [] residuesNumber;
   residuesNumber = NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(seqsInfo != NULL)
     delete [] seqsInfo;
   seqsInfo = NULL;
-  
+
   if(saveResidues != NULL)
     delete[] saveResidues;
   saveResidues = NULL;
@@ -348,15 +351,15 @@ alignment::~alignment(void) {
   saveSequences = NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(identities != NULL) {
     for(i = 0; i < sequenNumber; i++)
       delete [] identities[i];
-	delete [] identities;
-  }	
+    delete [] identities;
+  }
   identities = NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(sgaps != NULL)
     delete sgaps;
@@ -371,7 +374,7 @@ alignment::~alignment(void) {
   seqMatrix = NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   oldAlignment = false;
 
   sequenNumber = 0;
@@ -382,14 +385,15 @@ alignment::~alignment(void) {
 
   iformat =  0;
   oformat =  0;
+  shortNames = false;
 
   dataType = 0;
 
   ghWindow = 0;
   shWindow = 0;
-  
+
   filename.clear();
-  aligInfo.clear();  
+  aligInfo.clear();
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
@@ -411,7 +415,7 @@ bool alignment::loadAlignment(char *alignmentFile) {
     case 1:
       return loadClustalAlignment(alignmentFile);
     case 3:
-      return loadNBRF_PirAlignment(alignmentFile); 
+      return loadNBRF_PirAlignment(alignmentFile);
     case 8:
       return loadFastaAlignment(alignmentFile);
     case 11:
@@ -450,7 +454,7 @@ int alignment::typeInputFile(void) {
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function prints the alignmnet to the standard output using an 
+/* This function prints the alignmnet to the standard output using an
  * appropiate function depending on the output format */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 bool alignment::printAlignment(void){
@@ -462,32 +466,38 @@ bool alignment::printAlignment(void){
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   switch(oformat) {
-    case 1: 
-	  alignmentClustalToFile(cout);
-	  break;
-    case 3: 
-	  alignmentNBRF_PirToFile(cout);
-	  break;
+    case 1:
+      alignmentClustalToFile(cout);
+      break;
+    case 3:
+      alignmentNBRF_PirToFile(cout);
+      break;
     case 8:
-	  alignmentFastaToFile(cout);
-	  break;
+      alignmentFastaToFile(cout);
+      break;
     case 11:
-	  alignmentPhylip3_2ToFile(cout);
-	  break;
+      alignmentPhylip3_2ToFile(cout);
+      break;
     case 12:
-	  alignmentPhylipToFile(cout);
-	  break;
+      alignmentPhylipToFile(cout);
+      break;
+    case 13:
+      alignmentPhylip_PamlToFile(cout);
+      break;
     case 17:
-	  alignmentNexusToFile(cout);
-	  break;
+      alignmentNexusToFile(cout);
+      break;
     case 21: case 22:
       alignmentMegaToFile(cout);
       break;
     case 99:
       getSequences(cout);
       break;
+    case 100:
+      alignmentColourHTML(cout);
+      break;
     default:
-	  return false;
+      return false;
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   return true;
@@ -500,49 +510,55 @@ bool alignment::saveAlignment(char *destFile) {
 
   ofstream file;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(sequences == NULL) 
+  if(sequences == NULL)
     return false;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* File open and correct open check */
   file.open(destFile);
   if(!file) return false;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Depending on the output format, we call to the 
+  /* Depending on the output format, we call to the
    * appropiate function */
   switch(oformat) {
     case 1:
-	  alignmentClustalToFile(file);
-	  break;
-    case 3: 
-	  alignmentNBRF_PirToFile(file);
-	  break;
+      alignmentClustalToFile(file);
+      break;
+    case 3:
+      alignmentNBRF_PirToFile(file);
+      break;
     case 8:
-	  alignmentFastaToFile(file);
-	  break;
+      alignmentFastaToFile(file);
+      break;
     case 11:
-	  alignmentPhylip3_2ToFile(file);
-	  break;
+      alignmentPhylip3_2ToFile(file);
+      break;
     case 12:
-	  alignmentPhylipToFile(file);
-	  break;
+      alignmentPhylipToFile(file);
+      break;
+    case 13:
+      alignmentPhylip_PamlToFile(file);
+      break;
     case 17:
-	  alignmentNexusToFile(file);
-	  break;
-    case 21: case 22: 
+      alignmentNexusToFile(file);
+      break;
+    case 21: case 22:
       alignmentMegaToFile(file);
       break;
     case 99:
       getSequences(file);
       break;
+    case 100:
+      alignmentColourHTML(file);
+      break;	  
     default:
-	  return false;
+      return false;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Close the output file */
   file.close();
@@ -553,14 +569,14 @@ bool alignment::saveAlignment(char *destFile) {
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function trimms a given alignment based on the gap distribution 
+/* This function trimms a given alignment based on the gap distribution
  * values. To trim the alignment, this function uses two parameters:
- * 
- * 		baseLine: 	Minimum percentage of columns that should
- * 					be conserved in the new alignment.
- * 		gapsPct:  	Maximum percentage of gaps per column that
- * 					should be in the new alignment.
- * 
+ *
+ *      baseLine:   Minimum percentage of columns that should
+ *                  be conserved in the new alignment.
+ *      gapsPct:    Maximum percentage of gaps per column that
+ *                  should be in the new alignment.
+ *
  * The function selects that combination of parameters that maximize the
  * final number of columns in the new alignment. There is an extra parameter
  * to ask for the complementary alignment. A complementary alignment consits
@@ -570,11 +586,11 @@ alignment *alignment::cleanGaps(float baseLine, float gapsPct, bool complementar
 
   alignment *ret;
   double cut;
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* If gaps statistics are not calculated, we 
+  /* If gaps statistics are not calculated, we
    * calculate them */
-  if(calculateGapStats() != true) 
+  if(calculateGapStats() != true)
     return NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -584,8 +600,8 @@ alignment *alignment::cleanGaps(float baseLine, float gapsPct, bool complementar
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Once we have the cut value proposed, we call the 
-   * appropiate method to clean the alignment and, then, 
+  /* Once we have the cut value proposed, we call the
+   * appropiate method to clean the alignment and, then,
    * generate the new alignment. */
   ret = cleanByCutValue(cut, baseLine, sgaps -> getGapsWindow(), complementary);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -597,14 +613,14 @@ alignment *alignment::cleanGaps(float baseLine, float gapsPct, bool complementar
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function trimms a given alignment based on the similarity distribution 
+/* This function trimms a given alignment based on the similarity distribution
  * values. To trim the alignment, this function uses two parameters:
- * 
- * 		baseLine: 	Minimum percentage of columns that should
- * 					be conserved in the new alignment.
- * 		conservat: 	Minimum value of similarity per column that
- * 					should be in the new alignment.
- * 
+ *
+ *      baseLine:   Minimum percentage of columns that should
+ *                  be conserved in the new alignment.
+ *      conservat:  Minimum value of similarity per column that
+ *                  should be in the new alignment.
+ *
  * The function selects that combination of parameters that maximize the
  * final number of columns in the new alignment. There is an extra parameter
  * to ask for the complementary alignment. A complementary alignment consits
@@ -616,7 +632,7 @@ alignment *alignment::cleanConservation(float baseLine, float conservationPct, b
   float cut;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* If conservation's statistics are not calculated, 
+  /* If conservation's statistics are not calculated,
    * we calculate them */
   if(calculateConservationStats() != true)
     return NULL;
@@ -629,7 +645,7 @@ alignment *alignment::cleanConservation(float baseLine, float conservationPct, b
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Once we have the cut value, we call the appropiate
-   * method to clean the alignment and, then, generate 
+   * method to clean the alignment and, then, generate
      the new alignment */
   ret = cleanByCutValue(cut, baseLine, scons -> getMdkwVector(), complementary);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -642,22 +658,22 @@ alignment *alignment::cleanConservation(float baseLine, float conservationPct, b
 
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function trimms a given alignment based on the similarity and gaps 
- * distribution values. To trim the alignment, this function uses three 
+/* This function trimms a given alignment based on the similarity and gaps
+ * distribution values. To trim the alignment, this function uses three
  * parameters:
- * 
- * 		baseLine: 	Minimum percentage of columns that should
- * 					be conserved in the new alignment.
- * 		gapsPct:  	Maximum percentage of gaps per column that
- * 					should be in the new alignment.
- * 		conservat:	Minimum value of similarity per column that
- * 					should be in the new alignment.
- * 
+ *
+ *      baseLine:   Minimum percentage of columns that should
+ *                  be conserved in the new alignment.
+ *      gapsPct:    Maximum percentage of gaps per column that
+ *                  should be in the new alignment.
+ *      conservat:  Minimum value of similarity per column that
+ *                  should be in the new alignment.
+ *
  * The function selects that combination of parameters that maximize the
  * final number of columns in the new alignment. If the baseLine parameter
- * is the most strict, the other two ones would be relaxed to keep columns 
- * that would not be selected. There is an extra parameter to ask for the 
- * complementary alignment. A complementary alignment consits of those 
+ * is the most strict, the other two ones would be relaxed to keep columns
+ * that would not be selected. There is an extra parameter to ask for the
+ * complementary alignment. A complementary alignment consits of those
  * columns that would delete applying the standard approach. */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 alignment *alignment::clean(float baseLine, float GapsPct, float conservationPct, bool complementary) {
@@ -665,7 +681,7 @@ alignment *alignment::clean(float baseLine, float GapsPct, float conservationPct
   alignment *ret;
   float cutCons;
   double cutGaps;
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* If gaps statistics are not calculated, we calculate
    *  them */
@@ -674,7 +690,7 @@ alignment *alignment::clean(float baseLine, float GapsPct, float conservationPct
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* If conservation's statistics are not calculated, 
+  /* If conservation's statistics are not calculated,
    * we calculate them */
   if(calculateConservationStats() != true)
     return NULL;
@@ -687,7 +703,7 @@ alignment *alignment::clean(float baseLine, float GapsPct, float conservationPct
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Clean the alingment using the two cut values, the 
+  /* Clean the alingment using the two cut values, the
    * gapsWindow and MDK_Windows vectors and the baseline
    * value */
   ret = cleanByCutValue(cutGaps, sgaps -> getGapsWindow(), baseLine, cutCons, scons -> getMdkwVector(), complementary);
@@ -696,19 +712,19 @@ alignment *alignment::clean(float baseLine, float GapsPct, float conservationPct
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Return a reference of the clean alignment object */
   return ret;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This function cleans a given alignment based on the consistency values
  * asses from a dataset of alignments. The method takes three parameters:
- * 
- *		cutpoint: 	Lower limit (0-1) of comparefile value admits in 
- * 					the new alignment.
- * 		baseline: 	Minimum percentage of columns to have in the new alignment
- * 		vectValues: A vector with alignment's consistency values.
- * 
+ *
+ *      cutpoint:   Lower limit (0-1) of comparefile value admits in
+ *                  the new alignment.
+ *      baseline:   Minimum percentage of columns to have in the new alignment
+ *      vectValues: A vector with alignment's consistency values.
+ *
  * The function computes the optimal parameter combination value to trim
  * an alignment based on the consistency value from the comparison among
  * a dataset of alignments with the same sequences. */
@@ -730,10 +746,10 @@ alignment *alignment::cleanCompareFile(float cutpoint, float baseLine, float *ve
   utils::quicksort(vectAux, 0, residNumber-1);
   cut = vectAux[(int) ((float)(residNumber - 1) * (100.0 - baseLine)/100.0)];
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  /* We have to decide which is the smallest value 
-   * between the cutpoint value and the value from 
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* We have to decide which is the smallest value
+   * between the cutpoint value and the value from
    * the minimum percentage threshold */
   cut = cutpoint < cut ? cutpoint : cut;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -742,28 +758,28 @@ alignment *alignment::cleanCompareFile(float cutpoint, float baseLine, float *ve
   /* Deallocate memory */
   delete [] vectAux;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Clean the selected alignment using the input parameters. */
   ret = cleanByCutValue(cut, baseLine, vectValues, complementary);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Return a refernce of the new alignment */
   return ret;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function removes those sequences that are misaligned with the rest 
+/* This function removes those sequences that are misaligned with the rest
  * of sequences in the alignment at given sequence and residue overlaps.
- * 
- *		overlapColumn:	Set the minimum similarity fraction value that has 
- * 						to have a position from a given sequence to be
- * 						considered as an hit.
- * 		minimumOverlap:	Set the minimum proportion of hits that has to be
- * 						a sequence to keep it in the new alignment.
- * 
+ *
+ *      overlapColumn:  Set the minimum similarity fraction value that has
+ *                      to have a position from a given sequence to be
+ *                      considered as an hit.
+ *      minimumOverlap: Set the minimum proportion of hits that has to be
+ *                      a sequence to keep it in the new alignment.
+ *
  * At the same time, it's possible to get an alignment with those columns
  * that this method should remove setting for that purpose the complementary
  * parameter to True */
@@ -773,42 +789,42 @@ alignment *alignment::cleanSpuriousSeq(float overlapColumn, float minimumOverlap
   float *overlapVector;
   alignment *newAlig;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Allocate local memory */
   overlapVector = new float[sequenNumber];
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  /* Compute the overlap's vector using the overlap 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Compute the overlap's vector using the overlap
    * column's value */
   if(!calculateSpuriousVector(overlapColumn, overlapVector))
     return NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  	
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Select and remove the sequences with a overlap less
    * than threshold's overlap and create a new alignemnt */
   newAlig = cleanOverlapSeq(minimumOverlap, overlapVector, complementary);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate local memory */
   delete [] overlapVector;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Return a reference of the clean alignment object */
   return newAlig;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This function implements the gappyout approach. To trim the alignment, this
- * method computes the slope from the gaps distribution from the input alig. 
+ * method computes the slope from the gaps distribution from the input alig.
  * Using this information, the method asses the most abrupt change between
  * three consecutive points from that distribution and selects the first of
  * this point as aan cut-off point.
- * 
+ *
  * The method also can return the complementary alignment that consists of
  * those columns that would be delete applying this algorithm. */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -817,29 +833,29 @@ alignment *alignment::clean2ndSlope(bool complementarity) {
   alignment *ret;
   int cut;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* If gaps statistics are not calculated, we calculate
    *  them */
-  if(calculateGapStats() != true) 
+  if(calculateGapStats() != true)
     return NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */    
-  /* We get the cut point using a automatic method for 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* We get the cut point using a automatic method for
    * this purpose. */
   cut = sgaps -> calcCutPoint2ndSlope();
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */    
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  /* Using the cut point calculates in last steps, we 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Using the cut point calculates in last steps, we
    * clean the alignment and generate a new alignment */
   ret = cleanByCutValue(cut, 0, sgaps->getGapsWindow(), complementarity);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */    
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Returns the new alignment. */
   return ret;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */    
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -854,43 +870,43 @@ alignment *alignment::cleanCombMethods(bool complementarity, bool variable) {
   int i, j, acm, gapCut, *positions, *gaps;
   double inic, fin, vlr;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* If gaps statistics are not calculated, we calculate
    *  them */
   if(calculateGapStats() != true)
     return NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Computes the gap cut point using a automatic method
    * and at the same time, we get the gaps values from
    * the alignment. */
   gapCut = sgaps -> calcCutPoint2ndSlope();
   gaps = sgaps -> getGapsWindow();
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  /* If conservation's statistics are not calculated, 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* If conservation's statistics are not calculated,
    * we calculate them */
   if(calculateConservationStats() != true)
     return NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  /* Computes the conservations value for each column 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Computes the conservations value for each column
    * in the alignment. At the same time, the method get
    * the vector with those values. */
   scons -> calculateVectors(sequences, sgaps -> getGapsWindow());
   simil = scons -> getMdkwVector();
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */    
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Allocate local memory and initializate it to -1 */
   positions = new int[residNumber];
   utils::initlVect(positions, residNumber, -1);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* The method only selects columns with gaps number
    * less or equal than the gap's cut point. Counts the
    * number of columns that have been selected */
@@ -900,18 +916,18 @@ alignment *alignment::cleanCombMethods(bool complementarity, bool variable) {
       acm++;
     }
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */    
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  /* Allocate local memory and save the similaritys 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Allocate local memory and save the similaritys
    * values for the columns that have been selected */
   vectAux = new float[acm];
   for(i = 0, j = 0; i < residNumber; i++)
     if(positions[i] != -1)
       vectAux[j++] = simil[i];
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Sort the conservation's value vector. */
   utils::quicksort(vectAux, 0, acm-1);
 
@@ -919,49 +935,49 @@ alignment *alignment::cleanCombMethods(bool complementarity, bool variable) {
    * 80% of length. */
   first20Point = 0;
   last80Point  = 0;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   for(i = acm - 1, j = 1; i >= 0; i--, j++) {
-    if((((float) j/acm) * 100.0) <= 20.0) 
+    if((((float) j/acm) * 100.0) <= 20.0)
       first20Point = vectAux[i];
-    if((((float) j/acm) * 100.0) <= 80.0) 
+    if((((float) j/acm) * 100.0) <= 80.0)
       last80Point = vectAux[i];
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */    
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Computes the logaritmic's values for those points.
-   * Finally the method computes the similarity cut 
+   * Finally the method computes the similarity cut
    * point using these values. */
   inic = log10(first20Point);
   fin  = log10(last80Point);
   vlr  = ((inic - fin) / 10) + fin;
   simCut = (float) pow(10, vlr);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  /* Clean the alignment and generate a new alignment 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Clean the alignment and generate a new alignment
    * object using the gaps cut and the similaritys cut
    *  values */
-  alignment *ret = cleanStrict(gapCut, sgaps -> getGapsWindow(), 
+  alignment *ret = cleanStrict(gapCut, sgaps -> getGapsWindow(),
         simCut, scons -> getMdkwVector(), complementarity, variable);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate local memory */
   delete [] vectAux;
   delete [] positions;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Return a reference of the new alignment */
   return ret;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function allows to delete those columns consistents of only gaps. 
+/* This function allows to delete those columns consistents of only gaps.
  * This function is specially useful when we remove misaligned sequences from
  * a given alignmnet. As the rest of functions, this function can return the
  * complementary alignment but this alignment would have only columns with
@@ -971,23 +987,23 @@ alignment *alignment::cleanNoAllGaps(bool complementarity) {
 
   alignment *ret;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* If gaps statistics are not calculated, we calculate
    *  them */
-  if(calculateGapStats() != true) 
+  if(calculateGapStats() != true)
     return NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  /* We want to conserve the columns with gaps' number 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* We want to conserve the columns with gaps' number
    * less or equal than sequences' number - 1  */
   ret = cleanByCutValue((sequenNumber - 1), 0, sgaps->getGapsWindow(), complementarity);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Returns the new alignment. */
   return ret;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1019,7 +1035,7 @@ bool alignment::calculateSpuriousVector(float overlap, float *spuriousVector) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Depending on the kind of alignment, we have 
+  /* Depending on the kind of alignment, we have
    * different indetermination symbol */
   if(getTypeAlignment() == AAType)
     indet = 'X';
@@ -1032,8 +1048,8 @@ bool alignment::calculateSpuriousVector(float overlap, float *spuriousVector) {
   for(i = 0, seqValue = 0; i < sequenNumber; i++, seqValue = 0) {
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* For each alignment's column, computes the overlap 
-	 * between the selected sequence and the other ones */
+    /* For each alignment's column, computes the overlap
+     * between the selected sequence and the other ones */
     for(j = 0; j < residNumber; j++) {
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1041,73 +1057,73 @@ bool alignment::calculateSpuriousVector(float overlap, float *spuriousVector) {
       for(k = 0, hit = 0; k < i; k++) {
 
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	    /* If the element of sequence selected is the same 
-		 * that the element of sequence considered, computes
-		 * a hit */
-        if(sequences[i][j] == sequences[k][j]) 
+        /* If the element of sequence selected is the same
+         * that the element of sequence considered, computes
+         * a hit */
+        if(sequences[i][j] == sequences[k][j])
           hit++;
 
         /* If the element of sequence selected isn't a 'X' nor
-		 * 'N' (indetermination) or a '-' (gap) and the element
-		 * of sequence considered isn't a  a 'X' nor 'N' 
-		 * (indetermination) or a '-' (gap), computes a hit */
+         * 'N' (indetermination) or a '-' (gap) and the element
+         * of sequence considered isn't a  a 'X' nor 'N'
+         * (indetermination) or a '-' (gap), computes a hit */
         else if((sequences[i][j] != indet) && (sequences[i][j] != '-')
           && (sequences[k][j] != indet) && (sequences[k][j] != '-'))
           hit++;
       }
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       /* For sequences are after the sequence selected */
       for(k = (i + 1); k < sequenNumber; k++) {
-		  
-		/* ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* If the element of sequence selected is the same 
-		 * that the element of sequence considered, computes
-		 * a hit */
-        if(sequences[i][j] == sequences[k][j]) 
+
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        /* If the element of sequence selected is the same
+         * that the element of sequence considered, computes
+         * a hit */
+        if(sequences[i][j] == sequences[k][j])
           hit++;
 
         /* If the element of sequence selected isn't a 'X' nor
-		 * 'N' (indetermination) or a '-' (gap) and the element
-		 * of sequence considered isn't a  a 'X' nor 'N' 
-		 * (indetermination) or a '-' (gap), computes a hit */
+         * 'N' (indetermination) or a '-' (gap) and the element
+         * of sequence considered isn't a  a 'X' nor 'N'
+         * (indetermination) or a '-' (gap), computes a hit */
         else if((sequences[i][j] != indet) && (sequences[i][j] != '-')
           && (sequences[k][j] != indet) && (sequences[k][j] != '-'))
           hit++;
       }
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	  
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
       /* Finally, if the hit's number divided by number of
-	   * sequences minus one is greater or equal than 
-	   * overlap's value, computes a column's hit. */     
+       * sequences minus one is greater or equal than
+       * overlap's value, computes a column's hit. */
       if(hit >= ovrlap)
         seqValue++;
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
     }
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* For each alignment's sequence, computes its spurious's
-	 * or overlap's value as the column's hits -for that 
+     * or overlap's value as the column's hits -for that
        sequence- divided by column's number. */
     spuriousVector[i] = ((float) seqValue / residNumber);
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */	
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* If there is not problem in the method, return true */
   return true;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method compute the cluster belongs to a given alignment at certain 
+/* This method compute the cluster belongs to a given alignment at certain
  * identity threshold. To know the clusters from the alignment, those
  * clusters are calculated as follow: 1) Select the longest sequences. 2)
  * Using the previous computed identity values, compare if the second
  * longest sequence belongs, because the identity value with the cluster
- * representative is equal or greater than a given threshold, to this cluster 
+ * representative is equal or greater than a given threshold, to this cluster
  * or not. 3) If the sequence belongs to this cluster, we add it, if not
  * belongs, we create a new cluster and fix this sequence as its representative
  * 4) Continue with the rest of sequences. In the case that a given sequence
@@ -1116,7 +1132,8 @@ bool alignment::calculateSpuriousVector(float overlap, float *spuriousVector) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int *alignment::calculateRepresentativeSeq(float maximumIdent) {
 
-  int i, j, pos, clusterNum, **seqs, **cluster;
+  int i, j, pos, clusterNum, **seqs;
+  int *cluster;
   static int *repres;
   float max;
 
@@ -1130,108 +1147,72 @@ int *alignment::calculateRepresentativeSeq(float maximumIdent) {
   seqs = new int*[sequenNumber];
   for(i = 0; i < sequenNumber; i++) {
     seqs[i] = new int[2];
-	seqs[i][0] = utils::removeCharacter('-', sequences[i]).size();
-	seqs[i][1] = i;
+    seqs[i][0] = utils::removeCharacter('-', sequences[i]).size();
+    seqs[i][1] = i;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */	
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  cerr << endl << "calculateRepresentativeSeq::Allocating memmory - Computing sequences length" << endl;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
+  
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   utils::quicksort(seqs, 0, sequenNumber-1);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  cluster    = new int*[sequenNumber];
-  cluster[0] = new int [sequenNumber + 1];
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  cluster[0][1] = seqs[sequenNumber - 1][1];
-  cluster[0][0] = 1;
-  clusterNum = 1;  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  cluster = new int[sequenNumber];
+  cluster[0] = seqs[sequenNumber - 1][1];
+  clusterNum = 1;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  cerr << endl << "calculateRepresentativeSeq::Before to get the clusters" << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   for(i = sequenNumber - 2; i >= 0; i--) {
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */	  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     for(j = 0, max = 0, pos = -1; j < clusterNum; j++) {
-		
-  	  if(identities[seqs[i][1]][cluster[j][1]] > maximumIdent) {
-		  
-	    if(identities[seqs[i][1]][cluster[j][1]] > max) {
-		  max = identities[seqs[i][1]][cluster[j][1]];
-	      pos = j;
-		}
-	  }
-	}
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */
-	
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */
-	if(pos == -1) {
-      cluster[j]    = new int [sequenNumber + 1];		
-      cluster[j][1] = seqs[i][1];
-	  cluster[j][0] = 1;
-	  clusterNum++;
-	} else {
-	  cluster[pos][0]++;		
-      cluster[pos][cluster[pos][0]] = seqs[i][1];	  
-	}	
+      if(identities[seqs[i][1]][cluster[j]] > maximumIdent) {
+        if(identities[seqs[i][1]][cluster[j]] > max) {
+          max = identities[seqs[i][1]][cluster[j]];
+          pos = j;
+        }
+      }
+    }
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    if(pos == -1) {
+	  cluster[j] = seqs[i][1];
+      clusterNum++;
+    }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  cerr << endl << "calculateRepresentativeSeq::After to get the clusters" << endl;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
   repres = new int[clusterNum + 1];
   repres[0] = clusterNum;
   for(i = 0; i < clusterNum; i++)
-    repres[i+1] = cluster[i][1];
+    repres[i+1] = cluster[i];
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  cerr << endl << "calculateRepresentativeSeq::Allocating memory for the results - Deallocating local memmory" << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate dinamic memory */
-  for(i = 0; i < sequenNumber; i++) {	  
-    if(i < clusterNum) delete [] cluster[i];
+  for(i = 0; i < sequenNumber; i++)
 	delete [] seqs[i];
-  }
-  
+
   delete [] cluster;
   delete [] seqs;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  cerr << endl << "calculateRepresentativeSeq::Getting back the results" << endl;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   return repres;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method looks for the optimal cut point for a given clusters number. 
+/* This method looks for the optimal cut point for a given clusters number.
  * The idea is to find a identity cut-off point that can be used to get a
  * number of representative sequences similar to the input parameter */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 float alignment::getCutPointClusters(int clusterNumber) {
 
   float max, min, avg, gMax, gMin, startingPoint, prevValue = 0, iter = 0;
-  int i, j, clusterNum, *cluster, **seqs;  
+  int i, j, clusterNum, *cluster, **seqs;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* If the user wants only one cluster means that all
@@ -1256,28 +1237,28 @@ float alignment::getCutPointClusters(int clusterNumber) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     for(j = 0, max = 0, avg = 0, min = 1; j < i; j++) {
       if(max < identities[i][j])
-	    max  = identities[i][j];
+        max  = identities[i][j];
       if(min > identities[i][j])
-	    min  = identities[i][j];		
-      avg += identities[i][j];
-	}
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */	  
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */	  
-    for(j = i + 1; j < sequenNumber; j++) {
-      if(max < identities[i][j])
-	    max  = identities[i][j];
-      if(min > identities[i][j])
-	    min  = identities[i][j];		
+        min  = identities[i][j];
       avg += identities[i][j];
     }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */	  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    for(j = i + 1; j < sequenNumber; j++) {
+      if(max < identities[i][j])
+        max  = identities[i][j];
+      if(min > identities[i][j])
+        min  = identities[i][j];
+      avg += identities[i][j];
+    }
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     startingPoint += avg / (sequenNumber - 1);
-	if(max > gMax) gMax = max;
-	if(min < gMin) gMin = min;	
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */	
+    if(max > gMax) gMax = max;
+    if(min < gMin) gMin = min;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */	  
-  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Take the starting point as the average value */
   startingPoint /= sequenNumber;
@@ -1288,25 +1269,21 @@ float alignment::getCutPointClusters(int clusterNumber) {
   seqs = new int*[sequenNumber];
   for(i = 0; i < sequenNumber; i++) {
     seqs[i] = new int[2];
-	seqs[i][0] = utils::removeCharacter('-', sequences[i]).size();
-	seqs[i][1] = i;
+    seqs[i][0] = utils::removeCharacter('-', sequences[i]).size();
+    seqs[i][1] = i;
   }
   utils::quicksort(seqs, 0, sequenNumber-1);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Create the data structure to store the different 
+  /* Create the data structure to store the different
    * clusters for a given thresholds */
   cluster    = new int[sequenNumber];
   cluster[0] = seqs[sequenNumber - 1][1];
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  cerr << endl << "getCutPointClusters::Before enter in the loop to look for the optimal cut-off point" << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Look for the optimal identity value to get the 
+
+  /**** ***** ***** ***** ***** ***** ***** ***** */
+  /* Look for the optimal identity value to get the
    * number of cluster set by the user. To do that, the
    * method starts in the average identity value and moves
    * to the right or lefe side of this value depending on
@@ -1316,94 +1293,80 @@ float alignment::getCutPointClusters(int clusterNumber) {
    * the given cluster number means that it's impossible
    * to get this cut-off and we need to stop the search */
   do {
-    clusterNum = 1;  
+    clusterNum = 1;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	/* Start the search */
-    for(i = sequenNumber - 2; i >= 0; i--) {		
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */	  
-      for(j = 0; j < clusterNum; j++)
-    	if(identities[seqs[i][1]][cluster[j]] > startingPoint)
-		  break;
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */	
-	  if(j == clusterNum) {
-        cluster[j] = seqs[i][1];
-  	    clusterNum++;
-	  }	
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    }  
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	/* Given the cutoff point, if we get the same cluster
-	 * number or we have been getting for more than 10
-	 * consecutive times the same cutoff point, we stop */
-	if((clusterNum == clusterNumber) || (iter > 10))
-	  break;
-	else {
+    /* Start the search */
+    for(i = sequenNumber - 2; i >= 0; i--) {
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	  /* We have to move to the left side from the average
-	   * to decrease the cutoff value and get a smaller number
-	   * of clusters */
-	  if(clusterNum > clusterNumber) {
-	    gMax = startingPoint;
-		startingPoint = (gMax + gMin)/2;
-	  } else {
-	  /* In the opposite side, we have to move to the right
-	   * side from the cutting point to be more strict and get
-	   * a bigger number of clusters */
-		gMin = startingPoint;
-		startingPoint = (gMax + gMin)/2;
-	  }
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */	
-	  
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	  /* If the clusters number from the previous iteration
-	   * is different from the current number, we put the 
-	   * iteration number to 0 and store this new value */
-	  if(prevValue != clusterNum) {
-		iter = 0;
-	    prevValue = clusterNum;
-      /* Otherwise, we increase the iteration number to 
-	   * avoid enter in an infinitve loop */		
-	  } else iter++;	  
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */	
+      for(j = 0; j < clusterNum; j++)
+        if(identities[seqs[i][1]][cluster[j]] > startingPoint)
+          break;
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      if(j == clusterNum) {
+        cluster[j] = seqs[i][1];
+        clusterNum++;
+      }
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  cerr << endl << "getCutPointClusters::Inside of the loop... Clusters Number computes: " << clusterNum << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */	
-	
-  } while(true);
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Given the cutoff point, if we get the same cluster
+     * number or we have been getting for more than 10
+     * consecutive times the same cutoff point, we stop */
+    if((clusterNum == clusterNumber) || (iter > 10))
+      break;
+    else {
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* We have to move to the left side from the average
+       * to decrease the cutoff value and get a smaller number
+       * of clusters */
+      if(clusterNum > clusterNumber) {
+        gMax = startingPoint;
+        startingPoint = (gMax + gMin)/2;
+      } else {
+      /* In the opposite side, we have to move to the right
+       * side from the cutting point to be more strict and get
+       * a bigger number of clusters */
+        gMin = startingPoint;
+        startingPoint = (gMax + gMin)/2;
+      }
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  cerr << endl << "getCutPointClusters::After the loop" << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* If the clusters number from the previous iteration
+       * is different from the current number, we put the
+       * iteration number to 0 and store this new value */
+      if(prevValue != clusterNum) {
+        iter = 0;
+        prevValue = clusterNum;
+      /* Otherwise, we increase the iteration number to
+       * avoid enter in an infinitve loop */
+      } else iter++;
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    }
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  } while(true);
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate dinamic memory */
-  for(i = 0; i < sequenNumber; i++)
-    delete [] seqs[i];
+  for(i = 0; i < sequenNumber; i++) delete [] seqs[i];
   delete [] seqs;
   delete [] cluster;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  cerr << endl << "getCutPointClusters::Deallocating memmory" << endl;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
+   
   return startingPoint;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method removes those columns that exceed a given threshold. If the 
+/* This method removes those columns that exceed a given threshold. If the
  * number of columns in the trimmed alignment is lower than a given percentage
  * of the original alignment. The program relaxes the threshold until to add
  * enough columns to achieve this percentage, to add those columns the program
  * start in the middle of the original alignment and make, alternatively,
- * movements to the left and right side from that point. This method also can 
+ * movements to the left and right side from that point. This method also can
  * return the complementary alignment. */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gInCol, bool complementary) {
@@ -1412,21 +1375,21 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
   alignment *newAlig;
   string *matrixAux;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Select the columns with a gaps value less or equal
    * than the cut point. */
   for(i = 0, newResidNumber = 0; i < residNumber; i++)
     if(gInCol[i] <= cut) newResidNumber++;
     else saveResidues[i] = -1;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  /* Compute, if it's necessary, the number of columns 
-   * necessary to achieve the minimum number of columns 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Compute, if it's necessary, the number of columns
+   * necessary to achieve the minimum number of columns
    * fixed by coverage parameter. */
   oth = utils::roundInt((((baseLine/100.0) - (float) newResidNumber/residNumber)) * residNumber);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* if it's necessary to recover some columns, we
    * applied this instructions to recover it */
@@ -1447,13 +1410,13 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Fixed the initial size of blocks as 0.5% of 
+  /* Fixed the initial size of blocks as 0.5% of
    * alignment's length */
   for(k = utils::roundInt(0.005 * residNumber); (k >= 0) && (oth > 0); k--) {
 
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* We start in the alignment middle then we move on 
-	 * right and left side at the same time. */
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* We start in the alignment middle then we move on
+     * right and left side at the same time. */
     for(i = (residNumber/2), j = (i + 1); (((i > 0) || (j < (residNumber - 1))) && (oth > 0)); i--, j++) {
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1462,8 +1425,8 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       /* if block's size is greater or equal than the fixed
-	   * size then we save all columns that have not been 
-	   * saved previously. */
+       * size then we save all columns that have not been
+       * saved previously. */
       if((i - jn) >= k) {
         for( ; ((saveResidues[jn] == -1) && (jn >= 0) && (oth > 0)); jn--) {
           if(gInCol[jn] <= cut) {
@@ -1474,7 +1437,7 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
         }
       }
       i = jn;
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       /* Right side. Here, we compute the block's size. */
@@ -1482,8 +1445,8 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       /* if block's size is greater or equal than the fixed
-	   * size then we save all columns that have not been
-	   * saved previously. */
+       * size then we save all columns that have not been
+       * saved previously. */
       if((jn - j) >= k) {
         for( ; ((saveResidues[jn] == -1) && (jn < residNumber) && (oth > 0)); jn++) {
           if(gInCol[jn] <= cut) {
@@ -1494,9 +1457,9 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
         }
       }
       j = jn;
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
     }
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1521,7 +1484,7 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
     if(saveResidues[i] != -1) {
       for(j = 0; j < sequenNumber; j++) {
         matrixAux[j].resize(matrixAux[j].size() + 1, sequences[j][i]);
-	  }
+      }
     }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -1529,11 +1492,11 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
   /* When we have all parameters, we create the new
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
-                          iformat, oformat, dataType, isAligned, reverse, sequenNumber, residNumber,
-						  residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocated auxiliar memory */
   delete[] matrixAux;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1545,12 +1508,12 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method removes those columns that not achieve a given threshold. If the 
+/* This method removes those columns that not achieve a given threshold. If the
  * number of columns in the trimmed alignment is lower than a given percentage
  * of the original alignment. The program relaxes the threshold until to add
  * enough columns to achieve this percentage, to add those columns the program
  * start in the middle of the original alignment and make, alternatively,
- * movements to the left and right side from that point. This method also can 
+ * movements to the left and right side from that point. This method also can
  * return the complementary alignment. */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *ValueVect, bool complementary) {
@@ -1560,7 +1523,7 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
   string *matrixAux;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Select the columns with a conservation's value 
+  /* Select the columns with a conservation's value
    * greater than the cut point. */
   for(i = 0, newResidNumber = 0; i < residNumber; i++)
     if(ValueVect[i] > cut) newResidNumber++;
@@ -1569,20 +1532,20 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Compute, if it's necessary, the number of columns
-   * necessary to achieve the minimum number of columns 
+   * necessary to achieve the minimum number of columns
    * fixed by coverage value. */
   oth = utils::roundInt((((baseLine/100.0) - (float) newResidNumber/residNumber)) * residNumber);
   if(oth > 0) newResidNumber += oth;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Fixed the initial size of blocks as 0.5% of 
+  /* Fixed the initial size of blocks as 0.5% of
    * alignment's length */
   for(k = utils::roundInt(0.005 * residNumber); (k >= 0) && (oth > 0); k--) {
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* We start in the alignment middle then we move on 
-	 * right and left side at the same time. */
+    /* We start in the alignment middle then we move on
+     * right and left side at the same time. */
     for(i = (residNumber/2), j = (i + 1); (((i > 0) || (j < (residNumber - 1))) && (oth > 0)); i--, j++) {
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1590,11 +1553,11 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
       for(jn = i; ((saveResidues[jn] != -1) && (jn >= 0) && (oth > 0)); jn--) ;
 
        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      /* if block's size is greater or equal than the fixed 
-	   * size then we save all columns that have not been
-	   * saved previously. */
-      /* Here, we only accept column with a conservation's 
-	   * value equal to conservation cut point. */
+      /* if block's size is greater or equal than the fixed
+       * size then we save all columns that have not been
+       * saved previously. */
+      /* Here, we only accept column with a conservation's
+       * value equal to conservation cut point. */
       if((i - jn) >= k) {
         for( ; ((saveResidues[jn] == -1) && (jn >= 0) && (oth > 0)); jn--) {
           if(ValueVect[jn] == cut) {
@@ -1605,19 +1568,19 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
         }
       }
       i = jn;
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	  
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
       /* Right side. Here, we compute the block's size. */
       for(jn = j; ((saveResidues[jn] != -1) && (jn < residNumber) && (oth > 0)); jn++) ;
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       /* if block's size is greater or equal than the fixed
-	   * size then we select the column and save the block's
-	   * size for the next iteraction. it's obvius that we 
-	   * decrease the column's number needed to finish. */
-     /* Here, we only accept column with a conservation's 
-	  * value equal to conservation cut point. */
+       * size then we select the column and save the block's
+       * size for the next iteraction. it's obvius that we
+       * decrease the column's number needed to finish. */
+     /* Here, we only accept column with a conservation's
+      * value equal to conservation cut point. */
       if((jn - j) >= k) {
         for( ; ((saveResidues[jn] == -1) && (jn < residNumber) && (oth > 0)); jn++) {
           if(ValueVect[jn] == cut) {
@@ -1628,9 +1591,9 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
         }
       }
       j = jn;
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
     }
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1662,8 +1625,8 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
-                          iformat, oformat, dataType, isAligned, reverse, sequenNumber, residNumber,
-						  residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1678,16 +1641,16 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method removes those columns that not achieve the similarity threshond, 
+/* This method removes those columns that not achieve the similarity threshond,
  * by one hand, and exceed the gaps threshold. If the number of columns that
  * have been selected is lower that a given coverage, the program relaxes both
  * thresholds in order to get back some columns and achieve this minimum
- * number of columns in the new alignment. For that purpose, the program 
- * starts at the middle of the original alignment and makes, alternatively, 
- * movememts to the right and left sides looking for those columns necessary 
+ * number of columns in the new alignment. For that purpose, the program
+ * starts at the middle of the original alignment and makes, alternatively,
+ * movememts to the right and left sides looking for those columns necessary
  * to achieve the minimum number of columns set by the coverage parameter.
  * This method also can return the complementary alignmnet consists of those
- * columns that will be deleted from the original alignment applying the 
+ * columns that will be deleted from the original alignment applying the
  * standard method. */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary) {
@@ -1698,8 +1661,8 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
   string *matrixAux;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Select the columns with a conservation's value 
-   * greater than the conservation cut point AND 
+  /* Select the columns with a conservation's value
+   * greater than the conservation cut point AND
    * less or equal than the gap cut point. */
   for(i = 0, newResidNumber = 0; i < residNumber; i++)
     if((MDK_Win[i] > cutCons) && (gInCol[i] <= cutGaps)) newResidNumber++;
@@ -1707,12 +1670,12 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Compute, if it's necessary, the number of columns 
+  /* Compute, if it's necessary, the number of columns
    * necessary to achieve the minimum number of it fixed
    * by the coverage parameter. */
   oth = utils::roundInt((((baseLine/100.0) - (float) newResidNumber/residNumber)) * residNumber);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* If it's needed to add new columns, we compute the
    * news thresholds */
@@ -1723,12 +1686,12 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
     /* Allocate memory */
     vectAuxCons = new float[residNumber];
     vectAuxGaps = new int[residNumber];
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Sort a copy of the MDK_Win vector and of the gInCol
-	 * vector, and take the value of the column that marks
-	 * the % baseline */
+     * vector, and take the value of the column that marks
+     * the % baseline */
     utils::copyVect((float *) MDK_Win, vectAuxCons, residNumber);
     utils::copyVect((int *) gInCol, vectAuxGaps, residNumber);
 
@@ -1737,37 +1700,37 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
 
     blCons = vectAuxCons[(int) ((float)(residNumber - 1) * (100.0 - baseLine)/100.0)];
     blGaps = vectAuxGaps[(int) ((float)(residNumber - 1) * (baseLine)/100.0)];
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */
-	
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Deallocate memory */
     delete [] vectAuxCons;
     delete [] vectAuxGaps;
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Fixed the initial size of blocks as 0.5% of 
+  /* Fixed the initial size of blocks as 0.5% of
    * alignment's length */
   for(k = utils::roundInt(0.005 * residNumber); (k >= 0) && (oth > 0); k--) {
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	/* We start in the alignment middle then we move on 
-	 * right and left side at the same time. */
+    /* We start in the alignment middle then we move on
+     * right and left side at the same time. */
     for(i = (residNumber/2), j = (i + 1); (((i > 0) || (j < (residNumber - 1))) && (oth > 0)); i--, j++) {
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	  /* Left side. Here, we compute the block's size. */
+      /* Left side. Here, we compute the block's size. */
       for(jn = i; ((saveResidues[jn] != -1) && (jn >= 0) && (oth > 0)); jn--) ;
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	  /* if block's size is greater or equal than the fixed
-	   * size then we select the column and save the block's
-	   * size for the next iteraction. it's obvius that we
-	   * decrease the column's number needed to finish. */
+      /* if block's size is greater or equal than the fixed
+       * size then we select the column and save the block's
+       * size for the next iteraction. it's obvius that we
+       * decrease the column's number needed to finish. */
       /* Here, we accept column with a conservation's value
-	   * greater or equal than the conservation cut point OR
-	   * less or equal than the gap cut point. */
+       * greater or equal than the conservation cut point OR
+       * less or equal than the gap cut point. */
       if((i - jn) >= k) {
         for( ; ((saveResidues[jn] == -1) && (jn >= 0) && (oth > 0)); jn--) {
           if((MDK_Win[jn] >= blCons) || (gInCol[jn] <= blGaps)) {
@@ -1778,20 +1741,20 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
         }
       }
       i = jn;
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	  /* Right side. Here, we compute the block's size. */
+      /* Right side. Here, we compute the block's size. */
       for(jn = j; ((saveResidues[jn] != -1) && (jn < residNumber) && (oth > 0)); jn++) ;
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	  /* if block's size is greater or equal than the fixed
-	   * size then we select the column and save the block's
-	   * size for the next iteraction. it's obvius that we
-	   * decrease the column's number needed to finish. */
+      /* if block's size is greater or equal than the fixed
+       * size then we select the column and save the block's
+       * size for the next iteraction. it's obvius that we
+       * decrease the column's number needed to finish. */
       /* Here, we accept column with a conservation's value
-	   * greater or equal than the conservation cut point OR
-	   * less or equal than the gap cut point. */
+       * greater or equal than the conservation cut point OR
+       * less or equal than the gap cut point. */
       if((jn - j) >= k) {
         for( ; ((saveResidues[jn] == -1) && (jn < residNumber) && (oth > 0)); jn++) {
           if((MDK_Win[jn] >= blCons) || (gInCol[jn] <= blGaps)) {
@@ -1802,9 +1765,9 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
         }
       }
       j = jn;
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
     }
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1836,15 +1799,15 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
-                          iformat, oformat, dataType, isAligned, reverse, sequenNumber, residNumber,
-						  residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocated auxiliar memory */
   delete[] matrixAux;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Return the new alignment reference */
   return newAlig;
@@ -1852,11 +1815,11 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method carries out the strict and strict plus method. To trim the 
+/* This method carries out the strict and strict plus method. To trim the
  * alignment in an automated way, the method uses as an input a given gaps
  * thresholds over a gaps vector values, a given similarity threshold over a
  * similarity vector values. With a flag, we can decide which method the
- * program shall apply. With another one, the user can ask for the 
+ * program shall apply. With another one, the user can ask for the
  * complementary alignment. In this method, those columns that has been marked
  * to be deleted but has, at least, 3 of 4 surronding neighbour selected are
  * get back to the new alignmnet. At other part of the method, those column
@@ -1881,13 +1844,13 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, c
   for(i = 0; i < residNumber; i++)
     if(MDK_W[i] < simCut)
       saveResidues[i] = -1;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */	  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Search for columns that has been rejected and has,
    * at least, 3 adjacent columns selected */
   /* For the second column in the alignment */
-  if((saveResidues[0] != -1) && (saveResidues[2] != -1) && (saveResidues[3] != -1)) 
+  if((saveResidues[0] != -1) && (saveResidues[2] != -1) && (saveResidues[3] != -1))
     saveResidues[1] = 1;
   else
     saveResidues[1] = -1;
@@ -1910,7 +1873,7 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, c
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Fix the block's size based on variable flag. The 
+  /* Fix the block's size based on variable flag. The
    * Block's size can be fixed to 5 or can be variable
    * between a Minimum Block's size 3 and a Maximum
    * Block's size: 12 depend on percentage of alignment's
@@ -1935,9 +1898,9 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, c
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Finally, the method computes the new alignment 
+  /* Finally, the method computes the new alignment
    * columns' number */
-  for(i = 0, newResidNumber = 0; i < residNumber; i++) 
+  for(i = 0, newResidNumber = 0; i < residNumber; i++)
     if(saveResidues[i] != -1)
       newResidNumber++;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1957,7 +1920,7 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, c
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* We allocate memory to save the columns selected */
   matrixAux = new string[sequenNumber];
-  
+
   /* Copy the columns from the original alignment to
    * the new alignment, only if the column has been
    * selected. */
@@ -1969,18 +1932,18 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, c
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* When we have all parameters, we create the new 
+  /* When we have all parameters, we create the new
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
-                          iformat, oformat, dataType, isAligned, reverse, sequenNumber, residNumber,
-						  residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocated auxiliar memory */
   delete[] matrixAux;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Return the new alignment reference */
   return newAlig;
@@ -2011,7 +1974,7 @@ alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, b
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Once we've selected the sequences, if the 
+  /* Once we've selected the sequences, if the
    * complementary flag is true, we will have to change
    * the selected and non-selected sequences. */
   if(complementary == true) {
@@ -2033,17 +1996,17 @@ alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, b
   for(i = 0, j = 0; i < sequenNumber; i++)
     if(saveSequences[i] != -1) {
        newSeqsName[j] = seqsName[i];
-	   matrixAux[j] = sequences[i];
+       matrixAux[j] = sequences[i];
        j++;
     }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* When we have all parameters, we create the new 
+  /* When we have all parameters, we create the new
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, newSequences, residNumber,
-                          iformat, oformat, dataType, isAligned, reverse, sequenNumber, residNumber,
-						  residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2060,7 +2023,7 @@ alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, b
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method removes those columns, expressed as range of columns, set by
- * the user. The method also can return the complementary alignment, this 
+ * the user. The method also can return the complementary alignment, this
  * alignment only consits of those columns (or range de columns) fixs by the
  * user */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2118,11 +2081,11 @@ alignment *alignment::removeColumns(int *columns, int init, int size, bool compl
   /* When we have all parameters, we create the new
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
-                          iformat, oformat, dataType, isAligned, reverse, sequenNumber, residNumber,
-						  residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocated auxiliar memory */
   delete[] matrixAux;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2135,7 +2098,7 @@ alignment *alignment::removeColumns(int *columns, int init, int size, bool compl
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method removes those sequences, expressed as range of sequences, set
- * by the user. The method also can return the complementary alignment, this 
+ * by the user. The method also can return the complementary alignment, this
  * alignment only consits of those sequences (or range de sequences) fixs by
  * the user */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2184,20 +2147,20 @@ alignment *alignment::removeSequences(int *seqs, int init, int size, bool comple
   for(i = 0, j = 0; i < sequenNumber; i++)
     if(saveSequences[i] != -1) {
        newSeqsName[j] = seqsName[i];
-	   matrixAux[j] = sequences[i];
+       matrixAux[j] = sequences[i];
        j++;
     }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* When we have all parameters, we create the new 
+  /* When we have all parameters, we create the new
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, newSeqNumber, residNumber,
-                          iformat, oformat, dataType, isAligned, reverse, sequenNumber, residNumber,
-						  residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */ 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocated auxiliar memory */
   delete [] matrixAux;
   delete [] newSeqsName;
@@ -2245,20 +2208,20 @@ alignment *alignment::getClustering(float identityThreshold) {
   for(i = 0, j = 0; i < sequenNumber; i++)
     if(saveSequences[i] != -1) {
        newSeqsName[j] = seqsName[i];
-	   matrixAux[j] = sequences[i];
+       matrixAux[j] = sequences[i];
        j++;
     }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* When we have all parameters, we create the new 
+  /* When we have all parameters, we create the new
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, clustering[0], residNumber,
-                          iformat, oformat, dataType, isAligned, reverse, sequenNumber, residNumber,
-						  residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */ 
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocated auxiliar memory */
   delete [] matrixAux;
   delete [] newSeqsName;
@@ -2269,6 +2232,99 @@ alignment *alignment::getClustering(float identityThreshold) {
   return newAlig;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
+
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/* This function returns the backtranslation for a given protein processed 
+ * alignment into its CDS alignment. To do this convertion, the function needs
+ * the Coding sequences as well the original composition of each protein 
+ * sequence. Also, the function needs to know which columns/sequences will be
+ * in the final alignment to carray out the conversion. */
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *ColumnsToKeep, string *oldSeqsName, sequencesMatrix *seqMatrix, alignment *ProtAlig) {
+
+  string *matrixAux;
+  alignment *newAlig;
+  int i, j, k, l, oldResidues;
+  int *mappedSeqs, *tmpSequence, *selectedRes;
+  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Map the selected protein sequences to the input
+   * coding sequences */
+  mappedSeqs = new int[newSequences];  
+  for(i = 0; i < sequenNumber; i++)
+    for(j = 0; j < newSequences; j++)
+	  if(!seqsName[i].compare(oldSeqsName[j])) {
+		mappedSeqs[j] = i;
+		break;
+	  }
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Get the original alignment size as well the original
+   * selected/non-selected columns */
+  oldResidues = seqMatrix -> getResidNumber();
+  selectedRes = new int[oldResidues];
+
+  for(i = 0; i < oldResidues; i++)
+	selectedRes[i] = i;  
+
+  for(j = 0; j < ColumnsToKeep[0]; j++)
+	selectedRes[j] = -1;
+	
+  for(i = 0; i < newResidues - 1; i++)
+    for(j = ColumnsToKeep[i] + 1; j < ColumnsToKeep[i+1]; j++)
+	  selectedRes[j] = -1;
+  
+  for(j = ColumnsToKeep[newResidues - 1] + 1; j < oldResidues; j++)
+	selectedRes[j] = -1;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* We allocate memory to save the columns selected */
+  matrixAux = new string[newSequences];
+  tmpSequence = new int[oldResidues];
+
+  /* Using the information about which residues for each 
+   * sequence was selected by others function, we process
+   * these residues to recover the corresponding codons */
+  for(i = 0; i < newSequences; i++)
+	if(seqMatrix -> getSequence(oldSeqsName[i], tmpSequence)) {
+	  for(j = 0; j < oldResidues; j++) {
+		if((selectedRes[j] != -1) && (tmpSequence[j] != 0)) {
+		  for(k = 3 * (tmpSequence[j] - 1), l = 0; l < 3; k++, l++)
+			matrixAux[i].resize(matrixAux[i].size() + 1, sequences[mappedSeqs[i]][k]);
+		} else if(selectedRes[j] != -1) {
+          matrixAux[i].resize(matrixAux[i].size() + 3, '-');
+		}
+	  }
+	/* If there is any problems with a sequence then
+	 * the function returns an error */
+	} else {
+	  return NULL;
+	}
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* When we have all parameters, we create the new
+   * alignment */
+  newAlig = new alignment(filename, "", matrixAux, oldSeqsName, NULL, newSequences, newResidues * 3, ProtAlig -> getInputFormat(), 
+                          ProtAlig -> getOutputFormat(), ProtAlig -> getShortNames(), DNAType, true, ProtAlig -> getReverse(),
+                          sequenNumber, oldResidues * 3, NULL, NULL, NULL, 0, 0, NULL);
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Deallocated auxiliar memory */
+  delete [] matrixAux;
+  delete mappedSeqs;
+  delete tmpSequence;
+  delete selectedRes;  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Return the new alignment reference */
+  return newAlig;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+}  
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This function computes the gaps statistics for the input alignment. */
@@ -2282,7 +2338,7 @@ bool alignment::calculateGapStats(void) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* If sgaps object is not created, we create them 
+  /* If sgaps object is not created, we create them
      and calculate the statistics */
   if(sgaps == NULL) {
     sgaps = new statisticsGaps(sequences, sequenNumber, residNumber, dataType);
@@ -2329,14 +2385,14 @@ bool alignment::setSimilarityMatrix(similarityMatrix *sm) {
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* If scons object is not created, we create them */
-  if(scons == NULL) 
+  if(scons == NULL)
     scons = new statisticsConservation(sequences, sequenNumber, residNumber, dataType);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Associate the matrix to the similarity statistics
    * object */
-  if(!scons -> setSimilarityMatrix(sm)) 
+  if(!scons -> setSimilarityMatrix(sm))
     return false;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -2362,7 +2418,7 @@ bool alignment::calculateConservationStats(void) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* It the similarity statistics object has not been
    * created we create it */
-  if(scons == NULL) 
+  if(scons == NULL)
     return false;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -2459,8 +2515,37 @@ void alignment::setWindowsSize(int ghWindow_, int shWindow_) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method lets to change the output format */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void alignment::setOutputFormat(int format_) {
-  oformat = format_;
+void alignment::setOutputFormat(int format_, bool shortNames_) {
+  oformat    = format_;
+  shortNames = shortNames_;
+}
+
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/* Return the input format aligment */
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+int alignment::getInputFormat(void) {
+  return iformat;
+}
+
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/* eturn the output format alignment */
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+int alignment::getOutputFormat(void) {
+  return oformat;
+}
+
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/* Return true if the shortNames flag has been setted */
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+int alignment::getShortNames(void) {
+  return shortNames;
+}
+
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/* Return true if the reverse flag has been setted. */
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+int alignment::getReverse(void) {
+  return reverse;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2479,7 +2564,18 @@ void alignment::getSequences(string *Names) {
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* For a given set of sequences name, check for its correspondence with 
+/* This method returns the sequences name aswell the clean sequence length */
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+void alignment::getSequences(string *Names, int *lengths, int divisor) {
+
+  for(int i = 0; i < sequenNumber; i++) {
+    lengths[i] = (int) (utils::removeCharacter('-', sequences[i]).length() / divisor);
+    Names[i] = seqsName[i];
+  }
+}
+
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/* For a given set of sequences name, check for its correspondence with
  * the current sequences name. If there is not a complete correspondence
  * between both sets, the method return false, otherwise, return true */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2509,14 +2605,14 @@ bool alignment::getSeqNameOrder(string *names, int *orderVector) {
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method lets to build a sequence matrix. A sequence matrix contains 
+/* This method lets to build a sequence matrix. A sequence matrix contains
  * the residue position for each sequence without taking into account the
  * gaps in the sequence. This means that at position 10 we have the residue
  * 1 for that sequence */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void alignment::sequenMatrix(void) {
   if(seqMatrix == NULL)
-    seqMatrix = new sequencesMatrix(sequences, sequenNumber, residNumber);
+    seqMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2533,7 +2629,7 @@ void alignment::destroySequenMatrix(void) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void alignment::printSequenMatrix(void) {
   if(seqMatrix == NULL)
-    seqMatrix = new sequencesMatrix(sequences, sequenNumber, residNumber);
+    seqMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
   seqMatrix -> printMatrix();
 }
 
@@ -2543,7 +2639,7 @@ void alignment::printSequenMatrix(void) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void alignment::getColumnSeqMatrix(int column, int *columnSeqMatrix) {
   if(seqMatrix == NULL)
-    seqMatrix = new sequencesMatrix(sequences, sequenNumber, residNumber);
+    seqMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
   seqMatrix -> getColumn(column, columnSeqMatrix);
 }
 
@@ -2553,7 +2649,7 @@ void alignment::getColumnSeqMatrix(int column, int *columnSeqMatrix) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void alignment::getColumnSeqMatrix(int value, int row, int *columnSeqMatrix) {
   if(seqMatrix == NULL)
-    seqMatrix = new sequencesMatrix(sequences, sequenNumber, residNumber);
+    seqMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
   seqMatrix -> getColumn(value, row, columnSeqMatrix);
 }
 
@@ -2562,8 +2658,17 @@ void alignment::getColumnSeqMatrix(int value, int row, int *columnSeqMatrix) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void alignment::setSeqMatrixOrder(int *order) {
   if(seqMatrix == NULL)
-    seqMatrix = new sequencesMatrix(sequences, sequenNumber, residNumber);
+    seqMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
   seqMatrix -> setOrder(order);
+}
+
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/* This function change the rows order in the sequence matrix */
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+sequencesMatrix *alignment::getSeqMatrix(void) {
+  if(seqMatrix == NULL)
+    seqMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
+  return seqMatrix;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2576,7 +2681,7 @@ int alignment::getTypeAlignment(void) {
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Returns the correspondence between the columns in the original and in the 
+/* Returns the correspondence between the columns in the original and in the
  * trimmed alignment */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int *alignment::getCorrespResidues(void) {
@@ -2596,4 +2701,95 @@ int *alignment::getCorrespSequences(void) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 bool alignment::isFileAligned(void) {
   return isAligned;
+}
+
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/* Check if the Coding Sequences file is correct based on: There is not gaps
+ * in the whole set of sequences as well each sequence is multiple of 3. At
+ * the same time, the function will remove all the stop codon that are in the
+ * coding sequences if a given flat set up that */
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+bool alignment::prepareCodingSequence(bool removeStopCodon) {
+  int i, length;
+
+  for(i = 0; i < sequenNumber; i++) {
+    if(sequences[i].find("-") != string::npos) {
+      cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has, at least, one gap." << endl << endl;
+      break;
+    }
+      
+    if((sequences[i].length() % 3) != 0) {
+      cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" length is not multiple of 3." << endl << endl;
+      break;
+    }
+
+    length = sequences[i].length() - 3;
+    if(sequences[i].find("TAG", length) != string::npos) {
+      if(removeStopCodon) sequences[i].erase(length, 3);
+      else {
+        cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has the stop codon \"TAG\" at position " << length << endl << endl;
+        break;
+      }
+    }
+
+    if(sequences[i].find("TAA", length) != string::npos) {
+      if(removeStopCodon) sequences[i].erase(length, 3);
+      else {
+        cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has the stop codon \"TAA\" at position " << length << endl << endl;
+        break;
+      }
+    }
+
+    if(sequences[i].find("TGA", length) != string::npos) {
+      if(removeStopCodon) sequences[i].erase(length, 3);
+      else {
+        cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has the stop codon \"TGA\" at position " << length << endl << endl;
+        break;
+      }
+    }
+  }
+
+  if(i == sequenNumber) return true;
+  else return false;
+}
+
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/* Check if the Coding Sequences file is correct based on: There is not gaps
+ * in the whole set of sequences as well each sequence is multiple of 3.   */
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+bool alignment::checkCorrespondence(string *names, int *lengths) {
+  int i, j, numNames;
+  string tmp;
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* For each name in the current alignment, we look
+   * for its correspondence in the input protein alig */
+  for(i = 0, numNames = 0; i < sequenNumber; i++) {
+    tmp = utils::removeCharacter('-', sequences[i]);
+
+    for(j = 0; j < sequenNumber; j++) {
+      if(seqsName[i] == names[j]) {
+        if((int) tmp.length() == lengths[j]) {
+          numNames++; break;
+        } 
+		else {
+          cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" does not have the same length in both files." << endl << endl;
+          return false;
+        }
+	  }
+	}
+
+	if(j == sequenNumber) {
+      cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" is not in both files." << endl << endl;
+      return false;
+    }
+  }
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Depending on if we get the complete correspondence
+   * between both sets of names, we return true or not */
+  if(numNames == sequenNumber) return true;
+  else return false;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }

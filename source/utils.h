@@ -202,6 +202,10 @@ class utils {
   static void quicksort(int **, int, int);
 
   static void swap(int **, int **);
+  
+  static char determineColor(char res, string column);
+
+  static bool lookForPattern(string, string, float);
 
 };
 #endif
