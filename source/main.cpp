@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
 
   float conserve = -1, gapThreshold = -1, simThreshold = -1, comThreshold = -1, resOverlap = -1, seqOverlap = -1, maxIdentity = -1;
   int outformat = -1, prevType = -1, compareset = -1, stats = 0, windowSize = -1, gapWindow = -1, simWindow = -1, conWindow = -1,
-      clusters = -1;
+      blockSize = -1, clusters = -1;
 
   /* Others varibles */
   ifstream compare;
@@ -386,6 +386,11 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
+      else if(blockSize != -1) {
+        cerr << endl << "ERROR: Not allowed in combination of column block size value." << endl << endl;
+        appearErrors = true;
+      }
+
       else if((nogaps) || (noallgaps) || (gappyout) || (strict) || (strictplus)  || (automated1)) {
         cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
         appearErrors = true;
@@ -412,6 +417,11 @@ int main(int argc, char *argv[]){
 
       if((nogaps) || (noallgaps) || (gappyout) || (strict) || (strictplus) || (automated1)) {
         cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed." << endl << endl;
+        appearErrors = true;
+      }
+
+      else if(blockSize != -1) {
+        cerr << endl << "ERROR: Not allowed in combination of column block size value." << endl << endl;
         appearErrors = true;
       }
 
@@ -446,6 +456,11 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
+      else if(blockSize != -1) {
+        cerr << endl << "ERROR: Not allowed in combination of column block size value." << endl << endl;
+        appearErrors = true;
+      }
+
       else if((noallgaps) || (gappyout) || (strict) || (strictplus) || (automated1)) {
         cerr << endl << "ERROR: Combinations between automatic methods are not allowed." << endl << endl;
         appearErrors = true;
@@ -470,6 +485,11 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
+      else if(blockSize != -1) {
+        cerr << endl << "ERROR: Not allowed in combination of column block size value." << endl << endl;
+        appearErrors = true;
+      }
+      
       else if((nogaps) || (gappyout) || (strict) || (strictplus) || (automated1)) {
         cerr << endl << "ERROR: Combinations between automatic methods are not allowed." << endl << endl;
         appearErrors = true;
@@ -518,6 +538,11 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
+      else if(blockSize != -1) {
+        cerr << endl << "ERROR: Not allowed in combination of column block size value." << endl << endl;
+        appearErrors = true;
+      }
+
       else if((nogaps) || (noallgaps) || (gappyout) || (strictplus) || (automated1)) {
         cerr << endl << "ERROR: Combinations between automatic methods are not allowed." << endl << endl;
         appearErrors = true;
@@ -542,6 +567,11 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
+      else if(blockSize != -1) {
+        cerr << endl << "ERROR: Not allowed in combination of column block size value." << endl << endl;
+        appearErrors = true;
+      }
+
       else if((nogaps) || (noallgaps) || (gappyout) || (strict) || (automated1)) {
         cerr << endl << "ERROR: Combinations between automatic methods are not allowed." << endl << endl;
         appearErrors = true;
@@ -563,6 +593,11 @@ int main(int argc, char *argv[]){
 
       if((windowSize != -1) || (gapWindow != -1) || (simWindow != -1)) {
         cerr << endl << "ERROR: Not allowed in combination with this window value." << endl << endl;
+        appearErrors = true;
+      }
+
+      else if(blockSize != -1) {
+        cerr << endl << "ERROR: Not allowed in combination of column block size value." << endl << endl;
         appearErrors = true;
       }
 
@@ -746,8 +781,6 @@ int main(int argc, char *argv[]){
       }
     }
    /* ------------------------------------------------------------------------------------------------------ */	
-	
-   /* ------------------------------------------------------------------------------------------------------ */
 
    /* ------------------------------------------------------------------------------------------------------ */
 
@@ -888,7 +921,42 @@ int main(int argc, char *argv[]){
     }
    /* ------------------------------------------------------------------------------------------------------ */
 
+   /* ------------------------------------------------------------------------------------------------------ */
 
+   /*                                             Block Size Value                                           */
+
+   /* Option -block -------------------------------------------------------------------------------------------- */
+    else if(!strcmp(argv[i], "-block") && (i+1 != argc) && (blockSize == -1)){
+
+      if(selectCols) {
+        cerr << endl << "ERROR: It's imposible to set a block size value in combination with a column manual selection" << endl << endl;
+        appearErrors = true;
+      }
+      
+      else if(conserve != -1) {
+        cerr << endl << "ERROR: It's imposible to ask for a minimum percentage of the input alignment in combination with column block size" << endl << endl;
+        appearErrors = true;
+      }
+      
+      else if((nogaps) || (noallgaps) || (strict) || (strictplus) || (automated1)) {
+        cerr << endl << "ERROR: Not allowed in combination of automatic methods." << endl << endl;
+        appearErrors = true;
+      }
+
+      else {
+        if(utils::isNumber(argv[i+1])) {
+          blockSize = atoi(argv[++i]);
+          if(blockSize <= 0){
+            cerr << endl << "ERROR: The block size value should be a positive integer number." << endl << endl;
+            appearErrors = true;
+          }
+        }
+        else {
+          cerr << endl << "ERROR: The block size value should be a number." << endl << endl;
+          appearErrors = true;
+        }
+      }
+    }
    /* ------------------------------------------------------------------------------------------------------ */
 
    /*                                               Statistics                                               */
@@ -1303,7 +1371,13 @@ int main(int argc, char *argv[]){
       simWindow = 0;
   }
   origAlig -> setWindowsSize(gapWindow, simWindow);
-
+  
+  /* -------------------------------------------------------------------- */
+  
+  /* -------------------------------------------------------------------- */
+  if(blockSize != -1)
+    origAlig -> setBlockSize(blockSize);
+  
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
@@ -1500,7 +1574,6 @@ int main(int argc, char *argv[]){
   /* -------------------------------------------------------------------- */
   if(backtransFile != NULL) {
 
-
 	if(seqNames != NULL) delete [] seqNames;
     seqNames = new string[singleAlig -> getNumSpecies()];
 
@@ -1635,6 +1708,9 @@ void menu(void) {
   cout << "    -gw <n>                  " << "(half) Window size only applies to statistics/methods based on Gaps." << endl;
   cout << "    -sw <n>                  " << "(half) Window size only applies to statistics/methods based on Similarity." << endl;
   cout << "    -cw <n>                  " << "(half) Window size only applies to statistics/methods based on Consistency." << endl << endl;
+
+  cout << "    -block <n>               " << "Minimum column block size to be kept in the trimmed alignment. Available with manual and automatic (gappyout) methods"
+                                          << endl << endl;
 
   cout << "    -sgc                     " << "Print gap percentage count for columns in the input alignment." << endl;
   cout << "    -sgt                     " << "Print accumulated gap percentage count." << endl;

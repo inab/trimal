@@ -77,6 +77,8 @@ class alignment {
   int ghWindow;
   int shWindow;
 
+  int blockSize;
+
   string *sequences;
   string *seqsName;
   string *seqsInfo;
@@ -127,7 +129,7 @@ class alignment {
   alignment(void);
 
   alignment(string, string, string *, string *, string *, int, int, int, int, bool,
-            int, int, bool, int, int, int *, int *, int *, int, int, float **);
+            int, int, bool, int, int, int *, int *, int *, int, int, int, float **);
 
   /* Overlap the operator = to use it as a constructor */
   alignment &operator=(const alignment &);
@@ -439,6 +441,8 @@ class alignment {
 
   void setWindowsSize(int, int);
 
+  void setBlockSize(int);
+
   void setOutputFormat(int, bool);
 
   void setReverse(void);
@@ -450,6 +454,8 @@ class alignment {
   int getShortNames(void);
 
   int getReverse(void);
+
+  int getBlockSize(void);
 
   void calculateSeqIdentity(void);
 

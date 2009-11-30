@@ -58,6 +58,11 @@ alignment::alignment(void) {
   /* Window sizes to trim the input alignment */
   ghWindow = 0;
   shWindow = 0;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  
+  /* Minimum block size in the new alignment */
+  blockSize = 0;
+  
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -104,7 +109,7 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
                      string *o_seqsInfo, int o_sequenNumber, int o_residNumber, int o_iformat, int o_oformat,
                      bool o_shortNames, int o_dataType, int o_isAligned, bool o_reverse, int OldSequences,
                      int OldResidues, int *o_residuesNumber, int *o_saveResidues, int *o_saveSequences,
-                     int o_ghWindow, int o_shWindow, float **o_identities) {
+                     int o_ghWindow, int o_shWindow, int o_blockSize, float **o_identities) {
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   int i, j, k, ll;
@@ -125,6 +130,8 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
 
   ghWindow = o_ghWindow;
   shWindow = o_shWindow;
+
+  blockSize = o_blockSize;
 
   isAligned = o_isAligned;
   reverse   = o_reverse;
@@ -240,6 +247,8 @@ alignment &alignment::operator=(const alignment &old) {
 
     ghWindow = old.ghWindow;
     shWindow = old.shWindow;
+
+    blockSize = old.blockSize;
 
     filename = old.filename;
     aligInfo = old.aligInfo;
@@ -391,6 +400,8 @@ alignment::~alignment(void) {
 
   ghWindow = 0;
   shWindow = 0;
+
+  blockSize = 0;
 
   filename.clear();
   aligInfo.clear();
@@ -1371,7 +1382,7 @@ float alignment::getCutPointClusters(int clusterNumber) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gInCol, bool complementary) {
 
-  int i, j, k, jn, oth, newResidNumber, *vectAux;
+  int i, j, k, jn, oth, pos, block, newResidNumber, *vectAux;
   alignment *newAlig;
   string *matrixAux;
 
@@ -1463,6 +1474,28 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* The method searchs for columns blocks with LONGBLOCK
+   * or greater size */
+  if(blockSize != 0) {
+    for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
+      if(saveResidues[i] != -1) block++;
+      else { 
+		if(block < blockSize)
+		  for(j = pos; j < i; j++) saveResidues[j] = -1;
+		pos = i + 1;
+		block = 0;
+	  }
+    }
+  }	
+
+  /* Finally, the method computes the new alignment
+   * columns' number */
+  for(i = 0, newResidNumber = 0; i < residNumber; i++)
+    if(saveResidues[i] != -1)
+      newResidNumber++;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Once we've selected the columns, if the complementary
    * flag is true, we will have to change the selected and
      non-selected columns. */
@@ -1493,7 +1526,7 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
                           iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
-                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1518,7 +1551,7 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *ValueVect, bool complementary) {
 
-  int i, j, k, jn, oth, newResidNumber;
+  int i, j, k, jn, oth, pos, block, newResidNumber;
   alignment *newAlig;
   string *matrixAux;
 
@@ -1597,6 +1630,28 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* The method searchs for columns blocks with LONGBLOCK
+   * or greater size */
+  if(blockSize != 0) {
+    for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
+      if(saveResidues[i] != -1) block++;
+      else { 
+		if(block < blockSize)
+		  for(j = pos; j < i; j++) saveResidues[j] = -1;
+		pos = i + 1;
+		block = 0;
+	  }
+    }
+  }	
+
+  /* Finally, the method computes the new alignment
+   * columns' number */
+  for(i = 0, newResidNumber = 0; i < residNumber; i++)
+    if(saveResidues[i] != -1)
+      newResidNumber++;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Once we've selected the columns, if the complementary
    * flag is true, we will have to change the selected and
     non-selected columns. */
@@ -1626,7 +1681,7 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
                           iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
-                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1655,7 +1710,7 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary) {
 
-  int i, j, k, oth, jn, newResidNumber, blGaps, *vectAuxGaps;
+  int i, j, k, oth, pos, block, jn, newResidNumber, blGaps, *vectAuxGaps;
   float blCons, *vectAuxCons;
   alignment *newAlig;
   string *matrixAux;
@@ -1771,6 +1826,28 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* The method searchs for columns blocks with LONGBLOCK
+   * or greater size */
+  if(blockSize != 0) {
+    for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
+      if(saveResidues[i] != -1) block++;
+      else { 
+		if(block < blockSize)
+		  for(j = pos; j < i; j++) saveResidues[j] = -1;
+		pos = i + 1;
+		block = 0;
+	  }
+    }
+  }	
+
+  /* Finally, the method computes the new alignment
+   * columns' number */
+  for(i = 0, newResidNumber = 0; i < residNumber; i++)
+    if(saveResidues[i] != -1)
+      newResidNumber++;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Once we've selected the columns, if the complementary
    * flag is true, we will have to change the selected and
    * non-selected columns. */
@@ -1800,7 +1877,7 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
                           iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
-                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1828,7 +1905,7 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, const float *MDK_W, bool complementary, bool variable) {
 
-  int i, k, j = 0, num, newResidNumber, lenBlock;
+  int i, j = 0, block, pos, num, newResidNumber, lenBlock;
   alignment *newAlig;
   string *matrixAux;
 
@@ -1887,14 +1964,15 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, c
 
   /* The method searchs for columns' blocks with LONGBLOCK
    * or greater size */
-  for(i = 0; i < residNumber; i++)
-    if(saveResidues[i] != -1) {
-      for(j = (i + 1); ((j < residNumber) && (saveResidues[j] != -1)); j++) ;
-      if((j - i) < lenBlock)
-        for(k = i; k < j; k++)
-          saveResidues[k] = -1;
-      i = j;
+  for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
+    if(saveResidues[i] != -1) block++;
+    else { 
+	  if(block < lenBlock)
+		for(j = pos; j < i; j++) saveResidues[j] = -1;
+      pos = i + 1;
+	  block = 0;
     }
+  }	
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1936,7 +2014,7 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, c
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
                           iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
-                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2006,7 +2084,7 @@ alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, b
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, newSequences, residNumber,
                           iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
-                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2082,7 +2160,7 @@ alignment *alignment::removeColumns(int *columns, int init, int size, bool compl
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
                           iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
-                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2157,7 +2235,7 @@ alignment *alignment::removeSequences(int *seqs, int init, int size, bool comple
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, newSeqNumber, residNumber,
                           iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
-                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2218,7 +2296,7 @@ alignment *alignment::getClustering(float identityThreshold) {
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, clustering[0], residNumber,
                           iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
-                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, identities);
+                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2309,7 +2387,7 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
    * alignment */
   newAlig = new alignment(filename, "", matrixAux, oldSeqsName, NULL, newSequences, newResidues * 3, ProtAlig -> getInputFormat(), 
                           ProtAlig -> getOutputFormat(), ProtAlig -> getShortNames(), DNAType, true, ProtAlig -> getReverse(),
-                          sequenNumber, oldResidues * 3, NULL, NULL, NULL, 0, 0, NULL);
+                          sequenNumber, oldResidues * 3, NULL, NULL, NULL, 0, 0, ProtAlig -> getBlockSize(), NULL);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
       
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2521,6 +2599,13 @@ void alignment::setOutputFormat(int format_, bool shortNames_) {
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/* This method sets a new block size value */
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+void alignment::setBlockSize(int blockSize_) {
+  blockSize = blockSize_;
+}
+
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Return the input format aligment */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int alignment::getInputFormat(void) {
@@ -2528,7 +2613,7 @@ int alignment::getInputFormat(void) {
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* eturn the output format alignment */
+/* Return the output format alignment */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int alignment::getOutputFormat(void) {
   return oformat;
@@ -2553,6 +2638,13 @@ int alignment::getReverse(void) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void alignment::setReverse(void) {
   reverse = true;
+}
+
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/* Return the block size value */
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+int alignment::getBlockSize(void) {
+  return blockSize;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
