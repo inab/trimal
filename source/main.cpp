@@ -1294,11 +1294,21 @@ int main(int argc, char *argv[]){
   /* **** ***** ***** ***** ***** ***** **** **************************** **** ***** ***** ***** ***** ***** **** */
 
   /* ------------------------------------------------------------------------------------------------------ */
+  if((!appearErrors) && (origAlig -> getNumAminos() < (blockSize/4))) {
+     cerr << endl << "ERROR: The block size value is too big. Please, choose another one smaller than residues number / 4." << endl << endl;
+     appearErrors = true;
+  }
+  
   if((!appearErrors) && (backtransFile != NULL) && (backtranslation -> getTypeAlignment() != DNAType)) {
      cerr << endl << "ERROR: Check your Coding sequences file. It has been detected other kind of biological sequences." << endl << endl;
      appearErrors = true;
   }
   /* ------------------------------------------------------------------------------------------------------ */
+  if((!appearErrors) && (origAlig -> isFileAligned() != true) && (backtransFile != NULL)) {
+     cerr << endl << "ERROR: The input protein file has to be aligned to carry out the backtranslation process" << endl << endl;
+     appearErrors = true;
+  }
+  /* ------------------------------------------------------------------------------------------------------ */  
   if((!appearErrors) && (backtransFile == NULL) && (removestop)) {
      cerr << endl << "ERROR: The -removestopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
      appearErrors = true;
@@ -1312,6 +1322,7 @@ int main(int argc, char *argv[]){
   /* ------------------------------------------------------------------------------------------------------ */  
   if((!appearErrors)  && (backtransFile != NULL) && (backtranslation -> prepareCodingSequence(removestop) != true))
     appearErrors = true;
+    
   /* ------------------------------------------------------------------------------------------------------ */  
   if((!appearErrors) && (backtransFile != NULL)) {
 
