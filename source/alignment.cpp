@@ -26,6 +26,9 @@
 
  ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
  ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+#include <exception>
+using namespace std;
+
 #include <float.h>
 #include "alignment.h"
 #include "rwAlignment.cpp"
@@ -58,11 +61,11 @@ alignment::alignment(void) {
   /* Window sizes to trim the input alignment */
   ghWindow = 0;
   shWindow = 0;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
   /* Minimum block size in the new alignment */
   blockSize = 0;
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -415,6 +418,7 @@ bool alignment::loadAlignment(char *alignmentFile) {
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Analyze the input alignment to detect its format */
+
   iformat = formatInputAlignment(alignmentFile);
   oformat = iformat;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -422,6 +426,8 @@ bool alignment::loadAlignment(char *alignmentFile) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Depending on the input format, the program use an
    * appropiate function to read that alignment */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   switch(iformat) {
     case 1:
       return loadClustalAlignment(alignmentFile);
@@ -443,6 +449,7 @@ bool alignment::loadAlignment(char *alignmentFile) {
       return false;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
+  return false;
 }
 /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -564,7 +571,7 @@ bool alignment::saveAlignment(char *destFile) {
       break;
     case 100:
       alignmentColourHTML(file);
-      break;	  
+      break;
     default:
       return false;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1162,7 +1169,7 @@ int *alignment::calculateRepresentativeSeq(float maximumIdent) {
     seqs[i][1] = i;
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   utils::quicksort(seqs, 0, sequenNumber-1);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1199,7 +1206,7 @@ int *alignment::calculateRepresentativeSeq(float maximumIdent) {
   for(i = 0; i < clusterNum; i++)
     repres[i+1] = cluster[i];
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate dinamic memory */
   for(i = 0; i < sequenNumber; i++)
@@ -1367,7 +1374,7 @@ float alignment::getCutPointClusters(int clusterNumber) {
   delete [] seqs;
   delete [] cluster;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-   
+
   return startingPoint;
 }
 
@@ -1479,14 +1486,14 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
   if(blockSize != 0) {
     for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
       if(saveResidues[i] != -1) block++;
-      else { 
+      else {
 		if(block < blockSize)
 		  for(j = pos; j < i; j++) saveResidues[j] = -1;
 		pos = i + 1;
 		block = 0;
 	  }
     }
-  }	
+  }
 
   /* Finally, the method computes the new alignment
    * columns' number */
@@ -1635,14 +1642,14 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
   if(blockSize != 0) {
     for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
       if(saveResidues[i] != -1) block++;
-      else { 
+      else {
 		if(block < blockSize)
 		  for(j = pos; j < i; j++) saveResidues[j] = -1;
 		pos = i + 1;
 		block = 0;
 	  }
     }
-  }	
+  }
 
   /* Finally, the method computes the new alignment
    * columns' number */
@@ -1650,7 +1657,7 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
     if(saveResidues[i] != -1)
       newResidNumber++;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Once we've selected the columns, if the complementary
    * flag is true, we will have to change the selected and
@@ -1831,14 +1838,14 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
   if(blockSize != 0) {
     for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
       if(saveResidues[i] != -1) block++;
-      else { 
+      else {
 		if(block < blockSize)
 		  for(j = pos; j < i; j++) saveResidues[j] = -1;
 		pos = i + 1;
 		block = 0;
 	  }
     }
-  }	
+  }
 
   /* Finally, the method computes the new alignment
    * columns' number */
@@ -1966,13 +1973,13 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, c
    * or greater size */
   for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
     if(saveResidues[i] != -1) block++;
-    else { 
+    else {
 	  if(block < lenBlock)
 		for(j = pos; j < i; j++) saveResidues[j] = -1;
       pos = i + 1;
 	  block = 0;
     }
-  }	
+  }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2312,9 +2319,9 @@ alignment *alignment::getClustering(float identityThreshold) {
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function returns the backtranslation for a given protein processed 
+/* This function returns the backtranslation for a given protein processed
  * alignment into its CDS alignment. To do this convertion, the function needs
- * the Coding sequences as well the original composition of each protein 
+ * the Coding sequences as well the original composition of each protein
  * sequence. Also, the function needs to know which columns/sequences will be
  * in the final alignment to carray out the conversion. */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2324,11 +2331,11 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
   alignment *newAlig;
   int i, j, k, l, oldResidues;
   int *mappedSeqs, *tmpSequence, *selectedRes;
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Map the selected protein sequences to the input
    * coding sequences */
-  mappedSeqs = new int[newSequences];  
+  mappedSeqs = new int[newSequences];
   for(i = 0; i < sequenNumber; i++)
     for(j = 0; j < newSequences; j++)
 	  if(!seqsName[i].compare(oldSeqsName[j])) {
@@ -2344,15 +2351,15 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
   selectedRes = new int[oldResidues];
 
   for(i = 0; i < oldResidues; i++)
-	selectedRes[i] = i;  
+	selectedRes[i] = i;
 
   for(j = 0; j < ColumnsToKeep[0]; j++)
 	selectedRes[j] = -1;
-	
+
   for(i = 0; i < newResidues - 1; i++)
     for(j = ColumnsToKeep[i] + 1; j < ColumnsToKeep[i+1]; j++)
 	  selectedRes[j] = -1;
-  
+
   for(j = ColumnsToKeep[newResidues - 1] + 1; j < oldResidues; j++)
 	selectedRes[j] = -1;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2362,7 +2369,7 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
   matrixAux = new string[newSequences];
   tmpSequence = new int[oldResidues];
 
-  /* Using the information about which residues for each 
+  /* Using the information about which residues for each
    * sequence was selected by others function, we process
    * these residues to recover the corresponding codons */
   for(i = 0; i < newSequences; i++)
@@ -2385,24 +2392,24 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* When we have all parameters, we create the new
    * alignment */
-  newAlig = new alignment(filename, "", matrixAux, oldSeqsName, NULL, newSequences, newResidues * 3, ProtAlig -> getInputFormat(), 
+  newAlig = new alignment(filename, "", matrixAux, oldSeqsName, NULL, newSequences, newResidues * 3, ProtAlig -> getInputFormat(),
                           ProtAlig -> getOutputFormat(), ProtAlig -> getShortNames(), DNAType, true, ProtAlig -> getReverse(),
                           sequenNumber, oldResidues * 3, NULL, NULL, NULL, 0, 0, ProtAlig -> getBlockSize(), NULL);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocated auxiliar memory */
   delete [] matrixAux;
   delete mappedSeqs;
   delete tmpSequence;
-  delete selectedRes;  
+  delete selectedRes;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Return the new alignment reference */
   return newAlig;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-}  
+}
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This function computes the gaps statistics for the input alignment. */
@@ -2809,7 +2816,7 @@ bool alignment::prepareCodingSequence(bool removeStopCodon) {
       cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has, at least, one gap." << endl << endl;
       break;
     }
-      
+
     if((sequences[i].length() % 3) != 0) {
       cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" length is not multiple of 3." << endl << endl;
       break;
@@ -2863,7 +2870,7 @@ bool alignment::checkCorrespondence(string *names, int *lengths) {
       if(seqsName[i] == names[j]) {
         if((int) tmp.length() == lengths[j]) {
           numNames++; break;
-        } 
+        }
 		else {
           cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" does not have the same length in both files." << endl << endl;
           return false;

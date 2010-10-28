@@ -1,8 +1,8 @@
-									/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+									/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale 
-                 phylogenetics analyses 
+    trimAl v1.3: a tool for automated alignment trimming in large-scale
+                 phylogenetics analyses
 
     Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
                        [scapella, tgabaldon]@crg.es
@@ -21,7 +21,7 @@
     You should have received a copy of the GNU General Public License
     along with trimAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+ ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
  ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include <fstream>
@@ -43,7 +43,7 @@
 #define STRICT   2
 
 #define VERSION 1.3
-#define REVISION 01
+#define REVISION 20100902
 
 void menu(void);
 void examples(void);
@@ -62,9 +62,9 @@ int main(int argc, char *argv[]){
 
   /* Others varibles */
   ifstream compare;
-  float *compareVect = NULL; 
+  float *compareVect = NULL;
   alignment **compAlig  = NULL;
-  string nline, *seqNames = NULL;  
+  string nline, *seqNames = NULL;
   sequencesMatrix *seqMatrix = NULL;
   similarityMatrix *similMatrix = NULL;
   alignment *origAlig = NULL, *singleAlig = NULL, *backtranslation = NULL;
@@ -78,7 +78,7 @@ int main(int argc, char *argv[]){
   /* Exec: TrimAl - Shows the menu. */
 
   /* ------------------------------------------------------------------------------------------------------ */
-  if(argc == 1) { 
+  if(argc == 1) {
     menu();
     return 0;
   }
@@ -134,7 +134,7 @@ int main(int argc, char *argv[]){
           cerr << endl << "ERROR: Option \"" << argv[i] << "\" not valid. A alignment file has been setting up to be compare with a set of alignmets." << endl << endl;
         appearErrors = true;
         i++;
-      } 
+      }
     }
    /* ------------------------------------------------------------------------------------------------------ */
 
@@ -163,7 +163,7 @@ int main(int argc, char *argv[]){
    /* Option -fasta -------------------------------------------------------------------------------------- */
     else if(!strcmp(argv[i], "-fasta") && (outformat == -1))
       outformat = 8;
-	  
+
    /* Option -fasta-m10 -------------------------------------------------------------------------------------- */
     else if(!strcmp(argv[i], "-fasta-m10") && (outformat == -1)) {
       outformat = 8; shortNames = true;
@@ -206,7 +206,7 @@ int main(int argc, char *argv[]){
    /* Option -phylip_paml-m10 ------------------------------------------------------------------ */
     else if(!strcmp(argv[i], "-phylip_paml-m10") && (outformat == -1)) {
       outformat = 13; shortNames = true;
-    }	  
+    }
 
    /* ------------------------------------------------------------------------------------------------------ */
 
@@ -244,7 +244,7 @@ int main(int argc, char *argv[]){
         i++;
       }
     }
-	
+
     /* Option -forceselect ----------------------------------------------------------------------------------- */
     else if(!strcmp(argv[i], "-forceselect") && (i+1 != argc) && (forceFile == NULL)) {
 
@@ -263,7 +263,7 @@ int main(int argc, char *argv[]){
         appearErrors = true;
         i++;
       }
-    }	
+    }
 
     /* Option -backtrans -------------------------------------------------------------------------------------- */
     else if(!strcmp(argv[i], "-backtrans") && (i+1 != argc) && (backtransFile == NULL)) {
@@ -277,7 +277,7 @@ int main(int argc, char *argv[]){
         cerr << endl << "ERROR: Alignment not loaded: \"" << backtransFile << "\" Check the file's content." << endl << endl;
         appearErrors = true;
       }
-    }	
+    }
 
    /* ------------------------------------------------------------------------------------------------------ */
 
@@ -375,7 +375,7 @@ int main(int argc, char *argv[]){
         }
       }
     }
-	
+
    /* ------------------------------------------------------------------------------------------------------ */
 
    /* Option -cons ----------------------------------------------------------------------------------------- */
@@ -411,7 +411,7 @@ int main(int argc, char *argv[]){
       }
     }
    /* ------------------------------------------------------------------------------------------------------ */
-   
+
    /* Option -selectcols -------------------------------------------------------------------------------- */
     else if((!strcmp(argv[i], "-selectcols")) && (selectCols == false) && ((i+3) < argc) && (!strcmp(argv[++i], "{")) && (!strcmp(argv[i+2], "}"))) {
 
@@ -442,7 +442,7 @@ int main(int argc, char *argv[]){
 
       else selectCols = true;
       i++;
-    }   
+    }
 
    /* ------------------------------------------------------------------------------------------------------ */
 
@@ -466,7 +466,7 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
-      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) || 
+      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
         (comThreshold != -1) || (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
         appearErrors = true;
@@ -489,13 +489,13 @@ int main(int argc, char *argv[]){
         cerr << endl << "ERROR: Not allowed in combination of column block size value." << endl << endl;
         appearErrors = true;
       }
-      
+
       else if((nogaps) || (gappyout) || (strict) || (strictplus) || (automated1)) {
         cerr << endl << "ERROR: Combinations between automatic methods are not allowed." << endl << endl;
         appearErrors = true;
       }
 
-      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) || 
+      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
         (comThreshold != -1) || (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
         appearErrors = true;
@@ -519,7 +519,7 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
-      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) || 
+      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
         (comThreshold != -1) || (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
         appearErrors = true;
@@ -548,7 +548,7 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
-      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) || 
+      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
         (comThreshold != -1) || (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
         appearErrors = true;
@@ -577,7 +577,7 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
-      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) || 
+      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
         (comThreshold != -1) || (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
         appearErrors = true;
@@ -601,7 +601,7 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
-      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) || 
+      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
         (comThreshold != -1) || (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Combinations between automatic methods are not allowed." << endl << endl;
         appearErrors = true;
@@ -614,9 +614,9 @@ int main(int argc, char *argv[]){
 
       else
         automated1 = true;
-    }	
+    }
    /* ------------------------------------------------------------------------------------------------------ */
-   
+
    /* ------------------------------------------------------------------------------------------------------ */
 
    /*                                 Manual Method Values. Deleting sequences                                */
@@ -699,11 +699,11 @@ int main(int argc, char *argv[]){
       else selectSeqs = true;
       i++;
     }
-	
+
    /* Option -maxidentity ----------------------------------------------------------------------------------- */
     else if((!strcmp(argv[i], "-maxidentity")) && (i+1 != argc) && (maxIdentity == -1)) {
 
-      if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) || 
+      if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
          (comThreshold != -1) || (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Not allowed in combination of other manual methods such as manual "
 		     << "selection of sequences/columns." << endl << endl;
@@ -739,12 +739,12 @@ int main(int argc, char *argv[]){
         }
       }
     }
-   /* ------------------------------------------------------------------------------------------------------ */	
+   /* ------------------------------------------------------------------------------------------------------ */
 
    /* Option -clusters ----------------------------------------------------------------------------------- */
     else if((!strcmp(argv[i], "-clusters")) && (i+1 != argc) && (clusters == -1)) {
 
-      if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) || 
+      if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
          (comThreshold != -1) || (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Not allowed in combination of other manual methods such as manual "
 		     << "selection of sequences/columns." << endl << endl;
@@ -780,7 +780,7 @@ int main(int argc, char *argv[]){
         }
       }
     }
-   /* ------------------------------------------------------------------------------------------------------ */	
+   /* ------------------------------------------------------------------------------------------------------ */
 
    /* ------------------------------------------------------------------------------------------------------ */
 
@@ -932,12 +932,12 @@ int main(int argc, char *argv[]){
         cerr << endl << "ERROR: It's imposible to set a block size value in combination with a column manual selection" << endl << endl;
         appearErrors = true;
       }
-      
+
       else if(conserve != -1) {
         cerr << endl << "ERROR: It's imposible to ask for a minimum percentage of the input alignment in combination with column block size" << endl << endl;
         appearErrors = true;
       }
-      
+
       else if((nogaps) || (noallgaps) || (strict) || (strictplus) || (automated1)) {
         cerr << endl << "ERROR: Not allowed in combination of automatic methods." << endl << endl;
         appearErrors = true;
@@ -1298,7 +1298,7 @@ int main(int argc, char *argv[]){
      cerr << endl << "ERROR: The block size value is too big. Please, choose another one smaller than residues number / 4." << endl << endl;
      appearErrors = true;
   }
-  
+
   if((!appearErrors) && (backtransFile != NULL) && (backtranslation -> getTypeAlignment() != DNAType)) {
      cerr << endl << "ERROR: Check your Coding sequences file. It has been detected other kind of biological sequences." << endl << endl;
      appearErrors = true;
@@ -1308,22 +1308,22 @@ int main(int argc, char *argv[]){
      cerr << endl << "ERROR: The input protein file has to be aligned to carry out the backtranslation process" << endl << endl;
      appearErrors = true;
   }
-  /* ------------------------------------------------------------------------------------------------------ */  
+  /* ------------------------------------------------------------------------------------------------------ */
   if((!appearErrors) && (backtransFile == NULL) && (removestop)) {
      cerr << endl << "ERROR: The -removestopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
      appearErrors = true;
   }
-  /* ------------------------------------------------------------------------------------------------------ */  
+  /* ------------------------------------------------------------------------------------------------------ */
   if((!appearErrors) && (backtransFile != NULL) && (origAlig -> getNumSpecies() != backtranslation -> getNumSpecies())) {
     cerr << endl << "ERROR: The input alignmnet does not have the same number of sequences than the Coding Sequences files"
          << endl << endl;
     appearErrors = true;
   }
-  /* ------------------------------------------------------------------------------------------------------ */  
+  /* ------------------------------------------------------------------------------------------------------ */
   if((!appearErrors)  && (backtransFile != NULL) && (backtranslation -> prepareCodingSequence(removestop) != true))
     appearErrors = true;
-    
-  /* ------------------------------------------------------------------------------------------------------ */  
+
+  /* ------------------------------------------------------------------------------------------------------ */
   if((!appearErrors) && (backtransFile != NULL)) {
 
     seqNames = new string[backtranslation -> getNumSpecies()];
@@ -1334,7 +1334,7 @@ int main(int argc, char *argv[]){
       appearErrors = true;
   }
   /* ------------------------------------------------------------------------------------------------------ */
-  
+
   /* **** ***** ***** ***** ***** ***** **** End of Parameters Processing **** ***** ***** ***** ***** ***** **** */
 
 
@@ -1382,13 +1382,13 @@ int main(int argc, char *argv[]){
       simWindow = 0;
   }
   origAlig -> setWindowsSize(gapWindow, simWindow);
-  
+
   /* -------------------------------------------------------------------- */
-  
+
   /* -------------------------------------------------------------------- */
   if(blockSize != -1)
     origAlig -> setBlockSize(blockSize);
-  
+
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
@@ -1562,8 +1562,8 @@ int main(int argc, char *argv[]){
     } else {
 	  singleAlig = origAlig -> getClustering(origAlig -> getCutPointClusters(clusters));
 	  singleAlig = singleAlig -> cleanNoAllGaps(false);
-	}	  
-  }  
+	}
+  }
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
@@ -1581,7 +1581,7 @@ int main(int argc, char *argv[]){
       appearErrors = true;
     }
   /* -------------------------------------------------------------------- */
-  
+
   /* -------------------------------------------------------------------- */
   if(backtransFile != NULL) {
 
@@ -1589,13 +1589,13 @@ int main(int argc, char *argv[]){
     seqNames = new string[singleAlig -> getNumSpecies()];
 
 	singleAlig -> getSequences(seqNames);
-	
+
 	singleAlig = backtranslation -> getTranslationCDS(singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
                                                       singleAlig -> getCorrespResidues(), seqNames, seqMatrix, singleAlig);
   }
   /* -------------------------------------------------------------------- */
 
-  /* -------------------------------------------------------------------- */  
+  /* -------------------------------------------------------------------- */
   if((outfile != NULL) && (!appearErrors)) {
     if(!singleAlig -> saveAlignment(outfile)) {
       cerr << endl << "ERROR: It's imposible to generate the output file." << endl << endl;
@@ -1613,7 +1613,7 @@ int main(int argc, char *argv[]){
 
   /* -------------------------------------------------------------------- */
   delete singleAlig;
-  delete origAlig;  
+  delete origAlig;
   delete[] compAlig;
 
   delete similMatrix;
@@ -1662,7 +1662,7 @@ void menu(void) {
   cout << "    -forceselect <inputfile> " << "Force selection of the given input file in the files comparison method." << endl << endl;
 
   cout << "    -backtrans <inputfile>   " << "Use a Coding Sequences file to get a backtranslation for a given AA alignment" << endl;
-  cout << "    -removestopcodon         " << "Skip stop codons at end of a given set/subset of Coding Sequences." << endl << endl;  
+  cout << "    -removestopcodon         " << "Skip stop codons at end of a given set/subset of Coding Sequences." << endl << endl;
 
   cout << "    -matrix <inpufile>       " << "Input file for user-defined similarity matrix (default is Blosum62)." << endl << endl;
 
@@ -1679,15 +1679,15 @@ void menu(void) {
   cout << "    -phylip_paml-m10         " << "Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters." << endl;
   cout << "    -phylip3.2               " << "Output file in PHYLIP3.2 format" << endl;
   cout << "    -phylip3.2-m10           " << "Output file in PHYLIP3.2 format. Sequences name length up to 10 characters." << endl;
-  cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl;  
+  cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl;
   cout << "    -phylip-m10              " << "Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters." << endl << endl;
 
   cout << "    -complementary           " << "Get the complementary alignment." << endl;
   cout << "    -colnumbering            " << "Get the relationship between the columns in the old and new alignment." << endl << endl;
 
   cout << "    -selectcols { n,l,m-k }  " << "Selection of columns to be removed from the alignment. Range: [0 - (Number of Columns - 1)]. (see User Guide)." << endl;
-  cout << "    -selectseqs { n,l,m-k }  " << "Selection of sequences to be removed from the alignment. Range: [0 - (Number of Sequences - 1)]. (see User Guide)." << endl << endl;  
-  
+  cout << "    -selectseqs { n,l,m-k }  " << "Selection of sequences to be removed from the alignment. Range: [0 - (Number of Sequences - 1)]. (see User Guide)." << endl << endl;
+
   cout << "    -gt -gapthreshold <n>    " << "1 - (fraction of sequences with a gap allowed). Range: [0 - 1]" << endl;
   cout << "    -st -simthreshold <n>    " << "Minimum average similarity allowed. Range: [0 - 1]" << endl;
   cout << "    -ct -conthreshold <n>    " << "Minimum consistency value allowed.Range: [0 - 1]" << endl;
@@ -1726,12 +1726,12 @@ void menu(void) {
   cout << "    -sgc                     " << "Print gap percentage count for columns in the input alignment." << endl;
   cout << "    -sgt                     " << "Print accumulated gap percentage count." << endl;
   cout << "    -scc                     " << "Print conservation values for columns in the input alignment." << endl;
-  cout << "    -sct                     " << "Print accumulated conservation values count." << endl;  
+  cout << "    -sct                     " << "Print accumulated conservation values count." << endl;
   cout << "    -sfc                     " << "Print compare values for columns in the selected alignment from compare files method."
                                           << endl;
   cout << "    -sft                     " << "Print accumulated compare values count for the selected alignment from compare files method."
                                           << endl;
-  cout << "    -sident                  " << "Print identity statistics for all sequences in the alignemnt. (see User Guide)." 
+  cout << "    -sident                  " << "Print identity statistics for all sequences in the alignemnt. (see User Guide)."
                                           << endl << endl;
 }
 
@@ -1770,20 +1770,20 @@ void examples(void) {
 
   cout << "   trimal -in <inputfile> -out <outputfile> -resoverlap 0.8 -seqoverlap 75" << endl << endl;
 
-  cout << "7) Selection of columns to be deleted from the alignment. The selection can " << endl 
+  cout << "7) Selection of columns to be deleted from the alignment. The selection can " << endl
        << "   be a column's number or a column's number interval." << endl << endl;
 
   cout << "   trimal -in <inputfile> -out <outputfile> -selectcols { 2,3,10,45-60,68,70-78 }" << endl << endl;
 
-  cout << "8) Get the complementary alignment from the alignment previously trimmed." << endl << endl; 
+  cout << "8) Get the complementary alignment from the alignment previously trimmed." << endl << endl;
 
   cout << "   trimal -in <inputfile> -out <outputfile> -selectcols { 2,3,45-60 } -complementary" << endl << endl;
 
-  cout << "9) Selection of sequences to be deleted from the alignment." << endl << endl; 
+  cout << "9) Selection of sequences to be deleted from the alignment." << endl << endl;
 
   cout << "   trimal -in <inputfile> -out <outputfile> -selectseqs { 1,3,8-12 } " << endl << endl;
 
-  cout << "10) Select the most 5 representative sequences from the alignment" << endl << endl; 
+  cout << "10) Select the most 5 representative sequences from the alignment" << endl << endl;
 
   cout << "   trimal -in <inputfile> -out <outputfile> -clusters 5 " << endl << endl;
 }

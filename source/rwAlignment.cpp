@@ -1,7 +1,7 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale 
+    trimAl v1.3: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
     readAl v1.3: a tool for automated alignment conversion among different
@@ -24,7 +24,7 @@
     You should have received a copy of the GNU General Public License
     along with trimAl/readAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+ ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
  ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "alignment.h"
@@ -34,9 +34,10 @@ extern int errno;
 #include <errno.h>
 #include <ctype.h>
 #include <string>
+#include <exception>
 
-#define DELIMITERS     "   \n"
-#define OTHDELIMITERS  "   \n,:*"
+#define DELIMITERS     "   \t\n"
+#define OTHDELIMITERS  "   \t\n,:*"
 #define OTH2DELIMITERS "   \n,:;*"
 #define PHYLIPDISTANCE 10
 
@@ -59,13 +60,13 @@ bool alignment::fillMatrices(bool aligned) {
     if(residuesNumber[i] != residuesNumber[i-1])
     break;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
    if (i != sequenNumber) isAligned = false;
    else                   isAligned = true;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** Fill some info ***** ***** ***** */  
+  /* ***** ***** ***** Fill some info ***** ***** ***** */
   if(residNumber == 0)
     residNumber = residuesNumber[0];
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -74,7 +75,7 @@ bool alignment::fillMatrices(bool aligned) {
   if(aligned) {
     for(i = 0; i < sequenNumber; i++) {
       if(residuesNumber[i] != residNumber) {
-        cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" (" << residuesNumber[i] 
+        cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" (" << residuesNumber[i]
              << ") does not have the same number of residues fixed by the alignment (" << residNumber << ").";
         return false;
       }
@@ -114,7 +115,7 @@ bool alignment::fillMatrices(bool aligned) {
 
 int alignment::formatInputAlignment(char *alignmentFile) {
 
-  char c, *firstWord , *line = NULL;
+  char c, *firstWord = NULL, *line = NULL;
   int format = 0, blocks = 0;
   ifstream file;
   string nline;
@@ -123,12 +124,17 @@ int alignment::formatInputAlignment(char *alignmentFile) {
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
   if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Read lines in a safer way */
+  try {
   line = utils::readLine(file);
   firstWord = strtok(line, OTHDELIMITERS);
+  } catch (exception& e) {
+    cerr << "Standard exception: " << e.what() << endl;
+  }
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -168,7 +174,7 @@ int alignment::formatInputAlignment(char *alignmentFile) {
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       while((c != '\n') && (!file.eof())) file.read(&c, 1);
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      file.read(&c, 1); 
+      file.read(&c, 1);
       if(c == '#') blocks++;
     } while((c != '\n') && (!file.eof()));
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -259,14 +265,14 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
   if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* We store the file name */
   filename.append("!Title ");
   filename.append(alignmentFile);
   filename.append(";");
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Read lines in a safer way */
@@ -285,7 +291,7 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Check the parameters */
-  if((sequenNumber == 0) || (residNumber == 0)) 
+  if((sequenNumber == 0) || (residNumber == 0))
     return false;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -327,7 +333,7 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
     }
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Read the next aminoacids blocks */
   while(!file.eof()) {
@@ -352,7 +358,7 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
       /* and append it to the sequence */
       while(true) {
         str = strtok(NULL, DELIMITERS);
-        if(str != NULL) 
+        if(str != NULL)
           sequences[i].append(str, strlen(str));
         else break;
       }
@@ -380,14 +386,14 @@ bool alignment::loadPhylip3_2Alignment(char *alignmentFile) {
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
   if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* We store the file name */
   filename.append("!Title ");
   filename.append(alignmentFile);
   filename.append(";");
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Read lines in a safer way */
@@ -406,7 +412,7 @@ bool alignment::loadPhylip3_2Alignment(char *alignmentFile) {
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Check the parameters */
-  if((sequenNumber == 0) || (residNumber == 0)) 
+  if((sequenNumber == 0) || (residNumber == 0))
     return false;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -447,10 +453,10 @@ bool alignment::loadPhylip3_2Alignment(char *alignmentFile) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* to detect a new sequence, we read next token and */
     /* if it is a blank space then there is a new sequence */
-    file.read(&c, 1); 
+    file.read(&c, 1);
     if(c == '\n') {
       firstLine = true;
-      i++; 
+      i++;
     }
 
     /* Move one position back to continue */
@@ -481,14 +487,14 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
   if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */   
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* We store the file name */
   filename.append("!Title ");
   filename.append(alignmentFile);
   filename.append(";");
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   while(true) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -545,7 +551,7 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
   /* Close the input file */
   file.close();
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Check the matrix's content */
   return fillMatrices(false);
@@ -562,14 +568,14 @@ bool alignment::loadClustalAlignment(char *alignmentFile) {
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
   if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* We store the file name */
   filename.append("!Title ");
   filename.append(alignmentFile);
   filename.append(";");
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */   
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** Title ***** ***** ***** ***** */
   /* We ignore the title line. We are only interested in the */
@@ -627,7 +633,7 @@ bool alignment::loadClustalAlignment(char *alignmentFile) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   firstBlock = true;
   i = 0;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   while(true) {
      if(i >= sequenNumber) i = 0;
@@ -689,41 +695,41 @@ bool alignment::loadNexusAlignment(char *alignmentFile) {
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
   if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* We store the file name */
   filename.append("!Title ");
   filename.append(alignmentFile);
   filename.append(";");
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */   
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Read lines in a safe way */
   utils::readLine(file);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   do {
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Read lines in a safe way */
     line = utils::readLine(file);
     str = strtok(line, DELIMITERS);
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     if(str != NULL) {
 
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
       for(i = 0; i < (int) strlen(str); i++)
         str[i] = toupper(str[i]);
 
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
       if(!strcmp(str, "MATRIX")) break;
 
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
       if(!strcmp(str, "BEGIN")) state = true;
 
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+      /* ***** ***** ***** ***** ***** ***** ***** ***** */
       if((!strcmp(str, "DIMENSIONS")) && state) {
         str = strtok(NULL, DELIMITERS);
         frag = strtok(NULL, DELIMITERS);
@@ -739,11 +745,11 @@ bool alignment::loadNexusAlignment(char *alignmentFile) {
 
   } while(!file.eof());
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Check correct read parameters */
   if(strcmp(str, "MATRIX") || (sequenNumber == 0) || (residNumber == 0))
     return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** Allocate memory ***** ***** ***** */
   seqsName  = new string[sequenNumber];
@@ -753,18 +759,18 @@ bool alignment::loadNexusAlignment(char *alignmentFile) {
   i = 0;
   while(true) {
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Read lines in a safe way */
     line = utils::readLine(file);
     if(file.eof()) break;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-    if((!strncmp(line, "end;", 4)) || (!strncmp(line, "END;", 4))) 
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    if((!strncmp(line, "end;", 4)) || (!strncmp(line, "END;", 4)))
       break;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     str = strtok(line, OTH2DELIMITERS);
     if(str != NULL) {
 
@@ -813,23 +819,23 @@ bool alignment::loadNBRF_PirAlignment(char *alignmentFile) {
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
   if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* We store the file name */
   filename.append("!Title ");
   filename.append(alignmentFile);
   filename.append(";");
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   while(true) {
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     line = utils::readLine(file);
     if(file.eof()) break;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     if((line[0] == '>') && (line[3] == ';'))
       sequenNumber++;
     delete [] line;
@@ -849,16 +855,16 @@ bool alignment::loadNBRF_PirAlignment(char *alignmentFile) {
   i = 0;
   while(true) {
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     line = utils::readLine(file);
     if(file.eof()) break;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     if((line[0] == '>') && (line[3] == ';') && (firstLine)) {
       firstLine = false;
 
-      str = strtok(line, ">;"); 
+      str = strtok(line, ">;");
       seqsInfo[i].append(str, strlen(str));
 
       str = strtok(NULL, ">;");
@@ -867,7 +873,7 @@ bool alignment::loadNBRF_PirAlignment(char *alignmentFile) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    else if((!firstLine) && (!seqLines)) 
+    else if((!firstLine) && (!seqLines))
       seqLines = true;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -875,7 +881,7 @@ bool alignment::loadNBRF_PirAlignment(char *alignmentFile) {
     else if(seqLines) {
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       if(line[strlen(line)-1] == '*') {
-        seqLines = false; 
+        seqLines = false;
         firstLine = true;
       }
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -918,37 +924,37 @@ bool alignment::loadMegaInterleavedAlignment(char *alignmentFile) {
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
   if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* We store the file name */
   filename.append("!Title ");
   filename.append(alignmentFile);
   filename.append(";");
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   do { file.read(&c, 1); } while((c != '\n') && (!file.eof()));
   line = utils::readLine(file);
   nline.append(line, strlen(line));
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   str = strtok(line, "!: ");
   for(i = 0; i < (int) strlen(str); i++)
     str[i] = toupper(str[i]);
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Read the input alignment title */
   if(!strcmp(str, "TITLE")) {
     filename.clear();
 
-    if(nline[0] != '!') 
+    if(nline[0] != '!')
       filename = "!";
     filename += nline;
     cerr << endl << endl << filename << endl << endl;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   line = utils::readLineMEGA(file);
@@ -959,8 +965,8 @@ bool alignment::loadMegaInterleavedAlignment(char *alignmentFile) {
   while((c != '#') && (!file.eof())) { file.read(&c, 1); }
   for(nline.clear(); (c != '\n') && (!file.eof()); file.read(&c, 1))
     nline += c;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Count the sequences number from the input alignment */
   while(!file.eof()) {
@@ -977,11 +983,11 @@ bool alignment::loadMegaInterleavedAlignment(char *alignmentFile) {
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Finish to preprocess the input file. */
   file.clear();
   file.seekg(0);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** Allocate memory ***** ***** ***** */
   seqsName  = new string[sequenNumber];
@@ -1018,7 +1024,7 @@ bool alignment::loadMegaInterleavedAlignment(char *alignmentFile) {
     nline = utils::readLine(file);
     if(i >= sequenNumber) {
       firstBlock = false;
-      i = 0; 
+      i = 0;
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
@@ -1044,37 +1050,37 @@ bool alignment::loadMegaNonInterleavedAlignment(char *alignmentFile) {
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
   if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* We store the file name */
   filename.append("!Title ");
   filename.append(alignmentFile);
   filename.append(";");
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   do { file.read(&c, 1); } while((c != '\n') && (!file.eof()));
   line = utils::readLine(file);
   nline.append(line, strlen(line));
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   str = strtok(line, "!: ");
   for(i = 0; i < (int) strlen(str); i++)
     str[i] = toupper(str[i]);
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Read the input alignment title */
   if(!strcmp(str, "TITLE")) {
     filename.clear();
 
-    if(nline[0] != '!') 
+    if(nline[0] != '!')
       filename = "!";
     filename += nline;
     cerr << endl << endl << filename << endl << endl;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   line = utils::readLineMEGA(file);
@@ -1085,8 +1091,8 @@ bool alignment::loadMegaNonInterleavedAlignment(char *alignmentFile) {
   while((c != '#') && (!file.eof())) { file.read(&c, 1); }
   for(nline.clear(); (c != '\n') && (!file.eof()); file.read(&c, 1))
     nline += c;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
-  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Count the sequences number from the input alignment */
   while(!file.eof()) {
@@ -1100,11 +1106,11 @@ bool alignment::loadMegaNonInterleavedAlignment(char *alignmentFile) {
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Finish to preprocess the input file. */
   file.clear();
   file.seekg(0);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** Allocate memory ***** ***** ***** */
   seqsName  = new string[sequenNumber];
@@ -1143,7 +1149,7 @@ bool alignment::loadMegaNonInterleavedAlignment(char *alignmentFile) {
     nline = utils::readLine(file);
     if(nline[0] == '#') {
       firstLine = true;
-      i++; 
+      i++;
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
@@ -1166,11 +1172,11 @@ bool alignment::loadMegaNonInterleavedAlignment(char *alignmentFile) {
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 void alignment::alignmentPhylipToFile(ostream &file) {
-  
+
   int i, j, maxLongName;
   string *tmpMatrix;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(!isAligned) {
     cerr << endl << "ERROR: The input file does not ";
     cerr << "have the sequences aligned." << endl << endl;
@@ -1178,7 +1184,7 @@ void alignment::alignmentPhylipToFile(ostream &file) {
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */   
+  /* Allocate memory to output alignment. */
   tmpMatrix = new string[sequenNumber];
   for(i = 0; i < sequenNumber; i++) {
     if(!reverse) tmpMatrix[i] = sequences[i];
@@ -1195,9 +1201,9 @@ void alignment::alignmentPhylipToFile(ostream &file) {
   /* Look for the maximum sequenNumber name size */
   maxLongName = PHYLIPDISTANCE;
   for(i = 0; (i < sequenNumber) && (!shortNames); i++)
-    maxLongName = utils::max(maxLongName, seqsName[i].size()); 
+    maxLongName = utils::max(maxLongName, seqsName[i].size());
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Put on the stream the sequenNumber names and the first 60 aminoacids block */
   for(i = 0; i < sequenNumber; i++) {
@@ -1206,7 +1212,7 @@ void alignment::alignmentPhylipToFile(ostream &file) {
     file << tmpMatrix[i].substr(0, 60)  << endl;
   }
   file << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Put on the stream the rest of the blocks */
@@ -1230,7 +1236,7 @@ void alignment::alignmentPhylip3_2ToFile(ostream &file) {
   int i, j, k, maxLongName;
   string *tmpMatrix;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(!isAligned) {
     cerr << endl << "ERROR: The input file does not ";
     cerr << "have the sequences aligned." << endl << endl;
@@ -1238,7 +1244,7 @@ void alignment::alignmentPhylip3_2ToFile(ostream &file) {
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */   
+  /* Allocate memory to output alignment. */
   tmpMatrix = new string[sequenNumber];
   for(i = 0; i < sequenNumber; i++) {
     if(!reverse) tmpMatrix[i] = sequences[i];
@@ -1255,7 +1261,7 @@ void alignment::alignmentPhylip3_2ToFile(ostream &file) {
   /* Look for the maximum sequenNumber name size */
   maxLongName = PHYLIPDISTANCE;
   for(i = 0; (i < sequenNumber) && (!shortNames); i++)
-    maxLongName = utils::max(maxLongName, seqsName[i].size()); 
+    maxLongName = utils::max(maxLongName, seqsName[i].size());
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1271,7 +1277,7 @@ void alignment::alignmentPhylip3_2ToFile(ostream &file) {
         file << sequences[i].substr(k, 10) << " ";
       file << endl;
 
-      if(j + 50 < residNumber) 
+      if(j + 50 < residNumber)
         file << setw(maxLongName + 3) << " ";
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1291,7 +1297,7 @@ void alignment::alignmentPhylip_PamlToFile(ostream &file) {
   int i, maxLongName;
   string *tmpMatrix;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(!isAligned) {
     cerr << endl << "ERROR: The input file does not ";
     cerr << "have the sequences aligned." << endl << endl;
@@ -1299,7 +1305,7 @@ void alignment::alignmentPhylip_PamlToFile(ostream &file) {
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */   
+  /* Allocate memory to output alignment. */
   tmpMatrix = new string[sequenNumber];
   for(i = 0; i < sequenNumber; i++) {
     if(!reverse) tmpMatrix[i] = sequences[i];
@@ -1316,7 +1322,7 @@ void alignment::alignmentPhylip_PamlToFile(ostream &file) {
   /* Look for the maximum sequenNumber name size */
   maxLongName = PHYLIPDISTANCE;
   for(i = 0; (i < sequenNumber) && (!shortNames); i++)
-    maxLongName = utils::max(maxLongName, seqsName[i].size()); 
+    maxLongName = utils::max(maxLongName, seqsName[i].size());
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1324,7 +1330,7 @@ void alignment::alignmentPhylip_PamlToFile(ostream &file) {
      the 10 first characters, and the sequence */
   for(i = 0; i < sequenNumber; i++) {
 	if(!shortNames)    file << setw(maxLongName + 3) << left << seqsName[i];
-	else file << setw(maxLongName + 3) << left << seqsName[i].substr(0, 10);	  
+	else file << setw(maxLongName + 3) << left << seqsName[i].substr(0, 10);
     file << sequences[i] << endl;
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1342,7 +1348,7 @@ void alignment::alignmentClustalToFile(ostream &file) {
   int i, j, maxLongName = 0;
   string *tmpMatrix;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(!isAligned) {
     cerr << endl << "ERROR: The input file does not ";
     cerr << "have the sequences aligned." << endl << endl;
@@ -1350,7 +1356,7 @@ void alignment::alignmentClustalToFile(ostream &file) {
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */   
+  /* Allocate memory to output alignment. */
   tmpMatrix = new string[sequenNumber];
   for(i = 0; i < sequenNumber; i++) {
     if(!reverse) tmpMatrix[i] = sequences[i];
@@ -1361,7 +1367,7 @@ void alignment::alignmentClustalToFile(ostream &file) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if((aligInfo.size() != 0)  && (iformat == oformat))
     file << aligInfo;
-  else 
+  else
     file << "CLUSTAL W (1.8) multiple sequence alignment";
   file << endl << endl;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1369,7 +1375,7 @@ void alignment::alignmentClustalToFile(ostream &file) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Look for the maximum sequenNumber name size */
   for(i = 0; i < sequenNumber; i++)
-    maxLongName = utils::max(maxLongName, seqsName[i].size()); 
+    maxLongName = utils::max(maxLongName, seqsName[i].size());
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1397,7 +1403,7 @@ void alignment::alignmentNBRF_PirToFile(ostream &file) {
   int i, j, k;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */   
+  /* Allocate memory to output alignment. */
   tmpMatrix = new string[sequenNumber];
   for(i = 0; i < sequenNumber; i++) {
     if(!reverse) tmpMatrix[i] = sequences[i];
@@ -1411,7 +1417,7 @@ void alignment::alignmentNBRF_PirToFile(ostream &file) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Write the sequence name as well as the sequence type */
     file << ">";
-	
+
     if((seqsInfo != NULL) && (iformat == oformat))
       file << seqsInfo[i];
 
@@ -1436,7 +1442,7 @@ void alignment::alignmentNBRF_PirToFile(ostream &file) {
         file << " " << tmpMatrix[i].substr(k, 10);
 
       if((j + 50) >= residNumber)
-        file << "*"; 
+        file << "*";
       file << endl;
     }
     file << endl;
@@ -1455,7 +1461,7 @@ void alignment::alignmentFastaToFile(ostream &file) {
   int i, j;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */   
+  /* Allocate memory to output alignment. */
   tmpMatrix = new string[sequenNumber];
   for(i = 0; i < sequenNumber; i++) {
     if(!reverse) tmpMatrix[i] = sequences[i];
@@ -1467,9 +1473,8 @@ void alignment::alignmentFastaToFile(ostream &file) {
   for(i = 0; i < sequenNumber; i++) {
 
     /* Sequence Name */
-	if(!shortNames)    file << ">" << seqsName[i];
-	else file << ">" << seqsName[i].substr(0, 10);
-    file << " " << dec << residuesNumber[i] << " bp" << endl;
+	if(!shortNames)    file << ">" << seqsName[i] << endl;
+	else file << ">" << seqsName[i].substr(0, 10) << endl;
     /* Sequence Residues */
     for(j = 0; j < residuesNumber[i]; j += 60)
       file << tmpMatrix[i].substr(j, 60) << endl;
@@ -1487,7 +1492,7 @@ void alignment::alignmentNexusToFile(ostream &file) {
   int i, j, k, maxLongName = 0;
   string *tmpMatrix;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(!isAligned) {
     cerr << endl << "ERROR: The input file does not ";
     cerr << "have the sequences aligned." << endl << endl;
@@ -1496,7 +1501,7 @@ void alignment::alignmentNexusToFile(ostream &file) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */   
+  /* Allocate memory to output alignment. */
   tmpMatrix = new string[sequenNumber];
   for(i = 0; i < sequenNumber; i++) {
     if(!reverse) tmpMatrix[i] = sequences[i];
@@ -1523,7 +1528,7 @@ void alignment::alignmentNexusToFile(ostream &file) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Print the sequence name and the residues number 
+  /* Print the sequence name and the residues number
      for each sequence */
   for(i = 0; i < sequenNumber; i++)
     file << "[Name: " << seqsName[i] << "      Len: " << residNumber << " Check: 0]" << endl;
@@ -1533,7 +1538,7 @@ void alignment::alignmentNexusToFile(ostream &file) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Look for the maximum sequenNumber name size */
   for(i = 0; i < sequenNumber; i++)
-    maxLongName = utils::max(maxLongName, seqsName[i].size()); 
+    maxLongName = utils::max(maxLongName, seqsName[i].size());
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1562,7 +1567,7 @@ void alignment::alignmentMegaToFile(ostream &file) {
   int i, j, k;
   string *tmpMatrix;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(!isAligned) {
     cerr << endl << "ERROR: The input file does not ";
     cerr << "have the sequences aligned." << endl << endl;
@@ -1571,7 +1576,7 @@ void alignment::alignmentMegaToFile(ostream &file) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */   
+  /* Allocate memory to output alignment. */
   tmpMatrix = new string[sequenNumber];
   for(i = 0; i < sequenNumber; i++) {
     if(!reverse) tmpMatrix[i] = sequences[i];
@@ -1639,8 +1644,8 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, int
   string tmpName;
   ofstream file;
 
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(!isAligned) {
     cerr << endl << "ERROR: The input file does not ";
     cerr << "have the sequences aligned." << endl << endl;
@@ -1657,7 +1662,7 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, int
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Look for the maximum sequenNumber name size */
   for(i = 0; i < sequenNumber; i++)
-    maxLongName = utils::max(maxLongName, seqsName[i].size()); 
+    maxLongName = utils::max(maxLongName, seqsName[i].size());
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1719,7 +1724,7 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, int
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       for(k = j; ((k < residNumber) && (k < (j + 120))); k++) {
-        if((seq[i]) && (res[k])) 
+        if((seq[i]) && (res[k]))
           file << "<span class=sel>" << sequences[i][k] << "</span>";
         else
           file << sequences[i][k];
@@ -1730,7 +1735,7 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, int
       }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     }
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   file << "    </pre>" << endl;
   file << "  </body>" << endl << "</html>" << endl;
@@ -1752,10 +1757,10 @@ bool alignment::alignmentColourHTML(ostream &file, float *GapsVector, float *Sim
 
   int i, j, kj, upper, k = 0, maxLongName = 0;
   string tmpColumn;
-    
+
   tmpColumn.reserve(sequenNumber);
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(!isAligned) {
     cerr << endl << "ERROR: The input file does not ";
     cerr << "have the sequences aligned." << endl << endl;
@@ -1766,7 +1771,7 @@ bool alignment::alignmentColourHTML(ostream &file, float *GapsVector, float *Sim
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Look for the maximum sequenNumber name size */
   for(i = 0; i < sequenNumber; i++)
-    maxLongName = utils::max(maxLongName, seqsName[i].size()); 
+    maxLongName = utils::max(maxLongName, seqsName[i].size());
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1830,7 +1835,7 @@ bool alignment::alignmentColourHTML(ostream &file, float *GapsVector, float *Sim
 	file << endl;
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   file << "    </pre>" << endl;
   file << "  </body>" << endl << "</html>" << endl;
@@ -1845,10 +1850,11 @@ bool alignment::alignmentColourHTML(ostream &file) {
 
   int i, j, kj, upper, k = 0, maxLongName = 0;
   string tmpColumn;
-    
+  char type;
+
   tmpColumn.reserve(sequenNumber);
-  
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(!isAligned) {
     cerr << endl << "ERROR: The input file does not ";
     cerr << "have the sequences aligned." << endl << endl;
@@ -1859,7 +1865,7 @@ bool alignment::alignmentColourHTML(ostream &file) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Look for the maximum sequenNumber name size */
   for(i = 0; i < sequenNumber; i++)
-    maxLongName = utils::max(maxLongName, seqsName[i].size()); 
+    maxLongName = utils::max(maxLongName, seqsName[i].size());
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1869,15 +1875,14 @@ bool alignment::alignmentColourHTML(ostream &file) {
   file << "    <title>trimAl v1.3 Summary</title>" << endl;
 
   file << "    <style type=\"text/css\">" << endl;
-  file << "    .w  { background-color: #FFFFFF; }\n";
-  file << "    .b  { background-color: #3366ff; }\n";
-  file << "    .r  { background-color: #cc0000; }\n";
-  file << "    .g  { background-color: #33cc00; }\n";
-  file << "    .p  { background-color: #ff6666; }\n";
-  file << "    .m  { background-color: #cc33cc; }\n";
-  file << "    .o  { background-color: #ff9900; }\n";
-  file << "    .c  { background-color: #46C7C7; }\n";
-  file << "    .y  { background-color: #FFFF00; }\n";
+  file << "    #b  { background-color: #3366ff; }\n";
+  file << "    #r  { background-color: #cc0000; }\n";
+  file << "    #g  { background-color: #33cc00; }\n";
+  file << "    #p  { background-color: #ff6666; }\n";
+  file << "    #m  { background-color: #cc33cc; }\n";
+  file << "    #o  { background-color: #ff9900; }\n";
+  file << "    #c  { background-color: #46C7C7; }\n";
+  file << "    #y  { background-color: #FFFF00; }\n";
   file << "    </style>\n  </head>\n\n";
   file << "  <body>\n";
 
@@ -1886,7 +1891,7 @@ bool alignment::alignmentColourHTML(ostream &file) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  for(j = 0, upper = 120; j < residNumber; j += 120, upper += 120) {
+  for(j = 0, upper = 100; j < residNumber; j += 100, upper += 100) {
 
     file << endl;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1913,17 +1918,20 @@ bool alignment::alignmentColourHTML(ostream &file) {
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       for(k = j; ((k < residNumber) && (k < upper)); k++) {
-		for(kj = 0, tmpColumn.clear(); kj < sequenNumber; kj++)
-		  tmpColumn += sequences[kj][k];
-		file << "<span class=" << utils::determineColor(sequences[i][k], tmpColumn)
-		     << ">" << sequences[i][k] << "</span>";
+        for(kj = 0, tmpColumn.clear(); kj < sequenNumber; kj++)
+          tmpColumn += sequences[kj][k];
+        type = utils::determineColor(sequences[i][k], tmpColumn);
+        if (type != 'w')
+          file << "<span id=" << type << ">" << sequences[i][k] << "</span>";
+        else
+          file << sequences[i][k];
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       }
     }
 	file << endl;
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   file << "    </pre>" << endl;
   file << "  </body>" << endl << "</html>" << endl;
@@ -1940,7 +1948,7 @@ void alignment::getSequences(ostream &file) {
   int i, j;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */   
+  /* Allocate memory to output alignment. */
   tmpMatrix = new string[sequenNumber];
   for(i = 0; i < sequenNumber; i++) {
     if(!reverse) tmpMatrix[i] = utils::removeCharacter('-', sequences[i]);

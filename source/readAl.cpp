@@ -1,5 +1,5 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
     readAl v1.3: a tool for automated alignment conversion among different
                  formats.
@@ -21,7 +21,7 @@
     You should have received a copy of the GNU General Public License
     along with readAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+ ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
  ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include <stdlib.h>
@@ -32,7 +32,7 @@
 #include "utils.h"
 
 #define VERSION 1.3
-#define REVISION 01
+#define REVISION 20100902
 
 #define DNAType 1
 #define RNAType 2
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]){
   bool appearErrors = false, format = false, type = false, reverse = false, shortNames = false;
 
   /* Exec: readAl - Shows the menu. */
-  if(argc == 1) { 
+  if(argc == 1) {
     menu();
     return 0;
   }
@@ -125,7 +125,7 @@ int main(int argc, char *argv[]){
    /* Option -fasta -------------------------------------------------------------------------------------- */
     else if(!strcmp(argv[i], "-fasta") && (outformat == -1))
       outformat = 8;
-	  
+
    /* Option -fasta-m10 -------------------------------------------------------------------------------------- */
     else if(!strcmp(argv[i], "-fasta-m10") && (outformat == -1)) {
       outformat = 8; shortNames = true;
@@ -319,7 +319,7 @@ void menu(void) {
   cout << "    -h                       " << "Prints this information and show some examples." << endl;
   cout << "    --version                " << "Prints the readAl version." << endl << endl;
 
-  cout << "    -in <inputfile>          " << "Input file in several formats (clustal, fasta, NBRF/PIR, nexus, phylip3.2, phylip, mega)." 
+  cout << "    -in <inputfile>          " << "Input file in several formats (clustal, fasta, NBRF/PIR, nexus, phylip3.2, phylip, mega)."
                                           << endl;
   cout << "    -out <outputfile>        " << "Output alignment in the same input format (default stdout)." << endl << endl;
 
@@ -338,7 +338,7 @@ void menu(void) {
   cout << "    -phylip_paml-m10         " << "Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters." << endl;
   cout << "    -phylip3.2               " << "Output file in PHYLIP3.2 format" << endl;
   cout << "    -phylip3.2-m10           " << "Output file in PHYLIP3.2 format. Sequences name length up to 10 characters." << endl;
-  cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl;  
+  cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl;
   cout << "    -phylip-m10              " << "Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters." << endl << endl;
 
   cout << "    -html                    " << "Output file in HTML with residues colored using the CLUSTAL scheme" << endl << endl;
