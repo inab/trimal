@@ -1,10 +1,10 @@
-									/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
     trimAl v1.3: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses
 
-    Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
+    Copyright (C) 2009-2011 Capella-Gutierrez S. and Gabaldon, T.
                        [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
@@ -43,7 +43,7 @@
 #define STRICT   2
 
 #define VERSION 1.3
-#define REVISION 20100902
+#define REVISION 2011-01-19
 
 void menu(void);
 void examples(void);
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
   /* Parameters Control */
   bool appearErrors = false, complementary = false, colnumbering = false, nogaps = false, noallgaps = false, gappyout = false,
        strict = false, strictplus = false, automated1 = false, sgc = false, sgt = false, scc = false, sct = false, sfc = false,
-       sft = false, sident = false, selectSeqs = false, selectCols = false, shortNames = false, removestop = false;
+       sft = false, sident = false, selectSeqs = false, selectCols = false, shortNames = false, removestop = false, terminal = false;
 
 
   float conserve = -1, gapThreshold = -1, simThreshold = -1, comThreshold = -1, resOverlap = -1, seqOverlap = -1, maxIdentity = -1;
@@ -165,7 +165,7 @@ int main(int argc, char *argv[]){
       outformat = 8;
 
    /* Option -fasta-m10 -------------------------------------------------------------------------------------- */
-    else if(!strcmp(argv[i], "-fasta-m10") && (outformat == -1)) {
+    else if(!strcmp(argv[i], "-fasta_m10") && (outformat == -1)) {
       outformat = 8; shortNames = true;
    }
 
@@ -186,7 +186,7 @@ int main(int argc, char *argv[]){
       outformat = 11;
 
    /* Option -phylip3.2-m10 ----------------------------------------------------------------------------- */
-    else if(!strcmp(argv[i], "-phylip3.2-m10") && (outformat == -1)) {
+    else if(!strcmp(argv[i], "-phylip3.2_m10") && (outformat == -1)) {
       outformat = 11; shortNames = true;
     }
 
@@ -195,7 +195,7 @@ int main(int argc, char *argv[]){
       outformat = 12;
 
    /* Option -phylip-m10 ----------------------------------------------------------------------- */
-    else if(!strcmp(argv[i], "-phylip-m10") && (outformat == -1)) {
+    else if(!strcmp(argv[i], "-phylip_m10") && (outformat == -1)) {
       outformat = 12; shortNames = true;
     }
 
@@ -204,7 +204,7 @@ int main(int argc, char *argv[]){
       outformat = 13;
 
    /* Option -phylip_paml-m10 ------------------------------------------------------------------ */
-    else if(!strcmp(argv[i], "-phylip_paml-m10") && (outformat == -1)) {
+    else if(!strcmp(argv[i], "-phylip_paml_m10") && (outformat == -1)) {
       outformat = 13; shortNames = true;
     }
 
@@ -784,6 +784,18 @@ int main(int argc, char *argv[]){
 
    /* ------------------------------------------------------------------------------------------------------ */
 
+   /* Other methods: Just remove the terminal gaps from an alignment keeping the columns that are in the middle
+    * of the sequences independently of the trimming method used */
+
+   /* ------------------------------------------------------------------------------------------------------ */
+   /* Option -terminalonly --------------------------------------------------------------------------------- */
+    else if((!strcmp(argv[i], "-terminalonly")) && (!terminal)) {
+      terminal = true;
+    }
+   /* ------------------------------------------------------------------------------------------------------ */
+
+   /* ------------------------------------------------------------------------------------------------------ */
+
    /*                                           Windows Size Values                                           */
 
    /* Option -w -------------------------------------------------------------------------------------------- */
@@ -1127,6 +1139,16 @@ int main(int argc, char *argv[]){
   /* ------------------------------------------------------------------------------------------------------ */
 
   /* ------------------------------------------------------------------------------------------------------ */
+  if((terminal) && (!appearErrors))
+    if((!nogaps) && (!noallgaps) && (!gappyout) && (!strict) && (!strictplus) && (!automated1)
+      && (gapThreshold == -1) && (conserve == -1) && (simThreshold == -1) && (!selectCols) && (!selectSeqs)
+	  && (resOverlap == -1) && (seqOverlap == -1) && (maxIdentity == -1) && (clusters == -1)) {
+      cerr << endl << "ERROR: This parameter '-termina  lonly' can only be used with either an automatic or a manual method." << endl << endl;
+      appearErrors = true;
+    }
+  /* ------------------------------------------------------------------------------------------------------ */
+
+  /* ------------------------------------------------------------------------------------------------------ */
   if((colnumbering) && (!appearErrors)) {
     if((!nogaps) && (!noallgaps) && (!gappyout) && (!strict) && (!strictplus) && (!automated1)
       && (gapThreshold == -1) && (conserve == -1) && (simThreshold == -1) &&  (!selectCols) && (!selectSeqs)) {
@@ -1369,6 +1391,8 @@ int main(int argc, char *argv[]){
   if(conserve == -1)
     conserve  = 0;
   /* -------------------------------------------------------------------- */
+
+  origAlig -> trimTerminalGaps(terminal);
 
   /* -------------------------------------------------------------------- */
   if(windowSize != -1) {
@@ -1635,7 +1659,7 @@ int main(int argc, char *argv[]){
 void menu(void) {
 
   cout << endl;
-  cout << "trimAl " << VERSION << "rev" << REVISION << ". Copyright (C) 2009. Salvador Capella-Gutierrez and "
+  cout << "trimAl " << VERSION << "rev" << REVISION << ". Copyright (C) 2009-2011. Salvador Capella-Gutierrez and "
        << "Toni Gabaldón." << endl << endl;
 
   cout << "trimAl webpage: http://trimal.cgenomics.org" << endl << endl;
@@ -1676,11 +1700,11 @@ void menu(void) {
   cout << "    -nexus                   " << "Output file in NEXUS format" << endl;
   cout << "    -mega                    " << "Output file in MEGA format" << endl;
   cout << "    -phylip_paml             " << "Output file in PHYLIP format compatible with PAML" << endl;
-  cout << "    -phylip_paml-m10         " << "Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters." << endl;
+  cout << "    -phylip_paml_m10         " << "Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters." << endl;
   cout << "    -phylip3.2               " << "Output file in PHYLIP3.2 format" << endl;
-  cout << "    -phylip3.2-m10           " << "Output file in PHYLIP3.2 format. Sequences name length up to 10 characters." << endl;
+  cout << "    -phylip3.2_m10           " << "Output file in PHYLIP3.2 format. Sequences name length up to 10 characters." << endl;
   cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl;
-  cout << "    -phylip-m10              " << "Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters." << endl << endl;
+  cout << "    -phylip_ m10              " << "Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters." << endl << endl;
 
   cout << "    -complementary           " << "Get the complementary alignment." << endl;
   cout << "    -colnumbering            " << "Get the relationship between the columns in the old and new alignment." << endl << endl;
@@ -1704,6 +1728,8 @@ void menu(void) {
 
   cout << "    -automated1              " << "Use a heuristic selection of the automatic method based on similarity statistics. "
                                           << "(see User Guide)." << endl;
+  cout << "    -terminalonly            " << "Remove only terminal gaps after applying any trimming method" << endl << endl;
+
   cout << "                             " << "(Optimized for Maximum Likelihood phylogenetic tree reconstruction)."<< endl << endl;
 
   cout << "    -resoverlap              " << "Minimum overlap of a positions with other positions in the column to be considered a "

@@ -7,7 +7,7 @@
     readAl v1.3: a tool for automated alignment conversion among different
                  formats.
 
-    Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
+    Copyright (C) 2009-2011 Capella-Gutierrez S. and Gabaldon, T.
                        [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl/readAl.
@@ -67,6 +67,8 @@ class alignment {
 
   bool isAligned;
   bool reverse;
+
+  bool terminalGapOnly;
 
   int iformat;
   int oformat;
@@ -129,7 +131,7 @@ class alignment {
   alignment(void);
 
   alignment(string, string, string *, string *, string *, int, int, int, int, bool,
-            int, int, bool, int, int, int *, int *, int *, int, int, int, float **);
+            int, int, bool, bool, int, int, int *, int *, int *, int, int, int, float **);
 
   /* Overlap the operator = to use it as a constructor */
   alignment &operator=(const alignment &);
@@ -314,7 +316,6 @@ class alignment {
    */
   void printStatisticsConservationTotal(void);
 
-
   void printCorrespondence(void);
 
    /* Alignment's Info */
@@ -438,6 +439,8 @@ class alignment {
   void saveStatistics(similarityMatrix *sm);
 
   void saveStatistics(similarityMatrix *, int, int);
+
+  void trimTerminalGaps(bool);
 
   void setWindowsSize(int, int);
 

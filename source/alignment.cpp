@@ -50,6 +50,9 @@ alignment::alignment(void) {
   /* Should the output file be reversed? */
   reverse   = false;
 
+  /* Should be trimmed only terminal gaps? */
+  terminalGapOnly = false;
+
   /* Input and output formats */
   iformat = 0;
   oformat = 0;
@@ -110,8 +113,8 @@ alignment::alignment(void) {
 
 alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, string *o_seqsName,
                      string *o_seqsInfo, int o_sequenNumber, int o_residNumber, int o_iformat, int o_oformat,
-                     bool o_shortNames, int o_dataType, int o_isAligned, bool o_reverse, int OldSequences,
-                     int OldResidues, int *o_residuesNumber, int *o_saveResidues, int *o_saveSequences,
+                     bool o_shortNames, int o_dataType, int o_isAligned, bool o_reverse, bool o_terminalGapOnly,
+                     int OldSequences, int OldResidues, int *o_residuesNumber, int *o_saveResidues, int *o_saveSequences,
                      int o_ghWindow, int o_shWindow, int o_blockSize, float **o_identities) {
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -138,6 +141,8 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
 
   isAligned = o_isAligned;
   reverse   = o_reverse;
+
+  terminalGapOnly = o_terminalGapOnly;
 
   filename = o_filename;
   aligInfo = o_aligInfo;
@@ -241,6 +246,8 @@ alignment &alignment::operator=(const alignment &old) {
 
     isAligned =  old.isAligned;
     reverse   =  old.reverse;
+
+    terminalGapOnly = old.terminalGapOnly;
 
     iformat = old.iformat;
     oformat = old.oformat;
@@ -1532,8 +1539,9 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
   /* When we have all parameters, we create the new
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
-                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
-                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, terminalGapOnly, sequenNumber,
+                          residNumber, residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
+                          identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1687,7 +1695,7 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
-                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, terminalGapOnly, sequenNumber, residNumber,
                           residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -1883,8 +1891,8 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
-                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
-                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, terminalGapOnly, sequenNumber,
+                          residNumber, residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2020,8 +2028,8 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, c
   /* When we have all parameters, we create the new
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
-                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
-                          residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, terminalGapOnly, sequenNumber,
+                          residNumber, residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2090,7 +2098,7 @@ alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, b
   /* When we have all parameters, we create the new
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, newSequences, residNumber,
-                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, terminalGapOnly, sequenNumber, residNumber,
                           residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -2166,7 +2174,7 @@ alignment *alignment::removeColumns(int *columns, int init, int size, bool compl
   /* When we have all parameters, we create the new
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
-                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, terminalGapOnly, sequenNumber, residNumber,
                           residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -2241,7 +2249,7 @@ alignment *alignment::removeSequences(int *seqs, int init, int size, bool comple
   /* When we have all parameters, we create the new
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, newSeqNumber, residNumber,
-                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, terminalGapOnly, sequenNumber, residNumber,
                           residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -2302,7 +2310,7 @@ alignment *alignment::getClustering(float identityThreshold) {
   /* When we have all parameters, we create the new
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, clustering[0], residNumber,
-                          iformat, oformat, shortNames, dataType, isAligned, reverse, sequenNumber, residNumber,
+                          iformat, oformat, shortNames, dataType, isAligned, reverse, terminalGapOnly, sequenNumber, residNumber,
                           residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -2393,7 +2401,7 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
   /* When we have all parameters, we create the new
    * alignment */
   newAlig = new alignment(filename, "", matrixAux, oldSeqsName, NULL, newSequences, newResidues * 3, ProtAlig -> getInputFormat(),
-                          ProtAlig -> getOutputFormat(), ProtAlig -> getShortNames(), DNAType, true, ProtAlig -> getReverse(),
+                          ProtAlig -> getOutputFormat(), ProtAlig -> getShortNames(), DNAType, true, ProtAlig -> getReverse(), terminalGapOnly,
                           sequenNumber, oldResidues * 3, NULL, NULL, NULL, 0, 0, ProtAlig -> getBlockSize(), NULL);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -2587,6 +2595,14 @@ int alignment::getNumSpecies(void) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int alignment::getNumAminos(void) {
   return residNumber;
+}
+
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/* Sets the condition to remove only terminal gaps after applying any
+ * trimming method or not.   */
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+void alignment::trimTerminalGaps(bool terminalOnly_) {
+  terminalGapOnly = terminalOnly_;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
