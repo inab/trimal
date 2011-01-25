@@ -1508,7 +1508,35 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
     if(saveResidues[i] != -1)
       newResidNumber++;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
+  /* If the flag -terminalony is activated the program has to look for the
+   * internal boundaries in the alingmnet, that means, the first and the last
+   * column without any gap */
+  if(terminalGapOnly == true) {
+    int left_boundary = 0;
+    for(i = 0; i < residNumber; i++) {
+      if(gInCol[i] == 0) {
+        left_boundary = i;
+        break;
+      }
+    }
+    int right_boundary = 0;
+    for(i = residNumber - 1; i >= 0; i--) {
+      if(gInCol[i] == 0) {
+        right_boundary = i + 1;
+        break;
+      }
+    }
+    /* Once the interal boundaries for the alignmnet have been established,
+     * if these limits exist then retrieved all the columns inbetween both
+     * boundaries. The columns out of these limits will remain selected or not
+     * depending on the algorithm applied criteria */
+    for(i = left_boundary; i < right_boundary; i++) {
+      if(saveResidues[i] == -1) {
+        saveResidues[i] = i;
+        newResidNumber++;
+      }
+    }
+  }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Once we've selected the columns, if the complementary
    * flag is true, we will have to change the selected and
@@ -1665,7 +1693,41 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
     if(saveResidues[i] != -1)
       newResidNumber++;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* If the flag -terminalony is activated the program has to look for the
+   * internal boundaries in the alingmnet, that means, the first and the last
+   * column without any gap */
+  if(terminalGapOnly == true) {
+    /* Compute the alignmnet gaps distribution and use it for finding the
+     * internal boundaries */
+    if(calculateGapStats() != true)
+      return NULL;
+    const int *gInCol = sgaps->getGapsWindow();
 
+    int left_boundary = 0;
+    for(i = 0; i < residNumber; i++) {
+      if(gInCol[i] == 0) {
+        left_boundary = i;
+        break;
+      }
+    }
+    int right_boundary = 0;
+    for(i = residNumber - 1; i >= 0; i--) {
+      if(gInCol[i] == 0) {
+        right_boundary = i + 1;
+        break;
+      }
+    }
+    /* Once the interal boundaries for the alignmnet have been established,
+     * if these limits exist then retrieved all the columns inbetween both
+     * boundaries. The columns out of these limits will remain selected or not
+     * depending on the algorithm applied criteria */
+    for(i = left_boundary; i < right_boundary; i++) {
+      if(saveResidues[i] == -1) {
+        saveResidues[i] = i;
+        newResidNumber++;
+      }
+    }
+  }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Once we've selected the columns, if the complementary
    * flag is true, we will have to change the selected and
@@ -1862,6 +1924,35 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
       newResidNumber++;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
+  /* If the flag -terminalony is activated the program has to look for the
+   * internal boundaries in the alingmnet, that means, the first and the last
+   * column without any gap */
+  if(terminalGapOnly == true) {
+    int left_boundary = 0;
+    for(i = 0; i < residNumber; i++) {
+      if(gInCol[i] == 0) {
+        left_boundary = i;
+        break;
+      }
+    }
+    int right_boundary = 0;
+    for(i = residNumber - 1; i >= 0; i--) {
+      if(gInCol[i] == 0) {
+        right_boundary = i + 1;
+        break;
+      }
+    }
+    /* Once the interal boundaries for the alignmnet have been established,
+     * if these limits exist then retrieved all the columns inbetween both
+     * boundaries. The columns out of these limits will remain selected or not
+     * depending on the algorithm applied criteria */
+    for(i = left_boundary; i < right_boundary; i++) {
+      if(saveResidues[i] == -1) {
+        saveResidues[i] = i;
+        newResidNumber++;
+      }
+    }
+  }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Once we've selected the columns, if the complementary
    * flag is true, we will have to change the selected and
@@ -1997,7 +2088,35 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, c
     if(saveResidues[i] != -1)
       newResidNumber++;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
+  /* If the flag -terminalony is activated the program has to look for the
+   * internal boundaries in the alingmnet, that means, the first and the last
+   * column without any gap */
+  if(terminalGapOnly == true) {
+    int left_boundary = 0;
+    for(i = 0; i < residNumber; i++) {
+      if(gInCol[i] == 0) {
+        left_boundary = i;
+        break;
+      }
+    }
+    int right_boundary = 0;
+    for(i = residNumber - 1; i >= 0; i--) {
+      if(gInCol[i] == 0) {
+        right_boundary = i + 1;
+        break;
+      }
+    }
+    /* Once the interal boundaries for the alignmnet have been established,
+     * if these limits exist then retrieved all the columns inbetween both
+     * boundaries. The columns out of these limits will remain selected or not
+     * depending on the algorithm applied criteria */
+    for(i = left_boundary; i < right_boundary; i++) {
+      if(saveResidues[i] == -1) {
+        saveResidues[i] = i;
+        newResidNumber++;
+      }
+    }
+  }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Once we've selected the columns, if the complementary flag is true, we will have to change the selected and
     non-selected columns. */
@@ -2141,7 +2260,43 @@ alignment *alignment::removeColumns(int *columns, int init, int size, bool compl
   /* The method computes the new alignment columns
    * number */
   newResidNumber = residNumber - delAminos;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* If the flag -terminalony is activated the program has to look for the
+   * internal boundaries in the alingmnet, that means, the first and the last
+   * column without any gap */
+  if(terminalGapOnly == true) {
+    /* Compute the alignmnet gaps distribution and use it for finding the
+     * internal boundaries */
+    if(calculateGapStats() != true)
+      return NULL;
+    const int *gInCol = sgaps->getGapsWindow();
 
+    int left_boundary = 0;
+    for(i = 0; i < residNumber; i++) {
+      if(gInCol[i] == 0) {
+        left_boundary = i;
+        break;
+      }
+    }
+    int right_boundary = 0;
+    for(i = residNumber - 1; i >= 0; i--) {
+      if(gInCol[i] == 0) {
+        right_boundary = i + 1;
+        break;
+      }
+    }
+    /* Once the interal boundaries for the alignmnet have been established,
+     * if these limits exist then retrieved all the columns inbetween both
+     * boundaries. The columns out of these limits will remain selected or not
+     * depending on the algorithm applied criteria */
+    for(i = left_boundary; i < right_boundary; i++) {
+      if(saveResidues[i] == -1) {
+        saveResidues[i] = i;
+        newResidNumber++;
+      }
+    }
+  }
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Once we've selected the columns, if the complementary
    * flag is true, we will have to change the selected and
    * non-selected columns. */

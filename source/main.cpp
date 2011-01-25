@@ -43,7 +43,7 @@
 #define STRICT   2
 
 #define VERSION 1.3
-#define REVISION 2011-01-19
+#define REVISION 2011-01-25
 
 void menu(void);
 void examples(void);
@@ -1728,7 +1728,8 @@ void menu(void) {
 
   cout << "    -automated1              " << "Use a heuristic selection of the automatic method based on similarity statistics. "
                                           << "(see User Guide)." << endl;
-  cout << "    -terminalonly            " << "Remove only terminal gaps after applying any trimming method" << endl << endl;
+  cout << "    -terminalonly            " << "Only columns out of internal boundaries (first and last column without gaps) are " << endl;
+  cout << "                             " << "candidated to be trimmed depending on the applied method" << endl << endl;
 
   cout << "                             " << "(Optimized for Maximum Likelihood phylogenetic tree reconstruction)."<< endl << endl;
 
