@@ -32,7 +32,7 @@
 #include "utils.h"
 
 #define VERSION 1.3
-#define REVISION 2011-01-25
+#define REVISION "2011-01-25"
 
 #define DNAType 1
 #define RNAType 2

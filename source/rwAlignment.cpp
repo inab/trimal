@@ -281,12 +281,16 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   str = strtok(line, DELIMITERS);
-  if(str != NULL) sequenNumber = atoi(str);
-  else return false;
+  if(str != NULL)
+    sequenNumber = atoi(str);
+  else
+    return false;
 
   str = strtok(NULL, DELIMITERS);
-  if(str != NULL) residNumber = atoi(str);
-  else return false;
+  if(str != NULL)
+    residNumber = atoi(str);
+  else
+    return false;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -306,12 +310,12 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
   for(i = 0; i < sequenNumber; i++) {
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Read lines in a safer way */
-    delete [] line;
+    if (line != NULL)
+      delete [] line;
     line = utils::readLine(file);
-    if(file.eof()) break;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
+    if(line == NULL)
+      continue;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* First token: Sequence name */
     str = strtok(line, DELIMITERS);
@@ -329,11 +333,10 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
       str = strtok(NULL, DELIMITERS);
       if(str != NULL)
         sequences[i].append(str, strlen(str));
-      else break;
+      else
+        break;
     }
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Read the next aminoacids blocks */
   while(!file.eof()) {
@@ -341,10 +344,12 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       /* Read lines in a safe way */
-      delete [] line;
+      if (line != NULL)
+        delete [] line;
+
       line = utils::readLine(file);
-      if(file.eof()) break;
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      if(line == NULL)
+        continue;
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       /* we append this sequence fragment to the previous */
@@ -369,8 +374,8 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Close the input file and delete dinamic memory */
   file.close();
-  delete [] line;
-
+  if (line != NULL)
+    delete [] line;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Check the matrix's content */
   return fillMatrices(true);
@@ -378,99 +383,121 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
 
 bool alignment::loadPhylip3_2Alignment(char *alignmentFile) {
 
-  char c, *str, *line = NULL;
-  int i, firstLine = true;
+  int i, blocksFirstLine, firstLine = true;
+  char c = ' ', *str, *line = NULL;
   ifstream file;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
   if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* We store the file name */
+  /* Store the file name for futher format conversion*/
   filename.append("!Title ");
   filename.append(alignmentFile);
   filename.append(";");
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Read lines in a safer way */
+  /* Read the first line in a safer way */
   line = utils::readLine(file);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  if (line == NULL)
+    return NULL;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Get the sequences and residues numbers. If there is any mistake,
+   * return a FALSE value to warn about the possible error */
   str = strtok(line, DELIMITERS);
-  if(str != NULL) sequenNumber = atoi(str);
-  else return false;
+  sequenNumber = 0;
+  if(str != NULL)
+    sequenNumber = atoi(str);
 
   str = strtok(NULL, DELIMITERS);
-  if(str != NULL) residNumber = atoi(str);
-  else return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  residNumber = 0;
+  if(str != NULL)
+    residNumber = atoi(str);
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Check the parameters */
   if((sequenNumber == 0) || (residNumber == 0))
     return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory  */
+  /* Reserve memory according to the input parameters */
   sequences  = new string[sequenNumber];
   seqsName   = new string[sequenNumber];
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
+  /* Point to the first sequence in the alignment. Since the alignment could not
+   * have blank lines to separate the different sequences. Store the blocks size
+   * for the first line including a sequence identifier */
   i = 0;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  blocksFirstLine = 0;
   do {
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Read lines in a safer way */
-    delete [] line;
+    /* Read lines in a safer way. Destroy previous stored information */
+    if (line != NULL)
+      delete [] line;
     line = utils::readLine(file);
-    if(file.eof()) break;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* First block: Sequence Name + Sequence fragment */
+    /* If it is a blank line, do nothing. */
+    if(line == NULL)
+      continue;
+
     str = strtok(line, OTHDELIMITERS);
+    /* First block: Sequence Name + Sequence fragment */
     if(firstLine) {
-      firstLine = false;
       seqsName[i].append(str, strlen(str));
       str = strtok(NULL, OTHDELIMITERS);
+      firstLine = 1;
     }
 
     /* Sequence fragment */
     while(true) {
-      if(str == NULL) break;
-      else sequences[i].append(str, strlen(str));
+      if(str != NULL)
+        sequences[i].append(str, strlen(str));
+      else
+        break;
       str = strtok(NULL, OTHDELIMITERS);
+      /* Count the blocks number for the first fragment of the sequence */
+      if (firstLine)
+        firstLine += 1;
     }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* to detect a new sequence, we read next token and */
-    /* if it is a blank space then there is a new sequence */
-    file.read(&c, 1);
-    if(c == '\n') {
+    /* Store the blocks number for the first sequence including the name */
+    if ((blocksFirstLine == 0) and firstLine)
+      blocksFirstLine = firstLine;
+
+    /* If a false positive new sequence was detected, add stored information for
+     * the current sequence to the previous one and clear the data structure
+     * for the current sequence. Finally, move the sequence pointer to the
+     * previous one. */
+    if ((firstLine != false) and (firstLine != blocksFirstLine)) {
+      sequences[i-1].append(seqsName[i]);
+      seqsName[i].clear();
+      sequences[i-1].append(sequences[i]);
+      sequences[i].clear();
+      i --;
+    }
+
+    firstLine = false;
+    /* There are many ways to detect a new sequence. */
+    /* One of them -experimental- is just to detect is the residues number for
+     * the current entries is equal to the residues number set-up for the whole
+     * alignment */
+    if ((int) sequences[i].size() == residNumber) {
       firstLine = true;
       i++;
+    } else {
+      /* Another one is when a blank line is detected. */
+      file.read(&c, 1);
+      if(c == '\n') {
+        firstLine = true;
+        i++;
+      }
+      /* Move one position back for avoiding break the stream */
+      file.clear();
+      file.seekg (-1, ios_base::cur);
     }
-
-    /* Move one position back to continue */
-    /* with the reading flow */
-    file.clear();
-    file.seekg (-1, ios_base::cur);
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
   } while(!file.eof());
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Close the input file and delete dinamic memory */
   file.close();
-  delete [] line;
+  if (line != NULL)
+    delete [] line;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Check the matrix's content */
@@ -496,15 +523,18 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
   filename.append(";");
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  while(true) {
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  while(!file.eof()) {
+    if (line != NULL)
+      delete [] line;
+
     /* Read lines in a safe way */
     line = utils::readLine(file);
-    if(file.eof()) break;
+    if (line == NULL)
+      continue;
+
     str = strtok(line, DELIMITERS);
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    if(str[0] == '>') sequenNumber++;
-    delete [] line;
+    if(str[0] == '>')
+      sequenNumber++;
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -518,20 +548,23 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
   seqsName  = new string[sequenNumber];
   sequences = new string[sequenNumber];
 
-  for(i = -1; i < sequenNumber; ) {
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  for(i = -1; (i < sequenNumber) && (!file.eof()); ) {
+
+    if (line != NULL)
+      delete [] line;
+
     /* Read lines in a safe way */
     line = utils::readLine(file);
-    if(file.eof()) break;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    if (line == NULL)
+      continue;
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     str = strtok(line, OTHDELIMITERS);
-
     /* Sequence Name */
     if(str[0] == '>') {
-      if(strlen(str) == 1) str = strtok(NULL, OTHDELIMITERS);
-      else str = str + 1;
+      if(strlen(str) == 1)
+        str = strtok(NULL, OTHDELIMITERS);
+      else
+        str = str + 1;
       seqsName[++i].append(str, strlen(str));
     }
 
@@ -543,15 +576,14 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
         str = strtok(NULL, DELIMITERS);
       }
     }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    delete [] line;
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Close the input file */
   file.close();
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
+  if (line != NULL)
+    delete [] line;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Check the matrix's content */
   return fillMatrices(false);
@@ -588,11 +620,16 @@ bool alignment::loadClustalAlignment(char *alignmentFile) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** ***** */
   /* We want to read the first block only to know the */
   /* sequences number */
-  while(true) {
+  while(!file.eof()) {
+
+    if (line != NULL)
+      delete [] line;
+
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Read lines in a safe way */
     line = utils::readLine2(file);
-    if(file.eof()) break;
+    if (line == NULL)
+      continue;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -604,7 +641,6 @@ bool alignment::loadClustalAlignment(char *alignmentFile) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     if(!length) break;
     sequenNumber++;
-    delete [] line;
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -635,14 +671,17 @@ bool alignment::loadClustalAlignment(char *alignmentFile) {
   i = 0;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  while(true) {
-     if(i >= sequenNumber) i = 0;
+  while(!file.eof()) {
+     if(i >= sequenNumber)i = 0;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Read line  and analyze it*/
+    if (line != NULL)
+      delete [] line;
     line = utils::readLine2(file);
-    if(file.eof()) break;
+    if (line == NULL)
+      continue;
 
     store = i;
     state = (int) strlen(line);
@@ -672,7 +711,6 @@ bool alignment::loadClustalAlignment(char *alignmentFile) {
     } else
         firstBlock = false;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    delete [] line;
   }
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */

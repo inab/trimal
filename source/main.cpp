@@ -43,7 +43,7 @@
 #define STRICT   2
 
 #define VERSION 1.3
-#define REVISION 2011-01-25
+#define REVISION "2011-01-25"
 
 void menu(void);
 void examples(void);
@@ -1151,7 +1151,7 @@ int main(int argc, char *argv[]){
   /* ------------------------------------------------------------------------------------------------------ */
   if((colnumbering) && (!appearErrors)) {
     if((!nogaps) && (!noallgaps) && (!gappyout) && (!strict) && (!strictplus) && (!automated1)
-      && (gapThreshold == -1) && (conserve == -1) && (simThreshold == -1) &&  (!selectCols) && (!selectSeqs)) {
+      && (gapThreshold == -1) && (conserve == -1) && (simThreshold == -1) &&  (comThreshold == -1) && (!selectCols) && (!selectSeqs)) {
       cerr << endl << "ERROR: This parameter can only be used with any trimming method." << endl << endl;
       appearErrors = true;
     }

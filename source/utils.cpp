@@ -404,68 +404,95 @@ bool utils::checkFile(ifstream &file) {
 
 char* utils::readLine(ifstream &file) {
 
-  char c;
   int state;
+  char c = ' ';
   string nline;
   static char *line = NULL;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  do { file.read(&c, 1); } while((c == '\n') && (!file.eof()));
-  for( ; (c != '\n') && ((!file.eof())); file.read(&c, 1))
-    nline.resize(nline.size() + 1, c);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Check it the end of the file has been reached or not */
   if(file.eof())
     return NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Skip all the character while there are blank lines ... */
+  do { file.read(&c, 1); } while((c == '\n') && (!file.eof()));
+  /* ... and store the first line found */
+  for( ; (c != '\n') && ((!file.eof())); file.read(&c, 1))
+    nline.resize(nline.size() + 1, c);
+
+  /* Remove strange characters -Windows & MacOS compability- */
   state = nline.find("\r", 0);
   while(state != (int) string::npos) {
     nline.erase(state, 1);
     state = nline.find("\r", state);
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Remove blank spaces & tabs from the beginning of the line */
+  state = nline.find(" ", 0);
+  while(state != (int) string::npos && state == 0) {
+    nline.erase(state, 1);
+    state = nline.find(" ", state);
+  }
+  state = nline.find("\t", 0);
+  while(state != (int) string::npos && state == 0) {
+    nline.erase(state, 1);
+    state = nline.find("\t", state);
+  }
+
+  /* If there is nothing to return, give back a NULL pointer ... */
+  if(nline.size() == 0)
+    return NULL;
+
+  /* Otherwise, initialize the appropiate data structure,
+   * dump the data and return it */
   line = new char[nline.size() + 1];
   strcpy(line, nline.c_str());
   return line;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
-
 
 char* utils::readLine2(ifstream &file) {
 
-  char c;
   int state;
+  char c = ' ';
   string nline;
   static char *line;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  for(nline.clear(), file.read(&c, 1); (c != '\n') && ((!file.eof())); file.read(&c, 1))
-    nline.resize(nline.size() + 1, c);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Check it the end of the file has been reached or not */
   if(file.eof())
     return NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Read the current line until a return flag is reached */
+  nline.clear();
+  for(file.read(&c, 1); (c != '\n') && ((!file.eof())); file.read(&c, 1))
+    nline.resize(nline.size() + 1, c);
+
+  /* Remove strange characters -Windows & MacOS compability- */
   state = nline.find("\r", 0);
   while(state != (int) string::npos) {
     nline.erase(state, 1);
     state = nline.find("\r", state);
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Remove blank spaces & tabs from the beginning of the line */
+  state = nline.find(" ", 0);
+  while(state != (int) string::npos && state == 0) {
+    nline.erase(state, 1);
+    state = nline.find(" ", state);
+  }
+  state = nline.find("\t", 0);
+  while(state != (int) string::npos && state == 0) {
+    nline.erase(state, 1);
+    state = nline.find("\t", state);
+  }
+
+  /* If there is nothing to return, give back a NULL pointer ... */
+  if(nline.size() == 0)
+    return NULL;
+
+  /* Otherwise, initialize the appropiate data structure,
+   * dump the data and return it */
   line = new char[nline.size() + 1];
   strcpy(line, nline.c_str());
   return line;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 
@@ -516,7 +543,20 @@ char* utils::trimLine(string nline) {
     state = nline.find("\r", state);
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  state = nline.find(" ", 0);
+  while(state != (int) string::npos && state == 0) {
+    nline.erase(state, 1);
+    state = nline.find(" ", state);
+  }
 
+  state = nline.find("\t", 0);
+  while(state != (int) string::npos && state == 0) {
+    nline.erase(state, 1);
+    state = nline.find("\t", state);
+  }
+
+  if(nline.size() == 0)
+    return NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   line = new char[nline.size() + 1];
   strcpy(line, nline.c_str());
@@ -525,8 +565,9 @@ char* utils::trimLine(string nline) {
 }
 
 char* utils::readLineMEGA(ifstream &file) {
-  char c;
+
   int state;
+  char c = ' ';
   string nline;
   static char *line;
 
@@ -548,19 +589,34 @@ char* utils::readLineMEGA(ifstream &file) {
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Remove strange characters -Windows & MacOS compability- */
   state = nline.find("\r", 0);
   while(state != (int) string::npos) {
     nline.erase(state, 1);
     state = nline.find("\r", state);
   }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Remove blank spaces & tabs from the beginning of the line */
+  state = nline.find(" ", 0);
+  while(state != (int) string::npos && state == 0) {
+    nline.erase(state, 1);
+    state = nline.find(" ", state);
+  }
+  state = nline.find("\t", 0);
+  while(state != (int) string::npos && state == 0) {
+    nline.erase(state, 1);
+    state = nline.find("\t", state);
+  }
+
+  /* If there is nothing to return, give back a NULL pointer ... */
+  if(nline.size() == 0)
+    return NULL;
+
+  /* Otherwise, initialize the appropiate data structure,
+   * dump the data and return it */
   line = new char[nline.size() + 1];
   strcpy(line, nline.c_str());
   return line;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 string utils::getReverse(string toReverse) {
@@ -760,17 +816,17 @@ char utils::determineColor(char res, string column) {
         if(lookForPattern(column, "ts", 0.5))               return 'g';
         else if(lookForPattern(column, "wlvimafcyhp", 0.8)) return 'g';
         else                                                return 'w';
-      /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */		
+      /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-      /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */		
+      /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
       /* (N): {50%, n}{85%, d } */
       case 78:
         if(lookForPattern(column, "n", 0.5))                return 'g';
         else if(lookForPattern(column, "d", 0.85))          return 'g';
         else                                                return 'w';
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-	  
-      /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */	  		
+
+      /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
       /* (Q): {50%, qe}{60%, kr} */
       case 81:
         if(lookForPattern(column, "qe", 0.5))               return 'g';
@@ -784,9 +840,9 @@ char utils::determineColor(char res, string column) {
         if(lookForPattern(column, "de", 0.5))               return 'm';
         else if(lookForPattern(column, "n", 0.5))           return 'm';
         else                                                return 'w';
-      /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */			  
+      /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-      /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */			  
+      /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
       /* (E): {50%, de,qe} */
       case 69:
         if(lookForPattern(column, "de", 0.5))               return 'm';
