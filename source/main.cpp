@@ -43,7 +43,7 @@
 #define STRICT   2
 
 #define VERSION 1.3
-#define REVISION "2011-01-25"
+#define REVISION "2011-02-17"
 
 void menu(void);
 void examples(void);
@@ -988,14 +988,14 @@ int main(int argc, char *argv[]){
    /* ------------------------------------------------------------------------------------------------------ */
 
    /* Option -scc ------------------------------------------------------------------------------------------ */
-    else if((!strcmp(argv[i], "-scc")) && (!scc)) {
+    else if((!strcmp(argv[i], "-ssc")) && (!scc)) {
       scc = true;
       stats--;
     }
    /* ------------------------------------------------------------------------------------------------------ */
 
    /* Option -sct ------------------------------------------------------------------------------------------ */
-    else if((!strcmp(argv[i], "-sct")) && (!sct)) {
+    else if((!strcmp(argv[i], "-sst")) && (!sct)) {
       sct = true;
       stats--;
     }
@@ -1695,7 +1695,7 @@ void menu(void) {
 
   cout << "    -clustal                 " << "Output file in CLUSTAL format" << endl;
   cout << "    -fasta                   " << "Output file in FASTA format" << endl;
-  cout << "    -fasta-m10               " << "Output file in FASTA format. Sequences name length up to 10 characters." << endl;
+  cout << "    -fasta_m10               " << "Output file in FASTA format. Sequences name length up to 10 characters." << endl;
   cout << "    -nbrf                    " << "Output file in NBRF/PIR format" << endl;
   cout << "    -nexus                   " << "Output file in NEXUS format" << endl;
   cout << "    -mega                    " << "Output file in MEGA format" << endl;
@@ -1704,7 +1704,7 @@ void menu(void) {
   cout << "    -phylip3.2               " << "Output file in PHYLIP3.2 format" << endl;
   cout << "    -phylip3.2_m10           " << "Output file in PHYLIP3.2 format. Sequences name length up to 10 characters." << endl;
   cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl;
-  cout << "    -phylip_ m10              " << "Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters." << endl << endl;
+  cout << "    -phylip_m10              " << "Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters." << endl << endl;
 
   cout << "    -complementary           " << "Get the complementary alignment." << endl;
   cout << "    -colnumbering            " << "Get the relationship between the columns in the old and new alignment." << endl << endl;
@@ -1750,15 +1750,15 @@ void menu(void) {
   cout << "    -block <n>               " << "Minimum column block size to be kept in the trimmed alignment. Available with manual and automatic (gappyout) methods"
                                           << endl << endl;
 
-  cout << "    -sgc                     " << "Print gap percentage count for columns in the input alignment." << endl;
-  cout << "    -sgt                     " << "Print accumulated gap percentage count." << endl;
-  cout << "    -scc                     " << "Print conservation values for columns in the input alignment." << endl;
-  cout << "    -sct                     " << "Print accumulated conservation values count." << endl;
-  cout << "    -sfc                     " << "Print compare values for columns in the selected alignment from compare files method."
+  cout << "    -sgc                     " << "Print gap score for each column in the input alignment." << endl;
+  cout << "    -sgt                     " << "Print accumulated gap scores for the alignment." << endl;
+  cout << "    -ssc                     " << "Print similarity score for each in the from input alignment." << endl;
+  cout << "    -sst                     " << "Print accumulated similarity scores for the alignment." << endl;
+  cout << "    -sfc                     " << "Print sum-of-pairs score for each column from the selected alignment"
                                           << endl;
-  cout << "    -sft                     " << "Print accumulated compare values count for the selected alignment from compare files method."
+  cout << "    -sft                     " << "Print accumulated sum-of-pairs scores for the selected alignment"
                                           << endl;
-  cout << "    -sident                  " << "Print identity statistics for all sequences in the alignemnt. (see User Guide)."
+  cout << "    -sident                  " << "Print identity scores for all sequences in the alignemnt. (see User Guide)."
                                           << endl << endl;
 }
 
@@ -1767,50 +1767,50 @@ void examples(void) {
   cout << "Some Examples:" << endl << endl;
 
   cout << "1) Removes all positions in the alignment with gaps in 10% or more of" << endl
-       << "   the sequences, unless this leaves less than 60%. In such case, print" << endl
-       << "   the 60% best (with less gaps) positions." << endl << endl;
+       << "   the sequences, unless this leaves less than 60% of original alignment. " << endl
+       << "   In such case, print the 60% best (with less gaps) positions." << endl << endl;
 
   cout << "   trimal -in <inputfile> -out <outputfile> -gt 0.9 -cons 60" << endl << endl;
 
-  cout << "2) As above but, the gap percentage is averaged over a window starting" << endl
-       << "   3 positions before and ending 3 positions after the column." << endl << endl;
+  cout << "2) As above but, the gap score is averaged over a window starting" << endl
+       << "   3 positions before and ending 3 positions after each column." << endl << endl;
 
   cout << "   trimal -in <inputfile> -out <outputfile> -gt 0.9 -cons 60 -w 3" << endl << endl;
 
-  cout << "3) Uses an automatic method to decide optimal thresholds, based in the gap percentage" << endl
-       << "   count over the whole alignment. (see User Guide for details)." << endl << endl;
+  cout << "3) Use an automatic method to decide optimal thresholds, based in the gap scores" << endl
+       << "   from input alignment. (see User Guide for details)." << endl << endl;
 
   cout << "   trimal -in <inputfile> -out <outputfile> -gappyout" << endl << endl;
 
-  cout << "4) Uses automatics methods to decide optimal thresholds, based on the combination " << endl
-       << "   of strict method and similarity values. (see User Guide for details)." << endl << endl;
+  cout << "4) Use automatic methods to decide optimal thresholds, based on the combination " << endl
+       << "   of gap and similarity scores. (see User Guide for details)." << endl << endl;
 
   cout << "   trimal -in <inputfile> -out <outputfile> -strictplus" << endl << endl;
 
-  cout << "5) Uses an heuristic to decide the optimal method to trimming the alignment. " << endl
+  cout << "5) Use an heuristic to decide the optimal method for trimming the alignment. " << endl
        << "   (see User Guide for details)." << endl << endl;
 
   cout << "   trimal -in <inputfile> -out <outputfile> -automated1" << endl << endl;
 
-  cout << "6) Uses residue and sequences overlap thresholds to delete some sequences from the " << endl
+  cout << "6) Use residues and sequences overlap thresholds to delete some sequences from the " << endl
        << "   alignemnt. (see User Guide for details)." << endl << endl;
 
   cout << "   trimal -in <inputfile> -out <outputfile> -resoverlap 0.8 -seqoverlap 75" << endl << endl;
 
   cout << "7) Selection of columns to be deleted from the alignment. The selection can " << endl
-       << "   be a column's number or a column's number interval." << endl << endl;
+       << "   be a column number or a column number interval. Start from 0" << endl << endl;
 
-  cout << "   trimal -in <inputfile> -out <outputfile> -selectcols { 2,3,10,45-60,68,70-78 }" << endl << endl;
+  cout << "   trimal -in <inputfile> -out <outputfile> -selectcols { 0,2,3,10,45-60,68,70-78 }" << endl << endl;
 
   cout << "8) Get the complementary alignment from the alignment previously trimmed." << endl << endl;
 
-  cout << "   trimal -in <inputfile> -out <outputfile> -selectcols { 2,3,45-60 } -complementary" << endl << endl;
+  cout << "   trimal -in <inputfile> -out <outputfile> -selectcols { 0,2,3,10,45-60,68,70-78 } -complementary" << endl << endl;
 
-  cout << "9) Selection of sequences to be deleted from the alignment." << endl << endl;
+  cout << "9) Selection of sequences to be deleted from the alignment. Start in 0" << endl << endl;
 
   cout << "   trimal -in <inputfile> -out <outputfile> -selectseqs { 1,3,8-12 } " << endl << endl;
 
-  cout << "10) Select the most 5 representative sequences from the alignment" << endl << endl;
+  cout << "10) Select the 5 most representative sequences from the alignment" << endl << endl;
 
   cout << "   trimal -in <inputfile> -out <outputfile> -clusters 5 " << endl << endl;
 }

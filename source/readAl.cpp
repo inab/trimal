@@ -32,7 +32,7 @@
 #include "utils.h"
 
 #define VERSION 1.3
-#define REVISION "2011-01-25"
+#define REVISION "2011-02-17"
 
 #define DNAType 1
 #define RNAType 2
@@ -148,7 +148,7 @@ int main(int argc, char *argv[]){
       outformat = 11;
 
    /* Option -phylip3.2-m10 ----------------------------------------------------------------------------- */
-    else if(!strcmp(argv[i], "-phylip3.2_ m10") && (outformat == -1)) {
+    else if(!strcmp(argv[i], "-phylip3.2_m10") && (outformat == -1)) {
       outformat = 11; shortNames = true;
     }
 
