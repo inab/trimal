@@ -42,8 +42,9 @@
 #define GAPPYOUT 1
 #define STRICT   2
 
+#define BUILD "2011-02-17"
 #define VERSION 1.3
-#define REVISION "2011-02-17"
+#define REVISION 1
 
 void menu(void);
 void examples(void);
@@ -1659,8 +1660,9 @@ int main(int argc, char *argv[]){
 void menu(void) {
 
   cout << endl;
-  cout << "trimAl " << VERSION << "rev" << REVISION << ". Copyright (C) 2009-2011. Salvador Capella-Gutierrez and "
-       << "Toni Gabaldón." << endl << endl;
+  cout << "trimAl v" << VERSION << " build " << BUILD << " rev" << REVISION
+       << ". Copyright (C) 2009-2011. Salvador Capella-Gutierrez and Toni Gabaldón."
+       << endl << endl;
 
   cout << "trimAl webpage: http://trimal.cgenomics.org" << endl << endl;
 
