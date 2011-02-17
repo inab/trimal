@@ -1660,7 +1660,7 @@ int main(int argc, char *argv[]){
 void menu(void) {
 
   cout << endl;
-  cout << "trimAl v" << VERSION << " build " << BUILD << " rev" << REVISION
+  cout << "trimAl v" << VERSION << ".rev" << REVISION << " build" << BUILD
        << ". Copyright (C) 2009-2011. Salvador Capella-Gutierrez and Toni Gabaldón."
        << endl << endl;
 
