@@ -95,7 +95,8 @@ int main(int argc, char *argv[]){
   }
 
   if(!strcmp(argv[i], "--version") && (i+1 == argc)) {
-    cout << endl << "trimAl " << VERSION << "rev" << REVISION << endl << endl;
+    cout << endl << "trimAl v" << VERSION << ".rev" << REVISION
+         << " build[" << BUILD << "]" << endl << endl;
     return 0;
   }
 
