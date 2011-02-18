@@ -9,7 +9,7 @@ FLAGS = -Wall
 LIBM  = -lm
 DUGB  = -O2
 
-all:			readal trimal
+all:			clean readal trimal
 
 preview:		alignment.o statisticsGaps.o utils.o similarityMatrix.o statisticsConservation.o sequencesMatrix.o compareFiles.o
 

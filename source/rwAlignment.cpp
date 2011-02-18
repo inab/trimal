@@ -254,6 +254,11 @@ int alignment::formatInputAlignment(char *alignmentFile) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
+/* *****************************************************************************
+ *
+ * START - Refactored code
+ *
+ * ************************************************************************** */
 
 bool alignment::loadPhylipAlignment(char *alignmentFile) {
 
@@ -462,26 +467,153 @@ bool alignment::loadPhylip3_2Alignment(char *alignmentFile) {
   return fillMatrices(true);
 }
 
+bool alignment::loadClustalAlignment(char *alignmentFile) {
+
+  int i, seqLength, pos, firstBlock;
+  char *str, *line = NULL;
+  ifstream file;
+
+  /* Check input file and its content */
+  file.open(alignmentFile, ifstream::in);
+  if(!utils::checkFile(file))
+    return false;
+
+  /* Store some details about input file to be used in posterior format
+   * conversions */
+  filename.append("!Title ");
+  filename.append(alignmentFile);
+  filename.append(";");
+
+  /* The first line corresponding to CLUSTAL label is ignored */
+  line = utils::readLine(file);
+  if (line == NULL)
+    return false;
+
+  /* The program in only interested in the first blocks of sequences since
+   * it wants to know how many sequences are in the input file */
+  sequenNumber = 0;
+  while(!file.eof()) {
+
+    /* Read the input line in safer manner */
+    if (line != NULL)
+      delete [] line;
+    line = utils::readLine(file);
+
+    /* If a new line without any valid character is detected
+     * means the first block is over */
+    if (line == NULL)
+      break;
+
+    /* Count how many times standard characters as well as
+     * gap symbol "-" is detected in current line. */
+    seqLength = (int) strlen(line);
+    for(pos = 0; pos < seqLength; pos++)
+      if((isalpha(line[pos])) || (line[pos] == '-'))
+        break;
+
+    /* If not standard characters are detected in current line means that
+     * the program has found the typical line in clustal alignment files
+     * to mark some scores for some columns. In that case, the first block
+     * is over */
+    if(pos == seqLength)
+      break;
+    sequenNumber++;
+  }
+
+  /* Deallocate dinamic memory */
+  if (line != NULL)
+    delete [] line;
+
+  /* Finish to preprocess the input file. */
+  file.clear();
+  file.seekg(0);
+
+  /* Allocate memory for the input alignmet */
+  seqsName  = new string[sequenNumber];
+  sequences = new string[sequenNumber];
+
+  /* Read the title line and store it */
+  line = utils::readLine(file);
+  if (line == NULL)
+    return false;
+  aligInfo.append(line, strlen(line));
+
+  /* Set-up sequences pointer to the first one and the flag to indicate
+   * the first blocks. That flag implies that sequences names have to be
+   * stored */
+  i = 0;
+  firstBlock = true;
+
+  while(!file.eof()) {
+
+    /* Deallocate dinamic memory if it has been used before */
+    if (line != NULL)
+      delete [] line;
+    /* Read current line and analyze it*/
+    line = utils::readLine(file);
+    if (line == NULL)
+      continue;
+
+    /* Check whteher current line is a standard line or it is a line to mark
+     * quality scores for that alignment columns */
+    seqLength = (int) strlen(line);
+    for(pos = 0; pos < seqLength; pos++)
+      if((isalpha(line[pos])) || (line[pos] == '-'))
+        break;
+
+    /* Start a new block in the input alignment */
+    if (pos == seqLength) {
+      firstBlock = false;
+      continue;
+    }
+
+    /* If it is a standard line, split it into two parts. The first one contains
+     * sequence name and the second one the residues. If the "firstBlock" flag
+     * is active then store the sequence name */
+    str = strtok(line, OTHDELIMITERS);
+    if(str != NULL) {
+      if(firstBlock)
+        seqsName[i].append(str, strlen(str));
+      str = strtok(NULL, OTHDELIMITERS);
+      if(str != NULL)
+        sequences[i].append(str, strlen(str));
+
+      /* Move sequences pointer in a circular way */
+      i = (i + 1) % sequenNumber;
+    }
+  }
+
+  /* Close the input file */
+  file.close();
+
+  /* Deallocate dinamic memory */
+  if (line != NULL)
+    delete [] line;
+
+  /* Check the matrix's content */
+  return fillMatrices(true);
+}
+
 bool alignment::loadFastaAlignment(char *alignmentFile) {
 
   char *str, *line = NULL;
   ifstream file;
   int i;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
-  if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  if(!utils::checkFile(file))
+    return false;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* We store the file name */
+  /* Store input file name for posterior uses in other formats */
   filename.append("!Title ");
   filename.append(alignmentFile);
   filename.append(";");
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
+  /* Compute how many sequences are in the input alignment */
+  sequenNumber = 0;
   while(!file.eof()) {
+    /* Deallocate previously used dinamic memory */
     if (line != NULL)
       delete [] line;
 
@@ -490,24 +622,23 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
     if (line == NULL)
       continue;
 
+    /* It the line starts by ">" means that a new sequence has been found */
     str = strtok(line, DELIMITERS);
     if(str[0] == '>')
       sequenNumber++;
   }
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Finish to preprocess the input file. */
   file.clear();
   file.seekg(0);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Allocate memory for sequenNumber names vector */
   seqsName  = new string[sequenNumber];
   sequences = new string[sequenNumber];
 
   for(i = -1; (i < sequenNumber) && (!file.eof()); ) {
 
+    /* Deallocate previously used dinamic memory */
     if (line != NULL)
       delete [] line;
 
@@ -517,169 +648,36 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
       continue;
 
     str = strtok(line, OTHDELIMITERS);
-    /* Sequence Name */
+    /* Check whether current line belongs to the current sequence
+     * or it is a new one. In that case, store the sequence name */
     if(str[0] == '>') {
-      if(strlen(str) == 1)
-        str = strtok(NULL, OTHDELIMITERS);
-      else
-        str = str + 1;
+      str = str + 1;
       seqsName[++i].append(str, strlen(str));
+      continue;
     }
-
     /* Sequence */
-    else {
-      while(true) {
-        if(str == NULL) break;
-        else sequences[i].append(str, strlen(str));
-        str = strtok(NULL, DELIMITERS);
-      }
+    while(str != NULL) {
+      sequences[i].append(str, strlen(str));
+      str = strtok(NULL, DELIMITERS);
     }
   }
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Close the input file */
   file.close();
 
+  /* Deallocate previously used dinamic memory */
   if (line != NULL)
     delete [] line;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
   /* Check the matrix's content */
   return fillMatrices(false);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
-bool alignment::loadClustalAlignment(char *alignmentFile) {
-
-  int i, state, length = 0, store, firstBlock = true;
-  char c, *str, *line = NULL;
-  ifstream file;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Check the file and its content */
-  file.open(alignmentFile, ifstream::in);
-  if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* We store the file name */
-  filename.append("!Title ");
-  filename.append(alignmentFile);
-  filename.append(";");
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** Title ***** ***** ***** ***** */
-  /* We ignore the title line. We are only interested in the */
-  /* sequences number from the input alignment */
-  do { file.read(&c, 1); } while((c != '\n') && (!file.eof()));
-  do { file.read(&c, 1); } while((c == '\n') && (!file.eof()));
-  file.seekg(-1, ios::cur);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* We want to read the first block only to know the */
-  /* sequences number */
-  while(!file.eof()) {
-
-    if (line != NULL)
-      delete [] line;
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Read lines in a safe way */
-    line = utils::readLine2(file);
-    if (line == NULL)
-      continue;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    state = (int) strlen(line);
-    for(i = 0, length = 0; i < state; i++)
-      if((isalpha(line[i])) || (line[i] == '-')) length++;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    if(!length) break;
-    sequenNumber++;
-  }
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Finish to preprocess the input file. */
-  file.clear();
-  file.seekg(0);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** Allocate memory ***** ***** ***** */
-  seqsName  = new string[sequenNumber];
-  sequences = new string[sequenNumber];
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Read the title line and store it */
-  line = utils::readLine(file);
-  aligInfo.append(line, strlen(line));
-  delete [] line;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  do { file.read(&c, 1); } while((c == '\n') && (!file.eof()));
-  file.seekg(-1, ios::cur);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  firstBlock = true;
-  i = 0;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  while(!file.eof()) {
-     if(i >= sequenNumber)i = 0;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Read line  and analyze it*/
-    if (line != NULL)
-      delete [] line;
-    line = utils::readLine2(file);
-    if (line == NULL)
-      continue;
-
-    store = i;
-    state = (int) strlen(line);
-    for(i = 0, length = 0; i < state; i++)
-      if((isalpha(line[i])) || (line[i] == '-')) length++;
-    i = store;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* if there is a valid line, we need to split it in  */
-    /* order to extract the sequence name, only from the */
-    /* first block, as well the sequences, from each block */
-    if(length) {
-      str = strtok(line, OTHDELIMITERS);
-
-      if(str != NULL) {
-
-        /* Extract the sequence name */
-        if(firstBlock)
-          seqsName[i].append(str, strlen(str));
-        str = strtok(NULL, OTHDELIMITERS);
-        if(str != NULL)
-          sequences[i].append(str, strlen(str));
-        i++;
-      }
-    /* Start a new block in the input alignment */
-    } else
-        firstBlock = false;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  }
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Close the input file */
-  file.close();
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Check the matrix's content */
-  return fillMatrices(true);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-}
+/* *****************************************************************************
+ *
+ * END - Refactored code
+ *
+ * ************************************************************************** */
 
 bool alignment::loadNexusAlignment(char *alignmentFile) {
 
@@ -907,7 +905,6 @@ bool alignment::loadNBRF_PirAlignment(char *alignmentFile) {
   return fillMatrices(false);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
-
 
 bool alignment::loadMegaInterleavedAlignment(char *alignmentFile) {
 

@@ -31,9 +31,9 @@
 #include "alignment.h"
 #include "utils.h"
 
-#define BUILD "2011-02-17"
+#define BUILD "2011-02-18"
 #define VERSION 1.3
-#define REVISION 1
+#define REVISION 2
 
 #define DNAType 1
 #define RNAType 2
@@ -305,7 +305,7 @@ int main(int argc, char *argv[]){
 void menu(void) {
 
   cout << endl;
-  cout << "readAl v" << VERSION << ".rev" << REVISION << " build" << BUILD
+  cout << "readAl v" << VERSION << ".rev" << REVISION << " build[" << BUILD << "]"
        << ". Copyright (C) 2009-2011. Salvador Capella-Gutierrez and Toni Gabaldón."
        << endl << endl;
 

@@ -402,6 +402,12 @@ bool utils::checkFile(ifstream &file) {
   /* ***** ***** ***** ***** ***** ***** ***** */
 }
 
+/* *****************************************************************************
+ *
+ * START - Refactored code
+ *
+ * ************************************************************************** */
+
 char* utils::readLine(ifstream &file) {
 
   int state;
@@ -449,52 +455,11 @@ char* utils::readLine(ifstream &file) {
   return line;
 }
 
-char* utils::readLine2(ifstream &file) {
-
-  int state;
-  char c = ' ';
-  string nline;
-  static char *line;
-
-  /* Check it the end of the file has been reached or not */
-  if(file.eof())
-    return NULL;
-
-  /* Read the current line until a return flag is reached */
-  nline.clear();
-  for(file.read(&c, 1); (c != '\n') && ((!file.eof())); file.read(&c, 1))
-    nline.resize(nline.size() + 1, c);
-
-  /* Remove strange characters -Windows & MacOS compability- */
-  state = nline.find("\r", 0);
-  while(state != (int) string::npos) {
-    nline.erase(state, 1);
-    state = nline.find("\r", state);
-  }
-
-  /* Remove blank spaces & tabs from the beginning of the line */
-  state = nline.find(" ", 0);
-  while(state != (int) string::npos && state == 0) {
-    nline.erase(state, 1);
-    state = nline.find(" ", state);
-  }
-  state = nline.find("\t", 0);
-  while(state != (int) string::npos && state == 0) {
-    nline.erase(state, 1);
-    state = nline.find("\t", state);
-  }
-
-  /* If there is nothing to return, give back a NULL pointer ... */
-  if(nline.size() == 0)
-    return NULL;
-
-  /* Otherwise, initialize the appropiate data structure,
-   * dump the data and return it */
-  line = new char[nline.size() + 1];
-  strcpy(line, nline.c_str());
-  return line;
-}
-
+/* *****************************************************************************
+ *
+ * END - Refactored code
+ *
+ * ************************************************************************** */
 
 char* utils::trimLine(string nline) {
 

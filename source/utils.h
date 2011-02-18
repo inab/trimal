@@ -1,7 +1,7 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale 
+    trimAl v1.3: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
     readAl v1.3: a tool for automated alignment conversion among different
@@ -24,9 +24,9 @@
     You should have received a copy of the GNU General Public License
     along with trimAl/readAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+ ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
  ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-		
+
 #ifndef UTILS_H
 #define UTILS_H
 
@@ -48,7 +48,7 @@
 using namespace std;
 
 class utils {
-  
+
  public:
   /** \brief Vector initialization.
    * \param vector The vector that will be initializated.
@@ -81,7 +81,7 @@ class utils {
   /** \brief Round double to inferior integer method.
    * \param number The number that will be rounded.
    * \return the rounded number.
-   * 
+   *
    * This method rounds a double number to the inferior integer.
    */
   static int roundToInf(double number);
@@ -89,7 +89,7 @@ class utils {
   /** \brief Round double to integer method.
    * \param number The number that will be rounded.
    * \return the rounded number.
-   * 
+   *
    * This method rounds a double number to a integer.
    */
   static int roundInt(double number);
@@ -97,7 +97,7 @@ class utils {
   /** \brief Round double to greater integer method.
    * \param number The number that will be rounded.
    * \return the rounded number.
-   * 
+   *
    * This method rounds a double number to the greater integer.
    */
   static int roundToSup(double number);
@@ -114,13 +114,13 @@ class utils {
   static float max(float x, float y);
 
   static double max(double x, double y);
-  
+
   static int min(int x, int y);
 
   static float min(float x, float y);
 
   static double min(double x, double y);
-  
+
   // static bool getArg(int argc, char *argv[], int *var, char *argument, char *abrevArg);
   /** \brief String-is-number checking.
    * \param num The string we want to check.
@@ -139,7 +139,7 @@ class utils {
    */
   static bool compare(char *a, char *b);
 
-  /** \brief Removing spaces method. 
+  /** \brief Removing spaces method.
    * \param in The string that we want to clean.
    * \param out The destination of the clean string.
    *
@@ -151,11 +151,11 @@ class utils {
    * \a param list The vector that we want to sort.
    * \a param ini The first element of the vector.
    * \a param fin The last element of the vector.
-   * 
+   *
    * This method sorts the vector using the quicksort method.
    */
   static void quicksort(float *list, int ini, int fin);
-  
+
   /** \brief Swapping elements method
    * \param a One element to swap.
    * \param b Other element to swap.
@@ -168,11 +168,11 @@ class utils {
    * \a param list The vector that we want to sort.
    * \a param ini The first element of the vector.
    * \a param fin The last element of the vector.
-   * 
+   *
    * This method sorts the vector using the quicksort method.
    */
   static void quicksort(int *list, int ini, int fin);
-  
+
   /** \brief Swapping elements method
    * \param a One element to swap.
    * \param b Other element to swap.
@@ -180,12 +180,10 @@ class utils {
    * This method swaps the values in a and b.
    */
   static void swap(int *a, int *b);
-  
+
   static bool checkFile(ifstream &file);
 
   static char* readLine(ifstream &file);
-
-  static char* readLine2(ifstream &file);  
 
   static char* trimLine(string nline);
 
@@ -194,7 +192,7 @@ class utils {
   static string getReverse(string toReverse);
 
   static string removeCharacter(char c, string line);
-  
+
   static int checkTypeAlignment(int, int, string *);
 
   static int* readNumbers(string);
@@ -202,7 +200,7 @@ class utils {
   static void quicksort(int **, int, int);
 
   static void swap(int **, int **);
-  
+
   static char determineColor(char res, string column);
 
   static bool lookForPattern(string, string, float);
