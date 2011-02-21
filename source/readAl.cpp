@@ -33,7 +33,7 @@
 
 #define BUILD "2011-02-18"
 #define VERSION 1.3
-#define REVISION 2
+#define REVISION 3
 
 #define DNAType 1
 #define RNAType 2

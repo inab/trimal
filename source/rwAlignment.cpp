@@ -624,6 +624,9 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
 
     /* It the line starts by ">" means that a new sequence has been found */
     str = strtok(line, DELIMITERS);
+    if (str == NULL)
+      continue;
+
     if(str[0] == '>')
       sequenNumber++;
   }
@@ -647,7 +650,11 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
     if (line == NULL)
       continue;
 
+    /* Cut the current line and check whether there are valid characters */
     str = strtok(line, OTHDELIMITERS);
+    if (str == NULL)
+      continue;
+
     /* Check whether current line belongs to the current sequence
      * or it is a new one. In that case, store the sequence name */
     if(str[0] == '>') {
@@ -655,6 +662,7 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
       seqsName[++i].append(str, strlen(str));
       continue;
     }
+
     /* Sequence */
     while(str != NULL) {
       sequences[i].append(str, strlen(str));
