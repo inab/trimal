@@ -545,14 +545,19 @@ bool alignment::loadClustalAlignment(char *alignmentFile) {
   firstBlock = true;
 
   while(!file.eof()) {
-
     /* Deallocate dinamic memory if it has been used before */
     if (line != NULL)
       delete [] line;
     /* Read current line and analyze it*/
     line = utils::readLine(file);
-    if (line == NULL)
+    if (line == NULL) {
+      /* Sometimes, clustalw files does not have any marker after first block
+       * to indicate conservation between its columns residues. In that cases,
+       * mark the end of first block */
+      if (i == 0)
+        firstBlock = false;
       continue;
+    }
 
     /* Check whteher current line is a standard line or it is a line to mark
      * quality scores for that alignment columns */
