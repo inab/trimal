@@ -42,9 +42,9 @@
 #define GAPPYOUT 1
 #define STRICT   2
 
-#define BUILD "2011-02-21"
+#define BUILD "2011-03-08"
 #define VERSION 1.3
-#define REVISION 4
+#define REVISION 6
 
 void menu(void);
 void examples(void);

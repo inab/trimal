@@ -5,11 +5,11 @@ CODE2 = readAl.cpp
 NAME2 = readal
 
 CC    = g++
-FLAGS = -Wall
+FLAGS = -Wall -O2
 LIBM  = -lm
-DUGB  = -O2
+DUGB  =
 
-all:			clean readal trimal
+all:			readal trimal
 
 preview:		alignment.o statisticsGaps.o utils.o similarityMatrix.o statisticsConservation.o sequencesMatrix.o compareFiles.o
 

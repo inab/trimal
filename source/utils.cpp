@@ -615,8 +615,8 @@ string utils::removeCharacter(char c, string line) {
 int utils::checkTypeAlignment(int seqNumber, int residNumber, string *sequences) {
 
   int i, j, k, l, hitDNA, hitRNA, gDNA, gRNA;
-  char listRNA[6] = "AGCUN";
-  char listDNA[6] = "AGCTN";
+  char listRNA[11] = "AGCUNagcun";
+  char listDNA[11] = "AGCTNagctn";
 
   /* For each sequences, this method locks at the 100 letters (excluding gaps). If 95% or more of those letters are
      valid nucleotides, then the files is treated as nucleotides. The method also recognizes between ADN and ARN. */
@@ -624,7 +624,7 @@ int utils::checkTypeAlignment(int seqNumber, int residNumber, string *sequences)
 
     /* Looks at the 100 letters (excluding gaps) while doesn's get the sequence's end */
     for(j = 0, k = 0, hitDNA = 0, hitRNA = 0; ((j < residNumber) && (k  < 100)); j++)
-      if(sequences[i][j] != '-') {
+      if(sequences[i][j] != '-' && sequences[i][j] != '.' && sequences[i][j] != '?') {
         k++;
 
         /* Recognizes between DNA and RNA. */

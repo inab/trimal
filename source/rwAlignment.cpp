@@ -58,12 +58,14 @@ bool alignment::fillMatrices(bool aligned) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   for(i = 1; i < sequenNumber; i++)
     if(residuesNumber[i] != residuesNumber[i-1])
-    break;
+      break;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-   if (i != sequenNumber) isAligned = false;
-   else                   isAligned = true;
+   if (i != sequenNumber)
+    isAligned = false;
+   else
+    isAligned = true;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** Fill some info ***** ***** ***** */
@@ -640,7 +642,7 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
   file.clear();
   file.seekg(0);
 
-  /* Allocate memory for sequenNumber names vector */
+  /* Allocate memory for the input alignmet */
   seqsName  = new string[sequenNumber];
   sequences = new string[sequenNumber];
 
@@ -686,135 +688,156 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
   return fillMatrices(false);
 }
 
+bool alignment::loadNexusAlignment(char *alignmentFile) {
+
+  char *frag, *str, *line = NULL;
+  int i, pos, state, firstBlock;
+  ifstream file;
+
+  /* Check the file and its content */
+  file.open(alignmentFile, ifstream::in);
+  if(!utils::checkFile(file))
+    return false;
+
+  /* Store input file name for posterior uses in other formats */
+  /* We store the file name */
+  filename.append("!Title ");
+  filename.append(alignmentFile);
+  filename.append(";");
+
+  state = false;
+  do {
+
+    /* Destroy previous assigned memory */
+    if (line != NULL)
+      delete [] line;
+
+    /* Read line in a safer way */
+    line = utils::readLine(file);
+    if (line == NULL)
+      continue;
+
+    /* Discard line where there is not information */
+    str = strtok(line, DELIMITERS);
+    if (str == NULL)
+      continue;
+
+    /* If the line has any kind of information, try to catch it */
+    /* Firstly, convert to capital letters the input line */
+    for(i = 0; i < (int) strlen(str); i++)
+      str[i] = toupper(str[i]);
+
+    /* ... and then compare it again specific tags */
+    if(!strcmp(str, "BEGIN"))
+      state = true;
+
+    else if(!strcmp(str, "MATRIX"))
+      break;
+
+    /* Store information about input format file */
+    else if(!strcmp(str, "FORMAT")) {
+      seqsInfo = new string[1];
+      str = strtok(NULL, DELIMITERS);
+      while(str != NULL) {
+        seqsInfo[0].append(str, strlen(str));
+        seqsInfo[0].append(" ", strlen(" "));
+        str = strtok(NULL, DELIMITERS);
+      }
+    }
+
+    /* In this case, try to get matrix dimensions */
+    else if((!strcmp(str, "DIMENSIONS")) && state) {
+      str = strtok(NULL, DELIMITERS);
+      frag = strtok(NULL, DELIMITERS);
+      str = strtok(str, "=;");
+      sequenNumber = atoi(strtok(NULL, "=;"));
+      frag = strtok(frag, "=;");
+      residNumber = atoi(strtok(NULL, "=;"));
+    }
+  } while(!file.eof());
+
+  /* Check all parameters */
+  if(strcmp(str, "MATRIX") || (sequenNumber == 0) || (residNumber == 0))
+    return false;
+
+  /* Allocate memory for the input alignmet */
+  seqsName  = new string[sequenNumber];
+  sequences = new string[sequenNumber];
+
+  pos = 0;
+  state = false;
+  firstBlock = true;
+
+  while(!file.eof()) {
+    /* Destroy previous assigned memory */
+    if (line != NULL)
+      delete [] line;
+
+    /* Read line in a safer way */
+    line = utils::readLine(file);
+    if (line == NULL)
+      continue;
+
+    /* Discard any comments from input file */
+    for(i = 0; i < (int) strlen(line); i++) {
+      if (line[i] == '[')
+        state = true;
+      else if (line[i] == ']' && state) {
+        state = false;
+        break;
+      }
+    }
+
+    /* If there is a multi-line comments, skip it as well */
+    if ((state) || (not state && i != (int) strlen(line)))
+     continue;
+
+    /* Check for a specific tag indicating matrix end */
+    if((!strncmp(line, "end;", 4)) || (!strncmp(line, "END;", 4)))
+      break;
+
+    /* Split input line and check it if it is valid */
+    str = strtok(line, OTH2DELIMITERS);
+    if (str == NULL)
+      continue;
+
+    /* Store the sequence name, only from the first block */
+    if(firstBlock)
+      seqsName[pos].append(str, strlen(str));
+
+    /* Store rest of line as part of sequence */
+    str = strtok(NULL, OTH2DELIMITERS);
+    while(str != NULL) {
+      sequences[pos].append(str, strlen(str));
+      str = strtok(NULL, OTH2DELIMITERS);
+    }
+
+    /* move sequences pointer to next one. It if it is last one, move it to
+     * the beginning and set the first block to false for avoiding to rewrite
+     * sequences name */
+    pos = (pos + 1) % sequenNumber;
+    if (not pos)
+      firstBlock = false;
+  }
+
+  /* Deallocate memory */
+  if (line != NULL)
+    delete [] line;
+
+  /* Close the input file */
+  file.close();
+
+  /* Check the matrix's content */
+  return fillMatrices(true);
+}
+
 /* *****************************************************************************
  *
  * END - Refactored code
  *
  * ************************************************************************** */
 
-bool alignment::loadNexusAlignment(char *alignmentFile) {
 
-  char *frag, *str, *line = NULL;
-  int i, state = false, firstBlock = true;
-  ifstream file;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Check the file and its content */
-  file.open(alignmentFile, ifstream::in);
-  if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* We store the file name */
-  filename.append("!Title ");
-  filename.append(alignmentFile);
-  filename.append(";");
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Read lines in a safe way */
-  utils::readLine(file);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  do {
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Read lines in a safe way */
-    line = utils::readLine(file);
-    str = strtok(line, DELIMITERS);
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    if(str != NULL) {
-
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      for(i = 0; i < (int) strlen(str); i++)
-        str[i] = toupper(str[i]);
-
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      if(!strcmp(str, "MATRIX")) break;
-
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      if(!strcmp(str, "BEGIN")) state = true;
-
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      if((!strcmp(str, "DIMENSIONS")) && state) {
-        str = strtok(NULL, DELIMITERS);
-        frag = strtok(NULL, DELIMITERS);
-
-        str = strtok(str, "=;");
-        sequenNumber = atoi(strtok(NULL, "=;"));
-
-        frag = strtok(frag, "=;");
-        residNumber = atoi(strtok(NULL, "=;"));
-      }
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    }
-
-  } while(!file.eof());
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Check correct read parameters */
-  if(strcmp(str, "MATRIX") || (sequenNumber == 0) || (residNumber == 0))
-    return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** Allocate memory ***** ***** ***** */
-  seqsName  = new string[sequenNumber];
-  sequences = new string[sequenNumber];
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  i = 0;
-  while(true) {
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Read lines in a safe way */
-    line = utils::readLine(file);
-    if(file.eof()) break;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    if((!strncmp(line, "end;", 4)) || (!strncmp(line, "END;", 4)))
-      break;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    str = strtok(line, OTH2DELIMITERS);
-    if(str != NULL) {
-
-      /* Store the sequence name, only from the first block */
-      if(firstBlock)
-        seqsName[i].append(str, strlen(str));
-
-      /* Store the sequence */
-      while(true) {
-        str = strtok(NULL, OTH2DELIMITERS);
-        if(str != NULL)
-          sequences[i].append(str, strlen(str));
-        else break;
-      }
-      i++;
-    }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    if(i >= sequenNumber) {
-      firstBlock = false;
-      i = 0;
-    }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    delete [] line;
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Close the input file */
-  file.close();
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Check the matrix's content */
-  return fillMatrices(true);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-}
 
 bool alignment::loadNBRF_PirAlignment(char *alignmentFile) {
 
@@ -1348,7 +1371,6 @@ void alignment::alignmentPhylip_PamlToFile(ostream &file) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
-
 void alignment::alignmentClustalToFile(ostream &file) {
 
   int i, j, maxLongName = 0;
@@ -1521,30 +1543,63 @@ void alignment::alignmentNexusToFile(ostream &file) {
   file << " DIMENSIONS NTAX=" << sequenNumber << " NCHAR=" << residNumber <<";" << endl;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
+  /* Compute input file datatype */
   getTypeAlignment();
+  switch(dataType) {
+    case DNAType:
+      file << "FORMAT DATATYPE=DNA INTERLEAVE=yes GAP=-";
+      break;
+    case RNAType:
+      file << "FORMAT DATATYPE=RNA INTERLEAVE=yes GAP=-";
+      break;
+    case AAType:
+      file << "FORMAT DATATYPE=PROTEIN INTERLEAVE=yes GAP=-";
+      break;
+  }
+
+  /* Try to use information from input alignment if it is a NEXUS file */
+  if ((iformat == 17) && seqsInfo != NULL) {
+
+    /* Endding characters like ";" are removed from input information line */
+    while((int) seqsInfo[0].find(";") != (int) string::npos)
+      seqsInfo[0].erase(seqsInfo[0].find(";"), 1);
+
+    i = 0;
+    j = seqsInfo[0].find(" ", i);
+    /* Scan information line looking for specific tags. No all available tags
+     * are taking into account */
+    while(j != (int) string::npos) {
+
+      if((seqsInfo[0].substr(i, j - i)).compare(0, 7, "MISSING") == 0 ||
+         (seqsInfo[0].substr(i, j)).compare(0, 7, "missing") == 0)
+        file << " " << (seqsInfo[0].substr(i, j - i));
+
+      if((seqsInfo[0].substr(i, j)).compare(0, 9, "MATCHCHAR") == 0 ||
+         (seqsInfo[0].substr(i, j)).compare(0, 9, "matchchar") == 0)
+        file << " " << (seqsInfo[0].substr(i, j - i));
+
+      i = j + 1;
+      j = seqsInfo[0].find(" ", i);
+    }
+  }
+  file << ";" << endl;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  file << " FORMAT";
-  switch(dataType) {
-    case DNAType: file << " DATATYPE=DNA "; break;
-    case RNAType: file << " DATATYPE=RNA "; break;
-    case AAType:  file << " DATATYPE=PROTEIN "; break;
-  }
-  file << "INTERLEAVE=yes GAP=-;" << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* Look for the maximum sequenNumber name size */
+  for(i = 0; i < sequenNumber; i++)
+    maxLongName = utils::max(maxLongName, seqsName[i].size());
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Print the sequence name and the residues number
      for each sequence */
   for(i = 0; i < sequenNumber; i++)
-    file << "[Name: " << seqsName[i] << "      Len: " << residNumber << " Check: 0]" << endl;
+    file << "[Name: " << setw(maxLongName + 4) << left << seqsName[i] << "Len: " << residNumber << " Check: 0]" << endl;
   file << endl << "MATRIX" << endl;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Look for the maximum sequenNumber name size */
-  for(i = 0; i < sequenNumber; i++)
-    maxLongName = utils::max(maxLongName, seqsName[i].size());
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1559,7 +1614,7 @@ void alignment::alignmentNexusToFile(ostream &file) {
     file << endl;
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  file << endl << ";" << endl << "END;" << endl;
+  file << ";" << endl << "END;" << endl;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
