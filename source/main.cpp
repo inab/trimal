@@ -44,7 +44,7 @@
 
 #define BUILD "2011-03-08"
 #define VERSION 1.3
-#define REVISION 6
+#define REVISION 7
 
 void menu(void);
 void examples(void);

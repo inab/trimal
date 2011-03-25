@@ -379,36 +379,36 @@ void utils::swap(int **a, int **b){
   *b = temp;
 }
 
-/* ****************************************************************************************************************** */
-/* ****************************************************************************************************************** */
-
-
-bool utils::checkFile(ifstream &file) {
-
-  long begin, end;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Check file */
-  if(!file) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** Check the alignment content ***** */
-  begin = file.tellg();
-  file.seekg(0, ios::end);
-  end = file.tellg();
-  file.seekg(0, ios::beg);
-  if(!(end - begin)) return false;
-  return true;
-  /* ***** ***** ***** ***** ***** ***** ***** */
-}
-
 /* *****************************************************************************
  *
  * START - Refactored code
  *
  * ************************************************************************** */
 
+bool utils::checkFile(ifstream &file) {
+  /* Check if a given file exists and its size is greater than 0 */
+  long begin, end;
+
+  /* Check whether input file exists or not */
+  if(!file)
+    return false;
+
+  /* Check input file sizes. A valid file should have a size grater than 0 */
+  begin = file.tellg();
+  file.seekg(0, ios::end);
+  end = file.tellg();
+  file.seekg(0, ios::beg);
+  /* Compare difference between file start and end.
+   * Depending on result, return True or False */
+  if(!(end - begin))
+    return false;
+  return true;
+}
+
 char* utils::readLine(ifstream &file) {
+  /* Read a new line from current input stream. This function is better than
+   * standard one since cares of operative system compability. It is useful
+   * as well because remove tabs and blank spaces at lines beginning/ending */
 
   int state;
   char c = ' ';
@@ -419,9 +419,7 @@ char* utils::readLine(ifstream &file) {
   if(file.eof())
     return NULL;
 
-  /* Skip all the character while there are blank lines ... */
-  do { file.read(&c, 1); } while((c == '\n') && (!file.eof()));
-  /* ... and store the first line found */
+  /* Store first line found */
   for( ; (c != '\n') && ((!file.eof())); file.read(&c, 1))
     nline.resize(nline.size() + 1, c);
 
@@ -438,6 +436,7 @@ char* utils::readLine(ifstream &file) {
     nline.erase(state, 1);
     state = nline.find(" ", state);
   }
+
   state = nline.find("\t", 0);
   while(state != (int) string::npos && state == 0) {
     nline.erase(state, 1);
@@ -455,135 +454,93 @@ char* utils::readLine(ifstream &file) {
   return line;
 }
 
+char* utils::trimLine(string nline) {
+  /* This function is used to remove comments inbetween a biological sequence.
+   * Remove all content surrounded by ("") or ([]). It wans as well when a
+   * mismatch for these flags is found */
+
+  int pos, next;
+  static char *line;
+
+  /* Set-up lower and upper limit to look for comments inside of input string */
+  pos = -1;
+
+  /* Identify comments inside of input sequence and remove it */
+  while(true) {
+    pos  = nline.find("\"", (pos + 1));
+
+    /* When there is not any more a comment inside of sequence,
+     * go out from this loop */
+    if(pos == (int) string::npos)
+      break;
+
+    /* Look for closing flag */
+    next = nline.rfind("\"", nline.size());
+
+    /* If a pair of comments flags '"' is found, remove everything inbetween */
+    if((int) nline.find("\"", (pos + 1)) == next) {
+      nline.erase(pos, (next - pos + 1));
+      pos = -1;
+    }
+
+    /* If there is only one flag '"' for comments inside of sequence,
+     * user should be warned about that */
+    if (pos == next) {
+      cerr << endl << "ERROR: Possible (\") mismatch for comments" << endl;
+      return NULL;
+    }
+  }
+
+  /* Look for other kind of comments, in this case those with [] */
+  while(true) {
+    pos = -1;
+    next = -1;
+
+    /* Search for last opened bracket. It is supposed to be the first one for
+     * being close */
+    while((pos = nline.find("[", (pos + 1))) != (int) string::npos)
+      next = pos;
+
+    /* If no opening bracket has been found.
+     * Check if there is any closing one */
+    if (next == -1) {
+      /* There are not any bracket in input string */
+      if ((int) nline.find("]", 0) == (int) string::npos)
+        break;
+      /* Otherwise, warn about the error */
+      cerr << endl << "ERROR: Brackets (]) mismatch found" << endl;
+      return NULL;
+    }
+
+    /* Look for closest closing bracket to the opening one found */
+    pos = nline.find("]", (next + 1));
+
+    /* If no closing bracket has been found. Warn about the mismatch */
+    if (pos == (int) string::npos) {
+      cerr << endl << "ERROR: Brackets ([) mismatch found" << endl;
+      return NULL;
+    }
+
+    /* When both brackets have been found, remove comments inbetween them */
+    nline.erase(next, (pos - next + 1));
+  }
+
+  /* Check if after removing all comments from input string there is still part
+   * of sequences or not */
+  if(nline.size() == 0)
+    return NULL;
+
+  /* Initialize and store resulting sequence into an appropiate structure */
+  line = new char[nline.size() + 1];
+  strcpy(line, nline.c_str());
+
+  return line;
+}
 /* *****************************************************************************
  *
  * END - Refactored code
  *
  * ************************************************************************** */
-
-char* utils::trimLine(string nline) {
-
-  int state, pos, npos, next;
-  static char *line;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  next = nline.size() + 1;
-  pos = -1;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* We need to look for comments along the sequence */
-  while(true) {
-    pos  = nline.find("\"", (pos + 1));
-    npos = nline.find("\"", (pos + 1));
-    next = nline.rfind("\"", next - 1);
-
-    if(pos != (int) string::npos) {
-      if(npos == next) {
-        nline.erase(pos, (next - pos + 1));
-        next = nline.size() + 1;
-        pos = -1;
-      }
-    } else break;
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  do {
-    pos = -1;
-    npos = pos;
-
-    while((pos = nline.find("[", (pos + 1))) != (int) string::npos)
-      npos = pos;
-
-    if((int) nline.find("]", (npos + 1)) != (int) string::npos)
-      nline.erase(npos, (nline.find("]", (npos + 1)) - npos + 1));
-
-  } while(npos != -1);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  state = nline.find("\r", 0);
-  while(state != (int) string::npos) {
-    nline.erase(state, 1);
-    state = nline.find("\r", state);
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  state = nline.find(" ", 0);
-  while(state != (int) string::npos && state == 0) {
-    nline.erase(state, 1);
-    state = nline.find(" ", state);
-  }
-
-  state = nline.find("\t", 0);
-  while(state != (int) string::npos && state == 0) {
-    nline.erase(state, 1);
-    state = nline.find("\t", state);
-  }
-
-  if(nline.size() == 0)
-    return NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  line = new char[nline.size() + 1];
-  strcpy(line, nline.c_str());
-  return line;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-}
-
-char* utils::readLineMEGA(ifstream &file) {
-
-  int state;
-  char c = ' ';
-  string nline;
-  static char *line;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  do { file.read(&c, 1); } while((c == '\n') && (!file.eof()));
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    nline += c;
-  while((c != '\n') && (!file.eof())) {
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-        for(file.read(&c, 1); (c != '\n') && (!file.eof()) && (c != '#'); file.read(&c, 1))
-            nline += c;
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-   if(file.eof() || (c == '#')) break;
-   nline += c;
-   file.read(&c, 1);
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  }
-
-  /* Remove strange characters -Windows & MacOS compability- */
-  state = nline.find("\r", 0);
-  while(state != (int) string::npos) {
-    nline.erase(state, 1);
-    state = nline.find("\r", state);
-  }
-
-  /* Remove blank spaces & tabs from the beginning of the line */
-  state = nline.find(" ", 0);
-  while(state != (int) string::npos && state == 0) {
-    nline.erase(state, 1);
-    state = nline.find(" ", state);
-  }
-  state = nline.find("\t", 0);
-  while(state != (int) string::npos && state == 0) {
-    nline.erase(state, 1);
-    state = nline.find("\t", state);
-  }
-
-  /* If there is nothing to return, give back a NULL pointer ... */
-  if(nline.size() == 0)
-    return NULL;
-
-  /* Otherwise, initialize the appropiate data structure,
-   * dump the data and return it */
-  line = new char[nline.size() + 1];
-  strcpy(line, nline.c_str());
-  return line;
-}
-
 string utils::getReverse(string toReverse) {
 
   string line;
