@@ -2989,8 +2989,7 @@ bool alignment::prepareCodingSequence(bool removeStopCodon) {
     }
 
     if((sequences[i].length() % 3) != 0) {
-      cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" length is not multiple of 3." << endl << endl;
-      break;
+      cerr << endl << "WARNING: The sequence \"" << seqsName[i] << "\" length is not multiple of 3." << endl << endl;
     }
 
     length = sequences[i].length() - 3;
@@ -3042,6 +3041,13 @@ bool alignment::checkCorrespondence(string *names, int *lengths) {
         if((int) tmp.length() == lengths[j]) {
           numNames++; break;
         }
+        else if((int) tmp.length() < lengths[j]) {
+          numNames++;
+          cerr << endl << "WARNING: Sequence \"" << seqsName[i] << "\" will be cutted at position " << tmp.length() * 3 << " (total length: " << lengths[j] << " )" << endl;
+          break;
+      }
+
+
 		else {
           cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" does not have the same length in both files." << endl << endl;
           return false;
