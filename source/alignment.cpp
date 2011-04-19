@@ -2539,8 +2539,16 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
 	if(seqMatrix -> getSequence(oldSeqsName[i], tmpSequence)) {
 	  for(j = 0; j < oldResidues; j++) {
 		if((selectedRes[j] != -1) && (tmpSequence[j] != 0)) {
-		  for(k = 3 * (tmpSequence[j] - 1), l = 0; l < 3; k++, l++)
-			matrixAux[i].resize(matrixAux[i].size() + 1, sequences[mappedSeqs[i]][k]);
+
+		  for(k = 3 * (tmpSequence[j] - 1), l = 0; l < 3; k++, l++) {
+        /* Check whether the nucleotide sequences end has been reached or not.
+         * If it has been reached, complete backtranslation using indetermination
+         * symbols 'N' */
+        if((int) sequences[mappedSeqs[i]].length() > k)
+			    matrixAux[i].resize(matrixAux[i].size() + 1, sequences[mappedSeqs[i]][k]);
+        else
+          matrixAux[i].resize(matrixAux[i].size() + 1, 'N');
+    }
 		} else if(selectedRes[j] != -1) {
           matrixAux[i].resize(matrixAux[i].size() + 3, '-');
 		}
@@ -2834,12 +2842,9 @@ void alignment::getSequences(string *Names) {
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method returns the sequences name aswell the clean sequence length */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void alignment::getSequences(string *Names, int *lengths, int divisor) {
-
+void alignment::getSequences(string *Names, int *lengths) {
   for(int i = 0; i < sequenNumber; i++) {
-    lengths[i] = (int) (utils::removeCharacter('-', sequences[i]).length() / divisor);
+    lengths[i] = (int) utils::removeCharacter('-', sequences[i]).length();
     Names[i] = seqsName[i];
   }
 }
@@ -2979,93 +2984,193 @@ bool alignment::isFileAligned(void) {
  * the same time, the function will remove all the stop codon that are in the
  * coding sequences if a given flat set up that */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-bool alignment::prepareCodingSequence(bool removeStopCodon) {
+bool alignment::prepareCodingSequence(bool splitByStopCodon) {
   int i, length;
+  size_t found;
 
   for(i = 0; i < sequenNumber; i++) {
     if(sequences[i].find("-") != string::npos) {
-      cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has, at least, one gap." << endl << endl;
-      break;
+      cerr << endl << "ERROR: The sequence \"" << seqsName[i]
+           << "\" has, at least, one gap." << endl << endl;
+      return false;
     }
 
     if((sequences[i].length() % 3) != 0) {
-      cerr << endl << "WARNING: The sequence \"" << seqsName[i] << "\" length is not multiple of 3." << endl << endl;
+      cerr << endl << "WARNING: The sequence \"" << seqsName[i] << "\" length "
+        << " is not multiple of 3 (total length: " << sequences[i].length()
+        << ")" << endl;
     }
 
+    /* Last codon position, It there is any stop codon, it should be there */
     length = sequences[i].length() - 3;
-    if(sequences[i].find("TAG", length) != string::npos) {
-      if(removeStopCodon) sequences[i].erase(length, 3);
-      else {
-        cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has the stop codon \"TAG\" at position " << length << endl << endl;
-        break;
-      }
-    }
 
-    if(sequences[i].find("TAA", length) != string::npos) {
-      if(removeStopCodon) sequences[i].erase(length, 3);
-      else {
-        cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has the stop codon \"TAA\" at position " << length << endl << endl;
-        break;
-      }
-    }
+    /* Detect universal stop codons in the CDS. CDS sequences could be splitted
+     * using stop codons from the sequence itself */
 
-    if(sequences[i].find("TGA", length) != string::npos) {
-      if(removeStopCodon) sequences[i].erase(length, 3);
-      else {
-        cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has the stop codon \"TGA\" at position " << length << endl << endl;
-        break;
+    /* Initialize first appearence of a given stop codon to -1.
+     * That means that it has not been found yet */
+    found = -1;
+    do {
+      found = sequences[i].find("TGA", found + 1);
+
+      /* If a stop codon has been found and its position is multiple of 3.
+       * Analize it */
+      if((found != string::npos) && (((int) found % 3) == 0)) {
+        /* If split_by_stop_codon flag is activated then cut input CDS sequence
+         * up to first appearance of a stop codon */
+        if(splitByStopCodon) {
+          cerr << endl << "WARNING: Cutting sequence \"" << seqsName[i]
+            << "\" at first appearance of stop codon \"TGA\" at position "
+            << (int) found + 1 << " (total length: " << sequences[i].length()
+            << ")" << endl;
+          sequences[i].resize((int) found);
+        }
+        /* Otherwise, warn about it and return an error */
+        else {
+          cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has "
+            << "the stop codon \"TGA\" at position " << (int) found << " (total"
+            << " length: " << sequences[i].length() << ")" << endl << endl;
+          return false;
+        }
       }
-    }
+    /* Iterate over the CDS until not stop codon is found */
+    } while(found != string::npos);
+
+    /* Initialize first appearence of a given stop codon to -1.
+     * That means that it has not been found yet */
+    found = -1;
+    do {
+      found = sequences[i].find("TAA", found + 1);
+
+      /* If a stop codon has been found and its position is multiple of 3.
+       * Analize it */
+      if((found != string::npos) && (((int) found % 3) == 0)) {
+        /* If split_by_stop_codon flag is activated then cut input CDS sequence
+         * up to first appearance of a stop codon */
+        if(splitByStopCodon) {
+          cerr << endl << "WARNING: Cutting sequence \"" << seqsName[i]
+            << "\" at first appearance of stop codon \"TAA\" at position "
+            << (int) found + 1 << " (total length: " << sequences[i].length()
+            << ")" << endl;
+          sequences[i].resize((int) found);
+        }
+        /* Otherwise, warn about it and return an error */
+        else {
+          cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has "
+            << "the stop codon \"TAA\" at position " << (int) found << " (total"
+            << " length: " << sequences[i].length() << ")" << endl << endl;
+          return false;
+        }
+      }
+    /* Iterate over the CDS until not stop codon is found */
+    } while(found != string::npos);
+
+    /* Initialize first appearence of a given stop codon to -1.
+     * That means that it has not been found yet */
+    found = -1;
+    do {
+      found = sequences[i].find("TAG", found + 1);
+      /* If a stop codon has been found and its position is multiple of 3.
+       * Analize it */
+      if((found != string::npos) && (((int) found % 3) == 0)) {
+        /* If split_by_stop_codon flag is activated then cut input CDS sequence
+         * up to first appearance of a stop codon */
+        if(splitByStopCodon) {
+          cerr << endl << "WARNING: Cutting sequence \"" << seqsName[i]
+            << "\" at first appearance of stop codon \"TAA\" at position "
+            << (int) found + 1 << " (total length: " << sequences[i].length()
+            << ")" << endl;
+          sequences[i].resize((int) found);
+        }
+        /* Otherwise, warn about it and return an error */
+        else {
+          cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has "
+            << "the stop codon \"TAG\" at position " << (int) found << " (total"
+            << " length: " << sequences[i].length() << ")" << endl << endl;
+          return false;
+        }
+      }
+    /* Iterate over the CDS until not stop codon is found */
+    } while(found != string::npos);
   }
 
-  if(i == sequenNumber) return true;
-  else return false;
+  /* If everything was return an OK to informat about it. */
+  return true;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Check if the Coding Sequences file is correct based on: There is not gaps
  * in the whole set of sequences as well each sequence is multiple of 3.   */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-bool alignment::checkCorrespondence(string *names, int *lengths) {
-  int i, j, numNames;
+bool alignment::checkCorrespondence(string *names, int *lengths, int \
+  multiple = 1) {
+
+  int i, j, seqLength, indet;
   string tmp;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* For each name in the current alignment, we look
-   * for its correspondence in the input protein alig */
-  for(i = 0, numNames = 0; i < sequenNumber; i++) {
+  /* For each sequence in the current protein alignment, look for its coding
+   * DNA sequence checking that there have the same/similar size. */
+  for(i = 0; i < sequenNumber; i++) {
+
+    /* Get protein sequence length removing any possible gap. Get as well last
+     * residue from current sequence */
+
     tmp = utils::removeCharacter('-', sequences[i]);
+    seqLength = tmp.length() * multiple;
+    indet = ((int) tmp.length() - utils::min((int) tmp.find_last_not_of("X"), \
+      (int) tmp.find_last_not_of("x"))) - 1;
 
+    /* Go through all available CDS looking for the one with the same ID */
     for(j = 0; j < sequenNumber; j++) {
+
+      /* Once both ID matchs, compare its lengths */
       if(seqsName[i] == names[j]) {
-        if((int) tmp.length() == lengths[j]) {
-          numNames++; break;
-        }
-        else if((int) tmp.length() < lengths[j]) {
-          numNames++;
-          cerr << endl << "WARNING: Sequence \"" << seqsName[i] << "\" will be cutted at position " << tmp.length() * 3 << " (total length: " << lengths[j] << " )" << endl;
+
+        /* If both sequences have the same length, stop the search */
+        if(seqLength == lengths[j])
           break;
-      }
 
+        /* If nucleotide sequence is larger than protein sequence, warn about
+         * it and continue the verification process. It will used the 'Nth'
+         * first nucleotides for the conversion */
+        else if(seqLength < lengths[j]) {
+          cerr << endl << "WARNING: Sequence \"" << seqsName[i] << "\" will be "
+            << "cutted at position " << seqLength << " (total length: "
+            << lengths[j] << ")" << endl;
+          break;
+        }
 
-		else {
-          cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" does not have the same length in both files." << endl << endl;
+        /* It has been detected some indeterminations at the end of the protein
+         * sequence. That issue could be cause by some incomplete codons in the
+         * nucleotide sequences. This issue is solved adding as much 'N' symbols
+         * as it is needed to preserve the backtranslated alignment */
+        else if((indet > 0) && (indet > (seqLength - lengths[j])/3)) {
+          cerr << endl << "WARNING: Sequence \"" << seqsName[i] << "\" has "
+            << "some indetermination symbols 'X' at the end of sequence. There "
+            << "will be translated to the final alignment." << endl;
+          break;
+        }
+
+        /* If nucleotide sequence is shorter than protein sequence, return an
+         * error since it is not feasible to cut the input protein aligment to
+         * fit it into CDNA sequences size */
+        else {
+          cerr << endl << "ERROR: Sequence \"" << seqsName[i] << "\" has "
+            << "less nucleotides (" << lengths[j] << ") than expected ("
+            << seqLength << ")" << endl << endl;
           return false;
         }
-	  }
-	}
+      }
+    }
 
-	if(j == sequenNumber) {
-      cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" is not in both files." << endl << endl;
+    /* Warn about a mismatch a sequences name level */
+    if(j == sequenNumber) {
+      cerr << endl << "ERROR: Sequence \"" << seqsName[i] << "\" is not in "
+        << "both files." << endl << endl;
       return false;
     }
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Depending on if we get the complete correspondence
-   * between both sets of names, we return true or not */
-  if(numNames == sequenNumber) return true;
-  else return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* If everything is OK, return an appropiate flag */
+  return true;
 }

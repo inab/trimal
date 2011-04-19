@@ -42,9 +42,9 @@
 #define GAPPYOUT 1
 #define STRICT   2
 
-#define BUILD "2011-03-08"
+#define BUILD "2011-04-19"
 #define VERSION 1.3
-#define REVISION 7
+#define REVISION 8
 
 void menu(void);
 void examples(void);
@@ -54,7 +54,7 @@ int main(int argc, char *argv[]){
   /* Parameters Control */
   bool appearErrors = false, complementary = false, colnumbering = false, nogaps = false, noallgaps = false, gappyout = false,
        strict = false, strictplus = false, automated1 = false, sgc = false, sgt = false, scc = false, sct = false, sfc = false,
-       sft = false, sident = false, selectSeqs = false, selectCols = false, shortNames = false, removestop = false, terminal = false;
+       sft = false, sident = false, selectSeqs = false, selectCols = false, shortNames = false, splitbystop = false, terminal = false;
 
 
   float conserve = -1, gapThreshold = -1, simThreshold = -1, comThreshold = -1, resOverlap = -1, seqOverlap = -1, maxIdentity = -1;
@@ -1056,9 +1056,9 @@ int main(int argc, char *argv[]){
       colnumbering = true;
     }
 
-   /* Option -removestopcodon ------------------------------------------------------------------------------- */
-    else if((!strcmp(argv[i], "-removestopcodon")) && (removestop == false)) {
-      removestop = true;
+   /* Option -splitbystopcodon ------------------------------------------------------------------------------- */
+    else if((!strcmp(argv[i], "-splitbystopcodon")) && (splitbystop == false)) {
+      splitbystop = true;
     }
 
    /* ------------------------------------------------------------------------------------------------------ */
@@ -1333,8 +1333,8 @@ int main(int argc, char *argv[]){
      appearErrors = true;
   }
   /* ------------------------------------------------------------------------------------------------------ */
-  if((!appearErrors) && (backtransFile == NULL) && (removestop)) {
-     cerr << endl << "ERROR: The -removestopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
+  if((!appearErrors) && (backtransFile == NULL) && (splitbystop)) {
+     cerr << endl << "ERROR: The -splitbystopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
      appearErrors = true;
   }
   /* ------------------------------------------------------------------------------------------------------ */
@@ -1344,7 +1344,7 @@ int main(int argc, char *argv[]){
     appearErrors = true;
   }
   /* ------------------------------------------------------------------------------------------------------ */
-  if((!appearErrors)  && (backtransFile != NULL) && (backtranslation -> prepareCodingSequence(removestop) != true))
+  if((!appearErrors)  && (backtransFile != NULL) && (backtranslation -> prepareCodingSequence(splitbystop) != true))
     appearErrors = true;
 
   /* ------------------------------------------------------------------------------------------------------ */
@@ -1352,9 +1352,9 @@ int main(int argc, char *argv[]){
 
     seqNames = new string[backtranslation -> getNumSpecies()];
     seqLengths = new int[backtranslation -> getNumSpecies()];
-    backtranslation -> getSequences(seqNames, seqLengths, 3);
+    backtranslation -> getSequences(seqNames, seqLengths);
 
-    if(origAlig -> checkCorrespondence(seqNames, seqLengths) != true)
+    if(origAlig -> checkCorrespondence(seqNames, seqLengths, 3) != true)
       appearErrors = true;
   }
   /* ------------------------------------------------------------------------------------------------------ */
@@ -1689,7 +1689,7 @@ void menu(void) {
   cout << "    -forceselect <inputfile> " << "Force selection of the given input file in the files comparison method." << endl << endl;
 
   cout << "    -backtrans <inputfile>   " << "Use a Coding Sequences file to get a backtranslation for a given AA alignment" << endl;
-  cout << "    -removestopcodon         " << "Skip stop codons at end of a given set/subset of Coding Sequences." << endl << endl;
+  cout << "    -splitbystopcodon        " << "Split input coding sequences up to first stop codon appearance" << endl << endl;
 
   cout << "    -matrix <inpufile>       " << "Input file for user-defined similarity matrix (default is Blosum62)." << endl << endl;
 

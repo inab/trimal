@@ -334,7 +334,7 @@ class alignment {
    */
   void getSequences(string *);
 
-  void getSequences(string *, int *, int);
+  void getSequences(string *, int *);
 
   bool getSeqNameOrder(string *, int *);
 
@@ -482,7 +482,7 @@ class alignment {
 
   alignment * getTranslationCDS(int, int, int *, string *, sequencesMatrix *, alignment *);
 
-  bool checkCorrespondence(string *, int *);
+  bool checkCorrespondence(string *, int *, int);
 
   int *calculateRepresentativeSeq(float maximumIdent);
 

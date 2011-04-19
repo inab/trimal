@@ -706,7 +706,10 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
     /* Check whether current line belongs to the current sequence
      * or it is a new one. In that case, store the sequence name */
     if(str[0] == '>') {
-      str = str + 1;
+      /* Move sequence name pointer until a valid string name is obtained */
+      do {
+        str = str + 1;
+      } while(strlen(str) == 0);
       seqsName[++i].append(str, strlen(str));
       continue;
     }
