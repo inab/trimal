@@ -3028,7 +3028,7 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon) {
         /* Otherwise, warn about it and return an error */
         else {
           cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has "
-            << "the stop codon \"TGA\" at position " << (int) found << " (total"
+            << "stop codon \"TGA\" at position " << (int) found + 1 << " (total"
             << " length: " << sequences[i].length() << ")" << endl << endl;
           return false;
         }
@@ -3057,7 +3057,7 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon) {
         /* Otherwise, warn about it and return an error */
         else {
           cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has "
-            << "the stop codon \"TAA\" at position " << (int) found << " (total"
+            << "stop codon \"TAA\" at position " << (int) found + 1 << " (total"
             << " length: " << sequences[i].length() << ")" << endl << endl;
           return false;
         }
@@ -3085,7 +3085,7 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon) {
         /* Otherwise, warn about it and return an error */
         else {
           cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has "
-            << "the stop codon \"TAG\" at position " << (int) found << " (total"
+            << "stop codon \"TAG\" at position " << (int) found + 1 << " (total"
             << " length: " << sequences[i].length() << ")" << endl << endl;
           return false;
         }
@@ -3155,10 +3155,11 @@ bool alignment::checkCorrespondence(string *names, int *lengths, int \
          * error since it is not feasible to cut the input protein aligment to
          * fit it into CDNA sequences size */
         else {
-          cerr << endl << "ERROR: Sequence \"" << seqsName[i] << "\" has "
+          cerr << endl << "WARNING: Sequence \"" << seqsName[i] << "\" has "
             << "less nucleotides (" << lengths[j] << ") than expected ("
-            << seqLength << ")" << endl << endl;
-          return false;
+            << seqLength << "). It will be used N's to complete the sequence"
+            << endl;
+          break;
         }
       }
     }
