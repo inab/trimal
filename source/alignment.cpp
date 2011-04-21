@@ -26,7 +26,6 @@
 
  ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
  ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-#include <exception>
 using namespace std;
 
 #include <float.h>
@@ -2996,8 +2995,8 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon) {
     }
 
     if((sequences[i].length() % 3) != 0) {
-      cerr << endl << "WARNING: The sequence \"" << seqsName[i] << "\" length "
-        << " is not multiple of 3 (total length: " << sequences[i].length()
+      cerr << endl << "WARNING: The sequence length of \"" << seqsName[i]
+        << "\" is not multiple of 3 (total length: " << sequences[i].length()
         << ")" << endl;
     }
 

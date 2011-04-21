@@ -34,7 +34,6 @@ extern int errno;
 #include <errno.h>
 #include <ctype.h>
 #include <string>
-#include <exception>
 
 #define DELIMITERS     "   \t\n"
 #define OTHDELIMITERS  "   \t\n,:*"
@@ -564,7 +563,6 @@ bool alignment::loadClustalAlignment(char *alignmentFile) {
     if (line != NULL)
       break;
   }
-
 
   /* Set-up sequences pointer to the first one and the flag to indicate
    * the first blocks. That flag implies that sequences names have to be
@@ -1243,114 +1241,131 @@ bool alignment::loadMegaInterleavedAlignment(char *alignmentFile) {
   return fillMatrices(true);
 }
 
-/* *****************************************************************************
- *
- * END - Refactored code
- *
- * ************************************************************************** */
-
 bool alignment::loadNBRF_PirAlignment(char *alignmentFile) {
 
-  int i, firstLine = true, seqLines = false;
+  bool seqIdLine, seqLines;
   char *str, *line = NULL;
   ifstream file;
+  int i;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
-  if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  if(!utils::checkFile(file))
+    return false;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* We store the file name */
+  /* Store input file name for posterior uses in other formats */
   filename.append("!Title ");
   filename.append(alignmentFile);
   filename.append(";");
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  while(true) {
+  /* Compute how many sequences are in the input alignment */
+  sequenNumber = 0;
+  while(!file.eof()) {
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Deallocate previously used dinamic memory */
+    if (line != NULL)
+      delete [] line;
+
+    /* Read lines in a safe way */
     line = utils::readLine(file);
-    if(file.eof()) break;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    if (line == NULL)
+      continue;
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    if((line[0] == '>') && (line[3] == ';'))
+    /* It the line starts by ">" means that a new sequence has been found */
+    str = strtok(line, DELIMITERS);
+    if (str == NULL)
+      continue;
+
+    /* If a sequence name flag is detected, increase sequences counter */
+    if(str[0] == '>')
       sequenNumber++;
-    delete [] line;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
 
   /* Finish to preprocess the input file. */
   file.clear();
   file.seekg(0);
 
-  /* ***** ***** ***** Allocate memory ***** ***** ***** */
+  /* Allocate memory for the input alignmet */
   sequences = new string[sequenNumber];
   seqsName  = new string[sequenNumber];
   seqsInfo  = new string[sequenNumber];
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  i = 0;
-  while(true) {
+  /* Initialize some local variables */
+  seqIdLine = true;
+  seqLines = false;
+  i = -1;
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Read the entire input file */
+  while(!file.eof()) {
+
+    /* Deallocate local memory */
+    if (line != NULL)
+      delete [] line;
+
+    /* Read lines in a safe way */
     line = utils::readLine(file);
-    if(file.eof()) break;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    if (line == NULL)
+      continue;
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    if((line[0] == '>') && (line[3] == ';') && (firstLine)) {
-      firstLine = false;
+    /* Sequence ID line.
+     * Identification of these kind of lines is based on presence of ">" and ";"
+     * symbols at positions 0 and 3 respectively */
+    if((line[0] == '>') && (line[3] == ';') && (seqIdLine)) {
+      seqIdLine = false;
+      i += 1;
 
+      /* Store information about sequence datatype */
       str = strtok(line, ">;");
       seqsInfo[i].append(str, strlen(str));
 
+      /* and the sequence identifier itself */
       str = strtok(NULL, ">;");
       seqsName[i].append(str, strlen(str));
     }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    else if((!firstLine) && (!seqLines))
+    /* Line just after sequence Id line contains a textual description of
+     * the sequence. */
+    else if((!seqIdLine) && (!seqLines)) {
       seqLines = true;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      seqsInfo[i].append(line, strlen(line));
+    }
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    else if(seqLines) {
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      if(line[strlen(line)-1] == '*') {
+    /* Sequence lines itself */
+    else if (seqLines) {
+
+      /* Check whether a sequence end symbol '*' exists in current line.
+       * In that case, set appropriate flags to read a new sequence */
+      if (line[strlen(line) - 1] == '*') {
         seqLines = false;
-        firstLine = true;
+        seqIdLine = true;
       }
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* Process line */
       str = strtok(line, OTHDELIMITERS);
-      while(true) {
-        if(str == NULL) break;
+      while (str != NULL) {
         sequences[i].append(str, strlen(str));
         str = strtok(NULL, OTHDELIMITERS);
       }
     }
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    if((firstLine) && (!seqLines))
-      i++;
-    delete [] line;
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Close the input file */
   file.close();
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Deallocate dinamic memory */
+  if (line != NULL)
+    delete [] line;
+
   /* Check the matrix's content */
-  return fillMatrices(false);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  return fillMatrices(true);
 }
+
+/* *****************************************************************************
+ *
+ * END - Refactored code
+ *
+ * ************************************************************************** */
+
+
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 | void alignment::alignmentToFile(ostream &file)  |
@@ -1604,21 +1619,21 @@ void alignment::alignmentNBRF_PirToFile(ostream &file) {
     /* Write the sequence name as well as the sequence type */
     file << ">";
 
-    if((seqsInfo != NULL) && (iformat == oformat))
-      file << seqsInfo[i];
+    if((seqsInfo != NULL) && (iformat == oformat)) {
+      file << seqsInfo[i].substr(0, 2) << ";" << seqsName[i] << endl;
+      file << seqsInfo[i].substr(2) << endl;
 
-    else {
+    } else {
       getTypeAlignment();
       switch(dataType) {
         case DNAType: file << "DL"; break;
         case RNAType: file << "RL"; break;
         case AAType:  file << "P1"; break;
       }
+      file << ";" << seqsName[i] << endl;
+      file << seqsName[i] << " " << residuesNumber[i];
+      file << " bases" << endl;
     }
-
-    file << ";" << seqsName[i] << endl;
-    file << seqsName[i] << " " << residuesNumber[i];
-    file << " bases" << endl;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */

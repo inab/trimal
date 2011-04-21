@@ -42,9 +42,9 @@
 #define GAPPYOUT 1
 #define STRICT   2
 
-#define BUILD "2011-04-19"
+#define BUILD "2011-04-21"
 #define VERSION 1.3
-#define REVISION 9
+#define REVISION 10
 
 void menu(void);
 void examples(void);
@@ -1696,18 +1696,20 @@ void menu(void) {
   cout << "    -out <outputfile>        " << "Output alignment in the same input format (default stdout). (default input format)" << endl;
   cout << "    -htmlout <outputfile>    " << "Get a summary of trimal's work in an HTML file." << endl << endl;
 
-  cout << "    -clustal                 " << "Output file in CLUSTAL format" << endl;
-  cout << "    -fasta                   " << "Output file in FASTA format" << endl;
-  cout << "    -fasta_m10               " << "Output file in FASTA format. Sequences name length up to 10 characters." << endl;
   cout << "    -nbrf                    " << "Output file in NBRF/PIR format" << endl;
-  cout << "    -nexus                   " << "Output file in NEXUS format" << endl;
   cout << "    -mega                    " << "Output file in MEGA format" << endl;
+  cout << "    -nexus                   " << "Output file in NEXUS format" << endl;
+  cout << "    -clustal                 " << "Output file in CLUSTAL format" << endl << endl;
+
+  cout << "    -fasta                   " << "Output file in FASTA format" << endl;
+  cout << "    -fasta_m10               " << "Output file in FASTA format. Sequences name length up to 10 characters." << endl << endl;
+
+  cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl;
+  cout << "    -phylip_m10              " << "Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters." << endl;
   cout << "    -phylip_paml             " << "Output file in PHYLIP format compatible with PAML" << endl;
   cout << "    -phylip_paml_m10         " << "Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters." << endl;
   cout << "    -phylip3.2               " << "Output file in PHYLIP3.2 format" << endl;
-  cout << "    -phylip3.2_m10           " << "Output file in PHYLIP3.2 format. Sequences name length up to 10 characters." << endl;
-  cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl;
-  cout << "    -phylip_m10              " << "Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters." << endl << endl;
+  cout << "    -phylip3.2_m10           " << "Output file in PHYLIP3.2 format. Sequences name length up to 10 characters." << endl << endl;
 
   cout << "    -complementary           " << "Get the complementary alignment." << endl;
   cout << "    -colnumbering            " << "Get the relationship between the columns in the old and new alignment." << endl << endl;
@@ -1732,8 +1734,7 @@ void menu(void) {
   cout << "    -automated1              " << "Use a heuristic selection of the automatic method based on similarity statistics. "
                                           << "(see User Guide)." << endl;
   cout << "    -terminalonly            " << "Only columns out of internal boundaries (first and last column without gaps) are " << endl;
-  cout << "                             " << "candidated to be trimmed depending on the applied method" << endl << endl;
-
+  cout << "                             " << "candidated to be trimmed depending on the applied method" << endl;
   cout << "                             " << "(Optimized for Maximum Likelihood phylogenetic tree reconstruction)."<< endl << endl;
 
   cout << "    -resoverlap              " << "Minimum overlap of a positions with other positions in the column to be considered a "
