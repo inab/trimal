@@ -1,11 +1,11 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale 
-                 phylogenetics analyses 
+    trimAl v1.3: a tool for automated alignment trimming in large-scale
+                 phylogenetics analyses.
 
-    Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
-                       [scapella, tgabaldon]@crg.es
+    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+              [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
 
@@ -21,8 +21,8 @@
     You should have received a copy of the GNU General Public License
     along with trimAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #ifndef STATISTICSFILES_H
 #define STATISTICSFILES_H
@@ -36,9 +36,9 @@ using namespace std;
 
 /** \brief Class containing a sequences matrix
  *
- * This class stores the alignment sequences matrix. It provides 
- * methods to \b build the sequences matrix and print the matrix. 
- * It also provides methods for look to a column in the matrix and 
+ * This class stores the alignment sequences matrix. It provides
+ * methods to \b build the sequences matrix and print the matrix.
+ * It also provides methods for look to a column in the matrix and
  * for look to value at the position (row, column) in the matrix.
  */
 
@@ -51,17 +51,17 @@ class sequencesMatrix {
 
   /* Sequences Name */
   string *seqsName;
-  
+
   public:
 
   /* Constructors */
-  
+
   /** \brief Null constructor.
    *
-   * This construction method initializates all attributes 
+   * This construction method initializates all attributes
    * of the new object with 0 or NULL value.
    */
-  sequencesMatrix(void);  
+  sequencesMatrix(void);
 
   /* Copy constructor */
   sequencesMatrix(string *, string *, int, int);
@@ -97,7 +97,7 @@ class sequencesMatrix {
    * \param row where to look for a value.
    * \param numResidueseqMatrix Vector where storage a column's sequences matrix.
    *
-   * Method that looks to value in a row and storages a column's, corresponding to row, 
+   * Method that looks to value in a row and storages a column's, corresponding to row,
    * sequences matrix in a vector.
    */
   void getColumn(int, int, int *);
@@ -109,9 +109,9 @@ class sequencesMatrix {
   bool getSequence(string, int *);
 
   int getSeqNumber(void);
-	
-  int getResidNumber(void);	
-	
+
+  int getResidNumber(void);
+
 };
 
 #endif

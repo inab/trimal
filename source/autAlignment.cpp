@@ -1,11 +1,11 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale 
-                 phylogenetics analyses 
+    trimAl v1.3: a tool for automated alignment trimming in large-scale
+                 phylogenetics analyses.
 
-    Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
-                       [scapella, tgabaldon]@crg.es
+    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+              [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
 
@@ -21,9 +21,8 @@
     You should have received a copy of the GNU General Public License
     along with trimAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 #include "alignment.h"
 
 #define GAPPYOUT 1
@@ -44,7 +43,7 @@ void alignment::calculateSeqIdentity(void) {
   if(getTypeAlignment() == AAType) indet = 'X';
   else indet = 'N';
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Create the identities matrix to store the identity
    * score among the different sequences in the alig */
@@ -60,13 +59,13 @@ void alignment::calculateSeqIdentity(void) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 	/* It's a symmetric matrix, we copy the values that
 	 * have been already computed */
-    for(j = 0; j < i; j++) 
+    for(j = 0; j < i; j++)
       identities[i][j] = identities[j][i];
     identities[i][i] = 0;
 	/* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	/* For the rest of the sequences, we compute the 
+	/* For the rest of the sequences, we compute the
 	 * identity value between the selected sequence and
 	 * these ones */
     for(j = i + 1; j < sequenNumber; j++) {
@@ -76,12 +75,12 @@ void alignment::calculateSeqIdentity(void) {
 		 * we take it into account for the distance */
         if(((sequences[i][k] != indet) && (sequences[i][k] != '-')) ||
            ((sequences[j][k] != indet) && (sequences[j][k] != '-'))) {
-          dst++; 
+          dst++;
 		  /* If both position have the same residue, we
 		   * count a hit */
-          if(sequences[i][k] == sequences[j][k]) 
+          if(sequences[i][k] == sequences[j][k])
             hit++;
-        }		
+        }
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
       }
 	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -93,7 +92,7 @@ void alignment::calculateSeqIdentity(void) {
 	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
     }
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -114,7 +113,7 @@ int alignment::selectMethod(void) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Once we have the identities among all possible 
+  /* Once we have the identities among all possible
    * combinations between each pair of sequence. We
    * compute the average identity as well as the
    * average identity for each sequence with its most
@@ -143,10 +142,10 @@ int alignment::selectMethod(void) {
   if(avgSeq >= 0.55)      return GAPPYOUT;
   else if(avgSeq <= 0.38) return STRICT;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Sometimes we need to use more parameters to select
-   * the best automated method, always based on our 
+   * the best automated method, always based on our
    * benchmarks, to trim the input alignment */
   else {
     if(sequenNumber <= 20) return GAPPYOUT;
@@ -155,7 +154,7 @@ int alignment::selectMethod(void) {
       else return STRICT;
     }
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -193,16 +192,16 @@ void alignment::printSeqIdentity(void) {
       }
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */	
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     avgSeq += avg/(sequenNumber - 1);
     maxSeq += mx;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	
+
 	/* ***** ***** ***** ***** ***** ***** ***** ***** */
     maxs[i][0] = mx;
     maxs[i][1] = pos;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */	
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   avgSeq = avgSeq/sequenNumber;
@@ -210,7 +209,7 @@ void alignment::printSeqIdentity(void) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Once the method has computed all of different 
+  /* Once the method has computed all of different
    * values, it prints it */
   for(i = 0, maxLongName = 0; i < sequenNumber; i++)
     maxLongName = utils::max(maxLongName, seqsName[i].size());

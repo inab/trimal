@@ -1,5 +1,5 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
     trimAl v1.3: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
@@ -7,8 +7,8 @@
     readAl v1.3: a tool for automated alignment conversion among different
                  formats.
 
-    Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
-                       [scapella, tgabaldon]@crg.es
+    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+              [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl/readAl.
 
@@ -24,8 +24,8 @@
     You should have received a copy of the GNU General Public License
     along with trimAl/readAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 using namespace std;
 
 #include <float.h>
@@ -173,7 +173,7 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
   if(o_seqsInfo != NULL) {
     seqsInfo = new string[sequenNumber];
     for(i = 0; i < sequenNumber; i++)
-      seqsInfo[i] = seqsInfo[i];
+      seqsInfo[i] = o_seqsInfo[i];
   } else seqsInfo = NULL;
 
   saveResidues  = NULL;
@@ -223,7 +223,7 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
   sgaps  =     NULL;
   scons  =     NULL;
   seqMatrix =  NULL;
-  identities = NULL;
+  //~ identities = NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 

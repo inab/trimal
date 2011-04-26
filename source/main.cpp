@@ -1,11 +1,11 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
     trimAl v1.3: a tool for automated alignment trimming in large-scale
-                 phylogenetics analyses
+                 phylogenetics analyses.
 
-    Copyright (C) 2009-2011 Capella-Gutierrez S. and Gabaldon, T.
-                       [scapella, tgabaldon]@crg.es
+    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+              [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
 
@@ -21,8 +21,8 @@
     You should have received a copy of the GNU General Public License
     along with trimAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include <fstream>
 #include <iostream>
@@ -44,7 +44,7 @@
 
 #define BUILD "2011-04-21"
 #define VERSION 1.3
-#define REVISION 10
+#define REVISION 11
 
 void menu(void);
 void examples(void);
@@ -1661,8 +1661,8 @@ int main(int argc, char *argv[]){
 void menu(void) {
 
   cout << endl;
-  cout << "trimAl v" << VERSION << ".rev" << REVISION  << " build[" << BUILD << "]"
-       << ". Copyright (C) 2009-2011. Salvador Capella-Gutierrez and Toni Gabaldón."
+  cout << "trimAl v" << VERSION << ".rev" << REVISION  << " build[" << BUILD
+       << "]. 2009-2011. Salvador Capella-Gutierrez and Toni Gabaldón."
        << endl << endl;
 
   cout << "trimAl webpage: http://trimal.cgenomics.org" << endl << endl;
@@ -1671,8 +1671,8 @@ void menu(void) {
        << "it under the terms of the GNU General Public License as published by " << endl
        << "the Free Software Foundation, the last available version." << endl << endl;
 
-  cout << "Please cite:"
-       << "\n\t\ttrimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses."
+  cout << "Please cite:" << endl
+       << "\t\ttrimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses."
 	   << "\n\t\tSalvador Capella-Gutierrez; Jose M. Silla-Martinez; Toni Gabaldon."
 	   << "\n\t\tBioinformatics 2009, 25:1972-1973." << endl << endl;
 

@@ -1,11 +1,11 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
     readAl v1.3: a tool for automated alignment conversion among different
                  formats.
 
-    Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
-                       [scapella, tgabaldon]@crg.es
+    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+              [scapella, tgabaldon]@crg.es
 
     This file is part of readAl.
 
@@ -21,8 +21,8 @@
     You should have received a copy of the GNU General Public License
     along with readAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include <stdlib.h>
 #include <string.h>
@@ -33,7 +33,7 @@
 
 #define BUILD "2011-04-21"
 #define VERSION 1.3
-#define REVISION 10
+#define REVISION 11
 
 #define DNAType 1
 #define RNAType 2
@@ -306,8 +306,8 @@ int main(int argc, char *argv[]){
 void menu(void) {
 
   cout << endl;
-  cout << "readAl v" << VERSION << ".rev" << REVISION << " build[" << BUILD << "]"
-       << ". Copyright (C) 2009-2011. Salvador Capella-Gutierrez and Toni Gabaldón."
+  cout << "readAl v" << VERSION << ".rev" << REVISION << " build[" << BUILD
+       << "]. 2009-2011. Salvador Capella-Gutierrez and Toni Gabaldón."
        << endl << endl;
 
   cout << "readAl webpage: http://trimal.cgenomics.org" << endl << endl;

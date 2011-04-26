@@ -1,11 +1,11 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale 
-                 phylogenetics analyses 
+    trimAl v1.3: a tool for automated alignment trimming in large-scale
+                 phylogenetics analyses.
 
-    Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
-                       [scapella, tgabaldon]@crg.es
+    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+              [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
 
@@ -21,8 +21,8 @@
     You should have received a copy of the GNU General Public License
     along with trimAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #ifndef STATISTICS_CONSERVATION_H
 #define STATISTICS_CONSERVATION_H

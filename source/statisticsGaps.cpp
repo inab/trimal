@@ -1,11 +1,11 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale 
-                 phylogenetics analyses 
+    trimAl v1.3: a tool for automated alignment trimming in large-scale
+                 phylogenetics analyses.
 
-    Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
-                       [scapella, tgabaldon]@crg.es
+    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+              [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
 
@@ -21,8 +21,8 @@
     You should have received a copy of the GNU General Public License
     along with trimAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "statisticsGaps.h"
 
@@ -55,7 +55,7 @@ statisticsGaps::statisticsGaps(string *alignmentMatrix, int species, int aminos,
   utils::initlVect(gapsInColumn, columns, 0);
 
   aminosXInColumn =    new int[columns];
-  utils::initlVect(aminosXInColumn, aminos, 0);	
+  utils::initlVect(aminosXInColumn, aminos, 0);
 
   gapsWindow =         new int[columns];
   utils::initlVect(gapsWindow, columns, 0);
@@ -95,7 +95,7 @@ statisticsGaps::statisticsGaps(void) {
   gapsWindow = NULL;
 
   columns = 	  0;
-  columnLength  = 0;	
+  columnLength  = 0;
   maxGaps = 	  0;
   halfWindow = 	  0;
   dataType =      0;
@@ -165,7 +165,7 @@ bool statisticsGaps::applyWindow(int _halfWindow) {
     numColumnsWithGaps[gapsWindow[i]]++;
 
     /* Update the max number of gaps in the alignment, if neccesary */
-    if(gapsWindow[i] > maxGaps) 
+    if(gapsWindow[i] > maxGaps)
       maxGaps = gapsWindow[i];
   }
   return true;
@@ -289,14 +289,14 @@ int statisticsGaps::calcCutPointMixSlope(void) {
 
       /* .- second slope current and second slope earlier previus points. */
       if(secondSlopeVector[pprev] != -1.0) {
-        if(delta < (secondSlopeVector[act]/secondSlopeVector[pprev])) { 
+        if(delta < (secondSlopeVector[act]/secondSlopeVector[pprev])) {
           delta = secondSlopeVector[act]/secondSlopeVector[pprev];
           row = pprev;
         }
       }
 
       /* ... is better that current maxSlope then we modify the maxSlope with the best ratio. */
-      if(delta > maxSlope) { 
+      if(delta > maxSlope) {
         maxSlope = delta;
         max = row;
       }
@@ -334,7 +334,7 @@ int statisticsGaps::calcCutPoint2ndSlope(void) {
   while(act < maxIter) {
 
     /* We look for a first point to second slope. */
-    while((numColumnsWithGaps[act]) == 0) act++; 
+    while((numColumnsWithGaps[act]) == 0) act++;
     pprev = act; if((act+1) >= maxIter) break;
 
     /* We look for a first point to first slope. */
@@ -386,9 +386,9 @@ void statisticsGaps::printGapsColumns(void) {
   vectAux = new int[columns];
 
   /* We decide about the information's source then we get the information. */
-  if(halfWindow == 0) 
+  if(halfWindow == 0)
     utils::copyVect(gapsInColumn, vectAux, columns);
-  else 
+  else
    utils::copyVect(gapsWindow, vectAux, columns);
 
   /* Fix the precision of output */
@@ -400,7 +400,7 @@ void statisticsGaps::printGapsColumns(void) {
 
   /* Show the information that have been requered */
   for(int i = 0; i < columns; i++)
-    cout << "  " << setw(5) << i << "\t\t" << setw(10) << (vectAux[i] * 100.0)/columnLength  
+    cout << "  " << setw(5) << i << "\t\t" << setw(10) << (vectAux[i] * 100.0)/columnLength
          << "\t" << setw(7) << 1 -((vectAux[i] * 1.0)/columnLength) << endl;
 
   /* Finally, we deallocate the local memory */
@@ -429,12 +429,12 @@ void statisticsGaps::printGapsAcl(void) {
   for(i = 0, acm = 0; i <= maxGaps; i++) {
 
     /* If the columns' number with this gaps' number is not equal to zero, we will count the columns. */
-    if(numColumnsWithGaps[i] != 0) { 
+    if(numColumnsWithGaps[i] != 0) {
 
       /* Compute and prints the accumulative values for the gaps in the alignment. */
       acm += numColumnsWithGaps[i];
       cout << "  " << setiosflags(ios::left) << numColumnsWithGaps[i] << "\t\t" << setw(10) << (numColumnsWithGaps[i] * 100.0)/columns
-           << "\t\t" << acm << "\t\t" << setw(10) << (acm * 100.0)/columns 
+           << "\t\t" << acm << "\t\t" << setw(10) << (acm * 100.0)/columns
            << "\t\t" << i << "\t\t" << setw(10) << (i * 1.0)/columnLength << "\t"<< setw(10) << 1 - ((i * 1.0)/columnLength) << endl;
     }
   }

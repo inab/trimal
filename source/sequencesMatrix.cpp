@@ -1,11 +1,11 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale 
-                 phylogenetics analyses 
+    trimAl v1.3: a tool for automated alignment trimming in large-scale
+                 phylogenetics analyses.
 
-    Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
-                       [scapella, tgabaldon]@crg.es
+    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+              [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
 
@@ -21,8 +21,8 @@
     You should have received a copy of the GNU General Public License
     along with trimAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "sequencesMatrix.h"
 
@@ -43,7 +43,7 @@ sequencesMatrix::sequencesMatrix(string *alignmentMatrix, string *alignmentSeqsN
   seqsNumber = sequences;
   resNumber =  residues;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   seqsName = new string[seqsNumber];
   for(i = 0; i < seqsNumber; i++)
@@ -52,7 +52,7 @@ sequencesMatrix::sequencesMatrix(string *alignmentMatrix, string *alignmentSeqsN
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   matrix = new int*[seqsNumber];
-  for(i = 0; i < seqsNumber; i++) { 
+  for(i = 0; i < seqsNumber; i++) {
     matrix[i] = new int[resNumber];
     utils::initlVect(matrix[i], resNumber, 0);
   }
@@ -66,7 +66,7 @@ sequencesMatrix::sequencesMatrix(string *alignmentMatrix, string *alignmentSeqsN
       }
     }
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 sequencesMatrix &sequencesMatrix::operator=(const sequencesMatrix &old) {
@@ -84,7 +84,7 @@ sequencesMatrix &sequencesMatrix::operator=(const sequencesMatrix &old) {
       seqsName[i] = old.seqsName[i];
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */	
+	/* ***** ***** ***** ***** ***** ***** ***** ***** */
     matrix = new int*[seqsNumber];
     for(i = 0; i < seqsNumber; i++) {
       matrix[i] = new int[resNumber];
@@ -100,7 +100,7 @@ sequencesMatrix::~sequencesMatrix(void) {
   int i;
 
   if(matrix != NULL) {
-    for(i = 0; i < seqsNumber; i++) 
+    for(i = 0; i < seqsNumber; i++)
       delete matrix[i];
     delete [] matrix;
   }
@@ -110,7 +110,7 @@ sequencesMatrix::~sequencesMatrix(void) {
 
   seqsNumber = 0;
   resNumber = 0;
-  
+
   matrix = NULL;
   seqsName = NULL;
 }
@@ -119,7 +119,7 @@ void sequencesMatrix::printMatrix(void) {
   int i, j, k;
 
   for(i = 0; i < resNumber; i += 20) {
-    for(j = 0; j < seqsNumber; j++) {		
+    for(j = 0; j < seqsNumber; j++) {
       for(k = i; k < (20 + i) && k < resNumber; k++) {
         cout << setw(4) << matrix[j][k] << " ";
       }
@@ -159,20 +159,20 @@ void sequencesMatrix::getColumn(int value, int row, int *columnSeqMatrix) {
 
 void sequencesMatrix::setOrder(int *order) {
   int i, j, **resg;
-    
+
   resg = new int*[seqsNumber];
   for(i = 0; i < seqsNumber; i++)
     resg[i] = new int[resNumber];
-  
+
   for(i = 0; i < seqsNumber; i++)
     for(j = 0; j < resNumber; j++)
 	  resg[i][j] = matrix[order[i]][j];
 
-  for(i = 0; i < seqsNumber; i++) { 
+  for(i = 0; i < seqsNumber; i++) {
     for(j = 0; j < resNumber; j++)
       matrix[i][j] = resg[i][j];
     delete [] resg[i];
-  }  
+  }
   delete [] resg;
 }
 
@@ -189,19 +189,19 @@ bool sequencesMatrix::getSequence(string seqName, int *sequence) {
   if(pos == seqsNumber)
 	return false;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   for(i = 0; i < resNumber; i++)
 	sequence[i] = matrix[pos][i];
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   return true;
 }
 
 int  sequencesMatrix::getSeqNumber(void) {
   return seqsNumber;
 }
-  
+
 int sequencesMatrix::getResidNumber(void) {
   return resNumber;
 }

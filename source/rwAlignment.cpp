@@ -1,5 +1,5 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
     trimAl v1.3: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
@@ -7,8 +7,8 @@
     readAl v1.3: a tool for automated alignment conversion among different
                  formats.
 
-    Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
-                       [scapella, tgabaldon]@crg.es
+    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+              [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl/readAl.
 
@@ -24,8 +24,8 @@
     You should have received a copy of the GNU General Public License
     along with trimAl/readAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "alignment.h"
 #include "utils.h"
@@ -43,225 +43,228 @@ extern int errno;
 using namespace std;
 
 bool alignment::fillMatrices(bool aligned) {
+  /* Function to determine if a set of sequences, that can be aligned or not,
+   * have been correctly load and are free of errors. */
   int i, j;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Initialize some variables */
   residuesNumber = new int[sequenNumber];
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   for(i = 0; i < sequenNumber; i++)
     residuesNumber[i] = sequences[i].size();
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  for(i = 1; i < sequenNumber; i++)
-    if(residuesNumber[i] != residuesNumber[i-1])
-      break;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-   if (i != sequenNumber)
-    isAligned = false;
-   else
-    isAligned = true;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** Fill some info ***** ***** ***** */
-  if(residNumber == 0)
-    residNumber = residuesNumber[0];
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** Check content ***** ***** ***** */
-  if(aligned) {
-    for(i = 0; i < sequenNumber; i++) {
-      if(residuesNumber[i] != residNumber) {
-        cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" (" << residuesNumber[i]
-             << ") does not have the same number of residues fixed by the alignment (" << residNumber << ").";
-        return false;
-      }
-    }
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if((aligned) || (isAligned)) {
-
-    /* Asign its position to each column. */
-    saveResidues = new int[residNumber];
-    for(i = 0; i < residNumber; i++)
-    saveResidues[i] = i;
-
-    /* Asign its position to each sequence. */
-    saveSequences = new int[sequenNumber];
-    for(i = 0; i < sequenNumber; i++)
-    saveSequences[i] = i;
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Check whether there are any unknow/no allowed character in the sequences */
   for(i = 0; i < sequenNumber; i++)
     for(j = 0; j < residuesNumber[i]; j++)
       if((!isalpha(sequences[i][j])) && (!ispunct(sequences[i][j]))) {
-        cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has an unknow (" << sequences[i][j]
-             <<") character.";
+        cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has an "
+          << "unknown (" << sequences[i][j] << ") character." << endl;
         return false;
       }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Check whether all sequences have same size or not */
+  for(i = 1; i < sequenNumber; i++)
+    if(residuesNumber[i] != residuesNumber[i-1])
+      break;
+  /* Set an appropriate flag for indicating if sequences are aligned or not */
+  isAligned = (i != sequenNumber) ? false : true;
+
+  /* Warm about those cases where sequences should be aligned
+   * and there are not */
+  if (aligned and !isAligned) {
+    cerr << endl << "ERROR: Sequences should be aligned (all with same length) "
+      << "and there are not. Check your input alignment" << endl;
+    return false;
+  }
+
+  /* Full-fill some information about input alignment */
+  if(residNumber == 0)
+    residNumber = residuesNumber[0];
+
+  /* Check whether aligned sequences have the length fixed for the input alig */
+  for(i = 0; (i < sequenNumber) and (aligned); i++) {
+    if(residuesNumber[i] != residNumber) {
+      cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" ("
+        << residuesNumber[i] << ") does not have the same number of residues "
+        << "fixed by the alignment (" << residNumber << ")." << endl;
+      return false;
+    }
+  }
+
+  /* If the sequences are aligned, initialize some additional variables.
+   * These variables will be useful for posterior analysis */
+  if((aligned) || (isAligned)) {
+
+    /* Asign its position to each column. That will be used to determine which
+     * columns should be kept in output alignment after applying any method
+     * and which columns should not */
+    saveResidues = new int[residNumber];
+    for(i = 0; i < residNumber; i++)
+      saveResidues[i] = i;
+
+    /* Asign its position to each sequence. Similar to the columns numbering
+     * process, assign to each sequence its position is useful to know which
+     * sequences will be in the output alignment */
+    saveSequences = new int[sequenNumber];
+    for(i = 0; i < sequenNumber; i++)
+      saveSequences[i] = i;
+  }
+
+  /* Return an flag indicating that everything is fine */
   return true;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+}
+
+void alignment::getSequences(ostream &file) {
+  /* Get only residues sequences from input alignment */
+
+  int i, j;
+  string *tmpMatrix;
+
+  /* Allocate local memory for generating output alignment */
+  tmpMatrix = new string[sequenNumber];
+
+  /* Depending on alignment orientation: forward or reverse. Copy directly
+   * sequence information or get firstly the reversed sequences and then copy
+   * it into local memory. Once orientation has been determined, remove gaps
+   * from resuting sequences */
+  for(i = 0; i < sequenNumber; i++)
+    tmpMatrix[i] = (!reverse) ? utils::removeCharacter('-', sequences[i]) : \
+      utils::removeCharacter('-', utils::getReverse(sequences[i]));
+
+  /* Print output set of sequences in FASTA format*/
+  for(i = 0; i < sequenNumber; i++) {
+    file << ">" << seqsName[i] << endl;
+    for(j = 0; j < (int) tmpMatrix[i].size(); j += 60)
+      file << tmpMatrix[i].substr(j, 60) << endl;
+    file << endl;
+  }
+
+  /* Deallocate local memory */
+  delete [] tmpMatrix;
 }
 
 int alignment::formatInputAlignment(char *alignmentFile) {
+  /* Guess input alignment format */
 
   char c, *firstWord = NULL, *line = NULL;
   int format = 0, blocks = 0;
   ifstream file;
   string nline;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
-  if(!utils::checkFile(file)) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  if(!utils::checkFile(file))
+    return false;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Read lines in a safer way */
-  try {
+  /* Read the first line in a safer way */
   line = utils::readLine(file);
+  if (line == NULL)
+    return false;
   firstWord = strtok(line, OTHDELIMITERS);
-  } catch (exception& e) {
-    cerr << "Standard exception: " << e.what() << endl;
-  }
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Clustal Format */
   if((!strcmp(firstWord, "CLUSTAL")) || (!strcmp(firstWord, "clustal")))
     format = 1;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* NBRF/PIR Format */
   else if(firstWord[0] == '>' && firstWord[3] == ';')
     format = 3;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Fasta Format */
   else if(firstWord[0] == '>')
     format = 8;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Nexus Format */
   else if((!strcmp(firstWord, "#NEXUS")) || (!strcmp(firstWord, "#nexus")))
     format = 17;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Mega Format */
   else if((!strcmp(firstWord, "#MEGA")) || (!strcmp(firstWord, "#mega"))) {
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Determine specific mega format: sequential or interleaved.
+     * Counting the number of blocks (set of lines starting by "#") in
+     * the input file. */
     blocks = 0;
-    do { file.read(&c, 1); } while((c != '#') && (!file.eof()));
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    do {
+      file.read(&c, 1);
+    } while((c != '#') && (!file.eof()));
 
     do {
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      while((c != '\n') && (!file.eof())) file.read(&c, 1);
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      while((c != '\n') && (!file.eof()))
+        file.read(&c, 1);
       file.read(&c, 1);
-      if(c == '#') blocks++;
+      if(c == '#')
+        blocks++;
     } while((c != '\n') && (!file.eof()));
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* Mega NonInterleaved */
-    if(!blocks) format = 22;
-
-    /* Mega Interleaved */
-    else format = 21;
+    /* MEGA Sequential (22) or Interleaved (21) */
+    format = (!blocks) ? 22 : 21;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Phylip Format */
   else {
+    /* Determine specific phylip format: sequential or interleaved. */
+
+    /* Get number of sequences and residues */
     sequenNumber = atoi(firstWord);
     firstWord = strtok(NULL, DELIMITERS);
-
     if(firstWord != NULL)
       residNumber = atoi(firstWord);
 
+    /* If there is only one sequence, use by default sequential format since
+     * it is impossible to determine exactly which phylip format is */
     if((sequenNumber == 1) && (residNumber != 0))
-	  format = 12;
+      format = 12;
 
+    /* If there are more than one sequence, analyze sequences distribution to
+     * determine its format. */
     else if((sequenNumber != 0) && (residNumber != 0)) {
 
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      /* Read lines in a safer way */
-      delete [] line;
+      /* Read line in a safer way */
+      if (line != NULL)
+        delete [] line;
       line = utils::readLine(file);
+
       firstWord = strtok(line, DELIMITERS);
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      if(firstWord != NULL) blocks = 1;
+      if(firstWord != NULL)
+        blocks = 1;
 
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      while(true) {
+      firstWord = strtok(NULL, DELIMITERS);
+      while(firstWord != NULL) {
+        blocks++;
         firstWord = strtok(NULL, DELIMITERS);
-        if(firstWord != NULL) blocks++;
-        else break;
       }
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      /* Read lines in a safer way */
-      delete [] line;
+      /* Read line in a safer way */
+      if (line != NULL)
+        delete [] line;
       line = utils::readLine(file);
+
       firstWord = strtok(line, DELIMITERS);
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      if(firstWord != NULL) blocks--;
+      if(firstWord != NULL)
+        blocks--;
 
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      while(true) {
+      firstWord = strtok(NULL, DELIMITERS);
+      while(firstWord != NULL) {
+        blocks--;
         firstWord = strtok(NULL, DELIMITERS);
-        if(firstWord != NULL) blocks--;
-        else break;
       }
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-      /* Phylip Format */
-      if(!blocks) format = 12;
-
-      /* Phylip3.2 Format */
-      else format = 11;
+      /* Phylip Interleaved (12) or Sequential (11) */
+      format = (!blocks) ? 12 : 11;
     }
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Close the input file and delete dinamic memory */
   file.close();
-  delete [] line;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  if (line != NULL)
+    delete [] line;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Return the input alignment format */
   return format;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
-/* *****************************************************************************
- *
- * START - Refactored code
- *
- * ************************************************************************** */
-
 bool alignment::loadPhylipAlignment(char *alignmentFile) {
+  /* PHYLIP/PHYLIP 4 (Sequential) file format parser */
 
   char *str, *line = NULL;
   ifstream file;
@@ -359,6 +362,7 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
 }
 
 bool alignment::loadPhylip3_2Alignment(char *alignmentFile) {
+  /* PHYLIP 3.2 (Interleaved) file format parser */
 
   int i, blocksFirstLine, firstLine = true;
   char *str, *line = NULL;
@@ -469,6 +473,7 @@ bool alignment::loadPhylip3_2Alignment(char *alignmentFile) {
 }
 
 bool alignment::loadClustalAlignment(char *alignmentFile) {
+  /* CLUSTAL file format parser */
 
   int i, seqLength, pos, firstBlock;
   char *str, *line = NULL;
@@ -639,6 +644,7 @@ bool alignment::loadClustalAlignment(char *alignmentFile) {
 }
 
 bool alignment::loadFastaAlignment(char *alignmentFile) {
+  /* FASTA file format parser */
 
   char *str, *line = NULL;
   ifstream file;
@@ -731,6 +737,7 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
 }
 
 bool alignment::loadNexusAlignment(char *alignmentFile) {
+  /* NEXUS file format parser */
 
   char *frag = NULL, *str = NULL, *line = NULL;
   int i, pos, state, firstBlock;
@@ -853,7 +860,7 @@ bool alignment::loadNexusAlignment(char *alignmentFile) {
       str = strtok(NULL, OTH2DELIMITERS);
     }
 
-    /* move sequences pointer to next one. It if it is last one, move it to
+    /* Move sequences pointer to next one. It if it is last one, move it to
      * the beginning and set the first block to false for avoiding to rewrite
      * sequences name */
     pos = (pos + 1) % sequenNumber;
@@ -873,6 +880,7 @@ bool alignment::loadNexusAlignment(char *alignmentFile) {
 }
 
 bool alignment::loadMegaNonInterleavedAlignment(char *alignmentFile) {
+  /* MEGA sequential file format parser */
 
   int i, firstLine = true;
   char *frag = NULL, *str = NULL, *line = NULL;
@@ -1066,6 +1074,7 @@ bool alignment::loadMegaNonInterleavedAlignment(char *alignmentFile) {
 }
 
 bool alignment::loadMegaInterleavedAlignment(char *alignmentFile) {
+  /* MEGA interleaved file format parser */
 
   char *frag = NULL, *str = NULL, *line = NULL;
   int i, firstBlock = true;
@@ -1242,6 +1251,7 @@ bool alignment::loadMegaInterleavedAlignment(char *alignmentFile) {
 }
 
 bool alignment::loadNBRF_PirAlignment(char *alignmentFile) {
+  /* NBRF/PIR file format parser */
 
   bool seqIdLine, seqLines;
   char *str, *line = NULL;
@@ -1359,422 +1369,307 @@ bool alignment::loadNBRF_PirAlignment(char *alignmentFile) {
   return fillMatrices(true);
 }
 
-/* *****************************************************************************
- *
- * END - Refactored code
- *
- * ************************************************************************** */
-
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-| void alignment::alignmentToFile(ostream &file)  |
-|    Private method that put the alignment on the    |
-|    parameter stream in PHYLIP2               |
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
 void alignment::alignmentPhylipToFile(ostream &file) {
+  /* Generate output alignment in PHYLIP/PHYLIP 4 format (sequential) */
 
   int i, j, maxLongName;
   string *tmpMatrix;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(!isAligned) {
-    cerr << endl << "ERROR: The input file does not ";
-    cerr << "have the sequences aligned." << endl << endl;
-    return;
+  /* Check whether sequences in the alignment are aligned or not.
+   * Warn about it if there are not aligned. */
+  if (!isAligned) {
+    cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
+      << "not compatible with unaligned sequences." << endl << endl;
+    return ;
   }
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */
+  /* Allocate local memory for generating output alignment */
   tmpMatrix = new string[sequenNumber];
-  for(i = 0; i < sequenNumber; i++) {
-    if(!reverse) tmpMatrix[i] = sequences[i];
-    else tmpMatrix[i] = utils::getReverse(sequences[i]);
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Include in the first line the sequenNumber and the aminoacids of the alignment */
-  file << " " << sequenNumber << " " << residNumber << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Depending on alignment orientation: forward or reverse. Copy directly
+   * sequence information or get firstly the reversed sequences and then
+   * copy it into local memory */
+  for(i = 0; i < sequenNumber; i++)
+    tmpMatrix[i] = (!reverse) ? sequences[i] : utils::getReverse(sequences[i]);
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Look for the maximum sequenNumber name size */
+  /* Depending on if short name flag is activated (limits sequence name up to
+   * 10 characters) or not, get maximum sequence name length */
   maxLongName = PHYLIPDISTANCE;
   for(i = 0; (i < sequenNumber) && (!shortNames); i++)
     maxLongName = utils::max(maxLongName, seqsName[i].size());
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Put on the stream the sequenNumber names and the first 60 aminoacids block */
-  for(i = 0; i < sequenNumber; i++) {
-	if(!shortNames)    file << setw(maxLongName + 3) << left << seqsName[i];
-	else file << setw(maxLongName + 3) << left << seqsName[i].substr(0, 10);
-    file << tmpMatrix[i].substr(0, 60)  << endl;
-  }
+  /* Generating output alignment */
+  /* First Line: Sequences Number & Residued Number */
+  file << " " << sequenNumber << " " << residNumber << endl;
+
+  /* First Block: Sequences Names & First 60 residues */
+  for(i = 0; i < sequenNumber; i++)
+    file << setw(maxLongName + 3) << left << seqsName[i].substr(0, maxLongName)
+      << tmpMatrix[i].substr(0, 60) << endl;
   file << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Put on the stream the rest of the blocks */
+  /* Rest of blocks: Print 60 residues per each blocks of sequences */
   for(i = 60; i < residNumber; i += 60) {
-    for(j = 0; j < sequenNumber; j++) {
+    for(j = 0; j < sequenNumber; j++)
       file << tmpMatrix[j].substr(i, 60) << endl;
-    }
     file << endl;
   }
   file << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate local memory */
   delete [] tmpMatrix;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 void alignment::alignmentPhylip3_2ToFile(ostream &file) {
+  /* Generate output alignment in PHYLIP 3.2 format (interleaved) */
 
   int i, j, k, maxLongName;
   string *tmpMatrix;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(!isAligned) {
-    cerr << endl << "ERROR: The input file does not ";
-    cerr << "have the sequences aligned." << endl << endl;
-    return;
+  /* Check whether sequences in the alignment are aligned or not.
+   * Warn about it if there are not aligned. */
+  if (!isAligned) {
+    cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
+      << "not compatible with unaligned sequences." << endl << endl;
+    return ;
   }
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */
+  /* Allocate local memory for generating output alignment */
   tmpMatrix = new string[sequenNumber];
-  for(i = 0; i < sequenNumber; i++) {
-    if(!reverse) tmpMatrix[i] = sequences[i];
-    else tmpMatrix[i] = utils::getReverse(sequences[i]);
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Include in the first line the sequenNumber and the aminoacids of the alignment */
-  file << " " << sequenNumber << " " << residNumber << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Depending on alignment orientation: forward or reverse. Copy directly
+   * sequence information or get firstly the reversed sequences and then
+   * copy it into local memory */
+  for(i = 0; i < sequenNumber; i++)
+    tmpMatrix[i] = (!reverse) ? sequences[i] : utils::getReverse(sequences[i]);
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Look for the maximum sequenNumber name size */
+  /* Depending on if short name flag is activated (limits sequence name up to
+   * 10 characters) or not, get maximum sequence name length */
   maxLongName = PHYLIPDISTANCE;
   for(i = 0; (i < sequenNumber) && (!shortNames); i++)
     maxLongName = utils::max(maxLongName, seqsName[i].size());
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Put on the stream the sequenNumber names and the first 60 aminoacids block */
+  /* Generating output alignment */
+  /* First Line: Sequences Number & Residued Number */
+  file << " " << sequenNumber << " " << residNumber << endl;
+
+  /* Alignment */
+  /* For each sequence, print its identifier and then the sequence itself in
+   * blocks of 50 residues */
   for(i = 0; i < sequenNumber; i++) {
-	if(!shortNames)    file << setw(maxLongName + 3) << left << seqsName[i];
-	else file << setw(maxLongName + 3) << left << seqsName[i].substr(0, 10);
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Sequence Name */
+    file << setw(maxLongName + 3) << left << seqsName[i].substr(0, maxLongName);
+    /* Sequence. Each line contains a block of 5 times 10 residues. */
     for(j = 0; j < residNumber; j += 50) {
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      for(k = j; k < residNumber && k < j + 50; k += 10)
+      for(k = j; (k < residNumber) && (k < (j + 50)); k += 10)
         file << sequences[i].substr(k, 10) << " ";
       file << endl;
-
-      if(j + 50 < residNumber)
+      /* If the sequences end has not been reached, print black spaces
+       * to follow format specifications */
+      if((j + 50) < residNumber)
         file << setw(maxLongName + 3) << " ";
     }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Print a blank line to mark sequences separation */
     file << endl;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate local memory */
   delete [] tmpMatrix;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
-
 void alignment::alignmentPhylip_PamlToFile(ostream &file) {
+  /* Generate output alignment in PHYLIP format compatible with PAML program */
 
   int i, maxLongName;
   string *tmpMatrix;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(!isAligned) {
-    cerr << endl << "ERROR: The input file does not ";
-    cerr << "have the sequences aligned." << endl << endl;
-    return;
+  /* Check whether sequences in the alignment are aligned or not.
+   * Warn about it if there are not aligned. */
+  if (!isAligned) {
+    cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
+      << "not compatible with unaligned sequences." << endl << endl;
+    return ;
   }
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */
+  /* Allocate local memory for generating output alignment */
   tmpMatrix = new string[sequenNumber];
-  for(i = 0; i < sequenNumber; i++) {
-    if(!reverse) tmpMatrix[i] = sequences[i];
-    else tmpMatrix[i] = utils::getReverse(sequences[i]);
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Include in the first line the sequenNumber and the aminoacids of the alignment */
-  file << " " << sequenNumber << " " << residNumber << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Depending on alignment orientation: forward or reverse. Copy directly
+   * sequence information or get firstly the reversed sequences and then
+   * copy it into local memory */
+  for(i = 0; i < sequenNumber; i++)
+    tmpMatrix[i] = (!reverse) ? sequences[i] : utils::getReverse(sequences[i]);
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Look for the maximum sequenNumber name size */
+  /* Depending on if short name flag is activated (limits sequence name up to
+   * 10 characters) or not, get maximum sequence name length */
   maxLongName = PHYLIPDISTANCE;
   for(i = 0; (i < sequenNumber) && (!shortNames); i++)
     maxLongName = utils::max(maxLongName, seqsName[i].size());
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Put on the stream the sequence name, limited to
-     the 10 first characters, and the sequence */
-  for(i = 0; i < sequenNumber; i++) {
-	if(!shortNames)    file << setw(maxLongName + 3) << left << seqsName[i];
-	else file << setw(maxLongName + 3) << left << seqsName[i].substr(0, 10);
-    file << sequences[i] << endl;
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Generating output alignment */
+  /* First Line: Sequences Number & Residued Number */
+  file << " " << sequenNumber << " " << residNumber << endl;
+
+  /* Print alignment */
+  /* Print sequences name follow by the sequence itself in the same line */
+  for(i = 0; i < sequenNumber; i++)
+    file << setw(maxLongName + 3) << left << seqsName[i].substr(0, maxLongName)
+      << sequences[i] << endl;
   file << endl;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate local memory */
   delete [] tmpMatrix;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 void alignment::alignmentClustalToFile(ostream &file) {
+  /* Generate output alignment in CLUSTAL format */
 
   int i, j, maxLongName = 0;
   string *tmpMatrix;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(!isAligned) {
-    cerr << endl << "ERROR: The input file does not ";
-    cerr << "have the sequences aligned." << endl << endl;
-    return;
+  /* Check whether sequences in the alignment are aligned or not.
+   * Warn about it if there are not aligned. */
+  if (!isAligned) {
+    cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
+      << "not compatible with unaligned sequences." << endl << endl;
+    return ;
   }
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */
+  /* Allocate local memory for generating output alignment */
   tmpMatrix = new string[sequenNumber];
-  for(i = 0; i < sequenNumber; i++) {
-    if(!reverse) tmpMatrix[i] = sequences[i];
-    else tmpMatrix[i] = utils::getReverse(sequences[i]);
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if((aligInfo.size() != 0)  && (iformat == oformat))
-    file << aligInfo;
-  else
-    file << "CLUSTAL W (1.8) multiple sequence alignment";
-  file << endl << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Look for the maximum sequenNumber name size */
+  /* Depending on alignment orientation: forward or reverse. Copy directly
+   * sequence information or get firstly the reversed sequences and then
+   * copy it into local memory */
   for(i = 0; i < sequenNumber; i++)
+    tmpMatrix[i] = (!reverse) ? sequences[i] : utils::getReverse(sequences[i]);
+
+  /* Compute maximum sequences name length */
+  for(i = 0; (i < sequenNumber) && (!shortNames); i++)
     maxLongName = utils::max(maxLongName, seqsName[i].size());
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Print the sequence name as well as 60 residue blocks */
+  /* Print alignment header */
+  if((aligInfo.size() != 0)  && (iformat == oformat))
+    file << aligInfo << endl << endl;
+  else
+    file << "CLUSTAL multiple sequence alignment" << endl << endl;
+
+  /* Print alignment itself */
+  /* Print as many blocks as it is needed of lines composed
+   * by sequences name and 60 residues */
   for(j = 0; j < residNumber; j += 60) {
-    file << endl;
-    for(i = 0; i < sequenNumber; i++) {
-      file << setw(maxLongName + 5) << left << seqsName[i];
-      file << tmpMatrix[i].substr(j, 60) << endl;
-    }
-    file << endl;
+    for(i = 0; i < sequenNumber; i++)
+      file << setw(maxLongName + 5) << left << seqsName[i]
+        << tmpMatrix[i].substr(j, 60) << endl;
+    file << endl << endl;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate local memory */
   delete [] tmpMatrix;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-}
-
-
-void alignment::alignmentNBRF_PirToFile(ostream &file) {
-
-  string *tmpMatrix;
-  int i, j, k;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */
-  tmpMatrix = new string[sequenNumber];
-  for(i = 0; i < sequenNumber; i++) {
-    if(!reverse) tmpMatrix[i] = sequences[i];
-    else tmpMatrix[i] = utils::getReverse(sequences[i]);
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  for(i = 0; i < sequenNumber; i++) {
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Write the sequence name as well as the sequence type */
-    file << ">";
-
-    if((seqsInfo != NULL) && (iformat == oformat)) {
-      file << seqsInfo[i].substr(0, 2) << ";" << seqsName[i] << endl;
-      file << seqsInfo[i].substr(2) << endl;
-
-    } else {
-      getTypeAlignment();
-      switch(dataType) {
-        case DNAType: file << "DL"; break;
-        case RNAType: file << "RL"; break;
-        case AAType:  file << "P1"; break;
-      }
-      file << ";" << seqsName[i] << endl;
-      file << seqsName[i] << " " << residuesNumber[i];
-      file << " bases" << endl;
-    }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Write the sequence */
-    for(j = 0; j < residuesNumber[i]; j += 50) {
-      for(k = j; k < residuesNumber[i] && k < j + 50; k += 10)
-        file << " " << tmpMatrix[i].substr(k, 10);
-
-      if((j + 50) >= residNumber)
-        file << "*";
-      file << endl;
-    }
-    file << endl;
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Deallocate local memory */
-  delete [] tmpMatrix;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 void alignment::alignmentFastaToFile(ostream &file) {
+  /* Generate output alignment in FASTA format. Sequences can be unaligned. */
 
+  int i, j, maxLongName;
   string *tmpMatrix;
-  int i, j;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */
+  /* Allocate local memory for generating output alignment */
   tmpMatrix = new string[sequenNumber];
-  for(i = 0; i < sequenNumber; i++) {
-    if(!reverse) tmpMatrix[i] = sequences[i];
-    else tmpMatrix[i] = utils::getReverse(sequences[i]);
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  for(i = 0; i < sequenNumber; i++) {
+  /* Depending on alignment orientation: forward or reverse. Copy directly
+   * sequence information or get firstly the reversed sequences and then
+   * copy it into local memory */
+  for(i = 0; i < sequenNumber; i++)
+    tmpMatrix[i] = (!reverse) ? sequences[i] : utils::getReverse(sequences[i]);
 
-    /* Sequence Name */
-	if(!shortNames)    file << ">" << seqsName[i] << endl;
-	else file << ">" << seqsName[i].substr(0, 10) << endl;
-    /* Sequence Residues */
-    for(j = 0; j < residuesNumber[i]; j += 60)
+  /* Depending on if short name flag is activated (limits sequence name up to
+   * 10 characters) or not, get maximum sequence name length */
+  maxLongName = PHYLIPDISTANCE;
+  for(i = 0; (i < sequenNumber) && (!shortNames); i++)
+    maxLongName = utils::max(maxLongName, seqsName[i].size());
+
+  /* Print alignment. First, sequences name id and then the sequences itself */
+  for(i = 0; i < sequenNumber; i++) {
+    file << ">" << seqsName[i].substr(0, maxLongName) << endl;
+    for(j = 0; j < residuesNumber[i]; j+= 60)
       file << tmpMatrix[i].substr(j, 60) << endl;
+    file << endl;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate local memory */
   delete [] tmpMatrix;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 void alignment::alignmentNexusToFile(ostream &file) {
+  /* Generate output alignment in NEXUS format setting only alignment block */
 
   int i, j, k, maxLongName = 0;
   string *tmpMatrix;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(!isAligned) {
-    cerr << endl << "ERROR: The input file does not ";
-    cerr << "have the sequences aligned." << endl << endl;
-    return;
+  /* Check whether sequences in the alignment are aligned or not.
+   * Warn about it if there are not aligned. */
+  if (!isAligned) {
+    cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
+      << "not compatible with unaligned sequences." << endl << endl;
+    return ;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */
+  /* Allocate local memory for generating output alignment */
   tmpMatrix = new string[sequenNumber];
-  for(i = 0; i < sequenNumber; i++) {
-    if(!reverse) tmpMatrix[i] = sequences[i];
-    else tmpMatrix[i] = utils::getReverse(sequences[i]);
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  file << "#NEXUS" << endl;
-  file << "BEGIN DATA;" << endl;
-  file << " DIMENSIONS NTAX=" << sequenNumber << " NCHAR=" << residNumber <<";" << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Depending on alignment orientation: forward or reverse. Copy directly
+   * sequence information or get firstly the reversed sequences and then
+   * copy it into local memory */
+  for(i = 0; i < sequenNumber; i++)
+    tmpMatrix[i] = (!reverse) ? sequences[i] : utils::getReverse(sequences[i]);
 
-  /* Compute input file datatype */
+  /* Compute maximum sequences name length */
+  for(i = 0; (i < sequenNumber) && (!shortNames); i++)
+    maxLongName = utils::max(maxLongName, seqsName[i].size());
+
+  /* Compute output file datatype */
   getTypeAlignment();
-  switch(dataType) {
-    case DNAType:
-      file << "FORMAT DATATYPE=DNA INTERLEAVE=yes GAP=-";
-      break;
-    case RNAType:
-      file << "FORMAT DATATYPE=RNA INTERLEAVE=yes GAP=-";
-      break;
-    case AAType:
-      file << "FORMAT DATATYPE=PROTEIN INTERLEAVE=yes GAP=-";
-      break;
-  }
 
-  /* Try to use information from input alignment */
-
-  /* Endding characters like ";" are removed from input information line */
+  /* Remove characters like ";" from input alignment information line */
   while((int) aligInfo.find(";") != (int) string::npos)
     aligInfo.erase(aligInfo.find(";"), 1);
 
+  /* Print Alignment header */
+  file << "#NEXUS" << endl << "BEGIN DATA;" << endl << " DIMENSIONS NTAX="
+    << sequenNumber << " NCHAR=" << residNumber <<";" << endl;
+
+  /* Print alignment datatype */
+  if (dataType == DNAType)
+    file << "FORMAT DATATYPE=DNA INTERLEAVE=yes GAP=-";
+  else if (dataType == RNAType)
+    file << "FORMAT DATATYPE=RNA INTERLEAVE=yes GAP=-";
+  else if (dataType == AAType)
+    file << "FORMAT DATATYPE=PROTEIN INTERLEAVE=yes GAP=-";
+
   i = 0;
-  j = aligInfo.find(" ", i);
-  /* Scan information line looking for specific tags. No all available tags
-   * are taking into account */
-  while(j != (int) string::npos) {
+  /* Using information from input alignment. Use only some tags. */
+  while((j = aligInfo.find(" ", i)) != (int) string::npos) {
 
     if((aligInfo.substr(i, j - i)).compare(0, 7, "MISSING") == 0 ||
        (aligInfo.substr(i, j)).compare(0, 7, "missing") == 0)
       file << " " << (aligInfo.substr(i, j - i));
 
-    if((aligInfo.substr(i, j)).compare(0, 9, "MATCHCHAR") == 0 ||
+    else if((aligInfo.substr(i, j)).compare(0, 9, "MATCHCHAR") == 0 ||
        (aligInfo.substr(i, j)).compare(0, 9, "matchchar") == 0)
       file << " " << (aligInfo.substr(i, j - i));
 
     i = j + 1;
-    j = aligInfo.find(" ", i);
   }
   file << ";" << endl;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* Look for the maximum sequenNumber name size */
+  /* Print sequence name and sequence length */
   for(i = 0; i < sequenNumber; i++)
-    maxLongName = utils::max(maxLongName, seqsName[i].size());
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Print the sequence name and the residues number
-     for each sequence */
-  for(i = 0; i < sequenNumber; i++)
-    file << "[Name: " << setw(maxLongName + 4) << left << seqsName[i] << "Len: " << residNumber << " Check: 0]" << endl;
+    file << "[Name: " << setw(maxLongName + 4) << left << seqsName[i] << "Len: "
+      << residNumber << "]" << endl;
   file << endl << "MATRIX" << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Put on the stream the sequenNumber names and the first 60 aminoacids block */
+  /* Print alignment itself. Sequence name and 50 residues blocks */
   for(j = 0; j < residNumber; j += 50) {
     for(i = 0; i < sequenNumber; i++) {
       file << setw(maxLongName + 4) << left << seqsName[i];
@@ -1784,90 +1679,123 @@ void alignment::alignmentNexusToFile(ostream &file) {
     }
     file << endl;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   file << ";" << endl << "END;" << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate local memory */
   delete [] tmpMatrix;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 void alignment::alignmentMegaToFile(ostream &file) {
+  /* Generate output alignment in MEGA format */
 
   int i, j, k;
   string *tmpMatrix;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(!isAligned) {
-    cerr << endl << "ERROR: The input file does not ";
-    cerr << "have the sequences aligned." << endl << endl;
-    return;
+  /* Check whether sequences in the alignment are aligned or not.
+   * Warn about it if there are not aligned. */
+  if (!isAligned) {
+    cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
+      << "not compatible with unaligned sequences." << endl << endl;
+    return ;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */
+  /* Allocate local memory for generating output alignment */
   tmpMatrix = new string[sequenNumber];
-  for(i = 0; i < sequenNumber; i++) {
-    if(!reverse) tmpMatrix[i] = sequences[i];
-    else tmpMatrix[i] = utils::getReverse(sequences[i]);
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Phylemon Webserver Version */
-  /* file << "#MEGA" << endl << "Alignment file" << endl; */
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Depending on alignment orientation: forward or reverse. Copy directly
+   * sequence information or get firstly the reversed sequences and then
+   * copy it into local memory */
+  for(i = 0; i < sequenNumber; i++)
+    tmpMatrix[i] = (!reverse) ? sequences[i] : utils::getReverse(sequences[i]);
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Standard Version */
-  file << "#MEGA" << endl << filename << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
+  /* Compute output file datatype */
   getTypeAlignment();
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  switch(dataType) {
-    case DNAType:
-      file << "!Format DataType=DNA ";
-      break;
-    case RNAType:
-      file << "!Format DataType=RNA ";
-      break;
-    case AAType:
-      file << "!Format DataType=protein ";
-      break;
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Print output alignment header */
+  file << "#MEGA" << endl << filename << endl;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  file << "NSeqs=" << sequenNumber << " Nsites=";
-  file << residNumber << " indel=- CodeTable=Standard;";
-  file << endl << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Print alignment datatype */
+  if (dataType == DNAType)
+    file << "!Format DataType=DNA ";
+  else if (dataType == RNAType)
+    file << "!Format DataType=RNA ";
+  else if (dataType == AAType)
+    file << "!Format DataType=protein ";
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Print number of sequences and alignment length */
+  file << "NSeqs=" << sequenNumber << " Nsites=" << residNumber
+    << " indel=- CodeTable=Standard;" << endl << endl;
+
+  /* Print sequences name and sequences divided into blocks of 50 residues */
   for(i = 0; i < sequenNumber; i++) {
     file << "#" << seqsName[i] << endl;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
     for(j = 0; j < residNumber; j += 50) {
       for(k = j; ((k < residNumber) && (k < j + 50)); k += 10)
         file << tmpMatrix[i].substr(k, 10) << " ";
       file << endl;
     }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
     file << endl;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate local memory */
   delete [] tmpMatrix;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
+
+void alignment::alignmentNBRF_PirToFile(ostream &file) {
+  /* Generate output alignment in NBRF/PIR format. Sequences can be unaligned */
+
+  int i, j, k;
+  string alg_datatype, *tmpMatrix;
+
+  /* Allocate local memory for generating output alignment */
+  tmpMatrix = new string[sequenNumber];
+
+  /* Depending on alignment orientation: forward or reverse. Copy directly
+   * sequence information or get firstly the reversed sequences and then
+   * copy it into local memory */
+  for(i = 0; i < sequenNumber; i++)
+    tmpMatrix[i] = (!reverse) ? sequences[i] : utils::getReverse(sequences[i]);
+
+  /* Compute output file datatype */
+  getTypeAlignment();
+  if (dataType == DNAType)
+    alg_datatype = "DL";
+  else if (dataType == RNAType)
+    alg_datatype = "RL";
+  else if (dataType == AAType)
+    alg_datatype = "P1";
+
+  /* Print alignment */
+  for(i = 0; i < sequenNumber; i++) {
+
+    /* Print sequence datatype and its name */
+    if((seqsInfo != NULL) && (iformat == oformat))
+      file << ">" << seqsInfo[i].substr(0, 2) << ";" << seqsName[i]
+        << endl << seqsInfo[i].substr(2) << endl;
+    else
+      file << ">" << alg_datatype << ";" << seqsName[i] << endl
+        << seqsName[i] << " " << residuesNumber[i] << " bases" << endl;
+
+    /* Write the sequence */
+    for(j = 0; j < residuesNumber[i]; j += 50) {
+      for(k = j; (k < residuesNumber[i]) && (k < (j + 50)); k += 10)
+        file << " " << tmpMatrix[i].substr(k, 10);
+      if((j + 50) >= residNumber)
+        file << "*";
+      file << endl;
+    }
+    file << endl;
+  }
+
+  /* Deallocate local memory */
+  delete [] tmpMatrix;
+}
+
+/* *****************************************************************************
+ *
+ * To process ...
+ *
+ * ************************************************************************** */
 
 bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, int *selectedRes, int *selectedSeq) {
 
@@ -2043,11 +1971,11 @@ bool alignment::alignmentColourHTML(ostream &file, float *GapsVector, float *Sim
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* A pretty format */
     file << endl << setw(maxLongName + 10);
-	for(i = j + 10; ((i < residNumber) && (i <= upper)); i += 10) {
-	 for(k = i - 9; k < i; k++) file << "=";
+    for(i = j + 10; ((i < residNumber) && (i <= upper)); i += 10) {
+     for(k = i - 9; k < i; k++) file << "=";
      file << "+";
-	}
-	for( ; ((k < residNumber) && (k < upper)); k++) file << "=";
+    }
+    for( ; ((k < residNumber) && (k < upper)); k++) file << "=";
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2057,14 +1985,14 @@ bool alignment::alignmentColourHTML(ostream &file, float *GapsVector, float *Sim
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       for(k = j; ((k < residNumber) && (k < upper)); k++) {
-		for(kj = 0, tmpColumn.clear(); kj < sequenNumber; kj++)
-		  tmpColumn += sequences[kj][k];
-		file << "<span class=" << utils::determineColor(sequences[i][k], tmpColumn)
-		     << ">" << sequences[i][k] << "</span>";
+        for(kj = 0, tmpColumn.clear(); kj < sequenNumber; kj++)
+          tmpColumn += sequences[kj][k];
+        file << "<span class=" << utils::determineColor(sequences[i][k], tmpColumn)
+             << ">" << sequences[i][k] << "</span>";
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       }
     }
-	file << endl;
+    file << endl;
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -2136,11 +2064,11 @@ bool alignment::alignmentColourHTML(ostream &file) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* A pretty format */
     file << endl << setw(maxLongName + 10);
-	for(i = j + 10; ((i < residNumber) && (i <= upper)); i += 10) {
-	 for(k = i - 9; k < i; k++) file << "=";
+    for(i = j + 10; ((i < residNumber) && (i <= upper)); i += 10) {
+     for(k = i - 9; k < i; k++) file << "=";
      file << "+";
-	}
-	for( ; ((k < residNumber) && (k < upper)); k++) file << "=";
+    }
+    for( ; ((k < residNumber) && (k < upper)); k++) file << "=";
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2160,7 +2088,7 @@ bool alignment::alignmentColourHTML(ostream &file) {
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       }
     }
-	file << endl;
+    file << endl;
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -2171,35 +2099,5 @@ bool alignment::alignmentColourHTML(ostream &file) {
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   return true;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-}
-
-void alignment::getSequences(ostream &file) {
-
-  string *tmpMatrix;
-  int i, j;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory to output alignment. */
-  tmpMatrix = new string[sequenNumber];
-  for(i = 0; i < sequenNumber; i++) {
-    if(!reverse) tmpMatrix[i] = utils::removeCharacter('-', sequences[i]);
-    else tmpMatrix[i] = utils::getReverse(utils::removeCharacter('-', sequences[i]));
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  for(i = 0; i < sequenNumber; i++) {
-    file << ">" << seqsName[i] << endl;
-    for(j = 0; j < (int) tmpMatrix[i].size(); j += 60)
-      file << tmpMatrix[i].substr(j, 60) << endl;
-    file << endl;
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  file << endl;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Deallocate local memory */
-  delete [] tmpMatrix;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }

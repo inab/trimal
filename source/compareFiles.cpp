@@ -1,11 +1,11 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
     trimAl v1.3: a tool for automated alignment trimming in large-scale
-                 phylogenetics analyses
+                 phylogenetics analyses.
 
-    Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
-                       [scapella, tgabaldon]@crg.es
+    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+              [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
 
@@ -21,8 +21,8 @@
     You should have received a copy of the GNU General Public License
     along with trimAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "compareFiles.h"
 #include "alignment.h"
@@ -443,13 +443,13 @@ void compareFiles::printStatisticsFileColumns(int numAminos, float *compareVect)
   /* Print the consistency values for each column from
    * the selected alignment */
   for(int i = 0; i < numAminos; i++)
-    cout << "  " << setw(5) << i + 1 << "\t" 
+    cout << "  " << setw(5) << i + 1 << "\t"
 	     << "\t" << compareVect[i] << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */	
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Print the consistency values accumulative distribution for the selected 
+/* Print the consistency values accumulative distribution for the selected
  * alignment */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void compareFiles::printStatisticsFileAcl(int numAminos, float *compareVect) {
@@ -463,7 +463,7 @@ void compareFiles::printStatisticsFileAcl(int numAminos, float *compareVect) {
   vectAux = new float[numAminos];
   utils::copyVect(compareVect, vectAux, numAminos);
   utils::quicksort(vectAux, 0, numAminos-1);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Set the output precision and print the header */
@@ -476,7 +476,7 @@ void compareFiles::printStatisticsFileAcl(int numAminos, float *compareVect) {
 	   << endl;
   cout.precision(10);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Fix the initial values to count how many columns
    * has the same consistency value */
@@ -510,9 +510,9 @@ void compareFiles::printStatisticsFileAcl(int numAminos, float *compareVect) {
        << "\t\t" << i << "\t\t" << setw(10) << ((float) i/numAminos * 100.0)
 	   << "\t"  << setw(15) << refer << endl;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate dinamic memory */
   delete [] vectAux;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */  
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }

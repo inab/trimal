@@ -1,11 +1,11 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale 
-                 phylogenetics analyses 
+    trimAl v1.3: a tool for automated alignment trimming in large-scale
+                 phylogenetics analyses.
 
-    Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
-                       [scapella, tgabaldon]@crg.es
+    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+              [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
 
@@ -21,8 +21,8 @@
     You should have received a copy of the GNU General Public License
     along with trimAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "statisticsConservation.h"
 
@@ -181,7 +181,7 @@ bool statisticsConservation::calculateVectors(string *alignmentMatrix, int *gaps
     indet = 'N';
 
   /* A conservation matrix must be defined. If not, return false */
-  if(simMatrix == NULL) 
+  if(simMatrix == NULL)
     return false;
 
   /* For each column calculate the Q value and the MD value using an equation */
@@ -287,7 +287,7 @@ bool statisticsConservation::setSimilarityMatrix(similarityMatrix *sm) {
   if(sm == NULL)
     return false;
 
-  /* if a similarity matrix isn't being used, we associate a pointer gives as input parameter to object simMatrix's 
+  /* if a similarity matrix isn't being used, we associate a pointer gives as input parameter to object simMatrix's
      pointer and return true. */
   simMatrix = sm;
   return true;
@@ -400,7 +400,7 @@ void statisticsConservation::printConservationAcl(void) {
   refer = vectAux[columns-1];
   acm = 0; num = 1;
 
-  /* Count the columns with the same conservation's value and compute this information to shows the accunulative 
+  /* Count the columns with the same conservation's value and compute this information to shows the accunulative
      statistics in the alignment. */
   for(i = columns-2; i >= 0; i--) {
     acm++;

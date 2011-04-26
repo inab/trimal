@@ -1,11 +1,11 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale 
-                 phylogenetics analyses 
+    trimAl v1.3: a tool for automated alignment trimming in large-scale
+                 phylogenetics analyses.
 
-    Copyright (C) 2009 Capella-Gutierrez S. and Gabaldon, T.
-                       [scapella, tgabaldon]@crg.es
+    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+              [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
 
@@ -21,8 +21,8 @@
     You should have received a copy of the GNU General Public License
     along with trimAl. If not, see <http://www.gnu.org/licenses/>.
 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
- ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #ifndef SIMMatrix
 #define SIMMatrix
@@ -130,7 +130,7 @@ void similarityMatrix::memoryDeletion(){
 
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-| bool similarityMatrix::loadSimMatrix(char *)                       | 
+| bool similarityMatrix::loadSimMatrix(char *)                       |
 |      This method loads a similarity matrix from a file             |
 |      and checks if the file format is correct. In that case        |
 |      the method return true. If the format is incorrect the method |
@@ -187,7 +187,7 @@ bool similarityMatrix::loadSimMatrix(char *fn){
       /* in the format of the alignment                          */
       if((first[0] >= 'A') && (first[0] <= 'Z')) {
 	firstColumn = true;
-	
+
 	if((vhash[first[0] - 'A']) == -1){
 	  memoryDeletion(); return false;
 	}
@@ -240,7 +240,7 @@ bool similarityMatrix::loadSimMatrix(char *fn){
   for(j = 0; j < numPositions; j++){
     for(i = 0; i < numPositions; i++) {
       if((i != j) && (distMat[i][j] == 0.0)){
-        for(k = 0, sum = 0; k < numPositions; k++)  
+        for(k = 0, sum = 0; k < numPositions; k++)
           sum += ((simMat[k][j] - simMat[k][i]) * (simMat[k][j] - simMat[k][i]));
         sum = (float) sqrt(sum);
         distMat[i][j] = sum;
@@ -275,7 +275,7 @@ void similarityMatrix::defaultAASimMatrix(void) {
   for(j = 0; j < numPositions; j++) {
     for(i = 0; i < numPositions; i++) {
       if((i != j) && (distMat[i][j] == 0.0)) {
-        for(k = 0, sum = 0; k < numPositions; k++)  
+        for(k = 0, sum = 0; k < numPositions; k++)
           sum += ((simMat[k][j] - simMat[k][i]) * (simMat[k][j] - simMat[k][i]));
         sum = (float) sqrt(sum);
         distMat[i][j] = sum;
@@ -290,7 +290,7 @@ void similarityMatrix::defaultNTSimMatrix(void) {
   float sum;
 
   memoryAllocation(5);
-  for(i = 0; i < TAMABC; i++) 
+  for(i = 0; i < TAMABC; i++)
     vhash[i] = -1;
 
   /* We create the hashing vector */
@@ -306,7 +306,7 @@ void similarityMatrix::defaultNTSimMatrix(void) {
   for(j = 0; j < numPositions; j++) {
     for(i = 0; i < numPositions; i++) {
       if((i != j) && (distMat[i][j] == 0.0)) {
-        for(k = 0, sum = 0; k < numPositions; k++)  
+        for(k = 0, sum = 0; k < numPositions; k++)
           sum += ((simMat[k][j] - simMat[k][i]) * (simMat[k][j] - simMat[k][i]));
         sum = (float) sqrt(sum);
         distMat[i][j] = sum;
@@ -319,7 +319,7 @@ void similarityMatrix::defaultNTSimMatrix(void) {
 
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-| void similarityMatrix::printMatrix()                                 | 
+| void similarityMatrix::printMatrix()                                 |
 |      This method prints the similarity matrix to the standard output |
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
@@ -334,7 +334,7 @@ void similarityMatrix::printMatrix(){
 
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-| float similarityMatrix::getDistance(char,char)                            | 
+| float similarityMatrix::getDistance(char,char)                            |
 |      This method returns the distance between the two characters given    |
 |      The two character can be aminoacid characters, nucleotide characters |
 |      or any kind of characters. This depends on the defined characters in |
