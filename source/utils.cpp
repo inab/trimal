@@ -419,16 +419,10 @@ char* utils::readLine(ifstream &file) {
   if(file.eof())
     return NULL;
 
-  /* Store first line found */
-  for( ; (c != '\n') && ((!file.eof())); file.read(&c, 1))
+  /* Store first line found. For -Windows & MacOS compatibility- carriage return
+   * is considered as well as a new line character */
+  for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
     nline.resize(nline.size() + 1, c);
-
-  /* Remove strange characters -Windows & MacOS compability- */
-  state = nline.find("\r", 0);
-  while(state != (int) string::npos) {
-    nline.erase(state, 1);
-    state = nline.find("\r", state);
-  }
 
   /* Remove blank spaces & tabs from the beginning of the line */
   state = nline.find(" ", 0);

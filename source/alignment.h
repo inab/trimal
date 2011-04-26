@@ -431,8 +431,6 @@ class alignment {
 
   bool alignmentColourHTML(ostream &);
 
-  bool alignmentColourHTML(ostream &, float *, float *, float *, float *);
-
   void getSequences(ostream &);
   /* ********** ******** ********** */
 

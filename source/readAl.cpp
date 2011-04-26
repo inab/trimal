@@ -31,7 +31,7 @@
 #include "alignment.h"
 #include "utils.h"
 
-#define BUILD "2011-04-21"
+#define BUILD "2011-04-26"
 #define VERSION 1.3
 #define REVISION 11
 

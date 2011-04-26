@@ -38,6 +38,8 @@ extern int errno;
 #define DELIMITERS     "   \t\n"
 #define OTHDELIMITERS  "   \t\n,:*"
 #define OTH2DELIMITERS "   \n,:;*"
+
+#define HTMLBLOCKS 100
 #define PHYLIPDISTANCE 10
 
 using namespace std;
@@ -155,10 +157,16 @@ int alignment::formatInputAlignment(char *alignmentFile) {
   if(!utils::checkFile(file))
     return false;
 
-  /* Read the first line in a safer way */
-  line = utils::readLine(file);
-  if (line == NULL)
+  /* Read first valid line in a safer way */
+  do {
+    line = utils::readLine(file);
+  } while ((line == NULL) && (!file.eof()));
+
+  /* If the file end is reached without a valid line, warn about it */
+  if (file.eof())
     return false;
+
+  /* Otherwise, split line */
   firstWord = strtok(line, OTHDELIMITERS);
 
   /* Clustal Format */
@@ -1791,219 +1799,104 @@ void alignment::alignmentNBRF_PirToFile(ostream &file) {
   delete [] tmpMatrix;
 }
 
-/* *****************************************************************************
- *
- * To process ...
- *
- * ************************************************************************** */
+bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
+  int *selectedRes, int *selectedSeq) {
 
-bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, int *selectedRes, int *selectedSeq) {
+  /* Generate an HTML file with a visual summary about which sequences/columns
+   * have been selected and which have not */
 
-  int i, j, k, maxLongName = 0;
+  int i, j, k, upper, maxLongName;
   bool *res, *seq;
-  string tmpName;
   ofstream file;
 
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(!isAligned) {
-    cerr << endl << "ERROR: The input file does not ";
-    cerr << "have the sequences aligned." << endl << endl;
+  /* Check whether sequences in the alignment are aligned or not.
+   * Warn about it if there are not aligned. */
+  if (!isAligned) {
+    cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
     return false;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Open file and check the operations */
+  /* Open output file and check that file pointer is valid */
   file.open(destFile);
-  if(!file) return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  if(!file)
+    return false;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Look for the maximum sequenNumber name size */
+  /* Compute maximum sequences name length */
+  maxLongName = 0;
   for(i = 0; i < sequenNumber; i++)
     maxLongName = utils::max(maxLongName, seqsName[i].size());
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Initialize local variables to control which columns/sequences
+   * will be kept in the output alignment */
   res = new bool[residNumber];
-  for(i = 0; i < residNumber; i++) res[i] = false;
-  for(i = 0; i < residues; i++) res[selectedRes[i]] = true;
+  for(i = 0; i < residNumber; i++)
+    res[i] = false;
+  for(i = 0; i < residues; i++)
+    res[selectedRes[i]] = true;
 
   seq = new bool[sequenNumber];
-  for(i = 0; i < sequenNumber; i++) seq[i] = false;
-  for(i = 0; i < seqs; i++) seq[selectedSeq[i]] = true;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  for(i = 0; i < sequenNumber; i++)
+    seq[i] = false;
+  for(i = 0; i < seqs; i++)
+    seq[selectedSeq[i]] = true;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* File Header */
-  file << "<!DOCTYPE html>" << endl << "<html><head>" << endl;
-  file << "    <meta http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />" << endl;
-  file << "    <title>trimAl v1.3 Summary</title>" << endl;
+  /* Print HTML header into output file */
+  file << "<!DOCTYPE html>" << endl << "<html><head>" << endl << "    <meta "
+    << "http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />"
+    << endl << "    <title>trimAl v1.3 Summary</title>" << endl
+    << "    <style type=\"text/css\">" << endl
+    << "    .sel  { background-color: #C9C9C9; }\n"
+    << "    </style>\n  </head>\n\n" << "  <body>\n" << "  <pre>" << endl
+    << "  <span class=sel>Selected Residues/Sequences</span>" << endl
+    << "  Deleted Residues/Sequences";
 
-  file << "    <style type=\"text/css\">" << endl;
-  file << "    .sel  { background-color: #C9C9C9; }\n";
-  file << "    </style>\n  </head>\n\n";
-  file << "  <body>\n";
-
-  file << "  <pre>" << endl;
-  file << "  <span class=sel>Selected Residue / Sequence</span>" << endl;
-  file << "  Deleted Residue / Sequence";
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  for(j = 0; j < residNumber; j += 120) {
+  /* Print Sequences in block of BLOCK_SIZE */
+  for(j = 0, upper = HTMLBLOCKS; j < residNumber; j += HTMLBLOCKS, upper += \
+    HTMLBLOCKS) {
 
     file << endl;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Print the sequence number identifier */
-    for(i = j + 1; ((i <= residNumber) && (i <= (j + 10))); i++)
-      if(!((i + 1) % 10)) file << setw(maxLongName + 19) << right << (i + 1) << " ";
+    /* Print main columns number */
+    file << setw(maxLongName + 19) << right << (j + 10);
+    for(i = j + 20; ((i <= residNumber) && (i <= upper)); i += 10)
+      file << setw(10) << right << (i);
 
-    for(i = j + 11; ((i <= residNumber) && (i <= (j + 120))); i++)
-      if(!((i + 1) % 10)) file << setw(10) << right << (i + 1) << " ";
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* A pretty format */
+    /* Print special characters to delimit sequences blocks */
     file << endl << setw(maxLongName + 10);
-    for(i = j + 1; ((i <= residNumber) && (i <= (j + 120))); i++)
-      if(!(i % 10)) file << "+" << " ";
-      else file << "=";
+    for(i = j + 1; ((i <= residNumber) && (i <= upper)); i++)
+      file << (!(i % 10) ? "+" : "=");
     file << endl;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Print sequences name */
     for(i = 0; i < sequenNumber; i++) {
-      tmpName = seqsName[i] + "</span>";
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      if(seq[i]) file << "    <span class=sel>";
-      else       file << "    <span>";
-    file << setw(maxLongName + 12) << left << tmpName;
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      file << ((seq[i]) ? "    <span class=sel>" : "    <span>");
+      file << setw(maxLongName + 12) << left << (seqsName[i] + "</span>");
 
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      for(k = j; ((k < residNumber) && (k < (j + 120))); k++) {
-        if((seq[i]) && (res[k]))
-          file << "<span class=sel>" << sequences[i][k] << "</span>";
-        else
+      /* Print first residue for each sequence in that block. It is useful to
+       * reduce amount of HTML code */
+      file << ((seq[i] && res[j]) ? "<span class=sel>" : "") << sequences[i][j];
+
+      /* Print sequences itself */
+      for(k = j + 1; ((k < residNumber) && (k < (j + HTMLBLOCKS))); k++) {
+        /* Print residues */
+        if (!seq[i] or (res[k] == res[k-1]))
           file << sequences[i][k];
-    if(!((k + 1) % 10)) file << " ";
+        else
+          file << ((res[k] && !res[k-1]) ? "<span class=sel>" : "</span>")
+            << sequences[i][k];
       }
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      file << endl;
-      }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* Close any HTML element that it is still open */
+      file << ((res[k-1] and seq[i]) ? "</span>" : "") << endl;
     }
+  }
+  /* Print HTML footer into output file */
+  file << "    </pre>" << endl << "  </body>" << endl << "</html>" << endl;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  file << "    </pre>" << endl;
-  file << "  </body>" << endl << "</html>" << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Close output file and deallocate local memory */
   file.close();
   delete [] seq;
   delete [] res;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   return true;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-}
-
-
-bool alignment::alignmentColourHTML(ostream &file, float *GapsVector, float *SimilVector, float *ConsVector, float *IdentVector) {
-
-  int i, j, kj, upper, k = 0, maxLongName = 0;
-  string tmpColumn;
-
-  tmpColumn.reserve(sequenNumber);
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(!isAligned) {
-    cerr << endl << "ERROR: The input file does not ";
-    cerr << "have the sequences aligned." << endl << endl;
-    return false;
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Look for the maximum sequenNumber name size */
-  for(i = 0; i < sequenNumber; i++)
-    maxLongName = utils::max(maxLongName, seqsName[i].size());
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* File Header */
-  file << "<!DOCTYPE html>" << endl << "<html><head>" << endl;
-  file << "    <meta http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />" << endl;
-  file << "    <title>trimAl v1.3 Summary</title>" << endl;
-
-  file << "    <style type=\"text/css\">" << endl;
-  file << "    .w  { background-color: #FFFFFF; }\n";
-  file << "    .b  { background-color: #3366ff; }\n";
-  file << "    .r  { background-color: #cc0000; }\n";
-  file << "    .g  { background-color: #33cc00; }\n";
-  file << "    .p  { background-color: #ff6666; }\n";
-  file << "    .m  { background-color: #cc33cc; }\n";
-  file << "    .o  { background-color: #ff9900; }\n";
-  file << "    .c  { background-color: #46C7C7; }\n";
-  file << "    .y  { background-color: #FFFF00; }\n";
-  file << "    </style>\n  </head>\n\n";
-  file << "  <body>\n";
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  file << "  <pre>" << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  for(j = 0, upper = 120; j < residNumber; j += 120, upper += 120) {
-
-    file << endl;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Print the sequence number identifier */
-    file << setw(maxLongName + 20) << right << (j + 10);
-    for(i = j + 20; ((i <= residNumber) && (i <= upper)); i += 10)
-      file << setw(10) << right << i;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* A pretty format */
-    file << endl << setw(maxLongName + 10);
-    for(i = j + 10; ((i < residNumber) && (i <= upper)); i += 10) {
-     for(k = i - 9; k < i; k++) file << "=";
-     file << "+";
-    }
-    for( ; ((k < residNumber) && (k < upper)); k++) file << "=";
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    for(i = 0; i < sequenNumber; i++) {
-      file << endl << setw(maxLongName + 9) << left << seqsName[i];
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      for(k = j; ((k < residNumber) && (k < upper)); k++) {
-        for(kj = 0, tmpColumn.clear(); kj < sequenNumber; kj++)
-          tmpColumn += sequences[kj][k];
-        file << "<span class=" << utils::determineColor(sequences[i][k], tmpColumn)
-             << ">" << sequences[i][k] << "</span>";
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      }
-    }
-    file << endl;
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  file << "    </pre>" << endl;
-  file << "  </body>" << endl << "</html>" << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  return true;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 bool alignment::alignmentColourHTML(ostream &file) {
@@ -2012,92 +1905,76 @@ bool alignment::alignmentColourHTML(ostream &file) {
   string tmpColumn;
   char type;
 
+  /* Allocate some local memory */
   tmpColumn.reserve(sequenNumber);
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(!isAligned) {
-    cerr << endl << "ERROR: The input file does not ";
-    cerr << "have the sequences aligned." << endl << endl;
+  /* Check whether sequences in the alignment are aligned or not.
+   * Warn about it if there are not aligned. */
+  if (!isAligned) {
+    cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
     return false;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Look for the maximum sequenNumber name size */
+  /* Compute maximum sequences name length */
+  maxLongName = 0;
   for(i = 0; i < sequenNumber; i++)
     maxLongName = utils::max(maxLongName, seqsName[i].size());
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* File Header */
-  file << "<!DOCTYPE html>" << endl << "<html><head>" << endl;
-  file << "    <meta http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />" << endl;
-  file << "    <title>trimAl v1.3 Summary</title>" << endl;
 
-  file << "    <style type=\"text/css\">" << endl;
-  file << "    #b  { background-color: #3366ff; }\n";
-  file << "    #r  { background-color: #cc0000; }\n";
-  file << "    #g  { background-color: #33cc00; }\n";
-  file << "    #p  { background-color: #ff6666; }\n";
-  file << "    #m  { background-color: #cc33cc; }\n";
-  file << "    #o  { background-color: #ff9900; }\n";
-  file << "    #c  { background-color: #46C7C7; }\n";
-  file << "    #y  { background-color: #FFFF00; }\n";
-  file << "    </style>\n  </head>\n\n";
-  file << "  <body>\n";
+  /* Print HTML header into output file */
+  file << "<!DOCTYPE html>" << endl << "<html><head>" << endl << "    <meta "
+    << "http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />"
+    << endl << "    <title>readAl v1.3</title>" << endl
+    << "    <style type=\"text/css\">" << endl
+    << "    #b  { background-color: #3366ff; }\n"
+    << "    #r  { background-color: #cc0000; }\n"
+    << "    #g  { background-color: #33cc00; }\n"
+    << "    #p  { background-color: #ff6666; }\n"
+    << "    #m  { background-color: #cc33cc; }\n"
+    << "    #o  { background-color: #ff9900; }\n"
+    << "    #c  { background-color: #46C7C7; }\n"
+    << "    #y  { background-color: #FFFF00; }\n"
+    << "    </style>\n  </head>\n\n" << "  <body>\n  <pre>" << endl;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  file << "  <pre>" << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  for(j = 0, upper = 100; j < residNumber; j += 100, upper += 100) {
+  /* Print sequences colored according to CLUSTAL scheme based on
+   * physical-chemical properties */
+  for(j = 0, upper = HTMLBLOCKS; j < residNumber; j += HTMLBLOCKS, upper += \
+    HTMLBLOCKS) {
 
     file << endl;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Print the sequence number identifier */
-    file << setw(maxLongName + 20) << right << (j + 10);
+    /* Print main columns number */
+    file << setw(maxLongName + 19) << right << (j + 10);
     for(i = j + 20; ((i <= residNumber) && (i <= upper)); i += 10)
       file << setw(10) << right << i;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* A pretty format */
+    /* Print special characters to delimit sequences blocks */
     file << endl << setw(maxLongName + 10);
-    for(i = j + 10; ((i < residNumber) && (i <= upper)); i += 10) {
-     for(k = i - 9; k < i; k++) file << "=";
-     file << "+";
-    }
-    for( ; ((k < residNumber) && (k < upper)); k++) file << "=";
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    for(i = j + 1; ((i <= residNumber) && (i <= upper)); i++)
+      file << (!(i % 10) ? "+" : "=");
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Print sequences themselves */
     for(i = 0; i < sequenNumber; i++) {
-      file << endl << setw(maxLongName + 9) << left << seqsName[i];
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+      /* Print sequences name */
+      file << endl << setw(maxLongName + 9) << left << seqsName[i];
+
+      /* Print residues corresponding to current sequences block */
       for(k = j; ((k < residNumber) && (k < upper)); k++) {
         for(kj = 0, tmpColumn.clear(); kj < sequenNumber; kj++)
           tmpColumn += sequences[kj][k];
+        /* Determine residue color based on residues across the alig column */
         type = utils::determineColor(sequences[i][k], tmpColumn);
-        if (type != 'w')
-          file << "<span id=" << type << ">" << sequences[i][k] << "</span>";
-        else
+        if (type == 'w')
           file << sequences[i][k];
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        else
+          file << "<span id=" << type << ">" << sequences[i][k] << "</span>";
       }
     }
     file << endl;
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  file << "    </pre>" << endl;
-  file << "  </body>" << endl << "</html>" << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Print HTML footer into output file */
+  file << "    </pre>" << endl << "  </body>" << endl << "</html>" << endl;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   return true;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
