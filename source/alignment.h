@@ -427,7 +427,7 @@ class alignment {
 
   void alignmentMegaToFile(ostream &);
 
-  bool alignmentSummaryHTML(char *, int, int, int *, int *);
+  bool alignmentSummaryHTML(char *, int, int, int *, int *, float *);
 
   bool alignmentColourHTML(ostream &);
 

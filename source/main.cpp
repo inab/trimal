@@ -44,7 +44,7 @@
 
 #define BUILD "2011-04-26"
 #define VERSION 1.3
-#define REVISION 11
+#define REVISION 12
 
 void menu(void);
 void examples(void);
@@ -352,10 +352,10 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
-      else if((nogaps) || (noallgaps) || (gappyout) || (strict) || (strictplus) || (automated1)) {
-        cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
-        appearErrors = true;
-      }
+      //~ else if((nogaps) || (noallgaps) || (gappyout) || (strict) || (strictplus) || (automated1)) {
+        //~ cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
+        //~ appearErrors = true;
+      //~ }
 
       else if(infile != NULL) {
         cerr << endl << "ERROR: Not allowed in combination with -in option." << endl << endl;
@@ -1145,7 +1145,7 @@ int main(int argc, char *argv[]){
     if((!nogaps) && (!noallgaps) && (!gappyout) && (!strict) && (!strictplus) && (!automated1)
       && (gapThreshold == -1) && (conserve == -1) && (simThreshold == -1) && (!selectCols) && (!selectSeqs)
 	  && (resOverlap == -1) && (seqOverlap == -1) && (maxIdentity == -1) && (clusters == -1)) {
-      cerr << endl << "ERROR: This parameter '-termina  lonly' can only be used with either an automatic or a manual method." << endl << endl;
+      cerr << endl << "ERROR: This parameter '-terminalonly' can only be used with either an automatic or a manual method." << endl << endl;
       appearErrors = true;
     }
   /* ------------------------------------------------------------------------------------------------------ */
@@ -1187,12 +1187,12 @@ int main(int argc, char *argv[]){
 
   /* ------------------------------------------------------------------------------------------------------ */
 
-  if((outhtml != NULL) && (!appearErrors)) {
-   if(((gapThreshold != -1) || (simThreshold != -1)) && (comThreshold != -1)) {
-      cerr << endl << "ERROR: Impossible to generate the HTML file using two consecutive trimming methods." << endl << endl;
-      appearErrors = true;
-    }
-  }
+  //~ if((outhtml != NULL) && (!appearErrors)) {
+   //~ if(((gapThreshold != -1) || (simThreshold != -1)) && (comThreshold != -1)) {
+      //~ cerr << endl << "ERROR: Impossible to generate the HTML file using two consecutive trimming methods." << endl << endl;
+      //~ appearErrors = true;
+    //~ }
+  //~ }
   /* ------------------------------------------------------------------------------------------------------ */
 
 
@@ -1602,7 +1602,7 @@ int main(int argc, char *argv[]){
   /* -------------------------------------------------------------------- */
   if((outhtml != NULL) && (!appearErrors))
     if(!origAlig -> alignmentSummaryHTML(outhtml, singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
-                                     singleAlig -> getCorrespResidues(), singleAlig -> getCorrespSequences())) {
+                                     singleAlig -> getCorrespResidues(), singleAlig -> getCorrespSequences(), compareVect)) {
       cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
       appearErrors = true;
     }
