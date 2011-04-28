@@ -314,13 +314,14 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
   seqsName   = new string[sequenNumber];
 
   /* Read the lines block containing the sequences name + first fragment */
-  for(i = 0; i < sequenNumber; i++) {
+  i = 0;
+  while((i < sequenNumber) && (!file.eof())){
 
     /* Read lines in a safer way. Destroy previous stored information */
     if (line != NULL)
       delete [] line;
-
     line = utils::readLine(file);
+
     /* It the input line/s are blank lines, skip the loop iteration  */
     if(line == NULL)
       continue;
@@ -335,12 +336,15 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
       sequences[i].append(str, strlen(str));
       str = strtok(NULL, DELIMITERS);
     }
+    i++;
   }
 
   /* Read the rest of the input file */
   while(!file.eof()) {
+
     /* Try to get for each sequences its corresponding residues */
-    for(i = 0; i < sequenNumber; i++) {
+    i = 0;
+    while((i < sequenNumber) && (!file.eof())) {
       /* Read lines in a safer way. Destroy previous stored information */
       if (line != NULL)
         delete [] line;
@@ -357,6 +361,7 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
         sequences[i].append(str, strlen(str));
         str = strtok(NULL, DELIMITERS);
       }
+      i++;
     }
   }
 
@@ -1805,7 +1810,7 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
   /* Generate an HTML file with a visual summary about which sequences/columns
    * have been selected and which have not */
 
-  int i, j, k, kj, upper, maxLongName, *gapsValues;
+  int i, j, k, kj, upper, minHTML, maxLongName, *gapsValues;
   string tmpColumn;
   float *simValues;
   bool *res, *seq;
@@ -1827,10 +1832,13 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
   if(!file)
     return false;
 
-  /* Compute maximum sequences name length */
-  maxLongName = PHYLIPDISTANCE;
+  /* Compute maximum sequences name length. */
+  maxLongName = 0;
   for(i = 0; i < sequenNumber; i++)
     maxLongName = utils::max(maxLongName, seqsName[i].size());
+
+  /* Compute HTML blank spaces */
+  minHTML = utils::max(25, maxLongName + 10);
 
   /* Initialize local variables to control which columns/sequences
    * will be kept in the output alignment */
@@ -1838,16 +1846,14 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
   for(i = 0; i < residNumber; i++)
     res[i] = false;
 
-  cerr << endl << residues << endl << endl;
-
-  for(i = 0; i < residues; i++)
-    res[selectedRes[i]] = true;
-
-  /* Record which columns/sequences from original alignment
-   * have been kept in the final one */
   seq = new bool[sequenNumber];
   for(i = 0; i < sequenNumber; i++)
     seq[i] = false;
+
+  /* Record which columns/sequences from original alignment
+   * have been kept in the final one */
+  for(i = 0; i < residues; i++)
+    res[selectedRes[i]] = true;
   for(i = 0; i < seqs; i++)
     seq[selectedSeq[i]] = true;
 
@@ -1892,22 +1898,18 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
     << "    .c12  { background-color: #6E5411; color: white; }\n"
 
   /* Other HTML elements */
-    << "    </style>\n  </head>\n\n" << "  <body>\n" << "  <pre>" << endl
-    << "  <span  class=sel>Selected Residues/Sequences</span>" << endl
-    << "  <span class=nsel>Deleted Residues/Sequences </span>" << endl;
+    << "    </style>\n  </head>\n\n" << "  <body>\n" << "  <pre>" << endl;
+
+  /* Show information about how many sequences/residues have been selected */
+  file << "    <span class=sel>Selected Sequences: " << setw(5) << right << seqs
+    <<" /Selected Residues: " << setw(7) << right << residues << "</span>"
+    << endl << "    <span class=nsel>Deleted Sequences:  " << setw(5) << right
+    << sequenNumber - seqs << " /Deleted Residues:  " << setw(7) << right
+    << residNumber - residues << "</span>" << endl;
 
   /* Print headers for different scores derived from input alignment/s */
   if (gapsValues != NULL)
-    file << endl << setw(maxLongName + 10) << left << "    Gaps Scores:    "
-      << "<span  class=c1>  =0=  </span><span  class=c2> <.001 </span>"
-      << "<span  class=c3> <.050 </span><span  class=c4> <.100 </span>"
-      << "<span  class=c5> <.150 </span><span  class=c6> <.200 </span>"
-      << "<span  class=c7> <.250 </span><span  class=c8> <.350 </span>"
-      << "<span  class=c9> <.500 </span><span class=c10> <.750 </span>"
-      << "<span class=c11> <1.00 </span><span class=c12>  =1=  </span>";
-
-  if (consValues != NULL)
-    file << endl << setw(maxLongName + 10) << left << "    Cons. Scores:   "
+    file << endl << setw(minHTML) << left << "    Gaps Scores:        "
       << "<span  class=c1>  =0=  </span><span  class=c2> <.001 </span>"
       << "<span  class=c3> <.050 </span><span  class=c4> <.100 </span>"
       << "<span  class=c5> <.150 </span><span  class=c6> <.200 </span>"
@@ -1916,11 +1918,20 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
       << "<span class=c11> <1.00 </span><span class=c12>  =1=  </span>";
 
   if (simValues != NULL)
-    file << endl << setw(maxLongName + 10) << left << "    Simil. Scores:  "
+    file << endl << setw(minHTML) << left << "    Similarity Scores:  "
       << "<span  class=c1>  =0=  </span><span  class=c2> <1e-6 </span>"
       << "<span  class=c3> <1e-5 </span><span  class=c4> <1e-4 </span>"
       << "<span  class=c5> <.001 </span><span  class=c6> <.010 </span>"
       << "<span  class=c7> <.100 </span><span  class=c8> <.250 </span>"
+      << "<span  class=c9> <.500 </span><span class=c10> <.750 </span>"
+      << "<span class=c11> <1.00 </span><span class=c12>  =1=  </span>";
+
+  if (consValues != NULL)
+    file << endl << setw(minHTML) << left << "    Consistency Scores: "
+      << "<span  class=c1>  =0=  </span><span  class=c2> <.001 </span>"
+      << "<span  class=c3> <.050 </span><span  class=c4> <.100 </span>"
+      << "<span  class=c5> <.150 </span><span  class=c6> <.200 </span>"
+      << "<span  class=c7> <.250 </span><span  class=c8> <.350 </span>"
       << "<span  class=c9> <.500 </span><span class=c10> <.750 </span>"
       << "<span class=c11> <1.00 </span><span class=c12>  =1=  </span>";
 
@@ -1932,23 +1943,20 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
     HTMLBLOCKS) {
 
     /* Print main columns number */
-    file << endl << setw(maxLongName + 20) << right << (j + 10);
+    file << endl << setw(minHTML + 10) << right << (j + 10);
     for(i = j + 20; ((i <= residNumber) && (i <= upper)); i += 10)
       file << setw(10) << right << (i);
 
     /* Print special characters to delimit sequences blocks */
-    file << endl << setw(maxLongName + 11) << right;
+    file << endl << setw(minHTML + 1) << right;
     for(i = j + 1; ((i <= residNumber) && (i <= upper)); i++)
       file << (!(i % 10) ? "+" : "=");
     file << endl;
 
     /* Print sequences name */
     for(i = 0; i < sequenNumber; i++) {
-      file << ((seq[i]) ? "    <span class=sel>" : "    <span>")
-        << setw(maxLongName) << left << (seqsName[i] + "</span>")
-        << setw(utils::max(6, maxLongName - seqsName[i].size() + 6))
-        << right << "";
-
+      file << "    <span class=" << ((seq[i]) ? "sel>" : "nsel>") << seqsName[i]
+        << "</span>" << setw(minHTML - 4 - seqsName[i].size()) << right << "";
 
       /* Print residues corresponding to current sequences block */
       for(k = j; ((k < residNumber) && (k < upper)); k++) {
@@ -1964,7 +1972,7 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
       file << endl;
     }
 
-    file << endl << setw(maxLongName + 10) << left << "    Select Cols:    ";
+    file << endl << setw(minHTML) << left << "    Selected Cols:      ";
     for(k = j; ((k < residNumber) && (k < (j + HTMLBLOCKS))); k++)
       file << "<span class=" << (res[k] ? "sel" : "nsel") << "> </span>";
     file << endl;
@@ -1975,7 +1983,7 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
 
     /* Print score colors according to certain predefined thresholds */
     if (gapsValues != NULL) {
-      file << endl << setw(maxLongName + 10) << left << "    Gaps Scores:    ";
+      file << endl << setw(minHTML) << left << "    Gaps Scores:        ";
       for(k = j; ((k < residNumber) && (k < (j + HTMLBLOCKS))); k++)
         if(gapsValues[k] == 0)
           file << "<span class=c12> </span>";
@@ -2002,36 +2010,8 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
         else
           file << "<span  class=c2> </span>";
     }
-    if (consValues != NULL) {
-      file << endl << setw(maxLongName + 10) << left << "    Cons. Scores:   ";
-      for(k = j; ((k < residNumber) && (k < (j + HTMLBLOCKS))); k++)
-        if(consValues[k] == 1)
-          file << "<span class=c12> </span>";
-        else if(consValues[k] == 0)
-          file << "<span class=c1> </span>";
-        else if(consValues[k] >= .750)
-          file << "<span class=c11> </span>";
-        else if(consValues[k] >= .500)
-          file << "<span class=c10> </span>";
-        else if(consValues[k] >= .350)
-          file << "<span  class=c9> </span>";
-        else if(consValues[k] >= .250)
-          file << "<span  class=c8> </span>";
-        else if(consValues[k] >= .200)
-          file << "<span  class=c7> </span>";
-        else if(consValues[k] >= .150)
-          file << "<span  class=c6> </span>";
-        else if(consValues[k] >= .100)
-          file << "<span  class=c5> </span>";
-        else if(consValues[k] >= .050)
-          file << "<span  class=c4> </span>";
-        else if(consValues[k] >= .001)
-          file << "<span  class=c3> </span>";
-        else
-          file << "<span  class=c2> </span>";
-    }
     if (simValues != NULL) {
-      file << endl << setw(maxLongName + 10) << left << "    Simil. Scores:  ";
+      file << endl << setw(minHTML) << left << "    Similarity Scores:  ";
       for(k = j; ((k < residNumber) && (k < (j + HTMLBLOCKS))); k++)
         if(simValues[k] == 1)
           file << "<span class=c12> </span>";
@@ -2054,6 +2034,34 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
         else if(simValues[k] >= 1e-5)
           file << "<span  class=c4> </span>";
         else if(simValues[k] >= 1e-6)
+          file << "<span  class=c3> </span>";
+        else
+          file << "<span  class=c2> </span>";
+    }
+    if (consValues != NULL) {
+      file << endl << setw(minHTML) << left << "    Consistency Scores: ";
+      for(k = j; ((k < residNumber) && (k < (j + HTMLBLOCKS))); k++)
+        if(consValues[k] == 1)
+          file << "<span class=c12> </span>";
+        else if(consValues[k] == 0)
+          file << "<span class=c1> </span>";
+        else if(consValues[k] >= .750)
+          file << "<span class=c11> </span>";
+        else if(consValues[k] >= .500)
+          file << "<span class=c10> </span>";
+        else if(consValues[k] >= .350)
+          file << "<span  class=c9> </span>";
+        else if(consValues[k] >= .250)
+          file << "<span  class=c8> </span>";
+        else if(consValues[k] >= .200)
+          file << "<span  class=c7> </span>";
+        else if(consValues[k] >= .150)
+          file << "<span  class=c6> </span>";
+        else if(consValues[k] >= .100)
+          file << "<span  class=c5> </span>";
+        else if(consValues[k] >= .050)
+          file << "<span  class=c4> </span>";
+        else if(consValues[k] >= .001)
           file << "<span  class=c3> </span>";
         else
           file << "<span  class=c2> </span>";

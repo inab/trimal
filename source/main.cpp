@@ -1600,17 +1600,12 @@ int main(int argc, char *argv[]){
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
-  if((outhtml != NULL) && (!appearErrors)) {
-
-    cerr << endl << singleAlig -> getNumAminos() << ":" << singleAlig -> getNumSpecies() << endl;
-
+  if((outhtml != NULL) && (!appearErrors))
     if(!origAlig -> alignmentSummaryHTML(outhtml, singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
                                      singleAlig -> getCorrespResidues(), singleAlig -> getCorrespSequences(), compareVect)) {
       cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
       appearErrors = true;
     }
-
-  }
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
