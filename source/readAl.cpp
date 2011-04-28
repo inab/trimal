@@ -31,9 +31,9 @@
 #include "alignment.h"
 #include "utils.h"
 
-#define BUILD "2011-04-26"
+#define BUILD "2011-04-27"
 #define VERSION 1.3
-#define REVISION 12
+#define REVISION 13
 
 #define DNAType 1
 #define RNAType 2

@@ -223,7 +223,7 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
   sgaps  =     NULL;
   scons  =     NULL;
   seqMatrix =  NULL;
-  //~ identities = NULL;
+  identities = NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 

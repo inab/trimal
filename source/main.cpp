@@ -42,9 +42,9 @@
 #define GAPPYOUT 1
 #define STRICT   2
 
-#define BUILD "2011-04-26"
+#define BUILD "2011-04-27"
 #define VERSION 1.3
-#define REVISION 12
+#define REVISION 13
 
 void menu(void);
 void examples(void);
@@ -1600,12 +1600,17 @@ int main(int argc, char *argv[]){
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
-  if((outhtml != NULL) && (!appearErrors))
+  if((outhtml != NULL) && (!appearErrors)) {
+
+    cerr << endl << singleAlig -> getNumAminos() << ":" << singleAlig -> getNumSpecies() << endl;
+
     if(!origAlig -> alignmentSummaryHTML(outhtml, singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
                                      singleAlig -> getCorrespResidues(), singleAlig -> getCorrespSequences(), compareVect)) {
       cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
       appearErrors = true;
     }
+
+  }
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */

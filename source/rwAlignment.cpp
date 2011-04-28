@@ -1805,10 +1805,15 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
   /* Generate an HTML file with a visual summary about which sequences/columns
    * have been selected and which have not */
 
-  int i, j, k, upper, maxLongName, *gapsValues;
+  int i, j, k, kj, upper, maxLongName, *gapsValues;
+  string tmpColumn;
   float *simValues;
   bool *res, *seq;
   ofstream file;
+  char type;
+
+  /* Allocate some local memory */
+  tmpColumn.reserve(sequenNumber);
 
   /* Check whether sequences in the alignment are aligned or not.
    * Warn about it if there are not aligned. */
@@ -1832,6 +1837,9 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
   res = new bool[residNumber];
   for(i = 0; i < residNumber; i++)
     res[i] = false;
+
+  cerr << endl << residues << endl << endl;
+
   for(i = 0; i < residues; i++)
     res[selectedRes[i]] = true;
 
@@ -1856,10 +1864,22 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
     << "http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />"
     << endl << "    <title>trimAl v1.3 Summary</title>" << endl
     << "    <style type=\"text/css\" media=\"all\">" << endl
-    << "    .sel  { background-color: #C9C9C9; }\n"
+
+    << "    #b  { background-color: #3366ff; }\n"
+    << "    #r  { background-color: #cc0000; }\n"
+    << "    #g  { background-color: #33cc00; }\n"
+    << "    #p  { background-color: #ff6666; }\n"
+    << "    #m  { background-color: #cc33cc; }\n"
+    << "    #o  { background-color: #ff9900; }\n"
+    << "    #c  { background-color: #46C7C7; }\n"
+    << "    #y  { background-color: #FFFF00; }\n"
+
+    << "    .sel  { background-color: #B9B9B9; }\n"
+    << "    .nsel { background-color: #E9E9E9; }\n"
+
   /* Sets of colors for high-lighting scores intervals */
-    << "    .c1   { background-color: #E0E0FF; }\n"
-    << "    .c2   { background-color: #FFF8DC; }\n"
+    << "    .c1   { background-color: #FFFBF2; }\n"
+    << "    .c2   { background-color: #FFF8CC; }\n"
     << "    .c3   { background-color: #FAF0BE; }\n"
     << "    .c4   { background-color: #F0EAD6; }\n"
     << "    .c5   { background-color: #F3E5AB; }\n"
@@ -1869,11 +1889,12 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
     << "    .c9   { background-color: #B8860B; color: white; }\n"
     << "    .c10  { background-color: #918151; color: white; }\n"
     << "    .c11  { background-color: #967117; color: white; }\n"
-    << "    .c12  { background-color: #0000AD; color: white; }\n"
+    << "    .c12  { background-color: #6E5411; color: white; }\n"
+
   /* Other HTML elements */
     << "    </style>\n  </head>\n\n" << "  <body>\n" << "  <pre>" << endl
-    << "  <span class=sel>Selected Residues/Sequences</span>" << endl
-    << "  Deleted Residues/Sequences" << endl;
+    << "  <span  class=sel>Selected Residues/Sequences</span>" << endl
+    << "  <span class=nsel>Deleted Residues/Sequences </span>" << endl;
 
   /* Print headers for different scores derived from input alignment/s */
   if (gapsValues != NULL)
@@ -1928,22 +1949,25 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
         << setw(utils::max(6, maxLongName - seqsName[i].size() + 6))
         << right << "";
 
-      /* Print first residue for each sequence in that block. It is useful to
-       * reduce amount of HTML code */
-      file << ((seq[i] && res[j]) ? "<span class=sel>" : "") << sequences[i][j];
 
-      /* Print sequences itself */
-      for(k = j + 1; ((k < residNumber) && (k < (j + HTMLBLOCKS))); k++) {
-        /* Print residues */
-        if (!seq[i] or (res[k] == res[k-1]))
+      /* Print residues corresponding to current sequences block */
+      for(k = j; ((k < residNumber) && (k < upper)); k++) {
+        for(kj = 0, tmpColumn.clear(); kj < sequenNumber; kj++)
+          tmpColumn += sequences[kj][k];
+        /* Determine residue color based on residues across the alig column */
+        type = utils::determineColor(sequences[i][k], tmpColumn);
+        if (type == 'w')
           file << sequences[i][k];
         else
-          file << ((res[k] && !res[k-1]) ? "<span class=sel>" : "</span>")
-            << sequences[i][k];
+          file << "<span id=" << type << ">" << sequences[i][k] << "</span>";
       }
-      /* Close any HTML element that it is still open */
-      file << ((res[k-1] and seq[i]) ? "</span>" : "") << endl;
+      file << endl;
     }
+
+    file << endl << setw(maxLongName + 10) << left << "    Select Cols:    ";
+    for(k = j; ((k < residNumber) && (k < (j + HTMLBLOCKS))); k++)
+      file << "<span class=" << (res[k] ? "sel" : "nsel") << "> </span>";
+    file << endl;
 
     /* If there is not any score to print, skip this part of the function */
     if ((gapsValues == NULL) and (simValues == NULL) and (consValues == NULL))
