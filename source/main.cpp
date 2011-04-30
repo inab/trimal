@@ -708,7 +708,7 @@ int main(int argc, char *argv[]){
       if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
          (comThreshold != -1) || (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Not allowed in combination of other manual methods such as manual "
-		     << "selection of sequences/columns." << endl << endl;
+         << "selection of sequences/columns." << endl << endl;
         appearErrors = true;
       }
 
@@ -749,7 +749,7 @@ int main(int argc, char *argv[]){
       if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
          (comThreshold != -1) || (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Not allowed in combination of other manual methods such as manual "
-		     << "selection of sequences/columns." << endl << endl;
+         << "selection of sequences/columns." << endl << endl;
         appearErrors = true;
       }
 
@@ -1085,13 +1085,13 @@ int main(int argc, char *argv[]){
   /* ------------------------------------------------------------------------------------------------------ */
   if((!appearErrors) && (infile != NULL) && (forceFile != NULL)) {
      cerr << endl << "ERROR: You can not use a single alignmet at the same "
-	      << "time that you force the alignment selection." << endl << endl;
+        << "time that you force the alignment selection." << endl << endl;
      appearErrors = true;
   }
   /* ------------------------------------------------------------------------------------------------------ */
   if((!appearErrors) && (compareset == -1) && (forceFile != NULL)) {
      cerr << endl << "ERROR: You can not force the alignment selection without set"
-	      << " an alignment dataset against to compare it." << endl << endl;
+        << " an alignment dataset against to compare it." << endl << endl;
      appearErrors = true;
   }
   /* ------------------------------------------------------------------------------------------------------ */
@@ -1134,7 +1134,7 @@ int main(int argc, char *argv[]){
   if((complementary) && (!appearErrors))
     if((!nogaps) && (!noallgaps) && (!gappyout) && (!strict) && (!strictplus) && (!automated1)
       && (gapThreshold == -1) && (conserve == -1) && (simThreshold == -1) && (!selectCols) && (!selectSeqs)
-	  && (resOverlap == -1) && (seqOverlap == -1) && (maxIdentity == -1) && (clusters == -1)) {
+    && (resOverlap == -1) && (seqOverlap == -1) && (maxIdentity == -1) && (clusters == -1)) {
       cerr << endl << "ERROR: This parameter can only be used with either an automatic or a manual method." << endl << endl;
       appearErrors = true;
     }
@@ -1144,7 +1144,7 @@ int main(int argc, char *argv[]){
   if((terminal) && (!appearErrors))
     if((!nogaps) && (!noallgaps) && (!gappyout) && (!strict) && (!strictplus) && (!automated1)
       && (gapThreshold == -1) && (conserve == -1) && (simThreshold == -1) && (!selectCols) && (!selectSeqs)
-	  && (resOverlap == -1) && (seqOverlap == -1) && (maxIdentity == -1) && (clusters == -1)) {
+    && (resOverlap == -1) && (seqOverlap == -1) && (maxIdentity == -1) && (clusters == -1)) {
       cerr << endl << "ERROR: This parameter '-terminalonly' can only be used with either an automatic or a manual method." << endl << endl;
       appearErrors = true;
     }
@@ -1178,7 +1178,7 @@ int main(int argc, char *argv[]){
    if((!nogaps) && (!noallgaps) && (!gappyout) && (!strict) && (!strictplus) && (!automated1) &&
       (gapThreshold == -1) && (conserve == -1) && (simThreshold == -1) && (comThreshold == -1) &&
       (!selectCols) && (!selectSeqs) && (resOverlap == -1) && (seqOverlap == -1) && (maxIdentity == -1) &&
-	  (clusters == -1)) {
+    (clusters == -1)) {
       cerr << endl << "ERROR: This parameter can only be used with any trimming method." << endl << endl;
       appearErrors = true;
     }
@@ -1550,7 +1550,7 @@ int main(int argc, char *argv[]){
 
     /* -------------------------------------------------------------------- */
     if(delColumns != NULL) {
-	  num = delColumns[0];
+    num = delColumns[0];
       if(delColumns[num] >= origAlig -> getNumAminos()) {
         cerr << endl << "ERROR: This option only accepts integer numbers between 0 and the number of columns - 1." << endl << endl;
         appearErrors = true;
@@ -1579,16 +1579,16 @@ int main(int argc, char *argv[]){
   /* -------------------------------------------------------------------- */
   if(maxIdentity != -1) {
     singleAlig = origAlig -> getClustering(maxIdentity);
-	singleAlig = singleAlig -> cleanNoAllGaps(false);
+  singleAlig = singleAlig -> cleanNoAllGaps(false);
   }
   else if(clusters != -1) {
-	if(clusters > origAlig -> getNumSpecies()) {
+  if(clusters > origAlig -> getNumSpecies()) {
         cerr << endl << "ERROR:The number of clusters from the alignment can not be larger than the number of sequences from that alignment." << endl << endl;
         appearErrors = true;
     } else {
-	  singleAlig = origAlig -> getClustering(origAlig -> getCutPointClusters(clusters));
-	  singleAlig = singleAlig -> cleanNoAllGaps(false);
-	}
+    singleAlig = origAlig -> getClustering(origAlig -> getCutPointClusters(clusters));
+    singleAlig = singleAlig -> cleanNoAllGaps(false);
+  }
   }
   /* -------------------------------------------------------------------- */
 
@@ -1611,12 +1611,12 @@ int main(int argc, char *argv[]){
   /* -------------------------------------------------------------------- */
   if(backtransFile != NULL) {
 
-	if(seqNames != NULL) delete [] seqNames;
+  if(seqNames != NULL) delete [] seqNames;
     seqNames = new string[singleAlig -> getNumSpecies()];
 
-	singleAlig -> getSequences(seqNames);
+  singleAlig -> getSequences(seqNames);
 
-	singleAlig = backtranslation -> getTranslationCDS(singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
+  singleAlig = backtranslation -> getTranslationCDS(singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
                                                       singleAlig -> getCorrespResidues(), seqNames, seqMatrix, singleAlig);
   }
   /* -------------------------------------------------------------------- */
@@ -1673,8 +1673,8 @@ void menu(void) {
 
   cout << "Please cite:" << endl
        << "\t\ttrimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses."
-	   << "\n\t\tSalvador Capella-Gutierrez; Jose M. Silla-Martinez; Toni Gabaldon."
-	   << "\n\t\tBioinformatics 2009, 25:1972-1973." << endl << endl;
+     << "\n\t\tSalvador Capella-Gutierrez; Jose M. Silla-Martinez; Toni Gabaldon."
+     << "\n\t\tBioinformatics 2009, 25:1972-1973." << endl << endl;
 
   cout << "Basic usage" << endl
        << "\ttrimal -in <inputfile> -out <outputfile> -(other options)." << endl << endl;
@@ -1732,10 +1732,11 @@ void menu(void) {
   cout << "                             " << "(Optimized for Neighbour Joining phylogenetic tree reconstruction)."<< endl << endl;
 
   cout << "    -automated1              " << "Use a heuristic selection of the automatic method based on similarity statistics. "
-                                          << "(see User Guide)." << endl;
+                                          << "(see User Guide). (Optimized for Maximum Likelihood phylogenetic tree reconstruction)."
+                                          << endl << endl;
+
   cout << "    -terminalonly            " << "Only columns out of internal boundaries (first and last column without gaps) are " << endl;
-  cout << "                             " << "candidated to be trimmed depending on the applied method" << endl;
-  cout << "                             " << "(Optimized for Maximum Likelihood phylogenetic tree reconstruction)."<< endl << endl;
+  cout << "                             " << "candidated to be trimmed depending on the applied method" << endl << endl;
 
   cout << "    -resoverlap              " << "Minimum overlap of a positions with other positions in the column to be considered a "
                                           << "\"good position\". Range: [0 - 1]. (see User Guide)." << endl;
