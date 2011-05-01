@@ -4,25 +4,22 @@
     trimAl v1.3: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    readAl v1.3: a tool for automated alignment conversion among different
-                 formats.
-
     2009-2011 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
-    This file is part of trimAl/readAl.
+    This file is part of trimAl.
 
-    trimAl/readAl are free software: you can redistribute it and/or modify
+    trimAl is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, the last available version.
 
-    trimAl/readAl are distributed in the hope that it will be useful,
+    trimAl is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with trimAl/readAl. If not, see <http://www.gnu.org/licenses/>.
+    along with trimAl. If not, see <http://www.gnu.org/licenses/>.
 
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */

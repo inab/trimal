@@ -11,6 +11,8 @@ DUGB  =
 
 all:			readal trimal
 
+.PHONY :		all trimal readal clean
+
 preview:		alignment.o statisticsGaps.o utils.o similarityMatrix.o statisticsConservation.o sequencesMatrix.o compareFiles.o
 
 trimal:			preview
