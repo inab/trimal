@@ -215,9 +215,10 @@ void alignment::printSeqIdentity(void) {
     maxLongName = utils::max(maxLongName, seqsName[i].size());
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  cout.precision(6);
+  cout.precision(4);
+  cout << fixed;
   cout << endl << "#Mean Percentage of identity:"
-       << "                             " << avgSeq;
+       << "                            " << avgSeq;
   cout << endl << "#Mean Percentage of identity "
        << "with most similar sequence: " << maxSeq;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -226,13 +227,20 @@ void alignment::printSeqIdentity(void) {
   cout << endl << endl << "#Percentage of identity matrix:";
   for(i = 0; i < sequenNumber; i++) {
     cout << endl << setw(maxLongName + 2) << left << seqsName[i] << "  ";
-    for(j = 0; j < sequenNumber; j++)
+    for(j = 0; j < i; j++)
       cout << setiosflags(ios::left) << setw(10) << identities[i][j] * 100 << "  ";
+	cout.precision(3);
+    cout << setiosflags(ios::left) << setw(10) << 100.00 << "  ";
+	cout.precision(4);
+    for(j = i + 1; j < sequenNumber; j++)
+      cout << setiosflags(ios::left) << setw(10) << identities[i][j] * 100 << "  ";
+
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   cout << endl << endl << "#Percentage of identity with most similar sequence:" << endl;
+
   for(i = 0; i < sequenNumber; i++)
     cout << setw(maxLongName + 2) << left << seqsName[i] << "  " << setiosflags(ios::left)
 	     << setw(5) << maxs[i][0] * 100   << "    " << seqsName[(int) maxs[i][1]] << endl;

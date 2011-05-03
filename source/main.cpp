@@ -42,7 +42,7 @@
 #define GAPPYOUT 1
 #define STRICT   2
 
-#define BUILD "2011-04-27"
+#define BUILD "2011-05-03"
 #define VERSION 1.3
 #define REVISION 13
 
@@ -1736,7 +1736,11 @@ void menu(void) {
                                           << endl << endl;
 
   cout << "    -terminalonly            " << "Only columns out of internal boundaries (first and last column without gaps) are " << endl;
-  cout << "                             " << "candidated to be trimmed depending on the applied method" << endl << endl;
+  cout << "                             " << "candidated to be trimmed depending on the applied method" << endl;
+
+  cout << "    -block <n>               " << "Minimum column block size to be kept in the trimmed alignment. Available with manual"
+                                          << " and automatic (gappyout) methods" << endl << endl;
+
 
   cout << "    -resoverlap              " << "Minimum overlap of a positions with other positions in the column to be considered a "
                                           << "\"good position\". Range: [0 - 1]. (see User Guide)." << endl;
@@ -1751,9 +1755,6 @@ void menu(void) {
   cout << "    -gw <n>                  " << "(half) Window size only applies to statistics/methods based on Gaps." << endl;
   cout << "    -sw <n>                  " << "(half) Window size only applies to statistics/methods based on Similarity." << endl;
   cout << "    -cw <n>                  " << "(half) Window size only applies to statistics/methods based on Consistency." << endl << endl;
-
-  cout << "    -block <n>               " << "Minimum column block size to be kept in the trimmed alignment. Available with manual and automatic (gappyout) methods"
-                                          << endl << endl;
 
   cout << "    -sgc                     " << "Print gap score for each column in the input alignment." << endl;
   cout << "    -sgt                     " << "Print accumulated gap scores for the alignment." << endl;

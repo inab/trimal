@@ -27,11 +27,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "compareFiles.h"
 #include "alignment.h"
 #include "utils.h"
 
-#define BUILD "2011-04-27"
+#define BUILD "2011-05-03"
 #define VERSION 1.3
 #define REVISION 13
 
@@ -41,311 +40,337 @@
 
 void menu(void);
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[]) {
 
-  /* Parameters Control */
-  alignment compAlig;
-  int outformat = -1, i = 1;
+  /* Input alignment */
+  alignment inAlig;
+
+  /* Local variables */
+  string info;
+  int i, outformat = -1;
   char *infile = NULL, *outfile = NULL;
-  bool appearErrors = false, format = false, type = false, reverse = false, shortNames = false;
+  bool errors = false, reverse = false, shortNames = false, format = false, \
+    type = false;
 
-  /* Exec: readAl - Shows the menu. */
+  /* If there is no parameters: Inform about readAl options and finish */
   if(argc == 1) {
     menu();
     return 0;
   }
 
-  /***** ***** ***** ***** ***** ***** ***** Parameters Processing ***** ***** ***** ***** ***** ***** *****/
-  /* ------------------------------------------------------------------------------------------------------ */
-
-  /*                                        Help and Version Menu                                           */
-
-  /* ------------------------------------------------------------------------------------------------------ */
+  i = 1;
+  /* If option -h has been used, inform about readAl options and finish */
   if(!strcmp(argv[i], "-h") && (i+1 == argc)) {
     menu();
     return 0;
   }
 
+  /* Inform about current readAl version/revision/build and finish */
   if(!strcmp(argv[i], "--version") && (i+1 == argc)) {
-    cout << endl << "readAl v" << VERSION << ".rev" << REVISION
-         << " build[" << BUILD << "]" << endl << endl;
+      cout << endl << "readAl v" << VERSION << ".rev" << REVISION << " build["
+        << BUILD << "]" << endl << endl;
     return 0;
   }
 
-  /* ------------------------------------------------------------------------------------------------------ */
+  /* Catch different input options and then check whether there is a valid
+   * combination of parameters */
   while(i < argc) {
 
-   /* ------------------------------------------------------------------------------------------------------ */
-
-   /*                                Input and Output files and format output                                */
-
-   /* Option -in ------------------------------------------------------------------------------------------- */
+    /* Input alignment option: -in */
     if(!strcmp(argv[i], "-in") && (i+1 != argc) && (infile == NULL)) {
-
+      /* Allocate memory for storing input alignment filename */
       infile = new char[strlen(argv[++i]) + 1];
       strcpy(infile, argv[i]);
 
-      if(!compAlig.loadAlignment(infile)) {
-        cerr << endl << "ERROR: Alignment not loaded: \"" << infile << "\" Check the file's content." << endl << endl;
-        appearErrors = true;
+      /* Load input alignment and inform about it if something is wrong */
+      if(!inAlig.loadAlignment(infile)) {
+        cerr << endl << "ERROR: Alignment not loaded: \"" << infile
+          << "\" Check the file's content." << endl << endl;
+        errors = true;
       }
     }
-   /* ------------------------------------------------------------------------------------------------------ */
 
-   /* Option -out ------------------------------------------------------------------------------------------ */
+    /* Output filename option: -out */
     else if(!strcmp(argv[i], "-out") && (i+1 != argc) && (outfile == NULL)) {
+      /* Allocate memory for storing output alignment filename */
       outfile = new char[strlen(argv[++i]) + 1];
       strcpy(outfile, argv[i]);
     }
-   /* ------------------------------------------------------------------------------------------------------ */
 
-   /*                                         Information File format                                        */
-
-   /* Option -format ------------------------------------------------------------------------------------ */
-    else if(!strcmp(argv[i], "-reverse") && (!reverse))
-      reverse = true;
-   /* ------------------------------------------------------------------------------------------------------ */
-
-   /*                                         Information File format                                        */
-
-   /* Option -format ------------------------------------------------------------------------------------ */
+    /* Get information about input file format */
     else if(!strcmp(argv[i], "-format") && (!format))
       format = true;
 
-   /* Option -type ------------------------------------------------------------------------------------ */
+    /* Get information about input file residues type */
     else if(!strcmp(argv[i], "-type") && (!type))
       type = true;
 
-   /* ------------------------------------------------------------------------------------------------------ */
+    /* Get input sequences reverse option: -reverse */
+    else if(!strcmp(argv[i], "-reverse") && (!reverse))
+      reverse = true;
 
-   /*                                           Output File format                                           */
+    /* For all output format options is checked if more
+     * than one output format has been required */
 
-   /* Option -clustal -------------------------------------------------------------------------------------- */
+    /* Set output alignment format to CLUSTAL: -clustal */
     else if(!strcmp(argv[i], "-clustal") && (outformat == -1))
       outformat = 1;
 
-   /* Option -fasta -------------------------------------------------------------------------------------- */
+    /* Set output alignment format to FASTA: -fasta */
     else if(!strcmp(argv[i], "-fasta") && (outformat == -1))
       outformat = 8;
 
-   /* Option -fasta-m10 -------------------------------------------------------------------------------------- */
+   /* Set output alignment format to FASTA and ask for using only
+    * up to 10 characters for sequences name: -fasta_m10 */
     else if(!strcmp(argv[i], "-fasta_m10") && (outformat == -1)) {
-      outformat = 8; shortNames = true;
-   }
+      outformat = 8;
+      shortNames = true;
+    }
 
-   /* Option -nbrf ------------------------------------------------------------------------------------ */
+    /* Set output alignment format to NBRF/PIR: -nbrf */
     else if(!strcmp(argv[i], "-nbrf") && (outformat == -1))
       outformat = 3;
 
-   /* Option -nexus ------------------------------------------------------------------------------------ */
+    /* Set output alignment format to NEXUS: -nexus */
     else if(!strcmp(argv[i], "-nexus") && (outformat == -1))
       outformat = 17;
 
-   /* Option -mega ------------------------------------------------------------------------------------ */
+    /* Set output alignment format to MEGA: -mega */
     else if(!strcmp(argv[i], "-mega") && (outformat == -1))
       outformat = 21;
 
-   /* Option -phylip3.2 --------------------------------------------------------------------------------- */
+    /* Set output alignment format to PHYLIP3.2 (sequential): -phylip3.2 */
     else if(!strcmp(argv[i], "-phylip3.2") && (outformat == -1))
       outformat = 11;
 
-   /* Option -phylip3.2-m10 ----------------------------------------------------------------------------- */
+    /* Set output alignment format to PHYLIP3.2 (sequential) and ask for
+     * using only up to 10 characters for sequences name: -phylip3.2_m10 */
     else if(!strcmp(argv[i], "-phylip3.2_m10") && (outformat == -1)) {
-      outformat = 11; shortNames = true;
+      outformat = 11;
+      shortNames = true;
     }
 
-   /* Option -phylip --------------------------------------------------------------------------- */
+    /* Set output alignment format to PHYLIP (interleaved): -phylip */
     else if(!strcmp(argv[i], "-phylip") && (outformat == -1))
       outformat = 12;
 
-   /* Option -phylip-m10 ----------------------------------------------------------------------- */
+    /* Set output alignment format to PHYLIP (interleaved) and ask for
+     * using only up to 10 characters for sequences name: -phylip_m10 */
     else if(!strcmp(argv[i], "-phylip_m10") && (outformat == -1)) {
       outformat = 12; shortNames = true;
     }
 
-   /* Option -phylip_paml ---------------------------------------------------------------------- */
+    /* Set output alignment format to PHYLIP compatible with programs
+     * such as PAML: -phylip_paml */
     else if(!strcmp(argv[i], "-phylip_paml") && (outformat == -1))
       outformat = 13;
 
-   /* Option -phylip_paml-m10 ------------------------------------------------------------------ */
+    /* Set output alignment format to PHYLIP compatible with programs such as
+     * PAML and ask for using only up to 10 characters for sequences name:
+     * -phylip_paml_m10 */
     else if(!strcmp(argv[i], "-phylip_paml_m10") && (outformat == -1)) {
-      outformat = 13; shortNames = true;
+      outformat = 13;
+      shortNames = true;
     }
 
-   /* Option -html ---------------------------------------------------------------------------------------- */
+    /* Set output alignment format to HTML, that means residues will be colored
+     * according to its physic-chemical properties using CLUSTAL color scheme:
+     * -html */
     else if(!strcmp(argv[i], "-html") && (outformat == -1))
       outformat = 100;
 
-   /* Option -onlyseqs ------------------------------------------------------------------------------------ */
+    /* Get unaligned sequences from input file: -onlyseqs */
     else if(!strcmp(argv[i], "-onlyseqs") && (outformat == -1))
       outformat = 99;
-   /* ------------------------------------------------------------------------------------------------------ */
 
-   /*                                          Not Valids Parameters                                         */
-
-   /* ------------------------------------------------------------------------------------------------------ */
+    /* Inform about no valid options */
     else {
-      cerr << endl << "ERROR: Parameter \"" << argv[i] << "\" not valid." << endl << endl;
-      appearErrors = true;
+      cerr << endl << "ERROR: Parameter \"" << argv[i] << "\" not valid."
+        << endl << endl;
+      errors = true;
     }
-   /* ------------------------------------------------------------------------------------------------------ */
     i++;
 
-    if(appearErrors)
+    /* If any error has been detected, break input options loop
+     * and then process detected error */
+    if(errors)
       break;
   }
-  /* ------------------------------------------------------------------------------------------------------ */
 
-  /***** ***** ***** ***** ***** ***** ***** Postprocessing parameters  ***** ***** ***** ***** ***** ***** *****/
-
- /* ------------------------------------------------------------------------------------------------------ */
-
-  if((infile == NULL) && (!appearErrors)) {
+  /* Final verifications to detect any possible mistake in the input options */
+  /* It is mandatory to provide an input file. Otherwise, inform about it */
+  if((infile == NULL) && (!errors)) {
     cerr << endl << "ERROR: An input file has to be defined." << endl << endl;
-    appearErrors = true;
+    errors = true;
   }
 
- /* ------------------------------------------------------------------------------------------------------ */
-
-  if((outformat == -1) && (!format) && (!type) && (!reverse) && (!appearErrors)) {
-    cerr << endl << "ERROR: An option has to be defined." << endl << endl;
-    appearErrors = true;
+  /* It is mandatory to choose an option for processing input alignment */
+  if((outformat == -1) && (!reverse) && (!format) && (!type) && (!errors)) {
+    cerr << endl << "ERROR: An option has to be choose." << endl << endl;
+    errors = true;
   }
 
- /* ------------------------------------------------------------------------------------------------------ */
-
-  if(((outformat != -1) || (reverse)) && ((format) || (type)) && (!appearErrors)) {
-    cerr << endl << "ERROR: Only one option has to be choosen: either an output format or the input file information "
-         << "(Format and/or type options)." << endl << endl;
-    appearErrors = true;
+  /* Only one option can be selected when an output file is not defined */
+  if((outfile == NULL) && ((outformat != -1) || reverse) && (format || type) \
+    && (!errors)) {
+    cerr << endl << "ERROR: Only one option can be selected: either an output "
+      << "format or get information about input file when an output file is "
+      << "not defined" << endl << endl;
+    errors = true;
   }
 
- /* ------------------------------------------------------------------------------------------------------ */
-
- /* ------------------------------------------------------------------------------------------------------ */
-
-  if(((format) || (type)) && (outfile != NULL) && (!appearErrors)) {
-    cerr << endl << "ERROR: Not should defined an output file in order to get input file information." << endl << endl;
-    appearErrors = true;
+  /* Does not make any sense to define any output file when
+   * only information about input alignment is requested */
+  if(((outfile != NULL) && outformat == -1 && !reverse) && (format || type) \
+    && (!errors)) {
+    cerr << endl << "ERROR: An output file should not be provided when only "
+      << "information about input alignment is requested" << endl << endl;
+    errors = true;
   }
 
- /* ------------------------------------------------------------------------------------------------------ */
+  /* If no error has been detected, process input file */
+  if(!errors) {
 
-  if(appearErrors) {
-    delete[] outfile;
-    delete[] infile;
+    /* Print information about input alignment */
+    if((format) || (type)) {
+      cout << endl << infile;
 
+      if(format) {
+        /* Input file format */
+        if (inAlig.formatInputFile() == 1)
+          info = "clustal";
+        else if (inAlig.formatInputFile() == 3)
+          info = "nbrf/pir";
+        else if (inAlig.formatInputFile() == 8)
+          info = "fasta";
+        else if (inAlig.formatInputFile() == 11)
+          info = "phylip3.2";
+        else if (inAlig.formatInputFile() == 12)
+          info = "phylip";
+        else if (inAlig.formatInputFile() == 17)
+          info = "nexus";
+        else if (inAlig.formatInputFile() == 21)
+          info = "mega_interleaved";
+        else if (inAlig.formatInputFile() == 22)
+          info = "mega_sequential";
+        else
+          info = "unknown";
+
+        /* Inform about if sequences are aligned or not */
+        if (inAlig.isFileAligned())
+          cout << "\t" << info << "\taligned";
+        else
+          cout << "\t" << info << "\tunaligned";
+      }
+
+      if(type) {
+        /* Inform about biological datatype */
+        if (inAlig.getTypeAlignment() == DNAType)
+          cout << "\t" << "nucleotides:dna";
+        else if (inAlig.getTypeAlignment() == RNAType)
+          cout << "\t" << "nucleotides:rna";
+        else if (inAlig.getTypeAlignment() == AAType)
+          cout << "\t" << "aminoacids";
+        else
+          cout << "\t" << "unknown";
+      }
+      cout << endl << endl;
+    }
+
+    if((outfile != NULL) || (outformat != -1) || reverse || shortNames) {
+      /* Set output format */
+      if(outformat != -1 || shortNames)
+        inAlig.setOutputFormat(outformat, shortNames);
+      /* Ask for getting the reverse of input file */
+      if(reverse)
+        inAlig.setReverse();
+
+      /* If a outfile has been provided, try to generate output file */
+      if(outfile != NULL) {
+        if(!inAlig.saveAlignment(outfile)) {
+          cerr << endl << "ERROR: Impossible to generate OUTPUT file." << endl
+            << endl;
+          return -1;
+        }
+      /* ... otherwise dump outfile content to standard output */
+      } else {
+        inAlig.printAlignment();
+      }
+    }
+  }
+
+  /* Deallocate local memory */
+  delete [] infile;
+  delete [] outfile;
+
+  /* Inform about readAl execution */
+  if(errors)
     return -1;
-  }
-
-  /* ------------------------------------------------------------------------------------------------------ */
-
-  /***** ***** ***** ***** ***** ***** **** End of Parameters Processing **** ***** ***** ***** ***** ***** *****/
-
-  if((format) || (type)) {
-    cout << endl << infile;
-
-    if(format) {
-      switch(compAlig.formatInputFile()) {
-        case 1:  cout << "\t" << "clustal";           break;
-        case 3:  cout << "\t" << "nbrf/pir";          break;
-        case 8:  cout << "\t" << "fasta";             break;
-        case 11: cout << "\t" << "phylip3.2";         break;
-        case 12: cout << "\t" << "phylip";            break;
-        case 17: cout << "\t" << "nexus";             break;
-        case 21: cout << "\t" << "mega_interl";       break;
-        case 22: cout << "\t" << "mega_noninterl";    break;
-        default: cout << "\t" << "unknown";
-      }
-      switch(compAlig.typeInputFile()) {
-        case SINGLE: cout << "\t" << "single";        break;
-        case MULTI:  cout << "\t" << "multi";         break;
-        default:     cout << "\t" << "unknown";
-      }
-    }
-
-    if(type) {
-      switch(compAlig.getTypeAlignment()) {
-        case DNAType:
-        case RNAType: cout << "\t" << "nucleotides";  break;
-        case AAType:  cout << "\t" << "aminoacids";   break;
-        default: cout << "\t" << "unknown";
-      }
-    }
-    cout << endl << endl;
-  }
-
-  else {
-
-    /* -------------------------------------------------------------------- */
-    if(outformat != -1) compAlig.setOutputFormat(outformat, shortNames);
-    if(reverse) compAlig.setReverse();
-    /* -------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------- */
-    if(outfile != NULL) {
-      if(!compAlig.saveAlignment(outfile)) {
-        cerr << endl << "ERROR: It's impossible to generate the output file." << endl << endl;
-        return -1;
-      }
-    }
-    else {
-      compAlig.printAlignment();
-    }
-    /* -------------------------------------------------------------------- */
-  }
-
-  /* -------------------------------------------------------------------- */
-  delete[] outfile;
-  delete[] infile;
-  /* -------------------------------------------------------------------- */
-
   return 0;
 }
 
 void menu(void) {
 
-  cout << endl;
-  cout << "readAl v" << VERSION << ".rev" << REVISION << " build[" << BUILD
-       << "]. 2009-2011. Salvador Capella-Gutierrez and Toni Gabaldón."
-       << endl << endl;
+  cout << endl
+    << "readAl v" << VERSION << ".rev" << REVISION << " build[" << BUILD
+    << "]. 2009-2011. Salvador Capella-Gutierrez and Toni Gabaldón." << endl
+    << endl
 
-  cout << "readAl webpage: http://trimal.cgenomics.org" << endl << endl;
+    << "readAl webpage: http://trimal.cgenomics.org" << endl << endl
 
-  cout << "This program is free software: you can redistribute it and/or modify " << endl
-       << "it under the terms of the GNU General Public License as published by " << endl
-       << "the Free Software Foundation, the last available version." << endl << endl;
+    << "This program is free software: you can redistribute it and/or modify "
+    << endl
+    << "it under the terms of the GNU General Public License as published by "
+    << endl
+    << "the Free Software Foundation, the last available version." << endl
+    << endl
 
-  cout << "Basic usage" << endl
-       << "\treadal -in <inputfile> -out <outputfile> -(format options)." << endl << endl;
+    << "Basic usage" << endl
+    << "\treadal -in <inputfile> -out <outputfile> [options]." << endl << endl
 
-  cout << "    -h                       " << "Prints this information and show some examples." << endl;
-  cout << "    --version                " << "Prints the readAl version." << endl << endl;
+    << "\t-h                  " << "Show this information." << endl
+    << "\t--version           " << "Show readAl version." << endl << endl
 
-  cout << "    -in <inputfile>          " << "Input file in several formats (clustal, fasta, NBRF/PIR, nexus, phylip3.2, phylip, mega)."
-                                          << endl;
-  cout << "    -out <outputfile>        " << "Output alignment in the same input format (default stdout)." << endl << endl;
+    << "\t-in <inputfile>     " << "Input file in several formats." << endl
+    << "\t-out <outputfile>   " << "Output file name (default STDOUT)." << endl
+    << endl
 
-  cout << "    -reverse                 " << "Output the reverse input alignment." << endl << endl;
+    << "\t-format             " << "Print information about input file format "
+    << "and if sequences are aligned or not." << endl
 
-  cout << "    -format                  " << "Prints the the input file format (fasta, clustal, ...) and kind (single or multi)." << endl;
-  cout << "    -type                    " << "Prints the input file type (Nucleotides or Amino Acids)." << endl << endl;
+    << "\t-type               " << "Print information about biological "
+    << "sequences datatype (nucleotides:dna, nucleotides:rna or aminoacids)"
+    << endl << endl
 
-  cout << "    -clustal                 " << "Output file in CLUSTAL format" << endl;
-  cout << "    -fasta                   " << "Output file in FASTA format" << endl;
-  cout << "    -fasta_m10               " << "Output file in FASTA format. Sequences name length up to 10 characters." << endl;
-  cout << "    -nbrf                    " << "Output file in NBRF/PIR format" << endl;
-  cout << "    -nexus                   " << "Output file in NEXUS format" << endl;
-  cout << "    -mega                    " << "Output file in MEGA format" << endl;
-  cout << "    -phylip_paml             " << "Output file in PHYLIP format compatible with PAML" << endl;
-  cout << "    -phylip_paml_m10         " << "Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters." << endl;
-  cout << "    -phylip3.2               " << "Output file in PHYLIP3.2 format" << endl;
-  cout << "    -phylip3.2_m10           " << "Output file in PHYLIP3.2 format. Sequences name length up to 10 characters." << endl;
-  cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl;
-  cout << "    -phylip_m10              " << "Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters." << endl << endl;
+    << "\t-onlyseqs           " << "Generate output with only residues from "
+    << "input file" << endl << endl
 
-  cout << "    -html                    " << "Output file in HTML with residues colored using the CLUSTAL scheme" << endl << endl;
+    << "\t-html               " << "Output residues colored according their "
+    << "physicochemical properties. HTML file." << endl << endl
 
-  cout << "    -onlyseqs                " << "Output file with the sequences without gaps in FASTA format" << endl << endl;
+    << "\t-reverse             " << "Output the reverse of sequences in "
+    << "input file." << endl << endl
+
+    << "\t-nbrf                " << "Output file in NBRF/PIR format" << endl
+    << "\t-mega                " << "Output file in MEGA format" << endl
+
+    << "\t-nexus               " << "Output file in NEXUS format" << endl
+    << "\t-clustal             " << "Output file in CLUSTAL format" << endl
+    << endl
+
+    << "\t-fasta               " << "Output file in FASTA format" << endl
+    << "\t-fasta_m10           " << "Output file in FASTA format. Sequences "
+    << "name up to 10 characters." << endl << endl
+
+    << "\t-phylip              " << "Output file in PHYLIP/PHYLIP4 format"
+    << endl
+    << "\t-phylip_m10          " << "Output file in PHYLIP/PHYLIP4 format. "
+    << "Sequences name up to 10 characters." << endl
+    << "\t-phylip_paml         " << "Output file in PHYLIP format compatible "
+    << "with PAML" << endl
+    << "\t-phylip_paml_m10     " << "Output file in PHYLIP format compatible "
+    << "with PAML. Sequences name up to 10 characters." << endl
+    << "\t-phylip3.2           " << "Output file in PHYLIP3.2 format" << endl
+    << "\t-phylip3.2_m10       " << "Output file in PHYLIP3.2 format. Sequences"
+    << " name up to 10 characters." << endl << endl;
 }
-

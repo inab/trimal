@@ -36,9 +36,9 @@
   * When several alignment are given now it is possible to force the selection of one
     of them using a new option "-forceselect". This is useful to trim a specific alignment
     based on its consistency scores computed from a given set of alignments independently
-    if that alignment is the most consistent among the set of those alignments. 
+    if that alignment is the most consistent among the set of those alignments.
     The selected alignment should not be present among alignments in the "-compareset"
-    input file.    
+    input file.
 
   * Former "-select" option has been converted into "-selectcols" for removing specific
     columns/range of columns.
@@ -47,7 +47,7 @@
     of sequences from input alignment.
 
   * Using "-backtrans" option it is possible to trim an input protein alignment and then
-    get a back-translated CDS alignment. Coding DNA sequences are mapped before trimming 
+    get a back-translated CDS alignment. Coding DNA sequences are mapped before trimming
     to protein sequences through sequences identifiers controlling stop codons, sequences
     lengths, etc, etc.
 
@@ -55,16 +55,16 @@
     input coding sequences for its stop codons (at positions multiple of 3).
 
   * Added a new option "-terminalonly" for removing only columns out of internal boundaries.
-    Internal boundaries are defined as the first and last column in the alignment without 
+    Internal boundaries are defined as the first and last column in the alignment without
     gaps. The columns removal depends on the applied trimming method, that means, if there
     is not columns to be deleted out of internal boundaries, no-columns will be deleted.
     All columns in-between internal boundaries are kept independently of any trimming methods
     decision.
 
-  * Added a new option "-clusters" for getting the most Nth representative sequences from 
+  * Added a new option "-clusters" for getting the most Nth representative sequences from
     input alignment. Representativeness is computed in terms of identity between each pair
-    of sequences in the alignment. Then an algorithm is applied for constructing a set of 
-    clusters based on those identities values. The longest sequences is selected as the 
+    of sequences in the alignment. Then an algorithm is applied for constructing a set of
+    clusters based on those identities values. The longest sequences is selected as the
     cluster representative for the final alignment.
 
   * Added a new option "-maxidentity" for getting sequences representatives at given identity
@@ -76,6 +76,9 @@
   * Added a new option "-block" for keeping only columns blocks equal or higher to that size
     in the final alignment. This option is available for manual trimming methods and only for
     "gappyout" method among automated ones.
+
+  * Changed identity scores matrix. Now it is shown "100.000" in the diagonal instead of
+    "0". It makes more sense to have a score of 100 for each sequence against itself.
 
   * Changed options name for making clear their meaning.
     * scc => ssc  - Similarity scores for columns in the alignment.
@@ -91,6 +94,10 @@
   * Added new option "-html" for getting an HTML file with alignments residues colored
     according to CLUSTAL scheme. This functionality is similar to SeaView/JalView visualization.
 
+  * Changed option "-format". Now it informs about input file format and if sequences are
+    aligned or not.
+
+  * Updated option "-type". Now it informs more about nucleotides datatype: dna or rna.
 
 trimAl/readAl v1.2. April 2009.
 
@@ -123,11 +130,11 @@ trimAl/readAl v1.2. April 2009.
     * Added support for mega
     * Added support for nbrf/pir
 
-  * Improved of statistics methods. 
+  * Improved of statistics methods.
     * Improved the information of the available methods.
     * Added the identity statistics.
 
-  * Improved of windows size methods. 
+  * Improved of windows size methods.
     * Consistency windows size.
 
   * Improved the similarity-matrices handling.
