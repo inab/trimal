@@ -226,36 +226,41 @@ int alignment::formatInputAlignment(char *alignmentFile) {
     /* If there are more than one sequence, analyze sequences distribution to
      * determine its format. */
     else if((sequenNumber != 0) && (residNumber != 0)) {
+      blocks = 0;
 
       /* Read line in a safer way */
-      if (line != NULL)
-        delete [] line;
-      line = utils::readLine(file);
+      do {
+        if (line != NULL)
+          delete [] line;
+        line = utils::readLine(file);
+      } while ((line == NULL) && (!file.eof()));
+
+      /* If the file end is reached without a valid line, warn about it */
+      if (file.eof())
+        return false;
 
       firstWord = strtok(line, DELIMITERS);
-      if(firstWord != NULL)
-        blocks = 1;
-
-      firstWord = strtok(NULL, DELIMITERS);
       while(firstWord != NULL) {
         blocks++;
         firstWord = strtok(NULL, DELIMITERS);
       }
 
       /* Read line in a safer way */
-      if (line != NULL)
-        delete [] line;
-      line = utils::readLine(file);
+      do {
+        if (line != NULL)
+          delete [] line;
+        line = utils::readLine(file);
+      } while ((line == NULL) && (!file.eof()));
 
       firstWord = strtok(line, DELIMITERS);
-      if(firstWord != NULL)
-        blocks--;
-
-      firstWord = strtok(NULL, DELIMITERS);
       while(firstWord != NULL) {
         blocks--;
         firstWord = strtok(NULL, DELIMITERS);
       }
+
+      /* If the file end is reached without a valid line, warn about it */
+      if (file.eof())
+        return false;
 
       /* Phylip Interleaved (12) or Sequential (11) */
       format = (!blocks) ? 12 : 11;
@@ -288,9 +293,13 @@ bool alignment::loadPhylipAlignment(char *alignmentFile) {
   filename.append(alignmentFile);
   filename.append(";");
 
-  /* Read the first line in a safer way */
-  line = utils::readLine(file);
-  if (line == NULL)
+  /* Read first valid line in a safer way */
+  do {
+    line = utils::readLine(file);
+  } while ((line == NULL) && (!file.eof()));
+
+  /* If the file end is reached without a valid line, warn about it */
+  if (file.eof())
     return false;
 
   /* Read the input sequences and residues for each sequence numbers */
@@ -391,9 +400,13 @@ bool alignment::loadPhylip3_2Alignment(char *alignmentFile) {
   filename.append(alignmentFile);
   filename.append(";");
 
-  /* Read the first line in a safer way */
-  line = utils::readLine(file);
-  if (line == NULL)
+  /* Read first valid line in a safer way */
+  do {
+    line = utils::readLine(file);
+  } while ((line == NULL) && (!file.eof()));
+
+  /* If the file end is reached without a valid line, warn about it */
+  if (file.eof())
     return false;
 
   /* Get the sequences and residues numbers. If there is any mistake,
@@ -503,9 +516,13 @@ bool alignment::loadClustalAlignment(char *alignmentFile) {
   filename.append(alignmentFile);
   filename.append(";");
 
-  /* The first line corresponding to CLUSTAL label is ignored */
-  line = utils::readLine(file);
-  if (line == NULL)
+  /* The first valid line corresponding to CLUSTAL label is ignored */
+  do {
+    line = utils::readLine(file);
+  } while ((line == NULL) && (!file.eof()));
+
+  /* If the file end is reached without a valid line, warn about it */
+  if (file.eof())
     return false;
 
   /* Ignore blank lines before first sequence block starts */
@@ -911,8 +928,14 @@ bool alignment::loadMegaNonInterleavedAlignment(char *alignmentFile) {
   filename.append(alignmentFile);
   filename.append(";");
 
-  /* Skip first line */
-  line = utils::readLine(file);
+  /* Skip first valid line */
+  do {
+    line = utils::readLine(file);
+  } while ((line == NULL) && (!file.eof()));
+
+  /* If the file end is reached without a valid line, warn about it */
+  if (file.eof())
+    return false;
 
   /* Try to get input alignment information */
   while(!file.eof()) {
@@ -1105,8 +1128,14 @@ bool alignment::loadMegaInterleavedAlignment(char *alignmentFile) {
   filename.append(alignmentFile);
   filename.append(";");
 
-  /* Skip first line */
-  line = utils::readLine(file);
+  /* Skip first valid line */
+  do {
+    line = utils::readLine(file);
+  } while ((line == NULL) && (!file.eof()));
+
+  /* If the file end is reached without a valid line, warn about it */
+  if (file.eof())
+    return false;
 
   /* Try to get input alignment information */
   while(!file.eof()) {

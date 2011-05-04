@@ -44,7 +44,7 @@
 
 #define BUILD "2011-05-03"
 #define VERSION 1.3
-#define REVISION 13
+#define REVISION 14
 
 void menu(void);
 void examples(void);
@@ -468,8 +468,13 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
+      //~ else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
+        //~ (comThreshold != -1) || (selectCols) || (selectSeqs)) {
+        //~ cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
+        //~ appearErrors = true;
+      //~ }
       else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
-        (comThreshold != -1) || (selectCols) || (selectSeqs)) {
+        (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
         appearErrors = true;
       }
@@ -497,8 +502,13 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
+      //~ else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
+        //~ (comThreshold != -1) || (selectCols) || (selectSeqs)) {
+        //~ cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
+        //~ appearErrors = true;
+      //~ }
       else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
-        (comThreshold != -1) || (selectCols) || (selectSeqs)) {
+        (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
         appearErrors = true;
       }
@@ -521,8 +531,13 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
+      //~ else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
+        //~ (comThreshold != -1) || (selectCols) || (selectSeqs)) {
+        //~ cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
+        //~ appearErrors = true;
+      //~ }
       else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
-        (comThreshold != -1) || (selectCols) || (selectSeqs)) {
+        (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
         appearErrors = true;
       }
@@ -550,8 +565,13 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
+      //~ else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
+        //~ (comThreshold != -1) || (selectCols) || (selectSeqs)) {
+        //~ cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
+        //~ appearErrors = true;
+      //~ }
       else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
-        (comThreshold != -1) || (selectCols) || (selectSeqs)) {
+        (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
         appearErrors = true;
       }
@@ -579,8 +599,13 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
+      //~ else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
+        //~ (comThreshold != -1) || (selectCols) || (selectSeqs)) {
+        //~ cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
+        //~ appearErrors = true;
+      //~ }
       else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
-        (comThreshold != -1) || (selectCols) || (selectSeqs)) {
+        (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
         appearErrors = true;
       }
@@ -609,10 +634,21 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
-      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) || (comThreshold != -1) || (delColumns != NULL)) {
+      //~ else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
+        //~ (comThreshold != -1) || (selectCols) || (selectSeqs)) {
+        //~ cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
+        //~ appearErrors = true;
+      //~ }
+      else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) ||
+        (selectCols) || (selectSeqs)) {
         cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
         appearErrors = true;
       }
+//~
+      //~ else if((gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) || (comThreshold != -1) || (delColumns != NULL)) {
+        //~ cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
+        //~ appearErrors = true;
+      //~ }
 
       else
         automated1 = true;
