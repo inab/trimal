@@ -32,6 +32,7 @@
 #include <string.h>
 
 #include "compareFiles.h"
+#include "compareFiles.h"
 #include "alignment.h"
 #include "utils.h"
 
@@ -42,9 +43,9 @@
 #define GAPPYOUT 1
 #define STRICT   2
 
-#define BUILD "2011-05-03"
-#define VERSION 1.3
-#define REVISION 14
+#define BUILD "2011-05-12"
+#define VERSION 1.4
+#define REVISION 0
 
 void menu(void);
 void examples(void);
@@ -555,10 +556,10 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
-      else if(blockSize != -1) {
-        cerr << endl << "ERROR: Not allowed in combination of column block size value." << endl << endl;
-        appearErrors = true;
-      }
+      //~ else if(blockSize != -1) {
+        //~ cerr << endl << "ERROR: Not allowed in combination of column block size value." << endl << endl;
+        //~ appearErrors = true;
+      //~ }
 
       else if((nogaps) || (noallgaps) || (gappyout) || (strictplus) || (automated1)) {
         cerr << endl << "ERROR: Combinations between automatic methods are not allowed." << endl << endl;
@@ -589,10 +590,10 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
-      else if(blockSize != -1) {
-        cerr << endl << "ERROR: Not allowed in combination of column block size value." << endl << endl;
-        appearErrors = true;
-      }
+      //~ else if(blockSize != -1) {
+        //~ cerr << endl << "ERROR: Not allowed in combination of column block size value." << endl << endl;
+        //~ appearErrors = true;
+      //~ }
 
       else if((nogaps) || (noallgaps) || (gappyout) || (strict) || (automated1)) {
         cerr << endl << "ERROR: Combinations between automatic methods are not allowed." << endl << endl;
@@ -988,7 +989,8 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
 
-      else if((nogaps) || (noallgaps) || (strict) || (strictplus) || (automated1)) {
+      //~ else if((nogaps) || (noallgaps) || (strict) || (strictplus) || (automated1)) {
+      else if((nogaps) || (noallgaps)) {
         cerr << endl << "ERROR: Not allowed in combination of automatic methods." << endl << endl;
         appearErrors = true;
       }

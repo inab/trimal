@@ -2067,6 +2067,9 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, c
     lenBlock = lenBlock < 12 ? lenBlock : 12;
   }
 
+  /* Allow to change minimal block size */
+  lenBlock = blockSize > 0 ? blockSize : lenBlock;
+
   /* The method searchs for columns' blocks with LONGBLOCK
    * or greater size */
   for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
