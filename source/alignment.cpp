@@ -1486,20 +1486,33 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* The method searchs for columns blocks with LONGBLOCK
-   * or greater size */
+  /* Keep only columns blocks bigger than an input columns block size */
   if(blockSize != 0) {
+
+    /* Traverse all alignment looking for columns blocks greater than LONGBLOCK,
+     * everytime than a column is not selected by the trimming method, check
+     * whether the current block size until that point is big enough to be kept
+     * or it should be removed from the final alignment */
     for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
-      if(saveResidues[i] != -1) block++;
+      if(saveResidues[i] != -1)
+        block++;
       else {
-		if(block < blockSize)
-		  for(j = pos; j < i; j++) saveResidues[j] = -1;
-		pos = i + 1;
-		block = 0;
-	  }
+        /* Remove columns from blocks smaller than input blocks size */
+        if(block < blockSize)
+          for(j = pos; j <= i; j++)
+            saveResidues[j] = -1;
+        pos = i + 1;
+        block = 0;
+      }
     }
+    /* Check final block separately since it could happen than last block is not
+     * big enough but because the loop end could provoke to ignore it */
+    if(block < blockSize)
+      for(j = pos; j < i; j++)
+        saveResidues[j] = -1;
   }
+
+
 
   /* Finally, the method computes the new alignment
    * columns' number */
@@ -1536,6 +1549,7 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine, const int *gIn
       }
     }
   }
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Once we've selected the columns, if the complementary
    * flag is true, we will have to change the selected and
@@ -1671,19 +1685,31 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine, const float *Va
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* The method searchs for columns blocks with LONGBLOCK
-   * or greater size */
+
+  /* Keep only columns blocks bigger than an input columns block size */
   if(blockSize != 0) {
+
+    /* Traverse all alignment looking for columns blocks greater than LONGBLOCK,
+     * everytime than a column is not selected by the trimming method, check
+     * whether the current block size until that point is big enough to be kept
+     * or it should be removed from the final alignment */
     for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
-      if(saveResidues[i] != -1) block++;
+      if(saveResidues[i] != -1)
+        block++;
       else {
-		if(block < blockSize)
-		  for(j = pos; j < i; j++) saveResidues[j] = -1;
-		pos = i + 1;
-		block = 0;
-	  }
+        /* Remove columns from blocks smaller than input blocks size */
+        if(block < blockSize)
+          for(j = pos; j <= i; j++)
+            saveResidues[j] = -1;
+        pos = i + 1;
+        block = 0;
+      }
     }
+    /* Check final block separately since it could happen than last block is not
+     * big enough but because the loop end could provoke to ignore it */
+    if(block < blockSize)
+      for(j = pos; j < i; j++)
+        saveResidues[j] = -1;
   }
 
   /* Finally, the method computes the new alignment
@@ -1901,19 +1927,30 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* The method searchs for columns blocks with LONGBLOCK
-   * or greater size */
+  /* Keep only columns blocks bigger than an input columns block size */
   if(blockSize != 0) {
+
+    /* Traverse all alignment looking for columns blocks greater than LONGBLOCK,
+     * everytime than a column is not selected by the trimming method, check
+     * whether the current block size until that point is big enough to be kept
+     * or it should be removed from the final alignment */
     for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
-      if(saveResidues[i] != -1) block++;
+      if(saveResidues[i] != -1)
+        block++;
       else {
-		if(block < blockSize)
-		  for(j = pos; j < i; j++) saveResidues[j] = -1;
-		pos = i + 1;
-		block = 0;
-	  }
+        /* Remove columns from blocks smaller than input blocks size */
+        if(block < blockSize)
+          for(j = pos; j <= i; j++)
+            saveResidues[j] = -1;
+        pos = i + 1;
+        block = 0;
+      }
     }
+    /* Check final block separately since it could happen than last block is not
+     * big enough but because the loop end could provoke to ignore it */
+    if(block < blockSize)
+      for(j = pos; j < i; j++)
+        saveResidues[j] = -1;
   }
 
   /* Finally, the method computes the new alignment
@@ -2070,16 +2107,30 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, c
   /* Allow to change minimal block size */
   lenBlock = blockSize > 0 ? blockSize : lenBlock;
 
-  /* The method searchs for columns' blocks with LONGBLOCK
-   * or greater size */
-  for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
-    if(saveResidues[i] != -1) block++;
-    else {
-	  if(block < lenBlock)
-		for(j = pos; j < i; j++) saveResidues[j] = -1;
-      pos = i + 1;
-	  block = 0;
+  /* Keep only columns blocks bigger than an input columns block size */
+  if(blockSize != 0) {
+
+    /* Traverse all alignment looking for columns blocks greater than LONGBLOCK,
+     * everytime than a column is not selected by the trimming method, check
+     * whether the current block size until that point is big enough to be kept
+     * or it should be removed from the final alignment */
+    for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
+      if(saveResidues[i] != -1)
+        block++;
+      else {
+        /* Remove columns from blocks smaller than input blocks size */
+        if(block < blockSize)
+          for(j = pos; j <= i; j++)
+            saveResidues[j] = -1;
+        pos = i + 1;
+        block = 0;
+      }
     }
+    /* Check final block separately since it could happen than last block is not
+     * big enough but because the loop end could provoke to ignore it */
+    if(block < blockSize)
+      for(j = pos; j < i; j++)
+        saveResidues[j] = -1;
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 

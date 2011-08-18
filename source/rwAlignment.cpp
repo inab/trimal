@@ -51,8 +51,9 @@ bool alignment::fillMatrices(bool aligned) {
 
   /* Initialize some variables */
   residuesNumber = new int[sequenNumber];
-  for(i = 0; i < sequenNumber; i++)
+  for(i = 0; i < sequenNumber; i++) {
     residuesNumber[i] = sequences[i].size();
+  }
 
   /* Check whether there are any unknow/no allowed character in the sequences */
   for(i = 0; i < sequenNumber; i++)
