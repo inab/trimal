@@ -680,7 +680,6 @@ alignment *alignment::cleanConservation(float baseLine, float conservationPct, b
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
-
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This function trimms a given alignment based on the similarity and gaps
  * distribution values. To trim the alignment, this function uses three
@@ -1200,7 +1199,7 @@ int *alignment::calculateRepresentativeSeq(float maximumIdent) {
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     if(pos == -1) {
-	  cluster[j] = seqs[i][1];
+    cluster[j] = seqs[i][1];
       clusterNum++;
     }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1216,7 +1215,7 @@ int *alignment::calculateRepresentativeSeq(float maximumIdent) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocate dinamic memory */
   for(i = 0; i < sequenNumber; i++)
-	delete [] seqs[i];
+  delete [] seqs[i];
 
   delete [] cluster;
   delete [] seqs;
@@ -2001,6 +2000,8 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol, float b
     }
   }
 
+
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* We allocate memory to save the columns selected */
   matrixAux = new string[sequenNumber];
@@ -2223,67 +2224,50 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut, c
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, bool complementary) {
 
+  int i, newSeqNumber, newResidNumber;
   string *matrixAux, *newSeqsName;
-  int i, j, lenNames, newSequences;
   alignment *newAlig;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Computes the new sequences' number. For this purpose,
-   * selects the sequences with a overlap's value equal or
-   * greater than the minimum overlap value. At the same
-   * time, computes the sequence's name length. */
-  for(i = 0, newSequences = 0, lenNames = 0; i < sequenNumber; i++) {
-    if(overlapSeq[i] >= minimumOverlap) newSequences++;
-    else saveSequences[i] = -1;
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Keep only those sequences with an overlap value equal or greater than
+   * the minimum overlap value set by the user.  */
+  for(i = 0; i < sequenNumber; i++)
+    if(overlapSeq[i] < minimumOverlap)
+      saveSequences[i] = -1;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Once we've selected the sequences, if the
-   * complementary flag is true, we will have to change
-   * the selected and non-selected sequences. */
-  if(complementary == true) {
-    newSequences = sequenNumber - newSequences;
-    for(i = 0; i < sequenNumber; i++) {
-      if(saveSequences[i] == -1) saveSequences[i] = i;
-      else saveSequences[i] = -1;
-    }
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Once we've selected the columns, if the complementary flag is true,
+   * we will have to change the selected and non-selected sequences. */
+  if(complementary == true)
+    for(i = 0; i < sequenNumber; i++)
+      saveSequences[i] = (saveSequences[i] == -1) ? i : -1;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Allocate memory for the sequences selected */
-  matrixAux = new string[newSequences];
-  newSeqsName = new string[newSequences];
+  /* Check for any additional column/sequence to be removed */
+  /* Compute new sequences and columns numbers */
+  newSeqNumber = removeCols_SeqsAllGaps();
+  for(i = 0, newResidNumber = 0; i < residNumber; i++)
+    if(saveResidues[i] != -1)
+      newResidNumber ++;
 
-  /* Copy to new structures the information that have
-   * been selected previously. */
-  for(i = 0, j = 0; i < sequenNumber; i++)
-    if(saveSequences[i] != -1) {
-       newSeqsName[j] = seqsName[i];
-       matrixAux[j] = sequences[i];
-       j++;
-    }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Allocate memory  for selected sequences/columns */
+  matrixAux = new string[newSeqNumber];
+  newSeqsName = new string[newSeqNumber];
+
+  /* Fill local allocated memory with previously selected data */
+  fillNewDataStructure(matrixAux, newSeqsName);
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* When we have all parameters, we create the new
    * alignment */
-  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, newSequences, residNumber,
+  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, newSeqNumber, newResidNumber,
                           iformat, oformat, shortNames, dataType, isAligned, reverse, terminalGapOnly, sequenNumber, residNumber,
                           residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Deallocate the local memory */
+  /* Deallocate local memory */
   delete [] matrixAux;
   delete [] newSeqsName;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Return the new alignment reference */
   return newAlig;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2294,9 +2278,9 @@ alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, b
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 alignment *alignment::removeColumns(int *columns, int init, int size, bool complementary) {
 
-  int i, j, delAminos, newResidNumber;
+  int i, j, delAminos, newSeqNumber, newResidNumber;
+  string *matrixAux, *newSeqsName;
   alignment *newAlig;
-  string *matrixAux;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Delete those range columns defines in the columns
@@ -2350,38 +2334,30 @@ alignment *alignment::removeColumns(int *columns, int init, int size, bool compl
     }
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Once we've selected the columns, if the complementary
-   * flag is true, we will have to change the selected and
-   * non-selected columns. */
+
+  /* Once we've selected the columns, if the complementary flag is true,
+   * we will have to change the selected and non-selected columns. */
   if(complementary == true) {
+    for(i = 0; i < residNumber; i++)
+      saveResidues[i] = (saveResidues[i] == -1) ? i : -1;
     newResidNumber = residNumber - newResidNumber;
-    for(i = 0; i < residNumber; i++) {
-      if(saveResidues[i] == -1)
-        saveResidues[i] = i;
-      else
-        saveResidues[i] = -1;
-    }
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* We allocate memory to save the columns selected */
-  matrixAux = new string[sequenNumber];
+  /* Check for any additional column/sequence to be removed */
+  /* Compute new sequences number */
+  newSeqNumber = removeCols_SeqsAllGaps();
 
-  /* Copy the columns from the original alignment to
-   * the new alignment, only if the column has been
-   * selected. */
-  for(i = 0; i < residNumber; i++)
-    if(saveResidues[i] != -1) {
-      for(j = 0; j < sequenNumber; j++)
-        matrixAux[j].resize(matrixAux[j].size() + 1, sequences[j][i]);
-    }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Allocate memory  for selected sequences/columns */
+  matrixAux = new string[newSeqNumber];
+  newSeqsName = new string[newSeqNumber];
+
+  /* Fill local allocated memory with previously selected data */
+  fillNewDataStructure(matrixAux, newSeqsName);
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* When we have all parameters, we create the new
    * alignment */
-  newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, sequenNumber, newResidNumber,
+  newAlig = new alignment(filename, aligInfo, matrixAux, seqsName, seqsInfo, newSeqNumber, newResidNumber,
                           iformat, oformat, shortNames, dataType, isAligned, reverse, terminalGapOnly, sequenNumber, residNumber,
                           residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2405,72 +2381,49 @@ alignment *alignment::removeColumns(int *columns, int init, int size, bool compl
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 alignment *alignment::removeSequences(int *seqs, int init, int size, bool complementary) {
 
-  int i, j, delSequences, newSeqNumber;
+  int i, j, newSeqNumber, newResidNumber;
   string *matrixAux, *newSeqsName;
   alignment *newAlig;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Delete those range of sequences defines by the
-   * seqs vector */
-  for(i = init, delSequences = 0; i < size + init; i += 2) {
-    for(j = seqs[i]; j <= seqs[i+1]; j++) {
+  /* Delete those range of sequences defines by the seqs vector */
+  for(i = init; i < size + init; i += 2)
+    for(j = seqs[i]; j <= seqs[i+1]; j++)
       saveSequences[j] = -1;
-      delSequences++;
-    }
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* The method computes the new number of sequences */
-  newSeqNumber = sequenNumber - delSequences;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Once we've selected the columns, if the complementary flag is true,
+   * we will have to change the selected and non-selected sequences. */
+  if(complementary == true)
+    for(i = 0; i < sequenNumber; i++)
+      saveSequences[i] = (saveSequences[i] == -1) ? i : -1;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Once we've selected the columns, if the complementary
-   * flag is true, we will have to change the selected
-   * and non-selected columns. */
-  if(complementary == true) {
-    newSeqNumber = sequenNumber - newSeqNumber;
-    for(i = 0; i < sequenNumber; i++) {
-      if(saveSequences[i] == -1) saveSequences[i] = i;
-      else saveSequences[i] = -1;
-    }
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Check for any additional column/sequence to be removed */
+  /* Compute new sequences and columns numbers */
+  newSeqNumber = removeCols_SeqsAllGaps();
+  for(i = 0, newResidNumber = 0; i < residNumber; i++)
+    if(saveResidues[i] != -1)
+      newResidNumber ++;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* We allocate memory to save the sequences selected */
+  /* Allocate memory  for selected sequences/columns */
   matrixAux = new string[newSeqNumber];
   newSeqsName = new string[newSeqNumber];
 
-  /* Copy to new structures the information that have
-   * been selected previously. */
-  for(i = 0, j = 0; i < sequenNumber; i++)
-    if(saveSequences[i] != -1) {
-       newSeqsName[j] = seqsName[i];
-       matrixAux[j] = sequences[i];
-       j++;
-    }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Fill local allocated memory with previously selected data */
+  fillNewDataStructure(matrixAux, newSeqsName);
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* When we have all parameters, we create the new
    * alignment */
-  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, newSeqNumber, residNumber,
+  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, newSeqNumber, newResidNumber,
                           iformat, oformat, shortNames, dataType, isAligned, reverse, terminalGapOnly, sequenNumber, residNumber,
                           residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Deallocated auxiliar memory */
+  /* Free local memory */
   delete [] matrixAux;
   delete [] newSeqsName;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Return the new alignment reference */
   return newAlig;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2554,10 +2507,10 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
   mappedSeqs = new int[newSequences];
   for(i = 0; i < sequenNumber; i++)
     for(j = 0; j < newSequences; j++)
-	  if(!seqsName[i].compare(oldSeqsName[j])) {
-		mappedSeqs[j] = i;
-		break;
-	  }
+    if(!seqsName[i].compare(oldSeqsName[j])) {
+      mappedSeqs[j] = i;
+      break;
+    }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2567,17 +2520,17 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
   selectedRes = new int[oldResidues];
 
   for(i = 0; i < oldResidues; i++)
-	selectedRes[i] = i;
+    selectedRes[i] = i;
 
   for(j = 0; j < ColumnsToKeep[0]; j++)
-	selectedRes[j] = -1;
+    selectedRes[j] = -1;
 
   for(i = 0; i < newResidues - 1; i++)
     for(j = ColumnsToKeep[i] + 1; j < ColumnsToKeep[i+1]; j++)
-	  selectedRes[j] = -1;
+      selectedRes[j] = -1;
 
   for(j = ColumnsToKeep[newResidues - 1] + 1; j < oldResidues; j++)
-	selectedRes[j] = -1;
+    selectedRes[j] = -1;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2589,28 +2542,28 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
    * sequence was selected by others function, we process
    * these residues to recover the corresponding codons */
   for(i = 0; i < newSequences; i++)
-	if(seqMatrix -> getSequence(oldSeqsName[i], tmpSequence)) {
-	  for(j = 0; j < oldResidues; j++) {
-		if((selectedRes[j] != -1) && (tmpSequence[j] != 0)) {
+  if(seqMatrix -> getSequence(oldSeqsName[i], tmpSequence)) {
+    for(j = 0; j < oldResidues; j++) {
+    if((selectedRes[j] != -1) && (tmpSequence[j] != 0)) {
 
-		  for(k = 3 * (tmpSequence[j] - 1), l = 0; l < 3; k++, l++) {
+      for(k = 3 * (tmpSequence[j] - 1), l = 0; l < 3; k++, l++) {
         /* Check whether the nucleotide sequences end has been reached or not.
          * If it has been reached, complete backtranslation using indetermination
          * symbols 'N' */
         if((int) sequences[mappedSeqs[i]].length() > k)
-			    matrixAux[i].resize(matrixAux[i].size() + 1, sequences[mappedSeqs[i]][k]);
+          matrixAux[i].resize(matrixAux[i].size() + 1, sequences[mappedSeqs[i]][k]);
         else
           matrixAux[i].resize(matrixAux[i].size() + 1, 'N');
     }
-		} else if(selectedRes[j] != -1) {
+    } else if(selectedRes[j] != -1) {
           matrixAux[i].resize(matrixAux[i].size() + 3, '-');
-		}
-	  }
-	/* If there is any problems with a sequence then
-	 * the function returns an error */
-	} else {
-	  return NULL;
-	}
+    }
+    }
+  /* If there is any problems with a sequence then
+   * the function returns an error */
+  } else {
+    return NULL;
+  }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -3227,4 +3180,86 @@ bool alignment::checkCorrespondence(string *names, int *lengths, int \
 
   /* If everything is OK, return an appropiate flag */
   return true;
+}
+
+
+/* Function designed to identify columns and sequences composed only by gaps.
+ * Once these columns/sequences have been identified, they are removed from
+ * final alignment. */
+int alignment::removeCols_SeqsAllGaps(void) {
+  int i, j, seqs,valid, gaps;
+  bool warnings = false;
+
+  /* Check all valid columns looking for those composed by only gaps */
+  for(i = 0; i < residNumber; i++) {
+    if(saveResidues[i] == -1)
+      continue;
+
+    for(j = 0, valid = 0, gaps = 0; j < sequenNumber; j++) {
+      if (saveSequences[j] == -1)
+        continue;
+      if (sequences[j][i] == '-')
+        gaps ++;
+      valid ++;
+    }
+    /* Once a column has been identified, warm about it and remove it */
+    if(gaps == valid) {
+      if(!warnings)
+        cerr << endl;
+      warnings = true;
+      cerr << "WARNING: Removing column '" << i
+        << "' composed only by gaps" << endl;
+      saveResidues[i] = -1;
+    }
+  }
+
+  /* Check for those selected sequences to see whether there is anyone with
+   * only gaps */
+  for(i = 0, seqs = 0; i < sequenNumber; i++) {
+    if(saveSequences[i] == -1)
+      continue;
+
+    for(j = 0, valid = 0, gaps = 0; j < residNumber; j++) {
+      if(saveResidues[j] == -1)
+        continue;
+      if (sequences[i][j] == '-')
+        gaps ++;
+      valid ++;
+    }
+    /* Warm about it and remove each sequence composed only by gaps */
+    if(gaps == valid) {
+      if(!warnings)
+        cerr << endl;
+      warnings = true;
+      cerr << "WARNING: Removing sequence '" << seqsName[i]
+        << "' composed only by gaps" << endl;
+      saveSequences[i] = -1;
+    } else {
+      seqs ++;
+    }
+  }
+  if(warnings)
+    cerr << endl;
+
+  return seqs;
+}
+
+/* Function for copying to previously allocated memory those data selected
+ * for being in the final alignment */
+void alignment::fillNewDataStructure(string *newMatrix, string *newNames) {
+  int i, j, k;
+
+  /* Copy only those sequences/columns selected */
+  for(i = 0, j = 0; i < sequenNumber; i++) {
+    if(saveSequences[i] == -1)
+      continue;
+
+    newNames[j] = seqsName[i];
+    for(k = 0; k < residNumber; k++) {
+      if(saveResidues[k] == -1)
+        continue;
+      newMatrix[j].resize(newMatrix[j].size() + 1, sequences[i][k]);
+    }
+    j++;
+  }
 }

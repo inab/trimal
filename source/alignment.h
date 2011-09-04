@@ -484,6 +484,12 @@ class alignment {
 
   int *calculateRepresentativeSeq(float maximumIdent);
 
+  /* New code: version 1.4 */
+
+  int removeCols_SeqsAllGaps(void);
+
+  void fillNewDataStructure(string *, string *);
+
 };
 
 #endif
