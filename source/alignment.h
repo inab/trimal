@@ -1,10 +1,10 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale
+    trimAl v1.4: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    readAl v1.3: a tool for automated alignment conversion among different
+    readAl v1.4: a tool for automated alignment conversion among different
                  formats.
 
     2009-2011 Capella-Gutierrez S. and Gabaldon, T.
@@ -51,6 +51,12 @@
 #define AAType  3
 
 using namespace std;
+
+struct newValues {
+  int residues;
+  int sequences;
+};
+
 
 /** \brief Class containing an alignment
  *
@@ -486,7 +492,11 @@ class alignment {
 
   /* New code: version 1.4 */
 
-  int removeCols_SeqsAllGaps(void);
+  void computeComplementaryAlig(bool, bool);
+
+  bool removeOnlyTerminal(void);
+
+  newValues removeCols_SeqsAllGaps(void);
 
   void fillNewDataStructure(string *, string *);
 

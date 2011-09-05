@@ -1,7 +1,7 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.3: a tool for automated alignment trimming in large-scale
+    trimAl v1.4: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
     2009-2011 Capella-Gutierrez S. and Gabaldon, T.
@@ -43,9 +43,9 @@
 #define GAPPYOUT 1
 #define STRICT   2
 
-#define BUILD "2011-05-12"
+#define BUILD "2011-09-05"
 #define VERSION 1.4
-#define REVISION 1
+#define REVISION 5
 
 void menu(void);
 void examples(void);
@@ -1852,7 +1852,7 @@ void examples(void) {
 
   cout << "9) Selection of sequences to be deleted from the alignment. Start in 0" << endl << endl;
 
-  cout << "   trimal -in <inputfile> -out <outputfile> -selectseqs { 1,3,8-12 } " << endl << endl;
+  cout << "   trimal -in <inputfile> -out <outputfile> -selectseqs { 2,4,8-12 } " << endl << endl;
 
   cout << "10) Select the 5 most representative sequences from the alignment" << endl << endl;
 

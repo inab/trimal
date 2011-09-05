@@ -1,7 +1,7 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    readAl v1.3: a tool for automated alignment conversion among different
+    readAl v1.4: a tool for automated alignment conversion among different
                  formats.
 
     2009-2011 Capella-Gutierrez S. and Gabaldon, T.
@@ -30,9 +30,9 @@
 #include "alignment.h"
 #include "utils.h"
 
-#define BUILD "2011-05-12"
+#define BUILD "2011-09-05"
 #define VERSION 1.4
-#define REVISION 1
+#define REVISION 5
 
 #define DNAType 1
 #define RNAType 2
