@@ -55,8 +55,9 @@ using namespace std;
 struct newValues {
   int residues;
   int sequences;
+  string *matrix;
+  string *seqsName;
 };
-
 
 /** \brief Class containing an alignment
  *
@@ -497,8 +498,10 @@ class alignment {
   bool removeOnlyTerminal(void);
 
   newValues removeCols_SeqsAllGaps(void);
+  void removeCols_SeqsAllGaps(newValues *);
 
   void fillNewDataStructure(string *, string *);
+  void fillNewDataStructure(newValues *);
 
 };
 

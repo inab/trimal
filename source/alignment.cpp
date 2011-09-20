@@ -122,6 +122,9 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
 
   oldAlignment = true;
 
+  cerr << "Before anything... " << sequenNumber << endl;
+
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Assign the parameter values to the variables */
   sequenNumber = o_sequenNumber;
@@ -2675,7 +2678,6 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
   int i, j = 0, block, pos, num, lenBlock;
   string *matrixAux, *newSeqsName;
   alignment *newAlig;
-  newValues counter;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Rejects the columns with gaps' number greater than
@@ -2773,23 +2775,32 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
 
   /* Check for any additional column/sequence to be removed */
   /* Compute new sequences and columns numbers */
+
+  newValues counter;
   counter = removeCols_SeqsAllGaps();
 
   /* Allocate memory  for selected sequences/columns */
-  matrixAux = new string[counter.sequences];
-  newSeqsName = new string[counter.sequences];
+  //~ matrixAux = new string[counter.sequences];
+  //~ newSeqsName = new string[counter.sequences];
 
   /* Fill local allocated memory with previously selected data */
-  fillNewDataStructure(matrixAux, newSeqsName);
+  //~ fillNewDataStructure(matrixAux, newSeqsName);
+
+
+  fillNewDataStructure(&counter);
+
+  //~ cerr << counter -> seqsName[counter -> sequences - 1] << endl;
+
 
   /* When we have all parameters, we create the new alignment */
-  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, counter.sequences, counter.residues,
+  //~ newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, counter.sequences, counter.residues,
+  newAlig = new alignment(filename, aligInfo, counter.matrix, counter.seqsName, seqsInfo, counter.sequences, counter.residues,
                           iformat, oformat, shortNames, dataType, isAligned, reverse, terminalGapOnly, sequenNumber,
                           residNumber, residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
 
   /* Deallocate local memory */
-  delete[] matrixAux;
-  delete[] newSeqsName;
+  //~ delete[] matrixAux;
+  //~ delete[] newSeqsName;
 
   /* Return the new alignment reference */
   return newAlig;
@@ -2977,6 +2988,70 @@ bool alignment::removeOnlyTerminal(void) {
 /* Function designed to identify columns and sequences composed only by gaps.
  * Once these columns/sequences have been identified, they are removed from
  * final alignment. */
+//~ newValues alignment::removeCols_SeqsAllGaps(void) {
+  //~ int i, j, valid, gaps;
+  //~ bool warnings = false;
+  //~ newValues counter;
+//~
+  //~ /* Check all valid columns looking for those composed by only gaps */
+  //~ for(i = 0, counter.residues = 0; i < residNumber; i++) {
+    //~ if(saveResidues[i] == -1)
+      //~ continue;
+//~
+    //~ for(j = 0, valid = 0, gaps = 0; j < sequenNumber; j++) {
+      //~ if (saveSequences[j] == -1)
+        //~ continue;
+      //~ if (sequences[j][i] == '-')
+        //~ gaps ++;
+      //~ valid ++;
+    //~ }
+    //~ /* Once a column has been identified, warm about it and remove it */
+    //~ if(gaps == valid) {
+      //~ if(!warnings)
+        //~ cerr << endl;
+      //~ warnings = true;
+      //~ cerr << "WARNING: Removing column '" << i << "' composed only by gaps"
+        //~ << endl;
+      //~ saveResidues[i] = -1;
+    //~ } else {
+      //~ counter.residues ++;
+    //~ }
+  //~ }
+//~
+  //~ /* Check for those selected sequences to see whether there is anyone with
+   //~ * only gaps */
+  //~ for(i = 0, counter.sequences = 0; i < sequenNumber; i++) {
+    //~ if(saveSequences[i] == -1)
+      //~ continue;
+//~
+    //~ for(j = 0, valid = 0, gaps = 0; j < residNumber; j++) {
+      //~ if(saveResidues[j] == -1)
+        //~ continue;
+      //~ if (sequences[i][j] == '-')
+        //~ gaps ++;
+      //~ valid ++;
+    //~ }
+    //~ /* Warm about it and remove each sequence composed only by gaps */
+    //~ if(gaps == valid) {
+      //~ if(!warnings)
+        //~ cerr << endl;
+      //~ warnings = true;
+      //~ cerr << "WARNING: Removing sequence '" << seqsName[i]
+        //~ << "' composed only by gaps" << endl;
+      //~ saveSequences[i] = -1;
+    //~ } else {
+      //~ counter.sequences ++;
+    //~ }
+  //~ }
+  //~ if(warnings)
+    //~ cerr << endl;
+//~
+  //~ return counter;
+//~ }
+
+/* Function designed to identify columns and sequences composed only by gaps.
+ * Once these columns/sequences have been identified, they are removed from
+ * final alignment. */
 newValues alignment::removeCols_SeqsAllGaps(void) {
   int i, j, valid, gaps;
   bool warnings = false;
@@ -3035,8 +3110,12 @@ newValues alignment::removeCols_SeqsAllGaps(void) {
   if(warnings)
     cerr << endl;
 
+  counter.matrix = new string[counter.sequences];
+  counter.seqsName = new string[counter.sequences];
+
   return counter;
 }
+
 
 /* Function for copying to previously allocated memory those data selected
  * for being in the final alignment */
@@ -3056,4 +3135,25 @@ void alignment::fillNewDataStructure(string *newMatrix, string *newNames) {
     }
     j++;
   }
+}
+
+/* Function for copying to previously allocated memory those data selected
+ * for being in the final alignment */
+void alignment::fillNewDataStructure(newValues *data) {
+  int i, j, k;
+
+  /* Copy only those sequences/columns selected */
+  for(i = 0, j = 0; i < sequenNumber; i++) {
+    if(saveSequences[i] == -1)
+      continue;
+
+    data -> seqsName[j] = seqsName[i];
+    for(k = 0; k < residNumber; k++) {
+      if(saveResidues[k] == -1)
+        continue;
+      data -> matrix[j].resize(data -> matrix[j].size() + 1, sequences[i][k]);
+    }
+    j++;
+  }
+  cerr << data -> seqsName[j-1] << endl;
 }
