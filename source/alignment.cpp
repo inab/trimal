@@ -122,9 +122,6 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
 
   oldAlignment = true;
 
-  cerr << "Before anything... " << sequenNumber << endl;
-
-
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Assign the parameter values to the variables */
   sequenNumber = o_sequenNumber;
@@ -1711,15 +1708,12 @@ void alignment::printStatisticsConservationTotal(void) {
 void alignment::printCorrespondence(void) {
   int i;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  cout << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  cout << "#ColumnsMap\t";
   /* Print the saveResidues relathionship */
   for(i = 0; i < residNumber - 1; i++)
     cout << saveResidues[i] << ", ";
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  cout << saveResidues[i] << endl << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  cout << saveResidues[i] << endl;
+
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
