@@ -166,85 +166,80 @@ int alignment::selectMethod(void) {
 void alignment::printSeqIdentity(void) {
 
   int i, j, k, pos, maxLongName;
-  float mx, avg, maxSeq = 0, avgSeq = 0, **maxs;
+  float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Ask for the sequence identities assesment */
   if(identities == NULL)
     calculateSeqIdentity();
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* For each sequence, we look for its most similar
-   * one */
+  /* For each sequence, we look for its most similar one */
   maxs = new float*[sequenNumber];
+
   for(i = 0; i < sequenNumber; i++) {
     maxs[i] = new float[2];
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Get the most similar sequence to the current one in term of identity */
     for(k = 0, mx = 0, avg = 0, pos = i; k < sequenNumber; k++) {
       if(i != k) {
+        avg += identities[i][k];
         if(mx < identities[i][k]) {
-          mx  = identities[i][k];
+          mx = identities[i][k];
           pos = k;
         }
-        avg += identities[i][k];
       }
     }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Update global average variables*/
     avgSeq += avg/(sequenNumber - 1);
-    maxSeq += mx;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    maxAvgSeq += mx;
 
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Save the maximum average identity value for each sequence */
     maxs[i][0] = mx;
     maxs[i][1] = pos;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  avgSeq = avgSeq/sequenNumber;
-  maxSeq = maxSeq/sequenNumber;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Once the method has computed all of different
-   * values, it prints it */
+  /* Compute general averages */
+  avgSeq = avgSeq/sequenNumber;
+  maxAvgSeq = maxAvgSeq/sequenNumber;
+
+  /* Compute longest sequences name */
   for(i = 0, maxLongName = 0; i < sequenNumber; i++)
     maxLongName = utils::max(maxLongName, seqsName[i].size());
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Once the method has computed all of different values, it prints it */
   cout.precision(4);
   cout << fixed;
-  cout << endl << "#Mean Percentage of identity:"
-       << "                            " << avgSeq;
-  cout << endl << "#Mean Percentage of identity "
-       << "with most similar sequence: " << maxSeq;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  cout << endl << endl << "#Percentage of identity matrix:";
+  for(i = 0, maxSeq = 0; i < sequenNumber; i++)
+    if(maxs[i][0] > maxSeq)
+      maxSeq = maxs[i][0];
+
+  cout << endl << "#MaxIdentity " << maxSeq;
+  cout << endl << "MaxIdentity  Get the maximum identity value for any pair of"
+    << "sequences in the alignment" << endl;
+
+  cout << endl << "#AverageIdentity " << avgSeq;
+  cout << endl << "AverageIdentity  Average identity between all sequences";
+
+  cout << endl << endl << "#Identity sequences matrix";
   for(i = 0; i < sequenNumber; i++) {
     cout << endl << setw(maxLongName + 2) << left << seqsName[i] << "  ";
     for(j = 0; j < i; j++)
-      cout << setiosflags(ios::left) << setw(10) << identities[i][j] * 100 << "  ";
-	cout.precision(3);
-    cout << setiosflags(ios::left) << setw(10) << 100.00 << "  ";
-	cout.precision(4);
+      cout << setiosflags(ios::left) << setw(10) << identities[i][j] << "  ";
+    cout << setiosflags(ios::left) << setw(10) << 1.00 << "  ";
     for(j = i + 1; j < sequenNumber; j++)
-      cout << setiosflags(ios::left) << setw(10) << identities[i][j] * 100 << "  ";
-
+      cout << setiosflags(ios::left) << setw(10) << identities[i][j] << "  ";
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  cout << endl << endl << "#Percentage of identity with most similar sequence:" << endl;
-
-  for(i = 0; i < sequenNumber; i++)
-    cout << setw(maxLongName + 2) << left << seqsName[i] << "  " << setiosflags(ios::left)
-	     << setw(5) << maxs[i][0] * 100   << "    " << seqsName[(int) maxs[i][1]] << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   cout << endl;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  cout << endl << "#AverageMostSimilarIdentity " << maxAvgSeq;
+  cout << endl << "AverageMostSimilarIdentity  Average identity between most "
+    << "similar pair-wise sequences";
+
+  cout << endl << endl << "#Identity for most similar pair-wise sequences "
+    << "matrix" << endl;
+  for(i = 0; i < sequenNumber; i++)
+    cout << setw(maxLongName + 2) << left << seqsName[i]
+      << setiosflags(ios::left) << setw(5) << maxs[i][0]
+      << "  " << seqsName[(int) maxs[i][1]] << endl;
+  cout << endl;
 }
