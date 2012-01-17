@@ -34,66 +34,77 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void alignment::calculateSeqIdentity(void) {
 
-  char indet;
   int i, j, k, hit, dst;
+  char indet;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Depending on the alignment type, the indetermination
-   * symbol will be one or other */
-  if(getTypeAlignment() == AAType) indet = 'X';
-  else indet = 'N';
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Depending on alignment type, indetermination symbol will be one or other */
+  indet = getTypeAlignment() == AAType ? 'X' : 'N';
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Create the identities matrix to store the identity
-   * score among the different sequences in the alig */
+  /* Create identities matrix to store identities scores */
   identities = new float*[sequenNumber];
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* For each sequence, we have to compute its identity
-   * value respect of the otherones in the alignment */
+  /* For each seq, compute its identity score against the others in the MSA */
   for(i = 0; i < sequenNumber; i++) {
     identities[i] = new float[sequenNumber];
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	/* It's a symmetric matrix, we copy the values that
-	 * have been already computed */
+    /* It's a symmetric matrix, copy values that have been already computed */
     for(j = 0; j < i; j++)
       identities[i][j] = identities[j][i];
     identities[i][i] = 0;
-	/* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	/* For the rest of the sequences, we compute the
-	 * identity value between the selected sequence and
-	 * these ones */
+    /* Compute identity scores for the current sequence against the rest */
     for(j = i + 1; j < sequenNumber; j++) {
       for(k = 0, hit = 0, dst = 0; k < residNumber; k++) {
-		/* ***** ***** ***** ***** ***** ***** ***** ***** */
-		/* If one of the two positions is a valid residue,
-		 * we take it into account for the distance */
+      /* If one of the two positions is a valid residue,
+       * count it for the common length */
         if(((sequences[i][k] != indet) && (sequences[i][k] != '-')) ||
            ((sequences[j][k] != indet) && (sequences[j][k] != '-'))) {
           dst++;
-		  /* If both position have the same residue, we
-		   * count a hit */
+          /* If both positions are the same, count a hit */
           if(sequences[i][k] == sequences[j][k])
             hit++;
         }
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
       }
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-	  /* The identity value between two given sequence is
-	   * the proportion between number of hits and number
-	   * of residue, commons and non-commons, from these
-	   * sequences */
+
+      /* Identity score between two sequences is the ratio of identical residues
+       * by the total length (common and no-common residues) among them */
       identities[i][j] = (float) hit/dst;
-	  /* ***** ***** ***** ***** ***** ***** ***** ***** */
     }
   }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
+
+void alignment::calculateRelaxedSeqIdentity(void) {
+  /* Raw approximation of sequence identity computation designed for reducing
+   * comparisons for huge alignemnts */
+
+  int i, j, k, hit;
+
+  /* Create identities matrix to store identities scores */
+  identities = new float*[sequenNumber];
+
+  /* For each seq, compute its identity score against the others in the MSA */
+  for(i = 0; i < sequenNumber; i++) {
+    identities[i] = new float[sequenNumber];
+
+    /* It's a symmetric matrix, copy values that have been already computed */
+    for(j = 0; j < i; j++)
+      identities[i][j] = identities[j][i];
+    identities[i][i] = 0;
+
+    /* Compute identity score between the selected sequence and the others */
+    for(j = i + 1; j < sequenNumber; j++) {
+      for(k = 0, hit = 0; k < residNumber; k++) {
+        /* If both positions are the same, count a hit */
+        if(sequences[i][k] == sequences[j][k])
+          hit++;
+      }
+    /* Raw identity score is computed as the ratio of identical residues between
+     * alignment length */
+      identities[i][j] = (float) hit/residNumber;
+    }
+  }
+}
+
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This function computes some parameters from the input alignment such as

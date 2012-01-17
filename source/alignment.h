@@ -33,6 +33,8 @@
 #include <fstream>
 #include <iostream>
 
+#include <time.h>
+
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
@@ -80,6 +82,12 @@ class alignment {
   int iformat;
   int oformat;
   bool shortNames;
+
+  bool forceCaps;
+  bool upperCase;
+  bool lowerCase;
+
+  string gapSymbol;
 
   int dataType;
 
@@ -467,6 +475,9 @@ class alignment {
 
   void calculateSeqIdentity(void);
 
+  // New
+  void calculateRelaxedSeqIdentity(void);
+
   int selectMethod(void);
 
   void printSeqIdentity(void);
@@ -495,9 +506,12 @@ class alignment {
 
   void computeComplementaryAlig(bool, bool);
 
+  void removeSmallerBlocks(int);
+
   bool removeOnlyTerminal(void);
 
   newValues removeCols_SeqsAllGaps(void);
+
   void removeCols_SeqsAllGaps(newValues *);
 
   void fillNewDataStructure(string *, string *);

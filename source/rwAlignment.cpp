@@ -913,9 +913,9 @@ bool alignment::loadNexusAlignment(char *alignmentFile) {
 bool alignment::loadMegaNonInterleavedAlignment(char *alignmentFile) {
   /* MEGA sequential file format parser */
 
-  int i, firstLine = true;
   char *frag = NULL, *str = NULL, *line = NULL;
   ifstream file;
+  int i;
 
   /* Check the file and its content */
   file.open(alignmentFile, ifstream::in);
@@ -1038,7 +1038,6 @@ bool alignment::loadMegaNonInterleavedAlignment(char *alignmentFile) {
 
   /* First sequence is already detected so its name should be stored */
   i = -1;
-  firstLine = true;
 
   /* This loop is a bit tricky because first sequence name has been already
    * detected, so it is necessary to process it before moving to next line.

@@ -7,7 +7,10 @@
     readAl v1.4: a tool for automated alignment conversion among different
                  formats.
 
-    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+    statAl v1.4: a tool for getting stats about multiple sequence alignments.
+
+
+    2009-2012 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl/readAl.
@@ -39,13 +42,13 @@ using namespace std;
 
 alignment::alignment(void) {
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Alignment parameter */
   sequenNumber = 0;
   residNumber =  0;
 
   /* Are the input sequences aligned? */
   isAligned = false;
+
   /* Should the output file be reversed? */
   reverse   = false;
 
@@ -57,20 +60,22 @@ alignment::alignment(void) {
   oformat = 0;
   shortNames = false;
 
+  forceCaps = false;
+  upperCase = false;
+  lowerCase = false;
+
+  gapSymbol = "-";
+
   /* Sequence datatype: DNA, RNA or Protein */
   dataType = 0;
 
   /* Window sizes to trim the input alignment */
   ghWindow = 0;
   shWindow = 0;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* Minimum block size in the new alignment */
   blockSize = 0;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Is this alignmnet new? */
   oldAlignment  = false;
 
@@ -80,29 +85,22 @@ alignment::alignment(void) {
   /* Columns and sequences that have been previously selected */
   saveResidues  = NULL;
   saveSequences = NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Input sequences as well as other additional information
-   * such as sequences name or whatever */
+  /* Input sequences as well other information such as sequences name, etc */
   sequences = NULL;
   seqsName  = NULL;
   seqsInfo  = NULL;
 
+  /* Information about input alignment */
   filename = "";
   aligInfo = "";
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  identities = NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Information asses from the alignment such as
-   * gaps or similarity values distributions */
+  /* Information computed from alignment */
   sgaps =     NULL;
   scons =     NULL;
   seqMatrix = NULL;
+  identities = NULL;
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
@@ -146,6 +144,13 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
   filename = o_filename;
   aligInfo = o_aligInfo;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  forceCaps = false;
+  upperCase = false;
+  lowerCase = false;
+
+  gapSymbol = "-";
+
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Basic information for the new alignment */
@@ -262,6 +267,12 @@ alignment &alignment::operator=(const alignment &old) {
     filename = old.filename;
     aligInfo = old.aligInfo;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    forceCaps = old.forceCaps;
+    upperCase = old.upperCase;
+    lowerCase = old.lowerCase;
+
+    gapSymbol = old.gapSymbol;
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     sequences = new string[sequenNumber];
@@ -1533,6 +1544,10 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
+
+  /* Remove columns/sequences composed only by gaps before making the retrotranslation */
+
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* When we have all parameters, we create the new
    * alignment */
@@ -1946,204 +1961,6 @@ int *alignment::getCorrespSequences(void) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 bool alignment::isFileAligned(void) {
   return isAligned;
-}
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Check if the Coding Sequences file is correct based on: There is not gaps
- * in the whole set of sequences as well each sequence is multiple of 3. At
- * the same time, the function will remove all the stop codon that are in the
- * coding sequences if a given flat set up that */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-bool alignment::prepareCodingSequence(bool splitByStopCodon) {
-  int i, length;
-  size_t found;
-
-  for(i = 0; i < sequenNumber; i++) {
-    if(sequences[i].find("-") != string::npos) {
-      cerr << endl << "ERROR: The sequence \"" << seqsName[i]
-           << "\" has, at least, one gap." << endl << endl;
-      return false;
-    }
-
-    if((sequences[i].length() % 3) != 0) {
-      cerr << endl << "WARNING: The sequence length of \"" << seqsName[i]
-        << "\" is not multiple of 3 (total length: " << sequences[i].length()
-        << ")" << endl;
-    }
-
-    /* Last codon position, It there is any stop codon, it should be there */
-    length = sequences[i].length() - 3;
-
-    /* Detect universal stop codons in the CDS. CDS sequences could be splitted
-     * using stop codons from the sequence itself */
-
-    /* Initialize first appearence of a given stop codon to -1.
-     * That means that it has not been found yet */
-    found = -1;
-    do {
-      found = sequences[i].find("TGA", found + 1);
-
-      /* If a stop codon has been found and its position is multiple of 3.
-       * Analize it */
-      if((found != string::npos) && (((int) found % 3) == 0)) {
-        /* If split_by_stop_codon flag is activated then cut input CDS sequence
-         * up to first appearance of a stop codon */
-        if(splitByStopCodon) {
-          cerr << endl << "WARNING: Cutting sequence \"" << seqsName[i]
-            << "\" at first appearance of stop codon \"TGA\" at position "
-            << (int) found + 1 << " (total length: " << sequences[i].length()
-            << ")" << endl;
-          sequences[i].resize((int) found);
-        }
-        /* Otherwise, warn about it and return an error */
-        else {
-          cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has "
-            << "stop codon \"TGA\" at position " << (int) found + 1 << " (total"
-            << " length: " << sequences[i].length() << ")" << endl << endl;
-          return false;
-        }
-      }
-    /* Iterate over the CDS until not stop codon is found */
-    } while(found != string::npos);
-
-    /* Initialize first appearence of a given stop codon to -1.
-     * That means that it has not been found yet */
-    found = -1;
-    do {
-      found = sequences[i].find("TAA", found + 1);
-
-      /* If a stop codon has been found and its position is multiple of 3.
-       * Analize it */
-      if((found != string::npos) && (((int) found % 3) == 0)) {
-        /* If split_by_stop_codon flag is activated then cut input CDS sequence
-         * up to first appearance of a stop codon */
-        if(splitByStopCodon) {
-          cerr << endl << "WARNING: Cutting sequence \"" << seqsName[i]
-            << "\" at first appearance of stop codon \"TAA\" at position "
-            << (int) found + 1 << " (total length: " << sequences[i].length()
-            << ")" << endl;
-          sequences[i].resize((int) found);
-        }
-        /* Otherwise, warn about it and return an error */
-        else {
-          cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has "
-            << "stop codon \"TAA\" at position " << (int) found + 1 << " (total"
-            << " length: " << sequences[i].length() << ")" << endl << endl;
-          return false;
-        }
-      }
-    /* Iterate over the CDS until not stop codon is found */
-    } while(found != string::npos);
-
-    /* Initialize first appearence of a given stop codon to -1.
-     * That means that it has not been found yet */
-    found = -1;
-    do {
-      found = sequences[i].find("TAG", found + 1);
-      /* If a stop codon has been found and its position is multiple of 3.
-       * Analize it */
-      if((found != string::npos) && (((int) found % 3) == 0)) {
-        /* If split_by_stop_codon flag is activated then cut input CDS sequence
-         * up to first appearance of a stop codon */
-        if(splitByStopCodon) {
-          cerr << endl << "WARNING: Cutting sequence \"" << seqsName[i]
-            << "\" at first appearance of stop codon \"TAA\" at position "
-            << (int) found + 1 << " (total length: " << sequences[i].length()
-            << ")" << endl;
-          sequences[i].resize((int) found);
-        }
-        /* Otherwise, warn about it and return an error */
-        else {
-          cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has "
-            << "stop codon \"TAG\" at position " << (int) found + 1 << " (total"
-            << " length: " << sequences[i].length() << ")" << endl << endl;
-          return false;
-        }
-      }
-    /* Iterate over the CDS until not stop codon is found */
-    } while(found != string::npos);
-  }
-
-  /* If everything was return an OK to informat about it. */
-  return true;
-}
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Check if the Coding Sequences file is correct based on: There is not gaps
- * in the whole set of sequences as well each sequence is multiple of 3.   */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-bool alignment::checkCorrespondence(string *names, int *lengths, int \
-  multiple = 1) {
-
-  int i, j, seqLength, indet;
-  string tmp;
-
-  /* For each sequence in the current protein alignment, look for its coding
-   * DNA sequence checking that there have the same/similar size. */
-  for(i = 0; i < sequenNumber; i++) {
-
-    /* Get protein sequence length removing any possible gap. Get as well last
-     * residue from current sequence */
-
-    tmp = utils::removeCharacter('-', sequences[i]);
-    seqLength = tmp.length() * multiple;
-    indet = ((int) tmp.length() - utils::min((int) tmp.find_last_not_of("X"), \
-      (int) tmp.find_last_not_of("x"))) - 1;
-
-    /* Go through all available CDS looking for the one with the same ID */
-    for(j = 0; j < sequenNumber; j++) {
-
-      /* Once both ID matchs, compare its lengths */
-      if(seqsName[i] == names[j]) {
-
-        /* If both sequences have the same length, stop the search */
-        if(seqLength == lengths[j])
-          break;
-
-        /* If nucleotide sequence is larger than protein sequence, warn about
-         * it and continue the verification process. It will used the 'Nth'
-         * first nucleotides for the conversion */
-        else if(seqLength < lengths[j]) {
-          cerr << endl << "WARNING: Sequence \"" << seqsName[i] << "\" will be "
-            << "cutted at position " << seqLength << " (total length: "
-            << lengths[j] << ")" << endl;
-          break;
-        }
-
-        /* It has been detected some indeterminations at the end of the protein
-         * sequence. That issue could be cause by some incomplete codons in the
-         * nucleotide sequences. This issue is solved adding as much 'N' symbols
-         * as it is needed to preserve the backtranslated alignment */
-        else if((indet > 0) && (indet > (seqLength - lengths[j])/3)) {
-          cerr << endl << "WARNING: Sequence \"" << seqsName[i] << "\" has "
-            << "some indetermination symbols 'X' at the end of sequence. There "
-            << "will be translated to the final alignment." << endl;
-          break;
-        }
-
-        /* If nucleotide sequence is shorter than protein sequence, return an
-         * error since it is not feasible to cut the input protein aligment to
-         * fit it into CDNA sequences size */
-        else {
-          cerr << endl << "WARNING: Sequence \"" << seqsName[i] << "\" has "
-            << "less nucleotides (" << lengths[j] << ") than expected ("
-            << seqLength << "). It will be used N's to complete the sequence"
-            << endl;
-          break;
-        }
-      }
-    }
-
-    /* Warn about a mismatch a sequences name level */
-    if(j == sequenNumber) {
-      cerr << endl << "ERROR: Sequence \"" << seqsName[i] << "\" is not in "
-        << "both files." << endl << endl;
-      return false;
-    }
-  }
-
-  /* If everything is OK, return an appropiate flag */
-  return true;
 }
 
 /* *****************************************************************************
@@ -2669,92 +2486,66 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol,
 alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
   const float *MDK_W, bool complementary, bool variable) {
 
-  int i, j = 0, block, pos, num, lenBlock;
-  string *matrixAux, *newSeqsName;
+  int i, num, lenBlock;
   alignment *newAlig;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Rejects the columns with gaps' number greater than
-   * the gap's cut point. */
+  /* Reject columns with gaps number greater than the gap threshold. */
   for(i = 0; i < residNumber; i++)
     if(gInCol[i] > gapCut)
       saveResidues[i] = -1;
 
-  /* Rejects the columns with conservation'value less
-   * than the conservation's cut point. */
+  /* Reject columns with similarity score under the threshold. */
   for(i = 0; i < residNumber; i++)
     if(MDK_W[i] < simCut)
       saveResidues[i] = -1;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Search for columns that has been rejected and has,
-   * at least, 3 adjacent columns selected */
-  /* For the second column in the alignment */
-  if((saveResidues[0] != -1) && (saveResidues[2] != -1) && (saveResidues[3] != -1))
+  /* Search for those columns that have been removed but have,
+   * at least, 3 adjacent columns selected. */
+
+  /* Special cases:
+   * Second column */
+  if((saveResidues[0] != -1) && (saveResidues[2] != -1)
+    && (saveResidues[3] != -1))
     saveResidues[1] = 1;
   else
     saveResidues[1] = -1;
 
-  /* For the penultimate column in the alignment */
-  if((saveResidues[residNumber-1] != -1) && (saveResidues[residNumber-3] != -1) && (saveResidues[residNumber-4] != -1))
+  /* Second last column  */
+  if((saveResidues[residNumber-1] != -1) && (saveResidues[residNumber-3] != -1)
+    && (saveResidues[residNumber-4] != -1))
     saveResidues[(residNumber - 2)] = (residNumber - 2);
   else
     saveResidues[(residNumber - 2)] = -1;
 
-  /* For the rest of columns in the alignment */
+  /* Normal cases */
   for(i = 2, num = 0; i < (residNumber - 2); i++, num = 0)
     if(saveResidues[i] == -1) {
-      if(saveResidues[(i - 2)] != -1) num++;
-      if(saveResidues[(i - 1)] != -1) num++;
-      if(saveResidues[(i + 1)] != -1) num++;
-      if(saveResidues[(i + 2)] != -1) num++;
-      if(num >= 3) saveResidues[i] = i;
+      if(saveResidues[(i - 2)] != -1)
+        num++;
+      if(saveResidues[(i - 1)] != -1)
+        num++;
+      if(saveResidues[(i + 1)] != -1)
+        num++;
+      if(saveResidues[(i + 2)] != -1)
+        num++;
+      saveResidues[i] = (num >= 3) ? i : -1;
     }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Fix the block's size based on variable flag. The
-   * Block's size can be fixed to 5 or can be variable
-   * between a Minimum Block's size 3 and a Maximum
-   * Block's size: 12 depend on percentage of alignment's
-   * length. */
+  /* Select blocks size based on user input. It can be set either to 5 or to a
+   * variable number between 3 and 12 depending on alignment length (1% alig) */
   if(!variable)
     lenBlock = 5;
   else {
-    lenBlock = utils::roundInt(residNumber * 0.01) > 3 ? utils::roundInt(residNumber * 0.01) : 3;
-    lenBlock = lenBlock < 12 ? lenBlock : 12;
+    lenBlock = utils::roundInt(residNumber * 0.01);
+    lenBlock = lenBlock >  3 ? (lenBlock < 12 ? lenBlock : 12) : 3;
   }
 
   /* Allow to change minimal block size */
-  lenBlock = blockSize > 0 ? blockSize : lenBlock;
+  blockSize = blockSize > 0 ? blockSize : lenBlock;
 
-  /* Keep only columns blocks bigger than an input columns block size */
-  if(blockSize != 0) {
-
-    /* Traverse all alignment looking for columns blocks greater than LONGBLOCK,
-     * everytime than a column is not selected by the trimming method, check
-     * whether the current block size until that point is big enough to be kept
-     * or it should be removed from the final alignment */
-    for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
-      if(saveResidues[i] != -1)
-        block++;
-      else {
-        /* Remove columns from blocks smaller than input blocks size */
-        if(block < blockSize)
-          for(j = pos; j <= i; j++)
-            saveResidues[j] = -1;
-        pos = i + 1;
-        block = 0;
-      }
-    }
-    /* Check final block separately since it could happen than last block is not
-     * big enough but because the loop end could provoke to ignore it */
-    if(block < blockSize)
-      for(j = pos; j < i; j++)
-        saveResidues[j] = -1;
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  /* Keep only columns blocks bigger than either a computed dinamically or
+   * set by the user block size */
+  removeSmallerBlocks(blockSize);
 
   /* If the flag -terminalony is set, apply a method to look for internal
    * boundaries and get back columns inbetween them, if they exist */
@@ -2780,11 +2571,9 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
   /* Fill local allocated memory with previously selected data */
   //~ fillNewDataStructure(matrixAux, newSeqsName);
 
-
   fillNewDataStructure(&counter);
 
   //~ cerr << counter -> seqsName[counter -> sequences - 1] << endl;
-
 
   /* When we have all parameters, we create the new alignment */
   //~ newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, counter.sequences, counter.residues,
@@ -2948,7 +2737,7 @@ void alignment::computeComplementaryAlig(bool residues, bool sequences) {
 /* Function designed for identifying right and left borders between central
  * and terminal regions in the alignment. The borders are those columns, first
  * and last, composed by only residues. Everything inbetween left and right
- * borders are keept independendtly of the applied methods */
+ * borders are keept independently of the applied methods */
 bool alignment::removeOnlyTerminal(void) {
 
   int i, left_boundary, right_boundary;
@@ -2979,69 +2768,38 @@ bool alignment::removeOnlyTerminal(void) {
   return true;
 }
 
-/* Function designed to identify columns and sequences composed only by gaps.
- * Once these columns/sequences have been identified, they are removed from
- * final alignment. */
-//~ newValues alignment::removeCols_SeqsAllGaps(void) {
-  //~ int i, j, valid, gaps;
-  //~ bool warnings = false;
-  //~ newValues counter;
-//~
-  //~ /* Check all valid columns looking for those composed by only gaps */
-  //~ for(i = 0, counter.residues = 0; i < residNumber; i++) {
-    //~ if(saveResidues[i] == -1)
-      //~ continue;
-//~
-    //~ for(j = 0, valid = 0, gaps = 0; j < sequenNumber; j++) {
-      //~ if (saveSequences[j] == -1)
-        //~ continue;
-      //~ if (sequences[j][i] == '-')
-        //~ gaps ++;
-      //~ valid ++;
-    //~ }
-    //~ /* Once a column has been identified, warm about it and remove it */
-    //~ if(gaps == valid) {
-      //~ if(!warnings)
-        //~ cerr << endl;
-      //~ warnings = true;
-      //~ cerr << "WARNING: Removing column '" << i << "' composed only by gaps"
-        //~ << endl;
-      //~ saveResidues[i] = -1;
-    //~ } else {
-      //~ counter.residues ++;
-    //~ }
-  //~ }
-//~
-  //~ /* Check for those selected sequences to see whether there is anyone with
-   //~ * only gaps */
-  //~ for(i = 0, counter.sequences = 0; i < sequenNumber; i++) {
-    //~ if(saveSequences[i] == -1)
-      //~ continue;
-//~
-    //~ for(j = 0, valid = 0, gaps = 0; j < residNumber; j++) {
-      //~ if(saveResidues[j] == -1)
-        //~ continue;
-      //~ if (sequences[i][j] == '-')
-        //~ gaps ++;
-      //~ valid ++;
-    //~ }
-    //~ /* Warm about it and remove each sequence composed only by gaps */
-    //~ if(gaps == valid) {
-      //~ if(!warnings)
-        //~ cerr << endl;
-      //~ warnings = true;
-      //~ cerr << "WARNING: Removing sequence '" << seqsName[i]
-        //~ << "' composed only by gaps" << endl;
-      //~ saveSequences[i] = -1;
-    //~ } else {
-      //~ counter.sequences ++;
-    //~ }
-  //~ }
-  //~ if(warnings)
-    //~ cerr << endl;
-//~
-  //~ return counter;
-//~ }
+/* Function designed to identify and remove those columns blocks smaller than
+ * a given size */
+void alignment::removeSmallerBlocks(int blockSize) {
+
+  int i, j, pos, block;
+
+  if(blockSize == 0)
+    return ;
+
+  /* Traverse the alignment looking for blocks greater than BLOCKSIZE, everytime
+   * than a column hasn't been selected, check whether the current block is big
+   * enough to be kept or it should be removed from the final alignment */
+  for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
+    if(saveResidues[i] != -1)
+      block++;
+    else {
+      /* Remove columns from blocks smaller than input blocks size */
+      if(block < blockSize)
+        for(j = pos; j <= i; j++)
+          saveResidues[j] = -1;
+      pos = i + 1;
+      block = 0;
+    }
+  }
+
+  /* Check final block separately since it could happen than last block is not
+   * big enough but because the loop end could provoke to ignore it */
+  if(block < blockSize)
+    for(j = pos; j < i; j++)
+      saveResidues[j] = -1;
+  return ;
+}
 
 /* Function designed to identify columns and sequences composed only by gaps.
  * Once these columns/sequences have been identified, they are removed from
@@ -3110,7 +2868,6 @@ newValues alignment::removeCols_SeqsAllGaps(void) {
   return counter;
 }
 
-
 /* Function for copying to previously allocated memory those data selected
  * for being in the final alignment */
 void alignment::fillNewDataStructure(string *newMatrix, string *newNames) {
@@ -3150,4 +2907,231 @@ void alignment::fillNewDataStructure(newValues *data) {
     j++;
   }
   cerr << data -> seqsName[j-1] << endl;
+}
+
+/* Check if CDS file is correct based on: Residues are DNA/RNA (at most). There
+ * is not gaps in the whole dataset. Each sequence is multiple of 3. At the same
+ * time, the function will remove stop codons if appropiate flags are used */
+bool alignment::prepareCodingSequence(bool splitByStopCodon) {
+
+  bool warning = false;
+  size_t found;
+  int i;
+
+  /* Check read sequences are real DNA/RNA */
+  if (getTypeAlignment() == AAType) {
+    cerr << endl << "ERROR: Check input CDS file. It seems to content protein "
+      << "residues." << endl << endl;
+      return false;
+  }
+
+  for(i = 0; i < sequenNumber; i++) {
+    if(sequences[i].find("-") != string::npos) {
+      if (!warning)
+        cerr << endl;
+      cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has, at least, one gap"
+        << endl << endl;
+      return false;
+    }
+
+    if((sequences[i].length() % 3) != 0) {
+      if (!warning)
+        cerr << endl;
+      warning = true;
+      cerr << "WARNING: Sequence length \"" << seqsName[i] << "\" is not "
+        << "multiple of 3 (length: " << sequences[i].length() << ")" << endl;
+    }
+
+    /* Detect universal stop codons in the CDS. CDS sequences could be splitted
+     * using stop codons from the sequence itself */
+
+    /* Initialize first appearence of a given stop codon to -1.
+     * That means that it has not been found yet */
+    found = -1;
+    do {
+      found = sequences[i].find("TGA", found + 1);
+
+      /* If a stop codon has been found and its position is multiple of 3.
+       * Analize it */
+      if((found != string::npos) && (((int) found % 3) == 0)) {
+        /* If split_by_stop_codon flag is activated then cut input CDS sequence
+         * up to first appearance of a stop codon */
+        if(splitByStopCodon) {
+          if (!warning)
+            cerr << endl;
+          warning = true;
+          cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
+            << " appearance of stop codon \"TGA\" at position " << (int) found \
+            + 1 << " (length: " << sequences[i].length() << ")" << endl;
+          sequences[i].resize((int) found);
+        }
+        /* Otherwise, warn about it and return an error */
+        else {
+          if (!warning)
+            cerr << endl;
+          cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
+            << "TGA\" at position " << (int) found + 1 << " (length: "
+            << sequences[i].length() << ")" << endl << endl;
+          return false;
+        }
+      }
+    /* Iterate over the CDS until not stop codon is found */
+    } while(found != string::npos);
+
+    /* Initialize first appearence of a given stop codon to -1.
+     * That means that it has not been found yet */
+    found = -1;
+    do {
+      found = sequences[i].find("TAA", found + 1);
+
+      /* If a stop codon has been found and its position is multiple of 3.
+       * Analize it */
+      if((found != string::npos) && (((int) found % 3) == 0)) {
+        /* If split_by_stop_codon flag is activated then cut input CDS sequence
+         * up to first appearance of a stop codon */
+        if(splitByStopCodon) {
+          if (!warning)
+            cerr << endl;
+          warning = true;
+          cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
+            << " appearance of stop codon \"TAA\" at position " << (int) found \
+            + 1 << " (length: " << sequences[i].length() << ")" << endl;
+          sequences[i].resize((int) found);
+        }
+        /* Otherwise, warn about it and return an error */
+        else {
+          if (!warning)
+            cerr << endl;
+          cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
+            << "TAA\" at position " << (int) found + 1 << " (length: "
+            << sequences[i].length() << ")" << endl << endl;
+          return false;
+        }
+      }
+    /* Iterate over the CDS until not stop codon is found */
+    } while(found != string::npos);
+
+    /* Initialize first appearence of a given stop codon to -1.
+     * That means that it has not been found yet */
+    found = -1;
+    do {
+      found = sequences[i].find("TAG", found + 1);
+      /* If a stop codon has been found and its position is multiple of 3.
+       * Analize it */
+      if((found != string::npos) && (((int) found % 3) == 0)) {
+        /* If split_by_stop_codon flag is activated then cut input CDS sequence
+         * up to first appearance of a stop codon */
+        if(splitByStopCodon) {
+          if (!warning)
+            cerr << endl;
+          warning = true;
+          cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
+            << " appearance of stop codon \"TAG\" at position " << (int) found \
+            + 1 << " (length: " << sequences[i].length() << ")" << endl;
+
+          sequences[i].resize((int) found);
+        }
+        /* Otherwise, warn about it and return an error */
+        else {
+          if (!warning)
+            cerr << endl;
+          cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
+            << "TAG\" at position " << (int) found + 1 << " (length: "
+            << sequences[i].length() << ")" << endl << endl;
+          return false;
+        }
+      }
+    /* Iterate over the CDS until not stop codon is found */
+    } while(found != string::npos);
+  }
+
+  /* If everything was return an OK to informat about it. */
+  return true;
+}
+
+/* Function designed to check whether input CDS file is correct or not based on
+ * some features: Sequences are in both files (it could be more on CDS file),
+ * they have (more or less) same ength. Otherwise, some nucleotides could be
+ * excluded or some 'N's added to fit protein length. */
+bool alignment::checkCorrespondence(string *names, int *lengths, int \
+  multiple = 1) {
+
+  int i, j, seqLength, indet;
+  bool warnings = false;
+  string tmp;
+
+  /* For each sequence in the current protein alignment, look for its coding
+   * DNA sequence checking that they have the same size. */
+  for(i = 0; i < sequenNumber; i++) {
+
+    /* Get protein sequence length removing any possible gap. Get as well last
+     * residue from current sequence */
+
+    tmp = utils::removeCharacter('-', sequences[i]);
+    seqLength = tmp.length() * multiple;
+    indet = ((int) tmp.length() - utils::min((int) tmp.find_last_not_of("X"), \
+      (int) tmp.find_last_not_of("x"))) - 1;
+
+    /* Go through all available CDS looking for the one with the same ID */
+    for(j = 0; j < sequenNumber; j++) {
+
+      /* Once both ID matchs, compare its lengths */
+      if(seqsName[i] == names[j]) {
+
+        /* If both sequences have the same length, stop the search */
+        if(seqLength == lengths[j])
+          break;
+
+        /* If nucleotide sequence is larger than protein sequence, warn about
+         * it and continue the verification process. It will used the 'Nth'
+         * first nucleotides for the conversion */
+        else if(seqLength < lengths[j]) {
+          if (!warnings)
+            cerr << endl;
+          warnings = true;
+          cerr << "WARNING: Sequence \"" << seqsName[i] << "\" will be cutted "
+            << "at position " << seqLength << " (length: "<< lengths[j] << ")"
+            << endl;
+          break;
+        }
+
+        /* It has been detected some indeterminations at the end of the protein
+         * sequence. That issue could be cause by some incomplete codons in the
+         * nucleotide sequences. This issue is solved adding as much 'N' symbols
+         * as it is needed to preserve the backtranslated alignment */
+        else if((indet > 0) && (indet > (seqLength - lengths[j])/3)) {
+          if (!warnings)
+            cerr << endl;
+          warnings = true;
+          cerr << "WARNING: Sequence \"" << seqsName[i] << "\" has some inde"
+            << "termination symbols 'X' at the end of sequence. They will be"
+            << " included in the final alignment." << endl;
+          break;
+        }
+
+        /* If nucleotide sequence is shorter than protein sequence, return an
+         * error since it is not feasible to cut the input protein aligment to
+         * fit it into CDNA sequences size */
+        else {
+          if (!warnings)
+            cerr << endl;
+          warnings = true;
+          cerr << "WARNING: Sequence \"" << seqsName[i] << "\" has less nucleo"
+            << "tides (" << lengths[j] << ") than expected (" << seqLength
+            << "). It will be added N's to complete the sequence"  << endl;
+          break;
+        }
+      }
+    }
+
+    /* Warn about a mismatch a sequences name level */
+    if(j == sequenNumber) {
+      cerr << endl << "ERROR: Sequence \"" << seqsName[i] << "\" is not in "
+        << "CDS file." << endl << endl;
+      return false;
+    }
+  }
+
+  /* If everything is OK, return an appropiate flag */
+  return true;
 }

@@ -1375,13 +1375,13 @@ int main(int argc, char *argv[]){
      cerr << endl << "ERROR: The -splitbystopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
      appearErrors = true;
   }
-  /* ------------------------------------------------------------------------------------------------------ */
-  if((!appearErrors) && (backtransFile != NULL) && (origAlig -> getNumSpecies() != backtranslation -> getNumSpecies())) {
-    cerr << endl << "ERROR: The input alignmnet does not have the same number of sequences than the Coding Sequences files"
-         << endl << endl;
-    appearErrors = true;
-  }
-  /* ------------------------------------------------------------------------------------------------------ */
+  //~ /* ------------------------------------------------------------------------------------------------------ */
+  //~ if((!appearErrors) && (backtransFile != NULL) && (origAlig -> getNumSpecies() != backtranslation -> getNumSpecies())) {
+    //~ cerr << endl << "ERROR: The input alignmnet does not have the same number of sequences than the Coding Sequences files"
+         //~ << endl << endl;
+    //~ appearErrors = true;
+  //~ }
+  //~ /* ------------------------------------------------------------------------------------------------------ */
   if((!appearErrors)  && (backtransFile != NULL) && (backtranslation -> prepareCodingSequence(splitbystop) != true))
     appearErrors = true;
 
