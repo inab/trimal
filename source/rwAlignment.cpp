@@ -36,8 +36,8 @@ extern int errno;
 #include <string>
 
 #define DELIMITERS     "   \t\n"
-#define OTHDELIMITERS  "   \t\n,:*"
-#define OTH2DELIMITERS "   \n,:;*"
+#define OTHDELIMITERS  "   \t\n,:"
+#define OTH2DELIMITERS "   \n,:;"
 
 #define HTMLBLOCKS 120
 #define PHYLIPDISTANCE 10

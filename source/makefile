@@ -4,14 +4,15 @@ NAME  = trimal
 CODE2 = readAl.cpp
 NAME2 = readal
 
+CODE3 = statAl.cpp
+NAME3 = statal
+
 CC    = g++
 FLAGS = -Wall -O2
 LIBM  = -lm
 DUGB  =
 
-all:			readal trimal
-
-.PHONY :		all trimal readal clean
+all:			readal trimal statal
 
 preview:		alignment.o statisticsGaps.o utils.o similarityMatrix.o statisticsConservation.o sequencesMatrix.o compareFiles.o
 
@@ -20,6 +21,9 @@ trimal:			preview
 
 readal:			preview
 			$(CC) $(FLAGS) $(DUGB) -o $(NAME2) $(CODE2) $(LIBM) alignment.o statisticsGaps.o utils.o similarityMatrix.o statisticsConservation.o sequencesMatrix.o compareFiles.o
+
+statal:			preview
+			$(CC) $(FLAGS) $(DUGB) -o $(NAME3) $(CODE3) $(LIBM) alignment.o statisticsGaps.o utils.o similarityMatrix.o statisticsConservation.o sequencesMatrix.o compareFiles.o
 
 alignment.o:		alignment.cpp rwAlignment.cpp autAlignment.cpp alignment.h values.h
 			$(CC) $(FLAGS) $(DUGB) -c alignment.cpp rwAlignment.cpp autAlignment.cpp
@@ -43,4 +47,4 @@ compareFiles.o:		compareFiles.cpp compareFiles.h
 			$(CC) $(FLAGS) $(DUGB) -c compareFiles.cpp
 
 clean:
-			-rm -f $(NAME) $(NAME2) *.o *~
+			-rm -f $(NAME) $(NAME2)  $(NAME3) *.o *~

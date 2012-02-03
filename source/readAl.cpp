@@ -4,7 +4,7 @@
     readAl v1.4: a tool for automated alignment conversion among different
                  formats.
 
-    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2012 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of readAl.
@@ -30,13 +30,13 @@
 #include "alignment.h"
 #include "utils.h"
 
-#define BUILD "2011-09-05"
-#define VERSION 1.4
-#define REVISION 5
-
 #define DNAType 1
 #define RNAType 2
 #define AAType  3
+
+#define BUILD "2012-02-02"
+#define VERSION 1.4
+#define REVISION 6
 
 void menu(void);
 

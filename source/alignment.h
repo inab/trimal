@@ -517,6 +517,9 @@ class alignment {
   void fillNewDataStructure(string *, string *);
   void fillNewDataStructure(newValues *);
 
+  // New Code: February/2012
+  void calculateColIdentity(float *);
+  void printColumnsIdentity_DescriptiveStats(void);
 };
 
 #endif

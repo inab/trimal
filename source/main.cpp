@@ -4,7 +4,7 @@
     trimAl v1.4: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2012 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
@@ -43,9 +43,9 @@
 #define GAPPYOUT 1
 #define STRICT   2
 
-#define BUILD "2011-09-05"
+#define BUILD "2012-02-02"
 #define VERSION 1.4
-#define REVISION 5
+#define REVISION 6
 
 void menu(void);
 void examples(void);

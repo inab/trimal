@@ -254,3 +254,97 @@ void alignment::printSeqIdentity(void) {
       << "  " << seqsName[(int) maxs[i][1]] << endl;
   cout << endl;
 }
+
+/* *** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *** */
+/*                                                                           */
+/*                             NEW CODE: feb/2012                            */
+/*                                                                           */
+/* *** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *** */
+void alignment::calculateColIdentity(float *ColumnIdentities) {
+
+  int i, j, counter, pos, max, columnLen;
+  char letter, indet, gapSymbol;
+  string column;
+
+  /* Initialize some data for make computation more precise */
+  indet = getTypeAlignment() == AAType ? 'X' : 'N';
+  gapSymbol = '-';
+
+  /* Compute identity score for the most frequent residue, it can be as well
+   * gaps and indeterminations, for each column */
+  for(i = 0, max = 0; i < residNumber; i++, max = 0, column.clear()) {
+
+    /* Get residues from each column in capital letters */
+    for(j = 0; j < sequenNumber; j++)
+      /* Discard gaps and indeterminations from calculations */
+      if((toupper(sequences[j][i]) != indet) && (sequences[j][i] != gapSymbol))
+        column += toupper(sequences[j][i]);
+    columnLen = column.size();
+
+    /* Count letter frequency. It only matter the frequency. Use some shorcuts
+     * to speed-up the process */
+    while (!column.empty()) {
+      letter = column[0];
+      counter = 0;
+      pos = 0;
+
+      do {
+        counter += 1;
+        column.erase(pos, 1);
+        pos = column.find(letter, pos);
+      } while(pos != (int) string::npos);
+
+      /* Keep only the most frequent residue */
+      if(counter > max)
+        max = counter;
+      /* If column size is smaller than the current max, stop the count */
+      if((int) column.size() < max)
+        break;
+    }
+
+    /* Store column identity values */
+    if(columnLen != 0)
+      ColumnIdentities[i] = float(max)/columnLen;
+  }
+}
+
+void alignment::printColumnsIdentity_DescriptiveStats(void) {
+
+  float *colIdentities, avg, std, max, min;
+  int i, positions;
+
+  /* Allocate local memory for the computation */
+  colIdentities = new float[residNumber];
+
+  utils::initlVect(colIdentities, residNumber, -1);
+  calculateColIdentity(colIdentities);
+
+  for(i = 0, max = 0, min = 1, avg = 0, positions = 0; i < residNumber; i++) {
+    if(colIdentities[i] != -1) {
+      /* Compute on-the-fly max and min scores. Store accumulative score */
+      avg += colIdentities[i];
+      max = (colIdentities[i] > max) ? colIdentities[i] : max;
+      min = (colIdentities[i] < min) ? colIdentities[i] : min;
+      /* Count how many columns have a value score */
+      positions += 1;
+    }
+  }
+  /* Compute average identity column score */
+  avg /= positions;
+
+  /* Compute standard desviation */
+  for(i = 0, std = 0; i < residNumber; i++)
+    if(colIdentities[i] != -1)
+      std += pow((colIdentities[i] - avg), 2);
+  std = sqrt(std/positions);
+
+  /* Print general descriptive stats */
+  cout << "#maxColIdentity\t" << max << endl;
+  cout << "#minColIdentity\t" << min << endl;
+  cout << "#avgColIdentity\t" << avg << endl;
+  cout << "#stdColIdentity\t" << std << endl;
+}
+
+
+
+
