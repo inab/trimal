@@ -1636,7 +1636,6 @@ void alignment::alignmentFastaToFile(ostream &file) {
     file << ">" << seqsName[i].substr(0, maxLongName) << endl;
     for(j = 0; j < residuesNumber[i]; j+= 60)
       file << tmpMatrix[i].substr(j, 60) << endl;
-    file << endl;
   }
 
   /* Deallocate local memory */

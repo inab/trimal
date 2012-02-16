@@ -331,19 +331,36 @@ int statisticsGaps::calcCutPoint2ndSlope(void) {
   utils::initlVect(secondSlopeVector, maxGaps, -1.0);
   maxIter = maxGaps + 1;
 
+  /* Find the lowest number of gaps into the input alignment. If there are few
+   * points, it is possible that lowest number of gaps is returned as the thres
+   * hold. It could happen input alignment does not have columns with no-gaps */
+  for(act = 0, max = 0; numColumnsWithGaps[act] == 0; act++)
+    max = act + 1;
+
+  act = 0;
   while(act < maxIter) {
 
     /* We look for a first point to second slope. */
-    while((numColumnsWithGaps[act]) == 0) act++;
-    pprev = act; if((act+1) >= maxIter) break;
+    while((numColumnsWithGaps[act]) == 0)
+      act++;
+    pprev = act;
+    if((act+1) >= maxIter)
+      break;
 
     /* We look for a first point to first slope. */
-    do { act++; } while((numColumnsWithGaps[act]) == 0);
-    prev = act; if((act+1) >= maxIter) break;
+    do {
+      act++;
+    } while((numColumnsWithGaps[act]) == 0);
+    prev = act;
+    if((act+1) >= maxIter)
+      break;
 
     /* We look for a second point to first and second slope. */
-    do { act++; } while((numColumnsWithGaps[act]) == 0);
-    if(act >= maxIter) break;
+    do {
+      act++;
+    } while((numColumnsWithGaps[act]) == 0);
+    if(act >= maxIter)
+      break;
 
     /* Calculate the second slope between the earlier previous and current points. */
     secondSlopeVector[act] = ((float) (act - pprev) / columnLength);

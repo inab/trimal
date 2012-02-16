@@ -34,9 +34,9 @@
 #define RNAType 2
 #define AAType  3
 
-#define BUILD "2012-02-02"
+#define BUILD "2012-02-16"
 #define VERSION 1.4
-#define REVISION 6
+#define REVISION 7
 
 void menu(void);
 
