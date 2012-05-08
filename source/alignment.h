@@ -87,6 +87,8 @@ class alignment {
   bool upperCase;
   bool lowerCase;
 
+  bool keepSequences;
+
   string gapSymbol;
 
   int dataType;
@@ -145,8 +147,9 @@ class alignment {
   /* Constructors */
   alignment(void);
 
-  alignment(string, string, string *, string *, string *, int, int, int, int, bool,
-            int, int, bool, bool, int, int, int *, int *, int *, int, int, int, float **);
+  alignment(string, string, string *, string *, string *, int, int, int, int, 
+    bool, int, int, bool, bool, bool, int, int, int *, int *, int *, int, int,
+    int, float **);
 
   /* Overlap the operator = to use it as a constructor */
   alignment &operator=(const alignment &);
@@ -520,6 +523,9 @@ class alignment {
   // New Code: February/2012
   void calculateColIdentity(float *);
   void printColumnsIdentity_DescriptiveStats(void);
+
+  // New Code: May/2012
+  void setKeepSequencesFlag(bool);  
 };
 
 #endif

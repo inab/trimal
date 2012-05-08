@@ -43,9 +43,9 @@
 #define GAPPYOUT 1
 #define STRICT   2
 
-#define BUILD "2012-02-16"
+#define BUILD "2012-05-08"
 #define VERSION 1.4
-#define REVISION 7
+#define REVISION 8
 
 void menu(void);
 void examples(void);
@@ -55,8 +55,8 @@ int main(int argc, char *argv[]){
   /* Parameters Control */
   bool appearErrors = false, complementary = false, colnumbering = false, nogaps = false, noallgaps = false, gappyout = false,
        strict = false, strictplus = false, automated1 = false, sgc = false, sgt = false, scc = false, sct = false, sfc = false,
-       sft = false, sident = false, selectSeqs = false, selectCols = false, shortNames = false, splitbystop = false, terminal = false;
-
+       sft = false, sident = false, selectSeqs = false, selectCols = false, shortNames = false, splitbystop = false, terminal = false,
+       keepSeqs = false;
 
   float conserve = -1, gapThreshold = -1, simThreshold = -1, comThreshold = -1, resOverlap = -1, seqOverlap = -1, maxIdentity = -1;
   int outformat = -1, prevType = -1, compareset = -1, stats = 0, windowSize = -1, gapWindow = -1, simWindow = -1, conWindow = -1,
@@ -516,6 +516,10 @@ int main(int argc, char *argv[]){
 
       else
         noallgaps = true;
+    }
+   /* Option -keepseqs --------------------------------------------------------------------------------------- */
+    else if(!strcmp(argv[i], "-keepseqs") && (!keepSeqs)) {
+      keepSeqs = true;
     }
    /* ------------------------------------------------------------------------------------------------------ */
 
@@ -1433,6 +1437,7 @@ int main(int argc, char *argv[]){
   /* -------------------------------------------------------------------- */
 
   origAlig -> trimTerminalGaps(terminal);
+  origAlig -> setKeepSequencesFlag(keepSeqs);
 
   /* -------------------------------------------------------------------- */
   if(windowSize != -1) {
@@ -1761,7 +1766,8 @@ void menu(void) {
   cout << "    -cons <n>                " << "Minimum percentage of the positions in the original alignment to conserve. Range: [0 - 100]" << endl << endl;
 
   cout << "    -nogaps                  " << "Remove all positions with gaps in the alignment." << endl;
-  cout << "    -noallgaps               " << "Remove columns composed only by gaps." << endl << endl;
+  cout << "    -noallgaps               " << "Remove columns composed only by gaps." << endl;
+  cout << "    -keepseqs                " << "Keep sequences even if they are composed only by gaps." << endl << endl;
 
   cout << "    -gappyout                " << "Use automated selection on \"gappyout\" mode. This method only uses "
                                           << "information based on gaps' distribution. (see User Guide)." << endl;
