@@ -574,7 +574,9 @@ int utils::checkTypeAlignment(int seqNumber, int residNumber, string *sequences)
   for(i = 0, gDNA = 0, gRNA = 0; i < seqNumber; i++) {
 
     /* Looks at the 100 letters (excluding gaps) while doesn's get the sequence's end */
-    for(j = 0, k = 0, hitDNA = 0, hitRNA = 0; ((j < residNumber) && (k  < 100)); j++)
+    /* When there are less than a 100 characters, break the loop before reaching that limit */
+    residNumber = (int) sequences[i].size();
+    for(j = 0, k = 0, hitDNA = 0, hitRNA = 0; j < residNumber && k  < 100; j++)
       if(sequences[i][j] != '-' && sequences[i][j] != '.' && sequences[i][j] != '?') {
         k++;
 

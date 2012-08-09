@@ -35,9 +35,9 @@
 #include "alignment.h"
 #include "utils.h"
 
-#define BUILD "2012-05-08"
+#define BUILD "2012-08-09"
 #define VERSION 1.4
-#define REVISION 8
+#define REVISION 9
 
 void show_menu(void);
 void show_examples(void);
