@@ -267,8 +267,12 @@ int main(int argc, char *argv[]) {
         /* Inform about biological datatype */
         if (inAlig.getTypeAlignment() == DNAType)
           cout << "\t" << "nucleotides:dna";
+        else if (inAlig.getTypeAlignment() == DNADeg)
+          cout << "\t" << "nucleotides:dna_degenerate_codes";
         else if (inAlig.getTypeAlignment() == RNAType)
           cout << "\t" << "nucleotides:rna";
+        else if (inAlig.getTypeAlignment() == RNADeg)
+          cout << "\t" << "nucleotides:rna_degenerate_codes";
         else if (inAlig.getTypeAlignment() == AAType)
           cout << "\t" << "aminoacids";
         else

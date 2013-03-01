@@ -36,16 +36,12 @@
 #include "alignment.h"
 #include "utils.h"
 
-#define DNAType 1
-#define RNAType 2
-#define AAType  3
-
 #define GAPPYOUT 1
 #define STRICT   2
 
-#define BUILD "2012-08-09"
+#define BUILD "2013-03-01"
 #define VERSION 1.4
-#define REVISION 9
+#define REVISION 10
 
 void menu(void);
 void examples(void);
@@ -56,7 +52,7 @@ int main(int argc, char *argv[]){
   bool appearErrors = false, complementary = false, colnumbering = false, nogaps = false, noallgaps = false, gappyout = false,
        strict = false, strictplus = false, automated1 = false, sgc = false, sgt = false, scc = false, sct = false, sfc = false,
        sft = false, sident = false, selectSeqs = false, selectCols = false, shortNames = false, splitbystop = false, terminal = false,
-       keepSeqs = false;
+       keepSeqs = false, keepHeader = false;
 
   float conserve = -1, gapThreshold = -1, simThreshold = -1, comThreshold = -1, resOverlap = -1, seqOverlap = -1, maxIdentity = -1;
   int outformat = -1, prevType = -1, compareset = -1, stats = 0, windowSize = -1, gapWindow = -1, simWindow = -1, conWindow = -1,
@@ -517,10 +513,17 @@ int main(int argc, char *argv[]){
       else
         noallgaps = true;
     }
+
    /* Option -keepseqs --------------------------------------------------------------------------------------- */
     else if(!strcmp(argv[i], "-keepseqs") && (!keepSeqs)) {
       keepSeqs = true;
     }
+
+   /* Option -keepseqs --------------------------------------------------------------------------------------- */
+    else if(!strcmp(argv[i], "-keepheader") && (!keepHeader)) {
+      keepHeader = true;
+    }
+
    /* ------------------------------------------------------------------------------------------------------ */
 
    /* Option -gappyout ------------------------------------------------------------------------------------- */
@@ -1365,7 +1368,7 @@ int main(int argc, char *argv[]){
      appearErrors = true;
   }
 
-  if((!appearErrors) && (backtransFile != NULL) && (backtranslation -> getTypeAlignment() != DNAType)) {
+  if((!appearErrors) && (backtransFile != NULL) && (backtranslation -> getTypeAlignment() != DNAType && backtranslation -> getTypeAlignment() != DNADeg)) {
      cerr << endl << "ERROR: Check your Coding sequences file. It has been detected other kind of biological sequences." << endl << endl;
      appearErrors = true;
   }
@@ -1438,6 +1441,7 @@ int main(int argc, char *argv[]){
 
   origAlig -> trimTerminalGaps(terminal);
   origAlig -> setKeepSequencesFlag(keepSeqs);
+  origAlig -> setKeepSeqsHeaderFlag(keepHeader);
 
   /* -------------------------------------------------------------------- */
   if(windowSize != -1) {
@@ -1738,6 +1742,9 @@ void menu(void) {
 
   cout << "    -out <outputfile>        " << "Output alignment in the same input format (default stdout). (default input format)" << endl;
   cout << "    -htmlout <outputfile>    " << "Get a summary of trimal's work in an HTML file." << endl << endl;
+
+  cout << "    -keepheader              " << "Keep original sequence header including non-alphanumeric characters." << endl;
+  cout << "                             " << "Only available for input FASTA format files. (future versions will extend this feature)" << endl << endl;
 
   cout << "    -nbrf                    " << "Output file in NBRF/PIR format" << endl;
   cout << "    -mega                    " << "Output file in MEGA format" << endl;

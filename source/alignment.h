@@ -88,6 +88,7 @@ class alignment {
   bool lowerCase;
 
   bool keepSequences;
+  bool keepHeader;
 
   string gapSymbol;
 
@@ -147,9 +148,9 @@ class alignment {
   /* Constructors */
   alignment(void);
 
-  alignment(string, string, string *, string *, string *, int, int, int, int, 
-    bool, int, int, bool, bool, bool, int, int, int *, int *, int *, int, int,
-    int, float **);
+  alignment(string, string, string *, string *, string *, int, int, int, int,
+    bool, int, int, bool, bool, bool, bool, int, int, int *, int *, int *, int,
+     int, int, float **);
 
   /* Overlap the operator = to use it as a constructor */
   alignment &operator=(const alignment &);
@@ -525,7 +526,10 @@ class alignment {
   void printColumnsIdentity_DescriptiveStats(void);
 
   // New Code: May/2012
-  void setKeepSequencesFlag(bool);  
+  void setKeepSequencesFlag(bool);
+
+  // New Code: Mar/2013
+  void setKeepSeqsHeaderFlag(bool);
 };
 
 #endif

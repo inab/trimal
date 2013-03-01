@@ -565,18 +565,24 @@ string utils::removeCharacter(char c, string line) {
 
 int utils::checkTypeAlignment(int seqNumber, int residNumber, string *sequences) {
 
-  int i, j, k, l, hitDNA, hitRNA, gDNA, gRNA;
+  int i, j, k, l, hitDNA, hitRNA, degenerate, gDNA, gRNA, extDNA, extRNA;
+  float ratioDNA, ratioRNA;
+  /* Standard tables */
   char listRNA[11] = "AGCUNagcun";
   char listDNA[11] = "AGCTNagctn";
 
-  /* For each sequences, this method locks at the 100 letters (excluding gaps). If 95% or more of those letters are
-     valid nucleotides, then the files is treated as nucleotides. The method also recognizes between ADN and ARN. */
-  for(i = 0, gDNA = 0, gRNA = 0; i < seqNumber; i++) {
+  /* Degenerate Nucleotides codes */
+  char degeneratedCodes[21] = "MmRrWwSsYyKkVvHhDdBb";
+
+  /* For each sequences, this method locks at the 100 letters (excluding gaps).
+   * The method is able to distinguish between pure DNA/RNA nucleotides or those
+   * containing degenerate Nucleotide letters */
+  for(i = 0, gDNA = 0, gRNA = 0, extDNA = 0, extRNA = 0; i < seqNumber; i++) {
 
     /* Looks at the 100 letters (excluding gaps) while doesn's get the sequence's end */
     /* When there are less than a 100 characters, break the loop before reaching that limit */
     residNumber = (int) sequences[i].size();
-    for(j = 0, k = 0, hitDNA = 0, hitRNA = 0; j < residNumber && k  < 100; j++)
+    for(j = 0, k = 0, hitDNA = 0, hitRNA = 0, degenerate = 0; j < residNumber && k  < 100; j++)
       if(sequences[i][j] != '-' && sequences[i][j] != '.' && sequences[i][j] != '?') {
         k++;
 
@@ -588,25 +594,40 @@ int utils::checkTypeAlignment(int seqNumber, int residNumber, string *sequences)
         for(l = 0; l < (int) strlen(listRNA); l++)
           if(listRNA[l] == sequences[i][j])
             hitRNA++;
+
+        for(l = 0; l < (int) strlen(degeneratedCodes); l++)
+          if(degeneratedCodes[l] == sequences[i][j])
+            degenerate++;
       }
 
-    /* If for an alignment's sequences the nucleotides don't achieve the threshold, then the method finish and fix
-       the alignment's datatype as AminoAcids. */
-    if((((float) hitDNA/k) < 0.95) && (((float) hitRNA/k) < 0.95)) {
+    /* If input sequences have less than 95% of nucleotides, even when residues
+     * are treated with degenerated codes, consider the input file as containing
+     * amino-acidic sequences. */
+    ratioDNA = float(degenerate + hitDNA)/k;
+    ratioRNA = float(degenerate + hitRNA)/k;
+
+    if(ratioDNA < 0.95 && ratioRNA < 0.95)
       return AAType;
-    }
 
-    /* Computes the greater value between DNA's nucleotides and RNA's nucleotides */
-    else if(hitRNA > hitDNA)
+    /* Identify precisely if nucleotides sequences are DNA/RNA strict or
+     * any degenerate code has been used in the sequence */
+    else if(hitRNA > hitDNA && degenerate == 0)
       gRNA++;
-
-    else
+    else if(hitRNA > hitDNA && degenerate != 0)
+      extRNA++;
+    else if(hitRNA < hitDNA && degenerate == 0)
       gDNA++;
- }
-  /* Return the datatype with the greater value */
-  if(gRNA > gDNA)
+    else if(hitRNA < hitDNA && degenerate != 0)
+      extDNA++;
+  }
+  /* Return the datatype with greater values, considering always degenerate
+   * codes */
+  if (extDNA != 0 && extDNA > extRNA)
+    return DNADeg;
+  else if (extRNA != 0 && extDNA < extRNA)
+    return RNADeg;
+  else if(gRNA > gDNA)
     return RNAType;
-
   else
     return DNAType;
 }

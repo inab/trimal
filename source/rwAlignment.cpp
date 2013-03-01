@@ -721,6 +721,7 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
   /* Allocate memory for the input alignmet */
   seqsName  = new string[sequenNumber];
   sequences = new string[sequenNumber];
+  seqsInfo  = new string[sequenNumber];
 
   for(i = -1; (i < sequenNumber) && (!file.eof()); ) {
 
@@ -732,6 +733,11 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
     line = utils::readLine(file);
     if (line == NULL)
       continue;
+
+    /* Store original header fom input sequences including non-standard
+     * characters */
+    if (line[0] == '>')
+      seqsInfo[i+1].append(&line[1], strlen(line) - 1);
 
     /* Cut the current line and check whether there are valid characters */
     str = strtok(line, OTHDELIMITERS);
@@ -768,8 +774,8 @@ bool alignment::loadFastaAlignment(char *alignmentFile) {
 }
 
 bool alignment::loadNexusAlignment(char *alignmentFile) {
-  /* NEXUS file format parser */
 
+  /* NEXUS file format parser */
   char *frag = NULL, *str = NULL, *line = NULL;
   int i, pos, state, firstBlock;
   ifstream file;
@@ -1626,14 +1632,27 @@ void alignment::alignmentFastaToFile(ostream &file) {
     tmpMatrix[i] = (!reverse) ? sequences[i] : utils::getReverse(sequences[i]);
 
   /* Depending on if short name flag is activated (limits sequence name up to
-   * 10 characters) or not, get maximum sequence name length */
-  maxLongName = PHYLIPDISTANCE;
-  for(i = 0; (i < sequenNumber) && (!shortNames); i++)
-    maxLongName = utils::max(maxLongName, seqsName[i].size());
+   * 10 characters) or not, get maximum sequence name length. Consider those
+   * cases when the user has asked to keep original sequence header */
+  maxLongName = 0;
+  for(i = 0; i < sequenNumber; i++)
+    if (!keepHeader)
+      maxLongName = utils::max(maxLongName, seqsName[i].size());
+    else if (seqsInfo != NULL)
+      maxLongName = utils::max(maxLongName, seqsInfo[i].size());
 
+   if (shortNames && maxLongName > PHYLIPDISTANCE) {
+    maxLongName = PHYLIPDISTANCE;
+    if (keepHeader)
+      cerr << endl << "WARNING: Original sequence header will be cutted by "
+        << " 10 characters" << endl;
+    }
   /* Print alignment. First, sequences name id and then the sequences itself */
   for(i = 0; i < sequenNumber; i++) {
-    file << ">" << seqsName[i].substr(0, maxLongName) << endl;
+    if (!keepHeader)
+      file << ">" << seqsName[i].substr(0, maxLongName) << endl;
+    else if (seqsInfo != NULL)
+      file << ">" << seqsInfo[i].substr(0, maxLongName) << endl;
     for(j = 0; j < residuesNumber[i]; j+= 60)
       file << tmpMatrix[i].substr(j, 60) << endl;
   }

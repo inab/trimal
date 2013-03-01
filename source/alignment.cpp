@@ -67,6 +67,11 @@ alignment::alignment(void) {
   /* Indicate whether sequences composed only by gaps should be kept or not */
   keepSequences = false;
 
+  /* Indicate whether original header, they may include non-alphanumerical
+   * characters, should be dumped into output stream without any preprocessing
+   * step */
+  keepHeader = false;
+
   gapSymbol = "-";
 
   /* Sequence datatype: DNA, RNA or Protein */
@@ -114,8 +119,9 @@ alignment::alignment(void) {
 alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, string *o_seqsName,
                      string *o_seqsInfo, int o_sequenNumber, int o_residNumber, int o_iformat, int o_oformat,
                      bool o_shortNames, int o_dataType, int o_isAligned, bool o_reverse, bool o_terminalGapOnly,
-                     bool o_keepSeqs, int OldSequences, int OldResidues, int *o_residuesNumber, int *o_saveResidues,
-                     int *o_saveSequences, int o_ghWindow, int o_shWindow, int o_blockSize, float **o_identities) {
+                     bool o_keepSeqs, bool o_keepHeader, int OldSequences, int OldResidues, int *o_residuesNumber,
+                     int *o_saveResidues, int *o_saveSequences, int o_ghWindow, int o_shWindow, int o_blockSize,
+                     float **o_identities) {
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   int i, j, k, ll;
@@ -149,6 +155,7 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   keepSequences = o_keepSeqs;
+  keepHeader = o_keepHeader;
 
   forceCaps = false;
   upperCase = false;
@@ -274,6 +281,7 @@ alignment &alignment::operator=(const alignment &old) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     keepSequences = old.keepSequences;
+    keepHeader = old.keepHeader;
 
     forceCaps = old.forceCaps;
     upperCase = old.upperCase;
@@ -1457,7 +1465,7 @@ alignment *alignment::getClustering(float identityThreshold) {
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     clustering[0], residNumber, iformat, oformat, shortNames, dataType, isAligned,
-    reverse, terminalGapOnly, keepSequences, sequenNumber, residNumber, residuesNumber,
+    reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber, residuesNumber,
     saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -1562,7 +1570,7 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
   newAlig = new alignment(filename, "", matrixAux, oldSeqsName, NULL, newSequences,
     newResidues * 3, ProtAlig -> getInputFormat(), ProtAlig -> getOutputFormat(),
     ProtAlig -> getShortNames(), DNAType, true, ProtAlig -> getReverse(),
-    terminalGapOnly, keepSequences, sequenNumber, oldResidues * 3, NULL, NULL,
+    terminalGapOnly, keepSequences, keepHeader, sequenNumber, oldResidues * 3, NULL, NULL,
     NULL, 0, 0, ProtAlig -> getBlockSize(), NULL);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -1828,6 +1836,11 @@ void alignment::setKeepSequencesFlag(bool flag) {
   keepSequences = flag;
 }
 
+/* Set appropiate flag to decide whether original sequences header should be
+ * dumped into the output stream with or without any preprocessing step */
+void alignment::setKeepSeqsHeaderFlag(bool flag) {
+  keepHeader = flag;
+}
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Return the block size value */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2138,7 +2151,7 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine,
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
-    isAligned, reverse, terminalGapOnly, keepSequences, sequenNumber, residNumber,
+    isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
     identities);
 
@@ -2290,7 +2303,7 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine,
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
-    isAligned, reverse, terminalGapOnly, keepSequences, sequenNumber, residNumber,
+    isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
     identities);
 
@@ -2483,7 +2496,7 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol,
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
-    isAligned, reverse, terminalGapOnly, keepSequences, sequenNumber, residNumber,
+    isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
     identities);
 
@@ -2601,7 +2614,7 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
   //~ newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, counter.sequences, counter.residues,
   newAlig = new alignment(filename, aligInfo, counter.matrix, counter.seqsName,
     seqsInfo, counter.sequences, counter.residues, iformat, oformat, shortNames,
-    dataType, isAligned, reverse, terminalGapOnly, keepSequences, sequenNumber,
+    dataType, isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber,
     residNumber, residuesNumber, saveResidues, saveSequences, ghWindow, shWindow,
     blockSize, identities);
 
@@ -2648,7 +2661,7 @@ alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
-    isAligned, reverse, terminalGapOnly, keepSequences, sequenNumber, residNumber,
+    isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
     identities);
 
@@ -2694,7 +2707,7 @@ alignment *alignment::removeColumns(int *columns, int init, int size,
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
-    isAligned, reverse, terminalGapOnly, keepSequences, sequenNumber, residNumber,
+    isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
     identities);
 
@@ -2741,10 +2754,10 @@ alignment *alignment::removeSequences(int *seqs, int init, int size,
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
-    isAligned, reverse, terminalGapOnly, keepSequences, sequenNumber, residNumber,
+    isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
     identities);
-    
+
   /* Free local memory */
   delete [] matrixAux;
   delete [] newSeqsName;
