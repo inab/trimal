@@ -25,7 +25,7 @@ readal:			preview
 statal:			preview
 			$(CC) $(FLAGS) $(DUGB) -o $(NAME3) $(CODE3) $(LIBM) alignment.o statisticsGaps.o utils.o similarityMatrix.o statisticsConservation.o sequencesMatrix.o compareFiles.o
 
-alignment.o:		alignment.cpp rwAlignment.cpp autAlignment.cpp alignment.h values.h
+alignment.o:		alignment.cpp rwAlignment.cpp autAlignment.cpp alignment.h values.h defines.h
 			$(CC) $(FLAGS) $(DUGB) -c alignment.cpp rwAlignment.cpp autAlignment.cpp
 
 statisticsGaps.o:	statisticsGaps.cpp statisticsGaps.h
@@ -40,7 +40,7 @@ statisticsConservation.o: statisticsConservation.cpp statisticsConservation.h
 similarityMatrix.o:	similarityMatrix.cpp similarityMatrix.h values.h
 			$(CC) $(FLAGS) $(DUGB) -c similarityMatrix.cpp
 
-utils.o:		utils.cpp utils.h values.h
+utils.o:		utils.cpp utils.h values.h  defines.h
 			$(CC) $(FLAGS) $(DUGB) -c utils.cpp
 
 compareFiles.o:		compareFiles.cpp compareFiles.h

@@ -29,6 +29,7 @@
 
 #include "utils.h"
 #include "values.h"
+#include "defines.h"
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++
 | void utils::initVect(int *, int, int)          |

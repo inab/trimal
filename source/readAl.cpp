@@ -4,7 +4,7 @@
     readAl v1.4: a tool for automated alignment conversion among different
                  formats.
 
-    2009-2012 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2013 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of readAl.
@@ -28,15 +28,8 @@
 #include <string.h>
 
 #include "alignment.h"
+#include "defines.h"
 #include "utils.h"
-
-#define DNAType 1
-#define RNAType 2
-#define AAType  3
-
-#define BUILD "2012-08-09"
-#define VERSION 1.4
-#define REVISION 9
 
 void menu(void);
 
@@ -46,11 +39,11 @@ int main(int argc, char *argv[]) {
   alignment inAlig;
 
   /* Local variables */
-  string info;
+  string align_format;
   int i, outformat = -1;
   char *infile = NULL, *outfile = NULL;
   bool errors = false, reverse = false, shortNames = false, format = false, \
-    type = false;
+    type = false, info = false;
 
   /* If there is no parameters: Inform about readAl options and finish */
   if(argc == 1) {
@@ -104,6 +97,11 @@ int main(int argc, char *argv[]) {
     /* Get information about input file residues type */
     else if(!strcmp(argv[i], "-type") && (!type))
       type = true;
+
+    /* Get general information about input file: seqs number, average seq length,
+     * etc */
+    else if(!strcmp(argv[i], "-info") && (!info))
+      info = true;
 
     /* Get input sequences reverse option: -reverse */
     else if(!strcmp(argv[i], "-reverse") && (!reverse))
@@ -205,14 +203,15 @@ int main(int argc, char *argv[]) {
   }
 
   /* It is mandatory to choose an option for processing input alignment */
-  if((outformat == -1) && (!reverse) && (!format) && (!type) && (!errors)) {
+  if((outformat == -1) && (!reverse) && (!format) && (!type) && (!info)
+    && (!errors)) {
     cerr << endl << "ERROR: An option has to be choose." << endl << endl;
     errors = true;
   }
 
   /* Only one option can be selected when an output file is not defined */
-  if((outfile == NULL) && ((outformat != -1) || reverse) && (format || type) \
-    && (!errors)) {
+  if((outfile == NULL) && ((outformat != -1) || reverse) && (format || type \
+    || info) && (!errors)) {
     cerr << endl << "ERROR: Only one option can be selected: either an output "
       << "format or get information about input file when an output file is "
       << "not defined" << endl << endl;
@@ -221,8 +220,8 @@ int main(int argc, char *argv[]) {
 
   /* Does not make any sense to define any output file when
    * only information about input alignment is requested */
-  if(((outfile != NULL) && outformat == -1 && !reverse) && (format || type) \
-    && (!errors)) {
+  if(((outfile != NULL) && outformat == -1 && !reverse) && (format || type \
+    || info) && (!errors)) {
     cerr << endl << "ERROR: An output file should not be provided when only "
       << "information about input alignment is requested" << endl << endl;
     errors = true;
@@ -232,53 +231,56 @@ int main(int argc, char *argv[]) {
   if(!errors) {
 
     /* Print information about input alignment */
-    if((format) || (type)) {
-      cout << endl << infile;
+    if((format) || (type) || (info)) {
+      cout << "## Input filename\t'" << infile << "'" << endl;
 
       if(format) {
         /* Input file format */
         if (inAlig.formatInputFile() == 1)
-          info = "clustal";
+          align_format = "clustal";
         else if (inAlig.formatInputFile() == 3)
-          info = "nbrf/pir";
+          align_format = "nbrf/pir";
         else if (inAlig.formatInputFile() == 8)
-          info = "fasta";
+          align_format = "fasta";
         else if (inAlig.formatInputFile() == 11)
-          info = "phylip3.2";
+          align_format = "phylip3.2";
         else if (inAlig.formatInputFile() == 12)
-          info = "phylip";
+          align_format = "phylip";
         else if (inAlig.formatInputFile() == 17)
-          info = "nexus";
+          align_format = "nexus";
         else if (inAlig.formatInputFile() == 21)
-          info = "mega_interleaved";
+          align_format = "mega_interleaved";
         else if (inAlig.formatInputFile() == 22)
-          info = "mega_sequential";
+          align_format = "mega_sequential";
         else
-          info = "unknown";
+          align_format = "unknown";
 
         /* Inform about if sequences are aligned or not */
-        if (inAlig.isFileAligned())
-          cout << "\t" << info << "\taligned";
-        else
-          cout << "\t" << info << "\tunaligned";
+        cout << "## Input file format\t" << align_format << endl
+          << "## Input file aligned\t" << (inAlig.isFileAligned() ? "YES":"NO")
+          << endl;
       }
 
       if(type) {
         /* Inform about biological datatype */
         if (inAlig.getTypeAlignment() == DNAType)
-          cout << "\t" << "nucleotides:dna";
+          cout << "## Input file datatype\tnucleotides:dna" << endl;
         else if (inAlig.getTypeAlignment() == DNADeg)
-          cout << "\t" << "nucleotides:dna_degenerate_codes";
+          cout << "## Input file datatype\tnucleotides:dna_degenerate_codes"
+            << endl;
         else if (inAlig.getTypeAlignment() == RNAType)
-          cout << "\t" << "nucleotides:rna";
+          cout << "## Input file datatype\tnucleotides:rna" << endl;
         else if (inAlig.getTypeAlignment() == RNADeg)
-          cout << "\t" << "nucleotides:rna_degenerate_codes";
+          cout << "## Input file datatype\tnucleotides:rna_degenerate_codes"
+            << endl;
         else if (inAlig.getTypeAlignment() == AAType)
-          cout << "\t" << "aminoacids";
+          cout << "## Input file datatype\taminoacids" << endl;
         else
-          cout << "\t" << "unknown";
+          cout << "## Input file datatype\tunknown" << endl;
       }
-      cout << endl << endl;
+
+      if(info)
+        inAlig.printAlignmentInfo(cout);
     }
 
     if((outfile != NULL) || (outformat != -1) || reverse || shortNames) {
@@ -317,8 +319,7 @@ void menu(void) {
 
   cout << endl
     << "readAl v" << VERSION << ".rev" << REVISION << " build[" << BUILD
-    << "]. 2009-2011. Salvador Capella-Gutierrez and Toni Gabaldón." << endl
-    << endl
+    << "]. " << AUTHORS << endl << endl
 
     << "readAl webpage: http://trimal.cgenomics.org" << endl << endl
 
@@ -332,24 +333,28 @@ void menu(void) {
     << "Basic usage" << endl
     << "\treadal -in <inputfile> -out <outputfile> [options]." << endl << endl
 
-    << "\t-h                  " << "Show this information." << endl
-    << "\t--version           " << "Show readAl version." << endl << endl
+    << "\t-h                   " << "Show this information." << endl
+    << "\t--version            " << "Show readAl version." << endl << endl
 
-    << "\t-in <inputfile>     " << "Input file in several formats." << endl
-    << "\t-out <outputfile>   " << "Output file name (default STDOUT)." << endl
+    << "\t-in <inputfile>      " << "Input file in several formats." << endl
+    << "\t-out <outputfile>    " << "Output file name (default STDOUT)." << endl
     << endl
 
-    << "\t-format             " << "Print information about input file format "
+    << "\t-format              " << "Print information about input file format "
     << "and if sequences are aligned or not." << endl
 
-    << "\t-type               " << "Print information about biological "
-    << "sequences datatype (nucleotides:dna, nucleotides:rna or aminoacids)"
+    << "\t-type                " << "Print information about biological "
+    << "sequences datatype (e.g. nucleotides:dna, nucleotides:rna, aminoacids, etc)"
+    << endl
+
+    << "\t-info                " << "Print information about sequences number, "
+    << "average sequence length, max & min sequence length"
     << endl << endl
 
-    << "\t-onlyseqs           " << "Generate output with only residues from "
+    << "\t-onlyseqs            " << "Generate output with only residues from "
     << "input file" << endl << endl
 
-    << "\t-html               " << "Output residues colored according their "
+    << "\t-html                " << "Output residues colored according their "
     << "physicochemical properties. HTML file." << endl << endl
 
     << "\t-reverse             " << "Output the reverse of sequences in "

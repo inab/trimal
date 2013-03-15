@@ -530,6 +530,9 @@ class alignment {
 
   // New Code: Mar/2013
   void setKeepSeqsHeaderFlag(bool);
+
+  void printAlignmentInfo(ostream &);
+
 };
 
 #endif

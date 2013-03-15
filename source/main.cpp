@@ -4,7 +4,7 @@
     trimAl v1.4: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    2009-2012 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2013 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
@@ -34,14 +34,8 @@
 #include "compareFiles.h"
 #include "compareFiles.h"
 #include "alignment.h"
+#include "defines.h"
 #include "utils.h"
-
-#define GAPPYOUT 1
-#define STRICT   2
-
-#define BUILD "2013-03-01"
-#define VERSION 1.4
-#define REVISION 10
 
 void menu(void);
 void examples(void);
@@ -1709,8 +1703,7 @@ void menu(void) {
 
   cout << endl;
   cout << "trimAl v" << VERSION << ".rev" << REVISION  << " build[" << BUILD
-       << "]. 2009-2011. Salvador Capella-Gutierrez and Toni Gabaldón."
-       << endl << endl;
+       << "]. " << AUTHORS << endl << endl;
 
   cout << "trimAl webpage: http://trimal.cgenomics.org" << endl << endl;
 

@@ -28,19 +28,13 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "alignment.h"
+#include "defines.h"
 #include "utils.h"
 
 extern int errno;
 #include <errno.h>
 #include <ctype.h>
 #include <string>
-
-#define DELIMITERS     "   \t\n"
-#define OTHDELIMITERS  "   \t\n,:"
-#define OTH2DELIMITERS "   \n,:;"
-
-#define HTMLBLOCKS 120
-#define PHYLIPDISTANCE 10
 
 using namespace std;
 
@@ -2205,4 +2199,44 @@ bool alignment::alignmentColourHTML(ostream &file) {
   file << "    </pre>" << endl << "  </body>" << endl << "</html>" << endl;
 
   return true;
+}
+
+void alignment::printAlignmentInfo(ostream &file) {
+  /* Print information about sequences number, average sequence length, maximum
+   * and minimum sequences length, etc */
+
+  int i, j, valid_res, max, min, max_pos, min_pos, total_res;
+
+  /* Storage which sequences are the longest and shortest ones */
+  max = 0;
+  max_pos = 0;
+  min_pos = 0;
+  min = residuesNumber[0];
+
+  for(i = 0, total_res = 0; i < sequenNumber; i++) {
+
+    /* Discard gaps from current sequence and then compute real length */
+    for(j = 0, valid_res = 0; j < residuesNumber[i]; j++)
+      valid_res += (sequences[i][j] != '-' ? 1 : 0);
+
+    /* Compute the total residues in the alignment to calculate avg. sequence
+     * length */
+    total_res += valid_res;
+
+    /* Get values for the longest sequence */
+    max_pos = (max > valid_res) ? max_pos : i;
+    max = (max > valid_res) ? max : valid_res;
+    /* Similarily, get values for the shortest sequence */
+    min_pos = (min < valid_res) ? min_pos : i;
+    min = (min < valid_res) ? min : valid_res;
+  }
+
+  file << "## Total sequences\t" << sequenNumber << endl;
+  if (isFileAligned())
+    file << "## Alignment length\t" << residNumber << endl;
+  file  << "## Avg. sequence length\t" << (float) total_res / sequenNumber << endl
+    << "## Longest seq. name\t'"   << seqsName[max_pos] << "'" << endl
+    << "## Longest seq. length\t"  << max << endl
+    << "## Shortest seq. name\t'"  << seqsName[min_pos] << "'" << endl
+    << "## Shortest seq. length\t" << min << endl;
 }

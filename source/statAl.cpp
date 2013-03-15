@@ -3,7 +3,7 @@
 
     statAl v1.4: a tool for getting descriptive alignment features/scores.
 
-    2009-2012 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2013 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of statAl.
@@ -33,11 +33,8 @@
 #include "compareFiles.h"
 #include "compareFiles.h"
 #include "alignment.h"
+#include "defines.h"
 #include "utils.h"
-
-#define BUILD "2012-08-09"
-#define VERSION 1.4
-#define REVISION 9
 
 void show_menu(void);
 void show_examples(void);
@@ -446,8 +443,9 @@ int main(int argc, char *argv[]){
 
 void show_menu(void) {
 
-  cout << "\nstatAl v" << VERSION << ".rev" << REVISION  << " build[" << BUILD
-       << "].\n2009-2012. Salvador Capella-Gutierrez and Toni Gabaldón.\n\n";
+  cout << endl
+    << "statAl v" << VERSION << ".rev" << REVISION << " build[" << BUILD
+    << "]. " << AUTHORS << endl << endl;
 
   cout << "statAl/trimAl webpage: http://trimal.cgenomics.org" << endl << endl;
 
