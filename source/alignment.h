@@ -355,6 +355,8 @@ class alignment {
 
   void getSequences(string *, int *);
 
+  void getSequences(string *, string *, int *);
+
   bool getSeqNameOrder(string *, int *);
 
   /** \brief Gets alignment's amino acids number.
@@ -498,8 +500,6 @@ class alignment {
 
   bool isFileAligned(void);
 
-  bool prepareCodingSequence(bool);
-
   alignment * getTranslationCDS(int, int, int *, string *, sequencesMatrix *, alignment *);
 
   bool checkCorrespondence(string *, int *, int);
@@ -533,6 +533,8 @@ class alignment {
 
   void printAlignmentInfo(ostream &);
 
+  // Updated: June/2013
+  bool prepareCodingSequence(bool, alignment *);
 };
 
 #endif

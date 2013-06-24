@@ -274,7 +274,7 @@ int main(int argc, char *argv[]) {
           cout << "## Input file datatype\tnucleotides:rna_degenerate_codes"
             << endl;
         else if (inAlig.getTypeAlignment() == AAType)
-          cout << "## Input file datatype\taminoacids" << endl;
+          cout << "## Input file datatype\tamino-acids" << endl;
         else
           cout << "## Input file datatype\tunknown" << endl;
       }

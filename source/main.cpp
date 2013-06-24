@@ -1383,7 +1383,7 @@ int main(int argc, char *argv[]){
     //~ appearErrors = true;
   //~ }
   //~ /* ------------------------------------------------------------------------------------------------------ */
-  if((!appearErrors)  && (backtransFile != NULL) && (backtranslation -> prepareCodingSequence(splitbystop) != true))
+  if((!appearErrors)  && (backtransFile != NULL) && (backtranslation -> prepareCodingSequence(splitbystop, origAlig) != true))
     appearErrors = true;
 
   /* ------------------------------------------------------------------------------------------------------ */
@@ -1802,8 +1802,8 @@ void menu(void) {
 
   cout << "    -sgc                     " << "Print gap score for each column in the input alignment." << endl;
   cout << "    -sgt                     " << "Print accumulated gap scores for the alignment." << endl;
-  cout << "    -ssc                     " << "Print similarity score for each in the from input alignment." << endl;
-  cout << "    -sst                     " << "Print accumulated similarity scores for the alignment." << endl;
+  cout << "    -ssc                     " << "Print similarity score for each column from input alignment." << endl;
+  cout << "    -sst                     " << "Print accumulated similarity scores for input the alignment." << endl;
   cout << "    -sfc                     " << "Print sum-of-pairs score for each column from the selected alignment"
                                           << endl;
   cout << "    -sft                     " << "Print accumulated sum-of-pairs scores for the selected alignment"

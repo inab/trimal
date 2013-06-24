@@ -1865,6 +1865,16 @@ void alignment::getSequences(string *Names, int *lengths) {
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+void alignment::getSequences(string *Names, string *Sequences, int *Lengths) {
+  for(int i = 0; i < sequenNumber; i++) {
+    Names[i] = seqsName[i];
+    Sequences[i] = utils::removeCharacter('-', sequences[i]);
+    Lengths[i] = (int) Sequences[i].length();
+  }
+}
+
+
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* For a given set of sequences name, check for its correspondence with
  * the current sequences name. If there is not a complete correspondence
  * between both sets, the method return false, otherwise, return true */
@@ -2963,11 +2973,27 @@ void alignment::fillNewDataStructure(newValues *data) {
 /* Check if CDS file is correct based on: Residues are DNA/RNA (at most). There
  * is not gaps in the whole dataset. Each sequence is multiple of 3. At the same
  * time, the function will remove stop codons if appropiate flags are used */
-bool alignment::prepareCodingSequence(bool splitByStopCodon) {
+bool alignment::prepareCodingSequence(bool splitByStopCodon, alignment \
+  *proteinAlig) {
 
   bool warning = false;
   size_t found;
   int i;
+
+  /* New code: We now care about the presence of wildcards/indeterminations
+   * characters such as 'X' or 'B' into protein sequences as well as about the
+   * presence of Selenocysteines ('U') or Pyrrolysines ('O'). It only works, by
+   * now, with the universal genetic code */
+  int *protSeqsLengths, numbProtSeqs, current_prot;
+  string *protSeqsNames, *protSequences;
+  char aminoAcid;
+
+  numbProtSeqs =  proteinAlig -> getNumSpecies();
+  protSeqsNames = new string[numbProtSeqs];
+  protSequences = new string[numbProtSeqs];
+  protSeqsLengths = new int[numbProtSeqs];
+
+  proteinAlig -> getSequences(protSeqsNames, protSequences, protSeqsLengths);
 
   /* Check read sequences are real DNA/RNA */
   if (getTypeAlignment() == AAType) {
@@ -2977,6 +3003,16 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon) {
   }
 
   for(i = 0; i < sequenNumber; i++) {
+
+    /* Get protein sequence to compare against any potential stop codon in the
+     * coding sequence. If there is not protein sequence for current coding
+     * sequence, skip its analysis */
+    for(current_prot = 0; current_prot < numbProtSeqs; current_prot++)
+      if(protSeqsNames[current_prot] == seqsName[i])
+        break;
+    if(current_prot == numbProtSeqs)
+      continue;
+
     if(sequences[i].find("-") != string::npos) {
       if (!warning)
         cerr << endl;
@@ -2993,8 +3029,12 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon) {
         << "multiple of 3 (length: " << sequences[i].length() << ")" << endl;
     }
 
-    /* Detect universal stop codons in the CDS. CDS sequences could be splitted
-     * using stop codons from the sequence itself */
+    /* Detect universal stop codons in the CDS. Then, compare those stop codons
+     * against the protein sequence to see whether they are real stop codons or
+     * are representing rare amino-acids such as Selenocysteines or Pyrrolysines
+     * It also allows stop-codons when there are wildcards/indet characters in
+     * the protein sequence. CDS sequences could be splitted using stop codons
+     * from the sequence itself */
 
     /* Initialize first appearence of a given stop codon to -1.
      * That means that it has not been found yet */
@@ -3005,15 +3045,23 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon) {
       /* If a stop codon has been found and its position is multiple of 3.
        * Analize it */
       if((found != string::npos) && (((int) found % 3) == 0)) {
+
+        /* It may be a Selenocysteine ('TGA') which should be represented as 'U'
+         * or wildcard/indet characters such as 'X' or 'B' */
+        aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
+        if ((aminoAcid == 'U') || (aminoAcid == 'X') || (aminoAcid == 'B'))
+          continue;
+
         /* If split_by_stop_codon flag is activated then cut input CDS sequence
          * up to first appearance of a stop codon */
-        if(splitByStopCodon) {
+        else if(splitByStopCodon) {
           if (!warning)
             cerr << endl;
           warning = true;
           cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
-            << " appearance of stop codon \"TGA\" at position " << (int) found \
-            + 1 << " (length: " << sequences[i].length() << ")" << endl;
+            << " appearance of stop codon \"TGA\" (residue \"" << aminoAcid
+            << "\") at position " << (int) found + 1 << " (length: "
+            << sequences[i].length() << ")" << endl;
           sequences[i].resize((int) found);
         }
         /* Otherwise, warn about it and return an error */
@@ -3021,8 +3069,9 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon) {
           if (!warning)
             cerr << endl;
           cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
-            << "TGA\" at position " << (int) found + 1 << " (length: "
-            << sequences[i].length() << ")" << endl << endl;
+            << "TGA\" (residue \"" << aminoAcid << "\") at position "
+            << (int) found + 1 << " (length: " << sequences[i].length() << ")"
+            << endl << endl;
           return false;
         }
       }
@@ -3038,15 +3087,22 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon) {
       /* If a stop codon has been found and its position is multiple of 3.
        * Analize it */
       if((found != string::npos) && (((int) found % 3) == 0)) {
+
+        /* Check if there is any wildcard/indet characters such as 'X' or 'B' */
+        aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
+        if ((aminoAcid == 'X') || (aminoAcid == 'B'))
+          continue;
+
         /* If split_by_stop_codon flag is activated then cut input CDS sequence
          * up to first appearance of a stop codon */
-        if(splitByStopCodon) {
+        else if(splitByStopCodon) {
           if (!warning)
             cerr << endl;
           warning = true;
           cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
-            << " appearance of stop codon \"TAA\" at position " << (int) found \
-            + 1 << " (length: " << sequences[i].length() << ")" << endl;
+            << " appearance of stop codon \"TAA\" (residue \"" << aminoAcid
+            << "\") at position " << (int) found + 1 << " (length: "
+            << sequences[i].length() << ")" << endl;
           sequences[i].resize((int) found);
         }
         /* Otherwise, warn about it and return an error */
@@ -3054,8 +3110,9 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon) {
           if (!warning)
             cerr << endl;
           cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
-            << "TAA\" at position " << (int) found + 1 << " (length: "
-            << sequences[i].length() << ")" << endl << endl;
+            << "TAA\" (residue \"" << aminoAcid << "\") at position "
+            << (int) found + 1 << " (length: " << sequences[i].length() << ")"
+            << endl << endl;
           return false;
         }
       }
@@ -3070,16 +3127,23 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon) {
       /* If a stop codon has been found and its position is multiple of 3.
        * Analize it */
       if((found != string::npos) && (((int) found % 3) == 0)) {
+
+        /* It may be a Pyrrolysine ('TAG') which should be represented as 'O'
+         * or wildcard/indet characters such as 'X' or 'B' */
+        aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
+        if ((aminoAcid == 'O') || (aminoAcid == 'X') || (aminoAcid == 'B'))
+          continue;
+
         /* If split_by_stop_codon flag is activated then cut input CDS sequence
          * up to first appearance of a stop codon */
-        if(splitByStopCodon) {
+        else if(splitByStopCodon) {
           if (!warning)
             cerr << endl;
           warning = true;
           cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
-            << " appearance of stop codon \"TAG\" at position " << (int) found \
-            + 1 << " (length: " << sequences[i].length() << ")" << endl;
-
+            << " appearance of stop codon \"TAG\" (residue \"" << aminoAcid
+            << "\") at position " << (int) found + 1 << " (length: "
+            << sequences[i].length() << ")" << endl;
           sequences[i].resize((int) found);
         }
         /* Otherwise, warn about it and return an error */
@@ -3087,8 +3151,9 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon) {
           if (!warning)
             cerr << endl;
           cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
-            << "TAG\" at position " << (int) found + 1 << " (length: "
-            << sequences[i].length() << ")" << endl << endl;
+            << "TAG\" (residue \"" << aminoAcid << "\") at position "
+            << (int) found + 1 << " (length: " << sequences[i].length() << ")"
+            << endl << endl;
           return false;
         }
       }

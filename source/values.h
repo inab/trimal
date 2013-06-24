@@ -52,14 +52,21 @@ float defaultAAMatrix[20][20] = {
 { 0, -3, -3, -3, -1, -2, -2, -3, -3, 3, 1, -2, 1, -1, -2, -2, 0, -3, -1, 4}
 };
 
-char listNTSym[6] = "ACGTU";
+  char listNTSym[6] = "ACGTU";
 
-float defaultNTMatrix[5][5] = {
-{1, 0, 0, 0, 0},
-{0, 1, 0, 0, 0},
-{0, 0, 1, 0, 0},
-{0, 0, 0, 1, 0},
-{0, 0, 0, 0, 1}
-};
+  float defaultNTMatrix[5][5] = {
+    {1, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0},
+    {0, 0, 1, 0, 0},
+    {0, 0, 0, 1, 0},
+    {0, 0, 0, 0, 1}
+  };
+
+  // Characters used to indicate indeterminations
+  char protein_wildcards[3] = "BX";
+
+  // Pyrrolysine: 'O' > 'TAG'
+  // Selenocysteine: 'U' > 'TGA'
+  char protein_alternative_aminoacids[3] = "UO";
 
 #endif
