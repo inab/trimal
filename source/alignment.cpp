@@ -2973,8 +2973,8 @@ void alignment::fillNewDataStructure(newValues *data) {
 /* Check if CDS file is correct based on: Residues are DNA/RNA (at most). There
  * is not gaps in the whole dataset. Each sequence is multiple of 3. At the same
  * time, the function will remove stop codons if appropiate flags are used */
-bool alignment::prepareCodingSequence(bool splitByStopCodon, alignment \
-  *proteinAlig) {
+bool alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon,\
+  alignment *proteinAlig) {
 
   bool warning = false;
   size_t found;
@@ -3028,6 +3028,10 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon, alignment \
       cerr << "WARNING: Sequence length \"" << seqsName[i] << "\" is not "
         << "multiple of 3 (length: " << sequences[i].length() << ")" << endl;
     }
+
+    /* Ignore stop codons from the CDS if set by the user */
+    if (ignStopCodon)
+      continue;
 
     /* Detect universal stop codons in the CDS. Then, compare those stop codons
      * against the protein sequence to see whether they are real stop codons or

@@ -534,7 +534,7 @@ class alignment {
   void printAlignmentInfo(ostream &);
 
   // Updated: June/2013
-  bool prepareCodingSequence(bool, alignment *);
+  bool prepareCodingSequence(bool, bool, alignment *);
 };
 
 #endif

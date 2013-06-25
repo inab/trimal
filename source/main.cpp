@@ -46,7 +46,7 @@ int main(int argc, char *argv[]){
   bool appearErrors = false, complementary = false, colnumbering = false, nogaps = false, noallgaps = false, gappyout = false,
        strict = false, strictplus = false, automated1 = false, sgc = false, sgt = false, scc = false, sct = false, sfc = false,
        sft = false, sident = false, selectSeqs = false, selectCols = false, shortNames = false, splitbystop = false, terminal = false,
-       keepSeqs = false, keepHeader = false;
+       keepSeqs = false, keepHeader = false, ignorestop = false;
 
   float conserve = -1, gapThreshold = -1, simThreshold = -1, comThreshold = -1, resOverlap = -1, seqOverlap = -1, maxIdentity = -1;
   int outformat = -1, prevType = -1, compareset = -1, stats = 0, windowSize = -1, gapWindow = -1, simWindow = -1, conWindow = -1,
@@ -1100,6 +1100,11 @@ int main(int argc, char *argv[]){
       splitbystop = true;
     }
 
+   /* Option -ignorestopcodon ------------------------------------------------------------------------------- */
+    else if((!strcmp(argv[i], "-ignorestopcodon")) && (ignorestop == false)) {
+      ignorestop = true;
+    }
+
    /* ------------------------------------------------------------------------------------------------------ */
 
    /*                                          Not Valids Parameters                                         */
@@ -1376,14 +1381,18 @@ int main(int argc, char *argv[]){
      cerr << endl << "ERROR: The -splitbystopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
      appearErrors = true;
   }
-  //~ /* ------------------------------------------------------------------------------------------------------ */
-  //~ if((!appearErrors) && (backtransFile != NULL) && (origAlig -> getNumSpecies() != backtranslation -> getNumSpecies())) {
-    //~ cerr << endl << "ERROR: The input alignmnet does not have the same number of sequences than the Coding Sequences files"
-         //~ << endl << endl;
-    //~ appearErrors = true;
-  //~ }
-  //~ /* ------------------------------------------------------------------------------------------------------ */
-  if((!appearErrors)  && (backtransFile != NULL) && (backtranslation -> prepareCodingSequence(splitbystop, origAlig) != true))
+  /* ------------------------------------------------------------------------------------------------------ */
+  if((!appearErrors) && (backtransFile == NULL) && (ignorestop)) {
+     cerr << endl << "ERROR: The -ignorestopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
+     appearErrors = true;
+  }
+  /* ------------------------------------------------------------------------------------------------------ */
+  if((!appearErrors) && (ignorestop) && (splitbystop)) {
+     cerr << endl << "ERROR: Incompatibility of -ignorestopcodon & -splitbystopcodon parameters. Choose one." << endl << endl;
+     appearErrors = true;
+  }
+  /* ------------------------------------------------------------------------------------------------------ */
+  if((!appearErrors)  && (backtransFile != NULL) && (backtranslation -> prepareCodingSequence(splitbystop, ignorestop, origAlig) != true))
     appearErrors = true;
 
   /* ------------------------------------------------------------------------------------------------------ */
@@ -1729,7 +1738,9 @@ void menu(void) {
   cout << "    -forceselect <inputfile> " << "Force selection of the given input file in the files comparison method." << endl << endl;
 
   cout << "    -backtrans <inputfile>   " << "Use a Coding Sequences file to get a backtranslation for a given AA alignment" << endl;
+  cout << "    -ignorestopcodon         " << "Ignore stop codons in the input coding sequences" << endl;
   cout << "    -splitbystopcodon        " << "Split input coding sequences up to first stop codon appearance" << endl << endl;
+
 
   cout << "    -matrix <inpufile>       " << "Input file for user-defined similarity matrix (default is Blosum62)." << endl << endl;
 
