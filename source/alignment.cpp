@@ -3050,10 +3050,14 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon,\
        * Analize it */
       if((found != string::npos) && (((int) found % 3) == 0)) {
 
+        aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
         /* It may be a Selenocysteine ('TGA') which should be represented as 'U'
          * or wildcard/indet characters such as 'X' or 'B' */
-        aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
-        if ((aminoAcid == 'U') || (aminoAcid == 'X') || (aminoAcid == 'B'))
+        //~ if ((aminoAcid == 'U') || (aminoAcid == 'X') || (aminoAcid == 'B'))
+        /* If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
+         * such as 'B'/'X' is present, skip current stop codon */
+        if((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
+          (aminoAcid == 'B'))
           continue;
 
         /* If split_by_stop_codon flag is activated then cut input CDS sequence
@@ -3092,9 +3096,13 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon,\
        * Analize it */
       if((found != string::npos) && (((int) found % 3) == 0)) {
 
-        /* Check if there is any wildcard/indet characters such as 'X' or 'B' */
         aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
-        if ((aminoAcid == 'X') || (aminoAcid == 'B'))
+        /* Check if there is any wildcard/indet characters such as 'X' or 'B' */
+        //~ if ((aminoAcid == 'X') || (aminoAcid == 'B'))
+        /* If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
+         * such as 'B'/'X' is present, skip current stop codon */
+        if((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
+          (aminoAcid == 'B'))
           continue;
 
         /* If split_by_stop_codon flag is activated then cut input CDS sequence
@@ -3132,10 +3140,14 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon,\
        * Analize it */
       if((found != string::npos) && (((int) found % 3) == 0)) {
 
+        aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
         /* It may be a Pyrrolysine ('TAG') which should be represented as 'O'
          * or wildcard/indet characters such as 'X' or 'B' */
-        aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
-        if ((aminoAcid == 'O') || (aminoAcid == 'X') || (aminoAcid == 'B'))
+        //~ if ((aminoAcid == 'O') || (aminoAcid == 'X') || (aminoAcid == 'B'))
+        /* If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
+         * such as 'B'/'X' is present, skip current stop codon */
+        if((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
+          (aminoAcid == 'B'))
           continue;
 
         /* If split_by_stop_codon flag is activated then cut input CDS sequence
