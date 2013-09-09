@@ -3186,7 +3186,7 @@ bool alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon,\
  * they have (more or less) same ength. Otherwise, some nucleotides could be
  * excluded or some 'N's added to fit protein length. */
 bool alignment::checkCorrespondence(string *names, int *lengths, int \
-  multiple = 1) {
+  totalInputSeqs, int multiple = 1) {
 
   int i, j, seqLength, indet;
   bool warnings = false;
@@ -3205,7 +3205,7 @@ bool alignment::checkCorrespondence(string *names, int *lengths, int \
       (int) tmp.find_last_not_of("x"))) - 1;
 
     /* Go through all available CDS looking for the one with the same ID */
-    for(j = 0; j < sequenNumber; j++) {
+    for(j = 0; j < totalInputSeqs; j++) {
 
       /* Once both ID matchs, compare its lengths */
       if(seqsName[i] == names[j]) {
@@ -3257,7 +3257,7 @@ bool alignment::checkCorrespondence(string *names, int *lengths, int \
     }
 
     /* Warn about a mismatch a sequences name level */
-    if(j == sequenNumber) {
+    if(j == totalInputSeqs) {
       cerr << endl << "ERROR: Sequence \"" << seqsName[i] << "\" is not in "
         << "CDS file." << endl << endl;
       return false;

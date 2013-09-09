@@ -502,7 +502,7 @@ class alignment {
 
   alignment * getTranslationCDS(int, int, int *, string *, sequencesMatrix *, alignment *);
 
-  bool checkCorrespondence(string *, int *, int);
+  bool checkCorrespondence(string *, int *, int, int);
 
   int *calculateRepresentativeSeq(float maximumIdent);
 

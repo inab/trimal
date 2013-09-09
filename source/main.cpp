@@ -1402,7 +1402,7 @@ int main(int argc, char *argv[]){
     seqLengths = new int[backtranslation -> getNumSpecies()];
     backtranslation -> getSequences(seqNames, seqLengths);
 
-    if(origAlig -> checkCorrespondence(seqNames, seqLengths, 3) != true)
+    if(origAlig -> checkCorrespondence(seqNames, seqLengths, backtranslation -> getNumSpecies(), 3) != true)
       appearErrors = true;
   }
   /* ------------------------------------------------------------------------------------------------------ */
