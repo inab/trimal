@@ -222,34 +222,34 @@ void alignment::printSeqIdentity(void) {
     if(maxs[i][0] > maxSeq)
       maxSeq = maxs[i][0];
 
-  cout << endl << "#MaxIdentity " << maxSeq;
-  cout << endl << "MaxIdentity  Get the maximum identity value for any pair of"
-    << "sequences in the alignment" << endl;
+  cout << endl << "## MaxIdentity\t" << maxSeq;
+  cout << endl << "#> MaxIdentity\tGet the maximum identity value for any pair "
+    << "of sequences in the alignment" << endl;
 
-  cout << endl << "#AverageIdentity " << avgSeq;
-  cout << endl << "AverageIdentity  Average identity between all sequences";
+  cout << endl << "## AverageIdentity\t" << avgSeq;
+  cout << endl << "#> AverageIdentity\tAverage identity between all sequences";
 
-  cout << endl << endl << "#Identity sequences matrix";
+  cout << endl << endl << "## Identity sequences matrix";
   for(i = 0; i < sequenNumber; i++) {
-    cout << endl << setw(maxLongName + 2) << left << seqsName[i] << "  ";
+    cout << endl << setw(maxLongName + 2) << left << seqsName[i] << "\t";
     for(j = 0; j < i; j++)
-      cout << setiosflags(ios::left) << setw(10) << identities[i][j] << "  ";
-    cout << setiosflags(ios::left) << setw(10) << 1.00 << "  ";
+      cout << setiosflags(ios::left) << setw(10) << identities[i][j] << "\t";
+    cout << setiosflags(ios::left) << setw(10) << 1.00 << "\t";
     for(j = i + 1; j < sequenNumber; j++)
-      cout << setiosflags(ios::left) << setw(10) << identities[i][j] << "  ";
+      cout << setiosflags(ios::left) << setw(10) << identities[i][j] << "\t";
   }
   cout << endl;
 
-  cout << endl << "#AverageMostSimilarIdentity " << maxAvgSeq;
-  cout << endl << "AverageMostSimilarIdentity  Average identity between most "
-    << "similar pair-wise sequences";
+  cout << endl << "## AverageMostSimilarIdentity\t" << maxAvgSeq;
+  cout << endl << "#> AverageMostSimilarIdentity\t Average identity between "
+    << "most similar pair-wise sequences";
 
-  cout << endl << endl << "#Identity for most similar pair-wise sequences "
+  cout << endl << endl << "## Identity for most similar pair-wise sequences "
     << "matrix" << endl;
   for(i = 0; i < sequenNumber; i++)
     cout << setw(maxLongName + 2) << left << seqsName[i]
-      << setiosflags(ios::left) << setw(5) << maxs[i][0]
-      << "  " << seqsName[(int) maxs[i][1]] << endl;
+      << "\t" << setiosflags(ios::left) << setw(5)
+      << maxs[i][0] << "\t" << seqsName[(int) maxs[i][1]] << endl;
   cout << endl;
 }
 
