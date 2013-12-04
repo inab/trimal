@@ -2967,7 +2967,7 @@ void alignment::fillNewDataStructure(newValues *data) {
     }
     j++;
   }
-  # cerr << data -> seqsName[j-1] << endl;
+  // cerr << data -> seqsName[j-1] << endl;
 }
 
 /* Check if CDS file is correct based on: Residues are DNA/RNA (at most). There
