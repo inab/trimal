@@ -1811,15 +1811,15 @@ void menu(void) {
   cout << "    -sw <n>                  " << "(half) Window size only applies to statistics/methods based on Similarity." << endl;
   cout << "    -cw <n>                  " << "(half) Window size only applies to statistics/methods based on Consistency." << endl << endl;
 
-  cout << "    -sgc                     " << "Print gap score for each column in the input alignment." << endl;
-  cout << "    -sgt                     " << "Print accumulated gap scores for the alignment." << endl;
-  cout << "    -ssc                     " << "Print similarity score for each column from input alignment." << endl;
-  cout << "    -sst                     " << "Print accumulated similarity scores for input the alignment." << endl;
-  cout << "    -sfc                     " << "Print sum-of-pairs score for each column from the selected alignment"
+  cout << "    -sgc                     " << "Print gap scores for each column in the input alignment." << endl;
+  cout << "    -sgt                     " << "Print accumulated gap scores for the input alignment." << endl;
+  cout << "    -ssc                     " << "Print similarity scores for each column in the input alignment." << endl;
+  cout << "    -sst                     " << "Print accumulated similarity scores for the input alignment." << endl;
+  cout << "    -sfc                     " << "Print sum-of-pairs scores for each column from the selected alignment"
                                           << endl;
   cout << "    -sft                     " << "Print accumulated sum-of-pairs scores for the selected alignment"
                                           << endl;
-  cout << "    -sident                  " << "Print identity scores for all sequences in the alignemnt. (see User Guide)."
+  cout << "    -sident                  " << "Print identity scores for all sequences in the input alignment. (see User Guide)."
                                           << endl << endl;
 }
 
