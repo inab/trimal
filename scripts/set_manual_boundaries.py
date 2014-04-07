@@ -130,7 +130,7 @@ def main():
         output =  ("## %-30s\t") % ("Best Gaps_Score Left Boundary")
         output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (boundaries[1],
           boundaries[0], float(boundaries[0])/npos)
-    if boundaries[5] != -1 and boundaries[5] != boundaries[5] \
+    if boundaries[5] != -1 and boundaries[2] != boundaries[5] \
       and not args.discardNoGaps:
         output += ("\n## %-30s\t1.0000\t") % ("NO Gaps Right Boundary")
         output += ("pos\t%d\t%%alig\t%.4f") % (boundaries[5], \

@@ -31,7 +31,7 @@
 
 #define BUILD "2014-04-07"
 #define VERSION 1.4
-#define REVISION 16
+#define REVISION 17
 #define AUTHORS "2009-2014. Salvador Capella-Gutierrez and Toni Gabaldón."
 
 #define DNAType 1
