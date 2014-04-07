@@ -61,7 +61,7 @@ int main(int argc, char *argv[]){
   similarityMatrix *similMatrix = NULL;
   alignment *origAlig = NULL, *singleAlig = NULL, *backtranslation = NULL;
 
-  int i = 1, lng, num = 0, maxAminos = 0, numfiles = 0, referFile = 0, *delColumns = NULL, *delSequences = NULL, *seqLengths = NULL;
+  int i = 1, lng, num = 0, maxAminos = 0, numfiles = 0, referFile = 0, *delColumns = NULL, *delSequences = NULL, *seqLengths = NULL, *boundaries = NULL;
   char c, *forceFile = NULL, *infile = NULL, *backtransFile = NULL, *outfile = NULL, *outhtml = NULL, *matrix = NULL,
        **filesToCompare = NULL, line[256];
 
@@ -832,6 +832,19 @@ int main(int argc, char *argv[]){
     else if((!strcmp(argv[i], "-terminalonly")) && (!terminal)) {
       terminal = true;
     }
+
+   /* Option --set_boundaries -------------------------------------------------------------------------------- */
+    else if((!strcmp(argv[i], "--set_boundaries")) && (!terminal) && ((i+3) < argc) && (!strcmp(argv[++i], "{")) && (!strcmp(argv[i+2], "}"))) {
+
+      if((boundaries = utils::readNumbers_StartEnd(argv[++i])) == NULL) {
+
+        cerr << endl << "ERROR: Impossible to parser the sequences number" << endl << endl;
+        appearErrors = true;
+      }
+
+      terminal = true;
+      i++;
+    }
    /* ------------------------------------------------------------------------------------------------------ */
 
    /* ------------------------------------------------------------------------------------------------------ */
@@ -1185,7 +1198,25 @@ int main(int argc, char *argv[]){
   /* ------------------------------------------------------------------------------------------------------ */
 
   /* ------------------------------------------------------------------------------------------------------ */
-  if((terminal) && (!appearErrors))
+  if((terminal) && (boundaries != NULL) && (!appearErrors)) {
+    num = origAlig -> getNumAminos();
+
+    if((!nogaps) && (!noallgaps) && (!gappyout) && (!strict) && (!strictplus) && (!automated1)
+      && (gapThreshold == -1) && (conserve == -1) && (simThreshold == -1) && (!selectCols) && (!selectSeqs)
+    && (resOverlap == -1) && (seqOverlap == -1) && (maxIdentity == -1) && (clusters == -1)) {
+      cerr << endl << "ERROR: This parameter '--set_boundaries' can only be used with either an automatic or a manual method." << endl << endl;
+      appearErrors = true;
+    }
+
+    else if(boundaries[1] >= num) {
+      cerr << endl << "ERROR:  \"--set_boundaries\" parameter only accepts "
+        << "integer numbers between 0 and the number of positions (" << num
+        << ") - 1." << endl << endl;
+      appearErrors = true;
+    }
+  }
+
+  if((terminal) && (boundaries == NULL) && (!appearErrors))
     if((!nogaps) && (!noallgaps) && (!gappyout) && (!strict) && (!strictplus) && (!automated1)
       && (gapThreshold == -1) && (conserve == -1) && (simThreshold == -1) && (!selectCols) && (!selectSeqs)
     && (resOverlap == -1) && (seqOverlap == -1) && (maxIdentity == -1) && (clusters == -1)) {
@@ -1442,7 +1473,7 @@ int main(int argc, char *argv[]){
     conserve  = 0;
   /* -------------------------------------------------------------------- */
 
-  origAlig -> trimTerminalGaps(terminal);
+  origAlig -> trimTerminalGaps(terminal, boundaries);
   origAlig -> setKeepSequencesFlag(keepSeqs);
   origAlig -> setKeepSeqsHeaderFlag(keepHeader);
 
@@ -1791,7 +1822,11 @@ void menu(void) {
                                           << endl << endl;
 
   cout << "    -terminalonly            " << "Only columns out of internal boundaries (first and last column without gaps) are " << endl;
-  cout << "                             " << "candidated to be trimmed depending on the applied method" << endl;
+  cout << "                             " << "candidates to be trimmed depending on the selected method" << endl;
+
+  cout << "    --set_boundaries         " << "Set manually boundaries - only columns out of these boundaries are " << endl;
+  cout << "                             " << "candidates to be trimmed depending on the selected method" << endl;
+
 
   cout << "    -block <n>               " << "Minimum column block size to be kept in the trimmed alignment. Available with manual"
                                           << " and automatic (gappyout) methods" << endl << endl;

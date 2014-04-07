@@ -78,6 +78,9 @@ class alignment {
   bool reverse;
 
   bool terminalGapOnly;
+  int left_boundary;
+  int right_boundary;
+
 
   int iformat;
   int oformat;
@@ -149,7 +152,8 @@ class alignment {
   alignment(void);
 
   alignment(string, string, string *, string *, string *, int, int, int, int,
-    bool, int, int, bool, bool, bool, bool, int, int, int *, int *, int *, int,
+    bool, int, int, bool, bool, int, int,
+    bool, bool, int, int, int *, int *, int *, int,
      int, int, float **);
 
   /* Overlap the operator = to use it as a constructor */
@@ -459,7 +463,7 @@ class alignment {
 
   void saveStatistics(similarityMatrix *, int, int);
 
-  void trimTerminalGaps(bool);
+  void trimTerminalGaps(bool, int *);
 
   void setWindowsSize(int, int);
 
@@ -513,6 +517,8 @@ class alignment {
   void removeSmallerBlocks(int);
 
   bool removeOnlyTerminal(void);
+
+  bool removeOnlyTerminal(int, int);
 
   newValues removeCols_SeqsAllGaps(void);
 

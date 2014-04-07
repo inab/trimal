@@ -200,6 +200,8 @@ class utils {
 
   static int* readNumbers(string);
 
+  static int* readNumbers_StartEnd(string);
+
   static void quicksort(int **, int, int);
 
   static void swap(int **, int **);
