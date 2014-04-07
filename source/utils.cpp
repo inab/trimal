@@ -633,6 +633,28 @@ int utils::checkTypeAlignment(int seqNumber, int residNumber, string *sequences)
     return DNAType;
 }
 
+int* utils::readNumbers_StartEnd(string line) {
+
+  int comma, nElems = 0;
+  static int *numbers;
+
+ comma = -1;
+  while((comma = line.find(",", comma + 1)) != (int) string::npos)
+    nElems += 2;
+
+  //~ If there is more than two numbers separated by a comma, return NULL
+  if(nElems != 2)
+    return NULL;
+
+  numbers = new int[2];
+  comma = line.find(",", 0);
+  numbers[0] = atoi(line.substr(0, comma).c_str());
+  numbers[1] = atoi(line.substr(comma+1).c_str());
+
+  return numbers;
+}
+
+
 int* utils::readNumbers(string line) {
 
   int i, comma, separ, init, nElems = 0;
@@ -678,9 +700,12 @@ int* utils::readNumbers(string line) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    if(numbers[i-2] < 0) return NULL;
-    if(numbers[i-1] < numbers[i-2]) return NULL;
-    if(comma == (int) string::npos) break;
+    if(numbers[i-2] < 0)
+      return NULL;
+    if(numbers[i-1] < numbers[i-2])
+      return NULL;
+    if(comma == (int) string::npos)
+      break;
    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   } while(true);
 

@@ -123,10 +123,8 @@ void statisticsConservation::calculateMatrixIdentity(string *alignmentMatrix) {
   char indet;
   int i, j, k, sum, length;
 
-  if(dataType == AAType)
-    indet = 'X';
-  else
-    indet = 'N';
+  /* Depending on alignment type, indetermination symbol will be one or other */
+  indet = (dataType == AAType) ? 'X' : 'N';
 
   /* For each sequences' pair */
   for(i = 0; i < sequences; i++) {
@@ -175,10 +173,8 @@ bool statisticsConservation::calculateVectors(string *alignmentMatrix, int *gaps
   int i, j, k;
   float num, den;
 
-  if(dataType == AAType)
-    indet = 'X';
-  else
-    indet = 'N';
+  /* Depending on alignment type, indetermination symbol will be one or other */
+  indet = (dataType == AAType) ? 'X' : 'N';
 
   /* A conservation matrix must be defined. If not, return false */
   if(simMatrix == NULL)
