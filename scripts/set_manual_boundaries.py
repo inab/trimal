@@ -45,6 +45,10 @@ def main():
     default = False, action = "store_true", help = "Discard those columns with"
     + "no gaps - those columns will be preferentially selected as boundaries")
 
+  parser.add_argument("--one_line", dest = "oneLine", default = False, action =
+    "store_true", help = "Generate output in just one line which will be used "
+      + "directly by trimAl")
+
   args = parser.parse_args()
 
   if not os.path.isfile(args.inFile):
@@ -75,12 +79,13 @@ def main():
 
         ## We update constantently the right boundary until the last best value
         ## is found
-        if gap_score > boundaries[4] and gap_score != 1.0:
+        if gap_score >= boundaries[4] and gap_score != 1.0:
           boundaries[4] = gap_score
           boundaries[3] = pos
 
-        if gap_score == 1.0:
-          boundaries[5] = pos
+      ## Get the most to the right column without any gap
+      if gap_score == 1.0:
+        boundaries[5] = pos
 
       ## Define the left boundary as the first value passing the input parameters
       else:
@@ -118,36 +123,45 @@ def main():
         else:
           putative[2] = True
 
+
   output = ""
   ## Generate output, if any
-  if boundaries[0] != -1 and boundaries[3] != -1:
-    if boundaries[2] != -1 and boundaries[2] != boundaries[5] \
-      and not args.discardNoGaps:
-        output += ("## %-30s\t1.0000\t") % ("NO Gaps Left Boundary")
-        output += ("pos\t%d\t%%alig\t%.4f") % (boundaries[2], \
-          float(boundaries[2])/npos)
+
+  ## First try to get the best column possible - unless the user has set-up
+  ## specifically to discard them
+  if boundaries[2] != boundaries[5] and not args.discardNoGaps:
+    if not args.oneLine:
+      ratio = float(boundaries[2])/npos
+      output  = ("## %-30s\t1.0000\t") % ("NO Gaps Left Boundary")
+      output += ("pos\t%d\t%%alig\t%.4f") % (boundaries[2], ratio)
+      ratio = float(boundaries[5])/npos
+      output += ("\n## %-30s\t1.0000\t") % ("NO Gaps Right Boundary")
+      output += ("pos\t%d\t%%alig\t%.4f") % (boundaries[5], ratio)
     else:
-        output =  ("## %-30s\t") % ("Best Gaps_Score Left Boundary")
-        output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (boundaries[1],
-          boundaries[0], float(boundaries[0])/npos)
-    if boundaries[5] != -1 and boundaries[2] != boundaries[5] \
-      and not args.discardNoGaps:
-        output += ("\n## %-30s\t1.0000\t") % ("NO Gaps Right Boundary")
-        output += ("pos\t%d\t%%alig\t%.4f") % (boundaries[5], \
-          float(boundaries[5])/npos)
+      output = ("%d,%d") % (boundaries[2], boundaries[5])
+
+  elif not output and boundaries[0] != boundaries[3]:
+    if not args.oneLine:
+      ratio = float(boundaries[0])/npos
+      output =  ("## %-30s\t") % ("Best Gaps_Score Left Boundary")
+      output += ("%.4f\tpos\t%d\t%%alig\t") % (boundaries[1], boundaries[0])
+      output += ("%.4f\n## %-30s\t") % (ratio, "Best Gaps_Score Right Boundary")
+      output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (boundaries[4], boundaries[3],
+        float(boundaries[3])/npos)
     else:
-        output += ("\n## %-30s\t") % ("Best Gaps_Score Right Boundary")
-        output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (boundaries[4],
-          boundaries[3], float(boundaries[3])/npos)
+      output = ("%d,%d") % (boundaries[0], boundaries[3])
 
   ## If there is no output, and the user has set-up "--get_best_boundaries"
-  if not output and args.bestBoundaries:
-    output =  ("## %-30s\t") % ("Best_found Gaps_Score Left Boundary")
-    output += ("%.4f\tpos\t%d\t%%alig\t%.4f\n") % (putative[1],
-      putative[0], float(putative[0])/npos)
-    output += ("## %-30s\t") % ("Best_found Gaps_Score Right Boundary")
-    output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (putative[4],
-      putative[3], float(putative[3])/npos)
+  elif not output and args.bestBoundaries:
+    if not args.oneLine:
+      output =  ("## %-30s\t") % ("Best_found Gaps_Score Left Boundary")
+      output += ("%.4f\tpos\t%d\t%%alig\t%.4f\n") % (putative[1],
+        putative[0], float(putative[0])/npos)
+      output += ("## %-30s\t") % ("Best_found Gaps_Score Right Boundary")
+      output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (putative[4],
+        putative[3], float(putative[3])/npos)
+    else:
+      output = ("%d,%d") % (putative[0], putative[3])
 
   ## Generate a warning for those cases where no boundaries have been found
   if not output:
