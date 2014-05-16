@@ -36,7 +36,8 @@ if __name__ == "__main__":
     str, help = "Set output file")
 
   parser.add_argument("-f", "--format", dest = "inFormat", default = "fasta", \
-    type = str, choices = ["fasta", "phylip_relaxed"], help = "Set input alignment format")
+    type = str, choices = ["clustal", "fasta-m10", "fasta", "phylip-relaxed", \
+    "phylip-sequential", "phylip", "nexus"],help = "Set input alignment format")
 
   parser.add_argument("-g", "--gap_symbol", dest = "gapSymbol", default = '-', \
     type = str, help = "Define the gap symbol used in the input alignment")
