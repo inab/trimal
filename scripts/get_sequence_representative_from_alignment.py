@@ -42,6 +42,10 @@ if __name__ == "__main__":
   parser.add_argument("-g", "--gap_symbol", dest = "gapSymbol", default = '-', \
     type = str, help = "Define the gap symbol used in the input alignment")
 
+  parser.add_argument("--keep_header", dest = "keepHeader", default = False,
+    action = "store_true", help = "Keep original alignment sequence IDs indepen"
+    + "dently of blank spaces on it")
+
   parser.add_argument("-v", "--verbose", dest = "verbose", default = False,
     action = "store_true", help = "Activate verbosity")
 
@@ -54,6 +58,7 @@ if __name__ == "__main__":
   for record in AlignIO.read(args.inFile, format = args.inFormat):
     current_seq = str(record.seq)
     sequence_length = len(current_seq)
+    sequence_id = record.id if not args.keepHeader else record.description
 
     for seq in sequences:
       ## Identity score is computed considering all positions for which at least
@@ -65,12 +70,12 @@ if __name__ == "__main__":
         current_seq[pos]]
 
       ratio = float(len(identical))/len(valid_pos)
-      identities.setdefault(record.id, {}).setdefault(seq, ratio)
-      identities.setdefault(seq, {}).setdefault(record.id, ratio)
+      identities.setdefault(sequence_id, {}).setdefault(seq, ratio)
+      identities.setdefault(seq, {}).setdefault(sequence_id, ratio)
 
     ## Save current sequence and  move on to the nex one
     ungapped = current_seq.replace(args.gapSymbol, "")
-    sequences.setdefault(record.id, [current_seq, ungapped, len(ungapped)])
+    sequences.setdefault(sequence_id, [current_seq, ungapped, len(ungapped)])
 
   selection, maxIdentity = set(), 0
   for refer in sequences:
