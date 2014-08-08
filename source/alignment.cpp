@@ -455,23 +455,17 @@ alignment::~alignment(void) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function is useful to detect the format from a given alignment */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+
+// Try to load current alignment and inform otherwise
 bool alignment::loadAlignment(char *alignmentFile) {
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Analyze the input alignment to detect its format */
-
+    
+  // Detect input alignment format - it is an strict detection procedure
   iformat = formatInputAlignment(alignmentFile);
+  // Unless it is indicated somewhere else, output alignment format will be
+  // the same as the input one
   oformat = iformat;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Depending on the input format, the program use an
-   * appropiate function to read that alignment */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  // Use the appropiate function to read input alignment
   switch(iformat) {
     case 1:
       return loadClustalAlignment(alignmentFile);
@@ -489,29 +483,26 @@ bool alignment::loadAlignment(char *alignmentFile) {
       return loadMegaInterleavedAlignment(alignmentFile);
     case 22:
       return loadMegaNonInterleavedAlignment(alignmentFile);
+  // Return a FALSE value - meaning the input alignment was not loaded
     default:
       return false;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
   return false;
 }
-/* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function returns the input alignment format */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-int alignment::formatInputFile(void) {
-
+// Return input alignment format - it is useful to set-up output alignment one
+int alignment::getInputFormat(void) {
   return iformat;
 }
-/* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function returns the input alignment type between a single or a
- *  multialignment. */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+// Return output alignment format
+int alignment::getOutputFormat(void) {
+  return oformat;
+}
+
+// Return whether there is one or more alignments at the input file.
+// Currently trimAl family only support single alignments per file.
 int alignment::typeInputFile(void) {
-
   return SINGLE;
 }
 
@@ -1814,20 +1805,6 @@ void alignment::setOutputFormat(int format_, bool shortNames_) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void alignment::setBlockSize(int blockSize_) {
   blockSize = blockSize_;
-}
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Return the input format aligment */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-int alignment::getInputFormat(void) {
-  return iformat;
-}
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Return the output format alignment */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-int alignment::getOutputFormat(void) {
-  return oformat;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
