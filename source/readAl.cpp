@@ -236,21 +236,21 @@ int main(int argc, char *argv[]) {
 
       if(format) {
         /* Input file format */
-        if (inAlig.formatInputFile() == 1)
+        if (inAlig.getInputFormat() == 1)
           align_format = "clustal";
-        else if (inAlig.formatInputFile() == 3)
+        else if (inAlig.getInputFormat() == 3)
           align_format = "nbrf/pir";
-        else if (inAlig.formatInputFile() == 8)
+        else if (inAlig.getInputFormat() == 8)
           align_format = "fasta";
-        else if (inAlig.formatInputFile() == 11)
+        else if (inAlig.getInputFormat() == 11)
           align_format = "phylip3.2";
-        else if (inAlig.formatInputFile() == 12)
+        else if (inAlig.getInputFormat() == 12)
           align_format = "phylip";
-        else if (inAlig.formatInputFile() == 17)
+        else if (inAlig.getInputFormat() == 17)
           align_format = "nexus";
-        else if (inAlig.formatInputFile() == 21)
+        else if (inAlig.getInputFormat() == 21)
           align_format = "mega_interleaved";
-        else if (inAlig.formatInputFile() == 22)
+        else if (inAlig.getInputFormat() == 22)
           align_format = "mega_sequential";
         else
           align_format = "unknown";

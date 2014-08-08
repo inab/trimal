@@ -413,8 +413,6 @@ class alignment {
   /* ********** ******** ********** */
   int formatInputAlignment(char *);
 
-  int formatInputFile(void);
-
   int typeInputFile(void);
 
   bool loadPhylipAlignment(char *);
