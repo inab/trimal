@@ -1824,8 +1824,8 @@ void menu(void) {
   cout << "    -terminalonly            " << "Only columns out of internal boundaries (first and last column without gaps) are " << endl;
   cout << "                             " << "candidates to be trimmed depending on the selected method" << endl;
 
-  cout << "    --set_boundaries         " << "Set manually boundaries - only columns out of these boundaries are " << endl;
-  cout << "                             " << "candidates to be trimmed depending on the selected method" << endl;
+  cout << "    --set_boundaries { l,r } " << "Set manually left (l) and right (r) boundaries - only columns out of these boundaries are " << endl;
+  cout << "                             " << "candidates to be trimmed depending on the selected method. Range: [0 - (Number of Columns - 1)]" << endl;
 
 
   cout << "    -block <n>               " << "Minimum column block size to be kept in the trimmed alignment. Available with manual"

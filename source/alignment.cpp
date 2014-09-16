@@ -2834,8 +2834,7 @@ bool alignment::removeOnlyTerminal(void) {
    * then retrieved all columns inbetween both boundaries. Columns out of these
    * limits will remain selected or not depending on the algorithm applied */
   for(i = left_boundary; i < right_boundary; i++)
-    if(saveResidues[i] == -1)
-      saveResidues[i] = i;
+    saveResidues[i] = i;
 
   return true;
 }
