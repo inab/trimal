@@ -147,11 +147,17 @@ def main():
 
     ## If columns with no gaps are the first/last ones found - select them as
     ## the boundaries independently of user input parameters.
-    left = boundaries[2] if boundaries[2] < boundaries[0] else boundaries[0]
-    left_score = 1.0 if boundaries[2] < boundaries[0] else boundaries[1]
+    left = boundaries[0]
+    left_score = boundaries[1]
+    if boundaries[2] != -1 and boundaries[2] < boundaries[0]:
+      left = boundaries[2]
+      left_score = 1.0
 
-    right = boundaries[5] if boundaries[5] > boundaries[3] else boundaries[3]
-    right_score = 1.0 if boundaries[5] > boundaries[3] else boundaries[4]
+    right = boundaries[3]
+    right_score = boundaries[4]
+    if boundaries[5] != -1 and boundaries[5] > boundaries[3]:
+      right = boundaries[5]
+      right_score = 1.0
 
     if not args.oneLine:
       ratio_l = float(left)/npos
