@@ -439,7 +439,7 @@ bool alignment::loadPhylip3_2Alignment(char *alignmentFile) {
     if(line == NULL)
       continue;
 
-    str = strtok(line, OTHDELIMITERS);
+    str = strtok(line, DELIMITERS);
     /* First block: Sequence Name + Sequence fragment. Count how many blocks
      * the first sequence line is divided. It could help to identify the
      * different sequences from the input file */
