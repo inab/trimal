@@ -43,7 +43,9 @@ def main():
 
   parser.add_argument("--discard_nogaps_columns", dest = "discardNoGaps",
     default = False, action = "store_true", help = "Discard those columns with"
-    + "no gaps - those columns will be preferentially selected as boundaries")
+    + "no gaps - otherwise, those columns will be preferentially selected as "
+    + "boundaries - this parameter will be ignored if this column are the first"
+    + "/last one to pass the input gap_score threshold")
 
   parser.add_argument("--one_line", dest = "oneLine", default = False, action =
     "store_true", help = "Generate output in just one line which will be used "
@@ -72,27 +74,29 @@ def main():
     pos = int(f[0])
     gap_score = float(f[2])
 
+    ## This function is intended to find columns - with at least one gap - which
+    ## will be used as left and right boundaries for trimAl
     if gap_score >= args.minGapBoundaries:
+
       ## Check whether the left boundary is defined, if that the case, define
       ## the right one
       if boundaries[0] != -1:
-
         ## We update constantently the right boundary until the last best value
         ## is found
-        if gap_score >= boundaries[4] and gap_score != 1.0:
-          boundaries[4] = gap_score
+        if gap_score != 1.0:
           boundaries[3] = pos
+          boundaries[4] = gap_score
+
+      ## Define the left boundary as the first value passing the input threshold
+      elif gap_score != 1.0:
+        boundaries[0] = pos
+        boundaries[1] = gap_score
 
       ## Get the most to the right column without any gap
       if gap_score == 1.0:
         boundaries[5] = pos
 
-      ## Define the left boundary as the first value passing the input parameters
-      else:
-        if gap_score > boundaries[1] and gap_score != 1.0:
-          boundaries[1] = gap_score
-          boundaries[0] = pos
-
+      ## Get the most to the left column without any gap
       if gap_score == 1.0 and boundaries[2] == -1:
         boundaries[2] = pos
 
@@ -108,7 +112,7 @@ def main():
       ## We update current value until the left boundary is found
       if boundaries[0] == -1:
 
-        ## Any pick on values - reflected like the ta least the double of the
+        ## Any pick on values - reflected like the at least the double of the
         ## current best value, should be store.
         if gap_score > (2 * putative[1]):
           putative[1] = gap_score
@@ -122,7 +126,6 @@ def main():
           putative[0] = pos
         else:
           putative[2] = True
-
 
   output = ""
   ## Generate output, if any
@@ -141,27 +144,50 @@ def main():
       output = ("%d,%d") % (boundaries[2], boundaries[5])
 
   elif not output and boundaries[0] != boundaries[3]:
+
+    ## If columns with no gaps are the first/last ones found - select them as
+    ## the boundaries independently of user input parameters.
+    left = boundaries[0]
+    left_score = boundaries[1]
+    if boundaries[2] != -1 and boundaries[2] < boundaries[0]:
+      left = boundaries[2]
+      left_score = 1.0
+
+    right = boundaries[3]
+    right_score = boundaries[4]
+    if boundaries[5] != -1 and boundaries[5] > boundaries[3]:
+      right = boundaries[5]
+      right_score = 1.0
+
     if not args.oneLine:
-      ratio = float(boundaries[0])/npos
+      ratio_l = float(left)/npos
+      ratio_r = float(right)/npos
+      
       output =  ("## %-30s\t") % ("Best Gaps_Score Left Boundary")
-      output += ("%.4f\tpos\t%d\t%%alig\t") % (boundaries[1], boundaries[0])
-      output += ("%.4f\n## %-30s\t") % (ratio, "Best Gaps_Score Right Boundary")
-      output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (boundaries[4], boundaries[3],
-        float(boundaries[3])/npos)
+      output += ("%.4f\tpos\t%d\t%%alig\t%.4f\n") % (left_score, left, ratio_l)
+      output += ("## %-30s\t") % ("Best Gaps_Score Right Boundary")
+      output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (right_score, right, ratio_r)
     else:
-      output = ("%d,%d") % (boundaries[0], boundaries[3])
+      output = ("%d,%d") % (left, right)
 
   ## If there is no output, and the user has set-up "--get_best_boundaries"
   elif not output and args.bestBoundaries:
+    left = putatitve[0]
+    left_score = putative[1]
+
+    right = putative[3]
+    right_score = putative[4]
+
     if not args.oneLine:
+      ratio_l = float(left)/npos
+      ratio_r = float(right)/npos
+      
       output =  ("## %-30s\t") % ("Best_found Gaps_Score Left Boundary")
-      output += ("%.4f\tpos\t%d\t%%alig\t%.4f\n") % (putative[1],
-        putative[0], float(putative[0])/npos)
+      output += ("%.4f\tpos\t%d\t%%alig\t%.4f\n") % (left_score, left, ratio_l)
       output += ("## %-30s\t") % ("Best_found Gaps_Score Right Boundary")
-      output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (putative[4],
-        putative[3], float(putative[3])/npos)
+      output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (right_score, right, ratio_r)
     else:
-      output = ("%d,%d") % (putative[0], putative[3])
+      output = ("%d,%d") % (left, right)
 
   ## Generate a warning for those cases where no boundaries have been found
   if not output:
@@ -170,4 +196,3 @@ def main():
 ### ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ****
 if __name__ == "__main__":
   sys.exit(main())
-
