@@ -10,7 +10,7 @@
     statAl v1.4: a tool for getting stats about multiple sequence alignments.
 
 
-    2009-2012 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl/readAl.

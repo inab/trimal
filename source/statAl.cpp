@@ -3,7 +3,7 @@
 
     statAl v1.4: a tool for getting descriptive alignment features/scores.
 
-    2009-2014 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of statAl.
