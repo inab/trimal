@@ -183,42 +183,48 @@ int *statisticsGaps::getGapsWindow(void) {
   return gapsWindow;
 }
 
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-|  double statisticsGaps::calcCutPoint(float gapBaseLine, float gapThreshold)                                          |
-|                                                                                                                      |
-|       This method computes and selects the cut point between two inputs parameters. To knows, the gapBaseline that   |
-|       is the minimum columns' percentage to conserve in the new alignment and the gapThreshold that is the maximum   |
-|       gaps' percentage that allow us in each alignment's column.                                                     |
-|                                                                                                                      |
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+double statisticsGaps::calcCutPoint(float minInputAlignment, float gapThreshold)
+  {
 
-double statisticsGaps::calcCutPoint(float gapBaseLine, float gapThreshold) {
+  /* Method to select the cutting point based on gaps values from the input
+   * alignment. The cutting point is selected as the maximum gaps number allowed
+   * in the output alignment given a minimum percentage of the input alignment
+   * to be kept and a maximum gaps number. In case of both values set different
+   * cutting points, the minimum percentage of the input alignment prevails. */
 
-  double cutThr, cutBL;
+  double cuttingPoint_MinimumConserv, cuttingPoint_gapThreshold;
   int i, acum;
 
-  /* We calculate the number of gaps represented by the gaps' percentage. This gaps' number will be the maximum gaps'
-     number permitted in the clean alignment. */
-  cutThr = (double) columnLength * gapThreshold;
+  /* Calculate the gap number represented by the gaps threshold. This gap number
+   * represents the maximum gap number in any column in the output alignment */
+  cuttingPoint_gapThreshold = (double) columnLength * gapThreshold;
 
-  /* Now, we calculate the number of columns that allow us conserve the columns' percentage fixed by gapBaseline. */
-  cutBL = utils::roundInt(((double) (columns * gapBaseLine) / 100.0));
+  /* Compute the minimum columns number to be kept from the input alignment */
+  cuttingPoint_MinimumConserv = utils::roundInt(((double)
+    (columns * minInputAlignment) / 100.0));
+  if(cuttingPoint_MinimumConserv > columns)
+    cuttingPoint_MinimumConserv = columns;    
 
-  /* We look the number of gaps that allow us conserve the columns' percentage given by gapBaseLine */
+  /* We look at the number of gaps which allows us to keep the minimum columns
+   * number from the input alignment */
   for(i = 0, acum = 0; i < columnLength; i++) {
     acum += numColumnsWithGaps[i];
-    if(acum >= cutBL) break;
+    if(acum >= cuttingPoint_MinimumConserv)
+      break;
   }
 
-  /* If we don't have a exact value for the next of gaps, we compute this value as the gaps' number minus the
-     proportion necessary to achieve the columns' number fixed. */
+  /* If there is not an exact number for the gaps cutting point, compute such
+   * value as the inmediate superior gap number minus the proportion of columns
+   * necessary to respect the minimum percentage from the input alignment to be
+   * kept */
   if(numColumnsWithGaps[i])
-    cutBL = (double) (i - ((float) (acum - cutBL)/numColumnsWithGaps[i]));
+    cuttingPoint_MinimumConserv = (double) (i - ((float)
+      (acum - cuttingPoint_MinimumConserv)/numColumnsWithGaps[i]));
   else
-    cutBL = 0;
+    cuttingPoint_MinimumConserv = 0;
 
-  /* Return the maximum value of the two calculated cuts (gapThreshold cut and gapBaseLine cut) */
-  return (utils::max(cutThr, cutBL));
+  /* Return the maximum gap number of the two computed cutting points. */
+  return (utils::max(cuttingPoint_MinimumConserv, cuttingPoint_gapThreshold));
 }
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
