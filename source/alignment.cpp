@@ -705,7 +705,7 @@ alignment *alignment::cleanConservation(float baseLine, float conservationPct, b
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Calculate the cut point using the given parameters */
-  cut = scons -> calcCutPoint(baseLine, conservationPct);
+  cut = (float) scons -> calcCutPoint(baseLine, conservationPct);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */

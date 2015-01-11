@@ -103,7 +103,7 @@ class statisticsConservation{
   bool isSimMatrixDef(void);
 
   /* Computes and selects the cut point values based on conservation's values. */
-  float calcCutPoint(float, float);
+  double calcCutPoint(float, float);
 
   /* Prints the conservation's value for each alignment's column. */
   void printConservationColumns(void);

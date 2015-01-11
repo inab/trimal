@@ -301,38 +301,46 @@ bool statisticsConservation::isSimMatrixDef(void) {
   return (simMatrix != NULL);
 }
 
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-|  float statisticsConservation::calcCutPoint(float baseLine, float conservationPct)                                   |
-|                                                                                                                      |
-|       This method computes and selects the cut point value based on alignment's conservation. For this purpose, this |
-|       select the minimum conservation value bewteen the conservationPct -a conservation value- and the conservation  |
-|       value allows us conserve the columns' number associated to baseline.                                           |
-|                                                                                                                      |
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+double statisticsConservation::calcCutPoint(float minInputAlignment,
+  float similThreshold) {
+  /* It computes the cutting point based on alignment's conservation values -
+   * the so-called 'similarity'. It also takes into account the minimum percentage
+   * from the input alignment to be kept. Depending on those two values, the
+   * method will select a different cutting-point. */
 
-float statisticsConservation::calcCutPoint(float baseLine, float conservationPct) {
-
-  float cutBL, cutCons, *vectAux;
-  int i;
+  double cuttingPoint_MinimumConserv, cuttingPoint_SimilThreshold;
+  int i, highestPos;
+  float *vectAux;
 
   /* Allocate memory */
   vectAux = new float[columns];
 
-  /* Sort a copy of the MDK_Window vector, and take the value of the column that marks the % baseline */
+  /* Sort a copy of the vector containing the similarity values after applying
+   * any windows methods. Take the columns value that it lower than the minimum
+   * similarity threshold set by the user */
   utils::copyVect(MDK_Window, vectAux, columns);
   utils::quicksort(vectAux, 0, columns-1);
 
   for(i = columns - 1; i >= 0; i--)
-    if(vectAux[i] < conservationPct) break;
-  cutCons = vectAux[i];
+    if(vectAux[i] < similThreshold)
+      break;
+  cuttingPoint_SimilThreshold = vectAux[i];
 
-  cutBL = vectAux[(int) ((float)(columns - 1) * (100.0 - baseLine)/100.0)];
+  /* It is possible that due to number casting, we get a number out of the
+   * vector containing the similarity values - it is not reporting an overflow
+   * situation but giving back a 0 when it should be a number equal (or closer)
+   * to 1. */
+  highestPos = (int) ((double)(columns - 1) * (100.0 - minInputAlignment)/100.0);
+  highestPos = highestPos < (columns - 1) ? highestPos : columns - 1;
+  cuttingPoint_MinimumConserv = vectAux[highestPos];
 
   /* Deallocate memory */
   delete[] vectAux;
 
-  /* Return the minimum of the baseLine cut and conservationPct value */
-  return (cutBL < cutCons ? cutBL : cutCons);
+  /* Return the minimum cutting point between the one set by the threshold and
+   * the one set by the minimum percentage of the input alignment to be kept */
+  return (cuttingPoint_MinimumConserv < cuttingPoint_SimilThreshold ?
+    cuttingPoint_MinimumConserv : cuttingPoint_SimilThreshold);
 }
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
