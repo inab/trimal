@@ -9,7 +9,7 @@
 
     statAl v1.4: a tool for getting descriptive alignment features/scores.
 
-    2009-2014 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl/readAl.
@@ -32,7 +32,7 @@
 #define BUILD "2014-04-07"
 #define VERSION 1.4
 #define REVISION 18
-#define AUTHORS "2009-2014. Salvador Capella-Gutierrez and Toni Gabaldón."
+#define AUTHORS "2009-2015. Salvador Capella-Gutierrez and Toni Gabaldón."
 
 #define DNAType 1
 #define RNAType 2

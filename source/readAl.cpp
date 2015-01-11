@@ -4,7 +4,7 @@
     readAl v1.4: a tool for automated alignment conversion among different
                  formats.
 
-    2009-2014 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of readAl.
