@@ -116,8 +116,11 @@ class alignment {
   statisticsGaps *sgaps;
   statisticsConservation *scons;
 
-  /* Sequence Identities */
+  /* Sequences Identities */
   float **identities;
+
+  /* Sequences Overlaps */
+  float **overlaps;
 
   /* New Info */
   bool oldAlignment;
@@ -154,7 +157,7 @@ class alignment {
   alignment(string, string, string *, string *, string *, int, int, int, int,
     bool, int, int, bool, bool, int, int,
     bool, bool, int, int, int *, int *, int *, int,
-     int, int, float **);
+     int, int, float **, float **);
 
   /* Overlap the operator = to use it as a constructor */
   alignment &operator=(const alignment &);
@@ -485,6 +488,11 @@ class alignment {
 
   // New
   void calculateRelaxedSeqIdentity(void);
+
+  // New
+  void calculateSeqOverlap(void);
+
+  void printSeqOverlap(void);
 
   int selectMethod(void);
 

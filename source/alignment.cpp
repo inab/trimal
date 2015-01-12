@@ -110,7 +110,9 @@ alignment::alignment(void) {
   sgaps =     NULL;
   scons =     NULL;
   seqMatrix = NULL;
+
   identities = NULL;
+  overlaps = NULL;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
@@ -125,7 +127,7 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
                      int o_left_boundary, int o_right_boundary,
                      bool o_keepSeqs, bool o_keepHeader, int OldSequences, int OldResidues, int *o_residuesNumber,
                      int *o_saveResidues, int *o_saveSequences, int o_ghWindow, int o_shWindow, int o_blockSize,
-                     float **o_identities) {
+                     float **o_identities, float **o_overlaps) {
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   int i, j, k, ll;
@@ -230,6 +232,23 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
         for(k = 0, ll = 0; k < OldSequences; k++) {
           if(o_saveSequences[k] != -1) {
             identities[j][ll] = o_identities[i][k];
+            ll++;
+          }
+        }
+        j++;
+      }
+    }
+  }
+
+  overlaps = NULL;
+  if(o_overlaps != NULL) {
+    overlaps = new float*[sequenNumber];
+    for(i = 0, j = 0; i < OldSequences; i++) {
+      if(o_saveSequences[i] != -1) {
+        overlaps[j] = new float[sequenNumber];
+        for(k = 0, ll = 0; k < OldSequences; k++) {
+          if(o_saveSequences[k] != -1) {
+            overlaps[j][ll] = o_overlaps[i][k];
             ll++;
           }
         }
@@ -352,6 +371,18 @@ alignment &alignment::operator=(const alignment &old) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    delete [] overlaps;
+    if(old.overlaps) {
+      overlaps = new float*[sequenNumber];
+      for(i = 0; i < sequenNumber; i++) {
+        overlaps[i] = new float[sequenNumber];
+        for(j = 0; j < sequenNumber; j++)
+          overlaps[i][j] = old.overlaps[i][j];
+      }
+    } else overlaps = NULL;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     delete sgaps;
     sgaps = NULL;
 
@@ -413,6 +444,15 @@ alignment::~alignment(void) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  if(overlaps != NULL) {
+    for(i = 0; i < sequenNumber; i++)
+      delete [] overlaps[i];
+    delete [] overlaps;
+  }
+  overlaps = NULL;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(sgaps != NULL)
     delete sgaps;
   sgaps = NULL;
@@ -455,10 +495,9 @@ alignment::~alignment(void) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
-
 // Try to load current alignment and inform otherwise
 bool alignment::loadAlignment(char *alignmentFile) {
-    
+
   // Detect input alignment format - it is an strict detection procedure
   iformat = formatInputAlignment(alignmentFile);
   // Unless it is indicated somewhere else, output alignment format will be
@@ -1470,7 +1509,8 @@ alignment *alignment::getClustering(float identityThreshold) {
     clustering[0], residNumber, iformat, oformat, shortNames, dataType, isAligned,
     reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber, residuesNumber,
-    saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
+    saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities,
+    overlaps);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1576,7 +1616,7 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
     ProtAlig -> getShortNames(), DNAType, true, ProtAlig -> getReverse(),
     terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, oldResidues * 3, NULL, NULL,
-    NULL, 0, 0, ProtAlig -> getBlockSize(), NULL);
+    NULL, 0, 0, ProtAlig -> getBlockSize(), NULL, NULL);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2163,7 +2203,7 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine,
     isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
-    identities);
+    identities, overlaps);
 
   /* Deallocate local memory */
   delete[] matrixAux;
@@ -2316,7 +2356,7 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine,
     isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
-    identities);
+    identities, overlaps);
 
   /* Deallocate local memory */
   delete[] matrixAux;
@@ -2510,7 +2550,7 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol,
     isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
-    identities);
+    identities, overlaps);
 
   /* Deallocate local memory */
   delete[] matrixAux;
@@ -2629,7 +2669,7 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
     dataType, isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber,
     residNumber, residuesNumber, saveResidues, saveSequences, ghWindow, shWindow,
-    blockSize, identities);
+    blockSize, identities, overlaps);
 
   /* Deallocate local memory */
   //~ delete[] matrixAux;
@@ -2677,7 +2717,7 @@ alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
     isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
-    identities);
+    identities, overlaps);
 
   /* Deallocate local memory */
   delete [] matrixAux;
@@ -2724,7 +2764,7 @@ alignment *alignment::removeColumns(int *columns, int init, int size,
     isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
-    identities);
+    identities, overlaps);
 
   /* Deallocate local memory */
   delete[] matrixAux;
@@ -2772,7 +2812,7 @@ alignment *alignment::removeSequences(int *seqs, int init, int size,
     isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
-    identities);
+    identities, overlaps);
 
   /* Free local memory */
   delete [] matrixAux;
