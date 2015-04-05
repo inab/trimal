@@ -45,8 +45,8 @@ int main(int argc, char *argv[]){
   /* Parameters Control */
   bool appearErrors = false, complementary = false, colnumbering = false, nogaps = false, noallgaps = false, gappyout = false,
        strict = false, strictplus = false, automated1 = false, sgc = false, sgt = false, scc = false, sct = false, sfc = false,
-       sft = false, sident = false, selectSeqs = false, selectCols = false, shortNames = false, splitbystop = false, terminal = false,
-       keepSeqs = false, keepHeader = false, ignorestop = false;
+       sft = false, sident = false, soverlap = false, selectSeqs = false, selectCols = false, shortNames = false, splitbystop = false,
+       terminal = false, keepSeqs = false, keepHeader = false, ignorestop = false;
 
   float conserve = -1, gapThreshold = -1, simThreshold = -1, comThreshold = -1, resOverlap = -1, seqOverlap = -1, maxIdentity = -1;
   int outformat = -1, prevType = -1, compareset = -1, stats = 0, windowSize = -1, gapWindow = -1, simWindow = -1, conWindow = -1,
@@ -1060,6 +1060,12 @@ int main(int argc, char *argv[]){
       sident = true;
       stats--;
     }
+
+   /* Option -soverlap --------------------------------------------------------------------------------------- */
+    else if((!strcmp(argv[i], "-soverlap")) && (!soverlap)) {
+      soverlap = true;
+      stats--;
+    }
    /* ------------------------------------------------------------------------------------------------------ */
 
    /* Option -sfc ------------------------------------------------------------------------------------------ */
@@ -1560,6 +1566,12 @@ int main(int argc, char *argv[]){
       cout << endl;
   }
 
+  if(soverlap) {
+    origAlig -> printSeqOverlap();
+    stats++;
+    if(stats < -1)
+      cout << endl;
+  }
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
@@ -1854,7 +1866,9 @@ void menu(void) {
                                           << endl;
   cout << "    -sft                     " << "Print accumulated sum-of-pairs scores for the selected alignment"
                                           << endl;
-  cout << "    -sident                  " << "Print identity scores for all sequences in the input alignment. (see User Guide)."
+  cout << "    -sident                  " << "Print identity scores matrix for all sequences in the input alignment. (see User Guide)."
+                                          << endl;
+  cout << "    -soverlap                " << "Print overlap scores matrix for all sequences in the input alignment. (see User Guide)."
                                           << endl << endl;
 }
 
