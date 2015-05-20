@@ -29,9 +29,9 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#define BUILD "2015-01-12"
+#define BUILD "2015-02-14"
 #define VERSION 1.4
-#define REVISION 19
+#define REVISION 20
 #define AUTHORS "2009-2015. Salvador Capella-Gutierrez and Toni Gabaldón."
 
 #define DNAType 1

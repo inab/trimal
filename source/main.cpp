@@ -49,8 +49,9 @@ int main(int argc, char *argv[]){
        terminal = false, keepSeqs = false, keepHeader = false, ignorestop = false;
 
   float conserve = -1, gapThreshold = -1, simThreshold = -1, comThreshold = -1, resOverlap = -1, seqOverlap = -1, maxIdentity = -1;
-  int outformat = -1, prevType = -1, compareset = -1, stats = 0, windowSize = -1, gapWindow = -1, simWindow = -1, conWindow = -1,
-      blockSize = -1, clusters = -1;
+
+  int outformat = -1, compareset = -1, stats = 0, windowSize = -1, gapWindow = -1, simWindow = -1, conWindow = -1,
+      blockSize = -1, clusters = -1, alternative_matrix = -1, alignDataType = -1;
 
   /* Others varibles */
   ifstream compare;
@@ -210,6 +211,16 @@ int main(int argc, char *argv[]){
       lng = strlen(argv[++i]);
       matrix = new char[lng + 1];
       strcpy(matrix, argv[i]);
+    }
+
+    else if(!strcmp(argv[i], "--alternative_matrix") && (i+1 != argc) && (alternative_matrix == -1)) {
+      i++;
+      if (!strcmp(argv[i], "degenerated_nt_identity"))
+        alternative_matrix = 1;
+      else {
+        cerr << endl << "ERROR: Alternative not recognized \"" << argv[i] << "\"" << endl << endl;
+        appearErrors = true;
+      }
     }
    /* ------------------------------------------------------------------------------------------------------ */
 
@@ -1350,11 +1361,11 @@ int main(int argc, char *argv[]){
           if(compAlig[i] -> getNumAminos() > maxAminos)
             maxAminos = compAlig[i] -> getNumAminos();
 
-          if((compAlig[i] -> getTypeAlignment() != prevType) && (prevType != -1)) {
+          if((compAlig[i] -> getTypeAlignment() != alignDataType) && (alignDataType != -1)) {
             cerr << endl << "ERROR: The alignments' datatypes are different. Check your dataset." << endl << endl;
             appearErrors = true;
           } else
-            prevType = compAlig[i] -> getTypeAlignment();
+            alignDataType = compAlig[i] -> getTypeAlignment();
         }
       }
     }
@@ -1516,11 +1527,20 @@ int main(int argc, char *argv[]){
     if(matrix != NULL)
       similMatrix -> loadSimMatrix(matrix);
 
+    /* User can choose alternative matrices such as other BLOSUMs, PAMs, Identity Matrices, etc */
+    else if(alternative_matrix != -1) {
+      alignDataType = origAlig -> getTypeAlignment();
+      similMatrix -> alternativeSimilarityMatrices(alternative_matrix, alignDataType);
+    }
+
     else {
-      if((origAlig -> getTypeAlignment()) == AAType)
+      alignDataType = origAlig -> getTypeAlignment();
+      if(alignDataType == AAType)
         similMatrix -> defaultAASimMatrix();
-      else
+      else if((alignDataType == DNAType) || (alignDataType == RNAType))
         similMatrix -> defaultNTSimMatrix();
+      else if((alignDataType == DNADeg) || (alignDataType == RNADeg))
+        similMatrix -> defaultNTDegeneratedSimMatrix();
     }
 
     if(!origAlig -> setSimilarityMatrix(similMatrix)) {
@@ -1772,104 +1792,106 @@ void menu(void) {
        << "\ttrimal -in <inputfile> -out <outputfile> -(other options)." << endl << endl;
 
   cout << "Common options (for a complete list please see the User Guide or visit http://trimal.cgenomics.org):" << endl << endl;
-  cout << "    -h                       " << "Print this information and show some examples." << endl;
-  cout << "    --version                " << "Print the trimAl version." << endl << endl;
+  cout << "    -h                          " << "Print this information and show some examples." << endl;
+  cout << "    --version                   " << "Print the trimAl version." << endl << endl;
 
-  cout << "    -in <inputfile>          " << "Input file in several formats (clustal, fasta, NBRF/PIR, nexus, phylip3.2, phylip)." << endl << endl;
+  cout << "    -in <inputfile>             " << "Input file in several formats (clustal, fasta, NBRF/PIR, nexus, phylip3.2, phylip)." << endl << endl;
 
-  cout << "    -compareset <inputfile>  " << "Input list of paths for the files containing the alignments to compare." << endl;
-  cout << "    -forceselect <inputfile> " << "Force selection of the given input file in the files comparison method." << endl << endl;
+  cout << "    -compareset <inputfile>     " << "Input list of paths for the files containing the alignments to compare." << endl;
+  cout << "    -forceselect <inputfile>    " << "Force selection of the given input file in the files comparison method." << endl << endl;
 
-  cout << "    -backtrans <inputfile>   " << "Use a Coding Sequences file to get a backtranslation for a given AA alignment" << endl;
-  cout << "    -ignorestopcodon         " << "Ignore stop codons in the input coding sequences" << endl;
-  cout << "    -splitbystopcodon        " << "Split input coding sequences up to first stop codon appearance" << endl << endl;
-
-
-  cout << "    -matrix <inpufile>       " << "Input file for user-defined similarity matrix (default is Blosum62)." << endl << endl;
-
-  cout << "    -out <outputfile>        " << "Output alignment in the same input format (default stdout). (default input format)" << endl;
-  cout << "    -htmlout <outputfile>    " << "Get a summary of trimal's work in an HTML file." << endl << endl;
-
-  cout << "    -keepheader              " << "Keep original sequence header including non-alphanumeric characters." << endl;
-  cout << "                             " << "Only available for input FASTA format files. (future versions will extend this feature)" << endl << endl;
-
-  cout << "    -nbrf                    " << "Output file in NBRF/PIR format" << endl;
-  cout << "    -mega                    " << "Output file in MEGA format" << endl;
-  cout << "    -nexus                   " << "Output file in NEXUS format" << endl;
-  cout << "    -clustal                 " << "Output file in CLUSTAL format" << endl << endl;
-
-  cout << "    -fasta                   " << "Output file in FASTA format" << endl;
-  cout << "    -fasta_m10               " << "Output file in FASTA format. Sequences name length up to 10 characters." << endl << endl;
-
-  cout << "    -phylip                  " << "Output file in PHYLIP/PHYLIP4 format" << endl;
-  cout << "    -phylip_m10              " << "Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters." << endl;
-  cout << "    -phylip_paml             " << "Output file in PHYLIP format compatible with PAML" << endl;
-  cout << "    -phylip_paml_m10         " << "Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters." << endl;
-  cout << "    -phylip3.2               " << "Output file in PHYLIP3.2 format" << endl;
-  cout << "    -phylip3.2_m10           " << "Output file in PHYLIP3.2 format. Sequences name length up to 10 characters." << endl << endl;
-
-  cout << "    -complementary           " << "Get the complementary alignment." << endl;
-  cout << "    -colnumbering            " << "Get the relationship between the columns in the old and new alignment." << endl << endl;
-
-  cout << "    -selectcols { n,l,m-k }  " << "Selection of columns to be removed from the alignment. Range: [0 - (Number of Columns - 1)]. (see User Guide)." << endl;
-  cout << "    -selectseqs { n,l,m-k }  " << "Selection of sequences to be removed from the alignment. Range: [0 - (Number of Sequences - 1)]. (see User Guide)." << endl << endl;
-
-  cout << "    -gt -gapthreshold <n>    " << "1 - (fraction of sequences with a gap allowed). Range: [0 - 1]" << endl;
-  cout << "    -st -simthreshold <n>    " << "Minimum average similarity allowed. Range: [0 - 1]" << endl;
-  cout << "    -ct -conthreshold <n>    " << "Minimum consistency value allowed.Range: [0 - 1]" << endl;
-  cout << "    -cons <n>                " << "Minimum percentage of the positions in the original alignment to conserve. Range: [0 - 100]" << endl << endl;
-
-  cout << "    -nogaps                  " << "Remove all positions with gaps in the alignment." << endl;
-  cout << "    -noallgaps               " << "Remove columns composed only by gaps." << endl;
-  cout << "    -keepseqs                " << "Keep sequences even if they are composed only by gaps." << endl << endl;
-
-  cout << "    -gappyout                " << "Use automated selection on \"gappyout\" mode. This method only uses "
-                                          << "information based on gaps' distribution. (see User Guide)." << endl;
-  cout << "    -strict                  " << "Use automated selection on \"strict\" mode. (see User Guide)." << endl;
-  cout << "    -strictplus              " << "Use automated selection on \"strictplus\" mode. (see User Guide)."  << endl;
-  cout << "                             " << "(Optimized for Neighbour Joining phylogenetic tree reconstruction)."<< endl << endl;
-
-  cout << "    -automated1              " << "Use a heuristic selection of the automatic method based on similarity statistics. "
-                                          << "(see User Guide). (Optimized for Maximum Likelihood phylogenetic tree reconstruction)."
-                                          << endl << endl;
-
-  cout << "    -terminalonly            " << "Only columns out of internal boundaries (first and last column without gaps) are " << endl;
-  cout << "                             " << "candidates to be trimmed depending on the selected method" << endl;
-
-  cout << "    --set_boundaries { l,r } " << "Set manually left (l) and right (r) boundaries - only columns out of these boundaries are " << endl;
-  cout << "                             " << "candidates to be trimmed depending on the selected method. Range: [0 - (Number of Columns - 1)]" << endl;
+  cout << "    -backtrans <inputfile>      " << "Use a Coding Sequences file to get a backtranslation for a given AA alignment" << endl;
+  cout << "    -ignorestopcodon            " << "Ignore stop codons in the input coding sequences" << endl;
+  cout << "    -splitbystopcodon           " << "Split input coding sequences up to first stop codon appearance" << endl << endl;
 
 
-  cout << "    -block <n>               " << "Minimum column block size to be kept in the trimmed alignment. Available with manual"
-                                          << " and automatic (gappyout) methods" << endl << endl;
+  cout << "    -matrix <inpufile>          " << "Input file for user-defined similarity matrix (default is Blosum62)." << endl;
+  cout << "    --alternative_matrix <name> " << "Select an alternative similarity matrix already loaded. " << endl
+       << "                                Only available 'degenerated_nt_identity'" << endl << endl;
+
+  cout << "    -out <outputfile>           " << "Output alignment in the same input format (default stdout). (default input format)" << endl;
+  cout << "    -htmlout <outputfile>       " << "Get a summary of trimal's work in an HTML file." << endl << endl;
+
+  cout << "    -keepheader                 " << "Keep original sequence header including non-alphanumeric characters." << endl;
+  cout << "                                " << "Only available for input FASTA format files. (future versions will extend this feature)" << endl << endl;
+
+  cout << "    -nbrf                       " << "Output file in NBRF/PIR format" << endl;
+  cout << "    -mega                       " << "Output file in MEGA format" << endl;
+  cout << "    -nexus                      " << "Output file in NEXUS format" << endl;
+  cout << "    -clustal                    " << "Output file in CLUSTAL format" << endl << endl;
+
+  cout << "    -fasta                      " << "Output file in FASTA format" << endl;
+  cout << "    -fasta_m10                  " << "Output file in FASTA format. Sequences name length up to 10 characters." << endl << endl;
+
+  cout << "    -phylip                     " << "Output file in PHYLIP/PHYLIP4 format" << endl;
+  cout << "    -phylip_m10                 " << "Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters." << endl;
+  cout << "    -phylip_paml                " << "Output file in PHYLIP format compatible with PAML" << endl;
+  cout << "    -phylip_paml_m10            " << "Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters." << endl;
+  cout << "    -phylip3.2                  " << "Output file in PHYLIP3.2 format" << endl;
+  cout << "    -phylip3.2_m10              " << "Output file in PHYLIP3.2 format. Sequences name length up to 10 characters." << endl << endl;
+
+  cout << "    -complementary              " << "Get the complementary alignment." << endl;
+  cout << "    -colnumbering               " << "Get the relationship between the columns in the old and new alignment." << endl << endl;
+
+  cout << "    -selectcols { n,l,m-k }     " << "Selection of columns to be removed from the alignment. Range: [0 - (Number of Columns - 1)]. (see User Guide)." << endl;
+  cout << "    -selectseqs { n,l,m-k }     " << "Selection of sequences to be removed from the alignment. Range: [0 - (Number of Sequences - 1)]. (see User Guide)." << endl << endl;
+
+  cout << "    -gt -gapthreshold <n>       " << "1 - (fraction of sequences with a gap allowed). Range: [0 - 1]" << endl;
+  cout << "    -st -simthreshold <n>       " << "Minimum average similarity allowed. Range: [0 - 1]" << endl;
+  cout << "    -ct -conthreshold <n>       " << "Minimum consistency value allowed.Range: [0 - 1]" << endl;
+  cout << "    -cons <n>                   " << "Minimum percentage of the positions in the original alignment to conserve. Range: [0 - 100]" << endl << endl;
+
+  cout << "    -nogaps                     " << "Remove all positions with gaps in the alignment." << endl;
+  cout << "    -noallgaps                  " << "Remove columns composed only by gaps." << endl;
+  cout << "    -keepseqs                   " << "Keep sequences even if they are composed only by gaps." << endl << endl;
+
+  cout << "    -gappyout                   " << "Use automated selection on \"gappyout\" mode. This method only uses "
+                                             << "information based on gaps' distribution. (see User Guide)." << endl;
+  cout << "    -strict                     " << "Use automated selection on \"strict\" mode. (see User Guide)." << endl;
+  cout << "    -strictplus                 " << "Use automated selection on \"strictplus\" mode. (see User Guide)."  << endl;
+  cout << "                               " << "(Optimized for Neighbour Joining phylogenetic tree reconstruction)."<< endl << endl;
+
+  cout << "    -automated1                 " << "Use a heuristic selection of the automatic method based on similarity statistics. "
+                                             << "(see User Guide). (Optimized for Maximum Likelihood phylogenetic tree reconstruction)."
+                                             << endl << endl;
+
+  cout << "    -terminalonly               " << "Only columns out of internal boundaries (first and last column without gaps) are " << endl;
+  cout << "                                " << "candidates to be trimmed depending on the selected method" << endl;
+
+  cout << "    --set_boundaries { l,r }    " << "Set manually left (l) and right (r) boundaries - only columns out of these boundaries are " << endl;
+  cout << "                                " << "candidates to be trimmed depending on the selected method. Range: [0 - (Number of Columns - 1)]" << endl;
 
 
-  cout << "    -resoverlap              " << "Minimum overlap of a positions with other positions in the column to be considered a "
-                                          << "\"good position\". Range: [0 - 1]. (see User Guide)." << endl;
-  cout << "    -seqoverlap              " << "Minimum percentage of \"good positions\" that a sequence must have in order to be conserved. Range: [0 - 100]"
-                                          << "(see User Guide)." << endl << endl;
+  cout << "    -block <n>                  " << "Minimum column block size to be kept in the trimmed alignment. Available with manual"
+                                            << " and automatic (gappyout) methods" << endl << endl;
 
-  cout << "    -clusters <n>            " << "Get the most Nth representatives sequences from a given alignment. Range: [1 - (Number of sequences)]" << endl;
-  cout << "    -maxidentity <n>         " << "Get the representatives sequences for a given identity threshold. Range: [0 - 1]." << endl << endl;
 
-  cout << "    -w <n>                   " << "(half) Window size, score of position i is the average of the window (i - n) to (i + n)."
-                                          << endl;
-  cout << "    -gw <n>                  " << "(half) Window size only applies to statistics/methods based on Gaps." << endl;
-  cout << "    -sw <n>                  " << "(half) Window size only applies to statistics/methods based on Similarity." << endl;
-  cout << "    -cw <n>                  " << "(half) Window size only applies to statistics/methods based on Consistency." << endl << endl;
+  cout << "    -resoverlap                 " << "Minimum overlap of a positions with other positions in the column to be considered a "
+                                             << "\"good position\". Range: [0 - 1]. (see User Guide)." << endl;
+  cout << "    -seqoverlap                 " << "Minimum percentage of \"good positions\" that a sequence must have in order to be conserved. Range: [0 - 100]"
+                                             << "(see User Guide)." << endl << endl;
 
-  cout << "    -sgc                     " << "Print gap scores for each column in the input alignment." << endl;
-  cout << "    -sgt                     " << "Print accumulated gap scores for the input alignment." << endl;
-  cout << "    -ssc                     " << "Print similarity scores for each column in the input alignment." << endl;
-  cout << "    -sst                     " << "Print accumulated similarity scores for the input alignment." << endl;
-  cout << "    -sfc                     " << "Print sum-of-pairs scores for each column from the selected alignment"
-                                          << endl;
-  cout << "    -sft                     " << "Print accumulated sum-of-pairs scores for the selected alignment"
-                                          << endl;
-  cout << "    -sident                  " << "Print identity scores matrix for all sequences in the input alignment. (see User Guide)."
-                                          << endl;
-  cout << "    -soverlap                " << "Print overlap scores matrix for all sequences in the input alignment. (see User Guide)."
-                                          << endl << endl;
+  cout << "    -clusters <n>               " << "Get the most Nth representatives sequences from a given alignment. Range: [1 - (Number of sequences)]" << endl;
+  cout << "    -maxidentity <n>            " << "Get the representatives sequences for a given identity threshold. Range: [0 - 1]." << endl << endl;
+
+  cout << "    -w <n>                      " << "(half) Window size, score of position i is the average of the window (i - n) to (i + n)."
+                                             << endl;
+  cout << "    -gw <n>                     " << "(half) Window size only applies to statistics/methods based on Gaps." << endl;
+  cout << "    -sw <n>                     " << "(half) Window size only applies to statistics/methods based on Similarity." << endl;
+  cout << "    -cw <n>                     " << "(half) Window size only applies to statistics/methods based on Consistency." << endl << endl;
+
+  cout << "    -sgc                        " << "Print gap scores for each column in the input alignment." << endl;
+  cout << "    -sgt                        " << "Print accumulated gap scores for the input alignment." << endl;
+  cout << "    -ssc                        " << "Print similarity scores for each column in the input alignment." << endl;
+  cout << "    -sst                        " << "Print accumulated similarity scores for the input alignment." << endl;
+  cout << "    -sfc                        " << "Print sum-of-pairs scores for each column from the selected alignment"
+                                             << endl;
+  cout << "    -sft                        " << "Print accumulated sum-of-pairs scores for the selected alignment"
+                                             << endl;
+  cout << "    -sident                     " << "Print identity scores matrix for all sequences in the input alignment. (see User Guide)."
+                                             << endl;
+  cout << "    -soverlap                   " << "Print overlap scores matrix for all sequences in the input alignment. (see User Guide)."
+                                             << endl << endl;
 }
 
 void examples(void) {

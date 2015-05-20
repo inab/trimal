@@ -57,6 +57,10 @@ class similarityMatrix{
 
   void defaultNTSimMatrix();
 
+  void defaultNTDegeneratedSimMatrix();
+
+  void alternativeSimilarityMatrices(int, int);
+
   float getDistance(char, char);
 
   void printMatrix();
