@@ -205,7 +205,7 @@ int main(int argc, char *argv[]) {
   /* It is mandatory to choose an option for processing input alignment */
   if((outformat == -1) && (!reverse) && (!format) && (!type) && (!info)
     && (!errors)) {
-    cerr << endl << "ERROR: An option has to be choose." << endl << endl;
+    cerr << endl << "ERROR: An option has to be chosen." << endl << endl;
     errors = true;
   }
 
@@ -310,9 +310,7 @@ int main(int argc, char *argv[]) {
   delete [] outfile;
 
   /* Inform about readAl execution */
-  if(errors)
-    return -1;
-  return 0;
+  return (errors == true ? -1 : 0);
 }
 
 void menu(void) {

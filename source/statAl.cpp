@@ -339,6 +339,7 @@ int main(int argc, char *argv[]){
       if(compAlig[i] -> getNumAminos() > maxResidues)
         maxResidues = compAlig[i] -> getNumAminos();
     }
+    
     /* ***** ***** ***** ** Input set of alignments: Compare it ***** ***** * */
     if((!appearErrors) && (forceFile == NULL)) {
       /* If reference alignment has not been set, just compute the most
@@ -363,6 +364,7 @@ int main(int argc, char *argv[]){
     for(i = 0; i < numFiles; delete compAlig[i], i++)
       delete filesToCompare[i];
   }
+  
   /* ***** ***** ***** ***** ***** Final Checks ***** ***** ***** ***** ***** */
   if((!appearErrors) && (!origAlig -> isFileAligned() &&  (stats_gaps_columns or
     stats_gaps_dist or stats_simil_columns or stats_simil_dist or stats_seqs_ident
@@ -371,6 +373,15 @@ int main(int argc, char *argv[]){
       << "stats using it" << endl << endl;
     appearErrors = true;
   }
+
+  /* It is mandatory to choose an option for processing input alignment */
+  if((!appearErrors) && (!stats_gaps_columns and !stats_gaps_dist and
+    !stats_simil_columns and !stats_simil_dist and !stats_seqs_ident and
+    !stats_col_ident_gen and !stats_file_columns and !stats_file_dist)) {
+    cerr << endl << "ERROR: An option has to be chosen." << endl << endl;
+    appearErrors = true;
+  }
+  
   /* ***** ***** ***** ***** * Apply input parameters ***** ***** ***** ***** */
   if(!appearErrors) {
     /* Apply window size to either input single alignment or the most consistent
