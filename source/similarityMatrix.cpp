@@ -316,7 +316,100 @@ void similarityMatrix::defaultNTSimMatrix(void) {
   }
 }
 
+void similarityMatrix::defaultNTDegeneratedSimMatrix(void) {
+  int i, j, k;
+  float sum;
 
+  memoryAllocation(15);
+  for(i = 0; i < TAMABC; i++)
+    vhash[i] = -1;
+
+  /* We create the hashing vector */
+  for(i = 0; i < numPositions; i++)
+    vhash[listNTDegenerateSym[i] - 'A'] = i;
+
+  for(i = 0; i < numPositions; i++)
+    for(j = 0; j < numPositions; j++)
+      simMat[i][j] = defaultNTDegeneratedMatrix[i][j];
+
+  /* Calculate the distances between nucleotides based on Euclidean distance */
+  for(j = 0; j < numPositions; j++) {
+    for(i = 0; i < numPositions; i++) {
+      if((i != j) && (distMat[i][j] == 0.0)) {
+        for(k = 0, sum = 0; k < numPositions; k++)
+          sum += ((simMat[k][j] - simMat[k][i]) * (simMat[k][j] - simMat[k][i]));
+        sum = (float) sqrt(sum);
+        distMat[i][j] = sum;
+        distMat[j][i] = sum;
+      }
+    }
+  }
+}
+
+void similarityMatrix::alternativeSimilarityMatrices(int matrix_code, \
+  int datatype) {
+  int i, j, k;
+  float sum;
+
+  /* Allocate memory depending on the input datatype */
+  switch(datatype) {
+    case AAType:
+      memoryAllocation(20);
+      break;
+    case DNAType:
+    case RNAType:
+       memoryAllocation(5);
+      break;
+    case DNADeg:
+    case RNADeg:
+      memoryAllocation(15);
+      break;
+ }
+
+  for(i = 0; i < TAMABC; i++)
+    vhash[i] = -1;
+
+  /* We create the hashing vector taking into account the input datatype */
+  for(i = 0; i < numPositions; i++) {
+    switch(datatype) {
+      case AAType:
+        vhash[listAASym[i] - 'A'] = i;
+        break;
+      case DNAType:
+      case RNAType:
+        vhash[listNTSym[i] - 'A'] = i;
+        break;
+      case DNADeg:
+      case RNADeg:
+        vhash[listNTDegenerateSym[i] - 'A'] = i;
+        break;
+      }
+  }
+
+  /* Working similarity matrix is set depending on the preloaded matrices */
+  for(i = 0; i < numPositions; i++) {
+    for(j = 0; j < numPositions; j++) {
+      switch(matrix_code) {
+        case 1:
+          simMat[i][j] = alternative_1_NTDegeneratedMatrix[i][j];
+          break;
+      }
+    }
+  }
+
+  /* Calculate the distances between residues based on Euclidean distance */
+  for(j = 0; j < numPositions; j++) {
+    for(i = 0; i < numPositions; i++) {
+      if((i != j) && (distMat[i][j] == 0.0)) {
+        for(k = 0, sum = 0; k < numPositions; k++)
+          sum += ((simMat[k][j] - simMat[k][i]) * (simMat[k][j] - simMat[k][i]));
+        sum = (float) sqrt(sum);
+        distMat[i][j] = sum;
+        distMat[j][i] = sum;
+      }
+    }
+  }
+}
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 | void similarityMatrix::printMatrix()                                 |
@@ -327,7 +420,7 @@ void similarityMatrix::printMatrix(){
 
   for(int i = 0; i < numPositions; i++){
     for(int j = 0; j < numPositions; j++)
-      cerr << setw(5) << right << simMat[i][j];
+      cerr << setw(8) << setprecision(4) << right << simMat[i][j];
     cerr << endl;
   }
 }
