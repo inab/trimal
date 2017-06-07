@@ -30,11 +30,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "compareFiles.h"
-#include "compareFiles.h"
-#include "alignment.h"
-#include "defines.h"
-#include "utils.h"
+#include "../include/compareFiles.h"
+#include "../include/alignment.h"
+#include "../include/defines.h"
+#include "../include/utils.h"
 
 void show_menu(void);
 void show_examples(void);

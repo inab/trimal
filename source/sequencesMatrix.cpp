@@ -24,7 +24,7 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "sequencesMatrix.h"
+#include "../include/sequencesMatrix.h"
 
 sequencesMatrix::sequencesMatrix(void) {
 

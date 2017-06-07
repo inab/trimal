@@ -33,7 +33,7 @@
 
 #include "similarityMatrix.h"
 #include "statisticsGaps.h"
-#include "utils.h"
+#include "../include/utils.h"
 
 #define DNAType 1
 #define RNAType 2

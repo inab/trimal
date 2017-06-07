@@ -27,9 +27,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "alignment.h"
-#include "defines.h"
-#include "utils.h"
+#include "../include/alignment.h"
+#include "../include/defines.h"
+#include "../include/utils.h"
 
 void menu(void);
 

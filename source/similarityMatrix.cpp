@@ -32,11 +32,11 @@
 #define LINE_LENGTH 256
 #define REFER 65
 
-#include "values.h"
+#include "../include/values.h"
 #endif
 
-#include "similarityMatrix.h"
-#include "utils.h"
+#include "../include/similarityMatrix.h"
+#include "../include/utils.h"
 
 #include <iostream>
 

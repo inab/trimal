@@ -29,7 +29,7 @@
 #include <iostream>
 #include <iomanip>
 
-#include "utils.h"
+#include "../include/utils.h"
 
 #define DNAType 1
 #define RNAType 2
