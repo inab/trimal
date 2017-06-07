@@ -1,7 +1,7 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.4: a tool for automated alignment trimming in large-scale
+    trimAl v1.4: a tool for automated newAlignment  trimming in large-scale
                  phylogenetics analyses.
 
     2009-2013 Capella-Gutierrez S. and Gabaldon, T.
@@ -30,11 +30,15 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <newAlignment.h>
 
 #include "../include/compareFiles.h"
-#include "../include/alignment.h"
+#include "../include/newAlignment.h"
 #include "../include/defines.h"
 #include "../include/utils.h"
+#include "Cleaner.h"
+#include "StatisticsManager.h"
+#include "ReadWriteManager.h"
 
 void menu(void);
 void examples(void);
@@ -54,11 +58,11 @@ int main(int argc, char *argv[]){
   /* Others varibles */
   ifstream compare;
   float *compareVect = NULL;
-  alignment **compAlig  = NULL;
+  newAlignment  **compAlig  = NULL;
   string nline, *seqNames = NULL;
   sequencesMatrix *seqMatrix = NULL;
   similarityMatrix *similMatrix = NULL;
-  alignment *origAlig = NULL, *singleAlig = NULL, *backtranslation = NULL;
+  newAlignment  *origAlig = NULL, *singleAlig = NULL, *backtranslation = NULL;
 
   int i = 1, lng, num = 0, maxAminos = 0, numfiles = 0, referFile = 0, *delColumns = NULL, *delSequences = NULL, *seqLengths = NULL;
   char c, *forceFile = NULL, *infile = NULL, *backtransFile = NULL, *outfile = NULL, *outhtml = NULL, *matrix = NULL,
@@ -91,7 +95,7 @@ int main(int argc, char *argv[]){
   }
 
   /***** ***** ***** ***** ***** ***** ***** Parameters Processing ***** ***** ***** ***** ***** ***** *****/
-  origAlig = new alignment;
+  origAlig = new newAlignment;
 
   while(i < argc) {
 
@@ -113,8 +117,8 @@ int main(int argc, char *argv[]){
         infile = new char[lng + 1];
         strcpy(infile, argv[i]);
 
-        if(!origAlig -> loadAlignment(infile)) {
-          cerr << endl << "ERROR: Alignment not loaded: \"" << infile << "\" Check the file's content." << endl << endl;
+        if(!origAlig -> ReadWrite -> loadAlignment(infile)) {
+          cerr << endl << "ERROR: newAlignment  not loaded: \"" << infile << "\" Check the file's content." << endl << endl;
           appearErrors = true;
         }
       }
@@ -123,7 +127,7 @@ int main(int argc, char *argv[]){
         if(compareset != -1)
           cerr << endl << "ERROR: Option \"" << argv[i] << "\" not valid. A reference file exists with alignments to compare." << endl << endl;
         if(forceFile != NULL)
-          cerr << endl << "ERROR: Option \"" << argv[i] << "\" not valid. A alignment file has been setting up to be compare with a set of alignmets." << endl << endl;
+          cerr << endl << "ERROR: Option \"" << argv[i] << "\" not valid. A newAlignment  file has been setting up to be compare with a set of alignmets." << endl << endl;
         appearErrors = true;
         i++;
       }
@@ -231,7 +235,7 @@ int main(int argc, char *argv[]){
       }
 
       else {
-        cerr << endl << "ERROR: Option \"" << argv[i] << "\" not valid. A single alignment file has been set by the user." << endl << endl;
+        cerr << endl << "ERROR: Option \"" << argv[i] << "\" not valid. A single newAlignment  file has been set by the user." << endl << endl;
         appearErrors = true;
         i++;
       }
@@ -244,14 +248,14 @@ int main(int argc, char *argv[]){
         lng = strlen(argv[++i]);
         forceFile = new char[lng + 1];
         strcpy(forceFile, argv[i]);
-        if(!origAlig -> loadAlignment(forceFile)) {
-          cerr << endl << "ERROR: Alignment not loaded: \"" << forceFile << "\" Check the file's content." << endl << endl;
+        if(!origAlig -> ReadWrite -> loadAlignment(forceFile)) {
+          cerr << endl << "ERROR: newAlignment  not loaded: \"" << forceFile << "\" Check the file's content." << endl << endl;
           appearErrors = true;
         }
       }
 
       else {
-        cerr << endl << "ERROR: Option \"" << argv[i] << "\" not valid. A single alignment file has been setting it up" << endl << endl;
+        cerr << endl << "ERROR: Option \"" << argv[i] << "\" not valid. A single newAlignment  file has been setting it up" << endl << endl;
         appearErrors = true;
         i++;
       }
@@ -264,9 +268,9 @@ int main(int argc, char *argv[]){
       backtransFile = new char[lng + 1];
       strcpy(backtransFile, argv[i]);
 
-      backtranslation = new alignment;
-      if(!backtranslation -> loadAlignment(backtransFile)) {
-        cerr << endl << "ERROR: Alignment not loaded: \"" << backtransFile << "\" Check the file's content." << endl << endl;
+      backtranslation = new newAlignment;
+      if(!backtranslation -> ReadWrite -> loadAlignment(backtransFile)) {
+        cerr << endl << "ERROR: newAlignment  not loaded: \"" << backtransFile << "\" Check the file's content." << endl << endl;
         appearErrors = true;
       }
     }
@@ -823,7 +827,7 @@ int main(int argc, char *argv[]){
 
    /* ------------------------------------------------------------------------------------------------------ */
 
-   /* Other methods: Just remove the terminal gaps from an alignment keeping the columns that are in the middle
+   /* Other methods: Just remove the terminal gaps from an newAlignment  keeping the columns that are in the middle
     * of the sequences independently of the trimming method used */
 
    /* ------------------------------------------------------------------------------------------------------ */
@@ -985,7 +989,7 @@ int main(int argc, char *argv[]){
       }
 
       else if(conserve != -1) {
-        cerr << endl << "ERROR: It's imposible to ask for a minimum percentage of the input alignment in combination with column block size" << endl << endl;
+        cerr << endl << "ERROR: It's imposible to ask for a minimum percentage of the input newAlignment  in combination with column block size" << endl << endl;
         appearErrors = true;
       }
 
@@ -1128,13 +1132,13 @@ int main(int argc, char *argv[]){
   /* ------------------------------------------------------------------------------------------------------ */
   if((!appearErrors) && (infile != NULL) && (forceFile != NULL)) {
      cerr << endl << "ERROR: You can not use a single alignmet at the same "
-        << "time that you force the alignment selection." << endl << endl;
+        << "time that you force the newAlignment  selection." << endl << endl;
      appearErrors = true;
   }
   /* ------------------------------------------------------------------------------------------------------ */
   if((!appearErrors) && (compareset == -1) && (forceFile != NULL)) {
-     cerr << endl << "ERROR: You can not force the alignment selection without set"
-        << " an alignment dataset against to compare it." << endl << endl;
+     cerr << endl << "ERROR: You can not force the newAlignment  selection without set"
+        << " an newAlignment  dataset against to compare it." << endl << endl;
      appearErrors = true;
   }
   /* ------------------------------------------------------------------------------------------------------ */
@@ -1150,7 +1154,7 @@ int main(int argc, char *argv[]){
       (gapThreshold != -1) || (conserve != -1) || (simThreshold != -1) || (selectCols) || (selectSeqs) ||
       (resOverlap != -1) || (seqOverlap != -1) || (stats < 0)) &&
       (!origAlig -> isFileAligned())) {
-        cerr << endl << "ERROR: The sequences in the input alignment should be aligned in order to use trimming method." << endl << endl;
+        cerr << endl << "ERROR: The sequences in the input newAlignment  should be aligned in order to use trimming method." << endl << endl;
         appearErrors = true;
     }
   }
@@ -1279,7 +1283,7 @@ int main(int argc, char *argv[]){
   /* **** ***** ***** ***** ***** ***** ***** Files Comparison Methods ***** ***** ***** ***** ***** ***** **** */
   if((compareset != -1) && (!appearErrors)) {
 
-    compAlig = new alignment*[numfiles];
+    compAlig = new newAlignment*[numfiles];
     filesToCompare = new char*[numfiles];
 
     /* -------------------------------------------------------------------- */
@@ -1296,15 +1300,15 @@ int main(int argc, char *argv[]){
       /* -------------------------------------------------------------------- */
 
       /* -------------------------------------------------------------------- */
-      compAlig[i] = new alignment;
-      if(!compAlig[i] -> loadAlignment(filesToCompare[i])) {
-        cerr << endl << "Alignment not loaded: \"" << filesToCompare[i] << "\" Check the file's content." << endl << endl;
+      compAlig[i] = new newAlignment;
+      if(!compAlig[i] -> ReadWrite -> loadAlignment(filesToCompare[i])) {
+        cerr << endl << "newAlignment  not loaded: \"" << filesToCompare[i] << "\" Check the file's content." << endl << endl;
         appearErrors = true;
       }
 
       else {
         if(!compAlig[i] -> isFileAligned()) {
-          cerr << endl << "ERROR: The sequences in the input alignment should be aligned in order to use this method." << endl << endl;
+          cerr << endl << "ERROR: The sequences in the input newAlignment  should be aligned in order to use this method." << endl << endl;
           appearErrors = true;
         } else {
           compAlig[i] -> sequenMatrix();
@@ -1336,12 +1340,12 @@ int main(int argc, char *argv[]){
       else if(conWindow != -1)
         compareFiles::applyWindow(compAlig[referFile] -> getNumAminos(), conWindow, compareVect);
 
-      origAlig -> loadAlignment(filesToCompare[referFile]);
+      origAlig -> ReadWrite -> loadAlignment (filesToCompare[referFile]);
 
     } else if((!appearErrors) && (forceFile != NULL)) {
 
       compareVect = new float[origAlig -> getNumAminos()];
-      appearErrors = !(compareFiles::forceComparison(compAlig, numfiles, origAlig, compareVect));
+      appearErrors = !compareFiles::forceComparison(compAlig, numfiles, origAlig, compareVect);
 
       if((windowSize != -1) && (!appearErrors))
         compareFiles::applyWindow(origAlig -> getNumAminos(), windowSize, compareVect);
@@ -1485,7 +1489,7 @@ int main(int argc, char *argv[]){
         similMatrix -> defaultNTSimMatrix();
     }
 
-    if(!origAlig -> setSimilarityMatrix(similMatrix)) {
+    if(!origAlig -> Statistics -> setSimilarityMatrix(similMatrix)) {
       cerr << endl << "ERROR: It's imposible to proccess the Similarity Matrix." << endl << endl;
       return -1;
     }
@@ -1494,28 +1498,28 @@ int main(int argc, char *argv[]){
 
   /* -------------------------------------------------------------------- */
   if(sgc) {
-    origAlig -> printStatisticsGapsColumns();
+    origAlig -> Statistics -> printStatisticsGapsColumns();
     stats++;
     if(stats < -1)
       cout << endl;
   }
 
   if(sgt) {
-    origAlig -> printStatisticsGapsTotal();
+    origAlig -> Statistics -> printStatisticsGapsTotal();
     stats++;
     if(stats < -1)
       cout << endl;
   }
 
   if(scc) {
-    origAlig -> printStatisticsConservationColumns();
+    origAlig -> Statistics -> printStatisticsConservationColumns();
     stats++;
     if(stats < -1)
       cout << endl;
   }
 
   if(sct) {
-    origAlig -> printStatisticsConservationTotal();
+    origAlig -> Statistics -> printStatisticsConservationTotal();
     stats++;
     if(stats < -1)
       cout << endl;
@@ -1546,52 +1550,52 @@ int main(int argc, char *argv[]){
 
   /* -------------------------------------------------------------------- */
   if(nogaps)
-    singleAlig = origAlig -> cleanGaps(0, 0, complementary);
+    singleAlig = origAlig -> Cleaning -> cleanGaps(0, 0, complementary);
 
   else if(noallgaps)
-    singleAlig = origAlig -> cleanNoAllGaps(complementary);
+    singleAlig = origAlig -> Cleaning -> cleanNoAllGaps(complementary);
 
   else if(gappyout)
-    singleAlig = origAlig -> clean2ndSlope(complementary);
+    singleAlig = origAlig -> Cleaning -> clean2ndSlope(complementary);
 
   else if(strict)
-    singleAlig = origAlig -> cleanCombMethods(complementary, false);
+    singleAlig = origAlig -> Cleaning -> cleanCombMethods(complementary, false);
 
   else if(strictplus)
-    singleAlig = origAlig -> cleanCombMethods(complementary, true);
+    singleAlig = origAlig -> Cleaning -> cleanCombMethods(complementary, true);
 
   else if(automated1) {
     if(origAlig -> selectMethod() == GAPPYOUT)
-      singleAlig = origAlig -> clean2ndSlope(complementary);
+      singleAlig = origAlig -> Cleaning -> clean2ndSlope(complementary);
     else
-      singleAlig = origAlig -> cleanCombMethods(complementary, false);
+      singleAlig = origAlig -> Cleaning -> cleanCombMethods(complementary, false);
   }
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
   if(comThreshold != -1)
-    singleAlig = origAlig -> cleanCompareFile(comThreshold, conserve, compareVect, complementary);
+    singleAlig = origAlig -> Cleaning -> cleanCompareFile(comThreshold, conserve, compareVect, complementary);
  /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
   if((resOverlap != -1) && (seqOverlap != -1)) {
-    singleAlig = origAlig -> cleanSpuriousSeq(resOverlap, (seqOverlap/100), complementary);
-    singleAlig = singleAlig -> cleanNoAllGaps(false);
+    singleAlig = origAlig -> Cleaning -> cleanSpuriousSeq(resOverlap, (seqOverlap/100), complementary);
+    singleAlig = origAlig -> Cleaning -> cleanNoAllGaps(false);
   }
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
   if(simThreshold != -1.0) {
     if(gapThreshold != -1.0)
-      singleAlig = origAlig -> clean(conserve, gapThreshold, simThreshold, complementary);
+      singleAlig = origAlig -> Cleaning -> clean(conserve, gapThreshold, simThreshold, complementary);
     else
-      singleAlig = origAlig -> cleanConservation(conserve, simThreshold, complementary);
+      singleAlig = origAlig -> Cleaning -> cleanConservation(conserve, simThreshold, complementary);
   }
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
   else if(gapThreshold != -1.0)
-    singleAlig = origAlig -> cleanGaps(conserve, gapThreshold, complementary);
+    singleAlig = origAlig -> Cleaning -> cleanGaps(conserve, gapThreshold, complementary);
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
@@ -1605,7 +1609,7 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
       else
-        singleAlig = origAlig -> removeColumns(delColumns, 1, num, complementary);
+        singleAlig = origAlig -> Cleaning -> removeColumns(delColumns, 1, num, complementary);
     }
     /* -------------------------------------------------------------------- */
 
@@ -1617,8 +1621,8 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
       else {
-        singleAlig = origAlig -> removeSequences(delSequences, 1, num, complementary);
-        singleAlig = singleAlig -> cleanNoAllGaps(false);
+        singleAlig = origAlig -> Cleaning -> removeSequences(delSequences, 1, num, complementary);
+        singleAlig = singleAlig -> Cleaning -> cleanNoAllGaps(false);
       }
     }
     /* -------------------------------------------------------------------- */
@@ -1627,16 +1631,16 @@ int main(int argc, char *argv[]){
 
   /* -------------------------------------------------------------------- */
   if(maxIdentity != -1) {
-    singleAlig = origAlig -> getClustering(maxIdentity);
-  singleAlig = singleAlig -> cleanNoAllGaps(false);
+    singleAlig = origAlig -> getClustering (maxIdentity);
+  singleAlig = singleAlig -> Cleaning -> cleanNoAllGaps(false);
   }
   else if(clusters != -1) {
   if(clusters > origAlig -> getNumSpecies()) {
-        cerr << endl << "ERROR:The number of clusters from the alignment can not be larger than the number of sequences from that alignment." << endl << endl;
+        cerr << endl << "ERROR:The number of clusters from the newAlignment  can not be larger than the number of sequences from that alignment." << endl << endl;
         appearErrors = true;
     } else {
-    singleAlig = origAlig -> getClustering(origAlig -> getCutPointClusters(clusters));
-    singleAlig = singleAlig -> cleanNoAllGaps(false);
+    singleAlig = origAlig -> getClustering(origAlig -> Cleaning -> getCutPointClusters(clusters));
+    singleAlig = singleAlig -> Cleaning -> cleanNoAllGaps(false);
   }
   }
   /* -------------------------------------------------------------------- */
@@ -1650,7 +1654,7 @@ int main(int argc, char *argv[]){
 
   /* -------------------------------------------------------------------- */
   if((outhtml != NULL) && (!appearErrors))
-    if(!origAlig -> alignmentSummaryHTML(outhtml, singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
+    if(!origAlig -> ReadWrite -> alignmentSummaryHTML(outhtml, singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
                                      singleAlig -> getCorrespResidues(), singleAlig -> getCorrespSequences(), compareVect)) {
       cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
       appearErrors = true;
@@ -1672,18 +1676,18 @@ int main(int argc, char *argv[]){
 
   /* -------------------------------------------------------------------- */
   if((outfile != NULL) && (!appearErrors)) {
-    if(!singleAlig -> saveAlignment(outfile)) {
+    if(!singleAlig -> ReadWrite -> saveAlignment(outfile)) {
       cerr << endl << "ERROR: It's imposible to generate the output file." << endl << endl;
       appearErrors = true;
     }
   }
   else if((stats >= 0) && (!appearErrors))
-    singleAlig -> printAlignment();
+    singleAlig -> ReadWrite -> printAlignment();
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
   if((colnumbering) && (!appearErrors))
-    singleAlig -> printCorrespondence();
+    singleAlig -> Statistics -> printCorrespondence();
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
@@ -1720,7 +1724,7 @@ void menu(void) {
        << "the Free Software Foundation, the last available version." << endl << endl;
 
   cout << "Please cite:" << endl
-       << "\t\ttrimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses."
+       << "\t\ttrimAl: a tool for automated newAlignment  trimming in large-scale phylogenetic analyses."
      << "\n\t\tSalvador Capella-Gutierrez; Jose M. Silla-Martinez; Toni Gabaldon."
      << "\n\t\tBioinformatics 2009, 25:1972-1973." << endl << endl;
 
@@ -1743,7 +1747,7 @@ void menu(void) {
 
   cout << "    -matrix <inpufile>       " << "Input file for user-defined similarity matrix (default is Blosum62)." << endl << endl;
 
-  cout << "    -out <outputfile>        " << "Output alignment in the same input format (default stdout). (default input format)" << endl;
+  cout << "    -out <outputfile>        " << "Output newAlignment  in the same input format (default stdout). (default input format)" << endl;
   cout << "    -htmlout <outputfile>    " << "Get a summary of trimal's work in an HTML file." << endl << endl;
 
   cout << "    -keepheader              " << "Keep original sequence header including non-alphanumeric characters." << endl;
@@ -1773,7 +1777,7 @@ void menu(void) {
   cout << "    -gt -gapthreshold <n>    " << "1 - (fraction of sequences with a gap allowed). Range: [0 - 1]" << endl;
   cout << "    -st -simthreshold <n>    " << "Minimum average similarity allowed. Range: [0 - 1]" << endl;
   cout << "    -ct -conthreshold <n>    " << "Minimum consistency value allowed.Range: [0 - 1]" << endl;
-  cout << "    -cons <n>                " << "Minimum percentage of the positions in the original alignment to conserve. Range: [0 - 100]" << endl << endl;
+  cout << "    -cons <n>                " << "Minimum percentage of the positions in the original newAlignment  to conserve. Range: [0 - 100]" << endl << endl;
 
   cout << "    -nogaps                  " << "Remove all positions with gaps in the alignment." << endl;
   cout << "    -noallgaps               " << "Remove columns composed only by gaps." << endl;
@@ -1826,7 +1830,7 @@ void examples(void) {
 
   cout << "Some Examples:" << endl << endl;
 
-  cout << "1) Removes all positions in the alignment with gaps in 10% or more of" << endl
+  cout << "1) Removes all positions in the newAlignment  with gaps in 10% or more of" << endl
        << "   the sequences, unless this leaves less than 60% of original alignment. " << endl
        << "   In such case, print the 60% best (with less gaps) positions." << endl << endl;
 
@@ -1862,7 +1866,7 @@ void examples(void) {
 
   cout << "   trimal -in <inputfile> -out <outputfile> -selectcols { 0,2,3,10,45-60,68,70-78 }" << endl << endl;
 
-  cout << "8) Get the complementary alignment from the alignment previously trimmed." << endl << endl;
+  cout << "8) Get the complementary newAlignment  from the newAlignment  previously trimmed." << endl << endl;
 
   cout << "   trimal -in <inputfile> -out <outputfile> -selectcols { 0,2,3,10,45-60,68,70-78 } -complementary" << endl << endl;
 

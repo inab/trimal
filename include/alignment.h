@@ -45,6 +45,8 @@
 #include "similarityMatrix.h"
 #include "utils.h"
 
+#ifndef NEW_ALIGNMENT_H
+
 #define SINGLE  1
 #define MULTI   2
 
@@ -52,7 +54,6 @@
 #define RNAType 2
 #define AAType  3
 
-using namespace std;
 
 struct newValues {
   int residues;
@@ -60,6 +61,10 @@ struct newValues {
   string *matrix;
   string *seqsName;
 };
+
+#endif
+using namespace std;
+
 
 /** \brief Class containing an alignment
  *

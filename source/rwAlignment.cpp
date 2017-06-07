@@ -27,9 +27,9 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "alignment.h"
-#include "defines.h"
-#include "utils.h"
+#include "../include/alignment.h"
+#include "../include/defines.h"
+#include "../include/utils.h"
 
 extern int errno;
 #include <errno.h>

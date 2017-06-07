@@ -32,7 +32,7 @@
 using namespace std;
 
 #include <float.h>
-#include "alignment.h"
+#include "../include/alignment.h"
 #include "rwAlignment.cpp"
 #include "autAlignment.cpp"
 

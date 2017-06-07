@@ -1,0 +1,59 @@
+//
+// Created by bioinfo on 2/06/17.
+//
+
+#ifndef TRIMAL_CLEANER_H
+#define TRIMAL_CLEANER_H
+
+class newAlignment;
+
+//Class to make cleaning operations to an alignment
+ class Cleaner {
+
+ public:
+     newAlignment *cleanByCutValue(double, float, const int *, bool);
+
+     newAlignment *cleanByCutValue(float, float, const float *, bool);
+
+     newAlignment *cleanByCutValue(double, const int *, float, float, const float *, bool);
+
+     newAlignment *cleanStrict(int, const int *, float, const float *, bool, bool);
+
+     newAlignment *cleanOverlapSeq(float, float *, bool);
+
+     newAlignment *cleanGaps(float, float, bool);
+
+     newAlignment *cleanConservation(float, float, bool);
+
+     newAlignment *clean(float, float, float, bool);
+
+     newAlignment *cleanCompareFile(float, float, float *, bool);
+
+     newAlignment *cleanSpuriousSeq(float, float, bool);
+
+     newAlignment *clean2ndSlope(bool);
+
+     newAlignment *cleanCombMethods(bool, bool);
+
+     newAlignment *cleanNoAllGaps(bool);
+
+     newAlignment *removeColumns(int *, int, int, bool);
+
+     newAlignment *removeSequences(int *, int, int, bool);
+
+//     newAlignment *getClustering(float);
+
+     float getCutPointClusters(int);
+
+
+private:
+     friend class newAlignment;
+
+     newAlignment* _alignment;
+
+     Cleaner(newAlignment* parent);
+
+};
+
+
+#endif //TRIMAL_CLEANER_H

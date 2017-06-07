@@ -33,6 +33,7 @@
 #include <iostream>
 
 #include "alignment.h"
+#include "newAlignment.h"
 
 class compareFiles {
 
@@ -46,6 +47,11 @@ class compareFiles {
 
     static int algorithm(alignment **, char **, float *, int, bool);
 
+    static int algorithm(newAlignment **, char **, float *, int, bool);
+
     static bool forceComparison(alignment **, int, alignment *, float *);
+
+    static bool forceComparison(newAlignment **, int, newAlignment *, float *);
+
 };
 #endif

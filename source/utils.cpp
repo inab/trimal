@@ -27,9 +27,9 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "utils.h"
-#include "values.h"
-#include "defines.h"
+#include "../include/utils.h"
+#include "../include/values.h"
+#include "../include/defines.h"
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++
 | void utils::initVect(int *, int, int)          |

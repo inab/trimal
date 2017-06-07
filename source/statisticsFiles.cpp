@@ -24,7 +24,7 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "statisticsFiles.h"
+#include "../include/statisticsFiles.h"
 
 statisticsFiles::statisticsFiles() {
   columns = 0;
