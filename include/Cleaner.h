@@ -6,6 +6,7 @@
 #define TRIMAL_CLEANER_H
 
 class newAlignment;
+struct newValues;
 
 //Class to make cleaning operations to an alignment
  class Cleaner {
@@ -29,6 +30,8 @@ class newAlignment;
 
      newAlignment *cleanCompareFile(float, float, float *, bool);
 
+     bool calculateSpuriousVector(float, float *);
+
      newAlignment *cleanSpuriousSeq(float, float, bool);
 
      newAlignment *clean2ndSlope(bool);
@@ -41,19 +44,27 @@ class newAlignment;
 
      newAlignment *removeSequences(int *, int, int, bool);
 
-//     newAlignment *getClustering(float);
+     newAlignment *getClustering(float identityThreshold);
 
      float getCutPointClusters(int);
 
+     void removeSmallerBlocks(int);
+
+     bool removeOnlyTerminal(void);
+
+     newValues removeCols_SeqsAllGaps(void);
+
+    void trimTerminalGaps(bool);
 
 private:
+
      friend class newAlignment;
 
      newAlignment* _alignment;
 
      Cleaner(newAlignment* parent);
 
-};
+ };
 
 
 #endif //TRIMAL_CLEANER_H

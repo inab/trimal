@@ -62,6 +62,10 @@ public:
 
     void printCorrespondence(void);
 
+  void saveStatistics(similarityMatrix *sm);
+
+  void saveStatistics(similarityMatrix *, int, int);
+
 private:
     friend class newAlignment;
 

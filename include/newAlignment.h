@@ -32,6 +32,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <memory>
 
 #include <time.h>
 
@@ -65,10 +66,14 @@ struct newValues {
 #endif
 
 using namespace std;
+//
+//class Cleaner;
+//class StatisticsManager;
+//class ReadWriteManager;
 
-class Cleaner;
-class StatisticsManager;
-class ReadWriteManager;
+#include <Cleaner.h>
+#include <StatisticsManager.h>
+#include <ReadWriteManager.h>
 
 /** \brief Class containing an alignment
  *
@@ -81,11 +86,13 @@ class newAlignment {
     friend class Cleaner;
     friend class StatisticsManager;
     friend class ReadWriteManager;
+    friend class sequencesMatrix;
 
 public:
     Cleaner* Cleaning;
     StatisticsManager* Statistics;
     ReadWriteManager* ReadWrite;
+    sequencesMatrix *SequencesMatrix;
 
 private:
 
@@ -126,8 +133,7 @@ private:
   string filename;
   string aligInfo;
 
-  /* Sequences */
-  sequencesMatrix *seqMatrix;
+
 
   /* Statistics */
   statisticsGaps *sgaps;
@@ -192,49 +198,44 @@ private:
 
    /* Alignments' Compare */
 
-  /** \brief Building alignment's sequence matrix method.
-   *
-   * This method builds an alignment's sequence matrix.
-   */
-  void sequenMatrix(void);
+//  /** \brief Building alignment's sequence matrix method.
+//   *
+//   * This method builds an alignment's sequence matrix.
+//   */
+//  void sequenMatrix(void);
+//
+//  void destroySequenMatrix(void);
+//
+//  /** \brief Printing alignment's sequence matrix method.
+//   *
+//   * This method prints an alignment's sequence matrix.
+//   */
+//  void printSequenMatrix(void);
+//
+//  /** \brief Returns a column from alignment's sequence matrix.
+//   * \param colum, sequence matrix index
+//   * \param columnSeqMatrix, vector used to storage a column from alignment sequence matrix.
+//   *
+//   * This method returns a column from alignment sequence matrix.
+//   */
+//  void getColumnSeqMatrix(int, int *);
+//
+//  /** \brief Returns a column from alignment's sequence matrix.
+//   * \param value to look in a sequence matrix row.
+//   * \param sequence matrix row where look for a value.
+//   * \param columnSeqMatrix, vector used to storage a column from alignment sequence matrix.
+//   *
+//   * Method that returns a column from the aligment's sequence matrix with the same value that
+//   * "value" at matrix's position (row, i)
+//   */
+//  void getColumnSeqMatrix(int, int, int *);
+//
+//  void setSeqMatrixOrder(int *);
+//
+//  sequencesMatrix *getSeqMatrix(void);
 
-  void destroySequenMatrix(void);
-
-  /** \brief Printing alignment's sequence matrix method.
-   *
-   * This method prints an alignment's sequence matrix.
-   */
-  void printSequenMatrix(void);
-
-  /** \brief Returns a column from alignment's sequence matrix.
-   * \param colum, sequence matrix index
-   * \param columnSeqMatrix, vector used to storage a column from alignment sequence matrix.
-   *
-   * This method returns a column from alignment sequence matrix.
-   */
-  void getColumnSeqMatrix(int, int *);
-
-  /** \brief Returns a column from alignment's sequence matrix.
-   * \param value to look in a sequence matrix row.
-   * \param sequence matrix row where look for a value.
-   * \param columnSeqMatrix, vector used to storage a column from alignment sequence matrix.
-   *
-   * Method that returns a column from the aligment's sequence matrix with the same value that
-   * "value" at matrix's position (row, i)
-   */
-  void getColumnSeqMatrix(int, int, int *);
-
-  void setSeqMatrixOrder(int *);
-
-  sequencesMatrix *getSeqMatrix(void);
 
 
-
-  void saveStatistics(similarityMatrix *sm);
-
-  void saveStatistics(similarityMatrix *, int, int);
-
-  void trimTerminalGaps(bool);
 
   void setWindowsSize(int, int);
 
@@ -254,7 +255,6 @@ private:
 
   void calculateSeqIdentity(void);
 
-  newAlignment* getClustering(float identityThreshold);
 
     // New
   void calculateRelaxedSeqIdentity(void);
@@ -263,9 +263,8 @@ private:
 
   void printSeqIdentity(void);
 
-  bool calculateSpuriousVector(float, float *);
 
-  void checkTypeAlignment(void);
+//  void checkTypeAlignment(void);
 
   int getTypeAlignment(void);
 
@@ -285,13 +284,9 @@ private:
 
   void computeComplementaryAlig(bool, bool);
 
-  void removeSmallerBlocks(int);
 
-  bool removeOnlyTerminal(void);
 
-  newValues removeCols_SeqsAllGaps(void);
-
-  void removeCols_SeqsAllGaps(newValues *);
+//  void removeCols_SeqsAllGaps(newValues *);
 
   void fillNewDataStructure(string *, string *);
   void fillNewDataStructure(newValues *);
@@ -310,6 +305,7 @@ private:
 
   // Updated: June/2013
   bool prepareCodingSequence(bool, bool, newAlignment *);
+
 };
 
 #endif
