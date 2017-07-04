@@ -13,32 +13,33 @@
 
 using namespace std;
 
-class trimalArgumentParser {
+class trimalArgumentParser
+{
 
     bool appearErrors = false,
-            complementary = false, colnumbering = false,
-            nogaps = false, noallgaps = false,
-            gappyout = false, strict = false,
-            strictplus = false, automated1 = false,
-            sgc = false, sgt = false, scc = false, sct = false,
-            sfc = false, sft = false, sident = false, selectSeqs = false,
-            selectCols = false, shortNames = false, splitbystop = false,
-            terminal = false, keepSeqs = false,
-            keepHeader = false, ignorestop = false;
+         complementary = false, colnumbering = false,
+         nogaps = false, noallgaps = false,
+         gappyout = false, strict = false,
+         strictplus = false, automated1 = false,
+         sgc = false, sgt = false, scc = false, sct = false,
+         sfc = false, sft = false, sident = false, selectSeqs = false,
+         selectCols = false, shortNames = false, splitbystop = false,
+         terminal = false, keepSeqs = false,
+         keepHeader = false, ignorestop = false;
 
     float conserve = -1,
-            gapThreshold = -1,
-            simThreshold = -1,
-            comThreshold = -1,
-            resOverlap = -1,
-            seqOverlap = -1,
-            maxIdentity = -1;
+          gapThreshold = -1,
+          simThreshold = -1,
+          comThreshold = -1,
+          resOverlap = -1,
+          seqOverlap = -1,
+          maxIdentity = -1;
     int outformat = -1,
-            prevType = -1,
-            compareset = -1,
-            stats = 0,
-            windowSize = -1, gapWindow = -1, simWindow = -1,
-            conWindow = -1, blockSize = -1, clusters = -1;
+        prevType = -1,
+        compareset = -1,
+        stats = 0,
+        windowSize = -1, gapWindow = -1, simWindow = -1,
+        conWindow = -1, blockSize = -1, clusters = -1;
 
     /* Others variables */
     ifstream compare;
@@ -51,11 +52,11 @@ class trimalArgumentParser {
 
     int i = 1, lng, num = 0, maxAminos = 0, numfiles = 0, referFile = 0, *delColumns = NULL, *delSequences = NULL, *seqLengths = NULL;
     char c, *forceFile = NULL, *infile = NULL, *backtransFile = NULL, *outfile = NULL, *outhtml = NULL, *matrix = NULL,
-            **filesToCompare = NULL, line[256];
+             **filesToCompare = NULL, line[256];
 
 public:
+
     void parseArguments(int argc, char *argv[]);
-//    void applyArguments();
 
     bool info_arguments(int* argc, char* argv[], int* i);
     bool in_argument(int* argc, char* argv[], int* i);
@@ -96,8 +97,37 @@ public:
     bool split_by_stop_codon_argument(int* argc, char* argv[], int* i);
     bool ignore_stop_codon_argument(int* argc, char* argv[], int* i);
 
-    //todo PostProcessing;
+    // TODO: Names of this functions should be more informative.
+    bool post_process(char* argv[]);
 
+    bool check_force_selection();
+    bool check_input_file_with_coding_sequences_argument();
+    bool check_file_aligned();
+    bool check_similarity_matrix();
+    bool check_outputs_coincidence();
+    bool check_col_numbering();
+    bool check_residue_and_sequence_overlap();
+    bool check_html_output_interest();
+    bool check_output_file_with_statistics();
+    bool check_combinations_among_thresholds();
+    bool check_automated_manual_incompatibilities();
+    bool check_multiple_files_comparison(char* argv[]);
+    bool check_block_size();
+    bool check_backtranslations();
+    bool check_coding_sequences_type();
+    bool check_ignore_or_splitby_stop_codon();
+    bool check_and_prepare_coding_sequence();
+    bool check_correspondence();
+    void check_cw_argument(); // TODO <- HAS TO CHANGE ITS NAME
+
+    int perform();
+
+    void print_statistics();
+
+
+
+    void menu();
+    void examples();
 
 };
 
