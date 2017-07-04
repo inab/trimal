@@ -293,7 +293,7 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
   for(i = 1; ((i < numAlignments) && (!appearErrors)); i++) {
     vectAlignments[i] -> getSequences(names);
     vectAlignments[0] -> getSeqNameOrder(names, correspNames);
-    vectAlignments[i] -> setSeqMatrixOrder(correspNames);
+    vectAlignments[i] -> SequencesMatrix -> setOrder(correspNames);
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -325,7 +325,7 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
       /* Get back each column from the current selected
        * alignment */
-      vectAlignments[i] -> getColumnSeqMatrix(j, columnSeqMatrix);
+      vectAlignments[i] -> SequencesMatrix -> getColumn(j, columnSeqMatrix);
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -341,7 +341,7 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
           /* ***** ***** ***** ***** ***** ***** ***** ***** */
           for(l = 0; l < i; l++) {
             /* Recover the residue pairs from the others aligs */
-            vectAlignments[l] -> getColumnSeqMatrix(columnSeqMatrix[k], k, columnSeqMatrixAux);
+            vectAlignments[l] -> SequencesMatrix -> getColumn(columnSeqMatrix[k], k, columnSeqMatrixAux);
             /* ***** ***** ***** ***** ***** ***** ***** ***** */
             /* and count the similar residue pairs */
             for(m = k + 1; m < numSeqs; m++)
@@ -356,7 +356,7 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
           /* ***** ***** ***** ***** ***** ***** ***** ***** */
           for(l = i + 1; l < numAlignments; l++) {
             /* Recover the residue pairs from the others aligs */
-            vectAlignments[l] -> getColumnSeqMatrix(columnSeqMatrix[k], k, columnSeqMatrixAux);
+            vectAlignments[l] -> SequencesMatrix -> getColumn(columnSeqMatrix[k], k, columnSeqMatrixAux);
             /* ***** ***** ***** ***** ***** ***** ***** ***** */
             /* and count the similar residue pairs */
             for(m = k + 1; m < numSeqs; m++)
@@ -639,7 +639,7 @@ bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignme
     for(i = 0; i < numAlignments; i++) {
         vectAlignments[i] -> getSequences(names);
         selected -> getSeqNameOrder(names, correspNames);
-        vectAlignments[i] -> setSeqMatrixOrder(correspNames);
+        vectAlignments[i] -> SequencesMatrix -> setOrder(correspNames);
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -651,7 +651,7 @@ bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignme
         /* We get back the sequence position for each residue
          * from every column in the selected alignment */
         utils::initlVect(columnSeqMatrix, numSeqs, 0);
-        selected -> getColumnSeqMatrix(i, columnSeqMatrix);
+        selected -> SequencesMatrix -> getColumn(i, columnSeqMatrix);
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -669,7 +669,7 @@ bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignme
                     /* We look for the same residue in the same row in
                      * the rest of alignments */
                     utils::initlVect(columnSeqMatrixAux, numSeqs, 0);
-                    vectAlignments[k] -> getColumnSeqMatrix(columnSeqMatrix[j], j, columnSeqMatrixAux);
+                    vectAlignments[k] -> SequencesMatrix -> getColumn(columnSeqMatrix[j], j, columnSeqMatrixAux);
                     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
                     /* ***** ***** ***** ***** ***** ***** ***** ***** */

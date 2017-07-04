@@ -24,6 +24,7 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
+#include <newAlignment.h>
 #include "../include/sequencesMatrix.h"
 
 sequencesMatrix::sequencesMatrix(void) {
@@ -35,6 +36,41 @@ sequencesMatrix::sequencesMatrix(void) {
   matrix = NULL;
 
 }
+
+sequencesMatrix::sequencesMatrix(newAlignment* parent) {
+  _alignment = parent;
+  int i, j, k;
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  seqsNumber = _alignment -> sequenNumber;
+  resNumber = _alignment -> residNumber;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  seqsName = new string[seqsNumber];
+  for(i = 0; i < seqsNumber; i++)
+    seqsName[i] = _alignment -> seqsName[i];
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  matrix = new int*[seqsNumber];
+  for(i = 0; i < seqsNumber; i++) {
+    matrix[i] = new int[resNumber];
+    utils::initlVect(matrix[i], resNumber, 0);
+  }
+
+  /* Determinate the sequence for each alignment specie */
+  for(i = 0, k = 1; i < seqsNumber; i++, k = 1) {
+    for(j = 0; j < resNumber; j++) {
+      if(_alignment -> sequences[i][j] != '-') {
+        matrix[i][j] = k;
+        k++;
+      }
+    }
+  }
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+}
+
 
 sequencesMatrix::sequencesMatrix(string *alignmentMatrix, string *alignmentSeqsName, int sequences, int residues) {
   int i, j, k;

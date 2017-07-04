@@ -23,6 +23,7 @@ set(preview
         source/Cleaner.cpp
         source/StatisticsManager.cpp
         source/ReadWriteManager.cpp
+        source/trimalArgumentParser.cpp
         )
 
 # Add the executables
@@ -61,15 +62,15 @@ endmacro()
 # Create lists of variables and files for testing
 FILE(GLOB files
         dataset/*clw dataset/*phy
-        dataset/*msl dataset/*fa
+#        dataset/*msl dataset/*fa
 #        dataset/*pir dataset/*phy2
         )
 set(gt 0 1)
 set(st 0 1)
-set(cons 10 20 40 60)
+set(cons 60)
 set(thold -gappyout -strict -automated1)
-set(resoverlap 0.1 0.75 1)
-set(seqoverlap 10 20 80)
+set(resoverlap 0.5)
+set(seqoverlap 80)
 
 # Add all the combinations of gt and files provided
 foreach(file ${files})
@@ -105,14 +106,14 @@ foreach(file ${files})
                 "-in ${file} ${thold}")
     endforeach()
 
-#    foreach(seqoverlap ${seqoverlap})
-#        foreach(resoverlap ${resoverlap})
-#            compare_outputs(
-#                    "[file:${file}][seqo:${seqoverlap}][reso:${resoverlap}]"
-#                    "bin/trimal" "bin/new_trimal"
-#                    "-in ${file} -resoverlap ${resoverlap} -seqoverlap ${seqoverlap}")
-#        endforeach()
-#    endforeach()
+    foreach(seqoverlap ${seqoverlap})
+        foreach(resoverlap ${resoverlap})
+            compare_outputs(
+                    "[file:${file}][seqo:${seqoverlap}][reso:${resoverlap}]"
+                    "bin/trimal" "bin/new_trimal"
+                    "-in ${file} -resoverlap ${resoverlap} -seqoverlap ${seqoverlap}")
+        endforeach()
+    endforeach()
 
 endforeach()
 

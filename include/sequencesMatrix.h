@@ -41,6 +41,7 @@ using namespace std;
  * It also provides methods for look to a column in the matrix and
  * for look to value at the position (row, column) in the matrix.
  */
+class newAlignment;
 
 class sequencesMatrix {
   int resNumber;
@@ -65,6 +66,8 @@ class sequencesMatrix {
 
   /* Copy constructor */
   sequencesMatrix(string *, string *, int, int);
+
+    sequencesMatrix(newAlignment* parent);
 
   sequencesMatrix &operator=(const sequencesMatrix &);
 
@@ -112,6 +115,8 @@ class sequencesMatrix {
 
   int getResidNumber(void);
 
+private:
+    newAlignment* _alignment;
 };
 
 #endif

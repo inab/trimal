@@ -36,15 +36,15 @@
 #include "../include/newAlignment.h"
 #include "../include/defines.h"
 #include "../include/utils.h"
-#include "Cleaner.h"
-#include "StatisticsManager.h"
-#include "ReadWriteManager.h"
+#include "trimalArgumentParser.h"
 
 void menu(void);
 void examples(void);
 
 int main(int argc, char *argv[]){
 
+    trimalArgumentParser p = trimalArgumentParser();
+    p.parseArguments(argc, argv);
   /* Parameters Control */
   bool appearErrors = false, complementary = false, colnumbering = false, nogaps = false, noallgaps = false, gappyout = false,
        strict = false, strictplus = false, automated1 = false, sgc = false, sgt = false, scc = false, sct = false, sfc = false,
@@ -1311,7 +1311,7 @@ int main(int argc, char *argv[]){
           cerr << endl << "ERROR: The sequences in the input newAlignment  should be aligned in order to use this method." << endl << endl;
           appearErrors = true;
         } else {
-          compAlig[i] -> sequenMatrix();
+          compAlig[i] -> SequencesMatrix = new sequencesMatrix(compAlig[i]);
 
           if(compAlig[i] -> getNumAminos() > maxAminos)
             maxAminos = compAlig[i] -> getNumAminos();
@@ -1445,7 +1445,7 @@ int main(int argc, char *argv[]){
     conserve  = 0;
   /* -------------------------------------------------------------------- */
 
-  origAlig -> trimTerminalGaps(terminal);
+  origAlig -> Cleaning -> trimTerminalGaps(terminal);
   origAlig -> setKeepSequencesFlag(keepSeqs);
   origAlig -> setKeepSeqsHeaderFlag(keepHeader);
 
@@ -1545,7 +1545,7 @@ int main(int argc, char *argv[]){
 
   /* -------------------------------------------------------------------- */
   if(backtransFile != NULL)
-    seqMatrix = origAlig -> getSeqMatrix();
+    seqMatrix = origAlig -> SequencesMatrix;
   /* -------------------------------------------------------------------- */
 
   /* -------------------------------------------------------------------- */
@@ -1631,7 +1631,7 @@ int main(int argc, char *argv[]){
 
   /* -------------------------------------------------------------------- */
   if(maxIdentity != -1) {
-    singleAlig = origAlig -> getClustering (maxIdentity);
+    singleAlig = origAlig -> Cleaning -> getClustering (maxIdentity);
   singleAlig = singleAlig -> Cleaning -> cleanNoAllGaps(false);
   }
   else if(clusters != -1) {
@@ -1639,7 +1639,7 @@ int main(int argc, char *argv[]){
         cerr << endl << "ERROR:The number of clusters from the newAlignment  can not be larger than the number of sequences from that alignment." << endl << endl;
         appearErrors = true;
     } else {
-    singleAlig = origAlig -> getClustering(origAlig -> Cleaning -> getCutPointClusters(clusters));
+    singleAlig = origAlig -> Cleaning -> getClustering(origAlig -> Cleaning -> getCutPointClusters(clusters));
     singleAlig = singleAlig -> Cleaning -> cleanNoAllGaps(false);
   }
   }

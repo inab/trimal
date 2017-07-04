@@ -123,7 +123,7 @@ newAlignment::newAlignment(void) {
   /* Information computed from newAlignment */
   sgaps =     NULL;
   scons =     NULL;
-  seqMatrix = NULL;
+  SequencesMatrix = NULL;
   identities = NULL;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -260,7 +260,7 @@ newAlignment::newAlignment(string o_filename, string o_aligInfo, string *o_seque
    * if it will be necessary, has to be computed */
   sgaps  =     NULL;
   scons  =     NULL;
-  seqMatrix =  NULL;
+  SequencesMatrix =  NULL;
   identities = NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
@@ -371,8 +371,8 @@ newAlignment &newAlignment::operator=(const newAlignment &old) {
     delete scons;
     scons = NULL;
 
-    delete seqMatrix;
-    seqMatrix = old.seqMatrix;
+    delete SequencesMatrix;
+    SequencesMatrix = old.SequencesMatrix;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -434,9 +434,9 @@ newAlignment::~newAlignment(void) {
     delete scons;
   scons = NULL;
 
-  if(seqMatrix != NULL)
-    delete seqMatrix;
-  seqMatrix = NULL;
+  if(SequencesMatrix != NULL)
+    delete SequencesMatrix;
+  SequencesMatrix = NULL;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -472,109 +472,6 @@ newAlignment::~newAlignment(void) {
  * is similar, (in terms of residues, indetermination and gaps), a given
  * position respect to the element on its column. */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-bool newAlignment::calculateSpuriousVector(float overlap, float *spuriousVector) {
-
-  int i, j, k, seqValue, ovrlap, hit;
-  float floatOverlap;
-  char indet;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Compute the overlap */
-  floatOverlap = overlap * float(sequenNumber-1);
-  ovrlap = int(overlap * (sequenNumber-1));
-
-  if(floatOverlap > float(ovrlap))
-    ovrlap++;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* If the spurious vectos is NULL, returns false. */
-  if(spuriousVector == NULL)
-    return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Depending on the kind of newAlignment, we have
-   * different indetermination symbol */
-  if(getTypeAlignment() == AAType)
-    indet = 'X';
-  else
-    indet = 'N';
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* For each newAlignment's sequence, computes its overlap */
-  for(i = 0, seqValue = 0; i < sequenNumber; i++, seqValue = 0) {
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* For each newAlignment's column, computes the overlap
-     * between the selected sequence and the other ones */
-    for(j = 0; j < residNumber; j++) {
-
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      /* For sequences are before the sequence selected */
-      for(k = 0, hit = 0; k < i; k++) {
-
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* If the element of sequence selected is the same
-         * that the element of sequence considered, computes
-         * a hit */
-        if(sequences[i][j] == sequences[k][j])
-          hit++;
-
-        /* If the element of sequence selected isn't a 'X' nor
-         * 'N' (indetermination) or a '-' (gap) and the element
-         * of sequence considered isn't a  a 'X' nor 'N'
-         * (indetermination) or a '-' (gap), computes a hit */
-        else if((sequences[i][j] != indet) && (sequences[i][j] != '-')
-          && (sequences[k][j] != indet) && (sequences[k][j] != '-'))
-          hit++;
-      }
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      /* For sequences are after the sequence selected */
-      for(k = (i + 1); k < sequenNumber; k++) {
-
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* If the element of sequence selected is the same
-         * that the element of sequence considered, computes
-         * a hit */
-        if(sequences[i][j] == sequences[k][j])
-          hit++;
-
-        /* If the element of sequence selected isn't a 'X' nor
-         * 'N' (indetermination) or a '-' (gap) and the element
-         * of sequence considered isn't a  a 'X' nor 'N'
-         * (indetermination) or a '-' (gap), computes a hit */
-        else if((sequences[i][j] != indet) && (sequences[i][j] != '-')
-          && (sequences[k][j] != indet) && (sequences[k][j] != '-'))
-          hit++;
-      }
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-      /* Finally, if the hit's number divided by number of
-       * sequences minus one is greater or equal than
-       * overlap's value, computes a column's hit. */
-      if(hit >= ovrlap)
-        seqValue++;
-      /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    }
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* For each newAlignment's sequence, computes its spurious's
-     * or overlap's value as the column's hits -for that
-       sequence- divided by column's number. */
-    spuriousVector[i] = ((float) seqValue / residNumber);
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  }
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* If there is not problem in the method, return true */
-  return true;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-}
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method compute the cluster belongs to a given newAlignment at certain
@@ -792,13 +689,6 @@ int newAlignment::getNumAminos(void) {
   return residNumber;
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Sets the condition to remove only terminal gaps after applying any
- * trimming method or not.   */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void newAlignment::trimTerminalGaps(bool terminalOnly_) {
-  terminalGapOnly = terminalOnly_;
-}
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method stores the diferent windows values in the newAlignment object */
@@ -920,72 +810,72 @@ bool newAlignment::getSeqNameOrder(string *names, int *orderVector) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method lets to build a sequence matrix. A sequence matrix contains
- * the residue position for each sequence without taking into account the
- * gaps in the sequence. This means that at position 10 we have the residue
- * 1 for that sequence */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void newAlignment::sequenMatrix(void) {
-  if(seqMatrix == NULL)
-    seqMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
-}
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Use this method to destroy a given sequence matrix */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void newAlignment::destroySequenMatrix(void) {
-  if(seqMatrix != NULL)
-    delete seqMatrix;
-  seqMatrix = NULL;
-}
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Print the newAlignment's sequence matrix */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void newAlignment::printSequenMatrix(void) {
-  if(seqMatrix == NULL)
-    seqMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
-  seqMatrix -> printMatrix();
-}
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Given an index, this method returns the sequence matrix column for that
- * index */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void newAlignment::getColumnSeqMatrix(int column, int *columnSeqMatrix) {
-  if(seqMatrix == NULL)
-    seqMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
-  seqMatrix -> getColumn(column, columnSeqMatrix);
-}
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function looks if a given value belongs a given row. In the affirmative
- * case, returns the columns value for that row and value combination */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void newAlignment::getColumnSeqMatrix(int value, int row, int *columnSeqMatrix) {
-  if(seqMatrix == NULL)
-    seqMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
-  seqMatrix -> getColumn(value, row, columnSeqMatrix);
-}
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function change the rows order in the sequence matrix */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void newAlignment::setSeqMatrixOrder(int *order) {
-  if(seqMatrix == NULL)
-    seqMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
-  seqMatrix -> setOrder(order);
-}
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function change the rows order in the sequence matrix */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-sequencesMatrix *newAlignment::getSeqMatrix(void) {
-  if(seqMatrix == NULL)
-    seqMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
-  return seqMatrix;
-}
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+///* This method lets to build a sequence matrix. A sequence matrix contains
+// * the residue position for each sequence without taking into account the
+// * gaps in the sequence. This means that at position 10 we have the residue
+// * 1 for that sequence */
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+//void newAlignment::sequenMatrix(void) {
+//  if(SequencesMatrix == NULL)
+//    SequencesMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
+//}
+//
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+///* Use this method to destroy a given sequence matrix */
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+//void newAlignment::destroySequenMatrix(void) {
+//  if(SequencesMatrix != NULL)
+//    delete SequencesMatrix;
+//  SequencesMatrix = NULL;
+//}
+//
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+///* Print the newAlignment's sequence matrix */
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+//void newAlignment::printSequenMatrix(void) {
+//  if(SequencesMatrix == NULL)
+//    SequencesMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
+//  SequencesMatrix -> printMatrix();
+//}
+//
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+///* Given an index, this method returns the sequence matrix column for that
+// * index */
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+//void newAlignment::getColumnSeqMatrix(int column, int *columnSeqMatrix) {
+//  if(SequencesMatrix == NULL)
+//    SequencesMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
+//  SequencesMatrix -> getColumn(column, columnSeqMatrix);
+//}
+//
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+///* This function looks if a given value belongs a given row. In the affirmative
+// * case, returns the columns value for that row and value combination */
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+//void newAlignment::getColumnSeqMatrix(int value, int row, int *columnSeqMatrix) {
+//  if(SequencesMatrix == NULL)
+//    SequencesMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
+//  SequencesMatrix -> getColumn(value, row, columnSeqMatrix);
+//}
+//
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+///* This function change the rows order in the sequence matrix */
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+//void newAlignment::setSeqMatrixOrder(int *order) {
+//  if(SequencesMatrix == NULL)
+//    SequencesMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
+//  SequencesMatrix -> setOrder(order);
+//}
+//
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+///* This function change the rows order in the sequence matrix */
+///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+//sequencesMatrix *newAlignment::getSeqMatrix(void) {
+//  if(SequencesMatrix == NULL)
+//    SequencesMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
+//  return SequencesMatrix;
+//}
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Computes, if it's necessary, and return the newAlignment's type */
@@ -1036,146 +926,7 @@ void newAlignment::computeComplementaryAlig(bool residues, bool sequences) {
     saveSequences[i] = (saveSequences[i] == -1) ? i : -1;
 }
 
-/* Function designed for identifying right and left borders between central
- * and terminal regions in the newAlignment. The borders are those columns, first
- * and last, composed by only residues. Everything inbetween left and right
- * borders are keept independently of the applied methods */
-bool newAlignment::removeOnlyTerminal(void) {
 
-  int i, left_boundary, right_boundary;
-  const int *gInCol;
-
-  /* Get newAlignments gaps stats and copy it */
-  if(Statistics->calculateGapStats() != true) {
-    cerr << endl << "WARNING: Impossible to apply 'terminal-only' method"
-      << endl << endl;
-    return false;
-  }
-  gInCol = sgaps -> getGapsWindow();
-
-  /* Identify left and right borders. First and last columns with no gaps */
-  for(i = 0; i < residNumber && gInCol[i] != 0; i++) ;
-  left_boundary = i;
-
-  for(i = residNumber - 1; i > -1 && gInCol[i] != 0; i--) ;
-  right_boundary = i + 1;
-
-  /* Once the interal boundaries have been established, if these limits exist
-   * then retrieved all columns inbetween both boundaries. Columns out of these
-   * limits will remain selected or not depending on the algorithm applied */
-  for(i = left_boundary; i < right_boundary; i++)
-    if(saveResidues[i] == -1)
-      saveResidues[i] = i;
-
-  return true;
-}
-
-/* Function designed to identify and remove those columns blocks smaller than
- * a given size */
-void newAlignment::removeSmallerBlocks(int blockSize) {
-
-  int i, j, pos, block;
-
-  if(blockSize == 0)
-    return ;
-
-  /* Traverse the newAlignment looking for blocks greater than BLOCKSIZE, everytime
-   * than a column hasn't been selected, check whether the current block is big
-   * enough to be kept or it should be removed from the final newAlignment */
-  for(i = 0, pos = 0, block = 0; i < residNumber; i++) {
-    if(saveResidues[i] != -1)
-      block++;
-    else {
-      /* Remove columns from blocks smaller than input blocks size */
-      if(block < blockSize)
-        for(j = pos; j <= i; j++)
-          saveResidues[j] = -1;
-      pos = i + 1;
-      block = 0;
-    }
-  }
-
-  /* Check final block separately since it could happen than last block is not
-   * big enough but because the loop end could provoke to ignore it */
-  if(block < blockSize)
-    for(j = pos; j < i; j++)
-      saveResidues[j] = -1;
-  return ;
-}
-
-/* Function designed to identify columns and sequences composed only by gaps.
- * Once these columns/sequences have been identified, they are removed from
- * final newAlignment. */
-newValues newAlignment::removeCols_SeqsAllGaps(void) {
-  int i, j, valid, gaps;
-  bool warnings = false;
-  newValues counter;
-
-  /* Check all valid columns looking for those composed by only gaps */
-  for(i = 0, counter.residues = 0; i < residNumber; i++) {
-    if(saveResidues[i] == -1)
-      continue;
-
-    for(j = 0, valid = 0, gaps = 0; j < sequenNumber; j++) {
-      if (saveSequences[j] == -1)
-        continue;
-      if (sequences[j][i] == '-')
-        gaps ++;
-      valid ++;
-    }
-    /* Once a column has been identified, warm about it and remove it */
-    if(gaps == valid) {
-      if(!warnings)
-        cerr << endl;
-      warnings = true;
-      cerr << "WARNING: Removing column '" << i << "' composed only by gaps"
-        << endl;
-      saveResidues[i] = -1;
-    } else {
-      counter.residues ++;
-    }
-  }
-
-  /* Check for those selected sequences to see whether there is anyone with
-   * only gaps */
-  for(i = 0, counter.sequences = 0; i < sequenNumber; i++) {
-    if(saveSequences[i] == -1)
-      continue;
-
-    for(j = 0, valid = 0, gaps = 0; j < residNumber; j++) {
-      if(saveResidues[j] == -1)
-        continue;
-      if (sequences[i][j] == '-')
-        gaps ++;
-      valid ++;
-    }
-    /* Warm about it and remove each sequence composed only by gaps */
-    if(gaps == valid) {
-      if(!warnings)
-        cerr << endl;
-      warnings = true;
-
-      if(keepSequences) {
-        cerr << "WARNING: Keeping sequence '" << seqsName[i]
-          << "' composed only by gaps" << endl;
-        counter.sequences ++;
-      } else {
-        cerr << "WARNING: Removing sequence '" << seqsName[i]
-          << "' composed only by gaps" << endl;
-        saveSequences[i] = -1;
-      }
-    } else {
-      counter.sequences ++;
-    }
-  }
-  if(warnings)
-    cerr << endl;
-
-  counter.matrix = new string[counter.sequences];
-  counter.seqsName = new string[counter.sequences];
-
-  return counter;
-}
 
 /* Function for copying to previously allocated memory those data selected
  * for being in the final newAlignment */
@@ -1703,63 +1454,6 @@ void newAlignment::calculateRelaxedSeqIdentity(void) {
     }
 }
 
-newAlignment * newAlignment::getClustering(float identityThreshold) {
-
-    string *matrixAux, *newSeqsName;
-    int i, j, *clustering;
-    newAlignment *newAlig;
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Get the representative member for each cluster
-     * given a maximum identity threshold */
-    clustering = calculateRepresentativeSeq(identityThreshold);
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Put all sequences to be deleted and get back those
-     * sequences that are representative for each cluster
-     * */
-    for(i = 0; i < sequenNumber; i ++)
-        saveSequences[i] = -1;
-    for(i = 1; i <= clustering[0]; i ++)
-        saveSequences[clustering[i]] = clustering[i];
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* We allocate memory to save the sequences selected */
-    matrixAux = new string[clustering[0]];
-    newSeqsName = new string[clustering[0]];
-
-    /* Copy to new structures the information that have
-     * been selected previously. */
-    for(i = 0, j = 0; i < sequenNumber; i++)
-        if(saveSequences[i] != -1) {
-            newSeqsName[j] = seqsName[i];
-            matrixAux[j] = sequences[i];
-            j++;
-        }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* When we have all parameters, we create the new
-     * alignment */
-    newAlig = new newAlignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
-                            clustering[0], residNumber, iformat, oformat, shortNames, dataType, isAligned,
-                            reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber, residuesNumber,
-                            saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Deallocated auxiliar memory */
-    delete [] matrixAux;
-    delete [] newSeqsName;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Return the new alignment reference */
-    return newAlig;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-}
 
 
 

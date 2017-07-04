@@ -132,7 +132,7 @@
     /* If the flag -terminalony is set, apply a method to look for internal
      * boundaries and get back columns inbetween them, if they exist */
     if(_alignment->terminalGapOnly == true)
-        if(!_alignment->removeOnlyTerminal())
+        if(!_alignment->Cleaning->removeOnlyTerminal())
             return NULL;
 
     /* Once the columns/sequences selection is done, turn it around
@@ -142,7 +142,7 @@
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
-    counter = _alignment->removeCols_SeqsAllGaps();
+    counter = _alignment->Cleaning->removeCols_SeqsAllGaps();
 
     /* Allocate memory  for selected sequences/columns */
     matrixAux = new string[counter.sequences];
@@ -284,7 +284,7 @@
     /* If the flag -terminalony is set, apply a method to look for internal
      * boundaries and get back columns inbetween them, if they exist */
     if(_alignment->terminalGapOnly == true)
-        if(!_alignment->removeOnlyTerminal())
+        if(!_alignment->Cleaning->removeOnlyTerminal())
             return NULL;
 
     /* Once the columns/sequences selection is done, turn it around
@@ -294,7 +294,7 @@
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
-    counter = _alignment->removeCols_SeqsAllGaps();
+    counter = _alignment->Cleaning->removeCols_SeqsAllGaps();
 
     /* Allocate memory  for selected sequences/columns */
     matrixAux = new string[counter.sequences];
@@ -474,7 +474,7 @@
     /* If the flag -terminalony is set, apply a method to look for internal
      * boundaries and get back columns inbetween them, if they exist */
     if(_alignment->terminalGapOnly == true)
-        if(!_alignment->removeOnlyTerminal())
+        if(!_alignment->Cleaning->removeOnlyTerminal())
             return NULL;
 
     /* Once the columns/sequences selection is done, turn it around
@@ -484,7 +484,7 @@
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
-    counter = _alignment->removeCols_SeqsAllGaps();
+    counter = _alignment->Cleaning->removeCols_SeqsAllGaps();
 
     /* Allocate memory  for selected sequences/columns */
     matrixAux = new string[counter.sequences];
@@ -577,12 +577,12 @@
 
     /* Keep only columns blocks bigger than either a computed dinamically or
      * set by the user block size */
-    _alignment->removeSmallerBlocks(_alignment->blockSize);
+    _alignment->Cleaning->removeSmallerBlocks(_alignment->blockSize);
 
     /* If the flag -terminalony is set, apply a method to look for internal
      * boundaries and get back columns inbetween them, if they exist */
     if(_alignment->terminalGapOnly == true)
-        if(!_alignment->removeOnlyTerminal())
+        if(!_alignment->Cleaning->removeOnlyTerminal())
             return NULL;
 
     /* Once the columns/sequences selection is done, turn it around
@@ -594,7 +594,7 @@
     /* Compute new sequences and columns numbers */
 
     newValues counter;
-    counter = _alignment->removeCols_SeqsAllGaps();
+    counter = _alignment->Cleaning->removeCols_SeqsAllGaps();
 
     /* Allocate memory  for selected sequences/columns */
     //~ matrixAux = new string[counter.sequences];
@@ -664,7 +664,7 @@
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
-    counter = _alignment->removeCols_SeqsAllGaps();
+    counter = _alignment->Cleaning->removeCols_SeqsAllGaps();
 
     /* Allocate memory  for selected sequences/columns */
     matrixAux = new string[counter.sequences];
@@ -829,6 +829,111 @@
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
+bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
+
+    int i, j, k, seqValue, ovrlap, hit;
+    float floatOverlap;
+    char indet;
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Compute the overlap */
+    floatOverlap = overlap * float(_alignment -> sequenNumber-1);
+    ovrlap = int(overlap * (_alignment -> sequenNumber-1));
+
+    if(floatOverlap > float(ovrlap))
+        ovrlap++;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* If the spurious vectos is NULL, returns false. */
+    if(spuriousVector == NULL)
+        return false;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Depending on the kind of newAlignment, we have
+     * different indetermination symbol */
+    if(_alignment -> getTypeAlignment() == AAType)
+        indet = 'X';
+    else
+        indet = 'N';
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* For each newAlignment's sequence, computes its overlap */
+    for(i = 0, seqValue = 0; i < _alignment -> sequenNumber; i++, seqValue = 0) {
+
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        /* For each newAlignment's column, computes the overlap
+         * between the selected sequence and the other ones */
+        for(j = 0; j < _alignment -> residNumber; j++) {
+
+            /* ***** ***** ***** ***** ***** ***** ***** ***** */
+            /* For sequences are before the sequence selected */
+            for(k = 0, hit = 0; k < i; k++) {
+
+                /* ***** ***** ***** ***** ***** ***** ***** ***** */
+                /* If the element of sequence selected is the same
+                 * that the element of sequence considered, computes
+                 * a hit */
+                if(_alignment -> sequences[i][j] == _alignment -> sequences[k][j])
+                    hit++;
+
+                    /* If the element of sequence selected isn't a 'X' nor
+                     * 'N' (indetermination) or a '-' (gap) and the element
+                     * of sequence considered isn't a  a 'X' nor 'N'
+                     * (indetermination) or a '-' (gap), computes a hit */
+                else if((_alignment -> sequences[i][j] != indet) && (_alignment -> sequences[i][j] != '-')
+                        && (_alignment -> sequences[k][j] != indet) && (_alignment -> sequences[k][j] != '-'))
+                    hit++;
+            }
+            /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+            /* ***** ***** ***** ***** ***** ***** ***** ***** */
+            /* For sequences are after the sequence selected */
+            for(k = (i + 1); k < _alignment -> sequenNumber; k++) {
+
+                /* ***** ***** ***** ***** ***** ***** ***** ***** */
+                /* If the element of sequence selected is the same
+                 * that the element of sequence considered, computes
+                 * a hit */
+                if(_alignment -> sequences[i][j] == _alignment -> sequences[k][j])
+                    hit++;
+
+                    /* If the element of sequence selected isn't a 'X' nor
+                     * 'N' (indetermination) or a '-' (gap) and the element
+                     * of sequence considered isn't a  a 'X' nor 'N'
+                     * (indetermination) or a '-' (gap), computes a hit */
+                else if((_alignment -> sequences[i][j] != indet) && (_alignment -> sequences[i][j] != '-')
+                        && (_alignment -> sequences[k][j] != indet) && (_alignment -> sequences[k][j] != '-'))
+                    hit++;
+            }
+            /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+            /* ***** ***** ***** ***** ***** ***** ***** ***** */
+            /* Finally, if the hit's number divided by number of
+             * sequences minus one is greater or equal than
+             * overlap's value, computes a column's hit. */
+            if(hit >= ovrlap)
+                seqValue++;
+            /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        }
+
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        /* For each newAlignment's sequence, computes its spurious's
+         * or overlap's value as the column's hits -for that
+           sequence- divided by column's number. */
+        spuriousVector[i] = ((float) seqValue / _alignment -> residNumber);
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    }
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* If there is not problem in the method, return true */
+    return true;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+}
+
+
  newAlignment* Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, bool complementary) {
 
     float *overlapVector;
@@ -842,7 +947,7 @@
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Compute the overlap's vector using the overlap
      * column's value */
-    if(!_alignment->calculateSpuriousVector(overlapColumn, overlapVector))
+    if(!calculateSpuriousVector(overlapColumn, overlapVector))
         return NULL;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -1179,6 +1284,82 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     return startingPoint;
 }
 
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/* Sets the condition to remove only terminal gaps after applying any
+ * trimming method or not.   */
+/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+void Cleaner::trimTerminalGaps(bool terminalOnly_) {
+    _alignment->terminalGapOnly = terminalOnly_;
+}
+
+newAlignment * Cleaner::getClustering(float identityThreshold) {
+
+    string *matrixAux, *newSeqsName;
+    int i, j, *clustering;
+    newAlignment *newAlig;
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Get the representative member for each cluster
+     * given a maximum identity threshold */
+    clustering = _alignment -> calculateRepresentativeSeq(identityThreshold);
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Put all sequences to be deleted and get back those
+     * sequences that are representative for each cluster
+     * */
+    for(i = 0; i < _alignment -> sequenNumber; i ++)
+        _alignment -> saveSequences[i] = -1;
+    for(i = 1; i <= clustering[0]; i ++)
+        _alignment -> saveSequences[clustering[i]] = clustering[i];
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* We allocate memory to save the sequences selected */
+    matrixAux = new string[clustering[0]];
+    newSeqsName = new string[clustering[0]];
+
+    /* Copy to new structures the information that have
+     * been selected previously. */
+    for(i = 0, j = 0; i < _alignment -> sequenNumber; i++)
+        if(_alignment -> saveSequences[i] != -1) {
+            newSeqsName[j] = _alignment -> seqsName[i];
+            matrixAux[j] = _alignment -> sequences[i];
+            j++;
+        }
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* When we have all parameters, we create the new
+     * alignment */
+    newAlig = new newAlignment(_alignment ->filename, _alignment ->aligInfo,
+                               matrixAux, newSeqsName, _alignment ->seqsInfo,
+                               clustering[0], _alignment ->residNumber,
+                               _alignment ->iformat, _alignment ->oformat, _alignment ->shortNames,
+                               _alignment ->dataType, _alignment ->isAligned,
+                               _alignment ->reverse, _alignment ->terminalGapOnly,
+                               _alignment ->keepSequences, _alignment ->keepHeader,
+                               _alignment ->sequenNumber,
+                               _alignment ->residNumber, _alignment ->residuesNumber,
+                               _alignment ->saveResidues, _alignment ->saveSequences,
+                               _alignment ->ghWindow, _alignment ->shWindow,
+                               _alignment ->blockSize, _alignment ->identities);
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Deallocated auxiliar memory */
+    delete [] matrixAux;
+    delete [] newSeqsName;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Return the new alignment reference */
+    return newAlig;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+}
+
+
+
 /* Remove those columns, expressed as range, set by the user. It can return
  * the complementary alignmnet if appropiate flags is set. */
 newAlignment* Cleaner::removeColumns(int *columns, int init, int size,
@@ -1201,7 +1382,7 @@ newAlignment* Cleaner::removeColumns(int *columns, int init, int size,
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
-    counter = _alignment -> removeCols_SeqsAllGaps();
+    counter = _alignment -> Cleaning -> removeCols_SeqsAllGaps();
 
     /* Allocate memory  for selected sequences/columns */
     matrixAux = new string[counter.sequences];
@@ -1262,7 +1443,7 @@ newAlignment *Cleaner::removeSequences(int *seqs, int init, int size,
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
-    counter = _alignment -> removeCols_SeqsAllGaps();
+    counter = _alignment -> Cleaning -> removeCols_SeqsAllGaps();
 
     /* Allocate memory  for selected sequences/columns */
     matrixAux = new string[counter.sequences];
@@ -1298,6 +1479,147 @@ newAlignment *Cleaner::removeSequences(int *seqs, int init, int size,
 
     /* Return the new alignment reference */
     return newAlig;
+}
+
+/* Function designed for identifying right and left borders between central
+ * and terminal regions in the newAlignment. The borders are those columns, first
+ * and last, composed by only residues. Everything inbetween left and right
+ * borders are keept independently of the applied methods */
+bool Cleaner::removeOnlyTerminal(void) {
+
+    int i, left_boundary, right_boundary;
+    const int *gInCol;
+
+    /* Get newAlignments gaps stats and copy it */
+    if(_alignment -> Statistics->calculateGapStats() != true) {
+        cerr << endl << "WARNING: Impossible to apply 'terminal-only' method"
+             << endl << endl;
+        return false;
+    }
+    gInCol = _alignment -> sgaps -> getGapsWindow();
+
+    /* Identify left and right borders. First and last columns with no gaps */
+    for(i = 0; i < _alignment -> residNumber && gInCol[i] != 0; i++) ;
+    left_boundary = i;
+
+    for(i = _alignment -> residNumber - 1; i > -1 && gInCol[i] != 0; i--) ;
+    right_boundary = i + 1;
+
+    /* Once the interal boundaries have been established, if these limits exist
+     * then retrieved all columns inbetween both boundaries. Columns out of these
+     * limits will remain selected or not depending on the algorithm applied */
+    for(i = left_boundary; i < right_boundary; i++)
+        if(_alignment -> saveResidues[i] == -1)
+            _alignment -> saveResidues[i] = i;
+
+    return true;
+}
+
+/* Function designed to identify and remove those columns blocks smaller than
+ * a given size */
+void Cleaner::removeSmallerBlocks(int blockSize) {
+
+    int i, j, pos, block;
+
+    if(blockSize == 0)
+        return ;
+
+    /* Traverse the newAlignment looking for blocks greater than BLOCKSIZE, everytime
+     * than a column hasn't been selected, check whether the current block is big
+     * enough to be kept or it should be removed from the final newAlignment */
+    for(i = 0, pos = 0, block = 0; i < _alignment -> residNumber; i++) {
+        if(_alignment -> saveResidues[i] != -1)
+            block++;
+        else {
+            /* Remove columns from blocks smaller than input blocks size */
+            if(block < blockSize)
+                for(j = pos; j <= i; j++)
+                    _alignment -> saveResidues[j] = -1;
+            pos = i + 1;
+            block = 0;
+        }
+    }
+
+    /* Check final block separately since it could happen than last block is not
+     * big enough but because the loop end could provoke to ignore it */
+    if(block < blockSize)
+        for(j = pos; j < i; j++)
+            _alignment -> saveResidues[j] = -1;
+    return ;
+}
+
+/* Function designed to identify columns and sequences composed only by gaps.
+ * Once these columns/sequences have been identified, they are removed from
+ * final newAlignment. */
+newValues Cleaner::removeCols_SeqsAllGaps(void) {
+    int i, j, valid, gaps;
+    bool warnings = false;
+    newValues counter;
+
+    /* Check all valid columns looking for those composed by only gaps */
+    for(i = 0, counter.residues = 0; i < _alignment -> residNumber; i++) {
+        if(_alignment -> saveResidues[i] == -1)
+            continue;
+
+        for(j = 0, valid = 0, gaps = 0; j < _alignment -> sequenNumber; j++) {
+            if (_alignment -> saveSequences[j] == -1)
+                continue;
+            if (_alignment -> sequences[j][i] == '-')
+                gaps ++;
+            valid ++;
+        }
+        /* Once a column has been identified, warm about it and remove it */
+        if(gaps == valid) {
+            if(!warnings)
+                cerr << endl;
+            warnings = true;
+            cerr << "WARNING: Removing column '" << i << "' composed only by gaps"
+                 << endl;
+            _alignment -> saveResidues[i] = -1;
+        } else {
+            counter.residues ++;
+        }
+    }
+
+    /* Check for those selected sequences to see whether there is anyone with
+     * only gaps */
+    for(i = 0, counter.sequences = 0; i < _alignment -> sequenNumber; i++) {
+        if(_alignment -> saveSequences[i] == -1)
+            continue;
+
+        for(j = 0, valid = 0, gaps = 0; j < _alignment -> residNumber; j++) {
+            if(_alignment -> saveResidues[j] == -1)
+                continue;
+            if (_alignment -> sequences[i][j] == '-')
+                gaps ++;
+            valid ++;
+        }
+        /* Warm about it and remove each sequence composed only by gaps */
+        if(gaps == valid) {
+            if(!warnings)
+                cerr << endl;
+            warnings = true;
+
+            if(_alignment -> keepSequences) {
+                cerr << "WARNING: Keeping sequence '" << _alignment -> seqsName[i]
+                     << "' composed only by gaps" << endl;
+                counter.sequences ++;
+            } else {
+                cerr << "WARNING: Removing sequence '" << _alignment -> seqsName[i]
+                     << "' composed only by gaps" << endl;
+                _alignment -> saveSequences[i] = -1;
+            }
+        } else {
+            counter.sequences ++;
+        }
+    }
+    if(warnings)
+        cerr << endl;
+
+    counter.matrix = new string[counter.sequences];
+    counter.seqsName = new string[counter.sequences];
+
+    return counter;
 }
 
 Cleaner::Cleaner(newAlignment *parent) {
