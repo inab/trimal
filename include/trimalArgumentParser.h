@@ -123,6 +123,9 @@ public:
     int perform();
 
     void print_statistics();
+    bool create_or_use_similarity_matrix();
+    void clean_alignment();
+    void set_window_size();
 
 
 

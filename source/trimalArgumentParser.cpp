@@ -1807,6 +1807,7 @@ void trimalArgumentParser::check_cw_argument()
 int trimalArgumentParser::perform()
 {
     if (appearErrors) return -1;
+
     if(conserve == -1)
         conserve  = 0;
     /* -------------------------------------------------------------------- */
@@ -1816,35 +1817,153 @@ int trimalArgumentParser::perform()
     origAlig -> setKeepSeqsHeaderFlag(keepHeader);
 
     /* -------------------------------------------------------------------- */
-    if(windowSize != -1)
-    {
-        gapWindow = windowSize;
-        simWindow = windowSize;
-    }
-    else
-    {
-        if(gapWindow == -1)
-            gapWindow = 0;
-        if(simWindow == -1)
-            simWindow = 0;
-    }
-    origAlig -> setWindowsSize(gapWindow, simWindow);
+    set_window_size();
 
-    /* -------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------- */
     if(blockSize != -1)
         origAlig -> setBlockSize(blockSize);
 
-    /* -------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------- */
     if(outformat != -1)
         origAlig -> setOutputFormat(outformat, shortNames);
+
+    if (create_or_use_similarity_matrix())
+        return -1;
+
+    print_statistics();
+
+    if(backtransFile != NULL)
+        seqMatrix = origAlig -> SequencesMatrix;
     /* -------------------------------------------------------------------- */
 
     /* -------------------------------------------------------------------- */
-    if((strict) || (strictplus) || (automated1) || (simThreshold != -1.0) || (scc == 1) || (sct == 1))
+    clean_alignment();
+    /* -------------------------------------------------------------------- */
+
+    /* -------------------------------------------------------------------- */
+    if(singleAlig == NULL)
+    {
+        singleAlig = origAlig;
+        origAlig = NULL;
+    }
+    /* -------------------------------------------------------------------- */
+
+    /* -------------------------------------------------------------------- */
+    if((outhtml != NULL) && (!appearErrors))
+        if(!origAlig -> ReadWrite ->
+           alignmentSummaryHTML(outhtml, singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
+                                singleAlig -> getCorrespResidues(), singleAlig -> getCorrespSequences(), compareVect))
+        {
+            cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
+            appearErrors = true;
+        }
+    /* -------------------------------------------------------------------- */
+
+    /* -------------------------------------------------------------------- */
+    if(backtransFile != NULL)
+    {
+
+        if(seqNames != NULL) delete [] seqNames;
+        seqNames = new string[singleAlig -> getNumSpecies()];
+
+        singleAlig -> getSequences(seqNames);
+
+        singleAlig = backtranslation -> getTranslationCDS(singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
+                     singleAlig -> getCorrespResidues(), seqNames, seqMatrix, singleAlig);
+    }
+    /* -------------------------------------------------------------------- */
+
+    /* -------------------------------------------------------------------- */
+    if((outfile != NULL) && (!appearErrors))
+    {
+        if(!singleAlig -> ReadWrite -> saveAlignment(outfile))
+        {
+            cerr << endl << "ERROR: It's imposible to generate the output file." << endl << endl;
+            appearErrors = true;
+        }
+    }
+    else if((stats >= 0) && (!appearErrors))
+        singleAlig -> ReadWrite -> printAlignment();
+    /* -------------------------------------------------------------------- */
+
+    /* -------------------------------------------------------------------- */
+    if((colnumbering) && (!appearErrors))
+        singleAlig -> Statistics -> printCorrespondence();
+    /* -------------------------------------------------------------------- */
+
+    /* -------------------------------------------------------------------- */
+    delete singleAlig;
+    delete origAlig;
+    delete[] compAlig;
+
+    delete similMatrix;
+    delete []delColumns;
+
+    delete[] filesToCompare;
+    delete[] compareVect;
+
+    delete[] outfile;
+    delete[] outhtml;
+
+    delete[] infile;
+    delete[] matrix;
+    /* -------------------------------------------------------------------- */
+
+    return 0;
+}
+
+void trimalArgumentParser::print_statistics()
+{
+    if(sgc)
+    {
+        origAlig -> Statistics -> printStatisticsGapsColumns();
+        stats++;
+        if(stats < -1)
+            cout << endl;
+    }
+
+    if(sgt)
+    {
+        origAlig -> Statistics -> printStatisticsGapsTotal();
+        stats++;
+        if(stats < -1)
+            cout << endl;
+    }
+
+    if(scc)
+    {
+        origAlig -> Statistics -> printStatisticsConservationColumns();
+        stats++;
+        if(stats < -1)
+            cout << endl;
+    }
+
+    if(sct)
+    {
+        origAlig -> Statistics -> printStatisticsConservationTotal();
+        stats++;
+        if(stats < -1)
+            cout << endl;
+    }
+
+    if(sident)
+    {
+        origAlig -> printSeqIdentity();
+        stats++;
+        if(stats < -1)
+            cout << endl;
+    }
+
+    if(compareset != -1)
+    {
+        if(sfc)
+            compareFiles::printStatisticsFileColumns(origAlig -> getNumAminos(), compareVect);
+        if(sft)
+            compareFiles::printStatisticsFileAcl(origAlig -> getNumAminos(), compareVect);
+    }
+}
+
+bool trimalArgumentParser::create_or_use_similarity_matrix()
+{
+        if((strict) || (strictplus) || (automated1) || (simThreshold != -1.0) || (scc == 1) || (sct == 1))
     {
         similMatrix = new similarityMatrix();
 
@@ -1861,34 +1980,14 @@ int trimalArgumentParser::perform()
 
         if(!origAlig -> Statistics -> setSimilarityMatrix(similMatrix))
         {
-            cerr << endl << "ERROR: It's imposible to proccess the Similarity Matrix." << endl << endl;
-            return -1;
+            cerr << endl << "ERROR: It's impossible to process the Similarity Matrix." << endl << endl;
+            return true;
         }
     }
-    /* -------S------------------------------------------------------------- */
+}
 
-    /* -------------------------------------------------------------------- */
-
-    print_statistics();
-
-    /* -------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------- */
-    if(compareset != -1)
-    {
-        if(sfc)
-            compareFiles::printStatisticsFileColumns(origAlig -> getNumAminos(), compareVect);
-        if(sft)
-            compareFiles::printStatisticsFileAcl(origAlig -> getNumAminos(), compareVect);
-    }
-    /* -------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------- */
-    if(backtransFile != NULL)
-        seqMatrix = origAlig -> SequencesMatrix;
-    /* -------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------- */
+void trimalArgumentParser::clean_alignment()
+{
     if(nogaps)
         singleAlig = origAlig -> Cleaning -> cleanGaps(0, 0, complementary);
 
@@ -1997,122 +2096,24 @@ int trimalArgumentParser::perform()
             singleAlig = singleAlig -> Cleaning -> cleanNoAllGaps(false);
         }
     }
-    /* -------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------- */
-    if(singleAlig == NULL)
-    {
-        singleAlig = origAlig;
-        origAlig = NULL;
-    }
-    /* -------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------- */
-    if((outhtml != NULL) && (!appearErrors))
-        if(!origAlig -> ReadWrite -> alignmentSummaryHTML(outhtml, singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
-                singleAlig -> getCorrespResidues(), singleAlig -> getCorrespSequences(), compareVect))
-        {
-            cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
-            appearErrors = true;
-        }
-    /* -------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------- */
-    if(backtransFile != NULL)
-    {
-
-        if(seqNames != NULL) delete [] seqNames;
-        seqNames = new string[singleAlig -> getNumSpecies()];
-
-        singleAlig -> getSequences(seqNames);
-
-        singleAlig = backtranslation -> getTranslationCDS(singleAlig -> getNumAminos(), singleAlig -> getNumSpecies(),
-                     singleAlig -> getCorrespResidues(), seqNames, seqMatrix, singleAlig);
-    }
-    /* -------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------- */
-    if((outfile != NULL) && (!appearErrors))
-    {
-        if(!singleAlig -> ReadWrite -> saveAlignment(outfile))
-        {
-            cerr << endl << "ERROR: It's imposible to generate the output file." << endl << endl;
-            appearErrors = true;
-        }
-    }
-    else if((stats >= 0) && (!appearErrors))
-        singleAlig -> ReadWrite -> printAlignment();
-    /* -------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------- */
-    if((colnumbering) && (!appearErrors))
-        singleAlig -> Statistics -> printCorrespondence();
-    /* -------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------- */
-    delete singleAlig;
-    delete origAlig;
-    delete[] compAlig;
-
-    delete similMatrix;
-    delete []delColumns;
-
-    delete[] filesToCompare;
-    delete[] compareVect;
-
-    delete[] outfile;
-    delete[] outhtml;
-
-    delete[] infile;
-    delete[] matrix;
-    /* -------------------------------------------------------------------- */
-
-    return 0;
 }
 
-void trimalArgumentParser::print_statistics()
+void trimalArgumentParser::set_window_size()
 {
-    if(sgc)
+    if(windowSize != -1)
     {
-        origAlig -> Statistics -> printStatisticsGapsColumns();
-        stats++;
-        if(stats < -1)
-            cout << endl;
+        gapWindow = windowSize;
+        simWindow = windowSize;
     }
-
-    if(sgt)
+    else
     {
-        origAlig -> Statistics -> printStatisticsGapsTotal();
-        stats++;
-        if(stats < -1)
-            cout << endl;
+        if(gapWindow == -1)
+            gapWindow = 0;
+        if(simWindow == -1)
+            simWindow = 0;
     }
-
-    if(scc)
-    {
-        origAlig -> Statistics -> printStatisticsConservationColumns();
-        stats++;
-        if(stats < -1)
-            cout << endl;
-    }
-
-    if(sct)
-    {
-        origAlig -> Statistics -> printStatisticsConservationTotal();
-        stats++;
-        if(stats < -1)
-            cout << endl;
-    }
-
-    if(sident)
-    {
-        origAlig -> printSeqIdentity();
-        stats++;
-        if(stats < -1)
-            cout << endl;
-    }
+    origAlig -> setWindowsSize(gapWindow, simWindow);
 }
-
 
 void trimalArgumentParser::menu(void)
 {

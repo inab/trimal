@@ -209,8 +209,8 @@ void ReadWriteManager::getSequences(ostream &file) {
      * it into local memory. Once orientation has been determined, remove gaps
      * from resuting sequences */
     for(i = 0; i < _alignment->sequenNumber; i++)
-        tmpMatrix[i] = (!_alignment->reverse) ? 
-                       utils::removeCharacter('-', _alignment->sequences[i]) : 
+        tmpMatrix[i] = (!_alignment->reverse) ?
+                       utils::removeCharacter('-', _alignment->sequences[i]) :
                        utils::removeCharacter('-', utils::getReverse(_alignment->sequences[i]));
 
     /* Print output set of sequences in FASTA format*/
@@ -1518,8 +1518,8 @@ void ReadWriteManager::alignmentPhylipToFile(ostream &file) {
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
     for(i = 0; i < _alignment->sequenNumber; i++)
-        tmpMatrix[i] = (!_alignment->reverse) ? 
-                       _alignment->sequences[i] : 
+        tmpMatrix[i] = (!_alignment->reverse) ?
+                       _alignment->sequences[i] :
                        utils::getReverse(_alignment->sequences[i]);
 
     /* Depending on if short name flag is activated (limits sequence name up to
@@ -1571,8 +1571,8 @@ void ReadWriteManager::alignmentPhylip3_2ToFile(ostream &file) {
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
     for(i = 0; i < _alignment->sequenNumber; i++)
-        tmpMatrix[i] = (!_alignment->reverse) ? 
-                       _alignment->sequences[i] : 
+        tmpMatrix[i] = (!_alignment->reverse) ?
+                       _alignment->sequences[i] :
                        utils::getReverse(_alignment->sequences[i]);
 
     /* Depending on if short name flag is activated (limits sequence name up to
@@ -1631,7 +1631,7 @@ void ReadWriteManager::alignmentPhylip_PamlToFile(ostream &file) {
      * copy it into local memory */
     for(i = 0; i < _alignment->sequenNumber; i++)
         tmpMatrix[i] = (!_alignment->reverse) ?
-                       _alignment->sequences[i] : 
+                       _alignment->sequences[i] :
                        utils::getReverse(_alignment->sequences[i]);
 
     /* Depending on if short name flag is activated (limits sequence name up to
@@ -1677,7 +1677,7 @@ void ReadWriteManager::alignmentClustalToFile(ostream &file) {
      * copy it into local memory */
     for(i = 0; i < _alignment->sequenNumber; i++)
         tmpMatrix[i] = (!_alignment->reverse) ?
-                       _alignment->sequences[i] : 
+                       _alignment->sequences[i] :
                        utils::getReverse(_alignment->sequences[i]);
 
     /* Compute maximum sequences name length */
@@ -1718,7 +1718,7 @@ void ReadWriteManager::alignmentFastaToFile(ostream &file) {
      * copy it into local memory */
     for(i = 0; i < _alignment->sequenNumber; i++)
         tmpMatrix[i] = (!_alignment->reverse) ?
-                       _alignment->sequences[i] : 
+                       _alignment->sequences[i] :
                        utils::getReverse(_alignment->sequences[i]);
 
     /* Depending on if short name flag is activated (limits sequence name up to
@@ -1773,7 +1773,7 @@ void ReadWriteManager::alignmentNexusToFile(ostream &file) {
      * copy it into local memory */
     for(i = 0; i < _alignment->sequenNumber; i++)
         tmpMatrix[i] = (!_alignment->reverse) ?
-                       _alignment->sequences[i] : 
+                       _alignment->sequences[i] :
                        utils::getReverse(_alignment->sequences[i]);
 
     /* Compute maximum sequences name length */
@@ -1947,7 +1947,7 @@ void ReadWriteManager::alignmentNBRF_PirToFile(ostream &file) {
     delete [] tmpMatrix;
 }
 
-bool ReadWriteManager::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
+bool ReadWriteManager::alignmentSummaryHTML(char *destFile, int residues, int seqs,
   int *selectedRes, int *selectedSeq, float *consValues) {
 
     /* Generate an HTML file with a visual summary about which sequences/columns

@@ -61,9 +61,12 @@ endmacro()
 
 # Create lists of variables and files for testing
 FILE(GLOB files
-        dataset/*clw dataset/*phy
-#        dataset/*msl dataset/*fa
-#        dataset/*pir dataset/*phy2
+        dataset/*clw
+        dataset/*phy
+#        dataset/*msl
+#        dataset/*fa
+#        dataset/*pir
+#        dataset/*phy2
         )
 set(gt 0 1)
 set(st 0 1)
@@ -114,12 +117,10 @@ foreach(file ${files})
                     "-in ${file} -resoverlap ${resoverlap} -seqoverlap ${seqoverlap}")
         endforeach()
     endforeach()
-
 endforeach()
 
 # Force tests to be made each time new_trimal is built
 add_custom_command(
-        TARGET new_trimal
-        POST_BUILD
-        COMMAND ctest
-)
+       TARGET new_trimal
+      POST_BUILD
+     COMMAND ctest)
