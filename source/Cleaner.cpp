@@ -1,15 +1,72 @@
 //
 // Created by bioinfo on 2/06/17.
 //
-#include <utils.h>
-#include <values.h>
+#include "../include/utils.h"
+#include "../include/values.h"
 
-#include <Cleaner.h>
-#include <StatisticsManager.h>
-#include <newAlignment.h>
+#include "../include/Cleaner.h"
+#include "../include/StatisticsManager.h"
+#include "../include/newAlignment.h"
+#include <../../home/vfernandez/git/trimal/include/defines.h>
 
- newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine,
-                                      const int *gInCol, bool complementary) {
+int Cleaner::selectMethod(void) {
+
+    float mx, avg, maxSeq = 0, avgSeq = 0;
+    int i, j;
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Ask for the sequence identities assesment */
+    if(_alignment -> identities == NULL)
+        calculateSeqIdentity();
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Once we have the identities among all possible
+     * combinations between each pair of sequence. We
+     * compute the average identity as well as the
+     * average identity for each sequence with its most
+     * similar one */
+    for(i = 0; i < _alignment -> sequenNumber; i++) {
+        for(j = 0, mx = 0, avg = 0; j < _alignment -> sequenNumber; j++) {
+            if(i != j) {
+                mx  = mx < _alignment -> identities[i][j] ? _alignment -> identities[i][j] : mx;
+                avg += _alignment -> identities[i][j];
+            }
+        }
+        avgSeq += avg/(_alignment -> sequenNumber - 1);
+        maxSeq += mx;
+    }
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    avgSeq = avgSeq/_alignment -> sequenNumber;
+    maxSeq = maxSeq/_alignment -> sequenNumber;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* With the different parameters, we decide wich one
+     * is the best automated method, based on a previous
+     * simulated data benchmarks, to trim the alig */
+    if(avgSeq >= 0.55)      return GAPPYOUT;
+    else if(avgSeq <= 0.38) return STRICT;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Sometimes we need to use more parameters to select
+     * the best automated method, always based on our
+     * benchmarks, to trim the input alignment */
+    else {
+        if(_alignment -> sequenNumber <= 20) return GAPPYOUT;
+        else {
+            if((maxSeq >= 0.5) && (maxSeq <= 0.65)) return GAPPYOUT;
+            else return STRICT;
+        }
+    }
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+}
+
+newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine,
+                                       const int *gInCol, bool complementary) {
 
     int i, j, k, jn, oth, pos, block, *vectAux;
     string *matrixAux, *newSeqsName;
@@ -104,7 +161,7 @@
     }
 
     /* Keep only columns blocks bigger than an input columns block size */
-    if(_alignment->blockSize != 0) {
+    if(blockSize != 0) {
 
         /* Traverse all _alignmentment looking for columns blocks greater than LONGBLOCK,
          * everytime than a column is not selected by the trimming method, check
@@ -115,7 +172,7 @@
                 block++;
             else {
                 /* Remove columns from blocks smaller than input blocks size */
-                if(block < _alignment->blockSize)
+                if(block < blockSize)
                     for(j = pos; j <= i; j++)
                         _alignment->saveResidues[j] = -1;
                 pos = i + 1;
@@ -124,21 +181,21 @@
         }
         /* Check final block separately since it could happen than last block is not
          * big enough but because the loop end could provoke to ignore it */
-        if(block < _alignment->blockSize)
+        if(block < blockSize)
             for(j = pos; j < i; j++)
                 _alignment->saveResidues[j] = -1;
     }
 
     /* If the flag -terminalony is set, apply a method to look for internal
      * boundaries and get back columns inbetween them, if they exist */
-    if(_alignment->terminalGapOnly == true)
+    if(terminalGapOnly == true)
         if(!_alignment->Cleaning->removeOnlyTerminal())
             return NULL;
 
     /* Once the columns/sequences selection is done, turn it around
      * if complementary flag is active */
     if(complementary == true)
-        _alignment->computeComplementaryAlig(true, false);
+        _alignment-> Cleaning -> computeComplementaryAlig(true, false);
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
@@ -152,18 +209,30 @@
     _alignment->fillNewDataStructure(matrixAux, newSeqsName);
 
     /* When we have all parameters, we create the new _alignmentment */
-    newAlig = new newAlignment(_alignment->filename, _alignment->aligInfo,
-                               matrixAux, newSeqsName, _alignment->seqsInfo,
-                            counter.sequences, counter.residues,
-                               _alignment->iformat, _alignment->oformat,
-                               _alignment->shortNames, _alignment->dataType,
-                               _alignment->isAligned, _alignment->reverse,
-                               _alignment->terminalGapOnly, _alignment->keepSequences,
-                               _alignment->keepHeader, _alignment->sequenNumber,
-                               _alignment->residNumber,
-                               _alignment->residuesNumber, _alignment->saveResidues,
-                               _alignment->saveSequences, _alignment->ghWindow, _alignment->shWindow,
-                               _alignment->blockSize, _alignment->identities);
+//     newAlig = new newAlignment(_alignment->filename, _alignment->aligInfo,
+//                                matrixAux, newSeqsName, _alignment->seqsInfo,
+//                             counter.sequences, counter.residues,
+//                                _alignment->iformat, _alignment->oformat,
+//                                _alignment->shortNames, _alignment->dataType,
+//                                _alignment->isAligned, _alignment->reverse,
+//                                terminalGapOnly, keepSequences,
+//                                _alignment->keepHeader, _alignment->sequenNumber,
+//                                _alignment->residNumber,
+//                                _alignment->residuesNumber, _alignment->saveResidues,
+//                                _alignment->saveSequences, _alignment->ghWindow, _alignment->shWindow,
+//                                blockSize, _alignment->identities);
+    newAlig = new newAlignment(*_alignment);
+    
+    newAlig -> sequenNumber = counter.sequences;
+    newAlig -> residNumber = counter.residues;
+    
+    newAlig -> sequences = new string[counter.sequences];
+    newAlig -> seqsName = new string[counter.sequences];
+    for(i = 0; i < counter.sequences; i++)
+    {
+        newAlig -> sequences[i] = matrixAux[i];
+        newAlig -> seqsName[i] = newSeqsName[i];
+    }
 
     /* Deallocate local memory */
     delete[] matrixAux;
@@ -173,8 +242,8 @@
     return newAlig;
 }
 
- newAlignment* Cleaner::cleanByCutValue(float cut, float baseLine,
-                                      const float *ValueVect, bool complementary) {
+newAlignment* Cleaner::cleanByCutValue(float cut, float baseLine,
+                                       const float *ValueVect, bool complementary) {
 
     int i, j, k, jn, oth, pos, block;
     string *matrixAux, *newSeqsName;
@@ -256,7 +325,7 @@
     }
 
     /* Keep only columns blocks bigger than an input columns block size */
-    if(_alignment->blockSize != 0) {
+    if(blockSize != 0) {
 
         /* Traverse all _alignmentment looking for columns blocks greater than LONGBLOCK,
          * everytime than a column is not selected by the trimming method, check
@@ -267,7 +336,7 @@
                 block++;
             else {
                 /* Remove columns from blocks smaller than input blocks size */
-                if(block < _alignment->blockSize)
+                if(block < blockSize)
                     for(j = pos; j <= i; j++)
                         _alignment->saveResidues[j] = -1;
                 pos = i + 1;
@@ -276,21 +345,21 @@
         }
         /* Check final block separately since it could happen than last block is not
          * big enough but because the loop end could provoke to ignore it */
-        if(block < _alignment->blockSize)
+        if(block < blockSize)
             for(j = pos; j < i; j++)
                 _alignment->saveResidues[j] = -1;
     }
 
     /* If the flag -terminalony is set, apply a method to look for internal
      * boundaries and get back columns inbetween them, if they exist */
-    if(_alignment->terminalGapOnly == true)
+    if(terminalGapOnly == true)
         if(!_alignment->Cleaning->removeOnlyTerminal())
             return NULL;
 
     /* Once the columns/sequences selection is done, turn it around
      * if complementary flag is active */
     if(complementary == true)
-        _alignment->computeComplementaryAlig(true, false);
+        _alignment-> Cleaning -> computeComplementaryAlig(true, false);
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
@@ -304,20 +373,33 @@
     _alignment->fillNewDataStructure(matrixAux, newSeqsName);
 
     /* When we have all parameters, we create the new _alignmentment */
-    newAlig = new newAlignment(_alignment->filename, _alignment->aligInfo,
-                               matrixAux, newSeqsName,
-                               _alignment->seqsInfo,
-                            counter.sequences, counter.residues,
-                               _alignment->iformat, _alignment->oformat,
-                               _alignment->shortNames, _alignment->dataType,
-                               _alignment->isAligned, _alignment->reverse,
-                               _alignment->terminalGapOnly, _alignment->keepSequences,
-                               _alignment->keepHeader, _alignment->sequenNumber, _alignment->residNumber,
-                               _alignment->residuesNumber, _alignment->saveResidues,
-                               _alignment->saveSequences, _alignment->ghWindow, _alignment->shWindow,
-                               _alignment->blockSize,
-                               _alignment->identities);
+//     newAlig = new newAlignment(_alignment->filename, _alignment->aligInfo,
+//                                matrixAux, newSeqsName,
+//                                _alignment->seqsInfo,
+//                                counter.sequences, counter.residues,
+//                                _alignment->iformat, _alignment->oformat,
+//                                _alignment->shortNames, _alignment->dataType,
+//                                _alignment->isAligned, _alignment->reverse,
+//                                terminalGapOnly, keepSequences,
+//                                _alignment->keepHeader, _alignment->sequenNumber, _alignment->residNumber,
+//                                _alignment->residuesNumber, _alignment->saveResidues,
+//                                _alignment->saveSequences, _alignment->ghWindow, _alignment->shWindow,
+//                                blockSize,
+//                                _alignment->identities);
 
+    newAlig = new newAlignment(*_alignment);
+    
+    newAlig -> sequenNumber = counter.sequences;
+    newAlig -> residNumber = counter.residues;
+    
+    newAlig -> sequences = new string[counter.sequences];
+    newAlig -> seqsName = new string[counter.sequences];
+    for(i = 0; i < counter.sequences; i++)
+    {
+        newAlig -> sequences[i] = matrixAux[i];
+        newAlig -> seqsName[i] = newSeqsName[i];
+    }
+    
     /* Deallocate local memory */
     delete[] matrixAux;
     delete[] newSeqsName;
@@ -326,8 +408,8 @@
     return newAlig;
 }
 
- newAlignment* Cleaner::cleanByCutValue(double cutGaps, const int *gInCol,
-                                      float baseLine, float cutCons, const float *MDK_Win, bool complementary) {
+newAlignment* Cleaner::cleanByCutValue(double cutGaps, const int *gInCol,
+                                       float baseLine, float cutCons, const float *MDK_Win, bool complementary) {
 
     int i, j, k, oth, pos, block, jn, blGaps, *vectAuxGaps;
     string *matrixAux, *newSeqsName;
@@ -446,7 +528,7 @@
     }
 
     /* Keep only columns blocks bigger than an input columns block size */
-    if(_alignment->blockSize != 0) {
+    if(blockSize != 0) {
 
         /* Traverse all _alignmentment looking for columns blocks greater than LONGBLOCK,
          * everytime than a column is not selected by the trimming method, check
@@ -457,7 +539,7 @@
                 block++;
             else {
                 /* Remove columns from blocks smaller than input blocks size */
-                if(block < _alignment->blockSize)
+                if(block < blockSize)
                     for(j = pos; j <= i; j++)
                         _alignment->saveResidues[j] = -1;
                 pos = i + 1;
@@ -466,21 +548,21 @@
         }
         /* Check final block separately since it could happen than last block is not
          * big enough but because the loop end could provoke to ignore it */
-        if(block < _alignment->blockSize)
+        if(block < blockSize)
             for(j = pos; j < i; j++)
                 _alignment->saveResidues[j] = -1;
     }
 
     /* If the flag -terminalony is set, apply a method to look for internal
      * boundaries and get back columns inbetween them, if they exist */
-    if(_alignment->terminalGapOnly == true)
+    if(terminalGapOnly == true)
         if(!_alignment->Cleaning->removeOnlyTerminal())
             return NULL;
 
     /* Once the columns/sequences selection is done, turn it around
      * if complementary flag is active */
     if(complementary == true)
-        _alignment->computeComplementaryAlig(true, false);
+        _alignment->Cleaning->computeComplementaryAlig(true, false);
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
@@ -494,19 +576,31 @@
     _alignment->fillNewDataStructure(matrixAux, newSeqsName);
 
     /* When we have all parameters, we create the new _alignmentment */
-    newAlig = new newAlignment(_alignment->filename, _alignment->aligInfo,
-                               matrixAux, newSeqsName, _alignment->seqsInfo,
-                            counter.sequences, counter.residues,
-                               _alignment->iformat, _alignment->oformat,
-                               _alignment->shortNames, _alignment->dataType,
-                               _alignment->isAligned, _alignment->reverse, _alignment->terminalGapOnly,
-                               _alignment->keepSequences, _alignment->keepHeader,
-                               _alignment->sequenNumber, _alignment->residNumber,
-                               _alignment->residuesNumber, _alignment->saveResidues,
-                               _alignment->saveSequences,
-                               _alignment->ghWindow, _alignment->shWindow, _alignment->blockSize,
-                               _alignment->identities);
-
+//     newAlig = new newAlignment(_alignment->filename, _alignment->aligInfo,
+//                                matrixAux, newSeqsName, _alignment->seqsInfo,
+//                                counter.sequences, counter.residues,
+//                                _alignment->iformat, _alignment->oformat,
+//                                _alignment->shortNames, _alignment->dataType,
+//                                _alignment->isAligned, _alignment->reverse, terminalGapOnly,
+//                                keepSequences, _alignment->keepHeader,
+//                                _alignment->sequenNumber, _alignment->residNumber,
+//                                _alignment->residuesNumber, _alignment->saveResidues,
+//                                _alignment->saveSequences,
+//                                _alignment->ghWindow, _alignment->shWindow, blockSize,
+//                                _alignment->identities);
+    newAlig = new newAlignment(*_alignment);
+    
+    newAlig -> sequenNumber = counter.sequences;
+    newAlig -> residNumber = counter.residues;
+    
+    newAlig -> sequences = new string[counter.sequences];
+    newAlig -> seqsName = new string[counter.sequences];
+    for(i = 0; i < counter.sequences; i++)
+    {
+        newAlig -> sequences[i] = matrixAux[i];
+        newAlig -> seqsName[i] = newSeqsName[i];
+    }
+    
     /* Deallocate local memory */
     delete[] matrixAux;
     delete[] newSeqsName;
@@ -515,8 +609,8 @@
     return newAlig;
 }
 
- newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut,
-                                  const float *MDK_W, bool complementary, bool variable) {
+newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut,
+                                   const float *MDK_W, bool complementary, bool variable) {
 
     int i, num, lenBlock;
     newAlignment *newAlig;
@@ -537,14 +631,14 @@
     /* Special cases:
      * Second column */
     if((_alignment->saveResidues[0] != -1) && (_alignment->saveResidues[2] != -1)
-       && (_alignment->saveResidues[3] != -1))
+            && (_alignment->saveResidues[3] != -1))
         _alignment->saveResidues[1] = 1;
     else
         _alignment->saveResidues[1] = -1;
 
     /* Second last column  */
     if((_alignment->saveResidues[_alignment->residNumber-1] != -1) && (_alignment->saveResidues[_alignment->residNumber-3] != -1)
-       && (_alignment->saveResidues[_alignment->residNumber-4] != -1))
+            && (_alignment->saveResidues[_alignment->residNumber-4] != -1))
         _alignment->saveResidues[(_alignment->residNumber - 2)] = (_alignment->residNumber - 2);
     else
         _alignment->saveResidues[(_alignment->residNumber - 2)] = -1;
@@ -573,22 +667,22 @@
     }
 
     /* Allow to change minimal block size */
-    _alignment->blockSize = _alignment->blockSize > 0 ? _alignment->blockSize : lenBlock;
+    blockSize = blockSize > 0 ? blockSize : lenBlock;
 
     /* Keep only columns blocks bigger than either a computed dinamically or
      * set by the user block size */
-    _alignment->Cleaning->removeSmallerBlocks(_alignment->blockSize);
+    _alignment->Cleaning->removeSmallerBlocks(blockSize);
 
     /* If the flag -terminalony is set, apply a method to look for internal
      * boundaries and get back columns inbetween them, if they exist */
-    if(_alignment->terminalGapOnly == true)
-        if(!_alignment->Cleaning->removeOnlyTerminal())
+    if(terminalGapOnly == true)
+        if(!removeOnlyTerminal())
             return NULL;
 
     /* Once the columns/sequences selection is done, turn it around
      * if complementary flag is active */
     if(complementary == true)
-        _alignment->computeComplementaryAlig(true, false);
+        computeComplementaryAlig(true, false);
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
@@ -609,32 +703,43 @@
 
     /* When we have all parameters, we create the new _alignmentment */
     //~ newAlig = new _alignmentment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, counter.sequences, counter.residues,
-    newAlig = new newAlignment(_alignment->filename,
-                               _alignment->aligInfo,
-                               counter.matrix,
-                               counter.seqsName,
-                               _alignment->seqsInfo,
-                               counter.sequences,
-                               counter.residues,
-                               _alignment->iformat,
-                               _alignment->oformat,
-                               _alignment->shortNames,
-                               _alignment->dataType,
-                               _alignment->isAligned,
-                               _alignment->reverse,
-                               _alignment->terminalGapOnly,
-                               _alignment->keepSequences,
-                               _alignment->keepHeader,
-                               _alignment->sequenNumber,
-                               _alignment->residNumber,
-                               _alignment->residuesNumber,
-                               _alignment->saveResidues,
-                               _alignment->saveSequences,
-                               _alignment->ghWindow,
-                               _alignment->shWindow,
-                               _alignment->blockSize,
-                               _alignment->identities);
-
+//     newAlig = new newAlignment(_alignment->filename,
+//                                _alignment->aligInfo,
+//                                counter.matrix,
+//                                counter.seqsName,
+//                                _alignment->seqsInfo,
+//                                counter.sequences,
+//                                counter.residues,
+//                                _alignment->iformat,
+//                                _alignment->oformat,
+//                                _alignment->shortNames,
+//                                _alignment->dataType,
+//                                _alignment->isAligned,
+//                                _alignment->reverse,
+//                                terminalGapOnly,
+//                                keepSequences,
+//                                _alignment->keepHeader,
+//                                _alignment->sequenNumber,
+//                                _alignment->residNumber,
+//                                _alignment->residuesNumber,
+//                                _alignment->saveResidues,
+//                                _alignment->saveSequences,
+//                                _alignment->ghWindow,
+//                                _alignment->shWindow,
+//                                blockSize,
+//                                _alignment->identities);
+    newAlig = new newAlignment(*_alignment);
+    
+    newAlig -> sequenNumber = counter.sequences;
+    newAlig -> residNumber = counter.residues;
+    
+    newAlig -> sequences = new string[counter.sequences];
+    newAlig -> seqsName = new string[counter.sequences];
+    for(i = 0; i < counter.sequences; i++)
+    {
+        newAlig -> sequences[i] = counter.matrix[i];
+        newAlig -> seqsName[i] = counter.seqsName[i];
+    }
     /* Deallocate local memory */
     //~ delete[] matrixAux;
     //~ delete[] newSeqsName;
@@ -643,8 +748,8 @@
     return newAlig;
 }
 
- newAlignment* Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
-                                      bool complementary) {
+newAlignment* Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
+                                       bool complementary) {
 
     string *matrixAux, *newSeqsName;
     newAlignment *newAlig;
@@ -660,7 +765,7 @@
     /* Once the columns/sequences selection is done, turn it around
      * if complementary flag is active */
     if(complementary == true)
-        _alignment->computeComplementaryAlig(false, true);
+        computeComplementaryAlig(false, true);
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
@@ -674,12 +779,28 @@
     _alignment->fillNewDataStructure(matrixAux, newSeqsName);
 
     /* When we have all parameters, we create the new _alignmentment */
-    newAlig = new newAlignment(_alignment->filename,
-                               _alignment->aligInfo, matrixAux, newSeqsName,  _alignment->seqsInfo,
-                            counter.sequences, counter.residues,  _alignment->iformat,  _alignment->oformat,  _alignment->shortNames,  _alignment->dataType,
-                               _alignment->isAligned,  _alignment->reverse, _alignment->terminalGapOnly,  _alignment->keepSequences,  _alignment->keepHeader,  _alignment->sequenNumber, _alignment->residNumber,
-                               _alignment->residuesNumber, _alignment->saveResidues,  _alignment->saveSequences,  _alignment->ghWindow,  _alignment->shWindow, _alignment->blockSize,
-                               _alignment->identities);
+//     newAlig = new newAlignment(_alignment->filename,
+//                                _alignment->aligInfo, matrixAux, newSeqsName,  _alignment->seqsInfo,
+//                                counter.sequences, counter.residues,  _alignment->iformat,  
+//                                _alignment->oformat,  _alignment->shortNames,  _alignment->dataType,
+//                                _alignment->isAligned,  _alignment->reverse, terminalGapOnly,  
+//                                keepSequences,  _alignment->keepHeader,  _alignment->sequenNumber, _alignment->residNumber,
+//                                _alignment->residuesNumber, _alignment->saveResidues,  
+//                                _alignment->saveSequences,  _alignment->ghWindow,  _alignment->shWindow, blockSize,
+//                                _alignment->identities);
+
+    newAlig = new newAlignment(*_alignment);
+    
+    newAlig -> sequenNumber = counter.sequences;
+    newAlig -> residNumber = counter.residues;
+    
+    newAlig -> sequences = new string[counter.sequences];
+    newAlig -> seqsName = new string[counter.sequences];
+    for(i = 0; i < counter.sequences; i++)
+    {
+        newAlig -> sequences[i] = matrixAux[i];
+        newAlig -> seqsName[i] = newSeqsName[i];
+    }
 
     /* Deallocate local memory */
     delete [] matrixAux;
@@ -689,7 +810,7 @@
     return newAlig;
 }
 
- newAlignment* Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementary) {
+newAlignment* Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementary) {
 
     newAlignment *ret;
     double cut;
@@ -719,7 +840,7 @@
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
- newAlignment* Cleaner::cleanConservation(float baseLine, float conservationPct, bool complementary) {
+newAlignment* Cleaner::cleanConservation(float baseLine, float conservationPct, bool complementary) {
 
     newAlignment *ret;
     float cut;
@@ -749,7 +870,7 @@
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
- newAlignment* Cleaner::clean(float baseLine, float GapsPct, float conservationPct, bool complementary) {
+newAlignment* Cleaner::clean(float baseLine, float GapsPct, float conservationPct, bool complementary) {
 
     newAlignment *ret;
     float cutCons;
@@ -788,7 +909,7 @@
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
- newAlignment* Cleaner::cleanCompareFile(float cutpoint, float baseLine, float *vectValues, bool complementary) {
+newAlignment* Cleaner::cleanCompareFile(float cutpoint, float baseLine, float *vectValues, bool complementary) {
 
     newAlignment *ret;
     float cut, *vectAux;
@@ -853,7 +974,7 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Depending on the kind of newAlignment, we have
      * different indetermination symbol */
-    if(_alignment -> getTypeAlignment() == AAType)
+    if(_alignment -> getAlignmentType() == AAType)
         indet = 'X';
     else
         indet = 'N';
@@ -879,10 +1000,10 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
                 if(_alignment -> sequences[i][j] == _alignment -> sequences[k][j])
                     hit++;
 
-                    /* If the element of sequence selected isn't a 'X' nor
-                     * 'N' (indetermination) or a '-' (gap) and the element
-                     * of sequence considered isn't a  a 'X' nor 'N'
-                     * (indetermination) or a '-' (gap), computes a hit */
+                /* If the element of sequence selected isn't a 'X' nor
+                 * 'N' (indetermination) or a '-' (gap) and the element
+                 * of sequence considered isn't a  a 'X' nor 'N'
+                 * (indetermination) or a '-' (gap), computes a hit */
                 else if((_alignment -> sequences[i][j] != indet) && (_alignment -> sequences[i][j] != '-')
                         && (_alignment -> sequences[k][j] != indet) && (_alignment -> sequences[k][j] != '-'))
                     hit++;
@@ -900,10 +1021,10 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
                 if(_alignment -> sequences[i][j] == _alignment -> sequences[k][j])
                     hit++;
 
-                    /* If the element of sequence selected isn't a 'X' nor
-                     * 'N' (indetermination) or a '-' (gap) and the element
-                     * of sequence considered isn't a  a 'X' nor 'N'
-                     * (indetermination) or a '-' (gap), computes a hit */
+                /* If the element of sequence selected isn't a 'X' nor
+                 * 'N' (indetermination) or a '-' (gap) and the element
+                 * of sequence considered isn't a  a 'X' nor 'N'
+                 * (indetermination) or a '-' (gap), computes a hit */
                 else if((_alignment -> sequences[i][j] != indet) && (_alignment -> sequences[i][j] != '-')
                         && (_alignment -> sequences[k][j] != indet) && (_alignment -> sequences[k][j] != '-'))
                     hit++;
@@ -934,7 +1055,7 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
 }
 
 
- newAlignment* Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, bool complementary) {
+newAlignment* Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, bool complementary) {
 
     float *overlapVector;
     newAlignment *newAlig;
@@ -968,7 +1089,7 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
- newAlignment* Cleaner::clean2ndSlope(bool complementarity) {
+newAlignment* Cleaner::clean2ndSlope(bool complementarity) {
 
     newAlignment *ret;
     int cut;
@@ -998,7 +1119,7 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
- newAlignment* Cleaner::cleanCombMethods(bool complementarity, bool variable) {
+newAlignment* Cleaner::cleanCombMethods(bool complementarity, bool variable) {
 
     float simCut, first20Point, last80Point, *simil, *vectAux;
     int i, j, acm, gapCut, *positions, *gaps;
@@ -1110,7 +1231,7 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
- newAlignment* Cleaner::cleanNoAllGaps(bool complementarity) {
+newAlignment* Cleaner::cleanNoAllGaps(bool complementarity) {
 
     newAlignment *ret;
 
@@ -1151,7 +1272,7 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Ask for the sequence identities assesment */
     if(_alignment->identities == NULL)
-        _alignment->calculateSeqIdentity();
+        calculateSeqIdentity();
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1288,8 +1409,9 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
 /* Sets the condition to remove only terminal gaps after applying any
  * trimming method or not.   */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void Cleaner::trimTerminalGaps(bool terminalOnly_) {
-    _alignment->terminalGapOnly = terminalOnly_;
+void Cleaner::trimTerminalGaps(bool terminalOnly_)
+{
+    terminalGapOnly = terminalOnly_;
 }
 
 newAlignment * Cleaner::getClustering(float identityThreshold) {
@@ -1301,7 +1423,7 @@ newAlignment * Cleaner::getClustering(float identityThreshold) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Get the representative member for each cluster
      * given a maximum identity threshold */
-    clustering = _alignment -> calculateRepresentativeSeq(identityThreshold);
+    clustering = calculateRepresentativeSeq(identityThreshold);
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1332,18 +1454,32 @@ newAlignment * Cleaner::getClustering(float identityThreshold) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* When we have all parameters, we create the new
      * alignment */
-    newAlig = new newAlignment(_alignment ->filename, _alignment ->aligInfo,
-                               matrixAux, newSeqsName, _alignment ->seqsInfo,
-                               clustering[0], _alignment ->residNumber,
-                               _alignment ->iformat, _alignment ->oformat, _alignment ->shortNames,
-                               _alignment ->dataType, _alignment ->isAligned,
-                               _alignment ->reverse, _alignment ->terminalGapOnly,
-                               _alignment ->keepSequences, _alignment ->keepHeader,
-                               _alignment ->sequenNumber,
-                               _alignment ->residNumber, _alignment ->residuesNumber,
-                               _alignment ->saveResidues, _alignment ->saveSequences,
-                               _alignment ->ghWindow, _alignment ->shWindow,
-                               _alignment ->blockSize, _alignment ->identities);
+//     newAlig = new newAlignment(_alignment ->filename, _alignment ->aligInfo,
+//                                matrixAux, newSeqsName, _alignment ->seqsInfo,
+//                                clustering[0], _alignment ->residNumber,
+//                                _alignment ->iformat, _alignment ->oformat, _alignment ->shortNames,
+//                                _alignment ->dataType, _alignment ->isAligned,
+//                                _alignment ->reverse, _alignment ->terminalGapOnly,
+//                                _alignment ->keepSequences, _alignment ->keepHeader,
+//                                _alignment ->sequenNumber,
+//                                _alignment ->residNumber, _alignment ->residuesNumber,
+//                                _alignment ->saveResidues, _alignment ->saveSequences,
+//                                _alignment ->ghWindow, _alignment ->shWindow,
+//                                _alignment ->blockSize, _alignment ->identities);
+    
+    newAlig = new newAlignment(*_alignment);
+    
+     newAlig -> sequenNumber = clustering[0];
+//     newAlig -> residNumber = _alignment.residues;
+    
+    newAlig -> sequences = new string[clustering[0]];
+    newAlig -> seqsName = new string[clustering[0]];
+    for(i = 0; i < clustering[0]; i++)
+    {
+        newAlig -> sequences[i] = matrixAux[i];
+        newAlig -> seqsName[i] = newSeqsName[i];
+    }
+    
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1363,7 +1499,7 @@ newAlignment * Cleaner::getClustering(float identityThreshold) {
 /* Remove those columns, expressed as range, set by the user. It can return
  * the complementary alignmnet if appropiate flags is set. */
 newAlignment* Cleaner::removeColumns(int *columns, int init, int size,
-                                    bool complementary) {
+                                     bool complementary) {
 
     string *matrixAux, *newSeqsName;
     newAlignment *newAlig;
@@ -1378,7 +1514,7 @@ newAlignment* Cleaner::removeColumns(int *columns, int init, int size,
     /* Once the columns/sequences selection is done, turn it around
      * if complementary flag is active */
     if(complementary == true)
-        _alignment -> computeComplementaryAlig(true, false);
+        computeComplementaryAlig(true, false);
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
@@ -1392,25 +1528,38 @@ newAlignment* Cleaner::removeColumns(int *columns, int init, int size,
     _alignment -> fillNewDataStructure(matrixAux, newSeqsName);
 
     /* When we have all parameters, we create the new alignment */
-    newAlig = new newAlignment(
-            _alignment -> filename,
-            _alignment -> aligInfo,
-            matrixAux, newSeqsName,
-            _alignment -> seqsInfo,
-            counter.sequences, counter.residues,
-            _alignment -> iformat, _alignment -> oformat,
-            _alignment -> shortNames, _alignment -> dataType,
-            _alignment -> isAligned, _alignment -> reverse,
-            _alignment -> terminalGapOnly, _alignment -> keepSequences,
-            _alignment -> keepHeader, _alignment -> sequenNumber,
-            _alignment -> residNumber,
-            _alignment -> residuesNumber,
-            _alignment -> saveResidues,
-            _alignment -> saveSequences,
-            _alignment -> ghWindow,
-            _alignment -> shWindow,
-            _alignment -> blockSize,
-            _alignment -> identities);
+//     newAlig = new newAlignment(
+//         _alignment -> filename,
+//         _alignment -> aligInfo,
+//         matrixAux, newSeqsName,
+//         _alignment -> seqsInfo,
+//         counter.sequences, counter.residues,
+//         _alignment -> iformat, _alignment -> oformat,
+//         _alignment -> shortNames, _alignment -> dataType,
+//         _alignment -> isAligned, _alignment -> reverse,
+//         _alignment -> terminalGapOnly, keepSequences,
+//         _alignment -> keepHeader, _alignment -> sequenNumber,
+//         _alignment -> residNumber,
+//         _alignment -> residuesNumber,
+//         _alignment -> saveResidues,
+//         _alignment -> saveSequences,
+//         _alignment -> ghWindow,
+//         _alignment -> shWindow,
+//         _alignment -> blockSize,
+//         _alignment -> identities);
+
+    newAlig = new newAlignment(*_alignment);
+    
+    newAlig -> sequenNumber = counter.sequences;
+    newAlig -> residNumber = counter.residues;
+    
+    newAlig -> sequences = new string[counter.sequences];
+    newAlig -> seqsName = new string[counter.sequences];
+    for(i = 0; i < counter.sequences; i++)
+    {
+        newAlig -> sequences[i] = matrixAux[i];
+        newAlig -> seqsName[i] = newSeqsName[i];
+    }
 
     /* Deallocate local memory */
     delete[] matrixAux;
@@ -1424,7 +1573,7 @@ newAlignment* Cleaner::removeColumns(int *columns, int init, int size,
  * the user. The method also can return the complementary alignment, it means,
  * those sequences that originally should be removed from the input alignment */
 newAlignment *Cleaner::removeSequences(int *seqs, int init, int size,
-                                      bool complementary) {
+                                       bool complementary) {
 
     string *matrixAux, *newSeqsName;
     newAlignment *newAlig;
@@ -1439,7 +1588,7 @@ newAlignment *Cleaner::removeSequences(int *seqs, int init, int size,
     /* Once the columns/sequences selection is done, turn it around
      * if complementary flag is active */
     if(complementary == true)
-        _alignment -> computeComplementaryAlig(false, true);
+        computeComplementaryAlig(false, true);
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
@@ -1453,25 +1602,38 @@ newAlignment *Cleaner::removeSequences(int *seqs, int init, int size,
     _alignment -> fillNewDataStructure(matrixAux, newSeqsName);
 
     /* When we have all parameters, we create the new alignment */
-    newAlig = new newAlignment(
-            _alignment -> filename,
-            _alignment -> aligInfo,
-            matrixAux, newSeqsName,
-            _alignment -> seqsInfo,
-            counter.sequences, counter.residues,
-            _alignment -> iformat, _alignment -> oformat,
-            _alignment -> shortNames, _alignment -> dataType,
-            _alignment -> isAligned, _alignment -> reverse,
-            _alignment -> terminalGapOnly, _alignment -> keepSequences,
-            _alignment -> keepHeader, _alignment -> sequenNumber,
-            _alignment -> residNumber,
-            _alignment -> residuesNumber,
-            _alignment -> saveResidues,
-            _alignment -> saveSequences,
-            _alignment -> ghWindow,
-            _alignment -> shWindow,
-            _alignment -> blockSize,
-            _alignment -> identities);
+//     newAlig = new newAlignment(
+//         _alignment -> filename,
+//         _alignment -> aligInfo,
+//         matrixAux, newSeqsName,
+//         _alignment -> seqsInfo,
+//         counter.sequences, counter.residues,
+//         _alignment -> iformat, _alignment -> oformat,
+//         _alignment -> shortNames, _alignment -> dataType,
+//         _alignment -> isAligned, _alignment -> reverse,
+//         _alignment -> terminalGapOnly, keepSequences,
+//         _alignment -> keepHeader, _alignment -> sequenNumber,
+//         _alignment -> residNumber,
+//         _alignment -> residuesNumber,
+//         _alignment -> saveResidues,
+//         _alignment -> saveSequences,
+//         _alignment -> ghWindow,
+//         _alignment -> shWindow,
+//         _alignment -> blockSize,
+//         _alignment -> identities);
+
+    newAlig = new newAlignment(*_alignment);
+    
+    newAlig -> sequenNumber = counter.sequences;
+    newAlig -> residNumber = counter.residues;
+    
+    newAlig -> sequences = new string[counter.sequences];
+    newAlig -> seqsName = new string[counter.sequences];
+    for(i = 0; i < counter.sequences; i++)
+    {
+        newAlig -> sequences[i] = matrixAux[i];
+        newAlig -> seqsName[i] = newSeqsName[i];
+    }
 
     /* Free local memory */
     delete [] matrixAux;
@@ -1600,7 +1762,7 @@ newValues Cleaner::removeCols_SeqsAllGaps(void) {
                 cerr << endl;
             warnings = true;
 
-            if(_alignment -> keepSequences) {
+            if(keepSequences) {
                 cerr << "WARNING: Keeping sequence '" << _alignment -> seqsName[i]
                      << "' composed only by gaps" << endl;
                 counter.sequences ++;
@@ -1622,6 +1784,176 @@ newValues Cleaner::removeCols_SeqsAllGaps(void) {
     return counter;
 }
 
+void Cleaner::calculateSeqIdentity(void) {
+
+    int i, j, k, hit, dst;
+    char indet;
+
+    /* Depending on alignment type, indetermination symbol will be one or other */
+    indet = _alignment -> getAlignmentType() == AAType ? 'X' : 'N';
+
+    /* Create identities matrix to store identities scores */
+    _alignment -> identities = new float*[_alignment -> sequenNumber];
+
+    /* For each seq, compute its identity score against the others in the MSA */
+    for(i = 0; i < _alignment -> sequenNumber; i++) {
+        _alignment -> identities[i] = new float[_alignment -> sequenNumber];
+
+        /* It's a symmetric matrix, copy values that have been already computed */
+        for(j = 0; j < i; j++)
+            _alignment -> identities[i][j] = _alignment -> identities[j][i];
+        _alignment -> identities[i][i] = 0;
+
+        /* Compute identity scores for the current sequence against the rest */
+        for(j = i + 1; j < _alignment -> sequenNumber; j++) {
+            for(k = 0, hit = 0, dst = 0; k < _alignment -> residNumber; k++) {
+                /* If one of the two positions is a valid residue,
+                 * count it for the common length */
+                if(((_alignment -> sequences[i][k] != indet) && (_alignment -> sequences[i][k] != '-')) ||
+                        ((_alignment -> sequences[j][k] != indet) && (_alignment -> sequences[j][k] != '-'))) {
+                    dst++;
+                    /* If both positions are the same, count a hit */
+                    if(_alignment -> sequences[i][k] == _alignment -> sequences[j][k])
+                        hit++;
+                }
+            }
+
+            /* Identity score between two sequences is the ratio of identical residues
+             * by the total length (common and no-common residues) among them */
+            _alignment -> identities[i][j] = (float) hit/dst;
+        }
+    }
+}
+
+void Cleaner::calculateRelaxedSeqIdentity(void) {
+    /* Raw approximation of sequence identity computation designed for reducing
+     * comparisons for huge alignemnts */
+
+    int i, j, k, hit;
+
+    /* Create identities matrix to store identities scores */
+    _alignment -> identities = new float*[_alignment -> sequenNumber];
+
+    /* For each seq, compute its identity score against the others in the MSA */
+    for(i = 0; i < _alignment -> sequenNumber; i++) {
+        _alignment -> identities[i] = new float[_alignment -> sequenNumber];
+
+        /* It's a symmetric matrix, copy values that have been already computed */
+        for(j = 0; j < i; j++)
+            _alignment -> identities[i][j] = _alignment -> identities[j][i];
+        _alignment -> identities[i][i] = 0;
+
+        /* Compute identity score between the selected sequence and the others */
+        for(j = i + 1; j < _alignment -> sequenNumber; j++) {
+            for(k = 0, hit = 0; k < _alignment -> residNumber; k++) {
+                /* If both positions are the same, count a hit */
+                if(_alignment -> sequences[i][k] == _alignment -> sequences[j][k])
+                    hit++;
+            }
+            /* Raw identity score is computed as the ratio of identical residues between
+             * alignment length */
+            _alignment -> identities[i][j] = (float) hit/_alignment -> residNumber;
+        }
+    }
+}
+
+int* Cleaner::calculateRepresentativeSeq(float maximumIdent) {
+
+    int i, j, pos, clusterNum, **seqs;
+    int *cluster;
+    static int *repres;
+    float max;
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Ask for the sequence identities assesment */
+    if(_alignment -> identities == NULL)
+        _alignment ->  Cleaning ->  calculateSeqIdentity();
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    seqs = new int*[_alignment -> sequenNumber];
+    for(i = 0; i < _alignment -> sequenNumber; i++) {
+        seqs[i] = new int[2];
+        seqs[i][0] = utils::removeCharacter('-', _alignment -> sequences[i]).size();
+        seqs[i][1] = i;
+    }
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    utils::quicksort(seqs, 0, _alignment -> sequenNumber-1);
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    cluster = new int[_alignment -> sequenNumber];
+    cluster[0] = seqs[_alignment -> sequenNumber - 1][1];
+    clusterNum = 1;
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    for(i = _alignment -> sequenNumber - 2; i >= 0; i--) {
+
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        for(j = 0, max = 0, pos = -1; j < clusterNum; j++) {
+            if(_alignment -> identities[seqs[i][1]][cluster[j]] > maximumIdent) {
+                if(_alignment -> identities[seqs[i][1]][cluster[j]] > max) {
+                    max = _alignment -> identities[seqs[i][1]][cluster[j]];
+                    pos = j;
+                }
+            }
+        }
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        if(pos == -1) {
+            cluster[j] = seqs[i][1];
+            clusterNum++;
+        }
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    }
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    repres = new int[clusterNum + 1];
+    repres[0] = clusterNum;
+    for(i = 0; i < clusterNum; i++)
+        repres[i+1] = cluster[i];
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Deallocate dinamic memory */
+    for(i = 0; i < _alignment -> sequenNumber; i++)
+        delete [] seqs[i];
+
+    delete [] cluster;
+    delete [] seqs;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    return repres;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+}
+
+void Cleaner::computeComplementaryAlig(bool residues, bool sequences) {
+    int i;
+
+    for(i = 0; i < _alignment -> residNumber && residues; i++)
+        _alignment -> saveResidues[i] = (_alignment -> saveResidues[i] == -1) ? i : -1;
+
+    for(i = 0; i < _alignment -> sequenNumber && sequences; i++)
+        _alignment -> saveSequences[i] = (_alignment -> saveSequences[i] == -1) ? i : -1;
+}
+
+
 Cleaner::Cleaner(newAlignment *parent) {
     _alignment = parent;
+    
+    terminalGapOnly     = false;
+    keepSequences       = false;
+    
+    blockSize =     0;
+}
+
+Cleaner::Cleaner(newAlignment *parent, Cleaner* mold) {
+    _alignment = parent;
+    
+    terminalGapOnly     = mold -> terminalGapOnly;
+    keepSequences       = mold -> keepSequences;
+    blockSize           = mold -> blockSize;
 }

@@ -7,6 +7,9 @@ set(CMAKE_CXX_STANDARD 11)
 # Make bin folder to output the compiled programs
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
+# Set the debug flag
+SET(CMAKE_BUILD_TYPE Debug)
+
 # Include the include folder. Yeah. I love redudancy
 include_directories(include)
 
@@ -24,13 +27,24 @@ set(preview
         source/StatisticsManager.cpp
         source/ReadWriteManager.cpp
         source/trimalArgumentParser.cpp
+        source/ReadWriteMS/ReadWriteMachineState.cpp
+        source/ReadWriteMS/readwrites.cpp
         )
 
+# Include all states of ReadWriteMachineState
+FILE (GLOB states source/ReadWriteMS/*_state.cpp)
+# message("${states}")
+# message("${preview}")
+
+# add_library(states OBJECT ${states} ${preview})
+add_library(common OBJECT ${preview} ${states})
+        
 # Add the executables
-add_executable(trimal source/main.cpp ${preview})
-add_executable(new_trimal source/newmain.cpp ${preview})
-add_executable(readal source/readAl.cpp ${preview})
-add_executable(statal source/statAl.cpp ${preview})
+add_executable(trimal source/main.cpp $<TARGET_OBJECTS:common>)
+add_executable(new_trimal source/newmain.cpp $<TARGET_OBJECTS:common>)
+add_executable(readal source/readAl.cpp $<TARGET_OBJECTS:common>)
+add_executable(statal source/statAl.cpp $<TARGET_OBJECTS:common>)
+add_executable(readalMS source/ReadWriteMS/ReadWriteMSmain.cpp $<TARGET_OBJECTS:common>)
 
 # Link the mathematical library
 target_link_libraries(trimal m)
@@ -45,9 +59,9 @@ add_dependencies(new_trimal trimal)
 
 # Basic tests
 include(CTest)
-add_test(Crash_Trimal trimal)
-add_test(Crash_Readal readal)
-add_test(Crash_Statal statal)
+add_test(Crash_Trimal bin/trimal)
+add_test(Crash_Readal bin/readal)
+add_test(Crash_Statal bin/statal)
 
 # Macro that uses the compareOutput cmake to create tests
 macro(compare_outputs test_name program_a program_b arguments)
@@ -63,10 +77,10 @@ endmacro()
 FILE(GLOB files
         dataset/*clw
         dataset/*phy
-#        dataset/*msl
-#        dataset/*fa
-#        dataset/*pir
-#        dataset/*phy2
+       dataset/*msl
+       dataset/*fa
+       dataset/*pir
+       dataset/*phy2
         )
 set(gt 0 1)
 set(st 0 1)
@@ -119,8 +133,8 @@ foreach(file ${files})
     endforeach()
 endforeach()
 
-# Force tests to be made each time new_trimal is built
-add_custom_command(
-       TARGET new_trimal
-      POST_BUILD
-     COMMAND ctest)
+# # Force tests to be made each time new_trimal is built
+# add_custom_command(
+#        TARGET new_trimal
+#       POST_BUILD
+#      COMMAND ctest)

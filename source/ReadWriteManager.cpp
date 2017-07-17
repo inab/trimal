@@ -2,9 +2,9 @@
 // Created by bioinfo on 5/06/17.
 //
 
-#include "ReadWriteManager.h"
-#include <newAlignment.h>
-#include <defines.h>
+#include "../include/ReadWriteManager.h"
+#include "../include/newAlignment.h"
+#include "../include/defines.h"
 
 using namespace std;
 
@@ -16,8 +16,8 @@ bool ReadWriteManager::loadAlignment(char *newAlignmentFile) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Analyze the input newAlignment to detect its format */
 
-    _alignment->iformat = formatInputAlignment(newAlignmentFile);
-    _alignment->oformat = _alignment->iformat;
+    iformat = formatInputAlignment(newAlignmentFile);
+    oformat = iformat;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -25,7 +25,7 @@ bool ReadWriteManager::loadAlignment(char *newAlignmentFile) {
      * appropiate function to read that newAlignment */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    switch(_alignment->iformat) {
+    switch(iformat) {
         case 1:
             return loadClustalAlignment(newAlignmentFile);
         case 3:
@@ -55,7 +55,7 @@ bool ReadWriteManager::loadAlignment(char *newAlignmentFile) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int ReadWriteManager::formatInputFile(void) {
 
-    return _alignment->iformat;
+    return iformat;
 }
 /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -86,7 +86,7 @@ bool ReadWriteManager::printAlignment(void){
     }
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    switch(_alignment->oformat) {
+    switch(oformat) {
         case 1:
             alignmentClustalToFile(cout);
             break;
@@ -150,7 +150,7 @@ bool ReadWriteManager::saveAlignment(char *destFile) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Depending on the output format, we call to the
      * appropiate function */
-    switch(_alignment->oformat) {
+    switch(oformat) {
         case 1:
             alignmentClustalToFile(file);
             break;
@@ -370,9 +370,9 @@ bool ReadWriteManager::loadPhylipAlignment(char *alignmentFile) {
         return false;
 
     /* Store some data about filename for possible uses in other formats */
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(alignmentFile);
-    _alignment->filename.append(";");
+    filename.append("!Title ");
+    filename.append(alignmentFile);
+    filename.append(";");
 
     /* Read first valid line in a safer way */
     do {
@@ -477,9 +477,9 @@ bool ReadWriteManager::loadPhylip3_2Alignment(char *alignmentFile) {
         return false;
 
     /* Store the file name for futher format conversion*/
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(alignmentFile);
-    _alignment->filename.append(";");
+    filename.append("!Title ");
+    filename.append(alignmentFile);
+    filename.append(";");
 
     /* Read first valid line in a safer way */
     do {
@@ -593,9 +593,9 @@ bool ReadWriteManager::loadClustalAlignment(char *alignmentFile) {
 
     /* Store some details about input file to be used in posterior format
      * conversions */
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(alignmentFile);
-    _alignment->filename.append(";");
+    filename.append("!Title ");
+    filename.append(alignmentFile);
+    filename.append(";");
 
     /* The first valid line corresponding to CLUSTAL label is ignored */
     do {
@@ -664,7 +664,7 @@ bool ReadWriteManager::loadClustalAlignment(char *alignmentFile) {
     line = utils::readLine(file);
     if (line == NULL)
         return false;
-    _alignment->aligInfo.append(line, strlen(line));
+    aligInfo.append(line, strlen(line));
 
     /* Ignore blank lines before first sequence block starts */
     while(!file.eof()) {
@@ -767,9 +767,9 @@ bool ReadWriteManager::loadFastaAlignment(char *alignmentFile) {
         return false;
 
     /* Store input file name for posterior uses in other formats */
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(alignmentFile);
-    _alignment->filename.append(";");
+    filename.append("!Title ");
+    filename.append(alignmentFile);
+    filename.append(";");
 
     /* Compute how many sequences are in the input alignment */
     _alignment->sequenNumber = 0;
@@ -848,7 +848,7 @@ bool ReadWriteManager::loadFastaAlignment(char *alignmentFile) {
     /* Deallocate previously used dinamic memory */
     if (line != NULL)
         delete [] line;
-
+        
     /* Check the matrix's content */
     return _alignment->fillMatrices(false);
 }
@@ -867,9 +867,9 @@ bool ReadWriteManager::loadNexusAlignment(char *alignmentFile) {
 
     /* Store input file name for posterior uses in other formats */
     /* We store the file name */
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(alignmentFile);
-    _alignment->filename.append(";");
+    filename.append("!Title ");
+    filename.append(alignmentFile);
+    filename.append(";");
 
     state = false;
     do {
@@ -904,8 +904,8 @@ bool ReadWriteManager::loadNexusAlignment(char *alignmentFile) {
         else if(!strcmp(str, "FORMAT")) {
             str = strtok(NULL, DELIMITERS);
             while(str != NULL) {
-                _alignment->aligInfo.append(str, strlen(str));
-                _alignment->aligInfo.append(" ", strlen(" "));
+                aligInfo.append(str, strlen(str));
+                aligInfo.append(" ", strlen(" "));
                 str = strtok(NULL, DELIMITERS);
             }
         }
@@ -1011,9 +1011,9 @@ bool ReadWriteManager::loadMegaNonInterleavedAlignment(char *alignmentFile) {
     /* Filename is stored as a title for MEGA input alignment.
      * If it is detected later a label "TITLE" in input file, this information
      * will be replaced for that one */
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(alignmentFile);
-    _alignment->filename.append(";");
+    filename.append("!Title ");
+    filename.append(alignmentFile);
+    filename.append(";");
 
     /* Skip first valid line */
     do {
@@ -1057,15 +1057,15 @@ bool ReadWriteManager::loadMegaNonInterleavedAlignment(char *alignmentFile) {
         /* If TITLE label is found, replace previously stored information with
          * this info */
         if(!strcmp(str, "TITLE")) {
-            _alignment->filename.clear();
+            filename.clear();
             if(strncmp(line, "!", 1))
-                _alignment->filename += "!";
-            _alignment->filename += line;
+                filename += "!";
+            filename += line;
         }
 
             /* If FORMAT label is found, try to get some details from input file */
         else if(!strcmp(str, "FORMAT"))
-            _alignment->aligInfo.append(line, strlen(line));
+            aligInfo.append(line, strlen(line));
     }
 
     /* Deallocate local memory */
@@ -1210,9 +1210,9 @@ bool ReadWriteManager::loadMegaInterleavedAlignment(char *alignmentFile) {
     /* Filename is stored as a title for MEGA input alignment.
      * If it is detected later a label "TITLE" in input file, this information
      * will be replaced for that one */
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(alignmentFile);
-    _alignment->filename.append(";");
+    filename.append("!Title ");
+    filename.append(alignmentFile);
+    filename.append(";");
 
     /* Skip first valid line */
     do {
@@ -1252,15 +1252,15 @@ bool ReadWriteManager::loadMegaInterleavedAlignment(char *alignmentFile) {
         /* If TITLE label is found, replace previously stored information with
          * this info */
         if(!strcmp(str, "TITLE")) {
-            _alignment->filename.clear();
+            filename.clear();
             if(strncmp(line, "!", 1))
-                _alignment->filename += "!";
-            _alignment->filename += line;
+                filename += "!";
+            filename += line;
         }
 
             /* If FORMAT label is found, try to get some details from input file */
         else if(!strcmp(str, "FORMAT"))
-            _alignment->aligInfo.append(line, strlen(line));
+            aligInfo.append(line, strlen(line));
 
         /* Destroy previously allocated memory */
         if (frag != NULL)
@@ -1392,9 +1392,9 @@ bool ReadWriteManager::loadNBRF_PirAlignment(char *alignmentFile) {
         return false;
 
     /* Store input file name for posterior uses in other formats */
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(alignmentFile);
-    _alignment->filename.append(";");
+    filename.append("!Title ");
+    filename.append(alignmentFile);
+    filename.append(";");
 
     /* Compute how many sequences are in the input alignment */
     _alignment->sequenNumber = 0;
@@ -1525,7 +1525,7 @@ void ReadWriteManager::alignmentPhylipToFile(ostream &file) {
     /* Depending on if short name flag is activated (limits sequence name up to
      * 10 characters) or not, get maximum sequence name length */
     maxLongName = PHYLIPDISTANCE;
-    for(i = 0; (i < _alignment->sequenNumber) && (!_alignment->shortNames); i++)
+    for(i = 0; (i < _alignment->sequenNumber) && (!shortNames); i++)
         maxLongName = utils::max(maxLongName, _alignment->seqsName[i].size());
 
     /* Generating output alignment */
@@ -1578,7 +1578,7 @@ void ReadWriteManager::alignmentPhylip3_2ToFile(ostream &file) {
     /* Depending on if short name flag is activated (limits sequence name up to
      * 10 characters) or not, get maximum sequence name length */
     maxLongName = PHYLIPDISTANCE;
-    for(i = 0; (i < _alignment->sequenNumber) && (!_alignment->shortNames); i++)
+    for(i = 0; (i < _alignment->sequenNumber) && (!shortNames); i++)
         maxLongName = utils::max(maxLongName, _alignment->seqsName[i].size());
 
     /* Generating output alignment */
@@ -1637,7 +1637,7 @@ void ReadWriteManager::alignmentPhylip_PamlToFile(ostream &file) {
     /* Depending on if short name flag is activated (limits sequence name up to
      * 10 characters) or not, get maximum sequence name length */
     maxLongName = PHYLIPDISTANCE;
-    for(i = 0; (i < _alignment->sequenNumber) && (!_alignment->shortNames); i++)
+    for(i = 0; (i < _alignment->sequenNumber) && (!shortNames); i++)
         maxLongName = utils::max(maxLongName, _alignment->seqsName[i].size());
 
     /* Generating output alignment */
@@ -1681,12 +1681,12 @@ void ReadWriteManager::alignmentClustalToFile(ostream &file) {
                        utils::getReverse(_alignment->sequences[i]);
 
     /* Compute maximum sequences name length */
-    for(i = 0; (i < _alignment->sequenNumber) && (!_alignment->shortNames); i++)
+    for(i = 0; (i < _alignment->sequenNumber) && (!shortNames); i++)
         maxLongName = utils::max(maxLongName, _alignment->seqsName[i].size());
 
     /* Print alignment header */
-    if((_alignment->aligInfo.size() != 0)  && (_alignment->iformat == _alignment->oformat))
-        file << _alignment->aligInfo << endl << endl;
+    if((aligInfo.size() != 0)  && (iformat == oformat))
+        file << aligInfo << endl << endl;
     else
         file << "CLUSTAL multiple sequence alignment" << endl << endl;
 
@@ -1726,24 +1726,24 @@ void ReadWriteManager::alignmentFastaToFile(ostream &file) {
      * cases when the user has asked to keep original sequence header */
     maxLongName = 0;
     for(i = 0; i < _alignment->sequenNumber; i++)
-        if (!_alignment->keepHeader)
+        if (!keepHeader)
             maxLongName = utils::max(maxLongName, _alignment->seqsName[i].size());
         else if (_alignment->seqsInfo != NULL)
             maxLongName = utils::max(maxLongName, _alignment->seqsInfo[i].size());
 
-    if (_alignment->shortNames && maxLongName > PHYLIPDISTANCE) {
+    if (shortNames && maxLongName > PHYLIPDISTANCE) {
         maxLongName = PHYLIPDISTANCE;
-        if (_alignment->keepHeader)
+        if (keepHeader)
             cerr << endl << "WARNING: Original sequence header will be cutted by "
                  << " 10 characters" << endl;
     }
     /* Print alignment. First, sequences name id and then the sequences itself */
     for(i = 0; i < _alignment->sequenNumber; i++) {
-        if (!_alignment->keepHeader)
+        if (!keepHeader)
             file << ">" << _alignment->seqsName[i].substr(0, maxLongName) << endl;
         else if (_alignment->seqsInfo != NULL)
             file << ">" << _alignment->seqsInfo[i].substr(0, maxLongName) << endl;
-        for(j = 0; j < _alignment->residuesNumber[i]; j+= 60)
+        for(j = 0; j < _alignment->residNumber; j+= 60)
             file << tmpMatrix[i].substr(j, 60) << endl;
     }
 
@@ -1777,15 +1777,15 @@ void ReadWriteManager::alignmentNexusToFile(ostream &file) {
                        utils::getReverse(_alignment->sequences[i]);
 
     /* Compute maximum sequences name length */
-    for(i = 0; (i < _alignment->sequenNumber) && (!_alignment->shortNames); i++)
+    for(i = 0; (i < _alignment->sequenNumber) && (!shortNames); i++)
         maxLongName = utils::max(maxLongName, _alignment->seqsName[i].size());
 
     /* Compute output file datatype */
-    _alignment->getTypeAlignment();
+    _alignment->getAlignmentType();
 
     /* Remove characters like ";" from input alignment information line */
-    while((int) _alignment->aligInfo.find(";") != (int) string::npos)
-        _alignment->aligInfo.erase(_alignment->aligInfo.find(";"), 1);
+    while((int) aligInfo.find(";") != (int) string::npos)
+        aligInfo.erase(aligInfo.find(";"), 1);
 
     /* Print Alignment header */
     file << "#NEXUS" << endl << "BEGIN DATA;" << endl << " DIMENSIONS NTAX="
@@ -1801,15 +1801,15 @@ void ReadWriteManager::alignmentNexusToFile(ostream &file) {
 
     i = 0;
     /* Using information from input alignment. Use only some tags. */
-    while((j = _alignment->aligInfo.find(" ", i)) != (int) string::npos) {
+    while((j = aligInfo.find(" ", i)) != (int) string::npos) {
 
-        if((_alignment->aligInfo.substr(i, j - i)).compare(0, 7, "MISSING") == 0 ||
-           (_alignment->aligInfo.substr(i, j)).compare(0, 7, "missing") == 0)
-            file << " " << (_alignment->aligInfo.substr(i, j - i));
+        if((aligInfo.substr(i, j - i)).compare(0, 7, "MISSING") == 0 ||
+           (aligInfo.substr(i, j)).compare(0, 7, "missing") == 0)
+            file << " " << (aligInfo.substr(i, j - i));
 
-        else if((_alignment->aligInfo.substr(i, j)).compare(0, 9, "MATCHCHAR") == 0 ||
-                (_alignment->aligInfo.substr(i, j)).compare(0, 9, "matchchar") == 0)
-            file << " " << (_alignment->aligInfo.substr(i, j - i));
+        else if((aligInfo.substr(i, j)).compare(0, 9, "MATCHCHAR") == 0 ||
+                (aligInfo.substr(i, j)).compare(0, 9, "matchchar") == 0)
+            file << " " << (aligInfo.substr(i, j - i));
 
         i = j + 1;
     }
@@ -1863,10 +1863,10 @@ void ReadWriteManager::alignmentMegaToFile(ostream &file) {
                        utils::getReverse(_alignment->sequences[i]);
 
     /* Compute output file datatype */
-    _alignment->getTypeAlignment();
+    _alignment->getAlignmentType();
 
     /* Print output alignment header */
-    file << "#MEGA" << endl << _alignment->filename << endl;
+    file << "#MEGA" << endl << filename << endl;
 
     /* Print alignment datatype */
     if (_alignment->dataType == DNAType)
@@ -1913,7 +1913,7 @@ void ReadWriteManager::alignmentNBRF_PirToFile(ostream &file) {
                        utils::getReverse(_alignment->sequences[i]);
 
     /* Compute output file datatype */
-    _alignment->getTypeAlignment();
+    _alignment->getAlignmentType();
     if (_alignment->dataType == DNAType)
         alg_datatype = "DL";
     else if (_alignment->dataType == RNAType)
@@ -1925,7 +1925,7 @@ void ReadWriteManager::alignmentNBRF_PirToFile(ostream &file) {
     for(i = 0; i < _alignment->sequenNumber; i++) {
 
         /* Print sequence datatype and its name */
-        if((_alignment->seqsInfo != NULL) && (_alignment->iformat == _alignment->oformat))
+        if((_alignment->seqsInfo != NULL) && (iformat == oformat))
             file << ">" << _alignment->seqsInfo[i].substr(0, 2) << ";" << _alignment->seqsName[i]
                  << endl << _alignment->seqsInfo[i].substr(2) << endl;
         else
@@ -1933,8 +1933,8 @@ void ReadWriteManager::alignmentNBRF_PirToFile(ostream &file) {
                  << _alignment->seqsName[i] << " " << _alignment->residuesNumber[i] << " bases" << endl;
 
         /* Write the sequence */
-        for(j = 0; j < _alignment->residuesNumber[i]; j += 50) {
-            for(k = j; (k < _alignment->residuesNumber[i]) && (k < (j + 50)); k += 10)
+        for(j = 0; j < _alignment->residNumber; j += 50) {
+            for(k = j; (k < _alignment->residNumber) && (k < (j + 50)); k += 10)
                 file << " " << tmpMatrix[i].substr(k, 10);
             if((j + 50) >= _alignment->residNumber)
                 file << "*";
@@ -2308,17 +2308,37 @@ bool ReadWriteManager::alignmentColourHTML(ostream &file) {
 /* Return the input format aligment */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int ReadWriteManager::getInputFormat(void) {
-    return _alignment->iformat;
+    return iformat;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Return the output format newAlignment */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int ReadWriteManager::getOutputFormat(void) {
-    return _alignment->oformat;
+    return oformat;
 }
 
 ReadWriteManager::ReadWriteManager(newAlignment* parent)
 {
     _alignment = parent;
+    
+    iformat =       0;
+    oformat =       0;
+    shortNames =    false;
+    keepHeader =    false;
+    filename =      "";
+    aligInfo =      "";
+    
+}
+
+ReadWriteManager::ReadWriteManager(newAlignment* parent, ReadWriteManager* mold)
+{
+    _alignment =    parent;
+    
+    iformat =       mold->iformat;
+    oformat =       mold->oformat;
+    shortNames =    mold->shortNames;
+    keepHeader =    mold->keepHeader;
+    filename =      mold->filename;
+    aligInfo =      mold->aligInfo;
 }

@@ -9,9 +9,17 @@ class newAlignment;
 struct newValues;
 
 //Class to make cleaning operations to an alignment
- class Cleaner {
+class Cleaner {
 
  public:
+     
+     bool terminalGapOnly;
+     bool keepSequences;
+     int blockSize;
+     
+     
+     int selectMethod(void);
+     
      newAlignment *cleanByCutValue(double, float, const int *, bool);
 
      newAlignment *cleanByCutValue(float, float, const float *, bool);
@@ -54,7 +62,15 @@ struct newValues;
 
      newValues removeCols_SeqsAllGaps(void);
 
-    void trimTerminalGaps(bool);
+     void trimTerminalGaps(bool);
+    
+     void calculateSeqIdentity(void);
+
+     void calculateRelaxedSeqIdentity(void);
+  
+     int *calculateRepresentativeSeq(float maximumIdent);
+    
+     void computeComplementaryAlig(bool, bool);
 
 private:
 
@@ -63,6 +79,8 @@ private:
      newAlignment* _alignment;
 
      Cleaner(newAlignment* parent);
+     
+     Cleaner(newAlignment* parent, Cleaner* mold);
 
  };
 

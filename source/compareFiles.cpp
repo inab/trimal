@@ -24,8 +24,8 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include <newAlignment.h>
-#include <alignment.h>
+#include "../include/newAlignment.h"
+#include "../include/alignment.h"
 #include "../include/compareFiles.h"
 
 
@@ -278,9 +278,9 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     vectAlignments[i] -> getSequences(names);
-    if(!vectAlignments[0] -> getSeqNameOrder(names, correspNames)) {
+    if(!vectAlignments[0] -> getSequenceNameOrder(names, correspNames)) {
       cerr << endl << "ERROR: The files to compare do not"
-           << " have the sequence names" << endl << endl;
+           << " have the same sequence names" << endl << endl;
       appearErrors = true;
       break;
     }
@@ -292,7 +292,7 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
    * according to the order in the selected alignment */
   for(i = 1; ((i < numAlignments) && (!appearErrors)); i++) {
     vectAlignments[i] -> getSequences(names);
-    vectAlignments[0] -> getSeqNameOrder(names, correspNames);
+    vectAlignments[0] -> getSequenceNameOrder(names, correspNames);
     vectAlignments[i] -> SequencesMatrix -> setOrder(correspNames);
   }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -623,9 +623,9 @@ bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignme
 
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
         vectAlignments[i] -> getSequences(names);
-        if(!selected -> getSeqNameOrder(names, correspNames)) {
+        if(!selected -> getSequenceNameOrder(names, correspNames)) {
             cerr << endl << "ERROR: The files to compare do not"
-                 << " have the sequence names" << endl << endl;
+                 << " have the same sequence names" << endl << endl;
             appearErrors = true;
             break;
         }
@@ -638,7 +638,7 @@ bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignme
      * according to the order in the selected alignment */
     for(i = 0; i < numAlignments; i++) {
         vectAlignments[i] -> getSequences(names);
-        selected -> getSeqNameOrder(names, correspNames);
+        selected -> getSequenceNameOrder(names, correspNames);
         vectAlignments[i] -> SequencesMatrix -> setOrder(correspNames);
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */

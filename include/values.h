@@ -23,7 +23,8 @@
 
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-
+#ifndef VALUES
+#define VALUES
 #ifdef SIMMatrix
 
 char listAASym[21] = "ARNDCQEGHILKMFPSTWYV";
@@ -69,4 +70,5 @@ char protein_wildcards[3] = "BX";
 /* Selenocysteine: 'U' > 'TGA'  */
 char protein_alternative_aminoacids[3] = "UO";
 
+#endif
 #endif

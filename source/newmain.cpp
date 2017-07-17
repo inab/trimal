@@ -24,12 +24,12 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "trimalArgumentParser.h"
+#include "../include/trimalArgumentParser.h"
 
 int main(int argc, char *argv[])
 {
-    trimalArgumentParser p = trimalArgumentParser();
-    p.parseArguments(argc, argv);
-    p.post_process(argv);
-    return p.perform();
+    trimalArgumentParser Trimal = trimalArgumentParser();
+    Trimal.parseArguments(argc, argv);
+    Trimal.post_process(argv);
+    return Trimal.perform();
 }

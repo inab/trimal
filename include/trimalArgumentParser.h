@@ -17,41 +17,41 @@ class trimalArgumentParser
 {
 
     bool appearErrors = false,
-         complementary = false, colnumbering = false,
+         getComplementary = false, columnNumbering = false,
          nogaps = false, noallgaps = false,
          gappyout = false, strict = false,
          strictplus = false, automated1 = false,
          sgc = false, sgt = false, scc = false, sct = false,
          sfc = false, sft = false, sident = false, selectSeqs = false,
-         selectCols = false, shortNames = false, splitbystop = false,
-         terminal = false, keepSeqs = false,
-         keepHeader = false, ignorestop = false;
+         selectCols = false, shortNames = false, splitByStopCodon = false,
+         terminalOnly = false, keepSeqs = false,
+         keepHeader = false, ignoreStopCodon = false;
 
-    float conserve = -1,
+    float conservationThreshold = -1,
           gapThreshold = -1,
-          simThreshold = -1,
-          comThreshold = -1,
-          resOverlap = -1,
-          seqOverlap = -1,
+          similarityThreshold = -1,
+          consistencyThreshold = -1,
+          residuesOverlap = -1,
+          sequenceOverlap = -1,
           maxIdentity = -1;
     int outformat = -1,
         prevType = -1,
         compareset = -1,
         stats = 0,
-        windowSize = -1, gapWindow = -1, simWindow = -1,
-        conWindow = -1, blockSize = -1, clusters = -1;
+        windowSize = -1, gapWindow = -1, similarityWindow = -1,
+        consistencyWindow = -1, blockSize = -1, clusters = -1;
 
     /* Others variables */
     ifstream compare;
     float *compareVect = NULL;
-    newAlignment  **compAlig  = NULL;
-    string nline, *seqNames = NULL;
+    newAlignment  **compareAlignmentsArray  = NULL;
+    string nline, *sequencesNames = NULL;
     sequencesMatrix *seqMatrix = NULL;
     similarityMatrix *similMatrix = NULL;
-    newAlignment  *origAlig = NULL, *singleAlig = NULL, *backtranslation = NULL;
+    newAlignment  *origAlig = NULL, *singleAlig = NULL, *backtranslationAlig = NULL;
 
-    int i = 1, lng, num = 0, maxAminos = 0, numfiles = 0, referFile = 0, *delColumns = NULL, *delSequences = NULL, *seqLengths = NULL;
-    char c, *forceFile = NULL, *infile = NULL, *backtransFile = NULL, *outfile = NULL, *outhtml = NULL, *matrix = NULL,
+    int i = 1, argumentLength, num = 0, maxAminos = 0, numfiles = 0, referFile = 0, *delColumns = NULL, *delSequences = NULL, *sequencesLengths = NULL;
+    char c, *forceFile = NULL, *infile = NULL, *backtransFile = NULL, *outfile = NULL, *htmlOutFile = NULL, *matrixFile = NULL,
              **filesToCompare = NULL, line[256];
 
 public:
@@ -68,9 +68,9 @@ public:
     bool force_select_argument(int* argc, char* argv[], int* i);
     bool back_trans_argument(int* argc, char* argv[], int* i);
     bool gap_threshold_argument(int* argc, char* argv[], int* i);
-    bool sim_threshold_argument(int* argc, char* argv[], int* i);
-    bool cont_threshold_argument(int* argc, char* argv[], int* i);
-    bool cons_argument(int* argc, char* argv[], int* i);
+    bool similarity_threshold_argument(int* argc, char* argv[], int* i);
+    bool consistency_threshold_argument(int* argc, char* argv[], int* i);
+    bool conservation_argument(int* argc, char* argv[], int* i);
     bool select_cols_argument(int* argc, char* argv[], int* i);
     bool no_gaps_argument(int* argc, char* argv[], int* i);
     bool no_all_gaps_argument(int* argc, char* argv[], int* i);
@@ -80,16 +80,16 @@ public:
     bool strict_argument(int* argc, char* argv[], int* i);
     bool strict_plus_argument(int* argc, char* argv[], int* i);
     bool automated1_argument(int* argc, char* argv[], int* i);
-    bool col_overlap_argument(int* argc, char* argv[], int* i);
-    bool seq_overlap_argument(int* argc, char* argv[], int* i);
+    bool residue_overlap_argument(int* argc, char* argv[], int* i);
+    bool sequence_overlap_argument(int* argc, char* argv[], int* i);
     bool seqs_select_argument(int* argc, char* argv[], int* i);
     bool max_identity_argument(int* argc, char* argv[], int* i);
     bool clusters_argument(int* argc, char* argv[], int* i);
     bool terminal_only_argument(int* argc, char* argv[], int* i);
     bool window_argument(int* argc, char* argv[], int* i);
     bool gap_window_argument(int* argc, char* argv[], int* i);
-    bool sim_window_argument(int* argc, char* argv[], int* i);
-    bool con_window_argument(int* argc, char* argv[], int* i);
+    bool similarity_window_argument(int* argc, char* argv[], int* i);
+    bool consistency_window_argument(int* argc, char* argv[], int* i);
     bool block_argument(int* argc, char* argv[], int* i);
     bool stats_arguments(int* argc, char* argv[], int* i);
     bool complementary_argument(int* argc, char* argv[], int* i);

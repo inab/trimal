@@ -55,7 +55,7 @@ statisticsGaps::statisticsGaps(string *alignmentMatrix, int species, int aminos,
   utils::initlVect(gapsInColumn, columns, 0);
 
   aminosXInColumn =    new int[columns];
-  utils::initlVect(aminosXInColumn, aminos, 0);
+  utils::initlVect(aminosXInColumn, columns, 0);
 
   gapsWindow =         new int[columns];
   utils::initlVect(gapsWindow, columns, 0);
@@ -117,6 +117,7 @@ statisticsGaps::~statisticsGaps(void) {
     delete[] aminosXInColumn;
     delete[] gapsWindow;
   }
+  
 }
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

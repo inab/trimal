@@ -66,14 +66,10 @@ struct newValues {
 #endif
 
 using namespace std;
-//
-//class Cleaner;
-//class StatisticsManager;
-//class ReadWriteManager;
 
-#include <Cleaner.h>
-#include <StatisticsManager.h>
-#include <ReadWriteManager.h>
+#include "Cleaner.h"
+#include "StatisticsManager.h"
+#include "ReadWriteManager.h"
 
 /** \brief Class containing an alignment
  *
@@ -83,10 +79,10 @@ using namespace std;
  * \b statistics \b printing.
  */
 class newAlignment {
-    friend class Cleaner;
-    friend class StatisticsManager;
-    friend class ReadWriteManager;
-    friend class sequencesMatrix;
+//     friend class Cleaner;
+//     friend class StatisticsManager;
+//     friend class ReadWriteManager;
+//     friend class sequencesMatrix;
 
 public:
     Cleaner* Cleaning;
@@ -94,9 +90,9 @@ public:
     ReadWriteManager* ReadWrite;
     sequencesMatrix *SequencesMatrix;
 
-private:
+// private:
 
-    bool oldnewAlignment;
+//   bool oldnewAlignment;
 
   int sequenNumber;
   int residNumber;
@@ -104,39 +100,17 @@ private:
   bool isAligned;
   bool reverse;
 
-  bool terminalGapOnly;
-
-  int iformat;
-  int oformat;
-  bool shortNames;
-
-  bool forceCaps;
-  bool upperCase;
-  bool lowerCase;
-
-  bool keepSequences;
-  bool keepHeader;
-
-  string gapSymbol;
-
   int dataType;
-
-  int ghWindow;
-  int shWindow;
-
-  int blockSize;
 
   string *sequences;
   string *seqsName;
   string *seqsInfo;
 
-  string filename;
-  string aligInfo;
-
 
 
   /* Statistics */
   statisticsGaps *sgaps;
+  
   statisticsConservation *scons;
 
   /* Sequence Identities */
@@ -148,94 +122,31 @@ private:
   int *saveResidues;
   int *saveSequences;
 
- private:
   /* ***** Fill the matrices from the input alignment ***** */
   bool fillMatrices(bool aligned);
+  
  public:
 
-  /* Constructors */
+  /* Constructor */
   newAlignment(void);
 
-    newAlignment(string, string, string *, string *, string *, int, int, int, int,
-    bool, int, int, bool, bool, bool, bool, int, int, int *, int *, int *, int,
-     int, int, float **);
-
-  /* Overlap the operator = to use it as a constructor */
-  newAlignment &operator=(const newAlignment &);
+  /* Copy Constructor */
+  newAlignment(newAlignment &);
 
   /* Destructor */
   ~newAlignment(void);
 
-   /* Alignment's Info */
-
-  /** \brief Gets alignment's sequenNumber number.
-   * \return the alignment's sequenNumber number.
-   *
-   * This method returns the alignment's sequenNumber number.
-   */
   int getNumSpecies(void);
 
-  /** \brief Gets alignment's sequenNumber names.
-   * \param characters' matrix used to storage sequenNumber names.
-   *
-   * This method returns the alignment's sequenNumber names.
-   */
   void getSequences(string *);
 
   void getSequences(string *, int *);
 
   void getSequences(string *, string *, int *);
 
-  bool getSeqNameOrder(string *, int *);
+  bool getSequenceNameOrder(string *, int *);
 
-  /** \brief Gets alignment's amino acids number.
-   * \return the alignment's amino acids number.
-   *
-   * This method returns the alignment's amino acids number.
-   */
   int getNumAminos(void);
-
-
-   /* Alignments' Compare */
-
-//  /** \brief Building alignment's sequence matrix method.
-//   *
-//   * This method builds an alignment's sequence matrix.
-//   */
-//  void sequenMatrix(void);
-//
-//  void destroySequenMatrix(void);
-//
-//  /** \brief Printing alignment's sequence matrix method.
-//   *
-//   * This method prints an alignment's sequence matrix.
-//   */
-//  void printSequenMatrix(void);
-//
-//  /** \brief Returns a column from alignment's sequence matrix.
-//   * \param colum, sequence matrix index
-//   * \param columnSeqMatrix, vector used to storage a column from alignment sequence matrix.
-//   *
-//   * This method returns a column from alignment sequence matrix.
-//   */
-//  void getColumnSeqMatrix(int, int *);
-//
-//  /** \brief Returns a column from alignment's sequence matrix.
-//   * \param value to look in a sequence matrix row.
-//   * \param sequence matrix row where look for a value.
-//   * \param columnSeqMatrix, vector used to storage a column from alignment sequence matrix.
-//   *
-//   * Method that returns a column from the aligment's sequence matrix with the same value that
-//   * "value" at matrix's position (row, i)
-//   */
-//  void getColumnSeqMatrix(int, int, int *);
-//
-//  void setSeqMatrixOrder(int *);
-//
-//  sequencesMatrix *getSeqMatrix(void);
-
-
-
 
   void setWindowsSize(int, int);
 
@@ -243,30 +154,17 @@ private:
 
   void setOutputFormat(int, bool);
 
-  void setReverse(void);
-
-
+  void setReverseFlag(void);
 
   int getShortNames(void);
 
-  int getReverse(void);
+  int getReverseFlag(void);
 
   int getBlockSize(void);
 
-  void calculateSeqIdentity(void);
-
-
-    // New
-  void calculateRelaxedSeqIdentity(void);
-
-  int selectMethod(void);
-
   void printSeqIdentity(void);
 
-
-//  void checkTypeAlignment(void);
-
-  int getTypeAlignment(void);
+  int getAlignmentType(void);
 
   int *getCorrespResidues(void);
 
@@ -274,36 +172,24 @@ private:
 
   bool isFileAligned(void);
 
-    newAlignment * getTranslationCDS(int, int, int *, string *, sequencesMatrix *, newAlignment *);
+  newAlignment * getTranslationCDS(int, int, int *, string *, sequencesMatrix *, newAlignment *);
 
   bool checkCorrespondence(string *, int *, int, int);
 
-  int *calculateRepresentativeSeq(float maximumIdent);
-
-  /* New code: version 1.4 */
-
-  void computeComplementaryAlig(bool, bool);
-
-
-
-//  void removeCols_SeqsAllGaps(newValues *);
-
   void fillNewDataStructure(string *, string *);
+  
   void fillNewDataStructure(newValues *);
 
-  // New Code: February/2012
   void calculateColIdentity(float *);
+  
   void printColumnsIdentity_DescriptiveStats(void);
 
-  // New Code: May/2012
   void setKeepSequencesFlag(bool);
 
-  // New Code: Mar/2013
   void setKeepSeqsHeaderFlag(bool);
 
   void printAlignmentInfo(ostream &);
 
-  // Updated: June/2013
   bool prepareCodingSequence(bool, bool, newAlignment *);
 
 };

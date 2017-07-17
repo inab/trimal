@@ -12,6 +12,16 @@ class newAlignment;
 class ReadWriteManager {
 
 public:
+    
+      int iformat;
+      int oformat;
+      bool shortNames;
+      
+      bool keepHeader;
+        string filename;
+          string aligInfo;
+    
+    
     int getInputFormat(void);
 
     int getOutputFormat(void);
@@ -73,6 +83,8 @@ private:
     newAlignment* _alignment;
 
     ReadWriteManager(newAlignment* parent);
+    
+    ReadWriteManager(newAlignment* parent, ReadWriteManager* mold);
 };
 
 
