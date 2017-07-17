@@ -2015,7 +2015,7 @@ sequencesMatrix *alignment::getSeqMatrix(void) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int alignment::getTypeAlignment(void) {
   if(dataType == 0)
-    dataType = utils::checkTypeAlignment(sequenNumber, residNumber, sequences);
+    dataType = utils::checkAlignmentType(sequenNumber, residNumber, sequences);
   return dataType;
 }
 

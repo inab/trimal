@@ -23,7 +23,8 @@
 
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-
+#ifndef VALUES
+#define VALUES
 #ifdef SIMMatrix
 
 /* Characters used for different alignments type */
@@ -116,4 +117,5 @@ float alternative_1_NTDegeneratedMatrix[15][15] = {
   { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1}
 };
 
+#endif
 #endif

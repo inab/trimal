@@ -24,7 +24,7 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include <newAlignment.h>
+#include "../include/newAlignment.h"
 #include "../include/sequencesMatrix.h"
 
 sequencesMatrix::sequencesMatrix(void) {

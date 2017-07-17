@@ -2,9 +2,9 @@
 // Created by bioinfo on 5/06/17.
 //
 
-#include <StatisticsManager.h>
-#include <newAlignment.h>
-#include <Cleaner.h>
+#include "../include/StatisticsManager.h"
+#include "../include/newAlignment.h"
+#include "../include/Cleaner.h"
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method compute the similarity values from the input newAlignment if it
@@ -44,7 +44,7 @@ bool StatisticsManager::calculateConservationStats(void) {
     if(_alignment->scons->isDefinedWindow())
         return true;
     else
-        return _alignment->scons->applyWindow(_alignment->shWindow);
+        return _alignment->scons->applyWindow(shWindow);
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
@@ -164,7 +164,7 @@ bool StatisticsManager::calculateGapStats(void) {
                                                _alignment->sequenNumber,
                                                _alignment->residNumber,
                                                _alignment->dataType);
-        _alignment->sgaps -> applyWindow(_alignment->ghWindow);
+        _alignment->sgaps -> applyWindow(ghWindow);
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -175,5 +175,14 @@ bool StatisticsManager::calculateGapStats(void) {
 
 StatisticsManager::StatisticsManager(newAlignment *parent) {
     _alignment = parent;
+    
+    ghWindow = 0;
+    shWindow = 0;
 }
 
+StatisticsManager::StatisticsManager(newAlignment *parent, StatisticsManager* mold) {
+    _alignment = parent;
+    
+    ghWindow = mold->ghWindow;
+    shWindow = mold->shWindow;
+}

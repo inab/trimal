@@ -564,7 +564,7 @@ string utils::removeCharacter(char c, string line) {
   return line;
 }
 
-int utils::checkTypeAlignment(int seqNumber, int residNumber, string *sequences) {
+int utils::checkAlignmentType(int seqNumber, int residNumber, string *sequences) {
 
   int i, j, k, l, hitDNA, hitRNA, degenerate, gDNA, gRNA, extDNA, extRNA;
   float ratioDNA, ratioRNA;

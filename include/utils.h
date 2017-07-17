@@ -196,7 +196,7 @@ class utils {
 
   static string removeCharacter(char c, string line);
 
-  static int checkTypeAlignment(int, int, string *);
+  static int checkAlignmentType(int, int, string *);
 
   static int* readNumbers(string);
 

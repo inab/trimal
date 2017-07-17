@@ -32,18 +32,18 @@
 using namespace std;
 
 #include <float.h>
-#include "newAlignment.h"
+#include "../include/newAlignment.h"
 //#include "rwnewAlignment.cpp"
 //#include "autnewAlignment.cpp"
-#include <Cleaner.h>
-#include <StatisticsManager.h>
-#include <ReadWriteManager.h>
+#include "../include/Cleaner.h"
+#include "../include/StatisticsManager.h"
+#include "../include/ReadWriteManager.h"
 #include <errno.h>
 #include <ctype.h>
 #include <string>
 //#include <utils.h>
 //#include <values.h>
-#include <defines.h>
+#include "../include/defines.h"
 //extern int errno;
 
 using namespace std;
@@ -59,324 +59,302 @@ newAlignment::newAlignment(void) {
     Statistics = new StatisticsManager(this);
     ReadWrite = new ReadWriteManager(this);
 
-  /* newAlignment parameter */
-  sequenNumber = 0;
-  residNumber =  0;
+    /* newAlignment parameter */
+    sequenNumber = 0;
+    residNumber =  0;
 
-  /* Are the input sequences aligned? */
-  isAligned = false;
+    /* Are the input sequences aligned? */
+    isAligned = false;
 
-  /* Should the output file be reversed? */
-  reverse   = false;
+    /* Should the output file be reversed? */
+    reverse   = false;
 
-  /* Should be trimmed only terminal gaps? */
-  terminalGapOnly = false;
+    /* Should be trimmed only terminal gaps? */
+//     terminalGapOnly = false;
 
-  /* Input and output formats */
-  iformat = 0;
-  oformat = 0;
-  shortNames = false;
+    /* Input and output formats */
+//     ReadWrite -> iformat = 0;
+//     ReadWrite -> oformat = 0;
+//     ReadWrite -> shortNames = false;
 
-  forceCaps = false;
-  upperCase = false;
-  lowerCase = false;
+//     forceCaps = false;
+//     upperCase = false;
+//     lowerCase = false;
 
-  /* Indicate whether sequences composed only by gaps should be kept or not */
-  keepSequences = false;
+    /* Indicate whether sequences composed only by gaps should be kept or not */
+//     keepSequences = false;
 
-  /* Indicate whether original header, they may include non-alphanumerical
-   * characters, should be dumped into output stream without any preprocessing
-   * step */
-  keepHeader = false;
+    /* Indicate whether original header, they may include non-alphanumerical
+     * characters, should be dumped into output stream without any preprocessing
+     * step */
+//     keepHeader = false;
 
-  gapSymbol = "-";
+//     gapSymbol = "-";
 
-  /* Sequence datatype: DNA, RNA or Protein */
-  dataType = 0;
+    /* Sequence datatype: DNA, RNA or Protein */
+    dataType = 0;
 
-  /* Window sizes to trim the input newAlignment */
-  ghWindow = 0;
-  shWindow = 0;
+    /* Window sizes to trim the input newAlignment */
+//     ghWindow = 0;
+//     shWindow = 0;
 
-  /* Minimum block size in the new newAlignment */
-  blockSize = 0;
+    /* Minimum block size in the new newAlignment */
+//     blockSize = 0;
 
-  /* Is this alignmnet new? */
-  oldnewAlignment  = false;
+    /* Is this alignmnet new? */
+//     oldnewAlignment  = false;
 
-  /* Sequence residues number */
-  residuesNumber = NULL;
+    /* Sequence residues number */
+    residuesNumber = NULL;
 
-  /* Columns and sequences that have been previously selected */
-  saveResidues  = NULL;
-  saveSequences = NULL;
+    /* Columns and sequences that have been previously selected */
+    saveResidues  = NULL;
+    saveSequences = NULL;
 
-  /* Input sequences as well other information such as sequences name, etc */
-  sequences = NULL;
-  seqsName  = NULL;
-  seqsInfo  = NULL;
+    /* Input sequences as well other information such as sequences name, etc */
+    sequences = NULL;
+    seqsName  = NULL;
+    seqsInfo  = NULL;
 
-  /* Information about input newAlignment */
-  filename = "";
-  aligInfo = "";
+    /* Information about input newAlignment */
+//     filename = "";
+//     aligInfo = "";
 
-  /* Information computed from newAlignment */
-  sgaps =     NULL;
-  scons =     NULL;
-  SequencesMatrix = NULL;
-  identities = NULL;
+    /* Information computed from newAlignment */
+    sgaps =     NULL;
+    scons =     NULL;
+    SequencesMatrix = NULL;
+    identities = NULL;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Class constructor */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-newAlignment::newAlignment(string o_filename, string o_aligInfo, string *o_sequences, string *o_seqsName,
-                     string *o_seqsInfo, int o_sequenNumber, int o_residNumber, int o_iformat, int o_oformat,
-                     bool o_shortNames, int o_dataType, int o_isAligned, bool o_reverse, bool o_terminalGapOnly,
-                     bool o_keepSeqs, bool o_keepHeader, int OldSequences, int OldResidues, int *o_residuesNumber,
-                     int *o_saveResidues, int *o_saveSequences, int o_ghWindow, int o_shWindow, int o_blockSize,
-                     float **o_identities) {
-
-    Cleaning = new Cleaner(this);
-    Statistics = new StatisticsManager(this);
-    ReadWrite = new ReadWriteManager(this);
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  int i, j, k, ll;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  oldnewAlignment = true;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Assign the parameter values to the variables */
-  sequenNumber = o_sequenNumber;
-  residNumber  = o_residNumber;
-
-  iformat = o_iformat;
-  oformat = o_oformat;
-  shortNames = o_shortNames;
-
-  dataType = o_dataType;
-
-  ghWindow = o_ghWindow;
-  shWindow = o_shWindow;
-
-  blockSize = o_blockSize;
-
-  isAligned = o_isAligned;
-  reverse   = o_reverse;
-
-  terminalGapOnly = o_terminalGapOnly;
-
-  filename = o_filename;
-  aligInfo = o_aligInfo;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  keepSequences = o_keepSeqs;
-  keepHeader = o_keepHeader;
-
-  forceCaps = false;
-  upperCase = false;
-  lowerCase = false;
-
-  gapSymbol = "-";
-
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Basic information for the new newAlignment */
-  sequences = new string[sequenNumber];
-  for(i = 0; i < sequenNumber; i++)
-    sequences[i] = o_sequences[i];
-
-  seqsName = new string[sequenNumber];
-  for(i = 0; i < sequenNumber; i++)
-    seqsName[i] = o_seqsName[i];
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  residuesNumber = new int[sequenNumber];
-  if((isAligned) || (o_residuesNumber != NULL)) {
-    for(i = 0; i < sequenNumber; i++)
-      residuesNumber[i] = residNumber;
-  } else {
-    for(i = 0; i < sequenNumber; i++)
-      residuesNumber[i] = o_residuesNumber[i];
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(o_seqsInfo != NULL) {
-    seqsInfo = new string[sequenNumber];
-    for(i = 0; i < sequenNumber; i++)
-      seqsInfo[i] = o_seqsInfo[i];
-  } else seqsInfo = NULL;
-
-  saveResidues  = NULL;
-  if(o_saveResidues != NULL) {
-    saveResidues = new int[residNumber];
-    for(i = 0, j = 0; i < OldResidues; i++)
-      if(o_saveResidues[i] != -1) {
-        saveResidues[j] = o_saveResidues[i];
-        j++;
-      }
-  }
-
-  saveSequences = NULL;
-  if(o_saveSequences != NULL) {
-    saveSequences = new int[sequenNumber];
-    for(i = 0, j = 0; i < OldSequences; i++)
-      if(o_saveSequences[i] != -1) {
-        saveSequences[j] = o_saveSequences[i];
-        j++;
-      }
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  identities = NULL;
-  if(o_identities != NULL) {
-    identities = new float*[sequenNumber];
-    for(i = 0, j = 0; i < OldSequences; i++) {
-      if(o_saveSequences[i] != -1) {
-        identities[j] = new float[sequenNumber];
-        for(k = 0, ll = 0; k < OldSequences; k++) {
-          if(o_saveSequences[k] != -1) {
-            identities[j][ll] = o_identities[i][k];
-            ll++;
-          }
-        }
-        j++;
-      }
-    }
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Any structure associated to the new newAlignment is
-   * initialize to NULL. In this way, these structure,
-   * if it will be necessary, has to be computed */
-  sgaps  =     NULL;
-  scons  =     NULL;
-  SequencesMatrix =  NULL;
-  identities = NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-}
+// newAlignment::newAlignment(string o_filename, string o_aligInfo, string *o_sequences, string *o_seqsName,
+//                            string *o_seqsInfo, int o_sequenNumber, int o_residNumber, int o_ReadWrite -> iformat, int o_ReadWrite -> oformat,
+//                            bool o_ReadWrite -> shortNames, int o_dataType, int o_isAligned, bool o_reverse, bool o_terminalGapOnly,
+//                            bool o_keepSeqs, bool o_keepHeader, int OldSequences, int OldResidues, int *o_residuesNumber,
+//                            int *o_saveResidues, int *o_saveSequences, int o_ghWindow, int o_shWindow, int o_blockSize,
+//                            float **o_identities) {
+// 
+//     Cleaning = new Cleaner(this);
+//     Statistics = new StatisticsManager(this);
+//     ReadWrite = new ReadWriteManager(this);
+// 
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+//     int i, j, k, ll;
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+// 
+//     oldnewAlignment = true;
+// 
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+//     /* Assign the parameter values to the variables */
+//     sequenNumber = o_sequenNumber;
+//     residNumber  = o_residNumber;
+// 
+//     ReadWrite -> iformat = o_ReadWrite -> iformat;
+//     ReadWrite -> oformat = o_ReadWrite -> oformat;
+//     ReadWrite -> shortNames = o_ReadWrite -> shortNames;
+// 
+//     dataType = o_dataType;
+// 
+//     ghWindow = o_ghWindow;
+//     shWindow = o_shWindow;
+// 
+//     blockSize = o_blockSize;
+// 
+//     isAligned = o_isAligned;
+//     reverse   = o_reverse;
+// 
+//     terminalGapOnly = o_terminalGapOnly;
+// 
+//     filename = o_filename;
+//     aligInfo = o_aligInfo;
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+// 
+//     keepSequences = o_keepSeqs;
+//     keepHeader = o_keepHeader;
+// 
+//     forceCaps = false;
+//     upperCase = false;
+//     lowerCase = false;
+// 
+//     gapSymbol = "-";
+// 
+// 
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+//     /* Basic information for the new newAlignment */
+//     sequences = new string[sequenNumber];
+//     for(i = 0; i < sequenNumber; i++)
+//         sequences[i] = o_sequences[i];
+// 
+//     seqsName = new string[sequenNumber];
+//     for(i = 0; i < sequenNumber; i++)
+//         seqsName[i] = o_seqsName[i];
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+// 
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+//     residuesNumber = new int[sequenNumber];
+//     if((isAligned) || (o_residuesNumber != NULL)) {
+//         for(i = 0; i < sequenNumber; i++)
+//             residuesNumber[i] = residNumber;
+//     } else {
+//         for(i = 0; i < sequenNumber; i++)
+//             residuesNumber[i] = o_residuesNumber[i];
+//     }
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+// 
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+//     if(o_seqsInfo != NULL) {
+//         seqsInfo = new string[sequenNumber];
+//         for(i = 0; i < sequenNumber; i++)
+//             seqsInfo[i] = o_seqsInfo[i];
+//     } else seqsInfo = NULL;
+// 
+//     saveResidues  = NULL;
+//     if(o_saveResidues != NULL) {
+//         saveResidues = new int[residNumber];
+//         for(i = 0, j = 0; i < OldResidues; i++)
+//             if(o_saveResidues[i] != -1) {
+//                 saveResidues[j] = o_saveResidues[i];
+//                 j++;
+//             }
+//     }
+// 
+//     saveSequences = NULL;
+//     if(o_saveSequences != NULL) {
+//         saveSequences = new int[sequenNumber];
+//         for(i = 0, j = 0; i < OldSequences; i++)
+//             if(o_saveSequences[i] != -1) {
+//                 saveSequences[j] = o_saveSequences[i];
+//                 j++;
+//             }
+//     }
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+// 
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+//     identities = NULL;
+//     if(o_identities != NULL) {
+//         identities = new float*[sequenNumber];
+//         for(i = 0, j = 0; i < OldSequences; i++) {
+//             if(o_saveSequences[i] != -1) {
+//                 identities[j] = new float[sequenNumber];
+//                 for(k = 0, ll = 0; k < OldSequences; k++) {
+//                     if(o_saveSequences[k] != -1) {
+//                         identities[j][ll] = o_identities[i][k];
+//                         ll++;
+//                     }
+//                 }
+//                 j++;
+//             }
+//         }
+//     }
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+// 
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+//     /* Any structure associated to the new newAlignment is
+//      * initialize to NULL. In this way, these structure,
+//      * if it will be necessary, has to be computed */
+//     sgaps  =     NULL;
+//     scons  =     NULL;
+//     SequencesMatrix =  NULL;
+//     identities = NULL;
+//     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+// }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Overlapping operator = to use it as a kind of class constructor */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-newAlignment &newAlignment::operator=(const newAlignment &old) {
-  int i, j;
+newAlignment::newAlignment(newAlignment& old) {
 
-  if(this != &old) {
+    if(this != &old) {
 
-    oldnewAlignment = true;
+        int i, j;
 
+        sequenNumber = old.sequenNumber;
+        residNumber =  old.residNumber;
+
+        isAligned =  old.isAligned;
+        reverse   =  old.reverse;
+
+        dataType = old.dataType;
+
+        sequences = new string[sequenNumber];
+        for(i = 0; i < sequenNumber; i++)
+            sequences[i] = old.sequences[i];
+
+        seqsName = new string[sequenNumber];
+        for(i = 0; i < sequenNumber; i++)
+            seqsName[i] = old.seqsName[i];
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        //delete [] residuesNumber;
+        if(old.residuesNumber) {
+            residuesNumber = new int[sequenNumber];
+            for(i = 0; i < sequenNumber; i++)
+                residuesNumber[i] = old.residuesNumber[i];
+        }
+        else residuesNumber = NULL;
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        //delete [] seqsInfo;
+        if(old.seqsInfo) {
+            seqsInfo = new string[sequenNumber];
+            for(i = 0; i < sequenNumber; i++)
+                seqsInfo[i] = old.seqsInfo[i];
+        } else seqsInfo = NULL;
+
+        //delete [] saveResidues;
+        if(old.saveResidues) {
+            saveResidues = new int[residNumber];
+            for(i = 0; i < residNumber; i++)
+                saveResidues[i] = old.saveResidues[i];
+        } else saveResidues = NULL;
+
+        //delete [] saveSequences;
+        if(old.saveSequences) {
+            saveSequences = new int[sequenNumber];
+            for(i = 0; i < sequenNumber; i++)
+                saveSequences[i] = old.saveSequences[i];
+        } else saveSequences = NULL;
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        //delete [] identities;
+        if(old.identities) {
+            identities = new float*[sequenNumber];
+            for(i = 0; i < sequenNumber; i++) {
+                identities[i] = new float[sequenNumber];
+                for(j = 0; j < sequenNumber; j++)
+                    identities[i][j] = old.identities[i][j];
+            }
+        } else identities = NULL;
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        //delete sgaps;
+        sgaps = NULL;
+
+        //delete scons;
+        scons = NULL;
+
+        //delete SequencesMatrix;
+        SequencesMatrix = NULL;
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Assign the parameter values to the variables */
-    sequenNumber = old.sequenNumber;
-    residNumber =  old.residNumber;
+    this -> Cleaning = new Cleaner(this, old.Cleaning);
+    
+    this -> Statistics = new StatisticsManager(this, old.Statistics);
+    
+    this -> ReadWrite = new ReadWriteManager(this, old.ReadWrite);
 
-    isAligned =  old.isAligned;
-    reverse   =  old.reverse;
-
-    terminalGapOnly = old.terminalGapOnly;
-
-    iformat = old.iformat;
-    oformat = old.oformat;
-    shortNames = old.shortNames;
-
-    dataType = old.dataType;
-
-    ghWindow = old.ghWindow;
-    shWindow = old.shWindow;
-
-    blockSize = old.blockSize;
-
-    filename = old.filename;
-    aligInfo = old.aligInfo;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    keepSequences = old.keepSequences;
-    keepHeader = old.keepHeader;
-
-    forceCaps = old.forceCaps;
-    upperCase = old.upperCase;
-    lowerCase = old.lowerCase;
-
-    gapSymbol = old.gapSymbol;
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    sequences = new string[sequenNumber];
-    for(i = 0; i < sequenNumber; i++)
-      sequences[i] = old.sequences[i];
-
-    seqsName = new string[sequenNumber];
-    for(i = 0; i < sequenNumber; i++)
-      seqsName[i] = old.seqsName[i];
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    delete [] residuesNumber;
-    if(old.residuesNumber) {
-      residuesNumber = new int[sequenNumber];
-      for(i = 0; i < sequenNumber; i++)
-        residuesNumber[i] = old.residuesNumber[i];
-    } residuesNumber = NULL;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    delete [] seqsInfo;
-    if(old.seqsInfo) {
-      seqsInfo = new string[sequenNumber];
-      for(i = 0; i < sequenNumber; i++)
-        seqsInfo[i] = old.seqsInfo[i];
-    } else seqsInfo = NULL;
-
-    delete [] saveResidues;
-    if(old.saveResidues) {
-      saveResidues = new int[residNumber];
-      for(i = 0; i < residNumber; i++)
-        saveResidues[i] = old.saveResidues[i];
-    } else saveResidues = NULL;
-
-    delete [] saveSequences;
-    if(old.saveSequences) {
-      saveSequences = new int[sequenNumber];
-      for(i = 0; i < sequenNumber; i++)
-        saveSequences[i] = old.saveSequences[i];
-    } else saveSequences = NULL;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    delete [] identities;
-    if(old.identities) {
-      identities = new float*[sequenNumber];
-      for(i = 0; i < sequenNumber; i++) {
-        identities[i] = new float[sequenNumber];
-        for(j = 0; j < sequenNumber; j++)
-          identities[i][j] = old.identities[i][j];
-      }
-    } else identities = NULL;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    delete sgaps;
-    sgaps = NULL;
-
-    delete scons;
-    scons = NULL;
-
-    delete SequencesMatrix;
-    SequencesMatrix = old.SequencesMatrix;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  return *this;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -384,293 +362,186 @@ newAlignment &newAlignment::operator=(const newAlignment &old) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 newAlignment::~newAlignment(void) {
-  int i;
+    int i;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(sequences != NULL)
-    delete [] sequences;
-  sequences = NULL;
+    if(sequences != NULL)
+        delete [] sequences;
+    sequences = NULL;
 
-  if(seqsName != NULL)
-    delete [] seqsName;
-  seqsName = NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    if(seqsName != NULL)
+        delete [] seqsName;
+    seqsName = NULL;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(residuesNumber != NULL)
-    delete [] residuesNumber;
-  residuesNumber = NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    if(residuesNumber != NULL)
+        delete [] residuesNumber;
+    residuesNumber = NULL;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(seqsInfo != NULL)
-    delete [] seqsInfo;
-  seqsInfo = NULL;
+    if(seqsInfo != NULL)
+        delete [] seqsInfo;
+    seqsInfo = NULL;
 
-  if(saveResidues != NULL)
-    delete[] saveResidues;
-  saveResidues = NULL;
+    if(saveResidues != NULL)
+        delete[] saveResidues;
+    saveResidues = NULL;
 
-  if(saveSequences != NULL)
-    delete[] saveSequences;
-  saveSequences = NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    if(saveSequences != NULL)
+        delete[] saveSequences;
+    saveSequences = NULL;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(identities != NULL) {
+    if(identities != NULL) {
+        for(i = 0; i < sequenNumber; i++)
+            delete [] identities[i];
+        delete [] identities;
+    }
+    identities = NULL;
+
+    if(sgaps != NULL)
+        delete sgaps;
+    sgaps = NULL;
+
+    if(scons != NULL)
+        delete scons;
+    scons = NULL;
+
+    if(SequencesMatrix != NULL)
+        delete SequencesMatrix;
+    SequencesMatrix = NULL;
+
+    sequenNumber = 0;
+    residNumber  = 0;
+
+    isAligned = false;
+    reverse   = false;
+
+    dataType = 0;
+    
+    delete Cleaning;
+    delete Statistics;
+    delete ReadWrite;
+}
+
+
+
+newAlignment *newAlignment::getTranslationCDS(int newResidues, int newSequences, int *ColumnsToKeep, string *oldSeqsName, sequencesMatrix *seqMatrix, 
+                                              newAlignment *ProtAlig) {
+
+    string *matrixAux;
+    newAlignment *newAlig;
+    int i, j, k, l, oldResidues;
+    int *mappedSeqs, *tmpSequence, *selectedRes;
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Map the selected protein sequences to the input
+     * coding sequences */
+    mappedSeqs = new int[newSequences];
     for(i = 0; i < sequenNumber; i++)
-      delete [] identities[i];
-    delete [] identities;
-  }
-  identities = NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(sgaps != NULL)
-    delete sgaps;
-  sgaps = NULL;
-
-  if(scons != NULL)
-    delete scons;
-  scons = NULL;
-
-  if(SequencesMatrix != NULL)
-    delete SequencesMatrix;
-  SequencesMatrix = NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  oldnewAlignment = false;
-
-  sequenNumber = 0;
-  residNumber  = 0;
-
-  isAligned = false;
-  reverse   = false;
-
-  iformat =  0;
-  oformat =  0;
-  shortNames = false;
-
-  dataType = 0;
-
-  ghWindow = 0;
-  shWindow = 0;
-
-  blockSize = 0;
-
-  filename.clear();
-  aligInfo.clear();
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-}
-
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method computes the overlap for each sequence given a overlap value.
- * This overlap set the minimum fraction that has to be a position for the
- * selected sequence to count as an hit. This proportion measures how much
- * is similar, (in terms of residues, indetermination and gaps), a given
- * position respect to the element on its column. */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method compute the cluster belongs to a given newAlignment at certain
- * identity threshold. To know the clusters from the newAlignment, those
- * clusters are calculated as follow: 1) Select the longest sequences. 2)
- * Using the previous computed identity values, compare if the second
- * longest sequence belongs, because the identity value with the cluster
- * representative is equal or greater than a given threshold, to this cluster
- * or not. 3) If the sequence belongs to this cluster, we add it, if not
- * belongs, we create a new cluster and fix this sequence as its representative
- * 4) Continue with the rest of sequences. In the case that a given sequence
- * can belong to more than one cluster, we choose the cluster which one
- * maximize the identity value respect to its representative sequence */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-int *newAlignment::calculateRepresentativeSeq(float maximumIdent) {
-
-  int i, j, pos, clusterNum, **seqs;
-  int *cluster;
-  static int *repres;
-  float max;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Ask for the sequence identities assesment */
-  if(identities == NULL)
-    calculateSeqIdentity();
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  seqs = new int*[sequenNumber];
-  for(i = 0; i < sequenNumber; i++) {
-    seqs[i] = new int[2];
-    seqs[i][0] = utils::removeCharacter('-', sequences[i]).size();
-    seqs[i][1] = i;
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  utils::quicksort(seqs, 0, sequenNumber-1);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  cluster = new int[sequenNumber];
-  cluster[0] = seqs[sequenNumber - 1][1];
-  clusterNum = 1;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  for(i = sequenNumber - 2; i >= 0; i--) {
+        for(j = 0; j < newSequences; j++)
+            if(!seqsName[i].compare(oldSeqsName[j])) {
+                mappedSeqs[j] = i;
+                break;
+            }
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    for(j = 0, max = 0, pos = -1; j < clusterNum; j++) {
-      if(identities[seqs[i][1]][cluster[j]] > maximumIdent) {
-        if(identities[seqs[i][1]][cluster[j]] > max) {
-          max = identities[seqs[i][1]][cluster[j]];
-          pos = j;
+    /* Get the original newAlignment size as well the original
+     * selected/non-selected columns */
+    oldResidues = seqMatrix -> getResidNumber();
+    selectedRes = new int[oldResidues];
+
+    for(i = 0; i < oldResidues; i++)
+        selectedRes[i] = i;
+
+    for(j = 0; j < ColumnsToKeep[0]; j++)
+        selectedRes[j] = -1;
+
+    for(i = 0; i < newResidues - 1; i++)
+        for(j = ColumnsToKeep[i] + 1; j < ColumnsToKeep[i+1]; j++)
+            selectedRes[j] = -1;
+
+    for(j = ColumnsToKeep[newResidues - 1] + 1; j < oldResidues; j++)
+        selectedRes[j] = -1;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* We allocate memory to save the columns selected */
+    matrixAux = new string[newSequences];
+    tmpSequence = new int[oldResidues];
+
+    /* Using the information about which residues for each
+     * sequence was selected by others function, we process
+     * these residues to recover the corresponding codons */
+    for(i = 0; i < newSequences; i++)
+        if(seqMatrix -> getSequence(oldSeqsName[i], tmpSequence)) {
+            for(j = 0; j < oldResidues; j++) {
+                if((selectedRes[j] != -1) && (tmpSequence[j] != 0)) {
+
+                    for(k = 3 * (tmpSequence[j] - 1), l = 0; l < 3; k++, l++) {
+                        /* Check whether the nucleotide sequences end has been reached or not.
+                         * If it has been reached, complete backtranslation using indetermination
+                         * symbols 'N' */
+                        if((int) sequences[mappedSeqs[i]].length() > k)
+                            matrixAux[i].resize(matrixAux[i].size() + 1, sequences[mappedSeqs[i]][k]);
+                        else
+                            matrixAux[i].resize(matrixAux[i].size() + 1, 'N');
+                    }
+                } else if(selectedRes[j] != -1) {
+                    matrixAux[i].resize(matrixAux[i].size() + 3, '-');
+                }
+            }
+            /* If there is any problems with a sequence then
+             * the function returns an error */
+        } else {
+            return NULL;
         }
-      }
-    }
+    
+    newAlig = new newAlignment(*this);
+    newAlig -> ReadWrite -> aligInfo = "";
+    newAlig -> seqsInfo = NULL;
+    
+    newAlig -> sequenNumber =   newSequences;
+    newAlig -> residNumber =    newResidues * 3;
+    
+    newAlig -> sequences =  new string[newSequences];
+    newAlig -> seqsName =   new string[newSequences];
+    
+    newAlig -> ReadWrite -> iformat =    ProtAlig -> ReadWrite->getInputFormat();
+    newAlig -> ReadWrite -> oformat =    ProtAlig -> ReadWrite->getOutputFormat();
+    newAlig -> ReadWrite -> shortNames = ProtAlig -> getShortNames();
+    
+    newAlig -> dataType =   DNAType;
+    newAlig -> isAligned =  true;
+    
+    newAlig -> reverse =  ProtAlig -> getReverseFlag();
+//     newAlig -> OldResidues = oldResidues * 3; TODO?
+    newAlig -> residuesNumber = NULL;
+    newAlig -> saveSequences = NULL;
+    newAlig -> saveResidues = NULL;
+    
+//     newAlig -> ghWindow = 0;
+//     newAlig -> shWindow = 0;
+    
+    newAlig -> Cleaning -> blockSize = ProtAlig -> getBlockSize();
+    
+    newAlig -> identities = NULL;
+    
+    newAlig -> saveResidues = new int[residNumber];
+
+    
+    
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    if(pos == -1) {
-    cluster[j] = seqs[i][1];
-      clusterNum++;
-    }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  }
+    /* Deallocated auxiliar memory */
+    delete [] matrixAux;
+    delete mappedSeqs;
+    delete tmpSequence;
+    delete selectedRes;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  repres = new int[clusterNum + 1];
-  repres[0] = clusterNum;
-  for(i = 0; i < clusterNum; i++)
-    repres[i+1] = cluster[i];
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Deallocate dinamic memory */
-  for(i = 0; i < sequenNumber; i++)
-  delete [] seqs[i];
-
-  delete [] cluster;
-  delete [] seqs;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  return repres;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-}
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method looks for the optimal cut point for a given clusters number.
- * The idea is to find a identity cut-off point that can be used to get a
- * number of representative sequences similar to the input parameter */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function returns the backtranslation for a given protein processed
- * newAlignment into its CDS newAlignment. To do this convertion, the function needs
- * the Coding sequences as well the original composition of each protein
- * sequence. Also, the function needs to know which columns/sequences will be
- * in the final newAlignment to carray out the conversion. */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-newAlignment *newAlignment::getTranslationCDS(int newResidues, int newSequences, int *ColumnsToKeep, string *oldSeqsName, sequencesMatrix *seqMatrix, newAlignment *ProtAlig) {
-
-  string *matrixAux;
-  newAlignment *newAlig;
-  int i, j, k, l, oldResidues;
-  int *mappedSeqs, *tmpSequence, *selectedRes;
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Map the selected protein sequences to the input
-   * coding sequences */
-  mappedSeqs = new int[newSequences];
-  for(i = 0; i < sequenNumber; i++)
-    for(j = 0; j < newSequences; j++)
-    if(!seqsName[i].compare(oldSeqsName[j])) {
-      mappedSeqs[j] = i;
-      break;
-    }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Get the original newAlignment size as well the original
-   * selected/non-selected columns */
-  oldResidues = seqMatrix -> getResidNumber();
-  selectedRes = new int[oldResidues];
-
-  for(i = 0; i < oldResidues; i++)
-    selectedRes[i] = i;
-
-  for(j = 0; j < ColumnsToKeep[0]; j++)
-    selectedRes[j] = -1;
-
-  for(i = 0; i < newResidues - 1; i++)
-    for(j = ColumnsToKeep[i] + 1; j < ColumnsToKeep[i+1]; j++)
-      selectedRes[j] = -1;
-
-  for(j = ColumnsToKeep[newResidues - 1] + 1; j < oldResidues; j++)
-    selectedRes[j] = -1;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* We allocate memory to save the columns selected */
-  matrixAux = new string[newSequences];
-  tmpSequence = new int[oldResidues];
-
-  /* Using the information about which residues for each
-   * sequence was selected by others function, we process
-   * these residues to recover the corresponding codons */
-  for(i = 0; i < newSequences; i++)
-  if(seqMatrix -> getSequence(oldSeqsName[i], tmpSequence)) {
-    for(j = 0; j < oldResidues; j++) {
-    if((selectedRes[j] != -1) && (tmpSequence[j] != 0)) {
-
-      for(k = 3 * (tmpSequence[j] - 1), l = 0; l < 3; k++, l++) {
-        /* Check whether the nucleotide sequences end has been reached or not.
-         * If it has been reached, complete backtranslation using indetermination
-         * symbols 'N' */
-        if((int) sequences[mappedSeqs[i]].length() > k)
-          matrixAux[i].resize(matrixAux[i].size() + 1, sequences[mappedSeqs[i]][k]);
-        else
-          matrixAux[i].resize(matrixAux[i].size() + 1, 'N');
-    }
-    } else if(selectedRes[j] != -1) {
-          matrixAux[i].resize(matrixAux[i].size() + 3, '-');
-    }
-    }
-  /* If there is any problems with a sequence then
-   * the function returns an error */
-  } else {
-    return NULL;
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-
-  /* Remove columns/sequences composed only by gaps before making the retrotranslation */
-
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* When we have all parameters, we create the new
-   * newAlignment */
-  newAlig = new newAlignment(filename, "", matrixAux, oldSeqsName, NULL, newSequences,
-    newResidues * 3, ProtAlig -> ReadWrite->getInputFormat(), ProtAlig -> ReadWrite->getOutputFormat(),
-    ProtAlig -> getShortNames(), DNAType, true, ProtAlig -> getReverse(),
-    terminalGapOnly, keepSequences, keepHeader, sequenNumber, oldResidues * 3, NULL, NULL,
-    NULL, 0, 0, ProtAlig -> getBlockSize(), NULL);
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Deallocated auxiliar memory */
-  delete [] matrixAux;
-  delete mappedSeqs;
-  delete tmpSequence;
-  delete selectedRes;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Return the new newAlignment reference */
-  return newAlig;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Return the new newAlignment reference */
+    return newAlig;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 
@@ -679,14 +550,14 @@ newAlignment *newAlignment::getTranslationCDS(int newResidues, int newSequences,
 /* Return the number of the sequences in the newAlignment */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int newAlignment::getNumSpecies(void) {
-  return sequenNumber;
+    return sequenNumber;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Return the number of residues in the newAlignment */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int newAlignment::getNumAminos(void) {
-  return residNumber;
+    return residNumber;
 }
 
 
@@ -694,89 +565,89 @@ int newAlignment::getNumAminos(void) {
 /* This method stores the diferent windows values in the newAlignment object */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void newAlignment::setWindowsSize(int ghWindow_, int shWindow_) {
-  ghWindow = ghWindow_;
-  shWindow = shWindow_;
+    Statistics -> ghWindow = ghWindow_;
+    Statistics -> shWindow = shWindow_;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method lets to change the output format */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void newAlignment::setOutputFormat(int format_, bool shortNames_) {
-  oformat    = format_;
-  shortNames = shortNames_;
+    ReadWrite -> oformat    = format_;
+    ReadWrite -> shortNames = shortNames_;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method sets a new block size value */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void newAlignment::setBlockSize(int blockSize_) {
-  blockSize = blockSize_;
+    Cleaning -> blockSize = blockSize_;
 }
 
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Return true if the shortNames flag has been setted */
+/* Return true if the ReadWrite -> shortNames flag has been setted */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int newAlignment::getShortNames(void) {
-  return shortNames;
+    return ReadWrite -> shortNames;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Return true if the reverse flag has been setted. */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-int newAlignment::getReverse(void) {
-  return reverse;
+int newAlignment::getReverseFlag(void) {
+    return reverse;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method lets to change the output newAlignment orientation */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void newAlignment::setReverse(void) {
-  reverse = true;
+void newAlignment::setReverseFlag(void) {
+    reverse = true;
 }
 
 
 /* Set appropiate flag to decide whether sequences composed only by gaps should
  * be kept or not */
 void newAlignment::setKeepSequencesFlag(bool flag) {
-  keepSequences = flag;
+    Cleaning -> keepSequences = flag;
 }
 
 /* Set appropiate flag to decide whether original sequences header should be
  * dumped into the output stream with or without any preprocessing step */
 void newAlignment::setKeepSeqsHeaderFlag(bool flag) {
-  keepHeader = flag;
+    ReadWrite -> keepHeader = flag;
 }
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Return the block size value */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int newAlignment::getBlockSize(void) {
-  return blockSize;
+    return Cleaning -> blockSize;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method returns the sequences name */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void newAlignment::getSequences(string *Names) {
-  for(int i = 0; i < sequenNumber; i++)
-    Names[i] = seqsName[i];
+    for(int i = 0; i < sequenNumber; i++)
+        Names[i] = seqsName[i];
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void newAlignment::getSequences(string *Names, int *lengths) {
-  for(int i = 0; i < sequenNumber; i++) {
-    lengths[i] = (int) utils::removeCharacter('-', sequences[i]).length();
-    Names[i] = seqsName[i];
-  }
+    for(int i = 0; i < sequenNumber; i++) {
+        lengths[i] = (int) utils::removeCharacter('-', sequences[i]).length();
+        Names[i] = seqsName[i];
+    }
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void newAlignment::getSequences(string *Names, string *Sequences, int *Lengths) {
-  for(int i = 0; i < sequenNumber; i++) {
-    Names[i] = seqsName[i];
-    Sequences[i] = utils::removeCharacter('-', sequences[i]);
-    Lengths[i] = (int) Sequences[i].length();
-  }
+    for(int i = 0; i < sequenNumber; i++) {
+        Names[i] = seqsName[i];
+        Sequences[i] = utils::removeCharacter('-', sequences[i]);
+        Lengths[i] = (int) Sequences[i].length();
+    }
 }
 
 
@@ -785,29 +656,29 @@ void newAlignment::getSequences(string *Names, string *Sequences, int *Lengths) 
  * the current sequences name. If there is not a complete correspondence
  * between both sets, the method return false, otherwise, return true */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-bool newAlignment::getSeqNameOrder(string *names, int *orderVector) {
-  int i, j, numNames;
+bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) {
+    int i, j, numNames;
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* For each name in the current newAlignment, we look
-   * for its correspondence in the input set */
-  for(i = 0, numNames = 0; i < sequenNumber; i++) {
-    for(j = 0; j < sequenNumber; j++) {
-      if(seqsName[i] == names[j]) {
-        orderVector[i] = j;
-        numNames++;
-        break;
-      }
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* For each name in the current newAlignment, we look
+     * for its correspondence in the input set */
+    for(i = 0, numNames = 0; i < sequenNumber; i++) {
+        for(j = 0; j < sequenNumber; j++) {
+            if(seqsName[i] == names[j]) {
+                orderVector[i] = j;
+                numNames++;
+                break;
+            }
+        }
     }
-  }
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Depending on if we get the complete correspondence
-   * between both sets of names, we return true or not */
-  if(numNames == sequenNumber) return true;
-  else return false;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    /* Depending on if we get the complete correspondence
+     * between both sets of names, we return true or not */
+    if(numNames == sequenNumber) return true;
+    else return false;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 ///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -880,10 +751,10 @@ bool newAlignment::getSeqNameOrder(string *names, int *orderVector) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Computes, if it's necessary, and return the newAlignment's type */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-int newAlignment::getTypeAlignment(void) {
-  if(dataType == 0)
-    dataType = utils::checkTypeAlignment(sequenNumber, residNumber, sequences);
-  return dataType;
+int newAlignment::getAlignmentType(void) {
+    if(dataType == 0)
+        dataType = utils::checkAlignmentType(sequenNumber, residNumber, sequences);
+    return dataType;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -891,7 +762,7 @@ int newAlignment::getTypeAlignment(void) {
  * trimmed newAlignment */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int *newAlignment::getCorrespResidues(void) {
-  return saveResidues;
+    return saveResidues;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -899,14 +770,14 @@ int *newAlignment::getCorrespResidues(void) {
  * the trimmed newAlignment */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int *newAlignment::getCorrespSequences(void) {
-  return saveSequences;
+    return saveSequences;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Returns if the newAlignment is aligned or not */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 bool newAlignment::isFileAligned(void) {
-  return isAligned;
+    return isAligned;
 }
 
 /* *****************************************************************************
@@ -916,268 +787,259 @@ bool newAlignment::isFileAligned(void) {
 
 /* Function for computing the complementary newAlignment. It just turn around the
  * current columns/sequences selection */
-void newAlignment::computeComplementaryAlig(bool residues, bool sequences) {
-  int i;
-
-  for(i = 0; i < residNumber && residues; i++)
-    saveResidues[i] = (saveResidues[i] == -1) ? i : -1;
-
-  for(i = 0; i < sequenNumber && sequences; i++)
-    saveSequences[i] = (saveSequences[i] == -1) ? i : -1;
-}
 
 
 
 /* Function for copying to previously allocated memory those data selected
  * for being in the final newAlignment */
 void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) {
-  int i, j, k;
+    int i, j, k;
 
-  /* Copy only those sequences/columns selected */
-  for(i = 0, j = 0; i < sequenNumber; i++) {
-    if(saveSequences[i] == -1)
-      continue;
+    /* Copy only those sequences/columns selected */
+    for(i = 0, j = 0; i < sequenNumber; i++) {
+        if(saveSequences[i] == -1)
+            continue;
 
-    newNames[j] = seqsName[i];
-    for(k = 0; k < residNumber; k++) {
-      if(saveResidues[k] == -1)
-        continue;
-      newMatrix[j].resize(newMatrix[j].size() + 1, sequences[i][k]);
+        newNames[j] = seqsName[i];
+        for(k = 0; k < residNumber; k++) {
+            if(saveResidues[k] == -1)
+                continue;
+            newMatrix[j].resize(newMatrix[j].size() + 1, sequences[i][k]);
+        }
+        j++;
     }
-    j++;
-  }
 }
 
 /* Function for copying to previously allocated memory those data selected
  * for being in the final newAlignment */
 void newAlignment::fillNewDataStructure(newValues *data) {
-  int i, j, k;
+    int i, j, k;
 
-  /* Copy only those sequences/columns selected */
-  for(i = 0, j = 0; i < sequenNumber; i++) {
-    if(saveSequences[i] == -1)
-      continue;
+    /* Copy only those sequences/columns selected */
+    for(i = 0, j = 0; i < sequenNumber; i++) {
+        if(saveSequences[i] == -1)
+            continue;
 
-    data -> seqsName[j] = seqsName[i];
-    for(k = 0; k < residNumber; k++) {
-      if(saveResidues[k] == -1)
-        continue;
-      data -> matrix[j].resize(data -> matrix[j].size() + 1, sequences[i][k]);
+        data -> seqsName[j] = seqsName[i];
+        for(k = 0; k < residNumber; k++) {
+            if(saveResidues[k] == -1)
+                continue;
+            data -> matrix[j].resize(data -> matrix[j].size() + 1, sequences[i][k]);
+        }
+        j++;
     }
-    j++;
-  }
-  // cerr << data -> seqsName[j-1] << endl;
+    // cerr << data -> seqsName[j-1] << endl;
 }
 
 /* Check if CDS file is correct based on: Residues are DNA/RNA (at most). There
  * is not gaps in the whole dataset. Each sequence is multiple of 3. At the same
  * time, the function will remove stop codons if appropiate flags are used */
 bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon,\
-  newAlignment *proteinAlig) {
+        newAlignment *proteinAlig) {
 
-  bool warning = false;
-  size_t found;
-  int i;
+    bool warning = false;
+    size_t found;
+    int i;
 
-  /* New code: We now care about the presence of wildcards/indeterminations
-   * characters such as 'X' or 'B' into protein sequences as well as about the
-   * presence of Selenocysteines ('U') or Pyrrolysines ('O'). It only works, by
-   * now, with the universal genetic code */
-  int *protSeqsLengths, numbProtSeqs, current_prot;
-  string *protSeqsNames, *protSequences;
-  char aminoAcid;
+    /* New code: We now care about the presence of wildcards/indeterminations
+     * characters such as 'X' or 'B' into protein sequences as well as about the
+     * presence of Selenocysteines ('U') or Pyrrolysines ('O'). It only works, by
+     * now, with the universal genetic code */
+    int *protSeqsLengths, numbProtSeqs, current_prot;
+    string *protSeqsNames, *protSequences;
+    char aminoAcid;
 
-  numbProtSeqs =  proteinAlig -> getNumSpecies();
-  protSeqsNames = new string[numbProtSeqs];
-  protSequences = new string[numbProtSeqs];
-  protSeqsLengths = new int[numbProtSeqs];
+    numbProtSeqs =  proteinAlig -> getNumSpecies();
+    protSeqsNames = new string[numbProtSeqs];
+    protSequences = new string[numbProtSeqs];
+    protSeqsLengths = new int[numbProtSeqs];
 
-  proteinAlig -> getSequences(protSeqsNames, protSequences, protSeqsLengths);
+    proteinAlig -> getSequences(protSeqsNames, protSequences, protSeqsLengths);
 
-  /* Check read sequences are real DNA/RNA */
-  if (getTypeAlignment() == AAType) {
-    cerr << endl << "ERROR: Check input CDS file. It seems to content protein "
-      << "residues." << endl << endl;
-      return false;
-  }
-
-  for(i = 0; i < sequenNumber; i++) {
-
-    /* Get protein sequence to compare against any potential stop codon in the
-     * coding sequence. If there is not protein sequence for current coding
-     * sequence, skip its analysis */
-    for(current_prot = 0; current_prot < numbProtSeqs; current_prot++)
-      if(protSeqsNames[current_prot] == seqsName[i])
-        break;
-    if(current_prot == numbProtSeqs)
-      continue;
-
-    if(sequences[i].find("-") != string::npos) {
-      if (!warning)
-        cerr << endl;
-      cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has, at least, one gap"
-        << endl << endl;
-      return false;
+    /* Check read sequences are real DNA/RNA */
+    if (getAlignmentType() == AAType) {
+        cerr << endl << "ERROR: Check input CDS file. It seems to content protein "
+             << "residues." << endl << endl;
+        return false;
     }
 
-    if((sequences[i].length() % 3) != 0) {
-      if (!warning)
-        cerr << endl;
-      warning = true;
-      cerr << "WARNING: Sequence length \"" << seqsName[i] << "\" is not "
-        << "multiple of 3 (length: " << sequences[i].length() << ")" << endl;
+    for(i = 0; i < sequenNumber; i++) {
+
+        /* Get protein sequence to compare against any potential stop codon in the
+         * coding sequence. If there is not protein sequence for current coding
+         * sequence, skip its analysis */
+        for(current_prot = 0; current_prot < numbProtSeqs; current_prot++)
+            if(protSeqsNames[current_prot] == seqsName[i])
+                break;
+        if(current_prot == numbProtSeqs)
+            continue;
+
+        if(sequences[i].find("-") != string::npos) {
+            if (!warning)
+                cerr << endl;
+            cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has, at least, one gap"
+                 << endl << endl;
+            return false;
+        }
+
+        if((sequences[i].length() % 3) != 0) {
+            if (!warning)
+                cerr << endl;
+            warning = true;
+            cerr << "WARNING: Sequence length \"" << seqsName[i] << "\" is not "
+                 << "multiple of 3 (length: " << sequences[i].length() << ")" << endl;
+        }
+
+        /* Ignore stop codons from the CDS if set by the user */
+        if (ignStopCodon)
+            continue;
+
+        /* Detect universal stop codons in the CDS. Then, compare those stop codons
+         * against the protein sequence to see whether they are real stop codons or
+         * are representing rare amino-acids such as Selenocysteines or Pyrrolysines
+         * It also allows stop-codons when there are wildcards/indet characters in
+         * the protein sequence. CDS sequences could be splitted using stop codons
+         * from the sequence itself */
+
+        /* Initialize first appearence of a given stop codon to -1.
+         * That means that it has not been found yet */
+        found = -1;
+        do {
+            found = sequences[i].find("TGA", found + 1);
+
+            /* If a stop codon has been found and its position is multiple of 3.
+             * Analize it */
+            if((found != string::npos) && (((int) found % 3) == 0)) {
+
+                aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
+                /* It may be a Selenocysteine ('TGA') which should be represented as 'U'
+                 * or wildcard/indet characters such as 'X' or 'B' */
+                //~ if ((aminoAcid == 'U') || (aminoAcid == 'X') || (aminoAcid == 'B'))
+                /* If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
+                 * such as 'B'/'X' is present, skip current stop codon */
+                if((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
+                        (aminoAcid == 'B'))
+                    continue;
+
+                /* If split_by_stop_codon flag is activated then cut input CDS sequence
+                 * up to first appearance of a stop codon */
+                else if(splitByStopCodon) {
+                    if (!warning)
+                        cerr << endl;
+                    warning = true;
+                    cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
+                         << " appearance of stop codon \"TGA\" (residue \"" << aminoAcid
+                         << "\") at position " << (int) found + 1 << " (length: "
+                         << sequences[i].length() << ")" << endl;
+                    sequences[i].resize((int) found);
+                }
+                /* Otherwise, warn about it and return an error */
+                else {
+                    if (!warning)
+                        cerr << endl;
+                    cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
+                         << "TGA\" (residue \"" << aminoAcid << "\") at position "
+                         << (int) found + 1 << " (length: " << sequences[i].length() << ")"
+                         << endl << endl;
+                    return false;
+                }
+            }
+            /* Iterate over the CDS until not stop codon is found */
+        } while(found != string::npos);
+
+        /* Initialize first appearence of a given stop codon to -1.
+         * That means that it has not been found yet */
+        found = -1;
+        do {
+            found = sequences[i].find("TAA", found + 1);
+
+            /* If a stop codon has been found and its position is multiple of 3.
+             * Analize it */
+            if((found != string::npos) && (((int) found % 3) == 0)) {
+
+                aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
+                /* Check if there is any wildcard/indet characters such as 'X' or 'B' */
+                //~ if ((aminoAcid == 'X') || (aminoAcid == 'B'))
+                /* If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
+                 * such as 'B'/'X' is present, skip current stop codon */
+                if((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
+                        (aminoAcid == 'B'))
+                    continue;
+
+                /* If split_by_stop_codon flag is activated then cut input CDS sequence
+                 * up to first appearance of a stop codon */
+                else if(splitByStopCodon) {
+                    if (!warning)
+                        cerr << endl;
+                    warning = true;
+                    cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
+                         << " appearance of stop codon \"TAA\" (residue \"" << aminoAcid
+                         << "\") at position " << (int) found + 1 << " (length: "
+                         << sequences[i].length() << ")" << endl;
+                    sequences[i].resize((int) found);
+                }
+                /* Otherwise, warn about it and return an error */
+                else {
+                    if (!warning)
+                        cerr << endl;
+                    cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
+                         << "TAA\" (residue \"" << aminoAcid << "\") at position "
+                         << (int) found + 1 << " (length: " << sequences[i].length() << ")"
+                         << endl << endl;
+                    return false;
+                }
+            }
+            /* Iterate over the CDS until not stop codon is found */
+        } while(found != string::npos);
+
+        /* Initialize first appearence of a given stop codon to -1.
+         * That means that it has not been found yet */
+        found = -1;
+        do {
+            found = sequences[i].find("TAG", found + 1);
+            /* If a stop codon has been found and its position is multiple of 3.
+             * Analize it */
+            if((found != string::npos) && (((int) found % 3) == 0)) {
+
+                aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
+                /* It may be a Pyrrolysine ('TAG') which should be represented as 'O'
+                 * or wildcard/indet characters such as 'X' or 'B' */
+                //~ if ((aminoAcid == 'O') || (aminoAcid == 'X') || (aminoAcid == 'B'))
+                /* If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
+                 * such as 'B'/'X' is present, skip current stop codon */
+                if((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
+                        (aminoAcid == 'B'))
+                    continue;
+
+                /* If split_by_stop_codon flag is activated then cut input CDS sequence
+                 * up to first appearance of a stop codon */
+                else if(splitByStopCodon) {
+                    if (!warning)
+                        cerr << endl;
+                    warning = true;
+                    cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
+                         << " appearance of stop codon \"TAG\" (residue \"" << aminoAcid
+                         << "\") at position " << (int) found + 1 << " (length: "
+                         << sequences[i].length() << ")" << endl;
+                    sequences[i].resize((int) found);
+                }
+                /* Otherwise, warn about it and return an error */
+                else {
+                    if (!warning)
+                        cerr << endl;
+                    cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
+                         << "TAG\" (residue \"" << aminoAcid << "\") at position "
+                         << (int) found + 1 << " (length: " << sequences[i].length() << ")"
+                         << endl << endl;
+                    return false;
+                }
+            }
+            /* Iterate over the CDS until not stop codon is found */
+        } while(found != string::npos);
     }
 
-    /* Ignore stop codons from the CDS if set by the user */
-    if (ignStopCodon)
-      continue;
-
-    /* Detect universal stop codons in the CDS. Then, compare those stop codons
-     * against the protein sequence to see whether they are real stop codons or
-     * are representing rare amino-acids such as Selenocysteines or Pyrrolysines
-     * It also allows stop-codons when there are wildcards/indet characters in
-     * the protein sequence. CDS sequences could be splitted using stop codons
-     * from the sequence itself */
-
-    /* Initialize first appearence of a given stop codon to -1.
-     * That means that it has not been found yet */
-    found = -1;
-    do {
-      found = sequences[i].find("TGA", found + 1);
-
-      /* If a stop codon has been found and its position is multiple of 3.
-       * Analize it */
-      if((found != string::npos) && (((int) found % 3) == 0)) {
-
-        aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
-        /* It may be a Selenocysteine ('TGA') which should be represented as 'U'
-         * or wildcard/indet characters such as 'X' or 'B' */
-        //~ if ((aminoAcid == 'U') || (aminoAcid == 'X') || (aminoAcid == 'B'))
-        /* If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
-         * such as 'B'/'X' is present, skip current stop codon */
-        if((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
-          (aminoAcid == 'B'))
-          continue;
-
-        /* If split_by_stop_codon flag is activated then cut input CDS sequence
-         * up to first appearance of a stop codon */
-        else if(splitByStopCodon) {
-          if (!warning)
-            cerr << endl;
-          warning = true;
-          cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
-            << " appearance of stop codon \"TGA\" (residue \"" << aminoAcid
-            << "\") at position " << (int) found + 1 << " (length: "
-            << sequences[i].length() << ")" << endl;
-          sequences[i].resize((int) found);
-        }
-        /* Otherwise, warn about it and return an error */
-        else {
-          if (!warning)
-            cerr << endl;
-          cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
-            << "TGA\" (residue \"" << aminoAcid << "\") at position "
-            << (int) found + 1 << " (length: " << sequences[i].length() << ")"
-            << endl << endl;
-          return false;
-        }
-      }
-    /* Iterate over the CDS until not stop codon is found */
-    } while(found != string::npos);
-
-    /* Initialize first appearence of a given stop codon to -1.
-     * That means that it has not been found yet */
-    found = -1;
-    do {
-      found = sequences[i].find("TAA", found + 1);
-
-      /* If a stop codon has been found and its position is multiple of 3.
-       * Analize it */
-      if((found != string::npos) && (((int) found % 3) == 0)) {
-
-        aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
-        /* Check if there is any wildcard/indet characters such as 'X' or 'B' */
-        //~ if ((aminoAcid == 'X') || (aminoAcid == 'B'))
-        /* If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
-         * such as 'B'/'X' is present, skip current stop codon */
-        if((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
-          (aminoAcid == 'B'))
-          continue;
-
-        /* If split_by_stop_codon flag is activated then cut input CDS sequence
-         * up to first appearance of a stop codon */
-        else if(splitByStopCodon) {
-          if (!warning)
-            cerr << endl;
-          warning = true;
-          cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
-            << " appearance of stop codon \"TAA\" (residue \"" << aminoAcid
-            << "\") at position " << (int) found + 1 << " (length: "
-            << sequences[i].length() << ")" << endl;
-          sequences[i].resize((int) found);
-        }
-        /* Otherwise, warn about it and return an error */
-        else {
-          if (!warning)
-            cerr << endl;
-          cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
-            << "TAA\" (residue \"" << aminoAcid << "\") at position "
-            << (int) found + 1 << " (length: " << sequences[i].length() << ")"
-            << endl << endl;
-          return false;
-        }
-      }
-    /* Iterate over the CDS until not stop codon is found */
-    } while(found != string::npos);
-
-    /* Initialize first appearence of a given stop codon to -1.
-     * That means that it has not been found yet */
-    found = -1;
-    do {
-      found = sequences[i].find("TAG", found + 1);
-      /* If a stop codon has been found and its position is multiple of 3.
-       * Analize it */
-      if((found != string::npos) && (((int) found % 3) == 0)) {
-
-        aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
-        /* It may be a Pyrrolysine ('TAG') which should be represented as 'O'
-         * or wildcard/indet characters such as 'X' or 'B' */
-        //~ if ((aminoAcid == 'O') || (aminoAcid == 'X') || (aminoAcid == 'B'))
-        /* If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
-         * such as 'B'/'X' is present, skip current stop codon */
-        if((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
-          (aminoAcid == 'B'))
-          continue;
-
-        /* If split_by_stop_codon flag is activated then cut input CDS sequence
-         * up to first appearance of a stop codon */
-        else if(splitByStopCodon) {
-          if (!warning)
-            cerr << endl;
-          warning = true;
-          cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
-            << " appearance of stop codon \"TAG\" (residue \"" << aminoAcid
-            << "\") at position " << (int) found + 1 << " (length: "
-            << sequences[i].length() << ")" << endl;
-          sequences[i].resize((int) found);
-        }
-        /* Otherwise, warn about it and return an error */
-        else {
-          if (!warning)
-            cerr << endl;
-          cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
-            << "TAG\" (residue \"" << aminoAcid << "\") at position "
-            << (int) found + 1 << " (length: " << sequences[i].length() << ")"
-            << endl << endl;
-          return false;
-        }
-      }
-    /* Iterate over the CDS until not stop codon is found */
-    } while(found != string::npos);
-  }
-
-  /* If everything was return an OK to informat about it. */
-  return true;
+    /* If everything was return an OK to informat about it. */
+    return true;
 }
 
 /* Function designed to check whether input CDS file is correct or not based on
@@ -1185,86 +1047,86 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
  * they have (more or less) same ength. Otherwise, some nucleotides could be
  * excluded or some 'N's added to fit protein length. */
 bool newAlignment::checkCorrespondence(string *names, int *lengths, int \
-  totalInputSeqs, int multiple = 1) {
+                                       totalInputSeqs, int multiple = 1) {
 
-  int i, j, seqLength, indet;
-  bool warnings = false;
-  string tmp;
+    int i, j, seqLength, indet;
+    bool warnings = false;
+    string tmp;
 
-  /* For each sequence in the current protein newAlignment, look for its coding
-   * DNA sequence checking that they have the same size. */
-  for(i = 0; i < sequenNumber; i++) {
+    /* For each sequence in the current protein newAlignment, look for its coding
+     * DNA sequence checking that they have the same size. */
+    for(i = 0; i < sequenNumber; i++) {
 
-    /* Get protein sequence length removing any possible gap. Get as well last
-     * residue from current sequence */
+        /* Get protein sequence length removing any possible gap. Get as well last
+         * residue from current sequence */
 
-    tmp = utils::removeCharacter('-', sequences[i]);
-    seqLength = tmp.length() * multiple;
-    indet = ((int) tmp.length() - utils::min((int) tmp.find_last_not_of("X"), \
-      (int) tmp.find_last_not_of("x"))) - 1;
+        tmp = utils::removeCharacter('-', sequences[i]);
+        seqLength = tmp.length() * multiple;
+        indet = ((int) tmp.length() - utils::min((int) tmp.find_last_not_of("X"), \
+                 (int) tmp.find_last_not_of("x"))) - 1;
 
-    /* Go through all available CDS looking for the one with the same ID */
-    for(j = 0; j < totalInputSeqs; j++) {
+        /* Go through all available CDS looking for the one with the same ID */
+        for(j = 0; j < totalInputSeqs; j++) {
 
-      /* Once both ID matchs, compare its lengths */
-      if(seqsName[i] == names[j]) {
+            /* Once both ID matchs, compare its lengths */
+            if(seqsName[i] == names[j]) {
 
-        /* If both sequences have the same length, stop the search */
-        if(seqLength == lengths[j])
-          break;
+                /* If both sequences have the same length, stop the search */
+                if(seqLength == lengths[j])
+                    break;
 
-        /* If nucleotide sequence is larger than protein sequence, warn about
-         * it and continue the verification process. It will used the 'Nth'
-         * first nucleotides for the conversion */
-        else if(seqLength < lengths[j]) {
-          if (!warnings)
-            cerr << endl;
-          warnings = true;
-          cerr << "WARNING: Sequence \"" << seqsName[i] << "\" will be cutted "
-            << "at position " << seqLength << " (length: "<< lengths[j] << ")"
-            << endl;
-          break;
+                /* If nucleotide sequence is larger than protein sequence, warn about
+                 * it and continue the verification process. It will used the 'Nth'
+                 * first nucleotides for the conversion */
+                else if(seqLength < lengths[j]) {
+                    if (!warnings)
+                        cerr << endl;
+                    warnings = true;
+                    cerr << "WARNING: Sequence \"" << seqsName[i] << "\" will be cutted "
+                         << "at position " << seqLength << " (length: "<< lengths[j] << ")"
+                         << endl;
+                    break;
+                }
+
+                /* It has been detected some indeterminations at the end of the protein
+                 * sequence. That issue could be cause by some incomplete codons in the
+                 * nucleotide sequences. This issue is solved adding as much 'N' symbols
+                 * as it is needed to preserve the backtranslated newAlignment */
+                else if((indet > 0) && (indet > (seqLength - lengths[j])/3)) {
+                    if (!warnings)
+                        cerr << endl;
+                    warnings = true;
+                    cerr << "WARNING: Sequence \"" << seqsName[i] << "\" has some inde"
+                         << "termination symbols 'X' at the end of sequence. They will be"
+                         << " included in the final newAlignment." << endl;
+                    break;
+                }
+
+                /* If nucleotide sequence is shorter than protein sequence, return an
+                 * error since it is not feasible to cut the input protein aligment to
+                 * fit it into CDNA sequences size */
+                else {
+                    if (!warnings)
+                        cerr << endl;
+                    warnings = true;
+                    cerr << "WARNING: Sequence \"" << seqsName[i] << "\" has less nucleo"
+                         << "tides (" << lengths[j] << ") than expected (" << seqLength
+                         << "). It will be added N's to complete the sequence"  << endl;
+                    break;
+                }
+            }
         }
 
-        /* It has been detected some indeterminations at the end of the protein
-         * sequence. That issue could be cause by some incomplete codons in the
-         * nucleotide sequences. This issue is solved adding as much 'N' symbols
-         * as it is needed to preserve the backtranslated newAlignment */
-        else if((indet > 0) && (indet > (seqLength - lengths[j])/3)) {
-          if (!warnings)
-            cerr << endl;
-          warnings = true;
-          cerr << "WARNING: Sequence \"" << seqsName[i] << "\" has some inde"
-            << "termination symbols 'X' at the end of sequence. They will be"
-            << " included in the final newAlignment." << endl;
-          break;
+        /* Warn about a mismatch a sequences name level */
+        if(j == totalInputSeqs) {
+            cerr << endl << "ERROR: Sequence \"" << seqsName[i] << "\" is not in "
+                 << "CDS file." << endl << endl;
+            return false;
         }
-
-        /* If nucleotide sequence is shorter than protein sequence, return an
-         * error since it is not feasible to cut the input protein aligment to
-         * fit it into CDNA sequences size */
-        else {
-          if (!warnings)
-            cerr << endl;
-          warnings = true;
-          cerr << "WARNING: Sequence \"" << seqsName[i] << "\" has less nucleo"
-            << "tides (" << lengths[j] << ") than expected (" << seqLength
-            << "). It will be added N's to complete the sequence"  << endl;
-          break;
-        }
-      }
     }
 
-    /* Warn about a mismatch a sequences name level */
-    if(j == totalInputSeqs) {
-      cerr << endl << "ERROR: Sequence \"" << seqsName[i] << "\" is not in "
-        << "CDS file." << endl << endl;
-      return false;
-    }
-  }
-
-  /* If everything is OK, return an appropiate flag */
-  return true;
+    /* If everything is OK, return an appropiate flag */
+    return true;
 }
 
 bool newAlignment::fillMatrices(bool aligned) {
@@ -1381,78 +1243,7 @@ void newAlignment::printAlignmentInfo(ostream &file) {
           << "## Shortest seq. length\t" << min << endl;
 }
 
-void newAlignment::calculateSeqIdentity(void) {
 
-    int i, j, k, hit, dst;
-    char indet;
-
-    /* Depending on alignment type, indetermination symbol will be one or other */
-    indet = getTypeAlignment() == AAType ? 'X' : 'N';
-
-    /* Create identities matrix to store identities scores */
-    identities = new float*[sequenNumber];
-
-    /* For each seq, compute its identity score against the others in the MSA */
-    for(i = 0; i < sequenNumber; i++) {
-        identities[i] = new float[sequenNumber];
-
-        /* It's a symmetric matrix, copy values that have been already computed */
-        for(j = 0; j < i; j++)
-            identities[i][j] = identities[j][i];
-        identities[i][i] = 0;
-
-        /* Compute identity scores for the current sequence against the rest */
-        for(j = i + 1; j < sequenNumber; j++) {
-            for(k = 0, hit = 0, dst = 0; k < residNumber; k++) {
-                /* If one of the two positions is a valid residue,
-                 * count it for the common length */
-                if(((sequences[i][k] != indet) && (sequences[i][k] != '-')) ||
-                   ((sequences[j][k] != indet) && (sequences[j][k] != '-'))) {
-                    dst++;
-                    /* If both positions are the same, count a hit */
-                    if(sequences[i][k] == sequences[j][k])
-                        hit++;
-                }
-            }
-
-            /* Identity score between two sequences is the ratio of identical residues
-             * by the total length (common and no-common residues) among them */
-            identities[i][j] = (float) hit/dst;
-        }
-    }
-}
-
-void newAlignment::calculateRelaxedSeqIdentity(void) {
-    /* Raw approximation of sequence identity computation designed for reducing
-     * comparisons for huge alignemnts */
-
-    int i, j, k, hit;
-
-    /* Create identities matrix to store identities scores */
-    identities = new float*[sequenNumber];
-
-    /* For each seq, compute its identity score against the others in the MSA */
-    for(i = 0; i < sequenNumber; i++) {
-        identities[i] = new float[sequenNumber];
-
-        /* It's a symmetric matrix, copy values that have been already computed */
-        for(j = 0; j < i; j++)
-            identities[i][j] = identities[j][i];
-        identities[i][i] = 0;
-
-        /* Compute identity score between the selected sequence and the others */
-        for(j = i + 1; j < sequenNumber; j++) {
-            for(k = 0, hit = 0; k < residNumber; k++) {
-                /* If both positions are the same, count a hit */
-                if(sequences[i][k] == sequences[j][k])
-                    hit++;
-            }
-            /* Raw identity score is computed as the ratio of identical residues between
-             * alignment length */
-            identities[i][j] = (float) hit/residNumber;
-        }
-    }
-}
 
 
 
@@ -1463,61 +1254,7 @@ void newAlignment::calculateRelaxedSeqIdentity(void) {
  * one, etc, to select which one is the best automated method to trim this
  * alignment */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-int newAlignment::selectMethod(void) {
 
-    float mx, avg, maxSeq = 0, avgSeq = 0;
-    int i, j;
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Ask for the sequence identities assesment */
-    if(identities == NULL)
-        calculateSeqIdentity();
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Once we have the identities among all possible
-     * combinations between each pair of sequence. We
-     * compute the average identity as well as the
-     * average identity for each sequence with its most
-     * similar one */
-    for(i = 0; i < sequenNumber; i++) {
-        for(j = 0, mx = 0, avg = 0; j < sequenNumber; j++) {
-            if(i != j) {
-                mx  = mx < identities[i][j] ? identities[i][j] : mx;
-                avg += identities[i][j];
-            }
-        }
-        avgSeq += avg/(sequenNumber - 1);
-        maxSeq += mx;
-    }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    avgSeq = avgSeq/sequenNumber;
-    maxSeq = maxSeq/sequenNumber;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* With the different parameters, we decide wich one
-     * is the best automated method, based on a previous
-     * simulated data benchmarks, to trim the alig */
-    if(avgSeq >= 0.55)      return GAPPYOUT;
-    else if(avgSeq <= 0.38) return STRICT;
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* Sometimes we need to use more parameters to select
-         * the best automated method, always based on our
-         * benchmarks, to trim the input alignment */
-    else {
-        if(sequenNumber <= 20) return GAPPYOUT;
-        else {
-            if((maxSeq >= 0.5) && (maxSeq <= 0.65)) return GAPPYOUT;
-            else return STRICT;
-        }
-    }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-}
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method prints different identity values computed from the alignment.
@@ -1532,7 +1269,7 @@ void newAlignment::printSeqIdentity(void) {
 
     /* Ask for the sequence identities assesment */
     if(identities == NULL)
-        calculateSeqIdentity();
+        Cleaning -> calculateSeqIdentity();
 
     /* For each sequence, we look for its most similar one */
     maxs = new float*[sequenNumber];
@@ -1618,7 +1355,7 @@ void newAlignment::calculateColIdentity(float *ColumnIdentities) {
     string column;
 
     /* Initialize some data for make computation more precise */
-    indet = getTypeAlignment() == AAType ? 'X' : 'N';
+    indet = getAlignmentType() == AAType ? 'X' : 'N';
     gapSymbol = '-';
 
     /* Compute identity score for the most frequent residue, it can be as well
