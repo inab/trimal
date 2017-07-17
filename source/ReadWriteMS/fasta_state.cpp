@@ -17,66 +17,153 @@ int FastaState::CheckAlignment(istream* origin)
     return 0;
 }
 
-newAlignment* FastaState::LoadAlignment(istream* origin)
+newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
 {
-    origin->clear();
-    origin->seekg(0);
-
+    /* FASTA file format parser */
     newAlignment* _alignment = new newAlignment();
+    char *str, *line = NULL;
+    ifstream file;
+    int i;
+
+    /* Check the file and its content */
+    file.open(filename, ifstream::in);
+    if(!utils::checkFile(file))
+        return nullptr;
+
+    /* Store input file name for posterior uses in other formats */
+    filename.append("!Title ");
+    filename.append(filename);
+    filename.append(";");
 
     /* Compute how many sequences are in the input alignment */
     _alignment->sequenNumber = 0;
-    
-    for( std::string line; getline( (*origin), line ); )
-    {
-        if (line[0] == '>')
-            _alignment -> sequenNumber++;
+    while(!file.eof()) {
+
+        /* Deallocate previously used dinamic memory */
+        if (line != NULL)
+            delete [] line;
+
+        /* Read lines in a safe way */
+        line = utils::readLine(file);
+        if (line == NULL)
+            continue;
+
+        /* It the line starts by ">" means that a new sequence has been found */
+        str = strtok(line, DELIMITERS);
+        if (str == NULL)
+            continue;
+
+        /* If a sequence name flag is detected, increase sequences counter */
+        if(str[0] == '>')
+            _alignment->sequenNumber++;
     }
-    
+
     /* Finish to preprocess the input file. */
-    origin->clear();
-    origin->seekg(0);
+    file.clear();
+    file.seekg(0);
 
     /* Allocate memory for the input alignmet */
     _alignment->seqsName  = new string[_alignment->sequenNumber];
     _alignment->sequences = new string[_alignment->sequenNumber];
-    _alignment->seqsInfo  = NULL;
-    
-    int i = -1;
-    for( std::string line; getline( (*origin), line ); )
-    {
+    _alignment->seqsInfo  = new string[_alignment->sequenNumber];
+
+    for(i = -1; (i < _alignment->sequenNumber) && (!file.eof()); ) {
+
+        /* Deallocate previously used dinamic memory */
+        if (line != NULL)
+            delete [] line;
+
+        /* Read lines in a safe way */
+        line = utils::readLine(file);
+        if (line == NULL)
+            continue;
+
+        /* Store original header fom input sequences including non-standard
+         * characters */
         if (line[0] == '>')
-        {
-            int last_not = line.find_last_not_of("\t\n ");
-            
-            _alignment->seqsName[++i] = std::string().append(&line[1], last_not);
-            _alignment->sequences[i] = "";
-//             _alignment->seqsInfo[i] = std::string().append(&line[1], last_not);
+            _alignment->seqsInfo[i+1].append(&line[1], strlen(line) - 1);
+
+        /* Cut the current line and check whether there are valid characters */
+        str = strtok(line, OTHDELIMITERS);
+        if (str == NULL)
+            continue;
+
+        /* Check whether current line belongs to the current sequence
+         * or it is a new one. In that case, store the sequence name */
+        if(str[0] == '>') {
+            /* Move sequence name pointer until a valid string name is obtained */
+            do {
+                str = str + 1;
+            } while(strlen(str) == 0);
+            _alignment->seqsName[++i].append(str, strlen(str));
+            continue;
         }
-        else 
-        {
-            _alignment->sequences[i].append(line);
+
+        /* Sequence */
+        while(str != NULL) {
+            _alignment->sequences[i].append(str, strlen(str));
+            str = strtok(NULL, DELIMITERS);
         }
     }
 
+    /* Close the input file */
+    file.close();
+
+    /* Deallocate previously used dinamic memory */
+    if (line != NULL)
+        delete [] line;
+        
     /* Check the matrix's content */
     _alignment->fillMatrices(false);
-    return _alignment;
+    return _alignment; 
 }
 
 void FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
-    for (int i = 0; i < alignment->sequenNumber; i++)
-    {
-        if (Machine -> shortNames)
-            (*output) << ">" << alignment->seqsName[i].substr(0, 10) << endl;
-        else
-            (*output) << ">" << alignment->seqsName[i] << endl;
-        for (int x = 0; x < alignment->sequences[i].length(); x+= 60)
-        {
-            (*output) << alignment->sequences[i].substr(x, 60) << endl;
-        }
+    /* Generate output alignment in FASTA format. Sequences can be unaligned. */
+
+    int i, j, maxLongName;
+    string *tmpMatrix;
+
+    /* Allocate local memory for generating output alignment */
+    tmpMatrix = new string[alignment->sequenNumber];
+
+    /* Depending on alignment orientation: forward or reverse. Copy directly
+     * sequence information or get firstly the reversed sequences and then
+     * copy it into local memory */
+    for(i = 0; i < alignment->sequenNumber; i++)
+        tmpMatrix[i] = (!alignment->reverse) ?
+                       alignment->sequences[i] :
+                       utils::getReverse(alignment->sequences[i]);
+
+    /* Depending on if short name flag is activated (limits sequence name up to
+     * 10 characters) or not, get maximum sequence name length. Consider those
+     * cases when the user has asked to keep original sequence header */
+    maxLongName = 0;
+    for(i = 0; i < alignment->sequenNumber; i++)
+        if (!Machine->keepHeader)
+            maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
+        else if (alignment->seqsInfo != NULL)
+            maxLongName = utils::max(maxLongName, alignment->seqsInfo[i].size());
+
+    if (!Machine->shortNames && maxLongName > PHYLIPDISTANCE) {
+        maxLongName = PHYLIPDISTANCE;
+        if (!Machine->keepHeader)
+            cerr << endl << "WARNING: Original sequence header will be cutted by "
+                 << " 10 characters" << endl;
     }
+    /* Print alignment. First, sequences name id and then the sequences itself */
+    for(i = 0; i < alignment->sequenNumber; i++) {
+        if (!Machine->keepHeader)
+            (*output) << ">" << alignment->seqsName[i].substr(0, maxLongName) << endl;
+        else if (alignment->seqsInfo != NULL)
+            (*output) << ">" << alignment->seqsInfo[i].substr(0, maxLongName) << endl;
+        for(j = 0; j < alignment->residNumber; j+= 60)
+            (*output) << tmpMatrix[i].substr(j, 60) << endl;
+    }
+
+    /* Deallocate local memory */
+    delete [] tmpMatrix;
 }
 
 bool FastaState::RecognizeOutputFormat(std::string FormatName)

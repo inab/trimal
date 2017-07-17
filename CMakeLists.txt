@@ -28,7 +28,6 @@ set(preview
         source/ReadWriteManager.cpp
         source/trimalArgumentParser.cpp
         source/ReadWriteMS/ReadWriteMachineState.cpp
-        source/ReadWriteMS/readwrites.cpp
         )
 
 # Include all states of ReadWriteMachineState

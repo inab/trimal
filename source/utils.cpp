@@ -31,11 +31,6 @@
 #include "../include/values.h"
 #include "../include/defines.h"
 
-/*++++++++++++++++++++++++++++++++++++++++++++++++
-| void utils::initVect(int *, int, int)          |
-|      This method is used to initializate all   |
-|      positions of a vector with a given value. |
-++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 void utils::initlVect(int *vector, int tam, int valor) {
 
@@ -46,15 +41,7 @@ void utils::initlVect(int *vector, int tam, int valor) {
 void utils::initlVect(float *vector, int tam, float valor) {
 
   for(int i = 0; i < tam; i++) vector[i] = valor;
-
 }
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++
-| void utils::copyVect(int *, int *, int)     |
-|      This method copies integer vector 1 to |
-|      integer vector 2.                      |
-+++++++++++++++++++++++++++++++++++++++++++++*/
 
 void utils::copyVect(int *vect1, int *vect2, int tam) {
 
@@ -62,61 +49,25 @@ void utils::copyVect(int *vect1, int *vect2, int tam) {
 
 }
 
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++
-| void utils::copyVect(float *, float *, float) |
-|      This method copies float vector 1 to     |
-|      float vector 2.                          |
-+++++++++++++++++++++++++++++++++++++++++++++++*/
-
 void utils::copyVect(float *vect1, float *vect2, int tam) {
 
   for(int i = 0; i < tam; i++) vect2[i] = vect1[i];
-
 }
-
-
-/*+++++++++++++++++++++++++++++++++++++++++
-| int utils::roundToInf(double)           |
-|      This method rounds a double number |
-|      to the inferior integer.           |
-+++++++++++++++++++++++++++++++++++++++++*/
 
 int utils::roundToInf(double number) {
 
   return ((int) number);
 }
 
-
-/*+++++++++++++++++++++++++++++++++++++++++
-| int utils::roundInt(double)             |
-|      This method rounds a double number |
-|      to a integer.                      |
-+++++++++++++++++++++++++++++++++++++++++*/
-
 int utils::roundInt(double number) {
 
   return ((int) ((double) number + 0.5));
 }
 
-
-/*+++++++++++++++++++++++++++++++++++++++++
-| int utils::roundToSup(double)           |
-|      This method rounds a double number |
-|      to the greater integer.            |
-+++++++++++++++++++++++++++++++++++++++++*/
-
 int utils::roundToSup(double number) {
 
   return ((int) ((double) number + 1.0));
 }
-
-
-/*+++++++++++++++++++++++++++++++++++++++++
-| int utils::max(int, int)                |
-|      This method returns the maximum    |
-|      value of the two given arguments.  |
-+++++++++++++++++++++++++++++++++++++++++*/
 
 int utils::max(int x, int y) {
 
@@ -154,12 +105,6 @@ double utils::min(double x, double y) {
   else      return y;
 }
 
-/*+++++++++++++++++++++++++++++++++++++++++++
-| bool utils::isNumber(char *)              |
-|      This method checks if the given      |
-|      string is a float number.            |
-+++++++++++++++++++++++++++++++++++++++++++*/
-
 bool utils::isNumber(char *num){
 
   int tam = strlen(num);
@@ -183,26 +128,10 @@ bool utils::isNumber(char *num){
 
 }
 
-
-/*+++++++++++++++++++++++++++++++++++++++++++
-| bool utils::compare(char *, char *)       |
-|      This method compares the two strings |
-|      given, and returns true if the two   |
-|      strings are equal.                   |
-+++++++++++++++++++++++++++++++++++++++++++*/
-
 bool utils::compare(char *a, char *b){
 
   return(!strcmp(a,b));
 }
-
-
-/*++++++++++++++++++++++++++++++++++++++++++
-| void utils::removeSpaces(char *, char *) |
-|      This method removes spaces in the   |
-|      input string and put the result in  |
-|      the output string.                  |
-++++++++++++++++++++++++++++++++++++++++++*/
 
 void utils::removeSpaces(char *in, char *out){
 
@@ -217,13 +146,6 @@ void utils::removeSpaces(char *in, char *out){
   }
   out[j] = '\0';
 }
-
-
-/*++++++++++++++++++++++++++++++++++++++++++
-| void utils::quicksort(float *, int, int) |
-|      This method sorts the vector using  |
-|      the quicksort method.               |
-++++++++++++++++++++++++++++++++++++++++++*/
 
 void utils::quicksort(float *vect, int ini, int fin) {
 
@@ -259,13 +181,6 @@ void utils::quicksort(float *vect, int ini, int fin) {
   quicksort(vect, i + 1, fin);
 }
 
-
-/*++++++++++++++++++++++++++++++++++++++++
-| void utils::swap(float *, float *)     |
-|      This method swaps the values in a |
-|      and b.                            |
-++++++++++++++++++++++++++++++++++++++++*/
-
 void utils::swap(float *a, float *b){
 
   float temp;
@@ -275,12 +190,6 @@ void utils::swap(float *a, float *b){
   *b = temp;
 
 }
-
-/*++++++++++++++++++++++++++++++++++++++++++
-| void utils::quicksort(float *, int, int) |
-|      This method sorts the vector using  |
-|      the quicksort method.               |
-++++++++++++++++++++++++++++++++++++++++++*/
 
 void utils::quicksort(int *vect, int ini, int fin) {
 
@@ -315,13 +224,6 @@ void utils::quicksort(int *vect, int ini, int fin) {
   quicksort(vect, i + 1, fin);
 }
 
-
-/*++++++++++++++++++++++++++++++++++++++++
-| void utils::swap(float *, float *)     |
-|      This method swaps the values in a |
-|      and b.                            |
-++++++++++++++++++++++++++++++++++++++++*/
-
 void utils::swap(int *a, int *b) {
 
   int temp;
@@ -331,7 +233,6 @@ void utils::swap(int *a, int *b) {
   *b = temp;
 
 }
-
 
 void utils::quicksort(int **vect, int ini, int fin) {
 
@@ -407,6 +308,50 @@ bool utils::checkFile(ifstream &file) {
 }
 
 char* utils::readLine(ifstream &file) {
+  /* Read a new line from current input stream. This function is better than
+   * standard one since cares of operative system compability. It is useful
+   * as well because remove tabs and blank spaces at lines beginning/ending */
+
+  int state;
+  char c = ' ';
+  string nline;
+  static char *line = NULL;
+
+  /* Check it the end of the file has been reached or not */
+  if(file.eof())
+    return NULL;
+
+  /* Store first line found. For -Windows & MacOS compatibility- carriage return
+   * is considered as well as a new line character */
+  for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
+    nline.resize(nline.size() + 1, c);
+
+  /* Remove blank spaces & tabs from the beginning of the line */
+  state = nline.find(" ", 0);
+  while(state != (int) string::npos && state == 0) {
+    nline.erase(state, 1);
+    state = nline.find(" ", state);
+  }
+
+  state = nline.find("\t", 0);
+  while(state != (int) string::npos && state == 0) {
+    nline.erase(state, 1);
+    state = nline.find("\t", state);
+  }
+
+  /* If there is nothing to return, give back a NULL pointer ... */
+  if(nline.size() == 0)
+    return NULL;
+
+  /* Otherwise, initialize the appropiate data structure,
+   * dump the data and return it */
+  line = new char[nline.size() + 1];
+  strcpy(line, nline.c_str());
+  return line;
+}
+
+char* utils::readLine(std::istream& file)
+{
   /* Read a new line from current input stream. This function is better than
    * standard one since cares of operative system compability. It is useful
    * as well because remove tabs and blank spaces at lines beginning/ending */

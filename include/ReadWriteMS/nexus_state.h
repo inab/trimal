@@ -1,13 +1,13 @@
-#ifndef MEGASSTATE_H
-#define MEGASSTATE_H
+#ifndef NEXUSSTATE_H
+#define NEXUSSTATE_H
 
 #include "ReadWriteBaseState.h"
 
-class MegaSequentialState : public ReadWriteBaseState
+class NexusState : public ReadWriteBaseState
 {
 public:
     
-    MegaSequentialState(ReadWriteMS* MachineState) { Machine = MachineState; name="MEGAS"; };
+    NexusState(ReadWriteMS* MachineState) { Machine = MachineState; name="NEXUS"; };
     
     virtual int CheckAlignment(istream* origin);
     virtual newAlignment* LoadAlignment(string filename);
@@ -16,4 +16,4 @@ public:
      
 };
 
-#endif // MEGASSTATE_H
+#endif // NEXUSSTATE_H

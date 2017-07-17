@@ -106,7 +106,8 @@ public:
   string *seqsName;
   string *seqsInfo;
 
-
+    string filename;
+    string aligInfo;
 
   /* Statistics */
   statisticsGaps *sgaps;

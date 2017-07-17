@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-class readwrites;
+class ReadWriteBaseState;
 class ReadWriteMS
 {
 public:
@@ -13,19 +13,20 @@ public:
     ~ReadWriteMS();
     
 private:
-    std::vector<readwrites*> available_states;
-    readwrites* outState;
-    readwrites* inState;
+    std::vector<ReadWriteBaseState*> available_states;
+    ReadWriteBaseState* outState;
+    ReadWriteBaseState* inState;
     
-    void addState(readwrites* newState);
+    void addState(ReadWriteBaseState* newState);
 public:
     
     bool shortNames = false;
+    bool keepHeader = false;
     
     void processFile(std::string inFile, std::string outFile, std::string outFormat);
-//     void processFile(std::string inFile, std::string outPattern, std::string outFormats[]);
-//     
-//     void processFile(std::string inFiles[], std::string outPattern, std::string outFormat);
+    void processFile(std::string inFile, std::string outPattern, std::vector<std::string> outFormats[]);
+     
+//     void processFile(std::string inFiles[], std::string outFile, std::string outFormat);
 //     void processFile(std::string inFiles[], std::string outPattern, std::string outFormats[]);
 };
 

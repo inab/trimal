@@ -1,16 +1,16 @@
 #ifndef CLUSTALSTATE_H
 #define CLUSTALSTATE_H
 
-#include "readwrites.h"
+#include "ReadWriteBaseState.h"
 
-class ClustalState : public readwrites
+class ClustalState : public ReadWriteBaseState
 {
 public:
     
-    ClustalState(ReadWriteMS* MachineState) { Machine = MachineState; };
+    ClustalState(ReadWriteMS* MachineState) { Machine = MachineState; name="CLUSTAL"; };
     
     virtual int CheckAlignment(istream* origin);
-    virtual newAlignment* LoadAlignment(istream* origin);
+    virtual newAlignment* LoadAlignment(string filename);
     virtual void SaveAlignment(newAlignment* alignment, ostream* output, std::string* FileName);
     virtual bool RecognizeOutputFormat(std::string FormatName);
      

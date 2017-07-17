@@ -117,7 +117,7 @@ newAlignment::newAlignment(void) {
     seqsInfo  = NULL;
 
     /* Information about input newAlignment */
-//     filename = "";
+    filename = "";
 //     aligInfo = "";
 
     /* Information computed from newAlignment */

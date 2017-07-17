@@ -10,80 +10,215 @@ using namespace std;
 
 int PirState::CheckAlignment(istream* origin)
 {
-    string str;
-     origin->seekg(0);
-     getline( (*origin), str );
-     if (str[0] == '>' && str[3] == ';')
-         return 2;
+    origin->seekg(0);
+    origin->clear();
+    char *firstWord = NULL, *line = NULL;
+    int blocks = 0;
+    string nline;
+
+    /* Read first valid line in a safer way */
+    do {
+        line = utils::readLine(*origin);
+    } while ((line == NULL) && (!origin->eof()));
+
+    /* If the file end is reached without a valid line, warn about it */
+    if (origin->eof())
+        return false;
+
+    /* Otherwise, split line */
+    firstWord = strtok(line, OTHDELIMITERS);
+
+    /* Phylip Format */
+    {
+        /* Determine specific phylip format: sequential or interleaved. */
+
+        /* Get number of sequences and residues */
+        int sequenNumber = atoi(firstWord);
+        int residNumber = 0;
+        firstWord = strtok(NULL, DELIMITERS);
+        if(firstWord != NULL)
+            residNumber = atoi(firstWord);
+        else return 0;
+
+        /* If there is only one sequence, use by default sequential format since
+         * it is impossible to determine exactly which phylip format is */
+        if((sequenNumber == 1) && (residNumber != 0))
+            return 0;
+
+            /* If there are more than one sequence, analyze sequences distribution to
+             * determine its format. */
+        else if((sequenNumber != 0) && (residNumber != 0)) {
+            blocks = 0;
+
+            /* Read line in a safer way */
+            do {
+                if (line != NULL)
+                    delete [] line;
+                line = utils::readLine(*origin);
+            } while ((line == NULL) && (!origin->eof()));
+
+            /* If the file end is reached without a valid line, warn about it */
+            if (origin->eof())
+                return 0;
+
+            firstWord = strtok(line, DELIMITERS);
+            while(firstWord != NULL) {
+                blocks++;
+                firstWord = strtok(NULL, DELIMITERS);
+            }
+
+            /* Read line in a safer way */
+            do {
+                if (line != NULL)
+                    delete [] line;
+                line = utils::readLine(*origin);
+            } while ((line == NULL) && (!origin->eof()));
+
+            firstWord = strtok(line, DELIMITERS);
+            while(firstWord != NULL) {
+                blocks--;
+                firstWord = strtok(NULL, DELIMITERS);
+            }
+
+            /* If the file end is reached without a valid line, warn about it */
+            if (origin->eof())
+                return false;
+
+            /* Phylip Interleaved (12) or Sequential (11) */
+            return (!blocks) ? 0 : 1;
+        }
+    }
     return 0;
 }
 
-newAlignment* PirState::LoadAlignment(istream* origin)
+newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
 {
-    origin->clear();
-    origin->seekg(0);
+    /* NBRF/PIR file format parser */
+    
+    newAlignment* _alignment = new newAlignment();
 
-    newAlignment* alignment = new newAlignment();
+    bool seqIdLine, seqLines;
+    char *str, *line = NULL;
+    ifstream file;
+    int i;
+
+    /* Check the file and its content */
+    file.open(filename, ifstream::in);
+    if(!utils::checkFile(file))
+        return nullptr;
+
+    /* Store input file name for posterior uses in other formats */
+    filename.append("!Title ");
+    filename.append(filename);
+    filename.append(";");
 
     /* Compute how many sequences are in the input alignment */
-    alignment->sequenNumber = 0;
-    
-    for( std::string line; getline( (*origin), line ); )
-    {
-        if (line[0] == '>')
-            alignment -> sequenNumber++;
+    _alignment->sequenNumber = 0;
+    while(!file.eof()) {
+
+        /* Deallocate previously used dinamic memory */
+        if (line != NULL)
+            delete [] line;
+
+        /* Read lines in a safe way */
+        line = utils::readLine(file);
+        if (line == NULL)
+            continue;
+
+        /* It the line starts by ">" means that a new sequence has been found */
+        str = strtok(line, DELIMITERS);
+        if (str == NULL)
+            continue;
+
+        /* If a sequence name flag is detected, increase sequences counter */
+        if(str[0] == '>')
+            _alignment->sequenNumber++;
     }
-    
+
     /* Finish to preprocess the input file. */
-    origin->clear();
-    origin->seekg(0);
+    file.clear();
+    file.seekg(0);
 
     /* Allocate memory for the input alignmet */
-    alignment->seqsName  = new string[alignment->sequenNumber];
-    alignment->sequences = new string[alignment->sequenNumber];
-    alignment->seqsInfo  = new string[alignment->sequenNumber];
-    
-    int i = -1;
-    char * str_c = NULL;
-    for( std::string line; getline( (*origin), line ); )
-    {
-        if (line[0] == '>')
-        {
-            strtok(&line[0u], ";");
-            
-            alignment->seqsName[++i] = std::string().append(strtok(NULL, ";"));
-            getline( (*origin), line );
-            alignment->seqsInfo[i] = std::string().append(&line[0], line.find_first_not_of(" "), line.length());
-            alignment->sequences[i] = "";
-            
-            
+    _alignment->sequences = new string[_alignment->sequenNumber];
+    _alignment->seqsName  = new string[_alignment->sequenNumber];
+    _alignment->seqsInfo  = new string[_alignment->sequenNumber];
+
+    /* Initialize some local variables */
+    seqIdLine = true;
+    seqLines = false;
+    i = -1;
+
+    /* Read the entire input file */
+    while(!file.eof()) {
+
+        /* Deallocate local memory */
+        if (line != NULL)
+            delete [] line;
+
+        /* Read lines in a safe way */
+        line = utils::readLine(file);
+        if (line == NULL)
+            continue;
+
+        /* Sequence ID line.
+         * Identification of these kind of lines is based on presence of ">" and ";"
+         * symbols at positions 0 and 3 respectively */
+        if((line[0] == '>') && (line[3] == ';') && (seqIdLine)) {
+            seqIdLine = false;
+            i += 1;
+
+            /* Store information about sequence datatype */
+            str = strtok(line, ">;");
+            _alignment->seqsInfo[i].append(str, strlen(str));
+
+            /* and the sequence identifier itself */
+            str = strtok(NULL, ">;");
+            _alignment->seqsName[i].append(str, strlen(str));
         }
-        else 
-        {
-            for (int x = 0; x < line.length(); x++)
-            {
-                if (line[x] == ' ' || line[x] == '*') continue;
-                alignment->sequences[i].append(&line[x], 1);
+
+            /* Line just after sequence Id line contains a textual description of
+             * the sequence. */
+        else if((!seqIdLine) && (!seqLines)) {
+            seqLines = true;
+            _alignment->seqsInfo[i].append(line, strlen(line));
+        }
+
+            /* Sequence lines itself */
+        else if (seqLines) {
+
+            /* Check whether a sequence end symbol '*' exists in current line.
+             * In that case, set appropriate flags to read a new sequence */
+            if (line[strlen(line) - 1] == '*') {
+                seqLines = false;
+                seqIdLine = true;
             }
-            
+
+            /* Process line */
+            str = strtok(line, OTHDELIMITERS);
+            while (str != NULL) {
+                _alignment->sequences[i].append(str, strlen(str));
+                str = strtok(NULL, OTHDELIMITERS);
+            }
         }
     }
-    
-    delete str_c;
-    
-//     for (int y = 0; y < alignment->sequenNumber; y++)
-//     {
-//         cout << alignment->seqsName[y] << "_" << alignment->sequences[y] << endl;
-//     }
+    /* Close the input file */
+    file.close();
+
+    /* Deallocate dinamic memory */
+    if (line != NULL)
+        delete [] line;
 
     /* Check the matrix's content */
-    alignment->fillMatrices(false);
-    return alignment;
+    _alignment->fillMatrices(true);
+    return _alignment; 
 }
 
 void PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
-   int i, j, k;
+   /* Generate output alignment in NBRF/PIR format. Sequences can be unaligned */
+
+    int i, j, k;
     string alg_datatype, *tmpMatrix;
 
     /* Allocate local memory for generating output alignment */
@@ -110,22 +245,15 @@ void PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
     for(i = 0; i < alignment->sequenNumber; i++) {
 
         /* Print sequence datatype and its name */
-        
-        (*output) << ">" << alg_datatype << ";" ;
-        
-        if (Machine -> shortNames)
-            (*output) << alignment->seqsName[i].substr(0, 10); 
+        if((alignment->seqsInfo != NULL) /*&& (iformat == oformat)*/)
+            (*output) << ">" << alignment->seqsInfo[i].substr(0, 2) << ";" << alignment->seqsName[i]
+                 << endl << alignment->seqsInfo[i].substr(2) << endl;
         else
-            (*output) << alignment->seqsName[i]; 
-        
-        if((alignment->seqsInfo != NULL))
-            (*output) << endl << alignment->seqsInfo[i] << endl;
-        else
-            (*output) << endl << " " << alignment->residuesNumber[i] << " bases" << endl;
+            (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i] << endl
+                 << alignment->seqsName[i] << " " << alignment->residuesNumber[i] << " bases" << endl;
 
         /* Write the sequence */
         for(j = 0; j < alignment->residNumber; j += 50) {
-            (*output) << " ";
             for(k = j; (k < alignment->residNumber) && (k < (j + 50)); k += 10)
                 (*output) << " " << tmpMatrix[i].substr(k, 10);
             if((j + 50) >= alignment->residNumber)

@@ -1,13 +1,13 @@
-#ifndef MEGASSTATE_H
-#define MEGASSTATE_H
+#ifndef PHYLIP40STATE_H
+#define PHYLIP40STATE_H
 
 #include "ReadWriteBaseState.h"
 
-class MegaSequentialState : public ReadWriteBaseState
+class Phylip40State : public ReadWriteBaseState
 {
 public:
     
-    MegaSequentialState(ReadWriteMS* MachineState) { Machine = MachineState; name="MEGAS"; };
+    Phylip40State(ReadWriteMS* MachineState) { Machine = MachineState; name="PHYLIP40"; };
     
     virtual int CheckAlignment(istream* origin);
     virtual newAlignment* LoadAlignment(string filename);
@@ -16,4 +16,4 @@ public:
      
 };
 
-#endif // MEGASSTATE_H
+#endif // PHYLIP40STATE_H
