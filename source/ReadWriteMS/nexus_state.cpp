@@ -11,6 +11,27 @@ using namespace std;
 
 int NexusState::CheckAlignment(istream* origin)
 {
+    origin->seekg(0);
+    origin->clear();
+    char *firstWord = NULL, *line = NULL;
+
+    /* Read first valid line in a safer way */
+    do {
+        line = utils::readLine(*origin);
+    } while ((line == NULL) && (!origin->eof()));
+
+    /* If the file end is reached without a valid line, warn about it */
+    if (origin->eof())
+        return false;
+
+    /* Otherwise, split line */
+    firstWord = strtok(line, OTHDELIMITERS);
+
+    /* Clustal Format */
+    if((!strcmp(firstWord, "NEXUS")) || (!strcmp(firstWord, "nexus")))
+        return 1;
+
+ 
     return 0;
 }
 

@@ -8,9 +8,9 @@ int main(int argc, char *argv[])
     MachineState.shortNames = true;
     
     MachineState.processFile(
-        "./dataset/superAlignment1.phy2", 
+        "./dataset/superAlignment2.phy2", 
         "./dataset/Testing/outputs.$.txt", 
-        new std::vector<std::string>{"fasta", "clustal", "pir", "phylip32", "phylip40", "nexus", "mega", "html"});
+        new std::vector<std::string>{"fasta", "clustal", "pir", "phylip32", "phylip40", "nexus", "mega", "html", "phylippaml"});
     
 //     MachineState.processFile("./dataset/superAlignment1.mega", "./dataset/Testing/meganon.txt", "meganon");
 //     MachineState.processFile("./dataset/superAlignment1.mega", "./dataset/Testing/megai.txt", "megai");

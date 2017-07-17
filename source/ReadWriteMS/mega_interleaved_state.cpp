@@ -4,16 +4,50 @@
 #include <iostream>
 #include <stdio.h>
 #include <string>
+#include "../../include/defines.h"
 
 using namespace std;
 
 int MegaInterleavedState::CheckAlignment(istream* origin)
 {
-    char c;
-    origin->seekg(0);
-    origin->get(c);
-    if (!strcmp(&c, ">"))
-        return 1;
+    char c, *firstWord = NULL, *line = NULL;
+    int format = 0, blocks = 0;
+    string nline;
+
+    /* Read first valid line in a safer way */
+    do {
+        line = utils::readLine(*origin);
+    } while ((line == NULL) && (!origin->eof()));
+
+    /* If the file end is reached without a valid line, warn about it */
+    if (origin->eof())
+        return 0;
+
+    /* Otherwise, split line */
+    firstWord = strtok(line, OTHDELIMITERS);
+
+        /* Mega Format */
+    if((!strcmp(firstWord, "#MEGA")) || (!strcmp(firstWord, "#mega"))) {
+
+        /* Determine specific mega format: sequential or interleaved.
+         * Counting the number of blocks (set of lines starting by "#") in
+         * the input file. */
+        blocks = 0;
+        do {
+            origin->read(&c, 1);
+        } while((c != '#') && (!origin->eof()));
+
+        do {
+            while((c != '\n') && (!origin->eof()))
+                origin->read(&c, 1);
+            origin->read(&c, 1);
+            if(c == '#')
+                blocks++;
+        } while((c != '\n') && (!origin->eof()));
+
+        /* MEGA Sequential (22) or Interleaved (21) */
+        return (!blocks) ? 0 : 1;
+    }
     return 0;
 }
 
