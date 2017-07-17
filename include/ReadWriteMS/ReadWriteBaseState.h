@@ -6,18 +6,18 @@
 
 
 class ReadWriteMS;
-class readwrites
+class ReadWriteBaseState
 {
 public:
     
-    
+    string name;
     
     virtual int CheckAlignment(istream* origin) = 0;
-    virtual newAlignment* LoadAlignment(istream* origin) = 0;
+    virtual newAlignment* LoadAlignment(string filename) = 0;
     virtual void SaveAlignment(newAlignment* alignment, ostream* output, std::string* FileName) = 0;
     virtual bool RecognizeOutputFormat(std::string FormatName) = 0;
     
-    virtual ~readwrites() {};
+    virtual ~ReadWriteBaseState() {};
     
 protected:
     

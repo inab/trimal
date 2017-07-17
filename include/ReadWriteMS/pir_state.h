@@ -1,16 +1,16 @@
 #ifndef PIRSTATE_H
 #define PIRSTATE_H
 
-#include "readwrites.h"
+#include "ReadWriteBaseState.h"
 
-class PirState : public readwrites
+class PirState : public ReadWriteBaseState
 {
 public:
     
-    PirState(ReadWriteMS* MachineState) { Machine = MachineState; };
+    PirState(ReadWriteMS* MachineState) { Machine = MachineState; name="PIR"; };
     
     virtual int CheckAlignment(istream* origin);
-    virtual newAlignment* LoadAlignment(istream* origin);
+    virtual newAlignment* LoadAlignment(string filename);
     virtual void SaveAlignment(newAlignment* alignment, ostream* output, std::string* FileName);
     virtual bool RecognizeOutputFormat(std::string FormatName);
      

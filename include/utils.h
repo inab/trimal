@@ -43,13 +43,14 @@
 #define DNADeg  4
 #define RNADeg  5
 
+
+
+using namespace std;
+
 /** \brief Utils class.
  *
  * This class implements util methods.
  */
-
-using namespace std;
-
 class utils {
 
  public:
@@ -61,6 +62,13 @@ class utils {
    * This method is used to initializate all positions of a vector with a given value.
    */
   static void initlVect(int *vector, int tam, int valor);
+    /** \brief Vector initialization.
+   * \param vector The vector that will be initializated.
+   * \param tam The size of the vector.
+   * \param valor The initialization value of all positions of the vector.
+   *
+   * This method is used to initializate all positions of a vector with a given value.
+   */
   static void initlVect(float *vector, int tam, float valor);
 
   /** \brief Integer vector copying.
@@ -113,18 +121,47 @@ class utils {
    * This method returns the maximum between the two numbers given as parameters.
    */
   static int max(int x, int y);
-
+  /** \brief Maximum of two numbers method.
+   * \param x The first number.
+   * \param y The second number.
+   * \return The maximum between the two given numbers.
+   *
+   * This method returns the maximum between the two numbers given as parameters.
+   */
   static float max(float x, float y);
-
+  /** \brief Maximum of two numbers method.
+   * \param x The first number.
+   * \param y The second number.
+   * \return The maximum between the two given numbers.
+   *
+   * This method returns the maximum between the two numbers given as parameters.
+   */
   static double max(double x, double y);
-
+  /** \brief Minimum of two numbers method.
+   * \param x The first number.
+   * \param y The second number.
+   * \return The minumum between the two given numbers.
+   *
+   * This method returns the minimum between the two numbers given as parameters.
+   */
   static int min(int x, int y);
-
+  /** \brief Minimum of two numbers method.
+   * \param x The first number.
+   * \param y The second number.
+   * \return The minumum between the two given numbers.
+   *
+   * This method returns the minimum between the two numbers given as parameters.
+   */
   static float min(float x, float y);
-
+  /** \brief Minimum of two numbers method.
+   * \param x The first number.
+   * \param y The second number.
+   * \return The minumum between the two given numbers.
+   *
+   * This method returns the minimum between the two numbers given as parameters.
+   */
   static double min(double x, double y);
 
-  // static bool getArg(int argc, char *argv[], int *var, char *argument, char *abrevArg);
   /** \brief String-is-number checking.
    * \param num The string we want to check.
    * \return \b true if the string is a number, \b false if not.
@@ -151,9 +188,9 @@ class utils {
   static void removeSpaces(char *in, char *out);
 
   /** \brief Quicksort sorting method.
-   * \a param list The vector that we want to sort.
-   * \a param ini The first element of the vector.
-   * \a param fin The last element of the vector.
+   * \param list The vector that we want to sort.
+   * \param ini The first element of the vector.
+   * \param fin The last element of the vector.
    *
    * This method sorts the vector using the quicksort method.
    */
@@ -168,9 +205,9 @@ class utils {
   static void swap(float *a, float *b);
 
   /** \brief Quicksort sorting method.
-   * \a param list The vector that we want to sort.
-   * \a param ini The first element of the vector.
-   * \a param fin The last element of the vector.
+   * \param list The vector that we want to sort.
+   * \param ini The first element of the vector.
+   * \param fin The last element of the vector.
    *
    * This method sorts the vector using the quicksort method.
    */
@@ -183,31 +220,98 @@ class utils {
    * This method swaps the values in a and b.
    */
   static void swap(int *a, int *b);
-
+  /**
+   \brief Check if a given file exists and its size is greater than 0.
+   \param file ifstream to check
+   */
   static bool checkFile(ifstream &file);
-
+    /**
+     \brief Read a new line from current input stream.\n
+     This function is better than standard one since cares of operative system compability.\n
+     It is useful as well because removes tabs and blank spaces at lines at beginning/ending.\n
+     \param file ifstream to read line from.
+     \return \n
+        NULL if there is nothing to read.\n
+        Line that has been read.   
+     */
   static char* readLine(ifstream &file);
-
+      /**
+     \brief Read a new line from current input stream.\n
+     This function is better than standard one since cares of operative system compability.\n
+     It is useful as well because removes tabs and blank spaces at lines at beginning/ending.\n
+     \param file ifstream to read line from.
+     \return \n
+        NULL if there is nothing to read.\n
+        Line that has been read.   
+     */
+  static char* readLine(istream &file);
+    /**
+     \brief Remove comments inside a biological sequence.\n
+            Remove all content surrounded by ("") or ([]).\n
+            It warns as well when a mismatch for these flags is found. \n
+    \param nline Line to be trimmed.
+    \retun NULL if there has been a mismatch\n
+            Line trimmed of comments.
+     */
   static char* trimLine(string nline);
-
+    /**
+     \todo Implement this function.
+     */
   static char* readLineMEGA(ifstream &file);
-
+/**
+ \brief Reverses a string
+ \param toReverse String to get a reversed copy.
+ \return Reversed string of toReverse.
+ */
   static string getReverse(string toReverse);
-
+/**
+ \brief Removes a determined char from the string
+ \param c Character to remove from line
+ \param line String to remove c from.
+ \return New string without c character
+ */
   static string removeCharacter(char c, string line);
-
-  static int checkAlignmentType(int, int, string *);
-
-  static int* readNumbers(string);
+/**
+ \brief Checks an alignment type 
+ \param seqNumber Number of sequences to check it's type.
+ \param residNumber Number of residues of the alignment.
+ \param sequences Sequences pointer
+ \return Integer that represents the alignment type.*/
+  static int checkAlignmentType(int seqNumber, int residNumber, string *sequences);
+/**
+ \brief Reads a line and converts it to an array of number
+ \param line Line to convert to array of ints
+ \return Pointer to an array of numbers that contains line*/
+  static int* readNumbers(string line);
 
   static int* readNumbers_StartEnd(string);
 
-  static void quicksort(int **, int, int);
-
-  static void swap(int **, int **);
+  /** \brief Quicksort sorting method.
+   * \param vect The vector that we want to sort.
+   * \param ini The first element of the vector.
+   * \param fin The last element of the vector.
+   *
+   * This method sorts the vector using the quicksort method.
+   */
+  static void quicksort(int ** vect, int ini, int fin);
+  /** \brief Swaps pointers values
+   * \param a Pointer A
+   * \param b Pointer B
+   *
+   * This method swaps the values in a and b.
+   */
+  static void swap(int ** a , int ** b);
+/**
+ \brief Checks the color that has to be used on the output report
+ \param res Resiude to check its color
+ \param column Column to which this residue belongs.
+ \return Char that represents the color to be used.
+ */
 
   static char determineColor(char res, string column);
-
+/**
+ \brief Looks for a pattern
+ \todo Give a good description for this function.*/
   static bool lookForPattern(string, string, float);
 
 };
