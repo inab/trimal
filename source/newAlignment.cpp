@@ -602,8 +602,8 @@ int newAlignment::getReverseFlag(void) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method lets to change the output newAlignment orientation */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void newAlignment::setReverseFlag(void) {
-    reverse = true;
+void newAlignment::setReverseFlag(bool newValue) {
+    reverse = newValue;
 }
 
 

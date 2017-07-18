@@ -17,6 +17,7 @@
 #include <fstream>
 #include <algorithm>
 #include <array>
+#include <sstream>
 
 ReadWriteMS::ReadWriteMS()
 {
@@ -315,7 +316,7 @@ void ReadWriteMS::processFile(
         
         // Load alignment one by one and store it on each of the formats specified.
         newAlignment* alignment = inState->LoadAlignment(inFile);
-        if (reverse) alignment->reverse = true;
+        if (reverse) alignment->setReverseFlag(true);
         int start, end;
         inFileHandler.close();
         {
@@ -381,4 +382,19 @@ std::string ReadWriteMS::getInputStateName(std::string inFile)
     }
     
     return inState->name;
+}
+
+std::string ReadWriteMS::getFormatsAvailable()
+{
+    std::stringstream ss("");
+    
+    for (ReadWriteBaseState* state : available_states)
+    {
+        ss << state->name << ", " ;
+    }
+    ss.seekp(-2, std::ios_base::end);
+    ss << ". ";
+    
+    return ss.str();
+    
 }

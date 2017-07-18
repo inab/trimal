@@ -1,3 +1,4 @@
+#include <../../home/vfernandez/git/trimal/include/defines.h>
 #include "../../include/newAlignment.h"
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include <string>
@@ -7,8 +8,11 @@
 
 int parseArguments(int argc, char *argv[], ReadWriteMS* machine, std::vector<std::string>* inFiles, std::vector<std::string>* outFormats, std::string* outPattern)
 {
+    if (argc == 1) return -1;
     for(int i = 1; i < argc; i++ )
     {
+        if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help"))
+            return -1;
         // Check if current argument is the '-in' argument.
         if (!strcmp(argv[i], "-in"))
         {
@@ -87,6 +91,15 @@ int parseArguments(int argc, char *argv[], ReadWriteMS* machine, std::vector<std
         else if (!strcmp(argv[i], "-reverse"))
         {
             machine->reverse = true;
+        }
+        
+        else if (!strcmp(argv[i], "-shortNames"))
+        {
+            machine->shortNames = true;
+        }
+        else if (!strcmp(argv[i], "-keepHeaders"))
+        {
+            machine->keepHeader = true;
         }
         
         //Compatibility with legacy options:
@@ -216,7 +229,7 @@ int checkArguments(ReadWriteMS* machine, std::vector<std::string>* inFiles, std:
         }
         else if (outFormats->size() != 0)
         {
-            cerr    << "Terminal output option not compatible with information printing (-info | -format | -type)." << endl 
+            cerr    << "Terminal output option not compatible with information printing (-info | -format | -type)" << endl 
                     << "Provide an output format or disable information printing." << endl;
             returnValue = 1;
         }
@@ -229,6 +242,116 @@ int checkArguments(ReadWriteMS* machine, std::vector<std::string>* inFiles, std:
     return returnValue;
 }
 
+void menu()
+{
+
+    cout << endl
+    << "readAl v" << VERSION << ".rev" << REVISION << " build[" << BUILD
+    << "]. " << AUTHORS << endl << endl
+
+    << "readAl webpage: http://trimal.cgenomics.org" << endl << endl
+
+    << "This program is free software: you can redistribute it and/or modify "
+    << endl
+    << "it under the terms of the GNU General Public License as published by "
+    << endl
+    << "the Free Software Foundation, the last available version." << endl
+    << endl
+
+    << "BASIC USAGE" << endl << endl
+    << "\treadalMS -in <inputfiles> -out <pattern> -format [formats] [options]." << endl << endl
+
+    << "\t-h                    " << "Show this information." << endl
+//     << "\t--version            " << "Show readAl version." << endl << endl
+
+    << "\t-in <inputfiles>      " << "Input files in several formats. Separated by spaces." << endl
+    << "\t-out <pattern>        " << "Output file name (default STDOUT)." << endl
+    << "\t                      " << "It will replace the tags [in]        -> Original filename without extension." << endl
+    << "\t                      " << "                         [format]    -> Output's format name" << endl
+    << "\t                      " << "                         [extension] -> Output's extension" << endl
+    << endl
+
+    
+    << "\t-formats             " << "Formats you want the output to be converted to." << endl
+    << "\t                     " << "Available formats are " << ReadWriteMS().getFormatsAvailable() << endl 
+    << "\t                     " << "Being the HTML format not a format itself, but a colored report of the alignment files." << endl << endl
+    << "\t-format              " << "Print information about input file format "
+    << "and if sequences are aligned or not." << endl
+
+    << "\t-type                " << "Print information about biological "
+    << "sequences datatype (e.g. nucleotides:dna, nucleotides:rna, aminoacids, etc)"
+    << endl
+
+    << "\t-info                " << "Print information about sequences number, "
+    << "average sequence length, max & min sequence length"
+    << endl 
+    
+    << "\t-reverse             " << "Output the reverse of sequences in "
+    << "input file." << endl << endl
+    
+    << "\t-shortNames          " << "Shortens the names so they fit on certain formats" << endl
+
+    << "\t-keepHeaders         " << "Keeps the headers of the original format if it had any" << endl << endl
+
+    
+    << "LEGACY OPTIONS" << endl << "Take in mind that this arguments may be discontinued any time."<< endl << endl
+    
+    << "\t-onlyseqs            " << "Generate output with only residues from "
+    << "input file" << endl << endl
+    
+    << "\t-html                " << "Output residues colored according their "
+    << "physicochemical properties. HTML file." << endl << endl
+
+
+    << "\t-nbrf                " << "Output file in NBRF/PIR format" << endl
+    << "\t-mega                " << "Output file in MEGA format" << endl
+
+    << "\t-nexus               " << "Output file in NEXUS format" << endl
+    << "\t-clustal             " << "Output file in CLUSTAL format" << endl
+    << endl
+
+    << "\t-fasta               " << "Output file in FASTA format" << endl
+    << "\t-fasta_m10           " << "Output file in FASTA format. Sequences "
+    << "name up to 10 characters." << endl << endl
+
+    << "\t-phylip              " << "Output file in PHYLIP/PHYLIP4 format"
+    << endl
+    << "\t-phylip_m10          " << "Output file in PHYLIP/PHYLIP4 format. "
+    << "Sequences name up to 10 characters." << endl
+    << "\t-phylip_paml         " << "Output file in PHYLIP format compatible "
+    << "with PAML" << endl
+    << "\t-phylip_paml_m10     " << "Output file in PHYLIP format compatible "
+    << "with PAML. Sequences name up to 10 characters." << endl
+    << "\t-phylip3.2           " << "Output file in PHYLIP3.2 format" << endl
+    << "\t-phylip3.2_m10       " << "Output file in PHYLIP3.2 format. Sequences"
+    << " name up to 10 characters." << endl << endl
+    
+    << "EXAMPLES OF USE" << endl << endl
+    
+    << "\treadalMS -in ./dataset/AA1.fas -out ./dataset/[in].output.[extension] -formats clustal" << endl
+    << "\t  -> Will produce ./dataset/AA1.output.clw" << endl << endl
+    
+    << "\treadalMS -in ./dataset/example1.clw -out ./dataset/[in].[format].[extension] -formats fasta phylip32 phylip40" << endl
+    << "\t  -> Will produce ./dataset/example1.FASTA.fasta ./dataset/example1.PHYLIP32.phy ./dataset/example1.PHYLIP40.phy" << endl << endl
+    
+    << "\treadalMS -in ./dataset/example1.clw -out ./dataset/[in]/[format].[extension] -formats fasta phylip32 phylip40" << endl
+    << "\t  -> Will produce ./dataset/example1/FASTA.fasta ./dataset/example1/PHYLIP32.phy ./dataset/example1/PHYLIP40.phy" << endl
+    << "\t     ONLY if ./dataset/example1/ already exists." << endl << endl 
+    
+    << "\treadalMS -in ./dataset/AA1.fas ./dataset/AA2.fas -out ./dataset/[in].output.[extension] -formats clustal pir" << endl
+    << "\t  -> Will produce ./dataset/AA1.output.clw ./dataset/AA2.output.clw ./dataset/AA1.output.pir ./dataset/AA2.output.pir" << endl << endl
+    
+    << "\treadalMS -in ./dataset/AA1.fas -format -type -info" << endl
+    << "\t  -> Will produce terminal output giving information about AA1.fas alignment file" << endl << endl
+    
+    << "\treadalMS -in ./dataset/AA1.fas ./dataset/AA2.fas -out ./dataset/[in].output.[extension] -formats html" << endl
+    << "\t  -> Will produce ./dataset/AA1.output.html ./dataset/AA2.output.html" << endl
+    << "\t     Those files are not indeed reformats of the original alignments, but an HTML colored report of the alignment file." << endl
+    
+    << endl;
+}
+
+
 int main(int argc, char *argv[])
 {
     ReadWriteMS MachineState = ReadWriteMS();
@@ -238,15 +361,17 @@ int main(int argc, char *argv[])
     std::string outPattern = "";
     
     int result = parseArguments(argc, argv, &MachineState, &inFiles, &outFormats, &outPattern);
-    if (result != 0) return result;
+    if (result == -1) 
+    {
+        menu();
+        return 0;
+    }
+    else if (result != 0) return result;
     
     result = checkArguments(&MachineState, &inFiles, &outFormats, &outPattern);
     if (result != 0) return result;
     
-    
-//     MachineState.shortNames = false;
-//     MachineState.keepHeader = false;
-//     MachineState.reverse    = false;
+
     if(MachineState.format || MachineState.info || MachineState.type) {
         newAlignment* alignment = MachineState.loadAlignment(inFiles[0]);
         
