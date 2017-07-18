@@ -7,7 +7,7 @@ class ClustalState : public ReadWriteBaseState
 {
 public:
     
-    ClustalState(ReadWriteMS* MachineState) { Machine = MachineState; name="CLUSTAL"; };
+    ClustalState(ReadWriteMS* MachineState) { Machine = MachineState; name="CLUSTAL"; extension="clw"; };
     
     virtual int CheckAlignment(istream* origin);
     virtual newAlignment* LoadAlignment(string filename);

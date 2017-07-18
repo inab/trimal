@@ -7,7 +7,7 @@ class NexusState : public ReadWriteBaseState
 {
 public:
     
-    NexusState(ReadWriteMS* MachineState) { Machine = MachineState; name="NEXUS"; };
+    NexusState(ReadWriteMS* MachineState) { Machine = MachineState; name="NEXUS"; extension="nexus"; };
     
     virtual int CheckAlignment(istream* origin);
     virtual newAlignment* LoadAlignment(string filename);

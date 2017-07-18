@@ -313,6 +313,21 @@ class utils {
  \brief Looks for a pattern
  \todo Give a good description for this function.*/
   static bool lookForPattern(string, string, float);
-
+/**
+ * \brief Function that replaces a substring with another substring in a string.
+            It does not make a copy of the original string, but modifies it.
+    \param subject String to be modified
+    \param search Substring to search and change
+    \param replace Substring to put in place of search
+ */
+  static void ReplaceStringInPlace(std::string& subject, const std::string& search, const std::string& replace);
+  /**
+ * \brief Function that replaces a substring with another substring in a string.
+            It makes a copy of the original string.
+    \param subject String to be modified
+    \param search Substring to search and change
+    \param replace Substring to put in place of search
+ */
+  static std::string ReplaceString(std::string subject, const std::string& search, const std::string& replace);
 };
 #endif
