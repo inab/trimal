@@ -337,14 +337,48 @@ void ReadWriteMS::processFile(
                 outFileHandler.close();
             }
         }
-        delete alignment;
+        if (alignment != nullptr)
+            delete alignment;
+    }
+}
+
+std::string ReadWriteMS::getInputStateName(std::string inFile)
+{
+    ReadWriteBaseState* inState = NULL;
+    ifstream inFileHandler;
+    int format_value = 0;
+    int temp_value = 0;
+
+    // Open file.
+    inFileHandler.open(inFile);
+    if (!inFileHandler.is_open())
+    {
+        cerr << "Couldn't open input file " << inFile << endl;
+        return "Unknown";
     }
     
+    inState = NULL;
+    format_value = 0;
+    temp_value = 0;
     
+    // Get format State that can handle this alignment.
+    for(ReadWriteBaseState* state : available_states)
+    {
+        temp_value = state -> CheckAlignment(&inFileHandler);
+        
+        if (temp_value > format_value)
+        {
+            temp_value = format_value;
+            inState = state;
+        }
+    }
     
+    // Check if there is a format State to handle the alignment.
+    if (inState == NULL)
+    {
+        inFileHandler.close();
+        return "Unknown";
+    }
     
-    
-    
-
-    
+    return inState->name;
 }
