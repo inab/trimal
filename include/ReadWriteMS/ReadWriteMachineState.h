@@ -24,10 +24,17 @@ public:
     bool keepHeader     = false;
     bool reverse        = false;
     
+    // LEGACY PARAMETERS
+    bool format         = false;
+    bool type           = false;
+    bool info           = false;
+    
     newAlignment* loadAlignment(std::string inFile);
     void saveAlignment(std::string outFile, std::string outFormat, newAlignment* alignment);
 
     void processFile(std::vector< std::string >* inFile, std::string* outPattern, std::vector< std::string >* outFormats);
+    
+    std::string getInputStateName(std::string inFile);
 };
 
 
