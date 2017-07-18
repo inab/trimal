@@ -25,6 +25,11 @@ public:
     string name;
     
     /**
+     \brief String that contains the main extension of the format
+     */
+    string extension;
+    
+    /**
      \brief Function to check if a file is in the implemented format.
      \param origin File Handler to the file.
      \return A number that represents the confidence recognizing this format.

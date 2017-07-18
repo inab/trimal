@@ -7,7 +7,7 @@ class MegaSequentialState : public ReadWriteBaseState
 {
 public:
     
-    MegaSequentialState(ReadWriteMS* MachineState) { Machine = MachineState; name="MEGAS"; };
+    MegaSequentialState(ReadWriteMS* MachineState) { Machine = MachineState; name="MEGAS"; extension="mega"; };
     
     virtual int CheckAlignment(istream* origin);
     virtual newAlignment* LoadAlignment(string filename);
