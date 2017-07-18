@@ -35,6 +35,8 @@ public:
     void processFile(std::vector< std::string >* inFile, std::string* outPattern, std::vector< std::string >* outFormats);
     
     std::string getInputStateName(std::string inFile);
+    
+    std::string getFormatsAvailable();
 };
 
 

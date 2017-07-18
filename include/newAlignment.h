@@ -155,7 +155,7 @@ public:
 
   void setOutputFormat(int, bool);
 
-  void setReverseFlag(void);
+  void setReverseFlag(bool newValue);
 
   int getShortNames(void);
 
