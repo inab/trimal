@@ -158,7 +158,7 @@ void FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
             (*output) << ">" << alignment->seqsName[i].substr(0, maxLongName) << endl;
         else if (alignment->seqsInfo != NULL)
             (*output) << ">" << alignment->seqsInfo[i].substr(0, maxLongName) << endl;
-        for(j = 0; j < alignment->residNumber; j+= 60)
+        for(j = 0; j < alignment->residuesNumber[i]; j+= 60)
             (*output) << tmpMatrix[i].substr(j, 60) << endl;
     }
 

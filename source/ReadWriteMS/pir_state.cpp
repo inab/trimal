@@ -10,83 +10,14 @@ using namespace std;
 
 int PirState::CheckAlignment(istream* origin)
 {
+    char * line;
     origin->seekg(0);
-    origin->clear();
-    char *firstWord = NULL, *line = NULL;
-    int blocks = 0;
-    string nline;
-
-    /* Read first valid line in a safer way */
-    do {
-        line = utils::readLine(*origin);
-    } while ((line == NULL) && (!origin->eof()));
-
-    /* If the file end is reached without a valid line, warn about it */
-    if (origin->eof())
-        return false;
-
-    /* Otherwise, split line */
-    firstWord = strtok(line, OTHDELIMITERS);
-
-    /* Phylip Format */
+    line = utils::readLine(*origin);
+    if (strlen(line) > 4)
     {
-        /* Determine specific phylip format: sequential or interleaved. */
-
-        /* Get number of sequences and residues */
-        int sequenNumber = atoi(firstWord);
-        int residNumber = 0;
-        firstWord = strtok(NULL, DELIMITERS);
-        if(firstWord != NULL)
-            residNumber = atoi(firstWord);
-        else return 0;
-
-        /* If there is only one sequence, use by default sequential format since
-         * it is impossible to determine exactly which phylip format is */
-        if((sequenNumber == 1) && (residNumber != 0))
-            return 0;
-
-            /* If there are more than one sequence, analyze sequences distribution to
-             * determine its format. */
-        else if((sequenNumber != 0) && (residNumber != 0)) {
-            blocks = 0;
-
-            /* Read line in a safer way */
-            do {
-                if (line != NULL)
-                    delete [] line;
-                line = utils::readLine(*origin);
-            } while ((line == NULL) && (!origin->eof()));
-
-            /* If the file end is reached without a valid line, warn about it */
-            if (origin->eof())
-                return 0;
-
-            firstWord = strtok(line, DELIMITERS);
-            while(firstWord != NULL) {
-                blocks++;
-                firstWord = strtok(NULL, DELIMITERS);
-            }
-
-            /* Read line in a safer way */
-            do {
-                if (line != NULL)
-                    delete [] line;
-                line = utils::readLine(*origin);
-            } while ((line == NULL) && (!origin->eof()));
-
-            firstWord = strtok(line, DELIMITERS);
-            while(firstWord != NULL) {
-                blocks--;
-                firstWord = strtok(NULL, DELIMITERS);
-            }
-
-            /* If the file end is reached without a valid line, warn about it */
-            if (origin->eof())
-                return false;
-
-            /* Phylip Interleaved (12) or Sequential (11) */
-            return (!blocks) ? 0 : 1;
-        }
+        if (line[0] == '>')
+            if (line[3] == ';')
+                return 2;
     }
     return 0;
 }
