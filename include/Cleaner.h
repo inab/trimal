@@ -117,7 +117,7 @@ class Cleaner {
 /**
       \todo Give a good description
       */
-     void trimTerminalGaps(bool);
+     void setTrimTerminalGapsFlag(bool);
     /**
       \todo Give a good description
       */
