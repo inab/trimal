@@ -48,7 +48,7 @@ public:
     /**
      \brief Function to load a file in the current format and return an alignment object.
      \param filename Filename of the file to load.
-     \return <b>Alignment Object</b> with the information of the file. <b> nullptr</b> if there was any error. 
+     \return <b> Alignment Object</b> with the information of the file. <b> nullptr</b> if there was any error. 
      */
     virtual newAlignment* LoadAlignment(string filename) = 0;
     /**
