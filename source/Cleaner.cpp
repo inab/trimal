@@ -237,6 +237,9 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine,
     /* Deallocate local memory */
     delete[] matrixAux;
     delete[] newSeqsName;
+    
+        
+    newAlig->fillMatrices(true);
 
     /* Return the new _alignmentment reference */
     return newAlig;
@@ -403,6 +406,9 @@ newAlignment* Cleaner::cleanByCutValue(float cut, float baseLine,
     /* Deallocate local memory */
     delete[] matrixAux;
     delete[] newSeqsName;
+    
+        
+    newAlig->fillMatrices(true);
 
     /* Return the new _alignmentment reference */
     return newAlig;
@@ -604,6 +610,8 @@ newAlignment* Cleaner::cleanByCutValue(double cutGaps, const int *gInCol,
     /* Deallocate local memory */
     delete[] matrixAux;
     delete[] newSeqsName;
+    
+    newAlig->fillMatrices(true);
 
     /* Return the new _alignmentment reference */
     return newAlig;
@@ -745,6 +753,9 @@ newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut,
     //~ delete[] newSeqsName;
 
     /* Return the new _alignmentment reference */
+        
+    newAlig->fillMatrices(true);
+    
     return newAlig;
 }
 
@@ -805,6 +816,8 @@ newAlignment* Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
     /* Deallocate local memory */
     delete [] matrixAux;
     delete [] newSeqsName;
+    
+    newAlig->fillMatrices(true);
 
     /* Return the new _alignmentment reference */
     return newAlig;
@@ -1409,7 +1422,7 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
 /* Sets the condition to remove only terminal gaps after applying any
  * trimming method or not.   */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void Cleaner::trimTerminalGaps(bool terminalOnly_)
+void Cleaner::setTrimTerminalGapsFlag(bool terminalOnly_)
 {
     terminalGapOnly = terminalOnly_;
 }
@@ -1479,6 +1492,7 @@ newAlignment * Cleaner::getClustering(float identityThreshold) {
         newAlig -> sequences[i] = matrixAux[i];
         newAlig -> seqsName[i] = newSeqsName[i];
     }
+        
     
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -1488,6 +1502,7 @@ newAlignment * Cleaner::getClustering(float identityThreshold) {
     delete [] newSeqsName;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
+    newAlig->fillMatrices(true);
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Return the new alignment reference */
     return newAlig;
@@ -1564,6 +1579,9 @@ newAlignment* Cleaner::removeColumns(int *columns, int init, int size,
     /* Deallocate local memory */
     delete[] matrixAux;
     delete[] newSeqsName;
+    
+        
+    newAlig->fillMatrices(true);
 
     /* Return the new alignment reference */
     return newAlig;
@@ -1638,6 +1656,9 @@ newAlignment *Cleaner::removeSequences(int *seqs, int init, int size,
     /* Free local memory */
     delete [] matrixAux;
     delete [] newSeqsName;
+    
+        
+    newAlig->fillMatrices(true);
 
     /* Return the new alignment reference */
     return newAlig;

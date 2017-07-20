@@ -99,6 +99,8 @@ public:
 
     // TODO: Names of this functions should be more informative.
     bool post_process(char* argv[]);
+    
+    bool check_argument_incompatibilities();
 
     bool check_force_selection();
     bool check_input_file_with_coding_sequences_argument();
