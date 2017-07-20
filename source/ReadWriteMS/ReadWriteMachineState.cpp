@@ -48,7 +48,7 @@ void ReadWriteMS::addState(ReadWriteBaseState* newState)
 newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
 {
     ReadWriteBaseState* inState = NULL;
-    
+
     ifstream inFileHandler;
     inFileHandler.open(inFile);
     if (!inFileHandler.is_open())
@@ -59,25 +59,25 @@ newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
 
     int format_value = 0;
     int temp_value = 0;
-    
+
     for(ReadWriteBaseState* state : available_states)
     {
         temp_value = state -> CheckAlignment(&inFileHandler);
-        
+
         if (temp_value > format_value)
         {
             temp_value = format_value;
             inState = state;
         }
     }
-    
+
     if (inState == NULL)
     {
         cerr << "Cannot recognize input format" << endl;
         inFileHandler.close();
         return nullptr;
     }
-    
+
     newAlignment* alignment = inState->LoadAlignment(inFile);
     inFileHandler.close();
     return alignment;
@@ -95,159 +95,15 @@ void ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newA
             return;
         }
     }
-    
+
 }
 
-// void ReadWriteMS::processFile(std::string inFile, std::string outFile, std::string outFormat)
-// {
-//     ReadWriteBaseState* inState = NULL;
-//     ReadWriteBaseState* outState = NULL;
-//     
-//     ifstream inFileHandler;
-//     inFileHandler.open(inFile);
-//     if (!inFileHandler.is_open())
-//     {
-//         cerr << "Couldnt open input file" << endl;
-//         return;
-//     }
-//     
-//     {
-//         int format_value = 0;
-//         int temp_value = 0;
-//         
-//         for(ReadWriteBaseState* state : available_states)
-//         {
-//             temp_value = state -> CheckAlignment(&inFileHandler);
-//             
-//             if (temp_value > format_value)
-//             {
-//                 temp_value = format_value;
-//                 inState = state;
-//             }
-//             
-//             if (state->RecognizeOutputFormat(outFormat))
-//             {
-//                 outState = state;
-//             }
-//         }
-//     }
-//     
-//     
-//     if (inState == NULL || outState == NULL)
-//     {
-//         if (inState == NULL)
-//         {
-//             cerr << "Cannot recognize input format" << endl;
-//         }
-//         if (outState == NULL)
-//         {
-//             cerr << "Cannot recognize output format" << endl;
-//         }
-//         
-//         inFileHandler.close();
-//         return;
-//     }
-//     
-//     cout << "Loading Alignment" << endl;
-//     newAlignment* alignment = inState->LoadAlignment(inFile);
-//     inFileHandler.close();
-//     
-//     cout << "Saving Alignment in " << outState->name << " format" << endl;
-//     ofstream outFileHandler;
-//     outFileHandler.open(outFile);
-//     outState -> SaveAlignment(alignment, &outFileHandler, &inFile);
-//     outFileHandler.close();
-//     
-//     cout << "Alignment Saved" << endl;
-//     
-//     delete alignment;
-// }
-// 
-// void ReadWriteMS::processFile(std::string inFile, std::string outPattern, std::vector< std::string > outFormats)
-// {
-//     ReadWriteBaseState* inState = NULL;
-//     std::vector<ReadWriteBaseState*> outStates = std::vector<ReadWriteBaseState*>();
-//     
-//     ifstream inFileHandler;
-//     inFileHandler.open(inFile);
-//     if (!inFileHandler.is_open())
-//     {
-//         cerr << "Couldn't open input file" << endl;
-//         return;
-//     }
-//     
-//     
-//     int format_value = 0;
-//     int temp_value = 0;
-//     
-//     for(ReadWriteBaseState* state : available_states)
-//     {
-//         temp_value = state -> CheckAlignment(&inFileHandler);
-//         
-//         if (temp_value > format_value)
-//         {
-//             temp_value = format_value;
-//             inState = state;
-//         }
-//     }
-//     
-//     if (inState == NULL)
-//     {
-//         cerr << "Cannot recognize input format" << endl;
-//         inFileHandler.close();
-//         return;
-//     }
-//     
-//     bool recognized;
-//     for (int formatID = 0; formatID < outFormats->size(); formatID++)
-//     {
-//         recognized = false;
-//         for(ReadWriteBaseState* state : available_states)
-//         {
-//             if (state->RecognizeOutputFormat(outFormats->at(formatID)))
-//             {
-//                 outStates.push_back(state);
-//                 recognized = true;
-//                 break;
-//             }
-//         }
-//         
-//         if (!recognized)
-//         {
-//             cerr << "Cannot recognize output format" << endl;
-//             inFileHandler.close();
-//             return;
-//         }
-//     }
-//     
-//     cout << "Loading Alignment" << endl;
-//     newAlignment* alignment = inState->LoadAlignment(inFile);
-//     inFileHandler.close();
-//     {
-//         string filename;
-//         ofstream outFileHandler;
-//         for (ReadWriteBaseState * state : outStates)
-//         {
-//             cout << "Saving Alignment in " << state->name << " format" << endl;
-//             filename = outPattern;
-//             outFileHandler.open(filename.replace(filename.find('='), 1, state->name));
-//             state -> SaveAlignment(alignment, &outFileHandler, &inFile);
-//             outFileHandler.close();
-//             cout << "Alignment Saved" << endl;
-//             
-//         }
-//     }
-//     
-//     delete alignment;
-//     
-// }
-
 void ReadWriteMS::processFile(
-    std::vector< std::string >* inFiles, 
-    std::string* outPattern, 
+    std::vector< std::string >* inFiles,
+    std::string* outPattern,
     std::vector< std::string >* outFormats)
 {
-    
+
     // Get all the output format states needed.
     std::vector<ReadWriteBaseState*> outStates = std::vector<ReadWriteBaseState*>();
     {
@@ -264,7 +120,7 @@ void ReadWriteMS::processFile(
                     break;
                 }
             }
-            
+
             if (!recognized)
             {
                 cerr << "Cannot recognize output format " << outFormat << endl;
@@ -272,14 +128,14 @@ void ReadWriteMS::processFile(
             }
         }
     }
-    
-    
+
+
     // Process input files one by one.
     ReadWriteBaseState* inState = NULL;
     ifstream inFileHandler;
     int format_value = 0;
     int temp_value = 0;
-    
+
     for (std::string inFile : *inFiles)
     {
         // Open file.
@@ -289,23 +145,23 @@ void ReadWriteMS::processFile(
             cerr << "Couldn't open input file " << inFile << endl;
             return;
         }
-        
+
         inState = NULL;
         format_value = 0;
         temp_value = 0;
-        
+
         // Get format State that can handle this alignment.
         for(ReadWriteBaseState* state : available_states)
         {
             temp_value = state -> CheckAlignment(&inFileHandler);
-            
+
             if (temp_value > format_value)
             {
                 temp_value = format_value;
                 inState = state;
             }
         }
-        
+
         // Check if there is a format State to handle the alignment.
         if (inState == NULL)
         {
@@ -313,7 +169,7 @@ void ReadWriteMS::processFile(
             inFileHandler.close();
             return;
         }
-        
+
         // Load alignment one by one and store it on each of the formats specified.
         newAlignment* alignment = inState->LoadAlignment(inFile);
         if (reverse) alignment->setReverseFlag(true);
@@ -329,7 +185,7 @@ void ReadWriteMS::processFile(
                 filename = utils::ReplaceString(*outPattern, "[in]", inFile.substr(start, end-start));
                 utils::ReplaceStringInPlace(filename, "[extension]", state->extension);
                 utils::ReplaceStringInPlace(filename, "[format]", state->name);
-                
+
                 outFileHandler.open(filename);
                 if (this->hasOutputFile)
                     state -> SaveAlignment(alignment, &outFileHandler, &inFile);
@@ -357,44 +213,44 @@ std::string ReadWriteMS::getInputStateName(std::string inFile)
         cerr << "Couldn't open input file " << inFile << endl;
         return "Unknown";
     }
-    
+
     inState = NULL;
     format_value = 0;
     temp_value = 0;
-    
+
     // Get format State that can handle this alignment.
     for(ReadWriteBaseState* state : available_states)
     {
         temp_value = state -> CheckAlignment(&inFileHandler);
-        
+
         if (temp_value > format_value)
         {
             temp_value = format_value;
             inState = state;
         }
     }
-    
+
     // Check if there is a format State to handle the alignment.
     if (inState == NULL)
     {
         inFileHandler.close();
         return "Unknown";
     }
-    
+
     return inState->name;
 }
 
 std::string ReadWriteMS::getFormatsAvailable()
 {
     std::stringstream ss("");
-    
+
     for (ReadWriteBaseState* state : available_states)
     {
         ss << state->name << ", " ;
     }
     ss.seekp(-2, std::ios_base::end);
     ss << ". ";
-    
+
     return ss.str();
-    
+
 }
