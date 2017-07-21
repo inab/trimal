@@ -252,7 +252,7 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
     return _alignment;
 }
 
-void MegaSequentialState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool MegaSequentialState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
     /* Generate output alignment in MEGA format */
 
@@ -264,7 +264,7 @@ void MegaSequentialState::SaveAlignment(newAlignment* alignment, std::ostream* o
     if (!alignment->isAligned) {
         cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
              << "not compatible with unaligned sequences." << endl << endl;
-        return ;
+        return false;
     }
 
     /* Allocate local memory for generating output alignment */
@@ -309,6 +309,8 @@ void MegaSequentialState::SaveAlignment(newAlignment* alignment, std::ostream* o
 
     /* Deallocate local memory */
     delete [] tmpMatrix;
+    
+    return true;
 }
 
 bool MegaSequentialState::RecognizeOutputFormat(std::string FormatName)

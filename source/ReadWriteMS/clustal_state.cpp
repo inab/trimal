@@ -204,7 +204,7 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
     return alignment; 
 }
 
-void ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::__cxx11::string* FileName)
 {
     /* Generate output alignment in CLUSTAL format */
 
@@ -216,7 +216,7 @@ void ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, 
     if (!alignment->isAligned) {
         cerr << endl << "ERROR: Sequences are not aligned. Format (CLUSTAL) "
              << "not compatible with unaligned sequences." << endl << endl;
-        return ;
+        return false;
     }
 
     /* Allocate local memory for generating output alignment */
@@ -252,6 +252,8 @@ void ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, 
 
     /* Deallocate local memory */
     delete [] tmpMatrix;
+    
+    return true;
 }
 
 bool ClustalState::RecognizeOutputFormat(std::string FormatName)

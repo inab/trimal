@@ -19,7 +19,7 @@ newAlignment* PhylipPamlState::LoadAlignment(std::string filename)
     return nullptr;
 }
 
-void PhylipPamlState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool PhylipPamlState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
     /* Generate output alignment in PHYLIP format compatible with PAML program */
 
@@ -31,7 +31,7 @@ void PhylipPamlState::SaveAlignment(newAlignment* alignment, std::ostream* outpu
     if (!alignment->isAligned) {
         cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
              << "not compatible with unaligned sequences." << endl << endl;
-        return ;
+        return false;
     }
 
     /* Allocate local memory for generating output alignment */
@@ -64,6 +64,8 @@ void PhylipPamlState::SaveAlignment(newAlignment* alignment, std::ostream* outpu
 
     /* Deallocate local memory */
     delete [] tmpMatrix;
+    
+    return true;
 }
 
 bool PhylipPamlState::RecognizeOutputFormat(std::string FormatName)

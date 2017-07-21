@@ -180,7 +180,7 @@ newAlignment* NexusState::LoadAlignment(std::string filename)
     return _alignment;
 }
 
-void NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
     /* Generate output alignment in NEXUS format setting only alignment block */
 
@@ -192,7 +192,7 @@ void NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
     if (!alignment->isAligned) {
         cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
              << "not compatible with unaligned sequences." << endl << endl;
-        return ;
+        return false;
     }
 
     /* Allocate local memory for generating output alignment */
@@ -265,6 +265,8 @@ void NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
 
     /* Deallocate local memory */
     delete [] tmpMatrix;
+    
+    return true;
 }
 
 bool NexusState::RecognizeOutputFormat(std::string FormatName)

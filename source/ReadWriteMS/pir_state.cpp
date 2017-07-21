@@ -145,7 +145,7 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
     return _alignment; 
 }
 
-void PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
    /* Generate output alignment in NBRF/PIR format. Sequences can be unaligned */
 
@@ -196,6 +196,8 @@ void PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
 
     /* Deallocate local memory */
     delete [] tmpMatrix;
+    
+    return true;
 }
 
 bool PirState::RecognizeOutputFormat(std::string FormatName)

@@ -83,7 +83,7 @@ newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
     return alignment;
 }
 
-void ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newAlignment* alignment)
+bool ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newAlignment* alignment)
 {
     ofstream output;
     output.open(outFile);
@@ -91,8 +91,7 @@ void ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newA
     {
         if (state->RecognizeOutputFormat(outFormat))
         {
-            state->SaveAlignment(alignment, &output, &alignment->filename);
-            return;
+            return state->SaveAlignment(alignment, &output, &alignment->filename);
         }
     }
 
