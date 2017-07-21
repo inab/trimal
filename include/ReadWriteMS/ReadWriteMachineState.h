@@ -56,7 +56,7 @@ public:
      \param outFormat Format in which save the alignment.
     \param alignment Alignment
             */
-    void saveAlignment(std::string outFile, std::string outFormat, newAlignment* alignment);
+    bool saveAlignment(std::string outFile, std::string outFormat, newAlignment* alignment);
     
     /**
      \brief Function that takes multile files, loads them and saves in a cumulus of formats, using an outPattern.

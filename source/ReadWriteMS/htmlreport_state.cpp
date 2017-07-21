@@ -17,7 +17,7 @@ newAlignment* HTMLState::LoadAlignment(std::__cxx11::string filename)
     return nullptr;
 }
 
-void HTMLState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool HTMLState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
     int i, j, kj, upper, k = 0, maxLongName = 0;
     string tmpColumn;
@@ -30,7 +30,7 @@ void HTMLState::SaveAlignment(newAlignment* alignment, std::ostream* output, std
      * Warn about it if there are not aligned. */
     if (!alignment->isAligned) {
         cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
-        return;
+        return false;
     }
 
     /* Compute maximum sequences name length */
@@ -94,6 +94,8 @@ void HTMLState::SaveAlignment(newAlignment* alignment, std::ostream* output, std
 
     /* Print HTML footer into output file */
     *output << "    </pre>" << endl << "  </body>" << endl << "</html>" << endl;
+    
+    return true;
 }
 
 bool HTMLState::RecognizeOutputFormat(std::string FormatName)

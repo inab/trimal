@@ -210,7 +210,7 @@ newAlignment* Phylip32State::LoadAlignment(std::string filename)
     return _alignment; 
 }
 
-void Phylip32State::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool Phylip32State::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
     /* Generate output alignment in PHYLIP 3.2 format (interleaved) */
 
@@ -222,7 +222,7 @@ void Phylip32State::SaveAlignment(newAlignment* alignment, std::ostream* output,
     if (!alignment->isAligned) {
         cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
              << "not compatible with unaligned sequences." << endl << endl;
-        return ;
+        return false;
     }
 
     /* Allocate local memory for generating output alignment */
@@ -268,6 +268,8 @@ void Phylip32State::SaveAlignment(newAlignment* alignment, std::ostream* output,
 
     /* Deallocate local memory */
     delete [] tmpMatrix;
+    
+    return true;
 }
 
 bool Phylip32State::RecognizeOutputFormat(std::string FormatName)

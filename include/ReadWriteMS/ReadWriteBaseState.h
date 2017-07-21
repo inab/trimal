@@ -56,9 +56,10 @@ public:
      \param alignment Alignment to save.
      \param output File Handler where to save the formatted alignment;
      \param FileName File Name of the File Handler.
+     \return <b> True </b>if file could be saved. <b> False </b> otherwise.
      \todo Remove the File Name Argument as it's stored on the alignment itself.
      */
-    virtual void SaveAlignment(newAlignment* alignment, ostream* output, std::string* FileName) = 0;
+    virtual bool SaveAlignment(newAlignment* alignment, ostream* output, std::string* FileName) = 0;
     
     /**
      \brief Function that recognizes acronyms of the format.

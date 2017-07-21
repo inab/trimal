@@ -118,7 +118,7 @@ newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
     return _alignment; 
 }
 
-void FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
     /* Generate output alignment in FASTA format. Sequences can be unaligned. */
 
@@ -164,6 +164,8 @@ void FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
 
     /* Deallocate local memory */
     delete [] tmpMatrix;
+    
+    return true;
 }
 
 bool FastaState::RecognizeOutputFormat(std::string FormatName)

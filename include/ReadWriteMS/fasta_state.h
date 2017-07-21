@@ -11,7 +11,7 @@ public:
     
     virtual int CheckAlignment(istream* origin);
     virtual newAlignment* LoadAlignment(string filename);
-    virtual void SaveAlignment(newAlignment* alignment, ostream* output, std::string* FileName);
+    virtual bool SaveAlignment(newAlignment* alignment, ostream* output, std::string* FileName);
     virtual bool RecognizeOutputFormat(std::string FormatName);
      
 };

@@ -237,9 +237,9 @@ newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
     return _alignment;
 }
 
-void MegaInterleavedState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool MegaInterleavedState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
-    
+    return false;
 }
 
 bool MegaInterleavedState::RecognizeOutputFormat(std::string FormatName)
