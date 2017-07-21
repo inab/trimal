@@ -94,7 +94,65 @@ bool ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newA
             return state->SaveAlignment(alignment, &output, &alignment->filename);
         }
     }
+}
 
+bool ReadWriteMS::saveAlignment(std::string* outPattern, std::vector< std::string >* outFormats, newAlignment* alignment)
+{
+    std::vector<ReadWriteBaseState*> outStates = std::vector<ReadWriteBaseState*>();
+    {
+        bool recognized;
+        for (std::string outFormat : *outFormats)
+        {
+            recognized = false;
+            for(ReadWriteBaseState* state : available_states)
+            {
+                if (state->RecognizeOutputFormat(outFormat))
+                {
+                    outStates.push_back(state);
+                    recognized = true;
+                    break;
+                }
+            }
+
+            if (!recognized)
+            {
+                cerr << "Cannot recognize output format " << outFormat << endl;
+                return false;
+            }
+        }
+    }
+    
+    string filename;
+    ofstream outFileHandler;
+    int start, end;
+    bool isCorrect = true;
+    for (ReadWriteBaseState * state : outStates)
+    {
+        if (alignment->filename == "")
+        {
+            filename = utils::ReplaceString(*outPattern, "[in]", "NoInputFileName");
+        }
+        else
+        {
+            start = alignment->filename.find_last_of("/");
+            end = alignment->filename.find_last_of(".");
+            filename = utils::ReplaceString(*outPattern, "[in]", alignment->filename.substr(start, end-start));
+        }
+        utils::ReplaceStringInPlace(filename, "[extension]", state->extension);
+        utils::ReplaceStringInPlace(filename, "[format]", state->name);
+
+        outFileHandler.open(filename);
+        if (this->hasOutputFile)
+        {
+            if(!state -> SaveAlignment(alignment, &outFileHandler, &alignment->filename))
+                isCorrect = false;
+        }
+        else
+            if(!state -> SaveAlignment(alignment, &cout, &alignment->filename))
+                isCorrect = false;
+        outFileHandler.close();
+    }
+    return isCorrect;
 }
 
 void ReadWriteMS::processFile(
