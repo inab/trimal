@@ -274,6 +274,7 @@ bool Phylip32State::SaveAlignment(newAlignment* alignment, std::ostream* output,
 
 bool Phylip32State::RecognizeOutputFormat(std::string FormatName)
 {
+    if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     if (FormatName == "phylip32") return true;
     return false;
 }

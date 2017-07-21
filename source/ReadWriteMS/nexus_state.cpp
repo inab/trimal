@@ -271,6 +271,7 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
 
 bool NexusState::RecognizeOutputFormat(std::string FormatName)
 {
+    if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     if (FormatName == "nexus") return true;
     return false;
 }

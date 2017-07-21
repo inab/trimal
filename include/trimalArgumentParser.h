@@ -26,7 +26,7 @@ class trimalArgumentParser
          sfc = false, sft = false, sident = false, selectSeqs = false,
          selectCols = false, shortNames = false, splitByStopCodon = false,
          terminalOnly = false, keepSeqs = false,
-         keepHeader = false, ignoreStopCodon = false;
+         /*keepHeader = false,*/ ignoreStopCodon = false;
 
     float conservationThreshold = -1,
           gapThreshold = -1,
@@ -130,6 +130,7 @@ public:
     bool check_and_prepare_coding_sequence();
     bool check_correspondence();
     void check_cw_argument(); // TODO <- HAS TO CHANGE ITS NAME
+    void check_output_format();
 
     
     // ARGUMENTS ARE VALID, PERFORM TRIMMING FUNCTIONS

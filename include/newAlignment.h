@@ -153,11 +153,11 @@ public:
 
   void setBlockSize(int);
 
-  void setOutputFormat(int, bool);
+//   void setOutputFormat(int, bool);
 
   void setReverseFlag(bool newValue);
 
-  int getShortNames(void);
+//   int getShortNames(void);
 
   int getReverseFlag(void);
 

@@ -202,6 +202,7 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
 
 bool PirState::RecognizeOutputFormat(std::string FormatName)
 {
+    if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     if (FormatName == "pir" || FormatName == "PIR" ||
         FormatName == "nbrf" || FormatName == "NBRF")
         return true;

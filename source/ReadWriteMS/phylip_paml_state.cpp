@@ -70,6 +70,7 @@ bool PhylipPamlState::SaveAlignment(newAlignment* alignment, std::ostream* outpu
 
 bool PhylipPamlState::RecognizeOutputFormat(std::string FormatName)
 {
+    if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     if (FormatName == "phylippaml") return true;
     return false;
 }

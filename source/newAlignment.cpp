@@ -138,6 +138,8 @@ newAlignment::newAlignment(newAlignment& old) {
     if(this != &old) {
 
         int i, j;
+        
+        aligInfo = old.aligInfo;
 
         sequenNumber = old.sequenNumber;
         residNumber =  old.residNumber;
@@ -360,7 +362,7 @@ newAlignment *newAlignment::getTranslationCDS(int newResidues, int newSequences,
         }
     
     newAlig = new newAlignment(*this);
-    newAlig -> ReadWrite -> aligInfo = "";
+//     newAlig -> ReadWrite -> aligInfo = "";
     newAlig -> seqsInfo = NULL;
     
     newAlig -> sequenNumber =   newSequences;
@@ -369,9 +371,9 @@ newAlignment *newAlignment::getTranslationCDS(int newResidues, int newSequences,
     newAlig -> sequences =  new string[newSequences];
     newAlig -> seqsName =   new string[newSequences];
     
-    newAlig -> ReadWrite -> iformat =    ProtAlig -> ReadWrite->getInputFormat();
-    newAlig -> ReadWrite -> oformat =    ProtAlig -> ReadWrite->getOutputFormat();
-    newAlig -> ReadWrite -> shortNames = ProtAlig -> getShortNames();
+//     newAlig -> ReadWrite -> iformat =    ProtAlig -> ReadWrite->getInputFormat();
+//     newAlig -> ReadWrite -> oformat =    ProtAlig -> ReadWrite->getOutputFormat();
+//     newAlig -> ReadWrite -> shortNames = ProtAlig -> getShortNames();
     
     newAlig -> dataType =   DNAType;
     newAlig -> isAligned =  true;
@@ -434,28 +436,28 @@ void newAlignment::setWindowsSize(int ghWindow_, int shWindow_) {
     Statistics -> shWindow = shWindow_;
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method lets to change the output format */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void newAlignment::setOutputFormat(int format_, bool shortNames_) {
-    ReadWrite -> oformat    = format_;
-    ReadWrite -> shortNames = shortNames_;
-}
-
+// /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+// /* This method lets to change the output format */
+// /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+// void newAlignment::setOutputFormat(int format_, bool shortNames_) {
+//     ReadWrite -> oformat    = format_;
+//     ReadWrite -> shortNames = shortNames_;
+// }
+// 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method sets a new block size value */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void newAlignment::setBlockSize(int blockSize_) {
     Cleaning -> blockSize = blockSize_;
 }
-
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Return true if the ReadWrite -> shortNames flag has been setted */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-int newAlignment::getShortNames(void) {
-    return ReadWrite -> shortNames;
-}
+// 
+// 
+// /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+// /* Return true if the ReadWrite -> shortNames flag has been setted */
+// /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+// int newAlignment::getShortNames(void) {
+//     return ReadWrite -> shortNames;
+// }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Return true if the reverse flag has been setted. */
@@ -478,11 +480,11 @@ void newAlignment::setKeepSequencesFlag(bool flag) {
     Cleaning -> keepSequences = flag;
 }
 
-/* Set appropiate flag to decide whether original sequences header should be
- * dumped into the output stream with or without any preprocessing step */
-void newAlignment::setKeepSeqsHeaderFlag(bool flag) {
-    ReadWrite -> keepHeader = flag;
-}
+// /* Set appropiate flag to decide whether original sequences header should be
+//  * dumped into the output stream with or without any preprocessing step */
+// void newAlignment::setKeepSeqsHeaderFlag(bool flag) {
+//     ReadWrite -> keepHeader = flag;
+// }
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Return the block size value */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */

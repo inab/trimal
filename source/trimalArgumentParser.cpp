@@ -470,9 +470,9 @@ bool trimalArgumentParser::keep_seqs_argument(int *argc, char *argv[], int *i)
 
 bool trimalArgumentParser::keep_header_argument(int *argc, char *argv[], int *i)
 {
-    if(!strcmp(argv[*i], "-keepheader") && (!keepHeader))
+    if(!strcmp(argv[*i], "-keepheader") && (!ReadWriteMachine.keepHeader))
     {
-        keepHeader = true;
+        ReadWriteMachine.keepHeader = true;
         return true;
     }
     return false;
@@ -863,6 +863,7 @@ bool trimalArgumentParser::post_process(char* argv[])
         check_and_prepare_coding_sequence();
         check_correspondence();
         check_cw_argument();
+        check_output_format();
     }
 
     if(appearErrors)
@@ -1263,6 +1264,7 @@ bool trimalArgumentParser::check_multiple_files_comparison(char* argv[])
         filesToCompare = new char*[numfiles];
 
         /* -------------------------------------------------------------------- */
+        
         compare.open(argv[compareset], ifstream::in);
 
         for(i = 0; (i < numfiles)  && (!appearErrors); i++)
@@ -1276,9 +1278,6 @@ bool trimalArgumentParser::check_multiple_files_comparison(char* argv[])
             strcpy(filesToCompare[i], nline.c_str());
             /* -------------------------------------------------------------------- */
 
-            /* -------------------------------------------------------------------- */
-//             compareAlignmentsArray[i] = new newAlignment();
-//             if(!compareAlignmentsArray[i] -> ReadWrite -> loadAlignment(filesToCompare[i]))
             if ((compareAlignmentsArray[i] = ReadWriteMachine.loadAlignment(filesToCompare[i])))
             {
                 cerr << endl << "alignment not loaded: \"" << filesToCompare[i] << "\" Check the file's content." << endl << endl;
@@ -1453,6 +1452,14 @@ void trimalArgumentParser::check_cw_argument()
         cerr << "INFO: Try with specific comparison file window value. Parameter -cw." << endl << endl;
 }
 
+void trimalArgumentParser::check_output_format()
+{
+    if (oformats.size() == 0)
+    {
+        oformats.push_back(ReadWriteMachine.getInputStateName(infile));
+    }
+}
+
 int trimalArgumentParser::perform()
 {
     if (appearErrors) return -1;
@@ -1463,17 +1470,14 @@ int trimalArgumentParser::perform()
 
     origAlig -> Cleaning -> setTrimTerminalGapsFlag(terminalOnly);
     origAlig -> setKeepSequencesFlag(keepSeqs);
-    origAlig -> setKeepSeqsHeaderFlag(keepHeader);
+//     origAlig -> setKeepSeqsHeaderFlag(keepHeader);
 
     /* -------------------------------------------------------------------- */
     set_window_size();
 
     if(blockSize != -1)
         origAlig -> setBlockSize(blockSize);
-
-//     if(outformat != -1)
-//         origAlig -> setOutputFormat(outformat, shortNames);
-
+    
     if (create_or_use_similarity_matrix())
         return -1;
 
@@ -1482,11 +1486,9 @@ int trimalArgumentParser::perform()
     if(backtransFile != NULL)
         seqMatrix = origAlig -> SequencesMatrix;
     /* -------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------- */
+    
     clean_alignment();
-    /* -------------------------------------------------------------------- */
-
+    
     /* -------------------------------------------------------------------- */
     if(singleAlig == NULL)
     {
@@ -1523,26 +1525,22 @@ int trimalArgumentParser::perform()
     /* -------------------------------------------------------------------- */
     if((outfile != NULL) && (!appearErrors))
     {
-        std::string* outPattern = new std::string(outfile);
-        if (ReadWriteMachine.saveAlignment( outPattern, &oformats, singleAlig) == false)
-//         if(!singleAlig -> ReadWrite -> saveAlignment(outfile))
+         
+        if (ReadWriteMachine.saveAlignment( std::string(outfile), &oformats, singleAlig) == false)
         {
             cerr << endl << "ERROR: It's imposible to generate the output file." << endl << endl;
             appearErrors = true;
         }
-        delete outPattern;
+
     }
     else if((stats >= 0) && (!appearErrors))
-        singleAlig -> ReadWrite -> printAlignment();
-    /* -------------------------------------------------------------------- */
+        ReadWriteMachine.saveAlignment( "", &oformats, singleAlig);
 
     /* -------------------------------------------------------------------- */
     if((columnNumbering) && (!appearErrors))
         singleAlig -> Statistics -> printCorrespondence();
-    /* -------------------------------------------------------------------- */
 
     /* -------------------------------------------------------------------- */
-    
     
     delete singleAlig;
     delete origAlig;
@@ -1560,10 +1558,6 @@ int trimalArgumentParser::perform()
     delete[] infile;
     delete[] matrixFile;
     /* -------------------------------------------------------------------- */
-
-    cout << "Out formats" << endl;
-    for (std::string state : oformats)
-        cout << state << endl;
     
     return 0;
 }

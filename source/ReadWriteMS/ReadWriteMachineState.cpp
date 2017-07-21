@@ -91,68 +91,118 @@ bool ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newA
     {
         if (state->RecognizeOutputFormat(outFormat))
         {
-            return state->SaveAlignment(alignment, &output, &alignment->filename);
+            if (output)
+                return state->SaveAlignment(alignment, &output, &alignment->filename);
+            else
+                return state->SaveAlignment(alignment, &cout, &alignment->filename);
         }
     }
+    cerr << "ERROR: Format specified wasn't recognized" << endl;
+    return false;
 }
 
-bool ReadWriteMS::saveAlignment(std::string* outPattern, std::vector< std::string >* outFormats, newAlignment* alignment)
+bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string >* outFormats, newAlignment* alignment)
 {
-    std::vector<ReadWriteBaseState*> outStates = std::vector<ReadWriteBaseState*>();
+    if (outPattern == "")
     {
-        bool recognized;
-        for (std::string outFormat : *outFormats)
+        if (outFormats->size() == 0) 
         {
-            recognized = false;
+            outFormats->push_back("fasta");
+        }
+        if (outFormats->size() == 1)
+        {
             for(ReadWriteBaseState* state : available_states)
             {
-                if (state->RecognizeOutputFormat(outFormat))
+                if (state->RecognizeOutputFormat( outFormats->at(0) ))
                 {
-                    outStates.push_back(state);
-                    recognized = true;
-                    break;
+                    return state->SaveAlignment(alignment, &cout, &alignment->filename);
                 }
             }
-
-            if (!recognized)
+            cerr << "ERROR: Format specified wasn't recognized" << endl;
+            return false;
+        }
+        else
+        {
+            cerr << "ERROR: You must specify only one output format if you don't provide an output file pattern" << endl;
+            return false;
+        }
+    }
+    else
+    {
+        if (outFormats->size() == 0) 
+        {
+            outFormats->push_back("fasta");
+        }
+        if (outFormats->size() == 1)
+        {
+            for(ReadWriteBaseState* state : available_states)
             {
-                cerr << "Cannot recognize output format " << outFormat << endl;
-                return false;
+                if (state->RecognizeOutputFormat( outFormats->at(0) ))
+                {
+                    ofstream outFileHandler;
+                    outFileHandler.open(outPattern);
+                    return state->SaveAlignment(alignment, &outFileHandler, &alignment->filename);
+                }
+            }
+            cerr << "ERROR: Format specified wasn't recognized" << endl;
+            return false;
+        }
+        
+        // Tranform the list of std::string states to a ReadWriteBaseState list.
+        bool recognized = true;
+        std::vector<ReadWriteBaseState*> outStates = std::vector<ReadWriteBaseState*>();
+        {
+            recognized = false;
+            for (std::string outFormat : *outFormats)
+            {
+                for(ReadWriteBaseState* state : available_states)
+                {
+                    if (state->RecognizeOutputFormat(outFormat))
+                    {
+                        outStates.push_back(state);
+                        recognized = true;
+                    }
+                }
+                if (!recognized)
+                {
+                    cerr << "ERROR: Cannot recognize output format " << outFormat << endl;
+                    return false; 
+                }
             }
         }
-    }
-    
-    string filename;
-    ofstream outFileHandler;
-    int start, end;
-    bool isCorrect = true;
-    for (ReadWriteBaseState * state : outStates)
-    {
-        if (alignment->filename == "")
+        
+        string filename;
+        ofstream outFileHandler;
+        int start, end;
+        bool isCorrect = true;
+        for (ReadWriteBaseState * state : outStates)
         {
-            filename = utils::ReplaceString(*outPattern, "[in]", "NoInputFileName");
-        }
-        else
-        {
-            start = alignment->filename.find_last_of("/");
-            end = alignment->filename.find_last_of(".");
-            filename = utils::ReplaceString(*outPattern, "[in]", alignment->filename.substr(start, end-start));
-        }
-        utils::ReplaceStringInPlace(filename, "[extension]", state->extension);
-        utils::ReplaceStringInPlace(filename, "[format]", state->name);
+            if (alignment->filename == "")
+            {
+                filename = utils::ReplaceString(outPattern, "[in]", "NoInputFileName");
+            }
+            else
+            {
+                start = alignment->filename.find_last_of("/");
+                end = alignment->filename.find_last_of(".");
+                filename = utils::ReplaceString(outPattern, "[in]", alignment->filename.substr(start, end-start));
+            }
+            utils::ReplaceStringInPlace(filename, "[extension]", state->extension);
+            utils::ReplaceStringInPlace(filename, "[format]", state->name);
 
-        outFileHandler.open(filename);
-        if (this->hasOutputFile)
-        {
+            outFileHandler.open(filename);
             if(!state -> SaveAlignment(alignment, &outFileHandler, &alignment->filename))
+            {
+                cerr << "ERROR: Alignment couldn't be saved on " << state->name << " format" << endl;
                 isCorrect = false;
+            }
+            
+            outFileHandler.close();
         }
-        else
-            if(!state -> SaveAlignment(alignment, &cout, &alignment->filename))
-                isCorrect = false;
-        outFileHandler.close();
+        return isCorrect;
+    
     }
-    return isCorrect;
+    return false;
 }
 
 void ReadWriteMS::processFile(

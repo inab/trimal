@@ -100,6 +100,7 @@ bool HTMLState::SaveAlignment(newAlignment* alignment, std::ostream* output, std
 
 bool HTMLState::RecognizeOutputFormat(std::string FormatName)
 {
+    if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     if (FormatName == "html" || FormatName == "HTML" || FormatName == "report") return true;
     return false;
 }

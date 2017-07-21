@@ -170,6 +170,7 @@ bool FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
 
 bool FastaState::RecognizeOutputFormat(std::string FormatName)
 {
+    if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     if (FormatName == "fasta") return true;
     return false;
 }
