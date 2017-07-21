@@ -315,6 +315,7 @@ bool MegaSequentialState::SaveAlignment(newAlignment* alignment, std::ostream* o
 
 bool MegaSequentialState::RecognizeOutputFormat(std::string FormatName)
 {
+    if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     if (FormatName == "mega") return true;
     return false;
 }

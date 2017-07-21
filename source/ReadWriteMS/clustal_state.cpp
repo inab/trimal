@@ -28,7 +28,6 @@ int ClustalState::CheckAlignment(istream* origin)
     if((!strcmp(firstWord, "CLUSTAL")) || (!strcmp(firstWord, "clustal")))
         return 1;
 
- 
     return 0;
 }
 
@@ -235,10 +234,10 @@ bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, 
         maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
 
     /* Print alignment header */
-//     if((alignment->aligInfo.size() != 0)  && (iformat == oformat))
-//         (*output) << alignment->aligInfo << endl << endl;
-//     else
-    (*output) << "CLUSTAL multiple sequence alignment" << endl << endl;
+    if((alignment->aligInfo.size() != 0)  && (alignment->aligInfo.substr(0,7) == "CLUSTAL"))
+        (*output) << alignment->aligInfo << endl << endl;
+    else
+        (*output) << "CLUSTAL X (1.81) multiple sequence alignment" << endl << endl;
 
     /* Print alignment itself */
     /* Print as many blocks as it is needed of lines composed
@@ -258,6 +257,7 @@ bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, 
 
 bool ClustalState::RecognizeOutputFormat(std::string FormatName)
 {
+    if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     if (FormatName == "clustal") return true;
     return false;
 }

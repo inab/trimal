@@ -66,7 +66,9 @@ public:
      \param FormatName acronym to recognize
      \return <b>True</b> if recognized, <b>False</b> otherwise.
      */
-    virtual bool RecognizeOutputFormat(std::string FormatName) = 0;
+    virtual bool RecognizeOutputFormat(std::string FormatName) {
+        return (name == FormatName);
+    }
     
     /**
      \brief Class Destructor

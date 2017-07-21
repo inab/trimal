@@ -259,6 +259,7 @@ bool Phylip40State::SaveAlignment(newAlignment* alignment, std::ostream* output,
 
 bool Phylip40State::RecognizeOutputFormat(std::string FormatName)
 {
+    if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     if (FormatName == "phylip" || FormatName == "phylip40") return true;
     return false;
 }

@@ -13,62 +13,62 @@ class ReadWriteManager {
 
 public:
     
-    int iformat;
-    int oformat;
-    bool shortNames;
+//     int iformat;
+//     int oformat;
+//     bool shortNames;
       
-    bool keepHeader;
-    string filename;
-    string aligInfo;
+//     bool keepHeader;
+//     string filename;
+//     string aligInfo;
     
     
     int getInputFormat(void);
 
     int getOutputFormat(void);
 
-    bool loadAlignment(char *alignmentFile);
-
-    bool saveAlignment(char *destFile);
-
-    bool printAlignment(void);
-
-    int formatInputAlignment(char *);
-
-    int formatInputFile(void);
-
-    int typeInputFile(void);
-
-    bool loadPhylipAlignment(char *);
-
-    bool loadFastaAlignment(char *);
-
-    bool loadClustalAlignment(char *);
-
-    bool loadNexusAlignment(char *);
-
-    bool loadMegaInterleavedAlignment(char *);
-
-    bool loadMegaNonInterleavedAlignment(char *);
-
-    bool loadNBRF_PirAlignment(char *);
-
-    bool loadPhylip3_2Alignment(char *);
-
-    void alignmentClustalToFile(ostream &);
-
-    void alignmentNBRF_PirToFile(ostream &);
-
-    void alignmentFastaToFile(ostream &);
-
-    void alignmentPhylip3_2ToFile(ostream &);
-
-    void alignmentPhylipToFile(ostream &);
-
-    void alignmentPhylip_PamlToFile(ostream &);
-
-    void alignmentNexusToFile(ostream &);
-
-    void alignmentMegaToFile(ostream &);
+//     bool loadAlignment(char *alignmentFile);
+// 
+//     bool saveAlignment(char *destFile);
+// 
+//     bool printAlignment(void);
+// 
+//     int formatInputAlignment(char *);
+// 
+//     int formatInputFile(void);
+// 
+//     int typeInputFile(void);
+// 
+//     bool loadPhylipAlignment(char *);
+// 
+//     bool loadFastaAlignment(char *);
+// 
+//     bool loadClustalAlignment(char *);
+// 
+//     bool loadNexusAlignment(char *);
+// 
+//     bool loadMegaInterleavedAlignment(char *);
+// 
+//     bool loadMegaNonInterleavedAlignment(char *);
+// 
+//     bool loadNBRF_PirAlignment(char *);
+// 
+//     bool loadPhylip3_2Alignment(char *);
+// 
+//     void alignmentClustalToFile(ostream &);
+// 
+//     void alignmentNBRF_PirToFile(ostream &);
+// 
+//     void alignmentFastaToFile(ostream &);
+// 
+//     void alignmentPhylip3_2ToFile(ostream &);
+// 
+//     void alignmentPhylipToFile(ostream &);
+// 
+//     void alignmentPhylip_PamlToFile(ostream &);
+// 
+//     void alignmentNexusToFile(ostream &);
+// 
+//     void alignmentMegaToFile(ostream &);
 
     bool alignmentSummaryHTML(char *, int, int, int *, int *, float *);
 
