@@ -13,13 +13,13 @@ class ReadWriteManager {
 
 public:
     
-      int iformat;
-      int oformat;
-      bool shortNames;
+    int iformat;
+    int oformat;
+    bool shortNames;
       
-      bool keepHeader;
-        string filename;
-          string aligInfo;
+    bool keepHeader;
+    string filename;
+    string aligInfo;
     
     
     int getInputFormat(void);

@@ -10,6 +10,7 @@
 #include <string>
 #include <iostream>
 #include "newAlignment.h"
+#include "ReadWriteMS/ReadWriteMachineState.h"
 
 using namespace std;
 
@@ -34,7 +35,7 @@ class trimalArgumentParser
           residuesOverlap = -1,
           sequenceOverlap = -1,
           maxIdentity = -1;
-    int outformat = -1,
+    int outformat = 1,
         prevType = -1,
         compareset = -1,
         stats = 0,
@@ -53,9 +54,16 @@ class trimalArgumentParser
     int i = 1, argumentLength, num = 0, maxAminos = 0, numfiles = 0, referFile = 0, *delColumns = NULL, *delSequences = NULL, *sequencesLengths = NULL;
     char c, *forceFile = NULL, *infile = NULL, *backtransFile = NULL, *outfile = NULL, *htmlOutFile = NULL, *matrixFile = NULL,
              **filesToCompare = NULL, line[256];
+             
+             
+    std::vector<std::string> oformats;
 
 public:
+    
+    // Constructor
+//     trimalArgumentParser();
 
+    // READING ARGUMENTS
     void parseArguments(int argc, char *argv[]);
 
     bool info_arguments(int* argc, char* argv[], int* i);
@@ -98,6 +106,7 @@ public:
     bool ignore_stop_codon_argument(int* argc, char* argv[], int* i);
 
     // TODO: Names of this functions should be more informative.
+    // ARGUMENTS PARSED. CHECK COMPATIBILITY BETWEEN ARGUMENTS.
     bool post_process(char* argv[]);
     
     bool check_argument_incompatibilities();
@@ -122,6 +131,8 @@ public:
     bool check_correspondence();
     void check_cw_argument(); // TODO <- HAS TO CHANGE ITS NAME
 
+    
+    // ARGUMENTS ARE VALID, PERFORM TRIMMING FUNCTIONS
     int perform();
 
     void print_statistics();
@@ -129,11 +140,13 @@ public:
     void clean_alignment();
     void set_window_size();
 
-
-
+    
+    // NON COMPLEX OPTIONS
     void menu();
     void examples();
 
+private:
+    ReadWriteMS ReadWriteMachine;
 };
 
 

@@ -58,6 +58,15 @@ public:
             */
     bool saveAlignment(std::string outFile, std::string outFormat, newAlignment* alignment);
     
+        /**
+     \brief Function to save an alignment to a file.
+            It searched on the available_states, the one that can write the alignment in the correct format.
+     \param outFile Filepath to save the alignment.
+     \param outFormat Format in which save the alignment.
+    \param alignment Alignment
+            */
+    bool saveAlignment(std::string* outPattern, std::vector< std::string >* outFormats, newAlignment* alignment);
+    
     /**
      \brief Function that takes multile files, loads them and saves in a cumulus of formats, using an outPattern.
      \param inFile Vector of files to load, reformat and save.
