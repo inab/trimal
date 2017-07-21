@@ -176,10 +176,10 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
     for(i = 0; i < alignment->sequenNumber; i++) {
 
         /* Print sequence datatype and its name */
-//         if((alignment->seqsInfo != NULL) /*&& (iformat == oformat)*/)
-//             (*output) << ">" << alignment->seqsInfo[i].substr(0, 2) << ";" << alignment->seqsName[i]
-//                  << endl << alignment->seqsInfo[i].substr(2) << endl;
-//         else
+        if((alignment->seqsInfo != NULL) /*&& (iformat == oformat)*/)
+            (*output) << ">" << alignment->seqsInfo[i].substr(0, 2) << ";" << alignment->seqsName[i]
+                 << endl << alignment->seqsInfo[i].substr(2) << endl;
+        else
             (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i] << endl
                  << alignment->seqsName[i] << " " << alignment->residuesNumber[i] << " bases" << endl;
 
