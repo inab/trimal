@@ -99,7 +99,7 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine,
 
         /* Sort a copy of the gInCol vector, and take the value of the column that marks the % baseline */
         utils::copyVect((int *) gInCol, vectAux, _alignment->residNumber);
-        utils::quicksort(vectAux, 0, _alignment->residNumber-1);
+        utils::quicksort(vectAux, 0, _alignment->residNumber - 1);
         cut = vectAux[(int) ((float)(_alignment->residNumber - 1) * (baseLine)/100.0)];
 
         /* Deallocate memory */
@@ -209,36 +209,21 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine,
     _alignment->fillNewDataStructure(matrixAux, newSeqsName);
 
     /* When we have all parameters, we create the new _alignmentment */
-//     newAlig = new newAlignment(_alignment->filename, _alignment->aligInfo,
-//                                matrixAux, newSeqsName, _alignment->seqsInfo,
-//                             counter.sequences, counter.residues,
-//                                _alignment->iformat, _alignment->oformat,
-//                                _alignment->shortNames, _alignment->dataType,
-//                                _alignment->isAligned, _alignment->reverse,
-//                                terminalGapOnly, keepSequences,
-//                                _alignment->keepHeader, _alignment->sequenNumber,
-//                                _alignment->residNumber,
-//                                _alignment->residuesNumber, _alignment->saveResidues,
-//                                _alignment->saveSequences, _alignment->ghWindow, _alignment->shWindow,
-//                                blockSize, _alignment->identities);
+
     newAlig = new newAlignment(*_alignment);
     
     newAlig -> sequenNumber = counter.sequences;
     newAlig -> residNumber = counter.residues;
-    
-    newAlig -> sequences = new string[counter.sequences];
-    newAlig -> seqsName = new string[counter.sequences];
-    for(i = 0; i < counter.sequences; i++)
-    {
-        newAlig -> sequences[i] = matrixAux[i];
-        newAlig -> seqsName[i] = newSeqsName[i];
-    }
 
-    /* Deallocate local memory */
-    delete[] matrixAux;
-    delete[] newSeqsName;
+    if (newAlig-> sequences != NULL)
+        delete[] newAlig->sequences;
     
-        
+    if (newAlig-> seqsName != NULL)
+        delete[] newAlig->seqsName;
+    
+    newAlig -> sequences = matrixAux;
+    newAlig -> seqsName = newSeqsName;
+
     newAlig->fillMatrices(true);
 
     /* Return the new _alignmentment reference */
@@ -375,39 +360,20 @@ newAlignment* Cleaner::cleanByCutValue(float cut, float baseLine,
     /* Fill local allocated memory with previously selected data */
     _alignment->fillNewDataStructure(matrixAux, newSeqsName);
 
-    /* When we have all parameters, we create the new _alignmentment */
-//     newAlig = new newAlignment(_alignment->filename, _alignment->aligInfo,
-//                                matrixAux, newSeqsName,
-//                                _alignment->seqsInfo,
-//                                counter.sequences, counter.residues,
-//                                _alignment->iformat, _alignment->oformat,
-//                                _alignment->shortNames, _alignment->dataType,
-//                                _alignment->isAligned, _alignment->reverse,
-//                                terminalGapOnly, keepSequences,
-//                                _alignment->keepHeader, _alignment->sequenNumber, _alignment->residNumber,
-//                                _alignment->residuesNumber, _alignment->saveResidues,
-//                                _alignment->saveSequences, _alignment->ghWindow, _alignment->shWindow,
-//                                blockSize,
-//                                _alignment->identities);
-
     newAlig = new newAlignment(*_alignment);
     
     newAlig -> sequenNumber = counter.sequences;
     newAlig -> residNumber = counter.residues;
     
-    newAlig -> sequences = new string[counter.sequences];
-    newAlig -> seqsName = new string[counter.sequences];
-    for(i = 0; i < counter.sequences; i++)
-    {
-        newAlig -> sequences[i] = matrixAux[i];
-        newAlig -> seqsName[i] = newSeqsName[i];
-    }
+    if (newAlig->sequences != NULL)
+        delete[] newAlig -> sequences;
     
-    /* Deallocate local memory */
-    delete[] matrixAux;
-    delete[] newSeqsName;
+    if (newAlig -> seqsName != NULL)
+        delete[] newAlig -> seqsName;
     
-        
+    newAlig -> sequences = matrixAux;
+    newAlig -> seqsName = newSeqsName;
+
     newAlig->fillMatrices(true);
 
     /* Return the new _alignmentment reference */
@@ -581,31 +547,19 @@ newAlignment* Cleaner::cleanByCutValue(double cutGaps, const int *gInCol,
     /* Fill local allocated memory with previously selected data */
     _alignment->fillNewDataStructure(matrixAux, newSeqsName);
 
-    /* When we have all parameters, we create the new _alignmentment */
-//     newAlig = new newAlignment(_alignment->filename, _alignment->aligInfo,
-//                                matrixAux, newSeqsName, _alignment->seqsInfo,
-//                                counter.sequences, counter.residues,
-//                                _alignment->iformat, _alignment->oformat,
-//                                _alignment->shortNames, _alignment->dataType,
-//                                _alignment->isAligned, _alignment->reverse, terminalGapOnly,
-//                                keepSequences, _alignment->keepHeader,
-//                                _alignment->sequenNumber, _alignment->residNumber,
-//                                _alignment->residuesNumber, _alignment->saveResidues,
-//                                _alignment->saveSequences,
-//                                _alignment->ghWindow, _alignment->shWindow, blockSize,
-//                                _alignment->identities);
     newAlig = new newAlignment(*_alignment);
     
     newAlig -> sequenNumber = counter.sequences;
     newAlig -> residNumber = counter.residues;
     
-    newAlig -> sequences = new string[counter.sequences];
-    newAlig -> seqsName = new string[counter.sequences];
-    for(i = 0; i < counter.sequences; i++)
-    {
-        newAlig -> sequences[i] = matrixAux[i];
-        newAlig -> seqsName[i] = newSeqsName[i];
-    }
+    if (newAlig->sequences != NULL)
+        delete[] newAlig -> sequences;
+    
+    if (newAlig -> seqsName != NULL)
+        delete[] newAlig -> seqsName;
+    
+    newAlig -> sequences = matrixAux;
+    newAlig -> seqsName = newSeqsName;
     
     /* Deallocate local memory */
     delete[] matrixAux;
@@ -707,50 +661,20 @@ newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut,
 
     _alignment->fillNewDataStructure(&counter);
 
-    //~ cerr << counter -> seqsName[counter -> sequences - 1] << endl;
 
-    /* When we have all parameters, we create the new _alignmentment */
-    //~ newAlig = new _alignmentment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, counter.sequences, counter.residues,
-//     newAlig = new newAlignment(_alignment->filename,
-//                                _alignment->aligInfo,
-//                                counter.matrix,
-//                                counter.seqsName,
-//                                _alignment->seqsInfo,
-//                                counter.sequences,
-//                                counter.residues,
-//                                _alignment->iformat,
-//                                _alignment->oformat,
-//                                _alignment->shortNames,
-//                                _alignment->dataType,
-//                                _alignment->isAligned,
-//                                _alignment->reverse,
-//                                terminalGapOnly,
-//                                keepSequences,
-//                                _alignment->keepHeader,
-//                                _alignment->sequenNumber,
-//                                _alignment->residNumber,
-//                                _alignment->residuesNumber,
-//                                _alignment->saveResidues,
-//                                _alignment->saveSequences,
-//                                _alignment->ghWindow,
-//                                _alignment->shWindow,
-//                                blockSize,
-//                                _alignment->identities);
     newAlig = new newAlignment(*_alignment);
     
     newAlig -> sequenNumber = counter.sequences;
     newAlig -> residNumber = counter.residues;
     
-    newAlig -> sequences = new string[counter.sequences];
-    newAlig -> seqsName = new string[counter.sequences];
-    for(i = 0; i < counter.sequences; i++)
-    {
-        newAlig -> sequences[i] = counter.matrix[i];
-        newAlig -> seqsName[i] = counter.seqsName[i];
-    }
-    /* Deallocate local memory */
-    //~ delete[] matrixAux;
-    //~ delete[] newSeqsName;
+    if (newAlig->sequences != NULL)
+        delete[] newAlig -> sequences;
+    
+    if (newAlig -> seqsName != NULL)
+        delete[] newAlig -> seqsName;
+    
+    newAlig -> sequences = counter.matrix;
+    newAlig -> seqsName = counter.seqsName;
 
     /* Return the new _alignmentment reference */
         
@@ -805,17 +729,14 @@ newAlignment* Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
     newAlig -> sequenNumber = counter.sequences;
     newAlig -> residNumber = counter.residues;
     
-    newAlig -> sequences = new string[counter.sequences];
-    newAlig -> seqsName = new string[counter.sequences];
-    for(i = 0; i < counter.sequences; i++)
-    {
-        newAlig -> sequences[i] = matrixAux[i];
-        newAlig -> seqsName[i] = newSeqsName[i];
-    }
-
-    /* Deallocate local memory */
-    delete [] matrixAux;
-    delete [] newSeqsName;
+    if (newAlig->sequences != NULL)
+        delete[] newAlig -> sequences;
+    
+    if (newAlig -> seqsName != NULL)
+        delete[] newAlig -> seqsName;
+    
+    newAlig -> sequences = matrixAux;
+    newAlig -> seqsName = newSeqsName;
     
     newAlig->fillMatrices(true);
 
@@ -831,20 +752,20 @@ newAlignment* Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementa
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* If gaps statistics are not calculated, we
      * calculate them */
-    if(_alignment->Statistics->calculateGapStats() != true)
+    if(_alignment -> Statistics -> calculateGapStats() == false)
         return NULL;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Obtain the cut point using the given parameters */
-    cut = _alignment->sgaps -> calcCutPoint(baseLine, gapsPct);
+    cut = _alignment -> sgaps -> calcCutPoint(baseLine, gapsPct);
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Once we have the cut value proposed, we call the
      * appropiate method to clean the newAlignment and, then,
      * generate the new newAlignment. */
-    ret = cleanByCutValue(cut, baseLine, _alignment->sgaps -> getGapsWindow(), complementary);
+    ret = cleanByCutValue(cut, baseLine, _alignment -> sgaps -> getGapsWindow(), complementary);
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1228,8 +1149,9 @@ newAlignment* Cleaner::cleanCombMethods(bool complementarity, bool variable) {
     /* Clean the newAlignment and generate a new newAlignment
      * object using the gaps cut and the similaritys cut
      *  values */
-    newAlignment *ret = cleanStrict(gapCut, _alignment->sgaps -> getGapsWindow(),
-                                    simCut, _alignment->scons -> getMdkwVector(), complementarity, variable);
+    newAlignment *ret = cleanStrict(gapCut, _alignment -> sgaps -> getGapsWindow(),
+                                    simCut, _alignment -> scons -> getMdkwVector(), 
+                                    complementarity, variable);
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1467,39 +1389,21 @@ newAlignment * Cleaner::getClustering(float identityThreshold) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* When we have all parameters, we create the new
      * alignment */
-//     newAlig = new newAlignment(_alignment ->filename, _alignment ->aligInfo,
-//                                matrixAux, newSeqsName, _alignment ->seqsInfo,
-//                                clustering[0], _alignment ->residNumber,
-//                                _alignment ->iformat, _alignment ->oformat, _alignment ->shortNames,
-//                                _alignment ->dataType, _alignment ->isAligned,
-//                                _alignment ->reverse, _alignment ->terminalGapOnly,
-//                                _alignment ->keepSequences, _alignment ->keepHeader,
-//                                _alignment ->sequenNumber,
-//                                _alignment ->residNumber, _alignment ->residuesNumber,
-//                                _alignment ->saveResidues, _alignment ->saveSequences,
-//                                _alignment ->ghWindow, _alignment ->shWindow,
-//                                _alignment ->blockSize, _alignment ->identities);
-    
+
     newAlig = new newAlignment(*_alignment);
     
      newAlig -> sequenNumber = clustering[0];
 //     newAlig -> residNumber = _alignment.residues;
     
-    newAlig -> sequences = new string[clustering[0]];
-    newAlig -> seqsName = new string[clustering[0]];
-    for(i = 0; i < clustering[0]; i++)
-    {
-        newAlig -> sequences[i] = matrixAux[i];
-        newAlig -> seqsName[i] = newSeqsName[i];
-    }
-        
+    if (newAlig->sequences != NULL)
+        delete[] newAlig -> sequences;
     
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Deallocated auxiliar memory */
-    delete [] matrixAux;
-    delete [] newSeqsName;
+    if (newAlig -> seqsName != NULL)
+        delete[] newAlig -> seqsName;
+    
+    newAlig -> sequences = matrixAux;
+    newAlig -> seqsName = newSeqsName;
+        
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     newAlig->fillMatrices(true);
@@ -1542,44 +1446,23 @@ newAlignment* Cleaner::removeColumns(int *columns, int init, int size,
     /* Fill local allocated memory with previously selected data */
     _alignment -> fillNewDataStructure(matrixAux, newSeqsName);
 
-    /* When we have all parameters, we create the new alignment */
-//     newAlig = new newAlignment(
-//         _alignment -> filename,
-//         _alignment -> aligInfo,
-//         matrixAux, newSeqsName,
-//         _alignment -> seqsInfo,
-//         counter.sequences, counter.residues,
-//         _alignment -> iformat, _alignment -> oformat,
-//         _alignment -> shortNames, _alignment -> dataType,
-//         _alignment -> isAligned, _alignment -> reverse,
-//         _alignment -> terminalGapOnly, keepSequences,
-//         _alignment -> keepHeader, _alignment -> sequenNumber,
-//         _alignment -> residNumber,
-//         _alignment -> residuesNumber,
-//         _alignment -> saveResidues,
-//         _alignment -> saveSequences,
-//         _alignment -> ghWindow,
-//         _alignment -> shWindow,
-//         _alignment -> blockSize,
-//         _alignment -> identities);
-
     newAlig = new newAlignment(*_alignment);
     
     newAlig -> sequenNumber = counter.sequences;
     newAlig -> residNumber = counter.residues;
     
-    newAlig -> sequences = new string[counter.sequences];
-    newAlig -> seqsName = new string[counter.sequences];
-    for(i = 0; i < counter.sequences; i++)
-    {
-        newAlig -> sequences[i] = matrixAux[i];
-        newAlig -> seqsName[i] = newSeqsName[i];
-    }
+    if (newAlig->sequences != NULL)
+        delete[] newAlig -> sequences;
+    
+    if (newAlig -> seqsName != NULL)
+        delete[] newAlig -> seqsName;
+    
+    newAlig -> sequences = matrixAux;
+    newAlig -> seqsName = newSeqsName;
 
     /* Deallocate local memory */
-    delete[] matrixAux;
-    delete[] newSeqsName;
-    
+//     delete[] matrixAux;
+//     delete[] newSeqsName;
         
     newAlig->fillMatrices(true);
 
@@ -1620,42 +1503,24 @@ newAlignment *Cleaner::removeSequences(int *seqs, int init, int size,
     _alignment -> fillNewDataStructure(matrixAux, newSeqsName);
 
     /* When we have all parameters, we create the new alignment */
-//     newAlig = new newAlignment(
-//         _alignment -> filename,
-//         _alignment -> aligInfo,
-//         matrixAux, newSeqsName,
-//         _alignment -> seqsInfo,
-//         counter.sequences, counter.residues,
-//         _alignment -> iformat, _alignment -> oformat,
-//         _alignment -> shortNames, _alignment -> dataType,
-//         _alignment -> isAligned, _alignment -> reverse,
-//         _alignment -> terminalGapOnly, keepSequences,
-//         _alignment -> keepHeader, _alignment -> sequenNumber,
-//         _alignment -> residNumber,
-//         _alignment -> residuesNumber,
-//         _alignment -> saveResidues,
-//         _alignment -> saveSequences,
-//         _alignment -> ghWindow,
-//         _alignment -> shWindow,
-//         _alignment -> blockSize,
-//         _alignment -> identities);
 
     newAlig = new newAlignment(*_alignment);
     
     newAlig -> sequenNumber = counter.sequences;
     newAlig -> residNumber = counter.residues;
     
-    newAlig -> sequences = new string[counter.sequences];
-    newAlig -> seqsName = new string[counter.sequences];
-    for(i = 0; i < counter.sequences; i++)
-    {
-        newAlig -> sequences[i] = matrixAux[i];
-        newAlig -> seqsName[i] = newSeqsName[i];
-    }
+    if (newAlig->sequences != NULL)
+        delete[] newAlig -> sequences;
+    
+    if (newAlig -> seqsName != NULL)
+        delete[] newAlig -> seqsName;
+    
+    newAlig -> sequences = matrixAux;
+    newAlig -> seqsName = newSeqsName;
 
     /* Free local memory */
-    delete [] matrixAux;
-    delete [] newSeqsName;
+//     delete [] matrixAux;
+//     delete [] newSeqsName;
     
         
     newAlig->fillMatrices(true);

@@ -68,9 +68,9 @@ newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
     /* Filename is stored as a title for MEGA input alignment.
      * If it is detected later a label "TITLE" in input file, this information
      * will be replaced for that one */
-    filename.append("!Title ");
-    filename.append(filename);
-    filename.append(";");
+    _alignment->filename.append("!Title ");
+    _alignment->filename.append(filename);
+    _alignment->filename.append(";");
 
     /* Skip first valid line */
     do {

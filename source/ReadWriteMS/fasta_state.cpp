@@ -31,9 +31,9 @@ newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
         return nullptr;
 
     /* Store input file name for posterior uses in other formats */
-    filename.append("!Title ");
-    filename.append(filename);
-    filename.append(";");
+    _alignment->filename.append("!Title ");
+    _alignment->filename.append(filename);
+    _alignment->filename.append(";");
 
     /* Compute how many sequences are in the input alignment */
     _alignment->sequenNumber = 0;

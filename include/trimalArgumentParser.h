@@ -14,7 +14,7 @@
 
 using namespace std;
 
-class trimalArgumentParser
+class trimAlManager
 {
 
     bool appearErrors = false,
@@ -41,6 +41,14 @@ class trimalArgumentParser
         stats = 0,
         windowSize = -1, gapWindow = -1, similarityWindow = -1,
         consistencyWindow = -1, blockSize = -1, clusters = -1;
+        
+    
+    /**
+     \brief Integer counter of the automatic methods. 
+            If the counter is bigger than 0, we are using an automatic method.
+            If the counter is bigger than 1, we are trying to use multiple automatic methods.
+     */
+    int automatedMethodCount = -1;
 
     /* Others variables */
     ifstream compare;
@@ -60,91 +68,101 @@ class trimalArgumentParser
 
 public:
     
-    // Constructor
-//     trimalArgumentParser();
-
     // READING ARGUMENTS
     void parseArguments(int argc, char *argv[]);
 
-    bool info_arguments(int* argc, char* argv[], int* i);
-    bool in_argument(int* argc, char* argv[], int* i);
-    bool out_argument(int* argc, char* argv[], int* i);
-    bool html_out_argument(int* argc, char* argv[], int* i);
-    bool out_format_arguments(int* argc, char* argv[], int* i);
-    bool matrix_argument(int* argc, char* argv[], int* i);
-    bool compareset_argument(int* argc, char* argv[], int* i);
-    bool force_select_argument(int* argc, char* argv[], int* i);
-    bool back_trans_argument(int* argc, char* argv[], int* i);
-    bool gap_threshold_argument(int* argc, char* argv[], int* i);
-    bool similarity_threshold_argument(int* argc, char* argv[], int* i);
-    bool consistency_threshold_argument(int* argc, char* argv[], int* i);
-    bool conservation_argument(int* argc, char* argv[], int* i);
-    bool select_cols_argument(int* argc, char* argv[], int* i);
-    bool no_gaps_argument(int* argc, char* argv[], int* i);
-    bool no_all_gaps_argument(int* argc, char* argv[], int* i);
-    bool keep_seqs_argument(int* argc, char* argv[], int* i);
-    bool keep_header_argument(int* argc, char* argv[], int* i);
-    bool gappy_out_argument(int* argc, char* argv[], int* i);
-    bool strict_argument(int* argc, char* argv[], int* i);
-    bool strict_plus_argument(int* argc, char* argv[], int* i);
-    bool automated1_argument(int* argc, char* argv[], int* i);
-    bool residue_overlap_argument(int* argc, char* argv[], int* i);
-    bool sequence_overlap_argument(int* argc, char* argv[], int* i);
-    bool seqs_select_argument(int* argc, char* argv[], int* i);
-    bool max_identity_argument(int* argc, char* argv[], int* i);
-    bool clusters_argument(int* argc, char* argv[], int* i);
-    bool terminal_only_argument(int* argc, char* argv[], int* i);
-    bool window_argument(int* argc, char* argv[], int* i);
-    bool gap_window_argument(int* argc, char* argv[], int* i);
-    bool similarity_window_argument(int* argc, char* argv[], int* i);
-    bool consistency_window_argument(int* argc, char* argv[], int* i);
-    bool block_argument(int* argc, char* argv[], int* i);
-    bool stats_arguments(int* argc, char* argv[], int* i);
-    bool complementary_argument(int* argc, char* argv[], int* i);
-    bool col_numbering_argument(int* argc, char* argv[], int* i);
-    bool split_by_stop_codon_argument(int* argc, char* argv[], int* i);
-    bool ignore_stop_codon_argument(int* argc, char* argv[], int* i);
+        void info_arguments(int* argc, char* argv[], int* i);
+        bool in_argument(int* argc, char* argv[], int* i);
+        bool out_argument(int* argc, char* argv[], int* i);
+        bool html_out_argument(int* argc, char* argv[], int* i);
+        bool out_format_arguments(int* argc, char* argv[], int* i);
+        bool matrix_argument(int* argc, char* argv[], int* i);
+        bool compareset_argument(int* argc, char* argv[], int* i);
+        bool force_select_argument(int* argc, char* argv[], int* i);
+        bool back_trans_argument(int* argc, char* argv[], int* i);
+        bool gap_threshold_argument(int* argc, char* argv[], int* i);
+        bool similarity_threshold_argument(int* argc, char* argv[], int* i);
+        bool consistency_threshold_argument(int* argc, char* argv[], int* i);
+        bool conservation_threshold_argument(int* argc, char* argv[], int* i);
+        bool select_cols_argument(int* argc, char* argv[], int* i);
+        bool no_gaps_argument(int* argc, char* argv[], int* i);
+        bool no_all_gaps_argument(int* argc, char* argv[], int* i);
+        bool keep_seqs_argument(int* argc, char* argv[], int* i);
+        bool keep_header_argument(int* argc, char* argv[], int* i);
+        bool gappy_out_argument(int* argc, char* argv[], int* i);
+        bool strict_argument(int* argc, char* argv[], int* i);
+        bool strict_plus_argument(int* argc, char* argv[], int* i);
+        bool automated1_argument(int* argc, char* argv[], int* i);
+        bool residue_overlap_argument(int* argc, char* argv[], int* i);
+        bool sequence_overlap_argument(int* argc, char* argv[], int* i);
+        bool seqs_select_argument(int* argc, char* argv[], int* i);
+        bool max_identity_argument(int* argc, char* argv[], int* i);
+        bool clusters_argument(int* argc, char* argv[], int* i);
+        bool terminal_only_argument(int* argc, char* argv[], int* i);
+        bool window_argument(int* argc, char* argv[], int* i);
+        bool gap_window_argument(int* argc, char* argv[], int* i);
+        bool similarity_window_argument(int* argc, char* argv[], int* i);
+        bool consistency_window_argument(int* argc, char* argv[], int* i);
+        bool block_argument(int* argc, char* argv[], int* i);
+        bool stats_arguments(int* argc, char* argv[], int* i);
+        bool complementary_argument(int* argc, char* argv[], int* i);
+        bool col_numbering_argument(int* argc, char* argv[], int* i);
+        bool split_by_stop_codon_argument(int* argc, char* argv[], int* i);
+        bool ignore_stop_codon_argument(int* argc, char* argv[], int* i);
 
-    // TODO: Names of this functions should be more informative.
-    // ARGUMENTS PARSED. CHECK COMPATIBILITY BETWEEN ARGUMENTS.
-    bool post_process(char* argv[]);
+    // 
+    bool process_arguments(char* argv[]);
     
-    bool check_argument_incompatibilities();
-
-    bool check_force_selection();
-    bool check_input_file_with_coding_sequences_argument();
-    bool check_file_aligned();
-    bool check_similarity_matrix();
-    bool check_outputs_coincidence();
-    bool check_col_numbering();
-    bool check_residue_and_sequence_overlap();
-    bool check_html_output_interest();
-    bool check_output_file_with_statistics();
-    bool check_combinations_among_thresholds();
-    bool check_automated_manual_incompatibilities();
-    bool check_multiple_files_comparison(char* argv[]);
-    bool check_block_size();
-    bool check_backtranslations();
-    bool check_coding_sequences_type();
-    bool check_ignore_or_splitby_stop_codon();
-    bool check_and_prepare_coding_sequence();
-    bool check_correspondence();
-    void check_cw_argument(); // TODO <- HAS TO CHANGE ITS NAME
-    void check_output_format();
-
+        // Check incompatibilities between arguments
+        bool check_arguments_incompatibilities();
+        
+            bool check_inFile_incompatibilities();
+            bool check_select_cols_and_seqs_incompatibilities();
+            bool check_thresholds_incompatibilities();
+            bool check_automated_methods_incompatibilities();
+            bool check_max_identity_incompatibilities();
+            bool check_clusters_incompatibilities();
+            bool check_windows_incompatibilities();
+            bool check_stats_incompatibilities();
+            bool check_codon_behaviour_incompatibility();
+    
+        // Check cross arguments needs.
+        bool check_arguments_needs(char* argv[]);
+            
+            bool check_force_selection();
+            bool check_input_file_with_coding_sequences_argument();
+            bool check_file_aligned();
+            bool check_similarity_matrix();
+            bool check_outputs_coincidence();
+            bool check_col_numbering();
+            bool check_residue_and_sequence_overlap();
+            bool check_html_output_interest();
+            bool check_output_file_with_statistics();
+            bool check_combinations_among_thresholds();
+            bool check_automated_manual_incompatibilities();
+            bool check_multiple_files_comparison(char* argv[]);
+            bool check_block_size();
+            bool check_backtranslations();
+            bool check_coding_sequences_type();
+            bool check_and_prepare_coding_sequence();
+            bool check_backtranslation_infile_names_corresponde();
+            void check_cw_argument(); // TODO <- HAS TO CHANGE ITS NAME
+            void check_output_format();
     
     // ARGUMENTS ARE VALID, PERFORM TRIMMING FUNCTIONS
     int perform();
 
-    void print_statistics();
-    bool create_or_use_similarity_matrix();
-    void clean_alignment();
-    void set_window_size();
+        void print_statistics();
+        bool create_or_use_similarity_matrix();
+        void clean_alignment();
+        void set_window_size();
 
+    void delete_variables();
     
     // NON COMPLEX OPTIONS
     void menu();
     void examples();
+    
 
 private:
     ReadWriteMS ReadWriteMachine;

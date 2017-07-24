@@ -133,72 +133,72 @@ newAlignment::newAlignment(void) {
 /* Overlapping operator = to use it as a kind of class constructor */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-newAlignment::newAlignment(newAlignment& old) {
+newAlignment::newAlignment(newAlignment& originalAlignment) {
 
-    if(this != &old) {
+    if(this != &originalAlignment) {
 
         int i, j;
         
-        aligInfo = old.aligInfo;
+        aligInfo = originalAlignment.aligInfo;
 
-        sequenNumber = old.sequenNumber;
-        residNumber =  old.residNumber;
+        sequenNumber = originalAlignment.sequenNumber;
+        residNumber =  originalAlignment.residNumber;
 
-        isAligned =  old.isAligned;
-        reverse   =  old.reverse;
+        isAligned =  originalAlignment.isAligned;
+        reverse   =  originalAlignment.reverse;
 
-        dataType = old.dataType;
+        dataType = originalAlignment.dataType;
 
         sequences = new string[sequenNumber];
         for(i = 0; i < sequenNumber; i++)
-            sequences[i] = old.sequences[i];
+            sequences[i] = originalAlignment.sequences[i];
 
         seqsName = new string[sequenNumber];
         for(i = 0; i < sequenNumber; i++)
-            seqsName[i] = old.seqsName[i];
+            seqsName[i] = originalAlignment.seqsName[i];
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
         //delete [] residuesNumber;
-        if(old.residuesNumber) {
+        if(originalAlignment.residuesNumber) {
             residuesNumber = new int[sequenNumber];
             for(i = 0; i < sequenNumber; i++)
-                residuesNumber[i] = old.residuesNumber[i];
+                residuesNumber[i] = originalAlignment.residuesNumber[i];
         }
         else residuesNumber = NULL;
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
         //delete [] seqsInfo;
-        if(old.seqsInfo) {
+        if(originalAlignment.seqsInfo) {
             seqsInfo = new string[sequenNumber];
             for(i = 0; i < sequenNumber; i++)
-                seqsInfo[i] = old.seqsInfo[i];
+                seqsInfo[i] = originalAlignment.seqsInfo[i];
         } else seqsInfo = NULL;
 
         //delete [] saveResidues;
-        if(old.saveResidues) {
+        if(originalAlignment.saveResidues) {
             saveResidues = new int[residNumber];
             for(i = 0; i < residNumber; i++)
-                saveResidues[i] = old.saveResidues[i];
+                saveResidues[i] = originalAlignment.saveResidues[i];
         } else saveResidues = NULL;
 
         //delete [] saveSequences;
-        if(old.saveSequences) {
+        if(originalAlignment.saveSequences) {
             saveSequences = new int[sequenNumber];
             for(i = 0; i < sequenNumber; i++)
-                saveSequences[i] = old.saveSequences[i];
+                saveSequences[i] = originalAlignment.saveSequences[i];
         } else saveSequences = NULL;
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
         //delete [] identities;
-        if(old.identities) {
+        if(originalAlignment.identities) {
             identities = new float*[sequenNumber];
             for(i = 0; i < sequenNumber; i++) {
                 identities[i] = new float[sequenNumber];
                 for(j = 0; j < sequenNumber; j++)
-                    identities[i][j] = old.identities[i][j];
+                    identities[i][j] = originalAlignment.identities[i][j];
             }
         } else identities = NULL;
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -215,11 +215,11 @@ newAlignment::newAlignment(newAlignment& old) {
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    this -> Cleaning = new Cleaner(this, old.Cleaning);
+    this -> Cleaning = new Cleaner(this, originalAlignment.Cleaning);
     
-    this -> Statistics = new StatisticsManager(this, old.Statistics);
+    this -> Statistics = new StatisticsManager(this, originalAlignment.Statistics);
     
-    this -> ReadWrite = new ReadWriteManager(this, old.ReadWrite);
+    this -> ReadWrite = new ReadWriteManager(this, originalAlignment.ReadWrite);
 
     this-> fillMatrices(false);
 }
