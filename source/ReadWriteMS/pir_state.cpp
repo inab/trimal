@@ -39,9 +39,9 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
         return nullptr;
 
     /* Store input file name for posterior uses in other formats */
-    filename.append("!Title ");
-    filename.append(filename);
-    filename.append(";");
+    _alignment->filename.append("!Title ");
+    _alignment->filename.append(filename);
+    _alignment->filename.append(";");
 
     /* Compute how many sequences are in the input alignment */
     _alignment->sequenNumber = 0;
@@ -101,7 +101,7 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
 
             /* Store information about sequence datatype */
             str = strtok(line, ">;");
-            _alignment->seqsInfo[i].append(str, strlen(str));
+//             _alignment->seqsInfo[i].append(str, strlen(str));
 
             /* and the sequence identifier itself */
             str = strtok(NULL, ">;");
@@ -177,8 +177,8 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
 
         /* Print sequence datatype and its name */
         if((alignment->seqsInfo != NULL) /*&& (iformat == oformat)*/)
-            (*output) << ">" << alignment->seqsInfo[i].substr(0, 2) << ";" << alignment->seqsName[i]
-                 << endl << alignment->seqsInfo[i].substr(2) << endl;
+            (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i]
+                 << endl << alignment->seqsInfo[i] << endl;
         else
             (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i] << endl
                  << alignment->seqsName[i] << " " << alignment->residuesNumber[i] << " bases" << endl;

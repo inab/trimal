@@ -106,9 +106,9 @@ newAlignment* Phylip40State::LoadAlignment(std::string filename)
         return nullptr;
 
     /* Store some data about filename for possible uses in other formats */
-    filename.append("!Title ");
-    filename.append(filename);
-    filename.append(";");
+    _alignment->filename.append("!Title ");
+    _alignment->filename.append(filename);
+    _alignment->filename.append(";");
 
     /* Read first valid line in a safer way */
     do {

@@ -103,6 +103,21 @@ bool ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newA
 
 bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string >* outFormats, newAlignment* alignment)
 {
+    
+    string filename;
+    int start, end;
+    if (alignment->filename == "")
+    {
+        filename = utils::ReplaceString(outPattern, "[in]", "NoInputFileName");
+    }
+    else
+    {
+        start = alignment->filename.find_last_of("/");
+        end = alignment->filename.find_last_of(".");
+        filename = utils::ReplaceString(outPattern, "[in]", alignment->filename.substr(start, end-start));
+    }
+
+    
     if (outPattern == "")
     {
         if (outFormats->size() == 0) 
@@ -115,7 +130,7 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
             {
                 if (state->RecognizeOutputFormat( outFormats->at(0) ))
                 {
-                    return state->SaveAlignment(alignment, &cout, &alignment->filename);
+                    return state->SaveAlignment(alignment, &cout, &filename);
                 }
             }
             cerr << "ERROR: Format specified wasn't recognized" << endl;
@@ -139,8 +154,12 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
             {
                 if (state->RecognizeOutputFormat( outFormats->at(0) ))
                 {
+                    utils::ReplaceStringInPlace(filename, "[extension]", state->extension);
+                    utils::ReplaceStringInPlace(filename, "[format]", state->name);
+                    
                     ofstream outFileHandler;
-                    outFileHandler.open(outPattern);
+                    outFileHandler.open(filename);
+                    
                     return state->SaveAlignment(alignment, &outFileHandler, &alignment->filename);
                 }
             }
@@ -171,26 +190,15 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
             }
         }
         
-        string filename;
+
         ofstream outFileHandler;
-        int start, end;
         bool isCorrect = true;
+        string filename_2;
         for (ReadWriteBaseState * state : outStates)
         {
-            if (alignment->filename == "")
-            {
-                filename = utils::ReplaceString(outPattern, "[in]", "NoInputFileName");
-            }
-            else
-            {
-                start = alignment->filename.find_last_of("/");
-                end = alignment->filename.find_last_of(".");
-                filename = utils::ReplaceString(outPattern, "[in]", alignment->filename.substr(start, end-start));
-            }
-            utils::ReplaceStringInPlace(filename, "[extension]", state->extension);
-            utils::ReplaceStringInPlace(filename, "[format]", state->name);
-
-            outFileHandler.open(filename);
+            filename_2 = utils::ReplaceString(filename, "[extension]", state->extension);
+            utils::ReplaceStringInPlace(filename_2, "[format]", state->name);
+            outFileHandler.open(filename_2);
             if(!state -> SaveAlignment(alignment, &outFileHandler, &alignment->filename))
             {
                 cerr << "ERROR: Alignment couldn't be saved on " << state->name << " format" << endl;

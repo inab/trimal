@@ -79,20 +79,12 @@ using namespace std;
  * \b statistics \b printing.
  */
 class newAlignment {
-//     friend class Cleaner;
-//     friend class StatisticsManager;
-//     friend class ReadWriteManager;
-//     friend class sequencesMatrix;
 
 public:
     Cleaner* Cleaning;
     StatisticsManager* Statistics;
     ReadWriteManager* ReadWrite;
     sequencesMatrix *SequencesMatrix;
-
-// private:
-
-//   bool oldnewAlignment;
 
   int sequenNumber;
   int residNumber;
@@ -132,30 +124,30 @@ public:
   newAlignment(void);
 
   /* Copy Constructor */
-  newAlignment(newAlignment &);
+  newAlignment(newAlignment&);
 
   /* Destructor */
   ~newAlignment(void);
 
   int getNumSpecies(void);
 
-  void getSequences(string *);
+  void getSequences(string * names);
 
-  void getSequences(string *, int *);
+  void getSequences(string * names, int * lengths);
 
-  void getSequences(string *, string *, int *);
+  void getSequences(string * names, string * sequences, int * lenghts);
 
-  bool getSequenceNameOrder(string *, int *);
+  bool getSequenceNameOrder(string * names, int * orderVector);
 
   int getNumAminos(void);
 
-  void setWindowsSize(int, int);
+  void setWindowsSize(int ghWindow, int shWindow);
 
-  void setBlockSize(int);
+  void setBlockSize(int blockSize);
 
 //   void setOutputFormat(int, bool);
 
-  void setReverseFlag(bool newValue);
+  void setReverseFlag(bool newFlagValue);
 
 //   int getShortNames(void);
 
@@ -173,25 +165,25 @@ public:
 
   bool isFileAligned(void);
 
-  newAlignment * getTranslationCDS(int, int, int *, string *, sequencesMatrix *, newAlignment *);
+  newAlignment * getTranslationCDS(int newResidues, int newSequences, int * columnsToKeep, string * oldSequencesNames, sequencesMatrix * sequenceMatrix, newAlignment * proteinAlignment);
 
-  bool checkCorrespondence(string *, int *, int, int);
+  bool checkCorrespondence(string * names, int * lenghts, int totalInputSequences, int multiple);
 
-  void fillNewDataStructure(string *, string *);
+  void fillNewDataStructure(string * newMatrix, string * newNames);
   
-  void fillNewDataStructure(newValues *);
+  void fillNewDataStructure(newValues * data);
 
-  void calculateColIdentity(float *);
+  void calculateColIdentity(float * columnIdentity);
   
   void printColumnsIdentity_DescriptiveStats(void);
 
-  void setKeepSequencesFlag(bool);
+  void setKeepSequencesFlag(bool newFlagValue);
 
-  void setKeepSeqsHeaderFlag(bool);
+  void setKeepSeqsHeaderFlag(bool newFlagValue);
 
-  void printAlignmentInfo(ostream &);
+  void printAlignmentInfo(ostream & output);
 
-  bool prepareCodingSequence(bool, bool, newAlignment *);
+  bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, newAlignment * proteinAlignment);
 
 };
 

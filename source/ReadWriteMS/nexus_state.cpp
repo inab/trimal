@@ -50,9 +50,9 @@ newAlignment* NexusState::LoadAlignment(std::string filename)
 
     /* Store input file name for posterior uses in other formats */
     /* We store the file name */
-    filename.append("!Title ");
-    filename.append(filename);
-    filename.append(";");
+    _alignment->filename.append("!Title ");
+    _alignment->filename.append(filename);
+    _alignment->filename.append(";");
 
     state = false;
     do {

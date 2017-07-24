@@ -50,6 +50,7 @@ target_link_libraries(trimal m)
 target_link_libraries(readal m)
 target_link_libraries(statal m)
 target_link_libraries(new_trimal m)
+target_link_libraries(readalMS m)
 
 # --------------------------- TESTING --------------------------- #
 
@@ -58,9 +59,11 @@ add_dependencies(new_trimal trimal)
 
 # Basic tests
 include(CTest)
-add_test(Crash_Trimal bin/trimal)
-add_test(Crash_Readal bin/readal)
-add_test(Crash_Statal bin/statal)
+add_test(Crash_Trimal       bin/trimal)
+add_test(Crash_NewTrimal    bin/new_trimal)
+add_test(Crash_Readal       bin/readal)
+add_test(Crash_Statal       bin/statal)
+add_test(Crash_Readal       bin/readalMS)
 
 # Macro that uses the compareOutput cmake to create tests
 macro(compare_outputs test_name program_a program_b arguments)
@@ -81,51 +84,76 @@ FILE(GLOB files
        dataset/*pir
        dataset/*phy2
         )
-set(gt 0 1)
-set(st 0 1)
-set(cons 60)
-set(thold -gappyout -strict -automated1)
-set(resoverlap 0.5)
-set(seqoverlap 80)
+set(thresholds 0 0.5 1)
+set(cons 10 20 40 80)
+set(automethod -gappyout -strict -strictplus -automated1 -nogaps -noallgaps)
+set(resoverlap 0.1 0.3 0.6)
+set(seqoverlap 5 10 50 80)
+set(clusters 2 4)
+set(max_identities 0 0.5 1)
+set(blocks 2 4 6)
 
 # Add all the combinations of gt and files provided
 foreach(file ${files})
+    
+    string(REGEX MATCH "[^/]+$" stripped_file ${file})
+#     message("${stripped_file}")
+    
     compare_outputs(
-            "[file:${file}]"
+            "[file:${stripped_file}]"
             "bin/trimal" "bin/new_trimal"
             "-in ${file}")
-    foreach(gt ${gt})
+            
+    foreach(threshold ${thresholds})
         compare_outputs(
-                "[file:${file}][gt:${gt}]"
+                "[file:${stripped_file}][gt:${threshold}]"
                 "bin/trimal" "bin/new_trimal"
-                "-in ${file} -gt ${gt}")
-    endforeach()
-
-    foreach(st ${st})
+                "-in ${file} -gt ${threshold}")
         compare_outputs(
-                "[file:${file}][st:${st}]"
+                "[file:${stripped_file}][st:${threshold}]"
                 "bin/trimal" "bin/new_trimal"
-                "-in ${file} -st ${st}")
+                "-in ${file} -st ${threshold}")
     endforeach()
 
     foreach(cons ${cons})
         compare_outputs(
-                "[file:${file}][cons:${cons}]"
+                "[file:${stripped_file}][cons:${cons}]"
                 "bin/trimal" "bin/new_trimal"
                 "-in ${file} -cons ${cons}")
     endforeach()
 
-    foreach(thold ${thold})
+    foreach(method ${automethod})
         compare_outputs(
-                "[file:${file}][${thold}]"
+                "[file:${stripped_file}][${method}]"
                 "bin/trimal" "bin/new_trimal"
-                "-in ${file} ${thold}")
+                "-in ${file} ${method}")
+    endforeach()
+    
+    foreach(cluster ${clusters})
+        compare_outputs(
+                "[file:${stripped_file}][cluster:${cluster}]"
+                "bin/trimal" "bin/new_trimal"
+                "-in ${file} -clusters ${cluster}")
+    endforeach()
+    
+    foreach(max_identity ${max_identities})
+        compare_outputs(
+                "[file:${stripped_file}][max_identity:${max_identity}]"
+                "bin/trimal" "bin/new_trimal"
+                "-in ${file} -maxidentity ${max_identity}")
+    endforeach()
+    
+    foreach(block ${blocks})
+        compare_outputs(
+                "[file:${stripped_file}][block:${block}]"
+                "bin/trimal" "bin/new_trimal"
+                "-in ${file} -block ${block}")
     endforeach()
 
     foreach(seqoverlap ${seqoverlap})
         foreach(resoverlap ${resoverlap})
             compare_outputs(
-                    "[file:${file}][seqo:${seqoverlap}][reso:${resoverlap}]"
+                    "[file:${stripped_file}][seqo:${seqoverlap}][reso:${resoverlap}]"
                     "bin/trimal" "bin/new_trimal"
                     "-in ${file} -resoverlap ${resoverlap} -seqoverlap ${seqoverlap}")
         endforeach()

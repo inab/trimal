@@ -28,8 +28,8 @@
 
 int main(int argc, char *argv[])
 {
-    trimalArgumentParser Trimal = trimalArgumentParser();
+    trimAlManager Trimal = trimAlManager();
     Trimal.parseArguments(argc, argv);
-    Trimal.post_process(argv);
+    Trimal.process_arguments(argv);
     return Trimal.perform();
 }
