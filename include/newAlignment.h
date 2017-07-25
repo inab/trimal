@@ -69,7 +69,7 @@ using namespace std;
 
 #include "Cleaner.h"
 #include "StatisticsManager.h"
-#include "ReadWriteManager.h"
+// #include "ReadWriteManager.h"
 
 /** \brief Class containing an alignment
  *
@@ -83,7 +83,7 @@ class newAlignment {
 public:
     Cleaner* Cleaning;
     StatisticsManager* Statistics;
-    ReadWriteManager* ReadWrite;
+//     ReadWriteManager* ReadWrite;
     sequencesMatrix *SequencesMatrix;
 
   int sequenNumber;
@@ -184,7 +184,16 @@ public:
   void printAlignmentInfo(ostream & output);
 
   bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, newAlignment * proteinAlignment);
-
+  
+//   int getInputFormat(void);
+// 
+//   int getOutputFormat(void);
+    
+  bool alignmentSummaryHTML(char *, int, int, int *, int *, float *);
+    
+  bool alignmentColourHTML(ostream &);
+    
+  void getSequences(ostream &);
 };
 
 #endif
