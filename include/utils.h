@@ -250,7 +250,7 @@ class utils {
             Remove all content surrounded by ("") or ([]).\n
             It warns as well when a mismatch for these flags is found. \n
     \param nline Line to be trimmed.
-    \retun NULL if there has been a mismatch\n
+    \return NULL if there has been a mismatch\n
             Line trimmed of comments.
      */
   static char* trimLine(string nline);
