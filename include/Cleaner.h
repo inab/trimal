@@ -8,7 +8,10 @@
 class newAlignment;
 struct newValues;
 
-//Class to make cleaning operations to an alignment
+/**
+ \brief Subclass contained by the alignment object to make cleaning operations on it.
+ \par "Complementary parameter" All cleaning methods contains a boolean flag called<b> 'complementary' </b>.\n If set to<i> true</i>, the function will return a new alignment that contains the sequences and residues that method would<i> reject</i>.\n Otherwise it returns the cleaned version of the original alignment this object belongs to.
+ */
 class Cleaner {
 
  public:
@@ -18,7 +21,7 @@ class Cleaner {
       */
      bool terminalGapOnly;
      /**
-      \todo Give a good descriptiom
+      \brief Flag for keeping sequences even when they are composed only by gaps.
       */
      bool keepSequences;
     /**
@@ -27,7 +30,7 @@ class Cleaner {
      int blockSize;
      
      /**
-      \brief Function that selects the best method based on statistics of the alignment.
+      \brief Method that selects the best cleaning workflow based on statistics of the alignment.
       */
      int selectMethod(void);
      /**
@@ -99,7 +102,7 @@ class Cleaner {
       Column blocks that don't have a minimum size set by the method itself, will be removed too.
       \param baseLine Minimim percentage of columns to conserve in the new alignment.
       \param gapsPct Maximum percentage of gaps per column.
-      \param complementary Wheter to use a variable block length. 
+      \param complementary Wheter or not to return the complementary version of the trimmed alignment.
       \return Pointer to the cleaned alignment.
 */
      newAlignment *cleanGaps(float baseLine, float gapsPct, bool complementary);
@@ -107,7 +110,7 @@ class Cleaner {
       \brief Method to clean an alignment based on the similarity distribution values.
       \param baseLine Minimim percentage of columns to conserve in the new alignment.
       \param conservationPct Minimum value of similarity per column to keep the column.
-      \param complementary Wheter to use a variable block length. 
+      \param complementary Wheter or not to return the complementary version of the trimmed alignment.
       \return Pointer to the cleaned alignment.
 */
      newAlignment *cleanConservation(float baseLine, float conservationPct, bool complementary);
@@ -116,7 +119,7 @@ class Cleaner {
       \param baseLine Minimim percentage of columns to conserve in the new alignment.
       \param GapsPct Maximum percentage of gaps per column.
       \param conservationPct Minimum value of similarity per column to keep the column.
-      \param complementary Wheter to use a variable block length. 
+      \param complementary Wheter or not to return the complementary version of the trimmed alignment. 
       \par "Take in mind" If baseLine is too strict, the other two will be relaxed to obtain the minimum percentage desired.
       \return Pointer to the cleaned alignment.
 */
@@ -124,11 +127,10 @@ class Cleaner {
 /**
       \brief Method to clean an alignment based on consistency values obtained from a dataset of alignments.\n
       The function computes the optimal paremeter combination values to trim an alignment based on the consistency value from the comparison among a dataset of alignments with the same sequences.
-      \param cutpoint Lower limit (0-1) of comparefile value admits in the new alignment
-      \todo cutpoint argument description is not clear.
+      \param cutpoint Hint of Gap cut point. May be used if it's lower than the minimum percentage threshold.
       \param baseLine Minimim percentage of columns to conserve in the new alignment.
       \param vectValues Vector with alignment consistency values
-      \param complementary Wheter to use a variable block length. 
+      \param complementary Wheter or not to return the complementary version of the trimmed alignment.
       \return Pointer to the cleaned alignment.
 */
      newAlignment *cleanCompareFile(float cutpoint, float baseLine, float * vectValues, bool complementary);
@@ -137,78 +139,130 @@ class Cleaner {
       This overlap sets the minimum fraction that has to be a position for the selected sequence to count as a hit.\n
       This proportion measures how much a position is similar (in terms of residues, indetermination and gaps) in comparison with the element on it's columns.
       \param overlap Overlap value to keep a residue.
-      \param spuriousVector Pointer to the spuriousVector to fill.
-      \return <b> True </b> if the calculation went ok.<b> False </b> otherwise.\n
+      \param[out] spuriousVector Pointer to the spuriousVector to fill.
+      \return <b> True </b> if the calculation went ok.\n<b> False </b> otherwise.\n
       This should happen only if you pass a null pointer instead of a spuriousVector.
 */
      bool calculateSpuriousVector(float overlap, float *spuriousVector);
 /**
-      \todo Give a good description
+      \brief Method to remove sequences missaligned with the rest of sequences in the alignment.\n
+      For each residue in the sequence, it tests it's similarity. If the similarity of that residue is higher than overlapColumn value, it counts as a hit for the sequence.\n
+      After calculating the number of hits for the sequence, it removes the sequence if it has a proportion hits/residues lower tan minimumOverlap.
+      \param overlapColumn Minimum similarity value that a residue needs to be considered a hit.
+      \param minimumOverlap Minimum proportion of hits that a sequence needs to be kept in the new alignment.
+      \param complementary Wheter or not to return the complementary version of the trimmed alignment.
+      \return Pointer to the cleaned alignment.
+      \
       */
-     newAlignment *cleanSpuriousSeq(float, float, bool);
+     newAlignment *cleanSpuriousSeq(float overlapColumn, float minimumOverlap, bool complementary);
 /**
-      \todo Give a good description
+      \brief Method that carries the gappyout approach.\n
+      This methods calculates the slope in gaps distribution on the original alignment.\n
+      Then, it compares groups of three consecutive residues, searching for the group with the most abrupt change in slope.\n
+      When found, the first residue is taken as the cutpoint for the sequences.
+      \param complementary Wheter or not to return the complementary version of the trimmed alignment.
       */
-     newAlignment *clean2ndSlope(bool);
-/**
-      \todo Give a good description
+     newAlignment *clean2ndSlope(bool complementary);
+     /**
+      \brief Method to clean an alignment. It carries out strict and strictplus.\n
+      The method:
+        - Computes gaps values and gap cut point of the alignment.
+        - Computes similarity values and similarity cut point of the alignment.
+        - Calls the cleanStrict method with these values and returns its output.
+      \param complementary Wheter or not to return the complementary version of the trimmed alignment.
+      \param variable Wheter to use a variable block length. 
+      If false, block will be size 5. 
+      Else, it will use 1% of the alignment length, with a minimum of 3 and maximum of 12. 
+      This value will be overwritten if blockSize (of this object) is bigger than 0.
+      \return Pointer to the cleaned alignment returned by cleanStrict using the parameters calculated in this function.
       */
-     newAlignment *cleanCombMethods(bool, bool);
+     newAlignment *cleanCombMethods(bool complementary, bool variable);
 /**
-      \todo Give a good description
+      \brief Method to remove columns composed only by gaps\n
+      This method is specially useful when we remove missaligned sequences from a given alignment.
+      \param complementary Wheter or not to return the complementary version of the trimmed alignment. \n Although this method contains a complementary flag, setting this up would return an alignment full of gaps-only columns.
       */
-     newAlignment *cleanNoAllGaps(bool);
+     newAlignment *cleanNoAllGaps(bool complementary);
 /**
-      \todo Give a good description
+      \brief Method to remove columns, expressed as ranges.
+      \param columns Vector containing the columns to remove.
+      \param init Where does the vector start. Set to 1 if the vector contains its size as first element.
+      \param size Size of the columns vector.
+      \param complementary Wheter or not to return the complementary version of the trimmed alignment.
       */
-     newAlignment *removeColumns(int *, int, int, bool);
+     newAlignment *removeColumns(int * columns, int init, int size, bool complementary);
 /**
-      \todo Give a good description
+      \brief Method to remove sequences, expressed as ranges.
+      \param seqs Vector containing the sequences to remove.
+      \param init Where does the vector start. Set to 1 if the vector contains its size as first element.
+      \param size Size of the columns vector.
+      \param complementary Wheter or not to return the complementary version of the trimmed alignment.
       */
-     newAlignment *removeSequences(int *, int, int, bool);
+     newAlignment *removeSequences(int * seqs, int init, int size, bool complementary);
 /**
-      \todo Give a good description
+      \brief Method to select the most representative sequence (the longest one) for each cluster from the input alignment to generate a new alignment.
+      \param identityThreshold Threshold used to asign sequences to clusters.\n
+      If identity between representative sequence of the cluster and sequence to asign is superior to this threshold and no other cluster has a better identity with its representative, it will be asigned to that cluster.
       */
      newAlignment *getClustering(float identityThreshold);
 /**
-      \todo Give a good description
+      \brief Method that calculates the optimat cut point for a given clusters number.\n
+      The idea is to obtain a cutpoint that can be used to obtain a number of representative sequences similar to clusterNumber.
+      \param clusterNumber Number of representative sequences to obtain.
+      \return CutPoint to obtain clusterNumber sequences.
       */
-     float getCutPointClusters(int);
+     float getCutPointClusters(int clusterNumber);
 /**
-      \todo Give a good description
+      \brief Method to remove column blocks smaller than a given size.
+      \param blockSize Minimum size a block has to be to be kept.
       */
-     void removeSmallerBlocks(int);
+     void removeSmallerBlocks(int blockSize);
 /**
-      \todo Give a good description
+      \brief Method to detect right and left borders. Borders are the first column found with no gaps.\n
+      Everything between the borders are kept in the trimmed alignments.
+      \return <b>True</b> if everything went ok.\n<b> False </b>if it was not possible to calculate the gap stats. 
       */
      bool removeOnlyTerminal(void);
 /**
-      \todo Give a good description
+      \brief Method that identifies and removes columns and sequences composed only by gaps.
+      \return newValues struct containing the number of residues and sequences after the cleaning of empty columns/sequences.
       */
      newValues removeCols_SeqsAllGaps(void);
 /**
-      \todo Give a good description
+      \brief Setter method to Terminal Only Flag.
+      \param terminalOnly_ New vlue of the Terminal Only Flag.
       */
-     void setTrimTerminalGapsFlag(bool);
+     void setTrimTerminalGapsFlag(bool terminalOnly_);
     /**
-      \todo Give a good description
+      \brief Method to calculate identities between the sequences from the alignment.
       */
      void calculateSeqIdentity(void);
 /**
-      \todo Give a good description
+      \brief Method that makes a raw approximation of sequence identity computation.\n
+      \note Designed for reducing comparisons for huge alignments.
       */
      void calculateRelaxedSeqIdentity(void);
   /**
-      \todo Give a good description
+      \brief Method to asign sequences to clusters.\n
+      Clusters are calculated following this schema:
+        - Select the longest sequence and use it as representative of the first cluster.\n
+        - Using the previously computed identity values, check if second longest sequence should be part of cluster of first sequence. This is computed using the identity value in comparison with a threshold.\n
+        - If the second sequence should be part of the existing cluster, we add it. Otherwise we create a new cluster and use this sequence as representative for this new cluster.\n
+        - Continue with the rest of sequences, comparing them with the representatives of existing clusters. If a sequence can pertain to more than one cluster, we choose the one that maximizes the identity value with the representative sequence.
+      \param maximumIdent Identity threshold used to decide if a sequence should be part of a cluster or create a new one.
+      \return Vector that contains the clustering info.\n
+      The first item in the vector contains it's size.
       */
      int *calculateRepresentativeSeq(float maximumIdent);
     /**
-      \todo Give a good description
+      \brief Method for computing the complementary alignment.\n
+      Complementary Alignment is an alignment containing all sequences and columns that the original alignment would reject.\n
+      It inverses the saveResidues / saveSequences tags.
+      \param residues Wheter to reverse resiudes tags.
+      \param sequences Wheter to reverse sequences tags.
       */
-     void computeComplementaryAlig(bool, bool);
-/**
-      \todo Give a good description
-      */
+     void computeComplementaryAlig(bool residues, bool sequences);
+
 private:
 
      friend class newAlignment;
