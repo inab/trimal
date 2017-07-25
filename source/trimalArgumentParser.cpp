@@ -429,17 +429,21 @@ bool trimAlManager::conservation_threshold_argument(int *argc, char *argv[], int
 
 bool trimAlManager::select_cols_argument(int *argc, char *argv[], int *i)
 {
-    if((!strcmp(argv[*i], "-selectcols")) && (selectCols == false) &&
-            ((i+3) < argc) && (!strcmp(argv[++*i], "{")) && (!strcmp(argv[*i+2], "}")))
+    
+    if(!strcmp(argv[*i], "-selectcols") && 
+        selectCols == false &&
+        (*i+3) < *argc && 
+        !strcmp(argv[++(*i)], "{") && 
+        !strcmp(argv[(*i)+2], "}"))
     {
-        if((delColumns = utils::readNumbers(argv[++*i])) == NULL)
+        if((delColumns = utils::readNumbers(argv[++(*i)])) == NULL)
         {
             cerr << endl << "ERROR: Impossible to parse the sequences number" << endl << endl;
             appearErrors = true;
         }
 
         else selectCols = true;
-        i++;
+        (*i)++;
 
         return true;
     }
@@ -574,7 +578,7 @@ bool trimAlManager::sequence_overlap_argument(int *argc, char *argv[], int *i)
 
 bool trimAlManager::seqs_select_argument(int *argc, char *argv[], int *i)
 {
-    if((!strcmp(argv[*i], "-selectseqs")) && (selectSeqs == false) && ((i+3) < argc) && (!strcmp(argv[++*i], "{")) && (!strcmp(argv[*i+2], "}")))
+    if((!strcmp(argv[*i], "-selectseqs")) && (selectSeqs == false) && ((*i+3) < *argc) && (!strcmp(argv[++*i], "{")) && (!strcmp(argv[*i+2], "}")))
     {
         if((delSequences = utils::readNumbers(argv[++*i])) == NULL)
         {
@@ -583,7 +587,7 @@ bool trimAlManager::seqs_select_argument(int *argc, char *argv[], int *i)
         }
 
         else selectSeqs = true;
-        i++;
+        (*i)++;
         return true;
     }
     return false;
@@ -1556,7 +1560,7 @@ int trimAlManager::perform()
 
     /* -------------------------------------------------------------------- */
     if((htmlOutFile != NULL) && (!appearErrors))
-        if(!origAlig -> ReadWrite ->
+        if(!origAlig ->
            alignmentSummaryHTML(htmlOutFile, 
                                 singleAlig -> getNumAminos(), 
                                 singleAlig -> getNumSpecies(),
