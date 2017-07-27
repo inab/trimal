@@ -181,7 +181,7 @@ class utils {
 
   /** \brief Removing spaces method.
    * \param in The string that we want to clean.
-   * \param out The destination of the clean string.
+   * \param[out] out The destination of the clean string.
    *
    * This method removes spaces in the input string and put the result in the output string.
    */
