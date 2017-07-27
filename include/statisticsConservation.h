@@ -48,14 +48,15 @@ using namespace std;
 class statisticsConservation{
  private:
 
-  /* Number of columns and sequences of the alignment */
+  /** \brief Number of columns of the alignment */
   int columns;
+  /** \brief Number of sequences of the alignment */
   int sequences;
 
-  /* Sequence's Datatype: DNA, RNA or Amino Acids. */
+  /** \brief Sequence's Datatype: DNA, RNA or Amino Acids. */
   int dataType;
 
-  /* Half window size */
+  /** \brief Half window size */
   int halfWindow;
 
   /* Conservation vectors */
@@ -63,52 +64,85 @@ class statisticsConservation{
   float *MDK;
   float *MDK_Window;
 
-  /* Identity weight matrix between alignment rows */
+  /** \brief Identity weight matrix between alignment rows */
   float **matrixIdentity;
 
-  /* Similarity matrix used to conservation calculations */
+  /** \brief Similarity matrix used to conservation calculations */
   similarityMatrix *simMatrix;
 
   /* Private methods */
-  /* Computes the matrix identity between alignment's columns. */
+  /** \brief Computes the matrix identity between alignment's columns. */
   void calculateMatrixIdentity(string *alignmentMatrix);
 
  public:
 
-  /* Constructors without any parameters */
+  /** \brief Constructor without any parameters */
   statisticsConservation(void);
 
-  /* Constructors using parameters */
-  statisticsConservation(string *, int, int, int);
+  /** 
+   \brief Constructor using parameters
+   \param alignmentMatrix Vector containing all sequences and their residues forming a matrix.
+   \param species Number of sequences
+   \param aminos Number of residues
+   \param dataType_ Type of sequences.
+   */
+  statisticsConservation(string *alignmentMatrix, int species, int aminos, int dataType_);
 
-  /* Destroyer */
+  /** \brief Destructor */
   ~statisticsConservation(void);
 
-  /* This methods allows us compute the alignment's conservation's values. */
-  bool calculateVectors(string *, int *);
+  /** 
+    \brief Method to calculate the conservation values of a alignment matrix.
+    \todo Give a description to alignmentMatrix
+    \param alignmentMatrix Vector containing all sequences and their residues forming a matrix.
+    \param gaps Vector containing the gaps info.
+    */
+  bool calculateVectors(string *alignmentMatrix, int *gaps);
 
-  /* Allows us compute the conservationWindow's values. */
-  bool applyWindow(int);
+  /**
+   \brief Allows us compute the conservationWindow's values.
+   \param _halfWindow Half window size to apply.
+   \return \b False if there is a previously computed vector for this window size or half window size is greater than 1/4 of the alignment length.
+   */
+  bool applyWindow(int _halfWindow);
 
-  /* Returns if a windows size value has been defined or not. */
+  /** 
+   \brief Returns if a windows size value has been defined or not.
+   \return \b True if a windows size has been defined.\b False otherwise.
+   */
   bool isDefinedWindow(void);
 
-  /* This methods returns a pointer to conservationWindow's vector */
+  /** 
+   \brief This methods returns a pointer to conservationWindow's vector
+   \return Conservation window vector.
+   */
   float *getMdkwVector(void);
 
-  /* Associates a pointer to similarity matrix. This matrix is needed to compute the conservation's values. */
-  bool setSimilarityMatrix(similarityMatrix *);
+  /**
+    \brief Stores a valid similarity matrix point to use.
+    \param sm Similarity matrix pointer to associate.
+    \return \b True if sm is valid, \b False if it's null
+   */
+  bool setSimilarityMatrix(similarityMatrix * sm);
 
-  /* Returns if a similarity matrix is being used or not. */
+  /** 
+   \brief Returns if a similarity matrix is being used or not.
+   \return \b True if there is a similarity matrix set, \b False otherwise.
+   */
   bool isSimMatrixDef(void);
 
-  /* Computes and selects the cut point values based on conservation's values. */
-  float calcCutPoint(float, float);
+  /**
+   \brief Computes and selects the cut point values based on conservation's values.
+   \todo This description seems a little vague.
+   \param baseLine Percentage of columns desired.
+   \param conservationPct Percentage of conservation desired.
+   */
+  float calcCutPoint(float baseLine, float conservationPct);
 
-  /* Prints the conservation's value for each alignment's column. */
+  /** \brief Prints the conservation's value for each alignment's column. */
   void printConservationColumns(void);
 
-  /* Computes and prints the accumulative statistics associated to the alignment. */
+  /** \brief Computes and prints the accumulative statistics associated to the alignment. */
   void printConservationAcl(void);
 
 };
