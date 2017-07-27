@@ -45,8 +45,8 @@
 
 using namespace std;
 
-extern char listSym[21];
-extern float defaultMatrix[20][20];
+// extern char listSym[21];
+// extern float defaultMatrix[20][20];
 
 /*+++++++++++++++++++++++++++++++++++++++++++++
 | similarityMatrix::similarityMatrix()        |
@@ -153,8 +153,8 @@ bool similarityMatrix::loadSimMatrix(char *fn){
   utils::removeSpaces(aux, listSym);
   memoryAllocation(strlen(listSym));
 
-  for(i = 0; i < TAMABC; i++) vhash[i] = -1;
-
+//   for(i = 0; i < TAMABC; i++) vhash[i] = -1;
+    utils::initlVect(vhash, TAMABC, -1);
   /* We create the hashing vector */
   for(i = 0; i < numPositions; i++) {
     listSym[i] = (char)toupper((int)listSym[i]);

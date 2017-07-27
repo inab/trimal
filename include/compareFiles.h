@@ -97,7 +97,7 @@ class compareFiles {
  \param[out] columnsValue Vector to fill with the consistency values.
  \return Wether or not the method went ok.
  */
-    static bool forceComparison(newAlignment **vectAlignments, int numAlignments, alignment *selected, float *columnsValue);
+    static bool forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue);
 
 };
 #endif
