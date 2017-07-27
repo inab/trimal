@@ -67,7 +67,7 @@ newAlignment::newAlignment(void) {
     isAligned = false;
 
     /* Should the output file be reversed? */
-    reverse   = false;
+//     reverse   = false;
 
     /* Should be trimmed only terminal gaps? */
 //     terminalGapOnly = false;
@@ -117,7 +117,7 @@ newAlignment::newAlignment(void) {
     seqsInfo  = NULL;
 
     /* Information about input newAlignment */
-    filename = "";
+//     filename = "";
 //     aligInfo = "";
 
     /* Information computed from newAlignment */
@@ -145,7 +145,7 @@ newAlignment::newAlignment(newAlignment& originalAlignment) {
         residNumber =  originalAlignment.residNumber;
 
         isAligned =  originalAlignment.isAligned;
-        reverse   =  originalAlignment.reverse;
+//         reverse   =  originalAlignment.reverse;
 
         dataType = originalAlignment.dataType;
 
@@ -278,7 +278,7 @@ newAlignment::~newAlignment(void) {
     residNumber  = 0;
 
     isAligned = false;
-    reverse   = false;
+//     reverse   = false;
 
     dataType = 0;
     
@@ -362,7 +362,7 @@ newAlignment *newAlignment::getTranslationCDS(int newResidues, int newSequences,
         }
     
     newAlig = new newAlignment(*this);
-//     newAlig -> ReadWrite -> aligInfo = "";
+    newAlig -> aligInfo = "";
     newAlig -> seqsInfo = NULL;
     
     newAlig -> sequenNumber =   newSequences;
@@ -370,15 +370,11 @@ newAlignment *newAlignment::getTranslationCDS(int newResidues, int newSequences,
     
     newAlig -> sequences =  new string[newSequences];
     newAlig -> seqsName =   new string[newSequences];
-    
-//     newAlig -> ReadWrite -> iformat =    ProtAlig -> ReadWrite->getInputFormat();
-//     newAlig -> ReadWrite -> oformat =    ProtAlig -> ReadWrite->getOutputFormat();
-//     newAlig -> ReadWrite -> shortNames = ProtAlig -> getShortNames();
-    
+
     newAlig -> dataType =   DNAType;
     newAlig -> isAligned =  true;
     
-    newAlig -> reverse =  ProtAlig -> getReverseFlag();
+//     newAlig -> reverse =  ProtAlig -> getReverseFlag();
 //     newAlig -> OldResidues = oldResidues * 3; TODO?
     newAlig -> residuesNumber = NULL;
     newAlig -> saveSequences = NULL;
@@ -462,16 +458,16 @@ void newAlignment::setBlockSize(int blockSize_) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Return true if the reverse flag has been setted. */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-int newAlignment::getReverseFlag(void) {
-    return reverse;
-}
+// int newAlignment::getReverseFlag(void) {
+//     return reverse;
+// }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This method lets to change the output newAlignment orientation */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void newAlignment::setReverseFlag(bool newValue) {
-    reverse = newValue;
-}
+// void newAlignment::setReverseFlag(bool newValue) {
+//     reverse = newValue;
+// }
 
 
 /* Set appropiate flag to decide whether sequences composed only by gaps should
@@ -548,114 +544,24 @@ bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-///* This method lets to build a sequence matrix. A sequence matrix contains
-// * the residue position for each sequence without taking into account the
-// * gaps in the sequence. This means that at position 10 we have the residue
-// * 1 for that sequence */
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-//void newAlignment::sequenMatrix(void) {
-//  if(SequencesMatrix == NULL)
-//    SequencesMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
-//}
-//
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-///* Use this method to destroy a given sequence matrix */
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-//void newAlignment::destroySequenMatrix(void) {
-//  if(SequencesMatrix != NULL)
-//    delete SequencesMatrix;
-//  SequencesMatrix = NULL;
-//}
-//
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-///* Print the newAlignment's sequence matrix */
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-//void newAlignment::printSequenMatrix(void) {
-//  if(SequencesMatrix == NULL)
-//    SequencesMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
-//  SequencesMatrix -> printMatrix();
-//}
-//
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-///* Given an index, this method returns the sequence matrix column for that
-// * index */
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-//void newAlignment::getColumnSeqMatrix(int column, int *columnSeqMatrix) {
-//  if(SequencesMatrix == NULL)
-//    SequencesMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
-//  SequencesMatrix -> getColumn(column, columnSeqMatrix);
-//}
-//
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-///* This function looks if a given value belongs a given row. In the affirmative
-// * case, returns the columns value for that row and value combination */
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-//void newAlignment::getColumnSeqMatrix(int value, int row, int *columnSeqMatrix) {
-//  if(SequencesMatrix == NULL)
-//    SequencesMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
-//  SequencesMatrix -> getColumn(value, row, columnSeqMatrix);
-//}
-//
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-///* This function change the rows order in the sequence matrix */
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-//void newAlignment::setSeqMatrixOrder(int *order) {
-//  if(SequencesMatrix == NULL)
-//    SequencesMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
-//  SequencesMatrix -> setOrder(order);
-//}
-//
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-///* This function change the rows order in the sequence matrix */
-///* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-//sequencesMatrix *newAlignment::getSeqMatrix(void) {
-//  if(SequencesMatrix == NULL)
-//    SequencesMatrix = new sequencesMatrix(sequences, seqsName, sequenNumber, residNumber);
-//  return SequencesMatrix;
-//}
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Computes, if it's necessary, and return the newAlignment's type */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int newAlignment::getAlignmentType(void) {
     if(dataType == 0)
         dataType = utils::checkAlignmentType(sequenNumber, residNumber, sequences);
     return dataType;
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Returns the correspondence between the columns in the original and in the
- * trimmed newAlignment */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int *newAlignment::getCorrespResidues(void) {
     return saveResidues;
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Returns the correspondence between the sequences in the original and in
- * the trimmed newAlignment */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int *newAlignment::getCorrespSequences(void) {
     return saveSequences;
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Returns if the newAlignment is aligned or not */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 bool newAlignment::isFileAligned(void) {
     return isAligned;
 }
-
-/* *****************************************************************************
- * *****************************************************************************
- * *****************************************************************************
- * ************************************************************************** */
-
-/* Function for computing the complementary newAlignment. It just turn around the
- * current columns/sequences selection */
-
-
 
 /* Function for copying to previously allocated memory those data selected
  * for being in the final newAlignment */
@@ -704,6 +610,12 @@ void newAlignment::fillNewDataStructure(newValues *data) {
 bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon,\
         newAlignment *proteinAlig) {
 
+    if (getAlignmentType() == AAType) {
+        cerr << endl << "ERROR: Check input CDS file. It seems to content protein "
+             << "residues." << endl << endl;
+        return false;
+    }
+    
     bool warning = false;
     size_t found;
     int i;
@@ -724,11 +636,6 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
     proteinAlig -> getSequences(protSeqsNames, protSequences, protSeqsLengths);
 
     /* Check read sequences are real DNA/RNA */
-    if (getAlignmentType() == AAType) {
-        cerr << endl << "ERROR: Check input CDS file. It seems to content protein "
-             << "residues." << endl << endl;
-        return false;
-    }
 
     for(i = 0; i < sequenNumber; i++) {
 
@@ -1115,20 +1022,13 @@ void newAlignment::printAlignmentInfo(ostream &file) {
 
 
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+/*// ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This function computes some parameters from the input alignment such as
  * identity average, identity average from each sequence and its most similar
  * one, etc, to select which one is the best automated method to trim this
  * alignment */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method prints different identity values computed from the alignment.
- * In this method, we asses the identity values matrix as well as diferent
- * average values. Moreover, the method computes which one is the most
- * similar sequence, in term of identity values, for each one in this alig */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void newAlignment::printSeqIdentity(void) {
 
     int i, j, k, pos, maxLongName;
@@ -1338,6 +1238,7 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs,
 
     /* Initialize local variables to control which columns/sequences
      * will be kept in the output alignment */
+    
     res = new bool[residNumber];
     for(i = 0; i < residNumber; i++)
         res[i] = false;
