@@ -25,7 +25,6 @@ set(preview
         source/newAlignment.cpp
         source/Cleaner.cpp
         source/StatisticsManager.cpp
-        source/ReadWriteManager.cpp
         source/trimalArgumentParser.cpp
         source/ReadWriteMS/ReadWriteMachineState.cpp
         )

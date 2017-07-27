@@ -76,7 +76,9 @@ public:
     virtual ~ReadWriteBaseState() {};
     
 protected:
-    
+    /**
+     * \brief Pointer to the object that contains and manages this state\n
+     */
     ReadWriteMS* Machine;
 };
 

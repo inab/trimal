@@ -1492,6 +1492,7 @@ bool trimAlManager::check_and_prepare_coding_sequence()
 
 bool trimAlManager::check_backtranslation_infile_names_corresponde()
 {
+    //NOTE Maybe we don't need to copy the names and lengths to two new arrays as we could pass the original names and lengths to the check checkCorrespondence function, which doesn't modify the pointers passed to them
     if((!appearErrors) && (backtransFile != NULL))
     {
         sequencesNames = new string[backtranslationAlig -> getNumSpecies()];
@@ -1540,7 +1541,7 @@ int trimAlManager::perform()
         origAlig -> setBlockSize(blockSize);
     
     if (create_or_use_similarity_matrix())
-        return -1;
+        return -2;
 
     print_statistics();
 

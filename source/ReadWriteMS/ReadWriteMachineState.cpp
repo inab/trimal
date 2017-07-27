@@ -287,7 +287,7 @@ void ReadWriteMS::processFile(
 
         // Load alignment one by one and store it on each of the formats specified.
         newAlignment* alignment = inState->LoadAlignment(inFile);
-        if (reverse) alignment->setReverseFlag(true);
+//         if (reverse) alignment->setReverseFlag(true);
         int start, end;
         inFileHandler.close();
         {

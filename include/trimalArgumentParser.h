@@ -17,60 +17,101 @@ using namespace std;
 class trimAlManager
 {
 
-    bool appearErrors = false,
-         getComplementary = false, columnNumbering = false,
-         nogaps = false, noallgaps = false,
-         gappyout = false, strict = false,
-         strictplus = false, automated1 = false,
-         sgc = false, sgt = false, scc = false, sct = false,
-         sfc = false, sft = false, sident = false, selectSeqs = false,
-         selectCols = false, shortNames = false, splitByStopCodon = false,
-         terminalOnly = false, keepSeqs = false,
-         /*keepHeader = false,*/ ignoreStopCodon = false;
+    bool 
+    appearErrors        = false,
+    getComplementary    = false, 
+    columnNumbering     = false,
+    nogaps              = false, 
+    noallgaps           = false,
+    gappyout            = false, 
+    strict              = false,
+    strictplus          = false, 
+    automated1          = false,
+    sgc                 = false, 
+    sgt                 = false, 
+    scc                 = false, 
+    sct                 = false,
+    sfc                 = false, 
+    sft                 = false, 
+    sident              = false, 
+    selectSeqs          = false,
+    selectCols          = false, 
+    shortNames          = false, 
+    splitByStopCodon    = false,
+    terminalOnly        = false, 
+    keepSeqs            = false,
+    ignoreStopCodon     = false;
 
-    float conservationThreshold = -1,
-          gapThreshold = -1,
-          similarityThreshold = -1,
-          consistencyThreshold = -1,
-          residuesOverlap = -1,
-          sequenceOverlap = -1,
-          maxIdentity = -1;
-    int outformat = 1,
-        prevType = -1,
-        compareset = -1,
-        stats = 0,
-        windowSize = -1, gapWindow = -1, similarityWindow = -1,
-        consistencyWindow = -1, blockSize = -1, clusters = -1;
-        
+    float 
+    conservationThreshold   = -1,
+    gapThreshold            = -1,
+    similarityThreshold     = -1,
+    consistencyThreshold    = -1,
+    residuesOverlap         = -1,
+    sequenceOverlap         = -1,
+    maxIdentity             = -1;
     
-    /**
-     \brief Integer counter of the automatic methods. 
-            If the counter is bigger than 0, we are using an automatic method.
-            If the counter is bigger than 1, we are trying to use multiple automatic methods.
-     */
-    int automatedMethodCount = -1;
+    int 
+    stats                   = 0,
+    prevType                = -1,
+    compareset              = -1,
+    windowSize              = -1, 
+    gapWindow               = -1, 
+    similarityWindow        = -1,
+    consistencyWindow       = -1, 
+    blockSize               = -1, 
+    clusters                = -1,
+    argumentLength          = -1, 
+    i                       = 1, 
+    num                     = 0, 
+    maxAminos               = 0, 
+    numfiles                = 0, 
+    referFile               = 0, 
+    automatedMethodCount    = -1,
+    
+    *delColumns         = NULL, 
+    *delSequences       = NULL, 
+    *sequencesLengths   = NULL;
+        
+    string 
+    nline, 
+    *sequencesNames     = NULL;
+    
 
     /* Others variables */
     ifstream compare;
-    float *compareVect = NULL;
-    newAlignment  **compareAlignmentsArray  = NULL;
-    string nline, *sequencesNames = NULL;
-    sequencesMatrix *seqMatrix = NULL;
-    similarityMatrix *similMatrix = NULL;
-    newAlignment  *origAlig = NULL, *singleAlig = NULL, *backtranslationAlig = NULL;
+    float *compareVect              = NULL;
+    sequencesMatrix *seqMatrix      = NULL;
+    similarityMatrix *similMatrix   = NULL;
+    
+    newAlignment  
+    *origAlig                   = NULL, 
+    *singleAlig                 = NULL, 
+    **compareAlignmentsArray    = NULL,
+    *backtranslationAlig        = NULL;
 
-    int i = 1, argumentLength, num = 0, maxAminos = 0, numfiles = 0, referFile = 0, *delColumns = NULL, *delSequences = NULL, *sequencesLengths = NULL;
-    char c, *forceFile = NULL, *infile = NULL, *backtransFile = NULL, *outfile = NULL, *htmlOutFile = NULL, *matrixFile = NULL,
-             **filesToCompare = NULL, line[256];
+    char 
+    c, 
+    *forceFile          = NULL, 
+    *infile             = NULL, 
+    *backtransFile      = NULL, 
+    *outfile            = NULL, 
+    *htmlOutFile        = NULL, 
+    *matrixFile         = NULL,
              
+    **filesToCompare    = NULL, 
+    line[256];
              
     std::vector<std::string> oformats;
 
 public:
-    
-    // READING ARGUMENTS
+///\addtogroup TrimalParsingArguments
+///@{ 
+    ///\addtogroup ParsingArgumentsFunctions 
+    // read arguments.
+    ///@{ 
     void parseArguments(int argc, char *argv[]);
-
+private:
         void info_arguments(int* argc, char* argv[], int* i);
         bool in_argument(int* argc, char* argv[], int* i);
         bool out_argument(int* argc, char* argv[], int* i);
@@ -110,12 +151,15 @@ public:
         bool split_by_stop_codon_argument(int* argc, char* argv[], int* i);
         bool ignore_stop_codon_argument(int* argc, char* argv[], int* i);
 
-    // 
+    ///@}
+public:
     bool process_arguments(char* argv[]);
     
-        // Check incompatibilities between arguments
+private:
+        ///\addtogroup CheckIncompatibilities 
+    // Check incompatibilities between arguments
+        ///@{ 
         bool check_arguments_incompatibilities();
-        
             bool check_inFile_incompatibilities();
             bool check_select_cols_and_seqs_incompatibilities();
             bool check_thresholds_incompatibilities();
@@ -125,10 +169,13 @@ public:
             bool check_windows_incompatibilities();
             bool check_stats_incompatibilities();
             bool check_codon_behaviour_incompatibility();
-    
-        // Check cross arguments needs.
+        ///@}
+
+        ///\addtogroup CheckNeeds 
+    // Check cross arguments needs.
+        ///@{ 
         bool check_arguments_needs(char* argv[]);
-            
+
             bool check_force_selection();
             bool check_input_file_with_coding_sequences_argument();
             bool check_file_aligned();
@@ -148,25 +195,34 @@ public:
             bool check_backtranslation_infile_names_corresponde();
             void check_cw_argument(); // TODO <- HAS TO CHANGE ITS NAME
             void check_output_format();
+        ///@}
+            
     
-    // ARGUMENTS ARE VALID, PERFORM TRIMMING FUNCTIONS
+    ///\addtogroup PerformAlgorithm 
+// Arguments are valid, perform.
+    ///@{ 
+public:
     int perform();
-
+private:
         void print_statistics();
         bool create_or_use_similarity_matrix();
         void clean_alignment();
         void set_window_size();
-
+        
+    ///@}
+    ///\addtogroup OtherMethods
+    ///@{ 
     void delete_variables();
     
     // NON COMPLEX OPTIONS
     void menu();
     void examples();
-    
+    ///@}
 
 private:
     ReadWriteMS ReadWriteMachine;
 };
+///@}
 
 
 #endif //TRIMAL_TRIMALARGUMENTPARSER_H

@@ -223,7 +223,7 @@ bool Phylip40State::SaveAlignment(newAlignment* alignment, std::ostream* output,
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
     for(i = 0; i < alignment->sequenNumber; i++)
-        tmpMatrix[i] = (!alignment->reverse) ?
+        tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
 
