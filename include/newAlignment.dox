@@ -93,11 +93,14 @@ It contains methods and variables related to Statistics calculation and reportin
     
 /**
 \var newAlignment::saveResidues
-\todo todo
+\brief Vector containing which residues will be kept/removed.\n
+-1 Indicates a 'removed/toRemove'. Otherwise it will be kept
 */
     
 /**
 \var newAlignment::saveSequences
+\brief Vector containing which sequences will be kept/removed.\n
+-1 Indicates a 'removed/toRemove'. Otherwise it will be kept
 */
 
 /**
@@ -241,8 +244,8 @@ Moreover, the method computes which one is the most similar sequence, in term of
 
 /**
 \fn newAlignment::checkCorrespondence(string * names, int * lenghts, int totalInputSequences, int multiple)
-\brief Function to check CDS file.\n
 \todo multiple argument is needed?
+\brief Function to check CDS file.\n
 It checks if sequences of input alignment are all present on the CDS file.\n
 If nucleotide sequence is larger than protein sequence length * 3, warns about it and cuts the nucleotide sequence\n
 If sequence has indetermination symbols, it warns about it.\n
