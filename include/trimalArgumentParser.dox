@@ -1,3 +1,7 @@
+/**
+\class trimAlManager 
+\brief Main class of Trimal: It parses arguments and performs the algorithm requested on them.
+*/
 
 /**
 \var bool trimAlManager::appearErrors
@@ -973,7 +977,7 @@ It also perform some calculations needed on comparfiles behaviour.
 \fn int trimAlManager::perform()
 \brief Method to perform the analysis if all checks have passed.
 
-\return \b 0 if all went ok. \n \b -1 if parsing arguments went wrong\n \b -2 if there was a problem with the similarity matrix.
+\return \b  0 if all went ok. \n \b -1 if parsing arguments went wrong on previously steps\n \b -2 if there was a problem with the similarity matrix.
 */
 
 /**
