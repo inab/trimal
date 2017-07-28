@@ -299,7 +299,7 @@ bool MegaSequentialState::SaveAlignment(newAlignment* alignment, std::ostream* o
     /* Print sequences name and sequences divided into blocks of 50 residues */
     for(i = 0; i < alignment->sequenNumber; i++) {
         *output << "#" << alignment->seqsName[i] << endl;
-        for(j = 0; j < alignment->residNumber; j += 50) {
+        for(j = 0; j < alignment->residuesNumber[i]; j += 50) {
             for(k = j; ((k < alignment->residNumber) && (k < j + 50)); k += 10)
                 *output << tmpMatrix[i].substr(k, 10) << " ";
             *output << endl;

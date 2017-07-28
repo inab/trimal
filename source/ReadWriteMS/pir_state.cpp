@@ -184,10 +184,10 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
                  << alignment->seqsName[i] << " " << alignment->residuesNumber[i] << " bases" << endl;
 
         /* Write the sequence */
-        for(j = 0; j < alignment->residNumber; j += 50) {
-            for(k = j; (k < alignment->residNumber) && (k < (j + 50)); k += 10)
+        for(j = 0; j < alignment->residuesNumber[i]; j += 50) {
+            for(k = j; (k < alignment->residuesNumber[i]) && (k < (j + 50)); k += 10)
                 (*output) << " " << tmpMatrix[i].substr(k, 10);
-            if((j + 50) >= alignment->residNumber)
+            if((j + 50) >= alignment->residuesNumber[j])
                 (*output) << "*";
             (*output) << endl;
         }

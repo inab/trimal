@@ -7,7 +7,7 @@
 #include "../include/Cleaner.h"
 #include "../include/StatisticsManager.h"
 #include "../include/newAlignment.h"
-#include <../../include/defines.h>
+#include "../include/defines.h"
 
 int Cleaner::selectMethod(void) {
 
