@@ -1,6 +1,6 @@
 #include "../../include/ReadWriteMS/fasta_state.h"
 #include <iostream>
-#include <../../home/vfernandez/git/trimal/include/defines.h>
+#include "../../include/defines.h"
 #include <stdio.h>
 #include <string>
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
