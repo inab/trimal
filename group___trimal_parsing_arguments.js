@@ -1,5 +1,8 @@
 var group___trimal_parsing_arguments =
 [
+    [ "BASIC USAGE", "readal_pag.html#basic_usage", null ],
+    [ "LEGACY OPTIONS", "readal_pag.html#legacy_opt", null ],
+    [ "EXAMPLES OF USE", "readal_pag.html#examples", null ],
     [ "ParsingArgumentsFunctions", "group___parsing_arguments_functions.html", "group___parsing_arguments_functions" ],
     [ "CheckIncompatibilities", "group___check_incompatibilities.html", "group___check_incompatibilities" ],
     [ "CheckNeeds", "group___check_needs.html", "group___check_needs" ],
