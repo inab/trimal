@@ -822,6 +822,20 @@ Take in mind that an incompatibility is between two arguments, but only one meth
 */
 
 /**
+\fn bool trimAlManager::check_combinations_among_thresholds()
+\brief As some thresholds are incompatible between them, we check their incompatibilities.
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_automated_manual_incompatibilities()
+\brief Check if only one method, either automatic or manual has been asked.
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
 \fn bool trimAlManager::check_codon_behaviour_incompatibility()
 \brief Method to check incompatibilities related to how the algorithm should treat stop codons
 
@@ -896,23 +910,6 @@ Take in mind that dependencies may be between multiple arguments, so, if there i
 /**
 \fn bool trimAlManager::check_output_file_with_statistics()
 \brief Method to check if there is an output file to allow statistics to be given on terminal.
-
-\return \b False if dependencies check has passed\n \b True otherwise
-*/
-
-/**
-\fn bool trimAlManager::check_combinations_among_thresholds()
-\brief As some thresholds are incompatible between them, we check their incompatibilities.
-\note As description explains, this is an incompatibility check, not a dependency check, and should be moved to trimAlManager::check_arguments_incompatibilities
-
-\return \b False if dependencies check has passed\n \b True otherwise
-*/
-
-/**
-\fn bool trimAlManager::check_automated_manual_incompatibilities()
-\brief Check if only one method, either automatic or manual has been asked.
-
-\note As description explains, this is an incompatibility check, not a dependency check, and should be moved to trimAlManager::check_arguments_incompatibilities
 
 \return \b False if dependencies check has passed\n \b True otherwise
 */
