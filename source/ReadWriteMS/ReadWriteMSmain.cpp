@@ -1,4 +1,4 @@
-#include <../../home/vfernandez/git/trimal/include/defines.h>
+#include <../../include/defines.h>
 #include "../../include/newAlignment.h"
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include <string>
