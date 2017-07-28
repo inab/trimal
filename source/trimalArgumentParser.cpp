@@ -1121,6 +1121,48 @@ bool trimAlManager::check_codon_behaviour_incompatibility()
     return false;
 }
 
+bool trimAlManager::check_combinations_among_thresholds_incompatibility() // TODO is this ok?
+{
+    if((consistencyThreshold != -1) && (conservationThreshold != -1) && (!appearErrors))
+    {
+
+        if((gapThreshold != -1) || (similarityThreshold != -1))
+        {
+            cerr << endl << "ERROR: Combinations among thresholds are not allowed." << endl << endl;
+            appearErrors = true;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool trimAlManager::check_automated_manual_incompatibilities()
+{
+    if((getComplementary) && (!appearErrors))
+        if(!automatedMethodCount && // Are we not using an automated method? 
+            (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && // Neither a threshold method.
+            (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither a sequence and residues semimanual selection methods
+            (maxIdentity == -1) && (clusters == -1)) // Or complex selection of sequences.
+        {
+            cerr << endl << "ERROR: The parameter -complementary can only be used with either an automatic or a manual method." << endl << endl;
+            appearErrors = true;
+            return true;
+        }
+    /* ------------------------------------------------------------------------------------------------------ */
+
+    /* ------------------------------------------------------------------------------------------------------ */
+    if((terminalOnly) && (!appearErrors))
+        if(!automatedMethodCount && // Are we not using an automated method? 
+            (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && // Neither a threshold method.
+            (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither a sequence and residues semimanual selection methods
+            (maxIdentity == -1) && (clusters == -1)) // Or complex selection of sequences.
+        {
+            cerr << endl << "ERROR: The parameter '-terminalonly' can only be used with either an automatic or a manual method." << endl << endl;
+            appearErrors = true;
+            return true;
+        }
+    return false;
+}
 
 bool trimAlManager::check_force_selection()
 {
@@ -1279,49 +1321,6 @@ bool trimAlManager::check_output_file_with_statistics()
             return true;
         }
     }
-    return false;
-}
-
-bool trimAlManager::check_combinations_among_thresholds_incompatibility() // TODO is this ok?
-{
-    if((consistencyThreshold != -1) && (conservationThreshold != -1) && (!appearErrors))
-    {
-
-        if((gapThreshold != -1) || (similarityThreshold != -1))
-        {
-            cerr << endl << "ERROR: Combinations among thresholds are not allowed." << endl << endl;
-            appearErrors = true;
-            return true;
-        }
-    }
-    return false;
-}
-
-bool trimAlManager::check_automated_manual_incompatibilities()
-{
-    if((getComplementary) && (!appearErrors))
-        if(!automatedMethodCount && // Are we not using an automated method? 
-            (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && // Neither a threshold method.
-            (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither a sequence and residues semimanual selection methods
-            (maxIdentity == -1) && (clusters == -1)) // Or complex selection of sequences.
-        {
-            cerr << endl << "ERROR: The parameter -complementary can only be used with either an automatic or a manual method." << endl << endl;
-            appearErrors = true;
-            return true;
-        }
-    /* ------------------------------------------------------------------------------------------------------ */
-
-    /* ------------------------------------------------------------------------------------------------------ */
-    if((terminalOnly) && (!appearErrors))
-        if(!automatedMethodCount && // Are we not using an automated method? 
-            (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && // Neither a threshold method.
-            (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither a sequence and residues semimanual selection methods
-            (maxIdentity == -1) && (clusters == -1)) // Or complex selection of sequences.
-        {
-            cerr << endl << "ERROR: The parameter '-terminalonly' can only be used with either an automatic or a manual method." << endl << endl;
-            appearErrors = true;
-            return true;
-        }
     return false;
 }
 

@@ -169,7 +169,8 @@ private:
             bool check_windows_incompatibilities();
             bool check_stats_incompatibilities();
             bool check_codon_behaviour_incompatibility();
-            bool check_combinations_among_thresholds();
+            bool check_combinations_among_thresholds_incompatibility();
+            bool check_automated_manual_incompatibilities();
         ///@}
 
         ///\addtogroup CheckNeeds 
@@ -186,7 +187,6 @@ private:
             bool check_residue_and_sequence_overlap();
             bool check_html_output_interest();
             bool check_output_file_with_statistics();
-            bool check_automated_manual_incompatibilities();
             bool check_multiple_files_comparison(char* argv[]);
             bool check_block_size();
             bool check_backtranslations();
