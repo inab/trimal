@@ -886,6 +886,7 @@ bool trimAlManager::check_arguments_incompatibilities()
     check_windows_incompatibilities();
     check_stats_incompatibilities();
     check_codon_behaviour_incompatibility();
+    check_combinations_among_thresholds_incompatibility();
 
     return appearErrors;
 }
@@ -1098,7 +1099,6 @@ bool trimAlManager::check_arguments_needs(char* argv[])
         check_residue_and_sequence_overlap();
         check_html_output_interest();
         check_output_file_with_statistics();
-        check_combinations_among_thresholds();
         check_automated_manual_incompatibilities();
         check_multiple_files_comparison(argv);
         check_block_size();
@@ -1282,7 +1282,7 @@ bool trimAlManager::check_output_file_with_statistics()
     return false;
 }
 
-bool trimAlManager::check_combinations_among_thresholds() // TODO is this ok?
+bool trimAlManager::check_combinations_among_thresholds_incompatibility() // TODO is this ok?
 {
     if((consistencyThreshold != -1) && (conservationThreshold != -1) && (!appearErrors))
     {
