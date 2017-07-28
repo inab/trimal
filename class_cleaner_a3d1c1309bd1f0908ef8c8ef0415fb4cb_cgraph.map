@@ -1,0 +1,5 @@
+<map id="Cleaner::removeColumns" name="Cleaner::removeColumns">
+<area shape="rect" id="node2" href="$class_cleaner.html#a24bd28e4191afc9471adff329bee1466" title="Method for computing the complementary alignment. Complementary Alignment is an alignment containing ..." alt="" coords="224,5,463,32"/>
+<area shape="rect" id="node3" href="$class_cleaner.html#a2f7d85e29f23f880a7ad7e28863b36c3" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="271,57,416,98"/>
+<area shape="rect" id="node4" href="$classnew_alignment.html#acbeb320f0f70222f81a906ccfc33a016" title="Method to intialize data that has been modified on the alignment. The method checks if the sequences ..." alt="" coords="256,123,431,149"/>
+</map>

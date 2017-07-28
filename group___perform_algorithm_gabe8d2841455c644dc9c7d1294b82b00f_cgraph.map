@@ -1,0 +1,13 @@
+<map id="trimAlManager::perform" name="trimAlManager::perform">
+<area shape="rect" id="node2" href="$group___perform_algorithm.html#ga9fe53f593792efe2eafd54ec6e506bf3" title="Method to set correct window sizes depending on values for them given by the user. " alt="" coords="245,5,377,47"/>
+<area shape="rect" id="node3" href="$group___perform_algorithm.html#ga3e8b2b5b4e1a44c498c47448840b6c69" title="Method to create, load and use a similarity matrix, depending on alignment residue nature..." alt="" coords="226,71,397,112"/>
+<area shape="rect" id="node4" href="$group___perform_algorithm.html#gafc48b86f5ae35b9a5e721b65c58bf610" title="Method to print statistics requested. " alt="" coords="242,136,381,177"/>
+<area shape="rect" id="node10" href="$group___perform_algorithm.html#gadc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from. " alt="" coords="239,201,384,243"/>
+<area shape="rect" id="node11" href="$class_read_write_m_s.html#af81c55ae0e74802e3673f68e8e85fd2e" title="Function to save an alignment to a file. It searched on the available_states, the one that can write ..." alt="" coords="212,267,411,294"/>
+<area shape="rect" id="node12" href="$group___other_methods.html#ga6678747256ac394eb8b4c648d403dcc8" title="Method to delete all variables that need to be deallocated. " alt="" coords="237,319,386,360"/>
+<area shape="rect" id="node5" href="$classcompare_files.html#aa1a295d736ec6d8064cd28cf861289ef" title="Print the consistency value for each column from the selected alignment. " alt="" coords="459,104,647,145"/>
+<area shape="rect" id="node6" href="$classcompare_files.html#a435d98e46d83c066a928e40d2dbcead9" title="Print the accumulated consistency value from the selected alignment. " alt="" coords="459,169,647,211"/>
+<area shape="rect" id="node7" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="695,151,804,178"/>
+<area shape="rect" id="node8" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="696,202,803,229"/>
+<area shape="rect" id="node9" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="852,202,937,229"/>
+</map>

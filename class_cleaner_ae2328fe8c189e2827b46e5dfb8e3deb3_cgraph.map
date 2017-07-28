@@ -1,0 +1,12 @@
+<map id="Cleaner::cleanCompareFile" name="Cleaner::cleanCompareFile">
+<area shape="rect" id="node2" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="522,5,631,32"/>
+<area shape="rect" id="node3" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="523,56,630,83"/>
+<area shape="rect" id="node5" href="$class_cleaner.html#ad075f0ef730c8023cf8a0e35e7e1e53a" title="Method to clean an alignment. &#160;It removes sequences that overpass or equals a certain threshold..." alt="" coords="233,157,409,184"/>
+<area shape="rect" id="node4" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="744,56,829,83"/>
+<area shape="rect" id="node6" href="$classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method. " alt="" coords="526,107,627,133"/>
+<area shape="rect" id="node7" href="$class_cleaner.html#a033da9ea63774f43f4c7aff04f23da81" title="Method to detect right and left borders. Borders are the first column found with no gaps..." alt="" coords="479,157,674,184"/>
+<area shape="rect" id="node8" href="$class_cleaner.html#a24bd28e4191afc9471adff329bee1466" title="Method for computing the complementary alignment. Complementary Alignment is an alignment containing ..." alt="" coords="457,208,696,235"/>
+<area shape="rect" id="node9" href="$class_cleaner.html#a2f7d85e29f23f880a7ad7e28863b36c3" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="504,259,649,301"/>
+<area shape="rect" id="node10" href="$classnew_alignment.html#a3de39c62c08a265178f1fa7df76c3ab7" title="Method that copies information of the alignment to the pointers given. " alt="" coords="487,325,667,366"/>
+<area shape="rect" id="node11" href="$classnew_alignment.html#acbeb320f0f70222f81a906ccfc33a016" title="Method to intialize data that has been modified on the alignment. The method checks if the sequences ..." alt="" coords="489,391,664,417"/>
+</map>

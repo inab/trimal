@@ -1,0 +1,5 @@
+<map id="utils::max" name="utils::max">
+<area shape="rect" id="node2" href="$classnew_alignment.html#af730d0021082c5d52bc0b971a587c8e1" title="Method to print different identity values computed from the alignment. In this method we assess the i..." alt="" coords="161,5,363,32"/>
+<area shape="rect" id="node3" href="$classnew_alignment.html#a3377e8d600e1cbb9e65adf2995c877f9" title="Method to report the trimming results in HTML. It contains information about the original and trimmed..." alt="" coords="132,56,392,83"/>
+<area shape="rect" id="node4" href="$classnew_alignment.html#a26d10a23f8f71f95657a05e88a9a8fff" title="Method that saves a clustal&#45;color based visualization of the alignment. It doesn&#39;t report any trimmin..." alt="" coords="141,107,383,133"/>
+</map>

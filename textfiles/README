@@ -1,0 +1,16 @@
+Basic Installation
+==================
+
+The simplest way to compile this package is:
+
+  1. 'cd' to the directory containing the package's source code ('source').
+
+  2. Type 'make' to compile the package.
+
+  3. Optionally, run trimAl/readAl with the examples into the 'dataset' 
+     directory to check the correct installation.
+
+   By default, 'make' compiles the source code of trimAl and readAl in the
+current directory. After that, you can either add to PATH the current
+directory or move these files to '/usr/local/bin' or to '/usr/bin' using
+root privileges.

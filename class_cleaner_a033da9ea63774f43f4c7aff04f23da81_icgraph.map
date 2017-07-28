@@ -1,0 +1,11 @@
+<map id="Cleaner::removeOnlyTerminal" name="Cleaner::removeOnlyTerminal">
+<area shape="rect" id="node2" href="$class_cleaner.html#ad075f0ef730c8023cf8a0e35e7e1e53a" title="Method to clean an alignment. &#160;It removes sequences that overpass or equals a certain threshold..." alt="" coords="248,157,424,184"/>
+<area shape="rect" id="node9" href="$class_cleaner.html#a740bce047dce09be0f6bd1da9f826da3" title="Method to clean an alignment. It carries out strict and strictplus. It removes sequences that overpas..." alt="" coords="267,259,405,285"/>
+<area shape="rect" id="node3" href="$class_cleaner.html#ac3be9d53018d9146d6dc6cf7ff89f96d" title="Method to clean an alignment based on the gap distribution values. Column blocks that don&#39;t have a mi..." alt="" coords="499,5,636,32"/>
+<area shape="rect" id="node4" href="$class_cleaner.html#a694d53fdd5d1ac9455858e48537af3d0" title="Method to clean an alignment based on the similarity distribution values. " alt="" coords="476,56,659,83"/>
+<area shape="rect" id="node5" href="$class_cleaner.html#a1ac5ba504932526d77575365557a4d64" title="Method to clean an alignment based on the similarity and gaps distribution values. . " alt="" coords="514,107,621,133"/>
+<area shape="rect" id="node6" href="$class_cleaner.html#ae2328fe8c189e2827b46e5dfb8e3deb3" title="Method to clean an alignment based on consistency values obtained from a dataset of alignments..." alt="" coords="477,157,657,184"/>
+<area shape="rect" id="node7" href="$class_cleaner.html#a1ea9656823727f9ec237c82f9fb529cf" title="Method that carries the gappyout approach. This methods calculates the slope in gaps distribution on ..." alt="" coords="487,208,647,235"/>
+<area shape="rect" id="node8" href="$class_cleaner.html#a08e6db52c33baccce53a33d844597d7b" title="Method to remove columns composed only by gaps This method is specially useful when we remove missali..." alt="" coords="483,259,652,285"/>
+<area shape="rect" id="node10" href="$class_cleaner.html#a068b219f913adba5c917a231cff7e437" title="Method to clean an alignment. It carries out strict and strictplus. The method: " alt="" coords="472,309,663,336"/>
+</map>

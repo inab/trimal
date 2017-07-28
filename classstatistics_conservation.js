@@ -1,0 +1,25 @@
+var classstatistics_conservation =
+[
+    [ "statisticsConservation", "classstatistics_conservation.html#a4c808b44c2808ddb5578f1a90dadd6ea", null ],
+    [ "statisticsConservation", "classstatistics_conservation.html#a2fa0bbea2b5a353b12a185cf68f69653", null ],
+    [ "~statisticsConservation", "classstatistics_conservation.html#a2dfdf18224ec643d05a75997a93de131", null ],
+    [ "applyWindow", "classstatistics_conservation.html#a31f6ff0c30b2a207aba13f7687709467", null ],
+    [ "calcCutPoint", "classstatistics_conservation.html#a43f994a862174670d4fde9884360f680", null ],
+    [ "calculateMatrixIdentity", "classstatistics_conservation.html#ae76dd4736631a18acda230d8099a93b4", null ],
+    [ "calculateVectors", "classstatistics_conservation.html#af86c9c3c58d0b00c68d4eda4d5f6f133", null ],
+    [ "getMdkwVector", "classstatistics_conservation.html#adc38f48f809152e629a70b5d7e17a616", null ],
+    [ "isDefinedWindow", "classstatistics_conservation.html#a306718cdde8bdd54aeaec63ca318e88f", null ],
+    [ "isSimMatrixDef", "classstatistics_conservation.html#ab71123478840c7e816ead03ccfe41fc9", null ],
+    [ "printConservationAcl", "classstatistics_conservation.html#adaa79cf3eaa778b658b606ef1383c82b", null ],
+    [ "printConservationColumns", "classstatistics_conservation.html#abf7952f64d405745dde44e23ee2527f3", null ],
+    [ "setSimilarityMatrix", "classstatistics_conservation.html#aef88344fcc4642f0a7fc7926958b34ea", null ],
+    [ "columns", "classstatistics_conservation.html#a2e0417b263bda59c8831606cb2aa9538", null ],
+    [ "dataType", "classstatistics_conservation.html#a27348d47e7c543af508fe6d0e770dd7e", null ],
+    [ "halfWindow", "classstatistics_conservation.html#aa5154cc01fddb5acacf3fb756afd7791", null ],
+    [ "matrixIdentity", "classstatistics_conservation.html#a8a9a4757cdca25e638630329cc21f409", null ],
+    [ "MDK", "classstatistics_conservation.html#a5b1918897b5339124a6239e13bd54934", null ],
+    [ "MDK_Window", "classstatistics_conservation.html#a8d72a67f48300028bbe7ea9933a5f8ee", null ],
+    [ "Q", "classstatistics_conservation.html#acbd52d1c08c5fe45b84121bec2d1b8b1", null ],
+    [ "sequences", "classstatistics_conservation.html#ae62a8fdf513094d9a100b64630abe8b0", null ],
+    [ "simMatrix", "classstatistics_conservation.html#af23c4eb7cb2cf14761cc7f651b8c8006", null ]
+];

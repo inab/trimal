@@ -1,0 +1,16 @@
+<map id="utils::isNumber" name="utils::isNumber">
+<area shape="rect" id="node2" href="$group___parsing_arguments_functions.html#ga60a68cb3d06d630cbc52d9465dfe4112" title="Method to parse the gap threshold argument. " alt="" coords="187,5,329,47"/>
+<area shape="rect" id="node4" href="$group___parsing_arguments_functions.html#gad7fd9b44ff6cd032a83c599678fa4040" title="Method to parse the similarity threshold argument. " alt="" coords="175,71,341,112"/>
+<area shape="rect" id="node5" href="$group___parsing_arguments_functions.html#ga73b880844e7ceed43aa9d7dc4c3fb1f6" title="Method to parse the consistency threshold argument. " alt="" coords="166,136,350,177"/>
+<area shape="rect" id="node6" href="$group___parsing_arguments_functions.html#gab162d8373b277d4fb1d013e0aceb95b9" title="Method to parse the conservation threshold argument. " alt="" coords="164,201,352,243"/>
+<area shape="rect" id="node7" href="$group___parsing_arguments_functions.html#gae4c29488936ae2d429f563c8df0b85a0" title="Method to parse the residue overlap argument. " alt="" coords="180,267,336,308"/>
+<area shape="rect" id="node8" href="$group___parsing_arguments_functions.html#gab1bb749f54bfaedee49c03e78a2b7c11" title="Method to parse the sequence overlap argument. " alt="" coords="173,332,343,373"/>
+<area shape="rect" id="node9" href="$group___parsing_arguments_functions.html#ga5d22b6b08888f89e38d604b7e9653935" title="Method to parse the max identity argument. " alt="" coords="189,397,327,439"/>
+<area shape="rect" id="node10" href="$group___parsing_arguments_functions.html#ga66b5f541247441de174d643f85901eca" title="Method to parse the clusters argument. " alt="" coords="178,463,338,504"/>
+<area shape="rect" id="node11" href="$group___parsing_arguments_functions.html#ga54e5f7e5c36b532547b5d822ad59a193" title="Method to parse the Window argument. " alt="" coords="179,528,337,569"/>
+<area shape="rect" id="node12" href="$group___parsing_arguments_functions.html#gab15430c46ad26f21d8479bf3cd5b68fd" title="Method to parse the Gap Window argument. " alt="" coords="191,593,325,635"/>
+<area shape="rect" id="node13" href="$group___parsing_arguments_functions.html#gae5a646dea584f694cbb1262a5be72290" title="Method to parse the Similarity Window argument. " alt="" coords="175,659,341,700"/>
+<area shape="rect" id="node14" href="$group___parsing_arguments_functions.html#ga1192b7587cd78875384357d92bdadcef" title="Method to parse the Consistency Window argument. " alt="" coords="166,724,350,765"/>
+<area shape="rect" id="node15" href="$group___parsing_arguments_functions.html#ga1f34f42869ae921faeb2861ecba25d12" title="Method to parse the Block Size argument. " alt="" coords="185,789,331,831"/>
+<area shape="rect" id="node3" href="$group___parsing_arguments_functions.html#gaf140d97b6071a83930818030ac74b641" title="Method to parse arguments into usable structure in trimal. " alt="" coords="400,405,609,431"/>
+</map>

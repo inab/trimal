@@ -1,0 +1,7 @@
+<map id="utils::removeCharacter" name="utils::removeCharacter">
+<area shape="rect" id="node2" href="$class_cleaner.html#a60955e2ae3faa3ccf84780a52fb1a08a" title="Method that calculates the optimat cut point for a given clusters number. The idea is to obtain a cut..." alt="" coords="233,5,426,32"/>
+<area shape="rect" id="node3" href="$class_cleaner.html#a631cf3e2e55c00a995f0f4a51bfe7a2d" title="Method to asign sequences to clusters. Clusters are calculated following this schema: ..." alt="" coords="210,56,449,83"/>
+<area shape="rect" id="node5" href="$classnew_alignment.html#af32ab6b3b73c5ad37c9f1c796a4fbc44" title="Getter for the sequences names and its lenghts. " alt="" coords="232,107,427,133"/>
+<area shape="rect" id="node6" href="$classnew_alignment.html#ae8501233fe4f4ef6bfe30c99c744c7c2" title="Function to check CDS file. It checks if sequences of input alignment are all present on the CDS file..." alt="" coords="208,157,451,184"/>
+<area shape="rect" id="node4" href="$class_cleaner.html#a991bf55a7d36b305d67d639ebf028348" title="Method to select the most representative sequence (the longest one) for each cluster from the input a..." alt="" coords="499,56,651,83"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="trimAlManager::in_argument" name="trimAlManager::in_argument">
+<area shape="rect" id="node2" href="$class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf" title="Function that creates an alignment from a filepath. It automatically detects the format of the file..." alt="" coords="239,13,433,39"/>
+<area shape="rect" id="node3" href="$class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="481,5,627,47"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="sequencesMatrix" name="sequencesMatrix">
+<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="535,559,639,585"/>
+<area shape="rect" id="node11" href="$class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="755,649,822,676"/>
+<area shape="rect" id="node13" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="405,649,532,676"/>
+<area shape="rect" id="node4" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="54,325,161,352"/>
+<area shape="rect" id="node7" href="$classstatistics_conservation.html" title="statisticsConservation" alt="" coords="325,408,477,435"/>
+<area shape="rect" id="node10" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="533,228,644,255"/>
+</map>

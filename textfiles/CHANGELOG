@@ -1,0 +1,150 @@
+﻿trimAl/readAl v1.3. April 2011.
+
+[General]
+
+  * Rewritten all file format parsers.
+
+  * Added a new file format for compatibility with some programs.
+    * phylip_paml
+
+  * Extended some file format parsers.
+    * fasta_m10
+    * phylip_m10
+    * phylip3.2_m10
+    * phylip_paml_m10
+
+  * A new control versions system is used: git.
+
+  * Improved general system for tracking builds/revisions.
+
+  * Refactored some portion of codes for improving its legibility and
+    comprehension.
+
+[trimAl]
+
+  * Improved HTML functionality. Now trimAl's summary shows which scores have been used
+    for trimming the alignment along with scores scales bars.
+
+  * Now it is possible to get an HTML trimAl's summary of previously no-allowed combinations
+    of trimming methods. No-allowed combinations were related to the use of methods based on
+    several alignments (consistency based scores) and methods based on a single alignment.
+
+  * Some previously no allowed combinations between different trimming methods now are permitted.
+    This is oriented to trim a given alignment using scores from several alignments along with
+    scores computed from a single alignment.
+
+  * When several alignment are given now it is possible to force the selection of one
+    of them using a new option "-forceselect". This is useful to trim a specific alignment
+    based on its consistency scores computed from a given set of alignments independently
+    if that alignment is the most consistent among the set of those alignments.
+    The selected alignment should not be present among alignments in the "-compareset"
+    input file.
+
+  * Former "-select" option has been converted into "-selectcols" for removing specific
+    columns/range of columns.
+
+  * Added the possibility, using "-selectseqs" option, to remove specific sequences/range
+    of sequences from input alignment.
+
+  * Using "-backtrans" option it is possible to trim an input protein alignment and then
+    get a back-translated CDS alignment. Coding DNA sequences are mapped before trimming
+    to protein sequences through sequences identifiers controlling stop codons, sequences
+    lengths, etc, etc.
+
+  * Using "-splitbystopcodon" option is possible, when a back-translation is done, to split
+    input coding sequences for its stop codons (at positions multiple of 3).
+
+  * Added a new option "-terminalonly" for removing only columns out of internal boundaries.
+    Internal boundaries are defined as the first and last column in the alignment without
+    gaps. The columns removal depends on the applied trimming method, that means, if there
+    is not columns to be deleted out of internal boundaries, no-columns will be deleted.
+    All columns in-between internal boundaries are kept independently of any trimming methods
+    decision.
+
+  * Added a new option "-clusters" for getting the most Nth representative sequences from
+    input alignment. Representativeness is computed in terms of identity between each pair
+    of sequences in the alignment. Then an algorithm is applied for constructing a set of
+    clusters based on those identities values. The longest sequences is selected as the
+    cluster representative for the final alignment.
+
+  * Added a new option "-maxidentity" for getting sequences representatives at given identity
+    threshold. This option allows to get the set of sequences/cluster representatives with an
+    identity below to that threshold regarding to rest of the sequences. Sequences with identities
+    scores higher than established threshold are clusters to the most similar sequence. The
+    longest sequences are selected as cluster representatives for the final alignment.
+
+  * Added a new option "-block" for keeping only columns blocks equal or higher to that size
+    in the final alignment. This option is available for manual trimming methods and only for
+    "gappyout" method among automated ones.
+
+  * Changed identity scores matrix. Now it is shown "100.000" in the diagonal instead of
+    "0". It makes more sense to have a score of 100 for each sequence against itself.
+
+  * Changed options name for making clear their meaning.
+    * scc => ssc  - Similarity scores for columns in the alignment.
+    * sct => sst  - Cumulative distribution of similarities scores in the alignment.
+
+[readAl]
+
+  * Added new option "-reverse" for getting the reverse of the input alignment.
+
+  * Added new option "-onlyseqs" for getting only sequences from the alignment. This option
+    destroys input alignment and returns a fasta file with unaligned sequences.
+
+  * Added new option "-html" for getting an HTML file with alignments residues colored
+    according to CLUSTAL scheme. This functionality is similar to SeaView/JalView visualization.
+
+  * Changed option "-format". Now it informs about input file format and if sequences are
+    aligned or not.
+
+  * Updated option "-type". Now it informs more about nucleotides datatype: dna or rna.
+
+trimAl/readAl v1.2. April 2009.
+
+  * Added the htmlout to track the trimAl's trimming.
+
+  * Added the possibility to delete spurious sequences from the alignment.
+
+  * Added the complementary and colnumbering options.
+
+  * Added the manual selection of columns.
+
+  * Added one new heuristic method to select the best automated trimming method.
+    * Automated1
+
+  * Added two new automated methods to work with gaps and similarity distribution.
+    * Strict
+    * Strictplus
+
+  * Select only one automated method to work with gaps distribution.
+    * Strict => Gappyout
+    * Relaxed was deleted
+
+  * Added the version/revisions system.
+
+  * Improved the file format.
+    * Added support for phylip 3.2
+    * Added support for clustal
+    * Added support for fasta
+    * Added support for nexus
+    * Added support for mega
+    * Added support for nbrf/pir
+
+  * Improved of statistics methods.
+    * Improved the information of the available methods.
+    * Added the identity statistics.
+
+  * Improved of windows size methods.
+    * Consistency windows size.
+
+  * Improved the similarity-matrices handling.
+
+  * Improved the support for DNA/RNA alignments.
+
+  * Added readAl.
+
+  * Fixed some bugs from the previous version.
+
+trimAl v1.1. February 2008.
+
+  * Initial public version of trimAl.
