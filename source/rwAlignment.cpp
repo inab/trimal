@@ -7,7 +7,7 @@
     readAl v1.4: a tool for automated alignment conversion among different
                  formats.
 
-    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl/readAl.
@@ -439,7 +439,7 @@ bool alignment::loadPhylip3_2Alignment(char *alignmentFile) {
     if(line == NULL)
       continue;
 
-    str = strtok(line, OTHDELIMITERS);
+    str = strtok(line, DELIMITERS);
     /* First block: Sequence Name + Sequence fragment. Count how many blocks
      * the first sequence line is divided. It could help to identify the
      * different sequences from the input file */

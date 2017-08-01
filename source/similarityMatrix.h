@@ -4,7 +4,7 @@
     trimAl v1.4: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
@@ -56,6 +56,10 @@ class similarityMatrix{
   void defaultAASimMatrix();
 
   void defaultNTSimMatrix();
+
+  void defaultNTDegeneratedSimMatrix();
+
+  void alternativeSimilarityMatrices(int, int);
 
   float getDistance(char, char);
 

@@ -10,7 +10,7 @@
     statAl v1.4: a tool for getting stats about multiple sequence alignments.
 
 
-    2009-2012 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl/readAl.
@@ -52,8 +52,11 @@ alignment::alignment(void) {
   /* Should the output file be reversed? */
   reverse   = false;
 
-  /* Should be trimmed only terminal gaps? */
+  /* Should be trimmed only terminal gaps? - set automated and manual boundaries
+   * values */
   terminalGapOnly = false;
+  left_boundary = -1;
+  right_boundary = -1;
 
   /* Input and output formats */
   iformat = 0;
@@ -107,7 +110,9 @@ alignment::alignment(void) {
   sgaps =     NULL;
   scons =     NULL;
   seqMatrix = NULL;
+
   identities = NULL;
+  overlaps = NULL;
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
@@ -119,9 +124,10 @@ alignment::alignment(void) {
 alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, string *o_seqsName,
                      string *o_seqsInfo, int o_sequenNumber, int o_residNumber, int o_iformat, int o_oformat,
                      bool o_shortNames, int o_dataType, int o_isAligned, bool o_reverse, bool o_terminalGapOnly,
+                     int o_left_boundary, int o_right_boundary,
                      bool o_keepSeqs, bool o_keepHeader, int OldSequences, int OldResidues, int *o_residuesNumber,
                      int *o_saveResidues, int *o_saveSequences, int o_ghWindow, int o_shWindow, int o_blockSize,
-                     float **o_identities) {
+                     float **o_identities, float **o_overlaps) {
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   int i, j, k, ll;
@@ -149,6 +155,8 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
   reverse   = o_reverse;
 
   terminalGapOnly = o_terminalGapOnly;
+  right_boundary = o_right_boundary;
+  left_boundary = o_left_boundary;
 
   filename = o_filename;
   aligInfo = o_aligInfo;
@@ -231,6 +239,23 @@ alignment::alignment(string o_filename, string o_aligInfo, string *o_sequences, 
       }
     }
   }
+
+  overlaps = NULL;
+  if(o_overlaps != NULL) {
+    overlaps = new float*[sequenNumber];
+    for(i = 0, j = 0; i < OldSequences; i++) {
+      if(o_saveSequences[i] != -1) {
+        overlaps[j] = new float[sequenNumber];
+        for(k = 0, ll = 0; k < OldSequences; k++) {
+          if(o_saveSequences[k] != -1) {
+            overlaps[j][ll] = o_overlaps[i][k];
+            ll++;
+          }
+        }
+        j++;
+      }
+    }
+  }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -264,6 +289,8 @@ alignment &alignment::operator=(const alignment &old) {
     reverse   =  old.reverse;
 
     terminalGapOnly = old.terminalGapOnly;
+    right_boundary = old.right_boundary;
+    left_boundary = old.left_boundary;
 
     iformat = old.iformat;
     oformat = old.oformat;
@@ -344,6 +371,18 @@ alignment &alignment::operator=(const alignment &old) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    delete [] overlaps;
+    if(old.overlaps) {
+      overlaps = new float*[sequenNumber];
+      for(i = 0; i < sequenNumber; i++) {
+        overlaps[i] = new float[sequenNumber];
+        for(j = 0; j < sequenNumber; j++)
+          overlaps[i][j] = old.overlaps[i][j];
+      }
+    } else overlaps = NULL;
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     delete sgaps;
     sgaps = NULL;
 
@@ -405,6 +444,15 @@ alignment::~alignment(void) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  if(overlaps != NULL) {
+    for(i = 0; i < sequenNumber; i++)
+      delete [] overlaps[i];
+    delete [] overlaps;
+  }
+  overlaps = NULL;
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
+  /* ***** ***** ***** ***** ***** ***** ***** ***** */
   if(sgaps != NULL)
     delete sgaps;
   sgaps = NULL;
@@ -427,6 +475,10 @@ alignment::~alignment(void) {
   isAligned = false;
   reverse   = false;
 
+  terminalGapOnly = false;
+  right_boundary = -1;
+  left_boundary = -1;
+
   iformat =  0;
   oformat =  0;
   shortNames = false;
@@ -443,23 +495,16 @@ alignment::~alignment(void) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function is useful to detect the format from a given alignment */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+// Try to load current alignment and inform otherwise
 bool alignment::loadAlignment(char *alignmentFile) {
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Analyze the input alignment to detect its format */
-
+  // Detect input alignment format - it is an strict detection procedure
   iformat = formatInputAlignment(alignmentFile);
+  // Unless it is indicated somewhere else, output alignment format will be
+  // the same as the input one
   oformat = iformat;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Depending on the input format, the program use an
-   * appropiate function to read that alignment */
-
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
+  // Use the appropiate function to read input alignment
   switch(iformat) {
     case 1:
       return loadClustalAlignment(alignmentFile);
@@ -477,29 +522,26 @@ bool alignment::loadAlignment(char *alignmentFile) {
       return loadMegaInterleavedAlignment(alignmentFile);
     case 22:
       return loadMegaNonInterleavedAlignment(alignmentFile);
+  // Return a FALSE value - meaning the input alignment was not loaded
     default:
       return false;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   }
   return false;
 }
-/* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function returns the input alignment format */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-int alignment::formatInputFile(void) {
-
+// Return input alignment format - it is useful to set-up output alignment one
+int alignment::getInputFormat(void) {
   return iformat;
 }
-/* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function returns the input alignment type between a single or a
- *  multialignment. */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+// Return output alignment format
+int alignment::getOutputFormat(void) {
+  return oformat;
+}
+
+// Return whether there is one or more alignments at the input file.
+// Currently trimAl family only support single alignments per file.
 int alignment::typeInputFile(void) {
-
   return SINGLE;
 }
 
@@ -702,7 +744,7 @@ alignment *alignment::cleanConservation(float baseLine, float conservationPct, b
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Calculate the cut point using the given parameters */
-  cut = scons -> calcCutPoint(baseLine, conservationPct);
+  cut = (float) scons -> calcCutPoint(baseLine, conservationPct);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1465,8 +1507,10 @@ alignment *alignment::getClustering(float identityThreshold) {
    * alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     clustering[0], residNumber, iformat, oformat, shortNames, dataType, isAligned,
-    reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber, residuesNumber,
-    saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities);
+    reverse, terminalGapOnly, left_boundary, right_boundary,
+    keepSequences, keepHeader, sequenNumber, residNumber, residuesNumber,
+    saveResidues, saveSequences, ghWindow, shWindow, blockSize, identities,
+    overlaps);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1570,8 +1614,9 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
   newAlig = new alignment(filename, "", matrixAux, oldSeqsName, NULL, newSequences,
     newResidues * 3, ProtAlig -> getInputFormat(), ProtAlig -> getOutputFormat(),
     ProtAlig -> getShortNames(), DNAType, true, ProtAlig -> getReverse(),
-    terminalGapOnly, keepSequences, keepHeader, sequenNumber, oldResidues * 3, NULL, NULL,
-    NULL, 0, 0, ProtAlig -> getBlockSize(), NULL);
+    terminalGapOnly, left_boundary, right_boundary,
+    keepSequences, keepHeader, sequenNumber, oldResidues * 3, NULL, NULL,
+    NULL, 0, 0, ProtAlig -> getBlockSize(), NULL, NULL);
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1767,8 +1812,16 @@ int alignment::getNumAminos(void) {
 /* Sets the condition to remove only terminal gaps after applying any
  * trimming method or not.   */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-void alignment::trimTerminalGaps(bool terminalOnly_) {
+void alignment::trimTerminalGaps(bool terminalOnly_, int *boundaries_) {
   terminalGapOnly = terminalOnly_;
+
+  /* We are only interested in the first and last number of the vector - this
+   * vector is generated by other function where it is important to store all
+   * intervals */
+  if (boundaries_ != NULL) {
+    left_boundary = boundaries_[0];
+    right_boundary = boundaries_[1];
+  }
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1792,20 +1845,6 @@ void alignment::setOutputFormat(int format_, bool shortNames_) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void alignment::setBlockSize(int blockSize_) {
   blockSize = blockSize_;
-}
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Return the input format aligment */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-int alignment::getInputFormat(void) {
-  return iformat;
-}
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Return the output format alignment */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-int alignment::getOutputFormat(void) {
-  return oformat;
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2161,9 +2200,10 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine,
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
-    isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber,
+    isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
+    keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
-    identities);
+    identities, overlaps);
 
   /* Deallocate local memory */
   delete[] matrixAux;
@@ -2313,9 +2353,10 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine,
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
-    isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber,
+    isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
+    keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
-    identities);
+    identities, overlaps);
 
   /* Deallocate local memory */
   delete[] matrixAux;
@@ -2506,9 +2547,10 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol,
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
-    isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber,
+    isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
+    keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
-    identities);
+    identities, overlaps);
 
   /* Deallocate local memory */
   delete[] matrixAux;
@@ -2624,9 +2666,10 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
   //~ newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo, counter.sequences, counter.residues,
   newAlig = new alignment(filename, aligInfo, counter.matrix, counter.seqsName,
     seqsInfo, counter.sequences, counter.residues, iformat, oformat, shortNames,
-    dataType, isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber,
+    dataType, isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
+    keepSequences, keepHeader, sequenNumber,
     residNumber, residuesNumber, saveResidues, saveSequences, ghWindow, shWindow,
-    blockSize, identities);
+    blockSize, identities, overlaps);
 
   /* Deallocate local memory */
   //~ delete[] matrixAux;
@@ -2671,9 +2714,10 @@ alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
-    isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber,
+    isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
+    keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
-    identities);
+    identities, overlaps);
 
   /* Deallocate local memory */
   delete [] matrixAux;
@@ -2717,9 +2761,10 @@ alignment *alignment::removeColumns(int *columns, int init, int size,
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
-    isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber,
+    isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
+    keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
-    identities);
+    identities, overlaps);
 
   /* Deallocate local memory */
   delete[] matrixAux;
@@ -2764,9 +2809,10 @@ alignment *alignment::removeSequences(int *seqs, int init, int size,
   /* When we have all parameters, we create the new alignment */
   newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
-    isAligned, reverse, terminalGapOnly, keepSequences, keepHeader, sequenNumber, residNumber,
+    isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
+    keepSequences, keepHeader, sequenNumber, residNumber,
     residuesNumber, saveResidues, saveSequences, ghWindow, shWindow, blockSize,
-    identities);
+    identities, overlaps);
 
   /* Free local memory */
   delete [] matrixAux;
@@ -2794,30 +2840,41 @@ void alignment::computeComplementaryAlig(bool residues, bool sequences) {
  * borders are keept independently of the applied methods */
 bool alignment::removeOnlyTerminal(void) {
 
-  int i, left_boundary, right_boundary;
+  int i;
   const int *gInCol;
 
-  /* Get alignments gaps stats and copy it */
-  if(calculateGapStats() != true) {
-    cerr << endl << "WARNING: Impossible to apply 'terminal-only' method"
-      << endl << endl;
+  if((left_boundary == -1) and (right_boundary == -1)) {
+    /* Get alignments gaps stats and copy it */
+    if(calculateGapStats() != true) {
+      cerr << endl << "WARNING: Impossible to apply 'terminal-only' method"
+        << endl << endl;
+      return false;
+    }
+    gInCol = sgaps -> getGapsWindow();
+
+    /* Identify left and right borders. First and last columns with no gaps */
+    for(i = 0; i < residNumber && gInCol[i] != 0; i++) ;
+    left_boundary = i;
+
+    for(i = residNumber - 1; i > -1 && gInCol[i] != 0; i--) ;
+    right_boundary = i;
+  }
+
+  else if(left_boundary >= right_boundary) {
+    cerr << endl << "ERROR: Check your manually set left '"<< left_boundary
+      << "' and right '" << right_boundary << "' boundaries'" << endl << endl;
     return false;
   }
-  gInCol = sgaps -> getGapsWindow();
 
-  /* Identify left and right borders. First and last columns with no gaps */
-  for(i = 0; i < residNumber && gInCol[i] != 0; i++) ;
-  left_boundary = i;
-
-  for(i = residNumber - 1; i > -1 && gInCol[i] != 0; i--) ;
-  right_boundary = i + 1;
+  /* We increase the right boundary in one position because we use lower strict
+   * condition to get back columns inbetween boundaries removed by any method */
+   right_boundary += 1;
 
   /* Once the interal boundaries have been established, if these limits exist
    * then retrieved all columns inbetween both boundaries. Columns out of these
    * limits will remain selected or not depending on the algorithm applied */
   for(i = left_boundary; i < right_boundary; i++)
-    if(saveResidues[i] == -1)
-      saveResidues[i] = i;
+    saveResidues[i] = i;
 
   return true;
 }

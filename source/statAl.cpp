@@ -3,7 +3,7 @@
 
     statAl v1.4: a tool for getting descriptive alignment features/scores.
 
-    2009-2013 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of statAl.
@@ -43,7 +43,8 @@ int main(int argc, char *argv[]){
 
   /* Input values */
   char *inFile = NULL, *forceFile = NULL, *setAlignments = NULL, *matrix = NULL;
-  int windowSize = -1, gapWindow = -1, simWindow = -1, conWindow = -1;
+  int windowSize = -1, gapWindow = -1, simWindow = -1, conWindow = -1,
+    alternative_matrix = -1;
   bool stats_gaps_columns = 0, stats_gaps_dist = 0, stats_simil_columns = 0,
     stats_simil_dist = 0, stats_seqs_ident = 0, stats_col_ident_gen = 0,
     stats_file_columns = 0, stats_file_dist = 0;
@@ -127,6 +128,19 @@ int main(int argc, char *argv[]){
       if(!similMatrix -> loadSimMatrix(matrix)) {
         cerr << endl << "ERROR: Similarity Matrix not loaded: \"" << matrix
           << "\" Check input file content." << endl << endl;
+        appearErrors = true;
+      }
+    }
+
+    /* Select alternative similarity matrices */
+    else if(!strcmp(argv[i], "--alternative_matrix") && (i+1 != argc) &&
+      (alternative_matrix == -1)) {
+      i++;
+      if (!strcmp(argv[i], "degenerated_nt_identity"))
+        alternative_matrix = 1;
+      else {
+        cerr << endl << "ERROR: Alternative not recognized \"" << argv[i]
+          << "\"" << endl << endl;
         appearErrors = true;
       }
     }
@@ -381,15 +395,23 @@ int main(int argc, char *argv[]){
   /* ***** ***** ***** ***** * Load Similarity Matrix ***** ***** ***** ***** */
   if(!appearErrors) {
     if((stats_simil_columns) || (stats_simil_dist)) {
-      /* Load predefined similarity matrix, if none has been set by the user */
-      if(matrix == NULL){
-        similMatrix = new similarityMatrix();
 
-        if((origAlig -> getTypeAlignment()) == AAType)
+      /* If any of the predefined matrices are going to be used, initialize it */
+      if (matrix == NULL) {
+        similMatrix = new similarityMatrix();
+        alignDataType = origAlig -> getTypeAlignment();
+
+        /* Load a default matrix or choose an alternative one */
+        if(alternative_matrix != -1)
+          similMatrix -> alternativeSimilarityMatrices(alternative_matrix, alignDataType);
+        else if(alignDataType == AAType)
           similMatrix -> defaultAASimMatrix();
-        else
+        else if((alignDataType == DNAType) || (alignDataType == RNAType))
           similMatrix -> defaultNTSimMatrix();
+        else if((alignDataType == DNADeg) || (alignDataType == RNADeg))
+          similMatrix -> defaultNTDegeneratedSimMatrix();
       }
+
       /* Assign similarity matrix, either predefined one or supply by the user,
        * to the alignment that is used to compute stats */
       if(!origAlig -> setSimilarityMatrix(similMatrix)) {
@@ -482,48 +504,53 @@ void show_menu(void) {
     << "Input file in several formats (clustal, fasta, nexus, phylip, etc)."
     << endl << endl;
 
-  cout << "    -compareset <inputfile>  "
+  cout << "    -compareset <inputfile>     "
     << "Input list of paths for the alignments to compare." << endl;
-  cout << "    -forceselect <inputfile> "
+  cout << "    -forceselect <inputfile>    "
     << "Force selection of a given file as reference for being compare with "
     << "others." << endl << endl;
 
-  cout << "    -matrix <inpufile>       "
+  cout << "    -matrix <inpufile>          "
     << "Input file for user-defined similarity matrix (default: Blosum62)."
-    << endl << endl;
+    << endl;
 
-  cout << "    -sgc                     "
+  cout << "    --alternative_matrix <name> "
+    << "Select an alternative similarity matrix already loaded. " << endl
+    << "                                "
+    << "Only available 'degenerated_nt_identity'" << endl << endl;
+
+  cout << "    -sgc                        "
     << "Print gap score per column from input alignment." << endl;
-  cout << "    -sgt                     "
+  cout << "    -sgt                        "
     << "Print accumulated gap scores distribution from input alignment."
     << endl << endl;
 
-  cout << "    -ssc                     "
+  cout << "    -ssc                        "
     << "Print similarity score per column from input alignment." << endl;
-  cout << "    -sst                     "
+  cout << "    -sst                        "
     << "Print accumulated similarity scores distribution for input alignment."
     << endl << endl;
 
-  cout << "    -sfc                     "
+  cout << "    -sfc                        "
     << "Print sum-of-pairs score per column for the selected alignment" << endl;
-  cout << "    -sft                     "
+  cout << "    -sft                        "
     << "Print accumulated sum-of-pairs scores distribution for the selected "
     << "alignment" << endl << endl;
 
-  cout << "    -sident                  "
+  cout << "    -sident                     "
     << "Print identity scores for sequences in the alignemnt." << endl;
-  cout << "    -scolidentt              "
+  cout << "    -scolidentt                 "
     << "Print general descriptive statistics for column identity scores from "
     << "input alignemnt." << endl << endl;
 
-  cout << "    -w <n>                   "
+  cout << "    -w <n>                      "
     << "(half) Window size, score of position i is the average of the window "
     << "(i - n) to (i + n)." << endl;
-  cout << "    -gw <n>                  "
+  cout << "    -gw <n>                     "
     << "(half) Window size only applies to statistics based on Gaps." << endl;
-  cout << "    -sw <n>                  "
+  cout << "    -sw <n>                     "
     << "(half) Window size only applies to statistics based on Similarity.\n";
-  cout << "    -cw <n>                  "
+  cout << "    -cw <n>                     "
     << "(half) Window size only applies to statistics based on Consistency."
     << endl << endl;
 }

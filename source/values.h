@@ -4,7 +4,7 @@
     trimAl v1.4: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    2009-2013 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
@@ -26,9 +26,49 @@
 
 #ifdef SIMMatrix
 
+/* Characters used for different alignments type */
+char listNTSym[6] = "ACGTU";
+
 char listAASym[21] = "ARNDCQEGHILKMFPSTWYV";
 
-char listNTSym[6] = "ACGTU";
+char listNTDegenerateSym[16] = "ACGTURYKMSWBDHV";
+
+/* Characters used to indicate indeterminations */
+char protein_wildcards[3] = "BX";
+
+/* Pyrrolysine:    'O' > 'TAG'  */
+/* Selenocysteine: 'U' > 'TGA'  */
+char protein_alternative_aminoacids[3] = "UO";
+
+/* Default Identity Matrix for Canonical Nucleotides */
+float defaultNTMatrix[5][5] = {
+  {1, 0, 0, 0, 0},
+  {0, 1, 0, 0, 0},
+  {0, 0, 1, 0, 0},
+  {0, 0, 0, 1, 0},
+  {0, 0, 0, 0, 1}
+};
+
+float defaultNTDegeneratedMatrix[15][15] = {
+/* A: adenosine (A)        C: cytidine   (C)            G: guanine (G)            T: thymidine  (T)           U: uridine    (U)
+ * R: purine    (G | A)    Y: pyrimidine (C | T/u)      K: keto    (G | T/u)      M: amino      (A | C)       S: strong     (G | C)
+ * W: weak      (A | T/u)  B: not A      (G | C | T/u)  D: not C   (G | A | T/u)  H: not G      (A | C | T/u) V: not T/u    (G | C | A) */
+  { 1.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,   0.0},
+  { 0.0,  1.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,   0.0},
+  { 0.0,  0.0,  1.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,   0.0},
+  { 0.0,  0.0,  0.0,  1.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,   0.0},
+  { 0.0,  0.0,  0.0,  0.0,  1.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,   0.0},
+  { 1/4., 0.0,  1/4., 0.0,  0.0,  1/4., 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,   0.0},
+  { 0.0,  1/4., 0.0,  1/4., 1/4., 0.0,  1/4., 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,   0.0},
+  { 0.0,  0.0,  1/4., 1/4., 1/4., 0.0,  0.0,  1/4., 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,   0.0},
+  { 1/4., 1/4., 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1/4., 0.0,  0.0,  0.0,  0.0,  0.0,   0.0},
+  { 0.0,  1/4., 1/4., 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1/4., 0.0,  0.0,  0.0,  0.0,   0.0},
+  { 1/4., 0.0,  0.0,  1/4., 1/4., 0.0,  0.0,  0.0,  0.0,  0.0,  1/4., 0.0,  0.0,  0.0,   0.0},
+  { 0.0,  1/6., 1/6., 1/6., 1/6., 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1/6., 0.0,  0.0,   0.0},
+  { 1/6., 0.0,  1/6., 1/6., 1/6., 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1/6., 0.0,   0.0},
+  { 1/6., 1/6., 0.0,  1/6., 1/6., 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1/6.,  0.0},
+  { 1/6., 1/6., 1/6., 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1/6.}
+};
 
 /* BLOSUM62 Similarity Matrix */
 float defaultAAMatrix[20][20] = {
@@ -54,19 +94,26 @@ float defaultAAMatrix[20][20] = {
   {  0, -3, -3, -3, -1, -2, -2, -3, -3,  3,  1, -2,  1, -1, -2, -2,  0, -3, -1,  4}
 };
 
-float defaultNTMatrix[5][5] = {
-  {1, 0, 0, 0, 0},
-  {0, 1, 0, 0, 0},
-  {0, 0, 1, 0, 0},
-  {0, 0, 0, 1, 0},
-  {0, 0, 0, 0, 1}
+
+/* Alternative matrixes */
+
+// Nucleotides
+float alternative_1_NTDegeneratedMatrix[15][15] = {
+  { 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+  { 0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+  { 0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+  { 0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+  { 0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+  { 0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+  { 0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0},
+  { 0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0},
+  { 0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0},
+  { 0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0},
+  { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0},
+  { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0},
+  { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0},
+  { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0},
+  { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1}
 };
-
-/* Characters used to indicate indeterminations */
-char protein_wildcards[3] = "BX";
-
-/* Pyrrolysine:    'O' > 'TAG'  */
-/* Selenocysteine: 'U' > 'TGA'  */
-char protein_alternative_aminoacids[3] = "UO";
 
 #endif

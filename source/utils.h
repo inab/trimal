@@ -7,7 +7,7 @@
     readAl v1.4: a tool for automated alignment conversion among different
                  formats.
 
-    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl/readAl.
@@ -199,6 +199,8 @@ class utils {
   static int checkTypeAlignment(int, int, string *);
 
   static int* readNumbers(string);
+
+  static int* readNumbers_StartEnd(string);
 
   static void quicksort(int **, int, int);
 

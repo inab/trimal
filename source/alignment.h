@@ -7,7 +7,7 @@
     readAl v1.4: a tool for automated alignment conversion among different
                  formats.
 
-    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl/readAl.
@@ -78,6 +78,9 @@ class alignment {
   bool reverse;
 
   bool terminalGapOnly;
+  int left_boundary;
+  int right_boundary;
+
 
   int iformat;
   int oformat;
@@ -113,8 +116,11 @@ class alignment {
   statisticsGaps *sgaps;
   statisticsConservation *scons;
 
-  /* Sequence Identities */
+  /* Sequences Identities */
   float **identities;
+
+  /* Sequences Overlaps */
+  float **overlaps;
 
   /* New Info */
   bool oldAlignment;
@@ -149,8 +155,9 @@ class alignment {
   alignment(void);
 
   alignment(string, string, string *, string *, string *, int, int, int, int,
-    bool, int, int, bool, bool, bool, bool, int, int, int *, int *, int *, int,
-     int, int, float **);
+    bool, int, int, bool, bool, int, int,
+    bool, bool, int, int, int *, int *, int *, int,
+     int, int, float **, float **);
 
   /* Overlap the operator = to use it as a constructor */
   alignment &operator=(const alignment &);
@@ -409,8 +416,6 @@ class alignment {
   /* ********** ******** ********** */
   int formatInputAlignment(char *);
 
-  int formatInputFile(void);
-
   int typeInputFile(void);
 
   bool loadPhylipAlignment(char *);
@@ -459,7 +464,7 @@ class alignment {
 
   void saveStatistics(similarityMatrix *, int, int);
 
-  void trimTerminalGaps(bool);
+  void trimTerminalGaps(bool, int *);
 
   void setWindowsSize(int, int);
 
@@ -483,6 +488,11 @@ class alignment {
 
   // New
   void calculateRelaxedSeqIdentity(void);
+
+  // New
+  void calculateSeqOverlap(void);
+
+  void printSeqOverlap(void);
 
   int selectMethod(void);
 
@@ -513,6 +523,8 @@ class alignment {
   void removeSmallerBlocks(int);
 
   bool removeOnlyTerminal(void);
+
+  bool removeOnlyTerminal(int, int);
 
   newValues removeCols_SeqsAllGaps(void);
 

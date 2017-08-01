@@ -7,7 +7,7 @@
     readAl v1.4: a tool for automated alignment conversion among different
                  formats.
 
-    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl/readAl.
@@ -583,7 +583,8 @@ int utils::checkTypeAlignment(int seqNumber, int residNumber, string *sequences)
     /* Looks at the 100 letters (excluding gaps) while doesn's get the sequence's end */
     /* When there are less than a 100 characters, break the loop before reaching that limit */
     residNumber = (int) sequences[i].size();
-    for(j = 0, k = 0, hitDNA = 0, hitRNA = 0, degenerate = 0; j < residNumber && k  < 100; j++)
+    //~ for(j = 0, k = 0, hitDNA = 0, hitRNA = 0, degenerate = 0; j < residNumber && k  < 100; j++)
+    for(j = 0, k = 0, hitDNA = 0, hitRNA = 0, degenerate = 0; j < residNumber; j++)
       if(sequences[i][j] != '-' && sequences[i][j] != '.' && sequences[i][j] != '?') {
         k++;
 
@@ -633,6 +634,28 @@ int utils::checkTypeAlignment(int seqNumber, int residNumber, string *sequences)
     return DNAType;
 }
 
+int* utils::readNumbers_StartEnd(string line) {
+
+  int comma, nElems = 0;
+  static int *numbers;
+
+ comma = -1;
+  while((comma = line.find(",", comma + 1)) != (int) string::npos)
+    nElems += 2;
+
+  //~ If there is more than two numbers separated by a comma, return NULL
+  if(nElems != 2)
+    return NULL;
+
+  numbers = new int[2];
+  comma = line.find(",", 0);
+  numbers[0] = atoi(line.substr(0, comma).c_str());
+  numbers[1] = atoi(line.substr(comma+1).c_str());
+
+  return numbers;
+}
+
+
 int* utils::readNumbers(string line) {
 
   int i, comma, separ, init, nElems = 0;
@@ -678,9 +701,12 @@ int* utils::readNumbers(string line) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    if(numbers[i-2] < 0) return NULL;
-    if(numbers[i-1] < numbers[i-2]) return NULL;
-    if(comma == (int) string::npos) break;
+    if(numbers[i-2] < 0)
+      return NULL;
+    if(numbers[i-1] < numbers[i-2])
+      return NULL;
+    if(comma == (int) string::npos)
+      break;
    /* ***** ***** ***** ***** ***** ***** ***** ***** */
   } while(true);
 

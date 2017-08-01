@@ -4,7 +4,7 @@
     trimAl v1.4: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    2009-2011 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
@@ -103,7 +103,7 @@ class statisticsConservation{
   bool isSimMatrixDef(void);
 
   /* Computes and selects the cut point values based on conservation's values. */
-  float calcCutPoint(float, float);
+  double calcCutPoint(float, float);
 
   /* Prints the conservation's value for each alignment's column. */
   void printConservationColumns(void);
