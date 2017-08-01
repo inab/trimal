@@ -822,7 +822,7 @@ Take in mind that an incompatibility is between two arguments, but only one meth
 */
 
 /**
-\fn bool trimAlManager::check_combinations_among_thresholds()
+\fn bool trimAlManager::check_combinations_among_thresholds_incompatibility()
 \brief As some thresholds are incompatible between them, we check their incompatibilities.
 
 \return \b False if dependencies check has passed\n \b True otherwise
