@@ -3278,8 +3278,8 @@ bool alignment::checkCorrespondence(string *names, int *lengths, int \
           if (!warnings)
             cerr << endl;
           warnings = true;
-          cerr << "WARNING: Sequence \"" << seqsName[i] << "\" will be cutted "
-            << "at position " << seqLength << " (length: "<< lengths[j] << ")"
+          cerr << "WARNING: Sequence \"" << seqsName[i] << "\" will be cut at "
+            << "position " << seqLength << " (length: "<< lengths[j] << ")"
             << endl;
           break;
         }

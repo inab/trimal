@@ -1420,7 +1420,7 @@ void alignment::alignmentPhylipToFile(ostream &file) {
   /* Check whether sequences in the alignment are aligned or not.
    * Warn about it if there are not aligned. */
   if (!isAligned) {
-    cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
+    cerr << endl << "ERROR: Sequences are not aligned. Format (PHYLIP) "
       << "not compatible with unaligned sequences." << endl << endl;
     return ;
   }
@@ -1471,7 +1471,7 @@ void alignment::alignmentPhylip3_2ToFile(ostream &file) {
   /* Check whether sequences in the alignment are aligned or not.
    * Warn about it if there are not aligned. */
   if (!isAligned) {
-    cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
+    cerr << endl << "ERROR: Sequences are not aligned. Format (PHYLIP) "
       << "not compatible with unaligned sequences." << endl << endl;
     return ;
   }
@@ -1528,7 +1528,7 @@ void alignment::alignmentPhylip_PamlToFile(ostream &file) {
   /* Check whether sequences in the alignment are aligned or not.
    * Warn about it if there are not aligned. */
   if (!isAligned) {
-    cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
+    cerr << endl << "ERROR: Sequences are not aligned. Format (PHYLIP) "
       << "not compatible with unaligned sequences." << endl << endl;
     return ;
   }
@@ -1572,7 +1572,7 @@ void alignment::alignmentClustalToFile(ostream &file) {
   /* Check whether sequences in the alignment are aligned or not.
    * Warn about it if there are not aligned. */
   if (!isAligned) {
-    cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
+    cerr << endl << "ERROR: Sequences are not aligned. Format (CLUSTAL) "
       << "not compatible with unaligned sequences." << endl << endl;
     return ;
   }
@@ -1638,8 +1638,8 @@ void alignment::alignmentFastaToFile(ostream &file) {
    if (shortNames && maxLongName > PHYLIPDISTANCE) {
     maxLongName = PHYLIPDISTANCE;
     if (keepHeader)
-      cerr << endl << "WARNING: Original sequence header will be cutted by "
-        << " 10 characters" << endl;
+      cerr << endl << "WARNING: Original sequence header will be cut by charac"
+        << "ter 10" << endl;
     }
   /* Print alignment. First, sequences name id and then the sequences itself */
   for(i = 0; i < sequenNumber; i++) {
@@ -1664,7 +1664,7 @@ void alignment::alignmentNexusToFile(ostream &file) {
   /* Check whether sequences in the alignment are aligned or not.
    * Warn about it if there are not aligned. */
   if (!isAligned) {
-    cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
+    cerr << endl << "ERROR: Sequences are not aligned. Format (NEXUS) "
       << "not compatible with unaligned sequences." << endl << endl;
     return ;
   }
@@ -1748,7 +1748,7 @@ void alignment::alignmentMegaToFile(ostream &file) {
   /* Check whether sequences in the alignment are aligned or not.
    * Warn about it if there are not aligned. */
   if (!isAligned) {
-    cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
+    cerr << endl << "ERROR: Sequences are not aligned. Format (MEGA) "
       << "not compatible with unaligned sequences." << endl << endl;
     return ;
   }
