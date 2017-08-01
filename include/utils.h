@@ -283,21 +283,22 @@ class utils {
  \param line Line to convert to array of ints
  \return Pointer to an array of numbers that contains line*/
   static int* readNumbers(string line);
+  static int* readNumbers_StartEnd(string line);
 
-  /** \brief Quicksort sorting method.
-   * \param vect The vector that we want to sort.
-   * \param ini The first element of the vector.
-   * \param fin The last element of the vector.
-   *
-   * This method sorts the vector using the quicksort method.
-   */
-  static void quicksort(int ** vect, int ini, int fin);
-  /** \brief Swaps pointers values
-   * \param a Pointer A
-   * \param b Pointer B
-   *
-   * This method swaps the values in a and b.
-   */
+/** \brief Quicksort sorting method.
+* \param vect The vector that we want to sort.
+* \param ini The first element of the vector.
+* \param fin The last element of the vector.
+*
+* This method sorts the vector using the quicksort method.
+*/
+static void quicksort(int ** vect, int ini, int fin);
+/** \brief Swaps pointers values
+* \param a Pointer A
+* \param b Pointer B
+*
+* This method swaps the values in a and b.
+*/
   static void swap(int ** a , int ** b);
 /**
  \brief Checks the color that has to be used on the output report
