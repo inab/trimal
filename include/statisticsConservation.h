@@ -5,6 +5,7 @@
                  phylogenetics analyses.
 
     2009-2015 Capella-Gutierrez S. and Gabaldon, T.
+
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
@@ -137,7 +138,9 @@ class statisticsConservation{
    \param baseLine Percentage of columns desired.
    \param conservationPct Percentage of conservation desired.
    */
+
   double calcCutPoint(float baseLine, float conservationPct);
+
 
   /** \brief Prints the conservation's value for each alignment's column. */
   void printConservationColumns(void);

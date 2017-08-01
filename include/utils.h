@@ -284,8 +284,6 @@ class utils {
  \return Pointer to an array of numbers that contains line*/
   static int* readNumbers(string line);
 
-  static int* readNumbers_StartEnd(string);
-
   /** \brief Quicksort sorting method.
    * \param vect The vector that we want to sort.
    * \param ini The first element of the vector.
@@ -307,7 +305,6 @@ class utils {
  \param column Column to which this residue belongs.
  \return Char that represents the color to be used.
  */
-
   static char determineColor(char res, string column);
 /**
  \brief Looks for a pattern

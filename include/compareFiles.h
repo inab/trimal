@@ -5,6 +5,7 @@
                  phylogenetics analyses.
 
     2009-2015 Capella-Gutierrez S. and Gabaldon, T.
+
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl
