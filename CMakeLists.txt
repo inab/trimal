@@ -71,7 +71,7 @@ macro(compare_outputs test_name program_a program_b arguments)
             -Dprogram_a=${program_a}
             -Dprogram_b=${program_b}
             -Dcommand=${arguments}
-            -P Scripts/compareOutput.cmake)
+            -P scripts/compareOutput.cmake)
 endmacro()
 
 # Create lists of variables and files for testing
@@ -79,7 +79,7 @@ FILE(GLOB files
         dataset/*clw
         dataset/*phy
        dataset/*msl
-       dataset/*fa
+       dataset/*fa*
        dataset/*pir
        dataset/*phy2
         )
