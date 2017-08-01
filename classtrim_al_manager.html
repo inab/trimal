@@ -20,6 +20,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="theee.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -92,20 +93,12 @@ $(document).ready(function(){initNavTree('classtrim_al_manager.html','');});
 
 <p>Main class of Trimal: It parses arguments and performs the algorithm requested on them.  
  <a href="classtrim_al_manager.html#details">More...</a></p>
-<div class="dynheader">
-Collaboration diagram for trimAlManager:</div>
-<div class="dyncontent">
-<div class="center"><img src="classtrim_al_manager__coll__graph.png" border="0" usemap="#trim_al_manager_coll__map" alt="Collaboration graph"/></div>
-<map name="trim_al_manager_coll__map" id="trim_al_manager_coll__map">
-<area shape="rect" id="node2" href="classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="900,571,1004,597"/>
-<area shape="rect" id="node6" href="classsequences_matrix.html" title="sequencesMatrix" alt="" coords="1174,341,1295,368"/>
-<area shape="rect" id="node13" href="class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="1201,716,1268,743"/>
-<area shape="rect" id="node15" href="class_statistics_manager.html" title="StatisticsManager" alt="" coords="1171,519,1298,545"/>
-<area shape="rect" id="node4" href="classstatistics_gaps.html" title="statisticsGaps" alt="" coords="375,503,481,529"/>
-<area shape="rect" id="node9" href="classstatistics_conservation.html" title="statisticsConservation" alt="" coords="537,632,689,659"/>
-<area shape="rect" id="node12" href="classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="240,849,351,876"/>
-<area shape="rect" id="node19" href="class_read_write_m_s.html" title="Class that handles the load and save functions of an alignment. " alt="" coords="900,985,1004,1012"/>
-</map>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for trimAlManager:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classtrim_al_manager__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -268,8 +261,8 @@ Take in mind that an incompatibility is between two arguments, but only one meth
 <tr class="memitem:ga3563c4066ac0340d27cc72508bf8949b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___check_incompatibilities.html#ga3563c4066ac0340d27cc72508bf8949b">check_codon_behaviour_incompatibility</a> ()</td></tr>
 <tr class="memdesc:ga3563c4066ac0340d27cc72508bf8949b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to check incompatibilities related to how the algorithm should treat stop codons.  <a href="group___check_incompatibilities.html#ga3563c4066ac0340d27cc72508bf8949b">More...</a><br /></td></tr>
 <tr class="separator:ga3563c4066ac0340d27cc72508bf8949b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa96711af8011305f73b3caee46ae0fd8"><td class="memItemLeft" align="right" valign="top">
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>check_combinations_among_thresholds_incompatibility</b> ()</td></tr>
+<tr class="memitem:gaa96711af8011305f73b3caee46ae0fd8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___check_incompatibilities.html#gaa96711af8011305f73b3caee46ae0fd8">check_combinations_among_thresholds_incompatibility</a> ()</td></tr>
+<tr class="memdesc:gaa96711af8011305f73b3caee46ae0fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">As some thresholds are incompatible between them, we check their incompatibilities.  <a href="group___check_incompatibilities.html#gaa96711af8011305f73b3caee46ae0fd8">More...</a><br /></td></tr>
 <tr class="separator:gaa96711af8011305f73b3caee46ae0fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga27f1472f092b9c3a33a779ef538d11e1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___check_incompatibilities.html#ga27f1472f092b9c3a33a779ef538d11e1">check_automated_manual_incompatibilities</a> ()</td></tr>
 <tr class="memdesc:ga27f1472f092b9c3a33a779ef538d11e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if only one method, either automatic or manual has been asked.  <a href="group___check_incompatibilities.html#ga27f1472f092b9c3a33a779ef538d11e1">More...</a><br /></td></tr>

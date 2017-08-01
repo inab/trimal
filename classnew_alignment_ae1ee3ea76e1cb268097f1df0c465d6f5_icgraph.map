@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classnew_alignment.html#ad916722e4ee892ee9f5cf85f0bdb80aa" title="Method that calculates the columns identity value. &#160;This is, the frequency of the most present elemen..." alt="" coords="285,5,511,32"/>
+<area shape="rect" id="node4" href="$classnew_alignment.html#ad50ba126247276cd0bf89119e439c483" title="Method to check if the CDS file is correct. &#160;Based on nature of residues: DNA/RNA (Most of the residu..." alt="" coords="271,56,525,83"/>
+<area shape="rect" id="node3" href="$classnew_alignment.html#aa22c770103d0fce45cfb1840aab85888" title="Method to print Indentity stats: Min, Max, Avg and Std." alt="" coords="573,5,909,32"/>
+</map>

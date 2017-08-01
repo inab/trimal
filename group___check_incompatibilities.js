@@ -5,6 +5,7 @@ var group___check_incompatibilities =
     [ "check_automated_methods_incompatibilities", "group___check_incompatibilities.html#ga240651e152a2258badf642ed10a982f1", null ],
     [ "check_clusters_incompatibilities", "group___check_incompatibilities.html#ga197d0ef570aee1edc074b19f4134060e", null ],
     [ "check_codon_behaviour_incompatibility", "group___check_incompatibilities.html#ga3563c4066ac0340d27cc72508bf8949b", null ],
+    [ "check_combinations_among_thresholds_incompatibility", "group___check_incompatibilities.html#gaa96711af8011305f73b3caee46ae0fd8", null ],
     [ "check_inFile_incompatibilities", "group___check_incompatibilities.html#ga603ce4f4aefaf60dc1d8db83490d44ac", null ],
     [ "check_max_identity_incompatibilities", "group___check_incompatibilities.html#gab5b035ec7491b19958cf6f2e222e4b01", null ],
     [ "check_select_cols_and_seqs_incompatibilities", "group___check_incompatibilities.html#ga0e099828be74d3ca0068b951d6578407", null ],

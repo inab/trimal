@@ -1,0 +1,5 @@
+<map id="PirState::LoadAlignment" name="PirState::LoadAlignment">
+<area shape="rect" id="node2" href="$classutils.html#a10b232376c181f8206a39b3939ca2e6c" title="Check if a given file exists and its size is greater than 0. " alt="" coords="248,5,359,32"/>
+<area shape="rect" id="node3" href="$classutils.html#a13d5a7b906ab9eb4cc23939748c31c72" title="Read a new line from current input stream. This function is better than standard one since cares of o..." alt="" coords="252,56,355,83"/>
+<area shape="rect" id="node4" href="$classnew_alignment.html#acbeb320f0f70222f81a906ccfc33a016" title="Method to intialize data that has been modified on the alignment. The method checks if the sequences ..." alt="" coords="216,107,391,133"/>
+</map>

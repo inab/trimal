@@ -21,6 +21,7 @@ var searchData=
   ['check_5fcoding_5fsequences_5ftype',['check_coding_sequences_type',['../group___check_needs.html#gad3e1ebff95c17424f4159e9adb8548ae',1,'trimAlManager']]],
   ['check_5fcodon_5fbehaviour_5fincompatibility',['check_codon_behaviour_incompatibility',['../group___check_incompatibilities.html#ga3563c4066ac0340d27cc72508bf8949b',1,'trimAlManager']]],
   ['check_5fcol_5fnumbering',['check_col_numbering',['../group___check_needs.html#gab06dfadf8538ec6782a704b11e6d150a',1,'trimAlManager']]],
+  ['check_5fcombinations_5famong_5fthresholds_5fincompatibility',['check_combinations_among_thresholds_incompatibility',['../group___check_incompatibilities.html#gaa96711af8011305f73b3caee46ae0fd8',1,'trimAlManager']]],
   ['check_5fcw_5fargument',['check_cw_argument',['../group___check_needs.html#gab6f9f8b433a4c6fedbb4c094ae9003c7',1,'trimAlManager']]],
   ['check_5ffile_5faligned',['check_file_aligned',['../group___check_needs.html#ga3beec34d7074f4a67ccaf4e8bb875122',1,'trimAlManager']]],
   ['check_5fforce_5fselection',['check_force_selection',['../group___check_needs.html#gabb94df3621dbe1859675bb385d3d5b7d',1,'trimAlManager']]],

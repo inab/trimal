@@ -1,0 +1,10 @@
+<map id="utils::getReverse" name="utils::getReverse">
+<area shape="rect" id="node2" href="$class_clustal_state.html#a4b4e7bee3b140e757b330388a0e919f4" title="Function to save to a file in the current format an alignment object. " alt="" coords="187,5,377,32"/>
+<area shape="rect" id="node3" href="$class_fasta_state.html#a9ec84659fc383ba210aee3175d4d41be" title="Function to save to a file in the current format an alignment object. " alt="" coords="191,56,373,83"/>
+<area shape="rect" id="node4" href="$class_mega_sequential_state.html#adf3a27330a1031284c2e42e28f8ebca4" title="Function to save to a file in the current format an alignment object. " alt="" coords="209,107,355,149"/>
+<area shape="rect" id="node5" href="$class_nexus_state.html#abe48c78f0bb65358e863b58e6f76e78b" title="Function to save to a file in the current format an alignment object. " alt="" coords="189,173,375,200"/>
+<area shape="rect" id="node6" href="$class_phylip32_state.html#a33419a86eba4bbfcfa5ab519fd6823d9" title="Function to save to a file in the current format an alignment object. " alt="" coords="183,224,381,251"/>
+<area shape="rect" id="node7" href="$class_phylip40_state.html#a479bbbbc1e6a5b4612f05788d14a3f10" title="Function to save to a file in the current format an alignment object. " alt="" coords="183,275,381,301"/>
+<area shape="rect" id="node8" href="$class_phylip_paml_state.html#aec323d8cd757a8f38ea63587dc71b2cc" title="Function to save to a file in the current format an alignment object. " alt="" coords="175,325,389,352"/>
+<area shape="rect" id="node9" href="$class_pir_state.html#ab94b1ba368d97e5a25a7e0a229c50601" title="Function to save to a file in the current format an alignment object. " alt="" coords="199,376,365,403"/>
+</map>

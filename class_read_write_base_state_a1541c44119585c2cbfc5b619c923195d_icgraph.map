@@ -1,0 +1,11 @@
+<map id="ReadWriteBaseState::RecognizeOutputFormat" name="ReadWriteBaseState::RecognizeOutputFormat">
+<area shape="rect" id="node2" href="$class_clustal_state.html#a1c8be1fdbc1c9bb3cedccc4b17de5613" title="Function that recognizes acronyms of the format. " alt="" coords="225,5,428,47"/>
+<area shape="rect" id="node3" href="$class_fasta_state.html#a419cc017e79962835d59c8f50992fb7d" title="Function that recognizes acronyms of the format. " alt="" coords="229,71,424,112"/>
+<area shape="rect" id="node4" href="$class_h_t_m_l_state.html#a8ac5c2a30000cc57412daf746eb9b60f" title="Function that recognizes acronyms of the format. " alt="" coords="227,136,426,177"/>
+<area shape="rect" id="node5" href="$class_mega_sequential_state.html#ace897267bc2a02d784eba8aed4c17296" title="Function that recognizes acronyms of the format. " alt="" coords="241,201,413,243"/>
+<area shape="rect" id="node6" href="$class_nexus_state.html#a0a81b77c2f4c349be6fc3bc8e98eb9c2" title="Function that recognizes acronyms of the format. " alt="" coords="227,267,427,308"/>
+<area shape="rect" id="node7" href="$class_phylip32_state.html#a7382d60068069deb0567f0f66e600384" title="Function that recognizes acronyms of the format. " alt="" coords="240,332,413,373"/>
+<area shape="rect" id="node8" href="$class_phylip40_state.html#a3a2f937ab91b2ef45b1a6db1d1b43d8a" title="Function that recognizes acronyms of the format. " alt="" coords="240,397,413,439"/>
+<area shape="rect" id="node9" href="$class_phylip_paml_state.html#a133ec008e1965e1b7e2408987a85cc51" title="Function that recognizes acronyms of the format. " alt="" coords="232,463,421,504"/>
+<area shape="rect" id="node10" href="$class_pir_state.html#a9e9b8c825066e770c3e08c4ccb589027" title="Function that recognizes acronyms of the format. " alt="" coords="237,528,416,569"/>
+</map>
