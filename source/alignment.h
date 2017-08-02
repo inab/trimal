@@ -43,14 +43,8 @@
 #include "sequencesMatrix.h"
 #include "statisticsConservation.h"
 #include "similarityMatrix.h"
+#include "defines.h"
 #include "utils.h"
-
-#define SINGLE  1
-#define MULTI   2
-
-#define DNAType 1
-#define RNAType 2
-#define AAType  3
 
 using namespace std;
 

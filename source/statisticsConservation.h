@@ -33,11 +33,8 @@
 
 #include "similarityMatrix.h"
 #include "statisticsGaps.h"
+#include "defines.h"
 #include "utils.h"
-
-#define DNAType 1
-#define RNAType 2
-#define AAType  3
 
 using namespace std;
 

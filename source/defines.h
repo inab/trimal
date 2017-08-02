@@ -40,6 +40,9 @@
 #define DNADeg  4
 #define RNADeg  5
 
+#define SINGLE  1
+#define MULTI   2
+
 #define GAPPYOUT 1
 #define STRICT   2
 

@@ -30,10 +30,7 @@
 #include <iomanip>
 
 #include "utils.h"
-
-#define DNAType 1
-#define RNAType 2
-#define AAType  3
+#include "defines.h"
 
 using namespace std;
 

@@ -60,7 +60,7 @@ int main(int argc, char *argv[]){
   string nline, *seqNames = NULL;
   sequencesMatrix *seqMatrix = NULL;
   similarityMatrix *similMatrix = NULL;
-  alignment *origAlig = NULL, *singleAlig = NULL, *backtranslation = NULL;
+  alignment *origAlig = NULL, *intermediateAlig = NULL, *singleAlig = NULL, *backtranslation = NULL;
 
   int i = 1, lng, num = 0, maxAminos = 0, numfiles = 0, referFile = 0, *delColumns = NULL, *delSequences = NULL, *seqLengths = NULL, *boundaries = NULL;
   char c, *forceFile = NULL, *infile = NULL, *backtransFile = NULL, *outfile = NULL, *outhtml = NULL, *matrix = NULL,
@@ -1639,8 +1639,10 @@ int main(int argc, char *argv[]){
 
   /* -------------------------------------------------------------------- */
   if((resOverlap != -1) && (seqOverlap != -1)) {
-    singleAlig = origAlig -> cleanSpuriousSeq(resOverlap, (seqOverlap/100), complementary);
-    singleAlig = singleAlig -> cleanNoAllGaps(false);
+    intermediateAlig = origAlig -> cleanSpuriousSeq(resOverlap, (seqOverlap/100), complementary);
+    singleAlig = intermediateAlig -> cleanNoAllGaps(false);
+    
+    delete intermediateAlig;
   }
   /* -------------------------------------------------------------------- */
 
@@ -1681,8 +1683,10 @@ int main(int argc, char *argv[]){
         appearErrors = true;
       }
       else {
-        singleAlig = origAlig -> removeSequences(delSequences, 1, num, complementary);
-        singleAlig = singleAlig -> cleanNoAllGaps(false);
+        intermediateAlig = origAlig -> removeSequences(delSequences, 1, num, complementary);
+        singleAlig = intermediateAlig -> cleanNoAllGaps(false);
+        
+        delete intermediateAlig;
       }
     }
     /* -------------------------------------------------------------------- */
@@ -1691,16 +1695,20 @@ int main(int argc, char *argv[]){
 
   /* -------------------------------------------------------------------- */
   if(maxIdentity != -1) {
-    singleAlig = origAlig -> getClustering(maxIdentity);
-  singleAlig = singleAlig -> cleanNoAllGaps(false);
+    intermediateAlig = origAlig -> getClustering(maxIdentity);
+    singleAlig = intermediateAlig -> cleanNoAllGaps(false);
+    
+    delete intermediateAlig;  
   }
   else if(clusters != -1) {
   if(clusters > origAlig -> getNumSpecies()) {
         cerr << endl << "ERROR:The number of clusters from the alignment can not be larger than the number of sequences from that alignment." << endl << endl;
         appearErrors = true;
     } else {
-    singleAlig = origAlig -> getClustering(origAlig -> getCutPointClusters(clusters));
-    singleAlig = singleAlig -> cleanNoAllGaps(false);
+    intermediateAlig = origAlig -> getClustering(origAlig -> getCutPointClusters(clusters));
+    singleAlig = intermediateAlig -> cleanNoAllGaps(false);
+    
+    delete intermediateAlig;
   }
   }
   /* -------------------------------------------------------------------- */
@@ -1753,6 +1761,7 @@ int main(int argc, char *argv[]){
   /* -------------------------------------------------------------------- */
   delete singleAlig;
   delete origAlig;
+    
   delete[] compAlig;
 
   delete similMatrix;
