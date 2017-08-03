@@ -7,7 +7,8 @@ var NAVTREE =
       [ "Publications", "index.html#publication_sec", null ],
       [ "Usage", "index.html#usage_sec", null ],
       [ "Citing this tool", "index.html#citation_sec", null ],
-      [ "Understanding the code", "index.html#trimAl_code_sec", null ]
+      [ "Understanding the code", "index.html#trimAl_code_sec", null ],
+      [ "Acknowledgments", "index.html#Acknowledgments", null ]
     ] ],
     [ "readAl Main Page", "readal_pag.html", null ],
     [ "Todo List", "todo.html", null ],
