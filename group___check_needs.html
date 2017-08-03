@@ -1,11 +1,11 @@
+<!-- HTML header for doxygen 1.8.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>trimAl: CheckNeeds</title>
+<title>Trimal: CheckNeeds</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,19 +20,23 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="theee.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
-<table cellspacing="0" cellpadding="0">
+<table cellspacing="0" cellpadding="0" width=100%>
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">trimAl
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Trimal
    </div>
-   <div id="projectbrief">Tool for automating removal of spurious sequences or poorly aligned regions from a multiple sequence alignment</div>
   </td>
+  <!--<td style="float:right;margin-top:18px;vertical-align:bottom">
+     <a href="http://assimilationsystems.com/download/">
+       <img src="http://assimilationsystems.com/wp-content/uploads/2015/03/Download-Doxygen.png" style="float:right;" height="20" width="73">
+     </a>
+  </td>-->
  </tr>
  </tbody>
 </table>
@@ -87,12 +91,13 @@ $(document).ready(function(){initNavTree('group___check_needs.html','');});
 <div class="title">CheckNeeds<div class="ingroups"><a class="el" href="group___trimal_parsing_arguments.html">TrimalParsingArguments</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
-<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for CheckNeeds:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<center><table><tr><td><div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs.svg" width="323" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="dynheader">
+Collaboration diagram for CheckNeeds:</div>
+<div class="dyncontent">
+<center><table><tr><td><img src="group___check_needs.png" border="0" alt="" usemap="#group______check__needs"/>
+<map name="group______check__needs" id="group______check__needs">
+<area shape="rect" id="node1" href="group___trimal_parsing_arguments.html" title="TrimalParsingArguments" alt="" coords="5,5,171,32"/>
+</map>
 </td></tr></table></center>
 </div>
 <table class="memberdecls">
@@ -188,12 +193,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
  <b>True</b> otherwise </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01480">1480</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_ga55f0bbc922fb6854118da00a5bfa0c1b_icgraph.svg" width="624" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_ga55f0bbc922fb6854118da00a5bfa0c1b_icgraph.png" border="0" usemap="#group___check_needs_ga55f0bbc922fb6854118da00a5bfa0c1b_icgraph" alt=""/></div>
+<map name="group___check_needs_ga55f0bbc922fb6854118da00a5bfa0c1b_icgraph" id="group___check_needs_ga55f0bbc922fb6854118da00a5bfa0c1b_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="261,5,411,47"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="459,5,619,47"/>
+</map>
 </div>
 
 </div>
@@ -234,20 +241,47 @@ Take in mind that dependencies may be between multiple arguments, so, if there i
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01091">1091</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01092">1092</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_ga3f325b806727751394adb829d97b35f1_cgraph.png" border="0" usemap="#group___check_needs_ga3f325b806727751394adb829d97b35f1_cgraph" alt=""/></div>
+<map name="group___check_needs_ga3f325b806727751394adb829d97b35f1_cgraph" id="group___check_needs_ga3f325b806727751394adb829d97b35f1_cgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#gabb94df3621dbe1859675bb385d3d5b7d" title="Method to check dependency of force select argument. " alt="" coords="247,5,397,47"/>
+<area shape="rect" id="node3" href="group___check_needs.html#ga640fb579367d6ea2e45265cacf57a3ef" title="Method to check dependency between custom coding sequence file and infile arguments. " alt="" coords="243,71,401,127"/>
+<area shape="rect" id="node4" href="group___check_needs.html#ga3beec34d7074f4a67ccaf4e8bb875122" title="Method to check if an alignment needs to be aligned depending on the methods that have been asked to ..." alt="" coords="247,152,397,193"/>
+<area shape="rect" id="node5" href="group___check_needs.html#gaf66e0cf7f3819c3481c22067b8eb78d4" title="Method to check if given a similarity matrix, there is a need to use it. " alt="" coords="247,217,397,259"/>
+<area shape="rect" id="node6" href="group___check_needs.html#gabbaa9a8505b45e825e55d6d163878d06" title="Method to check if both output patterns (alignment output and html report output) are the same..." alt="" coords="247,283,397,324"/>
+<area shape="rect" id="node7" href="group___check_needs.html#gab06dfadf8538ec6782a704b11e6d150a" title="Method to check if column numbering makes sense based on the functionality asked. ..." alt="" coords="247,348,397,389"/>
+<area shape="rect" id="node8" href="group___check_needs.html#gab8cd1b2685c225bec9421f055536d853" title="Method to check if both of them (residue overlap and sequence overlap) have been defined by the user ..." alt="" coords="241,414,403,470"/>
+<area shape="rect" id="node9" href="group___check_needs.html#ga1715764c1434c79458e9d09d99cb2d84" title="Method to check if, being asked to give an HTML report, it makes logic, depending on the functionalit..." alt="" coords="247,495,397,536"/>
+<area shape="rect" id="node10" href="group___check_needs.html#ga4783de3644b5e5c6cb7f611f835c5ac2" title="Method to check if there is an output file to allow statistics to be given on terminal. " alt="" coords="232,560,412,601"/>
+<area shape="rect" id="node11" href="group___check_incompatibilities.html#ga27f1472f092b9c3a33a779ef538d11e1" title="Check if only one method, either automatic or manual has been asked. " alt="" coords="203,625,441,667"/>
+<area shape="rect" id="node12" href="group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation..." alt="" coords="233,691,411,732"/>
+<area shape="rect" id="node20" href="group___check_needs.html#ga1b39cb8f30d914ee709305bf9fc12a2a" title="Method to check if the block size is bigger than allowed depending on size of alignment. " alt="" coords="247,756,397,797"/>
+<area shape="rect" id="node21" href="group___check_needs.html#gac2c6938833505b9ded4c84636dee2663" title="Method to check backtranslation needs. " alt="" coords="247,821,397,863"/>
+<area shape="rect" id="node22" href="group___check_needs.html#gad3e1ebff95c17424f4159e9adb8548ae" title="Method to check the type of sequences present in the backtranslationAlig. " alt="" coords="237,887,407,928"/>
+<area shape="rect" id="node23" href="group___check_needs.html#ga55f0bbc922fb6854118da00a5bfa0c1b" title="Method to check and prepare the coding sequence. " alt="" coords="218,952,426,993"/>
+<area shape="rect" id="node24" href="group___check_needs.html#gad96c97918919040f8986ba8c26a1f728" title="Method to check if the origAlig and backtranslationAlig are compatible in names to make the backtrans..." alt="" coords="247,1018,397,1074"/>
+<area shape="rect" id="node25" href="group___check_needs.html#gab6f9f8b433a4c6fedbb4c094ae9003c7" title="Method to check and warn if windowsize and compareset has been given. " alt="" coords="247,1099,397,1140"/>
+<area shape="rect" id="node26" href="group___check_needs.html#gaf7c3b97a17c2f5750f9481cc60c17616" title="Method to check if an output format has been given. If no output format has been given, it will use the inFile format. " alt="" coords="247,1164,397,1205"/>
+<area shape="rect" id="node13" href="class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf" title="Function that creates an alignment from a filepath. It automatically detects the format of the file..." alt="" coords="505,622,699,649"/>
+<area shape="rect" id="node15" href="classcompare_files.html#a869e1029b22f477bb3ed2a700af64956" title="Method to compare a set of alignments to select the most consistent one respect the others..." alt="" coords="521,673,683,699"/>
+<area shape="rect" id="node17" href="classcompare_files.html#aad9a46ed0c7ed28f7095ca3aeb5b651b" title="Applies a new window to the alignment. " alt="" coords="509,774,695,801"/>
+<area shape="rect" id="node19" href="classcompare_files.html#acc8e14082afd80b0cf65a4c4d41549ea" title="Method to obtain the consistency values vector for a given alignment against a set of alignments with..." alt="" coords="499,723,705,750"/>
+<area shape="rect" id="node14" href="class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="763,615,908,656"/>
+<area shape="rect" id="node16" href="classutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization. " alt="" coords="785,702,886,729"/>
+<area shape="rect" id="node18" href="classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="781,774,890,801"/>
+<area shape="rect" id="node27" href="class_read_write_m_s.html#a17eaedaed097a21dbe028d129560de9b" title="Function to obtain the format name of a given file. " alt="" coords="489,1171,715,1198"/>
+</map>
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="group___check_needs_ga3f325b806727751394adb829d97b35f1_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_ga3f325b806727751394adb829d97b35f1_icgraph.svg" width="368" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_ga3f325b806727751394adb829d97b35f1_icgraph.png" border="0" usemap="#group___check_needs_ga3f325b806727751394adb829d97b35f1_icgraph" alt=""/></div>
+<map name="group___check_needs_ga3f325b806727751394adb829d97b35f1_icgraph" id="group___check_needs_ga3f325b806727751394adb829d97b35f1_icgraph">
+<area shape="rect" id="node2" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="203,5,363,47"/>
+</map>
 </div>
 
 </div>
@@ -280,12 +314,14 @@ Take in mind that dependencies may be between multiple arguments, so, if there i
  <b>True</b> otherwise </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01492">1492</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_gad96c97918919040f8986ba8c26a1f728_icgraph.svg" width="567" height="67"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_gad96c97918919040f8986ba8c26a1f728_icgraph.png" border="0" usemap="#group___check_needs_gad96c97918919040f8986ba8c26a1f728_icgraph" alt=""/></div>
+<map name="group___check_needs_gad96c97918919040f8986ba8c26a1f728_icgraph" id="group___check_needs_gad96c97918919040f8986ba8c26a1f728_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="204,13,353,54"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="401,13,561,54"/>
+</map>
 </div>
 
 </div>
@@ -317,13 +353,15 @@ Take in mind that dependencies may be between multiple arguments, so, if there i
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01438">1438</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_gac2c6938833505b9ded4c84636dee2663_icgraph.svg" width="566" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01439">1439</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_gac2c6938833505b9ded4c84636dee2663_icgraph.png" border="0" usemap="#group___check_needs_gac2c6938833505b9ded4c84636dee2663_icgraph" alt=""/></div>
+<map name="group___check_needs_gac2c6938833505b9ded4c84636dee2663_icgraph" id="group___check_needs_gac2c6938833505b9ded4c84636dee2663_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="203,5,352,47"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="400,5,560,47"/>
+</map>
 </div>
 
 </div>
@@ -355,13 +393,15 @@ Take in mind that dependencies may be between multiple arguments, so, if there i
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01427">1427</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_ga1b39cb8f30d914ee709305bf9fc12a2a_icgraph.svg" width="566" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01428">1428</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_ga1b39cb8f30d914ee709305bf9fc12a2a_icgraph.png" border="0" usemap="#group___check_needs_ga1b39cb8f30d914ee709305bf9fc12a2a_icgraph" alt=""/></div>
+<map name="group___check_needs_ga1b39cb8f30d914ee709305bf9fc12a2a_icgraph" id="group___check_needs_ga1b39cb8f30d914ee709305bf9fc12a2a_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="203,5,352,47"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="400,5,560,47"/>
+</map>
 </div>
 
 </div>
@@ -393,13 +433,15 @@ Take in mind that dependencies may be between multiple arguments, so, if there i
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01467">1467</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_gad3e1ebff95c17424f4159e9adb8548ae_icgraph.svg" width="586" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01468">1468</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_gad3e1ebff95c17424f4159e9adb8548ae_icgraph.png" border="0" usemap="#group___check_needs_gad3e1ebff95c17424f4159e9adb8548ae_icgraph" alt=""/></div>
+<map name="group___check_needs_gad3e1ebff95c17424f4159e9adb8548ae_icgraph" id="group___check_needs_gad3e1ebff95c17424f4159e9adb8548ae_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="223,5,372,47"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="420,5,580,47"/>
+</map>
 </div>
 
 </div>
@@ -431,13 +473,15 @@ Take in mind that dependencies may be between multiple arguments, so, if there i
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01252">1252</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_gab06dfadf8538ec6782a704b11e6d150a_icgraph.svg" width="566" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01253">1253</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_gab06dfadf8538ec6782a704b11e6d150a_icgraph.png" border="0" usemap="#group___check_needs_gab06dfadf8538ec6782a704b11e6d150a_icgraph" alt=""/></div>
+<map name="group___check_needs_gab06dfadf8538ec6782a704b11e6d150a_icgraph" id="group___check_needs_gab06dfadf8538ec6782a704b11e6d150a_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="203,5,352,47"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="400,5,560,47"/>
+</map>
 </div>
 
 </div>
@@ -469,13 +513,15 @@ Take in mind that dependencies may be between multiple arguments, so, if there i
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01196">1196</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_ga3beec34d7074f4a67ccaf4e8bb875122_icgraph.svg" width="566" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01197">1197</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_ga3beec34d7074f4a67ccaf4e8bb875122_icgraph.png" border="0" usemap="#group___check_needs_ga3beec34d7074f4a67ccaf4e8bb875122_icgraph" alt=""/></div>
+<map name="group___check_needs_ga3beec34d7074f4a67ccaf4e8bb875122_icgraph" id="group___check_needs_ga3beec34d7074f4a67ccaf4e8bb875122_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="203,5,352,47"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="400,5,560,47"/>
+</map>
 </div>
 
 </div>
@@ -507,13 +553,15 @@ Take in mind that dependencies may be between multiple arguments, so, if there i
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01167">1167</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_gabb94df3621dbe1859675bb385d3d5b7d_icgraph.svg" width="566" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01168">1168</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_gabb94df3621dbe1859675bb385d3d5b7d_icgraph.png" border="0" usemap="#group___check_needs_gabb94df3621dbe1859675bb385d3d5b7d_icgraph" alt=""/></div>
+<map name="group___check_needs_gabb94df3621dbe1859675bb385d3d5b7d_icgraph" id="group___check_needs_gabb94df3621dbe1859675bb385d3d5b7d_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="203,5,352,47"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="400,5,560,47"/>
+</map>
 </div>
 
 </div>
@@ -545,13 +593,15 @@ Take in mind that dependencies may be between multiple arguments, so, if there i
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01289">1289</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-11-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_ga1715764c1434c79458e9d09d99cb2d84_icgraph.svg" width="566" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01290">1290</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_ga1715764c1434c79458e9d09d99cb2d84_icgraph.png" border="0" usemap="#group___check_needs_ga1715764c1434c79458e9d09d99cb2d84_icgraph" alt=""/></div>
+<map name="group___check_needs_ga1715764c1434c79458e9d09d99cb2d84_icgraph" id="group___check_needs_ga1715764c1434c79458e9d09d99cb2d84_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="203,5,352,47"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="400,5,560,47"/>
+</map>
 </div>
 
 </div>
@@ -583,13 +633,15 @@ Take in mind that dependencies may be between multiple arguments, so, if there i
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01182">1182</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-12-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_ga640fb579367d6ea2e45265cacf57a3ef_icgraph.svg" width="574" height="67"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01183">1183</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_ga640fb579367d6ea2e45265cacf57a3ef_icgraph.png" border="0" usemap="#group___check_needs_ga640fb579367d6ea2e45265cacf57a3ef_icgraph" alt=""/></div>
+<map name="group___check_needs_ga640fb579367d6ea2e45265cacf57a3ef_icgraph" id="group___check_needs_ga640fb579367d6ea2e45265cacf57a3ef_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="211,13,360,54"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="408,13,568,54"/>
+</map>
 </div>
 
 </div>
@@ -629,20 +681,29 @@ It also perform some calculations needed on comparfiles behaviour. </p>
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01327">1327</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01328">1328</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_ga7cab8308b05c5921e61217f9c93fab27_cgraph.png" border="0" usemap="#group___check_needs_ga7cab8308b05c5921e61217f9c93fab27_cgraph" alt=""/></div>
+<map name="group___check_needs_ga7cab8308b05c5921e61217f9c93fab27_cgraph" id="group___check_needs_ga7cab8308b05c5921e61217f9c93fab27_cgraph">
+<area shape="rect" id="node2" href="class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf" title="Function that creates an alignment from a filepath. It automatically detects the format of the file..." alt="" coords="238,13,433,39"/>
+<area shape="rect" id="node4" href="classcompare_files.html#a869e1029b22f477bb3ed2a700af64956" title="Method to compare a set of alignments to select the most consistent one respect the others..." alt="" coords="255,63,416,90"/>
+<area shape="rect" id="node6" href="classcompare_files.html#aad9a46ed0c7ed28f7095ca3aeb5b651b" title="Applies a new window to the alignment. " alt="" coords="242,165,429,191"/>
+<area shape="rect" id="node8" href="classcompare_files.html#acc8e14082afd80b0cf65a4c4d41549ea" title="Method to obtain the consistency values vector for a given alignment against a set of alignments with..." alt="" coords="232,114,439,141"/>
+<area shape="rect" id="node3" href="class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="487,5,632,47"/>
+<area shape="rect" id="node5" href="classutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization. " alt="" coords="509,93,610,119"/>
+<area shape="rect" id="node7" href="classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="505,165,614,191"/>
+</map>
 </div>
-<div id="dynsection-13-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_ga7cab8308b05c5921e61217f9c93fab27_cgraph.svg" width="638" height="198"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-14-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_ga7cab8308b05c5921e61217f9c93fab27_icgraph.svg" width="595" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_ga7cab8308b05c5921e61217f9c93fab27_icgraph.png" border="0" usemap="#group___check_needs_ga7cab8308b05c5921e61217f9c93fab27_icgraph" alt=""/></div>
+<map name="group___check_needs_ga7cab8308b05c5921e61217f9c93fab27_icgraph" id="group___check_needs_ga7cab8308b05c5921e61217f9c93fab27_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="232,5,381,47"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="429,5,589,47"/>
+</map>
 </div>
 
 </div>
@@ -674,13 +735,15 @@ It also perform some calculations needed on comparfiles behaviour. </p>
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01306">1306</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-15-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_ga4783de3644b5e5c6cb7f611f835c5ac2_icgraph.svg" width="596" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01307">1307</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_ga4783de3644b5e5c6cb7f611f835c5ac2_icgraph.png" border="0" usemap="#group___check_needs_ga4783de3644b5e5c6cb7f611f835c5ac2_icgraph" alt=""/></div>
+<map name="group___check_needs_ga4783de3644b5e5c6cb7f611f835c5ac2_icgraph" id="group___check_needs_ga4783de3644b5e5c6cb7f611f835c5ac2_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="233,5,383,47"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="431,5,591,47"/>
+</map>
 </div>
 
 </div>
@@ -712,13 +775,15 @@ It also perform some calculations needed on comparfiles behaviour. </p>
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01238">1238</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-16-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-16-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_gabbaa9a8505b45e825e55d6d163878d06_icgraph.svg" width="566" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01239">1239</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_gabbaa9a8505b45e825e55d6d163878d06_icgraph.png" border="0" usemap="#group___check_needs_gabbaa9a8505b45e825e55d6d163878d06_icgraph" alt=""/></div>
+<map name="group___check_needs_gabbaa9a8505b45e825e55d6d163878d06_icgraph" id="group___check_needs_gabbaa9a8505b45e825e55d6d163878d06_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="203,5,352,47"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="400,5,560,47"/>
+</map>
 </div>
 
 </div>
@@ -750,13 +815,15 @@ It also perform some calculations needed on comparfiles behaviour. </p>
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01268">1268</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-17" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-17-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-17-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-17-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_gab8cd1b2685c225bec9421f055536d853_icgraph.svg" width="579" height="67"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01269">1269</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_gab8cd1b2685c225bec9421f055536d853_icgraph.png" border="0" usemap="#group___check_needs_gab8cd1b2685c225bec9421f055536d853_icgraph" alt=""/></div>
+<map name="group___check_needs_gab8cd1b2685c225bec9421f055536d853_icgraph" id="group___check_needs_gab8cd1b2685c225bec9421f055536d853_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="216,13,365,54"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="413,13,573,54"/>
+</map>
 </div>
 
 </div>
@@ -788,13 +855,15 @@ It also perform some calculations needed on comparfiles behaviour. </p>
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if dependencies check has passed<br />
  <b>True</b> otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01216">1216</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
-<div id="dynsection-18" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-18-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-18-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-18-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group___check_needs_gaf66e0cf7f3819c3481c22067b8eb78d4_icgraph.svg" width="566" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8cpp_source.html#l01217">1217</a> of file <a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="group___check_needs_gaf66e0cf7f3819c3481c22067b8eb78d4_icgraph.png" border="0" usemap="#group___check_needs_gaf66e0cf7f3819c3481c22067b8eb78d4_icgraph" alt=""/></div>
+<map name="group___check_needs_gaf66e0cf7f3819c3481c22067b8eb78d4_icgraph" id="group___check_needs_gaf66e0cf7f3819c3481c22067b8eb78d4_icgraph">
+<area shape="rect" id="node2" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="203,5,352,47"/>
+<area shape="rect" id="node3" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="400,5,560,47"/>
+</map>
 </div>
 
 </div>

@@ -1,11 +1,11 @@
+<!-- HTML header for doxygen 1.8.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>trimAl: newAlignment Class Reference</title>
+<title>Trimal: newAlignment Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,19 +20,23 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="theee.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
-<table cellspacing="0" cellpadding="0">
+<table cellspacing="0" cellpadding="0" width=100%>
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">trimAl
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Trimal
    </div>
-   <div id="projectbrief">Tool for automating removal of spurious sequences or poorly aligned regions from a multiple sequence alignment</div>
   </td>
+  <!--<td style="float:right;margin-top:18px;vertical-align:bottom">
+     <a href="http://assimilationsystems.com/download/">
+       <img src="http://assimilationsystems.com/wp-content/uploads/2015/03/Download-Doxygen.png" style="float:right;" height="20" width="73">
+     </a>
+  </td>-->
  </tr>
  </tbody>
 </table>
@@ -95,12 +99,18 @@ $(document).ready(function(){initNavTree('classnew_alignment.html','');});
  It contains multiple methods regarding the sequences.<br />
  It also contains submodules that provide methods for<b> Calculating statistics</b>, <b> Cleaning the alignment</b> and<b> Printing sequences information</b>.  
  <a href="classnew_alignment.html#details">More...</a></p>
-<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for newAlignment:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment__coll__graph.svg" width="575" height="306"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="dynheader">
+Collaboration diagram for newAlignment:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnew_alignment__coll__graph.png" border="0" usemap="#new_alignment_coll__map" alt="Collaboration graph"/></div>
+<map name="new_alignment_coll__map" id="new_alignment_coll__map">
+<area shape="rect" id="node5" href="classsequences_matrix.html" title="sequencesMatrix" alt="" coords="1033,512,1155,539"/>
+<area shape="rect" id="node12" href="class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="1061,124,1127,151"/>
+<area shape="rect" id="node14" href="class_statistics_manager.html" title="StatisticsManager" alt="" coords="1031,328,1157,355"/>
+<area shape="rect" id="node3" href="classstatistics_gaps.html" title="statisticsGaps" alt="" coords="375,323,481,349"/>
+<area shape="rect" id="node8" href="classstatistics_conservation.html" title="statisticsConservation" alt="" coords="505,275,657,301"/>
+<area shape="rect" id="node11" href="classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="240,191,351,217"/>
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -332,13 +342,16 @@ It doesn't report any trimming result, meaning this only shows information of an
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if everything went ok. <br />
  <b>False</b> if alignment is not aligned. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01480">1480</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
-<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a26d10a23f8f71f95657a05e88a9a8fff_cgraph.svg" width="631" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01343">1343</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnew_alignment_a26d10a23f8f71f95657a05e88a9a8fff_cgraph.png" border="0" usemap="#classnew_alignment_a26d10a23f8f71f95657a05e88a9a8fff_cgraph" alt=""/></div>
+<map name="classnew_alignment_a26d10a23f8f71f95657a05e88a9a8fff_cgraph" id="classnew_alignment_a26d10a23f8f71f95657a05e88a9a8fff_cgraph">
+<area shape="rect" id="node2" href="classutils.html#a40640e1942f00797e9fe8284e8fbdb14" title="Maximum of two numbers method. " alt="" coords="328,5,407,32"/>
+<area shape="rect" id="node3" href="classutils.html#ad1594a7c6cd34bba8e878fe09837e5d8" title="Checks the color that has to be used on the output report. " alt="" coords="296,56,439,83"/>
+<area shape="rect" id="node4" href="classutils.html#af7813b2754509dbf0b9b15f4d85f8401" title="Looks for a pattern. " alt="" coords="487,56,625,83"/>
+</map>
 </div>
 
 </div>
@@ -410,13 +423,16 @@ It contains information about the original and trimmed alignments, showing which
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if everything went ok. <br />
  <b>False</b> if file couldn't be open or alignment is not aligned. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01203">1203</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
-<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a3377e8d600e1cbb9e65adf2995c877f9_cgraph.svg" width="648" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01066">1066</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnew_alignment_a3377e8d600e1cbb9e65adf2995c877f9_cgraph.png" border="0" usemap="#classnew_alignment_a3377e8d600e1cbb9e65adf2995c877f9_cgraph" alt=""/></div>
+<map name="classnew_alignment_a3377e8d600e1cbb9e65adf2995c877f9_cgraph" id="classnew_alignment_a3377e8d600e1cbb9e65adf2995c877f9_cgraph">
+<area shape="rect" id="node2" href="classutils.html#a40640e1942f00797e9fe8284e8fbdb14" title="Maximum of two numbers method. " alt="" coords="345,5,424,32"/>
+<area shape="rect" id="node3" href="classutils.html#ad1594a7c6cd34bba8e878fe09837e5d8" title="Checks the color that has to be used on the output report. " alt="" coords="313,56,456,83"/>
+<area shape="rect" id="node4" href="classutils.html#af7813b2754509dbf0b9b15f4d85f8401" title="Looks for a pattern. " alt="" coords="504,56,643,83"/>
+</map>
 </div>
 
 </div>
@@ -446,7 +462,7 @@ This is, the frequency of the most present element in the column, being residue,
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01118">1118</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00981">981</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -506,13 +522,15 @@ If nucleotide sequence is smaller than protein sequence * 3, it adds some 'N' at
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if all went right.<br />
  <b>False</b> if there is a sequence in the alignment but not in the names vector. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00823">823</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
-<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_ae8501233fe4f4ef6bfe30c99c744c7c2_cgraph.svg" width="456" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00698">698</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnew_alignment_ae8501233fe4f4ef6bfe30c99c744c7c2_cgraph.png" border="0" usemap="#classnew_alignment_ae8501233fe4f4ef6bfe30c99c744c7c2_cgraph" alt=""/></div>
+<map name="classnew_alignment_ae8501233fe4f4ef6bfe30c99c744c7c2_cgraph" id="classnew_alignment_ae8501233fe4f4ef6bfe30c99c744c7c2_cgraph">
+<area shape="rect" id="node2" href="classutils.html#a1dce160519187ef2c6e14beb93a2050d" title="Removes a determined char from the string. " alt="" coords="296,5,451,32"/>
+<area shape="rect" id="node3" href="classutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f" title="Minimum of two numbers method. " alt="" coords="336,56,411,83"/>
+</map>
 </div>
 
 </div>
@@ -547,13 +565,27 @@ It checks if sequences contain unknown characters, sets the isAligned flag and i
  <b>False</b> if there was a problem.<br />
 This could happen if the sequences contain any unknown character or if aligned flag is set up to corrent, if the sequences have variable sizes. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00906">906</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
-<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_acbeb320f0f70222f81a906ccfc33a016_icgraph.svg" width="655" height="544"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00781">781</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnew_alignment_acbeb320f0f70222f81a906ccfc33a016_icgraph.png" border="0" usemap="#classnew_alignment_acbeb320f0f70222f81a906ccfc33a016_icgraph" alt=""/></div>
+<map name="classnew_alignment_acbeb320f0f70222f81a906ccfc33a016_icgraph" id="classnew_alignment_acbeb320f0f70222f81a906ccfc33a016_icgraph">
+<area shape="rect" id="node2" href="class_cleaner.html#ad075f0ef730c8023cf8a0e35e7e1e53a" title="Method to clean an alignment. &#160;It removes sequences that overpass or equals a certain threshold..." alt="" coords="231,157,407,184"/>
+<area shape="rect" id="node9" href="class_cleaner.html#a740bce047dce09be0f6bd1da9f826da3" title="Method to clean an alignment. It carries out strict and strictplus. It removes sequences that overpas..." alt="" coords="251,309,388,336"/>
+<area shape="rect" id="node11" href="class_cleaner.html#a74d3049d4997da5e7c6c51cb19b540e8" title="Method to clean sequences based on a minimum overlap threshold. The method selects a combination of p..." alt="" coords="232,360,407,387"/>
+<area shape="rect" id="node13" href="class_cleaner.html#a991bf55a7d36b305d67d639ebf028348" title="Method to select the most representative sequence (the longest one) for each cluster from the input a..." alt="" coords="243,411,395,437"/>
+<area shape="rect" id="node14" href="class_cleaner.html#a3d1c1309bd1f0908ef8c8ef0415fb4cb" title="Method to remove columns, expressed as ranges. " alt="" coords="234,461,405,488"/>
+<area shape="rect" id="node15" href="class_cleaner.html#af27e657bf4874a21b26d9a8217c1e643" title="Method to remove sequences, expressed as ranges. " alt="" coords="228,512,411,539"/>
+<area shape="rect" id="node3" href="class_cleaner.html#ac3be9d53018d9146d6dc6cf7ff89f96d" title="Method to clean an alignment based on the gap distribution values. Column blocks that don&#39;t have a mi..." alt="" coords="485,5,623,32"/>
+<area shape="rect" id="node4" href="class_cleaner.html#a694d53fdd5d1ac9455858e48537af3d0" title="Method to clean an alignment based on the similarity distribution values. " alt="" coords="463,56,645,83"/>
+<area shape="rect" id="node5" href="class_cleaner.html#a1ac5ba504932526d77575365557a4d64" title="Method to clean an alignment based on the similarity and gaps distribution values. . " alt="" coords="501,107,607,133"/>
+<area shape="rect" id="node6" href="class_cleaner.html#ae2328fe8c189e2827b46e5dfb8e3deb3" title="Method to clean an alignment based on consistency values obtained from a dataset of alignments..." alt="" coords="464,157,644,184"/>
+<area shape="rect" id="node7" href="class_cleaner.html#a1ea9656823727f9ec237c82f9fb529cf" title="Method that carries the gappyout approach. This methods calculates the slope in gaps distribution on ..." alt="" coords="474,208,634,235"/>
+<area shape="rect" id="node8" href="class_cleaner.html#a08e6db52c33baccce53a33d844597d7b" title="Method to remove columns composed only by gaps This method is specially useful when we remove missali..." alt="" coords="469,259,639,285"/>
+<area shape="rect" id="node10" href="class_cleaner.html#a068b219f913adba5c917a231cff7e437" title="Method to clean an alignment. It carries out strict and strictplus. The method: " alt="" coords="459,309,649,336"/>
+<area shape="rect" id="node12" href="class_cleaner.html#a095db8160a11a792a3feade870a24fd7" title="Method to remove sequences missaligned with the rest of sequences in the alignment. For each residue in the sequence, it tests it&#39;s similarity. If the similarity of that residue is higher than overlapColumn value, it counts as a hit for the sequence. After calculating the number of hits for the sequence, it removes the sequence if it has a proportion hits/residues lower tan minimumOverlap. " alt="" coords="464,360,644,387"/>
+</map>
 </div>
 
 </div>
@@ -593,13 +625,24 @@ This could happen if the sequences contain any unknown character or if aligned f
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00568">568</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
-<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a3de39c62c08a265178f1fa7df76c3ab7_icgraph.svg" width="654" height="392"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00452">452</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnew_alignment_a3de39c62c08a265178f1fa7df76c3ab7_icgraph.png" border="0" usemap="#classnew_alignment_a3de39c62c08a265178f1fa7df76c3ab7_icgraph" alt=""/></div>
+<map name="classnew_alignment_a3de39c62c08a265178f1fa7df76c3ab7_icgraph" id="classnew_alignment_a3de39c62c08a265178f1fa7df76c3ab7_icgraph">
+<area shape="rect" id="node2" href="class_cleaner.html#ad075f0ef730c8023cf8a0e35e7e1e53a" title="Method to clean an alignment. &#160;It removes sequences that overpass or equals a certain threshold..." alt="" coords="233,157,409,184"/>
+<area shape="rect" id="node9" href="class_cleaner.html#a740bce047dce09be0f6bd1da9f826da3" title="Method to clean an alignment. It carries out strict and strictplus. It removes sequences that overpas..." alt="" coords="253,309,390,336"/>
+<area shape="rect" id="node11" href="class_cleaner.html#a74d3049d4997da5e7c6c51cb19b540e8" title="Method to clean sequences based on a minimum overlap threshold. The method selects a combination of p..." alt="" coords="234,360,409,387"/>
+<area shape="rect" id="node3" href="class_cleaner.html#ac3be9d53018d9146d6dc6cf7ff89f96d" title="Method to clean an alignment based on the gap distribution values. Column blocks that don&#39;t have a mi..." alt="" coords="484,5,621,32"/>
+<area shape="rect" id="node4" href="class_cleaner.html#a694d53fdd5d1ac9455858e48537af3d0" title="Method to clean an alignment based on the similarity distribution values. " alt="" coords="461,56,644,83"/>
+<area shape="rect" id="node5" href="class_cleaner.html#a1ac5ba504932526d77575365557a4d64" title="Method to clean an alignment based on the similarity and gaps distribution values. . " alt="" coords="499,107,606,133"/>
+<area shape="rect" id="node6" href="class_cleaner.html#ae2328fe8c189e2827b46e5dfb8e3deb3" title="Method to clean an alignment based on consistency values obtained from a dataset of alignments..." alt="" coords="463,157,643,184"/>
+<area shape="rect" id="node7" href="class_cleaner.html#a1ea9656823727f9ec237c82f9fb529cf" title="Method that carries the gappyout approach. This methods calculates the slope in gaps distribution on ..." alt="" coords="473,208,633,235"/>
+<area shape="rect" id="node8" href="class_cleaner.html#a08e6db52c33baccce53a33d844597d7b" title="Method to remove columns composed only by gaps This method is specially useful when we remove missali..." alt="" coords="468,259,637,285"/>
+<area shape="rect" id="node10" href="class_cleaner.html#a068b219f913adba5c917a231cff7e437" title="Method to clean an alignment. It carries out strict and strictplus. The method: " alt="" coords="457,309,648,336"/>
+<area shape="rect" id="node12" href="class_cleaner.html#a095db8160a11a792a3feade870a24fd7" title="Method to remove sequences missaligned with the rest of sequences in the alignment. For each residue in the sequence, it tests it&#39;s similarity. If the similarity of that residue is higher than overlapColumn value, it counts as a hit for the sequence. After calculating the number of hits for the sequence, it removes the sequence if it has a proportion hits/residues lower tan minimumOverlap. " alt="" coords="463,360,643,387"/>
+</map>
 </div>
 
 </div>
@@ -628,7 +671,7 @@ This could happen if the sequences contain any unknown character or if aligned f
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00588">588</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00470">470</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -657,13 +700,14 @@ This could happen if the sequences contain any unknown character or if aligned f
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00548">548</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
-<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_ae1ee3ea76e1cb268097f1df0c465d6f5_cgraph.svg" width="452" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00434">434</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnew_alignment_ae1ee3ea76e1cb268097f1df0c465d6f5_cgraph.png" border="0" usemap="#classnew_alignment_ae1ee3ea76e1cb268097f1df0c465d6f5_cgraph" alt=""/></div>
+<map name="classnew_alignment_ae1ee3ea76e1cb268097f1df0c465d6f5_cgraph" id="classnew_alignment_ae1ee3ea76e1cb268097f1df0c465d6f5_cgraph">
+<area shape="rect" id="node2" href="classutils.html#a1f1dcbfa7276e54acec72bdbae1b1255" title="Checks an alignment type. " alt="" coords="271,5,447,32"/>
+</map>
 </div>
 
 </div>
@@ -687,7 +731,7 @@ This could happen if the sequences contain any unknown character or if aligned f
 <p>blockSize getter. </p>
 <dl class="section return"><dt>Returns</dt><dd>blockSize. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00487">487</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00385">385</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -710,7 +754,7 @@ This could happen if the sequences contain any unknown character or if aligned f
 <p>Method that returns the correspondence between old and new alignment residues. </p>
 <dl class="section return"><dt>Returns</dt><dd>Vector that represents which residues are kept (!= -1) and which are rejected (== -1) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00554">554</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00440">440</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -733,7 +777,7 @@ This could happen if the sequences contain any unknown character or if aligned f
 <p>Method that returns the correspondence between old and new alignment sequences. </p>
 <dl class="section return"><dt>Returns</dt><dd>Vector that represents which sequences are kept (!= -1) and which are rejected (== -1) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00558">558</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00444">444</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -756,7 +800,7 @@ This could happen if the sequences contain any unknown character or if aligned f
 <p>Residues getter. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of residues in the alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00422">422</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00364">364</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -779,7 +823,7 @@ This could happen if the sequences contain any unknown character or if aligned f
 <p>Getter for the number of species. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of sequences in the alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00415">415</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00357">357</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -823,7 +867,7 @@ If the sequence is present, its order on the alignment sequences vector will be 
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if both sets have the same sequences.<br />
  <b>False</b> otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00522">522</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00409">409</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -851,7 +895,7 @@ If the sequence is present, its order on the alignment sequences vector will be 
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00494">494</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00389">389</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -890,13 +934,14 @@ If the sequence is present, its order on the alignment sequences vector will be 
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00500">500</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
-<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_af32ab6b3b73c5ad37c9f1c796a4fbc44_cgraph.svg" width="408" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00394">394</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnew_alignment_af32ab6b3b73c5ad37c9f1c796a4fbc44_cgraph.png" border="0" usemap="#classnew_alignment_af32ab6b3b73c5ad37c9f1c796a4fbc44_cgraph" alt=""/></div>
+<map name="classnew_alignment_af32ab6b3b73c5ad37c9f1c796a4fbc44_cgraph" id="classnew_alignment_af32ab6b3b73c5ad37c9f1c796a4fbc44_cgraph">
+<area shape="rect" id="node2" href="classutils.html#a1dce160519187ef2c6e14beb93a2050d" title="Removes a determined char from the string. " alt="" coords="248,5,403,32"/>
+</map>
 </div>
 
 </div>
@@ -943,13 +988,14 @@ If the sequence is present, its order on the alignment sequences vector will be 
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00508">508</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
-<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a2fc0d691c0cce400f007446cc162704e_cgraph.svg" width="408" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00401">401</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnew_alignment_a2fc0d691c0cce400f007446cc162704e_cgraph.png" border="0" usemap="#classnew_alignment_a2fc0d691c0cce400f007446cc162704e_cgraph" alt=""/></div>
+<map name="classnew_alignment_a2fc0d691c0cce400f007446cc162704e_cgraph" id="classnew_alignment_a2fc0d691c0cce400f007446cc162704e_cgraph">
+<area shape="rect" id="node2" href="classutils.html#a1dce160519187ef2c6e14beb93a2050d" title="Removes a determined char from the string. " alt="" coords="248,5,403,32"/>
+</map>
 </div>
 
 </div>
@@ -1019,7 +1065,7 @@ If the sequence is present, its order on the alignment sequences vector will be 
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to new alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00292">292</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00244">244</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1042,7 +1088,7 @@ If the sequence is present, its order on the alignment sequences vector will be 
 <p>isAligned getter. </p>
 <dl class="section return"><dt>Returns</dt><dd>Wheter the alignment is aligned or not. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00562">562</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00448">448</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1093,7 +1139,7 @@ It will also remove or split stop codons depending on the flags passed. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00610">610</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00489">489</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1121,7 +1167,7 @@ It will also remove or split stop codons depending on the flags passed. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00980">980</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00855">855</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1149,7 +1195,7 @@ It will also remove or split stop codons depending on the flags passed. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00446">446</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00377">377</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1203,7 +1249,7 @@ It will also remove or split stop codons depending on the flags passed. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00475">475</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00381">381</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1242,7 +1288,7 @@ It will also remove or split stop codons depending on the flags passed. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00430">430</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00372">372</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>

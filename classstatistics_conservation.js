@@ -4,7 +4,7 @@ var classstatistics_conservation =
     [ "statisticsConservation", "classstatistics_conservation.html#a2fa0bbea2b5a353b12a185cf68f69653", null ],
     [ "~statisticsConservation", "classstatistics_conservation.html#a2dfdf18224ec643d05a75997a93de131", null ],
     [ "applyWindow", "classstatistics_conservation.html#a31f6ff0c30b2a207aba13f7687709467", null ],
-    [ "calcCutPoint", "classstatistics_conservation.html#a43f994a862174670d4fde9884360f680", null ],
+    [ "calcCutPoint", "classstatistics_conservation.html#aa11412e9db5babc6dc7b2b4c7c471ed6", null ],
     [ "calculateMatrixIdentity", "classstatistics_conservation.html#ae76dd4736631a18acda230d8099a93b4", null ],
     [ "calculateVectors", "classstatistics_conservation.html#af86c9c3c58d0b00c68d4eda4d5f6f133", null ],
     [ "getMdkwVector", "classstatistics_conservation.html#adc38f48f809152e629a70b5d7e17a616", null ],

@@ -5,7 +5,7 @@
 <area shape="rect" id="node10" href="$class_cleaner.html#a60955e2ae3faa3ccf84780a52fb1a08a" title="Method that calculates the optimat cut point for a given clusters number. The idea is to obtain a cut..." alt="" coords="183,284,376,311"/>
 <area shape="rect" id="node11" href="$class_cleaner.html#a631cf3e2e55c00a995f0f4a51bfe7a2d" title="Method to asign sequences to clusters. Clusters are calculated following this schema: ..." alt="" coords="160,335,399,361"/>
 <area shape="rect" id="node13" href="$classcompare_files.html#a435d98e46d83c066a928e40d2dbcead9" title="Print the accumulated consistency value from the selected alignment. " alt="" coords="185,386,373,427"/>
-<area shape="rect" id="node16" href="$classstatistics_conservation.html#a43f994a862174670d4fde9884360f680" title="Computes and selects the cut point values based on conservation&#39;s values. " alt="" coords="203,31,355,73"/>
+<area shape="rect" id="node16" href="$classstatistics_conservation.html#aa11412e9db5babc6dc7b2b4c7c471ed6" title="Computes and selects the cut point values based on conservation&#39;s values. " alt="" coords="203,31,355,73"/>
 <area shape="rect" id="node17" href="$classstatistics_conservation.html#adaa79cf3eaa778b658b606ef1383c82b" title="Computes and prints the accumulative statistics associated to the alignment. " alt="" coords="203,451,355,493"/>
 <area shape="rect" id="node18" href="$classutils.html#a3ff3252e3c5d743757b001734501fe60" title="Quicksort sorting method. " alt="" coords="226,517,333,544"/>
 <area shape="rect" id="node3" href="$class_cleaner.html#ac3be9d53018d9146d6dc6cf7ff89f96d" title="Method to clean an alignment based on the gap distribution values. Column blocks that don&#39;t have a mi..." alt="" coords="469,56,607,83"/>

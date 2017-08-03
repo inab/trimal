@@ -1,11 +1,11 @@
+<!-- HTML header for doxygen 1.8.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>trimAl: statisticsConservation Class Reference</title>
+<title>Trimal: statisticsConservation Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,19 +20,23 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="theee.css" rel="stylesheet" type="text/css"/>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
-<table cellspacing="0" cellpadding="0">
+<table cellspacing="0" cellpadding="0" width=100%>
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">trimAl
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Trimal
    </div>
-   <div id="projectbrief">Tool for automating removal of spurious sequences or poorly aligned regions from a multiple sequence alignment</div>
   </td>
+  <!--<td style="float:right;margin-top:18px;vertical-align:bottom">
+     <a href="http://assimilationsystems.com/download/">
+       <img src="http://assimilationsystems.com/wp-content/uploads/2015/03/Download-Doxygen.png" style="float:right;" height="20" width="73">
+     </a>
+  </td>-->
  </tr>
  </tbody>
 </table>
@@ -90,12 +94,13 @@ $(document).ready(function(){initNavTree('classstatistics_conservation.html','')
 <div class="title">statisticsConservation Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for statisticsConservation:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_conservation__coll__graph.svg" width="163" height="127"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="dynheader">
+Collaboration diagram for statisticsConservation:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstatistics_conservation__coll__graph.png" border="0" usemap="#statistics_conservation_coll__map" alt="Collaboration graph"/></div>
+<map name="statistics_conservation_coll__map" id="statistics_conservation_coll__map">
+<area shape="rect" id="node5" href="classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="241,125,351,152"/>
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -129,9 +134,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab71123478840c7e816ead03ccfe41fc9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstatistics_conservation.html#ab71123478840c7e816ead03ccfe41fc9">isSimMatrixDef</a> (void)</td></tr>
 <tr class="memdesc:ab71123478840c7e816ead03ccfe41fc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns if a similarity matrix is being used or not.  <a href="#ab71123478840c7e816ead03ccfe41fc9">More...</a><br /></td></tr>
 <tr class="separator:ab71123478840c7e816ead03ccfe41fc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43f994a862174670d4fde9884360f680"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstatistics_conservation.html#a43f994a862174670d4fde9884360f680">calcCutPoint</a> (float baseLine, float conservationPct)</td></tr>
-<tr class="memdesc:a43f994a862174670d4fde9884360f680"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes and selects the cut point values based on conservation's values.  <a href="#a43f994a862174670d4fde9884360f680">More...</a><br /></td></tr>
-<tr class="separator:a43f994a862174670d4fde9884360f680"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa11412e9db5babc6dc7b2b4c7c471ed6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstatistics_conservation.html#aa11412e9db5babc6dc7b2b4c7c471ed6">calcCutPoint</a> (float baseLine, float conservationPct)</td></tr>
+<tr class="memdesc:aa11412e9db5babc6dc7b2b4c7c471ed6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes and selects the cut point values based on conservation's values.  <a href="#aa11412e9db5babc6dc7b2b4c7c471ed6">More...</a><br /></td></tr>
+<tr class="separator:aa11412e9db5babc6dc7b2b4c7c471ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf7952f64d405745dde44e23ee2527f3"><td class="memItemLeft" align="right" valign="top"><a id="abf7952f64d405745dde44e23ee2527f3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstatistics_conservation.html#abf7952f64d405745dde44e23ee2527f3">printConservationColumns</a> (void)</td></tr>
 <tr class="memdesc:abf7952f64d405745dde44e23ee2527f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the conservation's value for each alignment's column. <br /></td></tr>
@@ -186,7 +191,7 @@ float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="statistics_conservation_8h_source.html#l00048">48</a> of file <a class="el" href="statistics_conservation_8h_source.html">statisticsConservation.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="statistics_conservation_8h_source.html#l00049">49</a> of file <a class="el" href="statistics_conservation_8h_source.html">statisticsConservation.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2fa0bbea2b5a353b12a185cf68f69653"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2fa0bbea2b5a353b12a185cf68f69653">&#9670;&nbsp;</a></span>statisticsConservation()</h2>
@@ -237,13 +242,15 @@ float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00037">37</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
-<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_conservation_a2fa0bbea2b5a353b12a185cf68f69653_cgraph.svg" width="380" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00038">38</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstatistics_conservation_a2fa0bbea2b5a353b12a185cf68f69653_cgraph.png" border="0" usemap="#classstatistics_conservation_a2fa0bbea2b5a353b12a185cf68f69653_cgraph" alt=""/></div>
+<map name="classstatistics_conservation_a2fa0bbea2b5a353b12a185cf68f69653_cgraph" id="classstatistics_conservation_a2fa0bbea2b5a353b12a185cf68f69653_cgraph">
+<area shape="rect" id="node2" href="classutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization. " alt="" coords="243,5,345,32"/>
+<area shape="rect" id="node3" href="classstatistics_conservation.html#ae76dd4736631a18acda230d8099a93b4" title="Computes the matrix identity between alignment&#39;s columns. " alt="" coords="213,57,375,98"/>
+</map>
 </div>
 
 </div>
@@ -274,18 +281,18 @@ float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><b>False</b> if there is a previously computed vector for this window size or half window size is greater than 1/4 of the alignment length. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00225">225</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00222">222</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a43f994a862174670d4fde9884360f680"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43f994a862174670d4fde9884360f680">&#9670;&nbsp;</a></span>calcCutPoint()</h2>
+<a id="aa11412e9db5babc6dc7b2b4c7c471ed6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa11412e9db5babc6dc7b2b4c7c471ed6">&#9670;&nbsp;</a></span>calcCutPoint()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float statisticsConservation::calcCutPoint </td>
+          <td class="memname">double statisticsConservation::calcCutPoint </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>baseLine</em>, </td>
@@ -314,20 +321,24 @@ float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00317">317</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
-<div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00305">305</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstatistics_conservation_aa11412e9db5babc6dc7b2b4c7c471ed6_cgraph.png" border="0" usemap="#classstatistics_conservation_aa11412e9db5babc6dc7b2b4c7c471ed6_cgraph" alt=""/></div>
+<map name="classstatistics_conservation_aa11412e9db5babc6dc7b2b4c7c471ed6_cgraph" id="classstatistics_conservation_aa11412e9db5babc6dc7b2b4c7c471ed6_cgraph">
+<area shape="rect" id="node2" href="classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="205,5,315,32"/>
+<area shape="rect" id="node3" href="classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="207,56,313,83"/>
+<area shape="rect" id="node4" href="classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="363,56,448,83"/>
+</map>
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_conservation_a43f994a862174670d4fde9884360f680_cgraph.svg" width="454" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_conservation_a43f994a862174670d4fde9884360f680_icgraph.svg" width="318" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstatistics_conservation_aa11412e9db5babc6dc7b2b4c7c471ed6_icgraph.png" border="0" usemap="#classstatistics_conservation_aa11412e9db5babc6dc7b2b4c7c471ed6_icgraph" alt=""/></div>
+<map name="classstatistics_conservation_aa11412e9db5babc6dc7b2b4c7c471ed6_icgraph" id="classstatistics_conservation_aa11412e9db5babc6dc7b2b4c7c471ed6_icgraph">
+<area shape="rect" id="node2" href="class_cleaner.html#a1ac5ba504932526d77575365557a4d64" title="Method to clean an alignment based on the similarity and gaps distribution values. . " alt="" coords="205,13,312,39"/>
+</map>
 </div>
 
 </div>
@@ -368,7 +379,7 @@ float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00172">172</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00171">171</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
 
 </div>
 </div>
@@ -391,7 +402,7 @@ float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <p>This methods returns a pointer to conservationWindow's vector. </p>
 <dl class="section return"><dt>Returns</dt><dd>Conservation window vector. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00271">271</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00268">268</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
 
 </div>
 </div>
@@ -414,7 +425,7 @@ float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <p>Returns if a windows size value has been defined or not. </p>
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if a windows size has been defined.<b>False</b> otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00259">259</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00256">256</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
 
 </div>
 </div>
@@ -437,7 +448,7 @@ float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <p>Returns if a similarity matrix is being used or not. </p>
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if there is a similarity matrix set, <b>False</b> otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00303">303</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00300">300</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
 
 </div>
 </div>
@@ -466,7 +477,7 @@ float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if sm is valid, <b>False</b> if it's null </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00284">284</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="statistics_conservation_8cpp_source.html#l00281">281</a> of file <a class="el" href="statistics_conservation_8cpp_source.html">statisticsConservation.cpp</a>.</p>
 
 </div>
 </div>

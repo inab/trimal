@@ -2,7 +2,9 @@ var classsimilarity_matrix =
 [
     [ "similarityMatrix", "classsimilarity_matrix.html#aab4fdda2c9e51efa07c91b1393c80b9a", null ],
     [ "~similarityMatrix", "classsimilarity_matrix.html#a8b3b77abff396fa2612db30226b00a2a", null ],
+    [ "alternativeSimilarityMatrices", "classsimilarity_matrix.html#a5a6bcde8762ab8ac750e2bf1dfadbc84", null ],
     [ "defaultAASimMatrix", "classsimilarity_matrix.html#a27816b8b2e132283436e04ceefc68c65", null ],
+    [ "defaultNTDegeneratedSimMatrix", "classsimilarity_matrix.html#abc9fb436b0ed9ad33068b28f8027e31f", null ],
     [ "defaultNTSimMatrix", "classsimilarity_matrix.html#a4867c060ed36fd7b7d46a0f04c9bcc22", null ],
     [ "getDistance", "classsimilarity_matrix.html#a455f78861ef87758463d701bb84130a4", null ],
     [ "loadSimMatrix", "classsimilarity_matrix.html#a4f61255c60c1ffd558dbd6730f3b3131", null ],

@@ -24,6 +24,7 @@ var classutils =
     [ "readLine", "classutils.html#ae905a8d60954a8e0a9f605d52fff126b", null ],
     [ "readLineMEGA", "classutils.html#afa0fa18ea4772ed4520834fc1aaaff70", null ],
     [ "readNumbers", "classutils.html#adb8231f84743d1c51e391ab3234714c6", null ],
+    [ "readNumbers_StartEnd", "classutils.html#aeb45e4c1390e28cf14b93e61797870b1", null ],
     [ "removeCharacter", "classutils.html#a1dce160519187ef2c6e14beb93a2050d", null ],
     [ "removeSpaces", "classutils.html#a2b86d1a439de68860f2366f99d507349", null ],
     [ "ReplaceString", "classutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78", null ],

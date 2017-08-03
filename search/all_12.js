@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['savealignment',['SaveAlignment',['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()'],['../class_read_write_m_s.html#af81c55ae0e74802e3673f68e8e85fd2e',1,'ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newAlignment *alignment)'],['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment(std::string outPattern, std::vector&lt; std::string &gt; *outFormats, newAlignment *alignment)']]],
+  ['savealignment',['saveAlignment',['../class_read_write_m_s.html#af81c55ae0e74802e3673f68e8e85fd2e',1,'ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newAlignment *alignment)'],['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment(std::string outPattern, std::vector&lt; std::string &gt; *outFormats, newAlignment *alignment)'],['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()']]],
   ['saveresidues',['saveResidues',['../classnew_alignment.html#a5239bd4e742631b58efc7f09dd67f165',1,'newAlignment']]],
   ['savesequences',['saveSequences',['../classnew_alignment.html#a76d057ddcebc7c88dd7f9e3ff0ce95bf',1,'newAlignment']]],
   ['scc',['scc',['../classtrim_al_manager.html#ab578880a4b104e7e0bc8db235d082ca1',1,'trimAlManager']]],
@@ -19,11 +19,12 @@ var searchData=
   ['sequenceoverlap',['sequenceOverlap',['../classtrim_al_manager.html#a76b83fdb75d03fffa72bc30fabdbbae8',1,'trimAlManager']]],
   ['sequences',['sequences',['../classnew_alignment.html#a23f06ad268f0e720bf3d5699a4cb7225',1,'newAlignment::sequences()'],['../classstatistics_conservation.html#ae62a8fdf513094d9a100b64630abe8b0',1,'statisticsConservation::sequences()']]],
   ['sequenceslengths',['sequencesLengths',['../classtrim_al_manager.html#ac49ddfd77456a8df3da725e9a7080db3',1,'trimAlManager']]],
-  ['sequencesmatrix',['sequencesMatrix',['../classsequences_matrix.html',1,'sequencesMatrix'],['../classsequences_matrix.html#a9205d08454190fd9ef27daf78b59410b',1,'sequencesMatrix::sequencesMatrix(void)'],['../classsequences_matrix.html#ad732edaa397a15a2653012f7e38f24af',1,'sequencesMatrix::sequencesMatrix(string *, string *, int, int)'],['../classnew_alignment.html#a8b328dfd8e7d3304cb144f2c2114ab5c',1,'newAlignment::SequencesMatrix()']]],
+  ['sequencesmatrix',['sequencesMatrix',['../classsequences_matrix.html',1,'sequencesMatrix'],['../classnew_alignment.html#a8b328dfd8e7d3304cb144f2c2114ab5c',1,'newAlignment::SequencesMatrix()'],['../classsequences_matrix.html#a9205d08454190fd9ef27daf78b59410b',1,'sequencesMatrix::sequencesMatrix(void)'],['../classsequences_matrix.html#ad732edaa397a15a2653012f7e38f24af',1,'sequencesMatrix::sequencesMatrix(string *, string *, int, int)']]],
   ['sequencesnames',['sequencesNames',['../classtrim_al_manager.html#a3c882b4187245a6a89d9a9cffc53a28a',1,'trimAlManager']]],
   ['sequennumber',['sequenNumber',['../classnew_alignment.html#a4a6b47de8bef3e783f30548dfa48d84c',1,'newAlignment']]],
   ['set_5fwindow_5fsize',['set_window_size',['../group___perform_algorithm.html#ga9fe53f593792efe2eafd54ec6e506bf3',1,'trimAlManager']]],
   ['setblocksize',['setBlockSize',['../classnew_alignment.html#a42894635dca6466308d9e21cec14d365',1,'newAlignment']]],
+  ['setboundaries',['setBoundaries',['../class_cleaner.html#a60e7c96314e666c4ab8cade7c10341a3',1,'Cleaner']]],
   ['setkeepseqsheaderflag',['setKeepSeqsHeaderFlag',['../classnew_alignment.html#aa77c80b10d05f3a069a5f63223e13ca2',1,'newAlignment']]],
   ['setkeepsequencesflag',['setKeepSequencesFlag',['../classnew_alignment.html#a29f7f52115fd4ecf13120e54c71b1a1a',1,'newAlignment']]],
   ['setorder',['setOrder',['../classsequences_matrix.html#a8b3882d2dcc73938707486c189908abf',1,'sequencesMatrix']]],

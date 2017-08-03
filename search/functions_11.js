@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['savealignment',['SaveAlignment',['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()'],['../class_read_write_m_s.html#af81c55ae0e74802e3673f68e8e85fd2e',1,'ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newAlignment *alignment)'],['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment(std::string outPattern, std::vector&lt; std::string &gt; *outFormats, newAlignment *alignment)']]],
+  ['savealignment',['saveAlignment',['../class_read_write_m_s.html#af81c55ae0e74802e3673f68e8e85fd2e',1,'ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newAlignment *alignment)'],['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment(std::string outPattern, std::vector&lt; std::string &gt; *outFormats, newAlignment *alignment)'],['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()']]],
   ['select_5fcols_5fargument',['select_cols_argument',['../group___parsing_arguments_functions.html#gadf8a0b6574e9abb325a6c331ab9368ac',1,'trimAlManager']]],
   ['selectmethod',['selectMethod',['../class_cleaner.html#a7ae24fa55c5d166d75237decd942ce94',1,'Cleaner']]],
   ['seqs_5fselect_5fargument',['seqs_select_argument',['../group___parsing_arguments_functions.html#ga5b7b7ccf9e704e7341546a9e8834e890',1,'trimAlManager']]],
@@ -8,6 +8,7 @@ var searchData=
   ['sequencesmatrix',['sequencesMatrix',['../classsequences_matrix.html#a9205d08454190fd9ef27daf78b59410b',1,'sequencesMatrix::sequencesMatrix(void)'],['../classsequences_matrix.html#ad732edaa397a15a2653012f7e38f24af',1,'sequencesMatrix::sequencesMatrix(string *, string *, int, int)']]],
   ['set_5fwindow_5fsize',['set_window_size',['../group___perform_algorithm.html#ga9fe53f593792efe2eafd54ec6e506bf3',1,'trimAlManager']]],
   ['setblocksize',['setBlockSize',['../classnew_alignment.html#a42894635dca6466308d9e21cec14d365',1,'newAlignment']]],
+  ['setboundaries',['setBoundaries',['../class_cleaner.html#a60e7c96314e666c4ab8cade7c10341a3',1,'Cleaner']]],
   ['setkeepseqsheaderflag',['setKeepSeqsHeaderFlag',['../classnew_alignment.html#aa77c80b10d05f3a069a5f63223e13ca2',1,'newAlignment']]],
   ['setkeepsequencesflag',['setKeepSequencesFlag',['../classnew_alignment.html#a29f7f52115fd4ecf13120e54c71b1a1a',1,'newAlignment']]],
   ['setorder',['setOrder',['../classsequences_matrix.html#a8b3882d2dcc73938707486c189908abf',1,'sequencesMatrix']]],

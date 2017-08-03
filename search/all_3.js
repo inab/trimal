@@ -1,7 +1,7 @@
 var searchData=
 [
   ['c',['c',['../classtrim_al_manager.html#aeee16fd90a9e76a1f3d86aa99258ca5c',1,'trimAlManager']]],
-  ['calccutpoint',['calcCutPoint',['../classstatistics_conservation.html#a43f994a862174670d4fde9884360f680',1,'statisticsConservation']]],
+  ['calccutpoint',['calcCutPoint',['../classstatistics_conservation.html#aa11412e9db5babc6dc7b2b4c7c471ed6',1,'statisticsConservation']]],
   ['calculatecolidentity',['calculateColIdentity',['../classnew_alignment.html#ad916722e4ee892ee9f5cf85f0bdb80aa',1,'newAlignment']]],
   ['calculatematrixidentity',['calculateMatrixIdentity',['../classstatistics_conservation.html#ae76dd4736631a18acda230d8099a93b4',1,'statisticsConservation']]],
   ['calculaterelaxedseqidentity',['calculateRelaxedSeqIdentity',['../class_cleaner.html#a802f477200826b833ef14f1e9ea4f1ae',1,'Cleaner']]],

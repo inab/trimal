@@ -1,8 +1,8 @@
 <map id="Cleaner" name="Cleaner">
-<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="110,184,214,211"/>
-<area shape="rect" id="node4" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="5,273,127,300"/>
-<area shape="rect" id="node7" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="193,273,320,300"/>
-<area shape="rect" id="node3" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="158,95,265,121"/>
-<area shape="rect" id="node5" href="$classstatistics_conservation.html" title="statisticsConservation" alt="" coords="289,95,441,121"/>
-<area shape="rect" id="node6" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="309,5,420,32"/>
+<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="472,572,576,599"/>
+<area shape="rect" id="node6" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="694,661,815,688"/>
+<area shape="rect" id="node14" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="317,661,443,688"/>
+<area shape="rect" id="node4" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="319,325,425,352"/>
+<area shape="rect" id="node9" href="$classstatistics_conservation.html" title="statisticsConservation" alt="" coords="519,415,671,442"/>
+<area shape="rect" id="node12" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="713,228,823,255"/>
 </map>

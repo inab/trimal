@@ -1,5 +1,5 @@
 <map id="Cleaner::clean" name="Cleaner::clean">
-<area shape="rect" id="node2" href="$classstatistics_conservation.html#a43f994a862174670d4fde9884360f680" title="Computes and selects the cut point values based on conservation&#39;s values. " alt="" coords="172,49,324,90"/>
+<area shape="rect" id="node2" href="$classstatistics_conservation.html#aa11412e9db5babc6dc7b2b4c7c471ed6" title="Computes and selects the cut point values based on conservation&#39;s values. " alt="" coords="172,49,324,90"/>
 <area shape="rect" id="node6" href="$class_cleaner.html#ad075f0ef730c8023cf8a0e35e7e1e53a" title="Method to clean an alignment. &#160;It removes sequences that overpass or equals a certain threshold..." alt="" coords="160,157,336,184"/>
 <area shape="rect" id="node3" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="449,5,558,32"/>
 <area shape="rect" id="node4" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="450,56,557,83"/>

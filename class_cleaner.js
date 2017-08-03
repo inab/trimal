@@ -28,10 +28,13 @@ var class_cleaner =
     [ "removeSequences", "class_cleaner.html#af27e657bf4874a21b26d9a8217c1e643", null ],
     [ "removeSmallerBlocks", "class_cleaner.html#afed3e14dcf00a5a24fb0abadd6682469", null ],
     [ "selectMethod", "class_cleaner.html#a7ae24fa55c5d166d75237decd942ce94", null ],
+    [ "setBoundaries", "class_cleaner.html#a60e7c96314e666c4ab8cade7c10341a3", null ],
     [ "setTrimTerminalGapsFlag", "class_cleaner.html#a1f4cdd8e06a4c461534a694ffa4ec1a2", null ],
     [ "newAlignment", "class_cleaner.html#a5d1b8a218a949b92c9ba5229570b3512", null ],
     [ "_alignment", "class_cleaner.html#a90c25fd80692f2e210505de0fba82fd9", null ],
     [ "blockSize", "class_cleaner.html#a62ae61b54482fab8050fe34ef6b0b0a4", null ],
     [ "keepSequences", "class_cleaner.html#a8ce7358a90df6a6be326b5a88de8b909", null ],
+    [ "left_boundary", "class_cleaner.html#ab1895110ae0546aa961c4f79a1f0f5ba", null ],
+    [ "right_boundary", "class_cleaner.html#a33143efd1ca0b5ef5b9569bcc39b2505", null ],
     [ "terminalGapOnly", "class_cleaner.html#afb01eec0519abc849aee82743827b9c4", null ]
 ];
