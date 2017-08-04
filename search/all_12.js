@@ -21,6 +21,7 @@ var searchData=
   ['sequenceslengths',['sequencesLengths',['../classtrim_al_manager.html#ac49ddfd77456a8df3da725e9a7080db3',1,'trimAlManager']]],
   ['sequencesmatrix',['sequencesMatrix',['../classsequences_matrix.html',1,'sequencesMatrix'],['../classnew_alignment.html#a8b328dfd8e7d3304cb144f2c2114ab5c',1,'newAlignment::SequencesMatrix()'],['../classsequences_matrix.html#a9205d08454190fd9ef27daf78b59410b',1,'sequencesMatrix::sequencesMatrix(void)'],['../classsequences_matrix.html#ad732edaa397a15a2653012f7e38f24af',1,'sequencesMatrix::sequencesMatrix(string *, string *, int, int)']]],
   ['sequencesnames',['sequencesNames',['../classtrim_al_manager.html#a3c882b4187245a6a89d9a9cffc53a28a',1,'trimAlManager']]],
+  ['sequencetypes',['SequenceTypes',['../defines_8h.html#a69d5409d6e7370d6bd3b4f931702e936',1,'defines.h']]],
   ['sequennumber',['sequenNumber',['../classnew_alignment.html#a4a6b47de8bef3e783f30548dfa48d84c',1,'newAlignment']]],
   ['set_5fwindow_5fsize',['set_window_size',['../group___perform_algorithm.html#ga9fe53f593792efe2eafd54ec6e506bf3',1,'trimAlManager']]],
   ['setblocksize',['setBlockSize',['../classnew_alignment.html#a42894635dca6466308d9e21cec14d365',1,'newAlignment']]],

@@ -24,6 +24,7 @@ var searchData=
   ['residuesoverlap',['residuesOverlap',['../classtrim_al_manager.html#a6cc6029dfd417bf1a3056f533299ad0b',1,'trimAlManager']]],
   ['resnumber',['resNumber',['../classsequences_matrix.html#acc6f2e08512d2f00e151691385380d0e',1,'sequencesMatrix']]],
   ['right_5fboundary',['right_boundary',['../class_cleaner.html#a33143efd1ca0b5ef5b9569bcc39b2505',1,'Cleaner']]],
+  ['rna',['RNA',['../defines_8h.html#a69d5409d6e7370d6bd3b4f931702e936a92efc5f13441d2abd5e146e629196c7e',1,'defines.h']]],
   ['roundint',['roundInt',['../classutils.html#ad50731aeb3c8f79ed8372516210dfc9d',1,'utils']]],
   ['roundtoinf',['roundToInf',['../classutils.html#adbfed7b7d733f3c1e40fd0d6a88c4c03',1,'utils']]],
   ['roundtosup',['roundToSup',['../classutils.html#ae39384db46ae5235ab37d8438c5f9257',1,'utils']]]

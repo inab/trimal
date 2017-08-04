@@ -3,6 +3,7 @@ var dir_b2f33c71d4aa5e7af42a1ca61ff5af1b =
     [ "ReadWriteMS", "dir_2f31cb1b851127f0f994cd6b79af4ccd.html", "dir_2f31cb1b851127f0f994cd6b79af4ccd" ],
     [ "Cleaner.cpp", "_cleaner_8cpp_source.html", null ],
     [ "compareFiles.cpp", "compare_files_8cpp_source.html", null ],
+    [ "DockerLauncher.cpp", "_docker_launcher_8cpp_source.html", null ],
     [ "newAlignment.cpp", "new_alignment_8cpp_source.html", null ],
     [ "newmain.cpp", "newmain_8cpp_source.html", null ],
     [ "readAl.cpp", "read_al_8cpp_source.html", null ],

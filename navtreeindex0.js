@@ -2,11 +2,12 @@ var NAVTREEINDEX0 =
 {
 "_cleaner_8cpp_source.html":[5,0,1,1],
 "_cleaner_8h_source.html":[5,0,0,1],
+"_docker_launcher_8cpp_source.html":[5,0,1,3],
 "_read_write_base_state_8h_source.html":[5,0,0,0,0],
 "_read_write_m_smain_8cpp_source.html":[5,0,1,0,1],
 "_read_write_machine_state_8cpp_source.html":[5,0,1,0,0],
 "_read_write_machine_state_8h_source.html":[5,0,0,0,1],
-"_statistics_manager_8cpp_source.html":[5,0,1,12],
+"_statistics_manager_8cpp_source.html":[5,0,1,13],
 "_statistics_manager_8h_source.html":[5,0,0,10],
 "annotated.html":[4,0],
 "class_cleaner.html":[4,0,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classtrim_al_manager.html#a31d9450a4cbda61a0e44b6b31a76348b":[4,0,12,79],
 "classtrim_al_manager.html#a325faf5b77c5e6fa335d46c2e1042fc4":[4,0,12,109],
 "classtrim_al_manager.html#a3a8ccb20e3e0a2f014cff21a4cfdc8d2":[4,0,12,145],
-"classtrim_al_manager.html#a3c882b4187245a6a89d9a9cffc53a28a":[4,0,12,131],
-"classtrim_al_manager.html#a3f2180162f0010c39deb60c520eb5ec6":[4,0,12,135]
+"classtrim_al_manager.html#a3c882b4187245a6a89d9a9cffc53a28a":[4,0,12,131]
 };
