@@ -34,6 +34,7 @@
 #include "../include/alignment.h"
 #include "../include/defines.h"
 #include "../include/utils.h"
+#include "../include/values.h"
 
 void show_menu(void);
 void show_examples(void);
@@ -403,11 +404,11 @@ int main(int argc, char *argv[]){
         /* Load a default matrix or choose an alternative one */
         if(alternative_matrix != -1)
           similMatrix -> alternativeSimilarityMatrices(alternative_matrix, alignDataType);
-        else if(alignDataType == AAType)
+        else if(alignDataType & SequenceTypes::AA)
           similMatrix -> defaultAASimMatrix();
-        else if((alignDataType == DNAType) || (alignDataType == RNAType))
+        else if(!alignDataType & SequenceTypes::DEG)
           similMatrix -> defaultNTSimMatrix();
-        else if((alignDataType == DNADeg) || (alignDataType == RNADeg))
+        else if(alignDataType & SequenceTypes::DEG)
           similMatrix -> defaultNTDegeneratedSimMatrix();
       }
 

@@ -36,9 +36,9 @@
 #include "statisticsGaps.h"
 #include "../include/utils.h"
 
-#define DNAType 1
-#define RNAType 2
-#define AAType  3
+// #define DNAType 1
+// #define RNAType 2
+// #define AAType  3
 
 using namespace std;
 

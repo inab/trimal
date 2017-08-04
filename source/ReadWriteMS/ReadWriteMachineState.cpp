@@ -53,7 +53,12 @@ newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
     inFileHandler.open(inFile);
     if (!inFileHandler.is_open())
     {
-        cerr << "Couldn't open input file" << endl;
+        cerr << "Couldn't open input file " << inFile << endl;
+        return nullptr;
+    }
+    else if (inFileHandler.peek() == std::ifstream::traits_type::eof())
+    {
+        cerr << inFile << " is empty" << endl;
         return nullptr;
     }
 
@@ -85,6 +90,7 @@ newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
 
 bool ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newAlignment* alignment)
 {
+    if (alignment->sequenNumber == 0) return true;
     ofstream output;
     output.open(outFile);
     for(ReadWriteBaseState* state : available_states)
@@ -260,6 +266,11 @@ void ReadWriteMS::processFile(
             cerr << "Couldn't open input file " << inFile << endl;
             return;
         }
+        else if (inFileHandler.peek() == std::ifstream::traits_type::eof())
+        {
+            cerr << inFile << " is empty" << endl;
+            return;
+        }
 
         inState = NULL;
         format_value = 0;
@@ -287,7 +298,6 @@ void ReadWriteMS::processFile(
 
         // Load alignment one by one and store it on each of the formats specified.
         newAlignment* alignment = inState->LoadAlignment(inFile);
-//         if (reverse) alignment->setReverseFlag(true);
         int start, end;
         inFileHandler.close();
         {
@@ -296,6 +306,7 @@ void ReadWriteMS::processFile(
             for (ReadWriteBaseState * state : outStates)
             {
                 start = inFile.find_last_of("/");
+                start = max(start, 0);
                 end = inFile.find_last_of(".");
                 filename = utils::ReplaceString(*outPattern, "[in]", inFile.substr(start, end-start));
                 utils::ReplaceStringInPlace(filename, "[extension]", state->extension);

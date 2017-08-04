@@ -237,7 +237,7 @@ bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, 
     if((alignment->aligInfo.size() != 0)  && (alignment->aligInfo.substr(0,7) == "CLUSTAL"))
         (*output) << alignment->aligInfo << endl << endl;
     else
-        (*output) << "CLUSTAL X (1.81) multiple sequence alignment" << endl << endl;
+        (*output) << "CLUSTAL multiple sequence alignment" << endl << endl;
 
     /* Print alignment itself */
     /* Print as many blocks as it is needed of lines composed

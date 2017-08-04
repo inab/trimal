@@ -554,7 +554,7 @@ int utils::checkAlignmentType(int seqNumber, int residNumber, string *sequences)
     ratioRNA = float(degenerate + hitRNA)/k;
 
     if(ratioDNA < 0.95 && ratioRNA < 0.95)
-      return AAType;
+      return SequenceTypes::AA;
 
     /* Identify precisely if nucleotides sequences are DNA/RNA strict or
      * any degenerate code has been used in the sequence */
@@ -570,13 +570,13 @@ int utils::checkAlignmentType(int seqNumber, int residNumber, string *sequences)
   /* Return the datatype with greater values, considering always degenerate
    * codes */
   if (extDNA != 0 && extDNA > extRNA)
-    return DNADeg;
+    return SequenceTypes::DNA | SequenceTypes::DEG;
   else if (extRNA != 0 && extDNA < extRNA)
-    return RNADeg;
+    return SequenceTypes::RNA | SequenceTypes::DEG;
   else if(gRNA > gDNA)
-    return RNAType;
+    return SequenceTypes::RNA;
   else
-    return DNAType;
+    return SequenceTypes::DNA;
 }
 
 int* utils::readNumbers_StartEnd(string line) {

@@ -6,7 +6,7 @@
  It also contains submodules that provide methods for<b> Calculating statistics</b>,
  <b> Cleaning the alignment</b> and<b> Printing sequences information</b>.
  */
-
+ 
 /**
 \var newAlignment::Cleaning
 \brief Cleaning submodule.\n

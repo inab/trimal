@@ -32,11 +32,13 @@
 #define LINE_LENGTH 256
 #define REFER 65
 
-#include "../include/values.h"
+#include "../include/defines.h"
 #endif
 
 #include "../include/similarityMatrix.h"
+#include "../include/defines.h"
 #include "../include/utils.h"
+#include "../include/values.h"
 
 #include <iostream>
 
@@ -353,17 +355,17 @@ void similarityMatrix::alternativeSimilarityMatrices(int matrix_code, \
 
   /* Allocate memory depending on the input datatype */
   switch(datatype) {
-    case AAType:
-      memoryAllocation(20);
-      break;
-    case DNAType:
-    case RNAType:
-       memoryAllocation(5);
-      break;
-    case DNADeg:
-    case RNADeg:
-      memoryAllocation(15);
-      break;
+      case SequenceTypes::AA:
+        memoryAllocation(20);
+        break;
+      case SequenceTypes::DNA:
+      case SequenceTypes::RNA:
+        memoryAllocation(5);
+        break;
+      case SequenceTypes::DNA | SequenceTypes::DEG:
+      case SequenceTypes::RNA | SequenceTypes::DEG:
+        memoryAllocation(15);
+        break;
  }
 
   for(i = 0; i < TAMABC; i++)
@@ -372,15 +374,15 @@ void similarityMatrix::alternativeSimilarityMatrices(int matrix_code, \
   /* We create the hashing vector taking into account the input datatype */
   for(i = 0; i < numPositions; i++) {
     switch(datatype) {
-      case AAType:
+        case SequenceTypes::AA:
         vhash[listAASym[i] - 'A'] = i;
         break;
-      case DNAType:
-      case RNAType:
+      case SequenceTypes::DNA:
+      case SequenceTypes::RNA:
         vhash[listNTSym[i] - 'A'] = i;
         break;
-      case DNADeg:
-      case RNADeg:
+      case SequenceTypes::DNA | SequenceTypes::DEG:
+      case SequenceTypes::RNA | SequenceTypes::DEG:
         vhash[listNTDegenerateSym[i] - 'A'] = i;
         break;
       }

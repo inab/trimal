@@ -42,7 +42,7 @@ using namespace std;
 #include <ctype.h>
 #include <string>
 //#include <utils.h>
-//#include <values.h>
+#include "../include/values.h"
 #include "../include/defines.h"
 //extern int errno;
 
@@ -57,7 +57,6 @@ newAlignment::newAlignment(void) {
 
     Cleaning = new Cleaner(this);
     Statistics = new StatisticsManager(this);
-//     ReadWrite = new ReadWriteManager(this);
 
     /* newAlignment parameter */
     sequenNumber = 0;
@@ -66,43 +65,8 @@ newAlignment::newAlignment(void) {
     /* Are the input sequences aligned? */
     isAligned = false;
 
-    /* Should the output file be reversed? */
-//     reverse   = false;
-
-    /* Should be trimmed only terminal gaps? */
-//     terminalGapOnly = false;
-
-    /* Input and output formats */
-//     ReadWrite -> iformat = 0;
-//     ReadWrite -> oformat = 0;
-//     ReadWrite -> shortNames = false;
-
-//     forceCaps = false;
-//     upperCase = false;
-//     lowerCase = false;
-
-    /* Indicate whether sequences composed only by gaps should be kept or not */
-//     keepSequences = false;
-
-    /* Indicate whether original header, they may include non-alphanumerical
-     * characters, should be dumped into output stream without any preprocessing
-     * step */
-//     keepHeader = false;
-
-//     gapSymbol = "-";
-
     /* Sequence datatype: DNA, RNA or Protein */
     dataType = 0;
-
-    /* Window sizes to trim the input newAlignment */
-//     ghWindow = 0;
-//     shWindow = 0;
-
-    /* Minimum block size in the new newAlignment */
-//     blockSize = 0;
-
-    /* Is this alignmnet new? */
-//     oldnewAlignment  = false;
 
     /* Sequence residues number */
     residuesNumber = NULL;
@@ -116,17 +80,12 @@ newAlignment::newAlignment(void) {
     seqsName  = NULL;
     seqsInfo  = NULL;
 
-    /* Information about input newAlignment */
-//     filename = "";
-//     aligInfo = "";
-
     /* Information computed from newAlignment */
-    sgaps =     NULL;
-    scons =     NULL;
-    SequencesMatrix = NULL;
-    identities = NULL;
+    sgaps =             NULL;
+    scons =             NULL;
+    SequencesMatrix =   NULL;
+    identities =        NULL;
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -141,58 +100,56 @@ newAlignment::newAlignment(newAlignment& originalAlignment) {
         
         aligInfo = originalAlignment.aligInfo;
 
+        
         sequenNumber = originalAlignment.sequenNumber;
         residNumber =  originalAlignment.residNumber;
 
+        
         isAligned =  originalAlignment.isAligned;
-//         reverse   =  originalAlignment.reverse;
 
+        
         dataType = originalAlignment.dataType;
 
+        
         sequences = new string[sequenNumber];
         for(i = 0; i < sequenNumber; i++)
             sequences[i] = originalAlignment.sequences[i];
 
+        
         seqsName = new string[sequenNumber];
         for(i = 0; i < sequenNumber; i++)
             seqsName[i] = originalAlignment.seqsName[i];
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-        //delete [] residuesNumber;
+        
         if(originalAlignment.residuesNumber) {
             residuesNumber = new int[sequenNumber];
             for(i = 0; i < sequenNumber; i++)
                 residuesNumber[i] = originalAlignment.residuesNumber[i];
         }
         else residuesNumber = NULL;
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-        //delete [] seqsInfo;
+        
         if(originalAlignment.seqsInfo) {
             seqsInfo = new string[sequenNumber];
             for(i = 0; i < sequenNumber; i++)
                 seqsInfo[i] = originalAlignment.seqsInfo[i];
         } else seqsInfo = NULL;
 
-        //delete [] saveResidues;
+        
         if(originalAlignment.saveResidues) {
             saveResidues = new int[residNumber];
             for(i = 0; i < residNumber; i++)
                 saveResidues[i] = originalAlignment.saveResidues[i];
         } else saveResidues = NULL;
 
-        //delete [] saveSequences;
+        
         if(originalAlignment.saveSequences) {
             saveSequences = new int[sequenNumber];
             for(i = 0; i < sequenNumber; i++)
                 saveSequences[i] = originalAlignment.saveSequences[i];
         } else saveSequences = NULL;
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-        //delete [] identities;
+        
         if(originalAlignment.identities) {
             identities = new float*[sequenNumber];
             for(i = 0; i < sequenNumber; i++) {
@@ -201,9 +158,7 @@ newAlignment::newAlignment(newAlignment& originalAlignment) {
                     identities[i][j] = originalAlignment.identities[i][j];
             }
         } else identities = NULL;
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
         //delete sgaps;
         sgaps = NULL;
 
@@ -212,14 +167,13 @@ newAlignment::newAlignment(newAlignment& originalAlignment) {
 
         //delete SequencesMatrix;
         SequencesMatrix = NULL;
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        
+        
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     this -> Cleaning = new Cleaner(this, originalAlignment.Cleaning);
     
     this -> Statistics = new StatisticsManager(this, originalAlignment.Statistics);
-    
-//     this -> ReadWrite = new ReadWriteManager(this, originalAlignment.ReadWrite);
 
     this-> fillMatrices(false);
 }
@@ -277,17 +231,15 @@ newAlignment::~newAlignment(void) {
     sequenNumber = 0;
     residNumber  = 0;
 
+
     isAligned = false;
-//     reverse   = false;
 
     dataType = 0;
     
     delete Cleaning;
     delete Statistics;
-//     delete ReadWrite;
+
 }
-
-
 
 newAlignment *newAlignment::getTranslationCDS(int newResidues, int newSequences, int *ColumnsToKeep, string *oldSeqsName, sequencesMatrix *seqMatrix, 
                                               newAlignment *ProtAlig) {
@@ -371,7 +323,7 @@ newAlignment *newAlignment::getTranslationCDS(int newResidues, int newSequences,
     newAlig -> sequences =  new string[newSequences];
     newAlig -> seqsName =   new string[newSequences];
 
-    newAlig -> dataType =   DNAType;
+    newAlig -> dataType =   SequenceTypes::DNA;
     newAlig -> isAligned =  true;
     
 //     newAlig -> reverse =  ProtAlig -> getReverseFlag();
@@ -389,25 +341,15 @@ newAlignment *newAlignment::getTranslationCDS(int newResidues, int newSequences,
     
     newAlig -> saveResidues = new int[residNumber];
 
-    
-    
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Deallocated auxiliar memory */
     delete [] matrixAux;
     delete mappedSeqs;
     delete tmpSequence;
     delete selectedRes;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Return the new newAlignment reference */
     return newAlig;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+
 }
-
-
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Return the number of the sequences in the newAlignment */
@@ -432,71 +374,23 @@ void newAlignment::setWindowsSize(int ghWindow_, int shWindow_) {
     Statistics -> shWindow = shWindow_;
 }
 
-// /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-// /* This method lets to change the output format */
-// /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-// void newAlignment::setOutputFormat(int format_, bool shortNames_) {
-//     ReadWrite -> oformat    = format_;
-//     ReadWrite -> shortNames = shortNames_;
-// }
-// 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method sets a new block size value */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void newAlignment::setBlockSize(int blockSize_) {
     Cleaning -> blockSize = blockSize_;
 }
-// 
-// 
-// /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-// /* Return true if the ReadWrite -> shortNames flag has been setted */
-// /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-// int newAlignment::getShortNames(void) {
-//     return ReadWrite -> shortNames;
-// }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Return true if the reverse flag has been setted. */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-// int newAlignment::getReverseFlag(void) {
-//     return reverse;
-// }
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method lets to change the output newAlignment orientation */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-// void newAlignment::setReverseFlag(bool newValue) {
-//     reverse = newValue;
-// }
-
-
-/* Set appropiate flag to decide whether sequences composed only by gaps should
- * be kept or not */
 void newAlignment::setKeepSequencesFlag(bool flag) {
     Cleaning -> keepSequences = flag;
 }
 
-// /* Set appropiate flag to decide whether original sequences header should be
-//  * dumped into the output stream with or without any preprocessing step */
-// void newAlignment::setKeepSeqsHeaderFlag(bool flag) {
-//     ReadWrite -> keepHeader = flag;
-// }
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Return the block size value */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int newAlignment::getBlockSize(void) {
     return Cleaning -> blockSize;
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method returns the sequences name */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void newAlignment::getSequences(string *Names) {
     for(int i = 0; i < sequenNumber; i++)
         Names[i] = seqsName[i];
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void newAlignment::getSequences(string *Names, int *lengths) {
     for(int i = 0; i < sequenNumber; i++) {
         lengths[i] = (int) utils::removeCharacter('-', sequences[i]).length();
@@ -504,7 +398,6 @@ void newAlignment::getSequences(string *Names, int *lengths) {
     }
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void newAlignment::getSequences(string *Names, string *Sequences, int *Lengths) {
     for(int i = 0; i < sequenNumber; i++) {
         Names[i] = seqsName[i];
@@ -513,12 +406,6 @@ void newAlignment::getSequences(string *Names, string *Sequences, int *Lengths) 
     }
 }
 
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* For a given set of sequences name, check for its correspondence with
- * the current sequences name. If there is not a complete correspondence
- * between both sets, the method return false, otherwise, return true */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) {
     int i, j, numNames;
 
@@ -544,7 +431,6 @@ bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
-
 int newAlignment::getAlignmentType(void) {
     if(dataType == 0)
         dataType = utils::checkAlignmentType(sequenNumber, residNumber, sequences);
@@ -563,8 +449,6 @@ bool newAlignment::isFileAligned(void) {
     return isAligned;
 }
 
-/* Function for copying to previously allocated memory those data selected
- * for being in the final newAlignment */
 void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) {
     int i, j, k;
 
@@ -583,8 +467,6 @@ void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) {
     }
 }
 
-/* Function for copying to previously allocated memory those data selected
- * for being in the final newAlignment */
 void newAlignment::fillNewDataStructure(newValues *data) {
     int i, j, k;
 
@@ -604,13 +486,10 @@ void newAlignment::fillNewDataStructure(newValues *data) {
     // cerr << data -> seqsName[j-1] << endl;
 }
 
-/* Check if CDS file is correct based on: Residues are DNA/RNA (at most). There
- * is not gaps in the whole dataset. Each sequence is multiple of 3. At the same
- * time, the function will remove stop codons if appropiate flags are used */
 bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon,\
         newAlignment *proteinAlig) {
 
-    if (getAlignmentType() == AAType) {
+    if (getAlignmentType() == SequenceTypes::AA) {
         cerr << endl << "ERROR: Check input CDS file. It seems to content protein "
              << "residues." << endl << endl;
         return false;
@@ -816,10 +695,6 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
     return true;
 }
 
-/* Function designed to check whether input CDS file is correct or not based on
- * some features: Sequences are in both files (it could be more on CDS file),
- * they have (more or less) same ength. Otherwise, some nucleotides could be
- * excluded or some 'N's added to fit protein length. */
 bool newAlignment::checkCorrespondence(string *names, int *lengths, int \
                                        totalInputSeqs, int multiple = 1) {
 
@@ -1017,18 +892,6 @@ void newAlignment::printAlignmentInfo(ostream &file) {
           << "## Shortest seq. length\t" << min << endl;
 }
 
-
-
-
-
-
-/*// ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This function computes some parameters from the input alignment such as
- * identity average, identity average from each sequence and its most similar
- * one, etc, to select which one is the best automated method to trim this
- * alignment */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-
 void newAlignment::printSeqIdentity(void) {
 
     int i, j, k, pos, maxLongName;
@@ -1122,7 +985,7 @@ void newAlignment::calculateColIdentity(float *ColumnIdentities) {
     string column;
 
     /* Initialize some data for make computation more precise */
-    indet = getAlignmentType() == AAType ? 'X' : 'N';
+    indet = getAlignmentType() == SequenceTypes::AA ? 'X' : 'N';
     gapSymbol = '-';
 
     /* Compute identity score for the most frequent residue, it can be as well

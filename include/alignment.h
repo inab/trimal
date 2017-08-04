@@ -53,7 +53,8 @@
 #define DNAType 1
 #define RNAType 2
 #define AAType  3
-
+#define DNADeg  4
+#define RNADeg  5
 
 struct newValues {
   int residues;

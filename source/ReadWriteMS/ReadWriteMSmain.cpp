@@ -2,6 +2,7 @@
 #include "../../include/newAlignment.h"
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include <string>
+#include "../../include/values.h"
 #ifndef debug
 #define debug false
 #endif
@@ -373,34 +374,40 @@ int main(int argc, char *argv[])
     
 
     if(MachineState.format || MachineState.info || MachineState.type) {
-        newAlignment* alignment = MachineState.loadAlignment(inFiles[0]);
-        
-        if (MachineState.format)
-            /* Inform about if sequences are aligned or not */
-            cout    << "## Input file format\t" << MachineState.getInputStateName(inFiles[0]) << endl
-                    << "## Input file aligned\t" << (alignment->isAligned ? "YES":"NO")
-                    << endl;
+        for (string str : inFiles)
+        {
+            cout << "## Alignment File: " << str << endl;
+            newAlignment* alignment = MachineState.loadAlignment(str);
+            
+            if (MachineState.format)
+                /* Inform about if sequences are aligned or not */
+                cout    << "## Input file format\t" << MachineState.getInputStateName(str) << endl
+                        << "## Input file aligned\t" << (alignment->isAligned ? "YES":"NO")
+                        << endl;
 
-        if(MachineState.type) {
-            /* Inform about biological datatype */
-            if (alignment->getAlignmentType() == DNAType)
-                cout << "## Input file datatype\tnucleotides:dna" << endl;
-            else if (alignment->getAlignmentType() == DNADeg)
-                cout << "## Input file datatype\tnucleotides:dna_degenerate_codes" << endl;
-            else if (alignment->getAlignmentType() == RNAType)
-                cout << "## Input file datatype\tnucleotides:rna" << endl;
-            else if (alignment->getAlignmentType() == RNADeg)
-                cout << "## Input file datatype\tnucleotides:rna_degenerate_codes" << endl;
-            else if (alignment->getAlignmentType() == AAType)
-                cout << "## Input file datatype\tamino-acids" << endl;
-            else
-                cout << "## Input file datatype\tunknown" << endl;
+            if(MachineState.type) {
+                /* Inform about biological datatype */
+                if (alignment->getAlignmentType() == SequenceTypes::DNA)
+                    cout << "## Input file datatype\tnucleotides:dna" << endl;
+                else if (alignment->getAlignmentType() == (SequenceTypes::DNA | SequenceTypes::DEG))
+                    cout << "## Input file datatype\tnucleotides:dna_degenerate_codes" << endl;
+                else if (alignment->getAlignmentType() == SequenceTypes::RNA)
+                    cout << "## Input file datatype\tnucleotides:rna" << endl;
+                else if (alignment->getAlignmentType() == (SequenceTypes::RNA | SequenceTypes::DEG))
+                    cout << "## Input file datatype\tnucleotides:rna_degenerate_codes" << endl;
+                else if (alignment->getAlignmentType() == SequenceTypes::AA)
+                    cout << "## Input file datatype\tamino-acids" << endl;
+                else
+                    cout << "## Input file datatype\tunknown" << endl;
+            }
+
+            if(MachineState.info)
+                alignment->printAlignmentInfo(cout);
+            
+            cout << endl;
+            
+            delete alignment;
         }
-
-        if(MachineState.info)
-            alignment->printAlignmentInfo(cout);
-        
-        delete alignment;
     }
     else
         MachineState.processFile(&inFiles, &outPattern, &outFormats);

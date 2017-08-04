@@ -4,6 +4,11 @@ project(trimal)
 # Make project C++ 11
 set(CMAKE_CXX_STANDARD 11)
 
+# Make project libs static for use in Docker.
+# Remember to comment these lines if you are building for non-docker use.
+SET(BUILD_SHARED_LIBRARIES OFF)
+SET(CMAKE_EXE_LINKER_FLAGS "-static")
+
 # Make bin folder to output the compiled programs
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
@@ -53,11 +58,16 @@ target_link_libraries(readalMS m)
 
 # --------------------------- TESTING --------------------------- #
 
+find_program( MEMORYCHECK_COMMAND valgrind )
+set( MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --leak-check=full" )
+# set( MEMORYCHECK_SUPPRESSIONS_FILE "${PROJECT_SOURCE_DIR}/valgrind_suppress.txt" )
+
 # new_trimal tests need trimal to be built
 add_dependencies(new_trimal trimal)
 
 # Basic tests
 include(CTest)
+set_tests_properties(PROPERTIES TIMEOUT 0)
 add_test(Crash_Trimal       bin/trimal)
 add_test(Crash_NewTrimal    bin/new_trimal)
 add_test(Crash_Readal       bin/readal)
@@ -71,96 +81,98 @@ macro(compare_outputs test_name program_a program_b arguments)
             -Dprogram_a=${program_a}
             -Dprogram_b=${program_b}
             -Dcommand=${arguments}
-            -P scripts/compareOutput.cmake)
+            -P scripts/compareTrimAlOutput.cmake)
 endmacro()
 
 # Create lists of variables and files for testing
 FILE(GLOB files
         dataset/*clw
         dataset/*phy
-       dataset/*msl
-       dataset/*fa*
-       dataset/*pir
-       dataset/*phy2
-        )
-set(thresholds 0 0.5 1)
-set(cons 10 20 40 80)
+        dataset/*msl
+        dataset/*fa*
+        dataset/*pir
+        dataset/*phy2
+    )
+    
+# Create a pack of arguments to use for testing
+set(thresholds 0.5)
+set(cons 10)
 set(automethod -gappyout -strict -strictplus -automated1 -nogaps -noallgaps)
-set(resoverlap 0.1 0.3 0.6)
-set(seqoverlap 5 10 50 80)
-set(clusters 2 4)
-set(max_identities 0 0.5 1)
-set(blocks 2 4 6)
+set(resoverlap 0.5)
+set(seqoverlap 5)
+set(clusters 2)
+set(max_identities 0.5)
+set(blocks 2)
 
-# Add all the combinations of gt and files provided
+# Add all the combinations of arguments and files provided
 foreach(file ${files})
     
     string(REGEX MATCH "[^/]+$" stripped_file ${file})
 #     message("${stripped_file}")
     
     compare_outputs(
-            "[file:${stripped_file}]"
-            "bin/trimal" "bin/new_trimal"
+            "[trimal][file:${stripped_file}][vanilla]"
+            "../Strimal/source/trimal" "bin/new_trimal"
             "-in ${file}")
             
     foreach(threshold ${thresholds})
         compare_outputs(
-                "[file:${stripped_file}][gt:${threshold}]"
-                "bin/trimal" "bin/new_trimal"
+                "[trimal][file:${stripped_file}][gt:${threshold}]"
+                "../Strimal/source/trimal" "bin/new_trimal"
                 "-in ${file} -gt ${threshold}")
         compare_outputs(
-                "[file:${stripped_file}][st:${threshold}]"
-                "bin/trimal" "bin/new_trimal"
+                "[trimal][file:${stripped_file}][st:${threshold}]"
+                "../Strimal/source/trimal" "bin/new_trimal"
                 "-in ${file} -st ${threshold}")
     endforeach()
 
     foreach(cons ${cons})
         compare_outputs(
-                "[file:${stripped_file}][cons:${cons}]"
-                "bin/trimal" "bin/new_trimal"
+                "[trimal][file:${stripped_file}][cons:${cons}]"
+                "../Strimal/source/trimal" "bin/new_trimal"
                 "-in ${file} -cons ${cons}")
     endforeach()
 
     foreach(method ${automethod})
         compare_outputs(
-                "[file:${stripped_file}][${method}]"
-                "bin/trimal" "bin/new_trimal"
+                "[trimal][file:${stripped_file}][${method}]"
+                "../Strimal/source/trimal" "bin/new_trimal"
                 "-in ${file} ${method}")
     endforeach()
     
     foreach(cluster ${clusters})
         compare_outputs(
-                "[file:${stripped_file}][cluster:${cluster}]"
-                "bin/trimal" "bin/new_trimal"
+                "[trimal][file:${stripped_file}][cluster:${cluster}]"
+                "../Strimal/source/trimal" "bin/new_trimal"
                 "-in ${file} -clusters ${cluster}")
     endforeach()
     
     foreach(max_identity ${max_identities})
         compare_outputs(
-                "[file:${stripped_file}][max_identity:${max_identity}]"
-                "bin/trimal" "bin/new_trimal"
+                "[trimal][file:${stripped_file}][max_identity:${max_identity}]"
+                "../Strimal/source/trimal" "bin/new_trimal"
                 "-in ${file} -maxidentity ${max_identity}")
     endforeach()
     
     foreach(block ${blocks})
         compare_outputs(
-                "[file:${stripped_file}][block:${block}]"
-                "bin/trimal" "bin/new_trimal"
+                "[trimal][file:${stripped_file}][block:${block}]"
+                "../Strimal/source/trimal" "bin/new_trimal"
                 "-in ${file} -block ${block}")
     endforeach()
 
     foreach(seqoverlap ${seqoverlap})
         foreach(resoverlap ${resoverlap})
             compare_outputs(
-                    "[file:${stripped_file}][seqo:${seqoverlap}][reso:${resoverlap}]"
-                    "bin/trimal" "bin/new_trimal"
+                    "[trimal][file:${stripped_file}][seqo:${seqoverlap}][reso:${resoverlap}]"
+                    "../Strimal/source/trimal" "bin/new_trimal"
                     "-in ${file} -resoverlap ${resoverlap} -seqoverlap ${seqoverlap}")
         endforeach()
     endforeach()
 endforeach()
 
-# # Force tests to be made each time new_trimal is built
+# Force tests to be made each time new_trimal is built
 # add_custom_command(
 #        TARGET new_trimal
 #       POST_BUILD
-#      COMMAND ctest)
+#      COMMAND ctest -R "vanilla")

@@ -37,11 +37,11 @@
 #define REVISION 22
 #define AUTHORS "2009-2015. Salvador Capella-Gutierrez and Toni Gabaldón."
 
-#define DNAType 1
-#define RNAType 2
-#define AAType  3
-#define DNADeg  4
-#define RNADeg  5
+// #define DNAType 1
+// #define RNAType 2
+// #define AAType  3
+// #define DNADeg  4
+// #define RNADeg  5
 
 #define GAPPYOUT 1
 #define STRICT   2
@@ -52,5 +52,39 @@
 
 #define HTMLBLOCKS 120
 #define PHYLIPDISTANCE 10
+
+ /**
+  \file defines.h
+  \enum SequenceTypes
+ \details 
+ <b> Binary Tag Enum.</b> \n
+<a href="http://www.alanzucconi.com/2015/07/26/enum-flags-and-bitwise-operators/" > Alan Zucconi </a> has a great explanation of these.\n\n
+ 
+ This enum contains the tags needed to obtain sequence types by composition of its main elements.\n
+ 
+ To obtain a composed alignment type you can bitwise OR the tags: ComposedTag = SequenceTypes::DNA | SequenceTypes::DEG\n
+ You can Fuzzy and Exact check both simple and composed tags\n\n
+ 
+ To \b FUZZY check an alignment type you can: \n
+    _alignment -> getAlignmentType() & SequenceTypes::DNA\n
+        <i> This will return true if the _alignment type is DNA, ignoring the rest of tags.</i>\n\n
+    _alignment -> getAlignmentType() & (SequenceTypes::DNA | SequenceTypes::DEG)\n
+        <i> This will return true if the _alignment type is DNA Deg, ignoring the rest of tags.</i>\n\n
+    
+ To \b EXACT check an alignment type you can: \n
+    _alignment -> getAlignmentType() == SequenceTypes::DNA \n
+        <i> This will return true if the _alignment type is only DNA. DNA Deg would result in false</i>.\n\n
+    _alignment -> getAlignmentType() == (SequenceTypes::DNA | SequenceTypes::DEG) \n
+        <i> This will return true if the _alignment is type DNA Deg, additional tags (like SequenceTypes::DNA | SequenceTypes::RNA | SequenceTypes::DEG) would resut in false.</i>\n\n
+
+ */
+enum SequenceTypes
+{
+    DNA = 1 << 1, ///< DNA Tag
+    RNA = 1 << 2, ///< RNA Tag
+    AA  = 1 << 3, ///< AA Tag
+    
+    DEG = 1 << 4 ///< Degraded Tag
+};
 
 #endif

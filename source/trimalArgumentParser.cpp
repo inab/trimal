@@ -6,6 +6,7 @@
 #include <string.h>
 #include "../include/compareFiles.h"
 #include "../include/defines.h"
+#include "../include/values.h"
 void menu();
 void examples();
 
@@ -1467,8 +1468,7 @@ bool trimAlManager::check_backtranslations()
 bool trimAlManager::check_coding_sequences_type()
 {
     if((!appearErrors) && (backtransFile != NULL) && // Is there a backtranslation file?
-        (backtranslationAlig -> getAlignmentType() != DNAType && 
-         backtranslationAlig -> getAlignmentType() != DNADeg)) // If so, is it from DNA?
+        (!backtranslationAlig -> getAlignmentType() & SequenceTypes::DNA )) // If so, is it from DNA?
     {
         cerr << endl << "ERROR: Check your Coding sequences file. It has been detected other kind of biological sequences." << endl << endl;
         appearErrors = true;
@@ -1681,7 +1681,7 @@ bool trimAlManager::create_or_use_similarity_matrix()
 
         else
         {
-            if((origAlig -> getAlignmentType()) == AAType)
+            if((origAlig -> getAlignmentType()) & SequenceTypes::AA)
                 similMatrix -> defaultAASimMatrix();
             else
                 similMatrix -> defaultNTSimMatrix();

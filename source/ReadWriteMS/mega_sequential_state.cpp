@@ -4,11 +4,15 @@
 #include <stdio.h>
 #include <string>
 #include "../../include/defines.h"
+#include "../../include/values.h"
 
 using namespace std;
 
 int MegaSequentialState::CheckAlignment(istream* origin)
 {
+    origin->seekg(0);
+    origin->clear();
+ 
     char c, *firstWord = NULL, *line = NULL;
     int format = 0, blocks = 0;
     string nline;
@@ -113,10 +117,10 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
         /* If TITLE label is found, replace previously stored information with
          * this info */
         if(!strcmp(str, "TITLE")) {
-            filename.clear();
+             _alignment->filename.clear();
             if(strncmp(line, "!", 1))
-                filename += "!";
-            filename += line;
+                 _alignment->filename += "!";
+             _alignment->filename += line;
         }
 
             /* If FORMAT label is found, try to get some details from input file */
@@ -262,7 +266,7 @@ bool MegaSequentialState::SaveAlignment(newAlignment* alignment, std::ostream* o
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
     if (!alignment->isAligned) {
-        cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
+        cerr << endl << "ERROR: Sequences are not aligned. Format (Mega) "
              << "not compatible with unaligned sequences." << endl << endl;
         return false;
     }
@@ -285,11 +289,11 @@ bool MegaSequentialState::SaveAlignment(newAlignment* alignment, std::ostream* o
     *output << "#MEGA" << endl << alignment->filename << endl;
 
     /* Print alignment datatype */
-    if (alignment->dataType == DNAType)
+    if (alignment->dataType & SequenceTypes::DNA)
         *output << "!Format DataType=DNA ";
-    else if (alignment->dataType == RNAType)
+    else if (alignment->dataType & SequenceTypes::RNA)
         *output << "!Format DataType=RNA ";
-    else if (alignment->dataType == AAType)
+    else if (alignment->dataType & SequenceTypes::AA)
         *output << "!Format DataType=protein ";
 
     /* Print number of sequences and alignment length */

@@ -788,7 +788,7 @@ newAlignment* Cleaner::cleanConservation(float baseLine, float conservationPct, 
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Calculate the cut point using the given parameters */
-    cut = _alignment->scons -> calcCutPoint(baseLine, conservationPct);
+    cut = (float) _alignment->scons -> calcCutPoint(baseLine, conservationPct);
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -908,7 +908,7 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Depending on the kind of newAlignment, we have
      * different indetermination symbol */
-    if(_alignment -> getAlignmentType() == AAType)
+    if(_alignment -> getAlignmentType() == SequenceTypes::AA)
         indet = 'X';
     else
         indet = 'N';
@@ -1349,6 +1349,14 @@ void Cleaner::setTrimTerminalGapsFlag(bool terminalOnly_)
     terminalGapOnly = terminalOnly_;
 }
 
+void Cleaner::setBoundaries(int * boundaries_)
+{
+    if (boundaries_ != NULL) {
+        left_boundary = boundaries_[0];
+        right_boundary = boundaries_[1];
+    }
+}
+
 newAlignment * Cleaner::getClustering(float identityThreshold) {
 
     string *matrixAux, *newSeqsName;
@@ -1535,32 +1543,43 @@ newAlignment *Cleaner::removeSequences(int *seqs, int init, int size,
  * borders are keept independently of the applied methods */
 bool Cleaner::removeOnlyTerminal(void) {
 
-    int i, left_boundary, right_boundary;
-    const int *gInCol;
+    int i;
+  const int *gInCol;
 
-    /* Get newAlignments gaps stats and copy it */
-    if(_alignment -> Statistics->calculateGapStats() != true) {
-        cerr << endl << "WARNING: Impossible to apply 'terminal-only' method"
-             << endl << endl;
-        return false;
+  if((left_boundary == -1) and (right_boundary == -1)) {
+    /* Get alignments gaps stats and copy it */
+    if(_alignment->Statistics-> calculateGapStats() != true) {
+      cerr << endl << "WARNING: Impossible to apply 'terminal-only' method"
+        << endl << endl;
+      return false;
     }
-    gInCol = _alignment -> sgaps -> getGapsWindow();
+    gInCol = _alignment->sgaps -> getGapsWindow();
 
     /* Identify left and right borders. First and last columns with no gaps */
-    for(i = 0; i < _alignment -> residNumber && gInCol[i] != 0; i++) ;
+    for(i = 0; i < _alignment->residNumber && gInCol[i] != 0; i++) ;
     left_boundary = i;
 
-    for(i = _alignment -> residNumber - 1; i > -1 && gInCol[i] != 0; i--) ;
-    right_boundary = i + 1;
+    for(i = _alignment->residNumber - 1; i > -1 && gInCol[i] != 0; i--) ;
+    right_boundary = i;
+  }
 
-    /* Once the interal boundaries have been established, if these limits exist
-     * then retrieved all columns inbetween both boundaries. Columns out of these
-     * limits will remain selected or not depending on the algorithm applied */
-    for(i = left_boundary; i < right_boundary; i++)
-        if(_alignment -> saveResidues[i] == -1)
-            _alignment -> saveResidues[i] = i;
+  else if(left_boundary >= right_boundary) {
+    cerr << endl << "ERROR: Check your manually set left '"<< left_boundary
+      << "' and right '" << right_boundary << "' boundaries'" << endl << endl;
+    return false;
+  }
 
-    return true;
+  /* We increase the right boundary in one position because we use lower strict
+   * condition to get back columns inbetween boundaries removed by any method */
+   right_boundary += 1;
+
+  /* Once the interal boundaries have been established, if these limits exist
+   * then retrieved all columns inbetween both boundaries. Columns out of these
+   * limits will remain selected or not depending on the algorithm applied */
+  for(i = left_boundary; i < right_boundary; i++)
+    _alignment-> saveResidues[i] = i;
+
+  return true;
 }
 
 /* Function designed to identify and remove those columns blocks smaller than
@@ -1676,7 +1695,7 @@ void Cleaner::calculateSeqIdentity(void) {
     char indet;
 
     /* Depending on alignment type, indetermination symbol will be one or other */
-    indet = _alignment -> getAlignmentType() == AAType ? 'X' : 'N';
+    indet = _alignment -> getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
     /* Create identities matrix to store identities scores */
     _alignment -> identities = new float*[_alignment -> sequenNumber];
@@ -1834,6 +1853,9 @@ Cleaner::Cleaner(newAlignment *parent) {
     keepSequences       = false;
     
     blockSize =     0;
+    
+    left_boundary = -1;
+    right_boundary = -1;
 }
 
 Cleaner::Cleaner(newAlignment *parent, Cleaner* mold) {
@@ -1842,4 +1864,6 @@ Cleaner::Cleaner(newAlignment *parent, Cleaner* mold) {
     terminalGapOnly     = mold -> terminalGapOnly;
     keepSequences       = mold -> keepSequences;
     blockSize           = mold -> blockSize;
+    left_boundary       = mold -> left_boundary;
+    right_boundary      = mold -> right_boundary;
 }

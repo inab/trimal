@@ -65,7 +65,7 @@ newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
     /* Allocate memory for the input alignmet */
     _alignment->seqsName  = new string[_alignment->sequenNumber];
     _alignment->sequences = new string[_alignment->sequenNumber];
-    _alignment->seqsInfo  = new string[_alignment->sequenNumber];
+    _alignment->seqsInfo  = NULL;//new string[_alignment->sequenNumber];
 
     for(i = -1; (i < _alignment->sequenNumber) && (!file.eof()); ) {
 
@@ -80,8 +80,8 @@ newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
 
         /* Store original header fom input sequences including non-standard
          * characters */
-        if (line[0] == '>')
-            _alignment->seqsInfo[i+1].append(&line[1], strlen(line) - 1);
+//         if (line[0] == '>')
+//             _alignment->seqsInfo[i+1].append(&line[1], strlen(line) - 1);
 
         /* Cut the current line and check whether there are valid characters */
         str = strtok(line, OTHDELIMITERS);
@@ -146,7 +146,7 @@ bool FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
         else if (alignment->seqsInfo != NULL)
             maxLongName = utils::max(maxLongName, alignment->seqsInfo[i].size());
 
-    if (!Machine->shortNames && maxLongName > PHYLIPDISTANCE) {
+    if (Machine->shortNames && maxLongName > PHYLIPDISTANCE) {
         maxLongName = PHYLIPDISTANCE;
         if (!Machine->keepHeader)
             cerr << endl << "WARNING: Original sequence header will be cutted by "

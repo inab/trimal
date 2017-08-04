@@ -28,7 +28,14 @@ class Cleaner {
       \brief Block size to use on the cleaning methods.
       */
      int blockSize;
-     
+     /**
+      \brief left boundary of the alignment
+      */
+         int left_boundary;
+    /**
+      \brief right boundary of the alignment
+      */
+    int right_boundary;
      /**
       \brief Method that selects the best cleaning workflow based on statistics of the alignment.
       */
@@ -233,6 +240,11 @@ class Cleaner {
       \param terminalOnly_ New vlue of the Terminal Only Flag.
       */
      void setTrimTerminalGapsFlag(bool terminalOnly_);
+     /**
+      \brief Boundaries setter
+      \param[in] boundaries New values.
+      */
+    void setBoundaries(int * boundaries);
     /**
       \brief Method to calculate identities between the sequences from the alignment.
       */

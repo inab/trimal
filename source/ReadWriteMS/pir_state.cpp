@@ -1,6 +1,7 @@
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/ReadWriteMS/pir_state.h"
 #include "../../include/defines.h"
+#include "../../include/values.h"
 #include <iostream>
 #include <stdio.h>
 #include <string>
@@ -147,6 +148,7 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
 
 bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
+    
    /* Generate output alignment in NBRF/PIR format. Sequences can be unaligned */
 
     int i, j, k;
@@ -165,11 +167,11 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
 
     /* Compute output file datatype */
     alignment->getAlignmentType();
-    if (alignment->dataType == DNAType)
+    if (alignment->dataType & SequenceTypes::DNA)
         alg_datatype = "DL";
-    else if (alignment->dataType == RNAType)
+    else if (alignment->dataType & SequenceTypes::RNA)
         alg_datatype = "RL";
-    else if (alignment->dataType == AAType)
+    else if (alignment->dataType & SequenceTypes::AA)
         alg_datatype = "P1";
 
     /* Print alignment */
@@ -184,10 +186,11 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
                  << alignment->seqsName[i] << " " << alignment->residuesNumber[i] << " bases" << endl;
 
         /* Write the sequence */
-        for(j = 0; j < alignment->residuesNumber[i]; j += 50) {
+        for(j = 0; j < alignment->residuesNumber[i]; j += 50) 
+        {
             for(k = j; (k < alignment->residuesNumber[i]) && (k < (j + 50)); k += 10)
                 (*output) << " " << tmpMatrix[i].substr(k, 10);
-            if((j + 50) >= alignment->residuesNumber[j])
+            if((j + 50) >= alignment->residNumber)
                 (*output) << "*";
             (*output) << endl;
         }

@@ -36,6 +36,12 @@
 #include "../include/defines.h"
 #include "../include/utils.h"
 
+#define DNAType 1
+#define RNAType 2
+#define AAType  3
+#define DNADeg  4
+#define RNADeg  5
+
 void menu(void);
 void examples(void);
 
@@ -1414,7 +1420,7 @@ int main(int argc, char *argv[]){
      appearErrors = true;
   }
 
-  if((!appearErrors) && (backtransFile != NULL) && (backtranslation -> getTypeAlignment() != DNAType && backtranslation -> getTypeAlignment() != DNADeg)) {
+  if((!appearErrors) && (backtransFile != NULL) && (!backtranslation -> getTypeAlignment() != DNAType && backtranslation -> getTypeAlignment() != DNADeg)) {
      cerr << endl << "ERROR: Check your Coding sequences file. It has been detected other kind of biological sequences." << endl << endl;
      appearErrors = true;
   }

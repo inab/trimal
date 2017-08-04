@@ -25,6 +25,7 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "../include/statisticsGaps.h"
+#include "../include/defines.h"
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 |  statisticsGaps::statisticsGaps(char **, int, int)                                                                   |
@@ -45,7 +46,7 @@ statisticsGaps::statisticsGaps(string *alignmentMatrix, int species, int aminos,
   halfWindow =   0;
   dataType = dataType_;
 
-  if(dataType == AAType)
+  if(dataType == SequenceTypes::DNA)
     indet = 'X';
   else
     indet = 'N';

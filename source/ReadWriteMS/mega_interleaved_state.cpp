@@ -10,6 +10,9 @@ using namespace std;
 
 int MegaInterleavedState::CheckAlignment(istream* origin)
 {
+    origin->seekg(0);
+    origin->clear();
+    
     char c, *firstWord = NULL, *line = NULL;
     int format = 0, blocks = 0;
     string nline;

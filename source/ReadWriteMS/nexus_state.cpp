@@ -1,6 +1,7 @@
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/ReadWriteMS/nexus_state.h"
 #include "../../include/defines.h"
+#include "../../include/values.h"
 #include <iostream>
 #include <stdio.h>
 #include <string>
@@ -28,7 +29,7 @@ int NexusState::CheckAlignment(istream* origin)
     firstWord = strtok(line, OTHDELIMITERS);
 
     /* Clustal Format */
-    if((!strcmp(firstWord, "NEXUS")) || (!strcmp(firstWord, "nexus")))
+    if((!strcmp(firstWord, "#NEXUS")) || (!strcmp(firstWord, "#nexus")))
         return 1;
 
  
@@ -222,11 +223,11 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
          << alignment->sequenNumber << " NCHAR=" << alignment->residNumber <<";" << endl;
 
     /* Print alignment datatype */
-    if (alignment->dataType == DNAType)
+    if (alignment->dataType & SequenceTypes::DNA)
         *output << "FORMAT DATATYPE=DNA INTERLEAVE=yes GAP=-";
-    else if (alignment->dataType == RNAType)
+    else if (alignment->dataType & SequenceTypes::RNA)
         *output << "FORMAT DATATYPE=RNA INTERLEAVE=yes GAP=-";
-    else if (alignment->dataType == AAType)
+    else if (alignment->dataType & SequenceTypes::AA)
         *output << "FORMAT DATATYPE=PROTEIN INTERLEAVE=yes GAP=-";
 
     i = 0;
