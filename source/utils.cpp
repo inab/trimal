@@ -389,6 +389,8 @@ char* utils::readLine(std::istream& file)
 
   /* Otherwise, initialize the appropiate data structure,
    * dump the data and return it */
+  if (line != nullptr) 
+      delete[] line;
   line = new char[nline.size() + 1];
   strcpy(line, nline.c_str());
   return line;
