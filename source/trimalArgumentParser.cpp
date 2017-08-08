@@ -13,7 +13,7 @@ void examples();
 void trimAlManager::parseArguments(int argc, char *argv[])
 {
 
-    origAlig = new newAlignment();
+    origAlig;
 
     if (argc == 1)
     {
