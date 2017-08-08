@@ -7,7 +7,7 @@ class MegaInterleavedState : public ReadWriteBaseState
 {
 public:
     
-    MegaInterleavedState(ReadWriteMS* MachineState) { Machine = MachineState; name="MEGAI"; extension="mega"; };
+    MegaInterleavedState(ReadWriteMS* MachineState) { Machine = MachineState; name="mega_interleaved"; extension="mega"; canLoad=true; };
     
     virtual int CheckAlignment(istream* origin);
     virtual newAlignment* LoadAlignment(string filename);

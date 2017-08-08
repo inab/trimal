@@ -47,21 +47,21 @@ void ReadWriteMS::addState(ReadWriteBaseState* newState)
 
 newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
 {
-    ReadWriteBaseState* inState = NULL;
-
+    // Check input file.
     ifstream inFileHandler;
     inFileHandler.open(inFile);
     if (!inFileHandler.is_open())
     {
-        cerr << "Couldn't open input file " << inFile << endl;
+        cerr << "ERROR: Couldn't open input file " << inFile << endl << endl;
         return nullptr;
     }
     else if (inFileHandler.peek() == std::ifstream::traits_type::eof())
     {
-        cerr << inFile << " is empty" << endl;
+        cerr << "ERROR: " << inFile << " is empty" << endl << endl;
         return nullptr;
     }
 
+    ReadWriteBaseState* inState = NULL;
     int format_value = 0;
     int temp_value = 0;
 
@@ -78,7 +78,7 @@ newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
 
     if (inState == NULL)
     {
-        cerr << "Cannot recognize input format" << endl;
+        cerr << "ERROR: Cannot recognize input format of file " << inFile << endl << endl;
         inFileHandler.close();
         return nullptr;
     }
@@ -86,25 +86,6 @@ newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
     newAlignment* alignment = inState->LoadAlignment(inFile);
     inFileHandler.close();
     return alignment;
-}
-
-bool ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newAlignment* alignment)
-{
-    if (alignment->sequenNumber == 0) return true;
-    ofstream output;
-    output.open(outFile);
-    for(ReadWriteBaseState* state : available_states)
-    {
-        if (state->RecognizeOutputFormat(outFormat))
-        {
-            if (output)
-                return state->SaveAlignment(alignment, &output, &alignment->filename);
-            else
-                return state->SaveAlignment(alignment, &cout, &alignment->filename);
-        }
-    }
-    cerr << "ERROR: Format specified wasn't recognized" << endl;
-    return false;
 }
 
 bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string >* outFormats, newAlignment* alignment)
@@ -118,8 +99,8 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
     }
     else
     {
-        start = alignment->filename.find_last_of("/");
-        end = alignment->filename.find_last_of(".");
+        start = max((int)outPattern.find_last_of("/"), 0);
+        end = outPattern.find_last_of(".");
         filename = utils::ReplaceString(outPattern, "[in]", alignment->filename.substr(start, end-start));
     }
 
@@ -139,12 +120,12 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
                     return state->SaveAlignment(alignment, &cout, &filename);
                 }
             }
-            cerr << "ERROR: Format specified wasn't recognized" << endl;
+            cerr << "ERROR: Format " << outFormats->at(0) << " wasn't recognized" << endl << endl;
             return false;
         }
         else
         {
-            cerr << "ERROR: You must specify only one output format if you don't provide an output file pattern" << endl;
+            cerr << "ERROR: You must specify only one output format if you don't provide an output file pattern" << endl << endl;
             return false;
         }
     }
@@ -169,7 +150,7 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
                     return state->SaveAlignment(alignment, &outFileHandler, &alignment->filename);
                 }
             }
-            cerr << "ERROR: Format specified wasn't recognized" << endl;
+            cerr << "ERROR: Format specified wasn't recognized" << endl << endl;
             return false;
         }
         
@@ -190,7 +171,7 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
                 }
                 if (!recognized)
                 {
-                    cerr << "ERROR: Cannot recognize output format " << outFormat << endl;
+                    cerr << "ERROR: Cannot recognize output format " << outFormat << endl << endl;
                     return false; 
                 }
             }
@@ -207,7 +188,7 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
             outFileHandler.open(filename_2);
             if(!state -> SaveAlignment(alignment, &outFileHandler, &alignment->filename))
             {
-                cerr << "ERROR: Alignment couldn't be saved on " << state->name << " format" << endl;
+                cerr << "ERROR: Alignment couldn't be saved on " << state->name << " format" << endl << endl;
                 isCorrect = false;
             }
             
@@ -250,7 +231,6 @@ void ReadWriteMS::processFile(
         }
     }
 
-
     // Process input files one by one.
     ReadWriteBaseState* inState = NULL;
     ifstream inFileHandler;
@@ -263,12 +243,12 @@ void ReadWriteMS::processFile(
         inFileHandler.open(inFile);
         if (!inFileHandler.is_open())
         {
-            cerr << "Couldn't open input file " << inFile << endl;
+            cerr << "ERROR: Couldn't open input file " << inFile << endl;
             return;
         }
         else if (inFileHandler.peek() == std::ifstream::traits_type::eof())
         {
-            cerr << inFile << " is empty" << endl;
+            cerr << "ERROR: " << inFile << " is empty" << endl;
             return;
         }
 
@@ -291,7 +271,7 @@ void ReadWriteMS::processFile(
         // Check if there is a format State to handle the alignment.
         if (inState == NULL)
         {
-            cerr << "Cannot recognize input format" << endl;
+            cerr << "Cannot recognize input format of file " << inFile << endl;
             inFileHandler.close();
             return;
         }
@@ -305,8 +285,7 @@ void ReadWriteMS::processFile(
             ofstream outFileHandler;
             for (ReadWriteBaseState * state : outStates)
             {
-                start = inFile.find_last_of("/");
-                start = max(start, 0);
+                start = max((int)inFile.find_last_of("/"), 0);
                 end = inFile.find_last_of(".");
                 filename = utils::ReplaceString(*outPattern, "[in]", inFile.substr(start, end-start));
                 utils::ReplaceStringInPlace(filename, "[extension]", state->extension);
@@ -325,12 +304,9 @@ void ReadWriteMS::processFile(
     }
 }
 
-std::string ReadWriteMS::getInputStateName(std::string inFile)
+std::string ReadWriteMS::getFileFormatName(std::string inFile)
 {
-    ReadWriteBaseState* inState = NULL;
     ifstream inFileHandler;
-    int format_value = 0;
-    int temp_value = 0;
 
     // Open file.
     inFileHandler.open(inFile);
@@ -339,10 +315,15 @@ std::string ReadWriteMS::getInputStateName(std::string inFile)
         cerr << "Couldn't open input file " << inFile << endl;
         return "Unknown";
     }
+    else if (inFileHandler.peek() == std::ifstream::traits_type::eof())
+    {
+        cerr << "ERROR: " << inFile << " is empty" << endl;
+        return "None";
+    }
 
-    inState = NULL;
-    format_value = 0;
-    temp_value = 0;
+    ReadWriteBaseState* inState = NULL;
+    int format_value = 0;
+    int temp_value = 0;
 
     // Get format State that can handle this alignment.
     for(ReadWriteBaseState* state : available_states)
@@ -366,16 +347,33 @@ std::string ReadWriteMS::getInputStateName(std::string inFile)
     return inState->name;
 }
 
-std::string ReadWriteMS::getFormatsAvailable()
+std::string ReadWriteMS::getInputFormatsAvailable()
 {
     std::stringstream ss("");
 
     for (ReadWriteBaseState* state : available_states)
     {
-        ss << state->name << ", " ;
+        if (state->canLoad)
+            ss << state->name << ", " ;
     }
     ss.seekp(-2, std::ios_base::end);
-    ss << ". ";
+    ss << "  ";
+
+    return ss.str();
+
+}
+
+std::string ReadWriteMS::getOutputFormatsAvailable()
+{
+    std::stringstream ss("");
+
+    for (ReadWriteBaseState* state : available_states)
+    {
+        if (state->canSave)
+            ss << state->name << ", " ;
+    }
+    ss.seekp(-2, std::ios_base::end);
+    ss << "  ";
 
     return ss.str();
 

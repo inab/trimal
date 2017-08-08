@@ -28,57 +28,57 @@ void trimAlManager::parseArguments(int argc, char *argv[])
 
         info_arguments(&argc, argv, &i);
         
-        if (in_argument(&argc, argv, &i)) continue;
-        if (out_argument(&argc, argv, &i)) continue;
-        if (html_out_argument(&argc, argv, &i)) continue;
-        if (out_format_arguments(&argc, argv, &i)) continue;
-        if (matrix_argument(&argc, argv, &i)) continue;
+        if (in_argument(&argc, argv, &i))           continue;
+        if (out_argument(&argc, argv, &i))          continue;
+        if (html_out_argument(&argc, argv, &i))     continue;
+        if (out_format_arguments(&argc, argv, &i))  continue;
+        if (matrix_argument(&argc, argv, &i))       continue;
 
-        if (compareset_argument(&argc, argv, &i)) continue;
+        if (compareset_argument(&argc, argv, &i))   continue;
         if (force_select_argument(&argc, argv, &i)) continue;
-        if (back_trans_argument(&argc, argv, &i)) continue;
+        if (back_trans_argument(&argc, argv, &i))   continue;
 
-        if (gap_threshold_argument(&argc, argv, &i)) continue;
-        if (similarity_threshold_argument(&argc, argv, &i)) continue;
-        if (consistency_threshold_argument(&argc, argv, &i)) continue;
+        if (gap_threshold_argument(&argc, argv, &i))            continue;
+        if (similarity_threshold_argument(&argc, argv, &i))     continue;
+        if (consistency_threshold_argument(&argc, argv, &i))    continue;
 
-        if (conservation_threshold_argument(&argc, argv, &i)) continue;
-        if (select_cols_argument(&argc, argv, &i)) continue;
+        if (conservation_threshold_argument(&argc, argv, &i))   continue;
+        if (select_cols_argument(&argc, argv, &i))              continue;
 
-        if (no_gaps_argument(&argc, argv, &i)) continue;
-        if (no_all_gaps_argument(&argc, argv, &i)) continue;
+        if (no_gaps_argument(&argc, argv, &i))              continue;
+        if (no_all_gaps_argument(&argc, argv, &i))          continue;
 
-        if (keep_seqs_argument(&argc, argv, &i)) continue;
-        if (keep_header_argument(&argc, argv, &i)) continue;
+        if (keep_seqs_argument(&argc, argv, &i))            continue;
+        if (keep_header_argument(&argc, argv, &i))          continue;
 
-        if (gappy_out_argument(&argc, argv, &i)) continue;
-        if (strict_argument(&argc, argv, &i)) continue;
-        if (strict_plus_argument(&argc, argv, &i)) continue;
-        if (automated1_argument(&argc, argv, &i)) continue;
+        if (gappy_out_argument(&argc, argv, &i))            continue;
+        if (strict_argument(&argc, argv, &i))               continue;
+        if (strict_plus_argument(&argc, argv, &i))          continue;
+        if (automated1_argument(&argc, argv, &i))           continue;
 
-        if (residue_overlap_argument(&argc, argv, &i)) continue;
-        if (sequence_overlap_argument(&argc, argv, &i)) continue;
+        if (residue_overlap_argument(&argc, argv, &i))      continue;
+        if (sequence_overlap_argument(&argc, argv, &i))     continue;
 
-        if (seqs_select_argument(&argc, argv, &i)) continue;
+        if (seqs_select_argument(&argc, argv, &i))          continue;
 
-        if (max_identity_argument(&argc, argv, &i)) continue;
-        if (clusters_argument(&argc, argv, &i)) continue;
+        if (max_identity_argument(&argc, argv, &i))         continue;
+        if (clusters_argument(&argc, argv, &i))             continue;
 
-        if (terminal_only_argument(&argc, argv, &i)) continue;
+        if (terminal_only_argument(&argc, argv, &i))        continue;
 
-        if (window_argument(&argc, argv, &i)) continue;
-        if (gap_window_argument(&argc, argv, &i)) continue;
-        if (similarity_window_argument(&argc, argv, &i)) continue;
-        if (consistency_window_argument(&argc, argv, &i)) continue;
+        if (window_argument(&argc, argv, &i))               continue;
+        if (gap_window_argument(&argc, argv, &i))           continue;
+        if (similarity_window_argument(&argc, argv, &i))    continue;
+        if (consistency_window_argument(&argc, argv, &i))   continue;
 
-        if (block_argument(&argc, argv, &i)) continue;
-        if (stats_arguments(&argc, argv, &i)) continue;
+        if (block_argument(&argc, argv, &i))                continue;
+        if (stats_arguments(&argc, argv, &i))               continue;
 
-        if (complementary_argument(&argc, argv, &i)) continue;
+        if (complementary_argument(&argc, argv, &i))        continue;
 
-        if (col_numbering_argument(&argc, argv, &i)) continue;
-        if (split_by_stop_codon_argument(&argc, argv, &i)) continue;
-        if (ignore_stop_codon_argument(&argc, argv, &i)) continue;
+        if (col_numbering_argument(&argc, argv, &i))        continue;
+        if (split_by_stop_codon_argument(&argc, argv, &i))  continue;
+        if (ignore_stop_codon_argument(&argc, argv, &i))    continue;
 
         cerr << endl << "ERROR: Parameter \"" << argv[i] << "\" not valid or repeated." << endl << endl;
         appearErrors = true;
@@ -1517,7 +1517,7 @@ void trimAlManager::check_output_format()
 {
     if (oformats.size() == 0)
     {
-        oformats.push_back(ReadWriteMachine.getInputStateName(infile));
+        oformats.push_back(ReadWriteMachine.getFileFormatName(infile));
     }
 }
 
@@ -1595,8 +1595,8 @@ int trimAlManager::perform()
     /* -------------------------------------------------------------------- */
     if((outfile != NULL) && (!appearErrors))
     {
-        
-        if (ReadWriteMachine.saveAlignment(std::string(outfile), &oformats, singleAlig) == false)
+        std::string outFileString = std::string(outfile);
+        if (ReadWriteMachine.saveAlignment(outFileString, &oformats, singleAlig) == false)
         {
             cerr << endl << "ERROR: It's imposible to generate the output file." << endl << endl;
             appearErrors = true;

@@ -3,9 +3,6 @@
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include <string>
 #include "../../include/values.h"
-#ifndef debug
-#define debug false
-#endif
 
 int parseArguments(int argc, char *argv[], ReadWriteMS* machine, std::vector<std::string>* inFiles, std::vector<std::string>* outFormats, std::string* outPattern)
 {
@@ -20,14 +17,14 @@ int parseArguments(int argc, char *argv[], ReadWriteMS* machine, std::vector<std
             // Check if this is the last argument.
             if (i >= argc -1)
             {
-                cerr << "At least one file should be passed after the '-in' argument" << endl;
+                cerr << "ERROR: At least one file should be passed after the '-in' argument" << endl;
                 return 1;
             }
             
             // Check if the next argument is a parameter or file argument.
             else if (argv[i + 1][0] == '-')
             {
-                cerr << "At least one file should be passed after the '-in' argument and you passed argument " << argv[i + 1] << endl;
+                cerr << "ERROR: At least one file should be passed after the '-in' argument and you passed argument " << argv[i + 1] << endl;
                 return 1;
             }
             
@@ -104,76 +101,74 @@ int parseArguments(int argc, char *argv[], ReadWriteMS* machine, std::vector<std
         }
         
         //Compatibility with legacy options:
-        else if (argv[i][0] == '-')
+
+        else if (!strcmp(argv[i], "-html"))
+            outFormats->push_back("html");
+        
+        else if (!strcmp(argv[i], "-nbrf"))
+            outFormats->push_back("nbrf");
+        
+        else if (!strcmp(argv[i], "-mega"))
+            outFormats->push_back("mega");
+        
+        else if (!strcmp(argv[i], "-nexus"))
+            outFormats->push_back("nexus");
+        
+        else if (!strcmp(argv[i], "-clustal"))
+            outFormats->push_back("clustal");
+        
+        else if (!strcmp(argv[i], "-fasta") || !strcmp(argv[i], "-onlyseqs"))
+            outFormats->push_back("fasta");
+        
+        else if (!strcmp(argv[i], "-fasta_m10"))
         {
-            if (!strcmp(argv[i], "-html"))
-                outFormats->push_back("html");
-            
-            else if (!strcmp(argv[i], "-nbrf"))
-                outFormats->push_back("nbrf");
-            
-            else if (!strcmp(argv[i], "-mega"))
-                outFormats->push_back("mega");
-            
-            else if (!strcmp(argv[i], "-nexus"))
-                outFormats->push_back("nexus");
-            
-            else if (!strcmp(argv[i], "-clustal"))
-                outFormats->push_back("clustal");
-            
-            else if (!strcmp(argv[i], "-fasta") || !strcmp(argv[i], "-onlyseqs"))
-                outFormats->push_back("fasta");
-            
-            else if (!strcmp(argv[i], "-fasta_m10"))
-            {
-                outFormats->push_back("fasta");
-                machine->shortNames = true;
-            }
-            
-            else if (!strcmp(argv[i], "-phylip"))
-                outFormats->push_back("phylip40");
-            
-            else if (!strcmp(argv[i], "-phylip_m10"))
-            {
-                outFormats->push_back("phylip40");
-                machine->shortNames = true;
-            }
-            
-            else if (!strcmp(argv[i], "-phylip_paml"))
-                outFormats->push_back("phylippaml");
-            
-            else if (!strcmp(argv[i], "-phylip_paml_m10"))
-            {
-                outFormats->push_back("phylippaml");
-                machine->shortNames = true;
-            }
-            
-            else if (!strcmp(argv[i], "-phylip3.2"))
-                outFormats->push_back("phylip32");
-            
-            else if (!strcmp(argv[i], "-phylip3.2_m10"))
-            {
-                outFormats->push_back("phylip32");
-                machine->shortNames = true;
-            }
-            else if (!strcmp(argv[i], "-format"))
-            {
-                machine->format = true;
-            }
-            else if (!strcmp(argv[i], "-type"))
-            {
-                machine->type = true;
-            }
-            else if (!strcmp(argv[i], "-info"))
-            {
-                machine->info = true;
-            }
+            outFormats->push_back("fasta");
+            machine->shortNames = true;
         }
         
+        else if (!strcmp(argv[i], "-phylip"))
+            outFormats->push_back("phylip40");
+        
+        else if (!strcmp(argv[i], "-phylip_m10"))
+        {
+            outFormats->push_back("phylip40");
+            machine->shortNames = true;
+        }
+        
+        else if (!strcmp(argv[i], "-phylip_paml"))
+            outFormats->push_back("phylippaml");
+        
+        else if (!strcmp(argv[i], "-phylip_paml_m10"))
+        {
+            outFormats->push_back("phylippaml");
+            machine->shortNames = true;
+        }
+        
+        else if (!strcmp(argv[i], "-phylip3.2"))
+            outFormats->push_back("phylip32");
+        
+        else if (!strcmp(argv[i], "-phylip3.2_m10"))
+        {
+            outFormats->push_back("phylip32");
+            machine->shortNames = true;
+        }
+        else if (!strcmp(argv[i], "-format"))
+        {
+            machine->format = true;
+        }
+        else if (!strcmp(argv[i], "-type"))
+        {
+            machine->type = true;
+        }
+        else if (!strcmp(argv[i], "-info"))
+        {
+            machine->info = true;
+        }
+
         // If a command is not recognized, give an error.
         else
         {
-            cerr << argv[i] << " not recognized." << endl;
+            cerr << argv[i] << " not recognized or repeated." << endl;
             return 1;
         }
     }
@@ -202,42 +197,32 @@ int checkArguments(ReadWriteMS* machine, std::vector<std::string>* inFiles, std:
     int returnValue = 0;
     if (inFiles->size() == 0)
     {
-        cerr        << "At least one input file must be provided" << endl;
+        cerr        << "ERROR: At least one input file must be provided" << endl;
         returnValue = 1;
     }
     // LEGACY OPTIONS
-    if (machine->format || machine->info || machine->type)
-    {
-        if (inFiles->size() != 1)
-        {
-            cerr    << "Print alignment info from multiple files is not allowed" << endl;
-            returnValue = 1;
-        }
-    }
+//     if (machine->format || machine->info || machine->type)
+//     {
+//         if (inFiles->size() != 1)
+//         {
+//             cerr    << "ERROR: Print alignment info from multiple files is not allowed" << endl;
+//             returnValue = 1;
+//         }
+//     }
     if (*outPattern == "")
     {
         if (inFiles->size() == 1 && outFormats->size() == 1 && !(machine->format || machine->info || machine->type))
             machine->hasOutputFile = false;
-        else if (inFiles->size() > 1)
-        {
-            cerr    << "Terminal output option disabled when there are more than one input files." << endl;
-            returnValue = 1;
-        }
-        else if (outFormats->size() > 1)
-        {
-            cerr    << "Terminal output option disabled when there are more than one output formats." << endl;
-            returnValue = 1;
-        }
         else if (outFormats->size() != 0)
         {
-            cerr    << "Terminal output option not compatible with information printing (-info | -format | -type)" << endl 
+            cerr    << "ERROR: Terminal output option not compatible with information printing (-info | -format | -type)" << endl 
                     << "Provide an output format or disable information printing." << endl;
             returnValue = 1;
         }
     }
     else if (outFormats->size() == 0)
     {
-        cerr        << "At least one output format must be provided" << endl;
+        cerr        << "ERROR: At least one output format must be provided" << endl;
         returnValue = 1;
     }
     return returnValue;
@@ -266,15 +251,15 @@ void menu()
 //     << "\t--version            " << "Show readAl version." << endl << endl
 
     << "\t-in <inputfiles>      " << "Input files in several formats. Separated by spaces." << endl
-    << "\t-out <pattern>        " << "Output file name (default STDOUT)." << endl
-    << "\t                      " << "It will replace the tags [in]        -> Original filename without extension." << endl
-    << "\t                      " << "                         [format]    -> Output's format name" << endl
-    << "\t                      " << "                         [extension] -> Output's extension" << endl
+    << "\t                      " << "Available formats are: " << ReadWriteMS().getInputFormatsAvailable() << endl 
+    << "\t-out <pattern>        " << "Output file name pattern (default STDOUT)." << endl
+    << "\t                      " << "It will replace optional the tags [in]        -> Original filename without extension." << endl
+    << "\t                      " << "                                  [format]    -> Output's format name" << endl
+    << "\t                      " << "                                  [extension] -> Output's extension" << endl
     << endl
-
     
     << "\t-formats             " << "Formats you want the output to be converted to." << endl
-    << "\t                     " << "Available formats are " << ReadWriteMS().getFormatsAvailable() << endl 
+    << "\t                     " << "Available formats are: " << ReadWriteMS().getOutputFormatsAvailable() << endl 
     << "\t                     " << "Being the HTML format not a format itself, but a colored report of the alignment files." << endl << endl
     << "\t-format              " << "Print information about input file format "
     << "and if sequences are aligned or not." << endl
@@ -326,6 +311,8 @@ void menu()
     << "\t-phylip3.2           " << "Output file in PHYLIP3.2 format" << endl
     << "\t-phylip3.2_m10       " << "Output file in PHYLIP3.2 format. Sequences"
     << " name up to 10 characters." << endl << endl
+    << "If you specify any m10 format, this will result in all formats having the sequences names shortened as this has the same effect as '-shortNames' argument" << endl << endl
+    
     
     << "EXAMPLES OF USE" << endl << endl
     
@@ -376,39 +363,44 @@ int main(int argc, char *argv[])
     if(MachineState.format || MachineState.info || MachineState.type) {
         for (string str : inFiles)
         {
-            cout << "## Alignment File: " << str << endl;
             newAlignment* alignment = MachineState.loadAlignment(str);
-            
-            if (MachineState.format)
-                /* Inform about if sequences are aligned or not */
-                cout    << "## Input file format\t" << MachineState.getInputStateName(str) << endl
-                        << "## Input file aligned\t" << (alignment->isAligned ? "YES":"NO")
-                        << endl;
+            if (alignment != nullptr)
+            {
+                cout << "## Alignment File: " << str << endl;
+                
+                if (MachineState.format)
+                    /* Inform about if sequences are aligned or not */
+                    cout    << "## Input file format\t" << MachineState.getFileFormatName(str) << endl
+                            << "## Input file aligned\t" << (alignment->isAligned ? "YES":"NO")
+                            << endl;
 
-            if(MachineState.type) {
-                /* Inform about biological datatype */
-                if (alignment->getAlignmentType() == SequenceTypes::DNA)
-                    cout << "## Input file datatype\tnucleotides:dna" << endl;
-                else if (alignment->getAlignmentType() == (SequenceTypes::DNA | SequenceTypes::DEG))
-                    cout << "## Input file datatype\tnucleotides:dna_degenerate_codes" << endl;
-                else if (alignment->getAlignmentType() == SequenceTypes::RNA)
-                    cout << "## Input file datatype\tnucleotides:rna" << endl;
-                else if (alignment->getAlignmentType() == (SequenceTypes::RNA | SequenceTypes::DEG))
-                    cout << "## Input file datatype\tnucleotides:rna_degenerate_codes" << endl;
-                else if (alignment->getAlignmentType() == SequenceTypes::AA)
-                    cout << "## Input file datatype\tamino-acids" << endl;
-                else
-                    cout << "## Input file datatype\tunknown" << endl;
+                if(MachineState.type) {
+                    /* Inform about biological datatype */
+                    if (alignment->getAlignmentType() == SequenceTypes::DNA)
+                        cout << "## Input file datatype\tnucleotides:dna" << endl;
+                    else if (alignment->getAlignmentType() == (SequenceTypes::DNA | SequenceTypes::DEG))
+                        cout << "## Input file datatype\tnucleotides:dna_degenerate_codes" << endl;
+                    else if (alignment->getAlignmentType() == SequenceTypes::RNA)
+                        cout << "## Input file datatype\tnucleotides:rna" << endl;
+                    else if (alignment->getAlignmentType() == (SequenceTypes::RNA | SequenceTypes::DEG))
+                        cout << "## Input file datatype\tnucleotides:rna_degenerate_codes" << endl;
+                    else if (alignment->getAlignmentType() == SequenceTypes::AA)
+                        cout << "## Input file datatype\tamino-acids" << endl;
+                    else
+                        cout << "## Input file datatype\tunknown" << endl;
+                }
+
+                if(MachineState.info)
+                    alignment->printAlignmentInfo(cout);
+                
+                cout << endl;
+                
+                delete alignment;
             }
-
-            if(MachineState.info)
-                alignment->printAlignmentInfo(cout);
-            
-            cout << endl;
-            
-            delete alignment;
         }
     }
-    else
+    else if (outFormats.size() != 0)
         MachineState.processFile(&inFiles, &outPattern, &outFormats);
+    else
+        cerr << "ERROR: An option has to be chosen" << endl;
 }

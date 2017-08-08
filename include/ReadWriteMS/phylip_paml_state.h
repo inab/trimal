@@ -7,7 +7,7 @@ class PhylipPamlState : public ReadWriteBaseState
 {
 public:
     
-    PhylipPamlState(ReadWriteMS* MachineState) { Machine = MachineState; name="PHYLIP_PAML"; extension="phy"; };
+    PhylipPamlState(ReadWriteMS* MachineState) { Machine = MachineState; name="phylip_paml"; extension="phy"; canSave=true; };
     
     virtual int CheckAlignment(istream* origin);
     virtual newAlignment* LoadAlignment(string filename);

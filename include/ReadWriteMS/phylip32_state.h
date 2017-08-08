@@ -7,7 +7,7 @@ class Phylip32State : public ReadWriteBaseState
 {
 public:
     
-    Phylip32State(ReadWriteMS* MachineState) { Machine = MachineState; name="PHYLIP32"; extension="phy"; };
+    Phylip32State(ReadWriteMS* MachineState) { Machine = MachineState; name="phylip32"; extension="phy"; canLoad=true ; canSave=true; };
     
     virtual int CheckAlignment(istream* origin);
     virtual newAlignment* LoadAlignment(string filename);

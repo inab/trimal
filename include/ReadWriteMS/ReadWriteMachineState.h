@@ -49,14 +49,14 @@ public:
      */
     newAlignment* loadAlignment(std::string inFile);
     
-    /**
-     \brief Function to save an alignment to a file.
-            It searched on the available_states, the one that can write the alignment in the correct format.
-     \param outFile Filepath to save the alignment.
-     \param outFormat Format in which save the alignment.
-    \param alignment Alignment
-            */
-    bool saveAlignment(std::string outFile, std::string outFormat, newAlignment* alignment);
+//     /**
+//      \brief Function to save an alignment to a file.
+//             It searched on the available_states, the one that can write the alignment in the correct format.
+//      \param outFile Filepath to save the alignment.
+//      \param outFormat Format in which save the alignment.
+//     \param alignment Alignment
+//             */
+//     bool saveAlignment(std::string outFile, std::string outFormat, newAlignment* alignment);
     
         /**
      \brief Function to save an alignment to a file.
@@ -82,14 +82,17 @@ public:
      \brief Function to obtain the format name of a given file.
      \param inFile Filepath of the file which we want to obtain it's format.
      */
-    std::string getInputStateName(std::string inFile);
+    std::string getFileFormatName(std::string inFile);
     
     /**
-     \brief Function to obtain all format names available to this object.
-     \todo This function doesn't take in mind half-states: States that can only load or save an alignment, as, for example, HTML format.
-            This could be implemented with some tags on the classes, and this function may be replaced with three new: getAllFormatsAvailable, getInputFormats, getOutputFormats.
+     \brief Function to obtain all format names available by this object that can \b load an alignment.
      */
-    std::string getFormatsAvailable();
+    std::string getInputFormatsAvailable();
+    
+    /**
+     \brief Function to obtain all format names available by this object that can \b save an alignment.
+     */
+    std::string getOutputFormatsAvailable();
 };
 
 

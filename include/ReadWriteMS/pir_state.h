@@ -7,7 +7,7 @@ class PirState : public ReadWriteBaseState
 {
 public:
     
-    PirState(ReadWriteMS* MachineState) { Machine = MachineState; name="PIR"; extension="pir"; };
+    PirState(ReadWriteMS* MachineState) { Machine = MachineState; name="pir"; extension="pir";canLoad=true ; canSave=true;; };
     
     virtual int CheckAlignment(istream* origin);
     virtual newAlignment* LoadAlignment(string filename);

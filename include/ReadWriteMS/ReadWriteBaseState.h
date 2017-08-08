@@ -19,6 +19,12 @@ class ReadWriteBaseState
 {
 public:
     
+    /** \brief Bool tag that indicates wether or not this state can load an alignment in the corresponding format.*/
+    bool canLoad = false;
+    
+    /** \brief Bool tag that indicates wether or not this state can save an alignment in the corresponding format.*/
+    bool canSave = false;
+    
     /**
      \brief String that contains a well known acronym to the format
      */

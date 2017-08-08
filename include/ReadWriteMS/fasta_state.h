@@ -7,7 +7,7 @@ class FastaState : public ReadWriteBaseState
 {
 public:
     
-    FastaState(ReadWriteMS* MachineState) { Machine = MachineState; name="FASTA"; extension="fasta"; };
+    FastaState(ReadWriteMS* MachineState) { Machine = MachineState; name="fasta"; extension="fasta"; canLoad=true ; canSave=true; };
     
     virtual int CheckAlignment(istream* origin);
     virtual newAlignment* LoadAlignment(string filename);

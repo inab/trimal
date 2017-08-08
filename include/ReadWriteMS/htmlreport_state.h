@@ -7,7 +7,7 @@ class HTMLState : public ReadWriteBaseState
 {
 public:
     
-    HTMLState(ReadWriteMS* MachineState) { Machine = MachineState; name="HTML"; extension="html"; };
+    HTMLState(ReadWriteMS* MachineState) { Machine = MachineState; name="html"; extension="html"; canSave=true; };
     
     virtual int CheckAlignment(istream* origin);
     virtual newAlignment* LoadAlignment(string filename);
