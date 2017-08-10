@@ -106,6 +106,9 @@ public:
 
     /* Sequence Identities */
     float **identities;
+    
+    /* Sequence Overlaps */
+    float **overlaps;
 
     /* New Info */
     int *residuesNumber;
@@ -139,8 +142,16 @@ public:
     void setBlockSize(int blockSize);
 
     int getBlockSize(void);
+    
+    void calculateSeqIdentity(void);
+      
+    void calculateRelaxedSeqIdentity(void);
+    
+    void calculateSeqOverlap(void);
 
     void printSeqIdentity(void);
+    
+    void printSeqOverlap(void);
 
     int getAlignmentType(void);
 

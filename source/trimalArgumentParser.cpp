@@ -275,6 +275,15 @@ bool trimAlManager::matrix_argument(int *argc, char *argv[], int *i)
         strcpy(matrixFile, argv[*i]);
         return true;
     }
+    else if(!strcmp(argv[*i], "--alternative_matrix") && (i+1 != argc) && (alternative_matrix == -1)) {
+      i++;
+      if (!strcmp(argv[*i], "degenerated_nt_identity"))
+        alternative_matrix = 1;
+      else {
+        cerr << endl << "ERROR: Alternative not recognized \"" << argv[*i] << "\"" << endl << endl;
+        appearErrors = true;
+      }
+    }
     return false;
 }
 
@@ -796,6 +805,11 @@ bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
         sident = true;
         stats--;
     }
+    else if((!strcmp(argv[*i], "-soverlap")) && (!soverlap))
+    {
+        soverlap = true;
+        stats--;
+    }
     else if((!strcmp(argv[*i], "-sfc")) && (!sfc))
     {
         sfc = true;
@@ -852,7 +866,7 @@ bool trimAlManager::ignore_stop_codon_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::process_arguments(char* argv[])
+bool trimAlManager::processArguments(char* argv[])
 {
     if (!appearErrors)
     {
@@ -1660,6 +1674,13 @@ void trimAlManager::print_statistics()
         if(stats < -1)
             cout << endl;
     }
+    
+    if(soverlap) {
+        origAlig -> printSeqOverlap();
+        stats++;
+        if(stats < -1)
+            cout << endl;
+    }
 
     if(compareset != -1)
     {
@@ -1678,7 +1699,10 @@ bool trimAlManager::create_or_use_similarity_matrix()
 
         if(matrixFile != NULL)
             similMatrix -> loadSimMatrix(matrixFile);
-
+        else if(alternative_matrix != -1) 
+        {
+            similMatrix -> alternativeSimilarityMatrices(alternative_matrix, origAlig -> getAlignmentType());
+        }
         else
         {
             if((origAlig -> getAlignmentType()) & SequenceTypes::AA)
@@ -1955,8 +1979,8 @@ void trimAlManager::menu(void)
     cout << "    -sst                     " << "Print accumulated similarity scores for the input alignment." << endl;
     cout << "    -sfc                     " << "Print sum-of-pairs scores for each column from the selected alignment" << endl;
     cout << "    -sft                     " << "Print accumulated sum-of-pairs scores for the selected alignment" << endl;
-    cout << "    -sident                  " << "Print identity scores for all sequences in the input alignment. (see User Guide)."
-         << endl << endl;
+    cout << "    -sident                  " << "Print identity scores for all sequences in the input alignment. (see User Guide)." << endl;
+    cout << "    -soverlap                " << "Print overlap scores matrix for all sequences in the input alignment. (see User Guide)." << endl << endl;
 }
 
 void trimAlManager::examples(void)

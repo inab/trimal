@@ -40,8 +40,8 @@ newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
     while(!file.eof()) {
 
         /* Deallocate previously used dinamic memory */
-        if (line != NULL)
-            delete [] line;
+//         if (line != NULL)
+//             delete [] line;
 
         /* Read lines in a safe way */
         line = utils::readLine(file);

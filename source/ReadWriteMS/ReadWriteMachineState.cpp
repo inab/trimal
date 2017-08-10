@@ -200,7 +200,7 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
     return false;
 }
 
-void ReadWriteMS::processFile(
+void ReadWriteMS::loadAndSaveMultipleAlignments(
     std::vector< std::string >* inFiles,
     std::string* outPattern,
     std::vector< std::string >* outFormats)

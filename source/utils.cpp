@@ -345,9 +345,9 @@ char* utils::readLine(ifstream &file) {
 
   /* Otherwise, initialize the appropiate data structure,
    * dump the data and return it */
-  line = new char[nline.size() + 1];
-  strcpy(line, nline.c_str());
-  return line;
+    line = new char[nline.size() + 1];
+    strcpy(line, &nline[0]);
+    return line;
 }
 
 char* utils::readLine(std::istream& file)
@@ -389,10 +389,8 @@ char* utils::readLine(std::istream& file)
 
   /* Otherwise, initialize the appropiate data structure,
    * dump the data and return it */
-  if (line != nullptr) 
-      delete[] line;
   line = new char[nline.size() + 1];
-  strcpy(line, nline.c_str());
+  strcpy(line, &nline[0]);
   return line;
 }
 
@@ -474,7 +472,7 @@ char* utils::trimLine(string nline) {
 
   /* Initialize and store resulting sequence into an appropiate structure */
   line = new char[nline.size() + 1];
-  strcpy(line, nline.c_str());
+  strcpy(line, &nline[0]);
 
   return line;
 }

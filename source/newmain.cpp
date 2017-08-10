@@ -30,6 +30,6 @@ int main(int argc, char *argv[])
 {
     trimAlManager Trimal = trimAlManager();
     Trimal.parseArguments(argc, argv);
-    Trimal.process_arguments(argv);
+    Trimal.processArguments(argv);
     return Trimal.perform();
 }

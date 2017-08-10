@@ -42,27 +42,18 @@ public:
     bool info           = false;
     
     /**
-     \brief Function that creates an alignment from a filepath.
-            It automatically detects the format of the file.
+    \brief Function that creates an alignment from a filepath.
+        It automatically detects the format of the file.
     \param inFile Filepath of the alignment to load.
     \return Pointer to the alignment if it could be loaded. Null if not.
-     */
+        */
     newAlignment* loadAlignment(std::string inFile);
-    
-//     /**
-//      \brief Function to save an alignment to a file.
-//             It searched on the available_states, the one that can write the alignment in the correct format.
-//      \param outFile Filepath to save the alignment.
-//      \param outFormat Format in which save the alignment.
-//     \param alignment Alignment
-//             */
-//     bool saveAlignment(std::string outFile, std::string outFormat, newAlignment* alignment);
-    
-        /**
-     \brief Function to save an alignment to a file.
-            It searched on the available_states, the one that can write the alignment in the correct format.
-     \param outPattern Filepath to save the alignment.
-     \param outFormats Format in which save the alignment.
+
+    /**
+    \brief Function to save an alignment to a file.
+        It searched on the available_states, the one that can write the alignment in the correct format.
+    \param outPattern Filepath to save the alignment.
+    \param outFormats Format in which save the alignment.
     \param alignment Alignment
             */
     bool saveAlignment(std::string outPattern, std::vector< std::string >* outFormats, newAlignment* alignment);
@@ -70,13 +61,13 @@ public:
     /**
      \brief Function that takes multile files, loads them and saves in a cumulus of formats, using an outPattern.
      \param inFile Vector of files to load, reformat and save.
-     \param outPattern Path and name of the new files. The function changes some tokens on the original string to obtain multiple versions:
+     \param outPattern Path and name of the new files. The function changes some optional tokens on the original string to obtain multiple versions:
                 [in]        Token that is changed with the original filename without extension.
                 [format]    Token that is changed with the new format name.
                 [extension] Token that is changed with the format file extensions.
      \param outFormats Output formats that original files should reformat to. 
      */
-    void processFile(std::vector< std::string >* inFile, std::string* outPattern, std::vector< std::string >* outFormats);
+    void loadAndSaveMultipleAlignments(std::vector< std::string >* inFile, std::string* outPattern, std::vector< std::string >* outFormats);
     
     /**
      \brief Function to obtain the format name of a given file.

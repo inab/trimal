@@ -400,7 +400,7 @@ int main(int argc, char *argv[])
         }
     }
     else if (outFormats.size() != 0)
-        MachineState.processFile(&inFiles, &outPattern, &outFormats);
+        MachineState.loadAndSaveMultipleAlignments(&inFiles, &outPattern, &outFormats);
     else
         cerr << "ERROR: An option has to be chosen" << endl;
 }

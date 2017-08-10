@@ -386,6 +386,115 @@ int newAlignment::getBlockSize(void) {
     return Cleaning -> blockSize;
 }
 
+void newAlignment::calculateSeqIdentity(void) {
+
+  int i, j, k, hit, dst;
+  char indet;
+
+  /* Depending on alignment type, indetermination symbol will be one or other */
+  indet = getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
+
+  /* Create identities matrix to store identities scores */
+  identities = new float*[sequenNumber];
+
+  /* For each seq, compute its identity score against the others in the MSA */
+  for(i = 0; i < sequenNumber; i++) {
+    identities[i] = new float[sequenNumber];
+
+    /* It's a symmetric matrix, copy values that have been already computed */
+    for(j = 0; j < i; j++)
+      identities[i][j] = identities[j][i];
+    identities[i][i] = 0;
+
+    /* Compute identity scores for the current sequence against the rest */
+    for(j = i + 1; j < sequenNumber; j++) {
+      for(k = 0, hit = 0, dst = 0; k < residNumber; k++) {
+      /* If one of the two positions is a valid residue,
+       * count it for the common length */
+        if(((sequences[i][k] != indet) && (sequences[i][k] != '-')) ||
+           ((sequences[j][k] != indet) && (sequences[j][k] != '-'))) {
+          dst++;
+          /* If both positions are the same, count a hit */
+          if(sequences[i][k] == sequences[j][k])
+            hit++;
+        }
+      }
+
+      /* Identity score between two sequences is the ratio of identical residues
+       * by the total length (common and no-common residues) among them */
+      identities[i][j] = (float) hit/dst;
+    }
+  }
+}
+
+void newAlignment::calculateRelaxedSeqIdentity(void) {
+  /* Raw approximation of sequence identity computation designed for reducing
+   * comparisons for huge alignemnts */
+
+  int i, j, k, hit;
+
+  /* Create identities matrix to store identities scores */
+  identities = new float*[sequenNumber];
+
+  /* For each seq, compute its identity score against the others in the MSA */
+  for(i = 0; i < sequenNumber; i++) {
+    identities[i] = new float[sequenNumber];
+
+    /* It's a symmetric matrix, copy values that have been already computed */
+    for(j = 0; j < i; j++)
+      identities[i][j] = identities[j][i];
+    identities[i][i] = 0;
+
+    /* Compute identity score between the selected sequence and the others */
+    for(j = i + 1; j < sequenNumber; j++) {
+      for(k = 0, hit = 0; k < residNumber; k++) {
+        /* If both positions are the same, count a hit */
+        if(sequences[i][k] == sequences[j][k])
+          hit++;
+      }
+    /* Raw identity score is computed as the ratio of identical residues between
+     * alignment length */
+      identities[i][j] = (float) hit/residNumber;
+    }
+  }
+}
+
+
+void newAlignment::calculateSeqOverlap(void) {
+  /* Compute the overlap between sequences taken each of them as the reference
+   * to compute such scores. It will lead to a non-symmetric matrix. */
+
+  int i, j, k, shared, referenceLength;
+  char indet;
+
+  /* Depending on alignment type, indetermination symbol will be one or other */
+  indet = getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
+
+  /* Create overlap matrix to store overlap scores */
+  overlaps = new float*[sequenNumber];
+
+  /* For each seq, compute its overlap score against the others in the MSA */
+  for(i = 0; i < sequenNumber; i++) {
+    overlaps[i] = new float[sequenNumber];
+
+    for(j = 0; j < sequenNumber; j++) {
+      for(k = 0, shared = 0, referenceLength = 0; k < residNumber; k++) {
+        /* If there a valid residue for the reference sequence, then see if
+         * there is a valid residue for the other sequence. */
+        if((sequences[i][k] != indet) && (sequences[i][k] != '-')) {
+          referenceLength++;
+          if ((sequences[j][k] != indet) && (sequences[j][k] != '-'))
+            shared++;
+        }
+      }
+      /* Overlap score between two sequences is the ratio of shared valid
+       * residues divided by the sequence length taken as reference. The
+       * overlaps matrix, therefore, will be not symmetric. */
+      overlaps[i][j] = (float) shared/referenceLength;
+    }
+  }
+}
+
 void newAlignment::getSequences(string *Names) {
     for(int i = 0; i < sequenNumber; i++)
         Names[i] = seqsName[i];
@@ -971,6 +1080,72 @@ void newAlignment::printSeqIdentity(void) {
              << "\t" << setiosflags(ios::left) << setw(5)
              << maxs[i][0] << "\t" << seqsName[(int) maxs[i][1]] << endl;
     cout << endl;
+}
+
+void newAlignment::printSeqOverlap()
+{
+  int i, j, k, pos, maxLongName;
+  float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
+
+  /* Ask for the sequence identities assesment */
+  if(overlaps == NULL)
+    calculateSeqOverlap();
+
+  /* For each sequence, we look for its most similar one */
+  maxs = new float*[sequenNumber];
+
+  for(i = 0; i < sequenNumber; i++) {
+    maxs[i] = new float[2];
+
+    /* Get the most similar sequence to the current one in term of overlap */
+    for(k = 0, mx = 0, avg = 0, pos = i; k < sequenNumber; k++) {
+      if(i != k) {
+        avg += overlaps[i][k];
+        if(mx < overlaps[i][k]) {
+          mx = overlaps[i][k];
+          pos = k;
+        }
+      }
+    }
+    /* Update global average variables*/
+    avgSeq += avg/(sequenNumber - 1);
+    maxAvgSeq += mx;
+
+    /* Save the maximum average overlap value for each sequence */
+    maxs[i][0] = mx;
+    maxs[i][1] = pos;
+  }
+
+  /* Compute general averages */
+  avgSeq = avgSeq/sequenNumber;
+  maxAvgSeq = maxAvgSeq/sequenNumber;
+
+  /* Compute longest sequences name */
+  for(i = 0, maxLongName = 0; i < sequenNumber; i++)
+    maxLongName = utils::max(maxLongName, seqsName[i].size());
+
+  /* Once the method has computed all of different values, it prints it */
+  cout.precision(4);
+  cout << fixed;
+
+  for(i = 0, maxSeq = 0; i < sequenNumber; i++)
+    if(maxs[i][0] > maxSeq)
+      maxSeq = maxs[i][0];
+
+  cout << "## MaxOverlap\t" << maxSeq;
+  cout << endl << "#> MaxOverlap\tGet the maximum overlap value for any pair "
+    << "of sequences in the alignment" << endl;
+
+  cout << endl << "## AverageOverlap\t" << avgSeq;
+  cout << endl << "#> AverageOverlap\tAverage overlap between all sequences";
+
+  cout << endl << endl << "## Overlap sequences matrix";
+  for(i = 0; i < sequenNumber; i++) {
+    cout << endl << setw(maxLongName + 2) << left << seqsName[i] << "\t";
+    for(j = 0; j < sequenNumber; j++)
+      cout << setiosflags(ios::left) << setw(10) << overlaps[i][j] << "\t";
+  }
+  cout << endl;
 }
 
 /* *** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *** */

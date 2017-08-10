@@ -34,6 +34,7 @@ class trimAlManager
     sfc                 = false, 
     sft                 = false, 
     sident              = false, 
+    soverlap            = false, 
     selectSeqs          = false,
     selectCols          = false, 
     shortNames          = false, 
@@ -68,6 +69,7 @@ class trimAlManager
     numfiles                = 0, 
     referFile               = 0, 
     automatedMethodCount    = -1,
+    alternative_matrix      = -1,
     
     *delColumns         = NULL, 
     *delSequences       = NULL, 
@@ -153,7 +155,7 @@ private:
 
     ///@}
 public:
-    bool process_arguments(char* argv[]);
+    bool processArguments(char* argv[]);
     
 private:
         ///\addtogroup CheckIncompatibilities 
