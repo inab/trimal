@@ -9,34 +9,34 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 62)">
 <title>ReadWriteMS::saveAlignment</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-62 324,-62 324,4 -4,4"/>
-<!-- Node27 -->
-<g id="node1" class="node"><title>Node27</title>
+<!-- Node22 -->
+<g id="node1" class="node"><title>Node22</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-19.5 0,-38.5 149,-38.5 149,-19.5 0,-19.5"/>
 <text text-anchor="middle" x="74.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteMS::saveAlignment</text>
 </g>
-<!-- Node28 -->
-<g id="node2" class="node"><title>Node28</title>
+<!-- Node23 -->
+<g id="node2" class="node"><title>Node23</title>
 <g id="a_node2"><a xlink:href="classutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" target="_top" xlink:title="Function that replaces a substring with another substring in a string. It makes a copy of the origina...">
 <polygon fill="white" stroke="black" points="201.5,-38.5 201.5,-57.5 303.5,-57.5 303.5,-38.5 201.5,-38.5"/>
 <text text-anchor="middle" x="252.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::ReplaceString</text>
 </a>
 </g>
 </g>
-<!-- Node27&#45;&gt;Node28 -->
-<g id="edge1" class="edge"><title>Node27&#45;&gt;Node28</title>
+<!-- Node22&#45;&gt;Node23 -->
+<g id="edge1" class="edge"><title>Node22&#45;&gt;Node23</title>
 <path fill="none" stroke="midnightblue" d="M149.12,-36.9476C163.157,-38.463 177.695,-40.0324 191.254,-41.4962"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="191.09,-44.9987 201.408,-42.5923 191.841,-38.0391 191.09,-44.9987"/>
 </g>
-<!-- Node29 -->
-<g id="node3" class="node"><title>Node29</title>
+<!-- Node24 -->
+<g id="node3" class="node"><title>Node24</title>
 <g id="a_node3"><a xlink:href="classutils.html#a6000246220e801bf6b1e6a553d7af13a" target="_top" xlink:title="Function that replaces a substring with another substring in a string. It does not make a copy of the...">
 <polygon fill="white" stroke="black" points="185,-0.5 185,-19.5 320,-19.5 320,-0.5 185,-0.5"/>
 <text text-anchor="middle" x="252.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::ReplaceStringInPlace</text>
 </a>
 </g>
 </g>
-<!-- Node27&#45;&gt;Node29 -->
-<g id="edge2" class="edge"><title>Node27&#45;&gt;Node29</title>
+<!-- Node22&#45;&gt;Node24 -->
+<g id="edge2" class="edge"><title>Node22&#45;&gt;Node24</title>
 <path fill="none" stroke="midnightblue" d="M149.12,-21.0524C157.651,-20.1315 166.367,-19.1905 174.936,-18.2655"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="175.341,-21.7422 184.907,-17.189 174.589,-14.7826 175.341,-21.7422"/>
 </g>

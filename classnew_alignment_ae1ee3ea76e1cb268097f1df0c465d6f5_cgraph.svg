@@ -9,21 +9,21 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>newAlignment::getAlignmentType</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 335,-24 335,4 -4,4"/>
-<!-- Node47 -->
-<g id="node1" class="node"><title>Node47</title>
+<!-- Node43 -->
+<g id="node1" class="node"><title>Node43</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 163,-19.5 163,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="81.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getAlignmentType</text>
 </g>
-<!-- Node48 -->
-<g id="node2" class="node"><title>Node48</title>
+<!-- Node44 -->
+<g id="node2" class="node"><title>Node44</title>
 <g id="a_node2"><a xlink:href="classutils.html#a1f1dcbfa7276e54acec72bdbae1b1255" target="_top" xlink:title="Checks an alignment type. ">
 <polygon fill="white" stroke="black" points="199,-0.5 199,-19.5 331,-19.5 331,-0.5 199,-0.5"/>
 <text text-anchor="middle" x="265" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::checkAlignmentType</text>
 </a>
 </g>
 </g>
-<!-- Node47&#45;&gt;Node48 -->
-<g id="edge1" class="edge"><title>Node47&#45;&gt;Node48</title>
+<!-- Node43&#45;&gt;Node44 -->
+<g id="edge1" class="edge"><title>Node43&#45;&gt;Node44</title>
 <path fill="none" stroke="midnightblue" d="M163.166,-10C171.646,-10 180.246,-10 188.664,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="188.821,-13.5001 198.821,-10 188.821,-6.5001 188.821,-13.5001"/>
 </g>

@@ -9,21 +9,21 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>newAlignment::getSequences</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 302,-24 302,4 -4,4"/>
-<!-- Node64 -->
-<g id="node1" class="node"><title>Node64</title>
+<!-- Node60 -->
+<g id="node1" class="node"><title>Node60</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 146,-19.5 146,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="73" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getSequences</text>
 </g>
-<!-- Node65 -->
-<g id="node2" class="node"><title>Node65</title>
+<!-- Node61 -->
+<g id="node2" class="node"><title>Node61</title>
 <g id="a_node2"><a xlink:href="classutils.html#a1dce160519187ef2c6e14beb93a2050d" target="_top" xlink:title="Removes a determined char from the string. ">
 <polygon fill="white" stroke="black" points="182,-0.5 182,-19.5 298,-19.5 298,-0.5 182,-0.5"/>
 <text text-anchor="middle" x="240" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::removeCharacter</text>
 </a>
 </g>
 </g>
-<!-- Node64&#45;&gt;Node65 -->
-<g id="edge1" class="edge"><title>Node64&#45;&gt;Node65</title>
+<!-- Node60&#45;&gt;Node61 -->
+<g id="edge1" class="edge"><title>Node60&#45;&gt;Node61</title>
 <path fill="none" stroke="midnightblue" d="M146.371,-10C154.651,-10 163.07,-10 171.286,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="171.559,-13.5001 181.559,-10 171.559,-6.5001 171.559,-13.5001"/>
 </g>

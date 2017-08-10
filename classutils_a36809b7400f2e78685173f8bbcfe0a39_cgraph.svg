@@ -9,39 +9,39 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 43)">
 <title>utils::quicksort</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-43 300,-43 300,4 -4,4"/>
-<!-- Node108 -->
-<g id="node1" class="node"><title>Node108</title>
+<!-- Node104 -->
+<g id="node1" class="node"><title>Node104</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-19.5 0,-38.5 80,-38.5 80,-19.5 0,-19.5"/>
 <text text-anchor="middle" x="40" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::quicksort</text>
 </g>
-<!-- Node109 -->
-<g id="node2" class="node"><title>Node109</title>
+<!-- Node105 -->
+<g id="node2" class="node"><title>Node105</title>
 <g id="a_node2"><a xlink:href="classutils.html#a3377ecde55631d1bbc4956e5923b7469" target="_top" xlink:title="Swapping elements method. ">
 <polygon fill="white" stroke="black" points="232,-19.5 232,-38.5 296,-38.5 296,-19.5 232,-19.5"/>
 <text text-anchor="middle" x="264" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::swap</text>
 </a>
 </g>
 </g>
-<!-- Node108&#45;&gt;Node109 -->
-<g id="edge1" class="edge"><title>Node108&#45;&gt;Node109</title>
+<!-- Node104&#45;&gt;Node105 -->
+<g id="edge1" class="edge"><title>Node104&#45;&gt;Node105</title>
 <path fill="none" stroke="midnightblue" d="M80.1781,-29C119.913,-29 181.165,-29 221.659,-29"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="221.734,-32.5001 231.734,-29 221.734,-25.5001 221.734,-32.5001"/>
 </g>
-<!-- Node110 -->
-<g id="node3" class="node"><title>Node110</title>
+<!-- Node106 -->
+<g id="node3" class="node"><title>Node106</title>
 <g id="a_node3"><a xlink:href="classutils.html#a73f038c379c13d23e3220afaa14f9983" target="_top" xlink:title="Quicksort sorting method. ">
 <polygon fill="white" stroke="black" points="116,-0.5 116,-19.5 196,-19.5 196,-0.5 116,-0.5"/>
 <text text-anchor="middle" x="156" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::quicksort</text>
 </a>
 </g>
 </g>
-<!-- Node108&#45;&gt;Node110 -->
-<g id="edge2" class="edge"><title>Node108&#45;&gt;Node110</title>
+<!-- Node104&#45;&gt;Node106 -->
+<g id="edge2" class="edge"><title>Node104&#45;&gt;Node106</title>
 <path fill="none" stroke="midnightblue" d="M80.2323,-22.4613C88.4723,-21.0879 97.2628,-19.6229 105.814,-18.1977"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="106.407,-21.6472 115.695,-16.5508 105.256,-14.7425 106.407,-21.6472"/>
 </g>
-<!-- Node110&#45;&gt;Node109 -->
-<g id="edge3" class="edge"><title>Node110&#45;&gt;Node109</title>
+<!-- Node106&#45;&gt;Node105 -->
+<g id="edge3" class="edge"><title>Node106&#45;&gt;Node105</title>
 <path fill="none" stroke="midnightblue" d="M196.169,-17.0209C204.555,-18.524 213.437,-20.1161 221.893,-21.6318"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="221.474,-25.1124 231.935,-23.4318 222.709,-18.2222 221.474,-25.1124"/>
 </g>

@@ -30,12 +30,12 @@
 <area shape="rect" id="node36" href="$group___check_needs.html#gad96c97918919040f8986ba8c26a1f728" title="Method to check if the origAlig and backtranslationAlig are compatible in names to make the backtrans..." alt="" coords="500,1703,651,1759"/>
 <area shape="rect" id="node37" href="$group___check_needs.html#gab6f9f8b433a4c6fedbb4c094ae9003c7" title="Method to check and warn if windowsize and compareset has been given. " alt="" coords="501,1784,650,1825"/>
 <area shape="rect" id="node38" href="$group___check_needs.html#gaf7c3b97a17c2f5750f9481cc60c17616" title="Method to check if an output format has been given. If no output format has been given, it will use the inFile format. " alt="" coords="501,1849,650,1891"/>
-<area shape="rect" id="node25" href="$class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf" title="Function that creates an alignment from a filepath. It automatically detects the format of the file..." alt="" coords="762,1307,957,1334"/>
-<area shape="rect" id="node27" href="$classcompare_files.html#a869e1029b22f477bb3ed2a700af64956" title="Method to compare a set of alignments to select the most consistent one respect the others..." alt="" coords="779,1358,940,1385"/>
-<area shape="rect" id="node29" href="$classcompare_files.html#aad9a46ed0c7ed28f7095ca3aeb5b651b" title="Applies a new window to the alignment. " alt="" coords="766,1459,953,1486"/>
-<area shape="rect" id="node31" href="$classcompare_files.html#acc8e14082afd80b0cf65a4c4d41549ea" title="Method to obtain the consistency values vector for a given alignment against a set of alignments with..." alt="" coords="756,1409,963,1435"/>
-<area shape="rect" id="node26" href="$class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="1020,1300,1165,1341"/>
-<area shape="rect" id="node28" href="$classutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization. " alt="" coords="1042,1387,1143,1414"/>
-<area shape="rect" id="node30" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="1038,1459,1147,1486"/>
-<area shape="rect" id="node39" href="$class_read_write_m_s.html#a17eaedaed097a21dbe028d129560de9b" title="Function to obtain the format name of a given file. " alt="" coords="747,1857,972,1883"/>
+<area shape="rect" id="node25" href="$class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf" title="Function that creates an alignment from a filepath. It automatically detects the format of the file..." alt="" coords="763,1307,957,1334"/>
+<area shape="rect" id="node27" href="$classcompare_files.html#a869e1029b22f477bb3ed2a700af64956" title="Method to compare a set of alignments to select the most consistent one respect the others..." alt="" coords="779,1358,941,1385"/>
+<area shape="rect" id="node29" href="$classcompare_files.html#aad9a46ed0c7ed28f7095ca3aeb5b651b" title="Applies a new window to the alignment. " alt="" coords="767,1459,953,1486"/>
+<area shape="rect" id="node31" href="$classcompare_files.html#acc8e14082afd80b0cf65a4c4d41549ea" title="Method to obtain the consistency values vector for a given alignment against a set of alignments with..." alt="" coords="757,1409,963,1435"/>
+<area shape="rect" id="node26" href="$class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="1021,1300,1167,1341"/>
+<area shape="rect" id="node28" href="$classutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization. " alt="" coords="1043,1387,1145,1414"/>
+<area shape="rect" id="node30" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="1039,1459,1149,1486"/>
+<area shape="rect" id="node39" href="$class_read_write_m_s.html#a5235fb14e8fb57c0d21a2b5a2c9d1666" title="Function to obtain the format name of a given file. " alt="" coords="747,1857,973,1883"/>
 </map>

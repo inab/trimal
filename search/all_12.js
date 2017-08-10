@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['savealignment',['saveAlignment',['../class_read_write_m_s.html#af81c55ae0e74802e3673f68e8e85fd2e',1,'ReadWriteMS::saveAlignment(std::string outFile, std::string outFormat, newAlignment *alignment)'],['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment(std::string outPattern, std::vector&lt; std::string &gt; *outFormats, newAlignment *alignment)'],['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()']]],
+  ['savealignment',['saveAlignment',['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment()'],['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()']]],
   ['saveresidues',['saveResidues',['../classnew_alignment.html#a5239bd4e742631b58efc7f09dd67f165',1,'newAlignment']]],
   ['savesequences',['saveSequences',['../classnew_alignment.html#a76d057ddcebc7c88dd7f9e3ff0ce95bf',1,'newAlignment']]],
   ['scc',['scc',['../classtrim_al_manager.html#ab578880a4b104e7e0bc8db235d082ca1',1,'trimAlManager']]],
@@ -19,7 +19,7 @@ var searchData=
   ['sequenceoverlap',['sequenceOverlap',['../classtrim_al_manager.html#a76b83fdb75d03fffa72bc30fabdbbae8',1,'trimAlManager']]],
   ['sequences',['sequences',['../classnew_alignment.html#a23f06ad268f0e720bf3d5699a4cb7225',1,'newAlignment::sequences()'],['../classstatistics_conservation.html#ae62a8fdf513094d9a100b64630abe8b0',1,'statisticsConservation::sequences()']]],
   ['sequenceslengths',['sequencesLengths',['../classtrim_al_manager.html#ac49ddfd77456a8df3da725e9a7080db3',1,'trimAlManager']]],
-  ['sequencesmatrix',['sequencesMatrix',['../classsequences_matrix.html',1,'sequencesMatrix'],['../classnew_alignment.html#a8b328dfd8e7d3304cb144f2c2114ab5c',1,'newAlignment::SequencesMatrix()'],['../classsequences_matrix.html#a9205d08454190fd9ef27daf78b59410b',1,'sequencesMatrix::sequencesMatrix(void)'],['../classsequences_matrix.html#ad732edaa397a15a2653012f7e38f24af',1,'sequencesMatrix::sequencesMatrix(string *, string *, int, int)']]],
+  ['sequencesmatrix',['sequencesMatrix',['../classsequences_matrix.html',1,'sequencesMatrix'],['../classsequences_matrix.html#a9205d08454190fd9ef27daf78b59410b',1,'sequencesMatrix::sequencesMatrix(void)'],['../classsequences_matrix.html#ad732edaa397a15a2653012f7e38f24af',1,'sequencesMatrix::sequencesMatrix(string *, string *, int, int)'],['../classnew_alignment.html#a8b328dfd8e7d3304cb144f2c2114ab5c',1,'newAlignment::SequencesMatrix()']]],
   ['sequencesnames',['sequencesNames',['../classtrim_al_manager.html#a3c882b4187245a6a89d9a9cffc53a28a',1,'trimAlManager']]],
   ['sequencetypes',['SequenceTypes',['../defines_8h.html#a69d5409d6e7370d6bd3b4f931702e936',1,'defines.h']]],
   ['sequennumber',['sequenNumber',['../classnew_alignment.html#a4a6b47de8bef3e783f30548dfa48d84c',1,'newAlignment']]],

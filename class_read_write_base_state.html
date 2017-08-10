@@ -105,10 +105,7 @@ $(document).ready(function(){initNavTree('class_read_write_base_state.html','');
 <div class="dynheader">
 Collaboration diagram for ReadWriteBaseState:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_read_write_base_state__coll__graph.png" border="0" usemap="#_read_write_base_state_coll__map" alt="Collaboration graph"/></div>
-<map name="_read_write_base_state_coll__map" id="_read_write_base_state_coll__map">
-<area shape="rect" id="node3" href="class_read_write_m_s.html" title="Class that handles the load and save functions of an alignment. " alt="" coords="85,183,189,209"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_base_state__coll__graph.svg" width="383" height="322"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -132,6 +129,14 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a1e7a2d74ee685f2c9c7a3fed03087354"><td class="memItemLeft" align="right" valign="top"><a id="a1e7a2d74ee685f2c9c7a3fed03087354"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_base_state.html#a1e7a2d74ee685f2c9c7a3fed03087354">canLoad</a> = false</td></tr>
+<tr class="memdesc:a1e7a2d74ee685f2c9c7a3fed03087354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool tag that indicates wether or not this state can load an alignment in the corresponding format. <br /></td></tr>
+<tr class="separator:a1e7a2d74ee685f2c9c7a3fed03087354"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa648fbe2f707d3ebc989bc104e9b906e"><td class="memItemLeft" align="right" valign="top"><a id="aa648fbe2f707d3ebc989bc104e9b906e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_base_state.html#aa648fbe2f707d3ebc989bc104e9b906e">canSave</a> = false</td></tr>
+<tr class="memdesc:aa648fbe2f707d3ebc989bc104e9b906e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool tag that indicates wether or not this state can save an alignment in the corresponding format. <br /></td></tr>
+<tr class="separator:aa648fbe2f707d3ebc989bc104e9b906e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0311caa9d9dbb5f8fc3734295f600336"><td class="memItemLeft" align="right" valign="top"><a id="a0311caa9d9dbb5f8fc3734295f600336"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_base_state.html#a0311caa9d9dbb5f8fc3734295f600336">name</a></td></tr>
 <tr class="memdesc:a0311caa9d9dbb5f8fc3734295f600336"><td class="mdescLeft">&#160;</td><td class="mdescRight">String that contains a well known acronym to the format. <br /></td></tr>
@@ -244,18 +249,7 @@ Protected Attributes</h2></td></tr>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_read_write_base_state_ac6d87d2b73337cb4afa1499bf218f4ab_icgraph.png" border="0" usemap="#class_read_write_base_state_ac6d87d2b73337cb4afa1499bf218f4ab_icgraph" alt=""/></div>
-<map name="class_read_write_base_state_ac6d87d2b73337cb4afa1499bf218f4ab_icgraph" id="class_read_write_base_state_ac6d87d2b73337cb4afa1499bf218f4ab_icgraph">
-<area shape="rect" id="node2" href="class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf" title="Function that creates an alignment from a filepath. It automatically detects the format of the file..." alt="" coords="199,97,393,124"/>
-<area shape="rect" id="node10" href="class_read_write_m_s.html#a15d072b1a26e6eb21e28fa016cc2f340" title="Function that takes multile files, loads them and saves in a cumulus of formats, using an outPattern..." alt="" coords="207,148,385,175"/>
-<area shape="rect" id="node3" href="group___parsing_arguments_functions.html#gac594aa4b43e39df57eaa2ded49d7d9e1" title="Method to parse the input file argument. " alt="" coords="441,5,627,32"/>
-<area shape="rect" id="node5" href="group___parsing_arguments_functions.html#ga28508aa820509b23c2f91634bc638082" title="Method to parse the force select argument. " alt="" coords="463,57,605,98"/>
-<area shape="rect" id="node6" href="group___parsing_arguments_functions.html#gacf6ecf63ed1194adc345de441e2c1fec" title="Method to parse the backtranslation argument. " alt="" coords="463,122,605,163"/>
-<area shape="rect" id="node7" href="group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation..." alt="" coords="445,187,623,229"/>
-<area shape="rect" id="node4" href="group___parsing_arguments_functions.html#gaf140d97b6071a83930818030ac74b641" title="Method to parse arguments into usable structure in trimal. " alt="" coords="675,64,884,91"/>
-<area shape="rect" id="node8" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="705,187,854,229"/>
-<area shape="rect" id="node9" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="932,187,1092,229"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_base_state_ac6d87d2b73337cb4afa1499bf218f4ab_icgraph.svg" width="1160" height="235"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -293,7 +287,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if recognized, <b>False</b> otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_read_write_base_state_8h_source.html#l00069">69</a> of file <a class="el" href="_read_write_base_state_8h_source.html">ReadWriteBaseState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_read_write_base_state_8h_source.html#l00075">75</a> of file <a class="el" href="_read_write_base_state_8h_source.html">ReadWriteBaseState.h</a>.</p>
 
 </div>
 </div>

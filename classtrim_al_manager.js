@@ -64,7 +64,7 @@ var classtrim_al_manager =
     [ "parseArguments", "group___parsing_arguments_functions.html#gaf140d97b6071a83930818030ac74b641", null ],
     [ "perform", "group___perform_algorithm.html#gabe8d2841455c644dc9c7d1294b82b00f", null ],
     [ "print_statistics", "group___perform_algorithm.html#gafc48b86f5ae35b9a5e721b65c58bf610", null ],
-    [ "process_arguments", "group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343", null ],
+    [ "processArguments", "group___trimal_parsing_arguments.html#ga748b08a1ec5cd214de804ed0d4234a6e", null ],
     [ "residue_overlap_argument", "group___parsing_arguments_functions.html#gae4c29488936ae2d429f563c8df0b85a0", null ],
     [ "select_cols_argument", "group___parsing_arguments_functions.html#gadf8a0b6574e9abb325a6c331ab9368ac", null ],
     [ "seqs_select_argument", "group___parsing_arguments_functions.html#ga5b7b7ccf9e704e7341546a9e8834e890", null ],

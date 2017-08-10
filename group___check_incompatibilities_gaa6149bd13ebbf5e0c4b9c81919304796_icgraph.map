@@ -1,4 +1,4 @@
 <map id="trimAlManager::check_thresholds_incompatibilities" name="trimAlManager::check_thresholds_incompatibilities">
 <area shape="rect" id="node2" href="$group___check_incompatibilities.html#ga16d2da3f90cfe965bea5f1da1360e17a" title="Method to check argument incompatibilities. Take in mind that an incompatibility is between two argum..." alt="" coords="243,5,433,47"/>
-<area shape="rect" id="node3" href="$group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="481,5,641,47"/>
+<area shape="rect" id="node3" href="$group___trimal_parsing_arguments.html#ga748b08a1ec5cd214de804ed0d4234a6e" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="481,13,704,39"/>
 </map>

@@ -9,34 +9,34 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 62)">
 <title>newAlignment::checkCorrespondence</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-62 338,-62 338,4 -4,4"/>
-<!-- Node12 -->
-<g id="node1" class="node"><title>Node12</title>
+<!-- Node8 -->
+<g id="node1" class="node"><title>Node8</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-19.5 0,-38.5 182,-38.5 182,-19.5 0,-19.5"/>
 <text text-anchor="middle" x="91" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::checkCorrespondence</text>
 </g>
-<!-- Node13 -->
-<g id="node2" class="node"><title>Node13</title>
+<!-- Node9 -->
+<g id="node2" class="node"><title>Node9</title>
 <g id="a_node2"><a xlink:href="classutils.html#a1dce160519187ef2c6e14beb93a2050d" target="_top" xlink:title="Removes a determined char from the string. ">
 <polygon fill="white" stroke="black" points="218,-38.5 218,-57.5 334,-57.5 334,-38.5 218,-38.5"/>
 <text text-anchor="middle" x="276" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::removeCharacter</text>
 </a>
 </g>
 </g>
-<!-- Node12&#45;&gt;Node13 -->
-<g id="edge1" class="edge"><title>Node12&#45;&gt;Node13</title>
+<!-- Node8&#45;&gt;Node9 -->
+<g id="edge1" class="edge"><title>Node8&#45;&gt;Node9</title>
 <path fill="none" stroke="midnightblue" d="M182.16,-38.3608C190.819,-39.2599 199.494,-40.1605 207.874,-41.0307"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="207.622,-44.5232 217.93,-42.0747 208.345,-37.5606 207.622,-44.5232"/>
 </g>
-<!-- Node14 -->
-<g id="node3" class="node"><title>Node14</title>
+<!-- Node10 -->
+<g id="node3" class="node"><title>Node10</title>
 <g id="a_node3"><a xlink:href="classutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f" target="_top" xlink:title="Minimum of two numbers method. ">
 <polygon fill="white" stroke="black" points="248,-0.5 248,-19.5 304,-19.5 304,-0.5 248,-0.5"/>
 <text text-anchor="middle" x="276" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::min</text>
 </a>
 </g>
 </g>
-<!-- Node12&#45;&gt;Node14 -->
-<g id="edge2" class="edge"><title>Node12&#45;&gt;Node14</title>
+<!-- Node8&#45;&gt;Node10 -->
+<g id="edge2" class="edge"><title>Node8&#45;&gt;Node10</title>
 <path fill="none" stroke="midnightblue" d="M182.16,-19.6392C201.846,-17.5952 221.615,-15.5427 237.82,-13.8602"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="238.333,-17.3258 247.918,-12.8117 237.61,-10.3632 238.333,-17.3258"/>
 </g>

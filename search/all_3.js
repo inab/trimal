@@ -9,6 +9,8 @@ var searchData=
   ['calculateseqidentity',['calculateSeqIdentity',['../class_cleaner.html#aaad9f8e8f67eb419fc5aa905c86318e9',1,'Cleaner']]],
   ['calculatespuriousvector',['calculateSpuriousVector',['../class_cleaner.html#ab2db8eacfbe545c68fc287c43309e439',1,'Cleaner']]],
   ['calculatevectors',['calculateVectors',['../classstatistics_conservation.html#af86c9c3c58d0b00c68d4eda4d5f6f133',1,'statisticsConservation']]],
+  ['canload',['canLoad',['../class_read_write_base_state.html#a1e7a2d74ee685f2c9c7a3fed03087354',1,'ReadWriteBaseState']]],
+  ['cansave',['canSave',['../class_read_write_base_state.html#aa648fbe2f707d3ebc989bc104e9b906e',1,'ReadWriteBaseState']]],
   ['check_5fand_5fprepare_5fcoding_5fsequence',['check_and_prepare_coding_sequence',['../group___check_needs.html#ga55f0bbc922fb6854118da00a5bfa0c1b',1,'trimAlManager']]],
   ['check_5farguments_5fincompatibilities',['check_arguments_incompatibilities',['../group___check_incompatibilities.html#ga16d2da3f90cfe965bea5f1da1360e17a',1,'trimAlManager']]],
   ['check_5farguments_5fneeds',['check_arguments_needs',['../group___check_needs.html#ga3f325b806727751394adb829d97b35f1',1,'trimAlManager']]],

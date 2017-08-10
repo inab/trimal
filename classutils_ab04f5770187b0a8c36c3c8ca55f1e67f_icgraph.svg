@@ -9,21 +9,21 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>utils::min</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 278,-24 278,4 -4,4"/>
-<!-- Node78 -->
-<g id="node1" class="node"><title>Node78</title>
+<!-- Node74 -->
+<g id="node1" class="node"><title>Node74</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 56,-19.5 56,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="28" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::min</text>
 </g>
-<!-- Node79 -->
-<g id="node2" class="node"><title>Node79</title>
+<!-- Node75 -->
+<g id="node2" class="node"><title>Node75</title>
 <g id="a_node2"><a xlink:href="classnew_alignment.html#ae8501233fe4f4ef6bfe30c99c744c7c2" target="_top" xlink:title="Function to check CDS file. It checks if sequences of input alignment are all present on the CDS file...">
 <polygon fill="white" stroke="black" points="92,-0.5 92,-19.5 274,-19.5 274,-0.5 92,-0.5"/>
 <text text-anchor="middle" x="183" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::checkCorrespondence</text>
 </a>
 </g>
 </g>
-<!-- Node78&#45;&gt;Node79 -->
-<g id="edge1" class="edge"><title>Node78&#45;&gt;Node79</title>
+<!-- Node74&#45;&gt;Node75 -->
+<g id="edge1" class="edge"><title>Node74&#45;&gt;Node75</title>
 <path fill="none" stroke="midnightblue" d="M66.0379,-10C74.0559,-10 82.8703,-10 91.9477,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="66.0012,-6.5001 56.0011,-10 66.0011,-13.5001 66.0012,-6.5001"/>
 </g>

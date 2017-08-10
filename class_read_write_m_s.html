@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('class_read_write_m_s.html','');});
 <div class="dynheader">
 Collaboration diagram for ReadWriteMS:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_read_write_m_s__coll__graph.png" border="0" usemap="#_read_write_m_s_coll__map" alt="Collaboration graph"/></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s__coll__graph.svg" width="296" height="215"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -111,21 +111,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9dde337280e5598f9006b3b436112caf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf">loadAlignment</a> (std::string inFile)</td></tr>
 <tr class="memdesc:a9dde337280e5598f9006b3b436112caf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that creates an alignment from a filepath. It automatically detects the format of the file.  <a href="#a9dde337280e5598f9006b3b436112caf">More...</a><br /></td></tr>
 <tr class="separator:a9dde337280e5598f9006b3b436112caf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af81c55ae0e74802e3673f68e8e85fd2e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#af81c55ae0e74802e3673f68e8e85fd2e">saveAlignment</a> (std::string outFile, std::string outFormat, <a class="el" href="classnew_alignment.html">newAlignment</a> *alignment)</td></tr>
-<tr class="memdesc:af81c55ae0e74802e3673f68e8e85fd2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to save an alignment to a file. It searched on the available_states, the one that can write the alignment in the correct format.  <a href="#af81c55ae0e74802e3673f68e8e85fd2e">More...</a><br /></td></tr>
-<tr class="separator:af81c55ae0e74802e3673f68e8e85fd2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96e81b9c1bb49a746bc923b0ecf9b0d0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0">saveAlignment</a> (std::string outPattern, std::vector&lt; std::string &gt; *outFormats, <a class="el" href="classnew_alignment.html">newAlignment</a> *alignment)</td></tr>
 <tr class="memdesc:a96e81b9c1bb49a746bc923b0ecf9b0d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to save an alignment to a file. It searched on the available_states, the one that can write the alignment in the correct format.  <a href="#a96e81b9c1bb49a746bc923b0ecf9b0d0">More...</a><br /></td></tr>
 <tr class="separator:a96e81b9c1bb49a746bc923b0ecf9b0d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15d072b1a26e6eb21e28fa016cc2f340"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a15d072b1a26e6eb21e28fa016cc2f340">processFile</a> (std::vector&lt; std::string &gt; *inFile, std::string *outPattern, std::vector&lt; std::string &gt; *outFormats)</td></tr>
-<tr class="memdesc:a15d072b1a26e6eb21e28fa016cc2f340"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that takes multile files, loads them and saves in a cumulus of formats, using an outPattern.  <a href="#a15d072b1a26e6eb21e28fa016cc2f340">More...</a><br /></td></tr>
-<tr class="separator:a15d072b1a26e6eb21e28fa016cc2f340"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17eaedaed097a21dbe028d129560de9b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a17eaedaed097a21dbe028d129560de9b">getInputStateName</a> (std::string inFile)</td></tr>
-<tr class="memdesc:a17eaedaed097a21dbe028d129560de9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to obtain the format name of a given file.  <a href="#a17eaedaed097a21dbe028d129560de9b">More...</a><br /></td></tr>
-<tr class="separator:a17eaedaed097a21dbe028d129560de9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a873c2d7a39de71db3dfdc564c078b497"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a873c2d7a39de71db3dfdc564c078b497">getFormatsAvailable</a> ()</td></tr>
-<tr class="memdesc:a873c2d7a39de71db3dfdc564c078b497"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to obtain all format names available to this object.  <a href="#a873c2d7a39de71db3dfdc564c078b497">More...</a><br /></td></tr>
-<tr class="separator:a873c2d7a39de71db3dfdc564c078b497"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab019d93e740d838c7e64415630ca5ad5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#ab019d93e740d838c7e64415630ca5ad5">loadAndSaveMultipleAlignments</a> (std::vector&lt; std::string &gt; *inFile, std::string *outPattern, std::vector&lt; std::string &gt; *outFormats)</td></tr>
+<tr class="memdesc:ab019d93e740d838c7e64415630ca5ad5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that takes multile files, loads them and saves in a cumulus of formats, using an outPattern.  <a href="#ab019d93e740d838c7e64415630ca5ad5">More...</a><br /></td></tr>
+<tr class="separator:ab019d93e740d838c7e64415630ca5ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5235fb14e8fb57c0d21a2b5a2c9d1666"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a5235fb14e8fb57c0d21a2b5a2c9d1666">getFileFormatName</a> (std::string inFile)</td></tr>
+<tr class="memdesc:a5235fb14e8fb57c0d21a2b5a2c9d1666"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to obtain the format name of a given file.  <a href="#a5235fb14e8fb57c0d21a2b5a2c9d1666">More...</a><br /></td></tr>
+<tr class="separator:a5235fb14e8fb57c0d21a2b5a2c9d1666"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a818f384e63dbdcb7d0a55024d98a8dc6"><td class="memItemLeft" align="right" valign="top"><a id="a818f384e63dbdcb7d0a55024d98a8dc6"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a818f384e63dbdcb7d0a55024d98a8dc6">getInputFormatsAvailable</a> ()</td></tr>
+<tr class="memdesc:a818f384e63dbdcb7d0a55024d98a8dc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to obtain all format names available by this object that can <b>load</b> an alignment. <br /></td></tr>
+<tr class="separator:a818f384e63dbdcb7d0a55024d98a8dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e3dfa28fc4c4c55e4456786a56f683c"><td class="memItemLeft" align="right" valign="top"><a id="a7e3dfa28fc4c4c55e4456786a56f683c"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a7e3dfa28fc4c4c55e4456786a56f683c">getOutputFormatsAvailable</a> ()</td></tr>
+<tr class="memdesc:a7e3dfa28fc4c4c55e4456786a56f683c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to obtain all format names available by this object that can <b>save</b> an alignment. <br /></td></tr>
+<tr class="separator:a7e3dfa28fc4c4c55e4456786a56f683c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -205,36 +207,14 @@ std::vector&lt; <a class="el" href="class_read_write_base_state.html">ReadWriteB
 
 </div>
 </div>
-<a id="a873c2d7a39de71db3dfdc564c078b497"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a873c2d7a39de71db3dfdc564c078b497">&#9670;&nbsp;</a></span>getFormatsAvailable()</h2>
+<a id="a5235fb14e8fb57c0d21a2b5a2c9d1666"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5235fb14e8fb57c0d21a2b5a2c9d1666">&#9670;&nbsp;</a></span>getFileFormatName()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string ReadWriteMS::getFormatsAvailable </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Function to obtain all format names available to this object. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>This function doesn't take in mind half-states: States that can only load or save an alignment, as, for example, HTML format. This could be implemented with some tags on the classes, and this function may be replaced with three new: getAllFormatsAvailable, getInputFormats, getOutputFormats. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00369">369</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a17eaedaed097a21dbe028d129560de9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17eaedaed097a21dbe028d129560de9b">&#9670;&nbsp;</a></span>getInputStateName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string ReadWriteMS::getInputStateName </td>
+          <td class="memname">std::string ReadWriteMS::getFileFormatName </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>inFile</em></td><td>)</td>
@@ -251,16 +231,11 @@ std::vector&lt; <a class="el" href="class_read_write_base_state.html">ReadWriteB
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00328">328</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00307">307</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_read_write_m_s_a17eaedaed097a21dbe028d129560de9b_icgraph.png" border="0" usemap="#class_read_write_m_s_a17eaedaed097a21dbe028d129560de9b_icgraph" alt=""/></div>
-<map name="class_read_write_m_s_a17eaedaed097a21dbe028d129560de9b_icgraph" id="class_read_write_m_s_a17eaedaed097a21dbe028d129560de9b_icgraph">
-<area shape="rect" id="node2" href="group___check_needs.html#gaf7c3b97a17c2f5750f9481cc60c17616" title="Method to check if an output format has been given. If no output format has been given, it will use the inFile format. " alt="" coords="279,5,428,47"/>
-<area shape="rect" id="node3" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="476,5,625,47"/>
-<area shape="rect" id="node4" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="673,5,833,47"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a5235fb14e8fb57c0d21a2b5a2c9d1666_icgraph.svg" width="903" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -294,36 +269,24 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_cgraph.png" border="0" usemap="#class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_cgraph" alt=""/></div>
-<map name="class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_cgraph" id="class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_cgraph">
-<area shape="rect" id="node2" href="class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="248,5,393,47"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_cgraph.svg" width="399" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_icgraph.png" border="0" usemap="#class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_icgraph" alt=""/></div>
-<map name="class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_icgraph" id="class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_icgraph">
-<area shape="rect" id="node2" href="group___parsing_arguments_functions.html#gac594aa4b43e39df57eaa2ded49d7d9e1" title="Method to parse the input file argument. " alt="" coords="248,5,433,32"/>
-<area shape="rect" id="node4" href="group___parsing_arguments_functions.html#ga28508aa820509b23c2f91634bc638082" title="Method to parse the force select argument. " alt="" coords="269,57,412,98"/>
-<area shape="rect" id="node5" href="group___parsing_arguments_functions.html#gacf6ecf63ed1194adc345de441e2c1fec" title="Method to parse the backtranslation argument. " alt="" coords="269,122,412,163"/>
-<area shape="rect" id="node6" href="group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation..." alt="" coords="251,187,430,229"/>
-<area shape="rect" id="node3" href="group___parsing_arguments_functions.html#gaf140d97b6071a83930818030ac74b641" title="Method to parse arguments into usable structure in trimal. " alt="" coords="481,64,691,91"/>
-<area shape="rect" id="node7" href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="511,187,661,229"/>
-<area shape="rect" id="node8" href="group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="739,187,899,229"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_icgraph.svg" width="967" height="235"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="a15d072b1a26e6eb21e28fa016cc2f340"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15d072b1a26e6eb21e28fa016cc2f340">&#9670;&nbsp;</a></span>processFile()</h2>
+<a id="ab019d93e740d838c7e64415630ca5ad5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab019d93e740d838c7e64415630ca5ad5">&#9670;&nbsp;</a></span>loadAndSaveMultipleAlignments()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ReadWriteMS::processFile </td>
+          <td class="memname">void ReadWriteMS::loadAndSaveMultipleAlignments </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; std::string &gt; *&#160;</td>
           <td class="paramname"><em>inFile</em>, </td>
@@ -352,82 +315,23 @@ Here is the caller graph for this function:</div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">inFile</td><td>Vector of files to load, reformat and save. </td></tr>
-    <tr><td class="paramname">outPattern</td><td>Path and name of the new files. The function changes some tokens on the original string to obtain multiple versions: [in] Token that is changed with the original filename without extension. [format] Token that is changed with the new format name. [extension] Token that is changed with the format file extensions. </td></tr>
+    <tr><td class="paramname">outPattern</td><td>Path and name of the new files. The function changes some optional tokens on the original string to obtain multiple versions: [in] Token that is changed with the original filename without extension. [format] Token that is changed with the new format name. [extension] Token that is changed with the format file extensions. </td></tr>
     <tr><td class="paramname">outFormats</td><td>Output formats that original files should reformat to. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00222">222</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00203">203</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_read_write_m_s_a15d072b1a26e6eb21e28fa016cc2f340_cgraph.png" border="0" usemap="#class_read_write_m_s_a15d072b1a26e6eb21e28fa016cc2f340_cgraph" alt=""/></div>
-<map name="class_read_write_m_s_a15d072b1a26e6eb21e28fa016cc2f340_cgraph" id="class_read_write_m_s_a15d072b1a26e6eb21e28fa016cc2f340_cgraph">
-<area shape="rect" id="node2" href="class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="249,5,395,47"/>
-<area shape="rect" id="node3" href="classutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" title="Function that replaces a substring with another substring in a string. It makes a copy of the origina..." alt="" coords="254,71,390,98"/>
-<area shape="rect" id="node4" href="classutils.html#a6000246220e801bf6b1e6a553d7af13a" title="Function that replaces a substring with another substring in a string. It does not make a copy of the..." alt="" coords="232,122,412,149"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="af81c55ae0e74802e3673f68e8e85fd2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af81c55ae0e74802e3673f68e8e85fd2e">&#9670;&nbsp;</a></span>saveAlignment() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ReadWriteMS::saveAlignment </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>outFile</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>outFormat</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td>
-          <td class="paramname"><em>alignment</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Function to save an alignment to a file. It searched on the available_states, the one that can write the alignment in the correct format. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">outFile</td><td>Filepath to save the alignment. </td></tr>
-    <tr><td class="paramname">outFormat</td><td>Format in which save the alignment. </td></tr>
-    <tr><td class="paramname">alignment</td><td>Alignment </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00091">91</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_read_write_m_s_af81c55ae0e74802e3673f68e8e85fd2e_icgraph.png" border="0" usemap="#class_read_write_m_s_af81c55ae0e74802e3673f68e8e85fd2e_icgraph" alt=""/></div>
-<map name="class_read_write_m_s_af81c55ae0e74802e3673f68e8e85fd2e_icgraph" id="class_read_write_m_s_af81c55ae0e74802e3673f68e8e85fd2e_icgraph">
-<area shape="rect" id="node2" href="group___perform_algorithm.html#gabe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="252,5,411,32"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_ab019d93e740d838c7e64415630ca5ad5_cgraph.svg" width="428" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
 <a id="a96e81b9c1bb49a746bc923b0ecf9b0d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96e81b9c1bb49a746bc923b0ecf9b0d0">&#9670;&nbsp;</a></span>saveAlignment() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a96e81b9c1bb49a746bc923b0ecf9b0d0">&#9670;&nbsp;</a></span>saveAlignment()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -468,15 +372,16 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00110">110</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00091">91</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_read_write_m_s_a96e81b9c1bb49a746bc923b0ecf9b0d0_cgraph.png" border="0" usemap="#class_read_write_m_s_a96e81b9c1bb49a746bc923b0ecf9b0d0_cgraph" alt=""/></div>
-<map name="class_read_write_m_s_a96e81b9c1bb49a746bc923b0ecf9b0d0_cgraph" id="class_read_write_m_s_a96e81b9c1bb49a746bc923b0ecf9b0d0_cgraph">
-<area shape="rect" id="node2" href="classutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" title="Function that replaces a substring with another substring in a string. It makes a copy of the origina..." alt="" coords="274,5,410,32"/>
-<area shape="rect" id="node3" href="classutils.html#a6000246220e801bf6b1e6a553d7af13a" title="Function that replaces a substring with another substring in a string. It does not make a copy of the..." alt="" coords="252,56,432,83"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a96e81b9c1bb49a746bc923b0ecf9b0d0_cgraph.svg" width="438" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a96e81b9c1bb49a746bc923b0ecf9b0d0_icgraph.svg" width="416" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

@@ -10,6 +10,7 @@ var NAVTREE =
       [ "Understanding the code", "index.html#trimAl_code_sec", null ],
       [ "Acknowledgments", "index.html#Acknowledgments", null ]
     ] ],
+    [ "Dot example", "dot_pag.html", null ],
     [ "readAl Main Page", "readal_pag.html", null ],
     [ "Todo List", "todo.html", null ],
     [ "Modules", "modules.html", "modules" ],
@@ -36,8 +37,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_cleaner_8cpp_source.html",
-"classtrim_al_manager.html#a3f2180162f0010c39deb60c520eb5ec6",
-"group___parsing_arguments_functions.html#ga549b563a1e76cb0d7cf1b661156352fc"
+"classtrim_al_manager.html#a3a8ccb20e3e0a2f014cff21a4cfdc8d2",
+"group___parsing_arguments_functions.html#ga45951517e92bc57fcbc2887676880610"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

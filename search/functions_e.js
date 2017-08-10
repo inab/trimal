@@ -12,6 +12,5 @@ var searchData=
   ['printseqidentity',['printSeqIdentity',['../classnew_alignment.html#af730d0021082c5d52bc0b971a587c8e1',1,'newAlignment']]],
   ['printstatisticsfileacl',['printStatisticsFileAcl',['../classcompare_files.html#a435d98e46d83c066a928e40d2dbcead9',1,'compareFiles']]],
   ['printstatisticsfilecolumns',['printStatisticsFileColumns',['../classcompare_files.html#aa1a295d736ec6d8064cd28cf861289ef',1,'compareFiles']]],
-  ['process_5farguments',['process_arguments',['../group___trimal_parsing_arguments.html#gae8565b76a7e277d37e3c78a6c6165343',1,'trimAlManager']]],
-  ['processfile',['processFile',['../class_read_write_m_s.html#a15d072b1a26e6eb21e28fa016cc2f340',1,'ReadWriteMS']]]
+  ['processarguments',['processArguments',['../group___trimal_parsing_arguments.html#ga748b08a1ec5cd214de804ed0d4234a6e',1,'trimAlManager']]]
 ];
