@@ -618,6 +618,19 @@ bool alignment::saveAlignment(char *destFile) {
     return true;
   }
 
+  /* Check whether the input sequences file is aligned or not before creating
+   * a given output format. */
+  switch(oformat) {
+    case 1: case 11: case 12: case 13: case 17: case 21: case 22:
+      /* Check whether sequences in the alignment are aligned or not.
+       * Warn about it if there are not aligned. */
+      if (!isAligned) {
+        cerr << endl << "ERROR: Sequences are not aligned. Output format is "
+             << "not compatible with unaligned sequences.";
+      return false;
+    }
+  }
+
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* File open and correct open check */
   file.open(destFile);
