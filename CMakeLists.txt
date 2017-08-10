@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD 11)
 
 # Make project libs static for use in Docker.
 # Remember to comment these lines if you are building for non-docker use.
-SET(BUILD_SHARED_LIBRARIES OFF)
-SET(CMAKE_EXE_LINKER_FLAGS "-static")
+# SET(BUILD_SHARED_LIBRARIES OFF)
+# SET(CMAKE_EXE_LINKER_FLAGS "-static")
 
 # Make bin folder to output the compiled programs
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
@@ -59,16 +59,14 @@ target_link_libraries(readalMS m)
 # --------------------------- TESTING --------------------------- #
 
 find_program( MEMORYCHECK_COMMAND valgrind )
-set( MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --leak-check=full" )
+set( MEMORYCHECK_COMMAND_OPTIONS "-v --tool=callgrind" )
 # set( MEMORYCHECK_SUPPRESSIONS_FILE "${PROJECT_SOURCE_DIR}/valgrind_suppress.txt" )
 
-# new_trimal tests need trimal to be built
-add_dependencies(new_trimal trimal)
 
 # Basic tests
 include(CTest)
-set_tests_properties(PROPERTIES TIMEOUT 0)
-add_test(Crash_Trimal       bin/trimal)
+# set_tests_properties(PROPERTIES TIMEOUT 0)
+add_test(Crash_Trimal       ../Strimal/source/trimal)
 add_test(Crash_NewTrimal    bin/new_trimal)
 add_test(Crash_Readal       bin/readal)
 add_test(Crash_Statal       bin/statal)
