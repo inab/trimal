@@ -111,30 +111,30 @@
 </g>
 <!-- Node5 -->
 <g id="node5" class="node"><title>Node5</title>
-<polygon fill="white" stroke="#bfbfbf" points="3,-724.199 3,-743.199 32,-743.199 32,-724.199 3,-724.199"/>
-<text text-anchor="middle" x="17.5" y="-731.199" font-family="Helvetica,sans-Serif" font-size="10.00">int</text>
+<polygon fill="white" stroke="#bfbfbf" points="3,-723.199 3,-742.199 32,-742.199 32,-723.199 3,-723.199"/>
+<text text-anchor="middle" x="17.5" y="-730.199" font-family="Helvetica,sans-Serif" font-size="10.00">int</text>
 </g>
 <!-- Node5&#45;&gt;Node1 -->
 <g id="edge32" class="edge"><title>Node5&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M18.4027,-753.898C19.2664,-783.741 24.8628,-840.032 53,-876.699 103.367,-942.336 133.765,-965.699 216.5,-965.699 216.5,-965.699 216.5,-965.699 923,-965.699 1005.25,-965.699 1027.61,-922.352 1068,-850.699 1112.56,-771.637 1123.11,-469.671 1124.75,-411.447"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="21.8976,-753.472 18.2673,-743.519 14.8982,-753.564 21.8976,-753.472"/>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M18.425,-752.881C19.317,-782.703 24.9492,-838.966 53,-875.699 103.342,-941.624 133.552,-965.699 216.5,-965.699 216.5,-965.699 216.5,-965.699 923,-965.699 1005.25,-965.699 1027.61,-922.352 1068,-850.699 1112.56,-771.637 1123.11,-469.671 1124.75,-411.447"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="21.9195,-752.46 18.279,-742.51 14.9202,-752.558 21.9195,-752.46"/>
 <text text-anchor="middle" x="603.5" y="-1089.7" font-family="Helvetica,sans-Serif" font-size="10.00"> num</text>
 <text text-anchor="middle" x="603.5" y="-1078.7" font-family="Helvetica,sans-Serif" font-size="10.00">compareset</text>
 <text text-anchor="middle" x="603.5" y="-1067.7" font-family="Helvetica,sans-Serif" font-size="10.00">clusters</text>
 <text text-anchor="middle" x="603.5" y="-1056.7" font-family="Helvetica,sans-Serif" font-size="10.00">delSequences</text>
-<text text-anchor="middle" x="603.5" y="-1045.7" font-family="Helvetica,sans-Serif" font-size="10.00">similarityWindow</text>
-<text text-anchor="middle" x="603.5" y="-1034.7" font-family="Helvetica,sans-Serif" font-size="10.00">i</text>
-<text text-anchor="middle" x="603.5" y="-1023.7" font-family="Helvetica,sans-Serif" font-size="10.00">delColumns</text>
-<text text-anchor="middle" x="603.5" y="-1012.7" font-family="Helvetica,sans-Serif" font-size="10.00">numfiles</text>
-<text text-anchor="start" x="564" y="-1001.7" font-family="Helvetica,sans-Serif" font-size="10.00">automatedMethod</text>
-<text text-anchor="middle" x="603.5" y="-990.699" font-family="Helvetica,sans-Serif" font-size="10.00">Count</text>
-<text text-anchor="middle" x="603.5" y="-979.699" font-family="Helvetica,sans-Serif" font-size="10.00">prevType</text>
+<text text-anchor="middle" x="603.5" y="-1045.7" font-family="Helvetica,sans-Serif" font-size="10.00">alternative_matrix</text>
+<text text-anchor="middle" x="603.5" y="-1034.7" font-family="Helvetica,sans-Serif" font-size="10.00">similarityWindow</text>
+<text text-anchor="middle" x="603.5" y="-1023.7" font-family="Helvetica,sans-Serif" font-size="10.00">i</text>
+<text text-anchor="middle" x="603.5" y="-1012.7" font-family="Helvetica,sans-Serif" font-size="10.00">delColumns</text>
+<text text-anchor="middle" x="603.5" y="-1001.7" font-family="Helvetica,sans-Serif" font-size="10.00">numfiles</text>
+<text text-anchor="start" x="564" y="-990.699" font-family="Helvetica,sans-Serif" font-size="10.00">automatedMethod</text>
+<text text-anchor="middle" x="603.5" y="-979.699" font-family="Helvetica,sans-Serif" font-size="10.00">Count</text>
 <text text-anchor="middle" x="603.5" y="-968.699" font-family="Helvetica,sans-Serif" font-size="10.00">...</text>
 </g>
 <!-- Node5&#45;&gt;Node2 -->
 <g id="edge10" class="edge"><title>Node5&#45;&gt;Node2</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M28.1366,-752.29C33.9793,-761.448 42.3683,-771.599 53,-776.699 95.0751,-796.885 111.645,-782.079 158,-776.699 211.971,-770.435 223.767,-759.576 277,-748.699 391.47,-725.309 421.205,-725.44 536,-703.699 588.156,-693.821 601.443,-692.333 653,-679.699 660.857,-677.774 669.272,-675.489 677.129,-673.258"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="31.0122,-750.27 22.9826,-743.358 24.9492,-753.769 31.0122,-750.27"/>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M28.1366,-751.29C33.9793,-760.448 42.3683,-770.599 53,-775.699 95.0751,-795.885 111.623,-780.894 158,-775.699 211.896,-769.662 223.822,-759.344 277,-748.699 391.563,-725.766 421.205,-725.44 536,-703.699 588.156,-693.821 601.443,-692.333 653,-679.699 660.857,-677.774 669.272,-675.489 677.129,-673.258"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="31.0122,-749.27 22.9826,-742.358 24.9492,-752.769 31.0122,-749.27"/>
 <text text-anchor="middle" x="317" y="-806.699" font-family="Helvetica,sans-Serif" font-size="10.00"> saveSequences</text>
 <text text-anchor="middle" x="317" y="-795.699" font-family="Helvetica,sans-Serif" font-size="10.00">dataType</text>
 <text text-anchor="middle" x="317" y="-784.699" font-family="Helvetica,sans-Serif" font-size="10.00">saveResidues</text>
@@ -144,22 +144,22 @@
 </g>
 <!-- Node5&#45;&gt;Node4 -->
 <g id="edge4" class="edge"><title>Node5&#45;&gt;Node4</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M24.6825,-714.552C29.9746,-701.615 38.9971,-685.519 53,-677.699 93.7435,-654.945 117.557,-654.416 158,-677.699 171.807,-685.648 162.366,-700.456 176,-708.699 206.187,-726.95 247.092,-726.451 276.889,-722.587"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="21.3634,-713.437 21.2143,-724.031 27.9373,-715.843 21.3634,-713.437"/>
-<text text-anchor="middle" x="105.5" y="-768.699" font-family="Helvetica,sans-Serif" font-size="10.00"> numColumnsWithGaps</text>
-<text text-anchor="middle" x="105.5" y="-757.699" font-family="Helvetica,sans-Serif" font-size="10.00">columnLength</text>
-<text text-anchor="middle" x="105.5" y="-746.699" font-family="Helvetica,sans-Serif" font-size="10.00">halfWindow</text>
-<text text-anchor="middle" x="105.5" y="-735.699" font-family="Helvetica,sans-Serif" font-size="10.00">gapsWindow</text>
-<text text-anchor="middle" x="105.5" y="-724.699" font-family="Helvetica,sans-Serif" font-size="10.00">maxGaps</text>
-<text text-anchor="middle" x="105.5" y="-713.699" font-family="Helvetica,sans-Serif" font-size="10.00">gapsInColumn</text>
-<text text-anchor="middle" x="105.5" y="-702.699" font-family="Helvetica,sans-Serif" font-size="10.00">dataType</text>
-<text text-anchor="middle" x="105.5" y="-691.699" font-family="Helvetica,sans-Serif" font-size="10.00">aminosXInColumn</text>
-<text text-anchor="middle" x="105.5" y="-680.699" font-family="Helvetica,sans-Serif" font-size="10.00">columns</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M24.6825,-713.552C29.9746,-700.615 38.9971,-684.519 53,-676.699 93.7435,-653.945 117.04,-654.337 158,-676.699 170.985,-683.788 163.276,-697.152 176,-704.699 206.284,-722.663 246.985,-723.533 276.695,-720.884"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="21.3634,-712.437 21.2143,-723.031 27.9373,-714.843 21.3634,-712.437"/>
+<text text-anchor="middle" x="105.5" y="-767.699" font-family="Helvetica,sans-Serif" font-size="10.00"> numColumnsWithGaps</text>
+<text text-anchor="middle" x="105.5" y="-756.699" font-family="Helvetica,sans-Serif" font-size="10.00">columnLength</text>
+<text text-anchor="middle" x="105.5" y="-745.699" font-family="Helvetica,sans-Serif" font-size="10.00">halfWindow</text>
+<text text-anchor="middle" x="105.5" y="-734.699" font-family="Helvetica,sans-Serif" font-size="10.00">gapsWindow</text>
+<text text-anchor="middle" x="105.5" y="-723.699" font-family="Helvetica,sans-Serif" font-size="10.00">maxGaps</text>
+<text text-anchor="middle" x="105.5" y="-712.699" font-family="Helvetica,sans-Serif" font-size="10.00">gapsInColumn</text>
+<text text-anchor="middle" x="105.5" y="-701.699" font-family="Helvetica,sans-Serif" font-size="10.00">dataType</text>
+<text text-anchor="middle" x="105.5" y="-690.699" font-family="Helvetica,sans-Serif" font-size="10.00">aminosXInColumn</text>
+<text text-anchor="middle" x="105.5" y="-679.699" font-family="Helvetica,sans-Serif" font-size="10.00">columns</text>
 </g>
 <!-- Node5&#45;&gt;Node6 -->
 <g id="edge7" class="edge"><title>Node5&#45;&gt;Node6</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M21.365,-753.458C25.2715,-774.003 34.0814,-805.998 53,-826.699 107.315,-886.131 135.988,-904.699 216.5,-904.699 216.5,-904.699 216.5,-904.699 711,-904.699 773.862,-904.699 790.021,-895.449 849,-873.699 869.555,-866.119 891.614,-853.788 905.82,-845.237"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="24.7777,-752.646 19.666,-743.366 17.8749,-753.809 24.7777,-752.646"/>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M21.3854,-752.439C25.309,-772.968 34.1329,-804.952 53,-825.699 107.297,-885.408 135.795,-904.699 216.5,-904.699 216.5,-904.699 216.5,-904.699 711,-904.699 773.862,-904.699 790.021,-895.449 849,-873.699 869.555,-866.119 891.614,-853.788 905.82,-845.237"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="24.7985,-751.631 19.6771,-742.356 17.8968,-752.8 24.7985,-751.631"/>
 <text text-anchor="middle" x="455.5" y="-929.699" font-family="Helvetica,sans-Serif" font-size="10.00"> matrix</text>
 <text text-anchor="middle" x="455.5" y="-918.699" font-family="Helvetica,sans-Serif" font-size="10.00">seqsNumber</text>
 <text text-anchor="middle" x="455.5" y="-907.699" font-family="Helvetica,sans-Serif" font-size="10.00">resNumber</text>
@@ -174,40 +174,40 @@
 </g>
 <!-- Node5&#45;&gt;Node9 -->
 <g id="edge13" class="edge"><title>Node5&#45;&gt;Node9</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M22.0028,-714.223C26.2458,-696.362 35.1696,-670.504 53,-655.699 104.109,-613.263 300.516,-616.191 398.392,-620.521"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="18.5499,-713.636 19.928,-724.141 25.4016,-715.07 18.5499,-713.636"/>
-<text text-anchor="middle" x="217.5" y="-657.699" font-family="Helvetica,sans-Serif" font-size="10.00"> halfWindow</text>
-<text text-anchor="middle" x="217.5" y="-646.699" font-family="Helvetica,sans-Serif" font-size="10.00">dataType</text>
-<text text-anchor="middle" x="217.5" y="-635.699" font-family="Helvetica,sans-Serif" font-size="10.00">sequences</text>
-<text text-anchor="middle" x="217.5" y="-624.699" font-family="Helvetica,sans-Serif" font-size="10.00">columns</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M22.3708,-712.812C26.8084,-695.295 35.8069,-670.353 53,-655.699 96.0763,-618.984 119.885,-630.096 176,-622.699 252.578,-612.605 342.033,-615.498 398.473,-619.101"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="18.844,-712.545 20.073,-723.068 25.6747,-714.075 18.844,-712.545"/>
+<text text-anchor="middle" x="217.5" y="-658.699" font-family="Helvetica,sans-Serif" font-size="10.00"> halfWindow</text>
+<text text-anchor="middle" x="217.5" y="-647.699" font-family="Helvetica,sans-Serif" font-size="10.00">dataType</text>
+<text text-anchor="middle" x="217.5" y="-636.699" font-family="Helvetica,sans-Serif" font-size="10.00">sequences</text>
+<text text-anchor="middle" x="217.5" y="-625.699" font-family="Helvetica,sans-Serif" font-size="10.00">columns</text>
 </g>
 <!-- Node12 -->
 <g id="node12" class="node"><title>Node12</title>
 <g id="a_node12"><a xlink:href="classsimilarity_matrix.html" target="_top" xlink:title="similarityMatrix">
-<polygon fill="white" stroke="black" points="176,-439.199 176,-458.199 259,-458.199 259,-439.199 176,-439.199"/>
-<text text-anchor="middle" x="217.5" y="-446.199" font-family="Helvetica,sans-Serif" font-size="10.00">similarityMatrix</text>
+<polygon fill="white" stroke="black" points="176,-436.199 176,-455.199 259,-455.199 259,-436.199 176,-436.199"/>
+<text text-anchor="middle" x="217.5" y="-443.199" font-family="Helvetica,sans-Serif" font-size="10.00">similarityMatrix</text>
 </a>
 </g>
 </g>
 <!-- Node5&#45;&gt;Node12 -->
 <g id="edge17" class="edge"><title>Node5&#45;&gt;Node12</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M18.7444,-713.87C19.7729,-663.067 25.1279,-529.97 53,-497.699 83.4097,-462.49 138.015,-452.038 175.7,-449.219"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="15.2402,-714.101 18.5742,-724.157 22.2392,-714.216 15.2402,-714.101"/>
-<text text-anchor="middle" x="105.5" y="-511.699" font-family="Helvetica,sans-Serif" font-size="10.00"> numPositions</text>
-<text text-anchor="middle" x="105.5" y="-500.699" font-family="Helvetica,sans-Serif" font-size="10.00">vhash</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M18.597,-712.92C19.2605,-661.028 23.7923,-522.702 53,-489.699 83.5859,-455.139 138.151,-446.42 175.779,-444.845"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="15.0953,-713.097 18.5038,-723.128 22.095,-713.161 15.0953,-713.097"/>
+<text text-anchor="middle" x="105.5" y="-503.699" font-family="Helvetica,sans-Serif" font-size="10.00"> numPositions</text>
+<text text-anchor="middle" x="105.5" y="-492.699" font-family="Helvetica,sans-Serif" font-size="10.00">vhash</text>
 </g>
 <!-- Node5&#45;&gt;Node13 -->
 <g id="edge20" class="edge"><title>Node5&#45;&gt;Node13</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M20.0413,-713.95C22.868,-689.597 30.8138,-648.076 53,-620.699 92.3281,-572.169 116.734,-572.43 176,-552.699 314.058,-506.736 784.931,-543.112 896.946,-552.596"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="16.5383,-713.811 19.0472,-724.104 23.5049,-714.493 16.5383,-713.811"/>
-<text text-anchor="middle" x="455.5" y="-555.699" font-family="Helvetica,sans-Serif" font-size="10.00"> right_boundary</text>
-<text text-anchor="middle" x="455.5" y="-544.699" font-family="Helvetica,sans-Serif" font-size="10.00">blockSize</text>
-<text text-anchor="middle" x="455.5" y="-533.699" font-family="Helvetica,sans-Serif" font-size="10.00">left_boundary</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M20.2427,-712.846C23.266,-688.747 31.4034,-647.958 53,-620.699 92.3361,-571.049 115.756,-568.272 176,-548.699 314.392,-503.736 785.011,-542.444 896.96,-552.479"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="16.7488,-712.602 19.1579,-722.92 23.7085,-713.352 16.7488,-712.602"/>
+<text text-anchor="middle" x="455.5" y="-553.699" font-family="Helvetica,sans-Serif" font-size="10.00"> right_boundary</text>
+<text text-anchor="middle" x="455.5" y="-542.699" font-family="Helvetica,sans-Serif" font-size="10.00">blockSize</text>
+<text text-anchor="middle" x="455.5" y="-531.699" font-family="Helvetica,sans-Serif" font-size="10.00">left_boundary</text>
 </g>
 <!-- Node5&#45;&gt;Node15 -->
 <g id="edge25" class="edge"><title>Node5&#45;&gt;Node15</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M24.3704,-753.072C29.624,-767.067 38.7344,-785.274 53,-795.699 112.853,-839.439 142.368,-828.699 216.5,-828.699 216.5,-828.699 216.5,-828.699 604.5,-828.699 681.036,-828.699 694.673,-796.732 767,-771.699 803.392,-759.103 813.889,-759.52 849,-743.699 869.459,-734.48 891.72,-721.272 905.989,-712.36"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="27.6122,-751.733 21.0832,-743.389 20.9837,-753.983 27.6122,-751.733"/>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M24.3882,-752.047C29.651,-766.03 38.7651,-784.232 53,-794.699 112.796,-838.667 142.279,-828.699 216.5,-828.699 216.5,-828.699 216.5,-828.699 604.5,-828.699 681.036,-828.699 694.673,-796.732 767,-771.699 803.392,-759.103 813.889,-759.52 849,-743.699 869.459,-734.48 891.72,-721.272 905.989,-712.36"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="27.6309,-750.712 21.0934,-742.375 21.0048,-752.969 27.6309,-750.712"/>
 <text text-anchor="middle" x="455.5" y="-842.699" font-family="Helvetica,sans-Serif" font-size="10.00"> shWindow</text>
 <text text-anchor="middle" x="455.5" y="-831.699" font-family="Helvetica,sans-Serif" font-size="10.00">ghWindow</text>
 </g>
@@ -236,13 +236,13 @@
 </g>
 <!-- Node8 -->
 <g id="node8" class="node"><title>Node8</title>
-<polygon fill="white" stroke="#bfbfbf" points="0,-404.199 0,-423.199 35,-423.199 35,-404.199 0,-404.199"/>
-<text text-anchor="middle" x="17.5" y="-411.199" font-family="Helvetica,sans-Serif" font-size="10.00">float</text>
+<polygon fill="white" stroke="#bfbfbf" points="0,-396.199 0,-415.199 35,-415.199 35,-396.199 0,-396.199"/>
+<text text-anchor="middle" x="17.5" y="-403.199" font-family="Helvetica,sans-Serif" font-size="10.00">float</text>
 </g>
 <!-- Node8&#45;&gt;Node1 -->
 <g id="edge30" class="edge"><title>Node8&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M44.1455,-399.389C119.444,-358.318 347.587,-240.585 554,-202.699 741.016,-168.373 797.214,-204.811 977,-266.699 1019.85,-281.45 1034.37,-282.323 1068,-312.699 1094.01,-336.19 1112.94,-374.17 1120.87,-391.943"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="42.4174,-396.345 35.3364,-404.226 45.7866,-402.481 42.4174,-396.345"/>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M44.7079,-391.805C120.742,-352.381 349.027,-240.247 554,-202.699 741.028,-168.439 797.214,-204.811 977,-266.699 1019.85,-281.45 1034.37,-282.323 1068,-312.699 1094.01,-336.19 1112.94,-374.17 1120.87,-391.943"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="42.6484,-388.932 35.4032,-396.662 45.8877,-395.137 42.6484,-388.932"/>
 <text text-anchor="middle" x="603.5" y="-282.699" font-family="Helvetica,sans-Serif" font-size="10.00"> maxIdentity</text>
 <text text-anchor="middle" x="603.5" y="-271.699" font-family="Helvetica,sans-Serif" font-size="10.00">sequenceOverlap</text>
 <text text-anchor="middle" x="603.5" y="-260.699" font-family="Helvetica,sans-Serif" font-size="10.00">similarityThreshold</text>
@@ -254,16 +254,17 @@
 </g>
 <!-- Node8&#45;&gt;Node2 -->
 <g id="edge9" class="edge"><title>Node8&#45;&gt;Node2</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M22.8231,-433.623C27.4181,-449.549 36.3948,-470.931 53,-481.699 166.501,-555.3 251.387,-412.169 357,-496.699 380.403,-515.43 353.344,-540.973 375,-561.699 420.799,-605.531 594.892,-600.358 653,-625.699 669.801,-633.026 686.92,-645.534 697.732,-654.188"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="26.1495,-432.5 20.3021,-423.665 19.3636,-434.218 26.1495,-432.5"/>
-<text text-anchor="middle" x="317" y="-499.699" font-family="Helvetica,sans-Serif" font-size="10.00"> identities</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M22.814,-425.637C27.4035,-441.572 36.3771,-462.959 53,-473.699 109.802,-510.401 304.804,-444.699 357,-487.699 383.124,-509.221 350.919,-537.913 375,-561.699 420.102,-606.248 594.892,-600.358 653,-625.699 669.801,-633.026 686.92,-645.534 697.732,-654.188"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="26.1397,-424.511 20.297,-415.673 19.3529,-426.226 26.1397,-424.511"/>
+<text text-anchor="middle" x="317" y="-501.699" font-family="Helvetica,sans-Serif" font-size="10.00"> identities</text>
+<text text-anchor="middle" x="317" y="-490.699" font-family="Helvetica,sans-Serif" font-size="10.00">overlaps</text>
 </g>
 <!-- Node8&#45;&gt;Node12 -->
 <g id="edge16" class="edge"><title>Node8&#45;&gt;Node12</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M45.1958,-409.887C73.6888,-406.736 119.883,-404.28 158,-414.699 175.45,-419.469 193.075,-430.804 204.35,-439.079"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="44.7002,-406.421 35.1961,-411.104 45.5456,-413.37 44.7002,-406.421"/>
-<text text-anchor="middle" x="105.5" y="-428.699" font-family="Helvetica,sans-Serif" font-size="10.00"> distMat</text>
-<text text-anchor="middle" x="105.5" y="-417.699" font-family="Helvetica,sans-Serif" font-size="10.00">simMat</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M45.3294,-401.426C73.9343,-397.889 120.221,-395.113 158,-406.699 176.905,-412.497 195.31,-426.575 206.277,-436.131"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="44.7242,-397.976 35.2866,-402.791 45.6669,-404.913 44.7242,-397.976"/>
+<text text-anchor="middle" x="105.5" y="-420.699" font-family="Helvetica,sans-Serif" font-size="10.00"> distMat</text>
+<text text-anchor="middle" x="105.5" y="-409.699" font-family="Helvetica,sans-Serif" font-size="10.00">simMat</text>
 </g>
 <!-- Node9&#45;&gt;Node2 -->
 <g id="edge11" class="edge"><title>Node9&#45;&gt;Node2</title>
@@ -273,39 +274,39 @@
 </g>
 <!-- Node10 -->
 <g id="node10" class="node"><title>Node10</title>
-<polygon fill="white" stroke="#bfbfbf" points="196.5,-680.199 196.5,-699.199 238.5,-699.199 238.5,-680.199 196.5,-680.199"/>
-<text text-anchor="middle" x="217.5" y="-687.199" font-family="Helvetica,sans-Serif" font-size="10.00">float *</text>
+<polygon fill="white" stroke="#bfbfbf" points="196.5,-676.199 196.5,-695.199 238.5,-695.199 238.5,-676.199 196.5,-676.199"/>
+<text text-anchor="middle" x="217.5" y="-683.199" font-family="Helvetica,sans-Serif" font-size="10.00">float *</text>
 </g>
 <!-- Node10&#45;&gt;Node9 -->
 <g id="edge12" class="edge"><title>Node10&#45;&gt;Node9</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M245.677,-675.672C255.377,-671.066 266.503,-666.228 277,-662.699 316.775,-649.326 363.131,-639.322 398.494,-632.796"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="243.975,-672.608 236.529,-680.144 247.05,-678.896 243.975,-672.608"/>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M248,-673.05C257.184,-669.398 267.416,-665.616 277,-662.699 317.899,-650.252 365.231,-640.055 400.727,-633.213"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="246.463,-669.897 238.526,-676.915 249.108,-676.378 246.463,-669.897"/>
 <text text-anchor="middle" x="317" y="-687.699" font-family="Helvetica,sans-Serif" font-size="10.00"> MDK_Window</text>
 <text text-anchor="middle" x="317" y="-676.699" font-family="Helvetica,sans-Serif" font-size="10.00">Q</text>
 <text text-anchor="middle" x="317" y="-665.699" font-family="Helvetica,sans-Serif" font-size="10.00">MDK</text>
 </g>
 <!-- Node11 -->
 <g id="node11" class="node"><title>Node11</title>
-<polygon fill="white" stroke="#bfbfbf" points="194.5,-562.199 194.5,-581.199 240.5,-581.199 240.5,-562.199 194.5,-562.199"/>
-<text text-anchor="middle" x="217.5" y="-569.199" font-family="Helvetica,sans-Serif" font-size="10.00">float **</text>
+<polygon fill="white" stroke="#bfbfbf" points="194.5,-558.199 194.5,-577.199 240.5,-577.199 240.5,-558.199 194.5,-558.199"/>
+<text text-anchor="middle" x="217.5" y="-565.199" font-family="Helvetica,sans-Serif" font-size="10.00">float **</text>
 </g>
 <!-- Node11&#45;&gt;Node9 -->
 <g id="edge14" class="edge"><title>Node11&#45;&gt;Node9</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M251.025,-574.585C279.359,-577.582 321.37,-583.195 357,-592.699 365.294,-594.911 366.885,-596.901 375,-599.699 389.857,-604.822 406.474,-609.933 420.66,-614.114"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="251.178,-571.083 240.878,-573.562 250.476,-578.048 251.178,-571.083"/>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M251.011,-571.765C279.335,-575.733 321.341,-582.648 357,-592.699 365.262,-595.028 366.885,-596.901 375,-599.699 389.857,-604.822 406.474,-609.933 420.66,-614.114"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="251.247,-568.265 240.867,-570.388 250.305,-575.202 251.247,-568.265"/>
 <text text-anchor="middle" x="317" y="-595.699" font-family="Helvetica,sans-Serif" font-size="10.00"> matrixIdentity</text>
 </g>
 <!-- Node12&#45;&gt;Node1 -->
 <g id="edge37" class="edge"><title>Node12&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M269.506,-445.972C317.293,-443.654 390.717,-440.699 454.5,-440.699 454.5,-440.699 454.5,-440.699 923,-440.699 988.117,-440.699 1004.52,-434.218 1068,-419.699 1077.91,-417.432 1088.59,-414.262 1097.99,-411.214"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="269.23,-442.481 259.415,-446.471 269.575,-449.473 269.23,-442.481"/>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M269.088,-444.008C316.871,-442.557 390.549,-440.699 454.5,-440.699 454.5,-440.699 454.5,-440.699 923,-440.699 988.117,-440.699 1004.52,-434.218 1068,-419.699 1077.91,-417.432 1088.59,-414.262 1097.99,-411.214"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="268.889,-440.512 259.002,-444.32 269.105,-447.509 268.889,-440.512"/>
 <text text-anchor="middle" x="710" y="-443.699" font-family="Helvetica,sans-Serif" font-size="10.00"> similMatrix</text>
 </g>
 <!-- Node12&#45;&gt;Node9 -->
 <g id="edge15" class="edge"><title>Node12&#45;&gt;Node9</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M232.709,-466.339C243.932,-479.661 260.417,-497.938 277,-511.699 280.663,-514.739 396.652,-587.465 439.118,-614.067"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="235.214,-463.875 226.146,-458.396 229.818,-468.334 235.214,-463.875"/>
-<text text-anchor="middle" x="317" y="-564.699" font-family="Helvetica,sans-Serif" font-size="10.00"> simMatrix</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M231.268,-463.594C242.28,-478.213 259.182,-498.82 277,-513.699 308.652,-540.131 321.896,-539.06 357,-560.699 386.851,-579.1 421.166,-601.592 440.086,-614.113"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="233.963,-461.35 225.217,-455.369 228.324,-465.499 233.963,-461.35"/>
+<text text-anchor="middle" x="317" y="-563.699" font-family="Helvetica,sans-Serif" font-size="10.00"> simMatrix</text>
 </g>
 <!-- Node13&#45;&gt;Node2 -->
 <g id="edge18" class="edge"><title>Node13&#45;&gt;Node2</title>
@@ -323,15 +324,15 @@
 <path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M466.376,-460.048C481.718,-432.718 513.743,-381.783 554,-351.699 594.628,-321.338 717.134,-278.966 767,-269.699 908.979,-243.314 1068.76,-357.587 1113.06,-392.093"/>
 <polygon fill="#9a32cd" stroke="#9a32cd" points="463.226,-458.514 461.495,-468.966 469.366,-461.875 463.226,-458.514"/>
 <text text-anchor="middle" x="808" y="-382.699" font-family="Helvetica,sans-Serif" font-size="10.00"> keepSeqs</text>
-<text text-anchor="middle" x="808" y="-371.699" font-family="Helvetica,sans-Serif" font-size="10.00">columnNumbering</text>
-<text text-anchor="middle" x="808" y="-360.699" font-family="Helvetica,sans-Serif" font-size="10.00">ignoreStopCodon</text>
-<text text-anchor="middle" x="808" y="-349.699" font-family="Helvetica,sans-Serif" font-size="10.00">splitByStopCodon</text>
-<text text-anchor="middle" x="808" y="-338.699" font-family="Helvetica,sans-Serif" font-size="10.00">selectSeqs</text>
-<text text-anchor="middle" x="808" y="-327.699" font-family="Helvetica,sans-Serif" font-size="10.00">sgt</text>
-<text text-anchor="middle" x="808" y="-316.699" font-family="Helvetica,sans-Serif" font-size="10.00">sgc</text>
-<text text-anchor="middle" x="808" y="-305.699" font-family="Helvetica,sans-Serif" font-size="10.00">strict</text>
-<text text-anchor="middle" x="808" y="-294.699" font-family="Helvetica,sans-Serif" font-size="10.00">shortNames</text>
-<text text-anchor="middle" x="808" y="-283.699" font-family="Helvetica,sans-Serif" font-size="10.00">selectCols</text>
+<text text-anchor="middle" x="808" y="-371.699" font-family="Helvetica,sans-Serif" font-size="10.00">soverlap</text>
+<text text-anchor="middle" x="808" y="-360.699" font-family="Helvetica,sans-Serif" font-size="10.00">columnNumbering</text>
+<text text-anchor="middle" x="808" y="-349.699" font-family="Helvetica,sans-Serif" font-size="10.00">ignoreStopCodon</text>
+<text text-anchor="middle" x="808" y="-338.699" font-family="Helvetica,sans-Serif" font-size="10.00">splitByStopCodon</text>
+<text text-anchor="middle" x="808" y="-327.699" font-family="Helvetica,sans-Serif" font-size="10.00">selectSeqs</text>
+<text text-anchor="middle" x="808" y="-316.699" font-family="Helvetica,sans-Serif" font-size="10.00">sgt</text>
+<text text-anchor="middle" x="808" y="-305.699" font-family="Helvetica,sans-Serif" font-size="10.00">sgc</text>
+<text text-anchor="middle" x="808" y="-294.699" font-family="Helvetica,sans-Serif" font-size="10.00">strict</text>
+<text text-anchor="middle" x="808" y="-283.699" font-family="Helvetica,sans-Serif" font-size="10.00">shortNames</text>
 <text text-anchor="middle" x="808" y="-272.699" font-family="Helvetica,sans-Serif" font-size="10.00">...</text>
 </g>
 <!-- Node14&#45;&gt;Node2 -->

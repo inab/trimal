@@ -102,7 +102,8 @@ $(document).ready(function(){initNavTree('classnew_alignment.html','');});
 <div class="dynheader">
 Collaboration diagram for newAlignment:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment__coll__graph.svg" width="1163" height="602"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment__coll__graph.svg" width="1163" height="602"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -154,12 +155,24 @@ If the sequence is present, its order on the alignment sequences vector will be 
 <tr class="memitem:a7a471f9393fa1da913bd9a65cc96a9f1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a7a471f9393fa1da913bd9a65cc96a9f1">getBlockSize</a> (void)</td></tr>
 <tr class="memdesc:a7a471f9393fa1da913bd9a65cc96a9f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">blockSize getter.  <a href="#a7a471f9393fa1da913bd9a65cc96a9f1">More...</a><br /></td></tr>
 <tr class="separator:a7a471f9393fa1da913bd9a65cc96a9f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4133316a6b5cd546573cfe93ce705343"><td class="memItemLeft" align="right" valign="top"><a id="a4133316a6b5cd546573cfe93ce705343"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateSeqIdentity</b> (void)</td></tr>
+<tr class="separator:a4133316a6b5cd546573cfe93ce705343"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10222b87adb54935588428a47aebfbb4"><td class="memItemLeft" align="right" valign="top"><a id="a10222b87adb54935588428a47aebfbb4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateRelaxedSeqIdentity</b> (void)</td></tr>
+<tr class="separator:a10222b87adb54935588428a47aebfbb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a808a1356ab9f65b42666afd3dc1f48f5"><td class="memItemLeft" align="right" valign="top"><a id="a808a1356ab9f65b42666afd3dc1f48f5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>calculateSeqOverlap</b> (void)</td></tr>
+<tr class="separator:a808a1356ab9f65b42666afd3dc1f48f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af730d0021082c5d52bc0b971a587c8e1"><td class="memItemLeft" align="right" valign="top"><a id="af730d0021082c5d52bc0b971a587c8e1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#af730d0021082c5d52bc0b971a587c8e1">printSeqIdentity</a> (void)</td></tr>
 <tr class="memdesc:af730d0021082c5d52bc0b971a587c8e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to print different identity values computed from the alignment.<br />
 In this method we assess the identity values matrix, as well as diferent average values. <br />
 Moreover, the method computes which one is the most similar sequence, in term of identity values, for each one on this alignment. <br /></td></tr>
 <tr class="separator:af730d0021082c5d52bc0b971a587c8e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe92c513666d2bc5ea2402081d670e1e"><td class="memItemLeft" align="right" valign="top"><a id="abe92c513666d2bc5ea2402081d670e1e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>printSeqOverlap</b> (void)</td></tr>
+<tr class="separator:abe92c513666d2bc5ea2402081d670e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1ee3ea76e1cb268097f1df0c465d6f5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#ae1ee3ea76e1cb268097f1df0c465d6f5">getAlignmentType</a> (void)</td></tr>
 <tr class="memdesc:ae1ee3ea76e1cb268097f1df0c465d6f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alignment type getter.  <a href="#ae1ee3ea76e1cb268097f1df0c465d6f5">More...</a><br /></td></tr>
 <tr class="separator:ae1ee3ea76e1cb268097f1df0c465d6f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -284,6 +297,9 @@ string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 <tr class="memitem:a792877eafe085fe6aa5b267901fe5be9"><td class="memItemLeft" align="right" valign="top"><a id="a792877eafe085fe6aa5b267901fe5be9"></a>
 float **&#160;</td><td class="memItemRight" valign="bottom"><b>identities</b></td></tr>
 <tr class="separator:a792877eafe085fe6aa5b267901fe5be9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3e4e212986c435b3573d94f4483f156"><td class="memItemLeft" align="right" valign="top"><a id="ad3e4e212986c435b3573d94f4483f156"></a>
+float **&#160;</td><td class="memItemRight" valign="bottom"><b>overlaps</b></td></tr>
+<tr class="separator:ad3e4e212986c435b3573d94f4483f156"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d5be3aa01fde32cbc0fddbf75c3c01e"><td class="memItemLeft" align="right" valign="top"><a id="a4d5be3aa01fde32cbc0fddbf75c3c01e"></a>
 int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a4d5be3aa01fde32cbc0fddbf75c3c01e">residuesNumber</a></td></tr>
 <tr class="memdesc:a4d5be3aa01fde32cbc0fddbf75c3c01e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of residues of this alignment, if it is aligned. <br /></td></tr>
@@ -334,7 +350,7 @@ It doesn't report any trimming result, meaning this only shows information of an
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if everything went ok. <br />
  <b>False</b> if alignment is not aligned. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01343">1343</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01868">1868</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -410,12 +426,7 @@ It contains information about the original and trimmed alignments, showing which
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if everything went ok. <br />
  <b>False</b> if file couldn't be open or alignment is not aligned. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01066">1066</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a3377e8d600e1cbb9e65adf2995c877f9_cgraph.svg" width="398" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01520">1520</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -444,7 +455,7 @@ This is, the frequency of the most present element in the column, being residue,
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00981">981</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01158">1158</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -504,11 +515,12 @@ If nucleotide sequence is smaller than protein sequence * 3, it adds some 'N' at
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if all went right.<br />
  <b>False</b> if there is a sequence in the alignment but not in the names vector. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00698">698</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00809">809</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_ae8501233fe4f4ef6bfe30c99c744c7c2_cgraph.svg" width="456" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_ae8501233fe4f4ef6bfe30c99c744c7c2_cgraph.svg" width="456" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -543,11 +555,12 @@ It checks if sequences contain unknown characters, sets the isAligned flag and i
  <b>False</b> if there was a problem.<br />
 This could happen if the sequences contain any unknown character or if aligned flag is set up to corrent, if the sequences have variable sizes. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00781">781</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00892">892</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_acbeb320f0f70222f81a906ccfc33a016_icgraph.svg" width="655" height="544"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_acbeb320f0f70222f81a906ccfc33a016_icgraph.svg" width="655" height="544"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -587,11 +600,12 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00452">452</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00563">563</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a3de39c62c08a265178f1fa7df76c3ab7_icgraph.svg" width="654" height="392"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a3de39c62c08a265178f1fa7df76c3ab7_icgraph.svg" width="654" height="392"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -620,7 +634,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00470">470</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00581">581</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -649,11 +663,12 @@ Here is the caller graph for this function:</div>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00434">434</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00545">545</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_ae1ee3ea76e1cb268097f1df0c465d6f5_cgraph.svg" width="452" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_ae1ee3ea76e1cb268097f1df0c465d6f5_cgraph.svg" width="452" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -677,7 +692,7 @@ Here is the call graph for this function:</div>
 <p>blockSize getter. </p>
 <dl class="section return"><dt>Returns</dt><dd>blockSize. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00385">385</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00387">387</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -700,7 +715,7 @@ Here is the call graph for this function:</div>
 <p>Method that returns the correspondence between old and new alignment residues. </p>
 <dl class="section return"><dt>Returns</dt><dd>Vector that represents which residues are kept (!= -1) and which are rejected (== -1) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00440">440</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00551">551</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -723,7 +738,7 @@ Here is the call graph for this function:</div>
 <p>Method that returns the correspondence between old and new alignment sequences. </p>
 <dl class="section return"><dt>Returns</dt><dd>Vector that represents which sequences are kept (!= -1) and which are rejected (== -1) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00444">444</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00555">555</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -746,7 +761,7 @@ Here is the call graph for this function:</div>
 <p>Residues getter. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of residues in the alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00364">364</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00366">366</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -769,7 +784,7 @@ Here is the call graph for this function:</div>
 <p>Getter for the number of species. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of sequences in the alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00357">357</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00359">359</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -813,7 +828,7 @@ If the sequence is present, its order on the alignment sequences vector will be 
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if both sets have the same sequences.<br />
  <b>False</b> otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00409">409</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00520">520</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -841,7 +856,7 @@ If the sequence is present, its order on the alignment sequences vector will be 
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00389">389</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00500">500</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -880,11 +895,12 @@ If the sequence is present, its order on the alignment sequences vector will be 
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00394">394</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00505">505</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_af32ab6b3b73c5ad37c9f1c796a4fbc44_cgraph.svg" width="408" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_af32ab6b3b73c5ad37c9f1c796a4fbc44_cgraph.svg" width="408" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -931,11 +947,12 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00401">401</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00512">512</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a2fc0d691c0cce400f007446cc162704e_cgraph.svg" width="408" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a2fc0d691c0cce400f007446cc162704e_cgraph.svg" width="408" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1005,7 +1022,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to new alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00244">244</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00246">246</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1028,7 +1045,7 @@ Here is the call graph for this function:</div>
 <p>isAligned getter. </p>
 <dl class="section return"><dt>Returns</dt><dd>Wheter the alignment is aligned or not. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00448">448</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00559">559</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1079,7 +1096,7 @@ It will also remove or split stop codons depending on the flags passed. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00489">489</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00600">600</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1107,7 +1124,7 @@ It will also remove or split stop codons depending on the flags passed. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00855">855</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00966">966</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1135,7 +1152,7 @@ It will also remove or split stop codons depending on the flags passed. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00377">377</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00379">379</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1189,7 +1206,7 @@ It will also remove or split stop codons depending on the flags passed. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00381">381</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00383">383</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1228,7 +1245,7 @@ It will also remove or split stop codons depending on the flags passed. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00372">372</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00374">374</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>

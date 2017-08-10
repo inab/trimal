@@ -100,7 +100,8 @@ $(document).ready(function(){initNavTree('classtrim_al_manager.html','');});
 <div class="dynheader">
 Collaboration diagram for trimAlManager:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classtrim_al_manager__coll__graph.svg" width="1566" height="1475"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classtrim_al_manager__coll__graph.svg" width="1566" height="1475"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -422,6 +423,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrim_al_manager.html#a973459433adebb52fed9c333c7f8a5fb">sident</a> = false</td></tr>
 <tr class="memdesc:a973459433adebb52fed9c333c7f8a5fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to show identity scores in the alignment. <br /></td></tr>
 <tr class="separator:a973459433adebb52fed9c333c7f8a5fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac256763630d72e5d1ae76d0bf27a2745"><td class="memItemLeft" align="right" valign="top"><a id="ac256763630d72e5d1ae76d0bf27a2745"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>soverlap</b> = false</td></tr>
+<tr class="separator:ac256763630d72e5d1ae76d0bf27a2745"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add34b891c86ad168fb9e84c5ca0bb59b"><td class="memItemLeft" align="right" valign="top"><a id="add34b891c86ad168fb9e84c5ca0bb59b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrim_al_manager.html#add34b891c86ad168fb9e84c5ca0bb59b">selectSeqs</a> = false</td></tr>
 <tr class="memdesc:add34b891c86ad168fb9e84c5ca0bb59b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to select sequences manually from the alignment. <br /></td></tr>
@@ -545,6 +549,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
  If the counter is bigger than 1, we are trying to use multiple automatic methods. <br />
 . <br /></td></tr>
 <tr class="separator:a03b0e1a34f1b220077d1dce7ab1f39f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f07cab437925d3d032a73183bb5c2a9"><td class="memItemLeft" align="right" valign="top"><a id="a5f07cab437925d3d032a73183bb5c2a9"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>alternative_matrix</b> = -1</td></tr>
+<tr class="separator:a5f07cab437925d3d032a73183bb5c2a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9985288283b762de4fd2602ca8b4cc10"><td class="memItemLeft" align="right" valign="top"><a id="a9985288283b762de4fd2602ca8b4cc10"></a>
 int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrim_al_manager.html#a9985288283b762de4fd2602ca8b4cc10">delColumns</a> = NULL</td></tr>
 <tr class="memdesc:a9985288283b762de4fd2602ca8b4cc10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector that contains the column indexes the user specified to be removed. <br /></td></tr>
@@ -667,7 +674,7 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <p>Temporal variable to open files in <a class="el" href="group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation...">trimAlManager::check_multiple_files_comparison</a> function. </p>
 <dl class="section note"><dt>Note</dt><dd>This could be moved there </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00082">82</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00084">84</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
 
 </div>
 </div>
@@ -694,7 +701,7 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <p>Alignment Vector used on <a class="el" href="group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation...">trimAlManager::check_multiple_files_comparison</a> to compare them. </p>
 <dl class="section note"><dt>Note</dt><dd>This variable could be moved there. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00090">90</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00092">92</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
 
 </div>
 </div>
@@ -721,7 +728,7 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <p>Vector containing the files to compare in <a class="el" href="group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation...">trimAlManager::check_multiple_files_comparison</a> function. </p>
 <dl class="section note"><dt>Note</dt><dd>This variable could be moved there. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00102">102</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00104">104</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
 
 </div>
 </div>
@@ -748,7 +755,7 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <p>Temporal variable to use on the <a class="el" href="group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation...">trimAlManager::check_multiple_files_comparison</a>. </p>
 <dl class="section note"><dt>Note</dt><dd>This can be moved there. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00077">77</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00079">79</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
 
 </div>
 </div>
@@ -775,7 +782,7 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <p>Vector that contains the sequences lengths of each sequence in the backtranslation option. </p>
 <dl class="section note"><dt>Note</dt><dd>This can be moved to <a class="el" href="group___check_needs.html#gad96c97918919040f8986ba8c26a1f728" title="Method to check if the origAlig and backtranslationAlig are compatible in names to make the backtrans...">trimAlManager::check_backtranslation_infile_names_corresponde()</a> function or even deleted, as we don't really need to copy them in order to compare them with origAlig names. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00074">74</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00076">76</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
 
 </div>
 </div>
@@ -802,7 +809,7 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <p>Temporal variable to use in backtranslation option to compare with infile. </p>
 <dl class="section note"><dt>Note</dt><dd>This variable may be deleted, as we don't need to copy the sequences names to compare them. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00078">78</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00080">80</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
 
 </div>
 </div>

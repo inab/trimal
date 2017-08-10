@@ -9,26 +9,26 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 73.5)">
 <title>utils::ReplaceString</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-73.5 446,-73.5 446,4 -4,4"/>
-<!-- Node129 -->
-<g id="node1" class="node"><title>Node129</title>
+<!-- Node128 -->
+<g id="node1" class="node"><title>Node128</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-28 0,-47 102,-47 102,-28 0,-28"/>
 <text text-anchor="middle" x="51" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00">utils::ReplaceString</text>
 </g>
-<!-- Node130 -->
-<g id="node2" class="node"><title>Node130</title>
+<!-- Node129 -->
+<g id="node2" class="node"><title>Node129</title>
 <g id="a_node2"><a xlink:href="class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0" target="_top" xlink:title="Function to save an alignment to a file. It searched on the available_states, the one that can write ...">
 <polygon fill="white" stroke="black" points="138,-50 138,-69 287,-69 287,-50 138,-50"/>
 <text text-anchor="middle" x="212.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteMS::saveAlignment</text>
 </a>
 </g>
 </g>
-<!-- Node129&#45;&gt;Node130 -->
-<g id="edge1" class="edge"><title>Node129&#45;&gt;Node130</title>
+<!-- Node128&#45;&gt;Node129 -->
+<g id="edge1" class="edge"><title>Node128&#45;&gt;Node129</title>
 <path fill="none" stroke="midnightblue" d="M112.131,-45.794C122.001,-47.1552 132.297,-48.5754 142.364,-49.9639"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="112.414,-42.2999 102.029,-44.4006 111.457,-49.2342 112.414,-42.2999"/>
 </g>
-<!-- Node132 -->
-<g id="node4" class="node"><title>Node132</title>
+<!-- Node131 -->
+<g id="node4" class="node"><title>Node131</title>
 <g id="a_node4"><a xlink:href="class_read_write_m_s.html#ab019d93e740d838c7e64415630ca5ad5" target="_top" xlink:title="Function that takes multile files, loads them and saves in a cumulus of formats, using an outPattern...">
 <polygon fill="white" stroke="black" points="141.5,-0.5 141.5,-30.5 283.5,-30.5 283.5,-0.5 141.5,-0.5"/>
 <text text-anchor="start" x="149.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteMS::loadAndSave</text>
@@ -36,21 +36,21 @@
 </a>
 </g>
 </g>
-<!-- Node129&#45;&gt;Node132 -->
-<g id="edge3" class="edge"><title>Node129&#45;&gt;Node132</title>
+<!-- Node128&#45;&gt;Node131 -->
+<g id="edge3" class="edge"><title>Node128&#45;&gt;Node131</title>
 <path fill="none" stroke="midnightblue" d="M112.216,-29.1943C121.774,-27.876 131.732,-26.5025 141.491,-25.1564"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="111.457,-25.7658 102.029,-30.5994 112.414,-32.7001 111.457,-25.7658"/>
 </g>
-<!-- Node131 -->
-<g id="node3" class="node"><title>Node131</title>
+<!-- Node130 -->
+<g id="node3" class="node"><title>Node130</title>
 <g id="a_node3"><a xlink:href="group___perform_algorithm.html#gabe8d2841455c644dc9c7d1294b82b00f" target="_top" xlink:title="Method to perform the analysis if all checks have passed. ">
 <polygon fill="white" stroke="black" points="323,-50 323,-69 442,-69 442,-50 323,-50"/>
 <text text-anchor="middle" x="382.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::perform</text>
 </a>
 </g>
 </g>
-<!-- Node130&#45;&gt;Node131 -->
-<g id="edge2" class="edge"><title>Node130&#45;&gt;Node131</title>
+<!-- Node129&#45;&gt;Node130 -->
+<g id="edge2" class="edge"><title>Node129&#45;&gt;Node130</title>
 <path fill="none" stroke="midnightblue" d="M297.274,-59.5C305.887,-59.5 314.503,-59.5 322.759,-59.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="297.187,-56.0001 287.187,-59.5 297.187,-63.0001 297.187,-56.0001"/>
 </g>
