@@ -1548,8 +1548,19 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, int *selectedRes, int *selectedSeq, float *consValues, float blocks) {
     
     int i, j, k, kj, kn, upper;
-    double H;
+    double H = 0.0;
     char type;
+    
+    int * gapsValues = NULL;
+    if (sgaps != NULL)
+        gapsValues = sgaps -> getGapsWindow();
+    cout << "GAPS " << ((sgaps == NULL) ? "NULL" : "NOT NULL") << endl;
+    float * simValues = NULL;
+    if (scons != NULL)
+        simValues = scons -> getMdkwVector();
+    cout << "SIMS " << ((scons == NULL) ? "NULL" : "NOT NULL") << endl;
+    
+    cout << "CONS " << ((consValues == NULL) ? "NULL" : "NOT NULL") << endl;
     
     // Check if alignment is aligned;
     if (!isAligned) {
@@ -1558,10 +1569,12 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
     }
 
     // Get what residues and sequences have been kept
-    bool * SEQS = new bool[sequenNumber];
+    bool * SEQS = new bool[sequenNumber + 1];
     std::fill(SEQS, SEQS + sequenNumber, false);
-    bool * RES = new bool[residNumber];
+    SEQS[sequenNumber] = false;
+    bool * RES = new bool[residNumber + 1];
     std::fill(RES, RES + residNumber, false);
+    RES[residNumber] = false;
     
     for (int i = 0; i < residues; i++)
         if (selectedRes[i] != -1)
@@ -1572,7 +1585,6 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
     for (int i = 0; i < seqs ; i++)
         if (selectedSeq[i] != -1)
         {
-//             cout << "Seq " << selectedSeq[i] << " selected" << endl;
             SEQS[selectedSeq[i]] = true;
         }
     
@@ -1646,11 +1658,15 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
     // Start the svg output
     file    << "<svg version=\"1.1\" height=\"" <<
             125 +                           /*Header Height*/
-            (60 + fontSize +            /*Column Numbering*/ 
-             20 * sequenNumber +        /*Sequences Height*/ 
-             35)                        /*Selected Residues*/
+            35  +
+            (fontSize * 8 +                     /*Column Numbering*/ 
+             fontSize * sequenNumber +        /*Sequences Height*/ 
+             fontSize * ((gapsValues == NULL) ? 0 : 1) + 
+             fontSize * ((simValues == NULL) ? 0 : 1) + 
+             fontSize * ((consValues == NULL) ? 0 : 1) 
+            )                        /*Selected Residues*/
             * std::ceil(sequences[0].length() / (float)blockSize) /*Blocks Number*/ <<"\"\
-            width=\""<< (sequencesNamesLength + blockSize) * fontSize << "\">" << endl;
+            width=\""<< ( std::ceil(sequencesNamesLength / 2.F) + blockSize + 2) * fontSize << "px\">" << endl;
             
     // BEGIN defines
     file  << "<defs>" << endl;
@@ -1676,6 +1692,7 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
     file << "<path d=\"M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2\" stroke=\"red\" stroke-width=\"2\"/>";
     file << "</pattern> " << endl;
     
+    // BEGIN COLORS
     
     // COLORS
     file << "<pattern id=\"colors-orange\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
@@ -1712,6 +1729,63 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
     file << "<rect width=\"100\" height=\"18\" fill=\"deepskyblue\"/>" ;
     file << "<path d=\"M61.82 18c3.47-1.45 6.86-3.78 11.3-7.34C78 6.76 80.34 5.1 83.87 3.42 88.56 1.16 93.75 0 100 0v6.16C98.76 6.05 97.43 6 96 6c-9.59 0-14.23 2.23-23.13 9.34-1.28 1.03-2.39 1.9-3.4 2.66h-7.65zm-23.64 0H22.52c-1-.76-2.1-1.63-3.4-2.66C11.57 9.3 7.08 6.78 0 6.16V0c6.25 0 11.44 1.16 16.14 3.42 3.53 1.7 5.87 3.35 10.73 7.24 4.45 3.56 7.84 5.9 11.31 7.34zM61.82 0h7.66a39.57 39.57 0 0 1-7.34 4.58C57.44 6.84 52.25 8 46 8S34.56 6.84 29.86 4.58A39.57 39.57 0 0 1 22.52 0h15.66C41.65 1.44 45.21 2 50 2c4.8 0 8.35-.56 11.82-2z\" stroke=\"blue\" stroke-width=\"0.3\" fill=\"transparent\"/> ";
     file << "</pattern> " << endl;
+    // END COLORS
+    
+    // BEGIN SCORES COLORS
+    for (i = 0; i < 12; i++)
+    {
+        file << "<pattern id=\"score-" << i <<"\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
+        file << "<rect width=\"10\" height=\"10\" fill=\""; 
+        switch(i) { 
+            case 0:
+                file << "#FFFBF2"; break;
+            case 1:
+                file << "#FFF8CC"; break;
+            case 2:
+                file << "#FAF0BE"; break;
+            case 3:
+                file << "#F0EAD6"; break;
+            case 4:
+                file << "#F3E5AB"; break;
+            case 5:
+                file << "#F4C430"; break;
+            case 6:
+                file << "#C2B280"; break;
+            case 7:
+                file << "#DAA520"; break;
+            case 8:
+                file << "#B8860B"; break;
+            case 9:
+                file << "#918151"; break;
+            case 10:
+                file << "#967117"; break;
+            case 11:
+                file << "#6E5411"; break;
+        } 
+        file << "\"/>";
+        file << "<path d=\"M0,10 l10,-10 \" stroke=\""; 
+        switch(i) { 
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                file << "black"; break;
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+                file << "white"; break;
+        } 
+        file << "\" stroke-width=\"1\"/>";
+        file << "</pattern> " << endl;
+        
+    }
+
+    // END SCORES COLORS
     
     file << "</defs>" << endl;
     // END defines
@@ -1741,7 +1815,7 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
     
     //Filename
     file  << "<g class=\"bar\">" << endl;
-    file  << "<rect style=\"fill:indianred\" height=\"20\" width=\"" << size  <<"px\" x =\"0\" y=\"" << (H) << "\" dy=\".35em\" />" << endl;
+    file  << "<rect style=\"fill:indianred\" height=\"20\" width=\"" << size <<"px\" x =\"0\" y=\"" << H << "\" dy=\".35em\" />" << endl;
     file  << "<text style=\"fill:black\" x =\"10\" y=\"" << (H+10) << "\" dy=\".35em\" text-anchor=\"start\" font-family = \"monospace\" xml:space=\"preserve\" kerning=\"0\" \
         lengthAdjust=\"spacingAndGlyphs\"\
         textLength='" << std::min(size - 10, (int)(fname.length() * fontSize * 0.5F)) << "' >"
@@ -1980,12 +2054,12 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
             file    << "<text font-family = \"monospace\" \
                     font-size=\"" << fontSize << "px\" dy=\".35em\" \
                     x =\"" << (sequencesNamesLength) * fontSize * 0.5F << "\" text-anchor=\"start\" y=\"" << (H) << "\" xml:space=\"preserve\" kerning=\"0\" \
-                    textLength='"<< ((std::min((float)blockSize, residNumber - j - 0.25F) + std::to_string(j).length() - 1) * fontSize )<<"' lengthAdjust=\"spacing\">";
+                    textLength='"<< ((std::min((float)blockSize, residNumber - j - 0.25F) + std::to_string(j).length()) * fontSize )<<"' lengthAdjust=\"spacing\">";
         }
             
         for(i = j; ((i < residNumber) && (i < upper)); i += 10)            
-            file << setw(std::min(10, residNumber - i + 2)) << setfill(' ') << left << i;
-        file    << "</text>" << endl;
+            file << setw(10) << setfill(' ') << left << i;
+        file << "</text>" << endl;
         
         H += fontSize;
         file    << "<text font-family = \"monospace\" \
@@ -1998,7 +2072,7 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
             file << setw(std::min(10, residNumber - i)) << setfill('~') << left << "+";
         file << "</text>" << endl;
         
-        H+=10;
+//         H+=fontSize;
 
         char colors[sequenNumber][blockSize];
         for(i = 0; i < sequenNumber; i++) {
@@ -2055,7 +2129,7 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
                 setfill(' ') << setw(sequencesNamesLength) << right << seqsName[i] << "</text>" << endl;
             
             file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"" << sequencesNamesLength * fontSize * 0.5F << "px\" \
-                text-anchor=\"start\" y=\"" << H << "\" xml:space=\"preserve\" kerning=\"0\" textLength='"<< (std::min((float)blockSize, residNumber - j - 0.25F) * fontSize) <<"' lengthAdjust=\"spacing\" " << (SEQS[i] ? "style=\"font-weight:bold\"" : "style=\"font-weight:100\"") << ">" ;
+                text-anchor=\"start\" y=\"" << H << "\" xml:space=\"preserve\" kerning=\"0\" textLength='"<< (std::min((float)blockSize, residNumber - j - 0.5F) * fontSize) <<"' lengthAdjust=\"spacing\" " << (SEQS[i] ? "style=\"font-weight:bold\"" : "style=\"font-weight:100\"") << ">" ;
             
                 /* Print residues corresponding to current sequences block */
             for(k = j; ((k < residNumber) && (k < upper)); k++) 
@@ -2070,19 +2144,25 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
             
         }
         
-        H += fontSize;
+        H += fontSize * 2;
+
+        // SELECTED OR REJECTED SEQUENCES AND RESIDUES
         bool accepted = RES[j];
         int oriPosi = j;
         for (k = j; k - j <= blockSize && k <= residNumber; k++)
         {
             if ( (k - j) == blockSize || ((k) == residNumber) || RES[k] != accepted)
             {
-                file << 
-                        "<rect style=\"fill:url(" << (accepted ? "#selected-no-focus" : "#deleted-no-focus") << ")\" height=\"10\"" <<
+                    file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
+                        text-anchor=\"start\" y=\"" << (H + fontSize / 2) << "\" kerning=\"0\" style=\"font-weight:100\"" << ">"  << 
+                        setfill(' ') << setw(sequencesNamesLength) << right << "Selected Sequences" << "</text>" << endl;
+                
+                    file << 
+                        "<rect style=\"fill:url(" << (accepted ? "#selected-no-focus" : "#deleted-no-focus") << ");stroke-width:1;stroke:black\" height=\"10\"" <<
                         " width=\"" << width * (k - oriPosi) << "px\"" <<
                         " x =\"" << ((sequencesNamesLength) * fontSize/2) + ((oriPosi - j - 0.25F) * width) << "px\" y=\"" << (H) << "\" dy=\".35em\" " <<
-                        " onmouseover=\"evt.target.setAttribute('style', 'fill:" << (accepted ? "url(#selected-focus)" : "url(#deleted-focus)") << "');\" " <<
-                        " onmouseout=\"evt.target.setAttribute('style', 'fill:url(" << (accepted ? "#selected-no-focus" : "#deleted-no-focus") << ")');\"/>" << endl;
+                        " onmouseover=\"evt.target.setAttribute('style', 'fill:url(" << (accepted ? "#selected-focus" : "#deleted-focus") << ");stroke-width:1;stroke:black');\" " <<
+                        " onmouseout=\"evt.target.setAttribute('style', 'fill:url(" <<  (accepted ? "#selected-no-focus" : "#deleted-no-focus") << ");stroke-width:1;stroke:black');\"/>" << endl;
             
             }
             
@@ -2091,13 +2171,119 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
                 accepted = RES[k];
                 oriPosi = k;
             }
-            /*
-            */
+
+        }
+        H += fontSize;
+        
+        // GAPS VALUES
+        if (gapsValues)
+        {
+            float inverse = 1.F / sequenNumber;
+            int step = utils::GetGapStep(&gapsValues[j], inverse), innerStep;
+            oriPosi = j;
+            
+            for (k = j; k - j <= blockSize && k <= residNumber; k++)
+            {
+                if (((k) != residNumber))
+                    innerStep = utils::GetGapStep(&gapsValues[k], inverse);
+                if ( (k - j) == blockSize || ((k) == residNumber) || innerStep != step)
+                {
+                    file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
+                            text-anchor=\"start\" y=\"" << (H + fontSize / 2) << "\" kerning=\"0\" style=\"font-weight:100\"" << ">"  << 
+                            setfill(' ') << setw(sequencesNamesLength) << right << "Gaps Values" << "</text>" << endl;
+                            
+                    file << 
+                            "<rect style=\"fill:url(#score-" << step << ");stroke-width:1.5;stroke:black\" height=\"10\"" <<
+                            " width=\"" << width * (k - oriPosi) << "px\"" <<
+                            " x =\"" << ((sequencesNamesLength) * fontSize/2) + ((oriPosi - j - 0.25F) * width) << "px\" y=\"" << (H) << "\" dy=\".35em\" " <<
+                            " />" << endl;
+                
+                }
+                
+                if (innerStep != step)
+                {
+                    step = innerStep;
+                    oriPosi = k;
+                }
+                /*
+                */
+            }
+            
+            H += fontSize;
         }
         
-        H += fontSize;
+        // SIMILARITY VALUES
+        if (simValues)
+        {
+            int step = utils::GetSimStep(&simValues[j]), innerStep;
+            oriPosi = j;
+            
+            for (k = j; k - j <= blockSize && k <= residNumber; k++)
+            {
+                if (((k) != residNumber))
+                    innerStep = utils::GetSimStep(&simValues[k]);
+                if ( (k - j) == blockSize || ((k) == residNumber) || innerStep != step)
+                {
+                    file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
+                            text-anchor=\"start\" y=\"" << (H + fontSize / 2) << "\" kerning=\"0\" style=\"font-weight:100\"" << ">"  << 
+                            setfill(' ') << setw(sequencesNamesLength) << right << "Similarily Values" << "</text>" << endl;
+                            
+                    file << 
+                            "<rect style=\"fill:url(#score-" << step << ");stroke-width:1.5;stroke:black\" height=\"10\"" <<
+                            " width=\"" << width * (k - oriPosi) << "px\"" <<
+                            " x =\"" << ((sequencesNamesLength) * fontSize/2) + ((oriPosi - j - 0.25F) * width) << "px\" y=\"" << (H) << "\" dy=\".35em\" " <<
+                            " />" << endl;
+                
+                }
+                
+                if (innerStep != step)
+                {
+                    step = innerStep;
+                    oriPosi = k;
+                }
+            }
+            
+            H += fontSize;
+        }
+        
+        // CONSISTENCY VALUES
+        if (consValues)
+        {
+            int step = utils::GetConsStep(&consValues[j]), innerStep;
+            oriPosi = j;
+            
+            for (k = j; k - j <= blockSize && k <= residNumber; k++)
+            {
+                if (((k) != residNumber))
+                    innerStep = utils::GetConsStep(&consValues[k]);
+                if ( (k - j) == blockSize || ((k) == residNumber) || innerStep != step)
+                {
+                    file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
+                            text-anchor=\"start\" y=\"" << (H + fontSize / 2) << "\" kerning=\"0\" style=\"font-weight:100\"" << ">"  << 
+                            setfill(' ') << setw(sequencesNamesLength) << right << "Similarily Values" << "</text>" << endl;
+                            
+                    file << 
+                            "<rect style=\"fill:url(#score-" << step << ");stroke-width:1.5;stroke:black\" height=\"10\"" <<
+                            " width=\"" << width * (k - oriPosi) << "px\"" <<
+                            " x =\"" << ((sequencesNamesLength) * fontSize/2) + ((oriPosi - j - 0.25F) * width) << "px\" y=\"" << (H) << "\" dy=\".35em\" " <<
+                            " />" << endl;
+                }
+                
+                if (innerStep != step)
+                {
+                    step = innerStep;
+                    oriPosi = k;
+                }
+            }
+            
+            H += fontSize;
+        }
+        
+        H += fontSize * 2;
     }
             
+    delete [] SEQS;
+    delete [] RES;
     file.close();
     return true;
 }

@@ -310,7 +310,7 @@ static void quicksort(int ** vect, int ini, int fin);
 /**
  \brief Looks for a pattern
  \todo Give a good description for this function.*/
-  static bool lookForPattern(string, string, float);
+  static bool lookForPattern(string const&, string, float);
 /**
  * \brief Function that replaces a substring with another substring in a string.
             It does not make a copy of the original string, but modifies it.
@@ -327,5 +327,42 @@ static void quicksort(int ** vect, int ini, int fin);
     \param replace Substring to put in place of search
  */
   static std::string ReplaceString(std::string subject, const std::string& search, const std::string& replace);
+    /**
+    * \brief Function that gives the gap classification of a column of values.
+    * \param gapValue Number of gaps present in the column.
+    * \param sequenNumber Number of sequences.
+    * \return Int representing the classification of this gap value.
+    */
+    static int GetGapStep(int * gapValue, int sequenNumber);
+    
+    /**
+    * \brief Function that gives the gap classification of a column of values. \n This function should work faster than it's sister utils::GetGapStep(int * gapValue, int sequenNumber), as it uses a precomputed (by the user) inverseSequenNumber (1F / newAlignment::sequenNumber), instead of calculating it over again each time the function is called (which is equal to number of residues). \n This comes with a precision cost that shouldn't be a problem.
+    * \param gapValue Number of gaps present in the column.
+    * \param inverseSequenNumber Inverse of number of sequences. (1F / sequenNumber)
+    * \return Int representing the classification of this gap value.
+    */
+    static int GetGapStep(int * gapValue, float inverseSequenNumber);
+    
+    /**
+    * \brief Function that gives the similarity classification of a column of values.
+    * \param simValue Similarity value.
+    * \return Int representing the classification of this gap value.
+    */
+    static int GetSimStep(float * simValue);
+    
+    /**
+    * \brief Function that gives the similarity classification of a column of values.
+    * \param consValue Consistency value.
+    * \return Int representing the classification of this gap value.
+    */
+    static int GetConsStep(float * consValue);
 };
+
+
+
+
+
+
+
+
 #endif

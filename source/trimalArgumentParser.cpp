@@ -1564,7 +1564,7 @@ int trimAlManager::perform()
     
 
     /* -------------------------------------------------------------------- */
-    cout << "Cleaning" << endl;
+//     cout << "Cleaning" << endl;
     clean_alignment();
 
     /* -------------------------------------------------------------------- */
@@ -1609,7 +1609,7 @@ int trimAlManager::perform()
             cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
             appearErrors = true;
         }
-    cout << "Saving?" << endl;
+//     cout << "Saving?" << endl;
     /* -------------------------------------------------------------------- */
     if((outfile != NULL) && (!appearErrors))
     {

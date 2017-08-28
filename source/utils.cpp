@@ -663,33 +663,34 @@ int* utils::readNumbers(string line) {
 
 char utils::determineColor(char res, string column) {
 
+    char up = toupper(res);
   /* ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-  if(toupper(res) == 'G')
+  if(up == 'G')
     return 'o';
   /* ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-  else if(toupper(res) == 'P')
+  else if(up == 'P')
     return 'y';
   /* ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
   else if(res != '-') {
-    switch(toupper(res)) {
+    switch(up) {
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
       /* (W, L, V, I, M, F): {50%, p}{60%, wlvimafcyhp} */
       case 87: case 76:  case 86: case 73: case 77: case 70:
-        if(lookForPattern(column, "p", 0.5))                return 'b';
-        else if(lookForPattern(column, "wlvimafcyhp", 0.6)) return 'b';
+        if(lookForPattern(column, "P", 0.5))                return 'b';
+        else if(lookForPattern(column, "WLVIMAFCYHP", 0.6)) return 'b';
         else                                                return 'w';
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
       /* (A): {50%, p}{60%, wlvimafcyhp}{85% t,s,g} */
       case 65:
-        if(lookForPattern(column, "p", 0.5))                return 'b';
-        else if(lookForPattern(column, "wlvimafcyhp", 0.6)) return 'b';
-        else if(lookForPattern(column, "t", 0.85))          return 'b';
-        else if(lookForPattern(column, "s", 0.85))          return 'b';
-        else if(lookForPattern(column, "g", 0.85))          return 'b';
+        if(lookForPattern(column, "P", 0.5))                return 'b';
+        else if(lookForPattern(column, "WLVIMAFCYHP", 0.6)) return 'b';
+        else if(lookForPattern(column, "T", 0.85))          return 'b';
+        else if(lookForPattern(column, "S", 0.85))          return 'b';
+        else if(lookForPattern(column, "u", 0.85))          return 'b';
         else                                                return 'w';
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -698,74 +699,74 @@ char utils::determineColor(char res, string column) {
        * PINK: (C): {85%, c}
       */
       case 67:
-        if(lookForPattern(column, "p", 0.5))                return 'b';
-        else if(lookForPattern(column, "wlvimafcyhp", 0.6)) return 'b';
-        else if(lookForPattern(column, "s", 0.85))          return 'b';
-        else if(lookForPattern(column, "c", 0.85))          return 'p';
+        if(lookForPattern(column, "P", 0.5))                return 'b';
+        else if(lookForPattern(column, "WLVIMAFCYHP", 0.6)) return 'b';
+        else if(lookForPattern(column, "S", 0.85))          return 'b';
+        else if(lookForPattern(column, "C", 0.85))          return 'p';
         else                                                return 'w';
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
       /* (K, R): {60%, kr}{85%, q} */
       case 75: case 82:
-        if(lookForPattern(column, "kr", 0.6))               return 'r';
-        else if(lookForPattern(column, "q", 0.85))          return 'r';
+        if(lookForPattern(column, "KR", 0.6))               return 'r';
+        else if(lookForPattern(column, "Q", 0.85))          return 'r';
         else                                                return 'w';
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
       /* (T): {50%, ts}{60%, wlvimafcyhp } */
       case 84:
-        if(lookForPattern(column, "ts", 0.5))               return 'g';
-        else if(lookForPattern(column, "wlvimafcyhp", 0.6)) return 'g';
+        if(lookForPattern(column, "TS", 0.5))               return 'g';
+        else if(lookForPattern(column, "WLVIMAFCYHP", 0.6)) return 'g';
         else                                                return 'w';
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
       /* (S): {50%, ts}{80%, wlvimafcyhp } */
       case 83:
-        if(lookForPattern(column, "ts", 0.5))               return 'g';
-        else if(lookForPattern(column, "wlvimafcyhp", 0.8)) return 'g';
+        if(lookForPattern(column, "TS", 0.5))               return 'g';
+        else if(lookForPattern(column, "WLVIMAFCYHP", 0.8)) return 'g';
         else                                                return 'w';
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
       /* (N): {50%, n}{85%, d } */
       case 78:
-        if(lookForPattern(column, "n", 0.5))                return 'g';
-        else if(lookForPattern(column, "d", 0.85))          return 'g';
+        if(lookForPattern(column, "N", 0.5))                return 'g';
+        else if(lookForPattern(column, "D", 0.85))          return 'g';
         else                                                return 'w';
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
       /* (Q): {50%, qe}{60%, kr} */
       case 81:
-        if(lookForPattern(column, "qe", 0.5))               return 'g';
-        else if(lookForPattern(column, "kr", 0.6))          return 'g';
+        if(lookForPattern(column, "QE", 0.5))               return 'g';
+        else if(lookForPattern(column, "KR", 0.6))          return 'g';
         else                                                return 'w';
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
       /* (D): {50%, de, n} */
       case 68:
-        if(lookForPattern(column, "de", 0.5))               return 'm';
-        else if(lookForPattern(column, "n", 0.5))           return 'm';
+        if(lookForPattern(column, "DE", 0.5))               return 'm';
+        else if(lookForPattern(column, "N", 0.5))           return 'm';
         else                                                return 'w';
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
       /* (E): {50%, de,qe} */
       case 69:
-        if(lookForPattern(column, "de", 0.5))               return 'm';
-        else if(lookForPattern(column, "qe", 0.5))          return 'm';
+        if(lookForPattern(column, "DE", 0.5))               return 'm';
+        else if(lookForPattern(column, "QE", 0.5))          return 'm';
         else                                                return 'w';
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
       /* (H,Y): {50%, p}{60%, wlvimafcyhp} */
       case 72: case 89:
-        if(lookForPattern(column, "p", 0.5))                return 'c';
-        else if(lookForPattern(column, "wlvimafcyhp", 0.5)) return 'c';
+        if(lookForPattern(column, "P", 0.5))                return 'c';
+        else if(lookForPattern(column, "WLVIMAFCYHP", 0.5)) return 'c';
         else                                                return 'w';
       /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
     }
@@ -774,14 +775,14 @@ char utils::determineColor(char res, string column) {
 }
 
 
-bool utils::lookForPattern(string column, string dataset, float level) {
+bool utils::lookForPattern(string const& column, string dataset, float level) {
 
   float count = 0;
   int i, j;
 
   for(i = 0; i < (int) column.size(); i++) {
-    for(j = 0; j < (int) dataset.size(); j++) {
-      if(toupper(column[i]) == toupper(dataset[j])) {
+    for(j = 0; j < (int) column.size(); j++) {
+      if(toupper(column[i]) == column[j]) {
         count++; break;
       }
     }
@@ -808,4 +809,124 @@ std::string utils::ReplaceString(std::string subject, const std::string& search,
          pos += replace.length();
     }
     return subject;
+}
+
+int utils::GetGapStep(int * gapValue, int sequenNumber)
+{
+    // Special cases. Upper and Lower limits.
+    if(*gapValue == 0)
+        return 11;
+    
+    if(*gapValue == sequenNumber)
+        return 0;
+    
+    float relativeGap = 1.F - float(*gapValue) / sequenNumber;
+    
+    if(relativeGap >= .750)
+        return 10;
+    if(relativeGap >= .500)
+        return 9;
+    if(relativeGap >= .350)
+        return 8;
+    if(relativeGap >= .250)
+        return 7;
+    if(relativeGap >= .200)
+        return 6;
+    if(relativeGap >= .150)
+        return 5;
+    if(relativeGap >= .100)
+        return 4;
+    if(relativeGap >= .050)
+        return 3;
+    if(relativeGap >= .001)
+        return 2;
+    return 1;
+}
+
+int utils::GetGapStep(int * gapValue, float inverseSequenNumber)
+{
+    // Special cases. Upper and Lower limits.
+    if(*gapValue == 0)
+        return 11;
+
+    float relativeGap = 1.F - float(*gapValue) * inverseSequenNumber;
+    
+    if(relativeGap == 1.F)
+        return 0;
+    if(relativeGap >= .750)
+        return 10;
+    if(relativeGap >= .500)
+        return 9;
+    if(relativeGap >= .350)
+        return 8;
+    if(relativeGap >= .250)
+        return 7;
+    if(relativeGap >= .200)
+        return 6;
+    if(relativeGap >= .150)
+        return 5;
+    if(relativeGap >= .100)
+        return 4;
+    if(relativeGap >= .050)
+        return 3;
+    if(relativeGap >= .001)
+        return 2;
+    return 1;
+}
+
+int utils::GetSimStep(float * simValue)
+{
+
+    if(*simValue == 0.F)
+        return 11;
+    if(*simValue == 1.F)
+        return 0;
+    if(*simValue >= .750)
+        return 10;
+    if(*simValue >= .500)
+        return 9;
+    if(*simValue >= .250)
+        return 8;
+    if(*simValue >= .100)
+        return 7;
+    if(*simValue >= .010)
+        return 6;
+    if(*simValue >= .001)
+        return 5;
+    if(*simValue >= 1e-4)
+        return 4;
+    if(*simValue >= 1e-5)
+        return 3;
+    if(*simValue >= 1e-6)
+        return 2;
+    return 1;
+}
+
+int utils::GetConsStep(float * consValue)
+{
+    // Special cases. Upper and Lower limits.
+    if(*consValue == 1.F)
+        return 11;
+    if(*consValue == 0.F)
+        return 0;
+    
+    if(*consValue >= .750)
+        return 10;
+    if(*consValue >= .500)
+        return 9;
+    if(*consValue >= .350)
+        return 8;
+    if(*consValue >= .250)
+        return 7;
+    if(*consValue >= .200)
+        return 6;
+    if(*consValue >= .150)
+        return 5;
+    if(*consValue >= .100)
+        return 4;
+    if(*consValue >= .050)
+        return 3;
+    if(*consValue >= .001)
+        return 2;
+    return 1;
 }
