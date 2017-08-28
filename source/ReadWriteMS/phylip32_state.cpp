@@ -16,7 +16,7 @@ int Phylip32State::CheckAlignment(istream* origin)
     char *firstWord = NULL, *line = NULL;
     int blocks = 0;
     string nline;
-
+    
     /* Read first valid line in a safer way */
     do {
         line = utils::readLine(*origin);
@@ -24,7 +24,10 @@ int Phylip32State::CheckAlignment(istream* origin)
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
+    {
+        delete [] line;
         return false;
+    }
 
     /* Otherwise, split line */
     firstWord = strtok(line, OTHDELIMITERS);
@@ -39,12 +42,19 @@ int Phylip32State::CheckAlignment(istream* origin)
         firstWord = strtok(NULL, DELIMITERS);
         if(firstWord != NULL)
             residNumber = atoi(firstWord);
-        else return 0;
+        else 
+        {
+            delete [] line;
+            return false;
+        }
 
         /* If there is only one sequence, use by default sequential format since
          * it is impossible to determine exactly which phylip format is */
         if((sequenNumber == 1) && (residNumber != 0))
-            return 0;
+        {
+            delete [] line;
+            return false;
+        }
 
             /* If there are more than one sequence, analyze sequences distribution to
              * determine its format. */
@@ -52,9 +62,8 @@ int Phylip32State::CheckAlignment(istream* origin)
             blocks = 0;
 
             /* Read line in a safer way */
+            if (line != NULL) delete [] line;
             do {
-                if (line != NULL)
-                    delete [] line;
                 line = utils::readLine(*origin);
             } while ((line == NULL) && (!origin->eof()));
 
@@ -68,10 +77,9 @@ int Phylip32State::CheckAlignment(istream* origin)
                 firstWord = strtok(NULL, DELIMITERS);
             }
 
+            delete [] line;
             /* Read line in a safer way */
             do {
-                if (line != NULL)
-                    delete [] line;
                 line = utils::readLine(*origin);
             } while ((line == NULL) && (!origin->eof()));
 
@@ -80,15 +88,18 @@ int Phylip32State::CheckAlignment(istream* origin)
                 blocks--;
                 firstWord = strtok(NULL, DELIMITERS);
             }
-
+            delete [] line;
             /* If the file end is reached without a valid line, warn about it */
             if (origin->eof())
+            {
                 return false;
+            }
 
             /* Phylip Interleaved (12) or Sequential (11) */
             return (!blocks) ? 0 : 1;
         }
     }
+    delete[] line;
     return 0;
 }
 

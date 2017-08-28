@@ -1622,9 +1622,9 @@ alignment *alignment::getTranslationCDS(int newResidues, int newSequences, int *
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* Deallocated auxiliar memory */
   delete [] matrixAux;
-  delete mappedSeqs;
-  delete tmpSequence;
-  delete selectedRes;
+  delete[] mappedSeqs;
+  delete[] tmpSequence;
+  delete[] selectedRes;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */

@@ -200,15 +200,6 @@ int checkArguments(ReadWriteMS* machine, std::vector<std::string>* inFiles, std:
         cerr        << "ERROR: At least one input file must be provided" << endl;
         returnValue = 1;
     }
-    // LEGACY OPTIONS
-//     if (machine->format || machine->info || machine->type)
-//     {
-//         if (inFiles->size() != 1)
-//         {
-//             cerr    << "ERROR: Print alignment info from multiple files is not allowed" << endl;
-//             returnValue = 1;
-//         }
-//     }
     if (*outPattern == "")
     {
         if (inFiles->size() == 1 && outFormats->size() == 1 && !(machine->format || machine->info || machine->type))
@@ -355,7 +346,7 @@ int main(int argc, char *argv[])
         return 0;
     }
     else if (result != 0) return result;
-    
+
     result = checkArguments(&MachineState, &inFiles, &outFormats, &outPattern);
     if (result != 0) return result;
     
@@ -364,6 +355,7 @@ int main(int argc, char *argv[])
         for (string str : inFiles)
         {
             newAlignment* alignment = MachineState.loadAlignment(str);
+                cout << "Hello there, LOADED" << endl;
             if (alignment != nullptr)
             {
                 cout << "## Alignment File: " << str << endl;
@@ -394,6 +386,9 @@ int main(int argc, char *argv[])
                     alignment->printAlignmentInfo(cout);
                 
                 cout << endl;
+                
+                if (outFormats.size() > 0)
+                    MachineState.saveAlignment(outPattern, &outFormats, alignment);
                 
                 delete alignment;
             }

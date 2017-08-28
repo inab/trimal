@@ -88,7 +88,8 @@ class trimAlManager
     
     newAlignment  
     *origAlig                   = NULL, 
-    *singleAlig                 = NULL, 
+    *singleAlig                 = NULL,
+    *tempAlig                   = NULL,
     **compareAlignmentsArray    = NULL,
     *backtranslationAlig        = NULL;
 

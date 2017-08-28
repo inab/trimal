@@ -20,6 +20,7 @@ int PirState::CheckAlignment(istream* origin)
             if (line[3] == ';')
                 return 2;
     }
+    delete[] line;
     return 0;
 }
 
@@ -183,12 +184,12 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
                  << endl << alignment->seqsInfo[i] << endl;
         else
             (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i] << endl
-                 << alignment->seqsName[i] << " " << alignment->residuesNumber[i] << " bases" << endl;
+                 << alignment->seqsName[i] << " " << alignment->sequences[i].length() << " bases" << endl;
 
         /* Write the sequence */
-        for(j = 0; j < alignment->residuesNumber[i]; j += 50) 
+        for(j = 0; j < alignment->sequences[i].length(); j += 50) 
         {
-            for(k = j; (k < alignment->residuesNumber[i]) && (k < (j + 50)); k += 10)
+            for(k = j; (k < alignment->sequences[i].length()) && (k < (j + 50)); k += 10)
                 (*output) << " " << tmpMatrix[i].substr(k, 10);
             if((j + 50) >= alignment->residNumber)
                 (*output) << "*";

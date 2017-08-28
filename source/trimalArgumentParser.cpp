@@ -13,7 +13,7 @@ void examples();
 void trimAlManager::parseArguments(int argc, char *argv[])
 {
 
-    origAlig;
+//     origAlig;
 
     if (argc == 1)
     {
@@ -86,7 +86,7 @@ void trimAlManager::parseArguments(int argc, char *argv[])
     }
 }
 
-void trimAlManager::info_arguments(int *argc, char *argv[], int *i)
+inline void trimAlManager::info_arguments(int *argc, char *argv[], int *i)
 {
     if (!strcmp(argv[*i], "-h"))
     {
@@ -102,7 +102,7 @@ void trimAlManager::info_arguments(int *argc, char *argv[], int *i)
 
 }
 
-bool trimAlManager::in_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::in_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-in") && (i+1 != argc) && (infile == NULL))
     {
@@ -120,7 +120,7 @@ bool trimAlManager::in_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::out_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::out_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-out")) && (i+1 != argc) && (outfile == NULL))
     {
@@ -132,7 +132,7 @@ bool trimAlManager::out_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::html_out_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::html_out_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-htmlout")) && (i+1 != argc) && (htmlOutFile == NULL))
     {
@@ -266,7 +266,7 @@ bool trimAlManager::out_format_arguments(int *argc, char *argv[], int *i)
 
 }
 
-bool trimAlManager::matrix_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::matrix_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-matrix") && (i+1 != argc) && (matrixFile == NULL))
     {
@@ -287,7 +287,7 @@ bool trimAlManager::matrix_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::compareset_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::compareset_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-compareset") && (i+1 != argc) && (compareset == -1))
     {
@@ -308,7 +308,7 @@ bool trimAlManager::compareset_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::force_select_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::force_select_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-forceselect") && (i+1 != argc) && (forceFile == NULL))
     {
@@ -326,7 +326,7 @@ bool trimAlManager::force_select_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::back_trans_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::back_trans_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-backtrans") && (i+1 != argc) && (backtransFile == NULL))
     {
@@ -344,7 +344,7 @@ bool trimAlManager::back_trans_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::gap_threshold_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::gap_threshold_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-gapthreshold") || !strcmp(argv[*i], "-gt")) && (i+1 != argc) && (gapThreshold == -1))
     {
@@ -367,7 +367,7 @@ bool trimAlManager::gap_threshold_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::similarity_threshold_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::similarity_threshold_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-simthreshold") || !strcmp(argv[*i], "-st")) && (i+1 != argc) && (similarityThreshold == -1))
     {
@@ -390,7 +390,7 @@ bool trimAlManager::similarity_threshold_argument(int *argc, char *argv[], int *
     return false;
 }
 
-bool trimAlManager::consistency_threshold_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::consistency_threshold_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-conthreshold") || !strcmp(argv[*i], "-ct")) && (i+1 != argc) && (consistencyThreshold == -1))
     {
@@ -413,7 +413,7 @@ bool trimAlManager::consistency_threshold_argument(int *argc, char *argv[], int 
     return false;
 }
 
-bool trimAlManager::conservation_threshold_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::conservation_threshold_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-cons")) && (i+1 != argc) && (conservationThreshold == -1))
     {
@@ -460,7 +460,7 @@ bool trimAlManager::select_cols_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::no_gaps_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::no_gaps_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-nogaps") && (!nogaps))
     {
@@ -470,7 +470,7 @@ bool trimAlManager::no_gaps_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::no_all_gaps_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::no_all_gaps_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-noallgaps") && (!noallgaps))
     {
@@ -480,7 +480,7 @@ bool trimAlManager::no_all_gaps_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::keep_seqs_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::keep_seqs_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-keepseqs") && (!keepSeqs))
     {
@@ -490,7 +490,7 @@ bool trimAlManager::keep_seqs_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::keep_header_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::keep_header_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-keepheader") && (!ReadWriteMachine.keepHeader))
     {
@@ -500,7 +500,7 @@ bool trimAlManager::keep_header_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::gappy_out_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::gappy_out_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-gappyout") && (!strict))
     {
@@ -510,7 +510,7 @@ bool trimAlManager::gappy_out_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::strict_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::strict_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-strict") && (!strict))
     {
@@ -520,7 +520,7 @@ bool trimAlManager::strict_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::strict_plus_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::strict_plus_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-strictplus")) && (!strictplus))
     {
@@ -530,7 +530,7 @@ bool trimAlManager::strict_plus_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::automated1_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::automated1_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-automated1")) && (!automated1))
     {
@@ -540,7 +540,7 @@ bool trimAlManager::automated1_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::residue_overlap_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::residue_overlap_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-resoverlap")) && (i+1 != argc) && (residuesOverlap == -1))
     {
@@ -563,7 +563,7 @@ bool trimAlManager::residue_overlap_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::sequence_overlap_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::sequence_overlap_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-seqoverlap")) && (i+1 != argc) && (sequenceOverlap == -1))
     {
@@ -603,7 +603,7 @@ bool trimAlManager::seqs_select_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::max_identity_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::max_identity_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-maxidentity")) && (i+1 != argc) && (maxIdentity == -1))
     {
@@ -628,7 +628,7 @@ bool trimAlManager::max_identity_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::clusters_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::clusters_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-clusters")) && (i+1 != argc) && (clusters == -1))
     {
@@ -652,7 +652,7 @@ bool trimAlManager::clusters_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::terminal_only_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::terminal_only_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-terminalonly")) && (!terminalOnly))
     {
@@ -662,7 +662,7 @@ bool trimAlManager::terminal_only_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::window_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::window_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-w") && (i+1 != argc) && (windowSize == -1))
     {
@@ -685,7 +685,7 @@ bool trimAlManager::window_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::gap_window_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::gap_window_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-gw") && (i+1 != argc) && (gapWindow == -1))
     {
@@ -708,7 +708,7 @@ bool trimAlManager::gap_window_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::similarity_window_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::similarity_window_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-sw") && (i+1 != argc) && (similarityWindow == -1))
     {
@@ -732,7 +732,7 @@ bool trimAlManager::similarity_window_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::consistency_window_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::consistency_window_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-cw") && (i+1 != argc) && (consistencyWindow == -1))
     {
@@ -755,7 +755,7 @@ bool trimAlManager::consistency_window_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::block_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::block_argument(int *argc, char *argv[], int *i)
 {
     if(!strcmp(argv[*i], "-block") && (i+1 != argc) && (blockSize == -1))
     {
@@ -778,7 +778,7 @@ bool trimAlManager::block_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
+inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-sgc")) && (!sgc))
     {
@@ -825,7 +825,7 @@ bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
     return true;
 }
 
-bool trimAlManager::complementary_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::complementary_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-complementary")) && (getComplementary == false))
     {
@@ -836,7 +836,7 @@ bool trimAlManager::complementary_argument(int *argc, char *argv[], int *i)
 
 }
 
-bool trimAlManager::col_numbering_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::col_numbering_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-colnumbering")) && (columnNumbering == false))
     {
@@ -846,7 +846,7 @@ bool trimAlManager::col_numbering_argument(int *argc, char *argv[], int *i)
     return false;
 }
 
-bool trimAlManager::split_by_stop_codon_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::split_by_stop_codon_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-splitbystopcodon")) && (splitByStopCodon == false))
     {
@@ -856,7 +856,7 @@ bool trimAlManager::split_by_stop_codon_argument(int *argc, char *argv[], int *i
     return false;
 }
 
-bool trimAlManager::ignore_stop_codon_argument(int *argc, char *argv[], int *i)
+inline bool trimAlManager::ignore_stop_codon_argument(int *argc, char *argv[], int *i)
 {
     if((!strcmp(argv[*i], "-ignorestopcodon")) && (ignoreStopCodon == false))
     {
@@ -886,7 +886,7 @@ bool trimAlManager::processArguments(char* argv[])
     return false;
 }
 
-bool trimAlManager::check_arguments_incompatibilities()
+inline bool trimAlManager::check_arguments_incompatibilities()
 {
     // The incompatibilities are checked only once, so there are arguments with no function to check it's incompatibilities although they have.
     // These are checked within other functions. 
@@ -906,7 +906,7 @@ bool trimAlManager::check_arguments_incompatibilities()
     return appearErrors;
 }
 
-bool trimAlManager::check_inFile_incompatibilities()
+inline bool trimAlManager::check_inFile_incompatibilities()
 {
     if (infile != NULL)
     {
@@ -930,7 +930,7 @@ bool trimAlManager::check_inFile_incompatibilities()
     return appearErrors;
 }
 
-bool trimAlManager::check_select_cols_and_seqs_incompatibilities()
+inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities()
 {
     if (selectCols || selectSeqs)
     {
@@ -975,7 +975,7 @@ bool trimAlManager::check_select_cols_and_seqs_incompatibilities()
     return appearErrors;
 }
 
-bool trimAlManager::check_thresholds_incompatibilities()
+inline bool trimAlManager::check_thresholds_incompatibilities()
 {
     if((gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || (consistencyThreshold != -1) ) //TODO consistencyThreshold was not present on this Incompatibilities. Is this correct?
     {
@@ -1009,7 +1009,7 @@ bool trimAlManager::check_thresholds_incompatibilities()
     return appearErrors;
 }
 
-bool trimAlManager::check_automated_methods_incompatibilities()
+inline bool trimAlManager::check_automated_methods_incompatibilities()
 {
     if (automatedMethodCount)
     {
@@ -1046,7 +1046,7 @@ bool trimAlManager::check_automated_methods_incompatibilities()
     return appearErrors;
 }
 
-bool trimAlManager::check_max_identity_incompatibilities()
+inline bool trimAlManager::check_max_identity_incompatibilities()
 {
     if (maxIdentity != -1)
     {
@@ -1064,7 +1064,7 @@ bool trimAlManager::check_max_identity_incompatibilities()
     return appearErrors;
 }
 
-bool trimAlManager::check_clusters_incompatibilities()
+inline bool trimAlManager::check_clusters_incompatibilities()
 {
     if (clusters != -1)
     {
@@ -1077,7 +1077,7 @@ bool trimAlManager::check_clusters_incompatibilities()
     return appearErrors;
 }
 
-bool trimAlManager::check_windows_incompatibilities()
+inline bool trimAlManager::check_windows_incompatibilities()
 {
     if (windowSize != -1)
     {
@@ -1090,7 +1090,7 @@ bool trimAlManager::check_windows_incompatibilities()
     return appearErrors;
 }
 
-bool trimAlManager::check_stats_incompatibilities()
+inline bool trimAlManager::check_stats_incompatibilities()
 {
     if(stats < 0)
     {
@@ -1103,7 +1103,7 @@ bool trimAlManager::check_stats_incompatibilities()
     return appearErrors;
 }
 
-bool trimAlManager::check_arguments_needs(char* argv[])
+inline bool trimAlManager::check_arguments_needs(char* argv[])
 {
         check_force_selection();
         check_input_file_with_coding_sequences_argument();
@@ -1125,7 +1125,7 @@ bool trimAlManager::check_arguments_needs(char* argv[])
         check_output_format();
 }
 
-bool trimAlManager::check_codon_behaviour_incompatibility()
+inline bool trimAlManager::check_codon_behaviour_incompatibility()
 {
     if((!appearErrors) && (ignoreStopCodon) && (splitByStopCodon))
     {
@@ -1136,7 +1136,7 @@ bool trimAlManager::check_codon_behaviour_incompatibility()
     return false;
 }
 
-bool trimAlManager::check_combinations_among_thresholds_incompatibility() // TODO is this ok?
+inline bool trimAlManager::check_combinations_among_thresholds_incompatibility() // TODO is this ok?
 {
     if((consistencyThreshold != -1) && (conservationThreshold != -1) && (!appearErrors))
     {
@@ -1151,7 +1151,7 @@ bool trimAlManager::check_combinations_among_thresholds_incompatibility() // TOD
     return false;
 }
 
-bool trimAlManager::check_automated_manual_incompatibilities()
+inline bool trimAlManager::check_automated_manual_incompatibilities()
 {
     if((getComplementary) && (!appearErrors))
         if(!automatedMethodCount && // Are we not using an automated method? 
@@ -1179,7 +1179,7 @@ bool trimAlManager::check_automated_manual_incompatibilities()
     return false;
 }
 
-bool trimAlManager::check_force_selection()
+inline bool trimAlManager::check_force_selection()
 {
     if (!appearErrors)
     {
@@ -1194,7 +1194,7 @@ bool trimAlManager::check_force_selection()
     return false;
 }
 
-bool trimAlManager::check_input_file_with_coding_sequences_argument()
+inline bool trimAlManager::check_input_file_with_coding_sequences_argument()
 {
     if((!appearErrors) && (infile == NULL) && (compareset == -1) && (forceFile == NULL) && (backtransFile != NULL))
     {
@@ -1208,7 +1208,7 @@ bool trimAlManager::check_input_file_with_coding_sequences_argument()
     return false;
 }
 
-bool trimAlManager::check_file_aligned()
+inline bool trimAlManager::check_file_aligned()
 {
     if((!appearErrors) && (infile != NULL))
     {
@@ -1228,7 +1228,7 @@ bool trimAlManager::check_file_aligned()
     return false;
 }
 
-bool trimAlManager::check_similarity_matrix()
+inline bool trimAlManager::check_similarity_matrix()
 {
     if((matrixFile != NULL) && (!appearErrors))
     {
@@ -1250,7 +1250,7 @@ bool trimAlManager::check_similarity_matrix()
     return false;
 }
 
-bool trimAlManager::check_outputs_coincidence()
+inline bool trimAlManager::check_outputs_coincidence()
 {
     if((htmlOutFile != NULL) && (outfile != NULL) && (!appearErrors))
     {
@@ -1264,7 +1264,7 @@ bool trimAlManager::check_outputs_coincidence()
     return false;
 }
 
-bool trimAlManager::check_col_numbering()
+inline bool trimAlManager::check_col_numbering()
 {
     if((columnNumbering) && (!appearErrors))
     {
@@ -1280,7 +1280,7 @@ bool trimAlManager::check_col_numbering()
     return false;
 }
 
-bool trimAlManager::check_residue_and_sequence_overlap()
+inline bool trimAlManager::check_residue_and_sequence_overlap()
 {
     if(!appearErrors)
     {
@@ -1301,7 +1301,7 @@ bool trimAlManager::check_residue_and_sequence_overlap()
     return false;
 }
 
-bool trimAlManager::check_html_output_interest()
+inline bool trimAlManager::check_html_output_interest()
 {
     if((htmlOutFile != NULL) && (!appearErrors))
     {
@@ -1318,7 +1318,7 @@ bool trimAlManager::check_html_output_interest()
     return false;
 }
 
-bool trimAlManager::check_output_file_with_statistics()
+inline bool trimAlManager::check_output_file_with_statistics()
 {
     // NOTE should this function only take in mind if statistics are requested and outFile is not defined?
     // Either we are using 'some' trimming methods or not, the incompatibility to output multiple info (alignment + stats) is present.
@@ -1339,7 +1339,7 @@ bool trimAlManager::check_output_file_with_statistics()
     return false;
 }
 
-bool trimAlManager::check_multiple_files_comparison(char* argv[])
+inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
 {
     bool hasError = false;
     if((compareset != -1) && (!appearErrors))
@@ -1439,7 +1439,7 @@ bool trimAlManager::check_multiple_files_comparison(char* argv[])
     return hasError;
 
 }
-bool trimAlManager::check_block_size()
+inline bool trimAlManager::check_block_size()
 {
     if((!appearErrors) && (origAlig -> getNumAminos() < (blockSize/4)))
     {
@@ -1450,7 +1450,7 @@ bool trimAlManager::check_block_size()
     return false;
 }
 
-bool trimAlManager::check_backtranslations()
+inline bool trimAlManager::check_backtranslations()
 {
     if (!appearErrors)
     {
@@ -1479,7 +1479,7 @@ bool trimAlManager::check_backtranslations()
     return false;
 }
 
-bool trimAlManager::check_coding_sequences_type()
+inline bool trimAlManager::check_coding_sequences_type()
 {
     if((!appearErrors) && (backtransFile != NULL) && // Is there a backtranslation file?
         (!backtranslationAlig -> getAlignmentType() & SequenceTypes::DNA )) // If so, is it from DNA?
@@ -1491,7 +1491,7 @@ bool trimAlManager::check_coding_sequences_type()
     return false;
 }
 
-bool trimAlManager::check_and_prepare_coding_sequence()
+inline bool trimAlManager::check_and_prepare_coding_sequence()
 {
     if((!appearErrors)  && (backtransFile != NULL) && 
         (!backtranslationAlig -> prepareCodingSequence(splitByStopCodon, ignoreStopCodon, origAlig)))
@@ -1503,7 +1503,7 @@ bool trimAlManager::check_and_prepare_coding_sequence()
     return false;
 }
 
-bool trimAlManager::check_backtranslation_infile_names_corresponde()
+inline bool trimAlManager::check_backtranslation_infile_names_corresponde()
 {
     //NOTE Maybe we don't need to copy the names and lengths to two new arrays as we could pass the original names and lengths to the check checkCorrespondence function, which doesn't modify the pointers passed to them
     if((!appearErrors) && (backtransFile != NULL))
@@ -1521,13 +1521,13 @@ bool trimAlManager::check_backtranslation_infile_names_corresponde()
     return false;
 }
 
-void trimAlManager::check_cw_argument()
+inline void trimAlManager::check_cw_argument()
 {
     if((!appearErrors) && (windowSize != -1) && (compareset != -1))
         cerr << "INFO: Try with specific comparison file window value. Parameter -cw." << endl << endl;
 }
 
-void trimAlManager::check_output_format()
+inline void trimAlManager::check_output_format()
 {
     if (oformats.size() == 0)
     {
@@ -1537,6 +1537,7 @@ void trimAlManager::check_output_format()
 
 int trimAlManager::perform()
 {
+    
     if (appearErrors) return -1;
 
     if(conservationThreshold == -1)
@@ -1560,10 +1561,12 @@ int trimAlManager::perform()
 
     if(backtransFile != NULL)
         seqMatrix = origAlig -> SequencesMatrix;
+    
+
     /* -------------------------------------------------------------------- */
-    
+    cout << "Cleaning" << endl;
     clean_alignment();
-    
+
     /* -------------------------------------------------------------------- */
     if(singleAlig == NULL)
     {
@@ -1573,19 +1576,7 @@ int trimAlManager::perform()
     /* -------------------------------------------------------------------- */
 
     /* -------------------------------------------------------------------- */
-    if((htmlOutFile != NULL) && (!appearErrors))
-        if(!origAlig ->
-           alignmentSummaryHTML(htmlOutFile, 
-                                singleAlig -> getNumAminos(), 
-                                singleAlig -> getNumSpecies(),
-                                singleAlig -> getCorrespResidues(), 
-                                singleAlig -> getCorrespSequences(), compareVect))
-        {
-            cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
-            appearErrors = true;
-        }
     /* -------------------------------------------------------------------- */
-
     /* -------------------------------------------------------------------- */
     if(backtransFile != NULL)
     {
@@ -1604,8 +1595,21 @@ int trimAlManager::perform()
                                                 seqMatrix, 
                                                 singleAlig);
     }
-    /* -------------------------------------------------------------------- */
 
+    /* -------------------------------------------------------------------- */
+    if((htmlOutFile != NULL) && (!appearErrors))
+        if(!origAlig ->
+           alignmentSummaryHTML(htmlOutFile,
+                                singleAlig -> getNumAminos(), 
+                                singleAlig -> getNumSpecies(),
+                                singleAlig -> getCorrespResidues(), 
+                                singleAlig -> getCorrespSequences(), 
+                                compareVect))
+        {
+            cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
+            appearErrors = true;
+        }
+    cout << "Saving?" << endl;
     /* -------------------------------------------------------------------- */
     if((outfile != NULL) && (!appearErrors))
     {
@@ -1621,19 +1625,19 @@ int trimAlManager::perform()
     else if((stats >= 0) && (!appearErrors))
         ReadWriteMachine.saveAlignment("", &oformats, singleAlig);
 
+
     /* -------------------------------------------------------------------- */
     if((columnNumbering) && (!appearErrors))
         singleAlig -> Statistics -> printCorrespondence();
 
     /* -------------------------------------------------------------------- */
-    
+
     delete_variables();
     /* -------------------------------------------------------------------- */
-    
     return 0;
 }
 
-void trimAlManager::print_statistics()
+inline void trimAlManager::print_statistics()
 {
     if(sgc)
     {
@@ -1691,18 +1695,23 @@ void trimAlManager::print_statistics()
     }
 }
 
-bool trimAlManager::create_or_use_similarity_matrix()
+inline bool trimAlManager::create_or_use_similarity_matrix()
 {
     if((strict) || (strictplus) || (automated1) || (similarityThreshold != -1.0) || (scc == 1) || (sct == 1))
     {
         similMatrix = new similarityMatrix();
-
+        
+        // Simple Matrix
         if(matrixFile != NULL)
             similMatrix -> loadSimMatrix(matrixFile);
+        
+        // Alternative Matrix
         else if(alternative_matrix != -1) 
         {
             similMatrix -> alternativeSimilarityMatrices(alternative_matrix, origAlig -> getAlignmentType());
         }
+        
+        // Default Matrices
         else
         {
             if((origAlig -> getAlignmentType()) & SequenceTypes::AA)
@@ -1720,8 +1729,9 @@ bool trimAlManager::create_or_use_similarity_matrix()
     return false;
 }
 
-void trimAlManager::clean_alignment()
+inline void trimAlManager::clean_alignment()
 {
+    
     if(nogaps)
         singleAlig = origAlig -> Cleaning -> cleanGaps(0, 0, getComplementary);
 
@@ -1748,14 +1758,17 @@ void trimAlManager::clean_alignment()
 
     /* -------------------------------------------------------------------- */
     else if(consistencyThreshold != -1)
+    {
         singleAlig = origAlig -> Cleaning -> cleanCompareFile(consistencyThreshold, conservationThreshold, compareVect, getComplementary);
+    }
     /* -------------------------------------------------------------------- */
-
+    
     /* -------------------------------------------------------------------- */
     else if((residuesOverlap != -1) && (sequenceOverlap != -1)) 
     {
-        singleAlig = origAlig -> Cleaning -> cleanSpuriousSeq(residuesOverlap, (sequenceOverlap/100), getComplementary);
-        singleAlig = singleAlig -> Cleaning -> cleanNoAllGaps(false);
+        tempAlig = origAlig -> Cleaning -> cleanSpuriousSeq(residuesOverlap, (sequenceOverlap/100), getComplementary);
+        singleAlig = tempAlig -> Cleaning -> cleanNoAllGaps(false);
+        delete tempAlig;
     }
     /* -------------------------------------------------------------------- */
 
@@ -1803,9 +1816,13 @@ void trimAlManager::clean_alignment()
             }
             else
             {
-                singleAlig = origAlig -> Cleaning -> removeSequences(delSequences, 1, num, getComplementary);
-                singleAlig = singleAlig -> Cleaning -> cleanNoAllGaps(false);
+                tempAlig = origAlig -> Cleaning -> removeSequences(delSequences, 1, num, getComplementary);
+
+                singleAlig = tempAlig -> Cleaning -> cleanNoAllGaps(false);
+                
+                delete tempAlig;
             }
+
         }
         /* -------------------------------------------------------------------- */
     }
@@ -1814,8 +1831,12 @@ void trimAlManager::clean_alignment()
     /* -------------------------------------------------------------------- */
     else if(maxIdentity != -1)
     {
-        singleAlig = origAlig -> Cleaning -> getClustering (maxIdentity);
-        singleAlig = singleAlig -> Cleaning -> cleanNoAllGaps(false);
+        tempAlig = origAlig -> Cleaning -> getClustering (maxIdentity);
+
+        singleAlig = tempAlig -> Cleaning -> cleanNoAllGaps(false);
+        
+        delete tempAlig;
+        
     }
     else if(clusters != -1)
     {
@@ -1826,13 +1847,17 @@ void trimAlManager::clean_alignment()
         }
         else
         {
-            singleAlig = origAlig -> Cleaning -> getClustering(origAlig -> Cleaning -> getCutPointClusters(clusters));
-            singleAlig = singleAlig -> Cleaning -> cleanNoAllGaps(false);
+            tempAlig = origAlig -> Cleaning -> getClustering(origAlig -> Cleaning -> getCutPointClusters(clusters));
+
+            singleAlig = tempAlig -> Cleaning -> cleanNoAllGaps(false);
+            
+            delete tempAlig;
+                    
         }
     }
 }
 
-void trimAlManager::set_window_size()
+inline void trimAlManager::set_window_size()
 {
     if(windowSize != -1)
     {
@@ -1849,14 +1874,14 @@ void trimAlManager::set_window_size()
     origAlig -> setWindowsSize(gapWindow, similarityWindow);
 }
 
-void trimAlManager::delete_variables()
+inline void trimAlManager::delete_variables()
 {
     delete singleAlig;
     delete origAlig;
     delete[] compareAlignmentsArray;
 
     delete similMatrix;
-    delete []delColumns;
+    delete[] delColumns;
 
     delete[] filesToCompare;
     delete[] compareVect;

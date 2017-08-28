@@ -67,12 +67,12 @@ int Cleaner::selectMethod(void) {
 
 newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine,
                                        const int *gInCol, bool complementary) {
-
+// cout << "cleanByCutValue" << endl;
     int i, j, k, jn, oth, pos, block, *vectAux;
     string *matrixAux, *newSeqsName;
     newAlignment *newAlig;
     newValues counter;
-
+// cout << "cleanByCutValue Phase 1" << endl;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Select the columns with a gaps value less or equal
      * than the cut point. */
@@ -80,14 +80,14 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine,
         if(gInCol[i] <= cut) counter.residues++;
         else _alignment->saveResidues[i] = -1;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
+// cout << "cleanByCutValue Phase 2" << endl;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Compute, if it's necessary, the number of columns
      * necessary to achieve the minimum number of columns
      * fixed by coverage parameter. */
     oth = utils::roundInt((((baseLine/100.0) - (float) counter.residues/_alignment->residNumber)) * _alignment->residNumber);
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
+// cout << "cleanByCutValue Phase 3" << endl;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* if it's necessary to recover some columns, we
      * applied this instructions to recover it */
@@ -106,7 +106,7 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine,
         delete [] vectAux;
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
+// cout << "cleanByCutValue Phase 4" << endl;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Fixed the initial size of blocks as 0.5% of
      * _alignmentment's length */
@@ -159,7 +159,7 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine,
         }
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
     }
-
+// cout << "cleanByCutValue Phase 5" << endl;
     /* Keep only columns blocks bigger than an input columns block size */
     if(blockSize != 0) {
 
@@ -185,33 +185,33 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine,
             for(j = pos; j < i; j++)
                 _alignment->saveResidues[j] = -1;
     }
-
+// cout << "cleanByCutValue Phase 6" << endl;
     /* If the flag -terminalony is set, apply a method to look for internal
      * boundaries and get back columns inbetween them, if they exist */
     if(terminalGapOnly == true)
         if(!_alignment->Cleaning->removeOnlyTerminal())
             return NULL;
-
+// cout << "cleanByCutValue Phase 7" << endl;
     /* Once the columns/sequences selection is done, turn it around
      * if complementary flag is active */
     if(complementary == true)
         _alignment-> Cleaning -> computeComplementaryAlig(true, false);
-
+// cout << "cleanByCutValue Phase 8" << endl;
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
     counter = _alignment->Cleaning->removeCols_SeqsAllGaps();
 
+// cout << "cleanByCutValue Phase 9" << endl;
     /* Allocate memory  for selected sequences/columns */
     matrixAux = new string[counter.sequences];
     newSeqsName = new string[counter.sequences];
-
+// cout << "FOUND" << endl;
     /* Fill local allocated memory with previously selected data */
     _alignment->fillNewDataStructure(matrixAux, newSeqsName);
-
+// cout << "cleanByCutValue Phase 10" << endl;
     /* When we have all parameters, we create the new _alignmentment */
-
     newAlig = new newAlignment(*_alignment);
-    
+
     newAlig -> sequenNumber = counter.sequences;
     newAlig -> residNumber = counter.residues;
 
@@ -224,8 +224,11 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine,
     newAlig -> sequences = matrixAux;
     newAlig -> seqsName = newSeqsName;
 
-    newAlig->fillMatrices(true);
-
+//     newAlig->fillMatrices(true);
+    
+    delete [] counter.matrix;
+    delete [] counter.seqsName;
+    
     /* Return the new _alignmentment reference */
     return newAlig;
 }
@@ -374,8 +377,9 @@ newAlignment* Cleaner::cleanByCutValue(float cut, float baseLine,
     newAlig -> sequences = matrixAux;
     newAlig -> seqsName = newSeqsName;
 
-    newAlig->fillMatrices(true);
-
+//     newAlig->fillMatrices(true);
+    delete [] counter.matrix;
+    delete [] counter.seqsName;
     /* Return the new _alignmentment reference */
     return newAlig;
 }
@@ -562,10 +566,13 @@ newAlignment* Cleaner::cleanByCutValue(double cutGaps, const int *gInCol,
     newAlig -> seqsName = newSeqsName;
     
     /* Deallocate local memory */
-    delete[] matrixAux;
-    delete[] newSeqsName;
+//     delete[] matrixAux;
+//     delete[] newSeqsName;
     
-    newAlig->fillMatrices(true);
+//     newAlig->fillMatrices(true);
+
+    delete [] counter.matrix;
+    delete [] counter.seqsName;
 
     /* Return the new _alignmentment reference */
     return newAlig;
@@ -661,7 +668,6 @@ newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut,
 
     _alignment->fillNewDataStructure(&counter);
 
-
     newAlig = new newAlignment(*_alignment);
     
     newAlig -> sequenNumber = counter.sequences;
@@ -675,17 +681,18 @@ newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut,
     
     newAlig -> sequences = counter.matrix;
     newAlig -> seqsName = counter.seqsName;
+    
 
     /* Return the new _alignmentment reference */
         
-    newAlig->fillMatrices(true);
+//     newAlig->fillMatrices(true);
     
     return newAlig;
 }
 
 newAlignment* Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
                                        bool complementary) {
-
+cout << "cleanOverlapSeq" << endl;
     string *matrixAux, *newSeqsName;
     newAlignment *newAlig;
     newValues counter;
@@ -714,15 +721,6 @@ newAlignment* Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
     _alignment->fillNewDataStructure(matrixAux, newSeqsName);
 
     /* When we have all parameters, we create the new _alignmentment */
-//     newAlig = new newAlignment(_alignment->filename,
-//                                _alignment->aligInfo, matrixAux, newSeqsName,  _alignment->seqsInfo,
-//                                counter.sequences, counter.residues,  _alignment->iformat,  
-//                                _alignment->oformat,  _alignment->shortNames,  _alignment->dataType,
-//                                _alignment->isAligned,  _alignment->reverse, terminalGapOnly,  
-//                                keepSequences,  _alignment->keepHeader,  _alignment->sequenNumber, _alignment->residNumber,
-//                                _alignment->residuesNumber, _alignment->saveResidues,  
-//                                _alignment->saveSequences,  _alignment->ghWindow,  _alignment->shWindow, blockSize,
-//                                _alignment->identities);
 
     newAlig = new newAlignment(*_alignment);
     
@@ -738,7 +736,9 @@ newAlignment* Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
     newAlig -> sequences = matrixAux;
     newAlig -> seqsName = newSeqsName;
     
-    newAlig->fillMatrices(true);
+    delete [] counter.matrix;
+    delete [] counter.seqsName;
+//     newAlig->fillMatrices(true);
 
     /* Return the new _alignmentment reference */
     return newAlig;
@@ -1019,12 +1019,13 @@ newAlignment* Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverla
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Return a reference of the clean newAlignment object */
+    newAlig->fillMatrices(false);
     return newAlig;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 newAlignment* Cleaner::clean2ndSlope(bool complementarity) {
-
+cout << "clean2ndSlope" << endl;
     newAlignment *ret;
     int cut;
 
@@ -1054,7 +1055,7 @@ newAlignment* Cleaner::clean2ndSlope(bool complementarity) {
 }
 
 newAlignment* Cleaner::cleanCombMethods(bool complementarity, bool variable) {
-
+cout << "cleanCombMethods" << endl;
     float simCut, first20Point, last80Point, *simil, *vectAux;
     int i, j, acm, gapCut, *positions, *gaps;
     double inic, fin, vlr;
@@ -1191,6 +1192,7 @@ newAlignment* Cleaner::cleanNoAllGaps(bool complementarity) {
 
 float Cleaner::getCutPointClusters(int clusterNumber) {
 
+//     cout << "Clusters = " << clusterNumber;
     float max, min, avg, gMax, gMin, startingPoint, prevValue = 0, iter = 0;
     int i, j, clusterNum, *cluster, **seqs;
 
@@ -1400,8 +1402,7 @@ newAlignment * Cleaner::getClustering(float identityThreshold) {
 
     newAlig = new newAlignment(*_alignment);
     
-     newAlig -> sequenNumber = clustering[0];
-//     newAlig -> residNumber = _alignment.residues;
+    newAlig -> sequenNumber = clustering[0];
     
     if (newAlig->sequences != NULL)
         delete[] newAlig -> sequences;
@@ -1409,12 +1410,14 @@ newAlignment * Cleaner::getClustering(float identityThreshold) {
     if (newAlig -> seqsName != NULL)
         delete[] newAlig -> seqsName;
     
+    newAlig -> sequenNumber = clustering[0];
     newAlig -> sequences = matrixAux;
     newAlig -> seqsName = newSeqsName;
-        
+    
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    newAlig->fillMatrices(true);
+     newAlig->fillMatrices(true);
+     delete [] clustering;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Return the new alignment reference */
     return newAlig;
@@ -1471,8 +1474,9 @@ newAlignment* Cleaner::removeColumns(int *columns, int init, int size,
     /* Deallocate local memory */
 //     delete[] matrixAux;
 //     delete[] newSeqsName;
-        
-    newAlig->fillMatrices(true);
+    delete [] counter.matrix;
+    delete [] counter.seqsName;
+//     newAlig->fillMatrices(true);
 
     /* Return the new alignment reference */
     return newAlig;
@@ -1525,13 +1529,9 @@ newAlignment *Cleaner::removeSequences(int *seqs, int init, int size,
     
     newAlig -> sequences = matrixAux;
     newAlig -> seqsName = newSeqsName;
-
-    /* Free local memory */
-//     delete [] matrixAux;
-//     delete [] newSeqsName;
     
-        
-    newAlig->fillMatrices(true);
+    delete [] counter.matrix;
+    delete [] counter.seqsName;
 
     /* Return the new alignment reference */
     return newAlig;
@@ -1683,6 +1683,9 @@ newValues Cleaner::removeCols_SeqsAllGaps(void) {
     if(warnings)
         cerr << endl;
 
+    if (counter.matrix != NULL) delete [] counter.matrix;
+    if (counter.seqsName != NULL) delete [] counter.seqsName; 
+    
     counter.matrix = new string[counter.sequences];
     counter.seqsName = new string[counter.sequences];
 

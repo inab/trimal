@@ -315,7 +315,7 @@ char* utils::readLine(ifstream &file) {
   int state;
   char c = ' ';
   string nline;
-  static char *line = NULL;
+  char *line = NULL;
 
   /* Check it the end of the file has been reached or not */
   if(file.eof())
@@ -346,7 +346,7 @@ char* utils::readLine(ifstream &file) {
   /* Otherwise, initialize the appropiate data structure,
    * dump the data and return it */
     line = new char[nline.size() + 1];
-    strcpy(line, &nline[0]);
+    strcpy(line, nline.c_str());
     return line;
 }
 

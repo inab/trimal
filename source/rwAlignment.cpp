@@ -1894,9 +1894,14 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
   /* Record which columns/sequences from original alignment
    * have been kept in the final one */
   for(i = 0; i < residues; i++)
-    res[selectedRes[i]] = true;
+  {
+    res[selectedRes[i]] = true; 
+}
   for(i = 0; i < seqs; i++)
+  {
+      
     seq[selectedSeq[i]] = true;
+}
 
   /* Recover some stats about different scores from current alignment */
   gapsValues = NULL;

@@ -1,16 +1,25 @@
 
 macro(compare program_a program_b command_list)
-    execute_process(COMMAND ${program_a} ${command_list} -out /tmp/in)
-    execute_process(COMMAND ${program_b} ${command_list} -out /tmp/out)
-    execute_process(COMMAND ${CMAKE_COMMAND} -E compare_files /tmp/in /tmp/out RESULT_VARIABLE returnValue)
-    if (${returnValue})
-        message( SEND_ERROR "Result is not the same." )
+
+ string(RANDOM RNUMBER LENGTH 20)
+#  message(${RNUMBER})
+
+    execute_process(COMMAND time ${program_a} ${command_list} -out "/tmp/in${RNUMBER}" )
+    
+    if (NOT EXISTS /tmp/in)
+        message ( WARNING "Original algorithm failed to make an output file. This may be caused by an empty alignment after cleanse. Don't trying with updated algorithm." )
+    
+    else()
+        execute_process(COMMAND ${program_b} ${command_list} -out "/tmp/out${RNUMBER}" )
+        execute_process(COMMAND ${CMAKE_COMMAND} -E compare_files "/tmp/in${RNUMBER}" "/tmp/out${RNUMBER}" RESULT_VARIABLE returnValue)
+        
+        if (${returnValue})
+            message( SEND_ERROR "Result is not the same." )
+        endif()
     endif()
-#    execute_process(COMMAND ${CMAKE_COMMAND} -E compare_files bin/in.html bin/out.html RESULT_VARIABLE returnValue)
-#    if (${returnValue})
-#        message( SEND_ERROR "HTML result is not the same." )
-#    endif()
-    file(REMOVE tmp/in tmp/out)
+    
+#     file(REMOVE "tmp/in${RNUMBER}" "tmp/out${RNUMBER}")
 endmacro(compare)
+
 string(REPLACE " " ";" command_list ${command})
 compare(${program_a} ${program_b} "${command_list}")

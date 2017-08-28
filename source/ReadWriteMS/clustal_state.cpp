@@ -12,6 +12,7 @@ int ClustalState::CheckAlignment(istream* origin)
     origin->clear();
     char *firstWord = NULL, *line = NULL;
 
+    
     /* Read first valid line in a safer way */
     do {
         line = utils::readLine(*origin);
@@ -28,6 +29,8 @@ int ClustalState::CheckAlignment(istream* origin)
     if((!strcmp(firstWord, "CLUSTAL")) || (!strcmp(firstWord, "clustal")))
         return 1;
 
+    delete[] line;
+    
     return 0;
 }
 

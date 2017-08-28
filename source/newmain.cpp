@@ -28,8 +28,12 @@
 
 int main(int argc, char *argv[])
 {
+    cout << "Starting" << endl;
     trimAlManager Trimal = trimAlManager();
+    cout << "Parsing" << endl;
     Trimal.parseArguments(argc, argv);
+    cout << "Processing" << endl;
     Trimal.processArguments(argv);
+    cout << "Performing" << endl;
     return Trimal.perform();
 }

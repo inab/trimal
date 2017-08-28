@@ -15,7 +15,7 @@ int NexusState::CheckAlignment(istream* origin)
     origin->seekg(0);
     origin->clear();
     char *firstWord = NULL, *line = NULL;
-
+    
     /* Read first valid line in a safer way */
     do {
         line = utils::readLine(*origin);
@@ -32,6 +32,7 @@ int NexusState::CheckAlignment(istream* origin)
     if((!strcmp(firstWord, "#NEXUS")) || (!strcmp(firstWord, "#nexus")))
         return 1;
 
+    delete[] line;
  
     return 0;
 }

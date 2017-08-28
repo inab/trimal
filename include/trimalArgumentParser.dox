@@ -749,7 +749,7 @@ If the counter is bigger than 1, we are trying to use multiple automatic methods
 */
 
 /**
-\fn bool trimAlManager::process_arguments(char* argv[])
+\fn bool trimAlManager::processArguments(char* argv[])
 \brief Method to process the information obtained by trimAlManager::parseArguments\n
 It checks for argument incompatibilities and arguments dependencies.
 

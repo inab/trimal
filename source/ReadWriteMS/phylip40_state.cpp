@@ -11,12 +11,12 @@ using namespace std;
 
 int Phylip40State::CheckAlignment(istream* origin)
 {
-        origin->seekg(0);
+    origin->seekg(0);
     origin->clear();
     char *firstWord = NULL, *line = NULL;
     int blocks = 0;
     string nline;
-
+    
     /* Read first valid line in a safer way */
     do {
         line = utils::readLine(*origin);
@@ -39,12 +39,18 @@ int Phylip40State::CheckAlignment(istream* origin)
         firstWord = strtok(NULL, DELIMITERS);
         if(firstWord != NULL)
             residNumber = atoi(firstWord);
-        else return 0;
+        else {
+            delete [] line;
+            return false;
+        }
 
         /* If there is only one sequence, use by default sequential format since
          * it is impossible to determine exactly which phylip format is */
         if((sequenNumber == 1) && (residNumber != 0))
-            return 1;
+            {
+            delete [] line;
+            return true;
+        }
 
             /* If there are more than one sequence, analyze sequences distribution to
              * determine its format. */
@@ -60,7 +66,10 @@ int Phylip40State::CheckAlignment(istream* origin)
 
             /* If the file end is reached without a valid line, warn about it */
             if (origin->eof())
-                return 0;
+                {
+                delete [] line;
+                return false;
+            }
 
             firstWord = strtok(line, DELIMITERS);
             while(firstWord != NULL) {
@@ -80,7 +89,9 @@ int Phylip40State::CheckAlignment(istream* origin)
                 blocks--;
                 firstWord = strtok(NULL, DELIMITERS);
             }
-
+            
+            delete [] line;
+            
             /* If the file end is reached without a valid line, warn about it */
             if (origin->eof())
                 return false;
@@ -89,6 +100,7 @@ int Phylip40State::CheckAlignment(istream* origin)
             return (!blocks) ? 1 : 0;
         }
     }
+    delete[] line;
     return 0;
 }
 

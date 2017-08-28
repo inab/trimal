@@ -56,10 +56,10 @@
 
 
 struct newValues {
-  int residues;
-  int sequences;
-  string *matrix;
-  string *seqsName;
+  int residues = 0;
+  int sequences = 0;
+  string *matrix = NULL;
+  string *seqsName = NULL;
 };
 
 #endif
@@ -111,7 +111,7 @@ public:
     float **overlaps;
 
     /* New Info */
-    int *residuesNumber;
+//     int *residuesNumber;
     int *saveResidues;
     int *saveSequences;
 
@@ -181,7 +181,7 @@ public:
 
     bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, newAlignment * proteinAlignment);
 
-    bool alignmentSummaryHTML(char * destFile, int residues, int seqs, int * selectedRes, int * selectedSeq, float * consValues);
+    bool alignmentSummaryHTML(char* destFile, int residues, int seqs, int* selectedRes, int* selectedSeq, float* consValues, float blocks = 4.0F);
 
     bool alignmentColourHTML(ostream &file);
 

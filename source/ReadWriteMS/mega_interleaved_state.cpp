@@ -16,7 +16,7 @@ int MegaInterleavedState::CheckAlignment(istream* origin)
     char c, *firstWord = NULL, *line = NULL;
     int format = 0, blocks = 0;
     string nline;
-
+    
     /* Read first valid line in a safer way */
     do {
         line = utils::readLine(*origin);
@@ -51,6 +51,7 @@ int MegaInterleavedState::CheckAlignment(istream* origin)
         /* MEGA Sequential (22) or Interleaved (21) */
         return (!blocks) ? 0 : 1;
     }
+    delete[] line;
     return 0;
 }
 
