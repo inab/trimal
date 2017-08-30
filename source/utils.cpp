@@ -781,8 +781,8 @@ bool utils::lookForPattern(string const& column, string dataset, float level) {
   int i, j;
 
   for(i = 0; i < (int) column.size(); i++) {
-    for(j = 0; j < (int) column.size(); j++) {
-      if(toupper(column[i]) == column[j]) {
+    for(j = 0; j < (int) dataset.size(); j++) {
+      if(toupper(column[i]) == dataset[j]) {
         count++; break;
       }
     }
@@ -929,4 +929,221 @@ int utils::GetConsStep(float * consValue)
     if(*consValue >= .001)
         return 2;
     return 1;
+}
+
+void utils::printAccSVG(int * x, float * y, int num, float threshold, std::string title, std::string out)
+{
+//     threshold = 0.8F;
+//     num = 24;
+//     x = new int[24] {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23/*,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47*/};
+//     y = new float[24] 
+//       {0.6354759646 , 12.31123498 , 36.02644687 , 45.07530835 , 48.42959361 , 50.10772454 , 51.37472328 , 
+//         52.09420462 , 52.88089026 , 53.57665244 , 54.25067204 , 55.00177894 , 55.61155914 , 56.14425206 , 
+//         56.77478653 , 57.37073055 , 57.92022454 , 58.45687065 , 59.24454459 , 59.97292062 , 61.02348197 , 
+//         63.64939121 , 100, 100};
+/*        
+    num = 144;
+    x = new int[144] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143};
+    y = new float[144] 
+      {0.6354759646 , 12.31123498 , 36.02644687 , 45.07530835 , 48.42959361 , 50.10772454 , 51.37472328 , 
+        52.09420462 , 52.88089026 , 53.57665244 , 54.25067204 , 55.00177894 , 55.61155914 , 56.14425206 , 
+        56.77478653 , 57.37073055 , 57.92022454 , 58.45687065 , 59.24454459 , 59.97292062 , 61.02348197 , 
+        63.64939121 , 100, 100, 0.6354759646 , 12.31123498 , 36.02644687 , 45.07530835 , 48.42959361 , 50.10772454 , 51.37472328 , 
+        52.09420462 , 52.88089026 , 53.57665244 , 54.25067204 , 55.00177894 , 55.61155914 , 56.14425206 , 
+        56.77478653 , 57.37073055 , 57.92022454 , 58.45687065 , 59.24454459 , 59.97292062 , 61.02348197 , 
+        63.64939121 , 100, 100,
+          0.6354759646 , 12.31123498 , 36.02644687 , 45.07530835 , 48.42959361 , 50.10772454 , 51.37472328 , 
+        52.09420462 , 52.88089026 , 53.57665244 , 54.25067204 , 55.00177894 , 55.61155914 , 56.14425206 , 
+        56.77478653 , 57.37073055 , 57.92022454 , 58.45687065 , 59.24454459 , 59.97292062 , 61.02348197 , 
+        63.64939121 , 100, 100, 0.6354759646 , 12.31123498 , 36.02644687 , 45.07530835 , 48.42959361 , 50.10772454 , 51.37472328 , 
+        52.09420462 , 52.88089026 , 53.57665244 , 54.25067204 , 55.00177894 , 55.61155914 , 56.14425206 , 
+        56.77478653 , 57.37073055 , 57.92022454 , 58.45687065 , 59.24454459 , 59.97292062 , 61.02348197 , 
+        63.64939121 , 100, 100,
+        0.6354759646 , 12.31123498 , 36.02644687 , 45.07530835 , 48.42959361 , 50.10772454 , 51.37472328 , 
+        52.09420462 , 52.88089026 , 53.57665244 , 54.25067204 , 55.00177894 , 55.61155914 , 56.14425206 , 
+        56.77478653 , 57.37073055 , 57.92022454 , 58.45687065 , 59.24454459 , 59.97292062 , 61.02348197 , 
+        63.64939121 , 100, 100, 0.6354759646 , 12.31123498 , 36.02644687 , 45.07530835 , 48.42959361 , 50.10772454 , 51.37472328 , 
+        52.09420462 , 52.88089026 , 53.57665244 , 54.25067204 , 55.00177894 , 55.61155914 , 56.14425206 , 
+        56.77478653 , 57.37073055 , 57.92022454 , 58.45687065 , 59.24454459 , 59.97292062 , 61.02348197 , 
+        63.64939121 , 100, 100
+    };*/
+//     cout << "CUT POINT " << threshold << endl;
+    float xMultiplier = 300.F / num;
+    int spacer = num / 10;
+    cout << "xMultiplier = " << xMultiplier << endl << "Spacer" << spacer << endl;;
+    
+    ofstream file;
+    file.open(out);  
+
+    // svg header  
+    file    << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" height=\"175\" width=\"350px\">" << endl;
+    // Gray box
+    file    << "<rect x=\"0\" width=\"350\" y=\"0\" height=\"175\" style=\"fill:gray\"/>" << endl;
+    // White box
+    file    << "<rect x=\"25\" width=\"300\" y=\"49\" height=\"102\" style=\"fill:white\"/>" << endl;
+    // Header text
+    file    << "<text text-anchor=\"middle\" x=\"175\" y=\"31.25\">" << title << "</text>" << endl;
+    // Y Axis
+    for (int i = 0; i < 110; i+= 10)
+    {
+        // Y Axis lines
+        file    << "<line x1=\"25\" y1=\"" << 50 + i << "\" x2=\"325\" y2=\"" << 50 + i << "\" style=\"stroke:black;stroke-width:0.5\" stroke-dasharray=\"1, 1\" opacity=\"0.25\"/>" << endl;
+        // Y Axis labels
+        file    << "<text x=\"22\" y= \"" << 50 + i + 1.25F << "\" text-anchor=\"end\" font-size=\"5\">" << 100 - i << "%" << "</text>" << endl;
+    }
+    // X Axis
+    for (int i = 0; i < num; i++)
+    {
+        // X axis lines
+        file    << "<line " <<
+                    "x1=\""  << 25 + i * xMultiplier <<"\" y1=\"50\" " <<
+                    "x2=\""  << 25 + i * xMultiplier <<"\" y2=\"150\" " <<
+                    "style=\"stroke:black;stroke-width:0.5\" " <<
+                    "stroke-dasharray=\"1, 1\" " <<
+                    "opacity=\"0.125\"/>" << endl;
+        
+        // X axis labels
+        if (i % spacer == 0)
+        {
+            // Indicator rectangle
+            file    << "<rect " <<
+                    "x=\""  << 25 + i * xMultiplier <<"\" " <<
+                    "y=\"49\" " <<
+                    "width=\""<< std::max(1.F, xMultiplier) <<"\" " <<
+                    "height=\"102\" " <<
+                    "style=\"fill:gray\" " <<
+                    "opacity=\"0.125\"/>" << endl;
+                    
+            // Labels
+            file    << "<text x=\""  << 25 + (i + 0.5F) * xMultiplier <<"\" " 
+                    << "y=\"" << 160 
+                    << "\" text-anchor=\"middle\" font-size=\"5\">"
+                    << x[i]
+                    << "</text>" << endl;
+        }
+    }
+    
+    // Points Line
+    file    << "<polyline stroke-linecap=\"round\" style=\"fill:none;stroke:black;stroke-width:1\" opacity=\"0.8\" points=\"";
+    for (int i = 0; i < num; i++)
+    {
+        file    << (25 + (x[i] + 0.5F) * xMultiplier) << "," << 50 + 100 - y[i] << " ";
+    }
+    file    << "\"/>" << endl;
+    
+    // Kept
+    file    << "<rect " <<
+                "x=\""  << 25 <<"\" " <<
+                "y=\"49\" " <<
+                "width=\""<< 300 * threshold <<"\" " <<
+                "height=\""<< 102  <<"\" " <<
+                "style=\"fill:green\" " <<
+                "opacity=\"0.125\"/>" << endl;
+                
+    // Rejected
+    file    << "<rect " <<
+                "x=\""  << 25 + 300 * threshold <<"\" " <<
+                "y=\"49\" " <<
+                "width=\""<< 300 * (1.F - threshold) <<"\" " <<
+                "height=\""<< 102  <<"\" " <<
+                "style=\"fill:red\" " <<
+                "opacity=\"0.125\"/>" << endl;
+    
+    file << "</svg>";
+    file.close();
+    
+//     delete [] x;
+//     delete [] y;
+}
+
+void utils::printColSVG(float * gapScore, int num, float threshold, std::string title, std::string out)
+{
+
+    float xMultiplier = 300.F / num;
+    int spacer = num / 10;
+//     cout << "xMultiplier = " << xMultiplier << endl << "Spacer" << spacer << endl;;
+    cout << "N = " << num << endl;
+    
+    ofstream file;
+    file.open(out);  
+
+    // svg header  
+    file    << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" height=\"175\" width=\"350px\">" << endl;
+    // Gray box
+    file    << "<rect x=\"0\" width=\"350\" y=\"0\" height=\"175\" style=\"fill:gray\"/>" << endl;
+    // White box
+    file    << "<rect x=\"25\" width=\"300\" y=\"49\" height=\"102\" style=\"fill:white\"/>" << endl;
+    // Header text
+    file    << "<text text-anchor=\"middle\" x=\"175\" y=\"31.25\">" << title << "</text>" << endl;
+    // Y Axis
+    for (int i = 0; i < 11; i+= 1)
+    {
+        // Y Axis lines
+        file    << "<line x1=\"25\" y1=\"" << 50 + i * 10 << "\" x2=\"325\" y2=\"" << 50 + i * 10 << "\" style=\"stroke:black;stroke-width:0.5\" stroke-dasharray=\"1, 1\" opacity=\"0.25\"/>" << endl;
+        // Y Axis labels
+        file    << "<text x=\"22\" y= \"" << 50 + i * 10 + 1.25F << "\" text-anchor=\"end\" font-size=\"5\">" << 1 - i * 0.1F << "</text>" << endl;
+    }
+    // X Axis
+    for (int i = 0; i < num; i++)
+    {
+        // X axis lines
+        file    << "<line " <<
+                    "x1=\""  << 25 + i * xMultiplier <<"\" y1=\"50\" " <<
+                    "x2=\""  << 25 + i * xMultiplier <<"\" y2=\"150\" " <<
+                    "style=\"stroke:black;stroke-width:0.5\" " <<
+                    "stroke-dasharray=\"1, 1\" " <<
+                    "opacity=\"0.125\"/>" << endl;
+        
+        // X axis labels
+        if (i % spacer == 0)
+        {
+            // Indicator rectangle
+            file    << "<rect " <<
+                    "x=\""  << 25 + i * xMultiplier <<"\" " <<
+                    "y=\"49\" " <<
+                    "width=\""<< std::max(1.F, xMultiplier) <<"\" " <<
+                    "height=\"102\" " <<
+                    "style=\"fill:gray\" " <<
+                    "opacity=\"0.125\"/>" << endl;
+                    
+            // Labels
+            file    << "<text x=\""  << 25 + (i + 0.5F) * xMultiplier <<"\" " 
+                    << "y=\"" << 160 
+                    << "\" text-anchor=\"middle\" font-size=\"5\">"
+                    << i
+                    << "</text>" << endl;
+        }
+    }
+    
+    // Points Line
+    file    << "<polyline stroke-linecap=\"round\" style=\"fill:none;stroke:black;stroke-width:1\" opacity=\"0.8\" points=\"";
+    for (int i = 0; i < num; i++)
+    {
+        file    << 25 + (i + 0.5F) * xMultiplier << "," << 50 + 100 - gapScore[i] << " ";
+    }
+    file    << "\"/>" << endl;
+    
+    // Kept
+    file    << "<rect " <<
+                "x=\"25\" " <<
+                "y=\""<< 49 <<"\" " <<
+                "width=\"300\" " <<
+                "height=\""<< 1 + 100 * threshold  <<"\" " <<
+                "style=\"fill:green\" " <<
+                "opacity=\"0.125\"/>" << endl;
+                
+    // Rejected
+    file    << "<rect " <<
+                "x=\"25\" " <<
+                "y=\""<< 50 + 100 * threshold <<"\" " <<
+                "width=\"300\" " <<
+                "height=\""<< 101 - 100 * threshold <<"\" " <<
+                "style=\"fill:red\" " <<
+                "opacity=\"0.125\"/>" << endl;
+    
+    file << "</svg>";
+    file.close();
+//     
+//     delete [] x;
+//     delete [] y;
 }

@@ -1642,6 +1642,40 @@ inline void trimAlManager::print_statistics()
     if(sgc)
     {
         origAlig -> Statistics -> printStatisticsGapsColumns();
+        {
+            if(origAlig -> Statistics -> calculateGapStats())
+            {
+                int *vectAux;
+                float * gapScores = new float[origAlig -> sgaps -> columns];
+                
+                float inverseColumnLength = 1.F / origAlig -> sgaps ->columnLength;
+
+                /* We allocate a local vector to recovery information on it */
+                vectAux = new int[origAlig -> sgaps -> columns];
+
+                /* We decide about the information's source then we get the information. */
+                if(origAlig -> sgaps ->halfWindow == 0)
+                    vectAux = origAlig -> sgaps -> gapsInColumn;
+                else
+                    vectAux = origAlig -> sgaps -> gapsWindow;
+
+
+                /* Show the information that have been requered */
+                for(int i = 0; i < origAlig -> sgaps ->columns; i++)
+                {
+                    gapScores[i] = 100 - (vectAux[i] * 100.0) * inverseColumnLength;
+                }
+                
+                utils::printColSVG(
+                gapScores, 
+                origAlig -> sgaps -> columns,
+                gapThreshold, 
+                "Column Gap Scores", 
+                "Column Gap Scores.svg");
+
+            }
+
+        }
         stats++;
         if(stats < -1)
             cout << endl;
@@ -1650,6 +1684,30 @@ inline void trimAlManager::print_statistics()
     if(sgt)
     {
         origAlig -> Statistics -> printStatisticsGapsTotal();
+        {
+            int * gaps = new int[origAlig -> sgaps -> maxGaps + 1];
+            float * accGaps = new float[origAlig -> sgaps -> maxGaps + 1];
+            float inverseColumnLength = 1.F / origAlig-> sgaps -> columns;
+
+            for(int i = 0, acm = 0; i <= origAlig -> sgaps -> maxGaps; i++) {
+
+                acm += origAlig -> sgaps -> numColumnsWithGaps[i];
+                
+                gaps[i] = i;
+                accGaps[i] = ((float)acm * 100.F) * inverseColumnLength;
+                
+            }
+            utils::printAccSVG(
+                gaps, 
+                accGaps, 
+                origAlig -> sgaps -> maxGaps + 1, 
+                gapThreshold, 
+                "Total Gap Scores", 
+                "Total Gap Scores.svg");
+            
+            delete [] gaps; 
+            delete [] accGaps;
+        }
         stats++;
         if(stats < -1)
             cout << endl;

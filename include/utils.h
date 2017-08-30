@@ -356,6 +356,26 @@ static void quicksort(int ** vect, int ini, int fin);
     * \return Int representing the classification of this gap value.
     */
     static int GetConsStep(float * consValue);
+    
+    /**
+     \brief Function to print accumulated information
+     \param x X axis values
+     \param y Y axis values
+     \param threshold Value (0-1) where to place the kept/rejected green/red boxes
+     \param title Graph title
+     \param out Filename where to store the file.
+     */
+    static void printAccSVG(int * x, float * y, int num, float threshold, std::string title, std::string out);
+    
+    /**
+     \brief Function to print column information
+     \param x X axis values
+     \param y Y axis values
+     \param threshold Value (0-1) where to place the kept/rejected green/red boxes
+     \param title Graph title
+     \param out Filename where to store the file.
+     */
+    static void printColSVG(float * gapScore, int num, float threshold, std::string title, std::string out);
 };
 
 

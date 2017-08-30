@@ -42,7 +42,7 @@ using namespace std;
 /* ***************************************************************************************************************** */
 
 class statisticsGaps {
-
+public:
   int columns;
   int columnLength;
   int maxGaps;
