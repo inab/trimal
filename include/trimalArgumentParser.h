@@ -110,8 +110,11 @@ class trimAlManager
     *statsSimAccFile    = NULL,
     *statsSimColFile    = NULL,
     
-    *statsConAccFile    = NULL,
-    *statsConColFile    = NULL,
+//     *statsConAccFile    = NULL,
+//     *statsConColFile    = NULL,
+    
+    *statsSumOfPairsAccFile     = NULL,
+    *statsSumOfPairsColFile     = NULL,
     
     *matrixFile         = NULL,
              

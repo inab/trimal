@@ -1159,7 +1159,7 @@ void utils::streamAccSVG(int * x, float * y, int num, float * threshold, std::st
         
         xMultiplier = 300.F / num;
         int spacer = num / 10;
-        cout << "xMultiplier = " << xMultiplier << endl << "Spacer" << spacer << endl;;
+//         cout << "xMultiplier = " << xMultiplier << endl << "Spacer" << spacer << endl;;
         
         file.open(*out);  
 
@@ -1265,7 +1265,7 @@ void utils::streamColSVG(float * y, int num, float * threshold, std::string * ti
         i = 0;
         xMultiplier = 300.F / num;
         spacer = num / 10;
-        cout << "N = " << num << endl;
+//         cout << "N = " << num << endl;
         
         file.open(*out);  
 
@@ -1276,7 +1276,7 @@ void utils::streamColSVG(float * y, int num, float * threshold, std::string * ti
         // White box
         file    << "<rect x=\"25\" width=\"300\" y=\"49\" height=\"102\" style=\"fill:white\"/>" << endl;
         // Header text
-        file    << "<text text-anchor=\"middle\" x=\"175\" y=\"31.25\">" << title << "</text>" << endl;
+        file    << "<text text-anchor=\"middle\" x=\"175\" y=\"31.25\">" << *title << "</text>" << endl;
         // Y Axis
         for (int i = 0; i < 11; i+= 1)
         {
@@ -1323,7 +1323,7 @@ void utils::streamColSVG(float * y, int num, float * threshold, std::string * ti
     
     if (y != NULL)
     {
-        file    << 25 + (i + 0.5F) * xMultiplier << "," << 50 + 100 - y[i] << " ";
+        file    << 25 + (i + 0.5F) * xMultiplier << "," << 50 + 100 - *y << " ";
         i++;
         return;
     }

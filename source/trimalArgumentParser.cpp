@@ -783,40 +783,127 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
     // This argument means two thing
     if((!strcmp(argv[*i], "-sgc")) )
     {
-//         if ((*i) + 1 != *argc)
-//         {
-//             if (argv[++*i][0] == '-')
-//             {
-//                 (*i)--;
-//             }
-//             
-//             else if (!statsGapsColFile)
-//             {
-//                 cout << "A svg filename " << argv[*i] << endl;
-//                 exit(0);
-//             }
-//         }
-//         
-//         if (!sgc)
-//         {
-//         }
+        // Check if it's the last argument. If it is, don't bother: User is asking console reporting
+        if ((*i) + 1 != *argc)
+        {
+            // If the next argument passed starts with '-' don't bother: User is asking console reporting
+            if (argv[++*i][0] == '-')
+            {
+                (*i)--;
+            }
+            // Else, the user is requesting SVG reporting
+            else if (!statsGapsColFile)
+            {
+                statsGapsColFile = argv[*i];
+                return true;
+            }
+            // If the user has given a filename previously, fail.
+            else
+            {
+                return false;
+            }
+        }
+        
+        if (!sgc)
+        {
             sgc = true;
             stats--;
+        }
+        
+        else return false;
     }
-    else if((!strcmp(argv[*i], "-sgt")) && (!sgt))
+    else if((!strcmp(argv[*i], "-sgt")) )
     {
-        sgt = true;
-        stats--;
+        // Check if it's the last argument. If it is, don't bother: User is asking console reporting
+        if ((*i) + 1 != *argc)
+        {
+            // If the next argument passed starts with '-' don't bother: User is asking console reporting
+            if (argv[++*i][0] == '-')
+            {
+                (*i)--;
+            }
+            // Else, the user is requesting SVG reporting
+            else if (!statsGapsAccFile)
+            {
+                statsGapsAccFile = argv[*i];
+                return true;
+            }
+            // If the user has given a filename previously, fail.
+            else
+            {
+                return false;
+            }
+        }
+        
+        if(!sgt)
+        {
+            sgt = true;
+            stats--;
+        }
+        
+        else return false;
     }
-    else if((!strcmp(argv[*i], "-ssc")) && (!scc))
+    else if((!strcmp(argv[*i], "-ssc")) )
     {
-        scc = true;
-        stats--;
+        // Check if it's the last argument. If it is, don't bother: User is asking console reporting
+        if ((*i) + 1 != *argc)
+        {
+            // If the next argument passed starts with '-' don't bother: User is asking console reporting
+            if (argv[++*i][0] == '-')
+            {
+                (*i)--;
+            }
+            // Else, the user is requesting SVG reporting
+            else if (!statsSimColFile)
+            {
+                statsSimColFile = argv[*i];
+                return true;
+            }
+            // If the user has given a filename previously, fail.
+            else
+            {
+                return false;
+            }
+        }
+        
+        if(!scc)
+        {
+            scc = true;
+            stats--;
+        }
+        
+        else return false;
     }
-    else if((!strcmp(argv[*i], "-sst")) && (!sct))
+    else if((!strcmp(argv[*i], "-sst")) )
     {
-        sct = true;
-        stats--;
+        // Check if it's the last argument. If it is, don't bother: User is asking console reporting
+        if ((*i) + 1 != *argc)
+        {
+            // If the next argument passed starts with '-' don't bother: User is asking console reporting
+            if (argv[++*i][0] == '-')
+            {
+                (*i)--;
+            }
+            // Else, the user is requesting SVG reporting
+            else if (!statsSimAccFile)
+            {
+                statsSimAccFile = argv[*i];
+                return true;
+            }
+            // If the user has given a filename previously, fail.
+            else
+            {
+                return false;
+            }
+        }
+        
+        if(!sct)
+        {
+            sct = true;
+            stats--;
+        }
+        
+        else return false;
     }
     else if((!strcmp(argv[*i], "-sident")) && (!sident))
     {
@@ -828,15 +915,67 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
         soverlap = true;
         stats--;
     }
-    else if((!strcmp(argv[*i], "-sfc")) && (!sfc))
+    else if((!strcmp(argv[*i], "-sfc")) )
     {
-        sfc = true;
-        stats--;
+// //         // Check if it's the last argument. If it is, don't bother: User is asking console reporting
+// //         if ((*i) + 1 != *argc)
+// //         {
+// //             // If the next argument passed starts with '-' don't bother: User is asking console reporting
+// //             if (argv[++*i][0] == '-')
+// //             {
+// //                 (*i)--;
+// //             }
+// //             // Else, the user is requesting SVG reporting
+// //             else if (!statsSumOfPairsColFile)
+// //             {
+// //                 statsSumOfPairsColFile = argv[*i];
+// //                 return true;
+// //             }
+// //             // If the user has given a filename previously, fail.
+// //             else
+// //             {
+// //                 return false;
+// //             }
+// //         }
+        
+        if(!sfc)
+        {
+            sfc = true;
+            stats--;
+        }
+        
+        else return false;
     }
-    else if((!strcmp(argv[*i], "-sft")) && (!sft))
+    else if((!strcmp(argv[*i], "-sft")) )
     {
-        sft = true;
-        stats--;
+// //         // Check if it's the last argument. If it is, don't bother: User is asking console reporting
+// //         if ((*i) + 1 != *argc)
+// //         {
+// //             // If the next argument passed starts with '-' don't bother: User is asking console reporting
+// //             if (argv[++*i][0] == '-')
+// //             {
+// //                 (*i)--;
+// //             }
+// //             // Else, the user is requesting SVG reporting
+// //             else if (!statsSumOfPairsAccFile)
+// //             {
+// //                 statsSumOfPairsAccFile = argv[*i];
+// //                 return true;
+// //             }
+// //             // If the user has given a filename previously, fail.
+// //             else
+// //             {
+// //                 return false;
+// //             }
+// //         }
+        
+        if(!sft)
+        {
+            sft = true;
+            stats--;
+        }
+        
+        else return false;
     }
     else 
         return false;
@@ -1270,15 +1409,39 @@ inline bool trimAlManager::check_similarity_matrix()
 
 inline bool trimAlManager::check_outputs_coincidence()
 {
-    if((htmlOutFile != NULL) && (outfile != NULL) && (!appearErrors))
+    
+    std::array<char*,8> outFiles 
+        {{htmlOutFile, outfile, statsGapsAccFile, statsGapsColFile, statsSimAccFile, statsSimColFile, statsSumOfPairsAccFile, statsSumOfPairsColFile}};
+    std::array<string,8> outFilesNames 
+        {{"html (-htmlout)", "output (-out)", "stats Gaps Total (-sgt X)", "stats Gaps Col (-sgc X)", "stats Sim Total (-sst X)", "stats Sim Col (-ssc X)", "stats Sum Of Pairs Total (-sft X)", "stats Sum Of Pairs Col (-sfc X)"}};
+    
+    for (int i = 0, x = 0; i < outFiles.size(); i++)
     {
-        if(!strcmp(htmlOutFile, outfile))
-        {
-            cerr << endl << "ERROR: The output and html files should not be the same." << endl << endl;
-            appearErrors = true;
-            return true;
-        }
+        if (outFiles.at(i) != NULL)
+            for (x = i + 1; x < outFiles.size(); x++)
+            {
+                if (outFiles.at(x) != NULL)
+                    if (!strcmp(outFiles.at(i), outFiles.at(x)))
+                    {
+                        cerr << endl << "ERROR: The " << outFilesNames.at(i) << " and " << outFilesNames.at(x) << " files should not be the same." << endl << endl;
+                        appearErrors = true;
+                    }
+            }
     }
+        
+    
+//     if((htmlOutFile != NULL)  && (!appearErrors))
+//     {
+//         if (outfile != NULL)
+//         {
+//             if(!strcmp(htmlOutFile, outfile))
+//             {
+//                 cerr << endl << "ERROR: The output and html files should not be the same." << endl << endl;
+//                 appearErrors = true;
+//                 return true;
+//             }
+//         }
+//     }
     return false;
 }
 
@@ -1660,64 +1823,66 @@ inline void trimAlManager::print_statistics()
     if(sgc)
     {
         origAlig -> Statistics -> printStatisticsGapsColumns();
-        {
-            if(origAlig -> Statistics -> calculateGapStats())
-            {
-                int *vectAux;
-                
-                float inverseColumnLength = 1.F / origAlig -> sgaps ->columnLength;
-                std::string title = "Column Gap Scores";
-                std::string filename = "Column Gap Scores.svg";
-                float gapScore;
-                
-                utils::streamColSVG(NULL, origAlig -> sgaps -> columns, NULL, & title, & filename);
-
-                /* We decide about the information's source then we get the information. */
-                if(origAlig -> sgaps ->halfWindow == 0)
-                    vectAux = origAlig -> sgaps -> gapsInColumn;
-                else
-                    vectAux = origAlig -> sgaps -> gapsWindow;
-
-                /* Show the information that have been requered */
-                for(int i = 0; i < origAlig -> sgaps ->columns; i++)
-                {
-                    gapScore = 100 - (vectAux[i] * 100.0) * inverseColumnLength;
-                    utils::streamColSVG(& gapScore, 0, NULL, NULL, NULL);
-                }
-                
-                utils::streamColSVG(NULL, -1, & gapThreshold, NULL, NULL);
-
-            }
-
-        }
         stats++;
         if(stats < -1)
             cout << endl;
+    }
+    
+    if (statsGapsColFile != NULL)
+    {
+        if(origAlig -> Statistics -> calculateGapStats())
+        {
+            int *vectAux;
+            
+            float inverseColumnLength = 1.F / origAlig -> sgaps ->columnLength;
+            std::string title = "Column Gap Scores";
+            std::string filename = statsGapsColFile;
+            float gapScore;
+            
+            utils::streamColSVG(NULL, origAlig -> sgaps -> columns, NULL, & title, & filename);
+
+            /* We decide about the information's source then we get the information. */
+            if(origAlig -> sgaps ->halfWindow == 0)
+                vectAux = origAlig -> sgaps -> gapsInColumn;
+            else
+                vectAux = origAlig -> sgaps -> gapsWindow;
+
+            /* Show the information that have been requered */
+            for(int i = 0; i < origAlig -> sgaps ->columns; i++)
+            {
+                gapScore = 100 - (vectAux[i] * 100.0) * inverseColumnLength;
+                utils::streamColSVG(& gapScore, 0, NULL, NULL, NULL);
+            }
+            
+            utils::streamColSVG(NULL, -1, & gapThreshold, NULL, NULL);
+        }
     }
 
     if(sgt)
     {
         origAlig -> Statistics -> printStatisticsGapsTotal();
-        {
-            std::string title = "Total Gap Scores";
-            std::string filename = "Total Gap Scores.svg";
-            
-            utils::streamAccSVG(NULL, NULL, origAlig -> sgaps -> maxGaps + 1, NULL, & title, & filename);
-
-            float inverseColumnLength = 100.F / origAlig-> sgaps -> columns;
-            float accGaps;
-
-            for(int i = 0, acm = 0; i <= origAlig -> sgaps -> maxGaps; i++) {
-
-                acm += origAlig -> sgaps -> numColumnsWithGaps[i];
-                accGaps = acm * inverseColumnLength;
-                utils::streamAccSVG(& i, & accGaps, 0, NULL, NULL, NULL);
-            }
-            utils::streamAccSVG(NULL, NULL, -1, & gapThreshold, NULL, NULL);
-        }
         stats++;
         if(stats < -1)
             cout << endl;
+    }
+    
+    if (statsGapsAccFile != NULL)
+    {
+        std::string title = "Total Gap Scores";
+        std::string filename = statsGapsAccFile;
+        
+        utils::streamAccSVG(NULL, NULL, origAlig -> sgaps -> maxGaps + 1, NULL, & title, & filename);
+
+        float inverseColumnLength = 100.F / origAlig-> sgaps -> columns;
+        float accGaps;
+
+        for(int i = 0, acm = 0; i <= origAlig -> sgaps -> maxGaps; i++) {
+
+            acm += origAlig -> sgaps -> numColumnsWithGaps[i];
+            accGaps = acm * inverseColumnLength;
+            utils::streamAccSVG(& i, & accGaps, 0, NULL, NULL, NULL);
+        }
+        utils::streamAccSVG(NULL, NULL, -1, & gapThreshold, NULL, NULL);
     }
 
     if(scc)

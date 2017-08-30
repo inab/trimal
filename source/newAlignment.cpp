@@ -1555,17 +1555,17 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
     int * gapsValues = NULL;
     if (sgaps != NULL)
         gapsValues = sgaps -> getGapsWindow();
-    cout << "GAPS " << ((sgaps == NULL) ? "NULL" : "NOT NULL") << endl;
+//     cout << "GAPS " << ((sgaps == NULL) ? "NULL" : "NOT NULL") << endl;
     float * simValues = NULL;
     if (scons != NULL)
         simValues = scons -> getMdkwVector();
-    cout << "SIMS " << ((scons == NULL) ? "NULL" : "NOT NULL") << endl;
+//     cout << "SIMS " << ((scons == NULL) ? "NULL" : "NOT NULL") << endl;
     
-    cout << "CONS " << ((consValues == NULL) ? "NULL" : "NOT NULL") << endl;
+//     cout << "CONS " << ((consValues == NULL) ? "NULL" : "NOT NULL") << endl;
     
     // Check if alignment is aligned;
     if (!isAligned) {
-        cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
+//         cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
         return false;
     }
 
