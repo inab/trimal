@@ -104,7 +104,7 @@ inline void trimAlManager::info_arguments(int *argc, char *argv[], int *i)
 
 inline bool trimAlManager::in_argument(int *argc, char *argv[], int *i)
 {
-    if(!strcmp(argv[*i], "-in") && (i+1 != argc) && (infile == NULL))
+    if(!strcmp(argv[*i], "-in") && ((*i)+1 != *argc) && (infile == NULL))
     {
         argumentLength = strlen(argv[++*i]);
         infile = new char[argumentLength + 1];
@@ -122,7 +122,7 @@ inline bool trimAlManager::in_argument(int *argc, char *argv[], int *i)
 
 inline bool trimAlManager::out_argument(int *argc, char *argv[], int *i)
 {
-    if((!strcmp(argv[*i], "-out")) && (i+1 != argc) && (outfile == NULL))
+    if((!strcmp(argv[*i], "-out")) && ((*i)+1 != *argc) && (outfile == NULL))
     {
         argumentLength = strlen(argv[++*i]);
         outfile = new char[argumentLength + 1];
@@ -134,7 +134,7 @@ inline bool trimAlManager::out_argument(int *argc, char *argv[], int *i)
 
 inline bool trimAlManager::html_out_argument(int *argc, char *argv[], int *i)
 {
-    if((!strcmp(argv[*i], "-htmlout")) && (i+1 != argc) && (htmlOutFile == NULL))
+    if((!strcmp(argv[*i], "-htmlout")) && ((*i)+1 != *argc) && (htmlOutFile == NULL))
     {
         argumentLength = strlen(argv[++*i]);
         htmlOutFile = new char[argumentLength + 1];
@@ -268,14 +268,14 @@ bool trimAlManager::out_format_arguments(int *argc, char *argv[], int *i)
 
 inline bool trimAlManager::matrix_argument(int *argc, char *argv[], int *i)
 {
-    if(!strcmp(argv[*i], "-matrix") && (i+1 != argc) && (matrixFile == NULL))
+    if(!strcmp(argv[*i], "-matrix") && ((*i)+1 != *argc) && (matrixFile == NULL))
     {
         argumentLength = strlen(argv[++*i]);
         matrixFile = new char[argumentLength + 1];
         strcpy(matrixFile, argv[*i]);
         return true;
     }
-    else if(!strcmp(argv[*i], "--alternative_matrix") && (i+1 != argc) && (alternative_matrix == -1)) {
+    else if(!strcmp(argv[*i], "--alternative_matrix") && ((*i)+1 != *argc) && (alternative_matrix == -1)) {
       i++;
       if (!strcmp(argv[*i], "degenerated_nt_identity"))
         alternative_matrix = 1;
@@ -289,7 +289,7 @@ inline bool trimAlManager::matrix_argument(int *argc, char *argv[], int *i)
 
 inline bool trimAlManager::compareset_argument(int *argc, char *argv[], int *i)
 {
-    if(!strcmp(argv[*i], "-compareset") && (i+1 != argc) && (compareset == -1))
+    if(!strcmp(argv[*i], "-compareset") && ((*i)+1 != *argc) && (compareset == -1))
     {
         compare.open(argv[++*i], ifstream::in);
         if(!compare)
@@ -310,7 +310,7 @@ inline bool trimAlManager::compareset_argument(int *argc, char *argv[], int *i)
 
 inline bool trimAlManager::force_select_argument(int *argc, char *argv[], int *i)
 {
-    if(!strcmp(argv[*i], "-forceselect") && (i+1 != argc) && (forceFile == NULL))
+    if(!strcmp(argv[*i], "-forceselect") && ((*i)+1 != *argc) && (forceFile == NULL))
     {
         argumentLength = strlen(argv[++*i]);
         forceFile = new char[argumentLength + 1];
@@ -328,7 +328,7 @@ inline bool trimAlManager::force_select_argument(int *argc, char *argv[], int *i
 
 inline bool trimAlManager::back_trans_argument(int *argc, char *argv[], int *i)
 {
-    if(!strcmp(argv[*i], "-backtrans") && (i+1 != argc) && (backtransFile == NULL))
+    if(!strcmp(argv[*i], "-backtrans") && ((*i)+1 != *argc) && (backtransFile == NULL))
     {
         argumentLength = strlen(argv[++*i]);
         backtransFile = new char[argumentLength + 1];
@@ -346,7 +346,7 @@ inline bool trimAlManager::back_trans_argument(int *argc, char *argv[], int *i)
 
 inline bool trimAlManager::gap_threshold_argument(int *argc, char *argv[], int *i)
 {
-    if((!strcmp(argv[*i], "-gapthreshold") || !strcmp(argv[*i], "-gt")) && (i+1 != argc) && (gapThreshold == -1))
+    if((!strcmp(argv[*i], "-gapthreshold") || !strcmp(argv[*i], "-gt")) && ((*i)+1 != *argc) && (gapThreshold == -1))
     {
         if(utils::isNumber(argv[++*i]))
         {
@@ -369,7 +369,7 @@ inline bool trimAlManager::gap_threshold_argument(int *argc, char *argv[], int *
 
 inline bool trimAlManager::similarity_threshold_argument(int *argc, char *argv[], int *i)
 {
-    if((!strcmp(argv[*i], "-simthreshold") || !strcmp(argv[*i], "-st")) && (i+1 != argc) && (similarityThreshold == -1))
+    if((!strcmp(argv[*i], "-simthreshold") || !strcmp(argv[*i], "-st")) && ((*i)+1 != *argc) && (similarityThreshold == -1))
     {
         if(utils::isNumber(argv[++*i]))
         {
@@ -392,7 +392,7 @@ inline bool trimAlManager::similarity_threshold_argument(int *argc, char *argv[]
 
 inline bool trimAlManager::consistency_threshold_argument(int *argc, char *argv[], int *i)
 {
-    if((!strcmp(argv[*i], "-conthreshold") || !strcmp(argv[*i], "-ct")) && (i+1 != argc) && (consistencyThreshold == -1))
+    if((!strcmp(argv[*i], "-conthreshold") || !strcmp(argv[*i], "-ct")) && ((*i)+1 != *argc) && (consistencyThreshold == -1))
     {
         if(utils::isNumber(argv[++*i]))
         {
@@ -415,7 +415,7 @@ inline bool trimAlManager::consistency_threshold_argument(int *argc, char *argv[
 
 inline bool trimAlManager::conservation_threshold_argument(int *argc, char *argv[], int *i)
 {
-    if((!strcmp(argv[*i], "-cons")) && (i+1 != argc) && (conservationThreshold == -1))
+    if((!strcmp(argv[*i], "-cons")) && ((*i)+1 != *argc) && (conservationThreshold == -1))
     {
         if(utils::isNumber(argv[++*i]))
         {
@@ -542,7 +542,7 @@ inline bool trimAlManager::automated1_argument(int *argc, char *argv[], int *i)
 
 inline bool trimAlManager::residue_overlap_argument(int *argc, char *argv[], int *i)
 {
-    if((!strcmp(argv[*i], "-resoverlap")) && (i+1 != argc) && (residuesOverlap == -1))
+    if((!strcmp(argv[*i], "-resoverlap")) && ((*i)+1 != *argc) && (residuesOverlap == -1))
     {
         if(utils::isNumber(argv[++*i]))
         {
@@ -565,7 +565,7 @@ inline bool trimAlManager::residue_overlap_argument(int *argc, char *argv[], int
 
 inline bool trimAlManager::sequence_overlap_argument(int *argc, char *argv[], int *i)
 {
-    if((!strcmp(argv[*i], "-seqoverlap")) && (i+1 != argc) && (sequenceOverlap == -1))
+    if((!strcmp(argv[*i], "-seqoverlap")) && ((*i)+1 != *argc) && (sequenceOverlap == -1))
     {
         if(utils::isNumber(argv[++*i]))
         {
@@ -605,7 +605,7 @@ bool trimAlManager::seqs_select_argument(int *argc, char *argv[], int *i)
 
 inline bool trimAlManager::max_identity_argument(int *argc, char *argv[], int *i)
 {
-    if((!strcmp(argv[*i], "-maxidentity")) && (i+1 != argc) && (maxIdentity == -1))
+    if((!strcmp(argv[*i], "-maxidentity")) && ((*i)+1 != *argc) && (maxIdentity == -1))
     {
 
         if(utils::isNumber(argv[++*i]))
@@ -630,7 +630,7 @@ inline bool trimAlManager::max_identity_argument(int *argc, char *argv[], int *i
 
 inline bool trimAlManager::clusters_argument(int *argc, char *argv[], int *i)
 {
-    if((!strcmp(argv[*i], "-clusters")) && (i+1 != argc) && (clusters == -1))
+    if((!strcmp(argv[*i], "-clusters")) && ((*i)+1 != *argc) && (clusters == -1))
     {
         if(utils::isNumber(argv[++*i]))
         {
@@ -664,7 +664,7 @@ inline bool trimAlManager::terminal_only_argument(int *argc, char *argv[], int *
 
 inline bool trimAlManager::window_argument(int *argc, char *argv[], int *i)
 {
-    if(!strcmp(argv[*i], "-w") && (i+1 != argc) && (windowSize == -1))
+    if(!strcmp(argv[*i], "-w") && ((*i)+1 != *argc) && (windowSize == -1))
     {
         if(utils::isNumber(argv[*i+1]))
         {
@@ -687,7 +687,7 @@ inline bool trimAlManager::window_argument(int *argc, char *argv[], int *i)
 
 inline bool trimAlManager::gap_window_argument(int *argc, char *argv[], int *i)
 {
-    if(!strcmp(argv[*i], "-gw") && (i+1 != argc) && (gapWindow == -1))
+    if(!strcmp(argv[*i], "-gw") && ((*i)+1 != *argc) && (gapWindow == -1))
     {
         if(utils::isNumber(argv[*i+1]))
         {
@@ -710,7 +710,7 @@ inline bool trimAlManager::gap_window_argument(int *argc, char *argv[], int *i)
 
 inline bool trimAlManager::similarity_window_argument(int *argc, char *argv[], int *i)
 {
-    if(!strcmp(argv[*i], "-sw") && (i+1 != argc) && (similarityWindow == -1))
+    if(!strcmp(argv[*i], "-sw") && ((*i)+1 != *argc) && (similarityWindow == -1))
     {
         if(utils::isNumber(argv[*i+1]))
         {
@@ -734,7 +734,7 @@ inline bool trimAlManager::similarity_window_argument(int *argc, char *argv[], i
 
 inline bool trimAlManager::consistency_window_argument(int *argc, char *argv[], int *i)
 {
-    if(!strcmp(argv[*i], "-cw") && (i+1 != argc) && (consistencyWindow == -1))
+    if(!strcmp(argv[*i], "-cw") && ((*i)+1 != *argc) && (consistencyWindow == -1))
     {
         if(utils::isNumber(argv[*i+1]))
         {
@@ -757,7 +757,7 @@ inline bool trimAlManager::consistency_window_argument(int *argc, char *argv[], 
 
 inline bool trimAlManager::block_argument(int *argc, char *argv[], int *i)
 {
-    if(!strcmp(argv[*i], "-block") && (i+1 != argc) && (blockSize == -1))
+    if(!strcmp(argv[*i], "-block") && ((*i)+1 != *argc) && (blockSize == -1))
     {
         if(utils::isNumber(argv[*i+1]))
         {
@@ -780,10 +780,28 @@ inline bool trimAlManager::block_argument(int *argc, char *argv[], int *i)
 
 inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
 {
-    if((!strcmp(argv[*i], "-sgc")) && (!sgc))
+    // This argument means two thing
+    if((!strcmp(argv[*i], "-sgc")) )
     {
-        sgc = true;
-        stats--;
+//         if ((*i) + 1 != *argc)
+//         {
+//             if (argv[++*i][0] == '-')
+//             {
+//                 (*i)--;
+//             }
+//             
+//             else if (!statsGapsColFile)
+//             {
+//                 cout << "A svg filename " << argv[*i] << endl;
+//                 exit(0);
+//             }
+//         }
+//         
+//         if (!sgc)
+//         {
+//         }
+            sgc = true;
+            stats--;
     }
     else if((!strcmp(argv[*i], "-sgt")) && (!sgt))
     {
@@ -1646,12 +1664,13 @@ inline void trimAlManager::print_statistics()
             if(origAlig -> Statistics -> calculateGapStats())
             {
                 int *vectAux;
-                float * gapScores = new float[origAlig -> sgaps -> columns];
                 
                 float inverseColumnLength = 1.F / origAlig -> sgaps ->columnLength;
-
-                /* We allocate a local vector to recovery information on it */
-                vectAux = new int[origAlig -> sgaps -> columns];
+                std::string title = "Column Gap Scores";
+                std::string filename = "Column Gap Scores.svg";
+                float gapScore;
+                
+                utils::streamColSVG(NULL, origAlig -> sgaps -> columns, NULL, & title, & filename);
 
                 /* We decide about the information's source then we get the information. */
                 if(origAlig -> sgaps ->halfWindow == 0)
@@ -1659,19 +1678,14 @@ inline void trimAlManager::print_statistics()
                 else
                     vectAux = origAlig -> sgaps -> gapsWindow;
 
-
                 /* Show the information that have been requered */
                 for(int i = 0; i < origAlig -> sgaps ->columns; i++)
                 {
-                    gapScores[i] = 100 - (vectAux[i] * 100.0) * inverseColumnLength;
+                    gapScore = 100 - (vectAux[i] * 100.0) * inverseColumnLength;
+                    utils::streamColSVG(& gapScore, 0, NULL, NULL, NULL);
                 }
                 
-                utils::printColSVG(
-                gapScores, 
-                origAlig -> sgaps -> columns,
-                gapThreshold, 
-                "Column Gap Scores", 
-                "Column Gap Scores.svg");
+                utils::streamColSVG(NULL, -1, & gapThreshold, NULL, NULL);
 
             }
 
@@ -1685,28 +1699,21 @@ inline void trimAlManager::print_statistics()
     {
         origAlig -> Statistics -> printStatisticsGapsTotal();
         {
-            int * gaps = new int[origAlig -> sgaps -> maxGaps + 1];
-            float * accGaps = new float[origAlig -> sgaps -> maxGaps + 1];
-            float inverseColumnLength = 1.F / origAlig-> sgaps -> columns;
+            std::string title = "Total Gap Scores";
+            std::string filename = "Total Gap Scores.svg";
+            
+            utils::streamAccSVG(NULL, NULL, origAlig -> sgaps -> maxGaps + 1, NULL, & title, & filename);
+
+            float inverseColumnLength = 100.F / origAlig-> sgaps -> columns;
+            float accGaps;
 
             for(int i = 0, acm = 0; i <= origAlig -> sgaps -> maxGaps; i++) {
 
                 acm += origAlig -> sgaps -> numColumnsWithGaps[i];
-                
-                gaps[i] = i;
-                accGaps[i] = ((float)acm * 100.F) * inverseColumnLength;
-                
+                accGaps = acm * inverseColumnLength;
+                utils::streamAccSVG(& i, & accGaps, 0, NULL, NULL, NULL);
             }
-            utils::printAccSVG(
-                gaps, 
-                accGaps, 
-                origAlig -> sgaps -> maxGaps + 1, 
-                gapThreshold, 
-                "Total Gap Scores", 
-                "Total Gap Scores.svg");
-            
-            delete [] gaps; 
-            delete [] accGaps;
+            utils::streamAccSVG(NULL, NULL, -1, & gapThreshold, NULL, NULL);
         }
         stats++;
         if(stats < -1)

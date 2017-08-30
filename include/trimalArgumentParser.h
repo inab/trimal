@@ -96,10 +96,23 @@ class trimAlManager
     char 
     c, 
     *forceFile          = NULL, 
+    
     *infile             = NULL, 
+    
     *backtransFile      = NULL, 
+    
     *outfile            = NULL, 
-    *htmlOutFile        = NULL, 
+    *htmlOutFile        = NULL,
+    
+    *statsGapsColFile   = NULL,
+    *statsGapsAccFile   = NULL,
+    
+    *statsSimAccFile    = NULL,
+    *statsSimColFile    = NULL,
+    
+    *statsConAccFile    = NULL,
+    *statsConColFile    = NULL,
+    
     *matrixFile         = NULL,
              
     **filesToCompare    = NULL, 

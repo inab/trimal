@@ -1056,7 +1056,7 @@ void utils::printAccSVG(int * x, float * y, int num, float threshold, std::strin
 //     delete [] y;
 }
 
-void utils::printColSVG(float * gapScore, int num, float threshold, std::string title, std::string out)
+void utils::printColSVG(float * y, int num, float threshold, std::string title, std::string out)
 {
 
     float xMultiplier = 300.F / num;
@@ -1119,7 +1119,7 @@ void utils::printColSVG(float * gapScore, int num, float threshold, std::string 
     file    << "<polyline stroke-linecap=\"round\" style=\"fill:none;stroke:black;stroke-width:1\" opacity=\"0.8\" points=\"";
     for (int i = 0; i < num; i++)
     {
-        file    << 25 + (i + 0.5F) * xMultiplier << "," << 50 + 100 - gapScore[i] << " ";
+        file    << 25 + (i + 0.5F) * xMultiplier << "," << 50 + 100 - y[i] << " ";
     }
     file    << "\"/>" << endl;
     
@@ -1146,4 +1146,214 @@ void utils::printColSVG(float * gapScore, int num, float threshold, std::string 
 //     
 //     delete [] x;
 //     delete [] y;
+}
+
+void utils::streamAccSVG(int * x, float * y, int num, float * threshold, std::string * title, std::string * out)
+{
+
+    static ofstream file;
+    static float xMultiplier;
+    static int i;
+    if (x == NULL && y == NULL && num != -1 && title != NULL && out != NULL)
+    {
+        
+        xMultiplier = 300.F / num;
+        int spacer = num / 10;
+        cout << "xMultiplier = " << xMultiplier << endl << "Spacer" << spacer << endl;;
+        
+        file.open(*out);  
+
+        // svg header  
+        file    << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" height=\"175\" width=\"350px\">" << endl;
+        // Gray box
+        file    << "<rect x=\"0\" width=\"350\" y=\"0\" height=\"175\" style=\"fill:gray\"/>" << endl;
+        // White box
+        file    << "<rect x=\"25\" width=\"300\" y=\"49\" height=\"102\" style=\"fill:white\"/>" << endl;
+        // Header text
+        file    << "<text text-anchor=\"middle\" x=\"175\" y=\"31.25\">" << * title << "</text>" << endl;
+        // Y Axis
+        for (int i = 0; i < 110; i+= 10)
+        {
+            // Y Axis lines
+            file    << "<line x1=\"25\" y1=\"" << 50 + i << "\" x2=\"325\" y2=\"" << 50 + i << "\" style=\"stroke:black;stroke-width:0.5\" stroke-dasharray=\"1, 1\" opacity=\"0.25\"/>" << endl;
+            // Y Axis labels
+            file    << "<text x=\"22\" y= \"" << 50 + i + 1.25F << "\" text-anchor=\"end\" font-size=\"5\">" << 100 - i << "%" << "</text>" << endl;
+        }
+        // X Axis
+        for (int i = 0; i < num; i++)
+        {
+            // X axis lines
+            file    << "<line " <<
+                        "x1=\""  << 25 + i * xMultiplier <<"\" y1=\"50\" " <<
+                        "x2=\""  << 25 + i * xMultiplier <<"\" y2=\"150\" " <<
+                        "style=\"stroke:black;stroke-width:0.5\" " <<
+                        "stroke-dasharray=\"1, 1\" " <<
+                        "opacity=\"0.125\"/>" << endl;
+            
+            // X axis labels
+            if (i % spacer == 0)
+            {
+                // Indicator rectangle
+                file    << "<rect " <<
+                        "x=\""  << 25 + i * xMultiplier <<"\" " <<
+                        "y=\"49\" " <<
+                        "width=\""<< std::max(1.F, xMultiplier) <<"\" " <<
+                        "height=\"102\" " <<
+                        "style=\"fill:gray\" " <<
+                        "opacity=\"0.125\"/>" << endl;
+                        
+                // Labels
+                file    << "<text x=\""  << 25 + (i + 0.5F) * xMultiplier <<"\" " 
+                        << "y=\"" << 160 
+                        << "\" text-anchor=\"middle\" font-size=\"5\">"
+                        << i
+                        << "</text>" << endl;
+            }
+        }
+        
+        file    << "<polyline stroke-linecap=\"round\" style=\"fill:none;stroke:black;stroke-width:1\" opacity=\"0.8\" points=\"";
+        return;
+    }
+    
+    if (x != NULL && y != NULL)
+    {
+        file    << (25 + (*x + 0.5F) * xMultiplier) << "," << 50 + 100 - *y << " ";
+        i++;
+        return;
+    }
+    
+    if (x == NULL && y == NULL && num == -1)
+    {
+        file    << "\"/>" << endl;
+        
+        // Kept
+        file    << "<rect " <<
+                    "x=\""  << 25 <<"\" " <<
+                    "y=\"49\" " <<
+                    "width=\""<< 300 * *threshold <<"\" " <<
+                    "height=\""<< 102  <<"\" " <<
+                    "style=\"fill:green\" " <<
+                    "opacity=\"0.125\"/>" << endl;
+                    
+        // Rejected
+        file    << "<rect " <<
+                    "x=\""  << 25 + 300 * *threshold <<"\" " <<
+                    "y=\"49\" " <<
+                    "width=\""<< 300 * (1.F - *threshold) <<"\" " <<
+                    "height=\""<< 102  <<"\" " <<
+                    "style=\"fill:red\" " <<
+                    "opacity=\"0.125\"/>" << endl;
+        
+        file << "</svg>";
+        file.close();
+        return;
+    }
+    cerr << "ERROR: Wrong arguments given to streamAccSVG. If you see this message, please, contact the current developer." << endl << endl;
+//     delete [] x;
+//     delete [] y;
+}
+
+void utils::streamColSVG(float * y, int num, float * threshold, std::string * title, std::string * out)
+{
+    static ofstream file;
+    static float xMultiplier;
+    static int spacer;
+    static int i;
+    
+    if (y == NULL && num != -1 && title != NULL && out != NULL)
+    {
+        i = 0;
+        xMultiplier = 300.F / num;
+        spacer = num / 10;
+        cout << "N = " << num << endl;
+        
+        file.open(*out);  
+
+        // svg header  
+        file    << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" height=\"175\" width=\"350px\">" << endl;
+        // Gray box
+        file    << "<rect x=\"0\" width=\"350\" y=\"0\" height=\"175\" style=\"fill:gray\"/>" << endl;
+        // White box
+        file    << "<rect x=\"25\" width=\"300\" y=\"49\" height=\"102\" style=\"fill:white\"/>" << endl;
+        // Header text
+        file    << "<text text-anchor=\"middle\" x=\"175\" y=\"31.25\">" << title << "</text>" << endl;
+        // Y Axis
+        for (int i = 0; i < 11; i+= 1)
+        {
+            // Y Axis lines
+            file    << "<line x1=\"25\" y1=\"" << 50 + i * 10 << "\" x2=\"325\" y2=\"" << 50 + i * 10 << "\" style=\"stroke:black;stroke-width:0.5\" stroke-dasharray=\"1, 1\" opacity=\"0.25\"/>" << endl;
+            // Y Axis labels
+            file    << "<text x=\"22\" y= \"" << 50 + i * 10 + 1.25F << "\" text-anchor=\"end\" font-size=\"5\">" << 1 - i * 0.1F << "</text>" << endl;
+        }
+        
+        for (int i = 0; i < num; i++)
+        {
+            // X axis lines
+            file    << "<line " <<
+                        "x1=\""  << 25 + i * xMultiplier <<"\" y1=\"50\" " <<
+                        "x2=\""  << 25 + i * xMultiplier <<"\" y2=\"150\" " <<
+                        "style=\"stroke:black;stroke-width:0.5\" " <<
+                        "stroke-dasharray=\"1, 1\" " <<
+                        "opacity=\"0.125\"/>" << endl;
+            
+            // X axis labels
+            if (i % spacer == 0)
+            {
+                // Indicator rectangle
+                file    << "<rect " <<
+                        "x=\""  << 25 + i * xMultiplier <<"\" " <<
+                        "y=\"49\" " <<
+                        "width=\""<< std::max(1.F, xMultiplier) <<"\" " <<
+                        "height=\"102\" " <<
+                        "style=\"fill:gray\" " <<
+                        "opacity=\"0.125\"/>" << endl;
+                        
+                // Labels
+                file    << "<text x=\""  << 25 + (i + 0.5F) * xMultiplier <<"\" " 
+                        << "y=\"" << 160 
+                        << "\" text-anchor=\"middle\" font-size=\"5\">"
+                        << i
+                        << "</text>" << endl;
+            }
+        }
+        
+        file    << "<polyline stroke-linecap=\"round\" style=\"fill:none;stroke:black;stroke-width:1\" opacity=\"0.8\" points=\"";
+        return;
+    }
+    
+    if (y != NULL)
+    {
+        file    << 25 + (i + 0.5F) * xMultiplier << "," << 50 + 100 - y[i] << " ";
+        i++;
+        return;
+    }
+    // X Axis
+
+    if (num == -1)
+    {
+        file    << "\"/>" << endl;
+        
+        // Kept
+        file    << "<rect " <<
+                    "x=\"25\" " <<
+                    "y=\""<< 49 <<"\" " <<
+                    "width=\"300\" " <<
+                    "height=\""<< 1 + 100 * *threshold  <<"\" " <<
+                    "style=\"fill:green\" " <<
+                    "opacity=\"0.125\"/>" << endl;
+                    
+        // Rejected
+        file    << "<rect " <<
+                    "x=\"25\" " <<
+                    "y=\""<< 50 + 100 * *threshold <<"\" " <<
+                    "width=\"300\" " <<
+                    "height=\""<< 101 - 100 * *threshold <<"\" " <<
+                    "style=\"fill:red\" " <<
+                    "opacity=\"0.125\"/>" << endl;
+        
+        file << "</svg>";
+        file.close();
+        return;
+    }
+    cerr << "ERROR: Wrong arguments given to streamColSVG. If you see this message, please, contact the current developer." << endl << endl;
 }

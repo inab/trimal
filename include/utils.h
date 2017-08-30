@@ -358,7 +358,7 @@ static void quicksort(int ** vect, int ini, int fin);
     static int GetConsStep(float * consValue);
     
     /**
-     \brief Function to print accumulated information
+     \brief Function to save to file accumulated information
      \param x X axis values
      \param y Y axis values
      \param threshold Value (0-1) where to place the kept/rejected green/red boxes
@@ -368,14 +368,44 @@ static void quicksort(int ** vect, int ini, int fin);
     static void printAccSVG(int * x, float * y, int num, float threshold, std::string title, std::string out);
     
     /**
-     \brief Function to print column information
-     \param x X axis values
-     \param y Y axis values
+     \brief Function to save to file column information
+     \param gapScore Y axis values
      \param threshold Value (0-1) where to place the kept/rejected green/red boxes
      \param title Graph title
      \param out Filename where to store the file.
      */
-    static void printColSVG(float * gapScore, int num, float threshold, std::string title, std::string out);
+    static void printColSVG(float * y, int num, float threshold, std::string title, std::string out);
+    
+    
+    
+    
+    
+    
+    //TEMP CODE
+    /**
+     \brief Function to save to file accumulated information \n
+            To produce the SVG file, you have to call the function with a different combination of parameters:\n
+            - Start the graphic: x, y and threshold to NULL. num, title and out, filled.\n
+            - Feed numbers: x and y not NULL. num, threshold, title and out will be ignored. Recommended to nullify them and put 0 on threshold.\n
+            - End the graphic: x and y to NULL. num to -1. threshold filled. Title and out will be ignored. Recommended to nullify them.\n
+     */
+    static void streamAccSVG(int * x, float * y, int num, float * threshold, std::string * title, std::string * out);
+    
+        /**
+     \brief Function to save to file column information\n
+            To produce the SVG file, you have to call the function with different combination of parameters:\n
+            - Start the graphic: gapScore and threshold to NULL. num, title and out, filled.\n
+            - Feed numbers: gapScore filled. num, threshold, title and out will be ignored. Recommeded to nullify them and put 0 on threshold.\n
+            - End the graphic: gapScore to NULL. num to -1. threshold filled. Title and out will be ignored. Recommended to nullify them. \n
+     \param gapScore Y axis values
+     \param threshold Value (0-1) where to place the kept/rejected green/red boxes
+     \param title Graph title
+     \param out Filename where to store the file.
+     */
+    static void streamColSVG(float * y, int num, float * threshold, std::string * title, std::string * out);
+    
+    
+    
 };
 
 
