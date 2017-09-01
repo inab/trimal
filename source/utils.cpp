@@ -1357,3 +1357,33 @@ void utils::streamColSVG(float * y, int num, float * threshold, std::string * ti
     }
     cerr << "ERROR: Wrong arguments given to streamColSVG. If you see this message, please, contact the current developer." << endl << endl;
 }
+
+void utils::streamSVG(float * x, float * y, int num, bool newLine, std::string * title, std::string * filename)
+{
+    static ofstream file;
+    
+    int grayboxWidth = 1200, grayboxHeight = 500;
+    int whiteboxWidth = 700, whiteboxHeight = 300;
+    
+    if (filename && title)
+    {
+        file.open(*filename);
+        // svg header  
+        file    << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" "
+                << "height=\""  << grayboxHeight << "\" " 
+                << "width=\""   << grayboxWidth << "\">" << endl;
+        // Gray box
+        file    << "<rect x=\"0\" "
+                << "width=\"" << grayboxWidth << "\" y=\"0\" height=\"" << grayboxHeight << "\" style=\"fill:gray\"/>" << endl;
+        // White box
+        file    << "<rect x=\"" << (grayboxWidth - whiteboxWidth) / 2 << "\" width=\"" << whiteboxWidth << "\" y=\"" << (grayboxHeight - whiteboxHeight) * 0.75F << "\" height=\"" << whiteboxHeight << "\" style=\"fill:white\"/>" << endl;
+        // Header text
+//         file    << "<text text-anchor=\"middle\" x=\"175\" y=\"31.25\">" << *title << "</text>" << endl;
+        
+        // svg footer
+        file << "</svg>";
+        file.close();
+    }
+    
+    
+}

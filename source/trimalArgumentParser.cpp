@@ -1892,6 +1892,32 @@ inline void trimAlManager::print_statistics()
         if(stats < -1)
             cout << endl;
     }
+    
+    if (statsSimColFile != NULL)
+    {
+        if(origAlig -> Statistics -> calculateConservationStats())
+        {
+            float *vectAux;
+            float val;
+            
+            std::string title = "Column Conservation Scores";
+            std::string filename = statsSimColFile;
+            
+            utils::streamColSVG(NULL, origAlig -> scons -> columns, NULL, & title, & filename);
+
+            /* We decide about the information's source then we get the information. */
+            vectAux = origAlig -> scons -> MDK_Window == NULL ? origAlig -> scons -> MDK : origAlig -> scons -> MDK_Window;
+
+            /* Show the information that have been requered */
+            for(int i = 0; i < origAlig -> scons ->columns; i++)
+            {
+                val = *(vectAux++) * 100.F;
+                utils::streamColSVG(&val, 0, NULL, NULL, NULL);
+            }
+            
+            utils::streamColSVG(NULL, -1, & gapThreshold, NULL, NULL);
+        }
+    }
 
     if(sct)
     {

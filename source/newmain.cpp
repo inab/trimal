@@ -35,5 +35,11 @@ int main(int argc, char *argv[])
 //     cout << "Processing" << endl;
     Trimal.processArguments(argv);
 //     cout << "Performing" << endl;
+    
+    std::string title = "New graphic";
+    std::string filename = "filename.svg";
+    
+    utils::streamSVG(NULL, NULL, 0, false, & title, & filename);
+    
     return Trimal.perform();
 }

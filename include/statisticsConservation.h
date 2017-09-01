@@ -47,7 +47,7 @@ using namespace std;
 /* ***************************************************************************************************************** */
 
 class statisticsConservation{
- private:
+ public:
 
   /** \brief Number of columns of the alignment */
   int columns;
