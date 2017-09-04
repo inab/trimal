@@ -30,6 +30,10 @@
 #include "../include/utils.h"
 #include "../include/values.h"
 #include "../include/defines.h"
+#include <sstream>
+#include <iomanip>
+#include <math.h>
+#include <vector>
 
 
 void utils::initlVect(int *vector, int tam, int valor) {
@@ -1358,27 +1362,182 @@ void utils::streamColSVG(float * y, int num, float * threshold, std::string * ti
     cerr << "ERROR: Wrong arguments given to streamColSVG. If you see this message, please, contact the current developer." << endl << endl;
 }
 
-void utils::streamSVG(float * x, float * y, int num, bool newLine, std::string * title, std::string * filename)
+void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std::string * lineColor, std::string * chartTitle, std::string * filename)
 {
     static ofstream file;
+    static stringstream legend;
+    static float lastX = INFINITY;
+    static std::vector<std::string> linesLegend = std::vector<std::string>();
     
-    int grayboxWidth = 1200, grayboxHeight = 500;
-    int whiteboxWidth = 700, whiteboxHeight = 300;
+    int 
+        whiteboxWidth   = 1300, 
+        whiteboxHeight  = 650,
+        
+        grayboxWidth    = 1500, 
+        grayboxHeight   = 900;
+        
+    float 
+        legendRatio     = 0.175F,
+        
+        widthRatio      = 0.5F, 
+        heightRatio     = 0.75F,
+        
+        whiteboxDeltaHeight 
+                        = whiteboxHeight * 0.05F,
+        
+        fontSize        = whiteboxHeight * 0.02F;
+        
+    static float
+        originX, 
+        originY,
+        chartWidth,
+        chartHeight;
     
-    if (filename && title)
+    if (filename && chartTitle)
     {
         file.open(*filename);
         // svg header  
         file    << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" "
                 << "height=\""  << grayboxHeight << "\" " 
                 << "width=\""   << grayboxWidth << "\">" << endl;
+                
         // Gray box
-        file    << "<rect x=\"0\" "
-                << "width=\"" << grayboxWidth << "\" y=\"0\" height=\"" << grayboxHeight << "\" style=\"fill:gray\"/>" << endl;
+        file    << "<rect "
+                << "width=\"" << grayboxWidth << "\" "
+                << "x=\"0\" "
+                << "height=\"" << grayboxHeight << "\" "
+                << "y=\"0\" "
+                << "style=\"fill:gray\"/>" << endl;
+                
         // White box
-        file    << "<rect x=\"" << (grayboxWidth - whiteboxWidth) / 2 << "\" width=\"" << whiteboxWidth << "\" y=\"" << (grayboxHeight - whiteboxHeight) * 0.75F << "\" height=\"" << whiteboxHeight << "\" style=\"fill:white\"/>" << endl;
+        file    << "<rect " 
+                << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio << "\" " 
+                << "width=\"" << whiteboxWidth * (1.F - legendRatio) << "\" " 
+                << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
+                << "height=\"" << whiteboxHeight << "\" "
+                << "style=\"fill:white; stroke:black; stroke-width:2\" "
+                << "/>" << endl;
+                
+        // Legend box
+        file    << "<rect " 
+                << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) << "\" " 
+                << "width=\"" << whiteboxWidth * legendRatio << "\" " 
+                << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
+                << "height=\"" << whiteboxHeight << "\" "
+                << "style=\"fill:white; stroke:black; stroke-width:2\" "
+                << "fill-opacity=\"0.25\" "
+                << "/>" << endl;
+                
         // Header text
-//         file    << "<text text-anchor=\"middle\" x=\"175\" y=\"31.25\">" << *title << "</text>" << endl;
+        file    << "<text text-anchor=\"middle\" "
+                << "x=\"" << grayboxWidth * 0.5F << "\" " 
+                << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio * 0.75F << "\" " 
+                << "font-size=\"" << (grayboxHeight - whiteboxHeight) * heightRatio * 0.5F << "\" "
+                << ">" 
+                << *chartTitle 
+                << "</text>" << endl;
+                
+        // Horizontal lines
+        for (int x = 0; x < 11 ; x++)
+        {
+            // X axis lines
+            file    << "<line " 
+                    << "x1=\""  << (grayboxWidth - whiteboxWidth) * widthRatio <<"\" "
+                    << "y1=\""  << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (x * 0.1F)  + (whiteboxDeltaHeight * 0.5F) << "\" " 
+                    << "x2=\""  << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) <<"\" "
+                    << "y2=\""  << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (x * 0.1F)  + (whiteboxDeltaHeight * 0.5F) << "\" " 
+                    << "style=\"stroke:black;stroke-width:1\" " 
+                    << "stroke-dasharray=\"1, 1\" " 
+                    << "opacity=\"0.5\"/>" << endl;
+                        
+            // Labels
+            file    << "<text "
+                    << "x=\""   << (grayboxWidth - whiteboxWidth) * widthRatio * 0.95F <<"\" " 
+                    << "y=\""   << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (x * 0.1F) + (0.25F * fontSize) + (whiteboxDeltaHeight * 0.5F) << "\" " 
+                    << "text-anchor=\"end\" " 
+                    << "xml:space=\"preserve\" "
+                    << "font-size=\"" << fontSize << "\">"
+                    << (10 - x) / 10.F
+                    << "</text>" << endl;
+        }
+        
+        // Horizontal lines
+        for (int x = 0; x < 11 ; x++)
+        {
+            // X axis lines
+            file    << "<line " 
+                    << "x1=\""  << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (x * 0.1F)  + (whiteboxDeltaHeight * 0.5F) << "\" "
+                    << "y1=\""  << (grayboxHeight - whiteboxHeight) * heightRatio << "\" " 
+                    << "x2=\""  << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (x * 0.1F)  + (whiteboxDeltaHeight * 0.5F) <<"\" "
+                    << "y2=\""  << (grayboxHeight - whiteboxHeight) * heightRatio + whiteboxHeight << "\" " 
+                    << "style=\"stroke:black;stroke-width:1\" " 
+                    << "stroke-dasharray=\"1, 1\" " 
+                    << "opacity=\"0.5\"/>" << endl;
+                        
+            // Labels
+            file    << "<text "
+                    << "x=\""   << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (x * 0.1F)  + (whiteboxDeltaHeight * 0.5F) <<"\" " 
+                    << "y=\""   << (grayboxHeight - whiteboxHeight) * heightRatio + whiteboxHeight * 1.05F << "\" " 
+                    << "text-anchor=\"middle\" " 
+                    << "xml:space=\"preserve\" "
+                    << "font-size=\"" << fontSize << "\">"
+                    << x * 10 << " %" 
+                    << "</text>" << endl;
+        }
+        
+        originX = (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxDeltaHeight * 0.5F);
+        originY = (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight * 0.5F);
+        chartWidth = (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight);
+        chartHeight = - (whiteboxHeight - whiteboxDeltaHeight);
+    }
+    
+    else if (x != NULL && y != NULL && lineColor != NULL)
+    {
+        if (*x < lastX)
+        {
+            if (lastX != INFINITY)
+            {
+                file    << "\"/>" << endl;
+            }
+            file    << "<polyline stroke-linecap=\"round\" style=\"fill:none;stroke:" << * lineColor << ";stroke-width:2\" opacity=\"0.8\" points=\"";
+            linesLegend.push_back(std::string(*lineColor + ";" + *lineName));
+        }
+        file    <<  originX + *x * chartWidth << "," 
+                <<  originY + *y * chartHeight << " ";
+        
+        lastX = *x;
+    }
+    
+    else 
+    {
+        file << "\"/>" << endl;
+        
+        float deltaHeigth = whiteboxHeight / (float)linesLegend.size();
+        float height =  whiteboxWidth * legendRatio * 0.1F;
+        for (int x = 0; x < linesLegend.size(); x++)
+        {
+            file    << "<rect " 
+                    << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.1F << "\" " 
+                    << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * x + deltaHeigth * 0.5F - height * 0.5F - fontSize * 0.25F << "\" "
+                    << "width=\"" << height << "\" " 
+                    << "height=\"" << height << "\" "
+                    << "style=\"fill:" << strtok(&linesLegend[x][0], ";") << "; stroke:black; stroke-width:2\" "
+                    << "fill-opacity=\"1\" "
+                    << "/>" << endl;
+            
+            file    << "<text "
+                    << "x=\""   << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.5F <<"\" " 
+                    << "y=\""   << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * x + deltaHeigth * 0.5F << "\" " 
+                    << "text-anchor=\"middle\" "
+                    << "xml:space=\"preserve\" "
+                    << "font-size=\"" << fontSize << "\">"
+                    << strtok(NULL, "")
+                    << "</text>" << endl;
+        }
+        
+        
+        
+        
         
         // svg footer
         file << "</svg>";

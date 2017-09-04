@@ -407,7 +407,7 @@ static void quicksort(int ** vect, int ini, int fin);
     
     
     
-    static void streamSVG(float * x, float * y, int num, bool newLine, std::string * title, std::string * filename);
+    static void streamSVG(float * x, float * y, int num, std::string * lineName, std::string * lineColor, std::string * chartTitle, std::string * filename);
     
 };
 
