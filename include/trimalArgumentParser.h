@@ -103,6 +103,8 @@ class trimAlManager
     
     *outfile            = NULL, 
     *htmlOutFile        = NULL,
+    *svgOutFile         = NULL,
+    *svgStatsOutFile    = NULL,
     
 //     *statsGapsColFile   = NULL,
 //     *statsGapsAccFile   = NULL,
@@ -135,6 +137,8 @@ private:
         bool in_argument(int* argc, char* argv[], int* i);
         bool out_argument(int* argc, char* argv[], int* i);
         bool html_out_argument(int* argc, char* argv[], int* i);
+        bool svg_out_argument(int* argc, char* argv[], int* i);
+        bool svg_stats_argument(int* argc, char* argv[], int* i);
         bool out_format_arguments(int* argc, char* argv[], int* i);
         bool matrix_argument(int* argc, char* argv[], int* i);
         bool compareset_argument(int* argc, char* argv[], int* i);
@@ -204,7 +208,7 @@ private:
             bool check_outputs_coincidence();
             bool check_col_numbering();
             bool check_residue_and_sequence_overlap();
-            bool check_html_output_interest();
+            bool check_output_relevance();
             bool check_output_file_with_statistics();
             bool check_multiple_files_comparison(char* argv[]);
             bool check_block_size();

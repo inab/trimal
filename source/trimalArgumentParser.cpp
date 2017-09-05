@@ -31,6 +31,8 @@ void trimAlManager::parseArguments(int argc, char *argv[])
         if (in_argument(&argc, argv, &i))           continue;
         if (out_argument(&argc, argv, &i))          continue;
         if (html_out_argument(&argc, argv, &i))     continue;
+        if (svg_out_argument(&argc, argv, &i))      continue;
+        if (svg_stats_argument(&argc, argv, &i))    continue;
         if (out_format_arguments(&argc, argv, &i))  continue;
         if (matrix_argument(&argc, argv, &i))       continue;
 
@@ -139,6 +141,30 @@ inline bool trimAlManager::html_out_argument(int *argc, char *argv[], int *i)
         argumentLength = strlen(argv[++*i]);
         htmlOutFile = new char[argumentLength + 1];
         strcpy(htmlOutFile, argv[*i]);
+        return true;
+    }
+    return false;
+}
+
+inline bool trimAlManager::svg_out_argument(int *argc, char *argv[], int *i)
+{
+    if((!strcmp(argv[*i], "-svgout")) && ((*i)+1 != *argc) && (svgOutFile == NULL))
+    {
+        argumentLength = strlen(argv[++*i]);
+        svgOutFile = new char[argumentLength + 1];
+        strcpy(svgOutFile, argv[*i]);
+        return true;
+    }
+    return false;
+}
+
+inline bool trimAlManager::svg_stats_argument(int *argc, char *argv[], int *i)
+{
+    if((!strcmp(argv[*i], "-svgstats")) && ((*i)+1 != *argc) && (svgStatsOutFile == NULL))
+    {
+        argumentLength = strlen(argv[++*i]);
+        svgStatsOutFile = new char[argumentLength + 1];
+        strcpy(svgStatsOutFile, argv[*i]);
         return true;
     }
     return false;
@@ -1269,7 +1295,7 @@ inline bool trimAlManager::check_arguments_needs(char* argv[])
         check_outputs_coincidence();
         check_col_numbering();
         check_residue_and_sequence_overlap();
-        check_html_output_interest();
+        check_output_relevance();
         check_output_file_with_statistics();
         check_automated_manual_incompatibilities();
         check_multiple_files_comparison(argv);
@@ -1411,9 +1437,9 @@ inline bool trimAlManager::check_outputs_coincidence()
 {
     
     std::array<char*,8> outFiles 
-        {{htmlOutFile, outfile/*, statsGapsAccFile, statsGapsColFile, statsSimAccFile, statsSimColFile, statsSumOfPairsAccFile, statsSumOfPairsColFile*/}};
+        {{htmlOutFile, outfile, svgOutFile, svgStatsOutFile/*, statsGapsAccFile, statsGapsColFile, statsSimAccFile, statsSimColFile, statsSumOfPairsAccFile, statsSumOfPairsColFile*/}};
     std::array<string,8> outFilesNames 
-        {{"html (-htmlout)", "output (-out)", /*"stats Gaps Total (-sgt X)", "stats Gaps Col (-sgc X)", "stats Sim Total (-sst X)", "stats Sim Col (-ssc X)", "stats Sum Of Pairs Total (-sft X)", "stats Sum Of Pairs Col (-sfc X)"*/}};
+        {{"html (-htmlout)", "output (-out)", "svg (-svgout)", "svg stats (-svgstats)" /*"stats Gaps Total (-sgt X)", "stats Gaps Col (-sgc X)", "stats Sim Total (-sst X)", "stats Sim Col (-ssc X)", "stats Sum Of Pairs Total (-sft X)", "stats Sum Of Pairs Col (-sfc X)"*/}};
     
     for (int i = 0, x = 0; i < outFiles.size(); i++)
     {
@@ -1423,7 +1449,7 @@ inline bool trimAlManager::check_outputs_coincidence()
                 if (outFiles.at(x) != NULL)
                     if (!strcmp(outFiles.at(i), outFiles.at(x)))
                     {
-                        cerr << endl << "ERROR: The " << outFilesNames.at(i) << " and " << outFilesNames.at(x) << " files should not be the same." << endl << endl;
+                        cerr << endl << "ERROR: The " << outFilesNames.at(i) << " and " << outFilesNames.at(x) << " files can't be the same." << endl << endl;
                         appearErrors = true;
                     }
             }
@@ -1482,16 +1508,16 @@ inline bool trimAlManager::check_residue_and_sequence_overlap()
     return false;
 }
 
-inline bool trimAlManager::check_html_output_interest()
+inline bool trimAlManager::check_output_relevance()
 {
-    if((htmlOutFile != NULL) && (!appearErrors))
+    if(((htmlOutFile != NULL) || (svgOutFile != NULL) || (svgStatsOutFile != NULL)) && (!appearErrors))
     {
         if(!automatedMethodCount && // Are we not using any automated method? 
                 (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && (consistencyThreshold == -1) && // Neither using thresholds
                 (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither selecting columns or sequences?
                 (maxIdentity == -1) && (clusters == -1)) // Neither using other selecting methods?
         {
-            cerr << endl << "ERROR: This parameter can only be used with any trimming method." << endl << endl;
+            cerr << endl << "ERROR: HTML/SVG reporting can only be used when using any trimming method." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1778,6 +1804,18 @@ int trimAlManager::perform()
     }
 
     /* -------------------------------------------------------------------- */
+    if((svgOutFile != NULL) && (!appearErrors))
+        if(!origAlig ->
+           alignmentSummarySVG(htmlOutFile,
+                                singleAlig -> getNumAminos(), 
+                                singleAlig -> getNumSpecies(),
+                                singleAlig -> getCorrespResidues(), 
+                                singleAlig -> getCorrespSequences(), 
+                                compareVect))
+        {
+            cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
+            appearErrors = true;
+        }
     if((htmlOutFile != NULL) && (!appearErrors))
         if(!origAlig ->
            alignmentSummaryHTML(htmlOutFile,
@@ -1820,12 +1858,12 @@ int trimAlManager::perform()
 
 inline void trimAlManager::print_statistics()
 {
-    if (sgt || sgc || scc || sct )
+    if (svgStatsOutFile != NULL)
     {
-        std::string title = "Statistics";
-        std::string filename = "filename.svg";
-        std::string linename = "gaps";
-        std::string color = "red";
+        std::string title = infile; // " statistics graphs";
+        std::string filename = svgStatsOutFile;
+        std::string linename = "";
+        std::string color = "";
         
         utils::streamSVG(NULL, NULL, 0, NULL, NULL, & title, & filename);
         
@@ -1834,9 +1872,9 @@ inline void trimAlManager::print_statistics()
             float acm = 0.0F;
             float x = 0;
             float y = 1.F;
-            std::string color = "red";
-            std::string name = "gaps";
-            utils::streamSVG(& x, & y, 0, & name, & color, NULL, NULL);
+            color = "red";
+            linename = "gaps";
+            utils::streamSVG(& x, & y, 0, & linename, & color, NULL, NULL);
             
             for(i = 0, acm = 0; i <= origAlig -> sgaps -> maxGaps; i++) {
 
@@ -1847,17 +1885,18 @@ inline void trimAlManager::print_statistics()
                 acm += origAlig -> sgaps -> numColumnsWithGaps[i];
                 x = acm / origAlig -> sgaps -> columns;
                 y = 1.F - ((i * 1.0F)/origAlig -> sgaps ->columnLength);
-                utils::streamSVG(& x, & y, 0, & name, & color, NULL, NULL);
+                utils::streamSVG(& x, & y, 0, & linename, & color, NULL, NULL);
                 }
             }
         }
+        
         if(origAlig -> Statistics -> calculateConservationStats())
         {
-            std::string color = "blue";
-            std::string name = "conservation";
+            color = "blue";
+            linename = "conservation";
             float x = 0;
             float y = 1.F;
-            utils::streamSVG(& x, & y, 0, & name, & color, NULL, NULL);
+            utils::streamSVG(& x, & y, 0, & linename, & color, NULL, NULL);
             float refer, *vectAux;
             int i, num, acm;
 
@@ -1885,7 +1924,7 @@ inline void trimAlManager::print_statistics()
                 if(refer != vectAux[i]) {
                     x = ((float) acm/origAlig -> scons ->columns ) ;
                     y = refer;
-                    utils::streamSVG(& x, & y, 0, & name, & color, NULL, NULL);
+                    utils::streamSVG(& x, & y, 0, & linename, & color, NULL, NULL);
                     refer = vectAux[i];
                     num = 1;
                 }
@@ -1894,13 +1933,18 @@ inline void trimAlManager::print_statistics()
             acm++;
             x = ((float) acm/origAlig -> scons ->columns ) ;
             y = refer;
-            utils::streamSVG(& x, & y, 0, & name, & color, NULL, NULL);
+            utils::streamSVG(& x, & y, 0, & linename, & color, NULL, NULL);
 
             /* Deallocate the reserved memory. */
             delete [] vectAux;
         }
         
-        
+        utils::streamSVG(NULL, NULL, 0, NULL, NULL, NULL, NULL);
+    }
+    
+    
+    if (sgt || sgc || scc || sct )
+    {
         if(sgc)
         {
             origAlig -> Statistics -> printStatisticsGapsColumns();
@@ -1943,7 +1987,6 @@ inline void trimAlManager::print_statistics()
             if(sft)
                 compareFiles::printStatisticsFileAcl(origAlig -> getNumAminos(), compareVect);
         }
-        utils::streamSVG(NULL, NULL, 0, NULL, NULL, NULL, NULL);
         cout << endl;
     }
     
@@ -2188,7 +2231,9 @@ void trimAlManager::menu(void)
     cout << "    -matrix <inpufile>       " << "Input file for user-defined similarity matrix (default is Blosum62)." << endl << endl;
 
     cout << "    -out <outputfile>        " << "Output newAlignment  in the same input format (default stdout). (default input format)" << endl;
-    cout << "    -htmlout <outputfile>    " << "Get a summary of trimal's work in an HTML file." << endl << endl;
+    cout << "    -htmlout <outputfile>    " << "Get a summary of trimal's work in an HTML file." << endl;
+    cout << "    -svgout <outputfile>     " << "Get a summary of trimal's work in an SVG file." << endl;
+    cout << "    -sgvstats <outputfile>   " << "Get a graphic in SVG showing stats of the indicators used in the cleanse of the alignment." << endl << endl;
 
     cout << "    -keepheader              " << "Keep original sequence header including non-alphanumeric characters." << endl;
     cout << "                             " << "Only available for input FASTA format files. (future versions will extend this feature)" << endl << endl;

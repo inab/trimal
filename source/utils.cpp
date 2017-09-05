@@ -34,6 +34,7 @@
 #include <iomanip>
 #include <math.h>
 #include <vector>
+#include <cstdio>
 
 
 void utils::initlVect(int *vector, int tam, int valor) {
@@ -937,10 +938,12 @@ int utils::GetConsStep(float * consValue)
 
 void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std::string * lineColor, std::string * chartTitle, std::string * filename)
 {
-    static ofstream file;
+    static ofstream file/*, tempfile*/;
+//     static std::string tempfilename;
     static stringstream legend;
     static float lastX = INFINITY;
     static std::vector<std::string> linesLegend = std::vector<std::string>();
+    static FILE* tmpFile;
     
     int 
         whiteboxWidth   = 1300, 
@@ -969,6 +972,9 @@ void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std
     if (filename && chartTitle)
     {
         file.open(*filename);
+//         tempfilename = std::tmpnam(nullptr);
+//         tempfile.open(tempfilename);
+        tmpFile = std::tmpfile();
         // svg header  
         file    << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" "
                 << "height=\""  << grayboxHeight << "\" " 
@@ -1005,7 +1011,7 @@ void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std
         file    << "<text text-anchor=\"middle\" "
                 << "x=\"" << grayboxWidth * 0.5F << "\" " 
                 << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio * 0.75F << "\" " 
-                << "font-size=\"" << (grayboxHeight - whiteboxHeight) * heightRatio * 0.5F << "\" "
+                << "font-size=\"" << (grayboxHeight - whiteboxHeight) * heightRatio * 10.F / chartTitle->length() << "\" "
                 << ">" 
                 << *chartTitle 
                 << "</text>" << endl;
@@ -1073,10 +1079,19 @@ void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std
                 file    << "\"/>" << endl;
             }
             linesLegend.push_back(std::string(*lineColor + ";" + *lineName));
-            file    << "<polyline stroke-linecap=\"round\" style=\"fill:none;stroke:" << * lineColor << ";stroke-width:2\" opacity=\"0.8\" stroke-dasharray=\"" << 2 + linesLegend.size() << "," << 2 + linesLegend.size() <<"\" points=\"";
+            file    << "<polyline stroke-linecap=\"round\" " 
+                    << "style=\"fill:none;stroke:" << * lineColor << ";stroke-width:0.8\" opacity=\"0.8\" points=\"";
         }
-        file    <<  originX + *x * chartWidth << "," 
-                <<  originY + *y * chartHeight << " ";
+        file        <<  originX + *x * chartWidth << "," 
+                    <<  originY + *y * chartHeight << " ";
+                    
+        std::fputs("<circle cx=\"", tmpFile);
+        std::fputs( std::to_string(originX + *x * chartWidth).c_str(), tmpFile);
+        std::fputs("\" cy=\"", tmpFile);
+        std::fputs( std::to_string((originY + *y * chartHeight)).c_str(), tmpFile);
+        std::fputs("\" r=\"2\" stroke=\"black\" stroke-width=\"0.1\" fill=\"", tmpFile);
+        std::fputs( lineColor->c_str(), tmpFile);
+        std::fputs("\" />\n", tmpFile);
         
         lastX = *x;
     }
@@ -1108,6 +1123,15 @@ void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std
                     << "</text>" << endl;
         }
         // svg footer
+        
+        char * line = new char[300];
+        std::rewind(tmpFile);
+        while (1) {
+            if (fgets(line, 300, tmpFile) == NULL) break;
+            file << line;
+        }
+        delete [] line;
+        
         file << "</svg>";
         file.close();
     }
