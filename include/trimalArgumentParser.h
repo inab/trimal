@@ -104,17 +104,17 @@ class trimAlManager
     *outfile            = NULL, 
     *htmlOutFile        = NULL,
     
-    *statsGapsColFile   = NULL,
-    *statsGapsAccFile   = NULL,
-    
-    *statsSimAccFile    = NULL,
-    *statsSimColFile    = NULL,
-    
-//     *statsConAccFile    = NULL,
-//     *statsConColFile    = NULL,
-    
-    *statsSumOfPairsAccFile     = NULL,
-    *statsSumOfPairsColFile     = NULL,
+//     *statsGapsColFile   = NULL,
+//     *statsGapsAccFile   = NULL,
+//     
+//     *statsSimAccFile    = NULL,
+//     *statsSimColFile    = NULL,
+//     
+// //     *statsConAccFile    = NULL,
+// //     *statsConColFile    = NULL,
+//     
+//     *statsSumOfPairsAccFile     = NULL,
+//     *statsSumOfPairsColFile     = NULL,
     
     *matrixFile         = NULL,
              

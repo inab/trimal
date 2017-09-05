@@ -1274,21 +1274,17 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
     int i, j, k, kj, kn, upper;
     double H = 0.0;
     char type;
+    bool textured = false;
     
     int * gapsValues = NULL;
     if (sgaps != NULL)
         gapsValues = sgaps -> getGapsWindow();
-//     cout << "GAPS " << ((sgaps == NULL) ? "NULL" : "NOT NULL") << endl;
     float * simValues = NULL;
     if (scons != NULL)
         simValues = scons -> getMdkwVector();
-//     cout << "SIMS " << ((scons == NULL) ? "NULL" : "NOT NULL") << endl;
-    
-//     cout << "CONS " << ((consValues == NULL) ? "NULL" : "NOT NULL") << endl;
-    
     // Check if alignment is aligned;
     if (!isAligned) {
-//         cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
+        cerr << endl << "ERROR: Sequences are not aligned. SVG report won't be created." << endl << endl;
         return false;
     }
 
@@ -1314,12 +1310,12 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
     
     // Calculate the blockSize;
     int blockSize = ((int)std::ceil((float)residNumber/ blocks * 0.1F)) * 10;
-//     blockSize = 120;
+    blockSize = 120;
     
     int fontSize = 15;
     
     // Allocate some local memory 
-    string tmpColumn; 
+    string tmpColumn = std::string(); 
     tmpColumn.reserve(sequenNumber);
     
     // Open the file;
@@ -1335,7 +1331,6 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
 
     int sequencesNamesLength = utils::max(25, j + 20);
     
-    bool textured = true;
     
     // Init Colors
     auto withTexture = []() { 
@@ -1373,12 +1368,7 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
     };
     
     std::map<char, string> mappedColors = textured ? withTexture() : withoutTexture() ;
-    
-    // Start the html output
-//     file    << "<?xml version=\"1.0\" standalone=\"no\"?>" << endl
-//             << "<title>trimAl v1.4 Summary</title>" << endl
-//             << "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">" << endl;
-//     
+
     // Start the svg output
     file    << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" height=\"" <<
             125 +                           /*Header Height*/
@@ -1812,8 +1802,8 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
             H+= 25;
         }
         if (consValues) {
-            ;
-            std::array<std::string, 12> u = {{"0"," <.001"," <.050"," <.100","  <.150"," <.200"," <.250"," <.350"," <.500"," <.750"," <1.00"," =1="}};
+            
+            std::array<std::string, 12> u = {{"0"," &lt; .001"," &lt; .050"," &lt; .100","  &lt; .150"," &lt; .200"," &lt; .250"," &lt; .350"," &lt; .500"," &lt; .750"," &lt; 1.00"," =1="}};
             file << "<text \
                         width=\"100\" style=\"font-weight:bold\" \
                         text-anchor=\"middle\" \
@@ -1842,6 +1832,12 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
     //END Legend
         
     H = 160;
+    
+    char ** colors = new char*[sequenNumber + 1];
+//     int** ary = new int*[rowCount];
+        for(int i = 0; i < sequenNumber + 1; ++i)
+            colors[i] = new char[blockSize + 1];
+    
     
     for(j = 0, upper = blockSize; 
         j < residNumber; 
@@ -1882,13 +1878,15 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
         
 //         H+=fontSize;
 
-        char colors[sequenNumber][blockSize];
+        
         for(i = 0; i < sequenNumber; i++) {
             
             /* Print residues corresponding to current sequences block */
             for(k = j; ((k < residNumber) && (k < upper)); k++) 
             {
-                for(kj = 0, tmpColumn.clear(); kj < sequenNumber; kj++)
+                if (tmpColumn != "")
+                    tmpColumn.clear();
+                for(kj = 0; kj < sequenNumber; kj++)
                     tmpColumn += sequences[kj][k];
                 /* Determine residue color based on residues acrofile the alig column */
                 type = utils::determineColor(sequences[i][k], tmpColumn);
@@ -1904,13 +1902,13 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
         float width =  (blockSize + 0.5F) * (fontSize) / blockSize;
         for (k = j; k < residNumber && k < upper; k++)
         {
-            for(kj = 0; kj <= sequenNumber; kj++)
+            for(kj = 0; kj < sequenNumber; kj++)
             {
-                for(int kn = kj + 1; kn <= sequenNumber; kn++)
+                for(int kn = kj + 1; kn < sequenNumber; kn++)
                 {
                     if (colors[kj][k - j] != colors[kn][k - j] || kn + 1 == sequenNumber)
                     {
-//                         if (colors[kj][k - j] != 'w')
+                        if (colors[kj][k - j] != 'w')
                          file << "<rect " <<
                                     " style=\"fill:"<< mappedColors[colors[kj][k - j]] <<"\" " <<
                                     " height=\""<< fontSize * (kn - kj) <<"\" " <<
@@ -2089,6 +2087,10 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
         
         H += fontSize * 2;
     }
+    for(int i = 0; i < sequenNumber + 1; ++i)
+        delete [] colors[i];
+    delete [] colors;
+    
     file << "</svg>";
     delete [] SEQS;
     delete [] RES;
