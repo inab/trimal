@@ -1806,7 +1806,7 @@ int trimAlManager::perform()
     /* -------------------------------------------------------------------- */
     if((svgOutFile != NULL) && (!appearErrors))
         if(!origAlig ->
-           alignmentSummarySVG(htmlOutFile,
+           alignmentSummarySVG(svgOutFile,
                                 singleAlig -> getNumAminos(), 
                                 singleAlig -> getNumSpecies(),
                                 singleAlig -> getCorrespResidues(), 
@@ -1860,6 +1860,7 @@ inline void trimAlManager::print_statistics()
 {
     if (svgStatsOutFile != NULL)
     {
+        cout << "SVG REPORTING" << endl;
         std::string title = infile; // " statistics graphs";
         std::string filename = svgStatsOutFile;
         std::string linename = "";
