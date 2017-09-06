@@ -36,10 +36,10 @@ int main(int argc, char *argv[])
     Trimal.processArguments(argv);
 //     cout << "Performing" << endl;
     
-    std::string title = "New graphic";
-    std::string filename = "filename.svg";
-    
-    utils::streamSVG(NULL, NULL, 0, false, & title, & filename);
+//     std::string title = "New graphic";
+//     std::string filename = "filename.svg";
+//     
+//     utils::streamSVG(NULL, NULL, 0, false, & title, & filename,);
     
     return Trimal.perform();
 }
