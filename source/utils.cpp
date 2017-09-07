@@ -1101,7 +1101,7 @@ void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std
     {
         file << "\"/>" << endl;
         
-        float deltaHeigth = whiteboxHeight / (float)linesLegend.size();
+        float deltaHeigth = whiteboxHeight / (float)(linesLegend.size() + 1 );
         deltaHeigth = std::min(whiteboxHeight * 0.12F, deltaHeigth);
         float height =  whiteboxWidth * legendRatio * 0.1F;
         
@@ -1110,17 +1110,33 @@ void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std
                 << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + 6 << "\" " 
                 << "width=\"" << whiteboxWidth * legendRatio << "\" " 
                 << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
-                << "height=\"" << deltaHeigth * linesLegend.size() << "\" "
+                << "height=\"" << deltaHeigth * (linesLegend.size() + 1) << "\" "
                 << "style=\"fill:white; stroke:black; stroke-width:2\" "
                 << "fill-opacity=\"0.25\" "
                 << "/>" << endl;
+                
+        file    << "<text "
+                << "x=\""   << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.5F <<"\" " 
+                << "y=\""   << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0 + deltaHeigth * 0.5F << "\" " 
+                << "text-anchor=\"middle\" "
+                << "xml:space=\"preserve\" "
+                << "font-size=\"" << fontSize * 2 << "\">"
+                << "Statistics"
+                << "</text>" << endl;
+                    
+        file    << "<line "
+                << "x1=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + 12 << "\" "
+                << "x2=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 1.F  << "\" "
+                << "y1=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0.3F + deltaHeigth * 0.5F << "\" " 
+                << "y2=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0.3F + deltaHeigth * 0.5F << "\" " 
+                << "style=\"stroke:black;stroke-width:2\" />" << endl;
         
         
         for (int x = 0; x < linesLegend.size(); x++)
         {
             file    << "<rect " 
                     << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.1F << "\" " 
-                    << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * x + deltaHeigth * 0.5F - height * 0.5F - fontSize * 0.25F << "\" "
+                    << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * (x + 1) + deltaHeigth * 0.5F - height * 0.5F - fontSize * 0.25F << "\" "
                     << "width=\"" << height << "\" " 
                     << "height=\"" << height << "\" "
                     << "style=\"fill:" << strtok(&linesLegend[x][0], ";") << "; stroke:black; stroke-width:2\" "
@@ -1129,7 +1145,7 @@ void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std
             
             file    << "<text "
                     << "x=\""   << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.5F <<"\" " 
-                    << "y=\""   << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * x + deltaHeigth * 0.5F << "\" " 
+                    << "y=\""   << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * (x + 1) + deltaHeigth * 0.5F << "\" " 
                     << "text-anchor=\"middle\" "
                     << "xml:space=\"preserve\" "
                     << "font-size=\"" << fontSize << "\">"
