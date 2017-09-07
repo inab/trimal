@@ -980,13 +980,14 @@ void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std
                 << "height=\""  << grayboxHeight << "\" " 
                 << "width=\""   << grayboxWidth << "\">" << endl;
                 
-        // Gray box
-        file    << "<rect "
-                << "width=\"" << grayboxWidth << "\" "
-                << "x=\"0\" "
-                << "height=\"" << grayboxHeight << "\" "
-                << "y=\"0\" "
-                << "style=\"fill:gray\"/>" << endl;
+//         // Gray box
+//         file    << "<rect "
+//                 << "width=\"" << grayboxWidth << "\" "
+//                 << "x=\"0\" "
+//                 << "height=\"" << grayboxHeight << "\" "
+//                 << "y=\"0\" "
+//                 << "style=\"fill:gray\" "
+//                 << "fill-opacity=\"0.1\" />" << endl;
                 
         // White box
         file    << "<rect " 
@@ -997,15 +998,15 @@ void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std
                 << "style=\"fill:white; stroke:black; stroke-width:2\" "
                 << "/>" << endl;
                 
-        // Legend box
-        file    << "<rect " 
-                << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) << "\" " 
-                << "width=\"" << whiteboxWidth * legendRatio << "\" " 
-                << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
-                << "height=\"" << whiteboxHeight << "\" "
-                << "style=\"fill:white; stroke:black; stroke-width:2\" "
-                << "fill-opacity=\"0.25\" "
-                << "/>" << endl;
+//         // Legend box
+//         file    << "<rect " 
+//                 << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + 6 << "\" " 
+//                 << "width=\"" << whiteboxWidth * legendRatio << "\" " 
+//                 << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
+//                 << "height=\"" << whiteboxHeight << "\" "
+//                 << "style=\"fill:white; stroke:black; stroke-width:2\" "
+//                 << "fill-opacity=\"0.25\" "
+//                 << "/>" << endl;
                 
         // Header text
         file    << "<text text-anchor=\"middle\" "
@@ -1101,7 +1102,20 @@ void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std
         file << "\"/>" << endl;
         
         float deltaHeigth = whiteboxHeight / (float)linesLegend.size();
+        deltaHeigth = std::min(whiteboxHeight * 0.12F, deltaHeigth);
         float height =  whiteboxWidth * legendRatio * 0.1F;
+        
+//         Legend box
+        file    << "<rect " 
+                << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + 6 << "\" " 
+                << "width=\"" << whiteboxWidth * legendRatio << "\" " 
+                << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
+                << "height=\"" << deltaHeigth * linesLegend.size() << "\" "
+                << "style=\"fill:white; stroke:black; stroke-width:2\" "
+                << "fill-opacity=\"0.25\" "
+                << "/>" << endl;
+        
+        
         for (int x = 0; x < linesLegend.size(); x++)
         {
             file    << "<rect " 

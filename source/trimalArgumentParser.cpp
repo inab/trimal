@@ -1878,15 +1878,13 @@ inline void trimAlManager::print_statistics()
             utils::streamSVG(& x, & y, 0, & linename, & color, NULL, NULL);
             
             for(i = 0, acm = 0; i <= origAlig -> sgaps -> maxGaps; i++) {
-
                 /* If the columns' number with this gaps' number is not equal to zero, we will count the columns. */
                 if(origAlig -> sgaps -> numColumnsWithGaps[i] != 0) {
-
-                /* Compute and prints the accumulative values for the gaps in the alignment. */
-                acm += origAlig -> sgaps -> numColumnsWithGaps[i];
-                x = acm / origAlig -> sgaps -> columns;
-                y = 1.F - ((i * 1.0F)/origAlig -> sgaps ->columnLength);
-                utils::streamSVG(& x, & y, 0, & linename, & color, NULL, NULL);
+                    /* Compute and prints the accumulative values for the gaps in the alignment. */
+                    acm += origAlig -> sgaps -> numColumnsWithGaps[i];
+                    x = acm / origAlig -> sgaps -> columns;
+                    y = 1.F - ((i * 1.0F)/origAlig -> sgaps ->columnLength);
+                    utils::streamSVG(& x, & y, 0, & linename, & color, NULL, NULL);
                 }
             }
         }

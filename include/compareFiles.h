@@ -33,7 +33,7 @@
 #include <string>
 #include <iostream>
 
-#include "alignment.h"
+// #include "alignment.h"
 #include "newAlignment.h"
 
 class compareFiles {
@@ -69,7 +69,7 @@ class compareFiles {
  \param verbosity Wether or not report by printing some results.
  \return \b -1 if there was any error.\n <b> Alignment index </b> of the selected algorithm otherwise.
  */
-    static int algorithm(alignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity);
+//     static int algorithm(alignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity);
 /**
  \brief Method to compare a set of alignments to select the most consistent one respect the others.\n 
  To compute the consistency values we use the proportion of residue pairs per columns in the alignments to compare.
@@ -89,7 +89,7 @@ class compareFiles {
  \param[out] columnsValue Vector to fill with the consistency values.
  \return Wether or not the method went ok.
  */
-    static bool forceComparison(alignment **vectAlignments, int numAlignments, alignment *selected, float *columnsValue);
+//     static bool forceComparison(alignment **vectAlignments, int numAlignments, alignment *selected, float *columnsValue);
 /**
  \brief Method to obtain the consistency values vector for a given alignment against a set of alignments with the same sequences.
  \param vectAlignments Alignment vector to compare against the selected alignment
