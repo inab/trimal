@@ -36,6 +36,8 @@
 #include <iomanip>
 #include <fstream>
 
+#include "defines.h"
+
 class similarityMatrix{
   int *vhash;
   float **simMat;

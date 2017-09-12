@@ -43,8 +43,10 @@
 #include "sequencesMatrix.h"
 #include "statisticsConservation.h"
 #include "similarityMatrix.h"
+#include "defines.h"
 #include "utils.h"
 
+<<<<<<< HEAD:LegacyCode/alignment.h
 #ifndef NEW_ALIGNMENT_H
 
 #define SINGLE  1
@@ -55,6 +57,9 @@
 #define AAType  3
 #define DNADeg  4
 #define RNADeg  5
+=======
+using namespace std;
+>>>>>>> upstream/trimAl:source/alignment.h
 
 struct newValues {
   int residues;

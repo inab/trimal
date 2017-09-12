@@ -1694,9 +1694,9 @@ void alignment::alignmentNexusToFile(ostream &file) {
     << sequenNumber << " NCHAR=" << residNumber <<";" << endl;
 
   /* Print alignment datatype */
-  if (dataType == DNAType)
+  if ((dataType == DNAType) || (dataType == DNADeg))
     file << "FORMAT DATATYPE=DNA INTERLEAVE=yes GAP=-";
-  else if (dataType == RNAType)
+  else if ((dataType == RNAType) || (dataType == RNADeg))
     file << "FORMAT DATATYPE=RNA INTERLEAVE=yes GAP=-";
   else if (dataType == AAType)
     file << "FORMAT DATATYPE=PROTEIN INTERLEAVE=yes GAP=-";
@@ -1769,9 +1769,9 @@ void alignment::alignmentMegaToFile(ostream &file) {
   file << "#MEGA" << endl << filename << endl;
 
   /* Print alignment datatype */
-  if (dataType == DNAType)
+  if ((dataType == DNAType) || (dataType == DNADeg))
     file << "!Format DataType=DNA ";
-  else if (dataType == RNAType)
+  else if ((dataType == RNAType) || (dataType == RNADeg))
     file << "!Format DataType=RNA ";
   else if (dataType == AAType)
     file << "!Format DataType=protein ";
@@ -1812,9 +1812,9 @@ void alignment::alignmentNBRF_PirToFile(ostream &file) {
 
   /* Compute output file datatype */
   getTypeAlignment();
-  if (dataType == DNAType)
+  if ((dataType == DNAType) || (dataType == DNADeg))
     alg_datatype = "DL";
-  else if (dataType == RNAType)
+  else if ((dataType == RNAType) || (dataType == RNADeg))
     alg_datatype = "RL";
   else if (dataType == AAType)
     alg_datatype = "P1";
