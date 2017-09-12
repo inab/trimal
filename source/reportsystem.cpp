@@ -1,278 +1,278 @@
 #include <iomanip>
-#include "../include/verbosemanager.h"
+#include "../include/reportsystem.h"
 #include <iostream>
 
 // Out of line initializations.
 
-VerboseManager::VerboseLevel VerboseManager::Level = VerboseLevel::ERROR;
+ReportSystem::VerboseLevel ReportSystem::Level = VerboseLevel::ERROR;
 
-const std::map<VerboseManager::InfoCode, const char *> VerboseManager::InfoMessages = 
+const std::map<ReportSystem::InfoCode, const char *> ReportSystem::InfoMessages = 
 {
-    { VerboseManager::InfoCode::CuttingSequence, 
+    { ReportSystem::InfoCode::CuttingSequence, 
         "Cutting sequence \"[ŧag]\" at first appearance of stop codon \"[tag]\" (residue \"[tag]\") at position [tag] (length: [tag] \")" }, 
         
-    { VerboseManager::InfoCode::WindowSizeCompareset, 
+    { ReportSystem::InfoCode::WindowSizeCompareset, 
         "Try with specific comparison file window value. Parameter -cw" }, 
 };
     
-const std::map<VerboseManager::WarningCode, const char *> VerboseManager::WarningMessages = 
+const std::map<ReportSystem::WarningCode, const char *> ReportSystem::WarningMessages = 
 {
-    { VerboseManager::WarningCode::RemovingOnlyGapsColumn, 
+    { ReportSystem::WarningCode::RemovingOnlyGapsColumn, 
         "Removing column '[tag]' composed only by gaps" }, 
         
-    { VerboseManager::WarningCode::KeepingOnlyGapsColumn, 
+    { ReportSystem::WarningCode::KeepingOnlyGapsColumn, 
         "Keeping column '[tag]' composed only by gaps" }, 
         
-    { VerboseManager::WarningCode::SequenceWillBeCutted, 
+    { ReportSystem::WarningCode::SequenceWillBeCutted, 
         "Sequence \"[tag]\" will be cutted at position [tag] (length:[tag])" }, 
         
-    { VerboseManager::WarningCode::IncludingIndeterminationSymbols,
+    { ReportSystem::WarningCode::IncludingIndeterminationSymbols,
         "Sequence \"[tag]\" has some indetermination symbols 'X' at the end of sequence. They will be included in the final newAlignment." },
         
-    { VerboseManager::WarningCode::LessNucleotidesThanExpected,
+    { ReportSystem::WarningCode::LessNucleotidesThanExpected,
         "Sequence \"[tag]\" has less nucleotides ([tag]) than expected ([tag]). It will be added N's to complete the sequence" }
 };
     
-const std::map<VerboseManager::ErrorCode, const char *> VerboseManager::ErrorMessages = 
+const std::map<ReportSystem::ErrorCode, const char *> ReportSystem::ErrorMessages = 
 {
-    { VerboseManager::ErrorCode::AlignmentNotLoaded, 
+    { ReportSystem::ErrorCode::AlignmentNotLoaded, 
         "Alignment not loaded: \" [tag] \" Check the file's content" }, 
         
-    { VerboseManager::ErrorCode::NoFormatsSpecified, 
+    { ReportSystem::ErrorCode::NoFormatsSpecified, 
         "You must specify at least one format after the '-formats' argument" }, 
         
-    { VerboseManager::ErrorCode::AlternativeMatrixNotRecognized, 
+    { ReportSystem::ErrorCode::AlternativeMatrixNotRecognized, 
         "Alternative matrix \" [tag] \" not recognized" }, 
         
-    { VerboseManager::ErrorCode::ReferenceFileNotLoaded, 
+    { ReportSystem::ErrorCode::ReferenceFileNotLoaded, 
         "Reference file \" [tag] \" not loaded" }, 
         
-    { VerboseManager::ErrorCode::GapThresholdOutOfRange, 
+    { ReportSystem::ErrorCode::GapThresholdOutOfRange, 
         "The gap threshold value should be between 0 and 1" }, 
         
-    { VerboseManager::ErrorCode::GapThresholdNotRecognized, 
+    { ReportSystem::ErrorCode::GapThresholdNotRecognized, 
         "The gap threshold value should be a positive real number between 0 and 1" }, 
         
-    { VerboseManager::ErrorCode::SimilarityThresholdOutOfRange, 
+    { ReportSystem::ErrorCode::SimilarityThresholdOutOfRange, 
         "The similarity threshold value should be between 0 and 1" }, 
         
-    { VerboseManager::ErrorCode::SimilarityThresholdNotRecognized, 
+    { ReportSystem::ErrorCode::SimilarityThresholdNotRecognized, 
         "The similarity threshold value should be a positive real number between 0 and 1" }, 
         
-    { VerboseManager::ErrorCode::ConsistencyThresholdOutOfRange, 
+    { ReportSystem::ErrorCode::ConsistencyThresholdOutOfRange, 
         "The consistency threshold value should be between 0 and 1" }, 
         
-    { VerboseManager::ErrorCode::ConsistencyThresholdNotRecognized, 
+    { ReportSystem::ErrorCode::ConsistencyThresholdNotRecognized, 
         "The consistency threshold value should be a positive real number between 0 and 1" }, 
         
-    { VerboseManager::ErrorCode::ConservationThresholdOutOfRange, 
+    { ReportSystem::ErrorCode::ConservationThresholdOutOfRange, 
         "The conservation threshold value should be between 0 and 100" }, 
         
-    { VerboseManager::ErrorCode::ConservationThresholdNotRecognized, 
+    { ReportSystem::ErrorCode::ConservationThresholdNotRecognized, 
         "The conservation threshold value should be a positive real number between 0 and 100" }, 
         
-    { VerboseManager::ErrorCode::ResidueOverlapOutOfRange, 
+    { ReportSystem::ErrorCode::ResidueOverlapOutOfRange, 
         "The residue overlap value should be between 0 and 100" }, 
         
-    { VerboseManager::ErrorCode::ResidueOverlapNotRecognized, 
+    { ReportSystem::ErrorCode::ResidueOverlapNotRecognized, 
         "The residue overlap value should be a positive real number between 0 and 100" }, 
         
-    { VerboseManager::ErrorCode::SequencesOverlapOutOfRange, 
+    { ReportSystem::ErrorCode::SequencesOverlapOutOfRange, 
         "The sequences overlap value should be between 0 and 100" }, 
         
-    { VerboseManager::ErrorCode::SequencesOverlapNotRecognized, 
+    { ReportSystem::ErrorCode::SequencesOverlapNotRecognized, 
         "The sequences overlap value should be a positive real number between 0 and 100" }, 
         
-    { VerboseManager::ErrorCode::MaxIdentityOutOfRange, 
+    { ReportSystem::ErrorCode::MaxIdentityOutOfRange, 
         "The max identity value should be between 0 and 1" }, 
         
-    { VerboseManager::ErrorCode::MaxIdentityNotRecognized, 
+    { ReportSystem::ErrorCode::MaxIdentityNotRecognized, 
         "The max identity value should be a positive real number between 0 and 1" }, 
         
-    { VerboseManager::ErrorCode::ClustersValueOutOfRange, 
+    { ReportSystem::ErrorCode::ClustersValueOutOfRange, 
         "The clusters value should be greater than 0" }, 
         
-    { VerboseManager::ErrorCode::ClustersValueNotRecognized, 
+    { ReportSystem::ErrorCode::ClustersValueNotRecognized, 
         "The clusters value should be a positive integer number greater than 0" }, 
         
-    { VerboseManager::ErrorCode::WindowValueOutOfRange, 
+    { ReportSystem::ErrorCode::WindowValueOutOfRange, 
         "The window value should be greater than 0" }, 
         
-    { VerboseManager::ErrorCode::WindowValueNotRecognized, 
+    { ReportSystem::ErrorCode::WindowValueNotRecognized, 
         "The window value should be a positive integer number greater than 0" }, 
         
-    { VerboseManager::ErrorCode::SelectSeqsNotRecognized, 
+    { ReportSystem::ErrorCode::SelectSeqsNotRecognized, 
         "Could not parse the -selectseqs ranges" }, 
         
-    { VerboseManager::ErrorCode::SelectColsNotRecognized, 
+    { ReportSystem::ErrorCode::SelectColsNotRecognized, 
         "Could not parse the -selectres ranges" }, 
         
-    { VerboseManager::ErrorCode::GapWindowValueOutOfRange, 
+    { ReportSystem::ErrorCode::GapWindowValueOutOfRange, 
         "The gap window value should be greater than 0" }, 
         
-    { VerboseManager::ErrorCode::GapWindowValueNotRecognized, 
+    { ReportSystem::ErrorCode::GapWindowValueNotRecognized, 
         "The gap window value should be a positive integer number grater than 0" }, 
         
-    { VerboseManager::ErrorCode::SimilarityWindowValueOutOfRange, 
+    { ReportSystem::ErrorCode::SimilarityWindowValueOutOfRange, 
         "The similarity window value should be greater than 0" }, 
         
-    { VerboseManager::ErrorCode::SimilarityWindowValueNotRecognized, 
+    { ReportSystem::ErrorCode::SimilarityWindowValueNotRecognized, 
         "The similarity window value should be a positive integer number grater than 0" }, 
         
-    { VerboseManager::ErrorCode::ConsistencyThresholdOutOfRange, 
+    { ReportSystem::ErrorCode::ConsistencyThresholdOutOfRange, 
         "The consistency window value should be greater than 0" }, 
         
-    { VerboseManager::ErrorCode::ConsistencyThresholdNotRecognized, 
+    { ReportSystem::ErrorCode::ConsistencyThresholdNotRecognized, 
         "The consistency window value should be a positive integer number grater than 0" }, 
         
-    { VerboseManager::ErrorCode::BlockSizeOutOfRange, 
+    { ReportSystem::ErrorCode::BlockSizeOutOfRange, 
         "The consistency window value should be greater than 0" }, 
         
-    { VerboseManager::ErrorCode::BlockSizeNotRecognized, 
+    { ReportSystem::ErrorCode::BlockSizeNotRecognized, 
         "The consistency window value should be a positive integer number grater than 0" }, 
         
-    { VerboseManager::ErrorCode::InFileComparisonStatistics, 
+    { ReportSystem::ErrorCode::InFileComparisonStatistics, 
         "Option -in not valid in combination with file comparision options: -sft || -sfc || -ct" }, 
         
-    { VerboseManager::ErrorCode::IncompatibleArguments, 
+    { ReportSystem::ErrorCode::IncompatibleArguments, 
         "Argument [tag] is not compatible with argument [tag]" }, 
         
-    { VerboseManager::ErrorCode::SelectSeqsResAndThresholdIncompatibilities, 
+    { ReportSystem::ErrorCode::SelectSeqsResAndThresholdIncompatibilities, 
         "Options -selectCols and -selectSeqs are not allowed in combination with threshold options: (-gt || -st || -ct || -cons)" }, 
     
-    { VerboseManager::ErrorCode::SelectSeqsResAndAutomathedMethodsIncompatibilities, 
+    { ReportSystem::ErrorCode::SelectSeqsResAndAutomathedMethodsIncompatibilities, 
         "Options -selectCols and -selectSeqs are not allowed in combination with automated trimming options: (-nogaps || -noallgaps || -gappyout || -strict || -strictplus || -automated1)." }, 
         
-    { VerboseManager::ErrorCode::SelectSeqsResAndWindowIncompatibilities, 
+    { ReportSystem::ErrorCode::SelectSeqsResAndWindowIncompatibilities, 
         "Options -selectCols and -selectSeqs are not allowed in combination with window options: (-w || -sw || -gw || -wc)" }, 
         
-    { VerboseManager::ErrorCode::SelectSeqsResAndOverlapIncompatibilites, 
+    { ReportSystem::ErrorCode::SelectSeqsResAndOverlapIncompatibilites, 
         "Options -selectCols and -selectSeqs are not allowed in combination of overlap options (-resoverlap || -seqoverlap)" }, 
         
-    { VerboseManager::ErrorCode::OnlyOneSequencesSelectionMethodAllowed, 
+    { ReportSystem::ErrorCode::OnlyOneSequencesSelectionMethodAllowed, 
         "Only one method to chose sequences can be applied: (-selectseqs || -clusters || -maxIdentity" }, 
         
-    { VerboseManager::ErrorCode::CombinationAmongTrimmingMethods, 
+    { ReportSystem::ErrorCode::CombinationAmongTrimmingMethods, 
         "Only one trimming method can be used at the same time, either automatic or manual" }, 
         
-    { VerboseManager::ErrorCode::AutomathicMethodAndBlock, 
+    { ReportSystem::ErrorCode::AutomathicMethodAndBlock, 
         "Combination between automatic methods and -block options is not allowed" }, 
         
-    { VerboseManager::ErrorCode::WindowAndArgumentIncompatibilities, 
+    { ReportSystem::ErrorCode::WindowAndArgumentIncompatibilities, 
         "Combination between general and specific windows is not allowed" }, 
         
-    { VerboseManager::ErrorCode::CombinationAmongThresholdsMethods, 
+    { ReportSystem::ErrorCode::CombinationAmongThresholdsMethods, 
         "Combination among thresholds are not allowed" }, 
         
-    { VerboseManager::ErrorCode::GeneralAndSpecificWindows, 
+    { ReportSystem::ErrorCode::GeneralAndSpecificWindows, 
         "General window (-w) is not compatible with specific window options: (-cw, -gw, -sw)" }, 
     
-    { VerboseManager::ErrorCode::StatisticsArgumentIncompatibilities, 
+    { ReportSystem::ErrorCode::StatisticsArgumentIncompatibilities, 
         "Parameter [tag] is not valid when statistics' parameters are defined" }, 
         
-    { VerboseManager::ErrorCode::TrimmingMethodNeeded, 
+    { ReportSystem::ErrorCode::TrimmingMethodNeeded, 
         "Parameter [tag] can only be used with either an automatic or a manual method" }, 
         
-    { VerboseManager::ErrorCode::ForceFileWithoutCompareDataset, 
+    { ReportSystem::ErrorCode::ForceFileWithoutCompareDataset, 
         "You can not force the alignment selection without setting an alignment dataset to compare against" }, 
         
-    { VerboseManager::ErrorCode::BacktranslationWithoutMainAlignment, 
+    { ReportSystem::ErrorCode::BacktranslationWithoutMainAlignment, 
         "You need to specify an input alignment (-in or -forcefile) to use a Coding Sequence File (-backtranslation) to apply the back translation method" }, 
         
-    { VerboseManager::ErrorCode::NotAligned, 
+    { ReportSystem::ErrorCode::NotAligned, 
         "The sequences in the input alignment [tag] should be aligned in order to use any trimming method or statistics" }, 
         
-    { VerboseManager::ErrorCode::MatrixGivenWithNoMethodToUseIt, 
+    { ReportSystem::ErrorCode::MatrixGivenWithNoMethodToUseIt, 
         "The Similarity Matrix can only be used with methods that use this matrix" }, 
         
-    { VerboseManager::ErrorCode::SameNameOutput, 
+    { ReportSystem::ErrorCode::SameNameOutput, 
         "The [tag] and [tag] files can't be the same" }, 
         
-    { VerboseManager::ErrorCode::SequenceAndResiduesOverlapMutuallyNeeded, 
+    { ReportSystem::ErrorCode::SequenceAndResiduesOverlapMutuallyNeeded, 
         "Sequence and residues overlap values are mutually needed. You only specified [tag]" }, 
         
-    { VerboseManager::ErrorCode::OutFileNeededWhenPrintingStatistics, 
+    { ReportSystem::ErrorCode::OutFileNeededWhenPrintingStatistics, 
         "Out file must be specified in order to print any statistics" }, 
         
-    { VerboseManager::ErrorCode::AlignmentTypesNotMatching, 
+    { ReportSystem::ErrorCode::AlignmentTypesNotMatching, 
         "The alignments' datatypes are different. Check your dataset" }, 
         
-    { VerboseManager::ErrorCode::BlocksizeTooBig, 
+    { ReportSystem::ErrorCode::BlocksizeTooBig, 
         "The block size value is too big. Please, choose another one smaller than residues number / 4. In this case, the limit is: [tag]" }, 
         
-    { VerboseManager::ErrorCode::ParemeterOnlyOnBacktranslation, 
+    { ReportSystem::ErrorCode::ParemeterOnlyOnBacktranslation, 
         "The [tag] parameter can be only set up with backtranslation functionality" }, 
         
-    { VerboseManager::ErrorCode::ProteinAlignmentMustBeAligned, 
+    { ReportSystem::ErrorCode::ProteinAlignmentMustBeAligned, 
         "The input protein file has to be aligned to carry out the backtranslation process" }, 
                 
-    { VerboseManager::ErrorCode::BacktransAlignIsDNA, 
+    { ReportSystem::ErrorCode::BacktransAlignIsDNA, 
         "Check your Coding sequences file. It has been detected other kind of biological sequences" }, 
         
-    { VerboseManager::ErrorCode::ImpossibleToGenerate, 
+    { ReportSystem::ErrorCode::ImpossibleToGenerate, 
         "Impossible to generate [tag]" }, 
         
-    { VerboseManager::ErrorCode::ImpossibleToProcessMatrix, 
+    { ReportSystem::ErrorCode::ImpossibleToProcessMatrix, 
         "It's impossible to process the Similarity Matrix" }, 
         
-    { VerboseManager::ErrorCode::SelectOnlyAccepts, 
+    { ReportSystem::ErrorCode::SelectOnlyAccepts, 
         "Option [tag] only accepts ranges from 0 to number of [tag] - 1" }, 
         
-    { VerboseManager::ErrorCode::MoreClustersThanSequences, 
+    { ReportSystem::ErrorCode::MoreClustersThanSequences, 
         "The number of clusters from the Alignment can not be larger than the number of sequences from that alignment" }, 
         
-    { VerboseManager::ErrorCode::LeftBoundaryBiggerThanRightBoundary, 
+    { ReportSystem::ErrorCode::LeftBoundaryBiggerThanRightBoundary, 
         "Check your manually set left '[tag]' and right '[tag]' boundaries'" }, 
         
-    { VerboseManager::ErrorCode::DifferentNumberOfSequencesInCompareset, 
+    { ReportSystem::ErrorCode::DifferentNumberOfSequencesInCompareset, 
         "The files to compare do not have the same number of sequences" }, 
     
-    { VerboseManager::ErrorCode::DifferentSeqsNamesInCompareset, 
+    { ReportSystem::ErrorCode::DifferentSeqsNamesInCompareset, 
         "Sequences names differ in compareset files" }, 
 
-    { VerboseManager::ErrorCode::CDScontainsProteinSequences, 
+    { ReportSystem::ErrorCode::CDScontainsProteinSequences, 
         "Check input CDS file. It seems to content protein residues." }, 
         
-    { VerboseManager::ErrorCode::SequenceContainsGap, 
+    { ReportSystem::ErrorCode::SequenceContainsGap, 
         "Sequence \"[tag]\" has, at least, one gap" }, 
         
-    { VerboseManager::ErrorCode::SequenceNotMultipleOfThree, 
+    { ReportSystem::ErrorCode::SequenceNotMultipleOfThree, 
         "Sequence length \"[tag]\" is not multiple of 3 (length: [tag])" }, 
         
-    { VerboseManager::ErrorCode::SequenceHasStopCodon, 
+    { ReportSystem::ErrorCode::SequenceHasStopCodon, 
         "Sequence \"[tag]\" has stop codon \"[tag]\" (residue \"[tag]\") at position [tag] (length: [tag])" }, 
         
-    { VerboseManager::ErrorCode::SequenceNotPresentInCDS, 
+    { ReportSystem::ErrorCode::SequenceNotPresentInCDS, 
         "Sequence \"[tag]\" is not in CDS file." }, 
         
-    { VerboseManager::ErrorCode::UnknownCharacter, 
+    { ReportSystem::ErrorCode::UnknownCharacter, 
         "The sequence \"[tag]\" has an unknown ([tag]) character." }, 
         
-    { VerboseManager::ErrorCode::SequencesNotSameSize, 
+    { ReportSystem::ErrorCode::SequencesNotSameSize, 
         "The sequence \"[tag]\" ([tag]) does not have the same number of residues fixed by the alignment ([tag])" }, 
         
-    { VerboseManager::ErrorCode::IncorrectSymbol, 
+    { ReportSystem::ErrorCode::IncorrectSymbol, 
         "the symbol '[tag]' is incorrect" }, 
         
-    { VerboseManager::ErrorCode::UndefinedSymbol, 
+    { ReportSystem::ErrorCode::UndefinedSymbol, 
         "the symbol '[tag]' accesing the matrix is not defined in this object" }, 
         
-    { VerboseManager::ErrorCode::ParameterNotFoundOrRepeated, 
+    { ReportSystem::ErrorCode::ParameterNotFoundOrRepeated, 
         "Parameter \"[tag]\" not valid or repeated." }, 
         
-    { VerboseManager::ErrorCode::SimilarityMatrixNotCompatibleWindow, 
+    { ReportSystem::ErrorCode::SimilarityMatrixNotCompatibleWindow, 
         "The Similarity Matrix can only be used with general/similarity windows size." }, 
         
-    { VerboseManager::ErrorCode::PossibleMissmatch, 
+    { ReportSystem::ErrorCode::PossibleMissmatch, 
         "Possible (\") mismatch for comments" }, 
         
-    { VerboseManager::ErrorCode::BracketsMissmatchFound, 
+    { ReportSystem::ErrorCode::BracketsMissmatchFound, 
         "Brackets (]) mismatch found" }, 
 };
 
-void VerboseManager::PrintCodesAndMessages()
+void ReportSystem::PrintCodesAndMessages()
 {
-    switch(VerboseManager::Level)
+    switch(ReportSystem::Level)
     {
         case VerboseLevel::NONE:
             std::cout << "[VerboseLevel] None" << std::endl;
@@ -288,26 +288,26 @@ void VerboseManager::PrintCodesAndMessages()
             break;
     }
 
-    for (int i = 1; i < VerboseManager::InfoCode::__MAXINFO ; i++)
+    for (int i = 1; i < ReportSystem::InfoCode::__MAXINFO ; i++)
     {
 //         std::cout << "Info Code:    " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
-        VerboseManager::Report((VerboseManager::InfoCode)i);
+        ReportSystem::Report((ReportSystem::InfoCode)i);
     }
     
-    for (int i = 1; i < VerboseManager::WarningCode::__MAXWARNING ; i++)
+    for (int i = 1; i < ReportSystem::WarningCode::__MAXWARNING ; i++)
     {
 //         std::cout << "Warning Code: " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
-        VerboseManager::Report((VerboseManager::WarningCode)i);
+        ReportSystem::Report((ReportSystem::WarningCode)i);
     }  
     
-    for (int i = 1; i < VerboseManager::ErrorCode::__MAXERROR ; i++)
+    for (int i = 1; i < ReportSystem::ErrorCode::__MAXERROR ; i++)
     {
 //         std::cerr << "Error Code:   " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
-        VerboseManager::Report((VerboseManager::ErrorCode)i);
+        ReportSystem::Report((ReportSystem::ErrorCode)i);
     }
 }
 
-void VerboseManager::Report(VerboseManager::ErrorCode message, std::string * vars)
+void ReportSystem::Report(ReportSystem::ErrorCode message, std::string * vars)
 {
     if (Level < VerboseLevel::ERROR)
     {
@@ -338,7 +338,7 @@ void VerboseManager::Report(VerboseManager::ErrorCode message, std::string * var
     }
 }
 
-void VerboseManager::Report(VerboseManager::ErrorCode message, char * vars)
+void ReportSystem::Report(ReportSystem::ErrorCode message, char * vars)
 {
     if (Level < VerboseLevel::ERROR) return;
     
@@ -362,7 +362,7 @@ void VerboseManager::Report(VerboseManager::ErrorCode message, char * vars)
 
 }
 
-void VerboseManager::Report(VerboseManager::WarningCode message, std::string * vars)
+void ReportSystem::Report(ReportSystem::WarningCode message, std::string * vars)
 {
     if (Level < VerboseLevel::WARNING)
     {
@@ -393,7 +393,7 @@ void VerboseManager::Report(VerboseManager::WarningCode message, std::string * v
     }
 }
 
-void VerboseManager::Report(VerboseManager::WarningCode message, char * vars)
+void ReportSystem::Report(ReportSystem::WarningCode message, char * vars)
 {
     if (Level < VerboseLevel::WARNING) return;
     
@@ -417,7 +417,7 @@ void VerboseManager::Report(VerboseManager::WarningCode message, char * vars)
 
 }
 
-void VerboseManager::Report(VerboseManager::InfoCode message, std::string * vars)
+void ReportSystem::Report(ReportSystem::InfoCode message, std::string * vars)
 {
     if (Level < VerboseLevel::INFO)
     {
@@ -448,7 +448,7 @@ void VerboseManager::Report(VerboseManager::InfoCode message, std::string * vars
     }
 }
 
-void VerboseManager::Report(VerboseManager::InfoCode message, char * vars)
+void ReportSystem::Report(ReportSystem::InfoCode message, char * vars)
 {
     if (Level < VerboseLevel::INFO) return;
     

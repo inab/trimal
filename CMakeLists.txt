@@ -34,7 +34,7 @@ set(preview
         source/StatisticsManager.cpp
         source/trimalArgumentParser.cpp
         source/ReadWriteMS/ReadWriteMachineState.cpp
-        source/verbosemanager.cpp
+        source/reportsystem.cpp
         )
 
 # Include all states of ReadWriteMachineState

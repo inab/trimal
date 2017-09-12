@@ -9,7 +9,7 @@
 #include "../include/newAlignment.h"
 #include "../include/defines.h"
 
-#include "../include/verbosemanager.h"
+#include "../include/reportsystem.h"
 
 int Cleaner::selectMethod(void) {
 
@@ -1559,7 +1559,7 @@ bool Cleaner::removeOnlyTerminal(void) {
   }
 
   else if(left_boundary >= right_boundary) {
-      VerboseManager::Report(VerboseManager::ErrorCode::LeftBoundaryBiggerThanRightBoundary, new std::string[2]{ std::to_string(left_boundary), std::to_string(right_boundary)} );
+      ReportSystem::Report(ReportSystem::ErrorCode::LeftBoundaryBiggerThanRightBoundary, new std::string[2]{ std::to_string(left_boundary), std::to_string(right_boundary)} );
 //     cerr << endl << "ERROR: Check your manually set left '"<< left_boundary
 //       << "' and right '" << right_boundary << "' boundaries'" << endl << endl;
     return false;
@@ -1636,7 +1636,7 @@ newValues Cleaner::removeCols_SeqsAllGaps(void) {
             if(!warnings)
                 cerr << endl;
             warnings = true;
-            VerboseManager::Report(VerboseManager::WarningCode::RemovingOnlyGapsColumn);
+            ReportSystem::Report(ReportSystem::WarningCode::RemovingOnlyGapsColumn);
 //             cerr << "WARNING: Removing column '" << i << "' composed only by gaps"
 //                  << endl;
             _alignment -> saveResidues[i] = -1;
@@ -1665,12 +1665,12 @@ newValues Cleaner::removeCols_SeqsAllGaps(void) {
             warnings = true;
 
             if(keepSequences) {
-                VerboseManager::Report(VerboseManager::WarningCode::KeepingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
+                ReportSystem::Report(ReportSystem::WarningCode::KeepingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
 //                 cerr << "WARNING: Keeping sequence '" << _alignment -> seqsName[i]
 //                      << "' composed only by gaps" << endl;
                 counter.sequences ++;
             } else {
-                VerboseManager::Report(VerboseManager::WarningCode::RemovingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
+                ReportSystem::Report(ReportSystem::WarningCode::RemovingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
 //                 cerr << "WARNING: Removing sequence '" << _alignment -> seqsName[i]
 //                      << "' composed only by gaps" << endl;
                 _alignment -> saveSequences[i] = -1;

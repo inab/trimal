@@ -30,7 +30,7 @@
 #include "../include/utils.h"
 #include "../include/values.h"
 #include "../include/defines.h"
-#include "../include/verbosemanager.h"
+#include "../include/reportsystem.h"
 #include <sstream>
 #include <iomanip>
 #include <math.h>
@@ -432,7 +432,7 @@ char* utils::trimLine(string nline) {
     /* If there is only one flag '"' for comments inside of sequence,
      * user should be warned about that */
     if (pos == next) {
-        VerboseManager::Report(VerboseManager::ErrorCode::PossibleMissmatch);
+        ReportSystem::Report(ReportSystem::ErrorCode::PossibleMissmatch);
 //       cerr << endl << "ERROR: Possible (\") mismatch for comments" << endl;
       return NULL;
     }
@@ -455,7 +455,7 @@ char* utils::trimLine(string nline) {
       if ((int) nline.find("]", 0) == (int) string::npos)
         break;
       /* Otherwise, warn about the error */
-      VerboseManager::Report(VerboseManager::ErrorCode::BracketsMissmatchFound);
+      ReportSystem::Report(ReportSystem::ErrorCode::BracketsMissmatchFound);
 //       cerr << endl << "ERROR: Brackets (]) mismatch found" << endl;
       return NULL;
     }
@@ -465,7 +465,7 @@ char* utils::trimLine(string nline) {
 
     /* If no closing bracket has been found. Warn about the mismatch */
     if (pos == (int) string::npos) {
-              VerboseManager::Report(VerboseManager::ErrorCode::BracketsMissmatchFound);
+              ReportSystem::Report(ReportSystem::ErrorCode::BracketsMissmatchFound);
 //       cerr << endl << "ERROR: Brackets ([) mismatch found" << endl;
       return NULL;
     }

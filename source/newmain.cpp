@@ -25,11 +25,11 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "../include/trimalArgumentParser.h"
-#include "../include/verbosemanager.h"
+#include "../include/reportsystem.h"
 
 int main(int argc, char *argv[])
 {
-    VerboseManager::PrintCodesAndMessages();
+    ReportSystem::PrintCodesAndMessages();
 
     trimAlManager Trimal = trimAlManager();
 
