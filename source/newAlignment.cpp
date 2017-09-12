@@ -50,6 +50,7 @@ using namespace std;
 #include <map>
 #include <vector>
 #include <cmath>
+#include "../include/verbosemanager.h"
 
 using namespace std;
 
@@ -610,15 +611,15 @@ void newAlignment::fillNewDataStructure(newValues *data) {
         }
         j++;
     }
-    // cerr << data -> seqsName[j-1] << endl;
 }
 
 bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon,\
         newAlignment *proteinAlig) {
 
     if (getAlignmentType() == SequenceTypes::AA) {
-        cerr << endl << "ERROR: Check input CDS file. It seems to content protein "
-             << "residues." << endl << endl;
+        VerboseManager::Report(VerboseManager::ErrorCode::CDScontainsProteinSequences);
+//         cerr << endl << "ERROR: Check input CDS file. It seems to content protein "
+//              << "residues." << endl << endl;
         return false;
     }
     
@@ -657,8 +658,9 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
         if(sequences[i].find("-") != string::npos) {
             if (!warning)
                 cerr << endl;
-            cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has, at least, one gap"
-                 << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SequenceContainsGap, new std::string[1] { seqsName[i] });
+//             cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has, at least, one gap"
+//                  << endl << endl;
             return false;
         }
 
@@ -666,8 +668,9 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
             if (!warning)
                 cerr << endl;
             warning = true;
-            cerr << "WARNING: Sequence length \"" << seqsName[i] << "\" is not "
-                 << "multiple of 3 (length: " << sequences[i].length() << ")" << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SequenceNotMultipleOfThree, new std::string [2] {seqsName[i], std::to_string(sequences[i].length()) });
+//             cerr << "WARNING: Sequence length \"" << seqsName[i] << "\" is not "
+//                  << "multiple of 3 (length: " << sequences[i].length() << ")" << endl;
         }
 
         /* Ignore stop codons from the CDS if set by the user */
@@ -704,23 +707,13 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
                 /* If split_by_stop_codon flag is activated then cut input CDS sequence
                  * up to first appearance of a stop codon */
                 else if(splitByStopCodon) {
-                    if (!warning)
-                        cerr << endl;
                     warning = true;
-                    cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
-                         << " appearance of stop codon \"TGA\" (residue \"" << aminoAcid
-                         << "\") at position " << (int) found + 1 << " (length: "
-                         << sequences[i].length() << ")" << endl;
+                    VerboseManager::Report(VerboseManager::InfoCode::CuttingSequence, new std::string[5] { seqsName[i], "TGA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length()) });
                     sequences[i].resize((int) found);
                 }
                 /* Otherwise, warn about it and return an error */
                 else {
-                    if (!warning)
-                        cerr << endl;
-                    cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
-                         << "TGA\" (residue \"" << aminoAcid << "\") at position "
-                         << (int) found + 1 << " (length: " << sequences[i].length() << ")"
-                         << endl << endl;
+                    VerboseManager::Report(VerboseManager::ErrorCode::SequenceHasStopCodon, new std::string[5]{ seqsName[i], "TGA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
                     return false;
                 }
             }
@@ -749,23 +742,13 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
                 /* If split_by_stop_codon flag is activated then cut input CDS sequence
                  * up to first appearance of a stop codon */
                 else if(splitByStopCodon) {
-                    if (!warning)
-                        cerr << endl;
                     warning = true;
-                    cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
-                         << " appearance of stop codon \"TAA\" (residue \"" << aminoAcid
-                         << "\") at position " << (int) found + 1 << " (length: "
-                         << sequences[i].length() << ")" << endl;
+                    VerboseManager::Report(VerboseManager::InfoCode::CuttingSequence, new std::string[5] { seqsName[i], "TAA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length()) });
                     sequences[i].resize((int) found);
                 }
                 /* Otherwise, warn about it and return an error */
                 else {
-                    if (!warning)
-                        cerr << endl;
-                    cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
-                         << "TAA\" (residue \"" << aminoAcid << "\") at position "
-                         << (int) found + 1 << " (length: " << sequences[i].length() << ")"
-                         << endl << endl;
+                    VerboseManager::Report(VerboseManager::ErrorCode::SequenceHasStopCodon, new std::string[5]{ seqsName[i], "TAA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
                     return false;
                 }
             }
@@ -794,23 +777,13 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
                 /* If split_by_stop_codon flag is activated then cut input CDS sequence
                  * up to first appearance of a stop codon */
                 else if(splitByStopCodon) {
-                    if (!warning)
-                        cerr << endl;
                     warning = true;
-                    cerr << "WARNING: Cutting sequence \"" << seqsName[i] << "\" at first"
-                         << " appearance of stop codon \"TAG\" (residue \"" << aminoAcid
-                         << "\") at position " << (int) found + 1 << " (length: "
-                         << sequences[i].length() << ")" << endl;
+                    VerboseManager::Report(VerboseManager::InfoCode::CuttingSequence, new std::string[5] { seqsName[i], "TAG", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length()) });
                     sequences[i].resize((int) found);
                 }
                 /* Otherwise, warn about it and return an error */
                 else {
-                    if (!warning)
-                        cerr << endl;
-                    cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has stop codon \""
-                         << "TAG\" (residue \"" << aminoAcid << "\") at position "
-                         << (int) found + 1 << " (length: " << sequences[i].length() << ")"
-                         << endl << endl;
+                    VerboseManager::Report(VerboseManager::ErrorCode::SequenceHasStopCodon, new std::string[5]{ seqsName[i], "TAG", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
                     return false;
                 }
             }
@@ -858,23 +831,25 @@ bool newAlignment::checkCorrespondence(string *names, int *lengths, int \
                     if (!warnings)
                         cerr << endl;
                     warnings = true;
-                    cerr << "WARNING: Sequence \"" << seqsName[i] << "\" will be cutted "
-                         << "at position " << seqLength << " (length: "<< lengths[j] << ")"
-                         << endl;
+                    VerboseManager::Report(VerboseManager::WarningCode::SequenceWillBeCutted, new std::string[3]{ seqsName[i], std::to_string(seqLength), std::to_string(lengths[j])});
+//                     cerr << "WARNING: Sequence \"" << seqsName[i] << "\" will be cutted "
+//                          << "at position " << seqLength << " (length: "<< lengths[j] << ")"
+//                          << endl;
                     break;
                 }
 
                 /* It has been detected some indeterminations at the end of the protein
                  * sequence. That ifileue could be cause by some incomplete codons in the
-                 * nucleotide sequences. This ifileue is solved adding as much 'N' symbols
+                 * nucleotide sequences. This issue is solved adding as much 'N' symbols
                  * as it is needed to preserve the backtranslated newAlignment */
                 else if((indet > 0) && (indet > (seqLength - lengths[j])/3)) {
                     if (!warnings)
                         cerr << endl;
                     warnings = true;
-                    cerr << "WARNING: Sequence \"" << seqsName[i] << "\" has some inde"
-                         << "termination symbols 'X' at the end of sequence. They will be"
-                         << " included in the final newAlignment." << endl;
+                    VerboseManager::Report(VerboseManager::WarningCode::IncludingIndeterminationSymbols, new std::string[1]{seqsName[i]});
+//                     cerr << "WARNING: Sequence \"" << seqsName[i] << "\" has some inde"
+//                          << "termination symbols 'X' at the end of sequence. They will be"
+//                          << " included in the final newAlignment." << endl;
                     break;
                 }
 
@@ -885,9 +860,10 @@ bool newAlignment::checkCorrespondence(string *names, int *lengths, int \
                     if (!warnings)
                         cerr << endl;
                     warnings = true;
-                    cerr << "WARNING: Sequence \"" << seqsName[i] << "\" has lefile nucleo"
-                         << "tides (" << lengths[j] << ") than expected (" << seqLength
-                         << "). It will be added N's to complete the sequence"  << endl;
+                    VerboseManager::Report(VerboseManager::WarningCode::LessNucleotidesThanExpected, new std::string[3] { seqsName[i], std::to_string(lengths[j]), std::to_string(seqLength)});
+//                     cerr << "WARNING: Sequence \"" << seqsName[i] << "\" has less nucleo"
+//                          << "tides (" << lengths[j] << ") than expected (" << seqLength
+//                          << "). It will be added N's to complete the sequence"  << endl;
                     break;
                 }
             }
@@ -895,8 +871,9 @@ bool newAlignment::checkCorrespondence(string *names, int *lengths, int \
 
         /* Warn about a mismatch a sequences name level */
         if(j == totalInputSeqs) {
-            cerr << endl << "ERROR: Sequence \"" << seqsName[i] << "\" is not in "
-                 << "CDS file." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SequenceNotPresentInCDS, new std::string[1]{ seqsName[i] });
+//             cerr << endl << "ERROR: Sequence \"" << seqsName[i] << "\" is not in "
+//                  << "CDS file." << endl << endl;
             return false;
         }
     }
@@ -920,8 +897,9 @@ bool newAlignment::fillMatrices(bool aligned) {
     for(i = 0; i < sequenNumber; i++)
         for(j = 0; j < sequences[i].length(); j++)
             if((!isalpha(sequences[i][j])) && (!ispunct(sequences[i][j]))) {
-                cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has an "
-                     << "unknown (" << sequences[i][j] << ") character." << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::UnknownCharacter, new std::string[2]{ seqsName[i], std::to_string(sequences[i][j]) });
+//                 cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has an "
+//                      << "unknown (" << sequences[i][j] << ") character." << endl;
                 return false;
             }
 
@@ -939,8 +917,9 @@ bool newAlignment::fillMatrices(bool aligned) {
     /* Warm about those cases where sequences should be aligned
      * and there are not */
     if (aligned and !isAligned) {
-        cerr << endl << "ERROR: Sequences should be aligned (all with same length) "
-             << "and there are not. Check your input alignment" << endl;
+        VerboseManager::Report(VerboseManager::ErrorCode::NotAligned, new std::string[1] { filename });
+//         cerr << endl << "ERROR: Sequences should be aligned (all with same length) "
+//              << "and there are not. Check your input alignment" << endl;
         return false;
     }
 
@@ -951,9 +930,10 @@ bool newAlignment::fillMatrices(bool aligned) {
     /* Check whether aligned sequences have the length fixed for the input alig */
     for(i = 0; (i < sequenNumber) and (aligned); i++) {
         if(sequences[i].length() != residNumber) {
-            cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" ("
-                 << sequences[i].length() << ") does not have the same number of residues "
-                 << "fixed by the alignment (" << residNumber << ")." << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SequencesNotSameSize, new std::string[3]{ seqsName[i], std::to_string(sequences[i].length()), std::to_string(residNumber)});
+//             cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" ("
+//                  << sequences[i].length() << ") does not have the same number of residues "
+//                  << "fixed by the alignment (" << residNumber << ")." << endl;
             return false;
         }
     }
@@ -1289,7 +1269,8 @@ bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, 
   /* Check whether sequences in the alignment are aligned or not.
    * Warn about it if there are not aligned. */
   if (!isAligned) {
-    cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
+      VerboseManager::Report(VerboseManager::ErrorCode::NotAligned, new std::string[1]{ filename });
+//     cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
     return false;
   }
 
@@ -1567,7 +1548,8 @@ bool newAlignment::alignmentSummarySVG(char *destFile, int residues, int seqs, i
         simValues = scons -> getMdkwVector();
     // Check if alignment is aligned;
     if (!isAligned) {
-        cerr << endl << "ERROR: Sequences are not aligned. SVG report won't be created." << endl << endl;
+        VerboseManager::Report(VerboseManager::ErrorCode::NotAligned, new std::string[1]{ filename });
+//         cerr << endl << "ERROR: Sequences are not aligned. SVG report won't be created." << endl << endl;
         return false;
     }
 
@@ -2391,7 +2373,8 @@ bool newAlignment::alignmentColourHTML(ostream &file) {
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
     if (!isAligned) {
-        cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
+        VerboseManager::Report(VerboseManager::ErrorCode::NotAligned, new std::string[1]{ filename });
+//         cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
         return false;
     }
 

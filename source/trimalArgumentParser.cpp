@@ -7,6 +7,8 @@
 #include "../include/compareFiles.h"
 #include "../include/defines.h"
 #include "../include/values.h"
+#include "../include/verbosemanager.h"
+
 void menu();
 void examples();
 
@@ -82,7 +84,8 @@ void trimAlManager::parseArguments(int argc, char *argv[])
         if (split_by_stop_codon_argument(&argc, argv, &i))  continue;
         if (ignore_stop_codon_argument(&argc, argv, &i))    continue;
 
-        cerr << endl << "ERROR: Parameter \"" << argv[i] << "\" not valid or repeated." << endl << endl;
+        VerboseManager::Report(VerboseManager::ErrorCode::ParameterNotFoundOrRepeated, argv[i]);
+//         cerr << endl << "ERROR: Parameter \"" << argv[i] << "\" not valid or repeated." << endl << endl;
         appearErrors = true;
         break;
     }
@@ -114,7 +117,7 @@ inline bool trimAlManager::in_argument(int *argc, char *argv[], int *i)
         if ((origAlig = ReadWriteMachine.loadAlignment(infile)) == nullptr)
 //         if(!origAlig -> ReadWrite -> loadAlignment(infile))
         {
-            cerr << endl << "ERROR: newAlignment  not loaded: \"" << infile << "\" Check the file's content." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::AlignmentNotLoaded, infile );
             appearErrors = true;
         }
         return true;
@@ -178,7 +181,7 @@ bool trimAlManager::out_format_arguments(int *argc, char *argv[], int *i)
         {
             if ((*i + 1) == *argc)
             {
-                cerr << "ERROR: You must specify at least one format after the '-formats' argument" << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::NoFormatsSpecified);
             }
             while (++(*i) != *argc && argv[*i][0] != '-')
                 oformats.push_back(argv[*i]);
@@ -306,7 +309,7 @@ inline bool trimAlManager::matrix_argument(int *argc, char *argv[], int *i)
       if (!strcmp(argv[*i], "degenerated_nt_identity"))
         alternative_matrix = 1;
       else {
-        cerr << endl << "ERROR: Alternative not recognized \"" << argv[*i] << "\"" << endl << endl;
+          VerboseManager::Report(VerboseManager::ErrorCode::AlternativeMatrixNotRecognized, argv[*i]);
         appearErrors = true;
       }
     }
@@ -320,7 +323,7 @@ inline bool trimAlManager::compareset_argument(int *argc, char *argv[], int *i)
         compare.open(argv[++*i], ifstream::in);
         if(!compare)
         {
-            cerr << endl << "ERROR: Could not open the reference file (-compareset file) \"" << argv[*i] << "\"" << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::ReferenceFileNotLoaded, argv[*i]);
             appearErrors = true;
         }
 
@@ -344,7 +347,7 @@ inline bool trimAlManager::force_select_argument(int *argc, char *argv[], int *i
         if ((origAlig = ReadWriteMachine.loadAlignment(forceFile)) == nullptr)
 //         if(!origAlig -> ReadWrite -> loadAlignment(forceFile))
         {
-            cerr << endl << "ERROR: alignment not loaded: \"" << forceFile << "\" Check the file's content." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::AlignmentNotLoaded, forceFile);
             appearErrors = true;
         }
         return true;
@@ -362,7 +365,7 @@ inline bool trimAlManager::back_trans_argument(int *argc, char *argv[], int *i)
 
         if ((backtranslationAlig = ReadWriteMachine.loadAlignment(backtransFile)) == nullptr)
         {
-            cerr << endl << "ERROR: alignment not loaded: \"" << backtransFile << "\" Check the file's content." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::AlignmentNotLoaded, backtransFile);
             appearErrors = true;
         }
         return true;
@@ -379,13 +382,13 @@ inline bool trimAlManager::gap_threshold_argument(int *argc, char *argv[], int *
             gapThreshold = 1. - atof(argv[*i]);
             if((gapThreshold < 0) || (gapThreshold > 1))
             {
-                cerr << endl << "ERROR: The gap threshold value should be between 0 and 1." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::GapThresholdOutOfRange);
                 appearErrors = true;
             }
         }
         else
         {
-            cerr << endl << "ERROR: The gap threshold value should be a positive real number." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::GapThresholdNotRecognized);
             appearErrors = true;
         }
         return true;
@@ -402,13 +405,15 @@ inline bool trimAlManager::similarity_threshold_argument(int *argc, char *argv[]
             similarityThreshold = atof(argv[*i]);
             if((similarityThreshold < 0) || (similarityThreshold > 1))
             {
-                cerr << endl << "ERROR: The similarity threshold value should be between 0 and 1." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::SimilarityThresholdOutOfRange);
+//                 cerr << endl << "ERROR: The similarity threshold value should be between 0 and 1." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
-            cerr << endl << "ERROR: The similarity threshold value should be a positive real number." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SimilarityThresholdNotRecognized);
+            //             cerr << endl << "ERROR: The similarity threshold value should be a positive real number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -425,13 +430,15 @@ inline bool trimAlManager::consistency_threshold_argument(int *argc, char *argv[
             consistencyThreshold = atof(argv[*i]);
             if((consistencyThreshold < 0) || (consistencyThreshold > 1))
             {
-                cerr << endl << "ERROR: The consistency threshold value should be between 0 and 1." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::ConsistencyThresholdOutOfRange);
+//                 cerr << endl << "ERROR: The consistency threshold value should be between 0 and 1." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
-            cerr << endl << "ERROR: The consistency threshold value should be a positive real number." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::ConsistencyThresholdNotRecognized);
+//             cerr << endl << "ERROR: The consistency threshold value should be a positive real number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -448,13 +455,15 @@ inline bool trimAlManager::conservation_threshold_argument(int *argc, char *argv
             conservationThreshold = atof(argv[*i]);
             if((conservationThreshold < 0) || (conservationThreshold > 100))
             {
-                cerr << endl << "ERROR: The minimal positions value should be between 0 and 100." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::ConservationThresholdOutOfRange);
+//                 cerr << endl << "ERROR: The minimal positions value should be between 0 and 100." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
-            cerr << endl << "ERROR: The minimal positions value should be a positive real number." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::ConservationThresholdNotRecognized);
+//             cerr << endl << "ERROR: The minimal positions value should be a positive real number." << endl << endl;
             appearErrors = true;
         }
         
@@ -474,7 +483,8 @@ bool trimAlManager::select_cols_argument(int *argc, char *argv[], int *i)
     {
         if((delColumns = utils::readNumbers(argv[++(*i)])) == NULL)
         {
-            cerr << endl << "ERROR: Impossible to parse the sequences number" << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SelectColsNotRecognized);
+//             cerr << endl << "ERROR: Impossible to parse the sequences number" << endl << endl;
             appearErrors = true;
         }
 
@@ -575,13 +585,15 @@ inline bool trimAlManager::residue_overlap_argument(int *argc, char *argv[], int
             residuesOverlap = atof(argv[*i]);
             if((residuesOverlap < 0) || (residuesOverlap > 1))
             {
-                cerr << endl << "ERROR: The residue overlap value should be between 0 and 1." << endl << endl;
+                VerboseManager::Report(VerboseManager::ResidueOverlapOutOfRange);
+//                 cerr << endl << "ERROR: The residue overlap value should be between 0 and 1." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
-            cerr << endl << "ERROR: The residue overlap value should be a positive real number." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::ResidueOverlapNotRecognized);
+//             cerr << endl << "ERROR: The residue overlap value should be a positive real number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -598,13 +610,13 @@ inline bool trimAlManager::sequence_overlap_argument(int *argc, char *argv[], in
             sequenceOverlap = atof(argv[*i]);
             if((sequenceOverlap < 0) || (sequenceOverlap > 100))
             {
-                cerr << endl << "ERROR: The sequences overlap value should be between 0 and 100." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::SequencesOverlapOutOfRange);
                 appearErrors = true;
             }
         }
         else
         {
-            cerr << endl << "ERROR: The sequences overlap value should be a positive real number." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SequencesOverlapNotRecognized);
             appearErrors = true;
         }
         return true;
@@ -618,7 +630,7 @@ bool trimAlManager::seqs_select_argument(int *argc, char *argv[], int *i)
     {
         if((delSequences = utils::readNumbers(argv[++*i])) == NULL)
         {
-            cerr << endl << "ERROR: Impossible to parse the number after '-selectseqs' argument." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SelectSeqsNotRecognized);
             appearErrors = true;
         }
 
@@ -639,13 +651,13 @@ inline bool trimAlManager::max_identity_argument(int *argc, char *argv[], int *i
             maxIdentity = atof(argv[*i]);
             if((maxIdentity < 0) || (maxIdentity > 1))
             {
-                cerr << endl << "ERROR: The maximum identity threshold should be between 0 and 1." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::MaxIdentityOutOfRange);
                 appearErrors = true;
             }
         }
         else
         {
-            cerr << endl << "ERROR: The maximum identity threshold should be a positive real number." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::MaxIdentityNotRecognized);
             appearErrors = true;
         }
         
@@ -663,13 +675,15 @@ inline bool trimAlManager::clusters_argument(int *argc, char *argv[], int *i)
             clusters = atoi(argv[*i]);
             if(clusters < 1)
             {
-                cerr << endl << "ERROR: The clusters number should be a positive integer number." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::ClustersValueOutOfRange);
+//                 cerr << endl << "ERROR: The clusters number should be a positive integer number." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
-            cerr << endl << "ERROR: The clusters number should be a positive integer number." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::ClustersValueNotRecognized);
+//             cerr << endl << "ERROR: The clusters number should be a positive integer number." << endl << endl;
             appearErrors = true;
         }
         
@@ -697,13 +711,15 @@ inline bool trimAlManager::window_argument(int *argc, char *argv[], int *i)
             windowSize = atoi(argv[++*i]);
             if(windowSize <= 0)
             {
-                cerr << endl << "ERROR: The window value should be a positive integer number." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::WindowValueOutOfRange);
+//                 cerr << endl << "ERROR: The window value should be a positive integer number." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
-            cerr << endl << "ERROR: The window value should be a number." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::WindowValueNotRecognized);
+//             cerr << endl << "ERROR: The window value should be a number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -720,13 +736,15 @@ inline bool trimAlManager::gap_window_argument(int *argc, char *argv[], int *i)
             gapWindow = atoi(argv[++*i]);
             if(gapWindow <= 0)
             {
-                cerr << endl << "ERROR: The gap window value should be a positive integer number." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::GapWindowValueOutOfRange);
+//                 cerr << endl << "ERROR: The gap window value should be a positive integer number." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
-            cerr << endl << "ERROR: The gap window value should be a number." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::GapWindowValueNotRecognized);
+//             cerr << endl << "ERROR: The gap window value should be a number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -743,13 +761,15 @@ inline bool trimAlManager::similarity_window_argument(int *argc, char *argv[], i
             similarityWindow = atoi(argv[++*i]);
             if(similarityWindow <= 0)
             {
-                cerr << endl << "ERROR: The similarity window value should be a positive integer number." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::SimilarityWindowValueOutOfRange);
+//                 cerr << endl << "ERROR: The similarity window value should be a positive integer number." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
-            cerr << endl << "ERROR: The similarity window value should be a number." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SimilarityWindowValueNotRecognized);
+//             cerr << endl << "ERROR: The similarity window value should be a number." << endl << endl;
             appearErrors = true;
         }
 
@@ -767,13 +787,15 @@ inline bool trimAlManager::consistency_window_argument(int *argc, char *argv[], 
             consistencyWindow = atoi(argv[++*i]);
             if(consistencyWindow <= 0)
             {
-                cerr << endl << "ERROR: The consistency window value should be a positive integer number." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::ConsistencyWindowValueOutOfRange);
+//                 cerr << endl << "ERROR: The consistency window value should be a positive integer number." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
-            cerr << endl << "ERROR: The consistency window value should be a number." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::ConsistencyWindowValueNotRecognized);
+//             cerr << endl << "ERROR: The consistency window value should be a number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -790,13 +812,15 @@ inline bool trimAlManager::block_argument(int *argc, char *argv[], int *i)
             blockSize = atoi(argv[++*i]);
             if(blockSize <= 0)
             {
-                cerr << endl << "ERROR: The block size value should be a positive integer number." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::BlockSizeOutOfRange);
+//                 cerr << endl << "ERROR: The block size value should be a positive integer number." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
-            cerr << endl << "ERROR: The block size value should be a number." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::BlockSizeNotRecognized);
+//             cerr << endl << "ERROR: The block size value should be a number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -809,27 +833,6 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
     // This argument means two thing
     if((!strcmp(argv[*i], "-sgc")) )
     {
-//         // Check if it's the last argument. If it is, don't bother: User is asking console reporting
-//         if ((*i) + 1 != *argc)
-//         {
-//             // If the next argument passed starts with '-' don't bother: User is asking console reporting
-//             if (argv[++*i][0] == '-')
-//             {
-//                 (*i)--;
-//             }
-//             // Else, the user is requesting SVG reporting
-//             else if (!statsGapsColFile)
-//             {
-//                 statsGapsColFile = argv[*i];
-//                 return true;
-//             }
-//             // If the user has given a filename previously, fail.
-//             else
-//             {
-//                 return false;
-//             }
-//         }
-        
         if (!sgc)
         {
             sgc = true;
@@ -840,27 +843,6 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
     }
     else if((!strcmp(argv[*i], "-sgt")) )
     {
-//         // Check if it's the last argument. If it is, don't bother: User is asking console reporting
-//         if ((*i) + 1 != *argc)
-//         {
-//             // If the next argument passed starts with '-' don't bother: User is asking console reporting
-//             if (argv[++*i][0] == '-')
-//             {
-//                 (*i)--;
-//             }
-//             // Else, the user is requesting SVG reporting
-//             else if (!statsGapsAccFile)
-//             {
-//                 statsGapsAccFile = argv[*i];
-//                 return true;
-//             }
-//             // If the user has given a filename previously, fail.
-//             else
-//             {
-//                 return false;
-//             }
-//         }
-        
         if(!sgt)
         {
             sgt = true;
@@ -871,27 +853,6 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
     }
     else if((!strcmp(argv[*i], "-ssc")) )
     {
-//         // Check if it's the last argument. If it is, don't bother: User is asking console reporting
-//         if ((*i) + 1 != *argc)
-//         {
-//             // If the next argument passed starts with '-' don't bother: User is asking console reporting
-//             if (argv[++*i][0] == '-')
-//             {
-//                 (*i)--;
-//             }
-//             // Else, the user is requesting SVG reporting
-//             else if (!statsSimColFile)
-//             {
-//                 statsSimColFile = argv[*i];
-//                 return true;
-//             }
-//             // If the user has given a filename previously, fail.
-//             else
-//             {
-//                 return false;
-//             }
-//         }
-        
         if(!scc)
         {
             scc = true;
@@ -902,27 +863,6 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
     }
     else if((!strcmp(argv[*i], "-sst")) )
     {
-//         // Check if it's the last argument. If it is, don't bother: User is asking console reporting
-//         if ((*i) + 1 != *argc)
-//         {
-//             // If the next argument passed starts with '-' don't bother: User is asking console reporting
-//             if (argv[++*i][0] == '-')
-//             {
-//                 (*i)--;
-//             }
-//             // Else, the user is requesting SVG reporting
-//             else if (!statsSimAccFile)
-//             {
-//                 statsSimAccFile = argv[*i];
-//                 return true;
-//             }
-//             // If the user has given a filename previously, fail.
-//             else
-//             {
-//                 return false;
-//             }
-//         }
-        
         if(!sct)
         {
             sct = true;
@@ -943,27 +883,6 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
     }
     else if((!strcmp(argv[*i], "-sfc")) )
     {
-// //         // Check if it's the last argument. If it is, don't bother: User is asking console reporting
-// //         if ((*i) + 1 != *argc)
-// //         {
-// //             // If the next argument passed starts with '-' don't bother: User is asking console reporting
-// //             if (argv[++*i][0] == '-')
-// //             {
-// //                 (*i)--;
-// //             }
-// //             // Else, the user is requesting SVG reporting
-// //             else if (!statsSumOfPairsColFile)
-// //             {
-// //                 statsSumOfPairsColFile = argv[*i];
-// //                 return true;
-// //             }
-// //             // If the user has given a filename previously, fail.
-// //             else
-// //             {
-// //                 return false;
-// //             }
-// //         }
-        
         if(!sfc)
         {
             sfc = true;
@@ -974,27 +893,6 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
     }
     else if((!strcmp(argv[*i], "-sft")) )
     {
-// //         // Check if it's the last argument. If it is, don't bother: User is asking console reporting
-// //         if ((*i) + 1 != *argc)
-// //         {
-// //             // If the next argument passed starts with '-' don't bother: User is asking console reporting
-// //             if (argv[++*i][0] == '-')
-// //             {
-// //                 (*i)--;
-// //             }
-// //             // Else, the user is requesting SVG reporting
-// //             else if (!statsSumOfPairsAccFile)
-// //             {
-// //                 statsSumOfPairsAccFile = argv[*i];
-// //                 return true;
-// //             }
-// //             // If the user has given a filename previously, fail.
-// //             else
-// //             {
-// //                 return false;
-// //             }
-// //         }
-        
         if(!sft)
         {
             sft = true;
@@ -1095,18 +993,21 @@ inline bool trimAlManager::check_inFile_incompatibilities()
     {
         if((sfc) || (sft) || (consistencyThreshold != -1))
         {
-            cerr << endl << "ERROR: Option -in not valid in combination with file comparision options: -sft || -sfc || -ct " << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::InFileComparisonStatistics);
+//             cerr << endl << "ERROR: Option -in not valid in combination with file comparision options: -sft || -sfc || -ct " << endl << endl;
             appearErrors = true;
             i++;
         }
         if(compareset != -1)
         {
-          cerr << endl << "ERROR: Option -in not valid in combination with -compareset option." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::IncompatibleArguments, new std::string[2] {"-in", "-compareset"} );
+//           cerr << endl << "ERROR: Option -in not valid in combination with -compareset option." << endl << endl;
           appearErrors = true;
         }
         if(forceFile != NULL)
         {
-            cerr << endl << "ERROR: Option -in not valid in combination with -forceselect option." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::IncompatibleArguments, new std::string[2] {"-in", "-forceselect"} );
+//             cerr << endl << "ERROR: Option -in not valid in combination with -forceselect option." << endl << endl;
             appearErrors = true;
         }
     }
@@ -1119,39 +1020,45 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities()
     {
         if((gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || (consistencyThreshold != -1))
         {
-            cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination with threshold options: (-gt || -st || -ct || -cons)." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SelectSeqsResAndThresholdIncompatibilities);
+//             cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination with threshold options: (-gt || -st || -ct || -cons)." << endl << endl;
             appearErrors = true;
         }
         
         if(automatedMethodCount)
         {
-            cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination with automated trimming options:" 
-                << " (-nogaps || -noallgaps || -gappyout || -strict || -strictplus || -automated1)." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SelectSeqsResAndAutomathedMethodsIncompatibilities);
+//             cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination with automated trimming options:" 
+//                 << " (-nogaps || -noallgaps || -gappyout || -strict || -strictplus || -automated1)." << endl << endl;
             appearErrors = true;
         }
         
         if((windowSize != -1) || (gapWindow != -1)|| (similarityWindow != -1) || consistencyWindow != -1)
         {
-            cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination with window options: (-w || -sw || -gw || -wc)." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SelectSeqsResAndWindowIncompatibilities);
+//             cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination with window options: (-w || -sw || -gw || -wc)." << endl << endl;
             appearErrors = true;
         }
         
         if (residuesOverlap != -1 || sequenceOverlap != -1)
         {
-            cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination of overlap options (-resoverlap || -seqoverlap)." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SelectSeqsResAndOverlapIncompatibilites);
+//             cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination of overlap options (-resoverlap || -seqoverlap)." << endl << endl;
             appearErrors = true;
         }
 
         if((clusters != -1) || (maxIdentity != -1))
         {
-            cerr << endl << "ERROR: Only one method to chose sequences can be applied: (-selectseqs || -clusters || -maxIdentity)." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::OnlyOneSequencesSelectionMethodAllowed);
+//             cerr << endl << "ERROR: Only one method to chose sequences can be applied: (-selectseqs || -clusters || -maxIdentity)." << endl << endl;
             appearErrors = true;
         }
         
         if (selectCols)
             if(blockSize != -1)
             {
-                cerr << endl << "ERROR: Option -selectcols not allowed in combination of column block size option (-block)." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::IncompatibleArguments, new std::string[2]{"-selectcols", "-block"});
+//                 cerr << endl << "ERROR: Option -selectcols not allowed in combination of column block size option (-block)." << endl << endl;
                 appearErrors = true;
             }
     }
@@ -1164,7 +1071,8 @@ inline bool trimAlManager::check_thresholds_incompatibilities()
     {
         if(automatedMethodCount)
         {
-            cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::CombinationAmongTrimmingMethods);
+//             cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed." << endl << endl;
             appearErrors = true;
         }
         
@@ -1172,20 +1080,23 @@ inline bool trimAlManager::check_thresholds_incompatibilities()
         {
             if(blockSize != -1)
             {
-                cerr << endl << "ERROR: Options -conthreshold and -block are not compatible." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::IncompatibleArguments, new std::string[2] {"-conthreshold", "-block"});
+//                 cerr << endl << "ERROR: Options -conthreshold and -block are not compatible." << endl << endl;
                 appearErrors = true;
             }
         }
         
         if (maxIdentity != -1)
         {
-             cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::CombinationAmongTrimmingMethods);
+//              cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed." << endl << endl;
              appearErrors = true;
         }
         
         if (clusters != -1)
         {
-            cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::CombinationAmongTrimmingMethods);
+//             cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed." << endl << endl;
             appearErrors = true;
         }
     }
@@ -1198,31 +1109,36 @@ inline bool trimAlManager::check_automated_methods_incompatibilities()
     {
         if((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1))
         {
-            cerr << endl << "ERROR: Combinations between automatic methods and window values are not allowed." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::CombinationAmongTrimmingMethods);
+//             cerr << endl << "ERROR: Combinations between automatic methods and window values are not allowed." << endl << endl;
             appearErrors = true;
         }
 
         if(blockSize != -1)
         {
-            cerr << endl << "ERROR: Combinations between automatic methods and -block options are not allowed." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::AutomathicMethodAndBlock);
+//             cerr << endl << "ERROR: Combinations between automatic methods and -block options are not allowed." << endl << endl;
             appearErrors = true;
         }
         
         if (clusters != -1)
         {
-            cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::CombinationAmongTrimmingMethods);
+//             cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
             appearErrors = true;
         }
         
         if (maxIdentity != -1)
         {
-             cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::CombinationAmongTrimmingMethods);
+//              cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
              appearErrors = true;
         }
         
         if (automatedMethodCount > 1)
         {
-            cerr << endl << "ERROR: Combinations between automatic methods are not allowed." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::CombinationAmongTrimmingMethods);
+//             cerr << endl << "ERROR: Combinations between automatic methods are not allowed." << endl << endl;
             appearErrors = true;
         }
     }
@@ -1235,12 +1151,14 @@ inline bool trimAlManager::check_max_identity_incompatibilities()
     {
         if((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1) || (consistencyWindow != -1))
         {
-            cerr << endl << "ERROR: Option -maxIdentity not allowed in combination with window values." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::WindowAndArgumentIncompatibilities, new std::string[1]{"-maxIdentity"});
+//             cerr << endl << "ERROR: Option -maxIdentity not allowed in combination with window values." << endl << endl;
             appearErrors = true;
         }
         if(clusters != -1)
         {
-            cerr << endl << "ERROR: Only one method to chose representative sequences can be applied." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::OnlyOneSequencesSelectionMethodAllowed);
+//             cerr << endl << "ERROR: Only one method to chose representative sequences can be applied." << endl << endl;
             appearErrors = true;
         }
     }
@@ -1253,7 +1171,8 @@ inline bool trimAlManager::check_clusters_incompatibilities()
     {
         if((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1) || consistencyWindow != -1)
         {
-            cerr << endl << "ERROR: Options -clusters is allowed in combination with window values." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::WindowAndArgumentIncompatibilities, new std::string[1]{"-clusters"});
+//             cerr << endl << "ERROR: Options -clusters is allowed in combination with window values." << endl << endl;
             appearErrors = true;
         }
     }
@@ -1266,7 +1185,8 @@ inline bool trimAlManager::check_windows_incompatibilities()
     {
         if (consistencyWindow != -1 || gapWindow != -1 || similarityWindow != -1)
         {
-            cerr << endl << "ERROR: General window (-w) is not compatible with specific window options: (-cw, -gw, -sw)" << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::GeneralAndSpecificWindows);
+//             cerr << endl << "ERROR: General window (-w) is not compatible with specific window options: (-cw, -gw, -sw)" << endl << endl;
             appearErrors = true;
         }
     }
@@ -1279,7 +1199,8 @@ inline bool trimAlManager::check_stats_incompatibilities()
     {
         if (columnNumbering)
         {
-            cerr << endl << "ERROR: Paramenter -colnumbering is not valid when statistics' parameters are defined." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::StatisticsArgumentIncompatibilities, new string[1] {"-colnumbering"});
+//             cerr << endl << "ERROR: Paramenter -colnumbering is not valid when statistics' parameters are defined." << endl << endl;
             appearErrors = true;
         }
     }
@@ -1312,7 +1233,8 @@ inline bool trimAlManager::check_codon_behaviour_incompatibility()
 {
     if((!appearErrors) && (ignoreStopCodon) && (splitByStopCodon))
     {
-        cerr << endl << "ERROR: Incompatibility of -ignorestopcodon & -splitbystopcodon parameters. Choose one." << endl << endl;
+        VerboseManager::Report(VerboseManager::ErrorCode::IncompatibleArguments, new std::string[2]{"-ignorestopcodon", "-splitbystopcodon"});
+//         cerr << endl << "ERROR: Incompatibility of -ignorestopcodon & -splitbystopcodon parameters. Choose one." << endl << endl;
         appearErrors = true;
         return true;
     }
@@ -1326,7 +1248,8 @@ inline bool trimAlManager::check_combinations_among_thresholds_incompatibility()
 
         if((gapThreshold != -1) || (similarityThreshold != -1))
         {
-            cerr << endl << "ERROR: Combinations among thresholds are not allowed." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::CombinationAmongThresholdsMethods);
+//             cerr << endl << "ERROR: Combinations among thresholds are not allowed." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1342,7 +1265,8 @@ inline bool trimAlManager::check_automated_manual_incompatibilities()
             (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither a sequence and residues semimanual selection methods
             (maxIdentity == -1) && (clusters == -1)) // Or complex selection of sequences.
         {
-            cerr << endl << "ERROR: The parameter -complementary can only be used with either an automatic or a manual method." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::TrimmingMethodNeeded, new std::string[1] { "-complementary" });
+//             cerr << endl << "ERROR: The parameter -complementary can only be used with either an automatic or a manual method." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1355,7 +1279,8 @@ inline bool trimAlManager::check_automated_manual_incompatibilities()
             (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither a sequence and residues semimanual selection methods
             (maxIdentity == -1) && (clusters == -1)) // Or complex selection of sequences.
         {
-            cerr << endl << "ERROR: The parameter '-terminalonly' can only be used with either an automatic or a manual method." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::TrimmingMethodNeeded, new std::string[1] { "-terminalonly" });
+//             cerr << endl << "ERROR: The parameter '-terminalonly' can only be used with either an automatic or a manual method." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1368,8 +1293,9 @@ inline bool trimAlManager::check_force_selection()
     {
         if((compareset == -1) && (forceFile != NULL))
         {
-            cerr << endl << "ERROR: You can not force the alignment selection without setting"
-                 << " an alignment dataset to compare against." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::ForceFileWithoutCompareDataset);
+//             cerr << endl << "ERROR: You can not force the alignment selection without setting"
+//                  << " an alignment dataset to compare against." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1383,8 +1309,9 @@ inline bool trimAlManager::check_input_file_with_coding_sequences_argument()
     {
 //         cerr << endl << "ERROR: It is impossible to use a Coding Sequences file to apply the back translation method"
 //              << " without defining an input alignment." << endl << endl;
-        cerr << endl << "ERROR: You need to specify an input alignment (-in or -forcefile) " <<
-                        "to use a Coding Sequence File (-backtranslation) to apply the back translation method." << endl << endl;
+//         cerr << endl << "ERROR: You need to specify an input alignment (-in or -forcefile) " <<
+//                         "to use a Coding Sequence File (-backtranslation) to apply the back translation method." << endl << endl;
+        VerboseManager::Report(VerboseManager::ErrorCode::BacktranslationWithoutMainAlignment);
         appearErrors = true;
         return true;
     }
@@ -1403,7 +1330,8 @@ inline bool trimAlManager::check_file_aligned()
             &&
             (!origAlig -> isFileAligned())) // Then we need the alignment to be aligned;
         {
-            cerr << endl << "ERROR: The sequences in the input alignment should be aligned in order to use any trimming method or statistics." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::NotAligned, new std::string[1] { infile });
+//             cerr << endl << "ERROR: The sequences in the input alignment should be aligned in order to use any trimming method or statistics." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1417,15 +1345,17 @@ inline bool trimAlManager::check_similarity_matrix()
     {
         if((!strict) && (!strictplus) && (!automated1) && (similarityThreshold == -1) && (!scc) && (!sct))
         {
-            cerr << endl << "ERROR: The Similarity Matrix can only be used with methods that use this matrix." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::MatrixGivenWithNoMethodToUseIt);
+//             cerr << endl << "ERROR: The Similarity Matrix can only be used with methods that use this matrix." << endl << endl;
             appearErrors = true;
             return true;
         }
 
         // TODO this is an incompatibility.
-        if((gapWindow != -1) ||((compareset == -1) && (consistencyWindow != -1)))
+        if((gapWindow != -1) || ((compareset == -1) && (consistencyWindow != -1)))
         {
-            cerr << endl << "ERROR: The Similarity Matrix can only be used with general/similarity windows size." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SimilarityMatrixNotCompatibleWindow);
+//             cerr << endl << "ERROR: The Similarity Matrix can only be used with general/similarity windows size." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1437,9 +1367,17 @@ inline bool trimAlManager::check_outputs_coincidence()
 {
     
     std::array<char*,8> outFiles 
-        {{htmlOutFile, outfile, svgOutFile, svgStatsOutFile/*, statsGapsAccFile, statsGapsColFile, statsSimAccFile, statsSimColFile, statsSumOfPairsAccFile, statsSumOfPairsColFile*/}};
+        {{
+            htmlOutFile, 
+            outfile, 
+            svgOutFile, 
+            svgStatsOutFile}};
     std::array<string,8> outFilesNames 
-        {{"html (-htmlout)", "output (-out)", "svg (-svgout)", "svg stats (-svgstats)" /*"stats Gaps Total (-sgt X)", "stats Gaps Col (-sgc X)", "stats Sim Total (-sst X)", "stats Sim Col (-ssc X)", "stats Sum Of Pairs Total (-sft X)", "stats Sum Of Pairs Col (-sfc X)"*/}};
+        {{
+            "html (-htmlout)", 
+            "output (-out)", 
+            "svg (-svgout)", 
+            "svg stats (-svgstats)"}};
     
     for (int i = 0, x = 0; i < outFiles.size(); i++)
     {
@@ -1449,7 +1387,8 @@ inline bool trimAlManager::check_outputs_coincidence()
                 if (outFiles.at(x) != NULL)
                     if (!strcmp(outFiles.at(i), outFiles.at(x)))
                     {
-                        cerr << endl << "ERROR: The " << outFilesNames.at(i) << " and " << outFilesNames.at(x) << " files can't be the same." << endl << endl;
+                        VerboseManager::Report(VerboseManager::ErrorCode::SameNameOutput, new std::string[2] { outFilesNames.at(i), outFilesNames.at(x) });
+//                         cerr << endl << "ERROR: The " << outFilesNames.at(i) << " and " << outFilesNames.at(x) << " files can't be the same." << endl << endl;
                         appearErrors = true;
                     }
             }
@@ -1479,7 +1418,8 @@ inline bool trimAlManager::check_col_numbering()
             (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && (consistencyThreshold == -1) && // Are we not using any threshold?
             (!selectCols) && (!selectSeqs)) // Neither selecting any column or sequence?
         {
-            cerr << endl << "ERROR: Paramenter -colnumbering can only be used with any trimming method." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::TrimmingMethodNeeded, new std::string[1]{"-colnumbering"} );
+//             cerr << endl << "ERROR: Paramenter -colnumbering can only be used with any trimming method." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1493,14 +1433,16 @@ inline bool trimAlManager::check_residue_and_sequence_overlap()
     {
         if((residuesOverlap != -1) && (sequenceOverlap == -1))
         {
-            cerr << endl << "ERROR: The sequence overlap value should be defined." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SequenceAndResiduesOverlapMutuallyNeeded, new string[1] {"residues overlap"} );
+//             cerr << endl << "ERROR: The sequence overlap value should be defined." << endl << endl;
             appearErrors = true;
             return true;
         }
         
         else if((residuesOverlap == -1) && (sequenceOverlap != -1))
         {
-            cerr << endl << "ERROR: The residue overlap value should be defined." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::SequenceAndResiduesOverlapMutuallyNeeded, new string[1] {"sequences overlap"} );
+//             cerr << endl << "ERROR: The residue overlap value should be defined." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1517,7 +1459,12 @@ inline bool trimAlManager::check_output_relevance()
                 (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither selecting columns or sequences?
                 (maxIdentity == -1) && (clusters == -1)) // Neither using other selecting methods?
         {
-            cerr << endl << "ERROR: HTML/SVG reporting can only be used when using any trimming method." << endl << endl;
+            if (htmlOutFile != NULL)
+                VerboseManager::Report(VerboseManager::ErrorCode::TrimmingMethodNeeded, new std::string[1] {"-htmlout"} );
+            if (svgOutFile != NULL)
+                VerboseManager::Report(VerboseManager::ErrorCode::TrimmingMethodNeeded, new std::string[1] {"-svgout"} );
+            if (svgStatsOutFile != NULL)
+                VerboseManager::Report(VerboseManager::ErrorCode::TrimmingMethodNeeded, new std::string[1] {"-svgstats"} );
             appearErrors = true;
             return true;
         }
@@ -1538,7 +1485,8 @@ inline bool trimAlManager::check_output_file_with_statistics()
             
             && (outfile == NULL)) // We need the outFile to be specified. 
         {
-            cerr << endl << "ERROR: An output file should be defined in order to get the alignment's statistics." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::OutFileNeededWhenPrintingStatistics);
+//             cerr << endl << "ERROR: An output file should be defined in order to get the alignment's statistics." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1572,7 +1520,8 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
 
             if ((compareAlignmentsArray[i] = ReadWriteMachine.loadAlignment(filesToCompare[i])))
             {
-                cerr << endl << "ERROR: Alignment not loaded: \"" << filesToCompare[i] << "\". Check the file's content." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::AlignmentNotLoaded, new std::string[1] { filesToCompare[i] });
+//                 cerr << endl << "ERROR: Alignment not loaded: \"" << filesToCompare[i] << "\". Check the file's content." << endl << endl;
                 hasError = true;
             }
 
@@ -1580,7 +1529,8 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
             {
                 if(!compareAlignmentsArray[i] -> isFileAligned())
                 {
-                    cerr << endl << "ERROR: File " << filesToCompare[i] << " is not aligned. Sequences in the input alignments should be aligned in order to use this method." << endl << endl;
+                    VerboseManager::Report(VerboseManager::ErrorCode::NotAligned, new std::string[1] {filesToCompare[i]} );
+//                     cerr << endl << "ERROR: File " << filesToCompare[i] << " is not aligned. Sequences in the input alignments should be aligned in order to use this method." << endl << endl;
                     hasError = true;
                 }
                 else
@@ -1592,7 +1542,8 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
 
                     if((compareAlignmentsArray[i] -> getAlignmentType() != prevType) && (prevType != -1))
                     {
-                        cerr << endl << "ERROR: The alignments' datatypes are different. Check your dataset." << endl << endl;
+                        VerboseManager::Report(VerboseManager::ErrorCode::AlignmentTypesNotMatching);
+//                         cerr << endl << "ERROR: The alignments' datatypes are different. Check your dataset." << endl << endl;
                         hasError = true;
                     }
                     else
@@ -1650,7 +1601,8 @@ inline bool trimAlManager::check_block_size()
 {
     if((!appearErrors) && (origAlig -> getNumAminos() < (blockSize/4)))
     {
-        cerr << endl << "ERROR: The block size value is too big. Please, choose another one smaller than residues number / 4." << endl << endl;
+        VerboseManager::Report(VerboseManager::ErrorCode::BlocksizeTooBig, new string[1]{ std::to_string(origAlig-> getNumAminos() / 4) });
+//         cerr << endl << "ERROR: The block size value is too big. Please, choose another one smaller than residues number / 4." << endl << endl;
         appearErrors = true;
         return true;
     }
@@ -1665,20 +1617,23 @@ inline bool trimAlManager::check_backtranslations()
         {
             if(splitByStopCodon)
             {
-                cerr << endl << "ERROR: The -splitbystopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::ParemeterOnlyOnBacktranslation, new string[1] { "-splitbystopcodon" });
+//                 cerr << endl << "ERROR: The -splitbystopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
                 appearErrors = true;
                 return true;
             }
             if(ignoreStopCodon)
             {
-                cerr << endl << "ERROR: The -ignorestopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::ParemeterOnlyOnBacktranslation, new string[1] { "-ignorestopcodon" });
+//                 cerr << endl << "ERROR: The -ignorestopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
                 appearErrors = true;
                 return true;
             }
         }
         else if(!origAlig -> isFileAligned())
         {
-            cerr << endl << "ERROR: The input protein file has to be aligned to carry out the backtranslation process" << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::ProteinAlignmentMustBeAligned);
+//             cerr << endl << "ERROR: The input protein file has to be aligned to carry out the backtranslation process" << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1691,7 +1646,8 @@ inline bool trimAlManager::check_coding_sequences_type()
     if((!appearErrors) && (backtransFile != NULL) && // Is there a backtranslation file?
         (!backtranslationAlig -> getAlignmentType() & SequenceTypes::DNA )) // If so, is it from DNA?
     {
-        cerr << endl << "ERROR: Check your Coding sequences file. It has been detected other kind of biological sequences." << endl << endl;
+        VerboseManager::Report(VerboseManager::ErrorCode::BacktransAlignIsDNA);
+//         cerr << endl << "ERROR: Check your Coding sequences file. It has been detected other kind of biological sequences." << endl << endl;
         appearErrors = true;
         return true;
     }
@@ -1731,7 +1687,8 @@ inline bool trimAlManager::check_backtranslation_infile_names_corresponde()
 inline void trimAlManager::check_cw_argument()
 {
     if((!appearErrors) && (windowSize != -1) && (compareset != -1))
-        cerr << "INFO: Try with specific comparison file window value. Parameter -cw." << endl << endl;
+        VerboseManager::Report(VerboseManager::ErrorCode::WindowSizeCompareset);
+//         cerr << "INFO: Try with specific comparison file window value. Parameter -cw." << endl << endl;
 }
 
 inline void trimAlManager::check_output_format()
@@ -1813,7 +1770,8 @@ int trimAlManager::perform()
                                 singleAlig -> getCorrespSequences(), 
                                 compareVect))
         {
-            cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::ImpossibleToGenerate, new string[1] { "the SVG output file"});
+//             cerr << endl << "ERROR: It's imposible to generate the SVG output file." << endl << endl;
             appearErrors = true;
         }
     if((htmlOutFile != NULL) && (!appearErrors))
@@ -1825,7 +1783,8 @@ int trimAlManager::perform()
                                 singleAlig -> getCorrespSequences(), 
                                 compareVect))
         {
-            cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::ImpossibleToGenerate, new string[1] { "the HTML output file"});
+//             cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
             appearErrors = true;
         }
 //     cout << "Saving?" << endl;
@@ -1835,7 +1794,8 @@ int trimAlManager::perform()
         std::string outFileString = std::string(outfile);
         if (ReadWriteMachine.saveAlignment(outFileString, &oformats, singleAlig) == false)
         {
-            cerr << endl << "ERROR: It's imposible to generate the output file." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::ImpossibleToGenerate, new string[1] { "the output file"});
+//             cerr << endl << "ERROR: It's imposible to generate the output file." << endl << endl;
             appearErrors = true;
         }
 
@@ -1860,7 +1820,7 @@ inline void trimAlManager::print_statistics()
 {
     if (svgStatsOutFile != NULL)
     {
-        cout << "SVG REPORTING" << endl;
+//         cout << "SVG REPORTING" << endl;
         std::string title = infile; // " statistics graphs";
         std::string filename = svgStatsOutFile;
         std::string linename = "";
@@ -2018,7 +1978,8 @@ inline bool trimAlManager::create_or_use_similarity_matrix()
 
         if(!origAlig -> Statistics -> setSimilarityMatrix(similMatrix))
         {
-            cerr << endl << "ERROR: It's impossible to process the Similarity Matrix." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::ImpossibleToProcessMatrix);
+//             cerr << endl << "ERROR: It's impossible to process the Similarity Matrix." << endl << endl;
             return true;
         }
     }
@@ -2093,7 +2054,8 @@ inline void trimAlManager::clean_alignment()
             num = delColumns[0];
             if(delColumns[num] >= origAlig -> getNumAminos())
             {
-                cerr << endl << "ERROR: This option only accepts integer numbers between 0 and the number of columns - 1." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::SelectOnlyAccepts, new string[2] {"-selectcols", "residues" });
+//                 cerr << endl << "ERROR: This option only accepts integer numbers between 0 and the number of columns - 1." << endl << endl;
                 appearErrors = true;
             }
             else
@@ -2107,7 +2069,8 @@ inline void trimAlManager::clean_alignment()
             num = delSequences[0];
             if(delSequences[num] >= origAlig -> getNumSpecies())
             {
-                cerr << endl << "ERROR: This option only accepts integer numbers between 0 and the number of sequences - 1." << endl << endl;
+                VerboseManager::Report(VerboseManager::ErrorCode::SelectOnlyAccepts, new string[2] {"-selectseqs", "sequences" });
+//                 cerr << endl << "ERROR: This option only accepts integer numbers between 0 and the number of sequences - 1." << endl << endl;
                 appearErrors = true;
             }
             else
@@ -2138,7 +2101,8 @@ inline void trimAlManager::clean_alignment()
     {
         if(clusters > origAlig -> getNumSpecies())
         {
-            cerr << endl << "ERROR:The number of clusters from the newAlignment can not be larger than the number of sequences from that alignment." << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::MoreClustersThanSequences);
+//             cerr << endl << "ERROR:The number of clusters from the Alignment can not be larger than the number of sequences from that alignment." << endl << endl;
             appearErrors = true;
         }
         else

@@ -27,7 +27,7 @@
 // #include "../include/newAlignment.h"
 // #include "../include/alignment.h"
 #include "../include/compareFiles.h"
-
+#include "../include/verbosemanager.h"
 
 #define LONG 80
 
@@ -269,8 +269,9 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
   for(i = 1; i < numAlignments; i++) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     if(numSeqs != vectAlignments[i] -> getNumSpecies()) {
-      cerr << endl << "ERROR: The files to compare do not have "
-           << "the same number of sequences" << endl << endl;
+        VerboseManager::Report(VerboseManager::ErrorCode::DifferentNumberOfSequencesInCompareset);
+//       cerr << endl << "ERROR: The files to compare do not have "
+//            << "the same number of sequences" << endl << endl;
       appearErrors = true;
       break;
     }
@@ -279,8 +280,9 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     vectAlignments[i] -> getSequences(names);
     if(!vectAlignments[0] -> getSequenceNameOrder(names, correspNames)) {
-      cerr << endl << "ERROR: The files to compare do not"
-           << " have the same sequence names" << endl << endl;
+        VerboseManager::Report(VerboseManager::ErrorCode::DifferentSeqsNamesInCompareset);
+//       cerr << endl << "ERROR: The files to compare do not"
+//            << " have the same sequence names" << endl << endl;
       appearErrors = true;
       break;
     }
@@ -614,8 +616,9 @@ bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignme
     for(i = 0; i < numAlignments; i++) {
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
         if(numSeqs != vectAlignments[i] -> getNumSpecies()) {
-            cerr << endl << "ERROR: The files to compare do not have "
-                 << "the same number of sequences" << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::DifferentNumberOfSequencesInCompareset);
+//             cerr << endl << "ERROR: The files to compare do not have "
+//                  << "the same number of sequences" << endl << endl;
             appearErrors = true;
             break;
         }
@@ -624,8 +627,9 @@ bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignme
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
         vectAlignments[i] -> getSequences(names);
         if(!selected -> getSequenceNameOrder(names, correspNames)) {
-            cerr << endl << "ERROR: The files to compare do not"
-                 << " have the same sequence names" << endl << endl;
+            VerboseManager::Report(VerboseManager::ErrorCode::DifferentSeqsNamesInCompareset);
+//             cerr << endl << "ERROR: The files to compare do not"
+//                  << " have the same sequence names" << endl << endl;
             appearErrors = true;
             break;
         }

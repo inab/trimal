@@ -25,21 +25,19 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "../include/trimalArgumentParser.h"
+#include "../include/verbosemanager.h"
 
 int main(int argc, char *argv[])
 {
-//     cout << "Starting" << endl;
+
     trimAlManager Trimal = trimAlManager();
-//     cout << "Parsing" << endl;
+
     Trimal.parseArguments(argc, argv);
-//     cout << "Processing" << endl;
+
     Trimal.processArguments(argv);
-//     cout << "Performing" << endl;
-    
-//     std::string title = "New graphic";
-//     std::string filename = "filename.svg";
-//     
-//     utils::streamSVG(NULL, NULL, 0, false, & title, & filename,);
-    
+
     return Trimal.perform();
+    
+    
+    
 }

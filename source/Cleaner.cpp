@@ -9,6 +9,8 @@
 #include "../include/newAlignment.h"
 #include "../include/defines.h"
 
+#include "../include/verbosemanager.h"
+
 int Cleaner::selectMethod(void) {
 
     float mx, avg, maxSeq = 0, avgSeq = 0;
@@ -1019,7 +1021,7 @@ newAlignment* Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverla
 }
 
 newAlignment* Cleaner::clean2ndSlope(bool complementarity) {
-cout << "clean2ndSlope" << endl;
+
     newAlignment *ret;
     int cut;
 
@@ -1049,7 +1051,7 @@ cout << "clean2ndSlope" << endl;
 }
 
 newAlignment* Cleaner::cleanCombMethods(bool complementarity, bool variable) {
-cout << "cleanCombMethods" << endl;
+
     float simCut, first20Point, last80Point, *simil, *vectAux;
     int i, j, acm, gapCut, *positions, *gaps;
     double inic, fin, vlr;
@@ -1186,7 +1188,6 @@ newAlignment* Cleaner::cleanNoAllGaps(bool complementarity) {
 
 float Cleaner::getCutPointClusters(int clusterNumber) {
 
-//     cout << "Clusters = " << clusterNumber;
     float max, min, avg, gMax, gMin, startingPoint, prevValue = 0, iter = 0;
     int i, j, clusterNum, *cluster, **seqs;
 
@@ -1558,8 +1559,9 @@ bool Cleaner::removeOnlyTerminal(void) {
   }
 
   else if(left_boundary >= right_boundary) {
-    cerr << endl << "ERROR: Check your manually set left '"<< left_boundary
-      << "' and right '" << right_boundary << "' boundaries'" << endl << endl;
+      VerboseManager::Report(VerboseManager::ErrorCode::LeftBoundaryBiggerThanRightBoundary, new std::string[2]{ std::to_string(left_boundary), std::to_string(right_boundary)} );
+//     cerr << endl << "ERROR: Check your manually set left '"<< left_boundary
+//       << "' and right '" << right_boundary << "' boundaries'" << endl << endl;
     return false;
   }
 
@@ -1634,8 +1636,9 @@ newValues Cleaner::removeCols_SeqsAllGaps(void) {
             if(!warnings)
                 cerr << endl;
             warnings = true;
-            cerr << "WARNING: Removing column '" << i << "' composed only by gaps"
-                 << endl;
+            VerboseManager::Report(VerboseManager::WarningCode::RemovingOnlyGapsColumn);
+//             cerr << "WARNING: Removing column '" << i << "' composed only by gaps"
+//                  << endl;
             _alignment -> saveResidues[i] = -1;
         } else {
             counter.residues ++;
@@ -1662,12 +1665,14 @@ newValues Cleaner::removeCols_SeqsAllGaps(void) {
             warnings = true;
 
             if(keepSequences) {
-                cerr << "WARNING: Keeping sequence '" << _alignment -> seqsName[i]
-                     << "' composed only by gaps" << endl;
+                VerboseManager::Report(VerboseManager::WarningCode::KeepingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
+//                 cerr << "WARNING: Keeping sequence '" << _alignment -> seqsName[i]
+//                      << "' composed only by gaps" << endl;
                 counter.sequences ++;
             } else {
-                cerr << "WARNING: Removing sequence '" << _alignment -> seqsName[i]
-                     << "' composed only by gaps" << endl;
+                VerboseManager::Report(VerboseManager::WarningCode::RemovingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
+//                 cerr << "WARNING: Removing sequence '" << _alignment -> seqsName[i]
+//                      << "' composed only by gaps" << endl;
                 _alignment -> saveSequences[i] = -1;
             }
         } else {
