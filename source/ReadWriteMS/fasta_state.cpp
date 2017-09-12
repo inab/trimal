@@ -149,8 +149,9 @@ bool FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
     if (Machine->shortNames && maxLongName > PHYLIPDISTANCE) {
         maxLongName = PHYLIPDISTANCE;
         if (!Machine->keepHeader)
-            cerr << endl << "WARNING: Original sequence header will be cutted by "
-                 << " 10 characters" << endl;
+            ReportSystem::Report(ReportSystem::WarningCode::HeaderWillBeCut);
+//             cerr << endl << "WARNING: Original sequence header will be cutted by "
+//                  << " 10 characters" << endl;
     }
     /* Print alignment. First, sequences name id and then the sequences itself */
     for(i = 0; i < alignment->sequenNumber; i++) {

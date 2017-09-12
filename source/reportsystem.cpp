@@ -30,7 +30,11 @@ const std::map<ReportSystem::WarningCode, const char *> ReportSystem::WarningMes
         "Sequence \"[tag]\" has some indetermination symbols 'X' at the end of sequence. They will be included in the final newAlignment." },
         
     { ReportSystem::WarningCode::LessNucleotidesThanExpected,
-        "Sequence \"[tag]\" has less nucleotides ([tag]) than expected ([tag]). It will be added N's to complete the sequence" }
+        "Sequence \"[tag]\" has less nucleotides ([tag]) than expected ([tag]). It will be added N's to complete the sequence" },
+        
+    { ReportSystem::WarningCode::HeaderWillBeCut,
+        "Original sequence header will be cutted by 10 characters" }
+        
 };
     
 const std::map<ReportSystem::ErrorCode, const char *> ReportSystem::ErrorMessages = 
@@ -268,6 +272,9 @@ const std::map<ReportSystem::ErrorCode, const char *> ReportSystem::ErrorMessage
         
     { ReportSystem::ErrorCode::BracketsMissmatchFound, 
         "Brackets (]) mismatch found" }, 
+        
+    { ReportSystem::ErrorCode::UnalignedAlignmentToAlignedFormat, 
+        "ERROR: Sequences are not aligned. Format ([tag]) not compatible with unaligned sequences." }, 
 };
 
 void ReportSystem::PrintCodesAndMessages()

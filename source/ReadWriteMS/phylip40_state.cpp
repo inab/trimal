@@ -223,8 +223,7 @@ bool Phylip40State::SaveAlignment(newAlignment* alignment, std::ostream* output,
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
     if (!alignment->isAligned) {
-        cerr << endl << "ERROR: Sequences are not aligned. Format (phylip) "
-             << "not compatible with unaligned sequences." << endl << endl;
+        ReportSystem::Report(ReportSystem::ErrorCode::UnalignedAlignmentToAlignedFormat, new std::string[1] { this->name });
         return false;
     }
 

@@ -2,6 +2,7 @@
 #define READWRITES_H
 
 #include "../../include/newAlignment.h"
+#include "../../include/reportsystem.h"
 #include <fstream>
 
 
