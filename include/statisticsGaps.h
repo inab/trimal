@@ -29,16 +29,7 @@
 #include <iostream>
 #include <iomanip>
 
-<<<<<<< HEAD:include/statisticsGaps.h
 #include "../include/utils.h"
-
-// #define DNAType 1
-// #define RNAType 2
-// #define AAType  3
-=======
-#include "utils.h"
-#include "defines.h"
->>>>>>> upstream/trimAl:source/statisticsGaps.h
 
 using namespace std;
 
