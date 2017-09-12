@@ -274,7 +274,7 @@ const std::map<ReportSystem::ErrorCode, const char *> ReportSystem::ErrorMessage
         "Brackets (]) mismatch found" }, 
         
     { ReportSystem::ErrorCode::UnalignedAlignmentToAlignedFormat, 
-        "ERROR: Sequences are not aligned. Format ([tag]) not compatible with unaligned sequences." }, 
+        "Sequences are not aligned. Format ([tag]) not compatible with unaligned sequences." }, 
 };
 
 void ReportSystem::PrintCodesAndMessages()
