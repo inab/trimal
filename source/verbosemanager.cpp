@@ -4,30 +4,33 @@
 
 // Out of line initializations.
 
-VerboseManager::VerboseLevel VerboseManager::Level = VerboseLevel::Errors;
+VerboseManager::VerboseLevel VerboseManager::Level = VerboseLevel::ERROR;
 
 const std::map<VerboseManager::InfoCode, const char *> VerboseManager::InfoMessages = 
 {
     { VerboseManager::InfoCode::CuttingSequence, 
-        "WARNING: Cutting sequence \"[ŧag]\" at first appearance of stop codon \"[tag]\" (residue \"[tag]\") at position [tag] (length: [tag] \")" }, 
+        "Cutting sequence \"[ŧag]\" at first appearance of stop codon \"[tag]\" (residue \"[tag]\") at position [tag] (length: [tag] \")" }, 
+        
+    { VerboseManager::InfoCode::WindowSizeCompareset, 
+        "Try with specific comparison file window value. Parameter -cw" }, 
 };
     
 const std::map<VerboseManager::WarningCode, const char *> VerboseManager::WarningMessages = 
 {
     { VerboseManager::WarningCode::RemovingOnlyGapsColumn, 
-        "WARNING: Removing column '[tag]' composed only by gaps" }, 
+        "Removing column '[tag]' composed only by gaps" }, 
         
     { VerboseManager::WarningCode::KeepingOnlyGapsColumn, 
-        "WARNING: Keeping column '[tag]' composed only by gaps" }, 
+        "Keeping column '[tag]' composed only by gaps" }, 
         
     { VerboseManager::WarningCode::SequenceWillBeCutted, 
-        "WARNING: Sequence \"[tag]\" will be cutted at position [tag] (length:[tag])" }, 
+        "Sequence \"[tag]\" will be cutted at position [tag] (length:[tag])" }, 
         
     { VerboseManager::WarningCode::IncludingIndeterminationSymbols,
-        "WARNING: Sequence \"[tag]\" has some indetermination symbols 'X' at the end of sequence. They will be included in the final newAlignment." },
+        "Sequence \"[tag]\" has some indetermination symbols 'X' at the end of sequence. They will be included in the final newAlignment." },
         
     { VerboseManager::WarningCode::LessNucleotidesThanExpected,
-        "WARNING: Sequence \"[tag]\" has less nucleotides ([tag]) than expected ([tag]). It will be added N's to complete the sequence" }
+        "Sequence \"[tag]\" has less nucleotides ([tag]) than expected ([tag]). It will be added N's to complete the sequence" }
 };
     
 const std::map<VerboseManager::ErrorCode, const char *> VerboseManager::ErrorMessages = 
@@ -205,9 +208,6 @@ const std::map<VerboseManager::ErrorCode, const char *> VerboseManager::ErrorMes
                 
     { VerboseManager::ErrorCode::BacktransAlignIsDNA, 
         "Check your Coding sequences file. It has been detected other kind of biological sequences" }, 
-                        
-    { VerboseManager::ErrorCode::WindowSizeCompareset, 
-        "Try with specific comparison file window value. Parameter -cw" }, 
         
     { VerboseManager::ErrorCode::ImpossibleToGenerate, 
         "Impossible to generate [tag]" }, 
@@ -274,38 +274,42 @@ void VerboseManager::PrintCodesAndMessages()
 {
     switch(VerboseManager::Level)
     {
-        case VerboseLevel::None:
+        case VerboseLevel::NONE:
             std::cout << "[VerboseLevel] None" << std::endl;
-        case VerboseLevel::Info:
+            break;
+        case VerboseLevel::INFO:
             std::cout << "[VerboseLevel] Info" << std::endl;
-        case VerboseLevel::Warnings:
+            break;
+        case VerboseLevel::WARNING:
             std::cout << "[VerboseLevel] Warning" << std::endl;
-        case VerboseLevel::Errors:
+            break;
+        case VerboseLevel::ERROR:
             std::cout << "[VerboseLevel] Error" << std::endl;
+            break;
     }
 
     for (int i = 1; i < VerboseManager::InfoCode::__MAXINFO ; i++)
     {
-        std::cout << "Info Code:    " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
+//         std::cout << "Info Code:    " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
         VerboseManager::Report((VerboseManager::InfoCode)i);
     }
     
     for (int i = 1; i < VerboseManager::WarningCode::__MAXWARNING ; i++)
     {
-        std::cout << "Warning Code: " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
+//         std::cout << "Warning Code: " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
         VerboseManager::Report((VerboseManager::WarningCode)i);
     }  
     
     for (int i = 1; i < VerboseManager::ErrorCode::__MAXERROR ; i++)
     {
-        std::cerr << "Error Code:   " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
+//         std::cerr << "Error Code:   " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
         VerboseManager::Report((VerboseManager::ErrorCode)i);
     }
 }
 
 void VerboseManager::Report(VerboseManager::ErrorCode message, std::string * vars)
 {
-    if (Level < VerboseLevel::Errors)
+    if (Level < VerboseLevel::ERROR)
     {
         if (vars != NULL)
             delete [] vars;
@@ -314,7 +318,7 @@ void VerboseManager::Report(VerboseManager::ErrorCode message, std::string * var
     {
         if (vars == NULL)
         {
-            std::cerr << "[ERROR] " << ErrorMessages.at(message) << std::endl;
+            std::cerr << "[ERROR "<< std::setw(3) << std::setfill('0') << message << "] " << ErrorMessages.at(message) << std::endl;
             return;
         }
         
@@ -328,7 +332,7 @@ void VerboseManager::Report(VerboseManager::ErrorCode message, std::string * var
             while ((index = s.find(FindWord)) != std::string::npos)
                 s.replace(index, FindWord.length(), vars[counter++]);
 
-        std::cerr << "[ERROR] " << s << std::endl;
+        std::cerr << "[ERROR "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
         
         delete [] vars;
     }
@@ -336,11 +340,11 @@ void VerboseManager::Report(VerboseManager::ErrorCode message, std::string * var
 
 void VerboseManager::Report(VerboseManager::ErrorCode message, char * vars)
 {
-    if (Level < VerboseLevel::Errors) return;
+    if (Level < VerboseLevel::ERROR) return;
     
     if (vars == NULL)
     {
-        std::cerr << "[ERROR] " << ErrorMessages.at(message) << std::endl;
+        std::cerr << "[ERROR "<< std::setw(3) << std::setfill('0') << message << "] " << ErrorMessages.at(message) << std::endl;
         return;
     }
     
@@ -354,13 +358,13 @@ void VerboseManager::Report(VerboseManager::ErrorCode message, char * vars)
         while ((index = s.find(FindWord)) != std::string::npos)
             s.replace(index, FindWord.length(), Vars);
 
-    std::cerr << "[ERROR] " << s << std::endl;
+    std::cerr << "[ERROR "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
 
 }
 
 void VerboseManager::Report(VerboseManager::WarningCode message, std::string * vars)
 {
-    if (Level < VerboseLevel::Warnings)
+    if (Level < VerboseLevel::WARNING)
     {
         if (vars != NULL)
             delete [] vars;
@@ -369,7 +373,7 @@ void VerboseManager::Report(VerboseManager::WarningCode message, std::string * v
     {
         if (vars == NULL)
         {
-            std::cout << "[WARNING] " << WarningMessages.at(message) << std::endl;
+            std::cout << "[WARNING "<< std::setw(3) << std::setfill('0') << message << "] " << WarningMessages.at(message) << std::endl;
             return;
         }
         
@@ -383,7 +387,7 @@ void VerboseManager::Report(VerboseManager::WarningCode message, std::string * v
             while ((index = s.find(FindWord)) != std::string::npos)
                 s.replace(index, FindWord.length(), vars[counter++]);
 
-        std::cout << "[WARNING] " << s << std::endl;
+        std::cout << "[WARNING "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
         
         delete [] vars;
     }
@@ -391,11 +395,11 @@ void VerboseManager::Report(VerboseManager::WarningCode message, std::string * v
 
 void VerboseManager::Report(VerboseManager::WarningCode message, char * vars)
 {
-    if (Level < VerboseLevel::Warnings) return;
+    if (Level < VerboseLevel::WARNING) return;
     
     if (vars == NULL)
     {
-        std::cout << "[WARNING] " << WarningMessages.at(message) << std::endl;
+        std::cout << "[WARNING "<< std::setw(3) << std::setfill('0') << message << "] " << WarningMessages.at(message) << std::endl;
         return;
     }
     
@@ -409,13 +413,13 @@ void VerboseManager::Report(VerboseManager::WarningCode message, char * vars)
         while ((index = s.find(FindWord)) != std::string::npos)
             s.replace(index, FindWord.length(), Vars);
 
-    std::cout << "[WARNING] " << s << std::endl;
+    std::cout << "[WARNING "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
 
 }
 
 void VerboseManager::Report(VerboseManager::InfoCode message, std::string * vars)
 {
-    if (Level < VerboseLevel::Info)
+    if (Level < VerboseLevel::INFO)
     {
         if (vars != NULL)
             delete [] vars;
@@ -424,7 +428,7 @@ void VerboseManager::Report(VerboseManager::InfoCode message, std::string * vars
     {
         if (vars == NULL)
         {
-            std::cout << "[INFO] " << InfoMessages.at(message) << std::endl;
+            std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << InfoMessages.at(message) << std::endl;
             return;
         }
         
@@ -438,7 +442,7 @@ void VerboseManager::Report(VerboseManager::InfoCode message, std::string * vars
             while ((index = s.find(FindWord)) != std::string::npos)
                 s.replace(index, FindWord.length(), vars[counter++]);
 
-        std::cout << "[INFO] " << s << std::endl;
+        std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
         
         delete [] vars;
     }
@@ -446,11 +450,11 @@ void VerboseManager::Report(VerboseManager::InfoCode message, std::string * vars
 
 void VerboseManager::Report(VerboseManager::InfoCode message, char * vars)
 {
-    if (Level < VerboseLevel::Info) return;
+    if (Level < VerboseLevel::INFO) return;
     
     if (vars == NULL)
     {
-        std::cout << "[INFO] " << InfoMessages.at(message) << std::endl;
+        std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << InfoMessages.at(message) << std::endl;
         return;
     }
     
@@ -464,6 +468,6 @@ void VerboseManager::Report(VerboseManager::InfoCode message, char * vars)
         while ((index = s.find(FindWord)) != std::string::npos)
             s.replace(index, FindWord.length(), Vars);
 
-    std::cout << "[INFO] " << s << std::endl;
+    std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
 
 }

@@ -1687,7 +1687,7 @@ inline bool trimAlManager::check_backtranslation_infile_names_corresponde()
 inline void trimAlManager::check_cw_argument()
 {
     if((!appearErrors) && (windowSize != -1) && (compareset != -1))
-        VerboseManager::Report(VerboseManager::ErrorCode::WindowSizeCompareset);
+        VerboseManager::Report(VerboseManager::InfoCode::WindowSizeCompareset);
 //         cerr << "INFO: Try with specific comparison file window value. Parameter -cw." << endl << endl;
 }
 

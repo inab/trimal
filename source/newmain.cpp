@@ -29,6 +29,7 @@
 
 int main(int argc, char *argv[])
 {
+    VerboseManager::PrintCodesAndMessages();
 
     trimAlManager Trimal = trimAlManager();
 
