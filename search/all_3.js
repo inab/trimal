@@ -27,7 +27,6 @@ var searchData=
   ['check_5fcw_5fargument',['check_cw_argument',['../group___check_needs.html#gab6f9f8b433a4c6fedbb4c094ae9003c7',1,'trimAlManager']]],
   ['check_5ffile_5faligned',['check_file_aligned',['../group___check_needs.html#ga3beec34d7074f4a67ccaf4e8bb875122',1,'trimAlManager']]],
   ['check_5fforce_5fselection',['check_force_selection',['../group___check_needs.html#gabb94df3621dbe1859675bb385d3d5b7d',1,'trimAlManager']]],
-  ['check_5fhtml_5foutput_5finterest',['check_html_output_interest',['../group___check_needs.html#ga1715764c1434c79458e9d09d99cb2d84',1,'trimAlManager']]],
   ['check_5finfile_5fincompatibilities',['check_inFile_incompatibilities',['../group___check_incompatibilities.html#ga603ce4f4aefaf60dc1d8db83490d44ac',1,'trimAlManager']]],
   ['check_5finput_5ffile_5fwith_5fcoding_5fsequences_5fargument',['check_input_file_with_coding_sequences_argument',['../group___check_needs.html#ga640fb579367d6ea2e45265cacf57a3ef',1,'trimAlManager']]],
   ['check_5fmax_5fidentity_5fincompatibilities',['check_max_identity_incompatibilities',['../group___check_incompatibilities.html#gab5b035ec7491b19958cf6f2e222e4b01',1,'trimAlManager']]],

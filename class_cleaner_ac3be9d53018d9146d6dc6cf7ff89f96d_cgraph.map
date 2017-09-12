@@ -1,12 +1,12 @@
 <map id="Cleaner::cleanGaps" name="Cleaner::cleanGaps">
-<area shape="rect" id="node2" href="$class_cleaner.html#ad075f0ef730c8023cf8a0e35e7e1e53a" title="Method to clean an alignment. &#160;It removes sequences that overpass or equals a certain threshold..." alt="" coords="191,183,367,209"/>
+<area shape="rect" id="node2" href="$class_cleaner.html#ad075f0ef730c8023cf8a0e35e7e1e53a" title="Method to clean an alignment. &#160;It removes sequences that overpass or equals a certain threshold..." alt="" coords="191,157,367,184"/>
 <area shape="rect" id="node3" href="$classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method. " alt="" coords="483,5,585,32"/>
 <area shape="rect" id="node4" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="479,56,589,83"/>
 <area shape="rect" id="node5" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="481,107,587,133"/>
 <area shape="rect" id="node7" href="$class_cleaner.html#a033da9ea63774f43f4c7aff04f23da81" title="Method to detect right and left borders. Borders are the first column found with no gaps..." alt="" coords="437,157,631,184"/>
-<area shape="rect" id="node8" href="$class_cleaner.html#a24bd28e4191afc9471adff329bee1466" title="Method for computing the complementary alignment. Complementary Alignment is an alignment containing ..." alt="" coords="415,208,653,235"/>
-<area shape="rect" id="node9" href="$class_cleaner.html#a2f7d85e29f23f880a7ad7e28863b36c3" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="461,259,607,301"/>
-<area shape="rect" id="node10" href="$classnew_alignment.html#a3de39c62c08a265178f1fa7df76c3ab7" title="Method that copies information of the alignment to the pointers given. " alt="" coords="444,325,624,366"/>
-<area shape="rect" id="node11" href="$classnew_alignment.html#acbeb320f0f70222f81a906ccfc33a016" title="Method to intialize data that has been modified on the alignment. The method checks if the sequences ..." alt="" coords="447,391,621,417"/>
-<area shape="rect" id="node6" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="701,107,787,133"/>
+<area shape="rect" id="node9" href="$class_cleaner.html#a24bd28e4191afc9471adff329bee1466" title="Method for computing the complementary alignment. Complementary Alignment is an alignment containing ..." alt="" coords="415,208,653,235"/>
+<area shape="rect" id="node10" href="$class_cleaner.html#a2f7d85e29f23f880a7ad7e28863b36c3" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="461,259,607,301"/>
+<area shape="rect" id="node11" href="$classnew_alignment.html#a3de39c62c08a265178f1fa7df76c3ab7" title="Method that copies information of the alignment to the pointers given. " alt="" coords="444,325,624,366"/>
+<area shape="rect" id="node6" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="742,107,827,133"/>
+<area shape="rect" id="node8" href="$class_verbose_manager.html#a261de87bbf9653cd729dca4e1fbeb2a3" title="Method to report an Error. It will be displayed if VerboseManager::Level is equal or higher to Verbos..." alt="" coords="701,212,868,239"/>
 </map>

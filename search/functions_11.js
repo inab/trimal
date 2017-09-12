@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['savealignment',['saveAlignment',['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment()'],['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()']]],
+  ['savealignment',['SaveAlignment',['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()'],['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment()']]],
   ['select_5fcols_5fargument',['select_cols_argument',['../group___parsing_arguments_functions.html#gadf8a0b6574e9abb325a6c331ab9368ac',1,'trimAlManager']]],
   ['selectmethod',['selectMethod',['../class_cleaner.html#a7ae24fa55c5d166d75237decd942ce94',1,'Cleaner']]],
   ['seqs_5fselect_5fargument',['seqs_select_argument',['../group___parsing_arguments_functions.html#ga5b7b7ccf9e704e7341546a9e8834e890',1,'trimAlManager']]],
@@ -20,6 +20,8 @@ var searchData=
   ['split_5fby_5fstop_5fcodon_5fargument',['split_by_stop_codon_argument',['../group___parsing_arguments_functions.html#ga5f145e3c94ade069f8da27b172f6641c',1,'trimAlManager']]],
   ['statisticsconservation',['statisticsConservation',['../classstatistics_conservation.html#a4c808b44c2808ddb5578f1a90dadd6ea',1,'statisticsConservation::statisticsConservation(void)'],['../classstatistics_conservation.html#a2fa0bbea2b5a353b12a185cf68f69653',1,'statisticsConservation::statisticsConservation(string *alignmentMatrix, int species, int aminos, int dataType_)']]],
   ['stats_5farguments',['stats_arguments',['../group___parsing_arguments_functions.html#ga1bae281d1fb2c0a49f9e88c83ba5684a',1,'trimAlManager']]],
+  ['streamaccsvg',['streamAccSVG',['../classutils.html#a79302b20c06537eed903f4d007f0e195',1,'utils']]],
+  ['streamcolsvg',['streamColSVG',['../classutils.html#a26f54faf5cbd72838ada33838c1a18c6',1,'utils']]],
   ['strict_5fargument',['strict_argument',['../group___parsing_arguments_functions.html#gaa008bef3630f5c8e37280359d7f5608c',1,'trimAlManager']]],
   ['strict_5fplus_5fargument',['strict_plus_argument',['../group___parsing_arguments_functions.html#ga6b6046796e345bef35474c895c681fb7',1,'trimAlManager']]],
   ['swap',['swap',['../classutils.html#a3377ecde55631d1bbc4956e5923b7469',1,'utils::swap(float *a, float *b)'],['../classutils.html#a5edf67302e70aeb92a9085023954f368',1,'utils::swap(int *a, int *b)'],['../classutils.html#a7ef87e474cc361a3cdf4e4f4227afb40',1,'utils::swap(int **a, int **b)']]]

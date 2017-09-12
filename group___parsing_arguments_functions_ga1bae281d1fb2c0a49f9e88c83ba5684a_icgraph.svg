@@ -9,22 +9,22 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 35)">
 <title>trimAlManager::stats_arguments</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-35 304,-35 304,4 -4,4"/>
-<!-- Node168 -->
-<g id="node1" class="node"><title>Node168</title>
+<!-- Node189 -->
+<g id="node1" class="node"><title>Node189</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-30.5 107,-30.5 107,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::stats</text>
 <text text-anchor="middle" x="53.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_arguments</text>
 </g>
-<!-- Node169 -->
-<g id="node2" class="node"><title>Node169</title>
+<!-- Node190 -->
+<g id="node2" class="node"><title>Node190</title>
 <g id="a_node2"><a xlink:href="group___parsing_arguments_functions.html#gaf140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
 <polygon fill="white" stroke="black" points="143,-6 143,-25 300,-25 300,-6 143,-6"/>
 <text text-anchor="middle" x="221.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::parseArguments</text>
 </a>
 </g>
 </g>
-<!-- Node168&#45;&gt;Node169 -->
-<g id="edge1" class="edge"><title>Node168&#45;&gt;Node169</title>
+<!-- Node189&#45;&gt;Node190 -->
+<g id="edge1" class="edge"><title>Node189&#45;&gt;Node190</title>
 <path fill="none" stroke="midnightblue" d="M117.106,-15.5C125.513,-15.5 134.219,-15.5 142.846,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="117.023,-12.0001 107.023,-15.5 117.023,-19.0001 117.023,-12.0001"/>
 </g>

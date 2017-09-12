@@ -1,0 +1,16 @@
+<map id="include/newAlignment.h" name="include/newAlignment.h">
+<area shape="rect" id="node2" href="$compare_files_8h_source.html" title="include/compareFiles.h" alt="" coords="182,87,338,114"/>
+<area shape="rect" id="node3" href="$compare_files_8cpp_source.html" title="source/compareFiles.cpp" alt="" coords="5,177,173,203"/>
+<area shape="rect" id="node6" href="$_read_write_base_state_8h_source.html" title="include/ReadWriteMS\l/ReadWriteBaseState.h" alt="" coords="415,80,575,121"/>
+<area shape="rect" id="node7" href="$_read_write_machine_state_8cpp_source.html" title="source/ReadWriteMS\l/ReadWriteMachineState.cpp" alt="" coords="398,169,591,211"/>
+<area shape="rect" id="node8" href="$_read_write_machine_state_8h_source.html" title="include/ReadWriteMS\l/ReadWriteMachineState.h" alt="" coords="649,80,828,121"/>
+<area shape="rect" id="node9" href="$trimal_argument_parser_8h_source.html" title="include/trimalArgumentParser.h" alt="" coords="615,177,819,203"/>
+<area shape="rect" id="node11" href="$_read_write_m_smain_8cpp_source.html" title="source/ReadWriteMS\l/ReadWriteMSmain.cpp" alt="" coords="843,169,1005,211"/>
+<area shape="rect" id="node12" href="$_cleaner_8cpp_source.html" title="source/Cleaner.cpp" alt="" coords="903,87,1038,114"/>
+<area shape="rect" id="node13" href="$new_alignment_8cpp_source.html" title="source/newAlignment.cpp" alt="" coords="1062,87,1234,114"/>
+<area shape="rect" id="node14" href="$sequences_matrix_8cpp_source.html" title="source/sequencesMatrix.cpp" alt="" coords="1259,87,1448,114"/>
+<area shape="rect" id="node15" href="$_statistics_manager_8cpp_source.html" title="source/StatisticsManager.cpp" alt="" coords="1472,87,1667,114"/>
+<area shape="rect" id="node4" href="$stat_al_8cpp_source.html" title="source/statAl.cpp" alt="" coords="198,177,322,203"/>
+<area shape="rect" id="node5" href="$trimal_argument_parser_8cpp_source.html" title="source/trimalArgumentParser.cpp" alt="" coords="329,259,545,285"/>
+<area shape="rect" id="node10" href="$newmain_8cpp_source.html" title="source/newmain.cpp" alt="" coords="646,259,789,285"/>
+</map>

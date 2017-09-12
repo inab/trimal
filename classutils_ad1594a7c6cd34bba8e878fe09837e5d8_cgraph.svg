@@ -16,7 +16,7 @@
 </g>
 <!-- Node28 -->
 <g id="node2" class="node"><title>Node28</title>
-<g id="a_node2"><a xlink:href="classutils.html#af7813b2754509dbf0b9b15f4d85f8401" target="_top" xlink:title="Looks for a pattern. ">
+<g id="a_node2"><a xlink:href="classutils.html#addcae2992f82a9542083b2c1f582f503" target="_top" xlink:title="Looks for a pattern. ">
 <polygon fill="white" stroke="black" points="143,-0.5 143,-19.5 247,-19.5 247,-0.5 143,-0.5"/>
 <text text-anchor="middle" x="195" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::lookForPattern</text>
 </a>

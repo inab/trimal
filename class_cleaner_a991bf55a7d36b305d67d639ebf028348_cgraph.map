@@ -1,8 +1,9 @@
 <map id="Cleaner::getClustering" name="Cleaner::getClustering">
-<area shape="rect" id="node2" href="$class_cleaner.html#a631cf3e2e55c00a995f0f4a51bfe7a2d" title="Method to asign sequences to clusters. Clusters are calculated following this schema: ..." alt="" coords="205,56,444,83"/>
-<area shape="rect" id="node7" href="$classnew_alignment.html#acbeb320f0f70222f81a906ccfc33a016" title="Method to intialize data that has been modified on the alignment. The method checks if the sequences ..." alt="" coords="237,107,412,133"/>
+<area shape="rect" id="node2" href="$class_cleaner.html#a631cf3e2e55c00a995f0f4a51bfe7a2d" title="Method to asign sequences to clusters. Clusters are calculated following this schema: ..." alt="" coords="205,69,444,96"/>
+<area shape="rect" id="node7" href="$classnew_alignment.html#acbeb320f0f70222f81a906ccfc33a016" title="Method to intialize data that has been modified on the alignment. The method checks if the sequences ..." alt="" coords="237,132,412,159"/>
 <area shape="rect" id="node3" href="$class_cleaner.html#aaad9f8e8f67eb419fc5aa905c86318e9" title="Method to calculate identities between the sequences from the alignment. " alt="" coords="492,5,685,32"/>
 <area shape="rect" id="node4" href="$classutils.html#a1dce160519187ef2c6e14beb93a2050d" title="Removes a determined char from the string. " alt="" coords="511,56,666,83"/>
 <area shape="rect" id="node5" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="535,107,642,133"/>
 <area shape="rect" id="node6" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="733,107,819,133"/>
+<area shape="rect" id="node8" href="$class_verbose_manager.html#a261de87bbf9653cd729dca4e1fbeb2a3" title="Method to report an Error. It will be displayed if VerboseManager::Level is equal or higher to Verbos..." alt="" coords="505,157,672,184"/>
 </map>

@@ -9,60 +9,60 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 100)">
 <title>Cleaner::getCutPointClusters</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-100 430,-100 430,4 -4,4"/>
-<!-- Node182 -->
-<g id="node1" class="node"><title>Node182</title>
+<!-- Node184 -->
+<g id="node1" class="node"><title>Node184</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-38.5 0,-57.5 145,-57.5 145,-38.5 0,-38.5"/>
 <text text-anchor="middle" x="72.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::getCutPointClusters</text>
 </g>
-<!-- Node183 -->
-<g id="node2" class="node"><title>Node183</title>
+<!-- Node185 -->
+<g id="node2" class="node"><title>Node185</title>
 <g id="a_node2"><a xlink:href="class_cleaner.html#aaad9f8e8f67eb419fc5aa905c86318e9" target="_top" xlink:title="Method to calculate identities between the sequences from the alignment. ">
 <polygon fill="white" stroke="black" points="181,-76.5 181,-95.5 326,-95.5 326,-76.5 181,-76.5"/>
 <text text-anchor="middle" x="253.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::calculateSeqIdentity</text>
 </a>
 </g>
 </g>
-<!-- Node182&#45;&gt;Node183 -->
-<g id="edge1" class="edge"><title>Node182&#45;&gt;Node183</title>
+<!-- Node184&#45;&gt;Node185 -->
+<g id="edge1" class="edge"><title>Node184&#45;&gt;Node185</title>
 <path fill="none" stroke="midnightblue" d="M118.669,-57.589C142.716,-62.6939 172.474,-69.0113 197.819,-74.3918"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="197.147,-77.8269 207.656,-76.4799 198.6,-70.9795 197.147,-77.8269"/>
 </g>
-<!-- Node184 -->
-<g id="node3" class="node"><title>Node184</title>
+<!-- Node186 -->
+<g id="node3" class="node"><title>Node186</title>
 <g id="a_node3"><a xlink:href="classutils.html#a1dce160519187ef2c6e14beb93a2050d" target="_top" xlink:title="Removes a determined char from the string. ">
 <polygon fill="white" stroke="black" points="195.5,-38.5 195.5,-57.5 311.5,-57.5 311.5,-38.5 195.5,-38.5"/>
 <text text-anchor="middle" x="253.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::removeCharacter</text>
 </a>
 </g>
 </g>
-<!-- Node182&#45;&gt;Node184 -->
-<g id="edge2" class="edge"><title>Node182&#45;&gt;Node184</title>
+<!-- Node184&#45;&gt;Node186 -->
+<g id="edge2" class="edge"><title>Node184&#45;&gt;Node186</title>
 <path fill="none" stroke="midnightblue" d="M145.017,-48C158.234,-48 171.995,-48 185.085,-48"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="185.415,-51.5001 195.415,-48 185.415,-44.5001 185.415,-51.5001"/>
 </g>
-<!-- Node185 -->
-<g id="node4" class="node"><title>Node185</title>
+<!-- Node187 -->
+<g id="node4" class="node"><title>Node187</title>
 <g id="a_node4"><a xlink:href="classutils.html#a73f038c379c13d23e3220afaa14f9983" target="_top" xlink:title="Quicksort sorting method. ">
 <polygon fill="white" stroke="black" points="213.5,-0.5 213.5,-19.5 293.5,-19.5 293.5,-0.5 213.5,-0.5"/>
 <text text-anchor="middle" x="253.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::quicksort</text>
 </a>
 </g>
 </g>
-<!-- Node182&#45;&gt;Node185 -->
-<g id="edge3" class="edge"><title>Node182&#45;&gt;Node185</title>
+<!-- Node184&#45;&gt;Node187 -->
+<g id="edge3" class="edge"><title>Node184&#45;&gt;Node187</title>
 <path fill="none" stroke="midnightblue" d="M118.669,-38.411C144.567,-32.9131 177.09,-26.0088 203.59,-20.3831"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="204.37,-23.7956 213.425,-18.2952 202.916,-16.9482 204.37,-23.7956"/>
 </g>
-<!-- Node186 -->
-<g id="node5" class="node"><title>Node186</title>
+<!-- Node188 -->
+<g id="node5" class="node"><title>Node188</title>
 <g id="a_node5"><a xlink:href="classutils.html#a3377ecde55631d1bbc4956e5923b7469" target="_top" xlink:title="Swapping elements method. ">
 <polygon fill="white" stroke="black" points="362,-0.5 362,-19.5 426,-19.5 426,-0.5 362,-0.5"/>
 <text text-anchor="middle" x="394" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::swap</text>
 </a>
 </g>
 </g>
-<!-- Node185&#45;&gt;Node186 -->
-<g id="edge4" class="edge"><title>Node185&#45;&gt;Node186</title>
+<!-- Node187&#45;&gt;Node188 -->
+<g id="edge4" class="edge"><title>Node187&#45;&gt;Node188</title>
 <path fill="none" stroke="midnightblue" d="M293.818,-10C311.953,-10 333.479,-10 351.835,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="351.945,-13.5001 361.945,-10 351.945,-6.5001 351.945,-13.5001"/>
 </g>

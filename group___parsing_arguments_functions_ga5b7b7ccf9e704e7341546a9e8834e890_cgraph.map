@@ -1,3 +1,4 @@
 <map id="trimAlManager::seqs_select_argument" name="trimAlManager::seqs_select_argument">
-<area shape="rect" id="node2" href="$classutils.html#adb8231f84743d1c51e391ab3234714c6" title="Reads a line and converts it to an array of number. " alt="" coords="196,13,328,39"/>
+<area shape="rect" id="node2" href="$classutils.html#adb8231f84743d1c51e391ab3234714c6" title="Reads a line and converts it to an array of number. " alt="" coords="213,5,345,32"/>
+<area shape="rect" id="node3" href="$class_verbose_manager.html#a261de87bbf9653cd729dca4e1fbeb2a3" title="Method to report an Error. It will be displayed if VerboseManager::Level is equal or higher to Verbos..." alt="" coords="196,56,363,83"/>
 </map>

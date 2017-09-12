@@ -9,9 +9,9 @@ var annotated_dup =
     [ "sequencesMatrix", "classsequences_matrix.html", "classsequences_matrix" ],
     [ "similarityMatrix", "classsimilarity_matrix.html", "classsimilarity_matrix" ],
     [ "statisticsConservation", "classstatistics_conservation.html", "classstatistics_conservation" ],
-    [ "statisticsFiles", "classstatistics_files.html", "classstatistics_files" ],
     [ "statisticsGaps", "classstatistics_gaps.html", "classstatistics_gaps" ],
     [ "StatisticsManager", "class_statistics_manager.html", "class_statistics_manager" ],
     [ "trimAlManager", "classtrim_al_manager.html", "classtrim_al_manager" ],
-    [ "utils", "classutils.html", "classutils" ]
+    [ "utils", "classutils.html", "classutils" ],
+    [ "VerboseManager", "class_verbose_manager.html", "class_verbose_manager" ]
 ];

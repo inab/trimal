@@ -9,178 +9,178 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 366)">
 <title>Cleaner::removeCols_SeqsAllGaps</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-366 465,-366 465,4 -4,4"/>
-<!-- Node189 -->
-<g id="node1" class="node"><title>Node189</title>
+<!-- Node192 -->
+<g id="node1" class="node"><title>Node192</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-71 0,-101 109,-101 109,-71 0,-71"/>
 <text text-anchor="start" x="8" y="-89" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeCols</text>
 <text text-anchor="middle" x="54.5" y="-78" font-family="Helvetica,sans-Serif" font-size="10.00">_SeqsAllGaps</text>
 </g>
-<!-- Node190 -->
-<g id="node2" class="node"><title>Node190</title>
+<!-- Node193 -->
+<g id="node2" class="node"><title>Node193</title>
 <g id="a_node2"><a xlink:href="class_cleaner.html#ad075f0ef730c8023cf8a0e35e7e1e53a" target="_top" xlink:title="Method to clean an alignment. &#160;It removes sequences that overpass or equals a certain threshold...">
 <polygon fill="white" stroke="black" points="147.5,-228.5 147.5,-247.5 279.5,-247.5 279.5,-228.5 147.5,-228.5"/>
 <text text-anchor="middle" x="213.5" y="-235.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanByCutValue</text>
 </a>
 </g>
 </g>
-<!-- Node189&#45;&gt;Node190 -->
-<g id="edge1" class="edge"><title>Node189&#45;&gt;Node190</title>
+<!-- Node192&#45;&gt;Node193 -->
+<g id="edge1" class="edge"><title>Node192&#45;&gt;Node193</title>
 <path fill="none" stroke="midnightblue" d="M78.4717,-108.24C113.222,-141.884 177.724,-204.332 202.474,-228.293"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="80.7468,-105.571 71.1277,-101.13 75.8778,-110.6 80.7468,-105.571"/>
 </g>
-<!-- Node197 -->
-<g id="node9" class="node"><title>Node197</title>
+<!-- Node200 -->
+<g id="node9" class="node"><title>Node200</title>
 <g id="a_node9"><a xlink:href="class_cleaner.html#a740bce047dce09be0f6bd1da9f826da3" target="_top" xlink:title="Method to clean an alignment. It carries out strict and strictplus. It removes sequences that overpas...">
 <polygon fill="white" stroke="black" points="162,-114.5 162,-133.5 265,-133.5 265,-114.5 162,-114.5"/>
 <text text-anchor="middle" x="213.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanStrict</text>
 </a>
 </g>
 </g>
-<!-- Node189&#45;&gt;Node197 -->
-<g id="edge8" class="edge"><title>Node189&#45;&gt;Node197</title>
+<!-- Node192&#45;&gt;Node200 -->
+<g id="edge8" class="edge"><title>Node192&#45;&gt;Node200</title>
 <path fill="none" stroke="midnightblue" d="M118.832,-101.329C137.15,-105.762 156.613,-110.473 173.025,-114.445"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="119.634,-97.9219 109.091,-98.9712 117.987,-104.725 119.634,-97.9219"/>
 </g>
-<!-- Node199 -->
-<g id="node11" class="node"><title>Node199</title>
+<!-- Node202 -->
+<g id="node11" class="node"><title>Node202</title>
 <g id="a_node11"><a xlink:href="class_cleaner.html#a74d3049d4997da5e7c6c51cb19b540e8" target="_top" xlink:title="Method to clean sequences based on a minimum overlap threshold. The method selects a combination of p...">
 <polygon fill="white" stroke="black" points="148,-76.5 148,-95.5 279,-95.5 279,-76.5 148,-76.5"/>
 <text text-anchor="middle" x="213.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanOverlapSeq</text>
 </a>
 </g>
 </g>
-<!-- Node189&#45;&gt;Node199 -->
-<g id="edge10" class="edge"><title>Node189&#45;&gt;Node199</title>
+<!-- Node192&#45;&gt;Node202 -->
+<g id="edge10" class="edge"><title>Node192&#45;&gt;Node202</title>
 <path fill="none" stroke="midnightblue" d="M119.172,-86C128.593,-86 138.31,-86 147.753,-86"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="119.091,-82.5001 109.091,-86 119.091,-89.5001 119.091,-82.5001"/>
 </g>
-<!-- Node201 -->
-<g id="node13" class="node"><title>Node201</title>
+<!-- Node204 -->
+<g id="node13" class="node"><title>Node204</title>
 <g id="a_node13"><a xlink:href="class_cleaner.html#a3d1c1309bd1f0908ef8c8ef0415fb4cb" target="_top" xlink:title="Method to remove columns, expressed as ranges. ">
 <polygon fill="white" stroke="black" points="149.5,-38.5 149.5,-57.5 277.5,-57.5 277.5,-38.5 149.5,-38.5"/>
 <text text-anchor="middle" x="213.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeColumns</text>
 </a>
 </g>
 </g>
-<!-- Node189&#45;&gt;Node201 -->
-<g id="edge12" class="edge"><title>Node189&#45;&gt;Node201</title>
+<!-- Node192&#45;&gt;Node204 -->
+<g id="edge12" class="edge"><title>Node192&#45;&gt;Node204</title>
 <path fill="none" stroke="midnightblue" d="M118.832,-70.6711C137.15,-66.2375 156.613,-61.5267 173.025,-57.5545"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="117.987,-67.2745 109.091,-73.0288 119.634,-74.0781 117.987,-67.2745"/>
 </g>
-<!-- Node202 -->
-<g id="node14" class="node"><title>Node202</title>
+<!-- Node205 -->
+<g id="node14" class="node"><title>Node205</title>
 <g id="a_node14"><a xlink:href="class_cleaner.html#af27e657bf4874a21b26d9a8217c1e643" target="_top" xlink:title="Method to remove sequences, expressed as ranges. ">
 <polygon fill="white" stroke="black" points="145,-0.5 145,-19.5 282,-19.5 282,-0.5 145,-0.5"/>
 <text text-anchor="middle" x="213.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeSequences</text>
 </a>
 </g>
 </g>
-<!-- Node189&#45;&gt;Node202 -->
-<g id="edge13" class="edge"><title>Node189&#45;&gt;Node202</title>
+<!-- Node192&#45;&gt;Node205 -->
+<g id="edge13" class="edge"><title>Node192&#45;&gt;Node205</title>
 <path fill="none" stroke="midnightblue" d="M83.8744,-64.8856C100.897,-53.0114 123.378,-38.6749 145,-29 153.223,-25.3205 162.332,-22.1806 171.128,-19.5758"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="81.6286,-62.1877 75.5039,-70.8329 85.683,-67.894 81.6286,-62.1877"/>
 </g>
-<!-- Node191 -->
-<g id="node3" class="node"><title>Node191</title>
+<!-- Node194 -->
+<g id="node3" class="node"><title>Node194</title>
 <g id="a_node3"><a xlink:href="class_cleaner.html#ac3be9d53018d9146d6dc6cf7ff89f96d" target="_top" xlink:title="Method to clean an alignment based on the gap distribution values. Column blocks that don&#39;t have a mi...">
 <polygon fill="white" stroke="black" points="338,-342.5 338,-361.5 441,-361.5 441,-342.5 338,-342.5"/>
 <text text-anchor="middle" x="389.5" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanGaps</text>
 </a>
 </g>
 </g>
-<!-- Node190&#45;&gt;Node191 -->
-<g id="edge2" class="edge"><title>Node190&#45;&gt;Node191</title>
+<!-- Node193&#45;&gt;Node194 -->
+<g id="edge2" class="edge"><title>Node193&#45;&gt;Node194</title>
 <path fill="none" stroke="midnightblue" d="M228.697,-255.386C247.098,-276.784 281.211,-312.762 318,-333 324.997,-336.849 332.82,-339.955 340.639,-342.449"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="231.349,-253.101 222.231,-247.706 225.995,-257.61 231.349,-253.101"/>
 </g>
-<!-- Node192 -->
-<g id="node4" class="node"><title>Node192</title>
+<!-- Node195 -->
+<g id="node4" class="node"><title>Node195</title>
 <g id="a_node4"><a xlink:href="class_cleaner.html#a694d53fdd5d1ac9455858e48537af3d0" target="_top" xlink:title="Method to clean an alignment based on the similarity distribution values. ">
 <polygon fill="white" stroke="black" points="321,-304.5 321,-323.5 458,-323.5 458,-304.5 321,-304.5"/>
 <text text-anchor="middle" x="389.5" y="-311.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanConservation</text>
 </a>
 </g>
 </g>
-<!-- Node190&#45;&gt;Node192 -->
-<g id="edge3" class="edge"><title>Node190&#45;&gt;Node192</title>
+<!-- Node193&#45;&gt;Node195 -->
+<g id="edge3" class="edge"><title>Node193&#45;&gt;Node195</title>
 <path fill="none" stroke="midnightblue" d="M237.998,-253.082C258.47,-265.691 289.293,-283.423 318,-295 327.052,-298.651 337.037,-301.824 346.575,-304.477"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="239.701,-250.019 229.365,-247.689 235.992,-255.956 239.701,-250.019"/>
 </g>
-<!-- Node193 -->
-<g id="node5" class="node"><title>Node193</title>
+<!-- Node196 -->
+<g id="node5" class="node"><title>Node196</title>
 <g id="a_node5"><a xlink:href="class_cleaner.html#a1ac5ba504932526d77575365557a4d64" target="_top" xlink:title="Method to clean an alignment based on the similarity and gaps distribution values. . ">
 <polygon fill="white" stroke="black" points="349.5,-266.5 349.5,-285.5 429.5,-285.5 429.5,-266.5 349.5,-266.5"/>
 <text text-anchor="middle" x="389.5" y="-273.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::clean</text>
 </a>
 </g>
 </g>
-<!-- Node190&#45;&gt;Node193 -->
-<g id="edge4" class="edge"><title>Node190&#45;&gt;Node193</title>
+<!-- Node193&#45;&gt;Node196 -->
+<g id="edge4" class="edge"><title>Node193&#45;&gt;Node196</title>
 <path fill="none" stroke="midnightblue" d="M268.201,-249.728C294.425,-255.455 325.403,-262.22 349.356,-267.451"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="268.924,-246.303 258.408,-247.589 267.43,-253.142 268.924,-246.303"/>
 </g>
-<!-- Node194 -->
-<g id="node6" class="node"><title>Node194</title>
+<!-- Node197 -->
+<g id="node6" class="node"><title>Node197</title>
 <g id="a_node6"><a xlink:href="class_cleaner.html#ae2328fe8c189e2827b46e5dfb8e3deb3" target="_top" xlink:title="Method to clean an alignment based on consistency values obtained from a dataset of alignments...">
 <polygon fill="white" stroke="black" points="322,-228.5 322,-247.5 457,-247.5 457,-228.5 322,-228.5"/>
 <text text-anchor="middle" x="389.5" y="-235.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanCompareFile</text>
 </a>
 </g>
 </g>
-<!-- Node190&#45;&gt;Node194 -->
-<g id="edge5" class="edge"><title>Node190&#45;&gt;Node194</title>
+<!-- Node193&#45;&gt;Node197 -->
+<g id="edge5" class="edge"><title>Node193&#45;&gt;Node197</title>
 <path fill="none" stroke="midnightblue" d="M289.921,-238C300.589,-238 311.494,-238 321.978,-238"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="289.786,-234.5 279.786,-238 289.786,-241.5 289.786,-234.5"/>
 </g>
-<!-- Node195 -->
-<g id="node7" class="node"><title>Node195</title>
+<!-- Node198 -->
+<g id="node7" class="node"><title>Node198</title>
 <g id="a_node7"><a xlink:href="class_cleaner.html#a1ea9656823727f9ec237c82f9fb529cf" target="_top" xlink:title="Method that carries the gappyout approach. This methods calculates the slope in gaps distribution on ...">
 <polygon fill="white" stroke="black" points="329.5,-190.5 329.5,-209.5 449.5,-209.5 449.5,-190.5 329.5,-190.5"/>
 <text text-anchor="middle" x="389.5" y="-197.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::clean2ndSlope</text>
 </a>
 </g>
 </g>
-<!-- Node190&#45;&gt;Node195 -->
-<g id="edge6" class="edge"><title>Node190&#45;&gt;Node195</title>
+<!-- Node193&#45;&gt;Node198 -->
+<g id="edge6" class="edge"><title>Node193&#45;&gt;Node198</title>
 <path fill="none" stroke="midnightblue" d="M268.314,-226.247C292.918,-220.874 321.687,-214.591 344.908,-209.52"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="267.43,-222.858 258.408,-228.411 268.924,-229.697 267.43,-222.858"/>
 </g>
-<!-- Node196 -->
-<g id="node8" class="node"><title>Node196</title>
+<!-- Node199 -->
+<g id="node8" class="node"><title>Node199</title>
 <g id="a_node8"><a xlink:href="class_cleaner.html#a08e6db52c33baccce53a33d844597d7b" target="_top" xlink:title="Method to remove columns composed only by gaps This method is specially useful when we remove missali...">
 <polygon fill="white" stroke="black" points="326,-152.5 326,-171.5 453,-171.5 453,-152.5 326,-152.5"/>
 <text text-anchor="middle" x="389.5" y="-159.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanNoAllGaps</text>
 </a>
 </g>
 </g>
-<!-- Node190&#45;&gt;Node196 -->
-<g id="edge7" class="edge"><title>Node190&#45;&gt;Node196</title>
+<!-- Node193&#45;&gt;Node199 -->
+<g id="edge7" class="edge"><title>Node193&#45;&gt;Node199</title>
 <path fill="none" stroke="midnightblue" d="M237.998,-222.918C258.47,-210.309 289.293,-192.577 318,-181 327.052,-177.349 337.037,-174.176 346.575,-171.523"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="235.992,-220.044 229.365,-228.311 239.701,-225.981 235.992,-220.044"/>
 </g>
-<!-- Node198 -->
-<g id="node10" class="node"><title>Node198</title>
+<!-- Node201 -->
+<g id="node10" class="node"><title>Node201</title>
 <g id="a_node10"><a xlink:href="class_cleaner.html#a068b219f913adba5c917a231cff7e437" target="_top" xlink:title="Method to clean an alignment. It carries out strict and strictplus. The method: ">
 <polygon fill="white" stroke="black" points="318,-114.5 318,-133.5 461,-133.5 461,-114.5 318,-114.5"/>
 <text text-anchor="middle" x="389.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanCombMethods</text>
 </a>
 </g>
 </g>
-<!-- Node197&#45;&gt;Node198 -->
-<g id="edge9" class="edge"><title>Node197&#45;&gt;Node198</title>
+<!-- Node200&#45;&gt;Node201 -->
+<g id="edge9" class="edge"><title>Node200&#45;&gt;Node201</title>
 <path fill="none" stroke="midnightblue" d="M275.555,-124C289.245,-124 303.878,-124 317.92,-124"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="275.296,-120.5 265.296,-124 275.296,-127.5 275.296,-120.5"/>
 </g>
-<!-- Node200 -->
-<g id="node12" class="node"><title>Node200</title>
+<!-- Node203 -->
+<g id="node12" class="node"><title>Node203</title>
 <g id="a_node12"><a xlink:href="class_cleaner.html#a095db8160a11a792a3feade870a24fd7" target="_top" xlink:title="Method to remove sequences missaligned with the rest of sequences in the alignment. For each residue in the sequence, it tests it&#39;s similarity. If the similarity of that residue is higher than overlapColumn value, it counts as a hit for the sequence. After calculating the number of hits for the sequence, it removes the sequence if it has a proportion hits/residues lower tan minimumOverlap. ">
 <polygon fill="white" stroke="black" points="322,-76.5 322,-95.5 457,-95.5 457,-76.5 322,-76.5"/>
 <text text-anchor="middle" x="389.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanSpuriousSeq</text>
 </a>
 </g>
 </g>
-<!-- Node199&#45;&gt;Node200 -->
-<g id="edge11" class="edge"><title>Node199&#45;&gt;Node200</title>
+<!-- Node202&#45;&gt;Node203 -->
+<g id="edge11" class="edge"><title>Node202&#45;&gt;Node203</title>
 <path fill="none" stroke="midnightblue" d="M289.521,-86C300.294,-86 311.317,-86 321.911,-86"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="289.291,-82.5001 279.291,-86 289.291,-89.5001 289.291,-82.5001"/>
 </g>

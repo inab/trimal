@@ -10,7 +10,6 @@ var group___check_needs =
     [ "check_cw_argument", "group___check_needs.html#gab6f9f8b433a4c6fedbb4c094ae9003c7", null ],
     [ "check_file_aligned", "group___check_needs.html#ga3beec34d7074f4a67ccaf4e8bb875122", null ],
     [ "check_force_selection", "group___check_needs.html#gabb94df3621dbe1859675bb385d3d5b7d", null ],
-    [ "check_html_output_interest", "group___check_needs.html#ga1715764c1434c79458e9d09d99cb2d84", null ],
     [ "check_input_file_with_coding_sequences_argument", "group___check_needs.html#ga640fb579367d6ea2e45265cacf57a3ef", null ],
     [ "check_multiple_files_comparison", "group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27", null ],
     [ "check_output_file_with_statistics", "group___check_needs.html#ga4783de3644b5e5c6cb7f611f835c5ac2", null ],

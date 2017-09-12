@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['savealignment',['saveAlignment',['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment()'],['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()']]],
+  ['savealignment',['SaveAlignment',['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()'],['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment()']]],
   ['saveresidues',['saveResidues',['../classnew_alignment.html#a5239bd4e742631b58efc7f09dd67f165',1,'newAlignment']]],
   ['savesequences',['saveSequences',['../classnew_alignment.html#a76d057ddcebc7c88dd7f9e3ff0ce95bf',1,'newAlignment']]],
   ['scc',['scc',['../classtrim_al_manager.html#ab578880a4b104e7e0bc8db235d082ca1',1,'trimAlManager']]],
@@ -51,11 +51,12 @@ var searchData=
   ['splitbystopcodon',['splitByStopCodon',['../classtrim_al_manager.html#a2fbbc1bb96c5b9f33ea40f639454d994',1,'trimAlManager']]],
   ['statistics',['Statistics',['../classnew_alignment.html#a6324267e64b68bb85d993cf602d008eb',1,'newAlignment']]],
   ['statisticsconservation',['statisticsConservation',['../classstatistics_conservation.html',1,'statisticsConservation'],['../classstatistics_conservation.html#a4c808b44c2808ddb5578f1a90dadd6ea',1,'statisticsConservation::statisticsConservation(void)'],['../classstatistics_conservation.html#a2fa0bbea2b5a353b12a185cf68f69653',1,'statisticsConservation::statisticsConservation(string *alignmentMatrix, int species, int aminos, int dataType_)']]],
-  ['statisticsfiles',['statisticsFiles',['../classstatistics_files.html',1,'']]],
   ['statisticsgaps',['statisticsGaps',['../classstatistics_gaps.html',1,'']]],
   ['statisticsmanager',['StatisticsManager',['../class_statistics_manager.html',1,'']]],
   ['stats',['stats',['../classtrim_al_manager.html#a8a097aab4cd98825a7a58af62e239bad',1,'trimAlManager']]],
   ['stats_5farguments',['stats_arguments',['../group___parsing_arguments_functions.html#ga1bae281d1fb2c0a49f9e88c83ba5684a',1,'trimAlManager']]],
+  ['streamaccsvg',['streamAccSVG',['../classutils.html#a79302b20c06537eed903f4d007f0e195',1,'utils']]],
+  ['streamcolsvg',['streamColSVG',['../classutils.html#a26f54faf5cbd72838ada33838c1a18c6',1,'utils']]],
   ['strict',['strict',['../classtrim_al_manager.html#a8093aa4a6cfa1a5690fb2db7ad61c40c',1,'trimAlManager']]],
   ['strict_5fargument',['strict_argument',['../group___parsing_arguments_functions.html#gaa008bef3630f5c8e37280359d7f5608c',1,'trimAlManager']]],
   ['strict_5fplus_5fargument',['strict_plus_argument',['../group___parsing_arguments_functions.html#ga6b6046796e345bef35474c895c681fb7',1,'trimAlManager']]],

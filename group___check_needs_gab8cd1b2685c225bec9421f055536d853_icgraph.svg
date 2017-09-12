@@ -9,15 +9,15 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 46)">
 <title>trimAlManager::check_residue_and_sequence_overlap</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-46 477,-46 477,4 -4,4"/>
-<!-- Node89 -->
-<g id="node1" class="node"><title>Node89</title>
+<!-- Node96 -->
+<g id="node1" class="node"><title>Node96</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-41.5 122,-41.5 122,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">_residue_and_sequence</text>
 <text text-anchor="middle" x="61" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_overlap</text>
 </g>
-<!-- Node90 -->
-<g id="node2" class="node"><title>Node90</title>
+<!-- Node97 -->
+<g id="node2" class="node"><title>Node97</title>
 <g id="a_node2"><a xlink:href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" target="_top" xlink:title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult...">
 <polygon fill="white" stroke="black" points="158,-6 158,-36 270,-36 270,-6 158,-6"/>
 <text text-anchor="start" x="166" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
@@ -25,21 +25,21 @@
 </a>
 </g>
 </g>
-<!-- Node89&#45;&gt;Node90 -->
-<g id="edge1" class="edge"><title>Node89&#45;&gt;Node90</title>
+<!-- Node96&#45;&gt;Node97 -->
+<g id="edge1" class="edge"><title>Node96&#45;&gt;Node97</title>
 <path fill="none" stroke="midnightblue" d="M132.203,-21C140.859,-21 149.608,-21 157.992,-21"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="132.113,-17.5001 122.113,-21 132.113,-24.5001 132.113,-17.5001"/>
 </g>
-<!-- Node91 -->
-<g id="node3" class="node"><title>Node91</title>
+<!-- Node98 -->
+<g id="node3" class="node"><title>Node98</title>
 <g id="a_node3"><a xlink:href="group___trimal_parsing_arguments.html#ga748b08a1ec5cd214de804ed0d4234a6e" target="_top" xlink:title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in...">
 <polygon fill="white" stroke="black" points="306,-11.5 306,-30.5 473,-30.5 473,-11.5 306,-11.5"/>
 <text text-anchor="middle" x="389.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::processArguments</text>
 </a>
 </g>
 </g>
-<!-- Node90&#45;&gt;Node91 -->
-<g id="edge2" class="edge"><title>Node90&#45;&gt;Node91</title>
+<!-- Node97&#45;&gt;Node98 -->
+<g id="edge2" class="edge"><title>Node97&#45;&gt;Node98</title>
 <path fill="none" stroke="midnightblue" d="M280.636,-21C288.87,-21 297.376,-21 305.829,-21"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="280.374,-17.5001 270.374,-21 280.373,-24.5001 280.374,-17.5001"/>
 </g>

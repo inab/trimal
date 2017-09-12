@@ -9,21 +9,21 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>compareFiles::applyWindow</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 262,-24 262,4 -4,4"/>
-<!-- Node9 -->
-<g id="node1" class="node"><title>Node9</title>
+<!-- Node7 -->
+<g id="node1" class="node"><title>Node7</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 140,-19.5 140,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="70" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">compareFiles::applyWindow</text>
 </g>
-<!-- Node10 -->
-<g id="node2" class="node"><title>Node10</title>
+<!-- Node8 -->
+<g id="node2" class="node"><title>Node8</title>
 <g id="a_node2"><a xlink:href="classutils.html#a42f272221edf7752ffda49e4212ef653" target="_top" xlink:title="Integer vector copying. ">
 <polygon fill="white" stroke="black" points="176,-0.5 176,-19.5 258,-19.5 258,-0.5 176,-0.5"/>
 <text text-anchor="middle" x="217" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::copyVect</text>
 </a>
 </g>
 </g>
-<!-- Node9&#45;&gt;Node10 -->
-<g id="edge1" class="edge"><title>Node9&#45;&gt;Node10</title>
+<!-- Node7&#45;&gt;Node8 -->
+<g id="edge1" class="edge"><title>Node7&#45;&gt;Node8</title>
 <path fill="none" stroke="midnightblue" d="M140.103,-10C148.719,-10 157.399,-10 165.656,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="165.85,-13.5001 175.85,-10 165.85,-6.5001 165.85,-13.5001"/>
 </g>

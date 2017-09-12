@@ -8,10 +8,10 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "sequencesMatrix.h", "sequences_matrix_8h_source.html", null ],
     [ "similarityMatrix.h", "similarity_matrix_8h_source.html", null ],
     [ "statisticsConservation.h", "statistics_conservation_8h_source.html", null ],
-    [ "statisticsFiles.h", "statistics_files_8h_source.html", null ],
     [ "statisticsGaps.h", "statistics_gaps_8h_source.html", null ],
     [ "StatisticsManager.h", "_statistics_manager_8h_source.html", null ],
     [ "trimalArgumentParser.h", "trimal_argument_parser_8h_source.html", null ],
     [ "utils.h", "utils_8h_source.html", null ],
-    [ "values.h", "values_8h_source.html", null ]
+    [ "values.h", "values_8h_source.html", null ],
+    [ "verbosemanager.h", "verbosemanager_8h_source.html", null ]
 ];

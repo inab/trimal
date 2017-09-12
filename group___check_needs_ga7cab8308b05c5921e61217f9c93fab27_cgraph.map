@@ -1,9 +1,10 @@
 <map id="trimAlManager::check_multiple_files_comparison" name="trimAlManager::check_multiple_files_comparison">
 <area shape="rect" id="node2" href="$class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf" title="Function that creates an alignment from a filepath. It automatically detects the format of the file..." alt="" coords="238,13,433,39"/>
-<area shape="rect" id="node4" href="$classcompare_files.html#a869e1029b22f477bb3ed2a700af64956" title="Method to compare a set of alignments to select the most consistent one respect the others..." alt="" coords="255,63,416,90"/>
-<area shape="rect" id="node6" href="$classcompare_files.html#aad9a46ed0c7ed28f7095ca3aeb5b651b" title="Applies a new window to the alignment. " alt="" coords="242,165,429,191"/>
-<area shape="rect" id="node8" href="$classcompare_files.html#acc8e14082afd80b0cf65a4c4d41549ea" title="Method to obtain the consistency values vector for a given alignment against a set of alignments with..." alt="" coords="232,114,439,141"/>
-<area shape="rect" id="node3" href="$class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="487,5,632,47"/>
-<area shape="rect" id="node5" href="$classutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization. " alt="" coords="509,93,610,119"/>
-<area shape="rect" id="node7" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="505,165,614,191"/>
+<area shape="rect" id="node4" href="$class_verbose_manager.html#a261de87bbf9653cd729dca4e1fbeb2a3" title="Method to report an Error. It will be displayed if VerboseManager::Level is equal or higher to Verbos..." alt="" coords="487,114,653,141"/>
+<area shape="rect" id="node5" href="$classcompare_files.html#ac2c0cb68eb0538d19a2688cb3d7fab37" title="Method to compare a set of alignments to select the most consistent one respect the others..." alt="" coords="255,165,416,191"/>
+<area shape="rect" id="node7" href="$classcompare_files.html#aad9a46ed0c7ed28f7095ca3aeb5b651b" title="Applies a new window to the alignment. " alt="" coords="242,215,429,242"/>
+<area shape="rect" id="node9" href="$classcompare_files.html#af54a4eb6dfb673389b22c5b345ac689e" title="Method to obtain the consistency values vector for a given alignment against a set of alignments with..." alt="" coords="232,114,439,141"/>
+<area shape="rect" id="node3" href="$class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="497,5,643,47"/>
+<area shape="rect" id="node6" href="$classutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization. " alt="" coords="519,165,621,191"/>
+<area shape="rect" id="node8" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="515,215,625,242"/>
 </map>

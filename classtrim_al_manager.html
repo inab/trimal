@@ -100,8 +100,7 @@ $(document).ready(function(){initNavTree('classtrim_al_manager.html','');});
 <div class="dynheader">
 Collaboration diagram for trimAlManager:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classtrim_al_manager__coll__graph.svg" width="1566" height="1475"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classtrim_al_manager__coll__graph.svg" width="1731" height="1683"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -131,6 +130,12 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:gaf01f123455f1752f85fac1f0baa77568"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___parsing_arguments_functions.html#gaf01f123455f1752f85fac1f0baa77568">html_out_argument</a> (int *argc, char *argv[], int *<a class="el" href="classtrim_al_manager.html#aafe4a10c083c5035211661e39071ab27">i</a>)</td></tr>
 <tr class="memdesc:gaf01f123455f1752f85fac1f0baa77568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to parse the html output file.  <a href="group___parsing_arguments_functions.html#gaf01f123455f1752f85fac1f0baa77568">More...</a><br /></td></tr>
 <tr class="separator:gaf01f123455f1752f85fac1f0baa77568"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga283312269b266ac48febb634f1813c59"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>svg_out_argument</b> (int *argc, char *argv[], int *<a class="el" href="classtrim_al_manager.html#aafe4a10c083c5035211661e39071ab27">i</a>)</td></tr>
+<tr class="separator:ga283312269b266ac48febb634f1813c59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0fa8ada73a3fc538c7bb9526fefb58bc"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>svg_stats_argument</b> (int *argc, char *argv[], int *<a class="el" href="classtrim_al_manager.html#aafe4a10c083c5035211661e39071ab27">i</a>)</td></tr>
+<tr class="separator:ga0fa8ada73a3fc538c7bb9526fefb58bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga154699b8e525b01cf0916b013d517347"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___parsing_arguments_functions.html#ga154699b8e525b01cf0916b013d517347">out_format_arguments</a> (int *argc, char *argv[], int *<a class="el" href="classtrim_al_manager.html#aafe4a10c083c5035211661e39071ab27">i</a>)</td></tr>
 <tr class="memdesc:ga154699b8e525b01cf0916b013d517347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to parse the output formats as -fasta -clustal or -formats [...].  <a href="group___parsing_arguments_functions.html#ga154699b8e525b01cf0916b013d517347">More...</a><br /></td></tr>
 <tr class="separator:ga154699b8e525b01cf0916b013d517347"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -296,9 +301,9 @@ Take in mind that dependencies may be between multiple arguments, so, if there i
 <tr class="memitem:gab8cd1b2685c225bec9421f055536d853"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___check_needs.html#gab8cd1b2685c225bec9421f055536d853">check_residue_and_sequence_overlap</a> ()</td></tr>
 <tr class="memdesc:gab8cd1b2685c225bec9421f055536d853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to check if both of them (residue overlap and sequence overlap) have been defined by the user as they have a dependency on each other.  <a href="group___check_needs.html#gab8cd1b2685c225bec9421f055536d853">More...</a><br /></td></tr>
 <tr class="separator:gab8cd1b2685c225bec9421f055536d853"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1715764c1434c79458e9d09d99cb2d84"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___check_needs.html#ga1715764c1434c79458e9d09d99cb2d84">check_html_output_interest</a> ()</td></tr>
-<tr class="memdesc:ga1715764c1434c79458e9d09d99cb2d84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to check if, being asked to give an HTML report, it makes logic, depending on the functionality asked.  <a href="group___check_needs.html#ga1715764c1434c79458e9d09d99cb2d84">More...</a><br /></td></tr>
-<tr class="separator:ga1715764c1434c79458e9d09d99cb2d84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf5b7eb54478c5ea21410381d52052e14"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>check_output_relevance</b> ()</td></tr>
+<tr class="separator:gaf5b7eb54478c5ea21410381d52052e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4783de3644b5e5c6cb7f611f835c5ac2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___check_needs.html#ga4783de3644b5e5c6cb7f611f835c5ac2">check_output_file_with_statistics</a> ()</td></tr>
 <tr class="memdesc:ga4783de3644b5e5c6cb7f611f835c5ac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to check if there is an output file to allow statistics to be given on terminal.  <a href="group___check_needs.html#ga4783de3644b5e5c6cb7f611f835c5ac2">More...</a><br /></td></tr>
 <tr class="separator:ga4783de3644b5e5c6cb7f611f835c5ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -592,6 +597,9 @@ float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrim_al_manager.html#acd3b1b38f7d94ff7fce989efc306f06c">singleAlig</a> = NULL</td></tr>
 <tr class="memdesc:acd3b1b38f7d94ff7fce989efc306f06c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alignment obtained by making modifications to singleAlig or backtranslationAlig. <br /></td></tr>
 <tr class="separator:acd3b1b38f7d94ff7fce989efc306f06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc701c16a08a9c9eb892c60860546779"><td class="memItemLeft" align="right" valign="top"><a id="abc701c16a08a9c9eb892c60860546779"></a>
+<a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>tempAlig</b> = NULL</td></tr>
+<tr class="separator:abc701c16a08a9c9eb892c60860546779"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cd9b7bd62cf65f35fffc0bb33f0ccf1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrim_al_manager.html#a2cd9b7bd62cf65f35fffc0bb33f0ccf1">compareAlignmentsArray</a> = NULL</td></tr>
 <tr class="memdesc:a2cd9b7bd62cf65f35fffc0bb33f0ccf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alignment Vector used on <a class="el" href="group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation...">trimAlManager::check_multiple_files_comparison</a> to compare them.  <a href="#a2cd9b7bd62cf65f35fffc0bb33f0ccf1">More...</a><br /></td></tr>
 <tr class="separator:a2cd9b7bd62cf65f35fffc0bb33f0ccf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -626,6 +634,12 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrim_al_manager.html#a0f5276699d17bdc755e57f0835581cda">htmlOutFile</a> = NULL</td></tr>
 <tr class="memdesc:a0f5276699d17bdc755e57f0835581cda"><td class="mdescLeft">&#160;</td><td class="mdescRight">File to output the html report file. <br /></td></tr>
 <tr class="separator:a0f5276699d17bdc755e57f0835581cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7986b65758c732e9201f8561264c05c0"><td class="memItemLeft" align="right" valign="top"><a id="a7986b65758c732e9201f8561264c05c0"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>svgOutFile</b> = NULL</td></tr>
+<tr class="separator:a7986b65758c732e9201f8561264c05c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aaacf3391b99b41e06496e096b779db"><td class="memItemLeft" align="right" valign="top"><a id="a6aaacf3391b99b41e06496e096b779db"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>svgStatsOutFile</b> = NULL</td></tr>
+<tr class="separator:a6aaacf3391b99b41e06496e096b779db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a325faf5b77c5e6fa335d46c2e1042fc4"><td class="memItemLeft" align="right" valign="top"><a id="a325faf5b77c5e6fa335d46c2e1042fc4"></a>
 char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrim_al_manager.html#a325faf5b77c5e6fa335d46c2e1042fc4">matrixFile</a> = NULL</td></tr>
 <tr class="memdesc:a325faf5b77c5e6fa335d46c2e1042fc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">File that contains a user defined similarity matrix. <br /></td></tr>
@@ -701,7 +715,7 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <p>Alignment Vector used on <a class="el" href="group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation...">trimAlManager::check_multiple_files_comparison</a> to compare them. </p>
 <dl class="section note"><dt>Note</dt><dd>This variable could be moved there. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00092">92</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00093">93</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
 
 </div>
 </div>
@@ -728,7 +742,7 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <p>Vector containing the files to compare in <a class="el" href="group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation...">trimAlManager::check_multiple_files_comparison</a> function. </p>
 <dl class="section note"><dt>Note</dt><dd>This variable could be moved there. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00104">104</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="trimal_argument_parser_8h_source.html#l00123">123</a> of file <a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a>.</p>
 
 </div>
 </div>
@@ -815,7 +829,7 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/<a class="el" href="trimal_argument_parser_8h_source.html">trimalArgumentParser.h</a></li>
-<li>include/trimalArgumentParser.dox</li>
+<li>include/documentation/trimalArgumentParser.dox</li>
 <li>source/<a class="el" href="trimal_argument_parser_8cpp_source.html">trimalArgumentParser.cpp</a></li>
 </ul>
 </div><!-- contents -->

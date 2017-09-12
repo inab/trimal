@@ -1,2 +1,6 @@
 <map id="ReadWriteMS" name="ReadWriteMS">
+<area shape="rect" id="node3" href="$class_read_write_base_state.html" title="Abstract class to implement. &#160;This class implementations are instantiated by the ReadWrite Machine St..." alt="" coords="172,304,317,331"/>
+<area shape="rect" id="node4" title="STL class. " alt="" coords="115,199,195,225"/>
+<area shape="rect" id="node5" title="STL class. " alt="" coords="92,5,219,47"/>
+<area shape="rect" id="node7" title="STL class. " alt="" coords="5,304,121,331"/>
 </map>

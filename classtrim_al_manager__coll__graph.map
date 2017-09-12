@@ -1,10 +1,19 @@
 <map id="trimAlManager" name="trimAlManager">
-<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="900,571,1004,597"/>
-<area shape="rect" id="node6" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="1174,341,1295,368"/>
-<area shape="rect" id="node13" href="$class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="1201,716,1268,743"/>
-<area shape="rect" id="node15" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="1171,519,1298,545"/>
-<area shape="rect" id="node4" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="375,503,481,529"/>
-<area shape="rect" id="node9" href="$classstatistics_conservation.html" title="statisticsConservation" alt="" coords="537,624,689,651"/>
-<area shape="rect" id="node12" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="240,861,351,888"/>
-<area shape="rect" id="node19" href="$class_read_write_m_s.html" title="Class that handles the load and save functions of an alignment. " alt="" coords="900,991,1004,1017"/>
+<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="949,643,1053,669"/>
+<area shape="rect" id="node5" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="1248,999,1369,1025"/>
+<area shape="rect" id="node13" href="$class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="1275,689,1342,716"/>
+<area shape="rect" id="node15" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="1245,453,1372,480"/>
+<area shape="rect" id="node3" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="472,549,579,576"/>
+<area shape="rect" id="node9" href="$classstatistics_conservation.html" title="statisticsConservation" alt="" coords="603,717,755,744"/>
+<area shape="rect" id="node12" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="315,373,426,400"/>
+<area shape="rect" id="node6" title="STL class. " alt="" coords="639,1289,719,1316"/>
+<area shape="rect" id="node24" href="$class_read_write_base_state.html" title="Abstract class to implement. &#160;This class implementations are instantiated by the ReadWrite Machine St..." alt="" coords="1236,1299,1381,1325"/>
+<area shape="rect" id="node7" title="STL class. " alt="" coords="307,1282,434,1323"/>
+<area shape="rect" id="node22" href="$class_read_write_m_s.html" title="Class that handles the load and save functions of an alignment. " alt="" coords="949,1187,1053,1213"/>
+<area shape="rect" id="node17" title="STL class. " alt="" coords="1261,209,1356,236"/>
+<area shape="rect" id="node18" title="STL class. " alt="" coords="935,155,1068,197"/>
+<area shape="rect" id="node19" title="STL class. " alt="" coords="614,115,743,157"/>
+<area shape="rect" id="node20" title="STL class. " alt="" coords="293,123,448,149"/>
+<area shape="rect" id="node21" title="STL class. " alt="" coords="5,123,105,149"/>
+<area shape="rect" id="node25" title="STL class. " alt="" coords="943,1651,1059,1677"/>
 </map>

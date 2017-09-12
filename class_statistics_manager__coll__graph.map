@@ -1,8 +1,10 @@
 <map id="StatisticsManager" name="StatisticsManager">
-<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="524,573,628,600"/>
-<area shape="rect" id="node6" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="267,664,389,691"/>
-<area shape="rect" id="node13" href="$class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="715,664,781,691"/>
-<area shape="rect" id="node4" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="781,325,888,352"/>
-<area shape="rect" id="node9" href="$classstatistics_conservation.html" title="statisticsConservation" alt="" coords="421,415,573,442"/>
-<area shape="rect" id="node12" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="445,228,555,255"/>
+<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="428,559,532,585"/>
+<area shape="rect" id="node5" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="93,649,214,676"/>
+<area shape="rect" id="node13" href="$class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="744,649,811,676"/>
+<area shape="rect" id="node3" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="483,318,589,345"/>
+<area shape="rect" id="node9" href="$classstatistics_conservation.html" title="statisticsConservation" alt="" coords="588,401,740,427"/>
+<area shape="rect" id="node12" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="751,228,862,255"/>
+<area shape="rect" id="node6" title="STL class. " alt="" coords="328,401,408,427"/>
+<area shape="rect" id="node7" title="STL class. " alt="" coords="214,221,341,262"/>
 </map>

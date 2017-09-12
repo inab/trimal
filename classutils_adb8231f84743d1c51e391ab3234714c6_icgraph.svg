@@ -9,13 +9,13 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 84)">
 <title>utils::readNumbers</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-84 444,-84 444,4 -4,4"/>
-<!-- Node114 -->
-<g id="node1" class="node"><title>Node114</title>
+<!-- Node127 -->
+<g id="node1" class="node"><title>Node127</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-30 0,-49 99,-49 99,-30 0,-30"/>
 <text text-anchor="middle" x="49.5" y="-37" font-family="Helvetica,sans-Serif" font-size="10.00">utils::readNumbers</text>
 </g>
-<!-- Node115 -->
-<g id="node2" class="node"><title>Node115</title>
+<!-- Node128 -->
+<g id="node2" class="node"><title>Node128</title>
 <g id="a_node2"><a xlink:href="group___parsing_arguments_functions.html#gadf8a0b6574e9abb325a6c331ab9368ac" target="_top" xlink:title="Method to parse the select columns argument. ">
 <polygon fill="white" stroke="black" points="135,-49.5 135,-79.5 247,-79.5 247,-49.5 135,-49.5"/>
 <text text-anchor="start" x="143" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::select</text>
@@ -23,13 +23,13 @@
 </a>
 </g>
 </g>
-<!-- Node114&#45;&gt;Node115 -->
-<g id="edge1" class="edge"><title>Node114&#45;&gt;Node115</title>
+<!-- Node127&#45;&gt;Node128 -->
+<g id="edge1" class="edge"><title>Node127&#45;&gt;Node128</title>
 <path fill="none" stroke="midnightblue" d="M109.136,-50.0082C117.638,-51.5318 126.366,-53.096 134.797,-54.607"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="109.751,-46.5628 99.2903,-48.2438 108.516,-53.453 109.751,-46.5628"/>
 </g>
-<!-- Node117 -->
-<g id="node4" class="node"><title>Node117</title>
+<!-- Node130 -->
+<g id="node4" class="node"><title>Node130</title>
 <g id="a_node4"><a xlink:href="group___parsing_arguments_functions.html#ga5b7b7ccf9e704e7341546a9e8834e890" target="_top" xlink:title="Method to parse que select sequences argument. ">
 <polygon fill="white" stroke="black" points="137.5,-0.5 137.5,-30.5 244.5,-30.5 244.5,-0.5 137.5,-0.5"/>
 <text text-anchor="start" x="145.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::seqs</text>
@@ -37,26 +37,26 @@
 </a>
 </g>
 </g>
-<!-- Node114&#45;&gt;Node117 -->
-<g id="edge3" class="edge"><title>Node114&#45;&gt;Node117</title>
+<!-- Node127&#45;&gt;Node130 -->
+<g id="edge3" class="edge"><title>Node127&#45;&gt;Node130</title>
 <path fill="none" stroke="midnightblue" d="M109.227,-29.3965C118.51,-27.7993 128.061,-26.1561 137.199,-24.5841"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="108.552,-25.961 99.2903,-31.106 109.739,-32.8597 108.552,-25.961"/>
 </g>
-<!-- Node116 -->
-<g id="node3" class="node"><title>Node116</title>
+<!-- Node129 -->
+<g id="node3" class="node"><title>Node129</title>
 <g id="a_node3"><a xlink:href="group___parsing_arguments_functions.html#gaf140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
 <polygon fill="white" stroke="black" points="283,-30 283,-49 440,-49 440,-30 283,-30"/>
 <text text-anchor="middle" x="361.5" y="-37" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::parseArguments</text>
 </a>
 </g>
 </g>
-<!-- Node115&#45;&gt;Node116 -->
-<g id="edge2" class="edge"><title>Node115&#45;&gt;Node116</title>
+<!-- Node128&#45;&gt;Node129 -->
+<g id="edge2" class="edge"><title>Node128&#45;&gt;Node129</title>
 <path fill="none" stroke="midnightblue" d="M257.316,-54.8092C270.158,-52.9038 283.62,-50.9065 296.422,-49.0071"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="256.551,-51.3843 247.173,-56.3141 257.579,-58.3085 256.551,-51.3843"/>
 </g>
-<!-- Node117&#45;&gt;Node116 -->
-<g id="edge4" class="edge"><title>Node117&#45;&gt;Node116</title>
+<!-- Node130&#45;&gt;Node129 -->
+<g id="edge4" class="edge"><title>Node130&#45;&gt;Node129</title>
 <path fill="none" stroke="midnightblue" d="M254.82,-24.4476C267.462,-26.2483 280.795,-28.1473 293.572,-29.9672"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="255.246,-20.9731 244.852,-23.0279 254.259,-27.9031 255.246,-20.9731"/>
 </g>

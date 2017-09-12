@@ -9,34 +9,34 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>Cleaner::removeSmallerBlocks</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 474,-24 474,4 -4,4"/>
-<!-- Node225 -->
-<g id="node1" class="node"><title>Node225</title>
+<!-- Node229 -->
+<g id="node1" class="node"><title>Node229</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 152,-19.5 152,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="76" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeSmallerBlocks</text>
 </g>
-<!-- Node226 -->
-<g id="node2" class="node"><title>Node226</title>
+<!-- Node230 -->
+<g id="node2" class="node"><title>Node230</title>
 <g id="a_node2"><a xlink:href="class_cleaner.html#a740bce047dce09be0f6bd1da9f826da3" target="_top" xlink:title="Method to clean an alignment. It carries out strict and strictplus. It removes sequences that overpas...">
 <polygon fill="white" stroke="black" points="188,-0.5 188,-19.5 291,-19.5 291,-0.5 188,-0.5"/>
 <text text-anchor="middle" x="239.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanStrict</text>
 </a>
 </g>
 </g>
-<!-- Node225&#45;&gt;Node226 -->
-<g id="edge1" class="edge"><title>Node225&#45;&gt;Node226</title>
+<!-- Node229&#45;&gt;Node230 -->
+<g id="edge1" class="edge"><title>Node229&#45;&gt;Node230</title>
 <path fill="none" stroke="midnightblue" d="M162.24,-10C170.891,-10 179.473,-10 187.587,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="162.076,-6.5001 152.076,-10 162.076,-13.5001 162.076,-6.5001"/>
 </g>
-<!-- Node227 -->
-<g id="node3" class="node"><title>Node227</title>
+<!-- Node231 -->
+<g id="node3" class="node"><title>Node231</title>
 <g id="a_node3"><a xlink:href="class_cleaner.html#a068b219f913adba5c917a231cff7e437" target="_top" xlink:title="Method to clean an alignment. It carries out strict and strictplus. The method: ">
 <polygon fill="white" stroke="black" points="327,-0.5 327,-19.5 470,-19.5 470,-0.5 327,-0.5"/>
 <text text-anchor="middle" x="398.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanCombMethods</text>
 </a>
 </g>
 </g>
-<!-- Node226&#45;&gt;Node227 -->
-<g id="edge2" class="edge"><title>Node226&#45;&gt;Node227</title>
+<!-- Node230&#45;&gt;Node231 -->
+<g id="edge2" class="edge"><title>Node230&#45;&gt;Node231</title>
 <path fill="none" stroke="midnightblue" d="M301.111,-10C309.507,-10 318.192,-10 326.752,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="301.04,-6.5001 291.04,-10 301.04,-13.5001 301.04,-6.5001"/>
 </g>

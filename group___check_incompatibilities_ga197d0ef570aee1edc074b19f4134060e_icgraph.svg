@@ -9,14 +9,14 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 35)">
 <title>trimAlManager::check_clusters_incompatibilities</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-35 517,-35 517,4 -4,4"/>
-<!-- Node22 -->
-<g id="node1" class="node"><title>Node22</title>
+<!-- Node26 -->
+<g id="node1" class="node"><title>Node26</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-30.5 131,-30.5 131,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
 <text text-anchor="middle" x="65.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_clusters_incompatibilities</text>
 </g>
-<!-- Node23 -->
-<g id="node2" class="node"><title>Node23</title>
+<!-- Node27 -->
+<g id="node2" class="node"><title>Node27</title>
 <g id="a_node2"><a xlink:href="group___check_incompatibilities.html#ga16d2da3f90cfe965bea5f1da1360e17a" target="_top" xlink:title="Method to check argument incompatibilities. Take in mind that an incompatibility is between two argum...">
 <polygon fill="white" stroke="black" points="167,-0.5 167,-30.5 310,-30.5 310,-0.5 167,-0.5"/>
 <text text-anchor="start" x="175" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
@@ -24,21 +24,21 @@
 </a>
 </g>
 </g>
-<!-- Node22&#45;&gt;Node23 -->
-<g id="edge1" class="edge"><title>Node22&#45;&gt;Node23</title>
+<!-- Node26&#45;&gt;Node27 -->
+<g id="edge1" class="edge"><title>Node26&#45;&gt;Node27</title>
 <path fill="none" stroke="midnightblue" d="M141.351,-15.5C149.791,-15.5 158.372,-15.5 166.758,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="141.148,-12.0001 131.148,-15.5 141.148,-19.0001 141.148,-12.0001"/>
 </g>
-<!-- Node24 -->
-<g id="node3" class="node"><title>Node24</title>
+<!-- Node28 -->
+<g id="node3" class="node"><title>Node28</title>
 <g id="a_node3"><a xlink:href="group___trimal_parsing_arguments.html#ga748b08a1ec5cd214de804ed0d4234a6e" target="_top" xlink:title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in...">
 <polygon fill="white" stroke="black" points="346,-6 346,-25 513,-25 513,-6 346,-6"/>
 <text text-anchor="middle" x="429.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::processArguments</text>
 </a>
 </g>
 </g>
-<!-- Node23&#45;&gt;Node24 -->
-<g id="edge2" class="edge"><title>Node23&#45;&gt;Node24</title>
+<!-- Node27&#45;&gt;Node28 -->
+<g id="edge2" class="edge"><title>Node27&#45;&gt;Node28</title>
 <path fill="none" stroke="midnightblue" d="M320.349,-15.5C328.789,-15.5 337.378,-15.5 345.839,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="320.145,-12.0001 310.145,-15.5 320.145,-19.0001 320.145,-12.0001"/>
 </g>

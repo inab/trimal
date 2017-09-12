@@ -9,21 +9,21 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>utils::quicksort</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 184,-24 184,4 -4,4"/>
-<!-- Node79 -->
-<g id="node1" class="node"><title>Node79</title>
+<!-- Node92 -->
+<g id="node1" class="node"><title>Node92</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 80,-19.5 80,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="40" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::quicksort</text>
 </g>
-<!-- Node80 -->
-<g id="node2" class="node"><title>Node80</title>
+<!-- Node93 -->
+<g id="node2" class="node"><title>Node93</title>
 <g id="a_node2"><a xlink:href="classutils.html#a3377ecde55631d1bbc4956e5923b7469" target="_top" xlink:title="Swapping elements method. ">
 <polygon fill="white" stroke="black" points="116,-0.5 116,-19.5 180,-19.5 180,-0.5 116,-0.5"/>
 <text text-anchor="middle" x="148" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::swap</text>
 </a>
 </g>
 </g>
-<!-- Node79&#45;&gt;Node80 -->
-<g id="edge1" class="edge"><title>Node79&#45;&gt;Node80</title>
+<!-- Node92&#45;&gt;Node93 -->
+<g id="edge1" class="edge"><title>Node92&#45;&gt;Node93</title>
 <path fill="none" stroke="midnightblue" d="M80.1693,-10C88.5549,-10 97.4371,-10 105.893,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="105.935,-13.5001 115.935,-10 105.935,-6.5001 105.935,-13.5001"/>
 </g>
