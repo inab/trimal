@@ -1834,8 +1834,14 @@ void alignment::alignmentNBRF_PirToFile(ostream &file) {
     for(j = 0; j < residuesNumber[i]; j += 50) {
       for(k = j; (k < residuesNumber[i]) && (k < (j + 50)); k += 10)
         file << " " << tmpMatrix[i].substr(k, 10);
-      if((j + 50) >= residNumber)
+
+      if(k >= residuesNumber[i]) {
+        if((residuesNumber[i] % 50) == 0)
+          file << endl << " ";
+        else if((residuesNumber[i] % 10) == 0)
+          file << " ";
         file << "*";
+      }
       file << endl;
     }
     file << endl;
