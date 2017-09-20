@@ -254,6 +254,8 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
 
     /* Check the matrix's content */
     _alignment->fillMatrices(true);
+    _alignment->originalSequenNumber = _alignment-> sequenNumber;
+    _alignment->originalResidNumber = _alignment->residNumber;
     return _alignment;
 }
 
@@ -261,23 +263,23 @@ bool MegaSequentialState::SaveAlignment(newAlignment* alignment, std::ostream* o
 {
     /* Generate output alignment in MEGA format */
 
-    int i, j, k;
+    int i, j, k, l, m;
     string *tmpMatrix;
 
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
-    if (!alignment->isAligned) {
+    if (!alignment->isAligned || !alignment->saveResidues || !alignment->saveSequences) {
         ReportSystem::Report(ReportSystem::ErrorCode::UnalignedAlignmentToAlignedFormat, new std::string[1] { this->name });
         return false;
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->sequenNumber];
+    tmpMatrix = new string[alignment->originalSequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->sequenNumber; i++)
+    for(i = 0; i < alignment->originalSequenNumber; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
@@ -298,18 +300,32 @@ bool MegaSequentialState::SaveAlignment(newAlignment* alignment, std::ostream* o
 
     /* Print number of sequences and alignment length */
     *output << "NSeqs=" << alignment->sequenNumber << " Nsites=" << alignment->residNumber
-         << " indel=- CodeTable=Standard;" << endl << endl;
+         << " indel=- CodeTable=Standard;" << endl;
 
     /* Print sequences name and sequences divided into blocks of 50 residues */
-    for(i = 0; i < alignment->sequenNumber; i++) {
-        *output << "#" << alignment->seqsName[i] << endl;
-        for(j = 0; j < alignment->sequences[i].length(); j += 50) {
-            for(k = j; ((k < alignment->residNumber) && (k < j + 50)); k += 10)
-                *output << tmpMatrix[i].substr(k, 10) << " ";
-            *output << endl;
+    for(i = 0; i < alignment->originalSequenNumber; i++) {
+        if (alignment->saveSequences[i] != -1)
+        {
+            *output << endl << "#" << alignment->seqsName[i] << endl;
+            
+            for(j = 0, l = 0; j < alignment->sequences[i].length(); j ++) 
+            {
+                if (alignment->saveResidues[j] != -1)
+                {
+                    *output << alignment->sequences[i][j];
+                    if (++l % 10 == 0) *output << " ";
+                    if (l == 50)
+                    {
+                        l = 0;
+                        *output << "\n";
+                    }
+                }
+            }
+            if (l % 10 != 0) *output << " ";
+            if (l != 0) *output << endl;
         }
-        *output << endl;
     }
+    *output << endl;
 
     /* Deallocate local memory */
     delete [] tmpMatrix;

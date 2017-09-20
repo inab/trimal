@@ -51,10 +51,6 @@
 #define SINGLE  1
 #define MULTI   2
 
-
-
-
-
 struct newValues {
   int residues = 0;
   int sequences = 0;
@@ -84,8 +80,14 @@ public:
     statisticsGaps * sgaps;
 
     statisticsConservation * scons;
-
+    
+    int * SeqRef;
+    
+    int originalSequenNumber;
+    
     int sequenNumber;
+    
+    int originalResidNumber;
 
     int residNumber;
 
@@ -186,6 +188,8 @@ public:
     bool alignmentSummarySVG(char* destFile, int residues, int seqs, int* selectedRes, int* selectedSeq, float* consValues, float blocks = 4.0F);
 
     bool alignmentColourHTML(ostream &file);
+    
+    void updateSequencesAndResiduesNums(bool countSequences = true, bool countResidues = true);
 
 };
 

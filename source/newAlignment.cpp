@@ -92,6 +92,8 @@ newAlignment::newAlignment(void) {
     SequencesMatrix =   NULL;
     identities =        NULL;
 
+    SeqRef = new int(1);
+    
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -120,57 +122,45 @@ newAlignment::newAlignment(newAlignment& originalAlignment) {
         
         dataType = originalAlignment.dataType;
 
+        originalSequenNumber = originalAlignment.originalSequenNumber;
+        originalResidNumber = originalAlignment.originalResidNumber;
         
-        sequences = new string[sequenNumber];
-        seqsName = new string[sequenNumber];
-        saveSequences = new int[sequenNumber];
-        for(i = 0, j = 0; i < originalAlignment.sequenNumber; i++)
-            if (originalAlignment.saveSequences[i] != -1)
-            {
-                sequences[j] = originalAlignment.sequences[i];
-                saveSequences[j] = originalAlignment.saveSequences[i];
-                seqsName[j++] = originalAlignment.seqsName[i];
-            }
-
+        sequences = originalAlignment.sequences;
+        seqsName = originalAlignment.seqsName;
+        seqsInfo = originalAlignment.seqsInfo;
         
-        if(originalAlignment.seqsInfo) {
-            seqsInfo = new string[sequenNumber];
-            for(i = 0, j = 0; i < originalAlignment.sequenNumber; i++)
-                if (originalAlignment.saveSequences[i] != -1)
-                    seqsInfo[j++] = originalAlignment.seqsInfo[i];
-        } else seqsInfo = NULL;
-
-        
-        if(originalAlignment.saveResidues) {
-            saveResidues = new int[residNumber];
-            for(i = 0, j = 0; i < originalAlignment.residNumber; i++)
-            {
-                if (originalAlignment.saveResidues[i] != -1)
-                saveResidues[j++] = originalAlignment.saveResidues[i];
-            }
-        } else saveResidues = NULL;
-
-        
-//         if(originalAlignment.saveSequences) {
-//             for(i = 0; i < sequenNumber; i++)
+        saveSequences = new int[originalSequenNumber];
+        std::copy(originalAlignment.saveSequences, originalAlignment.saveSequences + originalAlignment.originalSequenNumber, saveSequences);
+//         for(i = 0, j = 0; i < originalAlignment.originalSequenNumber; i++)
+// //             if (originalAlignment.saveSequences[i] != -1)
 //             {
-//                 saveSequences[i] = originalAlignment.saveSequences[i];
+// //                 sequences[j] = originalAlignment.sequences[i];
+//                 saveSequences[j] = originalAlignment.saveSequences[i];
+// //                 seqsName[j++] = originalAlignment.seqsName[i];
 //             }
-//         } else saveSequences = NULL;
 
         
-//         if(originalAlignment.identities) {
-//             identities = new float*[sequenNumber];
-//             for(i = 0; i < sequenNumber; i++) {
-//                 identities[i] = new float[sequenNumber];
-//                 for(j = 0; j < sequenNumber; j++)
-//                     identities[i][j] = originalAlignment.identities[i][j];
+//         if(originalAlignment.seqsInfo) {
+//             seqsInfo = new string[sequenNumber];
+//             for(i = 0, j = 0; i < originalAlignment.sequenNumber; i++)
+//                 if (originalAlignment.saveSequences[i] != -1)
+//                     seqsInfo[j++] = originalAlignment.seqsInfo[i];
+//         } else seqsInfo = NULL;
+
+        
+//         if(originalAlignment.saveResidues) {
+            saveResidues = new int[originalResidNumber];
+            std::copy(originalAlignment.saveResidues, originalAlignment.saveResidues + originalAlignment.originalSequenNumber, saveResidues);
+            
+//             for(i = 0, j = 0; i < originalAlignment.residNumber; i++)
+//             {
+// //                 if (originalAlignment.saveResidues[i] != -1)
+//                 saveResidues[j++] = originalAlignment.saveResidues[i];
 //             }
-//         } else 
-            identities = NULL;
-        
-        
-//         this-> fillMatrices(false);
+//         }
+//         else saveResidues = NULL;
+
+        identities = NULL;
 
         //delete sgaps;
         sgaps = NULL;
@@ -185,7 +175,9 @@ newAlignment::newAlignment(newAlignment& originalAlignment) {
         
         this -> Statistics = new StatisticsManager(this, originalAlignment.Statistics);
 
+        this -> SeqRef = originalAlignment.SeqRef;
         
+        (*SeqRef)++;
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -198,21 +190,7 @@ newAlignment::newAlignment(newAlignment& originalAlignment) {
 newAlignment::~newAlignment(void) {
     int i;
     
-    if(sequences != NULL)
-        delete [] sequences;
-    sequences = NULL;
-
-    if(seqsName != NULL)
-        delete [] seqsName;
-    seqsName = NULL;
-
-//     if(residuesNumber != NULL)
-//         delete [] residuesNumber;
-//     residuesNumber = NULL;
-
-    if(seqsInfo != NULL)
-        delete [] seqsInfo;
-    seqsInfo = NULL;
+//     cout << originalSequenNumber << ":" << originalResidNumber << endl;
 
     if(saveResidues != NULL)
         delete[] saveResidues;
@@ -250,7 +228,26 @@ newAlignment::~newAlignment(void) {
     dataType = 0;
     
     delete Cleaning;
+    
     delete Statistics;
+    
+    if (--(*SeqRef) == 0)
+    {
+        delete SeqRef;
+        
+        if(sequences != NULL)
+            delete [] sequences;
+        sequences = NULL;
+
+        if(seqsName != NULL)
+            delete [] seqsName;
+        seqsName = NULL;
+
+        if(seqsInfo != NULL)
+            delete [] seqsInfo;
+        seqsInfo = NULL;
+
+    }
 
 }
 
@@ -2442,4 +2439,22 @@ bool newAlignment::alignmentColourHTML(ostream &file) {
     return true;
 }
 
-
+void newAlignment::updateSequencesAndResiduesNums(bool countSequences, bool countResidues)
+{
+    int i;
+    if (countSequences)
+    {
+        for (sequenNumber = 0, i = 0; i < originalSequenNumber; i++)
+        {
+            if (saveSequences[i] != -1) sequenNumber++;
+        }
+    }
+    
+    if (countResidues)
+    {
+        for (residNumber = 0, i = 0; i < originalResidNumber; i++)
+        {
+            if (saveResidues[i] != -1) residNumber++;
+        }
+    }
+}

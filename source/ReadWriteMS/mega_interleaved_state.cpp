@@ -238,6 +238,8 @@ newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
 
     /* Check the matrix's content */
     _alignment->fillMatrices(true);
+    _alignment->originalSequenNumber = _alignment -> sequenNumber;
+    _alignment->originalResidNumber = _alignment -> residNumber;
     return _alignment;
 }
 

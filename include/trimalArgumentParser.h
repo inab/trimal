@@ -53,7 +53,12 @@ class trimAlManager
     maxIdentity             = -1;
     
     int 
+    i                       = 1, 
     stats                   = 0,
+    num                     = 0, 
+    maxAminos               = 0, 
+    numfiles                = 0, 
+    referFile               = 0, 
     prevType                = -1,
     compareset              = -1,
     windowSize              = -1, 
@@ -63,11 +68,6 @@ class trimAlManager
     blockSize               = -1, 
     clusters                = -1,
     argumentLength          = -1, 
-    i                       = 1, 
-    num                     = 0, 
-    maxAminos               = 0, 
-    numfiles                = 0, 
-    referFile               = 0, 
     automatedMethodCount    = -1,
     alternative_matrix      = -1,
     
@@ -105,18 +105,6 @@ class trimAlManager
     *htmlOutFile        = NULL,
     *svgOutFile         = NULL,
     *svgStatsOutFile    = NULL,
-    
-//     *statsGapsColFile   = NULL,
-//     *statsGapsAccFile   = NULL,
-//     
-//     *statsSimAccFile    = NULL,
-//     *statsSimColFile    = NULL,
-//     
-// //     *statsConAccFile    = NULL,
-// //     *statsConColFile    = NULL,
-//     
-//     *statsSumOfPairsAccFile     = NULL,
-//     *statsSumOfPairsColFile     = NULL,
     
     *matrixFile         = NULL,
              

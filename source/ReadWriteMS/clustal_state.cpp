@@ -203,6 +203,8 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
 
     /* Check the matrix's content */
     alignment->fillMatrices(true);
+    alignment->originalSequenNumber = alignment-> sequenNumber;
+    alignment->originalResidNumber = alignment->residNumber;
     return alignment; 
 }
 
@@ -210,7 +212,7 @@ bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, 
 {
     /* Generate output alignment in CLUSTAL format */
 
-    int i, j, maxLongName = 0;
+    int i, j, k, l, maxLongName = 0;
     string *tmpMatrix;
 
     /* Check whether sequences in the alignment are aligned or not.
@@ -223,18 +225,18 @@ bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, 
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->sequenNumber];
+    tmpMatrix = new string[alignment->originalSequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->sequenNumber; i++)
+    for(i = 0; i < alignment->originalSequenNumber; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
 
     /* Compute maximum sequences name length */
-    for(i = 0; (i < alignment->sequenNumber) && (!Machine->shortNames); i++)
+    for(i = 0; (i < alignment->originalSequenNumber) && (!Machine->shortNames); i++)
         maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
 
     /* Print alignment header */
@@ -246,10 +248,25 @@ bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, 
     /* Print alignment itself */
     /* Print as many blocks as it is needed of lines composed
      * by sequences name and 60 residues */
-    for(j = 0; j < alignment->residNumber; j += 60) {
-        for(i = 0; i < alignment->sequenNumber; i++)
-            (*output) << setw(maxLongName + 5) << left << alignment->seqsName[i]
-                 << tmpMatrix[i].substr(j, 60) << endl;
+    
+    for(j = 0, k = 0; j < alignment->originalResidNumber; j = k) 
+    {
+        for(i = 0; i < alignment->originalSequenNumber; i++)
+        {
+            if (alignment->saveSequences != NULL && alignment->saveSequences[i] != -1)
+            {
+                (*output) << setw(maxLongName + 5) << left << alignment->seqsName[i];
+                for (k = j, l = 0; l < 60 && k < alignment->originalResidNumber; k++)
+                {
+                    if (alignment->saveResidues != NULL && alignment->saveResidues[k] != -1)
+                    {
+                        (*output) << tmpMatrix[i][k];
+                        l++;
+                    }
+                }
+                (*output) << endl;
+            }
+        }
         (*output) << endl << endl;
     }
 

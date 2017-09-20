@@ -47,9 +47,10 @@ sequencesMatrix::sequencesMatrix(newAlignment* parent) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  seqsName = new string[seqsNumber];
+  seqsName = /*new string[seqsNumber];
   for(i = 0; i < seqsNumber; i++)
-    seqsName[i] = _alignment -> seqsName[i];
+    seqsName[i] = _alignment -> seqsName[i];*/
+    _alignment->seqsName;
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */

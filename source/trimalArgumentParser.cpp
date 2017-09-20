@@ -24,8 +24,7 @@ void trimAlManager::parseArguments(int argc, char *argv[])
     }
 
     for(int i = 1; i < argc; i++ )
-    {
-
+    {  
         if (appearErrors) break;
 
         info_arguments(&argc, argv, &i);
@@ -208,7 +207,7 @@ bool trimAlManager::out_format_arguments(int *argc, char *argv[], int *i)
         else if(!strcmp(argv[*i], "-fasta_m10") )
         {
 //             outformat = 8;
-            oformats.push_back("clustal");
+            oformats.push_back("fasta");
             ReadWriteMachine.shortNames = true;
             shortNames = true;
             return true;
@@ -269,6 +268,7 @@ bool trimAlManager::out_format_arguments(int *argc, char *argv[], int *i)
         {
 //             outformat = 12;
             oformats.push_back("phylip40");
+            ReadWriteMachine.shortNames = true;
             shortNames = true;
             return true;
         }
@@ -1737,11 +1737,7 @@ int trimAlManager::perform()
         singleAlig = origAlig;
         origAlig = NULL;
     }
-    /* -------------------------------------------------------------------- */
 
-    /* -------------------------------------------------------------------- */
-    /* -------------------------------------------------------------------- */
-    /* -------------------------------------------------------------------- */
     if(backtransFile != NULL)
     {
         if(sequencesNames != NULL) 
@@ -1803,7 +1799,6 @@ int trimAlManager::perform()
     
     else if((stats >= 0) && (!appearErrors))
         ReadWriteMachine.saveAlignment("", &oformats, singleAlig);
-
 
     /* -------------------------------------------------------------------- */
     if((columnNumbering) && (!appearErrors))
@@ -1991,7 +1986,7 @@ inline void trimAlManager::clean_alignment()
     
     if(nogaps)
         singleAlig = origAlig -> Cleaning -> cleanGaps(0, 0, getComplementary);
-
+    
     else if(noallgaps)
         singleAlig = origAlig -> Cleaning -> cleanNoAllGaps(getComplementary);
 
@@ -2047,7 +2042,6 @@ inline void trimAlManager::clean_alignment()
     /* -------------------------------------------------------------------- */
     else if((selectCols) || (selectSeqs))
     {
-
         /* -------------------------------------------------------------------- */
         if(delColumns != NULL)
         {
@@ -2055,7 +2049,6 @@ inline void trimAlManager::clean_alignment()
             if(delColumns[num] >= origAlig -> getNumAminos())
             {
                 ReportSystem::Report(ReportSystem::ErrorCode::SelectOnlyAccepts, new string[2] {"-selectcols", "residues" });
-//                 cerr << endl << "ERROR: This option only accepts integer numbers between 0 and the number of columns - 1." << endl << endl;
                 appearErrors = true;
             }
             else
@@ -2108,7 +2101,6 @@ inline void trimAlManager::clean_alignment()
         else
         {
             tempAlig = origAlig -> Cleaning -> getClustering(origAlig -> Cleaning -> getCutPointClusters(clusters));
-
             singleAlig = tempAlig -> Cleaning -> cleanNoAllGaps(false);
             
             delete tempAlig;

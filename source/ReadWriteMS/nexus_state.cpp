@@ -179,6 +179,8 @@ newAlignment* NexusState::LoadAlignment(std::string filename)
 
     /* Check the matrix's content */
     _alignment->fillMatrices(true);
+    _alignment->originalSequenNumber = _alignment-> sequenNumber;
+    _alignment->originalResidNumber =_alignment->residNumber;
     return _alignment;
 }
 
@@ -186,7 +188,7 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
 {
     /* Generate output alignment in NEXUS format setting only alignment block */
 
-    int i, j, k, maxLongName = 0;
+    int i, j, k, l, maxLongName = 0;
     string *tmpMatrix;
 
     /* Check whether sequences in the alignment are aligned or not.
@@ -197,19 +199,20 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->sequenNumber];
+    tmpMatrix = new string[alignment->originalSequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->sequenNumber; i++)
+    for(i = 0; i < alignment->originalSequenNumber; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
 
     /* Compute maximum sequences name length */
-    for(i = 0; (i < alignment->sequenNumber) && (!Machine->shortNames); i++)
-        maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
+    for(i = 0; (i < alignment->originalSequenNumber) && (!Machine->shortNames); i++)
+        if (alignment->saveSequences[i] != -1)
+            maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
 
     /* Compute output file datatype */
     alignment->getAlignmentType();
@@ -245,23 +248,31 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
         i = j + 1;
     }
     *output << ";" << endl;
+    
+    for(i = 0; i < alignment->originalSequenNumber; i++)
+    {
+        if (alignment->saveSequences[i] == -1 ) continue;
+        *output << "[Name: " << setw(maxLongName + 4) << left << alignment->seqsName[i] << "Len: " << alignment->residNumber << "]" << endl;
+    }
+    *output << endl << "MATRIX";
 
-    /* Print sequence name and sequence length */
-    for(i = 0; i < alignment->sequenNumber; i++)
-        *output << "[Name: " << setw(maxLongName + 4) << left << alignment->seqsName[i] << "Len: "
-             << alignment->residNumber << "]" << endl;
-    *output << endl << "MATRIX" << endl;
-
-    /* Print alignment itself. Sequence name and 50 residues blocks */
-    for(j = 0; j < alignment->residNumber; j += 50) {
-        for(i = 0; i < alignment->sequenNumber; i++) {
-            *output << setw(maxLongName + 4) << left << alignment->seqsName[i];
-            for(k = j; k < (j + 50) && k < alignment->residNumber; k += 10)
-                *output << " " << alignment->sequences[i].substr(k, 10);
-            *output << endl;
+    for(j = 0; j < alignment->originalResidNumber; j = k) {
+        if (alignment-> saveResidues[j] == -1) continue;
+        for(i = 0; i < alignment->originalSequenNumber; i++) {
+            if (alignment->saveSequences[i] == -1) continue;
+            *output << endl << setw(maxLongName + 4) << left << alignment->seqsName[i];
+            for (k = j, l = 0; k < alignment->originalResidNumber && l < 50; k++)
+            {
+                if (l != 50 && l % 10 == 0) *output << " ";
+                if (alignment->saveResidues[k] == -1) continue;
+                *output << alignment->sequences[i][k];
+                l++;
+            }
         }
         *output << endl;
     }
+    *output << endl;
+    
     *output << ";" << endl << "END;" << endl;
 
     /* Deallocate local memory */

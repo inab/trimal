@@ -29,7 +29,7 @@
 
 int main(int argc, char *argv[])
 {
-    ReportSystem::PrintCodesAndMessages();
+//     ReportSystem::PrintCodesAndMessages();
 
     trimAlManager Trimal = trimAlManager();
 

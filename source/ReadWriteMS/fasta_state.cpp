@@ -115,6 +115,8 @@ newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
         
     /* Check the matrix's content */
     _alignment->fillMatrices(false);
+    _alignment->originalSequenNumber = _alignment-> sequenNumber;
+    _alignment->originalResidNumber = _alignment->residNumber;
     return _alignment; 
 }
 
@@ -122,16 +124,17 @@ bool FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
 {
     /* Generate output alignment in FASTA format. Sequences can be unaligned. */
 
-    int i, j, maxLongName;
+    int i, j, k, maxLongName;
     string *tmpMatrix;
+    bool lastcharIsnewline = false;
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->sequenNumber];
+    tmpMatrix = new string[alignment->originalSequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->sequenNumber; i++)
+    for(i = 0; i < alignment->originalSequenNumber; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
@@ -140,27 +143,54 @@ bool FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
      * 10 characters) or not, get maximum sequence name length. Consider those
      * cases when the user has asked to keep original sequence header */
     maxLongName = 0;
-    for(i = 0; i < alignment->sequenNumber; i++)
+    for(i = 0; i < alignment->originalSequenNumber; i++)
+    {
+        if (alignment->saveSequences && alignment->saveSequences[i] == -1) continue;
         if (!Machine->keepHeader)
             maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
         else if (alignment->seqsInfo != NULL)
             maxLongName = utils::max(maxLongName, alignment->seqsInfo[i].size());
+    }
 
     if (Machine->shortNames && maxLongName > PHYLIPDISTANCE) {
         maxLongName = PHYLIPDISTANCE;
         if (!Machine->keepHeader)
             ReportSystem::Report(ReportSystem::WarningCode::HeaderWillBeCut);
-//             cerr << endl << "WARNING: Original sequence header will be cutted by "
-//                  << " 10 characters" << endl;
     }
     /* Print alignment. First, sequences name id and then the sequences itself */
-    for(i = 0; i < alignment->sequenNumber; i++) {
+    for(i = 0; i < alignment->originalSequenNumber; i++) {
+        
+        if (alignment->saveSequences != NULL && alignment->saveSequences[i] == -1) continue;
+        
         if (!Machine->keepHeader)
             (*output) << ">" << alignment->seqsName[i].substr(0, maxLongName) << endl;
+        
         else if (alignment->seqsInfo != NULL)
             (*output) << ">" << alignment->seqsInfo[i].substr(0, maxLongName) << endl;
-        for(j = 0; j < alignment->sequences[i].length(); j+= 60)
-            (*output) << tmpMatrix[i].substr(j, 60) << endl;
+        
+        
+        for (j = 0, k = 0; j < alignment->sequences[i].length(); j++)
+        {
+            if (alignment->saveResidues != NULL && alignment->saveResidues[j] == -1) 
+            {
+                if (!lastcharIsnewline && j == alignment->sequences[i].length() -1 ) 
+                {
+                    (*output) << endl;
+                    lastcharIsnewline = true;
+                }
+            }
+            else
+            {
+                (*output) << tmpMatrix[i][j];
+                k++;
+                lastcharIsnewline = false;
+                if (!lastcharIsnewline && (k % 60 == 0 || j == alignment->sequences[i].length() -1 ))
+                {
+                    (*output) << endl;
+                    lastcharIsnewline = true;
+                }
+            }
+        }
     }
 
     /* Deallocate local memory */

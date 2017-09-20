@@ -248,7 +248,7 @@ public:
      <b> The method wont take care of destroying the pointer </b> This allows to reuse the parameter passed.
      */
     static void Report(InfoCode message, char * vars);
-    
+
 };
 
 #endif // VERBOSEMANAGER_H

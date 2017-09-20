@@ -144,6 +144,8 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
 
     /* Check the matrix's content */
     _alignment->fillMatrices(true);
+    _alignment->originalSequenNumber = _alignment-> sequenNumber;
+    _alignment->originalResidNumber = _alignment->residNumber;
     return _alignment; 
 }
 
@@ -152,16 +154,16 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
     
    /* Generate output alignment in NBRF/PIR format. Sequences can be unaligned */
 
-    int i, j, k;
+    int i, j, k, l;
     string alg_datatype, *tmpMatrix;
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->sequenNumber];
+    tmpMatrix = new string[alignment->originalSequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->sequenNumber; i++)
+    for(i = 0; i < alignment->originalSequenNumber; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
@@ -176,7 +178,8 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
         alg_datatype = "P1";
 
     /* Print alignment */
-    for(i = 0; i < alignment->sequenNumber; i++) {
+    for(i = 0; i < alignment->originalSequenNumber; i++) {
+        if (alignment->saveSequences && alignment->saveSequences[i] == -1) continue;
 
         /* Print sequence datatype and its name */
         if((alignment->seqsInfo != NULL) /*&& (iformat == oformat)*/)
@@ -186,16 +189,25 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
             (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i] << endl
                  << alignment->seqsName[i] << " " << alignment->sequences[i].length() << " bases" << endl;
 
-        /* Write the sequence */
-        for(j = 0; j < alignment->sequences[i].length(); j += 50) 
+        for (j = 0, k = 0, l = 0; j < alignment->sequences[i].length(); j++)
         {
-            for(k = j; (k < alignment->sequences[i].length()) && (k < (j + 50)); k += 10)
-                (*output) << " " << tmpMatrix[i].substr(k, 10);
-            if((j + 50) >= alignment->residNumber)
-                (*output) << "*";
-            (*output) << endl;
+            if (alignment->saveResidues != NULL && alignment->saveResidues[j] == -1) 
+            {
+                if (j == alignment->sequences[i].length() -1 ) 
+                    (*output) << endl;
+            }
+            else
+            {
+                if (k % 10 == 0) (*output) << " ";
+                (*output) << tmpMatrix[i][j];
+                k++;
+                if (j == alignment->sequences[i].length() -1 ) ;
+                else if (k % 50 == 0 ) (*output) << endl;
+            }
         }
-        (*output) << endl;
+        if (k % 50 == 0 ) (*output) << endl << " ";
+        else if (k % 10 == 0) (*output) << " ";
+        (*output) << "*" << endl << endl;
     }
 
     /* Deallocate local memory */

@@ -210,6 +210,8 @@ newAlignment* Phylip40State::LoadAlignment(std::string filename)
 
     /* Check the matrix's content */
     _alignment->fillMatrices(true);
+    _alignment->originalSequenNumber = _alignment-> sequenNumber;
+    _alignment->originalResidNumber = _alignment->residNumber;
     return _alignment;
 }
 
@@ -217,7 +219,7 @@ bool Phylip40State::SaveAlignment(newAlignment* alignment, std::ostream* output,
 {
    /* Generate output alignment in PHYLIP/PHYLIP 4 format (sequential) */
 
-    int i, j, maxLongName;
+    int i, j, k, l, maxLongName;
     string *tmpMatrix;
 
     /* Check whether sequences in the alignment are aligned or not.
@@ -228,12 +230,12 @@ bool Phylip40State::SaveAlignment(newAlignment* alignment, std::ostream* output,
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->sequenNumber];
+    tmpMatrix = new string[alignment->originalSequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->sequenNumber; i++)
+    for(i = 0; i < alignment->originalSequenNumber; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
@@ -241,26 +243,55 @@ bool Phylip40State::SaveAlignment(newAlignment* alignment, std::ostream* output,
     /* Depending on if short name flag is activated (limits sequence name up to
      * 10 characters) or not, get maximum sequence name length */
     maxLongName = PHYLIPDISTANCE;
-    for(i = 0; (i < alignment->sequenNumber) && (!Machine->shortNames); i++)
+    for(i = 0; (i < alignment->originalSequenNumber); i++)
         maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
+    
+    if (Machine->shortNames)
+    {
+        maxLongName = PHYLIPDISTANCE;
+    }
 
     /* Generating output alignment */
     /* First Line: Sequences Number & Residued Number */
-    (*output) << " " << alignment->sequenNumber << " " << alignment->residNumber << endl;
+    (*output) << " " << alignment->sequenNumber << " " << alignment->residNumber;
 
     /* First Block: Sequences Names & First 60 residues */
     for(i = 0; i < alignment->sequenNumber; i++)
-        (*output) << setw(maxLongName + 3) << left << alignment->seqsName[i].substr(0, maxLongName)
-             << tmpMatrix[i].substr(0, 60) << endl;
-    (*output) << endl;
-
-    /* Rest of blocks: Print 60 residues per each blocks of sequences */
-    for(i = 60; i < alignment->residNumber; i += 60) {
-        for(j = 0; j < alignment->sequenNumber; j++)
-            (*output) << tmpMatrix[j].substr(i, 60) << endl;
-        (*output) << endl;
+    {
+        if (alignment->saveSequences[i] == -1) continue;
+        (*output) << endl << setw(maxLongName + 3) << left << alignment->seqsName[i].substr(0, maxLongName);
+            
+        for (k = 0, l = 0; k < alignment->originalResidNumber && l < 60; k++)
+        {
+            if (alignment->saveResidues[k] == -1) continue;
+            *output << alignment->sequences[i][k];
+            l++;
+        }
     }
-    (*output) << endl;
+
+
+    for (i = k; i < alignment->originalResidNumber; i=k)
+    {
+        if (alignment->saveResidues[i] == -1) {
+            k++;
+            continue;
+        }
+        *output << endl;
+        for (j = 0; j < alignment->originalSequenNumber; j++)
+        {
+            if (alignment->saveSequences[j] == -1) continue;
+            *output << endl;
+            for (k = i, l = 0; k < alignment->originalResidNumber && l < 60; k++)
+            {
+                if (alignment->saveResidues[k] == -1) continue;
+                *output << alignment->sequences[j][k];
+                l++;
+            }
+            
+        }
+    }
+    
+    *output << endl << endl << endl;
 
     /* Deallocate local memory */
     delete [] tmpMatrix;
