@@ -36,6 +36,8 @@ using namespace std;
 #include "rwAlignment.cpp"
 #include "autAlignment.cpp"
 
+#include <deque>
+
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* Class constructor */
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2589,6 +2591,8 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
   int i, num, lenBlock;
   alignment *newAlig;
 
+  deque<int> neighboursBlock;
+
   /* Reject columns with gaps number greater than the gap threshold. */
   for(i = 0; i < residNumber; i++)
     if(gInCol[i] > gapCut)
@@ -2600,36 +2604,50 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
       saveResidues[i] = -1;
 
   /* Search for those columns that have been removed but have,
-   * at least, 3 adjacent columns selected. */
+   * at least, 3 out of 4 adjacent columns selected. */
 
-  /* Special cases:
-   * Second column */
-  if((saveResidues[0] != -1) && (saveResidues[2] != -1)
-    && (saveResidues[3] != -1))
+  /* Load the first 5 columns into the list */
+  for(i = 0; i < (residNumber) && i < 5; i++)
+    neighboursBlock.push_back(saveResidues[i]); 
+
+  /* Special case #1 - we analyze it before processing the rest positions
+   * Column 2 - Save this column considering its neighbours */
+  if((saveResidues[1] == -1) &&
+      ((neighboursBlock[0] != -1) &&
+       (neighboursBlock[2] != -1) &&
+       (neighboursBlock[3] != -1)))
     saveResidues[1] = 1;
-  else
-    saveResidues[1] = -1;
-
-  /* Second last column  */
-  if((saveResidues[residNumber-1] != -1) && (saveResidues[residNumber-3] != -1)
-    && (saveResidues[residNumber-4] != -1))
-    saveResidues[(residNumber - 2)] = (residNumber - 2);
-  else
-    saveResidues[(residNumber - 2)] = -1;
 
   /* Normal cases */
-  for(i = 2, num = 0; i < (residNumber - 2); i++, num = 0)
+  for(i = 2, num = 0; i < (residNumber - 2); i++, num = 0) {
     if(saveResidues[i] == -1) {
-      if(saveResidues[(i - 2)] != -1)
+      if(neighboursBlock[0] != -1)
         num++;
-      if(saveResidues[(i - 1)] != -1)
+      if(neighboursBlock[1] != -1)
         num++;
-      if(saveResidues[(i + 1)] != -1)
+      if(neighboursBlock[3] != -1)
         num++;
-      if(saveResidues[(i + 2)] != -1)
+      if(neighboursBlock[4] != -1)
         num++;
       saveResidues[i] = (num >= 3) ? i : -1;
+     
+     }
+    /* We slide the window one position to the right */
+    if((i+3) < residNumber) {
+      neighboursBlock.pop_front();
+      neighboursBlock.push_back(saveResidues[i+3]);
     }
+  }
+
+  /* Special case #2 - 
+   * Column 2nd last one - We consider the list rather than the saveResidues
+   * vector in order to consider only unmodified values before the previous
+   * loop */
+  if((saveResidues[(residNumber - 2)] == -1) &&
+      ((neighboursBlock[1] != -1) &&
+       (neighboursBlock[2] != -1) &&
+       (neighboursBlock[4] != -1)))
+    saveResidues[(residNumber - 2)] = (residNumber - 2);
 
   /* Select blocks size based on user input. It can be set either to 5 or to a
    * variable number between 3 and 12 depending on alignment length (1% alig) */
