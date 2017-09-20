@@ -2612,17 +2612,25 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
 
   /* Special case #1 - we analyze it before processing the rest positions
    * Column: 1 - Save this column considering its neighbours */
-  if((saveResidues[0] == -1) &&
+  if((saveResidues[0] == -1) && (neighboursBlock.size() > 2) &&
        (neighboursBlock[1] != -1) &&
        (neighboursBlock[2] != -1)))
     saveResidues[0] = 0;
 
-  /* Special case #2 - we analyze it before processing the rest positions
+  /* Special case #2A - we analyze it before processing the rest positions
    * Column: 2 - Save this column considering its neighbours */
-  if((saveResidues[1] == -1) &&
+  if((saveResidues[1] == -1) && (neighboursBlock.size() > 3) &&
       ((neighboursBlock[0] != -1) &&
        (neighboursBlock[2] != -1) &&
        (neighboursBlock[3] != -1)))
+    saveResidues[1] = 1;
+
+  /* Special case #2B - when alignment is 3 columns long - we analyze it before
+   * processing the rest positions.
+   * Column: 2 - Save this column considering its neighbours */
+  if((saveResidues[1] == -1) && (neighboursBlock.size() > 2) &&
+      ((neighboursBlock[0] != -1) &&
+       (neighboursBlock[2] != -1)))
     saveResidues[1] = 1;
 
   /* Normal cases */
@@ -2650,19 +2658,19 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
    * Column: 2nd last one - We consider the list rather than the saveResidues
    * vector in order to consider only unmodified values before the previous
    * loop */
-  if((saveResidues[(residNumber - 2)] == -1) &&
-      ((neighboursBlock[1] != -1) &&
-       (neighboursBlock[2] != -1) &&
-       (neighboursBlock[4] != -1)))
+  if((saveResidues[(residNumber - 2)] == -1) && (neighboursBlock.size() > 3) && 
+      ((neighboursBlock[neighboursBlock.size() - 4] != -1) &&
+       (neighboursBlock[neighboursBlock.size() - 3] != -1) &&
+       (neighboursBlock[neighboursBlock.size() - 1] != -1)))
     saveResidues[(residNumber - 2)] = (residNumber - 2);
 
   /* Special case #4 - 
    * Column: last one - We consider the list rather than the saveResidues
    * vector in order to consider only unmodified values before the previous
    * loop */
-  if((saveResidues[(residNumber - 1)] == -1) &&
-      ((neighboursBlock[2] != -1) &&
-       (neighboursBlock[3] != -1)))
+  if((saveResidues[(residNumber - 1)] == -1) && (neighboursBlock.size() > 2) &&
+      ((neighboursBlock[neighboursBlock.size() - 3] != -1) &&
+       (neighboursBlock[neighboursBlock.size() - 2] != -1)))
     saveResidues[(residNumber - 1)] = (residNumber - 1);
 
   /* Select blocks size based on user input. It can be set either to 5 or to a
