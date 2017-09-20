@@ -2611,7 +2611,14 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
     neighboursBlock.push_back(saveResidues[i]); 
 
   /* Special case #1 - we analyze it before processing the rest positions
-   * Column 2 - Save this column considering its neighbours */
+   * Column: 1 - Save this column considering its neighbours */
+  if((saveResidues[0] == -1) &&
+       (neighboursBlock[1] != -1) &&
+       (neighboursBlock[2] != -1)))
+    saveResidues[0] = 0;
+
+  /* Special case #2 - we analyze it before processing the rest positions
+   * Column: 2 - Save this column considering its neighbours */
   if((saveResidues[1] == -1) &&
       ((neighboursBlock[0] != -1) &&
        (neighboursBlock[2] != -1) &&
@@ -2639,8 +2646,8 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
     }
   }
 
-  /* Special case #2 - 
-   * Column 2nd last one - We consider the list rather than the saveResidues
+  /* Special case #3 - 
+   * Column: 2nd last one - We consider the list rather than the saveResidues
    * vector in order to consider only unmodified values before the previous
    * loop */
   if((saveResidues[(residNumber - 2)] == -1) &&
@@ -2648,6 +2655,15 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
        (neighboursBlock[2] != -1) &&
        (neighboursBlock[4] != -1)))
     saveResidues[(residNumber - 2)] = (residNumber - 2);
+
+  /* Special case #4 - 
+   * Column: last one - We consider the list rather than the saveResidues
+   * vector in order to consider only unmodified values before the previous
+   * loop */
+  if((saveResidues[(residNumber - 1)] == -1) &&
+      ((neighboursBlock[2] != -1) &&
+       (neighboursBlock[3] != -1)))
+    saveResidues[(residNumber - 1)] = (residNumber - 1);
 
   /* Select blocks size based on user input. It can be set either to 5 or to a
    * variable number between 3 and 12 depending on alignment length (1% alig) */
