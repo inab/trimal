@@ -2614,7 +2614,7 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
    * Column: 1 - Save this column considering its neighbours */
   if((saveResidues[0] == -1) && (neighboursBlock.size() > 2) &&
        (neighboursBlock[1] != -1) &&
-       (neighboursBlock[2] != -1)))
+       (neighboursBlock[2] != -1))
     saveResidues[0] = 0;
 
   /* Special case #2A - we analyze it before processing the rest positions
