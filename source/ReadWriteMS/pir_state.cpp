@@ -130,7 +130,10 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
             /* Process line */
             str = strtok(line, OTHDELIMITERS);
             while (str != NULL) {
-                _alignment->sequences[i].append(str, strlen(str));
+                if (str[strlen(str) -1 ] == '*')
+                    _alignment->sequences[i].append(str, strlen(str) -1 );
+                else 
+                    _alignment->sequences[i].append(str, strlen(str));
                 str = strtok(NULL, OTHDELIMITERS);
             }
         }
@@ -146,6 +149,8 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
     _alignment->fillMatrices(true);
     _alignment->originalSequenNumber = _alignment-> sequenNumber;
     _alignment->originalResidNumber = _alignment->residNumber;
+    
+
     return _alignment; 
 }
 
@@ -177,6 +182,9 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
     else if (alignment->dataType & SequenceTypes::AA)
         alg_datatype = "P1";
 
+
+    
+    
     /* Print alignment */
     for(i = 0; i < alignment->originalSequenNumber; i++) {
         if (alignment->saveSequences && alignment->saveSequences[i] == -1) continue;
@@ -193,8 +201,8 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
         {
             if (alignment->saveResidues != NULL && alignment->saveResidues[j] == -1) 
             {
-                if (j == alignment->sequences[i].length() -1 ) 
-                    (*output) << endl;
+//                 if (j == alignment->sequences[i].length() -1 ) 
+//                     (*output) << endl;
             }
             else
             {
@@ -205,8 +213,8 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
                 else if (k % 50 == 0 ) (*output) << endl;
             }
         }
-        if (k % 50 == 0 ) (*output) << endl << " ";
-        else if (k % 10 == 0) (*output) << " ";
+//         if (k == 50 ) (*output) << " ";
+/*        else*/ if (k % 10 == 0) (*output) << " ";
         (*output) << "*" << endl << endl;
     }
 

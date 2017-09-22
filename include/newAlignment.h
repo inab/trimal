@@ -42,7 +42,7 @@
 
 #include "statisticsGaps.h"
 #include "sequencesMatrix.h"
-#include "statisticsConservation.h"
+#include "statisticsConservation2.h"
 #include "similarityMatrix.h"
 #include "utils.h"
 
@@ -79,7 +79,7 @@ public:
 
     statisticsGaps * sgaps;
 
-    statisticsConservation * scons;
+    statisticsConservation2 * scons;
     
     int * SeqRef;
     
@@ -104,7 +104,6 @@ public:
     string filename;
 
     string aligInfo;
-
 
     /* Sequence Identities */
     float **identities;

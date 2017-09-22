@@ -23,6 +23,7 @@ public:
         /// 3 = Only error messages
         ERROR      = 3,
     };
+    
     static VerboseLevel Level;
     
     enum ErrorCode {

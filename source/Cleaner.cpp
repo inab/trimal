@@ -106,13 +106,13 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gI
         /* Sort a copy of the gInCol vector, and take the value of the column that marks the % baseline */
         utils::copyVect((int *) gInCol, vectAux, _alignment->originalResidNumber);
         utils::quicksort(vectAux, 0, _alignment->originalResidNumber - 1);
-        
+
         for (int x = (int) ((float)(_alignment->residNumber - 1) * (baseLine)/100.0), i = 0, z = 0; i < _alignment->originalResidNumber && z < x ; i++)
         {
             if (_alignment->saveResidues[i] != -1) continue;
             z++;
         }
-        
+
         cut = vectAux[i];
 
         /* Deallocate memory */
@@ -144,9 +144,9 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gI
                         // b) Reaches a column that is not going to be recovered: gInCol[ij] > cut
                         // c) Reaches the begin of the alignment: ij == -1
                         // d) Recovers enought columns: NumberOfResiduesToAchieveBaseLine == 0
-                        // 
+                        //
                         // We'll ignore residues that have been previously rejected: _alignment->saveResidues[ij] == -1
-                        for( ; ij >= 0 && NumberOfResiduesToAchieveBaseLine > 0; ij--) 
+                        for( ; ij >= 0 && NumberOfResiduesToAchieveBaseLine > 0; ij--)
                         {
                             if (_alignment->saveResidues[ij] == -1) continue;
                             if (newAlig -> saveResidues[ij] != -1) break;
@@ -164,7 +164,7 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gI
             // We want to continue from where we left it on the next iteration
             i = ij;
             // END Left side
-            
+
             // BEGIN Right side
             // Check every column from current position (i) to the left until we found a residue to be deleted.
             for(ij = j, resCounter = 0; NumberOfResiduesToAchieveBaseLine > 0 && ij < newAlig->originalResidNumber; ij++)
@@ -184,9 +184,9 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gI
                         // b) Reaches a column that is not going to be recovered: gInCol[ij] > cut
                         // c) Reaches the begin of the alignment: ij == -1
                         // d) Recovers enought columns: NumberOfResiduesToAchieveBaseLine == 0
-                        // 
+                        //
                         // We'll ignore residues that have been previously rejected: _alignment->saveResidues[ij] == -1
-                        for( ; ij < newAlig->originalResidNumber && NumberOfResiduesToAchieveBaseLine > 0; ij++) 
+                        for( ; ij < newAlig->originalResidNumber && NumberOfResiduesToAchieveBaseLine > 0; ij++)
                         {
                             if (_alignment->saveResidues[ij] == -1) continue;
                             if (newAlig -> saveResidues[ij] != -1) break;
@@ -208,14 +208,14 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gI
     }
 
     /* Keep only columns blocks bigger than an input columns block size */
-    if(blockSize != 0) 
+    if(blockSize != 0)
     {
         for (i = 0, pos = 0; i < newAlig->originalResidNumber; i++)
         {
             // Forget about already rejected residues
             if (_alignment->saveResidues[i] == -1) continue;
             if (newAlig->saveResidues[i] != -1) pos++;
-            else 
+            else
             {
                 if (pos < blockSize)
                     while (pos != 0)
@@ -280,9 +280,9 @@ newAlignment* Cleaner::cleanByCutValue(float cut, float baseLine, const float *V
                         // b) Reaches a column that is not going to be recovered: gInCol[ij] > cut
                         // c) Reaches the begin of the alignment: ij == -1
                         // d) Recovers enought columns: NumberOfResiduesToAchieveBaseLine == 0
-                        // 
+                        //
                         // We'll ignore residues that have been previously rejected: _alignment->saveResidues[ij] == -1
-                        for( ; ij >= 0 && NumberOfResiduesToAchieveBaseLine > 0; ij--) 
+                        for( ; ij >= 0 && NumberOfResiduesToAchieveBaseLine > 0; ij--)
                         {
                             if (_alignment->saveResidues[ij] == -1) continue;
                             if (newAlig -> saveResidues[ij] != -1) break;
@@ -300,9 +300,9 @@ newAlignment* Cleaner::cleanByCutValue(float cut, float baseLine, const float *V
             // We want to continue from where we left it on the next iteration
             i = ij;
             // END Left side
-            
-            
-            
+
+
+
             // BEGIN Right side
             // Check every column from current position (i) to the left until we found a residue to be deleted.
             for(ij = j, resCounter = 0; NumberOfResiduesToAchieveBaseLine > 0 && ij < newAlig->originalResidNumber; ij++)
@@ -322,9 +322,9 @@ newAlignment* Cleaner::cleanByCutValue(float cut, float baseLine, const float *V
                         // b) Reaches a column that is not going to be recovered: ValueVect[ij] != cut
                         // c) Reaches the begin of the alignment: ij == -1
                         // d) Recovers enought columns: NumberOfResiduesToAchieveBaseLine == 0
-                        // 
+                        //
                         // We'll ignore residues that have been previously rejected: _alignment->saveResidues[ij] == -1
-                        for( ; ij < newAlig->originalResidNumber && NumberOfResiduesToAchieveBaseLine > 0; ij++) 
+                        for( ; ij < newAlig->originalResidNumber && NumberOfResiduesToAchieveBaseLine > 0; ij++)
                         {
                             if (_alignment->saveResidues[ij] == -1) continue;
                             if (newAlig -> saveResidues[ij] != -1) break;
@@ -346,19 +346,19 @@ newAlignment* Cleaner::cleanByCutValue(float cut, float baseLine, const float *V
     }
 
     /* Keep only columns blocks bigger than an input columns block size */
-    if(blockSize != 0) 
+    if(blockSize != 0)
     {
-        
+
         for (i = 0; i < newAlig->originalResidNumber; i++)
         {
             // Forget about already rejected residues
             if (_alignment->saveResidues[i] == -1) continue;
-            
-            
+
+
             for (pos = i, resCounter = 0; i < newAlig->originalResidNumber; i++)
             {
                 if (_alignment->saveResidues[i] == -1) continue;
-                if (newAlig -> saveResidues[i] != -1 && i < newAlig->originalResidNumber) 
+                if (newAlig -> saveResidues[i] != -1 && i < newAlig->originalResidNumber)
                 {
                     resCounter++;
                 }
@@ -418,12 +418,12 @@ newAlignment* Cleaner::cleanByCutValue(double cutGaps, const int *gInCol, float 
         utils::quicksort(vectAuxGaps,   0,  _alignment->residNumber-1);
         blGaps = vectAuxGaps[(int) ((float)(_alignment->residNumber - 1) * (baseLine)/100.0)];
         delete [] vectAuxGaps;
- 
+
     }
-    
+
     // if((MDK_Win[jn] >= blCons) || (gInCol[jn] <= blGaps))
 
-        // Start with a blocksize (k) = 0.5% alignment size.
+    // Start with a blocksize (k) = 0.5% alignment size.
     for(k = utils::roundInt(0.005 * newAlig->residNumber); (k >= 0) && (NumberOfResiduesToAchieveBaseLine > 0); k--)
     {
         // Start at the middle. Go to both ends: i goes to the left, j goes to the right, ij as a helper for both sides.
@@ -448,9 +448,9 @@ newAlignment* Cleaner::cleanByCutValue(double cutGaps, const int *gInCol, float 
                         // b) Reaches a column that is not going to be recovered: (MDK_Win[ij] < blCons) && (gInCol[ij] < blGaps)
                         // c) Reaches the begin of the alignment: ij == -1
                         // d) Recovers enought columns: NumberOfResiduesToAchieveBaseLine == 0
-                        // 
+                        //
                         // We'll ignore residues that have been previously rejected: _alignment->saveResidues[ij] == -1
-                        for( ; ij >= 0 && NumberOfResiduesToAchieveBaseLine > 0; ij--) 
+                        for( ; ij >= 0 && NumberOfResiduesToAchieveBaseLine > 0; ij--)
                         {
                             if (_alignment->saveResidues[ij] == -1) continue;
                             if (newAlig -> saveResidues[ij] != -1) break;
@@ -468,9 +468,9 @@ newAlignment* Cleaner::cleanByCutValue(double cutGaps, const int *gInCol, float 
             // We want to continue from where we left it on the next iteration
             i = ij;
             // END Left side
-            
-            
-            
+
+
+
             // BEGIN Right side
             // Check every column from current position (i) to the left until we found a residue to be deleted.
             for(ij = j, resCounter = 0; NumberOfResiduesToAchieveBaseLine > 0 && ij < newAlig->originalResidNumber; ij++)
@@ -490,9 +490,9 @@ newAlignment* Cleaner::cleanByCutValue(double cutGaps, const int *gInCol, float 
                         // b) Reaches a column that is not going to be recovered: gInCol[ij] > cut
                         // c) Reaches the begin of the alignment: ij == -1
                         // d) Recovers enought columns: NumberOfResiduesToAchieveBaseLine == 0
-                        // 
+                        //
                         // We'll ignore residues that have been previously rejected: _alignment->saveResidues[ij] == -1
-                        for( ; ij < newAlig->originalResidNumber && NumberOfResiduesToAchieveBaseLine > 0; ij++) 
+                        for( ; ij < newAlig->originalResidNumber && NumberOfResiduesToAchieveBaseLine > 0; ij++)
                         {
                             if (_alignment->saveResidues[ij] == -1) continue;
                             if (newAlig -> saveResidues[ij] != -1) break;
@@ -514,19 +514,19 @@ newAlignment* Cleaner::cleanByCutValue(double cutGaps, const int *gInCol, float 
     }
 
     /* Keep only columns blocks bigger than an input columns block size */
-    if(blockSize != 0) 
+    if(blockSize != 0)
     {
-        
+
         for (i = 0; i < newAlig->originalResidNumber; i++)
         {
             // Forget about already rejected residues
             if (_alignment->saveResidues[i] == -1) continue;
-            
-            
+
+
             for (pos = i, resCounter = 0; i < newAlig->originalResidNumber; i++)
             {
                 if (_alignment->saveResidues[i] == -1) continue;
-                if (newAlig -> saveResidues[i] != -1 && i < newAlig->originalResidNumber) 
+                if (newAlig -> saveResidues[i] != -1 && i < newAlig->originalResidNumber)
                 {
                     resCounter++;
                 }
@@ -567,6 +567,7 @@ newAlignment* Cleaner::cleanByCutValueV2(double GapsCutPoint, const int *GapsInC
 newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, const float *MDK_W, bool complementary, bool variable) {
 
     int i, x, pos, num, lenBlock;
+// //     _alignment->Cleaning->removeAllGapsSeqsAndCols();
     newAlignment *newAlig = new newAlignment(*_alignment);
 
     /* Reject columns with gaps number greater than the gap threshold. */
@@ -575,71 +576,148 @@ newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, 
         if(gInCol[i] > gapCut || MDK_W[i] < simCut)
             newAlig->saveResidues[i] = -1;
     }
-    
+
     // Rescue residues based on their neighbouring residues. We are going to rescue those residues that would be rejected but have at least, 3 non-rejected residues.
     {
         // We're going to store a 5-value window of values that we are goint to move residue by residue.
         // This allows us to keep a reduced memory consumption, as there is no need to make a whole copy of the saveResidues array.
-        std::deque<bool> rejectResiduesBuffer = std::deque<bool>(); // Here we store: True(1) if the residue was rejected, False(0) if it was accepted. 
+        std::deque<bool> rejectResiduesBuffer = std::deque<bool>(); // Here we store: True(1) if the residue was rejected, False(0) if it was accepted.
         std::deque<int> positionResidueBuffer = std::deque<int>(); // Here we store the position of the residues of the previous deque.
-        
+
         // We're going to add the first 5 newAlig residues. That means, they are not rejected on the original _alignment.
         for (i = 0, num = 0; i < _alignment->originalResidNumber && num < 5; i++)
         {
             if (_alignment->saveResidues[i] == -1) continue;
-            else 
+            else
             {
                 rejectResiduesBuffer.push_back(newAlig->saveResidues[i] == -1);
                 positionResidueBuffer.push_back(i);
                 num++;
             }
         }
-        
-        // Special case: Position 1 of newAlig
-        if (rejectResiduesBuffer[1])
-            newAlig->saveResidues[positionResidueBuffer[1]] =
-                            // Compare the sum of the booleans to 0. If any of the neighbours is rejected, we don't have 3 non-rejected residues.
-                            (rejectResiduesBuffer[0] + rejectResiduesBuffer[2] + rejectResiduesBuffer[3]) > 0 ? -1 : positionResidueBuffer[1];
-                            
-        // Special case: Position 2 of newAlig
-        if (rejectResiduesBuffer[2])
-            newAlig->saveResidues[positionResidueBuffer[2]] =
-                            // Compare the sum of the booleans to 0. As we have 4 neighbours to compare and only need 3 of them to be non-rejected,
-                            //      we can have 1 rejected residue on the neighbouring.
-                            (rejectResiduesBuffer[0] + rejectResiduesBuffer[1] + rejectResiduesBuffer[3] + rejectResiduesBuffer[4]) > 1 ? -1 : positionResidueBuffer[1];                    
-        
-        
-        // Move the window until it arrives to the end of the alignment.
-        for ( ; i < _alignment->originalResidNumber; i++)
+
+        // Special case: Position 0 of newAlig
+        if (num > 2) {
+            if (rejectResiduesBuffer[0])
+                newAlig->saveResidues[positionResidueBuffer[0]] =
+                    // Compare the sum of the booleans to 0. If any of the neighbours is rejected, we don't have 3 non-rejected residues.
+                    (rejectResiduesBuffer[1] +
+                     rejectResiduesBuffer[2]) > 0 ? -1 : positionResidueBuffer[0];
+        }
+        // Special case: Position 1
         {
-            if (_alignment->saveResidues[i] == -1) continue;
-            // If we find a new newAlig residue...
-            else 
-            {
-                // We add one new value to each buffer and remove the oldest value from it, effectively moving the window.
-                rejectResiduesBuffer.pop_front();
-                rejectResiduesBuffer.push_back(newAlig->saveResidues[i] == -1);
-                
-                positionResidueBuffer.pop_front();
-                positionResidueBuffer.push_back(i);
-                
-                // If the new middle-point residue was going to be rejected...
-                if (rejectResiduesBuffer[2])
-                {
-                    // Take a look at the neighbours of the new middle-point, positionResidueBuffer[2]. 
-                    // As we stored the rejectResiduesBuffer as booleans, we can add them and compare the result.
-                    // If the result is bigger than 1, means that we have rejected at least 2 neighbouring residues, thus, we cannot rescue this residue.
-                    newAlig->saveResidues[positionResidueBuffer[2]] =
-                        (rejectResiduesBuffer[0] + rejectResiduesBuffer[1] + rejectResiduesBuffer[3] + rejectResiduesBuffer[4]) > 1 ? -1 : positionResidueBuffer[2];
-                }
+            // Special case: Position 1 of newAlig in case the alignment has more than 3 residues.
+            if (num > 3) {
+                if (rejectResiduesBuffer[1])
+                    newAlig->saveResidues[positionResidueBuffer[1]] =
+                        // Compare the sum of the booleans to 0. If any of the neighbours is rejected, we don't have 3 non-rejected residues.
+                        (rejectResiduesBuffer[0] +
+                         rejectResiduesBuffer[2] +
+                         rejectResiduesBuffer[3]) > 0 ? -1 : positionResidueBuffer[1];
+            }
+            // Special case: Position 1 of newAlig in case the alignment has 3 residues.
+            else if (num > 2) {
+                if (rejectResiduesBuffer[1])
+                    newAlig->saveResidues[positionResidueBuffer[1]] =
+                        // Compare the sum of the booleans to 0. If any of the neighbours is rejected, we don't have 3 non-rejected residues.
+                        (rejectResiduesBuffer[0] +
+                         rejectResiduesBuffer[2] ) > 0 ? -1 : positionResidueBuffer[1];
             }
         }
-        
-        // Special case: Position -1 of newAlig
-        if (rejectResiduesBuffer[3])
-            newAlig->saveResidues[positionResidueBuffer[1]] =
-                            (rejectResiduesBuffer[1] + rejectResiduesBuffer[2] + rejectResiduesBuffer[4]) > 0 ? -1 : positionResidueBuffer[1];
+        // Special case: Position 2
+        {
+            // Special case: Position 2 of newAlig in case the alignment has more than 4 residues.
+            if (num > 4) {
+                if (rejectResiduesBuffer[2])
+                    newAlig->saveResidues[positionResidueBuffer[2]] =
+                        // Compare the sum of the booleans to 0. As we have 4 neighbours to compare and only need 3 of them to be non-rejected,
+                        //      we can have 1 rejected residue on the neighbouring.
+                        (rejectResiduesBuffer[0] +
+                         rejectResiduesBuffer[1] +
+                         rejectResiduesBuffer[3] +
+                         rejectResiduesBuffer[4]) > 1 ? -1 : positionResidueBuffer[2];
+            }
+            // Special case: Position 2 of newAlig in case the alignment has 4 residues
+            else if (num > 3) {
+                if (rejectResiduesBuffer[2])
+                    newAlig->saveResidues[positionResidueBuffer[2]] =
+                        // Compare the sum of the booleans to 0. As we have 4 neighbours to compare and only need 3 of them to be non-rejected,
+                        //      we can have 1 rejected residue on the neighbouring.
+                        (rejectResiduesBuffer[0] +
+                         rejectResiduesBuffer[1] +
+                         rejectResiduesBuffer[3]) > 0 ? -1 : positionResidueBuffer[2];
+            }
+            // Special case: Position 2 of newAlig in case the alignment has 3 residues
+            else if (num > 2) {
+                if (rejectResiduesBuffer[2])
+                    newAlig->saveResidues[positionResidueBuffer[2]] =
+                        // Compare the sum of the booleans to 0. As we have 4 neighbours to compare and only need 3 of them to be non-rejected,
+                        //      we can have 1 rejected residue on the neighbouring.
+                        (rejectResiduesBuffer[0] +
+                         rejectResiduesBuffer[1]) > 0 ? -1 : positionResidueBuffer[2];
+            }
+        }
 
+        // Move the window until it arrives to the end of the alignment.
+        if (num == 5)
+            for ( ; i < _alignment->originalResidNumber; i++)
+            {
+                if (_alignment->saveResidues[i] == -1) continue;
+                // If we find a new newAlig residue...
+                else
+                {
+                    // We add one new value to each buffer and remove the oldest value from it, effectively moving the window.
+                    rejectResiduesBuffer.pop_front();
+                    rejectResiduesBuffer.push_back(newAlig->saveResidues[i] == -1);
+
+                    positionResidueBuffer.pop_front();
+                    positionResidueBuffer.push_back(i);
+
+                    // If the new middle-point residue was going to be rejected...
+                    if (rejectResiduesBuffer[2])
+                    {
+                        // Take a look at the neighbours of the new middle-point, positionResidueBuffer[2].
+                        // As we stored the rejectResiduesBuffer as booleans, we can add them and compare the result.
+                        // If the result is bigger than 1, means that we have rejected at least 2 neighbouring residues, thus, we cannot rescue this residue.
+                        newAlig->saveResidues[positionResidueBuffer[2]] =
+                            (rejectResiduesBuffer[0] +
+                             rejectResiduesBuffer[1] +
+                             rejectResiduesBuffer[3] +
+                             rejectResiduesBuffer[4]) > 1 ? -1 : positionResidueBuffer[2];
+                    }
+                }
+            }
+
+        // Special case: Position -1 of newAlig
+        {
+            if (num > 4) {
+                if (rejectResiduesBuffer[3])
+                    newAlig->saveResidues[positionResidueBuffer[3]] =
+                        (rejectResiduesBuffer[1] +
+                         rejectResiduesBuffer[2] +
+                         rejectResiduesBuffer[4]) > 0 ? -1 : positionResidueBuffer[3];
+            }
+            else if (num > 3) {
+                if (rejectResiduesBuffer[2])
+                    newAlig->saveResidues[positionResidueBuffer[2]] =
+                        (rejectResiduesBuffer[0] +
+                         rejectResiduesBuffer[1] +
+                         rejectResiduesBuffer[3]) > 0 ? -1 : positionResidueBuffer[2];
+            }
+        }
+        // Special case: Position -2 of newAlig
+        if (num > 4) {
+            if (rejectResiduesBuffer[4])
+                newAlig->saveResidues[positionResidueBuffer[4]] =
+                    (rejectResiduesBuffer[2] +
+                     rejectResiduesBuffer[3]) > 0 ? -1 : positionResidueBuffer[4];
+        }
+        else if (num > 3) {
+            if (rejectResiduesBuffer[3])
+                newAlig->saveResidues[positionResidueBuffer[4]] =
+                    (rejectResiduesBuffer[1] +
+                     rejectResiduesBuffer[2]) > 0 ? -1 : positionResidueBuffer[3];
+        }
     }
 
     /* Select blocks size based on user input. It can be set either to 5 or to a
@@ -654,15 +732,15 @@ newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, 
     /* Allow to change minimal block size */
     blockSize = blockSize > 0 ? blockSize : lenBlock;
 
-        /* Keep only columns blocks bigger than an input columns block size */
-    if(blockSize != 0) 
+    /* Keep only columns blocks bigger than an input columns block size */
+    if(blockSize != 0)
     {
         for (i = 0, pos = 0; i < newAlig->originalResidNumber; i++)
         {
             // Forget about already rejected residues
             if (_alignment->saveResidues[i] == -1) continue;
             if (newAlig->saveResidues[i] != -1) pos++;
-            else 
+            else
             {
                 if (pos < blockSize)
                     while (pos != 0)
@@ -762,7 +840,7 @@ newAlignment* Cleaner::cleanConservation(float baseLine, float conservationPct, 
     /* Calculate the cut point using the given parameters */
     cut = (float) _alignment->scons -> calcCutPoint(baseLine, conservationPct);
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
-cout << "Conservation " << cut << endl;
+// cout << "Conservation " << cut << endl;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Once we have the cut value, we call the appropiate
      * method to clean the newAlignment and, then, generate
@@ -862,7 +940,7 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
     char indet;
 
     ovrlap = std::ceil(overlap * float(_alignment -> originalSequenNumber - 1));
-    
+
     if(spuriousVector == NULL)
         return false;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -901,7 +979,7 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
                  * of sequence considered isn't a  a 'X' nor 'N'
                  * (indetermination) or a '-' (gap), computes a hit */
                 else if((_alignment -> sequences[i][j] != indet) && (_alignment -> sequences[i][j] != '-')
-                    &&  (_alignment -> sequences[k][j] != indet) && (_alignment -> sequences[k][j] != '-'))
+                        &&  (_alignment -> sequences[k][j] != indet) && (_alignment -> sequences[k][j] != '-'))
                     hit++;
             }
             /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -922,7 +1000,7 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
                  * of sequence considered isn't a  a 'X' nor 'N'
                  * (indetermination) or a '-' (gap), computes a hit */
                 else if((_alignment -> sequences[i][j] != indet) && (_alignment -> sequences[i][j] != '-')
-                    &&  (_alignment -> sequences[k][j] != indet) && (_alignment -> sequences[k][j] != '-'))
+                        &&  (_alignment -> sequences[k][j] != indet) && (_alignment -> sequences[k][j] != '-'))
                     hit++;
             }
             /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1010,7 +1088,7 @@ newAlignment* Cleaner::cleanCombMethods(bool complementarity, bool variable) {
         return NULL;
 
     /* Computes the conservations value for each column in the newAlignment. At the same time, the method get the vector with those values. */
-    _alignment->scons -> calculateVectors(_alignment->sequences, _alignment->sgaps -> getGapsWindow());
+    _alignment->scons -> calculateVectors(/*_alignment->sequences,*/ _alignment->sgaps -> getGapsWindow());
     simil = _alignment->scons -> getMdkwVector();
 
     /* Allocate local memory and initializate it to -1 */
@@ -1299,12 +1377,12 @@ newAlignment * Cleaner::getClustering(float identityThreshold) {
      * alignment */
 
 //     newAlig = new newAlignment(*_alignment);
-// 
+//
 //     newAlig -> sequenNumber = clustering[0];
-// 
+//
 //     if (newAlig->sequences != NULL)
 //         delete[] newAlig -> sequences;
-// 
+//
 //     if (newAlig -> seqsName != NULL)
 //         delete[] newAlig -> seqsName;
 
@@ -1374,31 +1452,31 @@ newAlignment *Cleaner::removeSequences(int *seqs, int init, int size,
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
-   newAlig -> Cleaning -> removeAllGapsSeqsAndCols();
+    newAlig -> Cleaning -> removeAllGapsSeqsAndCols();
 
 //     /* Allocate memory  for selected sequences/columns */
 //     matrixAux = new string[counter.sequences];
 //     newSeqsName = new string[counter.sequences];
-// 
+//
 //     /* Fill local allocated memory with previously selected data */
 //     _alignment -> fillNewDataStructure(matrixAux, newSeqsName);
-// 
+//
 //     /* When we have all parameters, we create the new alignment */
-// 
+//
 //     newAlig = new newAlignment(*_alignment);
-// 
+//
 //     newAlig -> sequenNumber = counter.sequences;
 //     newAlig -> residNumber = counter.residues;
-// 
+//
 //     if (newAlig->sequences != NULL)
 //         delete[] newAlig -> sequences;
-// 
+//
 //     if (newAlig -> seqsName != NULL)
 //         delete[] newAlig -> seqsName;
-// 
+//
 //     newAlig -> sequences = matrixAux;
 //     newAlig -> seqsName = newSeqsName;
-// 
+//
 //     delete [] counter.matrix;
 //     delete [] counter.seqsName;
 
@@ -1456,7 +1534,7 @@ bool Cleaner::removeOnlyTerminal(void) {
 /* Function designed to identify and remove those columns blocks smaller than
  * a given size */
 void Cleaner::removeSmallerBlocks(int blockSize) {
-        // NOTE this method is not updated to use shared sequences. This shouldn't be used at all.
+    // NOTE this method is not updated to use shared sequences. This shouldn't be used at all.
     int i, j, pos, block;
 
     if(blockSize == 0)
@@ -1560,15 +1638,14 @@ newValues Cleaner::removeCols_SeqsAllGaps(void) {
 }
 
 void Cleaner::removeAllGapsSeqsAndCols(void) {
-    int i, j, k, valid, gaps;
-    bool warnings = false;
+    int i, j, valid, gaps;
 //     return;
     // Start checking the sequences.
     for (i = 0; i < _alignment->originalSequenNumber; i++)
     {
         // Forget about sequences that are already rejected
         if (_alignment->saveSequences[i] == -1) continue;
-        
+
         // Iterate over all residues
         for (j = 0 ; j < _alignment->sequences[i].length(); j++)
         {
@@ -1579,7 +1656,7 @@ void Cleaner::removeAllGapsSeqsAndCols(void) {
             if (_alignment->sequences[i][j] != '-')
                 break;
         }
-        
+
         // If we haven't early-stopped due to finding a non-gap residue, j == sequenceLenght
         if (j == _alignment->sequences[i].length())
         {
@@ -1592,31 +1669,30 @@ void Cleaner::removeAllGapsSeqsAndCols(void) {
             }
         }
     }
-    
+
     // Iterate over the residues
-    for (k = 0; k < _alignment->originalResidNumber; k++)
+    for (j = 0; j < _alignment->originalResidNumber; j++)
     {
         // Forget about already discarded residues;
-        if (_alignment->saveResidues[k] == -1) continue;
-        
+        if (_alignment->saveResidues[j] == -1) continue;
+
         // Check the residue position on each sequence.
-        for (j = 0; j < _alignment->originalSequenNumber; j++)
+        for (i = 0; i < _alignment->originalSequenNumber; i++)
         {
             // Forget about sequences that are already rejected
-            if (_alignment->saveSequences[j] == -1) 
+            if (_alignment->saveSequences[i] == -1)
                 continue;
-            // Stop if a non gap residue is found on the colum
-            if (_alignment->sequences[j][k] != '-')
+            // Stop if a non gap residue is found on the column
+            if (_alignment->sequences[i][j] != '-')
                 break;
         }
-        
+
         // If we didn't early-stop due to finding a non-gap residue, j == sequenNumber
-        if (j == _alignment->originalSequenNumber)
+        if (i == _alignment->originalSequenNumber)
         {
-            _alignment->saveResidues[i] = -1;
-            _alignment->residNumber--;
+            _alignment->saveResidues[j] = -1;
+            _alignment->residNumber --;
         }
-        
     }
 }
 
@@ -1781,7 +1857,7 @@ int* Cleaner::calculateRepresentativeSeq(float maximumIdent) {
 
 void Cleaner::computeComplementaryAlig(bool residues, bool sequences) {
     int i;
-    
+
     if (residues)
         for(i = 0; i < _alignment -> originalResidNumber; i++)
             _alignment -> saveResidues[i] = (_alignment -> saveResidues[i] == -1) ? i : -1;

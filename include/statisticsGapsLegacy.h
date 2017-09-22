@@ -23,8 +23,8 @@
 
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-#ifndef STATISTICSGAPS_H
-#define STATISTICSGAPS_H
+#ifndef STATISTICSGAPSL_H
+#define STATISTICSGAPSL_H
 
 #include <iostream>
 #include <iomanip>
@@ -37,12 +37,8 @@ using namespace std;
 /*                                           Header Class File: StatisticsGaps.                                      */
 /* ***************************************************************************************************************** */
 
-class newAlignment;
 class statisticsGaps {
 public:
-    
-    newAlignment * _alignment;
-    
   int residNumber;
   int sequenNumber;
   int maxGaps;
@@ -57,13 +53,13 @@ public:
  public:
 
   /* Class constructor without parameters. */
-  statisticsGaps(newAlignment * parent);
+  statisticsGaps(void);
 
   /* Class destroyer. */
   ~statisticsGaps(void);
 
   /* Class constructor with parameters. */
-  //statisticsGaps(string *, int, int, int);
+  statisticsGaps(string *, int, int, int);
 
   /* Methods allows us compute the gapWindows' values. */
   bool applyWindow(int);

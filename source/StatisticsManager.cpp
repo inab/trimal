@@ -35,7 +35,7 @@ bool StatisticsManager::calculateConservationStats(void) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Compute the similarity statistics from the input
      * newAlignment */
-    if(!_alignment->scons -> calculateVectors(_alignment->sequences, _alignment->sgaps->getGapsWindow()))
+    if(!_alignment->scons -> calculateVectors(/*_alignment->sequences,*/ _alignment->sgaps->getGapsWindow()))
         return false;
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -85,10 +85,7 @@ bool StatisticsManager::setSimilarityMatrix(similarityMatrix *sm) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* If scons object is not created, we create them */
     if(_alignment->scons == NULL)
-        _alignment->scons = new statisticsConservation(_alignment->sequences,
-                                                       _alignment->sequenNumber,
-                                                       _alignment->residNumber,
-                                                       _alignment->dataType);
+        _alignment->scons = new statisticsConservation2(_alignment);
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -160,10 +157,10 @@ bool StatisticsManager::calculateGapStats(void) {
     /* If sgaps object is not created, we create them
        and calculate the statistics */
     if(_alignment->sgaps == NULL) {
-        _alignment->sgaps = new statisticsGaps(_alignment->sequences,
+        _alignment->sgaps = new statisticsGaps(_alignment /*_alignment->sequences,
                                                _alignment->sequenNumber,
                                                _alignment->residNumber,
-                                               _alignment->dataType);
+                                               _alignment->dataType*/);
         _alignment->sgaps -> applyWindow(ghWindow);
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
