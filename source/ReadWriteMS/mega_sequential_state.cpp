@@ -291,11 +291,11 @@ bool MegaSequentialState::SaveAlignment(newAlignment* alignment, std::ostream* o
     *output << "#MEGA" << endl << alignment->filename << endl;
 
     /* Print alignment datatype */
-    if (alignment->dataType & SequenceTypes::DNA)
+    if (alignment->getAlignmentType() & SequenceTypes::DNA)
         *output << "!Format DataType=DNA ";
-    else if (alignment->dataType & SequenceTypes::RNA)
+    else if (alignment->getAlignmentType() & SequenceTypes::RNA)
         *output << "!Format DataType=RNA ";
-    else if (alignment->dataType & SequenceTypes::AA)
+    else if (alignment->getAlignmentType() & SequenceTypes::AA)
         *output << "!Format DataType=protein ";
 
     /* Print number of sequences and alignment length */

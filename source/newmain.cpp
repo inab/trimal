@@ -30,9 +30,8 @@
 int main(int argc, char *argv[])
 {
 //     ReportSystem::PrintCodesAndMessages();
+    ReportSystem::Level = ReportSystem::VerboseLevel::DEBUG;
     
-    ReportSystem::Level = ReportSystem::VerboseLevel::WARNING;
-
     trimAlManager Trimal = trimAlManager();
 
     Trimal.parseArguments(argc, argv);

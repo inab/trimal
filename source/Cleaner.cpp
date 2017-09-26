@@ -566,9 +566,10 @@ newAlignment* Cleaner::cleanByCutValueV2(double GapsCutPoint, const int *GapsInC
 
 newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, const float *MDK_W, bool complementary, bool variable) {
 
-    int i, x, pos, num, lenBlock;
+    int i, x, pos, counter, num, lenBlock;
 // //     _alignment->Cleaning->removeAllGapsSeqsAndCols();
     newAlignment *newAlig = new newAlignment(*_alignment);
+
 
     /* Reject columns with gaps number greater than the gap threshold. */
     for(i = 0; i < _alignment->originalResidNumber; i++)
@@ -719,6 +720,7 @@ newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, 
                      rejectResiduesBuffer[2]) > 0 ? -1 : positionResidueBuffer[3];
         }
     }
+    
 
     /* Select blocks size based on user input. It can be set either to 5 or to a
      * variable number between 3 and 12 depending on alignment's length (1% alig) */
@@ -733,22 +735,49 @@ newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, 
     blockSize = blockSize > 0 ? blockSize : lenBlock;
 
     /* Keep only columns blocks bigger than an input columns block size */
-    if(blockSize != 0)
+
+    for (i = 0, pos = 0, counter = 0; i < newAlig->originalResidNumber; i++)
     {
-        for (i = 0, pos = 0; i < newAlig->originalResidNumber; i++)
+        
+        if (_alignment->saveResidues[i] == -1) { pos++; continue; }
+        if (newAlig->saveResidues[i] != -1) { pos++; counter++; continue; }
+        
+        if (counter < blockSize)
         {
-            // Forget about already rejected residues
-            if (_alignment->saveResidues[i] == -1) continue;
-            if (newAlig->saveResidues[i] != -1) pos++;
-            else
+            while (pos > 0)
             {
-                if (pos < blockSize)
-                    while (pos != 0)
-                        newAlig->saveResidues[i-pos--] = -1;
-                pos = 0;
+                newAlig->saveResidues[i-pos--] = -1;
             }
         }
+        counter = 0;
+        pos = 0;
     }
+    
+    if (counter < blockSize)
+    {
+        while (pos > 0)
+        {
+            newAlig->saveResidues[i-pos--] = -1;
+        }
+    }
+    
+//     Debug << _alignment -> originalResidNumber << endl;
+//     
+//     Debug << setw(20) << left << "Save Residues" << " " 
+//             << setw(20) << left << "Gaps Window" << " " 
+//             << setw(20) << left << "Q" << " " 
+//             << setw(20) << left << "MDK" << " " 
+//             << setw(20) << left << "MDK_W" << endl << endl;
+//     
+//     
+//     for(i = 0; i < _alignment->originalResidNumber; i++)
+//     {
+//         Debug << setw(20) << left << newAlig->saveResidues[i] << " " 
+//              << setw(20) << left << _alignment->sgaps->gapsWindow[i] << " " 
+//              << setw(20) << left << _alignment->scons->Q[i] << " " 
+//              << setw(20) << left << _alignment->scons->MDK[i] << " " 
+//              << setw(20) << left << _alignment->scons->MDK_Window[i] << endl;
+//     }
 
     /* If the flag -terminalony is set, apply a method to look for internal
      * boundaries and get back columns inbetween them, if they exist */
@@ -763,7 +792,7 @@ newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, 
 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
-
+    
     newAlig->Cleaning->removeAllGapsSeqsAndCols();
     newAlig->updateSequencesAndResiduesNums();
 
@@ -1353,7 +1382,7 @@ newAlignment * Cleaner::getClustering(float identityThreshold) {
     {
 //         if (_alignment -> saveSequences[i] == -1) continue;
         newAlig -> saveSequences[clustering[i]] = clustering[i];
-        cout << clustering[i] << endl;
+//         cout << clustering[i] << endl;
     }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 

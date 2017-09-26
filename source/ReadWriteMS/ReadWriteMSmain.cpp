@@ -355,7 +355,6 @@ int main(int argc, char *argv[])
         for (string str : inFiles)
         {
             newAlignment* alignment = MachineState.loadAlignment(str);
-                cout << "Hello there, LOADED" << endl;
             if (alignment != nullptr)
             {
                 cout << "## Alignment File: " << str << endl;

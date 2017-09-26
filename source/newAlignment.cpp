@@ -72,7 +72,7 @@ newAlignment::newAlignment(void) {
     isAligned = false;
 
     /* Sequence datatype: DNA, RNA or Protein */
-    dataType = 0;
+    dataType = SequenceTypes::NotDefined;
 
     /* Sequence residues number */
 // // //     residuesNumber = NULL;
@@ -133,7 +133,7 @@ newAlignment::newAlignment(newAlignment& originalAlignment) {
         std::copy(originalAlignment.saveSequences, originalAlignment.saveSequences + originalAlignment.originalSequenNumber, saveSequences);
 
         saveResidues = new int[originalResidNumber];
-        std::copy(originalAlignment.saveResidues, originalAlignment.saveResidues + originalAlignment.originalSequenNumber, saveResidues);
+        std::copy(originalAlignment.saveResidues, originalAlignment.saveResidues + originalAlignment.originalResidNumber, saveResidues);
 
         identities = NULL;
 
@@ -198,7 +198,7 @@ newAlignment::~newAlignment(void) {
 
     isAligned = false;
 
-    dataType = 0;
+//     dataType = 0;
 
     delete Cleaning;
 

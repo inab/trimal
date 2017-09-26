@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(trimal)
-
+# JEMALLOC
 # Make project C++ 11
 set(CMAKE_CXX_STANDARD 11)
 
@@ -13,7 +13,9 @@ set(CMAKE_CXX_STANDARD 11)
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
 # Set the debug flag
-SET(CMAKE_BUILD_TYPE Debug)
+if( NOT CMAKE_BUILD_TYPE )
+    SET(CMAKE_BUILD_TYPE Debug)
+endif()
 
 # ADD_DEFINITIONS(-g -O2 -fsigned-char -freg-struct-return -Wall -W -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Winline )
 ADD_DEFINITIONS(-Winline -march=native --param max-inline-insns-single=4000 --param inline-unit-growth=200 )
@@ -26,7 +28,7 @@ set(preview
         source/statisticsGaps.cpp
         source/utils.cpp
         source/similarityMatrix.cpp
-        source/statisticsConservation.cpp
+#         source/statisticsConservation.cpp
         source/sequencesMatrix.cpp
         source/compareFiles.cpp
         source/newAlignment.cpp
@@ -35,6 +37,7 @@ set(preview
         source/trimalArgumentParser.cpp
         source/ReadWriteMS/ReadWriteMachineState.cpp
         source/reportsystem.cpp
+        source/statisticsConservation2.cpp
         )
 
 # Include all states of ReadWriteMachineState
@@ -66,12 +69,8 @@ set( MEMORYCHECK_COMMAND_OPTIONS "-v --tool=callgrind" )
 
 # Basic tests
 include(CTest)
-# set_tests_properties(PROPERTIES TIMEOUT 0)
-add_test(Crash_Trimal       ../Strimal/source/trimal)
-add_test(Crash_NewTrimal    bin/new_trimal)
+add_test(Crash_NewTrimal    bin/trimal)
 add_test(Crash_Readal       bin/readal)
-add_test(Crash_Statal       bin/statal)
-add_test(Crash_Readal       bin/readalMS)
 
 # Macro that uses the compareOutput cmake to create tests
 macro(compare_outputs test_name program_a program_b arguments)
@@ -102,6 +101,9 @@ set(seqoverlap 5)
 set(clusters 2)
 set(max_identities 0.5)
 set(blocks 2)
+set(formats -nbrf -mega -nexus -clustal -fasta -fasta_m10 -phylip -phylip_m10 -phylip_paml -phylip_paml_m10 -phylip3.2 -phylip3.2_m10)
+
+set(VAR 3)
 
 # Add all the combinations of arguments and files provided
 foreach(file ${files})
@@ -110,64 +112,82 @@ foreach(file ${files})
 #     message("${stripped_file}")
     
     compare_outputs(
-            "[trimal][file:${stripped_file}][vanilla]"
+            "[t${VAR}t][trimal][file:${stripped_file}][vanilla]"
             "../Strimal/source/trimal" "bin/trimal"
             "-in ${file}")
+    MATH(EXPR VAR "${VAR}+1")
             
     foreach(threshold ${thresholds})
         compare_outputs(
-                "[trimal][file:${stripped_file}][gt:${threshold}]"
+                "[t${VAR}t][trimal][file:${stripped_file}][gt:${threshold}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} -gt ${threshold}")
+        MATH(EXPR VAR "${VAR}+1")
         compare_outputs(
-                "[trimal][file:${stripped_file}][st:${threshold}]"
+                "[t${VAR}t][trimal][file:${stripped_file}][st:${threshold}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} -st ${threshold}")
+        MATH(EXPR VAR "${VAR}+1")
     endforeach()
 
     foreach(cons ${cons})
         compare_outputs(
-                "[trimal][file:${stripped_file}][cons:${cons}]"
+                "[t${VAR}t][trimal][file:${stripped_file}][cons:${cons}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} -cons ${cons}")
+        MATH(EXPR VAR "${VAR}+1")
     endforeach()
 
     foreach(method ${automethod})
         compare_outputs(
-                "[trimal][file:${stripped_file}][${method}]"
+                "[t${VAR}t][trimal][file:${stripped_file}][${method}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} ${method}")
+        MATH(EXPR VAR "${VAR}+1")
     endforeach()
     
     foreach(cluster ${clusters})
         compare_outputs(
-                "[trimal][file:${stripped_file}][cluster:${cluster}]"
+                "[t${VAR}t][trimal][file:${stripped_file}][cluster:${cluster}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} -clusters ${cluster}")
+        MATH(EXPR VAR "${VAR}+1")
     endforeach()
     
     foreach(max_identity ${max_identities})
         compare_outputs(
-                "[trimal][file:${stripped_file}][max_identity:${max_identity}]"
+                "[t${VAR}t][trimal][file:${stripped_file}][max_identity:${max_identity}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} -maxidentity ${max_identity}")
+        MATH(EXPR VAR "${VAR}+1")
     endforeach()
     
     foreach(block ${blocks})
         compare_outputs(
-                "[trimal][file:${stripped_file}][block:${block}]"
+                "[t${VAR}t][trimal][file:${stripped_file}][block:${block}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} -block ${block}")
+        MATH(EXPR VAR "${VAR}+1")
     endforeach()
 
     foreach(seqoverlap ${seqoverlap})
         foreach(resoverlap ${resoverlap})
             compare_outputs(
-                    "[trimal][file:${stripped_file}][seqo:${seqoverlap}][reso:${resoverlap}]"
+                    "[t${VAR}t][trimal][file:${stripped_file}][seqo:${seqoverlap}][reso:${resoverlap}]"
                     "../Strimal/source/trimal" "bin/trimal"
                     "-in ${file} -resoverlap ${resoverlap} -seqoverlap ${seqoverlap}")
+            MATH(EXPR VAR "${VAR}+1")
         endforeach()
     endforeach()
+    
+    foreach(format ${formats})
+        compare_outputs(
+                "[t${VAR}t][trimal][file:${stripped_file}][format:${format}]"
+                "../Strimal/source/trimal" "bin/trimal"
+                "-in ${file} ${format}")
+        MATH(EXPR VAR "${VAR}+1")
+    endforeach()
+    
 endforeach()
 
 # Force tests to be made each time new_trimal is built

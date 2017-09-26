@@ -68,6 +68,8 @@ using namespace std;
 
 class newAlignment {
 
+    int dataType = 0;
+    
 public:
 /* Submodules */
 
@@ -92,8 +94,6 @@ public:
     int residNumber;
 
     bool isAligned;
-
-    int dataType;
 
     string *sequences;
 

@@ -27,6 +27,7 @@
 #include "../include/statisticsConservation2.h"
 #include "../include/defines.h"
 #include "../include/newAlignment.h"
+#include "../include/reportsystem.h"
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 |  statisticsConservation2::statisticsConservation2(char **, int, int)                                                   |
@@ -196,7 +197,6 @@ bool statisticsConservation2::calculateVectors(int *gaps) {
 
     /* Depending on alignment type, indetermination symbol will be one or other */
     indet = (_alignment->getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
-
     /* A conservation matrix must be defined. If not, return false */
     if(simMatrix == NULL)
         return false;
@@ -235,7 +235,7 @@ bool statisticsConservation2::calculateVectors(int *gaps) {
 
         /* If the MDK value is more than 1, we normalized this value to 1. */
         if(MDK[ii] > 1) MDK[ii] = 1;
-//         cout << num << " " << den << " " << _alignment->sgaps->gapsWindow[i] << " " << Q[i] << " " << MDK[i] << " " << sequences << endl; 
+//         Debug  << setw(20) << left << i << " "  << setw(20) << left << Q[i] << " "  << setw(20) << left << num << " "  << setw(20) << left << den << endl;
 
     }
 

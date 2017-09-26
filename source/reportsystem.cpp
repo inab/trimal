@@ -1,6 +1,7 @@
 #include <iomanip>
 #include "../include/reportsystem.h"
-#include <iostream>
+
+ReportSystem Debug = ReportSystem();
 
 // Out of line initializations.
 
@@ -477,4 +478,12 @@ void ReportSystem::Report(ReportSystem::InfoCode message, char * vars)
 
     std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
 
+}
+
+void ReportSystem::Debug(std::string debugMessage)
+{
+    if (Level == VerboseLevel::DEBUG)
+    {
+        std::cout << debugMessage;
+    }
 }

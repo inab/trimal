@@ -1970,12 +1970,14 @@ inline bool trimAlManager::create_or_use_similarity_matrix()
         }
         
         // Default Matrices
-        else
-        {
-            if((origAlig -> getAlignmentType()) & SequenceTypes::AA)
+        else {
+            int alignDataType = origAlig -> getAlignmentType();
+            if(alignDataType & SequenceTypes::AA)
                 similMatrix -> defaultAASimMatrix();
-            else
+            else if((alignDataType == SequenceTypes::DNA) || (alignDataType == SequenceTypes::RNA))
                 similMatrix -> defaultNTSimMatrix();
+            else if((alignDataType == (SequenceTypes::DNA | SequenceTypes::DEG)) || (alignDataType == (SequenceTypes::RNA | SequenceTypes::DEG)))
+                similMatrix -> defaultNTDegeneratedSimMatrix();
         }
 
         if(!origAlig -> Statistics -> setSimilarityMatrix(similMatrix))

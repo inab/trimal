@@ -226,11 +226,11 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
          << alignment->sequenNumber << " NCHAR=" << alignment->residNumber <<";" << endl;
 
     /* Print alignment datatype */
-    if (alignment->dataType & SequenceTypes::DNA)
+    if (alignment->getAlignmentType() & SequenceTypes::DNA)
         *output << "FORMAT DATATYPE=DNA INTERLEAVE=yes GAP=-";
-    else if (alignment->dataType & SequenceTypes::RNA)
+    else if (alignment->getAlignmentType() & SequenceTypes::RNA)
         *output << "FORMAT DATATYPE=RNA INTERLEAVE=yes GAP=-";
-    else if (alignment->dataType & SequenceTypes::AA)
+    else if (alignment->getAlignmentType() & SequenceTypes::AA)
         *output << "FORMAT DATATYPE=PROTEIN INTERLEAVE=yes GAP=-";
 
     i = 0;

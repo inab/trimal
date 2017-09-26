@@ -175,11 +175,11 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
 
     /* Compute output file datatype */
     alignment->getAlignmentType();
-    if (alignment->dataType & SequenceTypes::DNA)
+    if (alignment->getAlignmentType() & SequenceTypes::DNA)
         alg_datatype = "DL";
-    else if (alignment->dataType & SequenceTypes::RNA)
+    else if (alignment->getAlignmentType() & SequenceTypes::RNA)
         alg_datatype = "RL";
-    else if (alignment->dataType & SequenceTypes::AA)
+    else if (alignment->getAlignmentType() & SequenceTypes::AA)
         alg_datatype = "P1";
 
 
@@ -213,8 +213,8 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
                 else if (k % 50 == 0 ) (*output) << endl;
             }
         }
-//         if (k == 50 ) (*output) << " ";
-/*        else*/ if (k % 10 == 0) (*output) << " ";
+        if (k % 50 == 0) (*output) << endl;
+        if (k % 10 == 0) (*output) << " ";
         (*output) << "*" << endl << endl;
     }
 
