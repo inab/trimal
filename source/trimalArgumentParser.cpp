@@ -2028,8 +2028,13 @@ inline void trimAlManager::clean_alignment()
     else if((residuesOverlap != -1) && (sequenceOverlap != -1)) 
     {
         tempAlig = origAlig -> Cleaning -> cleanSpuriousSeq(residuesOverlap, (sequenceOverlap/100), getComplementary);
+
         singleAlig = tempAlig -> Cleaning -> cleanNoAllGaps(false);
         delete tempAlig;
+        
+//         for (int i = 0 ; i < singleAlig->originalResidNumber; i++)
+//             if (singleAlig->saveResidues[i] != -1)
+//                 Debug << singleAlig->saveResidues[i] << endl; 
     }
     /* -------------------------------------------------------------------- */
 
@@ -2110,6 +2115,7 @@ inline void trimAlManager::clean_alignment()
         else
         {
             tempAlig = origAlig -> Cleaning -> getClustering(origAlig -> Cleaning -> getCutPointClusters(clusters));
+
             singleAlig = tempAlig -> Cleaning -> cleanNoAllGaps(false);
             
             delete tempAlig;

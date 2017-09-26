@@ -210,6 +210,8 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
 
 bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::__cxx11::string* FileName)
 {
+
+    
     /* Generate output alignment in CLUSTAL format */
 
     int i, j, k, l, maxLongName = 0;
@@ -219,8 +221,6 @@ bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, 
      * Warn about it if there are not aligned. */
     if (!alignment->isAligned) {
         Debug.Report(ErrorCode::UnalignedAlignmentToAlignedFormat, new std::string[1] { this->name });
-//         cerr << endl << "ERROR: Sequences are not aligned. Format (CLUSTAL) "
-//              << "not compatible with unaligned sequences." << endl << endl;
         return false;
     }
 
@@ -237,7 +237,10 @@ bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, 
 
     /* Compute maximum sequences name length */
     for(i = 0; (i < alignment->originalSequenNumber) && (!Machine->shortNames); i++)
+    {
+        if (alignment->saveSequences[i] == -1) continue;
         maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
+    }
 
     /* Print alignment header */
     if((alignment->aligInfo.size() != 0)  && (alignment->aligInfo.substr(0,7) == "CLUSTAL"))

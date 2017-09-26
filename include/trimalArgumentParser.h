@@ -121,6 +121,7 @@ public:
     ///@{ 
     void parseArguments(int argc, char *argv[]);
 private:
+
         void info_arguments(int* argc, char* argv[], int* i);
         bool in_argument(int* argc, char* argv[], int* i);
         bool out_argument(int* argc, char* argv[], int* i);
@@ -161,7 +162,7 @@ private:
         bool col_numbering_argument(int* argc, char* argv[], int* i);
         bool split_by_stop_codon_argument(int* argc, char* argv[], int* i);
         bool ignore_stop_codon_argument(int* argc, char* argv[], int* i);
-
+    
     ///@}
 public:
     bool processArguments(char* argv[]);

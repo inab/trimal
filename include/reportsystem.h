@@ -185,6 +185,7 @@ enum InfoCode {
 
     __MAXINFO
 };
+
 namespace _internalReport {
 class ReportSystem
 {

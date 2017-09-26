@@ -217,6 +217,8 @@ newAlignment* Phylip40State::LoadAlignment(std::string filename)
 
 bool Phylip40State::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
+  
+    
    /* Generate output alignment in PHYLIP/PHYLIP 4 format (sequential) */
 
     int i, j, k, l, maxLongName;
@@ -256,7 +258,7 @@ bool Phylip40State::SaveAlignment(newAlignment* alignment, std::ostream* output,
     (*output) << " " << alignment->sequenNumber << " " << alignment->residNumber;
 
     /* First Block: Sequences Names & First 60 residues */
-    for(i = 0; i < alignment->sequenNumber; i++)
+    for(i = 0; i < alignment->originalSequenNumber; i++)
     {
         if (alignment->saveSequences[i] == -1) continue;
         (*output) << endl << setw(maxLongName + 3) << left << alignment->seqsName[i].substr(0, maxLongName);

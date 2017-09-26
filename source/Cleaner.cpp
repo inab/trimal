@@ -71,8 +71,8 @@ int Cleaner::selectMethod(void) {
 }
 
 newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gInCol, bool complementary) {
-
-    int i, j, k, ij, resCounter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
+    
+    int i, j, k, ij, resCounter, counter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
     newAlignment *newAlig = new newAlignment(*_alignment);
 //     newValues counter;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -208,23 +208,30 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gI
     }
 
     /* Keep only columns blocks bigger than an input columns block size */
-    if(blockSize != 0)
+    for (i = 0, pos = 0, counter = 0; i < newAlig->originalResidNumber; i++)
     {
-        for (i = 0, pos = 0; i < newAlig->originalResidNumber; i++)
+        
+        if (_alignment->saveResidues[i] == -1) { pos++; continue; }
+        if (newAlig->saveResidues[i] != -1) { pos++; counter++; continue; }
+        
+        if (counter < blockSize)
         {
-            // Forget about already rejected residues
-            if (_alignment->saveResidues[i] == -1) continue;
-            if (newAlig->saveResidues[i] != -1) pos++;
-            else
+            while (pos > 0)
             {
-                if (pos < blockSize)
-                    while (pos != 0)
-                        newAlig->saveResidues[i-pos--] = -1;
-                pos = 0;
+                newAlig->saveResidues[i-pos--] = -1;
             }
         }
+        counter = 0;
+        pos = 0;
     }
-
+    
+    if (counter < blockSize)
+    {
+        while (pos > 0)
+        {
+            newAlig->saveResidues[i-pos--] = -1;
+        }
+    }
 
     /* If the flag -terminalony is set, apply a method to look for internal
      * boundaries and get back columns inbetween them, if they exist */
@@ -237,9 +244,10 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gI
     if(complementary == true)
         newAlig-> Cleaning -> computeComplementaryAlig(true, false);
 
-
     newAlig->Cleaning->removeAllGapsSeqsAndCols();
+
     newAlig->updateSequencesAndResiduesNums();
+
     /* Return the new _alignmentment reference */
     return newAlig;
 }
@@ -820,6 +828,8 @@ newAlignment* Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, 
     /* Compute new sequences and columns numbers */
     newAlig->Cleaning->removeAllGapsSeqsAndCols();
 
+
+    
     return newAlig;
 }
 
@@ -1380,48 +1390,11 @@ newAlignment * Cleaner::getClustering(float identityThreshold) {
     }
     for(i = 1; i <= clustering[0]; i ++)
     {
-//         if (_alignment -> saveSequences[i] == -1) continue;
         newAlig -> saveSequences[clustering[i]] = clustering[i];
-//         cout << clustering[i] << endl;
     }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* We allocate memory to save the sequences selected */
-//     matrixAux = new string[clustering[0]];
-//     newSeqsName = new string[clustering[0]];
-
-    /* Copy to new structures the information that have
-     * been selected previously. */
-//     for(i = 0, j = 0; i < _alignment -> sequenNumber; i++)
-//         if(_alignment -> saveSequences[i] != -1) {
-//             newSeqsName[j] = _alignment -> seqsName[i];
-//             matrixAux[j] = _alignment -> sequences[i];
-//             j++;
-//         }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* When we have all parameters, we create the new
-     * alignment */
-
-//     newAlig = new newAlignment(*_alignment);
-//
-//     newAlig -> sequenNumber = clustering[0];
-//
-//     if (newAlig->sequences != NULL)
-//         delete[] newAlig -> sequences;
-//
-//     if (newAlig -> seqsName != NULL)
-//         delete[] newAlig -> seqsName;
 
     newAlig -> sequenNumber = clustering[0];
-//     newAlig -> sequences = matrixAux;
-//     newAlig -> seqsName = newSeqsName;
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-//     newAlig->fillMatrices(true);
     delete [] clustering;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Return the new alignment reference */

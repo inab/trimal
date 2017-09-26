@@ -271,21 +271,21 @@ bool Phylip32State::SaveAlignment(newAlignment* alignment, std::ostream* output,
         for (j = 0, k = 0; j < alignment->originalResidNumber; j++)
         {
             if (alignment->saveResidues[j] == -1) continue;
-            *output << alignment->sequences[i][j];
-            k++;
-            if (k % 10 == 0) 
-                *output << " ";
             if (k == 50)
             {
                 *output << endl << setw(maxLongName + 3) << left << " " ;
                 k = 0;
             }
+            *output << alignment->sequences[i][j];
+            k++;
+            if (k % 10 == 0) 
+                *output << " ";
         }
         if (k % 10 != 0)
             *output << " ";
         
         /* Print a blank line to mark sequences separation */
-        if (k % 50 != 0)
+//         if (k % 50 != 0)
             (*output) << endl;
     }
     *output << endl;
