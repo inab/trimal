@@ -29,7 +29,7 @@ bool HTMLState::SaveAlignment(newAlignment* alignment, std::ostream* output, std
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
     if (!alignment->isAligned) {
-        ReportSystem::Report(ReportSystem::ErrorCode::UnalignedAlignmentToAlignedFormat, new std::string[1] { this->name });
+        Debug.Report(ErrorCode::UnalignedAlignmentToAlignedFormat, new std::string[1] { this->name });
         return false;
     }
 

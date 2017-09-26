@@ -445,25 +445,25 @@ float similarityMatrix::getDistance(char a, char b){
   /* Search the first character position */
   if((chA >= 'A') && (chA <= 'Z')) numa = vhash[chA - 'A'];
   else { 
-        ReportSystem::Report(ReportSystem::ErrorCode::IncorrectSymbol, new std::string[1]{std::to_string(a)}); 
+        Debug.Report(ErrorCode::IncorrectSymbol, new std::string[1]{std::to_string(a)}); 
         return -1; 
     }
 
   /* Search the second character position */
   if((chB >= 'A') && (chB <= 'Z')) numb = vhash[chB - 'A'];
   else { 
-        ReportSystem::Report(ReportSystem::ErrorCode::IncorrectSymbol, new std::string[1]{std::to_string(b)}); 
+        Debug.Report(ErrorCode::IncorrectSymbol, new std::string[1]{std::to_string(b)}); 
         return -1; 
     }
 
   /* We check if the two character postions are valid positions */
   if(numa == -1) {
-    ReportSystem::Report(ReportSystem::ErrorCode::UndefinedSymbol, new std::string[1]{std::to_string(a)}); 
+    Debug.Report(ErrorCode::UndefinedSymbol, new std::string[1]{std::to_string(a)}); 
     return -1;
   }
 
   if(numb == -1) {
-    ReportSystem::Report(ReportSystem::ErrorCode::UndefinedSymbol, new std::string[1]{std::to_string(b)}); 
+    Debug.Report(ErrorCode::UndefinedSymbol, new std::string[1]{std::to_string(b)}); 
     return -1;
   }
 

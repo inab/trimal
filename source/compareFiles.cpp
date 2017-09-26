@@ -269,7 +269,7 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
   for(i = 1; i < numAlignments; i++) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     if(numSeqs != vectAlignments[i] -> getNumSpecies()) {
-        ReportSystem::Report(ReportSystem::ErrorCode::DifferentNumberOfSequencesInCompareset);
+        Debug.Report(ErrorCode::DifferentNumberOfSequencesInCompareset);
 //       cerr << endl << "ERROR: The files to compare do not have "
 //            << "the same number of sequences" << endl << endl;
       appearErrors = true;
@@ -280,7 +280,7 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     vectAlignments[i] -> getSequences(names);
     if(!vectAlignments[0] -> getSequenceNameOrder(names, correspNames)) {
-        ReportSystem::Report(ReportSystem::ErrorCode::DifferentSeqsNamesInCompareset);
+        Debug.Report(ErrorCode::DifferentSeqsNamesInCompareset);
 //       cerr << endl << "ERROR: The files to compare do not"
 //            << " have the same sequence names" << endl << endl;
       appearErrors = true;
@@ -616,7 +616,7 @@ bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignme
     for(i = 0; i < numAlignments; i++) {
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
         if(numSeqs != vectAlignments[i] -> getNumSpecies()) {
-            ReportSystem::Report(ReportSystem::ErrorCode::DifferentNumberOfSequencesInCompareset);
+            Debug.Report(ErrorCode::DifferentNumberOfSequencesInCompareset);
 //             cerr << endl << "ERROR: The files to compare do not have "
 //                  << "the same number of sequences" << endl << endl;
             appearErrors = true;
@@ -627,7 +627,7 @@ bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignme
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
         vectAlignments[i] -> getSequences(names);
         if(!selected -> getSequenceNameOrder(names, correspNames)) {
-            ReportSystem::Report(ReportSystem::ErrorCode::DifferentSeqsNamesInCompareset);
+            Debug.Report(ErrorCode::DifferentSeqsNamesInCompareset);
 //             cerr << endl << "ERROR: The files to compare do not"
 //                  << " have the same sequence names" << endl << endl;
             appearErrors = true;

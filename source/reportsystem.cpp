@@ -1,286 +1,286 @@
 #include <iomanip>
 #include "../include/reportsystem.h"
 
-ReportSystem Debug = ReportSystem();
+_internalReport::ReportSystem Debug = _internalReport::ReportSystem();
 
 // Out of line initializations.
 
-ReportSystem::VerboseLevel ReportSystem::Level = VerboseLevel::ERROR;
+VerboseLevel Level = VerboseLevel::ERROR;
 
-const std::map<ReportSystem::InfoCode, const char *> ReportSystem::InfoMessages = 
+const std::map<InfoCode, const char *> InfoMessages = 
 {
-    { ReportSystem::InfoCode::CuttingSequence, 
+    { InfoCode::CuttingSequence, 
         "Cutting sequence \"[ŧag]\" at first appearance of stop codon \"[tag]\" (residue \"[tag]\") at position [tag] (length: [tag] \")" }, 
         
-    { ReportSystem::InfoCode::WindowSizeCompareset, 
+    { InfoCode::WindowSizeCompareset, 
         "Try with specific comparison file window value. Parameter -cw" }, 
 };
     
-const std::map<ReportSystem::WarningCode, const char *> ReportSystem::WarningMessages = 
+const std::map<WarningCode, const char *> WarningMessages = 
 {
-    { ReportSystem::WarningCode::RemovingOnlyGapsColumn, 
+    { WarningCode::RemovingOnlyGapsColumn, 
         "Removing column '[tag]' composed only by gaps" }, 
         
-    { ReportSystem::WarningCode::KeepingOnlyGapsColumn, 
+    { WarningCode::KeepingOnlyGapsColumn, 
         "Keeping column '[tag]' composed only by gaps" }, 
         
-    { ReportSystem::WarningCode::SequenceWillBeCutted, 
+    { WarningCode::SequenceWillBeCutted, 
         "Sequence \"[tag]\" will be cutted at position [tag] (length:[tag])" }, 
         
-    { ReportSystem::WarningCode::IncludingIndeterminationSymbols,
+    { WarningCode::IncludingIndeterminationSymbols,
         "Sequence \"[tag]\" has some indetermination symbols 'X' at the end of sequence. They will be included in the final newAlignment." },
         
-    { ReportSystem::WarningCode::LessNucleotidesThanExpected,
+    { WarningCode::LessNucleotidesThanExpected,
         "Sequence \"[tag]\" has less nucleotides ([tag]) than expected ([tag]). It will be added N's to complete the sequence" },
         
-    { ReportSystem::WarningCode::HeaderWillBeCut,
+    { WarningCode::HeaderWillBeCut,
         "Original sequence header will be cutted by 10 characters" }
         
 };
     
-const std::map<ReportSystem::ErrorCode, const char *> ReportSystem::ErrorMessages = 
+const std::map<ErrorCode, const char *> ErrorMessages = 
 {
-    { ReportSystem::ErrorCode::AlignmentNotLoaded, 
+    { ErrorCode::AlignmentNotLoaded, 
         "Alignment not loaded: \" [tag] \" Check the file's content" }, 
         
-    { ReportSystem::ErrorCode::NoFormatsSpecified, 
+    { ErrorCode::NoFormatsSpecified, 
         "You must specify at least one format after the '-formats' argument" }, 
         
-    { ReportSystem::ErrorCode::AlternativeMatrixNotRecognized, 
+    { ErrorCode::AlternativeMatrixNotRecognized, 
         "Alternative matrix \" [tag] \" not recognized" }, 
         
-    { ReportSystem::ErrorCode::ReferenceFileNotLoaded, 
+    { ErrorCode::ReferenceFileNotLoaded, 
         "Reference file \" [tag] \" not loaded" }, 
         
-    { ReportSystem::ErrorCode::GapThresholdOutOfRange, 
+    { ErrorCode::GapThresholdOutOfRange, 
         "The gap threshold value should be between 0 and 1" }, 
         
-    { ReportSystem::ErrorCode::GapThresholdNotRecognized, 
+    { ErrorCode::GapThresholdNotRecognized, 
         "The gap threshold value should be a positive real number between 0 and 1" }, 
         
-    { ReportSystem::ErrorCode::SimilarityThresholdOutOfRange, 
+    { ErrorCode::SimilarityThresholdOutOfRange, 
         "The similarity threshold value should be between 0 and 1" }, 
         
-    { ReportSystem::ErrorCode::SimilarityThresholdNotRecognized, 
+    { ErrorCode::SimilarityThresholdNotRecognized, 
         "The similarity threshold value should be a positive real number between 0 and 1" }, 
         
-    { ReportSystem::ErrorCode::ConsistencyThresholdOutOfRange, 
+    { ErrorCode::ConsistencyThresholdOutOfRange, 
         "The consistency threshold value should be between 0 and 1" }, 
         
-    { ReportSystem::ErrorCode::ConsistencyThresholdNotRecognized, 
+    { ErrorCode::ConsistencyThresholdNotRecognized, 
         "The consistency threshold value should be a positive real number between 0 and 1" }, 
         
-    { ReportSystem::ErrorCode::ConservationThresholdOutOfRange, 
+    { ErrorCode::ConservationThresholdOutOfRange, 
         "The conservation threshold value should be between 0 and 100" }, 
         
-    { ReportSystem::ErrorCode::ConservationThresholdNotRecognized, 
+    { ErrorCode::ConservationThresholdNotRecognized, 
         "The conservation threshold value should be a positive real number between 0 and 100" }, 
         
-    { ReportSystem::ErrorCode::ResidueOverlapOutOfRange, 
+    { ErrorCode::ResidueOverlapOutOfRange, 
         "The residue overlap value should be between 0 and 100" }, 
         
-    { ReportSystem::ErrorCode::ResidueOverlapNotRecognized, 
+    { ErrorCode::ResidueOverlapNotRecognized, 
         "The residue overlap value should be a positive real number between 0 and 100" }, 
         
-    { ReportSystem::ErrorCode::SequencesOverlapOutOfRange, 
+    { ErrorCode::SequencesOverlapOutOfRange, 
         "The sequences overlap value should be between 0 and 100" }, 
         
-    { ReportSystem::ErrorCode::SequencesOverlapNotRecognized, 
+    { ErrorCode::SequencesOverlapNotRecognized, 
         "The sequences overlap value should be a positive real number between 0 and 100" }, 
         
-    { ReportSystem::ErrorCode::MaxIdentityOutOfRange, 
+    { ErrorCode::MaxIdentityOutOfRange, 
         "The max identity value should be between 0 and 1" }, 
         
-    { ReportSystem::ErrorCode::MaxIdentityNotRecognized, 
+    { ErrorCode::MaxIdentityNotRecognized, 
         "The max identity value should be a positive real number between 0 and 1" }, 
         
-    { ReportSystem::ErrorCode::ClustersValueOutOfRange, 
+    { ErrorCode::ClustersValueOutOfRange, 
         "The clusters value should be greater than 0" }, 
         
-    { ReportSystem::ErrorCode::ClustersValueNotRecognized, 
+    { ErrorCode::ClustersValueNotRecognized, 
         "The clusters value should be a positive integer number greater than 0" }, 
         
-    { ReportSystem::ErrorCode::WindowValueOutOfRange, 
+    { ErrorCode::WindowValueOutOfRange, 
         "The window value should be greater than 0" }, 
         
-    { ReportSystem::ErrorCode::WindowValueNotRecognized, 
+    { ErrorCode::WindowValueNotRecognized, 
         "The window value should be a positive integer number greater than 0" }, 
         
-    { ReportSystem::ErrorCode::SelectSeqsNotRecognized, 
+    { ErrorCode::SelectSeqsNotRecognized, 
         "Could not parse the -selectseqs ranges" }, 
         
-    { ReportSystem::ErrorCode::SelectColsNotRecognized, 
+    { ErrorCode::SelectColsNotRecognized, 
         "Could not parse the -selectres ranges" }, 
         
-    { ReportSystem::ErrorCode::GapWindowValueOutOfRange, 
+    { ErrorCode::GapWindowValueOutOfRange, 
         "The gap window value should be greater than 0" }, 
         
-    { ReportSystem::ErrorCode::GapWindowValueNotRecognized, 
+    { ErrorCode::GapWindowValueNotRecognized, 
         "The gap window value should be a positive integer number grater than 0" }, 
         
-    { ReportSystem::ErrorCode::SimilarityWindowValueOutOfRange, 
+    { ErrorCode::SimilarityWindowValueOutOfRange, 
         "The similarity window value should be greater than 0" }, 
         
-    { ReportSystem::ErrorCode::SimilarityWindowValueNotRecognized, 
+    { ErrorCode::SimilarityWindowValueNotRecognized, 
         "The similarity window value should be a positive integer number grater than 0" }, 
         
-    { ReportSystem::ErrorCode::ConsistencyThresholdOutOfRange, 
+    { ErrorCode::ConsistencyThresholdOutOfRange, 
         "The consistency window value should be greater than 0" }, 
         
-    { ReportSystem::ErrorCode::ConsistencyThresholdNotRecognized, 
+    { ErrorCode::ConsistencyThresholdNotRecognized, 
         "The consistency window value should be a positive integer number grater than 0" }, 
         
-    { ReportSystem::ErrorCode::BlockSizeOutOfRange, 
+    { ErrorCode::BlockSizeOutOfRange, 
         "The consistency window value should be greater than 0" }, 
         
-    { ReportSystem::ErrorCode::BlockSizeNotRecognized, 
+    { ErrorCode::BlockSizeNotRecognized, 
         "The consistency window value should be a positive integer number grater than 0" }, 
         
-    { ReportSystem::ErrorCode::InFileComparisonStatistics, 
+    { ErrorCode::InFileComparisonStatistics, 
         "Option -in not valid in combination with file comparision options: -sft || -sfc || -ct" }, 
         
-    { ReportSystem::ErrorCode::IncompatibleArguments, 
+    { ErrorCode::IncompatibleArguments, 
         "Argument [tag] is not compatible with argument [tag]" }, 
         
-    { ReportSystem::ErrorCode::SelectSeqsResAndThresholdIncompatibilities, 
+    { ErrorCode::SelectSeqsResAndThresholdIncompatibilities, 
         "Options -selectCols and -selectSeqs are not allowed in combination with threshold options: (-gt || -st || -ct || -cons)" }, 
     
-    { ReportSystem::ErrorCode::SelectSeqsResAndAutomathedMethodsIncompatibilities, 
+    { ErrorCode::SelectSeqsResAndAutomathedMethodsIncompatibilities, 
         "Options -selectCols and -selectSeqs are not allowed in combination with automated trimming options: (-nogaps || -noallgaps || -gappyout || -strict || -strictplus || -automated1)." }, 
         
-    { ReportSystem::ErrorCode::SelectSeqsResAndWindowIncompatibilities, 
+    { ErrorCode::SelectSeqsResAndWindowIncompatibilities, 
         "Options -selectCols and -selectSeqs are not allowed in combination with window options: (-w || -sw || -gw || -wc)" }, 
         
-    { ReportSystem::ErrorCode::SelectSeqsResAndOverlapIncompatibilites, 
+    { ErrorCode::SelectSeqsResAndOverlapIncompatibilites, 
         "Options -selectCols and -selectSeqs are not allowed in combination of overlap options (-resoverlap || -seqoverlap)" }, 
         
-    { ReportSystem::ErrorCode::OnlyOneSequencesSelectionMethodAllowed, 
+    { ErrorCode::OnlyOneSequencesSelectionMethodAllowed, 
         "Only one method to chose sequences can be applied: (-selectseqs || -clusters || -maxIdentity" }, 
         
-    { ReportSystem::ErrorCode::CombinationAmongTrimmingMethods, 
+    { ErrorCode::CombinationAmongTrimmingMethods, 
         "Only one trimming method can be used at the same time, either automatic or manual" }, 
         
-    { ReportSystem::ErrorCode::AutomathicMethodAndBlock, 
+    { ErrorCode::AutomathicMethodAndBlock, 
         "Combination between automatic methods and -block options is not allowed" }, 
         
-    { ReportSystem::ErrorCode::WindowAndArgumentIncompatibilities, 
+    { ErrorCode::WindowAndArgumentIncompatibilities, 
         "Combination between general and specific windows is not allowed" }, 
         
-    { ReportSystem::ErrorCode::CombinationAmongThresholdsMethods, 
+    { ErrorCode::CombinationAmongThresholdsMethods, 
         "Combination among thresholds are not allowed" }, 
         
-    { ReportSystem::ErrorCode::GeneralAndSpecificWindows, 
+    { ErrorCode::GeneralAndSpecificWindows, 
         "General window (-w) is not compatible with specific window options: (-cw, -gw, -sw)" }, 
     
-    { ReportSystem::ErrorCode::StatisticsArgumentIncompatibilities, 
+    { ErrorCode::StatisticsArgumentIncompatibilities, 
         "Parameter [tag] is not valid when statistics' parameters are defined" }, 
         
-    { ReportSystem::ErrorCode::TrimmingMethodNeeded, 
+    { ErrorCode::TrimmingMethodNeeded, 
         "Parameter [tag] can only be used with either an automatic or a manual method" }, 
         
-    { ReportSystem::ErrorCode::ForceFileWithoutCompareDataset, 
+    { ErrorCode::ForceFileWithoutCompareDataset, 
         "You can not force the alignment selection without setting an alignment dataset to compare against" }, 
         
-    { ReportSystem::ErrorCode::BacktranslationWithoutMainAlignment, 
+    { ErrorCode::BacktranslationWithoutMainAlignment, 
         "You need to specify an input alignment (-in or -forcefile) to use a Coding Sequence File (-backtranslation) to apply the back translation method" }, 
         
-    { ReportSystem::ErrorCode::NotAligned, 
+    { ErrorCode::NotAligned, 
         "The sequences in the input alignment [tag] should be aligned in order to use any trimming method or statistics" }, 
         
-    { ReportSystem::ErrorCode::MatrixGivenWithNoMethodToUseIt, 
+    { ErrorCode::MatrixGivenWithNoMethodToUseIt, 
         "The Similarity Matrix can only be used with methods that use this matrix" }, 
         
-    { ReportSystem::ErrorCode::SameNameOutput, 
+    { ErrorCode::SameNameOutput, 
         "The [tag] and [tag] files can't be the same" }, 
         
-    { ReportSystem::ErrorCode::SequenceAndResiduesOverlapMutuallyNeeded, 
+    { ErrorCode::SequenceAndResiduesOverlapMutuallyNeeded, 
         "Sequence and residues overlap values are mutually needed. You only specified [tag]" }, 
         
-    { ReportSystem::ErrorCode::OutFileNeededWhenPrintingStatistics, 
+    { ErrorCode::OutFileNeededWhenPrintingStatistics, 
         "Out file must be specified in order to print any statistics" }, 
         
-    { ReportSystem::ErrorCode::AlignmentTypesNotMatching, 
+    { ErrorCode::AlignmentTypesNotMatching, 
         "The alignments' datatypes are different. Check your dataset" }, 
         
-    { ReportSystem::ErrorCode::BlocksizeTooBig, 
+    { ErrorCode::BlocksizeTooBig, 
         "The block size value is too big. Please, choose another one smaller than residues number / 4. In this case, the limit is: [tag]" }, 
         
-    { ReportSystem::ErrorCode::ParemeterOnlyOnBacktranslation, 
+    { ErrorCode::ParemeterOnlyOnBacktranslation, 
         "The [tag] parameter can be only set up with backtranslation functionality" }, 
         
-    { ReportSystem::ErrorCode::ProteinAlignmentMustBeAligned, 
+    { ErrorCode::ProteinAlignmentMustBeAligned, 
         "The input protein file has to be aligned to carry out the backtranslation process" }, 
                 
-    { ReportSystem::ErrorCode::BacktransAlignIsDNA, 
+    { ErrorCode::BacktransAlignIsDNA, 
         "Check your Coding sequences file. It has been detected other kind of biological sequences" }, 
         
-    { ReportSystem::ErrorCode::ImpossibleToGenerate, 
+    { ErrorCode::ImpossibleToGenerate, 
         "Impossible to generate [tag]" }, 
         
-    { ReportSystem::ErrorCode::ImpossibleToProcessMatrix, 
+    { ErrorCode::ImpossibleToProcessMatrix, 
         "It's impossible to process the Similarity Matrix" }, 
         
-    { ReportSystem::ErrorCode::SelectOnlyAccepts, 
+    { ErrorCode::SelectOnlyAccepts, 
         "Option [tag] only accepts ranges from 0 to number of [tag] - 1" }, 
         
-    { ReportSystem::ErrorCode::MoreClustersThanSequences, 
+    { ErrorCode::MoreClustersThanSequences, 
         "The number of clusters from the Alignment can not be larger than the number of sequences from that alignment" }, 
         
-    { ReportSystem::ErrorCode::LeftBoundaryBiggerThanRightBoundary, 
+    { ErrorCode::LeftBoundaryBiggerThanRightBoundary, 
         "Check your manually set left '[tag]' and right '[tag]' boundaries'" }, 
         
-    { ReportSystem::ErrorCode::DifferentNumberOfSequencesInCompareset, 
+    { ErrorCode::DifferentNumberOfSequencesInCompareset, 
         "The files to compare do not have the same number of sequences" }, 
     
-    { ReportSystem::ErrorCode::DifferentSeqsNamesInCompareset, 
+    { ErrorCode::DifferentSeqsNamesInCompareset, 
         "Sequences names differ in compareset files" }, 
 
-    { ReportSystem::ErrorCode::CDScontainsProteinSequences, 
+    { ErrorCode::CDScontainsProteinSequences, 
         "Check input CDS file. It seems to content protein residues." }, 
         
-    { ReportSystem::ErrorCode::SequenceContainsGap, 
+    { ErrorCode::SequenceContainsGap, 
         "Sequence \"[tag]\" has, at least, one gap" }, 
         
-    { ReportSystem::ErrorCode::SequenceNotMultipleOfThree, 
+    { ErrorCode::SequenceNotMultipleOfThree, 
         "Sequence length \"[tag]\" is not multiple of 3 (length: [tag])" }, 
         
-    { ReportSystem::ErrorCode::SequenceHasStopCodon, 
+    { ErrorCode::SequenceHasStopCodon, 
         "Sequence \"[tag]\" has stop codon \"[tag]\" (residue \"[tag]\") at position [tag] (length: [tag])" }, 
         
-    { ReportSystem::ErrorCode::SequenceNotPresentInCDS, 
+    { ErrorCode::SequenceNotPresentInCDS, 
         "Sequence \"[tag]\" is not in CDS file." }, 
         
-    { ReportSystem::ErrorCode::UnknownCharacter, 
+    { ErrorCode::UnknownCharacter, 
         "The sequence \"[tag]\" has an unknown ([tag]) character." }, 
         
-    { ReportSystem::ErrorCode::SequencesNotSameSize, 
+    { ErrorCode::SequencesNotSameSize, 
         "The sequence \"[tag]\" ([tag]) does not have the same number of residues fixed by the alignment ([tag])" }, 
         
-    { ReportSystem::ErrorCode::IncorrectSymbol, 
+    { ErrorCode::IncorrectSymbol, 
         "the symbol '[tag]' is incorrect" }, 
         
-    { ReportSystem::ErrorCode::UndefinedSymbol, 
+    { ErrorCode::UndefinedSymbol, 
         "the symbol '[tag]' accesing the matrix is not defined in this object" }, 
         
-    { ReportSystem::ErrorCode::ParameterNotFoundOrRepeated, 
+    { ErrorCode::ParameterNotFoundOrRepeated, 
         "Parameter \"[tag]\" not valid or repeated." }, 
         
-    { ReportSystem::ErrorCode::SimilarityMatrixNotCompatibleWindow, 
+    { ErrorCode::SimilarityMatrixNotCompatibleWindow, 
         "The Similarity Matrix can only be used with general/similarity windows size." }, 
         
-    { ReportSystem::ErrorCode::PossibleMissmatch, 
+    { ErrorCode::PossibleMissmatch, 
         "Possible (\") mismatch for comments" }, 
         
-    { ReportSystem::ErrorCode::BracketsMissmatchFound, 
+    { ErrorCode::BracketsMissmatchFound, 
         "Brackets (]) mismatch found" }, 
         
-    { ReportSystem::ErrorCode::UnalignedAlignmentToAlignedFormat, 
+    { ErrorCode::UnalignedAlignmentToAlignedFormat, 
         "Sequences are not aligned. Format ([tag]) not compatible with unaligned sequences." }, 
 };
 
-void ReportSystem::PrintCodesAndMessages()
+void _internalReport::ReportSystem::PrintCodesAndMessages()
 {
-    switch(ReportSystem::Level)
+    switch(Level)
     {
         case VerboseLevel::NONE:
             std::cout << "[VerboseLevel] None" << std::endl;
@@ -296,26 +296,26 @@ void ReportSystem::PrintCodesAndMessages()
             break;
     }
 
-    for (int i = 1; i < ReportSystem::InfoCode::__MAXINFO ; i++)
+    for (int i = 1; i < InfoCode::__MAXINFO ; i++)
     {
 //         std::cout << "Info Code:    " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
-        ReportSystem::Report((ReportSystem::InfoCode)i);
+        Report((InfoCode)i);
     }
     
-    for (int i = 1; i < ReportSystem::WarningCode::__MAXWARNING ; i++)
+    for (int i = 1; i < WarningCode::__MAXWARNING ; i++)
     {
 //         std::cout << "Warning Code: " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
-        ReportSystem::Report((ReportSystem::WarningCode)i);
+        Report((WarningCode)i);
     }  
     
-    for (int i = 1; i < ReportSystem::ErrorCode::__MAXERROR ; i++)
+    for (int i = 1; i < ErrorCode::__MAXERROR ; i++)
     {
 //         std::cerr << "Error Code:   " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
-        ReportSystem::Report((ReportSystem::ErrorCode)i);
+        Report((ErrorCode)i);
     }
 }
 
-void ReportSystem::Report(ReportSystem::ErrorCode message, std::string * vars)
+void _internalReport::ReportSystem::Report(ErrorCode message, std::string * vars)
 {
     if (Level < VerboseLevel::ERROR)
     {
@@ -346,7 +346,7 @@ void ReportSystem::Report(ReportSystem::ErrorCode message, std::string * vars)
     }
 }
 
-void ReportSystem::Report(ReportSystem::ErrorCode message, char * vars)
+void _internalReport::ReportSystem::Report(ErrorCode message, char * vars)
 {
     if (Level < VerboseLevel::ERROR) return;
     
@@ -370,7 +370,7 @@ void ReportSystem::Report(ReportSystem::ErrorCode message, char * vars)
 
 }
 
-void ReportSystem::Report(ReportSystem::WarningCode message, std::string * vars)
+void _internalReport::ReportSystem::Report(WarningCode message, std::string * vars)
 {
     if (Level < VerboseLevel::WARNING)
     {
@@ -401,7 +401,7 @@ void ReportSystem::Report(ReportSystem::WarningCode message, std::string * vars)
     }
 }
 
-void ReportSystem::Report(ReportSystem::WarningCode message, char * vars)
+void _internalReport::ReportSystem::Report(WarningCode message, char * vars)
 {
     if (Level < VerboseLevel::WARNING) return;
     
@@ -425,7 +425,7 @@ void ReportSystem::Report(ReportSystem::WarningCode message, char * vars)
 
 }
 
-void ReportSystem::Report(ReportSystem::InfoCode message, std::string * vars)
+void _internalReport::ReportSystem::Report(InfoCode message, std::string * vars)
 {
     if (Level < VerboseLevel::INFO)
     {
@@ -456,7 +456,7 @@ void ReportSystem::Report(ReportSystem::InfoCode message, std::string * vars)
     }
 }
 
-void ReportSystem::Report(ReportSystem::InfoCode message, char * vars)
+void _internalReport::ReportSystem::Report(InfoCode message, char * vars)
 {
     if (Level < VerboseLevel::INFO) return;
     
@@ -480,7 +480,7 @@ void ReportSystem::Report(ReportSystem::InfoCode message, char * vars)
 
 }
 
-void ReportSystem::Debug(std::string debugMessage)
+void _internalReport::ReportSystem::Debug(std::string debugMessage)
 {
     if (Level == VerboseLevel::DEBUG)
     {

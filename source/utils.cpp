@@ -432,7 +432,7 @@ char* utils::trimLine(string nline) {
     /* If there is only one flag '"' for comments inside of sequence,
      * user should be warned about that */
     if (pos == next) {
-        ReportSystem::Report(ReportSystem::ErrorCode::PossibleMissmatch);
+        Debug.Report(ErrorCode::PossibleMissmatch);
 //       cerr << endl << "ERROR: Possible (\") mismatch for comments" << endl;
       return NULL;
     }
@@ -455,7 +455,7 @@ char* utils::trimLine(string nline) {
       if ((int) nline.find("]", 0) == (int) string::npos)
         break;
       /* Otherwise, warn about the error */
-      ReportSystem::Report(ReportSystem::ErrorCode::BracketsMissmatchFound);
+      Debug.Report(ErrorCode::BracketsMissmatchFound);
 //       cerr << endl << "ERROR: Brackets (]) mismatch found" << endl;
       return NULL;
     }
@@ -465,7 +465,7 @@ char* utils::trimLine(string nline) {
 
     /* If no closing bracket has been found. Warn about the mismatch */
     if (pos == (int) string::npos) {
-              ReportSystem::Report(ReportSystem::ErrorCode::BracketsMissmatchFound);
+              Debug.Report(ErrorCode::BracketsMissmatchFound);
 //       cerr << endl << "ERROR: Brackets ([) mismatch found" << endl;
       return NULL;
     }
