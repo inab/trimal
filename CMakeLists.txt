@@ -18,7 +18,7 @@ if( NOT CMAKE_BUILD_TYPE )
 endif()
 
 # ADD_DEFINITIONS(-g -O2 -fsigned-char -freg-struct-return -Wall -W -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Winline )
-ADD_DEFINITIONS(-Winline -march=native --param max-inline-insns-single=4000 --param inline-unit-growth=200 )
+# ADD_DEFINITIONS(-Winline -march=native --param max-inline-insns-single=4000 --param inline-unit-growth=200 )
 
 # Include the include folder. Yeah. I love redudancy
 include_directories(include)
@@ -62,8 +62,8 @@ target_link_libraries(readal m)
 
 # --------------------------- TESTING --------------------------- #
 
-find_program( MEMORYCHECK_COMMAND valgrind )
-set( MEMORYCHECK_COMMAND_OPTIONS "-v --tool=callgrind" )
+# find_program( MEMORYCHECK_COMMAND valgrind )
+# set( MEMORYCHECK_COMMAND_OPTIONS "-v --tool=callgrind" )
 # set( MEMORYCHECK_SUPPRESSIONS_FILE "${PROJECT_SOURCE_DIR}/valgrind_suppress.txt" )
 
 
@@ -82,6 +82,24 @@ macro(compare_outputs test_name program_a program_b arguments)
             -P scripts/compareTrimAlOutput.cmake)
 endmacro()
 
+macro(compare_stdout test_name program_a program_b arguments)
+    add_test(NAME ${test_name}
+            COMMAND ${CMAKE_COMMAND}
+            -Dprogram_a=${program_a}
+            -Dprogram_b=${program_b}
+            -Dcommand=${arguments}
+            -P scripts/compareTrimAlSTD.cmake)
+endmacro()
+
+macro(compare_htmlsvg test_name program_a program_b arguments)
+    add_test(NAME ${test_name}
+            COMMAND ${CMAKE_COMMAND}
+            -Dprogram_a=${program_a}
+            -Dprogram_b=${program_b}
+            -Dcommand=${arguments}
+            -P scripts/compareTrimAlReports.cmake)
+endmacro()
+
 # Create lists of variables and files for testing
 FILE(GLOB files
         dataset/*clw
@@ -89,7 +107,7 @@ FILE(GLOB files
         dataset/*msl
         dataset/*fa*
         dataset/*pir
-        dataset/*phy2
+        dataset/*phy*
     )
     
 # Create a pack of arguments to use for testing
@@ -102,6 +120,7 @@ set(clusters 2)
 set(max_identities 0.5)
 set(blocks 2)
 set(formats -nbrf -mega -nexus -clustal -fasta -fasta_m10 -phylip -phylip_m10 -phylip_paml -phylip_paml_m10 -phylip3.2 -phylip3.2_m10)
+set(external -sgc -sgt -ssc -sst -sfc -sft -sident -soverlap)
 
 set(VAR 3)
 
@@ -112,19 +131,19 @@ foreach(file ${files})
 #     message("${stripped_file}")
     
     compare_outputs(
-            "[t${VAR}t][trimal][file:${stripped_file}][vanilla]"
+            "[.${VAR}.][trimal][file:${stripped_file}][vanilla]"
             "../Strimal/source/trimal" "bin/trimal"
             "-in ${file}")
     MATH(EXPR VAR "${VAR}+1")
             
     foreach(threshold ${thresholds})
         compare_outputs(
-                "[t${VAR}t][trimal][file:${stripped_file}][gt:${threshold}]"
+                "[.${VAR}.][trimal][file:${stripped_file}][gt:${threshold}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} -gt ${threshold}")
         MATH(EXPR VAR "${VAR}+1")
         compare_outputs(
-                "[t${VAR}t][trimal][file:${stripped_file}][st:${threshold}]"
+                "[.${VAR}.][trimal][file:${stripped_file}][st:${threshold}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} -st ${threshold}")
         MATH(EXPR VAR "${VAR}+1")
@@ -132,7 +151,7 @@ foreach(file ${files})
 
     foreach(cons ${cons})
         compare_outputs(
-                "[t${VAR}t][trimal][file:${stripped_file}][cons:${cons}]"
+                "[.${VAR}.][trimal][file:${stripped_file}][cons:${cons}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} -cons ${cons}")
         MATH(EXPR VAR "${VAR}+1")
@@ -140,7 +159,7 @@ foreach(file ${files})
 
     foreach(method ${automethod})
         compare_outputs(
-                "[t${VAR}t][trimal][file:${stripped_file}][${method}]"
+                "[.${VAR}.][trimal][file:${stripped_file}][${method}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} ${method}")
         MATH(EXPR VAR "${VAR}+1")
@@ -148,7 +167,7 @@ foreach(file ${files})
     
     foreach(cluster ${clusters})
         compare_outputs(
-                "[t${VAR}t][trimal][file:${stripped_file}][cluster:${cluster}]"
+                "[.${VAR}.][trimal][file:${stripped_file}][cluster:${cluster}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} -clusters ${cluster}")
         MATH(EXPR VAR "${VAR}+1")
@@ -156,7 +175,7 @@ foreach(file ${files})
     
     foreach(max_identity ${max_identities})
         compare_outputs(
-                "[t${VAR}t][trimal][file:${stripped_file}][max_identity:${max_identity}]"
+                "[.${VAR}.][trimal][file:${stripped_file}][max_identity:${max_identity}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} -maxidentity ${max_identity}")
         MATH(EXPR VAR "${VAR}+1")
@@ -164,7 +183,7 @@ foreach(file ${files})
     
     foreach(block ${blocks})
         compare_outputs(
-                "[t${VAR}t][trimal][file:${stripped_file}][block:${block}]"
+                "[.${VAR}.][trimal][file:${stripped_file}][block:${block}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} -block ${block}")
         MATH(EXPR VAR "${VAR}+1")
@@ -173,7 +192,7 @@ foreach(file ${files})
     foreach(seqoverlap ${seqoverlap})
         foreach(resoverlap ${resoverlap})
             compare_outputs(
-                    "[t${VAR}t][trimal][file:${stripped_file}][seqo:${seqoverlap}][reso:${resoverlap}]"
+                    "[.${VAR}.][trimal][file:${stripped_file}][seqo:${seqoverlap}][reso:${resoverlap}]"
                     "../Strimal/source/trimal" "bin/trimal"
                     "-in ${file} -resoverlap ${resoverlap} -seqoverlap ${seqoverlap}")
             MATH(EXPR VAR "${VAR}+1")
@@ -182,13 +201,26 @@ foreach(file ${files})
     
     foreach(format ${formats})
         compare_outputs(
-                "[t${VAR}t][trimal][file:${stripped_file}][format:${format}]"
+                "[.${VAR}.][trimal][file:${stripped_file}][format:${format}]"
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} ${format}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
     
+    foreach(ext ${external})
+        compare_outputs(
+                "[.${VAR}.][trimal][file:${stripped_file}][externalParam:${ext}]"
+                "../Strimal/source/trimal" "bin/trimal"
+                "-in ${file} ${ext}")
+        MATH(EXPR VAR "${VAR}+1")
+    endforeach()
+    compare_htmlsvg(
+                "[.${VAR}.][trimal][file:${stripped_file}][html]"
+                "../Strimal/source/trimal" "bin/trimal"
+                "-in ${file} -strict -htmlout")
+        MATH(EXPR VAR "${VAR}+1")
 endforeach()
+
 
 # Force tests to be made each time new_trimal is built
 # add_custom_command(

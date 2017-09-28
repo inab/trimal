@@ -206,6 +206,13 @@ bool statisticsConservation2::calculateVectors(int *gaps) {
         if (_alignment->saveResidues[i] == -1) continue;
         ii ++;
         /* For each AAs/Nucleotides' pair in the column we compute its distance */
+        if(_alignment->sgaps->getGapsWindow() != NULL)
+            if(((float) _alignment->sgaps->gapsWindow[ii] / sequences) >= 0.8) 
+            {
+                MDK[ii] = 0;
+                continue;
+            }
+            
         for(j = 0, jj = -1, num = 0, den = 0; j < _alignment->originalSequenNumber; j++) {
             if (_alignment->saveSequences[j] == -1) continue;
             jj++;
@@ -230,8 +237,6 @@ bool statisticsConservation2::calculateVectors(int *gaps) {
         MDK[ii] = (float) exp(-Q[ii]);
 
         /* If the column has 80% or more gaps then we set its conservation value to 0 */
-        if(_alignment->sgaps->getGapsWindow() != NULL)
-            if(((float) _alignment->sgaps->gapsWindow[ii] / sequences) >= 0.8) MDK[ii] = 0;
 
         /* If the MDK value is more than 1, we normalized this value to 1. */
         if(MDK[ii] > 1) MDK[ii] = 1;

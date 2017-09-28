@@ -30,7 +30,7 @@
 int main(int argc, char *argv[])
 {
 //     ReportSystem::PrintCodesAndMessages();
-    Debug.Level = VerboseLevel::DEBUG;
+    Debug.Level = VerboseLevel::ERROR;
     
     trimAlManager Trimal = trimAlManager();
 

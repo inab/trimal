@@ -3,12 +3,12 @@
 //
 
 #include "../include/trimalArgumentParser.h"
-#include <string.h>
+#include <string>
 #include "../include/compareFiles.h"
 #include "../include/defines.h"
 #include "../include/values.h"
 #include "../include/reportsystem.h"
-#include <../../home/vfernandez/git/trimal/include/statisticsConservation2.h>
+#include "../include/statisticsConservation2.h"
 
 void menu();
 void examples();
@@ -1389,25 +1389,11 @@ inline bool trimAlManager::check_outputs_coincidence()
                     if (!strcmp(outFiles.at(i), outFiles.at(x)))
                     {
                         Debug.Report(ErrorCode::SameNameOutput, new std::string[2] { outFilesNames.at(i), outFilesNames.at(x) });
-//                         cerr << endl << "ERROR: The " << outFilesNames.at(i) << " and " << outFilesNames.at(x) << " files can't be the same." << endl << endl;
                         appearErrors = true;
                     }
             }
     }
-        
-    
-//     if((htmlOutFile != NULL)  && (!appearErrors))
-//     {
-//         if (outfile != NULL)
-//         {
-//             if(!strcmp(htmlOutFile, outfile))
-//             {
-//                 cerr << endl << "ERROR: The output and html files should not be the same." << endl << endl;
-//                 appearErrors = true;
-//                 return true;
-//             }
-//         }
-//     }
+
     return false;
 }
 
@@ -1766,11 +1752,11 @@ int trimAlManager::perform()
     /* -------------------------------------------------------------------- */
     if((svgOutFile != NULL) && (!appearErrors))
         if(!origAlig ->
-           alignmentSummarySVG(svgOutFile,
-                                singleAlig -> getNumAminos(), 
-                                singleAlig -> getNumSpecies(),
-                                singleAlig -> getCorrespResidues(), 
-                                singleAlig -> getCorrespSequences(), 
+           alignmentSummarySVG(*singleAlig, svgOutFile,
+//                                 singleAlig -> getNumAminos(), 
+//                                 singleAlig -> getNumSpecies(),
+//                                 singleAlig -> getCorrespResidues(), 
+//                                 singleAlig -> getCorrespSequences(), 
                                 compareVect))
         {
             Debug.Report(ErrorCode::ImpossibleToGenerate, new string[1] { "the SVG output file"});
@@ -1779,11 +1765,11 @@ int trimAlManager::perform()
         }
     if((htmlOutFile != NULL) && (!appearErrors))
         if(!origAlig ->
-           alignmentSummaryHTML(htmlOutFile,
-                                singleAlig -> getNumAminos(), 
-                                singleAlig -> getNumSpecies(),
-                                singleAlig -> getCorrespResidues(), 
-                                singleAlig -> getCorrespSequences(), 
+           alignmentSummaryHTML(*singleAlig, htmlOutFile,
+//                                 singleAlig -> getNumAminos(), 
+//                                 singleAlig -> getNumSpecies(),
+//                                 singleAlig -> getCorrespResidues(), 
+//                                 singleAlig -> getCorrespSequences(), 
                                 compareVect))
         {
             Debug.Report(ErrorCode::ImpossibleToGenerate, new string[1] { "the HTML output file"});
@@ -2030,11 +2016,9 @@ inline void trimAlManager::clean_alignment()
         tempAlig = origAlig -> Cleaning -> cleanSpuriousSeq(residuesOverlap, (sequenceOverlap/100), getComplementary);
 
         singleAlig = tempAlig -> Cleaning -> cleanNoAllGaps(false);
-        delete tempAlig;
         
-//         for (int i = 0 ; i < singleAlig->originalResidNumber; i++)
-//             if (singleAlig->saveResidues[i] != -1)
-//                 Debug << singleAlig->saveResidues[i] << endl; 
+        delete tempAlig;
+
     }
     /* -------------------------------------------------------------------- */
 
@@ -2117,7 +2101,7 @@ inline void trimAlManager::clean_alignment()
             tempAlig = origAlig -> Cleaning -> getClustering(origAlig -> Cleaning -> getCutPointClusters(clusters));
 
             singleAlig = tempAlig -> Cleaning -> cleanNoAllGaps(false);
-            
+
             delete tempAlig;
                     
         }
@@ -2143,25 +2127,26 @@ inline void trimAlManager::set_window_size()
 
 inline void trimAlManager::delete_variables()
 {
-    delete singleAlig;
-    delete origAlig;
-    delete[] compareAlignmentsArray;
+    if (singleAlig != NULL)             delete singleAlig;
+    if (origAlig != NULL)               delete origAlig;
+    if (compareAlignmentsArray != NULL) delete [] compareAlignmentsArray;
+    
+    if (similMatrix != NULL)            delete similMatrix;
+    if (delColumns != NULL)             delete [] delColumns;
+    if (delSequences != NULL)           delete [] delSequences;
 
-    delete similMatrix;
-    delete[] delColumns;
+    if (filesToCompare != NULL)         delete [] filesToCompare;
+    if (compareVect != NULL)            delete [] compareVect;
 
-    delete[] filesToCompare;
-    delete[] compareVect;
+    if (outfile != NULL)                delete [] outfile;
+    if (htmlOutFile != NULL)            delete [] htmlOutFile;
 
-    delete[] outfile;
-    delete[] htmlOutFile;
+    if (infile != NULL)                 delete [] infile;
+    if (matrixFile != NULL)             delete [] matrixFile;
 
-    delete[] infile;
-    delete[] matrixFile;
-
-    if(forceFile != NULL) delete forceFile;
-    if(backtransFile != NULL) delete backtransFile;
-    if(backtranslationAlig != NULL) delete backtranslationAlig;
+    if(forceFile != NULL)               delete forceFile;
+    if(backtransFile != NULL)           delete backtransFile;
+    if(backtranslationAlig != NULL)     delete backtranslationAlig;
 }
 
 void trimAlManager::menu(void)

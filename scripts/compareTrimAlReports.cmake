@@ -3,13 +3,13 @@ macro(compare program_a program_b command_list)
 
  string(RANDOM LENGTH 20 RNUMBER)
 
-    execute_process(COMMAND ${program_a} ${command_list} -out "/tmp/in${RNUMBER}" )
+    execute_process(COMMAND ${program_a} -out /dev/null ${command_list} "/tmp/in${RNUMBER}" )
     
     if (NOT EXISTS /tmp/in${RNUMBER})
         message ( WARNING "Original algorithm failed to make an output file. This may be caused by an empty alignment after cleanse. Don't trying with updated algorithm." )
 
     else()
-        execute_process(COMMAND ${program_b} ${command_list} -out "/tmp/out${RNUMBER}" )
+        execute_process(COMMAND ${program_b} -out /dev/null ${command_list}  "/tmp/out${RNUMBER}" )
         execute_process(COMMAND ${CMAKE_COMMAND} -E compare_files "/tmp/in${RNUMBER}" "/tmp/out${RNUMBER}" RESULT_VARIABLE returnValue)
         
         if (${returnValue})
@@ -26,4 +26,3 @@ endmacro(compare)
 
 string(REPLACE " " ";" command_list ${command})
 compare(${program_a} ${program_b} "${command_list}")
-

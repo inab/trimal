@@ -7,7 +7,7 @@ _internalReport::ReportSystem Debug = _internalReport::ReportSystem();
 
 VerboseLevel Level = VerboseLevel::ERROR;
 
-const std::map<InfoCode, const char *> InfoMessages = 
+const std::map<InfoCode, const char *> _internalReport::ReportSystem::InfoMessages = 
 {
     { InfoCode::CuttingSequence, 
         "Cutting sequence \"[ŧag]\" at first appearance of stop codon \"[tag]\" (residue \"[tag]\") at position [tag] (length: [tag] \")" }, 
@@ -16,7 +16,7 @@ const std::map<InfoCode, const char *> InfoMessages =
         "Try with specific comparison file window value. Parameter -cw" }, 
 };
     
-const std::map<WarningCode, const char *> WarningMessages = 
+const std::map<WarningCode, const char *> _internalReport::ReportSystem::WarningMessages = 
 {
     { WarningCode::RemovingOnlyGapsColumn, 
         "Removing column '[tag]' composed only by gaps" }, 
@@ -38,7 +38,7 @@ const std::map<WarningCode, const char *> WarningMessages =
         
 };
     
-const std::map<ErrorCode, const char *> ErrorMessages = 
+const std::map<ErrorCode, const char *> _internalReport::ReportSystem::ErrorMessages = 
 {
     { ErrorCode::AlignmentNotLoaded, 
         "Alignment not loaded: \" [tag] \" Check the file's content" }, 
@@ -294,6 +294,7 @@ void _internalReport::ReportSystem::PrintCodesAndMessages()
         case VerboseLevel::ERROR:
             std::cout << "[VerboseLevel] Error" << std::endl;
             break;
+        case VerboseLevel::DEBUG: break;
     }
 
     for (int i = 1; i < InfoCode::__MAXINFO ; i++)

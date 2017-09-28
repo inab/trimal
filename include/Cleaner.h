@@ -242,7 +242,7 @@ class Cleaner {
      /**
       \brief Method that identifies and removes columns and sequences composed only by gaps.
       */
-     void removeAllGapsSeqsAndCols(void);
+     void removeAllGapsSeqsAndCols(bool seqs = true, bool cols = true);
 /**
       \brief Setter method to Terminal Only Flag.
       \param terminalOnly_ New vlue of the Terminal Only Flag.

@@ -153,48 +153,50 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
             cerr << "ERROR: Format specified wasn't recognized" << endl << endl;
             return false;
         }
-        
-        // Tranform the list of std::string states to a ReadWriteBaseState list.
-        bool recognized = true;
-        std::vector<ReadWriteBaseState*> outStates = std::vector<ReadWriteBaseState*>();
+        else 
         {
-            recognized = false;
-            for (std::string outFormat : *outFormats)
+            // Tranform the list of std::string states to a ReadWriteBaseState list.
+            bool recognized;
+            std::vector<ReadWriteBaseState*> outStates = std::vector<ReadWriteBaseState*>();
             {
-                for(ReadWriteBaseState* state : available_states)
+                for (std::string outFormat : *outFormats)
                 {
-                    if (state->RecognizeOutputFormat(outFormat))
+                    recognized = false;
+                    for(ReadWriteBaseState* state : available_states)
                     {
-                        outStates.push_back(state);
-                        recognized = true;
+                        if (state->RecognizeOutputFormat(outFormat))
+                        {
+                            outStates.push_back(state);
+                            recognized = true;
+                        }
+                    }
+                    if (!recognized)
+                    {
+                        cerr << "ERROR: Cannot recognize output format " << outFormat << endl << endl;
+                        return false; 
                     }
                 }
-                if (!recognized)
-                {
-                    cerr << "ERROR: Cannot recognize output format " << outFormat << endl << endl;
-                    return false; 
-                }
             }
+            ofstream outFileHandler;
+            bool isCorrect = true;
+            string filename_2;
+            for (ReadWriteBaseState * state : outStates)
+            {
+                filename_2 = utils::ReplaceString(filename, "[extension]", state->extension);
+                utils::ReplaceStringInPlace(filename_2, "[format]", state->name);
+                outFileHandler.open(filename_2);
+                if(!state -> SaveAlignment(alignment, &outFileHandler, &alignment->filename))
+                {
+                    cerr << "ERROR: Alignment couldn't be saved on " << state->name << " format" << endl << endl;
+                    isCorrect = false;
+                }
+                
+                outFileHandler.close();
+            }
+            return isCorrect;
         }
         
 
-        ofstream outFileHandler;
-        bool isCorrect = true;
-        string filename_2;
-        for (ReadWriteBaseState * state : outStates)
-        {
-            filename_2 = utils::ReplaceString(filename, "[extension]", state->extension);
-            utils::ReplaceStringInPlace(filename_2, "[format]", state->name);
-            outFileHandler.open(filename_2);
-            if(!state -> SaveAlignment(alignment, &outFileHandler, &alignment->filename))
-            {
-                cerr << "ERROR: Alignment couldn't be saved on " << state->name << " format" << endl << endl;
-                isCorrect = false;
-            }
-            
-            outFileHandler.close();
-        }
-        return isCorrect;
     
     }
     return false;

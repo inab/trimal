@@ -182,9 +182,11 @@ public:
 
     bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, newAlignment * proteinAlignment);
 
-    bool alignmentSummaryHTML(char *destFile, int residues, int seqs, int *selectedRes, int *selectedSeq, float *consValues);
+//     bool alignmentSummaryHTML(char *destFile, int residues, int seqs, int *selectedRes, int *selectedSeq, float *consValues);
     
-    bool alignmentSummarySVG(char* destFile, int residues, int seqs, int* selectedRes, int* selectedSeq, float* consValues, float blocks = 4.0F);
+    bool alignmentSummaryHTML(newAlignment& _trimmedAlignment, char *destFile, float *consValues);
+    
+    bool alignmentSummarySVG(newAlignment & _trimmedAlignment, char *destFile, float *consValues, float blocks = 4.0F);
 
     bool alignmentColourHTML(ostream &file);
     

@@ -72,25 +72,27 @@ int Cleaner::selectMethod(void) {
 
 newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gInCol, bool complementary) {
     
-    int i, j, k, ij, resCounter, counter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
+    int i, ii, j, k, ij, z, x, resCounter, counter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
     newAlignment *newAlig = new newAlignment(*_alignment);
-//     newValues counter;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Select the columns with a gaps value less or equal
-     * than the cut point. */
-    for(i = 0, resCounter = 0; i < _alignment->originalResidNumber; i++)
+
+    /* Select the columns with a gaps value less or equal than the cut point. */
+    for(i = 0, resCounter = 0, ii = 0; i < _alignment->originalResidNumber; i++)
+    {
         if (_alignment->saveResidues[i] != -1)
         {
-            if(gInCol[i] <= cut) resCounter++;
-            else newAlig->saveResidues[i] = -1;
+            if(gInCol[ii] <= cut) resCounter++;
+            else newAlig->saveResidues[ii] = -1;
+            ii++;
         }
+        
+    }
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Compute, if it's necessary, the number of columns
      * necessary to achieve the minimum number of columns
      * fixed by coverage parameter. */
-    NumberOfResiduesToAchieveBaseLine = utils::roundInt((((baseLine/100.0) - (float) resCounter/_alignment->residNumber)) * _alignment->residNumber);
+    NumberOfResiduesToAchieveBaseLine = utils::roundInt((((baseLine * 0.01F) - (float) resCounter/_alignment->residNumber)) * _alignment->residNumber);
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
@@ -101,26 +103,28 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gI
         resCounter += NumberOfResiduesToAchieveBaseLine;
 
         /* Allocate memory */
-        vectAux = new int[_alignment->originalResidNumber];
+        vectAux = new int[_alignment->residNumber];
 
         /* Sort a copy of the gInCol vector, and take the value of the column that marks the % baseline */
-        utils::copyVect((int *) gInCol, vectAux, _alignment->originalResidNumber);
-        utils::quicksort(vectAux, 0, _alignment->originalResidNumber - 1);
+        utils::copyVect((int *) gInCol, vectAux, _alignment->residNumber);
+        utils::quicksort(vectAux, 0, _alignment->residNumber - 1);
 
-        for (int x = (int) ((float)(_alignment->residNumber - 1) * (baseLine)/100.0), i = 0, z = 0; i < _alignment->originalResidNumber && z < x ; i++)
+        
+        
+        for (x = (int) ((float)(_alignment->residNumber - 1) * (baseLine)/100.0), i = 0, z = 0; i < _alignment->originalResidNumber && z < x ; i++)
         {
             if (_alignment->saveResidues[i] != -1) continue;
             z++;
         }
 
-        cut = vectAux[i];
+        cut = vectAux[z];
 
         /* Deallocate memory */
         delete [] vectAux;
     }
 
     // Start with a blocksize (k) = 0.5% alignment size.
-    for(k = utils::roundInt(0.005 * newAlig->residNumber); (k >= 0) && (NumberOfResiduesToAchieveBaseLine > 0); k--)
+    for(k = utils::roundInt(0.005F * newAlig->residNumber); (k >= 0) && (NumberOfResiduesToAchieveBaseLine > 0); k--)
     {
         // Start at the middle. Go to both ends: i goes to the left, j goes to the right, ij as a helper for both sides.
         for(i = (_alignment->originalResidNumber/2), j = (i + 1); NumberOfResiduesToAchieveBaseLine > 0 && (i > 0 || j < newAlig->originalResidNumber - 1); i--, j++)
@@ -207,6 +211,7 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gI
         }
     }
 
+
     /* Keep only columns blocks bigger than an input columns block size */
     for (i = 0, pos = 0, counter = 0; i < newAlig->originalResidNumber; i++)
     {
@@ -245,8 +250,10 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gI
         newAlig-> Cleaning -> computeComplementaryAlig(true, false);
 
     newAlig->Cleaning->removeAllGapsSeqsAndCols();
+    
+    newAlig->residNumber = resCounter;
 
-    newAlig->updateSequencesAndResiduesNums();
+//     newAlig->updateSequencesAndResiduesNums();
 
     /* Return the new _alignmentment reference */
     return newAlig;
@@ -768,24 +775,6 @@ newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, 
             newAlig->saveResidues[i-pos--] = -1;
         }
     }
-    
-//     Debug << _alignment -> originalResidNumber << endl;
-//     
-//     Debug << setw(20) << left << "Save Residues" << " " 
-//             << setw(20) << left << "Gaps Window" << " " 
-//             << setw(20) << left << "Q" << " " 
-//             << setw(20) << left << "MDK" << " " 
-//             << setw(20) << left << "MDK_W" << endl << endl;
-//     
-//     
-//     for(i = 0; i < _alignment->originalResidNumber; i++)
-//     {
-//         Debug << setw(20) << left << newAlig->saveResidues[i] << " " 
-//              << setw(20) << left << _alignment->sgaps->gapsWindow[i] << " " 
-//              << setw(20) << left << _alignment->scons->Q[i] << " " 
-//              << setw(20) << left << _alignment->scons->MDK[i] << " " 
-//              << setw(20) << left << _alignment->scons->MDK_Window[i] << endl;
-//     }
 
     /* If the flag -terminalony is set, apply a method to look for internal
      * boundaries and get back columns inbetween them, if they exist */
@@ -802,7 +791,7 @@ newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, 
     /* Compute new sequences and columns numbers */
     
     newAlig->Cleaning->removeAllGapsSeqsAndCols();
-    newAlig->updateSequencesAndResiduesNums();
+//     newAlig->updateSequencesAndResiduesNums(false, true);
 
     return newAlig;
 }
@@ -827,8 +816,6 @@ newAlignment* Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, 
     /* Check for any additional column/sequence to be removed */
     /* Compute new sequences and columns numbers */
     newAlig->Cleaning->removeAllGapsSeqsAndCols();
-
-
     
     return newAlig;
 }
@@ -1392,8 +1379,8 @@ newAlignment * Cleaner::getClustering(float identityThreshold) {
     {
         newAlig -> saveSequences[clustering[i]] = clustering[i];
     }
-
-    newAlig -> sequenNumber = clustering[0];
+    
+    newAlig->sequenNumber = clustering[0];
 
     delete [] clustering;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1639,62 +1626,70 @@ newValues Cleaner::removeCols_SeqsAllGaps(void) {
     return counter;
 }
 
-void Cleaner::removeAllGapsSeqsAndCols(void) {
-    int i, j, valid, gaps;
+void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) {
+    int i, j, valid, gaps, counter;
 //     return;
     // Start checking the sequences.
-    for (i = 0; i < _alignment->originalSequenNumber; i++)
+    if (seqs)
     {
-        // Forget about sequences that are already rejected
-        if (_alignment->saveSequences[i] == -1) continue;
-
-        // Iterate over all residues
-        for (j = 0 ; j < _alignment->sequences[i].length(); j++)
-        {
-            // Forget about residues that are already rejected
-            if (_alignment->saveResidues[j] == -1)
-                continue;
-            // Stop if one non-gap residue is found on the sequence
-            if (_alignment->sequences[i][j] != '-')
-                break;
-        }
-
-        // If we haven't early-stopped due to finding a non-gap residue, j == sequenceLenght
-        if (j == _alignment->sequences[i].length())
-        {
-            if(keepSequences) {
-                Debug.Report(WarningCode::KeepingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
-            } else {
-                Debug.Report(WarningCode::RemovingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
-                _alignment -> saveSequences[i] = -1;
-                _alignment -> sequenNumber --;
-            }
-        }
-    }
-
-    // Iterate over the residues
-    for (j = 0; j < _alignment->originalResidNumber; j++)
-    {
-        // Forget about already discarded residues;
-        if (_alignment->saveResidues[j] == -1) continue;
-
-        // Check the residue position on each sequence.
-        for (i = 0; i < _alignment->originalSequenNumber; i++)
+        for (i = 0, counter = 0; i < _alignment->originalSequenNumber; i++)
         {
             // Forget about sequences that are already rejected
-            if (_alignment->saveSequences[i] == -1)
-                continue;
-            // Stop if a non gap residue is found on the column
-            if (_alignment->sequences[i][j] != '-')
-                break;
-        }
+            if (_alignment->saveSequences[i] == -1) continue;
 
-        // If we didn't early-stop due to finding a non-gap residue, j == sequenNumber
-        if (i == _alignment->originalSequenNumber)
-        {
-            _alignment->saveResidues[j] = -1;
-            _alignment->residNumber --;
+            // Iterate over all residues
+            for (j = 0 ; j < _alignment->sequences[i].length(); j++)
+            {
+                // Forget about residues that are already rejected
+                if (_alignment->saveResidues[j] == -1)
+                    continue;
+                // Stop if one non-gap residue is found on the sequence
+                if (_alignment->sequences[i][j] != '-')
+                    break;
+            }
+
+            // If we haven't early-stopped due to finding a non-gap residue, j == sequenceLenght
+            if (j == _alignment->sequences[i].length())
+            {
+                if(keepSequences) {
+                    Debug.Report(WarningCode::KeepingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
+                    counter++;
+                } else {
+                    Debug.Report(WarningCode::RemovingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
+                    _alignment -> saveSequences[i] = -1;
+                }
+            }
+            else counter++;
         }
+        _alignment->sequenNumber = counter;
+    }
+    if (cols)
+    {
+        // Iterate over the residues
+        for (j = 0, counter = 0; j < _alignment->originalResidNumber; j++)
+        {
+            // Forget about already discarded residues;
+            if (_alignment->saveResidues[j] == -1) continue;
+
+            // Check the residue position on each sequence.
+            for (i = 0; i < _alignment->originalSequenNumber; i++)
+            {
+                // Forget about sequences that are already rejected
+                if (_alignment->saveSequences[i] == -1)
+                    continue;
+                // Stop if a non gap residue is found on the column
+                if (_alignment->sequences[i][j] != '-')
+                    break;
+            }
+
+            // If we didn't early-stop due to finding a non-gap residue, j == sequenNumber
+            if (i == _alignment->originalSequenNumber)
+            {
+                _alignment->saveResidues[j] = -1;
+            }
+            else counter++;
+        }
+        _alignment->residNumber = counter;
     }
 }
 

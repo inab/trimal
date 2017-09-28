@@ -194,9 +194,9 @@ public:
 
     VerboseLevel Level;
 
-    const std::map<InfoCode, const char *>       InfoMessages ;
-    const std::map<WarningCode, const char *>    WarningMessages ;
-    const std::map<ErrorCode, const char *>      ErrorMessages ;
+    static const std::map<InfoCode, const char *>       InfoMessages ;
+    static const std::map<WarningCode, const char *>    WarningMessages ;
+    static const std::map<ErrorCode, const char *>      ErrorMessages ;
 
 
     /**
