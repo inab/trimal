@@ -1505,10 +1505,9 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
             strcpy(filesToCompare[i], nline.c_str());
             /* -------------------------------------------------------------------- */
 
-            if ((compareAlignmentsArray[i] = ReadWriteMachine.loadAlignment(filesToCompare[i])))
+            if ((compareAlignmentsArray[i] = ReadWriteMachine.loadAlignment(filesToCompare[i])) == NULL)
             {
                 Debug.Report(ErrorCode::AlignmentNotLoaded, new std::string[1] { filesToCompare[i] });
-//                 cerr << endl << "ERROR: Alignment not loaded: \"" << filesToCompare[i] << "\". Check the file's content." << endl << endl;
                 hasError = true;
             }
 
@@ -1517,12 +1516,13 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
                 if(!compareAlignmentsArray[i] -> isFileAligned())
                 {
                     Debug.Report(ErrorCode::NotAligned, new std::string[1] {filesToCompare[i]} );
-//                     cerr << endl << "ERROR: File " << filesToCompare[i] << " is not aligned. Sequences in the input alignments should be aligned in order to use this method." << endl << endl;
                     hasError = true;
                 }
                 else
                 {
                     compareAlignmentsArray[i] -> SequencesMatrix = new sequencesMatrix(compareAlignmentsArray[i]);
+//                     compareAlignmentsArray[i] -> SequencesMatrix = new sequencesMatrix();
+                    
 
                     if(compareAlignmentsArray[i] -> getNumAminos() > maxAminos)
                         maxAminos = compareAlignmentsArray[i] -> getNumAminos();
@@ -1530,7 +1530,6 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
                     if((compareAlignmentsArray[i] -> getAlignmentType() != prevType) && (prevType != -1))
                     {
                         Debug.Report(ErrorCode::AlignmentTypesNotMatching);
-//                         cerr << endl << "ERROR: The alignments' datatypes are different. Check your dataset." << endl << endl;
                         hasError = true;
                     }
                     else
@@ -1556,7 +1555,6 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
                 else if(consistencyWindow != -1)
                     compareFiles::applyWindow(compareAlignmentsArray[referFile] -> getNumAminos(), consistencyWindow, compareVect);
                    origAlig = ReadWriteMachine.loadAlignment(filesToCompare[referFile]);
-//                 origAlig -> ReadWrite -> loadAlignment (filesToCompare[referFile]);
             }
             else
             {
@@ -1571,7 +1569,10 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
         }
         
         /* -------------------------------------------------------------------- */
-
+        if (oformats.size() == 0)
+        {
+            oformats.push_back(ReadWriteMachine.getFileFormatName(filesToCompare[referFile]));
+        }
         /* -------------------------------------------------------------------- */
         for(i = 0; i < numfiles; i++)
         {
@@ -1580,7 +1581,7 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
         }
         /* -------------------------------------------------------------------- */
     }
-
+// exit(0);
     return hasError;
 
 }
@@ -1680,7 +1681,7 @@ inline void trimAlManager::check_cw_argument()
 
 inline void trimAlManager::check_output_format()
 {
-    if (oformats.size() == 0)
+    if (oformats.size() == 0 && infile)
     {
         oformats.push_back(ReadWriteMachine.getFileFormatName(infile));
     }
@@ -1752,31 +1753,18 @@ int trimAlManager::perform()
     /* -------------------------------------------------------------------- */
     if((svgOutFile != NULL) && (!appearErrors))
         if(!origAlig ->
-           alignmentSummarySVG(*singleAlig, svgOutFile,
-//                                 singleAlig -> getNumAminos(), 
-//                                 singleAlig -> getNumSpecies(),
-//                                 singleAlig -> getCorrespResidues(), 
-//                                 singleAlig -> getCorrespSequences(), 
-                                compareVect))
+           alignmentSummarySVG(*singleAlig, svgOutFile, compareVect))
         {
             Debug.Report(ErrorCode::ImpossibleToGenerate, new string[1] { "the SVG output file"});
-//             cerr << endl << "ERROR: It's imposible to generate the SVG output file." << endl << endl;
             appearErrors = true;
         }
     if((htmlOutFile != NULL) && (!appearErrors))
         if(!origAlig ->
-           alignmentSummaryHTML(*singleAlig, htmlOutFile,
-//                                 singleAlig -> getNumAminos(), 
-//                                 singleAlig -> getNumSpecies(),
-//                                 singleAlig -> getCorrespResidues(), 
-//                                 singleAlig -> getCorrespSequences(), 
-                                compareVect))
+           alignmentSummaryHTML(*singleAlig, htmlOutFile, compareVect))
         {
             Debug.Report(ErrorCode::ImpossibleToGenerate, new string[1] { "the HTML output file"});
-//             cerr << endl << "ERROR: It's imposible to generate the HTML output file." << endl << endl;
             appearErrors = true;
         }
-//     cout << "Saving?" << endl;
     /* -------------------------------------------------------------------- */
     if((outfile != NULL) && (!appearErrors))
     {
@@ -1784,7 +1772,6 @@ int trimAlManager::perform()
         if (ReadWriteMachine.saveAlignment(outFileString, &oformats, singleAlig) == false)
         {
             Debug.Report(ErrorCode::ImpossibleToGenerate, new string[1] { "the output file"});
-//             cerr << endl << "ERROR: It's imposible to generate the output file." << endl << endl;
             appearErrors = true;
         }
 
@@ -2315,5 +2302,6 @@ void trimAlManager::examples(void)
 
     cout << "   trimal -in <inputfile> -out <outputfile> -clusters 5 " << endl << endl;
 }
+
 
 

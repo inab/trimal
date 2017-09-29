@@ -270,8 +270,6 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     if(numSeqs != vectAlignments[i] -> getNumSpecies()) {
         Debug.Report(ErrorCode::DifferentNumberOfSequencesInCompareset);
-//       cerr << endl << "ERROR: The files to compare do not have "
-//            << "the same number of sequences" << endl << endl;
       appearErrors = true;
       break;
     }
