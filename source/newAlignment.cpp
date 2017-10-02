@@ -107,8 +107,8 @@ newAlignment::newAlignment(newAlignment& originalAlignment) {
         int i, j;
 
         aligInfo = originalAlignment.aligInfo;
-        
-        
+
+
 
         for ( i = 0, j = 0; i < originalAlignment.originalSequenNumber; i++)
         {
@@ -228,115 +228,75 @@ newAlignment::~newAlignment(void) {
 
 }
 
-newAlignment *newAlignment::getTranslationCDS(int newResidues, int newSequences, int *ColumnsToKeep, string *oldSeqsName, sequencesMatrix *seqMatrix,
-        newAlignment *ProtAlig) {
+newAlignment *newAlignment::getTranslationCDS(/*int newResidues, int newSequences, int *ColumnsToKeep, string *oldSeqsName, sequencesMatrix *seqMatrix,*/
+    newAlignment *ProtAlig) {
 
-    string *matrixAux;
-    newAlignment *newAlig;
-    int i, j, k, l, oldResidues;
-    int *mappedSeqs, *tmpSequence, *selectedRes;
+    int x, y, counter, * mappedSeqs;
+    newAlignment *newAlig = new newAlignment();
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Map the selected protein sequences to the input
      * coding sequences */
-    mappedSeqs = new int[newSequences];
-    for(i = 0; i < sequenNumber; i++)
-        for(j = 0; j < newSequences; j++)
-            if(!seqsName[i].compare(oldSeqsName[j])) {
-                mappedSeqs[j] = i;
+    mappedSeqs = new int[ProtAlig->sequenNumber];
+
+    for (x = 0; x < ProtAlig->originalSequenNumber; x++)
+    {
+        for (y = 0; y < originalSequenNumber; y++)
+        {
+            if (ProtAlig->seqsName[x] == seqsName[y])
+            {
+                mappedSeqs[x] = y;
                 break;
             }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Get the original newAlignment size as well the original
-     * selected/non-selected columns */
-    oldResidues = seqMatrix -> getResidNumber();
-    selectedRes = new int[oldResidues];
-
-    for(i = 0; i < oldResidues; i++)
-        selectedRes[i] = i;
-
-    for(j = 0; j < ColumnsToKeep[0]; j++)
-        selectedRes[j] = -1;
-
-    for(i = 0; i < newResidues - 1; i++)
-        for(j = ColumnsToKeep[i] + 1; j < ColumnsToKeep[i+1]; j++)
-            selectedRes[j] = -1;
-
-    for(j = ColumnsToKeep[newResidues - 1] + 1; j < oldResidues; j++)
-        selectedRes[j] = -1;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* We allocate memory to save the columns selected */
-    matrixAux = new string[newSequences];
-    tmpSequence = new int[oldResidues];
-
-    /* Using the information about which residues for each
-     * sequence was selected by others function, we procefile
-     * these residues to recover the corresponding codons */
-    for(i = 0; i < newSequences; i++)
-        if(seqMatrix -> getSequence(oldSeqsName[i], tmpSequence)) {
-            for(j = 0; j < oldResidues; j++) {
-                if((selectedRes[j] != -1) && (tmpSequence[j] != 0)) {
-
-                    for(k = 3 * (tmpSequence[j] - 1), l = 0; l < 3; k++, l++) {
-                        /* Check whether the nucleotide sequences end has been reached or not.
-                         * If it has been reached, complete backtranslation using indetermination
-                         * symbols 'N' */
-                        if((int) sequences[mappedSeqs[i]].length() > k)
-                            matrixAux[i].resize(matrixAux[i].size() + 1, sequences[mappedSeqs[i]][k]);
-                        else
-                            matrixAux[i].resize(matrixAux[i].size() + 1, 'N');
-                    }
-                } else if(selectedRes[j] != -1) {
-                    matrixAux[i].resize(matrixAux[i].size() + 3, '-');
-                }
-            }
-            /* If there is any problems with a sequence then
-             * the function returns an error */
-        } else {
-            delete[] matrixAux;
-            delete[] tmpSequence;
-            delete[] mappedSeqs;
-            delete[] selectedRes;
-            return NULL;
         }
+        if (y == originalSequenNumber)
+        {
+            Debug << "Name " << ProtAlig->seqsName[x] << " not found" << endl;
+        }
+        else
+        {
+            Debug << "Seq " << y << " ~ Seq " << x << "\t\t\t" << ProtAlig->seqsName[y] << "\t\t" << seqsName[x] << endl;
+        }
+    }
 
-    newAlig = new newAlignment(*this);
-    newAlig -> aligInfo = "";
-    newAlig -> seqsInfo = NULL;
+    newAlig->sequences  = new std::string[ProtAlig->sequenNumber];
+    newAlig->seqsInfo   = new std::string[ProtAlig->sequenNumber];
+    newAlig->seqsName   = new std::string[ProtAlig->sequenNumber];
 
-    newAlig -> sequenNumber =   newSequences;
-    newAlig -> residNumber =    newResidues * 3;
+    for (x = 0; x < ProtAlig->originalSequenNumber; x++)
+    {
 
-    newAlig -> sequences =  new string[newSequences];
-    newAlig -> seqsName =   new string[newSequences];
+        newAlig->sequences[x] = *new std::string[ProtAlig->sequences[x].size()];
+        std::string & current = newAlig->sequences[x];
 
-    newAlig -> dataType =   SequenceTypes::DNA;
-    newAlig -> isAligned =  true;
+        if (ProtAlig->seqsInfo != NULL)
+            newAlig->seqsInfo[x] = *new std::string(ProtAlig->seqsInfo[x]);
+        newAlig->seqsName[x] = *new std::string(ProtAlig->seqsName[x]);
 
-//     newAlig -> reverse =  ProtAlig -> getReverseFlag();
-//     newAlig -> OldResidues = oldResidues * 3; TODO?
-//     newAlig -> residuesNumber = NULL;
-    newAlig -> saveSequences = NULL;
-    newAlig -> saveResidues = NULL;
 
-//     newAlig -> ghWindow = 0;
-//     newAlig -> shWindow = 0;
+        for (y = 0, counter = 0; y < ProtAlig->sequences[x].size(); y++)
+        {
+            if (ProtAlig->saveResidues[y] == -1) 
+            {
+                if (ProtAlig->sequences[x][y] != '-') counter++;
+                continue;
+            }
+            if (ProtAlig->sequences[x][y] == '-') {
+                current.push_back('-');
+                current.push_back('-');
+                current.push_back('-');
+                continue;
+            }
+            current.push_back(sequences[mappedSeqs[x]][counter * 3]);
+            current.push_back(sequences[mappedSeqs[x]][counter * 3 + 1]);
+            current.push_back(sequences[mappedSeqs[x]][counter * 3 + 2]);
+            counter ++;
+        }
+        current.shrink_to_fit();
+    }
 
-    newAlig -> Cleaning -> blockSize = ProtAlig -> getBlockSize();
-
-    newAlig -> identities = NULL;
-
-    newAlig -> saveResidues = new int[residNumber];
-
-    /* Deallocated auxiliar memory */
-    delete [] matrixAux;
-    delete[] mappedSeqs;
-    delete[] tmpSequence;
-    delete[] selectedRes;
+    newAlig->sequenNumber = ProtAlig->sequenNumber;
+    newAlig->originalSequenNumber = ProtAlig->sequenNumber;
 
     return newAlig;
 
@@ -1226,20 +1186,20 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 
 // bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
 //                                         int *selectedRes, int *selectedSeq, float *consValues) {
-// 
+//
 //     /* Generate an HTML file with a visual summary about which sequences/columns
 //      * have been selected and which have not */
-// 
+//
 //     int i, j, k, kj, upper, minHTML, maxLongName, *gapsValues;
 //     string tmpColumn;
 //     float *simValues;
 //     bool *res, *seq;
 //     ofstream file;
 //     char type;
-// 
+//
 //     /* Allocate some local memory */
 //     tmpColumn.reserve(sequenNumber);
-// 
+//
 //     /* Check whether sequences in the alignment are aligned or not.
 //      * Warn about it if there are not aligned. */
 //     if (!isAligned) {
@@ -1247,30 +1207,30 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 // //     cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
 //         return false;
 //     }
-// 
+//
 //     /* Open output file and check that file pointer is valid */
 //     file.open(destFile);
 //     if(!file)
 //         return false;
-// 
+//
 //     /* Compute maximum sequences name length. */
 //     maxLongName = 0;
 //     for(i = 0; i < sequenNumber; i++)
 //         maxLongName = utils::max(maxLongName, seqsName[i].size());
-// 
+//
 //     /* Compute HTML blank spaces */
 //     minHTML = utils::max(25, maxLongName + 10);
-// 
+//
 //     /* Initialize local variables to control which columns/sequences
 //      * will be kept in the output alignment */
 //     res = new bool[residNumber];
 //     for(i = 0; i < residNumber; i++)
 //         res[i] = false;
-// 
+//
 //     seq = new bool[sequenNumber];
 //     for(i = 0; i < sequenNumber; i++)
 //         seq[i] = false;
-// 
+//
 //     /* Record which columns/sequences from original alignment
 //      * have been kept in the final one */
 //     for(i = 0; i < residues; i++)
@@ -1279,10 +1239,10 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 //     }
 //     for(i = 0; i < seqs; i++)
 //     {
-// 
+//
 //         seq[selectedSeq[i]] = true;
 //     }
-// 
+//
 //     /* Recover some stats about different scores from current alignment */
 //     gapsValues = NULL;
 //     if (sgaps != NULL)
@@ -1290,13 +1250,13 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 //     simValues = NULL;
 //     if (scons != NULL)
 //         simValues = scons -> getMdkwVector();
-// 
+//
 //     /* Print HTML header into output file */
 //     file << "<!DOCTYPE html>" << endl << "<html><head>" << endl << "    <meta "
 //          << "http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />"
 //          << endl << "    <title>trimAl v1.4 Summary</title>" << endl
 //          << "    <style type=\"text/css\" media=\"all\">" << endl
-// 
+//
 //          << "    #b  { background-color: #3366ff; }\n"
 //          << "    #r  { background-color: #cc0000; }\n"
 //          << "    #g  { background-color: #33cc00; }\n"
@@ -1305,10 +1265,10 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 //          << "    #o  { background-color: #ff9900; }\n"
 //          << "    #c  { background-color: #46C7C7; }\n"
 //          << "    #y  { background-color: #FFFF00; }\n"
-// 
+//
 //          << "    .sel  { background-color: #B9B9B9; }\n"
 //          << "    .nsel { background-color: #E9E9E9; }\n"
-// 
+//
 //          /* Sets of colors for high-lighting scores intervals */
 //          << "    .c1   { background-color: #FFFBF2; }\n"
 //          << "    .c2   { background-color: #FFF8CC; }\n"
@@ -1322,17 +1282,17 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 //          << "    .c10  { background-color: #918151; color: white; }\n"
 //          << "    .c11  { background-color: #967117; color: white; }\n"
 //          << "    .c12  { background-color: #6E5411; color: white; }\n"
-// 
+//
 //          /* Other HTML elements */
 //          << "    </style>\n  </head>\n\n" << "  <body>\n" << "  <pre>" << endl;
-// 
+//
 //     /* Show information about how many sequences/residues have been selected */
 //     file << "    <span class=sel>Selected Sequences: " << setw(5) << right << seqs
 //          <<" /Selected Residues: " << setw(7) << right << residues << "</span>"
 //          << endl << "    <span class=nsel>Deleted Sequences:  " << setw(5) << right
 //          << sequenNumber - seqs << " /Deleted Residues:  " << setw(7) << right
 //          << residNumber - residues << "</span>" << endl;
-// 
+//
 //     /* Print headers for different scores derived from input alignment/s */
 //     if (gapsValues != NULL)
 //         file << endl << setw(minHTML) << left << "    Gaps Scores:        "
@@ -1342,7 +1302,7 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 //              << "<span  class=c7> <.250 </span><span  class=c8> <.350 </span>"
 //              << "<span  class=c9> <.500 </span><span class=c10> <.750 </span>"
 //              << "<span class=c11> <1.00 </span><span class=c12>  =1=  </span>";
-// 
+//
 //     if (simValues != NULL)
 //         file << endl << setw(minHTML) << left << "    Similarity Scores:  "
 //              << "<span  class=c1>  =0=  </span><span  class=c2> <1e-6 </span>"
@@ -1351,7 +1311,7 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 //              << "<span  class=c7> <.100 </span><span  class=c8> <.250 </span>"
 //              << "<span  class=c9> <.500 </span><span class=c10> <.750 </span>"
 //              << "<span class=c11> <1.00 </span><span class=c12>  =1=  </span>";
-// 
+//
 //     if (consValues != NULL)
 //         file << endl << setw(minHTML) << left << "    Consistency Scores: "
 //              << "<span  class=c1>  =0=  </span><span  class=c2> <.001 </span>"
@@ -1360,30 +1320,30 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 //              << "<span  class=c7> <.250 </span><span  class=c8> <.350 </span>"
 //              << "<span  class=c9> <.500 </span><span class=c10> <.750 </span>"
 //              << "<span class=c11> <1.00 </span><span class=c12>  =1=  </span>";
-// 
+//
 //     if ((gapsValues != NULL) or (simValues == NULL) or (consValues == NULL))
 //         file << endl;
-// 
+//
 //     /* Print Sequences in block of BLOCK_SIZE */
 //     for(j = 0, upper = HTMLBLOCKS; j < residNumber; j += HTMLBLOCKS, upper += \
 //             HTMLBLOCKS) {
-// 
+//
 //         /* Print main columns number */
 //         file << endl << setw(minHTML + 10) << right << (j + 10);
 //         for(i = j + 20; ((i <= residNumber) && (i <= upper)); i += 10)
 //             file << setw(10) << right << (i);
-// 
+//
 //         /* Print special characters to delimit sequences blocks */
 //         file << endl << setw(minHTML + 1) << right;
 //         for(i = j + 1; ((i <= residNumber) && (i <= upper)); i++)
 //             file << (!(i % 10) ? "+" : "=");
 //         file << endl;
-// 
+//
 //         /* Print sequences name */
 //         for(i = 0; i < sequenNumber; i++) {
 //             file << "    <span class=" << ((seq[i]) ? "sel>" : "nsel>") << seqsName[i]
 //                  << "</span>" << setw(minHTML - 4 - seqsName[i].size()) << right << "";
-// 
+//
 //             /* Print residues corresponding to current sequences block */
 //             for(k = j; ((k < residNumber) && (k < upper)); k++) {
 //                 for(kj = 0, tmpColumn.clear(); kj < sequenNumber; kj++)
@@ -1397,16 +1357,16 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 //             }
 //             file << endl;
 //         }
-// 
+//
 //         file << endl << setw(minHTML) << left << "    Selected Cols:      ";
 //         for(k = j; ((k < residNumber) && (k < (j + HTMLBLOCKS))); k++)
 //             file << "<span class=" << (res[k] ? "sel" : "nsel") << "> </span>";
 //         file << endl;
-// 
+//
 //         /* If there is not any score to print, skip this part of the function */
 //         if ((gapsValues == NULL) and (simValues == NULL) and (consValues == NULL))
 //             continue;
-// 
+//
 //         /* Print score colors according to certain predefined thresholds */
 //         if (gapsValues != NULL) {
 //             file << endl << setw(minHTML) << left << "    Gaps Scores:        ";
@@ -1494,15 +1454,15 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 //         }
 //         file << endl;
 //     }
-// 
+//
 //     /* Print HTML footer into output file */
 //     file << "    </pre>" << endl << "  </body>" << endl << "</html>" << endl;
-// 
+//
 //     /* Close output file and deallocate local memory */
 //     file.close();
 //     delete [] seq;
 //     delete [] res;
-// 
+//
 //     return true;
 // }
 
@@ -1547,7 +1507,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment & _trimmedAlignment, char *
 //     res = new bool[originalResidNumber];
 //     for(i = 0; i < originalResidNumber; i++)
 //         res[i] = false;
-// 
+//
 //     seq = new bool[originalSequenNumber];
 //     for(i = 0; i < originalSequenNumber; i++)
 //         seq[i] = false;
@@ -1560,7 +1520,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment & _trimmedAlignment, char *
 //     }
 //     for(i = 0; i < seqs; i++)
 //     {
-// 
+//
 //         seq[selectedSeq[i]] = true;
 //     }
 

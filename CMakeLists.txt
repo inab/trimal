@@ -219,7 +219,25 @@ foreach(file ${files})
                 "../Strimal/source/trimal" "bin/trimal"
                 "-in ${file} -strict -htmlout")
         MATH(EXPR VAR "${VAR}+1")
+        
 endforeach()
+
+compare_outputs(
+            "[.${VAR}.][trimal][Compareset]"
+            "../Strimal/source/trimal" "bin/trimal"
+            "-compareset /home/vfernandez/git/trimal/dataset/alignments_comparison.X")
+    MATH(EXPR VAR "${VAR}+1")
+    
+foreach(method ${automethod})
+compare_outputs(
+            "[.${VAR}.][trimal][Backtrans][${method}]"
+            "../Strimal/source/trimal" "bin/trimal"
+            "-in dataset/example.091.AA.strNOG.ENOG411BWBU.fasta -backtrans dataset/example.091.AA.strNOG.ENOG411BWBU.codon.fa ${method}")
+    MATH(EXPR VAR "${VAR}+1")
+    endforeach()
+    
+    
+
 
 
 # Force tests to be made each time new_trimal is built

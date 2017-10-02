@@ -25,11 +25,11 @@ void trimAlManager::parseArguments(int argc, char *argv[])
     }
 
     for(int i = 1; i < argc; i++ )
-    {  
+    {
         if (appearErrors) break;
 
         info_arguments(&argc, argv, &i);
-        
+
         if (in_argument(&argc, argv, &i))           continue;
         if (out_argument(&argc, argv, &i))          continue;
         if (html_out_argument(&argc, argv, &i))     continue;
@@ -306,13 +306,13 @@ inline bool trimAlManager::matrix_argument(int *argc, char *argv[], int *i)
         return true;
     }
     else if(!strcmp(argv[*i], "--alternative_matrix") && ((*i)+1 != *argc) && (alternative_matrix == -1)) {
-      i++;
-      if (!strcmp(argv[*i], "degenerated_nt_identity"))
-        alternative_matrix = 1;
-      else {
-          Debug.Report(ErrorCode::AlternativeMatrixNotRecognized, argv[*i]);
-        appearErrors = true;
-      }
+        i++;
+        if (!strcmp(argv[*i], "degenerated_nt_identity"))
+            alternative_matrix = 1;
+        else {
+            Debug.Report(ErrorCode::AlternativeMatrixNotRecognized, argv[*i]);
+            appearErrors = true;
+        }
     }
     return false;
 }
@@ -332,7 +332,7 @@ inline bool trimAlManager::compareset_argument(int *argc, char *argv[], int *i)
         compare.close();
 
         compareset = *i;
-       
+
         return true;
     }
     return false;
@@ -467,7 +467,7 @@ inline bool trimAlManager::conservation_threshold_argument(int *argc, char *argv
 //             cerr << endl << "ERROR: The minimal positions value should be a positive real number." << endl << endl;
             appearErrors = true;
         }
-        
+
         return true;
     }
     return false;
@@ -475,12 +475,12 @@ inline bool trimAlManager::conservation_threshold_argument(int *argc, char *argv
 
 bool trimAlManager::select_cols_argument(int *argc, char *argv[], int *i)
 {
-    
-    if(!strcmp(argv[*i], "-selectcols") && 
-        selectCols == false &&
-        (*i+3) < *argc && 
-        !strcmp(argv[++(*i)], "{") && 
-        !strcmp(argv[(*i)+2], "}"))
+
+    if(!strcmp(argv[*i], "-selectcols") &&
+            selectCols == false &&
+            (*i+3) < *argc &&
+            !strcmp(argv[++(*i)], "{") &&
+            !strcmp(argv[(*i)+2], "}"))
     {
         if((delColumns = utils::readNumbers(argv[++(*i)])) == NULL)
         {
@@ -661,7 +661,7 @@ inline bool trimAlManager::max_identity_argument(int *argc, char *argv[], int *i
             Debug.Report(ErrorCode::MaxIdentityNotRecognized);
             appearErrors = true;
         }
-        
+
         return true;
     }
     return false;
@@ -687,7 +687,7 @@ inline bool trimAlManager::clusters_argument(int *argc, char *argv[], int *i)
 //             cerr << endl << "ERROR: The clusters number should be a positive integer number." << endl << endl;
             appearErrors = true;
         }
-        
+
         return true;
     }
     return false;
@@ -839,7 +839,7 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
             sgc = true;
             stats--;
         }
-        
+
         else return false;
     }
     else if((!strcmp(argv[*i], "-sgt")) )
@@ -849,7 +849,7 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
             sgt = true;
             stats--;
         }
-        
+
         else return false;
     }
     else if((!strcmp(argv[*i], "-ssc")) )
@@ -859,7 +859,7 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
             scc = true;
             stats--;
         }
-        
+
         else return false;
     }
     else if((!strcmp(argv[*i], "-sst")) )
@@ -869,7 +869,7 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
             sct = true;
             stats--;
         }
-        
+
         else return false;
     }
     else if((!strcmp(argv[*i], "-sident")) && (!sident))
@@ -889,7 +889,7 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
             sfc = true;
             stats--;
         }
-        
+
         else return false;
     }
     else if((!strcmp(argv[*i], "-sft")) )
@@ -899,10 +899,10 @@ inline bool trimAlManager::stats_arguments(int *argc, char *argv[], int *i)
             sft = true;
             stats--;
         }
-        
+
         else return false;
     }
-    else 
+    else
         return false;
     return true;
 }
@@ -953,11 +953,11 @@ bool trimAlManager::processArguments(char* argv[])
     if (!appearErrors)
     {
         automatedMethodCount = nogaps + noallgaps + gappyout + strict + strictplus + automated1;
-        
+
         check_arguments_incompatibilities();
-        
+
         check_arguments_needs(argv);
-        
+
     }
 
     if(appearErrors)
@@ -971,9 +971,9 @@ bool trimAlManager::processArguments(char* argv[])
 inline bool trimAlManager::check_arguments_incompatibilities()
 {
     // The incompatibilities are checked only once, so there are arguments with no function to check it's incompatibilities although they have.
-    // These are checked within other functions. 
+    // These are checked within other functions.
     // So if argument A is incompatible with B, A may have this checked in it's incompatibilities function, but B may have no function to check them.
-    
+
     check_inFile_incompatibilities();
     check_select_cols_and_seqs_incompatibilities();
     check_thresholds_incompatibilities();
@@ -1003,7 +1003,7 @@ inline bool trimAlManager::check_inFile_incompatibilities()
         {
             Debug.Report(ErrorCode::IncompatibleArguments, new std::string[2] {"-in", "-compareset"} );
 //           cerr << endl << "ERROR: Option -in not valid in combination with -compareset option." << endl << endl;
-          appearErrors = true;
+            appearErrors = true;
         }
         if(forceFile != NULL)
         {
@@ -1025,22 +1025,22 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities()
 //             cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination with threshold options: (-gt || -st || -ct || -cons)." << endl << endl;
             appearErrors = true;
         }
-        
+
         if(automatedMethodCount)
         {
             Debug.Report(ErrorCode::SelectSeqsResAndAutomathedMethodsIncompatibilities);
-//             cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination with automated trimming options:" 
+//             cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination with automated trimming options:"
 //                 << " (-nogaps || -noallgaps || -gappyout || -strict || -strictplus || -automated1)." << endl << endl;
             appearErrors = true;
         }
-        
+
         if((windowSize != -1) || (gapWindow != -1)|| (similarityWindow != -1) || consistencyWindow != -1)
         {
             Debug.Report(ErrorCode::SelectSeqsResAndWindowIncompatibilities);
 //             cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination with window options: (-w || -sw || -gw || -wc)." << endl << endl;
             appearErrors = true;
         }
-        
+
         if (residuesOverlap != -1 || sequenceOverlap != -1)
         {
             Debug.Report(ErrorCode::SelectSeqsResAndOverlapIncompatibilites);
@@ -1054,11 +1054,11 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities()
 //             cerr << endl << "ERROR: Only one method to chose sequences can be applied: (-selectseqs || -clusters || -maxIdentity)." << endl << endl;
             appearErrors = true;
         }
-        
+
         if (selectCols)
             if(blockSize != -1)
             {
-                Debug.Report(ErrorCode::IncompatibleArguments, new std::string[2]{"-selectcols", "-block"});
+                Debug.Report(ErrorCode::IncompatibleArguments, new std::string[2] {"-selectcols", "-block"});
 //                 cerr << endl << "ERROR: Option -selectcols not allowed in combination of column block size option (-block)." << endl << endl;
                 appearErrors = true;
             }
@@ -1076,7 +1076,7 @@ inline bool trimAlManager::check_thresholds_incompatibilities()
 //             cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed." << endl << endl;
             appearErrors = true;
         }
-        
+
         if (conservationThreshold != -1) // TODO is this unique? or a threshold generality?
         {
             if(blockSize != -1)
@@ -1086,14 +1086,14 @@ inline bool trimAlManager::check_thresholds_incompatibilities()
                 appearErrors = true;
             }
         }
-        
+
         if (maxIdentity != -1)
         {
             Debug.Report(ErrorCode::CombinationAmongTrimmingMethods);
 //              cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed." << endl << endl;
-             appearErrors = true;
+            appearErrors = true;
         }
-        
+
         if (clusters != -1)
         {
             Debug.Report(ErrorCode::CombinationAmongTrimmingMethods);
@@ -1121,21 +1121,21 @@ inline bool trimAlManager::check_automated_methods_incompatibilities()
 //             cerr << endl << "ERROR: Combinations between automatic methods and -block options are not allowed." << endl << endl;
             appearErrors = true;
         }
-        
+
         if (clusters != -1)
         {
             Debug.Report(ErrorCode::CombinationAmongTrimmingMethods);
 //             cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
             appearErrors = true;
         }
-        
+
         if (maxIdentity != -1)
         {
             Debug.Report(ErrorCode::CombinationAmongTrimmingMethods);
 //              cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
-             appearErrors = true;
+            appearErrors = true;
         }
-        
+
         if (automatedMethodCount > 1)
         {
             Debug.Report(ErrorCode::CombinationAmongTrimmingMethods);
@@ -1152,7 +1152,7 @@ inline bool trimAlManager::check_max_identity_incompatibilities()
     {
         if((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1) || (consistencyWindow != -1))
         {
-            Debug.Report(ErrorCode::WindowAndArgumentIncompatibilities, new std::string[1]{"-maxIdentity"});
+            Debug.Report(ErrorCode::WindowAndArgumentIncompatibilities, new std::string[1] {"-maxIdentity"});
 //             cerr << endl << "ERROR: Option -maxIdentity not allowed in combination with window values." << endl << endl;
             appearErrors = true;
         }
@@ -1172,7 +1172,7 @@ inline bool trimAlManager::check_clusters_incompatibilities()
     {
         if((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1) || consistencyWindow != -1)
         {
-            Debug.Report(ErrorCode::WindowAndArgumentIncompatibilities, new std::string[1]{"-clusters"});
+            Debug.Report(ErrorCode::WindowAndArgumentIncompatibilities, new std::string[1] {"-clusters"});
 //             cerr << endl << "ERROR: Options -clusters is allowed in combination with window values." << endl << endl;
             appearErrors = true;
         }
@@ -1210,31 +1210,31 @@ inline bool trimAlManager::check_stats_incompatibilities()
 
 inline bool trimAlManager::check_arguments_needs(char* argv[])
 {
-        check_force_selection();
-        check_input_file_with_coding_sequences_argument();
-        check_file_aligned();
-        check_similarity_matrix();
-        check_outputs_coincidence();
-        check_col_numbering();
-        check_residue_and_sequence_overlap();
-        check_output_relevance();
-        check_output_file_with_statistics();
-        check_automated_manual_incompatibilities();
-        check_multiple_files_comparison(argv);
-        check_block_size();
-        check_backtranslations();
-        check_coding_sequences_type();
-        check_and_prepare_coding_sequence();
-        check_backtranslation_infile_names_corresponde();
-        check_cw_argument();
-        check_output_format();
+    check_force_selection();
+    check_input_file_with_coding_sequences_argument();
+    check_file_aligned();
+    check_similarity_matrix();
+    check_outputs_coincidence();
+    check_col_numbering();
+    check_residue_and_sequence_overlap();
+    check_output_relevance();
+    check_output_file_with_statistics();
+    check_automated_manual_incompatibilities();
+    check_multiple_files_comparison(argv);
+    check_block_size();
+    check_backtranslations();
+    check_coding_sequences_type();
+    check_and_prepare_coding_sequence();
+    check_backtranslation_infile_names_corresponde();
+    check_cw_argument();
+    check_output_format();
 }
 
 inline bool trimAlManager::check_codon_behaviour_incompatibility()
 {
     if((!appearErrors) && (ignoreStopCodon) && (splitByStopCodon))
     {
-        Debug.Report(ErrorCode::IncompatibleArguments, new std::string[2]{"-ignorestopcodon", "-splitbystopcodon"});
+        Debug.Report(ErrorCode::IncompatibleArguments, new std::string[2] {"-ignorestopcodon", "-splitbystopcodon"});
 //         cerr << endl << "ERROR: Incompatibility of -ignorestopcodon & -splitbystopcodon parameters. Choose one." << endl << endl;
         appearErrors = true;
         return true;
@@ -1261,10 +1261,10 @@ inline bool trimAlManager::check_combinations_among_thresholds_incompatibility()
 inline bool trimAlManager::check_automated_manual_incompatibilities()
 {
     if((getComplementary) && (!appearErrors))
-        if(!automatedMethodCount && // Are we not using an automated method? 
-            (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && // Neither a threshold method.
-            (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither a sequence and residues semimanual selection methods
-            (maxIdentity == -1) && (clusters == -1)) // Or complex selection of sequences.
+        if(!automatedMethodCount && // Are we not using an automated method?
+                (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && // Neither a threshold method.
+                (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither a sequence and residues semimanual selection methods
+                (maxIdentity == -1) && (clusters == -1)) // Or complex selection of sequences.
         {
             Debug.Report(ErrorCode::TrimmingMethodNeeded, new std::string[1] { "-complementary" });
 //             cerr << endl << "ERROR: The parameter -complementary can only be used with either an automatic or a manual method." << endl << endl;
@@ -1275,10 +1275,10 @@ inline bool trimAlManager::check_automated_manual_incompatibilities()
 
     /* ------------------------------------------------------------------------------------------------------ */
     if((terminalOnly) && (!appearErrors))
-        if(!automatedMethodCount && // Are we not using an automated method? 
-            (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && // Neither a threshold method.
-            (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither a sequence and residues semimanual selection methods
-            (maxIdentity == -1) && (clusters == -1)) // Or complex selection of sequences.
+        if(!automatedMethodCount && // Are we not using an automated method?
+                (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && // Neither a threshold method.
+                (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither a sequence and residues semimanual selection methods
+                (maxIdentity == -1) && (clusters == -1)) // Or complex selection of sequences.
         {
             Debug.Report(ErrorCode::TrimmingMethodNeeded, new std::string[1] { "-terminalonly" });
 //             cerr << endl << "ERROR: The parameter '-terminalonly' can only be used with either an automatic or a manual method." << endl << endl;
@@ -1324,12 +1324,12 @@ inline bool trimAlManager::check_file_aligned()
     if((!appearErrors) && (infile != NULL))
     {
 
-        if((automatedMethodCount || // Are we using an automated method? 
-            (gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || // Are we using any threshold?
-            (selectCols) || (selectSeqs) || (residuesOverlap != -1) || (sequenceOverlap != -1) || // Are we selecting columns or sequences?
-            (stats < 0))  // Are we asking for any stats?
-            &&
-            (!origAlig -> isFileAligned())) // Then we need the alignment to be aligned;
+        if((automatedMethodCount || // Are we using an automated method?
+                (gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || // Are we using any threshold?
+                (selectCols) || (selectSeqs) || (residuesOverlap != -1) || (sequenceOverlap != -1) || // Are we selecting columns or sequences?
+                (stats < 0))  // Are we asking for any stats?
+                &&
+                (!origAlig -> isFileAligned())) // Then we need the alignment to be aligned;
         {
             Debug.Report(ErrorCode::NotAligned, new std::string[1] { infile });
 //             cerr << endl << "ERROR: The sequences in the input alignment should be aligned in order to use any trimming method or statistics." << endl << endl;
@@ -1366,20 +1366,24 @@ inline bool trimAlManager::check_similarity_matrix()
 
 inline bool trimAlManager::check_outputs_coincidence()
 {
-    
-    std::array<char*,8> outFiles 
-        {{
-            htmlOutFile, 
-            outfile, 
-            svgOutFile, 
-            svgStatsOutFile}};
-    std::array<string,8> outFilesNames 
-        {{
-            "html (-htmlout)", 
-            "output (-out)", 
-            "svg (-svgout)", 
-            "svg stats (-svgstats)"}};
-    
+
+    std::array<char*,8> outFiles
+    {{
+            htmlOutFile,
+            outfile,
+            svgOutFile,
+            svgStatsOutFile
+        }
+    };
+    std::array<string,8> outFilesNames
+    {{
+            "html (-htmlout)",
+            "output (-out)",
+            "svg (-svgout)",
+            "svg stats (-svgstats)"
+        }
+    };
+
     for (int i = 0, x = 0; i < outFiles.size(); i++)
     {
         if (outFiles.at(i) != NULL)
@@ -1402,10 +1406,10 @@ inline bool trimAlManager::check_col_numbering()
     if((columnNumbering) && (!appearErrors))
     {
         if( (!automatedMethodCount) && // Are we not using any automated method?
-            (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && (consistencyThreshold == -1) && // Are we not using any threshold?
-            (!selectCols) && (!selectSeqs)) // Neither selecting any column or sequence?
+                (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && (consistencyThreshold == -1) && // Are we not using any threshold?
+                (!selectCols) && (!selectSeqs)) // Neither selecting any column or sequence?
         {
-            Debug.Report(ErrorCode::TrimmingMethodNeeded, new std::string[1]{"-colnumbering"} );
+            Debug.Report(ErrorCode::TrimmingMethodNeeded, new std::string[1] {"-colnumbering"} );
 //             cerr << endl << "ERROR: Paramenter -colnumbering can only be used with any trimming method." << endl << endl;
             appearErrors = true;
             return true;
@@ -1425,7 +1429,7 @@ inline bool trimAlManager::check_residue_and_sequence_overlap()
             appearErrors = true;
             return true;
         }
-        
+
         else if((residuesOverlap == -1) && (sequenceOverlap != -1))
         {
             Debug.Report(ErrorCode::SequenceAndResiduesOverlapMutuallyNeeded, new string[1] {"sequences overlap"} );
@@ -1441,7 +1445,7 @@ inline bool trimAlManager::check_output_relevance()
 {
     if(((htmlOutFile != NULL) || (svgOutFile != NULL) || (svgStatsOutFile != NULL)) && (!appearErrors))
     {
-        if(!automatedMethodCount && // Are we not using any automated method? 
+        if(!automatedMethodCount && // Are we not using any automated method?
                 (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && (consistencyThreshold == -1) && // Neither using thresholds
                 (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither selecting columns or sequences?
                 (maxIdentity == -1) && (clusters == -1)) // Neither using other selecting methods?
@@ -1468,9 +1472,9 @@ inline bool trimAlManager::check_output_file_with_statistics()
         stats--; //NOTE Why?
 
         if(((automatedMethodCount) || // If we are using an automated method
-            (gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1)) // Or a manual threshold
-            
-            && (outfile == NULL)) // We need the outFile to be specified. 
+                (gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1)) // Or a manual threshold
+
+                && (outfile == NULL)) // We need the outFile to be specified.
         {
             Debug.Report(ErrorCode::OutFileNeededWhenPrintingStatistics);
 //             cerr << endl << "ERROR: An output file should be defined in order to get the alignment's statistics." << endl << endl;
@@ -1491,7 +1495,7 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
         filesToCompare = new char*[numfiles];
 
         /* -------------------------------------------------------------------- */
-        
+
         compare.open(argv[compareset], ifstream::in);
 
         for(i = 0; (i < numfiles)  && (!appearErrors); i++)
@@ -1522,7 +1526,7 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
                 {
                     compareAlignmentsArray[i] -> SequencesMatrix = new sequencesMatrix(compareAlignmentsArray[i]);
 //                     compareAlignmentsArray[i] -> SequencesMatrix = new sequencesMatrix();
-                    
+
 
                     if(compareAlignmentsArray[i] -> getNumAminos() > maxAminos)
                         maxAminos = compareAlignmentsArray[i] -> getNumAminos();
@@ -1554,7 +1558,7 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
                     compareFiles::applyWindow(compareAlignmentsArray[referFile] -> getNumAminos(), windowSize, compareVect);
                 else if(consistencyWindow != -1)
                     compareFiles::applyWindow(compareAlignmentsArray[referFile] -> getNumAminos(), consistencyWindow, compareVect);
-                   origAlig = ReadWriteMachine.loadAlignment(filesToCompare[referFile]);
+                origAlig = ReadWriteMachine.loadAlignment(filesToCompare[referFile]);
             }
             else
             {
@@ -1567,7 +1571,7 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
                     compareFiles::applyWindow(origAlig -> getNumAminos(), consistencyWindow, compareVect);
             }
         }
-        
+
         /* -------------------------------------------------------------------- */
         if (oformats.size() == 0)
         {
@@ -1589,7 +1593,7 @@ inline bool trimAlManager::check_block_size()
 {
     if((!appearErrors) && (origAlig -> getNumAminos() < (blockSize/4)))
     {
-        Debug.Report(ErrorCode::BlocksizeTooBig, new string[1]{ std::to_string(origAlig-> getNumAminos() / 4) });
+        Debug.Report(ErrorCode::BlocksizeTooBig, new string[1] { std::to_string(origAlig-> getNumAminos() / 4) });
 //         cerr << endl << "ERROR: The block size value is too big. Please, choose another one smaller than residues number / 4." << endl << endl;
         appearErrors = true;
         return true;
@@ -1632,7 +1636,7 @@ inline bool trimAlManager::check_backtranslations()
 inline bool trimAlManager::check_coding_sequences_type()
 {
     if((!appearErrors) && (backtransFile != NULL) && // Is there a backtranslation file?
-        (!backtranslationAlig -> getAlignmentType() & SequenceTypes::DNA )) // If so, is it from DNA?
+            (!backtranslationAlig -> getAlignmentType() & SequenceTypes::DNA )) // If so, is it from DNA?
     {
         Debug.Report(ErrorCode::BacktransAlignIsDNA);
 //         cerr << endl << "ERROR: Check your Coding sequences file. It has been detected other kind of biological sequences." << endl << endl;
@@ -1644,8 +1648,8 @@ inline bool trimAlManager::check_coding_sequences_type()
 
 inline bool trimAlManager::check_and_prepare_coding_sequence()
 {
-    if((!appearErrors)  && (backtransFile != NULL) && 
-        (!backtranslationAlig -> prepareCodingSequence(splitByStopCodon, ignoreStopCodon, origAlig)))
+    if((!appearErrors)  && (backtransFile != NULL) &&
+            (!backtranslationAlig -> prepareCodingSequence(splitByStopCodon, ignoreStopCodon, origAlig)))
     {
         // Error reporting is made by prepareCodingSequence function.
         appearErrors = true;
@@ -1689,13 +1693,7 @@ inline void trimAlManager::check_output_format()
 
 int trimAlManager::perform()
 {
-    
-//     statisticsGaps sgapss = statisticsGaps(origAlig);
-//     
-//     sgapss.applyWindow(4);
-//     return 255;
-    
-    
+
     if (appearErrors) return -1;
 
     if(conservationThreshold == -1)
@@ -1711,21 +1709,18 @@ int trimAlManager::perform()
 
     if(blockSize != -1)
         origAlig -> setBlockSize(blockSize);
-    
+
     if (create_or_use_similarity_matrix())
         return -2;
 
     print_statistics();
-
-    if(backtransFile != NULL)
-        seqMatrix = origAlig -> SequencesMatrix;
-    
 
     /* -------------------------------------------------------------------- */
 //     cout << "Cleaning" << endl;
     clean_alignment();
 
     /* -------------------------------------------------------------------- */
+
     if(singleAlig == NULL)
     {
         singleAlig = origAlig;
@@ -1734,33 +1729,41 @@ int trimAlManager::perform()
 
     if(backtransFile != NULL)
     {
-        if(sequencesNames != NULL) 
-            delete [] sequencesNames;
-        
-        sequencesNames = new string[singleAlig -> getNumSpecies()];
+//         if(sequencesNames != NULL)
+//             delete [] sequencesNames;
 
-        singleAlig -> getSequences(sequencesNames);
+//         if(backtransFile != NULL)
+//             seqMatrix = singleAlig -> SequencesMatrix;
+// 
+//         if (seqMatrix == NULL)
+//             seqMatrix = new sequencesMatrix(singleAlig);
 
-        singleAlig = backtranslationAlig -> getTranslationCDS(
-                                                singleAlig -> getNumAminos(), 
-                                                singleAlig -> getNumSpecies(),
-                                                singleAlig -> getCorrespResidues(), 
-                                                sequencesNames, 
-                                                seqMatrix, 
-                                                singleAlig);
+
+//         sequencesNames = new string[singleAlig -> getNumSpecies()];
+// 
+//         singleAlig -> getSequences(sequencesNames);
+
+        singleAlig = backtranslationAlig -> getTranslationCDS(/*
+                         singleAlig -> getNumAminos(),
+                         singleAlig -> getNumSpecies(),
+                         singleAlig -> getCorrespResidues(),
+                         sequencesNames,
+                         seqMatrix,
+                         */singleAlig);
     }
+
 
     /* -------------------------------------------------------------------- */
     if((svgOutFile != NULL) && (!appearErrors))
         if(!origAlig ->
-           alignmentSummarySVG(*singleAlig, svgOutFile, compareVect))
+                alignmentSummarySVG(*singleAlig, svgOutFile, compareVect))
         {
             Debug.Report(ErrorCode::ImpossibleToGenerate, new string[1] { "the SVG output file"});
             appearErrors = true;
         }
     if((htmlOutFile != NULL) && (!appearErrors))
         if(!origAlig ->
-           alignmentSummaryHTML(*singleAlig, htmlOutFile, compareVect))
+                alignmentSummaryHTML(*singleAlig, htmlOutFile, compareVect))
         {
             Debug.Report(ErrorCode::ImpossibleToGenerate, new string[1] { "the HTML output file"});
             appearErrors = true;
@@ -1776,7 +1779,7 @@ int trimAlManager::perform()
         }
 
     }
-    
+
     else if((stats >= 0) && (!appearErrors))
         ReadWriteMachine.saveAlignment("", &oformats, singleAlig);
 
@@ -1800,9 +1803,9 @@ inline void trimAlManager::print_statistics()
         std::string filename = svgStatsOutFile;
         std::string linename = "";
         std::string color = "";
-        
+
         utils::streamSVG(NULL, NULL, 0, NULL, NULL, & title, & filename);
-        
+
         if(origAlig-> Statistics -> calculateGapStats())
         {
             float acm = 0.0F;
@@ -1811,7 +1814,7 @@ inline void trimAlManager::print_statistics()
             color = "red";
             linename = "gaps";
             utils::streamSVG(& x, & y, 0, & linename, & color, NULL, NULL);
-            
+
             for(i = 0, acm = 0; i <= origAlig -> sgaps -> maxGaps; i++) {
                 /* If the columns' number with this gaps' number is not equal to zero, we will count the columns. */
                 if(origAlig -> sgaps -> numColumnsWithGaps[i] != 0) {
@@ -1823,7 +1826,7 @@ inline void trimAlManager::print_statistics()
                 }
             }
         }
-        
+
         if(origAlig -> Statistics -> calculateConservationStats())
         {
             color = "blue";
@@ -1838,9 +1841,9 @@ inline void trimAlManager::print_statistics()
             vectAux = new float[origAlig -> scons -> residues];
 
             /* Select the conservation's value source and copy that vector in a auxiliar vector */
-            if(origAlig -> scons -> MDK_Window != NULL) 
+            if(origAlig -> scons -> MDK_Window != NULL)
                 utils::copyVect(origAlig -> scons -> MDK_Window, vectAux, origAlig -> scons -> residues);
-            else 
+            else
                 utils::copyVect(origAlig -> scons -> MDK, vectAux, origAlig -> scons -> residues);
 
             /* Sort the auxiliar vector. */
@@ -1848,7 +1851,8 @@ inline void trimAlManager::print_statistics()
 
             /* Initializate some values */
             refer = vectAux[origAlig -> scons -> residues-1];
-            acm = 0; num = 1;
+            acm = 0;
+            num = 1;
 
             /* Count the columns with the same conservation's value and compute this information to shows the accunulative
                 statistics in the alignment. */
@@ -1872,11 +1876,11 @@ inline void trimAlManager::print_statistics()
             /* Deallocate the reserved memory. */
             delete [] vectAux;
         }
-        
+
         utils::streamSVG(NULL, NULL, 0, NULL, NULL, NULL, NULL);
     }
-    
-    
+
+
     if (sgt || sgc || scc || sct )
     {
         if(sgc)
@@ -1884,7 +1888,7 @@ inline void trimAlManager::print_statistics()
             origAlig -> Statistics -> printStatisticsGapsColumns();
             stats++;
         }
-        
+
         if(sgt)
         {
             origAlig -> Statistics -> printStatisticsGapsTotal();
@@ -1908,7 +1912,7 @@ inline void trimAlManager::print_statistics()
             origAlig -> printSeqIdentity();
             stats++;
         }
-        
+
         if(soverlap) {
             origAlig -> printSeqOverlap();
             stats++;
@@ -1923,7 +1927,7 @@ inline void trimAlManager::print_statistics()
         }
         cout << endl;
     }
-    
+
 }
 
 inline bool trimAlManager::create_or_use_similarity_matrix()
@@ -1931,17 +1935,17 @@ inline bool trimAlManager::create_or_use_similarity_matrix()
     if((strict) || (strictplus) || (automated1) || (similarityThreshold != -1.0) || (scc == 1) || (sct == 1))
     {
         similMatrix = new similarityMatrix();
-        
+
         // Simple Matrix
         if(matrixFile != NULL)
             similMatrix -> loadSimMatrix(matrixFile);
-        
+
         // Alternative Matrix
-        else if(alternative_matrix != -1) 
+        else if(alternative_matrix != -1)
         {
             similMatrix -> alternativeSimilarityMatrices(alternative_matrix, origAlig -> getAlignmentType());
         }
-        
+
         // Default Matrices
         else {
             int alignDataType = origAlig -> getAlignmentType();
@@ -1965,10 +1969,10 @@ inline bool trimAlManager::create_or_use_similarity_matrix()
 
 inline void trimAlManager::clean_alignment()
 {
-    
+
     if(nogaps)
         singleAlig = origAlig -> Cleaning -> cleanGaps(0, 0, getComplementary);
-    
+
     else if(noallgaps)
         singleAlig = origAlig -> Cleaning -> cleanNoAllGaps(getComplementary);
 
@@ -1996,14 +2000,14 @@ inline void trimAlManager::clean_alignment()
         singleAlig = origAlig -> Cleaning -> cleanCompareFile(consistencyThreshold, conservationThreshold, compareVect, getComplementary);
     }
     /* -------------------------------------------------------------------- */
-    
+
     /* -------------------------------------------------------------------- */
-    else if((residuesOverlap != -1) && (sequenceOverlap != -1)) 
+    else if((residuesOverlap != -1) && (sequenceOverlap != -1))
     {
         tempAlig = origAlig -> Cleaning -> cleanSpuriousSeq(residuesOverlap, (sequenceOverlap/100), getComplementary);
 
         singleAlig = tempAlig -> Cleaning -> cleanNoAllGaps(false);
-        
+
         delete tempAlig;
 
     }
@@ -2056,7 +2060,7 @@ inline void trimAlManager::clean_alignment()
                 tempAlig = origAlig -> Cleaning -> removeSequences(delSequences, 1, num, getComplementary);
 
                 singleAlig = tempAlig -> Cleaning -> cleanNoAllGaps(false);
-                
+
                 delete tempAlig;
             }
 
@@ -2071,9 +2075,9 @@ inline void trimAlManager::clean_alignment()
         tempAlig = origAlig -> Cleaning -> getClustering (maxIdentity);
 
         singleAlig = tempAlig -> Cleaning -> cleanNoAllGaps(false);
-        
+
         delete tempAlig;
-        
+
     }
     else if(clusters != -1)
     {
@@ -2090,7 +2094,7 @@ inline void trimAlManager::clean_alignment()
             singleAlig = tempAlig -> Cleaning -> cleanNoAllGaps(false);
 
             delete tempAlig;
-                    
+
         }
     }
 }
@@ -2117,7 +2121,7 @@ inline void trimAlManager::delete_variables()
     if (singleAlig != NULL)             delete singleAlig;
     if (origAlig != NULL)               delete origAlig;
     if (compareAlignmentsArray != NULL) delete [] compareAlignmentsArray;
-    
+
     if (similMatrix != NULL)            delete similMatrix;
     if (delColumns != NULL)             delete [] delColumns;
     if (delSequences != NULL)           delete [] delSequences;

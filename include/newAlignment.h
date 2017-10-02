@@ -162,7 +162,7 @@ public:
 
     bool isFileAligned(void);
 
-    newAlignment * getTranslationCDS(int newResidues, int newSequences, int * columnsToKeep, string * oldSequencesNames, sequencesMatrix * sequenceMatrix, newAlignment * proteinAlignment);
+    newAlignment * getTranslationCDS(/*int newResidues, int newSequences, int * columnsToKeep, string * oldSequencesNames, sequencesMatrix * sequenceMatrix,*/ newAlignment * proteinAlignment);
 
     bool checkCorrespondence(string * names, int * lenghts, int totalInputSequences, int multiple);
 
