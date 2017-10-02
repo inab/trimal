@@ -249,14 +249,14 @@ newAlignment *newAlignment::getTranslationCDS(/*int newResidues, int newSequence
                 break;
             }
         }
-        if (y == originalSequenNumber)
-        {
-            Debug << "Name " << ProtAlig->seqsName[x] << " not found" << endl;
-        }
-        else
-        {
-            Debug << "Seq " << y << " ~ Seq " << x << "\t\t\t" << ProtAlig->seqsName[y] << "\t\t" << seqsName[x] << endl;
-        }
+//         if (y == originalSequenNumber)
+//         {
+//             Debug << "Name " << ProtAlig->seqsName[x] << " not found" << endl;
+//         }
+//         else
+//         {
+//             Debug << "Seq " << y << " ~ Seq " << x << "\t\t\t" << ProtAlig->seqsName[x] << "\t\t" << seqsName[y] << endl;
+//         }
     }
 
     newAlig->sequences  = new std::string[ProtAlig->sequenNumber];
