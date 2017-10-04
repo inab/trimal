@@ -1,13 +1,13 @@
 #include <iomanip>
 #include "../include/reportsystem.h"
 
-_internalReport::ReportSystem Debug = _internalReport::ReportSystem();
+__internalReport::__reportSystem debug = __internalReport::__reportSystem();
 
 // Out of line initializations.
 
 VerboseLevel Level = VerboseLevel::ERROR;
 
-const std::map<InfoCode, const char *> _internalReport::ReportSystem::InfoMessages = 
+const std::map<InfoCode, const char *> __internalReport::__reportSystem::InfoMessages = 
 {
     { InfoCode::CuttingSequence, 
         "Cutting sequence \"[ŧag]\" at first appearance of stop codon \"[tag]\" (residue \"[tag]\") at position [tag] (length: [tag] \")" }, 
@@ -16,7 +16,7 @@ const std::map<InfoCode, const char *> _internalReport::ReportSystem::InfoMessag
         "Try with specific comparison file window value. Parameter -cw" }, 
 };
     
-const std::map<WarningCode, const char *> _internalReport::ReportSystem::WarningMessages = 
+const std::map<WarningCode, const char *> __internalReport::__reportSystem::WarningMessages = 
 {
     { WarningCode::RemovingOnlyGapsColumn, 
         "Removing column '[tag]' composed only by gaps" }, 
@@ -38,7 +38,7 @@ const std::map<WarningCode, const char *> _internalReport::ReportSystem::Warning
         
 };
     
-const std::map<ErrorCode, const char *> _internalReport::ReportSystem::ErrorMessages = 
+const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorMessages = 
 {
     { ErrorCode::AlignmentNotLoaded, 
         "Alignment not loaded: \" [tag] \" Check the file's content" }, 
@@ -278,7 +278,7 @@ const std::map<ErrorCode, const char *> _internalReport::ReportSystem::ErrorMess
         "Sequences are not aligned. Format ([tag]) not compatible with unaligned sequences." }, 
 };
 
-void _internalReport::ReportSystem::PrintCodesAndMessages()
+void __internalReport::__reportSystem::PrintCodesAndMessages()
 {
     switch(Level)
     {
@@ -294,31 +294,30 @@ void _internalReport::ReportSystem::PrintCodesAndMessages()
         case VerboseLevel::ERROR:
             std::cout << "[VerboseLevel] Error" << std::endl;
             break;
-        case VerboseLevel::DEBUG: break;
     }
 
     for (int i = 1; i < InfoCode::__MAXINFO ; i++)
     {
 //         std::cout << "Info Code:    " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
-        Report((InfoCode)i);
+        report((InfoCode)i);
     }
     
     for (int i = 1; i < WarningCode::__MAXWARNING ; i++)
     {
 //         std::cout << "Warning Code: " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
-        Report((WarningCode)i);
+        report((WarningCode)i);
     }  
     
     for (int i = 1; i < ErrorCode::__MAXERROR ; i++)
     {
 //         std::cerr << "Error Code:   " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
-        Report((ErrorCode)i);
+        report((ErrorCode)i);
     }
 }
 
-void _internalReport::ReportSystem::Report(ErrorCode message, std::string * vars)
+void __internalReport::__reportSystem::report(ErrorCode message, std::string * vars)
 {
-    if (Level < VerboseLevel::ERROR)
+    if (Level > VerboseLevel::ERROR)
     {
         if (vars != NULL)
             delete [] vars;
@@ -347,9 +346,9 @@ void _internalReport::ReportSystem::Report(ErrorCode message, std::string * vars
     }
 }
 
-void _internalReport::ReportSystem::Report(ErrorCode message, char * vars)
+void __internalReport::__reportSystem::report(ErrorCode message, char * vars)
 {
-    if (Level < VerboseLevel::ERROR) return;
+    if (Level > VerboseLevel::ERROR) return;
     
     if (vars == NULL)
     {
@@ -371,9 +370,9 @@ void _internalReport::ReportSystem::Report(ErrorCode message, char * vars)
 
 }
 
-void _internalReport::ReportSystem::Report(WarningCode message, std::string * vars)
+void __internalReport::__reportSystem::report(WarningCode message, std::string * vars)
 {
-    if (Level < VerboseLevel::WARNING)
+    if (Level > VerboseLevel::WARNING)
     {
         if (vars != NULL)
             delete [] vars;
@@ -402,9 +401,9 @@ void _internalReport::ReportSystem::Report(WarningCode message, std::string * va
     }
 }
 
-void _internalReport::ReportSystem::Report(WarningCode message, char * vars)
+void __internalReport::__reportSystem::report(WarningCode message, char * vars)
 {
-    if (Level < VerboseLevel::WARNING) return;
+    if (Level > VerboseLevel::WARNING) return;
     
     if (vars == NULL)
     {
@@ -426,9 +425,9 @@ void _internalReport::ReportSystem::Report(WarningCode message, char * vars)
 
 }
 
-void _internalReport::ReportSystem::Report(InfoCode message, std::string * vars)
+void __internalReport::__reportSystem::report(InfoCode message, std::string * vars)
 {
-    if (Level < VerboseLevel::INFO)
+    if (Level > VerboseLevel::INFO)
     {
         if (vars != NULL)
             delete [] vars;
@@ -457,9 +456,9 @@ void _internalReport::ReportSystem::Report(InfoCode message, std::string * vars)
     }
 }
 
-void _internalReport::ReportSystem::Report(InfoCode message, char * vars)
+void __internalReport::__reportSystem::report(InfoCode message, char * vars)
 {
-    if (Level < VerboseLevel::INFO) return;
+    if (Level > VerboseLevel::INFO) return;
     
     if (vars == NULL)
     {
@@ -481,10 +480,10 @@ void _internalReport::ReportSystem::Report(InfoCode message, char * vars)
 
 }
 
-void _internalReport::ReportSystem::Debug(std::string debugMessage)
-{
-    if (Level == VerboseLevel::DEBUG)
-    {
-        std::cout << debugMessage;
-    }
-}
+// void __internalReport::__reportSystem::log(std::string debugMessage)
+// {
+//     if (IsDebug)
+//     {
+//         std::cout << debugMessage;
+//     }
+// }

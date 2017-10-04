@@ -29,8 +29,11 @@
 
 int main(int argc, char *argv[])
 {
-//     ReportSystem::PrintCodesAndMessages();
-    Debug.Level = VerboseLevel::DEBUG;
+    debug.IsDebug = true;
+    
+    debug.Level = VerboseLevel::INFO;
+    
+    debug.log(VerboseLevel::WARNING) << "HELLO" << endl;
     
     trimAlManager Trimal = trimAlManager();
 

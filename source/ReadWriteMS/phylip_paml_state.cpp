@@ -29,7 +29,7 @@ bool PhylipPamlState::SaveAlignment(newAlignment* alignment, std::ostream* outpu
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
     if (!alignment->isAligned) {
-        Debug.Report(ErrorCode::UnalignedAlignmentToAlignedFormat, new std::string[1] { this->name });
+        debug.report(ErrorCode::UnalignedAlignmentToAlignedFormat, new std::string[1] { this->name });
         return false;
     }
 

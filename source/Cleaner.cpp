@@ -1501,7 +1501,7 @@ bool Cleaner::removeOnlyTerminal(void) {
     }
 
     else if(left_boundary >= right_boundary) {
-        Debug.Report(ErrorCode::LeftBoundaryBiggerThanRightBoundary, new std::string[2] { std::to_string(left_boundary), std::to_string(right_boundary)} );
+        debug.report(ErrorCode::LeftBoundaryBiggerThanRightBoundary, new std::string[2] { std::to_string(left_boundary), std::to_string(right_boundary)} );
 //     cerr << endl << "ERROR: Check your manually set left '"<< left_boundary
 //       << "' and right '" << right_boundary << "' boundaries'" << endl << endl;
         return false;
@@ -1578,7 +1578,7 @@ newValues Cleaner::removeCols_SeqsAllGaps(void) {
             if(!warnings)
                 cerr << endl;
             warnings = true;
-            Debug.Report(WarningCode::RemovingOnlyGapsColumn);
+            debug.report(WarningCode::RemovingOnlyGapsColumn);
             _alignment -> saveResidues[i] = -1;
             _alignment -> residNumber--;
         } else {
@@ -1603,10 +1603,10 @@ newValues Cleaner::removeCols_SeqsAllGaps(void) {
             warnings = true;
 
             if(keepSequences) {
-                Debug.Report(WarningCode::KeepingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
+                debug.report(WarningCode::KeepingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
                 counter.sequences ++;
             } else {
-                Debug.Report(WarningCode::RemovingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
+                debug.report(WarningCode::RemovingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
                 _alignment -> saveSequences[i] = -1;
                 _alignment -> sequenNumber --;
             }
@@ -1652,10 +1652,10 @@ void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) {
             if (j == _alignment->sequences[i].length())
             {
                 if(keepSequences) {
-                    Debug.Report(WarningCode::KeepingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
+                    debug.report(WarningCode::KeepingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
                     counter++;
                 } else {
-                    Debug.Report(WarningCode::RemovingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
+                    debug.report(WarningCode::RemovingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
                     _alignment -> saveSequences[i] = -1;
                 }
             }

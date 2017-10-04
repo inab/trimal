@@ -16,9 +16,8 @@ enum VerboseLevel {
     WARNING    = 2,
     /// 3 = Only error messages
     ERROR      = 3,
-    /// 4 = Only Internal messages
-    DEBUG      = -1,
 };
+
 enum ErrorCode {
 
     AlignmentNotLoaded                          = 1,
@@ -186,18 +185,47 @@ enum InfoCode {
     __MAXINFO
 };
 
-namespace _internalReport {
-class ReportSystem
-{
-public:
-    /** \brief Level of Verbosity.\n The report system won't output messages that are lower than the current level */
+namespace __internalReport {
 
-    VerboseLevel Level;
+class __reporter {
+    bool CanReport;
+    
+    public:
+        
+    __reporter(bool CanReport) : CanReport{CanReport} { }
+    
+    template <typename T>
+    __reporter &operator<<(const T &a) {
+        if (CanReport)
+            std::cout<<a;
+        return *this;
+    }
+
+    __reporter &operator<<(std::ostream& (*pf) (std::ostream&)) {
+        if (CanReport)
+            std::cout<<pf;
+        return *this;
+    }
+};
+
+class __reportSystem
+{
+private:
+    
+    __reporter canReport = __reporter(true);
+    __reporter cantReport = __reporter(false);
 
     static const std::map<InfoCode, const char *>       InfoMessages ;
     static const std::map<WarningCode, const char *>    WarningMessages ;
     static const std::map<ErrorCode, const char *>      ErrorMessages ;
-
+    
+public:
+    /** \brief Level of Verbosity.\n The report system won't output messages that are lower than the current level */
+    
+    VerboseLevel Level;
+    
+    
+    bool IsDebug = false;
 
     /**
      \brief Method to print all Info, Warning and Error codes and their respective message.\n
@@ -212,7 +240,7 @@ public:
      \param vars Array of strings that will replace the '[tags]' in the message. The number of elements in the array must be the same as [tag] aparitions on the message.\n
      <b> The method will take care of destroying the pointer </b>
      */
-    void Report(ErrorCode message, std::string * vars = NULL);
+    void report(ErrorCode message, std::string * vars = NULL);
 
     /**
      \brief Method to report an Error. It will be displayed if VerboseManager::Level is equal or higher to ::VerboseLevel::Errors
@@ -220,56 +248,67 @@ public:
      \param vars Array of chars that will replace the first aparition of '[tags]' in the message. \n
      <b> The method wont take care of destroying the pointer </b> This allows to reuse the parameter passed.
      */
-    void Report(ErrorCode message, char * vars);
+    void report(ErrorCode message, char * vars);
     /**
     \brief Method to report a Watning. It will be displayed if VerboseManager::Level is equal or higher to VerboseManager::VerboseLevel::Warnings
     \param message Code to report.
     \param vars Array of strings that will replace the '[tags]' in the message. The number of elements in the array must be the same as [tag] aparitions on the message.\n
     <b> The method will take care of destroying the pointer </b>
     */
-    void Report(WarningCode message, std::string * vars = NULL);
+    void report(WarningCode message, std::string * vars = NULL);
     /**
      \brief Method to report a Warning. It will be displayed if VerboseManager::Level is equal or higher to VerboseManager::VerboseLevel::Warnings
      \param message Code to report.
      \param vars Array of chars that will replace the first aparition of '[tags]' in the message. \n
      <b> The method wont take care of destroying the pointer </b> This allows to reuse the parameter passed.
      */
-    void Report(WarningCode message, char * vars);
+    void report(WarningCode message, char * vars);
     /**
     \brief Method to report a Info message. It will be displayed if VerboseManager::Level is equal or higher to VerboseManager::VerboseLevel::Info
     \param message Code to report.
     \param vars Array of strings that will replace the '[tags]' in the message. The number of elements in the array must be the same as [tag] aparitions on the message.\n
     <b> The method will take care of destroying the pointer </b>
     */
-    void Report(InfoCode message, std::string * vars = NULL);
+    void report(InfoCode message, std::string * vars = NULL);
     /**
      \brief Method to report a Info message. It will be displayed if VerboseManager::Level is equal or higher to VerboseManager::VerboseLevel::Info
      \param message Code to report.
      \param vars Array of chars that will replace the first aparition of '[tags]' in the message. \n
      <b> The method wont take care of destroying the pointer </b> This allows to reuse the parameter passed.
      */
-    void Report(InfoCode message, char * vars);
+    void report(InfoCode message, char * vars);
 
 
-    void Debug(std::string debugMessage);
+//     void log(std::string debugMessage);
+    
+    __reporter log(VerboseLevel level)
+    {
+        if (!IsDebug) return cantReport;
+        
+        if (level >= Level)
+            return canReport;
+        else
+            return cantReport;
+    }
 
     template <typename T>
-    ReportSystem &operator<<(const T &a) {
-        if (Level == VerboseLevel::DEBUG)
+    __reportSystem &operator<<(const T &a) {
+        if (IsDebug)
             std::cout<<a;
         return *this;
     }
 
-    ReportSystem &operator<<(std::ostream& (*pf) (std::ostream&)) {
-        if (Level == VerboseLevel::DEBUG)
+    __reportSystem &operator<<(std::ostream& (*pf) (std::ostream&)) {
+        if (IsDebug)
             std::cout<<pf;
         return *this;
     }
 
 };
+
 }
 
-extern _internalReport::ReportSystem Debug;
+extern __internalReport::__reportSystem debug;
 
 #endif // VERBOSEMANAGER_H
 

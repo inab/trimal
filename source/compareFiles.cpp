@@ -269,7 +269,7 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
   for(i = 1; i < numAlignments; i++) {
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     if(numSeqs != vectAlignments[i] -> getNumSpecies()) {
-        Debug.Report(ErrorCode::DifferentNumberOfSequencesInCompareset);
+            debug.report(ErrorCode::DifferentNumberOfSequencesInCompareset);
       appearErrors = true;
       break;
     }
@@ -278,7 +278,7 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     vectAlignments[i] -> getSequences(names);
     if(!vectAlignments[0] -> getSequenceNameOrder(names, correspNames)) {
-        Debug.Report(ErrorCode::DifferentSeqsNamesInCompareset);
+            debug.report(ErrorCode::DifferentSeqsNamesInCompareset);
 //       cerr << endl << "ERROR: The files to compare do not"
 //            << " have the same sequence names" << endl << endl;
       appearErrors = true;
@@ -614,7 +614,7 @@ bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignme
     for(i = 0; i < numAlignments; i++) {
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
         if(numSeqs != vectAlignments[i] -> getNumSpecies()) {
-            Debug.Report(ErrorCode::DifferentNumberOfSequencesInCompareset);
+            debug.report(ErrorCode::DifferentNumberOfSequencesInCompareset);
 //             cerr << endl << "ERROR: The files to compare do not have "
 //                  << "the same number of sequences" << endl << endl;
             appearErrors = true;
@@ -625,7 +625,7 @@ bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignme
         /* ***** ***** ***** ***** ***** ***** ***** ***** */
         vectAlignments[i] -> getSequences(names);
         if(!selected -> getSequenceNameOrder(names, correspNames)) {
-            Debug.Report(ErrorCode::DifferentSeqsNamesInCompareset);
+            debug.report(ErrorCode::DifferentSeqsNamesInCompareset);
 //             cerr << endl << "ERROR: The files to compare do not"
 //                  << " have the same sequence names" << endl << endl;
             appearErrors = true;
