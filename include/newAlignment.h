@@ -186,7 +186,7 @@ public:
     
     bool alignmentSummaryHTML(newAlignment& _trimmedAlignment, char *destFile, float *consValues);
     
-    bool alignmentSummarySVG(newAlignment & _trimmedAlignment, char *destFile, float *consValues, float blocks = 4.0F);
+    bool alignmentSummarySVG(newAlignment & _trimmedAlignment, char *destFile, float *consValues, int blocks = 120);
 
     bool alignmentColourHTML(ostream &file);
     

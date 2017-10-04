@@ -1747,1651 +1747,11 @@ bool newAlignment::alignmentSummaryHTML(newAlignment & _trimmedAlignment, char *
     return true;
 }
 
-// bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *destFile, float *consValues, float blocks) {
-//
-//     int i, j, k, kj, kn, upper;
-//     double H = 0.0;
-//     char type;
-//     bool textured = false;
-//
-//     int * gapsValues = NULL;
-//     if (sgaps != NULL)
-//         gapsValues = sgaps -> getGapsWindow();
-//     float * simValues = NULL;
-//     if (scons != NULL)
-//         simValues = scons -> getMdkwVector();
-//     // Check if alignment is aligned;
-//     if (!isAligned) {
-//         Debug.Report(ErrorCode::NotAligned, new std::string[1] { filename });
-// //         cerr << endl << "ERROR: Sequences are not aligned. SVG report won't be created." << endl << endl;
-//         return false;
-//     }
-//
-//     // Calculate the blockSize;
-//     int blockSize = ((int)std::ceil((float)residNumber/ blocks * 0.1F)) * 10;
-//     blockSize = HTMLBLOCKS;
-//
-//     int fontSize = 15;
-//
-//     // Allocate some local memory
-//     string tmpColumn = std::string();
-//     tmpColumn.reserve(sequenNumber);
-//
-//     // Open the file;
-//     ofstream file;
-//     file.open(destFile);
-//     if(!file)
-//         return false;
-//
-//     /* Compute HTML blank spaces */
-//     j = 0;
-//     for(i = 0; i < sequenNumber; i++)
-//         j = utils::max(j, seqsName[i].size());
-//
-//     int sequencesNamesLength = utils::max(25, j + 20);
-//
-//
-//     // Init Colors
-//     auto withTexture = []() {
-//
-//         return std::map<char, string>
-//         {
-//             {'o', "url(#colors-orange)"},
-//             {'y', "url(#colors-yellow)"},
-//             {'b', "url(#colors-blue)"},
-//             {'w', "lightgrey"},
-//             {'p', "darkviolet"},
-//             {'r', "url(#colors-red)"},
-//             {'g', "url(#colors-lime)"},
-//             {'m', "url(#colors-magenta)"},
-//             {'c', "url(#colors-light-blue)"}
-//         };
-//
-//     };
-//
-//     auto withoutTexture = []() {
-//
-//         return std::map<char, string>
-//         {
-//             {'o', "orange"},
-//             {'y', "yellow"},
-//             {'b', "royalblue"},
-//             {'w', "lightgrey"},
-//             {'p', "darkviolet"},
-//             {'r', "red"},
-//             {'g', "lime"},
-//             {'m', "magenta"},
-//             {'c', "aqua"}
-//         };
-//
-//     };
-//
-//     std::map<char, string> mappedColors = textured ? withTexture() : withoutTexture() ;
-//
-//     // Start the svg output
-//     file    << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" height=\"" <<
-//             125 +                           /*Header Height*/
-//             35  +
-//             (fontSize * 8 +                     /*Column Numbering*/
-//              fontSize * sequenNumber +        /*Sequences Height*/
-//              fontSize * ((gapsValues == NULL) ? 0 : 1) +
-//              fontSize * ((simValues == NULL) ? 0 : 1) +
-//              fontSize * ((consValues == NULL) ? 0 : 1)
-//             )                        /*Selected Residues*/
-//             * std::ceil(sequences[0].length() / (float)blockSize) /*Blocks Number*/ <<"\"\
-//             width=\""<< std::max(1430.F, (( std::ceil(sequencesNamesLength / 2.F) + blockSize + 2) * fontSize)) << "px\">" << endl;
-//
-//     // BEGIN defines
-//     file  << "<defs>" << endl;
-//
-//     // Selected Block
-//     file << "<pattern id=\"selected-no-focus\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//     file << "<rect width=\"10\" height=\"10\" fill=\"green\"/>";
-//     file << "<path d=\"M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2\" stroke=\"white\" stroke-width=\"1\"/>";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"selected-focus\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//     file << "<rect width=\"10\" height=\"10\" fill=\"mediumseagreen\"/>";
-//     file << "</pattern> " << endl;
-//
-//     // Deleted Block
-//     file << "<pattern id=\"deleted-no-focus\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//     file << "<rect width=\"10\" height=\"10\" fill=\"red\"/>";
-//     file << "<path d=\"M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2\" stroke=\"black\" stroke-width=\"2\"/>";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"deleted-focus\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//     file << "<rect width=\"10\" height=\"10\" fill=\"black\"/>";
-//     file << "<path d=\"M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2\" stroke=\"red\" stroke-width=\"2\"/>";
-//     file << "</pattern> " << endl;
-//
-//     // BEGIN COLORS
-//
-//     // COLORS
-//     file << "<pattern id=\"colors-orange\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//     file << "<rect width=\"10\" height=\"10\" fill=\"#F7BE81\"/>" ;
-//     file << "<path d=\"M 0 0 L 10 10 M 0 10 L 10 0\" stroke=\"#DF7401\" stroke-width=\"0.5\" fill=\"transparent\"/> ";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"colors-red\" patternUnits=\"userSpaceOnUse\" width=\"20\" height=\"12\"> " << endl;
-//     file << "<rect width=\"20\" height=\"12\" fill=\"red\"/>" ;
-//     file << "<path d=\"M6 12c0-.622-.095-1.221-.27-1.785A5.982 5.982 0 0 0 10 12c1.67 0 3.182-.683 4.27-1.785A5.998 5.998 0 0 0 14 12h2a4 4 0 0 1 4-4V6c-1.67 0-3.182.683-4.27 1.785C15.905 7.22 16 6.622 16 6c0-.622-.095-1.221-.27-1.785A5.982 5.982 0 0 0 20 6V4a4 4 0 0 1-4-4h-2c0 .622.095 1.221.27 1.785A5.982 5.982 0 0 0 10 0C8.33 0 6.818.683 5.73 1.785 5.905 1.22 6 .622 6 0H4a4 4 0 0 1-4 4v2c1.67 0 3.182.683 4.27 1.785A5.998 5.998 0 0 1 4 6c0-.622.095-1.221.27-1.785A5.982 5.982 0 0 1 0 6v2a4 4 0 0 1 4 4h2zm-4 0a2 2 0 0 0-2-2v2h2zm16 0a2 2 0 0 1 2-2v2h-2zM0 2a2 2 0 0 0 2-2H0v2zm20 0a2 2 0 0 1-2-2h2v2zm-10 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z\" stroke=\"firebrick\" stroke-width=\"1\" fill=\"transparent\"/> ";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"colors-yellow\" patternUnits=\"userSpaceOnUse\" width=\"4\" height=\"4\"> " << endl;
-//     file << "<rect width=\"4\" height=\"4\" fill=\"yellow\"/>" ;
-//     file << "<path d=\"M 0 0 Q 0 4 4 0\" stroke=\"orange\" stroke-width=\"1\" fill=\"transparent\"/> ";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"colors-magenta\" patternUnits=\"userSpaceOnUse\" width=\"100\" height=\"100\"> " << endl;
-//     file << "<rect width=\"100\" height=\"100\" fill=\"magenta\"/>" ;
-//     file << "<path d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" stroke=\"mediumorchid\" stroke-width=\"1\" fill=\"mediumorchid\"/> ";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"colors-lime\" patternUnits=\"userSpaceOnUse\" width=\"28\" height=\"49\"> " << endl;
-//     file << "<rect width=\"28\" height=\"49\" fill=\"lime\"/>" ;
-//     file << "<path d=\"M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z\" stroke=\"green\" stroke-width=\"0.4\" fill=\"transparent\"/> ";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"colors-light-blue\" patternUnits=\"userSpaceOnUse\" width=\"100\" height=\"20\"> " << endl;
-//     file << "<rect width=\"100\" height=\"20\" fill=\"aqua\"/>" ;
-//     file << "<path d=\"M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z \" stroke=\"blue\" stroke-width=\"0.3\" fill=\"transparent\"/> ";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"colors-blue\" patternUnits=\"userSpaceOnUse\" width=\"100\" height=\"18\"> " << endl;
-//     file << "<rect width=\"100\" height=\"18\" fill=\"deepskyblue\"/>" ;
-//     file << "<path d=\"M61.82 18c3.47-1.45 6.86-3.78 11.3-7.34C78 6.76 80.34 5.1 83.87 3.42 88.56 1.16 93.75 0 100 0v6.16C98.76 6.05 97.43 6 96 6c-9.59 0-14.23 2.23-23.13 9.34-1.28 1.03-2.39 1.9-3.4 2.66h-7.65zm-23.64 0H22.52c-1-.76-2.1-1.63-3.4-2.66C11.57 9.3 7.08 6.78 0 6.16V0c6.25 0 11.44 1.16 16.14 3.42 3.53 1.7 5.87 3.35 10.73 7.24 4.45 3.56 7.84 5.9 11.31 7.34zM61.82 0h7.66a39.57 39.57 0 0 1-7.34 4.58C57.44 6.84 52.25 8 46 8S34.56 6.84 29.86 4.58A39.57 39.57 0 0 1 22.52 0h15.66C41.65 1.44 45.21 2 50 2c4.8 0 8.35-.56 11.82-2z\" stroke=\"blue\" stroke-width=\"0.3\" fill=\"transparent\"/> ";
-//     file << "</pattern> " << endl;
-//     // END COLORS
-//
-//     // BEGIN SCORES COLORS
-//     for (i = 0; i < 12; i++)
-//     {
-//         file << "<pattern id=\"score-" << i <<"\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//         file << "<rect width=\"10\" height=\"10\" fill=\"";
-//         switch(i) {
-//         case 0:
-//             file << "#FFFBF2";
-//             break;
-//         case 1:
-//             file << "#FFF8CC";
-//             break;
-//         case 2:
-//             file << "#FAF0BE";
-//             break;
-//         case 3:
-//             file << "#F0EAD6";
-//             break;
-//         case 4:
-//             file << "#F3E5AB";
-//             break;
-//         case 5:
-//             file << "#F4C430";
-//             break;
-//         case 6:
-//             file << "#C2B280";
-//             break;
-//         case 7:
-//             file << "#DAA520";
-//             break;
-//         case 8:
-//             file << "#B8860B";
-//             break;
-//         case 9:
-//             file << "#918151";
-//             break;
-//         case 10:
-//             file << "#967117";
-//             break;
-//         case 11:
-//             file << "#6E5411";
-//             break;
-//         }
-//         file << "\"/>";
-//         file << "<path d=\"M0,10 l10,-10 \" stroke=\"";
-//         switch(i) {
-//         case 0:
-//         case 1:
-//         case 2:
-//         case 3:
-//         case 4:
-//         case 5:
-//             file << "black";
-//             break;
-//         case 6:
-//         case 7:
-//         case 8:
-//         case 9:
-//         case 10:
-//         case 11:
-//             file << "white";
-//             break;
-//         }
-//         file << "\" stroke-width=\"1\"/>";
-//         file << "</pattern> " << endl;
-//
-//     }
-//
-//     // END SCORES COLORS
-//
-//     file << "</defs>" << endl;
-//     // END defines
-//
-//     // BEGIN INFO
-//     // Calculate Info Header Lengths
-//     strtok(&filename[0], " ");
-//     string fname = "Filename: ";
-//     fname.append(strtok(nullptr, ";"));
-//
-//     string sSequences = "Selected sequences: " + std::to_string(_trimmedAlignment.sequenNumber) + " / " + std::to_string(originalSequenNumber);
-//
-//     string sResidues =  "Selected residues:  " + std::to_string(_trimmedAlignment.residNumber) + " / "+  std::to_string(originalResidNumber);
-//
-//     string rSequences = "Deleted sequences:  " + std::to_string(_trimmedAlignment.originalSequenNumber - _trimmedAlignment.sequenNumber) + " / " + std::to_string(originalSequenNumber);
-//
-//     string rResidues =  "Deleted residues:   " + std::to_string(_trimmedAlignment.originalResidNumber - _trimmedAlignment.residNumber) + " / "+  std::to_string(originalResidNumber);
-//
-//
-//     int size = fname.length();
-//     size = std::max(size, (int)sSequences.length());
-//     size = std::max(size, (int)rSequences.length());
-//     size = std::max(size, (int)sResidues.length());
-//     size = std::max(size, (int)rResidues.length());
-//
-//     size *= fontSize * 0.5F;
-//
-//     //Filename
-//     file  << "<g class=\"bar\">" << endl;
-//     file  << "<rect style=\"fill:indianred\" height=\"20\" width=\"" << size <<"px\" x =\"0\" y=\"" << H << "\" dy=\".35em\" />" << endl;
-//     file  << "<text style=\"fill:black\" x =\"10\" y=\"" << (H+10) << "\" dy=\".35em\" text-anchor=\"start\" font-family = \"monospace\" xml:space=\"preserve\" kerning=\"0\" \
-//         lengthAdjust=\"spacingAndGlyphs\"\
-//         textLength='" << std::min(size - 10, (int)(fname.length() * fontSize * 0.5F)) << "' >"
-//           << fname << endl;
-//     file  << "</text>"<< endl;
-//     file  << "</g>"<< endl;;
-//
-//     H += 25;
-//
-//     // Selected Sequences
-//     file  << "<g class=\"bar\">"
-//           << "<rect style=\"fill:lightgrey\" height=\"20\" width=\"" << size << "px\" x =\"0\" y=\"" << (H) << "\" dy=\".35em\" />"
-//           << "<text style=\"fill:black\" width=\"200px\" x =\"10\" y=\"" << (H+10) << "\" dy=\".35em\" text-anchor=\"start\" font-family = \"monospace\" xml:space=\"preserve\" kerning=\"0\"\
-//         lengthAdjust=\"spacingAndGlyphs\"\
-//          textLength='" << std::min(size - 10, (int)(sSequences.length() * fontSize * 0.5F)) << "' >"
-//           << sSequences
-//           << "</text>"
-//           << "</g>";
-//
-//     H += 25;
-//
-//     // Deleted Sequences
-//     file  << "<g class=\"bar\">"
-//           << "<rect style=\"fill:grey\" height=\"20\" width=\"" << size << "px\" x =\"0\" y=\"" << (H) << "\" dy=\".35em\" />"
-//           << "<text style=\"fill:black\" width=\"200px\" x =\"10\" y=\"" << (H+10) << "\" dy=\".35em\" text-anchor=\"start\" font-family = \"monospace\" xml:space=\"preserve\" kerning=\"0\"\
-//         lengthAdjust=\"spacingAndGlyphs\"\
-//          textLength='" << std::min(size - 10, (int)(rSequences.length() * fontSize * 0.5F))  << "' >"
-//           << rSequences
-//           << "</text>"
-//           << "</g>";
-//
-//     H += 25;
-//
-//     // Selected Residues
-//     file  << "<g class=\"bar\">"
-//           << "<rect style=\"fill:lightgrey\" height=\"20\" width=\"" << size << "px\" x =\"0\" y=\"" << (H) << "\" dy=\".35em\" />"
-//           << "<text style=\"fill:black\" width=\"200px\" x =\"10\" y=\"" << (H+10) << "\" dy=\".35em\" text-anchor=\"start\" font-family = \"monospace\" xml:space=\"preserve\" kerning=\"0\"\
-//         lengthAdjust=\"spacingAndGlyphs\"\
-//          textLength='" << std::min(size - 10, (int)(sResidues.length() * fontSize * 0.5F)) << "' >"
-//           << sResidues
-//           << "</text>"
-//           << "</g>";
-//
-//     H += 25;
-//
-//     // Deleted Residues
-//     file  << "<g class=\"bar\">"
-//           << "<rect style=\"fill:grey\" height=\"20\" width=\"" << size << "px\" x =\"0\" y=\"" << (H) << "\" dy=\".35em\" />"
-//           << "<text style=\"fill:black\" width=\"200px\" x =\"10\" y=\"" << (H+10) << "\" dy=\".35em\" text-anchor=\"start\" font-family = \"monospace\" xml:space=\"preserve\" kerning=\"0\" \
-//         lengthAdjust=\"spacingAndGlyphs\"\
-//          textLength='" << std::min(size - 10, (int)(rResidues.length() * fontSize * 0.5F)) << "' >"
-//           << rResidues
-//           << "</text>"
-//           << "</g>";
-//
-//     // END INFO
-//
-//     H = 0;
-//
-//     //BEGIN Legend
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['b'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\" \
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Hidrophobic" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['r'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120<< "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Positive Charge" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['m'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 2 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 2 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Negative Charge" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['g'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 3 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 3 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Polar" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['p'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 4 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 4 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Cysteine" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['o'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 5 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//
-//
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 5 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Glycine" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['y'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 6 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 6 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Proline" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['c'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 7 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 7 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Aromatic" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['w'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 8 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 8 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\">" << endl
-//          << "Unconserved" << endl
-//          << "</text>" << endl;
-//     H+= 25;
-//
-//     if (gapsValues || consValues || simValues)
-//     {
-//         int width = 78;
-//
-//         for (i = 0; i < 12; i++)
-//         {
-//             file << "<rect \
-//                         style=\"fill:"<< "url(#score-"<<i<<");stroke:black;stroke-width:1" <<"\" \
-//                         height=\""<< 20 <<"\" \
-//                         width=\"" << width << "px\" \
-//                         x =\"" << size + 10  + width * (2 + i) << "px\"\
-//                         y =\""<< (H) <<"\" />" << endl;
-//         }
-//         if (gapsValues) {
-//             std::array<std::string, 12> u = {{"0","&lt;.001","&lt;.050", "&lt;.100","&lt;.150", "&lt;.200", "&lt;.250", "&lt;.350", "&lt;.500", "&lt;.750", "&lt; 1.00", "1"}};
-//             file << "<text \
-//                         width=\"100\" style=\"font-weight:bold\" \
-//                         text-anchor=\"middle\" \
-//                         x =\"" << size + 10 + width << "px\" \
-//                         y =\""<< (H + 40) <<"\" \
-//                         font-family = \"monospace\" \
-//                         kerning=\"0\" \
-//                         textLength=\""<< width * 1.5F << "\">" << endl
-//                  << "Gaps Scores" << endl
-//                  << "</text>" << endl;
-//             for (i = 0; i < 12; i++)
-//                 file << "<text \
-//                             width=\"100\" style=\"font-weight:bold\" \
-//                             text-anchor=\"middle\" \
-//                             x =\"" << size + 10 + width * (2.5F + i) << "px\" \
-//                             y =\""<< (H + 40) <<"\" \
-//                             font-family = \"monospace\" \
-//                             kerning=\"0\" \
-//                             textLength=\""<< width / 2 << "\">" << endl
-//                      << u[i] << endl
-//                      << "</text>" << endl;
-//
-//             H+= 25;
-//         }
-//         if (simValues) {
-//             std::array<std::string, 12> u = {{"0", "&lt; 1e-6", "&lt; 1e-5", "&lt; 1e-4", "&lt;.001","&lt;.010", "&lt;.100", "&lt;.250", "&lt;.500", "&lt;.750", "&lt; 1.00", "1" }};
-//             file << "<text \
-//                         width=\"100\" style=\"font-weight:bold\" \
-//                         text-anchor=\"middle\" \
-//                         x =\"" << size + 10 + width << "px\" \
-//                         y =\""<< (H + 40) <<"\" \
-//                         font-family = \"monospace\" \
-//                         kerning=\"0\" \
-//                         textLength=\""<< width * 1.5F << "\">" << endl
-//                  << "Similarity Scores" << endl
-//                  << "</text>" << endl;
-//             for (i = 0; i < 12; i++)
-//                 file << "<text \
-//                             width=\"100\" style=\"font-weight:bold\" \
-//                             text-anchor=\"middle\" \
-//                             x =\"" << size + 10 + width * (2.5F + i) << "px\" \
-//                             y =\""<< (H + 40) <<"\" \
-//                             font-family = \"monospace\" \
-//                             kerning=\"0\" \
-//                             textLength=\""<< width / 2 << "\">" << endl
-//                      << u[i] << endl
-//                      << "</text>" << endl;
-//             H+= 25;
-//         }
-//         if (consValues) {
-//
-//             std::array<std::string, 12> u = {{"0"," &lt; .001"," &lt; .050"," &lt; .100","  &lt; .150"," &lt; .200"," &lt; .250"," &lt; .350"," &lt; .500"," &lt; .750"," &lt; 1.00"," =1="}};
-//             file << "<text \
-//                         width=\"100\" style=\"font-weight:bold\" \
-//                         text-anchor=\"middle\" \
-//                         x =\"" << size + 10 + width << "px\" \
-//                         y =\""<< (H + 40) <<"\" \
-//                         font-family = \"monospace\" \
-//                         kerning=\"0\" \
-//                         textLength=\""<< width * 1.5F << "\">" << endl
-//                  << "Similarity Scores" << endl
-//                  << "</text>" << endl;
-//             for (i = 0; i < 12; i++)
-//                 file << "<text \
-//                             width=\"100\" style=\"font-weight:bold\" \
-//                             text-anchor=\"middle\" \
-//                             x =\"" << size + 10 + width * (2.5F + i) << "px\" \
-//                             y =\""<< (H + 40) <<"\" \
-//                             font-family = \"monospace\" \
-//                             kerning=\"0\" \
-//                             textLength=\""<< width / 2 << "\">" << endl
-//                      << u[i] << endl
-//                      << "</text>" << endl;
-//         }
-//
-//     }
-//
-//     //END Legend
-//
-//     H = 160;
-//
-//     char ** colors = new char*[sequenNumber];
-// //     int** ary = new int*[rowCount];
-//     for(int i = 0; i < sequenNumber; ++i)
-//         colors[i] = new char[blockSize];
-//
-//
-//     for(j = 0, upper = blockSize;
-//             j < originalResidNumber;
-//             j += blockSize, upper += blockSize) {
-//
-//         /* Print main columns number */
-//         H += fontSize;
-//
-//         if ((j + blockSize) < originalResidNumber)
-//         {
-//             file    << "<text font-family = \"monospace\" \
-//                     font-size=\"" << fontSize << "px\" dy=\".35em\"\
-//                     x =\"" << (sequencesNamesLength) * fontSize * 0.5F << "\" text-anchor=\"start\" y=\"" << (H) << "\" xml:space=\"preserve\" kerning=\"0\" \
-//                     textLength='"<< ((std::min((float)blockSize, originalResidNumber - j - 0.25F) ) * fontSize )<<"' lengthAdjust=\"spacing\">";
-//         }
-//         else
-//         {
-//             file    << "<text font-family = \"monospace\" \
-//                     font-size=\"" << fontSize << "px\" dy=\".35em\" \
-//                     x =\"" << (sequencesNamesLength) * fontSize * 0.5F << "\" text-anchor=\"start\" y=\"" << (H) << "\" xml:space=\"preserve\" kerning=\"0\" \
-//                     textLength='"<< ((std::min((float)blockSize, originalResidNumber - j - 0.25F) + std::to_string(j).length()) * fontSize )<<"' lengthAdjust=\"spacing\">";
-//         }
-//
-//         for(i = j; ((i < originalResidNumber) && (i < upper)); i += 10)
-//             file << setw(10) << setfill(' ') << left << i;
-//         file << "</text>" << endl;
-//
-//         H += fontSize;
-//         file    << "<text font-family = \"monospace\" \
-//                 font-size=\"" << fontSize << "px\" dy=\".35em\" \
-//                 x =\"" << (sequencesNamesLength) * fontSize * 0.5F << "\" text-anchor=\"start\" y=\"" << (H) << "\" xml:space=\"preserve\" kerning=\"0\" \
-//                 textLength='"<< (std::min((float)blockSize, originalResidNumber - j - 0.25F) * fontSize )<<"' lengthAdjust=\"spacing\">";
-//
-//         for(i = j; ((i < originalResidNumber) && (i < upper)); i += 10)
-//
-//             file << setw(std::min(10, originalResidNumber - i)) << setfill('~') << left << "+";
-//         file << "</text>" << endl;
-//
-// //         H+=fontSize;
-//
-//
-//         for(i = 0; i < originalSequenNumber; i++) {
-//
-//             /* Print residues corresponding to current sequences block */
-//             for(k = j; ((k < originalResidNumber) && (k < upper)); k++)
-//             {
-//                 if (tmpColumn != "")
-//                     tmpColumn.clear();
-//                 for(kj = 0; kj < originalSequenNumber; kj++)
-//                     tmpColumn += sequences[kj][k];
-//                 /* Determine residue color based on residues acrofile the alig column */
-//                 type = utils::determineColor(sequences[i][k], tmpColumn);
-//                 colors[i][k - j] = type;
-//             }
-//
-//         }
-//
-//         H += fontSize;
-//
-//         float width =  (blockSize + 0.5F) * (fontSize) / blockSize;
-//         for (k = j; k < originalResidNumber && k < upper; k++)
-//         {
-//             for(kj = 0; kj < originalSequenNumber; kj++)
-//             {
-//                 for(int kn = kj + 1; kn < originalSequenNumber; kn++)
-//                 {
-//                     if (colors[kj][k - j] != colors[kn][k - j] || kn + 1 == originalSequenNumber)
-//                     {
-//                         if (colors[kj][k - j] != 'w')
-//                             file << "<rect " <<
-//                                  " style=\"fill:"<< mappedColors[colors[kj][k - j]] <<"\" " <<
-//                                  " height=\""<< fontSize * (kn - kj) <<"\" " <<
-//                                  " width=\"" << width << "px\" " <<
-//                                  " x =\"" <<
-//
-//                                  sequencesNamesLength * fontSize * 0.5F  // Sequences Names
-//                                  + (k - j - 0.25F) * width
-//
-//                                  << "\" " <<
-//                                  " y =\"" << (H+(fontSize / 2)+(fontSize*kj)) << "\" />";
-//                         kj = kn;
-//                     }
-//                 }
-//
-//             }
-//         }
-//
-//         /* Print sequences name */
-//         for(i = 0; i < originalSequenNumber; i++) {
-//             H += fontSize;
-//             file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
-//                 text-anchor=\"start\" y=\"" << (H) << "\" kerning=\"0\" " << (_trimmedAlignment.saveSequences[i] != -1 ? "style=\"font-weight:bold\"" : "text-decoration=\"line-through\"") << ">"  <<
-//                  setfill(' ') << setw(sequencesNamesLength) << right << seqsName[i] << "</text>" << endl;
-//
-//             file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"" << sequencesNamesLength * fontSize * 0.5F << "px\" \
-//                 text-anchor=\"start\" y=\"" << H << "\" xml:space=\"preserve\" kerning=\"0\" textLength='"<< (std::min(blockSize, originalResidNumber - j) * fontSize) <<"' lengthAdjust=\"spacing\" " << (_trimmedAlignment.saveSequences[i] != -1 ? "style=\"font-weight:bold\"" : "style=\"font-weight:100\"") << ">" ;
-//
-//             /* Print residues corresponding to current sequences block */
-//             for(k = j; ((k < originalResidNumber) && (k < upper)); k++)
-//             {
-//                 for(kj = 0, tmpColumn.clear(); kj < originalSequenNumber; kj++)
-//                     tmpColumn += sequences[kj][k];
-//                 /* Determine residue color based on residues acrofile the alig column */
-//                 type = utils::determineColor(sequences[i][k], tmpColumn);
-//                 file << sequences[i][k];
-//             }
-//             file << "</text>" << endl;
-//
-//         }
-//
-//         H += fontSize * 2;
-//
-//         // SELECTED OR REJECTED SEQUENCES AND RESIDUES
-//         bool accepted = _trimmedAlignment.saveResidues[j] != -1;
-//         int oriPosi = j;
-//         for (k = j; k - j <= blockSize && k <= originalResidNumber; k++)
-//         {
-//             if ( (k - j) == blockSize || ((k) == originalResidNumber) || (_trimmedAlignment.saveResidues[k] != -1) != accepted)
-//             {
-//                 file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
-//                         text-anchor=\"start\" y=\"" << (H + fontSize / 2) << "\" kerning=\"0\"" << ">"  <<
-//                      setfill(' ') << setw(sequencesNamesLength) << right << "Selected Sequences" << "</text>" << endl;
-//
-//                 file <<
-//                      "<rect style=\"fill:url(" << (accepted ? "#selected-no-focus" : "#deleted-no-focus") << ");stroke-width:1;stroke:black\" height=\"10\"" <<
-//                      " width=\"" << width * (k - oriPosi) << "px\"" <<
-//                      " x =\"" << ((sequencesNamesLength) * fontSize/2) + ((oriPosi - j - 0.25F) * width) << "px\" y=\"" << (H) << "\" dy=\".35em\" " <<
-//                      " onmouseover=\"evt.target.setAttribute('style', 'fill:url(" << (accepted ? "#selected-focus" : "#deleted-focus") << ");stroke-width:1;stroke:black');\" " <<
-//                      " onmouseout=\"evt.target.setAttribute('style', 'fill:url(" <<  (accepted ? "#selected-no-focus" : "#deleted-no-focus") << ");stroke-width:1;stroke:black');\"/>" << endl;
-//
-//             }
-//
-//             if ((_trimmedAlignment.saveResidues[k] != -1) != accepted)
-//             {
-//                 accepted = (_trimmedAlignment.saveResidues[k] != -1);
-//                 oriPosi = k;
-//             }
-//
-//         }
-//         H += fontSize;
-//
-//         // GAPS VALUES
-//         if (gapsValues)
-//         {
-//             float inverse = 1.F / originalSequenNumber;
-//             int step = utils::GetGapStep(&gapsValues[j], inverse), innerStep;
-//             oriPosi = j;
-//
-//             for (k = j; k - j <= blockSize && k <= originalResidNumber; k++)
-//             {
-//                 if (((k) != originalResidNumber))
-//                     innerStep = utils::GetGapStep(&gapsValues[k], inverse);
-//                 if ( (k - j) == blockSize || ((k) == originalResidNumber) || innerStep != step)
-//                 {
-//                     file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
-//                             text-anchor=\"start\" y=\"" << (H + fontSize / 2) << "\" kerning=\"0\"" << ">"  <<
-//                          setfill(' ') << setw(sequencesNamesLength) << right << "Gaps Values" << "</text>" << endl;
-//
-//                     file <<
-//                          "<rect style=\"fill:url(#score-" << step << ");stroke-width:1.5;stroke:black\" height=\"10\"" <<
-//                          " width=\"" << width * (k - oriPosi) << "px\"" <<
-//                          " x =\"" << ((sequencesNamesLength) * fontSize/2) + ((oriPosi - j - 0.25F) * width) << "px\" y=\"" << (H) << "\" dy=\".35em\" " <<
-//                          " />" << endl;
-//
-//                 }
-//
-//                 if (innerStep != step)
-//                 {
-//                     step = innerStep;
-//                     oriPosi = k;
-//                 }
-//                 /*
-//                 */
-//             }
-//
-//             H += fontSize;
-//         }
-//
-//         // SIMILARITY VALUES
-//         if (simValues)
-//         {
-//             int step = utils::GetSimStep(&simValues[j]), innerStep;
-//             oriPosi = j;
-//
-//             for (k = j; k - j <= blockSize && k <= originalResidNumber; k++)
-//             {
-//                 if (((k) != originalResidNumber))
-//                     innerStep = utils::GetSimStep(&simValues[k]);
-//                 if ( (k - j) == blockSize || ((k) == originalResidNumber) || innerStep != step)
-//                 {
-//                     file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
-//                             text-anchor=\"start\" y=\"" << (H + fontSize / 2) << "\" kerning=\"0\"" << ">"  <<
-//                          setfill(' ') << setw(sequencesNamesLength) << right << "Similarily Values" << "</text>" << endl;
-//
-//                     file <<
-//                          "<rect style=\"fill:url(#score-" << step << ");stroke-width:1.5;stroke:black\" height=\"10\"" <<
-//                          " width=\"" << width * (k - oriPosi) << "px\"" <<
-//                          " x =\"" << ((sequencesNamesLength) * fontSize/2) + ((oriPosi - j - 0.25F) * width) << "px\" y=\"" << (H) << "\" dy=\".35em\" " <<
-//                          " />" << endl;
-//
-//                 }
-//
-//                 if (innerStep != step)
-//                 {
-//                     step = innerStep;
-//                     oriPosi = k;
-//                 }
-//             }
-//
-//             H += fontSize;
-//         }
-//
-//         // CONSISTENCY VALUES
-//         if (consValues)
-//         {
-//             int step = utils::GetConsStep(&consValues[j]), innerStep;
-//             oriPosi = j;
-//
-//             for (k = j; k - j <= blockSize && k <= originalResidNumber; k++)
-//             {
-//                 if (((k) != originalResidNumber))
-//                     innerStep = utils::GetConsStep(&consValues[k]);
-//                 if ( (k - j) == blockSize || ((k) == originalResidNumber) || innerStep != step)
-//                 {
-//                     file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
-//                             text-anchor=\"start\" y=\"" << (H + fontSize / 2) << "\" kerning=\"0\" style=\"font-weight:100\"" << ">"  <<
-//                          setfill(' ') << setw(sequencesNamesLength) << right << "Similarily Values" << "</text>" << endl;
-//
-//                     file <<
-//                          "<rect style=\"fill:url(#score-" << step << ");stroke-width:1.5;stroke:black\" height=\"10\"" <<
-//                          " width=\"" << width * (k - oriPosi) << "px\"" <<
-//                          " x =\"" << ((sequencesNamesLength) * fontSize/2) + ((oriPosi - j - 0.25F) * width) << "px\" y=\"" << (H) << "\" dy=\".35em\" " <<
-//                          " />" << endl;
-//                 }
-//
-//                 if (innerStep != step)
-//                 {
-//                     step = innerStep;
-//                     oriPosi = k;
-//                 }
-//             }
-//
-//             H += fontSize;
-//         }
-//
-//         H += fontSize * 2;
-//     }
-//     for(int i = 0; i < originalSequenNumber; ++i)
-//         delete [] colors[i];
-//     delete [] colors;
-//
-//     file << "</svg>";
-//     file.close();
-//     return true;
-// }
-
-// bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *destFile, float *consValues, float blocks) {
-//
-//     int i, j, k, kj, kn, upper;
-//     double H = 0.0;
-//     char type;
-//     bool textured = false;
-//
-//     int * gapsValues = NULL;
-//     if (sgaps != NULL)
-//         gapsValues = sgaps -> getGapsWindow();
-//     float * simValues = NULL;
-//     if (scons != NULL)
-//         simValues = scons -> getMdkwVector();
-//     // Check if alignment is aligned;
-//     if (!isAligned) {
-//         Debug.Report(ErrorCode::NotAligned, new std::string[1] { filename });
-// //         cerr << endl << "ERROR: Sequences are not aligned. SVG report won't be created." << endl << endl;
-//         return false;
-//     }
-//
-//     // Calculate the blockSize;
-//     int blockSize = ((int)std::ceil((float)residNumber/ blocks * 0.1F)) * 10;
-//     blockSize = HTMLBLOCKS;
-//
-//     int fontSize = 15;
-//
-//     // Allocate some local memory
-//     string tmpColumn = std::string();
-//     tmpColumn.reserve(sequenNumber);
-//
-//     // Open the file;
-//     ofstream file;
-//     file.open(destFile);
-//     if(!file)
-//         return false;
-//
-//     /* Compute HTML blank spaces */
-//     j = 0;
-//     for(i = 0; i < sequenNumber; i++)
-//         j = utils::max(j, seqsName[i].size());
-//
-//     int sequencesNamesLength = utils::max(25, j + 20);
-//
-//
-//     // Init Colors
-//     auto withTexture = []() {
-//
-//         return std::map<char, string>
-//         {
-//             {'o', "url(#colors-orange)"},
-//             {'y', "url(#colors-yellow)"},
-//             {'b', "url(#colors-blue)"},
-//             {'w', "lightgrey"},
-//             {'p', "darkviolet"},
-//             {'r', "url(#colors-red)"},
-//             {'g', "url(#colors-lime)"},
-//             {'m', "url(#colors-magenta)"},
-//             {'c', "url(#colors-light-blue)"}
-//         };
-//
-//     };
-//
-//     auto withoutTexture = []() {
-//
-//         return std::map<char, string>
-//         {
-//             {'o', "orange"},
-//             {'y', "yellow"},
-//             {'b', "royalblue"},
-//             {'w', "lightgrey"},
-//             {'p', "darkviolet"},
-//             {'r', "red"},
-//             {'g', "lime"},
-//             {'m', "magenta"},
-//             {'c', "aqua"}
-//         };
-//
-//     };
-//
-//     std::map<char, string> mappedColors = textured ? withTexture() : withoutTexture() ;
-//
-//     // Start the svg output
-//     file    << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" height=\"" <<
-//             125 +                           /*Header Height*/
-//             35  +
-//             (fontSize * 8 +                     /*Column Numbering*/
-//              fontSize * sequenNumber +        /*Sequences Height*/
-//              fontSize * ((gapsValues == NULL) ? 0 : 1) +
-//              fontSize * ((simValues == NULL) ? 0 : 1) +
-//              fontSize * ((consValues == NULL) ? 0 : 1)
-//             )                        /*Selected Residues*/
-//             * std::ceil(sequences[0].length() / (float)blockSize) /*Blocks Number*/ <<"\"\
-//             width=\""<< std::max(1430.F, (( std::ceil(sequencesNamesLength / 2.F) + blockSize + 2) * fontSize)) << "px\">" << endl;
-//
-//     // BEGIN defines
-//     file  << "<defs>" << endl;
-//
-//     // Selected Block
-//     file << "<pattern id=\"selected-no-focus\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//     file << "<rect width=\"10\" height=\"10\" fill=\"green\"/>";
-//     file << "<path d=\"M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2\" stroke=\"white\" stroke-width=\"1\"/>";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"selected-focus\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//     file << "<rect width=\"10\" height=\"10\" fill=\"mediumseagreen\"/>";
-//     file << "</pattern> " << endl;
-//
-//     // Deleted Block
-//     file << "<pattern id=\"deleted-no-focus\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//     file << "<rect width=\"10\" height=\"10\" fill=\"red\"/>";
-//     file << "<path d=\"M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2\" stroke=\"black\" stroke-width=\"2\"/>";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"deleted-focus\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//     file << "<rect width=\"10\" height=\"10\" fill=\"black\"/>";
-//     file << "<path d=\"M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2\" stroke=\"red\" stroke-width=\"2\"/>";
-//     file << "</pattern> " << endl;
-//
-//     // BEGIN COLORS
-//
-//     // COLORS
-//     file << "<pattern id=\"colors-orange\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//     file << "<rect width=\"10\" height=\"10\" fill=\"#F7BE81\"/>" ;
-//     file << "<path d=\"M 0 0 L 10 10 M 0 10 L 10 0\" stroke=\"#DF7401\" stroke-width=\"0.5\" fill=\"transparent\"/> ";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"colors-red\" patternUnits=\"userSpaceOnUse\" width=\"20\" height=\"12\"> " << endl;
-//     file << "<rect width=\"20\" height=\"12\" fill=\"red\"/>" ;
-//     file << "<path d=\"M6 12c0-.622-.095-1.221-.27-1.785A5.982 5.982 0 0 0 10 12c1.67 0 3.182-.683 4.27-1.785A5.998 5.998 0 0 0 14 12h2a4 4 0 0 1 4-4V6c-1.67 0-3.182.683-4.27 1.785C15.905 7.22 16 6.622 16 6c0-.622-.095-1.221-.27-1.785A5.982 5.982 0 0 0 20 6V4a4 4 0 0 1-4-4h-2c0 .622.095 1.221.27 1.785A5.982 5.982 0 0 0 10 0C8.33 0 6.818.683 5.73 1.785 5.905 1.22 6 .622 6 0H4a4 4 0 0 1-4 4v2c1.67 0 3.182.683 4.27 1.785A5.998 5.998 0 0 1 4 6c0-.622.095-1.221.27-1.785A5.982 5.982 0 0 1 0 6v2a4 4 0 0 1 4 4h2zm-4 0a2 2 0 0 0-2-2v2h2zm16 0a2 2 0 0 1 2-2v2h-2zM0 2a2 2 0 0 0 2-2H0v2zm20 0a2 2 0 0 1-2-2h2v2zm-10 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z\" stroke=\"firebrick\" stroke-width=\"1\" fill=\"transparent\"/> ";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"colors-yellow\" patternUnits=\"userSpaceOnUse\" width=\"4\" height=\"4\"> " << endl;
-//     file << "<rect width=\"4\" height=\"4\" fill=\"yellow\"/>" ;
-//     file << "<path d=\"M 0 0 Q 0 4 4 0\" stroke=\"orange\" stroke-width=\"1\" fill=\"transparent\"/> ";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"colors-magenta\" patternUnits=\"userSpaceOnUse\" width=\"100\" height=\"100\"> " << endl;
-//     file << "<rect width=\"100\" height=\"100\" fill=\"magenta\"/>" ;
-//     file << "<path d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" stroke=\"mediumorchid\" stroke-width=\"1\" fill=\"mediumorchid\"/> ";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"colors-lime\" patternUnits=\"userSpaceOnUse\" width=\"28\" height=\"49\"> " << endl;
-//     file << "<rect width=\"28\" height=\"49\" fill=\"lime\"/>" ;
-//     file << "<path d=\"M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z\" stroke=\"green\" stroke-width=\"0.4\" fill=\"transparent\"/> ";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"colors-light-blue\" patternUnits=\"userSpaceOnUse\" width=\"100\" height=\"20\"> " << endl;
-//     file << "<rect width=\"100\" height=\"20\" fill=\"aqua\"/>" ;
-//     file << "<path d=\"M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z \" stroke=\"blue\" stroke-width=\"0.3\" fill=\"transparent\"/> ";
-//     file << "</pattern> " << endl;
-//
-//     file << "<pattern id=\"colors-blue\" patternUnits=\"userSpaceOnUse\" width=\"100\" height=\"18\"> " << endl;
-//     file << "<rect width=\"100\" height=\"18\" fill=\"deepskyblue\"/>" ;
-//     file << "<path d=\"M61.82 18c3.47-1.45 6.86-3.78 11.3-7.34C78 6.76 80.34 5.1 83.87 3.42 88.56 1.16 93.75 0 100 0v6.16C98.76 6.05 97.43 6 96 6c-9.59 0-14.23 2.23-23.13 9.34-1.28 1.03-2.39 1.9-3.4 2.66h-7.65zm-23.64 0H22.52c-1-.76-2.1-1.63-3.4-2.66C11.57 9.3 7.08 6.78 0 6.16V0c6.25 0 11.44 1.16 16.14 3.42 3.53 1.7 5.87 3.35 10.73 7.24 4.45 3.56 7.84 5.9 11.31 7.34zM61.82 0h7.66a39.57 39.57 0 0 1-7.34 4.58C57.44 6.84 52.25 8 46 8S34.56 6.84 29.86 4.58A39.57 39.57 0 0 1 22.52 0h15.66C41.65 1.44 45.21 2 50 2c4.8 0 8.35-.56 11.82-2z\" stroke=\"blue\" stroke-width=\"0.3\" fill=\"transparent\"/> ";
-//     file << "</pattern> " << endl;
-//     // END COLORS
-//
-//     // BEGIN SCORES COLORS
-//     for (i = 0; i < 12; i++)
-//     {
-//         file << "<pattern id=\"score-" << i <<"\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//         file << "<rect width=\"10\" height=\"10\" fill=\"";
-//         switch(i) {
-//         case 0:
-//             file << "#FFFBF2";
-//             break;
-//         case 1:
-//             file << "#FFF8CC";
-//             break;
-//         case 2:
-//             file << "#FAF0BE";
-//             break;
-//         case 3:
-//             file << "#F0EAD6";
-//             break;
-//         case 4:
-//             file << "#F3E5AB";
-//             break;
-//         case 5:
-//             file << "#F4C430";
-//             break;
-//         case 6:
-//             file << "#C2B280";
-//             break;
-//         case 7:
-//             file << "#DAA520";
-//             break;
-//         case 8:
-//             file << "#B8860B";
-//             break;
-//         case 9:
-//             file << "#918151";
-//             break;
-//         case 10:
-//             file << "#967117";
-//             break;
-//         case 11:
-//             file << "#6E5411";
-//             break;
-//         }
-//         file << "\"/>";
-//         file << "<path d=\"M0,10 l10,-10 \" stroke=\"";
-//         switch(i) {
-//         case 0:
-//         case 1:
-//         case 2:
-//         case 3:
-//         case 4:
-//         case 5:
-//             file << "black";
-//             break;
-//         case 6:
-//         case 7:
-//         case 8:
-//         case 9:
-//         case 10:
-//         case 11:
-//             file << "white";
-//             break;
-//         }
-//         file << "\" stroke-width=\"1\"/>";
-//         file << "</pattern> " << endl;
-//
-//     }
-//
-//     // END SCORES COLORS
-//
-//     file << "</defs>" << endl;
-//     // END defines
-//
-//     // BEGIN INFO
-//     // Calculate Info Header Lengths
-//     strtok(&filename[0], " ");
-//     string fname = "Filename: ";
-//     fname.append(strtok(nullptr, ";"));
-//
-//     string sSequences = "Selected sequences: " + std::to_string(_trimmedAlignment.sequenNumber) + " / " + std::to_string(originalSequenNumber);
-//
-//     string sResidues =  "Selected residues:  " + std::to_string(_trimmedAlignment.residNumber) + " / "+  std::to_string(originalResidNumber);
-//
-//     string rSequences = "Deleted sequences:  " + std::to_string(_trimmedAlignment.originalSequenNumber - _trimmedAlignment.sequenNumber) + " / " + std::to_string(originalSequenNumber);
-//
-//     string rResidues =  "Deleted residues:   " + std::to_string(_trimmedAlignment.originalResidNumber - _trimmedAlignment.residNumber) + " / "+  std::to_string(originalResidNumber);
-//
-//
-//     int size = fname.length();
-//     size = std::max(size, (int)sSequences.length());
-//     size = std::max(size, (int)rSequences.length());
-//     size = std::max(size, (int)sResidues.length());
-//     size = std::max(size, (int)rResidues.length());
-//
-//     size *= fontSize * 0.5F;
-//
-//     //Filename
-//     file  << "<g class=\"bar\">" << endl;
-//     file  << "<rect style=\"fill:indianred\" height=\"20\" width=\"" << size <<"px\" x =\"0\" y=\"" << H << "\" dy=\".35em\" />" << endl;
-//     file  << "<text style=\"fill:black\" x =\"10\" y=\"" << (H+10) << "\" dy=\".35em\" text-anchor=\"start\" font-family = \"monospace\" xml:space=\"preserve\" kerning=\"0\" \
-//         lengthAdjust=\"spacingAndGlyphs\"\
-//         textLength='" << std::min(size - 10, (int)(fname.length() * fontSize * 0.5F)) << "' >"
-//           << fname << endl;
-//     file  << "</text>"<< endl;
-//     file  << "</g>"<< endl;;
-//
-//     H += 25;
-//
-//     // Selected Sequences
-//     file  << "<g class=\"bar\">"
-//           << "<rect style=\"fill:lightgrey\" height=\"20\" width=\"" << size << "px\" x =\"0\" y=\"" << (H) << "\" dy=\".35em\" />"
-//           << "<text style=\"fill:black\" width=\"200px\" x =\"10\" y=\"" << (H+10) << "\" dy=\".35em\" text-anchor=\"start\" font-family = \"monospace\" xml:space=\"preserve\" kerning=\"0\"\
-//         lengthAdjust=\"spacingAndGlyphs\"\
-//          textLength='" << std::min(size - 10, (int)(sSequences.length() * fontSize * 0.5F)) << "' >"
-//           << sSequences
-//           << "</text>"
-//           << "</g>";
-//
-//     H += 25;
-//
-//     // Deleted Sequences
-//     file  << "<g class=\"bar\">"
-//           << "<rect style=\"fill:grey\" height=\"20\" width=\"" << size << "px\" x =\"0\" y=\"" << (H) << "\" dy=\".35em\" />"
-//           << "<text style=\"fill:black\" width=\"200px\" x =\"10\" y=\"" << (H+10) << "\" dy=\".35em\" text-anchor=\"start\" font-family = \"monospace\" xml:space=\"preserve\" kerning=\"0\"\
-//         lengthAdjust=\"spacingAndGlyphs\"\
-//          textLength='" << std::min(size - 10, (int)(rSequences.length() * fontSize * 0.5F))  << "' >"
-//           << rSequences
-//           << "</text>"
-//           << "</g>";
-//
-//     H += 25;
-//
-//     // Selected Residues
-//     file  << "<g class=\"bar\">"
-//           << "<rect style=\"fill:lightgrey\" height=\"20\" width=\"" << size << "px\" x =\"0\" y=\"" << (H) << "\" dy=\".35em\" />"
-//           << "<text style=\"fill:black\" width=\"200px\" x =\"10\" y=\"" << (H+10) << "\" dy=\".35em\" text-anchor=\"start\" font-family = \"monospace\" xml:space=\"preserve\" kerning=\"0\"\
-//         lengthAdjust=\"spacingAndGlyphs\"\
-//          textLength='" << std::min(size - 10, (int)(sResidues.length() * fontSize * 0.5F)) << "' >"
-//           << sResidues
-//           << "</text>"
-//           << "</g>";
-//
-//     H += 25;
-//
-//     // Deleted Residues
-//     file  << "<g class=\"bar\">"
-//           << "<rect style=\"fill:grey\" height=\"20\" width=\"" << size << "px\" x =\"0\" y=\"" << (H) << "\" dy=\".35em\" />"
-//           << "<text style=\"fill:black\" width=\"200px\" x =\"10\" y=\"" << (H+10) << "\" dy=\".35em\" text-anchor=\"start\" font-family = \"monospace\" xml:space=\"preserve\" kerning=\"0\" \
-//         lengthAdjust=\"spacingAndGlyphs\"\
-//          textLength='" << std::min(size - 10, (int)(rResidues.length() * fontSize * 0.5F)) << "' >"
-//           << rResidues
-//           << "</text>"
-//           << "</g>";
-//
-//     // END INFO
-//
-//     H = 0;
-//
-//     //BEGIN Legend
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['b'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\" \
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Hidrophobic" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['r'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120<< "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Positive Charge" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['m'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 2 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 2 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Negative Charge" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['g'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 3 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 3 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Polar" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['p'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 4 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 4 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Cysteine" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['o'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 5 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//
-//
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 5 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Glycine" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['y'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 6 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 6 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Proline" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['c'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 7 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 7 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\" >" << endl
-//          << "Aromatic" << endl
-//          << "</text>" << endl;
-//
-//     file << "<rect \
-//                     style=\"fill:"<< mappedColors['w'] <<"\" \
-//                     height=\""<< 20 <<"\" \
-//                     width=\"" << 120 << "px\" \
-//                     x =\"" << size + 10 + 120 * 8 << "px\"\
-//                     y =\""<< (H) <<"\"/>" << endl;
-//     file << "<text \
-//                     width=\"100\" style=\"font-weight:bold\"\
-//                     text-anchor=\"middle\" \
-//                     x =\"" << size + 70 + 120 * 8 << "px\" \
-//                     y =\""<< (H + 15) <<"\" \
-//                     font-family = \"monospace\" \
-//                     kerning=\"0\">" << endl
-//          << "Unconserved" << endl
-//          << "</text>" << endl;
-//     H+= 25;
-//
-//     if (gapsValues || consValues || simValues)
-//     {
-//         int width = 78;
-//
-//         for (i = 0; i < 12; i++)
-//         {
-//             file << "<rect \
-//                         style=\"fill:"<< "url(#score-"<<i<<");stroke:black;stroke-width:1" <<"\" \
-//                         height=\""<< 20 <<"\" \
-//                         width=\"" << width << "px\" \
-//                         x =\"" << size + 10  + width * (2 + i) << "px\"\
-//                         y =\""<< (H) <<"\" />" << endl;
-//         }
-//         if (gapsValues) {
-//             std::array<std::string, 12> u = {{"0","&lt;.001","&lt;.050", "&lt;.100","&lt;.150", "&lt;.200", "&lt;.250", "&lt;.350", "&lt;.500", "&lt;.750", "&lt; 1.00", "1"}};
-//             file << "<text \
-//                         width=\"100\" style=\"font-weight:bold\" \
-//                         text-anchor=\"middle\" \
-//                         x =\"" << size + 10 + width << "px\" \
-//                         y =\""<< (H + 40) <<"\" \
-//                         font-family = \"monospace\" \
-//                         kerning=\"0\" \
-//                         textLength=\""<< width * 1.5F << "\">" << endl
-//                  << "Gaps Scores" << endl
-//                  << "</text>" << endl;
-//             for (i = 0; i < 12; i++)
-//                 file << "<text \
-//                             width=\"100\" style=\"font-weight:bold\" \
-//                             text-anchor=\"middle\" \
-//                             x =\"" << size + 10 + width * (2.5F + i) << "px\" \
-//                             y =\""<< (H + 40) <<"\" \
-//                             font-family = \"monospace\" \
-//                             kerning=\"0\" \
-//                             textLength=\""<< width / 2 << "\">" << endl
-//                      << u[i] << endl
-//                      << "</text>" << endl;
-//
-//             H+= 25;
-//         }
-//         if (simValues) {
-//             std::array<std::string, 12> u = {{"0", "&lt; 1e-6", "&lt; 1e-5", "&lt; 1e-4", "&lt;.001","&lt;.010", "&lt;.100", "&lt;.250", "&lt;.500", "&lt;.750", "&lt; 1.00", "1" }};
-//             file << "<text \
-//                         width=\"100\" style=\"font-weight:bold\" \
-//                         text-anchor=\"middle\" \
-//                         x =\"" << size + 10 + width << "px\" \
-//                         y =\""<< (H + 40) <<"\" \
-//                         font-family = \"monospace\" \
-//                         kerning=\"0\" \
-//                         textLength=\""<< width * 1.5F << "\">" << endl
-//                  << "Similarity Scores" << endl
-//                  << "</text>" << endl;
-//             for (i = 0; i < 12; i++)
-//                 file << "<text \
-//                             width=\"100\" style=\"font-weight:bold\" \
-//                             text-anchor=\"middle\" \
-//                             x =\"" << size + 10 + width * (2.5F + i) << "px\" \
-//                             y =\""<< (H + 40) <<"\" \
-//                             font-family = \"monospace\" \
-//                             kerning=\"0\" \
-//                             textLength=\""<< width / 2 << "\">" << endl
-//                      << u[i] << endl
-//                      << "</text>" << endl;
-//             H+= 25;
-//         }
-//         if (consValues) {
-//
-//             std::array<std::string, 12> u = {{"0"," &lt; .001"," &lt; .050"," &lt; .100","  &lt; .150"," &lt; .200"," &lt; .250"," &lt; .350"," &lt; .500"," &lt; .750"," &lt; 1.00"," =1="}};
-//             file << "<text \
-//                         width=\"100\" style=\"font-weight:bold\" \
-//                         text-anchor=\"middle\" \
-//                         x =\"" << size + 10 + width << "px\" \
-//                         y =\""<< (H + 40) <<"\" \
-//                         font-family = \"monospace\" \
-//                         kerning=\"0\" \
-//                         textLength=\""<< width * 1.5F << "\">" << endl
-//                  << "Similarity Scores" << endl
-//                  << "</text>" << endl;
-//             for (i = 0; i < 12; i++)
-//                 file << "<text \
-//                             width=\"100\" style=\"font-weight:bold\" \
-//                             text-anchor=\"middle\" \
-//                             x =\"" << size + 10 + width * (2.5F + i) << "px\" \
-//                             y =\""<< (H + 40) <<"\" \
-//                             font-family = \"monospace\" \
-//                             kerning=\"0\" \
-//                             textLength=\""<< width / 2 << "\">" << endl
-//                      << u[i] << endl
-//                      << "</text>" << endl;
-//         }
-//
-//     }
-//
-//     //END Legend
-//
-//     H = 160;
-//
-//     char ** colors = new char*[sequenNumber];
-// //     int** ary = new int*[rowCount];
-//     for(int i = 0; i < sequenNumber; ++i)
-//         colors[i] = new char[blockSize];
-//
-//
-//     for(j = 0, upper = blockSize;
-//             j < originalResidNumber;
-//             j += blockSize, upper += blockSize) {
-//
-//         /* Print main columns number */
-//         H += fontSize;
-//
-//         if ((j + blockSize) < originalResidNumber)
-//         {
-//             file    << "<text font-family = \"monospace\" \
-//                     font-size=\"" << fontSize << "px\" dy=\".35em\"\
-//                     x =\"" << (sequencesNamesLength) * fontSize * 0.5F << "\" text-anchor=\"start\" y=\"" << (H) << "\" xml:space=\"preserve\" kerning=\"0\" \
-//                     textLength='"<< ((std::min((float)blockSize, originalResidNumber - j - 0.25F) ) * fontSize )<<"' lengthAdjust=\"spacing\">";
-//         }
-//         else
-//         {
-//             file    << "<text font-family = \"monospace\" \
-//                     font-size=\"" << fontSize << "px\" dy=\".35em\" \
-//                     x =\"" << (sequencesNamesLength) * fontSize * 0.5F << "\" text-anchor=\"start\" y=\"" << (H) << "\" xml:space=\"preserve\" kerning=\"0\" \
-//                     textLength='"<< ((std::min((float)blockSize, originalResidNumber - j - 0.25F) + std::to_string(j).length()) * fontSize )<<"' lengthAdjust=\"spacing\">";
-//         }
-//
-//         for(i = j; ((i < originalResidNumber) && (i < upper)); i += 10)
-//             file << setw(10) << setfill(' ') << left << i;
-//         file << "</text>" << endl;
-//
-//         H += fontSize;
-//         file    << "<text font-family = \"monospace\" \
-//                 font-size=\"" << fontSize << "px\" dy=\".35em\" \
-//                 x =\"" << (sequencesNamesLength) * fontSize * 0.5F << "\" text-anchor=\"start\" y=\"" << (H) << "\" xml:space=\"preserve\" kerning=\"0\" \
-//                 textLength='"<< (std::min((float)blockSize, originalResidNumber - j - 0.25F) * fontSize )<<"' lengthAdjust=\"spacing\">";
-//
-//         for(i = j; ((i < originalResidNumber) && (i < upper)); i += 10)
-//
-//             file << setw(std::min(10, originalResidNumber - i)) << setfill('~') << left << "+";
-//         file << "</text>" << endl;
-//
-// //         H+=fontSize;
-//
-//
-//         for(i = 0; i < originalSequenNumber; i++) {
-//
-//             /* Print residues corresponding to current sequences block */
-//             for(k = j; ((k < originalResidNumber) && (k < upper)); k++)
-//             {
-//                 if (tmpColumn != "")
-//                     tmpColumn.clear();
-//                 for(kj = 0; kj < originalSequenNumber; kj++)
-//                     tmpColumn += sequences[kj][k];
-//                 /* Determine residue color based on residues acrofile the alig column */
-//                 type = utils::determineColor(sequences[i][k], tmpColumn);
-//                 colors[i][k - j] = type;
-//             }
-//
-//         }
-//
-//         H += fontSize;
-//
-//         float width =  (blockSize + 0.5F) * (fontSize) / blockSize;
-//         for (k = j; k < originalResidNumber && k < upper; k++)
-//         {
-//             for(kj = 0; kj < originalSequenNumber; kj++)
-//             {
-//                 for(int kn = kj + 1; kn < originalSequenNumber; kn++)
-//                 {
-//                     if (colors[kj][k - j] != colors[kn][k - j] || kn + 1 == originalSequenNumber)
-//                     {
-//                         if (colors[kj][k - j] != 'w')
-//                             file << "<rect " <<
-//                                  " style=\"fill:"<< mappedColors[colors[kj][k - j]] <<"\" " <<
-//                                  " height=\""<< fontSize * (kn - kj) <<"\" " <<
-//                                  " width=\"" << width << "px\" " <<
-//                                  " x =\"" <<
-//
-//                                  sequencesNamesLength * fontSize * 0.5F  // Sequences Names
-//                                  + (k - j - 0.25F) * width
-//
-//                                  << "\" " <<
-//                                  " y =\"" << (H+(fontSize / 2)+(fontSize*kj)) << "\" />";
-//                         kj = kn;
-//                     }
-//                 }
-//
-//             }
-//         }
-//
-//         /* Print sequences name */
-//         for(i = 0; i < originalSequenNumber; i++) {
-//             H += fontSize;
-//             file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
-//                 text-anchor=\"start\" y=\"" << (H) << "\" kerning=\"0\" " << (_trimmedAlignment.saveSequences[i] != -1 ? "style=\"font-weight:bold\"" : "text-decoration=\"line-through\"") << ">"  <<
-//                  setfill(' ') << setw(sequencesNamesLength) << right << seqsName[i] << "</text>" << endl;
-//
-//             file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"" << sequencesNamesLength * fontSize * 0.5F << "px\" \
-//                 text-anchor=\"start\" y=\"" << H << "\" xml:space=\"preserve\" kerning=\"0\" textLength='"<< (std::min(blockSize, originalResidNumber - j) * fontSize) <<"' lengthAdjust=\"spacing\" " << (_trimmedAlignment.saveSequences[i] != -1 ? "style=\"font-weight:bold\"" : "style=\"font-weight:100\"") << ">" ;
-//
-//             /* Print residues corresponding to current sequences block */
-//             for(k = j; ((k < originalResidNumber) && (k < upper)); k++)
-//             {
-//                 for(kj = 0, tmpColumn.clear(); kj < originalSequenNumber; kj++)
-//                     tmpColumn += sequences[kj][k];
-//                 /* Determine residue color based on residues acrofile the alig column */
-//                 type = utils::determineColor(sequences[i][k], tmpColumn);
-//                 file << sequences[i][k];
-//             }
-//             file << "</text>" << endl;
-//
-//         }
-//
-//         H += fontSize * 2;
-//
-//         // SELECTED OR REJECTED SEQUENCES AND RESIDUES
-//         bool accepted = _trimmedAlignment.saveResidues[j] != -1;
-//         int oriPosi = j;
-//         for (k = j; k - j <= blockSize && k <= originalResidNumber; k++)
-//         {
-//             if ( (k - j) == blockSize || ((k) == originalResidNumber) || (_trimmedAlignment.saveResidues[k] != -1) != accepted)
-//             {
-//                 file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
-//                         text-anchor=\"start\" y=\"" << (H + fontSize / 2) << "\" kerning=\"0\"" << ">"  <<
-//                      setfill(' ') << setw(sequencesNamesLength) << right << "Selected Sequences" << "</text>" << endl;
-//
-//                 file <<
-//                      "<rect style=\"fill:url(" << (accepted ? "#selected-no-focus" : "#deleted-no-focus") << ");stroke-width:1;stroke:black\" height=\"10\"" <<
-//                      " width=\"" << width * (k - oriPosi) << "px\"" <<
-//                      " x =\"" << ((sequencesNamesLength) * fontSize/2) + ((oriPosi - j - 0.25F) * width) << "px\" y=\"" << (H) << "\" dy=\".35em\" " <<
-//                      " onmouseover=\"evt.target.setAttribute('style', 'fill:url(" << (accepted ? "#selected-focus" : "#deleted-focus") << ");stroke-width:1;stroke:black');\" " <<
-//                      " onmouseout=\"evt.target.setAttribute('style', 'fill:url(" <<  (accepted ? "#selected-no-focus" : "#deleted-no-focus") << ");stroke-width:1;stroke:black');\"/>" << endl;
-//
-//             }
-//
-//             if ((_trimmedAlignment.saveResidues[k] != -1) != accepted)
-//             {
-//                 accepted = (_trimmedAlignment.saveResidues[k] != -1);
-//                 oriPosi = k;
-//             }
-//
-//         }
-//         H += fontSize;
-//
-//         // GAPS VALUES
-//         if (gapsValues)
-//         {
-//             float inverse = 1.F / originalSequenNumber;
-//             int step = utils::GetGapStep(&gapsValues[j], inverse), innerStep;
-//             oriPosi = j;
-//
-//             for (k = j; k - j <= blockSize && k <= originalResidNumber; k++)
-//             {
-//                 if (((k) != originalResidNumber))
-//                     innerStep = utils::GetGapStep(&gapsValues[k], inverse);
-//                 if ( (k - j) == blockSize || ((k) == originalResidNumber) || innerStep != step)
-//                 {
-//                     file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
-//                             text-anchor=\"start\" y=\"" << (H + fontSize / 2) << "\" kerning=\"0\"" << ">"  <<
-//                          setfill(' ') << setw(sequencesNamesLength) << right << "Gaps Values" << "</text>" << endl;
-//
-//                     file <<
-//                          "<rect style=\"fill:url(#score-" << step << ");stroke-width:1.5;stroke:black\" height=\"10\"" <<
-//                          " width=\"" << width * (k - oriPosi) << "px\"" <<
-//                          " x =\"" << ((sequencesNamesLength) * fontSize/2) + ((oriPosi - j - 0.25F) * width) << "px\" y=\"" << (H) << "\" dy=\".35em\" " <<
-//                          " />" << endl;
-//
-//                 }
-//
-//                 if (innerStep != step)
-//                 {
-//                     step = innerStep;
-//                     oriPosi = k;
-//                 }
-//                 /*
-//                 */
-//             }
-//
-//             H += fontSize;
-//         }
-//
-//         // SIMILARITY VALUES
-//         if (simValues)
-//         {
-//             int step = utils::GetSimStep(&simValues[j]), innerStep;
-//             oriPosi = j;
-//
-//             for (k = j; k - j <= blockSize && k <= originalResidNumber; k++)
-//             {
-//                 if (((k) != originalResidNumber))
-//                     innerStep = utils::GetSimStep(&simValues[k]);
-//                 if ( (k - j) == blockSize || ((k) == originalResidNumber) || innerStep != step)
-//                 {
-//                     file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
-//                             text-anchor=\"start\" y=\"" << (H + fontSize / 2) << "\" kerning=\"0\"" << ">"  <<
-//                          setfill(' ') << setw(sequencesNamesLength) << right << "Similarily Values" << "</text>" << endl;
-//
-//                     file <<
-//                          "<rect style=\"fill:url(#score-" << step << ");stroke-width:1.5;stroke:black\" height=\"10\"" <<
-//                          " width=\"" << width * (k - oriPosi) << "px\"" <<
-//                          " x =\"" << ((sequencesNamesLength) * fontSize/2) + ((oriPosi - j - 0.25F) * width) << "px\" y=\"" << (H) << "\" dy=\".35em\" " <<
-//                          " />" << endl;
-//
-//                 }
-//
-//                 if (innerStep != step)
-//                 {
-//                     step = innerStep;
-//                     oriPosi = k;
-//                 }
-//             }
-//
-//             H += fontSize;
-//         }
-//
-//         // CONSISTENCY VALUES
-//         if (consValues)
-//         {
-//             int step = utils::GetConsStep(&consValues[j]), innerStep;
-//             oriPosi = j;
-//
-//             for (k = j; k - j <= blockSize && k <= originalResidNumber; k++)
-//             {
-//                 if (((k) != originalResidNumber))
-//                     innerStep = utils::GetConsStep(&consValues[k]);
-//                 if ( (k - j) == blockSize || ((k) == originalResidNumber) || innerStep != step)
-//                 {
-//                     file << "<text font-family = \"monospace\" font-size=\"" << fontSize << "px\" dy=\".35em\" x =\"0\" \
-//                             text-anchor=\"start\" y=\"" << (H + fontSize / 2) << "\" kerning=\"0\" style=\"font-weight:100\"" << ">"  <<
-//                          setfill(' ') << setw(sequencesNamesLength) << right << "Similarily Values" << "</text>" << endl;
-//
-//                     file <<
-//                          "<rect style=\"fill:url(#score-" << step << ");stroke-width:1.5;stroke:black\" height=\"10\"" <<
-//                          " width=\"" << width * (k - oriPosi) << "px\"" <<
-//                          " x =\"" << ((sequencesNamesLength) * fontSize/2) + ((oriPosi - j - 0.25F) * width) << "px\" y=\"" << (H) << "\" dy=\".35em\" " <<
-//                          " />" << endl;
-//                 }
-//
-//                 if (innerStep != step)
-//                 {
-//                     step = innerStep;
-//                     oriPosi = k;
-//                 }
-//             }
-//
-//             H += fontSize;
-//         }
-//
-//         H += fontSize * 2;
-//     }
-//     for(int i = 0; i < originalSequenNumber; ++i)
-//         delete [] colors[i];
-//     delete [] colors;
-//
-//     file << "</svg>";
-//     file.close();
-//     return true;
-// }
-
 bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *destFile, float *consValues, int blocks) {
 
-    int i, j, k;
+    int i, j, k, counter = 0;
 
-    //Init variables BEGIN
+    // BEGIN Init variables
     int * gapsValues = NULL;
     if (sgaps != NULL)
         gapsValues = sgaps -> getGapsWindow();
@@ -3430,19 +1790,21 @@ bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *d
     // Init Colors
     std::map<char, string> mappedColors = std::map<char, string>
     {
-        {'o', "orange"},
-        {'y', "yellow"},
-        {'b', "royalblue"},
-        {'w', "lightgrey"},
-        {'p', "darkviolet"},
-        {'r', "red"},
-        {'g', "lime"},
-        {'m', "magenta"},
-        {'c', "aqua"}
+        {'o', "orange"},    {'y', "yellow"},        {'b', "royalblue"},
+        {'w', "lightgrey"}, {'p', "darkviolet"},    {'r', "red"},
+        {'g', "lime"},      {'m', "magenta"},       {'c', "aqua"}
+    };
+
+    std::map<char, string> mappedColorsMeaning = std::map<char, string>
+    {
+        {'o', "Glycines"},      {'y', "Prolines"},          {'b', "Hidrophobic"},
+        {'w', "Unconserved"},   {'p', "Prolines"},          {'r', "Positive Charge"},
+        {'g', "Polar"},         {'m', "Negative Charge"},   {'c', "Aromatic"}
     };
 
     // END
-
+    
+    // BEGIN Init SVG
     float leftMargin          = 5,
           nameBlocksMargin    = 15,
           rightMargin         = 5,
@@ -3450,15 +1812,21 @@ bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *d
           bottomMargin        = 10,
           interBlocksMargin   = 20;
 
-    float height = ((originalSequenNumber + 3 + (gapsValues != NULL || simValues != NULL ? 6 : 0) /* Colnumbering occupies 3 rows. Stats 5 */)
-                    * fontSize + interBlocksMargin) /* Height of a block + interblock */
-                   * std::ceil((float)originalResidNumber/blocks) /* Number of blocks */
+    float height = ((originalSequenNumber + 3 + (gapsValues != NULL || simValues != NULL ? 7 : 0) /* Colnumbering occupies 3 rows. Stats 5 */)
+                    * fontSize + interBlocksMargin)                 /* Height of a block + interblock */
+                   * std::ceil((float)originalResidNumber/blocks)  /* Number of blocks */
                    - interBlocksMargin /* Number of interblocks is number of blocks  - 1 */
-                   + topMargin + bottomMargin;
+                   + fontSize * 16
+                   + topMargin
+                   + bottomMargin;
 
-    float width = (sequencesNamesLength) * fontSize + blocks * fontSize * 0.75F + leftMargin + nameBlocksMargin + rightMargin;
+    float width = sequencesNamesLength * fontSize
+                  + blocks * fontSize * 0.75F
+                  + leftMargin
+                  + nameBlocksMargin
+                  + rightMargin;
 
-    float currentHeight = topMargin;
+    float currentHeight = topMargin + fontSize;
 
     // Start the svg output
     file << "<svg \
@@ -3467,10 +1835,173 @@ bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *d
         version=\"1.1\" \
         height=\""  << height << "\" \
         width=\""   << width << "px\">" << endl;
+    // END
+        
+    // BEGIN Functions
+        file << "<script type=\"text/ecmascript\"> \n\
+                <![CDATA[ \n\
+                function onMouseOverLabel(evt) { \n\
+                    var Line = document.childNodes[0].getElementById(evt.target.id.replace(\"Label\", \"Line\")); \n\
+                    Line.setAttribute(\"style\", \"fill:none;stroke:black;stroke-width:3\"); \n\
+                    evt.target.setAttribute(\"font-size\", 17); \n\
+                } \n\
+                function onMouseOutLabel(evt) { \n\
+                    var Line = document.childNodes[0].getElementById(evt.target.id.replace(\"Label\", \"Line\")); \n\
+                    Line.setAttribute(\"style\", \"fill:none;stroke:black;stroke-width:1\"); \n\
+                    evt.target.setAttribute(\"font-size\", 15); \n\
+                } \n\
+                function onMouseOverLine(evt) { \n\
+                    var Label = document.childNodes[0].getElementById(evt.target.id.replace(\"Line\", \"Label\")); \n\
+                    evt.target.setAttribute(\"style\", \"fill:none;stroke:black;stroke-width:3\"); \n\
+                    Label.setAttribute(\"font-size\", 17); \n\
+                } \n\
+                function onMouseOutLine(evt) { \n\
+                    var Label = document.childNodes[0].getElementById(evt.target.id.replace(\"Line\", \"Label\")); \n\
+                    evt.target.setAttribute(\"style\", \"fill:none;stroke:black;stroke-width:1\"); \n\
+                    Label.setAttribute(\"font-size\", 15); \n\
+                } \n\
+                ]]> \n </script>" << endl;
+    // END
+        
+    // BEGIN Patterns
+    
+    // Selected Block
+    file << "<pattern id=\"selected\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
+    file << "<rect width=\"10\" height=\"10\" fill=\"green\" opacity=\"0.5\"/>";
+    file << "<path d=\"M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2\" stroke=\"white\" stroke-width=\"1\"/>";
+    file << "</pattern> " << endl;
 
+//     file << "<pattern id=\"selected-focus\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
+//     file << "<rect width=\"10\" height=\"10\" fill=\"mediumseagreen\"/>";
+//     file << "</pattern> " << endl;
+
+    // Deleted Block
+    file << "<pattern id=\"rejected\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
+    file << "<rect width=\"10\" height=\"10\" fill=\"red\" opacity=\"0.5\"/>";
+    file << "<path d=\"M2,-2 l-1,1 M10,-10 l0,10 M2,-2 l9,11\" stroke=\"white\" stroke-width=\"1\"/>";
+    file << "</pattern> " << endl;
+
+//     file << "<pattern id=\"deleted-focus\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
+//     file << "<rect width=\"10\" height=\"10\" fill=\"black\"/>";
+//     file << "<path d=\"M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2\" stroke=\"red\" stroke-width=\"2\"/>";
+//     file << "</pattern> " << endl;
+        
+    // END
+    
+    // BEGIN Header
+        
+    strtok(&filename[0], " ");
+    std::string fname = strtok(NULL, " ");
+    
+    file << "<rect \
+                style=\"fill:none;stroke:lightgrey\" \
+                height=\""<< fontSize * 6.5F <<"\" \
+                width=\"" << fontSize * std::max(30.5F, fname.length() * 0.75F + 1.F) << "px\" \
+                x =\"" << leftMargin + nameBlocksMargin - fontSize * 0.5F << "px\"\
+                y =\""<< currentHeight - fontSize * 0.5F <<"\"/>" << endl;
+
+    file << "<text \
+                font-family = \"monospace\" \
+                font-size=\"" << fontSize << "px\" \
+                dy=\".35em\" \
+                x =\"" << leftMargin + nameBlocksMargin << "\" \
+                y=\"" << (currentHeight + fontSize / 2) << "\" \
+                kerning=\"0\" \
+                text-anchor=\"start\" \
+                lengthAdjust=\"spacingAndGlyphs\"\
+                textLength=\"" << fname.size() * 0.75F * fontSize << "\" \
+                style=\"font-weight:100\" \
+                xml:space=\"preserve\" >"
+
+         << fname
+
+         << "</text>" << endl;
+    currentHeight += fontSize * 2;
+    fname = "Selected Sequences \t" + std::to_string(_trimmedAlignment.sequenNumber) + " / " + std::to_string(originalSequenNumber);
+    file << "<text \
+                font-family = \"monospace\" \
+                font-size=\"" << fontSize << "px\" \
+                dy=\".35em\" \
+                x =\"" << leftMargin + nameBlocksMargin << "\" \
+                y=\"" << (currentHeight + fontSize / 2) << "\" \
+                kerning=\"0\" \
+                text-anchor=\"start\" \
+                lengthAdjust=\"spacingAndGlyphs\"\
+                textLength=\"" << std::min((float)fname.size() * 0.65F, (float)sequencesNamesLength) * fontSize << "\" \
+                style=\"font-weight:100\" \
+                xml:space=\"preserve\" >"
+
+         << fname
+
+         << "</text>" << endl;
+    currentHeight += fontSize * 2;
+    fname = "Selected Residues \t\t" + std::to_string(_trimmedAlignment.residNumber) + " / " + std::to_string(originalResidNumber);
+    file << "<text \
+                font-family = \"monospace\" \
+                font-size=\"" << fontSize << "px\" \
+                dy=\".35em\" \
+                x =\"" << leftMargin + nameBlocksMargin << "\" \
+                y=\"" << (currentHeight + fontSize / 2) << "\" \
+                kerning=\"0\" \
+                text-anchor=\"start\" \
+                lengthAdjust=\"spacingAndGlyphs\"\
+                textLength=\"" << std::min((float)fname.size() * 0.65F, (float)sequencesNamesLength) * fontSize << "\" \
+                style=\"font-weight:100\" \
+                xml:space=\"preserve\" >"
+
+         << fname
+
+         << "</text>" << endl;
+    currentHeight += fontSize * 3;
+
+    // END
+    
+    // BEGIN Legend
+    file << "<rect \
+                style=\"fill:none;stroke:lightgrey\" \
+                height=\""<< fontSize * 6.5F <<"\" \
+                width=\"" << fontSize * 30.5 << "px\" \
+                x =\"" << leftMargin + nameBlocksMargin - fontSize * 0.5F << "px\"\
+                y =\""<< currentHeight - fontSize * 0.5F <<"\"/>" << endl;
+                    
+    std::map<char,string>::iterator it = mappedColors.begin();
+    for (i = 0 ; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++, it++)
+        {
+            file << "<rect \
+                    style=\"fill:"<< it->second <<";stroke:black;stroke-width:1px\" \
+                    height=\""<< fontSize <<"\" \
+                    width=\"" << fontSize << "px\" \
+                    x =\"" << leftMargin + nameBlocksMargin * (j + 1) + (9 * fontSize * j) << "px\"\
+                    y =\""<< currentHeight + fontSize * i * 1.2F <<"\"/>" << endl;
+
+            file << "<text \
+                font-family = \"monospace\" \
+                font-size=\"" << fontSize * 0.75F << "px\" \
+                dy=\".35em\" \
+                x =\"" << leftMargin + nameBlocksMargin * (j + 3) + (9 * fontSize * j) << "\" \
+                y =\"" << currentHeight + fontSize * i * 1.2F + fontSize * 0.5F << "\" \
+                kerning=\"0\" \
+                text-anchor=\"start\" \
+                lengthAdjust=\"spacingAndGlyphs\"\
+                textLength=\"" << mappedColorsMeaning[it->first].size() * 0.5F * fontSize << "\" \
+                style=\"font-weight:100\" \
+                xml:space=\"preserve\" >"
+
+                 << mappedColorsMeaning[it->first]
+
+                 << "</text>" << endl;
+        }
+        currentHeight += fontSize;
+    }
+    currentHeight += fontSize * 4;
+    // END
+
+    // Foreach block
     for (j = 0; j < originalResidNumber; j+= blocks)
     {
-        // BEGIN Col Numbering Numbers
+        // BEGIN Columms Numbering Numbers
         file << "<text \
                 font-family = \"monospace\" \
                 font-size=\"" << fontSize << "px\" \
@@ -3492,7 +2023,8 @@ bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *d
 
         currentHeight += fontSize;
         // END
-        // BEGIN Col Numbering Symbols
+        
+        // BEGIN Columns Numbering Symbols
 
         file << "<text \
                 font-family = \"monospace\" \
@@ -3525,6 +2057,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *d
         currentHeight += fontSize ;
 
         // END
+
         // BEGIN Color Matrix
         char lastColor, newColor;
         int lastPos = 0;
@@ -3541,35 +2074,39 @@ bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *d
                 newColor = utils::determineColor(tmpColumn[k], tmpColumn);
                 if (newColor != lastColor)
                 {
-                    if (lastColor != 'w') 
-                    file << "<rect "        <<
-                         " style=\"fill:"   << mappedColors[lastColor]      <<"\" " <<
-                         " height=\""       << fontSize * (k - lastPos)     <<"\" " <<
-                         " width=\""        << fontSize * 0.75F << "px\" "  <<
-                         " x =\""           <<
+                    if (lastColor != 'w')
+                        file << "<rect "        <<
+                             " style=\"fill:"   << mappedColors[lastColor]      <<"\" " <<
+                             " height=\""       << fontSize * (k - lastPos)     <<"\" " <<
+                             " width=\""        << fontSize * 0.75F << "px\" "  <<
+                             " x =\""           <<
 
-                         leftMargin + nameBlocksMargin + (sequencesNamesLength) * fontSize + i * 0.75F * fontSize
+                             leftMargin +
+                             nameBlocksMargin +
+                             sequencesNamesLength * fontSize +
+                             i * 0.75F * fontSize
 
-                         << "\" "           <<
-                         " y =\""           << currentHeight + fontSize * lastPos   << "\" />" << endl;
+                             << "\" "           <<
+                             " y =\""           << currentHeight + fontSize * lastPos   << "\" />" << endl;
                     lastColor = newColor;
                     lastPos = k;
                 }
             }
             if (lastColor != 'w')
-            file << "<rect " <<
-                 " style=\"fill:"<< mappedColors[lastColor] <<"\" " <<
-                 " height=\""<< fontSize * (k - lastPos) <<"\" " <<
-                 " width=\"" << fontSize * 0.75F << "px\" " <<
-                 " x =\"" <<
+                file << "<rect " <<
+                     " style=\"fill:"<< mappedColors[lastColor] <<"\" " <<
+                     " height=\""<< fontSize * (k - lastPos) <<"\" " <<
+                     " width=\"" << fontSize * 0.75F << "px\" " <<
+                     " x =\"" <<
 
-                 leftMargin + nameBlocksMargin + (sequencesNamesLength) * fontSize + i * 0.75F * fontSize
+                     leftMargin + nameBlocksMargin + (sequencesNamesLength) * fontSize + i * 0.75F * fontSize
 
-                 << "\" " <<
-                 " y =\"" << currentHeight + fontSize * lastPos << "\" />" << endl;
+                     << "\" " <<
+                     " y =\"" << currentHeight + fontSize * lastPos << "\" />" << endl;
         }
 
         // END
+
         // BEGIN Sequences Names and Sequences
 
         for (i = 0; i < originalSequenNumber; i ++)
@@ -3583,6 +2120,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *d
                 y=\"" << (currentHeight + fontSize / 2) << "\" \
                 kerning=\"0\" \
                 text-anchor=\"start\" \
+                textLength=\"" << std::min((float)seqsName[i].size() * 0.75F, (float)sequencesNamesLength) * fontSize << "\" \
                 style=\"font-weight:100\"" << ">"
 
                  << seqsName[i].substr(0, sequencesNamesLength)
@@ -3597,27 +2135,40 @@ bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *d
                 y=\"" << (currentHeight + fontSize / 2) << "\" \
                 kerning=\"0\" \
                 text-anchor=\"start\" \
-                lengthAdjust=\"spacingAndGlyphs\"\
+                lengthAdjust=\"spacingAndGlyphs\" \
                 textLength=\"" << std::min((int)blocks, originalResidNumber - j) * fontSize * 0.75F << "\" \
                 style=\"font-weight:100\"" << ">"
 
                  << sequences[i].substr(j, blocks)
 
                  << "</text>" << endl;
-
+            if (_trimmedAlignment.saveSequences[i] == -1)
+            {
+                file << "<line x1=\""<< leftMargin + nameBlocksMargin + sequencesNamesLength * fontSize <<"\"" << 
+                             " x2=\""<< leftMargin + nameBlocksMargin + sequencesNamesLength * fontSize + std::min(blocks, originalResidNumber - j) * fontSize * 0.75F <<"\"" << 
+                             " y1=\""<< (currentHeight + fontSize / 2) <<"\"" <<
+                             " y2=\""<< (currentHeight + fontSize / 2) <<"\"" << 
+                             " style=\"stroke:rgb(0,0,0);stroke-width:2\""
+                             "/>" << endl;
+                file << "<line x1=\""<< leftMargin <<"\"" << 
+                             " x2=\""<< leftMargin + std::min((float)seqsName[i].size() * 0.75F, (float)sequencesNamesLength) * fontSize <<"\"" << 
+                             " y1=\""<< (currentHeight + fontSize / 2) <<"\"" <<
+                             " y2=\""<< (currentHeight + fontSize / 2) <<"\"" << 
+                             " style=\"stroke:rgb(0,0,0);stroke-width:2\""
+                             "/>" << endl;
+            }
             currentHeight += fontSize;
         }
 
         // END
 
-        // BEGIN STATS
-        if (gapsValues != NULL || simValues != NULL)
-        {
+        // BEGIN Selected / Rejected Boxes
             currentHeight += fontSize;
 
+            // Big white box
             file << "<rect " <<
-                 " style=\"fill:none;stroke:lightgrey\"" <<
-                 " height=\""<< fontSize * 4 + 20 <<"\" " <<
+                 " style=\"fill:none;stroke:black\"" <<
+                 " height=\""<< fontSize * 5 <<"\" " <<
                  " width=\"" << fontSize * 0.75F * std::min(blocks, originalResidNumber - j) << "px\" " <<
                  " x =\"" <<
 
@@ -3625,149 +2176,219 @@ bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *d
 
                  << "\" " <<
                  " y =\"" << currentHeight << "\" />" << endl;
+            
+            bool rejected = _trimmedAlignment.saveResidues[j] == -1;
+            lastPos = j;
+            for (k = j + 1; k < originalResidNumber && (k - j) < blocks; k++)
+            {
+                if ((_trimmedAlignment.saveResidues[k] == -1) != rejected)
+                {
+                    file << "<rect " <<
+                            " style=\"fill:url(#" << (rejected ? "rejected" : "selected") << ");stroke:black\"" <<
+                            " height=\""<< fontSize * 5 <<"\" " <<
+                            " width=\"" << fontSize * 0.75F * (k - lastPos) << "px\" " <<
+                            " opacity=\"0.5\"" <<
 
+                            " x =\"" <<
+
+                            leftMargin + nameBlocksMargin + sequencesNamesLength * fontSize + fontSize * 0.75F * (lastPos - j) 
+
+                        << "\" " <<
+                        " y =\"" << currentHeight << "\" />" << endl;
+                    rejected = !rejected;
+                    lastPos = k;
+                }
+            }
+            file << "<rect " <<
+                    " style=\"fill:url(#" << (rejected ? "rejected" : "selected") << ");stroke:black\"" <<
+                    " height=\""<< fontSize * 5 <<"\" " <<
+                    " width=\"" << fontSize * 0.75F * (k - lastPos) << "px\" " <<
+                    " opacity=\"0.5\""
+                    " x =\"" <<
+
+                    leftMargin + nameBlocksMargin + sequencesNamesLength * fontSize + fontSize * 0.75F * (lastPos - j) 
+
+                    << "\" " <<
+                    " y =\"" << currentHeight << "\" />" << endl;
+        // END
+                    
+        // BEGIN Stats report
+            if (gapsValues || simValues || consValues)
+            {
+                file << "<text \
+                        font-family = \"monospace\" \
+                        font-size=\"" << fontSize << "px\" \
+                        dy=\".35em\" \
+                        x =\"" << leftMargin + (sequencesNamesLength) * fontSize << "\" \
+                        y=\"" << currentHeight << "\" \
+                        kerning=\"0\" \
+                        text-anchor=\"end\" \
+                        lengthAdjust=\"spacingAndGlyphs\"\
+                        style=\"font-weight:100\" \
+                        xml:space=\"preserve\" >"
+
+                    << "1"
+
+                    << "</text>" << endl;
+                    
+                file << "<text \
+                        font-family = \"monospace\" \
+                        font-size=\"" << fontSize << "px\" \
+                        dy=\".35em\" \
+                        x =\"" << leftMargin + (sequencesNamesLength) * fontSize << "\" \
+                        y=\"" << currentHeight + fontSize * 5 << "\" \
+                        kerning=\"0\" \
+                        text-anchor=\"end\" \
+                        lengthAdjust=\"spacingAndGlyphs\"\
+                        style=\"font-weight:100\" \
+                        xml:space=\"preserve\" >"
+
+                    << "0"
+
+                    << "</text>" << endl;
+            }
             if (gapsValues)
             {
                 file << "<polyline \
-                style=\"fill:none;stroke:black;stroke-width:1\" \
-                points=\"";
+                        style=\"fill:none;stroke:black;stroke-width:1\" \
+                        stroke-dasharray=\"10,4\" \
+                        id =\"GapsLine" << counter << "\" \
+                        onmouseover=\"onMouseOverLine(evt)\" \
+                        onmouseout=\"onMouseOutLine(evt)\" \
+                        points=\"";
 
                 for (i = 0; i < blocks && (i+j) < originalResidNumber; i++)
                 {
                     file << leftMargin + nameBlocksMargin + (sequencesNamesLength) * fontSize + (i + 0.5F) * 0.75F * fontSize << ","
-                         << currentHeight + 10 + (gapsValues[i + j] * fontSize * 4)/sgaps->maxGaps << " ";
+                         << currentHeight + 10 + ( 1.F - (gapsValues[i + j] / (float)originalSequenNumber)) * fontSize * 4 << " ";
                 }
 
-                file << "\"/>";
+                file << "\"/>" << endl;
+                
+                file << "<text \
+                        font-family = \"monospace\" \
+                        font-size=\"" << fontSize << "px\" \
+                        dy=\".35em\" \
+                        x =\"" << leftMargin << "\" \
+                        y=\"" << (currentHeight + fontSize / 2) << "\" \
+                        kerning=\"0\" \
+                        text-anchor=\"start\" \
+                        id =\"GapsLabel" << counter << "\" \
+                        onmouseover=\"onMouseOverLabel(evt)\" \
+                        onmouseout=\"onMouseOutLabel(evt)\" \
+                        textLength=\"" << std::min(11 * 0.75F, (float)sequencesNamesLength) * fontSize << "\" \
+                        style=\"font-weight:bold\"" << ">"
 
-                if (simValues)
-                {
-                    file << "<text \
-                            font-family = \"monospace\" \
-                            font-size=\"" << fontSize << "px\" \
-                            dy=\".35em\" \
-                            x =\"" << leftMargin + nameBlocksMargin + 10 << "\" \
-                            y=\"" << (currentHeight + fontSize) << "\" \
-                            kerning=\"0\" \
-                            text-anchor=\"start\" \
-                            lengthAdjust=\"spacingAndGlyphs\"\
-                            textLength=\"" << sequencesNamesLength * fontSize * 0.5F << "\" \
-                            style=\"font-weight:100\"" << ">"
+                        << "Gaps Values"
 
-                         << "Gaps Values"
-
-                         << "</text>" << endl;
-
-                    file << "<line x1=\"" << leftMargin + nameBlocksMargin + 10
-                         << "\" x2=\"" << leftMargin + nameBlocksMargin + 10 + sequencesNamesLength * fontSize * 0.5F
-                         << "\" y1=\"" << currentHeight + fontSize * 1.75F
-                         << "\" y2=\"" << currentHeight + fontSize * 1.75F
-                         << "\" style=\"stroke:rgb(0,0,0);stroke-width:1\"/>" << endl;
-
-                }
-                else 
-                {
-                    file << "<text \
-                            font-family = \"monospace\" \
-                            font-size=\"" << fontSize << "px\" \
-                            dy=\".35em\" \
-                            x =\"" << leftMargin + nameBlocksMargin + 10 << "\" \
-                            y=\"" << (currentHeight + fontSize * 3) << "\" \
-                            kerning=\"0\" \
-                            text-anchor=\"start\" \
-                            lengthAdjust=\"spacingAndGlyphs\"\
-                            textLength=\"" << sequencesNamesLength * fontSize * 0.5F << "\" \
-                            style=\"font-weight:100\"" << ">"
-
-                         << "Gap Values"
-
-                         << "</text>" << endl;
-
-                    file << "<line x1=\"" << leftMargin + nameBlocksMargin + 10
-                         << "\" x2=\"" << leftMargin + nameBlocksMargin + 10 + sequencesNamesLength * fontSize * 0.5F
-                         << "\" y1=\"" << currentHeight + fontSize * 3.75F
-                         << "\" y2=\"" << currentHeight + fontSize * 3.75F
-                         << "\" style=\"stroke:rgb(0,0,0);stroke-width:1\"/>" << endl;
-                }
+                        << "</text>" << endl;
+                        
+                   file << "<line x1=\"" << leftMargin 
+                        << "\" x2=\"" << leftMargin + std::min(11 * 0.75F, (float)sequencesNamesLength) * fontSize
+                        << "\" y1=\"" << currentHeight + fontSize * 1.25F
+                        << "\" y2=\"" << currentHeight + fontSize * 1.25F
+                        << "\" style=\"stroke:rgb(0,0,0);stroke-width:1\""
+                        << " stroke-dasharray=\"10,4\""
+                        << " id =\"GapsSubLine" << counter << "\""
+                        << "/>" << endl;
             }
 
             if (simValues)
             {
                 file << "<polyline \
                 style=\"fill:none;stroke:black;stroke-width:1\" \
-                stroke-dasharray=\"5,5\" \
+                stroke-dasharray=\"5,1\" \
+                id =\"SimLine" << counter << "\" \
+                onmouseover=\"onMouseOverLine(evt)\" \
+                onmouseout=\"onMouseOutLine(evt)\" \
                 points=\"";
-                
-//                 if (gapsValues)
-//                     file << leftMargin + nameBlocksMargin + 10 << "," << currentHeight + fontSize * 5.75F << " "
-//                             << leftMargin + nameBlocksMargin + 10 + sequencesNamesLength * fontSize * 0.5F << "," << currentHeight + fontSize * 5.75F << " ";
 
                 for (i = 0; i < blocks && (i+j) < originalResidNumber; i++)
                 {
                     file << leftMargin + nameBlocksMargin + (sequencesNamesLength) * fontSize + (i + 0.5F) * 0.75F * fontSize << ","
-                         << currentHeight + 10 + (simValues[i + j] * fontSize * 4) << " ";
+                         << currentHeight + 10 + ( (1.F - simValues[i + j]) * fontSize * 4) << " ";
                 }
 
                 file << "\"/>";
+                
+                file << "<text \
+                        font-family = \"monospace\" \
+                        font-size=\"" << fontSize << "px\" \
+                        dy=\".35em\" \
+                        x =\"" << leftMargin << "\" \
+                        y=\"" << (currentHeight + 2.5F * fontSize) << "\" \
+                        kerning=\"0\" \
+                        text-anchor=\"start\" \
+                        id =\"SimLabel" << counter << "\" \
+                        onmouseover=\"onMouseOverLabel(evt)\" \
+                        onmouseout=\"onMouseOutLabel(evt)\" \
+                        textLength=\"" << std::min(10 * 0.75F, (float)sequencesNamesLength) * fontSize << "\" \
+                        style=\"font-weight:bold\"" << ">"
 
-                if (gapsValues)
-                {
+                        << "Sim Values"
 
-                    file << "<text \
-                            font-family = \"monospace\" \
-                            font-size=\"" << fontSize << "px\" \
-                            dy=\".35em\" \
-                            x =\"" << leftMargin + nameBlocksMargin + 10 << "\" \
-                            y=\"" << (currentHeight + fontSize * 5) << "\" \
-                            kerning=\"0\" \
-                            text-anchor=\"start\" \
-                            lengthAdjust=\"spacingAndGlyphs\"\
-                            textLength=\"" << sequencesNamesLength * fontSize * 0.5F << "\" \
-                            style=\"font-weight:100\"" << ">"
-
-                         << "Sim Values"
-
-                         << "</text>" << endl;
-
-                    file << "<line x1=\"" << leftMargin + nameBlocksMargin + 10
-                         << "\" x2=\"" << leftMargin + nameBlocksMargin + 10 + sequencesNamesLength * fontSize * 0.5F
-                         << "\" y1=\"" << currentHeight + fontSize * 5.75F
-                         << "\" y2=\"" << currentHeight + fontSize * 5.75F
-                         << "\" style=\"stroke:rgb(0,0,0);stroke-width:1\" \
-                        stroke-dasharray=\"5,5\" />" << endl;
-                }
-                else 
-                {
-                    file << "<text \
-                            font-family = \"monospace\" \
-                            font-size=\"" << fontSize << "px\" \
-                            dy=\".35em\" \
-                            x =\"" << leftMargin + nameBlocksMargin + 10 << "\" \
-                            y=\"" << (currentHeight + fontSize * 3) << "\" \
-                            kerning=\"0\" \
-                            text-anchor=\"start\" \
-                            lengthAdjust=\"spacingAndGlyphs\"\
-                            textLength=\"" << sequencesNamesLength * fontSize * 0.5F << "\" \
-                            style=\"font-weight:100\"" << ">"
-
-                         << "Sim Values"
-
-                         << "</text>" << endl;
-
-                    file << "<line x1=\"" << leftMargin + nameBlocksMargin + 10
-                         << "\" x2=\"" << leftMargin + nameBlocksMargin + 10 + sequencesNamesLength * fontSize * 0.5F
-                         << "\" y1=\"" << currentHeight + fontSize * 3.75F
-                         << "\" y2=\"" << currentHeight + fontSize * 3.75F
-                         << "\" style=\"stroke:rgb(0,0,0);stroke-width:1\" \
-                        stroke-dasharray=\"5,5\" />" << endl;
-                }
+                        << "</text>" << endl;
+                        
+                file << "<line x1=\"" << leftMargin 
+                        << "\" x2=\"" << leftMargin + std::min(10 * 0.75F, (float)sequencesNamesLength) * fontSize
+                        << "\" y1=\"" << currentHeight + fontSize * 3.25F
+                        << "\" y2=\"" << currentHeight + fontSize * 3.25F
+                        << "\" style=\"stroke:rgb(0,0,0);stroke-width:1\""
+                        << " stroke-dasharray=\"5,1\""
+                        << " id =\"SimSubLine" << counter << "\""
+                        << "/>" << endl;
             }
-            currentHeight += 5 * fontSize;
-        }
+            
+            if (consValues)
+            {
+                file << "<polyline \
+                style=\"fill:none;stroke:black;stroke-width:1\" \
+                stroke-dasharray=\"2,2\" \
+                id =\"ConsLine" << counter << "\" \
+                onmouseover=\"onMouseOverLine(evt)\" \
+                onmouseout=\"onMouseOutLine(evt)\" \
+                points=\"";
 
+                for (i = 0; i < blocks && (i+j) < originalResidNumber; i++)
+                {
+                    file << leftMargin + nameBlocksMargin + (sequencesNamesLength) * fontSize + (i + 0.5F) * 0.75F * fontSize << ","
+                         << currentHeight + 10 + ( (1.F - consValues[i + j]) * fontSize * 4) << " ";
+                }
+
+                file << "\"/>";
+                
+                file << "<text \
+                        font-family = \"monospace\" \
+                        font-size=\"" << fontSize << "px\" \
+                        dy=\".35em\" \
+                        x =\"" << leftMargin << "\" \
+                        y=\"" << (currentHeight + 4.5F * fontSize) << "\" \
+                        kerning=\"0\" \
+                        text-anchor=\"start\" \
+                        id =\"ConsLabel" << counter << "\" \
+                        onmouseover=\"onMouseOverLabel(evt)\" \
+                        onmouseout=\"onMouseOutLabel(evt)\" \
+                        textLength=\"" << std::min(10 * 0.75F, (float)sequencesNamesLength) * fontSize << "\" \
+                        style=\"font-weight:bold\"" << ">"
+
+                        << "Cons Values"
+
+                        << "</text>" << endl;
+                        
+                file << "<line x1=\"" << leftMargin 
+                        << "\" x2=\"" << leftMargin + std::min(10 * 0.75F, (float)sequencesNamesLength) * fontSize
+                        << "\" y1=\"" << currentHeight + fontSize * 5.25F
+                        << "\" y2=\"" << currentHeight + fontSize * 5.25F
+                        << "\" style=\"stroke:rgb(0,0,0);stroke-width:1\""
+                        << " stroke-dasharray=\"2,2\""
+                        << " id =\"ConsSubLine" << counter << "\""
+                        << "/>" << endl;
+            }
+            counter++;
+            currentHeight += 6 * fontSize;
+        
         // END
 
-        Debug << j << " " << std::min((int)blocks, originalResidNumber - j) << endl;
         currentHeight += interBlocksMargin;
     }
     file << "</svg>";

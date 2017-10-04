@@ -1729,27 +1729,7 @@ int trimAlManager::perform()
 
     if(backtransFile != NULL)
     {
-//         if(sequencesNames != NULL)
-//             delete [] sequencesNames;
-
-//         if(backtransFile != NULL)
-//             seqMatrix = singleAlig -> SequencesMatrix;
-// 
-//         if (seqMatrix == NULL)
-//             seqMatrix = new sequencesMatrix(singleAlig);
-
-
-//         sequencesNames = new string[singleAlig -> getNumSpecies()];
-// 
-//         singleAlig -> getSequences(sequencesNames);
-
-        singleAlig = backtranslationAlig -> getTranslationCDS(/*
-                         singleAlig -> getNumAminos(),
-                         singleAlig -> getNumSpecies(),
-                         singleAlig -> getCorrespResidues(),
-                         sequencesNames,
-                         seqMatrix,
-                         */singleAlig);
+        singleAlig = backtranslationAlig -> getTranslationCDS(singleAlig);
     }
 
 
