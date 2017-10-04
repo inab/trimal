@@ -31,9 +31,9 @@ int main(int argc, char *argv[])
 {
     debug.IsDebug = true;
     
-    debug.Level = VerboseLevel::INFO;
+    debug.Level = VerboseLevel::ERROR;
     
-    debug.log(VerboseLevel::WARNING) << "HELLO" << endl;
+//    debug.log(VerboseLevel::WARNING) << "HELLO" << endl;
     
     trimAlManager Trimal = trimAlManager();
 
