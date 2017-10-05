@@ -298,19 +298,16 @@ void __internalReport::__reportSystem::PrintCodesAndMessages()
 
     for (int i = 1; i < InfoCode::__MAXINFO ; i++)
     {
-//         std::cout << "Info Code:    " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
         report((InfoCode)i);
     }
     
     for (int i = 1; i < WarningCode::__MAXWARNING ; i++)
     {
-//         std::cout << "Warning Code: " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
         report((WarningCode)i);
     }  
     
     for (int i = 1; i < ErrorCode::__MAXERROR ; i++)
     {
-//         std::cerr << "Error Code:   " << std::setw(3) << std::setfill('0') << std::right << i << " -> ";
         report((ErrorCode)i);
     }
 }
@@ -479,11 +476,3 @@ void __internalReport::__reportSystem::report(InfoCode message, char * vars)
     std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
 
 }
-
-// void __internalReport::__reportSystem::log(std::string debugMessage)
-// {
-//     if (IsDebug)
-//     {
-//         std::cout << debugMessage;
-//     }
-// }

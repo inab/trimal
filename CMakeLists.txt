@@ -232,9 +232,9 @@ foreach(method ${automethod})
 compare_outputs(
             "[.${VAR}.][trimal][Backtrans][${method}]"
             "../Strimal/source/trimal" "bin/trimal"
-            "-in dataset/example.091.AA.strNOG.ENOG411BWBU.fasta -backtrans dataset/example.091.AA.strNOG.ENOG411BWBU.codon.fa ${method}")
+            "-in dataset/example.091.AA.strNOG.ENOG411BWBU.fasta -backtrans dataset/example.091.AA.strNOG.ENOG411BWBU.disordered.codon.fa ${method}")
     MATH(EXPR VAR "${VAR}+1")
-    endforeach()
+endforeach()
     
     
 

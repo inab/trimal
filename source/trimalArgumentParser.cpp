@@ -23,6 +23,8 @@ void trimAlManager::parseArguments(int argc, char *argv[])
         menu();
         exit(0);
     }
+    
+    verbosity_argument(&argc, argv);
 
     for(int i = 1; i < argc; i++ )
     {
@@ -83,11 +85,50 @@ void trimAlManager::parseArguments(int argc, char *argv[])
         if (col_numbering_argument(&argc, argv, &i))        continue;
         if (split_by_stop_codon_argument(&argc, argv, &i))  continue;
         if (ignore_stop_codon_argument(&argc, argv, &i))    continue;
-
+        
+        if (!strcmp(argv[i], "--verbosity") || !strcmp(argv[i], "-v"))
+        {
+            i++;
+            continue;
+        }
+        
         debug.report(ErrorCode::ParameterNotFoundOrRepeated, argv[i]);
 //         cerr << endl << "ERROR: Parameter \"" << argv[i] << "\" not valid or repeated." << endl << endl;
         appearErrors = true;
         break;
+    }
+}
+
+inline void trimAlManager::verbosity_argument(int* argc, char* argv[])
+{
+    for(int i = 1; i < *argc; i++ )
+    {
+        if (!strcmp(argv[i], "--verbosity") || !strcmp(argv[i], "-v"))
+        {
+            if (i != *argc)
+            {
+                if (!strcmp(argv[i + 1], "error") || !strcmp(argv[i + 1], "3"))
+                {
+                    debug.Level = VerboseLevel::ERROR;
+                    return;
+                }
+                if (!strcmp(argv[i + 1], "warning") || !strcmp(argv[i + 1], "2"))
+                {
+                    debug.Level = VerboseLevel::WARNING;
+                    return;
+                }
+                if (!strcmp(argv[i + 1], "info") || !strcmp(argv[i + 1], "1"))
+                {
+                    debug.Level = VerboseLevel::INFO;
+                    return;
+                }
+                if (!strcmp(argv[i + 1], "none") || !strcmp(argv[i + 1], "0"))
+                {
+                    debug.Level = VerboseLevel::NONE;
+                    return;
+                }
+            }
+        }
     }
 }
 
@@ -96,6 +137,7 @@ inline void trimAlManager::info_arguments(int *argc, char *argv[], int *i)
     if (!strcmp(argv[*i], "-h"))
     {
         menu();
+        delete_variables();
         exit(0); // We don't want to continue if we show the help.
     }
 

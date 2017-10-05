@@ -31,18 +31,14 @@ int main(int argc, char *argv[])
 {
     debug.IsDebug = true;
     
-    debug.Level = VerboseLevel::ERROR;
-    
-//    debug.log(VerboseLevel::WARNING) << "HELLO" << endl;
-    
+//     debug.Level = VerboseLevel::ERROR;
+
     trimAlManager Trimal = trimAlManager();
 
     Trimal.parseArguments(argc, argv);
-
+    
     Trimal.processArguments(argv);
 
     return Trimal.perform();
-    
-    
     
 }

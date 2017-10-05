@@ -121,7 +121,7 @@ public:
     ///@{ 
     void parseArguments(int argc, char *argv[]);
 private:
-
+        void verbosity_argument(int* argc, char* argv[]);
         void info_arguments(int* argc, char* argv[], int* i);
         bool in_argument(int* argc, char* argv[], int* i);
         bool out_argument(int* argc, char* argv[], int* i);
