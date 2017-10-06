@@ -30,8 +30,6 @@
 int main(int argc, char *argv[])
 {
     debug.IsDebug = true;
-    
-    debug.log(VerboseLevel::ERROR) << "This is the dev branch" << endl;
 
     trimAlManager Trimal = trimAlManager();
 

@@ -248,10 +248,10 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
         "Sequence \"[tag]\" has stop codon \"[tag]\" (residue \"[tag]\") at position [tag] (length: [tag])" }, 
         
     { ErrorCode::SequenceNotPresentInCDS, 
-        "Sequence \"[tag]\" is not in CDS file." }, 
+        "Sequence \"[tag]\" is not in CDS file" }, 
         
     { ErrorCode::UnknownCharacter, 
-        "The sequence \"[tag]\" has an unknown ([tag]) character." }, 
+        "The sequence \"[tag]\" has an unknown ([tag]) character" }, 
         
     { ErrorCode::SequencesNotSameSize, 
         "The sequence \"[tag]\" ([tag]) does not have the same number of residues fixed by the alignment ([tag])" }, 
@@ -263,10 +263,10 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
         "the symbol '[tag]' accesing the matrix is not defined in this object" }, 
         
     { ErrorCode::ParameterNotFoundOrRepeated, 
-        "Parameter \"[tag]\" not valid or repeated." }, 
+        "Parameter \"[tag]\" not valid or repeated" }, 
         
     { ErrorCode::SimilarityMatrixNotCompatibleWindow, 
-        "The Similarity Matrix can only be used with general/similarity windows size." }, 
+        "The Similarity Matrix can only be used with general/similarity windows size" }, 
         
     { ErrorCode::PossibleMissmatch, 
         "Possible (\") mismatch for comments" }, 
@@ -276,6 +276,27 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
         
     { ErrorCode::UnalignedAlignmentToAlignedFormat, 
         "Sequences are not aligned. Format ([tag]) not compatible with unaligned sequences." }, 
+        
+    { ErrorCode::CantOpenFile,
+        "File [tag] not found or impossible to open" },
+        
+    { ErrorCode::FileIsEmpty,
+        "File [tag] is empty"  },
+        
+    { ErrorCode::OutputFormatNotRecognized, 
+        "Output format [tag] not recognized" },
+        
+    { ErrorCode::OnlyOneFormatOnConsoleOutput,
+        "You must specify only one output format if you don't provide an output file pattern" }, 
+        
+    { ErrorCode::AlignmentNotSaved,
+        "Alignment couldn't be saved on [tag] format" },
+        
+    { ErrorCode::VerboseLevelNotRecognized, 
+        "Verbose Level specified ([tag]) wasn't recognized. Current level is: [tag]" },
+        
+    { ErrorCode::NeedToSpecifyVerboseLevel,
+        "Verbose Level has to be specified after the [tag] argument. Acceptable values are: 'error', 'warning', 'info', 'none' and their numerical equivalents '3', '2', '1' and '0'. Current level is [tag]" }
 };
 
 void __internalReport::__reportSystem::PrintCodesAndMessages()

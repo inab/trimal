@@ -105,7 +105,7 @@ inline void trimAlManager::verbosity_argument(int* argc, char* argv[])
     {
         if (!strcmp(argv[i], "--verbosity") || !strcmp(argv[i], "-v"))
         {
-            if (i != *argc)
+            if ((i + 1) != *argc)
             {
                 if (!strcmp(argv[i + 1], "error") || !strcmp(argv[i + 1], "3"))
                 {
@@ -127,7 +127,11 @@ inline void trimAlManager::verbosity_argument(int* argc, char* argv[])
                     debug.Level = VerboseLevel::NONE;
                     return;
                 }
+                
+                debug.report(ErrorCode::VerboseLevelNotRecognized, new std::string[2] { argv[i + 1] , std::to_string(debug.Level) });
             }
+            else 
+                debug.report(ErrorCode::NeedToSpecifyVerboseLevel, new std::string[2] { argv[i], std::to_string(debug.Level) });
         }
     }
 }
@@ -146,7 +150,6 @@ inline void trimAlManager::info_arguments(int *argc, char *argv[], int *i)
         examples();
         exit(0); // We don't want to continue if we show the examples.
     }
-
 }
 
 inline bool trimAlManager::in_argument(int *argc, char *argv[], int *i)
