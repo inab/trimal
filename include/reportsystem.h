@@ -157,6 +157,18 @@ enum ErrorCode {
     BracketsMissmatchFound                      = 76,
 
     UnalignedAlignmentToAlignedFormat           = 77,
+    
+    CantOpenFile                                = 78,
+    
+    FileIsEmpty                                 = 79,
+    
+    AlignmentFormatNotRecognized                = 80,
+    
+    OutputFormatNotRecognized                   = 81,
+    
+    OnlyOneFormatOnConsoleOutput                = 82,
+    
+    AlignmentNotSaved                           = 83,
 
     __MAXERROR
 

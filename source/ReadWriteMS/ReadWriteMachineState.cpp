@@ -52,12 +52,12 @@ newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
     inFileHandler.open(inFile);
     if (!inFileHandler.is_open())
     {
-        cerr << "ERROR: Couldn't open input file " << inFile << endl << endl;
+        debug.report(ErrorCode::CantOpenFile, &inFile[0]);
         return nullptr;
     }
     else if (inFileHandler.peek() == std::ifstream::traits_type::eof())
     {
-        cerr << "ERROR: " << inFile << " is empty" << endl << endl;
+        debug.report(ErrorCode::FileIsEmpty, &inFile[0]);
         return nullptr;
     }
 
@@ -78,7 +78,8 @@ newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
 
     if (inState == NULL)
     {
-        cerr << "ERROR: Cannot recognize input format of file " << inFile << endl << endl;
+        debug.report(ErrorCode::AlignmentFormatNotRecognized, &inFile[0]);
+//         cerr << "ERROR: Cannot recognize input format of file " << inFile << endl << endl;
         inFileHandler.close();
         return nullptr;
     }
@@ -120,12 +121,14 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
                     return state->SaveAlignment(alignment, &cout, &filename);
                 }
             }
-            cerr << "ERROR: Format " << outFormats->at(0) << " wasn't recognized" << endl << endl;
+            debug.report(ErrorCode::OutputFormatNotRecognized, &outFormats->at(0)[0]);
+//             cerr << "ERROR: Format " << outFormats->at(0) << " wasn't recognized" << endl << endl;
             return false;
         }
         else
         {
-            cerr << "ERROR: You must specify only one output format if you don't provide an output file pattern" << endl << endl;
+            debug.report(ErrorCode::OnlyOneFormatOnConsoleOutput);
+//             cerr << "ERROR: You must specify only one output format if you don't provide an output file pattern" << endl << endl;
             return false;
         }
     }
@@ -150,7 +153,8 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
                     return state->SaveAlignment(alignment, &outFileHandler, &alignment->filename);
                 }
             }
-            cerr << "ERROR: Format specified wasn't recognized" << endl << endl;
+            debug.report(ErrorCode::OutputFormatNotRecognized, &outFormats->at(0)[0]);
+//             cerr << "ERROR: Format specified wasn't recognized" << endl << endl;
             return false;
         }
         else 
@@ -172,7 +176,7 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
                     }
                     if (!recognized)
                     {
-                        cerr << "ERROR: Cannot recognize output format " << outFormat << endl << endl;
+                        debug.report(ErrorCode::OutputFormatNotRecognized, &outFormat[0]);
                         return false; 
                     }
                 }
@@ -187,7 +191,8 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
                 outFileHandler.open(filename_2);
                 if(!state -> SaveAlignment(alignment, &outFileHandler, &alignment->filename))
                 {
-                    cerr << "ERROR: Alignment couldn't be saved on " << state->name << " format" << endl << endl;
+                    debug.report(ErrorCode::AlignmentNotSaved, &state->name[0]);
+//                     cerr << "ERROR: Alignment couldn't be saved on " << state->name << " format" << endl << endl;
                     isCorrect = false;
                 }
                 
@@ -227,7 +232,8 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
 
             if (!recognized)
             {
-                cerr << "Cannot recognize output format " << outFormat << endl;
+                debug.report(ErrorCode::OutputFormatNotRecognized, &outFormat[0]);
+//                 cerr << "Cannot recognize output format " << outFormat << endl;
                 return;
             }
         }
@@ -245,12 +251,14 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
         inFileHandler.open(inFile);
         if (!inFileHandler.is_open())
         {
-            cerr << "ERROR: Couldn't open input file " << inFile << endl;
+            debug.report(ErrorCode::CantOpenFile, &inFile[0]);
+//             cerr << "ERROR: Couldn't open input file " << inFile << endl;
             return;
         }
         else if (inFileHandler.peek() == std::ifstream::traits_type::eof())
         {
-            cerr << "ERROR: " << inFile << " is empty" << endl;
+            debug.report(ErrorCode::FileIsEmpty, &inFile[0]);
+//             cerr << "ERROR: " << inFile << " is empty" << endl;
             return;
         }
 
@@ -273,7 +281,8 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
         // Check if there is a format State to handle the alignment.
         if (inState == NULL)
         {
-            cerr << "Cannot recognize input format of file " << inFile << endl;
+            debug.report(ErrorCode::AlignmentFormatNotRecognized, &inFile[0]);
+//             cerr << "Cannot recognize input format of file " << inFile << endl;
             inFileHandler.close();
             return;
         }
@@ -314,12 +323,14 @@ std::string ReadWriteMS::getFileFormatName(std::string inFile)
     inFileHandler.open(inFile);
     if (!inFileHandler.is_open())
     {
-        cerr << "Couldn't open input file " << inFile << endl;
+        debug.report(ErrorCode::CantOpenFile, &inFile[0]);
+        //         cerr << "Couldn't open input file " << inFile << endl;
         return "Unknown";
     }
     else if (inFileHandler.peek() == std::ifstream::traits_type::eof())
     {
-        cerr << "ERROR: " << inFile << " is empty" << endl;
+        debug.report(ErrorCode::FileIsEmpty, &inFile[0]);
+//         cerr << "ERROR: " << inFile << " is empty" << endl;
         return "None";
     }
 
