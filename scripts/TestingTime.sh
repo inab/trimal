@@ -3,8 +3,13 @@
 inputFolder=$1
 outputFile=$2
 
-cmake -DCMAKE_BUILD_TYPE=RELEASE .
-make -j8
+echo -e "Preparing the MakeFile"
+(cmake -DCMAKE_BUILD_TYPE=RELEASE .) >> /dev/null
+echo -e "Compiling using MakeFile"
+(make -j8) >> /dev/null  
+echo -e "Copying executable"
+(cp bin/trimal bin/trimalStable)
+echo -e "Starting the timing tests"
 
 # thresholds=(0.5)
 # cons=(10)
@@ -21,19 +26,20 @@ files=($(ls -Sr "$1"))
 for method in ${automethod[@]}
 do
     echo -e "Method ${method}" >> ${outputFile}
+    sleep 1
     for file in ${files[@]} 
     do
         echo -e "\nFile ${file}" >> ${outputFile}
         stat --printf="%s" ${inputFolder}/${file} >> ${outputFile}
         echo -e "\n\t[new_trimAl]" >> ${outputFile}
-        (time bin/trimal -in ${inputFolder}/${file} -out /tmp/null) &>> ${outputFile}
+        (time bin/trimalStable -in ${inputFolder}/${file} -out /tmp/null) &>> ${outputFile}
 
         echo -e "\n\t[trimAl]" >> ${outputFile}
         (time ../Strimal/source/trimal -in ${inputFolder}/${file} -out /tmp/null) &>> ${outputFile}
     done
 done
 
-
+rm bin/trimalStable
 
 
 
