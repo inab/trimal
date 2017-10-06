@@ -27,6 +27,7 @@
 #include "../include/statisticsGaps.h"
 #include "../include/defines.h"
 #include "../include/newAlignment.h"
+#include <sstream>
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 |  statisticsGaps::statisticsGaps(char **, int, int)                                                                   |
@@ -80,10 +81,10 @@ statisticsGaps::statisticsGaps(newAlignment * parent) {
 
         /* Increase the number of colums with the number of gaps of the last processed column */
         numColumnsWithGaps[gapsInColumn[ii]]++;
-        
+
         gapsWindow[ii] = gapsInColumn[ii];
-        
-        if(gapsWindow[ii] > maxGaps) 
+
+        if(gapsWindow[ii] > maxGaps)
             maxGaps = gapsWindow[ii];
 
     }
@@ -97,13 +98,13 @@ statisticsGaps::statisticsGaps(newAlignment * parent) {
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 // statisticsGaps::statisticsGaps(void) {
-// 
+//
 //     /* Initializate all values to NULL or 0 */
 //     gapsInColumn = NULL;
 //     numColumnsWithGaps = NULL;
 //     aminosXInColumn = NULL;
 //     gapsWindow = NULL;
-// 
+//
 //     residNumber = 	  0;
 //     sequenNumber  = 0;
 //     maxGaps = 	  0;
@@ -178,7 +179,7 @@ bool statisticsGaps::applyWindow(int _halfWindow) {
         /* Update the max number of gaps in the alignment, if neccesary */
         if(gapsWindow[i] > maxGaps)
             maxGaps = gapsWindow[i];
-        
+
 
     }
     return true;
@@ -235,7 +236,7 @@ double statisticsGaps::calcCutPoint(float minInputAlignment, float gapThreshold)
                                                 (acum - cuttingPoint_MinimumConserv)/numColumnsWithGaps[i]));
     else
         cuttingPoint_MinimumConserv = 0;
-    
+
     /* Return the maximum gap number of the two computed cutting points. */
     return (utils::max(cuttingPoint_MinimumConserv, cuttingPoint_gapThreshold));
 }
@@ -435,17 +436,42 @@ void statisticsGaps::printGapsColumns(void) {
     else
         utils::copyVect(gapsWindow, vectAux, residNumber);
 
-    /* Fix the precision of output */
-    /* We set the output precision and print the header. */
-    cout << "| Residue\t  % Gaps \t   Gap Score   |" << endl;
-    cout << "| Number \t         \t               |" << endl;
-    cout << "+----------------------------------------------+" << endl;
+    int size = std::max(16, (int)std::to_string(residNumber).length() + 6);
+
+    std::string fname = _alignment->filename.substr(6);
+
+    cout
+            << std::setw(fname.length() + 6)
+            << std::setfill(' ')
+            << std::left << "" << endl;
+
+    cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
+
+    cout << std::setw(fname.length() + 6)
+         << std::setfill('-')
+         << std::left << "" << endl;
+
+    cout << std::setfill(' ') << "\33[0;33;1m"
+         << std::setw(size) << std::left << " Residue"
+         << std::setw(size) << std::left << " % Gaps"
+         << std::setw(size) << std::left << " Gap Score"
+         << "\33[0m" << endl;
+
+    cout << std::setfill('-');
+
+    cout << std::setw(size) << std::right << "  "
+         << std::setw(size) << std::right << "  "
+         << std::setw(size) << std::right << "  " << endl;
+
+    cout << std::setfill(' ') << std::fixed;
     cout.precision(10);
 
     /* Show the information that have been requered */
     for(int i = 0; i < residNumber; i++)
-        cout << "  " << setw(5) << i << "\t\t" << setw(10) << (vectAux[i] * 100.0)/sequenNumber
-             << "\t" << setw(7) << 1 -((vectAux[i] * 1.0)/sequenNumber) << endl;
+        cout << setw(size) << std::setfill(' ') << std::left << i
+             << setw(size) << std::setfill(' ') << std::left
+             << setw(14) << setfill(' ') << std::right << (vectAux[i] * 100.0)/sequenNumber
+             << setw(size) << std::setfill(' ') << std::right << 1.F -((vectAux[i] * 1.0)/sequenNumber) << endl;
 
     /* Finally, we deallocate the local memory */
     delete[] vectAux;
@@ -462,11 +488,44 @@ void statisticsGaps::printGapsAcl(void) {
 
     int acm, i;
 
+    std::string fname = _alignment->filename.substr(6);
+    
+    std::stringstream firstLine;
+    std::stringstream secondLine;
+    
+//     firstLine  << std::setw(30);
+//     secondLine << std::setw(30);
+    int size = 24;
+    
+    firstLine   << std::setw(size)<< std::left << "Number of";
+    secondLine  << std::setw(size)<< std::left << "residues ";
+    
+    firstLine   << std::setw(size)<< std::left << "Percentage  ";
+    secondLine  << std::setw(size)<< std::left << "of alignment";
+    
+    firstLine   << std::setw(size)<< std::left << "Accumulative";
+    secondLine  << std::setw(size)<< std::left << "residues    ";
+        
+    firstLine   << std::setw(size)<< std::left << "Accumulative percent";
+    secondLine  << std::setw(size)<< std::left << "of alignment        ";
+    
+    firstLine   << std::setw(size)<< std::left << "Number of gaps";
+    secondLine  << std::setw(size)<< std::left << "per column    ";
+        
+    firstLine   << std::setw(size)<< std::left << "Percentage of gaps";
+    secondLine  << std::setw(size)<< std::left << "per column        ";
+        
+    firstLine   << std::setw(size)<< std::left << "Gaps score";
+    secondLine  << std::setw(size)<< std::left << "per column";
+    
+    cout << firstLine.rdbuf() << endl << secondLine.rdbuf() << endl;
+    
+
     /* Fix the precision of output */
-    cout << "| Number of\t        \t|\t Cumulative \t% Cumulative\t|\tNumber of Gaps\t  % Gaps  \tGap Score  |"  << endl;
-    cout << "| Residues \t% Length\t|\tNumberResid.\t   Length   \t|\t  per Column  \tper Column\tper Column |" << endl;
-    cout << "+-------------------------------+-----------------------------"
-         << "----------+--------------------------------------------------+" << endl;
+//     cout << "| Number of\t        \t|\t Cumulative \t% Cumulative\t|\tNumber of Gaps\t  % Gaps  \tGap Score  |"  << endl;
+//     cout << "| Residues \t% Length\t|\tNumberResid.\t   Length   \t|\t  per Column  \tper Column\tper Column |" << endl;
+//     cout << "+-------------------------------+-----------------------------"
+//          << "----------+--------------------------------------------------+" << endl;
     cout.precision(10);
 
     /* Count for each gaps' number the columns' number with that gaps' number. */
