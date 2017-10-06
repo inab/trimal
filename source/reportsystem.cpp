@@ -290,8 +290,13 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
         "You must specify only one output format if you don't provide an output file pattern" }, 
         
     { ErrorCode::AlignmentNotSaved,
-        "Alignment couldn't be saved on [tag] format"
-    }
+        "Alignment couldn't be saved on [tag] format" },
+        
+    { ErrorCode::VerboseLevelNotRecognized, 
+        "Verbose Level specified ([tag]) wasn't recognized. Current level is: [tag]" },
+        
+    { ErrorCode::NeedToSpecifyVerboseLevel,
+        "Verbose Level has to be specified after the [tag] argument. Acceptable values are: 'error', 'warning', 'info', 'none' and their numerical equivalents '3', '2', '1' and '0'. Current level is [tag]" }
 };
 
 void __internalReport::__reportSystem::PrintCodesAndMessages()

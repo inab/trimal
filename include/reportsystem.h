@@ -169,6 +169,10 @@ enum ErrorCode {
     OnlyOneFormatOnConsoleOutput                = 82,
     
     AlignmentNotSaved                           = 83,
+    
+    VerboseLevelNotRecognized                   = 84,
+    
+    NeedToSpecifyVerboseLevel                   = 85,
 
     __MAXERROR
 
