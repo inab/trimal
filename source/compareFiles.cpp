@@ -28,6 +28,7 @@
 // #include "../include/alignment.h"
 #include "../include/compareFiles.h"
 #include "../include/reportsystem.h"
+#include <sstream>
 
 #define LONG 80
 
@@ -822,65 +823,161 @@ void compareFiles::printStatisticsFileColumns(newAlignment& _alignment, float *c
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void compareFiles::printStatisticsFileAcl(newAlignment& _alignment, float *compareVect) {
 
+    int size = 18;
     float refer, *vectAux;
     int i, num;
+
+    std::string fname = _alignment.filename.substr(6, _alignment.filename.size() - 7);
+
+    cout
+            << std::setw(fname.length() + 7)
+            << std::setfill(' ')
+            << std::left << "" << endl;
+
+    cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
+
+    fname = " Conservation Total";
+
+    cout << "\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+
+    cout << std::setw(_alignment.filename.substr(6, _alignment.filename.size() - 7).length() + 7)
+         << std::setfill('-')
+         << std::left << ""
+         << std::setfill(' ')
+         << std::fixed
+         << endl ;
+
+    cout.precision(10);
+
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Allocate dinamic memory to copy the input vector
      * and sort it */
-//     vectAux = new float[numAminos];
-//     utils::copyVect(compareVect, vectAux, numAminos);
-//     utils::quicksort(vectAux, 0, numAminos-1);
+    vectAux = new float[_alignment.residNumber];
+    utils::copyVect(compareVect, vectAux, _alignment.residNumber);
+    utils::quicksort(vectAux, 0, _alignment.residNumber-1);
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Set the output precision and print the header */
-//     cout << "| Number of\t        \t|\t Cumulative \t% "
-//          << "Cumulative\t|   Consistency   |" << endl;
-//     cout << "| Residues \t% Length\t|\tNumberResid.\t   "
-//          << "Length   \t|      Value      |" << endl;
-//     cout << "+-------------------------------+------------"
-//          << "---------------------------+-----------------+"
-//          << endl;
-//     cout.precision(10);
+    std::stringstream firstLine;
+    std::stringstream secondLine;
+    std::stringstream thirdLine;
+
+    firstLine   << std::setw(size) << std::left << "";
+    secondLine  << std::setw(size) << std::left << " Number of";
+    thirdLine   << std::setw(size) << std::left << " residues";
+    
+    firstLine   << std::setw(size) << std::left << "";
+    secondLine  << std::setw(size) << std::left << " Percentage";
+    thirdLine   << std::setw(size) << std::left << " of alignment";
+    
+    firstLine   << std::setw(size) << std::left << " Accumulative";
+    secondLine  << std::setw(size) << std::left << " Number of";
+    thirdLine   << std::setw(size) << std::left << " Residues";
+    
+    firstLine   << std::setw(size) << std::left << " Accumulative";
+    secondLine  << std::setw(size) << std::left << " Percentage of";
+    thirdLine   << std::setw(size) << std::left << " Residues";
+    
+    firstLine   << std::setw(size) << std::left << "";
+    secondLine  << std::setw(size) << std::left << " Consistency";
+    thirdLine   << std::setw(size) << std::left << " Value";
+
+    cout    << "\33[0;33;1m"
+            << firstLine .rdbuf()    << endl 
+            << secondLine.rdbuf()    << endl 
+            << thirdLine .rdbuf()    << endl 
+            << "\33[0;m"
+            << std::setfill('-');
+
+    for (i = 0; i < 5; i++)
+    {
+        cout << std::setw(size) << std::right << "   ";
+    }
+    
+    cout    << std::endl
+            << std::fixed
+            << std::setfill(' ');
+            
+    cout.precision(10);
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Fix the initial values to count how many columns
      * has the same consistency value */
-//     refer = vectAux[0];
-//     num = 1;
+    refer = vectAux[0];
+    num = 1;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Print the accumulative distribution */
-//     for(i = 1; i < numAminos; i++) {
-//         /* ***** ***** ***** ***** ***** ***** ***** ***** */
-//         /* When the method detects a new consistency value
-//          * print the previous value as well as its frequency
-//          * and starts to count how many columns are for this
-//          * new value */
-//         if(refer != vectAux[i]) {
-//             cout << "  " << num << "\t\t" << setw(10) << ((float) num/numAminos * 100.0)
-//                  << "\t\t" << i << "\t\t" << setw(10) << ((float) i/numAminos * 100.0)
-//                  << "\t" << setw(15) << refer << endl;
-//             refer = vectAux[i];
-//             num = 1;
-//         }
-//         else num++;
-//         /* ***** ***** ***** ***** ***** ***** ***** ***** */
-//     }
+    for(i = 1; i < _alignment.residNumber; i++) {
+
+        // * When the method detects a new consistency value
+        // * print the previous value as well as its frequency
+        // * and starts to count how many columns are for this
+        // * new value *
+        
+        if(refer != vectAux[i]) {
+            // 
+            cout << std::setw(size) << std::left << num ;     
+
+            // 
+            cout << std::setw(size)     << std::left 
+                 << std::setw(size - 4) << std::right   << ((float) num/_alignment.residNumber * 100.0F)
+                 << std::setw(4)        << std::left    << " ";
+
+            // 
+            cout << std::setw(size) << std::left << i ;
+
+            // 
+            cout << std::setw(size)         << std::left 
+                 << std::setw(size - 4)     << std::right   <<  ((float) i/_alignment.residNumber * 100.0F)
+                 << std::setw(4)            << std::left    << " ";
+            
+            // 
+            cout << std::setw(size) << std::left << refer  ;
+            
+            // End line
+            cout << endl;
+            
+            refer = vectAux[i];
+            num = 1;
+        }
+        else num++;
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    }
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Print the last consistency value as well as its
      * frequency */
-//     cout << "  " << num << "\t\t" << setw(10) << ((float) num/numAminos * 100.0)
-//          << "\t\t" << i << "\t\t" << setw(10) << ((float) i/numAminos * 100.0)
-//          << "\t"  << setw(15) << refer << endl;
+    
+    // 
+    cout << std::setw(size) << std::left << num ;     
+
+    // 
+    cout << std::setw(size)        << std::left 
+         << std::setw(size - 4) << std::right   << ((float) num/_alignment.residNumber * 100.0F)
+         << std::setw(4)        << std::left    << " ";
+
+    // 
+    cout << std::setw(size) << std::left << i ;
+
+    // 
+    cout << std::setw(size)            << std::left 
+         << std::setw(size - 4)     << std::right   <<  ((float) i/_alignment.residNumber * 100.0F)
+         << std::setw(4)            << std::left    << " ";
+    
+    // 
+    cout << std::setw(size) << std::left << refer  ;
+    
+    // End line
+    cout << endl;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
     /* Deallocate dinamic memory */
-//     delete [] vectAux;
+    delete [] vectAux;
     /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
