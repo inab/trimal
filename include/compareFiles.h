@@ -44,13 +44,13 @@ class compareFiles {
  \param numAminos Number of aminos in the alignment
  \param compareVect Vector containing the consistency value for each column.
  */
-    static void printStatisticsFileColumns(int numAminos, float * compareVect);
+    static void printStatisticsFileColumns(newAlignment& _alignment, float * compareVect);
 /**
  \brief Print the accumulated consistency value from the selected alignment.
  \param numAminos Number of aminos in the alignment
  \param compareVect Vector containing the consistency value for each column.
  */
-    static void printStatisticsFileAcl(int numAminos, float * compareVect);
+    static void printStatisticsFileAcl(newAlignment& _alignment, float * compareVect);
 /**
  \brief Applies a new window to the alignment.
  \param columns Number of columns present in the alignment.

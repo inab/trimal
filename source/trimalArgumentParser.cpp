@@ -1747,7 +1747,6 @@ int trimAlManager::perform()
 
     origAlig -> Cleaning -> setTrimTerminalGapsFlag(terminalOnly);
     origAlig -> setKeepSequencesFlag(keepSeqs);
-//     origAlig -> setKeepSeqsHeaderFlag(keepHeader);
 
     /* -------------------------------------------------------------------- */
     set_window_size();
@@ -1906,7 +1905,7 @@ inline void trimAlManager::print_statistics()
     }
 
 
-    if (sgt || sgc || scc || sct )
+    if (sgt || sgc || scc || sct || sfc || sft)
     {
         if(sgc)
         {
@@ -1946,9 +1945,9 @@ inline void trimAlManager::print_statistics()
         if(compareset != -1)
         {
             if(sfc)
-                compareFiles::printStatisticsFileColumns(origAlig -> getNumAminos(), compareVect);
+                compareFiles::printStatisticsFileColumns(*origAlig, compareVect);
             if(sft)
-                compareFiles::printStatisticsFileAcl(origAlig -> getNumAminos(), compareVect);
+                compareFiles::printStatisticsFileAcl(*origAlig, compareVect);
         }
         cout << endl;
     }
