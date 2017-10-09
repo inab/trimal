@@ -401,18 +401,22 @@ void statisticsConservation2::printConservationColumns(void) {
             << std::left << "" << endl;
 
     cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
+         
+    fname = " Similarity per Column";
 
-    cout << std::setw(fname.length() + 7)
+    cout << "\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+
+    cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
          << std::setfill('-')
-         << std::right << "" 
+         << std::left << "" 
          << std::setfill(' ')
          << endl ;
          
 //     cout << setiosflags(std::ios_base::width(14));
 
     cout << "\33[0;33;1m"
-         << std::setw(size)       << std::left << "Residue" << std::left << "Similarity"  << endl
-         << std::setw(size)       << std::left << "Number"  << std::left << "Value"       << endl
+         << std::setw(size)       << std::left << " Residue" << std::left << " Similarity"  << endl
+         << std::setw(size)       << std::left << " Number"  << std::left << " Value"       << endl
          << std::setfill('-')
          << "\33[0;m"
          << std::setw(size)       << std::right << "  "      
@@ -446,7 +450,6 @@ void statisticsConservation2::printConservationAcl(void) {
 
     float refer, *vectAux;
     int i, num, acm;
-
     /* Allocate memory */
     vectAux = new float[residues];
 
@@ -457,8 +460,8 @@ void statisticsConservation2::printConservationAcl(void) {
     /* Sort the auxiliar vector. */
     utils::quicksort(vectAux, 0, residues-1);
     
+    // Print filename
     std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
-    debug << "HERE" << endl;
 
     cout    << std::fixed
             << std::setw(fname.length() + 7)
@@ -466,8 +469,12 @@ void statisticsConservation2::printConservationAcl(void) {
             << std::left << "" << endl;
 
     cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
+    
+    fname = " Similarity Total";
 
-    cout << std::setw(fname.length() + 7)
+    cout << "\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+
+    cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
          << std::setfill('-')
          << std::left << "" 
          << std::setfill(' ')
@@ -524,21 +531,19 @@ void statisticsConservation2::printConservationAcl(void) {
         acm++;
 
         if(refer != vectAux[i]) {
-//             cout << "  " << num << "\t\t" << setw(10) << ((float) num/residues * 100.0)
-//                  << "\t\t" << acm << "\t\t" << setw(10) << ((float) acm/residues * 100.0) << "\t"
-//                  << setw(15) << refer << endl;
+
         cout
                 << setw(size)        << std::left  << num
                 
                 << setw(size)        << std::left   
-                << setw(size - 6)   << std::right << ((float)num/residues * 100.0F)
-                << setw(6)          << std::right << " "
+                << setw(size - 6)    << std::right << ((float)num/residues * 100.0F)
+                << setw(6)           << std::right << " "
                 
                 << setw(size)        << std::left  << acm
                 
                 << setw(size)        << std::left   
-                << setw(size - 6)   << std::right << ((float)acm/residues * 100.0F)
-                << setw(6)          << std::right << " "
+                << setw(size - 6)    << std::right << ((float)acm/residues * 100.0F)
+                << setw(6)           << std::right << " "
                 
                 << setw(size)        << std::left  << refer
                 
@@ -551,18 +556,21 @@ void statisticsConservation2::printConservationAcl(void) {
     acm++;
     
     cout
-            << setw(size) << std::left << num
-            << setw(size) << std::left << (num/residues * 100.0F)
-            << setw(size) << std::left << acm
-            << setw(size) << std::left << (acm/residues * 100.0F)
-            << setw(size) << std::left << refer
-            << endl;
-            
-//     cout << "  " << num 
-//             << "\t\t" << setw(10) << ((float) num/residues * 100.0)
-//             << "\t\t" << acm 
-//             << "\t\t" << setw(10) << ((float) acm/residues * 100.0)
-//             << "\t" << setw(15) << refer << endl;
+                << setw(size)        << std::left  << num
+                
+                << setw(size)        << std::left   
+                << setw(size - 6)    << std::right << ((float)num/residues * 100.0F)
+                << setw(6)           << std::right << " "
+                
+                << setw(size)        << std::left  << acm
+                
+                << setw(size)        << std::left   
+                << setw(size - 6)    << std::right << ((float)acm/residues * 100.0F)
+                << setw(6)           << std::right << " "
+                
+                << setw(size)        << std::left  << refer
+                
+                << endl;
 
     /* Deallocate the reserved memory. */
     delete [] vectAux;

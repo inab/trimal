@@ -450,9 +450,15 @@ void statisticsGaps::printGapsColumns(void) {
 
     cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
 
-    cout << std::setw(fname.length() + 7)
+    fname = " Gaps per Column";
+
+    cout << "\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+
+    cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
          << std::setfill('-')
-         << std::left << "" << endl;
+         << std::left << "" 
+         << std::setfill(' ')
+         << endl ;
 
     cout << std::setfill(' ') << "\33[0;33;1m"
          << std::setw(size) << std::left << " Residue"
@@ -503,9 +509,15 @@ void statisticsGaps::printGapsAcl(void) {
 
     cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
 
-    cout << std::setw(fname.length() + 7)
+    fname = " Gaps Total";
+
+    cout << "\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+
+    cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
          << std::setfill('-')
-         << std::left << "" << endl ;
+         << std::left << "" 
+         << std::setfill(' ')
+         << endl ;
 
     int size = 22;
     
