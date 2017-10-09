@@ -28,6 +28,7 @@
 #include "../include/defines.h"
 #include "../include/newAlignment.h"
 #include "../include/reportsystem.h"
+#include <sstream>
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 |  statisticsConservation2::statisticsConservation2(char **, int, int)                                                   |
@@ -455,11 +456,59 @@ void statisticsConservation2::printConservationAcl(void) {
 
     /* Sort the auxiliar vector. */
     utils::quicksort(vectAux, 0, residues-1);
+    
+    std::string fname = _alignment->filename.substr(6);
 
-    /* We set the output precision and print the header. */
-    cout << "| Number of\t        \t|\t Cumulative \t% Cumulative\t|   Similarity   |" << endl;
-    cout << "| Residues \t% Length\t|\tNumberResid.\t   Length   \t|     Value      |" << endl;
-    cout << "+-------------------------------+---------------------------------------+----------------+" << endl;
+    cout    << std::fixed
+            << std::setw(fname.length() + 6)
+            << std::setfill(' ')
+            << std::left << "" << endl;
+
+    cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
+
+    cout << std::setw(fname.length() + 6)
+         << std::setfill('-')
+         << std::left << "" 
+         << std::setfill(' ')
+         << endl ;
+    
+    int size = 20;
+    
+    std::stringstream firstLine;
+    std::stringstream secondLine;
+    std::stringstream thirdLine;
+
+    firstLine   << std::setw(size) << std::left << "";
+    secondLine  << std::setw(size) << std::left << " Number of";
+    thirdLine   << std::setw(size) << std::left << " Residues";
+    
+    firstLine   << std::setw(size) << std::left << "";
+    secondLine  << std::setw(size) << std::left << " Percentage";
+    thirdLine   << std::setw(size) << std::left << " of Alignment";
+    
+    firstLine   << std::setw(size) << std::left << " Accumulative";
+    secondLine  << std::setw(size) << std::left << " Number of";
+    thirdLine   << std::setw(size) << std::left << " Residues";
+
+    firstLine   << std::setw(size) << std::left << " Accumulative";
+    secondLine  << std::setw(size) << std::left << " percentage";
+    thirdLine   << std::setw(size) << std::left << " of alignment";
+    
+    firstLine   << std::setw(size) << std::left << " ";
+    secondLine  << std::setw(size) << std::left << " Similarity";
+    thirdLine   << std::setw(size) << std::left << " Value";
+    
+    cout    << "\33[0;33;1m"
+            << firstLine.rdbuf()    << endl 
+            << secondLine.rdbuf()   << endl 
+            << thirdLine.rdbuf()    << endl 
+            << "\33[0;m"
+            << std::setfill('-');
+         
+    for (i = 0; i < 5; i++)
+        cout << setw(size) << std::right << "   ";
+         
+    cout << endl << setfill(' ');
     cout.precision(10);
 
 
@@ -468,24 +517,51 @@ void statisticsConservation2::printConservationAcl(void) {
     acm = 0;
     num = 1;
 
-    /* Count the columns with the same conservation's value and compute this information to shows the accunulative
+    /* Count the columns with the same conservation's value and compute this information to shows the accumulative
        statistics in the alignment. */
     for(i = residues-2; i >= 0; i--) {
         acm++;
 
         if(refer != vectAux[i]) {
-            cout << "  " << num << "\t\t" << setw(10) << ((float) num/residues * 100.0)
-                 << "\t\t" << acm << "\t\t" << setw(10) << ((float) acm/residues * 100.0) << "\t"
-                 << setw(15) << refer << endl;
+//             cout << "  " << num << "\t\t" << setw(10) << ((float) num/residues * 100.0)
+//                  << "\t\t" << acm << "\t\t" << setw(10) << ((float) acm/residues * 100.0) << "\t"
+//                  << setw(15) << refer << endl;
+        cout
+                << setw(size)        << std::left  << num
+                
+                << setw(size)        << std::left   
+                << setw(size - 6)   << std::right << ((float)num/residues * 100.0F)
+                << setw(6)          << std::right << " "
+                
+                << setw(size)        << std::left  << acm
+                
+                << setw(size)        << std::left   
+                << setw(size - 6)   << std::right << ((float)acm/residues * 100.0F)
+                << setw(6)          << std::right << " "
+                
+                << setw(size)        << std::left  << refer
+                
+                << endl;
             refer = vectAux[i];
             num = 1;
         }
         else num++;
     }
     acm++;
-    cout << "  " << num << "\t\t" << setw(10) << ((float) num/residues * 100.0)
-         << "\t\t" << acm << "\t\t" << setw(10) << ((float) acm/residues * 100.0) << "\t"
-         << setw(15) << refer << endl;
+    
+    cout
+            << setw(size) << std::left << num
+            << setw(size) << std::left << (num/residues * 100.0F)
+            << setw(size) << std::left << acm
+            << setw(size) << std::left << (acm/residues * 100.0F)
+            << setw(size) << std::left << refer
+            << endl;
+            
+//     cout << "  " << num 
+//             << "\t\t" << setw(10) << ((float) num/residues * 100.0)
+//             << "\t\t" << acm 
+//             << "\t\t" << setw(10) << ((float) acm/residues * 100.0)
+//             << "\t" << setw(15) << refer << endl;
 
     /* Deallocate the reserved memory. */
     delete [] vectAux;

@@ -507,11 +507,11 @@ void statisticsGaps::printGapsAcl(void) {
          << std::setfill('-')
          << std::left << "" << endl ;
 
+    int size = 22;
+    
     std::stringstream firstLine;
     std::stringstream secondLine;
     std::stringstream thirdLine;
-
-    int size = 22;
 
     firstLine   << std::setw(size) << std::left << "";
     secondLine  << std::setw(size) << std::left << " Number of";
