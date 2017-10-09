@@ -424,6 +424,9 @@ int statisticsGaps::calcCutPoint2ndSlope(void) {
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 void statisticsGaps::printGapsColumns(void) {
+    
+    // Colors can be removed with 
+    // ' sed -r "s:\x1B\[[0-9;]*[mK]::g" ' 
 
     int *vectAux;
 
@@ -470,7 +473,7 @@ void statisticsGaps::printGapsColumns(void) {
     for(int i = 0; i < residNumber; i++)
         cout << setw(size) << std::setfill(' ') << std::left << i
              << setw(size) << std::setfill(' ') << std::left
-             << setw(14) << setfill(' ') << std::right << (vectAux[i] * 100.0)/sequenNumber
+             << setw(14)   << std::setfill(' ') << std::right << (vectAux[i] * 100.0)/sequenNumber
              << setw(size) << std::setfill(' ') << std::right << 1.F -((vectAux[i] * 1.0)/sequenNumber) << endl;
 
     /* Finally, we deallocate the local memory */
@@ -485,47 +488,75 @@ void statisticsGaps::printGapsColumns(void) {
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 void statisticsGaps::printGapsAcl(void) {
+    
+    // Colors can be removed with 
+    // ' sed -r "s:\x1B\[[0-9;]*[mK]::g" '
 
     int acm, i;
 
     std::string fname = _alignment->filename.substr(6);
-    
+
+    cout
+            << std::setw(fname.length() + 6)
+            << std::setfill(' ')
+            << std::left << "" << endl;
+
+    cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
+
+    cout << std::setw(fname.length() + 6)
+         << std::setfill('-')
+         << std::left << "" << endl ;
+
     std::stringstream firstLine;
     std::stringstream secondLine;
-    
-//     firstLine  << std::setw(30);
-//     secondLine << std::setw(30);
-    int size = 24;
-    
-    firstLine   << std::setw(size)<< std::left << "Number of";
-    secondLine  << std::setw(size)<< std::left << "residues ";
-    
-    firstLine   << std::setw(size)<< std::left << "Percentage  ";
-    secondLine  << std::setw(size)<< std::left << "of alignment";
-    
-    firstLine   << std::setw(size)<< std::left << "Accumulative";
-    secondLine  << std::setw(size)<< std::left << "residues    ";
-        
-    firstLine   << std::setw(size)<< std::left << "Accumulative percent";
-    secondLine  << std::setw(size)<< std::left << "of alignment        ";
-    
-    firstLine   << std::setw(size)<< std::left << "Number of gaps";
-    secondLine  << std::setw(size)<< std::left << "per column    ";
-        
-    firstLine   << std::setw(size)<< std::left << "Percentage of gaps";
-    secondLine  << std::setw(size)<< std::left << "per column        ";
-        
-    firstLine   << std::setw(size)<< std::left << "Gaps score";
-    secondLine  << std::setw(size)<< std::left << "per column";
-    
-    cout << firstLine.rdbuf() << endl << secondLine.rdbuf() << endl;
-    
+    std::stringstream thirdLine;
 
-    /* Fix the precision of output */
-//     cout << "| Number of\t        \t|\t Cumulative \t% Cumulative\t|\tNumber of Gaps\t  % Gaps  \tGap Score  |"  << endl;
-//     cout << "| Residues \t% Length\t|\tNumberResid.\t   Length   \t|\t  per Column  \tper Column\tper Column |" << endl;
-//     cout << "+-------------------------------+-----------------------------"
-//          << "----------+--------------------------------------------------+" << endl;
+    int size = 22;
+
+    firstLine   << std::setw(size) << std::left << "";
+    secondLine  << std::setw(size) << std::left << " Number of";
+    thirdLine   << std::setw(size) << std::left << " residues";
+
+    firstLine   << std::setw(size) << std::left << "";
+    secondLine  << std::setw(size) << std::left << " Percentage";
+    thirdLine   << std::setw(size) << std::left << " of alignment";
+
+    firstLine   << std::setw(size) << std::left << "";
+    secondLine  << std::setw(size) << std::left << " Accumulative";
+    thirdLine   << std::setw(size) << std::left << " residues";
+
+    firstLine   << std::setw(size) << std::left << " Accumulative";
+    secondLine  << std::setw(size) << std::left << " percent of";
+    thirdLine   << std::setw(size) << std::left << " alignment";
+
+    firstLine   << std::setw(size) << std::left << " Number";
+    secondLine  << std::setw(size) << std::left << " of gaps";
+    thirdLine   << std::setw(size) << std::left << " per column";
+
+    firstLine   << std::setw(size) << std::left << " Percentage";
+    secondLine  << std::setw(size) << std::left << " of gaps";
+    thirdLine   << std::setw(size) << std::left << " per column";
+
+    firstLine   << std::setw(size) << std::left << "";
+    secondLine  << std::setw(size) << std::left << " Gaps score";
+    thirdLine   << std::setw(size) << std::left << " per column";
+
+    cout    << "\33[0;33;1m"
+            << firstLine.rdbuf()    << endl 
+            << secondLine.rdbuf()   << endl 
+            << thirdLine.rdbuf()    << endl 
+            << "\33[0;m"
+            << std::setfill('-');
+
+    for (i = 0; i < 7; i++)
+    {
+        cout << std::setw(size) << std::right << "   ";
+    }
+    
+    cout    << std::endl
+            << std::fixed
+            << std::setfill(' ');
+
     cout.precision(10);
 
     /* Count for each gaps' number the columns' number with that gaps' number. */
@@ -536,9 +567,53 @@ void statisticsGaps::printGapsAcl(void) {
 
             /* Compute and prints the accumulative values for the gaps in the alignment. */
             acm += numColumnsWithGaps[i];
-            cout << "  " << setiosflags(ios::left) << numColumnsWithGaps[i] << "\t\t" << setw(10) << (numColumnsWithGaps[i] * 100.0)/residNumber
-                 << "\t\t" << acm << "\t\t" << setw(10) << (acm * 100.0)/residNumber
-                 << "\t\t" << i << "\t\t" << setw(10) << (i * 1.0)/sequenNumber << "\t"<< setw(10) << 1 - ((i * 1.0)/sequenNumber) << endl;
+
+            // Number of residues
+            cout << std::setw(size) << std::left << numColumnsWithGaps[i] ;     
+
+            // Percentage of alignment
+            cout << std::setw(size)     << std::left 
+                 << std::setw(size - 8) << std::right   << (numColumnsWithGaps[i] * 100.0F)/residNumber 
+                 << std::setw(8)        << std::left    << " ";
+
+            // Accumulative residues
+            cout << std::setw(size) << std::left << acm ;
+
+            // Accumulative percent of alignment
+            cout << std::setw(size)         << std::left 
+                 << std::setw(size - 8)     << std::right   <<  (acm * 100.0F)/residNumber 
+                 << std::setw(8)            << std::left    << " ";
+            
+            // Number of gaps per column
+            cout << std::setw(size) << std::left << i  ;
+            
+            // Percentage of gaps per column
+            cout << std::setw(size) << std::left << (i * 1.0F)/sequenNumber ;
+            
+            // Gaps score per column
+            cout << std::setw(size) << std::left << 1.F - (((float)i)/sequenNumber);
+            
+            // End line
+            cout << endl;
+
+
+
+
+
+
+
+
+
+
+
+
+//             cout << "  " << setiosflags(ios::left) << numColumnsWithGaps[i]
+//                     << "\t\t" << setw(10) << (numColumnsWithGaps[i] * 100.0)/residNumber
+//                     << "\t\t" << acm
+//                     << "\t\t" << setw(10) << (acm * 100.0)/residNumber
+//                     << "\t\t" << i
+//                     << "\t\t" << setw(10) << (i * 1.0)/sequenNumber
+//                     << "\t"<< setw(10) << 1 - ((i * 1.0)/sequenNumber) << endl;
         }
     }
 }
