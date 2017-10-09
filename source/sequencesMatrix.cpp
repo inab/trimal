@@ -40,27 +40,19 @@ sequencesMatrix::sequencesMatrix(void) {
 sequencesMatrix::sequencesMatrix(newAlignment* parent) {
     _alignment = parent;
     int i, j, k;
-// 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     seqsNumber = _alignment -> originalSequenNumber;
     resNumber = _alignment -> originalResidNumber;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    seqsName = /*new string[seqsNumber];
-  for(i = 0; i < seqsNumber; i++)
-    seqsName[i] = _alignment -> seqsName[i];*/
-        _alignment->seqsName;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    seqsName = _alignment->seqsName;
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     matrix = new int*[seqsNumber];
     for(i = 0; i < seqsNumber; i++) {
         matrix[i] = new int[resNumber];
         utils::initlVect(matrix[i], resNumber, 0);
     }
 
-    /* Determinate the sequence for each alignment specie */
+    // Determinate the sequence for each alignment specie
     for(i = 0, k = 1; i < seqsNumber; i++, k = 1) {
         for(j = 0; j < resNumber; j++) {
             if(_alignment -> sequences[i][j] != '-') {
@@ -69,32 +61,32 @@ sequencesMatrix::sequencesMatrix(newAlignment* parent) {
             }
         }
     }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
 }
 
 
 sequencesMatrix::sequencesMatrix(string *alignmentMatrix, string *alignmentSeqsName, int sequences, int residues) {
     int i, j, k;
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     seqsNumber = sequences;
     resNumber =  residues;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     seqsName = new string[seqsNumber];
     for(i = 0; i < seqsNumber; i++)
         seqsName[i] = alignmentSeqsName[i];
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     matrix = new int*[seqsNumber];
     for(i = 0; i < seqsNumber; i++) {
         matrix[i] = new int[resNumber];
         utils::initlVect(matrix[i], resNumber, 0);
     }
 
-    /* Determinate the sequence for each alignment specie */
+    // Determinate the sequence for each alignment specie
     for(i = 0, k = 1; i < seqsNumber; i++, k = 1) {
         for(j = 0; j < resNumber; j++) {
             if(alignmentMatrix[i][j] != '-') {
@@ -103,32 +95,27 @@ sequencesMatrix::sequencesMatrix(string *alignmentMatrix, string *alignmentSeqsN
             }
         }
     }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 sequencesMatrix &sequencesMatrix::operator=(const sequencesMatrix &old) {
     int i, j;
 
     if(this != &old) {
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        
         seqsNumber = old.seqsNumber;
         resNumber =  old.resNumber;
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
         seqsName = new string[seqsNumber];
         for(i = 0; i < seqsNumber; i++)
             seqsName[i] = old.seqsName[i];
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
         matrix = new int*[seqsNumber];
         for(i = 0; i < seqsNumber; i++) {
             matrix[i] = new int[resNumber];
             for(j = 0; j < resNumber; j++)
                 matrix[i][j] = matrix[i][j];
         }
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        
     }
     return *this;
 }
@@ -141,9 +128,6 @@ sequencesMatrix::~sequencesMatrix(void) {
             delete matrix[i];
         delete [] matrix;
     }
-
-//     if(seqsName != NULL)
-//         delete [] seqsName;
 
     seqsNumber = 0;
     resNumber = 0;
@@ -216,22 +200,16 @@ void sequencesMatrix::setOrder(int *order) {
 bool sequencesMatrix::getSequence(string seqName, int *sequence) {
     int i, pos;
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     for(pos = 0; pos < seqsNumber; pos++)
         if(seqsName[pos].compare(seqName) == 0)
             break;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     if(pos == seqsNumber)
         return false;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     for(i = 0; i < resNumber; i++)
         sequence[i] = matrix[pos][i];
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
+    
     return true;
 }
 

@@ -33,18 +33,13 @@ using namespace std;
 
 #include <float.h>
 #include "../include/newAlignment.h"
-//#include "rwnewAlignment.cpp"
-//#include "autnewAlignment.cpp"
 #include "../include/Cleaner.h"
 #include "../include/StatisticsManager.h"
-// #include "../include/ReadWriteManager.h"
 #include <errno.h>
 #include <ctype.h>
 #include <string>
-//#include <utils.h>
 #include "../include/values.h"
 #include "../include/defines.h"
-//extern int errno;
 
 #include <sstream>
 #include <map>
@@ -54,39 +49,31 @@ using namespace std;
 
 using namespace std;
 
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Clafile constructor */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-
 newAlignment::newAlignment(void) {
 
     Cleaning = new Cleaner(this);
     Statistics = new StatisticsManager(this);
 
-    /* newAlignment parameter */
+    // newAlignment parameter
     sequenNumber = 0;
     residNumber =  0;
 
-    /* Are the input sequences aligned? */
+    // Are the input sequences aligned?
     isAligned = false;
 
-    /* Sequence datatype: DNA, RNA or Protein */
+    // Sequence datatype: DNA, RNA or Protein
     dataType = SequenceTypes::NotDefined;
 
-    /* Sequence residues number */
-// // //     residuesNumber = NULL;
-
-    /* Columns and sequences that have been previously selected */
+    // Columns and sequences that have been previously selected
     saveResidues  = NULL;
     saveSequences = NULL;
 
-    /* Input sequences as well other information such as sequences name, etc */
+    // Input sequences as well other information such as sequences name, etc 
     sequences = NULL;
     seqsName  = NULL;
     seqsInfo  = NULL;
 
-    /* Information computed from newAlignment */
+    // Information computed from newAlignment
     sgaps =             NULL;
     scons =             NULL;
     SequencesMatrix =   NULL;
@@ -96,10 +83,6 @@ newAlignment::newAlignment(void) {
 
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Overlapping operator = to use it as a kind of class constructor */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-
 newAlignment::newAlignment(newAlignment& originalAlignment) {
 
     if(this != &originalAlignment) {
@@ -107,8 +90,6 @@ newAlignment::newAlignment(newAlignment& originalAlignment) {
         int i, j;
 
         aligInfo = originalAlignment.aligInfo;
-
-
 
         for ( i = 0, j = 0; i < originalAlignment.originalSequenNumber; i++)
         {
@@ -158,13 +139,7 @@ newAlignment::newAlignment(newAlignment& originalAlignment) {
 
         (*SeqRef)++;
     }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Clafile destructor */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 newAlignment::~newAlignment(void) {
     int i;
@@ -199,10 +174,7 @@ newAlignment::~newAlignment(void) {
     sequenNumber = 0;
     residNumber  = 0;
 
-
     isAligned = false;
-
-//     dataType = 0;
 
     delete Cleaning;
 
@@ -225,18 +197,16 @@ newAlignment::~newAlignment(void) {
         seqsInfo = NULL;
 
     }
-
 }
 
-newAlignment *newAlignment::getTranslationCDS(/*int newResidues, int newSequences, int *ColumnsToKeep, string *oldSeqsName, sequencesMatrix *seqMatrix,*/
-    newAlignment *ProtAlig) {
+newAlignment *newAlignment::getTranslationCDS(newAlignment *ProtAlig) {
 
     int x, y, counter, * mappedSeqs;
     newAlignment *newAlig = new newAlignment();
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Map the selected protein sequences to the input
-     * coding sequences */
+    
+    // Map the selected protein sequences to the input
+    // coding sequences
     mappedSeqs = new int[ProtAlig->sequenNumber];
 
     for (x = 0; x < ProtAlig->originalSequenNumber; x++)
@@ -249,14 +219,6 @@ newAlignment *newAlignment::getTranslationCDS(/*int newResidues, int newSequence
                 break;
             }
         }
-//         if (y == originalSequenNumber)
-//         {
-//             Debug << "Name " << ProtAlig->seqsName[x] << " not found" << endl;
-//         }
-//         else
-//         {
-//             Debug << "Seq " << y << " ~ Seq " << x << "\t\t\t" << ProtAlig->seqsName[x] << "\t\t" << seqsName[y] << endl;
-//         }
     }
 
     newAlig->sequences  = new std::string[ProtAlig->sequenNumber];
@@ -302,24 +264,14 @@ newAlignment *newAlignment::getTranslationCDS(/*int newResidues, int newSequence
 
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Return the number of the sequences in the newAlignment */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int newAlignment::getNumSpecies(void) {
     return sequenNumber;
 }
 
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* Return the number of residues in the newAlignment */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 int newAlignment::getNumAminos(void) {
     return residNumber;
 }
 
-
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-/* This method stores the diferent windows values in the newAlignment object */
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 void newAlignment::setWindowsSize(int ghWindow_, int shWindow_) {
     Statistics -> ghWindow = ghWindow_;
     Statistics -> shWindow = shWindow_;
@@ -342,69 +294,69 @@ void newAlignment::calculateSeqIdentity(void) {
     int i, j, k, hit, dst;
     char indet;
 
-    /* Depending on alignment type, indetermination symbol will be one or other */
+    // Depending on alignment type, indetermination symbol will be one or other
     indet = getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
-    /* Create identities matrix to store identities scores */
+    // Create identities matrix to store identities scores
     identities = new float*[sequenNumber];
 
-    /* For each seq, compute its identity score against the others in the MSA */
+    // For each seq, compute its identity score against the others in the MSA
     for(i = 0; i < sequenNumber; i++) {
         identities[i] = new float[sequenNumber];
 
-        /* It's a symmetric matrix, copy values that have been already computed */
+        // It's a symmetric matrix, copy values that have been already computed
         for(j = 0; j < i; j++)
             identities[i][j] = identities[j][i];
         identities[i][i] = 0;
 
-        /* Compute identity scores for the current sequence against the rest */
+        // Compute identity scores for the current sequence against the rest
         for(j = i + 1; j < sequenNumber; j++) {
             for(k = 0, hit = 0, dst = 0; k < residNumber; k++) {
-                /* If one of the two positions is a valid residue,
-                 * count it for the common length */
+                // If one of the two positions is a valid residue,
+                // count it for the common length
                 if(((sequences[i][k] != indet) && (sequences[i][k] != '-')) ||
                         ((sequences[j][k] != indet) && (sequences[j][k] != '-'))) {
                     dst++;
-                    /* If both positions are the same, count a hit */
+                    // If both positions are the same, count a hit
                     if(sequences[i][k] == sequences[j][k])
                         hit++;
                 }
             }
 
-            /* Identity score between two sequences is the ratio of identical residues
-             * by the total length (common and no-common residues) among them */
+            // Identity score between two sequences is the ratio of identical residues
+            // by the total length (common and no-common residues) among them
             identities[i][j] = (float) hit/dst;
         }
     }
 }
 
 void newAlignment::calculateRelaxedSeqIdentity(void) {
-    /* Raw approximation of sequence identity computation designed for reducing
-     * comparisons for huge alignemnts */
+    // Raw approximation of sequence identity computation designed for reducing
+    // comparisons for huge alignemnts
 
     int i, j, k, hit;
 
-    /* Create identities matrix to store identities scores */
+    // Create identities matrix to store identities scores
     identities = new float*[sequenNumber];
 
-    /* For each seq, compute its identity score against the others in the MSA */
+    // For each seq, compute its identity score against the others in the MSA
     for(i = 0; i < sequenNumber; i++) {
         identities[i] = new float[sequenNumber];
 
-        /* It's a symmetric matrix, copy values that have been already computed */
+        // It's a symmetric matrix, copy values that have been already computed
         for(j = 0; j < i; j++)
             identities[i][j] = identities[j][i];
         identities[i][i] = 0;
 
-        /* Compute identity score between the selected sequence and the others */
+        // Compute identity score between the selected sequence and the others
         for(j = i + 1; j < sequenNumber; j++) {
             for(k = 0, hit = 0; k < residNumber; k++) {
-                /* If both positions are the same, count a hit */
+                // If both positions are the same, count a hit
                 if(sequences[i][k] == sequences[j][k])
                     hit++;
             }
-            /* Raw identity score is computed as the ratio of identical residues between
-             * alignment length */
+            // Raw identity score is computed as the ratio of identical residues between
+            // alignment length
             identities[i][j] = (float) hit/residNumber;
         }
     }
@@ -412,35 +364,35 @@ void newAlignment::calculateRelaxedSeqIdentity(void) {
 
 
 void newAlignment::calculateSeqOverlap(void) {
-    /* Compute the overlap between sequences taken each of them as the reference
-     * to compute such scores. It will lead to a non-symmetric matrix. */
+    // Compute the overlap between sequences taken each of them as the reference
+    // to compute such scores. It will lead to a non-symmetric matrix.
 
     int i, j, k, shared, referenceLength;
     char indet;
 
-    /* Depending on alignment type, indetermination symbol will be one or other */
+    // Depending on alignment type, indetermination symbol will be one or other
     indet = getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
-    /* Create overlap matrix to store overlap scores */
+    // Create overlap matrix to store overlap scores
     overlaps = new float*[sequenNumber];
 
-    /* For each seq, compute its overlap score against the others in the MSA */
+    // For each seq, compute its overlap score against the others in the MSA
     for(i = 0; i < sequenNumber; i++) {
         overlaps[i] = new float[sequenNumber];
 
         for(j = 0; j < sequenNumber; j++) {
             for(k = 0, shared = 0, referenceLength = 0; k < residNumber; k++) {
-                /* If there a valid residue for the reference sequence, then see if
-                 * there is a valid residue for the other sequence. */
+                // If there a valid residue for the reference sequence, then see if
+                // there is a valid residue for the other sequence.
                 if((sequences[i][k] != indet) && (sequences[i][k] != '-')) {
                     referenceLength++;
                     if ((sequences[j][k] != indet) && (sequences[j][k] != '-'))
                         shared++;
                 }
             }
-            /* Overlap score between two sequences is the ratio of shared valid
-             * residues divided by the sequence length taken as reference. The
-             * overlaps matrix, therefore, will be not symmetric. */
+            // Overlap score between two sequences is the ratio of shared valid
+            // residues divided by the sequence length taken as reference. The
+            // overlaps matrix, therefore, will be not symmetric.
             overlaps[i][j] = (float) shared/referenceLength;
         }
     }
@@ -469,9 +421,9 @@ void newAlignment::getSequences(string *Names, string *Sequences, int *Lengths) 
 bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) {
     int i, j, numNames;
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* For each name in the current newAlignment, we look
-     * for its correspondence in the input set */
+    
+    // For each name in the current newAlignment, we look
+    // for its correspondence in the input set
     for(i = 0, numNames = 0; i < sequenNumber; i++) {
         for(j = 0; j < sequenNumber; j++) {
             if(seqsName[i] == names[j]) {
@@ -481,14 +433,12 @@ bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) {
             }
         }
     }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-    /* Depending on if we get the complete correspondence
-     * between both sets of names, we return true or not */
+    
+    // Depending on if we get the complete correspondence
+    // between both sets of names, we return true or not
     if(numNames == sequenNumber) return true;
     else return false;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
 }
 
 int newAlignment::getAlignmentType(void) {
@@ -512,15 +462,13 @@ bool newAlignment::isFileAligned(void) {
 void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) {
     int i, j, k;
 
-    /* Copy only those sequences/columns selected */
+    // Copy only those sequences/columns selected
     for(i = 0, j = 0; i < sequenNumber; i++) {
         if(saveSequences[i] == -1)
             continue;
 
         newNames[j] = seqsName[i];
-//         cout << "Sequen " << i << endl;
         for(k = 0; k < residNumber; k++) {
-//             if (i == 2) cout << "Residue " << k << endl;
             if(saveResidues[k] == -1)
                 continue;
             newMatrix[j].resize(newMatrix[j].size() + 1, sequences[i][k]);
@@ -532,7 +480,7 @@ void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) {
 void newAlignment::fillNewDataStructure(newValues *data) {
     int i, j, k;
 
-    /* Copy only those sequences/columns selected */
+    // Copy only those sequences/columns selected
     for(i = 0, j = 0; i < sequenNumber; i++) {
         if(saveSequences[i] == -1)
             continue;
@@ -552,8 +500,6 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
 
     if (getAlignmentType() == SequenceTypes::AA) {
         debug.report(ErrorCode::CDScontainsProteinSequences);
-//         cerr << endl << "ERROR: Check input CDS file. It seems to content protein "
-//              << "residues." << endl << endl;
         return false;
     }
 
@@ -561,10 +507,10 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
     size_t found;
     int i;
 
-    /* New code: We now care about the presence of wildcards/indeterminations
-     * characters such as 'X' or 'B' into protein sequences as well as about the
-     * presence of Selenocysteines ('U') or Pyrrolysines ('O'). It only works, by
-     * now, with the universal genetic code */
+    // New code: We now care about the presence of wildcards/indeterminations
+    // characters such as 'X' or 'B' into protein sequences as well as about the
+    // presence of Selenocysteines ('U') or Pyrrolysines ('O'). It only works, by
+    // now, with the universal genetic code 
     int *protSeqsLengths, numbProtSeqs, current_prot;
     string *protSeqsNames, *protSequences;
     char aminoAcid;
@@ -580,9 +526,9 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
 
     for(i = 0; i < sequenNumber; i++) {
 
-        /* Get protein sequence to compare against any potential stop codon in the
-         * coding sequence. If there is not protein sequence for current coding
-         * sequence, skip its analysis */
+        // Get protein sequence to compare against any potential stop codon in the
+        // coding sequence. If there is not protein sequence for current coding
+        // sequence, skip its analysis
         for(current_prot = 0; current_prot < numbProtSeqs; current_prot++)
             if(protSeqsNames[current_prot] == seqsName[i])
                 break;
@@ -593,8 +539,6 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
             if (!warning)
                 cerr << endl;
             debug.report(ErrorCode::SequenceContainsGap, new std::string[1] { seqsName[i] });
-//             cerr << "ERROR: Sequence \"" << seqsName[i] << "\" has, at least, one gap"
-//                  << endl << endl;
             return false;
         }
 
@@ -603,129 +547,125 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
                 cerr << endl;
             warning = true;
             debug.report(ErrorCode::SequenceNotMultipleOfThree, new std::string [2] {seqsName[i], std::to_string(sequences[i].length()) });
-//             cerr << "WARNING: Sequence length \"" << seqsName[i] << "\" is not "
-//                  << "multiple of 3 (length: " << sequences[i].length() << ")" << endl;
         }
 
-        /* Ignore stop codons from the CDS if set by the user */
+        // Ignore stop codons from the CDS if set by the user
         if (ignStopCodon)
             continue;
 
-        /* Detect universal stop codons in the CDS. Then, compare those stop codons
-         * against the protein sequence to see whether they are real stop codons or
-         * are representing rare amino-acids such as Selenocysteines or Pyrrolysines
-         * It also allows stop-codons when there are wildcards/indet characters in
-         * the protein sequence. CDS sequences could be splitted using stop codons
-         * from the sequence itself */
+        // Detect universal stop codons in the CDS. Then, compare those stop codons
+        // against the protein sequence to see whether they are real stop codons or
+        // are representing rare amino-acids such as Selenocysteines or Pyrrolysines
+        // It also allows stop-codons when there are wildcards/indet characters in
+        // the protein sequence. CDS sequences could be splitted using stop codons
+        // from the sequence itself
 
-        /* Initialize first appearence of a given stop codon to -1.
-         * That means that it has not been found yet */
+        // Initialize first appearence of a given stop codon to -1.
+        // That means that it has not been found yet
         found = -1;
         do {
             found = sequences[i].find("TGA", found + 1);
 
-            /* If a stop codon has been found and its position is multiple of 3.
-             * Analize it */
+            // If a stop codon has been found and its position is multiple of 3.
+            // Analize it
             if((found != string::npos) && (((int) found % 3) == 0)) {
 
                 aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
-                /* It may be a Selenocysteine ('TGA') which should be represented as 'U'
-                 * or wildcard/indet characters such as 'X' or 'B' */
-                //~ if ((aminoAcid == 'U') || (aminoAcid == 'X') || (aminoAcid == 'B'))
-                /* If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
-                 * such as 'B'/'X' is present, skip current stop codon */
+                // It may be a Selenocysteine ('TGA') which should be represented as 'U'
+                // or wildcard/indet characters such as 'X' or 'B'
+                
+                // If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
+                // such as 'B'/'X' is present, skip current stop codon
                 if((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
                         (aminoAcid == 'B'))
                     continue;
 
-                /* If split_by_stop_codon flag is activated then cut input CDS sequence
-                 * up to first appearance of a stop codon */
+                // If split_by_stop_codon flag is activated then cut input CDS sequence
+                // up to first appearance of a stop codon
                 else if(splitByStopCodon) {
                     warning = true;
                     debug.report(InfoCode::CuttingSequence, new std::string[5] { seqsName[i], "TGA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length()) });
                     sequences[i].resize((int) found);
                 }
-                /* Otherwise, warn about it and return an error */
+                // Otherwise, warn about it and return an error
                 else {
                     debug.report(ErrorCode::SequenceHasStopCodon, new std::string[5] { seqsName[i], "TGA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
                     return false;
                 }
             }
-            /* Iterate over the CDS until not stop codon is found */
+            // Iterate over the CDS until not stop codon is found
         } while(found != string::npos);
 
-        /* Initialize first appearence of a given stop codon to -1.
-         * That means that it has not been found yet */
+        // Initialize first appearence of a given stop codon to -1.
+        // That means that it has not been found yet
         found = -1;
         do {
             found = sequences[i].find("TAA", found + 1);
 
-            /* If a stop codon has been found and its position is multiple of 3.
-             * Analize it */
+            // If a stop codon has been found and its position is multiple of 3.
+            // Analize it
             if((found != string::npos) && (((int) found % 3) == 0)) {
 
                 aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
-                /* Check if there is any wildcard/indet characters such as 'X' or 'B' */
-                //~ if ((aminoAcid == 'X') || (aminoAcid == 'B'))
-                /* If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
-                 * such as 'B'/'X' is present, skip current stop codon */
+                // Check if there is any wildcard/indet characters such as 'X' or 'B'
+                // If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
+                // such as 'B'/'X' is present, skip current stop codon
                 if((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
                         (aminoAcid == 'B'))
                     continue;
 
-                /* If split_by_stop_codon flag is activated then cut input CDS sequence
-                 * up to first appearance of a stop codon */
+                // If split_by_stop_codon flag is activated then cut input CDS sequence
+                // up to first appearance of a stop codon
                 else if(splitByStopCodon) {
                     warning = true;
                     debug.report(InfoCode::CuttingSequence, new std::string[5] { seqsName[i], "TAA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length()) });
                     sequences[i].resize((int) found);
                 }
-                /* Otherwise, warn about it and return an error */
+                // Otherwise, warn about it and return an error
                 else {
                     debug.report(ErrorCode::SequenceHasStopCodon, new std::string[5] { seqsName[i], "TAA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
                     return false;
                 }
             }
-            /* Iterate over the CDS until not stop codon is found */
+            // Iterate over the CDS until not stop codon is found
         } while(found != string::npos);
 
-        /* Initialize first appearence of a given stop codon to -1.
-         * That means that it has not been found yet */
+        // Initialize first appearence of a given stop codon to -1.
+        // That means that it has not been found yet
         found = -1;
         do {
             found = sequences[i].find("TAG", found + 1);
-            /* If a stop codon has been found and its position is multiple of 3.
-             * Analize it */
+            // If a stop codon has been found and its position is multiple of 3.
+            // Analize it
             if((found != string::npos) && (((int) found % 3) == 0)) {
 
                 aminoAcid = (char) toupper(protSequences[current_prot][(int) found/3]);
-                /* It may be a Pyrrolysine ('TAG') which should be represented as 'O'
-                 * or wildcard/indet characters such as 'X' or 'B' */
-                //~ if ((aminoAcid == 'O') || (aminoAcid == 'X') || (aminoAcid == 'B'))
-                /* If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
-                 * such as 'B'/'X' is present, skip current stop codon */
+                // It may be a Pyrrolysine ('TAG') which should be represented as 'O'
+                // or wildcard/indet characters such as 'X' or 'B'
+                // If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
+                // such as 'B'/'X' is present, skip current stop codon
                 if((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
                         (aminoAcid == 'B'))
                     continue;
 
-                /* If split_by_stop_codon flag is activated then cut input CDS sequence
-                 * up to first appearance of a stop codon */
+                // If split_by_stop_codon flag is activated then cut input CDS sequence
+                // up to first appearance of a stop codon
                 else if(splitByStopCodon) {
                     warning = true;
                     debug.report(InfoCode::CuttingSequence, new std::string[5] { seqsName[i], "TAG", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length()) });
                     sequences[i].resize((int) found);
                 }
-                /* Otherwise, warn about it and return an error */
+                // Otherwise, warn about it and return an error
                 else {
                     debug.report(ErrorCode::SequenceHasStopCodon, new std::string[5] { seqsName[i], "TAG", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
                     return false;
                 }
             }
-            /* Iterate over the CDS until not stop codon is found */
+            // Iterate over the CDS until not stop codon is found
         } while(found != string::npos);
     }
 
-    /* If everything was return an OK to informat about it. */
+    // If everything was return an OK to informat about it.
     return true;
 }
 
@@ -736,161 +676,137 @@ bool newAlignment::checkCorrespondence(string *names, int *lengths, int \
     bool warnings = false;
     string tmp;
 
-    /* For each sequence in the current protein newAlignment, look for its coding
-     * DNA sequence checking that they have the same size. */
+    // For each sequence in the current protein newAlignment, look for its coding
+    // DNA sequence checking that they have the same size.
     for(i = 0; i < sequenNumber; i++) {
 
-        /* Get protein sequence length removing any pofileible gap. Get as well last
-         * residue from current sequence */
+        // Get protein sequence length removing any pofileible gap. Get as well last
+        // residue from current sequence 
 
         tmp = utils::removeCharacter('-', sequences[i]);
         seqLength = tmp.length() * multiple;
         indet = ((int) tmp.length() - utils::min((int) tmp.find_last_not_of("X"), \
                  (int) tmp.find_last_not_of("x"))) - 1;
 
-        /* Go through all available CDS looking for the one with the same ID */
+        // Go through all available CDS looking for the one with the same ID
         for(j = 0; j < totalInputSeqs; j++) {
 
-            /* Once both ID matchs, compare its lengths */
+            // Once both ID matchs, compare its lengths
             if(seqsName[i] == names[j]) {
 
-                /* If both sequences have the same length, stop the search */
+                // If both sequences have the same length, stop the search 
                 if(seqLength == lengths[j])
                     break;
 
-                /* If nucleotide sequence is larger than protein sequence, warn about
-                 * it and continue the verification procefile. It will used the 'Nth'
-                 * first nucleotides for the conversion */
+                // If nucleotide sequence is larger than protein sequence, warn about
+                // it and continue the verification procefile. It will used the 'Nth'
+                // first nucleotides for the conversion
                 else if(seqLength < lengths[j]) {
                     if (!warnings)
                         cerr << endl;
                     warnings = true;
                     debug.report(WarningCode::SequenceWillBeCutted, new std::string[3] { seqsName[i], std::to_string(seqLength), std::to_string(lengths[j])});
-//                     cerr << "WARNING: Sequence \"" << seqsName[i] << "\" will be cutted "
-//                          << "at position " << seqLength << " (length: "<< lengths[j] << ")"
-//                          << endl;
                     break;
                 }
 
-                /* It has been detected some indeterminations at the end of the protein
-                 * sequence. That ifileue could be cause by some incomplete codons in the
-                 * nucleotide sequences. This issue is solved adding as much 'N' symbols
-                 * as it is needed to preserve the backtranslated newAlignment */
+                // It has been detected some indeterminations at the end of the protein
+                // sequence. That ifileue could be cause by some incomplete codons in the
+                // nucleotide sequences. This issue is solved adding as much 'N' symbols
+                // as it is needed to preserve the backtranslated newAlignment
                 else if((indet > 0) && (indet > (seqLength - lengths[j])/3)) {
                     if (!warnings)
                         cerr << endl;
                     warnings = true;
                     debug.report(WarningCode::IncludingIndeterminationSymbols, new std::string[1] {seqsName[i]});
-//                     cerr << "WARNING: Sequence \"" << seqsName[i] << "\" has some inde"
-//                          << "termination symbols 'X' at the end of sequence. They will be"
-//                          << " included in the final newAlignment." << endl;
                     break;
                 }
 
-                /* If nucleotide sequence is shorter than protein sequence, return an
-                 * error since it is not feasible to cut the input protein aligment to
-                 * fit it into CDNA sequences size */
+                // If nucleotide sequence is shorter than protein sequence, return an
+                // error since it is not feasible to cut the input protein aligment to
+                // fit it into CDNA sequences size
                 else {
                     if (!warnings)
                         cerr << endl;
                     warnings = true;
                     debug.report(WarningCode::LessNucleotidesThanExpected, new std::string[3] { seqsName[i], std::to_string(lengths[j]), std::to_string(seqLength)});
-//                     cerr << "WARNING: Sequence \"" << seqsName[i] << "\" has less nucleo"
-//                          << "tides (" << lengths[j] << ") than expected (" << seqLength
-//                          << "). It will be added N's to complete the sequence"  << endl;
                     break;
                 }
             }
         }
 
-        /* Warn about a mismatch a sequences name level */
+        // Warn about a mismatch a sequences name level
         if(j == totalInputSeqs) {
             debug.report(ErrorCode::SequenceNotPresentInCDS, new std::string[1] { seqsName[i] });
-//             cerr << endl << "ERROR: Sequence \"" << seqsName[i] << "\" is not in "
-//                  << "CDS file." << endl << endl;
             return false;
         }
     }
 
-    /* If everything is OK, return an appropiate flag */
+    // If everything is OK, return an appropiate flag
     return true;
 }
 
 bool newAlignment::fillMatrices(bool aligned) {
-    /* Function to determine if a set of sequences, that can be aligned or not,
-     * have been correctly load and are free of errors. */
+    // Function to determine if a set of sequences, that can be aligned or not,
+    // have been correctly load and are free of errors.
     int i, j;
 
-    /* Initialize some variables */
-//     residuesNumber = new int[sequenNumber];
-//     for(i = 0; i < sequenNumber; i++) {
-//         residuesNumber[i] = sequences[i].size();
-//     }
+    // Initialize some variables
 
-    /* Check whether there are any unknow/no allowed character in the sequences */
+    // Check whether there are any unknow/no allowed character in the sequences
     for(i = 0; i < sequenNumber; i++)
         for(j = 0; j < sequences[i].length(); j++)
             if((!isalpha(sequences[i][j])) && (!ispunct(sequences[i][j]))) {
                 debug.report(ErrorCode::UnknownCharacter, new std::string[2] { seqsName[i], std::to_string(sequences[i][j]) });
-//                 cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" has an "
-//                      << "unknown (" << sequences[i][j] << ") character." << endl;
                 return false;
             }
 
-    /* Check whether all sequences have same size or not */
+    // Check whether all sequences have same size or not
     for(i = 1; i < sequenNumber; i++)
     {
-//         cout << sequences[i].length() << " " << sequences[i] << endl;
         if(sequences[i].length() != sequences[i-1].length())
             break;
     }
-//     cout << endl;
-    /* Set an appropriate flag for indicating if sequences are aligned or not */
+    // Set an appropriate flag for indicating if sequences are aligned or not
     isAligned = (i != sequenNumber) ? false : true;
 
-    /* Warm about those cases where sequences should be aligned
-     * and there are not */
+    // Warm about those cases where sequences should be aligned
+    // and there are not
     if (aligned and !isAligned) {
         debug.report(ErrorCode::NotAligned, new std::string[1] { filename });
-//         cerr << endl << "ERROR: Sequences should be aligned (all with same length) "
-//              << "and there are not. Check your input alignment" << endl;
         return false;
     }
 
-    /* Full-fill some information about input alignment */
+    // Full-fill some information about input alignment
     if(residNumber == 0)
         residNumber = sequences[0].length();
 
-    /* Check whether aligned sequences have the length fixed for the input alig */
+    // Check whether aligned sequences have the length fixed for the input alig
     for(i = 0; (i < sequenNumber) and (aligned); i++) {
         if(sequences[i].length() != residNumber) {
             debug.report(ErrorCode::SequencesNotSameSize, new std::string[3] { seqsName[i], std::to_string(sequences[i].length()), std::to_string(residNumber)});
-//             cerr << endl << "ERROR: The sequence \"" << seqsName[i] << "\" ("
-//                  << sequences[i].length() << ") does not have the same number of residues "
-//                  << "fixed by the alignment (" << residNumber << ")." << endl;
             return false;
         }
     }
-    /* If the sequences are aligned, initialize some additional variables.
-     * These variables will be useful for posterior analysis */
+    // If the sequences are aligned, initialize some additional variables.
+    // These variables will be useful for posterior analysis
     if((aligned) || (isAligned)) {
 
-        /* Asign its position to each column. That will be used to determine which
-         * columns should be kept in output alignment after applying any method
-         * and which columns should not */
+        // Asign its position to each column. That will be used to determine which
+        // columns should be kept in output alignment after applying any method
+        // and which columns should not
         saveResidues = new int[residNumber];
         for(i = 0; i < residNumber; i++)
             saveResidues[i] = i;
 
-        /* Asign its position to each sequence. Similar to the columns numbering
-         * procefile, afileign to each sequence its position is useful to know which
-         * sequences will be in the output alignment */
+        // Asign its position to each sequence. Similar to the columns numbering
+        // procefile, afileign to each sequence its position is useful to know which
+        // sequences will be in the output alignment
         saveSequences = new int[sequenNumber];
         for(i = 0; i < sequenNumber; i++)
             saveSequences[i] = i;
     }
 
-    /* Return an flag indicating that everything is fine */
+    // Return an flag indicating that everything is fine
 
     return true;
 }
@@ -898,12 +814,12 @@ bool newAlignment::fillMatrices(bool aligned) {
 
 
 void newAlignment::printAlignmentInfo(ostream &file) {
-    /* Print information about sequences number, average sequence length, maximum
-     * and minimum sequences length, etc */
+    // Print information about sequences number, average sequence length, maximum
+    // and minimum sequences length, etc
 
     int i, j, valid_res, max, min, max_pos, min_pos, total_res;
 
-    /* Storage which sequences are the longest and shortest ones */
+    // Storage which sequences are the longest and shortest ones
     max = 0;
     max_pos = 0;
     min_pos = 0;
@@ -911,18 +827,19 @@ void newAlignment::printAlignmentInfo(ostream &file) {
 
     for(i = 0, total_res = 0; i < sequenNumber; i++) {
 
-        /* Discard gaps from current sequence and then compute real length */
+        // Discard gaps from current sequence and then compute real length
         for(j = 0, valid_res = 0; j < sequences[i].length(); j++)
             valid_res += (sequences[i][j] != '-' ? 1 : 0);
 
-        /* Compute the total residues in the alignment to calculate avg. sequence
-         * length */
+        // Compute the total residues in the alignment to calculate avg. sequence
+        // length
         total_res += valid_res;
 
-        /* Get values for the longest sequence */
+        // Get values for the longest sequence
         max_pos = (max > valid_res) ? max_pos : i;
         max = (max > valid_res) ? max : valid_res;
-        /* Similarily, get values for the shortest sequence */
+        
+        // Similarily, get values for the shortest sequence
         min_pos = (min < valid_res) ? min_pos : i;
         min = (min < valid_res) ? min : valid_res;
     }
@@ -942,17 +859,17 @@ void newAlignment::printSeqIdentity(void) {
     int i, j, k, pos, maxLongName;
     float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
 
-    /* Ask for the sequence identities afileesment */
+    // Ask for the sequence identities afileesment
     if(identities == NULL)
         Cleaning -> calculateSeqIdentity();
 
-    /* For each sequence, we look for its most similar one */
+    // For each sequence, we look for its most similar one
     maxs = new float*[sequenNumber];
 
     for(i = 0; i < sequenNumber; i++) {
         maxs[i] = new float[2];
 
-        /* Get the most similar sequence to the current one in term of identity */
+        // Get the most similar sequence to the current one in term of identity
         for(k = 0, mx = 0, avg = 0, pos = i; k < sequenNumber; k++) {
             if(i != k) {
                 avg += identities[i][k];
@@ -962,24 +879,24 @@ void newAlignment::printSeqIdentity(void) {
                 }
             }
         }
-        /* Update global average variables*/
+        // Update global average variables
         avgSeq += avg/(sequenNumber - 1);
         maxAvgSeq += mx;
 
-        /* Save the maximum average identity value for each sequence */
+        // Save the maximum average identity value for each sequence
         maxs[i][0] = mx;
         maxs[i][1] = pos;
     }
 
-    /* Compute general averages */
+    // Compute general averages 
     avgSeq = avgSeq/sequenNumber;
     maxAvgSeq = maxAvgSeq/sequenNumber;
 
-    /* Compute longest sequences name */
+    // Compute longest sequences name
     for(i = 0, maxLongName = 0; i < sequenNumber; i++)
         maxLongName = utils::max(maxLongName, seqsName[i].size());
 
-    /* Once the method has computed all of different values, it prints it */
+    // Once the method has computed all of different values, it prints it
     cout.precision(4);
     cout << fixed;
 
@@ -1028,17 +945,17 @@ void newAlignment::printSeqOverlap()
     int i, j, k, pos, maxLongName;
     float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
 
-    /* Ask for the sequence identities afileesment */
+    // Ask for the sequence identities assesment
     if(overlaps == NULL)
         calculateSeqOverlap();
 
-    /* For each sequence, we look for its most similar one */
+    // For each sequence, we look for its most similar one 
     maxs = new float*[sequenNumber];
 
     for(i = 0; i < sequenNumber; i++) {
         maxs[i] = new float[2];
 
-        /* Get the most similar sequence to the current one in term of overlap */
+        // Get the most similar sequence to the current one in term of overlap
         for(k = 0, mx = 0, avg = 0, pos = i; k < sequenNumber; k++) {
             if(i != k) {
                 avg += overlaps[i][k];
@@ -1048,24 +965,24 @@ void newAlignment::printSeqOverlap()
                 }
             }
         }
-        /* Update global average variables*/
+        // Update global average variables
         avgSeq += avg/(sequenNumber - 1);
         maxAvgSeq += mx;
 
-        /* Save the maximum average overlap value for each sequence */
+        // Save the maximum average overlap value for each sequence
         maxs[i][0] = mx;
         maxs[i][1] = pos;
     }
 
-    /* Compute general averages */
+    // Compute general averages
     avgSeq = avgSeq/sequenNumber;
     maxAvgSeq = maxAvgSeq/sequenNumber;
 
-    /* Compute longest sequences name */
+    // Compute longest sequences name 
     for(i = 0, maxLongName = 0; i < sequenNumber; i++)
         maxLongName = utils::max(maxLongName, seqsName[i].size());
 
-    /* Once the method has computed all of different values, it prints it */
+    // Once the method has computed all of different values, it prints it
     cout.precision(4);
     cout << fixed;
 
@@ -1094,34 +1011,29 @@ void newAlignment::printSeqOverlap()
     delete[] maxs;
 }
 
-/* *** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *** */
-/*                                                                           */
-/*                             NEW CODE: feb/2012                            */
-/*                                                                           */
-/* *** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *** */
 void newAlignment::calculateColIdentity(float *ColumnIdentities) {
 
     int i, j, counter, pos, max, columnLen;
     char letter, indet, gapSymbol;
     string column;
 
-    /* Initialize some data for make computation more precise */
+    // Initialize some data for make computation more precise
     indet = getAlignmentType() == SequenceTypes::AA ? 'X' : 'N';
     gapSymbol = '-';
 
-    /* Compute identity score for the most frequent residue, it can be as well
-     * gaps and indeterminations, for each column */
+    // Compute identity score for the most frequent residue, it can be as well
+    // gaps and indeterminations, for each column 
     for(i = 0, max = 0; i < residNumber; i++, max = 0, column.clear()) {
 
-        /* Get residues from each column in capital letters */
+        // Get residues from each column in capital letters
         for(j = 0; j < sequenNumber; j++)
-            /* Discard gaps and indeterminations from calculations */
+            // Discard gaps and indeterminations from calculations
             if((toupper(sequences[j][i]) != indet) && (sequences[j][i] != gapSymbol))
                 column += toupper(sequences[j][i]);
         columnLen = column.size();
 
-        /* Count letter frequency. It only matter the frequency. Use some shorcuts
-         * to speed-up the procefile */
+        // Count letter frequency. It only matter the frequency. Use some shorcuts
+        // to speed-up the procefile 
         while (!column.empty()) {
             letter = column[0];
             counter = 0;
@@ -1133,15 +1045,15 @@ void newAlignment::calculateColIdentity(float *ColumnIdentities) {
                 pos = column.find(letter, pos);
             } while(pos != (int) string::npos);
 
-            /* Keep only the most frequent residue */
+            // Keep only the most frequent residue
             if(counter > max)
                 max = counter;
-            /* If column size is smaller than the current max, stop the count */
+            // If column size is smaller than the current max, stop the count
             if((int) column.size() < max)
                 break;
         }
 
-        /* Store column identity values */
+        // Store column identity values
         if(columnLen != 0)
             ColumnIdentities[i] = float(max)/columnLen;
     }
@@ -1152,7 +1064,7 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
     float *colIdentities, avg, std, max, min;
     int i, positions;
 
-    /* Allocate local memory for the computation */
+    // Allocate local memory for the computation
     colIdentities = new float[residNumber];
 
     utils::initlVect(colIdentities, residNumber, -1);
@@ -1160,371 +1072,65 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 
     for(i = 0, max = 0, min = 1, avg = 0, positions = 0; i < residNumber; i++) {
         if(colIdentities[i] != -1) {
-            /* Compute on-the-fly max and min scores. Store accumulative score */
+            // Compute on-the-fly max and min scores. Store accumulative score
             avg += colIdentities[i];
             max = (colIdentities[i] > max) ? colIdentities[i] : max;
             min = (colIdentities[i] < min) ? colIdentities[i] : min;
-            /* Count how many columns have a value score */
+            // Count how many columns have a value score
             positions += 1;
         }
     }
-    /* Compute average identity column score */
+    // Compute average identity column score
     avg /= positions;
 
-    /* Compute standard desviation */
+    // Compute standard desviation
     for(i = 0, std = 0; i < residNumber; i++)
         if(colIdentities[i] != -1)
             std += pow((colIdentities[i] - avg), 2);
     std = sqrt(std/positions);
 
-    /* Print general descriptive stats */
+    // Print general descriptive stats
     cout << "#maxColIdentity\t" << max << endl;
     cout << "#minColIdentity\t" << min << endl;
     cout << "#avgColIdentity\t" << avg << endl;
     cout << "#stdColIdentity\t" << std << endl;
 }
 
-// bool newAlignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
-//                                         int *selectedRes, int *selectedSeq, float *consValues) {
-//
-//     /* Generate an HTML file with a visual summary about which sequences/columns
-//      * have been selected and which have not */
-//
-//     int i, j, k, kj, upper, minHTML, maxLongName, *gapsValues;
-//     string tmpColumn;
-//     float *simValues;
-//     bool *res, *seq;
-//     ofstream file;
-//     char type;
-//
-//     /* Allocate some local memory */
-//     tmpColumn.reserve(sequenNumber);
-//
-//     /* Check whether sequences in the alignment are aligned or not.
-//      * Warn about it if there are not aligned. */
-//     if (!isAligned) {
-//         Debug.report(ErrorCode::NotAligned, new std::string[1] { filename });
-// //     cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
-//         return false;
-//     }
-//
-//     /* Open output file and check that file pointer is valid */
-//     file.open(destFile);
-//     if(!file)
-//         return false;
-//
-//     /* Compute maximum sequences name length. */
-//     maxLongName = 0;
-//     for(i = 0; i < sequenNumber; i++)
-//         maxLongName = utils::max(maxLongName, seqsName[i].size());
-//
-//     /* Compute HTML blank spaces */
-//     minHTML = utils::max(25, maxLongName + 10);
-//
-//     /* Initialize local variables to control which columns/sequences
-//      * will be kept in the output alignment */
-//     res = new bool[residNumber];
-//     for(i = 0; i < residNumber; i++)
-//         res[i] = false;
-//
-//     seq = new bool[sequenNumber];
-//     for(i = 0; i < sequenNumber; i++)
-//         seq[i] = false;
-//
-//     /* Record which columns/sequences from original alignment
-//      * have been kept in the final one */
-//     for(i = 0; i < residues; i++)
-//     {
-//         res[selectedRes[i]] = true;
-//     }
-//     for(i = 0; i < seqs; i++)
-//     {
-//
-//         seq[selectedSeq[i]] = true;
-//     }
-//
-//     /* Recover some stats about different scores from current alignment */
-//     gapsValues = NULL;
-//     if (sgaps != NULL)
-//         gapsValues = sgaps -> getGapsWindow();
-//     simValues = NULL;
-//     if (scons != NULL)
-//         simValues = scons -> getMdkwVector();
-//
-//     /* Print HTML header into output file */
-//     file << "<!DOCTYPE html>" << endl << "<html><head>" << endl << "    <meta "
-//          << "http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />"
-//          << endl << "    <title>trimAl v1.4 Summary</title>" << endl
-//          << "    <style type=\"text/css\" media=\"all\">" << endl
-//
-//          << "    #b  { background-color: #3366ff; }\n"
-//          << "    #r  { background-color: #cc0000; }\n"
-//          << "    #g  { background-color: #33cc00; }\n"
-//          << "    #p  { background-color: #ff6666; }\n"
-//          << "    #m  { background-color: #cc33cc; }\n"
-//          << "    #o  { background-color: #ff9900; }\n"
-//          << "    #c  { background-color: #46C7C7; }\n"
-//          << "    #y  { background-color: #FFFF00; }\n"
-//
-//          << "    .sel  { background-color: #B9B9B9; }\n"
-//          << "    .nsel { background-color: #E9E9E9; }\n"
-//
-//          /* Sets of colors for high-lighting scores intervals */
-//          << "    .c1   { background-color: #FFFBF2; }\n"
-//          << "    .c2   { background-color: #FFF8CC; }\n"
-//          << "    .c3   { background-color: #FAF0BE; }\n"
-//          << "    .c4   { background-color: #F0EAD6; }\n"
-//          << "    .c5   { background-color: #F3E5AB; }\n"
-//          << "    .c6   { background-color: #F4C430; }\n"
-//          << "    .c7   { background-color: #C2B280; color: white; }\n"
-//          << "    .c8   { background-color: #DAA520; color: white; }\n"
-//          << "    .c9   { background-color: #B8860B; color: white; }\n"
-//          << "    .c10  { background-color: #918151; color: white; }\n"
-//          << "    .c11  { background-color: #967117; color: white; }\n"
-//          << "    .c12  { background-color: #6E5411; color: white; }\n"
-//
-//          /* Other HTML elements */
-//          << "    </style>\n  </head>\n\n" << "  <body>\n" << "  <pre>" << endl;
-//
-//     /* Show information about how many sequences/residues have been selected */
-//     file << "    <span class=sel>Selected Sequences: " << setw(5) << right << seqs
-//          <<" /Selected Residues: " << setw(7) << right << residues << "</span>"
-//          << endl << "    <span class=nsel>Deleted Sequences:  " << setw(5) << right
-//          << sequenNumber - seqs << " /Deleted Residues:  " << setw(7) << right
-//          << residNumber - residues << "</span>" << endl;
-//
-//     /* Print headers for different scores derived from input alignment/s */
-//     if (gapsValues != NULL)
-//         file << endl << setw(minHTML) << left << "    Gaps Scores:        "
-//              << "<span  class=c1>  =0=  </span><span  class=c2> <.001 </span>"
-//              << "<span  class=c3> <.050 </span><span  class=c4> <.100 </span>"
-//              << "<span  class=c5> <.150 </span><span  class=c6> <.200 </span>"
-//              << "<span  class=c7> <.250 </span><span  class=c8> <.350 </span>"
-//              << "<span  class=c9> <.500 </span><span class=c10> <.750 </span>"
-//              << "<span class=c11> <1.00 </span><span class=c12>  =1=  </span>";
-//
-//     if (simValues != NULL)
-//         file << endl << setw(minHTML) << left << "    Similarity Scores:  "
-//              << "<span  class=c1>  =0=  </span><span  class=c2> <1e-6 </span>"
-//              << "<span  class=c3> <1e-5 </span><span  class=c4> <1e-4 </span>"
-//              << "<span  class=c5> <.001 </span><span  class=c6> <.010 </span>"
-//              << "<span  class=c7> <.100 </span><span  class=c8> <.250 </span>"
-//              << "<span  class=c9> <.500 </span><span class=c10> <.750 </span>"
-//              << "<span class=c11> <1.00 </span><span class=c12>  =1=  </span>";
-//
-//     if (consValues != NULL)
-//         file << endl << setw(minHTML) << left << "    Consistency Scores: "
-//              << "<span  class=c1>  =0=  </span><span  class=c2> <.001 </span>"
-//              << "<span  class=c3> <.050 </span><span  class=c4> <.100 </span>"
-//              << "<span  class=c5> <.150 </span><span  class=c6> <.200 </span>"
-//              << "<span  class=c7> <.250 </span><span  class=c8> <.350 </span>"
-//              << "<span  class=c9> <.500 </span><span class=c10> <.750 </span>"
-//              << "<span class=c11> <1.00 </span><span class=c12>  =1=  </span>";
-//
-//     if ((gapsValues != NULL) or (simValues == NULL) or (consValues == NULL))
-//         file << endl;
-//
-//     /* Print Sequences in block of BLOCK_SIZE */
-//     for(j = 0, upper = HTMLBLOCKS; j < residNumber; j += HTMLBLOCKS, upper += \
-//             HTMLBLOCKS) {
-//
-//         /* Print main columns number */
-//         file << endl << setw(minHTML + 10) << right << (j + 10);
-//         for(i = j + 20; ((i <= residNumber) && (i <= upper)); i += 10)
-//             file << setw(10) << right << (i);
-//
-//         /* Print special characters to delimit sequences blocks */
-//         file << endl << setw(minHTML + 1) << right;
-//         for(i = j + 1; ((i <= residNumber) && (i <= upper)); i++)
-//             file << (!(i % 10) ? "+" : "=");
-//         file << endl;
-//
-//         /* Print sequences name */
-//         for(i = 0; i < sequenNumber; i++) {
-//             file << "    <span class=" << ((seq[i]) ? "sel>" : "nsel>") << seqsName[i]
-//                  << "</span>" << setw(minHTML - 4 - seqsName[i].size()) << right << "";
-//
-//             /* Print residues corresponding to current sequences block */
-//             for(k = j; ((k < residNumber) && (k < upper)); k++) {
-//                 for(kj = 0, tmpColumn.clear(); kj < sequenNumber; kj++)
-//                     tmpColumn += sequences[kj][k];
-//                 /* Determine residue color based on residues across the alig column */
-//                 type = utils::determineColor(sequences[i][k], tmpColumn);
-//                 if (type == 'w')
-//                     file << sequences[i][k];
-//                 else
-//                     file << "<span id=" << type << ">" << sequences[i][k] << "</span>";
-//             }
-//             file << endl;
-//         }
-//
-//         file << endl << setw(minHTML) << left << "    Selected Cols:      ";
-//         for(k = j; ((k < residNumber) && (k < (j + HTMLBLOCKS))); k++)
-//             file << "<span class=" << (res[k] ? "sel" : "nsel") << "> </span>";
-//         file << endl;
-//
-//         /* If there is not any score to print, skip this part of the function */
-//         if ((gapsValues == NULL) and (simValues == NULL) and (consValues == NULL))
-//             continue;
-//
-//         /* Print score colors according to certain predefined thresholds */
-//         if (gapsValues != NULL) {
-//             file << endl << setw(minHTML) << left << "    Gaps Scores:        ";
-//             for(k = j; ((k < residNumber) && (k < (j + HTMLBLOCKS))); k++)
-//                 if(gapsValues[k] == 0)
-//                     file << "<span class=c12> </span>";
-//                 else if(gapsValues[k] == sequenNumber)
-//                     file << "<span class=c1> </span>";
-//                 else if(1 - (float(gapsValues[k])/sequenNumber) >= .750)
-//                     file << "<span class=c11> </span>";
-//                 else if(1 - (float(gapsValues[k])/sequenNumber) >= .500)
-//                     file << "<span class=c10> </span>";
-//                 else if(1 - (float(gapsValues[k])/sequenNumber) >= .350)
-//                     file << "<span  class=c9> </span>";
-//                 else if(1 - (float(gapsValues[k])/sequenNumber) >= .250)
-//                     file << "<span  class=c8> </span>";
-//                 else if(1 - (float(gapsValues[k])/sequenNumber) >= .200)
-//                     file << "<span  class=c7> </span>";
-//                 else if(1 - (float(gapsValues[k])/sequenNumber) >= .150)
-//                     file << "<span  class=c6> </span>";
-//                 else if(1 - (float(gapsValues[k])/sequenNumber) >= .100)
-//                     file << "<span  class=c5> </span>";
-//                 else if(1 - (float(gapsValues[k])/sequenNumber) >= .050)
-//                     file << "<span  class=c4> </span>";
-//                 else if(1 - (float(gapsValues[k])/sequenNumber) >= .001)
-//                     file << "<span  class=c3> </span>";
-//                 else
-//                     file << "<span  class=c2> </span>";
-//         }
-//         if (simValues != NULL) {
-//             file << endl << setw(minHTML) << left << "    Similarity Scores:  ";
-//             for(k = j; ((k < residNumber) && (k < (j + HTMLBLOCKS))); k++)
-//                 if(simValues[k] == 1)
-//                     file << "<span class=c12> </span>";
-//                 else if(simValues[k] == 0)
-//                     file << "<span class=c1> </span>";
-//                 else if(simValues[k] >= .750)
-//                     file << "<span class=c11> </span>";
-//                 else if(simValues[k] >= .500)
-//                     file << "<span class=c10> </span>";
-//                 else if(simValues[k] >= .250)
-//                     file << "<span  class=c9> </span>";
-//                 else if(simValues[k] >= .100)
-//                     file << "<span  class=c8> </span>";
-//                 else if(simValues[k] >= .010)
-//                     file << "<span  class=c7> </span>";
-//                 else if(simValues[k] >= .001)
-//                     file << "<span  class=c6> </span>";
-//                 else if(simValues[k] >= 1e-4)
-//                     file << "<span  class=c5> </span>";
-//                 else if(simValues[k] >= 1e-5)
-//                     file << "<span  class=c4> </span>";
-//                 else if(simValues[k] >= 1e-6)
-//                     file << "<span  class=c3> </span>";
-//                 else
-//                     file << "<span  class=c2> </span>";
-//         }
-//         if (consValues != NULL) {
-//             file << endl << setw(minHTML) << left << "    Consistency Scores: ";
-//             for(k = j; ((k < residNumber) && (k < (j + HTMLBLOCKS))); k++)
-//                 if(consValues[k] == 1)
-//                     file << "<span class=c12> </span>";
-//                 else if(consValues[k] == 0)
-//                     file << "<span class=c1> </span>";
-//                 else if(consValues[k] >= .750)
-//                     file << "<span class=c11> </span>";
-//                 else if(consValues[k] >= .500)
-//                     file << "<span class=c10> </span>";
-//                 else if(consValues[k] >= .350)
-//                     file << "<span  class=c9> </span>";
-//                 else if(consValues[k] >= .250)
-//                     file << "<span  class=c8> </span>";
-//                 else if(consValues[k] >= .200)
-//                     file << "<span  class=c7> </span>";
-//                 else if(consValues[k] >= .150)
-//                     file << "<span  class=c6> </span>";
-//                 else if(consValues[k] >= .100)
-//                     file << "<span  class=c5> </span>";
-//                 else if(consValues[k] >= .050)
-//                     file << "<span  class=c4> </span>";
-//                 else if(consValues[k] >= .001)
-//                     file << "<span  class=c3> </span>";
-//                 else
-//                     file << "<span  class=c2> </span>";
-//         }
-//         file << endl;
-//     }
-//
-//     /* Print HTML footer into output file */
-//     file << "    </pre>" << endl << "  </body>" << endl << "</html>" << endl;
-//
-//     /* Close output file and deallocate local memory */
-//     file.close();
-//     delete [] seq;
-//     delete [] res;
-//
-//     return true;
-// }
-
 bool newAlignment::alignmentSummaryHTML(newAlignment & _trimmedAlignment, char *destFile, float *consValues) {
 
-    /* Generate an HTML file with a visual summary about which sequences/columns
-     * have been selected and which have not */
+    // Generate an HTML file with a visual summary about which sequences/columns
+    // have been selected and which have not
 
     int i, j, k, kj, upper, minHTML, maxLongName, *gapsValues;
     string tmpColumn;
     float *simValues;
-//     bool *res, *seq;
     ofstream file;
     char type;
 
-    /* Allocate some local memory */
+    // Allocate some local memory
     tmpColumn.reserve(originalSequenNumber);
 
-    /* Check whether sequences in the alignment are aligned or not.
-     * Warn about it if there are not aligned. */
+    // Check whether sequences in the alignment are aligned or not.
+    // Warn about it if there are not aligned.
     if (!isAligned) {
         debug.report(ErrorCode::NotAligned, new std::string[1] { filename });
-//     cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
         return false;
     }
 
-    /* Open output file and check that file pointer is valid */
+    // Open output file and check that file pointer is valid 
     file.open(destFile);
     if(!file)
         return false;
 
-    /* Compute maximum sequences name length. */
+    // Compute maximum sequences name length.
     maxLongName = 0;
     for(i = 0; i < originalSequenNumber; i++)
         maxLongName = utils::max(maxLongName, seqsName[i].size());
 
-    /* Compute HTML blank spaces */
+    // Compute HTML blank spaces
     minHTML = utils::max(25, maxLongName + 10);
 
-    /* Initialize local variables to control which columns/sequences
-     * will be kept in the output alignment */
-//     res = new bool[originalResidNumber];
-//     for(i = 0; i < originalResidNumber; i++)
-//         res[i] = false;
-//
-//     seq = new bool[originalSequenNumber];
-//     for(i = 0; i < originalSequenNumber; i++)
-//         seq[i] = false;
-
-    /* Record which columns/sequences from original alignment
-     * have been kept in the final one */
-//     for(i = 0; i < originalResidNumber; i++)
-//     {
-//         res[selectedRes[i]] = true;
-//     }
-//     for(i = 0; i < seqs; i++)
-//     {
-//
-//         seq[selectedSeq[i]] = true;
-//     }
-
-    /* Recover some stats about different scores from current alignment */
+    // Recover some stats about different scores from current alignment
     gapsValues = NULL;
     if (sgaps != NULL)
         gapsValues = sgaps -> getGapsWindow();
@@ -1532,7 +1138,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment & _trimmedAlignment, char *
     if (scons != NULL)
         simValues = scons -> getMdkwVector();
 
-    /* Print HTML header into output file */
+    // Print HTML header into output file
     file << "<!DOCTYPE html>" << endl << "<html><head>" << endl << "    <meta "
          << "http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />"
          << endl << "    <title>trimAl v1.4 Summary</title>" << endl
@@ -1550,7 +1156,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment & _trimmedAlignment, char *
          << "    .sel  { background-color: #B9B9B9; }\n"
          << "    .nsel { background-color: #E9E9E9; }\n"
 
-         /* Sets of colors for high-lighting scores intervals */
+         // Sets of colors for high-lighting scores intervals
          << "    .c1   { background-color: #FFFBF2; }\n"
          << "    .c2   { background-color: #FFF8CC; }\n"
          << "    .c3   { background-color: #FAF0BE; }\n"
@@ -1564,17 +1170,17 @@ bool newAlignment::alignmentSummaryHTML(newAlignment & _trimmedAlignment, char *
          << "    .c11  { background-color: #967117; color: white; }\n"
          << "    .c12  { background-color: #6E5411; color: white; }\n"
 
-         /* Other HTML elements */
+         // Other HTML elements
          << "    </style>\n  </head>\n\n" << "  <body>\n" << "  <pre>" << endl;
 
-    /* Show information about how many sequences/residues have been selected */
+    // Show information about how many sequences/residues have been selected
     file << "    <span class=sel>Selected Sequences: " << setw(5) << right << _trimmedAlignment.sequenNumber
          <<" /Selected Residues: " << setw(7) << right << _trimmedAlignment.residNumber << "</span>"
          << endl << "    <span class=nsel>Deleted Sequences:  " << setw(5) << right
          << sequenNumber - _trimmedAlignment.sequenNumber << " /Deleted Residues:  " << setw(7) << right
          << residNumber - _trimmedAlignment.residNumber << "</span>" << endl;
 
-    /* Print headers for different scores derived from input alignment/s */
+    // Print headers for different scores derived from input alignment/s 
     if (gapsValues != NULL)
         file << endl << setw(minHTML) << left << "    Gaps Scores:        "
              << "<span  class=c1>  =0=  </span><span  class=c2> <.001 </span>"
@@ -1605,31 +1211,31 @@ bool newAlignment::alignmentSummaryHTML(newAlignment & _trimmedAlignment, char *
     if ((gapsValues != NULL) or (simValues == NULL) or (consValues == NULL))
         file << endl;
 
-    /* Print Sequences in block of BLOCK_SIZE */
+    // Print Sequences in block of BLOCK_SIZE 
     for(j = 0, upper = HTMLBLOCKS; j < originalResidNumber; j += HTMLBLOCKS, upper += \
             HTMLBLOCKS) {
 
-        /* Print main columns number */
+        // Print main columns number
         file << endl << setw(minHTML + 10) << right << (j + 10);
         for(i = j + 20; ((i <= originalResidNumber) && (i <= upper)); i += 10)
             file << setw(10) << right << (i);
 
-        /* Print special characters to delimit sequences blocks */
+        // Print special characters to delimit sequences blocks
         file << endl << setw(minHTML + 1) << right;
         for(i = j + 1; ((i <= originalResidNumber) && (i <= upper)); i++)
             file << (!(i % 10) ? "+" : "=");
         file << endl;
 
-        /* Print sequences name */
+        // Print sequences name
         for(i = 0; i < originalSequenNumber; i++) {
             file << "    <span class=" << ((_trimmedAlignment.saveSequences[i] != -1 ) ? "sel>" : "nsel>") << seqsName[i]
                  << "</span>" << setw(minHTML - 4 - seqsName[i].size()) << right << "";
 
-            /* Print residues corresponding to current sequences block */
+            // Print residues corresponding to current sequences block
             for(k = j; ((k < originalResidNumber) && (k < upper)); k++) {
                 for(kj = 0, tmpColumn.clear(); kj < originalSequenNumber; kj++)
                     tmpColumn += sequences[kj][k];
-                /* Determine residue color based on residues across the alig column */
+                // Determine residue color based on residues across the alig column
                 type = utils::determineColor(sequences[i][k], tmpColumn);
 
                 if (type == 'w')
@@ -1646,11 +1252,11 @@ bool newAlignment::alignmentSummaryHTML(newAlignment & _trimmedAlignment, char *
             file << "<span class=" << (_trimmedAlignment.saveResidues[k] != -1 ? "sel" : "nsel") << "> </span>";
         file << endl;
 
-        /* If there is not any score to print, skip this part of the function */
+        // If there is not any score to print, skip this part of the function
         if ((gapsValues == NULL) and (simValues == NULL) and (consValues == NULL))
             continue;
 
-        /* Print score colors according to certain predefined thresholds */
+        // Print score colors according to certain predefined thresholds
         if (gapsValues != NULL) {
             file << endl << setw(minHTML) << left << "    Gaps Scores:        ";
             for(k = j; ((k < originalResidNumber) && (k < (j + HTMLBLOCKS))); k++)
@@ -1738,10 +1344,10 @@ bool newAlignment::alignmentSummaryHTML(newAlignment & _trimmedAlignment, char *
         file << endl;
     }
 
-    /* Print HTML footer into output file */
+    // Print HTML footer into output file
     file << "    </pre>" << endl << "  </body>" << endl << "</html>" << endl;
 
-    /* Close output file and deallocate local memory */
+    // Close output file and deallocate local memory
     file.close();
 
     return true;
@@ -1780,7 +1386,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *d
     if(!file)
         return false;
 
-    /* Compute HTML blank spaces */
+    // Compute HTML blank spaces
     j = 0;
     for(i = 0; i < sequenNumber; i++)
         j = utils::max(j, seqsName[i].size());
@@ -1813,9 +1419,9 @@ bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *d
           interBlocksMargin   = 20;
 
     float height = ((originalSequenNumber + 3 + (gapsValues != NULL || simValues != NULL ? 7 : 0) /* Colnumbering occupies 3 rows. Stats 5 */)
-                    * fontSize + interBlocksMargin)                 /* Height of a block + interblock */
-                   * std::ceil((float)originalResidNumber/blocks)  /* Number of blocks */
-                   - interBlocksMargin /* Number of interblocks is number of blocks  - 1 */
+                    * fontSize + interBlocksMargin)                 // Height of a block + interblock
+                   * std::ceil((float)originalResidNumber/blocks)  // Number of blocks 
+                   - interBlocksMargin // Number of interblocks is number of blocks  - 1
                    + fontSize * 16
                    + topMargin
                    + bottomMargin;
@@ -1871,20 +1477,11 @@ bool newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *d
     file << "<path d=\"M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2\" stroke=\"white\" stroke-width=\"1\"/>";
     file << "</pattern> " << endl;
 
-//     file << "<pattern id=\"selected-focus\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//     file << "<rect width=\"10\" height=\"10\" fill=\"mediumseagreen\"/>";
-//     file << "</pattern> " << endl;
-
     // Deleted Block
     file << "<pattern id=\"rejected\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
     file << "<rect width=\"10\" height=\"10\" fill=\"red\" opacity=\"0.5\"/>";
     file << "<path d=\"M2,-2 l-1,1 M10,-10 l0,10 M2,-2 l9,11\" stroke=\"white\" stroke-width=\"1\"/>";
     file << "</pattern> " << endl;
-
-//     file << "<pattern id=\"deleted-focus\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
-//     file << "<rect width=\"10\" height=\"10\" fill=\"black\"/>";
-//     file << "<path d=\"M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2\" stroke=\"red\" stroke-width=\"2\"/>";
-//     file << "</pattern> " << endl;
         
     // END
     
@@ -2404,24 +2001,23 @@ bool newAlignment::alignmentColourHTML(ostream &file) {
     string tmpColumn;
     char type;
 
-    /* Allocate some local memory */
+    // Allocate some local memory
     tmpColumn.reserve(sequenNumber);
 
-    /* Check whether sequences in the alignment are aligned or not.
-     * Warn about it if there are not aligned. */
+    // Check whether sequences in the alignment are aligned or not.
+    // Warn about it if there are not aligned. 
     if (!isAligned) {
         debug.report(ErrorCode::NotAligned, new std::string[1] { filename });
-//         cerr << endl << "ERROR: Sequences are not aligned." << endl << endl;
         return false;
     }
 
-    /* Compute maximum sequences name length */
+    // Compute maximum sequences name length
     maxLongName = 0;
     for(i = 0; i < sequenNumber; i++)
         maxLongName = utils::max(maxLongName, seqsName[i].size());
 
 
-    /* Print HTML header into output file */
+    // Print HTML header into output file
     file << "<!DOCTYPE html>" << endl << "<html><head>" << endl << "    <meta "
          << "http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />"
          << endl << "    <title>readAl v1.4</title>" << endl
@@ -2436,33 +2032,33 @@ bool newAlignment::alignmentColourHTML(ostream &file) {
          << "    #y  { background-color: #FFFF00; }\n"
          << "    </style>\n  </head>\n\n" << "  <body>\n  <pre>" << endl;
 
-    /* Print sequences colored according to CLUSTAL scheme based on
-     * physical-chemical properties */
+    // Print sequences colored according to CLUSTAL scheme based on
+    // physical-chemical properties
     for(j = 0, upper = HTMLBLOCKS; j < residNumber; j += HTMLBLOCKS, upper += \
             HTMLBLOCKS) {
 
         file << endl;
-        /* Print main columns number */
+        // Print main columns number
         file << setw(maxLongName + 19) << right << (j + 10);
         for(i = j + 20; ((i <= residNumber) && (i <= upper)); i += 10)
             file << setw(10) << right << i;
 
-        /* Print special characters to delimit sequences blocks */
+        // Print special characters to delimit sequences blocks
         file << endl << setw(maxLongName + 10);
         for(i = j + 1; ((i <= residNumber) && (i <= upper)); i++)
             file << (!(i % 10) ? "+" : "=");
 
-        /* Print sequences themselves */
+        //Print sequences themselves 
         for(i = 0; i < sequenNumber; i++) {
 
-            /* Print sequences name */
+            // Print sequences name
             file << endl << setw(maxLongName + 9) << left << seqsName[i];
 
-            /* Print residues corresponding to current sequences block */
+            // Print residues corresponding to current sequences block
             for(k = j; ((k < residNumber) && (k < upper)); k++) {
                 for(kj = 0, tmpColumn.clear(); kj < sequenNumber; kj++)
                     tmpColumn += sequences[kj][k];
-                /* Determine residue color based on residues acrofile the alig column */
+                // Determine residue color based on residues acrofile the alig column
                 type = utils::determineColor(sequences[i][k], tmpColumn);
                 if (type == 'w')
                     file << sequences[i][k];
@@ -2473,7 +2069,7 @@ bool newAlignment::alignmentColourHTML(ostream &file) {
         file << endl;
     }
 
-    /* Print HTML footer into output file */
+    // Print HTML footer into output file
     file << "    </pre>" << endl << "  </body>" << endl << "</html>" << endl;
 
     return true;

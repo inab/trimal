@@ -29,14 +29,6 @@
 #include "../include/newAlignment.h"
 #include <sstream>
 
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-|  statisticsGaps::statisticsGaps(char **, int, int)                                                                   |
-|                                                                                                                      |
-|       Class constructor. This method uses the inputs parameters to put the information in the new object that        |
-|       has been created.                                                                                              |
-|                                                                                                                      |
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
 statisticsGaps::statisticsGaps(newAlignment * parent) {
 
     _alignment = parent;
@@ -54,7 +46,7 @@ statisticsGaps::statisticsGaps(newAlignment * parent) {
     else
         indet = 'N';
 
-    /* Memory allocation for the vectors and its initialization */
+    // Memory allocation for the vectors and its initialization 
     gapsInColumn =       new int[residNumber];
     utils::initlVect(gapsInColumn, residNumber, 0);
 
@@ -67,7 +59,7 @@ statisticsGaps::statisticsGaps(newAlignment * parent) {
     numColumnsWithGaps = new int[sequenNumber+1];
     utils::initlVect(numColumnsWithGaps, sequenNumber+1, 0);
 
-    /* Count the gaps and indeterminations of each columns */
+    // Count the gaps and indeterminations of each columns
     for(i = 0, ii = -1; i < _alignment->originalResidNumber; i++) {
         if (_alignment->saveResidues[i] == -1) continue;
         ii++;
@@ -79,7 +71,7 @@ statisticsGaps::statisticsGaps(newAlignment * parent) {
                 aminosXInColumn[ii]++;
         }
 
-        /* Increase the number of colums with the number of gaps of the last processed column */
+        // Increase the number of colums with the number of gaps of the last processed column
         numColumnsWithGaps[gapsInColumn[ii]]++;
 
         gapsWindow[ii] = gapsInColumn[ii];
@@ -90,38 +82,9 @@ statisticsGaps::statisticsGaps(newAlignment * parent) {
     }
 }
 
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-|  statisticsGaps::statisticsGaps(void)                                                                                |
-|                                                                                                                      |
-|       Class constructor.                                                                                             |
-|                                                                                                                      |
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-// statisticsGaps::statisticsGaps(void) {
-//
-//     /* Initializate all values to NULL or 0 */
-//     gapsInColumn = NULL;
-//     numColumnsWithGaps = NULL;
-//     aminosXInColumn = NULL;
-//     gapsWindow = NULL;
-//
-//     residNumber = 	  0;
-//     sequenNumber  = 0;
-//     maxGaps = 	  0;
-//     halfWindow = 	  0;
-//     dataType =      0;
-// }
-
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-|  statisticsGaps::~statisticsGaps(void)                                                                               |
-|                                                                                                                      |
-|       Class destroyer.                                                                                               |
-|                                                                                                                      |
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
 statisticsGaps::~statisticsGaps(void) {
 
-    /* Only free memory if there is previous memory allocation */
+    // Only free memory if there is previous memory allocation
     if(gapsInColumn != NULL) {
         delete[] gapsInColumn;
         delete[] numColumnsWithGaps;
@@ -131,37 +94,29 @@ statisticsGaps::~statisticsGaps(void) {
 
 }
 
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-|  bool statisticsGaps::applyWindow(int)                                                                               |
-|                                                                                                                      |
-|       This method computes for each column's alignment its gapwindows' value. For this purpose, the method uses the  |
-|       values that previously has been calculated and the window's size value.                                        |
-|                                                                                                                      |
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
 bool statisticsGaps::applyWindow(int _halfWindow) {
 
     int i, j, window;
 
-    /* If one of this conditions is true, we return FALSE:                         */
-    /*    .- If already exists a previously calculated vector for this window size */
-    /*    .- If halfWinSize value is greater than 1/4 of alignment length        */
+    // If one of this conditions is true, we return FALSE:                         
+    //   .- If already exists a previously calculated vector for this window size 
+    //    .- If halfWinSize value is greater than 1/4 of alignment length        
     if((halfWindow == _halfWindow) || (_halfWindow > residNumber/4))
         return false;
 
-    /* Initializate to 0 the vector that will store the number of gaps of each column */
-    /* and the vector that will store window processing results                       */
+    // Initializate to 0 the vector that will store the number of gaps of each column 
+    // and the vector that will store window processing results                       
     utils::initlVect(numColumnsWithGaps, sequenNumber+1, 0);
     utils::initlVect(gapsWindow, residNumber, 0);
 
-    /* Initializate maximum gaps' number per column value and store the mediumWinSize value in the object. */
+    // Initializate maximum gaps number per column value and store the mediumWinSize value in the object.
     maxGaps = 0;
     halfWindow = _halfWindow;
     window = (2 * halfWindow + 1);
 
-    /* We calculate some statistics for every column in the alignment,and the maximum gaps' number value */
+    // We calculate some statistics for every column in the alignment,and the maximum gaps' number value
     for(i = 0; i < residNumber; i++) {
-        /* Sum the total number of gaps for the considered window */
+        // Sum the total number of gaps for the considered window 
         for(j = i - halfWindow, gapsWindow[i] = 0; j <= i + halfWindow; j++) {
             if(j < 0)
                 gapsWindow[i] += gapsInColumn[-j];
@@ -171,12 +126,12 @@ bool statisticsGaps::applyWindow(int _halfWindow) {
                 gapsWindow[i] += gapsInColumn[j];
         }
 
-        /* Calculate, and round to the nearest integer, the number of gaps for the i column */
+        // Calculate, and round to the nearest integer, the number of gaps for the i column
         gapsWindow[i] = utils::roundInt(((double) gapsWindow[i]/window));
-        /* Increase in 1 the number of colums with the same number of gaps than column i */
+        // Increase in 1 the number of colums with the same number of gaps than column i
         numColumnsWithGaps[gapsWindow[i]]++;
 
-        /* Update the max number of gaps in the alignment, if neccesary */
+        // Update the max number of gaps in the alignment, if neccesary
         if(gapsWindow[i] > maxGaps)
             maxGaps = gapsWindow[i];
 
@@ -184,13 +139,6 @@ bool statisticsGaps::applyWindow(int _halfWindow) {
     }
     return true;
 }
-
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-|  int *statisticsGaps::getGapsWindow(void)                                                                            |
-|                                                                                                                      |
-|       This method returns a pointer to gaps window's vector                                                          |
-|                                                                                                                      |
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 int *statisticsGaps::getGapsWindow(void) {
 
@@ -200,80 +148,70 @@ int *statisticsGaps::getGapsWindow(void) {
 double statisticsGaps::calcCutPoint(float minInputAlignment, float gapThreshold)
 {
 
-    /* Method to select the cutting point based on gaps values from the input
-     * alignment. The cutting point is selected as the maximum gaps number allowed
-     * in the output alignment given a minimum percentage of the input alignment
-     * to be kept and a maximum gaps number. In case of both values set different
-     * cutting points, the minimum percentage of the input alignment prevails. */
+    // Method to select the cutting point based on gaps values from the input
+    // alignment. The cutting point is selected as the maximum gaps number allowed
+    // in the output alignment given a minimum percentage of the input alignment
+    // to be kept and a maximum gaps number. In case of both values set different
+    // cutting points, the minimum percentage of the input alignment prevails. 
 
     double cuttingPoint_MinimumConserv, cuttingPoint_gapThreshold;
     int i, acum;
 
-    /* Calculate the gap number represented by the gaps threshold. This gap number
-     * represents the maximum gap number in any column in the output alignment */
+    // Calculate the gap number represented by the gaps threshold. This gap number
+    // represents the maximum gap number in any column in the output alignment
     cuttingPoint_gapThreshold = (double) sequenNumber * gapThreshold;
 
-    /* Compute the minimum columns number to be kept from the input alignment */
+    // Compute the minimum columns number to be kept from the input alignment
     cuttingPoint_MinimumConserv = utils::roundInt(((double)
                                   (residNumber * minInputAlignment) / 100.0));
     if(cuttingPoint_MinimumConserv > residNumber)
         cuttingPoint_MinimumConserv = residNumber;
 
-    /* We look at the number of gaps which allows us to keep the minimum columns
-     * number from the input alignment */
+    // We look at the number of gaps which allows us to keep the minimum columns
+    // number from the input alignment
     for(i = 0, acum = 0; i < sequenNumber; i++) {
         acum += numColumnsWithGaps[i];
         if(acum >= cuttingPoint_MinimumConserv)
             break;
     }
 
-    /* If there is not an exact number for the gaps cutting point, compute such
-     * value as the inmediate superior gap number minus the proportion of columns
-     * necessary to respect the minimum percentage from the input alignment to be
-     * kept */
+    // If there is not an exact number for the gaps cutting point, compute such
+    // value as the inmediate superior gap number minus the proportion of columns
+    // necessary to respect the minimum percentage from the input alignment to be
+    // kept
     if(numColumnsWithGaps[i])
-        cuttingPoint_MinimumConserv = (double) (i - ((float)
-                                                (acum - cuttingPoint_MinimumConserv)/numColumnsWithGaps[i]));
+        cuttingPoint_MinimumConserv = 
+        (double) (i - ((float) (acum - cuttingPoint_MinimumConserv)/numColumnsWithGaps[i]));
     else
         cuttingPoint_MinimumConserv = 0;
 
-    /* Return the maximum gap number of the two computed cutting points. */
+    // Return the maximum gap number of the two computed cutting points.
     return (utils::max(cuttingPoint_MinimumConserv, cuttingPoint_gapThreshold));
 }
-
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-|  int statisticsGaps::calcCutPointMixSlope(void)                                                                      |
-|                                                                                                                      |
-|       This method computes and selects the cut point based on the maximum rate between the first slope ratio between |
-|       gaps' percentage in the columns and alignments' length and the "second" slope (slope between three consecutive |
-|       points using only the first and third of them) ratio between gaps' percentage in the columns and alignments'   |
-|       length.                                                                                                        |
-|                                                                                                                      |
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 int statisticsGaps::calcCutPointMixSlope(void) {
 
     float delta = 0, maxSlope = -1, *firstSlopeVector, *secondSlopeVector;
     int prev, pprev, maxIter, row = 1, act = 0, max = 0;
 
-    /* We build two slope vectors, one vector for the first slope and another one for the second. */
+    // We build two slope vectors, one vector for the first slope and another one for the second.
     firstSlopeVector = new float[maxGaps+1];
     secondSlopeVector = new float[maxGaps+1];
 
-    /* We initialize them with -1.0 value and fix the maximum iteractions' number as maximun gaps' number plus 1. */
+    // We initialize them with -1.0 value and fix the maximum iteractions' number as maximun gaps' number plus 1
     utils::initlVect(firstSlopeVector, maxGaps, -1.0);
     utils::initlVect(secondSlopeVector, maxGaps, -1.0);
     maxIter = maxGaps + 1;
 
-    /* Until to achieve the maximum iteractions' number. */
+    // Until to achieve the maximum iteractions' number.
     while(act < maxIter) {
 
-        /* We look for a first point to second slope. */
+        // We look for a first point to second slope. 
         while((numColumnsWithGaps[act]) == 0) act++;
         pprev = act;
         if((act+1) >= maxIter) break;
 
-        /* We look for a first point to first slope. */
+        // We look for a first point to first slope.
         do {
             act++;
         }
@@ -281,41 +219,41 @@ int statisticsGaps::calcCutPointMixSlope(void) {
         prev = act;
         if((act+1) >= maxIter) break;
 
-        /* We look for a second point to first and second slope. */
+        // We look for a second point to first and second slope.
         do {
             act++;
         }
         while((numColumnsWithGaps[act]) == 0);
         if(act >= maxIter) break;
 
-        /* Calculate the first slope between the earlier previus and previus points. */
+        // Calculate the first slope between the earlier previus and previus points.
         firstSlopeVector[prev] =  ((float) (prev - pprev) / sequenNumber);
         firstSlopeVector[prev] /= ((float) numColumnsWithGaps[prev] / residNumber);
 
-        /* Calculate the first slope between the previus and current points. */
+        // Calculate the first slope between the previus and current points.
         firstSlopeVector[act] =  ((float) (act - prev) / sequenNumber);
         firstSlopeVector[act] /= ((float) numColumnsWithGaps[act] / residNumber);
 
-        /* Calculate the second slope between the earlier previus and current points. */
+        // Calculate the second slope between the earlier previus and current points.
         secondSlopeVector[act] = ((float) (act - pprev) / sequenNumber);
         secondSlopeVector[act] /= ((float) (numColumnsWithGaps[act] + numColumnsWithGaps[prev]) / residNumber);
 
-        /* If the ratio between ... */
+        // If the ratio between ...
         if((secondSlopeVector[pprev] != -1.0) || (firstSlopeVector[pprev] != -1.0)) {
 
-            /* .- first slope previus and first slope earlier previus points. */
+            // first slope previus and first slope earlier previus points.
             if(firstSlopeVector[pprev] != -1.0) {
                 delta = firstSlopeVector[prev]/firstSlopeVector[pprev];
                 row = pprev;
             }
 
-            /* .- first slope current and first slope previus points. */
+            // first slope current and first slope previus points.
             if(delta < (firstSlopeVector[act]/firstSlopeVector[prev])) {
                 delta = firstSlopeVector[act]/firstSlopeVector[prev];
                 row = prev;
             }
 
-            /* .- second slope current and second slope earlier previus points. */
+            // second slope current and second slope earlier previus points.
             if(secondSlopeVector[pprev] != -1.0) {
                 if(delta < (secondSlopeVector[act]/secondSlopeVector[pprev])) {
                     delta = secondSlopeVector[act]/secondSlopeVector[pprev];
@@ -323,7 +261,7 @@ int statisticsGaps::calcCutPointMixSlope(void) {
                 }
             }
 
-            /* ... is better that current maxSlope then we modify the maxSlope with the best ratio. */
+            // ... is better that current maxSlope then we modify the maxSlope with the best ratio.
             if(delta > maxSlope) {
                 maxSlope = delta;
                 max = row;
@@ -332,50 +270,41 @@ int statisticsGaps::calcCutPointMixSlope(void) {
         act = prev;
     }
 
-    /* We delete the local memory. */
+    // We delete the local memory.
     delete[] firstSlopeVector;
     delete[] secondSlopeVector;
 
-    /* and, finally, we return the cut point. */
+    // and, finally, we return the cut point.
     return max;
 }
-
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-|  int statisticsGaps::calcCutPoint2ndSlope(void)                                                                      |
-|                                                                                                                      |
-|       This method computes and selects the cut point based on the maximum "second" slope (slope between three        |
-|       consecutive points using only the first and third of them) ratio between gaps' percentage in the columns and   |
-|       alignments' length.                                                                                            |
-|                                                                                                                      |
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 int statisticsGaps::calcCutPoint2ndSlope(void) {
 
     float maxSlope = -1, *secondSlopeVector;
     int prev, pprev, maxIter, act = 0, max = 0;
 
-    /* We build one slope vector and fix the maximum iteractions' number as the gaps'number plus 1. */
+    // We build one slope vector and fix the maximum iteractions' number as the gaps'number plus 1.
     secondSlopeVector = new float[maxGaps+1];
     utils::initlVect(secondSlopeVector, maxGaps, -1.0);
     maxIter = maxGaps + 1;
 
-    /* Find the lowest number of gaps into the input alignment. If there are few
-     * points, it is possible that lowest number of gaps is returned as the thres
-     * hold. It could happen input alignment does not have columns with no-gaps */
+    // Find the lowest number of gaps into the input alignment. If there are few
+    // points, it is possible that lowest number of gaps is returned as the thres
+    // hold. It could happen input alignment does not have columns with no-gaps
     for(act = 0, max = 0; numColumnsWithGaps[act] == 0; act++)
         max = act + 1;
 
     act = 0;
     while(act < maxIter) {
 
-        /* We look for a first point to second slope. */
+        // We look for a first point to second slope.
         while((numColumnsWithGaps[act]) == 0)
             act++;
         pprev = act;
         if((act+1) >= maxIter)
             break;
 
-        /* We look for a first point to first slope. */
+        // We look for a first point to first slope. 
         do {
             act++;
         } while((numColumnsWithGaps[act]) == 0);
@@ -383,18 +312,18 @@ int statisticsGaps::calcCutPoint2ndSlope(void) {
         if((act+1) >= maxIter)
             break;
 
-        /* We look for a second point to first and second slope. */
+        // We look for a second point to first and second slope.
         do {
             act++;
         } while((numColumnsWithGaps[act]) == 0);
         if(act >= maxIter)
             break;
 
-        /* Calculate the second slope between the earlier previous and current points. */
+        // Calculate the second slope between the earlier previous and current points.
         secondSlopeVector[act] = ((float) (act - pprev) / sequenNumber);
         secondSlopeVector[act] /= ((float) (numColumnsWithGaps[act] + numColumnsWithGaps[prev]) / residNumber);
 
-        /* If the ratio between second slope current and second slope earlier previous points. */
+        // If the ratio between second slope current and second slope earlier previous points.
         if(secondSlopeVector[pprev] != -1.0) {
             if((secondSlopeVector[act]/secondSlopeVector[pprev]) > maxSlope) {
                 maxSlope = (secondSlopeVector[act]/secondSlopeVector[pprev]);
@@ -409,19 +338,12 @@ int statisticsGaps::calcCutPoint2ndSlope(void) {
         act = prev;
     }
 
-    /* We deallocate local memory. */
+    // We deallocate local memory.
     delete[] secondSlopeVector;
 
-    /* Finally, we return the selected cut point. */
+    // Finally, we return the selected cut point.
     return max;
 }
-
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-|  void statisticsGaps::printGapsColumns(void)                                                                         |
-|                                                                                                                      |
-|       This method shows the gaps' percentage per each column in the alignment.                                       |
-|                                                                                                                      |
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 void statisticsGaps::printGapsColumns(void) {
     
@@ -430,10 +352,10 @@ void statisticsGaps::printGapsColumns(void) {
 
     int *vectAux;
 
-    /* We allocate a local vector to recovery information on it */
+    // We allocate a local vector to recovery information on it
     vectAux = new int[residNumber];
 
-    /* We decide about the information's source then we get the information. */
+    // We decide about the information's source then we get the information.
     if(halfWindow == 0)
         utils::copyVect(gapsInColumn, vectAux, residNumber);
     else
@@ -475,23 +397,16 @@ void statisticsGaps::printGapsColumns(void) {
     cout << std::setfill(' ') << std::fixed;
     cout.precision(10);
 
-    /* Show the information that have been requered */
+    // Show the information that have been requered 
     for(int i = 0; i < residNumber; i++)
         cout << setw(size) << std::setfill(' ') << std::left << i
              << setw(size) << std::setfill(' ') << std::left
              << setw(14)   << std::setfill(' ') << std::right << (vectAux[i] * 100.0)/sequenNumber
              << setw(size) << std::setfill(' ') << std::right << 1.F -((vectAux[i] * 1.0)/sequenNumber) << endl;
 
-    /* Finally, we deallocate the local memory */
+    // Finally, we deallocate the local memory
     delete[] vectAux;
 }
-
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-|  void statisticsGaps::printGapsAcl(void)                                                                             |
-|                                                                                                                      |
-|       This method shows the gaps' statistics for the alignment.                                                      |
-|                                                                                                                      |
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 void statisticsGaps::printGapsAcl(void) {
     
@@ -571,13 +486,13 @@ void statisticsGaps::printGapsAcl(void) {
 
     cout.precision(10);
 
-    /* Count for each gaps' number the columns' number with that gaps' number. */
+    // Count for each gaps' number the columns' number with that gaps' number.
     for(i = 0, acm = 0; i <= maxGaps; i++) {
 
-        /* If the columns' number with this gaps' number is not equal to zero, we will count the columns. */
+        // If the columns' number with this gaps' number is not equal to zero, we will count the columns.
         if(numColumnsWithGaps[i] != 0) {
 
-            /* Compute and prints the accumulative values for the gaps in the alignment. */
+            // Compute and prints the accumulative values for the gaps in the alignment.
             acm += numColumnsWithGaps[i];
 
             // Number of residues
@@ -607,25 +522,6 @@ void statisticsGaps::printGapsAcl(void) {
             
             // End line
             cout << endl;
-
-
-
-
-
-
-
-
-
-
-
-
-//             cout << "  " << setiosflags(ios::left) << numColumnsWithGaps[i]
-//                     << "\t\t" << setw(10) << (numColumnsWithGaps[i] * 100.0)/residNumber
-//                     << "\t\t" << acm
-//                     << "\t\t" << setw(10) << (acm * 100.0)/residNumber
-//                     << "\t\t" << i
-//                     << "\t\t" << setw(10) << (i * 1.0)/sequenNumber
-//                     << "\t"<< setw(10) << 1 - ((i * 1.0)/sequenNumber) << endl;
         }
     }
 }
