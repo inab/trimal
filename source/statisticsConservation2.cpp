@@ -389,23 +389,49 @@ double statisticsConservation2::calcCutPoint(float baseLine, float conservationP
 
 void statisticsConservation2::printConservationColumns(void) {
 
-    int i;
+    int i, size = 18;
+    
+    std::string fname = _alignment->filename.substr(6);
+    
+    
+    cout    << std::fixed
+            << std::setw(fname.length() + 6)
+            << std::setfill(' ')
+            << std::left << "" << endl;
 
-    /* We set the output precision and print the header. */
-    cout << "| Residue\t Similarity  |" << endl;
-    cout << "| Number \t    Value    |" << endl;
-    cout << "+----------------------------+" << endl;
+    cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
+
+    cout << std::setw(fname.length() + 6)
+         << std::setfill('-')
+         << std::left << "" 
+         << std::setfill(' ')
+         << endl ;
+         
+//     cout << setiosflags(std::ios_base::width(14));
+
+    cout << "\33[0;33;1m"
+         << std::setw(size)       << std::left << "Residue" << std::left << "Similarity"  << endl
+         << std::setw(size)       << std::left << "Number"  << std::left << "Value"       << endl
+         << std::setfill('-')
+         << "\33[0;m"
+         << std::setw(size)       << std::right << "  "      
+         << std::setw(size)       << std::right << "  "                                   << endl
+         << std::setfill(' ')
+         ;
+          
     cout.precision(10);
+    
+    float *values;
 
     /* If MDK_Window vector is defined, we use it to print the conservation's values. */
     if(MDK_Window != NULL)
-        for(i = 0; i < residues; i++)
-            cout << "  " << setw(5) << i << "\t\t" << setw(7) << MDK_Window[i] << endl;
-
+        values = MDK_Window;
     /* In others cases, we uses the MDK vector to print the conservation's vlaues. */
     else
-        for(i = 0; i < residues; i++)
-            cout << "  " << setw(5) << i << "\t\t" << setw(7) << MDK[i] << endl;
+        values = MDK;
+
+    for(i = 0; i < residues; i++)
+        cout << setw(size) << std::left << i << values[i] << endl;
 }
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
