@@ -441,16 +441,16 @@ void statisticsGaps::printGapsColumns(void) {
 
     int size = std::max(16, (int)std::to_string(residNumber).length() + 6);
 
-    std::string fname = _alignment->filename.substr(6);
+    std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
 
     cout
-            << std::setw(fname.length() + 6)
+            << std::setw(fname.length() + 7)
             << std::setfill(' ')
             << std::left << "" << endl;
 
     cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
 
-    cout << std::setw(fname.length() + 6)
+    cout << std::setw(fname.length() + 7)
          << std::setfill('-')
          << std::left << "" << endl;
 
@@ -494,16 +494,16 @@ void statisticsGaps::printGapsAcl(void) {
 
     int acm, i;
 
-    std::string fname = _alignment->filename.substr(6);
+    std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
 
     cout
-            << std::setw(fname.length() + 6)
+            << std::setw(fname.length() + 7)
             << std::setfill(' ')
             << std::left << "" << endl;
 
     cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
 
-    cout << std::setw(fname.length() + 6)
+    cout << std::setw(fname.length() + 7)
          << std::setfill('-')
          << std::left << "" << endl ;
 

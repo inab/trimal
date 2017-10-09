@@ -392,19 +392,19 @@ void statisticsConservation2::printConservationColumns(void) {
 
     int i, size = 18;
     
-    std::string fname = _alignment->filename.substr(6);
+    std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
     
     
     cout    << std::fixed
-            << std::setw(fname.length() + 6)
+            << std::setw(fname.length() + 7)
             << std::setfill(' ')
             << std::left << "" << endl;
 
     cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
 
-    cout << std::setw(fname.length() + 6)
+    cout << std::setw(fname.length() + 7)
          << std::setfill('-')
-         << std::left << "" 
+         << std::right << "" 
          << std::setfill(' ')
          << endl ;
          
@@ -457,16 +457,17 @@ void statisticsConservation2::printConservationAcl(void) {
     /* Sort the auxiliar vector. */
     utils::quicksort(vectAux, 0, residues-1);
     
-    std::string fname = _alignment->filename.substr(6);
+    std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
+    debug << "HERE" << endl;
 
     cout    << std::fixed
-            << std::setw(fname.length() + 6)
+            << std::setw(fname.length() + 7)
             << std::setfill(' ')
             << std::left << "" << endl;
 
     cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
 
-    cout << std::setw(fname.length() + 6)
+    cout << std::setw(fname.length() + 7)
          << std::setfill('-')
          << std::left << "" 
          << std::setfill(' ')
