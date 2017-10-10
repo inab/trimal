@@ -277,7 +277,7 @@ double statisticsConservation2::calcCutPoint(float baseLine, float conservationP
 
 void statisticsConservation2::printConservationColumns(void) {
 
-    int i, size = 18;
+    int i, size = 20;
     
     std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
     
@@ -287,11 +287,20 @@ void statisticsConservation2::printConservationColumns(void) {
             << std::setfill(' ')
             << std::left << "" << endl;
 
-    cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
+    cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
+    
+    fname = std::to_string(size);
+
+    cout
+            << std::setw(fname.length() + 7)
+            << std::setfill(' ')
+            << std::left << "" << endl;
+
+    cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << endl;
          
     fname = " Similarity per Column";
 
-    cout << "\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+    cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
 
     cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
          << std::setfill('-')
@@ -330,6 +339,7 @@ void statisticsConservation2::printConservationAcl(void) {
 
     float refer, *vectAux;
     int i, num, acm;
+    int size = 20;
     // Allocate memory 
     vectAux = new float[residues];
 
@@ -348,11 +358,20 @@ void statisticsConservation2::printConservationAcl(void) {
             << std::setfill(' ')
             << std::left << "" << endl;
 
-    cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
+    cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
+    
+    fname = std::to_string(size);
+
+    cout
+            << std::setw(fname.length() + 7)
+            << std::setfill(' ')
+            << std::left << "" << endl;
+
+    cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << endl;
     
     fname = " Similarity Total";
 
-    cout << "\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+    cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
 
     cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
          << std::setfill('-')
@@ -360,7 +379,6 @@ void statisticsConservation2::printConservationAcl(void) {
          << std::setfill(' ')
          << endl ;
     
-    int size = 20;
     
     std::stringstream firstLine;
     std::stringstream secondLine;

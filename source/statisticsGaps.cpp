@@ -361,7 +361,7 @@ void statisticsGaps::printGapsColumns(void) {
     else
         utils::copyVect(gapsWindow, vectAux, residNumber);
 
-    int size = std::max(16, (int)std::to_string(residNumber).length() + 6);
+    int size = 20;
 
     std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
 
@@ -370,11 +370,20 @@ void statisticsGaps::printGapsColumns(void) {
             << std::setfill(' ')
             << std::left << "" << endl;
 
-    cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
+    cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
+    
+    fname = std::to_string(size);
+
+    cout
+            << std::setw(fname.length() + 7)
+            << std::setfill(' ')
+            << std::left << "" << endl;
+
+    cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << endl;
 
     fname = " Gaps per Column";
 
-    cout << "\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+    cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
 
     cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
          << std::setfill('-')
@@ -399,10 +408,10 @@ void statisticsGaps::printGapsColumns(void) {
 
     // Show the information that have been requered 
     for(int i = 0; i < residNumber; i++)
-        cout << setw(size) << std::setfill(' ') << std::left << i
-             << setw(size) << std::setfill(' ') << std::left
-             << setw(14)   << std::setfill(' ') << std::right << (vectAux[i] * 100.0)/sequenNumber
-             << setw(size) << std::setfill(' ') << std::right << 1.F -((vectAux[i] * 1.0)/sequenNumber) << endl;
+        cout << setw(size)          << std::setfill(' ') << std::left << i
+             << setw(size)          << std::setfill(' ') << std::left
+             << setw(size - 6)      << std::setfill(' ') << std::right << (vectAux[i] * 100.0)/sequenNumber
+             << setw(size)          << std::setfill(' ') << std::right << 1.F -((vectAux[i] * 1.0)/sequenNumber) << endl;
 
     // Finally, we deallocate the local memory
     delete[] vectAux;
@@ -414,6 +423,7 @@ void statisticsGaps::printGapsAcl(void) {
     // ' sed -r "s:\x1B\[[0-9;]*[mK]::g" '
 
     int acm, i;
+    int size = 20;
 
     std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
 
@@ -422,11 +432,20 @@ void statisticsGaps::printGapsAcl(void) {
             << std::setfill(' ')
             << std::left << "" << endl;
 
-    cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
+    cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m" ;
+    
+    fname = std::to_string(size);
+
+    cout
+            << std::setw(fname.length() + 7)
+            << std::setfill(' ')
+            << std::left << "" << endl;
+
+    cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << endl;
 
     fname = " Gaps Total";
 
-    cout << "\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+    cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
 
     cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
          << std::setfill('-')
@@ -434,7 +453,6 @@ void statisticsGaps::printGapsAcl(void) {
          << std::setfill(' ')
          << endl ;
 
-    int size = 22;
     
     std::stringstream firstLine;
     std::stringstream secondLine;
@@ -500,16 +518,16 @@ void statisticsGaps::printGapsAcl(void) {
 
             // Percentage of alignment
             cout << std::setw(size)     << std::left 
-                 << std::setw(size - 8) << std::right   << (numColumnsWithGaps[i] * 100.0F)/residNumber 
-                 << std::setw(8)        << std::left    << " ";
+                 << std::setw(size - 6) << std::right   << (numColumnsWithGaps[i] * 100.0F)/residNumber 
+                 << std::setw(6)        << std::left    << " ";
 
             // Accumulative residues
             cout << std::setw(size) << std::left << acm ;
 
             // Accumulative percent of alignment
             cout << std::setw(size)         << std::left 
-                 << std::setw(size - 8)     << std::right   <<  (acm * 100.0F)/residNumber 
-                 << std::setw(8)            << std::left    << " ";
+                 << std::setw(size - 6)     << std::right   <<  (acm * 100.0F)/residNumber 
+                 << std::setw(6)            << std::left    << " ";
             
             // Number of gaps per column
             cout << std::setw(size) << std::left << i  ;

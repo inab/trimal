@@ -332,7 +332,7 @@ bool compareFiles::applyWindow(int columns, int halfWindow, float *columnsValue)
 // Print the consistency value for each column from the selected alignment 
 void compareFiles::printStatisticsFileColumns(newAlignment& _alignment, float *compareVect) {
 
-    int size = 15;
+    int size = 20;
 
     std::string fname = _alignment.filename.substr(6, _alignment.filename.size() - 7);
 
@@ -341,11 +341,20 @@ void compareFiles::printStatisticsFileColumns(newAlignment& _alignment, float *c
             << std::setfill(' ')
             << std::left << "" << endl;
 
-    cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
+    cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
+    
+    fname = std::to_string(size);
+
+    cout
+            << std::setw(fname.length() + 7)
+            << std::setfill(' ')
+            << std::left << "" << endl;
+
+    cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << endl;
 
     fname = " Conservation per Column";
 
-    cout << "\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+    cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
 
     cout << std::setw(_alignment.filename.substr(6, _alignment.filename.size() - 7).length() + 7)
          << std::setfill('-')
@@ -378,7 +387,7 @@ void compareFiles::printStatisticsFileColumns(newAlignment& _alignment, float *c
 // alignment
 void compareFiles::printStatisticsFileAcl(newAlignment& _alignment, float *compareVect) {
 
-    int size = 18;
+    int size = 20;
     float refer, *vectAux;
     int i, num;
 
@@ -389,11 +398,20 @@ void compareFiles::printStatisticsFileAcl(newAlignment& _alignment, float *compa
             << std::setfill(' ')
             << std::left << "" << endl;
 
-    cout << "\33[0;31m File :\33[0;1m" << fname << "\33[0m" << endl;
+    cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
+    
+    fname = std::to_string(size);
+
+    cout
+            << std::setw(fname.length() + 7)
+            << std::setfill(' ')
+            << std::left << "" << endl;
+
+    cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << endl;
 
     fname = " Conservation Total";
 
-    cout << "\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+    cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
 
     cout << std::setw(_alignment.filename.substr(6, _alignment.filename.size() - 7).length() + 7)
          << std::setfill('-')
@@ -471,16 +489,16 @@ void compareFiles::printStatisticsFileAcl(newAlignment& _alignment, float *compa
 
             // 
             cout << std::setw(size)     << std::left 
-                 << std::setw(size - 4) << std::right   << ((float) num/_alignment.residNumber * 100.0F)
-                 << std::setw(4)        << std::left    << " ";
+                 << std::setw(size - 6) << std::right   << ((float) num/_alignment.residNumber * 100.0F)
+                 << std::setw(6)        << std::left    << " ";
 
             // 
             cout << std::setw(size) << std::left << i ;
 
             // 
             cout << std::setw(size)         << std::left 
-                 << std::setw(size - 4)     << std::right   <<  ((float) i/_alignment.residNumber * 100.0F)
-                 << std::setw(4)            << std::left    << " ";
+                 << std::setw(size - 6)     << std::right   <<  ((float) i/_alignment.residNumber * 100.0F)
+                 << std::setw(6)            << std::left    << " ";
             
             // 
             cout << std::setw(size) << std::left << refer  ;
@@ -500,14 +518,14 @@ void compareFiles::printStatisticsFileAcl(newAlignment& _alignment, float *compa
     cout << std::setw(size) << std::left << num ;     
 
     cout << std::setw(size)        << std::left 
-         << std::setw(size - 4) << std::right   << ((float) num/_alignment.residNumber * 100.0F)
-         << std::setw(4)        << std::left    << " ";
+         << std::setw(size - 6) << std::right   << ((float) num/_alignment.residNumber * 100.0F)
+         << std::setw(6)        << std::left    << " ";
 
     cout << std::setw(size) << std::left << i ;
 
     cout << std::setw(size)            << std::left 
-         << std::setw(size - 4)     << std::right   <<  ((float) i/_alignment.residNumber * 100.0F)
-         << std::setw(4)            << std::left    << " ";
+         << std::setw(size - 6)     << std::right   <<  ((float) i/_alignment.residNumber * 100.0F)
+         << std::setw(6)            << std::left    << " ";
     
     cout << std::setw(size) << std::left << refer  ;
     
