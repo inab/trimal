@@ -12,6 +12,7 @@ var defines_8h =
     [ "STRICT", "defines_8h.html#a8a7c30a576d5706b6c0821834d01cbbc", null ],
     [ "VERSION", "defines_8h.html#a1c6d5de492ac61ad29aec7aa9a436bbf", null ],
     [ "SequenceTypes", "defines_8h.html#a69d5409d6e7370d6bd3b4f931702e936", [
+      [ "NotDefined", "defines_8h.html#a69d5409d6e7370d6bd3b4f931702e936a3391d45e4b0be480216715453e5d9ddf", null ],
       [ "DNA", "defines_8h.html#a69d5409d6e7370d6bd3b4f931702e936acf4f4b33c0fa7b8f3cd37f44af0f5ce8", null ],
       [ "RNA", "defines_8h.html#a69d5409d6e7370d6bd3b4f931702e936a92efc5f13441d2abd5e146e629196c7e", null ],
       [ "AA", "defines_8h.html#a69d5409d6e7370d6bd3b4f931702e936adf8e3bb19d1b4de18399b64a58a39590", null ],

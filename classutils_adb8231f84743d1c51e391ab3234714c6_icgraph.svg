@@ -16,7 +16,7 @@
 </g>
 <!-- Node128 -->
 <g id="node2" class="node"><title>Node128</title>
-<g id="a_node2"><a xlink:href="group___parsing_arguments_functions.html#gadf8a0b6574e9abb325a6c331ab9368ac" target="_top" xlink:title="Method to parse the select columns argument. ">
+<g id="a_node2"><a xlink:href="classtrim_al_manager.html#adf8a0b6574e9abb325a6c331ab9368ac" target="_top" xlink:title="Method to parse the select columns argument. ">
 <polygon fill="white" stroke="black" points="135,-49.5 135,-79.5 247,-79.5 247,-49.5 135,-49.5"/>
 <text text-anchor="start" x="143" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::select</text>
 <text text-anchor="middle" x="191" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">_cols_argument</text>
@@ -30,7 +30,7 @@
 </g>
 <!-- Node130 -->
 <g id="node4" class="node"><title>Node130</title>
-<g id="a_node4"><a xlink:href="group___parsing_arguments_functions.html#ga5b7b7ccf9e704e7341546a9e8834e890" target="_top" xlink:title="Method to parse que select sequences argument. ">
+<g id="a_node4"><a xlink:href="classtrim_al_manager.html#a5b7b7ccf9e704e7341546a9e8834e890" target="_top" xlink:title="Method to parse que select sequences argument. ">
 <polygon fill="white" stroke="black" points="137.5,-0.5 137.5,-30.5 244.5,-30.5 244.5,-0.5 137.5,-0.5"/>
 <text text-anchor="start" x="145.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::seqs</text>
 <text text-anchor="middle" x="191" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_select_argument</text>
@@ -44,7 +44,7 @@
 </g>
 <!-- Node129 -->
 <g id="node3" class="node"><title>Node129</title>
-<g id="a_node3"><a xlink:href="group___parsing_arguments_functions.html#gaf140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
+<g id="a_node3"><a xlink:href="classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
 <polygon fill="white" stroke="black" points="283,-30 283,-49 440,-49 440,-30 283,-30"/>
 <text text-anchor="middle" x="361.5" y="-37" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::parseArguments</text>
 </a>

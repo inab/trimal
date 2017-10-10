@@ -95,12 +95,12 @@ $(document).ready(function(){initNavTree('classcompare_files.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aa1a295d736ec6d8064cd28cf861289ef"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcompare_files.html#aa1a295d736ec6d8064cd28cf861289ef">printStatisticsFileColumns</a> (int numAminos, float *compareVect)</td></tr>
-<tr class="memdesc:aa1a295d736ec6d8064cd28cf861289ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the consistency value for each column from the selected alignment.  <a href="#aa1a295d736ec6d8064cd28cf861289ef">More...</a><br /></td></tr>
-<tr class="separator:aa1a295d736ec6d8064cd28cf861289ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a435d98e46d83c066a928e40d2dbcead9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcompare_files.html#a435d98e46d83c066a928e40d2dbcead9">printStatisticsFileAcl</a> (int numAminos, float *compareVect)</td></tr>
-<tr class="memdesc:a435d98e46d83c066a928e40d2dbcead9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the accumulated consistency value from the selected alignment.  <a href="#a435d98e46d83c066a928e40d2dbcead9">More...</a><br /></td></tr>
-<tr class="separator:a435d98e46d83c066a928e40d2dbcead9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab43ddbc94ad3bb81f7b485374a0e03fd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcompare_files.html#ab43ddbc94ad3bb81f7b485374a0e03fd">printStatisticsFileColumns</a> (<a class="el" href="classnew_alignment.html">newAlignment</a> &amp;_alignment, float *compareVect)</td></tr>
+<tr class="memdesc:ab43ddbc94ad3bb81f7b485374a0e03fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the consistency value for each column from the selected alignment.  <a href="#ab43ddbc94ad3bb81f7b485374a0e03fd">More...</a><br /></td></tr>
+<tr class="separator:ab43ddbc94ad3bb81f7b485374a0e03fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad93588cbee39ef32d1c6a7d34f9dee95"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcompare_files.html#ad93588cbee39ef32d1c6a7d34f9dee95">printStatisticsFileAcl</a> (<a class="el" href="classnew_alignment.html">newAlignment</a> &amp;_alignment, float *compareVect)</td></tr>
+<tr class="memdesc:ad93588cbee39ef32d1c6a7d34f9dee95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the accumulated consistency value from the selected alignment.  <a href="#ad93588cbee39ef32d1c6a7d34f9dee95">More...</a><br /></td></tr>
+<tr class="separator:ad93588cbee39ef32d1c6a7d34f9dee95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad9a46ed0c7ed28f7095ca3aeb5b651b"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcompare_files.html#aad9a46ed0c7ed28f7095ca3aeb5b651b">applyWindow</a> (int columns, int halfWindow, float *columnsValue)</td></tr>
 <tr class="memdesc:aad9a46ed0c7ed28f7095ca3aeb5b651b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies a new window to the alignment.  <a href="#aad9a46ed0c7ed28f7095ca3aeb5b651b">More...</a><br /></td></tr>
 <tr class="separator:aad9a46ed0c7ed28f7095ca3aeb5b651b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,26 +181,13 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><b>-1</b> if there was any error.<br />
- <b> Alignment index </b> of the selected algorithm otherwise. Method to compare a set of alignments to select the most consistent one respect the others.<br />
- To compute the consistency values we use the proportion of residue pairs per columns in the alignments to compare. </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">vectAlignments</td><td>Alignment vector to compare and select the most consistent. </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">fileNames</td><td>Vector containing all the filenames. Useful only if verbosity==True. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">columnsValue</td><td>Consistency values of selected alignment. </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">numAlignments</td><td>Number of alignments to compare. </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">verbosity</td><td>Wether or not report by printing some results. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><b>-1</b> if there was any error.<br />
  <b> Alignment index </b> of the selected algorithm otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="compare_files_8cpp_source.html#l00241">241</a> of file <a class="el" href="compare_files_8cpp_source.html">compareFiles.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="compare_files_8cpp_source.html#l00039">39</a> of file <a class="el" href="compare_files_8cpp_source.html">compareFiles.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classcompare_files_ac2c0cb68eb0538d19a2688cb3d7fab37_cgraph.svg" width="387" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classcompare_files_ac2c0cb68eb0538d19a2688cb3d7fab37_cgraph.svg" width="375" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -261,7 +248,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="compare_files_8cpp_source.html#l00720">720</a> of file <a class="el" href="compare_files_8cpp_source.html">compareFiles.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="compare_files_8cpp_source.html#l00292">292</a> of file <a class="el" href="compare_files_8cpp_source.html">compareFiles.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -331,23 +318,13 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Wether or not the method went ok. Method to obtain the consistency values vector for a given alignment against a set of alignments with the same sequences. </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">vectAlignments</td><td>Alignment vector to compare against the selected alignment </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">numAlignments</td><td>Number of alignments to compare </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">selected</td><td>Alignment to compare against the set of alignments. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">columnsValue</td><td>Vector to fill with the consistency values. </td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="section return"><dt>Returns</dt><dd>Wether or not the method went ok. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="compare_files_8cpp_source.html#l00583">583</a> of file <a class="el" href="compare_files_8cpp_source.html">compareFiles.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="compare_files_8cpp_source.html#l00196">196</a> of file <a class="el" href="compare_files_8cpp_source.html">compareFiles.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classcompare_files_af54a4eb6dfb673389b22c5b345ac689e_cgraph.svg" width="432" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classcompare_files_af54a4eb6dfb673389b22c5b345ac689e_cgraph.svg" width="420" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -357,8 +334,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a435d98e46d83c066a928e40d2dbcead9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a435d98e46d83c066a928e40d2dbcead9">&#9670;&nbsp;</a></span>printStatisticsFileAcl()</h2>
+<a id="ad93588cbee39ef32d1c6a7d34f9dee95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad93588cbee39ef32d1c6a7d34f9dee95">&#9670;&nbsp;</a></span>printStatisticsFileAcl()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -369,8 +346,8 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">void compareFiles::printStatisticsFileAcl </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numAminos</em>, </td>
+          <td class="paramtype"><a class="el" href="classnew_alignment.html">newAlignment</a> &amp;&#160;</td>
+          <td class="paramname"><em>_alignment</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -394,28 +371,28 @@ Here is the caller graph for this function:</div>
 <p>Print the accumulated consistency value from the selected alignment. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">numAminos</td><td>Number of aminos in the alignment </td></tr>
+    <tr><td class="paramname">_alignment</td><td>Alignment used to obtain the accumulated consistency value </td></tr>
     <tr><td class="paramname">compareVect</td><td>Vector containing the consistency value for each column. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="compare_files_8cpp_source.html#l00798">798</a> of file <a class="el" href="compare_files_8cpp_source.html">compareFiles.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="compare_files_8cpp_source.html#l00388">388</a> of file <a class="el" href="compare_files_8cpp_source.html">compareFiles.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classcompare_files_a435d98e46d83c066a928e40d2dbcead9_cgraph.svg" width="490" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classcompare_files_ad93588cbee39ef32d1c6a7d34f9dee95_cgraph.svg" width="490" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classcompare_files_a435d98e46d83c066a928e40d2dbcead9_icgraph.svg" width="592" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classcompare_files_ad93588cbee39ef32d1c6a7d34f9dee95_icgraph.svg" width="592" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="aa1a295d736ec6d8064cd28cf861289ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1a295d736ec6d8064cd28cf861289ef">&#9670;&nbsp;</a></span>printStatisticsFileColumns()</h2>
+<a id="ab43ddbc94ad3bb81f7b485374a0e03fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab43ddbc94ad3bb81f7b485374a0e03fd">&#9670;&nbsp;</a></span>printStatisticsFileColumns()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -426,8 +403,8 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">void compareFiles::printStatisticsFileColumns </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numAminos</em>, </td>
+          <td class="paramtype"><a class="el" href="classnew_alignment.html">newAlignment</a> &amp;&#160;</td>
+          <td class="paramname"><em>_alignment</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -451,17 +428,17 @@ Here is the caller graph for this function:</div>
 <p>Print the consistency value for each column from the selected alignment. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">numAminos</td><td>Number of aminos in the alignment </td></tr>
+    <tr><td class="paramname">_alignment</td><td>Alignment used to obtain the accumulated consistency value </td></tr>
     <tr><td class="paramname">compareVect</td><td>Vector containing the consistency value for each column. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="compare_files_8cpp_source.html#l00775">775</a> of file <a class="el" href="compare_files_8cpp_source.html">compareFiles.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="compare_files_8cpp_source.html#l00333">333</a> of file <a class="el" href="compare_files_8cpp_source.html">compareFiles.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classcompare_files_aa1a295d736ec6d8064cd28cf861289ef_icgraph.svg" width="592" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classcompare_files_ab43ddbc94ad3bb81f7b485374a0e03fd_icgraph.svg" width="592" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

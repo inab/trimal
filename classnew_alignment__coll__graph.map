@@ -1,10 +1,10 @@
 <map id="newAlignment" name="newAlignment">
-<area shape="rect" id="node4" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="1049,484,1171,511"/>
-<area shape="rect" id="node12" href="$class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="1077,160,1143,187"/>
-<area shape="rect" id="node14" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="1047,307,1173,333"/>
-<area shape="rect" id="node2" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="391,220,497,247"/>
-<area shape="rect" id="node8" href="$classstatistics_conservation.html" title="statisticsConservation" alt="" coords="521,460,673,487"/>
-<area shape="rect" id="node11" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="248,572,359,599"/>
-<area shape="rect" id="node5" title="STL class. " alt="" coords="557,511,637,537"/>
-<area shape="rect" id="node6" title="STL class. " alt="" coords="240,623,367,665"/>
+<area shape="rect" id="node2" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="765,567,871,594"/>
+<area shape="rect" id="node4" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="757,143,879,170"/>
+<area shape="rect" id="node8" href="$classstatistics_conservation2.html" title="statisticsConservation2" alt="" coords="739,803,897,830"/>
+<area shape="rect" id="node12" href="$class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="785,290,851,317"/>
+<area shape="rect" id="node14" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="755,443,881,470"/>
+<area shape="rect" id="node11" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="460,883,571,910"/>
+<area shape="rect" id="node5" title="STL class. " alt="" coords="181,13,261,39"/>
+<area shape="rect" id="node6" title="STL class. " alt="" coords="5,5,132,47"/>
 </map>

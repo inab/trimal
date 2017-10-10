@@ -1,4 +1,4 @@
 <map id="newAlignment::alignmentColourHTML" name="newAlignment::alignmentColourHTML">
-<area shape="rect" id="node2" href="$class_verbose_manager.html#a261de87bbf9653cd729dca4e1fbeb2a3" title="Method to report an Error. It will be displayed if VerboseManager::Level is equal or higher to Verbos..." alt="" coords="296,5,463,32"/>
-<area shape="rect" id="node3" href="$classutils.html#a40640e1942f00797e9fe8284e8fbdb14" title="Maximum of two numbers method. " alt="" coords="340,56,419,83"/>
+<area shape="rect" id="node2" href="$class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. " alt="" coords="296,5,451,47"/>
+<area shape="rect" id="node3" href="$classutils.html#a40640e1942f00797e9fe8284e8fbdb14" title="Maximum of two numbers method. " alt="" coords="334,71,413,98"/>
 </map>

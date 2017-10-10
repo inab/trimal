@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('readal_pag.html','');});
 <div class="title">readAl Main Page </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="introduction_sec"></a>
+<div class="textblock"><h1><a class="anchor" id="introduction_sec_r"></a>
 Introduction</h1>
 <p>One of the main problems that the researchers have to face during their studies is the <em>conversion among the various formats</em> required by different programs. <br />
 Nowadays there around <em>20 different Multiple Sequence Alignment (MSAs) formats</em>. <br />
@@ -100,7 +100,7 @@ Nowadays there around <em>20 different Multiple Sequence Alignment (MSAs) format
  <b>readAl</b> has been implemented in <em>C++ programming language</em>. <br />
 This program is part of the <b>trimAl</b> package and is used internally by <b>trimAl</b> to convert among different formats.<br />
  </p>
-<h1><a class="anchor" id="installation_sec"></a>
+<h1><a class="anchor" id="installation_sec_r"></a>
 Installation</h1>
 <p>The simplest way to compile this program is: </p><pre class="fragment">1.- Move to the project folder
 
@@ -112,10 +112,10 @@ Installation</h1>
     &gt; make readalMS (if you only want readalMS to be compiled)
 
 4.- Move or copy binaries folder './bin/' to 'usr/local/bin' or 'usr/bin'
-</pre><h1><a class="anchor" id="usage_sec"></a>
+</pre><h1><a class="anchor" id="usage_sec_r"></a>
 Usage</h1>
 <p>This program is free software: you can redistribute it and/or modify it under the terms of the <b>GNU General Public License</b> as published by the Free Software Foundation, the last available version.</p>
-<h2><a class="anchor" id="basic_usage"></a>
+<h2><a class="anchor" id="basic_usage_r"></a>
 BASIC USAGE</h2>
 <pre class="fragment">readalMS -in &lt;inputfiles&gt; -out &lt;pattern&gt; -format [formats] [options].
 
@@ -137,7 +137,7 @@ BASIC USAGE</h2>
 
 -shortNames          Shortens the names so they fit on certain formats
 -keepHeaders         Keeps the headers of the original format if it had any
-</pre><h2><a class="anchor" id="legacy_opt"></a>
+</pre><h2><a class="anchor" id="legacy_opt_r"></a>
 LEGACY OPTIONS</h2>
 <p>Take in mind that this arguments may be discontinued any time. </p><pre class="fragment">-onlyseqs            Generate output with only residues from input file
 
@@ -157,7 +157,7 @@ LEGACY OPTIONS</h2>
 -phylip_paml_m10     Output file in PHYLIP format compatible with PAML. Sequences name up to 10 characters.
 -phylip3.2           Output file in PHYLIP3.2 format
 -phylip3.2_m10       Output file in PHYLIP3.2 format. Sequences name up to 10 characters.
-</pre><h2><a class="anchor" id="examples"></a>
+</pre><h2><a class="anchor" id="examples_r"></a>
 EXAMPLES OF USE</h2>
 <pre class="fragment">readalMS -in ./dataset/AA1.fas -out ./dataset/[in].output.[extension] -formats clustal
   -&gt; Will produce ./dataset/AA1.output.clw

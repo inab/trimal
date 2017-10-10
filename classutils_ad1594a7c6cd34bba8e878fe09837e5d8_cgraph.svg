@@ -9,21 +9,21 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>utils::determineColor</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 251,-24 251,4 -4,4"/>
-<!-- Node27 -->
-<g id="node1" class="node"><title>Node27</title>
+<!-- Node30 -->
+<g id="node1" class="node"><title>Node30</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 107,-19.5 107,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="53.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::determineColor</text>
 </g>
-<!-- Node28 -->
-<g id="node2" class="node"><title>Node28</title>
-<g id="a_node2"><a xlink:href="classutils.html#addcae2992f82a9542083b2c1f582f503" target="_top" xlink:title="Looks for a pattern. ">
+<!-- Node31 -->
+<g id="node2" class="node"><title>Node31</title>
+<g id="a_node2"><a xlink:href="classutils.html#ad7e66d2aa8756082b18eb40f209ded86" target="_top" xlink:title="Looks for a pattern. ">
 <polygon fill="white" stroke="black" points="143,-0.5 143,-19.5 247,-19.5 247,-0.5 143,-0.5"/>
 <text text-anchor="middle" x="195" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::lookForPattern</text>
 </a>
 </g>
 </g>
-<!-- Node27&#45;&gt;Node28 -->
-<g id="edge1" class="edge"><title>Node27&#45;&gt;Node28</title>
+<!-- Node30&#45;&gt;Node31 -->
+<g id="edge1" class="edge"><title>Node30&#45;&gt;Node31</title>
 <path fill="none" stroke="midnightblue" d="M107.239,-10C115.467,-10 124.031,-10 132.435,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="132.572,-13.5001 142.572,-10 132.572,-6.5001 132.572,-13.5001"/>
 </g>

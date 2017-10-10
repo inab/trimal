@@ -5,13 +5,14 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "compareFiles.h", "compare_files_8h_source.html", null ],
     [ "defines.h", "defines_8h.html", "defines_8h" ],
     [ "newAlignment.h", "new_alignment_8h_source.html", null ],
+    [ "reportsystem.h", "reportsystem_8h_source.html", null ],
     [ "sequencesMatrix.h", "sequences_matrix_8h_source.html", null ],
     [ "similarityMatrix.h", "similarity_matrix_8h_source.html", null ],
-    [ "statisticsConservation.h", "statistics_conservation_8h_source.html", null ],
+    [ "statisticsConservation2.h", "statistics_conservation2_8h_source.html", null ],
     [ "statisticsGaps.h", "statistics_gaps_8h_source.html", null ],
+    [ "statisticsGapsLegacy.h", "statistics_gaps_legacy_8h_source.html", null ],
     [ "StatisticsManager.h", "_statistics_manager_8h_source.html", null ],
     [ "trimalArgumentParser.h", "trimal_argument_parser_8h_source.html", null ],
     [ "utils.h", "utils_8h_source.html", null ],
-    [ "values.h", "values_8h_source.html", null ],
-    [ "verbosemanager.h", "verbosemanager_8h_source.html", null ]
+    [ "values.h", "values_8h_source.html", null ]
 ];

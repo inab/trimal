@@ -1,10 +1,23 @@
 <map id="include/defines.h" name="include/defines.h">
-<area shape="rect" id="node2" href="$_cleaner_8cpp_source.html" title="source/Cleaner.cpp" alt="" coords="5,87,140,114"/>
-<area shape="rect" id="node3" href="$new_alignment_8cpp_source.html" title="source/newAlignment.cpp" alt="" coords="164,87,336,114"/>
-<area shape="rect" id="node4" href="$_read_write_m_smain_8cpp_source.html" title="source/ReadWriteMS\l/ReadWriteMSmain.cpp" alt="" coords="360,80,521,121"/>
-<area shape="rect" id="node5" href="$similarity_matrix_8cpp_source.html" title="source/similarityMatrix.cpp" alt="" coords="546,87,725,114"/>
-<area shape="rect" id="node6" href="$statistics_conservation_8cpp_source.html" title="source/statisticsConservation.cpp" alt="" coords="749,87,969,114"/>
-<area shape="rect" id="node7" href="$statistics_gaps_8cpp_source.html" title="source/statisticsGaps.cpp" alt="" coords="993,87,1168,114"/>
-<area shape="rect" id="node8" href="$trimal_argument_parser_8cpp_source.html" title="source/trimalArgumentParser.cpp" alt="" coords="1193,87,1409,114"/>
-<area shape="rect" id="node9" href="$utils_8cpp_source.html" title="source/utils.cpp" alt="" coords="1433,87,1547,114"/>
+<area shape="rect" id="node2" href="$similarity_matrix_8h_source.html" title="include/similarityMatrix.h" alt="" coords="1194,80,1360,107"/>
+<area shape="rect" id="node7" href="$trimal_argument_parser_8cpp_source.html" title="source/trimalArgumentParser.cpp" alt="" coords="1433,483,1649,509"/>
+<area shape="rect" id="node13" href="$_read_write_m_smain_8cpp_source.html" title="source/ReadWriteMS\l/ReadWriteMSmain.cpp" alt="" coords="552,393,714,435"/>
+<area shape="rect" id="node14" href="$_cleaner_8cpp_source.html" title="source/Cleaner.cpp" alt="" coords="242,311,376,338"/>
+<area shape="rect" id="node15" href="$new_alignment_8cpp_source.html" title="source/newAlignment.cpp" alt="" coords="46,311,218,338"/>
+<area shape="rect" id="node17" href="$statistics_conservation2_8cpp_source.html" title="source/statisticsConservation2.cpp" alt="" coords="1604,311,1830,338"/>
+<area shape="rect" id="node18" href="$statistics_gaps_8cpp_source.html" title="source/statisticsGaps.cpp" alt="" coords="1855,311,2030,338"/>
+<area shape="rect" id="node21" href="$similarity_matrix_8cpp_source.html" title="source/similarityMatrix.cpp" alt="" coords="1409,155,1588,181"/>
+<area shape="rect" id="node22" href="$utils_8cpp_source.html" title="source/utils.cpp" alt="" coords="2105,80,2220,107"/>
+<area shape="rect" id="node3" href="$statistics_conservation2_8h_source.html" title="include/statisticsConservation2.h" alt="" coords="1170,155,1384,181"/>
+<area shape="rect" id="node4" href="$new_alignment_8h_source.html" title="include/newAlignment.h" alt="" coords="924,229,1084,256"/>
+<area shape="rect" id="node20" href="$_statistics_manager_8h_source.html" title="include/StatisticsManager.h" alt="" coords="407,155,590,181"/>
+<area shape="rect" id="node5" href="$compare_files_8h_source.html" title="include/compareFiles.h" alt="" coords="1372,311,1528,338"/>
+<area shape="rect" id="node8" href="$_read_write_base_state_8h_source.html" title="include/ReadWriteMS\l/ReadWriteBaseState.h" alt="" coords="924,304,1084,345"/>
+<area shape="rect" id="node9" href="$_read_write_machine_state_8cpp_source.html" title="source/ReadWriteMS\l/ReadWriteMachineState.cpp" alt="" coords="990,393,1183,435"/>
+<area shape="rect" id="node10" href="$_read_write_machine_state_8h_source.html" title="include/ReadWriteMS\l/ReadWriteMachineState.h" alt="" coords="670,304,849,345"/>
+<area shape="rect" id="node11" href="$trimal_argument_parser_8h_source.html" title="include/trimalArgumentParser.h" alt="" coords="762,401,966,427"/>
+<area shape="rect" id="node16" href="$sequences_matrix_8cpp_source.html" title="source/sequencesMatrix.cpp" alt="" coords="1158,311,1348,338"/>
+<area shape="rect" id="node19" href="$_statistics_manager_8cpp_source.html" title="source/StatisticsManager.cpp" alt="" coords="401,311,596,338"/>
+<area shape="rect" id="node6" href="$compare_files_8cpp_source.html" title="source/compareFiles.cpp" alt="" coords="1310,401,1478,427"/>
+<area shape="rect" id="node12" href="$newmain_8cpp_source.html" title="source/newmain.cpp" alt="" coords="792,483,935,509"/>
 </map>

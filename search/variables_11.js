@@ -12,7 +12,7 @@ var searchData=
   ['seqsname',['seqsName',['../classnew_alignment.html#aa4bf60277ddf15e935a15b22becd6ad9',1,'newAlignment::seqsName()'],['../classsequences_matrix.html#ad271646ee439f7d052e3f4f49b6666ae',1,'sequencesMatrix::seqsName()']]],
   ['seqsnumber',['seqsNumber',['../classsequences_matrix.html#a9ac1bb7ebd869048adf00cbdb644beac',1,'sequencesMatrix']]],
   ['sequenceoverlap',['sequenceOverlap',['../classtrim_al_manager.html#a76b83fdb75d03fffa72bc30fabdbbae8',1,'trimAlManager']]],
-  ['sequences',['sequences',['../classnew_alignment.html#a23f06ad268f0e720bf3d5699a4cb7225',1,'newAlignment::sequences()'],['../classstatistics_conservation.html#ae62a8fdf513094d9a100b64630abe8b0',1,'statisticsConservation::sequences()']]],
+  ['sequences',['sequences',['../classnew_alignment.html#a23f06ad268f0e720bf3d5699a4cb7225',1,'newAlignment']]],
   ['sequenceslengths',['sequencesLengths',['../classtrim_al_manager.html#ac49ddfd77456a8df3da725e9a7080db3',1,'trimAlManager']]],
   ['sequencesmatrix',['SequencesMatrix',['../classnew_alignment.html#a8b328dfd8e7d3304cb144f2c2114ab5c',1,'newAlignment']]],
   ['sequencesnames',['sequencesNames',['../classtrim_al_manager.html#a3c882b4187245a6a89d9a9cffc53a28a',1,'trimAlManager']]],
@@ -27,11 +27,13 @@ var searchData=
   ['similaritythreshold',['similarityThreshold',['../classtrim_al_manager.html#aa7596de6a68a0b242e3a2b982544d8ad',1,'trimAlManager']]],
   ['similaritywindow',['similarityWindow',['../classtrim_al_manager.html#aae5be0d3d9cd4a3893e6419bda0fb45f',1,'trimAlManager']]],
   ['similmatrix',['similMatrix',['../classtrim_al_manager.html#a0bb8cd82829fa0b3fead01eca71b95fe',1,'trimAlManager']]],
-  ['simmatrix',['simMatrix',['../classstatistics_conservation.html#af23c4eb7cb2cf14761cc7f651b8c8006',1,'statisticsConservation']]],
+  ['simmatrix',['simMatrix',['../classstatistics_conservation2.html#ae027e06cd7e17db2b51509339ac1722c',1,'statisticsConservation2']]],
   ['singlealig',['singleAlig',['../classtrim_al_manager.html#acd3b1b38f7d94ff7fce989efc306f06c',1,'trimAlManager']]],
   ['splitbystopcodon',['splitByStopCodon',['../classtrim_al_manager.html#a2fbbc1bb96c5b9f33ea40f639454d994',1,'trimAlManager']]],
   ['statistics',['Statistics',['../classnew_alignment.html#a6324267e64b68bb85d993cf602d008eb',1,'newAlignment']]],
   ['stats',['stats',['../classtrim_al_manager.html#a8a097aab4cd98825a7a58af62e239bad',1,'trimAlManager']]],
   ['strict',['strict',['../classtrim_al_manager.html#a8093aa4a6cfa1a5690fb2db7ad61c40c',1,'trimAlManager']]],
-  ['strictplus',['strictplus',['../classtrim_al_manager.html#a3a8ccb20e3e0a2f014cff21a4cfdc8d2',1,'trimAlManager']]]
+  ['strictplus',['strictplus',['../classtrim_al_manager.html#a3a8ccb20e3e0a2f014cff21a4cfdc8d2',1,'trimAlManager']]],
+  ['svgoutfile',['svgOutFile',['../classtrim_al_manager.html#a6a2e223832abc1d70520c04c986e6751',1,'trimAlManager']]],
+  ['svgstatsoutfile',['svgStatsOutFile',['../classtrim_al_manager.html#a7181a56720807235b21c51a93986add1',1,'trimAlManager']]]
 ];

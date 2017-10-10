@@ -22,7 +22,7 @@
 </g>
 <!-- parseArguments -->
 <g id="node2" class="node"><title>parseArguments</title>
-<g id="a_node2"><a xlink:href="group___parsing_arguments_functions.html#gaf140d97b6071a83930818030ac74b641" target="_top" xlink:title="parseArguments">
+<g id="a_node2"><a xlink:href="classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" target="_top" xlink:title="parseArguments">
 <ellipse fill="none" stroke="black" cx="82.5" cy="-91" rx="51.6054" ry="18"/>
 <text text-anchor="middle" x="82.5" y="-88.5" font-family="Helvetica,sans-Serif" font-size="10.00">parseArguments</text>
 </a>
@@ -35,7 +35,7 @@
 </g>
 <!-- processArguments -->
 <g id="node3" class="node"><title>processArguments</title>
-<g id="a_node3"><a xlink:href="group___trimal_parsing_arguments.html#ga748b08a1ec5cd214de804ed0d4234a6e" target="_top" xlink:title="processArguments">
+<g id="a_node3"><a xlink:href="classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" target="_top" xlink:title="processArguments">
 <ellipse fill="none" stroke="black" cx="209.5" cy="-91" rx="57.8786" ry="18"/>
 <text text-anchor="middle" x="209.5" y="-88.5" font-family="Helvetica,sans-Serif" font-size="10.00">processArguments</text>
 </a>
@@ -58,7 +58,7 @@
 </g>
 <!-- info_arguments -->
 <g id="node4" class="node"><title>info_arguments</title>
-<g id="a_node4"><a xlink:href="group___parsing_arguments_functions.html#gacc86df7574d3e26a7f90d3218f6b6aad" target="_top" xlink:title="info_arguments">
+<g id="a_node4"><a xlink:href="classtrim_al_manager.html#acc86df7574d3e26a7f90d3218f6b6aad" target="_top" xlink:title="info_arguments">
 <polygon fill="none" stroke="black" points="5174,-145.5 5174,-181.5 5257,-181.5 5257,-145.5 5174,-145.5"/>
 <text text-anchor="middle" x="5215.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">info_arguments</text>
 </a>
@@ -66,7 +66,7 @@
 </g>
 <!-- in_argument -->
 <g id="node5" class="node"><title>in_argument</title>
-<g id="a_node5"><a xlink:href="group___parsing_arguments_functions.html#gac594aa4b43e39df57eaa2ded49d7d9e1" target="_top" xlink:title="in_argument">
+<g id="a_node5"><a xlink:href="classtrim_al_manager.html#ac594aa4b43e39df57eaa2ded49d7d9e1" target="_top" xlink:title="in_argument">
 <polygon fill="none" stroke="black" points="5085.5,-145.5 5085.5,-181.5 5155.5,-181.5 5155.5,-145.5 5085.5,-145.5"/>
 <text text-anchor="middle" x="5120.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">in_argument</text>
 </a>
@@ -74,7 +74,7 @@
 </g>
 <!-- out_argument -->
 <g id="node6" class="node"><title>out_argument</title>
-<g id="a_node6"><a xlink:href="group___parsing_arguments_functions.html#ga45951517e92bc57fcbc2887676880610" target="_top" xlink:title="out_argument">
+<g id="a_node6"><a xlink:href="classtrim_al_manager.html#a45951517e92bc57fcbc2887676880610" target="_top" xlink:title="out_argument">
 <polygon fill="none" stroke="black" points="4991.5,-145.5 4991.5,-181.5 5067.5,-181.5 5067.5,-145.5 4991.5,-145.5"/>
 <text text-anchor="middle" x="5029.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">out_argument</text>
 </a>
@@ -82,7 +82,7 @@
 </g>
 <!-- html_out_argument -->
 <g id="node7" class="node"><title>html_out_argument</title>
-<g id="a_node7"><a xlink:href="group___parsing_arguments_functions.html#gaf01f123455f1752f85fac1f0baa77568" target="_top" xlink:title="html_out_argument">
+<g id="a_node7"><a xlink:href="classtrim_al_manager.html#af01f123455f1752f85fac1f0baa77568" target="_top" xlink:title="html_out_argument">
 <polygon fill="none" stroke="black" points="4873.5,-145.5 4873.5,-181.5 4973.5,-181.5 4973.5,-145.5 4873.5,-145.5"/>
 <text text-anchor="middle" x="4923.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">html_out_argument</text>
 </a>
@@ -90,7 +90,7 @@
 </g>
 <!-- out_format_arguments -->
 <g id="node8" class="node"><title>out_format_arguments</title>
-<g id="a_node8"><a xlink:href="group___parsing_arguments_functions.html#ga154699b8e525b01cf0916b013d517347" target="_top" xlink:title="out_format_arguments">
+<g id="a_node8"><a xlink:href="classtrim_al_manager.html#a154699b8e525b01cf0916b013d517347" target="_top" xlink:title="out_format_arguments">
 <polygon fill="none" stroke="black" points="4741.5,-145.5 4741.5,-181.5 4855.5,-181.5 4855.5,-145.5 4741.5,-145.5"/>
 <text text-anchor="middle" x="4798.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">out_format_arguments</text>
 </a>
@@ -98,7 +98,7 @@
 </g>
 <!-- matrix_argument -->
 <g id="node9" class="node"><title>matrix_argument</title>
-<g id="a_node9"><a xlink:href="group___parsing_arguments_functions.html#ga5b1407f7ca645c795835b3e0c20cb10d" target="_top" xlink:title="matrix_argument">
+<g id="a_node9"><a xlink:href="classtrim_al_manager.html#a5b1407f7ca645c795835b3e0c20cb10d" target="_top" xlink:title="matrix_argument">
 <polygon fill="none" stroke="black" points="4634,-145.5 4634,-181.5 4723,-181.5 4723,-145.5 4634,-145.5"/>
 <text text-anchor="middle" x="4678.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">matrix_argument</text>
 </a>
@@ -106,7 +106,7 @@
 </g>
 <!-- compareset_argument -->
 <g id="node10" class="node"><title>compareset_argument</title>
-<g id="a_node10"><a xlink:href="group___parsing_arguments_functions.html#ga313d3f5fe763b8c03bd46c2072a2357b" target="_top" xlink:title="compareset_argument">
+<g id="a_node10"><a xlink:href="classtrim_al_manager.html#a313d3f5fe763b8c03bd46c2072a2357b" target="_top" xlink:title="compareset_argument">
 <polygon fill="none" stroke="black" points="4503,-145.5 4503,-181.5 4616,-181.5 4616,-145.5 4503,-145.5"/>
 <text text-anchor="middle" x="4559.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">compareset_argument</text>
 </a>
@@ -114,7 +114,7 @@
 </g>
 <!-- force_select_argument -->
 <g id="node11" class="node"><title>force_select_argument</title>
-<g id="a_node11"><a xlink:href="group___parsing_arguments_functions.html#ga28508aa820509b23c2f91634bc638082" target="_top" xlink:title="force_select_argument">
+<g id="a_node11"><a xlink:href="classtrim_al_manager.html#a28508aa820509b23c2f91634bc638082" target="_top" xlink:title="force_select_argument">
 <polygon fill="none" stroke="black" points="4368.5,-145.5 4368.5,-181.5 4484.5,-181.5 4484.5,-145.5 4368.5,-145.5"/>
 <text text-anchor="middle" x="4426.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">force_select_argument</text>
 </a>
@@ -122,7 +122,7 @@
 </g>
 <!-- back_trans_argument -->
 <g id="node12" class="node"><title>back_trans_argument</title>
-<g id="a_node12"><a xlink:href="group___parsing_arguments_functions.html#gacf6ecf63ed1194adc345de441e2c1fec" target="_top" xlink:title="back_trans_argument">
+<g id="a_node12"><a xlink:href="classtrim_al_manager.html#acf6ecf63ed1194adc345de441e2c1fec" target="_top" xlink:title="back_trans_argument">
 <polygon fill="none" stroke="black" points="4240.5,-145.5 4240.5,-181.5 4350.5,-181.5 4350.5,-145.5 4240.5,-145.5"/>
 <text text-anchor="middle" x="4295.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">back_trans_argument</text>
 </a>
@@ -130,7 +130,7 @@
 </g>
 <!-- gap_threshold_argument -->
 <g id="node13" class="node"><title>gap_threshold_argument</title>
-<g id="a_node13"><a xlink:href="group___parsing_arguments_functions.html#ga60a68cb3d06d630cbc52d9465dfe4112" target="_top" xlink:title="gap_threshold_argument">
+<g id="a_node13"><a xlink:href="classtrim_al_manager.html#a60a68cb3d06d630cbc52d9465dfe4112" target="_top" xlink:title="gap_threshold_argument">
 <polygon fill="none" stroke="black" points="4099,-145.5 4099,-181.5 4222,-181.5 4222,-145.5 4099,-145.5"/>
 <text text-anchor="middle" x="4160.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">gap_threshold_argument</text>
 </a>
@@ -138,7 +138,7 @@
 </g>
 <!-- similarity_threshold_argument -->
 <g id="node14" class="node"><title>similarity_threshold_argument</title>
-<g id="a_node14"><a xlink:href="group___parsing_arguments_functions.html#gad7fd9b44ff6cd032a83c599678fa4040" target="_top" xlink:title="similarity_threshold_argument">
+<g id="a_node14"><a xlink:href="classtrim_al_manager.html#ad7fd9b44ff6cd032a83c599678fa4040" target="_top" xlink:title="similarity_threshold_argument">
 <polygon fill="none" stroke="black" points="3934.5,-145.5 3934.5,-181.5 4080.5,-181.5 4080.5,-145.5 3934.5,-145.5"/>
 <text text-anchor="middle" x="4007.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">similarity_threshold_argument</text>
 </a>
@@ -146,7 +146,7 @@
 </g>
 <!-- consistency_threshold_argument -->
 <g id="node15" class="node"><title>consistency_threshold_argument</title>
-<g id="a_node15"><a xlink:href="group___parsing_arguments_functions.html#ga73b880844e7ceed43aa9d7dc4c3fb1f6" target="_top" xlink:title="consistency_threshold_argument">
+<g id="a_node15"><a xlink:href="classtrim_al_manager.html#a73b880844e7ceed43aa9d7dc4c3fb1f6" target="_top" xlink:title="consistency_threshold_argument">
 <polygon fill="none" stroke="black" points="3756.5,-145.5 3756.5,-181.5 3916.5,-181.5 3916.5,-145.5 3756.5,-145.5"/>
 <text text-anchor="middle" x="3836.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">consistency_threshold_argument</text>
 </a>
@@ -154,7 +154,7 @@
 </g>
 <!-- conservation_threshold_argument -->
 <g id="node16" class="node"><title>conservation_threshold_argument</title>
-<g id="a_node16"><a xlink:href="group___parsing_arguments_functions.html#gab162d8373b277d4fb1d013e0aceb95b9" target="_top" xlink:title="conservation_threshold_argument">
+<g id="a_node16"><a xlink:href="classtrim_al_manager.html#ab162d8373b277d4fb1d013e0aceb95b9" target="_top" xlink:title="conservation_threshold_argument">
 <polygon fill="none" stroke="black" points="3575,-145.5 3575,-181.5 3738,-181.5 3738,-145.5 3575,-145.5"/>
 <text text-anchor="middle" x="3656.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">conservation_threshold_argument</text>
 </a>
@@ -162,7 +162,7 @@
 </g>
 <!-- select_cols_argument -->
 <g id="node17" class="node"><title>select_cols_argument</title>
-<g id="a_node17"><a xlink:href="group___parsing_arguments_functions.html#gadf8a0b6574e9abb325a6c331ab9368ac" target="_top" xlink:title="select_cols_argument">
+<g id="a_node17"><a xlink:href="classtrim_al_manager.html#adf8a0b6574e9abb325a6c331ab9368ac" target="_top" xlink:title="select_cols_argument">
 <polygon fill="none" stroke="black" points="3444.5,-145.5 3444.5,-181.5 3556.5,-181.5 3556.5,-145.5 3444.5,-145.5"/>
 <text text-anchor="middle" x="3500.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">select_cols_argument</text>
 </a>
@@ -170,7 +170,7 @@
 </g>
 <!-- no_gaps_argument -->
 <g id="node18" class="node"><title>no_gaps_argument</title>
-<g id="a_node18"><a xlink:href="group___parsing_arguments_functions.html#ga8b8a67674c7e54ae6e92485ade150556" target="_top" xlink:title="no_gaps_argument">
+<g id="a_node18"><a xlink:href="classtrim_al_manager.html#a8b8a67674c7e54ae6e92485ade150556" target="_top" xlink:title="no_gaps_argument">
 <polygon fill="none" stroke="black" points="3327,-145.5 3327,-181.5 3426,-181.5 3426,-145.5 3327,-145.5"/>
 <text text-anchor="middle" x="3376.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">no_gaps_argument</text>
 </a>
@@ -178,7 +178,7 @@
 </g>
 <!-- no_all_gaps_argument -->
 <g id="node19" class="node"><title>no_all_gaps_argument</title>
-<g id="a_node19"><a xlink:href="group___parsing_arguments_functions.html#ga951d5efaf7dd34a118c531085bb7d833" target="_top" xlink:title="no_all_gaps_argument">
+<g id="a_node19"><a xlink:href="classtrim_al_manager.html#a951d5efaf7dd34a118c531085bb7d833" target="_top" xlink:title="no_all_gaps_argument">
 <polygon fill="none" stroke="black" points="3194.5,-145.5 3194.5,-181.5 3308.5,-181.5 3308.5,-145.5 3194.5,-145.5"/>
 <text text-anchor="middle" x="3251.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">no_all_gaps_argument</text>
 </a>
@@ -186,7 +186,7 @@
 </g>
 <!-- keep_seqs_argument -->
 <g id="node20" class="node"><title>keep_seqs_argument</title>
-<g id="a_node20"><a xlink:href="group___parsing_arguments_functions.html#gaf9ed7ed44486a872ed37067152979190" target="_top" xlink:title="keep_seqs_argument">
+<g id="a_node20"><a xlink:href="classtrim_al_manager.html#af9ed7ed44486a872ed37067152979190" target="_top" xlink:title="keep_seqs_argument">
 <polygon fill="none" stroke="black" points="3066.5,-145.5 3066.5,-181.5 3176.5,-181.5 3176.5,-145.5 3066.5,-145.5"/>
 <text text-anchor="middle" x="3121.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">keep_seqs_argument</text>
 </a>
@@ -194,7 +194,7 @@
 </g>
 <!-- keep_header_argument -->
 <g id="node21" class="node"><title>keep_header_argument</title>
-<g id="a_node21"><a xlink:href="group___parsing_arguments_functions.html#ga6b5ddcd40dbd899a3854e8208494c6e8" target="_top" xlink:title="keep_header_argument">
+<g id="a_node21"><a xlink:href="classtrim_al_manager.html#a6b5ddcd40dbd899a3854e8208494c6e8" target="_top" xlink:title="keep_header_argument">
 <polygon fill="none" stroke="black" points="2930.5,-145.5 2930.5,-181.5 3048.5,-181.5 3048.5,-145.5 2930.5,-145.5"/>
 <text text-anchor="middle" x="2989.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">keep_header_argument</text>
 </a>
@@ -202,7 +202,7 @@
 </g>
 <!-- gappy_out_argument -->
 <g id="node22" class="node"><title>gappy_out_argument</title>
-<g id="a_node22"><a xlink:href="group___parsing_arguments_functions.html#ga7e81f8ca3ed731474c246cc670a62c10" target="_top" xlink:title="gappy_out_argument">
+<g id="a_node22"><a xlink:href="classtrim_al_manager.html#a7e81f8ca3ed731474c246cc670a62c10" target="_top" xlink:title="gappy_out_argument">
 <polygon fill="none" stroke="black" points="2805,-145.5 2805,-181.5 2912,-181.5 2912,-145.5 2805,-145.5"/>
 <text text-anchor="middle" x="2858.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">gappy_out_argument</text>
 </a>
@@ -210,7 +210,7 @@
 </g>
 <!-- strict_argument -->
 <g id="node23" class="node"><title>strict_argument</title>
-<g id="a_node23"><a xlink:href="group___parsing_arguments_functions.html#gaa008bef3630f5c8e37280359d7f5608c" target="_top" xlink:title="strict_argument">
+<g id="a_node23"><a xlink:href="classtrim_al_manager.html#aa008bef3630f5c8e37280359d7f5608c" target="_top" xlink:title="strict_argument">
 <polygon fill="none" stroke="black" points="2703.5,-145.5 2703.5,-181.5 2787.5,-181.5 2787.5,-145.5 2703.5,-145.5"/>
 <text text-anchor="middle" x="2745.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">strict_argument</text>
 </a>
@@ -218,7 +218,7 @@
 </g>
 <!-- strict_plus_argument -->
 <g id="node24" class="node"><title>strict_plus_argument</title>
-<g id="a_node24"><a xlink:href="group___parsing_arguments_functions.html#ga6b6046796e345bef35474c895c681fb7" target="_top" xlink:title="strict_plus_argument">
+<g id="a_node24"><a xlink:href="classtrim_al_manager.html#a6b6046796e345bef35474c895c681fb7" target="_top" xlink:title="strict_plus_argument">
 <polygon fill="none" stroke="black" points="2578,-145.5 2578,-181.5 2685,-181.5 2685,-145.5 2578,-145.5"/>
 <text text-anchor="middle" x="2631.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">strict_plus_argument</text>
 </a>
@@ -226,7 +226,7 @@
 </g>
 <!-- automated1_argument -->
 <g id="node25" class="node"><title>automated1_argument</title>
-<g id="a_node25"><a xlink:href="group___parsing_arguments_functions.html#ga549b563a1e76cb0d7cf1b661156352fc" target="_top" xlink:title="automated1_argument">
+<g id="a_node25"><a xlink:href="classtrim_al_manager.html#a549b563a1e76cb0d7cf1b661156352fc" target="_top" xlink:title="automated1_argument">
 <polygon fill="none" stroke="black" points="2447,-145.5 2447,-181.5 2560,-181.5 2560,-145.5 2447,-145.5"/>
 <text text-anchor="middle" x="2503.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">automated1_argument</text>
 </a>
@@ -234,7 +234,7 @@
 </g>
 <!-- residue_overlap_argument -->
 <g id="node26" class="node"><title>residue_overlap_argument</title>
-<g id="a_node26"><a xlink:href="group___parsing_arguments_functions.html#gae4c29488936ae2d429f563c8df0b85a0" target="_top" xlink:title="residue_overlap_argument">
+<g id="a_node26"><a xlink:href="classtrim_al_manager.html#ae4c29488936ae2d429f563c8df0b85a0" target="_top" xlink:title="residue_overlap_argument">
 <polygon fill="none" stroke="black" points="2298,-145.5 2298,-181.5 2429,-181.5 2429,-145.5 2298,-145.5"/>
 <text text-anchor="middle" x="2363.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">residue_overlap_argument</text>
 </a>
@@ -242,7 +242,7 @@
 </g>
 <!-- sequence_overlap_argument -->
 <g id="node27" class="node"><title>sequence_overlap_argument</title>
-<g id="a_node27"><a xlink:href="group___parsing_arguments_functions.html#gab1bb749f54bfaedee49c03e78a2b7c11" target="_top" xlink:title="sequence_overlap_argument">
+<g id="a_node27"><a xlink:href="classtrim_al_manager.html#ab1bb749f54bfaedee49c03e78a2b7c11" target="_top" xlink:title="sequence_overlap_argument">
 <polygon fill="none" stroke="black" points="2139,-145.5 2139,-181.5 2280,-181.5 2280,-145.5 2139,-145.5"/>
 <text text-anchor="middle" x="2209.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">sequence_overlap_argument</text>
 </a>
@@ -250,7 +250,7 @@
 </g>
 <!-- seqs_select_argument -->
 <g id="node28" class="node"><title>seqs_select_argument</title>
-<g id="a_node28"><a xlink:href="group___parsing_arguments_functions.html#ga5b7b7ccf9e704e7341546a9e8834e890" target="_top" xlink:title="seqs_select_argument">
+<g id="a_node28"><a xlink:href="classtrim_al_manager.html#a5b7b7ccf9e704e7341546a9e8834e890" target="_top" xlink:title="seqs_select_argument">
 <polygon fill="none" stroke="black" points="2006,-145.5 2006,-181.5 2121,-181.5 2121,-145.5 2006,-145.5"/>
 <text text-anchor="middle" x="2063.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">seqs_select_argument</text>
 </a>
@@ -258,7 +258,7 @@
 </g>
 <!-- max_identity_argument -->
 <g id="node29" class="node"><title>max_identity_argument</title>
-<g id="a_node29"><a xlink:href="group___parsing_arguments_functions.html#ga5d22b6b08888f89e38d604b7e9653935" target="_top" xlink:title="max_identity_argument">
+<g id="a_node29"><a xlink:href="classtrim_al_manager.html#a5d22b6b08888f89e38d604b7e9653935" target="_top" xlink:title="max_identity_argument">
 <polygon fill="none" stroke="black" points="1869.5,-145.5 1869.5,-181.5 1987.5,-181.5 1987.5,-145.5 1869.5,-145.5"/>
 <text text-anchor="middle" x="1928.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">max_identity_argument</text>
 </a>
@@ -266,7 +266,7 @@
 </g>
 <!-- clusters_argument -->
 <g id="node30" class="node"><title>clusters_argument</title>
-<g id="a_node30"><a xlink:href="group___parsing_arguments_functions.html#ga66b5f541247441de174d643f85901eca" target="_top" xlink:title="clusters_argument">
+<g id="a_node30"><a xlink:href="classtrim_al_manager.html#a66b5f541247441de174d643f85901eca" target="_top" xlink:title="clusters_argument">
 <polygon fill="none" stroke="black" points="1754,-145.5 1754,-181.5 1851,-181.5 1851,-145.5 1754,-145.5"/>
 <text text-anchor="middle" x="1802.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">clusters_argument</text>
 </a>
@@ -274,7 +274,7 @@
 </g>
 <!-- terminal_only_argument -->
 <g id="node31" class="node"><title>terminal_only_argument</title>
-<g id="a_node31"><a xlink:href="group___parsing_arguments_functions.html#gac3e103640f3c3a4bbbd61f780dfd481f" target="_top" xlink:title="terminal_only_argument">
+<g id="a_node31"><a xlink:href="classtrim_al_manager.html#ac3e103640f3c3a4bbbd61f780dfd481f" target="_top" xlink:title="terminal_only_argument">
 <polygon fill="none" stroke="black" points="1615.5,-145.5 1615.5,-181.5 1735.5,-181.5 1735.5,-145.5 1615.5,-145.5"/>
 <text text-anchor="middle" x="1675.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">terminal_only_argument</text>
 </a>
@@ -282,7 +282,7 @@
 </g>
 <!-- window_argument -->
 <g id="node32" class="node"><title>window_argument</title>
-<g id="a_node32"><a xlink:href="group___parsing_arguments_functions.html#ga54e5f7e5c36b532547b5d822ad59a193" target="_top" xlink:title="window_argument">
+<g id="a_node32"><a xlink:href="classtrim_al_manager.html#a54e5f7e5c36b532547b5d822ad59a193" target="_top" xlink:title="window_argument">
 <polygon fill="none" stroke="black" points="1502,-145.5 1502,-181.5 1597,-181.5 1597,-145.5 1502,-145.5"/>
 <text text-anchor="middle" x="1549.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">window_argument</text>
 </a>
@@ -290,7 +290,7 @@
 </g>
 <!-- gap_window_argument -->
 <g id="node33" class="node"><title>gap_window_argument</title>
-<g id="a_node33"><a xlink:href="group___parsing_arguments_functions.html#gab15430c46ad26f21d8479bf3cd5b68fd" target="_top" xlink:title="gap_window_argument">
+<g id="a_node33"><a xlink:href="classtrim_al_manager.html#ab15430c46ad26f21d8479bf3cd5b68fd" target="_top" xlink:title="gap_window_argument">
 <polygon fill="none" stroke="black" points="1367.5,-145.5 1367.5,-181.5 1483.5,-181.5 1483.5,-145.5 1367.5,-145.5"/>
 <text text-anchor="middle" x="1425.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">gap_window_argument</text>
 </a>
@@ -298,7 +298,7 @@
 </g>
 <!-- similarity_window_argument -->
 <g id="node34" class="node"><title>similarity_window_argument</title>
-<g id="a_node34"><a xlink:href="group___parsing_arguments_functions.html#gae5a646dea584f694cbb1262a5be72290" target="_top" xlink:title="similarity_window_argument">
+<g id="a_node34"><a xlink:href="classtrim_al_manager.html#ae5a646dea584f694cbb1262a5be72290" target="_top" xlink:title="similarity_window_argument">
 <polygon fill="none" stroke="black" points="1209.5,-145.5 1209.5,-181.5 1349.5,-181.5 1349.5,-145.5 1209.5,-145.5"/>
 <text text-anchor="middle" x="1279.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">similarity_window_argument</text>
 </a>
@@ -306,7 +306,7 @@
 </g>
 <!-- consistency_window_argument -->
 <g id="node35" class="node"><title>consistency_window_argument</title>
-<g id="a_node35"><a xlink:href="group___parsing_arguments_functions.html#ga1192b7587cd78875384357d92bdadcef" target="_top" xlink:title="consistency_window_argument">
+<g id="a_node35"><a xlink:href="classtrim_al_manager.html#a1192b7587cd78875384357d92bdadcef" target="_top" xlink:title="consistency_window_argument">
 <polygon fill="none" stroke="black" points="1038,-145.5 1038,-181.5 1191,-181.5 1191,-145.5 1038,-145.5"/>
 <text text-anchor="middle" x="1114.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">consistency_window_argument</text>
 </a>
@@ -314,7 +314,7 @@
 </g>
 <!-- block_argument -->
 <g id="node36" class="node"><title>block_argument</title>
-<g id="a_node36"><a xlink:href="group___parsing_arguments_functions.html#ga1f34f42869ae921faeb2861ecba25d12" target="_top" xlink:title="block_argument">
+<g id="a_node36"><a xlink:href="classtrim_al_manager.html#a1f34f42869ae921faeb2861ecba25d12" target="_top" xlink:title="block_argument">
 <polygon fill="none" stroke="black" points="933.5,-145.5 933.5,-181.5 1019.5,-181.5 1019.5,-145.5 933.5,-145.5"/>
 <text text-anchor="middle" x="976.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">block_argument</text>
 </a>
@@ -322,7 +322,7 @@
 </g>
 <!-- stats_arguments -->
 <g id="node37" class="node"><title>stats_arguments</title>
-<g id="a_node37"><a xlink:href="group___parsing_arguments_functions.html#ga1bae281d1fb2c0a49f9e88c83ba5684a" target="_top" xlink:title="stats_arguments">
+<g id="a_node37"><a xlink:href="classtrim_al_manager.html#a1bae281d1fb2c0a49f9e88c83ba5684a" target="_top" xlink:title="stats_arguments">
 <polygon fill="none" stroke="black" points="826,-145.5 826,-181.5 915,-181.5 915,-145.5 826,-145.5"/>
 <text text-anchor="middle" x="870.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">stats_arguments</text>
 </a>
@@ -330,7 +330,7 @@
 </g>
 <!-- complementary_argument -->
 <g id="node38" class="node"><title>complementary_argument</title>
-<g id="a_node38"><a xlink:href="group___parsing_arguments_functions.html#gafef91d4a030c838cba610a35abf2ab95" target="_top" xlink:title="complementary_argument">
+<g id="a_node38"><a xlink:href="classtrim_al_manager.html#afef91d4a030c838cba610a35abf2ab95" target="_top" xlink:title="complementary_argument">
 <polygon fill="none" stroke="black" points="679,-145.5 679,-181.5 808,-181.5 808,-145.5 679,-145.5"/>
 <text text-anchor="middle" x="743.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">complementary_argument</text>
 </a>
@@ -338,7 +338,7 @@
 </g>
 <!-- col_numbering_argument -->
 <g id="node39" class="node"><title>col_numbering_argument</title>
-<g id="a_node39"><a xlink:href="group___parsing_arguments_functions.html#ga87d6fe668c2a47600fdf9b55bfc8747b" target="_top" xlink:title="col_numbering_argument">
+<g id="a_node39"><a xlink:href="classtrim_al_manager.html#a87d6fe668c2a47600fdf9b55bfc8747b" target="_top" xlink:title="col_numbering_argument">
 <polygon fill="none" stroke="black" points="536,-145.5 536,-181.5 661,-181.5 661,-145.5 536,-145.5"/>
 <text text-anchor="middle" x="598.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">col_numbering_argument</text>
 </a>
@@ -346,7 +346,7 @@
 </g>
 <!-- split_by_stop_codon_argument -->
 <g id="node40" class="node"><title>split_by_stop_codon_argument</title>
-<g id="a_node40"><a xlink:href="group___parsing_arguments_functions.html#ga5f145e3c94ade069f8da27b172f6641c" target="_top" xlink:title="split_by_stop_codon_argument">
+<g id="a_node40"><a xlink:href="classtrim_al_manager.html#a5f145e3c94ade069f8da27b172f6641c" target="_top" xlink:title="split_by_stop_codon_argument">
 <polygon fill="none" stroke="black" points="365.5,-145.5 365.5,-181.5 517.5,-181.5 517.5,-145.5 365.5,-145.5"/>
 <text text-anchor="middle" x="441.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">split_by_stop_codon_argument</text>
 </a>
@@ -354,7 +354,7 @@
 </g>
 <!-- ignore_stop_codon_argument -->
 <g id="node41" class="node"><title>ignore_stop_codon_argument</title>
-<g id="a_node41"><a xlink:href="group___parsing_arguments_functions.html#ga95ec04ca6c813cff40c25056631ee593" target="_top" xlink:title="ignore_stop_codon_argument">
+<g id="a_node41"><a xlink:href="classtrim_al_manager.html#a95ec04ca6c813cff40c25056631ee593" target="_top" xlink:title="ignore_stop_codon_argument">
 <polygon fill="none" stroke="black" points="203.5,-145.5 203.5,-181.5 347.5,-181.5 347.5,-145.5 203.5,-145.5"/>
 <text text-anchor="middle" x="275.5" y="-161" font-family="Helvetica,sans-Serif" font-size="10.00">ignore_stop_codon_argument</text>
 </a>

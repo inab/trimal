@@ -22,7 +22,7 @@ var class_cleaner =
     [ "computeComplementaryAlig", "class_cleaner.html#a24bd28e4191afc9471adff329bee1466", null ],
     [ "getClustering", "class_cleaner.html#a991bf55a7d36b305d67d639ebf028348", null ],
     [ "getCutPointClusters", "class_cleaner.html#a60955e2ae3faa3ccf84780a52fb1a08a", null ],
-    [ "removeCols_SeqsAllGaps", "class_cleaner.html#a2f7d85e29f23f880a7ad7e28863b36c3", null ],
+    [ "removeAllGapsSeqsAndCols", "class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f", null ],
     [ "removeColumns", "class_cleaner.html#a3d1c1309bd1f0908ef8c8ef0415fb4cb", null ],
     [ "removeOnlyTerminal", "class_cleaner.html#a033da9ea63774f43f4c7aff04f23da81", null ],
     [ "removeSequences", "class_cleaner.html#af27e657bf4874a21b26d9a8217c1e643", null ],

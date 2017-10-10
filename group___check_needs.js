@@ -14,6 +14,7 @@ var group___check_needs =
     [ "check_multiple_files_comparison", "group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27", null ],
     [ "check_output_file_with_statistics", "group___check_needs.html#ga4783de3644b5e5c6cb7f611f835c5ac2", null ],
     [ "check_output_format", "group___check_needs.html#gaf7c3b97a17c2f5750f9481cc60c17616", null ],
+    [ "check_output_relevance", "group___check_needs.html#gaf5b7eb54478c5ea21410381d52052e14", null ],
     [ "check_outputs_coincidence", "group___check_needs.html#gabbaa9a8505b45e825e55d6d163878d06", null ],
     [ "check_residue_and_sequence_overlap", "group___check_needs.html#gab8cd1b2685c225bec9421f055536d853", null ],
     [ "check_similarity_matrix", "group___check_needs.html#gaf66e0cf7f3819c3481c22067b8eb78d4", null ]

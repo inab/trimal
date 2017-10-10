@@ -1,2 +1,10 @@
 <map id="statisticsGaps" name="statisticsGaps">
+<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="597,477,701,504"/>
+<area shape="rect" id="node3" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="876,196,997,223"/>
+<area shape="rect" id="node8" href="$classstatistics_conservation2.html" title="statisticsConservation2" alt="" coords="857,813,1016,840"/>
+<area shape="rect" id="node12" href="$class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="903,339,970,365"/>
+<area shape="rect" id="node14" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="873,537,1000,564"/>
+<area shape="rect" id="node11" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="593,776,704,803"/>
+<area shape="rect" id="node5" title="STL class. " alt="" coords="348,23,428,49"/>
+<area shape="rect" id="node6" title="STL class. " alt="" coords="5,15,132,57"/>
 </map>

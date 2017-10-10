@@ -1,0 +1,13 @@
+<map id="trimAlManager::check_arguments_incompatibilities" name="trimAlManager::check_arguments_incompatibilities">
+<area shape="rect" id="node2" href="$classtrim_al_manager.html#a603ce4f4aefaf60dc1d8db83490d44ac" title="Method to check the inFile argument incompatibilities. " alt="" coords="287,5,447,47"/>
+<area shape="rect" id="node4" href="$classtrim_al_manager.html#a0e099828be74d3ca0068b951d6578407" title="Method to check incompatibilities with select cols and select seqs arguments. " alt="" coords="288,71,447,127"/>
+<area shape="rect" id="node5" href="$classtrim_al_manager.html#aa6149bd13ebbf5e0c4b9c81919304796" title="Method to check incompatibilities with manual thresholds. " alt="" coords="273,152,462,193"/>
+<area shape="rect" id="node6" href="$classtrim_al_manager.html#a240651e152a2258badf642ed10a982f1" title="Method to check incompatibilities related to automated trimming methods. " alt="" coords="244,217,491,259"/>
+<area shape="rect" id="node7" href="$classtrim_al_manager.html#ab5b035ec7491b19958cf6f2e222e4b01" title="Method to check max identity incompatibilities. " alt="" coords="266,283,469,324"/>
+<area shape="rect" id="node8" href="$classtrim_al_manager.html#a197d0ef570aee1edc074b19f4134060e" title="Method to check clusters incompatibilities. " alt="" coords="280,348,455,389"/>
+<area shape="rect" id="node9" href="$classtrim_al_manager.html#a2cc3ed142e9da213332ada3a2b39dea0" title="Method to check windows incompatibilities. " alt="" coords="277,413,457,455"/>
+<area shape="rect" id="node10" href="$classtrim_al_manager.html#a10cf2679904a3707519d3ddac171ce06" title="Method to check statistics incompatibilities. " alt="" coords="288,479,447,520"/>
+<area shape="rect" id="node11" href="$classtrim_al_manager.html#a3563c4066ac0340d27cc72508bf8949b" title="Method to check incompatibilities related to how the algorithm should treat stop codons. " alt="" coords="259,544,476,585"/>
+<area shape="rect" id="node12" href="$classtrim_al_manager.html#aa96711af8011305f73b3caee46ae0fd8" title="As some thresholds are incompatible between them, we check their incompatibilities. " alt="" coords="258,610,477,666"/>
+<area shape="rect" id="node3" href="$class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. " alt="" coords="539,316,693,357"/>
+</map>

@@ -1,9 +1,7 @@
 <map id="Cleaner::cleanSpuriousSeq" name="Cleaner::cleanSpuriousSeq">
-<area shape="rect" id="node2" href="$class_cleaner.html#ab2db8eacfbe545c68fc287c43309e439" title="Method to compute the overlap for each sequence given a overlap value. This overlap sets the minimum ..." alt="" coords="233,31,412,73"/>
-<area shape="rect" id="node3" href="$class_cleaner.html#a74d3049d4997da5e7c6c51cb19b540e8" title="Method to clean sequences based on a minimum overlap threshold. The method selects a combination of p..." alt="" coords="235,97,410,124"/>
-<area shape="rect" id="node8" href="$classnew_alignment.html#acbeb320f0f70222f81a906ccfc33a016" title="Method to intialize data that has been modified on the alignment. The method checks if the sequences ..." alt="" coords="235,152,410,179"/>
-<area shape="rect" id="node4" href="$class_cleaner.html#a24bd28e4191afc9471adff329bee1466" title="Method for computing the complementary alignment. Complementary Alignment is an alignment containing ..." alt="" coords="460,5,699,32"/>
-<area shape="rect" id="node5" href="$class_cleaner.html#a2f7d85e29f23f880a7ad7e28863b36c3" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="507,57,652,98"/>
-<area shape="rect" id="node7" href="$classnew_alignment.html#a3de39c62c08a265178f1fa7df76c3ab7" title="Method that copies information of the alignment to the pointers given. " alt="" coords="489,122,669,163"/>
-<area shape="rect" id="node6" href="$class_verbose_manager.html#a261de87bbf9653cd729dca4e1fbeb2a3" title="Method to report an Error. It will be displayed if VerboseManager::Level is equal or higher to Verbos..." alt="" coords="747,127,913,153"/>
+<area shape="rect" id="node2" href="$class_cleaner.html#ab2db8eacfbe545c68fc287c43309e439" title="Method to compute the overlap for each sequence given a overlap value. This overlap sets the minimum ..." alt="" coords="233,5,412,47"/>
+<area shape="rect" id="node3" href="$class_cleaner.html#a74d3049d4997da5e7c6c51cb19b540e8" title="Method to clean sequences based on a minimum overlap threshold. The method selects a combination of p..." alt="" coords="235,71,410,98"/>
+<area shape="rect" id="node4" href="$class_cleaner.html#a24bd28e4191afc9471adff329bee1466" title="Method for computing the complementary alignment. Complementary Alignment is an alignment containing ..." alt="" coords="460,42,699,69"/>
+<area shape="rect" id="node5" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="482,93,677,135"/>
+<area shape="rect" id="node6" href="$class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. " alt="" coords="747,93,901,135"/>
 </map>

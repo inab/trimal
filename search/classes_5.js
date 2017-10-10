@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['utils',['utils',['../classutils.html',1,'']]]
+  ['trimalmanager',['trimAlManager',['../classtrim_al_manager.html',1,'']]]
 ];

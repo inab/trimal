@@ -1,3 +1,4 @@
 <map id="utils::min" name="utils::min">
-<area shape="rect" id="node2" href="$classnew_alignment.html#ae8501233fe4f4ef6bfe30c99c744c7c2" title="Function to check CDS file. It checks if sequences of input alignment are all present on the CDS file..." alt="" coords="128,5,371,32"/>
+<area shape="rect" id="node2" href="$class_cleaner.html#ae2328fe8c189e2827b46e5dfb8e3deb3" title="Method to clean an alignment based on consistency values obtained from a dataset of alignments..." alt="" coords="159,5,339,32"/>
+<area shape="rect" id="node3" href="$classnew_alignment.html#ae8501233fe4f4ef6bfe30c99c744c7c2" title="Function to check CDS file. It checks if sequences of input alignment are all present on the CDS file..." alt="" coords="128,56,371,83"/>
 </map>

@@ -1,19 +1,19 @@
 <map id="trimAlManager" name="trimAlManager">
-<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="949,643,1053,669"/>
-<area shape="rect" id="node5" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="1248,999,1369,1025"/>
-<area shape="rect" id="node13" href="$class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="1275,689,1342,716"/>
-<area shape="rect" id="node15" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="1245,453,1372,480"/>
-<area shape="rect" id="node3" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="472,549,579,576"/>
-<area shape="rect" id="node9" href="$classstatistics_conservation.html" title="statisticsConservation" alt="" coords="603,717,755,744"/>
-<area shape="rect" id="node12" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="315,373,426,400"/>
-<area shape="rect" id="node6" title="STL class. " alt="" coords="639,1289,719,1316"/>
-<area shape="rect" id="node24" href="$class_read_write_base_state.html" title="Abstract class to implement. &#160;This class implementations are instantiated by the ReadWrite Machine St..." alt="" coords="1236,1299,1381,1325"/>
-<area shape="rect" id="node7" title="STL class. " alt="" coords="307,1282,434,1323"/>
-<area shape="rect" id="node22" href="$class_read_write_m_s.html" title="Class that handles the load and save functions of an alignment. " alt="" coords="949,1187,1053,1213"/>
-<area shape="rect" id="node17" title="STL class. " alt="" coords="1261,209,1356,236"/>
-<area shape="rect" id="node18" title="STL class. " alt="" coords="935,155,1068,197"/>
-<area shape="rect" id="node19" title="STL class. " alt="" coords="614,115,743,157"/>
-<area shape="rect" id="node20" title="STL class. " alt="" coords="293,123,448,149"/>
-<area shape="rect" id="node21" title="STL class. " alt="" coords="5,123,105,149"/>
-<area shape="rect" id="node25" title="STL class. " alt="" coords="943,1651,1059,1677"/>
+<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="838,913,942,940"/>
+<area shape="rect" id="node3" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="1190,843,1297,869"/>
+<area shape="rect" id="node5" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="1183,952,1304,979"/>
+<area shape="rect" id="node9" href="$classstatistics_conservation2.html" title="statisticsConservation2" alt="" coords="1164,1297,1323,1324"/>
+<area shape="rect" id="node13" href="$class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="1210,647,1277,673"/>
+<area shape="rect" id="node15" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="1180,1043,1307,1069"/>
+<area shape="rect" id="node12" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="835,1443,945,1469"/>
+<area shape="rect" id="node6" title="STL class. " alt="" coords="219,633,299,660"/>
+<area shape="rect" id="node24" href="$class_read_write_base_state.html" title="Abstract class to implement. &#160;This class implementations are instantiated by the ReadWrite Machine St..." alt="" coords="445,356,591,383"/>
+<area shape="rect" id="node7" title="STL class. " alt="" coords="5,626,132,667"/>
+<area shape="rect" id="node22" href="$class_read_write_m_s.html" title="Class that handles the load and save functions of an alignment. " alt="" coords="1191,353,1295,380"/>
+<area shape="rect" id="node17" title="STL class. " alt="" coords="1196,2069,1291,2096"/>
+<area shape="rect" id="node18" title="STL class. " alt="" coords="823,2062,957,2103"/>
+<area shape="rect" id="node19" title="STL class. " alt="" coords="453,2062,583,2103"/>
+<area shape="rect" id="node20" title="STL class. " alt="" coords="181,2069,336,2096"/>
+<area shape="rect" id="node21" title="STL class. " alt="" coords="19,2069,119,2096"/>
+<area shape="rect" id="node25" title="STL class. " alt="" coords="460,407,576,433"/>
 </map>

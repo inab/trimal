@@ -1,5 +1,5 @@
 <map id="trimAlManager::force_select_argument" name="trimAlManager::force_select_argument">
-<area shape="rect" id="node2" href="$class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf" title="Function that creates an alignment from a filepath. It automatically detects the format of the file..." alt="" coords="196,13,391,39"/>
-<area shape="rect" id="node4" href="$class_verbose_manager.html#a261de87bbf9653cd729dca4e1fbeb2a3" title="Method to report an Error. It will be displayed if VerboseManager::Level is equal or higher to Verbos..." alt="" coords="210,63,377,90"/>
-<area shape="rect" id="node3" href="$class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="439,5,584,47"/>
+<area shape="rect" id="node2" href="$class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf" title="Function that creates an alignment from a filepath. It automatically detects the format of the file..." alt="" coords="196,63,391,90"/>
+<area shape="rect" id="node3" href="$class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" title="Method to report an Error. It will be displayed if VerboseManager::Level is equal or higher to Verbos..." alt="" coords="439,5,593,47"/>
+<area shape="rect" id="node4" href="$class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="443,71,589,112"/>
 </map>

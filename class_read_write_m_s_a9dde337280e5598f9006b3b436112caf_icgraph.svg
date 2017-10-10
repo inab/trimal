@@ -9,113 +9,113 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 171.5)">
 <title>ReadWriteMS::loadAlignment</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-171.5 721,-171.5 721,4 -4,4"/>
-<!-- Node9 -->
-<g id="node1" class="node"><title>Node9</title>
+<!-- Node12 -->
+<g id="node1" class="node"><title>Node12</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-79 0,-98 146,-98 146,-79 0,-79"/>
 <text text-anchor="middle" x="73" y="-86" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteMS::loadAlignment</text>
 </g>
-<!-- Node10 -->
-<g id="node2" class="node"><title>Node10</title>
-<g id="a_node2"><a xlink:href="group___parsing_arguments_functions.html#gac594aa4b43e39df57eaa2ded49d7d9e1" target="_top" xlink:title="Method to parse the input file argument. ">
+<!-- Node13 -->
+<g id="node2" class="node"><title>Node13</title>
+<g id="a_node2"><a xlink:href="classtrim_al_manager.html#ac594aa4b43e39df57eaa2ded49d7d9e1" target="_top" xlink:title="Method to parse the input file argument. ">
 <polygon fill="white" stroke="black" points="182,-148 182,-167 321,-167 321,-148 182,-148"/>
 <text text-anchor="middle" x="251.5" y="-155" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::in_argument</text>
 </a>
 </g>
 </g>
-<!-- Node9&#45;&gt;Node10 -->
-<g id="edge1" class="edge"><title>Node9&#45;&gt;Node10</title>
+<!-- Node12&#45;&gt;Node13 -->
+<g id="edge1" class="edge"><title>Node12&#45;&gt;Node13</title>
 <path fill="none" stroke="midnightblue" d="M101.524,-102.762C123.041,-113.536 153.913,-128.181 182,-138.5 191.499,-141.99 201.941,-145.193 211.747,-147.936"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="102.843,-99.5064 92.34,-98.1132 99.6817,-105.752 102.843,-99.5064"/>
 </g>
-<!-- Node12 -->
-<g id="node4" class="node"><title>Node12</title>
-<g id="a_node4"><a xlink:href="group___parsing_arguments_functions.html#ga28508aa820509b23c2f91634bc638082" target="_top" xlink:title="Method to parse the force select argument. ">
+<!-- Node15 -->
+<g id="node4" class="node"><title>Node15</title>
+<g id="a_node4"><a xlink:href="classtrim_al_manager.html#a28508aa820509b23c2f91634bc638082" target="_top" xlink:title="Method to parse the force select argument. ">
 <polygon fill="white" stroke="black" points="198,-98.5 198,-128.5 305,-128.5 305,-98.5 198,-98.5"/>
 <text text-anchor="start" x="206" y="-116.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::force</text>
 <text text-anchor="middle" x="251.5" y="-105.5" font-family="Helvetica,sans-Serif" font-size="10.00">_select_argument</text>
 </a>
 </g>
 </g>
-<!-- Node9&#45;&gt;Node12 -->
-<g id="edge3" class="edge"><title>Node9&#45;&gt;Node12</title>
+<!-- Node12&#45;&gt;Node15 -->
+<g id="edge3" class="edge"><title>Node12&#45;&gt;Node15</title>
 <path fill="none" stroke="midnightblue" d="M151.422,-99.4663C167.064,-101.682 183.166,-103.963 197.724,-106.025"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="151.623,-95.9599 141.231,-98.0227 150.641,-102.891 151.623,-95.9599"/>
 </g>
-<!-- Node13 -->
-<g id="node5" class="node"><title>Node13</title>
-<g id="a_node5"><a xlink:href="group___parsing_arguments_functions.html#gacf6ecf63ed1194adc345de441e2c1fec" target="_top" xlink:title="Method to parse the backtranslation argument. ">
+<!-- Node16 -->
+<g id="node5" class="node"><title>Node16</title>
+<g id="a_node5"><a xlink:href="classtrim_al_manager.html#acf6ecf63ed1194adc345de441e2c1fec" target="_top" xlink:title="Method to parse the backtranslation argument. ">
 <polygon fill="white" stroke="black" points="198,-49.5 198,-79.5 305,-79.5 305,-49.5 198,-49.5"/>
 <text text-anchor="start" x="206" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::back</text>
 <text text-anchor="middle" x="251.5" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">_trans_argument</text>
 </a>
 </g>
 </g>
-<!-- Node9&#45;&gt;Node13 -->
-<g id="edge5" class="edge"><title>Node9&#45;&gt;Node13</title>
+<!-- Node12&#45;&gt;Node16 -->
+<g id="edge5" class="edge"><title>Node12&#45;&gt;Node16</title>
 <path fill="none" stroke="midnightblue" d="M154.171,-77.5986C168.945,-75.5896 184.025,-73.5391 197.734,-71.675"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="153.448,-74.1646 144.011,-78.9801 154.391,-81.1007 153.448,-74.1646"/>
 </g>
-<!-- Node14 -->
-<g id="node6" class="node"><title>Node14</title>
-<g id="a_node6"><a xlink:href="group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27" target="_top" xlink:title="Method to check if multiple files comparison has been set correctly. It also perform some calculation...">
+<!-- Node17 -->
+<g id="node6" class="node"><title>Node17</title>
+<g id="a_node6"><a xlink:href="classtrim_al_manager.html#a7cab8308b05c5921e61217f9c93fab27" target="_top" xlink:title="Method to check if multiple files comparison has been set correctly. It also perform some calculation...">
 <polygon fill="white" stroke="black" points="184.5,-0.5 184.5,-30.5 318.5,-30.5 318.5,-0.5 184.5,-0.5"/>
 <text text-anchor="start" x="192.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
 <text text-anchor="middle" x="251.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_multiple_files_comparison</text>
 </a>
 </g>
 </g>
-<!-- Node9&#45;&gt;Node14 -->
-<g id="edge7" class="edge"><title>Node9&#45;&gt;Node14</title>
+<!-- Node12&#45;&gt;Node17 -->
+<g id="edge7" class="edge"><title>Node12&#45;&gt;Node17</title>
 <path fill="none" stroke="midnightblue" d="M102.933,-74.5259C124.51,-64.313 154.823,-50.4012 182,-39.5 189.602,-36.4507 197.76,-33.4027 205.701,-30.5518"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="101.2,-71.4744 93.6768,-78.934 104.21,-77.7943 101.2,-71.4744"/>
 </g>
-<!-- Node11 -->
-<g id="node3" class="node"><title>Node11</title>
-<g id="a_node3"><a xlink:href="group___parsing_arguments_functions.html#gaf140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
+<!-- Node14 -->
+<g id="node3" class="node"><title>Node14</title>
+<g id="a_node3"><a xlink:href="classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
 <polygon fill="white" stroke="black" points="357,-104 357,-123 514,-123 514,-104 357,-104"/>
 <text text-anchor="middle" x="435.5" y="-111" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::parseArguments</text>
 </a>
 </g>
 </g>
-<!-- Node10&#45;&gt;Node11 -->
-<g id="edge2" class="edge"><title>Node10&#45;&gt;Node11</title>
+<!-- Node13&#45;&gt;Node14 -->
+<g id="edge2" class="edge"><title>Node13&#45;&gt;Node14</title>
 <path fill="none" stroke="midnightblue" d="M302.008,-145.531C331.262,-138.459 367.795,-129.626 395.086,-123.029"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="300.889,-142.201 291.991,-147.953 302.534,-149.005 300.889,-142.201"/>
 </g>
-<!-- Node12&#45;&gt;Node11 -->
-<g id="edge4" class="edge"><title>Node12&#45;&gt;Node11</title>
+<!-- Node15&#45;&gt;Node14 -->
+<g id="edge4" class="edge"><title>Node15&#45;&gt;Node14</title>
 <path fill="none" stroke="midnightblue" d="M315.216,-113.5C328.653,-113.5 343.003,-113.5 356.924,-113.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="315.142,-110 305.142,-113.5 315.142,-117 315.142,-110"/>
 </g>
-<!-- Node13&#45;&gt;Node11 -->
-<g id="edge6" class="edge"><title>Node13&#45;&gt;Node11</title>
+<!-- Node16&#45;&gt;Node14 -->
+<g id="edge6" class="edge"><title>Node16&#45;&gt;Node14</title>
 <path fill="none" stroke="midnightblue" d="M314.884,-81.2958C342.962,-88.8551 375.085,-97.5038 398.968,-103.934"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="315.708,-77.893 305.142,-78.6728 313.888,-84.6523 315.708,-77.893"/>
 </g>
-<!-- Node15 -->
-<g id="node7" class="node"><title>Node15</title>
-<g id="a_node7"><a xlink:href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" target="_top" xlink:title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult...">
+<!-- Node18 -->
+<g id="node7" class="node"><title>Node18</title>
+<g id="a_node7"><a xlink:href="classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" target="_top" xlink:title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult...">
 <polygon fill="white" stroke="black" points="379.5,-0.5 379.5,-30.5 491.5,-30.5 491.5,-0.5 379.5,-0.5"/>
 <text text-anchor="start" x="387.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
 <text text-anchor="middle" x="435.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_arguments_needs</text>
 </a>
 </g>
 </g>
-<!-- Node14&#45;&gt;Node15 -->
-<g id="edge8" class="edge"><title>Node14&#45;&gt;Node15</title>
+<!-- Node17&#45;&gt;Node18 -->
+<g id="edge8" class="edge"><title>Node17&#45;&gt;Node18</title>
 <path fill="none" stroke="midnightblue" d="M329.123,-15.5C346.005,-15.5 363.564,-15.5 379.396,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="328.721,-12.0001 318.721,-15.5 328.721,-19.0001 328.721,-12.0001"/>
 </g>
-<!-- Node16 -->
-<g id="node8" class="node"><title>Node16</title>
-<g id="a_node8"><a xlink:href="group___trimal_parsing_arguments.html#ga748b08a1ec5cd214de804ed0d4234a6e" target="_top" xlink:title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in...">
+<!-- Node19 -->
+<g id="node8" class="node"><title>Node19</title>
+<g id="a_node8"><a xlink:href="classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" target="_top" xlink:title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in...">
 <polygon fill="white" stroke="black" points="550,-6 550,-25 717,-25 717,-6 550,-6"/>
 <text text-anchor="middle" x="633.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::processArguments</text>
 </a>
 </g>
 </g>
-<!-- Node15&#45;&gt;Node16 -->
-<g id="edge9" class="edge"><title>Node15&#45;&gt;Node16</title>
+<!-- Node18&#45;&gt;Node19 -->
+<g id="edge9" class="edge"><title>Node18&#45;&gt;Node19</title>
 <path fill="none" stroke="midnightblue" d="M502.044,-15.5C517.411,-15.5 533.979,-15.5 549.982,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="501.619,-12.0001 491.619,-15.5 501.618,-19.0001 501.619,-12.0001"/>
 </g>

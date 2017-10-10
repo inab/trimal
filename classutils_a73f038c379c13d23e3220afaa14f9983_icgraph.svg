@@ -81,7 +81,7 @@
 </g>
 <!-- Node106 -->
 <g id="node13" class="node"><title>Node106</title>
-<g id="a_node13"><a xlink:href="classcompare_files.html#a435d98e46d83c066a928e40d2dbcead9" target="_top" xlink:title="Print the accumulated consistency value from the selected alignment. ">
+<g id="a_node13"><a xlink:href="classcompare_files.html#ad93588cbee39ef32d1c6a7d34f9dee95" target="_top" xlink:title="Print the accumulated consistency value from the selected alignment. ">
 <polygon fill="white" stroke="black" points="135,-88 135,-118 276,-118 276,-88 135,-88"/>
 <text text-anchor="start" x="143" y="-106" font-family="Helvetica,sans-Serif" font-size="10.00">compareFiles::printStatistics</text>
 <text text-anchor="middle" x="205.5" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">FileAcl</text>
@@ -95,7 +95,7 @@
 </g>
 <!-- Node107 -->
 <g id="node14" class="node"><title>Node107</title>
-<g id="a_node14"><a xlink:href="group___perform_algorithm.html#gafc48b86f5ae35b9a5e721b65c58bf610" target="_top" xlink:title="Method to print statistics requested. ">
+<g id="a_node14"><a xlink:href="classtrim_al_manager.html#afc48b86f5ae35b9a5e721b65c58bf610" target="_top" xlink:title="Method to print statistics requested. ">
 <polygon fill="white" stroke="black" points="347.5,-107 347.5,-137 451.5,-137 451.5,-107 347.5,-107"/>
 <text text-anchor="start" x="355.5" y="-125" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::print</text>
 <text text-anchor="middle" x="399.5" y="-114" font-family="Helvetica,sans-Serif" font-size="10.00">_statistics</text>
@@ -109,9 +109,9 @@
 </g>
 <!-- Node109 -->
 <g id="node16" class="node"><title>Node109</title>
-<g id="a_node16"><a xlink:href="classstatistics_conservation.html#aa11412e9db5babc6dc7b2b4c7c471ed6" target="_top" xlink:title="Computes and selects the cut point values based on conservation&#39;s values. ">
-<polygon fill="white" stroke="black" points="148.5,-401 148.5,-431 262.5,-431 262.5,-401 148.5,-401"/>
-<text text-anchor="start" x="156.5" y="-419" font-family="Helvetica,sans-Serif" font-size="10.00">statisticsConservation</text>
+<g id="a_node16"><a xlink:href="classstatistics_conservation2.html#ad97bc3a8ce5f68d2ef34c0bea685f874" target="_top" xlink:title="Computes and selects the cut point values based on conservation&#39;s values. ">
+<polygon fill="white" stroke="black" points="146,-401 146,-431 265,-431 265,-401 146,-401"/>
+<text text-anchor="start" x="154" y="-419" font-family="Helvetica,sans-Serif" font-size="10.00">statisticsConservation2</text>
 <text text-anchor="middle" x="205.5" y="-408" font-family="Helvetica,sans-Serif" font-size="10.00">::calcCutPoint</text>
 </a>
 </g>
@@ -123,16 +123,16 @@
 </g>
 <!-- Node110 -->
 <g id="node17" class="node"><title>Node110</title>
-<g id="a_node17"><a xlink:href="classstatistics_conservation.html#adaa79cf3eaa778b658b606ef1383c82b" target="_top" xlink:title="Computes and prints the accumulative statistics associated to the alignment. ">
-<polygon fill="white" stroke="black" points="148.5,-39 148.5,-69 262.5,-69 262.5,-39 148.5,-39"/>
-<text text-anchor="start" x="156.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">statisticsConservation</text>
+<g id="a_node17"><a xlink:href="classstatistics_conservation2.html#a8c3af09a23274408feaebc4460c5e418" target="_top" xlink:title="Computes and prints the accumulative statistics associated to the alignment. ">
+<polygon fill="white" stroke="black" points="146,-39 146,-69 265,-69 265,-39 146,-39"/>
+<text text-anchor="start" x="154" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">statisticsConservation2</text>
 <text text-anchor="middle" x="205.5" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">::printConservationAcl</text>
 </a>
 </g>
 </g>
 <!-- Node94&#45;&gt;Node110 -->
 <g id="edge18" class="edge"><title>Node94&#45;&gt;Node110</title>
-<path fill="none" stroke="midnightblue" d="M47.4712,-184.443C57.6319,-156.785 79.9721,-106.551 116,-79 125.385,-71.8232 136.739,-66.7065 148.14,-63.0587"/>
+<path fill="none" stroke="midnightblue" d="M47.4712,-184.443C57.6319,-156.785 79.9721,-106.551 116,-79 124.751,-72.3081 135.214,-67.4073 145.83,-63.8184"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="44.0709,-183.563 44.0652,-194.158 50.6767,-185.879 44.0709,-183.563"/>
 </g>
 <!-- Node111 -->
@@ -238,7 +238,7 @@
 </g>
 <!-- Node108 -->
 <g id="node15" class="node"><title>Node108</title>
-<g id="a_node15"><a xlink:href="group___perform_algorithm.html#gabe8d2841455c644dc9c7d1294b82b00f" target="_top" xlink:title="Method to perform the analysis if all checks have passed. ">
+<g id="a_node15"><a xlink:href="classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" target="_top" xlink:title="Method to perform the analysis if all checks have passed. ">
 <polygon fill="white" stroke="black" points="504,-112.5 504,-131.5 623,-131.5 623,-112.5 504,-112.5"/>
 <text text-anchor="middle" x="563.5" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::perform</text>
 </a>
@@ -251,8 +251,8 @@
 </g>
 <!-- Node109&#45;&gt;Node98 -->
 <g id="edge17" class="edge"><title>Node109&#45;&gt;Node98</title>
-<path fill="none" stroke="midnightblue" d="M272.599,-421.508C301.539,-423.92 334.506,-426.667 359.444,-428.745"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="272.807,-418.014 262.55,-420.671 272.225,-424.989 272.807,-418.014"/>
+<path fill="none" stroke="midnightblue" d="M275.367,-421.739C303.574,-424.09 335.186,-426.724 359.317,-428.735"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="275.406,-418.23 265.15,-420.887 274.824,-425.206 275.406,-418.23"/>
 </g>
 </g>
 </svg>

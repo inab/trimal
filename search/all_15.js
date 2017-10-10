@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['verboselevel',['VerboseLevel',['../class_verbose_manager.html#a9a8f415d43ec53d33632ddb49d3f08cd',1,'VerboseManager']]],
-  ['verbosemanager',['VerboseManager',['../class_verbose_manager.html',1,'']]]
+  ['verbosity_5fargument',['verbosity_argument',['../classtrim_al_manager.html#a8c785d63c51ce490cef86dff573c7e36',1,'trimAlManager']]]
 ];

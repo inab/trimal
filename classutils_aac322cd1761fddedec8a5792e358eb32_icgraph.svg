@@ -9,52 +9,52 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 247.5)">
 <title>utils::initlVect</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-247.5 792,-247.5 792,4 -4,4"/>
-<!-- Node41 -->
-<g id="node1" class="node"><title>Node41</title>
+<!-- Node44 -->
+<g id="node1" class="node"><title>Node44</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-126 0,-145 76,-145 76,-126 0,-126"/>
 <text text-anchor="middle" x="38" y="-133" font-family="Helvetica,sans-Serif" font-size="10.00">utils::initlVect</text>
 </g>
-<!-- Node42 -->
-<g id="node2" class="node"><title>Node42</title>
+<!-- Node45 -->
+<g id="node2" class="node"><title>Node45</title>
 <g id="a_node2"><a xlink:href="class_cleaner.html#a068b219f913adba5c917a231cff7e437" target="_top" xlink:title="Method to clean an alignment. It carries out strict and strictplus. The method: ">
 <polygon fill="white" stroke="black" points="118,-224 118,-243 261,-243 261,-224 118,-224"/>
 <text text-anchor="middle" x="189.5" y="-231" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanCombMethods</text>
 </a>
 </g>
 </g>
-<!-- Node41&#45;&gt;Node42 -->
-<g id="edge1" class="edge"><title>Node41&#45;&gt;Node42</title>
+<!-- Node44&#45;&gt;Node45 -->
+<g id="edge1" class="edge"><title>Node44&#45;&gt;Node45</title>
 <path fill="none" stroke="midnightblue" d="M51.0198,-153.758C63.9359,-171.912 86.1312,-199.199 112,-214.5 118.596,-218.402 125.967,-221.505 133.458,-223.974"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="53.6912,-151.466 45.1411,-145.209 47.9233,-155.432 53.6912,-151.466"/>
 </g>
-<!-- Node43 -->
-<g id="node3" class="node"><title>Node43</title>
+<!-- Node46 -->
+<g id="node3" class="node"><title>Node46</title>
 <g id="a_node3"><a xlink:href="classcompare_files.html#ac2c0cb68eb0538d19a2688cb3d7fab37" target="_top" xlink:title="Method to compare a set of alignments to select the most consistent one respect the others...">
 <polygon fill="white" stroke="black" points="129,-186 129,-205 250,-205 250,-186 129,-186"/>
 <text text-anchor="middle" x="189.5" y="-193" font-family="Helvetica,sans-Serif" font-size="10.00">compareFiles::algorithm</text>
 </a>
 </g>
 </g>
-<!-- Node41&#45;&gt;Node43 -->
-<g id="edge2" class="edge"><title>Node41&#45;&gt;Node43</title>
+<!-- Node44&#45;&gt;Node46 -->
+<g id="edge2" class="edge"><title>Node44&#45;&gt;Node46</title>
 <path fill="none" stroke="midnightblue" d="M61.7404,-150.371C75.7618,-159 94.3766,-169.51 112,-176.5 121.286,-180.183 131.497,-183.311 141.35,-185.9"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="63.5745,-147.39 53.2462,-145.028 59.8474,-153.315 63.5745,-147.39"/>
 </g>
-<!-- Node47 -->
-<g id="node7" class="node"><title>Node47</title>
+<!-- Node50 -->
+<g id="node7" class="node"><title>Node50</title>
 <g id="a_node7"><a xlink:href="classcompare_files.html#af54a4eb6dfb673389b22c5b345ac689e" target="_top" xlink:title="Method to obtain the consistency values vector for a given alignment against a set of alignments with...">
 <polygon fill="white" stroke="black" points="112,-148 112,-167 267,-167 267,-148 112,-148"/>
 <text text-anchor="middle" x="189.5" y="-155" font-family="Helvetica,sans-Serif" font-size="10.00">compareFiles::forceComparison</text>
 </a>
 </g>
 </g>
-<!-- Node41&#45;&gt;Node47 -->
-<g id="edge6" class="edge"><title>Node41&#45;&gt;Node47</title>
+<!-- Node44&#45;&gt;Node50 -->
+<g id="edge6" class="edge"><title>Node44&#45;&gt;Node50</title>
 <path fill="none" stroke="midnightblue" d="M86.4433,-142.482C98.2929,-144.225 111.204,-146.125 123.734,-147.969"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="86.7426,-138.988 76.3395,-140.995 85.7234,-145.913 86.7426,-138.988"/>
 </g>
-<!-- Node48 -->
-<g id="node8" class="node"><title>Node48</title>
+<!-- Node51 -->
+<g id="node8" class="node"><title>Node51</title>
 <g id="a_node8"><a xlink:href="classnew_alignment.html#aa22c770103d0fce45cfb1840aab85888" target="_top" xlink:title="Method to print Indentity stats: Min, Max, Avg and Std. ">
 <polygon fill="white" stroke="black" points="118.5,-98.5 118.5,-128.5 260.5,-128.5 260.5,-98.5 118.5,-98.5"/>
 <text text-anchor="start" x="126.5" y="-116.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::printColumns</text>
@@ -62,13 +62,13 @@
 </a>
 </g>
 </g>
-<!-- Node41&#45;&gt;Node48 -->
-<g id="edge8" class="edge"><title>Node41&#45;&gt;Node48</title>
+<!-- Node44&#45;&gt;Node51 -->
+<g id="edge8" class="edge"><title>Node44&#45;&gt;Node51</title>
 <path fill="none" stroke="midnightblue" d="M86.2747,-128.543C96.5105,-127.037 107.545,-125.413 118.445,-123.809"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="85.7234,-125.087 76.3395,-130.005 86.7426,-132.012 85.7234,-125.087"/>
 </g>
-<!-- Node49 -->
-<g id="node9" class="node"><title>Node49</title>
+<!-- Node52 -->
+<g id="node9" class="node"><title>Node52</title>
 <g id="a_node9"><a xlink:href="classsequences_matrix.html#a9205d08454190fd9ef27daf78b59410b" target="_top" xlink:title="Null constructor. ">
 <polygon fill="white" stroke="black" points="117.5,-49.5 117.5,-79.5 261.5,-79.5 261.5,-49.5 117.5,-49.5"/>
 <text text-anchor="start" x="125.5" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">sequencesMatrix::sequences</text>
@@ -76,68 +76,68 @@
 </a>
 </g>
 </g>
-<!-- Node41&#45;&gt;Node49 -->
-<g id="edge9" class="edge"><title>Node41&#45;&gt;Node49</title>
+<!-- Node44&#45;&gt;Node52 -->
+<g id="edge9" class="edge"><title>Node44&#45;&gt;Node52</title>
 <path fill="none" stroke="midnightblue" d="M60.3884,-120.045C74.5297,-110.333 93.7589,-98.0669 112,-89.5 119.715,-85.8768 128.096,-82.5608 136.389,-79.6114"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="58.0764,-117.391 51.8919,-125.994 62.0911,-123.125 58.0764,-117.391"/>
 </g>
-<!-- Node50 -->
-<g id="node10" class="node"><title>Node50</title>
-<g id="a_node10"><a xlink:href="classstatistics_conservation.html#a2fa0bbea2b5a353b12a185cf68f69653" target="_top" xlink:title="Constructor using parameters. ">
-<polygon fill="white" stroke="black" points="129.5,-0.5 129.5,-30.5 249.5,-30.5 249.5,-0.5 129.5,-0.5"/>
-<text text-anchor="start" x="137.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">statisticsConservation</text>
-<text text-anchor="middle" x="189.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">::statisticsConservation</text>
+<!-- Node53 -->
+<g id="node10" class="node"><title>Node53</title>
+<g id="a_node10"><a xlink:href="classstatistics_conservation2.html#a41e0e4c03c21e41bfa2c4d01b6dc046a" target="_top" xlink:title="Constructor without any parameters. ">
+<polygon fill="white" stroke="black" points="127,-0.5 127,-30.5 252,-30.5 252,-0.5 127,-0.5"/>
+<text text-anchor="start" x="135" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">statisticsConservation2</text>
+<text text-anchor="middle" x="189.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">::statisticsConservation2</text>
 </a>
 </g>
 </g>
-<!-- Node41&#45;&gt;Node50 -->
-<g id="edge10" class="edge"><title>Node41&#45;&gt;Node50</title>
+<!-- Node44&#45;&gt;Node53 -->
+<g id="edge10" class="edge"><title>Node44&#45;&gt;Node53</title>
 <path fill="none" stroke="midnightblue" d="M48.7617,-116.825C60.8584,-95.4284 83.4157,-60.723 112,-40.5 117.475,-36.6265 123.586,-33.3266 129.903,-30.5214"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="45.5387,-115.425 43.8192,-125.879 51.6828,-118.779 45.5387,-115.425"/>
 </g>
-<!-- Node44 -->
-<g id="node4" class="node"><title>Node44</title>
-<g id="a_node4"><a xlink:href="group___check_needs.html#ga7cab8308b05c5921e61217f9c93fab27" target="_top" xlink:title="Method to check if multiple files comparison has been set correctly. It also perform some calculation...">
+<!-- Node47 -->
+<g id="node4" class="node"><title>Node47</title>
+<g id="a_node4"><a xlink:href="classtrim_al_manager.html#a7cab8308b05c5921e61217f9c93fab27" target="_top" xlink:title="Method to check if multiple files comparison has been set correctly. It also perform some calculation...">
 <polygon fill="white" stroke="black" points="303,-161.5 303,-191.5 437,-191.5 437,-161.5 303,-161.5"/>
 <text text-anchor="start" x="311" y="-179.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
 <text text-anchor="middle" x="370" y="-168.5" font-family="Helvetica,sans-Serif" font-size="10.00">_multiple_files_comparison</text>
 </a>
 </g>
 </g>
-<!-- Node43&#45;&gt;Node44 -->
-<g id="edge3" class="edge"><title>Node43&#45;&gt;Node44</title>
+<!-- Node46&#45;&gt;Node47 -->
+<g id="edge3" class="edge"><title>Node46&#45;&gt;Node47</title>
 <path fill="none" stroke="midnightblue" d="M260.444,-188.055C274.378,-186.572 288.972,-185.018 302.777,-183.549"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="260.008,-184.582 250.434,-189.12 260.749,-191.542 260.008,-184.582"/>
 </g>
-<!-- Node45 -->
-<g id="node5" class="node"><title>Node45</title>
-<g id="a_node5"><a xlink:href="group___check_needs.html#ga3f325b806727751394adb829d97b35f1" target="_top" xlink:title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult...">
+<!-- Node48 -->
+<g id="node5" class="node"><title>Node48</title>
+<g id="a_node5"><a xlink:href="classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" target="_top" xlink:title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult...">
 <polygon fill="white" stroke="black" points="473,-161.5 473,-191.5 585,-191.5 585,-161.5 473,-161.5"/>
 <text text-anchor="start" x="481" y="-179.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
 <text text-anchor="middle" x="529" y="-168.5" font-family="Helvetica,sans-Serif" font-size="10.00">_arguments_needs</text>
 </a>
 </g>
 </g>
-<!-- Node44&#45;&gt;Node45 -->
-<g id="edge4" class="edge"><title>Node44&#45;&gt;Node45</title>
+<!-- Node47&#45;&gt;Node48 -->
+<g id="edge4" class="edge"><title>Node47&#45;&gt;Node48</title>
 <path fill="none" stroke="midnightblue" d="M447.235,-176.5C455.881,-176.5 464.564,-176.5 472.863,-176.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="447.127,-173 437.127,-176.5 447.127,-180 447.127,-173"/>
 </g>
-<!-- Node46 -->
-<g id="node6" class="node"><title>Node46</title>
-<g id="a_node6"><a xlink:href="group___trimal_parsing_arguments.html#ga748b08a1ec5cd214de804ed0d4234a6e" target="_top" xlink:title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in...">
+<!-- Node49 -->
+<g id="node6" class="node"><title>Node49</title>
+<g id="a_node6"><a xlink:href="classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" target="_top" xlink:title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in...">
 <polygon fill="white" stroke="black" points="621,-167 621,-186 788,-186 788,-167 621,-167"/>
 <text text-anchor="middle" x="704.5" y="-174" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::processArguments</text>
 </a>
 </g>
 </g>
-<!-- Node45&#45;&gt;Node46 -->
-<g id="edge5" class="edge"><title>Node45&#45;&gt;Node46</title>
+<!-- Node48&#45;&gt;Node49 -->
+<g id="edge5" class="edge"><title>Node48&#45;&gt;Node49</title>
 <path fill="none" stroke="midnightblue" d="M595.636,-176.5C603.87,-176.5 612.376,-176.5 620.829,-176.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="595.374,-173 585.374,-176.5 595.373,-180 595.374,-173"/>
 </g>
-<!-- Node47&#45;&gt;Node44 -->
-<g id="edge7" class="edge"><title>Node47&#45;&gt;Node44</title>
+<!-- Node50&#45;&gt;Node47 -->
+<g id="edge7" class="edge"><title>Node50&#45;&gt;Node47</title>
 <path fill="none" stroke="midnightblue" d="M277.334,-166.743C285.965,-167.662 294.625,-168.583 302.993,-169.474"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="277.55,-163.246 267.236,-165.668 276.809,-170.207 277.55,-163.246"/>
 </g>

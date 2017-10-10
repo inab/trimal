@@ -9,21 +9,21 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>Cleaner::cleanOverlapSeq</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 306,-24 306,4 -4,4"/>
-<!-- Node139 -->
-<g id="node1" class="node"><title>Node139</title>
+<!-- Node128 -->
+<g id="node1" class="node"><title>Node128</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 131,-19.5 131,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="65.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanOverlapSeq</text>
 </g>
-<!-- Node140 -->
-<g id="node2" class="node"><title>Node140</title>
+<!-- Node129 -->
+<g id="node2" class="node"><title>Node129</title>
 <g id="a_node2"><a xlink:href="class_cleaner.html#a095db8160a11a792a3feade870a24fd7" target="_top" xlink:title="Method to remove sequences missaligned with the rest of sequences in the alignment. For each residue in the sequence, it tests it&#39;s similarity. If the similarity of that residue is higher than overlapColumn value, it counts as a hit for the sequence. After calculating the number of hits for the sequence, it removes the sequence if it has a proportion hits/residues lower tan minimumOverlap. ">
 <polygon fill="white" stroke="black" points="167,-0.5 167,-19.5 302,-19.5 302,-0.5 167,-0.5"/>
 <text text-anchor="middle" x="234.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanSpuriousSeq</text>
 </a>
 </g>
 </g>
-<!-- Node139&#45;&gt;Node140 -->
-<g id="edge1" class="edge"><title>Node139&#45;&gt;Node140</title>
+<!-- Node128&#45;&gt;Node129 -->
+<g id="edge1" class="edge"><title>Node128&#45;&gt;Node129</title>
 <path fill="none" stroke="midnightblue" d="M141.082,-10C149.683,-10 158.412,-10 166.897,-10"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="141.067,-6.5001 131.067,-10 141.067,-13.5001 141.067,-6.5001"/>
 </g>

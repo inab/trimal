@@ -1,5 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classnew_alignment.html#ad916722e4ee892ee9f5cf85f0bdb80aa" title="Method that calculates the columns identity value. &#160;This is, the frequency of the most present elemen..." alt="" coords="285,5,511,32"/>
-<area shape="rect" id="node4" href="$classnew_alignment.html#ad50ba126247276cd0bf89119e439c483" title="Method to check if the CDS file is correct. &#160;Based on nature of residues: DNA/RNA (Most of the residu..." alt="" coords="271,56,525,83"/>
-<area shape="rect" id="node3" href="$classnew_alignment.html#aa22c770103d0fce45cfb1840aab85888" title="Method to print Indentity stats: Min, Max, Avg and Std." alt="" coords="573,5,909,32"/>
+<map id="newAlignment::getAlignmentType" name="newAlignment::getAlignmentType">
+<area shape="rect" id="node2" href="$classstatistics_conservation2.html#aeaef2f53cd750c692795d663fdef866e" title="Computes the matrix identity between alignment&#39;s columns. " alt="" coords="271,5,432,47"/>
+<area shape="rect" id="node4" href="$classstatistics_conservation2.html#af9b347fdfff37c662d6336d9b3a01b4d" title="Method to calculate the conservation values of a alignment matrix. " alt="" coords="272,71,431,112"/>
+<area shape="rect" id="node3" href="$classstatistics_conservation2.html#a41e0e4c03c21e41bfa2c4d01b6dc046a" title="Constructor without any parameters. " alt="" coords="480,5,647,47"/>
 </map>

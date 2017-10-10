@@ -88,6 +88,7 @@ $(document).ready(function(){initNavTree('classnew_alignment.html','');});
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classnew_alignment-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">newAlignment Class Reference</div>  </div>
@@ -102,7 +103,7 @@ $(document).ready(function(){initNavTree('classnew_alignment.html','');});
 <div class="dynheader">
 Collaboration diagram for newAlignment:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment__coll__graph.svg" width="1179" height="811"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment__coll__graph.svg" width="903" height="967"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -184,9 +185,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>printSeqOverlap</b> (
 <tr class="memitem:ad56533a40875ddbe8aa65ee391840464"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#ad56533a40875ddbe8aa65ee391840464">isFileAligned</a> (void)</td></tr>
 <tr class="memdesc:ad56533a40875ddbe8aa65ee391840464"><td class="mdescLeft">&#160;</td><td class="mdescRight">isAligned getter.  <a href="#ad56533a40875ddbe8aa65ee391840464">More...</a><br /></td></tr>
 <tr class="separator:ad56533a40875ddbe8aa65ee391840464"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d1ff48743c38351c7e755f94baebf03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a3d1ff48743c38351c7e755f94baebf03">getTranslationCDS</a> (int newResidues, int newSequences, int *columnsToKeep, string *oldSequencesNames, <a class="el" href="classsequences_matrix.html">sequencesMatrix</a> *sequenceMatrix, <a class="el" href="classnew_alignment.html">newAlignment</a> *proteinAlignment)</td></tr>
-<tr class="memdesc:a3d1ff48743c38351c7e755f94baebf03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to obtain a DNA alignment from a Protein alignment.  <a href="#a3d1ff48743c38351c7e755f94baebf03">More...</a><br /></td></tr>
-<tr class="separator:a3d1ff48743c38351c7e755f94baebf03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a781fd0f2ae6a9bda2802ffd28372bfaa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a781fd0f2ae6a9bda2802ffd28372bfaa">getTranslationCDS</a> (<a class="el" href="classnew_alignment.html">newAlignment</a> *proteinAlignment)</td></tr>
+<tr class="memdesc:a781fd0f2ae6a9bda2802ffd28372bfaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to obtain a DNA alignment from a Protein alignment.  <a href="#a781fd0f2ae6a9bda2802ffd28372bfaa">More...</a><br /></td></tr>
+<tr class="separator:a781fd0f2ae6a9bda2802ffd28372bfaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8501233fe4f4ef6bfe30c99c744c7c2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#ae8501233fe4f4ef6bfe30c99c744c7c2">checkCorrespondence</a> (string *names, int *lenghts, int totalInputSequences, int multiple)</td></tr>
 <tr class="memdesc:ae8501233fe4f4ef6bfe30c99c744c7c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to check CDS file.<br />
 It checks if sequences of input alignment are all present on the CDS file.<br />
@@ -197,9 +198,6 @@ If nucleotide sequence is smaller than protein sequence * 3, it adds some 'N' at
 <tr class="memitem:a3de39c62c08a265178f1fa7df76c3ab7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a3de39c62c08a265178f1fa7df76c3ab7">fillNewDataStructure</a> (string *newMatrix, string *newNames)</td></tr>
 <tr class="memdesc:a3de39c62c08a265178f1fa7df76c3ab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that copies information of the alignment to the pointers given.  <a href="#a3de39c62c08a265178f1fa7df76c3ab7">More...</a><br /></td></tr>
 <tr class="separator:a3de39c62c08a265178f1fa7df76c3ab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54b8820f397c14cf4d8d5bc8a89daf24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a54b8820f397c14cf4d8d5bc8a89daf24">fillNewDataStructure</a> (<a class="el" href="structnew_values.html">newValues</a> *data)</td></tr>
-<tr class="memdesc:a54b8820f397c14cf4d8d5bc8a89daf24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that copies information of the alignment to the pointers given.  <a href="#a54b8820f397c14cf4d8d5bc8a89daf24">More...</a><br /></td></tr>
-<tr class="separator:a54b8820f397c14cf4d8d5bc8a89daf24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad916722e4ee892ee9f5cf85f0bdb80aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#ad916722e4ee892ee9f5cf85f0bdb80aa">calculateColIdentity</a> (float *columnIdentity)</td></tr>
 <tr class="memdesc:ad916722e4ee892ee9f5cf85f0bdb80aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that calculates the columns identity value.<br />
 This is, the frequency of the most present element in the column, being residue, indetermination and gap allowed.  <a href="#ad916722e4ee892ee9f5cf85f0bdb80aa">More...</a><br /></td></tr>
@@ -225,46 +223,58 @@ Each sequence is a multiple of 3.<br />
 <br />
 It will also remove or split stop codons depending on the flags passed.  <a href="#ad50ba126247276cd0bf89119e439c483">More...</a><br /></td></tr>
 <tr class="separator:ad50ba126247276cd0bf89119e439c483"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3377e8d600e1cbb9e65adf2995c877f9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a3377e8d600e1cbb9e65adf2995c877f9">alignmentSummaryHTML</a> (char *destFile, int residues, int seqs, int *selectedRes, int *selectedSeq, float *consValues)</td></tr>
-<tr class="memdesc:a3377e8d600e1cbb9e65adf2995c877f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to report the trimming results in HTML.<br />
-It contains information about the original and trimmed alignments, showing which residues and sequences have been kept and which ones have been removed on the output.  <a href="#a3377e8d600e1cbb9e65adf2995c877f9">More...</a><br /></td></tr>
-<tr class="separator:a3377e8d600e1cbb9e65adf2995c877f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af97a796c52841cb3ba120e3707722a51"><td class="memItemLeft" align="right" valign="top"><a id="af97a796c52841cb3ba120e3707722a51"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>alignmentSummarySVG</b> (char *destFile, int residues, int seqs, int *selectedRes, int *selectedSeq, float *consValues, float blocks=4.0F)</td></tr>
-<tr class="separator:af97a796c52841cb3ba120e3707722a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40a70c64e7c2f42806ef209fcd57360e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a40a70c64e7c2f42806ef209fcd57360e">alignmentSummaryHTML</a> (<a class="el" href="classnew_alignment.html">newAlignment</a> &amp;_trimmedAlignment, char *destFile, float *consValues)</td></tr>
+<tr class="memdesc:a40a70c64e7c2f42806ef209fcd57360e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to report the trimming results in HTML.<br />
+It contains information about the original and trimmed alignments, showing which residues and sequences have been kept and which ones have been removed on the output.  <a href="#a40a70c64e7c2f42806ef209fcd57360e">More...</a><br /></td></tr>
+<tr class="separator:a40a70c64e7c2f42806ef209fcd57360e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa23186d911e64751bdb1fa6ad9b88b49"><td class="memItemLeft" align="right" valign="top"><a id="aa23186d911e64751bdb1fa6ad9b88b49"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>alignmentSummarySVG</b> (<a class="el" href="classnew_alignment.html">newAlignment</a> &amp;_trimmedAlignment, char *destFile, float *consValues, int blocks=120)</td></tr>
+<tr class="separator:aa23186d911e64751bdb1fa6ad9b88b49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26d10a23f8f71f95657a05e88a9a8fff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a26d10a23f8f71f95657a05e88a9a8fff">alignmentColourHTML</a> (ostream &amp;file)</td></tr>
 <tr class="memdesc:a26d10a23f8f71f95657a05e88a9a8fff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that saves a clustal-color based visualization of the alignment.<br />
 It doesn't report any trimming result, meaning this only shows information of an alignment.  <a href="#a26d10a23f8f71f95657a05e88a9a8fff">More...</a><br /></td></tr>
 <tr class="separator:a26d10a23f8f71f95657a05e88a9a8fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52710ff330519de8a4e41b27e7e55958"><td class="memItemLeft" align="right" valign="top"><a id="a52710ff330519de8a4e41b27e7e55958"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateSequencesAndResiduesNums</b> (bool countSequences=true, bool countResidues=true)</td></tr>
+<tr class="separator:a52710ff330519de8a4e41b27e7e55958"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a2417feb815493866d0137ae5f5cd1028"><td class="memItemLeft" align="right" valign="top"><a id="a2417feb815493866d0137ae5f5cd1028"></a>
-<a class="el" href="class_cleaner.html">Cleaner</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a2417feb815493866d0137ae5f5cd1028">Cleaning</a></td></tr>
+<a class="el" href="class_cleaner.html">Cleaner</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a2417feb815493866d0137ae5f5cd1028">Cleaning</a> = NULL</td></tr>
 <tr class="memdesc:a2417feb815493866d0137ae5f5cd1028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleaning submodule.<br />
 It contains methods and variables related to trimming. <br /></td></tr>
 <tr class="separator:a2417feb815493866d0137ae5f5cd1028"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6324267e64b68bb85d993cf602d008eb"><td class="memItemLeft" align="right" valign="top"><a id="a6324267e64b68bb85d993cf602d008eb"></a>
-<a class="el" href="class_statistics_manager.html">StatisticsManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a6324267e64b68bb85d993cf602d008eb">Statistics</a></td></tr>
+<a class="el" href="class_statistics_manager.html">StatisticsManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a6324267e64b68bb85d993cf602d008eb">Statistics</a> = NULL</td></tr>
 <tr class="memdesc:a6324267e64b68bb85d993cf602d008eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Statistics submodule.<br />
 It contains methods and variables related to Statistics calculation and reporting. <br /></td></tr>
 <tr class="separator:a6324267e64b68bb85d993cf602d008eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b328dfd8e7d3304cb144f2c2114ab5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsequences_matrix.html">sequencesMatrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a8b328dfd8e7d3304cb144f2c2114ab5c">SequencesMatrix</a></td></tr>
+<tr class="memitem:a8b328dfd8e7d3304cb144f2c2114ab5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsequences_matrix.html">sequencesMatrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a8b328dfd8e7d3304cb144f2c2114ab5c">SequencesMatrix</a> = NULL</td></tr>
 <tr class="memdesc:a8b328dfd8e7d3304cb144f2c2114ab5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">SequencesMatrix submodule<br />
 .  <a href="#a8b328dfd8e7d3304cb144f2c2114ab5c">More...</a><br /></td></tr>
 <tr class="separator:a8b328dfd8e7d3304cb144f2c2114ab5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39c8e7f46c620cc32d32a81e1a78c31b"><td class="memItemLeft" align="right" valign="top"><a id="a39c8e7f46c620cc32d32a81e1a78c31b"></a>
-<a class="el" href="classstatistics_gaps.html">statisticsGaps</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a39c8e7f46c620cc32d32a81e1a78c31b">sgaps</a></td></tr>
+<a class="el" href="classstatistics_gaps.html">statisticsGaps</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a39c8e7f46c620cc32d32a81e1a78c31b">sgaps</a> = NULL</td></tr>
 <tr class="memdesc:a39c8e7f46c620cc32d32a81e1a78c31b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gaps Statistics submodule. <br /></td></tr>
 <tr class="separator:a39c8e7f46c620cc32d32a81e1a78c31b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01d5c3d9550cad228f65b6e9de2495fd"><td class="memItemLeft" align="right" valign="top"><a id="a01d5c3d9550cad228f65b6e9de2495fd"></a>
-<a class="el" href="classstatistics_conservation.html">statisticsConservation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a01d5c3d9550cad228f65b6e9de2495fd">scons</a></td></tr>
+<a class="el" href="classstatistics_conservation2.html">statisticsConservation2</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a01d5c3d9550cad228f65b6e9de2495fd">scons</a> = NULL</td></tr>
 <tr class="memdesc:a01d5c3d9550cad228f65b6e9de2495fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conservation Statistics submodule. <br /></td></tr>
 <tr class="separator:a01d5c3d9550cad228f65b6e9de2495fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae126c0fd715f0adf744183328a86f637"><td class="memItemLeft" align="right" valign="top"><a id="ae126c0fd715f0adf744183328a86f637"></a>
+int *&#160;</td><td class="memItemRight" valign="bottom"><b>SeqRef</b> = NULL</td></tr>
+<tr class="separator:ae126c0fd715f0adf744183328a86f637"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca9b1bc58d19b619a306489d8224ae6e"><td class="memItemLeft" align="right" valign="top"><a id="aca9b1bc58d19b619a306489d8224ae6e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>originalSequenNumber</b></td></tr>
+<tr class="separator:aca9b1bc58d19b619a306489d8224ae6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a6b47de8bef3e783f30548dfa48d84c"><td class="memItemLeft" align="right" valign="top"><a id="a4a6b47de8bef3e783f30548dfa48d84c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a4a6b47de8bef3e783f30548dfa48d84c">sequenNumber</a></td></tr>
 <tr class="memdesc:a4a6b47de8bef3e783f30548dfa48d84c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of sequences present on the alignment. <br /></td></tr>
 <tr class="separator:a4a6b47de8bef3e783f30548dfa48d84c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac620bf8188d9e35c4cd57f41f59d9928"><td class="memItemLeft" align="right" valign="top"><a id="ac620bf8188d9e35c4cd57f41f59d9928"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>originalResidNumber</b></td></tr>
+<tr class="separator:ac620bf8188d9e35c4cd57f41f59d9928"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff4e7761ec80bea74cdf28c0269b27db"><td class="memItemLeft" align="right" valign="top"><a id="aff4e7761ec80bea74cdf28c0269b27db"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#aff4e7761ec80bea74cdf28c0269b27db">residNumber</a></td></tr>
 <tr class="memdesc:aff4e7761ec80bea74cdf28c0269b27db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of residues present on the alignment if it is aligned. <br /></td></tr>
@@ -273,19 +283,16 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#ab6b16a670e278cd5e283573665fa450f">isAligned</a></td></tr>
 <tr class="memdesc:ab6b16a670e278cd5e283573665fa450f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag that indicates if all sequences on the alignment have the same length. <br /></td></tr>
 <tr class="separator:ab6b16a670e278cd5e283573665fa450f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada2fb94cccdf0760c22dab39d278680c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#ada2fb94cccdf0760c22dab39d278680c">dataType</a></td></tr>
-<tr class="memdesc:ada2fb94cccdf0760c22dab39d278680c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number that represents the type of the alignment.  <a href="#ada2fb94cccdf0760c22dab39d278680c">More...</a><br /></td></tr>
-<tr class="separator:ada2fb94cccdf0760c22dab39d278680c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23f06ad268f0e720bf3d5699a4cb7225"><td class="memItemLeft" align="right" valign="top"><a id="a23f06ad268f0e720bf3d5699a4cb7225"></a>
-string *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a23f06ad268f0e720bf3d5699a4cb7225">sequences</a></td></tr>
+string *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a23f06ad268f0e720bf3d5699a4cb7225">sequences</a> = NULL</td></tr>
 <tr class="memdesc:a23f06ad268f0e720bf3d5699a4cb7225"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequences vector containing the sequences residues. <br /></td></tr>
 <tr class="separator:a23f06ad268f0e720bf3d5699a4cb7225"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4bf60277ddf15e935a15b22becd6ad9"><td class="memItemLeft" align="right" valign="top"><a id="aa4bf60277ddf15e935a15b22becd6ad9"></a>
-string *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#aa4bf60277ddf15e935a15b22becd6ad9">seqsName</a></td></tr>
+string *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#aa4bf60277ddf15e935a15b22becd6ad9">seqsName</a> = NULL</td></tr>
 <tr class="memdesc:aa4bf60277ddf15e935a15b22becd6ad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequences names vector containing the sequences names. <br /></td></tr>
 <tr class="separator:aa4bf60277ddf15e935a15b22becd6ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4e91d14819ffa8e6e57ae7c23d35327"><td class="memItemLeft" align="right" valign="top"><a id="ad4e91d14819ffa8e6e57ae7c23d35327"></a>
-string *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#ad4e91d14819ffa8e6e57ae7c23d35327">seqsInfo</a></td></tr>
+string *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#ad4e91d14819ffa8e6e57ae7c23d35327">seqsInfo</a> = NULL</td></tr>
 <tr class="memdesc:ad4e91d14819ffa8e6e57ae7c23d35327"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequences information vector containing extra information about each sequence. <br /></td></tr>
 <tr class="separator:ad4e91d14819ffa8e6e57ae7c23d35327"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c9904f7a01e200bd167f3cf736af4d6"><td class="memItemLeft" align="right" valign="top"><a id="a6c9904f7a01e200bd167f3cf736af4d6"></a>
@@ -297,21 +304,27 @@ string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 <tr class="memdesc:a34b1ee01d1030ce737034b35f3631e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">String containing information of the alignment as a whole. <br /></td></tr>
 <tr class="separator:a34b1ee01d1030ce737034b35f3631e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a792877eafe085fe6aa5b267901fe5be9"><td class="memItemLeft" align="right" valign="top"><a id="a792877eafe085fe6aa5b267901fe5be9"></a>
-float **&#160;</td><td class="memItemRight" valign="bottom"><b>identities</b></td></tr>
+float **&#160;</td><td class="memItemRight" valign="bottom"><b>identities</b> = NULL</td></tr>
 <tr class="separator:a792877eafe085fe6aa5b267901fe5be9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3e4e212986c435b3573d94f4483f156"><td class="memItemLeft" align="right" valign="top"><a id="ad3e4e212986c435b3573d94f4483f156"></a>
-float **&#160;</td><td class="memItemRight" valign="bottom"><b>overlaps</b></td></tr>
+float **&#160;</td><td class="memItemRight" valign="bottom"><b>overlaps</b> = NULL</td></tr>
 <tr class="separator:ad3e4e212986c435b3573d94f4483f156"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5239bd4e742631b58efc7f09dd67f165"><td class="memItemLeft" align="right" valign="top"><a id="a5239bd4e742631b58efc7f09dd67f165"></a>
-int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a5239bd4e742631b58efc7f09dd67f165">saveResidues</a></td></tr>
+int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a5239bd4e742631b58efc7f09dd67f165">saveResidues</a> = NULL</td></tr>
 <tr class="memdesc:a5239bd4e742631b58efc7f09dd67f165"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector containing which residues will be kept/removed.<br />
 -1 Indicates a 'removed/toRemove'. Otherwise it will be kept. <br /></td></tr>
 <tr class="separator:a5239bd4e742631b58efc7f09dd67f165"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76d057ddcebc7c88dd7f9e3ff0ce95bf"><td class="memItemLeft" align="right" valign="top"><a id="a76d057ddcebc7c88dd7f9e3ff0ce95bf"></a>
-int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a76d057ddcebc7c88dd7f9e3ff0ce95bf">saveSequences</a></td></tr>
+int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#a76d057ddcebc7c88dd7f9e3ff0ce95bf">saveSequences</a> = NULL</td></tr>
 <tr class="memdesc:a76d057ddcebc7c88dd7f9e3ff0ce95bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector containing which sequences will be kept/removed.<br />
 -1 Indicates a 'removed/toRemove'. Otherwise it will be kept. <br /></td></tr>
 <tr class="separator:a76d057ddcebc7c88dd7f9e3ff0ce95bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ada2fb94cccdf0760c22dab39d278680c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_alignment.html#ada2fb94cccdf0760c22dab39d278680c">dataType</a> = 0</td></tr>
+<tr class="memdesc:ada2fb94cccdf0760c22dab39d278680c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number that represents the type of the alignment.  <a href="#ada2fb94cccdf0760c22dab39d278680c">More...</a><br /></td></tr>
+<tr class="separator:ada2fb94cccdf0760c22dab39d278680c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class containing an alignment<br />
@@ -319,7 +332,7 @@ int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
  It contains multiple methods regarding the sequences.<br />
  It also contains submodules that provide methods for<b> Calculating statistics</b>, <b> Cleaning the alignment</b> and<b> Printing sequences information</b>. </p>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8h_source.html#l00073">73</a> of file <a class="el" href="new_alignment_8h_source.html">newAlignment.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8h_source.html#l00069">69</a> of file <a class="el" href="new_alignment_8h_source.html">newAlignment.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a26d10a23f8f71f95657a05e88a9a8fff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a26d10a23f8f71f95657a05e88a9a8fff">&#9670;&nbsp;</a></span>alignmentColourHTML()</h2>
@@ -348,17 +361,17 @@ It doesn't report any trimming result, meaning this only shows information of an
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if everything went ok. <br />
  <b>False</b> if alignment is not aligned. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l02364">2364</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01980">1980</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a26d10a23f8f71f95657a05e88a9a8fff_cgraph.svg" width="468" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a26d10a23f8f71f95657a05e88a9a8fff_cgraph.svg" width="456" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="a3377e8d600e1cbb9e65adf2995c877f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3377e8d600e1cbb9e65adf2995c877f9">&#9670;&nbsp;</a></span>alignmentSummaryHTML()</h2>
+<a id="a40a70c64e7c2f42806ef209fcd57360e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40a70c64e7c2f42806ef209fcd57360e">&#9670;&nbsp;</a></span>alignmentSummaryHTML()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,32 +379,14 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">bool newAlignment::alignmentSummaryHTML </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="classnew_alignment.html">newAlignment</a> &amp;&#160;</td>
+          <td class="paramname"><em>_trimmedAlignment</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>destFile</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>residues</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>seqs</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>selectedRes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>selectedSeq</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -411,11 +406,8 @@ Here is the call graph for this function:</div>
 It contains information about the original and trimmed alignments, showing which residues and sequences have been kept and which ones have been removed on the output. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">_trimmedAlignment</td><td>Trimmed alignment obtained from the object calling this function. </td></tr>
     <tr><td class="paramname">destFile</td><td>Filename where to save the results. </td></tr>
-    <tr><td class="paramname">residues</td><td>Number of residues present on the trimmed alignment. </td></tr>
-    <tr><td class="paramname">seqs</td><td>Number of sequences present on the trimmed alignment. </td></tr>
-    <tr><td class="paramname">selectedRes</td><td>Vector containing the indexes of the original alignment residues that are kept on the trimmed alignment. </td></tr>
-    <tr><td class="paramname">selectedSeq</td><td>Vector containing the indexes of the original alignment sequences that are kept on the trimmed alignment. </td></tr>
     <tr><td class="paramname">consValues</td><td>Vector containing the consistency values of columns.<br />
  The consistency may be a null pointer, meaning we don't want to report consistency values. </td></tr>
   </table>
@@ -424,11 +416,11 @@ It contains information about the original and trimmed alignments, showing which
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if everything went ok. <br />
  <b>False</b> if file couldn't be open or alignment is not aligned. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01253">1253</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01081">1081</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a3377e8d600e1cbb9e65adf2995c877f9_cgraph.svg" width="486" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a40a70c64e7c2f42806ef209fcd57360e_cgraph.svg" width="474" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -458,7 +450,7 @@ This is, the frequency of the most present element in the column, being residue,
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l01168">1168</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00996">996</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -518,11 +510,11 @@ If nucleotide sequence is smaller than protein sequence * 3, it adds some 'N' at
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if all went right.<br />
  <b>False</b> if there is a sequence in the alignment but not in the names vector. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00798">798</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00654">654</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_ae8501233fe4f4ef6bfe30c99c744c7c2_cgraph.svg" width="468" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_ae8501233fe4f4ef6bfe30c99c744c7c2_cgraph.svg" width="456" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -557,22 +549,17 @@ It checks if sequences contain unknown characters, sets the isAligned flag and i
  <b>False</b> if there was a problem.<br />
 This could happen if the sequences contain any unknown character or if aligned flag is set up to corrent, if the sequences have variable sizes. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00885">885</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00730">730</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_acbeb320f0f70222f81a906ccfc33a016_cgraph.svg" width="400" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_acbeb320f0f70222f81a906ccfc33a016_icgraph.svg" width="414" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_acbeb320f0f70222f81a906ccfc33a016_cgraph.svg" width="388" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
 <a id="a3de39c62c08a265178f1fa7df76c3ab7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3de39c62c08a265178f1fa7df76c3ab7">&#9670;&nbsp;</a></span>fillNewDataStructure() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3de39c62c08a265178f1fa7df76c3ab7">&#9670;&nbsp;</a></span>fillNewDataStructure()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -606,40 +593,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00578">578</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_a3de39c62c08a265178f1fa7df76c3ab7_icgraph.svg" width="654" height="392"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="a54b8820f397c14cf4d8d5bc8a89daf24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54b8820f397c14cf4d8d5bc8a89daf24">&#9670;&nbsp;</a></span>fillNewDataStructure() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void newAlignment::fillNewDataStructure </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structnew_values.html">newValues</a> *&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Method that copies information of the alignment to the pointers given. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">data</td><td><a class="el" href="structnew_values.html">newValues</a> struct to fill with sequences and sequences names. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00598">598</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00462">462</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -668,11 +622,16 @@ Here is the caller graph for this function:</div>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00560">560</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00444">444</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_ae1ee3ea76e1cb268097f1df0c465d6f5_cgraph.svg" width="452" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_ae1ee3ea76e1cb268097f1df0c465d6f5_icgraph.svg" width="652" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -696,7 +655,7 @@ Here is the call graph for this function:</div>
 <p>blockSize getter. </p>
 <dl class="section return"><dt>Returns</dt><dd>blockSize. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00402">402</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00288">288</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -719,7 +678,7 @@ Here is the call graph for this function:</div>
 <p>Method that returns the correspondence between old and new alignment residues. </p>
 <dl class="section return"><dt>Returns</dt><dd>Vector that represents which residues are kept (!= -1) and which are rejected (== -1) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00566">566</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00450">450</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -742,7 +701,7 @@ Here is the call graph for this function:</div>
 <p>Method that returns the correspondence between old and new alignment sequences. </p>
 <dl class="section return"><dt>Returns</dt><dd>Vector that represents which sequences are kept (!= -1) and which are rejected (== -1) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00570">570</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00454">454</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -765,7 +724,7 @@ Here is the call graph for this function:</div>
 <p>Residues getter. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of residues in the alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00381">381</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00271">271</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -788,7 +747,7 @@ Here is the call graph for this function:</div>
 <p>Getter for the number of species. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of sequences in the alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00374">374</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00267">267</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -832,7 +791,7 @@ If the sequence is present, its order on the alignment sequences vector will be 
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if both sets have the same sequences.<br />
  <b>False</b> otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00535">535</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00421">421</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -860,7 +819,7 @@ If the sequence is present, its order on the alignment sequences vector will be 
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00515">515</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00401">401</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -899,7 +858,7 @@ If the sequence is present, its order on the alignment sequences vector will be 
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00520">520</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00406">406</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -950,7 +909,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00527">527</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00413">413</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -959,8 +918,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a3d1ff48743c38351c7e755f94baebf03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d1ff48743c38351c7e755f94baebf03">&#9670;&nbsp;</a></span>getTranslationCDS()</h2>
+<a id="a781fd0f2ae6a9bda2802ffd28372bfaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a781fd0f2ae6a9bda2802ffd28372bfaa">&#9670;&nbsp;</a></span>getTranslationCDS()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -968,43 +927,9 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname"><a class="el" href="classnew_alignment.html">newAlignment</a> * newAlignment::getTranslationCDS </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>newResidues</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>newSequences</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>columnsToKeep</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string *&#160;</td>
-          <td class="paramname"><em>oldSequencesNames</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classsequences_matrix.html">sequencesMatrix</a> *&#160;</td>
-          <td class="paramname"><em>sequenceMatrix</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td>
-          <td class="paramname"><em>proteinAlignment</em>&#160;</td>
-        </tr>
-        <tr>
+          <td class="paramname"><em>proteinAlignment</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1013,18 +938,13 @@ Here is the call graph for this function:</div>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Check the need for so many arguments. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">newResidues</td><td>Number of residues of the new alignment, it should be 3 x old.residNumber </td></tr>
-    <tr><td class="paramname">newSequences</td><td>Number of residues of the new alignment, it should be the same as old.sequenNumber </td></tr>
-    <tr><td class="paramname">columnsToKeep</td><td>Columns to keep ? IDK really. </td></tr>
-    <tr><td class="paramname">oldSequencesNames</td><td>Sequences names. </td></tr>
-    <tr><td class="paramname">sequenceMatrix</td><td>sequence Matrix. </td></tr>
-    <tr><td class="paramname">proteinAlignment</td><td>original alignment. </td></tr>
+    <tr><td class="paramname">proteinAlignment</td><td>Protein Alignment to use as origin. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to new alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00257">257</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00202">202</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1047,7 +967,7 @@ Here is the call graph for this function:</div>
 <p>isAligned getter. </p>
 <dl class="section return"><dt>Returns</dt><dd>Wheter the alignment is aligned or not. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00574">574</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00458">458</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1098,11 +1018,11 @@ It will also remove or split stop codons depending on the flags passed. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00616">616</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00480">480</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_ad50ba126247276cd0bf89119e439c483_cgraph.svg" width="422" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classnew_alignment_ad50ba126247276cd0bf89119e439c483_cgraph.svg" width="410" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -1131,7 +1051,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00966">966</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00798">798</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1159,7 +1079,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00394">394</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00280">280</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1213,7 +1133,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00398">398</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00284">284</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1252,7 +1172,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00389">389</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8cpp_source.html#l00275">275</a> of file <a class="el" href="new_alignment_8cpp_source.html">newAlignment.cpp</a>.</p>
 
 </div>
 </div>
@@ -1262,17 +1182,25 @@ Here is the call graph for this function:</div>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">newAlignment::dataType</td>
+          <td class="memname">newAlignment::dataType = 0</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Number that represents the type of the alignment. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>We should change this from a define to a enum. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8h_source.html#l00094">94</a> of file <a class="el" href="new_alignment_8h_source.html">newAlignment.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8h_source.html#l00071">71</a> of file <a class="el" href="new_alignment_8h_source.html">newAlignment.h</a>.</p>
 
 </div>
 </div>
@@ -1283,7 +1211,7 @@ Here is the call graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">newAlignment::SequencesMatrix</td>
+          <td class="memname">newAlignment::SequencesMatrix = NULL</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1292,7 +1220,7 @@ Here is the call graph for this function:</div>
 . </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Give a good explanation of the module. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="new_alignment_8h_source.html#l00082">82</a> of file <a class="el" href="new_alignment_8h_source.html">newAlignment.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="new_alignment_8h_source.html#l00080">80</a> of file <a class="el" href="new_alignment_8h_source.html">newAlignment.h</a>.</p>
 
 </div>
 </div>

@@ -1,10 +1,10 @@
 <map id="sequencesMatrix" name="sequencesMatrix">
-<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="615,544,719,571"/>
-<area shape="rect" id="node10" href="$class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="633,635,699,661"/>
-<area shape="rect" id="node14" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="5,635,132,661"/>
-<area shape="rect" id="node3" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="126,333,233,359"/>
-<area shape="rect" id="node6" href="$classstatistics_conservation.html" title="statisticsConservation" alt="" coords="411,430,563,457"/>
-<area shape="rect" id="node9" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="504,243,615,269"/>
-<area shape="rect" id="node12" title="STL class. " alt="" coords="937,243,1017,269"/>
-<area shape="rect" id="node13" title="STL class. " alt="" coords="913,5,1040,47"/>
+<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="784,513,888,540"/>
+<area shape="rect" id="node3" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="608,633,715,660"/>
+<area shape="rect" id="node6" href="$classstatistics_conservation2.html" title="statisticsConservation2" alt="" coords="185,633,343,660"/>
+<area shape="rect" id="node10" href="$class_cleaner.html" title="Subclass contained by the alignment object to make cleaning operations on it. " alt="" coords="1123,633,1189,660"/>
+<area shape="rect" id="node14" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="767,633,894,660"/>
+<area shape="rect" id="node9" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="181,513,291,540"/>
+<area shape="rect" id="node12" title="STL class. " alt="" coords="987,96,1067,123"/>
+<area shape="rect" id="node13" title="STL class. " alt="" coords="963,5,1090,47"/>
 </map>

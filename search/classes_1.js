@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['newalignment',['newAlignment',['../classnew_alignment.html',1,'']]],
-  ['newvalues',['newValues',['../structnew_values.html',1,'']]]
+  ['cleaner',['Cleaner',['../class_cleaner.html',1,'']]],
+  ['comparefiles',['compareFiles',['../classcompare_files.html',1,'']]]
 ];

@@ -1,10 +1,10 @@
 <map id="Cleaner" name="Cleaner">
-<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="789,475,893,501"/>
-<area shape="rect" id="node5" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="1049,452,1171,479"/>
-<area shape="rect" id="node14" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="1047,565,1173,592"/>
-<area shape="rect" id="node3" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="391,684,497,711"/>
-<area shape="rect" id="node9" href="$classstatistics_conservation.html" title="statisticsConservation" alt="" coords="521,377,673,404"/>
-<area shape="rect" id="node12" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="248,364,359,391"/>
-<area shape="rect" id="node6" title="STL class. " alt="" coords="557,125,637,152"/>
-<area shape="rect" id="node7" title="STL class. " alt="" coords="240,126,367,167"/>
+<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="605,315,709,342"/>
+<area shape="rect" id="node3" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="891,447,998,474"/>
+<area shape="rect" id="node5" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="884,170,1005,197"/>
+<area shape="rect" id="node9" href="$classstatistics_conservation2.html" title="statisticsConservation2" alt="" coords="865,746,1024,773"/>
+<area shape="rect" id="node14" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="881,323,1008,350"/>
+<area shape="rect" id="node12" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="601,766,712,793"/>
+<area shape="rect" id="node6" title="STL class. " alt="" coords="305,13,385,39"/>
+<area shape="rect" id="node7" title="STL class. " alt="" coords="5,5,132,47"/>
 </map>

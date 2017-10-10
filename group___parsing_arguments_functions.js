@@ -37,6 +37,9 @@ var group___parsing_arguments_functions =
     [ "stats_arguments", "group___parsing_arguments_functions.html#ga1bae281d1fb2c0a49f9e88c83ba5684a", null ],
     [ "strict_argument", "group___parsing_arguments_functions.html#gaa008bef3630f5c8e37280359d7f5608c", null ],
     [ "strict_plus_argument", "group___parsing_arguments_functions.html#ga6b6046796e345bef35474c895c681fb7", null ],
+    [ "svg_out_argument", "group___parsing_arguments_functions.html#ga283312269b266ac48febb634f1813c59", null ],
+    [ "svg_stats_argument", "group___parsing_arguments_functions.html#ga0fa8ada73a3fc538c7bb9526fefb58bc", null ],
     [ "terminal_only_argument", "group___parsing_arguments_functions.html#gac3e103640f3c3a4bbbd61f780dfd481f", null ],
+    [ "verbosity_argument", "group___parsing_arguments_functions.html#ga8c785d63c51ce490cef86dff573c7e36", null ],
     [ "window_argument", "group___parsing_arguments_functions.html#ga54e5f7e5c36b532547b5d822ad59a193", null ]
 ];

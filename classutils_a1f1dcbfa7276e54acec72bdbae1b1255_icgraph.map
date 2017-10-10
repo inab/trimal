@@ -1,3 +1,6 @@
 <map id="utils::checkAlignmentType" name="utils::checkAlignmentType">
-<area shape="rect" id="node2" href="$classnew_alignment.html#ae1ee3ea76e1cb268097f1df0c465d6f5" title="Alignment type getter. " alt="" coords="229,5,447,32"/>
+<area shape="rect" id="node2" href="$classnew_alignment.html#ae1ee3ea76e1cb268097f1df0c465d6f5" title="Alignment type getter. " alt="" coords="229,46,447,73"/>
+<area shape="rect" id="node3" href="$classstatistics_conservation2.html#aeaef2f53cd750c692795d663fdef866e" title="Computes the matrix identity between alignment&#39;s columns. " alt="" coords="495,5,656,47"/>
+<area shape="rect" id="node5" href="$classstatistics_conservation2.html#af9b347fdfff37c662d6336d9b3a01b4d" title="Method to calculate the conservation values of a alignment matrix. " alt="" coords="496,71,655,112"/>
+<area shape="rect" id="node4" href="$classstatistics_conservation2.html#a41e0e4c03c21e41bfa2c4d01b6dc046a" title="Constructor without any parameters. " alt="" coords="704,5,871,47"/>
 </map>
