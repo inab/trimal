@@ -477,24 +477,6 @@ void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) {
     }
 }
 
-void newAlignment::fillNewDataStructure(newValues *data) {
-    int i, j, k;
-
-    // Copy only those sequences/columns selected
-    for(i = 0, j = 0; i < sequenNumber; i++) {
-        if(saveSequences[i] == -1)
-            continue;
-
-        data -> seqsName[j] = seqsName[i];
-        for(k = 0; k < residNumber; k++) {
-            if(saveResidues[k] == -1)
-                continue;
-            data -> matrix[j].resize(data -> matrix[j].size() + 1, sequences[i][k]);
-        }
-        j++;
-    }
-}
-
 bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon,\
         newAlignment *proteinAlig) {
 

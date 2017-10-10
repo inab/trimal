@@ -85,11 +85,6 @@ It contains methods and variables related to Statistics calculation and reportin
 /**
 \var newAlignment::identities
 */
-
-/**
-\var newAlignment::residuesNumber
-\brief Number of residues of this alignment, if it is aligned.
-*/
     
 /**
 \var newAlignment::saveResidues
@@ -230,15 +225,10 @@ Moreover, the method computes which one is the most similar sequence, in term of
 */
 
 /**
-\fn newAlignment::getTranslationCDS(int newResidues, int newSequences, int * columnsToKeep, string * oldSequencesNames, sequencesMatrix * sequenceMatrix, newAlignment * proteinAlignment)
+\fn newAlignment::getTranslationCDS(newAlignment * proteinAlignment)
 \brief Method to obtain a DNA alignment from a Protein alignment.
 \todo Check the need for so many arguments.
-\param newResidues Number of residues of the new alignment, it should be 3 x old.residNumber
-\param newSequences Number of residues of the new alignment, it should be the same as old.sequenNumber
-\param columnsToKeep Columns to keep ? IDK really.
-\param oldSequencesNames Sequences names.
-\param sequenceMatrix sequence Matrix.
-\param proteinAlignment original alignment.
+\param proteinAlignment Protein Alignment to use as origin.
 \return Pointer to new alignment.
 */
 
@@ -262,12 +252,6 @@ If nucleotide sequence is smaller than protein sequence * 3, it adds some 'N' at
 \brief Method that copies information of the alignment to the pointers given.
 \param[out] newMatrix Sequences vector to fill.
 \param[out] newNames Names vector to fill.
-*/
-
-/**
-\fn newAlignment::fillNewDataStructure(newValues * data)
-\brief Method that copies information of the alignment to the pointers given.
-\param[out] data newValues struct to fill with sequences and sequences names.
 */
 
 /**
@@ -317,11 +301,8 @@ It will also remove or split stop codons depending on the flags passed.
 \fn newAlignment::alignmentSummaryHTML(char * destFile, int residues, int seqs, int * selectedRes, int * selectedSeq, float * consValues)
 \brief Method to report the trimming results in HTML.\n
 It contains information about the original and trimmed alignments, showing which residues and sequences have been kept and which ones have been removed on the output.
+\param _trimmedAlignment Trimmed alignment obtained from the object calling this function.
 \param destFile Filename where to save the results.
-\param residues Number of residues present on the trimmed alignment.
-\param seqs Number of sequences present on the trimmed alignment.
-\param selectedRes Vector containing the indexes of the original alignment residues that are kept on the trimmed alignment.
-\param selectedSeq Vector containing the indexes of the original alignment sequences that are kept on the trimmed alignment.
 \param consValues Vector containing the consistency values of columns.\n The consistency may be a null pointer, meaning we don't want to report consistency values.
 \return \b True if everything went ok. \n \b False if file couldn't be open or alignment is not aligned.
 */

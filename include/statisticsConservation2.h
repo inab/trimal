@@ -80,8 +80,6 @@ public:
 
     /**
         \brief Method to calculate the conservation values of a alignment matrix.
-        \todo Give a description to alignmentMatrix
-        \param alignmentMatrix Vector containing all sequences and their residues forming a matrix.
         \param gaps Vector containing the gaps info.
     */
     bool calculateVectors(int *gaps);

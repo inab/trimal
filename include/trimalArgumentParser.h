@@ -114,11 +114,6 @@ class trimAlManager
     std::vector<std::string> oformats;
 
 public:
-///\addtogroup TrimalParsingArguments
-///@{ 
-    ///\addtogroup ParsingArgumentsFunctions 
-    // read arguments.
-    ///@{ 
     void parseArguments(int argc, char *argv[]);
 private:
         void verbosity_argument(int* argc, char* argv[]);
@@ -162,15 +157,12 @@ private:
         bool col_numbering_argument(int* argc, char* argv[], int* i);
         bool split_by_stop_codon_argument(int* argc, char* argv[], int* i);
         bool ignore_stop_codon_argument(int* argc, char* argv[], int* i);
-    
-    ///@}
+
 public:
     bool processArguments(char* argv[]);
     
 private:
-        ///\addtogroup CheckIncompatibilities 
-    // Check incompatibilities between arguments
-        ///@{ 
+
         bool check_arguments_incompatibilities();
             bool check_inFile_incompatibilities();
             bool check_select_cols_and_seqs_incompatibilities();
@@ -183,11 +175,7 @@ private:
             bool check_codon_behaviour_incompatibility();
             bool check_combinations_among_thresholds_incompatibility();
             bool check_automated_manual_incompatibilities();
-        ///@}
 
-        ///\addtogroup CheckNeeds 
-    // Check cross arguments needs.
-        ///@{ 
         bool check_arguments_needs(char* argv[]);
 
             bool check_force_selection();
@@ -207,12 +195,7 @@ private:
             bool check_backtranslation_infile_names_corresponde();
             void check_cw_argument(); // TODO <- HAS TO CHANGE ITS NAME
             void check_output_format();
-        ///@}
-            
-    
-    ///\addtogroup PerformAlgorithm 
-// Arguments are valid, perform.
-    ///@{ 
+
 public:
     int perform();
 private:
@@ -220,21 +203,18 @@ private:
         bool create_or_use_similarity_matrix();
         void clean_alignment();
         void set_window_size();
-        
-    ///@}
-    ///\addtogroup OtherMethods
-    ///@{ 
+
     void delete_variables();
     
     // NON COMPLEX OPTIONS
     void menu();
     void examples();
-    ///@}
+
 
 private:
     ReadWriteMS ReadWriteMachine;
 };
-///@}
+
 
 
 #endif //TRIMAL_TRIMALARGUMENTPARSER_H

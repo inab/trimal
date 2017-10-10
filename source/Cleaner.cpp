@@ -551,11 +551,6 @@ newAlignment* Cleaner::cleanByCutValue(double cutGaps, const int *gInCol, float 
     return newAlig;
 }
 
-newAlignment* Cleaner::cleanByCutValueV2(double GapsCutPoint, const int *GapsInColumn, float PercentToKeep, float ConsCutPoint, const float *MDK_Win, bool complementary) {
-
-    return NULL;
-}
-
 newAlignment* Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, const float *MDK_W, bool complementary, bool variable) {
 
     int i, x, pos, counter, num, lenBlock;
@@ -1379,80 +1374,6 @@ void Cleaner::removeSmallerBlocks(int blockSize) {
         for(j = pos; j < i; j++)
             _alignment -> saveResidues[j] = -1;
     return ;
-}
-
-// Function designed to identify columns and sequences composed only by gaps.
-// Once these columns/sequences have been identified, they are removed from
-// final newAlignment.
-newValues Cleaner::removeCols_SeqsAllGaps(void) {
-    int i, j, valid, gaps;
-    bool warnings = false;
-    newValues counter;
-
-    // Check all valid columns looking for those composed by only gaps
-    for(i = 0, counter.residues = 0; i < _alignment -> residNumber; i++) {
-        if(_alignment -> saveResidues[i] == -1)
-            continue;
-
-        for(j = 0, valid = 0, gaps = 0; j < _alignment -> sequenNumber; j++) {
-            if (_alignment -> saveSequences[j] == -1)
-                continue;
-            if (_alignment -> sequences[j][i] == '-')
-                gaps ++;
-            valid ++;
-        }
-        
-        // Once a column has been identified, warm about it and remove it
-        if(gaps == valid) {
-            if(!warnings)
-                cerr << endl;
-            warnings = true;
-            debug.report(WarningCode::RemovingOnlyGapsColumn);
-            _alignment -> saveResidues[i] = -1;
-            _alignment -> residNumber--;
-        } else {
-            counter.residues ++;
-        }
-    }
-
-    // Check for those selected sequences to see whether there is anyone with only gaps
-    for(i = 0, counter.sequences = 0; i < _alignment -> sequenNumber; i++) {
-        if(_alignment -> saveSequences[i] == -1)
-            continue;
-
-        for(j = 0, valid = 0, gaps = 0; j < _alignment -> residNumber; j++) {
-            if(_alignment -> saveResidues[j] == -1)
-                continue;
-            if (_alignment -> sequences[i][j] == '-')
-                gaps ++;
-            valid ++;
-        }
-        // Warm about it and remove each sequence composed only by gaps
-        if(gaps == valid) {
-            warnings = true;
-
-            if(keepSequences) {
-                debug.report(WarningCode::KeepingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
-                counter.sequences ++;
-            } else {
-                debug.report(WarningCode::RemovingOnlyGapsColumn, new std::string[1] { _alignment->seqsName[i] });
-                _alignment -> saveSequences[i] = -1;
-                _alignment -> sequenNumber --;
-            }
-        } else {
-            counter.sequences ++;
-        }
-    }
-    if(warnings)
-        cerr << endl;
-
-    if (counter.matrix != NULL) delete [] counter.matrix;
-    if (counter.seqsName != NULL) delete [] counter.seqsName;
-
-    counter.matrix = new string[counter.sequences];
-    counter.seqsName = new string[counter.sequences];
-
-    return counter;
 }
 
 void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) {

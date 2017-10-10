@@ -41,13 +41,13 @@ class compareFiles {
   public:
 /**
  \brief Print the consistency value for each column from the selected alignment.
- \param numAminos Number of aminos in the alignment
+ \param _alignment Alignment used to obtain the accumulated consistency value
  \param compareVect Vector containing the consistency value for each column.
  */
     static void printStatisticsFileColumns(newAlignment& _alignment, float * compareVect);
 /**
  \brief Print the accumulated consistency value from the selected alignment.
- \param numAminos Number of aminos in the alignment
+ \param _alignment Alignment used to obtain the accumulated consistency value
  \param compareVect Vector containing the consistency value for each column.
  */
     static void printStatisticsFileAcl(newAlignment& _alignment, float * compareVect);
@@ -69,27 +69,7 @@ class compareFiles {
  \param verbosity Wether or not report by printing some results.
  \return \b -1 if there was any error.\n <b> Alignment index </b> of the selected algorithm otherwise.
  */
-//     static int algorithm(alignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity);
-/**
- \brief Method to compare a set of alignments to select the most consistent one respect the others.\n 
- To compute the consistency values we use the proportion of residue pairs per columns in the alignments to compare.
- \param vectAlignments Alignment vector to compare and select the most consistent.
- \param fileNames Vector containing all the filenames. Useful only if verbosity==True.
- \param[out] columnsValue Consistency values of selected alignment.
- \param numAlignments Number of alignments to compare.
- \param verbosity Wether or not report by printing some results.
- \return \b -1 if there was any error.\n <b> Alignment index </b> of the selected algorithm otherwise.
- */
     static int algorithm(newAlignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity);
-/**
- \brief Method to obtain the consistency values vector for a given alignment against a set of alignments with the same sequences.
- \param vectAlignments Alignment vector to compare against the selected alignment
- \param numAlignments Number of alignments to compare
- \param selected Alignment to compare against the set of alignments.
- \param[out] columnsValue Vector to fill with the consistency values.
- \return Wether or not the method went ok.
- */
-//     static bool forceComparison(alignment **vectAlignments, int numAlignments, alignment *selected, float *columnsValue);
 /**
  \brief Method to obtain the consistency values vector for a given alignment against a set of alignments with the same sequences.
  \param vectAlignments Alignment vector to compare against the selected alignment
