@@ -147,6 +147,13 @@ inline void trimAlManager::info_arguments(int *argc, char *argv[], int *i)
         examples();
         exit(0); // We don't want to continue if we show the examples.
     }
+    
+    if (!strcmp(argv[*i], "-lf") || !strcmp(argv[*i], "--listformats"))
+    {
+        cout << "Input Formats:  "  << ReadWriteMachine.getInputFormatsAvailable() << endl;
+        cout << "Output Formats: "  << ReadWriteMachine.getOutputFormatsAvailable();
+        exit(0);
+    }
 }
 
 inline bool trimAlManager::in_argument(int *argc, char *argv[], int *i)
