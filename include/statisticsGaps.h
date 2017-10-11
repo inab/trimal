@@ -38,6 +38,7 @@ using namespace std;
 /* ***************************************************************************************************************** */
 
 class newAlignment;
+/// \brief Class to handle Gaps statistics
 class statisticsGaps {
 public:
     

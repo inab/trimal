@@ -180,8 +180,6 @@ public:
 
     bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, newAlignment * proteinAlignment);
 
-//     bool alignmentSummaryHTML(char *destFile, int residues, int seqs, int *selectedRes, int *selectedSeq, float *consValues);
-    
     bool alignmentSummaryHTML(newAlignment& _trimmedAlignment, char *destFile, float *consValues);
     
     bool alignmentSummarySVG(newAlignment & _trimmedAlignment, char *destFile, float *consValues, int blocks = 120);

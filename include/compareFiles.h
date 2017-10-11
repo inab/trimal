@@ -36,6 +36,7 @@
 // #include "alignment.h"
 #include "newAlignment.h"
 
+/// \brief Helper class to handle the comparison between alignments. It also handles Consistency staticstics.
 class compareFiles {
 
   public:

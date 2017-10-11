@@ -31,14 +31,21 @@ private:
     
 public:
     
+    /// \brief Tag to know if the machine has an output file or it has to output to console.
     bool hasOutputFile  = true;
+    /// \brief Tag to know if the machine should shorten the names on the formats it's possible to.
     bool shortNames     = false;
+    /// \brief Tag to know if the machine should keep original headers.
     bool keepHeader     = false;
+    /// \brief Tag to know if sequences should be reversed before saving them.
     bool reverse        = false;
     
     // LEGACY PARAMETERS
+    /// \brief Tag to know if the machine should output the format information about the alignment.
     bool format         = false;
+    /// \brief Tag to know if the machine should output the type of the alignment.
     bool type           = false;
+    /// \brief Tag to know if the machine should output the information of the alignment.
     bool info           = false;
     
     /**

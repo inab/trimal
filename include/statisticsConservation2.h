@@ -46,6 +46,7 @@ using namespace std;
 /*                                       Header Class File: StatisticsConservation.                                  */
 /* ***************************************************************************************************************** */
 
+/// \brief Class to handle Conservation / Similarity statistics
 class statisticsConservation2 {
 public:
 

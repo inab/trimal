@@ -34,6 +34,8 @@
 
 using namespace std;
 
+class newAlignment;
+
 /** \brief Class containing a sequences matrix
  *
  * This class stores the alignment sequences matrix. It provides
@@ -41,8 +43,6 @@ using namespace std;
  * It also provides methods for look to a column in the matrix and
  * for look to value at the position (row, column) in the matrix.
  */
-class newAlignment;
-
 class sequencesMatrix {
     /**
      * \brief Number of residues per sequence.

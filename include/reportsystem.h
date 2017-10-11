@@ -215,7 +215,8 @@ class __reporter {
     bool CanReport;
     
     public:
-        
+    
+    /// \brief Constructor
     __reporter(bool CanReport) : CanReport{CanReport} { }
     
     /// \brief Overloaded operator that allows to use this object as it was an iostream, as cout.
