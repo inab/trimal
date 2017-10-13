@@ -1,0 +1,512 @@
+/*!
+\page WhatCanIDo
+
+\section WhatIntroduction How to use
+
+\b trimAl is a program that can do a variety of things. The first thing to take in mind is <i> What input do I have? </i>
+
+- \link OneMSA I have a Multiple Sequence Alignment \endlink
+- I have a DNA alignment and a Protein alignment that contain the same sequences, but translated.
+- \link CompareSet I have several Multiple Sequence Alignment with the same sequences. \endlink
+
+
+
+
+
+
+
+
+
+
+
+\subsection OneMSA One Multiple Sequence Alignment.
+Having one Multiple Sequence Alignment you have multiple options available:
+
+- \link Heuristic Heuristic Trimming \endlink
+- \link Automatic Automatic Trimming \endlink
+- \link Manual Manual Trimming \endlink
+- \link Manual Manual Trimming \endlink
+
+- \link Clustering \endlink
+
+\subsection CompareSet More than one Sequence Alignment.
+It's possible, by using different transformations on the same input data, to have multiple MSA where you have the same sequences, aligned differently.\n
+This may happen when you use different aligners, or different transformations to the same data.\n
+It can also happen that you want to apply different transformations on these alignments you have, obtaning more alignments for each alignment you have, and, thus, obtain exponential results on each step.\n
+This may result in really computational intensive, and, in some cases, redundant, as most of these alignments may be nearly the same.\n \n
+
+\b trimAl has a functionality to solve this problem: \b Compareset \n
+Instead of using the '-in' option, you can provide a file containing a filepath per line for each MSA you want to compare.\n
+Then, only the most representative alignment will be selected, reducing the number of alignments and allowing to make multiple transformations and reduce the number to one alignment again.\n
+
+\b trimAl will:
+- For each alignment in the set:
+    - For each other alignment in the set:
+        - For each sequence, present on both alignments.
+            - For each residue, calculate the consistency between sequences.
+            - Calculate the consistency between both sequences, averaging the consistency of the residues.
+        - Calculate the consistency between both alignments, averaging the consistency of their sequences.
+    - Calculate the consistency of the alignment in the set, averaging the consistencies between other alignments in the set.
+- Select the alignment with the highest consistency.
+
+The Alignment with the highest consistency will be selected, and, then, you can use this alignment as it was provided using the '-in' option.\n
+This means, you can do any type of trimming or stats reporting you would when inputting a single alignment.\n
+Added to that, you can use also compareset specific arguments: ConsistencyThreshold, ConsistencyWindow
+
+\link OneMSA One Multiple Sequence Alignment \endlink
+
+
+
+\subsection Heuristic Heuristic Trimming
+\b trimAl offers multiple Automatic Methods, and selecting one of them can be tricky. \n
+If you don't know what method you should use, you can always use the Heuristic approximation, which would select one of two methods (strict and gappyout) depending on some characteristics of your alignment.\n
+To use the Heuristic method, you only have to provide the alignment file and use the '-automated1' argument. \n
+Example:
+\code
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -automated1
+\endcode
+
+Further Tweaking:
+- \link HalfWindows Half Windows \endlink
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection Automatic Automatic Trimming
+\b trimAl offers multiple Automatic Methods: Gappyout, Strict, StrictPlus
+- gappyout: This method uses gaps statistics to calculate wether or not to keep a residue.
+- strict: This method uses gaps and similarity statistics to calculate wether or not to keep a residue.
+- strictplus: This method is almost identical to the -strict, but fixes the window to 5, which is the same as setting the half window to 2.
+
+To use any of the methods you simply have to provide the input alignment and use the argument.
+Example:
+\code
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strictplus
+\endcode
+
+
+
+
+
+
+
+\subsection Manual Manual Trimming
+Semi-automatic methods allow the user to provide statistics cut-offs and windows to trim it's alignments semi-automatically:
+\par Manual Trimming: Thresholds
+
+- gt X will cut the residues based on their gaps score, using X as cut-off point.
+- st X will cut the residues based on their similarity score, using X as cut-off point.
+- ct X will cut the residues based on their consistency score, using X as cut-off point. (This option is only available if using the -compareset argument)
+
+\code
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -st 0.4
+\endcode
+
+\par Manual Trimming: Windows.
+
+When using statistics, a half window can be provided.\n
+This half window will be used after calculating each column statistic, making the value for that column the median of the values of the window: The column value and half-window to left and right of that column.\n\n
+
+This allows us to smooth the values and trim the alignment less sparsely, analyzing the alignment as continuum data, and not a sum-of-parts.\n\n
+
+The windows can be set individually:
+- gw X ~ Gap half Window.
+- sw X ~ Similarity half Window.
+- cw X ~ Consistency half Window.
+
+Or they can be set globally:
+- w X ~ General half Window.
+
+\warning Combination of global and specific windows is not allowed.
+\note It's recommended to use the 'cw' instead of 'w'. Using compareset and 'w' will report an info message.
+
+Example:
+\code 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5 -gw 5
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -st 0.5 -sw 10
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5 -gw 2 -st 0.8 -sw 2
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5 -st 0.5 -w 3
+ trimal -compareset dataset/alignments_comparison.X -gt 0.5 -st 0.5 -ct 0.5 -gw 2 -sw 2 -cw 4
+
+\endcode
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection Scrap Manual Scrapping
+Manually removing sequences and columns from an alignment may be needed, so \b trimAl offers this possibility using selectcols and selectseqs
+- selectcols { X } will remove the residues specified inside the braces. \n
+- selectseqs { X } will remove the sequences specified inside the braces. 
+
+To specify sequences or residues, you can provide a number, simply placing the number between the braces. { X } \n
+You can provide a range, including the first number and up to, but not including, the second, specifying numbers using a dash '-' as separator, inside the braces. { X-Y } \n
+To provide a combination among positions and ranges, you can use the comma ',' as a separator { X,Y } \n
+It's worth to mention that the system is 0-based. \n \n
+
+To better explain how to specify what to remove, here are some examples: \n
+
+To remove the second residue of the alignment, or, the residue number 1:
+\code
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols { 1 }
+\endcode
+
+To remove from the second residue up to, but not including, the fifth, or from residue 1 to 4 (4 not inclusive):
+\code
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols { 1-4 }
+\endcode
+
+To provide two ranges, from 1 to 4, and 5 to 7:
+\code
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols { 1-4,5-7 }
+\endcode
+
+\note Don't forget the spaces between the braces and the specified residues/sequences. \n For example, this calls would result in errors:
+\code
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols {1-4,5-7 }
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols { 1}
+\endcode
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection Clustering Clustering
+\b trimAl can shrink your MSA using clustering:
+It will perform some clusterization and, then, use the most representative sequence of each cluster to provide a new alignment.\n
+This allow us to remove redundant information or sequences that are almost identical.\n \n
+
+There are two ways of doing clustering: specifying a number of clusters or sequences, and specifying a identity cut-off, with variable number of clusters.\n \n
+
+To use the first method, simply provide an input alignment, the cluster argument and the number of sequences you want to obtain.\n
+The clusters value should be the same or lower to the number of sequences.\n
+\code
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -clusters 2
+\endcode
+
+To use the second method, simply provide an input alignment, the maxidentity argument and a cut-off value.\n
+The cut-off value should be in the range 0 ~ 1.
+\code
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -maxidentity 0.5
+\endcode
+
+
+
+
+
+
+
+
+\section FurtherTweaks Further Tweaks
+
+\subsection TerminalOnly Further Tweaks: Terminal Only
+MSAs tend to have a central no-gaps zone, and that zone may be interesting to keep it without trimming, and so can be done with the terminalonly argument.
+
+Terminal Only works with any automated or semi-automated method, and allows us to keep that central block untouched.
+
+Example:
+\code 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -automated1 -terminalonly
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout   -terminalonly
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict     -terminalonly
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strictplus -terminalonly
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5     -terminalonly
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -st 0.4     -terminalonly
+\endcode
+
+\subsection CustomMatrix Further Tweaks: Custom Similarity Matrix
+\b trimAl has default Similarity Matrices for all the possible datatypes that allows as input.\n
+Default is Blossum62 but the user can input a custom Similarity Matrix with the matrix argument.
+
+Example:
+\code 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -matrix X
+\endcode
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection Block Further Tweaks: Block
+
+\todo TODO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection Complementary Further Tweaks: Complementary Alignment
+All methods allow the user to obtain the complementary sequence. This can be achieved using the complementary argument.
+
+Example:
+\code 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict     -complementary
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout   -complementary
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.2     -complementary
+\endcode
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section OutputTweaks Output Tweaks
+
+
+\subsection Out Output Tweaks: Output to file
+By default \b trimAl will output the resulting alignment in the same format as the input alignment throught the console it has been launched.\n
+Moreover, it offers the possibility to save the result directly on a file, or multiple files with the -out argument\n
+
+To use the out argument, simply provide the argument and a filepath where to store the results.\n
+
+Example:
+\code 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -out results/trimmed_example.fasta
+\endcode
+
+The out argument also allows the user to not only provide a filepath but a filepath pattern, where some tags will be replaced with some information about the input alignment and the output format:
+
+- [in] will be replaced with the original alignment filename.
+- [format] will be replaced with the output format name.
+- [extension] will be replaced with the most-known output format file extension.
+
+Example:
+\code 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -out results/[in].trimmed.[format].[extension]
+ 
+ Will produce the output file: "results/example.076.AA.strNOG.ENOG411BH75.trimmed.fasta.fasta"
+\endcode
+
+\note Althougth you can use these tags in the filename / filename pattern, it's not compulsory the use of them, and you can simply provide a hardcoded output filename as we show on the first example of this section.
+
+You can also use this tags on the whole filepath, not only the filename, allowing to have a multiple folders organization, up to the user.
+
+\code 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -out results/[in]/trimmed.[extension]
+ 
+ Will produce the output file: "results/example.076.AA.strNOG.ENOG411BH75/trimmed.fasta"
+\endcode
+
+\note In the previous example, the trimmed file would be outputted to a folder with the same name as the input file. \n
+While this is allowed, \b trimAl will only output to files if the folders already exist.\n
+<b> It will not create new folders. </b>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection Formats Output Tweaks: Multiple Formats
+As mentioned on the previous section, \b trimAl allows to output on different formats, and it allows to output the result on multiple formats without the need to do the same trimming all over again or perform a format conversion.\n
+It you plan to output in multiple formats, it's compulsory that you specify a filepattern, as outputting by console would lead to multiple formats being outputted and may be difficult to split them, so \b trimAl would produce an error if so.\n
+You can specify a simple filename instead of a filepatten but the file would be ovewritten for each format specified, wasting time and resources.\n\n
+
+<i> Specifying output formats can be achieved in two ways: Legacy and non-Legacy. </i>\n\n
+
+Legacy way has multiple formats that are introduced as arguments to the program:
+
+| Argument           |          Information                                                                          | 
+|--------------------|-----------------------------------------------------------------------------------------------|
+| -nbrf              | Output file in NBRF/PIR format                                                                | 
+| -mega              | Output file in MEGA format                                                                    | 
+| -nexus             | Output file in NEXUS format                                                                   | 
+| -clustal           | Output file in CLUSTAL format                                                                 | 
+| -fasta             | Output file in FASTA format                                                                   | 
+| -fasta_m10         | Output file in FASTA format. Sequences name length up to 10 characters.                       | 
+| -phylip            | Output file in PHYLIP/PHYLIP4 format                                                          | 
+| -phylip_m10        | Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters.              | 
+| -phylip_paml       | Output file in PHYLIP format compatible with PAML                                             | 
+| -phylip_paml_m10   | Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters. | 
+| -phylip3.2         | Output file in PHYLIP3.2 format                                                               | 
+| -phylip3.2_m10     | Output file in PHYLIP3.2 format. Sequences name length up to 10 characters.                   | 
+
+Example:
+\code 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -fasta
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout -clustal -out results/[in].trimmed.[format].[extension]
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.2 -out [in].[format] -fasta -clustal -nbrf
+\endcode
+
+\note Althougth Legacy arguments are allowed, there is another way of specifying the formats, and is using the -formats argument, followed by the identifier of each of the formats we want the format to be in. \n
+It is encouraged to use this argument instead of the Legacy ones, as new formats will be implemented this way, but no new Legacy Format Arguments will be added.
+
+To obtain a list of all the formats that are available, you can use the argument '-lf' or '--listformats'. This option will output a list of formats available as input and output.
+
+\code 
+trimal -lf 
+trimal --listformats 
+
+> Input Formats:  clustal, fasta, pir, phylip32, phylip40, nexus, mega_interleaved, mega_sequential  
+> Output Formats: clustal, fasta, pir, phylip32, phylip40, phylip_paml, nexus, mega_sequential, html  
+\endcode
+
+\note It is allowed to use a combination among Legacy and non-Legacy, as showed below, althougth it is not recommended.
+\code trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -fasta -formats nbrf clustal \endcode
+
+
+
+
+
+
+
+
+
+\section ReportingTweaks Reporting Tweaks
+
+\subsection ColNum Reporting Tweaks: Column Numbering
+When trimming an alignment, we usually want to have some kind of insight of what, how and why it happened with our data.\n
+One of the easiest ways to achieve this is throught the Column Numbering argument.\n
+This will output by console a list of all the columns that have been kept on the trimmed alignment.
+
+Example:
+\code
+trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout -colnumbering
+\endcode
+
+
+
+
+
+\subsection Stats Reporting Tweaks: Stats
+Althougth having knowledge of what has been kept and what has been removed from our alignment is informative, there are more informative methods.\n
+One of them is the Stats Arguments. These arguments are capable of outputting by console the stats of the original alignment, and thus, they give an insight of not only 'what' but 'why'.
+
+General Statistics (Allowed to use them with -compareset and -in options)
+| Argument | Meaning                                                                                   |
+|----------|-------------------------------------------------------------------------------------------|
+|-sgc      | Print gap scores for each column in the input alignment.                                  |
+|-sgt      | Print accumulated gap scores for the input alignment.                                     |
+|-ssc      | Print similarity scores for each column in the input alignment.                           |
+|-sst      | Print accumulated similarity scores for the input alignment.                              |
+
+Consistency Statistics (Allowed to use them with -compareset but not the -in option)
+| Argument | Meaning                                                                                   |
+|----------|-------------------------------------------------------------------------------------------|
+|-sfc      | Print sum-of-pairs scores for each column from the selected alignment                     |
+|-sft      | Print accumulated sum-of-pairs scores for the selected alignment                          |
+
+This statistics are pretty printed, and that may not suit the needs when using that data rather than check it manually.\n
+We explain how to obtain data that may be suitable for this purpose.\n
+
+- (Optional) To remove the colors on the output, you can use the regex expression: "\x1B\[[0-9;]*[mK]" \n
+    - This is only needed if you plan to parse the colored lines which contains: Filename, Statistic requested, Column width and Column names.\n
+- You can recognize the start of a statistic using the '#' token, that is present on the first 3 lines.\n
+- Later, we can remove the first 4 lines. They contain information about the filename, the statistic that is going to be showed, the width of the columns and a line separator.\n
+- The column width is always 20, so you can split each line in 20 characters, and each segment corresponds to each column.\n
+- The first values are the column names. They can occupy 2~3 lines, depending on the statistic requested.\n
+- The next line after the column names contains another line separator, which can be discarted too\n
+    - If you are only interested on the values, you can count until you reach the second line that starts with '-'. Next line contains the values.
+- After that you can continue splitting lines by 20 chars until end of output or finding another '#' which would mean another statistic has started it's output.\n
+
+
+There are also two types of extra statistics which aren't pretty printed.\n
+This is due to the fact they show a matrix of size sequences x sequences, so this results are nearly imposible to pretty print.
+| Argument | Meaning                                                                                   |
+|----------|-------------------------------------------------------------------------------------------|
+|-sident   | Print identity scores for all sequences in the input alignment.                           |
+|-soverlap | Print overlap scores matrix for all sequences in the input alignment.                     |
+Example:
+\code
+trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -sgc -sgt -ssc -sst
+\endcode
+
+
+
+
+
+
+
+
+
+\subsection HTMLSVG Reporting Tweaks: HTML and SVG Reporting
+\b trimAl also offers a pair of pseudo-formats that contain almost all the information needed to know what and why some residues/sentences have been rejected or kept.\n
+You can obtain these reports using the hmltout and svgout arguments.\n
+To use them you have to provide a filename where to store this reports.\n
+
+\note You must trim your alignment in order to obtain these reports. Any trimming method is valid.
+
+Example: 
+\code
+trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -htmlout htmlreport.html -svgout svgreport.svg -strict
+\endcode
+
+
+
+*/
