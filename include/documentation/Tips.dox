@@ -448,7 +448,7 @@ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout -colnumberi
 Althougth having knowledge of what has been kept and what has been removed from our alignment is informative, there are more informative methods.\n
 One of them is the Stats Arguments. These arguments are capable of outputting by console the stats of the original alignment, and thus, they give an insight of not only 'what' but 'why'.
 
-General Statistics (Allowed to use them with -compareset and -in options)
+General Statistics (Allowed to use them with either -compareset and -in options)
 | Argument | Meaning                                                                                   |
 |----------|-------------------------------------------------------------------------------------------|
 |-sgc      | Print gap scores for each column in the input alignment.                                  |
