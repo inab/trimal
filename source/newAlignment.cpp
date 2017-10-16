@@ -841,18 +841,18 @@ void newAlignment::printSeqIdentity(void) {
     int i, j, k, pos, maxLongName;
     float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
 
-    // Ask for the sequence identities afileesment
+    // Ask for the sequence identities assesment
     if(identities == NULL)
         Cleaning -> calculateSeqIdentity();
 
     // For each sequence, we look for its most similar one
-    maxs = new float*[sequenNumber];
+    maxs = new float*[originalSequenNumber];
 
-    for(i = 0; i < sequenNumber; i++) {
+    for(i = 0; i < originalSequenNumber; i++) {
         maxs[i] = new float[2];
 
         // Get the most similar sequence to the current one in term of identity
-        for(k = 0, mx = 0, avg = 0, pos = i; k < sequenNumber; k++) {
+        for(k = 0, mx = 0, avg = 0, pos = i; k < originalSequenNumber; k++) {
             if(i != k) {
                 avg += identities[i][k];
                 if(mx < identities[i][k]) {
@@ -862,7 +862,7 @@ void newAlignment::printSeqIdentity(void) {
             }
         }
         // Update global average variables
-        avgSeq += avg/(sequenNumber - 1);
+        avgSeq += avg/(originalSequenNumber - 1);
         maxAvgSeq += mx;
 
         // Save the maximum average identity value for each sequence
@@ -871,18 +871,18 @@ void newAlignment::printSeqIdentity(void) {
     }
 
     // Compute general averages 
-    avgSeq = avgSeq/sequenNumber;
-    maxAvgSeq = maxAvgSeq/sequenNumber;
+    avgSeq = avgSeq/originalSequenNumber;
+    maxAvgSeq = maxAvgSeq/originalSequenNumber;
 
     // Compute longest sequences name
-    for(i = 0, maxLongName = 0; i < sequenNumber; i++)
+    for(i = 0, maxLongName = 0; i < originalSequenNumber; i++)
         maxLongName = utils::max(maxLongName, seqsName[i].size());
 
     // Once the method has computed all of different values, it prints it
     cout.precision(4);
     cout << fixed;
 
-    for(i = 0, maxSeq = 0; i < sequenNumber; i++)
+    for(i = 0, maxSeq = 0; i < originalSequenNumber; i++)
         if(maxs[i][0] > maxSeq)
             maxSeq = maxs[i][0];
 
