@@ -1522,6 +1522,7 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
                     compareFiles::applyWindow(compareAlignmentsArray[referFile] -> getNumAminos(), windowSize, compareVect);
                 else if(consistencyWindow != -1)
                     compareFiles::applyWindow(compareAlignmentsArray[referFile] -> getNumAminos(), consistencyWindow, compareVect);
+                
                 origAlig = ReadWriteMachine.loadAlignment(filesToCompare[referFile]);
             }
             else
@@ -1807,7 +1808,7 @@ inline void trimAlManager::print_statistics()
     }
 
 
-    if (sgt || sgc || scc || sct || sfc || sft)
+//     if (sgt || sgc || scc || sct || sfc || sft)
     {
         if(sgc)
         {
