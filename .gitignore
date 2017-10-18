@@ -3,7 +3,6 @@
 *.pdf
 *.zip
 *.html
-*.ipynb
 *.save
 *.user
 *.cbp
