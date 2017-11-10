@@ -78,9 +78,7 @@ class Cleaner {
       \return Pointer to the cleaned alignment.
       */
      newAlignment *cleanByCutValue(double cutGaps, const int * gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary);
-     
-     newAlignment* cleanByCutValueV2(double GapsCutPoint, const int* GapsInColumn, float PercentToKeep, float ConsCutPoint, const float* MDK_Win, bool complementary);
-     
+
      /**
       \brief Method to clean an alignment. It carries out strict and strictplus.\n
       It removes sequences that<b> overpass </b>the gap threshold but<b> fall behind </b>the similarity threshold. \n
@@ -234,11 +232,7 @@ class Cleaner {
       \return <b>True</b> if everything went ok.\n<b> False </b>if it was not possible to calculate the gap stats. 
       */
      bool removeOnlyTerminal(void);
-/**
-      \brief Method that identifies and removes columns and sequences composed only by gaps.
-      \return newValues struct containing the number of residues and sequences after the cleaning of empty columns/sequences.
-      */
-     newValues removeCols_SeqsAllGaps(void);
+
      /**
       \brief Method that identifies and removes columns and sequences composed only by gaps.
       */

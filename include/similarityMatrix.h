@@ -38,6 +38,7 @@
 
 #include "defines.h"
 
+/// \brief Class that contains the similarity information of an alignment
 class similarityMatrix{
   int *vhash;
   float **simMat;

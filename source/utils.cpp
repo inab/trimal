@@ -245,38 +245,29 @@ void utils::quicksort(int **vect, int ini, int fin) {
 
     float elem_div;
     int i, j;
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     if ((ini >= fin) || (fin < 0))
         return;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     elem_div = vect[fin][0];
     i = ini - 1;
     j = fin;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     while (true) {
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        
         while (vect[++i][0] < elem_div) if(i == fin) break;
         while (vect[--j][0] > elem_div) if(j == 0)   break;
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        
         if(i < j) swap(&vect[i], &vect[j]);
         else break;
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        
     }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
     swap(&vect[i], &vect[fin]);
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     quicksort(vect, ini, i - 1);
     quicksort(vect, i + 1, fin);
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
 }
 
 void utils::swap(int **a, int **b) {
@@ -288,52 +279,46 @@ void utils::swap(int **a, int **b) {
     *b = temp;
 }
 
-/* *****************************************************************************
- *
- * START - Refactored code
- *
- * ************************************************************************** */
-
 bool utils::checkFile(ifstream &file) {
-    /* Check if a given file exists and its size is greater than 0 */
+    // Check if a given file exists and its size is greater than 0 
     long begin, end;
 
-    /* Check whether input file exists or not */
+    // Check whether input file exists or not 
     if(!file)
         return false;
 
-    /* Check input file sizes. A valid file should have a size grater than 0 */
+    // Check input file sizes. A valid file should have a size grater than 0 
     begin = file.tellg();
     file.seekg(0, ios::end);
     end = file.tellg();
     file.seekg(0, ios::beg);
-    /* Compare difference between file start and end.
-     * Depending on result, return True or False */
+    // Compare difference between file start and end.
+    // Depending on result, return True or False 
     if(!(end - begin))
         return false;
     return true;
 }
 
 char* utils::readLine(ifstream &file) {
-    /* Read a new line from current input stream. This function is better than
-     * standard one since cares of operative system compability. It is useful
-     * as well because remove tabs and blank spaces at lines beginning/ending */
+    // Read a new line from current input stream. This function is better than
+    // standard one since cares of operative system compability. It is useful
+    // as well because remove tabs and blank spaces at lines beginning/ending 
 
     int state;
     char c = ' ';
     string nline;
     char *line = NULL;
 
-    /* Check it the end of the file has been reached or not */
+    // Check it the end of the file has been reached or not
     if(file.eof())
         return NULL;
 
-    /* Store first line found. For -Windows & MacOS compatibility- carriage return
-     * is considered as well as a new line character */
+    // Store first line found. For -Windows & MacOS compatibility- carriage return
+    // is considered as well as a new line character
     for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
         nline.resize(nline.size() + 1, c);
 
-    /* Remove blank spaces & tabs from the beginning of the line */
+    // Remove blank spaces & tabs from the beginning of the line
     state = nline.find(" ", 0);
     while(state != (int) string::npos && state == 0) {
         nline.erase(state, 1);
@@ -346,12 +331,12 @@ char* utils::readLine(ifstream &file) {
         state = nline.find("\t", state);
     }
 
-    /* If there is nothing to return, give back a NULL pointer ... */
+    // If there is nothing to return, give back a NULL pointer ...
     if(nline.size() == 0)
         return NULL;
 
-    /* Otherwise, initialize the appropiate data structure,
-     * dump the data and return it */
+    // Otherwise, initialize the appropiate data structure,
+    // dump the data and return it 
     line = new char[nline.size() + 1];
     strcpy(line, nline.c_str());
     return line;
@@ -359,25 +344,25 @@ char* utils::readLine(ifstream &file) {
 
 char* utils::readLine(std::istream& file)
 {
-    /* Read a new line from current input stream. This function is better than
-     * standard one since cares of operative system compability. It is useful
-     * as well because remove tabs and blank spaces at lines beginning/ending */
+    // Read a new line from current input stream. This function is better than
+    // standard one since cares of operative system compability. It is useful
+    // as well because remove tabs and blank spaces at lines beginning/ending
 
     int state;
     char c = ' ';
     string nline;
     static char *line = NULL;
 
-    /* Check it the end of the file has been reached or not */
+    // Check it the end of the file has been reached or not
     if(file.eof())
         return NULL;
 
-    /* Store first line found. For -Windows & MacOS compatibility- carriage return
-     * is considered as well as a new line character */
+    // Store first line found. For -Windows & MacOS compatibility- carriage return
+    // is considered as well as a new line character
     for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
         nline.resize(nline.size() + 1, c);
 
-    /* Remove blank spaces & tabs from the beginning of the line */
+    // Remove blank spaces & tabs from the beginning of the line
     state = nline.find(" ", 0);
     while(state != (int) string::npos && state == 0) {
         nline.erase(state, 1);
@@ -390,116 +375,109 @@ char* utils::readLine(std::istream& file)
         state = nline.find("\t", state);
     }
 
-    /* If there is nothing to return, give back a NULL pointer ... */
+    // If there is nothing to return, give back a NULL pointer ...
     if(nline.size() == 0)
         return NULL;
 
-    /* Otherwise, initialize the appropiate data structure,
-     * dump the data and return it */
+    // Otherwise, initialize the appropiate data structure,
+    // dump the data and return it
     line = new char[nline.size() + 1];
     strcpy(line, &nline[0]);
     return line;
 }
 
 char* utils::trimLine(string nline) {
-    /* This function is used to remove comments inbetween a biological sequence.
-     * Remove all content surrounded by ("") or ([]). It wans as well when a
-     * mismatch for these flags is found */
+    // This function is used to remove comments inbetween a biological sequence.
+    // Remove all content surrounded by ("") or ([]). It wans as well when a
+    // mismatch for these flags is found 
 
     int pos, next;
     static char *line;
 
-    /* Set-up lower and upper limit to look for comments inside of input string */
+    // Set-up lower and upper limit to look for comments inside of input string
     pos = -1;
 
-    /* Identify comments inside of input sequence and remove it */
+    // Identify comments inside of input sequence and remove it
     while(true) {
         pos  = nline.find("\"", (pos + 1));
 
-        /* When there is not any more a comment inside of sequence,
-         * go out from this loop */
+        // When there is not any more a comment inside of sequence,
+        // go out from this loop 
         if(pos == (int) string::npos)
             break;
 
-        /* Look for closing flag */
+        // Look for closing flag
         next = nline.rfind("\"", nline.size());
 
-        /* If a pair of comments flags '"' is found, remove everything inbetween */
+        // If a pair of comments flags '"' is found, remove everything inbetween
         if((int) nline.find("\"", (pos + 1)) == next) {
             nline.erase(pos, (next - pos + 1));
             pos = -1;
         }
 
-        /* If there is only one flag '"' for comments inside of sequence,
-         * user should be warned about that */
+        // If there is only one flag '"' for comments inside of sequence,
+        // user should be warned about that
         if (pos == next) {
             debug.report(ErrorCode::PossibleMissmatch);
-//       cerr << endl << "ERROR: Possible (\") mismatch for comments" << endl;
             return NULL;
         }
     }
 
-    /* Look for other kind of comments, in this case those with [] */
+    // Look for other kind of comments, in this case those with []
     while(true) {
         pos = -1;
         next = -1;
 
-        /* Search for last opened bracket. It is supposed to be the first one for
-         * being close */
+        // Search for last opened bracket. It is supposed to be the first one for
+        // being close
         while((pos = nline.find("[", (pos + 1))) != (int) string::npos)
             next = pos;
 
-        /* If no opening bracket has been found.
-         * Check if there is any closing one */
+        // If no opening bracket has been found.
+        // Check if there is any closing one
         if (next == -1) {
-            /* There are not any bracket in input string */
+            // There are not any bracket in input string
             if ((int) nline.find("]", 0) == (int) string::npos)
                 break;
-            /* Otherwise, warn about the error */
+            // Otherwise, warn about the error
             debug.report(ErrorCode::BracketsMissmatchFound);
-//       cerr << endl << "ERROR: Brackets (]) mismatch found" << endl;
             return NULL;
         }
 
-        /* Look for closest closing bracket to the opening one found */
+        // Look for closest closing bracket to the opening one found
         pos = nline.find("]", (next + 1));
 
-        /* If no closing bracket has been found. Warn about the mismatch */
+        //If no closing bracket has been found. Warn about the mismatch
         if (pos == (int) string::npos) {
             debug.report(ErrorCode::BracketsMissmatchFound);
-//       cerr << endl << "ERROR: Brackets ([) mismatch found" << endl;
             return NULL;
         }
 
-        /* When both brackets have been found, remove comments inbetween them */
+        // When both brackets have been found, remove comments inbetween them
         nline.erase(next, (pos - next + 1));
     }
 
-    /* Check if after removing all comments from input string there is still part
-     * of sequences or not */
+    // Check if after removing all comments from input string there is still part
+    // of sequences or not
     if(nline.size() == 0)
         return NULL;
 
-    /* Initialize and store resulting sequence into an appropiate structure */
+    // Initialize and store resulting sequence into an appropiate structure
     line = new char[nline.size() + 1];
     strcpy(line, &nline[0]);
 
     return line;
 }
-/* *****************************************************************************
- *
- * END - Refactored code
- *
- * ************************************************************************** */
+
 string utils::getReverse(string toReverse) {
 
     string line;
     int i;
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     for(i = toReverse.size() - 1; i >= 0; i--)
         line += toReverse[i];
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
 
     return line;
 }
@@ -508,13 +486,13 @@ string utils::removeCharacter(char c, string line) {
 
     int pos;
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     pos = line.find(c, 0);
     while(pos != (int) string::npos) {
         line.erase(pos, 1);
         pos = line.find(c, pos);
     }
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
 
     return line;
 }
@@ -523,22 +501,22 @@ int utils::checkAlignmentType(int seqNumber, int residNumber, string *sequences)
 
     int i, j, k, l, hitDNA, hitRNA, degenerate, gDNA, gRNA, extDNA, extRNA;
     float ratioDNA, ratioRNA;
-    /* Standard tables */
+    // Standard tables
     char listRNA[11] = "AGCUNagcun";
     char listDNA[11] = "AGCTNagctn";
 
-    /* Degenerate Nucleotides codes */
+    // Degenerate Nucleotides codes
     char degeneratedCodes[21] = "MmRrWwSsYyKkVvHhDdBb";
 
-    /* For each sequences, this method locks at the 100 letters (excluding gaps).
-     * The method is able to distinguish between pure DNA/RNA nucleotides or those
-     * containing degenerate Nucleotide letters */
+    // For each sequences, this method locks at the 100 letters (excluding gaps).
+    // The method is able to distinguish between pure DNA/RNA nucleotides or those
+    // containing degenerate Nucleotide letters
     for(i = 0, gDNA = 0, gRNA = 0, extDNA = 0, extRNA = 0; i < seqNumber; i++) {
 
-        /* Looks at the 100 letters (excluding gaps) while doesn's get the sequence's end */
-        /* When there are less than a 100 characters, break the loop before reaching that limit */
+        // Looks at the 100 letters (excluding gaps) while doesn's get the sequence's end
+        // When there are less than a 100 characters, break the loop before reaching that limit
+        
         residNumber = (int) sequences[i].size();
-        //~ for(j = 0, k = 0, hitDNA = 0, hitRNA = 0, degenerate = 0; j < residNumber && k  < 100; j++)
         for(j = 0, k = 0, hitDNA = 0, hitRNA = 0, degenerate = 0; j < residNumber; j++)
             if(sequences[i][j] != '-' && sequences[i][j] != '.' && sequences[i][j] != '?') {
                 k++;
@@ -557,17 +535,17 @@ int utils::checkAlignmentType(int seqNumber, int residNumber, string *sequences)
                         degenerate++;
             }
 
-        /* If input sequences have less than 95% of nucleotides, even when residues
-         * are treated with degenerated codes, consider the input file as containing
-         * amino-acidic sequences. */
+        // If input sequences have less than 95% of nucleotides, even when residues
+        // are treated with degenerated codes, consider the input file as containing
+        // amino-acidic sequences. 
         ratioDNA = float(degenerate + hitDNA)/k;
         ratioRNA = float(degenerate + hitRNA)/k;
 
         if(ratioDNA < 0.95 && ratioRNA < 0.95)
             return SequenceTypes::AA;
 
-        /* Identify precisely if nucleotides sequences are DNA/RNA strict or
-         * any degenerate code has been used in the sequence */
+        // Identify precisely if nucleotides sequences are DNA/RNA strict or
+        // any degenerate code has been used in the sequence 
         else if(hitRNA > hitDNA && degenerate == 0)
             gRNA++;
         else if(hitRNA > hitDNA && degenerate != 0)
@@ -577,8 +555,8 @@ int utils::checkAlignmentType(int seqNumber, int residNumber, string *sequences)
         else if(hitRNA < hitDNA && degenerate != 0)
             extDNA++;
     }
-    /* Return the datatype with greater values, considering always degenerate
-     * codes */
+    // Return the datatype with greater values, considering always degenerate
+    // codes 
     if (extDNA != 0 && extDNA > extRNA)
         return SequenceTypes::DNA | SequenceTypes::DEG;
     else if (extRNA != 0 && extDNA < extRNA)
@@ -598,7 +576,7 @@ int* utils::readNumbers_StartEnd(string line) {
     while((comma = line.find(",", comma + 1)) != (int) string::npos)
         nElems += 2;
 
-    //~ If there is more than two numbers separated by a comma, return NULL
+    // If there is more than two numbers separated by a comma, return NULL
     if(nElems != 2)
         return NULL;
 
@@ -615,77 +593,59 @@ int* utils::readNumbers(string line) {
 
     int i, comma, separ, init, nElems = 0;
     static int *numbers;
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     comma = -1;
     while((comma = line.find(",", comma + 1)) != (int) string::npos)
         nElems += 2;
     nElems += 2;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     numbers = new int[nElems + 1];
     numbers[0] = nElems;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     init = 0;
     i = 1;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
     do {
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
         comma = line.find(",", init);
         separ = line.find("-", init);
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        
         if(((separ < comma) || (comma == (int) string::npos)) && (separ != (int) string::npos)) {
             numbers[i++] = atoi(line.substr(init, separ - init).c_str());
             numbers[i++] = atoi(line.substr(separ+1, comma - separ - 1).c_str());
             init = comma + 1;
         }
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        
         else if((separ > comma) || (separ == (int) string::npos)) {
             numbers[i++] = atoi(line.substr(init, comma - init).c_str());
             numbers[i++] = atoi(line.substr(init, comma - init).c_str());
             init = comma + 1;
         }
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
-
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        
         if(numbers[i-2] < 0)
             return NULL;
         if(numbers[i-1] < numbers[i-2])
             return NULL;
         if(comma == (int) string::npos)
             break;
-        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        
     } while(true);
-
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     return numbers;
-    /* ***** ***** ***** ***** ***** ***** ***** ***** */
 }
 
 
 char utils::determineColor(char res, string column) {
 
-    /* ***** ***** ***** ***** ***** ***** ***** ***** ***** */
     if(toupper(res) == 'G')
         return 'o';
-    /* ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+    
     else if(toupper(res) == 'P')
         return 'y';
-    /* ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-
+    
     else if(res != '-') {
         switch(toupper(res)) {
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* (W, L, V, I, M, F): {50%, p}{60%, wlvimafcyhp} */
+        // (W, L, V, I, M, F): {50%, p}{60%, wlvimafcyhp} 
         case 87:
         case 76:
         case 86:
@@ -695,10 +655,10 @@ char utils::determineColor(char res, string column) {
             if(lookForPattern(column, "p", 0.5))                return 'b';
             else if(lookForPattern(column, "wlvimafcyhp", 0.6)) return 'b';
             else                                                return 'w';
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+        
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* (A): {50%, p}{60%, wlvimafcyhp}{85% t,s,g} */
+        
+        // (A): {50%, p}{60%, wlvimafcyhp}{85% t,s,g}
         case 65:
             if(lookForPattern(column, "p", 0.5))                return 'b';
             else if(lookForPattern(column, "wlvimafcyhp", 0.6)) return 'b';
@@ -706,85 +666,84 @@ char utils::determineColor(char res, string column) {
             else if(lookForPattern(column, "s", 0.85))          return 'b';
             else if(lookForPattern(column, "g", 0.85))          return 'b';
             else                                                return 'w';
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+        
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* BLUE: (C): {50%, p}{60%, wlvimafcyhp}{85% s}
-         * PINK: (C): {85%, c}
-        */
+        
+        // BLUE: (C): {50%, p}{60%, wlvimafcyhp}{85% s}
+        // PINK: (C): {85%, c}
         case 67:
             if(lookForPattern(column, "p", 0.5))                return 'b';
             else if(lookForPattern(column, "wlvimafcyhp", 0.6)) return 'b';
             else if(lookForPattern(column, "s", 0.85))          return 'b';
             else if(lookForPattern(column, "c", 0.85))          return 'p';
             else                                                return 'w';
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+        
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* (K, R): {60%, kr}{85%, q} */
+        
+        // (K, R): {60%, kr}{85%, q}
         case 75:
         case 82:
             if(lookForPattern(column, "kr", 0.6))               return 'r';
             else if(lookForPattern(column, "q", 0.85))          return 'r';
             else                                                return 'w';
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+        
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* (T): {50%, ts}{60%, wlvimafcyhp } */
+        
+        // (T): {50%, ts}{60%, wlvimafcyhp } 
         case 84:
             if(lookForPattern(column, "ts", 0.5))               return 'g';
             else if(lookForPattern(column, "wlvimafcyhp", 0.6)) return 'g';
             else                                                return 'w';
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+        
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* (S): {50%, ts}{80%, wlvimafcyhp } */
+        
+        // (S): {50%, ts}{80%, wlvimafcyhp }
         case 83:
             if(lookForPattern(column, "ts", 0.5))               return 'g';
             else if(lookForPattern(column, "wlvimafcyhp", 0.8)) return 'g';
             else                                                return 'w';
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+        
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* (N): {50%, n}{85%, d } */
+        
+        // (N): {50%, n}{85%, d }
         case 78:
             if(lookForPattern(column, "n", 0.5))                return 'g';
             else if(lookForPattern(column, "d", 0.85))          return 'g';
             else                                                return 'w';
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+        
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* (Q): {50%, qe}{60%, kr} */
+        
+        // (Q): {50%, qe}{60%, kr} 
         case 81:
             if(lookForPattern(column, "qe", 0.5))               return 'g';
             else if(lookForPattern(column, "kr", 0.6))          return 'g';
             else                                                return 'w';
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+        
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* (D): {50%, de, n} */
+        
+        // (D): {50%, de, n} 
         case 68:
             if(lookForPattern(column, "de", 0.5))               return 'm';
             else if(lookForPattern(column, "n", 0.5))           return 'm';
             else                                                return 'w';
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+        
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* (E): {50%, de,qe} */
+        
+        // (E): {50%, de,qe} 
         case 69:
             if(lookForPattern(column, "de", 0.5))               return 'm';
             else if(lookForPattern(column, "qe", 0.5))          return 'm';
             else                                                return 'w';
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+        
 
-        /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-        /* (H,Y): {50%, p}{60%, wlvimafcyhp} */
+        
+        // (H,Y): {50%, p}{60%, wlvimafcyhp} 
         case 72:
         case 89:
             if(lookForPattern(column, "p", 0.5))                return 'c';
             else if(lookForPattern(column, "wlvimafcyhp", 0.5)) return 'c';
             else                                                return 'w';
-            /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+            
         }
     }
     return 'w';
@@ -949,8 +908,7 @@ int utils::GetConsStep(float * consValue)
 
 void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std::string * lineColor, std::string * chartTitle, std::string * filename)
 {
-    static ofstream file/*, tempfile*/;
-//     static std::string tempfilename;
+    static ofstream file;
     static stringstream legend;
     static float lastX = INFINITY;
     static std::vector<std::string> linesLegend = std::vector<std::string>();
@@ -983,22 +941,11 @@ void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std
     if (filename && chartTitle)
     {
         file.open(*filename);
-//         tempfilename = std::tmpnam(nullptr);
-//         tempfile.open(tempfilename);
         tmpFile = std::tmpfile();
         // svg header
         file    << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" "
                 << "height=\""  << grayboxHeight << "\" "
                 << "width=\""   << grayboxWidth << "\">" << endl;
-
-//         // Gray box
-//         file    << "<rect "
-//                 << "width=\"" << grayboxWidth << "\" "
-//                 << "x=\"0\" "
-//                 << "height=\"" << grayboxHeight << "\" "
-//                 << "y=\"0\" "
-//                 << "style=\"fill:gray\" "
-//                 << "fill-opacity=\"0.1\" />" << endl;
 
         // White box
         file    << "<rect "
@@ -1008,16 +955,6 @@ void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std
                 << "height=\"" << whiteboxHeight << "\" "
                 << "style=\"fill:white; stroke:black; stroke-width:2\" "
                 << "/>" << endl;
-
-//         // Legend box
-//         file    << "<rect "
-//                 << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + 6 << "\" "
-//                 << "width=\"" << whiteboxWidth * legendRatio << "\" "
-//                 << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
-//                 << "height=\"" << whiteboxHeight << "\" "
-//                 << "style=\"fill:white; stroke:black; stroke-width:2\" "
-//                 << "fill-opacity=\"0.25\" "
-//                 << "/>" << endl;
 
         // Header text
         file    << "<text text-anchor=\"middle\" "
@@ -1116,7 +1053,7 @@ void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std
         deltaHeigth = std::min(whiteboxHeight * 0.12F, deltaHeigth);
         float height =  whiteboxWidth * legendRatio * 0.1F;
 
-//         Legend box
+        // Legend box
         file    << "<rect "
                 << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + 6 << "\" "
                 << "width=\"" << whiteboxWidth * legendRatio << "\" "
