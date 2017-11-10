@@ -27,16 +27,23 @@
 #include "../include/trimalArgumentParser.h"
 #include "../include/reportsystem.h"
 
+#include <ReadWriteMS/vcf_statish.h>
+
+
 int main(int argc, char *argv[])
 {
     debug.IsDebug = true;
-
-    trimAlManager Trimal = trimAlManager();
-
-    Trimal.parseArguments(argc, argv);
     
-    Trimal.processArguments(argv);
+    vcf_statish READER = vcf_statish();
+    
+    READER.readVCF("dataset/ngs/CANGAstrains_usingRef.vcf");
 
-    return Trimal.perform();
+//     trimAlManager Trimal = trimAlManager();
+// 
+//     Trimal.parseArguments(argc, argv);
+//     
+//     Trimal.processArguments(argv);
+// 
+//     return Trimal.perform();
     
 }

@@ -38,6 +38,8 @@ set(preview
         source/ReadWriteMS/ReadWriteMachineState.cpp
         source/reportsystem.cpp
         source/statisticsConservation2.cpp
+        
+        source/ReadWriteMS/vcf_statish.cpp
         )
 
 # Include all states of ReadWriteMachineState
