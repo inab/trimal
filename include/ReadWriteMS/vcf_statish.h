@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <newAlignment.h>
 
 class vcf_statish
 {
@@ -10,7 +11,7 @@ public:
     vcf_statish();
     ~vcf_statish();
     
-    void readVCF(std::string filename);
+    void readVCF(std::vector<newAlignment*> sources, std::string filename);
 };
 
 class vcf_file

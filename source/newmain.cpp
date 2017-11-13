@@ -36,7 +36,21 @@ int main(int argc, char *argv[])
     
     vcf_statish READER = vcf_statish();
     
-    READER.readVCF("dataset/ngs/CANGAstrains_usingRef.vcf");
+    ReadWriteMS IO;
+    
+    newAlignment * genome = IO.loadAlignment("dataset/ngs/CANGA_REF.fasta");
+    
+    auto XX = IO.splitAlignmentKeeping(*genome);
+    
+    delete genome;
+    
+    READER.readVCF(XX, "dataset/ngs/CANGAstrains_usingRef.vcf");
+    
+    for (int i = 0; i < XX.size(); i++)
+    {
+        delete XX[i];
+    }
+    
 
 //     trimAlManager Trimal = trimAlManager();
 // 

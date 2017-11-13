@@ -195,7 +195,10 @@ newAlignment::~newAlignment(void) {
         if(seqsInfo != NULL)
             delete [] seqsInfo;
         seqsInfo = NULL;
-
+    }
+    else if (*SeqRef < 0)
+    {
+        delete SeqRef;
     }
 }
 
