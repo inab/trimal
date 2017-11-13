@@ -6,6 +6,8 @@
 #include <vector>
 #include <iomanip>
 
+#include <algorithm>
+
 vcf_statish::vcf_statish()
 {
 
@@ -31,7 +33,6 @@ void vcf_statish::readVCF(std::vector<newAlignment*> sources, std::string filena
     std::vector<std::string> sequences = std::vector<std::string>();
     
     char * line = new char [4096];
-//     int counter = 0;
     while (infile.getline(line, 4096, '\n'))
     {
         
@@ -87,9 +88,9 @@ void vcf_statish::readVCF(std::vector<newAlignment*> sources, std::string filena
                     break;
             }
             
-            if (x == sequences.size())
+            if (i == sources.size())
             {
-                std::cout << sources[i]->seqsName[0] << " not found in sources" << endl;
+                std::cout << sequences[x] << " not found in sources" << endl;
                 checkIn = false;
             }
         }
@@ -100,59 +101,75 @@ void vcf_statish::readVCF(std::vector<newAlignment*> sources, std::string filena
         {
             for (newAlignment * nA : sources)
             {
+                
+                std::string * oldSequences  = nA->sequences;
+                std::string * oldNames      = nA->seqsName;
+                
                 std::string seq = nA->sequences[0];
                 std::string nam = nA->seqsName[0];
                 
-                delete [] nA->sequences;
-                delete [] nA->seqsName;
-                
-                nA -> sequences = new std::string[donors.size() + 1];
+                nA -> sequences = new std::string[donors.size() + nA->originalSequenNumber];
                 nA -> sequences[0] = seq;
                 
-                nA -> seqsName = new std::string[donors.size() + 1];
+                nA -> seqsName = new std::string[donors.size() + nA->originalSequenNumber];
                 nA -> seqsName[0] = nam;
                 
                 for (int i = 1; i < donors.size() + 1; i++)
                 {
                     nA->sequences[i] = seq.c_str();
                     nA->seqsName[i] = donors[i - 1];
-                    
-                    nA -> sequenNumber = donors.size() + 1;
                 }
+                
+                for (int i = 0; i < nA->originalSequenNumber - 1; i++)
+                {
+                    int pos = i + donors.size() + 1;
+                    nA->sequences[i + donors.size() + 1] = oldSequences[i + 1];
+                    nA->seqsName[i + donors.size() + 1] = oldNames[i + 1];
+                }
+                
+                nA->originalSequenNumber = donors.size() + nA->originalSequenNumber;
+                nA->sequenNumber = nA->originalSequenNumber;
+                
+                delete [] oldSequences;
+                delete [] oldNames;
+
             }
         }
-
+        else 
+        {
+            exit(122);
+        }
     }
     
     
     while (infile.getline(line, 4096, '\n'))
     {
         {
-            vcf_file::snp_entry snp = vcf_file::snp_entry();
+//             vcf_file::snp_entry snp = vcf_file::snp_entry();
             char * tmp;
             
             tmp = std::strtok(line, "\t");
-            snp.chromosome = new char[strlen(tmp) + 1];
-            std::memmove(snp.chromosome, tmp, strlen(tmp) + 1);
+            char * chromosome = new char[strlen(tmp) + 1];
+            std::memmove(chromosome, tmp, strlen(tmp) + 1);
             
             tmp = std::strtok(NULL, "\t");
-            snp.position = atoi(tmp);
+            int position = atoi(tmp);
             
             tmp = std::strtok(NULL, "\t");
             tmp = std::strtok(NULL, "\t");
             
-            snp.ref = new char[strlen(tmp) + 1];
-            std::memmove(snp.ref, tmp, strlen(tmp) + 1);
+            char * ref = new char[strlen(tmp) + 1];
+            std::memmove(ref, tmp, strlen(tmp) + 1);
             
             tmp = std::strtok(NULL, "\t");
-            snp.alt = new char[strlen(tmp) + 1];
-            std::memmove(snp.alt, tmp, strlen(tmp) + 1);
+            char * alt = new char[strlen(tmp) + 1];
+            std::memmove(alt, tmp, strlen(tmp) + 1);
             
             tmp = std::strtok(NULL, "\t");
-            snp.quality = atof(tmp);
+            float quality = atof(tmp);
             
             tmp = std::strtok(NULL, "\t");
-            snp.filter = std::strcmp(tmp, "PASS") ? false : true;
+            bool filter = std::strcmp(tmp, "PASS") ? false : true;
             
             
             // INFO
@@ -164,23 +181,22 @@ void vcf_statish::readVCF(std::vector<newAlignment*> sources, std::string filena
             tmp = std::strtok(NULL, "\t");
             
             std::cout   << std::left        << std::setw(15)
-                        << snp.chromosome   << std::setw(15)
-                        << snp.position     << std::setw(15)
-                        << snp.ref          << std::setw(15) 
+                        << chromosome   << std::setw(15)
+                        << position     << std::setw(15)
+                        << ref          << std::setw(15) 
                         << "~>"             << std::setw(15)
-                        << snp.alt          << std::setw(15)
-                        << snp.quality      << std::setw(15)
-                        << (strlen(snp.ref) == 1 && strlen(snp.alt) == 1) << std::setw(15)
-                        << (snp.filter ? "PASS" : "FILTERED");
+                        << alt          << std::setw(15)
+                        << quality      << std::setw(15)
+                        << (strlen(ref) == 1 && strlen(alt) == 1) << std::setw(15)
+                        << (filter ? "PASS" : "FILTERED");
             
             int counter = 1;
-            if (strlen(snp.ref) == 1 && strlen(snp.alt) == 1)
+            if (filter && strlen(ref) == 1 && strlen(alt) == 1)
             {
-                newAlignment * current;
                 int i;
                 for (i = 0; i < sequences.size(); i++)
                 {
-                    if (sequences[i] == snp.chromosome)
+                    if (sequences[i] == chromosome)
                         break;
                 }
                 if (i == sequences.size())
@@ -190,13 +206,13 @@ void vcf_statish::readVCF(std::vector<newAlignment*> sources, std::string filena
                 else
                     while (tmp != NULL)
                     {
-                        if (!strcmp(tmp, "0"))
+                        if (strlen(tmp) > 0)
                         {
                             std::cout << " " << donors[counter - 1];
                             
-                            if (sources[i]->sequences[counter][snp.position - 1] == snp.ref[0])
+                            if (sources[i]->sequences[counter][position - 1] == ref[0])
                             {
-                                sources[i]->sequences[counter][snp.position - 1] = '+'; //snp.alt[0];
+                                sources[i]->sequences[counter][position - 1] = alt[0];
                                 std::cout << "~";
                             }
                             else
@@ -224,8 +240,13 @@ void vcf_statish::readVCF(std::vector<newAlignment*> sources, std::string filena
             }
             
             std::cout << std::endl;
+            
+            delete [] chromosome;
+            delete [] ref;
+            delete [] alt;
         }
     }
+    
     std::cout << "~~> Sequences in FASTA" << std::endl;
     for (newAlignment * A : sources)
     {

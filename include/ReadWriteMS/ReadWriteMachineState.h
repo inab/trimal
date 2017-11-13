@@ -105,7 +105,10 @@ public:
             tempAlignment->sequences = new std::string[1];
             tempAlignment->sequences[0] = std::string(alignment.sequences[i]);
             tempAlignment->seqsName = new std::string[1] { alignment.seqsName[i] };
-            tempAlignment->sequenNumber++;
+            tempAlignment->sequenNumber = 1;
+            tempAlignment->originalSequenNumber = 1;
+            tempAlignment->residNumber = tempAlignment->sequences[0].size();
+            tempAlignment->originalResidNumber = tempAlignment->residNumber;
             splitted[i] = tempAlignment;
         }
         
