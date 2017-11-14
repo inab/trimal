@@ -18,85 +18,144 @@ vcf_statish::~vcf_statish()
 
 }
 
-void vcf_statish::readVCF(std::vector<newAlignment*> sources, std::string filename)
+void vcf_statish::readVCF(std::vector<newAlignment*> sources, std::vector<std::string> filenames, float minQuality)
 {
-
-    std::ifstream infile;
-    infile.open(filename);
-
-    if (!infile.is_open())
-    {
-        debug.report(ErrorCode::CantOpenFile, new std::string[1] { filename });
-    }
-    
+    // All donors present in the vcf files.
     std::vector<std::string> donors = std::vector<std::string>();
-    std::vector<std::string> sequences = std::vector<std::string>();
+    // Contigs present on the VCF files. Each entry must be present in the sources vector.
+    std::vector<std::string> contigs = std::vector<std::string>();
+    // Position on the reference files of each donor.
+    std::vector<std::vector<int>> donorsPositions = std::vector<std::vector<int>>();
+    
     
     char * line = new char [4096];
-    while (infile.getline(line, 4096, '\n'))
+    
+    // Obtain contigs and donors from all VCF files.
+    for (int C = 0; C < filenames.size(); C++)
     {
+        std::string& filename = filenames[C];
+        donorsPositions.push_back(std::vector<int>());
+//         donorsPositions[C] = std::vector<int>();
         
-        if (line[0] == '#')
+        std::ifstream infile;
+        infile.open(filename);
+
+        if (!infile.is_open())
         {
-            if (line[1] == '#')
+            debug.report(ErrorCode::CantOpenFile, &filename[0]);
+        }
+        
+        // Read file to get all the donors and contigs present on the VCF
+        while (infile.getline(line, 4096, '\n'))
+        {
+            if (line[0] == '#')
             {
-                // Remove first two characters;
-                memmove (line, line+2, strlen (line+2) + 2);
-                // Print result
-                char * field_name = std::strtok(line, "=");
-                
-                if (!strcmp(field_name, "contig"))
-                {           
-                    std::strtok(NULL, "=");
-                    char * field_info = std::strtok(NULL, ",");
-                    char * fname = new char [std::strlen(field_info) + 1];
-                    memmove(fname, field_info, strlen(field_info));
-                    fname[std::strlen(field_info)] = '\0';
-                    sequences.push_back(fname);
-                    delete[] fname;
-                }
-            }
-            
-            else
-            {
-                
-                std::strtok(strstr(line, "FORMAT"), "\t");
-                
-                char * token = std::strtok(NULL, "\t");
-                while (token != NULL)
+                if (line[1] == '#')
                 {
-                    char * fname = new char [std::strlen(token) + 1];
-                    memmove (fname, token, strlen (token));
-                    fname[std::strlen(token)] = '\0';
-                    donors.push_back(fname);
-                    token = std::strtok(NULL, "\t");
-                    delete[] fname;
+                    // Remove first two characters;
+                    memmove (line, line+2, strlen (line+2) + 2);
+                    // Print result
+                    char * field_name = std::strtok(line, "=");
+                    
+                    // We only want the contig fields
+                    if (!strcmp(field_name, "contig"))
+                    {           
+                        std::strtok(NULL, "=");
+                        char * field_info = std::strtok(NULL, ",");
+                        char * fname = new char [std::strlen(field_info) + 1];
+                        memmove(fname, field_info, strlen(field_info));
+                        fname[std::strlen(field_info)] = '\0';
+                        
+                        int U;
+                        // Check if the contig has already been added.
+                        for (U = 0; U < contigs.size(); U++)
+                        {
+                            if (contigs[U] == fname)
+                            {
+                                break;
+                            }
+                        }
+                        
+                        // If not, add it to the vector.
+                        if (U == contigs.size())
+                        {
+                            contigs.push_back(fname);
+                        }
+                        
+                        
+                        delete[] fname;
+                    }
                 }
-                break;
+                
+                else
+                {
+                    // We only want to parse the FORMAT line, which contains the donors.
+                    std::strtok(strstr(line, "FORMAT"), "\t");
+                    
+                    char * token = std::strtok(NULL, "\t");
+                    while (token != NULL)
+                    {
+                        char * fname = new char [std::strlen(token) + 1];
+                        memmove (fname, token, strlen (token));
+                        fname[std::strlen(token)] = '\0';
+                        
+                        int U;
+                        
+                        // Check every other donor already added.
+                        for (U = 0; U < donors.size(); U++)
+                        {
+                            if (donors[U] == fname)
+                            {
+                                break;
+                            }
+                        }
+                        
+                        // If not present, we add it
+                        if (U == donors.size())
+                        {
+                            donorsPositions[C].push_back(U);
+                            donors.push_back(fname);
+                        }
+                        
+                        // If already present, warn the user.
+                        else
+                        {
+                            donorsPositions[C].push_back(U);
+                            debug.report(WarningCode::DonorAlreadyAdded, &fname[0]);
+                        }
+                        
+                        token = std::strtok(NULL, "\t");
+                        delete[] fname;
+                    }
+                    break;
+                }
             }
         }
+        
+        infile.close();
     }
     
+    // Extend the files.
     {
+        // Check if all contigs have a reference alignment.
         bool checkIn = true;
-        for (int x = 0; x < sequences.size(); x++)
+        for (int x = 0; x < contigs.size(); x++)
         {
             int i;
             for (i = 0; i < sources.size(); i++)
             {
-                if (!strcmp(&sequences[x][0], &sources[i]->seqsName[0][0]) )
+                if (!strcmp(&contigs[x][0], &sources[i]->seqsName[0][0]) )
                     break;
             }
             
             if (i == sources.size())
             {
-                std::cout << sequences[x] << " not found in sources" << endl;
+                debug.report(ErrorCode::NoReferenceSequenceForContig, &contigs[x][0]);
                 checkIn = false;
             }
         }
         
-        std::cout << "Has all files?: " << (checkIn ? "True" : "False") << std::endl;
-        
+        // Extend the reference files with new sequences from donors.
         if (checkIn)
         {
             for (newAlignment * nA : sources)
@@ -135,118 +194,203 @@ void vcf_statish::readVCF(std::vector<newAlignment*> sources, std::string filena
 
             }
         }
-        else 
-        {
-            exit(122);
-        }
     }
     
-    
-    while (infile.getline(line, 4096, '\n'))
+    for (int C = 0; C < filenames.size(); C++)
     {
+        std::cout << filenames[C] << std::endl;
+        
+        std::ifstream infile;
+        infile.open(filenames[C]);
+        if (!infile.is_open())
         {
-//             vcf_file::snp_entry snp = vcf_file::snp_entry();
-            char * tmp;
-            
-            tmp = std::strtok(line, "\t");
-            char * chromosome = new char[strlen(tmp) + 1];
-            std::memmove(chromosome, tmp, strlen(tmp) + 1);
-            
-            tmp = std::strtok(NULL, "\t");
-            int position = atoi(tmp);
-            
-            tmp = std::strtok(NULL, "\t");
-            tmp = std::strtok(NULL, "\t");
-            
-            char * ref = new char[strlen(tmp) + 1];
-            std::memmove(ref, tmp, strlen(tmp) + 1);
-            
-            tmp = std::strtok(NULL, "\t");
-            char * alt = new char[strlen(tmp) + 1];
-            std::memmove(alt, tmp, strlen(tmp) + 1);
-            
-            tmp = std::strtok(NULL, "\t");
-            float quality = atof(tmp);
-            
-            tmp = std::strtok(NULL, "\t");
-            bool filter = std::strcmp(tmp, "PASS") ? false : true;
-            
-            
-            // INFO
-            std::strtok(NULL, "\t");
-            // FORMAT
-            std::strtok(NULL, "\t");
-            // Individues with this SNP
-            
-            tmp = std::strtok(NULL, "\t");
-            
-            std::cout   << std::left        << std::setw(15)
-                        << chromosome   << std::setw(15)
-                        << position     << std::setw(15)
-                        << ref          << std::setw(15) 
-                        << "~>"             << std::setw(15)
-                        << alt          << std::setw(15)
-                        << quality      << std::setw(15)
-                        << (strlen(ref) == 1 && strlen(alt) == 1) << std::setw(15)
-                        << (filter ? "PASS" : "FILTERED");
-            
-            int counter = 1;
-            if (filter && strlen(ref) == 1 && strlen(alt) == 1)
-            {
-                int i;
-                for (i = 0; i < sequences.size(); i++)
-                {
-                    if (sequences[i] == chromosome)
-                        break;
-                }
-                if (i == sequences.size())
-                {
-                    std::cout << "Not Found" << std::endl;
-                }
-                else
-                    while (tmp != NULL)
-                    {
-                        if (strlen(tmp) > 0)
-                        {
-                            std::cout << " " << donors[counter - 1];
-                            
-                            if (sources[i]->sequences[counter][position - 1] == ref[0])
-                            {
-                                sources[i]->sequences[counter][position - 1] = alt[0];
-                                std::cout << "~";
-                            }
-                            else
-                            {
-                                std::cout << "¬";
-                            }
-                            
-                        }
-                        
-                        counter ++;
-                        tmp = std::strtok(NULL, "\t");
-                    }
-            }
-            
-            counter = 0;
-            while (tmp != NULL)
-            {
-                if (!strcmp(tmp, "0"))
-                {
-                    std::cout << " " << donors[counter];
-                }
-                
-                counter ++;
-                tmp = std::strtok(NULL, "\t");
-            }
-            
-            std::cout << std::endl;
-            
-            delete [] chromosome;
-            delete [] ref;
-            delete [] alt;
+            debug.report(ErrorCode::CantOpenFile, &filenames[C][0]);
         }
-    }
+        
+        while (infile.getline(line, 4096, '\n'))
+        {
+            if (line[0] == '#') continue;
+            {
+                char * tmp;
+                
+                tmp = std::strtok(line, "\t");
+                char * chromosome = new char[strlen(tmp) + 1];
+                std::memmove(chromosome, tmp, strlen(tmp) + 1);
+                
+                tmp = std::strtok(NULL, "\t");
+                int position = atoi(tmp);
+                
+                tmp = std::strtok(NULL, "\t");
+                tmp = std::strtok(NULL, "\t");
+                
+                char * ref = new char[strlen(tmp) + 1];
+                std::memmove(ref, tmp, strlen(tmp) + 1);
+                
+                tmp = std::strtok(NULL, "\t");
+                char * alt = new char[strlen(tmp) + 1];
+                std::memmove(alt, tmp, strlen(tmp) + 1);
+                
+                tmp = std::strtok(NULL, "\t");
+                float quality = atof(tmp);
+                
+                tmp = std::strtok(NULL, "\t");
+                bool filter = std::strcmp(tmp, "PASS") ? false : true;
+                
+                
+                // INFO
+                std::strtok(NULL, "\t");
+                // FORMAT
+                std::strtok(NULL, "\t");
+                // Individues with this SNP
+                
+                tmp = std::strtok(NULL, "\t");
+                
+                std::cout   << std::left    << std::setw(15)
+                            << chromosome   << std::setw(15)
+                            << position     << std::setw(15)
+                            << ref          << std::setw(15) 
+                            << "~>"         << std::setw(15)
+                            << alt          << std::setw(15)
+                            << quality      << std::setw(15)
+                            << (strlen(ref) == 1 && strlen(alt) == 1) << std::setw(15)
+                            << (filter ? "PASS" : "FILTERED");
+                
+                int counter = 1;
+                if (/*filter && quality > minQuality && strlen(ref) == 1 && strlen(alt) == 1*/ true)
+                {
+                    bool canPass = true;
+                    if (!filter)
+                    {
+                        std::cout << " Previously Filtered.";
+                        canPass = false;
+                    }
+                    
+                    if (quality < minQuality)
+                    {
+                        std::cout << " Filtered by Quality.";
+                        canPass = false;
+                    }
+                    
+                    if (strlen(ref) != 1)
+                    {
+                        std::cout << " Reference has more than 1 nucleotide.";
+                        canPass = false;
+                    }
+                    
+//                     if (strlen(alt) != 1)
+//                     {
+//                         std::cout << " Alternative has more than 1 nucleotide. ";
+//                         canPass = false;
+//                     }
+                    
+                    if (canPass) 
+                    {
+                        
+                    int i;
+                    for (i = 0; i < contigs.size(); i++)
+                    {
+                        if (contigs[i] == chromosome)
+                            break;
+                    }
+                    if (i == contigs.size())
+                    {
+                        std::cout << "Not Found" << std::endl;
+                    }
+                    else
+                        counter = 0;
+                        while (tmp != NULL)
+                        {
+                            if (strlen(tmp) > 0)
+                            {
+                                std::cout << " " << donors[counter];
+                                
+                                if (sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] == ref[0])
+                                {
+                                    int curval = 0;
+                                    if (strlen(alt) > 1)
+                                    {
+                                        int c, maxlen;
+                                        for (c = 0, maxlen = strlen(alt); c < maxlen; c++)
+                                        {
+                                            switch(alt[c])
+                                            {
+                                                case 'A': curval |= 1 << 0; break; // = 1
+                                                case 'C': curval |= 1 << 1; break; // = 2
+                                                case 'T': curval |= 1 << 2; break; // = 4
+                                                case 'G': curval |= 1 << 3; break; // = 8
+                                                default: break;
+                                            }
+                                            if (++c < maxlen && c == ',')
+                                                continue;
+                                        }
+                                        if (c == maxlen + 1)
+                                        {
+                                            switch(curval)
+                                            {
+                                                // One Base
+//                                              case 1://A = 1
+//                                              case 2://C = 2
+//                                              case 4://T = 4
+//                                              case 8://G = 8
+                                                // Two Bases
+                                                case 3:  sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = 'M'; break; // aMine AC
+                                                case 5:  sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = 'W'; break; // Weak AT
+                                                case 9:  sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = 'R'; break; // puRine AG
+                                                case 6:  sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = 'Y'; break; // pYrimidine CT
+                                                case 10: sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = 'S'; break; // Strong CG
+                                                case 12: sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = 'K'; break; // Keto TG
+                                                
+                                                // Three Bases
+                                                case 14: sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = 'B'; break; // CTG not A
+                                                case 13: sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = 'D'; break; // ATG not C
+                                                case 11: sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = 'V'; break; // ACG not T
+                                                case 7:  sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = 'H'; break; // ACT not G
+                                                
+                                                // All Four Bases
+                                                case 15: sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = 'N'; break; // ACTG
+                                                default:break;
+                                            }
+                                            std::cout << "#";
+                                        }
+                                        else
+                                        {
+                                            std::cout << "¬";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = alt[0];
+                                        std::cout << "~";
+                                    }
+                                }
+                                else
+                                {
+                                    std::cout << "¬";
+                                } 
+                            }
+                            counter ++;
+                            tmp = std::strtok(NULL, "\t");
+                        }
+                        counter = 0;
+                        while (tmp != NULL)
+                        {
+                            if (!strcmp(tmp, "0"))
+                            {
+                                std::cout << " " << donors[counter];
+                            }
+                            counter ++;
+                            tmp = std::strtok(NULL, "\t");
+                        }
+                    }
+                    std::cout << std::endl;
+                }
+                delete [] chromosome;
+                delete [] ref;
+                delete [] alt;
+            }
+        }
     
+    }
     std::cout << "~~> Sequences in FASTA" << std::endl;
     for (newAlignment * A : sources)
     {
@@ -258,18 +402,7 @@ void vcf_statish::readVCF(std::vector<newAlignment*> sources, std::string filena
             std::cout << "\t" << A->sequences[X].substr(0, 50) << std::endl;
         }
     }
-    
-//     std::cout << "~~>  Sequences in VCF" << std::endl;
-//     for (std::string fname : sequences)
-//     {
-//         std::cout << fname << std::endl;
-//     }
-//     
-//     std::cout << "~~>  Donors" << std::endl;
-//     for (std::string fname : donors)
-//     {
-//         std::cout << fname << std::endl;
-//     }
+
     
     delete [] line;
 }

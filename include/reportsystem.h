@@ -176,6 +176,8 @@ enum ErrorCode {
     VerboseLevelNotRecognized                   = 84,
     
     NeedToSpecifyVerboseLevel                   = 85,
+    
+    NoReferenceSequenceForContig                    = 86,
 
     __MAXERROR
 
@@ -192,6 +194,8 @@ enum WarningCode {
     LessNucleotidesThanExpected                 = 5,
 
     HeaderWillBeCut                             = 6,
+    
+    DonorAlreadyAdded                           = 7,
 
     __MAXWARNING
 };

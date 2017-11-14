@@ -38,15 +38,15 @@ int main(int argc, char *argv[])
     
     ReadWriteMS IO;
     
-    newAlignment * genome = IO.loadAlignment("dataset/ngs/manual_CANGA_REF.fasta");
+//     newAlignment * genome = IO.loadAlignment("dataset/ngs/manual_CANGA_REF.fasta");
+    newAlignment * genome = IO.loadAlignment("dataset/ngs/CANGA_REF.fasta");
     
     auto XX = IO.splitAlignmentKeeping(*genome);
     
     delete genome;
     
-//     READER.readVCF(XX, "dataset/ngs/test_manual.vcf");
-        READER.readVCF(XX, "dataset/ngs/B1012M_manual.bam.flt.vcf");
-        READER.readVCF(XX, "dataset/ngs/B1012S_manual.bam.flt.vcf");
+//     READER.readVCF(XX, std::vector<std::string>(1, "dataset/ngs/CANGAstrains_usingRef.vcf") );
+        READER.readVCF(XX, std::vector<std::string> {"dataset/ngs/B1012M.bam.flt.vcf", "dataset/ngs/B1012S.bam.flt.vcf" });
     
     for (int i = 0; i < XX.size(); i++)
     {
