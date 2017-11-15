@@ -37,7 +37,11 @@ const std::map<WarningCode, const char *> __internalReport::__reportSystem::Warn
         "Original sequence header will be cutted by 10 characters" },
         
     { WarningCode::DonorAlreadyAdded,
-        "The donor \"[tag]\" is present on more than one VCF. The SNP's of all entries will be merged in one single sequence." }
+        "The donor \"[tag]\" is present on more than one VCF. The SNP's of all entries will be merged in one single sequence." },
+        
+    { WarningCode::ReferenceNucleotideNotCorresponding,
+        "The sequence \"[tag]\" at position \"[tag]\" does not correspond with reference allele in file \"[tag]\". Found \"[tag]\". Expected \"[tag]\""
+    }
         
 };
     
@@ -302,7 +306,12 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
         "Verbose Level has to be specified after the [tag] argument. Acceptable values are: 'error', 'warning', 'info', 'none' and their numerical equivalents '3', '2', '1' and '0'. Current level is [tag]" },
         
     { ErrorCode::NoReferenceSequenceForContig,
-        "No reference sequence found for contig \"[tag]\"" }
+        "No reference sequence found for contig \"[tag]\"" },
+        
+    { ErrorCode::SNPoutOfBounds,
+        "SNP at positon \"[tag]\" in file \"[tag]\" cannot be applied as sequence has a length of \"[tag]\""
+        
+    }
 };
 
 void __internalReport::__reportSystem::PrintCodesAndMessages()

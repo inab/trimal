@@ -11,7 +11,7 @@ public:
     vcf_statish();
     ~vcf_statish();
     
-    void readVCF(std::vector< newAlignment*> sources, std::vector<std::string> filenames, float minQuality = 30);
+    void readVCF(std::vector< newAlignment*> sources, std::vector<std::string> filenames, float minQuality = 0, float minCoverage = 0, bool ignoreFilter = false);
 };
 
 class vcf_file

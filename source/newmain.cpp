@@ -45,8 +45,7 @@ int main(int argc, char *argv[])
     
     delete genome;
     
-//     READER.readVCF(XX, std::vector<std::string>(1, "dataset/ngs/CANGAstrains_usingRef.vcf") );
-        READER.readVCF(XX, std::vector<std::string> {"dataset/ngs/B1012M.bam.flt.vcf", "dataset/ngs/B1012S.bam.flt.vcf" });
+    READER.readVCF(XX, std::vector<std::string> {"dataset/ngs/B1012M_manual.bam.flt.vcf", "dataset/ngs/B1012S_manual.bam.flt.vcf" });
     
     for (int i = 0; i < XX.size(); i++)
     {
