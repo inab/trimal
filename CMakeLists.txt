@@ -39,7 +39,7 @@ set(preview
         source/reportsystem.cpp
         source/statisticsConservation2.cpp
         
-        source/ReadWriteMS/vcf_statish.cpp
+#         source/ReadWriteMS/vcf_statish.cpp
         )
 
 # Include all states of ReadWriteMachineState

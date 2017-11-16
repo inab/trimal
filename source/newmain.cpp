@@ -27,14 +27,14 @@
 #include "../include/trimalArgumentParser.h"
 #include "../include/reportsystem.h"
 
-#include <ReadWriteMS/vcf_statish.h>
+#include <../include/ReadWriteMS/vcf_statish.h>
 
 
 int main(int argc, char *argv[])
 {
     debug.IsDebug = true;
     
-    vcf_statish READER = vcf_statish();
+//     vcf_statish READER = vcf_statish();
     
     ReadWriteMS IO;
     
@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     
     char replacement = '-';
     
-    READER.readVCF(
+    ngs::readVCF(
       /* Dataset          */ XX, 
       /* VCF Collection   */ std::vector<std::string> {"dataset/ngs/B1012MS_manual.bam.flt.vcf", "dataset/ngs/B1012M_manual.bam.flt.vcf", "dataset/ngs/B1012S_manual.bam.flt.vcf" }, 
       /* min Quality      */ 0, 
