@@ -16,7 +16,9 @@ using namespace std;
 
 class trimAlManager
 {
-
+    std::vector<std::string> * vcfs;
+    
+    
     bool 
     appearErrors        = false,
     getComplementary    = false, 
@@ -119,6 +121,7 @@ private:
         void verbosity_argument(int* argc, char* argv[]);
         void info_arguments(int* argc, char* argv[], int* i);
         bool in_argument(int* argc, char* argv[], int* i);
+        bool vcf_argument(int* argc, char* argv[], int* i);
         bool out_argument(int* argc, char* argv[], int* i);
         bool html_out_argument(int* argc, char* argv[], int* i);
         bool svg_out_argument(int* argc, char* argv[], int* i);

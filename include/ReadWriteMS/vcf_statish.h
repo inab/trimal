@@ -18,7 +18,7 @@ namespace ngs {
     namespace IUPAC
     {
 
-        int getTagFromCharArray ( char * array, char separator ) {
+        static int getTagFromCharArray ( char * array, char separator ) {
             int c, maxlen, curval = 0;
             for ( c = 0, maxlen = strlen ( array ); c < maxlen; c++ ) {
                 switch ( array[c] ) {
@@ -45,7 +45,7 @@ namespace ngs {
             return -1;
         }
 
-        char getCharFromTag ( int tag ) {
+        static char getCharFromTag ( int tag ) {
             switch ( tag ) {
 
             // One Base
@@ -89,7 +89,7 @@ namespace ngs {
     
     namespace __internal
     {
-        void printApeek ( std::vector<newAlignment *> & sources ) {
+        static void printApeek ( std::vector<newAlignment *> & sources ) {
             for ( newAlignment * A : sources ) {
                 std::cout << A->seqsName[0] << std::endl;
 
@@ -100,7 +100,7 @@ namespace ngs {
             }
         }
 
-        void extendAlignments (
+        static void extendAlignments (
             std::vector<newAlignment*>  & sources,
             std::vector<std::string>    & contigs,
             std::vector<std::string>    & donors ) {
@@ -144,8 +144,8 @@ namespace ngs {
 
                         for ( int i = 0; i < nA->originalSequenNumber - 1; i++ ) {
                             int pos = i + donors.size() + 1;
-                            nA->sequences[i + donors.size() + 1] = oldSequences[i + 1];
-                            nA->seqsName[i + donors.size() + 1] = oldNames[i + 1];
+                            nA->sequences[pos] = oldSequences[i + 1];
+                            nA->seqsName[pos] = oldNames[i + 1];
                         }
 
                         nA->originalSequenNumber = donors.size() + nA->originalSequenNumber;
@@ -159,7 +159,7 @@ namespace ngs {
             }
         }
 
-        void applyVariantCallingFiles (
+        static void applyVariantCallingFiles (
             std::vector<newAlignment*>      & sources ,
             std::vector<std::string>        & filenames,
             std::vector<std::string>        & contigs,
@@ -193,7 +193,7 @@ namespace ngs {
                         int position = atoi ( tmp );
 
                         // ID
-                        tmp = std::strtok ( NULL, "\t" );
+                        std::strtok ( NULL, "\t" );
                         // Ref
                         tmp = std::strtok ( NULL, "\t" );
                         char * ref = new char[strlen ( tmp ) + 1];
@@ -342,7 +342,7 @@ namespace ngs {
             }
         }
 
-        void obtainContigsAndDonors (
+        static void obtainContigsAndDonors (
             std::vector<std::string> & filenames,
             std::vector<std::string> & donors,
             std::vector<std::string> & contigs,
@@ -444,7 +444,7 @@ namespace ngs {
     }
 
 
-    void readVCF ( std::vector<newAlignment*> sources, std::vector<std::string> filenames, float minQuality, float minCoverage, bool ignoreFilter, const char * const replacementChar ) {
+    static void readVCF ( std::vector<newAlignment*> sources, std::vector<std::string> filenames, float minQuality, float minCoverage, bool ignoreFilter, const char * const replacementChar ) {
         // All donors present in the vcf files.
         std::vector<std::string> donors = std::vector<std::string>();
         // Contigs present on the VCF files. Each entry must be present in the sources vector.
@@ -458,7 +458,7 @@ namespace ngs {
 
         ngs::__internal::applyVariantCallingFiles ( sources , filenames, contigs, donorsPositions, minQuality, minCoverage, ignoreFilter, replacementChar );
 
-        ngs::__internal::printApeek ( sources );
+//         ngs::__internal::printApeek ( sources );
     }
 }
 

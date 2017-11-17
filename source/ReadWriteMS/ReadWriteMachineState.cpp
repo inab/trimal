@@ -100,8 +100,8 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
     }
     else
     {
-        start = max((int)outPattern.find_last_of("/"), 0);
-        end = outPattern.find_last_of(".");
+        start = max((int)alignment->filename.find_last_of("/"), 0);
+        end = alignment->filename.find_last_of(".");
         filename = utils::ReplaceString(outPattern, "[in]", alignment->filename.substr(start, end-start));
     }
 

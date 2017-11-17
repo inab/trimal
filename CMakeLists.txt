@@ -134,19 +134,19 @@ foreach(file ${files})
     
     compare_outputs(
             "[.${VAR}.][trimal][file:${stripped_file}][vanilla]"
-            "../Strimal/source/trimal" "bin/trimal"
+            "../TtrimAl/source/trimal" "bin/trimal"
             "-in ${file}")
     MATH(EXPR VAR "${VAR}+1")
             
     foreach(threshold ${thresholds})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][gt:${threshold}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -gt ${threshold}")
         MATH(EXPR VAR "${VAR}+1")
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][st:${threshold}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -st ${threshold}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -154,7 +154,7 @@ foreach(file ${files})
     foreach(cons ${cons})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][cons:${cons}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -cons ${cons}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -162,7 +162,7 @@ foreach(file ${files})
     foreach(method ${automethod})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][${method}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} ${method}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -170,7 +170,7 @@ foreach(file ${files})
     foreach(cluster ${clusters})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][cluster:${cluster}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -clusters ${cluster}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -178,7 +178,7 @@ foreach(file ${files})
     foreach(max_identity ${max_identities})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][max_identity:${max_identity}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -maxidentity ${max_identity}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -186,7 +186,7 @@ foreach(file ${files})
     foreach(block ${blocks})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][block:${block}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -block ${block}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -195,7 +195,7 @@ foreach(file ${files})
         foreach(resoverlap ${resoverlap})
             compare_outputs(
                     "[.${VAR}.][trimal][file:${stripped_file}][seqo:${seqoverlap}][reso:${resoverlap}]"
-                    "../Strimal/source/trimal" "bin/trimal"
+                    "../TtrimAl/source/trimal" "bin/trimal"
                     "-in ${file} -resoverlap ${resoverlap} -seqoverlap ${seqoverlap}")
             MATH(EXPR VAR "${VAR}+1")
         endforeach()
@@ -204,7 +204,7 @@ foreach(file ${files})
     foreach(format ${formats})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][format:${format}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} ${format}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -212,13 +212,13 @@ foreach(file ${files})
     foreach(ext ${external})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][externalParam:${ext}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} ${ext}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
     compare_htmlsvg(
                 "[.${VAR}.][trimal][file:${stripped_file}][html]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -strict -htmlout")
         MATH(EXPR VAR "${VAR}+1")
         
@@ -226,14 +226,14 @@ endforeach()
 
 compare_outputs(
             "[.${VAR}.][trimal][Compareset]"
-            "../Strimal/source/trimal" "bin/trimal"
+            "../TtrimAl/source/trimal" "bin/trimal"
             "-compareset /home/vfernandez/git/trimal/dataset/alignments_comparison.X")
     MATH(EXPR VAR "${VAR}+1")
     
 foreach(method ${automethod})
 compare_outputs(
             "[.${VAR}.][trimal][Backtrans][${method}]"
-            "../Strimal/source/trimal" "bin/trimal"
+            "../TtrimAl/source/trimal" "bin/trimal"
             "-in dataset/example.091.AA.strNOG.ENOG411BWBU.fasta -backtrans dataset/example.091.AA.strNOG.ENOG411BWBU.disordered.codon.fa ${method}")
     MATH(EXPR VAR "${VAR}+1")
 endforeach()

@@ -109,6 +109,7 @@ public:
             tempAlignment->originalSequenNumber = 1;
             tempAlignment->residNumber = tempAlignment->sequences[0].size();
             tempAlignment->originalResidNumber = tempAlignment->residNumber;
+            tempAlignment->filename = tempAlignment->seqsName[0];
             splitted[i] = tempAlignment;
         }
         
