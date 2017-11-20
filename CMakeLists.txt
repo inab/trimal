@@ -28,7 +28,6 @@ set(preview
         source/statisticsGaps.cpp
         source/utils.cpp
         source/similarityMatrix.cpp
-#         source/statisticsConservation.cpp
         source/sequencesMatrix.cpp
         source/compareFiles.cpp
         source/newAlignment.cpp
@@ -38,12 +37,12 @@ set(preview
         source/ReadWriteMS/ReadWriteMachineState.cpp
         source/reportsystem.cpp
         source/statisticsConservation2.cpp
-        
-#         source/ReadWriteMS/vcf_statish.cpp
         )
 
 # Include all states of ReadWriteMachineState
 FILE (GLOB states source/ReadWriteMS/*_state.cpp)
+
+FILE (GLOB test_files source/Catch/test_*.cpp)
 
 # add_library(states OBJECT ${states} ${preview})
 add_library(common OBJECT ${preview} ${states})
@@ -54,6 +53,8 @@ add_executable(trimal source/newmain.cpp $<TARGET_OBJECTS:common>)
 # add_executable(readal source/readAl.cpp $<TARGET_OBJECTS:common>)
 # add_executable(statal source/statAl.cpp $<TARGET_OBJECTS:common>)
 add_executable(readal source/ReadWriteMS/ReadWriteMSmain.cpp $<TARGET_OBJECTS:common>)
+
+add_executable(tests source/Catch/main.cpp include/Catch/catch.hpp $<TARGET_OBJECTS:common> ${test_files})
 
 # Link the mathematical library
 target_link_libraries(trimal m)

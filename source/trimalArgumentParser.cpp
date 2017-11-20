@@ -16,6 +16,16 @@
 void menu();
 void examples();
 
+trimAlManager::trimAlManager()
+{
+
+}
+
+trimAlManager::~trimAlManager()
+{
+    delete_variables();
+}
+
 void trimAlManager::parseArguments(int argc, char *argv[])
 {
     if (argc == 1)
@@ -1725,7 +1735,7 @@ int trimAlManager::perform()
             }
             
         }
-        delete_variables();
+//         delete_variables();
         return 0;
     }
     
@@ -1788,7 +1798,7 @@ int trimAlManager::perform()
     if((columnNumbering) && (!appearErrors))
         singleAlig -> Statistics -> printCorrespondence();
 
-    delete_variables();
+//     delete_variables();
 
     return 0;
 }

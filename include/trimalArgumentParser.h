@@ -16,6 +16,7 @@ using namespace std;
 
 class trimAlManager
 {
+public:
     std::vector<std::string> * vcfs;
     
     
@@ -116,6 +117,9 @@ class trimAlManager
     std::vector<std::string> oformats;
 
 public:
+    trimAlManager();
+    trimAlManager(const trimAlManager&);
+    ~trimAlManager();
     void parseArguments(int argc, char *argv[]);
 private:
         void verbosity_argument(int* argc, char* argv[]);

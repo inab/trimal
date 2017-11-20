@@ -33,34 +33,6 @@
 int main(int argc, char *argv[])
 {
     debug.IsDebug = true;
-    
-// //     vcf_statish READER = vcf_statish();
-//     
-//     ReadWriteMS IO;
-//     
-// //     newAlignment * genome = IO.loadAlignment("dataset/ngs/manual_CANGA_REF.fasta");
-//     newAlignment * genome = IO.loadAlignment("dataset/ngs/CANGA_REF.fasta");
-//     
-//     auto XX = IO.splitAlignmentKeeping(*genome);
-//     
-//     delete genome;
-//     
-//     char replacement = '-';
-//     
-//     ngs::readVCF(
-//       /* Dataset          */ XX, 
-//       /* VCF Collection   */ std::vector<std::string> {"dataset/ngs/B1012MS_manual.bam.flt.vcf", "dataset/ngs/B1012M_manual.bam.flt.vcf", "dataset/ngs/B1012S_manual.bam.flt.vcf" }, 
-//       /* min Quality      */ 0, 
-//       /* min Converage    */ 30, 
-//       /* ignore Filters   */ false,
-//       /* replacement char */ &replacement
-//     );
-//     
-//     for (int i = 0; i < XX.size(); i++)
-//     {
-//         delete XX[i];
-//     }
-//     
 
     trimAlManager Trimal = trimAlManager();
 
