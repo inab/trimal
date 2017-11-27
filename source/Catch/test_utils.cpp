@@ -141,76 +141,38 @@ SCENARIO ( "Array utils", "[utils][array]" ) {
 
 SCENARIO ( "Number utils", "[utils][number]" ) {
     WHEN ( "Rounding" ) {
-        THEN ( "Value -1.9" ) {
-            double value = -1.9;
-            CAPTURE ( value );
-            CHECK ( utils::roundInt ( value ) == -2 );
-            CHECK ( utils::roundToInf ( value ) == -2 );
-            CHECK ( utils::roundToSup ( value ) == -1 );
-        }
-
-        THEN ( "Value -1.5" ) {
-            double value = -1.5;
-            CAPTURE ( value );
-            CHECK ( utils::roundInt ( value ) == -2 );
-            CHECK ( utils::roundToInf ( value ) == -2 );
-            CHECK ( utils::roundToSup ( value ) == -1 );
-        }
-
-        THEN ( "Value -1.1" ) {
-            double value = -1.1;
-            CAPTURE ( value );
-            CHECK ( utils::roundInt ( value ) == -1 );
-            CHECK ( utils::roundToInf ( value ) == -2 );
-            CHECK ( utils::roundToSup ( value ) == -1 );
-        }
-
-        THEN ( "Value -1" ) {
-            double value = -1;
-            CAPTURE ( value );
-            CHECK ( utils::roundInt ( value ) == -1 );
-            CHECK ( utils::roundToInf ( value ) == -1 );
-            CHECK ( utils::roundToSup ( value ) == -1 );
-        }
-
-        THEN ( "Value 0" ) {
-            double value = -0;
-            CAPTURE ( value );
-            CHECK ( utils::roundInt ( value ) == 0 );
-            CHECK ( utils::roundToInf ( value ) == 0 );
-            CHECK ( utils::roundToSup ( value ) == 0 );
-        }
-
-        THEN ( "Value 1.0" ) {
-            double value = 1.0;
-            CAPTURE ( value );
-            CHECK ( utils::roundInt ( value ) == 1 );
-            CHECK ( utils::roundToInf ( value ) == 1 );
-            CHECK ( utils::roundToSup ( value ) == 1 );
-        }
-
-        THEN ( "Value 1.1" ) {
-            double value = 1.1;
-            CAPTURE ( value );
-            CHECK ( utils::roundInt ( value ) == 1 );
-            CHECK ( utils::roundToInf ( value ) == 1 );
-            CHECK ( utils::roundToSup ( value ) == 2 );
-        }
-
-        THEN ( "Value 1.5" ) {
-            double value = 1.5;
-            CAPTURE ( value );
-            CHECK ( utils::roundInt ( value ) == 2 );
-            CHECK ( utils::roundToInf ( value ) == 1 );
-            CHECK ( utils::roundToSup ( value ) == 2 );
-        }
-
-        THEN ( "Value 1.9" ) {
-            double value = 1.9;
-            CAPTURE ( value );
-            CHECK ( utils::roundInt ( value ) == 2 );
-            CHECK ( utils::roundToInf ( value ) == 1 );
-            CHECK ( utils::roundToSup ( value ) == 2 );
+        
+        struct testStruct
+        {
+            float valueToTest;
+            int roundExpected;
+            int floorExpected;
+            int ceilExpected;
+            
+            testStruct(float value, int round, int floor, int ceil) : valueToTest(value), roundExpected(round), floorExpected(floor), ceilExpected(ceil) { } 
+        };
+        
+        std::vector<testStruct> testValues = {
+            testStruct(-1.9, -2, -2, -1),
+            testStruct(-1.5, -2, -2, -1),
+            testStruct(-1.1, -1, -2, -1),
+            testStruct(-1.0, -1, -1, -1),
+            testStruct(-0.0, +0, +0, +0),
+            testStruct(+1.0, +1, +1, +1),
+            testStruct(+1.1, +1, +1, +2),
+            testStruct(+1.5, +2, +1, +2),
+            testStruct(+1.9, +2, +1, +2),
+        };
+        
+        for (testStruct & testValue : testValues)
+        {
+            WHEN("Number" + std::to_string(testValue.valueToTest))
+            {
+                CAPTURE ( testValue.valueToTest );
+                CHECK ( utils::roundInt ( testValue.valueToTest ) == testValue.roundExpected );
+                CHECK ( utils::roundToInf ( testValue.valueToTest ) == testValue.floorExpected );
+                CHECK ( utils::roundToSup ( testValue.valueToTest ) == testValue.ceilExpected );
+            }
         }
     }
 
@@ -1058,8 +1020,6 @@ SCENARIO ( "Gap Ranges", "[utils][stats][gap]" ) {
         testStruct ( int sequences, int gaps, int result ) : sequenNumber ( sequences ), gapNumber ( gaps ), expectedResult ( result ) { }
     };
 
-    int * value /*= new int(0)*/;
-
     std::vector<testStruct> testValues = {
         testStruct ( 100, 0, 11 ),
         testStruct ( 100, 25, 10 ),
@@ -1086,10 +1046,9 @@ SCENARIO ( "Gap Ranges", "[utils][stats][gap]" ) {
         testStruct ( 1000, 990, 2 ),
         testStruct ( 1000, 999, 1 ),
         testStruct ( 1000, 1000, 0 ),
-
     };
 
-    for ( testStruct testValue : testValues ) {
+    for ( testStruct & testValue : testValues ) {
         GIVEN ( std::to_string ( testValue.sequenNumber ) + " sequences; " + std::to_string ( testValue.gapNumber ) + " gaps" ) {
 
             WHEN ( "Direct Method" ) {
@@ -1120,7 +1079,7 @@ SCENARIO ( "Sim Ranges", "[utils][stats][sim]" ) {
         std::pair<float, int> ( 1e-7F, 1 )
     };
 
-    for ( std::pair<float, int> pair : testValues ) {
+    for ( std::pair<float, int> & pair : testValues ) {
         GIVEN ( std::to_string ( pair.first ) ) {
             REQUIRE ( utils::GetSimStep ( &pair.first ) == pair.second );
         }
@@ -1144,19 +1103,10 @@ SCENARIO ( "Cons Ranges", "[utils][stats][cons]" ) {
         std::pair<float, int> ( .0001F, 1 )
     };
 
-    for ( std::pair<float, int> pair : testValues ) {
+    for ( std::pair<float, int> & pair : testValues ) {
         GIVEN ( std::to_string ( pair.first ) ) {
             INFO( std::setprecision(20) << pair.first );
             REQUIRE ( utils::GetConsStep ( &pair.first ) == pair.second );
         }
     }
 }
-
-// SCENARIO ( "Multiple Utilities", "[Utils]" ) {
-//
-//
-// }
-
-
-
-
