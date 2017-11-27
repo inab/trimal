@@ -30,13 +30,12 @@ public:
     }
 };
 
-
 template<> 
 inline bool ArrayComparer<double>::match(double * i) const
 {
     for (int x = 0; x < size; x++)
     {
-//         double I = i[x], M = m_begin[x];
+        double I = i[x], M = m_begin[x];
         if (fabs(i[x] - m_begin[x]) > std::numeric_limits<double>::epsilon()) 
             return false;
     }
@@ -48,7 +47,7 @@ inline bool ArrayComparer<float>::match(float * i) const
 {
     for (int x = 0; x < size; x++)
     {
-//         float I = i[x], M = m_begin[x];
+        float I = i[x], M = m_begin[x];
         if (fabs(i[x] - m_begin[x]) > std::numeric_limits<float>::epsilon()) 
             return false;
     }

@@ -4,7 +4,7 @@
 #include "../../include/reportsystem.h"
 #include "../../source/Catch/Matchers/ArrayMatcher.cpp"
 
-SCENARIO("Cleaner module can apply transformations to alignments", "[Cleaner][Alignment]")
+SCENARIO("Cleaner module can apply transformations to alignments", "[cleaner][alignment]")
 {
     newAlignment alig;
 
@@ -80,13 +80,47 @@ SCENARIO("Cleaner module can apply transformations to alignments", "[Cleaner][Al
     
     WHEN("Calculate Sim Stats")
     {
-//         if (alig.sgaps == NULL)
-//         {
-//             alig.sgaps = new statisticsGaps(&alig);
-//             alig.Statistics->calculateGapStats();
-//             alig.sgaps->applyWindow(0);
-//         }
+        if (alig.scons == NULL)
+        {
+            similarityMatrix * sm = new similarityMatrix();
+            sm->defaultNTSimMatrix();
+            alig.scons = new statisticsConservation2(&alig);
+            alig.scons->setSimilarityMatrix(sm);
+            alig.Statistics->calculateConservationStats();
+            alig.scons->applyWindow(0);
+            
+        }
         
+        THEN("MDK_Vector")
+        {
+            float * vals = alig.scons->getMdkwVector();
+            float * knownCons = new float[60]{0,0,0,0,0,0,0,0,0,0,1,1,0.35546314716339111328,1,1,0,0,0,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+            
+            CAPTURE(std::vector<float>(vals, vals + 60));
+            CAPTURE(std::vector<float>(knownCons, knownCons + 60));
+            REQUIRE_THAT(vals, ArrayContentsEqual(knownCons, 60));
+            
+            delete [] knownCons;
+        }
+        
+        THEN("Sim Values")
+        {
+            newAlignment * newAl = alig.Cleaning->cleanByCutValueFallBehind(0.5,0.5, alig.scons->getMdkwVector(), false);
+            
+            int * knownVals = new int[60]{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,10,11,-1,13,14,-1,-1,-1,18,19,20,-1,22,23,24,25,26,27,28,29,-1,31,32,33,34,35,36,37,38,39,40,-1,-1,-1,-1,-1,46,47,48,49,50,51,52,53,54,55,56,57,58,59};
+            int * vals = alig.saveResidues;
+            
+            CAPTURE(std::vector<int>(newAl->saveResidues, newAl->saveResidues + 60));
+            CAPTURE(std::vector<int>(knownVals, knownVals + 60));
+            REQUIRE_THAT(newAl->saveResidues, ArrayContentsEqual(knownVals, 60));
+            
+            delete [] knownVals;
+            delete newAl;
+        }
+    }
+    
+    WHEN("cleanByCutValue Composed")
+    {
         if (alig.scons == NULL)
         {
             similarityMatrix * sm = new similarityMatrix();
@@ -97,44 +131,17 @@ SCENARIO("Cleaner module can apply transformations to alignments", "[Cleaner][Al
             alig.scons->applyWindow(0);
         }
         
-        THEN("Window 0")
-        {
-            alig.Statistics->calculateConservationStats();
-            float * vals = alig.scons->getMdkwVector();
-            float * knownCons = new float[60] {0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,1.f,1.f,0.355463f,1.f,1.f,0.f,0.f,0.f,1.f,1.f,1.f,0.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,0.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,0.f,0.f,0.f,0.f,0.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f};
-            
-            CAPTURE(std::vector<float>(vals, vals + 60));
-            CAPTURE(std::vector<float>(knownCons, knownCons + 60));
-            REQUIRE_THAT(vals, ArrayContentsEqual(knownCons, 60));
-            
-            delete [] knownCons;
-        }
+        newAlignment * newAl = alig.Cleaning->cleanByCutValueOverpassOrEquals(0.5, alig.sgaps->getGapsWindow(), 0.5, 0.5, alig.scons->getMdkwVector(), false);
+        
+        int * knownVals = new int[60]{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,13,14,-1,-1,-1,-1,19,20,-1,-1,23,24,25,26,27,28,29,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,40,-1,-1,-1,-1,-1,46,47,48,49,50,51,52,53,54,55,56,57,58,59};
+        
+        CAPTURE(std::vector<int>(newAl->saveResidues, newAl->saveResidues + 60));
+        CAPTURE(std::vector<int>(knownVals, knownVals + 60));
+        REQUIRE_THAT(newAl->saveResidues, ArrayContentsEqual(knownVals, 60));
+        
+        delete newAl;
+        delete [] knownVals;
     }
-    
-//     WHEN("CleanByCutValueOverpass")
-//     {
-//         int * gInCol = new int[60];
-//         
-//         for (int i = 0; i < 60; i++)
-//         {
-//             gInCol[i] = 0;
-//             for (int x = 0; x < alig.originalSequenNumber; x++)
-//             {
-//                 if (alig.sequences[x][i] == '-') gInCol[i]++;
-//             }
-//         }
-//         
-//         int * saveResidues = new int[60];
-//         for (int i = 0; i < 60; i++)
-//             saveResidues[i] = i;
-//         
-//         newAlignment * newAlig = alig.Cleaning->cleanByCutValueOverpass(0.5, 0.5, gInCol, false);
-//         REQUIRE_THAT(newAlig->saveResidues, ArrayContentsEqual(saveResidues, alig.residNumber));
-//         
-//         delete [] gInCol;
-//         
-//         delete newAlig;
-//     }
 
 }
     

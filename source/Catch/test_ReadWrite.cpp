@@ -3,7 +3,7 @@
 #include "../../include/trimalArgumentParser.h"
 #include "../../include/reportsystem.h"
 
-SCENARIO("ReadWriteMS can load different formats", "[ReadWrite][Alignment][Load]")
+SCENARIO("ReadWriteMS can load different formats", "[readWrite][alignment][load]")
 {
     ReadWriteMS ReadWrite = ReadWriteMS();
     int counter = 0;
