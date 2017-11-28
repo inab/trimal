@@ -677,7 +677,7 @@ SCENARIO ( "File utils", "[utils][file]" ) {
     WHEN ( "Checking files functions" ) {
         GIVEN ( "Empty file" ) {
             ifstream F_;
-            F_.open ( "./dataset/testingFiles/efile.txt" );
+            F_.open ( "./dataset/testingFiles/fileUtils/efile.txt" );
 
             THEN ( "We detect is empty" ) {
                 REQUIRE_FALSE ( utils::checkFile ( F_ ) );
@@ -691,7 +691,7 @@ SCENARIO ( "File utils", "[utils][file]" ) {
         }
         GIVEN ( "A file containing a line with 'Hello\\n'" ) {
             ifstream F_;
-            F_.open ( "./dataset/testingFiles/testfile01.txt" );
+            F_.open ( "./dataset/testingFiles/fileUtils/testfile01.txt" );
             WHEN ( "Reading file" ) {
                 char * result = utils::readLine ( F_ );
                 WHEN ( "First line contains the correct data" ) {
@@ -715,7 +715,7 @@ SCENARIO ( "File utils", "[utils][file]" ) {
 
         GIVEN ( "A file containing a line with 'Hello\\r'" ) {
             ifstream F_;
-            F_.open ( "./dataset/testingFiles/testfile02.txt" );
+            F_.open ( "./dataset/testingFiles/fileUtils/testfile02.txt" );
             WHEN ( "Reading file" ) {
                 char * result = utils::readLine ( F_ );
 
@@ -740,7 +740,7 @@ SCENARIO ( "File utils", "[utils][file]" ) {
 
         GIVEN ( "A file containing a line with some spaces before 'Hello\\n'" ) {
             ifstream F_;
-            F_.open ( "./dataset/testingFiles/testfile03.txt" );
+            F_.open ( "./dataset/testingFiles/fileUtils/testfile03.txt" );
             WHEN ( "Reading file" ) {
                 char * result = utils::readLine ( F_ );
 
@@ -765,7 +765,7 @@ SCENARIO ( "File utils", "[utils][file]" ) {
 
         GIVEN ( "A file containing a line with some tabs before 'Hello\\n'" ) {
             ifstream F_;
-            F_.open ( "./dataset/testingFiles/testfile04.txt" );
+            F_.open ( "./dataset/testingFiles/fileUtils/testfile04.txt" );
             WHEN ( "Reading file" ) {
                 char * result = utils::readLine ( F_ );
 
@@ -790,7 +790,7 @@ SCENARIO ( "File utils", "[utils][file]" ) {
 
         GIVEN ( "A file containing a line with some tabs and spaces before 'Hello\\n'" ) {
             ifstream F_;
-            F_.open ( "./dataset/testingFiles/testfile05.txt" );
+            F_.open ( "./dataset/testingFiles/fileUtils/testfile05.txt" );
             WHEN ( "Reading file" ) {
                 char * result = utils::readLine ( F_ );
 
@@ -815,7 +815,7 @@ SCENARIO ( "File utils", "[utils][file]" ) {
 
         GIVEN ( "A file containing spaces and tabs before a '\\n'" ) {
             ifstream F_;
-            F_.open ( "./dataset/testingFiles/testfile06.txt" );
+            F_.open ( "./dataset/testingFiles/fileUtils/testfile06.txt" );
             WHEN ( "Reading file" ) {
                 WHEN ( "Reading a line returns null" ) {
                     char * result = utils::readLine ( F_ );
@@ -828,7 +828,7 @@ SCENARIO ( "File utils", "[utils][file]" ) {
 
         GIVEN ( "A file containing a line with 'Hello\\r\\n'" ) {
             ifstream F_;
-            F_.open ( "./dataset/testingFiles/testfile07.txt" );
+            F_.open ( "./dataset/testingFiles/fileUtils/testfile07.txt" );
             WHEN ( "Reading file" ) {
                 char * result = utils::readLine ( F_ );
 

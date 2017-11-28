@@ -9,7 +9,7 @@ SCENARIO("Cleaner module can apply transformations to alignments", "[cleaner][al
     newAlignment alig;
 
     debug.Level = VerboseLevel::NONE;
-    
+
     alig.sequences = new string [6];
     
     alig.sequenNumber = 6;
@@ -49,13 +49,13 @@ SCENARIO("Cleaner module can apply transformations to alignments", "[cleaner][al
         {
             alig.sgaps->applyWindow(0);
             int * vals = alig.sgaps->getGapsWindow();
-            int * knownVals = new int[60] { 5,5,5,5,5,5,5,5,5,5,2,1,0,0,0,6,6,6,1,0,0,5,1,0,0,0,0,0,0,0,6,1,4,1,1,4,4,1,1,1,0,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+            int * expectedGapsPerColumn = new int[60] { 5,5,5,5,5,5,5,5,5,5,2,1,0,0,0,6,6,6,1,0,0,5,1,0,0,0,0,0,0,0,6,1,4,1,1,4,4,1,1,1,0,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
             
             CAPTURE(std::vector<int>(vals, vals + 60));
-            CAPTURE(std::vector<int>(knownVals, knownVals + 60));
-            REQUIRE_THAT(vals, ArrayContentsEqual(knownVals, 60));
+            CAPTURE(std::vector<int>(expectedGapsPerColumn, expectedGapsPerColumn + 60));
+            REQUIRE_THAT(vals, ArrayContentsEqual(expectedGapsPerColumn, 60));
             
-            delete [] knownVals;
+            delete [] expectedGapsPerColumn;
         }
     }
     
@@ -88,7 +88,6 @@ SCENARIO("Cleaner module can apply transformations to alignments", "[cleaner][al
             alig.scons->setSimilarityMatrix(sm);
             alig.Statistics->calculateConservationStats();
             alig.scons->applyWindow(0);
-            
         }
         
         THEN("MDK_Vector")
