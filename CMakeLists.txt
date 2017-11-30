@@ -18,6 +18,7 @@ if( NOT CMAKE_BUILD_TYPE )
 endif()
 
 # ADD_DEFINITIONS(-g -O2 -fsigned-char -freg-struct-return -Wall -W -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Winline )
+ADD_DEFINITIONS(-O0 )
 # ADD_DEFINITIONS(-Winline -march=native --param max-inline-insns-single=4000 --param inline-unit-growth=200 )
 
 # Include the include folder. Yeah. I love redudancy
@@ -54,7 +55,7 @@ add_executable(trimal source/newmain.cpp $<TARGET_OBJECTS:common>)
 # add_executable(statal source/statAl.cpp $<TARGET_OBJECTS:common>)
 add_executable(readal source/ReadWriteMS/ReadWriteMSmain.cpp $<TARGET_OBJECTS:common>)
 
-add_executable(tests source/Catch/main.cpp include/Catch/catch.hpp $<TARGET_OBJECTS:common> ${test_files})
+add_executable(tests source/Catch/main.cpp include/Catch/catch.hpp include/Catch/picojson.h include/Catch/catchhelperfunctions.h $<TARGET_OBJECTS:common> ${test_files})
 
 # Link the mathematical library
 target_link_libraries(trimal m)
