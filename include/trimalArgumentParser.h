@@ -17,7 +17,7 @@ using namespace std;
 class trimAlManager
 {
 public:
-    std::vector<std::string> * vcfs;
+    std::vector<std::string> * vcfs = NULL;
     
     
     bool 

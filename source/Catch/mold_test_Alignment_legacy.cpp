@@ -1,9 +1,9 @@
-#include "../../include/Catch/catch.hpp"
-#include "../../include/Catch/picojson.h"
-#include "../../include/Catch/catchhelperfunctions.h"
+#include "Catch/catch.hpp"
+#include "Catch/picojson.h"
+#include "Catch/catchhelperfunctions.h"
 
-#include "../../include/trimalArgumentParser.h"
-#include "../../source/Catch/Matchers/ArrayMatcher.cpp"
+#include "trimalArgumentParser.h"
+#include "Matchers/ArrayMatcher.cpp"
 
 #include <fstream>
 
@@ -11,52 +11,7 @@
 #define ReportMissingFiles false
 #endif
 
-bool loadJSON ( const std::string & filename, picojson::value & alignmentTestData ) {
 
-    // region : This region is to prevent the testing to reload the same JSON again, as this should be done only once per JSON
-    static std::string lastFilename = filename;
-    if ( lastFilename == filename ) {
-        if ( alignmentTestData.is<picojson::object>() &&
-                alignmentTestData.contains ( "filename" ) &&
-                alignmentTestData.get ( "filename" ).get<string>() == filename ) {
-//             WARN ( "Reusing last picojson::value" );
-            return true;
-        } else {
-//             WARN ( "Last picojson::value is not valid" );
-            return false;
-        }
-    } else {
-        lastFilename = filename;
-//         WARN ( "Loading JSON " + filename );
-    }
-    // endregion
-
-
-    ifstream testData;
-    testData.open ( "./dataset/testingFiles/alignmentIntermediates/" + filename + ".json" );
-    if ( testData.is_open() ) {
-        std::string content ( ( std::istreambuf_iterator<char> ( testData ) ),
-                              ( std::istreambuf_iterator<char>() ) );
-
-        testData.close();
-        // parse the input
-        picojson::parse ( alignmentTestData, content );
-        std::string err = picojson::get_last_error();
-
-        if ( ! err.empty() ) {
-            WARN ( err );
-            return false;
-        }
-
-        // check if the type of the value is "object"
-        if ( ! alignmentTestData.is<picojson::object>() ) {
-            WARN ( "JSON is not an object" );
-            return false;
-        }
-        return true;
-    }
-    return false;
-}
 
 SCENARIO ( "Alignment methods work correctly", "[alignment][aligMethods]" ) {
 

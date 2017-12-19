@@ -1014,9 +1014,11 @@ bool trimAlManager::processArguments(char* argv[])
 
 inline bool trimAlManager::check_arguments_incompatibilities()
 {
-    // The incompatibilities are checked only once, so there are arguments with no function to check it's incompatibilities although they have.
+    // The incompatibilities are checked only once,
+    // so there are arguments with no function to check it's incompatibilities although they have.
     // These are checked within other functions.
-    // So if argument A is incompatible with B, A may have this checked in it's incompatibilities function, but B may have no function to check them.
+    // So if argument A is incompatible with B,
+    // A may have this checked in it's incompatibilities function, but B may have no function to check them.
 
     check_inFile_incompatibilities();
     check_select_cols_and_seqs_incompatibilities();
@@ -1735,7 +1737,6 @@ int trimAlManager::perform()
             }
             
         }
-//         delete_variables();
         return 0;
     }
     

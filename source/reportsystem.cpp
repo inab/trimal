@@ -350,7 +350,7 @@ void __internalReport::__reportSystem::PrintCodesAndMessages()
 
 void __internalReport::__reportSystem::report(ErrorCode message, std::string * vars)
 {
-    if (Level > VerboseLevel::ERROR)
+    if (Level < VerboseLevel::ERROR)
     {
         if (vars != NULL)
             delete [] vars;
@@ -381,7 +381,7 @@ void __internalReport::__reportSystem::report(ErrorCode message, std::string * v
 
 void __internalReport::__reportSystem::report(ErrorCode message, char * vars)
 {
-    if (Level > VerboseLevel::ERROR) return;
+    if (Level < VerboseLevel::ERROR) return;
     
     if (vars == NULL)
     {
@@ -405,7 +405,7 @@ void __internalReport::__reportSystem::report(ErrorCode message, char * vars)
 
 void __internalReport::__reportSystem::report(WarningCode message, std::string * vars)
 {
-    if (Level > VerboseLevel::WARNING)
+    if (Level < VerboseLevel::WARNING)
     {
         if (vars != NULL)
             delete [] vars;
@@ -436,7 +436,7 @@ void __internalReport::__reportSystem::report(WarningCode message, std::string *
 
 void __internalReport::__reportSystem::report(WarningCode message, char * vars)
 {
-    if (Level > VerboseLevel::WARNING) return;
+    if (Level < VerboseLevel::WARNING) return;
     
     if (vars == NULL)
     {
@@ -460,7 +460,7 @@ void __internalReport::__reportSystem::report(WarningCode message, char * vars)
 
 void __internalReport::__reportSystem::report(InfoCode message, std::string * vars)
 {
-    if (Level > VerboseLevel::INFO)
+    if (Level < VerboseLevel::INFO)
     {
         if (vars != NULL)
             delete [] vars;
@@ -491,7 +491,7 @@ void __internalReport::__reportSystem::report(InfoCode message, std::string * va
 
 void __internalReport::__reportSystem::report(InfoCode message, char * vars)
 {
-    if (Level > VerboseLevel::INFO) return;
+    if (Level < VerboseLevel::INFO) return;
     
     if (vars == NULL)
     {

@@ -51,7 +51,7 @@ class Cleaner {
       \param complementary Wheter or not to return the complementary version of the trimmed alignment.
       \return Pointer to the cleaned alignment.
       */
-     newAlignment *cleanByCutValue(double cut, float baseLine, const int *gInCol, bool complementary);
+     newAlignment *cleanByCutValueOverpass (double cut, float baseLine, const int *gInCol, bool complementary);
      /**
       \brief Method to clean an alignment. \n
       It removes sequences that<b> fall behind </b>a certain threshold. \n
@@ -63,7 +63,7 @@ class Cleaner {
       \param complementary Wheter or not to return the complementary version of the trimmed alignment.
       \return Pointer to the cleaned alignment.
       */
-     newAlignment *cleanByCutValue(float cut, float baseLine, const float *ValueVect, bool complementary);
+     newAlignment *cleanByCutValueFallBehind (float cut, float baseLine, const float *ValueVect, bool complementary);
            /**
       \brief Method to clean an alignment. \n
       It removes sequences that<b> overpass or equals </b> the gap threshold but <b> fall behind </b> the similarity threshold. \n
@@ -77,7 +77,7 @@ class Cleaner {
       \param complementary Wheter or not to return the complementary version of the trimmed alignment.
       \return Pointer to the cleaned alignment.
       */
-     newAlignment *cleanByCutValue(double cutGaps, const int * gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary);
+     newAlignment *cleanByCutValueOverpassOrEquals (double cutGaps, const int * gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary);
 
      /**
       \brief Method to clean an alignment. It carries out strict and strictplus.\n
