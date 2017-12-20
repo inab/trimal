@@ -63,7 +63,6 @@ add_executable(testMaker
 add_executable(tests
         source/Catch/main.cpp
         include/Catch/catch.hpp
-        include/Catch/modernjson.hpp
         include/Catch/catchhelperfunctions.h
         source/Catch/Matchers/ArrayMatcher.cpp
         $<TARGET_OBJECTS:common>

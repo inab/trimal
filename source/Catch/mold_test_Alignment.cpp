@@ -10,6 +10,15 @@
 
 int i;
 
+// Map of old and new ID's of sequence types
+std::map<int,int> AlignmentTypeCorrespondence = {
+        {1, SequenceTypes::DNA},
+        {2, SequenceTypes::RNA},
+        {3, SequenceTypes::AA},
+        {4, SequenceTypes::DNA | SequenceTypes::DEG},
+        {5, SequenceTypes::RNA | SequenceTypes::DEG}
+};
+
 // tag input_filename will be replaced for each name in ./database
 // EndOfHeader // <- Do not remove this comment, as is used by TestMaker.
 SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][aligMethods]") {
@@ -36,24 +45,17 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
             // Init Similarity Matrix
             {
                 int SequenceType = testData.get("SequenceType").get<double>();
-                similarityMatrix * sm = new similarityMatrix();
-                switch (SequenceType)
-                {
-                    case 1: case 2:
-                        sm->defaultNTSimMatrix();
-                        break;
+                similarityMatrix *sm = new similarityMatrix();
+                switch (SequenceType) {
+                    case 1: case 2: default:
+                        sm->defaultNTSimMatrix(); break;
                     case 3:
-                        sm->defaultAASimMatrix();
-                        break;
+                        sm->defaultAASimMatrix(); break;
                     case 4: case 5:
-                        sm->defaultNTDegeneratedSimMatrix();
-                        break;
-                    default:
-                        sm->defaultNTSimMatrix();
+                        sm->defaultNTDegeneratedSimMatrix(); break;
                 }
                 alig.scons->setSimilarityMatrix(sm);
             }
-
         }
 
         WHEN ("Checking save residues is initialized correctly") {
@@ -65,7 +67,6 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                     saveResidues[i] = i;
                 }
 
-                REQUIRE (saveResidues != NULL);
                 REQUIRE (alig.saveResidues != NULL);
 
                 INFO ("Save residues array in alignment doesn't match with expected saveResidues");
@@ -82,8 +83,9 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                 CAPTURE (obtained);
 
                 REQUIRE_THAT (alig.saveResidues,
-                              ArrayContentsEqual(saveResidues, alig.residNumber,
-                                      "./dataset/testingFiles/alignmentErrors/input_filename.saveResidues.error.tsv"));
+                              ArrayContentsEqual(saveResidues,
+                                                 alig.residNumber,
+                                                 "./dataset/testingFiles/alignmentErrors/input_filename.saveResidues.error.tsv"));
 
                 delete[] saveResidues;
             }
@@ -91,69 +93,71 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
 
         WHEN ("Getting number of species") {
             REQUIRE (alig.getNumSpecies() ==
-                             testData.get("sequenNumber").get<double>());
+                     testData.get("sequenNumber").get<double>());
         }
 
         WHEN ("Getting number of residues") {
             REQUIRE (alig.getNumAminos() ==
-                             testData.get("residNumber").get<double>());
+                     testData.get("residNumber").get<double>());
+        }
+
+        WHEN("Choosing an automated method")
+        {
+            // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
+            REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+        }
+
+        WHEN("Getting alignment type")
+        {
+            // TODO Result JSON should include the new mapping ids of SequenceTypes instead of the original.
+            REQUIRE(alig.getAlignmentType() == AlignmentTypeCorrespondence[static_cast<int>(testData.get("SequenceType").get<double>())]);
         }
 
         WHEN ("Getting Sequences") {
-            string *names = new string[alig.sequenNumber];
-            string *expectedNames;
 
-            populate(expectedNames, testData.get("names"));
+            if (testData.contains("names")) {
+                string *names = new string[alig.sequenNumber],
+                        *expectedNames;
+                populate(expectedNames, testData.get("names"));
 
-            GIVEN ("Out string array") {
-                alig.getSequences(names);
+                GIVEN ("Out names") {
 
-                REQUIRE_THAT (names,
-                              ArrayContentsEqual(expectedNames, alig.sequenNumber,
-                                                 "./dataset/testingFiles/alignmentErrors/input_filename.names1.error.tsv"));
-            }
+                    alig.getSequences(names);
 
-            GIVEN ("Out string array and out lengths") {
-                if (testData.contains("names")) {
-                    if (testData.contains("noGapsSize")) {
-                        int *sizePerSequence = new int[alig.sequenNumber], *expectedSizePerSequence;
-                        populate(expectedSizePerSequence, testData.get("noGapsSize"));
+                    REQUIRE_THAT (names,
+                                  ArrayContentsEqual(expectedNames,
+                                                     alig.sequenNumber,
+                                                     "./dataset/testingFiles/alignmentErrors/input_filename.names1.error.tsv"));
+                }
 
-                        alig.getSequences(names, sizePerSequence);
+                if (testData.contains("noGapsSize")) {
+                    int *sizePerSequence = new int[alig.sequenNumber],
+                            *expectedSizePerSequence;
+                    populate(expectedSizePerSequence, testData.get("noGapsSize"));
+
+                    GIVEN ("Out names and out lengths") {
+
+                        alig.getSequences(names,
+                                          sizePerSequence);
 
                         REQUIRE_THAT (names,
-                                      ArrayContentsEqual(expectedNames, alig.sequenNumber,
+                                      ArrayContentsEqual(expectedNames,
+                                                         alig.sequenNumber,
                                                          "./dataset/testingFiles/alignmentErrors/input_filename.names2.error.tsv"));
 
                         REQUIRE_THAT (sizePerSequence,
-                                      ArrayContentsEqual(expectedSizePerSequence, alig.sequenNumber,
+                                      ArrayContentsEqual(expectedSizePerSequence,
+                                                         alig.sequenNumber,
                                                          "./dataset/testingFiles/alignmentErrors/input_filename.sizePerSequence1.error.tsv"));
+                    }
 
-                        delete[] sizePerSequence;
-                        delete[] expectedSizePerSequence;
-                    } else
-                        WARN ("Alignment testfile does not contain 'noGapsSize' variable."
-                                      "\nSkipping test 'Out string array and out lengths'");
-                } else
-                    WARN ("Alignment testfile does not contain 'names' variable."
-                                  "\nSkipping test 'Out string array and out lengths'");
-            }
+                    if (testData.contains("noGapsSequences")) {
+                        string *sequences = new string[alig.sequenNumber],
+                                *expectedSequences;
+                        populate(expectedSequences,
+                                 testData.get("noGapsSequences"));
 
-            GIVEN ("Out string array, out sequences, out lengths") {
-                if (testData.contains("names")) {
-                    if (testData.contains("noGapsSize")) {
-                        if (testData.contains("noGapsSequences")) {
-                            int *sizePerSequence = new int[alig.sequenNumber],
-                                    *expectedSizePerSequence;
-
-                            populate(expectedSizePerSequence,
-                                     testData.get("noGapsSize"));
-
-                            string *sequences = new string[alig.sequenNumber],
-                                    *expectedSequences;
-                            populate(expectedSequences,
-                                     testData.get("noGapsSequences"));
-
+                        GIVEN ("Out names, out sequences, out lengths") {
                             alig.getSequences(names,
                                               sequences,
                                               sizePerSequence);
@@ -172,39 +176,38 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                                           ArrayContentsEqual(expectedSequences,
                                                              alig.sequenNumber,
                                                              "./dataset/testingFiles/alignmentErrors/input_filename.sequences.error.tsv"));
-
-                            delete[] sizePerSequence;
-                            delete[] expectedSizePerSequence;
-
-                            delete[] sequences;
-                            delete[] expectedSequences;
                         }
 
-
+                        delete[] sequences;
+                        delete[] expectedSequences;
                     } else
                         WARN ("Alignment testfile does not contain 'sequences' variable."
                                       "\nSkipping test 'Out string array, out sequences, out lengths'");
+                    delete[] sizePerSequence;
+                    delete[] expectedSizePerSequence;
                 } else
                     WARN ("Alignment testfile does not contain 'noGapsSize' variable."
-                                  "\nSkipping test 'Out string array, out sequences, out lengths'");
+                                  "\nSkipping test 'Out string array and out lengths'");
+                delete[] names;
+                delete[] expectedNames;
+            } else
+                WARN ("Alignment testfile does not contain 'names' variable."
+                              "\nSkipping test 'Out string array'");
 
-            } else WARN ("Alignment testfile does not contain 'names' variable."
-                                 "\nSkipping test 'Out string array, out sequences, out lengths'");
 
-            delete[] names;
-            delete[] expectedNames;
         }
 
         WHEN ("Calculate Gaps per column") {
             if (testData.contains("gapsPerColumn")) {
                 if (testData.contains("aligned")) {
                     if (testData.get("aligned").get<bool>()) {
-                        alig.sgaps = new statisticsGaps(&alig);
                         int *GapsPerColumn = alig.sgaps->getGapsWindow(), *expectedGapsPerColumn;
                         populate(expectedGapsPerColumn, testData.get("gapsPerColumn"));
 
-                        REQUIRE_THAT (GapsPerColumn, ArrayContentsEqual(expectedGapsPerColumn, alig.residNumber,
-                                                                        "./dataset/testingFiles/alignmentErrors/input_filename.gapsPerColumn.error.tsv"));
+                        REQUIRE_THAT (GapsPerColumn,
+                                      ArrayContentsEqual(expectedGapsPerColumn,
+                                                         alig.residNumber,
+                                                         "./dataset/testingFiles/alignmentErrors/input_filename.gapsPerColumn.error.tsv"));
 
                         delete[] expectedGapsPerColumn;
                     } //else WARN ( "Alignment testfile is not aligned.\nSkipping test 'Calculate Gaps'" );
@@ -220,16 +223,17 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
             if (testData.contains("cleanNoAllGaps")) {
                 if (testData.contains("aligned")) {
                     if (testData.get("aligned").get<bool>()) {
-                        int * cleanNoAllGaps;
+                        int *cleanNoAllGaps;
                         populate(cleanNoAllGaps, testData.get("cleanNoAllGaps"));
-                        alig.sgaps = new statisticsGaps(&alig);
 
-                        newAlignment * newAl = alig.Cleaning->cleanNoAllGaps(false);
+                        newAlignment *newAl = alig.Cleaning->cleanNoAllGaps(false);
 
-                        REQUIRE_THAT(newAl->saveResidues, ArrayContentsEqual(cleanNoAllGaps, alig.residNumber,
-                                                                           "./dataset/testingFiles/alignmentErrors/input_filename.noAllGaps.error.tsv"));
+                        REQUIRE_THAT(newAl->saveResidues,
+                                     ArrayContentsEqual(cleanNoAllGaps,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/input_filename.noAllGaps.error.tsv"));
                         delete newAl;
-                        delete [] cleanNoAllGaps;
+                        delete[] cleanNoAllGaps;
                     }
                 } else
                     WARN ("Alignment testfile does not contain 'aligned' variable"
@@ -243,16 +247,17 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
             if (testData.contains("clean2ndSlope")) {
                 if (testData.contains("aligned")) {
                     if (testData.get("aligned").get<bool>()) {
-                        int * cleanNoAllGaps;
+                        int *cleanNoAllGaps;
                         populate(cleanNoAllGaps, testData.get("clean2ndSlope"));
-                        alig.sgaps = new statisticsGaps(&alig);
 
-                        newAlignment * newAl = alig.Cleaning->clean2ndSlope(false);
+                        newAlignment *newAl = alig.Cleaning->clean2ndSlope(false);
 
-                        REQUIRE_THAT(newAl->saveResidues, ArrayContentsEqual(cleanNoAllGaps, alig.residNumber,
-                                                                           "./dataset/testingFiles/alignmentErrors/input_filename.2ndSlope.error.tsv"));
+                        REQUIRE_THAT(newAl->saveResidues,
+                                     ArrayContentsEqual(cleanNoAllGaps,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/input_filename.2ndSlope.error.tsv"));
                         delete newAl;
-                        delete [] cleanNoAllGaps;
+                        delete[] cleanNoAllGaps;
                     }
                 } else
                     WARN ("Alignment testfile does not contain 'aligned' variable"
@@ -266,16 +271,17 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
             if (testData.contains("cleanCombMethods lax")) {
                 if (testData.contains("aligned")) {
                     if (testData.get("aligned").get<bool>()) {
-                        int * cleanNoAllGaps;
+                        int *cleanNoAllGaps;
                         populate(cleanNoAllGaps, testData.get("clean2ndSlope"));
-                        alig.sgaps = new statisticsGaps(&alig);
 
-                        newAlignment * newAl = alig.Cleaning->cleanCombMethods(false, true);
+                        newAlignment *newAl = alig.Cleaning->cleanCombMethods(false, true);
 
-                        REQUIRE_THAT(newAl->saveResidues, ArrayContentsEqual(cleanNoAllGaps, alig.residNumber,
-                                                                           "./dataset/testingFiles/alignmentErrors/input_filename.combMethodLax.error.tsv"));
+                        REQUIRE_THAT(newAl->saveResidues,
+                                     ArrayContentsEqual(cleanNoAllGaps,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/input_filename.combMethodLax.error.tsv"));
                         delete newAl;
-                        delete [] cleanNoAllGaps;
+                        delete[] cleanNoAllGaps;
                     }
                 } else
                     WARN ("Alignment testfile does not contain 'aligned' variable"
@@ -289,16 +295,17 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
             if (testData.contains("cleanCombMethods strict")) {
                 if (testData.contains("aligned")) {
                     if (testData.get("aligned").get<bool>()) {
-                        int * cleanNoAllGaps;
+                        int *cleanNoAllGaps;
                         populate(cleanNoAllGaps, testData.get("clean2ndSlope"));
-                        alig.sgaps = new statisticsGaps(&alig);
 
-                        newAlignment * newAl = alig.Cleaning->cleanCombMethods(false, false);
+                        newAlignment *newAl = alig.Cleaning->cleanCombMethods(false, false);
 
-                        REQUIRE_THAT(newAl->saveResidues, ArrayContentsEqual(cleanNoAllGaps, alig.residNumber,
-                                                                           "./dataset/testingFiles/alignmentErrors/input_filename.combMethodStrict.error.tsv"));
+                        REQUIRE_THAT(newAl->saveResidues,
+                                     ArrayContentsEqual(cleanNoAllGaps,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/input_filename.combMethodStrict.error.tsv"));
                         delete newAl;
-                        delete [] cleanNoAllGaps;
+                        delete[] cleanNoAllGaps;
                     }
                 } else
                     WARN ("Alignment testfile does not contain 'aligned' variable"
@@ -308,7 +315,46 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                               "\nSkipping test 'Calculate Gaps'");
         }
 
+        WHEN("Clean Gaps") {
+            if (testData.contains("cleanGaps")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    auto cleanGapsData = testData.get("cleanGaps").get<picojson::object>();
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto gapPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 gapPctIT != end2;
+                                 gapPctIT++)
+                            {
+                                GIVEN(gapPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float gapsPct = std::stof(gapPctIT->first.substr(gapPctIT->first.find('=') + 1));
+                                    int *saveResidues;
+                                    populate(saveResidues, gapPctIT->second);
 
+                                    newAlignment *newAl = alig.Cleaning->cleanGaps(baseline, gapsPct, false);
+
+                                    std::stringstream ss;
+                                    ss << "./dataset/testingFiles/alignmentErrors/input_filename.CleanGaps"
+                                       << ".BL" << std::to_string(baseline)
+                                       << ".GPCT" << std::to_string(gapsPct)
+                                       << ".error.tsv";
+
+                                    REQUIRE_THAT(newAl->saveResidues,
+                                                 ArrayContentsEqual(saveResidues,
+                                                                    newAl->residNumber,
+                                                                    ss.rdbuf()->str()));
+
+                                    delete newAl;
+
+                                    delete[] saveResidues;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from input_filename");
 
