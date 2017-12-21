@@ -39,25 +39,6 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
 
         alig.fillMatrices(alig.isAligned);
 
-        if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
-            alig.sgaps = new statisticsGaps(&alig);
-            alig.scons = new statisticsConservation2(&alig);
-            // Init Similarity Matrix
-            {
-                int SequenceType = testData.get("SequenceType").get<double>();
-                similarityMatrix *sm = new similarityMatrix();
-                switch (SequenceType) {
-                    case 1: case 2: default:
-                        sm->defaultNTSimMatrix(); break;
-                    case 3:
-                        sm->defaultAASimMatrix(); break;
-                    case 4: case 5:
-                        sm->defaultNTDegeneratedSimMatrix(); break;
-                }
-                alig.scons->setSimilarityMatrix(sm);
-            }
-        }
-
         WHEN ("Checking save residues is initialized correctly") {
 
             if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
@@ -103,8 +84,12 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
 
         WHEN("Choosing an automated method")
         {
-            // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
-            REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
+                    REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
         }
 
         WHEN("Getting alignment type")
@@ -197,10 +182,11 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
 
         }
 
-        WHEN ("Calculate Gaps per column") {
+        WHEN ("Calculating Gaps per column") {
             if (testData.contains("gapsPerColumn")) {
                 if (testData.contains("aligned")) {
                     if (testData.get("aligned").get<bool>()) {
+                        alig.sgaps = new statisticsGaps(&alig);
                         int *GapsPerColumn = alig.sgaps->getGapsWindow(), *expectedGapsPerColumn;
                         populate(expectedGapsPerColumn, testData.get("gapsPerColumn"));
 
@@ -219,10 +205,11 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                               "\nSkipping test 'Calculate Gaps'");
         }
 
-        WHEN ("Calculate No All Gaps") {
+        WHEN ("Trimming by No All Gaps") {
             if (testData.contains("cleanNoAllGaps")) {
                 if (testData.contains("aligned")) {
                     if (testData.get("aligned").get<bool>()) {
+                        alig.sgaps = new statisticsGaps(&alig);
                         int *cleanNoAllGaps;
                         populate(cleanNoAllGaps, testData.get("cleanNoAllGaps"));
 
@@ -243,21 +230,29 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                               "\nSkipping test 'Calculate Gaps'");
         }
 
-        WHEN ("Calculate Clean 2nd Slope") {
+        WHEN ("Trimming by Clean 2nd Slope") {
             if (testData.contains("clean2ndSlope")) {
                 if (testData.contains("aligned")) {
                     if (testData.get("aligned").get<bool>()) {
-                        int *cleanNoAllGaps;
-                        populate(cleanNoAllGaps, testData.get("clean2ndSlope"));
+                        alig.sgaps = new statisticsGaps(&alig);
 
-                        newAlignment *newAl = alig.Cleaning->clean2ndSlope(false);
+                        WHEN("Calculating 2nd Slope")
+                            CHECK(alig.sgaps->calcCutPoint2ndSlope() == testData.get("2ndSlopeCutPoint").get<double>());
 
-                        REQUIRE_THAT(newAl->saveResidues,
-                                     ArrayContentsEqual(cleanNoAllGaps,
-                                                        alig.residNumber,
-                                                        "./dataset/testingFiles/alignmentErrors/input_filename.2ndSlope.error.tsv"));
-                        delete newAl;
-                        delete[] cleanNoAllGaps;
+                        WHEN("Applying 2nd Slope")
+                        {
+                            int *cleanNoAllGaps;
+                            populate(cleanNoAllGaps, testData.get("clean2ndSlope"));
+
+                            newAlignment *newAl = alig.Cleaning->clean2ndSlope(false);
+
+                            REQUIRE_THAT(newAl->saveResidues,
+                                         ArrayContentsEqual(cleanNoAllGaps,
+                                                            alig.residNumber,
+                                                            "./dataset/testingFiles/alignmentErrors/input_filename.2ndSlope.error.tsv"));
+                            delete newAl;
+                            delete[] cleanNoAllGaps;
+                        }
                     }
                 } else
                     WARN ("Alignment testfile does not contain 'aligned' variable"
@@ -267,10 +262,25 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                               "\nSkipping test 'Calculate Gaps'");
         }
 
-        WHEN ("Calculate Clean Comb Methods Lax") {
+        WHEN ("Trimming by Clean Comb Methods Lax") {
             if (testData.contains("cleanCombMethods lax")) {
                 if (testData.contains("aligned")) {
                     if (testData.get("aligned").get<bool>()) {
+                        {
+                            alig.sgaps = new statisticsGaps(&alig);
+                            alig.scons = new statisticsConservation2(&alig);
+                            int SequenceType = testData.get("SequenceType").get<double>();
+                            similarityMatrix *sm = new similarityMatrix();
+                            switch (SequenceType) {
+                                case 1: case 2: default:
+                                    sm->defaultNTSimMatrix(); break;
+                                case 3:
+                                    sm->defaultAASimMatrix(); break;
+                                case 4: case 5:
+                                    sm->defaultNTDegeneratedSimMatrix(); break;
+                            }
+                            alig.scons->setSimilarityMatrix(sm);
+                        }
                         int *cleanNoAllGaps;
                         populate(cleanNoAllGaps, testData.get("clean2ndSlope"));
 
@@ -291,10 +301,25 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                               "\nSkipping test 'Calculate Gaps'");
         }
 
-        WHEN ("Calculate Clean Comb Methods Strict") {
+        WHEN ("Trimming by Clean Comb Methods Strict") {
             if (testData.contains("cleanCombMethods strict")) {
                 if (testData.contains("aligned")) {
                     if (testData.get("aligned").get<bool>()) {
+                        {
+                            alig.sgaps = new statisticsGaps(&alig);
+                            alig.scons = new statisticsConservation2(&alig);
+                            int SequenceType = testData.get("SequenceType").get<double>();
+                            similarityMatrix *sm = new similarityMatrix();
+                            switch (SequenceType) {
+                                case 1: case 2: default:
+                                    sm->defaultNTSimMatrix(); break;
+                                case 3:
+                                    sm->defaultAASimMatrix(); break;
+                                case 4: case 5:
+                                    sm->defaultNTDegeneratedSimMatrix(); break;
+                            }
+                            alig.scons->setSimilarityMatrix(sm);
+                        }
                         int *cleanNoAllGaps;
                         populate(cleanNoAllGaps, testData.get("clean2ndSlope"));
 
@@ -315,9 +340,10 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                               "\nSkipping test 'Calculate Gaps'");
         }
 
-        WHEN("Clean Gaps") {
+        WHEN("Trimming by Clean Gaps") {
             if (testData.contains("cleanGaps")) {
                 if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.sgaps = new statisticsGaps(&alig);
                     auto cleanGapsData = testData.get("cleanGaps").get<picojson::object>();
                     for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
                         GIVEN (baselineIT->first) {
