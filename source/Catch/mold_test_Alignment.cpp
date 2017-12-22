@@ -120,12 +120,12 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
 
                         REQUIRE(mdk_obtained != NULL);
 
-                        REQUIRE_THAT(mdk_obtained,
+                        CHECK_THAT(mdk_obtained,
                                      ArrayContentsEqual(mdk_expected,
                                                         alig.residNumber,
                                                         "./dataset/testingFiles/alignmentErrors/input_filename.MDK.error.tsv"));
                         delete [] mdk_expected;
-                        delete [] mdk_obtained;
+//                        delete [] mdk_obtained;
                     }
 
                     WHEN("Calculating Q")
@@ -137,13 +137,15 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
 
                         REQUIRE(Q_obtained != NULL);
 
-                        REQUIRE_THAT(Q_expected,
+                        CHECK_THAT(Q_expected,
                                      ArrayContentsEqual(Q_obtained,
                                                         alig.residNumber,
                                                         "./dataset/testingFiles/alignmentErrors/input_filename.Q.error.tsv"));
                         delete [] Q_expected;
 //                        delete [] Q_obtained;
                     }
+
+                    delete sm;
                 }
             }
         }
@@ -165,7 +167,7 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
 
                     alig.getSequences(names);
 
-                    REQUIRE_THAT (names,
+                    CHECK_THAT (names,
                                   ArrayContentsEqual(expectedNames,
                                                      alig.sequenNumber,
                                                      "./dataset/testingFiles/alignmentErrors/input_filename.names1.error.tsv"));
@@ -181,12 +183,12 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                         alig.getSequences(names,
                                           sizePerSequence);
 
-                        REQUIRE_THAT (names,
+                        CHECK_THAT (names,
                                       ArrayContentsEqual(expectedNames,
                                                          alig.sequenNumber,
                                                          "./dataset/testingFiles/alignmentErrors/input_filename.names2.error.tsv"));
 
-                        REQUIRE_THAT (sizePerSequence,
+                        CHECK_THAT (sizePerSequence,
                                       ArrayContentsEqual(expectedSizePerSequence,
                                                          alig.sequenNumber,
                                                          "./dataset/testingFiles/alignmentErrors/input_filename.sizePerSequence1.error.tsv"));
@@ -203,17 +205,17 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                                               sequences,
                                               sizePerSequence);
 
-                            REQUIRE_THAT (names,
+                            CHECK_THAT (names,
                                           ArrayContentsEqual(expectedNames,
                                                              alig.sequenNumber,
                                                              "./dataset/testingFiles/alignmentErrors/input_filename.names4.error.tsv"));
 
-                            REQUIRE_THAT (sizePerSequence,
+                            CHECK_THAT (sizePerSequence,
                                           ArrayContentsEqual(expectedSizePerSequence,
                                                              alig.sequenNumber,
                                                              "./dataset/testingFiles/alignmentErrors/input_filename.sizePerSequence2.error.tsv"));
 
-                            REQUIRE_THAT (sequences,
+                            CHECK_THAT (sequences,
                                           ArrayContentsEqual(expectedSequences,
                                                              alig.sequenNumber,
                                                              "./dataset/testingFiles/alignmentErrors/input_filename.sequences.error.tsv"));
@@ -246,7 +248,7 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                         int *GapsPerColumn = alig.sgaps->getGapsWindow(), *expectedGapsPerColumn;
                         populate(expectedGapsPerColumn, testData.get("gapsPerColumn"));
 
-                        REQUIRE_THAT (GapsPerColumn,
+                        CHECK_THAT (GapsPerColumn,
                                       ArrayContentsEqual(expectedGapsPerColumn,
                                                          alig.residNumber,
                                                          "./dataset/testingFiles/alignmentErrors/input_filename.gapsPerColumn.error.tsv"));
@@ -271,7 +273,7 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
 
                         newAlignment *newAl = alig.Cleaning->cleanNoAllGaps(false);
 
-                        REQUIRE_THAT(newAl->saveResidues,
+                        CHECK_THAT(newAl->saveResidues,
                                      ArrayContentsEqual(cleanNoAllGaps,
                                                         alig.residNumber,
                                                         "./dataset/testingFiles/alignmentErrors/input_filename.noAllGaps.error.tsv"));
@@ -302,7 +304,7 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
 
                             newAlignment *newAl = alig.Cleaning->clean2ndSlope(false);
 
-                            REQUIRE_THAT(newAl->saveResidues,
+                            CHECK_THAT(newAl->saveResidues,
                                          ArrayContentsEqual(cleanNoAllGaps,
                                                             alig.residNumber,
                                                             "./dataset/testingFiles/alignmentErrors/input_filename.2ndSlope.error.tsv"));
@@ -322,31 +324,32 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
             if (testData.contains("cleanCombMethods lax")) {
                 if (testData.contains("aligned")) {
                     if (testData.get("aligned").get<bool>()) {
-                        {
-                            alig.sgaps = new statisticsGaps(&alig);
-                            alig.scons = new statisticsConservation2(&alig);
-                            int SequenceType = testData.get("SequenceType").get<double>();
-                            similarityMatrix *sm = new similarityMatrix();
-                            switch (SequenceType) {
-                                case 1: case 2: default:
-                                    sm->defaultNTSimMatrix(); break;
-                                case 3:
-                                    sm->defaultAASimMatrix(); break;
-                                case 4: case 5:
-                                    sm->defaultNTDegeneratedSimMatrix(); break;
-                            }
-                            alig.scons->setSimilarityMatrix(sm);
+
+                        alig.sgaps = new statisticsGaps(&alig);
+                        alig.scons = new statisticsConservation2(&alig);
+                        int SequenceType = testData.get("SequenceType").get<double>();
+                        similarityMatrix *sm = new similarityMatrix();
+                        switch (SequenceType) {
+                            case 1: case 2: default:
+                                sm->defaultNTSimMatrix(); break;
+                            case 3:
+                                sm->defaultAASimMatrix(); break;
+                            case 4: case 5:
+                                sm->defaultNTDegeneratedSimMatrix(); break;
                         }
+                        alig.scons->setSimilarityMatrix(sm);
+
                         int *cleanNoAllGaps;
                         populate(cleanNoAllGaps, testData.get("clean2ndSlope"));
 
                         newAlignment *newAl = alig.Cleaning->cleanCombMethods(false, true);
 
-                        REQUIRE_THAT(newAl->saveResidues,
+                        CHECK_THAT(newAl->saveResidues,
                                      ArrayContentsEqual(cleanNoAllGaps,
                                                         alig.residNumber,
                                                         "./dataset/testingFiles/alignmentErrors/input_filename.combMethodLax.error.tsv"));
                         delete newAl;
+                        delete sm;
                         delete[] cleanNoAllGaps;
                     }
                 } else
@@ -361,31 +364,32 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
             if (testData.contains("cleanCombMethods strict")) {
                 if (testData.contains("aligned")) {
                     if (testData.get("aligned").get<bool>()) {
-                        {
-                            alig.sgaps = new statisticsGaps(&alig);
-                            alig.scons = new statisticsConservation2(&alig);
-                            int SequenceType = testData.get("SequenceType").get<double>();
-                            similarityMatrix *sm = new similarityMatrix();
-                            switch (SequenceType) {
-                                case 1: case 2: default:
-                                    sm->defaultNTSimMatrix(); break;
-                                case 3:
-                                    sm->defaultAASimMatrix(); break;
-                                case 4: case 5:
-                                    sm->defaultNTDegeneratedSimMatrix(); break;
-                            }
-                            alig.scons->setSimilarityMatrix(sm);
+
+                        alig.sgaps = new statisticsGaps(&alig);
+                        alig.scons = new statisticsConservation2(&alig);
+                        int SequenceType = testData.get("SequenceType").get<double>();
+                        similarityMatrix *sm = new similarityMatrix();
+                        switch (SequenceType) {
+                            case 1: case 2: default:
+                                sm->defaultNTSimMatrix(); break;
+                            case 3:
+                                sm->defaultAASimMatrix(); break;
+                            case 4: case 5:
+                                sm->defaultNTDegeneratedSimMatrix(); break;
                         }
+                        alig.scons->setSimilarityMatrix(sm);
+
                         int *cleanNoAllGaps;
                         populate(cleanNoAllGaps, testData.get("clean2ndSlope"));
 
                         newAlignment *newAl = alig.Cleaning->cleanCombMethods(false, false);
 
-                        REQUIRE_THAT(newAl->saveResidues,
+                        CHECK_THAT(newAl->saveResidues,
                                      ArrayContentsEqual(cleanNoAllGaps,
                                                         alig.residNumber,
                                                         "./dataset/testingFiles/alignmentErrors/input_filename.combMethodStrict.error.tsv"));
                         delete newAl;
+                        delete sm;
                         delete[] cleanNoAllGaps;
                     }
                 } else
@@ -422,7 +426,7 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                                        << ".GPCT" << std::to_string(gapsPct)
                                        << ".error.tsv";
 
-                                    REQUIRE_THAT(newAl->saveResidues,
+                                    CHECK_THAT(newAl->saveResidues,
                                                  ArrayContentsEqual(saveResidues,
                                                                     newAl->residNumber,
                                                                     ss.rdbuf()->str()));
@@ -466,12 +470,12 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                                     float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
                                     float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
 
-                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                    CHECK(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
                                 }
                             }
                         }
                     }
-
+                    delete sm;
                 }
             }
         }
