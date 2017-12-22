@@ -92,6 +92,62 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
             }
         }
 
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/input_filename.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/input_filename.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
+                }
+            }
+        }
+
         WHEN("Getting alignment type")
         {
             // TODO Result JSON should include the new mapping ids of SequenceTypes instead of the original.
@@ -378,6 +434,44 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                             }
                         }
                     }
+                }
+            }
+        }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
         }

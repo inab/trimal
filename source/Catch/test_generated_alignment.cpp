@@ -92,6 +92,62 @@ SCENARIO ("Alignment methods work correctly in alignments_comparison.1", "[align
             }
         }
 
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/alignments_comparison.1.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/alignments_comparison.1.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
+                }
+            }
+        }
+
         WHEN("Getting alignment type")
         {
             // TODO Result JSON should include the new mapping ids of SequenceTypes instead of the original.
@@ -381,6 +437,44 @@ SCENARIO ("Alignment methods work correctly in alignments_comparison.1", "[align
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from alignments_comparison.1");
 
@@ -453,6 +547,62 @@ SCENARIO ("Alignment methods work correctly in alignments_comparison.2", "[align
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/alignments_comparison.2.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/alignments_comparison.2.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -746,6 +896,44 @@ SCENARIO ("Alignment methods work correctly in alignments_comparison.2", "[align
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from alignments_comparison.2");
 
@@ -818,6 +1006,62 @@ SCENARIO ("Alignment methods work correctly in alignments_comparison.3", "[align
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/alignments_comparison.3.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/alignments_comparison.3.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -1111,6 +1355,44 @@ SCENARIO ("Alignment methods work correctly in alignments_comparison.3", "[align
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from alignments_comparison.3");
 
@@ -1183,6 +1465,62 @@ SCENARIO ("Alignment methods work correctly in example.001.AA.clw", "[alignment]
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.001.AA.clw.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.001.AA.clw.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -1476,6 +1814,44 @@ SCENARIO ("Alignment methods work correctly in example.001.AA.clw", "[alignment]
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.001.AA.clw");
 
@@ -1548,6 +1924,62 @@ SCENARIO ("Alignment methods work correctly in example.001.AA.msl", "[alignment]
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.001.AA.msl.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.001.AA.msl.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -1841,6 +2273,44 @@ SCENARIO ("Alignment methods work correctly in example.001.AA.msl", "[alignment]
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.001.AA.msl");
 
@@ -1913,6 +2383,62 @@ SCENARIO ("Alignment methods work correctly in example.001.AA.phy", "[alignment]
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.001.AA.phy.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.001.AA.phy.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -2206,6 +2732,44 @@ SCENARIO ("Alignment methods work correctly in example.001.AA.phy", "[alignment]
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.001.AA.phy");
 
@@ -2278,6 +2842,62 @@ SCENARIO ("Alignment methods work correctly in example.002.AA.clw", "[alignment]
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.002.AA.clw.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.002.AA.clw.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -2571,6 +3191,44 @@ SCENARIO ("Alignment methods work correctly in example.002.AA.clw", "[alignment]
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.002.AA.clw");
 
@@ -2643,6 +3301,62 @@ SCENARIO ("Alignment methods work correctly in example.002.AA.phy", "[alignment]
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.002.AA.phy.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.002.AA.phy.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -2936,6 +3650,44 @@ SCENARIO ("Alignment methods work correctly in example.002.AA.phy", "[alignment]
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.002.AA.phy");
 
@@ -3008,6 +3760,62 @@ SCENARIO ("Alignment methods work correctly in example.003.AA.clw", "[alignment]
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.003.AA.clw.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.003.AA.clw.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -3301,6 +4109,44 @@ SCENARIO ("Alignment methods work correctly in example.003.AA.clw", "[alignment]
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.003.AA.clw");
 
@@ -3373,6 +4219,62 @@ SCENARIO ("Alignment methods work correctly in example.004.AA.fasta", "[alignmen
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.004.AA.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.004.AA.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -3666,6 +4568,44 @@ SCENARIO ("Alignment methods work correctly in example.004.AA.fasta", "[alignmen
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.004.AA.fasta");
 
@@ -3738,6 +4678,62 @@ SCENARIO ("Alignment methods work correctly in example.005.AA.fasta", "[alignmen
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.005.AA.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.005.AA.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -4031,6 +5027,44 @@ SCENARIO ("Alignment methods work correctly in example.005.AA.fasta", "[alignmen
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.005.AA.fasta");
 
@@ -4103,6 +5137,62 @@ SCENARIO ("Alignment methods work correctly in example.006.AA.pir", "[alignment]
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.006.AA.pir.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.006.AA.pir.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -4396,6 +5486,44 @@ SCENARIO ("Alignment methods work correctly in example.006.AA.pir", "[alignment]
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.006.AA.pir");
 
@@ -4468,6 +5596,62 @@ SCENARIO ("Alignment methods work correctly in example.007.AA.fasta", "[alignmen
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.007.AA.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.007.AA.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -4761,6 +5945,44 @@ SCENARIO ("Alignment methods work correctly in example.007.AA.fasta", "[alignmen
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.007.AA.fasta");
 
@@ -4833,6 +6055,62 @@ SCENARIO ("Alignment methods work correctly in example.007.AA.only_seqs", "[alig
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.007.AA.only_seqs.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.007.AA.only_seqs.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -5126,6 +6404,44 @@ SCENARIO ("Alignment methods work correctly in example.007.AA.only_seqs", "[alig
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.007.AA.only_seqs");
 
@@ -5198,6 +6514,62 @@ SCENARIO ("Alignment methods work correctly in example.009.AA.fasta", "[alignmen
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.009.AA.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.009.AA.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -5491,6 +6863,44 @@ SCENARIO ("Alignment methods work correctly in example.009.AA.fasta", "[alignmen
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.009.AA.fasta");
 
@@ -5563,6 +6973,62 @@ SCENARIO ("Alignment methods work correctly in example.010.AA.fasta", "[alignmen
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.010.AA.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.010.AA.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -5856,6 +7322,44 @@ SCENARIO ("Alignment methods work correctly in example.010.AA.fasta", "[alignmen
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.010.AA.fasta");
 
@@ -5928,6 +7432,62 @@ SCENARIO ("Alignment methods work correctly in example.011.AA.YKL197C.clw", "[al
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.011.AA.YKL197C.clw.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.011.AA.YKL197C.clw.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -6221,6 +7781,44 @@ SCENARIO ("Alignment methods work correctly in example.011.AA.YKL197C.clw", "[al
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.011.AA.YKL197C.clw");
 
@@ -6293,6 +7891,62 @@ SCENARIO ("Alignment methods work correctly in example.011.AA.YKL197C.fasta", "[
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.011.AA.YKL197C.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.011.AA.YKL197C.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -6586,6 +8240,44 @@ SCENARIO ("Alignment methods work correctly in example.011.AA.YKL197C.fasta", "[
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.011.AA.YKL197C.fasta");
 
@@ -6658,6 +8350,62 @@ SCENARIO ("Alignment methods work correctly in example.011.AA.YKL197C.phy", "[al
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.011.AA.YKL197C.phy.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.011.AA.YKL197C.phy.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -6951,6 +8699,44 @@ SCENARIO ("Alignment methods work correctly in example.011.AA.YKL197C.phy", "[al
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.011.AA.YKL197C.phy");
 
@@ -7023,6 +8809,62 @@ SCENARIO ("Alignment methods work correctly in example.012.AA.SuperAlignment.phy
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.012.AA.SuperAlignment.phy.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.012.AA.SuperAlignment.phy.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -7316,6 +9158,44 @@ SCENARIO ("Alignment methods work correctly in example.012.AA.SuperAlignment.phy
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.012.AA.SuperAlignment.phy");
 
@@ -7388,6 +9268,62 @@ SCENARIO ("Alignment methods work correctly in example.013.AA.SuperAlignment.phy
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.013.AA.SuperAlignment.phy.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.013.AA.SuperAlignment.phy.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -7681,6 +9617,44 @@ SCENARIO ("Alignment methods work correctly in example.013.AA.SuperAlignment.phy
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.013.AA.SuperAlignment.phy");
 
@@ -7753,6 +9727,62 @@ SCENARIO ("Alignment methods work correctly in example.014.AA.EggNOG.COG0591.fas
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.014.AA.EggNOG.COG0591.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.014.AA.EggNOG.COG0591.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -8046,6 +10076,44 @@ SCENARIO ("Alignment methods work correctly in example.014.AA.EggNOG.COG0591.fas
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.014.AA.EggNOG.COG0591.fasta");
 
@@ -8118,6 +10186,62 @@ SCENARIO ("Alignment methods work correctly in example.015.AA.bctoNOG.ENOG41099F
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.015.AA.bctoNOG.ENOG41099F3.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.015.AA.bctoNOG.ENOG41099F3.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -8411,6 +10535,44 @@ SCENARIO ("Alignment methods work correctly in example.015.AA.bctoNOG.ENOG41099F
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.015.AA.bctoNOG.ENOG41099F3.fasta");
 
@@ -8483,6 +10645,62 @@ SCENARIO ("Alignment methods work correctly in example.016.AA.bctoNOG.ENOG41099F
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.016.AA.bctoNOG.ENOG41099FB.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.016.AA.bctoNOG.ENOG41099FB.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -8776,6 +10994,44 @@ SCENARIO ("Alignment methods work correctly in example.016.AA.bctoNOG.ENOG41099F
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.016.AA.bctoNOG.ENOG41099FB.fasta");
 
@@ -8848,6 +11104,62 @@ SCENARIO ("Alignment methods work correctly in example.017.AA.bctoNOG.ENOG41099F
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.017.AA.bctoNOG.ENOG41099FJ.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.017.AA.bctoNOG.ENOG41099FJ.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -9141,6 +11453,44 @@ SCENARIO ("Alignment methods work correctly in example.017.AA.bctoNOG.ENOG41099F
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.017.AA.bctoNOG.ENOG41099FJ.fasta");
 
@@ -9213,6 +11563,62 @@ SCENARIO ("Alignment methods work correctly in example.018.AA.bctoNOG.ENOG41099F
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.018.AA.bctoNOG.ENOG41099FV.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.018.AA.bctoNOG.ENOG41099FV.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -9506,6 +11912,44 @@ SCENARIO ("Alignment methods work correctly in example.018.AA.bctoNOG.ENOG41099F
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.018.AA.bctoNOG.ENOG41099FV.fasta");
 
@@ -9578,6 +12022,62 @@ SCENARIO ("Alignment methods work correctly in example.019.AA.bctoNOG.ENOG41099H
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.019.AA.bctoNOG.ENOG41099HI.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.019.AA.bctoNOG.ENOG41099HI.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -9871,6 +12371,44 @@ SCENARIO ("Alignment methods work correctly in example.019.AA.bctoNOG.ENOG41099H
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.019.AA.bctoNOG.ENOG41099HI.fasta");
 
@@ -9943,6 +12481,62 @@ SCENARIO ("Alignment methods work correctly in example.020.AA.bctoNOG.ENOG41099H
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.020.AA.bctoNOG.ENOG41099HN.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.020.AA.bctoNOG.ENOG41099HN.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -10236,6 +12830,44 @@ SCENARIO ("Alignment methods work correctly in example.020.AA.bctoNOG.ENOG41099H
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.020.AA.bctoNOG.ENOG41099HN.fasta");
 
@@ -10308,6 +12940,62 @@ SCENARIO ("Alignment methods work correctly in example.021.AA.bctoNOG.ENOG41099I
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.021.AA.bctoNOG.ENOG41099I5.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.021.AA.bctoNOG.ENOG41099I5.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -10601,6 +13289,44 @@ SCENARIO ("Alignment methods work correctly in example.021.AA.bctoNOG.ENOG41099I
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.021.AA.bctoNOG.ENOG41099I5.fasta");
 
@@ -10673,6 +13399,62 @@ SCENARIO ("Alignment methods work correctly in example.022.AA.bctoNOG.ENOG41099I
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.022.AA.bctoNOG.ENOG41099IZ.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.022.AA.bctoNOG.ENOG41099IZ.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -10966,6 +13748,44 @@ SCENARIO ("Alignment methods work correctly in example.022.AA.bctoNOG.ENOG41099I
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.022.AA.bctoNOG.ENOG41099IZ.fasta");
 
@@ -11038,6 +13858,62 @@ SCENARIO ("Alignment methods work correctly in example.023.AA.bctoNOG.ENOG41099K
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.023.AA.bctoNOG.ENOG41099K3.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.023.AA.bctoNOG.ENOG41099K3.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -11331,6 +14207,44 @@ SCENARIO ("Alignment methods work correctly in example.023.AA.bctoNOG.ENOG41099K
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.023.AA.bctoNOG.ENOG41099K3.fasta");
 
@@ -11403,6 +14317,62 @@ SCENARIO ("Alignment methods work correctly in example.024.AA.bctoNOG.ENOG41099K
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.024.AA.bctoNOG.ENOG41099KM.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.024.AA.bctoNOG.ENOG41099KM.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -11696,6 +14666,44 @@ SCENARIO ("Alignment methods work correctly in example.024.AA.bctoNOG.ENOG41099K
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.024.AA.bctoNOG.ENOG41099KM.fasta");
 
@@ -11768,6 +14776,62 @@ SCENARIO ("Alignment methods work correctly in example.025.AA.bctoNOG.ENOG41099K
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.025.AA.bctoNOG.ENOG41099KP.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.025.AA.bctoNOG.ENOG41099KP.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -12061,6 +15125,44 @@ SCENARIO ("Alignment methods work correctly in example.025.AA.bctoNOG.ENOG41099K
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.025.AA.bctoNOG.ENOG41099KP.fasta");
 
@@ -12133,6 +15235,62 @@ SCENARIO ("Alignment methods work correctly in example.026.AA.bctoNOG.ENOG41099M
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.026.AA.bctoNOG.ENOG41099MV.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.026.AA.bctoNOG.ENOG41099MV.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -12426,6 +15584,44 @@ SCENARIO ("Alignment methods work correctly in example.026.AA.bctoNOG.ENOG41099M
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.026.AA.bctoNOG.ENOG41099MV.fasta");
 
@@ -12498,6 +15694,62 @@ SCENARIO ("Alignment methods work correctly in example.027.AA.bctoNOG.ENOG41099N
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.027.AA.bctoNOG.ENOG41099NY.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.027.AA.bctoNOG.ENOG41099NY.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -12791,6 +16043,44 @@ SCENARIO ("Alignment methods work correctly in example.027.AA.bctoNOG.ENOG41099N
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.027.AA.bctoNOG.ENOG41099NY.fasta");
 
@@ -12863,6 +16153,62 @@ SCENARIO ("Alignment methods work correctly in example.028.AA.bctoNOG.ENOG41099P
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.028.AA.bctoNOG.ENOG41099PA.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.028.AA.bctoNOG.ENOG41099PA.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -13156,6 +16502,44 @@ SCENARIO ("Alignment methods work correctly in example.028.AA.bctoNOG.ENOG41099P
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.028.AA.bctoNOG.ENOG41099PA.fasta");
 
@@ -13228,6 +16612,62 @@ SCENARIO ("Alignment methods work correctly in example.029.AA.bctoNOG.ENOG41099Q
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.029.AA.bctoNOG.ENOG41099Q3.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.029.AA.bctoNOG.ENOG41099Q3.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -13521,6 +16961,44 @@ SCENARIO ("Alignment methods work correctly in example.029.AA.bctoNOG.ENOG41099Q
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.029.AA.bctoNOG.ENOG41099Q3.fasta");
 
@@ -13593,6 +17071,62 @@ SCENARIO ("Alignment methods work correctly in example.030.AA.bctoNOG.ENOG41099R
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.030.AA.bctoNOG.ENOG41099RG.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.030.AA.bctoNOG.ENOG41099RG.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -13886,6 +17420,44 @@ SCENARIO ("Alignment methods work correctly in example.030.AA.bctoNOG.ENOG41099R
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.030.AA.bctoNOG.ENOG41099RG.fasta");
 
@@ -13958,6 +17530,62 @@ SCENARIO ("Alignment methods work correctly in example.031.AA.bctoNOG.ENOG41099U
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.031.AA.bctoNOG.ENOG41099UK.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.031.AA.bctoNOG.ENOG41099UK.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -14251,6 +17879,44 @@ SCENARIO ("Alignment methods work correctly in example.031.AA.bctoNOG.ENOG41099U
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.031.AA.bctoNOG.ENOG41099UK.fasta");
 
@@ -14323,6 +17989,62 @@ SCENARIO ("Alignment methods work correctly in example.032.AA.bctoNOG.ENOG41099U
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.032.AA.bctoNOG.ENOG41099UW.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.032.AA.bctoNOG.ENOG41099UW.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -14616,6 +18338,44 @@ SCENARIO ("Alignment methods work correctly in example.032.AA.bctoNOG.ENOG41099U
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.032.AA.bctoNOG.ENOG41099UW.fasta");
 
@@ -14688,6 +18448,62 @@ SCENARIO ("Alignment methods work correctly in example.033.AA.bctoNOG.ENOG41099V
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.033.AA.bctoNOG.ENOG41099VK.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.033.AA.bctoNOG.ENOG41099VK.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -14981,6 +18797,44 @@ SCENARIO ("Alignment methods work correctly in example.033.AA.bctoNOG.ENOG41099V
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.033.AA.bctoNOG.ENOG41099VK.fasta");
 
@@ -15053,6 +18907,62 @@ SCENARIO ("Alignment methods work correctly in example.034.AA.bctoNOG.ENOG41099W
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.034.AA.bctoNOG.ENOG41099WA.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.034.AA.bctoNOG.ENOG41099WA.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -15346,6 +19256,44 @@ SCENARIO ("Alignment methods work correctly in example.034.AA.bctoNOG.ENOG41099W
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.034.AA.bctoNOG.ENOG41099WA.fasta");
 
@@ -15418,6 +19366,62 @@ SCENARIO ("Alignment methods work correctly in example.035.AA.bctoNOG.ENOG41099W
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.035.AA.bctoNOG.ENOG41099WF.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.035.AA.bctoNOG.ENOG41099WF.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -15711,6 +19715,44 @@ SCENARIO ("Alignment methods work correctly in example.035.AA.bctoNOG.ENOG41099W
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.035.AA.bctoNOG.ENOG41099WF.fasta");
 
@@ -15783,6 +19825,62 @@ SCENARIO ("Alignment methods work correctly in example.036.AA.bctoNOG.ENOG41099X
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.036.AA.bctoNOG.ENOG41099XJ.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.036.AA.bctoNOG.ENOG41099XJ.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -16076,6 +20174,44 @@ SCENARIO ("Alignment methods work correctly in example.036.AA.bctoNOG.ENOG41099X
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.036.AA.bctoNOG.ENOG41099XJ.fasta");
 
@@ -16148,6 +20284,62 @@ SCENARIO ("Alignment methods work correctly in example.037.AA.bctoNOG.ENOG41099X
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.037.AA.bctoNOG.ENOG41099XP.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.037.AA.bctoNOG.ENOG41099XP.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -16441,6 +20633,44 @@ SCENARIO ("Alignment methods work correctly in example.037.AA.bctoNOG.ENOG41099X
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.037.AA.bctoNOG.ENOG41099XP.fasta");
 
@@ -16513,6 +20743,62 @@ SCENARIO ("Alignment methods work correctly in example.038.AA.bctoNOG.ENOG41099Y
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.038.AA.bctoNOG.ENOG41099Y4.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.038.AA.bctoNOG.ENOG41099Y4.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -16806,6 +21092,44 @@ SCENARIO ("Alignment methods work correctly in example.038.AA.bctoNOG.ENOG41099Y
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.038.AA.bctoNOG.ENOG41099Y4.fasta");
 
@@ -16878,6 +21202,62 @@ SCENARIO ("Alignment methods work correctly in example.039.AA.bctoNOG.ENOG41099Y
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.039.AA.bctoNOG.ENOG41099YD.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.039.AA.bctoNOG.ENOG41099YD.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -17171,6 +21551,44 @@ SCENARIO ("Alignment methods work correctly in example.039.AA.bctoNOG.ENOG41099Y
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.039.AA.bctoNOG.ENOG41099YD.fasta");
 
@@ -17243,6 +21661,62 @@ SCENARIO ("Alignment methods work correctly in example.040.AA.bctoNOG.ENOG4109A3
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.040.AA.bctoNOG.ENOG4109A32.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.040.AA.bctoNOG.ENOG4109A32.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -17536,6 +22010,44 @@ SCENARIO ("Alignment methods work correctly in example.040.AA.bctoNOG.ENOG4109A3
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.040.AA.bctoNOG.ENOG4109A32.fasta");
 
@@ -17608,6 +22120,62 @@ SCENARIO ("Alignment methods work correctly in example.041.AA.bctoNOG.ENOG4109A5
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.041.AA.bctoNOG.ENOG4109A5T.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.041.AA.bctoNOG.ENOG4109A5T.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -17901,6 +22469,44 @@ SCENARIO ("Alignment methods work correctly in example.041.AA.bctoNOG.ENOG4109A5
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.041.AA.bctoNOG.ENOG4109A5T.fasta");
 
@@ -17973,6 +22579,62 @@ SCENARIO ("Alignment methods work correctly in example.042.AA.bctoNOG.ENOG4109A9
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.042.AA.bctoNOG.ENOG4109A9M.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.042.AA.bctoNOG.ENOG4109A9M.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -18266,6 +22928,44 @@ SCENARIO ("Alignment methods work correctly in example.042.AA.bctoNOG.ENOG4109A9
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.042.AA.bctoNOG.ENOG4109A9M.fasta");
 
@@ -18338,6 +23038,62 @@ SCENARIO ("Alignment methods work correctly in example.043.AA.bctoNOG.ENOG4109AD
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.043.AA.bctoNOG.ENOG4109ADN.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.043.AA.bctoNOG.ENOG4109ADN.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -18631,6 +23387,44 @@ SCENARIO ("Alignment methods work correctly in example.043.AA.bctoNOG.ENOG4109AD
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.043.AA.bctoNOG.ENOG4109ADN.fasta");
 
@@ -18703,6 +23497,62 @@ SCENARIO ("Alignment methods work correctly in example.044.AA.bctoNOG.ENOG4109AE
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.044.AA.bctoNOG.ENOG4109AED.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.044.AA.bctoNOG.ENOG4109AED.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -18996,6 +23846,44 @@ SCENARIO ("Alignment methods work correctly in example.044.AA.bctoNOG.ENOG4109AE
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.044.AA.bctoNOG.ENOG4109AED.fasta");
 
@@ -19068,6 +23956,62 @@ SCENARIO ("Alignment methods work correctly in example.045.AA.bctoNOG.ENOG4109AG
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.045.AA.bctoNOG.ENOG4109AGT.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.045.AA.bctoNOG.ENOG4109AGT.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -19361,6 +24305,44 @@ SCENARIO ("Alignment methods work correctly in example.045.AA.bctoNOG.ENOG4109AG
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.045.AA.bctoNOG.ENOG4109AGT.fasta");
 
@@ -19433,6 +24415,62 @@ SCENARIO ("Alignment methods work correctly in example.046.AA.bctoNOG.ENOG4109AG
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.046.AA.bctoNOG.ENOG4109AGW.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.046.AA.bctoNOG.ENOG4109AGW.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -19726,6 +24764,44 @@ SCENARIO ("Alignment methods work correctly in example.046.AA.bctoNOG.ENOG4109AG
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.046.AA.bctoNOG.ENOG4109AGW.fasta");
 
@@ -19798,6 +24874,62 @@ SCENARIO ("Alignment methods work correctly in example.047.AA.bctoNOG.ENOG4109AI
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.047.AA.bctoNOG.ENOG4109AIC.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.047.AA.bctoNOG.ENOG4109AIC.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -20091,6 +25223,44 @@ SCENARIO ("Alignment methods work correctly in example.047.AA.bctoNOG.ENOG4109AI
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.047.AA.bctoNOG.ENOG4109AIC.fasta");
 
@@ -20163,6 +25333,62 @@ SCENARIO ("Alignment methods work correctly in example.048.AA.bctoNOG.ENOG4109AJ
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.048.AA.bctoNOG.ENOG4109AJ3.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.048.AA.bctoNOG.ENOG4109AJ3.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -20456,6 +25682,44 @@ SCENARIO ("Alignment methods work correctly in example.048.AA.bctoNOG.ENOG4109AJ
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.048.AA.bctoNOG.ENOG4109AJ3.fasta");
 
@@ -20528,6 +25792,62 @@ SCENARIO ("Alignment methods work correctly in example.049.AA.bctoNOG.ENOG4109AY
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.049.AA.bctoNOG.ENOG4109AY5.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.049.AA.bctoNOG.ENOG4109AY5.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -20821,6 +26141,44 @@ SCENARIO ("Alignment methods work correctly in example.049.AA.bctoNOG.ENOG4109AY
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.049.AA.bctoNOG.ENOG4109AY5.fasta");
 
@@ -20893,6 +26251,62 @@ SCENARIO ("Alignment methods work correctly in example.050.AA.bctoNOG.ENOG4109B8
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.050.AA.bctoNOG.ENOG4109B8Z.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.050.AA.bctoNOG.ENOG4109B8Z.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -21186,6 +26600,44 @@ SCENARIO ("Alignment methods work correctly in example.050.AA.bctoNOG.ENOG4109B8
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.050.AA.bctoNOG.ENOG4109B8Z.fasta");
 
@@ -21258,6 +26710,62 @@ SCENARIO ("Alignment methods work correctly in example.051.AA.bctoNOG.ENOG4109BC
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.051.AA.bctoNOG.ENOG4109BCJ.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.051.AA.bctoNOG.ENOG4109BCJ.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -21551,6 +27059,44 @@ SCENARIO ("Alignment methods work correctly in example.051.AA.bctoNOG.ENOG4109BC
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.051.AA.bctoNOG.ENOG4109BCJ.fasta");
 
@@ -21623,6 +27169,62 @@ SCENARIO ("Alignment methods work correctly in example.052.AA.bctoNOG.ENOG4109CT
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.052.AA.bctoNOG.ENOG4109CTU.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.052.AA.bctoNOG.ENOG4109CTU.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -21916,6 +27518,44 @@ SCENARIO ("Alignment methods work correctly in example.052.AA.bctoNOG.ENOG4109CT
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.052.AA.bctoNOG.ENOG4109CTU.fasta");
 
@@ -21988,6 +27628,62 @@ SCENARIO ("Alignment methods work correctly in example.053.AA.bctoNOG.ENOG4109CV
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.053.AA.bctoNOG.ENOG4109CVC.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.053.AA.bctoNOG.ENOG4109CVC.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -22281,6 +27977,44 @@ SCENARIO ("Alignment methods work correctly in example.053.AA.bctoNOG.ENOG4109CV
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.053.AA.bctoNOG.ENOG4109CVC.fasta");
 
@@ -22353,6 +28087,62 @@ SCENARIO ("Alignment methods work correctly in example.054.AA.bctoNOG.ENOG4109FI
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.054.AA.bctoNOG.ENOG4109FIT.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.054.AA.bctoNOG.ENOG4109FIT.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -22646,6 +28436,44 @@ SCENARIO ("Alignment methods work correctly in example.054.AA.bctoNOG.ENOG4109FI
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.054.AA.bctoNOG.ENOG4109FIT.fasta");
 
@@ -22718,6 +28546,62 @@ SCENARIO ("Alignment methods work correctly in example.055.AA.bctoNOG.ENOG4109GY
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.055.AA.bctoNOG.ENOG4109GY9.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.055.AA.bctoNOG.ENOG4109GY9.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -23011,6 +28895,44 @@ SCENARIO ("Alignment methods work correctly in example.055.AA.bctoNOG.ENOG4109GY
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.055.AA.bctoNOG.ENOG4109GY9.fasta");
 
@@ -23083,6 +29005,62 @@ SCENARIO ("Alignment methods work correctly in example.056.AA.bctoNOG.ENOG4109IP
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.056.AA.bctoNOG.ENOG4109IPJ.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.056.AA.bctoNOG.ENOG4109IPJ.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -23376,6 +29354,44 @@ SCENARIO ("Alignment methods work correctly in example.056.AA.bctoNOG.ENOG4109IP
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.056.AA.bctoNOG.ENOG4109IPJ.fasta");
 
@@ -23448,6 +29464,62 @@ SCENARIO ("Alignment methods work correctly in example.057.AA.bctoNOG.ENOG4109SZ
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.057.AA.bctoNOG.ENOG4109SZ2.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.057.AA.bctoNOG.ENOG4109SZ2.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -23741,6 +29813,44 @@ SCENARIO ("Alignment methods work correctly in example.057.AA.bctoNOG.ENOG4109SZ
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.057.AA.bctoNOG.ENOG4109SZ2.fasta");
 
@@ -23813,6 +29923,62 @@ SCENARIO ("Alignment methods work correctly in example.058.AA.strNOG.ENOG411BBR6
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.058.AA.strNOG.ENOG411BBR6.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.058.AA.strNOG.ENOG411BBR6.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -24106,6 +30272,44 @@ SCENARIO ("Alignment methods work correctly in example.058.AA.strNOG.ENOG411BBR6
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.058.AA.strNOG.ENOG411BBR6.fasta");
 
@@ -24178,6 +30382,62 @@ SCENARIO ("Alignment methods work correctly in example.059.AA.strNOG.ENOG411BBRR
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.059.AA.strNOG.ENOG411BBRR.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.059.AA.strNOG.ENOG411BBRR.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -24471,6 +30731,44 @@ SCENARIO ("Alignment methods work correctly in example.059.AA.strNOG.ENOG411BBRR
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.059.AA.strNOG.ENOG411BBRR.fasta");
 
@@ -24543,6 +30841,62 @@ SCENARIO ("Alignment methods work correctly in example.060.AA.strNOG.ENOG411BBWK
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.060.AA.strNOG.ENOG411BBWK.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.060.AA.strNOG.ENOG411BBWK.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -24836,6 +31190,44 @@ SCENARIO ("Alignment methods work correctly in example.060.AA.strNOG.ENOG411BBWK
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.060.AA.strNOG.ENOG411BBWK.fasta");
 
@@ -24908,6 +31300,62 @@ SCENARIO ("Alignment methods work correctly in example.061.AA.strNOG.ENOG411BCDZ
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.061.AA.strNOG.ENOG411BCDZ.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.061.AA.strNOG.ENOG411BCDZ.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -25201,6 +31649,44 @@ SCENARIO ("Alignment methods work correctly in example.061.AA.strNOG.ENOG411BCDZ
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.061.AA.strNOG.ENOG411BCDZ.fasta");
 
@@ -25273,6 +31759,62 @@ SCENARIO ("Alignment methods work correctly in example.062.AA.strNOG.ENOG411BCX3
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.062.AA.strNOG.ENOG411BCX3.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.062.AA.strNOG.ENOG411BCX3.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -25566,6 +32108,44 @@ SCENARIO ("Alignment methods work correctly in example.062.AA.strNOG.ENOG411BCX3
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.062.AA.strNOG.ENOG411BCX3.fasta");
 
@@ -25638,6 +32218,62 @@ SCENARIO ("Alignment methods work correctly in example.063.AA.strNOG.ENOG411BDBU
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.063.AA.strNOG.ENOG411BDBU.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.063.AA.strNOG.ENOG411BDBU.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -25931,6 +32567,44 @@ SCENARIO ("Alignment methods work correctly in example.063.AA.strNOG.ENOG411BDBU
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.063.AA.strNOG.ENOG411BDBU.fasta");
 
@@ -26003,6 +32677,62 @@ SCENARIO ("Alignment methods work correctly in example.064.AA.strNOG.ENOG411BDKC
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.064.AA.strNOG.ENOG411BDKC.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.064.AA.strNOG.ENOG411BDKC.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -26296,6 +33026,44 @@ SCENARIO ("Alignment methods work correctly in example.064.AA.strNOG.ENOG411BDKC
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.064.AA.strNOG.ENOG411BDKC.fasta");
 
@@ -26368,6 +33136,62 @@ SCENARIO ("Alignment methods work correctly in example.065.AA.strNOG.ENOG411BDSZ
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.065.AA.strNOG.ENOG411BDSZ.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.065.AA.strNOG.ENOG411BDSZ.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -26661,6 +33485,44 @@ SCENARIO ("Alignment methods work correctly in example.065.AA.strNOG.ENOG411BDSZ
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.065.AA.strNOG.ENOG411BDSZ.fasta");
 
@@ -26733,6 +33595,62 @@ SCENARIO ("Alignment methods work correctly in example.066.AA.strNOG.ENOG411BDUE
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.066.AA.strNOG.ENOG411BDUE.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.066.AA.strNOG.ENOG411BDUE.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -27026,6 +33944,44 @@ SCENARIO ("Alignment methods work correctly in example.066.AA.strNOG.ENOG411BDUE
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.066.AA.strNOG.ENOG411BDUE.fasta");
 
@@ -27098,6 +34054,62 @@ SCENARIO ("Alignment methods work correctly in example.067.AA.strNOG.ENOG411BDX3
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.067.AA.strNOG.ENOG411BDX3.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.067.AA.strNOG.ENOG411BDX3.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -27391,6 +34403,44 @@ SCENARIO ("Alignment methods work correctly in example.067.AA.strNOG.ENOG411BDX3
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.067.AA.strNOG.ENOG411BDX3.fasta");
 
@@ -27463,6 +34513,62 @@ SCENARIO ("Alignment methods work correctly in example.068.AA.strNOG.ENOG411BE45
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.068.AA.strNOG.ENOG411BE45.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.068.AA.strNOG.ENOG411BE45.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -27756,6 +34862,44 @@ SCENARIO ("Alignment methods work correctly in example.068.AA.strNOG.ENOG411BE45
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.068.AA.strNOG.ENOG411BE45.fasta");
 
@@ -27828,6 +34972,62 @@ SCENARIO ("Alignment methods work correctly in example.069.AA.strNOG.ENOG411BE8B
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.069.AA.strNOG.ENOG411BE8B.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.069.AA.strNOG.ENOG411BE8B.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -28121,6 +35321,44 @@ SCENARIO ("Alignment methods work correctly in example.069.AA.strNOG.ENOG411BE8B
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.069.AA.strNOG.ENOG411BE8B.fasta");
 
@@ -28193,6 +35431,62 @@ SCENARIO ("Alignment methods work correctly in example.070.AA.strNOG.ENOG411BEUV
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.070.AA.strNOG.ENOG411BEUV.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.070.AA.strNOG.ENOG411BEUV.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -28486,6 +35780,44 @@ SCENARIO ("Alignment methods work correctly in example.070.AA.strNOG.ENOG411BEUV
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.070.AA.strNOG.ENOG411BEUV.fasta");
 
@@ -28558,6 +35890,62 @@ SCENARIO ("Alignment methods work correctly in example.071.AA.strNOG.ENOG411BEZ0
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.071.AA.strNOG.ENOG411BEZ0.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.071.AA.strNOG.ENOG411BEZ0.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -28851,6 +36239,44 @@ SCENARIO ("Alignment methods work correctly in example.071.AA.strNOG.ENOG411BEZ0
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.071.AA.strNOG.ENOG411BEZ0.fasta");
 
@@ -28923,6 +36349,62 @@ SCENARIO ("Alignment methods work correctly in example.072.AA.strNOG.ENOG411BF1S
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.072.AA.strNOG.ENOG411BF1S.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.072.AA.strNOG.ENOG411BF1S.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -29216,6 +36698,44 @@ SCENARIO ("Alignment methods work correctly in example.072.AA.strNOG.ENOG411BF1S
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.072.AA.strNOG.ENOG411BF1S.fasta");
 
@@ -29288,6 +36808,62 @@ SCENARIO ("Alignment methods work correctly in example.073.AA.strNOG.ENOG411BFCW
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.073.AA.strNOG.ENOG411BFCW.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.073.AA.strNOG.ENOG411BFCW.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -29581,6 +37157,44 @@ SCENARIO ("Alignment methods work correctly in example.073.AA.strNOG.ENOG411BFCW
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.073.AA.strNOG.ENOG411BFCW.fasta");
 
@@ -29653,6 +37267,62 @@ SCENARIO ("Alignment methods work correctly in example.074.AA.strNOG.ENOG411BFPF
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.074.AA.strNOG.ENOG411BFPF.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.074.AA.strNOG.ENOG411BFPF.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -29946,6 +37616,44 @@ SCENARIO ("Alignment methods work correctly in example.074.AA.strNOG.ENOG411BFPF
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.074.AA.strNOG.ENOG411BFPF.fasta");
 
@@ -30018,6 +37726,62 @@ SCENARIO ("Alignment methods work correctly in example.075.AA.strNOG.ENOG411BFQS
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.075.AA.strNOG.ENOG411BFQS.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.075.AA.strNOG.ENOG411BFQS.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -30311,6 +38075,44 @@ SCENARIO ("Alignment methods work correctly in example.075.AA.strNOG.ENOG411BFQS
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.075.AA.strNOG.ENOG411BFQS.fasta");
 
@@ -30383,6 +38185,62 @@ SCENARIO ("Alignment methods work correctly in example.075.AA.strNOG.ENOG411BFQS
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.075.AA.strNOG.ENOG411BFQS.nxs.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.075.AA.strNOG.ENOG411BFQS.nxs.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -30676,6 +38534,44 @@ SCENARIO ("Alignment methods work correctly in example.075.AA.strNOG.ENOG411BFQS
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.075.AA.strNOG.ENOG411BFQS.nxs");
 
@@ -30748,6 +38644,62 @@ SCENARIO ("Alignment methods work correctly in example.076.AA.strNOG.ENOG411BH75
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.076.AA.strNOG.ENOG411BH75.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.076.AA.strNOG.ENOG411BH75.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -31041,6 +38993,44 @@ SCENARIO ("Alignment methods work correctly in example.076.AA.strNOG.ENOG411BH75
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.076.AA.strNOG.ENOG411BH75.fasta");
 
@@ -31113,6 +39103,62 @@ SCENARIO ("Alignment methods work correctly in example.077.AA.strNOG.ENOG411BH79
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.077.AA.strNOG.ENOG411BH79.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.077.AA.strNOG.ENOG411BH79.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -31406,6 +39452,44 @@ SCENARIO ("Alignment methods work correctly in example.077.AA.strNOG.ENOG411BH79
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.077.AA.strNOG.ENOG411BH79.fasta");
 
@@ -31478,6 +39562,62 @@ SCENARIO ("Alignment methods work correctly in example.078.AA.strNOG.ENOG411BH99
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.078.AA.strNOG.ENOG411BH99.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.078.AA.strNOG.ENOG411BH99.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -31771,6 +39911,44 @@ SCENARIO ("Alignment methods work correctly in example.078.AA.strNOG.ENOG411BH99
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.078.AA.strNOG.ENOG411BH99.fasta");
 
@@ -31843,6 +40021,62 @@ SCENARIO ("Alignment methods work correctly in example.079.AA.strNOG.ENOG411BJDC
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.079.AA.strNOG.ENOG411BJDC.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.079.AA.strNOG.ENOG411BJDC.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -32136,6 +40370,44 @@ SCENARIO ("Alignment methods work correctly in example.079.AA.strNOG.ENOG411BJDC
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.079.AA.strNOG.ENOG411BJDC.fasta");
 
@@ -32208,6 +40480,62 @@ SCENARIO ("Alignment methods work correctly in example.080.AA.strNOG.ENOG411BJIF
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.080.AA.strNOG.ENOG411BJIF.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.080.AA.strNOG.ENOG411BJIF.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -32501,6 +40829,44 @@ SCENARIO ("Alignment methods work correctly in example.080.AA.strNOG.ENOG411BJIF
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.080.AA.strNOG.ENOG411BJIF.fasta");
 
@@ -32573,6 +40939,62 @@ SCENARIO ("Alignment methods work correctly in example.081.AA.strNOG.ENOG411BK9X
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.081.AA.strNOG.ENOG411BK9X.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.081.AA.strNOG.ENOG411BK9X.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -32866,6 +41288,44 @@ SCENARIO ("Alignment methods work correctly in example.081.AA.strNOG.ENOG411BK9X
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.081.AA.strNOG.ENOG411BK9X.fasta");
 
@@ -32938,6 +41398,62 @@ SCENARIO ("Alignment methods work correctly in example.082.AA.strNOG.ENOG411BKC5
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.082.AA.strNOG.ENOG411BKC5.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.082.AA.strNOG.ENOG411BKC5.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -33231,6 +41747,44 @@ SCENARIO ("Alignment methods work correctly in example.082.AA.strNOG.ENOG411BKC5
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.082.AA.strNOG.ENOG411BKC5.fasta");
 
@@ -33303,6 +41857,62 @@ SCENARIO ("Alignment methods work correctly in example.083.AA.strNOG.ENOG411BMKC
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.083.AA.strNOG.ENOG411BMKC.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.083.AA.strNOG.ENOG411BMKC.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -33596,6 +42206,44 @@ SCENARIO ("Alignment methods work correctly in example.083.AA.strNOG.ENOG411BMKC
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.083.AA.strNOG.ENOG411BMKC.fasta");
 
@@ -33668,6 +42316,62 @@ SCENARIO ("Alignment methods work correctly in example.084.AA.strNOG.ENOG411BNP9
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.084.AA.strNOG.ENOG411BNP9.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.084.AA.strNOG.ENOG411BNP9.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -33961,6 +42665,44 @@ SCENARIO ("Alignment methods work correctly in example.084.AA.strNOG.ENOG411BNP9
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.084.AA.strNOG.ENOG411BNP9.fasta");
 
@@ -34033,6 +42775,62 @@ SCENARIO ("Alignment methods work correctly in example.085.AA.strNOG.ENOG411BQTJ
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.085.AA.strNOG.ENOG411BQTJ.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.085.AA.strNOG.ENOG411BQTJ.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -34326,6 +43124,44 @@ SCENARIO ("Alignment methods work correctly in example.085.AA.strNOG.ENOG411BQTJ
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.085.AA.strNOG.ENOG411BQTJ.fasta");
 
@@ -34398,6 +43234,62 @@ SCENARIO ("Alignment methods work correctly in example.086.AA.strNOG.ENOG411BR1D
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.086.AA.strNOG.ENOG411BR1D.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.086.AA.strNOG.ENOG411BR1D.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -34691,6 +43583,44 @@ SCENARIO ("Alignment methods work correctly in example.086.AA.strNOG.ENOG411BR1D
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.086.AA.strNOG.ENOG411BR1D.fasta");
 
@@ -34763,6 +43693,62 @@ SCENARIO ("Alignment methods work correctly in example.087.AA.strNOG.ENOG411BRCH
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.087.AA.strNOG.ENOG411BRCH.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.087.AA.strNOG.ENOG411BRCH.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -35056,6 +44042,44 @@ SCENARIO ("Alignment methods work correctly in example.087.AA.strNOG.ENOG411BRCH
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.087.AA.strNOG.ENOG411BRCH.fasta");
 
@@ -35128,6 +44152,62 @@ SCENARIO ("Alignment methods work correctly in example.088.AA.strNOG.ENOG411BSXF
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.088.AA.strNOG.ENOG411BSXF.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.088.AA.strNOG.ENOG411BSXF.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -35421,6 +44501,44 @@ SCENARIO ("Alignment methods work correctly in example.088.AA.strNOG.ENOG411BSXF
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.088.AA.strNOG.ENOG411BSXF.fasta");
 
@@ -35493,6 +44611,62 @@ SCENARIO ("Alignment methods work correctly in example.089.AA.strNOG.ENOG411BV9B
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.089.AA.strNOG.ENOG411BV9B.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.089.AA.strNOG.ENOG411BV9B.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -35786,6 +44960,44 @@ SCENARIO ("Alignment methods work correctly in example.089.AA.strNOG.ENOG411BV9B
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.089.AA.strNOG.ENOG411BV9B.fasta");
 
@@ -35858,6 +45070,62 @@ SCENARIO ("Alignment methods work correctly in example.090.AA.strNOG.ENOG411BVKR
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.090.AA.strNOG.ENOG411BVKR.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.090.AA.strNOG.ENOG411BVKR.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -36151,6 +45419,44 @@ SCENARIO ("Alignment methods work correctly in example.090.AA.strNOG.ENOG411BVKR
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.090.AA.strNOG.ENOG411BVKR.fasta");
 
@@ -36223,6 +45529,62 @@ SCENARIO ("Alignment methods work correctly in example.091.AA.strNOG.ENOG411BWBU
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.091.AA.strNOG.ENOG411BWBU.codon.fa.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.091.AA.strNOG.ENOG411BWBU.codon.fa.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -36516,6 +45878,44 @@ SCENARIO ("Alignment methods work correctly in example.091.AA.strNOG.ENOG411BWBU
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.091.AA.strNOG.ENOG411BWBU.codon.fa");
 
@@ -36588,6 +45988,62 @@ SCENARIO ("Alignment methods work correctly in example.091.AA.strNOG.ENOG411BWBU
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.091.AA.strNOG.ENOG411BWBU.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.091.AA.strNOG.ENOG411BWBU.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -36881,6 +46337,44 @@ SCENARIO ("Alignment methods work correctly in example.091.AA.strNOG.ENOG411BWBU
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.091.AA.strNOG.ENOG411BWBU.fasta");
 
@@ -36953,6 +46447,62 @@ SCENARIO ("Alignment methods work correctly in example.092.DNA.fasta", "[alignme
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.092.DNA.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.092.DNA.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -37246,6 +46796,44 @@ SCENARIO ("Alignment methods work correctly in example.092.DNA.fasta", "[alignme
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.092.DNA.fasta");
 
@@ -37318,6 +46906,62 @@ SCENARIO ("Alignment methods work correctly in example.093.DNA.fasta", "[alignme
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.093.DNA.fasta.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.093.DNA.fasta.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -37611,6 +47255,44 @@ SCENARIO ("Alignment methods work correctly in example.093.DNA.fasta", "[alignme
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.093.DNA.fasta");
 
@@ -37683,6 +47365,62 @@ SCENARIO ("Alignment methods work correctly in example.094.DNADeg.sequential_phy
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.094.DNADeg.sequential_phy.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/example.094.DNADeg.sequential_phy.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -37976,6 +47714,44 @@ SCENARIO ("Alignment methods work correctly in example.094.DNADeg.sequential_phy
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from example.094.DNADeg.sequential_phy");
 
@@ -38048,6 +47824,62 @@ SCENARIO ("Alignment methods work correctly in matrix.BLOSUM62", "[alignment][al
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/matrix.BLOSUM62.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/matrix.BLOSUM62.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -38341,6 +48173,44 @@ SCENARIO ("Alignment methods work correctly in matrix.BLOSUM62", "[alignment][al
                 }
             }
         }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     } else
         WARN("No Expected Test Results from matrix.BLOSUM62");
 
@@ -38413,6 +48283,62 @@ SCENARIO ("Alignment methods work correctly in matrix.Degenerated_DNA", "[alignm
                 if (testData.get("aligned").get<bool>()) {
                     // TODO Clean this. We shouldn't be casting. The original value should be in int, not string.
                     REQUIRE(std::to_string(alig.Cleaning->selectMethod()) == testData.get("AutoMethod").get<string>());
+                }
+            }
+        }
+
+        WHEN("Calculating Cons Vectors")
+        {
+            if (testData.contains("aligned")) {
+                if (testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    alig.sgaps = new statisticsGaps(&alig);
+                    int SequenceType = testData.get("SequenceType").get<double>();
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
+
+                    WHEN("Calculating MDK")
+                    {
+                        float * mdk_expected;
+                        populate(mdk_expected, testData.get("mdk"));
+
+                        float * mdk_obtained = alig.scons->getMdkwVector();
+
+                        REQUIRE(mdk_obtained != NULL);
+
+                        REQUIRE_THAT(mdk_obtained,
+                                     ArrayContentsEqual(mdk_expected,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/matrix.Degenerated_DNA.MDK.error.tsv"));
+                        delete [] mdk_expected;
+                        delete [] mdk_obtained;
+                    }
+
+                    WHEN("Calculating Q")
+                    {
+                        float * Q_expected;
+                        populate(Q_expected, testData.get("Q"));
+
+                        float * Q_obtained = alig.scons->Q;
+
+                        REQUIRE(Q_obtained != NULL);
+
+                        REQUIRE_THAT(Q_expected,
+                                     ArrayContentsEqual(Q_obtained,
+                                                        alig.residNumber,
+                                                        "./dataset/testingFiles/alignmentErrors/matrix.Degenerated_DNA.Q.error.tsv"));
+                        delete [] Q_expected;
+//                        delete [] Q_obtained;
+                    }
                 }
             }
         }
@@ -38703,6 +48629,44 @@ SCENARIO ("Alignment methods work correctly in matrix.Degenerated_DNA", "[alignm
                             }
                         }
                     }
+                }
+            }
+        }
+
+        WHEN("Calculating consCutPoint") {
+            if (testData.contains("consCutPoint")) {
+                if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.scons = new statisticsConservation2(&alig);
+                    int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
+                    similarityMatrix *sm = new similarityMatrix();
+                    switch (SequenceType) {
+                        case 1: case 2: default:
+                            sm->defaultNTSimMatrix(); break;
+                        case 3:
+                            sm->defaultAASimMatrix(); break;
+                        case 4: case 5:
+                            sm->defaultNTDegeneratedSimMatrix(); break;
+                    }
+                    alig.scons->setSimilarityMatrix(sm);
+
+                    auto cleanGapsData = testData.get("consCutPoint").get<picojson::object>();
+
+                    for (auto baselineIT = cleanGapsData.begin(), end = cleanGapsData.end(); baselineIT != end; baselineIT++) {
+                        GIVEN (baselineIT->first) {
+                            auto cleanGapsDataSecondLevel = baselineIT->second.get<picojson::object>();
+                            for (auto conPctIT = cleanGapsDataSecondLevel.begin(), end2 = cleanGapsDataSecondLevel.end();
+                                 conPctIT != end2;
+                                 conPctIT++) {
+                                GIVEN(conPctIT->first) {
+                                    float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
+                                    float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
+
+                                    REQUIRE(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
         }

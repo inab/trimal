@@ -1,5 +1,5 @@
 {
-	"filename": "./example.004.AA.fasta",
+	"filename": "example.004.AA.fasta",
 	"sequenNumber": 6,
 	"residNumber": 15,
 	"aligned": true,
@@ -67,6 +67,7 @@
 	"clean2ndSlope":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],
 	"cleanCombMethods lax":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],
 	"mdk":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+	"Q":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 	"consCutPoint":{
 		"baseline=0":{
 			"simPct=0":0,

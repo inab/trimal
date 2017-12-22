@@ -45,8 +45,7 @@ int main(int argc, char *argv[]) {
     // https://stackoverflow.com/a/146938
     for (const std::string &filename : filenames)
     {
-//        if (filename == "example.014.AA.EggNOG.COG0591.fasta") continue;
-//        if (counter++ == 5) break;
+//        if (counter++ == 10) break;
         // Get the full path length
         size_t filenameSize = std::strlen("./dataset/") + std::strlen(&filename[0]);
         // region Store it in a new variable

@@ -42,30 +42,30 @@ public:
         return ss.str();
     }
 };
-
-template<> 
-inline bool ArrayComparer<double>::match(double * i) const
-{
-    for (int x = 0; x < _arraySize; x++)
-    {
-        double I = i[x], M = object_2[x];
-        if (fabs(I - M) > std::numeric_limits<double>::epsilon())
-            return false;
-    }
-    return true;
-}
-
-template<> 
-inline bool ArrayComparer<float>::match(float * i) const
-{
-    for (int x = 0; x < _arraySize; x++)
-    {
-        float I = i[x], M = object_2[x];
-        if (std::fabs(I - M) > std::numeric_limits<float>::epsilon())
-            return false;
-    }
-    return true;
-}
+//
+//template<>
+//inline bool ArrayComparer<double>::match(double * i) const
+//{
+//    for (int x = 0; x < _arraySize; x++)
+//    {
+//        double I = i[x], M = object_2[x];
+//        if (fabs(I - M) > std::numeric_limits<double>::epsilon())
+//            return false;
+//    }
+//    return true;
+//}
+//
+//template<>
+//inline bool ArrayComparer<float>::match(float * i) const
+//{
+//    for (int x = 0; x < _arraySize; x++)
+//    {
+//        float I = i[x], M = object_2[x];
+//        if (std::fabs(I - M) > std::numeric_limits<float>::epsilon())
+//            return false;
+//    }
+//    return true;
+//}
 
 // The builder function
 template <class T>
