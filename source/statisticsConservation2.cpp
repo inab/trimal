@@ -167,7 +167,7 @@ bool statisticsConservation2::calculateVectors(int *gaps) {
         // If we are procesing a column with only one AA/nucleotide, the denominator is 0 and we don't execute the division
         // and we set the Q[i] value to 0. 
         Q[ii] = (den == 0) ? 0 : num / den;
-        MDK[ii] = (float) exp(-Q[ii]);
+        MDK[ii] = exp(-Q[ii]);
 
         // If the column has 80% or more gaps then we set its conservation value to 0 
 
@@ -212,8 +212,9 @@ bool statisticsConservation2::isDefinedWindow(void) {
 }
 
 float *statisticsConservation2::getMdkwVector(void) {
-
-    return MDK_Window;
+    if (isDefinedWindow())
+        return MDK_Window;
+    else return MDK;
 }
 
 bool statisticsConservation2::setSimilarityMatrix(similarityMatrix *sm) {
@@ -257,6 +258,7 @@ double statisticsConservation2::calcCutPoint(float baseLine, float conservationP
     for(i = residues - 1; i >= 0; i--)
         if(vectAux[i] < conservationPct)
             break;
+    i = std::max(i, 0);
     cuttingPoint_SimilThreshold = vectAux[i];
 
     // It is possible that due to number casting, we get a number out of the
