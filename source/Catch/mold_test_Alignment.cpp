@@ -445,6 +445,7 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
         WHEN("Calculating consCutPoint") {
             if (testData.contains("consCutPoint")) {
                 if (testData.contains("aligned") && testData.get("aligned").get<bool>()) {
+                    alig.sgaps = new statisticsGaps(&alig);
                     alig.scons = new statisticsConservation2(&alig);
                     int SequenceType = static_cast<int>(testData.get("SequenceType").get<double>());
                     similarityMatrix *sm = new similarityMatrix();
@@ -469,7 +470,7 @@ SCENARIO ("Alignment methods work correctly in input_filename", "[alignment][ali
                                 GIVEN(conPctIT->first) {
                                     float baseline = std::stof(baselineIT->first.substr(baselineIT->first.find('=') + 1));
                                     float consPct = std::stof(conPctIT->first.substr(conPctIT->first.find('=') + 1));
-
+                                    alig.scons->calculateVectors(alig.sgaps->getGapsWindow());
                                     CHECK(alig.scons->calcCutPoint(baseline, consPct) == conPctIT->second.get<double>());
                                 }
                             }
