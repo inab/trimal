@@ -318,10 +318,11 @@ char* utils::readLine(ifstream &file) {
     if(file.eof())
         return NULL;
 
-    // Store first line found. For -Windows & MacOS compatibility- carriage return
-    // is considered as well as a new line character
-    for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
-        nline.resize(nline.size() + 1, c);
+    /* Store first line found. For -Windows & MacOS compatibility- carriage return
+     * is considered as well as a new line character */
+//    for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
+//        nline.resize(nline.size() + 1, c);
+    getline(file,nline);
 
     // Remove blank spaces & tabs from the beginning of the line
     state = nline.find(" ", 0);
@@ -336,8 +337,8 @@ char* utils::readLine(ifstream &file) {
         state = nline.find("\t", state);
     }
 
-    // If there is nothing to return, give back a NULL pointer ...
-    if(nline.size() == 0)
+    /* If there is nothing to return, give back a NULL pointer ... */
+    if(nline.empty())
         return NULL;
 
     // Otherwise, initialize the appropiate data structure,
@@ -362,12 +363,14 @@ char* utils::readLine(std::istream& file)
     if(file.eof())
         return NULL;
 
-    // Store first line found. For -Windows & MacOS compatibility- carriage return
-    // is considered as well as a new line character
-    for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
-        nline.resize(nline.size() + 1, c);
 
-    // Remove blank spaces & tabs from the beginning of the line
+    /* Store first line found. For -Windows & MacOS compatibility- carriage return
+     * is considered as well as a new line character */
+//    for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
+//        nline.resize(nline.size() + 1, c);
+    getline(file,nline);
+    /* Remove blank spaces & tabs from the beginning of the line */
+
     state = nline.find(" ", 0);
     while(state != (int) string::npos && state == 0) {
         nline.erase(state, 1);

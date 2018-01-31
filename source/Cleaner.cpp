@@ -1019,9 +1019,10 @@ newAlignment* Cleaner::cleanCombMethods(bool complementarity, bool variable) {
     // If conservation's statistics are not calculated, we calculate them
     if(_alignment->Statistics->calculateConservationStats() != true)
         return NULL;
+    
+    /* Computes the conservations value for each column in the newAlignment. At the same time, the method get the vector with those values. */
+//    _alignment->scons -> calculateVectors(/*_alignment->sequences,*/ _alignment->sgaps -> getGapsWindow());
 
-    // Computes the conservations value for each column in the newAlignment. At the same time, the method get the vector with those values.
-    _alignment->scons -> calculateVectors(/*_alignment->sequences,*/ _alignment->sgaps -> getGapsWindow());
     simil = _alignment->scons -> getMdkwVector();
 
     // Allocate local memory and initializate it to -1

@@ -256,8 +256,11 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
     }
     *output << endl << "MATRIX";
 
-    for(j = 0; j < alignment->originalResidNumber; j = k) {
-        if (alignment-> saveResidues[j] == -1) continue;
+    for(j = 0, k = j; j < alignment->originalResidNumber; j = k) {
+        if (alignment-> saveResidues[j] == -1) {
+            k++;
+            continue;
+        }
         for(i = 0; i < alignment->originalSequenNumber; i++) {
             if (alignment->saveSequences[i] == -1) continue;
             *output << endl << setw(maxLongName + 4) << left << alignment->seqsName[i];
