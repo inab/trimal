@@ -232,7 +232,12 @@
 \var int trimAlManager::automatedMethodCount
 \brief Integer counter of the automatic methods. \n 
 If the counter is bigger than 0, we are using an automatic method.\n 
-If the counter is bigger than 1, we are trying to use multiple automatic methods. \n
+If the counter is bigger than 1, we are trying to use multiple automatic methods.
+*/
+
+/**
+\var int trimAlManager::alternative_matrix
+\brief Int that represents which alternative matrix to use, where '-1' means no alternative matrix, and '1' means degenerated_nt_identity
 */
 
 /**
@@ -295,6 +300,11 @@ If the counter is bigger than 1, we are trying to use multiple automatic methods
 */
 
 /**
+\var newAlignment trimAlManager::tempAlig
+\brief Temporal alignment that allows us to make some changes to trimAlManager::singleAlig, destroy it and set trimAlManager::singleAlig to this. 
+*/
+
+/**
 \var newAlignment trimAlManager::compareAlignmentsArray
 \brief Alignment Vector used on trimAlManager::check_multiple_files_comparison to compare them. 
 \note This variable could be moved there.
@@ -332,7 +342,17 @@ If the counter is bigger than 1, we are trying to use multiple automatic methods
 
 /**
 \var char trimAlManager::htmlOutFile
-\brief File to output the html report file.
+\brief File to output the html report.
+*/
+
+/**
+\var char trimAlManager::svgOutFile
+\brief File to output the svg report.
+*/
+
+/**
+\var char trimAlManager::svgStatsOutFile
+\brief File to output the svg graph showing the stats along the alignment.
 */
 
 /**
@@ -389,6 +409,14 @@ If the counter is bigger than 1, we are trying to use multiple automatic methods
 */
 
 /**
+\fn bool trimAlManager::verbosity_argument(int* argc, char* argv[], int* i)
+\brief Method to parse the verbosity argument.\n
+This check is performed before any other argument, so it affects other argument checks.
+
+\return \b True if current argument (*i) corresponds to the argument being checked. \n\b False otherwise.
+*/
+
+/**
 \fn bool trimAlManager::out_argument(int* argc, char* argv[], int* i)
 \brief Method to parse the output file pattern
 
@@ -401,6 +429,26 @@ If the counter is bigger than 1, we are trying to use multiple automatic methods
 /**
 \fn bool trimAlManager::html_out_argument(int* argc, char* argv[], int* i)
 \brief Method to parse the html output file
+
+\param argc Number of arguments in argv
+\param argv Arguments passed to the program
+\param i Current argument being evaluated
+\return \b True if current argument (*i) corresponds to the argument being checked. \n\b False otherwise.
+*/
+
+/**
+\fn bool trimAlManager::svg_out_argument(int* argc, char* argv[], int* i)
+\brief Method to parse the svg output file
+
+\param argc Number of arguments in argv
+\param argv Arguments passed to the program
+\param i Current argument being evaluated
+\return \b True if current argument (*i) corresponds to the argument being checked. \n\b False otherwise.
+*/
+
+/**
+\fn bool trimAlManager::svg_stats_argument(int* argc, char* argv[], int* i)
+\brief Method to parse the svg stats output file
 
 \param argc Number of arguments in argv
 \param argv Arguments passed to the program
@@ -901,8 +949,15 @@ Take in mind that dependencies may be between multiple arguments, so, if there i
 */
 
 /**
-\fn bool trimAlManager::check_html_output_interest()
+\fn bool trimAlManager::check_output_relevance()
 \brief Method to check if, being asked to give an HTML report, it makes logic, depending on the functionality asked
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_output_relevance()
+\brief Method to check if output is coherent. \n For example, it doesn't make sense to output an HTML if there is no trimming.
 
 \return \b False if dependencies check has passed\n \b True otherwise
 */

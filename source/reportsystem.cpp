@@ -344,7 +344,7 @@ void __internalReport::__reportSystem::report(ErrorCode message, std::string * v
     {
         if (vars == NULL)
         {
-            std::cerr << "[ERROR "<< std::setw(3) << std::setfill('0') << message << "] " << ErrorMessages.at(message) << std::endl;
+            std::cerr << "[ERROR "<< std::setw(3) << std::setfill('0') << message << "] " << ErrorMessages.at(message) << std::endl << std::setfill(' ');
             return;
         }
         
@@ -358,7 +358,7 @@ void __internalReport::__reportSystem::report(ErrorCode message, std::string * v
             while ((index = s.find(FindWord)) != std::string::npos)
                 s.replace(index, FindWord.length(), vars[counter++]);
 
-        std::cerr << "[ERROR "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
+        std::cerr << "[ERROR "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl<< std::setfill(' ');
         
         delete [] vars;
     }
@@ -370,7 +370,7 @@ void __internalReport::__reportSystem::report(ErrorCode message, char * vars)
     
     if (vars == NULL)
     {
-        std::cerr << "[ERROR "<< std::setw(3) << std::setfill('0') << message << "] " << ErrorMessages.at(message) << std::endl;
+        std::cerr << "[ERROR "<< std::setw(3) << std::setfill('0') << message << "] " << ErrorMessages.at(message) << std::endl<< std::setfill(' ');
         return;
     }
     
@@ -384,7 +384,7 @@ void __internalReport::__reportSystem::report(ErrorCode message, char * vars)
         while ((index = s.find(FindWord)) != std::string::npos)
             s.replace(index, FindWord.length(), Vars);
 
-    std::cerr << "[ERROR "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
+    std::cerr << "[ERROR "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl<< std::setfill(' ');
 
 }
 
@@ -399,7 +399,7 @@ void __internalReport::__reportSystem::report(WarningCode message, std::string *
     {
         if (vars == NULL)
         {
-            std::cout << "[WARNING "<< std::setw(3) << std::setfill('0') << message << "] " << WarningMessages.at(message) << std::endl;
+            std::cout << "[WARNING "<< std::setw(3) << std::setfill('0') << message << "] " << WarningMessages.at(message) << std::endl << std::setfill(' ');
             return;
         }
         
@@ -413,7 +413,7 @@ void __internalReport::__reportSystem::report(WarningCode message, std::string *
             while ((index = s.find(FindWord)) != std::string::npos)
                 s.replace(index, FindWord.length(), vars[counter++]);
 
-        std::cout << "[WARNING "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
+        std::cout << "[WARNING "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl << std::setfill(' ');
         
         delete [] vars;
     }
@@ -425,7 +425,7 @@ void __internalReport::__reportSystem::report(WarningCode message, char * vars)
     
     if (vars == NULL)
     {
-        std::cout << "[WARNING "<< std::setw(3) << std::setfill('0') << message << "] " << WarningMessages.at(message) << std::endl;
+        std::cout << "[WARNING "<< std::setw(3) << std::setfill('0') << message << "] " << WarningMessages.at(message) << std::endl << std::setfill(' ');
         return;
     }
     
@@ -439,7 +439,7 @@ void __internalReport::__reportSystem::report(WarningCode message, char * vars)
         while ((index = s.find(FindWord)) != std::string::npos)
             s.replace(index, FindWord.length(), Vars);
 
-    std::cout << "[WARNING "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
+    std::cout << "[WARNING "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl << std::setfill(' ');
 
 }
 
@@ -454,7 +454,7 @@ void __internalReport::__reportSystem::report(InfoCode message, std::string * va
     {
         if (vars == NULL)
         {
-            std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << InfoMessages.at(message) << std::endl;
+            std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << InfoMessages.at(message) << std::endl << std::setfill(' ');
             return;
         }
         
@@ -468,7 +468,7 @@ void __internalReport::__reportSystem::report(InfoCode message, std::string * va
             while ((index = s.find(FindWord)) != std::string::npos)
                 s.replace(index, FindWord.length(), vars[counter++]);
 
-        std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
+        std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl << std::setfill(' ');
         
         delete [] vars;
     }
@@ -480,7 +480,7 @@ void __internalReport::__reportSystem::report(InfoCode message, char * vars)
     
     if (vars == NULL)
     {
-        std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << InfoMessages.at(message) << std::endl;
+        std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << InfoMessages.at(message) << std::endl << std::setfill(' ');
         return;
     }
     
@@ -494,6 +494,6 @@ void __internalReport::__reportSystem::report(InfoCode message, char * vars)
         while ((index = s.find(FindWord)) != std::string::npos)
             s.replace(index, FindWord.length(), Vars);
 
-    std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl;
+    std::cout << "[INFO "<< std::setw(3) << std::setfill('0') << message << "] " << s << std::endl << std::setfill(' ');
 
 }

@@ -2,8 +2,9 @@
 // Created by bioinfo on 8/06/17.
 //
 
-#include "../include/trimalArgumentParser.h"
 #include <string>
+
+#include "../include/trimalArgumentParser.h"
 #include "../include/compareFiles.h"
 #include "../include/defines.h"
 #include "../include/values.h"
@@ -15,9 +16,6 @@ void examples();
 
 void trimAlManager::parseArguments(int argc, char *argv[])
 {
-
-//     origAlig;
-
     if (argc == 1)
     {
         menu();
@@ -93,7 +91,6 @@ void trimAlManager::parseArguments(int argc, char *argv[])
         }
         
         debug.report(ErrorCode::ParameterNotFoundOrRepeated, argv[i]);
-//         cerr << endl << "ERROR: Parameter \"" << argv[i] << "\" not valid or repeated." << endl << endl;
         appearErrors = true;
         break;
     }
@@ -150,6 +147,13 @@ inline void trimAlManager::info_arguments(int *argc, char *argv[], int *i)
         examples();
         exit(0); // We don't want to continue if we show the examples.
     }
+    
+    if (!strcmp(argv[*i], "-lf") || !strcmp(argv[*i], "--listformats"))
+    {
+        cout << "Input Formats:  "  << ReadWriteMachine.getInputFormatsAvailable() << endl;
+        cout << "Output Formats: "  << ReadWriteMachine.getOutputFormatsAvailable();
+        exit(0);
+    }
 }
 
 inline bool trimAlManager::in_argument(int *argc, char *argv[], int *i)
@@ -160,7 +164,6 @@ inline bool trimAlManager::in_argument(int *argc, char *argv[], int *i)
         infile = new char[argumentLength + 1];
         strcpy(infile, argv[*i]);
         if ((origAlig = ReadWriteMachine.loadAlignment(infile)) == nullptr)
-//         if(!origAlig -> ReadWrite -> loadAlignment(infile))
         {
             debug.report(ErrorCode::AlignmentNotLoaded, infile );
             appearErrors = true;
@@ -220,7 +223,6 @@ inline bool trimAlManager::svg_stats_argument(int *argc, char *argv[], int *i)
 
 bool trimAlManager::out_format_arguments(int *argc, char *argv[], int *i)
 {
-//     if (outformat == -1)
     {
         if(!strcmp(argv[*i], "-formats") )
         {
@@ -233,104 +235,92 @@ bool trimAlManager::out_format_arguments(int *argc, char *argv[], int *i)
             (*i)--;
             return true;
         }
-        /* Option -clustal -------------------------------------------------------------------------------------- */
+        // Option -clustal 
         else if(!strcmp(argv[*i], "-clustal") )
         {
-//             outformat = 1;
             oformats.push_back("clustal");
             return true;
         }
 
-        /* Option -fasta -------------------------------------------------------------------------------------- */
+        // Option -fasta 
         else if(!strcmp(argv[*i], "-fasta") )
         {
-//             outformat = 8;
             oformats.push_back("fasta");
             return true;
         }
 
-        /* Option -fasta-m10 -------------------------------------------------------------------------------------- */
+        // Option -fasta-m10 
         else if(!strcmp(argv[*i], "-fasta_m10") )
         {
-//             outformat = 8;
             oformats.push_back("fasta");
             ReadWriteMachine.shortNames = true;
             shortNames = true;
             return true;
         }
 
-        /* Option -nbrf ------------------------------------------------------------------------------------ */
+        // Option -nbrf 
         else if(!strcmp(argv[*i], "-nbrf") )
         {
-//             outformat = 3;
             oformats.push_back("pir");
             return true;
         }
 
-        /* Option -nexus ------------------------------------------------------------------------------------ */
+        // Option -nexus 
         else if(!strcmp(argv[*i], "-nexus") )
         {
-//             outformat = 17;
             oformats.push_back("nexus");
             return true;
         }
 
-        /* Option -mega ------------------------------------------------------------------------------------ */
+        // Option -mega 
         else if(!strcmp(argv[*i], "-mega") )
         {
-//             outformat = 21;
             oformats.push_back("mega");
             return true;
         }
 
-        /* Option -phylip3.2 --------------------------------------------------------------------------------- */
+        // Option -phylip3.2 
         else if(!strcmp(argv[*i], "-phylip3.2") )
         {
-//             outformat = 11;
             oformats.push_back("phylip32");
             return true;
         }
 
-        /* Option -phylip3.2-m10 ----------------------------------------------------------------------------- */
+        // Option -phylip3.2-m10 
         else if(!strcmp(argv[*i], "-phylip3.2_m10") )
         {
-//             outformat = 11;
             oformats.push_back("phylip32");
             ReadWriteMachine.shortNames = true;
             shortNames = true;
             return true;
         }
 
-        /* Option -phylip --------------------------------------------------------------------------- */
+        // Option -phylip 
         else if(!strcmp(argv[*i], "-phylip") )
         {
-//             outformat = 12;
             oformats.push_back("phylip40");
             return true;
         }
 
-        /* Option -phylip-m10 ----------------------------------------------------------------------- */
+        // Option -phylip-m10 
         else if(!strcmp(argv[*i], "-phylip_m10") )
         {
-//             outformat = 12;
             oformats.push_back("phylip40");
             ReadWriteMachine.shortNames = true;
             shortNames = true;
             return true;
         }
 
-        /* Option -phylip_paml ---------------------------------------------------------------------- */
+        // Option -phylip_paml 
         else if(!strcmp(argv[*i], "-phylip_paml") )
         {
-//             outformat = 13;
             oformats.push_back("phylippaml");
             return true;
         }
 
-        /* Option -phylip_paml-m10 ------------------------------------------------------------------ */
+        // Option -phylip_paml-m10 
         else if(!strcmp(argv[*i], "-phylip_paml_m10") )
         {
-//             outformat = 13;
             oformats.push_back("phylippaml");
             ReadWriteMachine.shortNames = true;
             shortNames = true;
@@ -391,7 +381,6 @@ inline bool trimAlManager::force_select_argument(int *argc, char *argv[], int *i
         forceFile = new char[argumentLength + 1];
         strcpy(forceFile, argv[*i]);
         if ((origAlig = ReadWriteMachine.loadAlignment(forceFile)) == nullptr)
-//         if(!origAlig -> ReadWrite -> loadAlignment(forceFile))
         {
             debug.report(ErrorCode::AlignmentNotLoaded, forceFile);
             appearErrors = true;
@@ -452,14 +441,12 @@ inline bool trimAlManager::similarity_threshold_argument(int *argc, char *argv[]
             if((similarityThreshold < 0) || (similarityThreshold > 1))
             {
                 debug.report(ErrorCode::SimilarityThresholdOutOfRange);
-//                 cerr << endl << "ERROR: The similarity threshold value should be between 0 and 1." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
             debug.report(ErrorCode::SimilarityThresholdNotRecognized);
-            //             cerr << endl << "ERROR: The similarity threshold value should be a positive real number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -477,14 +464,12 @@ inline bool trimAlManager::consistency_threshold_argument(int *argc, char *argv[
             if((consistencyThreshold < 0) || (consistencyThreshold > 1))
             {
                 debug.report(ErrorCode::ConsistencyThresholdOutOfRange);
-//                 cerr << endl << "ERROR: The consistency threshold value should be between 0 and 1." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
             debug.report(ErrorCode::ConsistencyThresholdNotRecognized);
-//             cerr << endl << "ERROR: The consistency threshold value should be a positive real number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -502,14 +487,12 @@ inline bool trimAlManager::conservation_threshold_argument(int *argc, char *argv
             if((conservationThreshold < 0) || (conservationThreshold > 100))
             {
                 debug.report(ErrorCode::ConservationThresholdOutOfRange);
-//                 cerr << endl << "ERROR: The minimal positions value should be between 0 and 100." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
             debug.report(ErrorCode::ConservationThresholdNotRecognized);
-//             cerr << endl << "ERROR: The minimal positions value should be a positive real number." << endl << endl;
             appearErrors = true;
         }
 
@@ -530,7 +513,6 @@ bool trimAlManager::select_cols_argument(int *argc, char *argv[], int *i)
         if((delColumns = utils::readNumbers(argv[++(*i)])) == NULL)
         {
             debug.report(ErrorCode::SelectColsNotRecognized);
-//             cerr << endl << "ERROR: Impossible to parse the sequences number" << endl << endl;
             appearErrors = true;
         }
 
@@ -632,14 +614,12 @@ inline bool trimAlManager::residue_overlap_argument(int *argc, char *argv[], int
             if((residuesOverlap < 0) || (residuesOverlap > 1))
             {
                 debug.report(ErrorCode::ResidueOverlapOutOfRange);
-//                 cerr << endl << "ERROR: The residue overlap value should be between 0 and 1." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
             debug.report(ErrorCode::ResidueOverlapNotRecognized);
-//             cerr << endl << "ERROR: The residue overlap value should be a positive real number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -722,14 +702,12 @@ inline bool trimAlManager::clusters_argument(int *argc, char *argv[], int *i)
             if(clusters < 1)
             {
                 debug.report(ErrorCode::ClustersValueOutOfRange);
-//                 cerr << endl << "ERROR: The clusters number should be a positive integer number." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
             debug.report(ErrorCode::ClustersValueNotRecognized);
-//             cerr << endl << "ERROR: The clusters number should be a positive integer number." << endl << endl;
             appearErrors = true;
         }
 
@@ -758,14 +736,12 @@ inline bool trimAlManager::window_argument(int *argc, char *argv[], int *i)
             if(windowSize <= 0)
             {
                 debug.report(ErrorCode::WindowValueOutOfRange);
-//                 cerr << endl << "ERROR: The window value should be a positive integer number." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
             debug.report(ErrorCode::WindowValueNotRecognized);
-//             cerr << endl << "ERROR: The window value should be a number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -783,14 +759,12 @@ inline bool trimAlManager::gap_window_argument(int *argc, char *argv[], int *i)
             if(gapWindow <= 0)
             {
                 debug.report(ErrorCode::GapWindowValueOutOfRange);
-//                 cerr << endl << "ERROR: The gap window value should be a positive integer number." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
             debug.report(ErrorCode::GapWindowValueNotRecognized);
-//             cerr << endl << "ERROR: The gap window value should be a number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -808,14 +782,12 @@ inline bool trimAlManager::similarity_window_argument(int *argc, char *argv[], i
             if(similarityWindow <= 0)
             {
                 debug.report(ErrorCode::SimilarityWindowValueOutOfRange);
-//                 cerr << endl << "ERROR: The similarity window value should be a positive integer number." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
             debug.report(ErrorCode::SimilarityWindowValueNotRecognized);
-//             cerr << endl << "ERROR: The similarity window value should be a number." << endl << endl;
             appearErrors = true;
         }
 
@@ -834,14 +806,12 @@ inline bool trimAlManager::consistency_window_argument(int *argc, char *argv[], 
             if(consistencyWindow <= 0)
             {
                 debug.report(ErrorCode::ConsistencyWindowValueOutOfRange);
-//                 cerr << endl << "ERROR: The consistency window value should be a positive integer number." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
             debug.report(ErrorCode::ConsistencyWindowValueNotRecognized);
-//             cerr << endl << "ERROR: The consistency window value should be a number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -859,14 +829,12 @@ inline bool trimAlManager::block_argument(int *argc, char *argv[], int *i)
             if(blockSize <= 0)
             {
                 debug.report(ErrorCode::BlockSizeOutOfRange);
-//                 cerr << endl << "ERROR: The block size value should be a positive integer number." << endl << endl;
                 appearErrors = true;
             }
         }
         else
         {
             debug.report(ErrorCode::BlockSizeNotRecognized);
-//             cerr << endl << "ERROR: The block size value should be a number." << endl << endl;
             appearErrors = true;
         }
         return true;
@@ -1040,20 +1008,17 @@ inline bool trimAlManager::check_inFile_incompatibilities()
         if((sfc) || (sft) || (consistencyThreshold != -1))
         {
             debug.report(ErrorCode::InFileComparisonStatistics);
-//             cerr << endl << "ERROR: Option -in not valid in combination with file comparision options: -sft || -sfc || -ct " << endl << endl;
             appearErrors = true;
             i++;
         }
         if(compareset != -1)
         {
             debug.report(ErrorCode::IncompatibleArguments, new std::string[2] {"-in", "-compareset"} );
-//           cerr << endl << "ERROR: Option -in not valid in combination with -compareset option." << endl << endl;
             appearErrors = true;
         }
         if(forceFile != NULL)
         {
             debug.report(ErrorCode::IncompatibleArguments, new std::string[2] {"-in", "-forceselect"} );
-//             cerr << endl << "ERROR: Option -in not valid in combination with -forceselect option." << endl << endl;
             appearErrors = true;
         }
     }
@@ -1067,36 +1032,30 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities()
         if((gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || (consistencyThreshold != -1))
         {
             debug.report(ErrorCode::SelectSeqsResAndThresholdIncompatibilities);
-//             cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination with threshold options: (-gt || -st || -ct || -cons)." << endl << endl;
             appearErrors = true;
         }
 
         if(automatedMethodCount)
         {
             debug.report(ErrorCode::SelectSeqsResAndAutomathedMethodsIncompatibilities);
-//             cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination with automated trimming options:"
-//                 << " (-nogaps || -noallgaps || -gappyout || -strict || -strictplus || -automated1)." << endl << endl;
             appearErrors = true;
         }
 
         if((windowSize != -1) || (gapWindow != -1)|| (similarityWindow != -1) || consistencyWindow != -1)
         {
             debug.report(ErrorCode::SelectSeqsResAndWindowIncompatibilities);
-//             cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination with window options: (-w || -sw || -gw || -wc)." << endl << endl;
             appearErrors = true;
         }
 
         if (residuesOverlap != -1 || sequenceOverlap != -1)
         {
             debug.report(ErrorCode::SelectSeqsResAndOverlapIncompatibilites);
-//             cerr << endl << "ERROR: Options -selectCols and -selectSeqs are not allowed in combination of overlap options (-resoverlap || -seqoverlap)." << endl << endl;
             appearErrors = true;
         }
 
         if((clusters != -1) || (maxIdentity != -1))
         {
             debug.report(ErrorCode::OnlyOneSequencesSelectionMethodAllowed);
-//             cerr << endl << "ERROR: Only one method to chose sequences can be applied: (-selectseqs || -clusters || -maxIdentity)." << endl << endl;
             appearErrors = true;
         }
 
@@ -1104,7 +1063,6 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities()
             if(blockSize != -1)
             {
                 debug.report(ErrorCode::IncompatibleArguments, new std::string[2] {"-selectcols", "-block"});
-//                 cerr << endl << "ERROR: Option -selectcols not allowed in combination of column block size option (-block)." << endl << endl;
                 appearErrors = true;
             }
     }
@@ -1113,12 +1071,12 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities()
 
 inline bool trimAlManager::check_thresholds_incompatibilities()
 {
-    if((gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || (consistencyThreshold != -1) ) //TODO consistencyThreshold was not present on this Incompatibilities. Is this correct?
+    //TODO consistencyThreshold was not present on this Incompatibilities. Is this correct?
+    if((gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || (consistencyThreshold != -1) ) 
     {
         if(automatedMethodCount)
         {
             debug.report(ErrorCode::CombinationAmongTrimmingMethods);
-//             cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed." << endl << endl;
             appearErrors = true;
         }
 
@@ -1127,7 +1085,6 @@ inline bool trimAlManager::check_thresholds_incompatibilities()
             if(blockSize != -1)
             {
                 debug.report(ErrorCode::IncompatibleArguments, new std::string[2] {"-conthreshold", "-block"});
-//                 cerr << endl << "ERROR: Options -conthreshold and -block are not compatible." << endl << endl;
                 appearErrors = true;
             }
         }
@@ -1135,14 +1092,12 @@ inline bool trimAlManager::check_thresholds_incompatibilities()
         if (maxIdentity != -1)
         {
             debug.report(ErrorCode::CombinationAmongTrimmingMethods);
-//              cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed." << endl << endl;
             appearErrors = true;
         }
 
         if (clusters != -1)
         {
             debug.report(ErrorCode::CombinationAmongTrimmingMethods);
-//             cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed." << endl << endl;
             appearErrors = true;
         }
     }
@@ -1156,35 +1111,30 @@ inline bool trimAlManager::check_automated_methods_incompatibilities()
         if((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1))
         {
             debug.report(ErrorCode::CombinationAmongTrimmingMethods);
-//             cerr << endl << "ERROR: Combinations between automatic methods and window values are not allowed." << endl << endl;
             appearErrors = true;
         }
 
         if(blockSize != -1)
         {
             debug.report(ErrorCode::AutomathicMethodAndBlock);
-//             cerr << endl << "ERROR: Combinations between automatic methods and -block options are not allowed." << endl << endl;
             appearErrors = true;
         }
 
         if (clusters != -1)
         {
             debug.report(ErrorCode::CombinationAmongTrimmingMethods);
-//             cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
             appearErrors = true;
         }
 
         if (maxIdentity != -1)
         {
             debug.report(ErrorCode::CombinationAmongTrimmingMethods);
-//              cerr << endl << "ERROR: Combinations between automatic and manual methods are not allowed" << endl << endl;
             appearErrors = true;
         }
 
         if (automatedMethodCount > 1)
         {
             debug.report(ErrorCode::CombinationAmongTrimmingMethods);
-//             cerr << endl << "ERROR: Combinations between automatic methods are not allowed." << endl << endl;
             appearErrors = true;
         }
     }
@@ -1198,13 +1148,11 @@ inline bool trimAlManager::check_max_identity_incompatibilities()
         if((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1) || (consistencyWindow != -1))
         {
             debug.report(ErrorCode::WindowAndArgumentIncompatibilities, new std::string[1] {"-maxIdentity"});
-//             cerr << endl << "ERROR: Option -maxIdentity not allowed in combination with window values." << endl << endl;
             appearErrors = true;
         }
         if(clusters != -1)
         {
             debug.report(ErrorCode::OnlyOneSequencesSelectionMethodAllowed);
-//             cerr << endl << "ERROR: Only one method to chose representative sequences can be applied." << endl << endl;
             appearErrors = true;
         }
     }
@@ -1218,7 +1166,6 @@ inline bool trimAlManager::check_clusters_incompatibilities()
         if((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1) || consistencyWindow != -1)
         {
             debug.report(ErrorCode::WindowAndArgumentIncompatibilities, new std::string[1] {"-clusters"});
-//             cerr << endl << "ERROR: Options -clusters is allowed in combination with window values." << endl << endl;
             appearErrors = true;
         }
     }
@@ -1232,7 +1179,6 @@ inline bool trimAlManager::check_windows_incompatibilities()
         if (consistencyWindow != -1 || gapWindow != -1 || similarityWindow != -1)
         {
             debug.report(ErrorCode::GeneralAndSpecificWindows);
-//             cerr << endl << "ERROR: General window (-w) is not compatible with specific window options: (-cw, -gw, -sw)" << endl << endl;
             appearErrors = true;
         }
     }
@@ -1246,7 +1192,6 @@ inline bool trimAlManager::check_stats_incompatibilities()
         if (columnNumbering)
         {
             debug.report(ErrorCode::StatisticsArgumentIncompatibilities, new string[1] {"-colnumbering"});
-//             cerr << endl << "ERROR: Paramenter -colnumbering is not valid when statistics' parameters are defined." << endl << endl;
             appearErrors = true;
         }
     }
@@ -1273,6 +1218,7 @@ inline bool trimAlManager::check_arguments_needs(char* argv[])
     check_backtranslation_infile_names_corresponde();
     check_cw_argument();
     check_output_format();
+    return appearErrors;
 }
 
 inline bool trimAlManager::check_codon_behaviour_incompatibility()
@@ -1280,7 +1226,6 @@ inline bool trimAlManager::check_codon_behaviour_incompatibility()
     if((!appearErrors) && (ignoreStopCodon) && (splitByStopCodon))
     {
         debug.report(ErrorCode::IncompatibleArguments, new std::string[2] {"-ignorestopcodon", "-splitbystopcodon"});
-//         cerr << endl << "ERROR: Incompatibility of -ignorestopcodon & -splitbystopcodon parameters. Choose one." << endl << endl;
         appearErrors = true;
         return true;
     }
@@ -1295,7 +1240,6 @@ inline bool trimAlManager::check_combinations_among_thresholds_incompatibility()
         if((gapThreshold != -1) || (similarityThreshold != -1))
         {
             debug.report(ErrorCode::CombinationAmongThresholdsMethods);
-//             cerr << endl << "ERROR: Combinations among thresholds are not allowed." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1312,13 +1256,10 @@ inline bool trimAlManager::check_automated_manual_incompatibilities()
                 (maxIdentity == -1) && (clusters == -1)) // Or complex selection of sequences.
         {
             debug.report(ErrorCode::TrimmingMethodNeeded, new std::string[1] { "-complementary" });
-//             cerr << endl << "ERROR: The parameter -complementary can only be used with either an automatic or a manual method." << endl << endl;
             appearErrors = true;
             return true;
         }
-    /* ------------------------------------------------------------------------------------------------------ */
 
-    /* ------------------------------------------------------------------------------------------------------ */
     if((terminalOnly) && (!appearErrors))
         if(!automatedMethodCount && // Are we not using an automated method?
                 (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && // Neither a threshold method.
@@ -1326,7 +1267,6 @@ inline bool trimAlManager::check_automated_manual_incompatibilities()
                 (maxIdentity == -1) && (clusters == -1)) // Or complex selection of sequences.
         {
             debug.report(ErrorCode::TrimmingMethodNeeded, new std::string[1] { "-terminalonly" });
-//             cerr << endl << "ERROR: The parameter '-terminalonly' can only be used with either an automatic or a manual method." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1340,8 +1280,6 @@ inline bool trimAlManager::check_force_selection()
         if((compareset == -1) && (forceFile != NULL))
         {
             debug.report(ErrorCode::ForceFileWithoutCompareDataset);
-//             cerr << endl << "ERROR: You can not force the alignment selection without setting"
-//                  << " an alignment dataset to compare against." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1353,10 +1291,6 @@ inline bool trimAlManager::check_input_file_with_coding_sequences_argument()
 {
     if((!appearErrors) && (infile == NULL) && (compareset == -1) && (forceFile == NULL) && (backtransFile != NULL))
     {
-//         cerr << endl << "ERROR: It is impossible to use a Coding Sequences file to apply the back translation method"
-//              << " without defining an input alignment." << endl << endl;
-//         cerr << endl << "ERROR: You need to specify an input alignment (-in or -forcefile) " <<
-//                         "to use a Coding Sequence File (-backtranslation) to apply the back translation method." << endl << endl;
         debug.report(ErrorCode::BacktranslationWithoutMainAlignment);
         appearErrors = true;
         return true;
@@ -1377,7 +1311,6 @@ inline bool trimAlManager::check_file_aligned()
                 (!origAlig -> isFileAligned())) // Then we need the alignment to be aligned;
         {
             debug.report(ErrorCode::NotAligned, new std::string[1] { infile });
-//             cerr << endl << "ERROR: The sequences in the input alignment should be aligned in order to use any trimming method or statistics." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1392,7 +1325,6 @@ inline bool trimAlManager::check_similarity_matrix()
         if((!strict) && (!strictplus) && (!automated1) && (similarityThreshold == -1) && (!scc) && (!sct))
         {
             debug.report(ErrorCode::MatrixGivenWithNoMethodToUseIt);
-//             cerr << endl << "ERROR: The Similarity Matrix can only be used with methods that use this matrix." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1401,7 +1333,6 @@ inline bool trimAlManager::check_similarity_matrix()
         if((gapWindow != -1) || ((compareset == -1) && (consistencyWindow != -1)))
         {
             debug.report(ErrorCode::SimilarityMatrixNotCompatibleWindow);
-//             cerr << endl << "ERROR: The Similarity Matrix can only be used with general/similarity windows size." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1455,7 +1386,6 @@ inline bool trimAlManager::check_col_numbering()
                 (!selectCols) && (!selectSeqs)) // Neither selecting any column or sequence?
         {
             debug.report(ErrorCode::TrimmingMethodNeeded, new std::string[1] {"-colnumbering"} );
-//             cerr << endl << "ERROR: Paramenter -colnumbering can only be used with any trimming method." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1470,7 +1400,6 @@ inline bool trimAlManager::check_residue_and_sequence_overlap()
         if((residuesOverlap != -1) && (sequenceOverlap == -1))
         {
             debug.report(ErrorCode::SequenceAndResiduesOverlapMutuallyNeeded, new string[1] {"residues overlap"} );
-//             cerr << endl << "ERROR: The sequence overlap value should be defined." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1478,7 +1407,6 @@ inline bool trimAlManager::check_residue_and_sequence_overlap()
         else if((residuesOverlap == -1) && (sequenceOverlap != -1))
         {
             debug.report(ErrorCode::SequenceAndResiduesOverlapMutuallyNeeded, new string[1] {"sequences overlap"} );
-//             cerr << endl << "ERROR: The residue overlap value should be defined." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1522,7 +1450,6 @@ inline bool trimAlManager::check_output_file_with_statistics()
                 && (outfile == NULL)) // We need the outFile to be specified.
         {
             debug.report(ErrorCode::OutFileNeededWhenPrintingStatistics);
-//             cerr << endl << "ERROR: An output file should be defined in order to get the alignment's statistics." << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1539,20 +1466,16 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
         compareAlignmentsArray = new newAlignment*[numfiles];
         filesToCompare = new char*[numfiles];
 
-        /* -------------------------------------------------------------------- */
-
         compare.open(argv[compareset], ifstream::in);
 
         for(i = 0; (i < numfiles)  && (!appearErrors); i++)
         {
 
-            /* -------------------------------------------------------------------- */
             for(nline.clear(), compare.read(&c, 1); (c != '\n') && ((!compare.eof())); compare.read(&c, 1))
                 nline += c;
 
             filesToCompare[i] = new char [nline.size() + 1];
             strcpy(filesToCompare[i], nline.c_str());
-            /* -------------------------------------------------------------------- */
 
             if ((compareAlignmentsArray[i] = ReadWriteMachine.loadAlignment(filesToCompare[i])) == NULL)
             {
@@ -1570,8 +1493,6 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
                 else
                 {
                     compareAlignmentsArray[i] -> SequencesMatrix = new sequencesMatrix(compareAlignmentsArray[i]);
-//                     compareAlignmentsArray[i] -> SequencesMatrix = new sequencesMatrix();
-
 
                     if(compareAlignmentsArray[i] -> getNumAminos() > maxAminos)
                         maxAminos = compareAlignmentsArray[i] -> getNumAminos();
@@ -1586,9 +1507,7 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
                 }
             }
         }
-        /* -------------------------------------------------------------------- */
 
-        /* -------------------------------------------------------------------- */
         if (!appearErrors)
         {
             if(forceFile == NULL)
@@ -1603,6 +1522,7 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
                     compareFiles::applyWindow(compareAlignmentsArray[referFile] -> getNumAminos(), windowSize, compareVect);
                 else if(consistencyWindow != -1)
                     compareFiles::applyWindow(compareAlignmentsArray[referFile] -> getNumAminos(), consistencyWindow, compareVect);
+                
                 origAlig = ReadWriteMachine.loadAlignment(filesToCompare[referFile]);
             }
             else
@@ -1617,20 +1537,17 @@ inline bool trimAlManager::check_multiple_files_comparison(char* argv[])
             }
         }
 
-        /* -------------------------------------------------------------------- */
         if (oformats.size() == 0)
         {
             oformats.push_back(ReadWriteMachine.getFileFormatName(filesToCompare[referFile]));
         }
-        /* -------------------------------------------------------------------- */
+        
         for(i = 0; i < numfiles; i++)
         {
             delete compareAlignmentsArray[i];
             delete filesToCompare[i];
         }
-        /* -------------------------------------------------------------------- */
     }
-// exit(0);
     return hasError;
 
 }
@@ -1639,7 +1556,6 @@ inline bool trimAlManager::check_block_size()
     if((!appearErrors) && (origAlig -> getNumAminos() < (blockSize/4)))
     {
         debug.report(ErrorCode::BlocksizeTooBig, new string[1] { std::to_string(origAlig-> getNumAminos() / 4) });
-//         cerr << endl << "ERROR: The block size value is too big. Please, choose another one smaller than residues number / 4." << endl << endl;
         appearErrors = true;
         return true;
     }
@@ -1655,14 +1571,12 @@ inline bool trimAlManager::check_backtranslations()
             if(splitByStopCodon)
             {
                 debug.report(ErrorCode::ParemeterOnlyOnBacktranslation, new string[1] { "-splitbystopcodon" });
-//                 cerr << endl << "ERROR: The -splitbystopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
                 appearErrors = true;
                 return true;
             }
             if(ignoreStopCodon)
             {
                 debug.report(ErrorCode::ParemeterOnlyOnBacktranslation, new string[1] { "-ignorestopcodon" });
-//                 cerr << endl << "ERROR: The -ignorestopcodon parameter can be only set up with backtranslation functionality." << endl << endl;
                 appearErrors = true;
                 return true;
             }
@@ -1670,7 +1584,6 @@ inline bool trimAlManager::check_backtranslations()
         else if(!origAlig -> isFileAligned())
         {
             debug.report(ErrorCode::ProteinAlignmentMustBeAligned);
-//             cerr << endl << "ERROR: The input protein file has to be aligned to carry out the backtranslation process" << endl << endl;
             appearErrors = true;
             return true;
         }
@@ -1684,7 +1597,6 @@ inline bool trimAlManager::check_coding_sequences_type()
             (!backtranslationAlig -> getAlignmentType() & SequenceTypes::DNA )) // If so, is it from DNA?
     {
         debug.report(ErrorCode::BacktransAlignIsDNA);
-//         cerr << endl << "ERROR: Check your Coding sequences file. It has been detected other kind of biological sequences." << endl << endl;
         appearErrors = true;
         return true;
     }
@@ -1705,7 +1617,9 @@ inline bool trimAlManager::check_and_prepare_coding_sequence()
 
 inline bool trimAlManager::check_backtranslation_infile_names_corresponde()
 {
-    //NOTE Maybe we don't need to copy the names and lengths to two new arrays as we could pass the original names and lengths to the check checkCorrespondence function, which doesn't modify the pointers passed to them
+    //NOTE Maybe we don't need to copy the names and lengths to two new arrays 
+    // as we could pass the original names and lengths to the check checkCorrespondence function, 
+    // which doesn't modify the pointers passed to them
     if((!appearErrors) && (backtransFile != NULL))
     {
         sequencesNames = new string[backtranslationAlig -> getNumSpecies()];
@@ -1725,7 +1639,6 @@ inline void trimAlManager::check_cw_argument()
 {
     if((!appearErrors) && (windowSize != -1) && (compareset != -1))
         debug.report(InfoCode::WindowSizeCompareset);
-//         cerr << "INFO: Try with specific comparison file window value. Parameter -cw." << endl << endl;
 }
 
 inline void trimAlManager::check_output_format()
@@ -1743,12 +1656,10 @@ int trimAlManager::perform()
 
     if(conservationThreshold == -1)
         conservationThreshold  = 0;
-    /* -------------------------------------------------------------------- */
 
     origAlig -> Cleaning -> setTrimTerminalGapsFlag(terminalOnly);
     origAlig -> setKeepSequencesFlag(keepSeqs);
 
-    /* -------------------------------------------------------------------- */
     set_window_size();
 
     if(blockSize != -1)
@@ -1759,11 +1670,7 @@ int trimAlManager::perform()
 
     print_statistics();
 
-    /* -------------------------------------------------------------------- */
-//     cout << "Cleaning" << endl;
     clean_alignment();
-
-    /* -------------------------------------------------------------------- */
 
     if(singleAlig == NULL)
     {
@@ -1776,8 +1683,6 @@ int trimAlManager::perform()
         singleAlig = backtranslationAlig -> getTranslationCDS(singleAlig);
     }
 
-
-    /* -------------------------------------------------------------------- */
     if((svgOutFile != NULL) && (!appearErrors))
         if(!origAlig ->
                 alignmentSummarySVG(*singleAlig, svgOutFile, compareVect))
@@ -1785,6 +1690,7 @@ int trimAlManager::perform()
             debug.report(ErrorCode::ImpossibleToGenerate, new string[1] { "the SVG output file"});
             appearErrors = true;
         }
+        
     if((htmlOutFile != NULL) && (!appearErrors))
         if(!origAlig ->
                 alignmentSummaryHTML(*singleAlig, htmlOutFile, compareVect))
@@ -1792,7 +1698,7 @@ int trimAlManager::perform()
             debug.report(ErrorCode::ImpossibleToGenerate, new string[1] { "the HTML output file"});
             appearErrors = true;
         }
-    /* -------------------------------------------------------------------- */
+
     if((outfile != NULL) && (!appearErrors))
     {
         std::string outFileString = std::string(outfile);
@@ -1807,14 +1713,12 @@ int trimAlManager::perform()
     else if((stats >= 0) && (!appearErrors))
         ReadWriteMachine.saveAlignment("", &oformats, singleAlig);
 
-    /* -------------------------------------------------------------------- */
     if((columnNumbering) && (!appearErrors))
         singleAlig -> Statistics -> printCorrespondence();
 
-    /* -------------------------------------------------------------------- */
 
     delete_variables();
-    /* -------------------------------------------------------------------- */
+
     return 0;
 }
 
@@ -1822,8 +1726,7 @@ inline void trimAlManager::print_statistics()
 {
     if (svgStatsOutFile != NULL)
     {
-//         cout << "SVG REPORTING" << endl;
-        std::string title = infile; // " statistics graphs";
+        std::string title = infile;
         std::string filename = svgStatsOutFile;
         std::string linename = "";
         std::string color = "";
@@ -1840,9 +1743,9 @@ inline void trimAlManager::print_statistics()
             utils::streamSVG(& x, & y, 0, & linename, & color, NULL, NULL);
 
             for(i = 0, acm = 0; i <= origAlig -> sgaps -> maxGaps; i++) {
-                /* If the columns' number with this gaps' number is not equal to zero, we will count the columns. */
+                // If the columns' number with this gaps' number is not equal to zero, we will count the columns. 
                 if(origAlig -> sgaps -> numColumnsWithGaps[i] != 0) {
-                    /* Compute and prints the accumulative values for the gaps in the alignment. */
+                    // Compute and prints the accumulative values for the gaps in the alignment. 
                     acm += origAlig -> sgaps -> numColumnsWithGaps[i];
                     x = acm / origAlig -> sgaps -> residNumber;
                     y = 1.F - ((i * 1.0F)/origAlig -> sgaps ->sequenNumber);
@@ -1861,25 +1764,25 @@ inline void trimAlManager::print_statistics()
             float refer, *vectAux;
             int i, num, acm;
 
-            /* Allocate memory */
+            // Allocate memory 
             vectAux = new float[origAlig -> scons -> residues];
 
-            /* Select the conservation's value source and copy that vector in a auxiliar vector */
+            // Select the conservation's value source and copy that vector in a auxiliar vector 
             if(origAlig -> scons -> MDK_Window != NULL)
                 utils::copyVect(origAlig -> scons -> MDK_Window, vectAux, origAlig -> scons -> residues);
             else
                 utils::copyVect(origAlig -> scons -> MDK, vectAux, origAlig -> scons -> residues);
 
-            /* Sort the auxiliar vector. */
+            // Sort the auxiliar vector. 
             utils::quicksort(vectAux, 0, origAlig -> scons -> residues - 1);
 
-            /* Initializate some values */
+            // Initializate some values 
             refer = vectAux[origAlig -> scons -> residues-1];
             acm = 0;
             num = 1;
 
-            /* Count the columns with the same conservation's value and compute this information to shows the accunulative
-                statistics in the alignment. */
+            // Count the columns with the same conservation's value and compute this information to shows the accunulative
+            // statistics in the alignment. 
             for(i = origAlig -> scons -> residues-2; i >= 0; i--) {
                 acm++;
 
@@ -1897,7 +1800,7 @@ inline void trimAlManager::print_statistics()
             y = refer;
             utils::streamSVG(& x, & y, 0, & linename, & color, NULL, NULL);
 
-            /* Deallocate the reserved memory. */
+            // Deallocate the reserved memory. 
             delete [] vectAux;
         }
 
@@ -1905,7 +1808,7 @@ inline void trimAlManager::print_statistics()
     }
 
 
-    if (sgt || sgc || scc || sct || sfc || sft)
+//     if (sgt || sgc || scc || sct || sfc || sft)
     {
         if(sgc)
         {
@@ -1984,7 +1887,6 @@ inline bool trimAlManager::create_or_use_similarity_matrix()
         if(!origAlig -> Statistics -> setSimilarityMatrix(similMatrix))
         {
             debug.report(ErrorCode::ImpossibleToProcessMatrix);
-//             cerr << endl << "ERROR: It's impossible to process the Similarity Matrix." << endl << endl;
             return true;
         }
     }
@@ -2016,16 +1918,12 @@ inline void trimAlManager::clean_alignment()
         else // STRICT
             singleAlig = origAlig -> Cleaning -> cleanCombMethods(getComplementary, false);
     }
-    /* -------------------------------------------------------------------- */
 
-    /* -------------------------------------------------------------------- */
     else if(consistencyThreshold != -1)
     {
         singleAlig = origAlig -> Cleaning -> cleanCompareFile(consistencyThreshold, conservationThreshold, compareVect, getComplementary);
     }
-    /* -------------------------------------------------------------------- */
 
-    /* -------------------------------------------------------------------- */
     else if((residuesOverlap != -1) && (sequenceOverlap != -1))
     {
         tempAlig = origAlig -> Cleaning -> cleanSpuriousSeq(residuesOverlap, (sequenceOverlap/100), getComplementary);
@@ -2035,9 +1933,7 @@ inline void trimAlManager::clean_alignment()
         delete tempAlig;
 
     }
-    /* -------------------------------------------------------------------- */
 
-    /* -------------------------------------------------------------------- */
     else if(similarityThreshold != -1.0)
     {
         if(gapThreshold != -1.0)
@@ -2045,17 +1941,13 @@ inline void trimAlManager::clean_alignment()
         else
             singleAlig = origAlig -> Cleaning -> cleanConservation(conservationThreshold, similarityThreshold, getComplementary);
     }
-    /* -------------------------------------------------------------------- */
 
-    /* -------------------------------------------------------------------- */
     else if(gapThreshold != -1.0)
         singleAlig = origAlig -> Cleaning -> cleanGaps(conservationThreshold, gapThreshold, getComplementary);
-    /* -------------------------------------------------------------------- */
 
-    /* -------------------------------------------------------------------- */
     else if((selectCols) || (selectSeqs))
     {
-        /* -------------------------------------------------------------------- */
+
         if(delColumns != NULL)
         {
             num = delColumns[0];
@@ -2067,16 +1959,13 @@ inline void trimAlManager::clean_alignment()
             else
                 singleAlig = origAlig -> Cleaning -> removeColumns(delColumns, 1, num, getComplementary);
         }
-        /* -------------------------------------------------------------------- */
 
-        /* -------------------------------------------------------------------- */
         if(delSequences != NULL)
         {
             num = delSequences[0];
             if(delSequences[num] >= origAlig -> getNumSpecies())
             {
                 debug.report(ErrorCode::SelectOnlyAccepts, new string[2] {"-selectseqs", "sequences" });
-//                 cerr << endl << "ERROR: This option only accepts integer numbers between 0 and the number of sequences - 1." << endl << endl;
                 appearErrors = true;
             }
             else
@@ -2089,11 +1978,8 @@ inline void trimAlManager::clean_alignment()
             }
 
         }
-        /* -------------------------------------------------------------------- */
     }
-    /* -------------------------------------------------------------------- */
 
-    /* -------------------------------------------------------------------- */
     else if(maxIdentity != -1)
     {
         tempAlig = origAlig -> Cleaning -> getClustering (maxIdentity);
@@ -2108,7 +1994,6 @@ inline void trimAlManager::clean_alignment()
         if(clusters > origAlig -> getNumSpecies())
         {
             debug.report(ErrorCode::MoreClustersThanSequences);
-//             cerr << endl << "ERROR:The number of clusters from the Alignment can not be larger than the number of sequences from that alignment." << endl << endl;
             appearErrors = true;
         }
         else

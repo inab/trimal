@@ -51,12 +51,12 @@
 #define SINGLE  1
 #define MULTI   2
 
-struct newValues {
-  int residues = 0;
-  int sequences = 0;
-  string *matrix = NULL;
-  string *seqsName = NULL;
-};
+// struct newValues {
+//   int residues = 0;
+//   int sequences = 0;
+//   string *matrix = NULL;
+//   string *seqsName = NULL;
+// };
 
 #endif
 
@@ -162,13 +162,11 @@ public:
 
     bool isFileAligned(void);
 
-    newAlignment * getTranslationCDS(/*int newResidues, int newSequences, int * columnsToKeep, string * oldSequencesNames, sequencesMatrix * sequenceMatrix,*/ newAlignment * proteinAlignment);
+    newAlignment * getTranslationCDS(newAlignment * proteinAlignment);
 
     bool checkCorrespondence(string * names, int * lenghts, int totalInputSequences, int multiple);
 
     void fillNewDataStructure(string * newMatrix, string * newNames);
-
-    void fillNewDataStructure(newValues * data);
 
     void calculateColIdentity(float * columnIdentity);
 
@@ -182,8 +180,6 @@ public:
 
     bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, newAlignment * proteinAlignment);
 
-//     bool alignmentSummaryHTML(char *destFile, int residues, int seqs, int *selectedRes, int *selectedSeq, float *consValues);
-    
     bool alignmentSummaryHTML(newAlignment& _trimmedAlignment, char *destFile, float *consValues);
     
     bool alignmentSummarySVG(newAlignment & _trimmedAlignment, char *destFile, float *consValues, int blocks = 120);

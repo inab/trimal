@@ -1,7 +1,7 @@
 
 /*! \page readal_pag readAl Main Page
 
-\section introduction_sec Introduction
+\section introduction_sec_r Introduction
 
 One of the main problems that the researchers have to face during their studies is the <i>conversion among the various formats</i> required by different programs. \n
 Nowadays there around <i>20 different Multiple Sequence Alignment (MSAs) formats</i>. \n\n
@@ -12,7 +12,7 @@ Here we present \b readAl, a tool for format alignment conversion among the most
 \b readAl has been implemented in <i>C++ programming language</i>. \n
 This program is part of the \b trimAl package and is used internally by \b trimAl to convert among different formats.\n
 
-\section installation_sec Installation
+\section installation_sec_r Installation
 
 The simplest way to compile this program is:
 
@@ -27,11 +27,11 @@ The simplest way to compile this program is:
     
     4.- Move or copy binaries folder './bin/' to 'usr/local/bin' or 'usr/bin'
     
-\section usage_sec Usage 
+\section usage_sec_r Usage 
 
 This program is free software: you can redistribute it and/or modify it under the terms of the <b>GNU General Public License</b> as published by the Free Software Foundation, the last available version.
 
-\subsection basic_usage BASIC USAGE
+\subsection basic_usage_r BASIC USAGE
 
 	readalMS -in <inputfiles> -out <pattern> -format [formats] [options].
 
@@ -54,7 +54,7 @@ This program is free software: you can redistribute it and/or modify it under th
 	-shortNames          Shortens the names so they fit on certain formats
 	-keepHeaders         Keeps the headers of the original format if it had any
 
-\subsection legacy_opt LEGACY OPTIONS
+\subsection legacy_opt_r LEGACY OPTIONS
 Take in mind that this arguments may be discontinued any time.
 
 	-onlyseqs            Generate output with only residues from input file
@@ -76,7 +76,7 @@ Take in mind that this arguments may be discontinued any time.
 	-phylip3.2           Output file in PHYLIP3.2 format
 	-phylip3.2_m10       Output file in PHYLIP3.2 format. Sequences name up to 10 characters.
 
-\subsection examples EXAMPLES OF USE
+\subsection examples_r EXAMPLES OF USE
 
 	readalMS -in ./dataset/AA1.fas -out ./dataset/[in].output.[extension] -formats clustal
 	  -> Will produce ./dataset/AA1.output.clw

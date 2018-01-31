@@ -7,9 +7,10 @@
 #include "../include/similarityMatrix.h"
 
 class newAlignment;
+/// \brief Class to handle the interaction with statistics and statistics objects.
 class StatisticsManager {
 public:
-    
+
     int ghWindow;
     int shWindow;
 
@@ -29,9 +30,9 @@ public:
 
     void printCorrespondence(void);
 
-  void saveStatistics(similarityMatrix *sm);
+    void saveStatistics(similarityMatrix *sm);
 
-  void saveStatistics(similarityMatrix *, int, int);
+    void saveStatistics(similarityMatrix *, int, int);
 
 private:
     friend class newAlignment;
@@ -39,7 +40,7 @@ private:
     newAlignment* _alignment;
 
     StatisticsManager(newAlignment* parent);
-    
+
     StatisticsManager(newAlignment* parent, StatisticsManager* mold);
 };
 
