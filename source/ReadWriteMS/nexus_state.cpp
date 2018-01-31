@@ -191,41 +191,41 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
     int i, j, k, l, maxLongName = 0;
     string *tmpMatrix;
 
-    /* Check whether sequences in the alignment are aligned or not.
-     * Warn about it if there are not aligned. */
+    // Check whether sequences in the alignment are aligned or not.
+    // Warn about it if there are not aligned.
     if (!alignment->isAligned) {
         debug.report(ErrorCode::UnalignedAlignmentToAlignedFormat, new std::string[1] { this->name });
         return false;
     }
 
-    /* Allocate local memory for generating output alignment */
+    // Allocate local memory for generating output alignment
     tmpMatrix = new string[alignment->originalSequenNumber];
 
-    /* Depending on alignment orientation: forward or reverse. Copy directly
-     * sequence information or get firstly the reversed sequences and then
-     * copy it into local memory */
+    // Depending on alignment orientation: forward or reverse. Copy directly
+    // sequence information or get firstly the reversed sequences and then
+    // copy it into local memory
     for(i = 0; i < alignment->originalSequenNumber; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
 
-    /* Compute maximum sequences name length */
+    // Compute maximum sequences name length
     for(i = 0; (i < alignment->originalSequenNumber) && (!Machine->shortNames); i++)
         if (alignment->saveSequences[i] != -1)
             maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
 
-    /* Compute output file datatype */
+    // Compute output file datatype
     alignment->getAlignmentType();
 
-    /* Remove characters like ";" from input alignment information line */
+    // Remove characters like ";" from input alignment information line
     while((int) alignment -> aligInfo.find(";") != (int) string::npos)
         alignment ->aligInfo.erase(alignment -> aligInfo.find(";"), 1);
 
-    /* Print Alignment header */
+    // Print Alignment header
     *output << "#NEXUS" << endl << "BEGIN DATA;" << endl << " DIMENSIONS NTAX="
          << alignment->sequenNumber << " NCHAR=" << alignment->residNumber <<";" << endl;
 
-    /* Print alignment datatype */
+    // Print alignment datatype
     if (alignment->getAlignmentType() & SequenceTypes::DNA)
         *output << "FORMAT DATATYPE=DNA INTERLEAVE=yes GAP=-";
     else if (alignment->getAlignmentType() & SequenceTypes::RNA)
@@ -234,7 +234,7 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
         *output << "FORMAT DATATYPE=PROTEIN INTERLEAVE=yes GAP=-";
 
     i = 0;
-    /* Using information from input alignment. Use only some tags. */
+    // Using information from input alignment. Use only some tags.
     while((j = alignment ->aligInfo.find(" ", i)) != (int) string::npos) {
 
         if((alignment ->aligInfo.substr(i, j - i)).compare(0, 7, "MISSING") == 0 ||
@@ -248,35 +248,61 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
         i = j + 1;
     }
     *output << ";" << endl;
-    
+
+    // Add a header indicating the number of residues of each sequence.
     for(i = 0; i < alignment->originalSequenNumber; i++)
     {
-        if (alignment->saveSequences[i] == -1 ) continue;
-        *output << "[Name: " << setw(maxLongName + 4) << left << alignment->seqsName[i] << "Len: " << alignment->residNumber << "]" << endl;
+        if (alignment->saveSequences[i] == -1 )
+            continue;
+
+        *output << "[Name: "
+                << setw(maxLongName + 4) << left << alignment->seqsName[i]
+                << "Len: " << alignment->residNumber << "]" << endl;
     }
     *output << endl << "MATRIX";
 
-    for(j = 0, k = j; j < alignment->originalResidNumber; j = k) {
-        if (alignment-> saveResidues[j] == -1) {
-            k++;
+    // Start filling the file with sequence names and sequences.
+    for (j = 0, k = 0; j < alignment->originalResidNumber;)
+    {
+        // Move until next not rejected residue
+        if (alignment->saveResidues[j] == -1)
+        {
+            j++;
             continue;
         }
-        for(i = 0; i < alignment->originalSequenNumber; i++) {
+
+        // Iterate over the sequences
+        for (i = 0; i < alignment->originalSequenNumber; i++)
+        {
+            // Skip rejected sequences
             if (alignment->saveSequences[i] == -1) continue;
-            *output << endl << setw(maxLongName + 4) << left << alignment->seqsName[i];
-            for (k = j, l = 0; k < alignment->originalResidNumber && l < 50; k++)
+            // Output sequence name
+            *output << endl << setw(maxLongName + 5) << left << alignment->seqsName[i];
+            // Add residues per block.
+            // k = residue position;
+            // l = residues added on current line
+            for (k = j, l = 0; k < alignment->originalResidNumber && l < 50;)
             {
-                if (l != 50 && l % 10 == 0) *output << " ";
-                if (alignment->saveResidues[k] == -1) continue;
+                // Don't save residues that have been rejected
+                if (alignment->saveResidues[k] == -1)
+                {
+                    k++;
+                    continue;
+                }
+                // Add the residue at position K
                 *output << alignment->sequences[i][k];
-                l++;
+                k++; l++;
+                // If a block of 10 residues have been added, append a space to sequence
+                if (l % 10 == 0 && l != 50) *output << " ";
             }
         }
+        // Add the line to split blocks
         *output << endl;
+        j = k;
     }
-    *output << endl;
-    
-    *output << ";" << endl << "END;" << endl;
+
+    // End of MATRIX
+    *output << endl << ";" << endl << "END;" << endl;
 
     /* Deallocate local memory */
     delete [] tmpMatrix;
