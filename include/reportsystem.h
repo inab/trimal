@@ -11,14 +11,15 @@
  * \brief VerboseLevel used to report messages. 
  */
 enum VerboseLevel {
-    /// 0 = No output messages
-    NONE        = 0,
+
     /// 1 = Info, warning and error messages
     INFO        = 1,
     /// 2 = Error and warning messages
     WARNING    = 2,
     /// 3 = Only error messages
     ERROR      = 3,
+    /// 4 = No output messages
+    NONE        = 4,
 };
 
 enum ErrorCode {
@@ -184,6 +185,7 @@ enum ErrorCode {
     __MAXERROR
 
 };
+
 enum WarningCode {
     RemovingOnlyGapsColumn                      = 1,
 
@@ -265,7 +267,7 @@ private:
     
 public:
     /** \brief Level of Verbosity.\n The report system won't output messages that are lower than the current level */
-    VerboseLevel Level;
+    VerboseLevel Level = VerboseLevel::INFO;
     
     /// \brief Protection variable. This variable should be set to true in Development Environments, and false on Release.
     bool IsDebug = false;
