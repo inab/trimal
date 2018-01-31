@@ -178,7 +178,8 @@ inline bool trimAlManager::in_argument(int *argc, char *argv[], int *i)
         strcpy(infile, argv[*i]);
         if ((origAlig = ReadWriteMachine.loadAlignment(infile)) == nullptr)
         {
-            debug.report(ErrorCode::AlignmentNotLoaded, infile );
+            // Reporting is done on the loadAlignment method.
+            // debug.report(ErrorCode::AlignmentNotLoaded, infile );
             appearErrors = true;
         }
         return true;
