@@ -55,12 +55,12 @@ add_executable(readal
         source/ReadWriteMS/ReadWriteMSmain.cpp
         $<TARGET_OBJECTS:common>)
 
-add_executable(testMaker
+add_executable(testMaker EXCLUDE_FROM_ALL
         source/Catch/TestMaker.cpp
         source/utils.cpp
         source/reportsystem.cpp)
 
-add_executable(tests
+add_executable(tests EXCLUDE_FROM_ALL
         source/Catch/main.cpp
         include/Catch/catch.hpp
         include/Catch/catchhelperfunctions.h
@@ -73,6 +73,8 @@ add_executable(tests
 add_dependencies(tests testMaker)
 
 add_custom_command(OUTPUT ${alignment_test_file} COMMAND testMaker)
+
+SET_TARGET_PROPERTIES(tests PROPERTIES EXCLUDE_FROM_DEFAULT_BUILD True)
 
 # Link the mathematical library
 target_link_libraries(trimal m)
