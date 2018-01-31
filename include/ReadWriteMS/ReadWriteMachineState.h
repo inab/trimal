@@ -91,6 +91,30 @@ public:
      \brief Function to obtain all format names available by this object that can \b save an alignment.
      */
     std::string getOutputFormatsAvailable();
+    
+    /**
+     \brief Function to divide an alignment into different alignments, each one with a sequence from the original 
+            This function does a deep copy of each sequence, so the original alignment can be deleted after being splitted*/
+    std::vector<newAlignment*> splitAlignmentKeeping(newAlignment& alignment)
+    {
+        std::vector<newAlignment *> splitted = std::vector<newAlignment *>(alignment.originalSequenNumber);
+        
+        for (int i = 0; i < alignment.originalSequenNumber; i++)
+        {
+            newAlignment * tempAlignment = new newAlignment();
+            tempAlignment->sequences = new std::string[1];
+            tempAlignment->sequences[0] = std::string(alignment.sequences[i]);
+            tempAlignment->seqsName = new std::string[1] { alignment.seqsName[i] };
+            tempAlignment->sequenNumber = 1;
+            tempAlignment->originalSequenNumber = 1;
+            tempAlignment->residNumber = tempAlignment->sequences[0].size();
+            tempAlignment->originalResidNumber = tempAlignment->residNumber;
+            tempAlignment->filename = tempAlignment->seqsName[0];
+            splitted[i] = tempAlignment;
+        }
+        
+        return splitted;
+    }
 };
 
 

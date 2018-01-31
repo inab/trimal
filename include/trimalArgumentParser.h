@@ -16,7 +16,10 @@ using namespace std;
 
 class trimAlManager
 {
-
+public:
+    std::vector<std::string> * vcfs = NULL;
+    
+    
     bool 
     appearErrors        = false,
     getComplementary    = false, 
@@ -114,11 +117,15 @@ class trimAlManager
     std::vector<std::string> oformats;
 
 public:
+    trimAlManager();
+    trimAlManager(const trimAlManager&);
+    ~trimAlManager();
     void parseArguments(int argc, char *argv[]);
 private:
         void verbosity_argument(int* argc, char* argv[]);
         void info_arguments(int* argc, char* argv[], int* i);
         bool in_argument(int* argc, char* argv[], int* i);
+        bool vcf_argument(int* argc, char* argv[], int* i);
         bool out_argument(int* argc, char* argv[], int* i);
         bool html_out_argument(int* argc, char* argv[], int* i);
         bool svg_out_argument(int* argc, char* argv[], int* i);

@@ -59,7 +59,7 @@ int Cleaner::selectMethod(void) {
     }
 }
 
-newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gInCol, bool complementary) {
+newAlignment* Cleaner::cleanByCutValueOverpass (double cut, float baseLine, const int *gInCol, bool complementary) {
     
     int i, ii, j, k, ij, z, x, resCounter, counter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
     newAlignment *newAlig = new newAlignment(*_alignment);
@@ -238,7 +238,7 @@ newAlignment* Cleaner::cleanByCutValue(double cut, float baseLine, const int *gI
     return newAlig;
 }
 
-newAlignment* Cleaner::cleanByCutValue(float cut, float baseLine, const float *ValueVect, bool complementary) {
+newAlignment* Cleaner::cleanByCutValueFallBehind (float cut, float baseLine, const float *ValueVect, bool complementary) {
 
     int i, j, k, ij, resCounter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
     newAlignment *newAlig = new newAlignment(*_alignment);
@@ -385,7 +385,7 @@ newAlignment* Cleaner::cleanByCutValue(float cut, float baseLine, const float *V
     return newAlig;
 }
 
-newAlignment* Cleaner::cleanByCutValue(double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary) {
+newAlignment* Cleaner::cleanByCutValueOverpassOrEquals (double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary) {
 
     int i, j, k, ij, resCounter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
     newAlignment *newAlig = new newAlignment(*_alignment);
@@ -805,7 +805,7 @@ newAlignment* Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementa
     // Once we have the cut value proposed, we call the
     // appropiate method to clean the newAlignment and, then,
     // generate the new newAlignment.
-    ret = cleanByCutValue(cut, baseLine, _alignment -> sgaps -> getGapsWindow(), complementary);
+    ret = cleanByCutValueOverpass (cut, baseLine, _alignment -> sgaps -> getGapsWindow(), complementary);
     
     // Return a reference of the new newAlignment
     return ret;
@@ -827,7 +827,7 @@ newAlignment* Cleaner::cleanConservation(float baseLine, float conservationPct, 
     // Once we have the cut value, we call the appropiate
     // method to clean the newAlignment and, then, generate
     // the new newAlignment
-    ret = cleanByCutValue(cut, baseLine, _alignment->scons -> getMdkwVector(), complementary);
+    ret = cleanByCutValueFallBehind (cut, baseLine, _alignment->scons -> getMdkwVector(), complementary);
     // Return a reference of the new newAlignment
     return ret;
     
@@ -856,7 +856,7 @@ newAlignment* Cleaner::clean(float baseLine, float GapsPct, float conservationPc
     // Clean the alingment using the two cut values, the
     // gapsWindow and MDK_Windows vectors and the baseline
     // value
-    ret = cleanByCutValue(cutGaps, _alignment->sgaps -> getGapsWindow(), baseLine, cutCons, _alignment->scons -> getMdkwVector(), complementary);
+    ret = cleanByCutValueOverpassOrEquals (cutGaps, _alignment->sgaps -> getGapsWindow(), baseLine, cutCons, _alignment->scons -> getMdkwVector(), complementary);
     // Return a reference of the clean newAlignment object
     return ret;
 }
@@ -881,7 +881,7 @@ newAlignment* Cleaner::cleanCompareFile(float cutpoint, float baseLine, float *v
     cut = utils::min(cutpoint, cut);
     
     // Clean the selected newAlignment using the input parameters.
-    ret = cleanByCutValue(cut, baseLine, vectValues, complementary);
+    ret = cleanByCutValueFallBehind (cut, baseLine, vectValues, complementary);
 
     // Deallocate memory
     delete [] vectAux;
@@ -996,7 +996,7 @@ newAlignment* Cleaner::clean2ndSlope(bool complementarity) {
     cut = _alignment->sgaps -> calcCutPoint2ndSlope();
 
     // Using the cut point calculates in last steps, weclean the newAlignment and generate a new Alignment
-    ret = cleanByCutValue(cut, 0, _alignment->sgaps->getGapsWindow(), complementarity);
+    ret = cleanByCutValueOverpass (cut, 0, _alignment->sgaps->getGapsWindow(), complementarity);
 
     // Returns the new newAlignment.
     return ret;
@@ -1084,7 +1084,7 @@ newAlignment* Cleaner::cleanNoAllGaps(bool complementarity) {
         return NULL;
 
     // We want to conserve the columns with gaps' number less or equal than sequences' number - 1 
-    ret = cleanByCutValue((_alignment->sequenNumber - 1), 0, _alignment->sgaps->getGapsWindow(), complementarity);
+    ret = cleanByCutValueOverpass ((_alignment->sequenNumber - 1), 0, _alignment->sgaps->getGapsWindow(), complementarity);
 
     // Returns the new newAlignment.
     return ret;

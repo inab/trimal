@@ -195,7 +195,10 @@ newAlignment::~newAlignment(void) {
         if(seqsInfo != NULL)
             delete [] seqsInfo;
         seqsInfo = NULL;
-
+    }
+    else if (*SeqRef < 0)
+    {
+        delete SeqRef;
     }
 }
 
@@ -418,10 +421,10 @@ void newAlignment::getSequences(string *Names, string *Sequences, int *Lengths) 
     }
 }
 
-bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) {
+bool newAlignment::getSequenceNameOrder(
+    string *names, int *orderVector) {
     int i, j, numNames;
 
-    
     // For each name in the current newAlignment, we look
     // for its correspondence in the input set
     for(i = 0, numNames = 0; i < sequenNumber; i++) {
@@ -433,7 +436,7 @@ bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) {
             }
         }
     }
-    
+
     // Depending on if we get the complete correspondence
     // between both sets of names, we return true or not
     if(numNames == sequenNumber) return true;
@@ -460,6 +463,7 @@ bool newAlignment::isFileAligned(void) {
 }
 
 void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) {
+    // TODO Remove method as it doesn't make sense now
     int i, j, k;
 
     // Copy only those sequences/columns selected

@@ -11,8 +11,20 @@
 #include "../include/reportsystem.h"
 #include "../include/statisticsConservation2.h"
 
+#include "../include/ReadWriteMS/vcf_statish.h"
+
 void menu();
 void examples();
+
+trimAlManager::trimAlManager()
+{
+
+}
+
+trimAlManager::~trimAlManager()
+{
+    delete_variables();
+}
 
 void trimAlManager::parseArguments(int argc, char *argv[])
 {
@@ -31,6 +43,7 @@ void trimAlManager::parseArguments(int argc, char *argv[])
         info_arguments(&argc, argv, &i);
 
         if (in_argument(&argc, argv, &i))           continue;
+        if (vcf_argument(&argc, argv, &i))          continue;
         if (out_argument(&argc, argv, &i))          continue;
         if (html_out_argument(&argc, argv, &i))     continue;
         if (svg_out_argument(&argc, argv, &i))      continue;
@@ -169,6 +182,24 @@ inline bool trimAlManager::in_argument(int *argc, char *argv[], int *i)
             appearErrors = true;
         }
         return true;
+    }
+    return false;
+}
+
+inline bool trimAlManager::vcf_argument(int *argc, char *argv[], int *i)
+{
+    if(!strcmp(argv[*i], "-vcf") && ((*i)+1 != *argc) && (infile == NULL))
+    {
+        vcfs = new std::vector<std::string>();
+        while (((*i)+1 != *argc))
+        {
+            ++*i;
+            if (argv[*i][0] == '-') { --*i; break; }
+            vcfs->push_back(argv[*i]);
+//             debug << argv[*i] << std::endl;
+        }
+        return true;
+        
     }
     return false;
 }
@@ -983,9 +1014,11 @@ bool trimAlManager::processArguments(char* argv[])
 
 inline bool trimAlManager::check_arguments_incompatibilities()
 {
-    // The incompatibilities are checked only once, so there are arguments with no function to check it's incompatibilities although they have.
+    // The incompatibilities are checked only once,
+    // so there are arguments with no function to check it's incompatibilities although they have.
     // These are checked within other functions.
-    // So if argument A is incompatible with B, A may have this checked in it's incompatibilities function, but B may have no function to check them.
+    // So if argument A is incompatible with B,
+    // A may have this checked in it's incompatibilities function, but B may have no function to check them.
 
     check_inFile_incompatibilities();
     check_select_cols_and_seqs_incompatibilities();
@@ -1656,7 +1689,57 @@ int trimAlManager::perform()
 
     if(conservationThreshold == -1)
         conservationThreshold  = 0;
+    
+    if (vcfs != NULL)
+    {
+        auto XX = ReadWriteMachine.splitAlignmentKeeping(*origAlig);
+        
+        char replacement = '-';
+        
+        ngs::readVCF(
+        /* Dataset          */ XX, 
+        /* VCF Collection   */ *vcfs, 
+        /* min Quality      */ 0, 
+        /* min Converage    */ 30, 
+        /* ignore Filters   */ false,
+        /* replacement char */ &replacement
+        );
+        
+        for (int i = 0; i < XX.size(); i++)
+        {
+            delete origAlig;
+            origAlig = XX[i];
+            
+            origAlig -> Cleaning -> setTrimTerminalGapsFlag(terminalOnly);
+            origAlig -> setKeepSequencesFlag(keepSeqs);
 
+            set_window_size();
+
+            if(blockSize != -1)
+                origAlig -> setBlockSize(blockSize);
+
+            if (create_or_use_similarity_matrix())
+                return -2;
+
+            print_statistics();
+
+            clean_alignment();
+            
+            if((outfile != NULL) && (!appearErrors))
+            {
+                std::string outFileString = std::string(outfile);
+                if (ReadWriteMachine.saveAlignment(outFileString, &oformats, origAlig) == false)
+                {
+                    debug.report(ErrorCode::ImpossibleToGenerate, new string[1] { "the output file"});
+                    appearErrors = true;
+                }
+
+            }
+            
+        }
+        return 0;
+    }
+    
     origAlig -> Cleaning -> setTrimTerminalGapsFlag(terminalOnly);
     origAlig -> setKeepSequencesFlag(keepSeqs);
 
@@ -1716,8 +1799,7 @@ int trimAlManager::perform()
     if((columnNumbering) && (!appearErrors))
         singleAlig -> Statistics -> printCorrespondence();
 
-
-    delete_variables();
+//     delete_variables();
 
     return 0;
 }
@@ -2047,6 +2129,8 @@ inline void trimAlManager::delete_variables()
     if(forceFile != NULL)               delete forceFile;
     if(backtransFile != NULL)           delete backtransFile;
     if(backtranslationAlig != NULL)     delete backtranslationAlig;
+    
+    if(vcfs != NULL)                    delete vcfs;
 }
 
 void trimAlManager::menu(void)

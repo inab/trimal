@@ -12,13 +12,7 @@ set(CMAKE_CXX_STANDARD 11)
 # Make bin folder to output the compiled programs
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
-# Set the debug flag
-if( NOT CMAKE_BUILD_TYPE )
-    SET(CMAKE_BUILD_TYPE Debug)
-endif()
-
-# ADD_DEFINITIONS(-g -O2 -fsigned-char -freg-struct-return -Wall -W -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Winline )
-# ADD_DEFINITIONS(-Winline -march=native --param max-inline-insns-single=4000 --param inline-unit-growth=200 )
+ADD_DEFINITIONS(-O0 )
 
 # Include the include folder. Yeah. I love redudancy
 include_directories(include)
@@ -28,7 +22,6 @@ set(preview
         source/statisticsGaps.cpp
         source/utils.cpp
         source/similarityMatrix.cpp
-#         source/statisticsConservation.cpp
         source/sequencesMatrix.cpp
         source/compareFiles.cpp
         source/newAlignment.cpp
@@ -41,24 +34,49 @@ set(preview
         )
 
 # Include all states of ReadWriteMachineState
-FILE (GLOB states source/ReadWriteMS/*_state.cpp)
+FILE (GLOB states
+        source/ReadWriteMS/*_state.cpp)
 
-# add_library(states OBJECT ${states} ${preview})
-add_library(common OBJECT ${preview} ${states})
-        
+FILE (GLOB test_files
+        source/Catch/test_*.cpp)
+
+SET (alignment_test_file source/Catch/test_generated_alignment.cpp)
+
+add_library(common OBJECT
+        ${preview}
+        ${states})
+
 # Add the executables
-# add_executable(trimal source/main.cpp $<TARGET_OBJECTS:common>)
-add_executable(trimal source/newmain.cpp $<TARGET_OBJECTS:common>)
-# add_executable(readal source/readAl.cpp $<TARGET_OBJECTS:common>)
-# add_executable(statal source/statAl.cpp $<TARGET_OBJECTS:common>)
-add_executable(readal source/ReadWriteMS/ReadWriteMSmain.cpp $<TARGET_OBJECTS:common>)
+add_executable(trimal
+        source/newmain.cpp
+        $<TARGET_OBJECTS:common>)
+
+add_executable(readal
+        source/ReadWriteMS/ReadWriteMSmain.cpp
+        $<TARGET_OBJECTS:common>)
+
+add_executable(testMaker
+        source/Catch/TestMaker.cpp
+        source/utils.cpp
+        source/reportsystem.cpp)
+
+add_executable(tests
+        source/Catch/main.cpp
+        include/Catch/catch.hpp
+        include/Catch/catchhelperfunctions.h
+        source/Catch/Matchers/ArrayMatcher.cpp
+        $<TARGET_OBJECTS:common>
+        ${test_files}
+        ${alignment_test_file})
+
+# Command to build the alignment_test_files
+add_dependencies(tests testMaker)
+
+add_custom_command(OUTPUT ${alignment_test_file} COMMAND testMaker)
 
 # Link the mathematical library
 target_link_libraries(trimal m)
 target_link_libraries(readal m)
-# target_link_libraries(statal m)
-# target_link_libraries(new_trimal m)
-# target_link_libraries(readalMS m)
 
 # --------------------------- TESTING --------------------------- #
 
@@ -132,19 +150,19 @@ foreach(file ${files})
     
     compare_outputs(
             "[.${VAR}.][trimal][file:${stripped_file}][vanilla]"
-            "../Strimal/source/trimal" "bin/trimal"
+            "../TtrimAl/source/trimal" "bin/trimal"
             "-in ${file}")
     MATH(EXPR VAR "${VAR}+1")
             
     foreach(threshold ${thresholds})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][gt:${threshold}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -gt ${threshold}")
         MATH(EXPR VAR "${VAR}+1")
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][st:${threshold}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -st ${threshold}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -152,7 +170,7 @@ foreach(file ${files})
     foreach(cons ${cons})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][cons:${cons}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -cons ${cons}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -160,7 +178,7 @@ foreach(file ${files})
     foreach(method ${automethod})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][${method}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} ${method}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -168,7 +186,7 @@ foreach(file ${files})
     foreach(cluster ${clusters})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][cluster:${cluster}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -clusters ${cluster}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -176,7 +194,7 @@ foreach(file ${files})
     foreach(max_identity ${max_identities})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][max_identity:${max_identity}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -maxidentity ${max_identity}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -184,7 +202,7 @@ foreach(file ${files})
     foreach(block ${blocks})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][block:${block}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -block ${block}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -193,7 +211,7 @@ foreach(file ${files})
         foreach(resoverlap ${resoverlap})
             compare_outputs(
                     "[.${VAR}.][trimal][file:${stripped_file}][seqo:${seqoverlap}][reso:${resoverlap}]"
-                    "../Strimal/source/trimal" "bin/trimal"
+                    "../TtrimAl/source/trimal" "bin/trimal"
                     "-in ${file} -resoverlap ${resoverlap} -seqoverlap ${seqoverlap}")
             MATH(EXPR VAR "${VAR}+1")
         endforeach()
@@ -202,7 +220,7 @@ foreach(file ${files})
     foreach(format ${formats})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][format:${format}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} ${format}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
@@ -210,13 +228,13 @@ foreach(file ${files})
     foreach(ext ${external})
         compare_outputs(
                 "[.${VAR}.][trimal][file:${stripped_file}][externalParam:${ext}]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} ${ext}")
         MATH(EXPR VAR "${VAR}+1")
     endforeach()
     compare_htmlsvg(
                 "[.${VAR}.][trimal][file:${stripped_file}][html]"
-                "../Strimal/source/trimal" "bin/trimal"
+                "../TtrimAl/source/trimal" "bin/trimal"
                 "-in ${file} -strict -htmlout")
         MATH(EXPR VAR "${VAR}+1")
         
@@ -224,14 +242,14 @@ endforeach()
 
 compare_outputs(
             "[.${VAR}.][trimal][Compareset]"
-            "../Strimal/source/trimal" "bin/trimal"
+            "../TtrimAl/source/trimal" "bin/trimal"
             "-compareset /home/vfernandez/git/trimal/dataset/alignments_comparison.X")
     MATH(EXPR VAR "${VAR}+1")
     
 foreach(method ${automethod})
 compare_outputs(
             "[.${VAR}.][trimal][Backtrans][${method}]"
-            "../Strimal/source/trimal" "bin/trimal"
+            "../TtrimAl/source/trimal" "bin/trimal"
             "-in dataset/example.091.AA.strNOG.ENOG411BWBU.fasta -backtrans dataset/example.091.AA.strNOG.ENOG411BWBU.disordered.codon.fa ${method}")
     MATH(EXPR VAR "${VAR}+1")
 endforeach()

@@ -34,7 +34,14 @@ const std::map<WarningCode, const char *> __internalReport::__reportSystem::Warn
         "Sequence \"[tag]\" has less nucleotides ([tag]) than expected ([tag]). It will be added N's to complete the sequence" },
         
     { WarningCode::HeaderWillBeCut,
-        "Original sequence header will be cutted by 10 characters" }
+        "Original sequence header will be cutted by 10 characters" },
+        
+    { WarningCode::DonorAlreadyAdded,
+        "The donor \"[tag]\" is present on more than one VCF. The SNP's of all entries will be merged in one single sequence." },
+        
+    { WarningCode::ReferenceNucleotideNotCorresponding,
+        "The sequence \"[tag]\" at position \"[tag]\" does not correspond with reference allele in file \"[tag]\". Found \"[tag]\". Expected \"[tag]\""
+    }
         
 };
     
@@ -296,7 +303,15 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
         "Verbose Level specified ([tag]) wasn't recognized. Current level is: [tag]" },
         
     { ErrorCode::NeedToSpecifyVerboseLevel,
-        "Verbose Level has to be specified after the [tag] argument. Acceptable values are: 'error', 'warning', 'info', 'none' and their numerical equivalents '3', '2', '1' and '0'. Current level is [tag]" }
+        "Verbose Level has to be specified after the [tag] argument. Acceptable values are: 'error', 'warning', 'info', 'none' and their numerical equivalents '3', '2', '1' and '0'. Current level is [tag]" },
+        
+    { ErrorCode::NoReferenceSequenceForContig,
+        "No reference sequence found for contig \"[tag]\"" },
+        
+    { ErrorCode::SNPoutOfBounds,
+        "SNP at positon \"[tag]\" in file \"[tag]\" cannot be applied as sequence has a length of \"[tag]\""
+        
+    }
 };
 
 void __internalReport::__reportSystem::PrintCodesAndMessages()
@@ -335,7 +350,7 @@ void __internalReport::__reportSystem::PrintCodesAndMessages()
 
 void __internalReport::__reportSystem::report(ErrorCode message, std::string * vars)
 {
-    if (Level > VerboseLevel::ERROR)
+    if (Level < VerboseLevel::ERROR)
     {
         if (vars != NULL)
             delete [] vars;
@@ -366,7 +381,7 @@ void __internalReport::__reportSystem::report(ErrorCode message, std::string * v
 
 void __internalReport::__reportSystem::report(ErrorCode message, char * vars)
 {
-    if (Level > VerboseLevel::ERROR) return;
+    if (Level < VerboseLevel::ERROR) return;
     
     if (vars == NULL)
     {
@@ -390,7 +405,7 @@ void __internalReport::__reportSystem::report(ErrorCode message, char * vars)
 
 void __internalReport::__reportSystem::report(WarningCode message, std::string * vars)
 {
-    if (Level > VerboseLevel::WARNING)
+    if (Level < VerboseLevel::WARNING)
     {
         if (vars != NULL)
             delete [] vars;
@@ -421,7 +436,7 @@ void __internalReport::__reportSystem::report(WarningCode message, std::string *
 
 void __internalReport::__reportSystem::report(WarningCode message, char * vars)
 {
-    if (Level > VerboseLevel::WARNING) return;
+    if (Level < VerboseLevel::WARNING) return;
     
     if (vars == NULL)
     {
@@ -445,7 +460,7 @@ void __internalReport::__reportSystem::report(WarningCode message, char * vars)
 
 void __internalReport::__reportSystem::report(InfoCode message, std::string * vars)
 {
-    if (Level > VerboseLevel::INFO)
+    if (Level < VerboseLevel::INFO)
     {
         if (vars != NULL)
             delete [] vars;
@@ -476,7 +491,7 @@ void __internalReport::__reportSystem::report(InfoCode message, std::string * va
 
 void __internalReport::__reportSystem::report(InfoCode message, char * vars)
 {
-    if (Level > VerboseLevel::INFO) return;
+    if (Level < VerboseLevel::INFO) return;
     
     if (vars == NULL)
     {

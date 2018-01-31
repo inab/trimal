@@ -63,16 +63,19 @@ void utils::copyVect(float *vect1, float *vect2, int tam) {
 
 int utils::roundToInf(double number) {
 
+    return std::floor(number);
     return ((int) number);
 }
 
 int utils::roundInt(double number) {
 
+    return std::round(number);
     return ((int) ((double) number + 0.5));
 }
 
 int utils::roundToSup(double number) {
 
+    return std::ceil(number);
     return ((int) ((double) number + 1.0));
 }
 
@@ -115,6 +118,7 @@ double utils::min(double x, double y) {
 bool utils::isNumber(char *num) {
 
     int tam = strlen(num);
+    if (tam == 0) return false;
     int i, flt = 1, expn = 1, sgn = 1;
 
     for(i = 0; i < tam; i++) {
@@ -154,8 +158,9 @@ void utils::removeSpaces(char *in, char *out) {
     out[j] = '\0';
 }
 
-void utils::quicksort(float *vect, int ini, int fin) {
 
+void utils::quicksort(float *vect, int ini, int fin) {
+// NOTE Introspective sort seems better - JMaria
     float elem_div;
     int i, j;
 
@@ -199,7 +204,7 @@ void utils::swap(float *a, float *b) {
 }
 
 void utils::quicksort(int *vect, int ini, int fin) {
-
+// NOTE Introspective sort seems better - JMaria
     int i, j, elem_div;
 
     if ((ini >= fin) || (fin < 0))
@@ -242,7 +247,7 @@ void utils::swap(int *a, int *b) {
 }
 
 void utils::quicksort(int **vect, int ini, int fin) {
-
+// NOTE Introspective sort seems better - JMaria
     float elem_div;
     int i, j;
     
@@ -488,14 +493,12 @@ string utils::getReverse(string toReverse) {
 string utils::removeCharacter(char c, string line) {
 
     int pos;
-
     
     pos = line.find(c, 0);
     while(pos != (int) string::npos) {
         line.erase(pos, 1);
         pos = line.find(c, pos);
     }
-    
 
     return line;
 }
@@ -561,9 +564,9 @@ int utils::checkAlignmentType(int seqNumber, int residNumber, string *sequences)
     // Return the datatype with greater values, considering always degenerate
     // codes 
     if (extDNA != 0 && extDNA > extRNA)
-        return SequenceTypes::DNA | SequenceTypes::DEG;
+        return (SequenceTypes::DNA | SequenceTypes::DEG);
     else if (extRNA != 0 && extDNA < extRNA)
-        return SequenceTypes::RNA | SequenceTypes::DEG;
+        return (SequenceTypes::RNA | SequenceTypes::DEG);
     else if(gRNA > gDNA)
         return SequenceTypes::RNA;
     else
@@ -829,25 +832,25 @@ int utils::GetGapStep(int * gapValue, float inverseSequenNumber)
 
     float relativeGap = 1.F - float(*gapValue) * inverseSequenNumber;
 
-    if(relativeGap == 1.F)
+    if(relativeGap == 0.F)
         return 0;
-    if(relativeGap >= .750)
+    if(relativeGap >= .750F)
         return 10;
-    if(relativeGap >= .500)
+    if(relativeGap >= .500F)
         return 9;
-    if(relativeGap >= .350)
+    if(relativeGap >= .350F)
         return 8;
-    if(relativeGap >= .250)
+    if(relativeGap >= .250F)
         return 7;
-    if(relativeGap >= .200)
+    if(relativeGap >= .200F)
         return 6;
-    if(relativeGap >= .150)
+    if(relativeGap >= .150F)
         return 5;
-    if(relativeGap >= .100)
+    if(relativeGap >= .100F)
         return 4;
-    if(relativeGap >= .050)
+    if(relativeGap >= .050F)
         return 3;
-    if(relativeGap >= .001)
+    if(relativeGap >= .001F)
         return 2;
     return 1;
 }
@@ -859,23 +862,23 @@ int utils::GetSimStep(float * simValue)
         return 11;
     if(*simValue == 1.F)
         return 0;
-    if(*simValue >= .750)
+    if(*simValue >= .750F)
         return 10;
-    if(*simValue >= .500)
+    if(*simValue >= .500F)
         return 9;
-    if(*simValue >= .250)
+    if(*simValue >= .250F)
         return 8;
-    if(*simValue >= .100)
+    if(*simValue >= .100F)
         return 7;
-    if(*simValue >= .010)
+    if(*simValue >= .010F)
         return 6;
-    if(*simValue >= .001)
+    if(*simValue >= .001F)
         return 5;
-    if(*simValue >= 1e-4)
+    if(*simValue >= 1e-4F)
         return 4;
-    if(*simValue >= 1e-5)
+    if(*simValue >= 1e-5F)
         return 3;
-    if(*simValue >= 1e-6)
+    if(*simValue >= 1e-6F)
         return 2;
     return 1;
 }

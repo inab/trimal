@@ -27,16 +27,19 @@
 #include "../include/trimalArgumentParser.h"
 #include "../include/reportsystem.h"
 
+#include <../include/ReadWriteMS/vcf_statish.h>
+
+
 int main(int argc, char *argv[])
 {
     debug.IsDebug = true;
 
-    trimAlManager Trimal = trimAlManager();
+    trimAlManager trimAl = trimAlManager();
 
-    Trimal.parseArguments(argc, argv);
+    trimAl.parseArguments(argc, argv);
     
-    Trimal.processArguments(argv);
+    trimAl.processArguments(argv);
 
-    return Trimal.perform();
+    return trimAl.perform();
     
 }
