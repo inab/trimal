@@ -41,24 +41,24 @@
 
 void utils::initlVect(int *vector, int tam, int valor) {
 
-    for(int i = 0; i < tam; i++) vector[i] = valor;
+    for (int i = 0; i < tam; i++) vector[i] = valor;
 
 }
 
 void utils::initlVect(float *vector, int tam, float valor) {
 
-    for(int i = 0; i < tam; i++) vector[i] = valor;
+    for (int i = 0; i < tam; i++) vector[i] = valor;
 }
 
 void utils::copyVect(int *vect1, int *vect2, int tam) {
 
-    for(int i = 0; i < tam; i++) vect2[i] = vect1[i];
+    for (int i = 0; i < tam; i++) vect2[i] = vect1[i];
 
 }
 
 void utils::copyVect(float *vect1, float *vect2, int tam) {
 
-    for(int i = 0; i < tam; i++) vect2[i] = vect1[i];
+    for (int i = 0; i < tam; i++) vect2[i] = vect1[i];
 }
 
 int utils::roundToInf(double number) {
@@ -81,38 +81,38 @@ int utils::roundToSup(double number) {
 
 int utils::max(int x, int y) {
 
-    if(x > y) return x;
-    else      return y;
+    if (x > y) return x;
+    else return y;
 }
 
 float utils::max(float x, float y) {
 
-    if(x > y) return x;
-    else      return y;
+    if (x > y) return x;
+    else return y;
 }
 
 double utils::max(double x, double y) {
 
-    if(x > y) return x;
-    else      return y;
+    if (x > y) return x;
+    else return y;
 }
 
 int utils::min(int x, int y) {
 
-    if(x < y) return x;
-    else      return y;
+    if (x < y) return x;
+    else return y;
 }
 
 float utils::min(float x, float y) {
 
-    if(x < y) return x;
-    else      return y;
+    if (x < y) return x;
+    else return y;
 }
 
 double utils::min(double x, double y) {
 
-    if(x < y) return x;
-    else      return y;
+    if (x < y) return x;
+    else return y;
 }
 
 bool utils::isNumber(char *num) {
@@ -121,17 +121,16 @@ bool utils::isNumber(char *num) {
     if (tam == 0) return false;
     int i, flt = 1, expn = 1, sgn = 1;
 
-    for(i = 0; i < tam; i++) {
-        if(num[i] == '.' && flt)
+    for (i = 0; i < tam; i++) {
+        if (num[i] == '.' && flt)
             flt = 0;
 
-        else if(((num[i] == 'e') ||(num[i] == 'E')) && expn)
+        else if (((num[i] == 'e') || (num[i] == 'E')) && expn)
             expn = 0;
 
-        else if(((num[i] == '+') ||(num[i] == '-')) && sgn) {
-            if(!expn) sgn = 0;
-        }
-        else if(num[i] > '9' || num[i] < '0')
+        else if (((num[i] == '+') || (num[i] == '-')) && sgn) {
+            if (!expn) sgn = 0;
+        } else if (num[i] > '9' || num[i] < '0')
             return false;
     }
 
@@ -141,16 +140,16 @@ bool utils::isNumber(char *num) {
 
 bool utils::compare(char *a, char *b) {
 
-    return(!strcmp(a,b));
+    return (!strcmp(a, b));
 }
 
 void utils::removeSpaces(char *in, char *out) {
 
     unsigned int i, j = 0;
 
-    for(i = 0; i < strlen(in); i++) {
+    for (i = 0; i < strlen(in); i++) {
 
-        if(in[i] != ' ' && in[i] != '\t') {
+        if (in[i] != ' ' && in[i] != '\t') {
             out[j] = in[i];
             j++;
         }
@@ -174,14 +173,14 @@ void utils::quicksort(float *vect, int ini, int fin) {
     while (1) {
 
         while (vect[++i] < elem_div)
-            if(i == fin)
+            if (i == fin)
                 break;
 
         while (vect[--j] > elem_div)
-            if(j == 0)
+            if (j == 0)
                 break;
 
-        if(i < j)
+        if (i < j)
             swap(&vect[i], &vect[j]);
         else
             break;
@@ -217,14 +216,14 @@ void utils::quicksort(int *vect, int ini, int fin) {
     while (1) {
 
         while (vect[++i] < elem_div)
-            if(i == fin)
+            if (i == fin)
                 break;
 
         while (vect[--j] > elem_div)
-            if(j == 0)
+            if (j == 0)
                 break;
 
-        if(i < j)
+        if (i < j)
             swap(&vect[i], &vect[j]);
         else
             break;
@@ -250,29 +249,29 @@ void utils::quicksort(int **vect, int ini, int fin) {
 // NOTE Introspective sort seems better - JMaria
     float elem_div;
     int i, j;
-    
+
     if ((ini >= fin) || (fin < 0))
         return;
-    
+
     elem_div = vect[fin][0];
     i = ini - 1;
     j = fin;
-    
+
     while (true) {
-        
-        while (vect[++i][0] < elem_div) if(i == fin) break;
-        while (vect[--j][0] > elem_div) if(j == 0)   break;
-        
-        if(i < j) swap(&vect[i], &vect[j]);
+
+        while (vect[++i][0] < elem_div) if (i == fin) break;
+        while (vect[--j][0] > elem_div) if (j == 0) break;
+
+        if (i < j) swap(&vect[i], &vect[j]);
         else break;
-        
+
     }
 
     swap(&vect[i], &vect[fin]);
-    
+
     quicksort(vect, ini, i - 1);
     quicksort(vect, i + 1, fin);
-    
+
 }
 
 void utils::swap(int **a, int **b) {
@@ -289,7 +288,7 @@ bool utils::checkFile(ifstream &file) {
     long begin, end;
 
     // Check whether input file exists or not 
-    if(!file)
+    if (!file)
         return false;
 
     // Check input file sizes. A valid file should have a size grater than 0 
@@ -299,12 +298,12 @@ bool utils::checkFile(ifstream &file) {
     file.seekg(0, ios::beg);
     // Compare difference between file start and end.
     // Depending on result, return True or False 
-    if(!(end - begin))
+    if (!(end - begin))
         return false;
     return true;
 }
 
-char* utils::readLine(ifstream &file) {
+char *utils::readLine(ifstream &file) {
     // Read a new line from current input stream. This function is better than
     // standard one since cares of operative system compability. It is useful
     // as well because remove tabs and blank spaces at lines beginning/ending 
@@ -315,30 +314,30 @@ char* utils::readLine(ifstream &file) {
     char *line = NULL;
 
     // Check it the end of the file has been reached or not
-    if(file.eof())
+    if (file.eof())
         return NULL;
 
     /* Store first line found. For -Windows & MacOS compatibility- carriage return
      * is considered as well as a new line character */
 //    for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
 //        nline.resize(nline.size() + 1, c);
-    getline(file,nline);
+    getline(file, nline);
 
     // Remove blank spaces & tabs from the beginning of the line
     state = nline.find(" ", 0);
-    while(state != (int) string::npos && state == 0) {
+    while (state != (int) string::npos && state == 0) {
         nline.erase(state, 1);
         state = nline.find(" ", state);
     }
 
     state = nline.find("\t", 0);
-    while(state != (int) string::npos && state == 0) {
+    while (state != (int) string::npos && state == 0) {
         nline.erase(state, 1);
         state = nline.find("\t", state);
     }
 
     /* If there is nothing to return, give back a NULL pointer ... */
-    if(nline.empty())
+    if (nline.empty())
         return NULL;
 
     // Otherwise, initialize the appropiate data structure,
@@ -348,8 +347,7 @@ char* utils::readLine(ifstream &file) {
     return line;
 }
 
-char* utils::readLine(std::istream& file)
-{
+char *utils::readLine(std::istream &file) {
     // Read a new line from current input stream. This function is better than
     // standard one since cares of operative system compability. It is useful
     // as well because remove tabs and blank spaces at lines beginning/ending
@@ -360,7 +358,7 @@ char* utils::readLine(std::istream& file)
     static char *line = NULL;
 
     // Check it the end of the file has been reached or not
-    if(file.eof())
+    if (file.eof())
         return NULL;
 
 
@@ -368,23 +366,23 @@ char* utils::readLine(std::istream& file)
      * is considered as well as a new line character */
 //    for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
 //        nline.resize(nline.size() + 1, c);
-    getline(file,nline);
+    getline(file, nline);
     /* Remove blank spaces & tabs from the beginning of the line */
 
     state = nline.find(" ", 0);
-    while(state != (int) string::npos && state == 0) {
+    while (state != (int) string::npos && state == 0) {
         nline.erase(state, 1);
         state = nline.find(" ", state);
     }
 
     state = nline.find("\t", 0);
-    while(state != (int) string::npos && state == 0) {
+    while (state != (int) string::npos && state == 0) {
         nline.erase(state, 1);
         state = nline.find("\t", state);
     }
 
     // If there is nothing to return, give back a NULL pointer ...
-    if(nline.size() == 0)
+    if (nline.size() == 0)
         return NULL;
 
     // Otherwise, initialize the appropiate data structure,
@@ -394,7 +392,7 @@ char* utils::readLine(std::istream& file)
     return line;
 }
 
-char* utils::trimLine(string nline) {
+char *utils::trimLine(string nline) {
     // This function is used to remove comments inbetween a biological sequence.
     // Remove all content surrounded by ("") or ([]). It wans as well when a
     // mismatch for these flags is found 
@@ -406,19 +404,19 @@ char* utils::trimLine(string nline) {
     pos = -1;
 
     // Identify comments inside of input sequence and remove it
-    while(true) {
-        pos  = nline.find("\"", (pos + 1));
+    while (true) {
+        pos = nline.find("\"", (pos + 1));
 
         // When there is not any more a comment inside of sequence,
         // go out from this loop 
-        if(pos == (int) string::npos)
+        if (pos == (int) string::npos)
             break;
 
         // Look for closing flag
         next = nline.rfind("\"", nline.size());
 
         // If a pair of comments flags '"' is found, remove everything inbetween
-        if((int) nline.find("\"", (pos + 1)) == next) {
+        if ((int) nline.find("\"", (pos + 1)) == next) {
             nline.erase(pos, (next - pos + 1));
             pos = -1;
         }
@@ -432,13 +430,13 @@ char* utils::trimLine(string nline) {
     }
 
     // Look for other kind of comments, in this case those with []
-    while(true) {
+    while (true) {
         pos = -1;
         next = -1;
 
         // Search for last opened bracket. It is supposed to be the first one for
         // being close
-        while((pos = nline.find("[", (pos + 1))) != (int) string::npos)
+        while ((pos = nline.find("[", (pos + 1))) != (int) string::npos)
             next = pos;
 
         // If no opening bracket has been found.
@@ -467,7 +465,7 @@ char* utils::trimLine(string nline) {
 
     // Check if after removing all comments from input string there is still part
     // of sequences or not
-    if(nline.size() == 0)
+    if (nline.size() == 0)
         return NULL;
 
     // Initialize and store resulting sequence into an appropiate structure
@@ -482,10 +480,10 @@ string utils::getReverse(string toReverse) {
     string line;
     int i;
 
-    
-    for(i = toReverse.size() - 1; i >= 0; i--)
+
+    for (i = toReverse.size() - 1; i >= 0; i--)
         line += toReverse[i];
-    
+
 
     return line;
 }
@@ -493,9 +491,9 @@ string utils::getReverse(string toReverse) {
 string utils::removeCharacter(char c, string line) {
 
     int pos;
-    
+
     pos = line.find(c, 0);
-    while(pos != (int) string::npos) {
+    while (pos != (int) string::npos) {
         line.erase(pos, 1);
         pos = line.find(c, pos);
     }
@@ -517,48 +515,48 @@ int utils::checkAlignmentType(int seqNumber, int residNumber, string *sequences)
     // For each sequences, this method locks at the 100 letters (excluding gaps).
     // The method is able to distinguish between pure DNA/RNA nucleotides or those
     // containing degenerate Nucleotide letters
-    for(i = 0, gDNA = 0, gRNA = 0, extDNA = 0, extRNA = 0; i < seqNumber; i++) {
+    for (i = 0, gDNA = 0, gRNA = 0, extDNA = 0, extRNA = 0; i < seqNumber; i++) {
 
         // Looks at the 100 letters (excluding gaps) while doesn's get the sequence's end
         // When there are less than a 100 characters, break the loop before reaching that limit
-        
+
         residNumber = (int) sequences[i].size();
-        for(j = 0, k = 0, hitDNA = 0, hitRNA = 0, degenerate = 0; j < residNumber; j++)
-            if(sequences[i][j] != '-' && sequences[i][j] != '.' && sequences[i][j] != '?') {
+        for (j = 0, k = 0, hitDNA = 0, hitRNA = 0, degenerate = 0; j < residNumber; j++)
+            if (sequences[i][j] != '-' && sequences[i][j] != '.' && sequences[i][j] != '?') {
                 k++;
 
                 /* Recognizes between DNA and RNA. */
-                for(l = 0; l < (int) strlen(listDNA); l++)
-                    if(listDNA[l] == sequences[i][j])
+                for (l = 0; l < (int) strlen(listDNA); l++)
+                    if (listDNA[l] == sequences[i][j])
                         hitDNA++;
 
-                for(l = 0; l < (int) strlen(listRNA); l++)
-                    if(listRNA[l] == sequences[i][j])
+                for (l = 0; l < (int) strlen(listRNA); l++)
+                    if (listRNA[l] == sequences[i][j])
                         hitRNA++;
 
-                for(l = 0; l < (int) strlen(degeneratedCodes); l++)
-                    if(degeneratedCodes[l] == sequences[i][j])
+                for (l = 0; l < (int) strlen(degeneratedCodes); l++)
+                    if (degeneratedCodes[l] == sequences[i][j])
                         degenerate++;
             }
 
         // If input sequences have less than 95% of nucleotides, even when residues
         // are treated with degenerated codes, consider the input file as containing
         // amino-acidic sequences. 
-        ratioDNA = float(degenerate + hitDNA)/k;
-        ratioRNA = float(degenerate + hitRNA)/k;
+        ratioDNA = float(degenerate + hitDNA) / k;
+        ratioRNA = float(degenerate + hitRNA) / k;
 
-        if(ratioDNA < 0.95 && ratioRNA < 0.95)
+        if (ratioDNA < 0.95 && ratioRNA < 0.95)
             return SequenceTypes::AA;
 
-        // Identify precisely if nucleotides sequences are DNA/RNA strict or
-        // any degenerate code has been used in the sequence 
-        else if(hitRNA > hitDNA && degenerate == 0)
+            // Identify precisely if nucleotides sequences are DNA/RNA strict or
+            // any degenerate code has been used in the sequence
+        else if (hitRNA > hitDNA && degenerate == 0)
             gRNA++;
-        else if(hitRNA > hitDNA && degenerate != 0)
+        else if (hitRNA > hitDNA && degenerate != 0)
             extRNA++;
-        else if(hitRNA < hitDNA && degenerate == 0)
+        else if (hitRNA < hitDNA && degenerate == 0)
             gDNA++;
-        else if(hitRNA < hitDNA && degenerate != 0)
+        else if (hitRNA < hitDNA && degenerate != 0)
             extDNA++;
     }
     // Return the datatype with greater values, considering always degenerate
@@ -567,189 +565,187 @@ int utils::checkAlignmentType(int seqNumber, int residNumber, string *sequences)
         return (SequenceTypes::DNA | SequenceTypes::DEG);
     else if (extRNA != 0 && extDNA < extRNA)
         return (SequenceTypes::RNA | SequenceTypes::DEG);
-    else if(gRNA > gDNA)
+    else if (gRNA > gDNA)
         return SequenceTypes::RNA;
     else
         return SequenceTypes::DNA;
 }
 
-int* utils::readNumbers_StartEnd(string line) {
+int *utils::readNumbers_StartEnd(string line) {
 
     int comma, nElems = 0;
     static int *numbers;
 
     comma = -1;
-    while((comma = line.find(",", comma + 1)) != (int) string::npos)
+    while ((comma = line.find(",", comma + 1)) != (int) string::npos)
         nElems += 2;
 
     // If there is more than two numbers separated by a comma, return NULL
-    if(nElems != 2)
+    if (nElems != 2)
         return NULL;
 
     numbers = new int[2];
     comma = line.find(",", 0);
     numbers[0] = atoi(line.substr(0, comma).c_str());
-    numbers[1] = atoi(line.substr(comma+1).c_str());
+    numbers[1] = atoi(line.substr(comma + 1).c_str());
 
     return numbers;
 }
 
 
-int* utils::readNumbers(string line) {
+int *utils::readNumbers(string line) {
 
     int i, comma, separ, init, nElems = 0;
     static int *numbers;
-    
+
     comma = -1;
-    while((comma = line.find(",", comma + 1)) != (int) string::npos)
+    while ((comma = line.find(",", comma + 1)) != (int) string::npos)
         nElems += 2;
     nElems += 2;
-    
+
     numbers = new int[nElems + 1];
     numbers[0] = nElems;
-    
+
     init = 0;
     i = 1;
 
     do {
         comma = line.find(",", init);
         separ = line.find("-", init);
-        
-        if(((separ < comma) || (comma == (int) string::npos)) && (separ != (int) string::npos)) {
+
+        if (((separ < comma) || (comma == (int) string::npos)) && (separ != (int) string::npos)) {
             numbers[i++] = atoi(line.substr(init, separ - init).c_str());
-            numbers[i++] = atoi(line.substr(separ+1, comma - separ - 1).c_str());
+            numbers[i++] = atoi(line.substr(separ + 1, comma - separ - 1).c_str());
             init = comma + 1;
-        }
-        
-        else if((separ > comma) || (separ == (int) string::npos)) {
+        } else if ((separ > comma) || (separ == (int) string::npos)) {
             numbers[i++] = atoi(line.substr(init, comma - init).c_str());
             numbers[i++] = atoi(line.substr(init, comma - init).c_str());
             init = comma + 1;
         }
-        
-        if(numbers[i-2] < 0)
+
+        if (numbers[i - 2] < 0)
             return NULL;
-        if(numbers[i-1] < numbers[i-2])
+        if (numbers[i - 1] < numbers[i - 2])
             return NULL;
-        if(comma == (int) string::npos)
+        if (comma == (int) string::npos)
             break;
-        
-    } while(true);
-    
+
+    } while (true);
+
     return numbers;
 }
 
 
 char utils::determineColor(char res, string column) {
 
-    if(toupper(res) == 'G')
+    if (toupper(res) == 'G')
         return 'o';
-    
-    else if(toupper(res) == 'P')
+
+    else if (toupper(res) == 'P')
         return 'y';
-    
-    else if(res != '-') {
-        switch(toupper(res)) {
 
-        // (W, L, V, I, M, F): {50%, p}{60%, wlvimafcyhp} 
-        case 87:
-        case 76:
-        case 86:
-        case 73:
-        case 77:
-        case 70:
-            if(lookForPattern(column, "p", 0.5))                return 'b';
-            else if(lookForPattern(column, "wlvimafcyhp", 0.6)) return 'b';
-            else                                                return 'w';
-        
+    else if (res != '-') {
+        switch (toupper(res)) {
 
-        
-        // (A): {50%, p}{60%, wlvimafcyhp}{85% t,s,g}
-        case 65:
-            if(lookForPattern(column, "p", 0.5))                return 'b';
-            else if(lookForPattern(column, "wlvimafcyhp", 0.6)) return 'b';
-            else if(lookForPattern(column, "t", 0.85))          return 'b';
-            else if(lookForPattern(column, "s", 0.85))          return 'b';
-            else if(lookForPattern(column, "g", 0.85))          return 'b';
-            else                                                return 'w';
-        
+            // (W, L, V, I, M, F): {50%, p}{60%, wlvimafcyhp}
+            case 87:
+            case 76:
+            case 86:
+            case 73:
+            case 77:
+            case 70:
+                if (lookForPattern(column, "p", 0.5)) return 'b';
+                else if (lookForPattern(column, "wlvimafcyhp", 0.6)) return 'b';
+                else return 'w';
 
-        
-        // BLUE: (C): {50%, p}{60%, wlvimafcyhp}{85% s}
-        // PINK: (C): {85%, c}
-        case 67:
-            if(lookForPattern(column, "p", 0.5))                return 'b';
-            else if(lookForPattern(column, "wlvimafcyhp", 0.6)) return 'b';
-            else if(lookForPattern(column, "s", 0.85))          return 'b';
-            else if(lookForPattern(column, "c", 0.85))          return 'p';
-            else                                                return 'w';
-        
 
-        
-        // (K, R): {60%, kr}{85%, q}
-        case 75:
-        case 82:
-            if(lookForPattern(column, "kr", 0.6))               return 'r';
-            else if(lookForPattern(column, "q", 0.85))          return 'r';
-            else                                                return 'w';
-        
 
-        
-        // (T): {50%, ts}{60%, wlvimafcyhp } 
-        case 84:
-            if(lookForPattern(column, "ts", 0.5))               return 'g';
-            else if(lookForPattern(column, "wlvimafcyhp", 0.6)) return 'g';
-            else                                                return 'w';
-        
+                // (A): {50%, p}{60%, wlvimafcyhp}{85% t,s,g}
+            case 65:
+                if (lookForPattern(column, "p", 0.5)) return 'b';
+                else if (lookForPattern(column, "wlvimafcyhp", 0.6)) return 'b';
+                else if (lookForPattern(column, "t", 0.85)) return 'b';
+                else if (lookForPattern(column, "s", 0.85)) return 'b';
+                else if (lookForPattern(column, "g", 0.85)) return 'b';
+                else return 'w';
 
-        
-        // (S): {50%, ts}{80%, wlvimafcyhp }
-        case 83:
-            if(lookForPattern(column, "ts", 0.5))               return 'g';
-            else if(lookForPattern(column, "wlvimafcyhp", 0.8)) return 'g';
-            else                                                return 'w';
-        
 
-        
-        // (N): {50%, n}{85%, d }
-        case 78:
-            if(lookForPattern(column, "n", 0.5))                return 'g';
-            else if(lookForPattern(column, "d", 0.85))          return 'g';
-            else                                                return 'w';
-        
 
-        
-        // (Q): {50%, qe}{60%, kr} 
-        case 81:
-            if(lookForPattern(column, "qe", 0.5))               return 'g';
-            else if(lookForPattern(column, "kr", 0.6))          return 'g';
-            else                                                return 'w';
-        
+                // BLUE: (C): {50%, p}{60%, wlvimafcyhp}{85% s}
+                // PINK: (C): {85%, c}
+            case 67:
+                if (lookForPattern(column, "p", 0.5)) return 'b';
+                else if (lookForPattern(column, "wlvimafcyhp", 0.6)) return 'b';
+                else if (lookForPattern(column, "s", 0.85)) return 'b';
+                else if (lookForPattern(column, "c", 0.85)) return 'p';
+                else return 'w';
 
-        
-        // (D): {50%, de, n} 
-        case 68:
-            if(lookForPattern(column, "de", 0.5))               return 'm';
-            else if(lookForPattern(column, "n", 0.5))           return 'm';
-            else                                                return 'w';
-        
 
-        
-        // (E): {50%, de,qe} 
-        case 69:
-            if(lookForPattern(column, "de", 0.5))               return 'm';
-            else if(lookForPattern(column, "qe", 0.5))          return 'm';
-            else                                                return 'w';
-        
 
-        
-        // (H,Y): {50%, p}{60%, wlvimafcyhp} 
-        case 72:
-        case 89:
-            if(lookForPattern(column, "p", 0.5))                return 'c';
-            else if(lookForPattern(column, "wlvimafcyhp", 0.5)) return 'c';
-            else                                                return 'w';
-            
+                // (K, R): {60%, kr}{85%, q}
+            case 75:
+            case 82:
+                if (lookForPattern(column, "kr", 0.6)) return 'r';
+                else if (lookForPattern(column, "q", 0.85)) return 'r';
+                else return 'w';
+
+
+
+                // (T): {50%, ts}{60%, wlvimafcyhp }
+            case 84:
+                if (lookForPattern(column, "ts", 0.5)) return 'g';
+                else if (lookForPattern(column, "wlvimafcyhp", 0.6)) return 'g';
+                else return 'w';
+
+
+
+                // (S): {50%, ts}{80%, wlvimafcyhp }
+            case 83:
+                if (lookForPattern(column, "ts", 0.5)) return 'g';
+                else if (lookForPattern(column, "wlvimafcyhp", 0.8)) return 'g';
+                else return 'w';
+
+
+
+                // (N): {50%, n}{85%, d }
+            case 78:
+                if (lookForPattern(column, "n", 0.5)) return 'g';
+                else if (lookForPattern(column, "d", 0.85)) return 'g';
+                else return 'w';
+
+
+
+                // (Q): {50%, qe}{60%, kr}
+            case 81:
+                if (lookForPattern(column, "qe", 0.5)) return 'g';
+                else if (lookForPattern(column, "kr", 0.6)) return 'g';
+                else return 'w';
+
+
+
+                // (D): {50%, de, n}
+            case 68:
+                if (lookForPattern(column, "de", 0.5)) return 'm';
+                else if (lookForPattern(column, "n", 0.5)) return 'm';
+                else return 'w';
+
+
+
+                // (E): {50%, de,qe}
+            case 69:
+                if (lookForPattern(column, "de", 0.5)) return 'm';
+                else if (lookForPattern(column, "qe", 0.5)) return 'm';
+                else return 'w';
+
+
+
+                // (H,Y): {50%, p}{60%, wlvimafcyhp}
+            case 72:
+            case 89:
+                if (lookForPattern(column, "p", 0.5)) return 'c';
+                else if (lookForPattern(column, "wlvimafcyhp", 0.5)) return 'c';
+                else return 'w';
+
         }
     }
     return 'w';
@@ -758,23 +754,24 @@ char utils::determineColor(char res, string column) {
 
 bool utils::lookForPattern(string column, string dataset, float level) {
 
-  float count = 0;
-  int i, j;
+    float count = 0;
+    int i, j;
 
-  for(i = 0; i < (int) column.size(); i++) {
-    for(j = 0; j < (int) dataset.size(); j++) {
-      if(toupper(column[i]) == toupper(dataset[j])) {
-        count++; break;
-      }
+    for (i = 0; i < (int) column.size(); i++) {
+        for (j = 0; j < (int) dataset.size(); j++) {
+            if (toupper(column[i]) == toupper(dataset[j])) {
+                count++;
+                break;
+            }
+        }
     }
-  }
 
-  if((count/column.size()) >= level)
-    return true;
-  else return false;
+    if ((count / column.size()) >= level)
+        return true;
+    else return false;
 }
 
-void utils::ReplaceStringInPlace(std::string& subject, const std::string& search, const std::string& replace) {
+void utils::ReplaceStringInPlace(std::string &subject, const std::string &search, const std::string &replace) {
     size_t pos = 0;
     while ((pos = subject.find(search, pos)) != std::string::npos) {
         subject.replace(pos, search.length(), replace);
@@ -782,8 +779,8 @@ void utils::ReplaceStringInPlace(std::string& subject, const std::string& search
     }
 }
 
-std::string utils::ReplaceString(std::string subject, const std::string& search,
-                                 const std::string& replace) {
+std::string utils::ReplaceString(std::string subject, const std::string &search,
+                                 const std::string &replace) {
     size_t pos = 0;
     while ((pos = subject.find(search, pos)) != std::string::npos) {
         subject.replace(pos, search.length(), replace);
@@ -792,329 +789,312 @@ std::string utils::ReplaceString(std::string subject, const std::string& search,
     return subject;
 }
 
-int utils::GetGapStep(int * gapValue, int sequenNumber)
-{
+int utils::GetGapStep(int *gapValue, int sequenNumber) {
     // Special cases. Upper and Lower limits.
-    if(*gapValue == 0)
+    if (*gapValue == 0)
         return 11;
 
-    if(*gapValue == sequenNumber)
+    if (*gapValue == sequenNumber)
         return 0;
 
     float relativeGap = 1.F - float(*gapValue) / sequenNumber;
 
-    if(relativeGap >= .750)
+    if (relativeGap >= .750)
         return 10;
-    if(relativeGap >= .500)
+    if (relativeGap >= .500)
         return 9;
-    if(relativeGap >= .350)
+    if (relativeGap >= .350)
         return 8;
-    if(relativeGap >= .250)
+    if (relativeGap >= .250)
         return 7;
-    if(relativeGap >= .200)
+    if (relativeGap >= .200)
         return 6;
-    if(relativeGap >= .150)
+    if (relativeGap >= .150)
         return 5;
-    if(relativeGap >= .100)
+    if (relativeGap >= .100)
         return 4;
-    if(relativeGap >= .050)
+    if (relativeGap >= .050)
         return 3;
-    if(relativeGap >= .001)
+    if (relativeGap >= .001)
         return 2;
     return 1;
 }
 
-int utils::GetGapStep(int * gapValue, float inverseSequenNumber)
-{
+int utils::GetGapStep(int *gapValue, float inverseSequenNumber) {
     // Special cases. Upper and Lower limits.
-    if(*gapValue == 0)
+    if (*gapValue == 0)
         return 11;
 
     float relativeGap = 1.F - float(*gapValue) * inverseSequenNumber;
 
-    if(relativeGap == 0.F)
+    if (relativeGap == 0.F)
         return 0;
-    if(relativeGap >= .750F)
+    if (relativeGap >= .750F)
         return 10;
-    if(relativeGap >= .500F)
+    if (relativeGap >= .500F)
         return 9;
-    if(relativeGap >= .350F)
+    if (relativeGap >= .350F)
         return 8;
-    if(relativeGap >= .250F)
+    if (relativeGap >= .250F)
         return 7;
-    if(relativeGap >= .200F)
+    if (relativeGap >= .200F)
         return 6;
-    if(relativeGap >= .150F)
+    if (relativeGap >= .150F)
         return 5;
-    if(relativeGap >= .100F)
+    if (relativeGap >= .100F)
         return 4;
-    if(relativeGap >= .050F)
+    if (relativeGap >= .050F)
         return 3;
-    if(relativeGap >= .001F)
+    if (relativeGap >= .001F)
         return 2;
     return 1;
 }
 
-int utils::GetSimStep(float * simValue)
-{
+int utils::GetSimStep(float *simValue) {
 
-    if(*simValue == 0.F)
+    if (*simValue == 0.F)
         return 11;
-    if(*simValue == 1.F)
+    if (*simValue == 1.F)
         return 0;
-    if(*simValue >= .750F)
+    if (*simValue >= .750F)
         return 10;
-    if(*simValue >= .500F)
+    if (*simValue >= .500F)
         return 9;
-    if(*simValue >= .250F)
+    if (*simValue >= .250F)
         return 8;
-    if(*simValue >= .100F)
+    if (*simValue >= .100F)
         return 7;
-    if(*simValue >= .010F)
+    if (*simValue >= .010F)
         return 6;
-    if(*simValue >= .001F)
+    if (*simValue >= .001F)
         return 5;
-    if(*simValue >= 1e-4F)
+    if (*simValue >= 1e-4F)
         return 4;
-    if(*simValue >= 1e-5F)
+    if (*simValue >= 1e-5F)
         return 3;
-    if(*simValue >= 1e-6F)
+    if (*simValue >= 1e-6F)
         return 2;
     return 1;
 }
 
-int utils::GetConsStep(float * consValue)
-{
+int utils::GetConsStep(float *consValue) {
     // Special cases. Upper and Lower limits.
-    if(*consValue == 1.F)
+    if (*consValue == 1.F)
         return 11;
-    if(*consValue == 0.F)
+    if (*consValue == 0.F)
         return 0;
 
-    if(*consValue >= .750)
+    if (*consValue >= .750)
         return 10;
-    if(*consValue >= .500)
+    if (*consValue >= .500)
         return 9;
-    if(*consValue >= .350)
+    if (*consValue >= .350)
         return 8;
-    if(*consValue >= .250)
+    if (*consValue >= .250)
         return 7;
-    if(*consValue >= .200)
+    if (*consValue >= .200)
         return 6;
-    if(*consValue >= .150)
+    if (*consValue >= .150)
         return 5;
-    if(*consValue >= .100)
+    if (*consValue >= .100)
         return 4;
-    if(*consValue >= .050)
+    if (*consValue >= .050)
         return 3;
-    if(*consValue >= .001)
+    if (*consValue >= .001)
         return 2;
     return 1;
 }
 
-void utils::streamSVG(float * x, float * y, int num, std::string * lineName, std::string * lineColor, std::string * chartTitle, std::string * filename)
-{
+void utils::streamSVG(float *x, float *y, int num, std::string *lineName, std::string *lineColor, std::string *chartTitle, std::string *filename) {
     static ofstream file;
     static stringstream legend;
     static float lastX = INFINITY;
     static std::vector<std::string> linesLegend = std::vector<std::string>();
-    static FILE* tmpFile;
+    static FILE *tmpFile;
 
     int
-    whiteboxWidth   = 1300,
-    whiteboxHeight  = 650,
+            whiteboxWidth = 1300,
+            whiteboxHeight = 650,
 
-    grayboxWidth    = 1500,
-    grayboxHeight   = 900;
+            grayboxWidth = 1500,
+            grayboxHeight = 900;
 
     float
-    legendRatio     = 0.175F,
+            legendRatio = 0.175F,
 
-    widthRatio      = 0.5F,
-    heightRatio     = 0.75F,
+            widthRatio = 0.5F,
+            heightRatio = 0.75F,
 
-    whiteboxDeltaHeight
-    = whiteboxHeight * 0.05F,
+            whiteboxDeltaHeight
+            = whiteboxHeight * 0.05F,
 
-    fontSize        = whiteboxHeight * 0.02F;
+            fontSize = whiteboxHeight * 0.02F;
 
     static float
-    originX,
-    originY,
-    chartWidth,
-    chartHeight;
+            originX,
+            originY,
+            chartWidth,
+            chartHeight;
 
-    if (filename && chartTitle)
-    {
+    if (filename && chartTitle) {
         file.open(*filename);
         tmpFile = std::tmpfile();
         // svg header
-        file    << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" "
-                << "height=\""  << grayboxHeight << "\" "
-                << "width=\""   << grayboxWidth << "\">" << endl;
+        file << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" "
+             << "height=\"" << grayboxHeight << "\" "
+             << "width=\"" << grayboxWidth << "\">" << endl;
 
         // White box
-        file    << "<rect "
-                << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio << "\" "
-                << "width=\"" << whiteboxWidth * (1.F - legendRatio) << "\" "
-                << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
-                << "height=\"" << whiteboxHeight << "\" "
-                << "style=\"fill:white; stroke:black; stroke-width:2\" "
-                << "/>" << endl;
+        file << "<rect "
+             << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio << "\" "
+             << "width=\"" << whiteboxWidth * (1.F - legendRatio) << "\" "
+             << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
+             << "height=\"" << whiteboxHeight << "\" "
+             << "style=\"fill:white; stroke:black; stroke-width:2\" "
+             << "/>" << endl;
 
         // Header text
-        file    << "<text text-anchor=\"middle\" "
-                << "x=\"" << grayboxWidth * 0.5F << "\" "
-                << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio * 0.75F << "\" "
-                << "font-size=\"" << (grayboxHeight - whiteboxHeight) * heightRatio * 10.F / chartTitle->length() << "\" "
-                << ">"
-                << *chartTitle
-                << "</text>" << endl;
+        file << "<text text-anchor=\"middle\" "
+             << "x=\"" << grayboxWidth * 0.5F << "\" "
+             << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio * 0.75F << "\" "
+             << "font-size=\"" << (grayboxHeight - whiteboxHeight) * heightRatio * 10.F / chartTitle->length() << "\" "
+             << ">"
+             << *chartTitle
+             << "</text>" << endl;
 
         // Horizontal lines
-        for (int x = 0; x < 11 ; x++)
-        {
+        for (int x = 0; x < 11; x++) {
             // X axis lines
-            file    << "<line "
-                    << "x1=\""  << (grayboxWidth - whiteboxWidth) * widthRatio <<"\" "
-                    << "y1=\""  << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (x * 0.1F)  + (whiteboxDeltaHeight * 0.5F) << "\" "
-                    << "x2=\""  << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) <<"\" "
-                    << "y2=\""  << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (x * 0.1F)  + (whiteboxDeltaHeight * 0.5F) << "\" "
-                    << "style=\"stroke:black;stroke-width:1\" "
-                    << "stroke-dasharray=\"1, 1\" "
-                    << "opacity=\"0.5\"/>" << endl;
+            file << "<line "
+                 << "x1=\"" << (grayboxWidth - whiteboxWidth) * widthRatio << "\" "
+                 << "y1=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (x * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
+                 << "x2=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) << "\" "
+                 << "y2=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (x * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
+                 << "style=\"stroke:black;stroke-width:1\" "
+                 << "stroke-dasharray=\"1, 1\" "
+                 << "opacity=\"0.5\"/>" << endl;
 
             // Labels
-            file    << "<text "
-                    << "x=\""   << (grayboxWidth - whiteboxWidth) * widthRatio * 0.95F <<"\" "
-                    << "y=\""   << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (x * 0.1F) + (0.25F * fontSize) + (whiteboxDeltaHeight * 0.5F) << "\" "
-                    << "text-anchor=\"end\" "
-                    << "xml:space=\"preserve\" "
-                    << "font-size=\"" << fontSize << "\">"
-                    << (10 - x) / 10.F
-                    << "</text>" << endl;
+            file << "<text "
+                 << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio * 0.95F << "\" "
+                 << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (x * 0.1F) + (0.25F * fontSize) + (whiteboxDeltaHeight * 0.5F) << "\" "
+                 << "text-anchor=\"end\" "
+                 << "xml:space=\"preserve\" "
+                 << "font-size=\"" << fontSize << "\">"
+                 << (10 - x) / 10.F
+                 << "</text>" << endl;
         }
 
         // Horizontal lines
-        for (int x = 0; x < 11 ; x++)
-        {
+        for (int x = 0; x < 11; x++) {
             // X axis lines
-            file    << "<line "
-                    << "x1=\""  << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (x * 0.1F)  + (whiteboxDeltaHeight * 0.5F) << "\" "
-                    << "y1=\""  << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
-                    << "x2=\""  << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (x * 0.1F)  + (whiteboxDeltaHeight * 0.5F) <<"\" "
-                    << "y2=\""  << (grayboxHeight - whiteboxHeight) * heightRatio + whiteboxHeight << "\" "
-                    << "style=\"stroke:black;stroke-width:1\" "
-                    << "stroke-dasharray=\"1, 1\" "
-                    << "opacity=\"0.5\"/>" << endl;
+            file << "<line "
+                 << "x1=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (x * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
+                 << "y1=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
+                 << "x2=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (x * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
+                 << "y2=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + whiteboxHeight << "\" "
+                 << "style=\"stroke:black;stroke-width:1\" "
+                 << "stroke-dasharray=\"1, 1\" "
+                 << "opacity=\"0.5\"/>" << endl;
 
             // Labels
-            file    << "<text "
-                    << "x=\""   << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (x * 0.1F)  + (whiteboxDeltaHeight * 0.5F) <<"\" "
-                    << "y=\""   << (grayboxHeight - whiteboxHeight) * heightRatio + whiteboxHeight * 1.05F << "\" "
-                    << "text-anchor=\"middle\" "
-                    << "xml:space=\"preserve\" "
-                    << "font-size=\"" << fontSize << "\">"
-                    << x * 10 << " %"
-                    << "</text>" << endl;
+            file << "<text "
+                 << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (x * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
+                 << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + whiteboxHeight * 1.05F << "\" "
+                 << "text-anchor=\"middle\" "
+                 << "xml:space=\"preserve\" "
+                 << "font-size=\"" << fontSize << "\">"
+                 << x * 10 << " %"
+                 << "</text>" << endl;
         }
 
         originX = (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxDeltaHeight * 0.5F);
         originY = (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight * 0.5F);
         chartWidth = (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight);
-        chartHeight = - (whiteboxHeight - whiteboxDeltaHeight);
-    }
-
-    else if (x != NULL && y != NULL && lineColor != NULL)
-    {
-        if (*x < lastX)
-        {
-            if (lastX != INFINITY)
-            {
-                file    << "\"/>" << endl;
+        chartHeight = -(whiteboxHeight - whiteboxDeltaHeight);
+    } else if (x != NULL && y != NULL && lineColor != NULL) {
+        if (*x < lastX) {
+            if (lastX != INFINITY) {
+                file << "\"/>" << endl;
             }
             linesLegend.push_back(std::string(*lineColor + ";" + *lineName));
-            file    << "<polyline stroke-linecap=\"round\" "
-                    << "style=\"fill:none;stroke:" << * lineColor << ";stroke-width:0.8\" opacity=\"0.8\" points=\"";
+            file << "<polyline stroke-linecap=\"round\" "
+                 << "style=\"fill:none;stroke:" << *lineColor << ";stroke-width:0.8\" opacity=\"0.8\" points=\"";
         }
-        file        <<  originX + *x * chartWidth << ","
-                    <<  originY + *y * chartHeight << " ";
+        file << originX + *x * chartWidth << ","
+             << originY + *y * chartHeight << " ";
 
         std::fputs("<circle cx=\"", tmpFile);
-        std::fputs( std::to_string(originX + *x * chartWidth).c_str(), tmpFile);
+        std::fputs(std::to_string(originX + *x * chartWidth).c_str(), tmpFile);
         std::fputs("\" cy=\"", tmpFile);
-        std::fputs( std::to_string((originY + *y * chartHeight)).c_str(), tmpFile);
+        std::fputs(std::to_string((originY + *y * chartHeight)).c_str(), tmpFile);
         std::fputs("\" r=\"2\" stroke=\"black\" stroke-width=\"0.1\" fill=\"", tmpFile);
-        std::fputs( lineColor->c_str(), tmpFile);
+        std::fputs(lineColor->c_str(), tmpFile);
         std::fputs("\" />\n", tmpFile);
 
         lastX = *x;
-    }
-
-    else
-    {
+    } else {
         file << "\"/>" << endl;
 
-        float deltaHeigth = whiteboxHeight / (float)(linesLegend.size() + 1 );
+        float deltaHeigth = whiteboxHeight / (float) (linesLegend.size() + 1);
         deltaHeigth = std::min(whiteboxHeight * 0.12F, deltaHeigth);
-        float height =  whiteboxWidth * legendRatio * 0.1F;
+        float height = whiteboxWidth * legendRatio * 0.1F;
 
         // Legend box
-        file    << "<rect "
-                << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + 6 << "\" "
-                << "width=\"" << whiteboxWidth * legendRatio << "\" "
-                << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
-                << "height=\"" << deltaHeigth * (linesLegend.size() + 1) << "\" "
-                << "style=\"fill:white; stroke:black; stroke-width:2\" "
-                << "fill-opacity=\"0.25\" "
-                << "/>" << endl;
+        file << "<rect "
+             << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + 6 << "\" "
+             << "width=\"" << whiteboxWidth * legendRatio << "\" "
+             << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
+             << "height=\"" << deltaHeigth * (linesLegend.size() + 1) << "\" "
+             << "style=\"fill:white; stroke:black; stroke-width:2\" "
+             << "fill-opacity=\"0.25\" "
+             << "/>" << endl;
 
-        file    << "<text "
-                << "x=\""   << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.5F <<"\" "
-                << "y=\""   << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0 + deltaHeigth * 0.5F << "\" "
-                << "text-anchor=\"middle\" "
-                << "xml:space=\"preserve\" "
-                << "font-size=\"" << fontSize * 2 << "\">"
-                << "Statistics"
-                << "</text>" << endl;
+        file << "<text "
+             << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.5F << "\" "
+             << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0 + deltaHeigth * 0.5F << "\" "
+             << "text-anchor=\"middle\" "
+             << "xml:space=\"preserve\" "
+             << "font-size=\"" << fontSize * 2 << "\">"
+             << "Statistics"
+             << "</text>" << endl;
 
-        file    << "<line "
-                << "x1=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + 12 << "\" "
-                << "x2=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 1.F  << "\" "
-                << "y1=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0.3F + deltaHeigth * 0.5F << "\" "
-                << "y2=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0.3F + deltaHeigth * 0.5F << "\" "
-                << "style=\"stroke:black;stroke-width:2\" />" << endl;
+        file << "<line "
+             << "x1=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + 12 << "\" "
+             << "x2=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 1.F << "\" "
+             << "y1=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0.3F + deltaHeigth * 0.5F << "\" "
+             << "y2=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0.3F + deltaHeigth * 0.5F << "\" "
+             << "style=\"stroke:black;stroke-width:2\" />" << endl;
 
 
-        for (int x = 0; x < linesLegend.size(); x++)
-        {
-            file    << "<rect "
-                    << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.1F << "\" "
-                    << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * (x + 1) + deltaHeigth * 0.5F - height * 0.5F - fontSize * 0.25F << "\" "
-                    << "width=\"" << height << "\" "
-                    << "height=\"" << height << "\" "
-                    << "style=\"fill:" << strtok(&linesLegend[x][0], ";") << "; stroke:black; stroke-width:2\" "
-                    << "fill-opacity=\"0.75\" "
-                    << "/>" << endl;
+        for (int x = 0; x < linesLegend.size(); x++) {
+            file << "<rect "
+                 << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.1F << "\" "
+                 << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * (x + 1) + deltaHeigth * 0.5F - height * 0.5F - fontSize * 0.25F << "\" "
+                 << "width=\"" << height << "\" "
+                 << "height=\"" << height << "\" "
+                 << "style=\"fill:" << strtok(&linesLegend[x][0], ";") << "; stroke:black; stroke-width:2\" "
+                 << "fill-opacity=\"0.75\" "
+                 << "/>" << endl;
 
-            file    << "<text "
-                    << "x=\""   << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.5F <<"\" "
-                    << "y=\""   << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * (x + 1) + deltaHeigth * 0.5F << "\" "
-                    << "text-anchor=\"middle\" "
-                    << "xml:space=\"preserve\" "
-                    << "font-size=\"" << fontSize << "\">"
-                    << strtok(NULL, "")
-                    << "</text>" << endl;
+            file << "<text "
+                 << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.5F << "\" "
+                 << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * (x + 1) + deltaHeigth * 0.5F << "\" "
+                 << "text-anchor=\"middle\" "
+                 << "xml:space=\"preserve\" "
+                 << "font-size=\"" << fontSize << "\">"
+                 << strtok(NULL, "")
+                 << "</text>" << endl;
         }
         // svg footer
 
-        char * line = new char[300];
+        char *line = new char[300];
         std::rewind(tmpFile);
         while (1) {
             if (fgets(line, 300, tmpFile) == NULL) break;
             file << line;
         }
-        delete [] line;
+        delete[] line;
 
         file << "</svg>";
         file.close();

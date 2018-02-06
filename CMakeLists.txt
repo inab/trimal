@@ -31,6 +31,7 @@ set(preview
         source/ReadWriteMS/ReadWriteMachineState.cpp
         source/reportsystem.cpp
         source/statisticsConservation2.cpp
+        source/TimerFactory.cpp
         )
 
 # Include all states of ReadWriteMachineState

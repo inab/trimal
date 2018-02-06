@@ -1,3 +1,4 @@
+#include <TimerFactory.h>
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
@@ -30,16 +31,27 @@
 #include <../include/ReadWriteMS/vcf_statish.h>
 
 
-int main(int argc, char *argv[])
-{
-    debug.IsDebug = true;
+int main(int argc, char *argv[]) {
 
-    trimAlManager trimAl = trimAlManager();
+    SetTimingOstream(new std::ofstream("./timingReport.txt"));
+    int returnValue;
+    {
+        // Create a timer that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("int main(int argc, char *argv[]) ");
+        debug.IsDebug = true;
 
-    trimAl.parseArguments(argc, argv);
-    
-    trimAl.processArguments(argv);
+        trimAlManager trimAl = trimAlManager();
 
-    return trimAl.perform();
-    
+        trimAl.parseArguments(argc, argv);
+
+        trimAl.processArguments(argv);
+
+        returnValue = trimAl.perform();
+
+    }
+//    timerFactory.reportTotal();
+
+    return returnValue;
+
 }
