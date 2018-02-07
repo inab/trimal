@@ -9,7 +9,7 @@ TimerFactory timerFactory = TimerFactory(&std::cout);
 
 Timer TimerFactory::getTimer(std::string name) {
     Timer timer = Timer(std::move(name), this);
-    _pool.push(&timer);
+    _pool.push_back(&timer);
     return timer; // NOLINT
 }
 
@@ -17,7 +17,11 @@ void TimerFactory::reportTotal() {
     *out << "\n";
     int maxSize = -1;
     for (auto &&value : wholeStats)
-        maxSize = std::max(maxSize, static_cast<const int &>(value.first.length()));
+    {
+        maxSize = std::max(maxSize, static_cast<const int &>(value.first.substr(0, value.first.find("(")).length()));
+        maxSize = std::max(maxSize, static_cast<const int &>(value.first.substr(value.first.find("(")).length()));
+    }
+
     maxSize = std::max(/*len of "Avg Total Duration   "*/ 21, maxSize);
     maxSize += 5;
 
@@ -52,8 +56,9 @@ void TimerFactory::reportTotal() {
             << " " << std::setw(25) << " "
             << std::setfill(' ')
             << "\n";
+
     for (auto &&value : wholeStats) {
-        *out << std::setw(maxSize - 2) << value.first << "  "
+        *out << std::setw(maxSize - 2) << value.first.substr(0, value.first.find("(")) << "  "
              << std::setw(21) << wholeUniqueStats[value.first].count() << " ms "
              << std::fixed
              << std::setw(21) << wholeUniqueStats[value.first].count() * 100.F / total.count() << " %  "
@@ -62,7 +67,8 @@ void TimerFactory::reportTotal() {
              << std::fixed
              << std::setw(21) << value.second.count() * 100.F / total.count() << " %  "
              << std::defaultfloat
-             << "\n";
+             << "\n"
+             << std::setw(maxSize - 2) << value.first.substr(value.first.find("(")) << "\n\n";
     }
 }
 
@@ -75,16 +81,28 @@ TimerFactory::~TimerFactory() {
 }
 
 Timer::Timer(std::string name, TimerFactory *timerFactory) :
-        name(std::move(name)),
-        timerFactory(timerFactory),
-        siblings_duration(0) {
+        name(std::move(name)), timerFactory(timerFactory), siblings_duration(0) {
+
     start = std::chrono::high_resolution_clock::now();
+
+    if (!timerFactory->_pool.empty())
+    {
+        timerFactory->_pool.back()->childCount += 1;
+    }
+
     if (timerFactory->lastTimer != this->name) {
         *timerFactory->out << "\n";
-        for (int i = 0; i < timerFactory->timer; i++) {
-            *timerFactory->out << "|  ";
+        for (int i = 0; i < timerFactory->timer - 1; i++) {
+            *timerFactory->out << "|";
         }
-        *timerFactory->out << this->name;
+//        *timerFactory->out << "[" << timerFactory->_pool.size() << "]";
+        *timerFactory->out << "|----> 1.";
+        for (Timer* timer : timerFactory->_pool)
+        {
+            *timerFactory->out << timer->childCount << ".";
+        }
+
+        *timerFactory->out << "\t\t" << this->name;
     }
     timerFactory->timer++;
 }
@@ -96,15 +114,12 @@ Timer::~Timer() {
     if (timerFactory->lastTimer == name) {
         timerFactory->accTimerCount += 1;
         timerFactory->accTimer += duration;
-//        *timerFactory->out << "\r";
         timerFactory->out->seekp(timerFactory->cursorPos);
-        for (int i = 0; i < timerFactory->timer; i++) *timerFactory->out << "|  ";
-
-        *timerFactory->out << "`·~ "
+        for (int i = 0; i < timerFactory->timer; i++) *timerFactory->out << "|";
+        *timerFactory->out << "`·~ " << name
                            << " Repetitions: " << timerFactory->accTimerCount
                            << " Average: " << (timerFactory->accTimer.count() / timerFactory->accTimerCount) << "ms."
                            << " Acc " << timerFactory->accTimer.count() << "ms.";
-        timerFactory->out->flush();
 
     } else {
         timerFactory->accTimerCount = 1;
@@ -113,14 +128,16 @@ Timer::~Timer() {
 
         *timerFactory->out << "\n";
         timerFactory->cursorPos = timerFactory->out->tellp();
-        for (int i = 0; i < timerFactory->timer; i++) *timerFactory->out << "|  ";
-        *timerFactory->out << "`·~ "
+        for (int i = 0; i < timerFactory->timer; i++) *timerFactory->out << "|";
+        *timerFactory->out << "`·~ " << name
                            << " Duration: " << (duration - siblings_duration).count() << "ms."
                            << " Acc " << duration.count() << "ms.";
+        *timerFactory->out << "\n";
+        for (int i = 0; i < timerFactory->timer; i++) *timerFactory->out << "|";
     }
-    timerFactory->_pool.pop();
+    timerFactory->_pool.pop_back();
     if (!timerFactory->_pool.empty()) {
-        timerFactory->_pool.top()->siblings_duration += duration;
+        timerFactory->_pool.back()->siblings_duration += duration;
     }
     if (timerFactory->wholeStats.find(name) != timerFactory->wholeStats.end()) {
         timerFactory->wholeStats[name] += duration;

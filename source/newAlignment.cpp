@@ -150,7 +150,7 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
 newAlignment::~newAlignment(void) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("newAlignment::~newAlignment(void) ");
+	StartTiming("newAlignment::~newAlignment(void) " + std::to_string(reinterpret_cast<uintptr_t>(this)));
     int i;
 
     if (saveResidues != NULL)
