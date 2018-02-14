@@ -3,9 +3,12 @@
 #include <iomanip>
 #include <algorithm>
 #include <iostream>
+#include <cstring>
+#include <fstream>
+#include <reportsystem.h>
 
 #if TimingReport
-TimerFactory timerFactory = TimerFactory(&std::cout);
+TimerFactory timerFactory = TimerFactory("");
 
 Timer TimerFactory::getTimer(std::string name) {
     Timer timer = Timer(std::move(name), this);
@@ -68,7 +71,8 @@ void TimerFactory::reportTotal() {
              << std::setw(21) << value.second.count() * 100.F / total.count() << " %  "
              << std::defaultfloat
              << "\n"
-             << std::setw(maxSize - 2) << value.first.substr(value.first.find("(")) << "\n\n";
+             << std::setw(maxSize - 2) << value.first.substr(value.first.find("(")) << "\n"
+                ;
     }
 }
 
@@ -95,16 +99,30 @@ Timer::Timer(std::string name, TimerFactory *timerFactory) :
         for (int i = 0; i < timerFactory->timer - 1; i++) {
             *timerFactory->out << "|";
         }
-//        *timerFactory->out << "[" << timerFactory->_pool.size() << "]";
         *timerFactory->out << "|----> 1.";
         for (Timer* timer : timerFactory->_pool)
         {
             *timerFactory->out << timer->childCount << ".";
         }
 
-        *timerFactory->out << "\t\t" << this->name;
+        *timerFactory->out << "  " << this->name << " " << currentMemoryUsage() << " kb";
     }
     timerFactory->timer++;
+}
+
+int Timer::currentMemoryUsage() {
+    std::ifstream proc_status_fhandle("/proc/self/status");
+    std::string s;
+    int line=0;
+    while(std::getline(proc_status_fhandle, s)){
+        ++line;
+        if (!s.compare(0, 6, "VmRSS:"))
+        {
+            int value = atoi(&(s.substr(7, s.npos))[0]);
+//            debug << s << "\n";
+            return value;
+        }
+    }
 }
 
 Timer::~Timer() {
@@ -119,7 +137,8 @@ Timer::~Timer() {
         *timerFactory->out << "`·~ " << name
                            << " Repetitions: " << timerFactory->accTimerCount
                            << " Average: " << (timerFactory->accTimer.count() / timerFactory->accTimerCount) << "ms."
-                           << " Acc " << timerFactory->accTimer.count() << "ms.";
+                           << " Acc " << timerFactory->accTimer.count() << "ms. "
+                            << currentMemoryUsage() << " kb";
 
     } else {
         timerFactory->accTimerCount = 1;
@@ -131,7 +150,8 @@ Timer::~Timer() {
         for (int i = 0; i < timerFactory->timer; i++) *timerFactory->out << "|";
         *timerFactory->out << "`·~ " << name
                            << " Duration: " << (duration - siblings_duration).count() << "ms."
-                           << " Acc " << duration.count() << "ms.";
+                           << " Acc " << duration.count() << "ms. "
+                           << currentMemoryUsage() << " kb";
         *timerFactory->out << "\n";
         for (int i = 0; i < timerFactory->timer; i++) *timerFactory->out << "|";
     }

@@ -17,9 +17,9 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <fstream>
 
 class TimerFactory;
-
 
 class Timer {
     friend TimerFactory;
@@ -27,9 +27,10 @@ class Timer {
     std::chrono::milliseconds siblings_duration;
     std::string name;
     int childCount = 0;
+    int currentMemoryUsage();
 
 public:
-    explicit Timer(std::string name, TimerFactory *timerFactory);;
+    explicit Timer(std::string name, TimerFactory *timerFactory);
     TimerFactory* timerFactory;
     ~Timer();
 };
@@ -42,11 +43,12 @@ public:
     ~TimerFactory();
     Timer getTimer(std::string name);;
 
-    TimerFactory(std::ostream * out)
-            : out(out), lastTimer(""), accTimer(0),
+    TimerFactory(std::string outFilename)
+            : lastTimer(""), accTimer(0),
               wholeStats(std::map<std::string, std::chrono::milliseconds>()),
               wholeUniqueStats(std::map<std::string, std::chrono::milliseconds>()),
               total(std::chrono::milliseconds(0)) {
+        out = new std::ofstream(outFilename);
     };
 
     void reportTotal();
@@ -69,8 +71,8 @@ private:
 extern TimerFactory timerFactory;
 #else
 
-#define StartTiming(name)
-#define SetTimingOfstream(_stream)
+#define StartTiming(name) {}
+#define SetTimingOfstream(_stream) {}
 
 #endif
 
