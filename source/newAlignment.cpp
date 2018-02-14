@@ -94,20 +94,11 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
 
     if (this != &originalAlignment) {
 
-        int i, j;
-
         aligInfo = originalAlignment.aligInfo;
 
-        for (i = 0, j = 0; i < originalAlignment.originalSequenNumber; i++) {
-            if (originalAlignment.saveSequences[i] != -1) j++;
-        }
+        sequenNumber = originalAlignment.sequenNumber;
 
-        sequenNumber = j;
-
-        for (i = 0, j = 0; i < originalAlignment.residNumber; i++)
-            if (originalAlignment.saveResidues[i] != -1) j++;
-
-        residNumber = j;
+        residNumber = originalAlignment.residNumber;
 
         isAligned = originalAlignment.isAligned;
 
@@ -128,13 +119,10 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
 
         identities = NULL;
 
-        //delete sgaps;
         sgaps = NULL;
 
-        //delete scons;
         scons = NULL;
 
-        //delete SequencesMatrix;
         SequencesMatrix = NULL;
 
         this->Cleaning = new Cleaner(this, originalAlignment.Cleaning);
@@ -812,7 +800,7 @@ bool newAlignment::fillMatrices(bool aligned) {
             break;
     }
     // Set an appropriate flag for indicating if sequences are aligned or not
-    isAligned = (i != sequenNumber) ? false : true;
+    isAligned = i == sequenNumber;
 
     // Warm about those cases where sequences should be aligned
     // and there are not
@@ -828,7 +816,8 @@ bool newAlignment::fillMatrices(bool aligned) {
     // Check whether aligned sequences have the length fixed for the input alig
     for (i = 0; (i < sequenNumber) and (aligned); i++) {
         if (sequences[i].length() != residNumber) {
-            debug.report(ErrorCode::SequencesNotSameSize, new std::string[3]{seqsName[i], std::to_string(sequences[i].length()), std::to_string(residNumber)});
+            debug.report(ErrorCode::SequencesNotSameSize,
+                         new std::string[3]{seqsName[i], std::to_string(sequences[i].length()), std::to_string(residNumber)});
             return false;
         }
     }

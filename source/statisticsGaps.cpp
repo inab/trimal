@@ -57,8 +57,8 @@ statisticsGaps::statisticsGaps(newAlignment *parent) {
     aminosXInColumn = new int[residNumber];
     utils::initlVect(aminosXInColumn, residNumber, 0);
 
-    gapsWindow = new int[residNumber];
-    utils::initlVect(gapsWindow, residNumber, 0);
+//    gapsWindow = new int[residNumber];
+//    utils::initlVect(gapsWindow, residNumber, 0);
 
     numColumnsWithGaps = new int[sequenNumber + 1];
     utils::initlVect(numColumnsWithGaps, sequenNumber + 1, 0);
@@ -78,10 +78,10 @@ statisticsGaps::statisticsGaps(newAlignment *parent) {
         // Increase the number of colums with the number of gaps of the last processed column
         numColumnsWithGaps[gapsInColumn[ii]]++;
 
-        gapsWindow[ii] = gapsInColumn[ii];
+//        gapsWindow[ii] = gapsInColumn[ii];
 
-        if (gapsWindow[ii] > maxGaps)
-            maxGaps = gapsWindow[ii];
+        if (gapsInColumn[ii] > maxGaps)
+            maxGaps = gapsInColumn[ii];
 
     }
 }
@@ -96,7 +96,9 @@ statisticsGaps::~statisticsGaps(void) {
         delete[] gapsInColumn;
         delete[] numColumnsWithGaps;
         delete[] aminosXInColumn;
-        delete[] gapsWindow;
+
+        if (halfWindow > 0)
+            delete[] gapsWindow;
     }
 
 }
@@ -105,6 +107,12 @@ bool statisticsGaps::applyWindow(int _halfWindow) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("bool statisticsGaps::applyWindow(int _halfWindow) ");
+
+    if (_halfWindow == 0)
+    {
+        gapsWindow = gapsInColumn;
+        return true;
+    }
 
     int i, j, window;
 

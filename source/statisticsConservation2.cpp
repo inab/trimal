@@ -46,8 +46,8 @@ statisticsConservation2::statisticsConservation2(newAlignment *parentAlignment) 
     MDK = new float[residues];
     utils::initlVect(MDK, residues, 0);
 
-    MDK_Window = new float[residues];
-    utils::initlVect(MDK_Window, residues, 0);
+//    MDK_Window = new float[residues];
+//    utils::initlVect(MDK_Window, residues, 0);
 
     sequences = _alignment->sequenNumber;
 
@@ -74,7 +74,9 @@ statisticsConservation2::~statisticsConservation2(void) {
     if (Q != NULL) {
         delete[] Q;
         delete[] MDK;
-        delete[] MDK_Window;
+
+        if (halfWindow > 0)
+            delete[] MDK_Window;
 
         for (int i = 0; i < _alignment->sequenNumber; i++)
             delete[] matrixIdentity[i];
@@ -140,7 +142,6 @@ bool statisticsConservation2::calculateVectors(int *gaps) {
     char indet;
     int i, ii, j, jj, k, kk;
     float num, den;
-    int * gapsWindow = _alignment->sgaps->getGapsWindow();
 
     // Depending on alignment type, indetermination symbol will be one or other 
     indet = (_alignment->getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
@@ -153,8 +154,8 @@ bool statisticsConservation2::calculateVectors(int *gaps) {
         if (_alignment->saveResidues[i] == -1) continue;
         ii++;
         // For each AAs/Nucleotides' pair in the column we compute its distance 
-        if (gapsWindow != NULL)
-            if (((float) _alignment->sgaps->gapsWindow[ii] / sequences) >= 0.8) {
+        if (gaps != NULL)
+            if (((float) gaps[ii] / sequences) >= 0.8) {
                 MDK[ii] = 0;
                 continue;
             }
@@ -195,6 +196,14 @@ bool statisticsConservation2::applyWindow(int _halfWindow) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("bool statisticsConservation2::applyWindow(int _halfWindow) ");
+    if (_halfWindow == 0)
+    {
+        if (halfWindow != 0)
+            delete[] MDK_Window;
+
+        MDK_Window = MDK;
+        return true;
+    }
 
     int i, j, window;
 

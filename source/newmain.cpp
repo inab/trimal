@@ -33,12 +33,14 @@
 
 int main(int argc, char *argv[]) {
 
-    SetTimingOstream(new std::ofstream("./timingReport.txt"));
+    SetTimingOfstream("./timingReport2.txt");
     int returnValue;
     {
         // Create a timer that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("int main(int argc, char *argv[]) ");
+
+        // This prevents calls to "debug << "
         debug.IsDebug = true;
 
         trimAlManager trimAl = trimAlManager();
@@ -50,8 +52,6 @@ int main(int argc, char *argv[]) {
         returnValue = trimAl.perform();
 
     }
-//    timerFactory.reportTotal();
-
     return returnValue;
 
 }
