@@ -16,9 +16,9 @@
 #include <queue>
 
 int Cleaner::selectMethod(void) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("int Cleaner::selectMethod(void) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("int Cleaner::selectMethod(void) ");
 
     float mx, avg, maxSeq = 0, avgSeq = 0;
     int i, j;
@@ -64,178 +64,127 @@ int Cleaner::selectMethod(void) {
 }
 
 newAlignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const int *gInCol, bool complementary) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const int *gInCol, bool complementary) ");
-
-    int i, ii, j, k, ij, z, x, resCounter, counter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const int *gInCol, bool complementary) ");
+    int i, j, k, jn, oth, pos, block, *vectAux, residues;
     newAlignment *newAlig = new newAlignment(*_alignment);
 
-    // Select the columns with a gaps value less or equal than the cut point.
-    for (i = 0, resCounter = 0, ii = 0; i < _alignment->originalResidNumber; i++) {
-        if (_alignment->saveResidues[i] != -1) {
-            if (gInCol[ii] <= cut) resCounter++;
-            else newAlig->saveResidues[ii] = -1;
-            ii++;
-        }
+    // Select the columns with a gaps value
+    // less or equal than the cut point.
+    for (i = 0, residues = 0; i < _alignment->residNumber; i++) {
+        if (gInCol[i] <= cut) residues++;
+        else newAlig->saveResidues[i] = -1;
 
     }
     // Compute, if it's necessary, the number of columns
     // necessary to achieve the minimum number of columns
     // fixed by coverage parameter.
-    NumberOfResiduesToAchieveBaseLine = utils::roundInt((((baseLine * 0.01F) - (float) resCounter / _alignment->residNumber)) * _alignment->residNumber);
-
-    // if it's necessary to recover some columns, we
-    // applied this instructions to recover it
-    if (NumberOfResiduesToAchieveBaseLine > 0) {
-        resCounter += NumberOfResiduesToAchieveBaseLine;
-
+    oth = utils::roundInt((((baseLine / 100.0) - (float) residues / _alignment->residNumber)) * _alignment->residNumber);
+    // if it's necessary to recover some columns,
+    // we apply this instructions to recover it
+    if (oth > 0) {
         // Allocate memory
         vectAux = new int[_alignment->residNumber];
 
         // Sort a copy of the gInCol vector, and take the value of the column that marks the % baseline
         utils::copyVect((int *) gInCol, vectAux, _alignment->residNumber);
         utils::quicksort(vectAux, 0, _alignment->residNumber - 1);
-
-        for (x = (int) ((float) (_alignment->residNumber - 1) * (baseLine) / 100.0), i = 0, z = 0; i < _alignment->originalResidNumber && z < x; i++) {
-            if (_alignment->saveResidues[i] != -1) continue;
-            z++;
-        }
-
-        cut = vectAux[z];
+        cut = vectAux[(int) ((float) (_alignment->residNumber - 1) * (baseLine) / 100.0)];
 
         // Deallocate memory
         delete[] vectAux;
     }
+    // Fixed the initial size of blocks as 0.5% of
+    // alignment's length
+    for (k = utils::roundInt(0.005 * _alignment->residNumber); (k >= 0) && (oth > 0); k--) {
 
-    // Start with a blocksize (k) = 0.5% alignment size.
-    for (k = utils::roundInt(0.005F * newAlig->residNumber); (k >= 0) && (NumberOfResiduesToAchieveBaseLine > 0); k--) {
-        // Start at the middle. Go to both ends: i goes to the left, j goes to the right, ij as a helper for both sides.
-        for (i = (_alignment->originalResidNumber / 2), j = (i + 1); NumberOfResiduesToAchieveBaseLine > 0 && (i > 0 || j < newAlig->originalResidNumber - 1); i--, j++) {
-            // BEGIN Left side
-            // Check every column from current position (i) to the left until we found a residue to be deleted.
-            for (ij = i, resCounter = 0; NumberOfResiduesToAchieveBaseLine > 0 && ij >= 0; ij--) {
-                // Don't use residues previously rejected.
-                if (_alignment->saveResidues[ij] == -1) continue;
-                // We need to have a counter to control blocksize
-                resCounter++;
-                // Iterate until finding one residue to recover.
-                if (newAlig->saveResidues[ij] != -1) {
-                    // If the block size is greater than the fixed size, k, we'll save all those columns.
-                    if (resCounter >= k) {
-                        // We'll keep expanding this side until:
-                        // a) It fuses the block with another saved column: newAlig -> saveResidues[ij] != -1
-                        // b) Reaches a column that is not going to be recovered: gInCol[ij] > cut
-                        // c) Reaches the begin of the alignment: ij == -1
-                        // d) Recovers enought columns: NumberOfResiduesToAchieveBaseLine == 0
-                        //
-                        // We'll ignore residues that have been previously rejected: _alignment->saveResidues[ij] == -1
-                        for (; ij >= 0 && NumberOfResiduesToAchieveBaseLine > 0; ij--) {
-                            if (_alignment->saveResidues[ij] == -1) continue;
-                            if (newAlig->saveResidues[ij] != -1) break;
-                            if (gInCol[ij] <= cut) {
-                                newAlig->saveResidues[ij] = ij;
-                                NumberOfResiduesToAchieveBaseLine--;
-                            } else break;
-                        }
-                    }
-                    break;
+        // We start in the alignment middle then we move on
+        // right and left side at the same time.
+        for (i = (_alignment->residNumber / 2), j = (i + 1); (((i > 0) || (j < (_alignment->residNumber - 1))) && (oth > 0)); i--, j++) {
+
+            // Left side. Here, we compute the block's size.
+            for (jn = i; ((newAlig->saveResidues[jn] != -1) && (jn >= 0) && (oth > 0)); jn--);
+
+            // if block's size is greater or equal than the fixed
+            // size then we save all columns that have not been
+            // saved previously.
+            if ((i - jn) >= k) {
+                for (; ((newAlig->saveResidues[jn] == -1) && (jn >= 0) && (oth > 0)); jn--) {
+                    if (gInCol[jn] <= cut) {
+                        newAlig->saveResidues[jn] = jn;
+                        oth--;
+                    } else
+                        break;
                 }
             }
-            // We want to continue from where we left it on the next iteration
-            i = ij;
-            // END Left side
+            i = jn;
+            // Right side. Here, we compute the block's size.
+            for (jn = j; ((newAlig->saveResidues[jn] != -1) && (jn < _alignment->residNumber) && (oth > 0)); jn++);
 
-            // BEGIN Right side
-            // Check every column from current position (i) to the left until we found a residue to be deleted.
-            for (ij = j, resCounter = 0; NumberOfResiduesToAchieveBaseLine > 0 && ij < newAlig->originalResidNumber; ij++) {
-                // Don't use residues previously rejected.
-                if (_alignment->saveResidues[ij] == -1) continue;
-                // We need to have a counter to control blocksize
-                resCounter++;
-                // Iterate until finding one residue to recover.
-                if (newAlig->saveResidues[ij] != -1) {
-                    // If the block size is greater than the fixed size, k, we'll save all those columns.
-                    if (resCounter >= k) {
-                        // We'll keep expanding this side until:
-                        // a) It fuses the block with another saved column: newAlig -> saveResidues[ij] != -1
-                        // b) Reaches a column that is not going to be recovered: gInCol[ij] > cut
-                        // c) Reaches the begin of the alignment: ij == -1
-                        // d) Recovers enought columns: NumberOfResiduesToAchieveBaseLine == 0
-                        //
-                        // We'll ignore residues that have been previously rejected: _alignment->saveResidues[ij] == -1
-                        for (; ij < newAlig->originalResidNumber && NumberOfResiduesToAchieveBaseLine > 0; ij++) {
-                            if (_alignment->saveResidues[ij] == -1) continue;
-                            if (newAlig->saveResidues[ij] != -1) break;
-                            if (gInCol[ij] <= cut) {
-                                newAlig->saveResidues[ij] = ij;
-                                NumberOfResiduesToAchieveBaseLine--;
-                            } else break;
-                        }
-                    }
-                    break;
+            // if block's size is greater or equal than the fixed
+            // size then we save all columns that have not been
+            // saved previously.
+            if ((jn - j) >= k) {
+                for (; ((newAlig->saveResidues[jn] == -1) && (jn < _alignment->residNumber) && (oth > 0)); jn++) {
+                    if (gInCol[jn] <= cut) {
+                        newAlig->saveResidues[jn] = jn;
+                        oth--;
+                    } else
+                        break;
                 }
             }
-            // We want to continue from where we left it on the next iteration
-            j = ij;
-            // END Right side
+            j = jn;
         }
     }
 
+    // Keep only columns blocks bigger than an input columns block size
+    if (blockSize != 0) {
 
-    /* Keep only columns blocks bigger than an input columns block size */
-    for (i = 0, pos = 0, counter = 0; i < newAlig->originalResidNumber; i++) {
-
-        if (_alignment->saveResidues[i] == -1) {
-            pos++;
-            continue;
-        }
-        if (newAlig->saveResidues[i] != -1) {
-            pos++;
-            counter++;
-            continue;
-        }
-
-        if (counter < blockSize) {
-            while (pos > 0) {
-                newAlig->saveResidues[i - pos--] = -1;
+        // Traverse all alignment looking for columns blocks greater than LONGBLOCK,
+        // every time than a column is not selected by the trimming method, check
+        // whether the current block size until that point is big enough to be kept
+        // or it should be removed from the final alignment
+        for (i = 0, pos = 0, block = 0; i < _alignment->residNumber; i++) {
+            if (newAlig->saveResidues[i] != -1)
+                block++;
+            else {
+                // Remove columns from blocks smaller than input blocks size
+                if (block < blockSize)
+                    for (j = pos; j <= i; j++)
+                        newAlig->saveResidues[j] = -1;
+                pos = i + 1;
+                block = 0;
             }
         }
-        counter = 0;
-        pos = 0;
-    }
-
-    if (counter < blockSize) {
-        while (pos > 0) {
-            newAlig->saveResidues[i - pos--] = -1;
-        }
+        // Check final block separately since it could happen than last block is not
+        // big enough but because the loop end could provoke to ignore it
+        if (block < blockSize)
+            for (j = pos; j < i; j++)
+                newAlig->saveResidues[j] = -1;
     }
 
     // If the flag -terminalony is set, apply a method to look for internal
     // boundaries and get back columns inbetween them, if they exist
-    if (terminalGapOnly == true)
-        if (!newAlig->Cleaning->removeOnlyTerminal())
-            return NULL;
+    if (terminalGapOnly && !removeOnlyTerminal()) return NULL;
 
     // Once the columns/sequences selection is done, turn it around
     // if complementary flag is active
-    if (complementary == true)
-        newAlig->Cleaning->computeComplementaryAlig(true, false);
+    if (complementary) computeComplementaryAlig(true, false);
 
     newAlig->Cleaning->removeAllGapsSeqsAndCols();
 
-    newAlig->residNumber = resCounter;
-
-    // Return the new _alignmentment reference
+    // Return the new alignment reference
     return newAlig;
+
 }
 
 newAlignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, const float *ValueVect, bool complementary) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, const float *ValueVect, bool complementary) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, const float *ValueVect, bool complementary) ");
 
-    int i, j, k, ij, resCounter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
+    int i, j, k, jn, resCounter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
     newAlignment *newAlig = new newAlignment(*_alignment);
 
     for (i = 0, resCounter = 0; i < _alignment->originalResidNumber; i++)
@@ -244,125 +193,98 @@ newAlignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, cons
 
     NumberOfResiduesToAchieveBaseLine = utils::roundInt((((baseLine / 100.0) - (float) resCounter / _alignment->residNumber)) * _alignment->residNumber);
 
-    // Start with a blocksize (k) = 0.5% alignment size.
-    for (k = utils::roundInt(0.005 * newAlig->residNumber); (k >= 0) && (NumberOfResiduesToAchieveBaseLine > 0); k--) {
-        // Start at the middle. Go to both ends: i goes to the left, j goes to the right, ij as a helper for both sides.
-        for (i = (newAlig->originalResidNumber / 2), j = (i + 1); NumberOfResiduesToAchieveBaseLine > 0 && (i > 0 || j < newAlig->originalResidNumber - 1); i--, j++) {
-            // BEGIN Left side
-            // Check every column from current position (i) to the left until we found a residue to be deleted.
-            for (ij = i, resCounter = 0; NumberOfResiduesToAchieveBaseLine > 0 && ij > 0; ij--) {
-                // Don't use residues previously rejected.
-                if (_alignment->saveResidues[ij] == -1) continue;
-                // We need to have a counter to control blocksize
-                resCounter++;
-                // Iterate until finding one residue to recover.
-                if (newAlig->saveResidues[ij] != -1) {
-                    // If the block size is greater than the fixed size, k, we'll save all those columns.
-                    if (resCounter >= k) {
-                        // We'll keep expanding this side until:
-                        // a) It fuses the block with another saved column: newAlig -> saveResidues[ij] != -1
-                        // b) Reaches a column that is not going to be recovered: gInCol[ij] > cut
-                        // c) Reaches the begin of the alignment: ij == -1
-                        // d) Recovers enought columns: NumberOfResiduesToAchieveBaseLine == 0
-                        //
-                        // We'll ignore residues that have been previously rejected: _alignment->saveResidues[ij] == -1
-                        for (; ij >= 0 && NumberOfResiduesToAchieveBaseLine > 0; ij--) {
-                            if (_alignment->saveResidues[ij] == -1) continue;
-                            if (newAlig->saveResidues[ij] != -1) break;
-                            if (ValueVect[ij] == cut) {
-                                newAlig->saveResidues[ij] = ij;
-                                NumberOfResiduesToAchieveBaseLine--;
-                            } else break;
-                        }
-                    }
-                    break;
+    for (int Y = 0; Y < newAlig->originalResidNumber; Y++)
+        debug << newAlig->saveResidues[Y] << "\t" << ValueVect[Y] << "\n";
+
+    // Fixed the initial size of blocks as 0.5% of
+    // alignment's length
+    for (k = utils::roundInt(0.005 * _alignment->residNumber); (k >= 0) && (NumberOfResiduesToAchieveBaseLine > 0); k--) {
+
+        // We start in the alignment middle then we move on
+        // right and left side at the same time.
+        for (i = (_alignment->residNumber / 2), j = (i + 1); (((i > 0) || (j < (_alignment->residNumber - 1))) && (NumberOfResiduesToAchieveBaseLine > 0)); i--, j++) {
+
+            // Left side. Here, we compute the block's size.
+            for (jn = i; ((newAlig->saveResidues[jn] != -1) && (jn >= 0) && (NumberOfResiduesToAchieveBaseLine > 0)); jn--);
+
+            // if block's size is greater or equal than the fixed
+            // size then we save all columns that have not been
+            // saved previously.
+            if ((i - jn) >= k) {
+                for (; ((newAlig->saveResidues[jn] == -1) && (jn >= 0) && (NumberOfResiduesToAchieveBaseLine > 0)); jn--) {
+                    if (ValueVect[jn] == cut) {
+                        newAlig->saveResidues[jn] = jn;
+                        NumberOfResiduesToAchieveBaseLine--;
+                    } else
+                        break;
                 }
             }
-            // We want to continue from where we left it on the next iteration
-            i = ij;
-            // END Left side
+            i = jn;
+            // Right side. Here, we compute the block's size.
+            for (jn = j; ((newAlig->saveResidues[jn] != -1) && (jn < _alignment->residNumber) && (NumberOfResiduesToAchieveBaseLine > 0)); jn++);
 
-
-
-            // BEGIN Right side
-            // Check every column from current position (i) to the left until we found a residue to be deleted.
-            for (ij = j, resCounter = 0; NumberOfResiduesToAchieveBaseLine > 0 && ij < newAlig->originalResidNumber; ij++) {
-                // Don't use residues previously rejected.
-                if (_alignment->saveResidues[ij] == -1) continue;
-                // We need to have a counter to control blocksize
-                resCounter++;
-                // Iterate until finding one residue to recover.
-                if (newAlig->saveResidues[ij] != -1) {
-                    // If the block size is greater than the fixed size, k, we'll save all those columns.
-                    if (resCounter >= k) {
-                        // We'll keep expanding this side until:
-                        // a) It fuses the block with another saved column: newAlig -> saveResidues[ij] != -1
-                        // b) Reaches a column that is not going to be recovered: ValueVect[ij] != cut
-                        // c) Reaches the begin of the alignment: ij == -1
-                        // d) Recovers enought columns: NumberOfResiduesToAchieveBaseLine == 0
-                        //
-                        // We'll ignore residues that have been previously rejected: _alignment->saveResidues[ij] == -1
-                        for (; ij < newAlig->originalResidNumber && NumberOfResiduesToAchieveBaseLine > 0; ij++) {
-                            if (_alignment->saveResidues[ij] == -1) continue;
-                            if (newAlig->saveResidues[ij] != -1) break;
-                            if (ValueVect[ij] == cut) {
-                                newAlig->saveResidues[ij] = ij;
-                                NumberOfResiduesToAchieveBaseLine--;
-                            } else break;
-                        }
-                    }
-                    break;
+            // if block's size is greater or equal than the fixed
+            // size then we save all columns that have not been
+            // saved previously.
+            if ((jn - j) >= k) {
+                for (; ((newAlig->saveResidues[jn] == -1) && (jn < _alignment->residNumber) && (NumberOfResiduesToAchieveBaseLine > 0)); jn++) {
+                    if (ValueVect[jn] == cut) {
+                        newAlig->saveResidues[jn] = jn;
+                        NumberOfResiduesToAchieveBaseLine--;
+                    } else
+                        break;
                 }
             }
-            // We want to continue from where we left it on the next iteration
-            j = ij;
-            // END Right side
+            j = jn;
         }
     }
 
     // Keep only columns blocks bigger than an input columns block size
     if (blockSize != 0) {
 
-        for (i = 0; i < newAlig->originalResidNumber; i++) {
-            // Forget about already rejected residues
-            if (_alignment->saveResidues[i] == -1) continue;
-
-
-            for (pos = i, resCounter = 0; i < newAlig->originalResidNumber; i++) {
-                if (_alignment->saveResidues[i] == -1) continue;
-                if (newAlig->saveResidues[i] != -1 && i < newAlig->originalResidNumber) {
-                    resCounter++;
-                } else if (resCounter < blockSize) {
-                    for (; pos <= i; pos++) {
-                        newAlig->saveResidues[i] = -1;
-                    }
-                }
+        // Traverse all alignment looking for columns blocks greater than LONGBLOCK,
+        // every time than a column is not selected by the trimming method, check
+        // whether the current block size until that point is big enough to be kept
+        // or it should be removed from the final alignment
+        for (i = 0, pos = 0, block = 0; i < _alignment->residNumber; i++) {
+            if (newAlig->saveResidues[i] != -1)
+                block++;
+            else {
+                // Remove columns from blocks smaller than input blocks size
+                if (block < blockSize)
+                    for (j = pos; j <= i; j++)
+                        newAlig->saveResidues[j] = -1;
+                pos = i + 1;
+                block = 0;
             }
         }
+        // Check final block separately since it could happen than last block is not
+        // big enough but because the loop end could provoke to ignore it
+        if (block < blockSize)
+            for (j = pos; j < i; j++)
+                newAlig->saveResidues[j] = -1;
     }
 
     // If the flag -terminalony is set, apply a method to look for internal
     // boundaries and get back columns inbetween them, if they exist
-    if (terminalGapOnly == true)
-        if (!newAlig->Cleaning->removeOnlyTerminal())
+    if (terminalGapOnly && !newAlig->Cleaning->removeOnlyTerminal())
             return NULL;
 
     // Once the columns/sequences selection is done, turn it around
     // if complementary flag is active
-    if (complementary == true)
+    if (complementary)
         newAlig->Cleaning->computeComplementaryAlig(true, false);
 
     // Check for any additional column/sequence to be removed
     // Compute new sequences and columns numbers 
     newAlig->Cleaning->removeAllGapsSeqsAndCols();
-    newAlig->updateSequencesAndResiduesNums();
     return newAlig;
 }
 
 newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary) ");
 
     int i, j, k, ij, resCounter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
     newAlignment *newAlig = new newAlignment(*_alignment);
@@ -508,9 +430,9 @@ newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(double cutGaps, const int
 }
 
 newAlignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, const float *MDK_W, bool complementary, bool variable) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, const float *MDK_W, bool complementary, bool variable) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, const float *MDK_W, bool complementary, bool variable) ");
 
     int i, x, pos, counter, num, lenBlock;
     newAlignment *newAlig = new newAlignment(*_alignment);
@@ -720,9 +642,9 @@ newAlignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, 
 }
 
 newAlignment *Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, bool complementary) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, bool complementary) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, bool complementary) ");
 
     newAlignment *newAlig = new newAlignment(*_alignment);
     int i;
@@ -746,9 +668,9 @@ newAlignment *Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, 
 }
 
 newAlignment *Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementary) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementary) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementary) ");
 
     newAlignment *ret;
     double cut;
@@ -772,9 +694,9 @@ newAlignment *Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementa
 }
 
 newAlignment *Cleaner::cleanConservation(float baseLine, float conservationPct, bool complementary) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::cleanConservation(float baseLine, float conservationPct, bool complementary) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::cleanConservation(float baseLine, float conservationPct, bool complementary) ");
 
     newAlignment *ret;
     float cut;
@@ -796,9 +718,9 @@ newAlignment *Cleaner::cleanConservation(float baseLine, float conservationPct, 
 }
 
 newAlignment *Cleaner::clean(float baseLine, float GapsPct, float conservationPct, bool complementary) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::clean(float baseLine, float GapsPct, float conservationPct, bool complementary) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::clean(float baseLine, float GapsPct, float conservationPct, bool complementary) ");
 
     newAlignment *ret;
     float cutCons;
@@ -827,9 +749,9 @@ newAlignment *Cleaner::clean(float baseLine, float GapsPct, float conservationPc
 }
 
 newAlignment *Cleaner::cleanCompareFile(float cutpoint, float baseLine, float *vectValues, bool complementary) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::cleanCompareFile(float cutpoint, float baseLine, float *vectValues, bool complementary) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::cleanCompareFile(float cutpoint, float baseLine, float *vectValues, bool complementary) ");
 
     newAlignment *ret;
     float cut, *vectAux;
@@ -859,9 +781,9 @@ newAlignment *Cleaner::cleanCompareFile(float cutpoint, float baseLine, float *v
 }
 
 bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) ");
 
     int i, j, k, seqValue, ovrlap, hit;
     char indet;
@@ -934,9 +856,9 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
 
 
 newAlignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, bool complementary) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, bool complementary) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, bool complementary) ");
 
     float *overlapVector;
     newAlignment *newAlig;
@@ -957,9 +879,9 @@ newAlignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverla
 }
 
 newAlignment *Cleaner::clean2ndSlope(bool complementarity) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::clean2ndSlope(bool complementarity) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::clean2ndSlope(bool complementarity) ");
 
     newAlignment *ret;
 
@@ -980,9 +902,9 @@ newAlignment *Cleaner::clean2ndSlope(bool complementarity) {
 }
 
 newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) ");
 
     float simCut, first20Point, last80Point, *simil, *vectAux;
     int i, j, acm, gapCut, *positions, *gaps;
@@ -1056,9 +978,9 @@ newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
 }
 
 newAlignment *Cleaner::cleanNoAllGaps(bool complementarity) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::cleanNoAllGaps(bool complementarity) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::cleanNoAllGaps(bool complementarity) ");
 
     newAlignment *ret;
 
@@ -1075,9 +997,9 @@ newAlignment *Cleaner::cleanNoAllGaps(bool complementarity) {
 }
 
 float Cleaner::getCutPointClusters(int clusterNumber) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("float Cleaner::getCutPointClusters(int clusterNumber) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("float Cleaner::getCutPointClusters(int clusterNumber) ");
 
     float max, min, avg, gMax, gMin, startingPoint, prevValue = 0, iter = 0;
     int i, j, clusterNum, *cluster, **seqs;
@@ -1203,16 +1125,16 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
 }
 
 void Cleaner::setTrimTerminalGapsFlag(bool terminalOnly_) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void Cleaner::setTrimTerminalGapsFlag(bool terminalOnly_) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void Cleaner::setTrimTerminalGapsFlag(bool terminalOnly_) ");
     terminalGapOnly = terminalOnly_;
 }
 
 void Cleaner::setBoundaries(int *boundaries_) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void Cleaner::setBoundaries(int *boundaries_) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void Cleaner::setBoundaries(int *boundaries_) ");
     if (boundaries_ != NULL) {
         left_boundary = boundaries_[0];
         right_boundary = boundaries_[1];
@@ -1220,9 +1142,9 @@ void Cleaner::setBoundaries(int *boundaries_) {
 }
 
 newAlignment *Cleaner::getClustering(float identityThreshold) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::getClustering(float identityThreshold) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::getClustering(float identityThreshold) ");
 
     int i, j, *clustering;
     newAlignment *newAlig = new newAlignment(*_alignment);
@@ -1249,9 +1171,9 @@ newAlignment *Cleaner::getClustering(float identityThreshold) {
 }
 
 newAlignment *Cleaner::removeColumns(int *columns, int init, int size, bool complementary) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("newAlignment *Cleaner::removeColumns(int *columns, int init, int size, bool complementary) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::removeColumns(int *columns, int init, int size, bool complementary) ");
 
     string *matrixAux, *newSeqsName;
     newAlignment *newAlig = new newAlignment(*_alignment);
@@ -1301,9 +1223,9 @@ newAlignment *Cleaner::removeSequences(int *seqs, int init, int size,
 }
 
 bool Cleaner::removeOnlyTerminal(void) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("bool Cleaner::removeOnlyTerminal(void) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("bool Cleaner::removeOnlyTerminal(void) ");
 
     int i;
     const int *gInCol;
@@ -1342,9 +1264,9 @@ bool Cleaner::removeOnlyTerminal(void) {
 }
 
 void Cleaner::removeSmallerBlocks(int blockSize) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void Cleaner::removeSmallerBlocks(int blockSize) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void Cleaner::removeSmallerBlocks(int blockSize) ");
     // NOTE this method is not updated to use shared sequences. This shouldn't be used at all.
     int i, j, pos, block;
 
@@ -1376,9 +1298,9 @@ void Cleaner::removeSmallerBlocks(int blockSize) {
 }
 
 void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) ");
     int i, j, valid, gaps, counter;
 
     // Start checking the sequences.
@@ -1410,6 +1332,7 @@ void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) {
         }
         _alignment->sequenNumber = counter;
     }
+
     if (cols) {
         // Iterate over the residues
         for (j = 0, counter = 0; j < _alignment->originalResidNumber; j++) {
@@ -1436,9 +1359,9 @@ void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) {
 }
 
 void Cleaner::calculateSeqIdentity(void) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void Cleaner::calculateSeqIdentity(void) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void Cleaner::calculateSeqIdentity(void) ");
 
     int i, j, k, hit, dst;
     char indet;
@@ -1485,9 +1408,9 @@ void Cleaner::calculateSeqIdentity(void) {
 }
 
 void Cleaner::calculateRelaxedSeqIdentity(void) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void Cleaner::calculateRelaxedSeqIdentity(void) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void Cleaner::calculateRelaxedSeqIdentity(void) ");
     // Raw approximation of sequence identity computation designed for reducing
     // comparisons for huge alignemnts
 
@@ -1527,9 +1450,9 @@ void Cleaner::calculateRelaxedSeqIdentity(void) {
 }
 
 int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("int *Cleaner::calculateRepresentativeSeq(float maximumIdent) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("int *Cleaner::calculateRepresentativeSeq(float maximumIdent) ");
 
     int i, j, pos, clusterNum, **seqs;
     int *cluster;
@@ -1591,9 +1514,9 @@ int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
 }
 
 void Cleaner::computeComplementaryAlig(bool residues, bool sequences) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void Cleaner::computeComplementaryAlig(bool residues, bool sequences) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void Cleaner::computeComplementaryAlig(bool residues, bool sequences) ");
     int i;
 
     if (residues)
@@ -1607,9 +1530,9 @@ void Cleaner::computeComplementaryAlig(bool residues, bool sequences) {
 
 
 Cleaner::Cleaner(newAlignment *parent) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("Cleaner::Cleaner(newAlignment *parent) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("Cleaner::Cleaner(newAlignment *parent) ");
     _alignment = parent;
 
     terminalGapOnly = false;
@@ -1622,9 +1545,9 @@ Cleaner::Cleaner(newAlignment *parent) {
 }
 
 Cleaner::Cleaner(newAlignment *parent, Cleaner *mold) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("Cleaner::Cleaner(newAlignment *parent, Cleaner *mold) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("Cleaner::Cleaner(newAlignment *parent, Cleaner *mold) ");
     _alignment = parent;
 
     terminalGapOnly = mold->terminalGapOnly;
