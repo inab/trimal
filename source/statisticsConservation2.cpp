@@ -274,46 +274,44 @@ double statisticsConservation2::calcCutPoint(float baseLine, float conservationP
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("double statisticsConservation2::calcCutPoint(float baseLine, float conservationPct) ");
-    // It computes the cutting point based on alignment's conservation values -
-    // the so-called 'similarity'. It also takes into account the minimum percentage
-    // from the input alignment to be kept. Depending on those two values, the
-    // method will select a different cutting-point. 
+    /* It computes the cutting point based on alignment's conservation values -
+      * the so-called 'similarity'. It also takes into account the minimum percentage
+      * from the input alignment to be kept. Depending on those two values, the
+      * method will select a different cutting-point. */
 
     double cuttingPoint_MinimumConserv, cuttingPoint_SimilThreshold;
     int i, highestPos;
     float *vectAux;
 
-    // Allocate memory 
+    /* Allocate memory */
     vectAux = new float[residues];
 
-    // Sort a copy of the vector containing the similarity values after applying
-    // any windows methods. Take the columns value that it lower than the minimum
-    // similarity threshold set by the user 
-
+    /* Sort a copy of the vector containing the similarity values after applying
+     * any windows methods. Take the columns value that it lower than the minimum
+     * similarity threshold set by the user */
     utils::copyVect(MDK_Window, vectAux, residues);
+    utils::quicksort(vectAux, 0, residues-1);
 
-    utils::quicksort(vectAux, 0, residues - 1);
-
-    for (i = residues - 1; i >= 0; i--)
-        if (vectAux[i] < conservationPct)
+    for(i = residues - 1; i >= 0; i--)
+        if(vectAux[i] < conservationPct)
             break;
-    i = std::max(i, 0);
     cuttingPoint_SimilThreshold = vectAux[i];
 
-    // It is possible that due to number casting, we get a number out of the
-    // vector containing the similarity values - it is not reporting an overflow
-    // situation but giving back a 0 when it should be a number equal (or closer)
-    // to 1. 
-    highestPos = (int) ((double) (residues - 1) * (100.0 - baseLine) / 100.0);
+    /* It is possible that due to number casting, we get a number out of the
+     * vector containing the similarity values - it is not reporting an overflow
+     * situation but giving back a 0 when it should be a number equal (or closer)
+     * to 1. */
+    highestPos = (int) ((double)(residues - 1) * (100.0 - baseLine)/100.0);
     highestPos = highestPos < (residues - 1) ? highestPos : residues - 1;
     cuttingPoint_MinimumConserv = vectAux[highestPos];
 
-    // Deallocate memory 
+    /* Deallocate memory */
     delete[] vectAux;
 
-    // Return the minimum cutting point between the one set by the threshold and
-    // the one set by the minimum percentage of the input alignment to be kept 
-    return std::min(cuttingPoint_MinimumConserv, cuttingPoint_SimilThreshold);
+    /* Return the minimum cutting point between the one set by the threshold and
+     * the one set by the minimum percentage of the input alignment to be kept */
+    return (cuttingPoint_MinimumConserv < cuttingPoint_SimilThreshold ?
+            cuttingPoint_MinimumConserv : cuttingPoint_SimilThreshold);
 }
 
 void statisticsConservation2::printConservationColumns(void) {

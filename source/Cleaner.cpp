@@ -138,31 +138,7 @@ newAlignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const
         }
     }
 
-    // Keep only columns blocks bigger than an input columns block size
-    if (blockSize != 0) {
-
-        // Traverse all alignment looking for columns blocks greater than LONGBLOCK,
-        // every time than a column is not selected by the trimming method, check
-        // whether the current block size until that point is big enough to be kept
-        // or it should be removed from the final alignment
-        for (i = 0, pos = 0, block = 0; i < _alignment->residNumber; i++) {
-            if (newAlig->saveResidues[i] != -1)
-                block++;
-            else {
-                // Remove columns from blocks smaller than input blocks size
-                if (block < blockSize)
-                    for (j = pos; j <= i; j++)
-                        newAlig->saveResidues[j] = -1;
-                pos = i + 1;
-                block = 0;
-            }
-        }
-        // Check final block separately since it could happen than last block is not
-        // big enough but because the loop end could provoke to ignore it
-        if (block < blockSize)
-            for (j = pos; j < i; j++)
-                newAlig->saveResidues[j] = -1;
-    }
+    newAlig->Cleaning->removeSmallerBlocks(blockSize);
 
     // If the flag -terminalony is set, apply a method to look for internal
     // boundaries and get back columns inbetween them, if they exist
@@ -184,17 +160,18 @@ newAlignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, cons
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, const float *ValueVect, bool complementary) ");
 
-    int i, j, k, jn, resCounter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
+    int i, j, k, jn, resCounter, NumberOfResiduesToAchieveBaseLine;
     newAlignment *newAlig = new newAlignment(*_alignment);
 
     for (i = 0, resCounter = 0; i < _alignment->originalResidNumber; i++)
+    {
         if (ValueVect[i] > cut) resCounter++;
         else newAlig->saveResidues[i] = -1;
+        debug << newAlig->saveResidues[i] << "\t" << ValueVect[i] << "\n";
+    }
 
     NumberOfResiduesToAchieveBaseLine = utils::roundInt((((baseLine / 100.0) - (float) resCounter / _alignment->residNumber)) * _alignment->residNumber);
 
-    for (int Y = 0; Y < newAlig->originalResidNumber; Y++)
-        debug << newAlig->saveResidues[Y] << "\t" << ValueVect[Y] << "\n";
 
     // Fixed the initial size of blocks as 0.5% of
     // alignment's length
@@ -239,31 +216,7 @@ newAlignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, cons
         }
     }
 
-    // Keep only columns blocks bigger than an input columns block size
-    if (blockSize != 0) {
-
-        // Traverse all alignment looking for columns blocks greater than LONGBLOCK,
-        // every time than a column is not selected by the trimming method, check
-        // whether the current block size until that point is big enough to be kept
-        // or it should be removed from the final alignment
-        for (i = 0, pos = 0, block = 0; i < _alignment->residNumber; i++) {
-            if (newAlig->saveResidues[i] != -1)
-                block++;
-            else {
-                // Remove columns from blocks smaller than input blocks size
-                if (block < blockSize)
-                    for (j = pos; j <= i; j++)
-                        newAlig->saveResidues[j] = -1;
-                pos = i + 1;
-                block = 0;
-            }
-        }
-        // Check final block separately since it could happen than last block is not
-        // big enough but because the loop end could provoke to ignore it
-        if (block < blockSize)
-            for (j = pos; j < i; j++)
-                newAlig->saveResidues[j] = -1;
-    }
+    newAlig->Cleaning->removeSmallerBlocks(blockSize);
 
     // If the flag -terminalony is set, apply a method to look for internal
     // boundaries and get back columns inbetween them, if they exist
