@@ -239,7 +239,7 @@ newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(double cutGaps, const int
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary) ");
 
-    int i, j, k, ij, resCounter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
+    int i, j, k, jn, resCounter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
     newAlignment *newAlig = new newAlignment(*_alignment);
 
     for (i = 0, resCounter = 0; i < _alignment->originalResidNumber; i++)
@@ -265,120 +265,66 @@ newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(double cutGaps, const int
         blGaps = vectAuxGaps[(int) ((float) (_alignment->residNumber - 1) * (baseLine) / 100.0)];
         delete[] vectAuxGaps;
 
-    }
+        // Fixed the initial size of blocks as 0.5% of
+        // alignment's length
+        for (k = utils::roundInt(0.005 * _alignment->residNumber); (k >= 0) && (NumberOfResiduesToAchieveBaseLine > 0); k--) {
 
-    // Start with a blocksize (k) = 0.5% alignment size.
-    for (k = utils::roundInt(0.005 * newAlig->residNumber); (k >= 0) && (NumberOfResiduesToAchieveBaseLine > 0); k--) {
-        // Start at the middle. Go to both ends: i goes to the left, j goes to the right, ij as a helper for both sides.
-        for (i = (newAlig->originalResidNumber / 2), j = (i + 1); NumberOfResiduesToAchieveBaseLine > 0 && (i > 0 || j < newAlig->originalResidNumber - 1); i--, j++) {
-            // BEGIN Left side
-            // Check every column from current position (i) to the left until we found a residue to be deleted.
-            for (ij = i, resCounter = 0; NumberOfResiduesToAchieveBaseLine > 0 && ij > 0; ij--) {
-                // Don't use residues previously rejected.
-                if (_alignment->saveResidues[ij] == -1) continue;
-                // We need to have a counter to control blocksize
-                resCounter++;
-                // Iterate until finding one residue to recover.
-                if (newAlig->saveResidues[ij] != -1) {
-                    // If the block size is greater than the fixed size, k, we'll save all those columns.
-                    if (resCounter >= k) {
-                        // We'll keep expanding this side until:
-                        // a) It fuses the block with another saved column: newAlig -> saveResidues[ij] != -1
-                        // b) Reaches a column that is not going to be recovered: (MDK_Win[ij] < blCons) && (gInCol[ij] < blGaps)
-                        // c) Reaches the begin of the alignment: ij == -1
-                        // d) Recovers enought columns: NumberOfResiduesToAchieveBaseLine == 0
-                        //
-                        // We'll ignore residues that have been previously rejected: _alignment->saveResidues[ij] == -1
-                        for (; ij >= 0 && NumberOfResiduesToAchieveBaseLine > 0; ij--) {
-                            if (_alignment->saveResidues[ij] == -1) continue;
-                            if (newAlig->saveResidues[ij] != -1) break;
-                            if ((MDK_Win[ij] >= blCons) || (gInCol[ij] <= blGaps)) {
-                                newAlig->saveResidues[ij] = ij;
-                                NumberOfResiduesToAchieveBaseLine--;
-                            } else break;
-                        }
-                    }
-                    break;
-                }
-            }
-            // We want to continue from where we left it on the next iteration
-            i = ij;
-            // END Left side
+            // We start in the alignment middle then we move on
+            // right and left side at the same time.
+            for (i = (_alignment->residNumber / 2), j = (i + 1); (((i > 0) || (j < (_alignment->residNumber - 1))) && (NumberOfResiduesToAchieveBaseLine > 0)); i--, j++) {
 
+                // Left side. Here, we compute the block's size.
+                for (jn = i; ((newAlig->saveResidues[jn] != -1) && (jn >= 0) && (NumberOfResiduesToAchieveBaseLine > 0)); jn--);
 
-
-            // BEGIN Right side
-            // Check every column from current position (i) to the left until we found a residue to be deleted.
-            for (ij = j, resCounter = 0; NumberOfResiduesToAchieveBaseLine > 0 && ij < newAlig->originalResidNumber; ij++) {
-                // Don't use residues previously rejected.
-                if (_alignment->saveResidues[ij] == -1) continue;
-                // We need to have a counter to control blocksize
-                resCounter++;
-                // Iterate until finding one residue to recover.
-                if (newAlig->saveResidues[ij] != -1) {
-                    // If the block size is greater than the fixed size, k, we'll save all those columns.
-                    if (resCounter >= k) {
-                        // We'll keep expanding this side until:
-                        // a) It fuses the block with another saved column: newAlig -> saveResidues[ij] != -1
-                        // b) Reaches a column that is not going to be recovered: gInCol[ij] > cut
-                        // c) Reaches the begin of the alignment: ij == -1
-                        // d) Recovers enought columns: NumberOfResiduesToAchieveBaseLine == 0
-                        //
-                        // We'll ignore residues that have been previously rejected: _alignment->saveResidues[ij] == -1
-                        for (; ij < newAlig->originalResidNumber && NumberOfResiduesToAchieveBaseLine > 0; ij++) {
-                            if (_alignment->saveResidues[ij] == -1) continue;
-                            if (newAlig->saveResidues[ij] != -1) break;
-                            if ((MDK_Win[ij] >= blCons) || (gInCol[ij] <= blGaps)) {
-                                newAlig->saveResidues[ij] = ij;
-                                NumberOfResiduesToAchieveBaseLine--;
-                            } else break;
-                        }
-                    }
-                    break;
-                }
-            }
-            // We want to continue from where we left it on the next iteration
-            j = ij;
-            // END Right side
-        }
-    }
-
-    // Keep only columns blocks bigger than an input columns block size //
-    if (blockSize != 0) {
-
-        for (i = 0; i < newAlig->originalResidNumber; i++) {
-            // Forget about already rejected residues
-            if (_alignment->saveResidues[i] == -1) continue;
-
-
-            for (pos = i, resCounter = 0; i < newAlig->originalResidNumber; i++) {
-                if (_alignment->saveResidues[i] == -1) continue;
-                if (newAlig->saveResidues[i] != -1 && i < newAlig->originalResidNumber) {
-                    resCounter++;
-                } else if (resCounter < blockSize) {
-                    for (; pos <= i; pos++) {
-                        newAlig->saveResidues[i] = -1;
+                // if block's size is greater or equal than the fixed
+                // size then we save all columns that have not been
+                // saved previously.
+                if ((i - jn) >= k) {
+                    for (; ((newAlig->saveResidues[jn] == -1) && (jn >= 0) && (NumberOfResiduesToAchieveBaseLine > 0)); jn--) {
+                        if (MDK_Win[jn] >= blCons || gInCol[jn] <= blGaps) {
+                            newAlig->saveResidues[jn] = jn;
+                            NumberOfResiduesToAchieveBaseLine--;
+                        } else
+                            break;
                     }
                 }
+                i = jn;
+                // Right side. Here, we compute the block's size.
+                for (jn = j; ((newAlig->saveResidues[jn] != -1) && (jn < _alignment->residNumber) && (NumberOfResiduesToAchieveBaseLine > 0)); jn++);
+
+                // if block's size is greater or equal than the fixed
+                // size then we save all columns that have not been
+                // saved previously.
+                if ((jn - j) >= k) {
+                    for (; ((newAlig->saveResidues[jn] == -1) && (jn < _alignment->residNumber) && (NumberOfResiduesToAchieveBaseLine > 0)); jn++) {
+                        if (MDK_Win[jn] >= blCons || gInCol[jn] <= blGaps) {
+                            newAlig->saveResidues[jn] = jn;
+                            NumberOfResiduesToAchieveBaseLine--;
+                        } else
+                            break;
+                    }
+                }
+                j = jn;
             }
         }
     }
+
+
+    newAlig->Cleaning->removeSmallerBlocks(blockSize);
 
     // If the flag -terminalony is set, apply a method to look for internal
     // boundaries and get back columns inbetween them, if they exist 
-    if (terminalGapOnly == true)
-        if (!newAlig->Cleaning->removeOnlyTerminal())
+    if (terminalGapOnly && !newAlig->Cleaning->removeOnlyTerminal())
             return NULL;
 
     // Once the columns/sequences selection is done, turn it around
     // if complementary flag is active 
-    if (complementary == true)
+    if (complementary)
         newAlig->Cleaning->computeComplementaryAlig(true, false);
 
     // Check for any additional column/sequence to be removed
     // Compute new sequences and columns numbers 
-    newAlig->Cleaning->removeAllGapsSeqsAndCols();
-    newAlig->updateSequencesAndResiduesNums();
+    newAlig->Cleaning->removeAllGapsSeqsAndCols(true, true);
     return newAlig;
 }
 
