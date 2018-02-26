@@ -34,36 +34,20 @@
 #include <iostream>
 #include <memory>
 
-#include <time.h>
+#include <ctime>
 
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstring>
+#include <cstdlib>
+#include <cmath>
 
-#include "statisticsGaps.h"
 #include "sequencesMatrix.h"
-#include "statisticsConservation2.h"
 #include "similarityMatrix.h"
 #include "utils.h"
 
-#ifndef ALIGNMENT_H
-
-#define SINGLE  1
-#define MULTI   2
-
-// struct newValues {
-//   int residues = 0;
-//   int sequences = 0;
-//   string *matrix = NULL;
-//   string *seqsName = NULL;
-// };
-
-#endif
-
-using namespace std;
-
 #include "Cleaner.h"
-#include "StatisticsManager.h"
+
+#include "../include/Statistics/StatisticsManager.h"
+using namespace std;
 
 
 class newAlignment {

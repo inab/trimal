@@ -3,7 +3,7 @@
 // Created by bioinfo on 5/06/17.
 //
 
-#include "../include/StatisticsManager.h"
+#include "../include/Statistics/StatisticsManager.h"
 #include "../include/newAlignment.h"
 #include "../include/Cleaner.h"
 

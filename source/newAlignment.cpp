@@ -32,12 +32,11 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 using namespace std;
 
-#include <float.h>
+#include <cfloat>
 #include "../include/newAlignment.h"
 #include "../include/Cleaner.h"
-#include "../include/StatisticsManager.h"
 #include <errno.h>
-#include <ctype.h>
+#include <cctype>
 #include <string>
 #include "../include/values.h"
 #include "../include/defines.h"

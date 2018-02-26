@@ -63,9 +63,8 @@ int main(int argc, char *argv[]) {
 
         // Perform the required actions
         returnValue = trimAl.perform();
-
     }
+
     // Return the exit code
     return returnValue;
-
 }

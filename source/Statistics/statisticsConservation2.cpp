@@ -25,10 +25,10 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "../include/statisticsConservation2.h"
-#include "../include/defines.h"
-#include "../include/newAlignment.h"
-#include "../include/reportsystem.h"
+#include "../include/Statistics/statisticsConservation2.h"
+#include "defines.h"
+#include "newAlignment.h"
+#include "reportsystem.h"
 #include <sstream>
 
 statisticsConservation2::statisticsConservation2(newAlignment *parentAlignment) {

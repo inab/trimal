@@ -10,7 +10,7 @@
 #include "../include/defines.h"
 #include "../include/values.h"
 #include "../include/reportsystem.h"
-#include "../include/statisticsConservation2.h"
+#include "../include/Statistics/statisticsConservation2.h"
 
 #include "../include/ReadWriteMS/vcf_statish.h"
 
@@ -127,6 +127,7 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
     if (infile == NULL && compareVect == NULL)
     {
         debug.report(ErrorCode::NoInputFile);
+        delete_variables();
         exit(0);
     }
 }

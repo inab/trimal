@@ -6,7 +6,7 @@
 #include "../include/values.h"
 
 #include "../include/Cleaner.h"
-#include "../include/StatisticsManager.h"
+#include "../include/Statistics/StatisticsManager.h"
 #include "../include/newAlignment.h"
 #include "../include/defines.h"
 

@@ -12,25 +12,30 @@ set(CMAKE_CXX_STANDARD 11)
 # Make bin folder to output the compiled programs
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
-ADD_DEFINITIONS(-O0 )
+ADD_DEFINITIONS(-O3)
 
 # Include the include folder. Yeah. I love redudancy
 include_directories(include)
 
 # Include all the cpp that are needed on our project
 set(preview
-        source/statisticsGaps.cpp
-        source/utils.cpp
+        source/trimalArgumentParser.cpp
+        source/newAlignment.cpp
+
+        source/Statistics/statisticsGaps.cpp
+        source/Statistics/StatisticsManager.cpp
+        source/Statistics/statisticsConservation2.cpp
+
+        source/Cleaner.cpp
+        source/ReadWriteMS/ReadWriteMachineState.cpp
+
         source/similarityMatrix.cpp
         source/sequencesMatrix.cpp
+
+        source/utils.cpp
         source/compareFiles.cpp
-        source/newAlignment.cpp
-        source/Cleaner.cpp
-        source/StatisticsManager.cpp
-        source/trimalArgumentParser.cpp
-        source/ReadWriteMS/ReadWriteMachineState.cpp
+
         source/reportsystem.cpp
-        source/statisticsConservation2.cpp
         source/TimerFactory.cpp
         )
 
