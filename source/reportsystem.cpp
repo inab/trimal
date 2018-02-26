@@ -311,6 +311,9 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
                 {ErrorCode::SNPoutOfBounds,
                         "SNP at positon \"[tag]\" in file \"[tag]\" cannot be applied as sequence has a length of \"[tag]\""
 
+                },
+                {ErrorCode::NoInputFile,
+                        "An MSA input file has to be provided"
                 }
         };
 

@@ -33,25 +33,39 @@
 
 int main(int argc, char *argv[]) {
 
-    SetTimingOfstream("./timingReport2.txt");
+#if TimingReport
+    // We have to check the output parameter of the timerFactory
+    //  before it's called the first time, AKA main function timer
+    timerFactory.checkOutputParameter(argc, argv);
+#endif
+
+    // This is to prevent debug calls.
+    // They will be silenced to the final user
+    //  although they appear in code.
+    debug.IsDebug = true;
+
+    // We store the return value before returning if as program exit code
+    //  to allow the main function timer to be deleted.
     int returnValue;
     {
         // Create a timer that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("int main(int argc, char *argv[]) ");
 
-        // This prevents calls to "debug << "
-        debug.IsDebug = true;
+        // We create the trimAl Manager
+        trimAlManager trimAl;
 
-        trimAlManager trimAl = trimAlManager();
-
+        // Feed the arguments
         trimAl.parseArguments(argc, argv);
 
+        // Process them: Incompatibilities and co-dependencies
         trimAl.processArguments(argv);
 
+        // Perform the required actions
         returnValue = trimAl.perform();
 
     }
+    // Return the exit code
     return returnValue;
 
 }

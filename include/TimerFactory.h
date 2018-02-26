@@ -8,7 +8,7 @@
 //#define TimingReport true
 
 #define BenchmarkTimes true
-#define BenchmarkMemory true
+#define BenchmarkMemory false
 
 #define TimingReport BenchmarkTimes || BenchmarkMemory
 
@@ -23,11 +23,12 @@
 #include <map>
 #include <vector>
 #include <fstream>
+#include <cstring>
 
 class TimerFactory;
 
 class Timer {
-    friend TimerFactory;
+    friend class TimerFactory;
 
 #if BenchmarkTimes
     /// Creation timestamp
@@ -54,12 +55,13 @@ public:
     TimerFactory* timerFactory;
     /// Destructor
     ~Timer();
+
 };
 
 
 
 class TimerFactory {
-    friend Timer;
+    friend class Timer;
 public:
     /// Class Destructor
     ~TimerFactory();
@@ -68,7 +70,7 @@ public:
 
 #if BenchmarkTimes
     /// Class constructor
-    TimerFactory(std::string outFilename)
+    explicit TimerFactory(const std::string &outFilename)
             : lastTimer(""), accTimer(0),
               wholeStats(std::map<std::string, std::chrono::milliseconds>()),
               wholeUniqueStats(std::map<std::string, std::chrono::milliseconds>()),
@@ -82,13 +84,16 @@ public:
     };
 #endif
 
-    void SetOutput(std::string _filename)
+    void SetOutput(const std::string &_filename)
     {
         delete out;
         out = new std::ofstream(_filename);
     }
     /// Method to stop tracking and report
     void reportTotal();
+
+
+    bool checkOutputParameter(int argc, char **argv);
 
 private:
     /// Timer Level

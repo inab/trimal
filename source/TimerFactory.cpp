@@ -64,11 +64,11 @@ void TimerFactory::reportTotal() {
 
             // Titles
             << "\n"
-            << " |" << std::setw(maxSize - 5) << "Key " << " | "
-            << " |" << std::setw(21) << "Duration " << " | "
-            << " |" << std::setw(21) << "Rel Duration " << " | "
-            << " |" << std::setw(21) << "Total Duration " << " | "
-            << " |" << std::setw(21) << "Rel Total Duration " << " | "
+            << " │" << std::setw(maxSize - 5) << "Key " << " │ "
+            << " │" << std::setw(21) << "Duration " << " │ "
+            << " │" << std::setw(21) << "Rel Duration " << " │ "
+            << " │" << std::setw(21) << "Total Duration " << " │ "
+            << " │" << std::setw(21) << "Rel Total Duration " << " │ "
             << "\n"
 
             // Titles separators
@@ -106,11 +106,6 @@ void TimerFactory::reportTotal() {
 
 TimerFactory::~TimerFactory() {
 
-    if (!_pool.empty()) {
-        delete _pool.back();
-    }
-
-
     // Output the chart
     reportTotal();
     // Delete the out pointer in case it's not a global one (cout, cerr, clog)
@@ -119,12 +114,28 @@ TimerFactory::~TimerFactory() {
         out->rdbuf() != std::clog.rdbuf())
         delete out;
 }
+
+bool TimerFactory::checkOutputParameter(int argc, char **argv) {
+    for (int i = 1; i < argc; i++) {
+        if ((!strcmp(argv[i], "-timetrackerout")) && ((i) + 1 != argc)) {
+            size_t argumentLength = strlen(argv[++i]);
+            char * out = new char[argumentLength + 1];
+            strcpy(out, argv[i]);
+            this->SetOutput(out);
+            std::cout << "Time Tracker Output changed to " << out << std::endl;
+            delete [] out;
+            return true;
+        }
+    }
+    this->SetOutput("/dev/null");
+    return false;
+}
 //endregion
 
 //region Timer
 
-std::string Timer::separator = std::string("|");
-std::string Timer::spacer = std::string("  ");
+std::string Timer::separator = std::string("│"); // NOLINT
+std::string Timer::spacer = std::string("  "); // NOLINT
 
 
 Timer::Timer(std::string name, TimerFactory *timerFactory) :
@@ -151,11 +162,16 @@ Timer::Timer(std::string name, TimerFactory *timerFactory) :
         // We add a new line
         *timerFactory->out << "\n";
         // And output the tree form
-        for (int i = 0; i < timerFactory->timer - 1; i++) {
+        int i = 0;
+        for (i = 0; i < timerFactory->timer - 1; i++) {
             *timerFactory->out << spacer << separator;
         }
+
+        if (timerFactory->timer == 1)
+            *timerFactory->out << spacer << "┌──┬─> ";
+        else
+            *timerFactory->out << spacer << "├──┬─> ";
         // We output the numbered ID
-        *timerFactory->out << spacer << separator << "----> ";
         for (Timer *timer : timerFactory->_pool) {
             *timerFactory->out << timer->childCount << ".";
         }
@@ -181,7 +197,7 @@ Timer::~Timer() {
         // Increase the counter of times we've called the same timer in different calls
         timerFactory->accTimerCount += 1;
 #if BenchmarkTimes
-        // Increase the counter of time ellapsed within the same timer in different calls
+        // Increase the counter of time elapsed within the same timer in different calls
         timerFactory->accTimer += duration;
 #endif
         // Move the position to the cursorPos, to remove the last call.
@@ -191,7 +207,7 @@ Timer::~Timer() {
         for (int i = 0; i < timerFactory->timer; i++) *timerFactory->out << spacer << separator;
         // Output the timing info: Name, Repetitions, Average and Accumulative.
         *timerFactory->out << spacer
-                           << "'~ " << name
+                           << "└─>" //<< name
                            << " Repetitions: " << timerFactory->accTimerCount
                            #if BenchmarkTimes
                            << " Average: " << (timerFactory->accTimer.count() / timerFactory->accTimerCount) << "ms."
@@ -221,22 +237,20 @@ Timer::~Timer() {
         for (int i = 0; i < timerFactory->timer; i++) *timerFactory->out << spacer << separator;
         // Output the timing info: Name, Duration, Accumulative
         *timerFactory->out << spacer
-                           << "'~ " << name
-                           #if BenchmarkTimes
-                           << " Duration: " << (duration - siblings_duration).count() << " ms."
-                           << " Acc: " << duration.count() << " ms."
-                           #endif
-                           #if BenchmarkMemory
-                           << " VmRSS: " << currentMemoryUsage() << " kb";
-#else
-        ;
+                << "└─>" //<< name
+               #if BenchmarkTimes
+               << " Duration: " << (duration - siblings_duration).count() << " ms."
+               << " Acc: " << duration.count() << " ms."
+               #endif
+               #if BenchmarkMemory
+               << " VmRSS: " << currentMemoryUsage() << " kb"
 #endif
+                                                              ;
         // Output a new line
         *timerFactory->out << "\n";
         // Output the tree separators
         for (int i = 0; i < timerFactory->timer; i++) *timerFactory->out << spacer << separator;
     }
-
     // Remove the current pointer from que queue.
     timerFactory->_pool.pop_back();
 #if BenchmarkTimes
@@ -257,13 +271,10 @@ Timer::~Timer() {
     // Increase the total duration of the program.
     timerFactory->total += (duration - siblings_duration);
 #endif
-
 }
 
 #if BenchmarkMemory
-
 int Timer::currentMemoryUsage() {
-    static std::streampos VmRSScursor = -1;
     std::ifstream proc_status_fhandle("/proc/self/status");
     std::string s;
     int line = 0;
@@ -274,9 +285,8 @@ int Timer::currentMemoryUsage() {
             return value;
         }
     }
-
+    return -1;
 }
-
 #endif
 //endregion
 

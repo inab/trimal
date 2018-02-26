@@ -24,163 +24,165 @@ enum VerboseLevel {
 
 enum ErrorCode {
 
-    AlignmentNotLoaded                          = 1,
+    AlignmentNotLoaded                                  = 1,
 
-    NoFormatsSpecified                          = 2,
+    NoFormatsSpecified                                  = 2,
 
-    AlternativeMatrixNotRecognized              = 3,
+    AlternativeMatrixNotRecognized                      = 3,
 
-    ReferenceFileNotLoaded                      = 4,
+    ReferenceFileNotLoaded                              = 4,
 
-    GapThresholdOutOfRange                      = 5,
-    GapThresholdNotRecognized                   = 6,
+    GapThresholdOutOfRange                              = 5,
+    GapThresholdNotRecognized                           = 6,
 
-    SimilarityThresholdOutOfRange               = 7,
-    SimilarityThresholdNotRecognized            = 8,
+    SimilarityThresholdOutOfRange                       = 7,
+    SimilarityThresholdNotRecognized                    = 8,
 
-    ConsistencyThresholdOutOfRange              = 9,
-    ConsistencyThresholdNotRecognized           = 10,
+    ConsistencyThresholdOutOfRange                      = 9,
+    ConsistencyThresholdNotRecognized                   = 10,
 
-    ConservationThresholdOutOfRange             = 11,
-    ConservationThresholdNotRecognized          = 12,
+    ConservationThresholdOutOfRange                     = 11,
+    ConservationThresholdNotRecognized                  = 12,
 
-    ResidueOverlapOutOfRange                    = 13,
-    ResidueOverlapNotRecognized                 = 14,
+    ResidueOverlapOutOfRange                            = 13,
+    ResidueOverlapNotRecognized                         = 14,
 
-    SequencesOverlapOutOfRange                  = 15,
-    SequencesOverlapNotRecognized               = 16,
+    SequencesOverlapOutOfRange                          = 15,
+    SequencesOverlapNotRecognized                       = 16,
 
-    MaxIdentityOutOfRange                       = 17,
-    MaxIdentityNotRecognized                    = 18,
+    MaxIdentityOutOfRange                               = 17,
+    MaxIdentityNotRecognized                            = 18,
 
-    ClustersValueOutOfRange                     = 19,
-    ClustersValueNotRecognized                  = 20,
+    ClustersValueOutOfRange                             = 19,
+    ClustersValueNotRecognized                          = 20,
 
-    WindowValueOutOfRange                       = 21,
-    WindowValueNotRecognized                    = 22,
+    WindowValueOutOfRange                               = 21,
+    WindowValueNotRecognized                            = 22,
 
-    SelectSeqsNotRecognized                     = 23,
-    SelectColsNotRecognized                     = 24,
+    SelectSeqsNotRecognized                             = 23,
+    SelectColsNotRecognized                             = 24,
 
-    GapWindowValueOutOfRange                    = 25,
-    GapWindowValueNotRecognized                 = 26,
+    GapWindowValueOutOfRange                            = 25,
+    GapWindowValueNotRecognized                         = 26,
 
-    SimilarityWindowValueOutOfRange             = 27,
-    SimilarityWindowValueNotRecognized          = 28,
+    SimilarityWindowValueOutOfRange                     = 27,
+    SimilarityWindowValueNotRecognized                  = 28,
 
-    ConsistencyWindowValueOutOfRange            = 27,
-    ConsistencyWindowValueNotRecognized         = 28,
+    ConsistencyWindowValueOutOfRange                    = 27,
+    ConsistencyWindowValueNotRecognized                 = 28,
 
-    BlockSizeOutOfRange                         = 29,
-    BlockSizeNotRecognized                      = 30,
+    BlockSizeOutOfRange                                 = 29,
+    BlockSizeNotRecognized                              = 30,
 
-    InFileComparisonStatistics                  = 31,
+    InFileComparisonStatistics                          = 31,
 
-    IncompatibleArguments                       = 32,
+    IncompatibleArguments                               = 32,
 
-    SelectSeqsResAndThresholdIncompatibilities  = 33,
+    SelectSeqsResAndThresholdIncompatibilities          = 33,
     SelectSeqsResAndAutomathedMethodsIncompatibilities  = 34,
-    SelectSeqsResAndWindowIncompatibilities     = 35,
-    SelectSeqsResAndOverlapIncompatibilites     = 36,
+    SelectSeqsResAndWindowIncompatibilities             = 35,
+    SelectSeqsResAndOverlapIncompatibilites             = 36,
 
-    OnlyOneSequencesSelectionMethodAllowed      = 37,
+    OnlyOneSequencesSelectionMethodAllowed              = 37,
 
-    CombinationAmongTrimmingMethods             = 38,
-    AutomathicMethodAndBlock                    = 39,
+    CombinationAmongTrimmingMethods                     = 38,
+    AutomathicMethodAndBlock                            = 39,
 
-    WindowAndArgumentIncompatibilities          = 40,
-    CombinationAmongThresholdsMethods           = 41,
-    GeneralAndSpecificWindows                   = 42,
-    StatisticsArgumentIncompatibilities         = 43,
+    WindowAndArgumentIncompatibilities                  = 40,
+    CombinationAmongThresholdsMethods                   = 41,
+    GeneralAndSpecificWindows                           = 42,
+    StatisticsArgumentIncompatibilities                 = 43,
 
-    TrimmingMethodNeeded                        = 44,
-    ForceFileWithoutCompareDataset              = 45,
+    TrimmingMethodNeeded                                = 44,
+    ForceFileWithoutCompareDataset                      = 45,
 
-    BacktranslationWithoutMainAlignment         = 46,
+    BacktranslationWithoutMainAlignment                 = 46,
 
-    NotAligned                                  = 47,
+    NotAligned                                          = 47,
 
-    MatrixGivenWithNoMethodToUseIt              = 48,
+    MatrixGivenWithNoMethodToUseIt                      = 48,
 
-    SameNameOutput                              = 49,
+    SameNameOutput                                      = 49,
 
-    SequenceAndResiduesOverlapMutuallyNeeded    = 50,
+    SequenceAndResiduesOverlapMutuallyNeeded            = 50,
 
-    OutFileNeededWhenPrintingStatistics         = 51,
+    OutFileNeededWhenPrintingStatistics                 = 51,
 
-    AlignmentTypesNotMatching                   = 52,
+    AlignmentTypesNotMatching                           = 52,
 
-    BlocksizeTooBig                             = 53,
+    BlocksizeTooBig                                     = 53,
 
-    ParemeterOnlyOnBacktranslation              = 54,
+    ParemeterOnlyOnBacktranslation                      = 54,
 
-    ProteinAlignmentMustBeAligned               = 55,
+    ProteinAlignmentMustBeAligned                       = 55,
 
-    BacktransAlignIsDNA                         = 56,
+    BacktransAlignIsDNA                                 = 56,
 
 
 
-    ImpossibleToGenerate                        = 57,
+    ImpossibleToGenerate                                = 57,
 
-    ImpossibleToProcessMatrix                   = 58,
+    ImpossibleToProcessMatrix                           = 58,
 
-    SelectOnlyAccepts                           = 59,
+    SelectOnlyAccepts                                   = 59,
 
-    MoreClustersThanSequences                   = 60,
+    MoreClustersThanSequences                           = 60,
 
-    LeftBoundaryBiggerThanRightBoundary         = 61,
+    LeftBoundaryBiggerThanRightBoundary                 = 61,
 
-    DifferentNumberOfSequencesInCompareset      = 62,
+    DifferentNumberOfSequencesInCompareset              = 62,
 
-    DifferentSeqsNamesInCompareset              = 63,
+    DifferentSeqsNamesInCompareset                      = 63,
 
-    CDScontainsProteinSequences                 = 64,
+    CDScontainsProteinSequences                         = 64,
 
-    SequenceContainsGap                         = 65,
+    SequenceContainsGap                                 = 65,
 
-    SequenceNotMultipleOfThree                  = 66,
+    SequenceNotMultipleOfThree                          = 66,
 
-    SequenceHasStopCodon                        = 67,
+    SequenceHasStopCodon                                = 67,
 
-    SequenceNotPresentInCDS                     = 68,
+    SequenceNotPresentInCDS                             = 68,
 
-    UnknownCharacter                            = 69,
+    UnknownCharacter                                    = 69,
 
-    SequencesNotSameSize                        = 70,
+    SequencesNotSameSize                                = 70,
 
-    IncorrectSymbol                             = 71,
+    IncorrectSymbol                                     = 71,
 
-    UndefinedSymbol                             = 72,
+    UndefinedSymbol                                     = 72,
 
-    ParameterNotFoundOrRepeated                 = 73,
+    ParameterNotFoundOrRepeated                         = 73,
 
-    SimilarityMatrixNotCompatibleWindow         = 74,
+    SimilarityMatrixNotCompatibleWindow                 = 74,
 
-    PossibleMissmatch                           = 75,
+    PossibleMissmatch                                   = 75,
 
-    BracketsMissmatchFound                      = 76,
+    BracketsMissmatchFound                              = 76,
 
-    UnalignedAlignmentToAlignedFormat           = 77,
+    UnalignedAlignmentToAlignedFormat                   = 77,
     
-    CantOpenFile                                = 78,
+    CantOpenFile                                        = 78,
     
-    FileIsEmpty                                 = 79,
+    FileIsEmpty                                         = 79,
     
-    AlignmentFormatNotRecognized                = 80,
+    AlignmentFormatNotRecognized                        = 80,
     
-    OutputFormatNotRecognized                   = 81,
+    OutputFormatNotRecognized                           = 81,
     
-    OnlyOneFormatOnConsoleOutput                = 82,
+    OnlyOneFormatOnConsoleOutput                        = 82,
     
-    AlignmentNotSaved                           = 83,
+    AlignmentNotSaved                                   = 83,
     
-    VerboseLevelNotRecognized                   = 84,
+    VerboseLevelNotRecognized                           = 84,
     
-    NeedToSpecifyVerboseLevel                   = 85,
+    NeedToSpecifyVerboseLevel                           = 85,
     
-    NoReferenceSequenceForContig                = 86,
+    NoReferenceSequenceForContig                        = 86,
     
-    SNPoutOfBounds                              = 87,
+    SNPoutOfBounds                                      = 87,
+
+    NoInputFile                                         = 88,
 
     __MAXERROR
 
