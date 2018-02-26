@@ -79,9 +79,9 @@ public:
 
     sequencesMatrix * SequencesMatrix = NULL;
 
-    statisticsGaps * sgaps = NULL;
+//    statisticsGaps * sgaps = NULL;
 
-    statisticsConservation2 * scons = NULL;
+//    statisticsConservation2 * scons = NULL;
     
     int * SeqRef = NULL;
     
@@ -112,7 +112,6 @@ public:
     float **overlaps = NULL;
 
     /* New Info */
-//     int *residuesNumber;
     int *saveResidues = NULL;
     int *saveSequences = NULL;
 

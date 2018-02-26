@@ -5,11 +5,16 @@
 #ifndef TRIMAL_STATISTICSMANAGER_H
 #define TRIMAL_STATISTICSMANAGER_H
 #include "../include/similarityMatrix.h"
+#include "../include/statisticsGaps.h"
+#include "../include/statisticsConservation2.h"
 
 class newAlignment;
 /// \brief Class to handle the interaction with statistics and statistics objects.
 class StatisticsManager {
 public:
+
+    statisticsGaps * gaps = NULL;
+    statisticsConservation2 * conservation = NULL;
 
     int ghWindow;
     int shWindow;
@@ -42,6 +47,8 @@ private:
     StatisticsManager(newAlignment* parent);
 
     StatisticsManager(newAlignment* parent, StatisticsManager* mold);
+
+    ~StatisticsManager();
 };
 
 

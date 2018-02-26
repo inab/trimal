@@ -1538,13 +1538,13 @@ inline void trimAlManager::print_statistics() {
             linename = "gaps";
             utils::streamSVG(&x, &y, 0, &linename, &color, NULL, NULL);
 
-            for (i = 0, acm = 0; i <= origAlig->sgaps->maxGaps; i++) {
+            for (i = 0, acm = 0; i <= origAlig->Statistics->gaps->maxGaps; i++) {
                 // If the columns' number with this gaps' number is not equal to zero, we will count the columns. 
-                if (origAlig->sgaps->numColumnsWithGaps[i] != 0) {
+                if (origAlig->Statistics->gaps->numColumnsWithGaps[i] != 0) {
                     // Compute and prints the accumulative values for the gaps in the alignment. 
-                    acm += origAlig->sgaps->numColumnsWithGaps[i];
-                    x = acm / origAlig->sgaps->residNumber;
-                    y = 1.F - ((i * 1.0F) / origAlig->sgaps->sequenNumber);
+                    acm += origAlig->Statistics->gaps->numColumnsWithGaps[i];
+                    x = acm / origAlig->Statistics->gaps->residNumber;
+                    y = 1.F - ((i * 1.0F) / origAlig->Statistics->gaps->sequenNumber);
                     utils::streamSVG(&x, &y, 0, &linename, &color, NULL, NULL);
                 }
             }
@@ -1560,29 +1560,29 @@ inline void trimAlManager::print_statistics() {
             int i, num, acm;
 
             // Allocate memory 
-            vectAux = new float[origAlig->scons->residues];
+            vectAux = new float[origAlig->Statistics->conservation->residues];
 
             // Select the conservation's value source and copy that vector in a auxiliar vector 
-            if (origAlig->scons->MDK_Window != NULL)
-                utils::copyVect(origAlig->scons->MDK_Window, vectAux, origAlig->scons->residues);
+            if (origAlig->Statistics->conservation->MDK_Window != NULL)
+                utils::copyVect(origAlig->Statistics->conservation->MDK_Window, vectAux, origAlig->Statistics->conservation->residues);
             else
-                utils::copyVect(origAlig->scons->MDK, vectAux, origAlig->scons->residues);
+                utils::copyVect(origAlig->Statistics->conservation->MDK, vectAux, origAlig->Statistics->conservation->residues);
 
             // Sort the auxiliar vector. 
-            utils::quicksort(vectAux, 0, origAlig->scons->residues - 1);
+            utils::quicksort(vectAux, 0, origAlig->Statistics->conservation->residues - 1);
 
             // Initializate some values 
-            refer = vectAux[origAlig->scons->residues - 1];
+            refer = vectAux[origAlig->Statistics->conservation->residues - 1];
             acm = 0;
             num = 1;
 
             // Count the columns with the same conservation's value and compute this information to shows the accunulative
             // statistics in the alignment. 
-            for (i = origAlig->scons->residues - 2; i >= 0; i--) {
+            for (i = origAlig->Statistics->conservation->residues - 2; i >= 0; i--) {
                 acm++;
 
                 if (refer != vectAux[i]) {
-                    x = ((float) acm / origAlig->scons->residues);
+                    x = ((float) acm / origAlig->Statistics->conservation->residues);
                     y = refer;
                     utils::streamSVG(&x, &y, 0, &linename, &color, NULL, NULL);
                     refer = vectAux[i];
@@ -1590,7 +1590,7 @@ inline void trimAlManager::print_statistics() {
                 } else num++;
             }
             acm++;
-            x = ((float) acm / origAlig->scons->residues);
+            x = ((float) acm / origAlig->Statistics->conservation->residues);
             y = refer;
             utils::streamSVG(&x, &y, 0, &linename, &color, NULL, NULL);
 

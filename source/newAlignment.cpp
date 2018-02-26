@@ -78,8 +78,8 @@ newAlignment::newAlignment(void) {
     seqsInfo = NULL;
 
     // Information computed from newAlignment
-    sgaps = NULL;
-    scons = NULL;
+//    sgaps = NULL;
+//    scons = NULL;
     SequencesMatrix = NULL;
     identities = NULL;
 
@@ -119,9 +119,9 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
 
         identities = NULL;
 
-        sgaps = NULL;
+//        sgaps = NULL;
 
-        scons = NULL;
+//        scons = NULL;
 
         SequencesMatrix = NULL;
 
@@ -156,13 +156,13 @@ newAlignment::~newAlignment(void) {
     }
     identities = NULL;
 
-    if (sgaps != NULL)
-        delete sgaps;
-    sgaps = NULL;
+//    if (sgaps != NULL)
+//        delete sgaps;
+//    sgaps = NULL;
 
-    if (scons != NULL)
-        delete scons;
-    scons = NULL;
+//    if (scons != NULL)
+//        delete scons;
+//    scons = NULL;
 
     if (SequencesMatrix != NULL)
         delete SequencesMatrix;
@@ -1181,11 +1181,11 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
 
     // Recover some stats about different scores from current alignment
     gapsValues = NULL;
-    if (sgaps != NULL)
-        gapsValues = sgaps->getGapsWindow();
+    if (Statistics->gaps != NULL)
+        gapsValues = Statistics->gaps->getGapsWindow();
     simValues = NULL;
-    if (scons != NULL)
-        simValues = scons->getMdkwVector();
+    if (Statistics->conservation != NULL)
+        simValues = Statistics->conservation->getMdkwVector();
 
     // Print HTML header into output file
     file << "<!DOCTYPE html>" << endl << "<html><head>" << endl << "    <meta "
@@ -1411,12 +1411,12 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
 
     // BEGIN Init variables
     int *gapsValues = NULL;
-    if (sgaps != NULL)
-        gapsValues = sgaps->getGapsWindow();
+    if (Statistics->gaps != NULL)
+        gapsValues = Statistics->gaps->getGapsWindow();
 
     float *simValues = NULL;
-    if (scons != NULL)
-        simValues = scons->getMdkwVector();
+    if (Statistics->conservation != NULL)
+        simValues = Statistics->conservation->getMdkwVector();
 
     // Check if alignment is aligned;
     if (!isAligned) {

@@ -580,12 +580,12 @@ newAlignment *Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementa
         return NULL;
 
     // Obtain the cut point using the given parameters
-    cut = _alignment->sgaps->calcCutPoint(baseLine, gapsPct);
+    cut = _alignment->Statistics->gaps->calcCutPoint(baseLine, gapsPct);
 
     // Once we have the cut value proposed, we call the
     // appropiate method to clean the newAlignment and, then,
     // generate the new newAlignment.
-    ret = cleanByCutValueOverpass(cut, baseLine, _alignment->sgaps->getGapsWindow(), complementary);
+    ret = cleanByCutValueOverpass(cut, baseLine, _alignment->Statistics->gaps->getGapsWindow(), complementary);
 
     // Return a reference of the new newAlignment
     return ret;
@@ -605,12 +605,12 @@ newAlignment *Cleaner::cleanConservation(float baseLine, float conservationPct, 
     if (_alignment->Statistics->calculateConservationStats() != true)
         return NULL;
     // Calculate the cut point using the given parameters
-    cut = (float) _alignment->scons->calcCutPoint(baseLine, conservationPct);
+    cut = (float) _alignment->Statistics->conservation->calcCutPoint(baseLine, conservationPct);
 
     // Once we have the cut value, we call the appropiate
     // method to clean the newAlignment and, then, generate
     // the new newAlignment
-    ret = cleanByCutValueFallBehind(cut, baseLine, _alignment->scons->getMdkwVector(), complementary);
+    ret = cleanByCutValueFallBehind(cut, baseLine, _alignment->Statistics->conservation->getMdkwVector(), complementary);
     // Return a reference of the new newAlignment
     return ret;
 
@@ -636,13 +636,18 @@ newAlignment *Cleaner::clean(float baseLine, float GapsPct, float conservationPc
         return NULL;
 
     // Calculate the two cut points using the parameters
-    cutGaps = _alignment->sgaps->calcCutPoint(baseLine, GapsPct);
-    cutCons = _alignment->scons->calcCutPoint(baseLine, conservationPct);
+    cutGaps = _alignment->Statistics->gaps->calcCutPoint(baseLine, GapsPct);
+    cutCons = _alignment->Statistics->conservation->calcCutPoint(baseLine, conservationPct);
 
     // Clean the alingment using the two cut values, the
     // gapsWindow and MDK_Windows vectors and the baseline
     // value
-    ret = cleanByCutValueOverpassOrEquals(cutGaps, _alignment->sgaps->getGapsWindow(), baseLine, cutCons, _alignment->scons->getMdkwVector(), complementary);
+    ret = cleanByCutValueOverpassOrEquals(cutGaps,
+                                          _alignment->Statistics->gaps->getGapsWindow(),
+                                          baseLine,
+                                          cutCons,
+                                          _alignment->Statistics->conservation->getMdkwVector(),
+                                          complementary);
     // Return a reference of the clean newAlignment object
     return ret;
 }
@@ -791,10 +796,10 @@ newAlignment *Cleaner::clean2ndSlope(bool complementarity) {
         return NULL;
 
     // We get the cut point using a automatic method for this purpose.
-    cut = _alignment->sgaps->calcCutPoint2ndSlope();
+    cut = _alignment->Statistics->gaps->calcCutPoint2ndSlope();
 
     // Using the cut point calculates in last steps, weclean the newAlignment and generate a new Alignment
-    ret = cleanByCutValueOverpass(cut, 0, _alignment->sgaps->getGapsWindow(), complementarity);
+    ret = cleanByCutValueOverpass(cut, 0, _alignment->Statistics->gaps->getGapsWindow(), complementarity);
 
     // Returns the new newAlignment.
     return ret;
@@ -814,8 +819,8 @@ newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
         return NULL;
 
     // Computes the gap cut point using a automatic method and at the same time, we get the gaps values from the newAlignment.
-    gapCut = _alignment->sgaps->calcCutPoint2ndSlope();
-    gaps = _alignment->sgaps->getGapsWindow();
+    gapCut = _alignment->Statistics->gaps->calcCutPoint2ndSlope();
+    gaps = _alignment->Statistics->gaps->getGapsWindow();
 
     // If conservation's statistics are not calculated, we calculate them
     if (_alignment->Statistics->calculateConservationStats() != true)
@@ -824,7 +829,7 @@ newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
     /* Computes the conservations value for each column in the newAlignment. At the same time, the method get the vector with those values. */
 //    _alignment->scons -> calculateVectors(/*_alignment->sequences,*/ _alignment->sgaps -> getGapsWindow());
 
-    simil = _alignment->scons->getMdkwVector();
+    simil = _alignment->Statistics->conservation->getMdkwVector();
 
     // Allocate local memory and initializate it to -1
     positions = new int[_alignment->originalResidNumber];
@@ -864,8 +869,8 @@ newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
     simCut = (float) pow(10, vlr);
 
     // Clean the newAlignment and generate a new newAlignment object using the gaps cut and the similaritys cut values
-    newAlignment *ret = cleanStrict(gapCut, _alignment->sgaps->getGapsWindow(),
-                                    simCut, _alignment->scons->getMdkwVector(),
+    newAlignment *ret = cleanStrict(gapCut, _alignment->Statistics->gaps->getGapsWindow(),
+                                    simCut, _alignment->Statistics->conservation->getMdkwVector(),
                                     complementarity, variable);
 
     // Deallocate local memory
@@ -888,7 +893,7 @@ newAlignment *Cleaner::cleanNoAllGaps(bool complementarity) {
         return NULL;
 
     // We want to conserve the columns with gaps' number less or equal than sequences' number - 1 
-    ret = cleanByCutValueOverpass((_alignment->sequenNumber - 1), 0, _alignment->sgaps->getGapsWindow(), complementarity);
+    ret = cleanByCutValueOverpass((_alignment->sequenNumber - 1), 0, _alignment->Statistics->gaps->getGapsWindow(), complementarity);
 
     // Returns the new newAlignment.
     return ret;
@@ -1136,7 +1141,7 @@ bool Cleaner::removeOnlyTerminal(void) {
                  << endl << endl;
             return false;
         }
-        gInCol = _alignment->sgaps->getGapsWindow();
+        gInCol = _alignment->Statistics->gaps->getGapsWindow();
 
         // Identify left and right borders. First and last columns with no gaps
         for (i = 0; i < _alignment->originalResidNumber && gInCol[i] != 0; i++);
