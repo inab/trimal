@@ -124,7 +124,7 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
 
     // Check if we've provided multiple correct arguments
     // but no input file is provided.
-    if (infile == NULL && compareVect == NULL)
+    if (infile == NULL && compareset == -1)
     {
         debug.report(ErrorCode::NoInputFile);
         delete_variables();
@@ -1248,15 +1248,19 @@ inline bool trimAlManager::check_output_file_with_statistics() {
 }
 
 inline bool trimAlManager::check_multiple_files_comparison(char *argv[]) {
-    bool hasError = false;
     if ((compareset != -1) && (!appearErrors)) {
 
         compareAlignmentsArray = new newAlignment *[numfiles];
         filesToCompare = new char *[numfiles];
 
+//        for (i = 0; i < numfiles; i++) {
+//            compareAlignmentsArray[i] = nullptr;
+//            filesToCompare[i] = nullptr;
+//        }
+
         compare.open(argv[compareset], ifstream::in);
 
-        for (i = 0; (i < numfiles) && (!appearErrors); i++) {
+        for (i = 0; i < numfiles; i++) {
 
             for (nline.clear(), compare.read(&c, 1); (c != '\n') && ((!compare.eof())); compare.read(&c, 1))
                 nline += c;
@@ -1264,13 +1268,14 @@ inline bool trimAlManager::check_multiple_files_comparison(char *argv[]) {
             filesToCompare[i] = new char[nline.size() + 1];
             strcpy(filesToCompare[i], nline.c_str());
 
-            if ((compareAlignmentsArray[i] = ReadWriteMachine.loadAlignment(filesToCompare[i])) == NULL) {
-                debug.report(ErrorCode::AlignmentNotLoaded, new std::string[1]{filesToCompare[i]});
-                hasError = true;
+            compareAlignmentsArray[i] = ReadWriteMachine.loadAlignment(filesToCompare[i]);
+
+            if (compareAlignmentsArray[i] == nullptr) {
+                appearErrors = true;
             } else {
                 if (!compareAlignmentsArray[i]->isFileAligned()) {
                     debug.report(ErrorCode::NotAligned, new std::string[1]{filesToCompare[i]});
-                    hasError = true;
+                    appearErrors = true;
                 } else {
                     compareAlignmentsArray[i]->SequencesMatrix = new sequencesMatrix(compareAlignmentsArray[i]);
 
@@ -1279,14 +1284,23 @@ inline bool trimAlManager::check_multiple_files_comparison(char *argv[]) {
 
                     if ((compareAlignmentsArray[i]->getAlignmentType() != prevType) && (prevType != -1)) {
                         debug.report(ErrorCode::AlignmentTypesNotMatching);
-                        hasError = true;
+                        appearErrors = true;
                     } else
                         prevType = compareAlignmentsArray[i]->getAlignmentType();
                 }
             }
         }
 
-        if (!appearErrors) {
+        if (appearErrors)
+        {
+            debug.report(ErrorCode::ComparesetFailedAlignmentMissing);
+            delete_variables();
+            for (i = 0; i < numfiles; i++)
+                delete [] filesToCompare[i];
+            exit(ErrorCode::ComparesetFailedAlignmentMissing);
+        }
+
+        else {
             if (forceFile == NULL) {
                 compareVect = new float[maxAminos];
                 referFile = compareFiles::algorithm(
@@ -1295,7 +1309,7 @@ inline bool trimAlManager::check_multiple_files_comparison(char *argv[]) {
                         compareVect,
                         numfiles,
                         // Verbosity
-                        (stats >= 0) && (outfile != NULL));
+                        stats >= 0 && outfile != NULL);
 
                 if (windowSize != -1)
                     compareFiles::applyWindow(compareAlignmentsArray[referFile]->getNumAminos(), windowSize, compareVect);
@@ -1312,19 +1326,20 @@ inline bool trimAlManager::check_multiple_files_comparison(char *argv[]) {
                 else if ((consistencyWindow != -1) && (!appearErrors))
                     compareFiles::applyWindow(origAlig->getNumAminos(), consistencyWindow, compareVect);
             }
+
+            if (oformats.empty()) {
+                oformats.emplace_back(ReadWriteMachine.getFileFormatName(filesToCompare[referFile]));
+            }
+
+            for (i = 0; i < numfiles; i++) {
+                delete compareAlignmentsArray[i];
+                delete filesToCompare[i];
+            }
         }
 
-        if (oformats.empty()) {
-            oformats.emplace_back(ReadWriteMachine.getFileFormatName(filesToCompare[referFile]));
-        }
-
-        for (i = 0; i < numfiles; i++) {
-            delete compareAlignmentsArray[i];
-            delete filesToCompare[i];
-        }
     }
-    return hasError;
 
+    return appearErrors;
 }
 
 inline bool trimAlManager::check_block_size() {

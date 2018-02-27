@@ -309,12 +309,13 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
                         "No reference sequence found for contig \"[tag]\""},
 
                 {ErrorCode::SNPoutOfBounds,
-                        "SNP at positon \"[tag]\" in file \"[tag]\" cannot be applied as sequence has a length of \"[tag]\""
+                        "SNP at positon \"[tag]\" in file \"[tag]\" cannot be applied as sequence has a length of \"[tag]\"" },
 
-                },
                 {ErrorCode::NoInputFile,
-                        "An MSA input file has to be provided"
-                }
+                        "An MSA input file has to be provided"},
+
+                {ErrorCode::ComparesetFailedAlignmentMissing,
+                        "Compareset couldn't be performed as some alignments are missing." }
         };
 
 void __internalReport::__reportSystem::PrintCodesAndMessages() {

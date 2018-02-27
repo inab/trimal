@@ -13,31 +13,31 @@ class newAlignment;
 class StatisticsManager {
 public:
 
-    statisticsGaps * gaps = NULL;
-    statisticsConservation2 * conservation = NULL;
+    statisticsGaps * gaps                   = NULL;
+    statisticsConservation2 * conservation  = NULL;
 
     int ghWindow;
     int shWindow;
 
-    bool calculateConservationStats(void);
+    bool calculateConservationStats();
 
     bool setSimilarityMatrix(similarityMatrix *sm);
 
-    bool calculateGapStats(void);
+    bool calculateGapStats();
 
-    void printStatisticsGapsColumns(void);
+    void printStatisticsGapsColumns();
 
-    void printStatisticsGapsTotal(void);
+    void printStatisticsGapsTotal();
 
-    void printStatisticsConservationColumns(void);
+    void printStatisticsConservationColumns();
 
-    void printStatisticsConservationTotal(void);
+    void printStatisticsConservationTotal();
 
-    void printCorrespondence(void);
+    void printCorrespondence();
 
-    void saveStatistics(similarityMatrix *sm);
-
-    void saveStatistics(similarityMatrix *, int, int);
+//    void saveStatistics(similarityMatrix *sm);
+//
+//    void saveStatistics(similarityMatrix *, int, int);
 
 private:
     friend class newAlignment;

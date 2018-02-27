@@ -184,6 +184,8 @@ enum ErrorCode {
 
     NoInputFile                                         = 88,
 
+    ComparesetFailedAlignmentMissing                             = 89,
+
     __MAXERROR
 
 };
