@@ -22,9 +22,10 @@ set(preview
         source/trimalArgumentParser.cpp
         source/newAlignment.cpp
 
-        source/Statistics/statisticsGaps.cpp
+        source/Statistics/GapStat.cpp
         source/Statistics/StatisticsManager.cpp
-        source/Statistics/statisticsConservation2.cpp
+        source/Statistics/ConservationStat.cpp
+        source/Statistics/ConsistencyStat.cpp
 
         source/Cleaner.cpp
         source/ReadWriteMS/ReadWriteMachineState.cpp
@@ -33,7 +34,6 @@ set(preview
         source/sequencesMatrix.cpp
 
         source/utils.cpp
-        source/compareFiles.cpp
 
         source/reportsystem.cpp
         source/TimerFactory.cpp

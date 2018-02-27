@@ -25,8 +25,8 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "../include/compareFiles.h"
-#include "../include/reportsystem.h"
+#include "Statistics/ConsistencyStat.h"
+#include "reportsystem.h"
 #include <sstream>
 
 #define LONG 80
@@ -37,10 +37,10 @@
 // values we use the proportion of residue pairs per column in the aligs
 // to compare 
 
-int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity) {
+int ConsistencyStat::compareAndChoose(newAlignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity) ");
+	StartTiming("int ConsistencyStat::compareAndChoose(newAlignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity) ");
 
     int *numResiduesAlig, *correspNames, *columnSeqMatrix, *columnSeqMatrixAux;
     int i, j, k, l, m, numSeqs, pairRes, hits, alig = 0;
@@ -54,12 +54,12 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
     numSeqs = vectAlignments[0]->getNumSpecies();
 
     // Allocate dinamic local memory
-    names = new string[numSeqs];
-    correspNames = new int[numSeqs];
-    numResiduesAlig = new int[numSeqs];
-    columnSeqMatrix = new int[numSeqs];
-    vectHits = new float *[numAlignments];
-    columnSeqMatrixAux = new int[numSeqs];
+    names               = new string[numSeqs];
+    correspNames        = new int[numSeqs];
+    numResiduesAlig     = new int[numSeqs];
+    columnSeqMatrix     = new int[numSeqs];
+    vectHits            = new float *[numAlignments];
+    columnSeqMatrixAux  = new int[numSeqs];
 
     // Check that all of alignment has the same number of
     // sequence as well as there exists a correspondence
@@ -80,109 +80,114 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
         }
     }
 
-    // Changes the order in sequences number matrix
-    // according to the order in the selected alignment 
-    for (i = 1; ((i < numAlignments) && (!appearErrors)); i++) {
-        vectAlignments[i]->getSequences(names);
-        vectAlignments[0]->getSequenceNameOrder(names, correspNames);
-        vectAlignments[i]->SequencesMatrix->setOrder(correspNames);
-    }
+    if (!appearErrors)
+    {
 
-    // Get back the residues number for each alignment
-    for (i = 0; ((i < numAlignments) && (!appearErrors)); i++)
-        numResiduesAlig[i] = vectAlignments[i]->getNumAminos();
+        // Changes the order in sequences number matrix
+        // according to the order in the selected alignment
+        for (i = 1; ((i < numAlignments) && (!appearErrors)); i++) {
+            vectAlignments[i]->getSequences(names);
+            vectAlignments[0]->getSequenceNameOrder(names, correspNames);
+            vectAlignments[i]->SequencesMatrix->setOrder(correspNames);
+        }
 
-    // Start the comparison among the alignments
-    for (i = 0; ((i < numAlignments) && (!appearErrors)); i++, value = 0) {
+        // Get back the residues number for each alignment
+        for (i = 0; ((i < numAlignments) && (!appearErrors)); i++)
+            numResiduesAlig[i] = vectAlignments[i]->getNumAminos();
 
-        // If it's necessary, we print some information
-        if (verbosity)
-            cout << endl;
+        // Start the comparison among the alignments
+        for (i = 0; ((i < numAlignments) && (!appearErrors)); i++) {
+            value = 0;
+            // If it's necessary, we print some information
+            if (verbosity)
+                cout << endl;
 
-        // Initialize the hits vector for each alignment
-        vectHits[i] = new float[numResiduesAlig[i]];
-        utils::initlVect(vectHits[i], numResiduesAlig[i], 0);
+            // Initialize the hits vector for each alignment
+            vectHits[i] = new float[numResiduesAlig[i]];
+            utils::initlVect(vectHits[i], numResiduesAlig[i], 0);
 
-        for (j = 0, pairRes = 0, hits = 0; j < numResiduesAlig[i]; j++, pairRes = 0, hits = 0) {
+            for (j = 0, pairRes = 0, hits = 0; j < numResiduesAlig[i]; j++, pairRes = 0, hits = 0) {
 
 
-            // Get back each column from the current selected
-            // alignment
-            vectAlignments[i]->SequencesMatrix->getColumn(j, columnSeqMatrix);
+                // Get back each column from the current selected
+                // alignment
+                vectAlignments[i]->SequencesMatrix->getColumn(j, columnSeqMatrix);
 
-            // For each position from the previous recovered
-            // columns, we carry out the analysis to detect the
-            // same residues pair in the rest of the alignmetns
-            for (k = 0; k < numSeqs; k++) {
+                // For each position from the previous recovered
+                // columns, we carry out the analysis to detect the
+                // same residues pair in the rest of the alignmetns
+                for (k = 0; k < numSeqs; k++) {
 
-                // If there is a valid residue, we go ahead with
-                // the analysis
-                if (columnSeqMatrix[k] != 0) {
-                    for (l = 0; l < i; l++) {
-                        // Recover the residue pairs from the others aligs
-                        vectAlignments[l]->SequencesMatrix->getColumn(columnSeqMatrix[k], k, columnSeqMatrixAux);
-                        // and count the similar residue pairs
-                        for (m = k + 1; m < numSeqs; m++)
-                            if (columnSeqMatrix[m] != 0) {
-                                if (columnSeqMatrix[m] == columnSeqMatrixAux[m])
-                                    hits++;
-                                pairRes++;
-                            }
+                    // If there is a valid residue, we go ahead with
+                    // the analysis
+                    if (columnSeqMatrix[k] != 0) {
+                        for (l = 0; l < i; l++) {
+                            // Recover the residue pairs from the others aligs
+                            vectAlignments[l]->SequencesMatrix->getColumn(columnSeqMatrix[k], k, columnSeqMatrixAux);
+                            // and count the similar residue pairs
+                            for (m = k + 1; m < numSeqs; m++)
+                                if (columnSeqMatrix[m] != 0) {
+                                    if (columnSeqMatrix[m] == columnSeqMatrixAux[m])
+                                        hits++;
+                                    pairRes++;
+                                }
+                        }
+
+                        for (l = i + 1; l < numAlignments; l++) {
+                            // Recover the residue pairs from the others aligs
+                            vectAlignments[l]->SequencesMatrix->getColumn(columnSeqMatrix[k], k, columnSeqMatrixAux);
+                            // and count the similar residue pairs
+                            for (m = k + 1; m < numSeqs; m++)
+                                if (columnSeqMatrix[m] != 0) {
+                                    if (columnSeqMatrix[m] == columnSeqMatrixAux[m])
+                                        hits++;
+                                    pairRes++;
+                                }
+                        }
                     }
+                }
 
-                    for (l = i + 1; l < numAlignments; l++) {
-                        // Recover the residue pairs from the others aligs
-                        vectAlignments[l]->SequencesMatrix->getColumn(columnSeqMatrix[k], k, columnSeqMatrixAux);
-                        // and count the similar residue pairs
-                        for (m = k + 1; m < numSeqs; m++)
-                            if (columnSeqMatrix[m] != 0) {
-                                if (columnSeqMatrix[m] == columnSeqMatrixAux[m])
-                                    hits++;
-                                pairRes++;
-                            }
-                    }
+                // For each column, compute the hits proportion for
+                // every residue pair against the rest of alignments
+                if (pairRes != 0) {
+                    vectHits[i][j] += ((1.0 * hits) / pairRes);
+                    value += vectHits[i][j];
                 }
             }
 
-            // For each column, compute the hits proportion for
-            // every residue pair against the rest of alignments
-            if (pairRes != 0) {
-                vectHits[i][j] += ((1.0 * hits) / pairRes);
-                value += vectHits[i][j];
+            // The method can offer some information about the
+            // comparison progression
+            if (verbosity)
+                cout << "File:\t\t" << fileNames[i] << endl << "Values:\t\tSequences: " << numSeqs
+                     << "\tResidues: " << numResiduesAlig[i] << "\tPond. Hits: " << setw(8)
+                     << value << "\t%Consistency: " << value / numResiduesAlig[i] << endl;
+            // Keep the alignment with higher consistency value
+            if ((value / numResiduesAlig[i]) > max) {
+                alig = i;
+                max = value / numResiduesAlig[i];
             }
         }
 
-        // The method can offer some information about the
-        // comparison progression
-        if (verbosity)
-            cout << "File:\t\t" << fileNames[i] << endl << "Values:\t\tSequences: " << numSeqs
-                 << "\tResidues: " << numResiduesAlig[i] << "\tPond. Hits: " << setw(8)
-                 << value << "\t%Consistency: " << value / numResiduesAlig[i] << endl;
-        // Keep the alignment with higher consistency value
-        if ((value / numResiduesAlig[i]) > max) {
-            alig = i;
-            max = value / numResiduesAlig[i];
+        // Prints the alignment that have been selected
+        if ((verbosity) && (!appearErrors)) {
+            cout << "\t\t\t\t\t--------------" << endl;
+            cout << endl << "File Selected:\t" << fileNames[alig] << endl << "Value:\t\t" << max << endl << endl;
+        }
+
+        // The method returns a vector with the consistency
+        // value for each column in the selected alignment
+        if ((columnsValue != NULL) && (!appearErrors)) {
+            utils::initlVect(columnsValue, numResiduesAlig[alig], -1);
+            for (i = 0; i < numResiduesAlig[alig]; i++)
+                columnsValue[i] = vectHits[alig][i];
         }
     }
 
-    // Prints the alignment that have been selected
-    if ((verbosity) && (!appearErrors)) {
-        cout << "\t\t\t\t\t--------------" << endl;
-        cout << endl << "File Selected:\t" << fileNames[alig] << endl << "Value:\t\t" << max << endl << endl;
-    }
-
-    // The method returns a vector with the consistency
-    // value for each column in the selected alignment
-    if ((columnsValue != NULL) && (!appearErrors)) {
-        utils::initlVect(columnsValue, numResiduesAlig[alig], -1);
-        for (i = 0; i < numResiduesAlig[alig]; i++)
-            columnsValue[i] = vectHits[alig][i];
-    }
-    // Deallocate memmory
+    // Deallocate memory
     for (i = 0; ((i < numAlignments) && (!appearErrors)); i++)
         delete[] vectHits[i];
-    delete[] vectHits;
 
+    delete[] vectHits;
     delete[] names;
     delete[] correspNames;
     delete[] numResiduesAlig;
@@ -197,10 +202,10 @@ int compareFiles::algorithm(newAlignment **vectAlignments, char **fileNames, flo
 
 // This method returns the consistency value vector for a given alignment
 // against a set of alignments with the same sequences
-bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue) {
+bool ConsistencyStat::forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue) ");
+	StartTiming("bool ConsistencyStat::forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue) ");
 
     int *correspNames, *columnSeqMatrix, *columnSeqMatrixAux;
     int i, j, k, ll, numResidues, numSeqs, pairRes, hit;
@@ -296,10 +301,10 @@ bool compareFiles::forceComparison(newAlignment **vectAlignments, int numAlignme
 }
 
 // This method applies a specific windows size to a selected alignment 
-bool compareFiles::applyWindow(int columns, int halfWindow, float *columnsValue) {
+bool ConsistencyStat::applyWindow(int columns, int halfWindow, float *columnsValue) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("bool compareFiles::applyWindow(int columns, int halfWindow, float *columnsValue) ");
+	StartTiming("bool ConsistencyStat::applyWindow(int columns, int halfWindow, float *columnsValue) ");
 
     int i, j, window;
     float *vectAux;
@@ -340,10 +345,10 @@ bool compareFiles::applyWindow(int columns, int halfWindow, float *columnsValue)
 }
 
 // Print the consistency value for each column from the selected alignment 
-void compareFiles::printStatisticsFileColumns(newAlignment &_alignment, float *compareVect) {
+void ConsistencyStat::printStatisticsFileColumns(newAlignment &_alignment, float *compareVect) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("void compareFiles::printStatisticsFileColumns(newAlignment &_alignment, float *compareVect) ");
+	StartTiming("void ConsistencyStat::printStatisticsFileColumns(newAlignment &_alignment, float *compareVect) ");
 
     int size = 20;
 
@@ -397,10 +402,10 @@ void compareFiles::printStatisticsFileColumns(newAlignment &_alignment, float *c
 
 // Print the consistency values accumulative distribution for the selected
 // alignment
-void compareFiles::printStatisticsFileAcl(newAlignment &_alignment, float *compareVect) {
+void ConsistencyStat::printStatisticsFileAcl(newAlignment &_alignment, float *compareVect) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("void compareFiles::printStatisticsFileAcl(newAlignment &_alignment, float *compareVect) ");
+	StartTiming("void ConsistencyStat::printStatisticsFileAcl(newAlignment &_alignment, float *compareVect) ");
 
     int size = 20;
     float refer, *vectAux;

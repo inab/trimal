@@ -33,7 +33,7 @@
 #include <iomanip>
 
 #include "similarityMatrix.h"
-#include "statisticsGaps.h"
+#include "GapStat.h"
 #include "../include/utils.h"
 
 // #define DNAType 1

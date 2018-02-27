@@ -37,7 +37,7 @@
 #include "newAlignment.h"
 
 /// \brief Helper class to handle the comparison between alignments. It also handles Consistency staticstics.
-class compareFiles {
+class ConsistencyStat {
 
   public:
 /**
@@ -70,7 +70,7 @@ class compareFiles {
  \param verbosity Wether or not report by printing some results.
  \return \b -1 if there was any error.\n <b> Alignment index </b> of the selected algorithm otherwise.
  */
-    static int algorithm(newAlignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity);
+    static int compareAndChoose(newAlignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity);
 /**
  \brief Method to obtain the consistency values vector for a given alignment against a set of alignments with the same sequences.
  \param vectAlignments Alignment vector to compare against the selected alignment
