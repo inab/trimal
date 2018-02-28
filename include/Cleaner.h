@@ -155,7 +155,7 @@ public:
       \param complementary Wheter or not to return the complementary version of the trimmed alignment.
       \return Pointer to the cleaned alignment.
 */
-    newAlignment *cleanCompareFile(float cutpoint, float baseLine, float *vectValues, bool complementary);
+    newAlignment *cleanCompareFile(const float cutpoint, const float baseLine, float *vectValues, const bool complementary);
 
 /**
       \brief Method to compute the overlap for each sequence given a overlap value.\n

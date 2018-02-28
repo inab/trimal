@@ -25,7 +25,7 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "Statistics/ConservationStat.h"
+#include "Statistics/statisticsConservation.h"
 #include "defines.h"
 #include "newAlignment.h"
 #include "reportsystem.h"

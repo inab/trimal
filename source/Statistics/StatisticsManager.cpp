@@ -5,7 +5,9 @@
 
 #include "../include/Statistics/StatisticsManager.h"
 #include "../include/newAlignment.h"
-#include "../include/Cleaner.h"
+#include "../include/Statistics/statisticsGaps.h"
+#include "../include/Statistics/statisticsConservation.h"
+#include "../include/Statistics/statisticsConsistency.h"
 
 
 bool StatisticsManager::calculateConservationStats(void) {

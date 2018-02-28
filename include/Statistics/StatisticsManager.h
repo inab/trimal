@@ -4,9 +4,14 @@
 
 #ifndef TRIMAL_STATISTICSMANAGER_H
 #define TRIMAL_STATISTICSMANAGER_H
-#include "../include/similarityMatrix.h"
-#include "GapStat.h"
-#include "ConservationStat.h"
+#include "similarityMatrix.h"
+//#include "statisticsGaps.h"
+//#include "statisticsConservation.h"
+//#include "statisticsConsistency.h"
+
+class statisticsGaps;
+class statisticsConservation2;
+class statisticsConsistency;
 
 class newAlignment;
 /// \brief Class to handle the interaction with statistics and statistics objects.
@@ -15,6 +20,7 @@ public:
 
     statisticsGaps * gaps                   = NULL;
     statisticsConservation2 * conservation  = NULL;
+    statisticsConsistency * consistency     = NULL;
 
     int ghWindow;
     int shWindow;

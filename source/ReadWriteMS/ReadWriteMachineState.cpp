@@ -391,3 +391,24 @@ std::string ReadWriteMS::getOutputFormatsAvailable()
     return ss.str();
 
 }
+
+std::vector<newAlignment*> ReadWriteMS::splitAlignmentKeeping(newAlignment& alignment)
+{
+    std::vector<newAlignment *> splitted = std::vector<newAlignment *>(alignment.originalSequenNumber);
+
+    for (int i = 0; i < alignment.originalSequenNumber; i++)
+    {
+        newAlignment * tempAlignment = new newAlignment();
+        tempAlignment->sequences = new std::string[1];
+        tempAlignment->sequences[0] = std::string(alignment.sequences[i]);
+        tempAlignment->seqsName = new std::string[1] { alignment.seqsName[i] };
+        tempAlignment->sequenNumber = 1;
+        tempAlignment->originalSequenNumber = 1;
+        tempAlignment->residNumber = tempAlignment->sequences[0].size();
+        tempAlignment->originalResidNumber = tempAlignment->residNumber;
+        tempAlignment->filename = tempAlignment->seqsName[0];
+        splitted[i] = tempAlignment;
+    }
+
+    return splitted;
+}

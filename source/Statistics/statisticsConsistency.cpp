@@ -25,11 +25,157 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "Statistics/ConsistencyStat.h"
+#include "Statistics/statisticsConsistency.h"
 #include "reportsystem.h"
 #include <sstream>
+#include <ReadWriteMS/ReadWriteMachineState.h>
+#include <trimalArgumentParser.h>
 
 #define LONG 80
+
+
+
+void statisticsConsistency::perform(char *comparesetFilePath, ReadWriteMS &ReadWriteMachine, trimAlManager &manager, char *forceFile) {
+
+    line = new char[1024];
+
+    // Open the file that contains the paths of the files.
+    compare.open(comparesetFilePath, ifstream::in);
+    while (compare.getline(line, 1024)) numFiles++;
+    compare.close();
+    compare.open(comparesetFilePath);
+
+    compareAlignmentsArray = new newAlignment *[numFiles];
+    filesToCompare = new char *[numFiles];
+
+    // Load all the alignments to compare
+    // Check if they: are aligned and the type is the same
+    // Store the maximum number of amino acids present on all alignments
+    for (i = 0; i < numFiles; i++) {
+
+
+        // Search for end of line.
+        for (nline.clear(), compare.read(&c, 1);
+             (c != '\n') && ((!compare.eof()));
+             compare.read(&c, 1))
+        {
+            nline += c;
+        }
+
+        // Save the alignment path
+        filesToCompare[i] = new char[nline.size() + 1];
+        strcpy(filesToCompare[i], nline.c_str());
+
+        // Load the alignment
+        compareAlignmentsArray[i] = ReadWriteMachine.loadAlignment(filesToCompare[i]);
+
+        // Check if alignment could be loaded
+        if (compareAlignmentsArray[i] == nullptr) {
+            appearErrors = true;
+        } else {
+            // Check if alignment is not aligned
+            if (!compareAlignmentsArray[i]->isFileAligned()) {
+                debug.report(ErrorCode::NotAligned,
+                             new std::string[1]{filesToCompare[i]});
+                appearErrors = true;
+
+            } else {
+                compareAlignmentsArray[i]->SequencesMatrix
+                        = new sequencesMatrix(compareAlignmentsArray[i]);
+
+                // Store maximum number of aminoacids
+                if (compareAlignmentsArray[i]->getNumAminos() > maxAminos)
+                    maxAminos = compareAlignmentsArray[i]->getNumAminos();
+
+                // Check if alignment type is the same as last one.
+                if (prevType == -1)
+                    prevType = compareAlignmentsArray[i]->getAlignmentType();
+                else if (compareAlignmentsArray[i]->getAlignmentType() != prevType) {
+                    debug.report(ErrorCode::AlignmentTypesNotMatching);
+                    appearErrors = true;
+                }
+            }
+        }
+    }
+
+    // If the analysis couldn't be performed, stop the program.
+    if (appearErrors)
+    {
+        debug.report(ErrorCode::ComparesetFailedAlignmentMissing);
+        delete_variables();
+        delete [] values;
+        exit(ErrorCode::ComparesetFailedAlignmentMissing);
+    }
+
+    else {
+        // If no alignment is forced to be selected, select one of them
+        if (forceFile == NULL) {
+            values = new float[maxAminos];
+            // Perform stat calculation and
+            //  choice the best scoring alignment
+            referFile = statisticsConsistency::compareAndChoose(
+                    compareAlignmentsArray,
+                    filesToCompare,
+                    values,
+                    numFiles,
+                    // Verbosity
+                    manager.stats >= 0 && manager.outfile != NULL);
+
+            // If no alignment could be selected, stop the program
+            if (referFile == -1)
+            {
+                manager.delete_variables();
+                delete_variables();
+                delete [] values;
+                exit(-1);
+            }
+
+            // Specify the selected alignment as origAlig
+            //  (as if it was fed thought -in argument
+            manager.origAlig
+                    = new newAlignment(*compareAlignmentsArray[referFile]);
+        }
+            // If there is an alignment that has been forcibly selected
+        else {
+            values = new float[manager.origAlig->getNumAminos()];
+            appearErrors = !statisticsConsistency::forceComparison(
+                    compareAlignmentsArray,
+                    numFiles,
+                    manager.origAlig,
+                    values);
+
+            // If forcing comparison failed, exit the program
+            if (appearErrors)
+            {
+                delete_variables();
+                delete [] values;
+                exit(-1);
+            }
+        }
+
+        // Store the cross reference between alignment
+        //  and this, it's consistency stat
+        manager.origAlig->Statistics->consistency = this;
+        _alignment = manager.origAlig;
+
+        // Apply window sizes
+        if (manager.windowSize != -1)
+            statisticsConsistency::applyWindow(manager.origAlig->getNumAminos(), manager.windowSize, values);
+        else if (manager.consistencyWindow != -1)
+            statisticsConsistency::applyWindow(manager.origAlig->getNumAminos(), manager.consistencyWindow, values);
+
+        // If no output format is provided
+        //  we'll use the selected alignment format
+        if (manager.oformats.empty()) {
+            manager.oformats.emplace_back(
+                    ReadWriteMachine.getFileFormatName(
+                            forceFile == NULL ? filesToCompare[referFile] : forceFile)
+            );
+        }
+
+        delete_variables();
+    }
+}
 
 
 // This method compares a set of alignment in order to select the most
@@ -37,10 +183,10 @@
 // values we use the proportion of residue pairs per column in the aligs
 // to compare 
 
-int ConsistencyStat::compareAndChoose(newAlignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity) {
+int statisticsConsistency::compareAndChoose(newAlignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("int ConsistencyStat::compareAndChoose(newAlignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity) ");
+	StartTiming("int statisticsConsistency::compareAndChoose(newAlignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity) ");
 
     int *numResiduesAlig, *correspNames, *columnSeqMatrix, *columnSeqMatrixAux;
     int i, j, k, l, m, numSeqs, pairRes, hits, alig = 0;
@@ -202,10 +348,10 @@ int ConsistencyStat::compareAndChoose(newAlignment **vectAlignments, char **file
 
 // This method returns the consistency value vector for a given alignment
 // against a set of alignments with the same sequences
-bool ConsistencyStat::forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue) {
+bool statisticsConsistency::forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("bool ConsistencyStat::forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue) ");
+	StartTiming("bool statisticsConsistency::forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue) ");
 
     int *correspNames, *columnSeqMatrix, *columnSeqMatrixAux;
     int i, j, k, ll, numResidues, numSeqs, pairRes, hit;
@@ -301,10 +447,10 @@ bool ConsistencyStat::forceComparison(newAlignment **vectAlignments, int numAlig
 }
 
 // This method applies a specific windows size to a selected alignment 
-bool ConsistencyStat::applyWindow(int columns, int halfWindow, float *columnsValue) {
+bool statisticsConsistency::applyWindow(int columns, int halfWindow, float *columnsValue) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("bool ConsistencyStat::applyWindow(int columns, int halfWindow, float *columnsValue) ");
+	StartTiming("bool statisticsConsistency::applyWindow(int columns, int halfWindow, float *columnsValue) ");
 
     int i, j, window;
     float *vectAux;
@@ -345,10 +491,10 @@ bool ConsistencyStat::applyWindow(int columns, int halfWindow, float *columnsVal
 }
 
 // Print the consistency value for each column from the selected alignment 
-void ConsistencyStat::printStatisticsFileColumns(newAlignment &_alignment, float *compareVect) {
+void statisticsConsistency::printStatisticsFileColumns(newAlignment &_alignment, float *compareVect) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("void ConsistencyStat::printStatisticsFileColumns(newAlignment &_alignment, float *compareVect) ");
+	StartTiming("void statisticsConsistency::printStatisticsFileColumns(newAlignment &_alignment, float *values) ");
 
     int size = 20;
 
@@ -402,10 +548,10 @@ void ConsistencyStat::printStatisticsFileColumns(newAlignment &_alignment, float
 
 // Print the consistency values accumulative distribution for the selected
 // alignment
-void ConsistencyStat::printStatisticsFileAcl(newAlignment &_alignment, float *compareVect) {
+void statisticsConsistency::printStatisticsFileAcl(newAlignment &_alignment, float *compareVect) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("void ConsistencyStat::printStatisticsFileAcl(newAlignment &_alignment, float *compareVect) ");
+	StartTiming("void statisticsConsistency::printStatisticsFileAcl(newAlignment &_alignment, float *values) ");
 
     int size = 20;
     float refer, *vectAux;
@@ -552,3 +698,25 @@ void ConsistencyStat::printStatisticsFileAcl(newAlignment &_alignment, float *co
     // Deallocate dinamic memory
     delete[] vectAux;
 }
+
+void statisticsConsistency::delete_variables() {
+
+    delete [] compareAlignmentsArray;
+    for (i = 0; i < numFiles; i++) {
+        delete [] filesToCompare[i];
+    }
+    delete [] filesToCompare;
+
+    delete [] line;
+}
+
+statisticsConsistency::~statisticsConsistency() {
+    delete [] values;
+    _alignment = NULL;
+}
+
+void statisticsConsistency::applyWindow(int halfWindow) {
+
+}
+
+

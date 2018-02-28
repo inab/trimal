@@ -60,10 +60,6 @@ public:
     i                       = 1,
     stats                   = 0,
     num                     = 0, 
-    maxAminos               = 0, 
-    numfiles                = 0, 
-    referFile               = 0, 
-    prevType                = -1,
     compareset              = -1,
     windowSize              = -1, 
     gapWindow               = -1, 
@@ -82,14 +78,12 @@ public:
             argumentLength = -1;
 
     string 
-    nline, 
     *sequencesNames     = NULL;
     
 
     /* Others variables */
     ifstream compare;
-    float *compareVect              = NULL;
-    sequencesMatrix *seqMatrix      = NULL;
+//    float *values              = NULL;
     similarityMatrix *similMatrix   = NULL;
     
     newAlignment  
@@ -208,14 +202,14 @@ private:
 
 public:
     int perform();
+    void delete_variables();
 private:
-        void print_statistics();
-        bool create_or_use_similarity_matrix();
-        void clean_alignment();
+    void print_statistics();
+    bool create_or_use_similarity_matrix();
+    void clean_alignment();
+
         void set_window_size();
 
-    void delete_variables();
-    
     // NON COMPLEX OPTIONS
     void menu();
     void examples();

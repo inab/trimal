@@ -28,18 +28,25 @@
 #ifndef COMPAREFILES_H
 #define COMPAREFILES_H
 
-#include <stdlib.h>
+#include <cstdlib>
 
 #include <string>
 #include <iostream>
+#include <ReadWriteMS/ReadWriteMachineState.h>
+#include <trimalArgumentParser.h>
 
 // #include "alignment.h"
 #include "newAlignment.h"
 
 /// \brief Helper class to handle the comparison between alignments. It also handles Consistency staticstics.
-class ConsistencyStat {
+class statisticsConsistency {
 
   public:
+
+
+    void perform(char *comparesetFilePath, ReadWriteMS &ReadWriteMachine, trimAlManager &manager, char *forceFile);
+
+
 /**
  \brief Print the consistency value for each column from the selected alignment.
  \param _alignment Alignment used to obtain the accumulated consistency value
@@ -81,5 +88,36 @@ class ConsistencyStat {
  */
     static bool forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue);
 
+    void applyWindow(int halfWindow);
+
+    float *values          = NULL;
+
+    ~statisticsConsistency();
+
+private:
+
+    newAlignment * _alignment;
+
+    std::ifstream compare;
+
+    int
+            numFiles            = 0,
+            i                   = 0,
+            maxAminos           = 0,
+            prevType            = -1,
+            referFile           = -1;
+
+    char
+            * line              = NULL,
+            c,
+            **filesToCompare    = NULL;
+
+    std::string nline;
+
+    newAlignment **compareAlignmentsArray = NULL;
+
+    bool appearErrors           = false;
+
+    void delete_variables();
 };
 #endif

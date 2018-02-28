@@ -22,10 +22,10 @@ set(preview
         source/trimalArgumentParser.cpp
         source/newAlignment.cpp
 
-        source/Statistics/GapStat.cpp
+        source/Statistics/statisticsGaps.cpp
         source/Statistics/StatisticsManager.cpp
-        source/Statistics/ConservationStat.cpp
-        source/Statistics/ConsistencyStat.cpp
+        source/Statistics/statisticsConservation.cpp
+        source/Statistics/statisticsConsistency.cpp
 
         source/Cleaner.cpp
         source/ReadWriteMS/ReadWriteMachineState.cpp

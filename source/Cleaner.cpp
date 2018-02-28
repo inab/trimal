@@ -7,6 +7,10 @@
 
 #include "../include/Cleaner.h"
 #include "../include/Statistics/StatisticsManager.h"
+#include "../include/Statistics/statisticsGaps.h"
+#include "../include/Statistics/statisticsConservation.h"
+#include "../include/Statistics/statisticsConsistency.h"
+
 #include "../include/newAlignment.h"
 #include "../include/defines.h"
 
@@ -167,7 +171,6 @@ newAlignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, cons
     {
         if (ValueVect[i] > cut) resCounter++;
         else newAlig->saveResidues[i] = -1;
-        debug << newAlig->saveResidues[i] << "\t" << ValueVect[i] << "\n";
     }
 
     NumberOfResiduesToAchieveBaseLine = utils::roundInt((((baseLine / 100.0) - (float) resCounter / _alignment->residNumber)) * _alignment->residNumber);
@@ -652,7 +655,7 @@ newAlignment *Cleaner::clean(float baseLine, float GapsPct, float conservationPc
     return ret;
 }
 
-newAlignment *Cleaner::cleanCompareFile(float cutpoint, float baseLine, float *vectValues, bool complementary) {
+newAlignment *Cleaner::cleanCompareFile(const float cutpoint, const float baseLine, float *vectValues, const bool complementary) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanCompareFile(float cutpoint, float baseLine, float *vectValues, bool complementary) ");
@@ -665,7 +668,7 @@ newAlignment *Cleaner::cleanCompareFile(float cutpoint, float baseLine, float *v
 
     // Sort a copy of the vectValues vector, and take the
     // value at 100% - baseline position.
-    utils::copyVect((float *) vectValues, vectAux, _alignment->originalResidNumber);
+    utils::copyVect(vectValues, vectAux, _alignment->originalResidNumber);
     utils::quicksort(vectAux, 0, _alignment->originalResidNumber - 1);
     cut = vectAux[(int) ((float) (_alignment->originalResidNumber - 1) * (100.0 - baseLine) / 100.0)];
 

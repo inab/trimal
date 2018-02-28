@@ -25,7 +25,7 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "Statistics/GapStat.h"
+#include "Statistics/statisticsGaps.h"
 #include "../include/defines.h"
 #include "../include/newAlignment.h"
 #include <sstream>

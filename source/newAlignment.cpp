@@ -46,6 +46,9 @@ using namespace std;
 #include <vector>
 #include <cmath>
 #include "../include/reportsystem.h"
+#include "../include/Statistics/statisticsGaps.h"
+#include "../include/Statistics/statisticsConservation.h"
+#include "../include/Statistics/statisticsConsistency.h"
 
 using namespace std;
 
@@ -93,6 +96,8 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
 
     if (this != &originalAlignment) {
 
+        filename = originalAlignment.filename;
+
         aligInfo = originalAlignment.aligInfo;
 
         sequenNumber = originalAlignment.sequenNumber;
@@ -117,10 +122,6 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
         std::copy(originalAlignment.saveResidues, originalAlignment.saveResidues + originalAlignment.originalResidNumber, saveResidues);
 
         identities = NULL;
-
-//        sgaps = NULL;
-
-//        scons = NULL;
 
         SequencesMatrix = NULL;
 
