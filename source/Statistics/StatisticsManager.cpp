@@ -171,5 +171,11 @@ StatisticsManager::StatisticsManager(newAlignment *parent, StatisticsManager *mo
 
 StatisticsManager::~StatisticsManager() {
     delete gaps;
+    gaps = nullptr;
+
     delete conservation;
+    conservation = nullptr;
+
+    delete consistency;
+    consistency = nullptr;
 }

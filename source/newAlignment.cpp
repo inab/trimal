@@ -156,13 +156,6 @@ newAlignment::~newAlignment(void) {
     }
     identities = NULL;
 
-//    if (sgaps != NULL)
-//        delete sgaps;
-//    sgaps = NULL;
-
-//    if (scons != NULL)
-//        delete scons;
-//    scons = NULL;
 
     if (SequencesMatrix != NULL)
         delete SequencesMatrix;
@@ -174,8 +167,10 @@ newAlignment::~newAlignment(void) {
     isAligned = false;
 
     delete Cleaning;
+    Cleaning = nullptr;
 
     delete Statistics;
+    Statistics = nullptr;
 
     if (--(*SeqRef) == 0) {
         delete SeqRef;
@@ -193,6 +188,7 @@ newAlignment::~newAlignment(void) {
         seqsInfo = NULL;
     } else if (*SeqRef < 0) {
         delete SeqRef;
+        SeqRef = nullptr;
     }
 }
 
@@ -203,7 +199,6 @@ newAlignment *newAlignment::getTranslationCDS(newAlignment *ProtAlig) {
 
     int x, y, counter, *mappedSeqs;
     newAlignment *newAlig = new newAlignment();
-
 
     // Map the selected protein sequences to the input
     // coding sequences

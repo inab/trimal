@@ -55,19 +55,17 @@ class newAlignment {
     int dataType = 0;
     
 public:
-/* Submodules */
+// BEGIN of Submodules
 
-    Cleaner * Cleaning = NULL;
+    Cleaner * Cleaning                  = NULL;
 
-    StatisticsManager * Statistics = NULL;
+    StatisticsManager * Statistics      = NULL;
 
-    sequencesMatrix * SequencesMatrix = NULL;
+    sequencesMatrix * SequencesMatrix   = NULL;
 
-//    statisticsGaps * sgaps = NULL;
-
-//    statisticsConservation2 * scons = NULL;
+// END of Submodules
     
-    int * SeqRef = NULL;
+    int * SeqRef                        = NULL;
     
     int originalSequenNumber;
     
@@ -79,25 +77,25 @@ public:
 
     bool isAligned;
 
-    string *sequences = NULL;
+    string *sequences           = NULL;
 
-    string *seqsName = NULL;
+    string *seqsName            = NULL;
 
-    string *seqsInfo = NULL;
+    string *seqsInfo            = NULL;
 
     string filename;
 
     string aligInfo;
 
     /* Sequence Identities */
-    float **identities = NULL;
+    float **identities          = NULL;
     
     /* Sequence Overlaps */
-    float **overlaps = NULL;
+    float **overlaps            = NULL;
 
     /* New Info */
-    int *saveResidues = NULL;
-    int *saveSequences = NULL;
+    int *saveResidues           = NULL;
+    int *saveSequences          = NULL;
 
     bool fillMatrices(bool aligned);
   

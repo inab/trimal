@@ -834,7 +834,6 @@ bool trimAlManager::processArguments(char *argv[]) {
     }
 
     if (appearErrors) {
-        delete_variables();
         return true;
     }
     return false;
@@ -1764,27 +1763,45 @@ inline void trimAlManager::delete_variables() {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("inline void trimAlManager::delete_variables() ");
-    if (singleAlig != NULL) delete singleAlig;
-    if (origAlig != NULL) delete origAlig;
-    if (compareAlignmentsArray != NULL) delete[] compareAlignmentsArray;
 
-    if (similMatrix != NULL) delete similMatrix;
-    if (delColumns != NULL) delete[] delColumns;
-    if (delSequences != NULL) delete[] delSequences;
+    delete singleAlig;
+    singleAlig = nullptr;
+    delete origAlig;
+    origAlig = nullptr;
 
-    if (filesToCompare != NULL) delete[] filesToCompare;
+    delete[] compareAlignmentsArray;
+    compareAlignmentsArray = nullptr;
 
-    if (outfile != NULL) delete[] outfile;
-    if (htmlOutFile != NULL) delete[] htmlOutFile;
+    delete similMatrix;
+    similMatrix = nullptr;
 
-    if (infile != NULL) delete[] infile;
-    if (matrixFile != NULL) delete[] matrixFile;
+    delete[] delColumns;
+    delColumns = nullptr;
+    delete[] delSequences;
+    delSequences = nullptr;
 
-    if (forceFile != NULL) delete forceFile;
-    if (backtransFile != NULL) delete backtransFile;
-    if (backtranslationAlig != NULL) delete backtranslationAlig;
+    delete[] filesToCompare;
+    filesToCompare = nullptr;
 
-    if (vcfs != NULL) delete vcfs;
+    delete[] outfile;
+    outfile = nullptr;
+    delete[] htmlOutFile;
+    htmlOutFile = nullptr;
+
+    delete[] infile;
+    infile = nullptr;
+    delete[] matrixFile;
+    matrixFile = nullptr;
+
+    delete forceFile;
+    forceFile = nullptr;
+    delete backtransFile;
+    backtransFile = nullptr;
+    delete backtranslationAlig;
+    backtranslationAlig = nullptr;
+
+    delete vcfs;
+    vcfs = nullptr;
 }
 
 void trimAlManager::menu(void) {
