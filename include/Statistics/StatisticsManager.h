@@ -18,9 +18,9 @@ class newAlignment;
 class StatisticsManager {
 public:
 
-    statisticsGaps * gaps                   = NULL;
-    statisticsConservation2 * conservation  = NULL;
-    statisticsConsistency * consistency     = NULL;
+    statisticsGaps * gaps                   = nullptr;
+    statisticsConservation2 * conservation  = nullptr;
+    statisticsConsistency * consistency     = nullptr;
 
     int ghWindow;
     int shWindow;

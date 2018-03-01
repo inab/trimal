@@ -189,55 +189,55 @@ namespace ngs {
                         std::memmove ( contig, tmp, strlen ( tmp ) + 1 );
 
                         // Position
-                        tmp = std::strtok ( NULL, "\t" );
+                        tmp = std::strtok ( nullptr, "\t" );
                         int position = atoi ( tmp );
 
                         // ID
-                        std::strtok ( NULL, "\t" );
+                        std::strtok ( nullptr, "\t" );
                         // Ref
-                        tmp = std::strtok ( NULL, "\t" );
+                        tmp = std::strtok ( nullptr, "\t" );
                         char * ref = new char[strlen ( tmp ) + 1];
                         std::memmove ( ref, tmp, strlen ( tmp ) + 1 );
 
                         // Alt
-                        tmp = std::strtok ( NULL, "\t" );
+                        tmp = std::strtok ( nullptr, "\t" );
                         char * alt = new char[strlen ( tmp ) + 1];
                         std::memmove ( alt, tmp, strlen ( tmp ) + 1 );
 
                         // Quality
-                        tmp = std::strtok ( NULL, "\t" );
+                        tmp = std::strtok ( nullptr, "\t" );
                         float quality = atof ( tmp );
 
                         // Filter
-                        tmp = std::strtok ( NULL, "\t" );
+                        tmp = std::strtok ( nullptr, "\t" );
                         bool filter = std::strcmp ( tmp, "PASS" ) ? false : true;
 
                         // Info
-                        tmp = std::strtok ( NULL, "\t" );
+                        tmp = std::strtok ( nullptr, "\t" );
 
                         // Format
-                        tmp = std::strtok ( NULL, "\t" );
+                        tmp = std::strtok ( nullptr, "\t" );
                         char * format = new char[strlen ( tmp ) + 1];
                         std::memmove ( format, tmp, strlen ( tmp ) + 1 );
 
                         // Donors
                         int counter = 0;
-                        tmp = std::strtok ( NULL, "\t" );
-                        while ( tmp != NULL ) {
+                        tmp = std::strtok ( nullptr, "\t" );
+                        while ( tmp != nullptr ) {
                             donorsInfo[counter++] = tmp;
-                            tmp = std::strtok ( NULL, "\t" );
+                            tmp = std::strtok ( nullptr, "\t" );
                         }
 
                         // Format -> Read Depth Index
                         counter = 0;
                         tmp = std::strtok ( format, ":" );
                         int readDepthIndex = -1;
-                        while ( tmp != NULL ) {
+                        while ( tmp != nullptr ) {
                             if ( strlen ( tmp ) > 1 && tmp[0] == 'D' && tmp[1] == 'P' ) {
                                 readDepthIndex = counter;
                                 break;
                             }
-                            tmp = std::strtok ( NULL, ":" );
+                            tmp = std::strtok ( nullptr, ":" );
                             counter++;
                         }
 
@@ -284,7 +284,7 @@ namespace ngs {
                                         if ( s != "0" ) {
                                             char * tmp = std::strtok ( &s[0], ":" );
                                             for ( int V = 0; V < readDepthIndex; V++ )
-                                                tmp = std::strtok ( NULL, ":" );
+                                                tmp = std::strtok ( nullptr, ":" );
                                             int readDepth = std::stoi ( tmp );
 
                                             if ( readDepth < minCoverage ) {
@@ -316,7 +316,7 @@ namespace ngs {
                                             }
                                         }
                                         counter ++;
-                                        tmp = std::strtok ( NULL, "\t" );
+                                        tmp = std::strtok ( nullptr, "\t" );
                                     }
                                 }
                             } else {
@@ -371,8 +371,8 @@ namespace ngs {
 
                             // We only want the contig fields
                             if ( !strcmp ( field_name, "contig" ) ) {
-                                std::strtok ( NULL, "=" );
-                                char * field_info = std::strtok ( NULL, "," );
+                                std::strtok ( nullptr, "=" );
+                                char * field_info = std::strtok ( nullptr, "," );
                                 char * fname = new char [std::strlen ( field_info ) + 1];
                                 memmove ( fname, field_info, strlen ( field_info ) );
                                 fname[std::strlen ( field_info )] = '\0';
@@ -399,8 +399,8 @@ namespace ngs {
                             // We only want to parse the FORMAT line, which contains the donors.
                             std::strtok ( strstr ( line, "FORMAT" ), "\t" );
 
-                            char * token = std::strtok ( NULL, "\t" );
-                            while ( token != NULL ) {
+                            char * token = std::strtok ( nullptr, "\t" );
+                            while ( token != nullptr ) {
                                 char * fname = new char [std::strlen ( token ) + 1];
                                 memmove ( fname, token, strlen ( token ) );
                                 fname[std::strlen ( token )] = '\0';
@@ -426,7 +426,7 @@ namespace ngs {
                                     debug.report ( WarningCode::DonorAlreadyAdded, &fname[0] );
                                 }
 
-                                token = std::strtok ( NULL, "\t" );
+                                token = std::strtok ( nullptr, "\t" );
                                 delete[] fname;
                             }
                             break;

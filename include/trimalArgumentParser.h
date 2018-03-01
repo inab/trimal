@@ -17,7 +17,7 @@ using namespace std;
 class trimAlManager
 {
 public:
-    std::vector<std::string> * vcfs = NULL;
+    std::vector<std::string> * vcfs = nullptr;
     
     
     bool 
@@ -71,44 +71,44 @@ public:
     automatedMethodCount    = -1,
     alternative_matrix      = -1,
     
-    *delColumns         = NULL, 
-    *delSequences       = NULL, 
-    *sequencesLengths   = NULL;
+    *delColumns         = nullptr,
+    *delSequences       = nullptr,
+    *sequencesLengths   = nullptr;
     size_t
             argumentLength = -1;
 
     string 
-    *sequencesNames     = NULL;
+    *sequencesNames     = nullptr;
     
 
     /* Others variables */
     ifstream compare;
-//    float *values              = NULL;
-    similarityMatrix *similMatrix   = NULL;
+//    float *values              = nullptr;
+    similarityMatrix *similMatrix   = nullptr;
     
     newAlignment  
-    *origAlig                   = NULL, 
-    *singleAlig                 = NULL,
-    *tempAlig                   = NULL,
-    **compareAlignmentsArray    = NULL,
-    *backtranslationAlig        = NULL;
+    *origAlig                   = nullptr,
+    *singleAlig                 = nullptr,
+    *tempAlig                   = nullptr,
+    **compareAlignmentsArray    = nullptr,
+    *backtranslationAlig        = nullptr;
 
     char 
     c, 
-    *forceFile          = NULL, 
+    *forceFile          = nullptr,
     
-    *infile             = NULL, 
+    *infile             = nullptr,
     
-    *backtransFile      = NULL, 
+    *backtransFile      = nullptr,
     
-    *outfile            = NULL, 
-    *htmlOutFile        = NULL,
-    *svgOutFile         = NULL,
-    *svgStatsOutFile    = NULL,
+    *outfile            = nullptr,
+    *htmlOutFile        = nullptr,
+    *svgOutFile         = nullptr,
+    *svgStatsOutFile    = nullptr,
     
-    *matrixFile         = NULL,
+    *matrixFile         = nullptr,
              
-    **filesToCompare    = NULL, 
+    **filesToCompare    = nullptr,
     line[256];
              
     std::vector<std::string> oformats;

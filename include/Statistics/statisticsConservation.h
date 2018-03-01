@@ -58,15 +58,15 @@ public:
     halfWindow = -1;
 
     /* Conservation vectors */
-    float *Q            = NULL;
-    float *MDK          = NULL;
-    float *MDK_Window   = NULL;
+    float *Q            = nullptr;
+    float *MDK          = nullptr;
+    float *MDK_Window   = nullptr;
 
     /** \brief Identity weight matrix between alignment rows */
-    float **matrixIdentity  = NULL;
+    float **matrixIdentity  = nullptr;
 
     /** \brief Similarity matrix used to conservation calculations */
-    similarityMatrix *simMatrix = NULL;
+    similarityMatrix *simMatrix = nullptr;
 
 
 public:

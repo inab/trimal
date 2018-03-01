@@ -100,7 +100,6 @@ statisticsGaps::~statisticsGaps(void) {
         if (halfWindow > 0)
             delete[] gapsWindow;
     }
-
 }
 
 bool statisticsGaps::applyWindow(int _halfWindow) {

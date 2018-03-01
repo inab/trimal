@@ -28,7 +28,7 @@ int Cleaner::selectMethod(void) {
     int i, j;
 
     // Ask for the sequence identities assesment
-    if (_alignment->identities == NULL)
+    if (_alignment->identities == nullptr)
         calculateSeqIdentity();
 
     // Once we have the identities among all possible
@@ -146,7 +146,7 @@ newAlignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const
 
     // If the flag -terminalony is set, apply a method to look for internal
     // boundaries and get back columns inbetween them, if they exist
-    if (terminalGapOnly && !removeOnlyTerminal()) return NULL;
+    if (terminalGapOnly && !removeOnlyTerminal()) return nullptr;
 
     // Once the columns/sequences selection is done, turn it around
     // if complementary flag is active
@@ -224,7 +224,7 @@ newAlignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, cons
     // If the flag -terminalony is set, apply a method to look for internal
     // boundaries and get back columns inbetween them, if they exist
     if (terminalGapOnly && !newAlig->Cleaning->removeOnlyTerminal())
-            return NULL;
+            return nullptr;
 
     // Once the columns/sequences selection is done, turn it around
     // if complementary flag is active
@@ -318,7 +318,7 @@ newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(double cutGaps, const int
     // If the flag -terminalony is set, apply a method to look for internal
     // boundaries and get back columns inbetween them, if they exist 
     if (terminalGapOnly && !newAlig->Cleaning->removeOnlyTerminal())
-            return NULL;
+            return nullptr;
 
     // Once the columns/sequences selection is done, turn it around
     // if complementary flag is active 
@@ -528,7 +528,7 @@ newAlignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, 
     // boundaries and get back columns inbetween them, if they exist
     if (terminalGapOnly == true)
         if (!newAlig->Cleaning->removeOnlyTerminal())
-            return NULL;
+            return nullptr;
 
     // Once the columns/sequences selection is done, turn it around
     // if complementary flag is active
@@ -580,7 +580,7 @@ newAlignment *Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementa
     // If gaps statistics are not calculated, we
     // calculate them 
     if (_alignment->Statistics->calculateGapStats() == false)
-        return NULL;
+        return nullptr;
 
     // Obtain the cut point using the given parameters
     cut = _alignment->Statistics->gaps->calcCutPoint(baseLine, gapsPct);
@@ -606,7 +606,7 @@ newAlignment *Cleaner::cleanConservation(float baseLine, float conservationPct, 
     // If conservation's statistics are not calculated,
     // we calculate them
     if (_alignment->Statistics->calculateConservationStats() != true)
-        return NULL;
+        return nullptr;
     // Calculate the cut point using the given parameters
     cut = (float) _alignment->Statistics->conservation->calcCutPoint(baseLine, conservationPct);
 
@@ -631,12 +631,12 @@ newAlignment *Cleaner::clean(float baseLine, float GapsPct, float conservationPc
     // If gaps statistics are not calculated, we calculate
     // them
     if (_alignment->Statistics->calculateGapStats() != true)
-        return NULL;
+        return nullptr;
 
     // If conservation's statistics are not calculated,
     // we calculate them
     if (_alignment->Statistics->calculateConservationStats() != true)
-        return NULL;
+        return nullptr;
 
     // Calculate the two cut points using the parameters
     cutGaps = _alignment->Statistics->gaps->calcCutPoint(baseLine, GapsPct);
@@ -697,7 +697,7 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
 
     ovrlap = std::ceil(overlap * float(_alignment->originalSequenNumber - 1));
 
-    if (spuriousVector == NULL)
+    if (spuriousVector == nullptr)
         return false;
     // Depending on the kind of newAlignment, we have
     // different indetermination symbol
@@ -774,7 +774,7 @@ newAlignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverla
 
     // Compute the overlap's vector using the overlap column's value
     if (!calculateSpuriousVector(overlapColumn, overlapVector))
-        return NULL;
+        return nullptr;
 
     // Select and remove the sequences with a overlap less than threshold's overlap and create a new _alignmentemnt
     newAlig = cleanOverlapSeq(minimumOverlap, overlapVector, complementary);
@@ -796,7 +796,7 @@ newAlignment *Cleaner::clean2ndSlope(bool complementarity) {
 
     //  If gaps statistics are not calculated, we calculate them 
     if (_alignment->Statistics->calculateGapStats() != true)
-        return NULL;
+        return nullptr;
 
     // We get the cut point using a automatic method for this purpose.
     cut = _alignment->Statistics->gaps->calcCutPoint2ndSlope();
@@ -819,7 +819,7 @@ newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
 
     // If gaps statistics are not calculated, we calculate them
     if (_alignment->Statistics->calculateGapStats() != true)
-        return NULL;
+        return nullptr;
 
     // Computes the gap cut point using a automatic method and at the same time, we get the gaps values from the newAlignment.
     gapCut = _alignment->Statistics->gaps->calcCutPoint2ndSlope();
@@ -827,7 +827,7 @@ newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
 
     // If conservation's statistics are not calculated, we calculate them
     if (_alignment->Statistics->calculateConservationStats() != true)
-        return NULL;
+        return nullptr;
 
     /* Computes the conservations value for each column in the newAlignment. At the same time, the method get the vector with those values. */
 //    _alignment->scons -> calculateVectors(/*_alignment->sequences,*/ _alignment->sgaps -> getGapsWindow());
@@ -893,7 +893,7 @@ newAlignment *Cleaner::cleanNoAllGaps(bool complementarity) {
 
     // If gaps statistics are not calculated, we calculate them
     if (_alignment->Statistics->calculateGapStats() != true)
-        return NULL;
+        return nullptr;
 
     // We want to conserve the columns with gaps' number less or equal than sequences' number - 1 
     ret = cleanByCutValueOverpass((_alignment->sequenNumber - 1), 0, _alignment->Statistics->gaps->getGapsWindow(), complementarity);
@@ -920,7 +920,7 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     else if (clusterNumber == 1) return 0;
 
     // Ask for the sequence identities assesment
-    if (_alignment->identities == NULL)
+    if (_alignment->identities == nullptr)
         calculateSeqIdentity();
 
     // Compute the maximum, the minimum and the average
@@ -1042,7 +1042,7 @@ void Cleaner::setBoundaries(int *boundaries_) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void Cleaner::setBoundaries(int *boundaries_) ");
-    if (boundaries_ != NULL) {
+    if (boundaries_ != nullptr) {
         left_boundary = boundaries_[0];
         right_boundary = boundaries_[1];
     }
@@ -1367,7 +1367,7 @@ int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
     float max;
 
     // Ask for the sequence identities assesment
-    if (_alignment->identities == NULL)
+    if (_alignment->identities == nullptr)
         _alignment->Cleaning->calculateSeqIdentity();
 
     seqs = new int *[_alignment->originalSequenNumber];

@@ -71,19 +71,19 @@ newAlignment::newAlignment(void) {
     dataType = SequenceTypes::NotDefined;
 
     // Columns and sequences that have been previously selected
-    saveResidues = NULL;
-    saveSequences = NULL;
+    saveResidues = nullptr;
+    saveSequences = nullptr;
 
     // Input sequences as well other information such as sequences name, etc 
-    sequences = NULL;
-    seqsName = NULL;
-    seqsInfo = NULL;
+    sequences = nullptr;
+    seqsName = nullptr;
+    seqsInfo = nullptr;
 
     // Information computed from newAlignment
-//    sgaps = NULL;
-//    scons = NULL;
-    SequencesMatrix = NULL;
-    identities = NULL;
+//    sgaps = nullptr;
+//    scons = nullptr;
+    SequencesMatrix = nullptr;
+    identities = nullptr;
 
     SeqRef = new int(1);
 
@@ -121,9 +121,9 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
         saveResidues = new int[originalResidNumber];
         std::copy(originalAlignment.saveResidues, originalAlignment.saveResidues + originalAlignment.originalResidNumber, saveResidues);
 
-        identities = NULL;
+        identities = nullptr;
 
-        SequencesMatrix = NULL;
+        SequencesMatrix = nullptr;
 
         this->Cleaning = new Cleaner(this, originalAlignment.Cleaning);
 
@@ -141,25 +141,25 @@ newAlignment::~newAlignment(void) {
 	StartTiming("newAlignment::~newAlignment(void) " + std::to_string(reinterpret_cast<uintptr_t>(this)));
     int i;
 
-    if (saveResidues != NULL)
+    if (saveResidues != nullptr)
         delete[] saveResidues;
-    saveResidues = NULL;
+    saveResidues = nullptr;
 
-    if (saveSequences != NULL)
+    if (saveSequences != nullptr)
         delete[] saveSequences;
-    saveSequences = NULL;
+    saveSequences = nullptr;
 
-    if (identities != NULL) {
+    if (identities != nullptr) {
         for (i = 0; i < sequenNumber; i++)
             delete[] identities[i];
         delete[] identities;
     }
-    identities = NULL;
+    identities = nullptr;
 
 
-    if (SequencesMatrix != NULL)
+    if (SequencesMatrix != nullptr)
         delete SequencesMatrix;
-    SequencesMatrix = NULL;
+    SequencesMatrix = nullptr;
 
     sequenNumber = 0;
     residNumber = 0;
@@ -175,17 +175,17 @@ newAlignment::~newAlignment(void) {
     if (--(*SeqRef) == 0) {
         delete SeqRef;
 
-        if (sequences != NULL)
+        if (sequences != nullptr)
             delete[] sequences;
-        sequences = NULL;
+        sequences = nullptr;
 
-        if (seqsName != NULL)
+        if (seqsName != nullptr)
             delete[] seqsName;
-        seqsName = NULL;
+        seqsName = nullptr;
 
-        if (seqsInfo != NULL)
+        if (seqsInfo != nullptr)
             delete[] seqsInfo;
-        seqsInfo = NULL;
+        seqsInfo = nullptr;
     } else if (*SeqRef < 0) {
         delete SeqRef;
         SeqRef = nullptr;
@@ -222,7 +222,7 @@ newAlignment *newAlignment::getTranslationCDS(newAlignment *ProtAlig) {
         newAlig->sequences[x] = *new std::string[ProtAlig->sequences[x].size()];
         std::string &current = newAlig->sequences[x];
 
-        if (ProtAlig->seqsInfo != NULL)
+        if (ProtAlig->seqsInfo != nullptr)
             newAlig->seqsInfo[x] = *new std::string(ProtAlig->seqsInfo[x]);
         newAlig->seqsName[x] = *new std::string(ProtAlig->seqsName[x]);
 
@@ -893,7 +893,7 @@ void newAlignment::printSeqIdentity(void) {
     float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
 
     // Ask for the sequence identities assesment
-    if (identities == NULL)
+    if (identities == nullptr)
         Cleaning->calculateSeqIdentity();
 
     // For each sequence, we look for its most similar one
@@ -981,7 +981,7 @@ void newAlignment::printSeqOverlap() {
     float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
 
     // Ask for the sequence identities assesment
-    if (overlaps == NULL)
+    if (overlaps == nullptr)
         calculateSeqOverlap();
 
     // For each sequence, we look for its most similar one 
@@ -1175,11 +1175,11 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
     minHTML = utils::max(25, maxLongName + 10);
 
     // Recover some stats about different scores from current alignment
-    gapsValues = NULL;
-    if (Statistics->gaps != NULL)
+    gapsValues = nullptr;
+    if (Statistics->gaps != nullptr)
         gapsValues = Statistics->gaps->getGapsWindow();
-    simValues = NULL;
-    if (Statistics->conservation != NULL)
+    simValues = nullptr;
+    if (Statistics->conservation != nullptr)
         simValues = Statistics->conservation->getMdkwVector();
 
     // Print HTML header into output file
@@ -1225,7 +1225,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
          << residNumber - _trimmedAlignment.residNumber << "</span>" << endl;
 
     // Print headers for different scores derived from input alignment/s 
-    if (gapsValues != NULL)
+    if (gapsValues != nullptr)
         file << endl << setw(minHTML) << left << "    Gaps Scores:        "
              << "<span  class=c1>  =0=  </span><span  class=c2> <.001 </span>"
              << "<span  class=c3> <.050 </span><span  class=c4> <.100 </span>"
@@ -1234,7 +1234,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
              << "<span  class=c9> <.500 </span><span class=c10> <.750 </span>"
              << "<span class=c11> <1.00 </span><span class=c12>  =1=  </span>";
 
-    if (simValues != NULL)
+    if (simValues != nullptr)
         file << endl << setw(minHTML) << left << "    Similarity Scores:  "
              << "<span  class=c1>  =0=  </span><span  class=c2> <1e-6 </span>"
              << "<span  class=c3> <1e-5 </span><span  class=c4> <1e-4 </span>"
@@ -1243,7 +1243,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
              << "<span  class=c9> <.500 </span><span class=c10> <.750 </span>"
              << "<span class=c11> <1.00 </span><span class=c12>  =1=  </span>";
 
-    if (consValues != NULL)
+    if (consValues != nullptr)
         file << endl << setw(minHTML) << left << "    Consistency Scores: "
              << "<span  class=c1>  =0=  </span><span  class=c2> <.001 </span>"
              << "<span  class=c3> <.050 </span><span  class=c4> <.100 </span>"
@@ -1252,7 +1252,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
              << "<span  class=c9> <.500 </span><span class=c10> <.750 </span>"
              << "<span class=c11> <1.00 </span><span class=c12>  =1=  </span>";
 
-    if ((gapsValues != NULL) or (simValues == NULL) or (consValues == NULL))
+    if ((gapsValues != nullptr) or (simValues == nullptr) or (consValues == nullptr))
         file << endl;
 
     // Print Sequences in block of BLOCK_SIZE 
@@ -1297,11 +1297,11 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
         file << endl;
 
         // If there is not any score to print, skip this part of the function
-        if ((gapsValues == NULL) and (simValues == NULL) and (consValues == NULL))
+        if ((gapsValues == nullptr) and (simValues == nullptr) and (consValues == nullptr))
             continue;
 
         // Print score colors according to certain predefined thresholds
-        if (gapsValues != NULL) {
+        if (gapsValues != nullptr) {
             file << endl << setw(minHTML) << left << "    Gaps Scores:        ";
             for (k = j; ((k < originalResidNumber) && (k < (j + HTMLBLOCKS))); k++)
                 if (gapsValues[k] == 0)
@@ -1329,7 +1329,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
                 else
                     file << "<span  class=c2> </span>";
         }
-        if (simValues != NULL) {
+        if (simValues != nullptr) {
             file << endl << setw(minHTML) << left << "    Similarity Scores:  ";
             for (k = j; ((k < originalResidNumber) && (k < (j + HTMLBLOCKS))); k++)
                 if (simValues[k] == 1)
@@ -1357,7 +1357,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
                 else
                     file << "<span  class=c2> </span>";
         }
-        if (consValues != NULL) {
+        if (consValues != nullptr) {
             file << endl << setw(minHTML) << left << "    Consistency Scores: ";
             for (k = j; ((k < originalResidNumber) && (k < (j + HTMLBLOCKS))); k++)
                 if (consValues[k] == 1)
@@ -1405,12 +1405,12 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
     int i, j, k, counter = 0;
 
     // BEGIN Init variables
-    int *gapsValues = NULL;
-    if (Statistics->gaps != NULL)
+    int *gapsValues = nullptr;
+    if (Statistics->gaps != nullptr)
         gapsValues = Statistics->gaps->getGapsWindow();
 
-    float *simValues = NULL;
-    if (Statistics->conservation != NULL)
+    float *simValues = nullptr;
+    if (Statistics->conservation != nullptr)
         simValues = Statistics->conservation->getMdkwVector();
 
     // Check if alignment is aligned;
@@ -1477,7 +1477,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
             bottomMargin = 10,
             interBlocksMargin = 20;
 
-    float height = ((originalSequenNumber + 3 + (gapsValues != NULL || simValues != NULL ? 7 : 0) /* Colnumbering occupies 3 rows. Stats 5 */)
+    float height = ((originalSequenNumber + 3 + (gapsValues != nullptr || simValues != nullptr ? 7 : 0) /* Colnumbering occupies 3 rows. Stats 5 */)
                     * fontSize + interBlocksMargin)                 // Height of a block + interblock
                    * std::ceil((float) originalResidNumber / blocks)  // Number of blocks
                    - interBlocksMargin // Number of interblocks is number of blocks  - 1
@@ -1547,7 +1547,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
     // BEGIN Header
 
     strtok(&filename[0], " ");
-    std::string fname = strtok(NULL, " ");
+    std::string fname = strtok(nullptr, " ");
 
     file << "<rect \
                 style=\"fill:none;stroke:lightgrey\" \

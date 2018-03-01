@@ -72,7 +72,7 @@ class sequencesMatrix {
   /** \brief Null constructor.
    *
    * This construction method initializates all attributes
-   * of the new object with 0 or NULL value.
+   * of the new object with 0 or nullptr value.
    */
   sequencesMatrix(void);
 
@@ -80,7 +80,7 @@ class sequencesMatrix {
    * \brief Null constructor.
    *
    * This construction method initializates all attributes
-   * of the new object with 0 or NULL value.
+   * of the new object with 0 or nullptr value.
    */
   sequencesMatrix(string *, string *, int, int);
     

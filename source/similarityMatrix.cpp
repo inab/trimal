@@ -55,9 +55,9 @@ similarityMatrix::similarityMatrix() {
 	 //	which means the end of the current scope.
 	StartTiming("similarityMatrix::similarityMatrix() ");
     numPositions = 0;
-    vhash = NULL;
-    simMat = NULL;
-    distMat = NULL;
+    vhash = nullptr;
+    simMat = nullptr;
+    distMat = nullptr;
 }
 
 void similarityMatrix::memoryAllocation(int nPos) {
@@ -113,9 +113,9 @@ void similarityMatrix::memoryDeletion() {
     delete[] vhash;
 
     numPositions = 0;
-    vhash = NULL;
-    simMat = NULL;
-    distMat = NULL;
+    vhash = nullptr;
+    simMat = nullptr;
+    distMat = nullptr;
 }
 
 bool similarityMatrix::loadSimMatrix(char *fn) {

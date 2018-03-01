@@ -289,7 +289,7 @@ public:
      \param vars Array of strings that will replace the '[tags]' in the message. The number of elements in the array must be the same as [tag] aparitions on the message.\n
      <b> The method will take care of destroying the pointer </b>
      */
-    void report(ErrorCode message, std::string * vars = NULL);
+    void report(ErrorCode message, std::string * vars = nullptr);
 
     /**
      \brief Method to report an Error. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::ERROR
@@ -304,7 +304,7 @@ public:
     \param vars Array of strings that will replace the '[tags]' in the message. The number of elements in the array must be the same as [tag] aparitions on the message.\n
     <b> The method will take care of destroying the pointer </b>
     */
-    void report(WarningCode message, std::string * vars = NULL);
+    void report(WarningCode message, std::string * vars = nullptr);
     /**
      \brief Method to report a Warning. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::WARNING
      \param message Code to report.
@@ -318,7 +318,7 @@ public:
     \param vars Array of strings that will replace the '[tags]' in the message. The number of elements in the array must be the same as [tag] aparitions on the message.\n
     <b> The method will take care of destroying the pointer </b>
     */
-    void report(InfoCode message, std::string * vars = NULL);
+    void report(InfoCode message, std::string * vars = nullptr);
     /**
      \brief Method to report a Info message. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::INFO
      \param message Code to report.

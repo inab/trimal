@@ -355,10 +355,10 @@ void __internalReport::__reportSystem::report(ErrorCode message, std::string *va
 	 //	which means the end of the current scope.
 	StartTiming("void __internalReport::__reportSystem::report(ErrorCode message, std::string *vars) ");
     if (Level > VerboseLevel::ERROR) {
-        if (vars != NULL)
+        if (vars != nullptr)
             delete[] vars;
     } else {
-        if (vars == NULL) {
+        if (vars == nullptr) {
             std::cerr << "[ERROR " << std::setw(3) << std::setfill('0') << message << "] " << ErrorMessages.at(message) << std::endl << std::setfill(' ');
             return;
         }
@@ -385,7 +385,7 @@ void __internalReport::__reportSystem::report(ErrorCode message, char *vars) {
 	StartTiming("void __internalReport::__reportSystem::report(ErrorCode message, char *vars) ");
     if (Level > VerboseLevel::ERROR) return;
 
-    if (vars == NULL) {
+    if (vars == nullptr) {
         std::cerr << "[ERROR " << std::setw(3) << std::setfill('0') << message << "] " << ErrorMessages.at(message) << std::endl << std::setfill(' ');
         return;
     }
@@ -409,10 +409,10 @@ void __internalReport::__reportSystem::report(WarningCode message, std::string *
 	 //	which means the end of the current scope.
 	StartTiming("void __internalReport::__reportSystem::report(WarningCode message, std::string *vars) ");
     if (Level > VerboseLevel::WARNING) {
-        if (vars != NULL)
+        if (vars != nullptr)
             delete[] vars;
     } else {
-        if (vars == NULL) {
+        if (vars == nullptr) {
             std::cout << "[WARNING " << std::setw(3) << std::setfill('0') << message << "] " << WarningMessages.at(message) << std::endl << std::setfill(' ');
             return;
         }
@@ -439,7 +439,7 @@ void __internalReport::__reportSystem::report(WarningCode message, char *vars) {
 	StartTiming("void __internalReport::__reportSystem::report(WarningCode message, char *vars) ");
     if (Level > VerboseLevel::WARNING) return;
 
-    if (vars == NULL) {
+    if (vars == nullptr) {
         std::cout << "[WARNING " << std::setw(3) << std::setfill('0') << message << "] " << WarningMessages.at(message) << std::endl << std::setfill(' ');
         return;
     }
@@ -463,10 +463,10 @@ void __internalReport::__reportSystem::report(InfoCode message, std::string *var
 	 //	which means the end of the current scope.
 	StartTiming("void __internalReport::__reportSystem::report(InfoCode message, std::string *vars) ");
     if (Level > VerboseLevel::INFO) {
-        if (vars != NULL)
+        if (vars != nullptr)
             delete[] vars;
     } else {
-        if (vars == NULL) {
+        if (vars == nullptr) {
             std::cout << "[INFO " << std::setw(3) << std::setfill('0') << message << "] " << InfoMessages.at(message) << std::endl << std::setfill(' ');
             return;
         }
@@ -493,7 +493,7 @@ void __internalReport::__reportSystem::report(InfoCode message, char *vars) {
 	StartTiming("void __internalReport::__reportSystem::report(InfoCode message, char *vars) ");
     if (Level > VerboseLevel::INFO) return;
 
-    if (vars == NULL) {
+    if (vars == nullptr) {
         std::cout << "[INFO " << std::setw(3) << std::setfill('0') << message << "] " << InfoMessages.at(message) << std::endl << std::setfill(' ');
         return;
     }

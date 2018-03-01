@@ -90,7 +90,7 @@ class statisticsConsistency {
 
     void applyWindow(int halfWindow);
 
-    float *values          = NULL;
+    float *values          = nullptr;
 
     ~statisticsConsistency();
 
@@ -108,13 +108,13 @@ private:
             referFile           = -1;
 
     char
-            * line              = NULL,
+            * line              = nullptr,
             c,
-            **filesToCompare    = NULL;
+            **filesToCompare    = nullptr;
 
     std::string nline;
 
-    newAlignment **compareAlignmentsArray = NULL;
+    newAlignment **compareAlignmentsArray = nullptr;
 
     bool appearErrors           = false;
 

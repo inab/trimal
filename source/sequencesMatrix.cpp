@@ -36,8 +36,8 @@ sequencesMatrix::sequencesMatrix(void) {
     resNumber = 0;
     seqsNumber = 0;
 
-    seqsName = NULL;
-    matrix = NULL;
+    seqsName = nullptr;
+    matrix = nullptr;
 
 }
 
@@ -134,7 +134,7 @@ sequencesMatrix::~sequencesMatrix(void) {
 	StartTiming("sequencesMatrix::~sequencesMatrix(void) ");
     int i;
 
-    if (matrix != NULL) {
+    if (matrix != nullptr) {
         for (i = 0; i < seqsNumber; i++)
             delete matrix[i];
         delete[] matrix;
@@ -143,8 +143,8 @@ sequencesMatrix::~sequencesMatrix(void) {
     seqsNumber = 0;
     resNumber = 0;
 
-    matrix = NULL;
-    seqsName = NULL;
+    matrix = nullptr;
+    seqsName = nullptr;
 }
 
 void sequencesMatrix::printMatrix(void) {

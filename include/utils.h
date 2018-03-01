@@ -231,7 +231,7 @@ public:
      It is useful as well because removes tabs and blank spaces at lines at beginning/ending.\n
      \param file ifstream to read line from.
      \return \n
-        NULL if there is nothing to read.\n
+        nullptr if there is nothing to read.\n
         Line that has been read.
      */
     static char* readLine(ifstream &file);
@@ -241,7 +241,7 @@ public:
     It is useful as well because removes tabs and blank spaces at lines at beginning/ending.\n
     \param file ifstream to read line from.
     \return \n
-      NULL if there is nothing to read.\n
+      nullptr if there is nothing to read.\n
       Line that has been read.
     */
     static char* readLine(istream &file);
@@ -250,7 +250,7 @@ public:
             Remove all content surrounded by ("") or ([]).\n
             It warns as well when a mismatch for these flags is found. \n
     \param nline Line to be trimmed.
-    \return NULL if there has been a mismatch\n
+    \return nullptr if there has been a mismatch\n
             Line trimmed of comments.
      */
     static char* trimLine(string nline);

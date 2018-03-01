@@ -311,11 +311,11 @@ char *utils::readLine(ifstream &file) {
     int state;
     char c = ' ';
     string nline;
-    char *line = NULL;
+    char *line = nullptr;
 
     // Check it the end of the file has been reached or not
     if (file.eof())
-        return NULL;
+        return nullptr;
 
     /* Store first line found. For -Windows & MacOS compatibility- carriage return
      * is considered as well as a new line character */
@@ -336,9 +336,9 @@ char *utils::readLine(ifstream &file) {
         state = nline.find("\t", state);
     }
 
-    /* If there is nothing to return, give back a NULL pointer ... */
+    /* If there is nothing to return, give back a nullptr pointer ... */
     if (nline.empty())
-        return NULL;
+        return nullptr;
 
     // Otherwise, initialize the appropiate data structure,
     // dump the data and return it 
@@ -355,11 +355,11 @@ char *utils::readLine(std::istream &file) {
     int state;
     char c = ' ';
     string nline;
-    static char *line = NULL;
+    static char *line = nullptr;
 
     // Check it the end of the file has been reached or not
     if (file.eof())
-        return NULL;
+        return nullptr;
 
 
     /* Store first line found. For -Windows & MacOS compatibility- carriage return
@@ -381,9 +381,9 @@ char *utils::readLine(std::istream &file) {
         state = nline.find("\t", state);
     }
 
-    // If there is nothing to return, give back a NULL pointer ...
+    // If there is nothing to return, give back a nullptr pointer ...
     if (nline.size() == 0)
-        return NULL;
+        return nullptr;
 
     // Otherwise, initialize the appropiate data structure,
     // dump the data and return it
@@ -425,7 +425,7 @@ char *utils::trimLine(string nline) {
         // user should be warned about that
         if (pos == next) {
             debug.report(ErrorCode::PossibleMissmatch);
-            return NULL;
+            return nullptr;
         }
     }
 
@@ -447,7 +447,7 @@ char *utils::trimLine(string nline) {
                 break;
             // Otherwise, warn about the error
             debug.report(ErrorCode::BracketsMissmatchFound);
-            return NULL;
+            return nullptr;
         }
 
         // Look for closest closing bracket to the opening one found
@@ -456,7 +456,7 @@ char *utils::trimLine(string nline) {
         //If no closing bracket has been found. Warn about the mismatch
         if (pos == (int) string::npos) {
             debug.report(ErrorCode::BracketsMissmatchFound);
-            return NULL;
+            return nullptr;
         }
 
         // When both brackets have been found, remove comments inbetween them
