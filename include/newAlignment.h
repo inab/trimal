@@ -161,9 +161,9 @@ public:
 
     bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, newAlignment * proteinAlignment);
 
-    bool alignmentSummaryHTML(newAlignment& _trimmedAlignment, char *destFile, float *consValues);
+    bool alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *destFile, statisticsConsistency *consistency);
     
-    bool alignmentSummarySVG(newAlignment & _trimmedAlignment, char *destFile, float *consValues, int blocks = 120);
+    bool alignmentSummarySVG(newAlignment &_trimmedAlignment, char *destFile, int blocks);
 
     bool alignmentColourHTML(ostream &file);
     

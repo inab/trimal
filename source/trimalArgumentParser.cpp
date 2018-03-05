@@ -1422,14 +1422,14 @@ int trimAlManager::perform() {
 
     if ((svgOutFile != NULL) && (!appearErrors))
         if (!origAlig->
-                alignmentSummarySVG(*singleAlig, svgOutFile, singleAlig->Statistics->consistency->getValues())) {
+                alignmentSummarySVG(*singleAlig, svgOutFile, 0)) {
             debug.report(ErrorCode::ImpossibleToGenerate, new string[1]{"the SVG output file"});
             appearErrors = true;
         }
 
     if ((htmlOutFile != NULL) && (!appearErrors))
         if (!origAlig->
-                alignmentSummaryHTML(*singleAlig, htmlOutFile, singleAlig->Statistics->consistency->getValues())) {
+                alignmentSummaryHTML(*singleAlig, htmlOutFile, origAlig->Statistics->consistency)) {
             debug.report(ErrorCode::ImpossibleToGenerate, new string[1]{"the HTML output file"});
             appearErrors = true;
         }
@@ -1670,12 +1670,6 @@ inline void trimAlManager::clean_alignment() {
         }
 
         if (similarityThreshold != -1.0) {
-            if (singleAlig->Statistics->conservation == nullptr &&
-                    origAlig->Statistics->conservation != nullptr)
-            {
-                singleAlig->Statistics->conservation = new statisticsConservation(singleAlig);
-                singleAlig->Statistics->setSimilarityMatrix(origAlig->Statistics->conservation->simMatrix);
-            }
 
             if (gapThreshold != -1.0)
                 singleAlig = singleAlig->Cleaning->clean(

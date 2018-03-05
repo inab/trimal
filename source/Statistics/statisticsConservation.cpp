@@ -66,6 +66,7 @@ statisticsConservation::~statisticsConservation(void) {
         if (halfWindow > 0)
             delete[] MDK_Window;
 
+        if (matrixIdentity != nullptr)
         for (int i = 0; i < _alignment->sequenNumber; i++)
             delete[] matrixIdentity[i];
         delete[] matrixIdentity;

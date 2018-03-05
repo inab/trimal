@@ -167,8 +167,18 @@ StatisticsManager::StatisticsManager(newAlignment *parent, StatisticsManager *mo
 	StartTiming("StatisticsManager::StatisticsManager(newAlignment *parent, StatisticsManager *mold) ");
     _alignment = parent;
 
+    this->consistency = mold->consistency;
+    mold->consistency = nullptr;
+
+    this->gaps = mold->gaps;
+    mold->gaps = nullptr;
+
+    this->conservation = mold->conservation;
+    mold->conservation = nullptr;
+
     ghWindow = mold->ghWindow;
     shWindow = mold->shWindow;
+
 }
 
 StatisticsManager::~StatisticsManager() {
