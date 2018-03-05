@@ -29,6 +29,7 @@
 #include "../include/defines.h"
 #include "../include/newAlignment.h"
 #include <sstream>
+#include <reportsystem.h>
 
 statisticsGaps::statisticsGaps(newAlignment *parent) {
 	 // Create a timer that will report times upon its destruction
@@ -37,7 +38,7 @@ statisticsGaps::statisticsGaps(newAlignment *parent) {
 
     _alignment = parent;
 
-    int i, ii, j;
+    int i, j;
     char indet;
 
     sequenNumber = _alignment->sequenNumber;
@@ -52,36 +53,31 @@ statisticsGaps::statisticsGaps(newAlignment *parent) {
 
     // Memory allocation for the vectors and its initialization 
     gapsInColumn = new int[residNumber];
-    utils::initlVect(gapsInColumn, residNumber, 0);
+//    utils::initlVect(gapsInColumn, residNumber, 0);
 
     aminosXInColumn = new int[residNumber];
     utils::initlVect(aminosXInColumn, residNumber, 0);
-
-//    gapsWindow = new int[residNumber];
-//    utils::initlVect(gapsWindow, residNumber, 0);
 
     numColumnsWithGaps = new int[sequenNumber + 1];
     utils::initlVect(numColumnsWithGaps, sequenNumber + 1, 0);
 
     // Count the gaps and indeterminations of each columns
-    for (i = 0, ii = -1; i < _alignment->originalResidNumber; i++) {
+    for (i = 0; i < _alignment->originalResidNumber; i++) {
         if (_alignment->saveResidues[i] == -1) continue;
-        ii++;
+        gapsInColumn[i] = 0;
         for (j = 0; j < _alignment->originalSequenNumber; j++) {
             if (_alignment->saveSequences[j] == -1) continue;
             if (_alignment->sequences[j][i] == '-')
-                gapsInColumn[ii]++;
+                gapsInColumn[i]++;
             else if (_alignment->sequences[j][i] == indet)
-                aminosXInColumn[ii]++;
+                aminosXInColumn[i]++;
         }
 
         // Increase the number of colums with the number of gaps of the last processed column
-        numColumnsWithGaps[gapsInColumn[ii]]++;
+        numColumnsWithGaps[gapsInColumn[i]]++;
 
-//        gapsWindow[ii] = gapsInColumn[ii];
-
-        if (gapsInColumn[ii] > maxGaps)
-            maxGaps = gapsInColumn[ii];
+        if (gapsInColumn[i] > maxGaps)
+            maxGaps = gapsInColumn[i];
 
     }
 }
@@ -92,7 +88,7 @@ statisticsGaps::~statisticsGaps(void) {
 	StartTiming("statisticsGaps::~statisticsGaps(void) ");
 
     // Only free memory if there is previous memory allocation
-    if (gapsInColumn != NULL) {
+    if (gapsInColumn != nullptr) {
         delete[] gapsInColumn;
         delete[] numColumnsWithGaps;
         delete[] aminosXInColumn;
@@ -109,17 +105,28 @@ bool statisticsGaps::applyWindow(int _halfWindow) {
 
     if (_halfWindow == 0)
     {
-        gapsWindow = gapsInColumn;
+        delete [] gapsWindow;
+        gapsWindow = nullptr;
         return true;
     }
 
-    int i, j, window;
+    int i, j, x, window;
+
+    if (halfWindow == _halfWindow)
+    {
+        return true;
+    }
 
     // If one of this conditions is true, we return FALSE:                         
     //   .- If already exists a previously calculated vector for this window size 
     //    .- If halfWinSize value is greater than 1/4 of alignment length        
-    if ((halfWindow == _halfWindow) || (_halfWindow > residNumber / 4))
+    if (_halfWindow > residNumber / 4)
+    {
+        debug.report(ErrorCode::GapWindowTooBig);
         return false;
+    }
+
+    gapsWindow = new int[_alignment->originalResidNumber];
 
     // Initializate to 0 the vector that will store the number of gaps of each column 
     // and the vector that will store window processing results                       
@@ -151,8 +158,6 @@ bool statisticsGaps::applyWindow(int _halfWindow) {
         // Update the max number of gaps in the alignment, if neccesary
         if (gapsWindow[i] > maxGaps)
             maxGaps = gapsWindow[i];
-
-
     }
     return true;
 }
@@ -162,7 +167,7 @@ int *statisticsGaps::getGapsWindow(void) {
 	 //	which means the end of the current scope.
 	StartTiming("int *statisticsGaps::getGapsWindow(void) ");
 
-    return gapsWindow;
+    return gapsWindow == nullptr ? gapsInColumn : gapsWindow;
 }
 
 double statisticsGaps::calcCutPoint(float minInputAlignment, float gapThreshold) {
@@ -224,8 +229,8 @@ int statisticsGaps::calcCutPointMixSlope(void) {
     secondSlopeVector = new float[maxGaps + 1];
 
     // We initialize them with -1.0 value and fix the maximum iteractions' number as maximun gaps' number plus 1
-    utils::initlVect(firstSlopeVector, maxGaps, -1.0);
-    utils::initlVect(secondSlopeVector, maxGaps, -1.0);
+    utils::initlVect(firstSlopeVector, maxGaps, -1.0F);
+    utils::initlVect(secondSlopeVector, maxGaps, -1.0F);
     maxIter = maxGaps + 1;
 
     // Until to achieve the maximum iteractions' number.

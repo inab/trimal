@@ -77,6 +77,7 @@ newAlignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const
     // Select the columns with a gaps value
     // less or equal than the cut point.
     for (i = 0, residues = 0; i < _alignment->residNumber; i++) {
+        if (_alignment->saveResidues[i] == -1) continue;
         if (gInCol[i] <= cut) residues++;
         else newAlig->saveResidues[i] = -1;
 
@@ -108,13 +109,14 @@ newAlignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const
         for (i = (_alignment->residNumber / 2), j = (i + 1); (((i > 0) || (j < (_alignment->residNumber - 1))) && (oth > 0)); i--, j++) {
 
             // Left side. Here, we compute the block's size.
-            for (jn = i; ((newAlig->saveResidues[jn] != -1) && (jn >= 0) && (oth > 0)); jn--);
+            for (jn = i; ((_alignment->saveResidues[jn] == -1 || newAlig->saveResidues[jn] != -1) && (jn >= 0) && (oth > 0)); jn--);
 
             // if block's size is greater or equal than the fixed
             // size then we save all columns that have not been
             // saved previously.
             if ((i - jn) >= k) {
                 for (; ((newAlig->saveResidues[jn] == -1) && (jn >= 0) && (oth > 0)); jn--) {
+                    if (_alignment->saveResidues[jn] != -1) continue;
                     if (gInCol[jn] <= cut) {
                         newAlig->saveResidues[jn] = jn;
                         oth--;
@@ -124,13 +126,14 @@ newAlignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const
             }
             i = jn;
             // Right side. Here, we compute the block's size.
-            for (jn = j; ((newAlig->saveResidues[jn] != -1) && (jn < _alignment->residNumber) && (oth > 0)); jn++);
+            for (jn = j; ((_alignment->saveResidues[jn] == -1 || newAlig->saveResidues[jn] != -1) && (jn < _alignment->residNumber) && (oth > 0)); jn++);
 
             // if block's size is greater or equal than the fixed
             // size then we save all columns that have not been
             // saved previously.
             if ((jn - j) >= k) {
                 for (; ((newAlig->saveResidues[jn] == -1) && (jn < _alignment->residNumber) && (oth > 0)); jn++) {
+                    if (_alignment->saveResidues[jn] != -1) continue;
                     if (gInCol[jn] <= cut) {
                         newAlig->saveResidues[jn] = jn;
                         oth--;

@@ -19,23 +19,23 @@ void menu();
 void examples();
 
 trimAlManager::trimAlManager() {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("trimAlManager::trimAlManager() ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("trimAlManager::trimAlManager() ");
 
 }
 
 trimAlManager::~trimAlManager() {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("trimAlManager::~trimAlManager() ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("trimAlManager::~trimAlManager() ");
     delete_variables();
 }
 
 void trimAlManager::parseArguments(int argc, char *argv[]) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void trimAlManager::parseArguments(int argc, char *argv[]) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void trimAlManager::parseArguments(int argc, char *argv[]) ");
 
     // Call to verbosity argument has to be done
     //  before any other argument.
@@ -43,8 +43,7 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
 
     // Check if there is only a call to trimAl,
     //  if so, show the menu and the examples
-    if (argc == 1)
-    {
+    if (argc == 1) {
         menu();
         exit(0);
     }
@@ -124,8 +123,7 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
 
     // Check if we've provided multiple correct arguments
     // but no input file is provided.
-    if (infile == NULL && compareset == -1)
-    {
+    if (infile == NULL && compareset == -1) {
         debug.report(ErrorCode::NoInputFile);
         delete_variables();
         exit(0);
@@ -230,9 +228,10 @@ inline bool trimAlManager::html_out_argument(const int *argc, char *argv[], int 
     }
     return false;
 }
+
 inline bool trimAlManager::timetracker_out_argument(const int *argc, char *argv[], int *i) {
     if ((!strcmp(argv[*i], "-timetrackerout")) && ((*i) + 1 != *argc)) {
-        (*i)+= 1;
+        (*i) += 1;
         return true;
     }
     return false;
@@ -821,9 +820,9 @@ inline bool trimAlManager::ignore_stop_codon_argument(const int *argc, char *arg
 }
 
 bool trimAlManager::processArguments(char *argv[]) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("bool trimAlManager::processArguments(char *argv[]) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("bool trimAlManager::processArguments(char *argv[]) ");
     if (!appearErrors) {
         automatedMethodCount = nogaps + noallgaps + gappyout + strict + strictplus + automated1;
 
@@ -1247,7 +1246,7 @@ inline bool trimAlManager::check_output_file_with_statistics() {
 inline bool trimAlManager::check_multiple_files_comparison(char *argv[]) {
     if ((compareset != -1) && (!appearErrors)) {
 
-        statisticsConsistency * CS = new statisticsConsistency();
+        statisticsConsistency *CS = new statisticsConsistency();
         CS->perform(argv[compareset], ReadWriteMachine, *this, forceFile);
     }
 }
@@ -1342,9 +1341,9 @@ inline void trimAlManager::check_output_format() {
 }
 
 int trimAlManager::perform() {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("int trimAlManager::perform() ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("int trimAlManager::perform() ");
 
     if (appearErrors) return -1;
 
@@ -1384,7 +1383,7 @@ int trimAlManager::perform() {
 
             clean_alignment();
 
-            if ((outfile != NULL) && (!appearErrors)) {
+            if ((outfile != nullptr) && (!appearErrors)) {
                 std::string outFileString = std::string(outfile);
                 if (!ReadWriteMachine.saveAlignment(outFileString, &oformats, origAlig)) {
                     debug.report(ErrorCode::ImpossibleToGenerate, new string[1]{"the output file"});
@@ -1423,14 +1422,14 @@ int trimAlManager::perform() {
 
     if ((svgOutFile != NULL) && (!appearErrors))
         if (!origAlig->
-                alignmentSummarySVG(*singleAlig, svgOutFile, singleAlig->Statistics->consistency->values)) {
+                alignmentSummarySVG(*singleAlig, svgOutFile, singleAlig->Statistics->consistency->getValues())) {
             debug.report(ErrorCode::ImpossibleToGenerate, new string[1]{"the SVG output file"});
             appearErrors = true;
         }
 
     if ((htmlOutFile != NULL) && (!appearErrors))
         if (!origAlig->
-                alignmentSummaryHTML(*singleAlig, htmlOutFile, singleAlig->Statistics->consistency->values)) {
+                alignmentSummaryHTML(*singleAlig, htmlOutFile, singleAlig->Statistics->consistency->getValues())) {
             debug.report(ErrorCode::ImpossibleToGenerate, new string[1]{"the HTML output file"});
             appearErrors = true;
         }
@@ -1454,9 +1453,9 @@ int trimAlManager::perform() {
 }
 
 inline void trimAlManager::print_statistics() {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("inline void trimAlManager::print_statistics() ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("inline void trimAlManager::print_statistics() ");
     if (svgStatsOutFile != NULL) {
         std::string title = infile;
         std::string filename = svgStatsOutFile;
@@ -1570,19 +1569,18 @@ inline void trimAlManager::print_statistics() {
 
         if (compareset != -1) {
             if (sfc)
-                statisticsConsistency::printStatisticsFileColumns(*origAlig, origAlig->Statistics->consistency->values);
+                statisticsConsistency::printStatisticsFileColumns(*origAlig, origAlig->Statistics->consistency->getValues());
             if (sft)
-                statisticsConsistency::printStatisticsFileAcl(*origAlig, origAlig->Statistics->consistency->values);
+                statisticsConsistency::printStatisticsFileAcl(*origAlig, origAlig->Statistics->consistency->getValues());
         }
-        cout << endl;
     }
 
 }
 
 inline bool trimAlManager::create_or_use_similarity_matrix() {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("inline bool trimAlManager::create_or_use_similarity_matrix() ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("inline bool trimAlManager::create_or_use_similarity_matrix() ");
     if ((strict) || (strictplus) || (automated1) || (similarityThreshold != -1.0) || (scc == 1) || (sct == 1)) {
         similMatrix = new similarityMatrix();
 
@@ -1615,41 +1613,42 @@ inline bool trimAlManager::create_or_use_similarity_matrix() {
 }
 
 inline void trimAlManager::clean_alignment() {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("inline void trimAlManager::clean_alignment() ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("inline void trimAlManager::clean_alignment() ");
 
-    if (nogaps)
-        singleAlig = origAlig->Cleaning->cleanGaps(0, 0, getComplementary);
+    singleAlig = origAlig;
 
-    else if (noallgaps)
-        singleAlig = origAlig->Cleaning->cleanNoAllGaps(getComplementary);
-
-    else if (gappyout)
-        singleAlig = origAlig->Cleaning->clean2ndSlope(getComplementary);
-
-    else if (strict)
-        singleAlig = origAlig->Cleaning->cleanCombMethods(getComplementary, false);
-
-    else if (strictplus)
-        singleAlig = origAlig->Cleaning->cleanCombMethods(getComplementary, true);
-
-    else if (automated1) {
-        if (origAlig->Cleaning->selectMethod() == GAPPYOUT)
-            singleAlig = origAlig->Cleaning->clean2ndSlope(getComplementary);
+    if (nogaps) {
+        singleAlig = singleAlig->Cleaning->cleanGaps(0, 0, getComplementary);
+    } else if (noallgaps) {
+        singleAlig = singleAlig->Cleaning->cleanNoAllGaps(getComplementary);
+    } else if (gappyout) {
+        singleAlig = singleAlig->Cleaning->clean2ndSlope(getComplementary);
+    } else if (strict) {
+        singleAlig = singleAlig->Cleaning->cleanCombMethods(getComplementary, false);
+    } else if (strictplus) {
+        singleAlig = singleAlig->Cleaning->cleanCombMethods(getComplementary, true);
+    } else if (automated1) {
+        if (singleAlig->Cleaning->selectMethod() == GAPPYOUT)
+            singleAlig = singleAlig->Cleaning->clean2ndSlope(getComplementary);
         else // STRICT
-            singleAlig = origAlig->Cleaning->cleanCombMethods(getComplementary, false);
+            singleAlig = singleAlig->Cleaning->cleanCombMethods(getComplementary, false);
+    } else if (clusters != -1) {
+        if (clusters > singleAlig->getNumSpecies()) {
+            debug.report(ErrorCode::MoreClustersThanSequences);
+            appearErrors = true;
+        } else {
+            tempAlig = singleAlig->Cleaning->getClustering(
+                    singleAlig->Cleaning->getCutPointClusters(clusters)
+            );
 
-    } else if (consistencyThreshold != -1) {
-        singleAlig = origAlig->Cleaning->cleanCompareFile(
-                consistencyThreshold,
-                conservationThreshold,
-                origAlig->Statistics->consistency->values,
-                getComplementary
-        );
+            singleAlig = tempAlig->Cleaning->cleanNoAllGaps(false);
 
+            delete tempAlig;
+        }
     } else if ((residuesOverlap != -1) && (sequenceOverlap != -1)) {
-        tempAlig = origAlig->Cleaning->cleanSpuriousSeq(
+        tempAlig = singleAlig->Cleaning->cleanSpuriousSeq(
                 residuesOverlap,
                 sequenceOverlap / 100,
                 getComplementary
@@ -1659,94 +1658,103 @@ inline void trimAlManager::clean_alignment() {
 
         delete tempAlig;
 
-    } else if (similarityThreshold != -1.0) {
-        if (gapThreshold != -1.0)
-            singleAlig = origAlig->Cleaning->clean(
+    } else {
+
+        if (consistencyThreshold != -1) {
+            singleAlig = singleAlig->Cleaning->cleanCompareFile(
+                    consistencyThreshold,
                     conservationThreshold,
-                    gapThreshold,
-                    similarityThreshold,
+                    singleAlig->Statistics->consistency->getValues(),
                     getComplementary
             );
-        else
-            singleAlig = origAlig->Cleaning->cleanConservation(
-                    conservationThreshold,
-                    similarityThreshold,
-                    getComplementary
-            );
-
-    } else if (gapThreshold != -1.0)
-        singleAlig = origAlig->Cleaning->cleanGaps(
-                conservationThreshold,
-                gapThreshold,
-                getComplementary
-        );
-
-    else if ((selectCols) || (selectSeqs)) {
-
-        if (delColumns != NULL) {
-            num = delColumns[0];
-            if (delColumns[num] >= origAlig->getNumAminos()) {
-                debug.report(
-                        ErrorCode::SelectOnlyAccepts,
-                        new string[2]{"-selectcols", "residues"}
-                );
-                appearErrors = true;
-            } else
-                singleAlig = origAlig->Cleaning->removeColumns(
-                        delColumns,
-                        1,
-                        num,
-                        getComplementary
-                );
         }
 
-        if (delSequences != NULL) {
-            num = delSequences[0];
-            if (delSequences[num] >= origAlig->getNumSpecies()) {
-                debug.report(ErrorCode::SelectOnlyAccepts, new string[2]{"-selectseqs", "sequences"});
-                appearErrors = true;
-            } else {
-                tempAlig = origAlig->Cleaning->removeSequences(
-                        delSequences,
-                        1,
-                        num,
-                        getComplementary
-                );
-
-                singleAlig = tempAlig->Cleaning->cleanNoAllGaps(false);
-
-                delete tempAlig;
+        if (similarityThreshold != -1.0) {
+            if (singleAlig->Statistics->conservation == nullptr &&
+                    origAlig->Statistics->conservation != nullptr)
+            {
+                singleAlig->Statistics->conservation = new statisticsConservation(singleAlig);
+                singleAlig->Statistics->setSimilarityMatrix(origAlig->Statistics->conservation->simMatrix);
             }
 
-        }
-    } else if (maxIdentity != -1) {
-        tempAlig = origAlig->Cleaning->getClustering(maxIdentity);
+            if (gapThreshold != -1.0)
+                singleAlig = singleAlig->Cleaning->clean(
+                        conservationThreshold,
+                        gapThreshold,
+                        similarityThreshold,
+                        getComplementary
+                );
+            else
+                singleAlig = singleAlig->Cleaning->cleanConservation(
+                        conservationThreshold,
+                        similarityThreshold,
+                        getComplementary
+                );
 
-        singleAlig = tempAlig->Cleaning->cleanNoAllGaps(false);
-
-        delete tempAlig;
-
-    } else if (clusters != -1) {
-        if (clusters > origAlig->getNumSpecies()) {
-            debug.report(ErrorCode::MoreClustersThanSequences);
-            appearErrors = true;
-        } else {
-            tempAlig = origAlig->Cleaning->getClustering(
-                    origAlig->Cleaning->getCutPointClusters(clusters)
+        } else if (gapThreshold != -1.0)
+            singleAlig = singleAlig->Cleaning->cleanGaps(
+                    conservationThreshold,
+                    gapThreshold,
+                    getComplementary
             );
+
+        else if ((selectCols) || (selectSeqs)) {
+
+            if (delColumns != nullptr) {
+                num = delColumns[0];
+                if (delColumns[num] >= singleAlig->getNumAminos()) {
+                    debug.report(
+                            ErrorCode::SelectOnlyAccepts,
+                            new string[2]{"-selectcols", "residues"}
+                    );
+                    appearErrors = true;
+                } else
+                    singleAlig = singleAlig->Cleaning->removeColumns(
+                            delColumns,
+                            1,
+                            num,
+                            getComplementary
+                    );
+            }
+
+            if (delSequences != nullptr) {
+                num = delSequences[0];
+                if (delSequences[num] >= singleAlig->getNumSpecies()) {
+                    debug.report(ErrorCode::SelectOnlyAccepts, new string[2]{"-selectseqs", "sequences"});
+                    appearErrors = true;
+                } else {
+                    tempAlig = origAlig->Cleaning->removeSequences(
+                            delSequences,
+                            1,
+                            num,
+                            getComplementary
+                    );
+
+                    singleAlig = tempAlig->Cleaning->cleanNoAllGaps(false);
+
+                    delete tempAlig;
+                }
+            }
+
+        } else if (maxIdentity != -1) {
+            tempAlig = singleAlig->Cleaning->getClustering(maxIdentity);
 
             singleAlig = tempAlig->Cleaning->cleanNoAllGaps(false);
 
             delete tempAlig;
 
-        }
+        } else { return; }
+    }
+
+    if (singleAlig == nullptr) {
+        exit(-1);
     }
 }
 
 inline void trimAlManager::set_window_size() {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("inline void trimAlManager::set_window_size() ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("inline void trimAlManager::set_window_size() ");
     if (windowSize != -1) {
         gapWindow = windowSize;
         similarityWindow = windowSize;
@@ -1760,9 +1768,9 @@ inline void trimAlManager::set_window_size() {
 }
 
 inline void trimAlManager::delete_variables() {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("inline void trimAlManager::delete_variables() ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("inline void trimAlManager::delete_variables() ");
 
     delete singleAlig;
     singleAlig = nullptr;
@@ -1805,9 +1813,9 @@ inline void trimAlManager::delete_variables() {
 }
 
 void trimAlManager::menu(void) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void trimAlManager::menu(void) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void trimAlManager::menu(void) ");
     cout << endl;
     cout << "trimAl v" << VERSION << ".rev" << REVISION << " build[" << BUILD
          << "]. " << AUTHORS << endl << endl;
@@ -1920,9 +1928,9 @@ void trimAlManager::menu(void) {
 }
 
 void trimAlManager::examples(void) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void trimAlManager::examples(void) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void trimAlManager::examples(void) ");
 
     cout << "Some Examples:" << endl << endl;
 

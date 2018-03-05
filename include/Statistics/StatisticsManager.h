@@ -10,7 +10,7 @@
 //#include "statisticsConsistency.h"
 
 class statisticsGaps;
-class statisticsConservation2;
+class statisticsConservation;
 class statisticsConsistency;
 
 class newAlignment;
@@ -19,7 +19,7 @@ class StatisticsManager {
 public:
 
     statisticsGaps * gaps                   = nullptr;
-    statisticsConservation2 * conservation  = nullptr;
+    statisticsConservation * conservation  = nullptr;
     statisticsConsistency * consistency     = nullptr;
 
     int ghWindow;

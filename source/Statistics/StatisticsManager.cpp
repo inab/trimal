@@ -18,16 +18,18 @@ bool StatisticsManager::calculateConservationStats(void) {
 
     // It the gaps statistics object has not been created
     // we create it 
-    if (calculateGapStats() != true)
+    if (!calculateGapStats())
         return false;
 
     // It the similarity statistics object has not been
     // created we create it
-    if (_alignment->Statistics->conservation == NULL)
+    if (_alignment->Statistics->conservation == nullptr)
+    {
         return false;
+    }
 
     // Ask for the similarity matrix
-    if (_alignment->Statistics->conservation->isSimMatrixDef() != true)
+    if (!_alignment->Statistics->conservation->isSimMatrixDef())
         return false;
 
     // Compute the similarity statistics from the input
@@ -77,8 +79,8 @@ bool StatisticsManager::setSimilarityMatrix(similarityMatrix *sm) {
 	StartTiming("bool StatisticsManager::setSimilarityMatrix(similarityMatrix *sm) ");
 
     // If scons object is not created, we create them
-    if (_alignment->Statistics->conservation == NULL)
-        _alignment->Statistics->conservation = new statisticsConservation2(_alignment);
+    if (_alignment->Statistics->conservation == nullptr)
+        _alignment->Statistics->conservation = new statisticsConservation(_alignment);
 
     // Associate the matrix to the similarity statistics
     // object
@@ -136,14 +138,14 @@ bool StatisticsManager::calculateGapStats(void) {
 	StartTiming("bool StatisticsManager::calculateGapStats(void) ");
 
     // If newAlignment matrix is not created, return false
-    if (_alignment->sequences == NULL)
+    if (_alignment->sequences == nullptr)
         return false;
 
     // If sgaps object is not created, we create them
     // and calculate the statistics
-    if (_alignment->Statistics->gaps == NULL) {
+    if (_alignment->Statistics->gaps == nullptr) {
         _alignment->Statistics->gaps = new statisticsGaps(_alignment);
-        _alignment->Statistics->gaps->applyWindow(ghWindow);
+        return _alignment->Statistics->gaps->applyWindow(ghWindow);
     }
 
     return true;

@@ -47,7 +47,7 @@ using namespace std;
 /* ***************************************************************************************************************** */
 
 /// \brief Class to handle Conservation / Similarity statistics
-class statisticsConservation2 {
+class statisticsConservation {
 public:
 
     newAlignment * _alignment;
@@ -63,7 +63,7 @@ public:
     float *MDK_Window   = nullptr;
 
     /** \brief Identity weight matrix between alignment rows */
-    float **matrixIdentity  = nullptr;
+    float **matrixIdentity      = nullptr;
 
     /** \brief Similarity matrix used to conservation calculations */
     similarityMatrix *simMatrix = nullptr;
@@ -74,10 +74,10 @@ public:
     void calculateMatrixIdentity();
 
     /** \brief Constructor without any parameters */
-    statisticsConservation2(newAlignment * parentAlignment);
+    statisticsConservation(newAlignment * parentAlignment);
 
     /** \brief Destructor */
-    ~statisticsConservation2(void);
+    ~statisticsConservation(void);
 
     /**
         \brief Method to calculate the conservation values of a alignment matrix.

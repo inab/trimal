@@ -184,7 +184,12 @@ enum ErrorCode {
 
     NoInputFile                                         = 88,
 
-    ComparesetFailedAlignmentMissing                             = 89,
+    ComparesetFailedAlignmentMissing                    = 89,
+
+    GapWindowTooBig                                     = 90,
+    SimilarityWindowTooBig                              = 91,
+    ConsistencyWindowTooBig                             = 92,
+    WindowTooBig                                        = 93,
 
     __MAXERROR
 

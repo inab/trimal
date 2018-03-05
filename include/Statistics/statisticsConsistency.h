@@ -62,11 +62,11 @@ class statisticsConsistency {
 /**
  \brief Applies a new window to the alignment.
  \param columns Number of columns present in the alignment.
- \param halfWindow Half size of window to apply.
+ \param _halfWindow Half size of window to apply.
  \param[in,out] columnsValue Vector containing the values that should be averaged and, at the same time, vector that will contain the new averaged values.
  \return \b True
  */
-    static bool applyWindow(int columns, int halfWindow, float * columnsValue);
+    bool applyWindow(int _halfWindow);
 /**
  \brief Method to compare a set of alignments to select the most consistent one respect the others.\n 
  To compute the consistency values we use the proportion of residue pairs per columns in the alignments to compare.
@@ -88,11 +88,9 @@ class statisticsConsistency {
  */
     static bool forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue);
 
-    void applyWindow(int halfWindow);
-
-    float *values          = nullptr;
-
     ~statisticsConsistency();
+
+    float * getValues();
 
 private:
 
@@ -100,12 +98,17 @@ private:
 
     std::ifstream compare;
 
+    float *values          = nullptr;
+    float *values_windowed = nullptr;
+
     int
             numFiles            = 0,
             i                   = 0,
             maxAminos           = 0,
             prevType            = -1,
-            referFile           = -1;
+            referFile           = -1,
+            halfWindow          = 0,
+            residues            = -1;
 
     char
             * line              = nullptr,

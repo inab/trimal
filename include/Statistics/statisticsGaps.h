@@ -50,10 +50,10 @@ public:
   int halfWindow;
   int dataType;
 
-  int *gapsInColumn;
-  int *numColumnsWithGaps;
-  int *aminosXInColumn;
-  int *gapsWindow;
+  int *gapsInColumn       = nullptr;
+  int *numColumnsWithGaps = nullptr;
+  int *aminosXInColumn    = nullptr;
+  int *gapsWindow         = nullptr;
 
  public:
 

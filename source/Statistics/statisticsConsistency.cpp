@@ -109,7 +109,7 @@ void statisticsConsistency::perform(char *comparesetFilePath, ReadWriteMS &ReadW
 
     else {
         // If no alignment is forced to be selected, select one of them
-        if (forceFile == NULL) {
+        if (forceFile == nullptr) {
             values = new float[maxAminos];
             // Perform stat calculation and
             //  choice the best scoring alignment
@@ -119,7 +119,7 @@ void statisticsConsistency::perform(char *comparesetFilePath, ReadWriteMS &ReadW
                     values,
                     numFiles,
                     // Verbosity
-                    manager.stats >= 0 && manager.outfile != NULL);
+                    manager.stats >= 0 && manager.outfile != nullptr);
 
             // If no alignment could be selected, stop the program
             if (referFile == -1)
@@ -157,19 +157,26 @@ void statisticsConsistency::perform(char *comparesetFilePath, ReadWriteMS &ReadW
         //  and this, it's consistency stat
         manager.origAlig->Statistics->consistency = this;
         _alignment = manager.origAlig;
+        residues = _alignment->originalResidNumber;
+
 
         // Apply window sizes
         if (manager.windowSize != -1)
-            statisticsConsistency::applyWindow(manager.origAlig->getNumAminos(), manager.windowSize, values);
+            appearErrors += !applyWindow(manager.windowSize);
         else if (manager.consistencyWindow != -1)
-            statisticsConsistency::applyWindow(manager.origAlig->getNumAminos(), manager.consistencyWindow, values);
+            appearErrors += !applyWindow(manager.consistencyWindow);
+
+        if (appearErrors)
+        {
+            exit(-1);
+        }
 
         // If no output format is provided
         //  we'll use the selected alignment format
         if (manager.oformats.empty()) {
             manager.oformats.emplace_back(
                     ReadWriteMachine.getFileFormatName(
-                            forceFile == NULL ? filesToCompare[referFile] : forceFile)
+                            forceFile == nullptr ? filesToCompare[referFile] : forceFile)
             );
         }
 
@@ -322,7 +329,7 @@ int statisticsConsistency::compareAndChoose(newAlignment **vectAlignments, char 
 
         // The method returns a vector with the consistency
         // value for each column in the selected alignment
-        if ((columnsValue != NULL) && (!appearErrors)) {
+        if ((columnsValue != nullptr) && (!appearErrors)) {
             utils::initlVect(columnsValue, numResiduesAlig[alig], -1);
             for (i = 0; i < numResiduesAlig[alig]; i++)
                 columnsValue[i] = vectHits[alig][i];
@@ -447,46 +454,51 @@ bool statisticsConsistency::forceComparison(newAlignment **vectAlignments, int n
 }
 
 // This method applies a specific windows size to a selected alignment 
-bool statisticsConsistency::applyWindow(int columns, int halfWindow, float *columnsValue) {
+bool statisticsConsistency::applyWindow(int _halfWindow) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("bool statisticsConsistency::applyWindow(int columns, int halfWindow, float *columnsValue) ");
 
-    int i, j, window;
-    float *vectAux;
+    if (_halfWindow == 0)
+    {
+        if (halfWindow != 0)
+            delete[] values_windowed;
 
-    // If windows size is greater than 1/4 of alignment
-    // length, trimAl rejects this windows size
-    if (halfWindow > columns / 4) return false;
-    else window = (2 * halfWindow + 1);
+        values_windowed = nullptr;
+        return true;
+    }
+    if ((halfWindow == _halfWindow)) return true;
 
-    // Allocate local memory. Copy the array values to
-    // auxiliar memory
-    vectAux = new float[columns];
-    utils::copyVect(columnsValue, vectAux, columns);
-
-    // For each column from the selected alignment,
-    // compute the average for its consistency values
-    for (i = 0; i < columns; i++) {
-
-        // This average is computed from halfWindow positions
-        // before to halfWindow positions after
-        for (j = i - halfWindow, columnsValue[i] = 0; j <= i + halfWindow; j++) {
-            if (j < 0) columnsValue[i] += vectAux[-j];
-            else if (j >= columns)
-                columnsValue[i] += vectAux[((2 * columns - j) - 2)];
-            else columnsValue[i] += vectAux[j];
-        }
-
-        // Finally, the column value is divided by the window
-        // size in order to compute the average score.
-        columnsValue[i] /= window;
+    if (_halfWindow > residues / 4)
+    {
+        debug.report(ErrorCode::ConsistencyWindowTooBig);
+        exit(-1);
     }
 
-    // Deallocate dinamic memory
-    delete[] vectAux;
+    int i, j, window;
+    delete[] values_windowed;
+    values_windowed = new float[residues];
 
-    // If everything is OK, return true
+    // If one of this conditions is true, we return FALSE:
+    //    .- If already exists a previously calculated vector for this window size
+    //    .- If mediumWinSize value is greater than 1/4 of alignment length
+
+    halfWindow = _halfWindow;
+    window = 2 * halfWindow + 1;
+
+    // Do the average window calculations
+    for (i = 0; i < residues; i++) {
+        values_windowed[i] = 0.F;
+        for (j = i - halfWindow; j <= i + halfWindow; j++) {
+            if (j < 0) values_windowed[i] += values[-j];
+            else if (j >= residues) values_windowed[i] += values[((2 * residues - j) - 2)];
+            else values_windowed[i] += values[j];
+        }
+
+        // Calculate the similiraty value for the i column
+        values_windowed[i] = values_windowed[i] / window;
+    }
+
     return true;
 }
 
@@ -712,11 +724,11 @@ void statisticsConsistency::delete_variables() {
 
 statisticsConsistency::~statisticsConsistency() {
     delete [] values;
-    _alignment = NULL;
+    _alignment = nullptr;
 }
 
-void statisticsConsistency::applyWindow(int halfWindow) {
-
+float *statisticsConsistency::getValues() {
+    if (values_windowed == nullptr) return values;
+    return values_windowed;
 }
-
 

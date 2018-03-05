@@ -7,10 +7,13 @@ __internalReport::__reportSystem debug = __internalReport::__reportSystem();
 const std::map<InfoCode, const char *> __internalReport::__reportSystem::InfoMessages =
         {
                 {InfoCode::CuttingSequence,
-                        "Cutting sequence \"[ŧag]\" at first appearance of stop codon \"[tag]\" (residue \"[tag]\") at position [tag] (length: [tag] \")"},
+                        "Cutting sequence \"[tag]\" at first appearance of stop codon \"[tag]\""
+                                " (residue \"[tag]\") at position [tag] (length: [tag] \")"},
 
                 {InfoCode::WindowSizeCompareset,
-                        "Try with specific comparison file window value. Parameter -cw"},
+                        "Window size (-w) is provided. "
+                                "It's recommended to use specific consistency window size (-cw)"
+                                " when using -compareset option"},
         };
 
 const std::map<WarningCode, const char *> __internalReport::__reportSystem::WarningMessages =
@@ -309,19 +312,32 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
                         "No reference sequence found for contig \"[tag]\""},
 
                 {ErrorCode::SNPoutOfBounds,
-                        "SNP at positon \"[tag]\" in file \"[tag]\" cannot be applied as sequence has a length of \"[tag]\"" },
+                        "SNP at positon \"[tag]\" in file \"[tag]\" cannot be applied as sequence has a length of \"[tag]\""},
 
                 {ErrorCode::NoInputFile,
                         "An MSA input file has to be provided"},
 
                 {ErrorCode::ComparesetFailedAlignmentMissing,
-                        "Compareset couldn't be performed as some alignments are missing." }
+                        "Compareset couldn't be performed as some alignments are missing"},
+
+                {ErrorCode::GapWindowTooBig,
+                        "Gap window size (-gw) provided is too big, please specify a window lesser than 1/4 of residues"},
+
+                {ErrorCode::SimilarityWindowTooBig,
+                        "Similarity window size (-sw) provided is too big, please specify a window lesser than 1/4 of residues"},
+
+                {ErrorCode::ConsistencyWindowTooBig,
+                        "Consistency window size (-cw) provided is too big, please specify a window lesser than 1/4 of residues"},
+
+                {ErrorCode::WindowTooBig,
+                        "Window size (-w) provided is too big, please specify a window lesser than 1/4 of residues"},
+
         };
 
 void __internalReport::__reportSystem::PrintCodesAndMessages() {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void __internalReport::__reportSystem::PrintCodesAndMessages() ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void __internalReport::__reportSystem::PrintCodesAndMessages() ");
     switch (Level) {
         case VerboseLevel::NONE:
             std::cout << "[VerboseLevel] None" << std::endl;
@@ -351,9 +367,9 @@ void __internalReport::__reportSystem::PrintCodesAndMessages() {
 }
 
 void __internalReport::__reportSystem::report(ErrorCode message, std::string *vars) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void __internalReport::__reportSystem::report(ErrorCode message, std::string *vars) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void __internalReport::__reportSystem::report(ErrorCode message, std::string *vars) ");
     if (Level > VerboseLevel::ERROR) {
         if (vars != nullptr)
             delete[] vars;
@@ -380,9 +396,9 @@ void __internalReport::__reportSystem::report(ErrorCode message, std::string *va
 }
 
 void __internalReport::__reportSystem::report(ErrorCode message, char *vars) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void __internalReport::__reportSystem::report(ErrorCode message, char *vars) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void __internalReport::__reportSystem::report(ErrorCode message, char *vars) ");
     if (Level > VerboseLevel::ERROR) return;
 
     if (vars == nullptr) {
@@ -405,9 +421,9 @@ void __internalReport::__reportSystem::report(ErrorCode message, char *vars) {
 }
 
 void __internalReport::__reportSystem::report(WarningCode message, std::string *vars) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void __internalReport::__reportSystem::report(WarningCode message, std::string *vars) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void __internalReport::__reportSystem::report(WarningCode message, std::string *vars) ");
     if (Level > VerboseLevel::WARNING) {
         if (vars != nullptr)
             delete[] vars;
@@ -434,9 +450,9 @@ void __internalReport::__reportSystem::report(WarningCode message, std::string *
 }
 
 void __internalReport::__reportSystem::report(WarningCode message, char *vars) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void __internalReport::__reportSystem::report(WarningCode message, char *vars) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void __internalReport::__reportSystem::report(WarningCode message, char *vars) ");
     if (Level > VerboseLevel::WARNING) return;
 
     if (vars == nullptr) {
@@ -459,9 +475,9 @@ void __internalReport::__reportSystem::report(WarningCode message, char *vars) {
 }
 
 void __internalReport::__reportSystem::report(InfoCode message, std::string *vars) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void __internalReport::__reportSystem::report(InfoCode message, std::string *vars) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void __internalReport::__reportSystem::report(InfoCode message, std::string *vars) ");
     if (Level > VerboseLevel::INFO) {
         if (vars != nullptr)
             delete[] vars;
@@ -488,9 +504,9 @@ void __internalReport::__reportSystem::report(InfoCode message, std::string *var
 }
 
 void __internalReport::__reportSystem::report(InfoCode message, char *vars) {
-	 // Create a timer that will report times upon its destruction
-	 //	which means the end of the current scope.
-	StartTiming("void __internalReport::__reportSystem::report(InfoCode message, char *vars) ");
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void __internalReport::__reportSystem::report(InfoCode message, char *vars) ");
     if (Level > VerboseLevel::INFO) return;
 
     if (vars == nullptr) {
