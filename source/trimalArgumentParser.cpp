@@ -917,6 +917,7 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {
 inline bool trimAlManager::check_thresholds_incompatibilities() {
     //TODO consistencyThreshold was not present on this Incompatibilities. Is this correct?
     if ((gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || (consistencyThreshold != -1)) {
+
         if (automatedMethodCount) {
             debug.report(ErrorCode::CombinationAmongTrimmingMethods);
             appearErrors = true;
@@ -935,10 +936,10 @@ inline bool trimAlManager::check_thresholds_incompatibilities() {
             appearErrors = true;
         }
 
-        if (clusters != -1) {
-            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
-            appearErrors = true;
-        }
+//        if (clusters != -1) {
+//            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
+//            appearErrors = true;
+//        }
     }
     return appearErrors;
 }
@@ -955,10 +956,10 @@ inline bool trimAlManager::check_automated_methods_incompatibilities() {
             appearErrors = true;
         }
 
-        if (clusters != -1) {
-            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
-            appearErrors = true;
-        }
+//        if (clusters != -1) {
+//            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
+//            appearErrors = true;
+//        }
 
         if (maxIdentity != -1) {
             debug.report(ErrorCode::CombinationAmongTrimmingMethods);
@@ -1437,7 +1438,7 @@ int trimAlManager::perform() {
     if ((outfile != NULL) && (!appearErrors)) {
         std::string outFileString = std::string(outfile);
         if (ReadWriteMachine.saveAlignment(outFileString, &oformats, singleAlig) == false) {
-            debug.report(ErrorCode::ImpossibleToGenerate, new string[1]{"the output file"});
+
             appearErrors = true;
         }
 
@@ -1766,6 +1767,8 @@ inline void trimAlManager::delete_variables() {
     //	which means the end of the current scope.
     StartTiming("inline void trimAlManager::delete_variables() ");
 
+    if (singleAlig == origAlig)
+        singleAlig = nullptr;
     delete singleAlig;
     singleAlig = nullptr;
     delete origAlig;

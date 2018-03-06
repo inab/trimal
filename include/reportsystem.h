@@ -191,8 +191,8 @@ enum ErrorCode {
     ConsistencyWindowTooBig                             = 92,
     WindowTooBig                                        = 93,
 
-    __MAXERROR
-
+    AlignmentIsEmpty                                    = 94,
+    __MAXERROR,
 };
 
 enum WarningCode {

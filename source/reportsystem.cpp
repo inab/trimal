@@ -332,6 +332,9 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
                 {ErrorCode::WindowTooBig,
                         "Window size (-w) provided is too big, please specify a window lesser than 1/4 of residues"},
 
+                {ErrorCode::AlignmentIsEmpty,
+                        "Couldn't output any alignment as it doesn't contain any sequence"},
+
         };
 
 void __internalReport::__reportSystem::PrintCodesAndMessages() {
