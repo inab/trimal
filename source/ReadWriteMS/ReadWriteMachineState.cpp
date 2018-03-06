@@ -71,7 +71,7 @@ newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
 
         if (temp_value > format_value)
         {
-            temp_value = format_value;
+            format_value = temp_value;
             inState = state;
         }
     }
@@ -230,7 +230,6 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
             if (!recognized)
             {
                 debug.report(ErrorCode::OutputFormatNotRecognized, &outFormat[0]);
-//                 cerr << "Cannot recognize output format " << outFormat << endl;
                 return;
             }
         }
@@ -249,19 +248,16 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
         if (!inFileHandler.is_open())
         {
             debug.report(ErrorCode::CantOpenFile, &inFile[0]);
-//             cerr << "ERROR: Couldn't open input file " << inFile << endl;
             return;
         }
         else if (inFileHandler.peek() == std::ifstream::traits_type::eof())
         {
             debug.report(ErrorCode::FileIsEmpty, &inFile[0]);
-//             cerr << "ERROR: " << inFile << " is empty" << endl;
             return;
         }
 
         inState = NULL;
         format_value = 0;
-        temp_value = 0;
 
         // Get format State that can handle this alignment.
         for(ReadWriteBaseState* state : available_states)
@@ -270,7 +266,7 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
 
             if (temp_value > format_value)
             {
-                temp_value = format_value;
+                format_value = temp_value;
                 inState = state;
             }
         }
@@ -279,7 +275,6 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
         if (inState == NULL)
         {
             debug.report(ErrorCode::AlignmentFormatNotRecognized, &inFile[0]);
-//             cerr << "Cannot recognize input format of file " << inFile << endl;
             inFileHandler.close();
             return;
         }
@@ -340,7 +335,7 @@ std::string ReadWriteMS::getFileFormatName(std::string inFile)
 
         if (temp_value > format_value)
         {
-            temp_value = format_value;
+            format_value = temp_value;
             inState = state;
         }
     }
