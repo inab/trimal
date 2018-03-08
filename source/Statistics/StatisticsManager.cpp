@@ -24,9 +24,7 @@ bool StatisticsManager::calculateConservationStats(void) {
     // It the similarity statistics object has not been
     // created we create it
     if (_alignment->Statistics->conservation == nullptr)
-    {
         return false;
-    }
 
     // Ask for the similarity matrix
     if (!_alignment->Statistics->conservation->isSimMatrixDef())
@@ -34,7 +32,7 @@ bool StatisticsManager::calculateConservationStats(void) {
 
     // Compute the similarity statistics from the input
     // newAlignment
-    if (!_alignment->Statistics->conservation->calculateVectors(_alignment->Statistics->gaps->getGapsWindow()))
+    if (!_alignment->Statistics->conservation->calculateVectors(true))
         return false;
 
     // Ask to know if it is necessary to apply any window
@@ -167,14 +165,14 @@ StatisticsManager::StatisticsManager(newAlignment *parent, StatisticsManager *mo
 	StartTiming("StatisticsManager::StatisticsManager(newAlignment *parent, StatisticsManager *mold) ");
     _alignment = parent;
 
-    this->consistency = mold->consistency;
-    mold->consistency = nullptr;
+    if (mold->conservation)
+        conservation    = new statisticsConservation(parent, mold->conservation);
 
-    this->gaps = mold->gaps;
-    mold->gaps = nullptr;
+    if (mold->gaps)
+        gaps            = new statisticsGaps(parent, mold->gaps);
 
-    this->conservation = mold->conservation;
-    mold->conservation = nullptr;
+    if (mold->consistency)
+        consistency     = new statisticsConsistency(parent, mold->consistency);
 
     ghWindow = mold->ghWindow;
     shWindow = mold->shWindow;

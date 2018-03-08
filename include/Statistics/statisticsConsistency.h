@@ -44,6 +44,7 @@ class statisticsConsistency {
   public:
 
 
+
     void perform(char *comparesetFilePath, ReadWriteMS &ReadWriteMachine, trimAlManager &manager, char *forceFile);
 
 
@@ -88,6 +89,9 @@ class statisticsConsistency {
  */
     static bool forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue);
 
+    statisticsConsistency(newAlignment *pAlignment, statisticsConsistency *pConsistency);
+    statisticsConsistency();
+
     ~statisticsConsistency();
 
     float * getValues();
@@ -107,8 +111,11 @@ private:
             maxAminos           = 0,
             prevType            = -1,
             referFile           = -1,
-            halfWindow          = 0,
+            halfWindowApplied   = -1,
+            halfWindowRequested = -1,
             residues            = -1;
+
+    int * refCounter;
 
     char
             * line              = nullptr,
@@ -122,5 +129,7 @@ private:
     bool appearErrors           = false;
 
     void delete_variables();
+
+    bool isDefinedWindow();
 };
 #endif

@@ -275,7 +275,7 @@ If the counter is bigger than 1, we are trying to use multiple automatic methods
 */
 
 /**
-\var float trimAlManager::compareVect
+\var float trimAlManager::values
 \brief Vector with the consistency value for each column in the selected alignment
 */
 

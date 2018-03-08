@@ -50,12 +50,15 @@ using namespace std;
 class statisticsConservation {
 public:
 
+    statisticsConservation(newAlignment *parentAlignment, statisticsConservation *mold);
+
     newAlignment * _alignment;
 
     int
     residues,
     sequences,
-    halfWindow = -1;
+    halfWindowApplied = -1,
+    halfWindowRequested = -1;
 
     /* Conservation vectors */
     float *Q            = nullptr;
@@ -68,6 +71,7 @@ public:
     /** \brief Similarity matrix used to conservation calculations */
     similarityMatrix *simMatrix = nullptr;
 
+    int * refCounter;
 
 public:
     /** \brief Computes the matrix identity between alignment's columns. */
@@ -83,7 +87,7 @@ public:
         \brief Method to calculate the conservation values of a alignment matrix.
         \param gaps Vector containing the gaps info.
     */
-    bool calculateVectors(int *gaps);
+    bool calculateVectors(bool cutByGap = true);
 
     /**
         \brief Allows us compute the conservationWindow's values.
@@ -102,7 +106,7 @@ public:
         \brief This methods returns a pointer to conservationWindow's vector
         \return Conservation window vector.
     */
-    float *getMdkwVector(void);
+    float *getMdkWindowedVector(void);
 
     /**
         \brief Stores a valid similarity matrix point to use.

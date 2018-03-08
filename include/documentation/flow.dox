@@ -1,0 +1,49 @@
+/*! \page trimAl Data Flow
+
+\section introduction_flow Data Flow
+
+trimAl performs multiple steps to trim your alignments.\n
+All these steps are optional, so indeed, it's possible to run trimAl without doing anything to an alignment.\n
+These steps are divided into:\n
+
+\section Preprocessing Preprocessing
+    This step allows to obtain an alignment from different sources instead of providing one with the '-in' argument:\n
+    - \b NGS: Allows to load a VCF file containing mutations for a REF file.\n
+    When both are provided, a MSA can be built and used in later steps.
+    - \b CompareSet: Performs a consistency analysis to a set of alignments.\n
+    The most consistent alignment among the set is selected.
+    \image html preprocess.svg
+
+\section SeqTrim Sequence Trimming
+    This steps allows to trim the alignment by removing sequences.\n
+    - \b Cluster: Performs a clustering among the MSA.\n
+    The most representative sequences are selected.
+    - \b MaxIdentity: Performs an identity analysis.\n
+     It keeps only the sequences with a minimum identity (provided by the user) among the sequences in the set.
+    - \b SelectSeqs: Manually removes sequences from the alignment.
+    \image html seqTrim.svg
+
+\section ResTrim Residue Trimming
+    This step allows to trim the alignment by removing columns.\n
+    - <b> Automated Methods</b> (Based on Gaps)
+        - \b Gappyout: Searches a threshold based on gaps distribution.\n
+        Removes residues that overpass this threshold.
+        - \b NoGaps: Removes all columns that contains gaps.
+        - \b NoAllGaps: Removes all columns that only contain gaps.\n
+        Although the input file usually does not contain only gaps columns,\n
+         removing sequences could lead to this 'all gaps' columns.
+        - <b>Automated Methods</b> (Based on Similarity)
+            - \b Strict: Searches a threshold based on gaps and similarity distribution.\n
+            - \b StrictPlus: Searches a threshold based on gaps and similarity distribution.\n
+    - <b>Meta Automated Methods</b>\n
+    These methods use heuristics to select the best method to clean an alignment based on certain properties:
+        - \b Automated1: Decides between Gappyout and Strict methods.
+
+    \image html resTrim.svg
+
+\section PostProcess Post Process
+    This step performs post processing on the resulting alignment.\n
+    These steps are sequential and optional, so you can perform any combination of them, or not perform any post process.\n
+    \image html postProcess.svg
+
+*/

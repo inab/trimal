@@ -130,6 +130,27 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
     }
 }
 
+inline bool trimAlManager::check_arguments_incompatibilities() {
+    // The incompatibilities are checked only once,
+    // so there are arguments with no function to check it's incompatibilities although they have.
+    // These are checked within other functions.
+    // So if argument A is incompatible with B,
+    // A may have this checked in it's incompatibilities function, but B may have no function to check them.
+
+    check_inFile_incompatibilities();
+    check_select_cols_and_seqs_incompatibilities();
+    check_thresholds_incompatibilities();
+    check_automated_methods_incompatibilities();
+    check_max_identity_incompatibilities();
+    check_clusters_incompatibilities();
+    check_windows_incompatibilities();
+    check_stats_incompatibilities();
+    check_codon_behaviour_incompatibility();
+    check_combinations_among_thresholds_incompatibility();
+
+    return appearErrors;
+}
+
 inline void trimAlManager::verbosity_argument(const int *argc, char *argv[]) {
     for (int i = 1; i < *argc; i++) {
         if (!strcmp(argv[i], "--verbosity") || !strcmp(argv[i], "-v")) {
@@ -838,27 +859,6 @@ bool trimAlManager::processArguments(char *argv[]) {
     return false;
 }
 
-inline bool trimAlManager::check_arguments_incompatibilities() {
-    // The incompatibilities are checked only once,
-    // so there are arguments with no function to check it's incompatibilities although they have.
-    // These are checked within other functions.
-    // So if argument A is incompatible with B,
-    // A may have this checked in it's incompatibilities function, but B may have no function to check them.
-
-    check_inFile_incompatibilities();
-    check_select_cols_and_seqs_incompatibilities();
-    check_thresholds_incompatibilities();
-    check_automated_methods_incompatibilities();
-    check_max_identity_incompatibilities();
-    check_clusters_incompatibilities();
-    check_windows_incompatibilities();
-    check_stats_incompatibilities();
-    check_codon_behaviour_incompatibility();
-    check_combinations_among_thresholds_incompatibility();
-
-    return appearErrors;
-}
-
 inline bool trimAlManager::check_inFile_incompatibilities() {
     if (infile != NULL) {
         if ((sfc) || (sft) || (consistencyThreshold != -1)) {
@@ -951,10 +951,10 @@ inline bool trimAlManager::check_automated_methods_incompatibilities() {
             appearErrors = true;
         }
 
-        if (blockSize != -1) {
-            debug.report(ErrorCode::AutomathicMethodAndBlock);
-            appearErrors = true;
-        }
+//        if (blockSize != -1) {
+//            debug.report(ErrorCode::AutomathicMethodAndBlock);
+//            appearErrors = true;
+//        }
 
 //        if (clusters != -1) {
 //            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
@@ -1430,7 +1430,7 @@ int trimAlManager::perform() {
 
     if ((htmlOutFile != NULL) && (!appearErrors))
         if (!origAlig->
-                alignmentSummaryHTML(*singleAlig, htmlOutFile, origAlig->Statistics->consistency)) {
+                alignmentSummaryHTML(*singleAlig, htmlOutFile)) {
             debug.report(ErrorCode::ImpossibleToGenerate, new string[1]{"the HTML output file"});
             appearErrors = true;
         }
@@ -1621,27 +1621,27 @@ inline void trimAlManager::clean_alignment() {
     singleAlig = origAlig;
 
     if (nogaps) {
-        singleAlig = singleAlig->Cleaning->cleanGaps(0, 0, getComplementary);
+        singleAlig = origAlig->Cleaning->cleanGaps(0, 0, getComplementary);
     } else if (noallgaps) {
-        singleAlig = singleAlig->Cleaning->cleanNoAllGaps(getComplementary);
+        singleAlig = origAlig->Cleaning->cleanNoAllGaps(getComplementary);
     } else if (gappyout) {
-        singleAlig = singleAlig->Cleaning->clean2ndSlope(getComplementary);
+        singleAlig = origAlig->Cleaning->clean2ndSlope(getComplementary);
     } else if (strict) {
-        singleAlig = singleAlig->Cleaning->cleanCombMethods(getComplementary, false);
+        singleAlig = origAlig->Cleaning->cleanCombMethods(getComplementary, false);
     } else if (strictplus) {
-        singleAlig = singleAlig->Cleaning->cleanCombMethods(getComplementary, true);
+        singleAlig = origAlig->Cleaning->cleanCombMethods(getComplementary, true);
     } else if (automated1) {
-        if (singleAlig->Cleaning->selectMethod() == GAPPYOUT)
-            singleAlig = singleAlig->Cleaning->clean2ndSlope(getComplementary);
+        if (origAlig->Cleaning->selectMethod() == GAPPYOUT)
+            singleAlig = origAlig->Cleaning->clean2ndSlope(getComplementary);
         else // STRICT
-            singleAlig = singleAlig->Cleaning->cleanCombMethods(getComplementary, false);
+            singleAlig = origAlig->Cleaning->cleanCombMethods(getComplementary, false);
     } else if (clusters != -1) {
-        if (clusters > singleAlig->getNumSpecies()) {
+        if (clusters > origAlig->getNumSpecies()) {
             debug.report(ErrorCode::MoreClustersThanSequences);
             appearErrors = true;
         } else {
-            tempAlig = singleAlig->Cleaning->getClustering(
-                    singleAlig->Cleaning->getCutPointClusters(clusters)
+            tempAlig = origAlig->Cleaning->getClustering(
+                    origAlig->Cleaning->getCutPointClusters(clusters)
             );
 
             singleAlig = tempAlig->Cleaning->cleanNoAllGaps(false);
@@ -1649,7 +1649,7 @@ inline void trimAlManager::clean_alignment() {
             delete tempAlig;
         }
     } else if ((residuesOverlap != -1) && (sequenceOverlap != -1)) {
-        tempAlig = singleAlig->Cleaning->cleanSpuriousSeq(
+        tempAlig = origAlig->Cleaning->cleanSpuriousSeq(
                 residuesOverlap,
                 sequenceOverlap / 100,
                 getComplementary
@@ -1662,13 +1662,13 @@ inline void trimAlManager::clean_alignment() {
     } else {
 
         if (consistencyThreshold != -1) {
-            singleAlig = singleAlig->Cleaning->cleanCompareFile(
+            singleAlig = origAlig->Cleaning->cleanCompareFile(
                     consistencyThreshold,
                     conservationThreshold,
                     singleAlig->Statistics->consistency->getValues(),
                     getComplementary
             );
-        }
+        } else { singleAlig = origAlig; }
 
         if (similarityThreshold != -1.0) {
 
@@ -1738,7 +1738,10 @@ inline void trimAlManager::clean_alignment() {
 
             delete tempAlig;
 
-        } else { return; }
+        } else {
+            singleAlig = nullptr;
+            return;
+        }
     }
 
     if (singleAlig == nullptr) {

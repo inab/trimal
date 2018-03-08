@@ -1,4 +1,3 @@
-#include <TimerFactory.h>
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
@@ -30,6 +29,8 @@
 #include "../include/newAlignment.h"
 #include <sstream>
 #include <reportsystem.h>
+#include <TimerFactory.h>
+
 
 statisticsGaps::statisticsGaps(newAlignment *parent) {
 	 // Create a timer that will report times upon its destruction
@@ -44,7 +45,7 @@ statisticsGaps::statisticsGaps(newAlignment *parent) {
     sequenNumber = _alignment->sequenNumber;
     residNumber = _alignment->residNumber;
     maxGaps = 0;
-    halfWindow = 0;
+    halfWindowApplied = 0;
 
     if (_alignment->getAlignmentType() & SequenceTypes::DNA)
         indet = 'X';
@@ -52,10 +53,9 @@ statisticsGaps::statisticsGaps(newAlignment *parent) {
         indet = 'N';
 
     // Memory allocation for the vectors and its initialization 
-    gapsInColumn = new int[residNumber];
-//    utils::initlVect(gapsInColumn, residNumber, 0);
+    gapsInColumn = new int[_alignment->originalResidNumber + 1];
 
-    aminosXInColumn = new int[residNumber];
+    aminosXInColumn = new int[_alignment->originalResidNumber + 1];
     utils::initlVect(aminosXInColumn, residNumber, 0);
 
     numColumnsWithGaps = new int[sequenNumber + 1];
@@ -80,7 +80,39 @@ statisticsGaps::statisticsGaps(newAlignment *parent) {
             maxGaps = gapsInColumn[i];
 
     }
+
+    refCounter = new int(1);
 }
+
+statisticsGaps::statisticsGaps(newAlignment *pAlignment,
+                               statisticsGaps *pGaps) {
+    _alignment = pAlignment;
+
+    sequenNumber = _alignment->sequenNumber;
+    residNumber = _alignment->residNumber;
+    maxGaps = 0;
+    halfWindowApplied = -1;
+    halfWindowRequested = pGaps->halfWindowRequested;
+
+    // Memory allocation for the vectors and its initialization
+    gapsInColumn = pGaps->gapsInColumn;
+
+    aminosXInColumn = pGaps->aminosXInColumn;
+
+    numColumnsWithGaps = pGaps->numColumnsWithGaps;
+
+    // Count the gaps and indeterminations of each columns
+    for (int i = 0; i < _alignment->originalResidNumber; i++) {
+
+        if (_alignment->saveResidues[i] == -1) continue;
+        if (gapsInColumn[i] > maxGaps)
+            maxGaps = gapsInColumn[i];
+    }
+
+    refCounter = pGaps->refCounter;
+    (*refCounter)++;
+}
+
 
 statisticsGaps::~statisticsGaps(void) {
 	 // Create a timer that will report times upon its destruction
@@ -88,14 +120,13 @@ statisticsGaps::~statisticsGaps(void) {
 	StartTiming("statisticsGaps::~statisticsGaps(void) ");
 
     // Only free memory if there is previous memory allocation
-    if (gapsInColumn != nullptr) {
+    if (--(*refCounter) == 0) {
         delete[] gapsInColumn;
         delete[] numColumnsWithGaps;
         delete[] aminosXInColumn;
-
-        if (halfWindow > 0)
-            delete[] gapsWindow;
+        delete refCounter;
     }
+    delete[] gapsWindow;
 }
 
 bool statisticsGaps::applyWindow(int _halfWindow) {
@@ -103,45 +134,49 @@ bool statisticsGaps::applyWindow(int _halfWindow) {
 	 //	which means the end of the current scope.
 	StartTiming("bool statisticsGaps::applyWindow(int _halfWindow) ");
 
-    if (_halfWindow == 0)
-    {
-        delete [] gapsWindow;
-        gapsWindow = nullptr;
-        return true;
-    }
-
-    int i, j, x, window;
-
-    if (halfWindow == _halfWindow)
-    {
-        return true;
-    }
-
-    // If one of this conditions is true, we return FALSE:                         
-    //   .- If already exists a previously calculated vector for this window size 
-    //    .- If halfWinSize value is greater than 1/4 of alignment length        
     if (_halfWindow > residNumber / 4)
     {
         debug.report(ErrorCode::GapWindowTooBig);
         return false;
     }
 
-    gapsWindow = new int[_alignment->originalResidNumber];
+    // If the current half window is the same as the last one, don't do anything
+    if (halfWindowApplied == _halfWindow) return true;
 
-    // Initializate to 0 the vector that will store the number of gaps of each column 
-    // and the vector that will store window processing results                       
+    // Save the requested half window. This is useful when making a copy of the
+    // alignment, as the window values are not valid anymore but don't want to
+    // calculate them if not needed anymore
+    halfWindowRequested = _halfWindow;
+
+    // If the half window requested is 0 or a negative number
+    // we simply delete the window values.
+    if (_halfWindow < 1) {
+        if (halfWindowApplied > 0)
+            delete[] gapsWindow;
+
+        gapsInColumn = nullptr;
+        return true;
+    }
+
+    int i, j, window;
+
+    if (gapsWindow == nullptr)
+        gapsWindow = new int[_alignment->originalResidNumber];
+
+    // Initializate to 0 the vector that will store the number of gaps of each column
+    // and the vector that will store window processing results
     utils::initlVect(numColumnsWithGaps, sequenNumber + 1, 0);
-    utils::initlVect(gapsWindow, residNumber, 0);
 
     // Initializate maximum gaps number per column value and store the mediumWinSize value in the object.
     maxGaps = 0;
-    halfWindow = _halfWindow;
-    window = (2 * halfWindow + 1);
+    halfWindowApplied = _halfWindow;
+    window = (2 * halfWindowApplied + 1);
 
     // We calculate some statistics for every column in the alignment,and the maximum gaps' number value
     for (i = 0; i < residNumber; i++) {
+        gapsWindow[i] = 0;
         // Sum the total number of gaps for the considered window 
-        for (j = i - halfWindow, gapsWindow[i] = 0; j <= i + halfWindow; j++) {
+        for (j = i - halfWindowApplied, gapsWindow[i] = 0; j <= i + halfWindowApplied; j++) {
             if (j < 0)
                 gapsWindow[i] += gapsInColumn[-j];
             else if (j >= residNumber)
@@ -162,12 +197,29 @@ bool statisticsGaps::applyWindow(int _halfWindow) {
     return true;
 }
 
-int *statisticsGaps::getGapsWindow(void) {
+bool statisticsGaps::isDefinedWindow() {
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("bool statisticsConservation::isDefinedWindow(void) ");
+
+    return (halfWindowRequested != -1);
+}
+
+int *statisticsGaps::getGapsWindow() {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("int *statisticsGaps::getGapsWindow(void) ");
 
-    return gapsWindow == nullptr ? gapsInColumn : gapsWindow;
+    // If a window is defined
+    if (isDefinedWindow()) {
+        // Check if the window has been applied
+        if (halfWindowRequested != halfWindowApplied)
+            applyWindow(halfWindowRequested);
+        // Return the windowed value
+        return gapsWindow;
+    }
+        // Return the original values
+    else return gapsInColumn;
 }
 
 double statisticsGaps::calcCutPoint(float minInputAlignment, float gapThreshold) {
@@ -306,7 +358,7 @@ int statisticsGaps::calcCutPointMixSlope(void) {
     return max;
 }
 
-int statisticsGaps::calcCutPoint2ndSlope(void) {
+int statisticsGaps::calcCutPoint2ndSlope() {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("int statisticsGaps::calcCutPoint2ndSlope(void) ");
@@ -314,14 +366,15 @@ int statisticsGaps::calcCutPoint2ndSlope(void) {
     float maxSlope = -1, *secondSlopeVector;
     int prev, pprev, maxIter, act = 0, max = 0;
 
-    // We build one slope vector and fix the maximum iteractions' number as the gaps'number plus 1.
+    // We build one slope vector and fix the maximum iterations' number
+    // as the gaps'number plus 1.
     secondSlopeVector = new float[maxGaps + 1];
-    utils::initlVect(secondSlopeVector, maxGaps, -1.0);
+    utils::initlVect(secondSlopeVector, maxGaps, -1.0F);
     maxIter = maxGaps + 1;
 
     // Find the lowest number of gaps into the input alignment. If there are few
-    // points, it is possible that lowest number of gaps is returned as the thres
-    // hold. It could happen input alignment does not have columns with no-gaps
+    // points, it is possible that lowest number of gaps is returned as the threshold.
+    // It could happen input alignment does not have columns with no-gaps
     for (act = 0, max = 0; numColumnsWithGaps[act] == 0; act++)
         max = act + 1;
 
@@ -376,7 +429,7 @@ int statisticsGaps::calcCutPoint2ndSlope(void) {
     return max;
 }
 
-void statisticsGaps::printGapsColumns(void) {
+void statisticsGaps::printGapsColumns() {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void statisticsGaps::printGapsColumns(void) ");
@@ -390,7 +443,7 @@ void statisticsGaps::printGapsColumns(void) {
     vectAux = new int[residNumber];
 
     // We decide about the information's source then we get the information.
-    if (halfWindow == 0)
+    if (halfWindowApplied == 0)
         utils::copyVect(gapsInColumn, vectAux, residNumber);
     else
         utils::copyVect(gapsWindow, vectAux, residNumber);

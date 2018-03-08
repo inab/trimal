@@ -5,9 +5,6 @@
 #ifndef TRIMAL_STATISTICSMANAGER_H
 #define TRIMAL_STATISTICSMANAGER_H
 #include "similarityMatrix.h"
-//#include "statisticsGaps.h"
-//#include "statisticsConservation.h"
-//#include "statisticsConsistency.h"
 
 class statisticsGaps;
 class statisticsConservation;
@@ -19,7 +16,7 @@ class StatisticsManager {
 public:
 
     statisticsGaps * gaps                   = nullptr;
-    statisticsConservation * conservation  = nullptr;
+    statisticsConservation * conservation   = nullptr;
     statisticsConsistency * consistency     = nullptr;
 
     int ghWindow;
@@ -41,16 +38,12 @@ public:
 
     void printCorrespondence();
 
-//    void saveStatistics(similarityMatrix *sm);
-//
-//    void saveStatistics(similarityMatrix *, int, int);
-
 private:
     friend class newAlignment;
 
     newAlignment* _alignment;
 
-    StatisticsManager(newAlignment* parent);
+    explicit StatisticsManager(newAlignment* parent);
 
     StatisticsManager(newAlignment* parent, StatisticsManager* mold);
 

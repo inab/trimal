@@ -457,17 +457,7 @@ bool statisticsConsistency::forceComparison(newAlignment **vectAlignments, int n
 bool statisticsConsistency::applyWindow(int _halfWindow) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("bool statisticsConsistency::applyWindow(int columns, int halfWindow, float *columnsValue) ");
-
-    if (_halfWindow == 0)
-    {
-        if (halfWindow != 0)
-            delete[] values_windowed;
-
-        values_windowed = nullptr;
-        return true;
-    }
-    if ((halfWindow == _halfWindow)) return true;
+	StartTiming("bool statisticsConsistency::applyWindow(int columns, int halfWindowApplied, float *columnsValue) ");
 
     if (_halfWindow > residues / 4)
     {
@@ -475,31 +465,77 @@ bool statisticsConsistency::applyWindow(int _halfWindow) {
         exit(-1);
     }
 
+    // If the current half window is the same as the last one, don't do anything
+    if (halfWindowApplied == _halfWindow) return true;
+
+    // Save the requested half window. This is useful when making a copy of the
+    // alignment, as the window values are not valid anymore but don't want to
+    // calculate them if not needed anymore
+    halfWindowRequested = _halfWindow;
+
+    // If the half window requested is 0 or a negative number
+    // we simply delete the window values.
+    if (_halfWindow < 1) {
+        if (halfWindowApplied > 0)
+            delete[] values_windowed;
+
+        values_windowed = nullptr;
+        return true;
+    }
+
+    // Initialize the values used in the calculation
     int i, j, window;
-    delete[] values_windowed;
-    values_windowed = new float[residues];
 
-    // If one of this conditions is true, we return FALSE:
-    //    .- If already exists a previously calculated vector for this window size
-    //    .- If mediumWinSize value is greater than 1/4 of alignment length
+    // Initialize the consistency window array if it's null
+    if (values_windowed == nullptr)
+        values_windowed = new float[residues];
 
-    halfWindow = _halfWindow;
-    window = 2 * halfWindow + 1;
+
+    halfWindowApplied = _halfWindow;
+    window = 2 * halfWindowApplied + 1;
 
     // Do the average window calculations
     for (i = 0; i < residues; i++) {
         values_windowed[i] = 0.F;
-        for (j = i - halfWindow; j <= i + halfWindow; j++) {
-            if (j < 0) values_windowed[i] += values[-j];
-            else if (j >= residues) values_windowed[i] += values[((2 * residues - j) - 2)];
-            else values_windowed[i] += values[j];
+        for (j = i - halfWindowApplied; j <= i + halfWindowApplied; j++) {
+            if (j < 0)
+                values_windowed[i] += values[-j];
+            else if (j >= residues)
+                values_windowed[i] += values[((2 * residues - j) - 2)];
+            else
+                values_windowed[i] += values[j];
         }
 
-        // Calculate the similiraty value for the i column
+        // Calculate the similarity value for the i column
         values_windowed[i] = values_windowed[i] / window;
     }
 
     return true;
+}
+
+bool statisticsConsistency::isDefinedWindow() {
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("bool statisticsConservation::isDefinedWindow(void) ");
+
+    return (halfWindowRequested != -1);
+}
+
+float *statisticsConsistency::getValues() {
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("float *statisticsConservation::getMdkWindowedVector(void) ");
+
+    // If a window is defined
+    if (isDefinedWindow()) {
+        // Check if the window has been applied
+        if (halfWindowRequested != halfWindowApplied)
+            applyWindow(halfWindowRequested);
+        // Return the windowed value
+        return values_windowed;
+    }
+        // Return the original values
+    else return values;
 }
 
 // Print the consistency value for each column from the selected alignment 
@@ -723,12 +759,23 @@ void statisticsConsistency::delete_variables() {
 }
 
 statisticsConsistency::~statisticsConsistency() {
-    delete [] values;
+    if (--(*refCounter) == 0)
+    {
+        delete [] values;
+    }
+    delete [] values_windowed;
     _alignment = nullptr;
 }
 
-float *statisticsConsistency::getValues() {
-    if (values_windowed == nullptr) return values;
-    return values_windowed;
+statisticsConsistency::statisticsConsistency(newAlignment *pAlignment,
+                                             statisticsConsistency *pConsistency) {
+    _alignment = pAlignment;
+    refCounter = pConsistency->refCounter;
+    values = pConsistency->values;
+    (*refCounter)++;
+}
+
+statisticsConsistency::statisticsConsistency() {
+    refCounter = new int(1);
 }
 

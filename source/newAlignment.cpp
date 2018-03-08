@@ -80,8 +80,6 @@ newAlignment::newAlignment(void) {
     seqsInfo = nullptr;
 
     // Information computed from newAlignment
-//    sgaps = nullptr;
-//    scons = nullptr;
     SequencesMatrix = nullptr;
     identities = nullptr;
 
@@ -1137,7 +1135,7 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
     cout << "#stdColIdentity\t" << std << endl;
 }
 
-bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *destFile, statisticsConsistency *consistency) {
+bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *destFile) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *destFile, float *consValues) ");
@@ -1180,7 +1178,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
 
     float *simValues = nullptr;
     if (_trimmedAlignment.Statistics->conservation != nullptr)
-        simValues = _trimmedAlignment.Statistics->conservation->getMdkwVector();
+        simValues = _trimmedAlignment.Statistics->conservation->getMdkWindowedVector();
 
     float *consValues = nullptr;
     if (_trimmedAlignment.Statistics->consistency != nullptr)
@@ -1410,16 +1408,16 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
 
     // BEGIN Init variables
     int *gapsValues = nullptr;
-    if (_trimmedAlignment.Statistics->gaps != nullptr)
-        gapsValues = _trimmedAlignment.Statistics->gaps->getGapsWindow();
+    if (Statistics->gaps != nullptr)
+        gapsValues = Statistics->gaps->getGapsWindow();
 
     float *simValues = nullptr;
-    if (_trimmedAlignment.Statistics->conservation != nullptr)
-        simValues = _trimmedAlignment.Statistics->conservation->getMdkwVector();
+    if (Statistics->conservation != nullptr)
+        simValues = Statistics->conservation->getMdkWindowedVector();
 
     float *consValues = nullptr;
-    if (_trimmedAlignment.Statistics->conservation != nullptr)
-        consValues = _trimmedAlignment.Statistics->consistency->getValues();
+    if (Statistics->consistency != nullptr)
+        consValues = Statistics->consistency->getValues();
 
     // Check if alignment is aligned;
     if (!isAligned) {

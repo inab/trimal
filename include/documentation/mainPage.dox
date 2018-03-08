@@ -85,7 +85,7 @@ Common options (for a complete list please see the User Guide or visit http://tr
     -selectcols { n,l,m-k }  Selection of columns to be removed from the alignment. Range: [0 - (Number of Columns - 1)]. (see User Guide).
     -selectseqs { n,l,m-k }  Selection of sequences to be removed from the alignment. Range: [0 - (Number of Sequences - 1)]. (see User Guide).
 
-    -gt -gapthreshold \c<n>    1 - (fraction of sequences with a gap allowed). Range: [0 - 1]
+    -gt -gapthreshold <n>    1 - (fraction of sequences with a gap allowed). Range: [0 - 1]
     -st -simthreshold <n>    Minimum average similarity allowed. Range: [0 - 1]
     -ct -conthreshold <n>    Minimum consistency value allowed.Range: [0 - 1]
     -cons <n>                Minimum percentage of the positions in the original alignment to conserve. Range: [0 - 100]

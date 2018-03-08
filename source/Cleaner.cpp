@@ -616,7 +616,7 @@ newAlignment *Cleaner::cleanConservation(float baseLine, float conservationPct, 
     // Once we have the cut value, we call the appropiate
     // method to clean the newAlignment and, then, generate
     // the new newAlignment
-    ret = cleanByCutValueFallBehind(cut, baseLine, _alignment->Statistics->conservation->getMdkwVector(), complementary);
+    ret = cleanByCutValueFallBehind(cut, baseLine, _alignment->Statistics->conservation->getMdkWindowedVector(), complementary);
     // Return a reference of the new newAlignment
     return ret;
 
@@ -652,13 +652,16 @@ newAlignment *Cleaner::clean(float baseLine, float GapsPct, float conservationPc
                                           _alignment->Statistics->gaps->getGapsWindow(),
                                           baseLine,
                                           cutCons,
-                                          _alignment->Statistics->conservation->getMdkwVector(),
+                                          _alignment->Statistics->conservation->getMdkWindowedVector(),
                                           complementary);
     // Return a reference of the clean newAlignment object
     return ret;
 }
 
-newAlignment *Cleaner::cleanCompareFile(const float cutpoint, const float baseLine, float *vectValues, const bool complementary) {
+newAlignment *Cleaner::cleanCompareFile(const float cutpoint,
+                                        const float baseLine,
+                                        float *vectValues,
+                                        const bool complementary) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanCompareFile(float cutpoint, float baseLine, float *vectValues, bool complementary) ");
@@ -835,7 +838,7 @@ newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
     /* Computes the conservations value for each column in the newAlignment. At the same time, the method get the vector with those values. */
 //    _alignment->scons -> calculateVectors(/*_alignment->sequences,*/ _alignment->sgaps -> getGapsWindow());
 
-    simil = _alignment->Statistics->conservation->getMdkwVector();
+    simil = _alignment->Statistics->conservation->getMdkWindowedVector();
 
     // Allocate local memory and initializate it to -1
     positions = new int[_alignment->originalResidNumber];
@@ -876,7 +879,7 @@ newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
 
     // Clean the newAlignment and generate a new newAlignment object using the gaps cut and the similaritys cut values
     newAlignment *ret = cleanStrict(gapCut, _alignment->Statistics->gaps->getGapsWindow(),
-                                    simCut, _alignment->Statistics->conservation->getMdkwVector(),
+                                    simCut, _alignment->Statistics->conservation->getMdkWindowedVector(),
                                     complementarity, variable);
 
     // Deallocate local memory
