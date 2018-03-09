@@ -557,12 +557,17 @@ newAlignment *Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, 
     // Keep only those sequences with an overlap value equal or greater than
     // the minimum overlap value set by the user.
     for (i = 0; i < _alignment->originalSequenNumber; i++)
+    {
         if (overlapSeq[i] < minimumOverlap)
             newAlig->saveSequences[i] = -1;
+    }
+
+    for (int X = 0; X < _alignment->originalSequenNumber; X++)
+        std::cout << "Seq " << X << " " << newAlig->saveSequences[X] << "\n";
 
     // Once the columns/sequences selection is done, turn it around
     // if complementary flag is active 
-    if (complementary == true)
+    if (complementary)
         newAlig->Cleaning->computeComplementaryAlig(false, true);
 
     // Check for any additional column/sequence to be removed
@@ -701,13 +706,17 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
     int i, j, k, seqValue, ovrlap, hit;
     char indet;
 
-    ovrlap = std::ceil(overlap * float(_alignment->originalSequenNumber - 1));
+    float floatOverlap = overlap * float(_alignment->originalSequenNumber-1);
+    ovrlap = int(overlap * (_alignment->originalSequenNumber-1));
+
+    if(floatOverlap > float(ovrlap))
+        ovrlap++;
 
     if (spuriousVector == nullptr)
         return false;
     // Depending on the kind of newAlignment, we have
     // different indetermination symbol
-    if (_alignment->getAlignmentType() == SequenceTypes::AA)
+    if (_alignment->getAlignmentType() & SequenceTypes::AA)
         indet = 'X';
     else
         indet = 'N';
@@ -760,7 +769,7 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
         // For each newAlignment's sequence, computes its spurious's
         // or overlap's value as the column's hits -for that
         // sequence- divided by column's number.
-        spuriousVector[i] = ((float) seqValue / _alignment->residNumber);
+        spuriousVector[i] = ((float) seqValue / _alignment->originalResidNumber);
     }
 
     // If there is not problem in the method, return true
@@ -782,7 +791,7 @@ newAlignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverla
     if (!calculateSpuriousVector(overlapColumn, overlapVector))
         return nullptr;
 
-    // Select and remove the sequences with a overlap less than threshold's overlap and create a new _alignmentemnt
+    // Select and remove the sequences with a overlap less than threshold's overlap and create a new alignment
     newAlig = cleanOverlapSeq(minimumOverlap, overlapVector, complementary);
 
     // Deallocate local memory
@@ -902,7 +911,7 @@ newAlignment *Cleaner::cleanNoAllGaps(bool complementarity) {
         return nullptr;
 
     // We want to conserve the columns with gaps' number less or equal than sequences' number - 1 
-    ret = cleanByCutValueOverpass((_alignment->sequenNumber - 1), 0, _alignment->Statistics->gaps->getGapsWindow(), complementarity);
+    ret = cleanByCutValueOverpass((_alignment->originalSequenNumber - 1), 0, _alignment->Statistics->gaps->getGapsWindow(), complementarity);
 
     // Returns the new newAlignment.
     return ret;

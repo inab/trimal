@@ -66,12 +66,11 @@ statisticsConservation::statisticsConservation(newAlignment *parentAlignment,
 
     sequences = _alignment->sequenNumber;
 
-    halfWindowApplied = -1;
-
-    halfWindowRequested = mold->halfWindowRequested;
+    halfWindow = 0;
 
     Q = mold->Q;
     MDK = mold->MDK;
+    MDK_Window = mold->MDK_Window;
 
     simMatrix = mold->simMatrix;
 
@@ -89,18 +88,14 @@ statisticsConservation::~statisticsConservation() {
     if (--(*refCounter) == 0) {
         delete[] Q;
         delete[] MDK;
+        delete[] MDK_Window;
 
         if (matrixIdentity != nullptr)
             for (int i = 0; i < _alignment->sequenNumber; i++)
                 delete[] matrixIdentity[i];
-
         delete[] matrixIdentity;
         delete refCounter;
     }
-
-    // We always want to delete the windows values as they are related to the
-    // specific alignment and not the whole set of derived alignments
-    delete[] MDK_Window;
 }
 
 void statisticsConservation::calculateMatrixIdentity() {
@@ -264,18 +259,17 @@ bool statisticsConservation::applyWindow(int _halfWindow) {
     }
 
     // If the current half window is the same as the last one, don't do anything
-    if (halfWindowApplied == _halfWindow) return true;
+    if (halfWindow == _halfWindow) return true;
 
     // Save the requested half window. This is useful when making a copy of the
     // alignment, as the window values are not valid anymore but don't want to
     // calculate them if not needed anymore
-    halfWindowRequested = _halfWindow;
+    halfWindow = _halfWindow;
 
     // If the half window requested is 0 or a negative number
     // we simply delete the window values.
     if (_halfWindow < 1) {
-        if (halfWindowApplied > 0)
-            delete[] MDK_Window;
+        delete[] MDK_Window;
 
         MDK_Window = nullptr;
         return true;
@@ -288,14 +282,12 @@ bool statisticsConservation::applyWindow(int _halfWindow) {
     if (MDK_Window == nullptr)
         MDK_Window = new float[residues + 1];
 
-
-    halfWindowApplied = _halfWindow;
-    window = 2 * halfWindowApplied + 1;
+    window = 2 * halfWindow + 1;
 
     // Do the average window calculations 
     for (i = 0; i < residues; i++) {
         MDK_Window[i] = 0.F;
-        for (j = i - halfWindowApplied; j <= i + halfWindowApplied; j++) {
+        for (j = i - halfWindow; j <= i + halfWindow; j++) {
             if (j < 0) MDK_Window[i] += MDK[-j];
             else if (j >= residues) MDK_Window[i] += MDK[((2 * residues - j) - 2)];
             else MDK_Window[i] += MDK[j];
@@ -304,7 +296,6 @@ bool statisticsConservation::applyWindow(int _halfWindow) {
         // Calculate the average value, by dividing the values
         MDK_Window[i] = MDK_Window[i] / (float) window;
     }
-
     return true;
 }
 
@@ -313,7 +304,7 @@ bool statisticsConservation::isDefinedWindow() {
     //	which means the end of the current scope.
     StartTiming("bool statisticsConservation::isDefinedWindow(void) ");
 
-    return (halfWindowRequested > 0);
+    return (halfWindow > 0);
 }
 
 float *statisticsConservation::getMdkWindowedVector() {
@@ -324,8 +315,8 @@ float *statisticsConservation::getMdkWindowedVector() {
     // If a window is defined
     if (isDefinedWindow()) {
         // Check if the window has been applied
-        if (halfWindowRequested != halfWindowApplied)
-            applyWindow(halfWindowRequested);
+        if (MDK_Window == nullptr)
+            applyWindow(halfWindow);
         // Return the windowed value
         return MDK_Window;
     }

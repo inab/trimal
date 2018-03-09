@@ -880,25 +880,25 @@ inline bool trimAlManager::check_inFile_incompatibilities() {
 
 inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {
     if (selectCols || selectSeqs) {
-        if ((gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || (consistencyThreshold != -1)) {
-            debug.report(ErrorCode::SelectSeqsResAndThresholdIncompatibilities);
-            appearErrors = true;
-        }
-
-        if (automatedMethodCount) {
-            debug.report(ErrorCode::SelectSeqsResAndAutomathedMethodsIncompatibilities);
-            appearErrors = true;
-        }
-
-        if ((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1) || consistencyWindow != -1) {
-            debug.report(ErrorCode::SelectSeqsResAndWindowIncompatibilities);
-            appearErrors = true;
-        }
-
-        if (residuesOverlap != -1 || sequenceOverlap != -1) {
-            debug.report(ErrorCode::SelectSeqsResAndOverlapIncompatibilites);
-            appearErrors = true;
-        }
+//        if ((gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || (consistencyThreshold != -1)) {
+//            debug.report(ErrorCode::SelectSeqsResAndThresholdIncompatibilities);
+//            appearErrors = true;
+//        }
+//
+//        if (automatedMethodCount) {
+//            debug.report(ErrorCode::SelectSeqsResAndAutomathedMethodsIncompatibilities);
+//            appearErrors = true;
+//        }
+//
+//        if ((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1) || consistencyWindow != -1) {
+//            debug.report(ErrorCode::SelectSeqsResAndWindowIncompatibilities);
+//            appearErrors = true;
+//        }
+//
+//        if (residuesOverlap != -1 || sequenceOverlap != -1) {
+//            debug.report(ErrorCode::SelectSeqsResAndOverlapIncompatibilites);
+//            appearErrors = true;
+//        }
 
         if ((clusters != -1) || (maxIdentity != -1)) {
             debug.report(ErrorCode::OnlyOneSequencesSelectionMethodAllowed);
@@ -910,6 +910,11 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {
                 debug.report(ErrorCode::IncompatibleArguments, new std::string[2]{"-selectcols", "-block"});
                 appearErrors = true;
             }
+
+        if (delSequences[num] >= singleAlig->getNumSpecies()) {
+            debug.report(ErrorCode::SelectOnlyAccepts, new string[2]{"-selectseqs", "sequences"});
+            appearErrors = true;
+        }
     }
     return appearErrors;
 }
@@ -990,8 +995,12 @@ inline bool trimAlManager::check_max_identity_incompatibilities() {
 
 inline bool trimAlManager::check_clusters_incompatibilities() {
     if (clusters != -1) {
-        if ((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1) || consistencyWindow != -1) {
-            debug.report(ErrorCode::WindowAndArgumentIncompatibilities, new std::string[1]{"-clusters"});
+//        if ((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1) || consistencyWindow != -1) {
+//            debug.report(ErrorCode::WindowAndArgumentIncompatibilities, new std::string[1]{"-clusters"});
+//            appearErrors = true;
+//        }
+        if (clusters > origAlig->getNumSpecies()) {
+            debug.report(ErrorCode::MoreClustersThanSequences);
             appearErrors = true;
         }
     }
@@ -1618,9 +1627,14 @@ inline void trimAlManager::clean_alignment() {
     //	which means the end of the current scope.
     StartTiming("inline void trimAlManager::clean_alignment() ");
 
-    singleAlig = origAlig;
+    CleanSequences();
 
-    if (nogaps) {
+    if (automatedMethodCount)
+        CleanResiduesAuto();
+    else
+        CleanResiduesNonAuto();
+
+/*    if (nogaps) {
         singleAlig = origAlig->Cleaning->cleanGaps(0, 0, getComplementary);
     } else if (noallgaps) {
         singleAlig = origAlig->Cleaning->cleanNoAllGaps(getComplementary);
@@ -1665,35 +1679,42 @@ inline void trimAlManager::clean_alignment() {
             singleAlig = origAlig->Cleaning->cleanCompareFile(
                     consistencyThreshold,
                     conservationThreshold,
-                    singleAlig->Statistics->consistency->getValues(),
+                    origAlig->Statistics->consistency->getValues(),
                     getComplementary
             );
         } else { singleAlig = origAlig; }
 
         if (similarityThreshold != -1.0) {
 
-            if (gapThreshold != -1.0)
-                singleAlig = singleAlig->Cleaning->clean(
+            if (gapThreshold != -1.0) {
+                tempAlig = singleAlig->Cleaning->clean(
                         conservationThreshold,
                         gapThreshold,
                         similarityThreshold,
                         getComplementary
                 );
-            else
-                singleAlig = singleAlig->Cleaning->cleanConservation(
+                if (singleAlig != origAlig) delete singleAlig;
+                singleAlig = tempAlig;
+            } else {
+                tempAlig = singleAlig->Cleaning->cleanConservation(
                         conservationThreshold,
                         similarityThreshold,
                         getComplementary
                 );
+                if (singleAlig != origAlig) delete singleAlig;
+                singleAlig = tempAlig;
+            }
 
-        } else if (gapThreshold != -1.0)
-            singleAlig = singleAlig->Cleaning->cleanGaps(
+        } else if (gapThreshold != -1.0) {
+
+            tempAlig = singleAlig->Cleaning->cleanGaps(
                     conservationThreshold,
                     gapThreshold,
                     getComplementary
             );
-
-        else if ((selectCols) || (selectSeqs)) {
+            if (singleAlig != origAlig) delete singleAlig;
+            singleAlig = tempAlig;
+        } else if ((selectCols) || (selectSeqs)) {
 
             if (delColumns != nullptr) {
                 num = delColumns[0];
@@ -1746,6 +1767,150 @@ inline void trimAlManager::clean_alignment() {
 
     if (singleAlig == nullptr) {
         exit(-1);
+    }*/
+}
+
+inline void trimAlManager::CleanSequences(){
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("inline void trimAlManager::CleanSequences() ");
+    tempAlig = nullptr;
+
+    if (clusters != -1) {
+        tempAlig = origAlig->Cleaning->getClustering(
+                origAlig->Cleaning->getCutPointClusters(clusters)
+        );
+    } else if (maxIdentity != -1) {
+        tempAlig = singleAlig->Cleaning->getClustering(maxIdentity);
+    } else if (delSequences != nullptr) {
+        num = delSequences[0];
+        {
+            tempAlig = origAlig->Cleaning->removeSequences(
+                    delSequences,
+                    1,
+                    num,
+                    getComplementary
+            );
+        }
+    } else if ((residuesOverlap != -1) && (sequenceOverlap != -1)) {
+        tempAlig = origAlig->Cleaning->cleanSpuriousSeq(
+                residuesOverlap,
+                sequenceOverlap / 100.0F,
+                getComplementary
+        );
+    }
+
+    if (tempAlig) {
+        singleAlig = tempAlig->Cleaning->cleanNoAllGaps(false);
+        delete tempAlig;
+        tempAlig = nullptr;
+    } else {
+        singleAlig = origAlig;
+    }
+}
+inline void trimAlManager::CleanResiduesAuto(){
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("inline void trimAlManager::CleanResiduesAuto() ");
+    // Here we use singleAlig as source alignment as the previous step,
+    // CleanSequences initializes singleAlig.
+    // singleAlig can be a derived alignment from origAlig or origAlig itself
+
+    if (nogaps) {
+        tempAlig = singleAlig->Cleaning->cleanGaps(0, 0, getComplementary);
+    } else if (noallgaps) {
+        tempAlig = singleAlig->Cleaning->cleanNoAllGaps(getComplementary);
+    } else if (gappyout) {
+        tempAlig = singleAlig->Cleaning->clean2ndSlope(getComplementary);
+    } else if (strict) {
+        tempAlig = singleAlig->Cleaning->cleanCombMethods(getComplementary, false);
+    } else if (strictplus) {
+        tempAlig = singleAlig->Cleaning->cleanCombMethods(getComplementary, true);
+    } else if (automated1) {
+        if (singleAlig->Cleaning->selectMethod() == GAPPYOUT)
+            tempAlig = singleAlig->Cleaning->clean2ndSlope(getComplementary);
+        else // STRICT
+            tempAlig = singleAlig->Cleaning->cleanCombMethods(getComplementary, false);
+    }
+    if (tempAlig)
+    {
+        // If singleAlig was an intermediate alignment, we delete it from memory.
+        if (singleAlig != origAlig) delete singleAlig;
+        // Reinitialize singleAlig for later uses
+        singleAlig = tempAlig;
+        tempAlig = nullptr;
+    }
+}
+inline void trimAlManager::CleanResiduesNonAuto(){
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("inline void trimAlManager::CleanResiduesNonAuto() ");
+    // Here we use singleAlig as source alignment as the previous step,
+    // CleanSequences initializes singleAlig.
+    // singleAlig can be a derived alignment from origAlig or origAlig itself
+
+    if (delColumns != nullptr) {
+        num = delColumns[0];
+        if (delColumns[num] >= singleAlig->getNumAminos()) {
+            debug.report(
+                    ErrorCode::SelectOnlyAccepts,
+                    new string[2]{"-selectcols", "residues"}
+            );
+            appearErrors = true;
+        } else
+            tempAlig = singleAlig->Cleaning->removeColumns(
+                    delColumns,
+                    1,
+                    num,
+                    getComplementary
+            );
+
+    } else {
+
+        if (consistencyThreshold != -1.0F) {
+            tempAlig = singleAlig->Cleaning->cleanCompareFile(
+                        consistencyThreshold,
+                        conservationThreshold,
+                        origAlig->Statistics->consistency->getValues(),
+                        getComplementary
+            );
+            if (singleAlig != origAlig) delete singleAlig;
+            singleAlig = tempAlig;
+            tempAlig = nullptr;
+        }
+
+        if (similarityThreshold != -1.0F) {
+
+            if (gapThreshold != -1.0F) {
+                tempAlig = singleAlig->Cleaning->clean(
+                        conservationThreshold,
+                        gapThreshold,
+                        similarityThreshold,
+                        getComplementary
+                );
+            } else {
+                tempAlig = singleAlig->Cleaning->cleanConservation(
+                        conservationThreshold,
+                        similarityThreshold,
+                        getComplementary
+                );
+            }
+        } else if (gapThreshold != -1.0F) {
+
+            tempAlig = singleAlig->Cleaning->cleanGaps(
+                    conservationThreshold,
+                    gapThreshold,
+                    getComplementary
+            );
+
+        }
+    }
+
+    if (tempAlig)
+    {
+        if (singleAlig != origAlig) delete singleAlig;
+        singleAlig = tempAlig;
+        tempAlig = nullptr;
     }
 }
 

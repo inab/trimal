@@ -215,6 +215,11 @@ private:
     void examples();
 
 
+    void CleanSequences();
+    void CleanResiduesAuto();
+    void CleanResiduesNonAuto();
+
+
 private:
     ReadWriteMS ReadWriteMachine;
 };

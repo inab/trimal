@@ -32,63 +32,60 @@
 using namespace std;
 
 class newAlignment;
+
 /// \brief Class to handle Gaps statistics
 class statisticsGaps {
 public:
 
     statisticsGaps(newAlignment *pAlignment, statisticsGaps *pGaps);
 
-    newAlignment * _alignment;
-    
-  int residNumber           = -1;
-  int sequenNumber          = -1;
-  int maxGaps               = -1;
-  int halfWindowApplied     = -1;
-  int halfWindowRequested   = -1;
-  int dataType              = -1;
+    newAlignment *_alignment;
 
-  int *gapsInColumn         = nullptr;
-  int *numColumnsWithGaps   = nullptr;
-  int *aminosXInColumn      = nullptr;
-  int *gapsWindow           = nullptr;
-  int *refCounter;
+    int residNumber = -1;
+    int sequenNumber = -1;
+    int maxGaps = -1;
+    int halfWindow = -1;
 
- public:
+    int *gapsInColumn = nullptr;
+    int *numColumnsWithGaps = nullptr;
+    int *aminosXInColumn = nullptr;
+    int *gapsWindow = nullptr;
+    int *refCounter;
 
-  // Class constructor without parameters.
-  explicit statisticsGaps(newAlignment * parent);
+public:
 
-  // Class destroyer. */
-  ~statisticsGaps();
+    // Class constructor without parameters.
+    explicit statisticsGaps(newAlignment *parent);
 
-  // Class constructor with parameters.
-  //statisticsGaps(string *, int, int, int);
+    // Class destroyer.
+    ~statisticsGaps();
 
-  // Methods allows us compute the gapWindows' values.
-  bool applyWindow(int);
+    // Methods allows us compute the gapWindows' values.
+    bool applyWindow(int);
 
-  // This methods returns a gaps' vector reference.
-  int *getGapsWindow();
+    // This methods returns a gaps' vector reference.
+    int *getGapsWindow();
 
-  // Allows compute and select the cut point value.
-  double calcCutPoint(float, float);
+    // Allows compute and select the cut point value.
+    double calcCutPoint(float, float);
 
-  // Automatic method to find a cut point value
-  // using the first and the second slopes.
-  int calcCutPointMixSlope();
+    // Automatic method to find a cut point value
+    // using the first and the second slopes.
+    int calcCutPointMixSlope();
 
-  // Automatic method to compute a cut point value
-  // using the second slope approach.
-  int calcCutPoint2ndSlope();
+    // Automatic method to compute a cut point value
+    // using the second slope approach.
+    int calcCutPoint2ndSlope();
 
-  // This methods print the gaps' percentage
-  // of each column in the alignment.
-  void printGapsColumns();
+    // This methods print the gaps' percentage
+    // of each column in the alignment.
+    void printGapsColumns();
 
-  // This methods prints the statistics
-  // for the alignment relates to gaps.
-  void printGapsAcl();
+    // This methods prints the statistics
+    // for the alignment relates to gaps.
+    void printGapsAcl();
 
     bool isDefinedWindow();
 };
+
 #endif

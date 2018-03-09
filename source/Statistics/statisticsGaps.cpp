@@ -45,7 +45,7 @@ statisticsGaps::statisticsGaps(newAlignment *parent) {
     sequenNumber = _alignment->sequenNumber;
     residNumber = _alignment->residNumber;
     maxGaps = 0;
-    halfWindowApplied = 0;
+    halfWindow = 0;
 
     if (_alignment->getAlignmentType() & SequenceTypes::DNA)
         indet = 'X';
@@ -91,30 +91,25 @@ statisticsGaps::statisticsGaps(newAlignment *pAlignment,
     sequenNumber = _alignment->sequenNumber;
     residNumber = _alignment->residNumber;
     maxGaps = 0;
-    halfWindowApplied = -1;
-    halfWindowRequested = pGaps->halfWindowRequested;
 
-    // Memory allocation for the vectors and its initialization
-    gapsInColumn = pGaps->gapsInColumn;
+    // Pointer initialization
+    gapsInColumn            = pGaps->gapsInColumn;
 
-    aminosXInColumn = pGaps->aminosXInColumn;
+    aminosXInColumn         = pGaps->aminosXInColumn;
 
-    numColumnsWithGaps = pGaps->numColumnsWithGaps;
+    numColumnsWithGaps      = pGaps->numColumnsWithGaps;
+
+    gapsWindow              = pGaps->gapsWindow;
 
     // Count the gaps and indeterminations of each columns
-    for (int i = 0; i < _alignment->originalResidNumber; i++) {
-
-        if (_alignment->saveResidues[i] == -1) continue;
-        if (gapsInColumn[i] > maxGaps)
-            maxGaps = gapsInColumn[i];
-    }
+    maxGaps = pGaps->maxGaps;
 
     refCounter = pGaps->refCounter;
     (*refCounter)++;
 }
 
 
-statisticsGaps::~statisticsGaps(void) {
+statisticsGaps::~statisticsGaps() {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("statisticsGaps::~statisticsGaps(void) ");
@@ -124,9 +119,9 @@ statisticsGaps::~statisticsGaps(void) {
         delete[] gapsInColumn;
         delete[] numColumnsWithGaps;
         delete[] aminosXInColumn;
+        delete[] gapsWindow;
         delete refCounter;
     }
-    delete[] gapsWindow;
 }
 
 bool statisticsGaps::applyWindow(int _halfWindow) {
@@ -140,21 +135,17 @@ bool statisticsGaps::applyWindow(int _halfWindow) {
         return false;
     }
 
-    // If the current half window is the same as the last one, don't do anything
-    if (halfWindowApplied == _halfWindow) return true;
-
     // Save the requested half window. This is useful when making a copy of the
     // alignment, as the window values are not valid anymore but don't want to
     // calculate them if not needed anymore
-    halfWindowRequested = _halfWindow;
+    halfWindow = _halfWindow;
 
     // If the half window requested is 0 or a negative number
     // we simply delete the window values.
     if (_halfWindow < 1) {
-        if (halfWindowApplied > 0)
-            delete[] gapsWindow;
 
-        gapsInColumn = nullptr;
+        delete[] gapsWindow;
+        gapsWindow = nullptr;
         return true;
     }
 
@@ -163,20 +154,19 @@ bool statisticsGaps::applyWindow(int _halfWindow) {
     if (gapsWindow == nullptr)
         gapsWindow = new int[_alignment->originalResidNumber];
 
-    // Initializate to 0 the vector that will store the number of gaps of each column
+    // Initialize to 0 the vector that will store the number of gaps of each column
     // and the vector that will store window processing results
     utils::initlVect(numColumnsWithGaps, sequenNumber + 1, 0);
 
-    // Initializate maximum gaps number per column value and store the mediumWinSize value in the object.
+    // Initialize maximum gaps number per column value and store the mediumWinSize value in the object.
     maxGaps = 0;
-    halfWindowApplied = _halfWindow;
-    window = (2 * halfWindowApplied + 1);
+    window = (2 * halfWindow + 1);
 
     // We calculate some statistics for every column in the alignment,and the maximum gaps' number value
     for (i = 0; i < residNumber; i++) {
         gapsWindow[i] = 0;
         // Sum the total number of gaps for the considered window 
-        for (j = i - halfWindowApplied, gapsWindow[i] = 0; j <= i + halfWindowApplied; j++) {
+        for (j = i - halfWindow, gapsWindow[i] = 0; j <= i + halfWindow; j++) {
             if (j < 0)
                 gapsWindow[i] += gapsInColumn[-j];
             else if (j >= residNumber)
@@ -202,7 +192,7 @@ bool statisticsGaps::isDefinedWindow() {
     //	which means the end of the current scope.
     StartTiming("bool statisticsConservation::isDefinedWindow(void) ");
 
-    return (halfWindowRequested != -1);
+    return (halfWindow > 0);
 }
 
 int *statisticsGaps::getGapsWindow() {
@@ -213,12 +203,13 @@ int *statisticsGaps::getGapsWindow() {
     // If a window is defined
     if (isDefinedWindow()) {
         // Check if the window has been applied
-        if (halfWindowRequested != halfWindowApplied)
-            applyWindow(halfWindowRequested);
+        if (gapsWindow == nullptr)
+            // Apply if not
+            applyWindow(halfWindow);
         // Return the windowed value
         return gapsWindow;
     }
-        // Return the original values
+    // Return the original values
     else return gapsInColumn;
 }
 
@@ -268,7 +259,7 @@ double statisticsGaps::calcCutPoint(float minInputAlignment, float gapThreshold)
     return (utils::max(cuttingPoint_MinimumConserv, cuttingPoint_gapThreshold));
 }
 
-int statisticsGaps::calcCutPointMixSlope(void) {
+int statisticsGaps::calcCutPointMixSlope() {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("int statisticsGaps::calcCutPointMixSlope(void) ");
@@ -443,7 +434,7 @@ void statisticsGaps::printGapsColumns() {
     vectAux = new int[residNumber];
 
     // We decide about the information's source then we get the information.
-    if (halfWindowApplied == 0)
+    if (halfWindow == 0)
         utils::copyVect(gapsInColumn, vectAux, residNumber);
     else
         utils::copyVect(gapsWindow, vectAux, residNumber);
@@ -504,7 +495,7 @@ void statisticsGaps::printGapsColumns() {
     delete[] vectAux;
 }
 
-void statisticsGaps::printGapsAcl(void) {
+void statisticsGaps::printGapsAcl() {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void statisticsGaps::printGapsAcl(void) ");

@@ -111,8 +111,7 @@ private:
             maxAminos           = 0,
             prevType            = -1,
             referFile           = -1,
-            halfWindowApplied   = -1,
-            halfWindowRequested = -1,
+            halfWindow          = -1,
             residues            = -1;
 
     int * refCounter;

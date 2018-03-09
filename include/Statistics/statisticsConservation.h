@@ -57,13 +57,12 @@ public:
     int
     residues,
     sequences,
-    halfWindowApplied = -1,
-    halfWindowRequested = -1;
+    halfWindow          = -1;
 
     /* Conservation vectors */
-    float *Q            = nullptr;
-    float *MDK          = nullptr;
-    float *MDK_Window   = nullptr;
+    float *Q                    = nullptr;
+    float *MDK                  = nullptr;
+    float *MDK_Window           = nullptr;
 
     /** \brief Identity weight matrix between alignment rows */
     float **matrixIdentity      = nullptr;
@@ -78,10 +77,10 @@ public:
     void calculateMatrixIdentity();
 
     /** \brief Constructor without any parameters */
-    statisticsConservation(newAlignment * parentAlignment);
+    explicit statisticsConservation(newAlignment * parentAlignment);
 
     /** \brief Destructor */
-    ~statisticsConservation(void);
+    ~statisticsConservation();
 
     /**
         \brief Method to calculate the conservation values of a alignment matrix.
@@ -100,13 +99,13 @@ public:
         \brief Returns if a windows size value has been defined or not.
         \return \b True if a windows size has been defined.\b False otherwise.
     */
-    bool isDefinedWindow(void);
+    bool isDefinedWindow();
 
     /**
         \brief This methods returns a pointer to conservationWindow's vector
         \return Conservation window vector.
     */
-    float *getMdkWindowedVector(void);
+    float *getMdkWindowedVector();
 
     /**
         \brief Stores a valid similarity matrix point to use.
@@ -119,7 +118,7 @@ public:
         \brief Returns if a similarity matrix is being used or not.
         \return \b True if there is a similarity matrix set, \b False otherwise.
     */
-    bool isSimMatrixDef(void);
+    bool isSimMatrixDef();
 
     /**
         \brief Computes and selects the cut point values based on conservation's values.
@@ -130,10 +129,10 @@ public:
     double calcCutPoint(float baseLine, float conservationPct);
 
     /** \brief Prints the conservation's value for each alignment's column. */
-    void printConservationColumns(void);
+    void printConservationColumns();
 
     /** \brief Computes and prints the accumulative statistics associated to the alignment. */
-    void printConservationAcl(void);
+    void printConservationAcl();
 
 };
 #endif

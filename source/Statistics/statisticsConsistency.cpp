@@ -28,14 +28,15 @@
 #include "Statistics/statisticsConsistency.h"
 #include "reportsystem.h"
 #include <sstream>
-#include <ReadWriteMS/ReadWriteMachineState.h>
-#include <trimalArgumentParser.h>
 
 #define LONG 80
 
 
 
-void statisticsConsistency::perform(char *comparesetFilePath, ReadWriteMS &ReadWriteMachine, trimAlManager &manager, char *forceFile) {
+void statisticsConsistency::perform(char *comparesetFilePath,
+                                    ReadWriteMS &ReadWriteMachine,
+                                    trimAlManager &manager,
+                                    char *forceFile) {
 
     line = new char[1024];
 
@@ -67,7 +68,8 @@ void statisticsConsistency::perform(char *comparesetFilePath, ReadWriteMS &ReadW
         strcpy(filesToCompare[i], nline.c_str());
 
         // Load the alignment
-        compareAlignmentsArray[i] = ReadWriteMachine.loadAlignment(filesToCompare[i]);
+        compareAlignmentsArray[i]
+                = ReadWriteMachine.loadAlignment(filesToCompare[i]);
 
         // Check if alignment could be loaded
         if (compareAlignmentsArray[i] == nullptr) {
@@ -190,10 +192,19 @@ void statisticsConsistency::perform(char *comparesetFilePath, ReadWriteMS &ReadW
 // values we use the proportion of residue pairs per column in the aligs
 // to compare 
 
-int statisticsConsistency::compareAndChoose(newAlignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity) {
+int statisticsConsistency::compareAndChoose(newAlignment **vectAlignments,
+                                            char **fileNames,
+                                            float *columnsValue,
+                                            int numAlignments,
+                                            bool verbosity) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("int statisticsConsistency::compareAndChoose(newAlignment **vectAlignments, char **fileNames, float *columnsValue, int numAlignments, bool verbosity) ");
+	StartTiming("int statisticsConsistency::compareAndChoose("
+                        "newAlignment **vectAlignments, "
+                        "char **fileNames, "
+                        "float *columnsValue, "
+                        "int numAlignments, "
+                        "bool verbosity) ");
 
     int *numResiduesAlig, *correspNames, *columnSeqMatrix, *columnSeqMatrixAux;
     int i, j, k, l, m, numSeqs, pairRes, hits, alig = 0;
@@ -355,10 +366,17 @@ int statisticsConsistency::compareAndChoose(newAlignment **vectAlignments, char 
 
 // This method returns the consistency value vector for a given alignment
 // against a set of alignments with the same sequences
-bool statisticsConsistency::forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue) {
+bool statisticsConsistency::forceComparison(newAlignment **vectAlignments,
+                                            int numAlignments,
+                                            newAlignment *selected,
+                                            float *columnsValue) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("bool statisticsConsistency::forceComparison(newAlignment **vectAlignments, int numAlignments, newAlignment *selected, float *columnsValue) ");
+	StartTiming("bool statisticsConsistency::forceComparison("
+                        "newAlignment **vectAlignments, "
+                        "int numAlignments, "
+                        "newAlignment *selected, "
+                        "float *columnsValue) ");
 
     int *correspNames, *columnSeqMatrix, *columnSeqMatrixAux;
     int i, j, k, ll, numResidues, numSeqs, pairRes, hit;
@@ -406,7 +424,9 @@ bool statisticsConsistency::forceComparison(newAlignment **vectAlignments, int n
         vectAlignments[i]->SequencesMatrix->setOrder(correspNames);
     }
     // Do the same analysis for each column
-    for (i = 0, pairRes = 0, hit = 0; ((i < numResidues) && (!appearErrors)); i++, pairRes = 0, hit = 0) {
+    for (i = 0, pairRes = 0, hit = 0;
+         i < numResidues && !appearErrors;
+         i++, pairRes = 0, hit = 0) {
 
         // We get back the sequence position for each residue
         // from every column in the selected alignment
@@ -440,16 +460,14 @@ bool statisticsConsistency::forceComparison(newAlignment **vectAlignments, int n
         if (pairRes != 0) columnsValue[i] += ((1.0 * hit) / pairRes);
     }
 
-    // Deallocate dinamic memory
+    // Deallocate dynamic memory
     delete[] names;
     delete[] correspNames;
     delete[] columnSeqMatrix;
     delete[] columnSeqMatrixAux;
 
-    // If it was fine, return true. Otherwise, return
-    // false 
-    if (appearErrors) return false;
-    else return true;
+    // Return if the process was perform without errors
+    return !appearErrors;
 
 }
 
@@ -466,19 +484,17 @@ bool statisticsConsistency::applyWindow(int _halfWindow) {
     }
 
     // If the current half window is the same as the last one, don't do anything
-    if (halfWindowApplied == _halfWindow) return true;
+    if (halfWindow == _halfWindow) return true;
 
     // Save the requested half window. This is useful when making a copy of the
     // alignment, as the window values are not valid anymore but don't want to
     // calculate them if not needed anymore
-    halfWindowRequested = _halfWindow;
+    halfWindow = _halfWindow;
 
     // If the half window requested is 0 or a negative number
     // we simply delete the window values.
     if (_halfWindow < 1) {
-        if (halfWindowApplied > 0)
-            delete[] values_windowed;
-
+        delete[] values_windowed;
         values_windowed = nullptr;
         return true;
     }
@@ -491,13 +507,12 @@ bool statisticsConsistency::applyWindow(int _halfWindow) {
         values_windowed = new float[residues];
 
 
-    halfWindowApplied = _halfWindow;
-    window = 2 * halfWindowApplied + 1;
+    window = 2 * halfWindow + 1;
 
     // Do the average window calculations
     for (i = 0; i < residues; i++) {
         values_windowed[i] = 0.F;
-        for (j = i - halfWindowApplied; j <= i + halfWindowApplied; j++) {
+        for (j = i - halfWindow; j <= i + halfWindow; j++) {
             if (j < 0)
                 values_windowed[i] += values[-j];
             else if (j >= residues)
@@ -518,7 +533,7 @@ bool statisticsConsistency::isDefinedWindow() {
     //	which means the end of the current scope.
     StartTiming("bool statisticsConservation::isDefinedWindow(void) ");
 
-    return (halfWindowRequested != -1);
+    return (halfWindow != -1);
 }
 
 float *statisticsConsistency::getValues() {
@@ -529,8 +544,8 @@ float *statisticsConsistency::getValues() {
     // If a window is defined
     if (isDefinedWindow()) {
         // Check if the window has been applied
-        if (halfWindowRequested != halfWindowApplied)
-            applyWindow(halfWindowRequested);
+        if (values_windowed == nullptr)
+            applyWindow(halfWindow);
         // Return the windowed value
         return values_windowed;
     }
@@ -539,10 +554,13 @@ float *statisticsConsistency::getValues() {
 }
 
 // Print the consistency value for each column from the selected alignment 
-void statisticsConsistency::printStatisticsFileColumns(newAlignment &_alignment, float *compareVect) {
+void statisticsConsistency::printStatisticsFileColumns(newAlignment &_alignment,
+                                                       float *compareVect) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("void statisticsConsistency::printStatisticsFileColumns(newAlignment &_alignment, float *values) ");
+	StartTiming("void statisticsConsistency::printStatisticsFileColumns("
+                        "newAlignment &_alignment, "
+                        "float *values) ");
 
     int size = 20;
 
@@ -596,10 +614,13 @@ void statisticsConsistency::printStatisticsFileColumns(newAlignment &_alignment,
 
 // Print the consistency values accumulative distribution for the selected
 // alignment
-void statisticsConsistency::printStatisticsFileAcl(newAlignment &_alignment, float *compareVect) {
+void statisticsConsistency::printStatisticsFileAcl(newAlignment &_alignment,
+                                                   float *compareVect) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("void statisticsConsistency::printStatisticsFileAcl(newAlignment &_alignment, float *values) ");
+	StartTiming("void statisticsConsistency::printStatisticsFileAcl("
+                        "newAlignment &_alignment, "
+                        "float *values) ");
 
     int size = 20;
     float refer, *vectAux;
@@ -743,7 +764,7 @@ void statisticsConsistency::printStatisticsFileAcl(newAlignment &_alignment, flo
 
     cout << endl;
 
-    // Deallocate dinamic memory
+    // Deallocate dynamic memory
     delete[] vectAux;
 }
 
@@ -762,16 +783,18 @@ statisticsConsistency::~statisticsConsistency() {
     if (--(*refCounter) == 0)
     {
         delete [] values;
+        delete [] values_windowed;
     }
-    delete [] values_windowed;
     _alignment = nullptr;
 }
 
 statisticsConsistency::statisticsConsistency(newAlignment *pAlignment,
                                              statisticsConsistency *pConsistency) {
-    _alignment = pAlignment;
-    refCounter = pConsistency->refCounter;
-    values = pConsistency->values;
+    _alignment      = pAlignment;
+    values          = pConsistency->values;
+    values_windowed = pConsistency->values_windowed;
+
+    refCounter      = pConsistency->refCounter;
     (*refCounter)++;
 }
 

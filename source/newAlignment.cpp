@@ -125,7 +125,7 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
 
         this->Cleaning = new Cleaner(this, originalAlignment.Cleaning);
 
-        this->Statistics = new StatisticsManager(this, originalAlignment.Statistics);
+        this->Statistics = originalAlignment.Statistics;
 
         this->SeqRef = originalAlignment.SeqRef;
 
@@ -133,18 +133,16 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
     }
 }
 
-newAlignment::~newAlignment(void) {
+newAlignment::~newAlignment() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment::~newAlignment(void) " + std::to_string(reinterpret_cast<uintptr_t>(this)));
     int i;
 
-    if (saveResidues != nullptr)
-        delete[] saveResidues;
+    delete[] saveResidues;
     saveResidues = nullptr;
 
-    if (saveSequences != nullptr)
-        delete[] saveSequences;
+    delete[] saveSequences;
     saveSequences = nullptr;
 
     if (identities != nullptr) {
@@ -155,8 +153,7 @@ newAlignment::~newAlignment(void) {
     identities = nullptr;
 
 
-    if (SequencesMatrix != nullptr)
-        delete SequencesMatrix;
+    delete SequencesMatrix;
     SequencesMatrix = nullptr;
 
     sequenNumber = 0;
@@ -167,23 +164,21 @@ newAlignment::~newAlignment(void) {
     delete Cleaning;
     Cleaning = nullptr;
 
-    delete Statistics;
-    Statistics = nullptr;
-
     if (--(*SeqRef) == 0) {
         delete SeqRef;
 
-        if (sequences != nullptr)
-            delete[] sequences;
+        delete[] sequences;
         sequences = nullptr;
 
-        if (seqsName != nullptr)
-            delete[] seqsName;
+        delete[] seqsName;
         seqsName = nullptr;
 
-        if (seqsInfo != nullptr)
-            delete[] seqsInfo;
+        delete[] seqsInfo;
         seqsInfo = nullptr;
+
+        delete Statistics;
+        Statistics = nullptr;
+
     } else if (*SeqRef < 0) {
         delete SeqRef;
         SeqRef = nullptr;
