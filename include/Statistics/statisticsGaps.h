@@ -41,8 +41,6 @@ public:
 
     newAlignment *_alignment;
 
-    int residNumber = -1;
-    int sequenNumber = -1;
     int maxGaps = -1;
     int halfWindow = -1;
 
@@ -86,6 +84,8 @@ public:
     void printGapsAcl();
 
     bool isDefinedWindow();
+
+    void CalculateVectors();
 };
 
 #endif

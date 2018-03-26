@@ -9,6 +9,7 @@
 #include <string.h>
 #include <string>
 #include <iostream>
+#include <iosfwd>
 #include "newAlignment.h"
 #include "ReadWriteMS/ReadWriteMachineState.h"
 

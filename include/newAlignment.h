@@ -49,7 +49,6 @@
 #include "../include/Statistics/StatisticsManager.h"
 using namespace std;
 
-
 class newAlignment {
 
     int dataType = 0;
@@ -101,13 +100,13 @@ public:
   
  public:
 
-    newAlignment(void);
+    newAlignment();
 
     newAlignment(newAlignment&);
 
-    ~newAlignment(void);
+    ~newAlignment();
 
-    int getNumSpecies(void);
+    int getNumSpecies();
 
     void getSequences(string * names);
 
@@ -117,31 +116,31 @@ public:
 
     bool getSequenceNameOrder(string * names, int * orderVector);
 
-    int getNumAminos(void);
+    int getNumAminos();
 
     void setWindowsSize(int ghWindow, int shWindow);
     
     void setBlockSize(int blockSize);
 
-    int getBlockSize(void);
+    int getBlockSize();
     
-    void calculateSeqIdentity(void);
+    void calculateSeqIdentity();
       
-    void calculateRelaxedSeqIdentity(void);
+    void calculateRelaxedSeqIdentity();
     
-    void calculateSeqOverlap(void);
+    void calculateSeqOverlap();
 
-    void printSeqIdentity(void);
+    void printSeqIdentity();
     
-    void printSeqOverlap(void);
+    void printSeqOverlap();
 
-    int getAlignmentType(void);
+    int getAlignmentType();
 
-    int *getCorrespResidues(void);
+    int *getCorrespResidues();
 
-    int *getCorrespSequences(void);
+    int *getCorrespSequences();
 
-    bool isFileAligned(void);
+    bool isFileAligned();
 
     newAlignment * getTranslationCDS(newAlignment * proteinAlignment);
 
@@ -151,7 +150,7 @@ public:
 
     void calculateColIdentity(float * columnIdentity);
 
-    void printColumnsIdentity_DescriptiveStats(void);
+    void printColumnsIdentity_DescriptiveStats();
 
     void setKeepSequencesFlag(bool newFlagValue);
 

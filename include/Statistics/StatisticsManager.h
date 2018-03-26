@@ -19,6 +19,8 @@ public:
     statisticsConservation * conservation   = nullptr;
     statisticsConsistency * consistency     = nullptr;
 
+    similarityMatrix * _similarityMatrix    = nullptr;
+
     int ghWindow;
     int shWindow;
 

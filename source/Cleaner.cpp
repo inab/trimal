@@ -19,7 +19,7 @@
 #include <algorithm>
 #include <queue>
 
-int Cleaner::selectMethod(void) {
+int Cleaner::selectMethod() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int Cleaner::selectMethod(void) ");
@@ -67,88 +67,143 @@ int Cleaner::selectMethod(void) {
     }
 }
 
-newAlignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const int *gInCol, bool complementary) {
+newAlignment *Cleaner::cleanByCutValueOverpass(
+        double cut,
+        float baseLine,
+        const int *gInCol,
+        bool complementary)
+{
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const int *gInCol, bool complementary) ");
-    int i, j, k, jn, oth, pos, block, *vectAux, residues;
+    int i, j, k, jn, oth, block = 0, *vectAux, residues;
     newAlignment *newAlig = new newAlignment(*_alignment);
 
     // Select the columns with a gaps value
     // less or equal than the cut point.
-    for (i = 0, residues = 0; i < _alignment->residNumber; i++) {
-        if (_alignment->saveResidues[i] == -1) continue;
-        if (gInCol[i] <= cut) residues++;
-        else newAlig->saveResidues[i] = -1;
+    //
+    // We also take advantage of the bucle
+    // to recalculate the number of residues kept
+    for (i = 0, residues = 0; i < _alignment->originalResidNumber; i++) {
+        if (_alignment->saveResidues[i] == -1)
+            continue;
 
+        block++;
+
+        if (gInCol[i] <= cut)
+            residues++;
+        else
+            newAlig->saveResidues[i] = -1;
     }
-    // Compute, if it's necessary, the number of columns
-    // necessary to achieve the minimum number of columns
+    _alignment->residNumber = block;
+
+    // Compute, the number of columns necessary
+    // to achieve the minimum number of columns
     // fixed by coverage parameter.
-    oth = utils::roundInt((((baseLine / 100.0) - (float) residues / _alignment->residNumber)) * _alignment->residNumber);
+    oth = utils::roundInt(((baseLine / 100.0) - (float) residues / block) * block);
+
     // if it's necessary to recover some columns,
     // we apply this instructions to recover it
     if (oth > 0) {
+        int counter = 0, midPoint = 0;
         // Allocate memory
-        vectAux = new int[_alignment->residNumber];
+        vectAux = new int[block];
+        // Fill the array with the previously kept values
+        int ii = 0;
+        for (i = 0; i < _alignment->originalResidNumber; i++) {
+            if (_alignment->saveResidues[i] == -1) continue;
+            vectAux[ii++] = gInCol[i];
+        }
 
-        // Sort a copy of the gInCol vector, and take the value of the column that marks the % baseline
-        utils::copyVect((int *) gInCol, vectAux, _alignment->residNumber);
+        // Sort a copy of the array,
+        // and take the value of the column that marks the % baseline
         utils::quicksort(vectAux, 0, _alignment->residNumber - 1);
         cut = vectAux[(int) ((float) (_alignment->residNumber - 1) * (baseLine) / 100.0)];
 
-        // Deallocate memory
         delete[] vectAux;
-    }
-    // Fixed the initial size of blocks as 0.5% of
-    // alignment's length
-    for (k = utils::roundInt(0.005 * _alignment->residNumber); (k >= 0) && (oth > 0); k--) {
 
-        // We start in the alignment middle then we move on
-        // right and left side at the same time.
-        for (i = (_alignment->residNumber / 2), j = (i + 1); (((i > 0) || (j < (_alignment->residNumber - 1))) && (oth > 0)); i--, j++) {
+        // Retrieve the residue that marks the midpoint of the alignment
+        // This can't be obtained directly
+        // as some parts may have been previously trimmed
+        for (int halfBlock = block / 2;
+             midPoint < _alignment->originalResidNumber;
+             midPoint++) {
+            if (_alignment->saveResidues[midPoint] == -1) continue;
+            if (counter >= halfBlock) break;
+            counter++;
+        }
+        for (k = utils::roundInt(0.005 * block);
+             k >= 0 && oth > 0;
+             k--) {
+            // We start in the alignment center residue,
+            // then we move on right and left side at the same time.
+            for (i = midPoint, j = i + 1;
+                 (i > 0 || j < _alignment->originalResidNumber - 1)
+                    && oth > 0;
+                 i--, j++) {
+                // Left side
+                {
+                    // Left side. Here, we compute the block's size.
+                    for (block = 0, jn = i; jn >= 0 && oth > 0; jn--) {
+                        if (_alignment->saveResidues[jn] == -1) continue;
+                        else if (newAlig->saveResidues[jn] == -1) {
+                            break;
+                        }
+                        else block++;
+                    }
 
-            // Left side. Here, we compute the block's size.
-            for (jn = i; ((_alignment->saveResidues[jn] == -1 || newAlig->saveResidues[jn] != -1) && (jn >= 0) && (oth > 0)); jn--);
+                    // if block's size is greater or equal than the fixed
+                    // size then we save all columns that have not been
+                    // saved previously.
+                    if (block >= k) {
+                        for (; jn >= 0 && oth > 0 && newAlig->saveResidues[jn] == -1; jn--) {
+                            if (_alignment->saveResidues[jn] == -1) continue;
+                            if (gInCol[jn] <= cut) {
+                                newAlig->saveResidues[jn] = jn;
+                                oth--;
+                            } else
+                                break;
+                        }
+                    }
+                    i = jn;
+                }
+                // Right side
+                {
+                    // Right side. Here, we compute the block's size.
+                    for (block = 0, jn = j; jn < _alignment->originalResidNumber && oth > 0; jn++) {
+                        if (_alignment->saveResidues[jn] == -1) continue;
+                        else if (newAlig->saveResidues[jn] == -1) {
+                            break;
+                        }
+                        else block++;
+                    }
 
-            // if block's size is greater or equal than the fixed
-            // size then we save all columns that have not been
-            // saved previously.
-            if ((i - jn) >= k) {
-                for (; ((newAlig->saveResidues[jn] == -1) && (jn >= 0) && (oth > 0)); jn--) {
-                    if (_alignment->saveResidues[jn] != -1) continue;
-                    if (gInCol[jn] <= cut) {
-                        newAlig->saveResidues[jn] = jn;
-                        oth--;
-                    } else
-                        break;
+                    // if block's size is greater or equal than the fixed
+                    // size then we save all columns that have not been
+                    // saved previously.
+                    if (block >= k) {
+                        for (; jn < _alignment->originalResidNumber
+                                    && oth > 0
+                                    && newAlig->saveResidues[jn] == -1;
+                               jn++) {
+                            if (_alignment->saveResidues[jn] == -1) continue;
+                            if (gInCol[jn] <= cut) {
+                                newAlig->saveResidues[jn] = jn;
+                                oth--;
+                            } else
+                                break;
+                        }
+                    }
+                    j = jn;
                 }
             }
-            i = jn;
-            // Right side. Here, we compute the block's size.
-            for (jn = j; ((_alignment->saveResidues[jn] == -1 || newAlig->saveResidues[jn] != -1) && (jn < _alignment->residNumber) && (oth > 0)); jn++);
-
-            // if block's size is greater or equal than the fixed
-            // size then we save all columns that have not been
-            // saved previously.
-            if ((jn - j) >= k) {
-                for (; ((newAlig->saveResidues[jn] == -1) && (jn < _alignment->residNumber) && (oth > 0)); jn++) {
-                    if (_alignment->saveResidues[jn] != -1) continue;
-                    if (gInCol[jn] <= cut) {
-                        newAlig->saveResidues[jn] = jn;
-                        oth--;
-                    } else
-                        break;
-                }
-            }
-            j = jn;
         }
     }
 
-    newAlig->Cleaning->removeSmallerBlocks(blockSize);
+    newAlig->Cleaning->removeSmallerBlocks(blockSize, *_alignment);
 
-    // If the flag -terminalony is set, apply a method to look for internal
-    // boundaries and get back columns inbetween them, if they exist
+    // If the flag -terminalonly is set, apply a method to look for internal
+    // boundaries and get back columns in-between them, if they exist
     if (terminalGapOnly && !removeOnlyTerminal()) return nullptr;
 
     // Once the columns/sequences selection is done, turn it around
@@ -162,72 +217,287 @@ newAlignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const
 
 }
 
-newAlignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, const float *ValueVect, bool complementary) {
+newAlignment *Cleaner::cleanByCutValueFallBehind(
+        float cut,
+        float baseLine,
+        const float *ValueVect,
+        bool complementary)
+{
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, const float *ValueVect, bool complementary) ");
-
-    int i, j, k, jn, resCounter, NumberOfResiduesToAchieveBaseLine;
+    int i, j, k, jn, oth, block = 0, residues;
     newAlignment *newAlig = new newAlignment(*_alignment);
 
-    for (i = 0, resCounter = 0; i < _alignment->originalResidNumber; i++)
-    {
-        if (ValueVect[i] > cut) resCounter++;
-        else newAlig->saveResidues[i] = -1;
+    // Select the columns with a gaps value
+    // less or equal than the cut point.
+    //
+    // We also take advantage of the bucle
+    // to recalculate the number of residues kept
+    for (i = 0, residues = 0; i < _alignment->originalResidNumber; i++) {
+        if (_alignment->saveResidues[i] == -1)
+            continue;
+
+        block++;
+
+        if (ValueVect[i] > cut)
+            residues++;
+        else
+            newAlig->saveResidues[i] = -1;
     }
+    _alignment->residNumber = block;
 
-    NumberOfResiduesToAchieveBaseLine = utils::roundInt((((baseLine / 100.0) - (float) resCounter / _alignment->residNumber)) * _alignment->residNumber);
+    // Compute, the number of columns necessary
+    // to achieve the minimum number of columns
+    // fixed by coverage parameter.
+    oth = utils::roundInt(((baseLine / 100.0) - (float) residues / block) * block);
 
+    // if it's necessary to recover some columns,
+    // we apply this instructions to recover it
+    if (oth > 0) {
+        int midPoint = 0, counter = 0;
+        for (int halfBlock = block / 2;
+             midPoint < _alignment->originalResidNumber;
+             midPoint++) {
+            if (_alignment->saveResidues[midPoint] == -1) continue;
+            if (counter >= halfBlock) break;
+            counter++;
+        }
 
-    // Fixed the initial size of blocks as 0.5% of
-    // alignment's length
-    for (k = utils::roundInt(0.005 * _alignment->residNumber); (k >= 0) && (NumberOfResiduesToAchieveBaseLine > 0); k--) {
+        for (k = utils::roundInt(0.005 * block);
+             k >= 0 && oth > 0;
+             k--) {
+            // We start in the alignment center residue,
+            // then we move on right and left side at the same time.
+            for (i = midPoint, j = i + 1;
+                 (i > 0 || j < _alignment->originalResidNumber - 1)
+                 && oth > 0;
+                 i--, j++) {
+                // Left side
+                {
+                    // Left side. Here, we compute the block's size.
+                    for (block = 0, jn = i; jn >= 0 && oth > 0; jn--) {
+                        if (_alignment->saveResidues[jn] == -1) continue;
+                        else if (newAlig->saveResidues[jn] == -1) {
+                            break;
+                        }
+                        else block++;
+                    }
 
-        // We start in the alignment middle then we move on
-        // right and left side at the same time.
-        for (i = (_alignment->residNumber / 2), j = (i + 1); (((i > 0) || (j < (_alignment->residNumber - 1))) && (NumberOfResiduesToAchieveBaseLine > 0)); i--, j++) {
+                    // if block's size is greater or equal than the fixed
+                    // size then we save all columns that have not been
+                    // saved previously.
+                    if (block >= k) {
+                        for (; jn >= 0 && oth > 0 && newAlig->saveResidues[jn] == -1; jn--) {
+                            if (_alignment->saveResidues[jn] == -1) continue;
+                            if (ValueVect[jn] == cut) {
+                                newAlig->saveResidues[jn] = jn;
+                                oth--;
+                            } else
+                                break;
+                        }
+                    }
+                    i = jn;
+                }
+                // Right side
+                {
+                    // Right side. Here, we compute the block's size.
+                    for (block = 0, jn = j; jn < _alignment->originalResidNumber && oth > 0; jn++) {
+                        if (_alignment->saveResidues[jn] == -1) continue;
+                        else if (newAlig->saveResidues[jn] == -1) {
+                            break;
+                        }
+                        else block++;
+                    }
 
-            // Left side. Here, we compute the block's size.
-            for (jn = i; ((newAlig->saveResidues[jn] != -1) && (jn >= 0) && (NumberOfResiduesToAchieveBaseLine > 0)); jn--);
-
-            // if block's size is greater or equal than the fixed
-            // size then we save all columns that have not been
-            // saved previously.
-            if ((i - jn) >= k) {
-                for (; ((newAlig->saveResidues[jn] == -1) && (jn >= 0) && (NumberOfResiduesToAchieveBaseLine > 0)); jn--) {
-                    if (ValueVect[jn] == cut) {
-                        newAlig->saveResidues[jn] = jn;
-                        NumberOfResiduesToAchieveBaseLine--;
-                    } else
-                        break;
+                    // if block's size is greater or equal than the fixed
+                    // size then we save all columns that have not been
+                    // saved previously.
+                    if (block >= k) {
+                        for (; jn < _alignment->originalResidNumber
+                               && oth > 0
+                               && newAlig->saveResidues[jn] == -1;
+                               jn++) {
+                            if (_alignment->saveResidues[jn] == -1) continue;
+                            if (ValueVect[jn] == cut) {
+                                newAlig->saveResidues[jn] = jn;
+                                oth--;
+                            } else
+                                break;
+                        }
+                    }
+                    j = jn;
                 }
             }
-            i = jn;
-            // Right side. Here, we compute the block's size.
-            for (jn = j; ((newAlig->saveResidues[jn] != -1) && (jn < _alignment->residNumber) && (NumberOfResiduesToAchieveBaseLine > 0)); jn++);
-
-            // if block's size is greater or equal than the fixed
-            // size then we save all columns that have not been
-            // saved previously.
-            if ((jn - j) >= k) {
-                for (; ((newAlig->saveResidues[jn] == -1) && (jn < _alignment->residNumber) && (NumberOfResiduesToAchieveBaseLine > 0)); jn++) {
-                    if (ValueVect[jn] == cut) {
-                        newAlig->saveResidues[jn] = jn;
-                        NumberOfResiduesToAchieveBaseLine--;
-                    } else
-                        break;
-                }
-            }
-            j = jn;
         }
     }
 
-    newAlig->Cleaning->removeSmallerBlocks(blockSize);
+    newAlig->Cleaning->removeSmallerBlocks(blockSize, *_alignment);
 
-    // If the flag -terminalony is set, apply a method to look for internal
-    // boundaries and get back columns inbetween them, if they exist
+    // If the flag -terminalonly is set, apply a method to look for internal
+    // boundaries and get back columns in-between them, if they exist
+    if (terminalGapOnly && !removeOnlyTerminal()) return nullptr;
+
+    // Once the columns/sequences selection is done, turn it around
+    // if complementary flag is active
+    if (complementary) computeComplementaryAlig(true, false);
+
+    newAlig->Cleaning->removeAllGapsSeqsAndCols();
+
+    // Return the new alignment reference
+    return newAlig;
+}
+
+newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(
+        double cutGaps,
+        const int *gInCol,
+        float baseLine,
+        float cutCons,
+        const float *MDK_Win,
+        bool complementary)
+{
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary) ");
+
+    int i, j, k, jn, resCounter, remainingResidues, block;
+    newAlignment *newAlig = new newAlignment(*_alignment);
+
+    // Remove the residues using both statistics
+    // We also profit the bucle and count the number of residues in the previous alignment
+    for (i = 0, resCounter = 0, block = 0;
+         i < _alignment->originalResidNumber;
+         i++)
+    {
+        if (_alignment->saveResidues[i] == -1)
+            continue;
+        if (MDK_Win[i] > cutCons && gInCol[i] <= cutGaps)
+            resCounter++;
+        else
+            newAlig->saveResidues[i] = -1;
+
+        block++;
+    }
+
+    _alignment->residNumber = block;
+
+    remainingResidues = utils::roundInt((((baseLine / 100.0) - (float) resCounter / block)) * block);
+
+    float blCons, *vectAuxCons;
+    int blGaps, *vectAuxGaps;
+
+    if (remainingResidues > 0) {
+        // Search for new cutpoints
+        vectAuxCons = new float[block];
+        vectAuxGaps = new int[block];
+
+        // Fill the temporary vectors
+        int ii = 0;
+        for (i = 0; i < _alignment->originalResidNumber; i++)
+        {
+            if (_alignment->saveResidues[i] == -1) continue;
+            vectAuxCons[ii] = MDK_Win[i];
+            vectAuxGaps[ii++] = gInCol[i];
+        }
+
+        // Sort them
+        utils::quicksort(vectAuxCons, 0, block - 1);
+        blCons = vectAuxCons[(int) ((float) (_alignment->residNumber - 1) * (100.0 - baseLine) / 100.0)];
+        delete[] vectAuxCons;
+
+        utils::quicksort(vectAuxGaps, 0, block - 1);
+        blGaps = vectAuxGaps[(int) ((float) (_alignment->residNumber - 1) * (baseLine) / 100.0)];
+        delete[] vectAuxGaps;
+
+        // Calculate the midpoint of the alignment
+        int midPoint = 0, counter = 0;
+        for (int halfBlock = block / 2;
+             midPoint < _alignment->originalResidNumber;
+             midPoint++) {
+            if (_alignment->saveResidues[midPoint] == -1) continue;
+            if (counter >= halfBlock) break;
+            counter++;
+        }
+
+        // Fixed the initial size of blocks as 0.5% of
+        // alignment's length
+        for (k = utils::roundInt(0.005 * block);
+             k >= 0 && remainingResidues > 0;
+             k--)
+        {
+
+            // We start in the alignment middle then we move on
+            // right and left side at the same time.
+            for (i = midPoint, j = i + 1;
+                 ((i > 0 || j < _alignment->residNumber - 1) && remainingResidues > 0);
+                 i--, j++) {
+
+                {
+                    // Left side. Here, we compute the block's size.
+                    for (block = 0, jn = i; jn >= 0 && remainingResidues > 0; jn--) {
+                        if (_alignment->saveResidues[jn] == -1) continue;
+                        else if (newAlig->saveResidues[jn] == -1) {
+                            break;
+                        }
+                        else block++;
+                    }
+
+                    // if block's size is greater or equal than the fixed
+                    // size then we save all columns that have not been
+                    // saved previously.
+                    if (block >= k) {
+                        for (; jn >= 0 && remainingResidues > 0 && newAlig->saveResidues[jn] == -1; jn--) {
+                            if (_alignment->saveResidues[jn] == -1) continue;
+                            if (MDK_Win[jn] >= blCons || gInCol[jn] <= blGaps) {
+                                newAlig->saveResidues[jn] = jn;
+                                remainingResidues--;
+                            } else
+                                break;
+                        }
+                    }
+                    i = jn;
+                }
+
+                {
+                    // Right side. Here, we compute the block's size.
+                    for (block = 0, jn = j; jn < _alignment->originalResidNumber && remainingResidues > 0; jn++) {
+                        if (_alignment->saveResidues[jn] == -1) continue;
+                        else if (newAlig->saveResidues[jn] == -1) {
+                            break;
+                        }
+                        else block++;
+                    }
+
+                    // if block's size is greater or equal than the fixed
+                    // size then we save all columns that have not been
+                    // saved previously.
+                    if (block >= k) {
+                        for (; jn < _alignment->originalResidNumber
+                               && remainingResidues > 0
+                               && newAlig->saveResidues[jn] == -1;
+                               jn++) {
+                            if (_alignment->saveResidues[jn] == -1) continue;
+                            if (MDK_Win[jn] >= blCons || gInCol[jn] <= blGaps) {
+                                newAlig->saveResidues[jn] = jn;
+                                remainingResidues--;
+                            } else
+                                break;
+                        }
+                    }
+                    j = jn;
+                }
+
+            }
+        }
+    }
+
+
+    newAlig->Cleaning->removeSmallerBlocks(blockSize, *_alignment);
+
+    // If the flag -terminalonly is set, apply a method to look for internal
+    // boundaries and get back columns in-between them, if they exist
     if (terminalGapOnly && !newAlig->Cleaning->removeOnlyTerminal())
-            return nullptr;
+        return nullptr;
 
     // Once the columns/sequences selection is done, turn it around
     // if complementary flag is active
@@ -235,101 +505,7 @@ newAlignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, cons
         newAlig->Cleaning->computeComplementaryAlig(true, false);
 
     // Check for any additional column/sequence to be removed
-    // Compute new sequences and columns numbers 
-    newAlig->Cleaning->removeAllGapsSeqsAndCols();
-    return newAlig;
-}
-
-newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary) {
-    // Create a timer that will report times upon its destruction
-    //	which means the end of the current scope.
-    StartTiming("newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary) ");
-
-    int i, j, k, jn, resCounter, NumberOfResiduesToAchieveBaseLine, pos, block, *vectAux;
-    newAlignment *newAlig = new newAlignment(*_alignment);
-
-    for (i = 0, resCounter = 0; i < _alignment->originalResidNumber; i++)
-        if ((MDK_Win[i] > cutCons) && (gInCol[i] <= cutGaps)) resCounter++;
-        else newAlig->saveResidues[i] = -1;
-
-    NumberOfResiduesToAchieveBaseLine = utils::roundInt((((baseLine / 100.0) - (float) resCounter / _alignment->residNumber)) * _alignment->residNumber);
-
-    float blCons, *vectAuxCons;
-    int blGaps, *vectAuxGaps;
-
-    if (NumberOfResiduesToAchieveBaseLine > 0) {
-
-        vectAuxCons = new float[_alignment->residNumber];
-        utils::copyVect((float *) MDK_Win, vectAuxCons, _alignment->residNumber);
-        utils::quicksort(vectAuxCons, 0, _alignment->residNumber - 1);
-        blCons = vectAuxCons[(int) ((float) (_alignment->residNumber - 1) * (100.0 - baseLine) / 100.0)];
-        delete[] vectAuxCons;
-
-        vectAuxGaps = new int[_alignment->residNumber];
-        utils::copyVect((int *) gInCol, vectAuxGaps, _alignment->residNumber);
-        utils::quicksort(vectAuxGaps, 0, _alignment->residNumber - 1);
-        blGaps = vectAuxGaps[(int) ((float) (_alignment->residNumber - 1) * (baseLine) / 100.0)];
-        delete[] vectAuxGaps;
-
-        // Fixed the initial size of blocks as 0.5% of
-        // alignment's length
-        for (k = utils::roundInt(0.005 * _alignment->residNumber); (k >= 0) && (NumberOfResiduesToAchieveBaseLine > 0); k--) {
-
-            // We start in the alignment middle then we move on
-            // right and left side at the same time.
-            for (i = (_alignment->residNumber / 2), j = (i + 1); (((i > 0) || (j < (_alignment->residNumber - 1))) && (NumberOfResiduesToAchieveBaseLine > 0)); i--, j++) {
-
-                // Left side. Here, we compute the block's size.
-                for (jn = i; ((newAlig->saveResidues[jn] != -1) && (jn >= 0) && (NumberOfResiduesToAchieveBaseLine > 0)); jn--);
-
-                // if block's size is greater or equal than the fixed
-                // size then we save all columns that have not been
-                // saved previously.
-                if ((i - jn) >= k) {
-                    for (; ((newAlig->saveResidues[jn] == -1) && (jn >= 0) && (NumberOfResiduesToAchieveBaseLine > 0)); jn--) {
-                        if (MDK_Win[jn] >= blCons || gInCol[jn] <= blGaps) {
-                            newAlig->saveResidues[jn] = jn;
-                            NumberOfResiduesToAchieveBaseLine--;
-                        } else
-                            break;
-                    }
-                }
-                i = jn;
-                // Right side. Here, we compute the block's size.
-                for (jn = j; ((newAlig->saveResidues[jn] != -1) && (jn < _alignment->residNumber) && (NumberOfResiduesToAchieveBaseLine > 0)); jn++);
-
-                // if block's size is greater or equal than the fixed
-                // size then we save all columns that have not been
-                // saved previously.
-                if ((jn - j) >= k) {
-                    for (; ((newAlig->saveResidues[jn] == -1) && (jn < _alignment->residNumber) && (NumberOfResiduesToAchieveBaseLine > 0)); jn++) {
-                        if (MDK_Win[jn] >= blCons || gInCol[jn] <= blGaps) {
-                            newAlig->saveResidues[jn] = jn;
-                            NumberOfResiduesToAchieveBaseLine--;
-                        } else
-                            break;
-                    }
-                }
-                j = jn;
-            }
-        }
-    }
-
-
-    newAlig->Cleaning->removeSmallerBlocks(blockSize);
-
-    // If the flag -terminalony is set, apply a method to look for internal
-    // boundaries and get back columns inbetween them, if they exist 
-    if (terminalGapOnly && !newAlig->Cleaning->removeOnlyTerminal())
-            return nullptr;
-
-    // Once the columns/sequences selection is done, turn it around
-    // if complementary flag is active 
-    if (complementary)
-        newAlig->Cleaning->computeComplementaryAlig(true, false);
-
-    // Check for any additional column/sequence to be removed
-    // Compute new sequences and columns numbers 
+    // Compute new sequences and columns numbers
     newAlig->Cleaning->removeAllGapsSeqsAndCols(true, true);
     return newAlig;
 }
@@ -527,8 +703,8 @@ newAlignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, 
         }
     }
 
-    // If the flag -terminalony is set, apply a method to look for internal
-    // boundaries and get back columns inbetween them, if they exist
+    // If the flag -terminalonly is set, apply a method to look for internal
+    // boundaries and get back columns in-between them, if they exist
     if (terminalGapOnly == true)
         if (!newAlig->Cleaning->removeOnlyTerminal())
             return nullptr;
@@ -556,14 +732,10 @@ newAlignment *Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, 
 
     // Keep only those sequences with an overlap value equal or greater than
     // the minimum overlap value set by the user.
-    for (i = 0; i < _alignment->originalSequenNumber; i++)
-    {
+    for (i = 0; i < _alignment->originalSequenNumber; i++) {
         if (overlapSeq[i] < minimumOverlap)
             newAlig->saveSequences[i] = -1;
     }
-
-    for (int X = 0; X < _alignment->originalSequenNumber; X++)
-        std::cout << "Seq " << X << " " << newAlig->saveSequences[X] << "\n";
 
     // Once the columns/sequences selection is done, turn it around
     // if complementary flag is active 
@@ -585,10 +757,8 @@ newAlignment *Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementa
     newAlignment *ret;
     double cut;
 
-    // If gaps statistics are not calculated, we
-    // calculate them 
-    if (_alignment->Statistics->calculateGapStats() == false)
-        return nullptr;
+    // If gaps statistics are not calculated, we calculate them
+    if (!_alignment->Statistics->calculateGapStats()) return nullptr;
 
     // Obtain the cut point using the given parameters
     cut = _alignment->Statistics->gaps->calcCutPoint(baseLine, gapsPct);
@@ -706,10 +876,10 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
     int i, j, k, seqValue, ovrlap, hit;
     char indet;
 
-    float floatOverlap = overlap * float(_alignment->originalSequenNumber-1);
-    ovrlap = int(overlap * (_alignment->originalSequenNumber-1));
+    float floatOverlap = overlap * float(_alignment->originalSequenNumber - 1);
+    ovrlap = int(overlap * (_alignment->originalSequenNumber - 1));
 
-    if(floatOverlap > float(ovrlap))
+    if (floatOverlap > float(ovrlap))
         ovrlap++;
 
     if (spuriousVector == nullptr)
@@ -832,20 +1002,13 @@ newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
     int i, j, acm, gapCut, *positions, *gaps;
     double inic, fin, vlr;
 
-    // If gaps statistics are not calculated, we calculate them
-    if (_alignment->Statistics->calculateGapStats() != true)
+    // If conservation's statistics are not calculated, we calculate them
+    if (_alignment->Statistics->calculateConservationStats() != true)
         return nullptr;
 
     // Computes the gap cut point using a automatic method and at the same time, we get the gaps values from the newAlignment.
     gapCut = _alignment->Statistics->gaps->calcCutPoint2ndSlope();
     gaps = _alignment->Statistics->gaps->getGapsWindow();
-
-    // If conservation's statistics are not calculated, we calculate them
-    if (_alignment->Statistics->calculateConservationStats() != true)
-        return nullptr;
-
-    /* Computes the conservations value for each column in the newAlignment. At the same time, the method get the vector with those values. */
-//    _alignment->scons -> calculateVectors(/*_alignment->sequences,*/ _alignment->sgaps -> getGapsWindow());
 
     simil = _alignment->Statistics->conservation->getMdkWindowedVector();
 
@@ -1173,11 +1336,11 @@ bool Cleaner::removeOnlyTerminal(void) {
     }
 
     // We increase the right boundary in one position because we use lower strict
-    // condition to get back columns inbetween boundaries removed by any method
+    // condition to get back columns in-between boundaries removed by any method
     right_boundary += 1;
 
     // Once the interal boundaries have been established, if these limits exist
-    // then retrieved all columns inbetween both boundaries. Columns out of these
+    // then retrieved all columns in-between both boundaries. Columns out of these
     // limits will remain selected or not depending on the algorithm applied
     for (i = left_boundary; i < right_boundary; i++)
         _alignment->saveResidues[i] = i;
@@ -1185,11 +1348,10 @@ bool Cleaner::removeOnlyTerminal(void) {
     return true;
 }
 
-void Cleaner::removeSmallerBlocks(int blockSize) {
+void Cleaner::removeSmallerBlocks(int blockSize, newAlignment &original) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void Cleaner::removeSmallerBlocks(int blockSize) ");
-    // NOTE this method is not updated to use shared sequences. This shouldn't be used at all.
     int i, j, pos, block;
 
     if (blockSize == 0)
@@ -1199,13 +1361,14 @@ void Cleaner::removeSmallerBlocks(int blockSize) {
     // than a column hasn't been selected, check whether the current block is big
     // enough to be kept or it should be removed from the final newAlignment
     for (i = 0, pos = 0, block = 0; i < _alignment->residNumber; i++) {
-        if (_alignment->saveResidues[i] != -1)
-            block++;
+        if (original.saveResidues[i] != -1) continue;
+        if (_alignment->saveResidues[i] != -1) block++;
         else {
             // Remove columns from blocks smaller than input blocks size
             if (block < blockSize)
                 for (j = pos; j <= i; j++)
-                    _alignment->saveResidues[j] = -1;
+                    if (original.saveResidues[j] == -1) continue;
+                    else _alignment->saveResidues[j] = -1;
             pos = i + 1;
             block = 0;
         }
@@ -1214,9 +1377,9 @@ void Cleaner::removeSmallerBlocks(int blockSize) {
     // Check final block separately since it could happen than last block is not
     // big enough but because the loop end could provoke to ignore it
     if (block < blockSize)
-        for (j = pos; j < i; j++)
-            _alignment->saveResidues[j] = -1;
-    return;
+        for (j = pos; j <= i; j++)
+            if (original.saveResidues[j] == -1) continue;
+            else _alignment->saveResidues[j] = -1;
 }
 
 void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) {

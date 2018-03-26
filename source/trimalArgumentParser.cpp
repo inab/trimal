@@ -921,7 +921,7 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {
 
 inline bool trimAlManager::check_thresholds_incompatibilities() {
     //TODO consistencyThreshold was not present on this Incompatibilities. Is this correct?
-    if ((gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || (consistencyThreshold != -1)) {
+    if ((gapThreshold != -1) || (similarityThreshold != -1) || (consistencyThreshold != -1)) {
 
         if (automatedMethodCount) {
             debug.report(ErrorCode::CombinationAmongTrimmingMethods);
@@ -936,10 +936,10 @@ inline bool trimAlManager::check_thresholds_incompatibilities() {
             }
         }
 
-        if (maxIdentity != -1) {
-            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
-            appearErrors = true;
-        }
+//        if (maxIdentity != -1) {
+//            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
+//            appearErrors = true;
+//        }
 
 //        if (clusters != -1) {
 //            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
@@ -966,10 +966,10 @@ inline bool trimAlManager::check_automated_methods_incompatibilities() {
 //            appearErrors = true;
 //        }
 
-        if (maxIdentity != -1) {
-            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
-            appearErrors = true;
-        }
+//        if (maxIdentity != -1) {
+//            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
+//            appearErrors = true;
+//        }
 
         if (automatedMethodCount > 1) {
             debug.report(ErrorCode::CombinationAmongTrimmingMethods);
@@ -1154,7 +1154,7 @@ inline bool trimAlManager::check_similarity_matrix() {
 
 inline bool trimAlManager::check_outputs_coincidence() {
 
-    std::array<char *, 8> outFiles
+    std::array<char *, 4> outFiles
             {{
                      htmlOutFile,
                      outfile,
@@ -1162,7 +1162,7 @@ inline bool trimAlManager::check_outputs_coincidence() {
                      svgStatsOutFile
              }
             };
-    std::array<string, 8> outFilesNames
+    std::array<string, 4> outFilesNames
             {{
                      "html (-htmlout)",
                      "output (-out)",
@@ -1487,8 +1487,8 @@ inline void trimAlManager::print_statistics() {
                 if (origAlig->Statistics->gaps->numColumnsWithGaps[i] != 0) {
                     // Compute and prints the accumulative values for the gaps in the alignment. 
                     acm += origAlig->Statistics->gaps->numColumnsWithGaps[i];
-                    x = acm / origAlig->Statistics->gaps->residNumber;
-                    y = 1.F - ((i * 1.0F) / origAlig->Statistics->gaps->sequenNumber);
+                    x = acm / origAlig->residNumber;
+                    y = 1.F - ((i * 1.0F) / origAlig->sequenNumber);
                     utils::streamSVG(&x, &y, 0, &linename, &color, NULL, NULL);
                 }
             }
@@ -1504,29 +1504,29 @@ inline void trimAlManager::print_statistics() {
             int i, num, acm;
 
             // Allocate memory 
-            vectAux = new float[origAlig->Statistics->conservation->residues];
+            vectAux = new float[origAlig->residNumber];
 
             // Select the conservation's value source and copy that vector in a auxiliar vector 
             if (origAlig->Statistics->conservation->MDK_Window != NULL)
-                utils::copyVect(origAlig->Statistics->conservation->MDK_Window, vectAux, origAlig->Statistics->conservation->residues);
+                utils::copyVect(origAlig->Statistics->conservation->MDK_Window, vectAux, origAlig->residNumber);
             else
-                utils::copyVect(origAlig->Statistics->conservation->MDK, vectAux, origAlig->Statistics->conservation->residues);
+                utils::copyVect(origAlig->Statistics->conservation->MDK, vectAux, origAlig->residNumber);
 
             // Sort the auxiliar vector. 
-            utils::quicksort(vectAux, 0, origAlig->Statistics->conservation->residues - 1);
+            utils::quicksort(vectAux, 0, origAlig->residNumber - 1);
 
             // Initializate some values 
-            refer = vectAux[origAlig->Statistics->conservation->residues - 1];
+            refer = vectAux[origAlig->residNumber - 1];
             acm = 0;
             num = 1;
 
             // Count the columns with the same conservation's value and compute this information to shows the accunulative
             // statistics in the alignment. 
-            for (i = origAlig->Statistics->conservation->residues - 2; i >= 0; i--) {
+            for (i = origAlig->residNumber - 2; i >= 0; i--) {
                 acm++;
 
                 if (refer != vectAux[i]) {
-                    x = ((float) acm / origAlig->Statistics->conservation->residues);
+                    x = ((float) acm / origAlig->residNumber);
                     y = refer;
                     utils::streamSVG(&x, &y, 0, &linename, &color, NULL, NULL);
                     refer = vectAux[i];
@@ -1534,7 +1534,7 @@ inline void trimAlManager::print_statistics() {
                 } else num++;
             }
             acm++;
-            x = ((float) acm / origAlig->Statistics->conservation->residues);
+            x = ((float) acm / origAlig->residNumber);
             y = refer;
             utils::streamSVG(&x, &y, 0, &linename, &color, NULL, NULL);
 
@@ -1584,7 +1584,6 @@ inline void trimAlManager::print_statistics() {
                 statisticsConsistency::printStatisticsFileAcl(*origAlig, origAlig->Statistics->consistency->getValues());
         }
     }
-
 }
 
 inline bool trimAlManager::create_or_use_similarity_matrix() {
@@ -1627,147 +1626,18 @@ inline void trimAlManager::clean_alignment() {
     //	which means the end of the current scope.
     StartTiming("inline void trimAlManager::clean_alignment() ");
 
+    if (!origAlig->isFileAligned())
+    {
+        debug.report(ErrorCode::NotAligned, infile);
+        exit(ErrorCode::NotAligned);
+    }
+
     CleanSequences();
 
     if (automatedMethodCount)
         CleanResiduesAuto();
     else
         CleanResiduesNonAuto();
-
-/*    if (nogaps) {
-        singleAlig = origAlig->Cleaning->cleanGaps(0, 0, getComplementary);
-    } else if (noallgaps) {
-        singleAlig = origAlig->Cleaning->cleanNoAllGaps(getComplementary);
-    } else if (gappyout) {
-        singleAlig = origAlig->Cleaning->clean2ndSlope(getComplementary);
-    } else if (strict) {
-        singleAlig = origAlig->Cleaning->cleanCombMethods(getComplementary, false);
-    } else if (strictplus) {
-        singleAlig = origAlig->Cleaning->cleanCombMethods(getComplementary, true);
-    } else if (automated1) {
-        if (origAlig->Cleaning->selectMethod() == GAPPYOUT)
-            singleAlig = origAlig->Cleaning->clean2ndSlope(getComplementary);
-        else // STRICT
-            singleAlig = origAlig->Cleaning->cleanCombMethods(getComplementary, false);
-    } else if (clusters != -1) {
-        if (clusters > origAlig->getNumSpecies()) {
-            debug.report(ErrorCode::MoreClustersThanSequences);
-            appearErrors = true;
-        } else {
-            tempAlig = origAlig->Cleaning->getClustering(
-                    origAlig->Cleaning->getCutPointClusters(clusters)
-            );
-
-            singleAlig = tempAlig->Cleaning->cleanNoAllGaps(false);
-
-            delete tempAlig;
-        }
-    } else if ((residuesOverlap != -1) && (sequenceOverlap != -1)) {
-        tempAlig = origAlig->Cleaning->cleanSpuriousSeq(
-                residuesOverlap,
-                sequenceOverlap / 100,
-                getComplementary
-        );
-
-        singleAlig = tempAlig->Cleaning->cleanNoAllGaps(false);
-
-        delete tempAlig;
-
-    } else {
-
-        if (consistencyThreshold != -1) {
-            singleAlig = origAlig->Cleaning->cleanCompareFile(
-                    consistencyThreshold,
-                    conservationThreshold,
-                    origAlig->Statistics->consistency->getValues(),
-                    getComplementary
-            );
-        } else { singleAlig = origAlig; }
-
-        if (similarityThreshold != -1.0) {
-
-            if (gapThreshold != -1.0) {
-                tempAlig = singleAlig->Cleaning->clean(
-                        conservationThreshold,
-                        gapThreshold,
-                        similarityThreshold,
-                        getComplementary
-                );
-                if (singleAlig != origAlig) delete singleAlig;
-                singleAlig = tempAlig;
-            } else {
-                tempAlig = singleAlig->Cleaning->cleanConservation(
-                        conservationThreshold,
-                        similarityThreshold,
-                        getComplementary
-                );
-                if (singleAlig != origAlig) delete singleAlig;
-                singleAlig = tempAlig;
-            }
-
-        } else if (gapThreshold != -1.0) {
-
-            tempAlig = singleAlig->Cleaning->cleanGaps(
-                    conservationThreshold,
-                    gapThreshold,
-                    getComplementary
-            );
-            if (singleAlig != origAlig) delete singleAlig;
-            singleAlig = tempAlig;
-        } else if ((selectCols) || (selectSeqs)) {
-
-            if (delColumns != nullptr) {
-                num = delColumns[0];
-                if (delColumns[num] >= singleAlig->getNumAminos()) {
-                    debug.report(
-                            ErrorCode::SelectOnlyAccepts,
-                            new string[2]{"-selectcols", "residues"}
-                    );
-                    appearErrors = true;
-                } else
-                    singleAlig = singleAlig->Cleaning->removeColumns(
-                            delColumns,
-                            1,
-                            num,
-                            getComplementary
-                    );
-            }
-
-            if (delSequences != nullptr) {
-                num = delSequences[0];
-                if (delSequences[num] >= singleAlig->getNumSpecies()) {
-                    debug.report(ErrorCode::SelectOnlyAccepts, new string[2]{"-selectseqs", "sequences"});
-                    appearErrors = true;
-                } else {
-                    tempAlig = origAlig->Cleaning->removeSequences(
-                            delSequences,
-                            1,
-                            num,
-                            getComplementary
-                    );
-
-                    singleAlig = tempAlig->Cleaning->cleanNoAllGaps(false);
-
-                    delete tempAlig;
-                }
-            }
-
-        } else if (maxIdentity != -1) {
-            tempAlig = singleAlig->Cleaning->getClustering(maxIdentity);
-
-            singleAlig = tempAlig->Cleaning->cleanNoAllGaps(false);
-
-            delete tempAlig;
-
-        } else {
-            singleAlig = nullptr;
-            return;
-        }
-    }
-
-    if (singleAlig == nullptr) {
-        exit(-1);
-    }*/
 }
 
 inline void trimAlManager::CleanSequences(){
@@ -1781,7 +1651,7 @@ inline void trimAlManager::CleanSequences(){
                 origAlig->Cleaning->getCutPointClusters(clusters)
         );
     } else if (maxIdentity != -1) {
-        tempAlig = singleAlig->Cleaning->getClustering(maxIdentity);
+        tempAlig = origAlig->Cleaning->getClustering(maxIdentity);
     } else if (delSequences != nullptr) {
         num = delSequences[0];
         {
@@ -1802,8 +1672,16 @@ inline void trimAlManager::CleanSequences(){
 
     if (tempAlig) {
         singleAlig = tempAlig->Cleaning->cleanNoAllGaps(false);
+
         delete tempAlig;
         tempAlig = nullptr;
+
+        delete singleAlig->Statistics->gaps;
+        singleAlig->Statistics->gaps = nullptr;
+
+        delete singleAlig->Statistics->conservation;
+        singleAlig->Statistics->conservation = nullptr;
+
     } else {
         singleAlig = origAlig;
     }
@@ -1816,6 +1694,12 @@ inline void trimAlManager::CleanResiduesAuto(){
     // CleanSequences initializes singleAlig.
     // singleAlig can be a derived alignment from origAlig or origAlig itself
 
+    if (automated1) {
+        if (singleAlig->Cleaning->selectMethod() == GAPPYOUT)
+            gappyout = true;
+        else
+            strict = true;
+    }
     if (nogaps) {
         tempAlig = singleAlig->Cleaning->cleanGaps(0, 0, getComplementary);
     } else if (noallgaps) {
@@ -1826,17 +1710,13 @@ inline void trimAlManager::CleanResiduesAuto(){
         tempAlig = singleAlig->Cleaning->cleanCombMethods(getComplementary, false);
     } else if (strictplus) {
         tempAlig = singleAlig->Cleaning->cleanCombMethods(getComplementary, true);
-    } else if (automated1) {
-        if (singleAlig->Cleaning->selectMethod() == GAPPYOUT)
-            tempAlig = singleAlig->Cleaning->clean2ndSlope(getComplementary);
-        else // STRICT
-            tempAlig = singleAlig->Cleaning->cleanCombMethods(getComplementary, false);
     }
+
+    // Move the new formed alignment to the variable singleAlig
     if (tempAlig)
     {
         // If singleAlig was an intermediate alignment, we delete it from memory.
         if (singleAlig != origAlig) delete singleAlig;
-        // Reinitialize singleAlig for later uses
         singleAlig = tempAlig;
         tempAlig = nullptr;
     }
@@ -1960,6 +1840,8 @@ inline void trimAlManager::delete_variables() {
     outfile = nullptr;
     delete[] htmlOutFile;
     htmlOutFile = nullptr;
+    delete [] svgOutFile;
+    svgOutFile = nullptr;
 
     delete[] infile;
     infile = nullptr;
@@ -1977,7 +1859,7 @@ inline void trimAlManager::delete_variables() {
     vcfs = nullptr;
 }
 
-void trimAlManager::menu(void) {
+void trimAlManager::menu() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void trimAlManager::menu(void) ");

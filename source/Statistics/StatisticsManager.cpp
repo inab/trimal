@@ -23,16 +23,20 @@ bool StatisticsManager::calculateConservationStats(void) {
 
     // It the similarity statistics object has not been
     // created we create it
-    if (_alignment->Statistics->conservation == nullptr)
-        return false;
+    if (conservation == nullptr)
+    {
+        conservation = new statisticsConservation(_alignment);
+        conservation->setSimilarityMatrix(_similarityMatrix);
+        conservation->applyWindow(shWindow);
+    }
 
     // Ask for the similarity matrix
-    if (!_alignment->Statistics->conservation->isSimMatrixDef())
+    if (!conservation->isSimMatrixDef())
         return false;
 
     // Compute the similarity statistics from the input
     // newAlignment
-    if (!_alignment->Statistics->conservation->calculateVectors(true))
+    if (!conservation->calculateVectors(true))
         return false;
 
     // Ask to know if it is necessary to apply any window
@@ -76,17 +80,16 @@ bool StatisticsManager::setSimilarityMatrix(similarityMatrix *sm) {
 	 //	which means the end of the current scope.
 	StartTiming("bool StatisticsManager::setSimilarityMatrix(similarityMatrix *sm) ");
 
+    _similarityMatrix = sm;
+
     // If scons object is not created, we create them
     if (_alignment->Statistics->conservation == nullptr)
         _alignment->Statistics->conservation = new statisticsConservation(_alignment);
 
-    // Associate the matrix to the similarity statistics
-    // object
-    if (!_alignment->Statistics->conservation->setSimilarityMatrix(sm))
-        return false;
-
+    // Associate the matrix to the similarity statistics object
     // If it's OK, we return true
-    return true;
+    return _alignment->Statistics->conservation->setSimilarityMatrix(sm);
+
 
 }
 
@@ -130,7 +133,7 @@ void StatisticsManager::printCorrespondence(void) {
 
 }
 
-bool StatisticsManager::calculateGapStats(void) {
+bool StatisticsManager::calculateGapStats() {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("bool StatisticsManager::calculateGapStats(void) ");
@@ -141,12 +144,11 @@ bool StatisticsManager::calculateGapStats(void) {
 
     // If sgaps object is not created, we create them
     // and calculate the statistics
-    if (_alignment->Statistics->gaps == nullptr) {
-        _alignment->Statistics->gaps = new statisticsGaps(_alignment);
-        return _alignment->Statistics->gaps->applyWindow(ghWindow);
+    if (gaps == nullptr) {
+        gaps = new statisticsGaps(_alignment);
     }
-
-    return true;
+    gaps->CalculateVectors();
+    return gaps->applyWindow(ghWindow);
 }
 
 StatisticsManager::StatisticsManager(newAlignment *parent) {
@@ -165,18 +167,19 @@ StatisticsManager::StatisticsManager(newAlignment *parent, StatisticsManager *mo
 	StartTiming("StatisticsManager::StatisticsManager(newAlignment *parent, StatisticsManager *mold) ");
     _alignment = parent;
 
-    if (mold->conservation)
-        conservation    = new statisticsConservation(parent, mold->conservation);
-
-    if (mold->gaps)
-        gaps            = new statisticsGaps(parent, mold->gaps);
-
-    if (mold->consistency)
-        consistency     = new statisticsConsistency(parent, mold->consistency);
+    _similarityMatrix = mold->_similarityMatrix;
 
     ghWindow = mold->ghWindow;
     shWindow = mold->shWindow;
 
+    if (mold->conservation)
+        conservation = new statisticsConservation(parent, mold->conservation);
+
+    if (mold->consistency)
+        consistency = new statisticsConsistency(parent, mold->consistency);
+
+    if (mold->gaps)
+        gaps = new statisticsGaps(parent, mold->gaps);
 }
 
 StatisticsManager::~StatisticsManager() {

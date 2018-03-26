@@ -248,7 +248,7 @@ public:
       \brief Method to remove column blocks smaller than a given size.
       \param blockSize Minimum size a block has to be to be kept.
       */
-    void removeSmallerBlocks(int blockSize);
+    void removeSmallerBlocks(int blockSize, newAlignment &original);
 
     /**
       \brief Method to remove columns based on a score and a threshold

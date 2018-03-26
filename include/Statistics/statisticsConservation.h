@@ -54,10 +54,7 @@ public:
 
     newAlignment * _alignment;
 
-    int
-    residues,
-    sequences,
-    halfWindow          = -1;
+    int halfWindow          = -1;
 
     /* Conservation vectors */
     float *Q                    = nullptr;

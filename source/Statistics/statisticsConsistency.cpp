@@ -220,7 +220,7 @@ int statisticsConsistency::compareAndChoose(newAlignment **vectAlignments,
     // Allocate dinamic local memory
     names               = new string[numSeqs];
     correspNames        = new int[numSeqs];
-    numResiduesAlig     = new int[numSeqs];
+    numResiduesAlig     = new int[numAlignments];
     columnSeqMatrix     = new int[numSeqs];
     vectHits            = new float *[numAlignments];
     columnSeqMatrixAux  = new int[numSeqs];

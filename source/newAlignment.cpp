@@ -125,7 +125,7 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
 
         this->Cleaning = new Cleaner(this, originalAlignment.Cleaning);
 
-        this->Statistics = originalAlignment.Statistics;
+        this->Statistics = new StatisticsManager(this, originalAlignment.Statistics);
 
         this->SeqRef = originalAlignment.SeqRef;
 
@@ -164,6 +164,9 @@ newAlignment::~newAlignment() {
     delete Cleaning;
     Cleaning = nullptr;
 
+    delete Statistics;
+    Statistics = nullptr;
+
     if (--(*SeqRef) == 0) {
         delete SeqRef;
 
@@ -175,9 +178,6 @@ newAlignment::~newAlignment() {
 
         delete[] seqsInfo;
         seqsInfo = nullptr;
-
-        delete Statistics;
-        Statistics = nullptr;
 
     } else if (*SeqRef < 0) {
         delete SeqRef;
