@@ -3,7 +3,7 @@
 #include "../../include/defines.h"
 #include "../../include/values.h"
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include <vector>
 
@@ -14,6 +14,7 @@ int PirState::CheckAlignment(istream* origin)
     char * line;
     origin->seekg(0);
     line = utils::readLine(*origin);
+    if (line == nullptr) return 0;
     if (strlen(line) > 4)
     {
         if (line[0] == '>')
@@ -31,7 +32,7 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
     newAlignment* _alignment = new newAlignment();
 
     bool seqIdLine, seqLines;
-    char *str, *line = NULL;
+    char *str, *line = nullptr;
     ifstream file;
     int i;
 
@@ -190,7 +191,7 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
         if (alignment->saveSequences && alignment->saveSequences[i] == -1) continue;
 
         /* Print sequence datatype and its name */
-        if((alignment->seqsInfo != NULL) /*&& (iformat == oformat)*/)
+        if((alignment->seqsInfo != nullptr) /*&& (iformat == oformat)*/)
             (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i]
                  << endl << alignment->seqsInfo[i] << endl;
         else
@@ -199,7 +200,7 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
 
         for (j = 0, k = 0, l = 0; j < alignment->sequences[i].length(); j++)
         {
-            if (alignment->saveResidues != NULL && alignment->saveResidues[j] == -1) 
+            if (alignment->saveResidues != nullptr && alignment->saveResidues[j] == -1)
             {
 //                 if (j == alignment->sequences[i].length() -1 ) 
 //                     (*output) << endl;

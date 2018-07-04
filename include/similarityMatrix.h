@@ -27,9 +27,9 @@
 #ifndef SIMILARITYMATRIX_H
 #define SIMILARITYMATRIX_H
 
-#include <math.h>
-#include <ctype.h>
-#include <stdlib.h>
+#include <cmath>
+#include <cctype>
+#include <cstdlib>
 
 #include <string>
 #include <iostream>
@@ -38,34 +38,37 @@
 
 #include "defines.h"
 
-/// \brief Class that contains the similarity information of an alignment
-class similarityMatrix{
-  int *vhash;
-  float **simMat;
-  float **distMat;
-  int numPositions;
+/** \brief Class that contains the similarity information of an alignment */
+class similarityMatrix {
 
- private:
-  void memoryAllocation(int);
-  void memoryDeletion();
+    int *vhash;
+    float **simMat;
+    float **distMat;
+    int numPositions;
 
- public:
-  similarityMatrix();
+private:
+    void memoryAllocation(int);
 
-  ~similarityMatrix();
+    void memoryDeletion();
 
-  bool loadSimMatrix(char *);
+public:
+    similarityMatrix();
 
-  void defaultAASimMatrix();
+    ~similarityMatrix();
 
-  void defaultNTSimMatrix();
+    bool loadSimMatrix(char *);
 
-  void defaultNTDegeneratedSimMatrix();
+    void defaultAASimMatrix();
 
-  void alternativeSimilarityMatrices(int, int);
+    void defaultNTSimMatrix();
 
-  float getDistance(char, char);
+    void defaultNTDegeneratedSimMatrix();
 
-  void printMatrix();
+    void alternativeSimilarityMatrices(int, int);
+
+    float getDistance(char, char);
+
+    void printMatrix();
 };
+
 #endif

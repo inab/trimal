@@ -32,14 +32,11 @@
 #include <TimerFactory.h>
 
 statisticsConservation::statisticsConservation(newAlignment *parentAlignment) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("statisticsConservation::statisticsConservation(newAlignment *parentAlignment) ");
 
     _alignment = parentAlignment;
-
-    Q = new float[_alignment->originalResidNumber];
-    utils::initlVect(Q, _alignment->originalResidNumber, 0);
 
     MDK = new float[_alignment->originalResidNumber];
     utils::initlVect(MDK, _alignment->originalResidNumber, 0);
@@ -52,7 +49,7 @@ statisticsConservation::statisticsConservation(newAlignment *parentAlignment) {
 
 statisticsConservation::statisticsConservation(newAlignment *parentAlignment,
                                                statisticsConservation *mold) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("statisticsConservation::statisticsConservation(newAlignment *parentAlignment) ");
 
@@ -60,7 +57,6 @@ statisticsConservation::statisticsConservation(newAlignment *parentAlignment,
 
     halfWindow = 0;
 
-    Q = mold->Q;
     MDK = mold->MDK;
     MDK_Window = mold->MDK_Window;
 
@@ -71,15 +67,13 @@ statisticsConservation::statisticsConservation(newAlignment *parentAlignment,
 }
 
 statisticsConservation::~statisticsConservation() {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("statisticsConservation::~statisticsConservation() ");
 
     // Deallocate common variables only in case there is no module that has a
     // reference to them
     if (refCounter == nullptr || --(*refCounter) < 1) {
-        delete[] Q;
-        Q = nullptr;
         delete[] MDK;
         MDK = nullptr;
         delete[] MDK_Window;
@@ -96,7 +90,7 @@ statisticsConservation::~statisticsConservation() {
 }
 
 void statisticsConservation::calculateMatrixIdentity() {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void statisticsConservation::calculateMatrixIdentity() ");
 
@@ -107,7 +101,7 @@ void statisticsConservation::calculateMatrixIdentity() {
 
     // Allocate temporal variables
     char indet;
-    int i, ii, j, jj, k, sum, length;
+    int i, j, k, sum, length;
 
     // Allocate memory for the matrix identity
     matrixIdentity = new float *[_alignment->originalSequenNumber + 1];
@@ -121,12 +115,12 @@ void statisticsConservation::calculateMatrixIdentity() {
     }
 
     // Depending on alignment type, indetermination symbol will be one or other 
-    indet = (_alignment->getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
+    indet = _alignment->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
     // For each sequences' pair
-    for (i = 0, ii = -1; i < _alignment->originalSequenNumber; i++) {
+    for (i = 0; i < _alignment->originalSequenNumber; i++) {
         if (_alignment->saveSequences[i] == -1) continue;
-        for (j = i + 1, jj = ii; j < _alignment->originalSequenNumber; j++) {
+        for (j = i + 1; j < _alignment->originalSequenNumber; j++) {
             if (_alignment->saveSequences[j] == -1) continue;
             // For each position in the alignment of that pair than we are processing
             for (k = 0, sum = 0, length = 0; k < _alignment->originalResidNumber; k++) {
@@ -145,8 +139,8 @@ void statisticsConservation::calculateMatrixIdentity() {
                     // Increase the length of the sequence free of gaps and X elements 
                     length++;
                 }
-                // If the first processed element is invalid and in the second we find a valid element increase the length of
-                // the sequence free of gaps and X elements
+                    // If the first processed element is invalid and in the second we find a valid element increase the length of
+                    // the sequence free of gaps and X elements
                 else if ((_alignment->sequences[j][k] != '-') && (_alignment->sequences[j][k] != indet))
                     length++;
             }
@@ -159,7 +153,7 @@ void statisticsConservation::calculateMatrixIdentity() {
 }
 
 bool statisticsConservation::calculateVectors(bool cutByGap) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool statisticsConservation::calculateVectors(int *gaps) ");
 
@@ -185,15 +179,19 @@ bool statisticsConservation::calculateVectors(bool cutByGap) {
     float num, den;
 
     // Depending on alignment type, indetermination symbol will be one or other 
-    indet = (_alignment->getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
+    indet = _alignment->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
+    // Initialize Q vector
+
+    float Q;
+    char chA, chB;
+
+    float gapThreshold = 0.8F * _alignment->residNumber;
     // For each column calculate the Q value and the MD value using an equation 
     for (i = 0; i < _alignment->originalResidNumber; i++) {
-        if (_alignment->saveResidues[i] == -1) continue;
-
         // Set MDK for columns with gaps values bigger or equal to 0.8F
         if (cutByGap) {
-            if (((float) gaps[i] / _alignment->sequenNumber) >= 0.8F) {
+            if (gaps[i] >= gapThreshold) {
                 MDK[i] = 0.F;
                 continue;
             }
@@ -201,33 +199,41 @@ bool statisticsConservation::calculateVectors(bool cutByGap) {
 
         // For each AAs/Nucleotides' pair in the column we compute its distance
         for (j = 0, num = 0, den = 0; j < _alignment->originalSequenNumber; j++) {
-            if (_alignment->saveSequences[j] == -1) continue;
-            // We don't compute the distance if the first element is a indeterminate (X) or a gap (-) element.
-            if ((_alignment->sequences[j][i] != '-') && (_alignment->sequences[j][i] != indet))
-                for (k = j + 1; k < _alignment->originalSequenNumber; k++) {
-                    if (_alignment->saveSequences[k] == -1) continue;
-                    // We don't compute the distance between the pair if the second element is a indeterminate or a gap element
-                    if ((_alignment->sequences[k][i] != '-') && (_alignment->sequences[k][i] != indet)) {
-                        // We use the identity value for the two pairs and its distance based on similarity matrix's value. 
-                        num += matrixIdentity[j][k] *
-                               simMatrix->getDistance(
-                                       _alignment->sequences[j][i],
-                                       _alignment->sequences[k][i]
-                               );
-                        den += matrixIdentity[j][k];
-                    }
-                }
+            if (_alignment->saveSequences[j] == -1)
+                continue;
+            // We don't compute the distance if the first element is
+            // a indeterminate (X) or a gap (-) element.
+            if ((_alignment->sequences[j][i] == '-') ||
+                (_alignment->sequences[j][i] == indet))
+                continue;
+            chA = (char) std::toupper((unsigned char) _alignment->sequences[j][i]);
+
+            for (k = j + 1; k < _alignment->originalSequenNumber; k++) {
+                if (_alignment->saveSequences[k] == -1)
+                    continue;
+                // We don't compute the distance if the second element is
+                // a indeterminate or a gap element
+                if ((_alignment->sequences[k][i] == '-') ||
+                    (_alignment->sequences[k][i] == indet))
+                    continue;
+
+                chB = (char) std::toupper((unsigned char) _alignment->sequences[k][i]);
+
+                // We use the identity value for the two pairs and
+                // its distance based on similarity matrix's value.
+                num += matrixIdentity[j][k] * simMatrix->getDistance(chA, chB);
+                den += matrixIdentity[j][k];
+            }
         }
 
         // If we are processing a column with only one AA/nucleotide,
         // the denominator is 0 and we don't execute the division
         // and we set the Q[i] value to 0. 
-        Q[i] = (den == 0) ? 0 : num / den;
-        MDK[i] = exp(-Q[i]);
+        Q = (den == 0) ? 0 : num / den;
+//        MDK[i] = exp(-Q);
 
         // If the MDK value is more than 1, we normalized this value to 1. 
-        if (MDK[i] > 1) MDK[i] = 1;
-
+        MDK[i] = std::min(exp(-Q), 1.F);
     }
 
     for (i = 0; i < _alignment->originalSequenNumber; i++)
@@ -235,11 +241,14 @@ bool statisticsConservation::calculateVectors(bool cutByGap) {
     delete[] matrixIdentity;
     matrixIdentity = nullptr;
 
+//    delete[] Q;
+//    Q = nullptr;
+
     return true;
 }
 
 bool statisticsConservation::applyWindow(int _halfWindow) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool statisticsConservation::applyWindow(int _halfWindow) ");
 
@@ -295,7 +304,7 @@ bool statisticsConservation::applyWindow(int _halfWindow) {
 }
 
 bool statisticsConservation::isDefinedWindow() {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool statisticsConservation::isDefinedWindow(void) ");
 
@@ -303,7 +312,7 @@ bool statisticsConservation::isDefinedWindow() {
 }
 
 float *statisticsConservation::getMdkWindowedVector() {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("float *statisticsConservation::getMdkWindowedVector(void) ");
 
@@ -315,12 +324,12 @@ float *statisticsConservation::getMdkWindowedVector() {
         // Return the windowed value
         return MDK_Window;
     }
-    // Return the original values
+        // Return the original values
     else return MDK;
 }
 
 bool statisticsConservation::setSimilarityMatrix(similarityMatrix *sm) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool statisticsConservation::setSimilarityMatrix(similarityMatrix *sm) ");
 
@@ -338,7 +347,7 @@ bool statisticsConservation::setSimilarityMatrix(similarityMatrix *sm) {
 }
 
 bool statisticsConservation::isSimMatrixDef() {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool statisticsConservation::isSimMatrixDef(void) ");
 
@@ -346,7 +355,7 @@ bool statisticsConservation::isSimMatrixDef() {
 }
 
 double statisticsConservation::calcCutPoint(float baseLine, float conservationPct) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("double statisticsConservation::calcCutPoint(float baseLine, float conservationPct) ");
     // It computes the cutting point based on alignment's conservation values -
@@ -388,7 +397,7 @@ double statisticsConservation::calcCutPoint(float baseLine, float conservationPc
 }
 
 void statisticsConservation::printConservationColumns() {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void statisticsConservation::printConservationColumns(void) ");
 
@@ -448,7 +457,7 @@ void statisticsConservation::printConservationColumns() {
 }
 
 void statisticsConservation::printConservationAcl() {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void statisticsConservation::printConservationAcl(void) ");
 

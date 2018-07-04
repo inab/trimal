@@ -18,11 +18,11 @@ const std::map<InfoCode, const char *> __internalReport::__reportSystem::InfoMes
 
 const std::map<WarningCode, const char *> __internalReport::__reportSystem::WarningMessages =
         {
-                {WarningCode::RemovingOnlyGapsColumn,
-                        "Removing column '[tag]' composed only by gaps"},
+                {WarningCode::RemovingOnlyGapsSequence,
+                        "Removing sequence '[tag]' composed only by gaps"},
 
-                {WarningCode::KeepingOnlyGapsColumn,
-                        "Keeping column '[tag]' composed only by gaps"},
+                {WarningCode::KeepingOnlyGapsSequence,
+                        "Keeping sequence '[tag]' composed only by gaps"},
 
                 {WarningCode::SequenceWillBeCutted,
                         "Sequence \"[tag]\" will be cutted at position [tag] (length:[tag])"},
@@ -335,10 +335,13 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
                 {ErrorCode::AlignmentIsEmpty,
                         "Couldn't output any alignment as it doesn't contain any sequence"},
 
+                {ErrorCode::AlignmentTypeisUnkwnown,
+                        "Couldn't perform the trimming step, alignment type unkwnown. "},
+
         };
 
 void __internalReport::__reportSystem::PrintCodesAndMessages() {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void __internalReport::__reportSystem::PrintCodesAndMessages() ");
     switch (Level) {
@@ -370,7 +373,7 @@ void __internalReport::__reportSystem::PrintCodesAndMessages() {
 }
 
 void __internalReport::__reportSystem::report(ErrorCode message, std::string *vars) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void __internalReport::__reportSystem::report(ErrorCode message, std::string *vars) ");
     if (Level > VerboseLevel::ERROR) {
@@ -399,7 +402,7 @@ void __internalReport::__reportSystem::report(ErrorCode message, std::string *va
 }
 
 void __internalReport::__reportSystem::report(ErrorCode message, char *vars) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void __internalReport::__reportSystem::report(ErrorCode message, char *vars) ");
     if (Level > VerboseLevel::ERROR) return;
@@ -424,7 +427,7 @@ void __internalReport::__reportSystem::report(ErrorCode message, char *vars) {
 }
 
 void __internalReport::__reportSystem::report(WarningCode message, std::string *vars) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void __internalReport::__reportSystem::report(WarningCode message, std::string *vars) ");
     if (Level > VerboseLevel::WARNING) {
@@ -453,7 +456,7 @@ void __internalReport::__reportSystem::report(WarningCode message, std::string *
 }
 
 void __internalReport::__reportSystem::report(WarningCode message, char *vars) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void __internalReport::__reportSystem::report(WarningCode message, char *vars) ");
     if (Level > VerboseLevel::WARNING) return;
@@ -478,7 +481,7 @@ void __internalReport::__reportSystem::report(WarningCode message, char *vars) {
 }
 
 void __internalReport::__reportSystem::report(InfoCode message, std::string *vars) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void __internalReport::__reportSystem::report(InfoCode message, std::string *vars) ");
     if (Level > VerboseLevel::INFO) {
@@ -507,7 +510,7 @@ void __internalReport::__reportSystem::report(InfoCode message, std::string *var
 }
 
 void __internalReport::__reportSystem::report(InfoCode message, char *vars) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void __internalReport::__reportSystem::report(InfoCode message, char *vars) ");
     if (Level > VerboseLevel::INFO) return;

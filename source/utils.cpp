@@ -33,10 +33,11 @@
 #include "../include/reportsystem.h"
 #include <sstream>
 #include <iomanip>
-#include <math.h>
+#include <cmath>
 #include <vector>
 #include <cstdio>
 #include <string>
+#include <TimerFactory.h>
 
 
 void utils::initlVect(int *vector, int tam, int valor) {
@@ -63,19 +64,19 @@ void utils::copyVect(float *vect1, float *vect2, int tam) {
 
 int utils::roundToInf(double number) {
 
-    return std::floor(number);
+//    return std::floor(number);
     return ((int) number);
 }
 
 int utils::roundInt(double number) {
 
-    return std::round(number);
+//    return std::round(number);
     return ((int) ((double) number + 0.5));
 }
 
 int utils::roundToSup(double number) {
 
-    return std::ceil(number);
+//    return std::ceil(number);
     return ((int) ((double) number + 1.0));
 }
 
@@ -159,7 +160,7 @@ void utils::removeSpaces(char *in, char *out) {
 
 
 void utils::quicksort(float *vect, int ini, int fin) {
-// NOTE Introspective sort seems better - JMaria
+    // NOTE Introspective sort seems better - JMaria
     float elem_div;
     int i, j;
 
@@ -170,7 +171,7 @@ void utils::quicksort(float *vect, int ini, int fin) {
     i = ini - 1;
     j = fin;
 
-    while (1) {
+    while (true) {
 
         while (vect[++i] < elem_div)
             if (i == fin)
@@ -202,6 +203,8 @@ void utils::swap(float *a, float *b) {
 
 }
 
+
+
 void utils::quicksort(int *vect, int ini, int fin) {
 // NOTE Introspective sort seems better - JMaria
     int i, j, elem_div;
@@ -213,7 +216,7 @@ void utils::quicksort(int *vect, int ini, int fin) {
     i = ini - 1;
     j = fin;
 
-    while (1) {
+    while (true) {
 
         while (vect[++i] < elem_div)
             if (i == fin)
@@ -236,7 +239,6 @@ void utils::quicksort(int *vect, int ini, int fin) {
 }
 
 void utils::swap(int *a, int *b) {
-
     int temp;
 
     temp = *a;
@@ -304,6 +306,7 @@ bool utils::checkFile(ifstream &file) {
 }
 
 char *utils::readLine(ifstream &file) {
+    StartTiming("char* utils::readLine(ifstream &file) ");
     // Read a new line from current input stream. This function is better than
     // standard one since cares of operative system compability. It is useful
     // as well because remove tabs and blank spaces at lines beginning/ending 
@@ -393,9 +396,9 @@ char *utils::readLine(std::istream &file) {
 }
 
 char *utils::trimLine(string nline) {
-    // This function is used to remove comments inbetween a biological sequence.
-    // Remove all content surrounded by ("") or ([]). It wans as well when a
-    // mismatch for these flags is found 
+    // This function is used to remove comments in between a biological sequence.
+    // Removes all content surrounded by ("") or ([]).
+    // It warns as well when a mismatch for these flags is found
 
     int pos, next;
     static char *line;
@@ -465,8 +468,8 @@ char *utils::trimLine(string nline) {
 
     // Check if after removing all comments from input string there is still part
     // of sequences or not
-    if (nline.size() == 0)
-        return NULL;
+    if (nline.empty())
+        return nullptr;
 
     // Initialize and store resulting sequence into an appropiate structure
     line = new char[nline.size() + 1];
@@ -478,8 +481,7 @@ char *utils::trimLine(string nline) {
 string utils::getReverse(string toReverse) {
 
     string line;
-    int i;
-
+    size_t i;
 
     for (i = toReverse.size() - 1; i >= 0; i--)
         line += toReverse[i];
@@ -490,7 +492,7 @@ string utils::getReverse(string toReverse) {
 
 string utils::removeCharacter(char c, string line) {
 
-    int pos;
+    size_t pos;
 
     pos = line.find(c, 0);
     while (pos != (int) string::npos) {
@@ -567,39 +569,21 @@ int utils::checkAlignmentType(int seqNumber, int residNumber, string *sequences)
         return (SequenceTypes::RNA | SequenceTypes::DEG);
     else if (gRNA > gDNA)
         return SequenceTypes::RNA;
-    else
+    else if (gDNA > gRNA)
         return SequenceTypes::DNA;
+    else
+        return SequenceTypes::NotDefined;
 }
-
-int *utils::readNumbers_StartEnd(string line) {
-
-    int comma, nElems = 0;
-    static int *numbers;
-
-    comma = -1;
-    while ((comma = line.find(",", comma + 1)) != (int) string::npos)
-        nElems += 2;
-
-    // If there is more than two numbers separated by a comma, return NULL
-    if (nElems != 2)
-        return NULL;
-
-    numbers = new int[2];
-    comma = line.find(",", 0);
-    numbers[0] = atoi(line.substr(0, comma).c_str());
-    numbers[1] = atoi(line.substr(comma + 1).c_str());
-
-    return numbers;
-}
-
 
 int *utils::readNumbers(string line) {
 
-    int i, comma, separ, init, nElems = 0;
+    int i, nElems = 0;
     static int *numbers;
 
-    comma = -1;
-    while ((comma = line.find(",", comma + 1)) != (int) string::npos)
+    size_t comma, separ, init;
+
+    comma = size_t(-1);
+    while ((comma = line.find(',', comma + 1)) != (int) string::npos)
         nElems += 2;
     nElems += 2;
 
@@ -610,8 +594,8 @@ int *utils::readNumbers(string line) {
     i = 1;
 
     do {
-        comma = line.find(",", init);
-        separ = line.find("-", init);
+        comma = line.find(',', init);
+        separ = line.find('-', init);
 
         if (((separ < comma) || (comma == (int) string::npos)) && (separ != (int) string::npos)) {
             numbers[i++] = atoi(line.substr(init, separ - init).c_str());
@@ -624,9 +608,9 @@ int *utils::readNumbers(string line) {
         }
 
         if (numbers[i - 2] < 0)
-            return NULL;
+            return nullptr;
         if (numbers[i - 1] < numbers[i - 2])
-            return NULL;
+            return nullptr;
         if (comma == (int) string::npos)
             break;
 
@@ -746,32 +730,34 @@ char utils::determineColor(char res, string column) {
                 else if (lookForPattern(column, "wlvimafcyhp", 0.5)) return 'c';
                 else return 'w';
 
+            default:
+                return 'w';
         }
     }
     return 'w';
 }
 
 
-bool utils::lookForPattern(string column, string dataset, float level) {
+bool utils::lookForPattern(const string data, const string pattern, const float threshold) {
 
     float count = 0;
     int i, j;
 
-    for (i = 0; i < (int) column.size(); i++) {
-        for (j = 0; j < (int) dataset.size(); j++) {
-            if (toupper(column[i]) == toupper(dataset[j])) {
+    for (i = 0; i < (int) data.size(); i++) {
+        for (j = 0; j < (int) pattern.size(); j++) {
+            if (toupper(data[i]) == toupper(pattern[j])) {
                 count++;
                 break;
             }
         }
     }
 
-    if ((count / column.size()) >= level)
-        return true;
-    else return false;
+    return (count / data.size()) >= threshold;
 }
 
-void utils::ReplaceStringInPlace(std::string &subject, const std::string &search, const std::string &replace) {
+void utils::ReplaceStringInPlace(std::string &subject,
+                                 const std::string &search,
+                                 const std::string &replace) {
     size_t pos = 0;
     while ((pos = subject.find(search, pos)) != std::string::npos) {
         subject.replace(pos, search.length(), replace);
@@ -779,7 +765,8 @@ void utils::ReplaceStringInPlace(std::string &subject, const std::string &search
     }
 }
 
-std::string utils::ReplaceString(std::string subject, const std::string &search,
+std::string utils::ReplaceString(std::string subject,
+                                 const std::string &search,
                                  const std::string &replace) {
     size_t pos = 0;
     while ((pos = subject.find(search, pos)) != std::string::npos) {
@@ -905,7 +892,9 @@ int utils::GetConsStep(float *consValue) {
     return 1;
 }
 
-void utils::streamSVG(float *x, float *y, int num, std::string *lineName, std::string *lineColor, std::string *chartTitle, std::string *filename) {
+void utils::streamSVG(float *x, float *y, int num,
+                      std::string *lineName, std::string *lineColor,
+                      std::string *chartTitle, std::string *filename) {
     static ofstream file;
     static stringstream legend;
     static float lastX = INFINITY;
@@ -963,35 +952,35 @@ void utils::streamSVG(float *x, float *y, int num, std::string *lineName, std::s
              << "</text>" << endl;
 
         // Horizontal lines
-        for (int x = 0; x < 11; x++) {
+        for (int xx = 0; xx < 11; xx++) {
             // X axis lines
             file << "<line "
                  << "x1=\"" << (grayboxWidth - whiteboxWidth) * widthRatio << "\" "
-                 << "y1=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (x * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
+                 << "y1=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (xx * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
                  << "x2=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) << "\" "
-                 << "y2=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (x * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
+                 << "y2=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (xx * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
                  << "style=\"stroke:black;stroke-width:1\" "
                  << "stroke-dasharray=\"1, 1\" "
                  << "opacity=\"0.5\"/>" << endl;
 
             // Labels
             file << "<text "
-                 << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio * 0.95F << "\" "
-                 << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (x * 0.1F) + (0.25F * fontSize) + (whiteboxDeltaHeight * 0.5F) << "\" "
+                 << "xx=\"" << (grayboxWidth - whiteboxWidth) * widthRatio * 0.95F << "\" "
+                 << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (xx * 0.1F) + (0.25F * fontSize) + (whiteboxDeltaHeight * 0.5F) << "\" "
                  << "text-anchor=\"end\" "
                  << "xml:space=\"preserve\" "
                  << "font-size=\"" << fontSize << "\">"
-                 << (10 - x) / 10.F
+                 << (10 - xx) / 10.F
                  << "</text>" << endl;
         }
 
         // Horizontal lines
-        for (int x = 0; x < 11; x++) {
+        for (int xx2 = 0; xx2 < 11; xx2++) {
             // X axis lines
             file << "<line "
-                 << "x1=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (x * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
+                 << "x1=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (xx2 * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
                  << "y1=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
-                 << "x2=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (x * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
+                 << "x2=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (xx2 * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
                  << "y2=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + whiteboxHeight << "\" "
                  << "style=\"stroke:black;stroke-width:1\" "
                  << "stroke-dasharray=\"1, 1\" "
@@ -999,12 +988,12 @@ void utils::streamSVG(float *x, float *y, int num, std::string *lineName, std::s
 
             // Labels
             file << "<text "
-                 << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (x * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
+                 << "xx2=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (xx2 * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
                  << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + whiteboxHeight * 1.05F << "\" "
                  << "text-anchor=\"middle\" "
                  << "xml:space=\"preserve\" "
                  << "font-size=\"" << fontSize << "\">"
-                 << x * 10 << " %"
+                 << xx2 * 10 << " %"
                  << "</text>" << endl;
         }
 
@@ -1017,7 +1006,7 @@ void utils::streamSVG(float *x, float *y, int num, std::string *lineName, std::s
             if (lastX != INFINITY) {
                 file << "\"/>" << endl;
             }
-            linesLegend.push_back(std::string(*lineColor + ";" + *lineName));
+            linesLegend.emplace_back(*lineColor + ";" + *lineName);
             file << "<polyline stroke-linecap=\"round\" "
                  << "style=\"fill:none;stroke:" << *lineColor << ";stroke-width:0.8\" opacity=\"0.8\" points=\"";
         }
@@ -1090,8 +1079,8 @@ void utils::streamSVG(float *x, float *y, int num, std::string *lineName, std::s
 
         char *line = new char[300];
         std::rewind(tmpFile);
-        while (1) {
-            if (fgets(line, 300, tmpFile) == NULL) break;
+        while (true) {
+            if (fgets(line, 300, tmpFile) == nullptr) break;
             file << line;
         }
         delete[] line;
@@ -1099,6 +1088,4 @@ void utils::streamSVG(float *x, float *y, int num, std::string *lineName, std::s
         file << "</svg>";
         file.close();
     }
-
-
 }

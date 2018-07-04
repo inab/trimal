@@ -12,7 +12,7 @@ int FastaState::CheckAlignment(istream* origin)
     char c;
     origin->seekg(0);
     origin->get(c);
-    if (!strcmp(&c, ">"))
+    if (c == '>')
         return 1;
     return 0;
 }

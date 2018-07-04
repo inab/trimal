@@ -11,7 +11,7 @@
 
 
 bool StatisticsManager::calculateConservationStats(void) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("bool StatisticsManager::calculateConservationStats(void) ");
 
@@ -49,7 +49,7 @@ bool StatisticsManager::calculateConservationStats(void) {
 
 
 void StatisticsManager::printStatisticsConservationColumns(void) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void StatisticsManager::printStatisticsConservationColumns(void) ");
 
@@ -62,7 +62,7 @@ void StatisticsManager::printStatisticsConservationColumns(void) {
 }
 
 void StatisticsManager::printStatisticsConservationTotal(void) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void StatisticsManager::printStatisticsConservationTotal(void) ");
 
@@ -76,7 +76,7 @@ void StatisticsManager::printStatisticsConservationTotal(void) {
 }
 
 bool StatisticsManager::setSimilarityMatrix(similarityMatrix *sm) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("bool StatisticsManager::setSimilarityMatrix(similarityMatrix *sm) ");
 
@@ -94,7 +94,7 @@ bool StatisticsManager::setSimilarityMatrix(similarityMatrix *sm) {
 }
 
 void StatisticsManager::printStatisticsGapsColumns(void) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void StatisticsManager::printStatisticsGapsColumns(void) ");
 
@@ -107,7 +107,7 @@ void StatisticsManager::printStatisticsGapsColumns(void) {
 }
 
 void StatisticsManager::printStatisticsGapsTotal(void) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void StatisticsManager::printStatisticsGapsTotal(void) ");
 
@@ -120,7 +120,7 @@ void StatisticsManager::printStatisticsGapsTotal(void) {
 }
 
 void StatisticsManager::printCorrespondence(void) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void StatisticsManager::printCorrespondence(void) ");
     int i;
@@ -134,7 +134,7 @@ void StatisticsManager::printCorrespondence(void) {
 }
 
 bool StatisticsManager::calculateGapStats() {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("bool StatisticsManager::calculateGapStats(void) ");
 
@@ -152,7 +152,7 @@ bool StatisticsManager::calculateGapStats() {
 }
 
 StatisticsManager::StatisticsManager(newAlignment *parent) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("StatisticsManager::StatisticsManager(newAlignment *parent) ");
     _alignment = parent;
@@ -162,7 +162,7 @@ StatisticsManager::StatisticsManager(newAlignment *parent) {
 }
 
 StatisticsManager::StatisticsManager(newAlignment *parent, StatisticsManager *mold) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("StatisticsManager::StatisticsManager(newAlignment *parent, StatisticsManager *mold) ");
     _alignment = parent;

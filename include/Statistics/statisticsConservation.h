@@ -57,7 +57,7 @@ public:
     int halfWindow          = -1;
 
     /* Conservation vectors */
-    float *Q                    = nullptr;
+//    float *Q                    = nullptr;
     float *MDK                  = nullptr;
     float *MDK_Window           = nullptr;
 

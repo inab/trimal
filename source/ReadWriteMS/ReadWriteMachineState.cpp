@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <istream>
 #include <algorithm>
 #include <array>
 #include <sstream>
@@ -61,7 +62,7 @@ newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
         return nullptr;
     }
 
-    ReadWriteBaseState* inState = NULL;
+    ReadWriteBaseState* inState = nullptr;
     int format_value = 0;
     int temp_value = 0;
 
@@ -76,7 +77,7 @@ newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
         }
     }
 
-    if (inState == NULL)
+    if (inState == nullptr)
     {
         debug.report(ErrorCode::AlignmentFormatNotRecognized, &inFile[0]);
         inFileHandler.close();
@@ -96,22 +97,23 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
         return false;
     }
     string filename;
-    int start, end;
-    if (alignment->filename == "")
+    unsigned long start;
+    unsigned long end;
+    if (alignment->filename.empty())
     {
         filename = utils::ReplaceString(outPattern, "[in]", "NoInputFileName");
     }
     else
     {
-        start = max((int)alignment->filename.find_last_of("/"), 0);
-        end = alignment->filename.find_last_of(".");
+        start = max((int)alignment->filename.find_last_of('/'), 0);
+        end = alignment->filename.find_last_of('.');
         filename = utils::ReplaceString(outPattern, "[in]", alignment->filename.substr(start, end-start));
     }
 
     
-    if (outPattern == "")
+    if (outPattern.empty())
     {
-        if (outFormats->size() == 0) 
+        if (outFormats->empty())
         {
             outFormats->push_back("fasta");
         }
@@ -135,7 +137,7 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
     }
     else
     {
-        if (outFormats->size() == 0) 
+        if (outFormats->empty())
         {
             outFormats->push_back("fasta");
         }
@@ -236,7 +238,7 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
     }
 
     // Process input files one by one.
-    ReadWriteBaseState* inState = NULL;
+    ReadWriteBaseState* inState = nullptr;
     ifstream inFileHandler;
     int format_value = 0;
     int temp_value = 0;
@@ -256,7 +258,7 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
             return;
         }
 
-        inState = NULL;
+        inState = nullptr;
         format_value = 0;
 
         // Get format State that can handle this alignment.
@@ -272,7 +274,7 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
         }
 
         // Check if there is a format State to handle the alignment.
-        if (inState == NULL)
+        if (inState == nullptr)
         {
             debug.report(ErrorCode::AlignmentFormatNotRecognized, &inFile[0]);
             inFileHandler.close();
@@ -281,15 +283,16 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
 
         // Load alignment one by one and store it on each of the formats specified.
         newAlignment* alignment = inState->LoadAlignment(inFile);
-        int start, end;
+        unsigned long start;
+        unsigned long end;
         inFileHandler.close();
         {
             string filename;
             ofstream outFileHandler;
             for (ReadWriteBaseState * state : outStates)
             {
-                start = max((int)inFile.find_last_of("/"), 0);
-                end = inFile.find_last_of(".");
+                start = std::max((int)inFile.find_last_of('/'), 0);
+                end = inFile.find_last_of('.');
                 filename = utils::ReplaceString(*outPattern, "[in]", inFile.substr(start, end-start));
                 utils::ReplaceStringInPlace(filename, "[extension]", state->extension);
                 utils::ReplaceStringInPlace(filename, "[format]", state->name);
@@ -302,8 +305,8 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
                 outFileHandler.close();
             }
         }
-        if (alignment != nullptr)
-            delete alignment;
+
+        delete alignment;
     }
 }
 
@@ -324,7 +327,7 @@ std::string ReadWriteMS::getFileFormatName(std::string inFile)
         return "None";
     }
 
-    ReadWriteBaseState* inState = NULL;
+    ReadWriteBaseState* inState = nullptr;
     int format_value = 0;
     int temp_value = 0;
 
@@ -341,7 +344,7 @@ std::string ReadWriteMS::getFileFormatName(std::string inFile)
     }
 
     // Check if there is a format State to handle the alignment.
-    if (inState == NULL)
+    if (inState == nullptr)
     {
         inFileHandler.close();
         return "Unknown";

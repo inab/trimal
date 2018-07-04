@@ -25,10 +25,10 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "../include/trimalArgumentParser.h"
+#include "trimAlManager.h"
 #include "../include/reportsystem.h"
 
-#include <../include/ReadWriteMS/vcf_statish.h>
+#include <../include/vcf_statish.h>
 
 
 int main(int argc, char *argv[]) {
@@ -39,16 +39,16 @@ int main(int argc, char *argv[]) {
     timerFactory.checkOutputParameter(argc, argv);
 #endif
 
-    // This is to prevent debug calls.
+    // This is to prevent debug messages.
     // They will be silenced to the final user
-    //  although they appear in code.
+    //  even they appear in code.
     debug.IsDebug = true;
 
     // We store the return value before returning if as program exit code
     //  to allow the main function timer to be deleted.
     int returnValue;
     {
-        // Create a timer that will report times upon its destruction
+        // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("int main(int argc, char *argv[]) ");
 

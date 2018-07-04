@@ -84,6 +84,11 @@
 */
 
 /**
+\var bool trimAlManager::soverlap
+\brief Flag to show overlap scores in the alignment
+*/
+
+/**
 \var bool trimAlManager::selectSeqs
 \brief Flag to select sequences manually from the alignment
 */
@@ -390,7 +395,7 @@ If the counter is bigger than 1, we are trying to use multiple automatic methods
 */
 
 /**
-\fn void trimAlManager::info_arguments(int* argc, char* argv[], int* i)
+\fn void trimAlManager::help_arguments(int* argc, char* argv[], int* i)
 \brief Method to parse information arguments as help and menu
 
 \param argc Number of arguments in argv
@@ -1014,7 +1019,7 @@ It also perform some calculations needed on comparfiles behaviour.
 */
 
 /**
-\fn void trimAlManager::check_cw_argument()
+\fn void trimAlManager::check_compareset_window_argument()
 \brief Method to check and warn if windowsize and compareset has been given
 
 */
@@ -1073,4 +1078,35 @@ It also perform some calculations needed on comparfiles behaviour.
 \fn void trimAlManager::examples()
 \brief Method to show the examples information about the program.
 
+*/
+
+/**
+\fn void trimAlManager::CleanSequences()
+\brief Method to trim or reduce the number of sequences in an alignment.
+It performs one or none of the following methods:
+- Clusters
+- MaxIdentity
+- Delete Sequences
+- Sequence Overlap
+
+When one method is applied, NoAllGaps is also applied,
+as these methods rely on it
+*/
+
+/**
+\fn void trimAlManager::CleanResiduesAuto()
+\brief Method to trim the alignment using automatic or semi-automatic methods:
+- Automatic1
+- NoGaps
+- NoAllGaps
+- Gappyout
+- Strict
+- Strictplus
+*/
+
+/**
+\fn void trimAlManager::CleanResiduesNonAuto()
+\brief Method to trim the alignment using non automatic methods:
+- Delete columns
+- Manual thresholds: Gap, Similarity and/or Consistency
 */

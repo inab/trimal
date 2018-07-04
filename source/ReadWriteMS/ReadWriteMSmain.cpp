@@ -337,7 +337,7 @@ int main(int argc, char *argv[])
     
     std::vector<std::string> outFormats = std::vector<std::string>();
     std::vector<std::string> inFiles  = std::vector<std::string>();
-    std::string outPattern = "";
+    std::string outPattern;
     
     int result = parseArguments(argc, argv, &MachineState, &inFiles, &outFormats, &outPattern);
     if (result == -1) 
@@ -349,10 +349,9 @@ int main(int argc, char *argv[])
 
     result = checkArguments(&MachineState, &inFiles, &outFormats, &outPattern);
     if (result != 0) return result;
-    
 
     if(MachineState.format || MachineState.info || MachineState.type) {
-        for (string str : inFiles)
+        for (const string &str : inFiles)
         {
             newAlignment* alignment = MachineState.loadAlignment(str);
             if (alignment != nullptr)
@@ -386,14 +385,14 @@ int main(int argc, char *argv[])
                 
                 cout << endl;
                 
-                if (outFormats.size() > 0)
+                if (!outFormats.empty())
                     MachineState.saveAlignment(outPattern, &outFormats, alignment);
                 
                 delete alignment;
             }
         }
     }
-    else if (outFormats.size() != 0)
+    else if (!outFormats.empty())
         MachineState.loadAndSaveMultipleAlignments(&inFiles, &outPattern, &outFormats);
     else
         cerr << "ERROR: An option has to be chosen" << endl;

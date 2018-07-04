@@ -28,21 +28,20 @@
 #ifndef STATISTICS_MOLD_H
 #define STATISTICS_MOLD_H
 
+#include "string"
+
 class newAlignment;
 
 /// \brief Class to handle Conservation / Similarity statistics
 class statisticsMold {
 public:
 
-    statisticsMold(newAlignment *parentAlignment, statisticsMold *mold);
-
     newAlignment * _alignment;
 
     int
     residues                = -1,
     sequences               = -1,
-    halfWindowApplied       = -1,
-    halfWindowRequested     = -1;
+    halfWindowApplied       = -1;
 
     /* Conservation vectors */
     float *values           = nullptr;
@@ -50,13 +49,17 @@ public:
 
     int * refCounter        = nullptr;
 
+    const static std::string statName;
+
 
 public:
+    statisticsMold(newAlignment *parentAlignment, statisticsMold *mold);
+
     explicit statisticsMold(newAlignment * parentAlignment);
 
     ~statisticsMold();
 
-    virtual bool calculateVectors() = 0;
+    virtual bool calculate() {};
 
     virtual bool applyWindow(int _halfWindow);
     
@@ -64,9 +67,11 @@ public:
 
     virtual float * getVector();
 
-    virtual void printByColumn();
+    virtual void printByColumn(bool calculateRelative = false); // NOLINT ->
+    // Default values for virtual methods is 'prohibited'
 
-    virtual void printAccumulative();
+    virtual void printAccumulative(bool calculateRelative = false); // NOLINT ->
+    // Default values for virtual methods is 'prohibited'
 
 };
 #endif

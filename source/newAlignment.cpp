@@ -35,7 +35,7 @@ using namespace std;
 #include <cfloat>
 #include "../include/newAlignment.h"
 #include "../include/Cleaner.h"
-#include <errno.h>
+#include <cerrno>
 #include <cctype>
 #include <string>
 #include "../include/values.h"
@@ -52,8 +52,8 @@ using namespace std;
 
 using namespace std;
 
-newAlignment::newAlignment(void) {
-    // Create a timer that will report times upon its destruction
+newAlignment::newAlignment() {
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment::newAlignment(void) ");
 
@@ -61,6 +61,8 @@ newAlignment::newAlignment(void) {
     Statistics = new StatisticsManager(this);
 
     // newAlignment parameter
+            originalResidNumber = 0;
+            originalSequenNumber = 0;
     sequenNumber = 0;
     residNumber = 0;
 
@@ -88,7 +90,7 @@ newAlignment::newAlignment(void) {
 }
 
 newAlignment::newAlignment(newAlignment &originalAlignment) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment::newAlignment(newAlignment &originalAlignment) ");
 
@@ -134,7 +136,7 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
 }
 
 newAlignment::~newAlignment() {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment::~newAlignment(void) " + std::to_string(reinterpret_cast<uintptr_t>(this)));
     int i;
@@ -186,7 +188,7 @@ newAlignment::~newAlignment() {
 }
 
 newAlignment *newAlignment::getTranslationCDS(newAlignment *ProtAlig) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *newAlignment::getTranslationCDS(newAlignment *ProtAlig) ");
 
@@ -247,21 +249,21 @@ newAlignment *newAlignment::getTranslationCDS(newAlignment *ProtAlig) {
 }
 
 int newAlignment::getNumSpecies(void) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int newAlignment::getNumSpecies(void) ");
     return sequenNumber;
 }
 
 int newAlignment::getNumAminos(void) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int newAlignment::getNumAminos(void) ");
     return residNumber;
 }
 
 void newAlignment::setWindowsSize(int ghWindow_, int shWindow_) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::setWindowsSize(int ghWindow_, int shWindow_) ");
     Statistics->ghWindow = ghWindow_;
@@ -269,28 +271,36 @@ void newAlignment::setWindowsSize(int ghWindow_, int shWindow_) {
 }
 
 void newAlignment::setBlockSize(int blockSize_) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::setBlockSize(int blockSize_) ");
     Cleaning->blockSize = blockSize_;
 }
 
 void newAlignment::setKeepSequencesFlag(bool flag) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::setKeepSequencesFlag(bool flag) ");
     Cleaning->keepSequences = flag;
 }
 
-int newAlignment::getBlockSize(void) {
-    // Create a timer that will report times upon its destruction
+void newAlignment::setKeepSeqsHeaderFlag(bool newFlagValue) {
+    // Create a timerLevel that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void newAlignment::setKeepSeqsHeaderFlag(bool flag) ");
+    Cleaning->keepSequences = newFlagValue;
+}
+
+
+int newAlignment::getBlockSize() {
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int newAlignment::getBlockSize(void) ");
     return Cleaning->blockSize;
 }
 
-void newAlignment::calculateSeqIdentity(void) {
-    // Create a timer that will report times upon its destruction
+void newAlignment::calculateSeqIdentity() {
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::calculateSeqIdentity(void) ");
 
@@ -333,8 +343,8 @@ void newAlignment::calculateSeqIdentity(void) {
     }
 }
 
-void newAlignment::calculateRelaxedSeqIdentity(void) {
-    // Create a timer that will report times upon its destruction
+void newAlignment::calculateRelaxedSeqIdentity() {
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::calculateRelaxedSeqIdentity(void) ");
     // Raw approximation of sequence identity computation designed for reducing
@@ -369,8 +379,8 @@ void newAlignment::calculateRelaxedSeqIdentity(void) {
 }
 
 
-void newAlignment::calculateSeqOverlap(void) {
-    // Create a timer that will report times upon its destruction
+void newAlignment::calculateSeqOverlap() {
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::calculateSeqOverlap(void) ");
     // Compute the overlap between sequences taken each of them as the reference
@@ -408,7 +418,7 @@ void newAlignment::calculateSeqOverlap(void) {
 }
 
 void newAlignment::getSequences(string *Names) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::getSequences(string *Names) ");
     for (int i = 0; i < sequenNumber; i++)
@@ -416,7 +426,7 @@ void newAlignment::getSequences(string *Names) {
 }
 
 void newAlignment::getSequences(string *Names, int *lengths) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::getSequences(string *Names, int *lengths) ");
     for (int i = 0; i < sequenNumber; i++) {
@@ -426,7 +436,7 @@ void newAlignment::getSequences(string *Names, int *lengths) {
 }
 
 void newAlignment::getSequences(string *Names, string *Sequences, int *Lengths) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::getSequences(string *Names, string *Sequences, int *Lengths) ");
     for (int i = 0; i < sequenNumber; i++) {
@@ -437,7 +447,7 @@ void newAlignment::getSequences(string *Names, string *Sequences, int *Lengths) 
 }
 
 bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) ");
     int i, j, numNames;
@@ -456,13 +466,12 @@ bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) {
 
     // Depending on if we get the complete correspondence
     // between both sets of names, we return true or not
-    if (numNames == sequenNumber) return true;
-    else return false;
+    return sequenNumber == numNames ? true : false;
 
 }
 
-int newAlignment::getAlignmentType(void) {
-    // Create a timer that will report times upon its destruction
+int newAlignment::getAlignmentType() {
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int newAlignment::getAlignmentType(void) ");
     if (dataType == 0)
@@ -470,29 +479,29 @@ int newAlignment::getAlignmentType(void) {
     return dataType;
 }
 
-int *newAlignment::getCorrespResidues(void) {
-    // Create a timer that will report times upon its destruction
+int *newAlignment::getCorrespResidues() {
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int *newAlignment::getCorrespResidues(void) ");
     return saveResidues;
 }
 
-int *newAlignment::getCorrespSequences(void) {
-    // Create a timer that will report times upon its destruction
+int *newAlignment::getCorrespSequences() {
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int *newAlignment::getCorrespSequences(void) ");
     return saveSequences;
 }
 
-bool newAlignment::isFileAligned(void) {
-    // Create a timer that will report times upon its destruction
+bool newAlignment::isFileAligned() {
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool newAlignment::isFileAligned(void) ");
     return isAligned;
 }
 
 void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) ");
     // TODO Remove method as it doesn't make sense now
@@ -514,17 +523,17 @@ void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) {
 }
 
 bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, newAlignment *proteinAlig) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, newAlignment *proteinAlig) ");
 
-    if (getAlignmentType() == SequenceTypes::AA) {
+    if (getAlignmentType() & SequenceTypes::AA) {
         debug.report(ErrorCode::CDScontainsProteinSequences);
         return false;
     }
 
     bool warning = false;
-    size_t found;
+    long found;
     int i;
 
     // New code: We now care about the presence of wildcards/indeterminations
@@ -555,7 +564,7 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
         if (current_prot == numbProtSeqs)
             continue;
 
-        if (sequences[i].find("-") != string::npos) {
+        if (sequences[i].find('-') != string::npos) {
             if (!warning)
                 cerr << endl;
             debug.report(ErrorCode::SequenceContainsGap, new std::string[1]{seqsName[i]});
@@ -605,7 +614,7 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
                 else if (splitByStopCodon) {
                     warning = true;
                     debug.report(InfoCode::CuttingSequence, new std::string[5]{seqsName[i], "TGA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
-                    sequences[i].resize((int) found);
+                    sequences[i].resize(found);
                 }
                     // Otherwise, warn about it and return an error
                 else {
@@ -639,7 +648,7 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
                 else if (splitByStopCodon) {
                     warning = true;
                     debug.report(InfoCode::CuttingSequence, new std::string[5]{seqsName[i], "TAA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
-                    sequences[i].resize((int) found);
+                    sequences[i].resize(found);
                 }
                     // Otherwise, warn about it and return an error
                 else {
@@ -673,7 +682,7 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
                 else if (splitByStopCodon) {
                     warning = true;
                     debug.report(InfoCode::CuttingSequence, new std::string[5]{seqsName[i], "TAG", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
-                    sequences[i].resize((int) found);
+                    sequences[i].resize(found);
                 }
                     // Otherwise, warn about it and return an error
                 else {
@@ -690,6 +699,9 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
 }
 
 bool newAlignment::checkCorrespondence(string *names, int *lengths, int totalInputSeqs, int multiple = 1) {
+    // Create a timerLevel that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("bool newAlignment::checkCorrespondence(string *names, int *lengths, int totalInputSeqs, int multiple = 1)");
 
     int i, j, seqLength, indet;
     bool warnings = false;
@@ -699,13 +711,13 @@ bool newAlignment::checkCorrespondence(string *names, int *lengths, int totalInp
     // DNA sequence checking that they have the same size.
     for (i = 0; i < sequenNumber; i++) {
 
-        // Get protein sequence length removing any pofileible gap. Get as well last
+        // Get protein sequence length removing any posible gap. Get as well last
         // residue from current sequence 
 
         tmp = utils::removeCharacter('-', sequences[i]);
         seqLength = tmp.length() * multiple;
-        indet = ((int) tmp.length() - utils::min((int) tmp.find_last_not_of("X"), \
-                 (int) tmp.find_last_not_of("x"))) - 1;
+        indet = ((int) tmp.length() - utils::min((int) tmp.find_last_not_of('X'), \
+                 (int) tmp.find_last_not_of('x'))) - 1;
 
         // Go through all available CDS looking for the one with the same ID
         for (j = 0; j < totalInputSeqs; j++) {
@@ -765,7 +777,7 @@ bool newAlignment::checkCorrespondence(string *names, int *lengths, int totalInp
 }
 
 bool newAlignment::fillMatrices(bool aligned) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool newAlignment::fillMatrices(bool aligned) ");
     // Function to determine if a set of sequences, that can be aligned or not,
@@ -813,15 +825,15 @@ bool newAlignment::fillMatrices(bool aligned) {
     // These variables will be useful for posterior analysis
     if ((aligned) || (isAligned)) {
 
-        // Asign its position to each column. That will be used to determine which
+        // Assign its position to each column. That will be used to determine which
         // columns should be kept in output alignment after applying any method
         // and which columns should not
         saveResidues = new int[residNumber];
         for (i = 0; i < residNumber; i++)
             saveResidues[i] = i;
 
-        // Asign its position to each sequence. Similar to the columns numbering
-        // procefile, afileign to each sequence its position is useful to know which
+        // Assign its position to each sequence. Similar to the columns numbering
+        // possible, assign to each sequence its position is useful to know which
         // sequences will be in the output alignment
         saveSequences = new int[sequenNumber];
         for (i = 0; i < sequenNumber; i++)
@@ -834,7 +846,7 @@ bool newAlignment::fillMatrices(bool aligned) {
 }
 
 void newAlignment::printAlignmentInfo(ostream &file) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::printAlignmentInfo(ostream &file) ");
     // Print information about sequences number, average sequence length, maximum
@@ -862,7 +874,7 @@ void newAlignment::printAlignmentInfo(ostream &file) {
         max_pos = (max > valid_res) ? max_pos : i;
         max = (max > valid_res) ? max : valid_res;
 
-        // Similarily, get values for the shortest sequence
+        // Similarly, get values for the shortest sequence
         min_pos = (min < valid_res) ? min_pos : i;
         min = (min < valid_res) ? min : valid_res;
     }
@@ -877,8 +889,8 @@ void newAlignment::printAlignmentInfo(ostream &file) {
          << "## Shortest seq. length\t" << min << endl;
 }
 
-void newAlignment::printSeqIdentity(void) {
-    // Create a timer that will report times upon its destruction
+void newAlignment::printSeqIdentity() {
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::printSeqIdentity(void) ");
 
@@ -967,13 +979,13 @@ void newAlignment::printSeqIdentity(void) {
 }
 
 void newAlignment::printSeqOverlap() {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::printSeqOverlap() ");
     int i, j, k, pos, maxLongName;
     float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
 
-    // Ask for the sequence identities assesment
+    // Ask for the sequence identities assessment
     if (overlaps == nullptr)
         calculateSeqOverlap();
 
@@ -1004,7 +1016,7 @@ void newAlignment::printSeqOverlap() {
 
     // Compute general averages
     avgSeq = avgSeq / sequenNumber;
-    maxAvgSeq = maxAvgSeq / sequenNumber;
+//    maxAvgSeq = maxAvgSeq / sequenNumber;
 
     // Compute longest sequences name 
     for (i = 0, maxLongName = 0; i < sequenNumber; i++)
@@ -1040,7 +1052,7 @@ void newAlignment::printSeqOverlap() {
 }
 
 void newAlignment::calculateColIdentity(float *ColumnIdentities) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::calculateColIdentity(float *ColumnIdentities) ");
 
@@ -1064,7 +1076,7 @@ void newAlignment::calculateColIdentity(float *ColumnIdentities) {
         columnLen = column.size();
 
         // Count letter frequency. It only matter the frequency. Use some shorcuts
-        // to speed-up the procefile 
+        // to speed-up the process
         while (!column.empty()) {
             letter = column[0];
             counter = 0;
@@ -1091,7 +1103,7 @@ void newAlignment::calculateColIdentity(float *ColumnIdentities) {
 }
 
 void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::printColumnsIdentity_DescriptiveStats(void) ");
 
@@ -1117,7 +1129,7 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
     // Compute average identity column score
     avg /= positions;
 
-    // Compute standard desviation
+    // Compute standard deviation
     for (i = 0, std = 0; i < residNumber; i++)
         if (colIdentities[i] != -1)
             std += pow((colIdentities[i] - avg), 2);
@@ -1131,7 +1143,7 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 }
 
 bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *destFile) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *destFile, float *consValues) ");
 
@@ -1395,7 +1407,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
 }
 
 bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *destFile, int blocks) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *destFile, float *consValues, int blocks) ");
 
@@ -1473,7 +1485,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
             rightMargin = 5, topMargin = 5,
             bottomMargin = 10, interBlocksMargin = 20;
 
-    float height = ((originalSequenNumber + 3 + (gapsValues != nullptr || simValues != nullptr ? 7 : 0) /* Colnumbering occupies 3 rows. Stats 5 */)
+    float height = ((originalSequenNumber + 3 + (gapsValues != nullptr || simValues != nullptr ? 7 : 0) /* Col numbering occupies 3 rows. Stats 5 */)
                     * fontSize + interBlocksMargin)                 // Height of a block + interblock
                    * std::ceil((float) originalResidNumber / blocks)  // Number of blocks
                    - interBlocksMargin // Number of interblocks is number of blocks  - 1
@@ -1649,7 +1661,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
 
     // Foreach block
     for (j = 0; j < originalResidNumber; j += blocks) {
-        // BEGIN Columms Numbering Numbers
+        // BEGIN Columns Numbering Numbers
         file << "<text \
                 font-family = \"monospace\" \
                 font-size=\"" << fontSize << "px\" \
@@ -2030,7 +2042,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
 }
 
 bool newAlignment::alignmentColourHTML(ostream &file) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool newAlignment::alignmentColourHTML(ostream &file) ");
 
@@ -2113,7 +2125,7 @@ bool newAlignment::alignmentColourHTML(ostream &file) {
 }
 
 void newAlignment::updateSequencesAndResiduesNums(bool countSequences, bool countResidues) {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::updateSequencesAndResiduesNums(bool countSequences, bool countResidues) ");
     int i;
@@ -2129,3 +2141,4 @@ void newAlignment::updateSequencesAndResiduesNums(bool countSequences, bool coun
         }
     }
 }
+

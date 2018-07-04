@@ -36,97 +36,124 @@ using namespace std;
 
 class newAlignment;
 
-/** \brief Class containing a sequences matrix
+/** \brief Class that represents a sequences matrix
  *
- * This class stores the alignment sequences matrix. It provides
+ * A Sequence matrix is a 2D matrix that represents
+ *  MSA without any gaps included.\n
+ *
+ * This class stores the alignment sequences matrix.\n It provides
  * methods to \b build the sequences matrix and print the matrix.
  * It also provides methods for look to a column in the matrix and
- * for look to value at the position (row, column) in the matrix.
+ * for look to value at the position (row, column) in the matrix.\n
+ * See: \n
+ * - statisticsConsistency::compareAndChoose
+ * - statisticsConsistency::forceComparison
  */
 class sequencesMatrix {
     /**
      * \brief Number of residues per sequence.
      */
-  int resNumber;
+    int resNumber;
     /**
      * \brief Number of sequences in the matrix.
      */
-  int seqsNumber;
+    int seqsNumber;
 
-  /* Sequences Matrix */
-  /**
-   * \brief Matrix container. It contains the sequences and residues of each sequence.
-   */
-  int **matrix;
+    /**
+     * \brief Matrix container. \n
+     * It contains the sequences and residues of each sequence.
+     */
+    int **matrix;
 
-  /* Sequences Name */
-  /**
-   * \brief Sequences names container.
-   */
-  string *seqsName;
+    /**
+     * \brief Sequences names container.
+     */
+    string *seqsName;
 
-  public:
+public:
 
-  /* Constructors */
+    /** \brief Null constructor.
+     *
+     * This construction method initializes all attributes
+     * of the new object with 0 or nullptr value.
+     */
+    sequencesMatrix();
 
-  /** \brief Null constructor.
-   *
-   * This construction method initializates all attributes
-   * of the new object with 0 or nullptr value.
-   */
-  sequencesMatrix(void);
+    /** \brief Manual constructor.
+     *
+     * This construction method initializes all attributes
+     * using the information passed as arguments.
+     *
+     * \param alignmentMatrix
+     *  Sequences of the alignment to convert to sequenceMatrix
+     * \param alignmentSeqsName
+     *  Sequences names
+     * \param sequences
+     *  Number of sequences
+     * \param residues
+     *  Number of residues
+     */
+    sequencesMatrix(string *alignmentMatrix, string *alignmentSeqsName,
+                    int sequences, int residues);
 
-  /** 
-   * \brief Null constructor.
-   *
-   * This construction method initializates all attributes
-   * of the new object with 0 or nullptr value.
-   */
-  sequencesMatrix(string *, string *, int, int);
-    
-  sequencesMatrix(newAlignment* parent);
+    /** \brief Automatic constructor.
+     *
+     * This construction method initializes all attributes
+     * using the information present in the alignment pointer passed.
+     *
+     * \param alignmentMatrix
+     *  Sequences of the alignment to convert to sequenceMatrix
+     * \param alignmentSeqsName
+     *  Sequences names
+     * \param sequences
+     *  Number of sequences
+     * \param residues
+     *  Number of residues
+     */
+    explicit sequencesMatrix(newAlignment *parent);
 
-  sequencesMatrix &operator=(const sequencesMatrix &);
+    sequencesMatrix &operator=(const sequencesMatrix &);
 
-  /** 
-   * \brief Destructor.
-   *
-   * Destruction method that frees, if exists, previously allocated memory.
-   */
-  ~sequencesMatrix();
+    /**
+     * \brief Destructor.
+     *
+     * Destruction method that frees, if exists, previously allocated memory.
+     */
+    ~sequencesMatrix();
 
-  /* Basic Operations. */
+    /** \brief Sequences Matrix printing method.
+     *
+     * Method that prints the alignment sequences matrix.
+     *
+     * \warning Not In Use
+     */
+    void printMatrix();
 
-  /** \brief Sequences Matrix printing method.
-   *
-   * Method that prints the alignment sequences matrix.
-   */
-  void printMatrix();
+    /** \brief Method to get a column out of the matrix
+     *  \param column
+     *   Column number at sequences matrix.
+     *  \param [out] numResidueseqMatrix
+     *   Vector where storage a column's sequences matrix.
+     *
+     *  Method that storages a column's sequences matrix in a vector.
+     */
+    void getColumn(int column, int *numResidueseqMatrix);
 
-  /** \brief Column for looking to method.
-   * \param column Column number at sequences matrix.
-   * \param numResidueseqMatrix Vector where storage a column's sequences matrix.
-   *
-   * Method that storages a column's sequences matrix in a vector.
-   */
-  void getColumn(int column, int * numResidueseqMatrix);
+    /** \brief
+     * Method that looks to value in a row and stores a column's,
+     * corresponding to row, sequences matrix in a vector.
+     * \param value to look in a row's sequences matrix.
+     * \param row where to look for a value.
+     * \param columnSeqMatrix Vector where storage a column's sequences matrix.
+     *
+     */
+    void getColumn(int value, int row, int *columnSeqMatrix);
 
-  /** \brief Column for looking to method.
-   * Method that looks to value in a row and storages a column's, corresponding to row,
-   * sequences matrix in a vector.
-   * \param value to look in a row's sequences matrix.
-   * \param row where to look for a value.
-   * \param columnSeqMatrix Vector where storage a column's sequences matrix.
-   *
-   */
-  void getColumn(int value, int row, int *columnSeqMatrix);
     /**
      * \brief Method that reorders the stored sequences with a given order list.
      * \param order Pointer that contains the new order we want to give the matrix.
      */
-  void setOrder(int * order);
-
-//   void removeColumns(int, int, int *, int *);
+    void setOrder(int *order);
 
     /**
      * \brief Method to obtain a sequence based on its name.
@@ -134,23 +161,25 @@ class sequencesMatrix {
      * \param[out] sequence Where to store the sequence.
      * \return \b True if found. \b False if not.
      */
-  bool getSequence(string seqName, int * sequence);
+    bool getSequence(string seqName, int *sequence);
+
     /**
      * \brief Number of sequences getter.
      * \return Number of sequences.
      */
-  int getSeqNumber(void);
+    int getSeqNumber();
+
     /**
      * \brief Number of residues getter.
      * \return Number of residues.
      */
-  int getResidNumber(void);
+    int getResidNumber();
 
 private:
     /**
      * \brief Pointer to the alignment this object is related to.
      */
-    newAlignment* _alignment;
+    newAlignment *_alignment;
 };
 
 #endif

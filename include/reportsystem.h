@@ -192,13 +192,15 @@ enum ErrorCode {
     WindowTooBig                                        = 93,
 
     AlignmentIsEmpty                                    = 94,
+
+    AlignmentTypeisUnkwnown                             = 95,
     __MAXERROR,
 };
 
 enum WarningCode {
-    RemovingOnlyGapsColumn                      = 1,
+    RemovingOnlyGapsSequence                      = 1,
 
-    KeepingOnlyGapsColumn                       = 2,
+    KeepingOnlyGapsSequence                       = 2,
 
     SequenceWillBeCutted                        = 3,
 
@@ -226,8 +228,10 @@ enum InfoCode {
 namespace __internalReport {
 
 /**
- \brief Internal class used by __internalReport::__reportSystem::log \n
-This class is able to produce output depending on it's internal value __internalReport::__reporter::CanReport
+ \brief Internal class used by __internalReport::__reportSystem \n
+ This class serves as a proxy for message reporting. \n
+ It will only output to std::cout if
+  __internalReport::__reporter::CanReport it's true
  */
 class __reporter {
     /// \brief Variable that specifies if the object is able to output to cout or not.
@@ -236,9 +240,10 @@ class __reporter {
     public:
     
     /// \brief Constructor
-    __reporter(bool CanReport) : CanReport{CanReport} { }
+    explicit __reporter(bool CanReport) : CanReport{CanReport} { }
     
-    /// \brief Overloaded operator that allows to use this object as it was an iostream, as cout.
+    /// \brief Overloaded operator that allows to use this object as
+    /// it was an iostream, as cout.
     template <typename T>
     __reporter &operator<<(const T &a) {
         if (CanReport)
@@ -246,7 +251,8 @@ class __reporter {
         return *this;
     }
     
-    /// \brief Overloaded operator that allows to use this object as it was an iostream, as cout.
+    /// \brief Overloaded operator that allows to use this object as
+    /// it was an iostream, as cout.
     __reporter &operator<<(std::ostream& (*pf) (std::ostream&)) {
         if (CanReport)
             std::cout<<pf;
@@ -255,19 +261,30 @@ class __reporter {
 };
 
 /**
- \brief Class that allows us to centralize all the Debug that should be used to inform the user of Errors, Warnings and Info.\n
- The object can also be used as a substitute to cout for temporal messages using the << overloaded operator or the \link __reportSystem::log log \endlink method, 
- and they will be behind the  IsDebug variable, which should be set to false in Release.\n
- This allows us to protect the user from receiving Debug/Developing messages that shouldn't bother them, in case any of them is not removed by error. \n
- <b> THIS CLASS SHOULDNT BE USED DIRECTLY </b> Use instanced global variable \link debug debug \endlink instead.
+ \brief Class that allows us to centralize all the reporting messages that
+  should be used to inform the user of Errors, Warnings and Info.\n
+ The object can also be used as a substitute to cout for temporal messages using
+  the << overloaded operator or the \link __reportSystem::log log \endlink method,
+  and the messages will be behind the IsDebug variable,
+  which should be set to false in Release.\n
+ This allows us to protect the user from receiving Debug/Developing messages
+  that shouldn't bother them, in case any of them is not removed by error.
+ \warning <b> THIS CLASS SHOULDN'T BE USED DIRECTLY </b> \n
+ Use instanced global variable \link debug debug \endlink instead.
  */
 class __reportSystem
 {
 private:
     
-    /// \brief Object that will be returned by \link __internalReport::__reportSystem::log log \endlink if it should allow to output the message
+    /** \brief Object that will be returned by
+         \link __internalReport::__reportSystem::log log \endlink
+         if it allows to output the message
+     */
     __reporter canReport = __reporter(true);
-    /// \brief Object that will be returned by \link __internalReport::__reportSystem::log log \endlink if it shouldn't allow to output the message
+    /** \brief Object that will be returned by
+     *   \link __internalReport::__reportSystem::log log \endlink
+     *   if it doesn't allow to output the message
+     * */
     __reporter cantReport = __reporter(false);
 
     static const std::map<InfoCode, const char *>       InfoMessages ;
@@ -275,67 +292,125 @@ private:
     static const std::map<ErrorCode, const char *>      ErrorMessages ;
     
 public:
-    /** \brief Level of Verbosity.\n The report system won't output messages that are lower than the current level */
+    /** \brief Level of Verbosity.\n
+     *   The report system won't output messages
+     *    that are lower than the current level */
     VerboseLevel Level = VerboseLevel::INFO;
     
-    /// \brief Protection variable. This variable should be set to true in Development Environments, and false on Release.
+    /** \brief Protection variable.
+      This variable should be set to true while in development,
+      and false on Release. */
     bool IsDebug = false;
 
     /**
-     \brief Method to print all Info, Warning and Error codes and their respective message.\n
-            This method is usefull to check wheter all codes have a message linked to them.
-            It will use the current VerboseLevel of the object, which defaults to ERROR level.
+     \brief Method to print all Info, Warning and Error codes
+      and their respective message.\n
+     This method is useful to check whether all codes
+      have a message linked to them.
+     It will use the current VerboseLevel of the object,
+      which defaults to ERROR level.
      */
     void PrintCodesAndMessages();
 
     /**
-     \brief Method to report an Error. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::ERROR
-     \param message Code to report.
-     \param vars Array of strings that will replace the '[tags]' in the message. The number of elements in the array must be the same as [tag] aparitions on the message.\n
-     <b> The method will take care of destroying the pointer </b>
+     \brief Method to report an Error. \n
+     It will be displayed if
+      \link __internalReport::__reportSystem::Level Level \endlink
+      is equal or higher to VerboseLevel::ERROR
+     \param message
+      Code to report.
+     \param vars
+      Array of strings that will replace the '[tags]' in the message.\n
+      The number of elements in the array must be the same as
+      [tag] occurrences on the message.\n
+     <b> The method will take care of destroying the array </b>
      */
     void report(ErrorCode message, std::string * vars = nullptr);
 
     /**
-     \brief Method to report an Error. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::ERROR
-     \param message Code to report.
-     \param vars Array of chars that will replace the first aparition of '[tags]' in the message. \n
-     <b> The method wont take care of destroying the pointer </b> This allows to reuse the parameter passed.
+     \brief Method to report an Error.\n
+     It will be displayed if
+      \link __internalReport::__reportSystem::Level Level \endlink
+      is equal or higher to VerboseLevel::ERROR
+     \param message
+      Code to report.
+     \param vars
+      Array of chars that will replace the first occurrence of
+      '[tags]' in the message. \n
+     <b> The method wont take care of destroying the array </b>\n
+      This allows to reuse the parameter passed.
      */
     void report(ErrorCode message, char * vars);
     /**
-    \brief Method to report a Warning. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::WARNING
-    \param message Code to report.
-    \param vars Array of strings that will replace the '[tags]' in the message. The number of elements in the array must be the same as [tag] aparitions on the message.\n
-    <b> The method will take care of destroying the pointer </b>
-    */
+     \brief Method to report a Warning. \n
+     It will be displayed if
+      \link __internalReport::__reportSystem::Level Level \endlink
+      is equal or higher to VerboseLevel::WARNING
+     \param message
+      Code to report.
+     \param vars
+      Array of strings that will replace the '[tags]' in the message.\n
+      The number of elements in the array must be the same as
+      [tag] occurrences on the message.\n
+     <b> The method will take care of destroying the array </b>
+     */
     void report(WarningCode message, std::string * vars = nullptr);
     /**
-     \brief Method to report a Warning. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::WARNING
-     \param message Code to report.
-     \param vars Array of chars that will replace the first aparition of '[tags]' in the message. \n
-     <b> The method wont take care of destroying the pointer </b> This allows to reuse the parameter passed.
+     \brief Method to report a Warning.\n
+     It will be displayed if
+      \link __internalReport::__reportSystem::Level Level \endlink
+      is equal or higher to VerboseLevel::WARNING
+     \param message
+      Code to report.
+     \param vars
+      Array of chars that will replace the first occurrence of
+      '[tags]' in the message. \n
+     <b> The method wont take care of destroying the array </b>\n
+      This allows to reuse the parameter passed.
      */
     void report(WarningCode message, char * vars);
     /**
-    \brief Method to report a Info message. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::INFO
-    \param message Code to report.
-    \param vars Array of strings that will replace the '[tags]' in the message. The number of elements in the array must be the same as [tag] aparitions on the message.\n
-    <b> The method will take care of destroying the pointer </b>
-    */
+     \brief Method to report an Info message. \n
+     It will be displayed if
+      \link __internalReport::__reportSystem::Level Level \endlink
+      is equal or higher to VerboseLevel::INFO
+     \param message
+      Code to report.
+     \param vars
+      Array of strings that will replace the '[tags]' in the message.\n
+      The number of elements in the array must be the same as
+      [tag] occurrences on the message.\n
+     <b> The method will take care of destroying the array </b>
+     */
     void report(InfoCode message, std::string * vars = nullptr);
     /**
-     \brief Method to report a Info message. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::INFO
-     \param message Code to report.
-     \param vars Array of chars that will replace the first aparition of '[tags]' in the message. \n
-     <b> The method wont take care of destroying the pointer </b> This allows to reuse the parameter passed.
+     \brief Method to report an Info message.\n
+     It will be displayed if
+      \link __internalReport::__reportSystem::Level Level \endlink
+      is equal or higher to VerboseLevel::WARNING
+     \param message
+      Code to report.
+     \param vars
+      Array of chars that will replace the first occurrence of
+      '[tags]' in the message. \n
+     <b> The method wont take care of destroying the array </b>\n
+      This allows to reuse the parameter passed.
      */
     void report(InfoCode message, char * vars);
 
     /**
-     \brief Method to output a message behind two walls: \link __internalReport::__reportSystem::IsDebug IsDebug \endlink and VerboseLevel passed.\n
-     If \link __internalReport::__reportSystem::IsDebug IsDebug \endlink is false, it will ignore the message returning the \link __internalReport::__reportSystem::cantReport cantReport \endlink, otherwise, VerboseLevel level will be checked.
-     \param level Level to use for this message. If \link __internalReport::__reportSystem::Level Level \endlink is higher than this argument, message will be ignored, otherwise, message will be outputted to cout.
+     \brief Method to output a message behind two checks:
+      \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
+      and VerboseLevel passed.\n
+     If \link __internalReport::__reportSystem::IsDebug IsDebug \endlink is false,
+      it will ignore the message returning the
+      \link __internalReport::__reportSystem::cantReport cantReport \endlink,
+      otherwise, VerboseLevel level will be checked.
+     \param level
+      Level to use for this message.\n
+     If \link __internalReport::__reportSystem::Level Level \endlink is higher
+      than this argument, message will be ignored,
+      otherwise, message will be outputted to cout.
      */
     __reporter log(VerboseLevel level)
     {
@@ -348,8 +423,11 @@ public:
     }
     
     /**
-     \brief Overloaded operator that allows us to debug some messages behind \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
-     \param a Message to be outputed if \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
+     \brief Overloaded operator that allows us to debug some messages behind
+      \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
+     \param a
+      Message to be outputed if
+      \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
      */
     template <typename T>
     __reportSystem &operator<<(const T &a) {
@@ -358,9 +436,11 @@ public:
         return *this;
     }
 
-        /**
-     \brief Overloaded operator that allows us to debug some messages behind \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
-     \param pf Object that overloads the '<<' operator
+    /**
+     \brief Overloaded operator that allows us to debug some messages behind
+      \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
+     \param pf
+      Object that overloads the '<<' operator
      */
     __reportSystem &operator<<(std::ostream& (*pf) (std::ostream&)) {
         if (IsDebug)
@@ -371,10 +451,12 @@ public:
 };
 
 }
-/** \brief <b> This object is the one that should be used</b> \n
- * It's use is similar to a singleton, without the need to obtain the instance everytime it's needed.\n
- * Instead, it's a global instance of the __internalReport::__reportSystem \n \n
- * This allows us to have the '<<' operator overloaded, as it can't be statically overloaded.
+/** \brief <b> This instance is the one that should be used</b> \n
+ * It's use is similar to a singleton, without the need to obtain
+ *  the instance every time it's needed.\n
+ * Instead, it's a global instance of the __internalReport::__reportSystem \n
+ * This allows us to have the '<<' operator overloaded,
+ *  as it can't be statically overloaded.
     \relates __internalReport::__reportSystem
  */
 extern __internalReport::__reportSystem debug;

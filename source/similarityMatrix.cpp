@@ -45,13 +45,13 @@
 
 #include <iostream>
 
-#include <string.h>
-#include <stdlib.h>
+#include <cstring>
+#include <cstdlib>
 
 using namespace std;
 
 similarityMatrix::similarityMatrix() {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("similarityMatrix::similarityMatrix() ");
     numPositions = 0;
@@ -61,12 +61,12 @@ similarityMatrix::similarityMatrix() {
 }
 
 void similarityMatrix::memoryAllocation(int nPos) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void similarityMatrix::memoryAllocation(int nPos) ");
     int i, j;
 
-    // Initializate square table dimension to store the distances
+    // Initialize square table dimension to store the distances
     // and to store the similarity matrix.
     if (numPositions != 0) memoryDeletion();
     numPositions = nPos;
@@ -89,7 +89,7 @@ void similarityMatrix::memoryAllocation(int nPos) {
 }
 
 similarityMatrix::~similarityMatrix() {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("similarityMatrix::~similarityMatrix() ");
 
@@ -98,7 +98,7 @@ similarityMatrix::~similarityMatrix() {
 }
 
 void similarityMatrix::memoryDeletion() {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void similarityMatrix::memoryDeletion() ");
     int i;
@@ -108,21 +108,23 @@ void similarityMatrix::memoryDeletion() {
         delete[] distMat[i];
     }
 
-    delete[] simMat;
     delete[] distMat;
+    delete[] simMat;
     delete[] vhash;
 
     numPositions = 0;
-    vhash = nullptr;
-    simMat = nullptr;
     distMat = nullptr;
+    simMat = nullptr;
+    vhash = nullptr;
 }
 
-bool similarityMatrix::loadSimMatrix(char *fn) {
-	 // Create a timer that will report times upon its destruction
+bool similarityMatrix::loadSimMatrix(char *filename) {
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("bool similarityMatrix::loadSimMatrix(char *fn) ");
-    char aux[LINE_LENGTH + 1], first[LINE_LENGTH], listSym[LINE_LENGTH + 1];
+	StartTiming("bool similarityMatrix::loadSimMatrix(char *filename) ");
+    char aux[LINE_LENGTH + 1],
+        first[LINE_LENGTH],
+        listSym[LINE_LENGTH + 1];
     int i, j, k;
     float sum;
     bool firstColumn = true;
@@ -130,8 +132,9 @@ bool similarityMatrix::loadSimMatrix(char *fn) {
 
     // We try to open the file, if we can't open the file
     // we return false.
-    file.open(fn);
-    if (file.fail()) return false;
+    file.open(filename);
+    if (file.fail())
+        return false;
 
     // Read the first line of the file and, depending on the
     // line length (free of spaces an tabulators), we allocate
@@ -167,8 +170,10 @@ bool similarityMatrix::loadSimMatrix(char *fn) {
         if (firstColumn) {
             first[0] = (char) toupper((int) first[0]);
 
-            // Format checking. The first token must be a valid number
-            if (((first[0] >= '0' && first[0] <= '9') || (first[0] == '-' && (first[1] >= '0' && first[1] <= '9'))) && i > 0) {
+            // Format checking. The first token must not be a valid number
+            if (((first[0] >= '0' && first[0] <= '9') ||
+                 (first[0] == '-' && (first[1] >= '0' && first[1] <= '9')))
+                && i > 0) {
                 memoryDeletion();
                 return false;
             }
@@ -184,8 +189,8 @@ bool similarityMatrix::loadSimMatrix(char *fn) {
                 }
             }
 
-                // If we have read a number there is no "first column"
-                // in the format of the alignment
+            // If we have read a number there is no "first column"
+            // in the format of the alignment
             else if ((first[0] >= '0' && first[0] <= '9') || (first[0] == '-' && (first[1] >= '0' && first[1] <= '9'))) {
                 firstColumn = false;
                 j = 1;
@@ -247,7 +252,7 @@ bool similarityMatrix::loadSimMatrix(char *fn) {
 }
 
 void similarityMatrix::defaultAASimMatrix(void) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void similarityMatrix::defaultAASimMatrix(void) ");
 
@@ -282,7 +287,7 @@ void similarityMatrix::defaultAASimMatrix(void) {
 }
 
 void similarityMatrix::defaultNTSimMatrix(void) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void similarityMatrix::defaultNTSimMatrix(void) ");
     int i, j, k;
@@ -316,7 +321,7 @@ void similarityMatrix::defaultNTSimMatrix(void) {
 }
 
 void similarityMatrix::defaultNTDegeneratedSimMatrix(void) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void similarityMatrix::defaultNTDegeneratedSimMatrix(void) ");
     int i, j, k;
@@ -388,7 +393,7 @@ void similarityMatrix::alternativeSimilarityMatrices(int matrix_code, \
         }
     }
 
-    // Working similarity matrix is set depending on the preloaded matrices 
+    // Working similarity matrix is set depending on the pre loaded matrices
     for (i = 0; i < numPositions; i++) {
         for (j = 0; j < numPositions; j++) {
             switch (matrix_code) {
@@ -414,7 +419,7 @@ void similarityMatrix::alternativeSimilarityMatrices(int matrix_code, \
 }
 
 void similarityMatrix::printMatrix() {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void similarityMatrix::printMatrix() ");
 
@@ -426,30 +431,26 @@ void similarityMatrix::printMatrix() {
 }
 
 float similarityMatrix::getDistance(char a, char b) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("float similarityMatrix::getDistance(char a, char b) ");
     int numa, numb;
-    char chA, chB;
 
-    chA = (char) toupper((int) a);
-    chB = (char) toupper((int) b);
-
-    // Search the first character position 
-    if ((chA >= 'A') && (chA <= 'Z')) numa = vhash[chA - 'A'];
+    // Search the first character position
+    if ((a >= 'A') && (a <= 'Z')) numa = vhash[a - 'A'];
     else {
         debug.report(ErrorCode::IncorrectSymbol, new std::string[1]{std::to_string(a)});
         return -1;
     }
 
-    // Search the second character position 
-    if ((chB >= 'A') && (chB <= 'Z')) numb = vhash[chB - 'A'];
+    // Search the second character position
+    if ((b >= 'A') && (b <= 'Z')) numb = vhash[b - 'A'];
     else {
         debug.report(ErrorCode::IncorrectSymbol, new std::string[1]{std::to_string(b)});
         return -1;
     }
 
-    // We check if the two character postions are valid positions 
+    // We check if the two character positions are valid positions
     if (numa == -1) {
         debug.report(ErrorCode::UndefinedSymbol, new std::string[1]{std::to_string(a)});
         return -1;

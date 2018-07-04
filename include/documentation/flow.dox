@@ -36,7 +36,7 @@ These steps are divided into:\n
             - \b Strict: Searches a threshold based on gaps and similarity distribution.\n
             - \b StrictPlus: Searches a threshold based on gaps and similarity distribution.\n
     - <b>Meta Automated Methods</b>\n
-    These methods use heuristics to select the best method to clean an alignment based on certain properties:
+    These methods use heuristics to select the best method among a set to clean an alignment based on certain properties:
         - \b Automated1: Decides between Gappyout and Strict methods.
 
     \image html resTrim.svg
@@ -46,4 +46,10 @@ These steps are divided into:\n
     These steps are sequential and optional, so you can perform any combination of them, or not perform any post process.\n
     \image html postProcess.svg
 
+\section output Output
+    This step outputs the resultant MSA.
+    Only one method can be selected between two of them:
+    - STDOUT (default) -- The alignment will be printed on the terminal or STDOUT.
+        Some messages (as errors and warnings) will be displayed on STDOUT too, which may difficult obtaining the MSA.
+    - FILE (recommended) -- It is possible to write to a file the resulting MSA.
 */

@@ -126,7 +126,6 @@ void statisticsConsistency::perform(char *comparesetFilePath,
             // If no alignment could be selected, stop the program
             if (referFile == -1)
             {
-                manager.delete_variables();
                 delete_variables();
                 delete [] values;
                 exit(-1);
@@ -197,7 +196,7 @@ int statisticsConsistency::compareAndChoose(newAlignment **vectAlignments,
                                             float *columnsValue,
                                             int numAlignments,
                                             bool verbosity) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("int statisticsConsistency::compareAndChoose("
                         "newAlignment **vectAlignments, "
@@ -370,7 +369,7 @@ bool statisticsConsistency::forceComparison(newAlignment **vectAlignments,
                                             int numAlignments,
                                             newAlignment *selected,
                                             float *columnsValue) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("bool statisticsConsistency::forceComparison("
                         "newAlignment **vectAlignments, "
@@ -473,7 +472,7 @@ bool statisticsConsistency::forceComparison(newAlignment **vectAlignments,
 
 // This method applies a specific windows size to a selected alignment 
 bool statisticsConsistency::applyWindow(int _halfWindow) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("bool statisticsConsistency::applyWindow(int columns, int halfWindowApplied, float *columnsValue) ");
 
@@ -529,7 +528,7 @@ bool statisticsConsistency::applyWindow(int _halfWindow) {
 }
 
 bool statisticsConsistency::isDefinedWindow() {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool statisticsConservation::isDefinedWindow(void) ");
 
@@ -537,7 +536,7 @@ bool statisticsConsistency::isDefinedWindow() {
 }
 
 float *statisticsConsistency::getValues() {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("float *statisticsConservation::getMdkWindowedVector(void) ");
 
@@ -556,7 +555,7 @@ float *statisticsConsistency::getValues() {
 // Print the consistency value for each column from the selected alignment 
 void statisticsConsistency::printStatisticsFileColumns(newAlignment &_alignment,
                                                        float *compareVect) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void statisticsConsistency::printStatisticsFileColumns("
                         "newAlignment &_alignment, "
@@ -616,7 +615,7 @@ void statisticsConsistency::printStatisticsFileColumns(newAlignment &_alignment,
 // alignment
 void statisticsConsistency::printStatisticsFileAcl(newAlignment &_alignment,
                                                    float *compareVect) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void statisticsConsistency::printStatisticsFileAcl("
                         "newAlignment &_alignment, "

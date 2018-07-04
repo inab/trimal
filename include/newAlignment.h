@@ -66,15 +66,15 @@ public:
     
     int * SeqRef                        = nullptr;
     
-    int originalSequenNumber;
+    int originalSequenNumber            = 0;
     
-    int sequenNumber;
+    int sequenNumber                    = 0;
     
-    int originalResidNumber;
+    int originalResidNumber             = 0;
 
-    int residNumber;
+    int residNumber                     = 0;
 
-    bool isAligned;
+    bool isAligned                      = false;
 
     string *sequences           = nullptr;
 

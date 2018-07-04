@@ -33,7 +33,7 @@
 
 
 statisticsGaps::statisticsGaps(newAlignment *parent) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("statisticsGaps::statisticsGaps(newAlignment *parent) ");
 
@@ -79,7 +79,7 @@ statisticsGaps::statisticsGaps(newAlignment *pAlignment,
 
 
 statisticsGaps::~statisticsGaps() {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("statisticsGaps::~statisticsGaps(void) ");
 
@@ -94,7 +94,7 @@ statisticsGaps::~statisticsGaps() {
 }
 
 bool statisticsGaps::applyWindow(int _halfWindow) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("bool statisticsGaps::applyWindow(int _halfWindow) ");
 
@@ -157,7 +157,7 @@ bool statisticsGaps::applyWindow(int _halfWindow) {
 }
 
 bool statisticsGaps::isDefinedWindow() {
-    // Create a timer that will report times upon its destruction
+    // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool statisticsConservation::isDefinedWindow(void) ");
 
@@ -165,7 +165,7 @@ bool statisticsGaps::isDefinedWindow() {
 }
 
 int *statisticsGaps::getGapsWindow() {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("int *statisticsGaps::getGapsWindow(void) ");
 
@@ -183,7 +183,7 @@ int *statisticsGaps::getGapsWindow() {
 }
 
 double statisticsGaps::calcCutPoint(float minInputAlignment, float gapThreshold) {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("double statisticsGaps::calcCutPoint(float minInputAlignment, float gapThreshold) ");
 
@@ -229,7 +229,7 @@ double statisticsGaps::calcCutPoint(float minInputAlignment, float gapThreshold)
 }
 
 int statisticsGaps::calcCutPointMixSlope() {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("int statisticsGaps::calcCutPointMixSlope(void) ");
 
@@ -319,7 +319,7 @@ int statisticsGaps::calcCutPointMixSlope() {
 }
 
 int statisticsGaps::calcCutPoint2ndSlope() {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("int statisticsGaps::calcCutPoint2ndSlope(void) ");
 
@@ -390,7 +390,7 @@ int statisticsGaps::calcCutPoint2ndSlope() {
 }
 
 void statisticsGaps::printGapsColumns() {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void statisticsGaps::printGapsColumns(void) ");
 
@@ -457,15 +457,17 @@ void statisticsGaps::printGapsColumns() {
     for (int i = 0; i < _alignment->originalResidNumber; i++)
         cout << setw(size) << std::setfill(' ') << std::left << i
              << setw(size) << std::setfill(' ') << std::left
-             << setw(size - 6) << std::setfill(' ') << std::right << (vectAux[i] * 100.0) / _alignment->originalSequenNumber
-             << setw(size) << std::setfill(' ') << std::right << 1.F - ((vectAux[i] * 1.0) / _alignment->originalSequenNumber) << endl;
+             << setw(size - 6) << std::setfill(' ') << std::right
+                << (vectAux[i] * 100.0) / _alignment->originalSequenNumber
+             << setw(size) << std::setfill(' ') << std::right
+                << 1.F - (float(vectAux[i]) / _alignment->originalSequenNumber) << endl;
 
     // Finally, we deallocate the local memory
     delete[] vectAux;
 }
 
 void statisticsGaps::printGapsAcl() {
-	 // Create a timer that will report times upon its destruction
+	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void statisticsGaps::printGapsAcl(void) ");
 
