@@ -1007,13 +1007,10 @@ alignment *alignment::cleanCombMethods(bool complementarity, bool variable) {
    * we calculate them */
   if(calculateConservationStats() != true)
     return NULL;
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
-  /* ***** ***** ***** ***** ***** ***** ***** ***** */
-  /* Computes the conservations value for each column
-   * in the alignment. At the same time, the method get
-   * the vector with those values. */
-  scons -> calculateVectors(sequences, sgaps -> getGapsWindow());
+  // Once the conservation stats have been calculated, generate the vector
+  // containing the similarity value for each column considering parameters
+  // such as windows size
   simil = scons -> getMdkwVector();
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
