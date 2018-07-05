@@ -3,17 +3,25 @@
 
 #include "ReadWriteBaseState.h"
 
-class Phylip40State : public ReadWriteBaseState
-{
+class phylip40_state : public ReadWriteBaseState {
 public:
-    
-    Phylip40State(ReadWriteMS* MachineState) { Machine = MachineState; name="phylip40"; extension="phy2"; canLoad=true ; canSave=true; };
-    
-    virtual int CheckAlignment(istream* origin);
-    virtual newAlignment* LoadAlignment(string filename);
-    virtual bool SaveAlignment(newAlignment* alignment, ostream* output, std::string* FileName);
-    virtual bool RecognizeOutputFormat(std::string FormatName);
-     
+
+    explicit phylip40_state(ReadWriteMS *MachineState) {
+        Machine = MachineState;
+        name = "phylip40";
+        extension = "phy2";
+        canLoad = true;
+        canSave = true;
+    };
+
+    int CheckAlignment(istream *origin) override;
+
+    newAlignment *LoadAlignment(string filename) override;
+
+    bool SaveAlignment(newAlignment *alignment, ostream *output, std::string *FileName) override;
+
+    bool RecognizeOutputFormat(std::string FormatName) override;
+
 };
 
 #endif // PHYLIP40STATE_H

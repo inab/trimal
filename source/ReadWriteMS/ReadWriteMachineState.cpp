@@ -1,17 +1,8 @@
-#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
-#include "../../include/ReadWriteMS/ReadWriteBaseState.h"
-#include "../../include/newAlignment.h"
+#include "ReadWriteMS/ReadWriteMachineState.h"
+#include "ReadWriteMS/ReadWriteBaseState.h"
+#include "newAlignment.h"
 
-#include "../../include/ReadWriteMS/clustal_state.h"
-#include "../../include/ReadWriteMS/fasta_state.h"
-#include "../../include/ReadWriteMS/pir_state.h"
-#include "../../include/ReadWriteMS/phylip32_state.h"
-#include "../../include/ReadWriteMS/phylip40_state.h"
-#include "../../include/ReadWriteMS/phylip_paml_state.h"
-#include "../../include/ReadWriteMS/nexus_state.h"
-#include "../../include/ReadWriteMS/mega_interleaved_state.h"
-#include "../../include/ReadWriteMS/mega_sequential_state.h"
-#include "../../include/ReadWriteMS/htmlreport_state.h"
+#include <ReadWriteMS/formats_header.h>
 
 #include <iostream>
 #include <fstream>
@@ -19,20 +10,6 @@
 #include <algorithm>
 #include <array>
 #include <sstream>
-
-ReadWriteMS::ReadWriteMS()
-{
-    addState(new ClustalState(this));
-    addState(new FastaState(this));
-    addState(new PirState(this));
-    addState(new Phylip32State(this));
-    addState(new Phylip40State(this));
-    addState(new PhylipPamlState(this));
-    addState(new NexusState(this));
-    addState(new MegaInterleavedState(this));
-    addState(new MegaSequentialState(this));
-    addState(new HTMLState(this));
-};
 
 ReadWriteMS::~ReadWriteMS()
 {

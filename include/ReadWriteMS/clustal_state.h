@@ -3,17 +3,25 @@
 
 #include "ReadWriteBaseState.h"
 
-class ClustalState : public ReadWriteBaseState
-{
+class clustal_state : public ReadWriteBaseState {
 public:
-    
-    ClustalState(ReadWriteMS* MachineState) { Machine = MachineState; name="clustal"; extension="clw"; canLoad=true ; canSave=true; };
-    
-    virtual int CheckAlignment(istream* origin);
-    virtual newAlignment* LoadAlignment(string filename);
-    virtual bool SaveAlignment(newAlignment* alignment, ostream* output, std::string* FileName);
-    virtual bool RecognizeOutputFormat(std::string FormatName);
-     
+
+    explicit clustal_state(ReadWriteMS *MachineState) {
+        Machine = MachineState;
+        name = "clustal";
+        extension = "clw";
+        canLoad = true;
+        canSave = true;
+    };
+
+    int CheckAlignment(istream *origin) override;
+
+    newAlignment *LoadAlignment(string filename) override;
+
+    bool SaveAlignment(newAlignment *alignment, ostream *output, std::string *FileName) override;
+
+    bool RecognizeOutputFormat(std::string FormatName) override;
+
 };
 
 #endif // CLUSTALSTATE_H

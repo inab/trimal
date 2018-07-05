@@ -9,14 +9,12 @@
 
 using namespace std;
 
-int PirState::CheckAlignment(istream* origin)
-{
-    char * line;
+int pir_state::CheckAlignment(istream *origin) {
+    char *line;
     origin->seekg(0);
     line = utils::readLine(*origin);
     if (line == nullptr) return 0;
-    if (strlen(line) > 4)
-    {
+    if (strlen(line) > 4) {
         if (line[0] == '>')
             if (line[3] == ';')
                 return 2;
@@ -25,11 +23,10 @@ int PirState::CheckAlignment(istream* origin)
     return 0;
 }
 
-newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
-{
+newAlignment *pir_state::LoadAlignment(std::__cxx11::string filename) {
     /* NBRF/PIR file format parser */
-    
-    newAlignment* _alignment = new newAlignment();
+
+    newAlignment *_alignment = new newAlignment();
 
     bool seqIdLine, seqLines;
     char *str, *line = nullptr;
@@ -38,7 +35,7 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
 
     /* Check the file and its content */
     file.open(filename, ifstream::in);
-    if(!utils::checkFile(file))
+    if (!utils::checkFile(file))
         return nullptr;
 
     /* Store input file name for posterior uses in other formats */
@@ -48,24 +45,24 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
 
     /* Compute how many sequences are in the input alignment */
     _alignment->sequenNumber = 0;
-    while(!file.eof()) {
+    while (!file.eof()) {
 
         /* Deallocate previously used dinamic memory */
-        if (line != NULL)
-            delete [] line;
+        if (line != nullptr)
+            delete[] line;
 
         /* Read lines in a safe way */
         line = utils::readLine(file);
-        if (line == NULL)
+        if (line == nullptr)
             continue;
 
         /* It the line starts by ">" means that a new sequence has been found */
         str = strtok(line, DELIMITERS);
-        if (str == NULL)
+        if (str == nullptr)
             continue;
 
         /* If a sequence name flag is detected, increase sequences counter */
-        if(str[0] == '>')
+        if (str[0] == '>')
             _alignment->sequenNumber++;
     }
 
@@ -75,8 +72,8 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
 
     /* Allocate memory for the input alignmet */
     _alignment->sequences = new string[_alignment->sequenNumber];
-    _alignment->seqsName  = new string[_alignment->sequenNumber];
-    _alignment->seqsInfo  = new string[_alignment->sequenNumber];
+    _alignment->seqsName = new string[_alignment->sequenNumber];
+    _alignment->seqsInfo = new string[_alignment->sequenNumber];
 
     /* Initialize some local variables */
     seqIdLine = true;
@@ -84,21 +81,21 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
     i = -1;
 
     /* Read the entire input file */
-    while(!file.eof()) {
+    while (!file.eof()) {
 
         /* Deallocate local memory */
-        if (line != NULL)
-            delete [] line;
+        if (line != nullptr)
+            delete[] line;
 
         /* Read lines in a safe way */
         line = utils::readLine(file);
-        if (line == NULL)
+        if (line == nullptr)
             continue;
 
         /* Sequence ID line.
          * Identification of these kind of lines is based on presence of ">" and ";"
          * symbols at positions 0 and 3 respectively */
-        if((line[0] == '>') && (line[3] == ';') && (seqIdLine)) {
+        if ((line[0] == '>') && (line[3] == ';') && (seqIdLine)) {
             seqIdLine = false;
             i += 1;
 
@@ -107,13 +104,13 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
 //             _alignment->seqsInfo[i].append(str, strlen(str));
 
             /* and the sequence identifier itself */
-            str = strtok(NULL, ">;");
+            str = strtok(nullptr, ">;");
             _alignment->seqsName[i].append(str, strlen(str));
         }
 
             /* Line just after sequence Id line contains a textual description of
              * the sequence. */
-        else if((!seqIdLine) && (!seqLines)) {
+        else if ((!seqIdLine) && (!seqLines)) {
             seqLines = true;
             _alignment->seqsInfo[i].append(line, strlen(line));
         }
@@ -130,12 +127,12 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
 
             /* Process line */
             str = strtok(line, OTHDELIMITERS);
-            while (str != NULL) {
-                if (str[strlen(str) -1 ] == '*')
-                    _alignment->sequences[i].append(str, strlen(str) -1 );
-                else 
+            while (str != nullptr) {
+                if (str[strlen(str) - 1] == '*')
+                    _alignment->sequences[i].append(str, strlen(str) - 1);
+                else
                     _alignment->sequences[i].append(str, strlen(str));
-                str = strtok(NULL, OTHDELIMITERS);
+                str = strtok(nullptr, OTHDELIMITERS);
             }
         }
     }
@@ -143,22 +140,20 @@ newAlignment* PirState::LoadAlignment(std::__cxx11::string filename)
     file.close();
 
     /* Deallocate dinamic memory */
-    if (line != NULL)
-        delete [] line;
+    delete[] line;
 
     /* Check the matrix's content */
     _alignment->fillMatrices(true);
-    _alignment->originalSequenNumber = _alignment-> sequenNumber;
+    _alignment->originalSequenNumber = _alignment->sequenNumber;
     _alignment->originalResidNumber = _alignment->residNumber;
-    
 
-    return _alignment; 
+
+    return _alignment;
 }
 
-bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
-{
-    
-   /* Generate output alignment in NBRF/PIR format. Sequences can be unaligned */
+bool pir_state::SaveAlignment(newAlignment *alignment, std::ostream *output, std::string *FileName) {
+
+    /* Generate output alignment in NBRF/PIR format. Sequences can be unaligned */
 
     int i, j, k, l;
     string alg_datatype, *tmpMatrix;
@@ -169,7 +164,7 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->originalSequenNumber; i++)
+    for (i = 0; i < alignment->originalSequenNumber; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
@@ -184,34 +179,30 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
         alg_datatype = "P1";
 
 
-    
-    
+
+
     /* Print alignment */
-    for(i = 0; i < alignment->originalSequenNumber; i++) {
+    for (i = 0; i < alignment->originalSequenNumber; i++) {
         if (alignment->saveSequences && alignment->saveSequences[i] == -1) continue;
 
         /* Print sequence datatype and its name */
-        if((alignment->seqsInfo != nullptr) /*&& (iformat == oformat)*/)
+        if ((alignment->seqsInfo != nullptr) /*&& (iformat == oformat)*/)
             (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i]
-                 << endl << alignment->seqsInfo[i] << endl;
+                      << endl << alignment->seqsInfo[i] << endl;
         else
             (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i] << endl
-                 << alignment->seqsName[i] << " " << alignment->sequences[i].length() << " bases" << endl;
+                      << alignment->seqsName[i] << " " << alignment->sequences[i].length() << " bases" << endl;
 
-        for (j = 0, k = 0, l = 0; j < alignment->sequences[i].length(); j++)
-        {
-            if (alignment->saveResidues != nullptr && alignment->saveResidues[j] == -1)
-            {
+        for (j = 0, k = 0, l = 0; j < alignment->sequences[i].length(); j++) {
+            if (alignment->saveResidues != nullptr && alignment->saveResidues[j] == -1) {
 //                 if (j == alignment->sequences[i].length() -1 ) 
 //                     (*output) << endl;
-            }
-            else
-            {
+            } else {
                 if (k % 10 == 0) (*output) << " ";
                 (*output) << tmpMatrix[i][j];
                 k++;
-                if (j == alignment->sequences[i].length() -1 ) ;
-                else if (k % 50 == 0 ) (*output) << endl;
+                if (j == alignment->sequences[i].length() - 1);
+                else if (k % 50 == 0) (*output) << endl;
             }
         }
         if (k % 50 == 0) (*output) << endl;
@@ -220,17 +211,15 @@ bool PirState::SaveAlignment(newAlignment* alignment, std::ostream* output, std:
     }
 
     /* Deallocate local memory */
-    delete [] tmpMatrix;
-    
+    delete[] tmpMatrix;
+
     return true;
 }
 
-bool PirState::RecognizeOutputFormat(std::string FormatName)
-{
-    if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
-    if (FormatName == "pir" || FormatName == "PIR" ||
-        FormatName == "nbrf" || FormatName == "NBRF")
+bool pir_state::RecognizeOutputFormat(std::string FormatName) {
+    if (ReadWriteBaseState::RecognizeOutputFormat(FormatName))
         return true;
-    return false;
+    return FormatName == "pir" || FormatName == "nbrf" ||
+           FormatName == "PIR" || FormatName == "NBRF";
 }
 

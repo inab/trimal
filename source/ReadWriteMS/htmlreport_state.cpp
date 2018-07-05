@@ -7,17 +7,17 @@
 
 using namespace std;
 
-int HTMLState::CheckAlignment(istream* origin)
+int htmlreport_state::CheckAlignment(istream* origin)
 {
     return 0;
 }
 
-newAlignment* HTMLState::LoadAlignment(std::__cxx11::string filename)
+newAlignment* htmlreport_state::LoadAlignment(std::__cxx11::string filename)
 {
     return nullptr;
 }
 
-bool HTMLState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool htmlreport_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
     int i, j, kj, upper, k = 0, maxLongName = 0;
     string tmpColumn;
@@ -98,9 +98,10 @@ bool HTMLState::SaveAlignment(newAlignment* alignment, std::ostream* output, std
     return true;
 }
 
-bool HTMLState::RecognizeOutputFormat(std::string FormatName)
+bool htmlreport_state::RecognizeOutputFormat(std::string FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
-    if (FormatName == "html" || FormatName == "HTML" || FormatName == "report") return true;
-    return false;
+    return FormatName == "html" ||
+           FormatName == "HTML" ||
+           FormatName == "htmlreport";
 }

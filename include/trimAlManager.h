@@ -42,7 +42,6 @@ public:
     soverlap            = false, 
     selectSeqs          = false,
     selectCols          = false, 
-    shortNames          = false, 
     splitByStopCodon    = false,
     terminalOnly        = false, 
     keepSeqs            = false,

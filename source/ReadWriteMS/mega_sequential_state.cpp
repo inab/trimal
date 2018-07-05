@@ -1,26 +1,26 @@
 #include "../../include/ReadWriteMS/mega_sequential_state.h"
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include "../../include/defines.h"
 #include "../../include/values.h"
 
 using namespace std;
 
-int MegaSequentialState::CheckAlignment(istream* origin)
+int mega_sequential_state::CheckAlignment(istream* origin)
 {
     origin->seekg(0);
     origin->clear();
  
-    char c, *firstWord = NULL, *line = NULL;
-    int format = 0, blocks = 0;
+    char c, *firstWord = nullptr, *line = nullptr;
+    int blocks = 0;
     string nline;
 
     /* Read first valid line in a safer way */
     do {
         line = utils::readLine(*origin);
-    } while ((line == NULL) && (!origin->eof()));
+    } while ((line == nullptr) && (!origin->eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
@@ -55,12 +55,12 @@ int MegaSequentialState::CheckAlignment(istream* origin)
     return 0;
 }
 
-newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
+newAlignment* mega_sequential_state::LoadAlignment(std::__cxx11::string filename)
 {
     newAlignment * _alignment = new newAlignment();
    /* MEGA sequential file format parser */
 
-    char *frag = NULL, *str = NULL, *line = NULL;
+    char *frag = nullptr, *str = nullptr, *line = nullptr;
     ifstream file;
     int i;
 
@@ -79,7 +79,7 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
     /* Skip first valid line */
     do {
         line = utils::readLine(file);
-    } while ((line == NULL) && (!file.eof()));
+    } while ((line == nullptr) && (!file.eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (file.eof())
@@ -89,12 +89,12 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
     while(!file.eof()) {
 
         /* Destroy previously allocated memory */
-        if (line != NULL)
+        if (line != nullptr)
             delete [] line;
 
         /* Read a new line in a safe way */
         line = utils::readLine(file);
-        if (line == NULL)
+        if (line == nullptr)
             continue;
 
         /* If a sequence name flag is found, go out from getting information loop */
@@ -102,7 +102,7 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
             break;
 
         /* Destroy previously allocated memory */
-        if (frag != NULL)
+        if (frag != nullptr)
             delete [] frag;
 
         /* Create a local copy from input line */
@@ -130,14 +130,13 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
     }
 
     /* Deallocate local memory */
-    if (frag != NULL)
-        delete [] frag;
+    delete [] frag;
 
     /* Count how many sequences are in input alignment file */
     do {
 
         /* Check whether input line is valid or not */
-        if (line == NULL) {
+        if (line == nullptr) {
             line = utils::readLine(file);
             continue;
         }
@@ -147,8 +146,7 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
             _alignment->sequenNumber++;
 
         /* Destroy previously allocated memory */
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read a new line in a safe way */
         line = utils::readLine(file);
@@ -170,12 +168,11 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
     while(!file.eof()) {
 
         /* Destroy previously allocated memory */
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read a new line in a safe way */
         line = utils::readLine(file);
-        if (line == NULL)
+        if (line == nullptr)
             continue;
 
         /* If sequence name label is found, go out from loop */
@@ -192,7 +189,7 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
     while(!file.eof()) {
 
         /* Skip blank lines */
-        if (line == NULL) {
+        if (line == nullptr) {
             line = utils::readLine(file);
             continue;
         }
@@ -209,11 +206,10 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
         frag = utils::trimLine(line);
 
         /* Skip lines with only comments */
-        if (frag == NULL) {
+        if (frag == nullptr) {
 
             /* Deallocate memory and read a new line */
-            if (line != NULL)
-                delete [] line;
+            delete [] line;
             line = utils::readLine(file);
             continue;
         }
@@ -225,21 +221,19 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
         if (!strncmp(line, "#", 1)) {
             i += 1;
             _alignment->seqsName[i].append(str, strlen(str));
-            str = strtok(NULL, " #\n");
+            str = strtok(nullptr, " #\n");
         }
 
         /* Sequence itself */
-        while(str != NULL) {
+        while(str != nullptr) {
             _alignment->sequences[i].append(str, strlen(str));
-            str = strtok(NULL, " \n");
+            str = strtok(nullptr, " \n");
         }
 
         /* Deallocate dynamic memory */
-        if (frag != NULL)
-            delete [] frag;
+        delete [] frag;
 
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read a new line in a safe way */
         line = utils::readLine(file);
@@ -249,8 +243,7 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
     file.close();
 
     /* Deallocate dynamic memory */
-    if (line != NULL)
-        delete [] line;
+    delete [] line;
 
     /* Check the matrix's content */
     _alignment->fillMatrices(true);
@@ -259,7 +252,7 @@ newAlignment* MegaSequentialState::LoadAlignment(std::__cxx11::string filename)
     return _alignment;
 }
 
-bool MegaSequentialState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool mega_sequential_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
     /* Generate output alignment in MEGA format */
 
@@ -333,9 +326,8 @@ bool MegaSequentialState::SaveAlignment(newAlignment* alignment, std::ostream* o
     return true;
 }
 
-bool MegaSequentialState::RecognizeOutputFormat(std::string FormatName)
+bool mega_sequential_state::RecognizeOutputFormat(std::string FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
-    if (FormatName == "mega") return true;
-    return false;
+    return FormatName == "mega";
 }

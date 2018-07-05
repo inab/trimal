@@ -90,11 +90,6 @@ int parseArguments(int argc, char *argv[], ReadWriteMS* machine, std::vector<std
         {
             machine->reverse = true;
         }
-        
-        else if (!strcmp(argv[i], "-shortNames"))
-        {
-            machine->shortNames = true;
-        }
         else if (!strcmp(argv[i], "-keepHeaders"))
         {
             machine->keepHeader = true;
@@ -123,7 +118,6 @@ int parseArguments(int argc, char *argv[], ReadWriteMS* machine, std::vector<std
         else if (!strcmp(argv[i], "-fasta_m10"))
         {
             outFormats->push_back("fasta");
-            machine->shortNames = true;
         }
         
         else if (!strcmp(argv[i], "-phylip"))
@@ -131,8 +125,7 @@ int parseArguments(int argc, char *argv[], ReadWriteMS* machine, std::vector<std
         
         else if (!strcmp(argv[i], "-phylip_m10"))
         {
-            outFormats->push_back("phylip40");
-            machine->shortNames = true;
+            outFormats->push_back("phylip40_m10");
         }
         
         else if (!strcmp(argv[i], "-phylip_paml"))
@@ -140,8 +133,7 @@ int parseArguments(int argc, char *argv[], ReadWriteMS* machine, std::vector<std
         
         else if (!strcmp(argv[i], "-phylip_paml_m10"))
         {
-            outFormats->push_back("phylippaml");
-            machine->shortNames = true;
+            outFormats->push_back("phylippaml_m10");
         }
         
         else if (!strcmp(argv[i], "-phylip3.2"))
@@ -149,8 +141,7 @@ int parseArguments(int argc, char *argv[], ReadWriteMS* machine, std::vector<std
         
         else if (!strcmp(argv[i], "-phylip3.2_m10"))
         {
-            outFormats->push_back("phylip32");
-            machine->shortNames = true;
+            outFormats->push_back("phylip32_m10");
         }
         else if (!strcmp(argv[i], "-format"))
         {
@@ -265,8 +256,6 @@ void menu()
     
     << "\t-reverse             " << "Output the reverse of sequences in "
     << "input file." << endl << endl
-    
-    << "\t-shortNames          " << "Shortens the names so they fit on certain formats" << endl
 
     << "\t-keepHeaders         " << "Keeps the headers of the original format if it had any" << endl << endl
 

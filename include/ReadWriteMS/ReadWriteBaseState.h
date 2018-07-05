@@ -7,6 +7,7 @@
 
 
 class ReadWriteMS;
+
 /**
  \brief Abstract class that represent a format.
         Formats must inherit from this class and
@@ -18,28 +19,27 @@ class ReadWriteMS;
         - Save an alignment to a file in this format\n
         - Recognize its format acronyms.
  */
-class ReadWriteBaseState
-{
+class ReadWriteBaseState {
 public:
-    
+
     /** \brief Bool tag that indicates whether or not this state
      * can load an alignment in the corresponding format.*/
     bool canLoad = false;
-    
+
     /** \brief Bool tag that indicates whether or not this state
      * can save an alignment in the corresponding format.*/
     bool canSave = false;
-    
+
     /**
      \brief String that contains a well known acronym to the format
      */
     string name;
-    
+
     /**
      \brief String that contains the main extension of the format
      */
     string extension;
-    
+
     /**
      \brief Function to check if a file is in the implemented format.
      \param origin File Handler to the file.
@@ -52,15 +52,16 @@ public:
                 So, when the Pir format is recognized, it's preferred over the Fasta Format,
                  when both of them can load the alignment bur pir extracts more information.</i>\n
      */
-    virtual int CheckAlignment(istream* origin) = 0;
-    
+    virtual int CheckAlignment(istream *origin) = 0;
+
     /**
      \brief Function to load a file in the current format and return an alignment object.
      \param filename Filename of the file to load.
      \return    <b> Alignment</b> loaded with the information of the file. \n
                 <b> nullptr</b> if there was any error.
      */
-    virtual newAlignment* LoadAlignment(string filename) = 0;
+    virtual newAlignment *LoadAlignment(string filename) = 0;
+
     /**
      \brief Function to save a \link newAlignment \endlink to a file.
      \param alignment Alignment to save.
@@ -70,8 +71,8 @@ public:
                 <b> False </b> otherwise.
      \todo Remove the File Name Argument as it's stored on the alignment itself.
      */
-    virtual bool SaveAlignment(newAlignment* alignment, ostream* output, std::string* FileName) = 0;
-    
+    virtual bool SaveAlignment(newAlignment *alignment, ostream *output, std::string *FileName) = 0;
+
     /**
      \brief Function that recognizes acronyms of the format.
      \param FormatName acronym to recognize
@@ -81,18 +82,18 @@ public:
     virtual bool RecognizeOutputFormat(std::string FormatName) {
         return (name == FormatName);
     }
-    
+
     /**
      \brief Class Destructor
      */
     virtual ~ReadWriteBaseState() {};
-    
+
 protected:
     /**
      \brief Pointer to the \link ReadWriteMS \endlink
      that contains and manages this state
      */
-    ReadWriteMS* Machine;
+    ReadWriteMS *Machine;
 };
 
 #endif // READWRITES_H

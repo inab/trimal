@@ -1,16 +1,16 @@
-#ifndef PHYLIP32STATE_H
-#define PHYLIP32STATE_H
+#ifndef NEXUSM10STATE_H
+#define NEXUSM10STATE_H
 
 #include "ReadWriteBaseState.h"
 
-class phylip32_state : public ReadWriteBaseState {
+class nexus_m10_state : public ReadWriteBaseState {
 public:
 
-    explicit phylip32_state(ReadWriteMS *MachineState) {
+    explicit nexus_m10_state(ReadWriteMS *MachineState) {
         Machine = MachineState;
-        name = "phylip32";
-        extension = "phy";
-        canLoad = true;
+        name = "nexus_m10";
+        extension = "nxs";
+        canLoad = false;
         canSave = true;
     };
 
@@ -24,4 +24,4 @@ public:
 
 };
 
-#endif // PHYLIP32STATE_H
+#endif // NEXUSSTATE_H

@@ -56,3 +56,45 @@ add_executable(readAl
 # Link the mathematical library
 target_link_libraries(trimAl m)
 target_link_libraries(readAl m)
+
+
+# Create a header that includes all the ReadWrite States headers
+# It also implements the ReadWriteMS constructor
+#   This implementation adds all the previous formats/States to the machine.
+#
+# To be able to be automatically recognized, the new state should:
+#   1.- Have the same Class Name as File Name (without the extension)
+#   2.- Name must end with '_state'
+#   3.- Be placed on ReadWriteMS folder
+
+message("Generating include/ReadWriteMS/formats_header.h related to format handling")
+
+FILE (GLOB stateheaders
+        include/ReadWriteMS/*_state.h)
+
+file(WRITE include/ReadWriteMS/formats_header.h "//CMake generated code\n")
+
+get_filename_component(var1 include ABSOLUTE)
+foreach(header_path ${stateheaders})
+    string(REPLACE "${var1}/" "" out "${header_path}")
+    file(APPEND include/ReadWriteMS/formats_header.h "#include \"${out}\"\n")
+endforeach()
+
+file(APPEND include/ReadWriteMS/formats_header.h
+"
+#include \"ReadWriteMS/ReadWriteMachineState.h\"
+#include \"ReadWriteMS/ReadWriteBaseState.h\"
+#include \"newAlignment.h\"
+
+ReadWriteMS::ReadWriteMS()
+{
+")
+
+
+foreach(header_path ${stateheaders})
+    get_filename_component(var1 ${header_path} NAME_WE)
+    file(APPEND include/ReadWriteMS/formats_header.h "\taddState(new ${var1}(this));\n")
+endforeach()
+
+
+file(APPEND include/ReadWriteMS/formats_header.h "};")

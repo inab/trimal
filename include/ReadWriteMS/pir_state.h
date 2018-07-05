@@ -3,17 +3,25 @@
 
 #include "ReadWriteBaseState.h"
 
-class PirState : public ReadWriteBaseState
-{
+class pir_state : public ReadWriteBaseState {
 public:
-    
-    PirState(ReadWriteMS* MachineState) { Machine = MachineState; name="pir"; extension="pir";canLoad=true ; canSave=true;; };
-    
-    virtual int CheckAlignment(istream* origin);
-    virtual newAlignment* LoadAlignment(string filename);
-    virtual bool SaveAlignment(newAlignment* alignment, ostream* output, std::string* FileName);
-    virtual bool RecognizeOutputFormat(std::string FormatName);
-     
+
+    explicit pir_state(ReadWriteMS *MachineState) {
+        Machine = MachineState;
+        name = "pir";
+        extension = "pir";
+        canLoad = true;
+        canSave = true;;
+    };
+
+    int CheckAlignment(istream *origin) override;
+
+    newAlignment *LoadAlignment(string filename) override;
+
+    bool SaveAlignment(newAlignment *alignment, ostream *output, std::string *FileName) override;
+
+    bool RecognizeOutputFormat(std::string FormatName) override;
+
 };
 
 #endif // PIRSTATE_H

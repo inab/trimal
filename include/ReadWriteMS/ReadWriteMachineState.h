@@ -41,9 +41,6 @@ public:
     /** \brief Tag to know if the machine
         has an output file or it has to output to console. */
     bool hasOutputFile  = true;
-    /** \brief Tag to know if the machine should shorten the names
-        on the formats it's possible to.*/
-    bool shortNames     = false;
     /** \brief Tag to know if the machine should keep original headers.*/
     bool keepHeader     = false;
     /** \brief Tag to know if sequences should be reversed before saving them.*/

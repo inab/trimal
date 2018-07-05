@@ -3,17 +3,25 @@
 
 #include "ReadWriteBaseState.h"
 
-class MegaInterleavedState : public ReadWriteBaseState
-{
+class mega_interleaved_state : public ReadWriteBaseState {
 public:
-    
-    MegaInterleavedState(ReadWriteMS* MachineState) { Machine = MachineState; name="mega_interleaved"; extension="mega"; canLoad=true; };
-    
-    virtual int CheckAlignment(istream* origin);
-    virtual newAlignment* LoadAlignment(string filename);
-    virtual bool SaveAlignment(newAlignment* alignment, ostream* output, std::string* FileName);
-    virtual bool RecognizeOutputFormat(std::string FormatName);
-     
+
+    explicit mega_interleaved_state(ReadWriteMS *MachineState) {
+        Machine = MachineState;
+        name = "mega_interleaved";
+        extension = "mega";
+        canLoad = true;
+        canSave = false;
+    };
+
+    int CheckAlignment(istream *origin) override;
+
+    newAlignment *LoadAlignment(string filename) override;
+
+    bool SaveAlignment(newAlignment *alignment, ostream *output, std::string *FileName) override;
+
+    bool RecognizeOutputFormat(std::string FormatName) override;
+
 };
 
 #endif // MEGAISTATE_H

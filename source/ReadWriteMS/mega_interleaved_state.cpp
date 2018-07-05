@@ -2,25 +2,25 @@
 
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include "../../include/defines.h"
 
 using namespace std;
 
-int MegaInterleavedState::CheckAlignment(istream* origin)
+int mega_interleaved_state::CheckAlignment(istream* origin)
 {
     origin->seekg(0);
     origin->clear();
     
-    char c, *firstWord = NULL, *line = NULL;
+    char c, *firstWord = nullptr, *line = nullptr;
     int format = 0, blocks = 0;
     string nline;
     
     /* Read first valid line in a safer way */
     do {
         line = utils::readLine(*origin);
-    } while ((line == NULL) && (!origin->eof()));
+    } while ((line == nullptr) && (!origin->eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
@@ -30,7 +30,8 @@ int MegaInterleavedState::CheckAlignment(istream* origin)
     firstWord = strtok(line, OTHDELIMITERS);
 
         /* Mega Format */
-    if((!strcmp(firstWord, "#MEGA")) || (!strcmp(firstWord, "#mega"))) {
+    if((!strcmp(firstWord, "#MEGA")) ||
+       (!strcmp(firstWord, "#mega"))) {
 
         /* Determine specific mega format: sequential or interleaved.
          * Counting the number of blocks (set of lines starting by "#") in
@@ -55,12 +56,12 @@ int MegaInterleavedState::CheckAlignment(istream* origin)
     return 0;
 }
 
-newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
+newAlignment* mega_interleaved_state::LoadAlignment(std::__cxx11::string filename)
 {
     newAlignment * _alignment = new newAlignment();
    /* MEGA interleaved file format parser */
 
-    char *frag = NULL, *str = NULL, *line = NULL;
+    char *frag = nullptr, *str = nullptr, *line = nullptr;
     int i, firstBlock = true;
     ifstream file;
     
@@ -79,7 +80,7 @@ newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
     /* Skip first valid line */
     do {
         line = utils::readLine(file);
-    } while ((line == NULL) && (!file.eof()));
+    } while ((line == nullptr) && (!file.eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (file.eof())
@@ -89,12 +90,11 @@ newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
     while(!file.eof()) {
 
         /* Destroy previously allocated memory */
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read a new line in a safe way */
         line = utils::readLine(file);
-        if (line == NULL)
+        if (line == nullptr)
             continue;
 
         /* If a sequence name flag is found, go out from getting information loop */
@@ -125,8 +125,7 @@ newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
              _alignment->aligInfo.append(line, strlen(line));
 
         /* Destroy previously allocated memory */
-        if (frag != NULL)
-            delete [] frag;
+        delete [] frag;
     }
 
     /* Count how many sequences are in input file */
@@ -137,15 +136,14 @@ newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
             _alignment->sequenNumber++;
 
         /* Deallocate dynamic memory */
-        if(line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read lines in a safe way */
         line = utils::readLine(file);
 
         /* If a blank line is detected means first block of sequences is over */
         /* Then, break counting sequences loop */
-        if (line == NULL)
+        if (line == nullptr)
             break;
     }
 
@@ -164,14 +162,13 @@ newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
     while(!file.eof()) {
 
         /* Deallocate previously used dynamic memory */
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read line in a safer way */
         line = utils::readLine(file);
 
         /* Determine whether a # flag has been found in current string */
-        if (line != NULL)
+        if (line != nullptr)
             if(!strncmp(line, "#", 1))
                 break;
     }
@@ -182,7 +179,7 @@ newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
 
     while(!file.eof()) {
 
-        if (line == NULL) {
+        if (line == nullptr) {
             /* Read line in a safer way */
             line = utils::readLine(file);
             continue;
@@ -200,7 +197,7 @@ newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
         str = strtok(frag, " #\n");
 
         /* Check whether a line fragment is valid or not */
-        if (str == NULL)
+        if (str == nullptr)
             continue;
 
         /* Store sequences names if firstBlock flag is TRUE */
@@ -208,18 +205,16 @@ newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
             _alignment->seqsName[i].append(str, strlen(str));
 
         /* Store sequence */
-        str = strtok(NULL, " \n");
-        while(str != NULL) {
+        str = strtok(nullptr, " \n");
+        while(str != nullptr) {
             _alignment->sequences[i].append(str, strlen(str));
-            str = strtok(NULL, " \n");
+            str = strtok(nullptr, " \n");
         }
 
         /* Deallocate previously used dynamic memory */
-        if (frag != NULL)
-            delete [] frag;
+        delete [] frag;
 
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read line in a safer way */
         line = utils::readLine(file);
@@ -233,8 +228,7 @@ newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
     file.close();
 
     /* Deallocate local memory */
-    if (line != NULL)
-        delete [] line;
+    delete [] line;
 
     /* Check the matrix's content */
     _alignment->fillMatrices(true);
@@ -243,12 +237,12 @@ newAlignment* MegaInterleavedState::LoadAlignment(std::__cxx11::string filename)
     return _alignment;
 }
 
-bool MegaInterleavedState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool mega_interleaved_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
     return false;
 }
 
-bool MegaInterleavedState::RecognizeOutputFormat(std::string FormatName)
+bool mega_interleaved_state::RecognizeOutputFormat(std::string FormatName)
 {
     return false;
 }
