@@ -83,8 +83,6 @@ endforeach()
 file(APPEND include/ReadWriteMS/formats_header.h
 "
 #include \"ReadWriteMS/ReadWriteMachineState.h\"
-#include \"ReadWriteMS/ReadWriteBaseState.h\"
-#include \"newAlignment.h\"
 
 ReadWriteMS::ReadWriteMS()
 {
