@@ -9,7 +9,7 @@ trimAl can consider several parameters, alone or in multiple combinations, in or
 These include the <i> proportion of sequences with a gap</i>, the level of <i> residue similarity</i> and, if several alignments for the same set of sequences are provided, the <i> consistency level of columns among alignments</i>. \n
 Moreover, \b trimAl is able to <i> manually select a set of columns and sequences </i> to be removed from the alignment.\n\n
 
-\b trimAl implements a series of automated algorithms that apply different thresholds, based on the characteristics of each alignment, to be used so that the signal-to-noise ratio after alignment trimming phase is optimized.\n
+\b trimAl implements a series of automated algorithms that apply different thresholds, based on the characteristics of each alignment, to be used so that the signal-to-noise ratio after alignment trimming phase is increased.\n
 
 The user can remove <i> spurious sequences </i> from the alignment before applying any method to improve the alignment's quality.\n
 
@@ -18,6 +18,7 @@ Among \b trimAl's additional features, \b trimAl allows getting the <i>complemen
 \section installation_sec Installation
 
 The simplest way to compile this package is:
+\code
 
     1.- Move to the project folder
     
@@ -26,101 +27,18 @@ The simplest way to compile this package is:
     
     3.- Compile the project: 
         > make
-    
-    4.- Move or copy binaries folder './bin/' to 'usr/local/bin' or 'usr/bin'
 
+    4.- [Optional] Move or copy binaries from folder './bin/' to '/usr/local/bin' or '/usr/bin'
+
+\endcode
 \section publication_sec Publications
-<a href= "http://trimal.cgenomics.org/_media/supplmaterial.b.pdf">  - trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses. </a> \n
+<a href= "http://trimal.cgenomics.org/_media/trimal.2009.pdf">  - trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses. </a> \n
 <a href= "http://trimal.cgenomics.org/_media/supplmaterial.b.pdf">  - Supplementary material </a> \n
 <a href= "http://trimal.cgenomics.org/_media/otherbenchs.b.pdf">    - Other benchmarks </a> \n
     
 \section usage_sec Usage
 \verbatim
-Basic usage
-	new_trimal -in <inputfile> -out <outputfile> -(other options).
 
-Common options (for a complete list please see the User Guide or visit http://trimal.cgenomics.org):
-
-    -h                       Print this information and show some examples.
-    --version                Print the trimAl version.
-
-    -in <inputfile>          Input file in several formats (clustal, fasta, NBRF/PIR, nexus, phylip3.2, phylip).
-
-    -compareset <inputfile>  Input list of paths for the files containing the alignments to compare.
-    -forceselect <inputfile> Force selection of the given input file in the files comparison method.
-
-    -backtrans <inputfile>   Use a Coding Sequences file to get a backtranslation for a given AA alignment
-    -ignorestopcodon         Ignore stop codons in the input coding sequences
-    -splitbystopcodon        Split input coding sequences up to first stop codon appearance
-
-    -matrix  <inpufile>       Input file for user-defined similarity matrix (default is Blosum62).
-
-    -out  <outputfile>        Output alignment in the same input format (default stdout). (default input format)
-    -htmlout <outputfile>    Get a summary of trimal's work in an HTML file.
-
-    -keepheader              Keep original sequence header including non-alphanumeric characters.
-                             Only available for input FASTA format files. (future versions will extend this feature)
-
-    -nbrf                    Output file in NBRF/PIR format
-    -mega                    Output file in MEGA format
-    -nexus                   Output file in NEXUS format
-    -clustal                 Output file in CLUSTAL format
-
-    -fasta                   Output file in FASTA format
-    -fasta_m10               Output file in FASTA format. Sequences name length up to 10 characters.
-
-    -phylip                  Output file in PHYLIP/PHYLIP4 format
-    -phylip_m10              Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters.
-    -phylip_paml             Output file in PHYLIP format compatible with PAML
-    -phylip_paml_m10         Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters.
-    -phylip3.2               Output file in PHYLIP3.2 format
-    -phylip3.2_m10           Output file in PHYLIP3.2 format. Sequences name length up to 10 characters.
-
-    -complementary           Get the complementary alignment.
-    -colnumbering            Get the relationship between the columns in the old and new alignment.
-
-    -selectcols { n,l,m-k }  Selection of columns to be removed from the alignment. Range: [0 - (Number of Columns - 1)]. (see User Guide).
-    -selectseqs { n,l,m-k }  Selection of sequences to be removed from the alignment. Range: [0 - (Number of Sequences - 1)]. (see User Guide).
-
-    -gt -gapthreshold <n>    1 - (fraction of sequences with a gap allowed). Range: [0 - 1]
-    -st -simthreshold <n>    Minimum average similarity allowed. Range: [0 - 1]
-    -ct -conthreshold <n>    Minimum consistency value allowed.Range: [0 - 1]
-    -cons <n>                Minimum percentage of the positions in the original alignment to conserve. Range: [0 - 100]
-
-    -nogaps                  Remove all positions with gaps in the alignment.
-    -noallgaps               Remove columns composed only by gaps.
-    -keepseqs                Keep sequences even if they are composed only by gaps.
-
-    -gappyout                Use automated selection on "gappyout" mode. This method only uses information based on gaps' distribution. (see User Guide).
-    -strict                  Use automated selection on "strict" mode. (see User Guide).
-    -strictplus              Use automated selection on "strictplus" mode. (see User Guide).
-                             (Optimized for Neighbour Joining phylogenetic tree reconstruction).
-
-    -automated1              Use a heuristic selection of the automatic method based on similarity statistics. (see User Guide). 
-                             Optimized for Maximum Likelihood phylogenetic tree reconstruction.
-
-    -terminalonly            Only columns out of internal boundaries (first and last column without gaps) are 
-                             candidated to be trimmed depending on the applied method
-    -block <n>               Minimum column block size to be kept in the trimmed alignment. Available with manual and automatic (gappyout) methods
-
-    -resoverlap              Minimum overlap of a positions with other positions in the column to be considered a "good position". Range: [0 - 1]. (see User Guide).
-    -seqoverlap              Minimum percentage of "good positions" that a sequence must have in order to be conserved. Range: [0 - 100](see User Guide).
-
-    -clusters <n>            Get the most Nth representatives sequences from a given alignment. Range: [1 - (Number of sequences)]
-    -maxidentity <n>         Get the representatives sequences for a given identity threshold. Range: [0 - 1].
-
-    -w <n>                   (half) Window size, score of position i is the average of the window (i - n) to (i + n).
-    -gw <n>                  (half) Window size only applies to statistics/methods based on Gaps.
-    -sw <n>                  (half) Window size only applies to statistics/methods based on Similarity.
-    -cw <n>                  (half) Window size only applies to statistics/methods based on Consistency.
-
-    -sgc                     Print gap scores for each column in the input alignment.
-    -sgt                     Print accumulated gap scores for the input alignment.
-    -ssc                     Print similarity scores for each column in the input alignment.
-    -sst                     Print accumulated similarity scores for the input alignment.
-    -sfc                     Print sum-of-pairs scores for each column from the selected alignment
-    -sft                     Print accumulated sum-of-pairs scores for the selected alignment
-    -sident                  Print identity scores for all sequences in the input alignment. (see User Guide).
 \endverbatim
 \section citation_sec Citing this tool
 
@@ -139,7 +57,6 @@ You can start by taking a look at: \n
 
 <a href="http://www.alanzucconi.com/2015/07/26/enum-flags-and-bitwise-operators/" > 
         - Alan Zucconi </a>: As his post explaining bitwise operators is used as reference explaining #SequenceTypes\n
-
 */
 
 <a href="https://github.com/assimilation/assimilation-official">

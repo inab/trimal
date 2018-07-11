@@ -894,11 +894,12 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {
                 appearErrors = true;
             }
 
-        if (delSequences[num] >= singleAlig->getNumSpecies()) {
-            debug.report(ErrorCode::SelectOnlyAccepts,
-                         new string[2]{"-selectseqs", "sequences"});
-            appearErrors = true;
-        }
+        if (selectCols)
+            if (delSequences[num] >= origAlig->getNumSpecies()) {
+                debug.report(ErrorCode::SelectOnlyAccepts,
+                             new string[2]{"-selectseqs", "sequences"});
+                appearErrors = true;
+            }
     }
     return appearErrors;
 }

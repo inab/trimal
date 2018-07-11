@@ -4,7 +4,7 @@
 \section introduction_sec_r Introduction
 
 One of the main problems that the researchers have to face during their studies is the <i>conversion among the various formats</i> required by different programs. \n
-Nowadays there around <i>20 different Multiple Sequence Alignment (MSAs) formats</i>. \n\n
+Nowadays there around <i>20 different Multiple Sequence Alignment (MSAs) formats and subformats</i>. \n\n
 
 Here we present \b readAl, a tool for format alignment conversion among the most representative formats. \n
 \b readAl has been designed to be used in several situations, including, alignment trimming, phylogenetic tree reconstruction, profile reconstruction, and so on.\n\n
@@ -23,7 +23,7 @@ The simplest way to compile this program is:
     
     3.- Compile the project: 
         > make
-        > make readalMS (if you only want readalMS to be compiled)
+        > make readal (if you only want readal to be compiled)
     
     4.- Move or copy binaries folder './bin/' to 'usr/local/bin' or 'usr/bin'
     
@@ -33,7 +33,7 @@ This program is free software: you can redistribute it and/or modify it under th
 
 \subsection basic_usage_r BASIC USAGE
 
-	readalMS -in <inputfiles> -out <pattern> -format [formats] [options].
+	readal -in <inputfiles> -out <pattern> -format [formats] [options].
 
 	-h                    Show this information.
 	-in <inputfiles>      Input files in several formats. Separated by spaces.
@@ -78,23 +78,23 @@ Take in mind that this arguments may be discontinued any time.
 
 \subsection examples_r EXAMPLES OF USE
 
-	readalMS -in ./dataset/AA1.fas -out ./dataset/[in].output.[extension] -formats clustal
+	readal -in ./dataset/AA1.fas -out ./dataset/[in].output.[extension] -formats clustal
 	  -> Will produce ./dataset/AA1.output.clw
 
-	readalMS -in ./dataset/example1.clw -out ./dataset/[in].[format].[extension] -formats fasta phylip32 phylip40
+	readal -in ./dataset/example1.clw -out ./dataset/[in].[format].[extension] -formats fasta phylip32 phylip40
 	  -> Will produce ./dataset/example1.FASTA.fasta ./dataset/example1.PHYLIP32.phy ./dataset/example1.PHYLIP40.phy
 
-	readalMS -in ./dataset/example1.clw -out ./dataset/[in]/[format].[extension] -formats fasta phylip32 phylip40
+	readal -in ./dataset/example1.clw -out ./dataset/[in]/[format].[extension] -formats fasta phylip32 phylip40
 	  -> Will produce ./dataset/example1/FASTA.fasta ./dataset/example1/PHYLIP32.phy ./dataset/example1/PHYLIP40.phy
 	     ONLY if ./dataset/example1/ already exists.
 
-	readalMS -in ./dataset/AA1.fas ./dataset/AA2.fas -out ./dataset/[in].output.[extension] -formats clustal pir
+	readal -in ./dataset/AA1.fas ./dataset/AA2.fas -out ./dataset/[in].output.[extension] -formats clustal pir
 	  -> Will produce ./dataset/AA1.output.clw ./dataset/AA2.output.clw ./dataset/AA1.output.pir ./dataset/AA2.output.pir
 
-	readalMS -in ./dataset/AA1.fas -format -type -info
+	readal -in ./dataset/AA1.fas -format -type -info
 	  -> Will produce terminal output giving information about AA1.fas alignment file
 
-	readalMS -in ./dataset/AA1.fas ./dataset/AA2.fas -out ./dataset/[in].output.[extension] -formats html
+	readal -in ./dataset/AA1.fas ./dataset/AA2.fas -out ./dataset/[in].output.[extension] -formats html
 	  -> Will produce ./dataset/AA1.output.html ./dataset/AA2.output.html
 	     Those files are not indeed reformats of the original alignments, but an HTML colored report of the alignment file.
 
