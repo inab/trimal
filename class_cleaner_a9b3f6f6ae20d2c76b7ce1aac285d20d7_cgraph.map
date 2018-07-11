@@ -1,0 +1,14 @@
+<map id="Cleaner::cleanCompareFile" name="Cleaner::cleanCompareFile">
+<area shape="rect" id="node2" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="267,5,376,32"/>
+<area shape="rect" id="node3" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="268,56,375,83"/>
+<area shape="rect" id="node5" href="$classutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f" title="Minimum of two numbers method. " alt="" coords="284,107,359,133"/>
+<area shape="rect" id="node6" href="$class_cleaner.html#aa85792ad5a7c3209509a689fb0410e92" title="Method to clean an alignment. &#160;It removes sequences that fall behind a certain threshold. &#160;The function detects if it would clean too many sequences, and relaxes the threshold until we have enough sequences to achieve the given percentage desired to keep. &#160;To achieve this, the method starts in the middle of the sequence and, alternating sides, adds column one by one. " alt="" coords="233,179,409,221"/>
+<area shape="rect" id="node4" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="534,45,619,72"/>
+<area shape="rect" id="node7" href="$classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method. " alt="" coords="526,96,627,123"/>
+<area shape="rect" id="node8" href="$class_cleaner.html#ae6d263df982b8e0a605f49e52a5a48d9" title="Method to remove column blocks smaller than a given size. " alt="" coords="475,147,678,173"/>
+<area shape="rect" id="node9" href="$class_cleaner.html#a033da9ea63774f43f4c7aff04f23da81" title="Method to detect right and left borders. Borders are the first column found with no gaps..." alt="" coords="479,197,674,224"/>
+<area shape="rect" id="node12" href="$class_cleaner.html#a24bd28e4191afc9471adff329bee1466" title="Method for computing the complementary alignment. Complementary Alignment is an alignment containing ..." alt="" coords="457,248,696,275"/>
+<area shape="rect" id="node13" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="479,299,674,341"/>
+<area shape="rect" id="node10" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. " alt="" coords="775,277,929,318"/>
+<area shape="rect" id="node11" href="$classnew_alignment.html#a52710ff330519de8a4e41b27e7e55958" title="Updates the sequence number and residue number based on saveResidues and saveSequences. " alt="" coords="744,190,960,231"/>
+</map>

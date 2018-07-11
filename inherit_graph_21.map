@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$struct_catch_1_1_i_transient_expression.html" title="Catch::ITransientExpression" alt="" coords="5,78,193,105"/>
+<area shape="rect" id="node2" href="$class_catch_1_1_binary_expr.html" title="Catch::BinaryExpr\&lt;\l LhsT, RhsT \&gt;" alt="" coords="263,5,400,47"/>
+<area shape="rect" id="node3" href="$class_catch_1_1_match_expr.html" title="Catch::MatchExpr\&lt; ArgT,\l MatcherT \&gt;" alt="" coords="245,71,417,112"/>
+<area shape="rect" id="node4" href="$class_catch_1_1_unary_expr.html" title="Catch::UnaryExpr\&lt; LhsT \&gt;" alt="" coords="241,137,421,163"/>
+</map>

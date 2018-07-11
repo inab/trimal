@@ -1,0 +1,9 @@
+<map id="Cleaner::cleanByCutValueOverpass" name="Cleaner::cleanByCutValueOverpass">
+<area shape="rect" id="node2" href="$class_cleaner.html#ac3be9d53018d9146d6dc6cf7ff89f96d" title="Method to trim an alignment based on the gap distribution values. Column blocks that don&#39;t have a min..." alt="" coords="245,5,383,32"/>
+<area shape="rect" id="node6" href="$class_cleaner.html#a1ea9656823727f9ec237c82f9fb529cf" title="Method that carries the gappyout approach. This methods calculates the slope in gaps distribution on ..." alt="" coords="234,56,394,83"/>
+<area shape="rect" id="node7" href="$class_cleaner.html#a08e6db52c33baccce53a33d844597d7b" title="Method to remove columns composed only by gaps This method is specially useful when we remove missali..." alt="" coords="229,107,399,133"/>
+<area shape="rect" id="node3" href="$classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" title="Method to trim the alignment using non automatic methods: " alt="" coords="452,9,655,50"/>
+<area shape="rect" id="node4" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from. " alt="" coords="708,43,853,85"/>
+<area shape="rect" id="node5" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="901,51,1060,77"/>
+<area shape="rect" id="node8" href="$classtrim_al_manager.html#a10536f715945a1a45f1df33f7cedc81e" title="Method to trim or reduce the number of sequences in an alignment. It performs one or none of the foll..." alt="" coords="447,85,660,112"/>
+</map>

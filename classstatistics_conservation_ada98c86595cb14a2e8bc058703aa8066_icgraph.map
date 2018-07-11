@@ -1,0 +1,12 @@
+<map id="statisticsConservation::calculateVectors" name="statisticsConservation::calculateVectors">
+<area shape="rect" id="node2" href="$classstatistics_conservation.html#a31f6ff0c30b2a207aba13f7687709467" title="Allows us compute the conservationWindow&#39;s values. " alt="" coords="205,97,357,139"/>
+<area shape="rect" id="node3" href="$classstatistics_conservation.html#a0e674b4b4b91773fb1c32a532797f328" title="This methods returns a pointer to conservationWindow&#39;s vector. " alt="" coords="405,97,577,139"/>
+<area shape="rect" id="node4" href="$class_cleaner.html#a694d53fdd5d1ac9455858e48537af3d0" title="Method to trim an alignment based on the similarity distribution values. " alt="" coords="933,21,1116,47"/>
+<area shape="rect" id="node8" href="$class_cleaner.html#a1ac5ba504932526d77575365557a4d64" title="Method to trim an alignment based on the similarity and gaps distribution values. ..." alt="" coords="971,71,1078,98"/>
+<area shape="rect" id="node9" href="$class_cleaner.html#a068b219f913adba5c917a231cff7e437" title="Method to clean an alignment. It carries out strict and strictplus. The method: " alt="" coords="660,105,851,131"/>
+<area shape="rect" id="node10" href="$classnew_alignment.html#a2607115c839209324dca54d70fc8708d" title="Method to report the trimming results in HTML. Outputs an HTML file that shows visually what has been..." alt="" coords="625,155,885,182"/>
+<area shape="rect" id="node11" href="$classstatistics_conservation.html#aa11412e9db5babc6dc7b2b4c7c471ed6" title="Computes and selects the cut point values based on conservation&#39;s values. " alt="" coords="679,39,831,80"/>
+<area shape="rect" id="node5" href="$classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" title="Method to trim the alignment using non automatic methods: " alt="" coords="1164,39,1367,80"/>
+<area shape="rect" id="node6" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from. " alt="" coords="1415,39,1560,80"/>
+<area shape="rect" id="node7" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="1608,46,1767,73"/>
+</map>

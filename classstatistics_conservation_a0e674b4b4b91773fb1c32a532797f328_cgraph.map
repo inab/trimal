@@ -1,0 +1,10 @@
+<map id="statisticsConservation::getMdkWindowedVector" name="statisticsConservation::getMdkWindowedVector">
+<area shape="rect" id="node2" href="$classstatistics_conservation.html#a48c32412653c299b159b56311065fc80" title="Returns if a windows size value has been defined or not. " alt="" coords="225,5,377,47"/>
+<area shape="rect" id="node3" href="$classstatistics_conservation.html#a31f6ff0c30b2a207aba13f7687709467" title="Allows us compute the conservationWindow&#39;s values. " alt="" coords="225,71,377,112"/>
+<area shape="rect" id="node4" href="$classstatistics_conservation.html#ada98c86595cb14a2e8bc058703aa8066" title="Method to calculate the conservation values of a alignment matrix. " alt="" coords="427,37,579,79"/>
+<area shape="rect" id="node9" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="425,103,580,144"/>
+<area shape="rect" id="node5" href="$classstatistics_conservation.html#a9fe3502be02c8d6591a6de2d5f81c337" title="Computes the matrix identity between alignment&#39;s columns. " alt="" coords="628,8,789,49"/>
+<area shape="rect" id="node7" href="$classnew_alignment.html#a670d5ef1ced9ed6041c3f6afdbd2cc02" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="837,70,1055,97"/>
+<area shape="rect" id="node6" href="$classutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization. " alt="" coords="895,15,997,42"/>
+<area shape="rect" id="node8" href="$classutils.html#a1f1dcbfa7276e54acec72bdbae1b1255" title="Checks an alignment type. " alt="" coords="1103,70,1279,97"/>
+</map>

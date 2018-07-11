@@ -1,0 +1,4 @@
+<map id="sequencesMatrix::setOrder" name="sequencesMatrix::setOrder">
+<area shape="rect" id="node2" href="$classstatistics_consistency.html#a54ff94b3add44ffeaab1cdf5ff1e9cfd" title="Method to compare a set of alignments to select the most consistent one respect the others..." alt="" coords="232,5,380,47"/>
+<area shape="rect" id="node3" href="$classstatistics_consistency.html#a42d3941c8ae6fada5631fcb035bf2794" title="Method to obtain the consistency values vector for a given alignment against a set of alignments with..." alt="" coords="232,71,380,112"/>
+</map>

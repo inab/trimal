@@ -1,0 +1,12 @@
+<map id="newAlignment::getNumSpecies" name="newAlignment::getNumSpecies">
+<area shape="rect" id="node2" href="$classnew_alignment.html#ad50ba126247276cd0bf89119e439c483" title="Method to check if the CDS file is correct. Based on nature of residues: DNA/RNA (Most of the residue..." alt="" coords="259,167,455,209"/>
+<area shape="rect" id="node6" href="$classstatistics_consistency.html#a54ff94b3add44ffeaab1cdf5ff1e9cfd" title="Method to compare a set of alignments to select the most consistent one respect the others..." alt="" coords="283,37,431,78"/>
+<area shape="rect" id="node7" href="$classstatistics_consistency.html#a42d3941c8ae6fada5631fcb035bf2794" title="Method to obtain the consistency values vector for a given alignment against a set of alignments with..." alt="" coords="283,102,431,143"/>
+<area shape="rect" id="node8" href="$classtrim_al_manager.html#a0e099828be74d3ca0068b951d6578407" title="Method to check incompatibilities with select cols and select seqs arguments. " alt="" coords="277,299,436,355"/>
+<area shape="rect" id="node10" href="$classtrim_al_manager.html#a197d0ef570aee1edc074b19f4134060e" title="Method to check clusters incompatibilities. " alt="" coords="269,233,444,274"/>
+<area shape="rect" id="node11" href="$classtrim_al_manager.html#ad96c97918919040f8986ba8c26a1f728" title="Method to check if the origAlig and backtranslationAlig are compatible in names to make the backtrans..." alt="" coords="531,29,682,85"/>
+<area shape="rect" id="node3" href="$classtrim_al_manager.html#a55f0bbc922fb6854118da00a5bfa0c1b" title="Method to check and prepare the coding sequence. " alt="" coords="503,167,711,209"/>
+<area shape="rect" id="node4" href="$classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="759,167,908,209"/>
+<area shape="rect" id="node5" href="$classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="956,205,1179,232"/>
+<area shape="rect" id="node9" href="$classtrim_al_manager.html#a16d2da3f90cfe965bea5f1da1360e17a" title="Method to check argument incompatibilities. Take in mind that an incompatibility is between two argum..." alt="" coords="511,233,702,274"/>
+</map>

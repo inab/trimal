@@ -1,0 +1,4 @@
+<map id="newAlignment::getSequenceNameOrder" name="newAlignment::getSequenceNameOrder">
+<area shape="rect" id="node2" href="$classstatistics_consistency.html#a54ff94b3add44ffeaab1cdf5ff1e9cfd" title="Method to compare a set of alignments to select the most consistent one respect the others..." alt="" coords="241,5,389,47"/>
+<area shape="rect" id="node3" href="$classstatistics_consistency.html#a42d3941c8ae6fada5631fcb035bf2794" title="Method to obtain the consistency values vector for a given alignment against a set of alignments with..." alt="" coords="241,71,389,112"/>
+</map>
