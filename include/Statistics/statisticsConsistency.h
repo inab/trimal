@@ -33,7 +33,7 @@
 #include <string>
 #include <iostream>
 #include <ReadWriteMS/ReadWriteMachineState.h>
-#include "trimAlManager.h"
+#include "trimalManager.h"
 #include "newAlignment.h"
 
 /// \brief Helper class to handle the comparison between alignments. It also handles Consistency staticstics.
