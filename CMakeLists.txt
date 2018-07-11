@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.12)
-project(trimal)
+project(trimAl)
 # Make project C++ 11
 set(CMAKE_CXX_STANDARD 11)
 
@@ -16,7 +16,7 @@ include_directories(include)
 
 # Include all the cpp that are needed on our project
 set(preview
-        source/trimAlManager.cpp
+        source/trimalManager.cpp
         source/newAlignment.cpp
 
         source/Statistics/statisticsMold.cpp
@@ -45,14 +45,14 @@ add_library(common OBJECT
         ${states})
 
 # Add the executables
-add_executable(trimAl
+add_executable(trimal
         source/newmain.cpp
         $<TARGET_OBJECTS:common>)
 
-add_executable(readAl
+add_executable(readal
         source/ReadWriteMS/ReadWriteMSmain.cpp
         $<TARGET_OBJECTS:common>)
 
 # Link the mathematical library
-target_link_libraries(trimAl m)
-target_link_libraries(readAl m)
+target_link_libraries(trimal m)
+target_link_libraries(readal m)

@@ -25,7 +25,7 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "trimAlManager.h"
+#include "trimalManager.h"
 #include "../include/reportsystem.h"
 
 #include <../include/vcf_statish.h>

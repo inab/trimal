@@ -5,7 +5,7 @@
 
 #include <string>
 
-#include "trimAlManager.h"
+#include "../include/trimalManager.h"
 #include "Statistics/statisticsConsistency.h"
 #include "defines.h"
 #include "values.h"
