@@ -1,5 +1,5 @@
 <map id="utils::ReplaceString" name="utils::ReplaceString">
-<area shape="rect" id="node2" href="$class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0" title="Function to save an alignment to a file. It searched on the available_states, the one that can write ..." alt="" coords="189,5,388,32"/>
-<area shape="rect" id="node4" href="$class_read_write_m_s.html#ab019d93e740d838c7e64415630ca5ad5" title="Function that takes multile files, loads them and saves in a cumulus of formats, using an outPattern..." alt="" coords="194,57,383,98"/>
+<area shape="rect" id="node2" href="$class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0" title="Function to save an alignment to a file. It searches among the available_states one that can write th..." alt="" coords="189,5,388,32"/>
+<area shape="rect" id="node4" href="$class_read_write_m_s.html#ab019d93e740d838c7e64415630ca5ad5" title="Function that takes multiple files, loads them and saves in a cumulus of formats, using an outPattern..." alt="" coords="194,57,383,98"/>
 <area shape="rect" id="node3" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="436,5,595,32"/>
 </map>

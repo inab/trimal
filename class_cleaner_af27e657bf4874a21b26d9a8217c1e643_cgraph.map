@@ -1,5 +1,5 @@
 <map id="Cleaner::removeSequences" name="Cleaner::removeSequences">
-<area shape="rect" id="node2" href="$class_cleaner.html#a24bd28e4191afc9471adff329bee1466" title="Method for computing the complementary alignment. Complementary Alignment is an alignment containing ..." alt="" coords="236,5,475,32"/>
-<area shape="rect" id="node3" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="258,57,453,98"/>
-<area shape="rect" id="node4" href="$class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. " alt="" coords="523,57,677,98"/>
+<area shape="rect" id="node2" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="247,5,441,47"/>
+<area shape="rect" id="node4" href="$classnew_alignment.html#a52710ff330519de8a4e41b27e7e55958" title="Updates the sequence number and residue number based on saveResidues and saveSequences. " alt="" coords="236,71,452,112"/>
+<area shape="rect" id="node3" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="500,5,655,47"/>
 </map>

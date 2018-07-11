@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['sequencesmatrix',['sequencesMatrix',['../classsequences_matrix.html',1,'']]],
-  ['similaritymatrix',['similarityMatrix',['../classsimilarity_matrix.html',1,'']]],
-  ['statisticsconservation',['statisticsConservation',['../classstatistics_conservation.html',1,'']]],
-  ['statisticsfiles',['statisticsFiles',['../classstatistics_files.html',1,'']]],
-  ['statisticsgaps',['statisticsGaps',['../classstatistics_gaps.html',1,'']]],
-  ['statisticsmanager',['StatisticsManager',['../class_statistics_manager.html',1,'']]]
+  ['last_5ferror_5ft',['last_error_t',['../structpicojson_1_1last__error__t.html',1,'picojson']]],
+  ['lazyexpression',['LazyExpression',['../class_catch_1_1_lazy_expression.html',1,'Catch']]]
 ];

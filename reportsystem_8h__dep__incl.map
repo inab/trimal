@@ -1,13 +1,11 @@
 <map id="include/reportsystem.h" name="include/reportsystem.h">
-<area shape="rect" id="node2" href="$_read_write_base_state_8h_source.html" title="include/ReadWriteMS\l/ReadWriteBaseState.h" alt="" coords="22,80,182,121"/>
-<area shape="rect" id="node4" href="$_cleaner_8cpp_source.html" title="source/Cleaner.cpp" alt="" coords="207,87,341,114"/>
-<area shape="rect" id="node5" href="$compare_files_8cpp_source.html" title="source/compareFiles.cpp" alt="" coords="366,87,534,114"/>
-<area shape="rect" id="node6" href="$new_alignment_8cpp_source.html" title="source/newAlignment.cpp" alt="" coords="559,87,731,114"/>
-<area shape="rect" id="node7" href="$newmain_8cpp_source.html" title="source/newmain.cpp" alt="" coords="755,87,897,114"/>
-<area shape="rect" id="node8" href="$reportsystem_8cpp_source.html" title="source/reportsystem.cpp" alt="" coords="921,87,1088,114"/>
-<area shape="rect" id="node9" href="$similarity_matrix_8cpp_source.html" title="source/similarityMatrix.cpp" alt="" coords="1113,87,1291,114"/>
-<area shape="rect" id="node10" href="$statistics_conservation2_8cpp_source.html" title="source/statisticsConservation2.cpp" alt="" coords="1315,87,1542,114"/>
-<area shape="rect" id="node11" href="$trimal_argument_parser_8cpp_source.html" title="source/trimalArgumentParser.cpp" alt="" coords="1566,87,1782,114"/>
-<area shape="rect" id="node12" href="$utils_8cpp_source.html" title="source/utils.cpp" alt="" coords="1806,87,1921,114"/>
-<area shape="rect" id="node3" href="$_read_write_machine_state_8cpp_source.html" title="source/ReadWriteMS\l/ReadWriteMachineState.cpp" alt="" coords="5,169,199,211"/>
+<area shape="rect" id="node2" href="$_cleaner_8cpp.html" title="source/Cleaner.cpp" alt="" coords="5,87,140,114"/>
+<area shape="rect" id="node3" href="$new_alignment_8cpp.html" title="source/newAlignment.cpp" alt="" coords="164,87,336,114"/>
+<area shape="rect" id="node4" href="$newmain_8cpp.html" title="source/newmain.cpp" alt="" coords="360,87,503,114"/>
+<area shape="rect" id="node5" href="$reportsystem_8cpp.html" title="source/reportsystem.cpp" alt="" coords="527,87,693,114"/>
+<area shape="rect" id="node6" href="$similarity_matrix_8cpp.html" title="source/similarityMatrix.cpp" alt="" coords="718,87,897,114"/>
+<area shape="rect" id="node7" href="$_timer_factory_8cpp.html" title="source/TimerFactory.cpp" alt="" coords="921,87,1088,114"/>
+<area shape="rect" id="node8" href="$trimal_argument_parser_8cpp.html" title="source/trimalArgumentParser.cpp" alt="" coords="1113,87,1329,114"/>
+<area shape="rect" id="node9" href="$utils_8cpp.html" title="source/utils.cpp" alt="" coords="1353,87,1467,114"/>
+<area shape="rect" id="node10" href="$_read_write_base_state_8h.html" title="include/ReadWriteMS\l/ReadWriteBaseState.h" alt="" coords="1491,80,1651,121"/>
 </map>

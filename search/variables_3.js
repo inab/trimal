@@ -11,7 +11,6 @@ var searchData=
   ['compare',['compare',['../classtrim_al_manager.html#aeb430abf5b07a53e09ce6b1aee10799e',1,'trimAlManager']]],
   ['comparealignmentsarray',['compareAlignmentsArray',['../classtrim_al_manager.html#a2cd9b7bd62cf65f35fffc0bb33f0ccf1',1,'trimAlManager']]],
   ['compareset',['compareset',['../classtrim_al_manager.html#aad91008c9e584856346b85f74bd0aba9',1,'trimAlManager']]],
-  ['comparevect',['compareVect',['../classtrim_al_manager.html#ab0a03748ace4f841eba5fcd3ab981a8b',1,'trimAlManager']]],
   ['conservationthreshold',['conservationThreshold',['../classtrim_al_manager.html#a546617602c21476d61e9880fa75d944a',1,'trimAlManager']]],
   ['consistencythreshold',['consistencyThreshold',['../classtrim_al_manager.html#a693fdaee53253ae7a9b3a0719a3d5bd1',1,'trimAlManager']]],
   ['consistencywindow',['consistencyWindow',['../classtrim_al_manager.html#a9a0122f9ec340576294198c4241f00ac',1,'trimAlManager']]]

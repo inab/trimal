@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
-<title>Trimal: Cleaner Class Reference</title>
+<title>trimAl: Cleaner Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
  <tbody>
  <tr style="height: 12px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Trimal
+   <div id="projectname">trimAl
    </div>
    <div id="projectbrief">A Multiple Alignment Sequence framework for Cleaning and Reformating.</div>
   </td>
@@ -97,74 +97,74 @@ $(document).ready(function(){initNavTree('class_cleaner.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Subclass contained by the alignment object to make cleaning operations on it.  
+<p>Submodule contained by <a class="el" href="classnew_alignment.html">newAlignment </a>.  
  <a href="class_cleaner.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Cleaner:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner__coll__graph.svg" width="1030" height="900"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner__coll__graph.svg" width="1826" height="802"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7ae24fa55c5d166d75237decd942ce94"><td class="memItemLeft" align="right" valign="top"><a id="a7ae24fa55c5d166d75237decd942ce94"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a7ae24fa55c5d166d75237decd942ce94">selectMethod</a> (void)</td></tr>
-<tr class="memdesc:a7ae24fa55c5d166d75237decd942ce94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that selects the best cleaning workflow based on statistics of the alignment. <br /></td></tr>
-<tr class="separator:a7ae24fa55c5d166d75237decd942ce94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad075f0ef730c8023cf8a0e35e7e1e53a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#ad075f0ef730c8023cf8a0e35e7e1e53a">cleanByCutValue</a> (double cut, float baseLine, const int *gInCol, bool complementary)</td></tr>
-<tr class="memdesc:ad075f0ef730c8023cf8a0e35e7e1e53a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to clean an alignment. <br />
+<tr class="memitem:a6e219be8cd47b2d084e4563c2c66a947"><td class="memItemLeft" align="right" valign="top"><a id="a6e219be8cd47b2d084e4563c2c66a947"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a6e219be8cd47b2d084e4563c2c66a947">selectMethod</a> ()</td></tr>
+<tr class="memdesc:a6e219be8cd47b2d084e4563c2c66a947"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that selects the best cleaning method based on statistics of the alignment. <br /></td></tr>
+<tr class="separator:a6e219be8cd47b2d084e4563c2c66a947"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66bda5807c06cfaf1609e4c1f5955671"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a66bda5807c06cfaf1609e4c1f5955671">cleanByCutValueOverpass</a> (double cut, float baseLine, const int *gInCol, bool complementary)</td></tr>
+<tr class="memdesc:a66bda5807c06cfaf1609e4c1f5955671"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to clean an alignment. <br />
 It removes sequences that<b> overpass or equals </b>a certain threshold. <br />
 The function detects if it would clean too many sequences, and relaxes the threshold until we have enough sequences to achieve the given percentage desired to keep. <br />
 To achieve this, the method starts in the middle of the sequence and, alternating sides, adds column one by one.<br />
-.  <a href="#ad075f0ef730c8023cf8a0e35e7e1e53a">More...</a><br /></td></tr>
-<tr class="separator:ad075f0ef730c8023cf8a0e35e7e1e53a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a883d8411a37ef23acb145e2c60ba0351"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a883d8411a37ef23acb145e2c60ba0351">cleanByCutValue</a> (float cut, float baseLine, const float *ValueVect, bool complementary)</td></tr>
-<tr class="memdesc:a883d8411a37ef23acb145e2c60ba0351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to clean an alignment. <br />
+.  <a href="#a66bda5807c06cfaf1609e4c1f5955671">More...</a><br /></td></tr>
+<tr class="separator:a66bda5807c06cfaf1609e4c1f5955671"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa85792ad5a7c3209509a689fb0410e92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#aa85792ad5a7c3209509a689fb0410e92">cleanByCutValueFallBehind</a> (float cut, float baseLine, const float *ValueVect, bool complementary)</td></tr>
+<tr class="memdesc:aa85792ad5a7c3209509a689fb0410e92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to clean an alignment. <br />
 It removes sequences that<b> fall behind </b>a certain threshold. <br />
 The function detects if it would clean too many sequences, and relaxes the threshold until we have enough sequences to achieve the given percentage desired to keep. <br />
-To achieve this, the method starts in the middle of the sequence and, alternating sides, adds column one by one.  <a href="#a883d8411a37ef23acb145e2c60ba0351">More...</a><br /></td></tr>
-<tr class="separator:a883d8411a37ef23acb145e2c60ba0351"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76c152a67f0116be5cfd6001673a6b1c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a76c152a67f0116be5cfd6001673a6b1c">cleanByCutValue</a> (double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary)</td></tr>
-<tr class="memdesc:a76c152a67f0116be5cfd6001673a6b1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to clean an alignment. <br />
+To achieve this, the method starts in the middle of the sequence and, alternating sides, adds column one by one.  <a href="#aa85792ad5a7c3209509a689fb0410e92">More...</a><br /></td></tr>
+<tr class="separator:aa85792ad5a7c3209509a689fb0410e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7ad16bc3ad459a12c908801fa20da66"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#ae7ad16bc3ad459a12c908801fa20da66">cleanByCutValueOverpassOrEquals</a> (double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary)</td></tr>
+<tr class="memdesc:ae7ad16bc3ad459a12c908801fa20da66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to clean an alignment. <br />
 It removes sequences that<b> overpass or equals </b> the gap threshold but <b> fall behind </b> the similarity threshold. <br />
 The function detects if it would clean too many sequences, and relaxes both thresholds until we have enough sequences to achieve the given percentage desired to keep. <br />
-To achieve this, the method starts in the middle of the sequence and, alternating sides, adds column one by one.  <a href="#a76c152a67f0116be5cfd6001673a6b1c">More...</a><br /></td></tr>
-<tr class="separator:a76c152a67f0116be5cfd6001673a6b1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+To achieve this, the method starts in the middle of the sequence and, alternating sides, adds column one by one.  <a href="#ae7ad16bc3ad459a12c908801fa20da66">More...</a><br /></td></tr>
+<tr class="separator:ae7ad16bc3ad459a12c908801fa20da66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a740bce047dce09be0f6bd1da9f826da3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a740bce047dce09be0f6bd1da9f826da3">cleanStrict</a> (int gapCut, const int *gInCol, float simCut, const float *MDK_W, bool complementary, bool variable)</td></tr>
 <tr class="memdesc:a740bce047dce09be0f6bd1da9f826da3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to clean an alignment. It carries out strict and strictplus.<br />
-It removes sequences that<b> overpass </b>the gap threshold but<b> fall behind </b>the similarity threshold. <br />
+It removes sequences that<b> overpass </b>the gap threshold but <b> fall behind </b>the similarity threshold. <br />
 The function recovers those columns that, by themselves would be rejected, but it's neighbours (3 of 4) don't.<br />
 Column blocks that don't have a minimum size set by the method itself, will be removed too.  <a href="#a740bce047dce09be0f6bd1da9f826da3">More...</a><br /></td></tr>
 <tr class="separator:a740bce047dce09be0f6bd1da9f826da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74d3049d4997da5e7c6c51cb19b540e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a74d3049d4997da5e7c6c51cb19b540e8">cleanOverlapSeq</a> (float minimumOverlap, float *overlapSeq, bool complementary)</td></tr>
-<tr class="memdesc:a74d3049d4997da5e7c6c51cb19b540e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to clean sequences based on a minimum overlap threshold.<br />
-The method selects a combination of parameters to maximize the final number of columns in the new alignment.<br />
+<tr class="memdesc:a74d3049d4997da5e7c6c51cb19b540e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to trim an alignment based on a minimum sequence overlap threshold.<br />
+ The method selects a combination of parameters to maximize the final number of columns in the new alignment.<br />
 .  <a href="#a74d3049d4997da5e7c6c51cb19b540e8">More...</a><br /></td></tr>
 <tr class="separator:a74d3049d4997da5e7c6c51cb19b540e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3be9d53018d9146d6dc6cf7ff89f96d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#ac3be9d53018d9146d6dc6cf7ff89f96d">cleanGaps</a> (float baseLine, float gapsPct, bool complementary)</td></tr>
-<tr class="memdesc:ac3be9d53018d9146d6dc6cf7ff89f96d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to clean an alignment based on the gap distribution values. Column blocks that don't have a minimum size set by the method itself, will be removed too.  <a href="#ac3be9d53018d9146d6dc6cf7ff89f96d">More...</a><br /></td></tr>
+<tr class="memdesc:ac3be9d53018d9146d6dc6cf7ff89f96d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to trim an alignment based on the gap distribution values. Column blocks that don't have a minimum size set by the method itself, will be removed too.  <a href="#ac3be9d53018d9146d6dc6cf7ff89f96d">More...</a><br /></td></tr>
 <tr class="separator:ac3be9d53018d9146d6dc6cf7ff89f96d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a694d53fdd5d1ac9455858e48537af3d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a694d53fdd5d1ac9455858e48537af3d0">cleanConservation</a> (float baseLine, float conservationPct, bool complementary)</td></tr>
-<tr class="memdesc:a694d53fdd5d1ac9455858e48537af3d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to clean an alignment based on the similarity distribution values.  <a href="#a694d53fdd5d1ac9455858e48537af3d0">More...</a><br /></td></tr>
+<tr class="memdesc:a694d53fdd5d1ac9455858e48537af3d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to trim an alignment based on the similarity distribution values.  <a href="#a694d53fdd5d1ac9455858e48537af3d0">More...</a><br /></td></tr>
 <tr class="separator:a694d53fdd5d1ac9455858e48537af3d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ac5ba504932526d77575365557a4d64"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a1ac5ba504932526d77575365557a4d64">clean</a> (float baseLine, float GapsPct, float conservationPct, bool complementary)</td></tr>
-<tr class="memdesc:a1ac5ba504932526d77575365557a4d64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to clean an alignment based on the similarity and gaps distribution values.<br />
+<tr class="memdesc:a1ac5ba504932526d77575365557a4d64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to trim an alignment based on the similarity and gaps distribution values.<br />
 .  <a href="#a1ac5ba504932526d77575365557a4d64">More...</a><br /></td></tr>
 <tr class="separator:a1ac5ba504932526d77575365557a4d64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2328fe8c189e2827b46e5dfb8e3deb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#ae2328fe8c189e2827b46e5dfb8e3deb3">cleanCompareFile</a> (float cutpoint, float baseLine, float *vectValues, bool complementary)</td></tr>
-<tr class="memdesc:ae2328fe8c189e2827b46e5dfb8e3deb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to clean an alignment based on consistency values obtained from a dataset of alignments.<br />
-The function computes the optimal paremeter combination values to trim an alignment based on the consistency value from the comparison among a dataset of alignments with the same sequences.  <a href="#ae2328fe8c189e2827b46e5dfb8e3deb3">More...</a><br /></td></tr>
+<tr class="memdesc:ae2328fe8c189e2827b46e5dfb8e3deb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to trim an alignment based on consistency values obtained from a dataset of alignments.<br />
+ The function computes the optimal parameter combination values to trim an alignment based on the consistency value from the comparison among a dataset of alignments with the same sequences.  <a href="#ae2328fe8c189e2827b46e5dfb8e3deb3">More...</a><br /></td></tr>
 <tr class="separator:ae2328fe8c189e2827b46e5dfb8e3deb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2db8eacfbe545c68fc287c43309e439"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#ab2db8eacfbe545c68fc287c43309e439">calculateSpuriousVector</a> (float overlap, float *spuriousVector)</td></tr>
-<tr class="memdesc:ab2db8eacfbe545c68fc287c43309e439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to compute the overlap for each sequence given a overlap value.<br />
-This overlap sets the minimum fraction that has to be a position for the selected sequence to count as a hit.<br />
-This proportion measures how much a position is similar (in terms of residues, indetermination and gaps) in comparison with the element on it's columns.  <a href="#ab2db8eacfbe545c68fc287c43309e439">More...</a><br /></td></tr>
+<tr class="memdesc:ab2db8eacfbe545c68fc287c43309e439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to compute the overlap values.<br />
+ See <a class="el" href="classnew_alignment.html#aee3815b0ff8076b8929e4128414ef320" title="Matrix that stores the overlap between sequences of an alignment. See newAlignment::calculateSeqOverl...">newAlignment::overlaps</a>.  <a href="#ab2db8eacfbe545c68fc287c43309e439">More...</a><br /></td></tr>
 <tr class="separator:ab2db8eacfbe545c68fc287c43309e439"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a095db8160a11a792a3feade870a24fd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a095db8160a11a792a3feade870a24fd7">cleanSpuriousSeq</a> (float overlapColumn, float minimumOverlap, bool complementary)</td></tr>
 <tr class="memdesc:a095db8160a11a792a3feade870a24fd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to remove sequences missaligned with the rest of sequences in the alignment.<br />
-For each residue in the sequence, it tests it's similarity. If the similarity of that residue is higher than overlapColumn value, it counts as a hit for the sequence.<br />
+ For each residue in the sequence, it tests it's similarity. If the similarity of that residue is higher than overlapColumn value, it counts as a hit for the sequence.<br />
 After calculating the number of hits for the sequence, it removes the sequence if it has a proportion hits/residues lower tan minimumOverlap.  <a href="#a095db8160a11a792a3feade870a24fd7">More...</a><br /></td></tr>
 <tr class="separator:a095db8160a11a792a3feade870a24fd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ea9656823727f9ec237c82f9fb529cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a1ea9656823727f9ec237c82f9fb529cf">clean2ndSlope</a> (bool complementary)</td></tr>
@@ -191,16 +191,16 @@ This method is specially useful when we remove missaligned sequences from a give
 <tr class="memdesc:a991bf55a7d36b305d67d639ebf028348"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to select the most representative sequence (the longest one) for each cluster from the input alignment to generate a new alignment.  <a href="#a991bf55a7d36b305d67d639ebf028348">More...</a><br /></td></tr>
 <tr class="separator:a991bf55a7d36b305d67d639ebf028348"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60955e2ae3faa3ccf84780a52fb1a08a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a60955e2ae3faa3ccf84780a52fb1a08a">getCutPointClusters</a> (int clusterNumber)</td></tr>
-<tr class="memdesc:a60955e2ae3faa3ccf84780a52fb1a08a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that calculates the optimat cut point for a given clusters number.<br />
-The idea is to obtain a cutpoint that can be used to obtain a number of representative sequences similar to clusterNumber.  <a href="#a60955e2ae3faa3ccf84780a52fb1a08a">More...</a><br /></td></tr>
+<tr class="memdesc:a60955e2ae3faa3ccf84780a52fb1a08a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that calculates the optimal cut point for a given clusters number.<br />
+ The idea is to obtain a cutpoint that can be used to obtain as sequences as clusterNumber.  <a href="#a60955e2ae3faa3ccf84780a52fb1a08a">More...</a><br /></td></tr>
 <tr class="separator:a60955e2ae3faa3ccf84780a52fb1a08a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afed3e14dcf00a5a24fb0abadd6682469"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#afed3e14dcf00a5a24fb0abadd6682469">removeSmallerBlocks</a> (int <a class="el" href="class_cleaner.html#a62ae61b54482fab8050fe34ef6b0b0a4">blockSize</a>)</td></tr>
-<tr class="memdesc:afed3e14dcf00a5a24fb0abadd6682469"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to remove column blocks smaller than a given size.  <a href="#afed3e14dcf00a5a24fb0abadd6682469">More...</a><br /></td></tr>
-<tr class="separator:afed3e14dcf00a5a24fb0abadd6682469"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a033da9ea63774f43f4c7aff04f23da81"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a033da9ea63774f43f4c7aff04f23da81">removeOnlyTerminal</a> (void)</td></tr>
-<tr class="memdesc:a033da9ea63774f43f4c7aff04f23da81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to detect right and left borders. Borders are the first column found with no gaps.<br />
-Everything between the borders are kept in the trimmed alignments.  <a href="#a033da9ea63774f43f4c7aff04f23da81">More...</a><br /></td></tr>
-<tr class="separator:a033da9ea63774f43f4c7aff04f23da81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6d263df982b8e0a605f49e52a5a48d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#ae6d263df982b8e0a605f49e52a5a48d9">removeSmallerBlocks</a> (int <a class="el" href="class_cleaner.html#a62ae61b54482fab8050fe34ef6b0b0a4">blockSize</a>, <a class="el" href="classnew_alignment.html">newAlignment</a> &amp;original)</td></tr>
+<tr class="memdesc:ae6d263df982b8e0a605f49e52a5a48d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to remove column blocks smaller than a given size.  <a href="#ae6d263df982b8e0a605f49e52a5a48d9">More...</a><br /></td></tr>
+<tr class="separator:ae6d263df982b8e0a605f49e52a5a48d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7f5b746b97697181f4cd06063cbb49a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#ab7f5b746b97697181f4cd06063cbb49a">removeOnlyTerminal</a> ()</td></tr>
+<tr class="memdesc:ab7f5b746b97697181f4cd06063cbb49a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to detect right and left borders. Borders are the first column found with no gaps.<br />
+Everything between the borders are kept in the trimmed alignments.  <a href="#ab7f5b746b97697181f4cd06063cbb49a">More...</a><br /></td></tr>
+<tr class="separator:ab7f5b746b97697181f4cd06063cbb49a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada8ad076dd037f00ae3f4fd17762641f"><td class="memItemLeft" align="right" valign="top"><a id="ada8ad076dd037f00ae3f4fd17762641f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f">removeAllGapsSeqsAndCols</a> (bool seqs=true, bool cols=true)</td></tr>
 <tr class="memdesc:ada8ad076dd037f00ae3f4fd17762641f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that identifies and removes columns and sequences composed only by gaps. <br /></td></tr>
@@ -211,21 +211,22 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a60e7c96314e666c4ab8cade7c10341a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a60e7c96314e666c4ab8cade7c10341a3">setBoundaries</a> (int *boundaries)</td></tr>
 <tr class="memdesc:a60e7c96314e666c4ab8cade7c10341a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boundaries setter.  <a href="#a60e7c96314e666c4ab8cade7c10341a3">More...</a><br /></td></tr>
 <tr class="separator:a60e7c96314e666c4ab8cade7c10341a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaad9f8e8f67eb419fc5aa905c86318e9"><td class="memItemLeft" align="right" valign="top"><a id="aaad9f8e8f67eb419fc5aa905c86318e9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#aaad9f8e8f67eb419fc5aa905c86318e9">calculateSeqIdentity</a> (void)</td></tr>
-<tr class="memdesc:aaad9f8e8f67eb419fc5aa905c86318e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to calculate identities between the sequences from the alignment. <br /></td></tr>
-<tr class="separator:aaad9f8e8f67eb419fc5aa905c86318e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a802f477200826b833ef14f1e9ea4f1ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a802f477200826b833ef14f1e9ea4f1ae">calculateRelaxedSeqIdentity</a> (void)</td></tr>
-<tr class="memdesc:a802f477200826b833ef14f1e9ea4f1ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that makes a raw approximation of sequence identity computation.<br />
-.  <a href="#a802f477200826b833ef14f1e9ea4f1ae">More...</a><br /></td></tr>
-<tr class="separator:a802f477200826b833ef14f1e9ea4f1ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65d829578be97c192561a129435b3c58"><td class="memItemLeft" align="right" valign="top"><a id="a65d829578be97c192561a129435b3c58"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a65d829578be97c192561a129435b3c58">calculateSeqIdentity</a> ()</td></tr>
+<tr class="memdesc:a65d829578be97c192561a129435b3c58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to calculate identities between the sequences from the alignment.<br />
+See <a class="el" href="classnew_alignment.html#a792877eafe085fe6aa5b267901fe5be9" title="2D Matrix that represents how much each sequence resembles other sequences in the same MSA ...">newAlignment::identities</a>. <br /></td></tr>
+<tr class="separator:a65d829578be97c192561a129435b3c58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a4ba3fd7351c908cbb44d5381b5320e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a5a4ba3fd7351c908cbb44d5381b5320e">calculateRelaxedSeqIdentity</a> ()</td></tr>
+<tr class="memdesc:a5a4ba3fd7351c908cbb44d5381b5320e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that makes a raw approximation of sequence identity computation.<br />
+.  <a href="#a5a4ba3fd7351c908cbb44d5381b5320e">More...</a><br /></td></tr>
+<tr class="separator:a5a4ba3fd7351c908cbb44d5381b5320e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a631cf3e2e55c00a995f0f4a51bfe7a2d"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a631cf3e2e55c00a995f0f4a51bfe7a2d">calculateRepresentativeSeq</a> (float maximumIdent)</td></tr>
-<tr class="memdesc:a631cf3e2e55c00a995f0f4a51bfe7a2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to asign sequences to clusters.<br />
-Clusters are calculated following this schema:  <a href="#a631cf3e2e55c00a995f0f4a51bfe7a2d">More...</a><br /></td></tr>
+<tr class="memdesc:a631cf3e2e55c00a995f0f4a51bfe7a2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to assign sequences to clusters.<br />
+Clusters are calculated following this flow:  <a href="#a631cf3e2e55c00a995f0f4a51bfe7a2d">More...</a><br /></td></tr>
 <tr class="separator:a631cf3e2e55c00a995f0f4a51bfe7a2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24bd28e4191afc9471adff329bee1466"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a24bd28e4191afc9471adff329bee1466">computeComplementaryAlig</a> (bool residues, bool sequences)</td></tr>
 <tr class="memdesc:a24bd28e4191afc9471adff329bee1466"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for computing the complementary alignment.<br />
-Complementary Alignment is an alignment containing all sequences and columns that the original alignment would reject.<br />
+ Complementary alignment is an alignment containing all sequences and columns that the original alignment would reject.<br />
 It inverses the saveResidues / saveSequences tags.  <a href="#a24bd28e4191afc9471adff329bee1466">More...</a><br /></td></tr>
 <tr class="separator:a24bd28e4191afc9471adff329bee1466"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -233,7 +234,7 @@ It inverses the saveResidues / saveSequences tags.  <a href="#a24bd28e4191afc947
 Public Attributes</h2></td></tr>
 <tr class="memitem:afb01eec0519abc849aee82743827b9c4"><td class="memItemLeft" align="right" valign="top"><a id="afb01eec0519abc849aee82743827b9c4"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#afb01eec0519abc849aee82743827b9c4">terminalGapOnly</a></td></tr>
-<tr class="memdesc:afb01eec0519abc849aee82743827b9c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag for making only trimming on the terminal positions. <br /></td></tr>
+<tr class="memdesc:afb01eec0519abc849aee82743827b9c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag for trimming only on the terminal positions. <br /></td></tr>
 <tr class="separator:afb01eec0519abc849aee82743827b9c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ce7358a90df6a6be326b5a88de8b909"><td class="memItemLeft" align="right" valign="top"><a id="a8ce7358a90df6a6be326b5a88de8b909"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a8ce7358a90df6a6be326b5a88de8b909">keepSequences</a></td></tr>
@@ -256,11 +257,11 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a883ce9ca6a2883ebe161d02ea7814342"><td class="memItemLeft" align="right" valign="top"><a id="a883ce9ca6a2883ebe161d02ea7814342"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a883ce9ca6a2883ebe161d02ea7814342">Cleaner</a> (<a class="el" href="classnew_alignment.html">newAlignment</a> *parent)</td></tr>
-<tr class="memdesc:a883ce9ca6a2883ebe161d02ea7814342"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class Constructor - Called by <a class="el" href="classnew_alignment.html" title="Class containing an alignment  This class stores the alignment sequences with it&#39;s names...">newAlignment</a>. <br /></td></tr>
+<tr class="memdesc:a883ce9ca6a2883ebe161d02ea7814342"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class Constructor - Called by <a class="el" href="classnew_alignment.html">newAlignment</a>. <br /></td></tr>
 <tr class="separator:a883ce9ca6a2883ebe161d02ea7814342"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a443bbf27dcf441e06a6c3c0381397210"><td class="memItemLeft" align="right" valign="top"><a id="a443bbf27dcf441e06a6c3c0381397210"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a443bbf27dcf441e06a6c3c0381397210">Cleaner</a> (<a class="el" href="classnew_alignment.html">newAlignment</a> *parent, <a class="el" href="class_cleaner.html">Cleaner</a> *mold)</td></tr>
-<tr class="memdesc:a443bbf27dcf441e06a6c3c0381397210"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy Constructor - Called by <a class="el" href="classnew_alignment.html" title="Class containing an alignment  This class stores the alignment sequences with it&#39;s names...">newAlignment</a>. <br /></td></tr>
+<tr class="memdesc:a443bbf27dcf441e06a6c3c0381397210"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy Constructor - Called by <a class="el" href="classnew_alignment.html">newAlignment</a>. <br /></td></tr>
 <tr class="separator:a443bbf27dcf441e06a6c3c0381397210"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -277,15 +278,18 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>newAlignment</b></td
 <tr class="separator:a5d1b8a218a949b92c9ba5229570b3512"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Subclass contained by the alignment object to make cleaning operations on it. </p>
+<div class="textblock"><p>Submodule contained by <a class="el" href="classnew_alignment.html">newAlignment </a>. </p>
 <dl class="section user"><dt>Complementary parameter</dt><dd>All cleaning methods contains a boolean flag called<b> 'complementary' </b>.<br />
  If set to<em> true</em>, the function will return a new alignment that contains the sequences and residues that method would<em> reject</em>.<br />
- Otherwise it returns the cleaned version of the original alignment this object belongs to. </dd></dl>
+ Otherwise it returns the cleaned version of the original alignment this object belongs to. <br />
+<br />
+ The use of this flag - complementary - is <b>not recommended.</b><br />
+ Complementarity is now performed when ALL methods have been applied. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00015">15</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00024">24</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a802f477200826b833ef14f1e9ea4f1ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a802f477200826b833ef14f1e9ea4f1ae">&#9670;&nbsp;</a></span>calculateRelaxedSeqIdentity()</h2>
+<a id="a5a4ba3fd7351c908cbb44d5381b5320e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a4ba3fd7351c908cbb44d5381b5320e">&#9670;&nbsp;</a></span>calculateRelaxedSeqIdentity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -293,7 +297,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>newAlignment</b></td
         <tr>
           <td class="memname">void Cleaner::calculateRelaxedSeqIdentity </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -302,9 +305,10 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>newAlignment</b></td
 
 <p>Method that makes a raw approximation of sequence identity computation.<br />
 . </p>
+<dl class="section warning"><dt>Warning</dt><dd>Not In Use </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Designed for reducing comparisons for huge alignments. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01493">1493</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01464">1464</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
 </div>
 </div>
@@ -324,8 +328,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>newAlignment</b></td
       </table>
 </div><div class="memdoc">
 
-<p>Method to asign sequences to clusters.<br />
-Clusters are calculated following this schema: </p>
+<p>Method to assign sequences to clusters.<br />
+Clusters are calculated following this flow: </p>
 <ul>
 <li>Select the longest sequence and use it as representative of the first cluster.<br />
 </li>
@@ -344,16 +348,18 @@ The first item in the vector contains it's size. </dd></dl>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01533">1533</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01506">1506</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a631cf3e2e55c00a995f0f4a51bfe7a2d_cgraph.svg" width="624" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a631cf3e2e55c00a995f0f4a51bfe7a2d_cgraph.svg" width="980" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a631cf3e2e55c00a995f0f4a51bfe7a2d_icgraph.svg" width="450" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a631cf3e2e55c00a995f0f4a51bfe7a2d_icgraph.svg" width="1111" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -384,25 +390,30 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Method to compute the overlap for each sequence given a overlap value.<br />
-This overlap sets the minimum fraction that has to be a position for the selected sequence to count as a hit.<br />
-This proportion measures how much a position is similar (in terms of residues, indetermination and gaps) in comparison with the element on it's columns. </p>
+<p>Method to compute the overlap values.<br />
+ See <a class="el" href="classnew_alignment.html#aee3815b0ff8076b8929e4128414ef320" title="Matrix that stores the overlap between sequences of an alignment. See newAlignment::calculateSeqOverl...">newAlignment::overlaps</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir"></td><td class="paramname">overlap</td><td>Overlap value to keep a residue. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">overlap</td><td>Overlap threshold. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">spuriousVector</td><td>Pointer to the spuriousVector to fill. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><b> True </b> if the calculation went ok.<br />
-<b> False </b> otherwise.<br />
+ <b> False </b> otherwise.<br />
 This should happen only if you pass a null pointer instead of a spuriousVector. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00893">893</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00842">842</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ab2db8eacfbe545c68fc287c43309e439_cgraph.svg" width="679" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ab2db8eacfbe545c68fc287c43309e439_icgraph.svg" width="418" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ab2db8eacfbe545c68fc287c43309e439_icgraph.svg" width="1079" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -445,25 +456,32 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Method to clean an alignment based on the similarity and gaps distribution values.<br />
+<p>Method to trim an alignment based on the similarity and gaps distribution values.<br />
 . </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">baseLine</td><td>Minimim percentage of columns to conserve in the new alignment. </td></tr>
+    <tr><td class="paramname">baseLine</td><td>Minimum percentage of columns to conserve in the new alignment. </td></tr>
     <tr><td class="paramname">GapsPct</td><td>Maximum percentage of gaps per column. </td></tr>
     <tr><td class="paramname">conservationPct</td><td>Minimum value of similarity per column to keep the column. </td></tr>
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section user"><dt>Take in mind</dt><dd>If baseLine is too strict, the other two will be relaxed to obtain the minimum percentage desired. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00836">836</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00771">771</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a1ac5ba504932526d77575365557a4d64_cgraph.svg" width="831" height="307"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a1ac5ba504932526d77575365557a4d64_cgraph.svg" width="1736" height="288"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a1ac5ba504932526d77575365557a4d64_icgraph.svg" width="768" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -490,28 +508,98 @@ Then, it compares groups of three consecutive residues, searching for the group 
 When found, the first residue is taken as the cutpoint for the sequences. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00985">985</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00944">944</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a1ea9656823727f9ec237c82f9fb529cf_cgraph.svg" width="884" height="307"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a1ea9656823727f9ec237c82f9fb529cf_cgraph.svg" width="848" height="206"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
 </div>
-<a id="ad075f0ef730c8023cf8a0e35e7e1e53a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad075f0ef730c8023cf8a0e35e7e1e53a">&#9670;&nbsp;</a></span>cleanByCutValue() <span class="overload">[1/3]</span></h2>
+<a id="aa85792ad5a7c3209509a689fb0410e92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa85792ad5a7c3209509a689fb0410e92">&#9670;&nbsp;</a></span>cleanByCutValueFallBehind()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classnew_alignment.html">newAlignment</a> * Cleaner::cleanByCutValue </td>
+          <td class="memname"><a class="el" href="classnew_alignment.html">newAlignment</a> * Cleaner::cleanByCutValueFallBehind </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>cut</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>baseLine</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float *&#160;</td>
+          <td class="paramname"><em>ValueVect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>complementary</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method to clean an alignment. <br />
+It removes sequences that<b> fall behind </b>a certain threshold. <br />
+The function detects if it would clean too many sequences, and relaxes the threshold until we have enough sequences to achieve the given percentage desired to keep. <br />
+To achieve this, the method starts in the middle of the sequence and, alternating sides, adds column one by one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cut</td><td>Gap cut value to use. </td></tr>
+    <tr><td class="paramname">baseLine</td><td>Percent of sequences to keep </td></tr>
+    <tr><td class="paramname">ValueVect</td><td>Vector that contains the gaps present on each column. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00211">211</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_aa85792ad5a7c3209509a689fb0410e92_cgraph.svg" width="640" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_aa85792ad5a7c3209509a689fb0410e92_icgraph.svg" width="1068" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a66bda5807c06cfaf1609e4c1f5955671"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66bda5807c06cfaf1609e4c1f5955671">&#9670;&nbsp;</a></span>cleanByCutValueOverpass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classnew_alignment.html">newAlignment</a> * Cleaner::cleanByCutValueOverpass </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>cut</em>, </td>
@@ -552,96 +640,36 @@ To achieve this, the method starts in the middle of the sequence and, alternatin
     <tr><td class="paramname">cut</td><td>Cut value to use. If a column has a value lower or equal to the cut value, it is removed. </td></tr>
     <tr><td class="paramname">baseLine</td><td>Percent of sequences to keep </td></tr>
     <tr><td class="paramname">gInCol</td><td>Vector that contains the values that will be tested for each column. </td></tr>
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00062">62</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00070">70</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ad075f0ef730c8023cf8a0e35e7e1e53a_cgraph.svg" width="676" height="307"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a66bda5807c06cfaf1609e4c1f5955671_cgraph.svg" width="640" height="206"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ad075f0ef730c8023cf8a0e35e7e1e53a_icgraph.svg" width="418" height="291"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a66bda5807c06cfaf1609e4c1f5955671_icgraph.svg" width="1066" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
 </div>
-<a id="a883d8411a37ef23acb145e2c60ba0351"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a883d8411a37ef23acb145e2c60ba0351">&#9670;&nbsp;</a></span>cleanByCutValue() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classnew_alignment.html">newAlignment</a> * Cleaner::cleanByCutValue </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>cut</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>baseLine</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const float *&#160;</td>
-          <td class="paramname"><em>ValueVect</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>complementary</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Method to clean an alignment. <br />
-It removes sequences that<b> fall behind </b>a certain threshold. <br />
-The function detects if it would clean too many sequences, and relaxes the threshold until we have enough sequences to achieve the given percentage desired to keep. <br />
-To achieve this, the method starts in the middle of the sequence and, alternating sides, adds column one by one. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cut</td><td>Gap cut value to use. </td></tr>
-    <tr><td class="paramname">baseLine</td><td>Percent of sequences to keep </td></tr>
-    <tr><td class="paramname">ValueVect</td><td>Vector that contains the gaps present on each column. </td></tr>
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00241">241</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a883d8411a37ef23acb145e2c60ba0351_cgraph.svg" width="676" height="206"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="a76c152a67f0116be5cfd6001673a6b1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76c152a67f0116be5cfd6001673a6b1c">&#9670;&nbsp;</a></span>cleanByCutValue() <span class="overload">[3/3]</span></h2>
+<a id="ae7ad16bc3ad459a12c908801fa20da66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7ad16bc3ad459a12c908801fa20da66">&#9670;&nbsp;</a></span>cleanByCutValueOverpassOrEquals()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classnew_alignment.html">newAlignment</a> * Cleaner::cleanByCutValue </td>
+          <td class="memname"><a class="el" href="classnew_alignment.html">newAlignment</a> * Cleaner::cleanByCutValueOverpassOrEquals </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>cutGaps</em>, </td>
@@ -694,18 +722,25 @@ To achieve this, the method starts in the middle of the sequence and, alternatin
     <tr><td class="paramname">baseLine</td><td>Percent of sequences to keep </td></tr>
     <tr><td class="paramname">gInCol</td><td>Vector that contains the gaps present on each column. </td></tr>
     <tr><td class="paramname">MDK_Win</td><td>Vector that contains similarity value for each column. </td></tr>
-    <tr><td class="paramname">cutCons</td><td>Minium convervation value to keep a column in the alignment. </td></tr>
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
+    <tr><td class="paramname">cutCons</td><td>Minimum conservation value to keep a column in the alignment. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00388">388</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00337">337</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a76c152a67f0116be5cfd6001673a6b1c_cgraph.svg" width="676" height="307"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ae7ad16bc3ad459a12c908801fa20da66_cgraph.svg" width="640" height="206"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ae7ad16bc3ad459a12c908801fa20da66_icgraph.svg" width="992" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -743,8 +778,8 @@ The method: </p>
 <li>Computes similarity values and similarity cut point of the alignment.</li>
 <li>Calls the cleanStrict method with these values and returns its output. <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
-    <tr><td class="paramname">variable</td><td>Wheter to use a variable block length. If false, block will be size 5. Else, it will use 1% of the alignment length, with a minimum of 3 and maximum of 12. This value will be overwritten if blockSize (of this object) is bigger than 0. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
+    <tr><td class="paramname">variable</td><td>Whether to use a variable block length. If false, block will be size 5. Else, it will use 1% of the alignment length, with a minimum of 3 and maximum of 12. This value will be overwritten if blockSize (of this object) is bigger than 0. </td></tr>
   </table>
   </dd>
 </dl>
@@ -752,11 +787,12 @@ The method: </p>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01005">1005</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00967">967</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a068b219f913adba5c917a231cff7e437_cgraph.svg" width="876" height="282"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a068b219f913adba5c917a231cff7e437_cgraph.svg" width="1566" height="323"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -799,24 +835,31 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Method to clean an alignment based on consistency values obtained from a dataset of alignments.<br />
-The function computes the optimal paremeter combination values to trim an alignment based on the consistency value from the comparison among a dataset of alignments with the same sequences. </p>
+<p>Method to trim an alignment based on consistency values obtained from a dataset of alignments.<br />
+ The function computes the optimal parameter combination values to trim an alignment based on the consistency value from the comparison among a dataset of alignments with the same sequences. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cutpoint</td><td>Hint of Gap cut point. May be used if it's lower than the minimum percentage threshold. </td></tr>
-    <tr><td class="paramname">baseLine</td><td>Minimim percentage of columns to conserve in the new alignment. </td></tr>
+    <tr><td class="paramname">baseLine</td><td>Minimum percentage of columns to conserve in the new alignment. </td></tr>
     <tr><td class="paramname">vectValues</td><td>Vector with alignment consistency values </td></tr>
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00864">864</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00807">807</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ae2328fe8c189e2827b46e5dfb8e3deb3_cgraph.svg" width="904" height="307"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ae2328fe8c189e2827b46e5dfb8e3deb3_cgraph.svg" width="868" height="264"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ae2328fe8c189e2827b46e5dfb8e3deb3_icgraph.svg" width="842" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -853,22 +896,29 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Method to clean an alignment based on the similarity distribution values. </p>
+<p>Method to trim an alignment based on the similarity distribution values. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">baseLine</td><td>Minimim percentage of columns to conserve in the new alignment. </td></tr>
+    <tr><td class="paramname">baseLine</td><td>Minimum percentage of columns to conserve in the new alignment. </td></tr>
     <tr><td class="paramname">conservationPct</td><td>Minimum value of similarity per column to keep the column. </td></tr>
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00815">815</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00747">747</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a694d53fdd5d1ac9455858e48537af3d0_cgraph.svg" width="907" height="307"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a694d53fdd5d1ac9455858e48537af3d0_cgraph.svg" width="1812" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a694d53fdd5d1ac9455858e48537af3d0_icgraph.svg" width="844" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -905,22 +955,29 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Method to clean an alignment based on the gap distribution values. Column blocks that don't have a minimum size set by the method itself, will be removed too. </p>
+<p>Method to trim an alignment based on the gap distribution values. Column blocks that don't have a minimum size set by the method itself, will be removed too. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">baseLine</td><td>Minimim percentage of columns to conserve in the new alignment. </td></tr>
+    <tr><td class="paramname">baseLine</td><td>Minimum percentage of columns to conserve in the new alignment. </td></tr>
     <tr><td class="paramname">gapsPct</td><td>Maximum percentage of gaps per column. </td></tr>
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00792">792</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00723">723</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ac3be9d53018d9146d6dc6cf7ff89f96d_cgraph.svg" width="862" height="307"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ac3be9d53018d9146d6dc6cf7ff89f96d_cgraph.svg" width="826" height="206"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ac3be9d53018d9146d6dc6cf7ff89f96d_icgraph.svg" width="799" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -945,17 +1002,24 @@ Here is the call graph for this function:</div>
 This method is specially useful when we remove missaligned sequences from a given alignment. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. <br />
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. <br />
  Although this method contains a complementary flag, setting this up would return an alignment full of gaps-only columns. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01077">1077</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01036">1036</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a08e6db52c33baccce53a33d844597d7b_cgraph.svg" width="894" height="307"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a08e6db52c33baccce53a33d844597d7b_cgraph.svg" width="858" height="206"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a08e6db52c33baccce53a33d844597d7b_icgraph.svg" width="842" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -992,29 +1056,31 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Method to clean sequences based on a minimum overlap threshold.<br />
-The method selects a combination of parameters to maximize the final number of columns in the new alignment.<br />
+<p>Method to trim an alignment based on a minimum sequence overlap threshold.<br />
+ The method selects a combination of parameters to maximize the final number of columns in the new alignment.<br />
 . </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">minimumOverlap</td><td>Min overlap to keep a sequence. </td></tr>
     <tr><td class="paramname">overlapSeq</td><td>Vector containing the overlap for each column. </td></tr>
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00769">769</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00701">701</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a74d3049d4997da5e7c6c51cb19b540e8_cgraph.svg" width="675" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a74d3049d4997da5e7c6c51cb19b540e8_cgraph.svg" width="631" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a74d3049d4997da5e7c6c51cb19b540e8_icgraph.svg" width="414" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a74d3049d4997da5e7c6c51cb19b540e8_icgraph.svg" width="1075" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1052,23 +1118,30 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Method to remove sequences missaligned with the rest of sequences in the alignment.<br />
-For each residue in the sequence, it tests it's similarity. If the similarity of that residue is higher than overlapColumn value, it counts as a hit for the sequence.<br />
+ For each residue in the sequence, it tests it's similarity. If the similarity of that residue is higher than overlapColumn value, it counts as a hit for the sequence.<br />
 After calculating the number of hits for the sequence, it removes the sequence if it has a proportion hits/residues lower tan minimumOverlap. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">overlapColumn</td><td>Minimum similarity value that a residue needs to be considered a hit. </td></tr>
     <tr><td class="paramname">minimumOverlap</td><td>Minimum proportion of hits that a sequence needs to be kept in the new alignment. </td></tr>
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. \ </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00965">965</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00921">921</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a095db8160a11a792a3feade870a24fd7_cgraph.svg" width="907" height="140"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a095db8160a11a792a3feade870a24fd7_cgraph.svg" width="907" height="111"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a095db8160a11a792a3feade870a24fd7_icgraph.svg" width="852" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1124,32 +1197,34 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Method to clean an alignment. It carries out strict and strictplus.<br />
-It removes sequences that<b> overpass </b>the gap threshold but<b> fall behind </b>the similarity threshold. <br />
+It removes sequences that<b> overpass </b>the gap threshold but <b> fall behind </b>the similarity threshold. <br />
 The function recovers those columns that, by themselves would be rejected, but it's neighbours (3 of 4) don't.<br />
 Column blocks that don't have a minimum size set by the method itself, will be removed too. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">gapCut</td><td>Gap cut value to use. </td></tr>
     <tr><td class="paramname">gInCol</td><td>Vector that contains the gaps present on each column. </td></tr>
-    <tr><td class="paramname">simCut</td><td>Minimim similarity value to keep a column. </td></tr>
+    <tr><td class="paramname">simCut</td><td>Minimum similarity value to keep a column. </td></tr>
     <tr><td class="paramname">MDK_W</td><td>Vector that contains the similarity of each column. </td></tr>
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
-    <tr><td class="paramname">variable</td><td>Wheter to use a variable block length. If false, block will be size 5. Else, it will use 1% of the alignment length, with a minimum of 3 and maximum of 12. This value will be overwritten if blockSize (of this object) is bigger than 0. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
+    <tr><td class="paramname">variable</td><td>Whether to use a variable block length. If false, block will be size 5. Else, it will use 1% of the alignment length, with a minimum of 3 and maximum of 12. This value will be overwritten if blockSize (of this object) is bigger than 0. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00554">554</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00501">501</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a740bce047dce09be0f6bd1da9f826da3_cgraph.svg" width="638" height="206"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a740bce047dce09be0f6bd1da9f826da3_cgraph.svg" width="594" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a740bce047dce09be0f6bd1da9f826da3_icgraph.svg" width="387" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a740bce047dce09be0f6bd1da9f826da3_icgraph.svg" width="387" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1181,21 +1256,22 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Method for computing the complementary alignment.<br />
-Complementary Alignment is an alignment containing all sequences and columns that the original alignment would reject.<br />
+ Complementary alignment is an alignment containing all sequences and columns that the original alignment would reject.<br />
 It inverses the saveResidues / saveSequences tags. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">residues</td><td>Wheter to reverse resiudes tags. </td></tr>
-    <tr><td class="paramname">sequences</td><td>Wheter to reverse sequences tags. </td></tr>
+    <tr><td class="paramname">residues</td><td>Whether to reverse resiudes tags. </td></tr>
+    <tr><td class="paramname">sequences</td><td>Whether to reverse sequences tags. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01595">1595</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01570">1570</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a24bd28e4191afc9471adff329bee1466_icgraph.svg" width="719" height="494"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a24bd28e4191afc9471adff329bee1466_icgraph.svg" width="650" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1219,17 +1295,24 @@ Here is the caller graph for this function:</div>
 <p>Method to select the most representative sequence (the longest one) for each cluster from the input alignment to generate a new alignment. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">identityThreshold</td><td>Threshold used to asign sequences to clusters.<br />
-If identity between representative sequence of the cluster and sequence to asign is superior to this threshold and no other cluster has a better identity with its representative, it will be asigned to that cluster. </td></tr>
+    <tr><td class="paramname">identityThreshold</td><td>Threshold used to assign sequences to clusters.<br />
+ If identity between representative sequence of the cluster and sequence to assign is superior to this threshold and no other cluster has a better identity with its representative, it will be assigned to that cluster. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01231">1231</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01198">1198</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a991bf55a7d36b305d67d639ebf028348_cgraph.svg" width="824" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a991bf55a7d36b305d67d639ebf028348_cgraph.svg" width="1180" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a991bf55a7d36b305d67d639ebf028348_icgraph.svg" width="824" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1250,8 +1333,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Method that calculates the optimat cut point for a given clusters number.<br />
-The idea is to obtain a cutpoint that can be used to obtain a number of representative sequences similar to clusterNumber. </p>
+<p>Method that calculates the optimal cut point for a given clusters number.<br />
+ The idea is to obtain a cutpoint that can be used to obtain as sequences as clusterNumber. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">clusterNumber</td><td>Number of representative sequences to obtain. </td></tr>
@@ -1260,11 +1343,18 @@ The idea is to obtain a cutpoint that can be used to obtain a number of represen
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>CutPoint to obtain clusterNumber sequences. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01093">1093</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01055">1055</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a60955e2ae3faa3ccf84780a52fb1a08a_cgraph.svg" width="579" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a60955e2ae3faa3ccf84780a52fb1a08a_cgraph.svg" width="935" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a60955e2ae3faa3ccf84780a52fb1a08a_icgraph.svg" width="866" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1313,22 +1403,29 @@ Here is the call graph for this function:</div>
     <tr><td class="paramname">columns</td><td>Vector containing the columns to remove. </td></tr>
     <tr><td class="paramname">init</td><td>Where does the vector start. Set to 1 if the vector contains its size as first element. </td></tr>
     <tr><td class="paramname">size</td><td>Size of the columns vector. </td></tr>
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01259">1259</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01227">1227</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a3d1c1309bd1f0908ef8c8ef0415fb4cb_cgraph.svg" width="671" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a3d1c1309bd1f0908ef8c8ef0415fb4cb_cgraph.svg" width="648" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a3d1c1309bd1f0908ef8c8ef0415fb4cb_icgraph.svg" width="832" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
 </div>
-<a id="a033da9ea63774f43f4c7aff04f23da81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a033da9ea63774f43f4c7aff04f23da81">&#9670;&nbsp;</a></span>removeOnlyTerminal()</h2>
+<a id="ab7f5b746b97697181f4cd06063cbb49a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7f5b746b97697181f4cd06063cbb49a">&#9670;&nbsp;</a></span>removeOnlyTerminal()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1336,7 +1433,6 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">bool Cleaner::removeOnlyTerminal </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -1345,19 +1441,21 @@ Here is the call graph for this function:</div>
 
 <p>Method to detect right and left borders. Borders are the first column found with no gaps.<br />
 Everything between the borders are kept in the trimmed alignments. </p>
-<dl class="section return"><dt>Returns</dt><dd><b>True</b> if everything went ok.<br />
-<b> False </b>if it was not possible to calculate the gap stats. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><b>True</b> if everything went ok. <br />
+ <b> False </b>if it was not possible to calculate the gap stats. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01308">1308</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01271">1271</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a033da9ea63774f43f4c7aff04f23da81_cgraph.svg" width="408" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ab7f5b746b97697181f4cd06063cbb49a_cgraph.svg" width="470" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a033da9ea63774f43f4c7aff04f23da81_icgraph.svg" width="668" height="342"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ab7f5b746b97697181f4cd06063cbb49a_icgraph.svg" width="606" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1406,22 +1504,29 @@ Here is the caller graph for this function:</div>
     <tr><td class="paramname">seqs</td><td>Vector containing the sequences to remove. </td></tr>
     <tr><td class="paramname">init</td><td>Where does the vector start. Set to 1 if the vector contains its size as first element. </td></tr>
     <tr><td class="paramname">size</td><td>Size of the columns vector. </td></tr>
-    <tr><td class="paramname">complementary</td><td>Wheter or not to return the complementary version of the trimmed alignment. </td></tr>
+    <tr><td class="paramname">complementary</td><td>Whether or not to return the complementary version of the trimmed alignment. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01283">1283</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01250">1250</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_af27e657bf4874a21b26d9a8217c1e643_cgraph.svg" width="683" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_af27e657bf4874a21b26d9a8217c1e643_cgraph.svg" width="660" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_af27e657bf4874a21b26d9a8217c1e643_icgraph.svg" width="855" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
 </div>
-<a id="afed3e14dcf00a5a24fb0abadd6682469"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afed3e14dcf00a5a24fb0abadd6682469">&#9670;&nbsp;</a></span>removeSmallerBlocks()</h2>
+<a id="ae6d263df982b8e0a605f49e52a5a48d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6d263df982b8e0a605f49e52a5a48d9">&#9670;&nbsp;</a></span>removeSmallerBlocks()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1430,8 +1535,18 @@ Here is the call graph for this function:</div>
           <td class="memname">void Cleaner::removeSmallerBlocks </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>blockSize</em></td><td>)</td>
+          <td class="paramname"><em>blockSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classnew_alignment.html">newAlignment</a> &amp;&#160;</td>
+          <td class="paramname"><em>original</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1444,7 +1559,13 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01348">1348</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01314">1314</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ae6d263df982b8e0a605f49e52a5a48d9_icgraph.svg" width="1330" height="291"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -1465,14 +1586,15 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Boundaries setter. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Not In Use </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">boundaries</td><td>New values. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">boundaries</td><td>New boundaries values. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01223">1223</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01188">1188</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
 </div>
 </div>
@@ -1500,7 +1622,13 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01218">1218</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01181">1181</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a1f4cdd8e06a4c461534a694ffa4ec1a2_icgraph.svg" width="387" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>

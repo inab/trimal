@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
-<title>Trimal: statisticsConservation2 Class Reference</title>
+<title>trimAl: statisticsConservation2 Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
  <tbody>
  <tr style="height: 12px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Trimal
+   <div id="projectname">trimAl
    </div>
    <div id="projectbrief">A Multiple Alignment Sequence framework for Cleaning and Reformating.</div>
   </td>
@@ -93,6 +93,11 @@ $(document).ready(function(){initNavTree('classstatistics_conservation2.html',''
 <div class="title">statisticsConservation2 Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class to handle Conservation / Similarity statistics.  
+ <a href="classstatistics_conservation2.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="statistics_conservation2_8h_source.html">statisticsConservation2.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for statisticsConservation2:</div>
 <div class="dyncontent">
@@ -176,8 +181,9 @@ float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <tr class="separator:ae027e06cd7e17db2b51509339ac1722c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="statistics_conservation2_8h_source.html#l00049">49</a> of file <a class="el" href="statistics_conservation2_8h_source.html">statisticsConservation2.h</a>.</p>
+<div class="textblock"><p>Class to handle Conservation / Similarity statistics. </p>
+
+<p class="definition">Definition at line <a class="el" href="statistics_conservation2_8h_source.html#l00050">50</a> of file <a class="el" href="statistics_conservation2_8h_source.html">statisticsConservation2.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac77a3d807ad1e917c13238940d934fad"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac77a3d807ad1e917c13238940d934fad">&#9670;&nbsp;</a></span>applyWindow()</h2>
@@ -235,7 +241,7 @@ float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </div><div class="memdoc">
 
 <p>Computes and selects the cut point values based on conservation's values. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>This description seems a little vague. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>This description seems a little vague. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">baseLine</td><td>Percentage of columns desired. </td></tr>
@@ -244,7 +250,7 @@ float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="statistics_conservation2_8cpp_source.html#l00236">236</a> of file <a class="el" href="statistics_conservation2_8cpp_source.html">statisticsConservation2.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="statistics_conservation2_8cpp_source.html#l00237">237</a> of file <a class="el" href="statistics_conservation2_8cpp_source.html">statisticsConservation2.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -311,6 +317,11 @@ Here is the call graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>Conservation window vector. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="statistics_conservation2_8cpp_source.html#l00214">214</a> of file <a class="el" href="statistics_conservation2_8cpp_source.html">statisticsConservation2.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_conservation2_a7abe78ca55cc07c143be7c6ba4146bb0_cgraph.svg" width="376" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -334,6 +345,11 @@ Here is the call graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if a windows size has been defined.<b>False</b> otherwise. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="statistics_conservation2_8cpp_source.html#l00209">209</a> of file <a class="el" href="statistics_conservation2_8cpp_source.html">statisticsConservation2.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_conservation2_a8bf5e63eeff3461636ef64b40a1ca598_icgraph.svg" width="376" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -356,7 +372,7 @@ Here is the call graph for this function:</div>
 <p>Returns if a similarity matrix is being used or not. </p>
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if there is a similarity matrix set, <b>False</b> otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="statistics_conservation2_8cpp_source.html#l00231">231</a> of file <a class="el" href="statistics_conservation2_8cpp_source.html">statisticsConservation2.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="statistics_conservation2_8cpp_source.html#l00232">232</a> of file <a class="el" href="statistics_conservation2_8cpp_source.html">statisticsConservation2.cpp</a>.</p>
 
 </div>
 </div>
@@ -385,7 +401,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if sm is valid, <b>False</b> if it's null </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="statistics_conservation2_8cpp_source.html#l00219">219</a> of file <a class="el" href="statistics_conservation2_8cpp_source.html">statisticsConservation2.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="statistics_conservation2_8cpp_source.html#l00220">220</a> of file <a class="el" href="statistics_conservation2_8cpp_source.html">statisticsConservation2.cpp</a>.</p>
 
 </div>
 </div>

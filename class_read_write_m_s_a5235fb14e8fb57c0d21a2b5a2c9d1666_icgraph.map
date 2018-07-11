@@ -1,6 +1,5 @@
 <map id="ReadWriteMS::getFileFormatName" name="ReadWriteMS::getFileFormatName">
-<area shape="rect" id="node2" href="$classtrim_al_manager.html#a7cab8308b05c5921e61217f9c93fab27" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation..." alt="" coords="280,5,459,47"/>
-<area shape="rect" id="node5" href="$classtrim_al_manager.html#af7c3b97a17c2f5750f9481cc60c17616" title="Method to check if an output format has been given. If no output format has been given, it will use the inFile format. " alt="" coords="295,71,444,112"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="507,39,656,80"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="704,46,927,73"/>
+<area shape="rect" id="node2" href="$classtrim_al_manager.html#af7c3b97a17c2f5750f9481cc60c17616" title="Method to check if an output format has been given. If no output format has been given, it will use the inFile format. " alt="" coords="280,5,429,47"/>
+<area shape="rect" id="node3" href="$classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="477,5,627,47"/>
+<area shape="rect" id="node4" href="$classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="675,13,897,39"/>
 </map>

@@ -1,9 +1,6 @@
 <map id="ReadWriteMS::loadAlignment" name="ReadWriteMS::loadAlignment">
-<area shape="rect" id="node2" href="$classtrim_al_manager.html#ac594aa4b43e39df57eaa2ded49d7d9e1" title="Method to parse the input file argument. " alt="" coords="248,5,433,32"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#a28508aa820509b23c2f91634bc638082" title="Method to parse the force select argument. " alt="" coords="269,57,412,98"/>
-<area shape="rect" id="node5" href="$classtrim_al_manager.html#acf6ecf63ed1194adc345de441e2c1fec" title="Method to parse the backtranslation argument. " alt="" coords="269,122,412,163"/>
-<area shape="rect" id="node6" href="$classtrim_al_manager.html#a7cab8308b05c5921e61217f9c93fab27" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation..." alt="" coords="251,187,430,229"/>
+<area shape="rect" id="node2" href="$classtrim_al_manager.html#aa79dcf0006a8b31d27a15a33f64e14e8" title="Method to parse the input file argument. " alt="" coords="248,5,433,32"/>
+<area shape="rect" id="node4" href="$classtrim_al_manager.html#ae9cb92b21f85e72d58f80362374cfa4a" title="Method to parse the force select argument. " alt="" coords="269,57,412,98"/>
+<area shape="rect" id="node5" href="$classtrim_al_manager.html#a2d1aa7e2da1a826b04e55f35fa81e4ad" title="Method to parse the backtranslation argument. " alt="" coords="269,122,412,163"/>
 <area shape="rect" id="node3" href="$classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" title="Method to parse arguments into usable structure in trimal. " alt="" coords="481,64,691,91"/>
-<area shape="rect" id="node7" href="$classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="511,187,661,229"/>
-<area shape="rect" id="node8" href="$classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="739,195,961,221"/>
 </map>

@@ -1,10 +1,16 @@
 <map id="Cleaner" name="Cleaner">
-<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="605,315,709,342"/>
-<area shape="rect" id="node3" href="$classstatistics_gaps.html" title="statisticsGaps" alt="" coords="891,447,998,474"/>
-<area shape="rect" id="node5" href="$classsequences_matrix.html" title="sequencesMatrix" alt="" coords="884,170,1005,197"/>
-<area shape="rect" id="node9" href="$classstatistics_conservation2.html" title="statisticsConservation2" alt="" coords="865,746,1024,773"/>
-<area shape="rect" id="node14" href="$class_statistics_manager.html" title="StatisticsManager" alt="" coords="881,323,1008,350"/>
-<area shape="rect" id="node12" href="$classsimilarity_matrix.html" title="similarityMatrix" alt="" coords="601,766,712,793"/>
-<area shape="rect" id="node6" title="STL class. " alt="" coords="305,13,385,39"/>
-<area shape="rect" id="node7" title="STL class. " alt="" coords="5,5,132,47"/>
+<area shape="rect" id="node2" href="$classnew_alignment.html" title="Class containing an alignment &#160;This class stores the alignment sequences with it&#39;s names..." alt="" coords="757,575,861,601"/>
+<area shape="rect" id="node3" href="$classsequences_matrix.html" title="Class that represents a sequences matrix. " alt="" coords="867,680,989,707"/>
+<area shape="rect" id="node9" href="$class_statistics_manager.html" title="Class to handle the interaction with statistics and statistics objects. " alt="" coords="434,769,561,796"/>
+<area shape="rect" id="node10" href="$classstatistics_gaps.html" title="Class to handle Gaps statistics. " alt="" coords="291,680,397,707"/>
+<area shape="rect" id="node11" href="$classstatistics_conservation.html" title="Class to handle Conservation / Similarity statistics. " alt="" coords="421,680,573,707"/>
+<area shape="rect" id="node15" href="$classstatistics_consistency.html" title="Helper class to handle the comparison between alignments. It also handles Consistency staticstics..." alt="" coords="1386,680,1534,707"/>
+<area shape="rect" id="node14" href="$classsimilarity_matrix.html" title="Class that contains the similarity information of an alignment. " alt="" coords="213,575,323,601"/>
+<area shape="rect" id="node5" title="STL class. " alt="" coords="1333,336,1413,363"/>
+<area shape="rect" id="node6" title="STL class. " alt="" coords="1526,157,1653,199"/>
+<area shape="rect" id="node17" title="STL class. " alt="" coords="1695,575,1790,601"/>
+<area shape="rect" id="node18" title="STL class. " alt="" coords="1676,329,1809,370"/>
+<area shape="rect" id="node19" title="STL class. " alt="" coords="1678,157,1807,199"/>
+<area shape="rect" id="node20" title="STL class. " alt="" coords="1665,81,1820,108"/>
+<area shape="rect" id="node21" title="STL class. " alt="" coords="1693,5,1793,32"/>
 </map>

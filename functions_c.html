@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
-<title>Trimal: Class Members</title>
+<title>trimAl: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
  <tbody>
  <tr style="height: 12px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Trimal
+   <div id="projectname">trimAl
    </div>
    <div id="projectbrief">A Multiple Alignment Sequence framework for Cleaning and Reformating.</div>
   </td>
@@ -92,28 +92,33 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 : <a class="el" href="classtrim_al_manager.html#aeee16fd90a9e76a1f3d86aa99258ca5c">trimAlManager</a>
 </li>
 <li>calcCutPoint()
-: <a class="el" href="classstatistics_conservation2.html#ad97bc3a8ce5f68d2ef34c0bea685f874">statisticsConservation2</a>
+: <a class="el" href="classstatistics_conservation.html#aa11412e9db5babc6dc7b2b4c7c471ed6">statisticsConservation</a>
 </li>
 <li>calculateColIdentity()
 : <a class="el" href="classnew_alignment.html#ad916722e4ee892ee9f5cf85f0bdb80aa">newAlignment</a>
 </li>
 <li>calculateMatrixIdentity()
-: <a class="el" href="classstatistics_conservation2.html#aeaef2f53cd750c692795d663fdef866e">statisticsConservation2</a>
+: <a class="el" href="classstatistics_conservation.html#a9fe3502be02c8d6591a6de2d5f81c337">statisticsConservation</a>
 </li>
 <li>calculateRelaxedSeqIdentity()
-: <a class="el" href="class_cleaner.html#a802f477200826b833ef14f1e9ea4f1ae">Cleaner</a>
+: <a class="el" href="class_cleaner.html#a5a4ba3fd7351c908cbb44d5381b5320e">Cleaner</a>
+, <a class="el" href="classnew_alignment.html#adaeafc911344fc10069f40d9fc41303f">newAlignment</a>
 </li>
 <li>calculateRepresentativeSeq()
 : <a class="el" href="class_cleaner.html#a631cf3e2e55c00a995f0f4a51bfe7a2d">Cleaner</a>
 </li>
 <li>calculateSeqIdentity()
-: <a class="el" href="class_cleaner.html#aaad9f8e8f67eb419fc5aa905c86318e9">Cleaner</a>
+: <a class="el" href="class_cleaner.html#a65d829578be97c192561a129435b3c58">Cleaner</a>
+, <a class="el" href="classnew_alignment.html#aa9178bd574db2b6171c0bb09133bdb94">newAlignment</a>
+</li>
+<li>calculateSeqOverlap()
+: <a class="el" href="classnew_alignment.html#ae157ddd55e9f41d809fb664116619802">newAlignment</a>
 </li>
 <li>calculateSpuriousVector()
 : <a class="el" href="class_cleaner.html#ab2db8eacfbe545c68fc287c43309e439">Cleaner</a>
 </li>
 <li>calculateVectors()
-: <a class="el" href="classstatistics_conservation2.html#af9b347fdfff37c662d6336d9b3a01b4d">statisticsConservation2</a>
+: <a class="el" href="classstatistics_conservation.html#ada98c86595cb14a2e8bc058703aa8066">statisticsConservation</a>
 </li>
 <li>canLoad
 : <a class="el" href="class_read_write_base_state.html#a1e7a2d74ee685f2c9c7a3fed03087354">ReadWriteBaseState</a>
@@ -169,8 +174,8 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 <li>check_combinations_among_thresholds_incompatibility()
 : <a class="el" href="classtrim_al_manager.html#aa96711af8011305f73b3caee46ae0fd8">trimAlManager</a>
 </li>
-<li>check_cw_argument()
-: <a class="el" href="classtrim_al_manager.html#ab6f9f8b433a4c6fedbb4c094ae9003c7">trimAlManager</a>
+<li>check_compareset_window_argument()
+: <a class="el" href="classtrim_al_manager.html#ab6003417954bc032c4f82892d0f38a16">trimAlManager</a>
 </li>
 <li>check_file_aligned()
 : <a class="el" href="classtrim_al_manager.html#a3beec34d7074f4a67ccaf4e8bb875122">trimAlManager</a>
@@ -241,8 +246,14 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 <li>clean_alignment()
 : <a class="el" href="classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068">trimAlManager</a>
 </li>
-<li>cleanByCutValue()
-: <a class="el" href="class_cleaner.html#ad075f0ef730c8023cf8a0e35e7e1e53a">Cleaner</a>
+<li>cleanByCutValueFallBehind()
+: <a class="el" href="class_cleaner.html#aa85792ad5a7c3209509a689fb0410e92">Cleaner</a>
+</li>
+<li>cleanByCutValueOverpass()
+: <a class="el" href="class_cleaner.html#a66bda5807c06cfaf1609e4c1f5955671">Cleaner</a>
+</li>
+<li>cleanByCutValueOverpassOrEquals()
+: <a class="el" href="class_cleaner.html#ae7ad16bc3ad459a12c908801fa20da66">Cleaner</a>
 </li>
 <li>cleanCombMethods()
 : <a class="el" href="class_cleaner.html#a068b219f913adba5c917a231cff7e437">Cleaner</a>
@@ -268,6 +279,15 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 <li>cleanOverlapSeq()
 : <a class="el" href="class_cleaner.html#a74d3049d4997da5e7c6c51cb19b540e8">Cleaner</a>
 </li>
+<li>CleanResiduesAuto()
+: <a class="el" href="classtrim_al_manager.html#a69082911b30a1bd12395bb235bc18a34">trimAlManager</a>
+</li>
+<li>CleanResiduesNonAuto()
+: <a class="el" href="classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee">trimAlManager</a>
+</li>
+<li>CleanSequences()
+: <a class="el" href="classtrim_al_manager.html#a10536f715945a1a45f1df33f7cedc81e">trimAlManager</a>
+</li>
 <li>cleanSpuriousSeq()
 : <a class="el" href="class_cleaner.html#a095db8160a11a792a3feade870a24fd7">Cleaner</a>
 </li>
@@ -278,10 +298,10 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 : <a class="el" href="classtrim_al_manager.html#a8123073dd90189a4c6e12f992120e5fc">trimAlManager</a>
 </li>
 <li>clusters_argument()
-: <a class="el" href="classtrim_al_manager.html#a66b5f541247441de174d643f85901eca">trimAlManager</a>
+: <a class="el" href="classtrim_al_manager.html#af87e0b5682ec1220ba91e9704f8564b5">trimAlManager</a>
 </li>
 <li>col_numbering_argument()
-: <a class="el" href="classtrim_al_manager.html#a87d6fe668c2a47600fdf9b55bfc8747b">trimAlManager</a>
+: <a class="el" href="classtrim_al_manager.html#a350d599ad793c99d13748c3c55cb0867">trimAlManager</a>
 </li>
 <li>columnNumbering
 : <a class="el" href="classtrim_al_manager.html#a2308fd4e3d1b8fde87b15dab706fb2c4">trimAlManager</a>
@@ -293,32 +313,32 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 <li>compareAlignmentsArray
 : <a class="el" href="classtrim_al_manager.html#a2cd9b7bd62cf65f35fffc0bb33f0ccf1">trimAlManager</a>
 </li>
+<li>compareAndChoose()
+: <a class="el" href="classstatistics_consistency.html#a54ff94b3add44ffeaab1cdf5ff1e9cfd">statisticsConsistency</a>
+</li>
 <li>compareset
 : <a class="el" href="classtrim_al_manager.html#aad91008c9e584856346b85f74bd0aba9">trimAlManager</a>
 </li>
 <li>compareset_argument()
-: <a class="el" href="classtrim_al_manager.html#a313d3f5fe763b8c03bd46c2072a2357b">trimAlManager</a>
-</li>
-<li>compareVect
-: <a class="el" href="classtrim_al_manager.html#ab0a03748ace4f841eba5fcd3ab981a8b">trimAlManager</a>
+: <a class="el" href="classtrim_al_manager.html#a782c3fc853779ce23f60ec5815428750">trimAlManager</a>
 </li>
 <li>complementary_argument()
-: <a class="el" href="classtrim_al_manager.html#afef91d4a030c838cba610a35abf2ab95">trimAlManager</a>
+: <a class="el" href="classtrim_al_manager.html#a3fea0fcbd61bb7160086434f4f383769">trimAlManager</a>
 </li>
 <li>computeComplementaryAlig()
 : <a class="el" href="class_cleaner.html#a24bd28e4191afc9471adff329bee1466">Cleaner</a>
 </li>
 <li>conservation_threshold_argument()
-: <a class="el" href="classtrim_al_manager.html#ab162d8373b277d4fb1d013e0aceb95b9">trimAlManager</a>
+: <a class="el" href="classtrim_al_manager.html#a9dbb2a1d3c807f77c94dfa1b9e209b91">trimAlManager</a>
 </li>
 <li>conservationThreshold
 : <a class="el" href="classtrim_al_manager.html#a546617602c21476d61e9880fa75d944a">trimAlManager</a>
 </li>
 <li>consistency_threshold_argument()
-: <a class="el" href="classtrim_al_manager.html#a73b880844e7ceed43aa9d7dc4c3fb1f6">trimAlManager</a>
+: <a class="el" href="classtrim_al_manager.html#a2f9e77f45d6b7862edfc41ec6b2ee49f">trimAlManager</a>
 </li>
 <li>consistency_window_argument()
-: <a class="el" href="classtrim_al_manager.html#a1192b7587cd78875384357d92bdadcef">trimAlManager</a>
+: <a class="el" href="classtrim_al_manager.html#a28a1ea6d455d37308faebd84b3a9990d">trimAlManager</a>
 </li>
 <li>consistencyThreshold
 : <a class="el" href="classtrim_al_manager.html#a693fdaee53253ae7a9b3a0719a3d5bd1">trimAlManager</a>

@@ -5,54 +5,54 @@
  -->
 <!-- Title: ReadWriteMS::saveAlignment Pages: 1 -->
 <svg width="328pt" height="116pt"
- viewBox="0.00 0.00 328.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+ viewBox="0.00 0.00 328.00 115.50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 111.5)">
 <title>ReadWriteMS::saveAlignment</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-112 324,-112 324,4 -4,4"/>
-<!-- Node26 -->
-<g id="node1" class="node"><title>Node26</title>
-<polygon fill="#bfbfbf" stroke="black" points="0,-44.5 0,-63.5 149,-63.5 149,-44.5 0,-44.5"/>
-<text text-anchor="middle" x="74.5" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteMS::saveAlignment</text>
+<polygon fill="white" stroke="none" points="-4,4 -4,-111.5 324,-111.5 324,4 -4,4"/>
+<!-- Node22 -->
+<g id="node1" class="node"><title>Node22</title>
+<polygon fill="#bfbfbf" stroke="black" points="0,-38.5 0,-57.5 149,-57.5 149,-38.5 0,-38.5"/>
+<text text-anchor="middle" x="74.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteMS::saveAlignment</text>
 </g>
-<!-- Node27 -->
-<g id="node2" class="node"><title>Node27</title>
-<g id="a_node2"><a xlink:href="classutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" target="_top" xlink:title="Function that replaces a substring with another substring in a string. It makes a copy of the origina...">
-<polygon fill="white" stroke="black" points="201.5,-88.5 201.5,-107.5 303.5,-107.5 303.5,-88.5 201.5,-88.5"/>
-<text text-anchor="middle" x="252.5" y="-95.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::ReplaceString</text>
+<!-- Node23 -->
+<g id="node2" class="node"><title>Node23</title>
+<g id="a_node2"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
+<polygon fill="white" stroke="black" points="194.5,-77 194.5,-107 310.5,-107 310.5,-77 194.5,-77"/>
+<text text-anchor="start" x="202.5" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
+<text text-anchor="middle" x="252.5" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
 </a>
 </g>
 </g>
-<!-- Node26&#45;&gt;Node27 -->
-<g id="edge1" class="edge"><title>Node26&#45;&gt;Node27</title>
-<path fill="none" stroke="midnightblue" d="M113.689,-63.5473C139.982,-70.1204 175.119,-78.9048 203.333,-85.9583"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="202.835,-89.4414 213.385,-88.4713 204.533,-82.6504 202.835,-89.4414"/>
+<!-- Node22&#45;&gt;Node23 -->
+<g id="edge1" class="edge"><title>Node22&#45;&gt;Node23</title>
+<path fill="none" stroke="midnightblue" d="M113.689,-57.5473C134.393,-62.7233 160.582,-69.2704 184.555,-75.2638"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="183.768,-78.6746 194.318,-77.7045 185.465,-71.8836 183.768,-78.6746"/>
 </g>
-<!-- Node28 -->
-<g id="node3" class="node"><title>Node28</title>
-<g id="a_node3"><a xlink:href="class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" target="_top" xlink:title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. ">
-<polygon fill="white" stroke="black" points="194.5,-39 194.5,-69 310.5,-69 310.5,-39 194.5,-39"/>
-<text text-anchor="start" x="202.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
-<text text-anchor="middle" x="252.5" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
+<!-- Node24 -->
+<g id="node3" class="node"><title>Node24</title>
+<g id="a_node3"><a xlink:href="classutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" target="_top" xlink:title="Function that replaces a substring with another substring in a string. It makes a copy of the origina...">
+<polygon fill="white" stroke="black" points="201.5,-38.5 201.5,-57.5 303.5,-57.5 303.5,-38.5 201.5,-38.5"/>
+<text text-anchor="middle" x="252.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::ReplaceString</text>
 </a>
 </g>
 </g>
-<!-- Node26&#45;&gt;Node28 -->
-<g id="edge2" class="edge"><title>Node26&#45;&gt;Node28</title>
-<path fill="none" stroke="midnightblue" d="M149.12,-54C160.659,-54 172.537,-54 183.932,-54"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="184.236,-57.5001 194.236,-54 184.236,-50.5001 184.236,-57.5001"/>
+<!-- Node22&#45;&gt;Node24 -->
+<g id="edge2" class="edge"><title>Node22&#45;&gt;Node24</title>
+<path fill="none" stroke="midnightblue" d="M149.12,-48C163.157,-48 177.695,-48 191.254,-48"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="191.408,-51.5001 201.408,-48 191.408,-44.5001 191.408,-51.5001"/>
 </g>
-<!-- Node29 -->
-<g id="node4" class="node"><title>Node29</title>
+<!-- Node25 -->
+<g id="node4" class="node"><title>Node25</title>
 <g id="a_node4"><a xlink:href="classutils.html#a6000246220e801bf6b1e6a553d7af13a" target="_top" xlink:title="Function that replaces a substring with another substring in a string. It does not make a copy of the...">
 <polygon fill="white" stroke="black" points="185,-0.5 185,-19.5 320,-19.5 320,-0.5 185,-0.5"/>
 <text text-anchor="middle" x="252.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::ReplaceStringInPlace</text>
 </a>
 </g>
 </g>
-<!-- Node26&#45;&gt;Node29 -->
-<g id="edge3" class="edge"><title>Node26&#45;&gt;Node29</title>
-<path fill="none" stroke="midnightblue" d="M113.689,-44.4527C139.982,-37.8796 175.119,-29.0952 203.333,-22.0417"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="204.533,-25.3496 213.385,-19.5287 202.835,-18.5586 204.533,-25.3496"/>
+<!-- Node22&#45;&gt;Node25 -->
+<g id="edge3" class="edge"><title>Node22&#45;&gt;Node25</title>
+<path fill="none" stroke="midnightblue" d="M119.912,-38.411C143.451,-33.3287 172.557,-27.0446 197.405,-21.6797"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="198.371,-25.0518 207.407,-19.5201 196.894,-18.2094 198.371,-25.0518"/>
 </g>
 </g>
 </svg>

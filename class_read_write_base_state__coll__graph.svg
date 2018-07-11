@@ -69,7 +69,7 @@
 </g>
 <!-- Node5 -->
 <g id="node5" class="node"><title>Node5</title>
-<g id="a_node5"><a xlink:href="class_read_write_m_s.html" target="_top" xlink:title="Class that handles the load and save functions of an alignment. ">
+<g id="a_node5"><a xlink:href="class_read_write_m_s.html" target="_top" xlink:title="Class to handle ReadWriteBaseStates , which represents formats. It serves as a proxy to the formats...">
 <polygon fill="white" stroke="black" points="39.5,-0.5 39.5,-19.5 117.5,-19.5 117.5,-0.5 39.5,-0.5"/>
 <text text-anchor="middle" x="78.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteMS</text>
 </a>

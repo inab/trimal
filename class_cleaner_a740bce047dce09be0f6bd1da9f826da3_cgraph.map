@@ -1,7 +1,5 @@
 <map id="Cleaner::cleanStrict" name="Cleaner::cleanStrict">
-<area shape="rect" id="node2" href="$classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method. " alt="" coords="259,5,361,32"/>
-<area shape="rect" id="node3" href="$class_cleaner.html#a033da9ea63774f43f4c7aff04f23da81" title="Method to detect right and left borders. Borders are the first column found with no gaps..." alt="" coords="213,56,407,83"/>
-<area shape="rect" id="node5" href="$class_cleaner.html#a24bd28e4191afc9471adff329bee1466" title="Method for computing the complementary alignment. Complementary Alignment is an alignment containing ..." alt="" coords="191,107,429,133"/>
-<area shape="rect" id="node6" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="213,158,407,199"/>
-<area shape="rect" id="node4" href="$class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. " alt="" coords="477,103,632,145"/>
+<area shape="rect" id="node2" href="$classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method. " alt="" coords="237,5,339,32"/>
+<area shape="rect" id="node3" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="191,57,385,98"/>
+<area shape="rect" id="node4" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="433,57,588,98"/>
 </map>

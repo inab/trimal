@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['referencefilenotloaded',['ReferenceFileNotLoaded',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37afdb8a79987c0b3da4e3209e46d863694',1,'VerboseManager']]],
-  ['residueoverlapnotrecognized',['ResidueOverlapNotRecognized',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a16b9e396e4744a2de8259cd69a6e9b47',1,'VerboseManager']]],
-  ['residueoverlapoutofrange',['ResidueOverlapOutOfRange',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a76a87ca8ed62af010b5e156ac242c4e4',1,'VerboseManager']]],
-  ['rna',['RNA',['../defines_8h.html#a69d5409d6e7370d6bd3b4f931702e936a92efc5f13441d2abd5e146e629196c7e',1,'defines.h']]]
+  ['matrixgivenwithnomethodtouseit',['MatrixGivenWithNoMethodToUseIt',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa42998f0fa0e9fb102bb1d518f8a81005',1,'reportsystem.h']]],
+  ['maxidentitynotrecognized',['MaxIdentityNotRecognized',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa8d602885dfaff5a252d037f1561b977d',1,'reportsystem.h']]],
+  ['maxidentityoutofrange',['MaxIdentityOutOfRange',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa7a0b0db4c680845d4e6eaf1246d98fbd',1,'reportsystem.h']]],
+  ['moreclustersthansequences',['MoreClustersThanSequences',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa80a65354269ad88abfbadb567ccaebc4',1,'reportsystem.h']]]
 ];

@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['matrix_5fargument',['matrix_argument',['../classtrim_al_manager.html#a5b1407f7ca645c795835b3e0c20cb10d',1,'trimAlManager']]],
-  ['max',['max',['../classutils.html#a40640e1942f00797e9fe8284e8fbdb14',1,'utils::max(int x, int y)'],['../classutils.html#ab819a53ebbbe657d398f0e5c5c4b0eae',1,'utils::max(float x, float y)'],['../classutils.html#a91f98ed74c54fdc1ee7ae6c7e770591c',1,'utils::max(double x, double y)']]],
-  ['max_5fidentity_5fargument',['max_identity_argument',['../classtrim_al_manager.html#a5d22b6b08888f89e38d604b7e9653935',1,'trimAlManager']]],
-  ['menu',['menu',['../classtrim_al_manager.html#a09d07645fa0057989875f2b2d25ec4d7',1,'trimAlManager']]],
-  ['min',['min',['../classutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f',1,'utils::min(int x, int y)'],['../classutils.html#ac2368c54440c2ea34d009fc73ed0b400',1,'utils::min(float x, float y)'],['../classutils.html#ad64d57e0078c384da8d876f27735e8d4',1,'utils::min(double x, double y)']]]
+  ['loadalignment',['LoadAlignment',['../class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab',1,'ReadWriteBaseState::LoadAlignment()'],['../class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf',1,'ReadWriteMS::loadAlignment()']]],
+  ['loadandsavemultiplealignments',['loadAndSaveMultipleAlignments',['../class_read_write_m_s.html#ab019d93e740d838c7e64415630ca5ad5',1,'ReadWriteMS']]],
+  ['log',['log',['../class____internal_report_1_1____report_system.html#a4c591784e52b48e8f4b51281d80634b3',1,'__internalReport::__reportSystem']]],
+  ['lookforpattern',['lookForPattern',['../classutils.html#a45361ec2b0f05b254c152b14af595bfb',1,'utils']]]
 ];

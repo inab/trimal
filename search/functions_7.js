@@ -1,4 +1,29 @@
 var searchData=
 [
-  ['html_5fout_5fargument',['html_out_argument',['../classtrim_al_manager.html#af01f123455f1752f85fac1f0baa77568',1,'trimAlManager']]]
+  ['gap_5fthreshold_5fargument',['gap_threshold_argument',['../classtrim_al_manager.html#a52aabe8b7e1788a1732dbdd6c29e387d',1,'trimAlManager']]],
+  ['gap_5fwindow_5fargument',['gap_window_argument',['../classtrim_al_manager.html#ab276738d10e3bbb0afe14e1f7cdc8331',1,'trimAlManager']]],
+  ['gappy_5fout_5fargument',['gappy_out_argument',['../classtrim_al_manager.html#abe260f234658f669ee6604d02b66117c',1,'trimAlManager']]],
+  ['getalignmenttype',['getAlignmentType',['../classnew_alignment.html#a670d5ef1ced9ed6041c3f6afdbd2cc02',1,'newAlignment']]],
+  ['getblocksize',['getBlockSize',['../classnew_alignment.html#a4761e21288fc15f3b86cf80dd4c6c91b',1,'newAlignment']]],
+  ['getclustering',['getClustering',['../class_cleaner.html#a991bf55a7d36b305d67d639ebf028348',1,'Cleaner']]],
+  ['getcolumn',['getColumn',['../classsequences_matrix.html#a2954781bf8e8fd338714246fd10bae88',1,'sequencesMatrix::getColumn(int column, int *numResidueseqMatrix)'],['../classsequences_matrix.html#a8fc6c1bf201483a75fe4ed77aa6190d9',1,'sequencesMatrix::getColumn(int value, int row, int *columnSeqMatrix)']]],
+  ['getconsstep',['GetConsStep',['../classutils.html#a4804aa8e934b5b255c11403d2d1eeaa5',1,'utils']]],
+  ['getcorrespresidues',['getCorrespResidues',['../classnew_alignment.html#ace3be92e3229fc241557597090977ba5',1,'newAlignment']]],
+  ['getcorrespsequences',['getCorrespSequences',['../classnew_alignment.html#a0c3cd77c8a6b118efb84b577bb4ab1ce',1,'newAlignment']]],
+  ['getcutpointclusters',['getCutPointClusters',['../class_cleaner.html#a60955e2ae3faa3ccf84780a52fb1a08a',1,'Cleaner']]],
+  ['getfileformatname',['getFileFormatName',['../class_read_write_m_s.html#a5235fb14e8fb57c0d21a2b5a2c9d1666',1,'ReadWriteMS']]],
+  ['getgapstep',['GetGapStep',['../classutils.html#a0f5ab7795538323e7b93682f5a591690',1,'utils::GetGapStep(int *gapValue, int sequenNumber)'],['../classutils.html#ae1e05e791a81910510a314fc5c79b9f0',1,'utils::GetGapStep(int *gapValue, float inverseSequenNumber)']]],
+  ['getinputformatsavailable',['getInputFormatsAvailable',['../class_read_write_m_s.html#a818f384e63dbdcb7d0a55024d98a8dc6',1,'ReadWriteMS']]],
+  ['getmdkwindowedvector',['getMdkWindowedVector',['../classstatistics_conservation.html#a0e674b4b4b91773fb1c32a532797f328',1,'statisticsConservation']]],
+  ['getnumaminos',['getNumAminos',['../classnew_alignment.html#ad08d05c08eb66665defed4a16ab08e91',1,'newAlignment']]],
+  ['getnumspecies',['getNumSpecies',['../classnew_alignment.html#acfd820148c267a3d698a39758ecf190d',1,'newAlignment']]],
+  ['getoutputformatsavailable',['getOutputFormatsAvailable',['../class_read_write_m_s.html#a7e3dfa28fc4c4c55e4456786a56f683c',1,'ReadWriteMS']]],
+  ['getresidnumber',['getResidNumber',['../classsequences_matrix.html#a66adb7dd73689a07db753902474492b3',1,'sequencesMatrix']]],
+  ['getreverse',['getReverse',['../classutils.html#a32c73a519d8d768695550513b89583c6',1,'utils']]],
+  ['getseqnumber',['getSeqNumber',['../classsequences_matrix.html#a30953cd948a16b03257b0c1a7f85e08c',1,'sequencesMatrix']]],
+  ['getsequence',['getSequence',['../classsequences_matrix.html#a57c263430e37513be76683d8931dcd48',1,'sequencesMatrix']]],
+  ['getsequencenameorder',['getSequenceNameOrder',['../classnew_alignment.html#ac3d5c9670904bba45707746640aac382',1,'newAlignment']]],
+  ['getsequences',['getSequences',['../classnew_alignment.html#a0db3e76f82a71c7a2fe5b9279f8fa310',1,'newAlignment::getSequences(string *names)'],['../classnew_alignment.html#af32ab6b3b73c5ad37c9f1c796a4fbc44',1,'newAlignment::getSequences(string *names, int *lengths)'],['../classnew_alignment.html#a2fc0d691c0cce400f007446cc162704e',1,'newAlignment::getSequences(string *names, string *sequences, int *lenghts)']]],
+  ['getsimstep',['GetSimStep',['../classutils.html#a257a000e9e7be1e35a5038a1c2cf0539',1,'utils']]],
+  ['gettranslationcds',['getTranslationCDS',['../classnew_alignment.html#a781fd0f2ae6a9bda2802ffd28372bfaa',1,'newAlignment']]]
 ];

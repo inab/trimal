@@ -9,5 +9,5 @@ var searchData=
   ['delsequences',['delSequences',['../classtrim_al_manager.html#a6ab2294c5158bbcd8e81f681e96c9f76',1,'trimAlManager']]],
   ['determinecolor',['determineColor',['../classutils.html#ad1594a7c6cd34bba8e878fe09837e5d8',1,'utils']]],
   ['dna',['DNA',['../defines_8h.html#a69d5409d6e7370d6bd3b4f931702e936acf4f4b33c0fa7b8f3cd37f44af0f5ce8',1,'defines.h']]],
-  ['dot_20example',['Dot example',['../dot_pag.html',1,'']]]
+  ['data_20flow',['Data Flow',['../trim_al.html',1,'']]]
 ];

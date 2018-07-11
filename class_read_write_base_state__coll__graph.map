@@ -1,6 +1,6 @@
 <map id="ReadWriteBaseState" name="ReadWriteBaseState">
 <area shape="rect" id="node2" title="STL class. " alt="" coords="97,96,177,123"/>
 <area shape="rect" id="node3" title="STL class. " alt="" coords="73,5,200,47"/>
-<area shape="rect" id="node5" href="$class_read_write_m_s.html" title="Class that handles the load and save functions of an alignment. " alt="" coords="58,481,162,508"/>
+<area shape="rect" id="node5" href="$class_read_write_m_s.html" title="Class to handle ReadWriteBaseStates , which represents formats. It serves as a proxy to the formats..." alt="" coords="58,481,162,508"/>
 <area shape="rect" id="node7" title="STL class. " alt="" coords="224,200,340,227"/>
 </map>

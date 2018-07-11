@@ -9,6 +9,7 @@ var class_read_write_m_s =
     [ "loadAlignment", "class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf", null ],
     [ "loadAndSaveMultipleAlignments", "class_read_write_m_s.html#ab019d93e740d838c7e64415630ca5ad5", null ],
     [ "saveAlignment", "class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0", null ],
+    [ "splitAlignmentKeeping", "class_read_write_m_s.html#a7fa503119fec930b30ae412c711ef802", null ],
     [ "available_states", "class_read_write_m_s.html#a1ee89fddcc66967d04c5d7d81cd4a8fa", null ],
     [ "format", "class_read_write_m_s.html#a269556792488b541719596ef63c3b181", null ],
     [ "hasOutputFile", "class_read_write_m_s.html#a9641b0e97beb410fa814bcf015d52a98", null ],

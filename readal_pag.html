@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
-<title>Trimal: readAl Main Page</title>
+<title>trimAl: readAl Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
  <tbody>
  <tr style="height: 12px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Trimal
+   <div id="projectname">trimAl
    </div>
    <div id="projectbrief">A Multiple Alignment Sequence framework for Cleaning and Reformating.</div>
   </td>
@@ -92,7 +92,7 @@ $(document).ready(function(){initNavTree('readal_pag.html','');});
 <div class="textblock"><h1><a class="anchor" id="introduction_sec_r"></a>
 Introduction</h1>
 <p>One of the main problems that the researchers have to face during their studies is the <em>conversion among the various formats</em> required by different programs. <br />
-Nowadays there around <em>20 different Multiple Sequence Alignment (MSAs) formats</em>. <br />
+Nowadays there around <em>20 different Multiple Sequence Alignment (MSAs) formats and subformats</em>. <br />
 <br />
  Here we present <b>readAl</b>, a tool for format alignment conversion among the most representative formats. <br />
 <b>readAl</b> has been designed to be used in several situations, including, alignment trimming, phylogenetic tree reconstruction, profile reconstruction, and so on.<br />
@@ -109,7 +109,7 @@ Installation</h1>
 
 3.- Compile the project: 
     &gt; make
-    &gt; make readalMS (if you only want readalMS to be compiled)
+    &gt; make readal (if you only want readal to be compiled)
 
 4.- Move or copy binaries folder './bin/' to 'usr/local/bin' or 'usr/bin'
 </pre><h1><a class="anchor" id="usage_sec_r"></a>
@@ -117,7 +117,7 @@ Usage</h1>
 <p>This program is free software: you can redistribute it and/or modify it under the terms of the <b>GNU General Public License</b> as published by the Free Software Foundation, the last available version.</p>
 <h2><a class="anchor" id="basic_usage_r"></a>
 BASIC USAGE</h2>
-<pre class="fragment">readalMS -in &lt;inputfiles&gt; -out &lt;pattern&gt; -format [formats] [options].
+<pre class="fragment">readal -in &lt;inputfiles&gt; -out &lt;pattern&gt; -format [formats] [options].
 
 -h                    Show this information.
 -in &lt;inputfiles&gt;      Input files in several formats. Separated by spaces.
@@ -159,23 +159,23 @@ LEGACY OPTIONS</h2>
 -phylip3.2_m10       Output file in PHYLIP3.2 format. Sequences name up to 10 characters.
 </pre><h2><a class="anchor" id="examples_r"></a>
 EXAMPLES OF USE</h2>
-<pre class="fragment">readalMS -in ./dataset/AA1.fas -out ./dataset/[in].output.[extension] -formats clustal
+<pre class="fragment">readal -in ./dataset/AA1.fas -out ./dataset/[in].output.[extension] -formats clustal
   -&gt; Will produce ./dataset/AA1.output.clw
 
-readalMS -in ./dataset/example1.clw -out ./dataset/[in].[format].[extension] -formats fasta phylip32 phylip40
+readal -in ./dataset/example1.clw -out ./dataset/[in].[format].[extension] -formats fasta phylip32 phylip40
   -&gt; Will produce ./dataset/example1.FASTA.fasta ./dataset/example1.PHYLIP32.phy ./dataset/example1.PHYLIP40.phy
 
-readalMS -in ./dataset/example1.clw -out ./dataset/[in]/[format].[extension] -formats fasta phylip32 phylip40
+readal -in ./dataset/example1.clw -out ./dataset/[in]/[format].[extension] -formats fasta phylip32 phylip40
   -&gt; Will produce ./dataset/example1/FASTA.fasta ./dataset/example1/PHYLIP32.phy ./dataset/example1/PHYLIP40.phy
      ONLY if ./dataset/example1/ already exists.
 
-readalMS -in ./dataset/AA1.fas ./dataset/AA2.fas -out ./dataset/[in].output.[extension] -formats clustal pir
+readal -in ./dataset/AA1.fas ./dataset/AA2.fas -out ./dataset/[in].output.[extension] -formats clustal pir
   -&gt; Will produce ./dataset/AA1.output.clw ./dataset/AA2.output.clw ./dataset/AA1.output.pir ./dataset/AA2.output.pir
 
-readalMS -in ./dataset/AA1.fas -format -type -info
+readal -in ./dataset/AA1.fas -format -type -info
   -&gt; Will produce terminal output giving information about AA1.fas alignment file
 
-readalMS -in ./dataset/AA1.fas ./dataset/AA2.fas -out ./dataset/[in].output.[extension] -formats html
+readal -in ./dataset/AA1.fas ./dataset/AA2.fas -out ./dataset/[in].output.[extension] -formats html
   -&gt; Will produce ./dataset/AA1.output.html ./dataset/AA2.output.html
      Those files are not indeed reformats of the original alignments, but an HTML colored report of the alignment file.</pre> </div></div><!-- contents -->
 </div><!-- doc-content -->

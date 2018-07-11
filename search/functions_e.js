@@ -1,17 +1,6 @@
 var searchData=
 [
-  ['parsearguments',['parseArguments',['../classtrim_al_manager.html#af140d97b6071a83930818030ac74b641',1,'trimAlManager']]],
-  ['perform',['perform',['../classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f',1,'trimAlManager']]],
-  ['preparecodingsequence',['prepareCodingSequence',['../classnew_alignment.html#ad50ba126247276cd0bf89119e439c483',1,'newAlignment']]],
-  ['print_5fstatistics',['print_statistics',['../classtrim_al_manager.html#afc48b86f5ae35b9a5e721b65c58bf610',1,'trimAlManager']]],
-  ['printalignmentinfo',['printAlignmentInfo',['../classnew_alignment.html#a3b75055480c60265ea57ca557213fe06',1,'newAlignment']]],
-  ['printcodesandmessages',['PrintCodesAndMessages',['../class____internal_report_1_1____report_system.html#a84fae2fb34755c7f9bda9ac31e44ebfa',1,'__internalReport::__reportSystem']]],
-  ['printcolumnsidentity_5fdescriptivestats',['printColumnsIdentity_DescriptiveStats',['../classnew_alignment.html#aa22c770103d0fce45cfb1840aab85888',1,'newAlignment']]],
-  ['printconservationacl',['printConservationAcl',['../classstatistics_conservation2.html#a8c3af09a23274408feaebc4460c5e418',1,'statisticsConservation2']]],
-  ['printconservationcolumns',['printConservationColumns',['../classstatistics_conservation2.html#a60374ff205bf2128505db4be2c7ff714',1,'statisticsConservation2']]],
-  ['printmatrix',['printMatrix',['../classsequences_matrix.html#a5ce138201d0ad6c454be9745509711f7',1,'sequencesMatrix']]],
-  ['printseqidentity',['printSeqIdentity',['../classnew_alignment.html#af730d0021082c5d52bc0b971a587c8e1',1,'newAlignment']]],
-  ['printstatisticsfileacl',['printStatisticsFileAcl',['../classcompare_files.html#ad93588cbee39ef32d1c6a7d34f9dee95',1,'compareFiles']]],
-  ['printstatisticsfilecolumns',['printStatisticsFileColumns',['../classcompare_files.html#ab43ddbc94ad3bb81f7b485374a0e03fd',1,'compareFiles']]],
-  ['processarguments',['processArguments',['../classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e',1,'trimAlManager']]]
+  ['operator_3c_3c',['operator&lt;&lt;',['../class____internal_report_1_1____reporter.html#ac4206667c368ec5bd092bf7c2dba497c',1,'__internalReport::__reporter::operator&lt;&lt;(const T &amp;a)'],['../class____internal_report_1_1____reporter.html#a1a5c027d7d6edd46ffbf1696c2a5c0dc',1,'__internalReport::__reporter::operator&lt;&lt;(std::ostream &amp;(*pf)(std::ostream &amp;))'],['../class____internal_report_1_1____report_system.html#aebf67cae7ba22f5ae37ef9043e9f0b64',1,'__internalReport::__reportSystem::operator&lt;&lt;(const T &amp;a)'],['../class____internal_report_1_1____report_system.html#af1d5d5fc59f2c37c71d1c56fbc19a907',1,'__internalReport::__reportSystem::operator&lt;&lt;(std::ostream &amp;(*pf)(std::ostream &amp;))']]],
+  ['out_5fargument',['out_argument',['../classtrim_al_manager.html#aca61aecdea10a23afe2d40b874dfdc55',1,'trimAlManager']]],
+  ['out_5fformat_5farguments',['out_format_arguments',['../classtrim_al_manager.html#a3db3c61e4170bf170f601c0fa1940746',1,'trimAlManager']]]
 ];

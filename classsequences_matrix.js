@@ -1,13 +1,13 @@
 var classsequences_matrix =
 [
-    [ "sequencesMatrix", "classsequences_matrix.html#a9205d08454190fd9ef27daf78b59410b", null ],
-    [ "sequencesMatrix", "classsequences_matrix.html#ad732edaa397a15a2653012f7e38f24af", null ],
+    [ "sequencesMatrix", "classsequences_matrix.html#ae66defcc14ec21f87e516ad7afa1c6e6", null ],
+    [ "sequencesMatrix", "classsequences_matrix.html#abaa8e45506cb9ce153b6b335f1d95c34", null ],
     [ "sequencesMatrix", "classsequences_matrix.html#ab7e0cc3927d37236f73e75ea277ca704", null ],
     [ "~sequencesMatrix", "classsequences_matrix.html#ad81bf2003c77c947a922515dcf71b842", null ],
     [ "getColumn", "classsequences_matrix.html#a2954781bf8e8fd338714246fd10bae88", null ],
     [ "getColumn", "classsequences_matrix.html#a8fc6c1bf201483a75fe4ed77aa6190d9", null ],
-    [ "getResidNumber", "classsequences_matrix.html#a2de574095c42e2bb1032d6e6e8b0e65d", null ],
-    [ "getSeqNumber", "classsequences_matrix.html#a8ea5ad8b6537a6522180ed3719ebccba", null ],
+    [ "getResidNumber", "classsequences_matrix.html#a66adb7dd73689a07db753902474492b3", null ],
+    [ "getSeqNumber", "classsequences_matrix.html#a30953cd948a16b03257b0c1a7f85e08c", null ],
     [ "getSequence", "classsequences_matrix.html#a57c263430e37513be76683d8931dcd48", null ],
     [ "operator=", "classsequences_matrix.html#a915abcd6c918af6939450105b78b37d4", null ],
     [ "printMatrix", "classsequences_matrix.html#a5ce138201d0ad6c454be9745509711f7", null ],

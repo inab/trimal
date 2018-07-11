@@ -9,14 +9,14 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 35)">
 <title>trimAlManager::matrix_argument</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-35 269,-35 269,4 -4,4"/>
-<!-- Node271 -->
-<g id="node1" class="node"><title>Node271</title>
+<!-- Node273 -->
+<g id="node1" class="node"><title>Node273</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-30.5 113,-30.5 113,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::matrix</text>
 <text text-anchor="middle" x="56.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_argument</text>
 </g>
-<!-- Node272 -->
-<g id="node2" class="node"><title>Node272</title>
+<!-- Node274 -->
+<g id="node2" class="node"><title>Node274</title>
 <g id="a_node2"><a xlink:href="class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" target="_top" xlink:title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. ">
 <polygon fill="white" stroke="black" points="149,-0.5 149,-30.5 265,-30.5 265,-0.5 149,-0.5"/>
 <text text-anchor="start" x="157" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
@@ -24,8 +24,8 @@
 </a>
 </g>
 </g>
-<!-- Node271&#45;&gt;Node272 -->
-<g id="edge1" class="edge"><title>Node271&#45;&gt;Node272</title>
+<!-- Node273&#45;&gt;Node274 -->
+<g id="edge1" class="edge"><title>Node273&#45;&gt;Node274</title>
 <path fill="none" stroke="midnightblue" d="M113.218,-15.5C121.618,-15.5 130.356,-15.5 138.963,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="138.979,-19.0001 148.979,-15.5 138.979,-12.0001 138.979,-19.0001"/>
 </g>

@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
-<title>Trimal: utils Class Reference</title>
+<title>trimAl: utils Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
  <tbody>
  <tr style="height: 12px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Trimal
+   <div id="projectname">trimAl
    </div>
    <div id="projectbrief">A Multiple Alignment Sequence framework for Cleaning and Reformating.</div>
   </td>
@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('classutils.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Utils class.  
+<p>Utilities class. This class contains shared methods to be used in multiple parts of the code.  
  <a href="classutils.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="utils_8h_source.html">utils.h</a>&gt;</code></p>
@@ -165,24 +165,21 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a10b232376c181f8206a39b3939ca2e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13d5a7b906ab9eb4cc23939748c31c72"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#a13d5a7b906ab9eb4cc23939748c31c72">readLine</a> (ifstream &amp;file)</td></tr>
 <tr class="memdesc:a13d5a7b906ab9eb4cc23939748c31c72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a new line from current input stream.<br />
-This function is better than standard one since cares of operative system compability.<br />
+This function is better than standard one since cares of operative system compatibility.<br />
 It is useful as well because removes tabs and blank spaces at lines at beginning/ending.<br />
 .  <a href="#a13d5a7b906ab9eb4cc23939748c31c72">More...</a><br /></td></tr>
 <tr class="separator:a13d5a7b906ab9eb4cc23939748c31c72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d7530c6b87f5c83bebda5b91d3ce5ca"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#a7d7530c6b87f5c83bebda5b91d3ce5ca">readLine</a> (istream &amp;file)</td></tr>
 <tr class="memdesc:a7d7530c6b87f5c83bebda5b91d3ce5ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a new line from current input stream.<br />
-This function is better than standard one since cares of operative system compability.<br />
+This function is better than standard one since cares of operative system compatibility.<br />
 It is useful as well because removes tabs and blank spaces at lines at beginning/ending.<br />
 .  <a href="#a7d7530c6b87f5c83bebda5b91d3ce5ca">More...</a><br /></td></tr>
 <tr class="separator:a7d7530c6b87f5c83bebda5b91d3ce5ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a108fccc1d82c3a93b7c70fc2399d6e5f"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#a108fccc1d82c3a93b7c70fc2399d6e5f">trimLine</a> (string nline)</td></tr>
-<tr class="memdesc:a108fccc1d82c3a93b7c70fc2399d6e5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove comments inside a biological sequence.<br />
- Remove all content surrounded by ("") or ([]).<br />
+<tr class="memdesc:a108fccc1d82c3a93b7c70fc2399d6e5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all content surrounded by ("") or ([]).<br />
  It warns as well when a mismatch for these flags is found. <br />
 .  <a href="#a108fccc1d82c3a93b7c70fc2399d6e5f">More...</a><br /></td></tr>
 <tr class="separator:a108fccc1d82c3a93b7c70fc2399d6e5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa0fa18ea4772ed4520834fc1aaaff70"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#afa0fa18ea4772ed4520834fc1aaaff70">readLineMEGA</a> (ifstream &amp;file)</td></tr>
-<tr class="separator:afa0fa18ea4772ed4520834fc1aaaff70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32c73a519d8d768695550513b89583c6"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#a32c73a519d8d768695550513b89583c6">getReverse</a> (string toReverse)</td></tr>
 <tr class="memdesc:a32c73a519d8d768695550513b89583c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses a string.  <a href="#a32c73a519d8d768695550513b89583c6">More...</a><br /></td></tr>
 <tr class="separator:a32c73a519d8d768695550513b89583c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,21 +192,19 @@ It is useful as well because removes tabs and blank spaces at lines at beginning
 <tr class="memitem:adb8231f84743d1c51e391ab3234714c6"><td class="memItemLeft" align="right" valign="top">static int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#adb8231f84743d1c51e391ab3234714c6">readNumbers</a> (string line)</td></tr>
 <tr class="memdesc:adb8231f84743d1c51e391ab3234714c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a line and converts it to an array of number.  <a href="#adb8231f84743d1c51e391ab3234714c6">More...</a><br /></td></tr>
 <tr class="separator:adb8231f84743d1c51e391ab3234714c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb45e4c1390e28cf14b93e61797870b1"><td class="memItemLeft" align="right" valign="top"><a id="aeb45e4c1390e28cf14b93e61797870b1"></a>
-static int *&#160;</td><td class="memItemRight" valign="bottom"><b>readNumbers_StartEnd</b> (string line)</td></tr>
-<tr class="separator:aeb45e4c1390e28cf14b93e61797870b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36809b7400f2e78685173f8bbcfe0a39"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#a36809b7400f2e78685173f8bbcfe0a39">quicksort</a> (int **vect, int ini, int fin)</td></tr>
 <tr class="memdesc:a36809b7400f2e78685173f8bbcfe0a39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quicksort sorting method.  <a href="#a36809b7400f2e78685173f8bbcfe0a39">More...</a><br /></td></tr>
 <tr class="separator:a36809b7400f2e78685173f8bbcfe0a39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ef87e474cc361a3cdf4e4f4227afb40"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#a7ef87e474cc361a3cdf4e4f4227afb40">swap</a> (int **a, int **b)</td></tr>
-<tr class="memdesc:a7ef87e474cc361a3cdf4e4f4227afb40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps pointers values.  <a href="#a7ef87e474cc361a3cdf4e4f4227afb40">More...</a><br /></td></tr>
+<tr class="memdesc:a7ef87e474cc361a3cdf4e4f4227afb40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps double pointers.  <a href="#a7ef87e474cc361a3cdf4e4f4227afb40">More...</a><br /></td></tr>
 <tr class="separator:a7ef87e474cc361a3cdf4e4f4227afb40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1594a7c6cd34bba8e878fe09837e5d8"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#ad1594a7c6cd34bba8e878fe09837e5d8">determineColor</a> (char res, string column)</td></tr>
 <tr class="memdesc:ad1594a7c6cd34bba8e878fe09837e5d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the color that has to be used on the output report.  <a href="#ad1594a7c6cd34bba8e878fe09837e5d8">More...</a><br /></td></tr>
 <tr class="separator:ad1594a7c6cd34bba8e878fe09837e5d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7e66d2aa8756082b18eb40f209ded86"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#ad7e66d2aa8756082b18eb40f209ded86">lookForPattern</a> (std::string, std::string, float)</td></tr>
-<tr class="memdesc:ad7e66d2aa8756082b18eb40f209ded86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks for a pattern.  <a href="#ad7e66d2aa8756082b18eb40f209ded86">More...</a><br /></td></tr>
-<tr class="separator:ad7e66d2aa8756082b18eb40f209ded86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45361ec2b0f05b254c152b14af595bfb"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#a45361ec2b0f05b254c152b14af595bfb">lookForPattern</a> (const string data, const string pattern, const float threshold)</td></tr>
+<tr class="memdesc:a45361ec2b0f05b254c152b14af595bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to check for a pattern in a string.<br />
+ The method will check, character by character of the first string if there is some equality for each character in the pattern. When done, it will calculate the fraction of characters present in the pattern and compare to the threshold argument.  <a href="#a45361ec2b0f05b254c152b14af595bfb">More...</a><br /></td></tr>
+<tr class="separator:a45361ec2b0f05b254c152b14af595bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6000246220e801bf6b1e6a553d7af13a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#a6000246220e801bf6b1e6a553d7af13a">ReplaceStringInPlace</a> (std::string &amp;subject, const std::string &amp;search, const std::string &amp;replace)</td></tr>
 <tr class="memdesc:a6000246220e801bf6b1e6a553d7af13a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that replaces a substring with another substring in a string. It does not make a copy of the original string, but modifies it.  <a href="#a6000246220e801bf6b1e6a553d7af13a">More...</a><br /></td></tr>
 <tr class="separator:a6000246220e801bf6b1e6a553d7af13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -220,25 +215,24 @@ static int *&#160;</td><td class="memItemRight" valign="bottom"><b>readNumbers_S
 <tr class="memdesc:a0f5ab7795538323e7b93682f5a591690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that gives the gap classification of a column of values.  <a href="#a0f5ab7795538323e7b93682f5a591690">More...</a><br /></td></tr>
 <tr class="separator:a0f5ab7795538323e7b93682f5a591690"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1e05e791a81910510a314fc5c79b9f0"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#ae1e05e791a81910510a314fc5c79b9f0">GetGapStep</a> (int *gapValue, float inverseSequenNumber)</td></tr>
-<tr class="memdesc:ae1e05e791a81910510a314fc5c79b9f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that gives the gap classification of a column of values. <br />
- This function should work faster than it's sister <a class="el" href="classutils.html#a0f5ab7795538323e7b93682f5a591690" title="Function that gives the gap classification of a column of values. ">utils::GetGapStep(int * gapValue, int sequenNumber)</a>, as it uses a precomputed (by the user) inverseSequenNumber (1F / <a class="el" href="classnew_alignment.html#a4a6b47de8bef3e783f30548dfa48d84c" title="Number of sequences present on the alignment. ">newAlignment::sequenNumber</a>), instead of calculating it over again each time the function is called (which is equal to number of residues). <br />
- This comes with a precision cost that shouldn't be a problem.  <a href="#ae1e05e791a81910510a314fc5c79b9f0">More...</a><br /></td></tr>
+<tr class="memdesc:ae1e05e791a81910510a314fc5c79b9f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that gives the gap classification of a column of values.<br />
+This function should work faster than it's sister <a class="el" href="classutils.html#a0f5ab7795538323e7b93682f5a591690" title="Function that gives the gap classification of a column of values. ">utils::GetGapStep(int * gapValue, int sequenNumber)</a>, as it uses a precomputed (by the user) inverseSequenNumber (1F / <a class="el" href="classnew_alignment.html#a4a6b47de8bef3e783f30548dfa48d84c" title="Number of sequences present on the alignment. ">newAlignment::sequenNumber</a>), instead of calculating it over again each time the function is called (which is equal to number of residues). <br />
+This comes with a precision cost that shouldn't be a problem.  <a href="#ae1e05e791a81910510a314fc5c79b9f0">More...</a><br /></td></tr>
 <tr class="separator:ae1e05e791a81910510a314fc5c79b9f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a257a000e9e7be1e35a5038a1c2cf0539"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#a257a000e9e7be1e35a5038a1c2cf0539">GetSimStep</a> (float *simValue)</td></tr>
 <tr class="memdesc:a257a000e9e7be1e35a5038a1c2cf0539"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that gives the similarity classification of a column of values.  <a href="#a257a000e9e7be1e35a5038a1c2cf0539">More...</a><br /></td></tr>
 <tr class="separator:a257a000e9e7be1e35a5038a1c2cf0539"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4804aa8e934b5b255c11403d2d1eeaa5"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutils.html#a4804aa8e934b5b255c11403d2d1eeaa5">GetConsStep</a> (float *consValue)</td></tr>
-<tr class="memdesc:a4804aa8e934b5b255c11403d2d1eeaa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that gives the similarity classification of a column of values.  <a href="#a4804aa8e934b5b255c11403d2d1eeaa5">More...</a><br /></td></tr>
+<tr class="memdesc:a4804aa8e934b5b255c11403d2d1eeaa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that gives the consistency classification of a column of values.  <a href="#a4804aa8e934b5b255c11403d2d1eeaa5">More...</a><br /></td></tr>
 <tr class="separator:a4804aa8e934b5b255c11403d2d1eeaa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbd5c408c723a242c2d536e6638b6ff7"><td class="memItemLeft" align="right" valign="top"><a id="afbd5c408c723a242c2d536e6638b6ff7"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>streamSVG</b> (float *x, float *y, int num, std::string *lineName, std::string *lineColor, std::string *chartTitle, std::string *filename)</td></tr>
 <tr class="separator:afbd5c408c723a242c2d536e6638b6ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Utils class. </p>
-<p>This class implements util methods. </p>
+<div class="textblock"><p>Utilities class. This class contains shared methods to be used in multiple parts of the code. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00054">54</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8h_source.html#l00045">45</a> of file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1f1dcbfa7276e54acec72bdbae1b1255"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1f1dcbfa7276e54acec72bdbae1b1255">&#9670;&nbsp;</a></span>checkAlignmentType()</h2>
@@ -291,11 +285,12 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>streamSVG</b> 
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Integer that represents the alignment type. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00500">500</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00506">506</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a1f1dcbfa7276e54acec72bdbae1b1255_icgraph.svg" width="876" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a1f1dcbfa7276e54acec72bdbae1b1255_icgraph.svg" width="2719" height="446"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -332,7 +327,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00282">282</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00288">288</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -381,7 +376,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd><b>true</b> if the two strings are the same, <b>false</b> if not.</dd></dl>
 <p>This method compares the two strings given, and returns <b>true</b> if the two strings are equal. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00138">138</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00142">142</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -428,19 +423,20 @@ Here is the caller graph for this function:</div>
 <p>Integer vector copying. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">vect1</td><td>Vector that we want to copy. </td></tr>
-    <tr><td class="paramname">vect2</td><td>Destination vector of the copy. </td></tr>
-    <tr><td class="paramname">tam</td><td>Vectors size.</td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">vect1</td><td>Vector that we want to copy. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">vect2</td><td>Destination vector of the copy. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">tam</td><td>Vectors size.</td></tr>
   </table>
   </dd>
 </dl>
 <p>This method copies integer vector 1 to integer vector 2. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00053">53</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00054">54</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a42f272221edf7752ffda49e4212ef653_icgraph.svg" width="1064" height="514"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a42f272221edf7752ffda49e4212ef653_icgraph.svg" width="1202" height="260"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -488,15 +484,15 @@ Here is the caller graph for this function:</div>
 <p>Float vector copying. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">vect1</td><td>Vector that we want to copy. </td></tr>
-    <tr><td class="paramname">vect2</td><td>Destination vector of the copy. </td></tr>
-    <tr><td class="paramname">tam</td><td>Vectors size.</td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">vect1</td><td>Vector that we want to copy. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">vect2</td><td>Destination vector of the copy. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">tam</td><td>Vectors size.</td></tr>
   </table>
   </dd>
 </dl>
 <p>This method copies float vector 1 to float vector 2. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00059">59</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00060">60</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -544,11 +540,18 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Char that represents the color to be used. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00637">637</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00623">623</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_ad1594a7c6cd34bba8e878fe09837e5d8_cgraph.svg" width="340" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_ad1594a7c6cd34bba8e878fe09837e5d8_cgraph.svg" width="340" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_ad1594a7c6cd34bba8e878fe09837e5d8_icgraph.svg" width="454" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -577,7 +580,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Function that gives the similarity classification of a column of values. </p>
+<p>Function that gives the consistency classification of a column of values. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">consValue</td><td>Consistency value. </td></tr>
@@ -586,7 +589,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Int representing the classification of this gap value. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00880">880</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00867">867</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -634,7 +637,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Int representing the classification of this gap value. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00789">789</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00779">779</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -672,9 +675,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Function that gives the gap classification of a column of values. <br />
- This function should work faster than it's sister <a class="el" href="classutils.html#a0f5ab7795538323e7b93682f5a591690" title="Function that gives the gap classification of a column of values. ">utils::GetGapStep(int * gapValue, int sequenNumber)</a>, as it uses a precomputed (by the user) inverseSequenNumber (1F / <a class="el" href="classnew_alignment.html#a4a6b47de8bef3e783f30548dfa48d84c" title="Number of sequences present on the alignment. ">newAlignment::sequenNumber</a>), instead of calculating it over again each time the function is called (which is equal to number of residues). <br />
- This comes with a precision cost that shouldn't be a problem. </p>
+<p>Function that gives the gap classification of a column of values.<br />
+This function should work faster than it's sister <a class="el" href="classutils.html#a0f5ab7795538323e7b93682f5a591690" title="Function that gives the gap classification of a column of values. ">utils::GetGapStep(int * gapValue, int sequenNumber)</a>, as it uses a precomputed (by the user) inverseSequenNumber (1F / <a class="el" href="classnew_alignment.html#a4a6b47de8bef3e783f30548dfa48d84c" title="Number of sequences present on the alignment. ">newAlignment::sequenNumber</a>), instead of calculating it over again each time the function is called (which is equal to number of residues). <br />
+This comes with a precision cost that shouldn't be a problem. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">gapValue</td><td>Number of gaps present in the column. </td></tr>
@@ -684,7 +687,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Int representing the classification of this gap value. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00821">821</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00810">810</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -721,7 +724,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reversed string of toReverse. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00472">472</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00481">481</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -758,7 +761,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Int representing the classification of this gap value. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00852">852</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00840">840</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -805,19 +808,20 @@ Here is the call graph for this function:</div>
 <p>Vector initialization. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">vector</td><td>The vector that will be initializated. </td></tr>
-    <tr><td class="paramname">tam</td><td>The size of the vector. </td></tr>
-    <tr><td class="paramname">valor</td><td>The initialization value of all positions of the vector.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">vector</td><td>The vector that will be initialized. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">tam</td><td>The size of the vector. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">valor</td><td>The initialization value that will of all positions of the vector.</td></tr>
   </table>
   </dd>
 </dl>
-<p>This method is used to initializate all positions of a vector with a given value. </p>
+<p>This method is used to initialize all positions of a vector with a given value. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00042">42</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00043">43</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_aac322cd1761fddedec8a5792e358eb32_icgraph.svg" width="1062" height="336"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_aac322cd1761fddedec8a5792e358eb32_icgraph.svg" width="2162" height="434"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -865,15 +869,15 @@ Here is the caller graph for this function:</div>
 <p>Vector initialization. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">vector</td><td>The vector that will be initializated. </td></tr>
-    <tr><td class="paramname">tam</td><td>The size of the vector. </td></tr>
-    <tr><td class="paramname">valor</td><td>The initialization value of all positions of the vector.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">vector</td><td>The vector that will be initialized. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">tam</td><td>The size of the vector. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">valor</td><td>The initialization value of all positions of the vector.</td></tr>
   </table>
   </dd>
 </dl>
-<p>This method is used to initializate all positions of a vector with a given value. </p>
+<p>This method is used to initialize all positions of a vector with a given value. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00048">48</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00049">49</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -909,19 +913,20 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><b>true</b> if the string is a number, <b>false</b> if not.</dd></dl>
-<p>This method checks if the given string is a float number. </p>
+<p>This method checks if the given string is a number (taking in mind the possibility of floating numbers and scientific notation) </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00115">115</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00119">119</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a32e6bab4fb43b096f983faedeefd0511_icgraph.svg" width="615" height="836"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a32e6bab4fb43b096f983faedeefd0511_icgraph.svg" width="615" height="836"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
 </div>
-<a id="ad7e66d2aa8756082b18eb40f209ded86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7e66d2aa8756082b18eb40f209ded86">&#9670;&nbsp;</a></span>lookForPattern()</h2>
+<a id="a45361ec2b0f05b254c152b14af595bfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45361ec2b0f05b254c152b14af595bfb">&#9670;&nbsp;</a></span>lookForPattern()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -932,20 +937,20 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">bool utils::lookForPattern </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>column</em>, </td>
+          <td class="paramtype">const string&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>dataset</em>, </td>
+          <td class="paramtype">const string&#160;</td>
+          <td class="paramname"><em>pattern</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>level</em>&#160;</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>threshold</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -960,14 +965,22 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Looks for a pattern. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd>Give a good description for this function. </dd></dl>
+<p>Method to check for a pattern in a string.<br />
+ The method will check, character by character of the first string if there is some equality for each character in the pattern. When done, it will calculate the fraction of characters present in the pattern and compare to the threshold argument. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>string that will be compared against a pattern </td></tr>
+    <tr><td class="paramname">pattern</td><td>string that contains the pattern. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Give a good description for this function. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00753">753</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00741">741</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_ad7e66d2aa8756082b18eb40f209ded86_icgraph.svg" width="340" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a45361ec2b0f05b254c152b14af595bfb_icgraph.svg" width="640" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -1017,11 +1030,12 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>The maximum between the two given numbers.</dd></dl>
 <p>This method returns the maximum between the two numbers given as parameters. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00079">79</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00083">83</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a40640e1942f00797e9fe8284e8fbdb14_icgraph.svg" width="398" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a40640e1942f00797e9fe8284e8fbdb14_icgraph.svg" width="791" height="240"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1071,7 +1085,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>The maximum between the two given numbers.</dd></dl>
 <p>This method returns the maximum between the two numbers given as parameters. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00085">85</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00089">89</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1120,7 +1134,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>The maximum between the two given numbers.</dd></dl>
 <p>This method returns the maximum between the two numbers given as parameters. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00091">91</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00095">95</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1169,11 +1183,12 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>The minumum between the two given numbers.</dd></dl>
 <p>This method returns the minimum between the two numbers given as parameters. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00097">97</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00101">101</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_ab04f5770187b0a8c36c3c8ca55f1e67f_icgraph.svg" width="376" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_ab04f5770187b0a8c36c3c8ca55f1e67f_icgraph.svg" width="1095" height="134"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1223,7 +1238,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>The minumum between the two given numbers.</dd></dl>
 <p>This method returns the minimum between the two numbers given as parameters. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00103">103</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00107">107</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1272,7 +1287,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>The minumum between the two given numbers.</dd></dl>
 <p>This method returns the minimum between the two numbers given as parameters. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00109">109</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00113">113</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1327,16 +1342,18 @@ Here is the caller graph for this function:</div>
 </dl>
 <p>This method sorts the vector using the quicksort method. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00157">157</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00162">162</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a73f038c379c13d23e3220afaa14f9983_cgraph.svg" width="251" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a73f038c379c13d23e3220afaa14f9983_cgraph.svg" width="251" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a73f038c379c13d23e3220afaa14f9983_icgraph.svg" width="842" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a73f038c379c13d23e3220afaa14f9983_icgraph.svg" width="1307" height="639"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1392,11 +1409,12 @@ Here is the caller graph for this function:</div>
 </dl>
 <p>This method sorts the vector using the quicksort method. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00201">201</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00208">208</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a3ff3252e3c5d743757b001734501fe60_cgraph.svg" width="406" height="63"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a3ff3252e3c5d743757b001734501fe60_cgraph.svg" width="406" height="63"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1446,17 +1464,17 @@ Here is the call graph for this function:</div>
   <table class="params">
     <tr><td class="paramname">vect</td><td>The vector that we want to sort. </td></tr>
     <tr><td class="paramname">ini</td><td>The first element of the vector. </td></tr>
-    <tr><td class="paramname">fin</td><td>The last element of the vector.</td></tr>
+    <tr><td class="paramname">fin</td><td>The last element of the vector. </td></tr>
   </table>
   </dd>
 </dl>
-<p>This method sorts the vector using the quicksort method. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00244">244</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00250">250</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a36809b7400f2e78685173f8bbcfe0a39_cgraph.svg" width="406" height="63"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a36809b7400f2e78685173f8bbcfe0a39_cgraph.svg" width="406" height="63"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1486,7 +1504,7 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Read a new line from current input stream.<br />
-This function is better than standard one since cares of operative system compability.<br />
+This function is better than standard one since cares of operative system compatibility.<br />
 It is useful as well because removes tabs and blank spaces at lines at beginning/ending.<br />
 . </p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -1496,10 +1514,10 @@ It is useful as well because removes tabs and blank spaces at lines at beginning
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><br />
- NULL if there is nothing to read.<br />
- Line that has been read. </dd></dl>
+ Line that has been read or nullptr if there is nothing to read.<br />
+</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00302">302</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00308">308</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1528,7 +1546,7 @@ It is useful as well because removes tabs and blank spaces at lines at beginning
 </div><div class="memdoc">
 
 <p>Read a new line from current input stream.<br />
-This function is better than standard one since cares of operative system compability.<br />
+This function is better than standard one since cares of operative system compatibility.<br />
 It is useful as well because removes tabs and blank spaces at lines at beginning/ending.<br />
 . </p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -1538,37 +1556,10 @@ It is useful as well because removes tabs and blank spaces at lines at beginning
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><br />
- NULL if there is nothing to read.<br />
+ nullptr if there is nothing to read.<br />
  Line that has been read. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00345">345</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
-
-</div>
-</div>
-<a id="afa0fa18ea4772ed4520834fc1aaaff70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa0fa18ea4772ed4520834fc1aaaff70">&#9670;&nbsp;</a></span>readLineMEGA()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static char* utils::readLineMEGA </td>
-          <td>(</td>
-          <td class="paramtype">ifstream &amp;&#160;</td>
-          <td class="paramname"><em>file</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>Implement this function. </dd></dl>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00353">353</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1605,11 +1596,12 @@ It is useful as well because removes tabs and blank spaces at lines at beginning
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to an array of numbers that contains line </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00592">592</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00578">578</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_adb8231f84743d1c51e391ab3234714c6_icgraph.svg" width="598" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_adb8231f84743d1c51e391ab3234714c6_icgraph.svg" width="598" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1658,11 +1650,12 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>New string without c character </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00485">485</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00493">493</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a1dce160519187ef2c6e14beb93a2050d_icgraph.svg" width="656" height="190"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a1dce160519187ef2c6e14beb93a2050d_icgraph.svg" width="1436" height="204"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1711,7 +1704,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <p>This method removes spaces in the input string and put the result in the output string. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00143">143</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00147">147</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1758,18 +1751,19 @@ Here is the caller graph for this function:</div>
 <p>Function that replaces a substring with another substring in a string. It makes a copy of the original string. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">subject</td><td>String to be modified </td></tr>
-    <tr><td class="paramname">search</td><td>Substring to search and change </td></tr>
-    <tr><td class="paramname">replace</td><td>Substring to put in place of search </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">subject</td><td>String to be modified </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">search</td><td>Substring to search and change </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">replace</td><td>Substring to put in place of search </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00779">779</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00768">768</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_ab0cb109dc7e12b42abd4cba86f7d8e78_icgraph.svg" width="600" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_ab0cb109dc7e12b42abd4cba86f7d8e78_icgraph.svg" width="600" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1817,18 +1811,19 @@ Here is the caller graph for this function:</div>
 <p>Function that replaces a substring with another substring in a string. It does not make a copy of the original string, but modifies it. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">subject</td><td>String to be modified </td></tr>
-    <tr><td class="paramname">search</td><td>Substring to search and change </td></tr>
-    <tr><td class="paramname">replace</td><td>Substring to put in place of search </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">subject</td><td>String to be modified </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">search</td><td>Substring to search and change </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">replace</td><td>Substring to put in place of search </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00771">771</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00758">758</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a6000246220e801bf6b1e6a553d7af13a_icgraph.svg" width="644" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a6000246220e801bf6b1e6a553d7af13a_icgraph.svg" width="902" height="192"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1867,11 +1862,12 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>the rounded number.</dd></dl>
 <p>This method rounds a double number to a integer. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00069">69</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00071">71</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_ad50731aeb3c8f79ed8372516210dfc9d_icgraph.svg" width="575" height="342"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_ad50731aeb3c8f79ed8372516210dfc9d_icgraph.svg" width="1236" height="346"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1910,7 +1906,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>the rounded number.</dd></dl>
 <p>This method rounds a double number to the inferior integer. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00064">64</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00065">65</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1948,7 +1944,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>the rounded number.</dd></dl>
 <p>This method rounds a double number to the greater integer. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00074">74</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00077">77</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1996,11 +1992,12 @@ Here is the caller graph for this function:</div>
 </dl>
 <p>This method swaps the values in a and b. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00191">191</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00196">196</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a3377ecde55631d1bbc4956e5923b7469_icgraph.svg" width="975" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a3377ecde55631d1bbc4956e5923b7469_icgraph.svg" width="1440" height="639"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -2049,7 +2046,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <p>This method swaps the values in a and b. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00234">234</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00241">241</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -2087,17 +2084,16 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Swaps pointers values. </p>
+<p>Swaps double pointers. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">a</td><td>Pointer A </td></tr>
-    <tr><td class="paramname">b</td><td>Pointer B</td></tr>
+    <tr><td class="paramname">a</td><td>Double pointer A </td></tr>
+    <tr><td class="paramname">b</td><td>Double pointer B </td></tr>
   </table>
   </dd>
 </dl>
-<p>This method swaps the values in a and b. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00273">273</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00279">279</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -2125,8 +2121,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Remove comments inside a biological sequence.<br />
- Remove all content surrounded by ("") or ([]).<br />
+<p>Remove all content surrounded by ("") or ([]).<br />
  It warns as well when a mismatch for these flags is found. <br />
 . </p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -2135,14 +2130,15 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>NULL if there has been a mismatch<br />
- Line trimmed of comments. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Line trimmed of comments or nullptr if there has been a mismatch<br />
+</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00389">389</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00398">398</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a108fccc1d82c3a93b7c70fc2399d6e5f_cgraph.svg" width="314" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classutils_a108fccc1d82c3a93b7c70fc2399d6e5f_cgraph.svg" width="314" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>

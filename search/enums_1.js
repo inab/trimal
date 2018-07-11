@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['verboselevel',['VerboseLevel',['../reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471',1,'reportsystem.h']]]
+  ['infocode',['InfoCode',['../reportsystem_8h.html#a0829d185720916db5a931df28f0064bf',1,'reportsystem.h']]]
 ];

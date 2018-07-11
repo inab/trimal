@@ -1,12 +1,19 @@
 <map id="Cleaner::clean" name="Cleaner::clean">
-<area shape="rect" id="node2" href="$classstatistics_conservation2.html#ad97bc3a8ce5f68d2ef34c0bea685f874" title="Computes and selects the cut point values based on conservation&#39;s values. " alt="" coords="169,49,327,90"/>
-<area shape="rect" id="node6" href="$class_cleaner.html#ad075f0ef730c8023cf8a0e35e7e1e53a" title="Method to clean an alignment. &#160;It removes sequences that overpass or equals a certain threshold..." alt="" coords="160,115,336,141"/>
-<area shape="rect" id="node3" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="449,5,558,32"/>
-<area shape="rect" id="node4" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="450,56,557,83"/>
-<area shape="rect" id="node5" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="705,56,791,83"/>
-<area shape="rect" id="node7" href="$classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method. " alt="" coords="453,224,554,251"/>
-<area shape="rect" id="node8" href="$class_cleaner.html#a033da9ea63774f43f4c7aff04f23da81" title="Method to detect right and left borders. Borders are the first column found with no gaps..." alt="" coords="406,275,601,301"/>
-<area shape="rect" id="node10" href="$class_cleaner.html#a24bd28e4191afc9471adff329bee1466" title="Method for computing the complementary alignment. Complementary Alignment is an alignment containing ..." alt="" coords="384,173,623,200"/>
-<area shape="rect" id="node11" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="406,107,601,149"/>
-<area shape="rect" id="node9" href="$class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. " alt="" coords="671,187,825,229"/>
+<area shape="rect" id="node2" href="$classstatistics_conservation.html#aa11412e9db5babc6dc7b2b4c7c471ed6" title="Computes and selects the cut point values based on conservation&#39;s values. " alt="" coords="172,71,324,112"/>
+<area shape="rect" id="node4" href="$classstatistics_conservation.html#a0e674b4b4b91773fb1c32a532797f328" title="This methods returns a pointer to conservationWindow&#39;s vector. " alt="" coords="399,12,571,53"/>
+<area shape="rect" id="node15" href="$class_cleaner.html#ae7ad16bc3ad459a12c908801fa20da66" title="Method to clean an alignment. &#160;It removes sequences that overpass or equals &#160;the gap threshold but &#160;f..." alt="" coords="160,172,336,213"/>
+<area shape="rect" id="node3" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="431,78,540,105"/>
+<area shape="rect" id="node13" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="432,129,539,155"/>
+<area shape="rect" id="node5" href="$classstatistics_conservation.html#a48c32412653c299b159b56311065fc80" title="Returns if a windows size value has been defined or not. " alt="" coords="656,5,808,47"/>
+<area shape="rect" id="node6" href="$classstatistics_conservation.html#a31f6ff0c30b2a207aba13f7687709467" title="Allows us compute the conservationWindow&#39;s values. " alt="" coords="656,71,808,112"/>
+<area shape="rect" id="node7" href="$classstatistics_conservation.html#ada98c86595cb14a2e8bc058703aa8066" title="Method to calculate the conservation values of a alignment matrix. " alt="" coords="879,71,1031,112"/>
+<area shape="rect" id="node12" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="877,181,1032,223"/>
+<area shape="rect" id="node8" href="$classstatistics_conservation.html#a9fe3502be02c8d6591a6de2d5f81c337" title="Computes the matrix identity between alignment&#39;s columns. " alt="" coords="1080,41,1241,83"/>
+<area shape="rect" id="node10" href="$classnew_alignment.html#a670d5ef1ced9ed6041c3f6afdbd2cc02" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="1289,103,1507,130"/>
+<area shape="rect" id="node9" href="$classutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization. " alt="" coords="1347,49,1449,75"/>
+<area shape="rect" id="node11" href="$classutils.html#a1f1dcbfa7276e54acec72bdbae1b1255" title="Checks an alignment type. " alt="" coords="1555,103,1731,130"/>
+<area shape="rect" id="node14" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="689,137,775,163"/>
+<area shape="rect" id="node16" href="$classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method. " alt="" coords="435,179,536,206"/>
+<area shape="rect" id="node17" href="$class_cleaner.html#ae6d263df982b8e0a605f49e52a5a48d9" title="Method to remove column blocks smaller than a given size. " alt="" coords="384,230,587,257"/>
+<area shape="rect" id="node18" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="635,227,829,268"/>
 </map>

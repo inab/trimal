@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['onlyonesequencesselectionmethodallowed',['OnlyOneSequencesSelectionMethodAllowed',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a41b1602cb91ac5b2a658b4fe0cfc3913',1,'VerboseManager']]],
-  ['outfileneededwhenprintingstatistics',['OutFileNeededWhenPrintingStatistics',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a4e5a541503f8f508494b5fd4d87f20f4',1,'VerboseManager']]]
+  ['keepingonlygapscolumn',['KeepingOnlyGapsColumn',['../reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65af1486bf0d343dc6205b23ea0ddd7c2ac',1,'reportsystem.h']]]
 ];

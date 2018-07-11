@@ -9,13 +9,13 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 84)">
 <title>newAlignment::getAlignmentType</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-84 485,-84 485,4 -4,4"/>
-<!-- Node22 -->
-<g id="node1" class="node"><title>Node22</title>
+<!-- Node28 -->
+<g id="node1" class="node"><title>Node28</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-30 0,-49 163,-49 163,-30 0,-30"/>
 <text text-anchor="middle" x="81.5" y="-37" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getAlignmentType</text>
 </g>
-<!-- Node23 -->
-<g id="node2" class="node"><title>Node23</title>
+<!-- Node29 -->
+<g id="node2" class="node"><title>Node29</title>
 <g id="a_node2"><a xlink:href="classstatistics_conservation2.html#aeaef2f53cd750c692795d663fdef866e" target="_top" xlink:title="Computes the matrix identity between alignment&#39;s columns. ">
 <polygon fill="white" stroke="black" points="199,-49.5 199,-79.5 320,-79.5 320,-49.5 199,-49.5"/>
 <text text-anchor="start" x="207" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">statisticsConservation2</text>
@@ -23,13 +23,13 @@
 </a>
 </g>
 </g>
-<!-- Node22&#45;&gt;Node23 -->
-<g id="edge1" class="edge"><title>Node22&#45;&gt;Node23</title>
+<!-- Node28&#45;&gt;Node29 -->
+<g id="edge1" class="edge"><title>Node28&#45;&gt;Node29</title>
 <path fill="none" stroke="midnightblue" d="M159.531,-50.4419C172.707,-52.3135 186.216,-54.2324 198.852,-56.0273"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="159.933,-46.964 149.54,-49.0227 158.948,-53.8944 159.933,-46.964"/>
 </g>
-<!-- Node25 -->
-<g id="node4" class="node"><title>Node25</title>
+<!-- Node31 -->
+<g id="node4" class="node"><title>Node31</title>
 <g id="a_node4"><a xlink:href="classstatistics_conservation2.html#af9b347fdfff37c662d6336d9b3a01b4d" target="_top" xlink:title="Method to calculate the conservation values of a alignment matrix. ">
 <polygon fill="white" stroke="black" points="200,-0.5 200,-30.5 319,-30.5 319,-0.5 200,-0.5"/>
 <text text-anchor="start" x="208" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">statisticsConservation2</text>
@@ -37,13 +37,13 @@
 </a>
 </g>
 </g>
-<!-- Node22&#45;&gt;Node25 -->
-<g id="edge3" class="edge"><title>Node22&#45;&gt;Node25</title>
+<!-- Node28&#45;&gt;Node31 -->
+<g id="edge3" class="edge"><title>Node28&#45;&gt;Node31</title>
 <path fill="none" stroke="midnightblue" d="M162.361,-28.6098C174.976,-26.8897 187.816,-25.1388 199.831,-23.5003"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="161.748,-25.161 152.313,-29.9801 162.694,-32.0968 161.748,-25.161"/>
 </g>
-<!-- Node24 -->
-<g id="node3" class="node"><title>Node24</title>
+<!-- Node30 -->
+<g id="node3" class="node"><title>Node30</title>
 <g id="a_node3"><a xlink:href="classstatistics_conservation2.html#a41e0e4c03c21e41bfa2c4d01b6dc046a" target="_top" xlink:title="Constructor without any parameters. ">
 <polygon fill="white" stroke="black" points="356,-49.5 356,-79.5 481,-79.5 481,-49.5 356,-49.5"/>
 <text text-anchor="start" x="364" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">statisticsConservation2</text>
@@ -51,8 +51,8 @@
 </a>
 </g>
 </g>
-<!-- Node23&#45;&gt;Node24 -->
-<g id="edge2" class="edge"><title>Node23&#45;&gt;Node24</title>
+<!-- Node29&#45;&gt;Node30 -->
+<g id="edge2" class="edge"><title>Node29&#45;&gt;Node30</title>
 <path fill="none" stroke="midnightblue" d="M330.491,-64.5C338.92,-64.5 347.48,-64.5 355.779,-64.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="330.303,-61.0001 320.303,-64.5 330.303,-68.0001 330.303,-61.0001"/>
 </g>

@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
-<title>Trimal: __internalReport::__reporter Class Reference</title>
+<title>trimAl: __internalReport::__reporter Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
  <tbody>
  <tr style="height: 12px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Trimal
+   <div id="projectname">trimAl
    </div>
    <div id="projectbrief">A Multiple Alignment Sequence framework for Cleaning and Reformating.</div>
   </td>
@@ -94,8 +94,9 @@ $(document).ready(function(){initNavTree('class____internal_report_1_1____report
 </div><!--header-->
 <div class="contents">
 
-<p>Internal class used by <a class="el" href="class____internal_report_1_1____report_system.html#a4c591784e52b48e8f4b51281d80634b3" title="Method to output a message behind two walls: IsDebug  and VerboseLevel passed. If IsDebug  is false...">__internalReport::__reportSystem::log</a> <br />
-This class is able to produce output depending on it's internal value <a class="el" href="class____internal_report_1_1____reporter.html#a7b919a29f23d49b217045aaef27b8c9a" title="Variable that specifies if the object is able to output to cout or not. ">__internalReport::__reporter::CanReport</a>.  
+<p>Internal class used by <a class="el" href="class____internal_report_1_1____report_system.html" title="Class that allows us to centralize all the reporting messages that should be used to inform the user ...">__internalReport::__reportSystem</a> <br />
+This class serves as a proxy for message reporting. <br />
+It will only output to std::cout if <a class="el" href="class____internal_report_1_1____reporter.html#a7b919a29f23d49b217045aaef27b8c9a" title="Variable that specifies if the object is able to output to cout or not. ">__internalReport::__reporter::CanReport</a> it's true.  
  <a href="class____internal_report_1_1____reporter.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>&gt;</code></p>
@@ -108,7 +109,8 @@ Collaboration diagram for __internalReport::__reporter:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aafcc386d7f12602b5748e21601014305"><td class="memItemLeft" align="right" valign="top"><a id="aafcc386d7f12602b5748e21601014305"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>__reporter</b> (bool <a class="el" href="class____internal_report_1_1____reporter.html#a7b919a29f23d49b217045aaef27b8c9a">CanReport</a>)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class____internal_report_1_1____reporter.html#aafcc386d7f12602b5748e21601014305">__reporter</a> (bool <a class="el" href="class____internal_report_1_1____reporter.html#a7b919a29f23d49b217045aaef27b8c9a">CanReport</a>)</td></tr>
+<tr class="memdesc:aafcc386d7f12602b5748e21601014305"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
 <tr class="separator:aafcc386d7f12602b5748e21601014305"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4206667c368ec5bd092bf7c2dba497c"><td class="memTemplParams" colspan="2"><a id="ac4206667c368ec5bd092bf7c2dba497c"></a>
 template&lt;typename T &gt; </td></tr>
@@ -128,10 +130,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a7b919a29f23d49b217045aaef27b8c9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Internal class used by <a class="el" href="class____internal_report_1_1____report_system.html#a4c591784e52b48e8f4b51281d80634b3" title="Method to output a message behind two walls: IsDebug  and VerboseLevel passed. If IsDebug  is false...">__internalReport::__reportSystem::log</a> <br />
-This class is able to produce output depending on it's internal value <a class="el" href="class____internal_report_1_1____reporter.html#a7b919a29f23d49b217045aaef27b8c9a" title="Variable that specifies if the object is able to output to cout or not. ">__internalReport::__reporter::CanReport</a>. </p>
+<div class="textblock"><p>Internal class used by <a class="el" href="class____internal_report_1_1____report_system.html" title="Class that allows us to centralize all the reporting messages that should be used to inform the user ...">__internalReport::__reportSystem</a> <br />
+This class serves as a proxy for message reporting. <br />
+It will only output to std::cout if <a class="el" href="class____internal_report_1_1____reporter.html#a7b919a29f23d49b217045aaef27b8c9a" title="Variable that specifies if the object is able to output to cout or not. ">__internalReport::__reporter::CanReport</a> it's true. </p>
 
-<p class="definition">Definition at line <a class="el" href="reportsystem_8h_source.html#l00213">213</a> of file <a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reportsystem_8h_source.html#l00236">236</a> of file <a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>.</p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/<a class="el" href="reportsystem_8h_source.html">reportsystem.h</a></li>
 </ul>

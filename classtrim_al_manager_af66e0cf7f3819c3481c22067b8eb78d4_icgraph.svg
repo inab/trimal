@@ -9,14 +9,14 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 35)">
 <title>trimAlManager::check_similarity_matrix</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-35 467,-35 467,4 -4,4"/>
-<!-- Node176 -->
-<g id="node1" class="node"><title>Node176</title>
+<!-- Node188 -->
+<g id="node1" class="node"><title>Node188</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-30.5 112,-30.5 112,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
 <text text-anchor="middle" x="56" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_similarity_matrix</text>
 </g>
-<!-- Node177 -->
-<g id="node2" class="node"><title>Node177</title>
+<!-- Node189 -->
+<g id="node2" class="node"><title>Node189</title>
 <g id="a_node2"><a xlink:href="classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" target="_top" xlink:title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult...">
 <polygon fill="white" stroke="black" points="148,-0.5 148,-30.5 260,-30.5 260,-0.5 148,-0.5"/>
 <text text-anchor="start" x="156" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
@@ -24,21 +24,21 @@
 </a>
 </g>
 </g>
-<!-- Node176&#45;&gt;Node177 -->
-<g id="edge1" class="edge"><title>Node176&#45;&gt;Node177</title>
+<!-- Node188&#45;&gt;Node189 -->
+<g id="edge1" class="edge"><title>Node188&#45;&gt;Node189</title>
 <path fill="none" stroke="midnightblue" d="M122.41,-15.5C130.865,-15.5 139.457,-15.5 147.726,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="122.196,-12.0001 112.196,-15.5 122.196,-19.0001 122.196,-12.0001"/>
 </g>
-<!-- Node178 -->
-<g id="node3" class="node"><title>Node178</title>
+<!-- Node190 -->
+<g id="node3" class="node"><title>Node190</title>
 <g id="a_node3"><a xlink:href="classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" target="_top" xlink:title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in...">
 <polygon fill="white" stroke="black" points="296,-6 296,-25 463,-25 463,-6 296,-6"/>
 <text text-anchor="middle" x="379.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::processArguments</text>
 </a>
 </g>
 </g>
-<!-- Node177&#45;&gt;Node178 -->
-<g id="edge2" class="edge"><title>Node177&#45;&gt;Node178</title>
+<!-- Node189&#45;&gt;Node190 -->
+<g id="edge2" class="edge"><title>Node189&#45;&gt;Node190</title>
 <path fill="none" stroke="midnightblue" d="M270.636,-15.5C278.87,-15.5 287.376,-15.5 295.829,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="270.374,-12.0001 260.374,-15.5 270.373,-19.0001 270.374,-12.0001"/>
 </g>

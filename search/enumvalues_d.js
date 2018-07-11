@@ -1,25 +1,10 @@
 var searchData=
 [
-  ['samenameoutput',['SameNameOutput',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a93dbfa060aefb3c33b33567d4e966953',1,'VerboseManager']]],
-  ['selectcolsnotrecognized',['SelectColsNotRecognized',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a714bf89e650e3e44526837cff0623e13',1,'VerboseManager']]],
-  ['selectonlyaccepts',['SelectOnlyAccepts',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37ad93be4e21cf54efda6ee5f3242769e13',1,'VerboseManager']]],
-  ['selectseqsnotrecognized',['SelectSeqsNotRecognized',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37ad4ce8126c0a1b1b648b2d0b7d552aaae',1,'VerboseManager']]],
-  ['selectseqsresandautomathedmethodsincompatibilities',['SelectSeqsResAndAutomathedMethodsIncompatibilities',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37ace7a994af5bd1071e6ae80df2f94b83a',1,'VerboseManager']]],
-  ['selectseqsresandoverlapincompatibilites',['SelectSeqsResAndOverlapIncompatibilites',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a8a45ac9c6358b5ddf6c70245a5fa0c0d',1,'VerboseManager']]],
-  ['selectseqsresandthresholdincompatibilities',['SelectSeqsResAndThresholdIncompatibilities',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37ad1e8434cd0f461cc42662f341f130fdf',1,'VerboseManager']]],
-  ['selectseqsresandwindowincompatibilities',['SelectSeqsResAndWindowIncompatibilities',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a563827aacb70ac5e7700564d1c0c981e',1,'VerboseManager']]],
-  ['sequenceandresiduesoverlapmutuallyneeded',['SequenceAndResiduesOverlapMutuallyNeeded',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37aaffc174a794eb7acc792516f1185e24f',1,'VerboseManager']]],
-  ['sequencecontainsgap',['SequenceContainsGap',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37ac13181b4d82f5000b4001d018141d280',1,'VerboseManager']]],
-  ['sequencehasstopcodon',['SequenceHasStopCodon',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37aa2e89575cf3cb483d8f95a63bf87154a',1,'VerboseManager']]],
-  ['sequencenotmultipleofthree',['SequenceNotMultipleOfThree',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37aa641067abd040b2e08c14566f423364f',1,'VerboseManager']]],
-  ['sequencenotpresentincds',['SequenceNotPresentInCDS',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37aa672dfc048db7a243dc80ad4f56bde7a',1,'VerboseManager']]],
-  ['sequencesnotsamesize',['SequencesNotSameSize',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a14ba0f60824d891f835d8e7872f66226',1,'VerboseManager']]],
-  ['sequencesoverlapnotrecognized',['SequencesOverlapNotRecognized',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a17dd85e5d74a5541549c7c19ccf1bee2',1,'VerboseManager']]],
-  ['sequencesoverlapoutofrange',['SequencesOverlapOutOfRange',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a0bad8d4a573bd5556c9682f67e74869d',1,'VerboseManager']]],
-  ['similaritymatrixnotcompatiblewindow',['SimilarityMatrixNotCompatibleWindow',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a161504129d227eb25befd3af625cfbb9',1,'VerboseManager']]],
-  ['similaritythresholdnotrecognized',['SimilarityThresholdNotRecognized',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a49f3dd91455643e9cc2792bed9f21d0f',1,'VerboseManager']]],
-  ['similaritythresholdoutofrange',['SimilarityThresholdOutOfRange',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a090081ae9a6611dde11e1c6b3cd57f80',1,'VerboseManager']]],
-  ['similaritywindowvaluenotrecognized',['SimilarityWindowValueNotRecognized',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a692edcd1d852f7e18b2f048bbeb9a9c2',1,'VerboseManager']]],
-  ['similaritywindowvalueoutofrange',['SimilarityWindowValueOutOfRange',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37afa9de2924846178f4ad523987977acd1',1,'VerboseManager']]],
-  ['statisticsargumentincompatibilities',['StatisticsArgumentIncompatibilities',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37abf9f41bf75813d8e272a98abc08789f9',1,'VerboseManager']]]
+  ['needtospecifyverboselevel',['NeedToSpecifyVerboseLevel',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faf622597169eacbe18967fbbd2df6f38d',1,'reportsystem.h']]],
+  ['noformatsspecified',['NoFormatsSpecified',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa8d33a1e74113ede7ecb2813fa4629579',1,'reportsystem.h']]],
+  ['noinputfile',['NoInputFile',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa519eb1ab685b9cc52a3127aa0d219448',1,'reportsystem.h']]],
+  ['none',['NONE',['../reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471ac157bdf0b85a40d2619cbc8bc1ae5fe2',1,'reportsystem.h']]],
+  ['noreferencesequenceforcontig',['NoReferenceSequenceForContig',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fac32c19cd0b338d352c40cde3408751d3',1,'reportsystem.h']]],
+  ['notaligned',['NotAligned',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faeb5e16bb2081da4d5c534060df5005aa',1,'reportsystem.h']]],
+  ['notdefined',['NotDefined',['../defines_8h.html#a69d5409d6e7370d6bd3b4f931702e936a3391d45e4b0be480216715453e5d9ddf',1,'defines.h']]]
 ];

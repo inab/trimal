@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
-<title>Trimal: ReadWriteMS Class Reference</title>
+<title>trimAl: ReadWriteMS Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
  <tbody>
  <tr style="height: 12px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Trimal
+   <div id="projectname">trimAl
    </div>
    <div id="projectbrief">A Multiple Alignment Sequence framework for Cleaning and Reformating.</div>
   </td>
@@ -96,26 +96,28 @@ $(document).ready(function(){initNavTree('class_read_write_m_s.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Class that handles the load and save functions of an alignment.  
+<p>Class to handle <a class="el" href="class_read_write_base_state.html">ReadWriteBaseStates </a>, which represents formats.<br />
+It serves as a proxy to the formats, so the code outside the ReadWriteMachine is format-agnostic.  
  <a href="class_read_write_m_s.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_read_write_machine_state_8h_source.html">ReadWriteMachineState.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for ReadWriteMS:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s__coll__graph.svg" width="452" height="440"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s__coll__graph.svg" width="452" height="440"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9dde337280e5598f9006b3b436112caf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classnew_alignment.html">newAlignment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf">loadAlignment</a> (std::string inFile)</td></tr>
-<tr class="memdesc:a9dde337280e5598f9006b3b436112caf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that creates an alignment from a filepath. It automatically detects the format of the file.  <a href="#a9dde337280e5598f9006b3b436112caf">More...</a><br /></td></tr>
+<tr class="memdesc:a9dde337280e5598f9006b3b436112caf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that creates an alignment given a file path. It automatically detects the format of the file.  <a href="#a9dde337280e5598f9006b3b436112caf">More...</a><br /></td></tr>
 <tr class="separator:a9dde337280e5598f9006b3b436112caf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96e81b9c1bb49a746bc923b0ecf9b0d0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0">saveAlignment</a> (std::string outPattern, std::vector&lt; std::string &gt; *outFormats, <a class="el" href="classnew_alignment.html">newAlignment</a> *alignment)</td></tr>
-<tr class="memdesc:a96e81b9c1bb49a746bc923b0ecf9b0d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to save an alignment to a file. It searched on the available_states, the one that can write the alignment in the correct format.  <a href="#a96e81b9c1bb49a746bc923b0ecf9b0d0">More...</a><br /></td></tr>
+<tr class="memdesc:a96e81b9c1bb49a746bc923b0ecf9b0d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to save an alignment to a file. It searches among the available_states one that can write the alignment in the specified format.  <a href="#a96e81b9c1bb49a746bc923b0ecf9b0d0">More...</a><br /></td></tr>
 <tr class="separator:a96e81b9c1bb49a746bc923b0ecf9b0d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab019d93e740d838c7e64415630ca5ad5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#ab019d93e740d838c7e64415630ca5ad5">loadAndSaveMultipleAlignments</a> (std::vector&lt; std::string &gt; *inFile, std::string *outPattern, std::vector&lt; std::string &gt; *outFormats)</td></tr>
-<tr class="memdesc:ab019d93e740d838c7e64415630ca5ad5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that takes multile files, loads them and saves in a cumulus of formats, using an outPattern.  <a href="#ab019d93e740d838c7e64415630ca5ad5">More...</a><br /></td></tr>
+<tr class="memdesc:ab019d93e740d838c7e64415630ca5ad5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that takes multiple files, loads them and saves in a cumulus of formats, using an outPattern.  <a href="#ab019d93e740d838c7e64415630ca5ad5">More...</a><br /></td></tr>
 <tr class="separator:ab019d93e740d838c7e64415630ca5ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5235fb14e8fb57c0d21a2b5a2c9d1666"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a5235fb14e8fb57c0d21a2b5a2c9d1666">getFileFormatName</a> (std::string inFile)</td></tr>
 <tr class="memdesc:a5235fb14e8fb57c0d21a2b5a2c9d1666"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to obtain the format name of a given file.  <a href="#a5235fb14e8fb57c0d21a2b5a2c9d1666">More...</a><br /></td></tr>
@@ -128,48 +130,62 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a7e3dfa28fc4c4c55e4456786a56f683c">getOutputFormatsAvailable</a> ()</td></tr>
 <tr class="memdesc:a7e3dfa28fc4c4c55e4456786a56f683c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to obtain all format names available by this object that can <b>save</b> an alignment. <br /></td></tr>
 <tr class="separator:a7e3dfa28fc4c4c55e4456786a56f683c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fa503119fec930b30ae412c711ef802"><td class="memItemLeft" align="right" valign="top"><a id="a7fa503119fec930b30ae412c711ef802"></a>
+std::vector&lt; <a class="el" href="classnew_alignment.html">newAlignment</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a7fa503119fec930b30ae412c711ef802">splitAlignmentKeeping</a> (<a class="el" href="classnew_alignment.html">newAlignment</a> &amp;alignment)</td></tr>
+<tr class="memdesc:a7fa503119fec930b30ae412c711ef802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to divide an alignment into different alignments, each one with a sequence from the original.<br />
+ This function does a deep copy of each sequence, so the original alignment can be deleted after being splitted. <br /></td></tr>
+<tr class="separator:a7fa503119fec930b30ae412c711ef802"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a9641b0e97beb410fa814bcf015d52a98"><td class="memItemLeft" align="right" valign="top"><a id="a9641b0e97beb410fa814bcf015d52a98"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasOutputFile</b> = true</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a9641b0e97beb410fa814bcf015d52a98">hasOutputFile</a> = true</td></tr>
+<tr class="memdesc:a9641b0e97beb410fa814bcf015d52a98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag to know if the machine has an output file or it has to output to console. <br /></td></tr>
 <tr class="separator:a9641b0e97beb410fa814bcf015d52a98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9c173cd7f219d3c329b147e6fec3b31"><td class="memItemLeft" align="right" valign="top"><a id="ab9c173cd7f219d3c329b147e6fec3b31"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>shortNames</b> = false</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#ab9c173cd7f219d3c329b147e6fec3b31">shortNames</a> = false</td></tr>
+<tr class="memdesc:ab9c173cd7f219d3c329b147e6fec3b31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag to know if the machine should shorten the names on the formats it's possible to. <br /></td></tr>
 <tr class="separator:ab9c173cd7f219d3c329b147e6fec3b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e88be38c30cd43a0689f3395b467cf4"><td class="memItemLeft" align="right" valign="top"><a id="a9e88be38c30cd43a0689f3395b467cf4"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>keepHeader</b> = false</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a9e88be38c30cd43a0689f3395b467cf4">keepHeader</a> = false</td></tr>
+<tr class="memdesc:a9e88be38c30cd43a0689f3395b467cf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag to know if the machine should keep original headers. <br /></td></tr>
 <tr class="separator:a9e88be38c30cd43a0689f3395b467cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bae1b12cac37ea99f4a59ae774d815e"><td class="memItemLeft" align="right" valign="top"><a id="a0bae1b12cac37ea99f4a59ae774d815e"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>reverse</b> = false</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a0bae1b12cac37ea99f4a59ae774d815e">reverse</a> = false</td></tr>
+<tr class="memdesc:a0bae1b12cac37ea99f4a59ae774d815e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag to know if sequences should be reversed before saving them. <br /></td></tr>
 <tr class="separator:a0bae1b12cac37ea99f4a59ae774d815e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a269556792488b541719596ef63c3b181"><td class="memItemLeft" align="right" valign="top"><a id="a269556792488b541719596ef63c3b181"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>format</b> = false</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a269556792488b541719596ef63c3b181">format</a> = false</td></tr>
+<tr class="memdesc:a269556792488b541719596ef63c3b181"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag to know if the machine should output the format information about the alignment. <br /></td></tr>
 <tr class="separator:a269556792488b541719596ef63c3b181"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a404776cf14820ef01b1de600ae963de1"><td class="memItemLeft" align="right" valign="top"><a id="a404776cf14820ef01b1de600ae963de1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>type</b> = false</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a404776cf14820ef01b1de600ae963de1">type</a> = false</td></tr>
+<tr class="memdesc:a404776cf14820ef01b1de600ae963de1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag to know if the machine should output the type of the alignment. <br /></td></tr>
 <tr class="separator:a404776cf14820ef01b1de600ae963de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b92e4a5a3df785e9b19287b293ff151"><td class="memItemLeft" align="right" valign="top"><a id="a2b92e4a5a3df785e9b19287b293ff151"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>info</b> = false</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a2b92e4a5a3df785e9b19287b293ff151">info</a> = false</td></tr>
+<tr class="memdesc:a2b92e4a5a3df785e9b19287b293ff151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag to know if the machine should output the information of the alignment. <br /></td></tr>
 <tr class="separator:a2b92e4a5a3df785e9b19287b293ff151"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a17b0f1d3806c546df106a670490e1c2e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a17b0f1d3806c546df106a670490e1c2e">addState</a> (<a class="el" href="class_read_write_base_state.html">ReadWriteBaseState</a> *newState)</td></tr>
-<tr class="memdesc:a17b0f1d3806c546df106a670490e1c2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that adds a newState to the available_states vector. This should be called on the constructor function foreach format existent.  <a href="#a17b0f1d3806c546df106a670490e1c2e">More...</a><br /></td></tr>
+<tr class="memdesc:a17b0f1d3806c546df106a670490e1c2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that adds a newState to the <a class="el" href="class_read_write_m_s.html#a1ee89fddcc66967d04c5d7d81cd4a8fa">ReadWriteMS::available_states</a> vector.<br />
+ This should be called on the constructor function foreach format existent.  <a href="#a17b0f1d3806c546df106a670490e1c2e">More...</a><br /></td></tr>
 <tr class="separator:a17b0f1d3806c546df106a670490e1c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a1ee89fddcc66967d04c5d7d81cd4a8fa"><td class="memItemLeft" align="right" valign="top"><a id="a1ee89fddcc66967d04c5d7d81cd4a8fa"></a>
-std::vector&lt; <a class="el" href="class_read_write_base_state.html">ReadWriteBaseState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a1ee89fddcc66967d04c5d7d81cd4a8fa">available_states</a></td></tr>
-<tr class="memdesc:a1ee89fddcc66967d04c5d7d81cd4a8fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector that contains the available formats to load/save from. They are loaded into the format in the constructor function. <br /></td></tr>
+<tr class="memitem:a1ee89fddcc66967d04c5d7d81cd4a8fa"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_read_write_base_state.html">ReadWriteBaseState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_m_s.html#a1ee89fddcc66967d04c5d7d81cd4a8fa">available_states</a></td></tr>
+<tr class="memdesc:a1ee89fddcc66967d04c5d7d81cd4a8fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector that contains the available formats to load/save from.<br />
+ They are loaded into the format in the constructor function.  <a href="#a1ee89fddcc66967d04c5d7d81cd4a8fa">More...</a><br /></td></tr>
 <tr class="separator:a1ee89fddcc66967d04c5d7d81cd4a8fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Class that handles the load and save functions of an alignment. </p>
+<div class="textblock"><p>Class to handle <a class="el" href="class_read_write_base_state.html">ReadWriteBaseStates </a>, which represents formats.<br />
+It serves as a proxy to the formats, so the code outside the ReadWriteMachine is format-agnostic. </p>
 
-<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8h_source.html#l00013">13</a> of file <a class="el" href="_read_write_machine_state_8h_source.html">ReadWriteMachineState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8h_source.html#l00016">16</a> of file <a class="el" href="_read_write_machine_state_8h_source.html">ReadWriteMachineState.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a17b0f1d3806c546df106a670490e1c2e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a17b0f1d3806c546df106a670490e1c2e">&#9670;&nbsp;</a></span>addState()</h2>
@@ -195,7 +211,8 @@ std::vector&lt; <a class="el" href="class_read_write_base_state.html">ReadWriteB
 </table>
 </div><div class="memdoc">
 
-<p>Function that adds a newState to the available_states vector. This should be called on the constructor function foreach format existent. </p>
+<p>Function that adds a newState to the <a class="el" href="class_read_write_m_s.html#a1ee89fddcc66967d04c5d7d81cd4a8fa">ReadWriteMS::available_states</a> vector.<br />
+ This should be called on the constructor function foreach format existent. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">newState</td><td>Pointer to the newState we want to instantiate. </td></tr>
@@ -203,7 +220,7 @@ std::vector&lt; <a class="el" href="class_read_write_base_state.html">ReadWriteB
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00043">43</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00044">44</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
 
 </div>
 </div>
@@ -226,21 +243,23 @@ std::vector&lt; <a class="el" href="class_read_write_base_state.html">ReadWriteB
 <p>Function to obtain the format name of a given file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">inFile</td><td>Filepath of the file which we want to obtain it's format. </td></tr>
+    <tr><td class="paramname">inFile</td><td>File path of the file which we want to obtain it's format. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00318">318</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00313">313</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a5235fb14e8fb57c0d21a2b5a2c9d1666_cgraph.svg" width="440" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a5235fb14e8fb57c0d21a2b5a2c9d1666_cgraph.svg" width="440" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a5235fb14e8fb57c0d21a2b5a2c9d1666_icgraph.svg" width="932" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a5235fb14e8fb57c0d21a2b5a2c9d1666_icgraph.svg" width="903" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -261,25 +280,28 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Function that creates an alignment from a filepath. It automatically detects the format of the file. </p>
+<p>Function that creates an alignment given a file path. It automatically detects the format of the file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">inFile</td><td>Filepath of the alignment to load. </td></tr>
+    <tr><td class="paramname">inFile</td><td>File path of the alignment to load. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the alignment if it could be loaded. Null if not. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><b>Pointer to the alignment</b> if it could be loaded.<br />
+ <b>Null</b> if not. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00048">48</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00049">49</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_cgraph.svg" width="408" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_cgraph.svg" width="408" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_icgraph.svg" width="967" height="235"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a9dde337280e5598f9006b3b436112caf_icgraph.svg" width="696" height="170"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -316,21 +338,37 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Function that takes multile files, loads them and saves in a cumulus of formats, using an outPattern. </p>
+<p>Function that takes multiple files, loads them and saves in a cumulus of formats, using an outPattern. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">inFile</td><td>Vector of files to load, reformat and save. </td></tr>
-    <tr><td class="paramname">outPattern</td><td>Path and name of the new files. The function changes some optional tokens on the original string to obtain multiple versions: [in] Token that is changed with the original filename without extension. [format] Token that is changed with the new format name. [extension] Token that is changed with the format file extensions. </td></tr>
+    <tr><td class="paramname">outPattern</td><td>Path and name of the new files.<br />
+ The function changes some optional tokens on the original string to obtain multiple versions: <br />
+<ul>
+<li><b> [in] </b> Token that is changed with the original filename without extension.<br />
+</li>
+<li><b> [format] </b> Token that is changed with the new format name.<br />
+</li>
+<li><b> [extension] </b> Token that is changed with the format file extensions. </li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Without using tags, when outputting several files </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
     <tr><td class="paramname">outFormats</td><td>Output formats that original files should reformat to. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00210">210</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8cpp_source.html#l00209">209</a> of file <a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_ab019d93e740d838c7e64415630ca5ad5_cgraph.svg" width="428" height="220"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_ab019d93e740d838c7e64415630ca5ad5_cgraph.svg" width="428" height="220"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -367,10 +405,10 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Function to save an alignment to a file. It searched on the available_states, the one that can write the alignment in the correct format. </p>
+<p>Function to save an alignment to a file. It searches among the available_states one that can write the alignment in the specified format. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">outPattern</td><td>Filepath to save the alignment. </td></tr>
+    <tr><td class="paramname">outPattern</td><td>File path to save the alignment. </td></tr>
     <tr><td class="paramname">outFormats</td><td>Format in which save the alignment. </td></tr>
     <tr><td class="paramname">alignment</td><td>Alignment </td></tr>
   </table>
@@ -381,18 +419,50 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a96e81b9c1bb49a746bc923b0ecf9b0d0_cgraph.svg" width="438" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a96e81b9c1bb49a746bc923b0ecf9b0d0_cgraph.svg" width="438" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a96e81b9c1bb49a746bc923b0ecf9b0d0_icgraph.svg" width="416" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_m_s_a96e81b9c1bb49a746bc923b0ecf9b0d0_icgraph.svg" width="416" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1ee89fddcc66967d04c5d7d81cd4a8fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ee89fddcc66967d04c5d7d81cd4a8fa">&#9670;&nbsp;</a></span>available_states</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="class_read_write_base_state.html">ReadWriteBaseState</a>*&gt; ReadWriteMS::available_states</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector that contains the available formats to load/save from.<br />
+ They are loaded into the format in the constructor function. </p>
+<dl class="section note"><dt>Note</dt><dd>The formats (<a class="el" href="class_read_write_base_state.html">ReadWriteBaseState</a>) are loaded statically, no dynamically, so when a new format is implemented, it has to be added <em>by hand</em> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_read_write_machine_state_8h_source.html#l00030">30</a> of file <a class="el" href="_read_write_machine_state_8h_source.html">ReadWriteMachineState.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/ReadWriteMS/<a class="el" href="_read_write_machine_state_8h_source.html">ReadWriteMachineState.h</a></li>
+<li>include/ReadWriteMS/<a class="el" href="formats__header_8h_source.html">formats_header.h</a></li>
 <li>source/ReadWriteMS/<a class="el" href="_read_write_machine_state_8cpp_source.html">ReadWriteMachineState.cpp</a></li>
 </ul>
 </div><!-- contents -->

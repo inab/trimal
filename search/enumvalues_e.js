@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['trimmingmethodneeded',['TrimmingMethodNeeded',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a25801d8c82d0e1b6d6baff0bfec49458',1,'VerboseManager']]]
+  ['onlyoneformatonconsoleoutput',['OnlyOneFormatOnConsoleOutput',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faccabb48279b7d32957941fd7015872e3',1,'reportsystem.h']]],
+  ['onlyonesequencesselectionmethodallowed',['OnlyOneSequencesSelectionMethodAllowed',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa2863d2357011c5c770f5ae92dfe54fd0',1,'reportsystem.h']]],
+  ['outfileneededwhenprintingstatistics',['OutFileNeededWhenPrintingStatistics',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa252bbc3d92979d1a287f659ced5b6a18',1,'reportsystem.h']]],
+  ['outputformatnotrecognized',['OutputFormatNotRecognized',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad0d38edc78b38b302a33d438e6337246',1,'reportsystem.h']]]
 ];

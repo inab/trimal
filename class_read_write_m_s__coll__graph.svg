@@ -16,7 +16,7 @@
 </g>
 <!-- Node3 -->
 <g id="node3" class="node"><title>Node3</title>
-<g id="a_node3"><a xlink:href="class_read_write_base_state.html" target="_top" xlink:title="Abstract class to implement. &#160;This class implementations are instantiated by the ReadWrite Machine St...">
+<g id="a_node3"><a xlink:href="class_read_write_base_state.html" target="_top" xlink:title="Abstract class that represent a format. Formats must inherit from this class and will be handled by R...">
 <polygon fill="white" stroke="black" points="125,-78.5 125,-97.5 234,-97.5 234,-78.5 125,-78.5"/>
 <text text-anchor="middle" x="179.5" y="-85.5" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteBaseState</text>
 </a>

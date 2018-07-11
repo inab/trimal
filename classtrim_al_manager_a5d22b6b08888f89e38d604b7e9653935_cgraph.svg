@@ -9,27 +9,27 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 73.5)">
 <title>trimAlManager::max_identity_argument</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-73.5 260,-73.5 260,4 -4,4"/>
-<!-- Node275 -->
-<g id="node1" class="node"><title>Node275</title>
+<!-- Node277 -->
+<g id="node1" class="node"><title>Node277</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-22.5 0,-52.5 104,-52.5 104,-22.5 0,-22.5"/>
 <text text-anchor="start" x="8" y="-40.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::max</text>
 <text text-anchor="middle" x="52" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">_identity_argument</text>
 </g>
-<!-- Node276 -->
-<g id="node2" class="node"><title>Node276</title>
+<!-- Node278 -->
+<g id="node2" class="node"><title>Node278</title>
 <g id="a_node2"><a xlink:href="classutils.html#a32e6bab4fb43b096f983faedeefd0511" target="_top" xlink:title="String&#45;is&#45;number checking. ">
 <polygon fill="white" stroke="black" points="156.5,-50 156.5,-69 239.5,-69 239.5,-50 156.5,-50"/>
 <text text-anchor="middle" x="198" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">utils::isNumber</text>
 </a>
 </g>
 </g>
-<!-- Node275&#45;&gt;Node276 -->
-<g id="edge1" class="edge"><title>Node275&#45;&gt;Node276</title>
+<!-- Node277&#45;&gt;Node278 -->
+<g id="edge1" class="edge"><title>Node277&#45;&gt;Node278</title>
 <path fill="none" stroke="midnightblue" d="M104.174,-45.3183C117.831,-47.4048 132.582,-49.6583 146.217,-51.7416"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="145.977,-55.2453 156.391,-53.2958 147.034,-48.3256 145.977,-55.2453"/>
 </g>
-<!-- Node277 -->
-<g id="node3" class="node"><title>Node277</title>
+<!-- Node279 -->
+<g id="node3" class="node"><title>Node279</title>
 <g id="a_node3"><a xlink:href="class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" target="_top" xlink:title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. ">
 <polygon fill="white" stroke="black" points="140,-0.5 140,-30.5 256,-30.5 256,-0.5 140,-0.5"/>
 <text text-anchor="start" x="148" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
@@ -37,8 +37,8 @@
 </a>
 </g>
 </g>
-<!-- Node275&#45;&gt;Node277 -->
-<g id="edge2" class="edge"><title>Node275&#45;&gt;Node277</title>
+<!-- Node277&#45;&gt;Node279 -->
+<g id="edge2" class="edge"><title>Node277&#45;&gt;Node279</title>
 <path fill="none" stroke="midnightblue" d="M104.174,-29.6817C112.425,-28.4212 121.075,-27.0997 129.637,-25.7916"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="130.262,-29.2368 139.619,-24.2666 129.205,-22.3171 130.262,-29.2368"/>
 </g>

@@ -1,11 +1,9 @@
 <map id="Cleaner::clean2ndSlope" name="Cleaner::clean2ndSlope">
-<area shape="rect" id="node2" href="$class_cleaner.html#ad075f0ef730c8023cf8a0e35e7e1e53a" title="Method to clean an alignment. &#160;It removes sequences that overpass or equals a certain threshold..." alt="" coords="213,132,389,159"/>
-<area shape="rect" id="node3" href="$classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method. " alt="" coords="506,5,607,32"/>
-<area shape="rect" id="node4" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="502,56,611,83"/>
-<area shape="rect" id="node5" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="503,107,610,133"/>
-<area shape="rect" id="node7" href="$class_cleaner.html#a033da9ea63774f43f4c7aff04f23da81" title="Method to detect right and left borders. Borders are the first column found with no gaps..." alt="" coords="459,157,654,184"/>
-<area shape="rect" id="node9" href="$class_cleaner.html#a24bd28e4191afc9471adff329bee1466" title="Method for computing the complementary alignment. Complementary Alignment is an alignment containing ..." alt="" coords="437,208,676,235"/>
-<area shape="rect" id="node10" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="459,259,654,301"/>
-<area shape="rect" id="node6" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="759,107,844,133"/>
-<area shape="rect" id="node8" href="$class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. " alt="" coords="724,209,879,250"/>
+<area shape="rect" id="node2" href="$class_cleaner.html#a66bda5807c06cfaf1609e4c1f5955671" title="Method to clean an alignment. &#160;It removes sequences that overpass or equals a certain threshold..." alt="" coords="213,74,389,115"/>
+<area shape="rect" id="node3" href="$classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method. " alt="" coords="488,5,589,32"/>
+<area shape="rect" id="node4" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="485,56,592,83"/>
+<area shape="rect" id="node6" href="$class_cleaner.html#ae6d263df982b8e0a605f49e52a5a48d9" title="Method to remove column blocks smaller than a given size. " alt="" coords="437,107,640,133"/>
+<area shape="rect" id="node7" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="441,158,636,199"/>
+<area shape="rect" id="node5" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="723,56,808,83"/>
+<area shape="rect" id="node8" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="688,158,843,199"/>
 </map>

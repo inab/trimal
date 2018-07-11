@@ -1,11 +1,11 @@
-<!-- HTML header for doxygen 1.8.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
-<title>Trimal: include/reportsystem.h File Reference</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>trimAl: include/reportsystem.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,23 +20,18 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="extra.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
-<table cellspacing="0" cellpadding="0" width=100%>
+<table cellspacing="0" cellpadding="0">
  <tbody>
- <tr style="height: 12px;">
-  <td style="padding-left: 0.5em;">
-   <div id="projectname">Trimal
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">trimAl
    </div>
-   <div id="projectbrief">A Multiple Alignment Sequence framework for Cleaning and Reformating.</div>
   </td>
-<!--  <td style="float:right;margin-top:18px;vertical-align:bottom">
-     <a href="http://assimilationsystems.com/download/">
-       <img src="http://assimilationsystems.com/wp-content/uploads/2015/03/Download-Doxygen.png" style="float:right;" height="20" width="73">
-     </a>
-  </td>-->
  </tr>
  </tbody>
 </table>
@@ -87,14 +82,12 @@ $(document).ready(function(){initNavTree('reportsystem_8h.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
 <div class="title">reportsystem.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Method to report a Warning. It will be displayed if <a class="el" href="class____internal_report_1_1____report_system.html#a595ee8c5cc90cf011ded3f26b90d7160">Level </a> is equal or higher to ::VerboseLevel::WARNING.  
-<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
@@ -103,12 +96,23 @@ $(document).ready(function(){initNavTree('reportsystem_8h.html','');});
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for reportsystem.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="reportsystem_8h__incl.svg" width="391" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><img src="reportsystem_8h__incl.png" border="0" usemap="#include_2reportsystem_8h" alt=""/></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="reportsystem_8h__dep__incl.svg" width="1927" height="216"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><img src="reportsystem_8h__dep__incl.png" border="0" usemap="#include_2reportsystem_8hdep" alt=""/></div>
+<map name="include_2reportsystem_8hdep" id="include_2reportsystem_8hdep">
+<area shape="rect" id="node2" href="_cleaner_8cpp.html" title="source/Cleaner.cpp" alt="" coords="5,87,140,114"/>
+<area shape="rect" id="node3" href="new_alignment_8cpp.html" title="source/newAlignment.cpp" alt="" coords="164,87,336,114"/>
+<area shape="rect" id="node4" href="newmain_8cpp.html" title="source/newmain.cpp" alt="" coords="360,87,503,114"/>
+<area shape="rect" id="node5" href="reportsystem_8cpp.html" title="source/reportsystem.cpp" alt="" coords="527,87,693,114"/>
+<area shape="rect" id="node6" href="similarity_matrix_8cpp.html" title="source/similarityMatrix.cpp" alt="" coords="718,87,897,114"/>
+<area shape="rect" id="node7" href="_timer_factory_8cpp.html" title="source/TimerFactory.cpp" alt="" coords="921,87,1088,114"/>
+<area shape="rect" id="node8" href="trimal_argument_parser_8cpp.html" title="source/trimalArgumentParser.cpp" alt="" coords="1113,87,1329,114"/>
+<area shape="rect" id="node9" href="utils_8cpp.html" title="source/utils.cpp" alt="" coords="1353,87,1467,114"/>
+<area shape="rect" id="node10" href="_read_write_base_state_8h.html" title="include/ReadWriteMS\l/ReadWriteBaseState.h" alt="" coords="1491,80,1651,121"/>
+</map>
 </div>
 </div>
 <p><a href="reportsystem_8h_source.html">Go to the source code of this file.</a></p>
@@ -117,7 +121,7 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class____internal_report_1_1____reporter.html">__internalReport::__reporter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal class used by <a class="el" href="class____internal_report_1_1____report_system.html#a4c591784e52b48e8f4b51281d80634b3" title="Method to output a message behind two walls: IsDebug  and VerboseLevel passed. If IsDebug  is false...">__internalReport::__reportSystem::log</a> <br />
-This class is able to produce output depending on it's internal value <a class="el" href="class____internal_report_1_1____reporter.html#a7b919a29f23d49b217045aaef27b8c9a" title="Variable that specifies if the object is able to output to cout or not. ">__internalReport::__reporter::CanReport</a>.  <a href="class____internal_report_1_1____reporter.html#details">More...</a><br /></td></tr>
+This class is able to produce output depending on it's internal value __internalReport::__reporter::CanReport.  <a href="class____internal_report_1_1____reporter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class____internal_report_1_1____report_system.html">__internalReport::__reportSystem</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that allows us to centralize all the Debug that should be used to inform the user of Errors, Warnings and Info.<br />
@@ -126,239 +130,299 @@ This allows us to protect the user from receiving Debug/Developing messages that
 <b> THIS CLASS SHOULDNT BE USED DIRECTLY </b> Use instanced global variable <a class="el" href="class____internal_report_1_1____report_system.html#a7a960f90171492d4fc7e9d955cc8e2a1">debug </a> instead.  <a href="class____internal_report_1_1____report_system.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace____internal_report"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace____internal_report.html">__internalReport</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a0822d01c051e2b76c48c9ae19b07a471"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471">VerboseLevel</a> { <br />
-&#160;&#160;<a class="el" href="reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471ac157bdf0b85a40d2619cbc8bc1ae5fe2">NONE</a> = 0, 
-<br />
-&#160;&#160;<a class="el" href="reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471a748005382152808a72b1a9177d9dc806">INFO</a> = 1, 
-<br />
-&#160;&#160;<a class="el" href="reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471a984de77c680eaff141ec910e25568a81">WARNING</a> = 2, 
-<br />
-&#160;&#160;<a class="el" href="reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471a2fd6f336d08340583bd620a7f5694c90">ERROR</a> = 3
-<br />
+<tr class="memitem:a0822d01c051e2b76c48c9ae19b07a471"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471">VerboseLevel</a> { <a class="el" href="reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471a748005382152808a72b1a9177d9dc806">INFO</a> = 1, 
+<a class="el" href="reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471a984de77c680eaff141ec910e25568a81">WARNING</a> = 2, 
+<a class="el" href="reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471a2fd6f336d08340583bd620a7f5694c90">ERROR</a> = 3, 
+<a class="el" href="reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471ac157bdf0b85a40d2619cbc8bc1ae5fe2">NONE</a> = 4
  }<tr class="memdesc:a0822d01c051e2b76c48c9ae19b07a471"><td class="mdescLeft">&#160;</td><td class="mdescRight">VerboseLevel used to report messages.  <a href="reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471">More...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:a0822d01c051e2b76c48c9ae19b07a471"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59e56af19e754a6aa26a612ebf91d05f"><td class="memItemLeft" align="right" valign="top"><a id="a59e56af19e754a6aa26a612ebf91d05f"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ErrorCode</b> { <br />
-&#160;&#160;<b>AlignmentNotLoaded</b> = 1, 
-<br />
-&#160;&#160;<b>NoFormatsSpecified</b> = 2, 
-<br />
-&#160;&#160;<b>AlternativeMatrixNotRecognized</b> = 3, 
-<br />
-&#160;&#160;<b>ReferenceFileNotLoaded</b> = 4, 
-<br />
-&#160;&#160;<b>GapThresholdOutOfRange</b> = 5, 
-<br />
-&#160;&#160;<b>GapThresholdNotRecognized</b> = 6, 
-<br />
-&#160;&#160;<b>SimilarityThresholdOutOfRange</b> = 7, 
-<br />
-&#160;&#160;<b>SimilarityThresholdNotRecognized</b> = 8, 
-<br />
-&#160;&#160;<b>ConsistencyThresholdOutOfRange</b> = 9, 
-<br />
-&#160;&#160;<b>ConsistencyThresholdNotRecognized</b> = 10, 
-<br />
-&#160;&#160;<b>ConservationThresholdOutOfRange</b> = 11, 
-<br />
-&#160;&#160;<b>ConservationThresholdNotRecognized</b> = 12, 
-<br />
-&#160;&#160;<b>ResidueOverlapOutOfRange</b> = 13, 
-<br />
-&#160;&#160;<b>ResidueOverlapNotRecognized</b> = 14, 
-<br />
-&#160;&#160;<b>SequencesOverlapOutOfRange</b> = 15, 
-<br />
-&#160;&#160;<b>SequencesOverlapNotRecognized</b> = 16, 
-<br />
-&#160;&#160;<b>MaxIdentityOutOfRange</b> = 17, 
-<br />
-&#160;&#160;<b>MaxIdentityNotRecognized</b> = 18, 
-<br />
-&#160;&#160;<b>ClustersValueOutOfRange</b> = 19, 
-<br />
-&#160;&#160;<b>ClustersValueNotRecognized</b> = 20, 
-<br />
-&#160;&#160;<b>WindowValueOutOfRange</b> = 21, 
-<br />
-&#160;&#160;<b>WindowValueNotRecognized</b> = 22, 
-<br />
-&#160;&#160;<b>SelectSeqsNotRecognized</b> = 23, 
-<br />
-&#160;&#160;<b>SelectColsNotRecognized</b> = 24, 
-<br />
-&#160;&#160;<b>GapWindowValueOutOfRange</b> = 25, 
-<br />
-&#160;&#160;<b>GapWindowValueNotRecognized</b> = 26, 
-<br />
-&#160;&#160;<b>SimilarityWindowValueOutOfRange</b> = 27, 
-<br />
-&#160;&#160;<b>SimilarityWindowValueNotRecognized</b> = 28, 
-<br />
-&#160;&#160;<b>ConsistencyWindowValueOutOfRange</b> = 27, 
-<br />
-&#160;&#160;<b>ConsistencyWindowValueNotRecognized</b> = 28, 
-<br />
-&#160;&#160;<b>BlockSizeOutOfRange</b> = 29, 
-<br />
-&#160;&#160;<b>BlockSizeNotRecognized</b> = 30, 
-<br />
-&#160;&#160;<b>InFileComparisonStatistics</b> = 31, 
-<br />
-&#160;&#160;<b>IncompatibleArguments</b> = 32, 
-<br />
-&#160;&#160;<b>SelectSeqsResAndThresholdIncompatibilities</b> = 33, 
-<br />
-&#160;&#160;<b>SelectSeqsResAndAutomathedMethodsIncompatibilities</b> = 34, 
-<br />
-&#160;&#160;<b>SelectSeqsResAndWindowIncompatibilities</b> = 35, 
-<br />
-&#160;&#160;<b>SelectSeqsResAndOverlapIncompatibilites</b> = 36, 
-<br />
-&#160;&#160;<b>OnlyOneSequencesSelectionMethodAllowed</b> = 37, 
-<br />
-&#160;&#160;<b>CombinationAmongTrimmingMethods</b> = 38, 
-<br />
-&#160;&#160;<b>AutomathicMethodAndBlock</b> = 39, 
-<br />
-&#160;&#160;<b>WindowAndArgumentIncompatibilities</b> = 40, 
-<br />
-&#160;&#160;<b>CombinationAmongThresholdsMethods</b> = 41, 
-<br />
-&#160;&#160;<b>GeneralAndSpecificWindows</b> = 42, 
-<br />
-&#160;&#160;<b>StatisticsArgumentIncompatibilities</b> = 43, 
-<br />
-&#160;&#160;<b>TrimmingMethodNeeded</b> = 44, 
-<br />
-&#160;&#160;<b>ForceFileWithoutCompareDataset</b> = 45, 
-<br />
-&#160;&#160;<b>BacktranslationWithoutMainAlignment</b> = 46, 
-<br />
-&#160;&#160;<b>NotAligned</b> = 47, 
-<br />
-&#160;&#160;<b>MatrixGivenWithNoMethodToUseIt</b> = 48, 
-<br />
-&#160;&#160;<b>SameNameOutput</b> = 49, 
-<br />
-&#160;&#160;<b>SequenceAndResiduesOverlapMutuallyNeeded</b> = 50, 
-<br />
-&#160;&#160;<b>OutFileNeededWhenPrintingStatistics</b> = 51, 
-<br />
-&#160;&#160;<b>AlignmentTypesNotMatching</b> = 52, 
-<br />
-&#160;&#160;<b>BlocksizeTooBig</b> = 53, 
-<br />
-&#160;&#160;<b>ParemeterOnlyOnBacktranslation</b> = 54, 
-<br />
-&#160;&#160;<b>ProteinAlignmentMustBeAligned</b> = 55, 
-<br />
-&#160;&#160;<b>BacktransAlignIsDNA</b> = 56, 
-<br />
-&#160;&#160;<b>ImpossibleToGenerate</b> = 57, 
-<br />
-&#160;&#160;<b>ImpossibleToProcessMatrix</b> = 58, 
-<br />
-&#160;&#160;<b>SelectOnlyAccepts</b> = 59, 
-<br />
-&#160;&#160;<b>MoreClustersThanSequences</b> = 60, 
-<br />
-&#160;&#160;<b>LeftBoundaryBiggerThanRightBoundary</b> = 61, 
-<br />
-&#160;&#160;<b>DifferentNumberOfSequencesInCompareset</b> = 62, 
-<br />
-&#160;&#160;<b>DifferentSeqsNamesInCompareset</b> = 63, 
-<br />
-&#160;&#160;<b>CDScontainsProteinSequences</b> = 64, 
-<br />
-&#160;&#160;<b>SequenceContainsGap</b> = 65, 
-<br />
-&#160;&#160;<b>SequenceNotMultipleOfThree</b> = 66, 
-<br />
-&#160;&#160;<b>SequenceHasStopCodon</b> = 67, 
-<br />
-&#160;&#160;<b>SequenceNotPresentInCDS</b> = 68, 
-<br />
-&#160;&#160;<b>UnknownCharacter</b> = 69, 
-<br />
-&#160;&#160;<b>SequencesNotSameSize</b> = 70, 
-<br />
-&#160;&#160;<b>IncorrectSymbol</b> = 71, 
-<br />
-&#160;&#160;<b>UndefinedSymbol</b> = 72, 
-<br />
-&#160;&#160;<b>ParameterNotFoundOrRepeated</b> = 73, 
-<br />
-&#160;&#160;<b>SimilarityMatrixNotCompatibleWindow</b> = 74, 
-<br />
-&#160;&#160;<b>PossibleMissmatch</b> = 75, 
-<br />
-&#160;&#160;<b>BracketsMissmatchFound</b> = 76, 
-<br />
-&#160;&#160;<b>UnalignedAlignmentToAlignedFormat</b> = 77, 
-<br />
-&#160;&#160;<b>CantOpenFile</b> = 78, 
-<br />
-&#160;&#160;<b>FileIsEmpty</b> = 79, 
-<br />
-&#160;&#160;<b>AlignmentFormatNotRecognized</b> = 80, 
-<br />
-&#160;&#160;<b>OutputFormatNotRecognized</b> = 81, 
-<br />
-&#160;&#160;<b>OnlyOneFormatOnConsoleOutput</b> = 82, 
-<br />
-&#160;&#160;<b>AlignmentNotSaved</b> = 83, 
-<br />
-&#160;&#160;<b>VerboseLevelNotRecognized</b> = 84, 
-<br />
-&#160;&#160;<b>NeedToSpecifyVerboseLevel</b> = 85, 
-<br />
-&#160;&#160;<b>__MAXERROR</b>
+<tr class="memitem:a59e56af19e754a6aa26a612ebf91d05f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05f">ErrorCode</a> { <br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faef2443fff64589a6c1b94a95d8363cc8">AlignmentNotLoaded</a> = 1, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa8d33a1e74113ede7ecb2813fa4629579">NoFormatsSpecified</a> = 2, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa1fec780513046c768de63d658ac6bc4c">AlternativeMatrixNotRecognized</a> = 3, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa910f51553b4f4ef7cdeb5d9b30f711d7">ReferenceFileNotLoaded</a> = 4, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fae5faf0f1d64f4804d3d56957ee0a6e37">GapThresholdOutOfRange</a> = 5, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa2de1e7cd81b77b8ccdd3b8aaacc0ae32">GapThresholdNotRecognized</a> = 6, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa2cf581ff2d3b80335cadae73a375a1e6">SimilarityThresholdOutOfRange</a> = 7, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa10958625c3e02e0783075c32bc84b36f">SimilarityThresholdNotRecognized</a> = 8, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa0f67f87e8e3677ead99b35f9bca50278">ConsistencyThresholdOutOfRange</a> = 9, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faed7414c585390f058667cb5bb891b8c4">ConsistencyThresholdNotRecognized</a> = 10, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa8385665f14a5d7e0812b10e3897bf19d">ConservationThresholdOutOfRange</a> = 11, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05facf5706bd477ecabf0f613e02b4a7419c">ConservationThresholdNotRecognized</a> = 12, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faedf0276523919109cd93ef1e85166779">ResidueOverlapOutOfRange</a> = 13, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fae5d06dfd747bd3f8ba0c42a9c671e3ef">ResidueOverlapNotRecognized</a> = 14, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa9bc0c2cc4b6fc9e60d8bd40700557daf">SequencesOverlapOutOfRange</a> = 15, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa5953e182ff4d03951d277e73792ce7c8">SequencesOverlapNotRecognized</a> = 16, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa7a0b0db4c680845d4e6eaf1246d98fbd">MaxIdentityOutOfRange</a> = 17, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa8d602885dfaff5a252d037f1561b977d">MaxIdentityNotRecognized</a> = 18, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa11c58de51fa4a635592ef5ffffbfe57d">ClustersValueOutOfRange</a> = 19, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa9ec821fb9fd36b35c5adbe0dba4d3bc0">ClustersValueNotRecognized</a> = 20, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa3ba2bfb3c3ff0f2203fbc591bb92c606">WindowValueOutOfRange</a> = 21, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad899df7c5b0c6acdc2d5f67f4e12f9ae">WindowValueNotRecognized</a> = 22, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa410c437086eacf2954de245ca9ff213f">SelectSeqsNotRecognized</a> = 23, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fae8648277c3d986e0c644915085dc445f">SelectColsNotRecognized</a> = 24, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fadcb50a134008ce9b9d77948c08d63b44">GapWindowValueOutOfRange</a> = 25, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa301d7d1cc3ad0c611b1ec7cda84f0981">GapWindowValueNotRecognized</a> = 26, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa7c2f1c3599e22f9b02d62300631693d9">SimilarityWindowValueOutOfRange</a> = 27, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faeb4a4ca3b91437e93085e885dd777386">SimilarityWindowValueNotRecognized</a> = 28, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fab43f6f7dac466307c775b01ac8e48e0d">ConsistencyWindowValueOutOfRange</a> = 27, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa9e8ed33a47d36283d38bd7fef4f75060">ConsistencyWindowValueNotRecognized</a> = 28, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa6789497ea98b1ffa50f8c8f04ec4c7cb">BlockSizeOutOfRange</a> = 29, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fabd6de966420cfcd2ca25af0d6d442031">BlockSizeNotRecognized</a> = 30, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa8e31126a1a9e2f00752e0facf302e81b">InFileComparisonStatistics</a> = 31, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa07334463cee812f9f91ff93c1d7eabd2">IncompatibleArguments</a> = 32, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa5583fe80c3365813ef591d9070966775">SelectSeqsResAndThresholdIncompatibilities</a> = 33, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa0379c23aabfe50a792dca016cf574b18">SelectSeqsResAndAutomathedMethodsIncompatibilities</a> = 34, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa973b9067f5abe95cd1cf829829fecdcc">SelectSeqsResAndWindowIncompatibilities</a> = 35, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa58a643c5b7fc0a1925e61ec78c4b9a90">SelectSeqsResAndOverlapIncompatibilites</a> = 36, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa2863d2357011c5c770f5ae92dfe54fd0">OnlyOneSequencesSelectionMethodAllowed</a> = 37, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa5d1d2c14254fdab50b3a7aba2c213c3a">CombinationAmongTrimmingMethods</a> = 38, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faadf9ad5683239b7d1ac1155943cd83c4">AutomathicMethodAndBlock</a> = 39, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa7e03069272fa97f50c096b470c11f110">WindowAndArgumentIncompatibilities</a> = 40, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fabf15e65e61ab794e75feaccb1f06561b">CombinationAmongThresholdsMethods</a> = 41, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faccd62aaa225084c8ae7f0311b9011970">GeneralAndSpecificWindows</a> = 42, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa03b8fca52f016fdbf90b77d46fbf28ba">StatisticsArgumentIncompatibilities</a> = 43, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa5af7f207520578bb0c731e8408ef178e">TrimmingMethodNeeded</a> = 44, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fabe8724fd1c3d0020c413289a24e9353a">ForceFileWithoutCompareDataset</a> = 45, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faf4fe9b05e4c9f051824cba7565757b43">BacktranslationWithoutMainAlignment</a> = 46, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faeb5e16bb2081da4d5c534060df5005aa">NotAligned</a> = 47, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa42998f0fa0e9fb102bb1d518f8a81005">MatrixGivenWithNoMethodToUseIt</a> = 48, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa14ee30093e5d0ba0b4b34d3710d2110c">SameNameOutput</a> = 49, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fadbcbb20e22c88510a6dd92695e2b5959">SequenceAndResiduesOverlapMutuallyNeeded</a> = 50, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa252bbc3d92979d1a287f659ced5b6a18">OutFileNeededWhenPrintingStatistics</a> = 51, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faf9b304d68169afb4ba41155fcfd7dd53">AlignmentTypesNotMatching</a> = 52, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fabb65c68cc0d554b67290705ed294fac4">BlocksizeTooBig</a> = 53, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fac7d4440e9d8003e3a146783efbde1f7f">ParemeterOnlyOnBacktranslation</a> = 54, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa2d1288e33118d212b9fd1b861ecfc41d">ProteinAlignmentMustBeAligned</a> = 55, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa190f9732c03d05f0eae9a7519de772ce">BacktransAlignIsDNA</a> = 56, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa7639c4af020b00ebff2aff375c6191de">ImpossibleToGenerate</a> = 57, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faaa14002f0d3a0d31fbc1a0a71b6a80b1">ImpossibleToProcessMatrix</a> = 58, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa7fd4b247ba53f1c03f5e449faef440a8">SelectOnlyAccepts</a> = 59, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa80a65354269ad88abfbadb567ccaebc4">MoreClustersThanSequences</a> = 60, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa06a7967106ccda1e8d5d71617304a00b">LeftBoundaryBiggerThanRightBoundary</a> = 61, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa718235ed0b501d95318cd3bbf4646794">DifferentNumberOfSequencesInCompareset</a> = 62, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa4e92961ca28012a93c5dbce5ea2d5c3a">DifferentSeqsNamesInCompareset</a> = 63, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa8956262556143d45ddb62779c8c7da6e">CDScontainsProteinSequences</a> = 64, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faf4e3a25b622eb4830ddbdca899d89362">SequenceContainsGap</a> = 65, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa79be9fd30ef4566bfddcf639b174f494">SequenceNotMultipleOfThree</a> = 66, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fabdf53dc94d3438c682812cff9db346e3">SequenceHasStopCodon</a> = 67, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa839416a8b6a983ff304db9a270291944">SequenceNotPresentInCDS</a> = 68, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fafbebbe1c86dc6788dc815a0f3cbcc460">UnknownCharacter</a> = 69, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fab34c434460397cb4131ce7ce7a8d90e6">SequencesNotSameSize</a> = 70, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa91c5e9ca652380c874a3e0d76febaf8a">IncorrectSymbol</a> = 71, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa08c5fae378ff3bf37420c05241779ad3">UndefinedSymbol</a> = 72, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa2b2bfe46a9619184862c7c9b41a50449">ParameterNotFoundOrRepeated</a> = 73, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa930e5db61aee02234b8de35b28978d31">SimilarityMatrixNotCompatibleWindow</a> = 74, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa8ad584b1c3ea931008ee4df8942ed3fa">PossibleMissmatch</a> = 75, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad872d2bd00ed81cb07912a82bb3e51f8">BracketsMissmatchFound</a> = 76, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa31d9e44ca4d4cf5180f3ae327ea70e69">UnalignedAlignmentToAlignedFormat</a> = 77, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa78d8dc8df4460efd62cc9711b7d5b7f1">CantOpenFile</a> = 78, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa019c55e007074127b690d4e56468a60d">FileIsEmpty</a> = 79, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa5df9cbdf52a8ec2a4ef1d3d37ed6f6ca">AlignmentFormatNotRecognized</a> = 80, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad0d38edc78b38b302a33d438e6337246">OutputFormatNotRecognized</a> = 81, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faccabb48279b7d32957941fd7015872e3">OnlyOneFormatOnConsoleOutput</a> = 82, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad421aaef84899a3999896e310909862a">AlignmentNotSaved</a> = 83, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fac0a326ef0ed6b471b90ca2b0cb602753">VerboseLevelNotRecognized</a> = 84, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faf622597169eacbe18967fbbd2df6f38d">NeedToSpecifyVerboseLevel</a> = 85, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fac32c19cd0b338d352c40cde3408751d3">NoReferenceSequenceForContig</a> = 86, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad2a4eb06972bb416621650f3883d152d">SNPoutOfBounds</a> = 87, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa519eb1ab685b9cc52a3127aa0d219448">NoInputFile</a> = 88, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa77ea50a3fa213f3c0caf199bcadc4370">ComparesetFailedAlignmentMissing</a> = 89, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa849a0d340dbe0a2f1be006b41c24a3d9">GapWindowTooBig</a> = 90, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fac5f0ad82da3b890ae743ccb46f10af96">SimilarityWindowTooBig</a> = 91, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad231bd133eb07c797e7fcae35303d054">ConsistencyWindowTooBig</a> = 92, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa349a56be4e4a1f5f865cbe56de13802a">WindowTooBig</a> = 93, 
+<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa3ec6a93590637152f3a53186bf0c28e2">AlignmentIsEmpty</a> = 94, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad478ecc3d437135f059fe4c0453e5efc">__MAXERROR</a>
 <br />
  }</td></tr>
 <tr class="separator:a59e56af19e754a6aa26a612ebf91d05f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1be246973c0b17c33e6e5f99bcc2dc65"><td class="memItemLeft" align="right" valign="top"><a id="a1be246973c0b17c33e6e5f99bcc2dc65"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>WarningCode</b> { <br />
-&#160;&#160;<b>RemovingOnlyGapsColumn</b> = 1, 
+<tr class="memitem:a1be246973c0b17c33e6e5f99bcc2dc65"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65">WarningCode</a> { <br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a0577db0c7b73743fc6f9ed2e702c1412">RemovingOnlyGapsColumn</a> = 1, 
+<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65af1486bf0d343dc6205b23ea0ddd7c2ac">KeepingOnlyGapsColumn</a> = 2, 
+<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65aaa82996a0ec5db67b357c97b646af259">SequenceWillBeCutted</a> = 3, 
+<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65abf1d77a602b9015effc47227a0b6a00d">IncludingIndeterminationSymbols</a> = 4, 
 <br />
-&#160;&#160;<b>KeepingOnlyGapsColumn</b> = 2, 
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a4fbe16f7f958d68dfb2dc901fb5d5139">LessNucleotidesThanExpected</a> = 5, 
+<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a6323bd54dc90d34a725f24310fe0c0a8">HeaderWillBeCut</a> = 6, 
+<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a99252fa48d69f9b2c3292ec84398c978">DonorAlreadyAdded</a> = 7, 
+<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65ac1ccd1c7a1c36eb0a7d97e1469f3da5d">ReferenceNucleotideNotCorresponding</a> = 8, 
 <br />
-&#160;&#160;<b>SequenceWillBeCutted</b> = 3, 
-<br />
-&#160;&#160;<b>IncludingIndeterminationSymbols</b> = 4, 
-<br />
-&#160;&#160;<b>LessNucleotidesThanExpected</b> = 5, 
-<br />
-&#160;&#160;<b>HeaderWillBeCut</b> = 6, 
-<br />
-&#160;&#160;<b>__MAXWARNING</b>
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a3a8e0672ec02531643c74adda48f7ce7">__MAXWARNING</a>
 <br />
  }</td></tr>
 <tr class="separator:a1be246973c0b17c33e6e5f99bcc2dc65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0829d185720916db5a931df28f0064bf"><td class="memItemLeft" align="right" valign="top"><a id="a0829d185720916db5a931df28f0064bf"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>InfoCode</b> { <br />
-&#160;&#160;<b>CuttingSequence</b> = 1, 
-<br />
-&#160;&#160;<b>WindowSizeCompareset</b> = 2, 
-<br />
-&#160;&#160;<b>__MAXINFO</b>
-<br />
+<tr class="memitem:a0829d185720916db5a931df28f0064bf"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="reportsystem_8h.html#a0829d185720916db5a931df28f0064bf">InfoCode</a> { <a class="el" href="reportsystem_8h.html#a0829d185720916db5a931df28f0064bfa22225703b83b4d977cf0a9523cd0e955">CuttingSequence</a> = 1, 
+<a class="el" href="reportsystem_8h.html#a0829d185720916db5a931df28f0064bfaa9df6ce8350cedbad88f22af506ffcab">WindowSizeCompareset</a> = 2, 
+<a class="el" href="reportsystem_8h.html#a0829d185720916db5a931df28f0064bfa5a23043db9e94656d5403c7bd0b0f2fa">__MAXINFO</a>
  }</td></tr>
 <tr class="separator:a0829d185720916db5a931df28f0064bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Method to report a Warning. It will be displayed if <a class="el" href="class____internal_report_1_1____report_system.html#a595ee8c5cc90cf011ded3f26b90d7160">Level </a> is equal or higher to ::VerboseLevel::WARNING. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">message</td><td>Code to report. </td></tr>
-    <tr><td class="paramname">vars</td><td>Array of strings that will replace the '[tags]' in the message. The number of elements in the array must be the same as [tag] aparitions on the message.<br />
-<b> The method will take care of destroying the pointer </b> </td></tr>
-  </table>
-  </dd>
-</dl>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a59e56af19e754a6aa26a612ebf91d05f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59e56af19e754a6aa26a612ebf91d05f">&#9670;&nbsp;</a></span>ErrorCode</h2>
 
-<p class="definition">Definition in file <a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>.</p>
-</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05f">ErrorCode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faef2443fff64589a6c1b94a95d8363cc8"></a>AlignmentNotLoaded&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa8d33a1e74113ede7ecb2813fa4629579"></a>NoFormatsSpecified&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa1fec780513046c768de63d658ac6bc4c"></a>AlternativeMatrixNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa910f51553b4f4ef7cdeb5d9b30f711d7"></a>ReferenceFileNotLoaded&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fae5faf0f1d64f4804d3d56957ee0a6e37"></a>GapThresholdOutOfRange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa2de1e7cd81b77b8ccdd3b8aaacc0ae32"></a>GapThresholdNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa2cf581ff2d3b80335cadae73a375a1e6"></a>SimilarityThresholdOutOfRange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa10958625c3e02e0783075c32bc84b36f"></a>SimilarityThresholdNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa0f67f87e8e3677ead99b35f9bca50278"></a>ConsistencyThresholdOutOfRange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faed7414c585390f058667cb5bb891b8c4"></a>ConsistencyThresholdNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa8385665f14a5d7e0812b10e3897bf19d"></a>ConservationThresholdOutOfRange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05facf5706bd477ecabf0f613e02b4a7419c"></a>ConservationThresholdNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faedf0276523919109cd93ef1e85166779"></a>ResidueOverlapOutOfRange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fae5d06dfd747bd3f8ba0c42a9c671e3ef"></a>ResidueOverlapNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa9bc0c2cc4b6fc9e60d8bd40700557daf"></a>SequencesOverlapOutOfRange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa5953e182ff4d03951d277e73792ce7c8"></a>SequencesOverlapNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa7a0b0db4c680845d4e6eaf1246d98fbd"></a>MaxIdentityOutOfRange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa8d602885dfaff5a252d037f1561b977d"></a>MaxIdentityNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa11c58de51fa4a635592ef5ffffbfe57d"></a>ClustersValueOutOfRange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa9ec821fb9fd36b35c5adbe0dba4d3bc0"></a>ClustersValueNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa3ba2bfb3c3ff0f2203fbc591bb92c606"></a>WindowValueOutOfRange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fad899df7c5b0c6acdc2d5f67f4e12f9ae"></a>WindowValueNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa410c437086eacf2954de245ca9ff213f"></a>SelectSeqsNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fae8648277c3d986e0c644915085dc445f"></a>SelectColsNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fadcb50a134008ce9b9d77948c08d63b44"></a>GapWindowValueOutOfRange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa301d7d1cc3ad0c611b1ec7cda84f0981"></a>GapWindowValueNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa7c2f1c3599e22f9b02d62300631693d9"></a>SimilarityWindowValueOutOfRange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faeb4a4ca3b91437e93085e885dd777386"></a>SimilarityWindowValueNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fab43f6f7dac466307c775b01ac8e48e0d"></a>ConsistencyWindowValueOutOfRange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa9e8ed33a47d36283d38bd7fef4f75060"></a>ConsistencyWindowValueNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa6789497ea98b1ffa50f8c8f04ec4c7cb"></a>BlockSizeOutOfRange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fabd6de966420cfcd2ca25af0d6d442031"></a>BlockSizeNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa8e31126a1a9e2f00752e0facf302e81b"></a>InFileComparisonStatistics&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa07334463cee812f9f91ff93c1d7eabd2"></a>IncompatibleArguments&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa5583fe80c3365813ef591d9070966775"></a>SelectSeqsResAndThresholdIncompatibilities&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa0379c23aabfe50a792dca016cf574b18"></a>SelectSeqsResAndAutomathedMethodsIncompatibilities&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa973b9067f5abe95cd1cf829829fecdcc"></a>SelectSeqsResAndWindowIncompatibilities&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa58a643c5b7fc0a1925e61ec78c4b9a90"></a>SelectSeqsResAndOverlapIncompatibilites&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa2863d2357011c5c770f5ae92dfe54fd0"></a>OnlyOneSequencesSelectionMethodAllowed&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa5d1d2c14254fdab50b3a7aba2c213c3a"></a>CombinationAmongTrimmingMethods&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faadf9ad5683239b7d1ac1155943cd83c4"></a>AutomathicMethodAndBlock&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa7e03069272fa97f50c096b470c11f110"></a>WindowAndArgumentIncompatibilities&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fabf15e65e61ab794e75feaccb1f06561b"></a>CombinationAmongThresholdsMethods&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faccd62aaa225084c8ae7f0311b9011970"></a>GeneralAndSpecificWindows&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa03b8fca52f016fdbf90b77d46fbf28ba"></a>StatisticsArgumentIncompatibilities&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa5af7f207520578bb0c731e8408ef178e"></a>TrimmingMethodNeeded&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fabe8724fd1c3d0020c413289a24e9353a"></a>ForceFileWithoutCompareDataset&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faf4fe9b05e4c9f051824cba7565757b43"></a>BacktranslationWithoutMainAlignment&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faeb5e16bb2081da4d5c534060df5005aa"></a>NotAligned&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa42998f0fa0e9fb102bb1d518f8a81005"></a>MatrixGivenWithNoMethodToUseIt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa14ee30093e5d0ba0b4b34d3710d2110c"></a>SameNameOutput&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fadbcbb20e22c88510a6dd92695e2b5959"></a>SequenceAndResiduesOverlapMutuallyNeeded&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa252bbc3d92979d1a287f659ced5b6a18"></a>OutFileNeededWhenPrintingStatistics&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faf9b304d68169afb4ba41155fcfd7dd53"></a>AlignmentTypesNotMatching&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fabb65c68cc0d554b67290705ed294fac4"></a>BlocksizeTooBig&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fac7d4440e9d8003e3a146783efbde1f7f"></a>ParemeterOnlyOnBacktranslation&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa2d1288e33118d212b9fd1b861ecfc41d"></a>ProteinAlignmentMustBeAligned&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa190f9732c03d05f0eae9a7519de772ce"></a>BacktransAlignIsDNA&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa7639c4af020b00ebff2aff375c6191de"></a>ImpossibleToGenerate&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faaa14002f0d3a0d31fbc1a0a71b6a80b1"></a>ImpossibleToProcessMatrix&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa7fd4b247ba53f1c03f5e449faef440a8"></a>SelectOnlyAccepts&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa80a65354269ad88abfbadb567ccaebc4"></a>MoreClustersThanSequences&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa06a7967106ccda1e8d5d71617304a00b"></a>LeftBoundaryBiggerThanRightBoundary&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa718235ed0b501d95318cd3bbf4646794"></a>DifferentNumberOfSequencesInCompareset&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa4e92961ca28012a93c5dbce5ea2d5c3a"></a>DifferentSeqsNamesInCompareset&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa8956262556143d45ddb62779c8c7da6e"></a>CDScontainsProteinSequences&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faf4e3a25b622eb4830ddbdca899d89362"></a>SequenceContainsGap&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa79be9fd30ef4566bfddcf639b174f494"></a>SequenceNotMultipleOfThree&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fabdf53dc94d3438c682812cff9db346e3"></a>SequenceHasStopCodon&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa839416a8b6a983ff304db9a270291944"></a>SequenceNotPresentInCDS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fafbebbe1c86dc6788dc815a0f3cbcc460"></a>UnknownCharacter&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fab34c434460397cb4131ce7ce7a8d90e6"></a>SequencesNotSameSize&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa91c5e9ca652380c874a3e0d76febaf8a"></a>IncorrectSymbol&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa08c5fae378ff3bf37420c05241779ad3"></a>UndefinedSymbol&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa2b2bfe46a9619184862c7c9b41a50449"></a>ParameterNotFoundOrRepeated&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa930e5db61aee02234b8de35b28978d31"></a>SimilarityMatrixNotCompatibleWindow&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa8ad584b1c3ea931008ee4df8942ed3fa"></a>PossibleMissmatch&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fad872d2bd00ed81cb07912a82bb3e51f8"></a>BracketsMissmatchFound&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa31d9e44ca4d4cf5180f3ae327ea70e69"></a>UnalignedAlignmentToAlignedFormat&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa78d8dc8df4460efd62cc9711b7d5b7f1"></a>CantOpenFile&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa019c55e007074127b690d4e56468a60d"></a>FileIsEmpty&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa5df9cbdf52a8ec2a4ef1d3d37ed6f6ca"></a>AlignmentFormatNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fad0d38edc78b38b302a33d438e6337246"></a>OutputFormatNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faccabb48279b7d32957941fd7015872e3"></a>OnlyOneFormatOnConsoleOutput&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fad421aaef84899a3999896e310909862a"></a>AlignmentNotSaved&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fac0a326ef0ed6b471b90ca2b0cb602753"></a>VerboseLevelNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faf622597169eacbe18967fbbd2df6f38d"></a>NeedToSpecifyVerboseLevel&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fac32c19cd0b338d352c40cde3408751d3"></a>NoReferenceSequenceForContig&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fad2a4eb06972bb416621650f3883d152d"></a>SNPoutOfBounds&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa519eb1ab685b9cc52a3127aa0d219448"></a>NoInputFile&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa77ea50a3fa213f3c0caf199bcadc4370"></a>ComparesetFailedAlignmentMissing&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa849a0d340dbe0a2f1be006b41c24a3d9"></a>GapWindowTooBig&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fac5f0ad82da3b890ae743ccb46f10af96"></a>SimilarityWindowTooBig&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fad231bd133eb07c797e7fcae35303d054"></a>ConsistencyWindowTooBig&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa349a56be4e4a1f5f865cbe56de13802a"></a>WindowTooBig&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa3ec6a93590637152f3a53186bf0c28e2"></a>AlignmentIsEmpty&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fad478ecc3d437135f059fe4c0453e5efc"></a>__MAXERROR&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a0829d185720916db5a931df28f0064bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0829d185720916db5a931df28f0064bf">&#9670;&nbsp;</a></span>InfoCode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="reportsystem_8h.html#a0829d185720916db5a931df28f0064bf">InfoCode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0829d185720916db5a931df28f0064bfa22225703b83b4d977cf0a9523cd0e955"></a>CuttingSequence&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0829d185720916db5a931df28f0064bfaa9df6ce8350cedbad88f22af506ffcab"></a>WindowSizeCompareset&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0829d185720916db5a931df28f0064bfa5a23043db9e94656d5403c7bd0b0f2fa"></a>__MAXINFO&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <a id="a0822d01c051e2b76c48c9ae19b07a471"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0822d01c051e2b76c48c9ae19b07a471">&#9670;&nbsp;</a></span>VerboseLevel</h2>
 
@@ -373,17 +437,40 @@ Enumerations</h2></td></tr>
 
 <p>VerboseLevel used to report messages. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0822d01c051e2b76c48c9ae19b07a471ac157bdf0b85a40d2619cbc8bc1ae5fe2"></a>NONE&#160;</td><td class="fielddoc"><p>0 = No output messages </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a0822d01c051e2b76c48c9ae19b07a471a748005382152808a72b1a9177d9dc806"></a>INFO&#160;</td><td class="fielddoc"><p>1 = Info, warning and error messages </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0822d01c051e2b76c48c9ae19b07a471a748005382152808a72b1a9177d9dc806"></a>INFO&#160;</td><td class="fielddoc"><p>1 = Info, warning and error messages </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a0822d01c051e2b76c48c9ae19b07a471a984de77c680eaff141ec910e25568a81"></a>WARNING&#160;</td><td class="fielddoc"><p>2 = Error and warning messages </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a0822d01c051e2b76c48c9ae19b07a471a2fd6f336d08340583bd620a7f5694c90"></a>ERROR&#160;</td><td class="fielddoc"><p>3 = Only error messages </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a0822d01c051e2b76c48c9ae19b07a471ac157bdf0b85a40d2619cbc8bc1ae5fe2"></a>NONE&#160;</td><td class="fielddoc"><p>4 = No output messages </p>
+</td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="reportsystem_8h_source.html#l00013">13</a> of file <a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>.</p>
+</div>
+</div>
+<a id="a1be246973c0b17c33e6e5f99bcc2dc65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1be246973c0b17c33e6e5f99bcc2dc65">&#9670;&nbsp;</a></span>WarningCode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65">WarningCode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65a0577db0c7b73743fc6f9ed2e702c1412"></a>RemovingOnlyGapsColumn&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65af1486bf0d343dc6205b23ea0ddd7c2ac"></a>KeepingOnlyGapsColumn&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65aaa82996a0ec5db67b357c97b646af259"></a>SequenceWillBeCutted&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65abf1d77a602b9015effc47227a0b6a00d"></a>IncludingIndeterminationSymbols&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65a4fbe16f7f958d68dfb2dc901fb5d5139"></a>LessNucleotidesThanExpected&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65a6323bd54dc90d34a725f24310fe0c0a8"></a>HeaderWillBeCut&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65a99252fa48d69f9b2c3292ec84398c978"></a>DonorAlreadyAdded&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65ac1ccd1c7a1c36eb0a7d97e1469f3da5d"></a>ReferenceNucleotideNotCorresponding&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65a3a8e0672ec02531643c74adda48f7ce7"></a>__MAXWARNING&#160;</td><td class="fielddoc"></td></tr>
+</table>
 
 </div>
 </div>

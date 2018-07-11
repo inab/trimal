@@ -9,48 +9,48 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 111.5)">
 <title>newAlignment::checkCorrespondence</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-111.5 338,-111.5 338,4 -4,4"/>
-<!-- Node10 -->
-<g id="node1" class="node"><title>Node10</title>
+<!-- Node28 -->
+<g id="node1" class="node"><title>Node28</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-50 0,-69 182,-69 182,-50 0,-50"/>
 <text text-anchor="middle" x="91" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::checkCorrespondence</text>
 </g>
-<!-- Node11 -->
-<g id="node2" class="node"><title>Node11</title>
+<!-- Node29 -->
+<g id="node2" class="node"><title>Node29</title>
 <g id="a_node2"><a xlink:href="classutils.html#a1dce160519187ef2c6e14beb93a2050d" target="_top" xlink:title="Removes a determined char from the string. ">
 <polygon fill="white" stroke="black" points="218,-88 218,-107 334,-107 334,-88 218,-88"/>
 <text text-anchor="middle" x="276" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">utils::removeCharacter</text>
 </a>
 </g>
 </g>
-<!-- Node10&#45;&gt;Node11 -->
-<g id="edge1" class="edge"><title>Node10&#45;&gt;Node11</title>
+<!-- Node28&#45;&gt;Node29 -->
+<g id="edge1" class="edge"><title>Node28&#45;&gt;Node29</title>
 <path fill="none" stroke="midnightblue" d="M138.179,-69.089C162.763,-74.1939 193.186,-80.5113 219.097,-85.8918"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="218.651,-89.3736 229.153,-87.9799 220.074,-82.5198 218.651,-89.3736"/>
 </g>
-<!-- Node12 -->
-<g id="node3" class="node"><title>Node12</title>
+<!-- Node30 -->
+<g id="node3" class="node"><title>Node30</title>
 <g id="a_node3"><a xlink:href="classutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f" target="_top" xlink:title="Minimum of two numbers method. ">
 <polygon fill="white" stroke="black" points="248,-50 248,-69 304,-69 304,-50 248,-50"/>
 <text text-anchor="middle" x="276" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">utils::min</text>
 </a>
 </g>
 </g>
-<!-- Node10&#45;&gt;Node12 -->
-<g id="edge2" class="edge"><title>Node10&#45;&gt;Node12</title>
+<!-- Node28&#45;&gt;Node30 -->
+<g id="edge2" class="edge"><title>Node28&#45;&gt;Node30</title>
 <path fill="none" stroke="midnightblue" d="M182.16,-59.5C201.846,-59.5 221.615,-59.5 237.82,-59.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="237.919,-63.0001 247.918,-59.5 237.918,-56.0001 237.919,-63.0001"/>
 </g>
-<!-- Node13 -->
-<g id="node4" class="node"><title>Node13</title>
-<g id="a_node4"><a xlink:href="class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" target="_top" xlink:title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. ">
+<!-- Node31 -->
+<g id="node4" class="node"><title>Node31</title>
+<g id="a_node4"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
 <polygon fill="white" stroke="black" points="218,-0.5 218,-30.5 334,-30.5 334,-0.5 218,-0.5"/>
 <text text-anchor="start" x="226" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
 <text text-anchor="middle" x="276" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
 </a>
 </g>
 </g>
-<!-- Node10&#45;&gt;Node13 -->
-<g id="edge3" class="edge"><title>Node10&#45;&gt;Node13</title>
+<!-- Node28&#45;&gt;Node31 -->
+<g id="edge3" class="edge"><title>Node28&#45;&gt;Node31</title>
 <path fill="none" stroke="midnightblue" d="M131.708,-49.9527C153.888,-44.6198 182.121,-37.8315 207.653,-31.6928"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="208.752,-35.0283 217.657,-29.2875 207.115,-28.2223 208.752,-35.0283"/>
 </g>

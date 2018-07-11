@@ -1,7 +1,9 @@
 <map id="Cleaner::getClustering" name="Cleaner::getClustering">
-<area shape="rect" id="node2" href="$class_cleaner.html#a631cf3e2e55c00a995f0f4a51bfe7a2d" title="Method to asign sequences to clusters. Clusters are calculated following this schema: ..." alt="" coords="205,56,444,83"/>
-<area shape="rect" id="node3" href="$class_cleaner.html#aaad9f8e8f67eb419fc5aa905c86318e9" title="Method to calculate identities between the sequences from the alignment. " alt="" coords="492,5,685,32"/>
-<area shape="rect" id="node4" href="$classutils.html#a1dce160519187ef2c6e14beb93a2050d" title="Removes a determined char from the string. " alt="" coords="511,56,666,83"/>
-<area shape="rect" id="node5" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="535,107,642,133"/>
-<area shape="rect" id="node6" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="733,107,819,133"/>
+<area shape="rect" id="node2" href="$class_cleaner.html#a631cf3e2e55c00a995f0f4a51bfe7a2d" title="Method to assign sequences to clusters. Clusters are calculated following this flow: ..." alt="" coords="205,56,444,83"/>
+<area shape="rect" id="node3" href="$class_cleaner.html#a65d829578be97c192561a129435b3c58" title="Method to calculate identities between the sequences from the alignment. See newAlignment::identities..." alt="" coords="492,5,685,32"/>
+<area shape="rect" id="node6" href="$classutils.html#a1dce160519187ef2c6e14beb93a2050d" title="Removes a determined char from the string. " alt="" coords="511,56,666,83"/>
+<area shape="rect" id="node7" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="535,107,642,133"/>
+<area shape="rect" id="node4" href="$classnew_alignment.html#a670d5ef1ced9ed6041c3f6afdbd2cc02" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="733,5,951,32"/>
+<area shape="rect" id="node5" href="$classutils.html#a1f1dcbfa7276e54acec72bdbae1b1255" title="Checks an alignment type. " alt="" coords="999,5,1175,32"/>
+<area shape="rect" id="node8" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="799,107,885,133"/>
 </map>

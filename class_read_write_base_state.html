@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
-<title>Trimal: ReadWriteBaseState Class Reference</title>
+<title>trimAl: ReadWriteBaseState Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,7 @@
  <tbody>
  <tr style="height: 12px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Trimal
+   <div id="projectname">trimAl
    </div>
    <div id="projectbrief">A Multiple Alignment Sequence framework for Cleaning and Reformating.</div>
   </td>
@@ -95,17 +95,15 @@ $(document).ready(function(){initNavTree('class_read_write_base_state.html','');
 </div><!--header-->
 <div class="contents">
 
-<p>Abstract class to implement.<br />
- This class implementations are instantiated by the ReadWrite Machine State.<br />
- Each implementation is related to an alignment format, and should know how to:<br />
-.  
+<p>Abstract class that represent a format. Formats must inherit from this class and will be handled by <a class="el" href="class_read_write_m_s.html">ReadWriteMS</a>.  
  <a href="class_read_write_base_state.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_read_write_base_state_8h_source.html">ReadWriteBaseState.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for ReadWriteBaseState:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_base_state__coll__graph.svg" width="446" height="514"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_base_state__coll__graph.svg" width="446" height="514"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -117,7 +115,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac6d87d2b73337cb4afa1499bf218f4ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to load a file in the current format and return an alignment object.  <a href="#ac6d87d2b73337cb4afa1499bf218f4ab">More...</a><br /></td></tr>
 <tr class="separator:ac6d87d2b73337cb4afa1499bf218f4ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29be4d8b0eb8ae3e5219b5b92cbfc596"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596">SaveAlignment</a> (<a class="el" href="classnew_alignment.html">newAlignment</a> *alignment, ostream *output, std::string *FileName)=0</td></tr>
-<tr class="memdesc:a29be4d8b0eb8ae3e5219b5b92cbfc596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to save to a file in the current format an alignment object.  <a href="#a29be4d8b0eb8ae3e5219b5b92cbfc596">More...</a><br /></td></tr>
+<tr class="memdesc:a29be4d8b0eb8ae3e5219b5b92cbfc596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to save a <a class="el" href="classnew_alignment.html">newAlignment</a> to a file.  <a href="#a29be4d8b0eb8ae3e5219b5b92cbfc596">More...</a><br /></td></tr>
 <tr class="separator:a29be4d8b0eb8ae3e5219b5b92cbfc596"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1541c44119585c2cbfc5b619c923195d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_base_state.html#a1541c44119585c2cbfc5b619c923195d">RecognizeOutputFormat</a> (std::string FormatName)</td></tr>
 <tr class="memdesc:a1541c44119585c2cbfc5b619c923195d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that recognizes acronyms of the format.  <a href="#a1541c44119585c2cbfc5b619c923195d">More...</a><br /></td></tr>
@@ -131,11 +129,11 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 Public Attributes</h2></td></tr>
 <tr class="memitem:a1e7a2d74ee685f2c9c7a3fed03087354"><td class="memItemLeft" align="right" valign="top"><a id="a1e7a2d74ee685f2c9c7a3fed03087354"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_base_state.html#a1e7a2d74ee685f2c9c7a3fed03087354">canLoad</a> = false</td></tr>
-<tr class="memdesc:a1e7a2d74ee685f2c9c7a3fed03087354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool tag that indicates wether or not this state can load an alignment in the corresponding format. <br /></td></tr>
+<tr class="memdesc:a1e7a2d74ee685f2c9c7a3fed03087354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool tag that indicates whether or not this state can load an alignment in the corresponding format. <br /></td></tr>
 <tr class="separator:a1e7a2d74ee685f2c9c7a3fed03087354"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa648fbe2f707d3ebc989bc104e9b906e"><td class="memItemLeft" align="right" valign="top"><a id="aa648fbe2f707d3ebc989bc104e9b906e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_base_state.html#aa648fbe2f707d3ebc989bc104e9b906e">canSave</a> = false</td></tr>
-<tr class="memdesc:aa648fbe2f707d3ebc989bc104e9b906e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool tag that indicates wether or not this state can save an alignment in the corresponding format. <br /></td></tr>
+<tr class="memdesc:aa648fbe2f707d3ebc989bc104e9b906e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bool tag that indicates whether or not this state can save an alignment in the corresponding format. <br /></td></tr>
 <tr class="separator:aa648fbe2f707d3ebc989bc104e9b906e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0311caa9d9dbb5f8fc3734295f600336"><td class="memItemLeft" align="right" valign="top"><a id="a0311caa9d9dbb5f8fc3734295f600336"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_base_state.html#a0311caa9d9dbb5f8fc3734295f600336">name</a></td></tr>
@@ -150,26 +148,22 @@ string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a988c349bcbe345fd51dc8e7fc2a4cf34"><td class="memItemLeft" align="right" valign="top"><a id="a988c349bcbe345fd51dc8e7fc2a4cf34"></a>
 <a class="el" href="class_read_write_m_s.html">ReadWriteMS</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_read_write_base_state.html#a988c349bcbe345fd51dc8e7fc2a4cf34">Machine</a></td></tr>
-<tr class="memdesc:a988c349bcbe345fd51dc8e7fc2a4cf34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the object that contains and manages this state<br />
-. <br /></td></tr>
+<tr class="memdesc:a988c349bcbe345fd51dc8e7fc2a4cf34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the <a class="el" href="class_read_write_m_s.html">ReadWriteMS</a> that contains and manages this state. <br /></td></tr>
 <tr class="separator:a988c349bcbe345fd51dc8e7fc2a4cf34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Abstract class to implement.<br />
- This class implementations are instantiated by the ReadWrite Machine State.<br />
- Each implementation is related to an alignment format, and should know how to:<br />
-. </p>
-<ul>
+<div class="textblock"><p>Abstract class that represent a format. Formats must inherit from this class and will be handled by <a class="el" href="class_read_write_m_s.html">ReadWriteMS</a>. </p>
+<p>Each class should know how to:</p><ul>
 <li>Recognize if a file is in its format<br />
 </li>
 <li>Load a file in its format and return an alignment object<br />
 </li>
 <li>Save an alignment to a file in this format<br />
 </li>
-<li>Recognize its acronyms. </li>
+<li>Recognize its format acronyms. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="_read_write_base_state_8h_source.html#l00019">19</a> of file <a class="el" href="_read_write_base_state_8h_source.html">ReadWriteBaseState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_read_write_base_state_8h_source.html#l00021">21</a> of file <a class="el" href="_read_write_base_state_8h_source.html">ReadWriteBaseState.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab767cb6d126950f0931c182f90bb248b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab767cb6d126950f0931c182f90bb248b">&#9670;&nbsp;</a></span>CheckAlignment()</h2>
@@ -205,12 +199,11 @@ Protected Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>A number that represents the confidence recognizing this format. </dd></dl>
 <dl class="section attention"><dt>Attention</dt><dd>Take in mind incompatibilities with other formats when you implement this function:<br />
 <br />
-<pre class="fragment">       Example:
-
-       Fasta may recognize a file if it starts with '&gt;', returning a 1.
-       Pir files also begin with '&gt;', but they also recognize the ';' after the '&gt;' and 2 letter symbol.
-       When the Pir recognizes its format, it returns a 2.
-       So, when the Pir format is recognized, it's preferred over the Fasta Format.</pre> </dd></dl>
+ <em>Fasta may recognize a file if it starts with '&gt;', returning a 1.<br />
+ Pir files also begin with '&gt;', but they also recognize the ';' after the '&gt;' and 2 letter symbol.<br />
+ When the Pir recognizes its format, it returns a 2.<br />
+ So, when the Pir format is recognized, it's preferred over the Fasta Format, when both of them can load the alignment bur pir extracts more information.</em><br />
+</dd></dl>
 
 </div>
 </div>
@@ -245,11 +238,13 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><b> Alignment Object</b> with the information of the file. <b> nullptr</b> if there was any error. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><b> Alignment</b> loaded with the information of the file. <br />
+ <b> nullptr</b> if there was any error. </dd></dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_base_state_ac6d87d2b73337cb4afa1499bf218f4ab_icgraph.svg" width="1160" height="235"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_read_write_base_state_ac6d87d2b73337cb4afa1499bf218f4ab_icgraph.svg" width="890" height="170"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -285,9 +280,10 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><b>True</b> if recognized, <b>False</b> otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><b>True</b> if recognized<br />
+ <b>False</b> otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_read_write_base_state_8h_source.html#l00076">76</a> of file <a class="el" href="_read_write_base_state_8h_source.html">ReadWriteBaseState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_read_write_base_state_8h_source.html#l00081">81</a> of file <a class="el" href="_read_write_base_state_8h_source.html">ReadWriteBaseState.h</a>.</p>
 
 </div>
 </div>
@@ -331,7 +327,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Function to save to a file in the current format an alignment object. </p>
+<p>Function to save a <a class="el" href="classnew_alignment.html">newAlignment</a> to a file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">alignment</td><td>Alignment to save. </td></tr>
@@ -340,8 +336,9 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><b> True </b>if file could be saved. <b> False </b> otherwise. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>Remove the File Name Argument as it's stored on the alignment itself. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><b> True </b>if file could be saved.<br />
+ <b> False </b> otherwise. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Remove the File Name Argument as it's stored on the alignment itself. </dd></dl>
 
 </div>
 </div>

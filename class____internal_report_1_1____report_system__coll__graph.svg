@@ -46,22 +46,11 @@
 </g>
 <!-- Node4 -->
 <g id="node4" class="node"><title>Node4</title>
-<polygon fill="white" stroke="#bfbfbf" points="116,-349.901 116,-368.901 192,-368.901 192,-349.901 116,-349.901"/>
-<text text-anchor="middle" x="154" y="-356.901" font-family="Helvetica,sans-Serif" font-size="10.00">WarningCode</text>
+<polygon fill="white" stroke="#bfbfbf" points="136.5,-161.901 136.5,-180.901 171.5,-180.901 171.5,-161.901 136.5,-161.901"/>
+<text text-anchor="middle" x="154" y="-168.901" font-family="Helvetica,sans-Serif" font-size="10.00">char</text>
 </g>
 <!-- Node4&#45;&gt;Node3 -->
 <g id="edge3" class="edge"><title>Node4&#45;&gt;Node3</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M202.2,-364.596C242.241,-366.307 298.791,-361.98 335,-330.401 355.661,-312.381 334.477,-291.613 353,-271.401 356.529,-267.55 360.732,-264.281 365.265,-261.508"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="202.325,-361.097 192.143,-364.026 201.929,-368.086 202.325,-361.097"/>
-<text text-anchor="middle" x="276.5" y="-367.401" font-family="Helvetica,sans-Serif" font-size="10.00"> keys</text>
-</g>
-<!-- Node5 -->
-<g id="node5" class="node"><title>Node5</title>
-<polygon fill="white" stroke="#bfbfbf" points="119.5,-161.901 119.5,-180.901 188.5,-180.901 188.5,-161.901 119.5,-161.901"/>
-<text text-anchor="middle" x="154" y="-168.901" font-family="Helvetica,sans-Serif" font-size="10.00">const char *</text>
-</g>
-<!-- Node5&#45;&gt;Node3 -->
-<g id="edge4" class="edge"><title>Node5&#45;&gt;Node3</title>
 <path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M170.075,-188.621C181.825,-200.807 199.252,-216.357 218,-224.401 241.561,-234.51 304.431,-240.304 352.871,-243.382"/>
 <polygon fill="#9a32cd" stroke="#9a32cd" points="172.578,-186.173 163.216,-181.212 167.441,-190.928 172.578,-186.173"/>
 <text text-anchor="middle" x="276.5" y="-245.401" font-family="Helvetica,sans-Serif" font-size="10.00"> elements</text>
@@ -72,10 +61,10 @@
 <text text-anchor="start" x="368.5" y="-104.401" font-family="Helvetica,sans-Serif" font-size="10.00">std::map&lt; ErrorCode,</text>
 <text text-anchor="middle" x="416" y="-93.4009" font-family="Helvetica,sans-Serif" font-size="10.00"> const char *&gt;</text>
 </g>
-<!-- Node5&#45;&gt;Node10 -->
-<g id="edge11" class="edge"><title>Node5&#45;&gt;Node10</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M194.261,-156.618C196.278,-155.313 198.207,-153.909 200,-152.401 211.32,-142.876 205.449,-132.232 218,-124.401 260.506,-97.8796 318.332,-94.0758 360.333,-95.7333"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="192.086,-153.821 185.023,-161.717 195.469,-159.949 192.086,-153.821"/>
+<!-- Node4&#45;&gt;Node10 -->
+<g id="edge10" class="edge"><title>Node4&#45;&gt;Node10</title>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M181.109,-163.472C187.726,-160.666 194.507,-157.023 200,-152.401 211.32,-142.876 205.449,-132.232 218,-124.401 260.506,-97.8796 318.332,-94.0758 360.333,-95.7333"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="179.836,-160.211 171.702,-167 182.294,-166.765 179.836,-160.211"/>
 <text text-anchor="middle" x="276.5" y="-127.401" font-family="Helvetica,sans-Serif" font-size="10.00"> elements</text>
 </g>
 <!-- Node13 -->
@@ -84,11 +73,22 @@
 <text text-anchor="start" x="370.5" y="-166.401" font-family="Helvetica,sans-Serif" font-size="10.00">std::map&lt; InfoCode,</text>
 <text text-anchor="middle" x="416" y="-155.401" font-family="Helvetica,sans-Serif" font-size="10.00"> const char *&gt;</text>
 </g>
-<!-- Node5&#45;&gt;Node13 -->
-<g id="edge17" class="edge"><title>Node5&#45;&gt;Node13</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M198.682,-169.195C205.158,-168.904 211.752,-168.629 218,-168.401 266.891,-166.617 322.631,-165.266 362.313,-164.42"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="198.498,-165.7 188.67,-169.659 198.822,-172.692 198.498,-165.7"/>
+<!-- Node4&#45;&gt;Node13 -->
+<g id="edge17" class="edge"><title>Node4&#45;&gt;Node13</title>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M181.625,-170.002C192.851,-169.446 206.059,-168.837 218,-168.401 266.891,-166.617 322.631,-165.266 362.313,-164.42"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="181.386,-166.509 171.576,-170.511 181.741,-173.5 181.386,-166.509"/>
 <text text-anchor="middle" x="276.5" y="-171.401" font-family="Helvetica,sans-Serif" font-size="10.00"> elements</text>
+</g>
+<!-- Node5 -->
+<g id="node5" class="node"><title>Node5</title>
+<polygon fill="white" stroke="#bfbfbf" points="116,-349.901 116,-368.901 192,-368.901 192,-349.901 116,-349.901"/>
+<text text-anchor="middle" x="154" y="-356.901" font-family="Helvetica,sans-Serif" font-size="10.00">WarningCode</text>
+</g>
+<!-- Node5&#45;&gt;Node3 -->
+<g id="edge4" class="edge"><title>Node5&#45;&gt;Node3</title>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M202.2,-364.596C242.241,-366.307 298.791,-361.98 335,-330.401 355.661,-312.381 334.477,-291.613 353,-271.401 356.529,-267.55 360.732,-264.281 365.265,-261.508"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="202.325,-361.097 192.143,-364.026 201.929,-368.086 202.325,-361.097"/>
+<text text-anchor="middle" x="276.5" y="-367.401" font-family="Helvetica,sans-Serif" font-size="10.00"> keys</text>
 </g>
 <!-- Node6 -->
 <g id="node6" class="node"><title>Node6</title>
@@ -153,7 +153,7 @@
 </g>
 <!-- Node12 -->
 <g id="node12" class="node"><title>Node12</title>
-<g id="a_node12"><a xlink:href="class____internal_report_1_1____reporter.html" target="_top" xlink:title="Internal class used by __internalReport::__reportSystem::log &#160;This class is able to produce output de...">
+<g id="a_node12"><a xlink:href="class____internal_report_1_1____reporter.html" target="_top" xlink:title="Internal class used by __internalReport::__reportSystem &#160;This class serves as a proxy for message rep...">
 <polygon fill="white" stroke="black" points="369,-34.4009 369,-64.4009 463,-64.4009 463,-34.4009 369,-34.4009"/>
 <text text-anchor="start" x="377" y="-52.4009" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
 <text text-anchor="middle" x="416" y="-41.4009" font-family="Helvetica,sans-Serif" font-size="10.00">__reporter</text>
@@ -178,7 +178,7 @@
 <text text-anchor="middle" x="154" y="-62.9009" font-family="Helvetica,sans-Serif" font-size="10.00">ErrorCode</text>
 </g>
 <!-- Node11&#45;&gt;Node10 -->
-<g id="edge10" class="edge"><title>Node11&#45;&gt;Node10</title>
+<g id="edge11" class="edge"><title>Node11&#45;&gt;Node10</title>
 <path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M195.014,-61.0368C231.822,-58.0986 287.699,-56.3694 335,-66.4009 337.558,-66.9434 360.605,-77.0716 381.309,-86.2933"/>
 <polygon fill="#9a32cd" stroke="#9a32cd" points="194.358,-57.5805 184.698,-61.9321 194.963,-64.5543 194.358,-57.5805"/>
 <text text-anchor="middle" x="276.5" y="-69.4009" font-family="Helvetica,sans-Serif" font-size="10.00"> keys</text>

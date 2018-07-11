@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['windowandargumentincompatibilities',['WindowAndArgumentIncompatibilities',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37ac68476dee7a195b5763fd0707a2d1cee',1,'VerboseManager']]],
-  ['windowsizecompareset',['WindowSizeCompareset',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37ae76cc33e4cbd57ca02f8f7f4e35e9348',1,'VerboseManager']]],
-  ['windowvaluenotrecognized',['WindowValueNotRecognized',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a0cdf3247fc9e81bcb0e0049804a1efea',1,'VerboseManager']]],
-  ['windowvalueoutofrange',['WindowValueOutOfRange',['../class_verbose_manager.html#a8f711407b8b0d501b285ea0dd4ec1a37a0e14e0b6c393e7edd445188b48e847e3',1,'VerboseManager']]]
+  ['referencefilenotloaded',['ReferenceFileNotLoaded',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa910f51553b4f4ef7cdeb5d9b30f711d7',1,'reportsystem.h']]],
+  ['referencenucleotidenotcorresponding',['ReferenceNucleotideNotCorresponding',['../reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65ac1ccd1c7a1c36eb0a7d97e1469f3da5d',1,'reportsystem.h']]],
+  ['removingonlygapscolumn',['RemovingOnlyGapsColumn',['../reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a0577db0c7b73743fc6f9ed2e702c1412',1,'reportsystem.h']]],
+  ['residueoverlapnotrecognized',['ResidueOverlapNotRecognized',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fae5d06dfd747bd3f8ba0c42a9c671e3ef',1,'reportsystem.h']]],
+  ['residueoverlapoutofrange',['ResidueOverlapOutOfRange',['../reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faedf0276523919109cd93ef1e85166779',1,'reportsystem.h']]],
+  ['rna',['RNA',['../defines_8h.html#a69d5409d6e7370d6bd3b4f931702e936a92efc5f13441d2abd5e146e629196c7e',1,'defines.h']]]
 ];

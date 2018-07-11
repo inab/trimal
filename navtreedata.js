@@ -1,6 +1,6 @@
 var NAVTREE =
 [
-  [ "Trimal", "index.html", [
+  [ "trimAl", "index.html", [
     [ "trimAl Main Page", "index.html", [
       [ "Introduction", "index.html#introduction_sec", null ],
       [ "Installation", "index.html#installation_sec", null ],
@@ -10,7 +10,14 @@ var NAVTREE =
       [ "Understanding the code", "index.html#trimAl_code_sec", null ],
       [ "Acknowledgments", "index.html#Acknowledgments", null ]
     ] ],
-    [ "Dot example", "dot_pag.html", null ],
+    [ "Data Flow", "trim_al.html", [
+      [ "Data Flow", "trim_al.html#introduction_flow", null ],
+      [ "Preprocessing", "trim_al.html#Preprocessing", null ],
+      [ "Sequence Trimming", "trim_al.html#SeqTrim", null ],
+      [ "Residue Trimming", "trim_al.html#ResTrim", null ],
+      [ "Post Process", "trim_al.html#PostProcess", null ],
+      [ "Output", "trim_al.html#output", null ]
+    ] ],
     [ "readAl Main Page", "readal_pag.html", [
       [ "Introduction", "readal_pag.html#introduction_sec_r", null ],
       [ "Installation", "readal_pag.html#installation_sec_r", null ],
@@ -18,6 +25,32 @@ var NAVTREE =
         [ "BASIC USAGE", "readal_pag.html#basic_usage_r", null ],
         [ "LEGACY OPTIONS", "readal_pag.html#legacy_opt_r", null ],
         [ "EXAMPLES OF USE", "readal_pag.html#examples_r", null ]
+      ] ]
+    ] ],
+    [ "What can I do?", "whatcanido.html", [
+      [ "How to use", "whatcanido.html#WhatIntroduction", [
+        [ "One Multiple Sequence Alignment.", "whatcanido.html#OneMSA", null ],
+        [ "More than one Sequence Alignment.", "whatcanido.html#CompareSet", null ],
+        [ "Heuristic Trimming", "whatcanido.html#Heuristic", null ],
+        [ "Automatic Trimming", "whatcanido.html#Automatic", null ],
+        [ "Manual Trimming", "whatcanido.html#Manual", null ],
+        [ "Manual Scrapping", "whatcanido.html#Scrap", null ],
+        [ "Clustering", "whatcanido.html#Clustering", null ]
+      ] ],
+      [ "Further Tweaks", "whatcanido.html#FurtherTweaks", [
+        [ "Further Tweaks: Terminal Only", "whatcanido.html#TerminalOnly", null ],
+        [ "Further Tweaks: Custom Similarity Matrix", "whatcanido.html#CustomMatrix", null ],
+        [ "Further Tweaks: Block", "whatcanido.html#Block", null ],
+        [ "Further Tweaks: Complementary Alignment", "whatcanido.html#Complementary", null ]
+      ] ],
+      [ "Output Tweaks", "whatcanido.html#OutputTweaks", [
+        [ "Output Tweaks: Output to file", "whatcanido.html#Out", null ],
+        [ "Output Tweaks: Multiple Formats", "whatcanido.html#Formats", null ]
+      ] ],
+      [ "Reporting Tweaks", "whatcanido.html#ReportingTweaks", [
+        [ "Reporting Tweaks: Column Numbering", "whatcanido.html#ColNum", null ],
+        [ "Reporting Tweaks: Stats", "whatcanido.html#Stats", null ],
+        [ "Reporting Tweaks: HTML and SVG Reporting", "whatcanido.html#HTMLSVG", null ]
       ] ]
     ] ],
     [ "Todo List", "todo.html", null ],
@@ -44,8 +77,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"classstatistics_gaps.html#a6c8b601018c3bcf7970cef9bc5975987",
-"functions_d.html"
+"classstatistics_consistency.html#a6c84faff7565742e1d07bf2db328217b",
+"classutils.html#ae1e05e791a81910510a314fc5c79b9f0"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

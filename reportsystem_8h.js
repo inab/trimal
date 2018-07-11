@@ -90,6 +90,15 @@ var reportsystem_8h =
       [ "AlignmentNotSaved", "reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad421aaef84899a3999896e310909862a", null ],
       [ "VerboseLevelNotRecognized", "reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fac0a326ef0ed6b471b90ca2b0cb602753", null ],
       [ "NeedToSpecifyVerboseLevel", "reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faf622597169eacbe18967fbbd2df6f38d", null ],
+      [ "NoReferenceSequenceForContig", "reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fac32c19cd0b338d352c40cde3408751d3", null ],
+      [ "SNPoutOfBounds", "reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad2a4eb06972bb416621650f3883d152d", null ],
+      [ "NoInputFile", "reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa519eb1ab685b9cc52a3127aa0d219448", null ],
+      [ "ComparesetFailedAlignmentMissing", "reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa77ea50a3fa213f3c0caf199bcadc4370", null ],
+      [ "GapWindowTooBig", "reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa849a0d340dbe0a2f1be006b41c24a3d9", null ],
+      [ "SimilarityWindowTooBig", "reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fac5f0ad82da3b890ae743ccb46f10af96", null ],
+      [ "ConsistencyWindowTooBig", "reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad231bd133eb07c797e7fcae35303d054", null ],
+      [ "WindowTooBig", "reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa349a56be4e4a1f5f865cbe56de13802a", null ],
+      [ "AlignmentIsEmpty", "reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa3ec6a93590637152f3a53186bf0c28e2", null ],
       [ "__MAXERROR", "reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad478ecc3d437135f059fe4c0453e5efc", null ]
     ] ],
     [ "InfoCode", "reportsystem_8h.html#a0829d185720916db5a931df28f0064bf", [
@@ -98,10 +107,10 @@ var reportsystem_8h =
       [ "__MAXINFO", "reportsystem_8h.html#a0829d185720916db5a931df28f0064bfa5a23043db9e94656d5403c7bd0b0f2fa", null ]
     ] ],
     [ "VerboseLevel", "reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471", [
-      [ "NONE", "reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471ac157bdf0b85a40d2619cbc8bc1ae5fe2", null ],
       [ "INFO", "reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471a748005382152808a72b1a9177d9dc806", null ],
       [ "WARNING", "reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471a984de77c680eaff141ec910e25568a81", null ],
-      [ "ERROR", "reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471a2fd6f336d08340583bd620a7f5694c90", null ]
+      [ "ERROR", "reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471a2fd6f336d08340583bd620a7f5694c90", null ],
+      [ "NONE", "reportsystem_8h.html#a0822d01c051e2b76c48c9ae19b07a471ac157bdf0b85a40d2619cbc8bc1ae5fe2", null ]
     ] ],
     [ "WarningCode", "reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65", [
       [ "RemovingOnlyGapsColumn", "reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a0577db0c7b73743fc6f9ed2e702c1412", null ],
@@ -110,6 +119,8 @@ var reportsystem_8h =
       [ "IncludingIndeterminationSymbols", "reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65abf1d77a602b9015effc47227a0b6a00d", null ],
       [ "LessNucleotidesThanExpected", "reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a4fbe16f7f958d68dfb2dc901fb5d5139", null ],
       [ "HeaderWillBeCut", "reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a6323bd54dc90d34a725f24310fe0c0a8", null ],
+      [ "DonorAlreadyAdded", "reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a99252fa48d69f9b2c3292ec84398c978", null ],
+      [ "ReferenceNucleotideNotCorresponding", "reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65ac1ccd1c7a1c36eb0a7d97e1469f3da5d", null ],
       [ "__MAXWARNING", "reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a3a8e0672ec02531643c74adda48f7ce7", null ]
     ] ]
 ];

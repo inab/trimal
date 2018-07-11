@@ -9,23 +9,23 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 35)">
 <title>trimAlManager::check_max_identity_incompatibilities</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-35 308,-35 308,4 -4,4"/>
-<!-- Node131 -->
-<g id="node1" class="node"><title>Node131</title>
+<!-- Node151 -->
+<g id="node1" class="node"><title>Node151</title>
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-30.5 152,-30.5 152,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
 <text text-anchor="middle" x="76" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_max_identity_incompatibilities</text>
 </g>
-<!-- Node132 -->
-<g id="node2" class="node"><title>Node132</title>
-<g id="a_node2"><a xlink:href="class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" target="_top" xlink:title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. ">
+<!-- Node152 -->
+<g id="node2" class="node"><title>Node152</title>
+<g id="a_node2"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
 <polygon fill="white" stroke="black" points="188,-0.5 188,-30.5 304,-30.5 304,-0.5 188,-0.5"/>
 <text text-anchor="start" x="196" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
 <text text-anchor="middle" x="246" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
 </a>
 </g>
 </g>
-<!-- Node131&#45;&gt;Node132 -->
-<g id="edge1" class="edge"><title>Node131&#45;&gt;Node132</title>
+<!-- Node151&#45;&gt;Node152 -->
+<g id="edge1" class="edge"><title>Node151&#45;&gt;Node152</title>
 <path fill="none" stroke="midnightblue" d="M152.155,-15.5C160.664,-15.5 169.296,-15.5 177.696,-15.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="177.802,-19.0001 187.802,-15.5 177.802,-12.0001 177.802,-19.0001"/>
 </g>
