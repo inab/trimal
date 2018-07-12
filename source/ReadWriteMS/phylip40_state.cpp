@@ -2,25 +2,25 @@
 #include "../../include/ReadWriteMS/phylip40_state.h"
 #include "../../include/defines.h"
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include <vector>
 #include "../../include/newAlignment.h"
 
 using namespace std;
 
-int Phylip40State::CheckAlignment(istream* origin)
+int phylip40_state::CheckAlignment(istream* origin)
 {
     origin->seekg(0);
     origin->clear();
-    char *firstWord = NULL, *line = NULL;
+    char *firstWord = nullptr, *line = nullptr;
     int blocks = 0;
     string nline;
     
     /* Read first valid line in a safer way */
     do {
         line = utils::readLine(*origin);
-    } while ((line == NULL) && (!origin->eof()));
+    } while ((line == nullptr) && (!origin->eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
@@ -36,8 +36,8 @@ int Phylip40State::CheckAlignment(istream* origin)
         /* Get number of sequences and residues */
         int sequenNumber = atoi(firstWord);
         int residNumber = 0;
-        firstWord = strtok(NULL, DELIMITERS);
-        if(firstWord != NULL)
+        firstWord = strtok(nullptr, DELIMITERS);
+        if(firstWord != nullptr)
             residNumber = atoi(firstWord);
         else {
             delete [] line;
@@ -59,10 +59,9 @@ int Phylip40State::CheckAlignment(istream* origin)
 
             /* Read line in a safer way */
             do {
-                if (line != NULL)
-                    delete [] line;
+                delete [] line;
                 line = utils::readLine(*origin);
-            } while ((line == NULL) && (!origin->eof()));
+            } while ((line == nullptr) && (!origin->eof()));
 
             /* If the file end is reached without a valid line, warn about it */
             if (origin->eof())
@@ -72,22 +71,21 @@ int Phylip40State::CheckAlignment(istream* origin)
             }
 
             firstWord = strtok(line, DELIMITERS);
-            while(firstWord != NULL) {
+            while(firstWord != nullptr) {
                 blocks++;
-                firstWord = strtok(NULL, DELIMITERS);
+                firstWord = strtok(nullptr, DELIMITERS);
             }
 
             /* Read line in a safer way */
             do {
-                if (line != NULL)
-                    delete [] line;
+                delete [] line;
                 line = utils::readLine(*origin);
-            } while ((line == NULL) && (!origin->eof()));
+            } while ((line == nullptr) && (!origin->eof()));
 
             firstWord = strtok(line, DELIMITERS);
-            while(firstWord != NULL) {
+            while(firstWord != nullptr) {
                 blocks--;
-                firstWord = strtok(NULL, DELIMITERS);
+                firstWord = strtok(nullptr, DELIMITERS);
             }
             
             delete [] line;
@@ -104,11 +102,11 @@ int Phylip40State::CheckAlignment(istream* origin)
     return 0;
 }
 
-newAlignment* Phylip40State::LoadAlignment(std::string filename)
+newAlignment* phylip40_state::LoadAlignment(std::string filename)
 {
     /* PHYLIP/PHYLIP 4 (Sequential) file format parser */
     newAlignment * _alignment = new newAlignment();
-    char *str, *line = NULL;
+    char *str, *line = nullptr;
     ifstream file;
     int i;
 
@@ -125,7 +123,7 @@ newAlignment* Phylip40State::LoadAlignment(std::string filename)
     /* Read first valid line in a safer way */
     do {
         line = utils::readLine(file);
-    } while ((line == NULL) && (!file.eof()));
+    } while ((line == nullptr) && (!file.eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (file.eof())
@@ -134,12 +132,12 @@ newAlignment* Phylip40State::LoadAlignment(std::string filename)
     /* Read the input sequences and residues for each sequence numbers */
     str = strtok(line, DELIMITERS);
     _alignment->sequenNumber = 0;
-    if(str != NULL)
+    if(str != nullptr)
         _alignment->sequenNumber = atoi(str);
 
-    str = strtok(NULL, DELIMITERS);
+    str = strtok(nullptr, DELIMITERS);
     _alignment->residNumber = 0;
-    if(str != NULL)
+    if(str != nullptr)
         _alignment->residNumber = atoi(str);
 
     /* If something is wrong about the sequences or/and residues number,
@@ -156,12 +154,11 @@ newAlignment* Phylip40State::LoadAlignment(std::string filename)
     while((i < _alignment->sequenNumber) && (!file.eof())){
 
         /* Read lines in a safer way. Destroy previous stored information */
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
         line = utils::readLine(file);
 
         /* It the input line/s are blank lines, skip the loop iteration  */
-        if(line == NULL)
+        if(line == nullptr)
             continue;
 
         /* First token: Sequence name */
@@ -169,10 +166,10 @@ newAlignment* Phylip40State::LoadAlignment(std::string filename)
         _alignment->seqsName[i].append(str, strlen(str));
 
         /* Trim the rest of the line from blank spaces, tabs, etc and store it */
-        str = strtok(NULL, DELIMITERS);
-        while(str != NULL) {
+        str = strtok(nullptr, DELIMITERS);
+        while(str != nullptr) {
             _alignment->sequences[i].append(str, strlen(str));
-            str = strtok(NULL, DELIMITERS);
+            str = strtok(nullptr, DELIMITERS);
         }
         i++;
     }
@@ -184,20 +181,19 @@ newAlignment* Phylip40State::LoadAlignment(std::string filename)
         i = 0;
         while((i < _alignment->sequenNumber) && (!file.eof())) {
             /* Read lines in a safer way. Destroy previous stored information */
-            if (line != NULL)
-                delete [] line;
+            delete [] line;
 
             line = utils::readLine(file);
             /* It the input line/s are blank lines, skip the loop iteration  */
-            if(line == NULL)
+            if(line == nullptr)
                 continue;
 
             /* Remove from the current line non-printable characters and add fragments
              * to previous stored sequence */
             str = strtok(line, DELIMITERS);
-            while(str != NULL) {
+            while(str != nullptr) {
                 _alignment->sequences[i].append(str, strlen(str));
-                str = strtok(NULL, DELIMITERS);
+                str = strtok(nullptr, DELIMITERS);
             }
             i++;
         }
@@ -205,8 +201,7 @@ newAlignment* Phylip40State::LoadAlignment(std::string filename)
 
     /* Close the input file and delete dinamic memory */
     file.close();
-    if (line != NULL)
-        delete [] line;
+    delete [] line;
 
     /* Check the matrix's content */
     _alignment->fillMatrices(true);
@@ -215,13 +210,13 @@ newAlignment* Phylip40State::LoadAlignment(std::string filename)
     return _alignment;
 }
 
-bool Phylip40State::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool phylip40_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
   
     
    /* Generate output alignment in PHYLIP/PHYLIP 4 format (sequential) */
 
-    int i, j, k, l, maxLongName;
+    int i, j, k = -1, l, maxLongName;
     string *tmpMatrix;
 
     /* Check whether sequences in the alignment are aligned or not.
@@ -247,11 +242,6 @@ bool Phylip40State::SaveAlignment(newAlignment* alignment, std::ostream* output,
     maxLongName = PHYLIPDISTANCE;
     for(i = 0; (i < alignment->originalSequenNumber); i++)
         maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
-    
-    if (Machine->shortNames)
-    {
-        maxLongName = PHYLIPDISTANCE;
-    }
 
     /* Generating output alignment */
     /* First Line: Sequences Number & Residued Number */
@@ -270,7 +260,6 @@ bool Phylip40State::SaveAlignment(newAlignment* alignment, std::ostream* output,
             l++;
         }
     }
-
 
     for (i = k; i < alignment->originalResidNumber; i=k)
     {
@@ -301,10 +290,9 @@ bool Phylip40State::SaveAlignment(newAlignment* alignment, std::ostream* output,
     return true;
 }
 
-bool Phylip40State::RecognizeOutputFormat(std::string FormatName)
+bool phylip40_state::RecognizeOutputFormat(std::string FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
-    if (FormatName == "phylip" || FormatName == "phylip40") return true;
-    return false;
+    return FormatName == "phylip" || FormatName == "phylip40";
 }
 

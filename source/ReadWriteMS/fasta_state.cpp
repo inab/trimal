@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int FastaState::CheckAlignment(istream* origin)
+int fasta_state::CheckAlignment(istream* origin)
 {
     char c;
     origin->seekg(0);
@@ -17,11 +17,11 @@ int FastaState::CheckAlignment(istream* origin)
     return 0;
 }
 
-newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
+newAlignment* fasta_state::LoadAlignment(std::__cxx11::string filename)
 {
     /* FASTA file format parser */
     newAlignment* _alignment = new newAlignment();
-    char *str, *line = NULL;
+    char *str, *line = nullptr;
     ifstream file;
     int i;
 
@@ -40,17 +40,16 @@ newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
     while(!file.eof()) {
 
         /* Deallocate previously used dinamic memory */
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read lines in a safe way */
         line = utils::readLine(file);
-        if (line == NULL)
+        if (line == nullptr)
             continue;
 
         /* It the line starts by ">" means that a new sequence has been found */
         str = strtok(line, DELIMITERS);
-        if (str == NULL)
+        if (str == nullptr)
             continue;
 
         /* If a sequence name flag is detected, increase sequences counter */
@@ -65,17 +64,16 @@ newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
     /* Allocate memory for the input alignmet */
     _alignment->seqsName  = new string[_alignment->sequenNumber];
     _alignment->sequences = new string[_alignment->sequenNumber];
-    _alignment->seqsInfo  = NULL;//new string[_alignment->sequenNumber];
+    _alignment->seqsInfo  = nullptr;//new string[_alignment->sequenNumber];
 
     for(i = -1; (i < _alignment->sequenNumber) && (!file.eof()); ) {
 
         /* Deallocate previously used dinamic memory */
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read lines in a safe way */
         line = utils::readLine(file);
-        if (line == NULL)
+        if (line == nullptr)
             continue;
 
         /* Store original header fom input sequences including non-standard
@@ -85,7 +83,7 @@ newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
 
         /* Cut the current line and check whether there are valid characters */
         str = strtok(line, OTHDELIMITERS);
-        if (str == NULL)
+        if (str == nullptr)
             continue;
 
         /* Check whether current line belongs to the current sequence
@@ -100,9 +98,9 @@ newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
         }
 
         /* Sequence */
-        while(str != NULL) {
+        while(str != nullptr) {
             _alignment->sequences[i].append(str, strlen(str));
-            str = strtok(NULL, DELIMITERS);
+            str = strtok(nullptr, DELIMITERS);
         }
     }
 
@@ -110,7 +108,7 @@ newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
     file.close();
 
     /* Deallocate previously used dinamic memory */
-    if (line != NULL)
+    if (line != nullptr)
         delete [] line;
         
     /* Check the matrix's content */
@@ -120,7 +118,9 @@ newAlignment* FastaState::LoadAlignment(std::__cxx11::string filename)
     return _alignment; 
 }
 
-bool FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool fasta_state::SaveAlignment(newAlignment* alignment,
+                                std::ostream* output,
+                                std::string* FileName)
 {
     /* Generate output alignment in FASTA format. Sequences can be unaligned. */
 
@@ -145,33 +145,31 @@ bool FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
     maxLongName = 0;
     for(i = 0; i < alignment->originalSequenNumber; i++)
     {
-        if (alignment->saveSequences && alignment->saveSequences[i] == -1) continue;
+        if (alignment->saveSequences && alignment->saveSequences[i] == -1)
+            continue;
         if (!Machine->keepHeader)
             maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
-        else if (alignment->seqsInfo != NULL)
+        else if (alignment->seqsInfo != nullptr)
             maxLongName = utils::max(maxLongName, alignment->seqsInfo[i].size());
     }
 
-    if (Machine->shortNames && maxLongName > PHYLIPDISTANCE) {
-        maxLongName = PHYLIPDISTANCE;
-        if (!Machine->keepHeader)
-            debug.report(WarningCode::HeaderWillBeCut);
-    }
     /* Print alignment. First, sequences name id and then the sequences itself */
     for(i = 0; i < alignment->originalSequenNumber; i++) {
         
-        if (alignment->saveSequences != NULL && alignment->saveSequences[i] == -1) continue;
+        if (alignment->saveSequences != nullptr &&
+            alignment->saveSequences[i] == -1)
+            continue;
         
         if (!Machine->keepHeader)
             (*output) << ">" << alignment->seqsName[i].substr(0, maxLongName) << endl;
         
-        else if (alignment->seqsInfo != NULL)
+        else if (alignment->seqsInfo != nullptr)
             (*output) << ">" << alignment->seqsInfo[i].substr(0, maxLongName) << endl;
         
         
         for (j = 0, k = 0; j < alignment->sequences[i].length(); j++)
         {
-            if (alignment->saveResidues != NULL && alignment->saveResidues[j] == -1) 
+            if (alignment->saveResidues != nullptr && alignment->saveResidues[j] == -1) 
             {
                 if (!lastcharIsnewline && j == alignment->sequences[i].length() -1 ) 
                 {
@@ -184,7 +182,7 @@ bool FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
                 (*output) << tmpMatrix[i][j];
                 k++;
                 lastcharIsnewline = false;
-                if (!lastcharIsnewline && (k % 60 == 0 || j == alignment->sequences[i].length() -1 ))
+                if (k % 60 == 0 || j == alignment->sequences[i].length() -1 )
                 {
                     (*output) << endl;
                     lastcharIsnewline = true;
@@ -199,9 +197,8 @@ bool FastaState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
     return true;
 }
 
-bool FastaState::RecognizeOutputFormat(std::string FormatName)
+bool fasta_state::RecognizeOutputFormat(std::string FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
-    if (FormatName == "fasta") return true;
-    return false;
+    return FormatName == "fasta";
 }

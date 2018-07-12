@@ -3,17 +3,25 @@
 
 #include "ReadWriteBaseState.h"
 
-class MegaSequentialState : public ReadWriteBaseState
-{
+class mega_sequential_state : public ReadWriteBaseState {
 public:
-    
-    MegaSequentialState(ReadWriteMS* MachineState) { Machine = MachineState; name="mega_sequential"; extension="mega"; canLoad=true ; canSave=true; };
-    
-    virtual int CheckAlignment(istream* origin);
-    virtual newAlignment* LoadAlignment(string filename);
-    virtual bool SaveAlignment(newAlignment* alignment, ostream* output, std::string* FileName);
-    virtual bool RecognizeOutputFormat(std::string FormatName);
-     
+
+    explicit mega_sequential_state(ReadWriteMS *MachineState) {
+        Machine = MachineState;
+        name = "mega_sequential";
+        extension = "mega";
+        canLoad = true;
+        canSave = true;
+    };
+
+    int CheckAlignment(istream *origin) override;
+
+    newAlignment *LoadAlignment(string filename) override;
+
+    bool SaveAlignment(newAlignment *alignment, ostream *output, std::string *FileName) override;
+
+    bool RecognizeOutputFormat(std::string FormatName) override;
+
 };
 
 #endif // MEGASSTATE_H

@@ -309,9 +309,7 @@ bool trimAlManager::out_format_arguments(const int *argc, char *argv[], int *i) 
 
             // Option -fasta-m10
         else if (!strcmp(argv[*i], "-fasta_m10")) {
-            oformats.emplace_back("fasta");
-            ReadWriteMachine.shortNames = true;
-            shortNames = true;
+            oformats.emplace_back("fasta_m10");
             return true;
         }
 
@@ -341,9 +339,7 @@ bool trimAlManager::out_format_arguments(const int *argc, char *argv[], int *i) 
 
             // Option -phylip3.2-m10
         else if (!strcmp(argv[*i], "-phylip3.2_m10")) {
-            oformats.emplace_back("phylip32");
-            ReadWriteMachine.shortNames = true;
-            shortNames = true;
+            oformats.emplace_back("phylip32_m10");
             return true;
         }
 
@@ -355,28 +351,23 @@ bool trimAlManager::out_format_arguments(const int *argc, char *argv[], int *i) 
 
             // Option -phylip-m10
         else if (!strcmp(argv[*i], "-phylip_m10")) {
-            oformats.emplace_back("phylip40");
-            ReadWriteMachine.shortNames = true;
-            shortNames = true;
+            oformats.emplace_back("phylip40_m10");
             return true;
         }
 
             // Option -phylip_paml
         else if (!strcmp(argv[*i], "-phylip_paml")) {
-            oformats.emplace_back("phylippaml");
+            oformats.emplace_back("phylip_paml");
             return true;
         }
 
             // Option -phylip_paml-m10
         else if (!strcmp(argv[*i], "-phylip_paml_m10")) {
-            oformats.emplace_back("phylippaml");
-            ReadWriteMachine.shortNames = true;
-            shortNames = true;
+            oformats.emplace_back("phylip_paml_m10");
             return true;
         }
     }
     return false;
-
 }
 
 inline bool trimAlManager::matrix_argument(const int *argc, char *argv[], int *i) {
@@ -895,17 +886,22 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {
             }
 
         if (selectSeqs)
-            if (delSequences[num] >= origAlig->getNumSpecies()) {
-                debug.report(ErrorCode::SelectOnlyAccepts,
-                             new string[2]{"-selectseqs", "sequences"});
-                appearErrors = true;
+
+            for (int i = 0; i < delSequences[0]; i++)
+            {
+                if (delSequences[i] >= origAlig->getNumSpecies()) {
+                    debug.report(ErrorCode::SelectOnlyAccepts,
+                                 new string[2]{"-selectseqs", "sequences"});
+                    appearErrors = true;
+                    break;
+                }
             }
     }
     return appearErrors;
 }
 
 inline bool trimAlManager::check_thresholds_incompatibilities() {
-    //TODO consistencyThreshold was not present on this Incompatibilities. Is this correct?
+    //NOTE consistencyThreshold was not present on this Incompatibilities. Is this correct?
     if ((gapThreshold != -1) || (similarityThreshold != -1) || (consistencyThreshold != -1)) {
 
         if (automatedMethodCount) {
@@ -1632,13 +1628,13 @@ inline void trimAlManager::CleanSequences() {
     } else if (maxIdentity != -1) {
         tempAlig = origAlig->Cleaning->getClustering(maxIdentity);
     } else if (delSequences != nullptr) {
-        num = delSequences[0];
+
         {
             tempAlig = origAlig->Cleaning->removeSequences(
                     delSequences,
                     1,
-                    num,
-                    /* getComplementary*/ false
+                    delSequences[0], // Num of sequences in array
+                    false
             );
         }
     } else if ((residuesOverlap != -1) && (sequenceOverlap != -1)) {
@@ -1715,18 +1711,21 @@ inline void trimAlManager::CleanResiduesNonAuto() {
     // singleAlig can be a derived alignment from origAlig or origAlig itself
 
     if (delColumns != nullptr) {
-        num = delColumns[0];
-        if (delColumns[num] >= singleAlig->getNumAminos()) {
-            debug.report(
-                    ErrorCode::SelectOnlyAccepts,
-                    new string[2]{"-selectcols", "residues"}
-            );
-            appearErrors = true;
-        } else
+        for (int i = 0 ; i < delColumns[0]; i++)
+        {
+            if (delColumns[i] >= singleAlig->getNumAminos()) {
+                debug.report(
+                        ErrorCode::SelectOnlyAccepts,
+                        new string[2]{"-selectcols", "residues"}
+                );
+                appearErrors = true;
+            }
+        }
+         if (!appearErrors)
             tempAlig = singleAlig->Cleaning->removeColumns(
                     delColumns,
                     1,
-                    num,
+                    delColumns[0],
                     /* getComplementary*/ false
             );
 

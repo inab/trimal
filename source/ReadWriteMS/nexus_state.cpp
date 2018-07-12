@@ -3,23 +3,23 @@
 #include "../../include/defines.h"
 #include "../../include/values.h"
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include <vector>
 #include "../../include/newAlignment.h"
 
 using namespace std;
 
-int NexusState::CheckAlignment(istream* origin)
+int nexus_state::CheckAlignment(istream* origin)
 {
     origin->seekg(0);
     origin->clear();
-    char *firstWord = NULL, *line = NULL;
+    char *firstWord = nullptr, *line = nullptr;
     
     /* Read first valid line in a safer way */
     do {
         line = utils::readLine(*origin);
-    } while ((line == NULL) && (!origin->eof()));
+    } while ((line == nullptr) && (!origin->eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
@@ -37,11 +37,11 @@ int NexusState::CheckAlignment(istream* origin)
     return 0;
 }
 
-newAlignment* NexusState::LoadAlignment(std::string filename)
+newAlignment* nexus_state::LoadAlignment(std::string filename)
 {
     newAlignment* _alignment = new newAlignment();
     /* NEXUS file format parser */
-    char *frag = NULL, *str = NULL, *line = NULL;
+    char *frag = nullptr, *str = nullptr, *line = nullptr;
     int i, pos, state, firstBlock;
     ifstream file;
 
@@ -60,17 +60,16 @@ newAlignment* NexusState::LoadAlignment(std::string filename)
     do {
 
         /* Destroy previous assigned memory */
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read line in a safer way */
         line = utils::readLine(file);
-        if (line == NULL)
+        if (line == nullptr)
             continue;
 
         /* Discard line where there is not information */
         str = strtok(line, DELIMITERS);
-        if(str == NULL)
+        if(str == nullptr)
             continue;
 
         /* If the line has any kind of information, try to catch it */
@@ -87,22 +86,22 @@ newAlignment* NexusState::LoadAlignment(std::string filename)
 
             /* Store information about input format file */
         else if(!strcmp(str, "FORMAT")) {
-            str = strtok(NULL, DELIMITERS);
-            while(str != NULL) {
+            str = strtok(nullptr, DELIMITERS);
+            while(str != nullptr) {
                 _alignment-> aligInfo.append(str, strlen(str));
                 _alignment-> aligInfo.append(" ", strlen(" "));
-                str = strtok(NULL, DELIMITERS);
+                str = strtok(nullptr, DELIMITERS);
             }
         }
 
             /* In this case, try to get matrix dimensions */
         else if((!strcmp(str, "DIMENSIONS")) && state) {
-            str = strtok(NULL, DELIMITERS);
-            frag = strtok(NULL, DELIMITERS);
+            str = strtok(nullptr, DELIMITERS);
+            frag = strtok(nullptr, DELIMITERS);
             str = strtok(str, "=;");
-            _alignment->sequenNumber = atoi(strtok(NULL, "=;"));
+            _alignment->sequenNumber = atoi(strtok(nullptr, "=;"));
             frag = strtok(frag, "=;");
-            _alignment->residNumber = atoi(strtok(NULL, "=;"));
+            _alignment->residNumber = atoi(strtok(nullptr, "=;"));
         }
     } while(!file.eof());
 
@@ -110,7 +109,7 @@ newAlignment* NexusState::LoadAlignment(std::string filename)
     if(strcmp(str, "MATRIX") || (_alignment->sequenNumber == 0) || (_alignment->residNumber == 0))
         return nullptr;
 
-    /* Allocate memory for the input alignmet */
+    /* Allocate memory for the input alignment */
     _alignment->seqsName  = new string[_alignment->sequenNumber];
     _alignment->sequences = new string[_alignment->sequenNumber];
 
@@ -120,12 +119,11 @@ newAlignment* NexusState::LoadAlignment(std::string filename)
 
     while(!file.eof()) {
         /* Destroy previous assigned memory */
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read line in a safer way */
         line = utils::readLine(file);
-        if (line == NULL)
+        if (line == nullptr)
             continue;
 
         /* Discard any comments from input file */
@@ -139,7 +137,7 @@ newAlignment* NexusState::LoadAlignment(std::string filename)
         }
 
         /* If there is a multi-line comments, skip it as well */
-        if ((state) || (not state && i != (int) strlen(line)))
+        if ((state) || (i != (int) strlen(line)))
             continue;
 
         /* Check for a specific tag indicating matrix end */
@@ -148,7 +146,7 @@ newAlignment* NexusState::LoadAlignment(std::string filename)
 
         /* Split input line and check it if it is valid */
         str = strtok(line, OTH2DELIMITERS);
-        if (str == NULL)
+        if (str == nullptr)
             continue;
 
         /* Store the sequence name, only from the first block */
@@ -156,10 +154,10 @@ newAlignment* NexusState::LoadAlignment(std::string filename)
             _alignment->seqsName[pos].append(str, strlen(str));
 
         /* Store rest of line as part of sequence */
-        str = strtok(NULL, OTH2DELIMITERS);
-        while(str != NULL) {
+        str = strtok(nullptr, OTH2DELIMITERS);
+        while(str != nullptr) {
             _alignment->sequences[pos].append(str, strlen(str));
-            str = strtok(NULL, OTH2DELIMITERS);
+            str = strtok(nullptr, OTH2DELIMITERS);
         }
 
         /* Move sequences pointer to next one. It if it is last one, move it to
@@ -171,8 +169,7 @@ newAlignment* NexusState::LoadAlignment(std::string filename)
     }
 
     /* Deallocate memory */
-    if (line != NULL)
-        delete [] line;
+    delete [] line;
 
     /* Close the input file */
     file.close();
@@ -184,7 +181,7 @@ newAlignment* NexusState::LoadAlignment(std::string filename)
     return _alignment;
 }
 
-bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool nexus_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
     /* Generate output alignment in NEXUS format setting only alignment block */
 
@@ -210,7 +207,7 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
                        utils::getReverse(alignment->sequences[i]);
 
     // Compute maximum sequences name length
-    for(i = 0; (i < alignment->originalSequenNumber) && (!Machine->shortNames); i++)
+    for (i = 0; (i < alignment->originalSequenNumber); i++)
         if (alignment->saveSequences[i] != -1)
             maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
 
@@ -218,8 +215,8 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
     alignment->getAlignmentType();
 
     // Remove characters like ";" from input alignment information line
-    while((int) alignment -> aligInfo.find(";") != (int) string::npos)
-        alignment ->aligInfo.erase(alignment -> aligInfo.find(";"), 1);
+    while((int) alignment -> aligInfo.find(';') != (int) string::npos)
+        alignment ->aligInfo.erase(alignment -> aligInfo.find(';'), 1);
 
     // Print Alignment header
     *output << "#NEXUS" << endl << "BEGIN DATA;" << endl << " DIMENSIONS NTAX="
@@ -235,7 +232,7 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
 
     i = 0;
     // Using information from input alignment. Use only some tags.
-    while((j = alignment ->aligInfo.find(" ", i)) != (int) string::npos) {
+    while((j = alignment ->aligInfo.find(' ', i)) != (int) string::npos) {
 
         if((alignment ->aligInfo.substr(i, j - i)).compare(0, 7, "MISSING") == 0 ||
            (alignment ->aligInfo.substr(i, j)).compare(0, 7, "missing") == 0)
@@ -310,10 +307,9 @@ bool NexusState::SaveAlignment(newAlignment* alignment, std::ostream* output, st
     return true;
 }
 
-bool NexusState::RecognizeOutputFormat(std::string FormatName)
+bool nexus_state::RecognizeOutputFormat(std::string FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
-    if (FormatName == "nexus") return true;
-    return false;
+    return FormatName == "nexus";
 }
 

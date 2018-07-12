@@ -42,7 +42,6 @@ public:
     soverlap            = false, 
     selectSeqs          = false,
     selectCols          = false, 
-    shortNames          = false, 
     splitByStopCodon    = false,
     terminalOnly        = false, 
     keepSeqs            = false,
@@ -60,7 +59,7 @@ public:
     int
     i                       = 1,
     stats                   = 0,
-    num                     = 0, 
+//    num                     = 0,
     compareset              = -1,
     windowSize              = -1, 
     gapWindow               = -1, 

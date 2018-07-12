@@ -1,16 +1,16 @@
-#ifndef PHYLIP32STATE_H
-#define PHYLIP32STATE_H
+#ifndef FASTAM10STATE_H
+#define FASTAM10STATE_H
 
 #include "ReadWriteBaseState.h"
 
-class phylip32_state : public ReadWriteBaseState {
+class fasta_m10_state : public ReadWriteBaseState {
 public:
 
-    explicit phylip32_state(ReadWriteMS *MachineState) {
+    explicit fasta_m10_state(ReadWriteMS *MachineState) {
         Machine = MachineState;
-        name = "phylip32";
-        extension = "phy";
-        canLoad = true;
+        name = "fasta_m10";
+        extension = "fasta";
+        canLoad = false;
         canSave = true;
     };
 
@@ -24,4 +24,4 @@ public:
 
 };
 
-#endif // PHYLIP32STATE_H
+#endif // FASTASTATE_H

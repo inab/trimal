@@ -1,16 +1,16 @@
-#ifndef PHYLIP32STATE_H
-#define PHYLIP32STATE_H
+#ifndef PHYLIP40M10STATE_H
+#define PHYLIP40M10STATE_H
 
 #include "ReadWriteBaseState.h"
 
-class phylip32_state : public ReadWriteBaseState {
+class phylip40_m10_state : public ReadWriteBaseState {
 public:
 
-    explicit phylip32_state(ReadWriteMS *MachineState) {
+    explicit phylip40_m10_state(ReadWriteMS *MachineState) {
         Machine = MachineState;
-        name = "phylip32";
-        extension = "phy";
-        canLoad = true;
+        name = "phylip40_m10";
+        extension = "phy2";
+        canLoad = false;
         canSave = true;
     };
 
@@ -24,4 +24,4 @@ public:
 
 };
 
-#endif // PHYLIP32STATE_H
+#endif // PHYLIP40STATE_H

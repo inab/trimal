@@ -6,17 +6,17 @@
 
 using namespace std;
 
-int ClustalState::CheckAlignment(istream* origin)
+int clustal_state::CheckAlignment(istream* origin)
 {
     origin->seekg(0);
     origin->clear();
-    char *firstWord = NULL, *line = NULL;
+    char *firstWord = nullptr, *line = nullptr;
 
     
     /* Read first valid line in a safer way */
     do {
         line = utils::readLine(*origin);
-    } while ((line == NULL) && (!origin->eof()));
+    } while ((line == nullptr) && (!origin->eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
@@ -34,11 +34,11 @@ int ClustalState::CheckAlignment(istream* origin)
     return 0;
 }
 
-newAlignment* ClustalState::LoadAlignment(std::string filename)
+newAlignment* clustal_state::LoadAlignment(std::string filename)
 {
     newAlignment* alignment = new newAlignment();
     int i, seqLength, pos, firstBlock;
-    char *str, *line = NULL;
+    char *str, *line = nullptr;
     ifstream file;
     file.open(filename, ifstream::in);
     
@@ -51,7 +51,7 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
     /* The first valid line corresponding to CLUSTAL label is ignored */
     do {
         line = utils::readLine(file);
-    } while ((line == NULL) && (!file.eof()));
+    } while ((line == nullptr) && (!file.eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (file.eof())
@@ -61,13 +61,12 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
     while(!file.eof()) {
 
         /* Deallocate previously used dynamic memory */
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read lines in safe way */
         line = utils::readLine(file);
 
-        if (line != NULL)
+        if (line != nullptr)
             break;
     }
 
@@ -78,7 +77,7 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
 
         /* If a new line without any valid character is detected
          * means the first block is over */
-        if (line == NULL)
+        if (line == nullptr)
             break;
 
         /* Count how many times standard characters as well as
@@ -96,8 +95,7 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
         alignment->sequenNumber++;
 
         /* Deallocate previously used dynamic memory */
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read lines in safe way */
         line = utils::readLine(file);
@@ -113,7 +111,7 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
 
     /* Read the title line and store it */
     line = utils::readLine(file);
-    if (line == NULL)
+    if (line == nullptr)
         return nullptr;
     alignment->aligInfo.append(line, strlen(line));
 
@@ -121,13 +119,12 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
     while(!file.eof()) {
 
         /* Deallocate previously used dynamic memory */
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read lines in safe way */
         line = utils::readLine(file);
 
-        if (line != NULL)
+        if (line != nullptr)
             break;
     }
 
@@ -139,7 +136,7 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
 
     while(!file.eof()) {
 
-        if (line == NULL) {
+        if (line == nullptr) {
             /* Sometimes, clustalw files does not have any marker after first block
              * to indicate conservation between its columns residues. In that cases,
              * mark the end of first block */
@@ -162,8 +159,7 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
             firstBlock = false;
 
             /* Deallocate dinamic memory if it has been used before */
-            if (line != NULL)
-                delete [] line;
+            delete [] line;
 
             /* Read current line and analyze it*/
             line = utils::readLine(file);
@@ -175,11 +171,11 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
          * sequence name and the second one the residues. If the "firstBlock" flag
          * is active then store the sequence name */
         str = strtok(line, OTHDELIMITERS);
-        if(str != NULL) {
+        if(str != nullptr) {
             if(firstBlock)
                 alignment->seqsName[i].append(str, strlen(str));
-            str = strtok(NULL, OTHDELIMITERS);
-            if(str != NULL)
+            str = strtok(nullptr, OTHDELIMITERS);
+            if(str != nullptr)
                 alignment->sequences[i].append(str, strlen(str));
 
             /* Move sequences pointer in a circular way */
@@ -187,8 +183,7 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
         }
 
         /* Deallocate dinamic memory if it has been used before */
-        if (line != NULL)
-            delete [] line;
+        delete [] line;
 
         /* Read current line and analyze it*/
         line = utils::readLine(file);
@@ -198,8 +193,7 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
     file.close();
 
     /* Deallocate dinamic memory */
-    if (line != NULL)
-        delete [] line;
+    delete [] line;
 
     /* Check the matrix's content */
     alignment->fillMatrices(true);
@@ -208,10 +202,8 @@ newAlignment* ClustalState::LoadAlignment(std::string filename)
     return alignment; 
 }
 
-bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, std::__cxx11::string* FileName)
+bool clustal_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::__cxx11::string* FileName)
 {
-
-    
     /* Generate output alignment in CLUSTAL format */
 
     int i, j, k, l, maxLongName = 0;
@@ -235,15 +227,8 @@ bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, 
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
 
-    /* Compute maximum sequences name length */
-    for(i = 0; (i < alignment->originalSequenNumber) && (!Machine->shortNames); i++)
-    {
-        if (alignment->saveSequences[i] == -1) continue;
-        maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
-    }
-
     /* Print alignment header */
-    if((alignment->aligInfo.size() != 0)  && (alignment->aligInfo.substr(0,7) == "CLUSTAL"))
+    if(!alignment->aligInfo.empty() && alignment->aligInfo.substr(0,7) == "CLUSTAL")
         (*output) << alignment->aligInfo << endl << endl;
     else
         (*output) << "CLUSTAL multiple sequence alignment" << endl << endl;
@@ -256,12 +241,12 @@ bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, 
     {
         for(i = 0; i < alignment->originalSequenNumber; i++)
         {
-            if (alignment->saveSequences != NULL && alignment->saveSequences[i] != -1)
+            if (alignment->saveSequences != nullptr && alignment->saveSequences[i] != -1)
             {
                 (*output) << setw(maxLongName + 5) << left << alignment->seqsName[i];
                 for (k = j, l = 0; l < 60 && k < alignment->originalResidNumber; k++)
                 {
-                    if (alignment->saveResidues != NULL && alignment->saveResidues[k] != -1)
+                    if (alignment->saveResidues != nullptr && alignment->saveResidues[k] != -1)
                     {
                         (*output) << tmpMatrix[i][k];
                         l++;
@@ -279,10 +264,9 @@ bool ClustalState::SaveAlignment(newAlignment* alignment, std::ostream* output, 
     return true;
 }
 
-bool ClustalState::RecognizeOutputFormat(std::string FormatName)
+bool clustal_state::RecognizeOutputFormat(std::string FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
-    if (FormatName == "clustal") return true;
-    return false;
+    return FormatName == "clustal";
 }
 

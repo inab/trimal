@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD 11)
 # Make bin folder to output the compiled programs
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
-ADD_DEFINITIONS(-O2)
+#ADD_DEFINITIONS(-O2)
 
 # Include the include folder. Yeah. I love redudancy
 include_directories(include)
@@ -56,3 +56,42 @@ add_executable(readal
 # Link the mathematical library
 target_link_libraries(trimal m)
 target_link_libraries(readal m)
+
+
+# Create a header that includes all the ReadWrite States headers
+# It also implements the ReadWriteMS constructor
+#   This implementation adds all the previous formats/States to the machine.
+#
+# To be able to be automatically recognized, the new state should:
+#   1.- Have the same Class Name as File Name (without the extension)
+#   2.- Name must end with '_state'
+#   3.- Be placed on ReadWriteMS folder
+
+message("Generating include/ReadWriteMS/formats_header.h related to format handling")
+
+FILE (GLOB stateheaders
+        include/ReadWriteMS/*_state.h)
+
+file(WRITE include/ReadWriteMS/formats_header.h "//CMake generated code\n")
+
+get_filename_component(var1 include ABSOLUTE)
+foreach(header_path ${stateheaders})
+    string(REPLACE "${var1}/" "" out "${header_path}")
+    file(APPEND include/ReadWriteMS/formats_header.h "#include \"${out}\"\n")
+endforeach()
+
+file(APPEND include/ReadWriteMS/formats_header.h
+"
+#include \"ReadWriteMS/ReadWriteMachineState.h\"
+
+ReadWriteMS::ReadWriteMS()
+{
+")
+
+
+foreach(header_path ${stateheaders})
+    get_filename_component(var1 ${header_path} NAME_WE)
+    file(APPEND include/ReadWriteMS/formats_header.h "\taddState(new ${var1}(this));\n")
+endforeach()
+
+file(APPEND include/ReadWriteMS/formats_header.h "};")

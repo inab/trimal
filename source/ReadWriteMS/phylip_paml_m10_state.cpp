@@ -1,5 +1,5 @@
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
-#include "../../include/ReadWriteMS/phylip_paml_state.h"
+#include "../../include/ReadWriteMS/phylip_paml_m10_state.h"
 #include "../../include/defines.h"
 #include <iostream>
 #include <cstdio>
@@ -9,17 +9,17 @@
 
 using namespace std;
 
-int phylip_paml_state::CheckAlignment(istream* origin)
+int phylip_paml_m10_state::CheckAlignment(istream* origin)
 {
     return 0;
 }
 
-newAlignment* phylip_paml_state::LoadAlignment(std::string filename)
+newAlignment* phylip_paml_m10_state::LoadAlignment(std::string filename)
 {
     return nullptr;
 }
 
-bool phylip_paml_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool phylip_paml_m10_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
     /* Generate output alignment in PHYLIP format compatible with PAML program */
 
@@ -44,10 +44,13 @@ bool phylip_paml_state::SaveAlignment(newAlignment* alignment, std::ostream* out
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
 
+    /* Depending on if short name flag is activated (limits sequence name up to
+     * 10 characters) or not, get maximum sequence name length */
     maxLongName = PHYLIPDISTANCE;
     for(i = 0; (i < alignment->sequenNumber); i++)
         maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
 
+    maxLongName = std::min(maxLongName, PHYLIPDISTANCE);
     /* Generating output alignment */
     /* First Line: Sequences Number & Residued Number */
     *output << " " << alignment->sequenNumber << " " << alignment->residNumber << endl;
@@ -65,9 +68,9 @@ bool phylip_paml_state::SaveAlignment(newAlignment* alignment, std::ostream* out
     return true;
 }
 
-bool phylip_paml_state::RecognizeOutputFormat(std::string FormatName)
+bool phylip_paml_m10_state::RecognizeOutputFormat(std::string FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
-    return FormatName == "phylippaml";
+    return FormatName == "phylippaml_m10";
 }
 
