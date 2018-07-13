@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['savealignment',['saveAlignment',['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment()'],['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()']]],
+  ['savealignment',['SaveAlignment',['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()'],['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment()']]],
   ['saveresidues',['saveResidues',['../classnew_alignment.html#a5239bd4e742631b58efc7f09dd67f165',1,'newAlignment']]],
   ['savesequences',['saveSequences',['../classnew_alignment.html#a76d057ddcebc7c88dd7f9e3ff0ce95bf',1,'newAlignment']]],
   ['scc',['scc',['../classtrim_al_manager.html#ab578880a4b104e7e0bc8db235d082ca1',1,'trimAlManager']]],
@@ -35,7 +35,6 @@ var searchData=
   ['sft',['sft',['../classtrim_al_manager.html#a5a834529d43f043faa79a568da4807c3',1,'trimAlManager']]],
   ['sgc',['sgc',['../classtrim_al_manager.html#ac671430e07bf4402f7ad22499f62617c',1,'trimAlManager']]],
   ['sgt',['sgt',['../classtrim_al_manager.html#a3f2180162f0010c39deb60c520eb5ec6',1,'trimAlManager']]],
-  ['shortnames',['shortNames',['../class_read_write_m_s.html#ab9c173cd7f219d3c329b147e6fec3b31',1,'ReadWriteMS::shortNames()'],['../classtrim_al_manager.html#a4a3843ccb5e84f24704c2ee9861cec85',1,'trimAlManager::shortNames()']]],
   ['sident',['sident',['../classtrim_al_manager.html#a973459433adebb52fed9c333c7f8a5fb',1,'trimAlManager']]],
   ['similarity_5fthreshold_5fargument',['similarity_threshold_argument',['../classtrim_al_manager.html#ad6171bbd0595da342eb344b91a212eb6',1,'trimAlManager']]],
   ['similarity_5fwindow_5fargument',['similarity_window_argument',['../classtrim_al_manager.html#a17b966b839f13fc5a33a99807b6fb792',1,'trimAlManager']]],

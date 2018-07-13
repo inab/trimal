@@ -16,10 +16,10 @@
 </g>
 <!-- Node121 -->
 <g id="node2" class="node"><title>Node121</title>
-<g id="a_node2"><a xlink:href="classtrim_al_manager.html#a3beec34d7074f4a67ccaf4e8bb875122" target="_top" xlink:title="Method to check if an alignment needs to be aligned depending on the methods that have been asked to ...">
+<g id="a_node2"><a xlink:href="classtrim_al_manager.html#ac2c6938833505b9ded4c84636dee2663" target="_top" xlink:title="Method to check backtranslation needs. ">
 <polygon fill="white" stroke="black" points="176,-98.5 176,-128.5 288,-128.5 288,-98.5 176,-98.5"/>
 <text text-anchor="start" x="184" y="-116.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
-<text text-anchor="middle" x="232" y="-105.5" font-family="Helvetica,sans-Serif" font-size="10.00">_file_aligned</text>
+<text text-anchor="middle" x="232" y="-105.5" font-family="Helvetica,sans-Serif" font-size="10.00">_backtranslations</text>
 </a>
 </g>
 </g>
@@ -30,10 +30,10 @@
 </g>
 <!-- Node124 -->
 <g id="node5" class="node"><title>Node124</title>
-<g id="a_node5"><a xlink:href="classtrim_al_manager.html#ac2c6938833505b9ded4c84636dee2663" target="_top" xlink:title="Method to check backtranslation needs. ">
+<g id="a_node5"><a xlink:href="classtrim_al_manager.html#a3beec34d7074f4a67ccaf4e8bb875122" target="_top" xlink:title="Method to check if an alignment needs to be aligned depending on the methods that have been asked to ...">
 <polygon fill="white" stroke="black" points="176,-49.5 176,-79.5 288,-79.5 288,-49.5 176,-49.5"/>
 <text text-anchor="start" x="184" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
-<text text-anchor="middle" x="232" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">_backtranslations</text>
+<text text-anchor="middle" x="232" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">_file_aligned</text>
 </a>
 </g>
 </g>

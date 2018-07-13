@@ -11,117 +11,117 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-95.5 817,-95.5 817,4 -4,4"/>
 <!-- Node115 -->
 <g id="node1" class="node"><title>Node115</title>
-<polygon fill="#bfbfbf" stroke="black" points="0,-40.5 0,-59.5 56,-59.5 56,-40.5 0,-40.5"/>
-<text text-anchor="middle" x="28" y="-47.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::min</text>
+<polygon fill="#bfbfbf" stroke="black" points="0,-35 0,-54 56,-54 56,-35 0,-35"/>
+<text text-anchor="middle" x="28" y="-42" font-family="Helvetica,sans-Serif" font-size="10.00">utils::min</text>
 </g>
 <!-- Node116 -->
 <g id="node2" class="node"><title>Node116</title>
-<g id="a_node2"><a xlink:href="class_cleaner.html#ae2328fe8c189e2827b46e5dfb8e3deb3" target="_top" xlink:title="Method to trim an alignment based on consistency values obtained from a dataset of alignments...">
-<polygon fill="white" stroke="black" points="115.5,-61.5 115.5,-80.5 250.5,-80.5 250.5,-61.5 115.5,-61.5"/>
-<text text-anchor="middle" x="183" y="-68.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanCompareFile</text>
+<g id="a_node2"><a xlink:href="classnew_alignment.html#ae8501233fe4f4ef6bfe30c99c744c7c2" target="_top" xlink:title="Function to check CDS file. . ">
+<polygon fill="white" stroke="black" points="92,-56 92,-75 274,-75 274,-56 92,-56"/>
+<text text-anchor="middle" x="183" y="-63" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::checkCorrespondence</text>
 </a>
 </g>
 </g>
 <!-- Node115&#45;&gt;Node116 -->
 <g id="edge1" class="edge"><title>Node115&#45;&gt;Node116</title>
-<path fill="none" stroke="midnightblue" d="M66.2749,-55.1162C81.1045,-57.1516 98.6301,-59.5571 115.496,-61.872"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="66.3842,-51.5984 56.0011,-53.706 65.4323,-58.5334 66.3842,-51.5984"/>
+<path fill="none" stroke="midnightblue" d="M66.1832,-49.6036C80.1735,-51.5238 96.573,-53.7747 112.558,-55.9687"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="66.3842,-46.0984 56.0011,-48.206 65.4323,-53.0334 66.3842,-46.0984"/>
 </g>
 <!-- Node120 -->
 <g id="node6" class="node"><title>Node120</title>
-<g id="a_node6"><a xlink:href="classnew_alignment.html#ae8501233fe4f4ef6bfe30c99c744c7c2" target="_top" xlink:title="Function to check CDS file. . ">
-<polygon fill="white" stroke="black" points="92,-19.5 92,-38.5 274,-38.5 274,-19.5 92,-19.5"/>
-<text text-anchor="middle" x="183" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::checkCorrespondence</text>
+<g id="a_node6"><a xlink:href="class_cleaner.html#ae2328fe8c189e2827b46e5dfb8e3deb3" target="_top" xlink:title="Method to trim an alignment based on consistency values obtained from a dataset of alignments...">
+<polygon fill="white" stroke="black" points="115.5,-14 115.5,-33 250.5,-33 250.5,-14 115.5,-14"/>
+<text text-anchor="middle" x="183" y="-21" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanCompareFile</text>
 </a>
 </g>
 </g>
 <!-- Node115&#45;&gt;Node120 -->
 <g id="edge5" class="edge"><title>Node115&#45;&gt;Node120</title>
-<path fill="none" stroke="midnightblue" d="M66.1832,-44.8964C80.1735,-42.9762 96.573,-40.7253 112.558,-38.5313"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="65.4323,-41.4666 56.0011,-46.294 66.3842,-48.4016 65.4323,-41.4666"/>
+<path fill="none" stroke="midnightblue" d="M66.2749,-39.3838C81.1045,-37.3484 98.6301,-34.9429 115.496,-32.628"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="65.4323,-35.9666 56.0011,-40.794 66.3842,-42.9016 65.4323,-35.9666"/>
 </g>
 <!-- Node117 -->
 <g id="node3" class="node"><title>Node117</title>
-<g id="a_node3"><a xlink:href="classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" target="_top" xlink:title="Method to trim the alignment using non automatic methods: ">
-<polygon fill="white" stroke="black" points="310,-61 310,-91 462,-91 462,-61 310,-61"/>
-<text text-anchor="start" x="318" y="-79" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::CleanResidues</text>
-<text text-anchor="middle" x="386" y="-68" font-family="Helvetica,sans-Serif" font-size="10.00">NonAuto</text>
+<g id="a_node3"><a xlink:href="classtrim_al_manager.html#ad96c97918919040f8986ba8c26a1f728" target="_top" xlink:title="Method to check if the origAlig and backtranslationAlig are compatible in names to make the backtrans...">
+<polygon fill="white" stroke="black" points="329.5,-50 329.5,-91 442.5,-91 442.5,-50 329.5,-50"/>
+<text text-anchor="start" x="337.5" y="-79" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
+<text text-anchor="start" x="337.5" y="-68" font-family="Helvetica,sans-Serif" font-size="10.00">_backtranslation_infile</text>
+<text text-anchor="middle" x="386" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">_names_corresponde</text>
 </a>
 </g>
 </g>
 <!-- Node116&#45;&gt;Node117 -->
 <g id="edge2" class="edge"><title>Node116&#45;&gt;Node117</title>
-<path fill="none" stroke="midnightblue" d="M261.035,-72.9163C277.049,-73.3147 293.905,-73.734 309.85,-74.1306"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="260.735,-69.4078 250.651,-72.658 260.561,-76.4057 260.735,-69.4078"/>
+<path fill="none" stroke="midnightblue" d="M284.369,-67.9967C299.851,-68.3819 315.338,-68.7671 329.358,-69.1159"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="284.295,-64.4939 274.211,-67.7441 284.121,-71.4917 284.295,-64.4939"/>
 </g>
 <!-- Node118 -->
 <g id="node4" class="node"><title>Node118</title>
-<g id="a_node4"><a xlink:href="classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" target="_top" xlink:title="Core Method of the program. This is where almost all cleaning methods are called from. ">
-<polygon fill="white" stroke="black" points="499.5,-61 499.5,-91 608.5,-91 608.5,-61 499.5,-61"/>
-<text text-anchor="start" x="507.5" y="-79" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::clean</text>
-<text text-anchor="middle" x="554" y="-68" font-family="Helvetica,sans-Serif" font-size="10.00">_alignment</text>
+<g id="a_node4"><a xlink:href="classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" target="_top" xlink:title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult...">
+<polygon fill="white" stroke="black" points="498,-55.5 498,-85.5 610,-85.5 610,-55.5 498,-55.5"/>
+<text text-anchor="start" x="506" y="-73.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
+<text text-anchor="middle" x="554" y="-62.5" font-family="Helvetica,sans-Serif" font-size="10.00">_arguments_needs</text>
 </a>
 </g>
 </g>
 <!-- Node117&#45;&gt;Node118 -->
 <g id="edge3" class="edge"><title>Node117&#45;&gt;Node118</title>
-<path fill="none" stroke="midnightblue" d="M472.238,-76C481.469,-76 490.663,-76 499.362,-76"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="472.229,-72.5001 462.229,-76 472.229,-79.5001 472.229,-72.5001"/>
+<path fill="none" stroke="midnightblue" d="M452.924,-70.5C467.853,-70.5 483.551,-70.5 497.974,-70.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="452.737,-67.0001 442.737,-70.5 452.737,-74.0001 452.737,-67.0001"/>
 </g>
 <!-- Node119 -->
 <g id="node5" class="node"><title>Node119</title>
-<g id="a_node5"><a xlink:href="classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" target="_top" xlink:title="Method to perform the analysis if all checks have passed. ">
-<polygon fill="white" stroke="black" points="670,-66.5 670,-85.5 789,-85.5 789,-66.5 670,-66.5"/>
-<text text-anchor="middle" x="729.5" y="-73.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::perform</text>
+<g id="a_node5"><a xlink:href="classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" target="_top" xlink:title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in...">
+<polygon fill="white" stroke="black" points="646,-61 646,-80 813,-80 813,-61 646,-61"/>
+<text text-anchor="middle" x="729.5" y="-68" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::processArguments</text>
 </a>
 </g>
 </g>
 <!-- Node118&#45;&gt;Node119 -->
 <g id="edge4" class="edge"><title>Node118&#45;&gt;Node119</title>
-<path fill="none" stroke="midnightblue" d="M619.097,-76C635.687,-76 653.465,-76 669.765,-76"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="618.945,-72.5001 608.945,-76 618.945,-79.5001 618.945,-72.5001"/>
+<path fill="none" stroke="midnightblue" d="M620.636,-70.5C628.87,-70.5 637.376,-70.5 645.829,-70.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="620.374,-67.0001 610.374,-70.5 620.373,-74.0001 620.374,-67.0001"/>
 </g>
 <!-- Node121 -->
 <g id="node7" class="node"><title>Node121</title>
-<g id="a_node7"><a xlink:href="classtrim_al_manager.html#ad96c97918919040f8986ba8c26a1f728" target="_top" xlink:title="Method to check if the origAlig and backtranslationAlig are compatible in names to make the backtrans...">
-<polygon fill="white" stroke="black" points="329.5,-0.5 329.5,-41.5 442.5,-41.5 442.5,-0.5 329.5,-0.5"/>
-<text text-anchor="start" x="337.5" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
-<text text-anchor="start" x="337.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">_backtranslation_infile</text>
-<text text-anchor="middle" x="386" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_names_corresponde</text>
+<g id="a_node7"><a xlink:href="classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" target="_top" xlink:title="Method to trim the alignment using non automatic methods: ">
+<polygon fill="white" stroke="black" points="310,-0.5 310,-30.5 462,-30.5 462,-0.5 310,-0.5"/>
+<text text-anchor="start" x="318" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::CleanResidues</text>
+<text text-anchor="middle" x="386" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">NonAuto</text>
 </a>
 </g>
 </g>
 <!-- Node120&#45;&gt;Node121 -->
 <g id="edge6" class="edge"><title>Node120&#45;&gt;Node121</title>
-<path fill="none" stroke="midnightblue" d="M284.369,-25.0052C299.851,-24.389 315.338,-23.7726 329.358,-23.2146"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="284.064,-21.5145 274.211,-25.4095 284.342,-28.509 284.064,-21.5145"/>
+<path fill="none" stroke="midnightblue" d="M261.035,-20.4339C277.049,-19.7966 293.905,-19.1257 309.85,-18.491"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="260.504,-16.9522 250.651,-20.8472 260.782,-23.9467 260.504,-16.9522"/>
 </g>
 <!-- Node122 -->
 <g id="node8" class="node"><title>Node122</title>
-<g id="a_node8"><a xlink:href="classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" target="_top" xlink:title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult...">
-<polygon fill="white" stroke="black" points="498,-6 498,-36 610,-36 610,-6 498,-6"/>
-<text text-anchor="start" x="506" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
-<text text-anchor="middle" x="554" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">_arguments_needs</text>
+<g id="a_node8"><a xlink:href="classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" target="_top" xlink:title="Core Method of the program. This is where almost all cleaning methods are called from. ">
+<polygon fill="white" stroke="black" points="499.5,-0.5 499.5,-30.5 608.5,-30.5 608.5,-0.5 499.5,-0.5"/>
+<text text-anchor="start" x="507.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::clean</text>
+<text text-anchor="middle" x="554" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_alignment</text>
 </a>
 </g>
 </g>
 <!-- Node121&#45;&gt;Node122 -->
 <g id="edge7" class="edge"><title>Node121&#45;&gt;Node122</title>
-<path fill="none" stroke="midnightblue" d="M452.924,-21C467.853,-21 483.551,-21 497.974,-21"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="452.737,-17.5001 442.737,-21 452.737,-24.5001 452.737,-17.5001"/>
+<path fill="none" stroke="midnightblue" d="M472.238,-15.5C481.469,-15.5 490.663,-15.5 499.362,-15.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="472.229,-12.0001 462.229,-15.5 472.229,-19.0001 472.229,-12.0001"/>
 </g>
 <!-- Node123 -->
 <g id="node9" class="node"><title>Node123</title>
-<g id="a_node9"><a xlink:href="classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" target="_top" xlink:title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in...">
-<polygon fill="white" stroke="black" points="646,-11.5 646,-30.5 813,-30.5 813,-11.5 646,-11.5"/>
-<text text-anchor="middle" x="729.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::processArguments</text>
+<g id="a_node9"><a xlink:href="classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" target="_top" xlink:title="Method to perform the analysis if all checks have passed. ">
+<polygon fill="white" stroke="black" points="670,-6 670,-25 789,-25 789,-6 670,-6"/>
+<text text-anchor="middle" x="729.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::perform</text>
 </a>
 </g>
 </g>
 <!-- Node122&#45;&gt;Node123 -->
 <g id="edge8" class="edge"><title>Node122&#45;&gt;Node123</title>
-<path fill="none" stroke="midnightblue" d="M620.636,-21C628.87,-21 637.376,-21 645.829,-21"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="620.374,-17.5001 610.374,-21 620.373,-24.5001 620.374,-17.5001"/>
+<path fill="none" stroke="midnightblue" d="M619.097,-15.5C635.687,-15.5 653.465,-15.5 669.765,-15.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="618.945,-12.0001 608.945,-15.5 618.945,-19.0001 618.945,-12.0001"/>
 </g>
 </g>
 </svg>

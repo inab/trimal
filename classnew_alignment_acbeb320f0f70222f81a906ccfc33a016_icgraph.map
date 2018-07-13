@@ -1,4 +1,0 @@
-<map id="newAlignment::fillMatrices" name="newAlignment::fillMatrices">
-<area shape="rect" id="node2" href="$class_cleaner.html#a095db8160a11a792a3feade870a24fd7" title="Method to remove sequences missaligned with the rest of sequences in the alignment. For each residue in the sequence, it tests it&#39;s similarity. If the similarity of that residue is higher than overlapColumn value, it counts as a hit for the sequence. After calculating the number of hits for the sequence, it removes the sequence if it has a proportion hits/residues lower tan minimumOverlap. " alt="" coords="228,5,408,32"/>
-<area shape="rect" id="node3" href="$class_cleaner.html#a991bf55a7d36b305d67d639ebf028348" title="Method to select the most representative sequence (the longest one) for each cluster from the input a..." alt="" coords="242,56,394,83"/>
-</map>

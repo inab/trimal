@@ -1,7 +1,0 @@
-<map id="Catch::Matchers::Vector::ContainsElementMatcher&lt; T &gt;" name="Catch::Matchers::Vector::ContainsElementMatcher&lt; T &gt;">
-<area shape="rect" id="node2" href="$struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base.html" title="Catch::Matchers::Impl\l::MatcherBase\&lt; std::vector\l\&lt; T \&gt;, T \&gt;" alt="" coords="663,30,844,86"/>
-<area shape="rect" id="node3" href="$class_catch_1_1_matchers_1_1_impl_1_1_matcher_untyped_base.html" title="Catch::Matchers::Impl\l::MatcherUntypedBase" alt="" coords="440,5,596,47"/>
-<area shape="rect" id="node4" title="STL class. " alt="" coords="181,13,261,39"/>
-<area shape="rect" id="node5" title="STL class. " alt="" coords="5,5,132,47"/>
-<area shape="rect" id="node6" href="$struct_catch_1_1_matchers_1_1_impl_1_1_matcher_method.html" title="Catch::Matchers::Impl\l::MatcherMethod\&lt; ObjectT \&gt;" alt="" coords="423,71,613,112"/>
-</map>

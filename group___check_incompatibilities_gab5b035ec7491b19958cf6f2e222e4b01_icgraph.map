@@ -1,4 +1,0 @@
-<map id="trimAlManager::check_max_identity_incompatibilities" name="trimAlManager::check_max_identity_incompatibilities">
-<area shape="rect" id="node2" href="$group___check_incompatibilities.html#ga16d2da3f90cfe965bea5f1da1360e17a" title="Method to check argument incompatibilities. Take in mind that an incompatibility is between two argum..." alt="" coords="256,5,447,47"/>
-<area shape="rect" id="node3" href="$group___trimal_parsing_arguments.html#ga748b08a1ec5cd214de804ed0d4234a6e" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="495,13,717,39"/>
-</map>

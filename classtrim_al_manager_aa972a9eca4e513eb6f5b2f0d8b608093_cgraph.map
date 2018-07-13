@@ -1,7 +1,7 @@
 <map id="trimAlManager::help_arguments" name="trimAlManager::help_arguments">
-<area shape="rect" id="node2" href="$classtrim_al_manager.html#a09d07645fa0057989875f2b2d25ec4d7" title="Method to show the menu of the program. " alt="" coords="204,64,351,91"/>
-<area shape="rect" id="node6" href="$classtrim_al_manager.html#a5716d2e2a6d21b7f2bacbf284b5bd75b" title="Method to show the examples information about the program. " alt="" coords="192,115,363,141"/>
-<area shape="rect" id="node3" href="$classutils.html#a6000246220e801bf6b1e6a553d7af13a" title="Function that replaces a substring with another substring in a string. It does not make a copy of the..." alt="" coords="429,5,609,32"/>
-<area shape="rect" id="node4" href="$class_read_write_m_s.html#a818f384e63dbdcb7d0a55024d98a8dc6" title="Function to obtain all format names available by this object that can load an alignment. " alt="" coords="416,57,623,98"/>
-<area shape="rect" id="node5" href="$class_read_write_m_s.html#a7e3dfa28fc4c4c55e4456786a56f683c" title="Function to obtain all format names available by this object that can save an alignment. " alt="" coords="411,122,628,163"/>
+<area shape="rect" id="node2" href="$classtrim_al_manager.html#a5716d2e2a6d21b7f2bacbf284b5bd75b" title="Method to show the examples information about the program. " alt="" coords="192,13,363,40"/>
+<area shape="rect" id="node3" href="$classtrim_al_manager.html#a09d07645fa0057989875f2b2d25ec4d7" title="Method to show the menu of the program. " alt="" coords="204,64,351,91"/>
+<area shape="rect" id="node4" href="$classutils.html#a6000246220e801bf6b1e6a553d7af13a" title="Function that replaces a substring with another substring in a string. It does not make a copy of the..." alt="" coords="429,5,609,32"/>
+<area shape="rect" id="node5" href="$class_read_write_m_s.html#a818f384e63dbdcb7d0a55024d98a8dc6" title="Function to obtain all format names available by this object that can load an alignment. " alt="" coords="416,57,623,98"/>
+<area shape="rect" id="node6" href="$class_read_write_m_s.html#a7e3dfa28fc4c4c55e4456786a56f683c" title="Function to obtain all format names available by this object that can save an alignment. " alt="" coords="411,122,628,163"/>
 </map>

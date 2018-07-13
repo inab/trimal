@@ -5,95 +5,95 @@
  -->
 <!-- Title: Cleaner::cleanByCutValueOverpass Pages: 1 -->
 <svg width="480pt" height="154pt"
- viewBox="0.00 0.00 480.00 153.50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 149.5)">
+ viewBox="0.00 0.00 480.00 154.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 150)">
 <title>Cleaner::cleanByCutValueOverpass</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-149.5 476,-149.5 476,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-150 476,-150 476,4 -4,4"/>
 <!-- Node64 -->
 <g id="node1" class="node"><title>Node64</title>
-<polygon fill="#bfbfbf" stroke="black" points="0,-63.5 0,-93.5 132,-93.5 132,-63.5 0,-63.5"/>
-<text text-anchor="start" x="8" y="-81.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanByCutValue</text>
-<text text-anchor="middle" x="66" y="-70.5" font-family="Helvetica,sans-Serif" font-size="10.00">Overpass</text>
+<polygon fill="#bfbfbf" stroke="black" points="0,-55 0,-85 132,-85 132,-55 0,-55"/>
+<text text-anchor="start" x="8" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanByCutValue</text>
+<text text-anchor="middle" x="66" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">Overpass</text>
 </g>
 <!-- Node65 -->
 <g id="node2" class="node"><title>Node65</title>
-<g id="a_node2"><a xlink:href="classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" target="_top" xlink:title="Round double to integer method. ">
-<polygon fill="white" stroke="black" points="206,-126 206,-145 282,-145 282,-126 206,-126"/>
-<text text-anchor="middle" x="244" y="-133" font-family="Helvetica,sans-Serif" font-size="10.00">utils::roundInt</text>
+<g id="a_node2"><a xlink:href="classutils.html#a73f038c379c13d23e3220afaa14f9983" target="_top" xlink:title="Quicksort sorting method. ">
+<polygon fill="white" stroke="black" points="204,-126.5 204,-145.5 284,-145.5 284,-126.5 204,-126.5"/>
+<text text-anchor="middle" x="244" y="-133.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::quicksort</text>
 </a>
 </g>
 </g>
 <!-- Node64&#45;&gt;Node65 -->
 <g id="edge1" class="edge"><title>Node64&#45;&gt;Node65</title>
-<path fill="none" stroke="midnightblue" d="M104.066,-93.5814C123.016,-101.001 146.549,-109.771 168,-116.5 176.941,-119.305 186.579,-121.992 195.87,-124.418"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="195.212,-127.862 205.766,-126.94 196.941,-121.078 195.212,-127.862"/>
+<path fill="none" stroke="midnightblue" d="M95.5666,-85.0492C115.47,-95.0947 142.855,-108.053 168,-117 176.275,-119.944 185.216,-122.624 193.943,-124.982"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="193.1,-128.379 203.658,-127.505 194.859,-121.604 193.1,-128.379"/>
 </g>
-<!-- Node66 -->
-<g id="node3" class="node"><title>Node66</title>
-<g id="a_node3"><a xlink:href="classutils.html#a73f038c379c13d23e3220afaa14f9983" target="_top" xlink:title="Quicksort sorting method. ">
-<polygon fill="white" stroke="black" points="204,-88 204,-107 284,-107 284,-88 204,-88"/>
-<text text-anchor="middle" x="244" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">utils::quicksort</text>
+<!-- Node67 -->
+<g id="node4" class="node"><title>Node67</title>
+<g id="a_node4"><a xlink:href="class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" target="_top" xlink:title="Method that identifies and removes columns and sequences composed only by gaps. ">
+<polygon fill="white" stroke="black" points="171,-77 171,-107 317,-107 317,-77 171,-77"/>
+<text text-anchor="start" x="179" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeAllGapsSeqs</text>
+<text text-anchor="middle" x="244" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">AndCols</text>
 </a>
 </g>
 </g>
-<!-- Node64&#45;&gt;Node66 -->
-<g id="edge2" class="edge"><title>Node64&#45;&gt;Node66</title>
-<path fill="none" stroke="midnightblue" d="M132.036,-85.5209C152.455,-87.7252 174.647,-90.121 193.782,-92.1867"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="193.456,-95.6718 203.774,-93.2654 194.208,-88.7122 193.456,-95.6718"/>
-</g>
-<!-- Node68 -->
-<g id="node5" class="node"><title>Node68</title>
-<g id="a_node5"><a xlink:href="class_cleaner.html#ae6d263df982b8e0a605f49e52a5a48d9" target="_top" xlink:title="Method to remove column blocks smaller than a given size. ">
-<polygon fill="white" stroke="black" points="168,-50 168,-69 320,-69 320,-50 168,-50"/>
-<text text-anchor="middle" x="244" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeSmallerBlocks</text>
-</a>
-</g>
-</g>
-<!-- Node64&#45;&gt;Node68 -->
-<g id="edge4" class="edge"><title>Node64&#45;&gt;Node68</title>
-<path fill="none" stroke="midnightblue" d="M132.036,-71.4791C140.411,-70.5749 149.085,-69.6386 157.724,-68.706"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="158.262,-72.1683 167.829,-67.6151 157.511,-65.2087 158.262,-72.1683"/>
+<!-- Node64&#45;&gt;Node67 -->
+<g id="edge3" class="edge"><title>Node64&#45;&gt;Node67</title>
+<path fill="none" stroke="midnightblue" d="M132.036,-78.1295C141.411,-79.3014 151.16,-80.52 160.816,-81.7269"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="160.467,-85.2105 170.824,-82.978 161.335,-78.2646 160.467,-85.2105"/>
 </g>
 <!-- Node69 -->
 <g id="node6" class="node"><title>Node69</title>
-<g id="a_node6"><a xlink:href="class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" target="_top" xlink:title="Method that identifies and removes columns and sequences composed only by gaps. ">
-<polygon fill="white" stroke="black" points="171,-0.5 171,-30.5 317,-30.5 317,-0.5 171,-0.5"/>
-<text text-anchor="start" x="179" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeAllGapsSeqs</text>
-<text text-anchor="middle" x="244" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">AndCols</text>
+<g id="a_node6"><a xlink:href="class_cleaner.html#ae6d263df982b8e0a605f49e52a5a48d9" target="_top" xlink:title="Method to remove column blocks smaller than a given size. ">
+<polygon fill="white" stroke="black" points="168,-38.5 168,-57.5 320,-57.5 320,-38.5 168,-38.5"/>
+<text text-anchor="middle" x="244" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeSmallerBlocks</text>
 </a>
 </g>
 </g>
 <!-- Node64&#45;&gt;Node69 -->
 <g id="edge5" class="edge"><title>Node64&#45;&gt;Node69</title>
-<path fill="none" stroke="midnightblue" d="M106.204,-63.3532C124.86,-56.2471 147.518,-47.7639 168,-40.5 174.258,-38.2808 180.828,-36.0076 187.371,-33.78"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="188.543,-37.0785 196.895,-30.5607 186.301,-30.4471 188.543,-37.0785"/>
-</g>
-<!-- Node67 -->
-<g id="node4" class="node"><title>Node67</title>
-<g id="a_node4"><a xlink:href="classutils.html#a3377ecde55631d1bbc4956e5923b7469" target="_top" xlink:title="Swapping elements method. ">
-<polygon fill="white" stroke="black" points="382,-88 382,-107 446,-107 446,-88 382,-88"/>
-<text text-anchor="middle" x="414" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">utils::swap</text>
-</a>
-</g>
-</g>
-<!-- Node66&#45;&gt;Node67 -->
-<g id="edge3" class="edge"><title>Node66&#45;&gt;Node67</title>
-<path fill="none" stroke="midnightblue" d="M284.389,-97.5C310.673,-97.5 345.168,-97.5 371.816,-97.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="371.976,-101 381.976,-97.5 371.976,-94.0001 371.976,-101"/>
+<path fill="none" stroke="midnightblue" d="M132.036,-61.8705C140.411,-60.8236 149.085,-59.7394 157.724,-58.6595"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="158.34,-62.1098 167.829,-57.3964 157.472,-55.1639 158.34,-62.1098"/>
 </g>
 <!-- Node70 -->
 <g id="node7" class="node"><title>Node70</title>
-<g id="a_node7"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
-<polygon fill="white" stroke="black" points="356,-0.5 356,-30.5 472,-30.5 472,-0.5 356,-0.5"/>
-<text text-anchor="start" x="364" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
-<text text-anchor="middle" x="414" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
+<g id="a_node7"><a xlink:href="classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" target="_top" xlink:title="Round double to integer method. ">
+<polygon fill="white" stroke="black" points="206,-0.5 206,-19.5 282,-19.5 282,-0.5 206,-0.5"/>
+<text text-anchor="middle" x="244" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::roundInt</text>
 </a>
 </g>
 </g>
-<!-- Node69&#45;&gt;Node70 -->
-<g id="edge6" class="edge"><title>Node69&#45;&gt;Node70</title>
-<path fill="none" stroke="midnightblue" d="M317.222,-15.5C326.692,-15.5 336.366,-15.5 345.749,-15.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="345.793,-19.0001 355.793,-15.5 345.793,-12.0001 345.793,-19.0001"/>
+<!-- Node64&#45;&gt;Node70 -->
+<g id="edge6" class="edge"><title>Node64&#45;&gt;Node70</title>
+<path fill="none" stroke="midnightblue" d="M100.695,-54.9644C120.127,-46.6377 145.162,-36.4887 168,-29 176.905,-26.0801 186.526,-23.3406 195.812,-20.9"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="196.883,-24.2389 205.707,-18.3746 195.152,-17.4563 196.883,-24.2389"/>
+</g>
+<!-- Node66 -->
+<g id="node3" class="node"><title>Node66</title>
+<g id="a_node3"><a xlink:href="classutils.html#a3377ecde55631d1bbc4956e5923b7469" target="_top" xlink:title="Swapping elements method. ">
+<polygon fill="white" stroke="black" points="382,-126.5 382,-145.5 446,-145.5 446,-126.5 382,-126.5"/>
+<text text-anchor="middle" x="414" y="-133.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::swap</text>
+</a>
+</g>
+</g>
+<!-- Node65&#45;&gt;Node66 -->
+<g id="edge2" class="edge"><title>Node65&#45;&gt;Node66</title>
+<path fill="none" stroke="midnightblue" d="M284.389,-136C310.673,-136 345.168,-136 371.816,-136"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="371.976,-139.5 381.976,-136 371.976,-132.5 371.976,-139.5"/>
+</g>
+<!-- Node68 -->
+<g id="node5" class="node"><title>Node68</title>
+<g id="a_node5"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
+<polygon fill="white" stroke="black" points="356,-77 356,-107 472,-107 472,-77 356,-77"/>
+<text text-anchor="start" x="364" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
+<text text-anchor="middle" x="414" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
+</a>
+</g>
+</g>
+<!-- Node67&#45;&gt;Node68 -->
+<g id="edge4" class="edge"><title>Node67&#45;&gt;Node68</title>
+<path fill="none" stroke="midnightblue" d="M317.222,-92C326.692,-92 336.366,-92 345.749,-92"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="345.793,-95.5001 355.793,-92 345.793,-88.5001 345.793,-95.5001"/>
 </g>
 </g>
 </svg>

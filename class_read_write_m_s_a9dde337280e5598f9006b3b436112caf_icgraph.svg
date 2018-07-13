@@ -11,72 +11,72 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-122.5 518,-122.5 518,4 -4,4"/>
 <!-- Node11 -->
 <g id="node1" class="node"><title>Node11</title>
-<polygon fill="#bfbfbf" stroke="black" points="0,-55 0,-74 146,-74 146,-55 0,-55"/>
-<text text-anchor="middle" x="73" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteMS::loadAlignment</text>
+<polygon fill="#bfbfbf" stroke="black" points="0,-44.5 0,-63.5 146,-63.5 146,-44.5 0,-44.5"/>
+<text text-anchor="middle" x="73" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteMS::loadAlignment</text>
 </g>
 <!-- Node12 -->
 <g id="node2" class="node"><title>Node12</title>
-<g id="a_node2"><a xlink:href="classtrim_al_manager.html#aa79dcf0006a8b31d27a15a33f64e14e8" target="_top" xlink:title="Method to parse the input file argument. ">
-<polygon fill="white" stroke="black" points="182,-99 182,-118 321,-118 321,-99 182,-99"/>
-<text text-anchor="middle" x="251.5" y="-106" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::in_argument</text>
+<g id="a_node2"><a xlink:href="classtrim_al_manager.html#a2d1aa7e2da1a826b04e55f35fa81e4ad" target="_top" xlink:title="Method to parse the backtranslation argument. ">
+<polygon fill="white" stroke="black" points="198,-88 198,-118 305,-118 305,-88 198,-88"/>
+<text text-anchor="start" x="206" y="-106" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::back</text>
+<text text-anchor="middle" x="251.5" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">_trans_argument</text>
 </a>
 </g>
 </g>
 <!-- Node11&#45;&gt;Node12 -->
 <g id="edge1" class="edge"><title>Node11&#45;&gt;Node12</title>
-<path fill="none" stroke="midnightblue" d="M122.012,-76.469C150.382,-83.5414 185.811,-92.3736 212.277,-98.9713"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="122.848,-73.0702 112.298,-74.0473 121.154,-79.8624 122.848,-73.0702"/>
+<path fill="none" stroke="midnightblue" d="M118.387,-66.3229C142.482,-73.012 172.426,-81.3251 197.711,-88.3448"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="119.022,-62.8667 108.45,-63.564 117.149,-69.6116 119.022,-62.8667"/>
 </g>
 <!-- Node14 -->
 <g id="node4" class="node"><title>Node14</title>
 <g id="a_node4"><a xlink:href="classtrim_al_manager.html#ae9cb92b21f85e72d58f80362374cfa4a" target="_top" xlink:title="Method to parse the force select argument. ">
-<polygon fill="white" stroke="black" points="198,-49.5 198,-79.5 305,-79.5 305,-49.5 198,-49.5"/>
-<text text-anchor="start" x="206" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::force</text>
-<text text-anchor="middle" x="251.5" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">_select_argument</text>
+<polygon fill="white" stroke="black" points="198,-39 198,-69 305,-69 305,-39 198,-39"/>
+<text text-anchor="start" x="206" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::force</text>
+<text text-anchor="middle" x="251.5" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">_select_argument</text>
 </a>
 </g>
 </g>
 <!-- Node11&#45;&gt;Node14 -->
 <g id="edge3" class="edge"><title>Node11&#45;&gt;Node14</title>
-<path fill="none" stroke="midnightblue" d="M156.287,-64.5C170.433,-64.5 184.784,-64.5 197.878,-64.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="156.044,-61.0001 146.044,-64.5 156.044,-68.0001 156.044,-61.0001"/>
+<path fill="none" stroke="midnightblue" d="M156.287,-54C170.433,-54 184.784,-54 197.878,-54"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="156.044,-50.5001 146.044,-54 156.044,-57.5001 156.044,-50.5001"/>
 </g>
 <!-- Node15 -->
 <g id="node5" class="node"><title>Node15</title>
-<g id="a_node5"><a xlink:href="classtrim_al_manager.html#a2d1aa7e2da1a826b04e55f35fa81e4ad" target="_top" xlink:title="Method to parse the backtranslation argument. ">
-<polygon fill="white" stroke="black" points="198,-0.5 198,-30.5 305,-30.5 305,-0.5 198,-0.5"/>
-<text text-anchor="start" x="206" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::back</text>
-<text text-anchor="middle" x="251.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_trans_argument</text>
+<g id="a_node5"><a xlink:href="classtrim_al_manager.html#aa79dcf0006a8b31d27a15a33f64e14e8" target="_top" xlink:title="Method to parse the input file argument. ">
+<polygon fill="white" stroke="black" points="182,-0.5 182,-19.5 321,-19.5 321,-0.5 182,-0.5"/>
+<text text-anchor="middle" x="251.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::in_argument</text>
 </a>
 </g>
 </g>
 <!-- Node11&#45;&gt;Node15 -->
 <g id="edge5" class="edge"><title>Node11&#45;&gt;Node15</title>
-<path fill="none" stroke="midnightblue" d="M118.387,-52.1771C142.482,-45.488 172.426,-37.1749 197.711,-30.1552"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="117.149,-48.8884 108.45,-54.936 119.022,-55.6333 117.149,-48.8884"/>
+<path fill="none" stroke="midnightblue" d="M122.012,-42.031C150.382,-34.9586 185.811,-26.1264 212.277,-19.5287"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="121.154,-38.6376 112.298,-44.4527 122.848,-45.4298 121.154,-38.6376"/>
 </g>
 <!-- Node13 -->
 <g id="node3" class="node"><title>Node13</title>
 <g id="a_node3"><a xlink:href="classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
-<polygon fill="white" stroke="black" points="357,-55 357,-74 514,-74 514,-55 357,-55"/>
-<text text-anchor="middle" x="435.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::parseArguments</text>
+<polygon fill="white" stroke="black" points="357,-44.5 357,-63.5 514,-63.5 514,-44.5 357,-44.5"/>
+<text text-anchor="middle" x="435.5" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::parseArguments</text>
 </a>
 </g>
 </g>
 <!-- Node12&#45;&gt;Node13 -->
 <g id="edge2" class="edge"><title>Node12&#45;&gt;Node13</title>
-<path fill="none" stroke="midnightblue" d="M302.008,-96.531C331.262,-89.4586 367.795,-80.6264 395.086,-74.0287"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="300.889,-93.2007 291.991,-98.9527 302.534,-100.005 300.889,-93.2007"/>
+<path fill="none" stroke="midnightblue" d="M314.884,-86.2042C342.962,-78.6449 375.085,-69.9962 398.968,-63.5663"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="313.888,-82.8477 305.142,-88.8272 315.708,-89.607 313.888,-82.8477"/>
 </g>
 <!-- Node14&#45;&gt;Node13 -->
 <g id="edge4" class="edge"><title>Node14&#45;&gt;Node13</title>
-<path fill="none" stroke="midnightblue" d="M315.216,-64.5C328.653,-64.5 343.003,-64.5 356.924,-64.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="315.142,-61.0001 305.142,-64.5 315.142,-68.0001 315.142,-61.0001"/>
+<path fill="none" stroke="midnightblue" d="M315.216,-54C328.653,-54 343.003,-54 356.924,-54"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="315.142,-50.5001 305.142,-54 315.142,-57.5001 315.142,-50.5001"/>
 </g>
 <!-- Node15&#45;&gt;Node13 -->
 <g id="edge6" class="edge"><title>Node15&#45;&gt;Node13</title>
-<path fill="none" stroke="midnightblue" d="M314.884,-32.2958C342.962,-39.8551 375.085,-48.5038 398.968,-54.9337"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="315.708,-28.893 305.142,-29.6728 313.888,-35.6523 315.708,-28.893"/>
+<path fill="none" stroke="midnightblue" d="M302.008,-21.969C331.262,-29.0414 367.795,-37.8736 395.086,-44.4713"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="302.534,-18.4953 291.991,-19.5473 300.889,-25.2993 302.534,-18.4953"/>
 </g>
 </g>
 </svg>

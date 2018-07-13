@@ -1,11 +1,11 @@
 <map id="Cleaner::cleanCompareFile" name="Cleaner::cleanCompareFile">
-<area shape="rect" id="node2" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="267,5,376,32"/>
-<area shape="rect" id="node3" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="268,56,375,83"/>
-<area shape="rect" id="node5" href="$classutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f" title="Minimum of two numbers method. " alt="" coords="284,107,359,133"/>
-<area shape="rect" id="node6" href="$class_cleaner.html#aa85792ad5a7c3209509a689fb0410e92" title="Method to clean an alignment. &#160;It removes sequences that fall behind a certain threshold. &#160;The function detects if it would clean too many sequences, and relaxes the threshold until we have enough sequences to achieve the given percentage desired to keep. &#160;To achieve this, the method starts in the middle of the sequence and, alternating sides, adds column one by one. " alt="" coords="233,158,409,199"/>
-<area shape="rect" id="node4" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="516,56,601,83"/>
-<area shape="rect" id="node7" href="$classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method. " alt="" coords="508,115,609,141"/>
-<area shape="rect" id="node8" href="$class_cleaner.html#ae6d263df982b8e0a605f49e52a5a48d9" title="Method to remove column blocks smaller than a given size. " alt="" coords="457,165,660,192"/>
-<area shape="rect" id="node9" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="461,217,656,258"/>
-<area shape="rect" id="node10" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="708,217,863,258"/>
+<area shape="rect" id="node2" href="$class_cleaner.html#aa85792ad5a7c3209509a689fb0410e92" title="Method to clean an alignment. &#160;It removes sequences that fall behind a certain threshold. &#160;The function detects if it would clean too many sequences, and relaxes the threshold until we have enough sequences to achieve the given percentage desired to keep. &#160;To achieve this, the method starts in the middle of the sequence and, alternating sides, adds column one by one. " alt="" coords="233,64,409,105"/>
+<area shape="rect" id="node7" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="267,130,376,157"/>
+<area shape="rect" id="node8" href="$classutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f" title="Minimum of two numbers method. " alt="" coords="284,181,359,207"/>
+<area shape="rect" id="node9" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="268,231,375,258"/>
+<area shape="rect" id="node3" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="461,5,656,47"/>
+<area shape="rect" id="node5" href="$class_cleaner.html#ae6d263df982b8e0a605f49e52a5a48d9" title="Method to remove column blocks smaller than a given size. " alt="" coords="457,71,660,98"/>
+<area shape="rect" id="node6" href="$classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method. " alt="" coords="508,122,609,149"/>
+<area shape="rect" id="node4" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="708,5,863,47"/>
+<area shape="rect" id="node10" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="516,231,601,258"/>
 </map>

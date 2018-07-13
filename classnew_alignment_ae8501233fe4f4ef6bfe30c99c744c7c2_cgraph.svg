@@ -16,29 +16,29 @@
 </g>
 <!-- Node29 -->
 <g id="node2" class="node"><title>Node29</title>
-<g id="a_node2"><a xlink:href="classutils.html#a1dce160519187ef2c6e14beb93a2050d" target="_top" xlink:title="Removes a determined char from the string. ">
-<polygon fill="white" stroke="black" points="218,-88 218,-107 334,-107 334,-88 218,-88"/>
-<text text-anchor="middle" x="276" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">utils::removeCharacter</text>
+<g id="a_node2"><a xlink:href="classutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f" target="_top" xlink:title="Minimum of two numbers method. ">
+<polygon fill="white" stroke="black" points="248,-88 248,-107 304,-107 304,-88 248,-88"/>
+<text text-anchor="middle" x="276" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">utils::min</text>
 </a>
 </g>
 </g>
 <!-- Node28&#45;&gt;Node29 -->
 <g id="edge1" class="edge"><title>Node28&#45;&gt;Node29</title>
-<path fill="none" stroke="midnightblue" d="M138.179,-69.089C162.763,-74.1939 193.186,-80.5113 219.097,-85.8918"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="218.651,-89.3736 229.153,-87.9799 220.074,-82.5198 218.651,-89.3736"/>
+<path fill="none" stroke="midnightblue" d="M138.179,-69.089C169.015,-75.4923 209.04,-83.8034 237.823,-89.7802"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="237.378,-93.2624 247.881,-91.8687 238.801,-86.4086 237.378,-93.2624"/>
 </g>
 <!-- Node30 -->
 <g id="node3" class="node"><title>Node30</title>
-<g id="a_node3"><a xlink:href="classutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f" target="_top" xlink:title="Minimum of two numbers method. ">
-<polygon fill="white" stroke="black" points="248,-50 248,-69 304,-69 304,-50 248,-50"/>
-<text text-anchor="middle" x="276" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">utils::min</text>
+<g id="a_node3"><a xlink:href="classutils.html#a1dce160519187ef2c6e14beb93a2050d" target="_top" xlink:title="Removes a determined char from the string. ">
+<polygon fill="white" stroke="black" points="218,-50 218,-69 334,-69 334,-50 218,-50"/>
+<text text-anchor="middle" x="276" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">utils::removeCharacter</text>
 </a>
 </g>
 </g>
 <!-- Node28&#45;&gt;Node30 -->
 <g id="edge2" class="edge"><title>Node28&#45;&gt;Node30</title>
-<path fill="none" stroke="midnightblue" d="M182.16,-59.5C201.846,-59.5 221.615,-59.5 237.82,-59.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="237.919,-63.0001 247.918,-59.5 237.918,-56.0001 237.919,-63.0001"/>
+<path fill="none" stroke="midnightblue" d="M182.16,-59.5C190.819,-59.5 199.494,-59.5 207.874,-59.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="207.93,-63.0001 217.93,-59.5 207.93,-56.0001 207.93,-63.0001"/>
 </g>
 <!-- Node31 -->
 <g id="node4" class="node"><title>Node31</title>

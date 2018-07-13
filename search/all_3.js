@@ -11,7 +11,7 @@ var searchData=
   ['calculatespuriousvector',['calculateSpuriousVector',['../class_cleaner.html#ab2db8eacfbe545c68fc287c43309e439',1,'Cleaner']]],
   ['calculatevectors',['calculateVectors',['../classstatistics_conservation.html#ada98c86595cb14a2e8bc058703aa8066',1,'statisticsConservation']]],
   ['canload',['canLoad',['../class_read_write_base_state.html#a1e7a2d74ee685f2c9c7a3fed03087354',1,'ReadWriteBaseState']]],
-  ['canreport',['CanReport',['../class____internal_report_1_1____reporter.html#a7b919a29f23d49b217045aaef27b8c9a',1,'__internalReport::__reporter::CanReport()'],['../class____internal_report_1_1____report_system.html#a9c46b849fa12cd1aee3e1543d825e249',1,'__internalReport::__reportSystem::canReport()']]],
+  ['canreport',['canReport',['../class____internal_report_1_1____report_system.html#a9c46b849fa12cd1aee3e1543d825e249',1,'__internalReport::__reportSystem::canReport()'],['../class____internal_report_1_1____reporter.html#a7b919a29f23d49b217045aaef27b8c9a',1,'__internalReport::__reporter::CanReport()']]],
   ['cansave',['canSave',['../class_read_write_base_state.html#aa648fbe2f707d3ebc989bc104e9b906e',1,'ReadWriteBaseState']]],
   ['cantreport',['cantReport',['../class____internal_report_1_1____report_system.html#a1ce92bd8aad4838dcf8e3bc4d0a4131d',1,'__internalReport::__reportSystem']]],
   ['check_5fand_5fprepare_5fcoding_5fsequence',['check_and_prepare_coding_sequence',['../classtrim_al_manager.html#a55f0bbc922fb6854118da00a5bfa0c1b',1,'trimAlManager']]],

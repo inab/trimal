@@ -1,5 +1,0 @@
-<map id="ReadWriteMS::processFile" name="ReadWriteMS::processFile">
-<area shape="rect" id="node2" href="$class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="249,5,395,47"/>
-<area shape="rect" id="node3" href="$classutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" title="Function that replaces a substring with another substring in a string. It makes a copy of the origina..." alt="" coords="254,71,390,98"/>
-<area shape="rect" id="node4" href="$classutils.html#a6000246220e801bf6b1e6a553d7af13a" title="Function that replaces a substring with another substring in a string. It does not make a copy of the..." alt="" coords="232,122,412,149"/>
-</map>

@@ -16,24 +16,24 @@
 </g>
 <!-- Node83 -->
 <g id="node2" class="node"><title>Node83</title>
-<g id="a_node2"><a xlink:href="classtrim_al_manager.html#a52aabe8b7e1788a1732dbdd6c29e387d" target="_top" xlink:title="Method to parse the gap threshold argument. ">
-<polygon fill="white" stroke="black" points="136,-588.5 136,-618.5 243,-618.5 243,-588.5 136,-588.5"/>
-<text text-anchor="start" x="144" y="-606.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::gap</text>
-<text text-anchor="middle" x="189.5" y="-595.5" font-family="Helvetica,sans-Serif" font-size="10.00">_threshold_argument</text>
+<g id="a_node2"><a xlink:href="classtrim_al_manager.html#ac376826d0e68bd89428e455f9c84b98b" target="_top" xlink:title="Method to parse the Block Size argument. ">
+<polygon fill="white" stroke="black" points="135,-588.5 135,-618.5 244,-618.5 244,-588.5 135,-588.5"/>
+<text text-anchor="start" x="143" y="-606.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::block</text>
+<text text-anchor="middle" x="189.5" y="-595.5" font-family="Helvetica,sans-Serif" font-size="10.00">_argument</text>
 </a>
 </g>
 </g>
 <!-- Node82&#45;&gt;Node83 -->
 <g id="edge1" class="edge"><title>Node82&#45;&gt;Node83</title>
-<path fill="none" stroke="midnightblue" d="M42.2357,-329.356C42.6769,-378.533 50.6859,-507.22 119,-579.5 123.735,-584.51 129.565,-588.474 135.817,-591.611"/>
+<path fill="none" stroke="midnightblue" d="M42.2357,-329.356C42.6769,-378.533 50.6859,-507.22 119,-579.5 123.472,-584.231 128.92,-588.03 134.779,-591.08"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="45.7358,-329.136 42.2483,-319.132 38.7358,-329.128 45.7358,-329.136"/>
 </g>
 <!-- Node85 -->
 <g id="node4" class="node"><title>Node85</title>
-<g id="a_node4"><a xlink:href="classtrim_al_manager.html#ad6171bbd0595da342eb344b91a212eb6" target="_top" xlink:title="Method to parse the similarity threshold argument. ">
-<polygon fill="white" stroke="black" points="127,-539.5 127,-569.5 252,-569.5 252,-539.5 127,-539.5"/>
-<text text-anchor="start" x="135" y="-557.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::similarity</text>
-<text text-anchor="middle" x="189.5" y="-546.5" font-family="Helvetica,sans-Serif" font-size="10.00">_threshold_argument</text>
+<g id="a_node4"><a xlink:href="classtrim_al_manager.html#af87e0b5682ec1220ba91e9704f8564b5" target="_top" xlink:title="Method to parse the clusters argument. ">
+<polygon fill="white" stroke="black" points="129.5,-539.5 129.5,-569.5 249.5,-569.5 249.5,-539.5 129.5,-539.5"/>
+<text text-anchor="start" x="137.5" y="-557.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::clusters</text>
+<text text-anchor="middle" x="189.5" y="-546.5" font-family="Helvetica,sans-Serif" font-size="10.00">_argument</text>
 </a>
 </g>
 </g>
@@ -44,9 +44,9 @@
 </g>
 <!-- Node86 -->
 <g id="node5" class="node"><title>Node86</title>
-<g id="a_node5"><a xlink:href="classtrim_al_manager.html#a2f9e77f45d6b7862edfc41ec6b2ee49f" target="_top" xlink:title="Method to parse the consistency threshold argument. ">
-<polygon fill="white" stroke="black" points="120.5,-490.5 120.5,-520.5 258.5,-520.5 258.5,-490.5 120.5,-490.5"/>
-<text text-anchor="start" x="128.5" y="-508.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::consistency</text>
+<g id="a_node5"><a xlink:href="classtrim_al_manager.html#a9dbb2a1d3c807f77c94dfa1b9e209b91" target="_top" xlink:title="Method to parse the conservation threshold argument. ">
+<polygon fill="white" stroke="black" points="119,-490.5 119,-520.5 260,-520.5 260,-490.5 119,-490.5"/>
+<text text-anchor="start" x="127" y="-508.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::conservation</text>
 <text text-anchor="middle" x="189.5" y="-497.5" font-family="Helvetica,sans-Serif" font-size="10.00">_threshold_argument</text>
 </a>
 </g>
@@ -58,9 +58,9 @@
 </g>
 <!-- Node87 -->
 <g id="node6" class="node"><title>Node87</title>
-<g id="a_node6"><a xlink:href="classtrim_al_manager.html#a9dbb2a1d3c807f77c94dfa1b9e209b91" target="_top" xlink:title="Method to parse the conservation threshold argument. ">
-<polygon fill="white" stroke="black" points="119,-441.5 119,-471.5 260,-471.5 260,-441.5 119,-441.5"/>
-<text text-anchor="start" x="127" y="-459.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::conservation</text>
+<g id="a_node6"><a xlink:href="classtrim_al_manager.html#a2f9e77f45d6b7862edfc41ec6b2ee49f" target="_top" xlink:title="Method to parse the consistency threshold argument. ">
+<polygon fill="white" stroke="black" points="120.5,-441.5 120.5,-471.5 258.5,-471.5 258.5,-441.5 120.5,-441.5"/>
+<text text-anchor="start" x="128.5" y="-459.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::consistency</text>
 <text text-anchor="middle" x="189.5" y="-448.5" font-family="Helvetica,sans-Serif" font-size="10.00">_threshold_argument</text>
 </a>
 </g>
@@ -72,10 +72,10 @@
 </g>
 <!-- Node88 -->
 <g id="node7" class="node"><title>Node88</title>
-<g id="a_node7"><a xlink:href="classtrim_al_manager.html#a4305627b06c11b9939fdedec9ea25bc0" target="_top" xlink:title="Method to parse the residue overlap argument. ">
-<polygon fill="white" stroke="black" points="131,-392.5 131,-422.5 248,-422.5 248,-392.5 131,-392.5"/>
-<text text-anchor="start" x="139" y="-410.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::residue</text>
-<text text-anchor="middle" x="189.5" y="-399.5" font-family="Helvetica,sans-Serif" font-size="10.00">_overlap_argument</text>
+<g id="a_node7"><a xlink:href="classtrim_al_manager.html#a28a1ea6d455d37308faebd84b3a9990d" target="_top" xlink:title="Method to parse the Consistency Window argument. ">
+<polygon fill="white" stroke="black" points="120.5,-392.5 120.5,-422.5 258.5,-422.5 258.5,-392.5 120.5,-392.5"/>
+<text text-anchor="start" x="128.5" y="-410.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::consistency</text>
+<text text-anchor="middle" x="189.5" y="-399.5" font-family="Helvetica,sans-Serif" font-size="10.00">_window_argument</text>
 </a>
 </g>
 </g>
@@ -86,10 +86,10 @@
 </g>
 <!-- Node89 -->
 <g id="node8" class="node"><title>Node89</title>
-<g id="a_node8"><a xlink:href="classtrim_al_manager.html#a6f73fc04b251f4963efe07307ccdb37f" target="_top" xlink:title="Method to parse the sequence overlap argument. ">
-<polygon fill="white" stroke="black" points="125.5,-343.5 125.5,-373.5 253.5,-373.5 253.5,-343.5 125.5,-343.5"/>
-<text text-anchor="start" x="133.5" y="-361.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::sequence</text>
-<text text-anchor="middle" x="189.5" y="-350.5" font-family="Helvetica,sans-Serif" font-size="10.00">_overlap_argument</text>
+<g id="a_node8"><a xlink:href="classtrim_al_manager.html#a52aabe8b7e1788a1732dbdd6c29e387d" target="_top" xlink:title="Method to parse the gap threshold argument. ">
+<polygon fill="white" stroke="black" points="136,-343.5 136,-373.5 243,-373.5 243,-343.5 136,-343.5"/>
+<text text-anchor="start" x="144" y="-361.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::gap</text>
+<text text-anchor="middle" x="189.5" y="-350.5" font-family="Helvetica,sans-Serif" font-size="10.00">_threshold_argument</text>
 </a>
 </g>
 </g>
@@ -100,24 +100,24 @@
 </g>
 <!-- Node90 -->
 <g id="node9" class="node"><title>Node90</title>
-<g id="a_node9"><a xlink:href="classtrim_al_manager.html#adb48eda605eb1a621f64c7ff49789f65" target="_top" xlink:title="Method to parse the max identity argument. ">
-<polygon fill="white" stroke="black" points="137.5,-294.5 137.5,-324.5 241.5,-324.5 241.5,-294.5 137.5,-294.5"/>
-<text text-anchor="start" x="145.5" y="-312.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::max</text>
-<text text-anchor="middle" x="189.5" y="-301.5" font-family="Helvetica,sans-Serif" font-size="10.00">_identity_argument</text>
+<g id="a_node9"><a xlink:href="classtrim_al_manager.html#ab276738d10e3bbb0afe14e1f7cdc8331" target="_top" xlink:title="Method to parse the Gap Window argument. ">
+<polygon fill="white" stroke="black" points="139,-294.5 139,-324.5 240,-324.5 240,-294.5 139,-294.5"/>
+<text text-anchor="start" x="147" y="-312.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::gap</text>
+<text text-anchor="middle" x="189.5" y="-301.5" font-family="Helvetica,sans-Serif" font-size="10.00">_window_argument</text>
 </a>
 </g>
 </g>
 <!-- Node82&#45;&gt;Node90 -->
 <g id="edge13" class="edge"><title>Node82&#45;&gt;Node90</title>
-<path fill="none" stroke="midnightblue" d="M93.2993,-309.5C107.563,-309.5 123.077,-309.5 137.361,-309.5"/>
+<path fill="none" stroke="midnightblue" d="M93.1845,-309.5C108.014,-309.5 124.203,-309.5 138.961,-309.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="93.1692,-306 83.1691,-309.5 93.1691,-313 93.1692,-306"/>
 </g>
 <!-- Node91 -->
 <g id="node10" class="node"><title>Node91</title>
-<g id="a_node10"><a xlink:href="classtrim_al_manager.html#af87e0b5682ec1220ba91e9704f8564b5" target="_top" xlink:title="Method to parse the clusters argument. ">
-<polygon fill="white" stroke="black" points="129.5,-245.5 129.5,-275.5 249.5,-275.5 249.5,-245.5 129.5,-245.5"/>
-<text text-anchor="start" x="137.5" y="-263.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::clusters</text>
-<text text-anchor="middle" x="189.5" y="-252.5" font-family="Helvetica,sans-Serif" font-size="10.00">_argument</text>
+<g id="a_node10"><a xlink:href="classtrim_al_manager.html#adb48eda605eb1a621f64c7ff49789f65" target="_top" xlink:title="Method to parse the max identity argument. ">
+<polygon fill="white" stroke="black" points="137.5,-245.5 137.5,-275.5 241.5,-275.5 241.5,-245.5 137.5,-245.5"/>
+<text text-anchor="start" x="145.5" y="-263.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::max</text>
+<text text-anchor="middle" x="189.5" y="-252.5" font-family="Helvetica,sans-Serif" font-size="10.00">_identity_argument</text>
 </a>
 </g>
 </g>
@@ -128,10 +128,10 @@
 </g>
 <!-- Node92 -->
 <g id="node11" class="node"><title>Node92</title>
-<g id="a_node11"><a xlink:href="classtrim_al_manager.html#a694afcd5ebf2ef693c15dc0bdef57576" target="_top" xlink:title="Method to parse the Window argument. ">
-<polygon fill="white" stroke="black" points="130,-196.5 130,-226.5 249,-226.5 249,-196.5 130,-196.5"/>
-<text text-anchor="start" x="138" y="-214.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::window</text>
-<text text-anchor="middle" x="189.5" y="-203.5" font-family="Helvetica,sans-Serif" font-size="10.00">_argument</text>
+<g id="a_node11"><a xlink:href="classtrim_al_manager.html#a4305627b06c11b9939fdedec9ea25bc0" target="_top" xlink:title="Method to parse the residue overlap argument. ">
+<polygon fill="white" stroke="black" points="131,-196.5 131,-226.5 248,-226.5 248,-196.5 131,-196.5"/>
+<text text-anchor="start" x="139" y="-214.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::residue</text>
+<text text-anchor="middle" x="189.5" y="-203.5" font-family="Helvetica,sans-Serif" font-size="10.00">_overlap_argument</text>
 </a>
 </g>
 </g>
@@ -142,24 +142,24 @@
 </g>
 <!-- Node93 -->
 <g id="node12" class="node"><title>Node93</title>
-<g id="a_node12"><a xlink:href="classtrim_al_manager.html#ab276738d10e3bbb0afe14e1f7cdc8331" target="_top" xlink:title="Method to parse the Gap Window argument. ">
-<polygon fill="white" stroke="black" points="139,-147.5 139,-177.5 240,-177.5 240,-147.5 139,-147.5"/>
-<text text-anchor="start" x="147" y="-165.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::gap</text>
-<text text-anchor="middle" x="189.5" y="-154.5" font-family="Helvetica,sans-Serif" font-size="10.00">_window_argument</text>
+<g id="a_node12"><a xlink:href="classtrim_al_manager.html#a6f73fc04b251f4963efe07307ccdb37f" target="_top" xlink:title="Method to parse the sequence overlap argument. ">
+<polygon fill="white" stroke="black" points="125.5,-147.5 125.5,-177.5 253.5,-177.5 253.5,-147.5 125.5,-147.5"/>
+<text text-anchor="start" x="133.5" y="-165.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::sequence</text>
+<text text-anchor="middle" x="189.5" y="-154.5" font-family="Helvetica,sans-Serif" font-size="10.00">_overlap_argument</text>
 </a>
 </g>
 </g>
 <!-- Node82&#45;&gt;Node93 -->
 <g id="edge19" class="edge"><title>Node82&#45;&gt;Node93</title>
-<path fill="none" stroke="midnightblue" d="M49.7644,-290.345C60.8094,-263.669 84.2784,-215.464 119,-187.5 124.892,-182.755 131.76,-178.869 138.841,-175.698"/>
+<path fill="none" stroke="midnightblue" d="M49.7644,-290.345C60.8094,-263.669 84.2784,-215.464 119,-187.5 123.794,-183.639 129.233,-180.347 134.907,-177.547"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="46.4741,-289.148 46.0255,-299.733 52.9773,-291.738 46.4741,-289.148"/>
 </g>
 <!-- Node94 -->
 <g id="node13" class="node"><title>Node94</title>
-<g id="a_node13"><a xlink:href="classtrim_al_manager.html#a17b966b839f13fc5a33a99807b6fb792" target="_top" xlink:title="Method to parse the Similarity Window argument. ">
+<g id="a_node13"><a xlink:href="classtrim_al_manager.html#ad6171bbd0595da342eb344b91a212eb6" target="_top" xlink:title="Method to parse the similarity threshold argument. ">
 <polygon fill="white" stroke="black" points="127,-98.5 127,-128.5 252,-128.5 252,-98.5 127,-98.5"/>
 <text text-anchor="start" x="135" y="-116.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::similarity</text>
-<text text-anchor="middle" x="189.5" y="-105.5" font-family="Helvetica,sans-Serif" font-size="10.00">_window_argument</text>
+<text text-anchor="middle" x="189.5" y="-105.5" font-family="Helvetica,sans-Serif" font-size="10.00">_threshold_argument</text>
 </a>
 </g>
 </g>
@@ -170,9 +170,9 @@
 </g>
 <!-- Node95 -->
 <g id="node14" class="node"><title>Node95</title>
-<g id="a_node14"><a xlink:href="classtrim_al_manager.html#a28a1ea6d455d37308faebd84b3a9990d" target="_top" xlink:title="Method to parse the Consistency Window argument. ">
-<polygon fill="white" stroke="black" points="120.5,-49.5 120.5,-79.5 258.5,-79.5 258.5,-49.5 120.5,-49.5"/>
-<text text-anchor="start" x="128.5" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::consistency</text>
+<g id="a_node14"><a xlink:href="classtrim_al_manager.html#a17b966b839f13fc5a33a99807b6fb792" target="_top" xlink:title="Method to parse the Similarity Window argument. ">
+<polygon fill="white" stroke="black" points="127,-49.5 127,-79.5 252,-79.5 252,-49.5 127,-49.5"/>
+<text text-anchor="start" x="135" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::similarity</text>
 <text text-anchor="middle" x="189.5" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">_window_argument</text>
 </a>
 </g>
@@ -184,16 +184,16 @@
 </g>
 <!-- Node96 -->
 <g id="node15" class="node"><title>Node96</title>
-<g id="a_node15"><a xlink:href="classtrim_al_manager.html#ac376826d0e68bd89428e455f9c84b98b" target="_top" xlink:title="Method to parse the Block Size argument. ">
-<polygon fill="white" stroke="black" points="135,-0.5 135,-30.5 244,-30.5 244,-0.5 135,-0.5"/>
-<text text-anchor="start" x="143" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::block</text>
+<g id="a_node15"><a xlink:href="classtrim_al_manager.html#a694afcd5ebf2ef693c15dc0bdef57576" target="_top" xlink:title="Method to parse the Window argument. ">
+<polygon fill="white" stroke="black" points="130,-0.5 130,-30.5 249,-30.5 249,-0.5 130,-0.5"/>
+<text text-anchor="start" x="138" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::window</text>
 <text text-anchor="middle" x="189.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">_argument</text>
 </a>
 </g>
 </g>
 <!-- Node82&#45;&gt;Node96 -->
 <g id="edge25" class="edge"><title>Node82&#45;&gt;Node96</title>
-<path fill="none" stroke="midnightblue" d="M42.3171,-289.769C42.9448,-240.893 51.3471,-112.934 119,-40.5 123.464,-35.7207 128.907,-31.8535 134.763,-28.7246"/>
+<path fill="none" stroke="midnightblue" d="M42.3171,-289.769C42.9448,-240.893 51.3471,-112.934 119,-40.5 122.589,-36.6578 126.81,-33.4051 131.37,-30.6516"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="38.8168,-289.92 42.2895,-299.93 45.8167,-289.939 38.8168,-289.92"/>
 </g>
 <!-- Node84 -->
@@ -206,8 +206,8 @@
 </g>
 <!-- Node83&#45;&gt;Node84 -->
 <g id="edge2" class="edge"><title>Node83&#45;&gt;Node84</title>
-<path fill="none" stroke="midnightblue" d="M252.129,-585.686C254.93,-583.824 257.578,-581.769 260,-579.5 341.832,-502.855 366.9,-357.934 372.278,-319.215"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="250.279,-582.712 243.333,-590.713 253.752,-588.79 250.279,-582.712"/>
+<path fill="none" stroke="midnightblue" d="M252.953,-585.13C255.45,-583.417 257.816,-581.545 260,-579.5 341.832,-502.855 366.9,-357.934 372.278,-319.215"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="250.886,-582.285 244.033,-590.365 254.429,-588.322 250.886,-582.285"/>
 </g>
 <!-- Node85&#45;&gt;Node84 -->
 <g id="edge4" class="edge"><title>Node85&#45;&gt;Node84</title>
@@ -231,18 +231,18 @@
 </g>
 <!-- Node89&#45;&gt;Node84 -->
 <g id="edge12" class="edge"><title>Node89&#45;&gt;Node84</title>
-<path fill="none" stroke="midnightblue" d="M256.84,-340.737C284.279,-333.39 314.991,-325.166 338.013,-319.002"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="255.654,-337.431 246.899,-343.399 257.464,-344.193 255.654,-337.431"/>
+<path fill="none" stroke="midnightblue" d="M253.227,-341.704C281.459,-334.145 313.759,-325.496 337.773,-319.066"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="252.186,-338.36 243.431,-344.327 253.996,-345.122 252.186,-338.36"/>
 </g>
 <!-- Node90&#45;&gt;Node84 -->
 <g id="edge14" class="edge"><title>Node90&#45;&gt;Node84</title>
-<path fill="none" stroke="midnightblue" d="M251.981,-309.5C266.028,-309.5 281.137,-309.5 295.765,-309.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="251.963,-306 241.963,-309.5 251.963,-313 251.963,-306"/>
+<path fill="none" stroke="midnightblue" d="M250.333,-309.5C264.82,-309.5 280.514,-309.5 295.695,-309.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="250.022,-306 240.022,-309.5 250.022,-313 250.022,-306"/>
 </g>
 <!-- Node91&#45;&gt;Node84 -->
 <g id="edge16" class="edge"><title>Node91&#45;&gt;Node84</title>
-<path fill="none" stroke="midnightblue" d="M256.84,-278.263C284.279,-285.61 314.991,-293.834 338.013,-299.998"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="257.464,-274.807 246.899,-275.601 255.654,-281.569 257.464,-274.807"/>
+<path fill="none" stroke="midnightblue" d="M251.856,-276.929C280.405,-284.573 313.362,-293.398 337.765,-299.932"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="252.528,-273.485 241.963,-274.28 250.717,-280.247 252.528,-273.485"/>
 </g>
 <!-- Node92&#45;&gt;Node84 -->
 <g id="edge18" class="edge"><title>Node92&#45;&gt;Node84</title>
@@ -251,8 +251,8 @@
 </g>
 <!-- Node93&#45;&gt;Node84 -->
 <g id="edge20" class="edge"><title>Node93&#45;&gt;Node84</title>
-<path fill="none" stroke="midnightblue" d="M249.44,-181.383C253.11,-183.262 256.664,-185.298 260,-187.5 308.772,-219.69 351.243,-277.04 366.99,-299.802"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="250.681,-178.1 240.14,-177.035 247.716,-184.441 250.681,-178.1"/>
+<path fill="none" stroke="midnightblue" d="M250.316,-181.836C253.675,-183.588 256.93,-185.474 260,-187.5 308.772,-219.69 351.243,-277.04 366.99,-299.802"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="251.766,-178.65 241.233,-177.508 248.755,-184.969 251.766,-178.65"/>
 </g>
 <!-- Node94&#45;&gt;Node84 -->
 <g id="edge22" class="edge"><title>Node94&#45;&gt;Node84</title>
@@ -266,8 +266,8 @@
 </g>
 <!-- Node96&#45;&gt;Node84 -->
 <g id="edge26" class="edge"><title>Node96&#45;&gt;Node84</title>
-<path fill="none" stroke="midnightblue" d="M252.958,-34.7922C255.454,-36.5349 257.818,-38.433 260,-40.5 341.135,-117.371 366.706,-261.387 372.238,-299.851"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="254.417,-31.5864 244.041,-29.4456 250.817,-37.5899 254.417,-31.5864"/>
+<path fill="none" stroke="midnightblue" d="M254.712,-36.0595C256.566,-37.4454 258.336,-38.9236 260,-40.5 341.135,-117.371 366.706,-261.387 372.238,-299.851"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="256.428,-33.0024 246.12,-30.5548 252.652,-38.8965 256.428,-33.0024"/>
 </g>
 </g>
 </svg>

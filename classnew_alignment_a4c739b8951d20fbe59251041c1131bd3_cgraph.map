@@ -1,6 +1,6 @@
 <map id="newAlignment::alignmentSummarySVG" name="newAlignment::alignmentSummarySVG">
-<area shape="rect" id="node2" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="305,5,460,47"/>
-<area shape="rect" id="node3" href="$classutils.html#a40640e1942f00797e9fe8284e8fbdb14" title="Maximum of two numbers method. " alt="" coords="343,71,422,98"/>
-<area shape="rect" id="node4" href="$classutils.html#ad1594a7c6cd34bba8e878fe09837e5d8" title="Checks the color that has to be used on the output report. " alt="" coords="311,122,454,149"/>
-<area shape="rect" id="node5" href="$classutils.html#a45361ec2b0f05b254c152b14af595bfb" title="Method to check for a pattern in a string. &#160;The method will check, character by character of the firs..." alt="" coords="508,122,647,149"/>
+<area shape="rect" id="node2" href="$classutils.html#ad1594a7c6cd34bba8e878fe09837e5d8" title="Checks the color that has to be used on the output report. " alt="" coords="311,5,454,32"/>
+<area shape="rect" id="node4" href="$classutils.html#a40640e1942f00797e9fe8284e8fbdb14" title="Maximum of two numbers method. " alt="" coords="343,56,422,83"/>
+<area shape="rect" id="node5" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="305,107,460,149"/>
+<area shape="rect" id="node3" href="$classutils.html#a45361ec2b0f05b254c152b14af595bfb" title="Method to check for a pattern in a string. &#160;The method will check, character by character of the firs..." alt="" coords="508,5,647,32"/>
 </map>

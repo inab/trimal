@@ -2,7 +2,7 @@ var searchData=
 [
   ['c',['c',['../classtrim_al_manager.html#aeee16fd90a9e76a1f3d86aa99258ca5c',1,'trimAlManager']]],
   ['canload',['canLoad',['../class_read_write_base_state.html#a1e7a2d74ee685f2c9c7a3fed03087354',1,'ReadWriteBaseState']]],
-  ['canreport',['CanReport',['../class____internal_report_1_1____reporter.html#a7b919a29f23d49b217045aaef27b8c9a',1,'__internalReport::__reporter::CanReport()'],['../class____internal_report_1_1____report_system.html#a9c46b849fa12cd1aee3e1543d825e249',1,'__internalReport::__reportSystem::canReport()']]],
+  ['canreport',['canReport',['../class____internal_report_1_1____report_system.html#a9c46b849fa12cd1aee3e1543d825e249',1,'__internalReport::__reportSystem::canReport()'],['../class____internal_report_1_1____reporter.html#a7b919a29f23d49b217045aaef27b8c9a',1,'__internalReport::__reporter::CanReport()']]],
   ['cansave',['canSave',['../class_read_write_base_state.html#aa648fbe2f707d3ebc989bc104e9b906e',1,'ReadWriteBaseState']]],
   ['cantreport',['cantReport',['../class____internal_report_1_1____report_system.html#a1ce92bd8aad4838dcf8e3bc4d0a4131d',1,'__internalReport::__reportSystem']]],
   ['cleaning',['Cleaning',['../classnew_alignment.html#a2417feb815493866d0137ae5f5cd1028',1,'newAlignment']]],

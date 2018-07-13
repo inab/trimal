@@ -11,49 +11,49 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-111.5 341,-111.5 341,4 -4,4"/>
 <!-- Node127 -->
 <g id="node1" class="node"><title>Node127</title>
-<polygon fill="#bfbfbf" stroke="black" points="0,-33 0,-63 147,-63 147,-33 0,-33"/>
-<text text-anchor="start" x="8" y="-51" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::prepareCoding</text>
-<text text-anchor="middle" x="73.5" y="-40" font-family="Helvetica,sans-Serif" font-size="10.00">Sequence</text>
+<polygon fill="#bfbfbf" stroke="black" points="0,-44.5 0,-74.5 147,-74.5 147,-44.5 0,-44.5"/>
+<text text-anchor="start" x="8" y="-62.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::prepareCoding</text>
+<text text-anchor="middle" x="73.5" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">Sequence</text>
 </g>
 <!-- Node128 -->
 <g id="node2" class="node"><title>Node128</title>
-<g id="a_node2"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
-<polygon fill="white" stroke="black" points="202,-77 202,-107 318,-107 318,-77 202,-77"/>
-<text text-anchor="start" x="210" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
-<text text-anchor="middle" x="260" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
+<g id="a_node2"><a xlink:href="classnew_alignment.html#acfd820148c267a3d698a39758ecf190d" target="_top" xlink:title="Number of sequences getter. ">
+<polygon fill="white" stroke="black" points="183,-88 183,-107 337,-107 337,-88 183,-88"/>
+<text text-anchor="middle" x="260" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getNumSpecies</text>
 </a>
 </g>
 </g>
 <!-- Node127&#45;&gt;Node128 -->
 <g id="edge1" class="edge"><title>Node127&#45;&gt;Node128</title>
-<path fill="none" stroke="midnightblue" d="M137.478,-63.0192C155.094,-67.2203 174.299,-71.8003 192.132,-76.0531"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="191.34,-79.4623 201.879,-78.3776 192.963,-72.6532 191.34,-79.4623"/>
+<path fill="none" stroke="midnightblue" d="M147.154,-74.4641C165.615,-78.2663 185.174,-82.2946 202.685,-85.9012"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="202.234,-89.3817 212.734,-87.9711 203.646,-82.5256 202.234,-89.3817"/>
 </g>
 <!-- Node129 -->
 <g id="node3" class="node"><title>Node129</title>
-<g id="a_node3"><a xlink:href="classnew_alignment.html#acfd820148c267a3d698a39758ecf190d" target="_top" xlink:title="Number of sequences getter. ">
-<polygon fill="white" stroke="black" points="183,-38.5 183,-57.5 337,-57.5 337,-38.5 183,-38.5"/>
-<text text-anchor="middle" x="260" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getNumSpecies</text>
+<g id="a_node3"><a xlink:href="classnew_alignment.html#a0db3e76f82a71c7a2fe5b9279f8fa310" target="_top" xlink:title="Getter for the sequences names. ">
+<polygon fill="white" stroke="black" points="187,-50 187,-69 333,-69 333,-50 187,-50"/>
+<text text-anchor="middle" x="260" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getSequences</text>
 </a>
 </g>
 </g>
 <!-- Node127&#45;&gt;Node129 -->
 <g id="edge2" class="edge"><title>Node127&#45;&gt;Node129</title>
-<path fill="none" stroke="midnightblue" d="M147.154,-48C155.562,-48 164.197,-48 172.763,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="172.769,-51.5001 182.769,-48 172.769,-44.5001 172.769,-51.5001"/>
+<path fill="none" stroke="midnightblue" d="M147.154,-59.5C156.809,-59.5 166.764,-59.5 176.569,-59.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="176.714,-63.0001 186.714,-59.5 176.714,-56.0001 176.714,-63.0001"/>
 </g>
 <!-- Node130 -->
 <g id="node4" class="node"><title>Node130</title>
-<g id="a_node4"><a xlink:href="classnew_alignment.html#a0db3e76f82a71c7a2fe5b9279f8fa310" target="_top" xlink:title="Getter for the sequences names. ">
-<polygon fill="white" stroke="black" points="187,-0.5 187,-19.5 333,-19.5 333,-0.5 187,-0.5"/>
-<text text-anchor="middle" x="260" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getSequences</text>
+<g id="a_node4"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
+<polygon fill="white" stroke="black" points="202,-0.5 202,-30.5 318,-30.5 318,-0.5 202,-0.5"/>
+<text text-anchor="start" x="210" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
+<text text-anchor="middle" x="260" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
 </a>
 </g>
 </g>
 <!-- Node127&#45;&gt;Node130 -->
 <g id="edge3" class="edge"><title>Node127&#45;&gt;Node130</title>
-<path fill="none" stroke="midnightblue" d="M147.154,-33.0359C165.615,-29.2337 185.174,-25.2054 202.685,-21.5988"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="203.646,-24.9744 212.734,-19.5289 202.234,-18.1183 203.646,-24.9744"/>
+<path fill="none" stroke="midnightblue" d="M137.478,-44.4808C155.094,-40.2797 174.299,-35.6997 192.132,-31.4469"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="192.963,-34.8468 201.879,-29.1224 191.34,-28.0377 192.963,-34.8468"/>
 </g>
 </g>
 </svg>

@@ -11,37 +11,37 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-73.5 313,-73.5 313,4 -4,4"/>
 <!-- Node180 -->
 <g id="node1" class="node"><title>Node180</title>
-<polygon fill="#bfbfbf" stroke="black" points="0,-11.5 0,-52.5 119,-52.5 119,-11.5 0,-11.5"/>
-<text text-anchor="start" x="8" y="-40.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
-<text text-anchor="start" x="8" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">_select_cols_and_seqs</text>
-<text text-anchor="middle" x="59.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">_incompatibilities</text>
+<polygon fill="#bfbfbf" stroke="black" points="0,-17 0,-58 119,-58 119,-17 0,-17"/>
+<text text-anchor="start" x="8" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
+<text text-anchor="start" x="8" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00">_select_cols_and_seqs</text>
+<text text-anchor="middle" x="59.5" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">_incompatibilities</text>
 </g>
 <!-- Node181 -->
 <g id="node2" class="node"><title>Node181</title>
-<g id="a_node2"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
-<polygon fill="white" stroke="black" points="174,-39 174,-69 290,-69 290,-39 174,-39"/>
-<text text-anchor="start" x="182" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
-<text text-anchor="middle" x="232" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
+<g id="a_node2"><a xlink:href="classnew_alignment.html#acfd820148c267a3d698a39758ecf190d" target="_top" xlink:title="Number of sequences getter. ">
+<polygon fill="white" stroke="black" points="155,-50 155,-69 309,-69 309,-50 155,-50"/>
+<text text-anchor="middle" x="232" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getNumSpecies</text>
 </a>
 </g>
 </g>
 <!-- Node180&#45;&gt;Node181 -->
 <g id="edge1" class="edge"><title>Node180&#45;&gt;Node181</title>
-<path fill="none" stroke="midnightblue" d="M119.176,-39.5712C133.577,-41.4293 149.102,-43.4326 163.867,-45.3377"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="163.579,-48.8294 173.944,-46.638 164.475,-41.887 163.579,-48.8294"/>
+<path fill="none" stroke="midnightblue" d="M119.176,-45.0712C128.16,-46.2304 137.582,-47.4461 146.983,-48.6592"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="146.79,-52.1631 157.156,-49.9717 147.686,-45.2207 146.79,-52.1631"/>
 </g>
 <!-- Node182 -->
 <g id="node3" class="node"><title>Node182</title>
-<g id="a_node3"><a xlink:href="classnew_alignment.html#acfd820148c267a3d698a39758ecf190d" target="_top" xlink:title="Number of sequences getter. ">
-<polygon fill="white" stroke="black" points="155,-0.5 155,-19.5 309,-19.5 309,-0.5 155,-0.5"/>
-<text text-anchor="middle" x="232" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getNumSpecies</text>
+<g id="a_node3"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
+<polygon fill="white" stroke="black" points="174,-0.5 174,-30.5 290,-30.5 290,-0.5 174,-0.5"/>
+<text text-anchor="start" x="182" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
+<text text-anchor="middle" x="232" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
 </a>
 </g>
 </g>
 <!-- Node180&#45;&gt;Node182 -->
 <g id="edge2" class="edge"><title>Node180&#45;&gt;Node182</title>
-<path fill="none" stroke="midnightblue" d="M119.176,-24.4288C128.16,-23.2696 137.582,-22.0539 146.983,-20.8408"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="147.686,-24.2793 157.156,-19.5283 146.79,-17.3369 147.686,-24.2793"/>
+<path fill="none" stroke="midnightblue" d="M119.176,-29.9288C133.577,-28.0707 149.102,-26.0674 163.867,-24.1623"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="164.475,-27.613 173.944,-22.862 163.579,-20.6706 164.475,-27.613"/>
 </g>
 </g>
 </svg>

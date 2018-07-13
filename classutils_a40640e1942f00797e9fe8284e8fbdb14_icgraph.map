@@ -1,9 +1,9 @@
 <map id="utils::max" name="utils::max">
-<area shape="rect" id="node2" href="$classnew_alignment.html#a1180033903a517103612ae59fd024b2f" title="Method to print different identity values computed from the alignment. In this method we assess the i..." alt="" coords="161,5,363,32"/>
-<area shape="rect" id="node5" href="$classnew_alignment.html#a8fa808afb7d7813adbd5acdd2b0effef" title="Prints the overlap between sequences. " alt="" coords="159,56,365,83"/>
-<area shape="rect" id="node6" href="$classnew_alignment.html#a2607115c839209324dca54d70fc8708d" title="Method to report the trimming results in HTML. Outputs an HTML file that shows visually what has been..." alt="" coords="132,107,392,133"/>
-<area shape="rect" id="node7" href="$classnew_alignment.html#a4c739b8951d20fbe59251041c1131bd3" title="Method to report the trimming results in SVG. Outputs a SVG file that shows visually what has been do..." alt="" coords="136,157,388,184"/>
-<area shape="rect" id="node8" href="$classnew_alignment.html#a26d10a23f8f71f95657a05e88a9a8fff" title="Method that saves a clustal&#45;color based visualization of the alignment. It doesn&#39;t report any trimmin..." alt="" coords="141,208,383,235"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#afc48b86f5ae35b9a5e721b65c58bf610" title="Method to print statistics requested. " alt="" coords="440,23,579,65"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="627,31,785,57"/>
+<area shape="rect" id="node2" href="$classnew_alignment.html#a26d10a23f8f71f95657a05e88a9a8fff" title="Method that saves a clustal&#45;color based visualization of the alignment. It doesn&#39;t report any trimmin..." alt="" coords="141,5,383,32"/>
+<area shape="rect" id="node3" href="$classnew_alignment.html#a2607115c839209324dca54d70fc8708d" title="Method to report the trimming results in HTML. Outputs an HTML file that shows visually what has been..." alt="" coords="132,56,392,83"/>
+<area shape="rect" id="node4" href="$classnew_alignment.html#a4c739b8951d20fbe59251041c1131bd3" title="Method to report the trimming results in SVG. Outputs a SVG file that shows visually what has been do..." alt="" coords="136,107,388,133"/>
+<area shape="rect" id="node5" href="$classnew_alignment.html#a1180033903a517103612ae59fd024b2f" title="Method to print different identity values computed from the alignment. In this method we assess the i..." alt="" coords="161,157,363,184"/>
+<area shape="rect" id="node8" href="$classnew_alignment.html#a8fa808afb7d7813adbd5acdd2b0effef" title="Prints the overlap between sequences. " alt="" coords="159,208,365,235"/>
+<area shape="rect" id="node6" href="$classtrim_al_manager.html#afc48b86f5ae35b9a5e721b65c58bf610" title="Method to print statistics requested. " alt="" coords="440,175,579,217"/>
+<area shape="rect" id="node7" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="627,183,785,209"/>
 </map>

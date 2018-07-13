@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['savealignment',['saveAlignment',['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment()'],['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()']]],
+  ['savealignment',['SaveAlignment',['../class_read_write_base_state.html#a29be4d8b0eb8ae3e5219b5b92cbfc596',1,'ReadWriteBaseState::SaveAlignment()'],['../class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0',1,'ReadWriteMS::saveAlignment()']]],
   ['select_5fcols_5fargument',['select_cols_argument',['../classtrim_al_manager.html#a9f151cd8397d6ef00e61213ed6931c5a',1,'trimAlManager']]],
   ['selectmethod',['selectMethod',['../class_cleaner.html#a6e219be8cd47b2d084e4563c2c66a947',1,'Cleaner']]],
   ['seqs_5fselect_5fargument',['seqs_select_argument',['../classtrim_al_manager.html#ac90e24deb8e034abab70031edb162426',1,'trimAlManager']]],

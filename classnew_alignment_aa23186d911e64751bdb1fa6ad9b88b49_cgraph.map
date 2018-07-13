@@ -1,6 +1,0 @@
-<map id="newAlignment::alignmentSummarySVG" name="newAlignment::alignmentSummarySVG">
-<area shape="rect" id="node2" href="$class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. " alt="" coords="305,5,460,47"/>
-<area shape="rect" id="node3" href="$classutils.html#a40640e1942f00797e9fe8284e8fbdb14" title="Maximum of two numbers method. " alt="" coords="343,71,422,98"/>
-<area shape="rect" id="node4" href="$classutils.html#ad1594a7c6cd34bba8e878fe09837e5d8" title="Checks the color that has to be used on the output report. " alt="" coords="311,122,454,149"/>
-<area shape="rect" id="node5" href="$classutils.html#ad7e66d2aa8756082b18eb40f209ded86" title="Looks for a pattern. " alt="" coords="508,122,647,149"/>
-</map>

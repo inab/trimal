@@ -1,9 +1,0 @@
-<map id="Catch::Matchers::StdString::StartsWithMatcher" name="Catch::Matchers::StdString::StartsWithMatcher">
-<area shape="rect" id="node2" href="$struct_catch_1_1_matchers_1_1_std_string_1_1_string_matcher_base.html" title="Catch::Matchers::StdString\l::StringMatcherBase" alt="" coords="976,87,1157,129"/>
-<area shape="rect" id="node3" href="$struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base.html" title="Catch::Matchers::Impl\l::MatcherBase\&lt; std::string \&gt;" alt="" coords="737,146,927,187"/>
-<area shape="rect" id="node4" href="$class_catch_1_1_matchers_1_1_impl_1_1_matcher_untyped_base.html" title="Catch::Matchers::Impl\l::MatcherUntypedBase" alt="" coords="440,146,596,187"/>
-<area shape="rect" id="node5" title="STL class. " alt="" coords="181,95,261,121"/>
-<area shape="rect" id="node8" href="$struct_catch_1_1_matchers_1_1_std_string_1_1_cased_string.html" title="Catch::Matchers::StdString\l::CasedString" alt="" coords="427,26,609,67"/>
-<area shape="rect" id="node6" title="STL class. " alt="" coords="5,87,132,129"/>
-<area shape="rect" id="node7" href="$struct_catch_1_1_matchers_1_1_impl_1_1_matcher_method.html" title="Catch::Matchers::Impl\l::MatcherMethod\&lt; ObjectT \&gt;" alt="" coords="423,211,613,253"/>
-</map>

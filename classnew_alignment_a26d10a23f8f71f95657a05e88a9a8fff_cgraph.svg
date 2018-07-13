@@ -11,35 +11,35 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-73.5 338,-73.5 338,4 -4,4"/>
 <!-- Node0 -->
 <g id="node1" class="node"><title>Node0</title>
-<polygon fill="#bfbfbf" stroke="black" points="0,-22.5 0,-41.5 182,-41.5 182,-22.5 0,-22.5"/>
-<text text-anchor="middle" x="91" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::alignmentColourHTML</text>
+<polygon fill="#bfbfbf" stroke="black" points="0,-28 0,-47 182,-47 182,-28 0,-28"/>
+<text text-anchor="middle" x="91" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::alignmentColourHTML</text>
 </g>
 <!-- Node1 -->
 <g id="node2" class="node"><title>Node1</title>
-<g id="a_node2"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
-<polygon fill="white" stroke="black" points="218,-39 218,-69 334,-69 334,-39 218,-39"/>
-<text text-anchor="start" x="226" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
-<text text-anchor="middle" x="276" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
+<g id="a_node2"><a xlink:href="classutils.html#a40640e1942f00797e9fe8284e8fbdb14" target="_top" xlink:title="Maximum of two numbers method. ">
+<polygon fill="white" stroke="black" points="246.5,-50 246.5,-69 305.5,-69 305.5,-50 246.5,-50"/>
+<text text-anchor="middle" x="276" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">utils::max</text>
 </a>
 </g>
 </g>
 <!-- Node0&#45;&gt;Node1 -->
 <g id="edge1" class="edge"><title>Node0&#45;&gt;Node1</title>
-<path fill="none" stroke="midnightblue" d="M171.202,-41.5216C183.305,-42.9766 195.701,-44.4668 207.521,-45.8878"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="207.393,-49.3974 217.739,-47.1161 208.228,-42.4475 207.393,-49.3974"/>
+<path fill="none" stroke="midnightblue" d="M171.202,-47.0216C193.697,-49.7259 217.202,-52.5516 236.145,-54.8289"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="235.818,-58.3147 246.164,-56.0334 236.653,-51.3647 235.818,-58.3147"/>
 </g>
 <!-- Node2 -->
 <g id="node3" class="node"><title>Node2</title>
-<g id="a_node3"><a xlink:href="classutils.html#a40640e1942f00797e9fe8284e8fbdb14" target="_top" xlink:title="Maximum of two numbers method. ">
-<polygon fill="white" stroke="black" points="246.5,-0.5 246.5,-19.5 305.5,-19.5 305.5,-0.5 246.5,-0.5"/>
-<text text-anchor="middle" x="276" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::max</text>
+<g id="a_node3"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
+<polygon fill="white" stroke="black" points="218,-0.5 218,-30.5 334,-30.5 334,-0.5 218,-0.5"/>
+<text text-anchor="start" x="226" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
+<text text-anchor="middle" x="276" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
 </a>
 </g>
 </g>
 <!-- Node0&#45;&gt;Node2 -->
 <g id="edge2" class="edge"><title>Node0&#45;&gt;Node2</title>
-<path fill="none" stroke="midnightblue" d="M171.202,-22.4784C193.697,-19.7741 217.202,-16.9484 236.145,-14.6711"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="236.653,-18.1353 246.164,-13.4666 235.818,-11.1853 236.653,-18.1353"/>
+<path fill="none" stroke="midnightblue" d="M171.202,-27.9784C183.305,-26.5234 195.701,-25.0332 207.521,-23.6122"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="208.228,-27.0525 217.739,-22.3839 207.393,-20.1026 208.228,-27.0525"/>
 </g>
 </g>
 </svg>

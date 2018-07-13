@@ -1,7 +1,0 @@
-<map id="trimAlManager::print_statistics" name="trimAlManager::print_statistics">
-<area shape="rect" id="node2" href="$classcompare_files.html#aa1a295d736ec6d8064cd28cf861289ef" title="Print the consistency value for each column from the selected alignment. " alt="" coords="192,5,380,47"/>
-<area shape="rect" id="node3" href="$classcompare_files.html#a435d98e46d83c066a928e40d2dbcead9" title="Print the accumulated consistency value from the selected alignment. " alt="" coords="192,71,380,112"/>
-<area shape="rect" id="node4" href="$classutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying. " alt="" coords="428,53,537,79"/>
-<area shape="rect" id="node5" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="429,103,536,130"/>
-<area shape="rect" id="node6" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="585,103,671,130"/>
-</map>

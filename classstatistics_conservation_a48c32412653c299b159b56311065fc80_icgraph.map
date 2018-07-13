@@ -1,11 +1,11 @@
 <map id="statisticsConservation::isDefinedWindow" name="statisticsConservation::isDefinedWindow">
-<area shape="rect" id="node2" href="$classstatistics_conservation.html#a0e674b4b4b91773fb1c32a532797f328" title="This methods returns a pointer to conservationWindow&#39;s vector. " alt="" coords="205,97,377,139"/>
-<area shape="rect" id="node3" href="$class_cleaner.html#a694d53fdd5d1ac9455858e48537af3d0" title="Method to trim an alignment based on the similarity distribution values. " alt="" coords="733,21,916,47"/>
-<area shape="rect" id="node7" href="$class_cleaner.html#a1ac5ba504932526d77575365557a4d64" title="Method to trim an alignment based on the similarity and gaps distribution values. ..." alt="" coords="771,71,878,98"/>
-<area shape="rect" id="node8" href="$class_cleaner.html#a068b219f913adba5c917a231cff7e437" title="Method to clean an alignment. It carries out strict and strictplus. The method: " alt="" coords="460,105,651,131"/>
-<area shape="rect" id="node9" href="$classnew_alignment.html#a2607115c839209324dca54d70fc8708d" title="Method to report the trimming results in HTML. Outputs an HTML file that shows visually what has been..." alt="" coords="425,155,685,182"/>
-<area shape="rect" id="node10" href="$classstatistics_conservation.html#aa11412e9db5babc6dc7b2b4c7c471ed6" title="Computes and selects the cut point values based on conservation&#39;s values. " alt="" coords="479,39,631,80"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" title="Method to trim the alignment using non automatic methods: " alt="" coords="964,39,1167,80"/>
-<area shape="rect" id="node5" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from. " alt="" coords="1215,39,1360,80"/>
-<area shape="rect" id="node6" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="1408,46,1567,73"/>
+<area shape="rect" id="node2" href="$classstatistics_conservation.html#a0e674b4b4b91773fb1c32a532797f328" title="This methods returns a pointer to conservationWindow&#39;s vector. " alt="" coords="205,107,377,149"/>
+<area shape="rect" id="node3" href="$classnew_alignment.html#a2607115c839209324dca54d70fc8708d" title="Method to report the trimming results in HTML. Outputs an HTML file that shows visually what has been..." alt="" coords="425,5,685,32"/>
+<area shape="rect" id="node4" href="$classstatistics_conservation.html#aa11412e9db5babc6dc7b2b4c7c471ed6" title="Computes and selects the cut point values based on conservation&#39;s values. " alt="" coords="479,107,631,149"/>
+<area shape="rect" id="node5" href="$class_cleaner.html#a1ac5ba504932526d77575365557a4d64" title="Method to trim an alignment based on the similarity and gaps distribution values. ..." alt="" coords="771,89,878,116"/>
+<area shape="rect" id="node9" href="$class_cleaner.html#a694d53fdd5d1ac9455858e48537af3d0" title="Method to trim an alignment based on the similarity distribution values. " alt="" coords="733,140,916,167"/>
+<area shape="rect" id="node10" href="$class_cleaner.html#a068b219f913adba5c917a231cff7e437" title="Method to clean an alignment. It carries out strict and strictplus. The method: " alt="" coords="460,224,651,251"/>
+<area shape="rect" id="node6" href="$classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" title="Method to trim the alignment using non automatic methods: " alt="" coords="964,107,1167,149"/>
+<area shape="rect" id="node7" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from. " alt="" coords="1215,107,1360,149"/>
+<area shape="rect" id="node8" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="1408,115,1567,141"/>
 </map>

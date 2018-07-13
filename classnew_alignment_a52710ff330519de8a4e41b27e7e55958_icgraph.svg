@@ -30,29 +30,29 @@
 </g>
 <!-- Node158 -->
 <g id="node6" class="node"><title>Node158</title>
-<g id="a_node6"><a xlink:href="class_cleaner.html#af27e657bf4874a21b26d9a8217c1e643" target="_top" xlink:title="Method to remove sequences, expressed as ranges. ">
-<polygon fill="white" stroke="black" points="198,-38.5 198,-57.5 335,-57.5 335,-38.5 198,-38.5"/>
-<text text-anchor="middle" x="266.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeSequences</text>
+<g id="a_node6"><a xlink:href="class_cleaner.html#ab7f5b746b97697181f4cd06063cbb49a" target="_top" xlink:title="Method to detect right and left borders. Borders are the first column found with no gaps...">
+<polygon fill="white" stroke="black" points="378,-38.5 378,-57.5 524,-57.5 524,-38.5 378,-38.5"/>
+<text text-anchor="middle" x="451" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeOnlyTerminal</text>
 </a>
 </g>
 </g>
 <!-- Node153&#45;&gt;Node158 -->
 <g id="edge5" class="edge"><title>Node153&#45;&gt;Node158</title>
-<path fill="none" stroke="midnightblue" d="M172.271,-48C180.857,-48 189.46,-48 197.779,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="172.219,-44.5001 162.219,-48 172.219,-51.5001 172.219,-44.5001"/>
+<path fill="none" stroke="midnightblue" d="M172.677,-48C235.945,-48 319.235,-48 377.967,-48"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="172.304,-44.5001 162.304,-48 172.304,-51.5001 172.304,-44.5001"/>
 </g>
-<!-- Node160 -->
-<g id="node8" class="node"><title>Node160</title>
-<g id="a_node8"><a xlink:href="class_cleaner.html#ab7f5b746b97697181f4cd06063cbb49a" target="_top" xlink:title="Method to detect right and left borders. Borders are the first column found with no gaps...">
-<polygon fill="white" stroke="black" points="378,-0.5 378,-19.5 524,-19.5 524,-0.5 378,-0.5"/>
-<text text-anchor="middle" x="451" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeOnlyTerminal</text>
+<!-- Node159 -->
+<g id="node7" class="node"><title>Node159</title>
+<g id="a_node7"><a xlink:href="class_cleaner.html#af27e657bf4874a21b26d9a8217c1e643" target="_top" xlink:title="Method to remove sequences, expressed as ranges. ">
+<polygon fill="white" stroke="black" points="198,-0.5 198,-19.5 335,-19.5 335,-0.5 198,-0.5"/>
+<text text-anchor="middle" x="266.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeSequences</text>
 </a>
 </g>
 </g>
-<!-- Node153&#45;&gt;Node160 -->
-<g id="edge8" class="edge"><title>Node153&#45;&gt;Node160</title>
-<path fill="none" stroke="midnightblue" d="M171.957,-32.4756C180.743,-31.1972 189.534,-30.0105 198,-29 258.446,-21.7848 327.396,-16.8094 377.875,-13.7654"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="171.43,-29.0153 162.057,-33.9536 172.464,-35.9386 171.43,-29.0153"/>
+<!-- Node153&#45;&gt;Node159 -->
+<g id="edge7" class="edge"><title>Node153&#45;&gt;Node159</title>
+<path fill="none" stroke="midnightblue" d="M164.378,-30.9408C183.349,-27.0123 202.859,-22.9719 219.621,-19.5009"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="163.607,-27.5262 154.524,-32.9814 165.026,-34.3808 163.607,-27.5262"/>
 </g>
 <!-- Node155 -->
 <g id="node3" class="node"><title>Node155</title>
@@ -95,23 +95,23 @@
 <path fill="none" stroke="midnightblue" d="M686.532,-48C694.977,-48 703.597,-48 711.943,-48"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="686.35,-44.5001 676.35,-48 686.35,-51.5001 686.35,-44.5001"/>
 </g>
-<!-- Node159 -->
-<g id="node7" class="node"><title>Node159</title>
-<g id="a_node7"><a xlink:href="classtrim_al_manager.html#a10536f715945a1a45f1df33f7cedc81e" target="_top" xlink:title="Method to trim or reduce the number of sequences in an alignment. It performs one or none of the foll...">
-<polygon fill="white" stroke="black" points="371,-38.5 371,-57.5 531,-57.5 531,-38.5 371,-38.5"/>
-<text text-anchor="middle" x="451" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::CleanSequences</text>
+<!-- Node158&#45;&gt;Node156 -->
+<g id="edge6" class="edge"><title>Node158&#45;&gt;Node156</title>
+<path fill="none" stroke="midnightblue" d="M534.526,-48C545.548,-48 556.609,-48 566.954,-48"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="534.437,-44.5001 524.437,-48 534.437,-51.5001 534.437,-44.5001"/>
+</g>
+<!-- Node160 -->
+<g id="node8" class="node"><title>Node160</title>
+<g id="a_node8"><a xlink:href="classtrim_al_manager.html#a10536f715945a1a45f1df33f7cedc81e" target="_top" xlink:title="Method to trim or reduce the number of sequences in an alignment. It performs one or none of the foll...">
+<polygon fill="white" stroke="black" points="371,-0.5 371,-19.5 531,-19.5 531,-0.5 371,-0.5"/>
+<text text-anchor="middle" x="451" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::CleanSequences</text>
 </a>
 </g>
 </g>
-<!-- Node158&#45;&gt;Node159 -->
-<g id="edge6" class="edge"><title>Node158&#45;&gt;Node159</title>
-<path fill="none" stroke="midnightblue" d="M345.341,-48C353.737,-48 362.288,-48 370.7,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="345.197,-44.5001 335.197,-48 345.197,-51.5001 345.197,-44.5001"/>
-</g>
-<!-- Node159&#45;&gt;Node156 -->
-<g id="edge7" class="edge"><title>Node159&#45;&gt;Node156</title>
-<path fill="none" stroke="midnightblue" d="M541.409,-48C549.997,-48 558.513,-48 566.599,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="541.316,-44.5001 531.316,-48 541.316,-51.5001 541.316,-44.5001"/>
+<!-- Node159&#45;&gt;Node160 -->
+<g id="edge8" class="edge"><title>Node159&#45;&gt;Node160</title>
+<path fill="none" stroke="midnightblue" d="M345.341,-10C353.737,-10 362.288,-10 370.7,-10"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="345.197,-6.5001 335.197,-10 345.197,-13.5001 345.197,-6.5001"/>
 </g>
 <!-- Node160&#45;&gt;Node156 -->
 <g id="edge9" class="edge"><title>Node160&#45;&gt;Node156</title>

@@ -16,6 +16,5 @@ var class_read_write_m_s =
     [ "info", "class_read_write_m_s.html#a2b92e4a5a3df785e9b19287b293ff151", null ],
     [ "keepHeader", "class_read_write_m_s.html#a9e88be38c30cd43a0689f3395b467cf4", null ],
     [ "reverse", "class_read_write_m_s.html#a0bae1b12cac37ea99f4a59ae774d815e", null ],
-    [ "shortNames", "class_read_write_m_s.html#ab9c173cd7f219d3c329b147e6fec3b31", null ],
     [ "type", "class_read_write_m_s.html#a404776cf14820ef01b1de600ae963de1", null ]
 ];

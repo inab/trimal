@@ -5,6 +5,5 @@ var searchData=
   ['no_5fall_5fgaps_5fargument',['no_all_gaps_argument',['../classtrim_al_manager.html#a732ebffc780ba35c9ded29f81c5d3990',1,'trimAlManager']]],
   ['no_5fgaps_5fargument',['no_gaps_argument',['../classtrim_al_manager.html#a2946d5e48a2c27e04a263584864480f5',1,'trimAlManager']]],
   ['noallgaps',['noallgaps',['../classtrim_al_manager.html#aa1cb3110962e10156507958ebf33f2fe',1,'trimAlManager']]],
-  ['nogaps',['nogaps',['../classtrim_al_manager.html#a252ba503c26ea4092fce6fe557864044',1,'trimAlManager']]],
-  ['num',['num',['../classtrim_al_manager.html#a7651daee572268d486be127aa437315d',1,'trimAlManager']]]
+  ['nogaps',['nogaps',['../classtrim_al_manager.html#a252ba503c26ea4092fce6fe557864044',1,'trimAlManager']]]
 ];

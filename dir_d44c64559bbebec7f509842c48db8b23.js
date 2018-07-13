@@ -9,7 +9,7 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "sequencesMatrix.h", "sequences_matrix_8h_source.html", null ],
     [ "similarityMatrix.h", "similarity_matrix_8h_source.html", null ],
     [ "TimerFactory.h", "_timer_factory_8h_source.html", null ],
-    [ "trimAlManager.h", "trim_al_manager_8h_source.html", null ],
+    [ "trimalManager.h", "trimal_manager_8h_source.html", null ],
     [ "utils.h", "utils_8h_source.html", null ],
     [ "values.h", "values_8h_source.html", null ],
     [ "vcf_statish.h", "vcf__statish_8h_source.html", null ]

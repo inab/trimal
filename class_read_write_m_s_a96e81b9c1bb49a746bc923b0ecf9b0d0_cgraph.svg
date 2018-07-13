@@ -11,48 +11,48 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-111.5 324,-111.5 324,4 -4,4"/>
 <!-- Node22 -->
 <g id="node1" class="node"><title>Node22</title>
-<polygon fill="#bfbfbf" stroke="black" points="0,-38.5 0,-57.5 149,-57.5 149,-38.5 0,-38.5"/>
-<text text-anchor="middle" x="74.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteMS::saveAlignment</text>
+<polygon fill="#bfbfbf" stroke="black" points="0,-50 0,-69 149,-69 149,-50 0,-50"/>
+<text text-anchor="middle" x="74.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteMS::saveAlignment</text>
 </g>
 <!-- Node23 -->
 <g id="node2" class="node"><title>Node23</title>
-<g id="a_node2"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
-<polygon fill="white" stroke="black" points="194.5,-77 194.5,-107 310.5,-107 310.5,-77 194.5,-77"/>
-<text text-anchor="start" x="202.5" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
-<text text-anchor="middle" x="252.5" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
+<g id="a_node2"><a xlink:href="classutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" target="_top" xlink:title="Function that replaces a substring with another substring in a string. It makes a copy of the origina...">
+<polygon fill="white" stroke="black" points="201.5,-88 201.5,-107 303.5,-107 303.5,-88 201.5,-88"/>
+<text text-anchor="middle" x="252.5" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">utils::ReplaceString</text>
 </a>
 </g>
 </g>
 <!-- Node22&#45;&gt;Node23 -->
 <g id="edge1" class="edge"><title>Node22&#45;&gt;Node23</title>
-<path fill="none" stroke="midnightblue" d="M113.689,-57.5473C134.393,-62.7233 160.582,-69.2704 184.555,-75.2638"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="183.768,-78.6746 194.318,-77.7045 185.465,-71.8836 183.768,-78.6746"/>
+<path fill="none" stroke="midnightblue" d="M119.912,-69.089C143.451,-74.1713 172.557,-80.4554 197.405,-85.8203"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="196.894,-89.2906 207.407,-87.9799 198.371,-82.4482 196.894,-89.2906"/>
 </g>
 <!-- Node24 -->
 <g id="node3" class="node"><title>Node24</title>
-<g id="a_node3"><a xlink:href="classutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" target="_top" xlink:title="Function that replaces a substring with another substring in a string. It makes a copy of the origina...">
-<polygon fill="white" stroke="black" points="201.5,-38.5 201.5,-57.5 303.5,-57.5 303.5,-38.5 201.5,-38.5"/>
-<text text-anchor="middle" x="252.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::ReplaceString</text>
+<g id="a_node3"><a xlink:href="classutils.html#a6000246220e801bf6b1e6a553d7af13a" target="_top" xlink:title="Function that replaces a substring with another substring in a string. It does not make a copy of the...">
+<polygon fill="white" stroke="black" points="185,-50 185,-69 320,-69 320,-50 185,-50"/>
+<text text-anchor="middle" x="252.5" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">utils::ReplaceStringInPlace</text>
 </a>
 </g>
 </g>
 <!-- Node22&#45;&gt;Node24 -->
 <g id="edge2" class="edge"><title>Node22&#45;&gt;Node24</title>
-<path fill="none" stroke="midnightblue" d="M149.12,-48C163.157,-48 177.695,-48 191.254,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="191.408,-51.5001 201.408,-48 191.408,-44.5001 191.408,-51.5001"/>
+<path fill="none" stroke="midnightblue" d="M149.12,-59.5C157.558,-59.5 166.177,-59.5 174.656,-59.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="174.907,-63.0001 184.907,-59.5 174.907,-56.0001 174.907,-63.0001"/>
 </g>
 <!-- Node25 -->
 <g id="node4" class="node"><title>Node25</title>
-<g id="a_node4"><a xlink:href="classutils.html#a6000246220e801bf6b1e6a553d7af13a" target="_top" xlink:title="Function that replaces a substring with another substring in a string. It does not make a copy of the...">
-<polygon fill="white" stroke="black" points="185,-0.5 185,-19.5 320,-19.5 320,-0.5 185,-0.5"/>
-<text text-anchor="middle" x="252.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::ReplaceStringInPlace</text>
+<g id="a_node4"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
+<polygon fill="white" stroke="black" points="194.5,-0.5 194.5,-30.5 310.5,-30.5 310.5,-0.5 194.5,-0.5"/>
+<text text-anchor="start" x="202.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
+<text text-anchor="middle" x="252.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
 </a>
 </g>
 </g>
 <!-- Node22&#45;&gt;Node25 -->
 <g id="edge3" class="edge"><title>Node22&#45;&gt;Node25</title>
-<path fill="none" stroke="midnightblue" d="M119.912,-38.411C143.451,-33.3287 172.557,-27.0446 197.405,-21.6797"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="198.371,-25.0518 207.407,-19.5201 196.894,-18.2094 198.371,-25.0518"/>
+<path fill="none" stroke="midnightblue" d="M113.689,-49.9527C134.393,-44.7767 160.582,-38.2296 184.555,-32.2362"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="185.465,-35.6164 194.318,-29.7955 183.768,-28.8254 185.465,-35.6164"/>
 </g>
 </g>
 </svg>

@@ -1,4 +1,0 @@
-<map id="Phylip32State" name="Phylip32State">
-<area shape="rect" id="node2" href="$class_read_write_base_state.html" title="Abstract class to implement. &#160;This class implementations are instantiated by the ReadWrite Machine St..." alt="" coords="8,287,153,313"/>
-<area shape="rect" id="node4" href="$class_read_write_m_s.html" title="Class that handles the load and save functions of an alignment. " alt="" coords="85,183,189,209"/>
-</map>

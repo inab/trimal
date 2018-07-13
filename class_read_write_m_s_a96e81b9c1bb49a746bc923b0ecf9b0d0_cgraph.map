@@ -1,5 +1,5 @@
 <map id="ReadWriteMS::saveAlignment" name="ReadWriteMS::saveAlignment">
-<area shape="rect" id="node2" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="265,5,419,47"/>
-<area shape="rect" id="node3" href="$classutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" title="Function that replaces a substring with another substring in a string. It makes a copy of the origina..." alt="" coords="274,71,410,98"/>
-<area shape="rect" id="node4" href="$classutils.html#a6000246220e801bf6b1e6a553d7af13a" title="Function that replaces a substring with another substring in a string. It does not make a copy of the..." alt="" coords="252,122,432,149"/>
+<area shape="rect" id="node2" href="$classutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" title="Function that replaces a substring with another substring in a string. It makes a copy of the origina..." alt="" coords="274,5,410,32"/>
+<area shape="rect" id="node3" href="$classutils.html#a6000246220e801bf6b1e6a553d7af13a" title="Function that replaces a substring with another substring in a string. It does not make a copy of the..." alt="" coords="252,56,432,83"/>
+<area shape="rect" id="node4" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="265,107,419,149"/>
 </map>

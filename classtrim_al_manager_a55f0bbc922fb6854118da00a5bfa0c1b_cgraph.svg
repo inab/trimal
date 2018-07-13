@@ -11,63 +11,63 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-111.5 533,-111.5 533,4 -4,4"/>
 <!-- Node14 -->
 <g id="node1" class="node"><title>Node14</title>
-<polygon fill="#bfbfbf" stroke="black" points="0,-33 0,-63 156,-63 156,-33 0,-33"/>
-<text text-anchor="start" x="8" y="-51" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
-<text text-anchor="middle" x="78" y="-40" font-family="Helvetica,sans-Serif" font-size="10.00">_and_prepare_coding_sequence</text>
+<polygon fill="#bfbfbf" stroke="black" points="0,-44.5 0,-74.5 156,-74.5 156,-44.5 0,-44.5"/>
+<text text-anchor="start" x="8" y="-62.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
+<text text-anchor="middle" x="78" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">_and_prepare_coding_sequence</text>
 </g>
 <!-- Node15 -->
 <g id="node2" class="node"><title>Node15</title>
 <g id="a_node2"><a xlink:href="classnew_alignment.html#ad50ba126247276cd0bf89119e439c483" target="_top" xlink:title="Method to check if the CDS file is correct. Based on nature of residues: DNA/RNA (Most of the residue...">
-<polygon fill="white" stroke="black" points="192,-33 192,-63 339,-63 339,-33 192,-33"/>
-<text text-anchor="start" x="200" y="-51" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::prepareCoding</text>
-<text text-anchor="middle" x="265.5" y="-40" font-family="Helvetica,sans-Serif" font-size="10.00">Sequence</text>
+<polygon fill="white" stroke="black" points="192,-44.5 192,-74.5 339,-74.5 339,-44.5 192,-44.5"/>
+<text text-anchor="start" x="200" y="-62.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::prepareCoding</text>
+<text text-anchor="middle" x="265.5" y="-51.5" font-family="Helvetica,sans-Serif" font-size="10.00">Sequence</text>
 </a>
 </g>
 </g>
 <!-- Node14&#45;&gt;Node15 -->
 <g id="edge1" class="edge"><title>Node14&#45;&gt;Node15</title>
-<path fill="none" stroke="midnightblue" d="M156.057,-48C164.479,-48 173.078,-48 181.566,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="181.846,-51.5001 191.846,-48 181.846,-44.5001 181.846,-51.5001"/>
+<path fill="none" stroke="midnightblue" d="M156.057,-59.5C164.479,-59.5 173.078,-59.5 181.566,-59.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="181.846,-63.0001 191.846,-59.5 181.846,-56.0001 181.846,-63.0001"/>
 </g>
 <!-- Node16 -->
 <g id="node3" class="node"><title>Node16</title>
-<g id="a_node3"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
-<polygon fill="white" stroke="black" points="394,-77 394,-107 510,-107 510,-77 394,-77"/>
-<text text-anchor="start" x="402" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
-<text text-anchor="middle" x="452" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
+<g id="a_node3"><a xlink:href="classnew_alignment.html#acfd820148c267a3d698a39758ecf190d" target="_top" xlink:title="Number of sequences getter. ">
+<polygon fill="white" stroke="black" points="375,-88 375,-107 529,-107 529,-88 375,-88"/>
+<text text-anchor="middle" x="452" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getNumSpecies</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node16 -->
 <g id="edge2" class="edge"><title>Node15&#45;&gt;Node16</title>
-<path fill="none" stroke="midnightblue" d="M329.478,-63.0192C347.094,-67.2203 366.299,-71.8003 384.132,-76.0531"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="383.34,-79.4623 393.879,-78.3776 384.963,-72.6532 383.34,-79.4623"/>
+<path fill="none" stroke="midnightblue" d="M339.154,-74.4641C357.615,-78.2663 377.174,-82.2946 394.685,-85.9012"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="394.234,-89.3817 404.734,-87.9711 395.646,-82.5256 394.234,-89.3817"/>
 </g>
 <!-- Node17 -->
 <g id="node4" class="node"><title>Node17</title>
-<g id="a_node4"><a xlink:href="classnew_alignment.html#acfd820148c267a3d698a39758ecf190d" target="_top" xlink:title="Number of sequences getter. ">
-<polygon fill="white" stroke="black" points="375,-38.5 375,-57.5 529,-57.5 529,-38.5 375,-38.5"/>
-<text text-anchor="middle" x="452" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getNumSpecies</text>
+<g id="a_node4"><a xlink:href="classnew_alignment.html#a0db3e76f82a71c7a2fe5b9279f8fa310" target="_top" xlink:title="Getter for the sequences names. ">
+<polygon fill="white" stroke="black" points="379,-50 379,-69 525,-69 525,-50 379,-50"/>
+<text text-anchor="middle" x="452" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getSequences</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node17 -->
 <g id="edge3" class="edge"><title>Node15&#45;&gt;Node17</title>
-<path fill="none" stroke="midnightblue" d="M339.154,-48C347.562,-48 356.197,-48 364.763,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="364.769,-51.5001 374.769,-48 364.769,-44.5001 364.769,-51.5001"/>
+<path fill="none" stroke="midnightblue" d="M339.154,-59.5C348.809,-59.5 358.764,-59.5 368.569,-59.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="368.714,-63.0001 378.714,-59.5 368.714,-56.0001 368.714,-63.0001"/>
 </g>
 <!-- Node18 -->
 <g id="node5" class="node"><title>Node18</title>
-<g id="a_node5"><a xlink:href="classnew_alignment.html#a0db3e76f82a71c7a2fe5b9279f8fa310" target="_top" xlink:title="Getter for the sequences names. ">
-<polygon fill="white" stroke="black" points="379,-0.5 379,-19.5 525,-19.5 525,-0.5 379,-0.5"/>
-<text text-anchor="middle" x="452" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getSequences</text>
+<g id="a_node5"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
+<polygon fill="white" stroke="black" points="394,-0.5 394,-30.5 510,-30.5 510,-0.5 394,-0.5"/>
+<text text-anchor="start" x="402" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
+<text text-anchor="middle" x="452" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
 </a>
 </g>
 </g>
 <!-- Node15&#45;&gt;Node18 -->
 <g id="edge4" class="edge"><title>Node15&#45;&gt;Node18</title>
-<path fill="none" stroke="midnightblue" d="M339.154,-33.0359C357.615,-29.2337 377.174,-25.2054 394.685,-21.5988"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="395.646,-24.9744 404.734,-19.5289 394.234,-18.1183 395.646,-24.9744"/>
+<path fill="none" stroke="midnightblue" d="M329.478,-44.4808C347.094,-40.2797 366.299,-35.6997 384.132,-31.4469"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="384.963,-34.8468 393.879,-29.1224 383.34,-28.0377 384.963,-34.8468"/>
 </g>
 </g>
 </svg>

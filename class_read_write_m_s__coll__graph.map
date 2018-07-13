@@ -1,6 +1,6 @@
 <map id="ReadWriteMS" name="ReadWriteMS">
-<area shape="rect" id="node3" href="$class_read_write_base_state.html" title="Abstract class that represent a format. Formats must inherit from this class and will be handled by R..." alt="" coords="172,304,317,331"/>
-<area shape="rect" id="node4" title="STL class. " alt="" coords="115,199,195,225"/>
+<area shape="rect" id="node3" href="$class_read_write_base_state.html" title="Abstract class that represent a format. Formats must inherit from this class and will be handled by R..." alt="" coords="172,289,317,316"/>
+<area shape="rect" id="node4" title="STL class. " alt="" coords="115,184,195,211"/>
 <area shape="rect" id="node5" title="STL class. " alt="" coords="92,5,219,47"/>
-<area shape="rect" id="node7" title="STL class. " alt="" coords="5,304,121,331"/>
+<area shape="rect" id="node7" title="STL class. " alt="" coords="5,289,121,316"/>
 </map>

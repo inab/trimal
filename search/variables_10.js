@@ -20,7 +20,6 @@ var searchData=
   ['sft',['sft',['../classtrim_al_manager.html#a5a834529d43f043faa79a568da4807c3',1,'trimAlManager']]],
   ['sgc',['sgc',['../classtrim_al_manager.html#ac671430e07bf4402f7ad22499f62617c',1,'trimAlManager']]],
   ['sgt',['sgt',['../classtrim_al_manager.html#a3f2180162f0010c39deb60c520eb5ec6',1,'trimAlManager']]],
-  ['shortnames',['shortNames',['../class_read_write_m_s.html#ab9c173cd7f219d3c329b147e6fec3b31',1,'ReadWriteMS::shortNames()'],['../classtrim_al_manager.html#a4a3843ccb5e84f24704c2ee9861cec85',1,'trimAlManager::shortNames()']]],
   ['sident',['sident',['../classtrim_al_manager.html#a973459433adebb52fed9c333c7f8a5fb',1,'trimAlManager']]],
   ['similaritythreshold',['similarityThreshold',['../classtrim_al_manager.html#aa7596de6a68a0b242e3a2b982544d8ad',1,'trimAlManager']]],
   ['similaritywindow',['similarityWindow',['../classtrim_al_manager.html#aae5be0d3d9cd4a3893e6419bda0fb45f',1,'trimAlManager']]],

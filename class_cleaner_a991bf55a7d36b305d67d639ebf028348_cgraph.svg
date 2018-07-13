@@ -42,29 +42,29 @@
 </g>
 <!-- Node201 -->
 <g id="node6" class="node"><title>Node201</title>
-<g id="a_node6"><a xlink:href="classutils.html#a1dce160519187ef2c6e14beb93a2050d" target="_top" xlink:title="Removes a determined char from the string. ">
-<polygon fill="white" stroke="black" points="379.5,-38.5 379.5,-57.5 495.5,-57.5 495.5,-38.5 379.5,-38.5"/>
-<text text-anchor="middle" x="437.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::removeCharacter</text>
+<g id="a_node6"><a xlink:href="classutils.html#a73f038c379c13d23e3220afaa14f9983" target="_top" xlink:title="Quicksort sorting method. ">
+<polygon fill="white" stroke="black" points="397.5,-38.5 397.5,-57.5 477.5,-57.5 477.5,-38.5 397.5,-38.5"/>
+<text text-anchor="middle" x="437.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::quicksort</text>
 </a>
 </g>
 </g>
 <!-- Node197&#45;&gt;Node201 -->
 <g id="edge5" class="edge"><title>Node197&#45;&gt;Node201</title>
-<path fill="none" stroke="midnightblue" d="M329.039,-48C342.487,-48 356.175,-48 369.077,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="369.236,-51.5001 379.236,-48 369.236,-44.5001 369.236,-51.5001"/>
+<path fill="none" stroke="midnightblue" d="M329.039,-48C349.052,-48 369.597,-48 387.293,-48"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="387.357,-51.5001 397.357,-48 387.357,-44.5001 387.357,-51.5001"/>
 </g>
-<!-- Node202 -->
-<g id="node7" class="node"><title>Node202</title>
-<g id="a_node7"><a xlink:href="classutils.html#a73f038c379c13d23e3220afaa14f9983" target="_top" xlink:title="Quicksort sorting method. ">
-<polygon fill="white" stroke="black" points="397.5,-0.5 397.5,-19.5 477.5,-19.5 477.5,-0.5 397.5,-0.5"/>
-<text text-anchor="middle" x="437.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::quicksort</text>
+<!-- Node203 -->
+<g id="node8" class="node"><title>Node203</title>
+<g id="a_node8"><a xlink:href="classutils.html#a1dce160519187ef2c6e14beb93a2050d" target="_top" xlink:title="Removes a determined char from the string. ">
+<polygon fill="white" stroke="black" points="379.5,-0.5 379.5,-19.5 495.5,-19.5 495.5,-0.5 379.5,-0.5"/>
+<text text-anchor="middle" x="437.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::removeCharacter</text>
 </a>
 </g>
 </g>
-<!-- Node197&#45;&gt;Node202 -->
-<g id="edge6" class="edge"><title>Node197&#45;&gt;Node202</title>
-<path fill="none" stroke="midnightblue" d="M289.706,-38.46C319.528,-32.6782 357.444,-25.3271 387.271,-19.5444"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="388.306,-22.909 397.457,-17.5695 386.974,-16.0369 388.306,-22.909"/>
+<!-- Node197&#45;&gt;Node203 -->
+<g id="edge7" class="edge"><title>Node197&#45;&gt;Node203</title>
+<path fill="none" stroke="midnightblue" d="M289.706,-38.46C316.267,-33.3104 349.249,-26.916 377.218,-21.4935"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="378.123,-24.8833 387.274,-19.5439 376.79,-18.0113 378.123,-24.8833"/>
 </g>
 <!-- Node199 -->
 <g id="node4" class="node"><title>Node199</title>
@@ -92,18 +92,18 @@
 <path fill="none" stroke="midnightblue" d="M709.166,-86C717.646,-86 726.246,-86 734.664,-86"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="734.821,-89.5001 744.821,-86 734.821,-82.5001 734.821,-89.5001"/>
 </g>
-<!-- Node203 -->
-<g id="node8" class="node"><title>Node203</title>
-<g id="a_node8"><a xlink:href="classutils.html#a3377ecde55631d1bbc4956e5923b7469" target="_top" xlink:title="Swapping elements method. ">
-<polygon fill="white" stroke="black" points="595.5,-0.5 595.5,-19.5 659.5,-19.5 659.5,-0.5 595.5,-0.5"/>
-<text text-anchor="middle" x="627.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::swap</text>
+<!-- Node202 -->
+<g id="node7" class="node"><title>Node202</title>
+<g id="a_node7"><a xlink:href="classutils.html#a3377ecde55631d1bbc4956e5923b7469" target="_top" xlink:title="Swapping elements method. ">
+<polygon fill="white" stroke="black" points="595.5,-38.5 595.5,-57.5 659.5,-57.5 659.5,-38.5 595.5,-38.5"/>
+<text text-anchor="middle" x="627.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::swap</text>
 </a>
 </g>
 </g>
-<!-- Node202&#45;&gt;Node203 -->
-<g id="edge7" class="edge"><title>Node202&#45;&gt;Node203</title>
-<path fill="none" stroke="midnightblue" d="M477.911,-10C509.253,-10 552.987,-10 584.89,-10"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="585.222,-13.5001 595.221,-10 585.221,-6.5001 585.222,-13.5001"/>
+<!-- Node201&#45;&gt;Node202 -->
+<g id="edge6" class="edge"><title>Node201&#45;&gt;Node202</title>
+<path fill="none" stroke="midnightblue" d="M477.911,-48C509.253,-48 552.987,-48 584.89,-48"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="585.222,-51.5001 595.221,-48 585.221,-44.5001 585.222,-51.5001"/>
 </g>
 </g>
 </svg>

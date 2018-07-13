@@ -17,28 +17,28 @@
 </g>
 <!-- Node31 -->
 <g id="node2" class="node"><title>Node31</title>
-<g id="a_node2"><a xlink:href="class_cleaner.html#a694d53fdd5d1ac9455858e48537af3d0" target="_top" xlink:title="Method to trim an alignment based on the similarity distribution values. ">
-<polygon fill="white" stroke="black" points="150,-38.5 150,-57.5 287,-57.5 287,-38.5 150,-38.5"/>
-<text text-anchor="middle" x="218.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanConservation</text>
+<g id="a_node2"><a xlink:href="class_cleaner.html#a1ac5ba504932526d77575365557a4d64" target="_top" xlink:title="Method to trim an alignment based on the similarity and gaps distribution values. ...">
+<polygon fill="white" stroke="black" points="178.5,-38.5 178.5,-57.5 258.5,-57.5 258.5,-38.5 178.5,-38.5"/>
+<text text-anchor="middle" x="218.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::clean</text>
 </a>
 </g>
 </g>
 <!-- Node30&#45;&gt;Node31 -->
 <g id="edge1" class="edge"><title>Node30&#45;&gt;Node31</title>
-<path fill="none" stroke="midnightblue" d="M124.342,-36.9028C132.734,-37.9024 141.329,-38.9263 149.742,-39.9285"/>
+<path fill="none" stroke="midnightblue" d="M124.308,-36.8987C142.668,-39.0859 162.008,-41.3897 178.281,-43.3281"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="124.578,-33.4062 114.234,-35.6987 123.749,-40.3571 124.578,-33.4062"/>
 </g>
 <!-- Node35 -->
 <g id="node6" class="node"><title>Node35</title>
-<g id="a_node6"><a xlink:href="class_cleaner.html#a1ac5ba504932526d77575365557a4d64" target="_top" xlink:title="Method to trim an alignment based on the similarity and gaps distribution values. ...">
-<polygon fill="white" stroke="black" points="178.5,-0.5 178.5,-19.5 258.5,-19.5 258.5,-0.5 178.5,-0.5"/>
-<text text-anchor="middle" x="218.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::clean</text>
+<g id="a_node6"><a xlink:href="class_cleaner.html#a694d53fdd5d1ac9455858e48537af3d0" target="_top" xlink:title="Method to trim an alignment based on the similarity distribution values. ">
+<polygon fill="white" stroke="black" points="150,-0.5 150,-19.5 287,-19.5 287,-0.5 150,-0.5"/>
+<text text-anchor="middle" x="218.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanConservation</text>
 </a>
 </g>
 </g>
 <!-- Node30&#45;&gt;Node35 -->
 <g id="edge5" class="edge"><title>Node30&#45;&gt;Node35</title>
-<path fill="none" stroke="midnightblue" d="M124.308,-21.1013C142.668,-18.9141 162.008,-16.6103 178.281,-14.6719"/>
+<path fill="none" stroke="midnightblue" d="M124.342,-21.0972C132.734,-20.0976 141.329,-19.0737 149.742,-18.0715"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="123.749,-17.6429 114.234,-22.3013 124.578,-24.5938 123.749,-17.6429"/>
 </g>
 <!-- Node32 -->
@@ -52,8 +52,8 @@
 </g>
 <!-- Node31&#45;&gt;Node32 -->
 <g id="edge2" class="edge"><title>Node31&#45;&gt;Node32</title>
-<path fill="none" stroke="midnightblue" d="M297.439,-39.7039C305.875,-38.806 314.449,-37.8934 322.851,-36.9991"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="296.811,-36.2509 287.238,-40.7898 297.552,-43.2116 296.811,-36.2509"/>
+<path fill="none" stroke="midnightblue" d="M268.773,-42.7553C285.532,-40.9714 304.661,-38.9352 322.971,-36.9863"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="268.246,-39.2915 258.673,-43.8304 268.987,-46.2522 268.246,-39.2915"/>
 </g>
 <!-- Node33 -->
 <g id="node4" class="node"><title>Node33</title>
@@ -84,8 +84,8 @@
 </g>
 <!-- Node35&#45;&gt;Node32 -->
 <g id="edge6" class="edge"><title>Node35&#45;&gt;Node32</title>
-<path fill="none" stroke="midnightblue" d="M268.773,-15.2447C285.532,-17.0286 304.661,-19.0648 322.971,-21.0137"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="268.987,-11.7478 258.673,-14.1696 268.246,-18.7085 268.987,-11.7478"/>
+<path fill="none" stroke="midnightblue" d="M297.439,-18.2961C305.875,-19.194 314.449,-20.1066 322.851,-21.0009"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="297.552,-14.7884 287.238,-17.2102 296.811,-21.7491 297.552,-14.7884"/>
 </g>
 </g>
 </svg>

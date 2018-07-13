@@ -17,9 +17,9 @@
 </g>
 <!-- Node13 -->
 <g id="node2" class="node"><title>Node13</title>
-<g id="a_node2"><a xlink:href="classnew_alignment.html#ad08d05c08eb66665defed4a16ab08e91" target="_top" xlink:title="Residues number getter. It counts gaps as residue. ">
-<polygon fill="white" stroke="black" points="148,-290.5 148,-309.5 300,-309.5 300,-290.5 148,-290.5"/>
-<text text-anchor="middle" x="224" y="-297.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getNumAminos</text>
+<g id="a_node2"><a xlink:href="classsequences_matrix.html#a2954781bf8e8fd338714246fd10bae88" target="_top" xlink:title="Method to get a column out of the matrix. ">
+<polygon fill="white" stroke="black" points="152,-290.5 152,-309.5 296,-309.5 296,-290.5 152,-290.5"/>
+<text text-anchor="middle" x="224" y="-297.5" font-family="Helvetica,sans-Serif" font-size="10.00">sequencesMatrix::getColumn</text>
 </a>
 </g>
 </g>
@@ -30,9 +30,9 @@
 </g>
 <!-- Node14 -->
 <g id="node3" class="node"><title>Node14</title>
-<g id="a_node3"><a xlink:href="classnew_alignment.html#acfd820148c267a3d698a39758ecf190d" target="_top" xlink:title="Number of sequences getter. ">
-<polygon fill="white" stroke="black" points="147,-252.5 147,-271.5 301,-271.5 301,-252.5 147,-252.5"/>
-<text text-anchor="middle" x="224" y="-259.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getNumSpecies</text>
+<g id="a_node3"><a xlink:href="classnew_alignment.html#ad08d05c08eb66665defed4a16ab08e91" target="_top" xlink:title="Residues number getter. It counts gaps as residue. ">
+<polygon fill="white" stroke="black" points="148,-252.5 148,-271.5 300,-271.5 300,-252.5 148,-252.5"/>
+<text text-anchor="middle" x="224" y="-259.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getNumAminos</text>
 </a>
 </g>
 </g>
@@ -43,30 +43,30 @@
 </g>
 <!-- Node15 -->
 <g id="node4" class="node"><title>Node15</title>
-<g id="a_node4"><a xlink:href="classutils.html#aac322cd1761fddedec8a5792e358eb32" target="_top" xlink:title="Vector initialization. ">
-<polygon fill="white" stroke="black" points="186,-214.5 186,-233.5 262,-233.5 262,-214.5 186,-214.5"/>
-<text text-anchor="middle" x="224" y="-221.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::initlVect</text>
+<g id="a_node4"><a xlink:href="classnew_alignment.html#acfd820148c267a3d698a39758ecf190d" target="_top" xlink:title="Number of sequences getter. ">
+<polygon fill="white" stroke="black" points="147,-214.5 147,-233.5 301,-233.5 301,-214.5 147,-214.5"/>
+<text text-anchor="middle" x="224" y="-221.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getNumSpecies</text>
 </a>
 </g>
 </g>
 <!-- Node12&#45;&gt;Node15 -->
 <g id="edge3" class="edge"><title>Node12&#45;&gt;Node15</title>
-<path fill="none" stroke="midnightblue" d="M81.5099,-173.017C99.2828,-183.178 123.986,-196.285 147,-205 156.157,-208.467 166.174,-211.487 175.843,-214.037"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="175.192,-217.482 185.743,-216.523 176.897,-210.693 175.192,-217.482"/>
+<path fill="none" stroke="midnightblue" d="M81.5099,-173.017C99.2828,-183.178 123.986,-196.285 147,-205 153.495,-207.459 160.422,-209.694 167.351,-211.695"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="166.885,-215.196 177.455,-214.458 168.733,-208.444 166.885,-215.196"/>
 </g>
 <!-- Node16 -->
 <g id="node5" class="node"><title>Node16</title>
-<g id="a_node5"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
-<polygon fill="white" stroke="black" points="166,-165 166,-195 282,-195 282,-165 166,-165"/>
-<text text-anchor="start" x="174" y="-183" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
-<text text-anchor="middle" x="224" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
+<g id="a_node5"><a xlink:href="classnew_alignment.html#ac3d5c9670904bba45707746640aac382" target="_top" xlink:title="Method to map two sets of sequences, own and external. The method accepts a vector of names...">
+<polygon fill="white" stroke="black" points="153.5,-165 153.5,-195 294.5,-195 294.5,-165 153.5,-165"/>
+<text text-anchor="start" x="161.5" y="-183" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getSequence</text>
+<text text-anchor="middle" x="224" y="-172" font-family="Helvetica,sans-Serif" font-size="10.00">NameOrder</text>
 </a>
 </g>
 </g>
 <!-- Node12&#45;&gt;Node16 -->
 <g id="edge4" class="edge"><title>Node12&#45;&gt;Node16</title>
-<path fill="none" stroke="midnightblue" d="M111.018,-165.204C125.274,-167.087 140.811,-169.14 155.648,-171.101"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="155.412,-174.6 165.784,-172.44 156.329,-167.66 155.412,-174.6"/>
+<path fill="none" stroke="midnightblue" d="M111.018,-165.204C121.402,-166.576 132.465,-168.037 143.443,-169.488"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="143.106,-172.974 153.478,-170.814 144.023,-166.034 143.106,-172.974"/>
 </g>
 <!-- Node17 -->
 <g id="node6" class="node"><title>Node17</title>
@@ -83,43 +83,43 @@
 </g>
 <!-- Node18 -->
 <g id="node7" class="node"><title>Node18</title>
-<g id="a_node7"><a xlink:href="classnew_alignment.html#ac3d5c9670904bba45707746640aac382" target="_top" xlink:title="Method to map two sets of sequences, own and external. The method accepts a vector of names...">
-<polygon fill="white" stroke="black" points="153.5,-77 153.5,-107 294.5,-107 294.5,-77 153.5,-77"/>
-<text text-anchor="start" x="161.5" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::getSequence</text>
-<text text-anchor="middle" x="224" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">NameOrder</text>
+<g id="a_node7"><a xlink:href="classutils.html#aac322cd1761fddedec8a5792e358eb32" target="_top" xlink:title="Vector initialization. ">
+<polygon fill="white" stroke="black" points="186,-88.5 186,-107.5 262,-107.5 262,-88.5 186,-88.5"/>
+<text text-anchor="middle" x="224" y="-95.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::initlVect</text>
 </a>
 </g>
 </g>
 <!-- Node12&#45;&gt;Node18 -->
 <g id="edge6" class="edge"><title>Node12&#45;&gt;Node18</title>
-<path fill="none" stroke="midnightblue" d="M87.5587,-142.929C104.863,-134.787 126.91,-124.829 147,-117 152.775,-114.749 158.847,-112.524 164.935,-110.383"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="166.162,-113.662 174.477,-107.097 163.882,-107.044 166.162,-113.662"/>
+<path fill="none" stroke="midnightblue" d="M86.1125,-142.947C103.525,-134.513 126.15,-124.263 147,-117 156.246,-113.779 166.303,-110.867 175.982,-108.345"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="177.035,-111.69 185.883,-105.862 175.332,-104.9 177.035,-111.69"/>
 </g>
 <!-- Node19 -->
 <g id="node8" class="node"><title>Node19</title>
-<g id="a_node8"><a xlink:href="classsequences_matrix.html#a8b3882d2dcc73938707486c189908abf" target="_top" xlink:title="Method that reorders the stored sequences with a given order list. ">
-<polygon fill="white" stroke="black" points="157,-38.5 157,-57.5 291,-57.5 291,-38.5 157,-38.5"/>
-<text text-anchor="middle" x="224" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">sequencesMatrix::setOrder</text>
+<g id="a_node8"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
+<polygon fill="white" stroke="black" points="166,-39 166,-69 282,-69 282,-39 166,-39"/>
+<text text-anchor="start" x="174" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
+<text text-anchor="middle" x="224" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
 </a>
 </g>
 </g>
 <!-- Node12&#45;&gt;Node19 -->
 <g id="edge7" class="edge"><title>Node12&#45;&gt;Node19</title>
-<path fill="none" stroke="midnightblue" d="M67.5746,-142.803C83.0717,-122.65 113.155,-87.377 147,-68 151.736,-65.2884 156.848,-62.9359 162.102,-60.8965"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="163.378,-64.1581 171.663,-57.5537 161.068,-57.5503 163.378,-64.1581"/>
+<path fill="none" stroke="midnightblue" d="M70.1405,-142.873C86.7425,-125.285 116.373,-96.4437 147,-79 150.838,-76.8142 154.895,-74.7857 159.057,-72.9092"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="160.421,-76.1324 168.294,-69.0417 157.718,-69.6756 160.421,-76.1324"/>
 </g>
 <!-- Node20 -->
 <g id="node9" class="node"><title>Node20</title>
-<g id="a_node9"><a xlink:href="classsequences_matrix.html#a2954781bf8e8fd338714246fd10bae88" target="_top" xlink:title="Method to get a column out of the matrix. ">
-<polygon fill="white" stroke="black" points="152,-0.5 152,-19.5 296,-19.5 296,-0.5 152,-0.5"/>
-<text text-anchor="middle" x="224" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">sequencesMatrix::getColumn</text>
+<g id="a_node9"><a xlink:href="classsequences_matrix.html#a8b3882d2dcc73938707486c189908abf" target="_top" xlink:title="Method that reorders the stored sequences with a given order list. ">
+<polygon fill="white" stroke="black" points="157,-0.5 157,-19.5 291,-19.5 291,-0.5 157,-0.5"/>
+<text text-anchor="middle" x="224" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">sequencesMatrix::setOrder</text>
 </a>
 </g>
 </g>
 <!-- Node12&#45;&gt;Node20 -->
 <g id="edge8" class="edge"><title>Node12&#45;&gt;Node20</title>
-<path fill="none" stroke="midnightblue" d="M62.711,-142.997C74.7527,-115.835 103.933,-58.5906 147,-29 149.89,-27.0143 152.969,-25.2359 156.169,-23.6432"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="157.664,-26.81 165.453,-19.628 154.885,-20.3851 157.664,-26.81"/>
+<path fill="none" stroke="midnightblue" d="M62.9713,-142.739C75.239,-115.702 104.508,-59.4677 147,-30 150.532,-27.5508 154.345,-25.4016 158.317,-23.5155"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="159.92,-26.6399 167.815,-19.5751 157.237,-20.1742 159.92,-26.6399"/>
 </g>
 </g>
 </svg>

@@ -1,5 +1,0 @@
-<map id="trimAlManager::in_argument" name="trimAlManager::in_argument">
-<area shape="rect" id="node2" href="$class_read_write_m_s.html#a9dde337280e5598f9006b3b436112caf" title="Function that creates an alignment from a filepath. It automatically detects the format of the file..." alt="" coords="239,63,433,90"/>
-<area shape="rect" id="node3" href="$class____internal_report_1_1____report_system.html#a94ce85b97d7b6c3e5fbda0d30a35edd0" title="Method to report an Error. It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR. " alt="" coords="481,5,636,47"/>
-<area shape="rect" id="node4" href="$class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="486,71,631,112"/>
-</map>

@@ -1,10 +1,10 @@
 <map id="utils::min" name="utils::min">
-<area shape="rect" id="node2" href="$class_cleaner.html#ae2328fe8c189e2827b46e5dfb8e3deb3" title="Method to trim an alignment based on consistency values obtained from a dataset of alignments..." alt="" coords="159,19,339,46"/>
-<area shape="rect" id="node6" href="$classnew_alignment.html#ae8501233fe4f4ef6bfe30c99c744c7c2" title="Function to check CDS file. . " alt="" coords="128,75,371,102"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" title="Method to trim the alignment using non automatic methods: " alt="" coords="419,5,621,47"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from. " alt="" coords="671,5,817,47"/>
-<area shape="rect" id="node5" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="899,13,1057,39"/>
-<area shape="rect" id="node7" href="$classtrim_al_manager.html#ad96c97918919040f8986ba8c26a1f728" title="Method to check if the origAlig and backtranslationAlig are compatible in names to make the backtrans..." alt="" coords="445,71,595,127"/>
-<area shape="rect" id="node8" href="$classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="669,79,819,120"/>
-<area shape="rect" id="node9" href="$classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="867,86,1089,113"/>
+<area shape="rect" id="node2" href="$classnew_alignment.html#ae8501233fe4f4ef6bfe30c99c744c7c2" title="Function to check CDS file. . " alt="" coords="128,27,371,53"/>
+<area shape="rect" id="node6" href="$class_cleaner.html#ae2328fe8c189e2827b46e5dfb8e3deb3" title="Method to trim an alignment based on consistency values obtained from a dataset of alignments..." alt="" coords="159,83,339,109"/>
+<area shape="rect" id="node3" href="$classtrim_al_manager.html#ad96c97918919040f8986ba8c26a1f728" title="Method to check if the origAlig and backtranslationAlig are compatible in names to make the backtrans..." alt="" coords="445,5,595,61"/>
+<area shape="rect" id="node4" href="$classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="669,13,819,54"/>
+<area shape="rect" id="node5" href="$classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="867,20,1089,47"/>
+<area shape="rect" id="node7" href="$classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" title="Method to trim the alignment using non automatic methods: " alt="" coords="419,86,621,127"/>
+<area shape="rect" id="node8" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from. " alt="" coords="671,86,817,127"/>
+<area shape="rect" id="node9" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="899,93,1057,120"/>
 </map>

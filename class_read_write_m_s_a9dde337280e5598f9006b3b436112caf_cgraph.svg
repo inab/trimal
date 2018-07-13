@@ -16,31 +16,31 @@
 </g>
 <!-- Node9 -->
 <g id="node2" class="node"><title>Node9</title>
-<g id="a_node2"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
-<polygon fill="white" stroke="black" points="182,-49.5 182,-79.5 298,-79.5 298,-49.5 182,-49.5"/>
-<text text-anchor="start" x="190" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
-<text text-anchor="middle" x="240" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
+<g id="a_node2"><a xlink:href="class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" target="_top" xlink:title="Function to load a file in the current format and return an alignment object. ">
+<polygon fill="white" stroke="black" points="185.5,-49.5 185.5,-79.5 294.5,-79.5 294.5,-49.5 185.5,-49.5"/>
+<text text-anchor="start" x="193.5" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteBaseState</text>
+<text text-anchor="middle" x="240" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00">::LoadAlignment</text>
 </a>
 </g>
 </g>
 <!-- Node8&#45;&gt;Node9 -->
 <g id="edge1" class="edge"><title>Node8&#45;&gt;Node9</title>
-<path fill="none" stroke="midnightblue" d="M136.85,-49.0227C148.261,-50.7517 160.205,-52.5613 171.737,-54.3086"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="171.33,-57.7868 181.741,-55.8245 172.379,-50.8658 171.33,-57.7868"/>
+<path fill="none" stroke="midnightblue" d="M136.85,-49.0227C149.498,-50.9391 162.8,-52.9545 175.47,-54.8743"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="175.06,-58.3521 185.472,-56.3897 176.109,-51.431 175.06,-58.3521"/>
 </g>
 <!-- Node10 -->
 <g id="node3" class="node"><title>Node10</title>
-<g id="a_node3"><a xlink:href="class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" target="_top" xlink:title="Function to load a file in the current format and return an alignment object. ">
-<polygon fill="white" stroke="black" points="185.5,-0.5 185.5,-30.5 294.5,-30.5 294.5,-0.5 185.5,-0.5"/>
-<text text-anchor="start" x="193.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">ReadWriteBaseState</text>
-<text text-anchor="middle" x="240" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">::LoadAlignment</text>
+<g id="a_node3"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
+<polygon fill="white" stroke="black" points="182,-0.5 182,-30.5 298,-30.5 298,-0.5 182,-0.5"/>
+<text text-anchor="start" x="190" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
+<text text-anchor="middle" x="240" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
 </a>
 </g>
 </g>
 <!-- Node8&#45;&gt;Node10 -->
 <g id="edge2" class="edge"><title>Node8&#45;&gt;Node10</title>
-<path fill="none" stroke="midnightblue" d="M139.686,-29.9456C151.433,-28.237 163.655,-26.4592 175.344,-24.7591"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="176.061,-28.1917 185.453,-23.2886 175.054,-21.2645 176.061,-28.1917"/>
+<path fill="none" stroke="midnightblue" d="M139.686,-29.9456C150.243,-28.4102 161.182,-26.8189 171.774,-25.2783"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="172.406,-28.7233 181.798,-23.8202 171.399,-21.7962 172.406,-28.7233"/>
 </g>
 </g>
 </svg>

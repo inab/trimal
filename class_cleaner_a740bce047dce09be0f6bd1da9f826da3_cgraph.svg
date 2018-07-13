@@ -11,49 +11,49 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-73.5 441,-73.5 441,4 -4,4"/>
 <!-- Node186 -->
 <g id="node1" class="node"><title>Node186</title>
-<polygon fill="#bfbfbf" stroke="black" points="0,-28 0,-47 103,-47 103,-28 0,-28"/>
-<text text-anchor="middle" x="51.5" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanStrict</text>
+<polygon fill="#bfbfbf" stroke="black" points="0,-22.5 0,-41.5 103,-41.5 103,-22.5 0,-22.5"/>
+<text text-anchor="middle" x="51.5" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::cleanStrict</text>
 </g>
 <!-- Node187 -->
 <g id="node2" class="node"><title>Node187</title>
-<g id="a_node2"><a xlink:href="classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" target="_top" xlink:title="Round double to integer method. ">
-<polygon fill="white" stroke="black" points="174,-50 174,-69 250,-69 250,-50 174,-50"/>
-<text text-anchor="middle" x="212" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">utils::roundInt</text>
+<g id="a_node2"><a xlink:href="class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" target="_top" xlink:title="Method that identifies and removes columns and sequences composed only by gaps. ">
+<polygon fill="white" stroke="black" points="139,-39 139,-69 285,-69 285,-39 139,-39"/>
+<text text-anchor="start" x="147" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeAllGapsSeqs</text>
+<text text-anchor="middle" x="212" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">AndCols</text>
 </a>
 </g>
 </g>
 <!-- Node186&#45;&gt;Node187 -->
 <g id="edge1" class="edge"><title>Node186&#45;&gt;Node187</title>
-<path fill="none" stroke="midnightblue" d="M103.086,-44.5214C122.592,-47.2289 144.776,-50.308 163.936,-52.9675"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="163.554,-56.4479 173.94,-54.3561 164.517,-49.5144 163.554,-56.4479"/>
-</g>
-<!-- Node188 -->
-<g id="node3" class="node"><title>Node188</title>
-<g id="a_node3"><a xlink:href="class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" target="_top" xlink:title="Method that identifies and removes columns and sequences composed only by gaps. ">
-<polygon fill="white" stroke="black" points="139,-0.5 139,-30.5 285,-30.5 285,-0.5 139,-0.5"/>
-<text text-anchor="start" x="147" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">Cleaner::removeAllGapsSeqs</text>
-<text text-anchor="middle" x="212" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">AndCols</text>
-</a>
-</g>
-</g>
-<!-- Node186&#45;&gt;Node188 -->
-<g id="edge2" class="edge"><title>Node186&#45;&gt;Node188</title>
-<path fill="none" stroke="midnightblue" d="M103.086,-30.4786C111.38,-29.3274 120.158,-28.109 128.982,-26.8842"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="129.517,-30.3436 138.941,-25.5019 128.554,-23.4101 129.517,-30.3436"/>
+<path fill="none" stroke="midnightblue" d="M103.086,-39.0214C111.38,-40.1726 120.158,-41.391 128.982,-42.6158"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="128.554,-46.0899 138.941,-43.9981 129.517,-39.1564 128.554,-46.0899"/>
 </g>
 <!-- Node189 -->
 <g id="node4" class="node"><title>Node189</title>
-<g id="a_node4"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
-<polygon fill="white" stroke="black" points="321,-0.5 321,-30.5 437,-30.5 437,-0.5 321,-0.5"/>
-<text text-anchor="start" x="329" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
-<text text-anchor="middle" x="379" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
+<g id="a_node4"><a xlink:href="classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" target="_top" xlink:title="Round double to integer method. ">
+<polygon fill="white" stroke="black" points="174,-0.5 174,-19.5 250,-19.5 250,-0.5 174,-0.5"/>
+<text text-anchor="middle" x="212" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">utils::roundInt</text>
 </a>
 </g>
 </g>
-<!-- Node188&#45;&gt;Node189 -->
-<g id="edge3" class="edge"><title>Node188&#45;&gt;Node189</title>
-<path fill="none" stroke="midnightblue" d="M285.371,-15.5C293.651,-15.5 302.07,-15.5 310.286,-15.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="310.559,-19.0001 320.559,-15.5 310.559,-12.0001 310.559,-19.0001"/>
+<!-- Node186&#45;&gt;Node189 -->
+<g id="edge3" class="edge"><title>Node186&#45;&gt;Node189</title>
+<path fill="none" stroke="midnightblue" d="M103.086,-24.9786C122.592,-22.2711 144.776,-19.192 163.936,-16.5325"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="164.517,-19.9856 173.94,-15.1439 163.554,-13.0521 164.517,-19.9856"/>
+</g>
+<!-- Node188 -->
+<g id="node3" class="node"><title>Node188</title>
+<g id="a_node3"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
+<polygon fill="white" stroke="black" points="321,-39 321,-69 437,-69 437,-39 321,-39"/>
+<text text-anchor="start" x="329" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
+<text text-anchor="middle" x="379" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
+</a>
+</g>
+</g>
+<!-- Node187&#45;&gt;Node188 -->
+<g id="edge2" class="edge"><title>Node187&#45;&gt;Node188</title>
+<path fill="none" stroke="midnightblue" d="M285.371,-54C293.651,-54 302.07,-54 310.286,-54"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="310.559,-57.5001 320.559,-54 310.559,-50.5001 310.559,-57.5001"/>
 </g>
 </g>
 </svg>

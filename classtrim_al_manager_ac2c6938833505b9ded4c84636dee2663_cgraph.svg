@@ -11,36 +11,36 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-73.5 292,-73.5 292,4 -4,4"/>
 <!-- Node90 -->
 <g id="node1" class="node"><title>Node90</title>
-<polygon fill="#bfbfbf" stroke="black" points="0,-17 0,-47 112,-47 112,-17 0,-17"/>
-<text text-anchor="start" x="8" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
-<text text-anchor="middle" x="56" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">_backtranslations</text>
+<polygon fill="#bfbfbf" stroke="black" points="0,-22.5 0,-52.5 112,-52.5 112,-22.5 0,-22.5"/>
+<text text-anchor="start" x="8" y="-40.5" font-family="Helvetica,sans-Serif" font-size="10.00">trimAlManager::check</text>
+<text text-anchor="middle" x="56" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">_backtranslations</text>
 </g>
 <!-- Node91 -->
 <g id="node2" class="node"><title>Node91</title>
-<g id="a_node2"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
-<polygon fill="white" stroke="black" points="160,-39 160,-69 276,-69 276,-39 160,-39"/>
-<text text-anchor="start" x="168" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
-<text text-anchor="middle" x="218" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
+<g id="a_node2"><a xlink:href="classnew_alignment.html#ab865e218a05742c00d604f4a71ce9e10" target="_top" xlink:title="isAligned getter. ">
+<polygon fill="white" stroke="black" points="148,-50 148,-69 288,-69 288,-50 148,-50"/>
+<text text-anchor="middle" x="218" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::isFileAligned</text>
 </a>
 </g>
 </g>
 <!-- Node90&#45;&gt;Node91 -->
 <g id="edge1" class="edge"><title>Node90&#45;&gt;Node91</title>
-<path fill="none" stroke="midnightblue" d="M112.063,-39.5712C124.26,-41.2482 137.316,-43.0435 149.932,-44.7781"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="149.546,-48.258 159.93,-46.1528 150.5,-41.3232 149.546,-48.258"/>
+<path fill="none" stroke="midnightblue" d="M112.063,-45.0712C120.379,-46.2146 129.095,-47.4131 137.798,-48.6098"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="137.601,-52.1155 147.985,-50.0104 138.555,-45.1808 137.601,-52.1155"/>
 </g>
 <!-- Node92 -->
 <g id="node3" class="node"><title>Node92</title>
-<g id="a_node3"><a xlink:href="classnew_alignment.html#ab865e218a05742c00d604f4a71ce9e10" target="_top" xlink:title="isAligned getter. ">
-<polygon fill="white" stroke="black" points="148,-0.5 148,-19.5 288,-19.5 288,-0.5 148,-0.5"/>
-<text text-anchor="middle" x="218" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">newAlignment::isFileAligned</text>
+<g id="a_node3"><a xlink:href="class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
+<polygon fill="white" stroke="black" points="160,-0.5 160,-30.5 276,-30.5 276,-0.5 160,-0.5"/>
+<text text-anchor="start" x="168" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">__internalReport::</text>
+<text text-anchor="middle" x="218" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">__reportSystem::report</text>
 </a>
 </g>
 </g>
 <!-- Node90&#45;&gt;Node92 -->
 <g id="edge2" class="edge"><title>Node90&#45;&gt;Node92</title>
-<path fill="none" stroke="midnightblue" d="M112.063,-24.4288C120.379,-23.2854 129.095,-22.0869 137.798,-20.8902"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="138.555,-24.3192 147.985,-19.4896 137.601,-17.3845 138.555,-24.3192"/>
+<path fill="none" stroke="midnightblue" d="M112.063,-29.9288C124.26,-28.2518 137.316,-26.4565 149.932,-24.7219"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="150.5,-28.1768 159.93,-23.3472 149.546,-21.242 150.5,-28.1768"/>
 </g>
 </g>
 </svg>

@@ -1,9 +1,0 @@
-<map id="include/ReadWriteMS/ReadWriteMachineState.h" name="include/ReadWriteMS/ReadWriteMachineState.h">
-<area shape="rect" id="node4" href="$new_alignment_8h.html" title="../../include/newAlignment.h" alt="" coords="544,95,728,121"/>
-<area shape="rect" id="node12" href="$sequences_matrix_8h.html" title="sequencesMatrix.h" alt="" coords="357,177,489,203"/>
-<area shape="rect" id="node14" href="$utils_8h.html" title="../include/utils.h" alt="" coords="205,259,320,285"/>
-<area shape="rect" id="node17" href="$similarity_matrix_8h.html" title="similarityMatrix.h" alt="" coords="473,259,594,285"/>
-<area shape="rect" id="node21" href="$_cleaner_8h.html" title="Cleaner.h" alt="" coords="1159,177,1238,203"/>
-<area shape="rect" id="node23" href="$_statistics_manager_8h.html" title="../include/Statistics\l/StatisticsManager.h" alt="" coords="565,169,707,211"/>
-<area shape="rect" id="node20" href="$defines_8h.html" title="defines.h" alt="" coords="681,333,756,360"/>
-</map>

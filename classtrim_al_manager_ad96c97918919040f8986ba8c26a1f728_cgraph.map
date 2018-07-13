@@ -1,8 +1,8 @@
 <map id="trimAlManager::check_backtranslation_infile_names_corresponde" name="trimAlManager::check_backtranslation_infile_names_corresponde">
-<area shape="rect" id="node2" href="$classnew_alignment.html#acfd820148c267a3d698a39758ecf190d" title="Number of sequences getter. " alt="" coords="223,5,428,32"/>
-<area shape="rect" id="node3" href="$classnew_alignment.html#a0db3e76f82a71c7a2fe5b9279f8fa310" title="Getter for the sequences names. " alt="" coords="228,56,423,83"/>
-<area shape="rect" id="node4" href="$classnew_alignment.html#ae8501233fe4f4ef6bfe30c99c744c7c2" title="Function to check CDS file. . " alt="" coords="204,107,447,133"/>
-<area shape="rect" id="node5" href="$classutils.html#a1dce160519187ef2c6e14beb93a2050d" title="Removes a determined char from the string. " alt="" coords="495,56,649,83"/>
-<area shape="rect" id="node6" href="$classutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f" title="Minimum of two numbers method. " alt="" coords="535,107,609,133"/>
-<area shape="rect" id="node7" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="495,158,649,199"/>
+<area shape="rect" id="node2" href="$classnew_alignment.html#ae8501233fe4f4ef6bfe30c99c744c7c2" title="Function to check CDS file. . " alt="" coords="204,56,447,83"/>
+<area shape="rect" id="node6" href="$classnew_alignment.html#acfd820148c267a3d698a39758ecf190d" title="Number of sequences getter. " alt="" coords="223,107,428,133"/>
+<area shape="rect" id="node7" href="$classnew_alignment.html#a0db3e76f82a71c7a2fe5b9279f8fa310" title="Getter for the sequences names. " alt="" coords="228,157,423,184"/>
+<area shape="rect" id="node3" href="$classutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f" title="Minimum of two numbers method. " alt="" coords="535,5,609,32"/>
+<area shape="rect" id="node4" href="$classutils.html#a1dce160519187ef2c6e14beb93a2050d" title="Removes a determined char from the string. " alt="" coords="495,56,649,83"/>
+<area shape="rect" id="node5" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="495,107,649,149"/>
 </map>

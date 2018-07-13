@@ -1,9 +1,0 @@
-<map id="Catch::Section" name="Catch::Section">
-<area shape="rect" id="node2" href="$class_catch_1_1_non_copyable.html" title="Catch::NonCopyable" alt="" coords="5,243,149,269"/>
-<area shape="rect" id="node3" href="$struct_catch_1_1_section_info.html" title="Catch::SectionInfo" alt="" coords="304,243,435,269"/>
-<area shape="rect" id="node4" href="$struct_catch_1_1_source_line_info.html" title="Catch::SourceLineInfo" alt="" coords="245,139,397,165"/>
-<area shape="rect" id="node12" href="$struct_catch_1_1_counts.html" title="Catch::Counts" alt="" coords="143,191,249,217"/>
-<area shape="rect" id="node7" title="STL class. " alt="" coords="443,139,523,165"/>
-<area shape="rect" id="node8" title="STL class. " alt="" coords="421,5,547,47"/>
-<area shape="rect" id="node9" href="$class_catch_1_1_timer.html" title="Catch::Timer" alt="" coords="561,243,660,269"/>
-</map>

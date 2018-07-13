@@ -1,8 +1,8 @@
 <map id="Cleaner::getCutPointClusters" name="Cleaner::getCutPointClusters">
 <area shape="rect" id="node2" href="$class_cleaner.html#a65d829578be97c192561a129435b3c58" title="Method to calculate identities between the sequences from the alignment. See newAlignment::identities..." alt="" coords="247,5,440,32"/>
-<area shape="rect" id="node5" href="$classutils.html#a1dce160519187ef2c6e14beb93a2050d" title="Removes a determined char from the string. " alt="" coords="266,56,421,83"/>
-<area shape="rect" id="node6" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="290,107,397,133"/>
+<area shape="rect" id="node5" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="290,56,397,83"/>
+<area shape="rect" id="node7" href="$classutils.html#a1dce160519187ef2c6e14beb93a2050d" title="Removes a determined char from the string. " alt="" coords="266,107,421,133"/>
 <area shape="rect" id="node3" href="$classnew_alignment.html#a670d5ef1ced9ed6041c3f6afdbd2cc02" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="488,5,705,32"/>
 <area shape="rect" id="node4" href="$classutils.html#a1f1dcbfa7276e54acec72bdbae1b1255" title="Checks an alignment type. " alt="" coords="753,5,929,32"/>
-<area shape="rect" id="node7" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="554,107,639,133"/>
+<area shape="rect" id="node6" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="554,56,639,83"/>
 </map>

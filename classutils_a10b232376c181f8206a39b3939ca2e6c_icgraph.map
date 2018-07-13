@@ -1,9 +1,0 @@
-<map id="utils::checkFile" name="utils::checkFile">
-<area shape="rect" id="node2" href="$class_fasta_state.html#ac8a1c6fc5fa211720cf10019de34873c" title="Function to load a file in the current format and return an alignment object. " alt="" coords="173,5,353,32"/>
-<area shape="rect" id="node3" href="$class_mega_interleaved_state.html#a85416b4b8ed38e83409636125da0c93c" title="Function to load a file in the current format and return an alignment object. " alt="" coords="188,57,337,98"/>
-<area shape="rect" id="node4" href="$class_mega_sequential_state.html#a200cce920776993c34cafc13b09f942f" title="Function to load a file in the current format and return an alignment object. " alt="" coords="189,122,336,163"/>
-<area shape="rect" id="node5" href="$class_nexus_state.html#a59f9bb6263c831ce04c7d13bdc15d7da" title="Function to load a file in the current format and return an alignment object. " alt="" coords="170,188,355,215"/>
-<area shape="rect" id="node6" href="$class_phylip32_state.html#abbd46868bf830df00dbc0c9f959e0925" title="Function to load a file in the current format and return an alignment object. " alt="" coords="164,239,361,265"/>
-<area shape="rect" id="node7" href="$class_phylip40_state.html#ae66e2812a6f8bc1dec27274e39a4086c" title="Function to load a file in the current format and return an alignment object. " alt="" coords="164,289,361,316"/>
-<area shape="rect" id="node8" href="$class_pir_state.html#acbfe35bc8a24607cb28de32087775d15" title="Function to load a file in the current format and return an alignment object. " alt="" coords="181,340,344,367"/>
-</map>
