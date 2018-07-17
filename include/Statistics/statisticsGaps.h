@@ -46,7 +46,7 @@ public:
 
     int *gapsInColumn = nullptr;
     int *numColumnsWithGaps = nullptr;
-    int *aminosXInColumn = nullptr;
+//    int *aminosXInColumn = nullptr;
     int *gapsWindow = nullptr;
     int *refCounter;
 

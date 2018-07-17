@@ -42,14 +42,13 @@ statisticsGaps::statisticsGaps(newAlignment *parent) {
     maxGaps = 0;
     halfWindow = 0;
 
-
     // Memory allocation for the vectors and its initialization 
-    gapsInColumn = new int[_alignment->originalResidNumber + 1];
+    gapsInColumn = new int[_alignment->originalResidNumber];
 
-    aminosXInColumn = new int[_alignment->originalResidNumber + 1];
-    utils::initlVect(aminosXInColumn, _alignment->originalResidNumber, 0);
+//    aminosXInColumn = new int[_alignment->originalResidNumber];
+//    utils::initlVect(aminosXInColumn, _alignment->originalResidNumber, 0);
 
-    numColumnsWithGaps = new int[_alignment->originalSequenNumber + 1];
+    numColumnsWithGaps = new int[_alignment->originalSequenNumber ];
     utils::initlVect(numColumnsWithGaps, _alignment->originalSequenNumber + 1, 0);
 
     refCounter = new int(1);
@@ -64,7 +63,7 @@ statisticsGaps::statisticsGaps(newAlignment *pAlignment,
     // Pointer initialization
     gapsInColumn            = pGaps->gapsInColumn;
 
-    aminosXInColumn         = pGaps->aminosXInColumn;
+//    aminosXInColumn         = pGaps->aminosXInColumn;
 
     numColumnsWithGaps      = pGaps->numColumnsWithGaps;
 
@@ -87,7 +86,7 @@ statisticsGaps::~statisticsGaps() {
     if (--(*refCounter) == 0) {
         delete[] gapsInColumn;
         delete[] numColumnsWithGaps;
-        delete[] aminosXInColumn;
+//        delete[] aminosXInColumn;
         delete[] gapsWindow;
         delete refCounter;
     }
@@ -597,11 +596,11 @@ void statisticsGaps::printGapsAcl() {
 
 void statisticsGaps::CalculateVectors() {
     int i, j;
-    char indet;
-    if (_alignment->getAlignmentType() & SequenceTypes::DNA)
-        indet = 'X';
-    else
-        indet = 'N';
+//    char indet;
+//    if (_alignment->getAlignmentType() & SequenceTypes::DNA)
+//        indet = 'X';
+//    else
+//        indet = 'N';
     // Count the gaps and indeterminations of each columns
     for (i = 0; i < _alignment->originalResidNumber; i++) {
         if (_alignment->saveResidues[i] == -1) continue;
@@ -610,8 +609,8 @@ void statisticsGaps::CalculateVectors() {
             if (_alignment->saveSequences[j] == -1) continue;
             if (_alignment->sequences[j][i] == '-')
                 gapsInColumn[i]++;
-            else if (_alignment->sequences[j][i] == indet)
-                aminosXInColumn[i]++;
+//            else if (_alignment->sequences[j][i] == indet)
+//                aminosXInColumn[i]++;
         }
 
         // Increase the number of colums with the number of gaps of the last processed column
