@@ -4,7 +4,7 @@ project(trimAl)
 set(CMAKE_CXX_STANDARD 11)
 
 # SET(BUILD_SHARED_LIBRARIES OFF)
-# SET(CMAKE_EXE_LINKER_FLAGS "-static")
+# SET(CMAKE_EXE_LINKER_FLAGS "-static ")
 
 # Make bin folder to output the compiled programs
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
@@ -53,10 +53,13 @@ add_executable(readal
         source/ReadWriteMS/ReadWriteMSmain.cpp
         $<TARGET_OBJECTS:common>)
 
+add_executable(sandbox
+        source/sandbox.cpp
+        $<TARGET_OBJECTS:common>)
+
 # Link the mathematical library
 target_link_libraries(trimal m)
 target_link_libraries(readal m)
-
 
 # Create a header that includes all the ReadWrite States headers
 # It also implements the ReadWriteMS constructor
@@ -88,10 +91,11 @@ ReadWriteMS::ReadWriteMS()
 {
 ")
 
-
 foreach(header_path ${stateheaders})
     get_filename_component(var1 ${header_path} NAME_WE)
     file(APPEND include/ReadWriteMS/formats_header.h "\taddState(new ${var1}(this));\n")
 endforeach()
 
 file(APPEND include/ReadWriteMS/formats_header.h "};")
+
+# End header Creation

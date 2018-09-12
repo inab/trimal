@@ -57,7 +57,7 @@ You can start by taking a look at: \n
 
 <a href="http://www.alanzucconi.com/2015/07/26/enum-flags-and-bitwise-operators/" > 
         - Alan Zucconi </a>: As his post explaining bitwise operators is used as reference explaining #SequenceTypes\n
-*/
 
 <a href="https://github.com/assimilation/assimilation-official">
         - The Assimilation System Management Suite </a>: As their doxygen <a href="https://github.com/assimilation/assimilation-official/blob/master/docfiles/header.html">header.html</a> served us as mold to make ours so it is more mobile-friendly.\n
+*/

@@ -327,16 +327,16 @@ char *utils::readLine(ifstream &file) {
     getline(file, nline);
 
     // Remove blank spaces & tabs from the beginning of the line
-    state = nline.find(" ", 0);
+    state = nline.find(' ', 0);
     while (state != (int) string::npos && state == 0) {
         nline.erase(state, 1);
-        state = nline.find(" ", state);
+        state = nline.find(' ', state);
     }
 
-    state = nline.find("\t", 0);
+    state = nline.find('\t', 0);
     while (state != (int) string::npos && state == 0) {
         nline.erase(state, 1);
-        state = nline.find("\t", state);
+        state = nline.find('\t', state);
     }
 
     /* If there is nothing to return, give back a nullptr pointer ... */
@@ -372,16 +372,16 @@ char *utils::readLine(std::istream &file) {
     getline(file, nline);
     /* Remove blank spaces & tabs from the beginning of the line */
 
-    state = nline.find(" ", 0);
+    state = nline.find(' ', 0);
     while (state != (int) string::npos && state == 0) {
         nline.erase(state, 1);
-        state = nline.find(" ", state);
+        state = nline.find(' ', state);
     }
 
-    state = nline.find("\t", 0);
+    state = nline.find('\t', 0);
     while (state != (int) string::npos && state == 0) {
         nline.erase(state, 1);
-        state = nline.find("\t", state);
+        state = nline.find('\t', state);
     }
 
     // If there is nothing to return, give back a nullptr pointer ...
@@ -408,7 +408,7 @@ char *utils::trimLine(string nline) {
 
     // Identify comments inside of input sequence and remove it
     while (true) {
-        pos = nline.find("\"", (pos + 1));
+        pos = nline.find('\"', (pos + 1));
 
         // When there is not any more a comment inside of sequence,
         // go out from this loop 
@@ -416,10 +416,10 @@ char *utils::trimLine(string nline) {
             break;
 
         // Look for closing flag
-        next = nline.rfind("\"", nline.size());
+        next = nline.rfind('\"', nline.size());
 
         // If a pair of comments flags '"' is found, remove everything inbetween
-        if ((int) nline.find("\"", (pos + 1)) == next) {
+        if ((int) nline.find('\"', (pos + 1)) == next) {
             nline.erase(pos, (next - pos + 1));
             pos = -1;
         }
@@ -439,14 +439,14 @@ char *utils::trimLine(string nline) {
 
         // Search for last opened bracket. It is supposed to be the first one for
         // being close
-        while ((pos = nline.find("[", (pos + 1))) != (int) string::npos)
+        while ((pos = nline.find('[', (pos + 1))) != (int) string::npos)
             next = pos;
 
         // If no opening bracket has been found.
         // Check if there is any closing one
         if (next == -1) {
             // There are not any bracket in input string
-            if ((int) nline.find("]", 0) == (int) string::npos)
+            if ((int) nline.find(']', 0) == (int) string::npos)
                 break;
             // Otherwise, warn about the error
             debug.report(ErrorCode::BracketsMissmatchFound);
@@ -454,7 +454,7 @@ char *utils::trimLine(string nline) {
         }
 
         // Look for closest closing bracket to the opening one found
-        pos = nline.find("]", (next + 1));
+        pos = nline.find(']', (next + 1));
 
         //If no closing bracket has been found. Warn about the mismatch
         if (pos == (int) string::npos) {
@@ -569,7 +569,7 @@ int utils::checkAlignmentType(int seqNumber, int residNumber, string *sequences)
         return (SequenceTypes::RNA | SequenceTypes::DEG);
     else if (gRNA > gDNA)
         return SequenceTypes::RNA;
-    else if (gDNA > gRNA)
+    else if (gDNA >= gRNA)
         return SequenceTypes::DNA;
     else
         return SequenceTypes::NotDefined;

@@ -1,10 +1,11 @@
+#include <TimerFactory.h>
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.4: a tool for automated alignment trimming in large-scale
+    trimAl v1.4: a tool for automated newAlignment  trimming in large-scale
                  phylogenetics analyses.
 
-    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
+    2009-2013 Capella-Gutierrez S. and Gabaldon, T.
               [scapella, tgabaldon]@crg.es
 
     This file is part of trimAl.
@@ -24,51 +25,13 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#ifndef SIMILARITYMATRIX_H
-#define SIMILARITYMATRIX_H
+#include "trimalManager.h"
+#include "../include/reportsystem.h"
 
-#include <cmath>
-#include <cctype>
-#include <cstdlib>
+#include <../include/vcf_statish.h>
 
-#include <string>
-#include <iostream>
-#include <iomanip>
-#include <fstream>
 
-#include "defines.h"
-
-/** \brief Class that contains the similarity information of an alignment */
-class similarityMatrix {
-
-    int *vhash;
-    float **simMat;
-    float **distMat;
-    int numPositions;
-
-private:
-    void memoryAllocation(int);
-
-    void memoryDeletion();
-
-public:
-    similarityMatrix();
-
-    ~similarityMatrix();
-
-    bool loadSimMatrix(char *);
-
-    void defaultAASimMatrix();
-
-    void defaultNTSimMatrix();
-
-    void defaultNTDegeneratedSimMatrix();
-
-    void alternativeSimilarityMatrices(int, int);
-
-    float getDistance(char &, char &);
-
-    void printMatrix();
-};
-
-#endif
+int main(int argc, char *argv[]) {
+    std::cout << "-" << std::endl;
+    std::cout << ((char)std::toupper((unsigned int)('-'))) << std::endl;
+}

@@ -47,125 +47,126 @@
 #include "Cleaner.h"
 
 #include "../include/Statistics/StatisticsManager.h"
+
 using namespace std;
 
 class newAlignment {
 
     int dataType = 0;
-    
+
 public:
 // BEGIN of Submodules
 
-    Cleaner * Cleaning                  = nullptr;
+    Cleaner *Cleaning = nullptr;
 
-    StatisticsManager * Statistics      = nullptr;
+    StatisticsManager *Statistics = nullptr;
 
-    sequencesMatrix * SequencesMatrix   = nullptr;
+    sequencesMatrix *SequencesMatrix = nullptr;
 
 // END of Submodules
-    
-    int * SeqRef                        = nullptr;
-    
-    int originalSequenNumber            = 0;
-    
-    int sequenNumber                    = 0;
-    
-    int originalResidNumber             = 0;
 
-    int residNumber                     = 0;
+    int *SeqRef = nullptr;
 
-    bool isAligned                      = false;
+    int originalSequenNumber = 0;
 
-    string *sequences           = nullptr;
+    int sequenNumber = 0;
 
-    string *seqsName            = nullptr;
+    int originalResidNumber = 0;
 
-    string *seqsInfo            = nullptr;
+    int residNumber = 0;
+
+    bool isAligned = false;
+
+    string *sequences = nullptr;
+
+    string *seqsName = nullptr;
+
+    string *seqsInfo = nullptr;
 
     string filename;
 
     string aligInfo;
 
     /* Sequence Identities */
-    float **identities          = nullptr;
-    
+    float **identities = nullptr;
+
     /* Sequence Overlaps */
-    float **overlaps            = nullptr;
+    float **overlaps = nullptr;
 
     /* New Info */
-    int *saveResidues           = nullptr;
-    int *saveSequences          = nullptr;
+    int *saveResidues = nullptr;
+    int *saveSequences = nullptr;
 
     bool fillMatrices(bool aligned);
-  
- public:
+
+public:
 
     newAlignment();
 
-    newAlignment(newAlignment&);
+    newAlignment(newAlignment &);
 
     ~newAlignment();
 
     int getNumSpecies();
 
-    void getSequences(string * names);
+    void getSequences(string *names);
 
-    void getSequences(string * names, int * lengths);
+    void getSequences(string *names, int *lengths);
 
-    void getSequences(string * names, string * sequences, int * lenghts);
+    void getSequences(string *names, string *sequences, int *lenghts);
 
-    bool getSequenceNameOrder(string * names, int * orderVector);
+    bool getSequenceNameOrder(string *names, int *orderVector);
 
     int getNumAminos();
 
     void setWindowsSize(int ghWindow, int shWindow);
-    
+
     void setBlockSize(int blockSize);
 
-    int getBlockSize();
-    
-    void calculateSeqIdentity();
-      
-    void calculateRelaxedSeqIdentity();
-    
+//    int getBlockSize();
+
+//    void calculateSeqIdentity();
+
+//    void calculateRelaxedSeqIdentity();
+
     void calculateSeqOverlap();
 
     void printSeqIdentity();
-    
+
     void printSeqOverlap();
 
     int getAlignmentType();
 
-    int *getCorrespResidues();
+//    int *getCorrespResidues();
 
-    int *getCorrespSequences();
+//    int *getCorrespSequences();
 
     bool isFileAligned();
 
-    newAlignment * getTranslationCDS(newAlignment * proteinAlignment);
+    newAlignment *getTranslationCDS(newAlignment *proteinAlignment);
 
-    bool checkCorrespondence(string * names, int * lenghts, int totalInputSequences, int multiple);
+    bool checkCorrespondence(string *names, int *lenghts, int totalInputSequences, int multiple);
 
-    void fillNewDataStructure(string * newMatrix, string * newNames);
+//    void fillNewDataStructure(string *newMatrix, string *newNames);
 
-    void calculateColIdentity(float * columnIdentity);
+    void calculateColIdentity(float *columnIdentity);
 
-    void printColumnsIdentity_DescriptiveStats();
+//    void printColumnsIdentity_DescriptiveStats();
 
     void setKeepSequencesFlag(bool newFlagValue);
 
-    void setKeepSeqsHeaderFlag(bool newFlagValue);
+//    void setKeepSeqsHeaderFlag(bool newFlagValue);
 
-    void printAlignmentInfo(ostream & output);
+    void printAlignmentInfo(ostream &output);
 
-    bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, newAlignment * proteinAlignment);
+    bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, newAlignment *proteinAlignment);
 
     bool alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *destFile);
-    
+
     bool alignmentSummarySVG(newAlignment &_trimmedAlignment, char *destFile, int blocks);
 
-    bool alignmentColourHTML(ostream &file);
-    
+//    bool alignmentColourHTML(ostream &file);
+
     void updateSequencesAndResiduesNums(bool countSequences = true, bool countResidues = true);
 
 };

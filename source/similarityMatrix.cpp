@@ -430,7 +430,7 @@ void similarityMatrix::printMatrix() {
     }
 }
 
-float similarityMatrix::getDistance(char a, char b) {
+float similarityMatrix::getDistance(char &a, char &b) {
 	 // Create a timerLevel that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("float similarityMatrix::getDistance(char a, char b) ");
@@ -461,6 +461,6 @@ float similarityMatrix::getDistance(char a, char b) {
         return -1;
     }
 
-    // Return the distance value between a and b 
+    // Return the distance value between a and b
     return distMat[numa][numb];
 }

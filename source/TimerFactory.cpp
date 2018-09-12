@@ -120,9 +120,13 @@ Timer::~Timer() {
         timerFactory->relativeDuration[timerFactory->_pool.back()->name] += duration;
     timerFactory->totalDuration[name] += duration;
 #if BenchmarkTimes
-    *timerFactory->out /*<< " " << this->name*/ << " duration: "
-                                                << duration;
+        *timerFactory->out /*<< " " << this->name*/ << " duration: "
+                                                << duration
 #endif
+#if BenchmarkMemory
+    << " " << currentMemoryUsage() << " kb"
+#endif
+            ;
     if (timerFactory->timesStepRepeated > 1)
         *timerFactory->out << ". " << timerFactory->timesStepRepeated << " repetitions";
     *timerFactory->out << "\n";
@@ -136,10 +140,9 @@ Timer::~Timer() {
 
 int Timer::currentMemoryUsage() {
     std::ifstream proc_status_fhandle("/proc/self/status");
+    proc_status_fhandle.seekg(0);
     std::string s;
-    int line = 0;
     while (std::getline(proc_status_fhandle, s)) {
-        ++line;
         if (!s.compare(0, 6, "VmRSS:")) {
             int value = atoi(&(s.substr(7, std::string::npos))[0]);
             return value;

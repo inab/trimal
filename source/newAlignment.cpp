@@ -138,7 +138,7 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
 newAlignment::~newAlignment() {
     // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("newAlignment::~newAlignment(void) " + std::to_string(reinterpret_cast<uintptr_t>(this)));
+    StartTiming("newAlignment::~newAlignment(void) ");
     int i;
 
     delete[] saveResidues;
@@ -283,22 +283,23 @@ void newAlignment::setKeepSequencesFlag(bool flag) {
     StartTiming("void newAlignment::setKeepSequencesFlag(bool flag) ");
     Cleaning->keepSequences = flag;
 }
-
+/*
 void newAlignment::setKeepSeqsHeaderFlag(bool newFlagValue) {
     // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::setKeepSeqsHeaderFlag(bool flag) ");
     Cleaning->keepSequences = newFlagValue;
 }
-
-
+*/
+/*
 int newAlignment::getBlockSize() {
     // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int newAlignment::getBlockSize(void) ");
     return Cleaning->blockSize;
 }
-
+ */
+/*
 void newAlignment::calculateSeqIdentity() {
     // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
@@ -342,7 +343,8 @@ void newAlignment::calculateSeqIdentity() {
         }
     }
 }
-
+ */
+/*
 void newAlignment::calculateRelaxedSeqIdentity() {
     // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
@@ -377,7 +379,7 @@ void newAlignment::calculateRelaxedSeqIdentity() {
         }
     }
 }
-
+*/
 
 void newAlignment::calculateSeqOverlap() {
     // Create a timerLevel that will report times upon its destruction
@@ -478,28 +480,29 @@ int newAlignment::getAlignmentType() {
         dataType = utils::checkAlignmentType(sequenNumber, residNumber, sequences);
     return dataType;
 }
-
+/*
 int *newAlignment::getCorrespResidues() {
     // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int *newAlignment::getCorrespResidues(void) ");
     return saveResidues;
 }
-
+*/
+/*
 int *newAlignment::getCorrespSequences() {
     // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int *newAlignment::getCorrespSequences(void) ");
     return saveSequences;
 }
-
+*/
 bool newAlignment::isFileAligned() {
     // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool newAlignment::isFileAligned(void) ");
     return isAligned;
 }
-
+/*
 void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) {
     // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
@@ -521,7 +524,7 @@ void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) {
         j++;
     }
 }
-
+*/
 bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, newAlignment *proteinAlig) {
     // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
@@ -1101,7 +1104,7 @@ void newAlignment::calculateColIdentity(float *ColumnIdentities) {
             ColumnIdentities[i] = float(max) / columnLen;
     }
 }
-
+/*
 void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
     // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
@@ -1141,6 +1144,7 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
     cout << "#avgColIdentity\t" << avg << endl;
     cout << "#stdColIdentity\t" << std << endl;
 }
+ */
 
 bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *destFile) {
     // Create a timerLevel that will report times upon its destruction
@@ -2040,7 +2044,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
 
     return true;
 }
-
+/*
 bool newAlignment::alignmentColourHTML(ostream &file) {
     // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.
@@ -2123,6 +2127,7 @@ bool newAlignment::alignmentColourHTML(ostream &file) {
 
     return true;
 }
+ */
 
 void newAlignment::updateSequencesAndResiduesNums(bool countSequences, bool countResidues) {
     // Create a timerLevel that will report times upon its destruction

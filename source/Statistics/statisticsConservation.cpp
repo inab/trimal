@@ -104,13 +104,13 @@ void statisticsConservation::calculateMatrixIdentity() {
     int i, j, k, sum, length;
 
     // Allocate memory for the matrix identity
-    matrixIdentity = new float *[_alignment->originalSequenNumber + 1];
+    matrixIdentity = new float *[_alignment->originalSequenNumber];
     for (i = 0; i < _alignment->originalSequenNumber; i++) {
         if (_alignment->saveSequences[i] == -1)
             matrixIdentity[i] = nullptr;
         else {
             matrixIdentity[i] = new float[_alignment->originalSequenNumber];
-            utils::initlVect(matrixIdentity[i], _alignment->originalSequenNumber, 0);
+            utils::initlVect(matrixIdentity[i], _alignment->originalSequenNumber , 0);
         }
     }
 
@@ -124,25 +124,28 @@ void statisticsConservation::calculateMatrixIdentity() {
             if (_alignment->saveSequences[j] == -1) continue;
             // For each position in the alignment of that pair than we are processing
             for (k = 0, sum = 0, length = 0; k < _alignment->originalResidNumber; k++) {
-                if (_alignment->saveResidues[k] == -1) continue;
-
                 // If we find a element that is not a gap or an X aminoacid in the first sequence of the pair 
-                if ((_alignment->sequences[i][k] != '-') && (_alignment->sequences[i][k] != indet)) {
+                if ((_alignment->sequences[i][k] != '-') &&
+                    (_alignment->sequences[i][k] != indet)) {
 
                     // If we also find a valid element in the second sequence  
-                    if ((_alignment->sequences[j][k] != '-') && (_alignment->sequences[j][k] != indet))
-
-                        // If the two valid elements are the same increase the sum 
+                    if ((_alignment->sequences[j][k] != '-') &&
+                        (_alignment->sequences[j][k] != indet))
+                    {
+                        // If the two valid elements are the same increase the sum
                         if (_alignment->sequences[j][k] == _alignment->sequences[i][k])
                             sum++;
-
-                    // Increase the length of the sequence free of gaps and X elements 
+                    }
+                    // Increase the length of the sequence free of gaps and X elements
                     length++;
                 }
-                    // If the first processed element is invalid and in the second we find a valid element increase the length of
-                    // the sequence free of gaps and X elements
-                else if ((_alignment->sequences[j][k] != '-') && (_alignment->sequences[j][k] != indet))
+                // If the first processed element is invalid and in the second we find a valid element increase the length of
+                // the sequence free of gaps and X elements
+                else if ((_alignment->sequences[j][k] != '-') &&
+                         (_alignment->sequences[j][k] != indet))
+                {
                     length++;
+                }
             }
 
             // Calculate the value of matrix idn for columns j and i
@@ -171,78 +174,104 @@ bool statisticsConservation::calculateVectors(bool cutByGap) {
     // Retrieve the gaps values in case we want to set to 0 the similarity value
     // in case the gaps value for that column is bigger or equal to 0.8F
     if (cutByGap)
+    {
+        if (_alignment->Statistics->gaps == nullptr)
+            _alignment->Statistics->calculateGapStats();
         gaps = _alignment->Statistics->gaps->getGapsWindow();
+    }
 
     // Initialize the variables used
-    char indet;
     int i, j, k;
     float num, den;
 
-    // Depending on alignment type, indetermination symbol will be one or other 
-    indet = _alignment->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
+    // Depending on alignment type, indetermination symbol will be one or other
+    char indet = _alignment->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
-    // Initialize Q vector
-
+    // Q temporal value
     float Q;
+    // Temporal chars that will contain the residues to compare by pair.
     char chA, chB;
 
+    // Calculate the maximum number of gaps a column can have to calculate it's
+    //      conservation
     float gapThreshold = 0.8F * _alignment->residNumber;
+
     // For each column calculate the Q value and the MD value using an equation 
     for (i = 0; i < _alignment->originalResidNumber; i++) {
         // Set MDK for columns with gaps values bigger or equal to 0.8F
-        if (cutByGap) {
-            if (gaps[i] >= gapThreshold) {
-                MDK[i] = 0.F;
-                continue;
-            }
+        if (cutByGap && gaps[i] >= gapThreshold) {
+            MDK[i] = 0.F;
+            continue;
         }
-
         // For each AAs/Nucleotides' pair in the column we compute its distance
         for (j = 0, num = 0, den = 0; j < _alignment->originalSequenNumber; j++) {
-            if (_alignment->saveSequences[j] == -1)
-                continue;
-            // We don't compute the distance if the first element is
-            // a indeterminate (X) or a gap (-) element.
-            if ((_alignment->sequences[j][i] == '-') ||
-                (_alignment->sequences[j][i] == indet))
-                continue;
+            // Skip sequences that have been rejected
+//            if (_alignment->saveSequences[j] == -1)
+//                continue;
+            // Calculate the upper value of the residue,
+            //      to use in simMatrix->getDistance
+            // This is faster than calculating the upper on that method
+            //      as this is done before entering the loop
+            // Doing this before checking if the element is indeterminate or gap
+            //      allows to check if the indetermination is not capitalized
             chA = (char) std::toupper((unsigned char) _alignment->sequences[j][i]);
 
-            for (k = j + 1; k < _alignment->originalSequenNumber; k++) {
-                if (_alignment->saveSequences[k] == -1)
-                    continue;
-                // We don't compute the distance if the second element is
-                // a indeterminate or a gap element
-                if ((_alignment->sequences[k][i] == '-') ||
-                    (_alignment->sequences[k][i] == indet))
-                    continue;
+            // We don't compute the distance if the first element is
+            // a indeterminate (XN) or a gap (-) element.
+            if ((chA == '-') || (chA == indet))
+                continue;
 
+            for (k = j + 1; k < _alignment->originalSequenNumber; k++) {
+//                if (_alignment->saveSequences[k] == -1)
+//                    continue;
+
+                // We calculate the upper value of the residue,
+                //      to use in simMatrix->getDistance
+                // This is equally faster as if it was done inside the method
+                //      but to prevent errors, the method doesn't 'upper'
+                //      the given chars.
+                // Doing this before checking if the element is indeterminate or gap
+                //      allows to check if the indetermination is not capitalized
                 chB = (char) std::toupper((unsigned char) _alignment->sequences[k][i]);
 
+                // We don't compute the distance if the second element is
+                //      a indeterminate (XN) or a gap (-) element
+                if ((chB == '-') || (chB == indet))
+                    continue;
+
                 // We use the identity value for the two pairs and
-                // its distance based on similarity matrix's value.
+                //      its distance based on similarity matrix's value.
                 num += matrixIdentity[j][k] * simMatrix->getDistance(chA, chB);
                 den += matrixIdentity[j][k];
             }
         }
 
         // If we are processing a column with only one AA/nucleotide,
-        // the denominator is 0 and we don't execute the division
-        // and we set the Q[i] value to 0. 
-        Q = (den == 0) ? 0 : num / den;
-//        MDK[i] = exp(-Q);
-
-        // If the MDK value is more than 1, we normalized this value to 1. 
-        MDK[i] = std::min(exp(-Q), 1.F);
+        //      the denominator is 0 and we don't execute the division
+        //      and we set the Q[i] value to 0.
+        // As we already know the value of exp(-0) = 1, we use it directly.
+        if (den == 0)
+            MDK[i] = 1;
+        else
+        {
+            Q = num / den;
+            // If the MDK value is more than 1, we normalized this value to 1.
+            //      Only numbers higher than 0 yield exponents higher than 1
+            //      Using this we can test if the result is going to be higher than 1.
+            //      And thus, prevent calculating the exp.
+            // Take in mind that the Q is negative, so we must test if Q is LESSER
+            //      than one, not bigger.
+            if (Q < 0)
+                MDK[i] = 1.F;
+            else
+                MDK[i] = exp(-Q);
+        }
     }
 
     for (i = 0; i < _alignment->originalSequenNumber; i++)
         delete[] matrixIdentity[i];
     delete[] matrixIdentity;
     matrixIdentity = nullptr;
-
-//    delete[] Q;
-//    Q = nullptr;
 
     return true;
 }
@@ -292,9 +321,12 @@ bool statisticsConservation::applyWindow(int _halfWindow) {
     for (i = 0; i < _alignment->originalResidNumber; i++) {
         MDK_Window[i] = 0.F;
         for (j = i - halfWindow; j <= i + halfWindow; j++) {
-            if (j < 0) MDK_Window[i] += MDK[-j];
-            else if (j >= _alignment->originalResidNumber) MDK_Window[i] += MDK[((2 * _alignment->originalResidNumber - j) - 2)];
-            else MDK_Window[i] += MDK[j];
+            if (j < 0)
+                MDK_Window[i] += MDK[-j];
+            else if (j >= _alignment->originalResidNumber)
+                MDK_Window[i] += MDK[((2 * _alignment->originalResidNumber - j) - 2)];
+            else
+                MDK_Window[i] += MDK[j];
         }
 
         // Calculate the average value, by dividing the values

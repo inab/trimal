@@ -345,7 +345,8 @@ int main(int argc, char *argv[])
             newAlignment* alignment = MachineState.loadAlignment(str);
             if (alignment != nullptr)
             {
-                cout << "## Alignment File: " << str << endl;
+
+                cout << "## Alignment File:\t" << str << endl;
                 
                 if (MachineState.format)
                     /* Inform about if sequences are aligned or not */

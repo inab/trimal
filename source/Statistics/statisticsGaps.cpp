@@ -44,11 +44,9 @@ statisticsGaps::statisticsGaps(newAlignment *parent) {
 
     // Memory allocation for the vectors and its initialization 
     gapsInColumn = new int[_alignment->originalResidNumber];
+    utils::initlVect(gapsInColumn, _alignment->originalResidNumber, 0);
 
-//    aminosXInColumn = new int[_alignment->originalResidNumber];
-//    utils::initlVect(aminosXInColumn, _alignment->originalResidNumber, 0);
-
-    numColumnsWithGaps = new int[_alignment->originalSequenNumber ];
+    numColumnsWithGaps = new int[_alignment->originalSequenNumber + 1];
     utils::initlVect(numColumnsWithGaps, _alignment->originalSequenNumber + 1, 0);
 
     refCounter = new int(1);
@@ -62,8 +60,6 @@ statisticsGaps::statisticsGaps(newAlignment *pAlignment,
 
     // Pointer initialization
     gapsInColumn            = pGaps->gapsInColumn;
-
-//    aminosXInColumn         = pGaps->aminosXInColumn;
 
     numColumnsWithGaps      = pGaps->numColumnsWithGaps;
 
@@ -86,7 +82,6 @@ statisticsGaps::~statisticsGaps() {
     if (--(*refCounter) == 0) {
         delete[] gapsInColumn;
         delete[] numColumnsWithGaps;
-//        delete[] aminosXInColumn;
         delete[] gapsWindow;
         delete refCounter;
     }
@@ -207,7 +202,6 @@ double statisticsGaps::calcCutPoint(float minInputAlignment, float gapThreshold)
     // We look at the number of gaps which allows us to keep the minimum columns
     // number from the input alignment
     for (i = 0, acum = 0; i < _alignment->originalSequenNumber; i++) {
-//        if (_alignment->saveSequences[i] == -1) continue;
         acum += numColumnsWithGaps[i];
         if (acum >= cuttingPoint_MinimumConserv)
             break;
@@ -328,7 +322,7 @@ int statisticsGaps::calcCutPoint2ndSlope() {
     // We build one slope vector and fix the maximum iterations' number
     // as the gaps'number plus 1.
     secondSlopeVector = new float[maxGaps + 1];
-    utils::initlVect(secondSlopeVector, maxGaps, -1.0F);
+    utils::initlVect(secondSlopeVector, maxGaps + 1, -1.0F);
     maxIter = maxGaps + 1;
 
     // Find the lowest number of gaps into the input alignment. If there are few
@@ -596,21 +590,13 @@ void statisticsGaps::printGapsAcl() {
 
 void statisticsGaps::CalculateVectors() {
     int i, j;
-//    char indet;
-//    if (_alignment->getAlignmentType() & SequenceTypes::DNA)
-//        indet = 'X';
-//    else
-//        indet = 'N';
     // Count the gaps and indeterminations of each columns
     for (i = 0; i < _alignment->originalResidNumber; i++) {
-        if (_alignment->saveResidues[i] == -1) continue;
         gapsInColumn[i] = 0;
         for (j = 0; j < _alignment->originalSequenNumber; j++) {
             if (_alignment->saveSequences[j] == -1) continue;
             if (_alignment->sequences[j][i] == '-')
                 gapsInColumn[i]++;
-//            else if (_alignment->sequences[j][i] == indet)
-//                aminosXInColumn[i]++;
         }
 
         // Increase the number of colums with the number of gaps of the last processed column
