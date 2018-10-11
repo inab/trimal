@@ -1,4 +1,3 @@
-#include <TimerFactory.h>
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
@@ -25,37 +24,33 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
+#include "TimerFactory.h"
+#include "reportsystem.h"
 #include "trimalManager.h"
-#include "../include/reportsystem.h"
-
-#include <../include/vcf_statish.h>
-
 
 int main(int argc, char *argv[]) {
 
-#if TimingReport
     // We have to check the output parameter of the timerFactory
-    //  before it's called the first time, AKA main function timer
-    timerFactory.checkOutputParameter(argc, argv);
-#endif
+    //  before it's called the first time
+    #if TimingReport
+        timerFactory.checkOutputParameter(argc, argv);
+    #endif
 
-    // This is to prevent debug messages.
-    // They will be silenced to the final user
-    //  even they appear in code.
+    // Debug tag to prevent Debug Messages to be printed on user side
     debug.IsDebug = true;
 
-    // We store the return value before returning if as program exit code
-    //  to allow the main function timer to be deleted.
+    // To allow timing the whole program, we must encapsulate
+    //  inside it's own scope. Thus, we store the returnValue outside
+    //  the scope.
     int returnValue;
     {
-        // Create a timerLevel that will report times upon its destruction
-        //	which means the end of the current scope.
+        // Create a Timer that will report times and/or memory usage
+        // upon its destruction
         StartTiming("int main(int argc, char *argv[]) ");
 
-        // We create the trimAl Manager
+        // Create trimAl Manager
         trimAlManager trimAl;
 
-        // Feed the arguments
         trimAl.parseArguments(argc, argv);
 
         // Process them: Incompatibilities and co-dependencies
@@ -65,6 +60,6 @@ int main(int argc, char *argv[]) {
         returnValue = trimAl.perform();
     }
 
-    // Return the exit code
+    // Return the exit code obtained in the perform method.
     return returnValue;
 }
