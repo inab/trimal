@@ -1,39 +1,36 @@
-#include <TimerFactory.h>
-//
-// Created by bioinfo on 8/06/17.
-//
-
-#include <string>
-
-#include "../include/trimalManager.h"
-#include "Statistics/statisticsConsistency.h"
-#include "defines.h"
+#include "string"
 #include "values.h"
+#include "defines.h"
+#include "vcf_statish.h"
 #include "reportsystem.h"
+#include "TimerFactory.h"
+#include "trimalManager.h"
+#include "Statistics/statisticsConsistency.h"
 #include "Statistics/statisticsConservation.h"
 
-#include "vcf_statish.h"
-
-//void menu();
-//
-//void examples();
+// Macros defined on this file will be defined
+//  before the method that uses them.
+// This is due to macros that are only used on
+//  one method
 
 trimAlManager::trimAlManager() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("trimAlManager::trimAlManager() ");
-
 }
 
 trimAlManager::~trimAlManager() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("trimAlManager::~trimAlManager() ");
+
     delete_variables();
 }
 
+#define checkArgument(argument) if (argument(&argc, argv, &i)) continue;
+
 void trimAlManager::parseArguments(int argc, char *argv[]) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void trimAlManager::parseArguments(int argc, char *argv[]) ");
 
@@ -41,7 +38,7 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
     //  before any other argument.
     verbosity_argument(&argc, argv);
 
-    // Check if there is only a call to trimAl,
+    // Check if there is only an argument passed to trimAl,
     //  if so, show the menu and the examples
     if (argc == 1) {
         menu();
@@ -56,61 +53,64 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
 
         help_arguments(&argc, argv, &i);
 
-        if (in_argument(&argc, argv, &i)) continue;
-        if (vcf_argument(&argc, argv, &i)) continue;
-        if (out_argument(&argc, argv, &i)) continue;
-        if (html_out_argument(&argc, argv, &i)) continue;
-        if (timetracker_out_argument(&argc, argv, &i)) continue;
-        if (svg_out_argument(&argc, argv, &i)) continue;
-        if (svg_stats_argument(&argc, argv, &i)) continue;
-        if (out_format_arguments(&argc, argv, &i)) continue;
-        if (matrix_argument(&argc, argv, &i)) continue;
+        // Check arguments. Makes use of the 
+        //  macro checkArgument (start of the file)
+        //  to make code more understandable
+        checkArgument(in_argument)
+        checkArgument(vcf_argument)
+        checkArgument(out_argument)
+        checkArgument(html_out_argument)
+        checkArgument(timetracker_out_argument)
+        checkArgument(svg_out_argument)
+        checkArgument(svg_stats_argument)
+        checkArgument(out_format_arguments)
+        checkArgument(matrix_argument)
 
-        if (compareset_argument(&argc, argv, &i)) continue;
-        if (force_select_argument(&argc, argv, &i)) continue;
-        if (back_trans_argument(&argc, argv, &i)) continue;
+        checkArgument(compareset_argument)
+        checkArgument(force_select_argument)
+        checkArgument(back_trans_argument)
 
-        if (gap_threshold_argument(&argc, argv, &i)) continue;
-        if (similarity_threshold_argument(&argc, argv, &i)) continue;
-        if (consistency_threshold_argument(&argc, argv, &i)) continue;
+        checkArgument(gap_threshold_argument)
+        checkArgument(similarity_threshold_argument)
+        checkArgument(consistency_threshold_argument)
 
-        if (conservation_threshold_argument(&argc, argv, &i)) continue;
-        if (select_cols_argument(&argc, argv, &i)) continue;
+        checkArgument(conservation_threshold_argument)
+        checkArgument(select_cols_argument)
 
-        if (no_gaps_argument(&argc, argv, &i)) continue;
-        if (no_all_gaps_argument(&argc, argv, &i)) continue;
+        checkArgument(no_gaps_argument)
+        checkArgument(no_all_gaps_argument)
 
-        if (keep_seqs_argument(&argc, argv, &i)) continue;
-        if (keep_header_argument(&argc, argv, &i)) continue;
+        checkArgument(keep_seqs_argument)
+        checkArgument(keep_header_argument)
 
-        if (gappy_out_argument(&argc, argv, &i)) continue;
-        if (strict_argument(&argc, argv, &i)) continue;
-        if (strict_plus_argument(&argc, argv, &i)) continue;
-        if (automated1_argument(&argc, argv, &i)) continue;
+        checkArgument(gappy_out_argument)
+        checkArgument(strict_argument)
+        checkArgument(strict_plus_argument)
+        checkArgument(automated1_argument)
 
-        if (residue_overlap_argument(&argc, argv, &i)) continue;
-        if (sequence_overlap_argument(&argc, argv, &i)) continue;
+        checkArgument(residue_overlap_argument)
+        checkArgument(sequence_overlap_argument)
 
-        if (seqs_select_argument(&argc, argv, &i)) continue;
+        checkArgument(seqs_select_argument)
 
-        if (max_identity_argument(&argc, argv, &i)) continue;
-        if (clusters_argument(&argc, argv, &i)) continue;
+        checkArgument(max_identity_argument)
+        checkArgument(clusters_argument)
 
-        if (terminal_only_argument(&argc, argv, &i)) continue;
+        checkArgument(terminal_only_argument)
 
-        if (window_argument(&argc, argv, &i)) continue;
-        if (gap_window_argument(&argc, argv, &i)) continue;
-        if (similarity_window_argument(&argc, argv, &i)) continue;
-        if (consistency_window_argument(&argc, argv, &i)) continue;
+        checkArgument(window_argument)
+        checkArgument(gap_window_argument)
+        checkArgument(similarity_window_argument)
+        checkArgument(consistency_window_argument)
 
-        if (block_argument(&argc, argv, &i)) continue;
-        if (stats_arguments(&argc, argv, &i)) continue;
+        checkArgument(block_argument)
+        checkArgument(stats_arguments)
 
-        if (complementary_argument(&argc, argv, &i)) continue;
+        checkArgument(complementary_argument)
 
-        if (col_numbering_argument(&argc, argv, &i)) continue;
-        if (split_by_stop_codon_argument(&argc, argv, &i)) continue;
-        if (ignore_stop_codon_argument(&argc, argv, &i)) continue;
+        checkArgument(col_numbering_argument);
+        checkArgument(split_by_stop_codon_argument)
+        checkArgument(ignore_stop_codon_argument)
 
         // Skip the verbosity option, as it was checked before the loop
         if (!strcmp(argv[i], "--verbosity") || !strcmp(argv[i], "-v")) {
@@ -188,15 +188,9 @@ inline void trimAlManager::help_arguments(const int *argc, char **argv, int *i) 
         exit(0); // We don't want to continue if we show the help.
     }
 
-//    if (!strcmp(argv[*i], "-examples")) {
-//        examples();
-//        delete_variables();
-//        exit(0); // We don't want to continue if we show the help.
-//    }
-
     if (!strcmp(argv[*i], "--version")) {
         std::cout << VERSION << std::endl;
-        exit(0); // We don't want to continue if we show the examples.
+        exit(0); // We don't want to continue if we show the version.
     }
 
     if (!strcmp(argv[*i], "-lf") || !strcmp(argv[*i], "--listformats")) {
@@ -284,89 +278,47 @@ inline bool trimAlManager::svg_stats_argument(const int *argc, char *argv[], int
     return false;
 }
 
-bool trimAlManager::out_format_arguments(const int *argc, char *argv[], int *i) {
-    {
-        if (!strcmp(argv[*i], "-formats")) {
-            if ((*i + 1) == *argc) {
-                debug.report(ErrorCode::NoFormatsSpecified);
-            }
-            while (++(*i) != *argc && argv[*i][0] != '-')
-                oformats.emplace_back(argv[*i]);
-            (*i)--;
-            return true;
-        }
-            // Option -clustal
-        else if (!strcmp(argv[*i], "-clustal")) {
-            oformats.emplace_back("clustal");
-            return true;
-        }
-
-            // Option -fasta
-        else if (!strcmp(argv[*i], "-fasta")) {
-            oformats.emplace_back("fasta");
-            return true;
-        }
-
-            // Option -fasta-m10
-        else if (!strcmp(argv[*i], "-fasta_m10")) {
-            oformats.emplace_back("fasta_m10");
-            return true;
-        }
-
-            // Option -nbrf
-        else if (!strcmp(argv[*i], "-nbrf")) {
-            oformats.emplace_back("pir");
-            return true;
-        }
-
-            // Option -nexus
-        else if (!strcmp(argv[*i], "-nexus")) {
-            oformats.emplace_back("nexus");
-            return true;
-        }
-
-            // Option -mega
-        else if (!strcmp(argv[*i], "-mega")) {
-            oformats.emplace_back("mega");
-            return true;
-        }
-
-            // Option -phylip3.2
-        else if (!strcmp(argv[*i], "-phylip3.2")) {
-            oformats.emplace_back("phylip32");
-            return true;
-        }
-
-            // Option -phylip3.2-m10
-        else if (!strcmp(argv[*i], "-phylip3.2_m10")) {
-            oformats.emplace_back("phylip32_m10");
-            return true;
-        }
-
-            // Option -phylip
-        else if (!strcmp(argv[*i], "-phylip")) {
-            oformats.emplace_back("phylip40");
-            return true;
-        }
-
-            // Option -phylip-m10
-        else if (!strcmp(argv[*i], "-phylip_m10")) {
-            oformats.emplace_back("phylip40_m10");
-            return true;
-        }
-
-            // Option -phylip_paml
-        else if (!strcmp(argv[*i], "-phylip_paml")) {
-            oformats.emplace_back("phylip_paml");
-            return true;
-        }
-
-            // Option -phylip_paml-m10
-        else if (!strcmp(argv[*i], "-phylip_paml_m10")) {
-            oformats.emplace_back("phylip_paml_m10");
-            return true;
-        }
+// Macro to allow using legacy format arguments
+//  with the new system.
+#define LegacyFormatArgumentWrapper(arg, format) \
+    if (!strcmp(argv[*i], arg)) { \
+        oformats.emplace_back(format); \
+        return true; \
     }
+
+
+inline bool trimAlManager::out_format_arguments(const int *argc, char *argv[], int *i) {
+    // Detect formats using the ReadWriteMachineState (RWMS) method
+    //  Store the formats desired on 'oformats' list, which
+    //  will be passed to the RWMS
+    if (!strcmp(argv[*i], "-formats")) {
+        if ((*i + 1) == *argc) {
+            debug.report(ErrorCode::NoFormatsSpecified);
+        }
+        while (++(*i) != *argc && argv[*i][0] != '-')
+            oformats.emplace_back(argv[*i]);
+        (*i)--;
+        return true;
+    }
+
+    // Legacy formats handling code.
+    //  Makes use of the macro LegacyFormatArgumentWrapper 
+    //  for the sake of understandability.
+    // This transforms the old arguments to the RWMS format,
+    //  emplacing the IDS for each format on oformats list.
+    LegacyFormatArgumentWrapper("-clustal", "clustal")
+    LegacyFormatArgumentWrapper("-fasta", "fasta")
+    LegacyFormatArgumentWrapper("-fasta_m10", "fasta_m10")
+    LegacyFormatArgumentWrapper("-nbrf", "pir")
+    LegacyFormatArgumentWrapper("-nexus", "nexus")
+    LegacyFormatArgumentWrapper("-mega", "mega")
+    LegacyFormatArgumentWrapper("-phylip3.2", "phylip32")
+    LegacyFormatArgumentWrapper("-phylip3.2_m10", "phylip32_m10")
+    LegacyFormatArgumentWrapper("-phylip", "phylip40")
+    LegacyFormatArgumentWrapper("-phylip_m10", "phylip40_m10")
+    LegacyFormatArgumentWrapper("-phylip_paml", "phylip_paml")
+    LegacyFormatArgumentWrapper("-phylip_paml_m10", "phylip_paml_m10")
+
     return false;
 }
 
@@ -390,15 +342,14 @@ inline bool trimAlManager::matrix_argument(const int *argc, char *argv[], int *i
 
 inline bool trimAlManager::compareset_argument(const int *argc, char *argv[], int *i) {
     if (!strcmp(argv[*i], "-compareset") && ((*i) + 1 != *argc) && (compareset == -1)) {
+        // Check if file can be opened
         compare.open(argv[++*i], ifstream::in);
         if (!compare) {
             debug.report(ErrorCode::ReferenceFileNotLoaded, argv[*i]);
             appearErrors = true;
         }
         compare.close();
-
         compareset = *i;
-
         return true;
     }
     return false;
@@ -502,7 +453,7 @@ inline bool trimAlManager::conservation_threshold_argument(const int *argc, char
     return false;
 }
 
-bool trimAlManager::select_cols_argument(const int *argc, char *argv[], int *i) {
+inline bool trimAlManager::select_cols_argument(const int *argc, char *argv[], int *i) {
 
     if (!strcmp(argv[*i], "-selectcols") &&
         !selectCols &&
@@ -618,7 +569,7 @@ inline bool trimAlManager::sequence_overlap_argument(const int *argc, char *argv
     return false;
 }
 
-bool trimAlManager::seqs_select_argument(const int *argc, char *argv[], int *i) {
+inline bool trimAlManager::seqs_select_argument(const int *argc, char *argv[], int *i) {
     if ((!strcmp(argv[*i], "-selectseqs")) && !selectSeqs && ((*i + 3) < *argc) && (!strcmp(argv[++*i], "{")) && (!strcmp(argv[*i + 2], "}"))) {
         if ((delSequences = utils::readNumbers(argv[++*i])) == nullptr) {
             debug.report(ErrorCode::SelectSeqsNotRecognized);
@@ -761,46 +712,41 @@ inline bool trimAlManager::block_argument(const int *argc, char *argv[], int *i)
     return false;
 }
 
+// Macros to make the code on stats_arguments easier to understand.
+//  The macro needs the stat variable name to be the same as the argument used. 
+
+// This macro also tightens the relation between a stats argument and 
+//  the variable name where that information is stored.
+
+// This is an intentional coupling that would help when the number of variables
+//  arises, as their names may be not fully informative.
+
+#define stat_check(stat) \
+    if (!strcmp(argv[*i], "-" #stat )) { \
+        if (!stat) { \
+            stat = true; \
+            stats--; \
+            return true; \
+        } else return false; \
+    }
+
 inline bool trimAlManager::stats_arguments(const int *argc, char *argv[], int *i) {
-    if ((!strcmp(argv[*i], "-sgc"))) {
-        if (!sgc) {
-            sgc = true;
-            stats--;
-        } else return false;
-    } else if ((!strcmp(argv[*i], "-sgt"))) {
-        if (!sgt) {
-            sgt = true;
-            stats--;
-        } else return false;
-    } else if ((!strcmp(argv[*i], "-ssc"))) {
-        if (!scc) {
-            scc = true;
-            stats--;
-        } else return false;
-    } else if ((!strcmp(argv[*i], "-sst"))) {
-        if (!sct) {
-            sct = true;
-            stats--;
-        } else return false;
-    } else if ((!strcmp(argv[*i], "-sident")) && (!sident)) {
-        sident = true;
-        stats--;
-    } else if ((!strcmp(argv[*i], "-soverlap")) && (!soverlap)) {
-        soverlap = true;
-        stats--;
-    } else if ((!strcmp(argv[*i], "-sfc"))) {
-        if (!sfc) {
-            sfc = true;
-            stats--;
-        } else return false;
-    } else if ((!strcmp(argv[*i], "-sft"))) {
-        if (!sft) {
-            sft = true;
-            stats--;
-        } else return false;
-    } else
-        return false;
-    return true;
+    stat_check(sgc)
+    stat_check(sgt)
+    stat_check(ssc)
+    stat_check(sst)
+
+    stat_check(sident)
+    stat_check(soverlap)
+
+    stat_check(sfc)
+    stat_check(sft)
+
+    // As macro stat_check is able to make the method to return values 
+    //  under certain circumstances, althought the method (stats_arguments) 
+    //  seem to always return false, this is incorrect and the method can
+    //  return True or False, depeding if a stat argument has been recognized.
+    return false;
 }
 
 inline bool trimAlManager::complementary_argument(const int *argc, char *argv[], int *i) {
@@ -809,7 +755,6 @@ inline bool trimAlManager::complementary_argument(const int *argc, char *argv[],
         return true;
     }
     return false;
-
 }
 
 inline bool trimAlManager::col_numbering_argument(const int *argc, char *argv[], int *i) {
@@ -837,18 +782,20 @@ inline bool trimAlManager::ignore_stop_codon_argument(const int *argc, char *arg
 }
 
 bool trimAlManager::processArguments(char *argv[]) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool trimAlManager::processArguments(char *argv[]) ");
     if (!appearErrors) {
+
+        // This allows us to have a count of all the automatic methods 
+        //  that have been requested.
+        // We can use this information to prevent performing more than one method,
+        //  and using as a bool, to check if any automatic method has been used.
         automatedMethodCount = nogaps + noallgaps + gappyout + strict + strictplus + automated1;
 
         check_arguments_incompatibilities();
-
         check_arguments_needs(argv);
-
     }
-
     return appearErrors;
 }
 
@@ -901,7 +848,6 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {
 }
 
 inline bool trimAlManager::check_thresholds_incompatibilities() {
-    //NOTE consistencyThreshold was not present on this Incompatibilities. Is this correct?
     if ((gapThreshold != -1) || (similarityThreshold != -1) || (consistencyThreshold != -1)) {
 
         if (automatedMethodCount) {
@@ -1010,10 +956,10 @@ inline bool trimAlManager::check_codon_behaviour_incompatibility() {
     return false;
 }
 
-inline bool trimAlManager::check_combinations_among_thresholds_incompatibility() // TODO is this ok?
+inline bool trimAlManager::check_combinations_among_thresholds_incompatibility() 
+// TODO is this ok?
 {
     if ((consistencyThreshold != -1) && (conservationThreshold != -1) && (!appearErrors)) {
-
         if ((gapThreshold != -1) || (similarityThreshold != -1)) {
             debug.report(ErrorCode::CombinationAmongThresholdsMethods);
             appearErrors = true;
@@ -1071,12 +1017,21 @@ inline bool trimAlManager::check_input_file_with_coding_sequences_argument() {
 inline bool trimAlManager::check_file_aligned() {
     if ((!appearErrors) && (infile != nullptr)) {
 
-        if ((automatedMethodCount || // Are we using an automated method?
-             (gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || // Are we using any threshold?
-             (selectCols) || (selectSeqs) || (residuesOverlap != -1) || (sequenceOverlap != -1) || // Are we selecting columns or sequences?
-             (stats < 0))  // Are we asking for any stats?
+        if (
+            // Are we requesting an automated method ? or...
+                (automatedMethodCount || 
+            // Are we requesting any manual threshold method ? or...
+                (gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || 
+            // Are we selecting columns or sequences ? or...
+                (selectCols) || (selectSeqs) || 
+            // Are we using max overlap between sequences ? or...
+                (residuesOverlap != -1) || (sequenceOverlap != -1) || 
+            // Are we asking for any stats?
+                (stats < 0)) 
             &&
-            (!origAlig->isFileAligned())) // Then we need the alignment to be aligned;
+            // Then we need the alignment to be aligned; 
+            //  If not, we should report the error
+            (!origAlig->isFileAligned())) 
         {
             debug.report(ErrorCode::NotAligned, new std::string[1]{infile});
             appearErrors = true;
@@ -1088,7 +1043,7 @@ inline bool trimAlManager::check_file_aligned() {
 
 inline bool trimAlManager::check_similarity_matrix() {
     if ((matrixFile != nullptr) && (!appearErrors)) {
-        if ((!strict) && (!strictplus) && (!automated1) && (similarityThreshold == -1) && (!scc) && (!sct)) {
+        if ((!strict) && (!strictplus) && (!automated1) && (similarityThreshold == -1) && (!ssc) && (!sst)) {
             debug.report(ErrorCode::MatrixGivenWithNoMethodToUseIt);
             appearErrors = true;
             return true;
@@ -1105,23 +1060,27 @@ inline bool trimAlManager::check_similarity_matrix() {
 }
 
 inline bool trimAlManager::check_outputs_coincidence() {
+    // Check dynamically that every output path is unique
+    // We use two arrays: 
+    //      outFiles, which contains the variables
+    //      outFilesNames, which is used to identify each method
 
     std::array<char *, 4> outFiles
-            {{
-                     htmlOutFile,
-                     outfile,
-                     svgOutFile,
-                     svgStatsOutFile
-             }
-            };
+    {{
+        htmlOutFile,
+        outfile,
+        svgOutFile,
+        svgStatsOutFile
+    }};
+
     std::array<string, 4> outFilesNames
-            {{
-                     "html (-htmlout)",
-                     "output (-out)",
-                     "svg (-svgout)",
-                     "svg stats (-svgstats)"
-             }
-            };
+    {{
+        "html report (-htmlout)",
+        "output alignment (-out)",
+        "svg report (-svgout)",
+        "svg stats (-svgstats)"
+    }};
+
 
     for (int i = 0, x = 0; i < outFiles.size(); i++) {
         if (outFiles.at(i) != nullptr)
@@ -1138,11 +1097,21 @@ inline bool trimAlManager::check_outputs_coincidence() {
 }
 
 inline bool trimAlManager::check_col_numbering() {
+
+    // As colnumbering doesn't make sense if we don't trim the alignment...
     if ((columnNumbering) && (!appearErrors)) {
-        if ((!automatedMethodCount) && // Are we not using any automated method?
-            (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && (consistencyThreshold == -1) && // Are we not using any threshold?
-            (!selectCols) && (!selectSeqs)) // Neither selecting any column or sequence?
+        if (
+            // Are we not using any automated method? and...
+                (!automatedMethodCount) && 
+            // Are we not using any threshold? and...
+                (gapThreshold == -1) && 
+                (conservationThreshold == -1) && 
+                (similarityThreshold == -1) && 
+                (consistencyThreshold == -1) && 
+            // Neither selecting any column or sequence?
+                (!selectCols) && (!selectSeqs))
         {
+            // If all that happens, we are not trimming the alignment and should report it.
             debug.report(ErrorCode::TrimmingMethodNeeded, new std::string[1]{"-colnumbering"});
             appearErrors = true;
             return true;
@@ -1169,12 +1138,19 @@ inline bool trimAlManager::check_residue_and_sequence_overlap() {
 inline bool trimAlManager::check_output_relevance() {
     if (((htmlOutFile != nullptr) ||
          (svgOutFile != nullptr) ||
-         (svgStatsOutFile != nullptr)) && (!appearErrors)) {
-        if (!automatedMethodCount && // Are we not using any automated method?
-            (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && (consistencyThreshold == -1) && // Neither using thresholds
-            (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && // Neither selecting columns or sequences?
-            (maxIdentity == -1) && (clusters == -1)) // Neither using other selecting methods?
+         (svgStatsOutFile != nullptr)) 
+         && (!appearErrors)) {
+        if (
+            // Are we not using any automated method? and...
+                !automatedMethodCount && 
+            // Neither using thresholds? and...
+                (gapThreshold == -1) && (conservationThreshold == -1) && (similarityThreshold == -1) && (consistencyThreshold == -1) && 
+            // Neither selecting columns or sequences? and...
+                (!selectCols) && (!selectSeqs) && (residuesOverlap == -1) && (sequenceOverlap == -1) && 
+            // Neither using other selecting methods? and...
+                (maxIdentity == -1) && (clusters == -1))
         {
+            // Then, we are not trimming the alignment and should report it.
             if (htmlOutFile != nullptr)
                 debug.report(ErrorCode::TrimmingMethodNeeded, new std::string[1]{"-htmlout"});
             if (svgOutFile != nullptr)
@@ -1189,16 +1165,22 @@ inline bool trimAlManager::check_output_relevance() {
 }
 
 inline bool trimAlManager::check_output_file_with_statistics() {
-    // NOTE should this function only take in mind if statistics are requested and outFile is not defined?
-    // Either we are using 'some' trimming methods or not, the incompatibility to output multiple info (alignment + stats) is present.
+    // TODO: Create a method to check if a trimming method has been requested.
+    // TODO:    This will help to maintain coherence when scaling up 
+    // TODO:    With more trimming methods. 
+
     if ((stats < 0) && (!appearErrors)) {
-        stats--; //NOTE Why?
+        stats--; 
 
-        if (((automatedMethodCount) || // If we are using an automated method
-             (gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1)) // Or a manual threshold
-
-            && (outfile == nullptr)) // We need the outFile to be specified.
+        if (
+            // If we are using an automated method
+                ((automatedMethodCount) ||
+            // Or a manual threshold
+                (gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1)) 
+            // We need the outFile to be specified.
+            && (outfile == nullptr)) 
         {
+            // If so, report the error to the user.
             debug.report(ErrorCode::OutFileNeededWhenPrintingStatistics);
             appearErrors = true;
             return true;
@@ -1208,8 +1190,9 @@ inline bool trimAlManager::check_output_file_with_statistics() {
 }
 
 inline bool trimAlManager::check_multiple_files_comparison(char *argv[]) {
-    if ((compareset != -1) && (!appearErrors)) {
 
+    // TODO: This is a perform action.
+    if ((compareset != -1) && (!appearErrors)) {
         statisticsConsistency *CS = new statisticsConsistency();
         CS->perform(argv[compareset], ReadWriteMachine, *this, forceFile);
     }
@@ -1227,17 +1210,24 @@ inline bool trimAlManager::check_block_size() {
 inline bool trimAlManager::check_backtranslations() {
     if (!appearErrors) {
         if (backtransFile == nullptr) {
+
+            // Crossed dependency between Backtranslation and SplitByCodon
+
             if (splitByStopCodon) {
                 debug.report(ErrorCode::ParemeterOnlyOnBacktranslation, new string[1]{"-splitbystopcodon"});
                 appearErrors = true;
                 return true;
             }
+
+            // Crossed dependency between Backtranslation and IgnoreStopCodon
             if (ignoreStopCodon) {
                 debug.report(ErrorCode::ParemeterOnlyOnBacktranslation, new string[1]{"-ignorestopcodon"});
                 appearErrors = true;
                 return true;
             }
-        } else if (!origAlig->isFileAligned()) {
+        } 
+        // If doing backtranslation, we need the input file to be aligned.
+        else if (!origAlig->isFileAligned()) {
             debug.report(ErrorCode::ProteinAlignmentMustBeAligned);
             appearErrors = true;
             return true;
@@ -1247,9 +1237,15 @@ inline bool trimAlManager::check_backtranslations() {
 }
 
 inline bool trimAlManager::check_coding_sequences_type() {
-    if ((!appearErrors) && (backtransFile != nullptr) && // Is there a backtranslation file?
-        (!backtranslationAlig->getAlignmentType() & SequenceTypes::DNA)) // If so, is it from DNA?
+    if (
+        // Is there a backtranslation file?
+            (!appearErrors) && (backtransFile != nullptr) && 
+        // If so, is it from DNA? If not...
+            (!backtranslationAlig->getAlignmentType() & SequenceTypes::DNA)) 
     {
+        // When doing backtranslation, 
+        //  a DNA alignment (without gaps) is needed.
+        // Report the error to the user.
         debug.report(ErrorCode::BacktransAlignIsDNA);
         appearErrors = true;
         return true;
@@ -1258,12 +1254,17 @@ inline bool trimAlManager::check_coding_sequences_type() {
 }
 
 inline bool trimAlManager::check_and_prepare_coding_sequence() {
-    if ((!appearErrors) && (backtransFile != nullptr) &&
-        (!backtranslationAlig->prepareCodingSequence(
+    if ((!appearErrors) && 
+        // If we are going to do a back translation
+            (backtransFile != nullptr) &&
+        // Perform it and save if it has errored.
+            (!backtranslationAlig->prepareCodingSequence(
                 splitByStopCodon,
                 ignoreStopCodon,
-                origAlig
-        ))) {
+                origAlig)
+            )
+        ) 
+    {
         // Error reporting is made by prepareCodingSequence function.
         appearErrors = true;
         return true;
@@ -1275,6 +1276,7 @@ inline bool trimAlManager::check_backtranslation_infile_names_corresponde() {
     //NOTE Maybe we don't need to copy the names and lengths to two new arrays 
     // as we could pass the original names and lengths to the check checkCorrespondence function, 
     // which doesn't modify the pointers passed to them
+
     if ((!appearErrors) && (backtransFile != nullptr)) {
         sequencesNames = new string[backtranslationAlig->getNumSpecies()];
         sequencesLengths = new int[backtranslationAlig->getNumSpecies()];
@@ -1305,60 +1307,24 @@ inline void trimAlManager::check_output_format() {
 }
 
 int trimAlManager::perform() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int trimAlManager::perform() ");
 
-    if (appearErrors) return -1;
+    // We don't perform any manipulation in previous steps an error has
+    // been detected
+    if (appearErrors) 
+    return -1;
 
+    // If conservation threshold is -1, it hasn't been specified, and we
+    // use 0 as default value, which makes no effect
     if (conservationThreshold == -1)
         conservationThreshold = 0;
 
-    if (vcfs != nullptr) {
-        auto XX = ReadWriteMachine.splitAlignmentKeeping(*origAlig);
-
-        char replacement = '-';
-
-        ngs::readVCF(
-                /* Dataset          */ XX,
-                /* VCF Collection   */ *vcfs,
-                /* min Quality      */ 0,
-                /* min Coverage     */ 30,
-                /* ignore Filters   */ false,
-                /* replacement char */ &replacement
-        );
-
-        for (auto &i : XX) {
-            delete origAlig;
-            origAlig = i;
-
-            origAlig->Cleaning->setTrimTerminalGapsFlag(terminalOnly);
-            origAlig->setKeepSequencesFlag(keepSeqs);
-
-            set_window_size();
-
-            if (blockSize != -1)
-                origAlig->setBlockSize(blockSize);
-
-            if (!create_or_use_similarity_matrix())
-                return -2;
-
-            print_statistics();
-
-            clean_alignment();
-
-            postprocess_alignment();
-
-            if ((outfile != nullptr) && (!appearErrors)) {
-                std::string outFileString = std::string(outfile);
-                if (!ReadWriteMachine.saveAlignment(outFileString, &oformats, origAlig)) {
-                    debug.report(ErrorCode::ImpossibleToGenerate, new string[1]{"the output file"});
-                    appearErrors = true;
-                }
-            }
-        }
-        return 0;
-    }
+    // In case we are doing VCF transformations, the perform should
+    // be applied in all the collection.
+    if (vcfs != nullptr)
+        return perform_VCF();
 
     origAlig->Cleaning->setTrimTerminalGapsFlag(terminalOnly);
     origAlig->setKeepSequencesFlag(keepSeqs);
@@ -1382,6 +1348,77 @@ int trimAlManager::perform() {
 
     postprocess_alignment();
 
+    output_reports();
+
+    save_alignment();
+
+    if ((columnNumbering) && (!appearErrors))
+        singleAlig->Statistics->printCorrespondence();
+
+    return 0;
+}
+
+inline int trimAlManager::perform_VCF()
+{
+    auto XX = ReadWriteMachine.splitAlignmentKeeping(*origAlig);
+    char replacement = '-';
+    ngs::readVCF(
+            /* Dataset          */ XX,
+            /* VCF Collection   */ *vcfs,
+            /* min Quality      */ 0,
+            /* min Coverage     */ 30,
+            /* ignore Filters   */ false,
+            /* replacement char */ &replacement
+    );
+
+    for (newAlignment* &i : XX) {
+        delete origAlig;
+        origAlig = i;
+
+        origAlig->Cleaning->setTrimTerminalGapsFlag(terminalOnly);
+        origAlig->setKeepSequencesFlag(keepSeqs);
+
+        set_window_size();
+
+        if (blockSize != -1)
+            origAlig->setBlockSize(blockSize);
+
+        if (!create_or_use_similarity_matrix())
+            return -2;
+        
+        if (svgStatsOutFile != nullptr)
+            svg_stats_out();
+
+        // print_statistics();
+
+        clean_alignment();
+
+        postprocess_alignment();
+
+        if ((outfile != nullptr) && (!appearErrors)) {
+            std::string outFileString = std::string(outfile);
+            if (!ReadWriteMachine.saveAlignment(outFileString, &oformats, origAlig)) {
+                appearErrors = true;
+            }
+        }
+    }
+    return 0;
+}
+
+inline void trimAlManager::save_alignment()
+{
+    if ((outfile != nullptr) && (!appearErrors)) {
+        std::string outFileString = std::string(outfile);
+        if (!ReadWriteMachine.saveAlignment(outFileString, &oformats, singleAlig)) {
+            appearErrors = true;
+        }
+
+    } else if ((stats >= 0) && (!appearErrors))
+        ReadWriteMachine.saveAlignment("", &oformats, singleAlig);
+}
+
+inline void trimAlManager::output_reports()
+{
     if ((svgOutFile != nullptr) && (!appearErrors))
         if (!origAlig->
                 alignmentSummarySVG(*singleAlig, svgOutFile, 0)) {
@@ -1395,163 +1432,148 @@ int trimAlManager::perform() {
             debug.report(ErrorCode::ImpossibleToGenerate, new string[1]{"the HTML output file"});
             appearErrors = true;
         }
-
-    if ((outfile != nullptr) && (!appearErrors)) {
-        std::string outFileString = std::string(outfile);
-        if (!ReadWriteMachine.saveAlignment(outFileString, &oformats, singleAlig)) {
-            appearErrors = true;
-        }
-
-    } else if ((stats >= 0) && (!appearErrors))
-        ReadWriteMachine.saveAlignment("", &oformats, singleAlig);
-
-    if ((columnNumbering) && (!appearErrors))
-        singleAlig->Statistics->printCorrespondence();
-
-    return 0;
 }
 
 inline void trimAlManager::print_statistics() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("inline void trimAlManager::print_statistics() ");
-    if (svgStatsOutFile != nullptr) {
-        std::string title = infile;
-        std::string filename = svgStatsOutFile;
-        std::string linename = "";
-        std::string color = "";
 
-        utils::streamSVG(nullptr, nullptr, 0, nullptr, nullptr, &title, &filename);
-
-        if (origAlig->Statistics->calculateGapStats()) {
-            float acm = 0.0F;
-            float x = 0;
-            float y = 1.F;
-            color = "red";
-            linename = "gaps";
-            utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
-
-            for (i = 0, acm = 0; i <= origAlig->Statistics->gaps->maxGaps; i++) {
-                // If the columns' number with this gaps' number is not equal to zero, we will count the columns. 
-                if (origAlig->Statistics->gaps->numColumnsWithGaps[i] != 0) {
-                    // Compute and prints the accumulative values for the gaps in the alignment. 
-                    acm += origAlig->Statistics->gaps->numColumnsWithGaps[i];
-                    x = acm / origAlig->residNumber;
-                    y = 1.F - ((i * 1.0F) / origAlig->sequenNumber);
-                    utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
-                }
-            }
-        }
-
-        if (origAlig->Statistics->calculateConservationStats()) {
-            color = "blue";
-            linename = "conservation";
-            float x = 0;
-            float y = 1.F;
-            utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
-            float refer, *vectAux;
-            int i, num, acm;
-
-            // Allocate memory 
-            vectAux = new float[origAlig->residNumber];
-
-            // Select the conservation's value source and copy that vector in a auxiliar vector 
-            if (origAlig->Statistics->conservation->MDK_Window != nullptr)
-                utils::copyVect(origAlig->Statistics->conservation->MDK_Window, vectAux, origAlig->residNumber);
-            else
-                utils::copyVect(origAlig->Statistics->conservation->MDK, vectAux, origAlig->residNumber);
-
-            // Sort the auxiliar vector. 
-            utils::quicksort(vectAux, 0, origAlig->residNumber - 1);
-
-            // Initializate some values 
-            refer = vectAux[origAlig->residNumber - 1];
-            acm = 0;
-            num = 1;
-
-            // Count the columns with the same conservation's value and compute this information to shows the accunulative
-            // statistics in the alignment. 
-            for (i = origAlig->residNumber - 2; i >= 0; i--) {
-                acm++;
-
-                if (refer != vectAux[i]) {
-                    x = ((float) acm / origAlig->residNumber);
-                    y = refer;
-                    utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
-                    refer = vectAux[i];
-                    num = 1;
-                } else num++;
-            }
-            acm++;
-            x = ((float) acm / origAlig->residNumber);
-            y = refer;
-            utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
-
-            // Deallocate the reserved memory. 
-            delete[] vectAux;
-        }
-
-        utils::streamSVG(nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr);
+    if (sgc) {
+        origAlig->Statistics->printStatisticsGapsColumns();
+        stats++;
     }
 
+    if (sgt) {
+        origAlig->Statistics->printStatisticsGapsTotal();
+        stats++;
+    }
 
-    {
-        if (sgc) {
-            origAlig->Statistics->printStatisticsGapsColumns();
-            stats++;
-        }
+    if (ssc) {
+        origAlig->Statistics->printStatisticsConservationColumns();
+        stats++;
+    }
 
-        if (sgt) {
-            origAlig->Statistics->printStatisticsGapsTotal();
-            stats++;
-        }
+    if (sst) {
+        origAlig->Statistics->printStatisticsConservationTotal();
+        stats++;
+    }
 
-        if (scc) {
-            origAlig->Statistics->printStatisticsConservationColumns();
-            stats++;
-        }
+    if (sident) {
+        origAlig->printSeqIdentity();
+        stats++;
+    }
 
-        if (sct) {
-            origAlig->Statistics->printStatisticsConservationTotal();
-            stats++;
-        }
+    if (soverlap) {
+        origAlig->printSeqOverlap();
+        stats++;
+    }
 
-        if (sident) {
-            origAlig->printSeqIdentity();
-            stats++;
-        }
-
-        if (soverlap) {
-            origAlig->printSeqOverlap();
-            stats++;
-        }
-
-        if (compareset != -1) {
-            if (sfc)
-                statisticsConsistency::printStatisticsFileColumns(*origAlig, origAlig->Statistics->consistency->getValues());
-            if (sft)
-                statisticsConsistency::printStatisticsFileAcl(*origAlig, origAlig->Statistics->consistency->getValues());
-        }
+    if (compareset != -1) {
+        if (sfc)
+            statisticsConsistency::printStatisticsFileColumns(*origAlig, origAlig->Statistics->consistency->getValues());
+        if (sft)
+            statisticsConsistency::printStatisticsFileAcl(*origAlig, origAlig->Statistics->consistency->getValues());
     }
 }
 
+inline void trimAlManager::svg_stats_out()
+{
+    std::string title = infile;
+    std::string filename = svgStatsOutFile;
+    std::string linename = "";
+    std::string color = "";
+
+    utils::streamSVG(nullptr, nullptr, 0, nullptr, nullptr, &title, &filename);
+
+    if (origAlig->Statistics->calculateGapStats()) {
+        float acm = 0.0F;
+        float x = 0;
+        float y = 1.F;
+        color = "red";
+        linename = "gaps";
+        utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
+
+        for (i = 0, acm = 0; i <= origAlig->Statistics->gaps->maxGaps; i++) {
+            // If the columns' number with this gaps' number is not equal to zero, we will count the columns. 
+            if (origAlig->Statistics->gaps->numColumnsWithGaps[i] != 0) {
+                // Compute and prints the accumulative values for the gaps in the alignment. 
+                acm += origAlig->Statistics->gaps->numColumnsWithGaps[i];
+                x = acm / origAlig->residNumber;
+                y = 1.F - ((i * 1.0F) / origAlig->sequenNumber);
+                utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
+            }
+        }
+    }
+
+    if (origAlig->Statistics->calculateConservationStats()) {
+        color = "blue";
+        linename = "conservation";
+        float x = 0;
+        float y = 1.F;
+        utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
+        float refer, *vectAux;
+        int i, num, acm;
+
+        // Allocate memory 
+        vectAux = new float[origAlig->residNumber];
+
+        // Select the conservation's value source and copy that vector in a auxiliar vector 
+        if (origAlig->Statistics->conservation->MDK_Window != nullptr)
+            utils::copyVect(origAlig->Statistics->conservation->MDK_Window, vectAux, origAlig->residNumber);
+        else
+            utils::copyVect(origAlig->Statistics->conservation->MDK, vectAux, origAlig->residNumber);
+
+        // Sort the auxiliar vector. 
+        utils::quicksort(vectAux, 0, origAlig->residNumber - 1);
+
+        // Initializate some values 
+        refer = vectAux[origAlig->residNumber - 1];
+        acm = 0;
+        num = 1;
+
+        // Count the columns with the same conservation's value and compute this information to shows the accunulative
+        // statistics in the alignment. 
+        for (i = origAlig->residNumber - 2; i >= 0; i--) {
+            acm++;
+
+            if (refer != vectAux[i]) {
+                x = ((float) acm / origAlig->residNumber);
+                y = refer;
+                utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
+                refer = vectAux[i];
+                num = 1;
+            } else num++;
+        }
+        acm++;
+        x = ((float) acm / origAlig->residNumber);
+        y = refer;
+        utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
+
+        // Deallocate the reserved memory. 
+        delete[] vectAux;
+    }
+
+    utils::streamSVG(nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr);
+}
+
 inline bool trimAlManager::create_or_use_similarity_matrix() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("inline bool trimAlManager::create_or_use_similarity_matrix() ");
-    if ((strict) || (strictplus) || (automated1) || (similarityThreshold != -1.0) || (scc == 1) || (sct == 1)) {
+    if ((strict) || (strictplus) || (automated1) || (similarityThreshold != -1.0) || (ssc == 1) || (sst == 1)) {
         similMatrix = new similarityMatrix();
 
-        // Simple Matrix
+    // Load Matrix
         if (matrixFile != nullptr)
             similMatrix->loadSimMatrix(matrixFile);
 
-            // Alternative Matrix
+    // Alternative Default Matrix
         else if (alternative_matrix != -1) {
             similMatrix->alternativeSimilarityMatrices(alternative_matrix, origAlig->getAlignmentType());
         }
 
-            // Default Matrices
+    // Default Matrices
         else {
             int alignDataType = origAlig->getAlignmentType();
             if (alignDataType & SequenceTypes::AA)
@@ -1563,6 +1585,7 @@ inline bool trimAlManager::create_or_use_similarity_matrix() {
                 similMatrix->defaultNTDegeneratedSimMatrix();
         }
 
+    // Check if Matrix has been loaded
         if (!origAlig->Statistics->setSimilarityMatrix(similMatrix)) {
             debug.report(ErrorCode::ImpossibleToProcessMatrix);
             return false;
@@ -1572,7 +1595,7 @@ inline bool trimAlManager::create_or_use_similarity_matrix() {
 }
 
 inline void trimAlManager::clean_alignment() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("inline void trimAlManager::clean_alignment() ");
 
@@ -1595,16 +1618,19 @@ inline void trimAlManager::clean_alignment() {
 }
 
 inline void trimAlManager::postprocess_alignment() {
-
-    // only terminal
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("inline void trimAlManager::postprocess_alignment()");
+    
+    // Only terminal
     if (terminalOnly)
         singleAlig->Cleaning->removeOnlyTerminal();
 
-    // complementary
+    // Complementary
     if (getComplementary)
         singleAlig->Cleaning->computeComplementaryAlig(true, false);
 
-    // backtranslate
+    // Backtranslate
     if (backtransFile != nullptr) {
         tempAlig = backtranslationAlig->getTranslationCDS(singleAlig);
         delete singleAlig;
@@ -1615,28 +1641,41 @@ inline void trimAlManager::postprocess_alignment() {
 }
 
 inline void trimAlManager::CleanSequences() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("inline void trimAlManager::CleanSequences() ");
-    tempAlig = nullptr;
 
+    // tempAlig should be nullptr,      
+    //  but a security check may help in the future.
+    tempAlig = new newAlignment();
+    if (tempAlig != nullptr)
+    {
+        delete tempAlig; 
+        tempAlig = nullptr;
+        debug << "tempAlig should be null when entering trimAlManager::CleanSequences";
+    }
+
+    // Clustering by number of clusters
     if (clusters != -1) {
-
         tempAlig = origAlig->Cleaning->getClustering(
                 origAlig->Cleaning->getCutPointClusters(clusters)
         );
+
+    // Clustering by Max Identity
     } else if (maxIdentity != -1) {
         tempAlig = origAlig->Cleaning->getClustering(maxIdentity);
-    } else if (delSequences != nullptr) {
 
-        {
-            tempAlig = origAlig->Cleaning->removeSequences(
-                    delSequences,
-                    1,
-                    delSequences[0], // Num of sequences in array
-                    false
-            );
-        }
+    // Remove Sequences
+    } else if (delSequences != nullptr) {
+        tempAlig = origAlig->Cleaning->removeSequences(
+                delSequences,       // Informative array
+                1,                  // Position to start. 
+                                    // Position on number 0 indicates the number of elements.
+                delSequences[0],    // Num of sequences in array
+                false               // Complementary? Legacy
+        );
+
+    // Remove by Overlap
     } else if ((residuesOverlap != -1) && (sequenceOverlap != -1)) {
         tempAlig = origAlig->Cleaning->cleanSpuriousSeq(
                 residuesOverlap,
@@ -1666,7 +1705,7 @@ inline void trimAlManager::CleanSequences() {
 }
 
 inline void trimAlManager::CleanResiduesAuto() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("inline void trimAlManager::CleanResiduesAuto() ");
     // Here we use singleAlig as source alignment as the previous step,
@@ -1703,12 +1742,13 @@ inline void trimAlManager::CleanResiduesAuto() {
 }
 
 inline void trimAlManager::CleanResiduesNonAuto() {
-    // Create a timerLevel that will report times upon its destruction
-    //	which means the end of the current scope.
-    StartTiming("inline void trimAlManager::CleanResiduesNonAuto() ");
     // Here we use singleAlig as source alignment as the previous step,
     // CleanSequences initializes singleAlig.
     // singleAlig can be a derived alignment from origAlig or origAlig itself
+
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("inline void trimAlManager::CleanResiduesNonAuto() ");
 
     if (delColumns != nullptr) {
         for (int i = 0 ; i < delColumns[0]; i++)
@@ -1783,7 +1823,7 @@ inline void trimAlManager::CleanResiduesNonAuto() {
 }
 
 inline void trimAlManager::set_window_size() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("inline void trimAlManager::set_window_size() ");
     if (windowSize != -1) {
@@ -1799,7 +1839,7 @@ inline void trimAlManager::set_window_size() {
 }
 
 inline void trimAlManager::delete_variables() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("inline void trimAlManager::delete_variables() ");
 
@@ -1847,15 +1887,15 @@ inline void trimAlManager::delete_variables() {
     vcfs = nullptr;
 }
 
-void trimAlManager::menu() {
-    // Create a timerLevel that will report times upon its destruction
+inline void trimAlManager::menu() {
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void trimAlManager::menu(void) ");
 
     // Simple idiom to allow including a text file into a char array at compile time
     // Explanation: https://stackoverflow.com/a/25021520
     std::string menu = {
-#include "menu.txt"
+        #include "menu.txt"
     };
 
     utils::ReplaceStringInPlace(menu, "[iformat]", ReadWriteMachine.getInputFormatsAvailable());
@@ -1868,15 +1908,15 @@ void trimAlManager::menu() {
     std::cout << menu;
 }
 
-void trimAlManager::examples() {
-    // Create a timerLevel that will report times upon its destruction
+inline void trimAlManager::examples() {
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void trimAlManager::examples(void) ");
 
     // Simple idiom to allow including a text file into a char array at compile time
     // Explanation: https://stackoverflow.com/a/25021520
     std::string examples = {
-#include "examples.txt"
+        #include "examples.txt"
     };
 
     std::cout << examples;
