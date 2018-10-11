@@ -1,5 +1,4 @@
 R"(
-
 Some Examples:
 
 1) Removes all positions in the newAlignment  with gaps in 10% or more of
@@ -49,5 +48,4 @@ Some Examples:
 10) Select the 5 most representative sequences from the alignment
 
    trimal -in <inputfile> -out <outputfile> -clusters 5
-
 )"

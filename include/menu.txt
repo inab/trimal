@@ -120,6 +120,4 @@ Common options (for a complete list please see the User Guide or visit http://tr
     --alternative_matrix degenerated_nt_identity
                             Specify the degenerated nt identity matrix as the similarity matrix to use.
                                 If a matrix is not specified, the best suited among a set will be selected.
-
-
 )"
