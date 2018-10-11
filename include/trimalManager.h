@@ -34,8 +34,8 @@ public:
     automated1          = false,
     sgc                 = false, 
     sgt                 = false, 
-    scc                 = false, 
-    sct                 = false,
+    ssc                 = false, 
+    sst                 = false,
     sfc                 = false, 
     sft                 = false, 
     sident              = false, 
@@ -74,6 +74,7 @@ public:
     *delColumns         = nullptr,
     *delSequences       = nullptr,
     *sequencesLengths   = nullptr;
+    
     size_t
             argumentLength = size_t(-1);
 
@@ -204,6 +205,10 @@ public:
     int perform();
     void delete_variables();
 private:
+    void output_reports();
+    void save_alignment();
+    int perform_VCF();
+    void svg_stats_out();
     void print_statistics();
     bool create_or_use_similarity_matrix();
     void clean_alignment();
