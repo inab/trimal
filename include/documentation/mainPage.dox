@@ -2,35 +2,56 @@
 
 \section introduction_sec Introduction
 
-This is \b trimAl's information page. Also, you can find information related to the \link readal_pag readAl program.\endlink \n
-\b trimAl is a tool for the automated removal of spurious sequences or poorly aligned regions from a multiple sequence alignment.\n\n
+This is \b trimAl's information page. 
+You can also find information related to \link readal_pag readAl \endlink, a MSA format conversor.\n
+\b trimAl is a tool for the automated removal of 
+spurious sequences or poorly aligned regions from a multiple sequence alignment.\n\n
 
-trimAl can consider several parameters, alone or in multiple combinations, in order to select the most-reliable positions in the alignment. \n
-These include the <i> proportion of sequences with a gap</i>, the level of <i> residue similarity</i> and, if several alignments for the same set of sequences are provided, the <i> consistency level of columns among alignments</i>. \n
-Moreover, \b trimAl is able to <i> manually select a set of columns and sequences </i> to be removed from the alignment.\n\n
+\b trimAl can consider several parameters, alone or in multiple combinations, 
+in order to select the most-reliable positions in the alignment. \n
+These include the <i> proportion of sequences with a gap</i>, 
+the level of <i> residue similarity</i> and, 
+if several alignments for the same set of sequences are provided, 
+the <i> consistency level of columns among alignments</i>. \n
+Moreover, \b trimAl allows to <i> manually select a set of columns and sequences </i> 
+to be removed from the alignment.\n\n
 
-\b trimAl implements a series of automated algorithms that apply different thresholds, based on the characteristics of each alignment, to be used so that the signal-to-noise ratio after alignment trimming phase is increased.\n
+\b trimAl implements a series of automated algorithms that trim the alignment searching for
+optimum thresholds based on inherent characteristics of the input alignment,
+to be used so that the signal-to-noise ratio after alignment trimming phase is increased.\n\n
 
-The user can remove <i> spurious sequences </i> from the alignment before applying any method to improve the alignment's quality.\n
-
-Among \b trimAl's additional features, \b trimAl allows getting the <i>complementary alignment</i> (columns that were trimmed), to <i> compute statistics </i> from the alignment, to <i> select the output file format </i>, to <i> get a summary </i> of \b trimAl's trimming in HTML format, and many other options. \n
+Among \b trimAl's additional features, 
+\b trimAl allows getting the <i>complementary alignment</i> (columns that were trimmed), 
+to <i> compute statistics </i> from the alignment, 
+to <i> select the output file format </i>, 
+to <i> get a summary </i> of \b trimAl's trimming in HTML and SVG formats,
+and many other options. \n
 
 \section installation_sec Installation
 
 The simplest way to compile this package is:
 \code
-
+ 
     1.- Move to the project folder
     
-    2.- Configure the project: 
-        > cmake .
+    2.- Configure the project. 
+        This will also create the file "include/ReadWriteMS/formats_header.h" needed to handle formats.
+            > cmake .
     
-    3.- Compile the project: 
-        > make
-
+    3.- Compile the project. 
+            > make
+        
+        It is possible to increase the speed of compilation by compiling in multiple threads.
+        Specify the number of threads providing the -jN argument, where N is the number of threads.
+            > make -j2 
+            > make -j3 
+            > ...
+ 
     4.- [Optional] Move or copy binaries from folder './bin/' to '/usr/local/bin' or '/usr/bin'
-
+        This will allow you to use directly trimAl without specifiying path to binary.
+  
 \endcode
+
 \section publication_sec Publications
 <a href= "http://trimal.cgenomics.org/_media/trimal.2009.pdf">  - trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses. </a> \n
 <a href= "http://trimal.cgenomics.org/_media/supplmaterial.b.pdf">  - Supplementary material </a> \n

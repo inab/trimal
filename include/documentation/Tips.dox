@@ -2,7 +2,8 @@
 
 \section WhatIntroduction How to use
 
-\b trimAl is a program that can do a variety of things. The first thing to take in mind is <i> What input do I have? </i>
+\b trimAl is a program that can do a variety of things.\n
+The first thing to take in mind is <i> What input do I have? </i>\n\n
 
 - \link OneMSA I have a Multiple Sequence Alignment \endlink
 - I have a DNA alignment and a Protein alignment that contain the same sequences, but translated.
@@ -21,7 +22,7 @@
 \subsection OneMSA One Multiple Sequence Alignment.
 Having one Multiple Sequence Alignment you have multiple options available:
 
-- \link Heuristic Heuristic Trimming \endlink
+- \link MetaAutomated Meta Automated Trimming \endlink
 - \link Automatic Automatic Trimming \endlink
 - \link Manual Manual Trimming \endlink
 
@@ -35,17 +36,7 @@ This may result in really computational intensive, and, in some cases, redundant
 
 \b trimAl has a functionality to solve this problem: \b Compareset \n
 Instead of using the '-in' option, you can provide a file containing a filepath per line for each MSA you want to compare.\n
-Then, only the most representative alignment will be selected, reducing the number of alignments and allowing to make multiple transformations and reduce the number to one alignment again.\n
-
-\b trimAl will:
-- For each alignment in the set:
-    - For each other alignment in the set:
-        - For each sequence, present on both alignments.
-            - For each residue, calculate the consistency between sequences.
-            - Calculate the consistency between both sequences, averaging the consistency of the residues.
-        - Calculate the consistency between both alignments, averaging the consistency of their sequences.
-    - Calculate the consistency of the alignment in the set, averaging the consistencies between other alignments in the set.
-- Select the alignment with the highest consistency.
+Then, only the most representative alignment will be selected, reducing the number of alignments and allowing to make multiple transformations and reduce the number to one alignment again.\n\n
 
 The Alignment with the highest consistency will be selected, and, then, you can use this alignment as it was provided using the '-in' option.\n
 This means, you can do any type of trimming or stats reporting you would when inputting a single alignment.\n
@@ -55,10 +46,10 @@ Added to that, you can use also compareset specific arguments: ConsistencyThresh
 
 
 
-\subsection Heuristic Heuristic Trimming
+\subsection MetaAutomated Meta Automated Trimming
 \b trimAl offers multiple Automatic Methods, and selecting one of them can be tricky. \n
-If you don't know what method you should use, you can always use the Heuristic approximation, which would select one of two methods (strict and gappyout) depending on some characteristics of your alignment.\n
-To use the Heuristic method, you only have to provide the alignment file and use the '-automated1' argument. \n
+If you don't know what method you should use, you can always use the Meta Automated approximation, which would select one of two methods (strict and gappyout) depending on some characteristics of your alignment.\n
+To use the Meta Automated method, you only have to provide the alignment file and use the '-automated1' argument. \n
 Example:
 \code
  trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -automated1

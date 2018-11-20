@@ -59,12 +59,12 @@
 */
 
 /**
-\var bool trimAlManager::scc
+\var bool trimAlManager::ssc
 \brief Flag to show the Similarity Scores per column
 */
 
 /**
-\var bool trimAlManager::sct
+\var bool trimAlManager::sst
 \brief Flag to show the Accumulated Similarity Scores
 */
 
@@ -96,11 +96,6 @@
 /**
 \var bool trimAlManager::selectCols
 \brief Flag to select columns manually from the alignment
-*/
-
-/**
-\var bool trimAlManager::shortNames
-\brief Flag to shorten the names to a maximum of 10
 */
 
 /**
@@ -164,11 +159,6 @@
 */
 
 /**
-\var int trimAlManager::prevType
-\brief Flag to keep the sequence type while checking multiple files.
-*/
-
-/**
 \var int trimAlManager::compareset
 \brief Pointer to the argument that contains the compareset file.
 */
@@ -214,26 +204,6 @@
 */
 
 /**
-\var int trimAlManager::num
-\brief Temporal variable
-*/
-
-/**
-\var int trimAlManager::maxAminos
-\brief Temporal variable used when comparing alignments
-*/
-
-/**
-\var int trimAlManager::numfiles
-\brief Temporal variable used to store the number of files present in the compareset file
-*/
-
-/**
-\var int trimAlManager::referFile
-\brief Temporal variable used to track which file are we currently comparing
-*/
-
-/**
 \var int trimAlManager::automatedMethodCount
 \brief Integer counter of the automatic methods. \n 
 If the counter is bigger than 0, we are using an automatic method.\n 
@@ -262,12 +232,6 @@ If the counter is bigger than 1, we are trying to use multiple automatic methods
 */
 
 /**
-\var string trimAlManager::nline
-\brief Temporal variable to use on the trimAlManager::check_multiple_files_comparison
-\note This can be moved there.
-*/
-
-/**
 \var string trimAlManager::sequencesNames
 \brief Temporal variable to use in backtranslation option to compare with infile.
 \note This variable may be deleted, as we don't need to copy the sequences names to compare them.
@@ -277,16 +241,6 @@ If the counter is bigger than 1, we are trying to use multiple automatic methods
 \var ifstream trimAlManager::compare
 \brief Temporal variable to open files in trimAlManager::check_multiple_files_comparison function.
 \note This could be moved there
-*/
-
-/**
-\var float trimAlManager::values
-\brief Vector with the consistency value for each column in the selected alignment
-*/
-
-/**
-\var sequencesMatrix trimAlManager::seqMatrix
-\brief Temporal Sequences Matrix
 */
 
 /**

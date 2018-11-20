@@ -157,18 +157,18 @@ This could happen if the sequences contain any unknown character or if aligned f
 */
 
 /**
-\fn newAlignment::getSequences(string * names, int * lengths)
-\brief Getter for the sequences names and its lengths.
+\fn newAlignment::getSequences(string * names, int * lenghts)
+\brief Getter for the sequences names and its lenghts.
 \param[out] names Vector of sequences names to fill.
-\param[out] lengths Vector of lengths to fill.
+\param[out] lenghts Vector of lenghts to fill.
 */
 
 /**
-\fn newAlignment::getSequences(string * names, string * sequences, int * lenghts)
+\fn newAlignment::getSequences(string* names, string *sequences, int *lenghts)
 \brief Getter for the sequences, its names and lenghts.
 \param[out] names Vector of sequences names to fill.
 \param[out] sequences Vector of sequences to fill.
-\param[out] lengths Vector of lengths to fill.
+\param[out] lenghts Vector of lenghts to fill.
 */
 
 /**
@@ -200,28 +200,8 @@ If the sequence is present, its index will be stored in orderVector.\n
 \param blockSize New value.
 */
 
-
 /**
-\fn newAlignment::getBlockSize(void)
-\warning Not In Use
-\brief BlockSize getter.
-\return New BlockSize value.
-*/
-
-/**
-\fn newAlignment::calculateSeqIdentity(void)
-\warning Not In Use
-\brief Calculates identity between sequences.
-*/
-
-/**
-\fn newAlignment::calculateRelaxedSeqIdentity(void)
-\warning Not In Use
-\brief Lightweight version of newAlignment::calculateSeqIdentity for use in huge alignments.
-*/
-
-/**
-\fn newAlignment::calculateSeqOverlap(void)
+\fn newAlignment::calculateSeqOverlap()
 \brief Calculates overlap between sequences.
 */
 
@@ -240,24 +220,8 @@ Moreover, the method computes which one is the most similar sequence.
 /**
 \fn newAlignment::getAlignmentType(void)
 \brief Alignment type getter.
-\n See \link SequenceTypes
+\n See \link SequenceTypes \endlink
 \return Int representing the alignment type.\n
-*/
-
-/**
-\fn newAlignment::getCorrespResidues(void)
-\warning Not In Use
-\brief Method that returns the correspondence between old and new alignment residues.
-\n See newAlignment::saveResidues
-\return Vector that represents which residues are kept (!= -1) and which are rejected (== -1)
-*/
-
-/**
-\fn newAlignment::getCorrespSequences(void)
-\warning Not In Use
-\brief Method that returns the correspondence between old and new alignment sequences.
-\n See newAlignment::saveSequences
-\return Vector that represents which sequences are kept (!= -1) and which are rejected (== -1)
 */
 
 /** 
@@ -290,14 +254,6 @@ Moreover, the method computes which one is the most similar sequence.
 */
 
 /**
-\fn newAlignment::fillNewDataStructure(string * newMatrix, string * newNames)
-\warning Not In Use
-\brief Method that copies information of the alignment to the pointers given.
-\param[out] newMatrix Sequences vector to fill.
-\param[out] newNames Names vector to fill.
-*/
-
-/**
 \fn newAlignment::calculateColIdentity(float * columnIdentity)
 \brief Method that calculates the columns identity value.\n
 This is, the frequency of the most present element in the column, being residue, indetermination and gap allowed.
@@ -305,21 +261,8 @@ This is, the frequency of the most present element in the column, being residue,
 */
 
 /**
-\fn newAlignment::printColumnsIdentity_DescriptiveStats(void)
-\warning Not In Use
-\brief Method to print Identity stats: Min, Max, Avg and Std.
-*/
-
-/**
 \fn newAlignment::setKeepSequencesFlag(bool newFlagValue)
 \brief Keep Sequences setter.
-\param newFlagValue New flag value
-*/
-
-/**
-\fn newAlignment::setKeepSeqsHeaderFlag(bool newFlagValue)
-\warning Not In Use
-\brief Keep Header setter.
 \param newFlagValue New flag value
 */
 
@@ -348,10 +291,6 @@ It will also remove or split stop codons depending on the flags passed.
 Outputs an HTML file that shows visually what has been done to the alignment (removed sequences or residues) and the stats used to do so.
 \param _trimmedAlignment Trimmed alignment to compare with.
 \param destFile Filename where to save the results.
-\param consValues Vector containing the consistency values of columns.\n
-The consistency may be a null pointer, meaning we don't want to report consistency values.\n
-This may happen if we didn't calculated the consistency values or used them to choose the best alignment among a set,
-but not used to trim the alignment itself.
 \return \b True if correct.
 \n      \b False if file couldn't be open or alignment is not aligned.
 */
@@ -361,21 +300,8 @@ but not used to trim the alignment itself.
 \brief Method to report the trimming results in SVG.\n
 Outputs a SVG file that shows visually what has been done to the alignment (removed sequences or residues) and the stats used to do so.\param _trimmedAlignment Trimmed alignment obtained from the object calling this function.
 \param destFile Filename where to save the results.
-\param consValues Vector containing the consistency values of columns.
-\n The consistency may be a null pointer, meaning we don't want to report consistency values.\n
-This may happen if we didn't calculated the consistency values or used them to choose the best alignment among a set,
-but not used to trim the alignment itself.
 \param blocks Size in residues to report. 120 by default.
 \return \b True if everything went ok. \n \b False if file couldn't be open or alignment is not aligned.
-*/
-
-/**
-\fn newAlignment::alignmentColourHTML(ostream &file)
-\warning Not In Use
-\brief Method that saves a clustal-color based visualization of the alignment.\n
-It doesn't report any trimming result, meaning this only shows information of an alignment.
-\param file Where to save the visualization.
-\return \b True if everything went ok. \n \b False if alignment is not aligned.
 */
 
 /**
