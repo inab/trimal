@@ -1438,17 +1438,16 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
 
     int fontSize = 15;
 
-    // Allocate some local memory
-    char *tmpColumn = new char[originalSequenNumber + 1];
-
     // Open the file;
     ofstream file;
     file.open(destFile);
     if (!file)
     {
-        delete[] tmpColumn;
         return false;
     }
+
+    // Allocate some local memory
+    char *tmpColumn = new char[originalSequenNumber + 1];
 
     // Compute HTML blank spaces
     j = 0;
