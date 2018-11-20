@@ -1,17 +1,21 @@
-#include "string"
-#include "values.h"
-#include "defines.h"
-#include "vcf_statish.h"
-#include "reportsystem.h"
-#include "TimerFactory.h"
-#include "trimalManager.h"
-#include "Statistics/statisticsConsistency.h"
-#include "Statistics/statisticsConservation.h"
+#include "../include/Statistics/statisticsConservation.h"
+#include "../include/Statistics/statisticsConsistency.h"
+#include "../include/Statistics/StatisticsManager.h"
+#include "../include/similarityMatrix.h"
+#include "../include/trimalManager.h"
+#include "../include/reportsystem.h"
+#include "../include/newAlignment.h"
+#include "../include/TimerFactory.h"
+#include "../include/VCFHandler.h"
+#include "../include/Cleaner.h"
+#include "../include/defines.h"
+#include "../include/values.h"
+#include "../include/utils.h"
 
 // Macros defined on this file will be defined
 //  before the method that uses them.
 // This is due to macros that are only used on
-//  one method
+//  one method.
 
 trimAlManager::trimAlManager() {
     // Create a timer that will report times upon its destruction
@@ -181,7 +185,7 @@ inline void trimAlManager::verbosity_argument(const int *argc, char *argv[]) {
     }
 }
 
-inline void trimAlManager::help_arguments(const int *argc, char **argv, int *i) {
+inline void trimAlManager::help_arguments(const int *argc, char *argv[], int *i) {
     if (!strcmp(argv[*i], "-h") || !strcmp(argv[*i], "-help")) {
         menu();
         examples();
@@ -194,8 +198,8 @@ inline void trimAlManager::help_arguments(const int *argc, char **argv, int *i) 
     }
 
     if (!strcmp(argv[*i], "-lf") || !strcmp(argv[*i], "--listformats")) {
-        cout << "Input Formats:  " << ReadWriteMachine.getInputFormatsAvailable() << endl;
-        cout << "Output Formats: " << ReadWriteMachine.getOutputFormatsAvailable() << endl;
+        std::cout << "Input Formats:  " << ReadWriteMachine.getInputFormatsAvailable() << "\n";
+        std::cout << "Output Formats: " << ReadWriteMachine.getOutputFormatsAvailable() << "\n";
         exit(0);
     }
 }
@@ -343,7 +347,7 @@ inline bool trimAlManager::matrix_argument(const int *argc, char *argv[], int *i
 inline bool trimAlManager::compareset_argument(const int *argc, char *argv[], int *i) {
     if (!strcmp(argv[*i], "-compareset") && ((*i) + 1 != *argc) && (compareset == -1)) {
         // Check if file can be opened
-        compare.open(argv[++*i], ifstream::in);
+        compare.open(argv[++*i], std::ifstream::in);
         if (!compare) {
             debug.report(ErrorCode::ReferenceFileNotLoaded, argv[*i]);
             appearErrors = true;
@@ -838,7 +842,7 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {
             {
                 if (delSequences[i] >= origAlig->getNumSpecies()) {
                     debug.report(ErrorCode::SelectOnlyAccepts,
-                                 new string[2]{"-selectseqs", "sequences"});
+                                 new std::string[2]{"-selectseqs", "sequences"});
                     appearErrors = true;
                     break;
                 }
@@ -918,7 +922,7 @@ inline bool trimAlManager::check_windows_incompatibilities() {
 inline bool trimAlManager::check_stats_incompatibilities() {
     if (stats < 0) {
         if (columnNumbering) {
-            debug.report(ErrorCode::StatisticsArgumentIncompatibilities, new string[1]{"-colnumbering"});
+            debug.report(ErrorCode::StatisticsArgumentIncompatibilities, new std::string[1]{"-colnumbering"});
             appearErrors = true;
         }
     }
@@ -1073,7 +1077,7 @@ inline bool trimAlManager::check_outputs_coincidence() {
         svgStatsOutFile
     }};
 
-    std::array<string, 4> outFilesNames
+    std::array<std::string, 4> outFilesNames
     {{
         "html report (-htmlout)",
         "output alignment (-out)",
@@ -1123,11 +1127,11 @@ inline bool trimAlManager::check_col_numbering() {
 inline bool trimAlManager::check_residue_and_sequence_overlap() {
     if (!appearErrors) {
         if ((residuesOverlap != -1) && (sequenceOverlap == -1)) {
-            debug.report(ErrorCode::SequenceAndResiduesOverlapMutuallyNeeded, new string[1]{"residues overlap"});
+            debug.report(ErrorCode::SequenceAndResiduesOverlapMutuallyNeeded, new std::string[1]{"residues overlap"});
             appearErrors = true;
             return true;
         } else if ((residuesOverlap == -1) && (sequenceOverlap != -1)) {
-            debug.report(ErrorCode::SequenceAndResiduesOverlapMutuallyNeeded, new string[1]{"sequences overlap"});
+            debug.report(ErrorCode::SequenceAndResiduesOverlapMutuallyNeeded, new std::string[1]{"sequences overlap"});
             appearErrors = true;
             return true;
         }
@@ -1196,11 +1200,12 @@ inline bool trimAlManager::check_multiple_files_comparison(char *argv[]) {
         statisticsConsistency *CS = new statisticsConsistency();
         CS->perform(argv[compareset], ReadWriteMachine, *this, forceFile);
     }
+    return appearErrors;
 }
 
 inline bool trimAlManager::check_block_size() {
     if ((!appearErrors) && (origAlig->getNumAminos() < (blockSize / 4))) {
-        debug.report(ErrorCode::BlocksizeTooBig, new string[1]{std::to_string(origAlig->getNumAminos() / 4)});
+        debug.report(ErrorCode::BlocksizeTooBig, new std::string[1]{std::to_string(origAlig->getNumAminos() / 4)});
         appearErrors = true;
         return true;
     }
@@ -1214,14 +1219,14 @@ inline bool trimAlManager::check_backtranslations() {
             // Crossed dependency between Backtranslation and SplitByCodon
 
             if (splitByStopCodon) {
-                debug.report(ErrorCode::ParemeterOnlyOnBacktranslation, new string[1]{"-splitbystopcodon"});
+                debug.report(ErrorCode::ParemeterOnlyOnBacktranslation, new std::string[1]{"-splitbystopcodon"});
                 appearErrors = true;
                 return true;
             }
 
             // Crossed dependency between Backtranslation and IgnoreStopCodon
             if (ignoreStopCodon) {
-                debug.report(ErrorCode::ParemeterOnlyOnBacktranslation, new string[1]{"-ignorestopcodon"});
+                debug.report(ErrorCode::ParemeterOnlyOnBacktranslation, new std::string[1]{"-ignorestopcodon"});
                 appearErrors = true;
                 return true;
             }
@@ -1241,7 +1246,7 @@ inline bool trimAlManager::check_coding_sequences_type() {
         // Is there a backtranslation file?
             (!appearErrors) && (backtransFile != nullptr) && 
         // If so, is it from DNA? If not...
-            (!backtranslationAlig->getAlignmentType() & SequenceTypes::DNA)) 
+            ( (!backtranslationAlig->getAlignmentType()) & SequenceTypes::DNA)) 
     {
         // When doing backtranslation, 
         //  a DNA alignment (without gaps) is needed.
@@ -1278,7 +1283,7 @@ inline bool trimAlManager::check_backtranslation_infile_names_corresponde() {
     // which doesn't modify the pointers passed to them
 
     if ((!appearErrors) && (backtransFile != nullptr)) {
-        sequencesNames = new string[backtranslationAlig->getNumSpecies()];
+        sequencesNames = new std::string[backtranslationAlig->getNumSpecies()];
         sequencesLengths = new int[backtranslationAlig->getNumSpecies()];
         backtranslationAlig->getSequences(sequencesNames, sequencesLengths);
 
@@ -1422,14 +1427,14 @@ inline void trimAlManager::output_reports()
     if ((svgOutFile != nullptr) && (!appearErrors))
         if (!origAlig->
                 alignmentSummarySVG(*singleAlig, svgOutFile, 0)) {
-            debug.report(ErrorCode::ImpossibleToGenerate, new string[1]{"the SVG output file"});
+            debug.report(ErrorCode::ImpossibleToGenerate, new std::string[1]{"the SVG output file"});
             appearErrors = true;
         }
 
     if ((htmlOutFile != nullptr) && (!appearErrors))
         if (!origAlig->
                 alignmentSummaryHTML(*singleAlig, htmlOutFile)) {
-            debug.report(ErrorCode::ImpossibleToGenerate, new string[1]{"the HTML output file"});
+            debug.report(ErrorCode::ImpossibleToGenerate, new std::string[1]{"the HTML output file"});
             appearErrors = true;
         }
 }
@@ -1645,16 +1650,6 @@ inline void trimAlManager::CleanSequences() {
     //	which means the end of the current scope.
     StartTiming("inline void trimAlManager::CleanSequences() ");
 
-    // tempAlig should be nullptr,      
-    //  but a security check may help in the future.
-    tempAlig = new newAlignment();
-    if (tempAlig != nullptr)
-    {
-        delete tempAlig; 
-        tempAlig = nullptr;
-        debug << "tempAlig should be null when entering trimAlManager::CleanSequences";
-    }
-
     // Clustering by number of clusters
     if (clusters != -1) {
         tempAlig = origAlig->Cleaning->getClustering(
@@ -1756,7 +1751,7 @@ inline void trimAlManager::CleanResiduesNonAuto() {
             if (delColumns[i] >= singleAlig->getNumAminos()) {
                 debug.report(
                         ErrorCode::SelectOnlyAccepts,
-                        new string[2]{"-selectcols", "residues"}
+                        new std::string[2]{"-selectcols", "residues"}
                 );
                 appearErrors = true;
             }

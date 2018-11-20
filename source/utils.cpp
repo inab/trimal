@@ -27,18 +27,11 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "../include/utils.h"
-#include "../include/values.h"
-#include "../include/defines.h"
+#include "../include/TimerFactory.h"
 #include "../include/reportsystem.h"
-#include <sstream>
-#include <iomanip>
-#include <cmath>
-#include <vector>
-#include <cstdio>
-#include <string>
-#include <TimerFactory.h>
-
+#include "../include/defines.h"
+#include "../include/values.h"
+#include "../include/utils.h"
 
 void utils::initlVect(int *vector, int tam, int valor) {
 
@@ -285,7 +278,7 @@ void utils::swap(int **a, int **b) {
     *b = temp;
 }
 
-bool utils::checkFile(ifstream &file) {
+bool utils::checkFile(std::ifstream &file) {
     // Check if a given file exists and its size is greater than 0 
     long begin, end;
 
@@ -295,9 +288,9 @@ bool utils::checkFile(ifstream &file) {
 
     // Check input file sizes. A valid file should have a size grater than 0 
     begin = file.tellg();
-    file.seekg(0, ios::end);
+    file.seekg(0, std::ios::end);
     end = file.tellg();
-    file.seekg(0, ios::beg);
+    file.seekg(0, std::ios::beg);
     // Compare difference between file start and end.
     // Depending on result, return True or False 
     if (!(end - begin))
@@ -305,15 +298,15 @@ bool utils::checkFile(ifstream &file) {
     return true;
 }
 
-char *utils::readLine(ifstream &file) {
-    StartTiming("char* utils::readLine(ifstream &file) ");
+char *utils::readLine(std::ifstream &file) {
+    StartTiming("char* utils::readLine(std::ifstream &file) ");
     // Read a new line from current input stream. This function is better than
     // standard one since cares of operative system compability. It is useful
     // as well because remove tabs and blank spaces at lines beginning/ending 
 
     int state;
     char c = ' ';
-    string nline;
+    std::string nline;
     char *line = nullptr;
 
     // Check it the end of the file has been reached or not
@@ -328,13 +321,13 @@ char *utils::readLine(ifstream &file) {
 
     // Remove blank spaces & tabs from the beginning of the line
     state = nline.find(' ', 0);
-    while (state != (int) string::npos && state == 0) {
+    while (state != (int) std::string::npos && state == 0) {
         nline.erase(state, 1);
         state = nline.find(' ', state);
     }
 
     state = nline.find('\t', 0);
-    while (state != (int) string::npos && state == 0) {
+    while (state != (int) std::string::npos && state == 0) {
         nline.erase(state, 1);
         state = nline.find('\t', state);
     }
@@ -357,8 +350,8 @@ char *utils::readLine(std::istream &file) {
 
     int state;
     char c = ' ';
-    string nline;
-    static char *line = nullptr;
+    std::string nline;
+    char *line = nullptr;
 
     // Check it the end of the file has been reached or not
     if (file.eof())
@@ -373,13 +366,13 @@ char *utils::readLine(std::istream &file) {
     /* Remove blank spaces & tabs from the beginning of the line */
 
     state = nline.find(' ', 0);
-    while (state != (int) string::npos && state == 0) {
+    while (state != (int) std::string::npos && state == 0) {
         nline.erase(state, 1);
         state = nline.find(' ', state);
     }
 
     state = nline.find('\t', 0);
-    while (state != (int) string::npos && state == 0) {
+    while (state != (int) std::string::npos && state == 0) {
         nline.erase(state, 1);
         state = nline.find('\t', state);
     }
@@ -395,15 +388,15 @@ char *utils::readLine(std::istream &file) {
     return line;
 }
 
-char *utils::trimLine(string nline) {
+char *utils::trimLine(std::string nline) {
     // This function is used to remove comments in between a biological sequence.
     // Removes all content surrounded by ("") or ([]).
     // It warns as well when a mismatch for these flags is found
 
     int pos, next;
-    static char *line;
+    char *line;
 
-    // Set-up lower and upper limit to look for comments inside of input string
+    // Set-up lower and upper limit to look for comments inside of input std::string
     pos = -1;
 
     // Identify comments inside of input sequence and remove it
@@ -412,7 +405,7 @@ char *utils::trimLine(string nline) {
 
         // When there is not any more a comment inside of sequence,
         // go out from this loop 
-        if (pos == (int) string::npos)
+        if (pos == (int) std::string::npos)
             break;
 
         // Look for closing flag
@@ -439,14 +432,14 @@ char *utils::trimLine(string nline) {
 
         // Search for last opened bracket. It is supposed to be the first one for
         // being close
-        while ((pos = nline.find('[', (pos + 1))) != (int) string::npos)
+        while ((pos = nline.find('[', (pos + 1))) != (int) std::string::npos)
             next = pos;
 
         // If no opening bracket has been found.
         // Check if there is any closing one
         if (next == -1) {
-            // There are not any bracket in input string
-            if ((int) nline.find(']', 0) == (int) string::npos)
+            // There are not any bracket in input std::string
+            if ((int) nline.find(']', 0) == (int) std::string::npos)
                 break;
             // Otherwise, warn about the error
             debug.report(ErrorCode::BracketsMissmatchFound);
@@ -457,7 +450,7 @@ char *utils::trimLine(string nline) {
         pos = nline.find(']', (next + 1));
 
         //If no closing bracket has been found. Warn about the mismatch
-        if (pos == (int) string::npos) {
+        if (pos == (int) std::string::npos) {
             debug.report(ErrorCode::BracketsMissmatchFound);
             return nullptr;
         }
@@ -466,7 +459,7 @@ char *utils::trimLine(string nline) {
         nline.erase(next, (pos - next + 1));
     }
 
-    // Check if after removing all comments from input string there is still part
+    // Check if after removing all comments from input std::string there is still part
     // of sequences or not
     if (nline.empty())
         return nullptr;
@@ -478,24 +471,22 @@ char *utils::trimLine(string nline) {
     return line;
 }
 
-string utils::getReverse(string toReverse) {
+std::string utils::getReverse(std::string toReverse) {
 
-    string line;
+    std::string line(toReverse.size(), ' ');
     size_t i;
 
     for (i = toReverse.size() - 1; i >= 0; i--)
         line += toReverse[i];
-
-
     return line;
 }
 
-string utils::removeCharacter(char c, string line) {
+std::string utils::removeCharacter(char c, std::string line) {
 
     size_t pos;
 
     pos = line.find(c, 0);
-    while (pos != (int) string::npos) {
+    while (pos != (int) std::string::npos) {
         line.erase(pos, 1);
         pos = line.find(c, pos);
     }
@@ -503,7 +494,7 @@ string utils::removeCharacter(char c, string line) {
     return line;
 }
 
-int utils::checkAlignmentType(int seqNumber, int residNumber, string *sequences) {
+int utils::checkAlignmentType(int seqNumber, int residNumber, std::string *sequences) {
 
     int i, j, k, l, hitDNA, hitRNA, degenerate, gDNA, gRNA, extDNA, extRNA;
     float ratioDNA, ratioRNA;
@@ -575,7 +566,7 @@ int utils::checkAlignmentType(int seqNumber, int residNumber, string *sequences)
         return SequenceTypes::NotDefined;
 }
 
-int *utils::readNumbers(string line) {
+int *utils::readNumbers(std::string line) {
 
     int i, nElems = 0;
     static int *numbers;
@@ -583,7 +574,7 @@ int *utils::readNumbers(string line) {
     size_t comma, separ, init;
 
     comma = size_t(-1);
-    while ((comma = line.find(',', comma + 1)) != (int) string::npos)
+    while ((comma = line.find(',', comma + 1)) != (int) std::string::npos)
         nElems += 2;
     nElems += 2;
 
@@ -597,11 +588,11 @@ int *utils::readNumbers(string line) {
         comma = line.find(',', init);
         separ = line.find('-', init);
 
-        if (((separ < comma) || (comma == (int) string::npos)) && (separ != (int) string::npos)) {
+        if (((separ < comma) || (comma == (int) std::string::npos)) && (separ != (int) std::string::npos)) {
             numbers[i++] = atoi(line.substr(init, separ - init).c_str());
             numbers[i++] = atoi(line.substr(separ + 1, comma - separ - 1).c_str());
             init = comma + 1;
-        } else if ((separ > comma) || (separ == (int) string::npos)) {
+        } else if ((separ > comma) || (separ == (int) std::string::npos)) {
             numbers[i++] = atoi(line.substr(init, comma - init).c_str());
             numbers[i++] = atoi(line.substr(init, comma - init).c_str());
             init = comma + 1;
@@ -611,7 +602,7 @@ int *utils::readNumbers(string line) {
             return nullptr;
         if (numbers[i - 1] < numbers[i - 2])
             return nullptr;
-        if (comma == (int) string::npos)
+        if (comma == (int) std::string::npos)
             break;
 
     } while (true);
@@ -620,7 +611,7 @@ int *utils::readNumbers(string line) {
 }
 
 
-char utils::determineColor(char res, string column) {
+char utils::determineColor(char res, std::string column) {
 
     if (toupper(res) == 'G')
         return 'o';
@@ -738,7 +729,7 @@ char utils::determineColor(char res, string column) {
 }
 
 
-bool utils::lookForPattern(const string data, const string pattern, const float threshold) {
+bool utils::lookForPattern(const std::string data, const std::string pattern, const float threshold) {
 
     float count = 0;
     int i, j;
@@ -775,6 +766,9 @@ std::string utils::ReplaceString(std::string subject,
     }
     return subject;
 }
+
+
+
 
 int utils::GetGapStep(int *gapValue, int sequenNumber) {
     // Special cases. Upper and Lower limits.
@@ -892,11 +886,18 @@ int utils::GetConsStep(float *consValue) {
     return 1;
 }
 
+// char utils::toUpper(char c) 
+// {
+//     if (c >= 'a' and c <= 'z')
+//         return c & (~(1<<5));
+//     return c;
+// }
+
 void utils::streamSVG(float *x, float *y, int num,
                       std::string *lineName, std::string *lineColor,
                       std::string *chartTitle, std::string *filename) {
-    static ofstream file;
-    static stringstream legend;
+    static std::ofstream file;
+    static std::stringstream legend;
     static float lastX = INFINITY;
     static std::vector<std::string> linesLegend = std::vector<std::string>();
     static FILE *tmpFile;
@@ -931,7 +932,7 @@ void utils::streamSVG(float *x, float *y, int num,
         // svg header
         file << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" "
              << "height=\"" << grayboxHeight << "\" "
-             << "width=\"" << grayboxWidth << "\">" << endl;
+             << "width=\"" << grayboxWidth << "\">" << "\n";
 
         // White box
         file << "<rect "
@@ -940,7 +941,7 @@ void utils::streamSVG(float *x, float *y, int num,
              << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
              << "height=\"" << whiteboxHeight << "\" "
              << "style=\"fill:white; stroke:black; stroke-width:2\" "
-             << "/>" << endl;
+             << "/>" << "\n";
 
         // Header text
         file << "<text text-anchor=\"middle\" "
@@ -949,7 +950,7 @@ void utils::streamSVG(float *x, float *y, int num,
              << "font-size=\"" << (grayboxHeight - whiteboxHeight) * heightRatio * 10.F / chartTitle->length() << "\" "
              << ">"
              << *chartTitle
-             << "</text>" << endl;
+             << "</text>" << "\n";
 
         // Horizontal lines
         for (int xx = 0; xx < 11; xx++) {
@@ -961,7 +962,7 @@ void utils::streamSVG(float *x, float *y, int num,
                  << "y2=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight) * (xx * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
                  << "style=\"stroke:black;stroke-width:1\" "
                  << "stroke-dasharray=\"1, 1\" "
-                 << "opacity=\"0.5\"/>" << endl;
+                 << "opacity=\"0.5\"/>" << "\n";
 
             // Labels
             file << "<text "
@@ -971,7 +972,7 @@ void utils::streamSVG(float *x, float *y, int num,
                  << "xml:space=\"preserve\" "
                  << "font-size=\"" << fontSize << "\">"
                  << (10 - xx) / 10.F
-                 << "</text>" << endl;
+                 << "</text>" << "\n";
         }
 
         // Horizontal lines
@@ -984,7 +985,7 @@ void utils::streamSVG(float *x, float *y, int num,
                  << "y2=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + whiteboxHeight << "\" "
                  << "style=\"stroke:black;stroke-width:1\" "
                  << "stroke-dasharray=\"1, 1\" "
-                 << "opacity=\"0.5\"/>" << endl;
+                 << "opacity=\"0.5\"/>" << "\n";
 
             // Labels
             file << "<text "
@@ -994,7 +995,7 @@ void utils::streamSVG(float *x, float *y, int num,
                  << "xml:space=\"preserve\" "
                  << "font-size=\"" << fontSize << "\">"
                  << xx2 * 10 << " %"
-                 << "</text>" << endl;
+                 << "</text>" << "\n";
         }
 
         originX = (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxDeltaHeight * 0.5F);
@@ -1004,7 +1005,7 @@ void utils::streamSVG(float *x, float *y, int num,
     } else if (x != NULL && y != NULL && lineColor != NULL) {
         if (*x < lastX) {
             if (lastX != INFINITY) {
-                file << "\"/>" << endl;
+                file << "\"/>" << "\n";
             }
             linesLegend.emplace_back(*lineColor + ";" + *lineName);
             file << "<polyline stroke-linecap=\"round\" "
@@ -1023,7 +1024,7 @@ void utils::streamSVG(float *x, float *y, int num,
 
         lastX = *x;
     } else {
-        file << "\"/>" << endl;
+        file << "\"/>" << "\n";
 
         float deltaHeigth = whiteboxHeight / (float) (linesLegend.size() + 1);
         deltaHeigth = std::min(whiteboxHeight * 0.12F, deltaHeigth);
@@ -1037,7 +1038,7 @@ void utils::streamSVG(float *x, float *y, int num,
              << "height=\"" << deltaHeigth * (linesLegend.size() + 1) << "\" "
              << "style=\"fill:white; stroke:black; stroke-width:2\" "
              << "fill-opacity=\"0.25\" "
-             << "/>" << endl;
+             << "/>" << "\n";
 
         file << "<text "
              << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.5F << "\" "
@@ -1046,14 +1047,14 @@ void utils::streamSVG(float *x, float *y, int num,
              << "xml:space=\"preserve\" "
              << "font-size=\"" << fontSize * 2 << "\">"
              << "Statistics"
-             << "</text>" << endl;
+             << "</text>" << "\n";
 
         file << "<line "
              << "x1=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + 12 << "\" "
              << "x2=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 1.F << "\" "
              << "y1=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0.3F + deltaHeigth * 0.5F << "\" "
              << "y2=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0.3F + deltaHeigth * 0.5F << "\" "
-             << "style=\"stroke:black;stroke-width:2\" />" << endl;
+             << "style=\"stroke:black;stroke-width:2\" />" << "\n";
 
 
         for (int x = 0; x < linesLegend.size(); x++) {
@@ -1064,7 +1065,7 @@ void utils::streamSVG(float *x, float *y, int num,
                  << "height=\"" << height << "\" "
                  << "style=\"fill:" << strtok(&linesLegend[x][0], ";") << "; stroke:black; stroke-width:2\" "
                  << "fill-opacity=\"0.75\" "
-                 << "/>" << endl;
+                 << "/>" << "\n";
 
             file << "<text "
                  << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.5F << "\" "
@@ -1073,7 +1074,7 @@ void utils::streamSVG(float *x, float *y, int num,
                  << "xml:space=\"preserve\" "
                  << "font-size=\"" << fontSize << "\">"
                  << strtok(NULL, "")
-                 << "</text>" << endl;
+                 << "</text>" << "\n";
         }
         // svg footer
 

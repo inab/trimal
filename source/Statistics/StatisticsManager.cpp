@@ -1,13 +1,13 @@
-#include <TimerFactory.h>
 //
 // Created by bioinfo on 5/06/17.
 //
 
-#include "../include/Statistics/StatisticsManager.h"
-#include "../include/newAlignment.h"
-#include "../include/Statistics/statisticsGaps.h"
-#include "../include/Statistics/statisticsConservation.h"
-#include "../include/Statistics/statisticsConsistency.h"
+#include "../../include/Statistics/statisticsConservation.h"
+#include "../../include/Statistics/statisticsConsistency.h"
+#include "../../include/Statistics/StatisticsManager.h"
+#include "../../include/Statistics/statisticsGaps.h"
+#include "../../include/newAlignment.h"
+#include "../../include/TimerFactory.h"
 
 
 bool StatisticsManager::calculateConservationStats(void) {
@@ -125,11 +125,11 @@ void StatisticsManager::printCorrespondence(void) {
 	StartTiming("void StatisticsManager::printCorrespondence(void) ");
     int i;
 
-    cout << "#ColumnsMap\t";
+    std::cout << "#ColumnsMap\t";
     // Print the saveResidues relathionship
     for (i = 0; i < _alignment->residNumber - 1; i++)
-        cout << _alignment->saveResidues[i] << ", ";
-    cout << _alignment->saveResidues[i] << endl;
+        std::cout << _alignment->saveResidues[i] << ", ";
+    std::cout << _alignment->saveResidues[i] << std::endl;
 
 }
 

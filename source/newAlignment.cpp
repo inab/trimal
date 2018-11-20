@@ -1,4 +1,3 @@
-#include <TimerFactory.h>
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
@@ -30,17 +29,19 @@
 
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-using namespace std;
-
-#include "values.h"
-#include "Cleaner.h"
-#include "defines.h"
-
-#include "newAlignment.h"
-#include "reportsystem.h"
-#include "Statistics/statisticsGaps.h"
-#include "Statistics/statisticsConservation.h"
-#include "Statistics/statisticsConsistency.h"
+#include "../include/Statistics/statisticsConservation.h"
+#include "../include/Statistics/statisticsConsistency.h"
+#include "../include/Statistics/StatisticsManager.h"
+#include "../include/Statistics/statisticsGaps.h"
+#include "../include/sequencesMatrix.h"
+#include "../include/similarityMatrix.h"
+#include "../include/TimerFactory.h"
+#include "../include/reportsystem.h"
+#include "../include/newAlignment.h"
+#include "../include/defines.h"
+#include "../include/Cleaner.h"
+#include "../include/values.h"
+#include "../include/utils.h"
 
 using namespace std;
 
@@ -126,6 +127,7 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
         // Increase the number of elements using the shared information.
         this->SeqRef = originalAlignment.SeqRef;
         (*SeqRef)++;
+
     }
 }
 
@@ -288,7 +290,7 @@ void newAlignment::setKeepSeqsHeaderFlag(bool newFlagValue) {
 int newAlignment::getBlockSize() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("int newAlignment::getBlockSize(void) ");
+    StartTiming("int newAlignment::getBlockSize() ");
     return Cleaning->blockSize;
 }
  */
@@ -420,24 +422,24 @@ void newAlignment::getSequences(string *Names) {
         Names[i] = seqsName[i];
 }
 
-void newAlignment::getSequences(string *Names, int *lengths) {
+void newAlignment::getSequences(string *Names, int *lenghts) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void newAlignment::getSequences(string *Names, int *lengths) ");
     for (int i = 0; i < sequenNumber; i++) {
-        lengths[i] = (int) utils::removeCharacter('-', sequences[i]).length();
+        lenghts[i] = (int) utils::removeCharacter('-', sequences[i]).length();
         Names[i] = seqsName[i];
     }
 }
 
-void newAlignment::getSequences(string *Names, string *Sequences, int *Lengths) {
+void newAlignment::getSequences(string *Names, string *Sequences, int *lengths) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::getSequences(string *Names, string *Sequences, int *Lengths) ");
+    StartTiming("void newAlignment::getSequences(string *Names, string *Sequences, int *lengths) ");
     for (int i = 0; i < sequenNumber; i++) {
         Names[i] = seqsName[i];
         Sequences[i] = utils::removeCharacter('-', sequences[i]);
-        Lengths[i] = (int) Sequences[i].length();
+        lengths[i] = (int) Sequences[i].length();
     }
 }
 

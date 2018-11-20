@@ -1,26 +1,18 @@
-#include <TimerFactory.h>
-//
-// Created by bioinfo on 2/06/17.
-//
-#include "../include/utils.h"
-#include "../include/values.h"
 
-#include "../include/Cleaner.h"
-#include "../include/Statistics/StatisticsManager.h"
-#include "../include/Statistics/statisticsGaps.h"
 #include "../include/Statistics/statisticsConservation.h"
 #include "../include/Statistics/statisticsConsistency.h"
-
+#include "../include/Statistics/StatisticsManager.h"
+#include "../include/Statistics/statisticsGaps.h"
+#include "../include/TimerFactory.h"
 #include "../include/newAlignment.h"
-#include "../include/defines.h"
-
 #include "../include/reportsystem.h"
-
-#include <algorithm>
-#include <queue>
+#include "../include/defines.h"
+#include "../include/Cleaner.h"
+#include "../include/values.h"
+#include "../include/utils.h"
 
 int Cleaner::selectMethod() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int Cleaner::selectMethod(void) ");
 
@@ -72,7 +64,7 @@ newAlignment *Cleaner::cleanByCutValueOverpass(
         float baseLine,
         const int *gInCol,
         bool complementary) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const int *gInCol, bool complementary) ");
     int i, j, k, jn, oth, block = 0, *vectAux, residues;
@@ -213,7 +205,7 @@ newAlignment *Cleaner::cleanByCutValueFallBehind(
         float baseLine,
         const float *ValueVect,
         bool complementary) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, const float *ValueVect, bool complementary) ");
     int i, j, k, jn, oth, block = 0, residues;
@@ -341,7 +333,7 @@ newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(
         float cutCons,
         const float *MDK_Win,
         bool complementary) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary) ");
 
@@ -499,7 +491,7 @@ newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(
 }
 
 newAlignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, const float *MDK_W, bool complementary, bool variable) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, const float *MDK_W, bool complementary, bool variable) ");
 
@@ -699,7 +691,7 @@ newAlignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, 
 }
 
 newAlignment *Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, bool complementary) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, bool complementary) ");
 
@@ -721,7 +713,7 @@ newAlignment *Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, 
 }
 
 newAlignment *Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementary) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementary) ");
 
@@ -745,7 +737,7 @@ newAlignment *Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementa
 }
 
 newAlignment *Cleaner::cleanConservation(float baseLine, float conservationPct, bool complementary) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanConservation(float baseLine, float conservationPct, bool complementary) ");
 
@@ -769,7 +761,7 @@ newAlignment *Cleaner::cleanConservation(float baseLine, float conservationPct, 
 }
 
 newAlignment *Cleaner::clean(float baseLine, float GapsPct, float conservationPct, bool complementary) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::clean(float baseLine, float GapsPct, float conservationPct, bool complementary) ");
 
@@ -808,7 +800,7 @@ newAlignment *Cleaner::cleanCompareFile(const float cutpoint,
                                         const float baseLine,
                                         float *vectValues,
                                         const bool complementary) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanCompareFile(float cutpoint, float baseLine, float *vectValues, bool complementary) ");
 
@@ -840,7 +832,7 @@ newAlignment *Cleaner::cleanCompareFile(const float cutpoint,
 }
 
 bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) ");
 
@@ -919,7 +911,7 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
 
 
 newAlignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, bool complementary) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, bool complementary) ");
 
@@ -942,7 +934,7 @@ newAlignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverla
 }
 
 newAlignment *Cleaner::clean2ndSlope(bool complementarity) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::clean2ndSlope(bool complementarity) ");
 
@@ -965,7 +957,7 @@ newAlignment *Cleaner::clean2ndSlope(bool complementarity) {
 }
 
 newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) ");
 
@@ -1034,7 +1026,7 @@ newAlignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
 }
 
 newAlignment *Cleaner::cleanNoAllGaps(bool complementarity) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanNoAllGaps(bool complementarity) ");
 
@@ -1053,7 +1045,7 @@ newAlignment *Cleaner::cleanNoAllGaps(bool complementarity) {
 }
 
 float Cleaner::getCutPointClusters(int clusterNumber) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("float Cleaner::getCutPointClusters(int clusterNumber) ");
 
@@ -1179,14 +1171,14 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
 }
 
 void Cleaner::setTrimTerminalGapsFlag(bool terminalOnly_) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void Cleaner::setTrimTerminalGapsFlag(bool terminalOnly_) ");
     terminalGapOnly = terminalOnly_;
 }
 
 void Cleaner::setBoundaries(int *boundaries_) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void Cleaner::setBoundaries(int *boundaries_) ");
     if (boundaries_ != nullptr) {
@@ -1196,7 +1188,7 @@ void Cleaner::setBoundaries(int *boundaries_) {
 }
 
 newAlignment *Cleaner::getClustering(float identityThreshold) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::getClustering(float identityThreshold) ");
 
@@ -1225,11 +1217,11 @@ newAlignment *Cleaner::getClustering(float identityThreshold) {
 }
 
 newAlignment *Cleaner::removeColumns(int *columns, int init, int size, bool complementary) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::removeColumns(int *columns, int init, int size, bool complementary) ");
 
-    string *matrixAux, *newSeqsName;
+    std::string *matrixAux, *newSeqsName;
     newAlignment *newAlig = new newAlignment(*_alignment);
     int i, j;
 
@@ -1269,7 +1261,7 @@ newAlignment *Cleaner::removeSequences(int *seqs, int init, int size,
 }
 
 bool Cleaner::removeOnlyTerminal() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool Cleaner::removeOnlyTerminal(void) ");
 
@@ -1279,8 +1271,8 @@ bool Cleaner::removeOnlyTerminal() {
     if ((left_boundary == -1) and (right_boundary == -1)) {
         // Get alignments gaps stats and copy it
         if (!_alignment->Statistics->calculateGapStats()) {
-            cerr << endl << "WARNING: Impossible to apply 'terminal-only' method"
-                 << endl << endl;
+            std::cerr << "\nWARNING: Impossible to apply 'terminal-only' method"
+                 << "\n\n";
             return false;
         }
         gInCol = _alignment->Statistics->gaps->getGapsWindow();
@@ -1312,13 +1304,15 @@ bool Cleaner::removeOnlyTerminal() {
 }
 
 void Cleaner::removeSmallerBlocks(int blockSize, newAlignment &original) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void Cleaner::removeSmallerBlocks(int blockSize) ");
     int i, j, pos, block;
 
     if (blockSize == 0)
+    {
         return;
+    }
 
     // Traverse the newAlignment looking for blocks greater than BLOCKSIZE, everytime
     // than a column hasn't been selected, check whether the current block is big
@@ -1329,9 +1323,19 @@ void Cleaner::removeSmallerBlocks(int blockSize, newAlignment &original) {
         else {
             // Remove columns from blocks smaller than input blocks size
             if (block < blockSize)
+            {
                 for (j = pos; j <= i; j++)
-                    if (original.saveResidues[j] == -1) continue;
-                    else _alignment->saveResidues[j] = -1;
+                {
+                    if (original.saveResidues[j] == -1) 
+                    {
+                        continue;
+                    }
+                    else 
+                    {
+                        _alignment->saveResidues[j] = -1;
+                    }
+                }
+            }
             pos = i + 1;
             block = 0;
         }
@@ -1340,13 +1344,23 @@ void Cleaner::removeSmallerBlocks(int blockSize, newAlignment &original) {
     // Check final block separately since it could happen than last block is not
     // big enough but because the loop end could provoke to ignore it
     if (block < blockSize)
+    {
         for (j = pos; j <= i; j++)
-            if (original.saveResidues[j] == -1) continue;
-            else _alignment->saveResidues[j] = -1;
+        {
+            if (original.saveResidues[j] == -1)
+            {
+                continue;
+            } 
+            else
+            {
+                _alignment->saveResidues[j] = -1;
+            } 
+        }
+    }
 }
 
 void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) ");
     int i, j, counter;
@@ -1413,7 +1427,7 @@ void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) {
 }
 
 void Cleaner::calculateSeqIdentity() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void Cleaner::calculateSeqIdentity(void) ");
 
@@ -1462,7 +1476,7 @@ void Cleaner::calculateSeqIdentity() {
 }
 
 void Cleaner::calculateRelaxedSeqIdentity() {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void Cleaner::calculateRelaxedSeqIdentity(void) ");
     // Raw approximation of sequence identity computation designed for reducing
@@ -1504,7 +1518,7 @@ void Cleaner::calculateRelaxedSeqIdentity() {
 }
 
 int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int *Cleaner::calculateRepresentativeSeq(float maximumIdent) ");
 
@@ -1568,7 +1582,7 @@ int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
 }
 
 void Cleaner::computeComplementaryAlig(bool residues, bool sequences) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void Cleaner::computeComplementaryAlig(bool residues, bool sequences) ");
     int i;
@@ -1584,7 +1598,7 @@ void Cleaner::computeComplementaryAlig(bool residues, bool sequences) {
 
 
 Cleaner::Cleaner(newAlignment *parent) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("Cleaner::Cleaner(newAlignment *parent) ");
     _alignment = parent;
@@ -1599,7 +1613,7 @@ Cleaner::Cleaner(newAlignment *parent) {
 }
 
 Cleaner::Cleaner(newAlignment *parent, Cleaner *mold) {
-    // Create a timerLevel that will report times upon its destruction
+    // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("Cleaner::Cleaner(newAlignment *parent, Cleaner *mold) ");
     _alignment = parent;

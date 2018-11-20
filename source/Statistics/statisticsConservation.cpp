@@ -24,12 +24,13 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "Statistics/statisticsConservation.h"
-#include "defines.h"
-#include "newAlignment.h"
-#include "reportsystem.h"
-#include <sstream>
-#include <TimerFactory.h>
+#include "../../include/Statistics/statisticsConservation.h"
+#include "../../include/Statistics/StatisticsManager.h"
+#include "../../include/newAlignment.h"
+#include "../../include/reportsystem.h"
+#include "../../include/TimerFactory.h"
+#include "../../include/defines.h"
+#include "../../include/utils.h"
 
 statisticsConservation::statisticsConservation(newAlignment *parentAlignment) {
     // Create a timerLevel that will report times upon its destruction
@@ -205,16 +206,15 @@ bool statisticsConservation::calculateVectors(bool cutByGap) {
         }
         // For each AAs/Nucleotides' pair in the column we compute its distance
         for (j = 0, num = 0, den = 0; j < _alignment->originalSequenNumber; j++) {
-            // Skip sequences that have been rejected
-//            if (_alignment->saveSequences[j] == -1)
-//                continue;
+            
+                
             // Calculate the upper value of the residue,
             //      to use in simMatrix->getDistance
             // This is faster than calculating the upper on that method
             //      as this is done before entering the loop
             // Doing this before checking if the element is indeterminate or gap
             //      allows to check if the indetermination is not capitalized
-            chA = (char) std::toupper((unsigned char) _alignment->sequences[j][i]);
+            chA = utils::toUpper(_alignment->sequences[j][i]);
 
             // We don't compute the distance if the first element is
             // a indeterminate (XN) or a gap (-) element.
@@ -222,9 +222,6 @@ bool statisticsConservation::calculateVectors(bool cutByGap) {
                 continue;
 
             for (k = j + 1; k < _alignment->originalSequenNumber; k++) {
-//                if (_alignment->saveSequences[k] == -1)
-//                    continue;
-
                 // We calculate the upper value of the residue,
                 //      to use in simMatrix->getDistance
                 // This is equally faster as if it was done inside the method
@@ -232,7 +229,7 @@ bool statisticsConservation::calculateVectors(bool cutByGap) {
                 //      the given chars.
                 // Doing this before checking if the element is indeterminate or gap
                 //      allows to check if the indetermination is not capitalized
-                chB = (char) std::toupper((unsigned char) _alignment->sequences[k][i]);
+                chB = utils::toUpper(_alignment->sequences[k][i]);
 
                 // We don't compute the distance if the second element is
                 //      a indeterminate (XN) or a gap (-) element
@@ -438,42 +435,42 @@ void statisticsConservation::printConservationColumns() {
     std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
 
 
-    cout << std::fixed
+    std::cout << std::fixed
          << std::setw(fname.length() + 7)
          << std::setfill(' ')
-         << std::left << "" << endl;
+         << std::left << "" << std::endl;
 
-    cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
+    std::cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
 
     fname = std::to_string(size);
 
-    cout
+    std::cout
             << std::setw(fname.length() + 7)
             << std::setfill(' ')
-            << std::left << "" << endl;
+            << std::left << "" << std::endl;
 
-    cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << endl;
+    std::cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << std::endl;
 
     fname = " Similarity per Column";
 
-    cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+    std::cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << std::endl;
 
-    cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
+    std::cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
          << std::setfill('-')
          << std::left << ""
          << std::setfill(' ')
-         << endl;
+         << std::endl;
 
-    cout << "\33[0;33;1m"
-         << std::setw(size) << std::left << " Residue" << std::left << " Similarity" << endl
-         << std::setw(size) << std::left << " Number" << std::left << " Value" << endl
+    std::cout << "\33[0;33;1m"
+         << std::setw(size) << std::left << " Residue" << std::left << " Similarity" << std::endl
+         << std::setw(size) << std::left << " Number" << std::left << " Value" << std::endl
          << std::setfill('-')
          << "\33[0;m"
          << std::setw(size) << std::right << "  "
-         << std::setw(size) << std::right << "  " << endl
+         << std::setw(size) << std::right << "  " << std::endl
          << std::setfill(' ');
 
-    cout.precision(10);
+    std::cout.precision(10);
 
     float *values;
 
@@ -485,7 +482,7 @@ void statisticsConservation::printConservationColumns() {
         values = MDK;
 
     for (i = 0; i < _alignment->originalResidNumber; i++)
-        cout << setw(size) << std::left << i << values[i] << endl;
+        std::cout << std::setw(size) << std::left << i << values[i] << std::endl;
 }
 
 void statisticsConservation::printConservationAcl() {
@@ -509,31 +506,31 @@ void statisticsConservation::printConservationAcl() {
     // Print filename
     std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
 
-    cout << std::fixed
+    std::cout << std::fixed
          << std::setw(fname.length() + 7)
          << std::setfill(' ')
-         << std::left << "" << endl;
+         << std::left << "" << std::endl;
 
-    cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
+    std::cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
 
     fname = std::to_string(size);
 
-    cout
+    std::cout
             << std::setw(fname.length() + 7)
             << std::setfill(' ')
-            << std::left << "" << endl;
+            << std::left << "" << std::endl;
 
-    cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << endl;
+    std::cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << std::endl;
 
     fname = " Similarity Total";
 
-    cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+    std::cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << std::endl;
 
-    cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
+    std::cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
          << std::setfill('-')
          << std::left << ""
          << std::setfill(' ')
-         << endl;
+         << std::endl;
 
 
     std::stringstream firstLine;
@@ -560,18 +557,18 @@ void statisticsConservation::printConservationAcl() {
     secondLine << std::setw(size) << std::left << " Similarity";
     thirdLine << std::setw(size) << std::left << " Value";
 
-    cout << "\33[0;33;1m"
-         << firstLine.rdbuf() << endl
-         << secondLine.rdbuf() << endl
-         << thirdLine.rdbuf() << endl
+    std::cout << "\33[0;33;1m"
+         << firstLine.rdbuf() << std::endl
+         << secondLine.rdbuf() << std::endl
+         << thirdLine.rdbuf() << std::endl
          << "\33[0;m"
          << std::setfill('-');
 
     for (i = 0; i < 5; i++)
-        cout << setw(size) << std::right << "   ";
+        std::cout << std::setw(size) << std::right << "   ";
 
-    cout << endl << setfill(' ');
-    cout.precision(10);
+    std::cout << std::endl << std::setfill(' ');
+    std::cout.precision(10);
 
 
     // Initializate some values 
@@ -586,44 +583,44 @@ void statisticsConservation::printConservationAcl() {
 
         if (refer != vectAux[i]) {
 
-            cout
-                    << setw(size) << std::left << num
+            std::cout
+                    << std::setw(size) << std::left << num
 
-                    << setw(size) << std::left
-                    << setw(size - 6) << std::right << ((float) num / _alignment->originalResidNumber * 100.0F)
-                    << setw(6) << std::right << " "
+                    << std::setw(size) << std::left
+                    << std::setw(size - 6) << std::right << ((float) num / _alignment->originalResidNumber * 100.0F)
+                    << std::setw(6) << std::right << " "
 
-                    << setw(size) << std::left << acm
+                    << std::setw(size) << std::left << acm
 
-                    << setw(size) << std::left
-                    << setw(size - 6) << std::right << ((float) acm / _alignment->originalResidNumber * 100.0F)
-                    << setw(6) << std::right << " "
+                    << std::setw(size) << std::left
+                    << std::setw(size - 6) << std::right << ((float) acm / _alignment->originalResidNumber * 100.0F)
+                    << std::setw(6) << std::right << " "
 
-                    << setw(size) << std::left << refer
+                    << std::setw(size) << std::left << refer
 
-                    << endl;
+                    << std::endl;
             refer = vectAux[i];
             num = 1;
         } else num++;
     }
     acm++;
 
-    cout
-            << setw(size) << std::left << num
+    std::cout
+            << std::setw(size) << std::left << num
 
-            << setw(size) << std::left
-            << setw(size - 6) << std::right << ((float) num / _alignment->originalResidNumber * 100.0F)
-            << setw(6) << std::right << " "
+            << std::setw(size) << std::left
+            << std::setw(size - 6) << std::right << ((float) num / _alignment->originalResidNumber * 100.0F)
+            << std::setw(6) << std::right << " "
 
-            << setw(size) << std::left << acm
+            << std::setw(size) << std::left << acm
 
-            << setw(size) << std::left
-            << setw(size - 6) << std::right << ((float) acm / _alignment->originalResidNumber * 100.0F)
-            << setw(6) << std::right << " "
+            << std::setw(size) << std::left
+            << std::setw(size - 6) << std::right << ((float) acm / _alignment->originalResidNumber * 100.0F)
+            << std::setw(6) << std::right << " "
 
-            << setw(size) << std::left << refer
+            << std::setw(size) << std::left << refer
 
-            << endl;
+            << std::endl;
 
     // Deallocate the reserved memory. 
     delete[] vectAux;

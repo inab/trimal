@@ -28,23 +28,27 @@
 #ifndef COMPAREFILES_H
 #define COMPAREFILES_H
 
-#include <cstdlib>
 
-#include <string>
+#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
+#include "../../include/trimalManager.h"
+
 #include <iostream>
-#include <ReadWriteMS/ReadWriteMachineState.h>
-#include "trimalManager.h"
-#include "newAlignment.h"
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <sstream>
+#include <iomanip>
+
+
+// Forward declaration
+class newAlignment;
 
 /// \brief Helper class to handle the comparison between alignments. It also handles Consistency staticstics.
 class statisticsConsistency {
 
   public:
 
-
-
     void perform(char *comparesetFilePath, ReadWriteMS &ReadWriteMachine, trimAlManager &manager, char *forceFile);
-
 
 /**
  \brief Print the consistency value for each column from the selected alignment.
@@ -60,9 +64,7 @@ class statisticsConsistency {
     static void printStatisticsFileAcl(newAlignment& _alignment, float * compareVect);
 /**
  \brief Applies a new window to the alignment.
- \param columns Number of columns present in the alignment.
  \param _halfWindow Half size of window to apply.
- \param[in,out] columnsValue Vector containing the values that should be averaged and, at the same time, vector that will contain the new averaged values.
  \return \b True
  */
     bool applyWindow(int _halfWindow);
@@ -96,7 +98,8 @@ class statisticsConsistency {
 
 private:
 
-    newAlignment * _alignment;
+    newAlignment * _alignment               = nullptr;
+    newAlignment ** compareAlignmentsArray  = nullptr;
 
     std::ifstream compare;
 
@@ -104,26 +107,25 @@ private:
     float *values_windowed = nullptr;
 
     int
-            numFiles            = 0,
-            i                   = 0,
-            maxAminos           = 0,
-            prevType            = -1,
-            referFile           = -1,
-            halfWindow          = -1,
-            residues            = -1;
+        numFiles            = 0,
+        i                   = 0,
+        maxAminos           = 0,
+        prevType            = -1,
+        referFile           = -1,
+        halfWindow          = -1,
+        residues            = -1;
 
     int * refCounter;
 
     char
-            * line              = nullptr,
-            c,
-            **filesToCompare    = nullptr;
+        c,
+        * line              = nullptr,
+        ** filesToCompare   = nullptr;
 
     std::string nline;
 
-    newAlignment **compareAlignmentsArray = nullptr;
 
-    bool appearErrors           = false;
+    bool appearErrors       = false;
 
     void delete_variables();
 

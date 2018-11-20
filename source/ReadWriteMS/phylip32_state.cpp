@@ -1,21 +1,16 @@
-#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/ReadWriteMS/phylip32_state.h"
+
+#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/defines.h"
-#include <iostream>
-#include <cstdio>
-#include <string>
-#include <vector>
-#include "../../include/newAlignment.h"
+#include "../../include/utils.h"
 
-using namespace std;
-
-int phylip32_state::CheckAlignment(istream* origin)
+int phylip32_state::CheckAlignment(std::istream* origin)
 {
     origin->seekg(0);
     origin->clear();
     char *firstWord = nullptr, *line = nullptr;
     int blocks = 0;
-    string nline;
+    std::string nline;
     
     /* Read first valid line in a safer way */
     do {
@@ -110,10 +105,10 @@ newAlignment* phylip32_state::LoadAlignment(std::string filename)
     
     int i, blocksFirstLine, firstLine = true;
     char *str, *line = nullptr;
-    ifstream file;
+    std::ifstream file;
 
     /* Check the file and its content */
-    file.open(filename, ifstream::in);
+    file.open(filename, std::ifstream::in);
     if(!utils::checkFile(file))
         return nullptr;
 
@@ -147,8 +142,8 @@ newAlignment* phylip32_state::LoadAlignment(std::string filename)
         return nullptr;
 
     /* Reserve memory according to the input parameters */
-    _alignment->sequences  = new string[_alignment->sequenNumber];
-    _alignment->seqsName   = new string[_alignment->sequenNumber];
+    _alignment->sequences  = new std::string[_alignment->sequenNumber];
+    _alignment->seqsName   = new std::string[_alignment->sequenNumber];
 
     /* Point to the first sequence in the alignment. Since the alignment could not
      * have blank lines to separate the different sequences. Store the blocks size
@@ -226,7 +221,7 @@ bool phylip32_state::SaveAlignment(newAlignment* alignment, std::ostream* output
     /* Generate output alignment in PHYLIP 3.2 format (interleaved) */
 
     int i, j, k, maxLongName;
-    string *tmpMatrix;
+    std::string *tmpMatrix;
 
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
@@ -236,7 +231,7 @@ bool phylip32_state::SaveAlignment(newAlignment* alignment, std::ostream* output
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->originalSequenNumber];
+    tmpMatrix = new std::string[alignment->originalSequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
@@ -261,7 +256,7 @@ bool phylip32_state::SaveAlignment(newAlignment* alignment, std::ostream* output
     for(i = 0; i < alignment->originalSequenNumber; i++) {
         /* Sequence Name */
         if (alignment->saveSequences[i] == -1) continue;
-        (*output) << endl << setw(maxLongName + 3) << left << alignment->seqsName[i].substr(0, maxLongName);
+        (*output) << "\n" << std::setw(maxLongName + 3) << std::left << alignment->seqsName[i].substr(0, maxLongName);
         /* Sequence. Each line contains a block of 5 times 10 residues. */
         
         for (j = 0, k = 0; j < alignment->originalResidNumber; j++)
@@ -269,7 +264,7 @@ bool phylip32_state::SaveAlignment(newAlignment* alignment, std::ostream* output
             if (alignment->saveResidues[j] == -1) continue;
             if (k == 50)
             {
-                *output << endl << setw(maxLongName + 3) << left << " " ;
+                *output << "\n" << std::setw(maxLongName + 3) << std::left << " " ;
                 k = 0;
             }
             *output << alignment->sequences[i][j];
@@ -282,9 +277,9 @@ bool phylip32_state::SaveAlignment(newAlignment* alignment, std::ostream* output
         
         /* Print a blank line to mark sequences separation */
 //         if (k % 50 != 0)
-            (*output) << endl;
+            (*output) << "\n";
     }
-    *output << endl;
+    *output << "\n";
 
     /* Deallocate local memory */
     delete [] tmpMatrix;

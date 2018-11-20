@@ -1,21 +1,17 @@
 #include "../../include/ReadWriteMS/mega_interleaved_state.h"
 
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
-#include <iostream>
-#include <cstdio>
-#include <string>
 #include "../../include/defines.h"
+#include "../../include/utils.h"
 
-using namespace std;
-
-int mega_interleaved_state::CheckAlignment(istream* origin)
+int mega_interleaved_state::CheckAlignment(std::istream* origin)
 {
     origin->seekg(0);
     origin->clear();
     
     char c, *firstWord = nullptr, *line = nullptr;
     int format = 0, blocks = 0;
-    string nline;
+    std::string nline;
     
     /* Read first valid line in a safer way */
     do {
@@ -56,17 +52,17 @@ int mega_interleaved_state::CheckAlignment(istream* origin)
     return 0;
 }
 
-newAlignment* mega_interleaved_state::LoadAlignment(std::__cxx11::string filename)
+newAlignment* mega_interleaved_state::LoadAlignment(std::string filename)
 {
     newAlignment * _alignment = new newAlignment();
    /* MEGA interleaved file format parser */
 
     char *frag = nullptr, *str = nullptr, *line = nullptr;
     int i, firstBlock = true;
-    ifstream file;
+    std::ifstream file;
     
     /* Check the file and its content */
-    file.open(filename, ifstream::in);
+    file.open(filename, std::ifstream::in);
     if(!utils::checkFile(file))
         return nullptr;
 
@@ -152,8 +148,8 @@ newAlignment* mega_interleaved_state::LoadAlignment(std::__cxx11::string filenam
     file.seekg(0);
 
     /* Allocate memory */
-    _alignment->seqsName  = new string[_alignment->sequenNumber];
-    _alignment->sequences = new string[_alignment->sequenNumber];
+    _alignment->seqsName  = new std::string[_alignment->sequenNumber];
+    _alignment->sequences = new std::string[_alignment->sequenNumber];
 
     /* Skip first line */
     line = utils::readLine(file);
@@ -167,7 +163,7 @@ newAlignment* mega_interleaved_state::LoadAlignment(std::__cxx11::string filenam
         /* Read line in a safer way */
         line = utils::readLine(file);
 
-        /* Determine whether a # flag has been found in current string */
+        /* Determine whether a # flag has been found in current std::string */
         if (line != nullptr)
             if(!strncmp(line, "#", 1))
                 break;

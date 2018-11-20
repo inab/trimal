@@ -11,14 +11,14 @@ public:
         name = "pir";
         extension = "pir";
         canLoad = true;
-        canSave = true;;
+        canSave = true;
     };
 
-    int CheckAlignment(istream *origin) override;
+    int CheckAlignment(std::istream *origin) override;
 
-    newAlignment *LoadAlignment(string filename) override;
+    newAlignment *LoadAlignment(std::string filename) override;
 
-    bool SaveAlignment(newAlignment *alignment, ostream *output, std::string *FileName) override;
+    bool SaveAlignment(newAlignment *alignment, std::ostream *output, std::string *FileName) override;
 
     bool RecognizeOutputFormat(std::string FormatName) override;
 

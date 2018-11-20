@@ -1,11 +1,13 @@
 #ifndef VERBOSEMANAGER_H
 #define VERBOSEMANAGER_H
 
-#include <string>
-#include <map>
-#include <array>
-#include <vector>
 #include <iostream>
+#include <cstring>
+#include <iomanip>
+#include <vector>
+#include <array>
+#include <map>
+
 
 /** 
  * \brief VerboseLevel used to report messages. 

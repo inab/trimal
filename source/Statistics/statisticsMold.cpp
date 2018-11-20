@@ -24,11 +24,14 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
+#include "../../include/Statistics/statisticsMold.h"
+#include "../../include/newAlignment.h"
+#include "../../include/reportsystem.h"
+#include "../../include/TimerFactory.h"
+#include "../../include/utils.h"
+
 #include <sstream>
-#include "Statistics/statisticsMold.h"
-#include "newAlignment.h"
-#include "reportsystem.h"
-#include "TimerFactory.h"
+#include <iomanip>
 
 const std::string statisticsMold::statName = "Gaps"; // NOLINT
 
@@ -168,39 +171,39 @@ void statisticsMold::printByColumn(bool calculateRelative) {
 
     std::string &filename = _alignment->filename;
 
-    cout << std::fixed << std::setw(filename.length())
-         << std::setfill(' ') << std::left << "" << endl
+    std::cout << std::fixed << std::setw(filename.length())
+         << std::setfill(' ') << std::left << "\n"
 
          << "#\33[0;31m File:\33[0;1m "
          << filename << "\33[0m"
 
          << std::setw(filename.length())
          << std::setfill(' ')
-         << std::left << "" << endl;
+         << std::left << "\n";
 
-    cout << "#\33[0;36m BlockSize: \33[0;1m"
-         << size << "\33[0m" << endl
+    std::cout << "#\33[0;36m BlockSize: \33[0;1m"
+         << size << "\33[0m\n"
 
          << "#\33[0;32m Statistic:\33[0;1m "
-         << statName << " per column\33[0m" << endl;
+         << statName << " per column\33[0m\n";
 
     int headerSize = std::max(8 + filename.length(), 24 + statName.length());
 
-    cout << std::setw(headerSize) << std::setfill('-')
-         << std::left << "" << std::setfill(' ') << endl;
+    std::cout << std::setw(headerSize) << std::setfill('-')
+         << std::left << "" << std::setfill(' ') << "\n";
 
-    cout << "\33[0;33;1m"
+    std::cout << "\33[0;33;1m"
          << std::setw(size) << std::left << " Residue"
-         << std::left << " " << statName << endl
+         << std::left << " " << statName << "\n"
 
          << std::setw(size) << std::left << " Number"
-         << std::left << " Value" << endl
+         << std::left << " Value\n"
          << std::setfill('-') << "\33[0;m"
          << std::setw(size) << std::right << "  "
-         << std::setw(size) << std::right << "  " << endl
+         << std::setw(size) << std::right << "  \n"
          << std::setfill(' ');
 
-    cout.precision(5);
+    std::cout.precision(5);
 
     float *reportValues;
 
@@ -209,8 +212,8 @@ void statisticsMold::printByColumn(bool calculateRelative) {
     reportValues = getVector();
 
     for (i = 0; i < _alignment->originalResidNumber; i++)
-        cout << setw(size) << std::left << i
-             << setw(2) << std::right << reportValues[i] << endl;
+        std::cout << std::setw(size) << std::left << i
+             << std::setw(2) << std::right << reportValues[i] << "\n";
 }
 
 void statisticsMold::printAccumulative(bool calculateRelative) {
@@ -229,26 +232,26 @@ void statisticsMold::printAccumulative(bool calculateRelative) {
 
     std::string &filename = _alignment->filename;
 
-    cout << std::fixed << std::setw(filename.length())
-         << std::setfill(' ') << std::left << "" << endl
+    std::cout << std::fixed << std::setw(filename.length())
+         << std::setfill(' ') << std::left << "\n"
 
          << "#\33[0;31m File:\33[0;1m "
          << filename << "\33[0m"
 
          << std::setw(filename.length())
          << std::setfill(' ')
-         << std::left << "" << endl;
+         << std::left << "\n";
 
-    cout << "#\33[0;36m BlockSize: \33[0;1m"
-         << size << "\33[0m" << endl
+    std::cout << "#\33[0;36m BlockSize: \33[0;1m"
+         << size << "\33[0m\n"
 
          << "#\33[0;32m Statistic:\33[0;1m "
-         << statName << " total\33[0m" << endl;
+         << statName << " total\33[0m\n";
 
     int headerSize = std::max(8 + filename.length(), 19 + statName.length());
 
-    cout << std::setw(headerSize) << std::setfill('-')
-         << std::left << "" << std::setfill(' ') << endl;
+    std::cout << std::setw(headerSize) << std::setfill('-')
+         << std::left << "" << std::setfill(' ') << "\n";
 
     std::stringstream firstLine;
     std::stringstream secondLine;
@@ -285,18 +288,18 @@ void statisticsMold::printAccumulative(bool calculateRelative) {
         thirdLine << std::setw(size) << std::left << " per column";
     }
 
-    cout << "\33[0;33;1m"
-         << firstLine.rdbuf() << endl
-         << secondLine.rdbuf() << endl
-         << thirdLine.rdbuf() << endl
+    std::cout << "\33[0;33;1m"
+         << firstLine.rdbuf() << "\n"
+         << secondLine.rdbuf() << "\n"
+         << thirdLine.rdbuf() << "\n"
          << "\33[0;m"
          << std::setfill('-');
 
     for (i = 0; i < (calculateRelative ? 7 : 5); i++)
-        cout << setw(size) << std::right << "   ";
+        std::cout << std::setw(size) << std::right << "   ";
 
-    cout << endl << setfill(' ');
-    cout.precision(10);
+    std::cout << "\n" << std::setfill(' ');
+    std::cout.precision(10);
 
 
     // Initialize temporal values
@@ -311,34 +314,34 @@ void statisticsMold::printAccumulative(bool calculateRelative) {
 
         if (refer != vectAux[i]) {
 
-            cout
-                << setw(size) << std::left << num
+            std::cout
+                << std::setw(size) << std::left << num
 
-                << setw(size) << std::left
-                << setw(size - 6) << std::right << ((float) num / _alignment->originalResidNumber * 100.0F)
-                << setw(6) << std::right << " "
+                << std::setw(size) << std::left
+                << std::setw(size - 6) << std::right << ((float) num / _alignment->originalResidNumber * 100.0F)
+                << std::setw(6) << std::right << " "
 
-                << setw(size) << std::left << acm
+                << std::setw(size) << std::left << acm
 
-                << setw(size) << std::left
-                << setw(size - 6) << std::right << ((float) acm / _alignment->originalResidNumber * 100.0F)
-                << setw(6) << std::right << " "
+                << std::setw(size) << std::left
+                << std::setw(size - 6) << std::right << ((float) acm / _alignment->originalResidNumber * 100.0F)
+                << std::setw(6) << std::right << " "
 
-                << setw(size) << std::left << refer;
+                << std::setw(size) << std::left << refer;
 
             if (calculateRelative)
             {
-                cout
-                    << setw(size) << std::left
-                    << setw(size - 6) << std::right << (vectAux[i] * 100.0F) / _alignment->originalResidNumber
-                    << setw(6) << std::right << " "
+                std::cout
+                    << std::setw(size) << std::left
+                    << std::setw(size - 6) << std::right << (vectAux[i] * 100.0F) / _alignment->originalResidNumber
+                    << std::setw(6) << std::right << " "
 
-                    << setw(size) << std::left
-                    << setw(size - 6) << std::right << 1.0F - (vectAux[i] / _alignment->originalResidNumber)
-                    << setw(6) << std::right << " ";
+                    << std::setw(size) << std::left
+                    << std::setw(size - 6) << std::right << 1.0F - (vectAux[i] / _alignment->originalResidNumber)
+                    << std::setw(6) << std::right << " ";
             }
 
-            cout << endl;
+            std::cout << "\n";
             refer = vectAux[i];
             num = 1;
         } else num++;
@@ -346,34 +349,34 @@ void statisticsMold::printAccumulative(bool calculateRelative) {
     acm++;
 
     // Repeat the body of the last for, to show the last result
-    cout
-        << setw(size) << std::left << num
+    std::cout
+        << std::setw(size) << std::left << num
 
-        << setw(size) << std::left
-        << setw(size - 6) << std::right << ((float) num / _alignment->originalResidNumber * 100.0F)
-        << setw(6) << std::right << " "
+        << std::setw(size) << std::left
+        << std::setw(size - 6) << std::right << ((float) num / _alignment->originalResidNumber * 100.0F)
+        << std::setw(6) << std::right << " "
 
-        << setw(size) << std::left << acm
+        << std::setw(size) << std::left << acm
 
-        << setw(size) << std::left
-        << setw(size - 6) << std::right << ((float) acm / _alignment->originalResidNumber * 100.0F)
-        << setw(6) << std::right << " "
+        << std::setw(size) << std::left
+        << std::setw(size - 6) << std::right << ((float) acm / _alignment->originalResidNumber * 100.0F)
+        << std::setw(6) << std::right << " "
 
-        << setw(size) << std::left << refer;
+        << std::setw(size) << std::left << refer;
 
     if (calculateRelative)
     {
-        cout
-                << setw(size) << std::left
-                << setw(size - 6) << std::right << (vectAux[i] * 100.0F) / _alignment->originalResidNumber
-                << setw(6) << std::right << " "
+        std::cout
+                << std::setw(size) << std::left
+                << std::setw(size - 6) << std::right << (vectAux[i] * 100.0F) / _alignment->originalResidNumber
+                << std::setw(6) << std::right << " "
 
-                << setw(size) << std::left
-                << setw(size - 6) << std::right << 1.0F - (vectAux[i] / _alignment->originalResidNumber)
-                << setw(6) << std::right << " ";
+                << std::setw(size) << std::left
+                << std::setw(size - 6) << std::right << 1.0F - (vectAux[i] / _alignment->originalResidNumber)
+                << std::setw(6) << std::right << " ";
     }
 
-    cout << endl;
+    std::cout << "\n";
 
     // Deallocate the reserved memory.
     delete[] vectAux;

@@ -1,4 +1,3 @@
-#include <TimerFactory.h>
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
@@ -38,20 +37,16 @@
 #endif
 
 #include "../include/similarityMatrix.h"
-#include "../include/defines.h"
-#include "../include/utils.h"
-#include "../include/values.h"
 #include "../include/reportsystem.h"
-
-#include <iostream>
-
-#include <cstring>
-#include <cstdlib>
+#include "../include/TimerFactory.h"
+#include "../include/defines.h"
+#include "../include/values.h"
+#include "../include/utils.h"
 
 using namespace std;
 
 similarityMatrix::similarityMatrix() {
-	 // Create a timerLevel that will report times upon its destruction
+	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("similarityMatrix::similarityMatrix() ");
     numPositions = 0;
@@ -61,7 +56,7 @@ similarityMatrix::similarityMatrix() {
 }
 
 void similarityMatrix::memoryAllocation(int nPos) {
-	 // Create a timerLevel that will report times upon its destruction
+	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void similarityMatrix::memoryAllocation(int nPos) ");
     int i, j;
@@ -89,7 +84,7 @@ void similarityMatrix::memoryAllocation(int nPos) {
 }
 
 similarityMatrix::~similarityMatrix() {
-	 // Create a timerLevel that will report times upon its destruction
+	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("similarityMatrix::~similarityMatrix() ");
 
@@ -98,7 +93,7 @@ similarityMatrix::~similarityMatrix() {
 }
 
 void similarityMatrix::memoryDeletion() {
-	 // Create a timerLevel that will report times upon its destruction
+	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void similarityMatrix::memoryDeletion() ");
     int i;
@@ -119,7 +114,7 @@ void similarityMatrix::memoryDeletion() {
 }
 
 bool similarityMatrix::loadSimMatrix(char *filename) {
-	 // Create a timerLevel that will report times upon its destruction
+	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("bool similarityMatrix::loadSimMatrix(char *filename) ");
     char aux[LINE_LENGTH + 1],
@@ -252,7 +247,7 @@ bool similarityMatrix::loadSimMatrix(char *filename) {
 }
 
 void similarityMatrix::defaultAASimMatrix(void) {
-	 // Create a timerLevel that will report times upon its destruction
+	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void similarityMatrix::defaultAASimMatrix(void) ");
 
@@ -287,7 +282,7 @@ void similarityMatrix::defaultAASimMatrix(void) {
 }
 
 void similarityMatrix::defaultNTSimMatrix(void) {
-	 // Create a timerLevel that will report times upon its destruction
+	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void similarityMatrix::defaultNTSimMatrix(void) ");
     int i, j, k;
@@ -321,7 +316,7 @@ void similarityMatrix::defaultNTSimMatrix(void) {
 }
 
 void similarityMatrix::defaultNTDegeneratedSimMatrix(void) {
-	 // Create a timerLevel that will report times upon its destruction
+	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void similarityMatrix::defaultNTDegeneratedSimMatrix(void) ");
     int i, j, k;
@@ -419,7 +414,7 @@ void similarityMatrix::alternativeSimilarityMatrices(int matrix_code, \
 }
 
 void similarityMatrix::printMatrix() {
-	 // Create a timerLevel that will report times upon its destruction
+	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("void similarityMatrix::printMatrix() ");
 
@@ -431,8 +426,8 @@ void similarityMatrix::printMatrix() {
 }
 
 float similarityMatrix::getDistance(char &a, char &b) {
-	 // Create a timerLevel that will report times upon its destruction
-	 //	which means the end of the current scope.
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
 	StartTiming("float similarityMatrix::getDistance(char a, char b) ");
     int numa, numb;
 

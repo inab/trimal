@@ -28,25 +28,18 @@
 #ifndef STATISTICS_CONSERVATION2_H
 #define STATISTICS_CONSERVATION2_H
 
-#include <math.h>
+#include "../../include/Statistics/statisticsGaps.h"
+#include "../../include/similarityMatrix.h"
+
 #include <iostream>
+#include <sstream>
 #include <iomanip>
+#include <math.h>
 
-#include "similarityMatrix.h"
-#include "statisticsGaps.h"
-#include "../include/utils.h"
 
-// #define DNAType 1
-// #define RNAType 2
-// #define AAType  3
+// Forward declaration
 class newAlignment;
-using namespace std;
 
-/* ***************************************************************************************************************** */
-/*                                       Header Class File: StatisticsConservation.                                  */
-/* ***************************************************************************************************************** */
-
-/// \brief Class to handle Conservation / Similarity statistics
 class statisticsConservation {
 public:
 
@@ -57,7 +50,6 @@ public:
     int halfWindow          = -1;
 
     /* Conservation vectors */
-//    float *Q                    = nullptr;
     float *MDK                  = nullptr;
     float *MDK_Window           = nullptr;
 
@@ -81,7 +73,7 @@ public:
 
     /**
         \brief Method to calculate the conservation values of a alignment matrix.
-        \param gaps Vector containing the gaps info.
+        \param cutByGap Wheter to cut by gap or not
     */
     bool calculateVectors(bool cutByGap = true);
 

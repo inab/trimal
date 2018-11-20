@@ -5,15 +5,21 @@
 #ifndef TRIMAL_TRIMALARGUMENTPARSER_H
 #define TRIMAL_TRIMALARGUMENTPARSER_H
 
+
+#include "../include/ReadWriteMS/ReadWriteMachineState.h"
+#include "../include/newAlignment.h"
+
 #include <stdlib.h>
 #include <string.h>
-#include <string>
 #include <iostream>
+#include <fstream>
+#include <cstring>
 #include <iosfwd>
-#include "newAlignment.h"
-#include "ReadWriteMS/ReadWriteMachineState.h"
+#include <string>
 
-using namespace std;
+
+// Forward declatarion
+class similarityMatrix;
 
 class trimAlManager
 {
@@ -78,39 +84,38 @@ public:
     size_t
             argumentLength = size_t(-1);
 
-    string 
+    std::string 
     *sequencesNames     = nullptr;
     
 
     /* Others variables */
-    ifstream compare;
-//    float *values              = nullptr;
+    std::ifstream compare;
     similarityMatrix *similMatrix   = nullptr;
     
     newAlignment  
-    *origAlig                   = nullptr,
-    *singleAlig                 = nullptr,
-    *tempAlig                   = nullptr,
-    **compareAlignmentsArray    = nullptr,
-    *backtranslationAlig        = nullptr;
+        *origAlig                   = nullptr,
+        *singleAlig                 = nullptr,
+        *tempAlig                   = nullptr,
+        *backtranslationAlig        = nullptr,
+        **compareAlignmentsArray    = nullptr;
 
     char 
-    c, 
-    *forceFile          = nullptr,
-    
-    *infile             = nullptr,
-    
-    *backtransFile      = nullptr,
-    
-    *outfile            = nullptr,
-    *htmlOutFile        = nullptr,
-    *svgOutFile         = nullptr,
-    *svgStatsOutFile    = nullptr,
-    
-    *matrixFile         = nullptr,
-             
-    **filesToCompare    = nullptr,
-    line[256];
+        c, 
+        *forceFile          = nullptr,
+        
+        *infile             = nullptr,
+        
+        *backtransFile      = nullptr,
+        
+        *outfile            = nullptr,
+        *htmlOutFile        = nullptr,
+        *svgOutFile         = nullptr,
+        *svgStatsOutFile    = nullptr,
+        
+        *matrixFile         = nullptr,
+                
+        **filesToCompare    = nullptr,
+        line[256];
              
     std::vector<std::string> oformats;
 
@@ -119,49 +124,51 @@ public:
     ~trimAlManager();
     void parseArguments(int argc, char *argv[]);
 private:
-        void verbosity_argument(const int* argc, char* argv[]);
-        void help_arguments(const int *argc, char **argv, int *i);
-        bool in_argument(const int* argc, char* argv[], int* i);
-        bool vcf_argument(const int* argc, char* argv[], int* i);
-        bool out_argument(const int* argc, char* argv[], int* i);
-        bool html_out_argument(const int* argc, char* argv[], int* i);
-        bool timetracker_out_argument(const int* argc, char* argv[], int* i);
-        bool svg_out_argument(const int* argc, char* argv[], int* i);
-        bool svg_stats_argument(const int* argc, char* argv[], int* i);
-        bool out_format_arguments(const int* argc, char* argv[], int* i);
-        bool matrix_argument(const int* argc, char* argv[], int* i);
-        bool compareset_argument(const int* argc, char* argv[], int* i);
-        bool force_select_argument(const int* argc, char* argv[], int* i);
-        bool back_trans_argument(const int* argc, char* argv[], int* i);
-        bool gap_threshold_argument(const int* argc, char* argv[], int* i);
-        bool similarity_threshold_argument(const int* argc, char* argv[], int* i);
-        bool consistency_threshold_argument(const int* argc, char* argv[], int* i);
+        void verbosity_argument             (const int* argc, char* argv[]);
+        
+        void help_arguments                 (const int *argc, char* argv[], int *i);
+
+        bool in_argument                    (const int* argc, char* argv[], int* i);
+        bool vcf_argument                   (const int* argc, char* argv[], int* i);
+        bool out_argument                   (const int* argc, char* argv[], int* i);
+        bool html_out_argument              (const int* argc, char* argv[], int* i);
+        bool timetracker_out_argument       (const int* argc, char* argv[], int* i);
+        bool svg_out_argument               (const int* argc, char* argv[], int* i);
+        bool svg_stats_argument             (const int* argc, char* argv[], int* i);
+        bool out_format_arguments           (const int* argc, char* argv[], int* i);
+        bool matrix_argument                (const int* argc, char* argv[], int* i);
+        bool compareset_argument            (const int* argc, char* argv[], int* i);
+        bool force_select_argument          (const int* argc, char* argv[], int* i);
+        bool back_trans_argument            (const int* argc, char* argv[], int* i);
+        bool gap_threshold_argument         (const int* argc, char* argv[], int* i);
+        bool similarity_threshold_argument  (const int* argc, char* argv[], int* i);
+        bool consistency_threshold_argument (const int* argc, char* argv[], int* i);
         bool conservation_threshold_argument(const int* argc, char* argv[], int* i);
-        bool select_cols_argument(const int* argc, char* argv[], int* i);
-        bool no_gaps_argument(const int* argc, char* argv[], int* i);
-        bool no_all_gaps_argument(const int* argc, char* argv[], int* i);
-        bool keep_seqs_argument(const int* argc, char* argv[], int* i);
-        bool keep_header_argument(const int* argc, char* argv[], int* i);
-        bool gappy_out_argument(const int* argc, char* argv[], int* i);
-        bool strict_argument(const int* argc, char* argv[], int* i);
-        bool strict_plus_argument(const int* argc, char* argv[], int* i);
-        bool automated1_argument(const int* argc, char* argv[], int* i);
-        bool residue_overlap_argument(const int* argc, char* argv[], int* i);
-        bool sequence_overlap_argument(const int* argc, char* argv[], int* i);
-        bool seqs_select_argument(const int* argc, char* argv[], int* i);
-        bool max_identity_argument(const int* argc, char* argv[], int* i);
-        bool clusters_argument(const int* argc, char* argv[], int* i);
-        bool terminal_only_argument(const int* argc, char* argv[], int* i);
-        bool window_argument(const int* argc, char* argv[], int* i);
-        bool gap_window_argument(const int* argc, char* argv[], int* i);
-        bool similarity_window_argument(const int* argc, char* argv[], int* i);
-        bool consistency_window_argument(const int* argc, char* argv[], int* i);
-        bool block_argument(const int* argc, char* argv[], int* i);
-        bool stats_arguments(const int* argc, char* argv[], int* i);
-        bool complementary_argument(const int* argc, char* argv[], int* i);
-        bool col_numbering_argument(const int* argc, char* argv[], int* i);
-        bool split_by_stop_codon_argument(const int* argc, char* argv[], int* i);
-        bool ignore_stop_codon_argument(const int* argc, char* argv[], int* i);
+        bool select_cols_argument           (const int* argc, char* argv[], int* i);
+        bool no_gaps_argument               (const int* argc, char* argv[], int* i);
+        bool no_all_gaps_argument           (const int* argc, char* argv[], int* i);
+        bool keep_seqs_argument             (const int* argc, char* argv[], int* i);
+        bool keep_header_argument           (const int* argc, char* argv[], int* i);
+        bool gappy_out_argument             (const int* argc, char* argv[], int* i);
+        bool strict_argument                (const int* argc, char* argv[], int* i);
+        bool strict_plus_argument           (const int* argc, char* argv[], int* i);
+        bool automated1_argument            (const int* argc, char* argv[], int* i);
+        bool residue_overlap_argument       (const int* argc, char* argv[], int* i);
+        bool sequence_overlap_argument      (const int* argc, char* argv[], int* i);
+        bool seqs_select_argument           (const int* argc, char* argv[], int* i);
+        bool max_identity_argument          (const int* argc, char* argv[], int* i);
+        bool clusters_argument              (const int* argc, char* argv[], int* i);
+        bool terminal_only_argument         (const int* argc, char* argv[], int* i);
+        bool window_argument                (const int* argc, char* argv[], int* i);
+        bool gap_window_argument            (const int* argc, char* argv[], int* i);
+        bool similarity_window_argument     (const int* argc, char* argv[], int* i);
+        bool consistency_window_argument    (const int* argc, char* argv[], int* i);
+        bool block_argument                 (const int* argc, char* argv[], int* i);
+        bool stats_arguments                (const int* argc, char* argv[], int* i);
+        bool complementary_argument         (const int* argc, char* argv[], int* i);
+        bool col_numbering_argument         (const int* argc, char* argv[], int* i);
+        bool split_by_stop_codon_argument   (const int* argc, char* argv[], int* i);
+        bool ignore_stop_codon_argument     (const int* argc, char* argv[], int* i);
 
 public:
     bool processArguments(char* argv[]);

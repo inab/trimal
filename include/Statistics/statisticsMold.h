@@ -28,8 +28,11 @@
 #ifndef STATISTICS_MOLD_H
 #define STATISTICS_MOLD_H
 
-#include "string"
+#include <sstream>
+#include <iomanip>
+#include <string>
 
+// Forward declaration
 class newAlignment;
 
 /// \brief Class to handle Conservation / Similarity statistics
@@ -59,7 +62,7 @@ public:
 
     ~statisticsMold();
 
-    virtual bool calculate() {};
+    virtual bool calculate() { return false; };
 
     virtual bool applyWindow(int _halfWindow);
     

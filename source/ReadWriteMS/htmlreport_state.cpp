@@ -1,18 +1,15 @@
 #include "../../include/ReadWriteMS/htmlreport_state.h"
-#include <iostream>
-#include "../../include/defines.h"
-#include <stdio.h>
-#include <string>
+
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
+#include "../../include/defines.h"
+#include "../../include/utils.h"
 
-using namespace std;
-
-int htmlreport_state::CheckAlignment(istream* origin)
+int htmlreport_state::CheckAlignment(std::istream* origin)
 {
     return 0;
 }
 
-newAlignment* htmlreport_state::LoadAlignment(std::__cxx11::string filename)
+newAlignment* htmlreport_state::LoadAlignment(std::string filename)
 {
     return nullptr;
 }
@@ -20,7 +17,7 @@ newAlignment* htmlreport_state::LoadAlignment(std::__cxx11::string filename)
 bool htmlreport_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
     int i, j, kj, upper, k = 0, maxLongName = 0;
-    string tmpColumn;
+    std::string tmpColumn;
     char type;
 
     /* Allocate some local memory */
@@ -40,11 +37,11 @@ bool htmlreport_state::SaveAlignment(newAlignment* alignment, std::ostream* outp
 
 
     /* Print HTML header into output file */
-    *output << "<!DOCTYPE html>" << endl 
-            << "<html><head>" << endl 
-            << "    <meta http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />" << endl 
-            << "    <title>readAl v1.4</title>" << endl
-            << "    <style type=\"text/css\">" << endl
+    *output << "<!DOCTYPE html>\n" 
+            << "<html><head>\n" 
+            << "    <meta http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />\n" 
+            << "    <title>readAl v1.4</title>\n"
+            << "    <style type=\"text/css\">\n"
             << "    #b  { background-color: #3366ff; }\n"
             << "    #r  { background-color: #cc0000; }\n"
             << "    #g  { background-color: #33cc00; }\n"
@@ -53,21 +50,21 @@ bool htmlreport_state::SaveAlignment(newAlignment* alignment, std::ostream* outp
             << "    #o  { background-color: #ff9900; }\n"
             << "    #c  { background-color: #46C7C7; }\n"
             << "    #y  { background-color: #FFFF00; }\n"
-            << "    </style>\n  </head>\n\n" << "  <body>\n  <pre>" << endl;
+            << "    </style>\n  </head>\n\n  <body>\n  <pre>\n";
 
     /* Print sequences colored according to CLUSTAL scheme based on
      * physical-chemical properties */
     for(j = 0, upper = HTMLBLOCKS; j < alignment->residNumber; j += HTMLBLOCKS, upper += \
     HTMLBLOCKS) {
 
-        *output << endl;
+        *output << "\n";
         /* Print main columns number */
-        *output << setw(maxLongName + 19) << right << (j + 10);
+        *output << std::setw(maxLongName + 19) << std::right << (j + 10);
         for(i = j + 20; ((i <= alignment->residNumber) && (i <= upper)); i += 10)
-            *output << setw(10) << right << i;
+            *output << std::setw(10) << std::right << i;
 
         /* Print special characters to delimit sequences blocks */
-        *output << endl << setw(maxLongName + 10);
+        *output << "\n" << std::setw(maxLongName + 10);
         for(i = j + 1; ((i <= alignment->residNumber) && (i <= upper)); i++)
             *output << (!(i % 10) ? "+" : "=");
 
@@ -75,7 +72,7 @@ bool htmlreport_state::SaveAlignment(newAlignment* alignment, std::ostream* outp
         for(i = 0; i < alignment->sequenNumber; i++) {
 
             /* Print sequences name */
-            *output << endl << setw(maxLongName + 9) << left << alignment->seqsName[i];
+            *output << "\n" << std::setw(maxLongName + 9) << std::left << alignment->seqsName[i];
 
             /* Print residues corresponding to current sequences block */
             for(k = j; ((k < alignment->residNumber) && (k < upper)); k++) {
@@ -89,11 +86,11 @@ bool htmlreport_state::SaveAlignment(newAlignment* alignment, std::ostream* outp
                     *output << "<span id=" << type << ">" << alignment->sequences[i][k] << "</span>";
             }
         }
-        *output << endl;
+        *output << "\n";
     }
 
     /* Print HTML footer into output file */
-    *output << "    </pre>" << endl << "  </body>" << endl << "</html>" << endl;
+    *output << "    </pre>\n  </body>\n</html>\n";
     
     return true;
 }

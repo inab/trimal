@@ -1,16 +1,10 @@
-#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/ReadWriteMS/nexus_m10_state.h"
+
+#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/defines.h"
-#include "../../include/values.h"
-#include <iostream>
-#include <cstdio>
-#include <string>
-#include <vector>
-#include "../../include/newAlignment.h"
+#include "../../include/utils.h"
 
-using namespace std;
-
-int nexus_m10_state::CheckAlignment(istream *origin) {
+int nexus_m10_state::CheckAlignment(std::istream *origin) {
     return 0;
 }
 
@@ -22,7 +16,7 @@ bool nexus_m10_state::SaveAlignment(newAlignment *alignment, std::ostream *outpu
     /* Generate output alignment in NEXUS format setting only alignment block */
 
     int i, j, k, l, maxLongName = 0;
-    string *tmpMatrix;
+    std::string *tmpMatrix;
 
     // Check whether sequences in the alignment are aligned or not.
     // Warn about it if there are not aligned.
@@ -32,7 +26,7 @@ bool nexus_m10_state::SaveAlignment(newAlignment *alignment, std::ostream *outpu
     }
 
     // Allocate local memory for generating output alignment
-    tmpMatrix = new string[alignment->originalSequenNumber];
+    tmpMatrix = new std::string[alignment->originalSequenNumber];
 
     // Depending on alignment orientation: forward or reverse. Copy directly
     // sequence information or get firstly the reversed sequences and then
@@ -52,12 +46,12 @@ bool nexus_m10_state::SaveAlignment(newAlignment *alignment, std::ostream *outpu
     alignment->getAlignmentType();
 
     // Remove characters like ";" from input alignment information line
-    while ((int) alignment->aligInfo.find(';') != (int) string::npos)
+    while ((int) alignment->aligInfo.find(';') != (int) std::string::npos)
         alignment->aligInfo.erase(alignment->aligInfo.find(';'), 1);
 
     // Print Alignment header
-    *output << "#NEXUS" << endl << "BEGIN DATA;" << endl << " DIMENSIONS NTAX="
-            << alignment->sequenNumber << " NCHAR=" << alignment->residNumber << ";" << endl;
+    *output << "#NEXUS\nBEGIN DATA;\n DIMENSIONS NTAX="
+            << alignment->sequenNumber << " NCHAR=" << alignment->residNumber << ";\n";
 
     // Print alignment datatype
     if (alignment->getAlignmentType() & SequenceTypes::DNA)
@@ -69,7 +63,7 @@ bool nexus_m10_state::SaveAlignment(newAlignment *alignment, std::ostream *outpu
 
     i = 0;
     // Using information from input alignment. Use only some tags.
-    while ((j = alignment->aligInfo.find(' ', i)) != (int) string::npos) {
+    while ((j = alignment->aligInfo.find(' ', i)) != (int) std::string::npos) {
 
         if ((alignment->aligInfo.substr(i, j - i)).compare(0, 7, "MISSING") == 0 ||
             (alignment->aligInfo.substr(i, j)).compare(0, 7, "missing") == 0)
@@ -81,7 +75,7 @@ bool nexus_m10_state::SaveAlignment(newAlignment *alignment, std::ostream *outpu
 
         i = j + 1;
     }
-    *output << ";" << endl;
+    *output << ";\n";
 
     // Add a header indicating the number of residues of each sequence.
     for (i = 0; i < alignment->originalSequenNumber; i++) {
@@ -89,10 +83,10 @@ bool nexus_m10_state::SaveAlignment(newAlignment *alignment, std::ostream *outpu
             continue;
 
         *output << "[Name: "
-                << setw(maxLongName + 4) << left << alignment->seqsName[i].substr(0, maxLongName)
-                << "Len: " << alignment->residNumber << "]" << endl;
+                << std::setw(maxLongName + 4) << std::left << alignment->seqsName[i].substr(0, maxLongName)
+                << "Len: " << alignment->residNumber << "]\n";
     }
-    *output << endl << "MATRIX";
+    *output << "\nMATRIX";
 
     // Start filling the file with sequence names and sequences.
     for (j = 0, k = 0; j < alignment->originalResidNumber;) {
@@ -107,7 +101,7 @@ bool nexus_m10_state::SaveAlignment(newAlignment *alignment, std::ostream *outpu
             // Skip rejected sequences
             if (alignment->saveSequences[i] == -1) continue;
             // Output sequence name
-            *output << endl << setw(maxLongName + 5) << left << alignment->seqsName[i].substr(0, maxLongName);
+            *output << "\n" << std::setw(maxLongName + 5) << std::left << alignment->seqsName[i].substr(0, maxLongName);
             // Add residues per block.
             // k = residue position;
             // l = residues added on current line
@@ -126,12 +120,12 @@ bool nexus_m10_state::SaveAlignment(newAlignment *alignment, std::ostream *outpu
             }
         }
         // Add the line to split blocks
-        *output << endl;
+        *output << "\n";
         j = k;
     }
 
     // End of MATRIX
-    *output << endl << ";" << endl << "END;" << endl;
+    *output << "\n;\nEND;\n";
 
     /* Deallocate local memory */
     delete[] tmpMatrix;

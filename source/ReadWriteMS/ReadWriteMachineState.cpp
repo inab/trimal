@@ -1,15 +1,9 @@
-#include "ReadWriteMS/ReadWriteMachineState.h"
-#include "ReadWriteMS/ReadWriteBaseState.h"
-#include "newAlignment.h"
-
-#include <ReadWriteMS/formats_header.h>
-
-#include <iostream>
-#include <fstream>
-#include <istream>
-#include <algorithm>
-#include <array>
-#include <sstream>
+#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
+#include "../../include/ReadWriteMS/ReadWriteBaseState.h"
+#include "../../include/ReadWriteMS/formats_header.h"
+#include "../../include/TimerFactory.h"
+#include "../../include/newAlignment.h"
+#include "../../include/utils.h"
 
 ReadWriteMS::~ReadWriteMS()
 {
@@ -26,7 +20,7 @@ void ReadWriteMS::addState(ReadWriteBaseState* newState)
 newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
 {
     // Check input file.
-    ifstream inFileHandler;
+    std::ifstream inFileHandler;
     inFileHandler.open(inFile);
     if (!inFileHandler.is_open())
     {
@@ -68,12 +62,13 @@ newAlignment* ReadWriteMS::loadAlignment(std::string inFile)
 
 bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string >* outFormats, newAlignment* alignment)
 {
+    StartTiming("bool ReadWriteMS::saveAlignment()");
     if (alignment->residNumber == 0 || alignment->sequenNumber == 0)
     {
         debug.report(ErrorCode::AlignmentIsEmpty);
         return false;
     }
-    string filename;
+    std::string filename;
     unsigned long start;
     unsigned long end;
     if (alignment->filename.empty())
@@ -82,7 +77,7 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
     }
     else
     {
-        start = max((int)alignment->filename.find_last_of('/'), 0);
+        start = std::max((int)alignment->filename.find_last_of('/'), 0);
         end = alignment->filename.find_last_of('.');
         filename = utils::ReplaceString(outPattern, "[in]", alignment->filename.substr(start, end-start));
     }
@@ -100,7 +95,7 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
             {
                 if (state->RecognizeOutputFormat( outFormats->at(0) ))
                 {
-                    return state->SaveAlignment(alignment, &cout, &filename);
+                    return state->SaveAlignment(alignment, &std::cout, &filename);
                 }
             }
             debug.report(ErrorCode::OutputFormatNotRecognized, &outFormats->at(0)[0]);
@@ -127,7 +122,7 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
                     utils::ReplaceStringInPlace(filename, "[extension]", state->extension);
                     utils::ReplaceStringInPlace(filename, "[format]", state->name);
                     
-                    ofstream outFileHandler;
+                    std::ofstream outFileHandler;
                     outFileHandler.open(filename);
                     
                     return state->SaveAlignment(alignment, &outFileHandler, &alignment->filename);
@@ -160,9 +155,9 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
                     }
                 }
             }
-            ofstream outFileHandler;
+            std::ofstream outFileHandler;
             bool isCorrect = true;
-            string filename_2;
+            std::string filename_2;
             for (ReadWriteBaseState * state : outStates)
             {
                 filename_2 = utils::ReplaceString(filename, "[extension]", state->extension);
@@ -177,7 +172,7 @@ bool ReadWriteMS::saveAlignment(std::string outPattern, std::vector< std::string
                 outFileHandler.close();
             }
             if (!isCorrect)
-                debug.report(ErrorCode::ImpossibleToGenerate, new string[1]{"the output file"});
+                debug.report(ErrorCode::ImpossibleToGenerate, new std::string[1]{"the output file"});
             return isCorrect;
         }
     }
@@ -216,7 +211,7 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
 
     // Process input files one by one.
     ReadWriteBaseState* inState = nullptr;
-    ifstream inFileHandler;
+    std::ifstream inFileHandler;
     int format_value = 0;
     int temp_value = 0;
 
@@ -264,8 +259,8 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
         unsigned long end;
         inFileHandler.close();
         {
-            string filename;
-            ofstream outFileHandler;
+            std::string filename;
+            std::ofstream outFileHandler;
             for (ReadWriteBaseState * state : outStates)
             {
                 start = std::max((int)inFile.find_last_of('/'), 0);
@@ -278,7 +273,7 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
                 if (this->hasOutputFile)
                     state -> SaveAlignment(alignment, &outFileHandler, &inFile);
                 else
-                    state -> SaveAlignment(alignment, &cout, &inFile);
+                    state -> SaveAlignment(alignment, &std::cout, &inFile);
                 outFileHandler.close();
             }
         }
@@ -289,7 +284,7 @@ void ReadWriteMS::loadAndSaveMultipleAlignments(
 
 std::string ReadWriteMS::getFileFormatName(std::string inFile)
 {
-    ifstream inFileHandler;
+    std::ifstream inFileHandler;
 
     // Open file.
     inFileHandler.open(inFile);

@@ -1,4 +1,3 @@
-#include <TimerFactory.h>
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
@@ -25,9 +24,19 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "Statistics/statisticsConsistency.h"
-#include "reportsystem.h"
-#include <sstream>
+#include "../../include/Statistics/statisticsConsistency.h"
+#include "../../include/Statistics/StatisticsManager.h"
+#include "../../include/sequencesMatrix.h"
+#include "../../include/trimalManager.h"
+#include "../../include/newAlignment.h"
+#include "../../include/reportsystem.h"
+#include "../../include/TimerFactory.h"
+#include "../../include/defines.h"
+#include "../../include/utils.h"
+
+
+#include <iomanip>
+#include <fstream>
 
 #define LONG 80
 
@@ -41,7 +50,7 @@ void statisticsConsistency::perform(char *comparesetFilePath,
     line = new char[1024];
 
     // Open the file that contains the paths of the files.
-    compare.open(comparesetFilePath, ifstream::in);
+    compare.open(comparesetFilePath, std::ifstream::in);
     while (compare.getline(line, 1024)) numFiles++;
     compare.close();
     compare.open(comparesetFilePath);

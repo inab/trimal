@@ -1,15 +1,10 @@
-#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/ReadWriteMS/pir_state.h"
+
+#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/defines.h"
-#include "../../include/values.h"
-#include <iostream>
-#include <cstdio>
-#include <string>
-#include <vector>
+#include "../../include/utils.h"
 
-using namespace std;
-
-int pir_state::CheckAlignment(istream *origin) {
+int pir_state::CheckAlignment(std::istream *origin) {
     char *line;
     origin->seekg(0);
     line = utils::readLine(*origin);
@@ -23,18 +18,18 @@ int pir_state::CheckAlignment(istream *origin) {
     return 0;
 }
 
-newAlignment *pir_state::LoadAlignment(std::__cxx11::string filename) {
+newAlignment *pir_state::LoadAlignment(std::string filename) {
     /* NBRF/PIR file format parser */
 
     newAlignment *_alignment = new newAlignment();
 
     bool seqIdLine, seqLines;
     char *str, *line = nullptr;
-    ifstream file;
+    std::ifstream file;
     int i;
 
     /* Check the file and its content */
-    file.open(filename, ifstream::in);
+    file.open(filename, std::ifstream::in);
     if (!utils::checkFile(file))
         return nullptr;
 
@@ -71,9 +66,9 @@ newAlignment *pir_state::LoadAlignment(std::__cxx11::string filename) {
     file.seekg(0);
 
     /* Allocate memory for the input alignmet */
-    _alignment->sequences = new string[_alignment->sequenNumber];
-    _alignment->seqsName = new string[_alignment->sequenNumber];
-    _alignment->seqsInfo = new string[_alignment->sequenNumber];
+    _alignment->sequences = new std::string[_alignment->sequenNumber];
+    _alignment->seqsName = new std::string[_alignment->sequenNumber];
+    _alignment->seqsInfo = new std::string[_alignment->sequenNumber];
 
     /* Initialize some local variables */
     seqIdLine = true;
@@ -156,10 +151,10 @@ bool pir_state::SaveAlignment(newAlignment *alignment, std::ostream *output, std
     /* Generate output alignment in NBRF/PIR format. Sequences can be unaligned */
 
     int i, j, k, l;
-    string alg_datatype, *tmpMatrix;
+    std::string alg_datatype, *tmpMatrix;
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->originalSequenNumber];
+    tmpMatrix = new std::string[alignment->originalSequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
@@ -188,26 +183,26 @@ bool pir_state::SaveAlignment(newAlignment *alignment, std::ostream *output, std
         /* Print sequence datatype and its name */
         if ((alignment->seqsInfo != nullptr) /*&& (iformat == oformat)*/)
             (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i]
-                      << endl << alignment->seqsInfo[i] << endl;
+                      << "\n" << alignment->seqsInfo[i] << "\n";
         else
-            (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i] << endl
-                      << alignment->seqsName[i] << " " << alignment->sequences[i].length() << " bases" << endl;
+            (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i] << "\n"
+                      << alignment->seqsName[i] << " " << alignment->sequences[i].length() << " bases\n";
 
         for (j = 0, k = 0, l = 0; j < alignment->sequences[i].length(); j++) {
             if (alignment->saveResidues != nullptr && alignment->saveResidues[j] == -1) {
 //                 if (j == alignment->sequences[i].length() -1 ) 
-//                     (*output) << endl;
+//                     (*output) << "\n";
             } else {
                 if (k % 10 == 0) (*output) << " ";
                 (*output) << tmpMatrix[i][j];
                 k++;
                 if (j == alignment->sequences[i].length() - 1);
-                else if (k % 50 == 0) (*output) << endl;
+                else if (k % 50 == 0) (*output) << "\n";
             }
         }
-        if (k % 50 == 0) (*output) << endl;
+        if (k % 50 == 0) (*output) << "\n";
         if (k % 10 == 0) (*output) << " ";
-        (*output) << "*" << endl << endl;
+        (*output) << "*\n\n";
     }
 
     /* Deallocate local memory */

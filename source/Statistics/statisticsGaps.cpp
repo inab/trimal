@@ -24,12 +24,12 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "Statistics/statisticsGaps.h"
-#include "../include/defines.h"
-#include "../include/newAlignment.h"
-#include <sstream>
-#include <reportsystem.h>
-#include <TimerFactory.h>
+#include "../../include/Statistics/statisticsGaps.h"
+#include "../../include/newAlignment.h"
+#include "../../include/reportsystem.h"
+#include "../../include/TimerFactory.h"
+#include "../../include/defines.h"
+#include "../../include/utils.h"
 
 
 statisticsGaps::statisticsGaps(newAlignment *parent) {
@@ -405,55 +405,55 @@ void statisticsGaps::printGapsColumns() {
 
     std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
 
-    cout
+    std::cout
             << std::setw(fname.length() + 7)
             << std::setfill(' ')
-            << std::left << "" << endl;
+            << std::left << "" << "\n";
 
-    cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
+    std::cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
 
     fname = std::to_string(size);
 
-    cout
+    std::cout
             << std::setw(fname.length() + 7)
             << std::setfill(' ')
-            << std::left << "" << endl;
+            << std::left << "" << "\n";
 
-    cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << endl;
+    std::cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << "\n";
 
     fname = " Gaps per Column";
 
-    cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+    std::cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << "\n";
 
-    cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
+    std::cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
          << std::setfill('-')
          << std::left << ""
          << std::setfill(' ')
-         << endl;
+         << "\n";
 
-    cout << std::setfill(' ') << "\33[0;33;1m"
+    std::cout << std::setfill(' ') << "\33[0;33;1m"
          << std::setw(size) << std::left << " Residue"
          << std::setw(size) << std::left << " % Gaps"
          << std::setw(size) << std::left << " Gap Score"
-         << "\33[0m" << endl;
+         << "\33[0m" << "\n";
 
-    cout << std::setfill('-');
+    std::cout << std::setfill('-');
 
-    cout << std::setw(size) << std::right << "  "
+    std::cout << std::setw(size) << std::right << "  "
          << std::setw(size) << std::right << "  "
-         << std::setw(size) << std::right << "  " << endl;
+         << std::setw(size) << std::right << "  " << "\n";
 
-    cout << std::setfill(' ') << std::fixed;
-    cout.precision(10);
+    std::cout << std::setfill(' ') << std::fixed;
+    std::cout.precision(10);
 
     // Show the information that have been requered 
     for (int i = 0; i < _alignment->originalResidNumber; i++)
-        cout << setw(size) << std::setfill(' ') << std::left << i
-             << setw(size) << std::setfill(' ') << std::left
-             << setw(size - 6) << std::setfill(' ') << std::right
+        std::cout << std::setw(size) << std::setfill(' ') << std::left << i
+             << std::setw(size) << std::setfill(' ') << std::left
+             << std::setw(size - 6) << std::setfill(' ') << std::right
                 << (vectAux[i] * 100.0) / _alignment->originalSequenNumber
-             << setw(size) << std::setfill(' ') << std::right
-                << 1.F - (float(vectAux[i]) / _alignment->originalSequenNumber) << endl;
+             << std::setw(size) << std::setfill(' ') << std::right
+                << 1.F - (float(vectAux[i]) / _alignment->originalSequenNumber) << "\n";
 
     // Finally, we deallocate the local memory
     delete[] vectAux;
@@ -472,31 +472,31 @@ void statisticsGaps::printGapsAcl() {
 
     std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
 
-    cout
+    std::cout
             << std::setw(fname.length() + 7)
             << std::setfill(' ')
-            << std::left << "" << endl;
+            << std::left << "" << "\n";
 
-    cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
+    std::cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
 
     fname = std::to_string(size);
 
-    cout
+    std::cout
             << std::setw(fname.length() + 7)
             << std::setfill(' ')
-            << std::left << "" << endl;
+            << std::left << "" << "\n";
 
-    cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << endl;
+    std::cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << "\n";
 
     fname = " Gaps Total";
 
-    cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
+    std::cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << "\n";
 
-    cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
+    std::cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
          << std::setfill('-')
          << std::left << ""
          << std::setfill(' ')
-         << endl;
+         << "\n";
 
 
     std::stringstream firstLine;
@@ -531,22 +531,22 @@ void statisticsGaps::printGapsAcl() {
     secondLine << std::setw(size) << std::left << " Gaps score";
     thirdLine << std::setw(size) << std::left << " per column";
 
-    cout << "\33[0;33;1m"
-         << firstLine.rdbuf() << endl
-         << secondLine.rdbuf() << endl
-         << thirdLine.rdbuf() << endl
+    std::cout << "\33[0;33;1m"
+         << firstLine.rdbuf() << "\n"
+         << secondLine.rdbuf() << "\n"
+         << thirdLine.rdbuf() << "\n"
          << "\33[0;m"
          << std::setfill('-');
 
     for (i = 0; i < 7; i++) {
-        cout << std::setw(size) << std::right << "   ";
+        std::cout << std::setw(size) << std::right << "   ";
     }
 
-    cout << std::endl
+    std::cout << "\n"
          << std::fixed
          << std::setfill(' ');
 
-    cout.precision(10);
+    std::cout.precision(10);
 
     // Count for each gaps' number the columns' number with that gaps' number.
     for (i = 0, acm = 0; i <= maxGaps; i++) {
@@ -558,32 +558,32 @@ void statisticsGaps::printGapsAcl() {
             acm += numColumnsWithGaps[i];
 
             // Number of residues
-            cout << std::setw(size) << std::left << numColumnsWithGaps[i];
+            std::cout << std::setw(size) << std::left << numColumnsWithGaps[i];
 
             // Percentage of alignment
-            cout << std::setw(size) << std::left
+            std::cout << std::setw(size) << std::left
                  << std::setw(size - 6) << std::right << (numColumnsWithGaps[i] * 100.0F) / _alignment->originalResidNumber
                  << std::setw(6) << std::left << " ";
 
             // Accumulative residues
-            cout << std::setw(size) << std::left << acm;
+            std::cout << std::setw(size) << std::left << acm;
 
             // Accumulative percent of alignment
-            cout << std::setw(size) << std::left
+            std::cout << std::setw(size) << std::left
                  << std::setw(size - 6) << std::right << (acm * 100.0F) / _alignment->originalResidNumber
                  << std::setw(6) << std::left << " ";
 
             // Number of gaps per column
-            cout << std::setw(size) << std::left << i;
+            std::cout << std::setw(size) << std::left << i;
 
             // Percentage of gaps per column
-            cout << std::setw(size) << std::left << (i * 1.0F) / _alignment->originalSequenNumber;
+            std::cout << std::setw(size) << std::left << (i * 1.0F) / _alignment->originalSequenNumber;
 
             // Gaps score per column
-            cout << std::setw(size) << std::left << 1.F - (((float) i) / _alignment->originalSequenNumber);
+            std::cout << std::setw(size) << std::left << 1.F - (((float) i) / _alignment->originalSequenNumber);
 
             // End line
-            cout << endl;
+            std::cout << "\n";
         }
     }
 }

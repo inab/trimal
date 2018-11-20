@@ -3,8 +3,8 @@
 
 #include "../../include/newAlignment.h"
 #include "../../include/reportsystem.h"
-#include <fstream>
 
+#include <iomanip>
 
 class ReadWriteMS;
 
@@ -33,12 +33,12 @@ public:
     /**
      \brief String that contains a well known acronym to the format
      */
-    string name;
+    std::string name;
 
     /**
      \brief String that contains the main extension of the format
      */
-    string extension;
+    std::string extension;
 
     /**
      \brief Function to check if a file is in the implemented format.
@@ -52,7 +52,7 @@ public:
                 So, when the Pir format is recognized, it's preferred over the Fasta Format,
                  when both of them can load the alignment bur pir extracts more information.</i>\n
      */
-    virtual int CheckAlignment(istream *origin) = 0;
+    virtual int CheckAlignment(std::istream *origin) = 0;
 
     /**
      \brief Function to load a file in the current format and return an alignment object.
@@ -60,7 +60,7 @@ public:
      \return    <b> Alignment</b> loaded with the information of the file. \n
                 <b> nullptr</b> if there was any error.
      */
-    virtual newAlignment *LoadAlignment(string filename) = 0;
+    virtual newAlignment *LoadAlignment(std::string filename) = 0;
 
     /**
      \brief Function to save a \link newAlignment \endlink to a file.
@@ -71,7 +71,7 @@ public:
                 <b> False </b> otherwise.
      \todo Remove the File Name Argument as it's stored on the alignment itself.
      */
-    virtual bool SaveAlignment(newAlignment *alignment, ostream *output, std::string *FileName) = 0;
+    virtual bool SaveAlignment(newAlignment *alignment, std::ostream *output, std::string *FileName) = 0;
 
     /**
      \brief Function that recognizes acronyms of the format.

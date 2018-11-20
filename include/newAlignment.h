@@ -30,25 +30,18 @@
 #ifndef NEW_ALIGNMENT_H
 #define NEW_ALIGNMENT_H
 
-#include <fstream>
 #include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <string>
 #include <memory>
-
+#include <cmath>
 #include <ctime>
 
-#include <cstring>
-#include <cstdlib>
-#include <cmath>
-
-#include "sequencesMatrix.h"
-#include "similarityMatrix.h"
-#include "utils.h"
-
-#include "Cleaner.h"
-
-#include "../include/Statistics/StatisticsManager.h"
-
-using namespace std;
+// Forward declarations
+class sequencesMatrix;
+class StatisticsManager;
+class Cleaner;
 
 class newAlignment {
 
@@ -77,15 +70,15 @@ public:
 
     bool isAligned = false;
 
-    string *sequences = nullptr;
+    std::string *sequences = nullptr;
 
-    string *seqsName = nullptr;
+    std::string *seqsName = nullptr;
 
-    string *seqsInfo = nullptr;
+    std::string *seqsInfo = nullptr;
 
-    string filename;
+    std::string filename;
 
-    string aligInfo;
+    std::string aligInfo;
 
     /* Sequence Identities */
     float **identities = nullptr;
@@ -109,25 +102,19 @@ public:
 
     int getNumSpecies();
 
-    void getSequences(string *names);
+    void getSequences(std::string *names);
 
-    void getSequences(string *names, int *lengths);
+    void getSequences(std::string *names, int *lenghts);
 
-    void getSequences(string *names, string *sequences, int *lenghts);
+    void getSequences(std::string *names, std::string *sequences, int *lenghts);
 
-    bool getSequenceNameOrder(string *names, int *orderVector);
+    bool getSequenceNameOrder(std::string *names, int *orderVector);
 
     int getNumAminos();
 
     void setWindowsSize(int ghWindow, int shWindow);
 
     void setBlockSize(int blockSize);
-
-//    int getBlockSize();
-
-//    void calculateSeqIdentity();
-
-//    void calculateRelaxedSeqIdentity();
 
     void calculateSeqOverlap();
 
@@ -137,27 +124,17 @@ public:
 
     int getAlignmentType();
 
-//    int *getCorrespResidues();
-
-//    int *getCorrespSequences();
-
     bool isFileAligned();
 
     newAlignment *getTranslationCDS(newAlignment *proteinAlignment);
 
-    bool checkCorrespondence(string *names, int *lenghts, int totalInputSequences, int multiple);
-
-//    void fillNewDataStructure(string *newMatrix, string *newNames);
+    bool checkCorrespondence(std::string *names, int *lenghts, int totalInputSequences, int multiple);
 
     void calculateColIdentity(float *columnIdentity);
 
-//    void printColumnsIdentity_DescriptiveStats();
-
     void setKeepSequencesFlag(bool newFlagValue);
 
-//    void setKeepSeqsHeaderFlag(bool newFlagValue);
-
-    void printAlignmentInfo(ostream &output);
+    void printAlignmentInfo(std::ostream &output);
 
     bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, newAlignment *proteinAlignment);
 
@@ -165,10 +142,7 @@ public:
 
     bool alignmentSummarySVG(newAlignment &_trimmedAlignment, char *destFile, int blocks);
 
-//    bool alignmentColourHTML(ostream &file);
-
     void updateSequencesAndResiduesNums(bool countSequences = true, bool countResidues = true);
-
 };
 
 #endif

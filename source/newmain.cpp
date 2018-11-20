@@ -24,9 +24,9 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "TimerFactory.h"
-#include "reportsystem.h"
-#include "trimalManager.h"
+#include "../include/trimalManager.h"
+#include "../include/TimerFactory.h"
+#include "../include/reportsystem.h"
 
 int main(int argc, char *argv[]) {
 

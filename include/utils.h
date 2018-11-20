@@ -30,13 +30,16 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <iostream>
 #include <cstring>
 #include <cstdlib>
-
 #include <fstream>
-#include <iostream>
-
-using namespace std;
+#include <sstream>
+#include <iomanip>
+#include <vector>
+#include <cstdio>
+#include <string>
+#include <cmath>
 
 /**
  \brief Utilities class.
@@ -247,7 +250,7 @@ public:
      \brief Check if a given file exists and its size is greater than 0.
      \param file ifstream to check
      */
-    static bool checkFile(ifstream &file);
+    static bool checkFile(std::ifstream &file);
 
     /**
      \brief Read a new line from current input stream.\n
@@ -260,7 +263,7 @@ public:
         Line that has been read or
         nullptr if there is nothing to read.\n
      */
-    static char *readLine(ifstream &file);
+    static char *readLine(std::ifstream &file);
 
     /**
      \brief Read a new line from current input stream.\n
@@ -273,7 +276,7 @@ public:
       nullptr if there is nothing to read.\n
       Line that has been read.
     */
-    static char *readLine(istream &file);
+    static char *readLine(std::istream &file);
 
     /**
      \brief Remove all content surrounded by ("") or ([]).\n
@@ -283,14 +286,14 @@ public:
             Line trimmed of comments or
             nullptr if there has been a mismatch\n
      */
-    static char *trimLine(string nline);
+    static char *trimLine(std::string nline);
 
     /**
      \brief Reverses a string
      \param toReverse String to get a reversed copy.
      \return Reversed string of toReverse.
      */
-    static string getReverse(string toReverse);
+    static std::string getReverse(std::string toReverse);
 
     /**
      \brief Removes a determined char from the string
@@ -298,7 +301,7 @@ public:
      \param line String to remove c from.
      \return New string without c character
      */
-    static string removeCharacter(char c, string line);
+    static std::string removeCharacter(char c, std::string line);
 
     /**
      \brief Checks an alignment type
@@ -309,14 +312,14 @@ public:
      */
     static int checkAlignmentType(int seqNumber,
                                   int residNumber,
-                                  string *sequences);
+                                  std::string *sequences);
 
     /**
      \brief Reads a line and converts it to an array of number
      \param line Line to convert to array of ints
      \return Pointer to an array of numbers that contains line
      */
-    static int *readNumbers(string line);
+    static int *readNumbers(std::string line);
 
     /**
      \brief Quicksort sorting method.
@@ -339,7 +342,7 @@ public:
      \param column Column to which this residue belongs.
      \return Char that represents the color to be used.
     */
-    static char determineColor(char res, string column);
+    static char determineColor(char res, std::string column);
 
     /**
      \brief Method to check for a pattern in a string.\n
@@ -349,10 +352,11 @@ public:
              present in the pattern and compare to the threshold argument.
      \param data string that will be compared against a pattern
      \param pattern string that contains the pattern.
+     \param threshold minimum ratio of hits to consider the pattern valid
      \todo Give a good description for this function.
      */
-    static bool lookForPattern(const string data,
-                               const string pattern,
+    static bool lookForPattern(const std::string data,
+                               const std::string pattern,
                                const float threshold);
 
     /**
@@ -418,6 +422,12 @@ public:
      */
     static int GetConsStep(float *consValue);
 
+      /**
+     
+     
+     */
+    static char toUpper(char c);
+
 
     static void streamSVG(float *x, float *y,
                           int num, std::string *lineName,
@@ -425,6 +435,14 @@ public:
                           std::string *filename);
 
 };
+
+inline char utils::toUpper(char c) 
+{
+    return std::toupper(c);
+    if (c >= 'a' and c <= 'z')
+        return c & (~(1<<5));
+    return c;
+}
 
 
 #endif

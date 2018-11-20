@@ -1,21 +1,17 @@
 #include "../../include/ReadWriteMS/mega_sequential_state.h"
+
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
-#include <iostream>
-#include <cstdio>
-#include <string>
 #include "../../include/defines.h"
-#include "../../include/values.h"
+#include "../../include/utils.h"
 
-using namespace std;
-
-int mega_sequential_state::CheckAlignment(istream* origin)
+int mega_sequential_state::CheckAlignment(std::istream* origin)
 {
     origin->seekg(0);
     origin->clear();
  
     char c, *firstWord = nullptr, *line = nullptr;
     int blocks = 0;
-    string nline;
+    std::string nline;
 
     /* Read first valid line in a safer way */
     do {
@@ -55,17 +51,17 @@ int mega_sequential_state::CheckAlignment(istream* origin)
     return 0;
 }
 
-newAlignment* mega_sequential_state::LoadAlignment(std::__cxx11::string filename)
+newAlignment* mega_sequential_state::LoadAlignment(std::string filename)
 {
     newAlignment * _alignment = new newAlignment();
    /* MEGA sequential file format parser */
 
     char *frag = nullptr, *str = nullptr, *line = nullptr;
-    ifstream file;
+    std::ifstream file;
     int i;
 
     /* Check the file and its content */
-    file.open(filename, ifstream::in);
+    file.open(filename, std::ifstream::in);
     if(!utils::checkFile(file))
         return nullptr;
 
@@ -158,8 +154,8 @@ newAlignment* mega_sequential_state::LoadAlignment(std::__cxx11::string filename
     file.seekg(0);
 
     /* Allocate memory */
-    _alignment->seqsName  = new string[_alignment->sequenNumber];
-    _alignment->sequences = new string[_alignment->sequenNumber];
+    _alignment->seqsName  = new std::string[_alignment->sequenNumber];
+    _alignment->sequences = new std::string[_alignment->sequenNumber];
 
     /* Skip first line */
     line = utils::readLine(file);
@@ -257,7 +253,7 @@ bool mega_sequential_state::SaveAlignment(newAlignment* alignment, std::ostream*
     /* Generate output alignment in MEGA format */
 
     int i, j, k, l, m;
-    string *tmpMatrix;
+    std::string *tmpMatrix;
 
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
@@ -267,7 +263,7 @@ bool mega_sequential_state::SaveAlignment(newAlignment* alignment, std::ostream*
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->originalSequenNumber];
+    tmpMatrix = new std::string[alignment->originalSequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
@@ -281,7 +277,7 @@ bool mega_sequential_state::SaveAlignment(newAlignment* alignment, std::ostream*
     alignment->getAlignmentType();
 
     /* Print output alignment header */
-    *output << "#MEGA" << endl << alignment->filename << endl;
+    *output << "#MEGA\n" << alignment->filename << "\n";
 
     /* Print alignment datatype */
     if (alignment->getAlignmentType() & SequenceTypes::DNA)
@@ -293,13 +289,13 @@ bool mega_sequential_state::SaveAlignment(newAlignment* alignment, std::ostream*
 
     /* Print number of sequences and alignment length */
     *output << "NSeqs=" << alignment->sequenNumber << " Nsites=" << alignment->residNumber
-         << " indel=- CodeTable=Standard;" << endl;
+         << " indel=- CodeTable=Standard;\n";
 
     /* Print sequences name and sequences divided into blocks of 50 residues */
     for(i = 0; i < alignment->originalSequenNumber; i++) {
         if (alignment->saveSequences[i] != -1)
         {
-            *output << endl << "#" << alignment->seqsName[i] << endl;
+            *output << "\n#" << alignment->seqsName[i] << "\n";
             
             for(j = 0, l = 0; j < alignment->sequences[i].length(); j ++) 
             {
@@ -315,10 +311,10 @@ bool mega_sequential_state::SaveAlignment(newAlignment* alignment, std::ostream*
                 }
             }
             if (l % 10 != 0) *output << " ";
-            if (l != 0) *output << endl;
+            if (l != 0) *output << "\n";
         }
     }
-    *output << endl;
+    *output << "\n";
 
     /* Deallocate local memory */
     delete [] tmpMatrix;

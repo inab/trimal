@@ -1,15 +1,10 @@
-#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/ReadWriteMS/phylip_paml_m10_state.h"
+
+#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/defines.h"
-#include <iostream>
-#include <cstdio>
-#include <string>
-#include <vector>
-#include "../../include/newAlignment.h"
+#include "../../include/utils.h"
 
-using namespace std;
-
-int phylip_paml_m10_state::CheckAlignment(istream* origin)
+int phylip_paml_m10_state::CheckAlignment(std::istream* origin)
 {
     return 0;
 }
@@ -24,7 +19,7 @@ bool phylip_paml_m10_state::SaveAlignment(newAlignment* alignment, std::ostream*
     /* Generate output alignment in PHYLIP format compatible with PAML program */
 
     int i, maxLongName;
-    string *tmpMatrix;
+    std::string *tmpMatrix;
 
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
@@ -34,7 +29,7 @@ bool phylip_paml_m10_state::SaveAlignment(newAlignment* alignment, std::ostream*
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->sequenNumber];
+    tmpMatrix = new std::string[alignment->sequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
@@ -53,14 +48,14 @@ bool phylip_paml_m10_state::SaveAlignment(newAlignment* alignment, std::ostream*
     maxLongName = std::min(maxLongName, PHYLIPDISTANCE);
     /* Generating output alignment */
     /* First Line: Sequences Number & Residued Number */
-    *output << " " << alignment->sequenNumber << " " << alignment->residNumber << endl;
+    *output << " " << alignment->sequenNumber << " " << alignment->residNumber << "\n";
 
     /* Print alignment */
     /* Print sequences name follow by the sequence itself in the same line */
     for(i = 0; i < alignment->sequenNumber; i++)
-        *output << setw(maxLongName + 3) << left << alignment->seqsName[i].substr(0, maxLongName)
-             << alignment->sequences[i] << endl;
-    *output << endl;
+        *output << std::setw(maxLongName + 3) << std::left << alignment->seqsName[i].substr(0, maxLongName)
+             << alignment->sequences[i] << "\n";
+    *output << "\n";
 
     /* Deallocate local memory */
     delete [] tmpMatrix;

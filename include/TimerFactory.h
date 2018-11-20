@@ -7,28 +7,31 @@
 
 //#define TimingReport true
 
-#define BenchmarkTimes false
-#define BenchmarkMemory false
+#define BenchmarkTimes true
+#define BenchmarkMemory true
 
 #define TimingReport BenchmarkTimes || BenchmarkMemory
 
 #if TimingReport
 
+#include <algorithm>
+#include <iostream>
+#include <cstring>
+#include <fstream>
+#include <cstring>
+#include <iomanip>
+#include <utility>
 #include <chrono>
+#include <vector>
 #include <ctime>
+#include <stack>
+#include <map>
 
 typedef std::chrono::time_point<std::chrono::high_resolution_clock> time_point;
 
 #define StartTiming(name) auto macroCustomTimer = timerFactory.getTimer(name)
 #define SetTimingOfstream(_filename) timerFactory.SetOutput(_filename)
-#include <chrono>
-#include <string>
-#include <stack>
-#include <iostream>
-#include <map>
-#include <vector>
-#include <fstream>
-#include <cstring>
+
 
 /** \brief Class Timer Factory */
 class TimerFactory;

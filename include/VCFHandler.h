@@ -1,16 +1,14 @@
 #ifndef VCF_STATISH_H
 #define VCF_STATISH_H
 
-#include <fstream>
-
-#include <reportsystem.h>
-#include <cstring>
-#include <vector>
-#include <iomanip>
+#include "../include/reportsystem.h"
+#include "../include/newAlignment.h"
 
 #include <algorithm>
-
-#include <newAlignment.h>
+#include <cstring>
+#include <iomanip>
+#include <fstream>
+#include <vector>
 
 namespace ngs {
     

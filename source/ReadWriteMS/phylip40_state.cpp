@@ -1,21 +1,16 @@
-#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/ReadWriteMS/phylip40_state.h"
+
+#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/defines.h"
-#include <iostream>
-#include <cstdio>
-#include <string>
-#include <vector>
-#include "../../include/newAlignment.h"
+#include "../../include/utils.h"
 
-using namespace std;
-
-int phylip40_state::CheckAlignment(istream* origin)
+int phylip40_state::CheckAlignment(std::istream* origin)
 {
     origin->seekg(0);
     origin->clear();
     char *firstWord = nullptr, *line = nullptr;
     int blocks = 0;
-    string nline;
+    std::string nline;
     
     /* Read first valid line in a safer way */
     do {
@@ -107,11 +102,11 @@ newAlignment* phylip40_state::LoadAlignment(std::string filename)
     /* PHYLIP/PHYLIP 4 (Sequential) file format parser */
     newAlignment * _alignment = new newAlignment();
     char *str, *line = nullptr;
-    ifstream file;
+    std::ifstream file;
     int i;
 
     /* Check the file and its content */
-    file.open(filename, ifstream::in);
+    file.open(filename, std::ifstream::in);
     if(!utils::checkFile(file))
         return nullptr;
 
@@ -146,8 +141,8 @@ newAlignment* phylip40_state::LoadAlignment(std::string filename)
         return nullptr;
 
     /* Allocate memory  for the input data */
-    _alignment->sequences  = new string[_alignment->sequenNumber];
-    _alignment->seqsName   = new string[_alignment->sequenNumber];
+    _alignment->sequences  = new std::string[_alignment->sequenNumber];
+    _alignment->seqsName   = new std::string[_alignment->sequenNumber];
 
     /* Read the lines block containing the sequences name + first fragment */
     i = 0;
@@ -217,7 +212,7 @@ bool phylip40_state::SaveAlignment(newAlignment* alignment, std::ostream* output
    /* Generate output alignment in PHYLIP/PHYLIP 4 format (sequential) */
 
     int i, j, k = -1, l, maxLongName;
-    string *tmpMatrix;
+    std::string *tmpMatrix;
 
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
@@ -227,7 +222,7 @@ bool phylip40_state::SaveAlignment(newAlignment* alignment, std::ostream* output
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->originalSequenNumber];
+    tmpMatrix = new std::string[alignment->originalSequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
@@ -251,7 +246,7 @@ bool phylip40_state::SaveAlignment(newAlignment* alignment, std::ostream* output
     for(i = 0; i < alignment->originalSequenNumber; i++)
     {
         if (alignment->saveSequences[i] == -1) continue;
-        (*output) << endl << setw(maxLongName + 3) << left << alignment->seqsName[i].substr(0, maxLongName);
+        (*output) << "\n" << std::setw(maxLongName + 3) << std::left << alignment->seqsName[i].substr(0, maxLongName);
             
         for (k = 0, l = 0; k < alignment->originalResidNumber && l < 60; k++)
         {
@@ -267,11 +262,11 @@ bool phylip40_state::SaveAlignment(newAlignment* alignment, std::ostream* output
             k++;
             continue;
         }
-        *output << endl;
+        *output << "\n";
         for (j = 0; j < alignment->originalSequenNumber; j++)
         {
             if (alignment->saveSequences[j] == -1) continue;
-            *output << endl;
+            *output << "\n";
             for (k = i, l = 0; k < alignment->originalResidNumber && l < 60; k++)
             {
                 if (alignment->saveResidues[k] == -1) continue;
@@ -282,7 +277,7 @@ bool phylip40_state::SaveAlignment(newAlignment* alignment, std::ostream* output
         }
     }
     
-    *output << endl << endl << endl;
+    *output << "\n\n\n";
 
     /* Deallocate local memory */
     delete [] tmpMatrix;

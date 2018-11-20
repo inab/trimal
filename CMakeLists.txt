@@ -48,7 +48,7 @@ set(preview
         source/utils.cpp
 
         source/reportsystem.cpp
-        source/timerFactory.cpp)
+        source/TimerFactory.cpp)
 
 # Create a list of all format states source files
 FILE (GLOB states

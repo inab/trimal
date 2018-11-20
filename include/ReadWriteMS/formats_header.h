@@ -1,4 +1,12 @@
-//CMake generated code
+// CMake generated code
+// Do not manually modify this file
+
+// This file includes all States found, and also defines the ReadWriteMS constructor.
+// To be able to be automatically recognized, the new state should:
+//        1.- Have the same Class Name as File Name (without the extension)
+//        2.- Name must end with '_state'
+//        3.- Be placed on ReadWriteMS folder
+
 #include "ReadWriteMS/clustal_state.h"
 #include "ReadWriteMS/fasta_m10_state.h"
 #include "ReadWriteMS/fasta_state.h"

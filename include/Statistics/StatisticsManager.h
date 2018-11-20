@@ -4,13 +4,15 @@
 
 #ifndef TRIMAL_STATISTICSMANAGER_H
 #define TRIMAL_STATISTICSMANAGER_H
-#include "similarityMatrix.h"
+#include "../../include/similarityMatrix.h"
 
+// Forward declarations
 class statisticsGaps;
 class statisticsConservation;
 class statisticsConsistency;
 
 class newAlignment;
+
 /// \brief Class to handle the interaction with statistics and statistics objects.
 class StatisticsManager {
 public:

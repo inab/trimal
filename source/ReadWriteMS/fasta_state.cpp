@@ -1,13 +1,10 @@
 #include "../../include/ReadWriteMS/fasta_state.h"
-#include <iostream>
-#include "../../include/defines.h"
-#include <stdio.h>
-#include <string>
+
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
+#include "../../include/defines.h"
+#include "../../include/utils.h"
 
-using namespace std;
-
-int fasta_state::CheckAlignment(istream* origin)
+int fasta_state::CheckAlignment(std::istream* origin)
 {
     char c;
     origin->seekg(0);
@@ -17,16 +14,16 @@ int fasta_state::CheckAlignment(istream* origin)
     return 0;
 }
 
-newAlignment* fasta_state::LoadAlignment(std::__cxx11::string filename)
+newAlignment* fasta_state::LoadAlignment(std::string filename)
 {
     /* FASTA file format parser */
     newAlignment* _alignment = new newAlignment();
     char *str, *line = nullptr;
-    ifstream file;
+    std::ifstream file;
     int i;
 
     /* Check the file and its content */
-    file.open(filename, ifstream::in);
+    file.open(filename, std::ifstream::in);
     if(!utils::checkFile(file))
         return nullptr;
 
@@ -62,9 +59,9 @@ newAlignment* fasta_state::LoadAlignment(std::__cxx11::string filename)
     file.seekg(0);
 
     /* Allocate memory for the input alignmet */
-    _alignment->seqsName  = new string[_alignment->sequenNumber];
-    _alignment->sequences = new string[_alignment->sequenNumber];
-    _alignment->seqsInfo  = nullptr;//new string[_alignment->sequenNumber];
+    _alignment->seqsName  = new std::string[_alignment->sequenNumber];
+    _alignment->sequences = new std::string[_alignment->sequenNumber];
+    _alignment->seqsInfo  = nullptr;//new std::string[_alignment->sequenNumber];
 
     for(i = -1; (i < _alignment->sequenNumber) && (!file.eof()); ) {
 
@@ -89,7 +86,7 @@ newAlignment* fasta_state::LoadAlignment(std::__cxx11::string filename)
         /* Check whether current line belongs to the current sequence
          * or it is a new one. In that case, store the sequence name */
         if(str[0] == '>') {
-            /* Move sequence name pointer until a valid string name is obtained */
+            /* Move sequence name pointer until a valid std::string name is obtained */
             do {
                 str = str + 1;
             } while(strlen(str) == 0);
@@ -125,11 +122,11 @@ bool fasta_state::SaveAlignment(newAlignment* alignment,
     /* Generate output alignment in FASTA format. Sequences can be unaligned. */
 
     int i, j, k, maxLongName;
-    string *tmpMatrix;
+    std::string *tmpMatrix;
     bool lastcharIsnewline = false;
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->originalSequenNumber];
+    tmpMatrix = new std::string[alignment->originalSequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
@@ -161,10 +158,10 @@ bool fasta_state::SaveAlignment(newAlignment* alignment,
             continue;
         
         if (!Machine->keepHeader)
-            (*output) << ">" << alignment->seqsName[i].substr(0, maxLongName) << endl;
+            (*output) << ">" << alignment->seqsName[i].substr(0, maxLongName) << "\n";
         
         else if (alignment->seqsInfo != nullptr)
-            (*output) << ">" << alignment->seqsInfo[i].substr(0, maxLongName) << endl;
+            (*output) << ">" << alignment->seqsInfo[i].substr(0, maxLongName) << "\n";
         
         
         for (j = 0, k = 0; j < alignment->sequences[i].length(); j++)
@@ -173,7 +170,7 @@ bool fasta_state::SaveAlignment(newAlignment* alignment,
             {
                 if (!lastcharIsnewline && j == alignment->sequences[i].length() -1 ) 
                 {
-                    (*output) << endl;
+                    (*output) << "\n";
                     lastcharIsnewline = true;
                 }
             }
@@ -184,7 +181,7 @@ bool fasta_state::SaveAlignment(newAlignment* alignment,
                 lastcharIsnewline = false;
                 if (k % 60 == 0 || j == alignment->sequences[i].length() -1 )
                 {
-                    (*output) << endl;
+                    (*output) << "\n";
                     lastcharIsnewline = true;
                 }
             }

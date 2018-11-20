@@ -1,18 +1,15 @@
 #include "../../include/ReadWriteMS/fasta_m10_state.h"
-#include <iostream>
-#include "../../include/defines.h"
-#include <cstdio>
-#include <string>
+
 #include "../../include/ReadWriteMS/ReadWriteMachineState.h"
+#include "../../include/defines.h"
+#include "../../include/utils.h"
 
-using namespace std;
-
-int fasta_m10_state::CheckAlignment(istream* origin)
+int fasta_m10_state::CheckAlignment(std::istream* origin)
 {
     return 0;
 }
 
-newAlignment* fasta_m10_state::LoadAlignment(std::__cxx11::string filename)
+newAlignment* fasta_m10_state::LoadAlignment(std::string filename)
 {
     return nullptr;
 }
@@ -22,11 +19,11 @@ bool fasta_m10_state::SaveAlignment(newAlignment* alignment, std::ostream* outpu
     /* Generate output alignment in FASTA format. Sequences can be unaligned. */
 
     int i, j, k, maxLongName;
-    string *tmpMatrix;
+    std::string *tmpMatrix;
     bool lastcharIsnewline = false;
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->originalSequenNumber];
+    tmpMatrix = new std::string[alignment->originalSequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
@@ -60,10 +57,10 @@ bool fasta_m10_state::SaveAlignment(newAlignment* alignment, std::ostream* outpu
         if (alignment->saveSequences != nullptr && alignment->saveSequences[i] == -1) continue;
         
         if (!Machine->keepHeader)
-            (*output) << ">" << alignment->seqsName[i].substr(0, maxLongName) << endl;
+            (*output) << ">" << alignment->seqsName[i].substr(0, maxLongName) << "\n";
         
         else if (alignment->seqsInfo != nullptr)
-            (*output) << ">" << alignment->seqsInfo[i].substr(0, maxLongName) << endl;
+            (*output) << ">" << alignment->seqsInfo[i].substr(0, maxLongName) << "\n";
         
         
         for (j = 0, k = 0; j < alignment->sequences[i].length(); j++)
@@ -72,7 +69,7 @@ bool fasta_m10_state::SaveAlignment(newAlignment* alignment, std::ostream* outpu
             {
                 if (!lastcharIsnewline && j == alignment->sequences[i].length() -1 ) 
                 {
-                    (*output) << endl;
+                    (*output) << "\n";
                     lastcharIsnewline = true;
                 }
             }
@@ -83,7 +80,7 @@ bool fasta_m10_state::SaveAlignment(newAlignment* alignment, std::ostream* outpu
                 lastcharIsnewline = false;
                 if (!lastcharIsnewline && (k % 60 == 0 || j == alignment->sequences[i].length() -1 ))
                 {
-                    (*output) << endl;
+                    (*output) << "\n";
                     lastcharIsnewline = true;
                 }
             }

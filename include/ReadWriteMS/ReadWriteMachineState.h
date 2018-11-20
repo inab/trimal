@@ -1,10 +1,17 @@
 #ifndef READWRITEMS_H
 #define READWRITEMS_H
 
+#include <algorithm>
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <cstring>
+#include <istream>
 #include <vector>
 #include <string>
-#include "../../include/newAlignment.h"
+#include <array>
 
+class newAlignment;
 class ReadWriteBaseState;
 
 /**

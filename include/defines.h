@@ -81,11 +81,11 @@ enum SequenceTypes
 {
     NotDefined = 0,
     
-    DNA = 1 << 1, ///< DNA Tag = 2
-    RNA = 1 << 2, ///< RNA Tag = 4
-    AA  = 1 << 3, ///< AA Tag = 8
+    DNA = 1 << 1, /// DNA Tag = 2
+    RNA = 1 << 2, /// RNA Tag = 4
+    AA  = 1 << 3, /// AA Tag = 8
     
-    DEG = 1 << 4 ///< Degraded Tag = 16
+    DEG = 1 << 4 /// Degraded Tag = 16
 };
 
 #endif

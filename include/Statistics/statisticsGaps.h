@@ -28,9 +28,9 @@
 
 #include <iostream>
 #include <iomanip>
+#include <sstream>
 
-using namespace std;
-
+// Forward declaration
 class newAlignment;
 
 /// \brief Class to handle Gaps statistics

@@ -27,16 +27,14 @@
 #ifndef SIMILARITYMATRIX_H
 #define SIMILARITYMATRIX_H
 
-#include <cmath>
-#include <cctype>
-#include <cstdlib>
-
-#include <string>
 #include <iostream>
+#include <cstring>
+#include <cstdlib>
 #include <iomanip>
 #include <fstream>
-
-#include "defines.h"
+#include <cstring>
+#include <cctype>
+#include <cmath>
 
 /** \brief Class that contains the similarity information of an alignment */
 class similarityMatrix {

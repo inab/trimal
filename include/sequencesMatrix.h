@@ -30,8 +30,6 @@
 #include <iostream>
 #include <iomanip>
 
-#include "../include/utils.h"
-
 using namespace std;
 
 class newAlignment;
@@ -101,14 +99,7 @@ public:
      * This construction method initializes all attributes
      * using the information present in the alignment pointer passed.
      *
-     * \param alignmentMatrix
-     *  Sequences of the alignment to convert to sequenceMatrix
-     * \param alignmentSeqsName
-     *  Sequences names
-     * \param sequences
-     *  Number of sequences
-     * \param residues
-     *  Number of residues
+     * \param parent Alignment to associate the sequences matrix to.
      */
     explicit sequencesMatrix(newAlignment *parent);
 

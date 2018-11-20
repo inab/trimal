@@ -1,12 +1,10 @@
-#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/ReadWriteMS/clustal_state.h"
-#include "../../include/newAlignment.h"
+
+#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
 #include "../../include/defines.h"
 #include "../../include/utils.h"
 
-using namespace std;
-
-int clustal_state::CheckAlignment(istream* origin)
+int clustal_state::CheckAlignment(std::istream* origin)
 {
     origin->seekg(0);
     origin->clear();
@@ -39,8 +37,8 @@ newAlignment* clustal_state::LoadAlignment(std::string filename)
     newAlignment* alignment = new newAlignment();
     int i, seqLength, pos, firstBlock;
     char *str, *line = nullptr;
-    ifstream file;
-    file.open(filename, ifstream::in);
+    std::ifstream file;
+    file.open(filename, std::ifstream::in);
     
     /* Store some details about input file to be used in posterior format
      * conversions */
@@ -106,8 +104,8 @@ newAlignment* clustal_state::LoadAlignment(std::string filename)
     file.seekg(0);
 
     /* Allocate memory for the input alignmet */
-    alignment->seqsName  = new string[alignment->sequenNumber];
-    alignment->sequences = new string[alignment->sequenNumber];
+    alignment->seqsName  = new std::string[alignment->sequenNumber];
+    alignment->sequences = new std::string[alignment->sequenNumber];
 
     /* Read the title line and store it */
     line = utils::readLine(file);
@@ -202,12 +200,12 @@ newAlignment* clustal_state::LoadAlignment(std::string filename)
     return alignment; 
 }
 
-bool clustal_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::__cxx11::string* FileName)
+bool clustal_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
 {
     /* Generate output alignment in CLUSTAL format */
 
     int i, j, k, l, maxLongName = 0;
-    string *tmpMatrix;
+    std::string *tmpMatrix;
 
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
@@ -217,7 +215,7 @@ bool clustal_state::SaveAlignment(newAlignment* alignment, std::ostream* output,
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new string[alignment->originalSequenNumber];
+    tmpMatrix = new std::string[alignment->originalSequenNumber];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
@@ -229,9 +227,9 @@ bool clustal_state::SaveAlignment(newAlignment* alignment, std::ostream* output,
 
     /* Print alignment header */
     if(!alignment->aligInfo.empty() && alignment->aligInfo.substr(0,7) == "CLUSTAL")
-        (*output) << alignment->aligInfo << endl << endl;
+        (*output) << alignment->aligInfo << "\n\n";
     else
-        (*output) << "CLUSTAL multiple sequence alignment" << endl << endl;
+        (*output) << "CLUSTAL multiple sequence alignment\n\n";
 
     /* Print alignment itself */
     /* Print as many blocks as it is needed of lines composed
@@ -243,7 +241,7 @@ bool clustal_state::SaveAlignment(newAlignment* alignment, std::ostream* output,
         {
             if (alignment->saveSequences != nullptr && alignment->saveSequences[i] != -1)
             {
-                (*output) << setw(maxLongName + 5) << left << alignment->seqsName[i];
+                (*output) << std::setw(maxLongName + 5) << std::left << alignment->seqsName[i];
                 for (k = j, l = 0; l < 60 && k < alignment->originalResidNumber; k++)
                 {
                     if (alignment->saveResidues != nullptr && alignment->saveResidues[k] != -1)
@@ -252,10 +250,10 @@ bool clustal_state::SaveAlignment(newAlignment* alignment, std::ostream* output,
                         l++;
                     }
                 }
-                (*output) << endl;
+                (*output) << "\n";
             }
         }
-        (*output) << endl << endl;
+        (*output) << "\n\n";
     }
 
     /* Deallocate local memory */

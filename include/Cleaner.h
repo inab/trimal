@@ -6,7 +6,10 @@
 #define TRIMAL_CLEANER_H
 
 #include <functional>
+#include <algorithm>
+#include <queue>
 
+// Forward declaration
 class newAlignment;
 
  /**
@@ -356,7 +359,8 @@ public:
 
      /**
       \brief Method to remove column blocks smaller than a given size.
-      \param blockSize
+      \param blockSize Minimum size to remove a block from the alignment
+      \param original Alignment to apply the removal.
        Minimum size a block has to be to be kept.
       */
     void removeSmallerBlocks(int blockSize, newAlignment &original);
