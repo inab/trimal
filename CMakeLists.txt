@@ -105,7 +105,17 @@ FILE (GLOB stateheaders
 
 # Override formats_header, 
 #       add a header that informs this is auto-generated code
-file(WRITE include/ReadWriteMS/formats_header.h "//CMake generated code\n")
+file(WRITE include/ReadWriteMS/formats_header.h 
+"// CMake generated code
+// Do not manually modify this file
+
+// This file includes all States found, and also defines the ReadWriteMS constructor.
+// To be able to be automatically recognized, the new state should:
+//        1.- Have the same Class Name as File Name (without the extension)
+//        2.- Name must end with '_state'
+//        3.- Be placed on ReadWriteMS folder
+
+")
 
 # Get the absolute path to include folder
 get_filename_component(var1 include ABSOLUTE)
