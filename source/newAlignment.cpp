@@ -239,6 +239,8 @@ newAlignment *newAlignment::getTranslationCDS(newAlignment *ProtAlig) {
     newAlig->sequenNumber = ProtAlig->sequenNumber;
     newAlig->originalSequenNumber = ProtAlig->sequenNumber;
 
+    delete[] mappedSeqs;
+
     return newAlig;
 
 }
@@ -1443,7 +1445,10 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
     ofstream file;
     file.open(destFile);
     if (!file)
+    {
+        delete[] tmpColumn;
         return false;
+    }
 
     // Compute HTML blank spaces
     j = 0;
