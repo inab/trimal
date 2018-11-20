@@ -34,10 +34,6 @@
 #include "../../include/defines.h"
 #include "../../include/utils.h"
 
-
-#include <iomanip>
-#include <fstream>
-
 #define LONG 80
 
 

@@ -32,6 +32,7 @@
 #include "../../include/defines.h"
 #include "../../include/utils.h"
 
+
 statisticsConservation::statisticsConservation(newAlignment *parentAlignment) {
     // Create a timerLevel that will report times upon its destruction
     //	which means the end of the current scope.

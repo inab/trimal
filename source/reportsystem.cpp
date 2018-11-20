@@ -1,7 +1,6 @@
 #include "../include/TimerFactory.h"
 #include "../include/reportsystem.h"
 
-#include <iomanip>
 
 __internalReport::__reportSystem debug = __internalReport::__reportSystem();
 

@@ -30,9 +30,6 @@
 #include "../../include/TimerFactory.h"
 #include "../../include/utils.h"
 
-#include <sstream>
-#include <iomanip>
-
 const std::string statisticsMold::statName = "Gaps"; // NOLINT
 
 statisticsMold::statisticsMold(newAlignment *parentAlignment, statisticsMold *mold) {
