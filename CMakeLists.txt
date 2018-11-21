@@ -45,8 +45,6 @@ set(preview
         source/similarityMatrix.cpp
         source/sequencesMatrix.cpp
 
-        source/utils.cpp
-
         source/reportsystem.cpp
         source/TimerFactory.cpp)
 
