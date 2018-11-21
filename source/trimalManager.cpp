@@ -59,7 +59,11 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
 
         // Check arguments. Makes use of the 
         //  macro checkArgument (start of the file)
-        //  to make code more understandable
+        //  to make code more understandable.
+        //
+        // Argument passed to checkArgument is,
+        //  indeed, a method with signature:
+        //  x_argument(&argc, argv, &i)
         checkArgument(in_argument)
         checkArgument(vcf_argument)
         checkArgument(out_argument)
@@ -198,8 +202,8 @@ inline void trimAlManager::help_arguments(const int *argc, char *argv[], int *i)
     }
 
     if (!strcmp(argv[*i], "-lf") || !strcmp(argv[*i], "--listformats")) {
-        std::cout << "Input Formats:  " << ReadWriteMachine.getInputFormatsAvailable() << "\n";
-        std::cout << "Output Formats: " << ReadWriteMachine.getOutputFormatsAvailable() << "\n";
+        std::cout << "Input Formats:  " << formatManager.getInputFormatsAvailable() << "\n";
+        std::cout << "Output Formats: " << formatManager.getOutputFormatsAvailable() << "\n";
         exit(0);
     }
 }
@@ -209,7 +213,7 @@ inline bool trimAlManager::in_argument(const int *argc, char *argv[], int *i) {
         argumentLength = strlen(argv[++*i]);
         infile = new char[argumentLength + 1];
         strcpy(infile, argv[*i]);
-        if ((origAlig = ReadWriteMachine.loadAlignment(infile)) == nullptr) {
+        if ((origAlig = formatManager.loadAlignment(infile)) == nullptr) {
             appearErrors = true;
         }
         return true;
@@ -364,7 +368,7 @@ inline bool trimAlManager::force_select_argument(const int *argc, char *argv[], 
         argumentLength = strlen(argv[++*i]);
         forceFile = new char[argumentLength + 1];
         strcpy(forceFile, argv[*i]);
-        if ((origAlig = ReadWriteMachine.loadAlignment(forceFile)) == nullptr) {
+        if ((origAlig = formatManager.loadAlignment(forceFile)) == nullptr) {
             debug.report(ErrorCode::AlignmentNotLoaded, forceFile);
             appearErrors = true;
         }
@@ -379,7 +383,7 @@ inline bool trimAlManager::back_trans_argument(const int *argc, char *argv[], in
         backtransFile = new char[argumentLength + 1];
         strcpy(backtransFile, argv[*i]);
 
-        if ((backtranslationAlig = ReadWriteMachine.loadAlignment(backtransFile)) == nullptr) {
+        if ((backtranslationAlig = formatManager.loadAlignment(backtransFile)) == nullptr) {
             debug.report(ErrorCode::AlignmentNotLoaded, backtransFile);
             appearErrors = true;
         }
@@ -500,8 +504,8 @@ inline bool trimAlManager::keep_seqs_argument(const int *argc, char *argv[], int
 }
 
 inline bool trimAlManager::keep_header_argument(const int *argc, char *argv[], int *i) {
-    if (!strcmp(argv[*i], "-keepheader") && (!ReadWriteMachine.keepHeader)) {
-        ReadWriteMachine.keepHeader = true;
+    if (!strcmp(argv[*i], "-keepheader") && (!formatManager.keepHeader)) {
+        formatManager.keepHeader = true;
         return true;
     }
     return false;
@@ -1198,7 +1202,7 @@ inline bool trimAlManager::check_multiple_files_comparison(char *argv[]) {
     // TODO: This is a perform action.
     if ((compareset != -1) && (!appearErrors)) {
         statisticsConsistency *CS = new statisticsConsistency();
-        CS->perform(argv[compareset], ReadWriteMachine, *this, forceFile);
+        CS->perform(argv[compareset], formatManager, *this, forceFile);
     }
     return appearErrors;
 }
@@ -1307,7 +1311,7 @@ inline void trimAlManager::check_compareset_window_argument() {
 
 inline void trimAlManager::check_output_format() {
     if (oformats.empty() && infile) {
-        oformats.emplace_back(ReadWriteMachine.getFileFormatName(infile));
+        oformats.emplace_back(formatManager.getFileFormatName(infile));
     }
 }
 
@@ -1365,7 +1369,7 @@ int trimAlManager::perform() {
 
 inline int trimAlManager::perform_VCF()
 {
-    auto XX = ReadWriteMachine.splitAlignmentKeeping(*origAlig);
+    auto XX = formatManager.splitAlignmentKeeping(*origAlig);
     char replacement = '-';
     ngs::readVCF(
             /* Dataset          */ XX,
@@ -1402,7 +1406,7 @@ inline int trimAlManager::perform_VCF()
 
         if ((outfile != nullptr) && (!appearErrors)) {
             std::string outFileString = std::string(outfile);
-            if (!ReadWriteMachine.saveAlignment(outFileString, &oformats, origAlig)) {
+            if (!formatManager.saveAlignment(outFileString, &oformats, origAlig)) {
                 appearErrors = true;
             }
         }
@@ -1414,12 +1418,12 @@ inline void trimAlManager::save_alignment()
 {
     if ((outfile != nullptr) && (!appearErrors)) {
         std::string outFileString = std::string(outfile);
-        if (!ReadWriteMachine.saveAlignment(outFileString, &oformats, singleAlig)) {
+        if (!formatManager.saveAlignment(outFileString, &oformats, singleAlig)) {
             appearErrors = true;
         }
 
     } else if ((stats >= 0) && (!appearErrors))
-        ReadWriteMachine.saveAlignment("", &oformats, singleAlig);
+        formatManager.saveAlignment("", &oformats, singleAlig);
 }
 
 inline void trimAlManager::output_reports()
@@ -1893,8 +1897,8 @@ inline void trimAlManager::menu() {
         #include "menu.txt"
     };
 
-    utils::ReplaceStringInPlace(menu, "[iformat]", ReadWriteMachine.getInputFormatsAvailable());
-    utils::ReplaceStringInPlace(menu, "[oformat]", ReadWriteMachine.getOutputFormatsAvailable());
+    utils::ReplaceStringInPlace(menu, "[iformat]", formatManager.getInputFormatsAvailable());
+    utils::ReplaceStringInPlace(menu, "[oformat]", formatManager.getOutputFormatsAvailable());
     utils::ReplaceStringInPlace(menu, "[version]", VERSION);
     utils::ReplaceStringInPlace(menu, "[revision]", REVISION);
     utils::ReplaceStringInPlace(menu, "[build]", BUILD);

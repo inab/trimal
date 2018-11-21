@@ -19,7 +19,7 @@ set(CMAKE_CXX_STANDARD 11)
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
 # Specify the level of optimization used
-#ADD_DEFINITIONS(-O2)
+ADD_DEFINITIONS(-O2)
 
 
 
@@ -40,17 +40,19 @@ set(preview
         source/Statistics/statisticsConsistency.cpp
 
         source/Cleaner.cpp
-        source/ReadWriteMS/ReadWriteMachineState.cpp
+        source/FormatHandling/BaseFormatHandler.cpp
 
         source/similarityMatrix.cpp
         source/sequencesMatrix.cpp
+
+        source/utils.cpp
 
         source/reportsystem.cpp
         source/TimerFactory.cpp)
 
 # Create a list of all format states source files
 FILE (GLOB states
-        source/ReadWriteMS/*_state.cpp)
+        source/FormatHandling/*_state.cpp)
 
 # Create a library including all states and common source files
 add_library(common OBJECT
@@ -66,7 +68,7 @@ add_executable(trimal
         $<TARGET_OBJECTS:common>)
 
 add_executable(readal
-        source/ReadWriteMS/ReadWriteMSmain.cpp
+        source/FormatHandling/ReadWriteMSmain.cpp
         $<TARGET_OBJECTS:common>)
 
 
@@ -99,7 +101,7 @@ message(
 
 #  Create a list of all format states header files
 FILE (GLOB stateheaders
-        include/ReadWriteMS/*_state.h)
+        include/FormatHandling/*_state.h)
 
 # Override formats_header, 
 #       add a header that informs this is auto-generated code
@@ -126,17 +128,17 @@ foreach(header_path ${stateheaders})
 
     # Append the "#include X" where X is the route to the header, 
     #   not including the absolute path to include folder
-    file(APPEND include/ReadWriteMS/formats_header.h "#include \"${out}\"\n")
+    file(APPEND include/FormatHandling/formats_header.h "#include \"${out}\"\n")
 
 endforeach()
 
 # Append the "#include" relative to the MachineStateHandler
 # Append the begin of the constructor method
-file(APPEND include/ReadWriteMS/formats_header.h
+file(APPEND include/FormatHandling/formats_header.h
 "
-#include \"ReadWriteMS/ReadWriteMachineState.h\"
+#include \"FormatHandling/FormatManager.h\"
 
-ReadWriteMS::ReadWriteMS()
+FormatManager::FormatManager()
 {
 ")
 
@@ -144,10 +146,10 @@ ReadWriteMS::ReadWriteMS()
 #       to add to the pool of states each state found
 foreach(header_path ${stateheaders})
     get_filename_component(var1 ${header_path} NAME_WE)
-    file(APPEND include/ReadWriteMS/formats_header.h "\taddState(new ${var1}(this));\n")
+    file(APPEND include/FormatHandling/formats_header.h "\taddState(new ${var1}(this));\n")
 endforeach()
 
 # Finish constructor method
-file(APPEND include/ReadWriteMS/formats_header.h "};")
+file(APPEND include/FormatHandling/formats_header.h "};")
 
 # End header Creation

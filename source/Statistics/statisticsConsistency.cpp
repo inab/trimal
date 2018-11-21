@@ -39,7 +39,7 @@
 
 
 void statisticsConsistency::perform(char *comparesetFilePath,
-                                    ReadWriteMS &ReadWriteMachine,
+                                    FormatManager &formatManager,
                                     trimAlManager &manager,
                                     char *forceFile) {
 
@@ -74,7 +74,7 @@ void statisticsConsistency::perform(char *comparesetFilePath,
 
         // Load the alignment
         compareAlignmentsArray[i]
-                = ReadWriteMachine.loadAlignment(filesToCompare[i]);
+                = formatManager.loadAlignment(filesToCompare[i]);
 
         // Check if alignment could be loaded
         if (compareAlignmentsArray[i] == nullptr) {
@@ -181,7 +181,7 @@ void statisticsConsistency::perform(char *comparesetFilePath,
         //  we'll use the selected alignment format
         if (manager.oformats.empty()) {
             manager.oformats.emplace_back(
-                    ReadWriteMachine.getFileFormatName(
+                    formatManager.getFileFormatName(
                             forceFile == nullptr ? filesToCompare[referFile] : forceFile)
             );
         }

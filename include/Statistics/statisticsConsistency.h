@@ -29,7 +29,7 @@
 #define COMPAREFILES_H
 
 
-#include "../../include/ReadWriteMS/ReadWriteMachineState.h"
+#include "../../include/FormatHandling/FormatManager.h"
 #include "../../include/trimalManager.h"
 
 #include <iostream>
@@ -48,7 +48,7 @@ class statisticsConsistency {
 
   public:
 
-    void perform(char *comparesetFilePath, ReadWriteMS &ReadWriteMachine, trimAlManager &manager, char *forceFile);
+    void perform(char *comparesetFilePath, FormatManager &FormatManager, trimAlManager &manager, char *forceFile);
 
 /**
  \brief Print the consistency value for each column from the selected alignment.

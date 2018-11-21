@@ -6,7 +6,7 @@
 #define TRIMAL_TRIMALARGUMENTPARSER_H
 
 
-#include "../include/ReadWriteMS/ReadWriteMachineState.h"
+#include "../include/FormatHandling/FormatManager.h"
 #include "../include/newAlignment.h"
 
 #include <stdlib.h>
@@ -28,64 +28,63 @@ public:
     
     
     bool 
-    appearErrors        = false,
+        appearErrors        = false,
 
-    getComplementary    = false, 
-    columnNumbering     = false,
-    nogaps              = false, 
-    noallgaps           = false,
-    gappyout            = false, 
-    strict              = false,
-    strictplus          = false, 
-    automated1          = false,
-    sgc                 = false, 
-    sgt                 = false, 
-    ssc                 = false, 
-    sst                 = false,
-    sfc                 = false, 
-    sft                 = false, 
-    sident              = false, 
-    soverlap            = false, 
-    selectSeqs          = false,
-    selectCols          = false, 
-    splitByStopCodon    = false,
-    terminalOnly        = false, 
-    keepSeqs            = false,
-    ignoreStopCodon     = false;
+        getComplementary    = false, 
+        columnNumbering     = false,
+        nogaps              = false, 
+        noallgaps           = false,
+        gappyout            = false, 
+        strict              = false,
+        strictplus          = false, 
+        automated1          = false,
+        sgc                 = false, 
+        sgt                 = false, 
+        ssc                 = false, 
+        sst                 = false,
+        sfc                 = false, 
+        sft                 = false, 
+        sident              = false, 
+        soverlap            = false, 
+        selectSeqs          = false,
+        selectCols          = false, 
+        splitByStopCodon    = false,
+        terminalOnly        = false, 
+        keepSeqs            = false,
+        ignoreStopCodon     = false;
 
     float 
-    conservationThreshold   = -1,
-    gapThreshold            = -1,
-    similarityThreshold     = -1,
-    consistencyThreshold    = -1,
-    residuesOverlap         = -1,
-    sequenceOverlap         = -1,
-    maxIdentity             = -1;
+        conservationThreshold   = -1,
+        gapThreshold            = -1,
+        similarityThreshold     = -1,
+        consistencyThreshold    = -1,
+        residuesOverlap         = -1,
+        sequenceOverlap         = -1,
+        maxIdentity             = -1;
     
     int
-    i                       = 1,
-    stats                   = 0,
-//    num                     = 0,
-    compareset              = -1,
-    windowSize              = -1, 
-    gapWindow               = -1, 
-    similarityWindow        = -1,
-    consistencyWindow       = -1, 
-    blockSize               = -1, 
-    clusters                = -1
-    ,
-    automatedMethodCount    = -1,
-    alternative_matrix      = -1,
-    
-    *delColumns         = nullptr,
-    *delSequences       = nullptr,
-    *sequencesLengths   = nullptr;
+        i                       = 1,
+        stats                   = 0,
+        compareset              = -1,
+        windowSize              = -1, 
+        gapWindow               = -1, 
+        similarityWindow        = -1,
+        consistencyWindow       = -1, 
+        blockSize               = -1, 
+        clusters                = -1
+        ,
+        automatedMethodCount    = -1,
+        alternative_matrix      = -1,
+        
+        *delColumns         = nullptr,
+        *delSequences       = nullptr,
+        *sequencesLengths   = nullptr;
     
     size_t
             argumentLength = size_t(-1);
 
     std::string 
-    *sequencesNames     = nullptr;
+        *sequencesNames     = nullptr;
     
 
     /* Others variables */
@@ -123,7 +122,7 @@ public:
     trimAlManager();
     ~trimAlManager();
     void parseArguments(int argc, char *argv[]);
-private:
+private: // Parse Arguments Methods
         void verbosity_argument             (const int* argc, char* argv[]);
         
         void help_arguments                 (const int *argc, char* argv[], int *i);
@@ -172,46 +171,45 @@ private:
 
 public:
     bool processArguments(char* argv[]);
-    
-private:
+private: // Process Arguments Methods
+    bool check_arguments_incompatibilities();
+        bool check_inFile_incompatibilities();
+        bool check_select_cols_and_seqs_incompatibilities();
+        bool check_thresholds_incompatibilities();
+        bool check_automated_methods_incompatibilities();
+        bool check_max_identity_incompatibilities();
+        bool check_clusters_incompatibilities();
+        bool check_windows_incompatibilities();
+        bool check_stats_incompatibilities();
+        bool check_codon_behaviour_incompatibility();
+        bool check_combinations_among_thresholds_incompatibility();
+        bool check_automated_manual_incompatibilities();
 
-        bool check_arguments_incompatibilities();
-            bool check_inFile_incompatibilities();
-            bool check_select_cols_and_seqs_incompatibilities();
-            bool check_thresholds_incompatibilities();
-            bool check_automated_methods_incompatibilities();
-            bool check_max_identity_incompatibilities();
-            bool check_clusters_incompatibilities();
-            bool check_windows_incompatibilities();
-            bool check_stats_incompatibilities();
-            bool check_codon_behaviour_incompatibility();
-            bool check_combinations_among_thresholds_incompatibility();
-            bool check_automated_manual_incompatibilities();
+    bool check_arguments_needs(char* argv[]);
 
-        bool check_arguments_needs(char* argv[]);
-
-            bool check_force_selection();
-            bool check_input_file_with_coding_sequences_argument();
-            bool check_file_aligned();
-            bool check_similarity_matrix();
-            bool check_outputs_coincidence();
-            bool check_col_numbering();
-            bool check_residue_and_sequence_overlap();
-            bool check_output_relevance();
-            bool check_output_file_with_statistics();
-            bool check_multiple_files_comparison(char* argv[]);
-            bool check_block_size();
-            bool check_backtranslations();
-            bool check_coding_sequences_type();
-            bool check_and_prepare_coding_sequence();
-            bool check_backtranslation_infile_names_corresponde();
-            void check_compareset_window_argument(); // TODO <- HAS TO CHANGE ITS NAME
-            void check_output_format();
+        bool check_force_selection();
+        bool check_input_file_with_coding_sequences_argument();
+        bool check_file_aligned();
+        bool check_similarity_matrix();
+        bool check_outputs_coincidence();
+        bool check_col_numbering();
+        bool check_residue_and_sequence_overlap();
+        bool check_output_relevance();
+        bool check_output_file_with_statistics();
+        bool check_multiple_files_comparison(char* argv[]);
+        bool check_block_size();
+        bool check_backtranslations();
+        bool check_coding_sequences_type();
+        bool check_and_prepare_coding_sequence();
+        bool check_backtranslation_infile_names_corresponde();
+        void check_compareset_window_argument(); // TODO <- HAS TO CHANGE ITS NAME
+        void check_output_format();
 
 public:
     int perform();
     void delete_variables();
-private:
+
+private: // General, private, methods
     void output_reports();
     void save_alignment();
     int perform_VCF();
@@ -234,7 +232,7 @@ private:
 
 
 private:
-    ReadWriteMS ReadWriteMachine;
+    FormatManager formatManager;
 };
 
 
