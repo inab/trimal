@@ -361,8 +361,8 @@ newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(
 
     remainingResidues = utils::roundInt((((baseLine / 100.0) - (float) resCounter / block)) * block);
 
-    float blCons, *vectAuxCons;
-    int blGaps, *vectAuxGaps;
+    float *vectAuxCons;
+    int *vectAuxGaps;
 
     if (remainingResidues > 0) {
         // Search for new cutpoints
@@ -379,11 +379,11 @@ newAlignment *Cleaner::cleanByCutValueOverpassOrEquals(
 
         // Sort them
         utils::quicksort(vectAuxCons, 0, block - 1);
-        blCons = vectAuxCons[(int) ((float) (_alignment->residNumber - 1) * (100.0 - baseLine) / 100.0)];
+        float blCons = vectAuxCons[(int) ((float) (_alignment->residNumber - 1) * (100.0 - baseLine) / 100.0)];
         delete[] vectAuxCons;
 
         utils::quicksort(vectAuxGaps, 0, block - 1);
-        blGaps = vectAuxGaps[(int) ((float) (_alignment->residNumber - 1) * (baseLine) / 100.0)];
+        float blGaps = vectAuxGaps[(int) ((float) (_alignment->residNumber - 1) * (baseLine) / 100.0)];
         delete[] vectAuxGaps;
 
         // Calculate the midpoint of the alignment
@@ -495,7 +495,7 @@ newAlignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, 
     //	which means the end of the current scope.
     StartTiming("newAlignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, const float *MDK_W, bool complementary, bool variable) ");
 
-    int i, x, pos, counter, num, lenBlock;
+    int i, x, pos, counter, lenBlock;
     newAlignment *newAlig = new newAlignment(*_alignment);
 
 
@@ -511,7 +511,8 @@ newAlignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, 
         // This allows us to keep a reduced memory consumption, as there is no need to make a whole copy of the saveResidues array.
         std::deque<bool> rejectResiduesBuffer = std::deque<bool>(); // Here we store: True(1) if the residue was rejected, False(0) if it was accepted.
         std::deque<int> positionResidueBuffer = std::deque<int>(); // Here we store the position of the residues of the previous deque.
-
+        
+        int num;
         // We're going to add the first 5 newAlig residues. That means, they are not rejected on the original _alignment.
         for (i = 0, num = 0; i < _alignment->originalResidNumber && num < 5; i++) {
             if (_alignment->saveResidues[i] == -1) continue;
@@ -1266,9 +1267,9 @@ bool Cleaner::removeOnlyTerminal() {
     StartTiming("bool Cleaner::removeOnlyTerminal(void) ");
 
     int i;
-    const int *gInCol;
 
     if ((left_boundary == -1) and (right_boundary == -1)) {
+        const int *gInCol;
         // Get alignments gaps stats and copy it
         if (!_alignment->Statistics->calculateGapStats()) {
             std::cerr << "\nWARNING: Impossible to apply 'terminal-only' method"
@@ -1435,7 +1436,7 @@ void Cleaner::calculateSeqIdentity() {
     char indet;
 
     // Depending on alignment type, indetermination symbol will be one or other
-    indet = _alignment->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
+    indet = (_alignment->getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
 
     // Create identities matrix to store identities scores
     _alignment->identities = new float *[_alignment->originalSequenNumber];
