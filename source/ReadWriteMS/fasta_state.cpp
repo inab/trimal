@@ -14,7 +14,7 @@ int fasta_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* fasta_state::LoadAlignment(std::string filename)
+newAlignment* fasta_state::LoadAlignment(std::string& filename)
 {
     /* FASTA file format parser */
     newAlignment* _alignment = new newAlignment();
@@ -194,7 +194,7 @@ bool fasta_state::SaveAlignment(newAlignment* alignment,
     return true;
 }
 
-bool fasta_state::RecognizeOutputFormat(std::string FormatName)
+bool fasta_state::RecognizeOutputFormat(std::string& FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "fasta";

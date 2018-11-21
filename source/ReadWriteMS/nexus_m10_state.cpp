@@ -8,7 +8,7 @@ int nexus_m10_state::CheckAlignment(std::istream *origin) {
     return 0;
 }
 
-newAlignment *nexus_m10_state::LoadAlignment(std::string filename) {
+newAlignment *nexus_m10_state::LoadAlignment(std::string& filename) {
     return nullptr;
 }
 
@@ -133,7 +133,7 @@ bool nexus_m10_state::SaveAlignment(newAlignment *alignment, std::ostream *outpu
     return true;
 }
 
-bool nexus_m10_state::RecognizeOutputFormat(std::string FormatName) {
+bool nexus_m10_state::RecognizeOutputFormat(std::string& FormatName) {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "nexus_m10";
 }

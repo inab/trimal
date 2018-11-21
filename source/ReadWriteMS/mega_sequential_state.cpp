@@ -51,7 +51,7 @@ int mega_sequential_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* mega_sequential_state::LoadAlignment(std::string filename)
+newAlignment* mega_sequential_state::LoadAlignment(std::string& filename)
 {
     newAlignment * _alignment = new newAlignment();
    /* MEGA sequential file format parser */
@@ -322,7 +322,7 @@ bool mega_sequential_state::SaveAlignment(newAlignment* alignment, std::ostream*
     return true;
 }
 
-bool mega_sequential_state::RecognizeOutputFormat(std::string FormatName)
+bool mega_sequential_state::RecognizeOutputFormat(std::string& FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "mega";

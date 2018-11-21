@@ -18,7 +18,7 @@ int pir_state::CheckAlignment(std::istream *origin) {
     return 0;
 }
 
-newAlignment *pir_state::LoadAlignment(std::string filename) {
+newAlignment *pir_state::LoadAlignment(std::string& filename) {
     /* NBRF/PIR file format parser */
 
     newAlignment *_alignment = new newAlignment();
@@ -211,7 +211,7 @@ bool pir_state::SaveAlignment(newAlignment *alignment, std::ostream *output, std
     return true;
 }
 
-bool pir_state::RecognizeOutputFormat(std::string FormatName) {
+bool pir_state::RecognizeOutputFormat(std::string& FormatName) {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName))
         return true;
     return FormatName == "pir" || FormatName == "nbrf" ||

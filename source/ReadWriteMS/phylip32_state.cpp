@@ -98,7 +98,7 @@ int phylip32_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* phylip32_state::LoadAlignment(std::string filename)
+newAlignment* phylip32_state::LoadAlignment(std::string& filename)
 {
     /* PHYLIP 3.2 (Interleaved) file format parser */
     newAlignment* _alignment = new newAlignment();
@@ -287,7 +287,7 @@ bool phylip32_state::SaveAlignment(newAlignment* alignment, std::ostream* output
     return true;
 }
 
-bool phylip32_state::RecognizeOutputFormat(std::string FormatName)
+bool phylip32_state::RecognizeOutputFormat(std::string& FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "phylip32";

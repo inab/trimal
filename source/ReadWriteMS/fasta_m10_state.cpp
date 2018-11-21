@@ -9,7 +9,7 @@ int fasta_m10_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* fasta_m10_state::LoadAlignment(std::string filename)
+newAlignment* fasta_m10_state::LoadAlignment(std::string& filename)
 {
     return nullptr;
 }
@@ -93,7 +93,7 @@ bool fasta_m10_state::SaveAlignment(newAlignment* alignment, std::ostream* outpu
     return true;
 }
 
-bool fasta_m10_state::RecognizeOutputFormat(std::string FormatName)
+bool fasta_m10_state::RecognizeOutputFormat(std::string& FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "fasta_m10";

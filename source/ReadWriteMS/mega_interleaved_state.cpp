@@ -52,7 +52,7 @@ int mega_interleaved_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* mega_interleaved_state::LoadAlignment(std::string filename)
+newAlignment* mega_interleaved_state::LoadAlignment(std::string& filename)
 {
     newAlignment * _alignment = new newAlignment();
    /* MEGA interleaved file format parser */
@@ -238,7 +238,7 @@ bool mega_interleaved_state::SaveAlignment(newAlignment* alignment, std::ostream
     return false;
 }
 
-bool mega_interleaved_state::RecognizeOutputFormat(std::string FormatName)
+bool mega_interleaved_state::RecognizeOutputFormat(std::string& FormatName)
 {
     return false;
 }

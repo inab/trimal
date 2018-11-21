@@ -32,7 +32,7 @@ int clustal_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* clustal_state::LoadAlignment(std::string filename)
+newAlignment* clustal_state::LoadAlignment(std::string& filename)
 {
     newAlignment* alignment = new newAlignment();
     int i, seqLength, pos, firstBlock;
@@ -262,7 +262,7 @@ bool clustal_state::SaveAlignment(newAlignment* alignment, std::ostream* output,
     return true;
 }
 
-bool clustal_state::RecognizeOutputFormat(std::string FormatName)
+bool clustal_state::RecognizeOutputFormat(std::string& FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "clustal";

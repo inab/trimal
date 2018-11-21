@@ -31,7 +31,7 @@ int nexus_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* nexus_state::LoadAlignment(std::string filename)
+newAlignment* nexus_state::LoadAlignment(std::string& filename)
 {
     newAlignment* _alignment = new newAlignment();
     /* NEXUS file format parser */
@@ -301,7 +301,7 @@ bool nexus_state::SaveAlignment(newAlignment* alignment, std::ostream* output, s
     return true;
 }
 
-bool nexus_state::RecognizeOutputFormat(std::string FormatName)
+bool nexus_state::RecognizeOutputFormat(std::string& FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "nexus";

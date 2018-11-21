@@ -9,7 +9,7 @@ int htmlreport_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* htmlreport_state::LoadAlignment(std::string filename)
+newAlignment* htmlreport_state::LoadAlignment(std::string& filename)
 {
     return nullptr;
 }
@@ -95,7 +95,7 @@ bool htmlreport_state::SaveAlignment(newAlignment* alignment, std::ostream* outp
     return true;
 }
 
-bool htmlreport_state::RecognizeOutputFormat(std::string FormatName)
+bool htmlreport_state::RecognizeOutputFormat(std::string& FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "html" ||

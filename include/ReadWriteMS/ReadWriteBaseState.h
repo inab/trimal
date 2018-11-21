@@ -60,7 +60,7 @@ public:
      \return    <b> Alignment</b> loaded with the information of the file. \n
                 <b> nullptr</b> if there was any error.
      */
-    virtual newAlignment *LoadAlignment(std::string filename) = 0;
+    virtual newAlignment *LoadAlignment(std::string& filename) = 0;
 
     /**
      \brief Function to save a \link newAlignment \endlink to a file.
@@ -79,7 +79,7 @@ public:
      \return <b>True</b> if recognized\n
              <b>False</b> otherwise.
      */
-    virtual bool RecognizeOutputFormat(std::string FormatName) {
+    virtual bool RecognizeOutputFormat(std::string& FormatName) {
         return (name == FormatName);
     }
 

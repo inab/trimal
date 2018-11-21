@@ -9,7 +9,7 @@ int phylip_paml_m10_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* phylip_paml_m10_state::LoadAlignment(std::string filename)
+newAlignment* phylip_paml_m10_state::LoadAlignment(std::string& filename)
 {
     return nullptr;
 }
@@ -63,7 +63,7 @@ bool phylip_paml_m10_state::SaveAlignment(newAlignment* alignment, std::ostream*
     return true;
 }
 
-bool phylip_paml_m10_state::RecognizeOutputFormat(std::string FormatName)
+bool phylip_paml_m10_state::RecognizeOutputFormat(std::string& FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "phylippaml_m10";

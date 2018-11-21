@@ -9,7 +9,7 @@ int phylip32_m10_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* phylip32_m10_state::LoadAlignment(std::string filename)
+newAlignment* phylip32_m10_state::LoadAlignment(std::string& filename)
 {
     return nullptr;
 }
@@ -89,7 +89,7 @@ bool phylip32_m10_state::SaveAlignment(newAlignment* alignment, std::ostream* ou
     return true;
 }
 
-bool phylip32_m10_state::RecognizeOutputFormat(std::string FormatName)
+bool phylip32_m10_state::RecognizeOutputFormat(std::string& FormatName)
 {
     if (ReadWriteBaseState::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "phylip32_m10";
