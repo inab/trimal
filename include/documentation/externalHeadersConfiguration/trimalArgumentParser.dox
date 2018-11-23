@@ -249,28 +249,28 @@ If the counter is bigger than 1, we are trying to use multiple automatic methods
 */
 
 /**
-\var newAlignment trimAlManager::origAlig
+\var Alignment trimAlManager::origAlig
 \brief Main alignment used/loaded on trimAl in combination with singleAlig.
 */
 
 /**
-\var newAlignment trimAlManager::singleAlig
+\var Alignment trimAlManager::singleAlig
 \brief Alignment obtained by making modifications to singleAlig or backtranslationAlig.
 */
 
 /**
-\var newAlignment trimAlManager::tempAlig
+\var Alignment trimAlManager::tempAlig
 \brief Temporal alignment that allows us to make some changes to trimAlManager::singleAlig, destroy it and set trimAlManager::singleAlig to this. 
 */
 
 /**
-\var newAlignment trimAlManager::compareAlignmentsArray
+\var Alignment trimAlManager::compareAlignmentsArray
 \brief Alignment Vector used on trimAlManager::check_multiple_files_comparison to compare them. 
 \note This variable could be moved there.
 */
 
 /**
-\var newAlignment trimAlManager::backtranslationAlig
+\var Alignment trimAlManager::backtranslationAlig
 \brief Alignment used on the backtranslation functionality.
 */
 
@@ -336,7 +336,7 @@ If the counter is bigger than 1, we are trying to use multiple automatic methods
 */
 
 /**
-\var ReadWriteMS trimAlManager::ReadWriteMachine
+\var FormatManager trimAlManager::formatManager
 \brief Read Write Machine that allows to manage formats easily.
 */
 

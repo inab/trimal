@@ -1,7 +1,7 @@
 R"(
 Some Examples:
 
-1) Removes all positions in the newAlignment  with gaps in 10% or more of
+1) Removes all positions in the Alignment  with gaps in 10% or more of
    the sequences, unless this leaves less than 60% of original alignment.
    In such case, print the 60% best (with less gaps) positions.
 
@@ -37,7 +37,7 @@ Some Examples:
 
    trimal -in <inputfile> -out <outputfile> -selectcols { 0,2,3,10,45-60,68,70-78 }
 
-8) Get the complementary newAlignment  from the newAlignment  previously trimmed.
+8) Get the complementary Alignment  from the Alignment  previously trimmed.
 
    trimal -in <inputfile> -out <outputfile> -selectcols { 0,2,3,10,45-60,68,70-78 } -complementary
 

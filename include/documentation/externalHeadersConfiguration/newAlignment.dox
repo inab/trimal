@@ -1,5 +1,5 @@
 /**
-\class newAlignment
+\class Alignment
 \brief Class containing an alignment\n
  This class stores the alignment sequences with it's names, residues and extra information.\n
  It contains multiple methods regarding the sequences.\n
@@ -8,71 +8,71 @@
  */
  
 /**
-\var newAlignment::Cleaning
+\var Alignment::Cleaning
 \brief Trimming submodule.\n
 It contains methods and variables related to trimming.
 */
     
 /** 
-\var newAlignment::Statistics
+\var Alignment::Statistics
 \brief Statistics submodule.\n
 It contains methods and variables related to Statistics calculation and reporting.
 */
     
 /**
-\var newAlignment::SequencesMatrix
+\var Alignment::SequencesMatrix
 \brief SequencesMatrix submodule\n
  This helper module stores the sequences without gaps.
  Useful when comparing MSA
 */
 
 /**
-\var newAlignment::sequenNumber
+\var Alignment::numberOfSequences
 \brief Number of sequences present on the alignment.
 */
 
 /**
-\var newAlignment::residNumber
+\var Alignment::numberOfResidues
 \brief Number of residues present on the alignment if it is aligned.
 */
 
 /**
-\var newAlignment::isAligned
+\var Alignment::isAligned
 \brief Flag that indicates if all sequences on the alignment have the same length (Including gaps).
 */
 
 /**
-\var newAlignment::dataType
+\var Alignment::dataType
 \brief Flag variable that represents the type of the alignment.
 */
 
 /**
-\var newAlignment::sequences
+\var Alignment::sequences
 \brief Vector containing the sequences.
 */
 
 /**
-\var newAlignment::seqsName
+\var Alignment::seqsName
 \brief String vector containing the sequences names.
 */
 
 /**
-\var newAlignment::seqsInfo
+\var Alignment::seqsInfo
 \brief Vector containing extra information about each sequence.
 */
 
 /**
-\var newAlignment::filename
+\var Alignment::filename
 \brief Filename where this alignment was loaded from.
 */
 
 /**
-\var newAlignment::aligInfo
+\var Alignment::alignmentInfo
 \brief String containing information of the alignment as a whole.
 */
 
 /**
-\var newAlignment::identities
+\var Alignment::identities
 \brief 2D Matrix that represents how much each sequence resembles other sequences in the same MSA
 
  Identity score between two sequences is the ratio of identical residues
@@ -80,42 +80,42 @@ It contains methods and variables related to Statistics calculation and reportin
 */
     
 /**
-\var newAlignment::saveResidues
+\var Alignment::saveResidues
 \brief Vector containing which residues will be kept/removed.\n
 -1 Indicates a 'removed/toRemove'. Otherwise residue/column will be kept
 */
     
 /**
-\var newAlignment::saveSequences
+\var Alignment::saveSequences
 \brief Vector containing which sequences will be kept/removed.\n
 -1 Indicates a 'removed/toRemove'. Otherwise sequence will be kept
 */
 
 /**
-\var newAlignment::SeqRef
+\var Alignment::SeqRef
 \brief Pointer to keep a count of how many alignments depend on the same shared-sequences.\n
  Increased on each trim step, and automatically reduced on each alignment destroy.\n
  If it arrives to 0, the last alignment being destroyed will also take care of releasing memory for shared information.
 */
 
 /**
-\var newAlignment::originalSequenNumber
+\var Alignment::originalNumberOfSequences
 \brief Number of sequences the alignment had when it was loaded.
 */
 
 /**
-\var newAlignment::originalResidNumber
+\var Alignment::originalNumberOfResidues
 \brief Number of residues the alignment had when it was loaded.
 */
 
 /**
-\var newAlignment::overlaps
+\var Alignment::overlaps
 \brief Matrix that stores the overlap between sequences of an alignment.
- See newAlignment::calculateSeqOverlap
+ See Alignment::calculateSeqOverlap
 */
 
 /**
-\fn newAlignment::fillMatrices(bool aligned)
+\fn Alignment::fillMatrices(bool aligned)
 \brief Method to initialize matrices and check if the sequences have been correctly loaded and are free of errors\n
 It checks if sequences contain unknown characters,
 sets the isAligned flag and initializes 'saveResidues' and 'saveSequences',
@@ -130,41 +130,50 @@ This could happen if the sequences contain any unknown character or if aligned f
 
 
 /** 
-\fn newAlignment::newAlignment(void)
+\fn Alignment::Alignment(void)
 \brief Constructor
 */
 
 /**
-\fn newAlignment::newAlignment(newAlignment&)
-\brief Copy Constructor 
+\fn Alignment::Alignment(Alignment&)
+\brief Copy Constructor. \n
+    The copy constructor does not make a copy of all structures present on the original alignment.\n
+    Instead, all alignments that share a common origin, share some information, and also, a counter (Alignment::SeqRef)
+        of how many alignments share the same information.\n
+    This allows us to keep the information on memory while any alignment is using it.\n
+    When an alignment is destroyed, the counter is substracted by 1, and, if it is 0 after the substraction,
+        the shared data is destroyed.
 */
 
 /** 
-\fn newAlignment::~newAlignment(void)
-\brief Destructor 
+\fn Alignment::~Alignment(void)
+\brief Destructor.
+    The destructor takes care of removing the non-shared information of each alignment when is destroyed.\n
+    It also substracts 1 from the shared counter Alignment::SeqRef.\n
+    When Alignment::SeqRef arrives to 0, the shared data is destroyed, including Alignment::SeqRef.
 */
 
 /**
-\fn newAlignment::getNumSpecies(void)
+\fn Alignment::getNumSpecies(void)
 \brief Number of sequences getter.
 \return Number of sequences in the alignment.
 */
 
 /**
-\fn newAlignment::getSequences(string * names)
+\fn Alignment::getSequences(std::string * names)
 \brief Getter for the sequences names.
 \param[out] names Vector of sequences names to fill.
 */
 
 /**
-\fn newAlignment::getSequences(string * names, int * lenghts)
+\fn Alignment::getSequences(std::string * names, int * lenghts)
 \brief Getter for the sequences names and its lenghts.
 \param[out] names Vector of sequences names to fill.
 \param[out] lenghts Vector of lenghts to fill.
 */
 
 /**
-\fn newAlignment::getSequences(string* names, string *sequences, int *lenghts)
+\fn Alignment::getSequences(std::string * names, std::string *sequences, int *lenghts)
 \brief Getter for the sequences, its names and lenghts.
 \param[out] names Vector of sequences names to fill.
 \param[out] sequences Vector of sequences to fill.
@@ -172,7 +181,7 @@ This could happen if the sequences contain any unknown character or if aligned f
 */
 
 /**
-\fn newAlignment::getSequenceNameOrder(string * names, int * orderVector)
+\fn Alignment::getSequenceNameOrder(string * names, int * orderVector)
 \brief Method to map two sets of sequences, own and external.\n
 The method accepts a vector of names, and test them against the alignment own sequences' names.\n
 If the sequence is present, its index will be stored in orderVector.\n
@@ -182,56 +191,56 @@ If the sequence is present, its index will be stored in orderVector.\n
 */
 
 /**
-\fn newAlignment::getNumAminos(void)
+\fn Alignment::getNumAminos(void)
 \brief Residues number getter. It counts gaps as residue.
 \return Number of residues in the alignment.
 */
 
 /**
-\fn newAlignment::setWindowsSize(int ghWindow, int shWindow)
+\fn Alignment::setWindowsSize(int ghWindow, int shWindow)
 \brief Windows setter
 \param ghWindow Half the Gap Window.
 \param shWindow Half the Similarity Window.
 */
 
 /**
-\fn newAlignment::setBlockSize(int blockSize)
-\brief blockSize BlockSize Setter.
+\fn Alignment::setBlockSize(int blockSize)
+\brief BlockSize Setter.
 \param blockSize New value.
 */
 
 /**
-\fn newAlignment::calculateSeqOverlap()
+\fn Alignment::calculateSeqOverlap()
 \brief Calculates overlap between sequences.
 */
 
 /**
-\fn newAlignment::printSeqOverlap(void)
+\fn Alignment::printSeqOverlap(void)
 \brief Prints the overlap between sequences.
 */
 
 /**
-\fn newAlignment::printSeqIdentity(void)
+\fn Alignment::printSeqIdentity(void)
 \brief Method to print different identity values computed from the alignment.\n
 In this method we assess the identity values matrix, as well as different average values. \n
 Moreover, the method computes which one is the most similar sequence.
 */
 
 /**
-\fn newAlignment::getAlignmentType(void)
+\fn Alignment::getAlignmentType(void)
 \brief Alignment type getter.
 \n See \link SequenceTypes \endlink
 \return Int representing the alignment type.\n
 */
 
 /** 
-\fn newAlignment::isFileAligned(void)
+\fn Alignment::isFileAligned(void)
 \brief isAligned getter.
 \return Whether the alignment is aligned or not.
 */
 
 /**
-\fn newAlignment::getTranslationCDS(newAlignment * proteinAlignment)
+\fn Alignment::getTranslationCDS(Alignment * proteinAlignment)
 \brief Method to back translate a protein alignment using the sequences present on the current alignment.
 \n Current alignment should contain the original sequences which were translated to protein sequences, <b> without any gap.</b>
 \note It's recommended to translate from dna to protein and then, align the protein sequences.
@@ -240,7 +249,7 @@ Moreover, the method computes which one is the most similar sequence.
 */
 
 /**
-\fn newAlignment::checkCorrespondence(string * names, int * lenghts, int totalInputSequences, int multiple)
+\fn Alignment::checkCorrespondence(string * names, int * lenghts, int totalInputSequences, int multiple)
 \brief Function to check CDS file.\n
 - It checks if sequences of input alignment are all present on the CDS file.
 - If nucleotide sequence is larger than protein sequence length * 3, warns about it and cuts the nucleotide sequence
@@ -254,26 +263,26 @@ Moreover, the method computes which one is the most similar sequence.
 */
 
 /**
-\fn newAlignment::calculateColIdentity(float * columnIdentity)
+\fn Alignment::calculateColIdentity(float * columnIdentity)
 \brief Method that calculates the columns identity value.\n
 This is, the frequency of the most present element in the column, being residue, indetermination and gap allowed.
 \param[out] columnIdentity Vector to fill with identities for each column.
 */
 
 /**
-\fn newAlignment::setKeepSequencesFlag(bool newFlagValue)
+\fn Alignment::setKeepSequencesFlag(bool newFlagValue)
 \brief Keep Sequences setter.
 \param newFlagValue New flag value
 */
 
 /**
-\fn newAlignment::printAlignmentInfo(ostream & output)
+\fn Alignment::printAlignmentInfo(ostream & output)
 \brief Print information about sequences number, average sequence length, maximum and minimum sequences length, etc 
 \param output Output stream.
 */
 
 /**
-\fn newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, newAlignment * proteinAlignment)
+\fn Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, Alignment * proteinAlignment)
 \brief Method to check if the CDS file is correct.\n
 Based on nature of residues: DNA/RNA (Most of the residues)\n
 There is no gaps on the whole dataset.\n
@@ -286,7 +295,7 @@ It will also remove or split stop codons depending on the flags passed.
 */
 
 /**
-\fn newAlignment::alignmentSummaryHTML(newAlignment & _trimmedAlignment, char *destFile, float *consValues)
+\fn Alignment::alignmentSummaryHTML(Alignment & _trimmedAlignment, char *destFile, float *consValues)
 \brief Method to report the trimming results in HTML.\n
 Outputs an HTML file that shows visually what has been done to the alignment (removed sequences or residues) and the stats used to do so.
 \param _trimmedAlignment Trimmed alignment to compare with.
@@ -296,7 +305,7 @@ Outputs an HTML file that shows visually what has been done to the alignment (re
 */
 
 /**
-\fn newAlignment::alignmentSummarySVG(newAlignment & _trimmedAlignment, char *destFile, float *consValues, int blocks)
+\fn Alignment::alignmentSummarySVG(Alignment & _trimmedAlignment, char *destFile, float *consValues, int blocks)
 \brief Method to report the trimming results in SVG.\n
 Outputs a SVG file that shows visually what has been done to the alignment (removed sequences or residues) and the stats used to do so.\param _trimmedAlignment Trimmed alignment obtained from the object calling this function.
 \param destFile Filename where to save the results.
@@ -305,7 +314,7 @@ Outputs a SVG file that shows visually what has been done to the alignment (remo
 */
 
 /**
-\fn newAlignment::updateSequencesAndResiduesNums(bool countSequences, bool countResidues)
+\fn Alignment::updateSequencesAndResiduesNums(bool countSequences, bool countResidues)
 \brief Updates the sequence number and residue number based on saveResidues and saveSequences
 \param countSequences Whether to count sequences
 \param countResidues Whether to count residues

@@ -3,13 +3,13 @@
 \section WhatIntroduction How to use
 
 \b trimAl is a program that can do a variety of things.\n
-The first thing to take in mind is <i> What input do I have? </i>\n\n
+The first thing to take in mind is <i> What input do I have? </i>\n
 
 - \link OneMSA I have a Multiple Sequence Alignment \endlink
-- I have a DNA alignment and a Protein alignment that contain the same sequences, but translated.
+- \link Backtranslation I have a DNA alignment and a Protein alignment that contain the same sequences, but translated. \endlink
 - \link CompareSet I have several Multiple Sequence Alignment with the same sequences. \endlink
 
-
+\skipline line
 
 
 
@@ -28,6 +28,23 @@ Having one Multiple Sequence Alignment you have multiple options available:
 
 - \link Clustering \endlink
 
+\subsection Backtranslation Protein alignment and DNA sequences
+It has been reported that trimming an alingment at protein level may be more informative than with DNA.\n
+A problem with this approach is the result, most of the time, is in Aminoacids, losing information about the DNA level.
+
+For solving this problem, we offer an argument that allows to input two files: \n
+    - Protein alignment
+    - Only sequences file (DNA or RNA)
+
+When providing both files, all transformations would be made on the protein alignment,
+but the result will be reflected on the Only Sequences file.
+
+For it to work, a number of requirements to be met:
+    - Both files must contain the same sequences, with the same ID
+    - Number of residues on each sequence of the protein alignment must be 3x of the number of residues on it's DNA/RNA sequence.
+        <i> Although this is not an strict requirement, results may not be correct if not met </i>
+    - Only sequences file mustn't contain any gap.
+
 \subsection CompareSet More than one Sequence Alignment.
 It's possible, by using different transformations on the same input data, to have multiple MSA where you have the same sequences, aligned differently.\n
 This may happen when you use different aligners, or different transformations to the same data.\n
@@ -38,12 +55,13 @@ This may result in really computational intensive, and, in some cases, redundant
 Instead of using the '-in' option, you can provide a file containing a filepath per line for each MSA you want to compare.\n
 Then, only the most representative alignment will be selected, reducing the number of alignments and allowing to make multiple transformations and reduce the number to one alignment again.\n\n
 
-The Alignment with the highest consistency will be selected, and, then, you can use this alignment as it was provided using the '-in' option.\n
+The %alignment with the highest consistency will be selected, and, then, you can use this alignment as it was provided using the '-in' option.\n
 This means, you can do any type of trimming or stats reporting you would when inputting a single alignment.\n
 Added to that, you can use also compareset specific arguments: ConsistencyThreshold, ConsistencyWindow
 
 \link OneMSA One Multiple Sequence Alignment \endlink
 
+\skipline line
 
 
 \subsection MetaAutomated Meta Automated Trimming
@@ -52,7 +70,9 @@ If you don't know what method you should use, you can always use the Meta Automa
 To use the Meta Automated method, you only have to provide the alignment file and use the '-automated1' argument. \n
 Example:
 \code
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -automated1
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -automated1
+ 
 \endcode
 
 Further Tweaking:
@@ -82,9 +102,11 @@ Further Tweaking:
 To use any of the methods you simply have to provide the input alignment and use the argument.
 Example:
 \code
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strictplus
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strictplus
+ 
 \endcode
 
 
@@ -102,8 +124,10 @@ Semi-automatic methods allow the user to provide statistics cut-offs and windows
 - ct X will cut the residues based on their consistency score, using X as cut-off point. (This option is only available if using the -compareset argument)
 
 \code
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -st 0.4
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -st 0.4
+ 
 \endcode
 
 \par Manual Trimming: Windows.
@@ -125,13 +149,14 @@ Or they can be set globally:
 \note It's recommended to use the 'cw' instead of 'w'. Using compareset and 'w' will report an info message.
 
 Example:
-\code 
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5 -gw 5
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -st 0.5 -sw 10
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5 -gw 2 -st 0.8 -sw 2
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5 -st 0.5 -w 3
- trimal -compareset dataset/alignments_comparison.X -gt 0.5 -st 0.5 -ct 0.5 -gw 2 -sw 2 -cw 4
-
+\code
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5 -gw 5
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -st 0.5 -sw 10
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5 -gw 2 -st 0.8 -sw 2
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5 -st 0.5 -w 3
+ trimal -compareset dataset/alignments_comparison.X -gt 0.5 -st 0.5 -ct 0.5 -gw 2 -sw 2 -cw 4
+ 
 \endcode
 
 
@@ -163,23 +188,31 @@ To better explain how to specify what to remove, here are some examples: \n
 
 To remove the second residue of the alignment, or, the residue number 1:
 \code
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols { 1 }
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols { 1 }
+ 
 \endcode
 
 To remove from the second residue up to, but not including, the fifth, or from residue 1 to 4 (4 not inclusive):
 \code
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols { 1-4 }
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols { 1-4 }
+ 
 \endcode
 
 To provide two ranges, from 1 to 4, and 5 to 7:
 \code
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols { 1-4,5-7 }
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols { 1-4,5-7 }
+ 
 \endcode
 
 \note Don't forget the spaces between the braces and the specified residues/sequences. \n For example, this calls would result in errors:
 \code
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols {1-4,5-7 }
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols { 1}
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols {1-4,5-7 }
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -selectcols { 1}
+ 
 \endcode
 
 
@@ -204,13 +237,17 @@ There are two ways of doing clustering: specifying a number of clusters or seque
 To use the first method, simply provide an input alignment, the cluster argument and the number of sequences you want to obtain.\n
 The clusters value should be the same or lower to the number of sequences.\n
 \code
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -clusters 2
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -clusters 2
+ 
 \endcode
 
 To use the second method, simply provide an input alignment, the maxidentity argument and a cut-off value.\n
 The cut-off value should be in the range 0 ~ 1.
 \code
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -maxidentity 0.5
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -maxidentity 0.5
+ 
 \endcode
 
 
@@ -228,22 +265,29 @@ MSAs tend to have a central no-gaps zone, and that zone may be interesting to ke
 Terminal Only works with any automated or semi-automated method, and allows us to keep that central block untouched.
 
 Example:
-\code 
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -automated1 -terminalonly
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout   -terminalonly
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict     -terminalonly
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strictplus -terminalonly
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5     -terminalonly
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -st 0.4     -terminalonly
+\code
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -automated1 -terminalonly
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout   -terminalonly
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict     -terminalonly
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strictplus -terminalonly
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.5     -terminalonly
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -st 0.4     -terminalonly
+ 
 \endcode
 
 \subsection CustomMatrix Further Tweaks: Custom Similarity Matrix
 \b trimAl has default Similarity Matrices for all the possible datatypes that allows as input.\n
 Default is Blossum62 but the user can input a custom Similarity Matrix with the matrix argument.
 
+\subsection HalfWindows Half Windows
+:D
+
 Example:
-\code 
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -matrix X
+\code
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -matrix X
+ 
 \endcode
 
 
@@ -282,10 +326,12 @@ Example:
 All methods allow the user to obtain the complementary sequence. This can be achieved using the complementary argument.
 
 Example:
-\code 
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict     -complementary
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout   -complementary
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.2     -complementary
+\code
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict     -complementary
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout   -complementary
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.2     -complementary
+ 
 \endcode
 
 
@@ -311,8 +357,10 @@ Moreover, it offers the possibility to save the result directly on a file, or mu
 To use the out argument, simply provide the argument and a filepath where to store the results.\n
 
 Example:
-\code 
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -out results/trimmed_example.fasta
+\code
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -out results/trimmed_example.fasta
+ 
 \endcode
 
 The out argument also allows the user to not only provide a filepath but a filepath pattern, where some tags will be replaced with some information about the input alignment and the output format:
@@ -322,20 +370,24 @@ The out argument also allows the user to not only provide a filepath but a filep
 - [extension] will be replaced with the most-known output format file extension.
 
 Example:
-\code 
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -out results/[in].trimmed.[format].[extension]
+\code
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -out results/[in].trimmed.[format].[extension]
  
- Will produce the output file: "results/example.076.AA.strNOG.ENOG411BH75.trimmed.fasta.fasta"
+ Will produce the output file: "results/example.076.AA.strNOG.ENOG411BH75.trimmed.fasta.fasta"
+ 
 \endcode
 
 \note Althougth you can use these tags in the filename / filename pattern, it's not compulsory the use of them, and you can simply provide a hardcoded output filename as we show on the first example of this section.
 
 You can also use this tags on the whole filepath, not only the filename, allowing to have a multiple folders organization, up to the user.
 
-\code 
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -out results/[in]/trimmed.[extension]
- 
- Will produce the output file: "results/example.076.AA.strNOG.ENOG411BH75/trimmed.fasta"
+\code
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -out results/[in]/trimmed.[extension]
+ 
+ Will produce the output file: "results/example.076.AA.strNOG.ENOG411BH75/trimmed.fasta"
+ 
 \endcode
 
 \note In the previous example, the trimmed file would be outputted to a folder with the same name as the input file. \n
@@ -387,10 +439,12 @@ Legacy way has multiple formats that are introduced as arguments to the program:
 | -phylip3.2_m10     | Output file in PHYLIP3.2 format. Sequences name length up to 10 characters.                   | 
 
 Example:
-\code 
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -fasta
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout -clustal -out results/[in].trimmed.[format].[extension]
- trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.2 -out [in].[format] -fasta -clustal -nbrf
+\code
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -strict -fasta
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout -clustal -out results/[in].trimmed.[format].[extension]
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gt 0.2 -out [in].[format] -fasta -clustal -nbrf
+ 
 \endcode
 
 \note Althougth Legacy arguments are allowed, there is another way of specifying the formats, and is using the -formats argument, followed by the identifier of each of the formats we want the format to be in. \n
@@ -407,8 +461,11 @@ trimal --listformats
 \endcode
 
 \note It is allowed to use a combination among Legacy and non-Legacy, as showed below, althougth it is not recommended.
-\code trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -fasta -formats nbrf clustal \endcode
-
+\code
+  
+  trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -fasta -formats nbrf clustal
+ 
+\endcode
 
 
 
@@ -426,7 +483,9 @@ This will output by console a list of all the columns that have been kept on the
 
 Example:
 \code
-trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout -colnumbering
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -gappyout -colnumbering
+ 
 \endcode
 
 
@@ -473,7 +532,9 @@ This is due to the fact they show a matrix of size sequences x sequences, so thi
 |-soverlap | Print overlap scores matrix for all sequences in the input alignment.                     |
 Example:
 \code
-trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -sgc -sgt -ssc -sst
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -sgc -sgt -ssc -sst
+ 
 \endcode
 
 
@@ -493,7 +554,9 @@ To use them you have to provide a filename where to store this reports.\n
 
 Example: 
 \code
-trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -htmlout htmlreport.html -svgout svgreport.svg -strict
+ 
+ trimal -in dataset/example.076.AA.strNOG.ENOG411BH75.fasta -htmlout htmlreport.html -svgout svgreport.svg -strict
+ 
 \endcode
 
 

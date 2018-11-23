@@ -7,7 +7,7 @@ trimAl [version].rev[revision] build[[build]]. [authors]
     the Free Software Foundation, the last available version.
 
 Please cite:
-    trimAl: a tool for automated newAlignment  trimming in large-scale phylogenetic analyses.
+    trimAl: a tool for automated Alignment  trimming in large-scale phylogenetic analyses.
     Salvador Capella-Gutierrez; Jose M. Silla-Martinez; Toni Gabaldon.
     Bioinformatics 2009, 25:1972-1973.
 
@@ -67,7 +67,7 @@ Common options (for a complete list please see the User Guide or visit http://tr
     -gt -gapthreshold <n>    1 - (fraction of sequences with a gap allowed). Range: [0 - 1]
     -st -simthreshold <n>    Minimum average similarity allowed. Range: [0 - 1]
     -ct -conthreshold <n>    Minimum consistency value allowed.Range: [0 - 1]
-    -cons <n>                Minimum percentage of the positions in the original newAlignment  to conserve. Range: [0 - 100]
+    -cons <n>                Minimum percentage of the positions in the original Alignment  to conserve. Range: [0 - 100]
 
     -nogaps                  Remove all positions with gaps in the alignment.
     -noallgaps               Remove columns composed only by gaps.

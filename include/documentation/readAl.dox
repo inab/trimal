@@ -4,10 +4,9 @@
 \section introduction_sec_r Introduction
 
 One of the main problems that the researchers have to face during their studies is the <i>conversion among the various formats</i> required by different programs. \n
-Nowadays there around <i>20 different Multiple Sequence Alignment (MSAs) formats and subformats</i>. \n\n
+Nowadays there around <i>20 different Multiple Sequence %Alignment (MSAs) formats and subformats</i>. \n\n
 
 Here we present \b readAl, a tool for format alignment conversion among the most representative formats. \n
-\b readAl has been designed to be used in several situations, including, alignment trimming, phylogenetic tree reconstruction, profile reconstruction, and so on.\n\n
 
 \b readAl has been implemented in <i>C++ programming language</i>. \n
 This program is part of the \b trimAl package and is used internally by \b trimAl to convert among different formats.\n

@@ -15,7 +15,7 @@ These steps are divided into:\n
     \note <i> You can force to select an alignment despite it's consistency using -forceselect.\n
     This functionality allows to clean the alignment using consistency stats, while using the manually selected alignment as input </i>
 
-    \warning If no preprocessing is used, then an alignment must be provided (using -in argument).\n \endwarning
+    \warning If no preprocessing is used, then an alignment must be provided (using -in argument).
 
     \image html preprocess.svg
 
@@ -76,7 +76,7 @@ These steps are divided into:\n
     - <b> SVG Output </b>  -- Obtain a report in SVG Format, where the original alignment is showed in a manner similar to html output format.\n
     This report includes all the statistics used in the trimming steps and also, points out what residues and sequences are kept or removed.\n
     - <b> HTML Output </b>  -- Obtain a report in HTML Format, including the statistics and kept/removed sequences / residues.\n
-    - <b> Output Alignment </b>  allows to output the aligment. Two options are available:
+    - <b> Output %Alignment </b>  allows to output the aligment. Two options are available:
         Only one can be selected:
         - <b> STDOUT (default) </b> -- The alignment will be printed on the terminal or STDOUT.
             - Some messages (as errors and warnings) will be displayed on STDOUT too, which may difficult obtaining the MSA.
