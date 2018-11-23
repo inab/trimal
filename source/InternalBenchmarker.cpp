@@ -1,20 +1,20 @@
-#include "../include/TimerFactory.h"
+#include "InternalBenchmarker.h"
 
 #if TimingReport
     // Global variable timerFactory.
-    TimerFactory timerFactory = TimerFactory(""); // NOLINT
+    InternalBenchmarker timerFactory = InternalBenchmarker(""); // NOLINT
 
-    //region TimerFactory
-    Timer TimerFactory::getTimer(std::string name) {
+    //region InternalBenchmarker
+    BenchmarkSnapshot InternalBenchmarker::getTimer(std::string name) {
         // Create a new timer
-        Timer timer = Timer(std::move(name), this);
+        BenchmarkSnapshot timer = BenchmarkSnapshot(std::move(name), this);
         // Store its pointer in the current queue
         _pool.push_back(&timer);
         // Return the timer
         return timer; // NOLINT
     }
 
-    void TimerFactory::reportTotal() {
+    void InternalBenchmarker::reportTotal() {
         double duration = std::chrono::duration_cast<std::chrono::milliseconds>
                 (std::chrono::high_resolution_clock::now() - startPoint).count();
 
@@ -37,7 +37,7 @@
         *timerFactory.out << "\n";
     }
 
-    TimerFactory::~TimerFactory() {
+    InternalBenchmarker::~InternalBenchmarker() {
 
         // Output the chart
         reportTotal();
@@ -48,7 +48,7 @@
             delete out;
     }
 
-    bool TimerFactory::checkOutputParameter(int argc, char **argv) {
+    bool InternalBenchmarker::checkOutputParameter(int argc, char **argv) {
         for (int i = 1; i < argc; i++) {
             if ((!strcmp(argv[i], "-timetrackerout")) && ((i) + 1 != argc)) {
                 size_t argumentLength = strlen(argv[++i]);
@@ -65,13 +65,13 @@
     }
     //endregion
 
-    //region Timer
+    //region BenchmarkSnapshot
 
-    std::string Timer::separator = std::string("│ "); // NOLINT
-    std::string Timer::spacer = std::string("  "); // NOLINT
+    std::string BenchmarkSnapshot::separator = std::string("│ "); // NOLINT
+    std::string BenchmarkSnapshot::spacer = std::string("  "); // NOLINT
 
 
-    Timer::Timer(std::string name, TimerFactory *timerFactory) :
+    BenchmarkSnapshot::BenchmarkSnapshot(std::string name, InternalBenchmarker *timerFactory) :
             name(std::move(name)),
             timerFactory(timerFactory) {
         start = std::chrono::high_resolution_clock::now();
@@ -96,7 +96,7 @@
                         << "\n";
     }
 
-    Timer::~Timer() {
+    BenchmarkSnapshot::~BenchmarkSnapshot() {
         timerFactory->lastLevel = timerFactory->levels.back();
         timerFactory->_pool.pop_back();
 
@@ -132,7 +132,7 @@
 
     #if BenchmarkMemory
 
-        int Timer::currentMemoryUsage() {
+        int BenchmarkSnapshot::currentMemoryUsage() {
             static std::ifstream proc_status_fhandle("/proc/self/status");
             proc_status_fhandle.seekg(0);
             std::string s;

@@ -1,11 +1,11 @@
-#include "../include/Statistics/statisticsConservation.h"
-#include "../include/Statistics/statisticsConsistency.h"
-#include "../include/Statistics/StatisticsManager.h"
+#include "Statistics/Conservation.h"
+#include "Statistics/Consistency.h"
+#include "Statistics/Manager.h"
 #include "../include/similarityMatrix.h"
 #include "../include/trimalManager.h"
 #include "../include/reportsystem.h"
-#include "../include/newAlignment.h"
-#include "../include/TimerFactory.h"
+#include "Alignment.h"
+#include "InternalBenchmarker.h"
 #include "../include/VCFHandler.h"
 #include "../include/Cleaner.h"
 #include "../include/defines.h"
@@ -1201,7 +1201,7 @@ inline bool trimAlManager::check_multiple_files_comparison(char *argv[]) {
 
     // TODO: This is a perform action.
     if ((compareset != -1) && (!appearErrors)) {
-        statisticsConsistency *CS = new statisticsConsistency();
+        Statistics::Consistency *CS = new Statistics::Consistency();
         CS->perform(argv[compareset], formatManager, *this, forceFile);
     }
     return appearErrors;
@@ -1380,7 +1380,7 @@ inline int trimAlManager::perform_VCF()
             /* replacement char */ &replacement
     );
 
-    for (newAlignment* &i : XX) {
+    for (Alignment* &i : XX) {
         delete origAlig;
         origAlig = i;
 
@@ -1480,9 +1480,9 @@ inline void trimAlManager::print_statistics() {
 
     if (compareset != -1) {
         if (sfc)
-            statisticsConsistency::printStatisticsFileColumns(*origAlig, origAlig->Statistics->consistency->getValues());
+            Statistics::Consistency::printStatisticsFileColumns(*origAlig, origAlig->Statistics->consistency->getValues());
         if (sft)
-            statisticsConsistency::printStatisticsFileAcl(*origAlig, origAlig->Statistics->consistency->getValues());
+            Statistics::Consistency::printStatisticsFileAcl(*origAlig, origAlig->Statistics->consistency->getValues());
     }
 }
 
@@ -1508,8 +1508,8 @@ inline void trimAlManager::svg_stats_out()
             if (origAlig->Statistics->gaps->numColumnsWithGaps[i] != 0) {
                 // Compute and prints the accumulative values for the gaps in the alignment. 
                 acm += origAlig->Statistics->gaps->numColumnsWithGaps[i];
-                x = acm / origAlig->residNumber;
-                y = 1.F - ((i * 1.0F) / origAlig->sequenNumber);
+                x = acm / origAlig->numberOfResidues;
+                y = 1.F - ((i * 1.0F) / origAlig->numberOfSequences);
                 utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
             }
         }
@@ -1525,29 +1525,29 @@ inline void trimAlManager::svg_stats_out()
         int i, num, acm;
 
         // Allocate memory 
-        vectAux = new float[origAlig->residNumber];
+        vectAux = new float[origAlig->numberOfResidues];
 
         // Select the conservation's value source and copy that vector in a auxiliar vector 
         if (origAlig->Statistics->conservation->MDK_Window != nullptr)
-            utils::copyVect(origAlig->Statistics->conservation->MDK_Window, vectAux, origAlig->residNumber);
+            utils::copyVect(origAlig->Statistics->conservation->MDK_Window, vectAux, origAlig->numberOfResidues);
         else
-            utils::copyVect(origAlig->Statistics->conservation->MDK, vectAux, origAlig->residNumber);
+            utils::copyVect(origAlig->Statistics->conservation->MDK, vectAux, origAlig->numberOfResidues);
 
         // Sort the auxiliar vector. 
-        utils::quicksort(vectAux, 0, origAlig->residNumber - 1);
+        utils::quicksort(vectAux, 0, origAlig->numberOfResidues - 1);
 
         // Initializate some values 
-        refer = vectAux[origAlig->residNumber - 1];
+        refer = vectAux[origAlig->numberOfResidues - 1];
         acm = 0;
         num = 1;
 
         // Count the columns with the same conservation's value and compute this information to shows the accunulative
         // statistics in the alignment. 
-        for (i = origAlig->residNumber - 2; i >= 0; i--) {
+        for (i = origAlig->numberOfResidues - 2; i >= 0; i--) {
             acm++;
 
             if (refer != vectAux[i]) {
-                x = ((float) acm / origAlig->residNumber);
+                x = ((float) acm / origAlig->numberOfResidues);
                 y = refer;
                 utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
                 refer = vectAux[i];
@@ -1555,7 +1555,7 @@ inline void trimAlManager::svg_stats_out()
             } else num++;
         }
         acm++;
-        x = ((float) acm / origAlig->residNumber);
+        x = ((float) acm / origAlig->numberOfResidues);
         y = refer;
         utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
 

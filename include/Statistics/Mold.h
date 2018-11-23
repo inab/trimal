@@ -33,48 +33,54 @@
 #include <string>
 
 // Forward declaration
-class newAlignment;
+class Alignment;
 
-/// \brief Class to handle Conservation / Similarity statistics
-class statisticsMold {
-public:
+namespace Statistics {
 
-    newAlignment * _alignment;
+    /** \brief Class to serve as a mold to multiple statistics. <b> Currently not in use </b>
+     * This would help to maintain coherence and to ease the understanding of each of the stats. 
+     * As the number of statistics grows, this standarization will become more valuable.
+    */
+    class Mold {
+    public:
 
-    int
-    residues                = -1,
-    sequences               = -1,
-    halfWindowApplied       = -1;
+        Alignment *_alignment;
 
-    /* Conservation vectors */
-    float *values           = nullptr;
-    float *valuesWindow     = nullptr;
+        int
+                residues = -1,
+                sequences = -1,
+                halfWindowApplied = -1;
 
-    int * refCounter        = nullptr;
+        /* Conservation vectors */
+        float *values = nullptr;
+        float *valuesWindow = nullptr;
 
-    const static std::string statName;
+        int *refCounter = nullptr;
+
+        const static std::string statName;
 
 
-public:
-    statisticsMold(newAlignment *parentAlignment, statisticsMold *mold);
+    public:
+        Mold(Alignment *parentAlignment, Mold *mold);
 
-    explicit statisticsMold(newAlignment * parentAlignment);
+        explicit Mold(Alignment *parentAlignment);
 
-    ~statisticsMold();
+        ~Mold();
 
-    virtual bool calculate() { return false; };
+        virtual bool calculate() { return false; };
 
-    virtual bool applyWindow(int _halfWindow);
-    
-    virtual bool isDefinedWindow();
+        virtual bool applyWindow(int _halfWindow);
 
-    virtual float * getVector();
+        virtual bool isDefinedWindow();
 
-    virtual void printByColumn(bool calculateRelative = false); // NOLINT ->
-    // Default values for virtual methods is 'prohibited'
+        virtual float *getVector();
 
-    virtual void printAccumulative(bool calculateRelative = false); // NOLINT ->
-    // Default values for virtual methods is 'prohibited'
+        virtual void printByColumn(bool calculateRelative = false); // NOLINT ->
+        // Default values for virtual methods is 'prohibited'
 
-};
+        virtual void printAccumulative(bool calculateRelative = false); // NOLINT ->
+        // Default values for virtual methods is 'prohibited'
+
+    };
+}
 #endif

@@ -27,7 +27,7 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "../include/TimerFactory.h"
+#include "InternalBenchmarker.h"
 #include "../include/reportsystem.h"
 #include "../include/defines.h"
 #include "../include/values.h"

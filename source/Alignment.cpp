@@ -1,10 +1,10 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.4: a tool for automated newAlignment trimming in large-scale
+    trimAl v1.4: a tool for automated Alignment trimming in large-scale
                  phylogenetics analyses.
 
-    readAl v1.4: a tool for automated newAlignment conversion among different
+    readAl v1.4: a tool for automated Alignment conversion among different
                  formats.
 
     statAl v1.4: a tool for getting stats about multiple sequence newAlignments.
@@ -29,15 +29,15 @@
 
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-#include "../include/Statistics/statisticsConservation.h"
-#include "../include/Statistics/statisticsConsistency.h"
-#include "../include/Statistics/StatisticsManager.h"
-#include "../include/Statistics/statisticsGaps.h"
+#include "Statistics/Conservation.h"
+#include "Statistics/Consistency.h"
+#include "Statistics/Manager.h"
+#include "Statistics/Gaps.h"
 #include "../include/sequencesMatrix.h"
 #include "../include/similarityMatrix.h"
-#include "../include/TimerFactory.h"
+#include "InternalBenchmarker.h"
 #include "../include/reportsystem.h"
-#include "../include/newAlignment.h"
+#include "Alignment.h"
 #include "../include/defines.h"
 #include "../include/Cleaner.h"
 #include "../include/values.h"
@@ -45,20 +45,20 @@
 
 using namespace std;
 
-newAlignment::newAlignment() {
+Alignment::Alignment() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("newAlignment::newAlignment(void) ");
+    StartTiming("Alignment::Alignment(void) ");
 
     // Submodules
     Cleaning = new Cleaner(this);
-    Statistics = new StatisticsManager(this);
+    Statistics = new Statistics::Manager(this);
 
     // Sizes
-    originalResidNumber = 0;
-    originalSequenNumber = 0;
-    sequenNumber = 0;
-    residNumber = 0;
+    originalNumberOfResidues = 0;
+    originalNumberOfSequences = 0;
+    numberOfSequences = 0;
+    numberOfResidues = 0;
 
     // Are the input sequences aligned?
     isAligned = false;
@@ -75,7 +75,7 @@ newAlignment::newAlignment() {
     seqsName = nullptr;
     seqsInfo = nullptr;
 
-    // Information computed from newAlignment
+    // Information computed from Alignment
     SequencesMatrix = nullptr;
     identities = nullptr;
 
@@ -86,14 +86,14 @@ newAlignment::newAlignment() {
 
 }
 
-newAlignment::newAlignment(newAlignment &originalAlignment) {
+Alignment::Alignment(Alignment &originalAlignment) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("newAlignment::newAlignment(newAlignment &originalAlignment) ");
+    StartTiming("Alignment::Alignment(Alignment &originalAlignment) ");
 
     if (this != &originalAlignment) {
         filename                = originalAlignment.filename;
-        aligInfo                = originalAlignment.aligInfo;
+        alignmentInfo                = originalAlignment.alignmentInfo;
         dataType                = originalAlignment.dataType;
         isAligned               = originalAlignment.isAligned;
 
@@ -101,28 +101,28 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
         seqsInfo                = originalAlignment.seqsInfo;
         sequences               = originalAlignment.sequences;
 
-        residNumber             = originalAlignment.residNumber;
-        sequenNumber            = originalAlignment.sequenNumber;
-        originalResidNumber     = originalAlignment.originalResidNumber;
-        originalSequenNumber    = originalAlignment.originalSequenNumber;
+        numberOfResidues             = originalAlignment.numberOfResidues;
+        numberOfSequences            = originalAlignment.numberOfSequences;
+        originalNumberOfResidues     = originalAlignment.originalNumberOfResidues;
+        originalNumberOfSequences    = originalAlignment.originalNumberOfSequences;
 
         identities              = nullptr;
         SequencesMatrix         = nullptr;
 
         // Copy save(Sequences|Residues) vector to keep information of previous
         //  trimming steps
-        saveSequences = new int[originalSequenNumber];
+        saveSequences = new int[originalNumberOfSequences];
         std::copy(  originalAlignment.saveSequences, 
-                    originalAlignment.saveSequences + originalAlignment.originalSequenNumber, 
+                    originalAlignment.saveSequences + originalAlignment.originalNumberOfSequences,
                     saveSequences);
-        saveResidues = new int[originalResidNumber];
+        saveResidues = new int[originalNumberOfResidues];
         std::copy(  originalAlignment.saveResidues, 
-                    originalAlignment.saveResidues + originalAlignment.originalResidNumber, 
+                    originalAlignment.saveResidues + originalAlignment.originalNumberOfResidues,
                     saveResidues);
 
         // Submodules
         this->Cleaning = new Cleaner(this, originalAlignment.Cleaning);
-        this->Statistics = new StatisticsManager(this, originalAlignment.Statistics);
+        this->Statistics = new Statistics::Manager(this, originalAlignment.Statistics);
 
         // Increase the number of elements using the shared information.
         this->SeqRef = originalAlignment.SeqRef;
@@ -131,10 +131,10 @@ newAlignment::newAlignment(newAlignment &originalAlignment) {
     }
 }
 
-newAlignment::~newAlignment() {
+Alignment::~Alignment() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("newAlignment::~newAlignment(void) ");
+    StartTiming("Alignment::Alignmentid) ");
 
     delete[] saveResidues;
     // saveResidues = nullptr;
@@ -143,7 +143,7 @@ newAlignment::~newAlignment() {
     // saveSequences = nullptr;
 
     if (identities != nullptr) {
-        for (int i = 0; i < sequenNumber; i++)
+        for (int i = 0; i < numberOfSequences; i++)
             delete[] identities[i];
         delete[] identities;
     }
@@ -153,8 +153,8 @@ newAlignment::~newAlignment() {
     delete SequencesMatrix;
     // SequencesMatrix = nullptr;
 
-    // sequenNumber = 0;
-    // residNumber = 0;
+    // numberOfSequences = 0;
+    // numberOfResidues = 0;
 
     // isAligned = false;
 
@@ -182,20 +182,20 @@ newAlignment::~newAlignment() {
     }
 }
 
-newAlignment *newAlignment::getTranslationCDS(newAlignment *ProtAlig) {
+Alignment *Alignment::getTranslationCDS(Alignment *ProtAlig) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("newAlignment *newAlignment::getTranslationCDS(newAlignment *ProtAlig) ");
+    StartTiming("Alignment *Alignment::getTranslationCDS(Alignment *ProtAlig) ");
 
     int x, y, counter, *mappedSeqs;
-    newAlignment *newAlig = new newAlignment();
+    Alignment *newAlig = new Alignment();
 
     // Map the selected protein sequences to the input
     // coding sequences
-    mappedSeqs = new int[ProtAlig->sequenNumber];
+    mappedSeqs = new int[ProtAlig->numberOfSequences];
 
-    for (x = 0; x < ProtAlig->originalSequenNumber; x++) {
-        for (y = 0; y < originalSequenNumber; y++) {
+    for (x = 0; x < ProtAlig->originalNumberOfSequences; x++) {
+        for (y = 0; y < originalNumberOfSequences; y++) {
             if (ProtAlig->seqsName[x] == seqsName[y]) {
                 mappedSeqs[x] = y;
                 break;
@@ -203,11 +203,11 @@ newAlignment *newAlignment::getTranslationCDS(newAlignment *ProtAlig) {
         }
     }
 
-    newAlig->sequences = new std::string[ProtAlig->sequenNumber];
-    newAlig->seqsInfo = new std::string[ProtAlig->sequenNumber];
-    newAlig->seqsName = new std::string[ProtAlig->sequenNumber];
+    newAlig->sequences = new std::string[ProtAlig->numberOfSequences];
+    newAlig->seqsInfo = new std::string[ProtAlig->numberOfSequences];
+    newAlig->seqsName = new std::string[ProtAlig->numberOfSequences];
 
-    for (x = 0; x < ProtAlig->originalSequenNumber; x++) {
+    for (x = 0; x < ProtAlig->originalNumberOfSequences; x++) {
 
         newAlig->sequences[x] = *new std::string[ProtAlig->sequences[x].size()];
         std::string &current = newAlig->sequences[x];
@@ -236,8 +236,8 @@ newAlignment *newAlignment::getTranslationCDS(newAlignment *ProtAlig) {
         current.shrink_to_fit();
     }
 
-    newAlig->sequenNumber = ProtAlig->sequenNumber;
-    newAlig->originalSequenNumber = ProtAlig->sequenNumber;
+    newAlig->numberOfSequences = ProtAlig->numberOfSequences;
+    newAlig->originalNumberOfSequences = ProtAlig->numberOfSequences;
 
     delete[] mappedSeqs;
 
@@ -245,62 +245,62 @@ newAlignment *newAlignment::getTranslationCDS(newAlignment *ProtAlig) {
 
 }
 
-int newAlignment::getNumSpecies(void) {
+int Alignment::getNumSpecies(void) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("int newAlignment::getNumSpecies(void) ");
-    return sequenNumber;
+    StartTiming("int Alignment::getNumSpecies(void) ");
+    return numberOfSequences;
 }
 
-int newAlignment::getNumAminos(void) {
+int Alignment::getNumAminos(void) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("int newAlignment::getNumAminos(void) ");
-    return residNumber;
+    StartTiming("int Alignment::getNumAminos(void) ");
+    return numberOfResidues;
 }
 
-void newAlignment::setWindowsSize(int ghWindow_, int shWindow_) {
+void Alignment::setWindowsSize(int ghWindow_, int shWindow_) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::setWindowsSize(int ghWindow_, int shWindow_) ");
+    StartTiming("void Alignment::setWindowsSize(int ghWindow_, int shWindow_) ");
     Statistics->ghWindow = ghWindow_;
     Statistics->shWindow = shWindow_;
 }
 
-void newAlignment::setBlockSize(int blockSize_) {
+void Alignment::setBlockSize(int blockSize_) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::setBlockSize(int blockSize_) ");
+    StartTiming("void Alignment::setBlockSize(int blockSize_) ");
     Cleaning->blockSize = blockSize_;
 }
 
-void newAlignment::setKeepSequencesFlag(bool flag) {
+void Alignment::setKeepSequencesFlag(bool flag) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::setKeepSequencesFlag(bool flag) ");
+    StartTiming("void Alignment::setKeepSequencesFlag(bool flag) ");
     Cleaning->keepSequences = flag;
 }
 /*
-void newAlignment::setKeepSeqsHeaderFlag(bool newFlagValue) {
+void Alignment::setKeepSeqsHeaderFlag(bool newFlagValue) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::setKeepSeqsHeaderFlag(bool flag) ");
+    StartTiming("void Alignment::setKeepSeqsHeaderFlag(bool flag) ");
     Cleaning->keepSequences = newFlagValue;
 }
 */
 /*
-int newAlignment::getBlockSize() {
+int Alignment::getBlockSize() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("int newAlignment::getBlockSize() ");
+    StartTiming("int Alignment::getBlockSize() ");
     return Cleaning->blockSize;
 }
  */
 /*
-void newAlignment::calculateSeqIdentity() {
+void Alignment::calculateSeqIdentity() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::calculateSeqIdentity(void) ");
+    StartTiming("void Alignment::calculateSeqIdentity(void) ");
 
     int i, j, k, hit, dst;
     char indet;
@@ -309,11 +309,11 @@ void newAlignment::calculateSeqIdentity() {
     indet = getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
     // Create identities matrix to store identities scores
-    identities = new float *[sequenNumber];
+    identities = new float *[numberOfSequences];
 
     // For each seq, compute its identity score against the others in the MSA
-    for (i = 0; i < sequenNumber; i++) {
-        identities[i] = new float[sequenNumber];
+    for (i = 0; i < numberOfSequences; i++) {
+        identities[i] = new float[numberOfSequences];
 
         // It's a symmetric matrix, copy values that have been already computed
         for (j = 0; j < i; j++)
@@ -321,8 +321,8 @@ void newAlignment::calculateSeqIdentity() {
         identities[i][i] = 0;
 
         // Compute identity scores for the current sequence against the rest
-        for (j = i + 1; j < sequenNumber; j++) {
-            for (k = 0, hit = 0, dst = 0; k < residNumber; k++) {
+        for (j = i + 1; j < numberOfSequences; j++) {
+            for (k = 0, hit = 0, dst = 0; k < numberOfResidues; k++) {
                 // If one of the two positions is a valid residue,
                 // count it for the common length
                 if (((sequences[i][k] != indet) && (sequences[i][k] != '-')) ||
@@ -342,21 +342,21 @@ void newAlignment::calculateSeqIdentity() {
 }
  */
 /*
-void newAlignment::calculateRelaxedSeqIdentity() {
+void Alignment::calculateRelaxedSeqIdentity() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::calculateRelaxedSeqIdentity(void) ");
+    StartTiming("void Alignment::calculateRelaxedSeqIdentity(void) ");
     // Raw approximation of sequence identity computation designed for reducing
     // comparisons for huge alignemnts
 
     int i, j, k, hit;
 
     // Create identities matrix to store identities scores
-    identities = new float *[sequenNumber];
+    identities = new float *[numberOfSequences];
 
     // For each seq, compute its identity score against the others in the MSA
-    for (i = 0; i < sequenNumber; i++) {
-        identities[i] = new float[sequenNumber];
+    for (i = 0; i < numberOfSequences; i++) {
+        identities[i] = new float[numberOfSequences];
 
         // It's a symmetric matrix, copy values that have been already computed
         for (j = 0; j < i; j++)
@@ -364,24 +364,24 @@ void newAlignment::calculateRelaxedSeqIdentity() {
         identities[i][i] = 0;
 
         // Compute identity score between the selected sequence and the others
-        for (j = i + 1; j < sequenNumber; j++) {
-            for (k = 0, hit = 0; k < residNumber; k++) {
+        for (j = i + 1; j < numberOfSequences; j++) {
+            for (k = 0, hit = 0; k < numberOfResidues; k++) {
                 // If both positions are the same, count a hit
                 if (sequences[i][k] == sequences[j][k])
                     hit++;
             }
             // Raw identity score is computed as the ratio of identical residues between
             // alignment length
-            identities[i][j] = (float) hit / residNumber;
+            identities[i][j] = (float) hit / numberOfResidues;
         }
     }
 }
 */
 
-void newAlignment::calculateSeqOverlap() {
+void Alignment::calculateSeqOverlap() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::calculateSeqOverlap(void) ");
+    StartTiming("void Alignment::calculateSeqOverlap(void) ");
     // Compute the overlap between sequences taken each of them as the reference
     // to compute such scores. It will lead to a non-symmetric matrix.
 
@@ -392,14 +392,14 @@ void newAlignment::calculateSeqOverlap() {
     indet = getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
     // Create overlap matrix to store overlap scores
-    overlaps = new float *[sequenNumber];
+    overlaps = new float *[numberOfSequences];
 
     // For each seq, compute its overlap score against the others in the MSA
-    for (i = 0; i < sequenNumber; i++) {
-        overlaps[i] = new float[sequenNumber];
+    for (i = 0; i < numberOfSequences; i++) {
+        overlaps[i] = new float[numberOfSequences];
 
-        for (j = 0; j < sequenNumber; j++) {
-            for (k = 0, shared = 0, referenceLength = 0; k < residNumber; k++) {
+        for (j = 0; j < numberOfSequences; j++) {
+            for (k = 0, shared = 0, referenceLength = 0; k < numberOfResidues; k++) {
                 // If there a valid residue for the reference sequence, then see if
                 // there is a valid residue for the other sequence.
                 if ((sequences[i][k] != indet) && (sequences[i][k] != '-')) {
@@ -416,45 +416,45 @@ void newAlignment::calculateSeqOverlap() {
     }
 }
 
-void newAlignment::getSequences(string *Names) {
+void Alignment::getSequences(string *Names) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::getSequences(string *Names) ");
-    for (int i = 0; i < sequenNumber; i++)
+    StartTiming("void Alignment::getSequences(string *Names) ");
+    for (int i = 0; i < numberOfSequences; i++)
         Names[i] = seqsName[i];
 }
 
-void newAlignment::getSequences(string *Names, int *lenghts) {
+void Alignment::getSequences(string *Names, int *lenghts) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::getSequences(string *Names, int *lengths) ");
-    for (int i = 0; i < sequenNumber; i++) {
+    StartTiming("void Alignment::getSequences(string *Names, int *lengths) ");
+    for (int i = 0; i < numberOfSequences; i++) {
         lenghts[i] = (int) utils::removeCharacter('-', sequences[i]).length();
         Names[i] = seqsName[i];
     }
 }
 
-void newAlignment::getSequences(string *Names, string *Sequences, int *lengths) {
+void Alignment::getSequences(string *Names, string *Sequences, int *lengths) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::getSequences(string *Names, string *Sequences, int *lengths) ");
-    for (int i = 0; i < sequenNumber; i++) {
+    StartTiming("void Alignment::getSequences(string *Names, string *Sequences, int *lengths) ");
+    for (int i = 0; i < numberOfSequences; i++) {
         Names[i] = seqsName[i];
         Sequences[i] = utils::removeCharacter('-', sequences[i]);
         lengths[i] = (int) Sequences[i].length();
     }
 }
 
-bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) {
+bool Alignment::getSequenceNameOrder(string *names, int *orderVector) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) ");
+    StartTiming("bool Alignment::getSequenceNameOrder(string *names, int *orderVector) ");
     int i, j, numNames;
 
-    // For each name in the current newAlignment, we look
+    // For each name in the current Alignment, we look
     // for its correspondence in the input set
-    for (i = 0, numNames = 0; i < sequenNumber; i++) {
-        for (j = 0; j < sequenNumber; j++) {
+    for (i = 0, numNames = 0; i < numberOfSequences; i++) {
+        for (j = 0; j < numberOfSequences; j++) {
             if (seqsName[i] == names[j]) {
                 orderVector[i] = j;
                 numNames++;
@@ -465,55 +465,55 @@ bool newAlignment::getSequenceNameOrder(string *names, int *orderVector) {
 
     // Depending on if we get the complete correspondence
     // between both sets of names, we return true or not
-    return sequenNumber == numNames ? true : false;
+    return numberOfSequences == numNames ? true : false;
 
 }
 
-int newAlignment::getAlignmentType() {
+int Alignment::getAlignmentType() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("int newAlignment::getAlignmentType(void) ");
+    StartTiming("int Alignment::getAlignmentType(void) ");
     if (dataType == 0)
-        dataType = utils::checkAlignmentType(sequenNumber, residNumber, sequences);
+        dataType = utils::checkAlignmentType(numberOfSequences, numberOfResidues, sequences);
     return dataType;
 }
 /*
-int *newAlignment::getCorrespResidues() {
+int *Alignment::getCorrespResidues() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("int *newAlignment::getCorrespResidues(void) ");
+    StartTiming("int *Alignment::getCorrespResidues(void) ");
     return saveResidues;
 }
 */
 /*
-int *newAlignment::getCorrespSequences() {
+int *Alignment::getCorrespSequences() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("int *newAlignment::getCorrespSequences(void) ");
+    StartTiming("int *Alignment::getCorrespSequences(void) ");
     return saveSequences;
 }
 */
-bool newAlignment::isFileAligned() {
+bool Alignment::isFileAligned() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("bool newAlignment::isFileAligned(void) ");
+    StartTiming("bool Alignment::isFileAligned(void) ");
     return isAligned;
 }
 /*
-void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) {
+void Alignment::fillNewDataStructure(string *newMatrix, string *newNames) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) ");
+    StartTiming("void Alignment::fillNewDataStructure(string *newMatrix, string *newNames) ");
     // TODO Remove method as it doesn't make sense now
     int i, j, k;
 
     // Copy only those sequences/columns selected
-    for (i = 0, j = 0; i < sequenNumber; i++) {
+    for (i = 0, j = 0; i < numberOfSequences; i++) {
         if (saveSequences[i] == -1)
             continue;
 
         newNames[j] = seqsName[i];
-        for (k = 0; k < residNumber; k++) {
+        for (k = 0; k < numberOfResidues; k++) {
             if (saveResidues[k] == -1)
                 continue;
             newMatrix[j].resize(newMatrix[j].size() + 1, sequences[i][k]);
@@ -522,10 +522,10 @@ void newAlignment::fillNewDataStructure(string *newMatrix, string *newNames) {
     }
 }
 */
-bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, newAlignment *proteinAlig) {
+bool Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, Alignment *proteinAlig) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, newAlignment *proteinAlig) ");
+    StartTiming("bool Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, Alignment *proteinAlig) ");
 
     if (getAlignmentType() & SequenceTypes::AA) {
         debug.report(ErrorCode::CDScontainsProteinSequences);
@@ -553,7 +553,7 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
 
     /* Check read sequences are real DNA/RNA */
 
-    for (i = 0; i < sequenNumber; i++) {
+    for (i = 0; i < numberOfSequences; i++) {
 
         // Get protein sequence to compare against any potential stop codon in the
         // coding sequence. If there is not protein sequence for current coding
@@ -698,18 +698,18 @@ bool newAlignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodo
     return true;
 }
 
-bool newAlignment::checkCorrespondence(string *names, int *lengths, int totalInputSeqs, int multiple = 1) {
+bool Alignment::checkCorrespondence(string *names, int *lengths, int totalInputSeqs, int multiple = 1) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("bool newAlignment::checkCorrespondence(string *names, int *lengths, int totalInputSeqs, int multiple = 1)");
+    StartTiming("bool Alignment::checkCorrespondence(string *names, int *lengths, int totalInputSeqs, int multiple = 1)");
 
     int i, j, seqLength, indet;
     bool warnings = false;
     string tmp;
 
-    // For each sequence in the current protein newAlignment, look for its coding
+    // For each sequence in the current protein Alignment, look for its coding
     // DNA sequence checking that they have the same size.
-    for (i = 0; i < sequenNumber; i++) {
+    for (i = 0; i < numberOfSequences; i++) {
 
         // Get protein sequence length removing any posible gap. Get as well last
         // residue from current sequence 
@@ -743,7 +743,7 @@ bool newAlignment::checkCorrespondence(string *names, int *lengths, int totalInp
                     // It has been detected some indeterminations at the end of the protein
                     // sequence. That ifileue could be cause by some incomplete codons in the
                     // nucleotide sequences. This issue is solved adding as much 'N' symbols
-                    // as it is needed to preserve the backtranslated newAlignment
+                    // as it is needed to preserve the backtranslated Alignment
                 else if ((indet > 0) && (indet > (seqLength - lengths[j]) / 3)) {
                     if (!warnings)
                         cerr << endl;
@@ -776,10 +776,10 @@ bool newAlignment::checkCorrespondence(string *names, int *lengths, int totalInp
     return true;
 }
 
-bool newAlignment::fillMatrices(bool aligned) {
+bool Alignment::fillMatrices(bool aligned) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("bool newAlignment::fillMatrices(bool aligned) ");
+    StartTiming("bool Alignment::fillMatrices(bool aligned) ");
     // Function to determine if a set of sequences, that can be aligned or not,
     // have been correctly load and are free of errors.
     int i, j;
@@ -787,7 +787,7 @@ bool newAlignment::fillMatrices(bool aligned) {
     // Initialize some variables
 
     // Check whether there are any unknow/no allowed character in the sequences
-    for (i = 0; i < sequenNumber; i++)
+    for (i = 0; i < numberOfSequences; i++)
         for (j = 0; j < sequences[i].length(); j++)
             if ((!isalpha(sequences[i][j])) && (!ispunct(sequences[i][j]))) {
                 debug.report(ErrorCode::UnknownCharacter, new std::string[2]{seqsName[i], std::to_string(sequences[i][j])});
@@ -795,12 +795,12 @@ bool newAlignment::fillMatrices(bool aligned) {
             }
 
     // Check whether all sequences have same size or not
-    for (i = 1; i < sequenNumber; i++) {
+    for (i = 1; i < numberOfSequences; i++) {
         if (sequences[i].length() != sequences[i - 1].length())
             break;
     }
     // Set an appropriate flag for indicating if sequences are aligned or not
-    isAligned = i == sequenNumber;
+    isAligned = i == numberOfSequences;
 
     // Warm about those cases where sequences should be aligned
     // and there are not
@@ -810,14 +810,14 @@ bool newAlignment::fillMatrices(bool aligned) {
     }
 
     // Full-fill some information about input alignment
-    if (residNumber == 0)
-        residNumber = sequences[0].length();
+    if (numberOfResidues == 0)
+        numberOfResidues = sequences[0].length();
 
     // Check whether aligned sequences have the length fixed for the input alig
-    for (i = 0; (i < sequenNumber) and (aligned); i++) {
-        if (sequences[i].length() != residNumber) {
+    for (i = 0; (i < numberOfSequences) and (aligned); i++) {
+        if (sequences[i].length() != numberOfResidues) {
             debug.report(ErrorCode::SequencesNotSameSize,
-                         new std::string[3]{seqsName[i], std::to_string(sequences[i].length()), std::to_string(residNumber)});
+                         new std::string[3]{seqsName[i], std::to_string(sequences[i].length()), std::to_string(numberOfResidues)});
             return false;
         }
     }
@@ -828,15 +828,15 @@ bool newAlignment::fillMatrices(bool aligned) {
         // Assign its position to each column. That will be used to determine which
         // columns should be kept in output alignment after applying any method
         // and which columns should not
-        saveResidues = new int[residNumber];
-        for (i = 0; i < residNumber; i++)
+        saveResidues = new int[numberOfResidues];
+        for (i = 0; i < numberOfResidues; i++)
             saveResidues[i] = i;
 
         // Assign its position to each sequence. Similar to the columns numbering
         // possible, assign to each sequence its position is useful to know which
         // sequences will be in the output alignment
-        saveSequences = new int[sequenNumber];
-        for (i = 0; i < sequenNumber; i++)
+        saveSequences = new int[numberOfSequences];
+        for (i = 0; i < numberOfSequences; i++)
             saveSequences[i] = i;
     }
 
@@ -845,10 +845,10 @@ bool newAlignment::fillMatrices(bool aligned) {
     return true;
 }
 
-void newAlignment::printAlignmentInfo(ostream &file) {
+void Alignment::printAlignmentInfo(ostream &file) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::printAlignmentInfo(ostream &file) ");
+    StartTiming("void Alignment::printAlignmentInfo(ostream &file) ");
     // Print information about sequences number, average sequence length, maximum
     // and minimum sequences length, etc
 
@@ -860,7 +860,7 @@ void newAlignment::printAlignmentInfo(ostream &file) {
     min_pos = 0;
     min = sequences[0].length();
 
-    for (i = 0, total_res = 0; i < sequenNumber; i++) {
+    for (i = 0, total_res = 0; i < numberOfSequences; i++) {
 
         // Discard gaps from current sequence and then compute real length
         for (j = 0, valid_res = 0; j < sequences[i].length(); j++)
@@ -879,20 +879,20 @@ void newAlignment::printAlignmentInfo(ostream &file) {
         min = (min < valid_res) ? min : valid_res;
     }
 
-    file << "## Total sequences\t" << sequenNumber << endl;
+    file << "## Total sequences\t" << numberOfSequences << endl;
     if (isFileAligned())
-        file << "## Alignment length\t" << residNumber << endl;
-    file << "## Avg. sequence length\t" << (float) total_res / sequenNumber << endl
+        file << "## Alignment length\t" << numberOfResidues << endl;
+    file << "## Avg. sequence length\t" << (float) total_res / numberOfSequences << endl
          << "## Longest seq. name\t'" << seqsName[max_pos] << "'" << endl
          << "## Longest seq. length\t" << max << endl
          << "## Shortest seq. name\t'" << seqsName[min_pos] << "'" << endl
          << "## Shortest seq. length\t" << min << endl;
 }
 
-void newAlignment::printSeqIdentity() {
+void Alignment::printSeqIdentity() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::printSeqIdentity(void) ");
+    StartTiming("void Alignment::printSeqIdentity(void) ");
 
     int i, j, k, pos, maxLongName;
     float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
@@ -902,13 +902,13 @@ void newAlignment::printSeqIdentity() {
         Cleaning->calculateSeqIdentity();
 
     // For each sequence, we look for its most similar one
-    maxs = new float *[originalSequenNumber];
+    maxs = new float *[originalNumberOfSequences];
 
-    for (i = 0; i < originalSequenNumber; i++) {
+    for (i = 0; i < originalNumberOfSequences; i++) {
         maxs[i] = new float[2];
 
         // Get the most similar sequence to the current one in term of identity
-        for (k = 0, mx = 0, avg = 0, pos = i; k < originalSequenNumber; k++) {
+        for (k = 0, mx = 0, avg = 0, pos = i; k < originalNumberOfSequences; k++) {
             if (i != k) {
                 avg += identities[i][k];
                 if (mx < identities[i][k]) {
@@ -918,7 +918,7 @@ void newAlignment::printSeqIdentity() {
             }
         }
         // Update global average variables
-        avgSeq += avg / (originalSequenNumber - 1);
+        avgSeq += avg / (originalNumberOfSequences - 1);
         maxAvgSeq += mx;
 
         // Save the maximum average identity value for each sequence
@@ -927,18 +927,18 @@ void newAlignment::printSeqIdentity() {
     }
 
     // Compute general averages 
-    avgSeq = avgSeq / originalSequenNumber;
-    maxAvgSeq = maxAvgSeq / originalSequenNumber;
+    avgSeq = avgSeq / originalNumberOfSequences;
+    maxAvgSeq = maxAvgSeq / originalNumberOfSequences;
 
     // Compute longest sequences name
-    for (i = 0, maxLongName = 0; i < originalSequenNumber; i++)
+    for (i = 0, maxLongName = 0; i < originalNumberOfSequences; i++)
         maxLongName = utils::max(maxLongName, seqsName[i].size());
 
     // Once the method has computed all of different values, it prints it
     cout.precision(4);
     cout << fixed;
 
-    for (i = 0, maxSeq = 0; i < originalSequenNumber; i++)
+    for (i = 0, maxSeq = 0; i < originalNumberOfSequences; i++)
         if (maxs[i][0] > maxSeq)
             maxSeq = maxs[i][0];
 
@@ -950,12 +950,12 @@ void newAlignment::printSeqIdentity() {
     cout << endl << "#> AverageIdentity\tAverage identity between all sequences";
 
     cout << endl << endl << "## Identity sequences matrix";
-    for (i = 0; i < sequenNumber; i++) {
+    for (i = 0; i < numberOfSequences; i++) {
         cout << endl << setw(maxLongName + 2) << left << seqsName[i] << "\t";
         for (j = 0; j < i; j++)
             cout << setiosflags(ios::left) << setw(10) << identities[i][j] << "\t";
         cout << setiosflags(ios::left) << setw(10) << 1.00 << "\t";
-        for (j = i + 1; j < sequenNumber; j++)
+        for (j = i + 1; j < numberOfSequences; j++)
             cout << setiosflags(ios::left) << setw(10) << identities[i][j] << "\t";
     }
     cout << endl;
@@ -966,22 +966,22 @@ void newAlignment::printSeqIdentity() {
 
     cout << endl << endl << "## Identity for most similar pair-wise sequences "
          << "matrix" << endl;
-    for (i = 0; i < sequenNumber; i++)
+    for (i = 0; i < numberOfSequences; i++)
         cout << setw(maxLongName + 2) << left << seqsName[i]
              << "\t" << setiosflags(ios::left) << setw(5)
              << maxs[i][0] << "\t" << seqsName[(int) maxs[i][1]] << endl;
     cout << endl;
 
-    for (i = 0; i < sequenNumber; i++) {
+    for (i = 0; i < numberOfSequences; i++) {
         delete maxs[i];
     }
     delete[] maxs;
 }
 
-void newAlignment::printSeqOverlap() {
+void Alignment::printSeqOverlap() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::printSeqOverlap() ");
+    StartTiming("void Alignment::printSeqOverlap() ");
     int i, j, k, pos, maxLongName;
     float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
 
@@ -990,13 +990,13 @@ void newAlignment::printSeqOverlap() {
         calculateSeqOverlap();
 
     // For each sequence, we look for its most similar one 
-    maxs = new float *[sequenNumber];
+    maxs = new float *[numberOfSequences];
 
-    for (i = 0; i < sequenNumber; i++) {
+    for (i = 0; i < numberOfSequences; i++) {
         maxs[i] = new float[2];
 
         // Get the most similar sequence to the current one in term of overlap
-        for (k = 0, mx = 0, avg = 0, pos = i; k < sequenNumber; k++) {
+        for (k = 0, mx = 0, avg = 0, pos = i; k < numberOfSequences; k++) {
             if (i != k) {
                 avg += overlaps[i][k];
                 if (mx < overlaps[i][k]) {
@@ -1006,7 +1006,7 @@ void newAlignment::printSeqOverlap() {
             }
         }
         // Update global average variables
-        avgSeq += avg / (sequenNumber - 1);
+        avgSeq += avg / (numberOfSequences - 1);
         maxAvgSeq += mx;
 
         // Save the maximum average overlap value for each sequence
@@ -1015,18 +1015,18 @@ void newAlignment::printSeqOverlap() {
     }
 
     // Compute general averages
-    avgSeq = avgSeq / sequenNumber;
-//    maxAvgSeq = maxAvgSeq / sequenNumber;
+    avgSeq = avgSeq / numberOfSequences;
+//    maxAvgSeq = maxAvgSeq / numberOfSequences;
 
     // Compute longest sequences name 
-    for (i = 0, maxLongName = 0; i < sequenNumber; i++)
+    for (i = 0, maxLongName = 0; i < numberOfSequences; i++)
         maxLongName = utils::max(maxLongName, seqsName[i].size());
 
     // Once the method has computed all of different values, it prints it
     cout.precision(4);
     cout << fixed;
 
-    for (i = 0, maxSeq = 0; i < sequenNumber; i++)
+    for (i = 0, maxSeq = 0; i < numberOfSequences; i++)
         if (maxs[i][0] > maxSeq)
             maxSeq = maxs[i][0];
 
@@ -1038,23 +1038,23 @@ void newAlignment::printSeqOverlap() {
     cout << endl << "#> AverageOverlap\tAverage overlap between all sequences";
 
     cout << endl << endl << "## Overlap sequences matrix";
-    for (i = 0; i < sequenNumber; i++) {
+    for (i = 0; i < numberOfSequences; i++) {
         cout << endl << setw(maxLongName + 2) << left << seqsName[i] << "\t";
-        for (j = 0; j < sequenNumber; j++)
+        for (j = 0; j < numberOfSequences; j++)
             cout << setiosflags(ios::left) << setw(10) << overlaps[i][j] << "\t";
     }
     cout << endl;
 
-    for (i = 0; i < sequenNumber; i++) {
+    for (i = 0; i < numberOfSequences; i++) {
         delete maxs[i];
     }
     delete[] maxs;
 }
 
-void newAlignment::calculateColIdentity(float *ColumnIdentities) {
+void Alignment::calculateColIdentity(float *ColumnIdentities) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::calculateColIdentity(float *ColumnIdentities) ");
+    StartTiming("void Alignment::calculateColIdentity(float *ColumnIdentities) ");
 
     int i, j, counter, pos, max, columnLen;
     char letter, indet, gapSymbol;
@@ -1066,10 +1066,10 @@ void newAlignment::calculateColIdentity(float *ColumnIdentities) {
 
     // Compute identity score for the most frequent residue, it can be as well
     // gaps and indeterminations, for each column 
-    for (i = 0, max = 0; i < residNumber; i++, max = 0, column.clear()) {
+    for (i = 0, max = 0; i < numberOfResidues; i++, max = 0, column.clear()) {
 
         // Get residues from each column in capital letters
-        for (j = 0; j < sequenNumber; j++)
+        for (j = 0; j < numberOfSequences; j++)
             // Discard gaps and indeterminations from calculations
             if ((toupper(sequences[j][i]) != indet) && (sequences[j][i] != gapSymbol))
                 column += toupper(sequences[j][i]);
@@ -1102,21 +1102,21 @@ void newAlignment::calculateColIdentity(float *ColumnIdentities) {
     }
 }
 /*
-void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
+void Alignment::printColumnsIdentity_DescriptiveStats(void) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::printColumnsIdentity_DescriptiveStats(void) ");
+    StartTiming("void Alignment::printColumnsIdentity_DescriptiveStats(void) ");
 
     float *colIdentities, avg, std, max, min;
     int i, positions;
 
     // Allocate local memory for the computation
-    colIdentities = new float[residNumber];
+    colIdentities = new float[numberOfResidues];
 
-    utils::initlVect(colIdentities, residNumber, -1);
+    utils::initlVect(colIdentities, numberOfResidues, -1);
     calculateColIdentity(colIdentities);
 
-    for (i = 0, max = 0, min = 1, avg = 0, positions = 0; i < residNumber; i++) {
+    for (i = 0, max = 0, min = 1, avg = 0, positions = 0; i < numberOfResidues; i++) {
         if (colIdentities[i] != -1) {
             // Compute on-the-fly max and min scores. Store accumulative score
             avg += colIdentities[i];
@@ -1130,7 +1130,7 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
     avg /= positions;
 
     // Compute standard deviation
-    for (i = 0, std = 0; i < residNumber; i++)
+    for (i = 0, std = 0; i < numberOfResidues; i++)
         if (colIdentities[i] != -1)
             std += pow((colIdentities[i] - avg), 2);
     std = sqrt(std / positions);
@@ -1143,10 +1143,10 @@ void newAlignment::printColumnsIdentity_DescriptiveStats(void) {
 }
  */
 
-bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *destFile) {
+bool Alignment::alignmentSummaryHTML(Alignment &_trimmedAlignment, char *destFile) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *destFile, float *consValues) ");
+    StartTiming("bool Alignment::alignmentSummaryHTML(Alignment &_trimmedAlignment, char *destFile, float *consValues) ");
 
     // Generate an HTML file with a visual summary about which sequences/columns
     // have been selected and which have not
@@ -1157,7 +1157,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
     char type;
 
     // Allocate some local memory
-    tmpColumn.reserve(originalSequenNumber);
+    tmpColumn.reserve(originalNumberOfSequences);
 
     // Check whether sequences in the alignment are aligned or not.
     // Warn about it if there are not aligned.
@@ -1173,7 +1173,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
 
     // Compute maximum sequences name length.
     maxLongName = 0;
-    for (i = 0; i < originalSequenNumber; i++)
+    for (i = 0; i < originalNumberOfSequences; i++)
         maxLongName = utils::max(maxLongName, seqsName[i].size());
 
     // Compute HTML blank spaces
@@ -1228,11 +1228,11 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
          << "    </style>\n  </head>\n\n" << "  <body>\n" << "  <pre>" << endl;
 
     // Show information about how many sequences/residues have been selected
-    file << "    <span class=sel>Selected Sequences: " << setw(5) << right << _trimmedAlignment.sequenNumber
-         << " /Selected Residues: " << setw(7) << right << _trimmedAlignment.residNumber << "</span>"
+    file << "    <span class=sel>Selected Sequences: " << setw(5) << right << _trimmedAlignment.numberOfSequences
+         << " /Selected Residues: " << setw(7) << right << _trimmedAlignment.numberOfResidues << "</span>"
          << endl << "    <span class=nsel>Deleted Sequences:  " << setw(5) << right
-         << sequenNumber - _trimmedAlignment.sequenNumber << " /Deleted Residues:  " << setw(7) << right
-         << residNumber - _trimmedAlignment.residNumber << "</span>" << endl;
+         << numberOfSequences - _trimmedAlignment.numberOfSequences << " /Deleted Residues:  " << setw(7) << right
+         << numberOfResidues - _trimmedAlignment.numberOfResidues << "</span>" << endl;
 
     // Print headers for different scores derived from input alignment/s 
     if (gapsValues != nullptr)
@@ -1266,28 +1266,28 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
         file << endl;
 
     // Print Sequences in block of BLOCK_SIZE 
-    for (j = 0, upper = HTMLBLOCKS; j < originalResidNumber; j += HTMLBLOCKS, upper += \
+    for (j = 0, upper = HTMLBLOCKS; j < originalNumberOfResidues; j += HTMLBLOCKS, upper += \
             HTMLBLOCKS) {
 
         // Print main columns number
         file << endl << setw(minHTML + 10) << right << (j + 10);
-        for (i = j + 20; ((i <= originalResidNumber) && (i <= upper)); i += 10)
+        for (i = j + 20; ((i <= originalNumberOfResidues) && (i <= upper)); i += 10)
             file << setw(10) << right << (i);
 
         // Print special characters to delimit sequences blocks
         file << endl << setw(minHTML + 1) << right;
-        for (i = j + 1; ((i <= originalResidNumber) && (i <= upper)); i++)
+        for (i = j + 1; ((i <= originalNumberOfResidues) && (i <= upper)); i++)
             file << (!(i % 10) ? "+" : "=");
         file << endl;
 
         // Print sequences name
-        for (i = 0; i < originalSequenNumber; i++) {
+        for (i = 0; i < originalNumberOfSequences; i++) {
             file << "    <span class=" << ((_trimmedAlignment.saveSequences[i] != -1) ? "sel>" : "nsel>") << seqsName[i]
                  << "</span>" << setw(minHTML - 4 - seqsName[i].size()) << right << "";
 
             // Print residues corresponding to current sequences block
-            for (k = j; ((k < originalResidNumber) && (k < upper)); k++) {
-                for (kj = 0, tmpColumn.clear(); kj < originalSequenNumber; kj++)
+            for (k = j; ((k < originalNumberOfResidues) && (k < upper)); k++) {
+                for (kj = 0, tmpColumn.clear(); kj < originalNumberOfSequences; kj++)
                     tmpColumn += sequences[kj][k];
                 // Determine residue color based on residues across the alig column
                 type = utils::determineColor(sequences[i][k], tmpColumn);
@@ -1302,7 +1302,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
         }
 
         file << endl << setw(minHTML) << left << "    Selected Cols:      ";
-        for (k = j; ((k < originalResidNumber) && (k < (j + HTMLBLOCKS))); k++)
+        for (k = j; ((k < originalNumberOfResidues) && (k < (j + HTMLBLOCKS))); k++)
             file << "<span class=" << (_trimmedAlignment.saveResidues[k] != -1 ? "sel" : "nsel") << "> </span>";
         file << endl;
 
@@ -1313,35 +1313,35 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
         // Print score colors according to certain predefined thresholds
         if (gapsValues != nullptr) {
             file << endl << setw(minHTML) << left << "    Gaps Scores:        ";
-            for (k = j; ((k < originalResidNumber) && (k < (j + HTMLBLOCKS))); k++)
+            for (k = j; ((k < originalNumberOfResidues) && (k < (j + HTMLBLOCKS))); k++)
                 if (gapsValues[k] == 0)
                     file << "<span class=c12> </span>";
-                else if (gapsValues[k] == originalSequenNumber)
+                else if (gapsValues[k] == originalNumberOfSequences)
                     file << "<span class=c1> </span>";
-                else if (1 - (float(gapsValues[k]) / originalSequenNumber) >= .750)
+                else if (1 - (float(gapsValues[k]) / originalNumberOfSequences) >= .750)
                     file << "<span class=c11> </span>";
-                else if (1 - (float(gapsValues[k]) / originalSequenNumber) >= .500)
+                else if (1 - (float(gapsValues[k]) / originalNumberOfSequences) >= .500)
                     file << "<span class=c10> </span>";
-                else if (1 - (float(gapsValues[k]) / originalSequenNumber) >= .350)
+                else if (1 - (float(gapsValues[k]) / originalNumberOfSequences) >= .350)
                     file << "<span  class=c9> </span>";
-                else if (1 - (float(gapsValues[k]) / originalSequenNumber) >= .250)
+                else if (1 - (float(gapsValues[k]) / originalNumberOfSequences) >= .250)
                     file << "<span  class=c8> </span>";
-                else if (1 - (float(gapsValues[k]) / originalSequenNumber) >= .200)
+                else if (1 - (float(gapsValues[k]) / originalNumberOfSequences) >= .200)
                     file << "<span  class=c7> </span>";
-                else if (1 - (float(gapsValues[k]) / originalSequenNumber) >= .150)
+                else if (1 - (float(gapsValues[k]) / originalNumberOfSequences) >= .150)
                     file << "<span  class=c6> </span>";
-                else if (1 - (float(gapsValues[k]) / originalSequenNumber) >= .100)
+                else if (1 - (float(gapsValues[k]) / originalNumberOfSequences) >= .100)
                     file << "<span  class=c5> </span>";
-                else if (1 - (float(gapsValues[k]) / originalSequenNumber) >= .050)
+                else if (1 - (float(gapsValues[k]) / originalNumberOfSequences) >= .050)
                     file << "<span  class=c4> </span>";
-                else if (1 - (float(gapsValues[k]) / originalSequenNumber) >= .001)
+                else if (1 - (float(gapsValues[k]) / originalNumberOfSequences) >= .001)
                     file << "<span  class=c3> </span>";
                 else
                     file << "<span  class=c2> </span>";
         }
         if (simValues != nullptr) {
             file << endl << setw(minHTML) << left << "    Similarity Scores:  ";
-            for (k = j; ((k < originalResidNumber) && (k < (j + HTMLBLOCKS))); k++)
+            for (k = j; ((k < originalNumberOfResidues) && (k < (j + HTMLBLOCKS))); k++)
                 if (simValues[k] == 1)
                     file << "<span class=c12> </span>";
                 else if (simValues[k] == 0)
@@ -1369,7 +1369,7 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
         }
         if (consValues != nullptr) {
             file << endl << setw(minHTML) << left << "    Consistency Scores: ";
-            for (k = j; ((k < originalResidNumber) && (k < (j + HTMLBLOCKS))); k++)
+            for (k = j; ((k < originalNumberOfResidues) && (k < (j + HTMLBLOCKS))); k++)
                 if (consValues[k] == 1)
                     file << "<span class=c12> </span>";
                 else if (consValues[k] == 0)
@@ -1407,10 +1407,10 @@ bool newAlignment::alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *d
     return true;
 }
 
-bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *destFile, int blocks) {
+bool Alignment::alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile, int blocks) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *destFile, float *consValues, int blocks) ");
+    StartTiming("bool Alignment::alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile, float *consValues, int blocks) ");
 
     int i, j, k, counter = 0;
 
@@ -1447,11 +1447,11 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
     }
 
     // Allocate some local memory
-    char *tmpColumn = new char[originalSequenNumber + 1];
+    char *tmpColumn = new char[originalNumberOfSequences + 1];
 
     // Compute HTML blank spaces
     j = 0;
-    for (i = 0; i < sequenNumber; i++)
+    for (i = 0; i < numberOfSequences; i++)
         j = utils::max(j, seqsName[i].size());
 
     int sequencesNamesLength = utils::max(25, j);
@@ -1488,9 +1488,9 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
             rightMargin = 5, topMargin = 5,
             bottomMargin = 10, interBlocksMargin = 20;
 
-    float height = ((originalSequenNumber + 3 + (gapsValues != nullptr || simValues != nullptr ? 7 : 0) /* Col numbering occupies 3 rows. Stats 5 */)
+    float height = ((originalNumberOfSequences + 3 + (gapsValues != nullptr || simValues != nullptr ? 7 : 0) /* Col numbering occupies 3 rows. Stats 5 */)
                     * fontSize + interBlocksMargin)                 // Height of a block + interblock
-                   * std::ceil((float) originalResidNumber / blocks)  // Number of blocks
+                   * std::ceil((float) originalNumberOfResidues / blocks)  // Number of blocks
                    - interBlocksMargin // Number of interblocks is number of blocks  - 1
                    + fontSize * 16
                    + topMargin
@@ -1582,7 +1582,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
 
          << "</text>" << endl;
     currentHeight += fontSize * 2;
-    fname = "Selected Sequences \t" + std::to_string(_trimmedAlignment.sequenNumber) + " / " + std::to_string(originalSequenNumber);
+    fname = "Selected Sequences \t" + std::to_string(_trimmedAlignment.numberOfSequences) + " / " + std::to_string(originalNumberOfSequences);
     file << "<text \
                 font-family = \"monospace\" \
                 font-size=\"" << fontSize << "px\" \
@@ -1600,7 +1600,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
 
          << "</text>" << endl;
     currentHeight += fontSize * 2;
-    fname = "Selected Residues \t\t" + std::to_string(_trimmedAlignment.residNumber) + " / " + std::to_string(originalResidNumber);
+    fname = "Selected Residues \t\t" + std::to_string(_trimmedAlignment.numberOfResidues) + " / " + std::to_string(originalNumberOfResidues);
     file << "<text \
                 font-family = \"monospace\" \
                 font-size=\"" << fontSize << "px\" \
@@ -1662,7 +1662,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
     // END
 
     // Foreach block
-    for (j = 0; j < originalResidNumber; j += blocks) {
+    for (j = 0; j < originalNumberOfResidues; j += blocks) {
         // BEGIN Columns Numbering Numbers
         file << "<text \
                 font-family = \"monospace\" \
@@ -1673,10 +1673,10 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
                 kerning=\"0\" \
                 text-anchor=\"start\" \
                 lengthAdjust=\"spacingAndGlyphs\"\
-                textLength=\"" << std::min((int) blocks, originalResidNumber - j) * fontSize * 0.75F << "\" \
+                textLength=\"" << std::min((int) blocks, originalNumberOfResidues - j) * fontSize * 0.75F << "\" \
                 style=\"font-weight:100\" \
                 xml:space=\"preserve\" >";
-        for (k = j; k < originalResidNumber && (k - j) < blocks; k += 10) {
+        for (k = j; k < originalNumberOfResidues && (k - j) < blocks; k += 10) {
             file << std::left << std::setw(10) << std::setfill(' ') << k;
         }
 
@@ -1696,10 +1696,10 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
                 kerning=\"0\" \
                 text-anchor=\"start\" \
                 lengthAdjust=\"spacingAndGlyphs\"\
-                textLength=\"" << std::min((int) blocks, originalResidNumber - j) * fontSize * 0.75F << "\" \
+                textLength=\"" << std::min((int) blocks, originalNumberOfResidues - j) * fontSize * 0.75F << "\" \
                 style=\"font-weight:100\" \
                 xml:space=\"preserve\" >";
-        for (k = j; k < originalResidNumber && (k - j) < blocks; k += 10) {
+        for (k = j; k < originalNumberOfResidues && (k - j) < blocks; k += 10) {
             file << std::left << std::setw(10) << std::setfill(' ') << "|";
         }
 
@@ -1707,7 +1707,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
 
         file << "<line x1=\"" << leftMargin + nameBlocksMargin + sequencesNamesLength * fontSize
              << "\" x2=\"" << leftMargin + nameBlocksMargin + sequencesNamesLength * fontSize
-                              + std::min((int) blocks, originalResidNumber - j) * fontSize * 0.75F
+                              + std::min((int) blocks, originalNumberOfResidues - j) * fontSize * 0.75F
              << "\" y1=\"" << currentHeight + fontSize / 2
              << "\" y2=\"" << currentHeight + fontSize / 2
              << "\" style=\"stroke:rgb(0,0,0);stroke-width:2\"/>" << endl;
@@ -1721,13 +1721,13 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
         // BEGIN Color Matrix
         char lastColor, newColor;
         int lastPos = 0;
-        for (i = 0; i < blocks && (i + j) < originalResidNumber; i++) {
-            for (k = 0; k < originalSequenNumber; k++) {
+        for (i = 0; i < blocks && (i + j) < originalNumberOfResidues; i++) {
+            for (k = 0; k < originalNumberOfSequences; k++) {
                 tmpColumn[k] = (sequences[k][i + j]);
             }
             lastColor = utils::determineColor(tmpColumn[0], tmpColumn);
             lastPos = 0;
-            for (k = 1; k < originalSequenNumber; k++) {
+            for (k = 1; k < originalNumberOfSequences; k++) {
                 newColor = utils::determineColor(tmpColumn[k], tmpColumn);
                 if (newColor != lastColor) {
                     if (lastColor != 'w')
@@ -1765,7 +1765,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
 
         // BEGIN Sequences Names and Sequences
 
-        for (i = 0; i < originalSequenNumber; i++) {
+        for (i = 0; i < originalNumberOfSequences; i++) {
             // Print names
             file << "<text \
                 font-family = \"monospace\" \
@@ -1791,7 +1791,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
                 kerning=\"0\" \
                 text-anchor=\"start\" \
                 lengthAdjust=\"spacingAndGlyphs\" \
-                textLength=\"" << std::min((int) blocks, originalResidNumber - j) * fontSize * 0.75F << "\" \
+                textLength=\"" << std::min((int) blocks, originalNumberOfResidues - j) * fontSize * 0.75F << "\" \
                 style=\"font-weight:100\"" << ">"
 
                  << sequences[i].substr(j, blocks)
@@ -1799,7 +1799,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
                  << "</text>" << endl;
             if (_trimmedAlignment.saveSequences[i] == -1) {
                 file << "<line x1=\"" << leftMargin + nameBlocksMargin + sequencesNamesLength * fontSize << "\"" <<
-                     " x2=\"" << leftMargin + nameBlocksMargin + sequencesNamesLength * fontSize + std::min(blocks, originalResidNumber - j) * fontSize * 0.75F << "\"" <<
+                     " x2=\"" << leftMargin + nameBlocksMargin + sequencesNamesLength * fontSize + std::min(blocks, originalNumberOfResidues - j) * fontSize * 0.75F << "\"" <<
                      " y1=\"" << (currentHeight + fontSize / 2) << "\"" <<
                      " y2=\"" << (currentHeight + fontSize / 2) << "\"" <<
                      " style=\"stroke:rgb(0,0,0);stroke-width:2\""
@@ -1823,7 +1823,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
         file << "<rect " <<
              " style=\"fill:none;stroke:black\"" <<
              " height=\"" << fontSize * 5 << "\" " <<
-             " width=\"" << fontSize * 0.75F * std::min(blocks, originalResidNumber - j) << "px\" " <<
+             " width=\"" << fontSize * 0.75F * std::min(blocks, originalNumberOfResidues - j) << "px\" " <<
              " x =\"" <<
 
              leftMargin + nameBlocksMargin + (sequencesNamesLength) * fontSize
@@ -1833,7 +1833,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
 
         bool rejected = _trimmedAlignment.saveResidues[j] == -1;
         lastPos = j;
-        for (k = j + 1; k < originalResidNumber && (k - j) < blocks; k++) {
+        for (k = j + 1; k < originalNumberOfResidues && (k - j) < blocks; k++) {
             if ((_trimmedAlignment.saveResidues[k] == -1) != rejected) {
                 file << "<rect " <<
                      " style=\"fill:url(#" << (rejected ? "rejected" : "selected") << ");stroke:black\"" <<
@@ -1907,9 +1907,9 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
                         onmouseout=\"onMouseOutLine(evt)\" \
                         points=\"";
 
-            for (i = 0; i < blocks && (i + j) < originalResidNumber; i++) {
+            for (i = 0; i < blocks && (i + j) < originalNumberOfResidues; i++) {
                 file << leftMargin + nameBlocksMargin + (sequencesNamesLength) * fontSize + (i + 0.5F) * 0.75F * fontSize << ","
-                     << currentHeight + 10 + (1.F - (gapsValues[i + j] / (float) originalSequenNumber)) * fontSize * 4 << " ";
+                     << currentHeight + 10 + (1.F - (gapsValues[i + j] / (float) originalNumberOfSequences)) * fontSize * 4 << " ";
             }
 
             file << "\"/>" << endl;
@@ -1951,7 +1951,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
                 onmouseout=\"onMouseOutLine(evt)\" \
                 points=\"";
 
-            for (i = 0; i < blocks && (i + j) < originalResidNumber; i++) {
+            for (i = 0; i < blocks && (i + j) < originalNumberOfResidues; i++) {
                 file << leftMargin + nameBlocksMargin + (sequencesNamesLength) * fontSize + (i + 0.5F) * 0.75F * fontSize << ","
                      << currentHeight + 10 + ((1.F - simValues[i + j]) * fontSize * 4) << " ";
             }
@@ -1995,7 +1995,7 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
                 onmouseout=\"onMouseOutLine(evt)\" \
                 points=\"";
 
-            for (i = 0; i < blocks && (i + j) < originalResidNumber; i++) {
+            for (i = 0; i < blocks && (i + j) < originalNumberOfResidues; i++) {
                 file << leftMargin + nameBlocksMargin + (sequencesNamesLength) * fontSize + (i + 0.5F) * 0.75F * fontSize << ","
                      << currentHeight + 10 + ((1.F - consValues[i + j]) * fontSize * 4) << " ";
             }
@@ -2043,20 +2043,20 @@ bool newAlignment::alignmentSummarySVG(newAlignment &_trimmedAlignment, char *de
     return true;
 }
 
-void newAlignment::updateSequencesAndResiduesNums(bool countSequences, bool countResidues) {
+void Alignment::updateSequencesAndResiduesNums(bool countSequences, bool countResidues) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void newAlignment::updateSequencesAndResiduesNums(bool countSequences, bool countResidues) ");
+    StartTiming("void Alignment::updateSequencesAndResiduesNums(bool countSequences, bool countResidues) ");
     int i;
     if (countSequences) {
-        for (sequenNumber = 0, i = 0; i < originalSequenNumber; i++) {
-            if (saveSequences[i] != -1) sequenNumber++;
+        for (numberOfSequences = 0, i = 0; i < originalNumberOfSequences; i++) {
+            if (saveSequences[i] != -1) numberOfSequences++;
         }
     }
 
     if (countResidues) {
-        for (residNumber = 0, i = 0; i < originalResidNumber; i++) {
-            if (saveResidues[i] != -1) residNumber++;
+        for (numberOfResidues = 0, i = 0; i < originalNumberOfResidues; i++) {
+            if (saveResidues[i] != -1) numberOfResidues++;
         }
     }
 }

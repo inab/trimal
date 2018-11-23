@@ -9,12 +9,12 @@ int phylip32_m10_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* phylip32_m10_state::LoadAlignment(std::string& filename)
+Alignment* phylip32_m10_state::LoadAlignment(std::string& filename)
 {
     return nullptr;
 }
 
-bool phylip32_m10_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool phylip32_m10_state::SaveAlignment(Alignment* alignment, std::ostream* output, std::string* FileName)
 {
     /* Generate output alignment in PHYLIP 3.2 format (interleaved) */
 
@@ -29,12 +29,12 @@ bool phylip32_m10_state::SaveAlignment(newAlignment* alignment, std::ostream* ou
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new std::string[alignment->originalSequenNumber];
+    tmpMatrix = new std::string[alignment->originalNumberOfSequences];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->originalSequenNumber; i++)
+    for(i = 0; i < alignment->originalNumberOfSequences; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
@@ -42,7 +42,7 @@ bool phylip32_m10_state::SaveAlignment(newAlignment* alignment, std::ostream* ou
     /* Depending on if short name flag is activated (limits sequence name up to
      * 10 characters) or not, get maximum sequence name length */
     maxLongName = PHYLIPDISTANCE;
-    for(i = 0; (i < alignment->originalSequenNumber); i++)
+    for(i = 0; (i < alignment->originalNumberOfSequences); i++)
         if  (alignment->saveSequences[i] != -1)
             maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
 
@@ -50,18 +50,18 @@ bool phylip32_m10_state::SaveAlignment(newAlignment* alignment, std::ostream* ou
 
     /* Generating output alignment */
     /* First Line: Sequences Number & Residued Number */
-    (*output) << " " << alignment->sequenNumber << " " << alignment->residNumber;
+    (*output) << " " << alignment->numberOfSequences << " " << alignment->numberOfResidues;
 
     /* Alignment */
     /* For each sequence, print its identifier and then the sequence itself in
      * blocks of 50 residues */
-    for(i = 0; i < alignment->originalSequenNumber; i++) {
+    for(i = 0; i < alignment->originalNumberOfSequences; i++) {
         /* Sequence Name */
         if (alignment->saveSequences[i] == -1) continue;
         (*output) << "\n" << std::setw(maxLongName + 3) << std::left << alignment->seqsName[i].substr(0, maxLongName);
         /* Sequence. Each line contains a block of 5 times 10 residues. */
         
-        for (j = 0, k = 0; j < alignment->originalResidNumber; j++)
+        for (j = 0, k = 0; j < alignment->originalNumberOfResidues; j++)
         {
             if (alignment->saveResidues[j] == -1) continue;
             if (k == 50)

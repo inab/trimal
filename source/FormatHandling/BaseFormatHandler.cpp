@@ -1,8 +1,8 @@
 #include "../../include/FormatHandling/FormatManager.h"
 #include "../../include/FormatHandling/BaseFormatHandler.h"
 #include "../../include/FormatHandling/formats_header.h"
-#include "../../include/TimerFactory.h"
-#include "../../include/newAlignment.h"
+#include "InternalBenchmarker.h"
+#include "Alignment.h"
 #include "../../include/utils.h"
 
 FormatManager::~FormatManager()
@@ -17,7 +17,7 @@ void FormatManager::addState(BaseFormatHandler* newState)
     this -> available_states.push_back(newState);
 }
 
-newAlignment* FormatManager::loadAlignment(std::string inFile)
+Alignment* FormatManager::loadAlignment(std::string inFile)
 {
     // Check input file.
     std::ifstream inFileHandler;
@@ -55,15 +55,15 @@ newAlignment* FormatManager::loadAlignment(std::string inFile)
         return nullptr;
     }
 
-    newAlignment* alignment = inState->LoadAlignment(inFile);
+    Alignment* alignment = inState->LoadAlignment(inFile);
     inFileHandler.close();
     return alignment;
 }
 
-bool FormatManager::saveAlignment(std::string outPattern, std::vector< std::string >* outFormats, newAlignment* alignment)
+bool FormatManager::saveAlignment(std::string outPattern, std::vector< std::string >* outFormats, Alignment* alignment)
 {
     StartTiming("bool FormatManager::saveAlignment()");
-    if (alignment->residNumber == 0 || alignment->sequenNumber == 0)
+    if (alignment->numberOfResidues == 0 || alignment->numberOfSequences == 0)
     {
         debug.report(ErrorCode::AlignmentIsEmpty);
         return false;
@@ -254,7 +254,7 @@ void FormatManager::loadAndSaveMultipleAlignments(
         }
 
         // Load alignment one by one and store it on each of the formats specified.
-        newAlignment* alignment = inState->LoadAlignment(inFile);
+        Alignment* alignment = inState->LoadAlignment(inFile);
         unsigned long start;
         unsigned long end;
         inFileHandler.close();
@@ -357,20 +357,20 @@ std::string FormatManager::getOutputFormatsAvailable()
 
 }
 
-std::vector<newAlignment*> FormatManager::splitAlignmentKeeping(newAlignment& alignment)
+std::vector<Alignment*> FormatManager::splitAlignmentKeeping(Alignment& alignment)
 {
-    std::vector<newAlignment *> splitted = std::vector<newAlignment *>(alignment.originalSequenNumber);
+    std::vector<Alignment *> splitted = std::vector<Alignment *>(alignment.originalNumberOfSequences);
 
-    for (int i = 0; i < alignment.originalSequenNumber; i++)
+    for (int i = 0; i < alignment.originalNumberOfSequences; i++)
     {
-        newAlignment * tempAlignment = new newAlignment();
+        Alignment * tempAlignment = new Alignment();
         tempAlignment->sequences = new std::string[1];
         tempAlignment->sequences[0] = std::string(alignment.sequences[i]);
         tempAlignment->seqsName = new std::string[1] { alignment.seqsName[i] };
-        tempAlignment->sequenNumber = 1;
-        tempAlignment->originalSequenNumber = 1;
-        tempAlignment->residNumber = tempAlignment->sequences[0].size();
-        tempAlignment->originalResidNumber = tempAlignment->residNumber;
+        tempAlignment->numberOfSequences = 1;
+        tempAlignment->originalNumberOfSequences = 1;
+        tempAlignment->numberOfResidues = tempAlignment->sequences[0].size();
+        tempAlignment->originalNumberOfResidues = tempAlignment->numberOfResidues;
         tempAlignment->filename = tempAlignment->seqsName[0];
         splitted[i] = tempAlignment;
     }

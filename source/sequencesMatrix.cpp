@@ -25,8 +25,8 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "../include/sequencesMatrix.h"
-#include "../include/TimerFactory.h"
-#include "../include/newAlignment.h"
+#include "InternalBenchmarker.h"
+#include "Alignment.h"
 #include "../include/utils.h"
 
 sequencesMatrix::sequencesMatrix(void) {
@@ -42,15 +42,15 @@ sequencesMatrix::sequencesMatrix(void) {
 
 }
 
-sequencesMatrix::sequencesMatrix(newAlignment *parent) {
+sequencesMatrix::sequencesMatrix(Alignment *parent) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("sequencesMatrix::sequencesMatrix(newAlignment *parent) ");
+	StartTiming("sequencesMatrix::sequencesMatrix(Alignment *parent) ");
     _alignment = parent;
     int i, j, k;
 
-    seqsNumber = _alignment->originalSequenNumber;
-    resNumber = _alignment->originalResidNumber;
+    seqsNumber = _alignment->originalNumberOfSequences;
+    resNumber = _alignment->originalNumberOfResidues;
 
     seqsName = _alignment->seqsName;
 

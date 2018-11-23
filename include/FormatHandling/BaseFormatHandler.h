@@ -1,7 +1,7 @@
 #ifndef READWRITES_H
 #define READWRITES_H
 
-#include "../../include/newAlignment.h"
+#include "Alignment.h"
 #include "../../include/reportsystem.h"
 
 #include <iomanip>
@@ -60,10 +60,10 @@ public:
      \return    <b> Alignment</b> loaded with the information of the file. \n
                 <b> nullptr</b> if there was any error.
      */
-    virtual newAlignment *LoadAlignment(std::string& filename) = 0;
+    virtual Alignment *LoadAlignment(std::string& filename) = 0;
 
     /**
-     \brief Function to save a \link newAlignment \endlink to a file.
+     \brief Function to save a \link Alignment \endlink to a file.
      \param alignment Alignment to save.
      \param output File Handler where to save the formatted alignment;
      \param FileName File Name of the File Handler.
@@ -71,7 +71,7 @@ public:
                 <b> False </b> otherwise.
      \todo Remove the File Name Argument as it's stored on the alignment itself.
      */
-    virtual bool SaveAlignment(newAlignment *alignment, std::ostream *output, std::string *FileName) = 0;
+    virtual bool SaveAlignment(Alignment *alignment, std::ostream *output, std::string *FileName) = 0;
 
     /**
      \brief Function that recognizes acronyms of the format.

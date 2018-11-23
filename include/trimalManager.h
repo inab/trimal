@@ -7,7 +7,7 @@
 
 
 #include "../include/FormatHandling/FormatManager.h"
-#include "../include/newAlignment.h"
+#include "Alignment.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -91,7 +91,7 @@ public:
     std::ifstream compare;
     similarityMatrix *similMatrix   = nullptr;
     
-    newAlignment  
+    Alignment
         *origAlig                   = nullptr,
         *singleAlig                 = nullptr,
         *tempAlig                   = nullptr,

@@ -32,7 +32,7 @@
 
 using namespace std;
 
-class newAlignment;
+class Alignment;
 
 /** \brief Class that represents a sequences matrix
  *
@@ -40,12 +40,12 @@ class newAlignment;
  *  MSA without any gaps included.\n
  *
  * This class stores the alignment sequences matrix.\n It provides
- * methods to \b build the sequences matrix and print the matrix.
+ * methods to \b build the sequences matrix and print the matrix.\n
  * It also provides methods for look to a column in the matrix and
  * for look to value at the position (row, column) in the matrix.\n
  * See: \n
- * - statisticsConsistency::compareAndChoose
- * - statisticsConsistency::forceComparison
+ * - Statistics::Consistency::compareAndChoose
+ * - Statistics::Consistency::forceComparison
  */
 class sequencesMatrix {
     /**
@@ -101,7 +101,7 @@ public:
      *
      * \param parent Alignment to associate the sequences matrix to.
      */
-    explicit sequencesMatrix(newAlignment *parent);
+    explicit sequencesMatrix(Alignment *parent);
 
     sequencesMatrix &operator=(const sequencesMatrix &);
 
@@ -170,7 +170,7 @@ private:
     /**
      * \brief Pointer to the alignment this object is related to.
      */
-    newAlignment *_alignment;
+    Alignment *_alignment;
 };
 
 #endif

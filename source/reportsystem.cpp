@@ -1,4 +1,4 @@
-#include "../include/TimerFactory.h"
+#include "InternalBenchmarker.h"
 #include "../include/reportsystem.h"
 
 
@@ -28,7 +28,7 @@ const std::map<WarningCode, const char *> __internalReport::__reportSystem::Warn
                         "Sequence \"[tag]\" will be cutted at position [tag] (length:[tag])"},
 
                 {WarningCode::IncludingIndeterminationSymbols,
-                        "Sequence \"[tag]\" has some indetermination symbols 'X' at the end of sequence. They will be included in the final newAlignment."},
+                        "Sequence \"[tag]\" has some indetermination symbols 'X' at the end of sequence. They will be included in the final Alignment."},
 
                 {WarningCode::LessNucleotidesThanExpected,
                         "Sequence \"[tag]\" has less nucleotides ([tag]) than expected ([tag]). It will be added N's to complete the sequence"},
@@ -335,7 +335,7 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
                 {ErrorCode::AlignmentIsEmpty,
                         "Couldn't output any alignment as it doesn't contain any sequence"},
 
-                {ErrorCode::AlignmentTypeisUnkwnown,
+                {ErrorCode::AlignmentTypeIsUnknown,
                         "Couldn't perform the trimming step, alignment type unkwnown. "},
 
         };

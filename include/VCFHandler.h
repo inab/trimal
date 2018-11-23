@@ -2,7 +2,7 @@
 #define VCF_STATISH_H
 
 #include "../include/reportsystem.h"
-#include "../include/newAlignment.h"
+#include "Alignment.h"
 
 #include <algorithm>
 #include <cstring>
@@ -85,11 +85,11 @@ namespace ngs {
     
     namespace __internal
     {
-        static void printApeek ( std::vector<newAlignment *> & sources ) {
-            for ( newAlignment * A : sources ) {
+        static void printApeek ( std::vector<Alignment *> & sources ) {
+            for ( Alignment * A : sources ) {
                 std::cout << A->seqsName[0] << std::endl;
 
-                for ( int X = 0; X < A->sequenNumber; X++ ) {
+                for ( int X = 0; X < A->numberOfSequences; X++ ) {
                     std::cout << "\t>" << A->seqsName[X] << std::endl;
                     std::cout << "\t" << A->sequences[X].substr ( 0, 50 ) << std::endl;
                 }
@@ -97,7 +97,7 @@ namespace ngs {
         }
 
         static void extendAlignments (
-            std::vector<newAlignment*>  & sources,
+            std::vector<Alignment*>  & sources,
             std::vector<std::string>    & contigs,
             std::vector<std::string>    & donors ) {
             // Extend the files.
@@ -119,7 +119,7 @@ namespace ngs {
 
                 // Extend the reference files with new sequences from donors.
                 if ( checkIn ) {
-                    for ( newAlignment * nA : sources ) {
+                    for ( Alignment * nA : sources ) {
 
                         std::string * oldSequences  = nA->sequences;
                         std::string * oldNames      = nA->seqsName;
@@ -127,10 +127,10 @@ namespace ngs {
                         std::string seq = nA->sequences[0];
                         std::string nam = nA->seqsName[0];
 
-                        nA -> sequences = new std::string[donors.size() + nA->originalSequenNumber];
+                        nA -> sequences = new std::string[donors.size() + nA->originalNumberOfSequences];
                         nA -> sequences[0] = seq;
 
-                        nA -> seqsName = new std::string[donors.size() + nA->originalSequenNumber];
+                        nA -> seqsName = new std::string[donors.size() + nA->originalNumberOfSequences];
                         nA -> seqsName[0] = nam;
 
                         for ( int i = 1; i < donors.size() + 1; i++ ) {
@@ -138,14 +138,14 @@ namespace ngs {
                             nA->seqsName[i] = donors[i - 1];
                         }
 
-                        for ( int i = 0; i < nA->originalSequenNumber - 1; i++ ) {
+                        for ( int i = 0; i < nA->originalNumberOfSequences - 1; i++ ) {
                             int pos = i + donors.size() + 1;
                             nA->sequences[pos] = oldSequences[i + 1];
                             nA->seqsName[pos] = oldNames[i + 1];
                         }
 
-                        nA->originalSequenNumber = donors.size() + nA->originalSequenNumber;
-                        nA->sequenNumber = nA->originalSequenNumber;
+                        nA->originalNumberOfSequences = donors.size() + nA->originalNumberOfSequences;
+                        nA->numberOfSequences = nA->originalNumberOfSequences;
 
                         delete [] oldSequences;
                         delete [] oldNames;
@@ -156,7 +156,7 @@ namespace ngs {
         }
 
         static void applyVariantCallingFiles (
-            std::vector<newAlignment*>      & sources ,
+            std::vector<Alignment*>      & sources ,
             std::vector<std::string>        & filenames,
             std::vector<std::string>        & contigs,
             std::vector<std::vector<int>>   & donorsPositions,
@@ -440,7 +440,7 @@ namespace ngs {
     }
 
     static void readVCF(
-            std::vector<newAlignment *> sources,
+            std::vector<Alignment *> sources,
             std::vector<std::string> filenames,
             float minQuality,
             float minCoverage,

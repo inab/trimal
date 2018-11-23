@@ -52,9 +52,9 @@ int mega_interleaved_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* mega_interleaved_state::LoadAlignment(std::string& filename)
+Alignment* mega_interleaved_state::LoadAlignment(std::string& filename)
 {
-    newAlignment * _alignment = new newAlignment();
+    Alignment * _alignment = new Alignment();
    /* MEGA interleaved file format parser */
 
     char *frag = nullptr, *str = nullptr, *line = nullptr;
@@ -118,7 +118,7 @@ newAlignment* mega_interleaved_state::LoadAlignment(std::string& filename)
 
             /* If FORMAT label is found, try to get some details from input file */
         else if(!strcmp(str, "FORMAT"))
-             _alignment->aligInfo.append(line, strlen(line));
+             _alignment->alignmentInfo.append(line, strlen(line));
 
         /* Destroy previously allocated memory */
         delete [] frag;
@@ -129,7 +129,7 @@ newAlignment* mega_interleaved_state::LoadAlignment(std::string& filename)
 
         /* If a sequence name flag has been detected, increase counter */
         if(!strncmp(line, "#", 1))
-            _alignment->sequenNumber++;
+            _alignment->numberOfSequences++;
 
         /* Deallocate dynamic memory */
         delete [] line;
@@ -148,8 +148,8 @@ newAlignment* mega_interleaved_state::LoadAlignment(std::string& filename)
     file.seekg(0);
 
     /* Allocate memory */
-    _alignment->seqsName  = new std::string[_alignment->sequenNumber];
-    _alignment->sequences = new std::string[_alignment->sequenNumber];
+    _alignment->seqsName  = new std::string[_alignment->numberOfSequences];
+    _alignment->sequences = new std::string[_alignment->numberOfSequences];
 
     /* Skip first line */
     line = utils::readLine(file);
@@ -215,7 +215,7 @@ newAlignment* mega_interleaved_state::LoadAlignment(std::string& filename)
         /* Read line in a safer way */
         line = utils::readLine(file);
 
-        i = (i + 1) % _alignment->sequenNumber;
+        i = (i + 1) % _alignment->numberOfSequences;
         if (i == 0)
             firstBlock = false;
     }
@@ -228,12 +228,12 @@ newAlignment* mega_interleaved_state::LoadAlignment(std::string& filename)
 
     /* Check the matrix's content */
     _alignment->fillMatrices(true);
-    _alignment->originalSequenNumber = _alignment -> sequenNumber;
-    _alignment->originalResidNumber = _alignment -> residNumber;
+    _alignment->originalNumberOfSequences = _alignment -> numberOfSequences;
+    _alignment->originalNumberOfResidues = _alignment -> numberOfResidues;
     return _alignment;
 }
 
-bool mega_interleaved_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool mega_interleaved_state::SaveAlignment(Alignment* alignment, std::ostream* output, std::string* FileName)
 {
     return false;
 }

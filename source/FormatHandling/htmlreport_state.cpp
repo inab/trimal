@@ -9,19 +9,19 @@ int htmlreport_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* htmlreport_state::LoadAlignment(std::string& filename)
+Alignment* htmlreport_state::LoadAlignment(std::string& filename)
 {
     return nullptr;
 }
 
-bool htmlreport_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool htmlreport_state::SaveAlignment(Alignment* alignment, std::ostream* output, std::string* FileName)
 {
     int i, j, kj, upper, k = 0, maxLongName = 0;
     std::string tmpColumn;
     char type;
 
     /* Allocate some local memory */
-    tmpColumn.reserve(alignment->sequenNumber);
+    tmpColumn.reserve(alignment->numberOfSequences);
 
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
@@ -32,7 +32,7 @@ bool htmlreport_state::SaveAlignment(newAlignment* alignment, std::ostream* outp
 
     /* Compute maximum sequences name length */
     maxLongName = 0;
-    for(i = 0; i < alignment->sequenNumber; i++)
+    for(i = 0; i < alignment->numberOfSequences; i++)
         maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
 
 
@@ -54,29 +54,29 @@ bool htmlreport_state::SaveAlignment(newAlignment* alignment, std::ostream* outp
 
     /* Print sequences colored according to CLUSTAL scheme based on
      * physical-chemical properties */
-    for(j = 0, upper = HTMLBLOCKS; j < alignment->residNumber; j += HTMLBLOCKS, upper += \
+    for(j = 0, upper = HTMLBLOCKS; j < alignment->numberOfResidues; j += HTMLBLOCKS, upper += \
     HTMLBLOCKS) {
 
         *output << "\n";
         /* Print main columns number */
         *output << std::setw(maxLongName + 19) << std::right << (j + 10);
-        for(i = j + 20; ((i <= alignment->residNumber) && (i <= upper)); i += 10)
+        for(i = j + 20; ((i <= alignment->numberOfResidues) && (i <= upper)); i += 10)
             *output << std::setw(10) << std::right << i;
 
         /* Print special characters to delimit sequences blocks */
         *output << "\n" << std::setw(maxLongName + 10);
-        for(i = j + 1; ((i <= alignment->residNumber) && (i <= upper)); i++)
+        for(i = j + 1; ((i <= alignment->numberOfResidues) && (i <= upper)); i++)
             *output << (!(i % 10) ? "+" : "=");
 
         /* Print sequences themselves */
-        for(i = 0; i < alignment->sequenNumber; i++) {
+        for(i = 0; i < alignment->numberOfSequences; i++) {
 
             /* Print sequences name */
             *output << "\n" << std::setw(maxLongName + 9) << std::left << alignment->seqsName[i];
 
             /* Print residues corresponding to current sequences block */
-            for(k = j; ((k < alignment->residNumber) && (k < upper)); k++) {
-                for(kj = 0, tmpColumn.clear(); kj < alignment->sequenNumber; kj++)
+            for(k = j; ((k < alignment->numberOfResidues) && (k < upper)); k++) {
+                for(kj = 0, tmpColumn.clear(); kj < alignment->numberOfSequences; kj++)
                     tmpColumn += alignment->sequences[kj][k];
                 /* Determine residue color based on residues across the alig column */
                 type = utils::determineColor(alignment->sequences[i][k], tmpColumn);

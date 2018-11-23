@@ -11,14 +11,16 @@
 #include <string>
 #include <array>
 
-class newAlignment;
+class Alignment;
 class BaseFormatHandler;
 
 /**
- \brief Class to handle \link BaseFormatHandler ReadWriteBaseStates \endlink,
-  which represents formats.\n
- It serves as a proxy to the formats, so the code outside the FormatManager
-  is format-agnostic.
+ \brief Class to handle \link BaseFormatHandler Format Handlers \endlink.\n
+    It serves as a proxy to the handlers, so the code outside the FormatManager
+        is format-agnostic.
+    \note The Format Handlers are added automatically by CMake, on CMake configuration.\n
+    This is achieved by creating the file include/FormatHandling/formats_header.h ,
+        which implements the FormatManager constructor.
  */
 class FormatManager
 {
@@ -30,9 +32,17 @@ private:
     /**
      \brief Vector that contains the available formats to load/save from.\n
             They are loaded into the format in the constructor function.
-     \note The formats (\link BaseFormatHandler \endlink) are loaded statically,
-      no dynamically, so when a new format is implemented,
-      it has to be added <i>by hand</i>
+     \note The formats (\link BaseFormatHandler \endlink) are hard-coded loaded, 
+        and thus so when a new format is implemented, it has to be added 'manually'.
+        There is a workaround for this, done on CMake, which creates the constructor of the class.
+        This on-the-fly constructor implements all states found, using some rules.\n
+<br>
+\note 
+This file includes all States found, and also defines the ReadWriteMS constructor.\n
+To be able to be automatically recognized, the new state should:\n
+       -# Have the same Class Name as File Name (without the extension)\n
+       -# Name must end with '_state'\n
+       -# Be placed on ReadWriteMS folder\n
      */
     std::vector<BaseFormatHandler*> available_states;
     /**
@@ -65,13 +75,13 @@ public:
     bool info           = false;
     
     /**
-    \brief Function that creates an alignment given a file path.
+    \brief Function that loads an alignment given a file path.
         It automatically detects the format of the file.
     \param inFile File path of the alignment to load.
     \return <b>Pointer to the alignment</b> if it could be loaded.\n
             <b>Null</b> if not.
         */
-    newAlignment* loadAlignment(std::string inFile);
+    Alignment* loadAlignment(std::string inFile);
 
     /**
     \brief Function to save an alignment to a file.
@@ -81,7 +91,7 @@ public:
     \param outFormats Format in which save the alignment.
     \param alignment Alignment
             */
-    bool saveAlignment(std::string outPattern, std::vector< std::string >* outFormats, newAlignment* alignment);
+    bool saveAlignment(std::string outPattern, std::vector< std::string >* outFormats, Alignment* alignment);
     
     /**
      \brief Function that takes multiple files,
@@ -92,7 +102,9 @@ public:
                 - <b> [in] </b>        Token that is changed with the original filename without extension.\n
                 - <b> [format] </b>    Token that is changed with the new format name.\n
                 - <b> [extension] </b> Token that is changed with the format file extensions.
-     \note Without using tags, when outputting several files
+     \note This method should be used in combination of the output tag system, which allows to reuse the name of the original alignment, 
+        in the new output, along the new format and extension.
+        Otherwise, the system would overwrite the same file over and over.
      \param outFormats Output formats that original files should reformat to. 
      */
     void loadAndSaveMultipleAlignments(std::vector< std::string >* inFile, std::string* outPattern, std::vector< std::string >* outFormats);
@@ -120,7 +132,7 @@ public:
              each one with a sequence from the original.\n
             This function does a deep copy of each sequence,
              so the original alignment can be deleted after being splitted*/
-    std::vector<newAlignment*> splitAlignmentKeeping(newAlignment& alignment);
+    std::vector<Alignment*> splitAlignmentKeeping(Alignment& alignment);
 };
 
 

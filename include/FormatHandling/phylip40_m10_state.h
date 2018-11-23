@@ -16,9 +16,9 @@ public:
 
     int CheckAlignment(std::istream *origin) override;
 
-    newAlignment *LoadAlignment(std::string& filename) override;
+    Alignment *LoadAlignment(std::string& filename) override;
 
-    bool SaveAlignment(newAlignment *alignment, std::ostream *output, std::string *FileName) override;
+    bool SaveAlignment(Alignment *alignment, std::ostream *output, std::string *FileName) override;
 
     bool RecognizeOutputFormat(std::string& FormatName) override;
 

@@ -7,8 +7,8 @@
 
 //#define TimingReport true
 
-#define BenchmarkTimes true
-#define BenchmarkMemory true
+#define BenchmarkTimes false
+#define BenchmarkMemory false
 
 #define TimingReport BenchmarkTimes || BenchmarkMemory
 
@@ -33,10 +33,10 @@ typedef std::chrono::time_point<std::chrono::high_resolution_clock> time_point;
 #define SetTimingOfstream(_filename) timerFactory.SetOutput(_filename)
 
 
-/** \brief Class Timer Factory */
-class TimerFactory;
+// Forward Declaration
+class InternalBenchmarker;
 
-class Timer {
+class BenchmarkSnapshot {
     friend class TimerFactory;
 
 #if BenchmarkTimes
@@ -45,8 +45,6 @@ class Timer {
 #endif
     /// Name of the timer
     std::string name;
-//    /// How many child does this timer have
-//    int childCount = 0;
 
 #if BenchmarkMemory
     /// Method to chek current memory usage
@@ -57,26 +55,26 @@ public:
 
     static std::string separator, spacer;
     /// Constructor
-    explicit Timer(std::string name, TimerFactory *timerFactory);
+    explicit BenchmarkSnapshot(std::string name, InternalBenchmarker *timerFactory);
     /// TimeFactory pointer
-    TimerFactory* timerFactory;
+    InternalBenchmarker* timerFactory;
     /// Destructor
-    ~Timer();
+    ~BenchmarkSnapshot();
 
 };
 
 
 
-class TimerFactory {
-    friend class Timer;
+class InternalBenchmarker {
+    friend class BenchmarkSnapshot;
 public:
     /// Class Destructor
-    ~TimerFactory();
+    ~InternalBenchmarker();
     /// Method to start timing an scope
-    Timer getTimer(std::string name);
+    BenchmarkSnapshot getTimer(std::string name);
 
     /// Class constructor
-    explicit TimerFactory(const std::string &outFilename) {
+    explicit InternalBenchmarker(const std::string &outFilename) {
         out = new std::ofstream(outFilename);
         startPoint = std::chrono::high_resolution_clock::now();
     };
@@ -95,7 +93,7 @@ private:
     int lastLevel = 0;
     std::vector<int> levels;
     /// Timer Pool
-    std::vector<Timer *> _pool;
+    std::vector<BenchmarkSnapshot *> _pool;
     /// Ostream where to output the report
     std::ostream * out;
     /// Cursor position of the output file.
@@ -111,7 +109,7 @@ private:
     time_point startPoint;
 };
 
-extern TimerFactory timerFactory;
+extern InternalBenchmarker timerFactory;
 #else
 
 #define StartTiming(name) {}

@@ -18,10 +18,10 @@ int pir_state::CheckAlignment(std::istream *origin) {
     return 0;
 }
 
-newAlignment *pir_state::LoadAlignment(std::string& filename) {
+Alignment *pir_state::LoadAlignment(std::string& filename) {
     /* NBRF/PIR file format parser */
 
-    newAlignment *_alignment = new newAlignment();
+    Alignment *_alignment = new Alignment();
 
     bool seqIdLine, seqLines;
     char *str, *line = nullptr;
@@ -39,7 +39,7 @@ newAlignment *pir_state::LoadAlignment(std::string& filename) {
     _alignment->filename.append(";");
 
     /* Compute how many sequences are in the input alignment */
-    _alignment->sequenNumber = 0;
+    _alignment->numberOfSequences = 0;
     while (!file.eof()) {
 
         /* Deallocate previously used dinamic memory */
@@ -58,7 +58,7 @@ newAlignment *pir_state::LoadAlignment(std::string& filename) {
 
         /* If a sequence name flag is detected, increase sequences counter */
         if (str[0] == '>')
-            _alignment->sequenNumber++;
+            _alignment->numberOfSequences++;
     }
 
     /* Finish to preprocess the input file. */
@@ -66,9 +66,9 @@ newAlignment *pir_state::LoadAlignment(std::string& filename) {
     file.seekg(0);
 
     /* Allocate memory for the input alignmet */
-    _alignment->sequences = new std::string[_alignment->sequenNumber];
-    _alignment->seqsName = new std::string[_alignment->sequenNumber];
-    _alignment->seqsInfo = new std::string[_alignment->sequenNumber];
+    _alignment->sequences = new std::string[_alignment->numberOfSequences];
+    _alignment->seqsName = new std::string[_alignment->numberOfSequences];
+    _alignment->seqsInfo = new std::string[_alignment->numberOfSequences];
 
     /* Initialize some local variables */
     seqIdLine = true;
@@ -139,14 +139,14 @@ newAlignment *pir_state::LoadAlignment(std::string& filename) {
 
     /* Check the matrix's content */
     _alignment->fillMatrices(true);
-    _alignment->originalSequenNumber = _alignment->sequenNumber;
-    _alignment->originalResidNumber = _alignment->residNumber;
+    _alignment->originalNumberOfSequences = _alignment->numberOfSequences;
+    _alignment->originalNumberOfResidues = _alignment->numberOfResidues;
 
 
     return _alignment;
 }
 
-bool pir_state::SaveAlignment(newAlignment *alignment, std::ostream *output, std::string *FileName) {
+bool pir_state::SaveAlignment(Alignment *alignment, std::ostream *output, std::string *FileName) {
 
     /* Generate output alignment in NBRF/PIR format. Sequences can be unaligned */
 
@@ -154,12 +154,12 @@ bool pir_state::SaveAlignment(newAlignment *alignment, std::ostream *output, std
     std::string alg_datatype, *tmpMatrix;
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new std::string[alignment->originalSequenNumber];
+    tmpMatrix = new std::string[alignment->originalNumberOfSequences];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for (i = 0; i < alignment->originalSequenNumber; i++)
+    for (i = 0; i < alignment->originalNumberOfSequences; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
@@ -177,7 +177,7 @@ bool pir_state::SaveAlignment(newAlignment *alignment, std::ostream *output, std
 
 
     /* Print alignment */
-    for (i = 0; i < alignment->originalSequenNumber; i++) {
+    for (i = 0; i < alignment->originalNumberOfSequences; i++) {
         if (alignment->saveSequences && alignment->saveSequences[i] == -1) continue;
 
         /* Print sequence datatype and its name */

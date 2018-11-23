@@ -10,10 +10,10 @@
 #include <queue>
 
 // Forward declaration
-class newAlignment;
+class Alignment;
 
  /**
- \brief Submodule contained by \link newAlignment newAlignment \endlink.
+ \brief Submodule contained by \link Alignment Alignment \endlink.
  \par "Complementary parameter"
   All cleaning methods contains a boolean flag called<b> 'complementary' </b>.\n
   If set to<i> true</i>, the function will return a new alignment that contains
@@ -73,7 +73,7 @@ public:
       Whether or not to return the complementary version of the trimmed alignment.
      \return Pointer to the cleaned alignment.
      */
-    newAlignment *cleanByCutValueOverpass(double cut, float baseLine,
+    Alignment *cleanByCutValueOverpass(double cut, float baseLine,
                                           const int *gInCol, bool complementary);
 
      /**
@@ -94,7 +94,7 @@ public:
       Whether or not to return the complementary version of the trimmed alignment.
      \return Pointer to the cleaned alignment.
      */
-    newAlignment *cleanByCutValueFallBehind(float cut, float baseLine,
+    Alignment *cleanByCutValueFallBehind(float cut, float baseLine,
                                             const float *ValueVect,
                                             bool complementary);
 
@@ -121,7 +121,7 @@ public:
       Whether or not to return the complementary version of the trimmed alignment.
     \return Pointer to the cleaned alignment.
     */
-    newAlignment *cleanByCutValueOverpassOrEquals(
+    Alignment *cleanByCutValueOverpassOrEquals(
             double cutGaps, const int *gInCol, float baseLine,
             float cutCons, const float *MDK_Win, bool complementary);
 
@@ -151,7 +151,7 @@ public:
      \return Pointer to the cleaned alignment.
      */
 
-    newAlignment *cleanStrict(int gapCut, const int *gInCol, float simCut,
+    Alignment *cleanStrict(int gapCut, const int *gInCol, float simCut,
                               const float *MDK_W, bool complementary, bool variable);
 
      /**
@@ -166,7 +166,7 @@ public:
        Whether or not to return the complementary version of the trimmed alignment.
       \return Pointer to the cleaned alignment.
     */
-    newAlignment *cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
+    Alignment *cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
                                   bool complementary);
 
      /**
@@ -181,7 +181,7 @@ public:
        Whether or not to return the complementary version of the trimmed alignment.
       \return Pointer to the cleaned alignment.
     */
-    newAlignment *cleanGaps(float baseLine, float gapsPct, 
+    Alignment *cleanGaps(float baseLine, float gapsPct,
                             bool complementary);
 
      /**
@@ -194,7 +194,7 @@ public:
        Whether or not to return the complementary version of the trimmed alignment.
       \return Pointer to the cleaned alignment.
     */
-    newAlignment *cleanConservation(float baseLine, float conservationPct, 
+    Alignment *cleanConservation(float baseLine, float conservationPct,
                                     bool complementary);
 
      /**
@@ -213,7 +213,7 @@ public:
        to obtain the minimum percentage desired.
       \return Pointer to the cleaned alignment.
 */
-    newAlignment *clean(float baseLine, float GapsPct, 
+    Alignment *clean(float baseLine, float GapsPct,
                         float conservationPct, bool complementary);
 
      /**
@@ -233,11 +233,11 @@ public:
        Whether or not to return the complementary version of the trimmed alignment.
       \return Pointer to the cleaned alignment.
 */
-    newAlignment *cleanCompareFile(float cutpoint, float baseLine, float *vectValues, bool complementary);
+    Alignment *cleanCompareFile(float cutpoint, float baseLine, float *vectValues, bool complementary);
 
      /**
       \brief Method to compute the overlap values.\n
-        See newAlignment::overlaps
+        See Alignment::overlaps
       \param overlap
        Overlap threshold.
       \param[out] spuriousVector
@@ -266,7 +266,7 @@ public:
       \return Pointer to the cleaned alignment.
       \
       */
-    newAlignment *cleanSpuriousSeq(float overlapColumn, float minimumOverlap, bool complementary);
+    Alignment *cleanSpuriousSeq(float overlapColumn, float minimumOverlap, bool complementary);
 
      /**
       \brief Method that carries the gappyout approach.\n
@@ -278,7 +278,7 @@ public:
       \param complementary
        Whether or not to return the complementary version of the trimmed alignment.
       */
-    newAlignment *clean2ndSlope(bool complementary);
+    Alignment *clean2ndSlope(bool complementary);
 
      /**
      \brief Method to clean an alignment. It carries out strict and strictplus.\n
@@ -295,7 +295,7 @@ public:
      \return Pointer to the cleaned alignment returned by cleanStrict
       using the parameters calculated in this function.
      */
-    newAlignment *cleanCombMethods(bool complementary, bool variable);
+    Alignment *cleanCombMethods(bool complementary, bool variable);
 
      /**
       \brief Method to remove columns composed only by gaps\n
@@ -306,7 +306,7 @@ public:
        \n Although this method contains a complementary flag,
        setting this up would return an alignment full of gaps-only columns.
       */
-    newAlignment *cleanNoAllGaps(bool complementary);
+    Alignment *cleanNoAllGaps(bool complementary);
 
      /**
       \brief Method to remove columns, expressed as ranges.
@@ -319,7 +319,7 @@ public:
       \param complementary
        Whether or not to return the complementary version of the trimmed alignment.
       */
-    newAlignment *removeColumns(int *columns, int init, int size, bool complementary);
+    Alignment *removeColumns(int *columns, int init, int size, bool complementary);
 
      /**
       \brief Method to remove sequences, expressed as ranges.
@@ -333,7 +333,7 @@ public:
       \param complementary
        Whether or not to return the complementary version of the trimmed alignment.
       */
-    newAlignment *removeSequences(int *seqs, int init, int size, bool complementary);
+    Alignment *removeSequences(int *seqs, int init, int size, bool complementary);
 
      /**
       \brief Method to select the most representative sequence (the longest one)
@@ -345,7 +345,7 @@ public:
        no other cluster has a better identity with its representative,
        it will be assigned to that cluster.
       */
-    newAlignment *getClustering(float identityThreshold);
+    Alignment *getClustering(float identityThreshold);
 
      /**
       \brief Method that calculates the optimal cut point for a given clusters number.\n
@@ -358,12 +358,13 @@ public:
     float getCutPointClusters(int clusterNumber);
 
      /**
-      \brief Method to remove column blocks smaller than a given size.
+      \brief Method to remove blocks of columns with no rejected residue
+        smaller than a given size.
       \param blockSize Minimum size to remove a block from the alignment
       \param original Alignment to apply the removal.
        Minimum size a block has to be to be kept.
       */
-    void removeSmallerBlocks(int blockSize, newAlignment &original);
+    void removeSmallerBlocks(int blockSize, Alignment &original);
 
 
      /**
@@ -397,7 +398,7 @@ public:
 
      /**
       \brief Method to calculate identities between the sequences from the alignment.\n
-      See newAlignment::identities
+      See Alignment::identities
       */
     void calculateSeqIdentity();
 
@@ -446,22 +447,22 @@ public:
 
 private:
 
-    friend class newAlignment;
+    friend class Alignment;
 
      /**
       \brief Pointer to the alignment that contains this object
       */
-    newAlignment *_alignment;
+    Alignment *_alignment;
 
      /**
-      \brief Class Constructor - Called by \link newAlignment \endlink
+      \brief Class Constructor - Called by \link Alignment \endlink
       */
-     explicit Cleaner(newAlignment *parent);
+     explicit Cleaner(Alignment *parent);
 
      /**
-     \brief Copy Constructor - Called by \link newAlignment \endlink
+     \brief Copy Constructor - Called by \link Alignment \endlink
      */
-    Cleaner(newAlignment *parent, Cleaner *mold);
+    Cleaner(Alignment *parent, Cleaner *mold);
 
 };
 

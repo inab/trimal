@@ -195,7 +195,8 @@ enum ErrorCode {
 
     AlignmentIsEmpty                                    = 94,
 
-    AlignmentTypeisUnkwnown                             = 95,
+    AlignmentTypeIsUnknown                             = 95,
+
     __MAXERROR,
 };
 

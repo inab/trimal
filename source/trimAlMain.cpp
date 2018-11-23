@@ -1,7 +1,7 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.4: a tool for automated newAlignment  trimming in large-scale
+    trimAl v1.4: a tool for automated Alignment  trimming in large-scale
                  phylogenetics analyses.
 
     2009-2013 Capella-Gutierrez S. and Gabaldon, T.
@@ -25,7 +25,7 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "../include/trimalManager.h"
-#include "../include/TimerFactory.h"
+#include "InternalBenchmarker.h"
 #include "../include/reportsystem.h"
 
 int main(int argc, char *argv[]) {
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
     //  the scope.
     int returnValue;
     {
-        // Create a Timer that will report times and/or memory usage
+        // Create a BenchmarkSnapshot that will report times and/or memory usage
         // upon its destruction
         StartTiming("int main(int argc, char *argv[]) ");
 

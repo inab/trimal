@@ -396,7 +396,7 @@ namespace utils {
      This function should work faster than it's sister
        utils::GetGapStep(int * gapValue, int sequenNumber),
        as it uses a precomputed (by the user)
-       inverseSequenNumber (1F / newAlignment::sequenNumber),
+       inverseSequenNumber (1F / Alignment::sequenNumber),
        instead of calculating it over again each time the function
        is called (which is equal to number of residues). \n
      This comes with a precision cost that shouldn't be a problem.
@@ -438,7 +438,7 @@ namespace utils {
 
 inline char utils::toUpper(char c) 
 {
-    // return std::toupper(c);
+    return std::toupper(c);
     if (c >= 'a' and c <= 'z')
         return c & (~(1<<5));
     return c;

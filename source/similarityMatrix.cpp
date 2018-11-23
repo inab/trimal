@@ -38,7 +38,7 @@
 
 #include "../include/similarityMatrix.h"
 #include "../include/reportsystem.h"
-#include "../include/TimerFactory.h"
+#include "InternalBenchmarker.h"
 #include "../include/defines.h"
 #include "../include/values.h"
 #include "../include/utils.h"
@@ -429,7 +429,7 @@ float similarityMatrix::getDistance(char &a, char &b) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
 	StartTiming("float similarityMatrix::getDistance(char a, char b) ");
-    int numa, numb;
+    int numa = -1, numb = -1;
 
     // Search the first character position
     if ((a >= 'A') && (a <= 'Z')) numa = vhash[a - 'A'];

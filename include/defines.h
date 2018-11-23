@@ -79,13 +79,25 @@ To \b EXACT check an alignment type you can: \n
 */
 enum SequenceTypes
 {
+    // Not Defined Tag = 0
+    /// = 0
     NotDefined = 0,
     
-    DNA = 1 << 1, /// DNA Tag = 2
-    RNA = 1 << 2, /// RNA Tag = 4
-    AA  = 1 << 3, /// AA Tag = 8
+    // DNA Tag = 2
+    /// 1 << 1 = 2
+    DNA = 1 << 1,
+
+    // RNA Tag = 4
+    /// 1 << 2 = 4
+    RNA = 1 << 2, 
     
-    DEG = 1 << 4 /// Degraded Tag = 16
+    // AA Tag = 8
+    /// 1 << 3 = 8
+    AA  = 1 << 3,
+    
+    // Degraded Tag = 16
+    /// 1 << 4 = 16
+    DEG = 1 << 4 
 };
 
 #endif

@@ -31,9 +31,9 @@ int nexus_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* nexus_state::LoadAlignment(std::string& filename)
+Alignment* nexus_state::LoadAlignment(std::string& filename)
 {
-    newAlignment* _alignment = new newAlignment();
+    Alignment* _alignment = new Alignment();
     /* NEXUS file format parser */
     char *frag = nullptr, *str = nullptr, *line = nullptr;
     int i, pos, state, firstBlock;
@@ -82,8 +82,8 @@ newAlignment* nexus_state::LoadAlignment(std::string& filename)
         else if(!strcmp(str, "FORMAT")) {
             str = strtok(nullptr, DELIMITERS);
             while(str != nullptr) {
-                _alignment-> aligInfo.append(str, strlen(str));
-                _alignment-> aligInfo.append(" ", strlen(" "));
+                _alignment-> alignmentInfo.append(str, strlen(str));
+                _alignment-> alignmentInfo.append(" ", strlen(" "));
                 str = strtok(nullptr, DELIMITERS);
             }
         }
@@ -93,19 +93,19 @@ newAlignment* nexus_state::LoadAlignment(std::string& filename)
             str = strtok(nullptr, DELIMITERS);
             frag = strtok(nullptr, DELIMITERS);
             str = strtok(str, "=;");
-            _alignment->sequenNumber = atoi(strtok(nullptr, "=;"));
+            _alignment->numberOfSequences = atoi(strtok(nullptr, "=;"));
             frag = strtok(frag, "=;");
-            _alignment->residNumber = atoi(strtok(nullptr, "=;"));
+            _alignment->numberOfResidues = atoi(strtok(nullptr, "=;"));
         }
     } while(!file.eof());
 
     /* Check all parameters */
-    if(strcmp(str, "MATRIX") || (_alignment->sequenNumber == 0) || (_alignment->residNumber == 0))
+    if(strcmp(str, "MATRIX") || (_alignment->numberOfSequences == 0) || (_alignment->numberOfResidues == 0))
         return nullptr;
 
     /* Allocate memory for the input alignment */
-    _alignment->seqsName  = new std::string[_alignment->sequenNumber];
-    _alignment->sequences = new std::string[_alignment->sequenNumber];
+    _alignment->seqsName  = new std::string[_alignment->numberOfSequences];
+    _alignment->sequences = new std::string[_alignment->numberOfSequences];
 
     pos = 0;
     state = false;
@@ -157,7 +157,7 @@ newAlignment* nexus_state::LoadAlignment(std::string& filename)
         /* Move sequences pointer to next one. It if it is last one, move it to
          * the beginning and set the first block to false for avoiding to rewrite
          * sequences name */
-        pos = (pos + 1) % _alignment->sequenNumber;
+        pos = (pos + 1) % _alignment->numberOfSequences;
         if (not pos)
             firstBlock = false;
     }
@@ -170,12 +170,12 @@ newAlignment* nexus_state::LoadAlignment(std::string& filename)
 
     /* Check the matrix's content */
     _alignment->fillMatrices(true);
-    _alignment->originalSequenNumber = _alignment-> sequenNumber;
-    _alignment->originalResidNumber =_alignment->residNumber;
+    _alignment->originalNumberOfSequences = _alignment-> numberOfSequences;
+    _alignment->originalNumberOfResidues =_alignment->numberOfResidues;
     return _alignment;
 }
 
-bool nexus_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool nexus_state::SaveAlignment(Alignment* alignment, std::ostream* output, std::string* FileName)
 {
     /* Generate output alignment in NEXUS format setting only alignment block */
 
@@ -190,18 +190,18 @@ bool nexus_state::SaveAlignment(newAlignment* alignment, std::ostream* output, s
     }
 
     // Allocate local memory for generating output alignment
-    tmpMatrix = new std::string[alignment->originalSequenNumber];
+    tmpMatrix = new std::string[alignment->originalNumberOfSequences];
 
     // Depending on alignment orientation: forward or reverse. Copy directly
     // sequence information or get firstly the reversed sequences and then
     // copy it into local memory
-    for(i = 0; i < alignment->originalSequenNumber; i++)
+    for(i = 0; i < alignment->originalNumberOfSequences; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
 
     // Compute maximum sequences name length
-    for (i = 0; (i < alignment->originalSequenNumber); i++)
+    for (i = 0; (i < alignment->originalNumberOfSequences); i++)
         if (alignment->saveSequences[i] != -1)
             maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
 
@@ -209,12 +209,12 @@ bool nexus_state::SaveAlignment(newAlignment* alignment, std::ostream* output, s
     alignment->getAlignmentType();
 
     // Remove characters like ";" from input alignment information line
-    while((int) alignment -> aligInfo.find(';') != (int) std::string::npos)
-        alignment ->aligInfo.erase(alignment -> aligInfo.find(';'), 1);
+    while((int) alignment -> alignmentInfo.find(';') != (int) std::string::npos)
+        alignment ->alignmentInfo.erase(alignment -> alignmentInfo.find(';'), 1);
 
     // Print Alignment header
     *output << "#NEXUS\nBEGIN DATA;\n DIMENSIONS NTAX="
-         << alignment->sequenNumber << " NCHAR=" << alignment->residNumber <<";\n";
+         << alignment->numberOfSequences << " NCHAR=" << alignment->numberOfResidues <<";\n";
 
     // Print alignment datatype
     if (alignment->getAlignmentType() & SequenceTypes::DNA)
@@ -226,34 +226,34 @@ bool nexus_state::SaveAlignment(newAlignment* alignment, std::ostream* output, s
 
     i = 0;
     // Using information from input alignment. Use only some tags.
-    while((j = alignment ->aligInfo.find(' ', i)) != (int) std::string::npos) {
+    while((j = alignment ->alignmentInfo.find(' ', i)) != (int) std::string::npos) {
 
-        if((alignment ->aligInfo.substr(i, j - i)).compare(0, 7, "MISSING") == 0 ||
-           (alignment ->aligInfo.substr(i, j)).compare(0, 7, "missing") == 0)
-            *output << " " << (alignment ->aligInfo.substr(i, j - i));
+        if((alignment ->alignmentInfo.substr(i, j - i)).compare(0, 7, "MISSING") == 0 ||
+           (alignment ->alignmentInfo.substr(i, j)).compare(0, 7, "missing") == 0)
+            *output << " " << (alignment ->alignmentInfo.substr(i, j - i));
 
-        else if((alignment ->aligInfo.substr(i, j)).compare(0, 9, "MATCHCHAR") == 0 ||
-                (alignment ->aligInfo.substr(i, j)).compare(0, 9, "matchchar") == 0)
-            *output << " " << (alignment ->aligInfo.substr(i, j - i));
+        else if((alignment ->alignmentInfo.substr(i, j)).compare(0, 9, "MATCHCHAR") == 0 ||
+                (alignment ->alignmentInfo.substr(i, j)).compare(0, 9, "matchchar") == 0)
+            *output << " " << (alignment ->alignmentInfo.substr(i, j - i));
 
         i = j + 1;
     }
     *output << ";\n";
 
     // Add a header indicating the number of residues of each sequence.
-    for(i = 0; i < alignment->originalSequenNumber; i++)
+    for(i = 0; i < alignment->originalNumberOfSequences; i++)
     {
         if (alignment->saveSequences[i] == -1 )
             continue;
 
         *output << "[Name: "
                 << std::setw(maxLongName + 4) << std::left << alignment->seqsName[i]
-                << "Len: " << alignment->residNumber << "]\n";
+                << "Len: " << alignment->numberOfResidues << "]\n";
     }
     *output << "\nMATRIX";
 
     // Start filling the file with sequence names and sequences.
-    for (j = 0, k = 0; j < alignment->originalResidNumber;)
+    for (j = 0, k = 0; j < alignment->originalNumberOfResidues;)
     {
         // Move until next not rejected residue
         if (alignment->saveResidues[j] == -1)
@@ -263,7 +263,7 @@ bool nexus_state::SaveAlignment(newAlignment* alignment, std::ostream* output, s
         }
 
         // Iterate over the sequences
-        for (i = 0; i < alignment->originalSequenNumber; i++)
+        for (i = 0; i < alignment->originalNumberOfSequences; i++)
         {
             // Skip rejected sequences
             if (alignment->saveSequences[i] == -1) continue;
@@ -272,7 +272,7 @@ bool nexus_state::SaveAlignment(newAlignment* alignment, std::ostream* output, s
             // Add residues per block.
             // k = residue position;
             // l = residues added on current line
-            for (k = j, l = 0; k < alignment->originalResidNumber && l < 50;)
+            for (k = j, l = 0; k < alignment->originalNumberOfResidues && l < 50;)
             {
                 // Don't save residues that have been rejected
                 if (alignment->saveResidues[k] == -1)

@@ -1,5 +1,5 @@
 #include "../../include/FormatHandling/FormatManager.h"
-#include "../../include/newAlignment.h"
+#include "Alignment.h"
 #include "../../include/defines.h"
 #include "../../include/values.h"
 
@@ -345,7 +345,7 @@ int main(int argc, char *argv[])
     if(MachineState.format || MachineState.info || MachineState.type) {
         for (const std::string &str : inFiles)
         {
-            newAlignment* alignment = MachineState.loadAlignment(str);
+            Alignment* alignment = MachineState.loadAlignment(str);
             if (alignment != nullptr)
             {
 

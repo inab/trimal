@@ -38,21 +38,25 @@
 #include <cmath>
 #include <ctime>
 
+#include "../include/defines.h"
+
 // Forward declarations
 class sequencesMatrix;
-class StatisticsManager;
 class Cleaner;
+namespace Statistics {
+    class Manager;
+}
 
-class newAlignment {
+class Alignment {
 
-    int dataType = 0;
+    int dataType = SequenceTypes::NotDefined;
 
 public:
 // BEGIN of Submodules
 
     Cleaner *Cleaning = nullptr;
 
-    StatisticsManager *Statistics = nullptr;
+    Statistics::Manager *Statistics = nullptr;
 
     sequencesMatrix *SequencesMatrix = nullptr;
 
@@ -60,13 +64,13 @@ public:
 
     int *SeqRef = nullptr;
 
-    int originalSequenNumber = 0;
+    int originalNumberOfSequences = 0;
 
-    int sequenNumber = 0;
+    int numberOfSequences = 0;
 
-    int originalResidNumber = 0;
+    int originalNumberOfResidues = 0;
 
-    int residNumber = 0;
+    int numberOfResidues = 0;
 
     bool isAligned = false;
 
@@ -78,7 +82,7 @@ public:
 
     std::string filename;
 
-    std::string aligInfo;
+    std::string alignmentInfo;
 
     /* Sequence Identities */
     float **identities = nullptr;
@@ -94,11 +98,11 @@ public:
 
 public:
 
-    newAlignment();
+    Alignment();
 
-    newAlignment(newAlignment &);
+    Alignment(Alignment &);
 
-    ~newAlignment();
+    ~Alignment();
 
     int getNumSpecies();
 
@@ -126,7 +130,7 @@ public:
 
     bool isFileAligned();
 
-    newAlignment *getTranslationCDS(newAlignment *proteinAlignment);
+    Alignment *getTranslationCDS(Alignment *proteinAlignment);
 
     bool checkCorrespondence(std::string *names, int *lenghts, int totalInputSequences, int multiple);
 
@@ -136,11 +140,11 @@ public:
 
     void printAlignmentInfo(std::ostream &output);
 
-    bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, newAlignment *proteinAlignment);
+    bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, Alignment *proteinAlignment);
 
-    bool alignmentSummaryHTML(newAlignment &_trimmedAlignment, char *destFile);
+    bool alignmentSummaryHTML(Alignment &_trimmedAlignment, char *destFile);
 
-    bool alignmentSummarySVG(newAlignment &_trimmedAlignment, char *destFile, int blocks);
+    bool alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile, int blocks);
 
     void updateSequencesAndResiduesNums(bool countSequences = true, bool countResidues = true);
 };

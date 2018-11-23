@@ -31,13 +31,13 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
 # Create a list of all common source files
 set(preview
         source/trimalManager.cpp
-        source/newAlignment.cpp
+        source/Alignment.cpp
 
-        source/Statistics/statisticsMold.cpp
-        source/Statistics/statisticsGaps.cpp
-        source/Statistics/StatisticsManager.cpp
-        source/Statistics/statisticsConservation.cpp
-        source/Statistics/statisticsConsistency.cpp
+        source/Statistics/Mold.cpp
+        source/Statistics/Gaps.cpp
+        source/Statistics/Manager.cpp
+        source/Statistics/Conservation.cpp
+        source/Statistics/Consistency.cpp
 
         source/Cleaner.cpp
         source/FormatHandling/BaseFormatHandler.cpp
@@ -48,7 +48,7 @@ set(preview
         source/utils.cpp
 
         source/reportsystem.cpp
-        source/TimerFactory.cpp)
+        source/InternalBenchmarker.cpp)
 
 # Create a list of all format states source files
 FILE (GLOB states
@@ -64,11 +64,11 @@ add_library(common OBJECT
 
 # Add the executables
 add_executable(trimal
-        source/newmain.cpp
+        source/trimAlMain.cpp
         $<TARGET_OBJECTS:common>)
 
 add_executable(readal
-        source/FormatHandling/ReadWriteMSmain.cpp
+        source/FormatHandling/readAlMain.cpp
         $<TARGET_OBJECTS:common>)
 
 
@@ -79,8 +79,6 @@ target_link_libraries(trimal m)
 target_link_libraries(readal m)
 
 
-
-
 # Create a header that includes all the ReadWrite States headers
 # It also implements the ReadWriteMS constructor
 #   This implementation adds all the previous formats/States to the machine.
@@ -89,6 +87,8 @@ target_link_libraries(readal m)
 #   1.- Have the same Class Name as File Name (without the extension)
 #   2.- Name must end with '_state'
 #   3.- Be placed on ReadWriteMS folder
+
+file(REMOVE "include/FormatHandling/formats_header.h")
 
 message(
 "-- Generating include/ReadWriteMS/formats_header.h related to format handling.
@@ -105,7 +105,7 @@ FILE (GLOB stateheaders
 
 # Override formats_header, 
 #       add a header that informs this is auto-generated code
-file(WRITE include/ReadWriteMS/formats_header.h 
+file(WRITE include/FormatHandling/formats_header.h 
 "// CMake generated code
 // Do not manually modify this file
 

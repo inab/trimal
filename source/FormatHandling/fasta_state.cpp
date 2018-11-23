@@ -14,10 +14,10 @@ int fasta_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* fasta_state::LoadAlignment(std::string& filename)
+Alignment* fasta_state::LoadAlignment(std::string& filename)
 {
     /* FASTA file format parser */
-    newAlignment* _alignment = new newAlignment();
+    Alignment* _alignment = new Alignment();
     char *str, *line = nullptr;
     std::ifstream file;
     int i;
@@ -33,7 +33,7 @@ newAlignment* fasta_state::LoadAlignment(std::string& filename)
     _alignment->filename.append(";");
 
     /* Compute how many sequences are in the input alignment */
-    _alignment->sequenNumber = 0;
+    _alignment->numberOfSequences = 0;
     while(!file.eof()) {
 
         /* Deallocate previously used dinamic memory */
@@ -51,7 +51,7 @@ newAlignment* fasta_state::LoadAlignment(std::string& filename)
 
         /* If a sequence name flag is detected, increase sequences counter */
         if(str[0] == '>')
-            _alignment->sequenNumber++;
+            _alignment->numberOfSequences++;
     }
 
     /* Finish to preprocess the input file. */
@@ -59,11 +59,11 @@ newAlignment* fasta_state::LoadAlignment(std::string& filename)
     file.seekg(0);
 
     /* Allocate memory for the input alignmet */
-    _alignment->seqsName  = new std::string[_alignment->sequenNumber];
-    _alignment->sequences = new std::string[_alignment->sequenNumber];
-    _alignment->seqsInfo  = nullptr;//new std::string[_alignment->sequenNumber];
+    _alignment->seqsName  = new std::string[_alignment->numberOfSequences];
+    _alignment->sequences = new std::string[_alignment->numberOfSequences];
+    _alignment->seqsInfo  = nullptr;//new std::string[_alignment->numberOfSequences];
 
-    for(i = -1; (i < _alignment->sequenNumber) && (!file.eof()); ) {
+    for(i = -1; (i < _alignment->numberOfSequences) && (!file.eof()); ) {
 
         /* Deallocate previously used dinamic memory */
         delete [] line;
@@ -110,12 +110,12 @@ newAlignment* fasta_state::LoadAlignment(std::string& filename)
         
     /* Check the matrix's content */
     _alignment->fillMatrices(false);
-    _alignment->originalSequenNumber = _alignment-> sequenNumber;
-    _alignment->originalResidNumber = _alignment->residNumber;
+    _alignment->originalNumberOfSequences = _alignment-> numberOfSequences;
+    _alignment->originalNumberOfResidues = _alignment->numberOfResidues;
     return _alignment; 
 }
 
-bool fasta_state::SaveAlignment(newAlignment* alignment,
+bool fasta_state::SaveAlignment(Alignment* alignment,
                                 std::ostream* output,
                                 std::string* FileName)
 {
@@ -126,12 +126,12 @@ bool fasta_state::SaveAlignment(newAlignment* alignment,
     bool lastcharIsnewline = false;
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new std::string[alignment->originalSequenNumber];
+    tmpMatrix = new std::string[alignment->originalNumberOfSequences];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->originalSequenNumber; i++)
+    for(i = 0; i < alignment->originalNumberOfSequences; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
@@ -140,7 +140,7 @@ bool fasta_state::SaveAlignment(newAlignment* alignment,
      * 10 characters) or not, get maximum sequence name length. Consider those
      * cases when the user has asked to keep original sequence header */
     maxLongName = 0;
-    for(i = 0; i < alignment->originalSequenNumber; i++)
+    for(i = 0; i < alignment->originalNumberOfSequences; i++)
     {
         if (alignment->saveSequences && alignment->saveSequences[i] == -1)
             continue;
@@ -151,7 +151,7 @@ bool fasta_state::SaveAlignment(newAlignment* alignment,
     }
 
     /* Print alignment. First, sequences name id and then the sequences itself */
-    for(i = 0; i < alignment->originalSequenNumber; i++) {
+    for(i = 0; i < alignment->originalNumberOfSequences; i++) {
         
         if (alignment->saveSequences != nullptr &&
             alignment->saveSequences[i] == -1)

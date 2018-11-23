@@ -51,9 +51,9 @@ int mega_sequential_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-newAlignment* mega_sequential_state::LoadAlignment(std::string& filename)
+Alignment* mega_sequential_state::LoadAlignment(std::string& filename)
 {
-    newAlignment * _alignment = new newAlignment();
+    Alignment * _alignment = new Alignment();
    /* MEGA sequential file format parser */
 
     char *frag = nullptr, *str = nullptr, *line = nullptr;
@@ -122,7 +122,7 @@ newAlignment* mega_sequential_state::LoadAlignment(std::string& filename)
 
             /* If FORMAT label is found, try to get some details from input file */
         else if(!strcmp(str, "FORMAT"))
-            _alignment -> aligInfo.append(line, strlen(line));
+            _alignment -> alignmentInfo.append(line, strlen(line));
     }
 
     /* Deallocate local memory */
@@ -139,7 +139,7 @@ newAlignment* mega_sequential_state::LoadAlignment(std::string& filename)
 
         /* If current line starts by a # means that it is a sequence name */
         if (!strncmp(line, "#", 1))
-            _alignment->sequenNumber++;
+            _alignment->numberOfSequences++;
 
         /* Destroy previously allocated memory */
         delete [] line;
@@ -154,8 +154,8 @@ newAlignment* mega_sequential_state::LoadAlignment(std::string& filename)
     file.seekg(0);
 
     /* Allocate memory */
-    _alignment->seqsName  = new std::string[_alignment->sequenNumber];
-    _alignment->sequences = new std::string[_alignment->sequenNumber];
+    _alignment->seqsName  = new std::string[_alignment->numberOfSequences];
+    _alignment->sequences = new std::string[_alignment->numberOfSequences];
 
     /* Skip first line */
     line = utils::readLine(file);
@@ -243,12 +243,12 @@ newAlignment* mega_sequential_state::LoadAlignment(std::string& filename)
 
     /* Check the matrix's content */
     _alignment->fillMatrices(true);
-    _alignment->originalSequenNumber = _alignment-> sequenNumber;
-    _alignment->originalResidNumber = _alignment->residNumber;
+    _alignment->originalNumberOfSequences = _alignment-> numberOfSequences;
+    _alignment->originalNumberOfResidues = _alignment->numberOfResidues;
     return _alignment;
 }
 
-bool mega_sequential_state::SaveAlignment(newAlignment* alignment, std::ostream* output, std::string* FileName)
+bool mega_sequential_state::SaveAlignment(Alignment* alignment, std::ostream* output, std::string* FileName)
 {
     /* Generate output alignment in MEGA format */
 
@@ -263,12 +263,12 @@ bool mega_sequential_state::SaveAlignment(newAlignment* alignment, std::ostream*
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new std::string[alignment->originalSequenNumber];
+    tmpMatrix = new std::string[alignment->originalNumberOfSequences];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->originalSequenNumber; i++)
+    for(i = 0; i < alignment->originalNumberOfSequences; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
@@ -288,11 +288,11 @@ bool mega_sequential_state::SaveAlignment(newAlignment* alignment, std::ostream*
         *output << "!Format DataType=protein ";
 
     /* Print number of sequences and alignment length */
-    *output << "NSeqs=" << alignment->sequenNumber << " Nsites=" << alignment->residNumber
+    *output << "NSeqs=" << alignment->numberOfSequences << " Nsites=" << alignment->numberOfResidues
          << " indel=- CodeTable=Standard;\n";
 
     /* Print sequences name and sequences divided into blocks of 50 residues */
-    for(i = 0; i < alignment->originalSequenNumber; i++) {
+    for(i = 0; i < alignment->originalNumberOfSequences; i++) {
         if (alignment->saveSequences[i] != -1)
         {
             *output << "\n#" << alignment->seqsName[i] << "\n";
