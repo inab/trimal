@@ -221,7 +221,7 @@ namespace Statistics {
                     "bool verbosity) ");
 
         int *numResiduesAlig, *correspNames, *columnSeqMatrix, *columnSeqMatrixAux;
-        int i, j, k, l, m, numSeqs, pairRes, hits, alignmentIndex = 0;
+        int i, k, l, m, numSeqs, pairRes, hits, alignmentIndex = 0;
         float max = 0, value = 0, **vectHits;
         bool appearErrors = false;
         string *names;
@@ -260,20 +260,22 @@ namespace Statistics {
 
         if (!appearErrors) {
 
+            float max = 0;
+
             // Changes the order in sequences number matrix
             // according to the order in the selected alignment
-            for (i = 1; ((i < numAlignments) && (!appearErrors)); i++) {
+            for (i = 1; i < numAlignments; i++) {
                 vectAlignments[i]->getSequences(names);
                 vectAlignments[0]->getSequenceNameOrder(names, correspNames);
                 vectAlignments[i]->SequencesMatrix->setOrder(correspNames);
             }
 
             // Get back the residues number for each alignment
-            for (i = 0; ((i < numAlignments) && (!appearErrors)); i++)
+            for (i = 0; i < numAlignments; i++)
                 numResiduesAlig[i] = vectAlignments[i]->getNumAminos();
 
             // Start the comparison among the alignments
-            for (i = 0; ((i < numAlignments) && (!appearErrors)); i++) {
+            for (i = 0; i < numAlignments; i++) {
                 value = 0;
                 // If it's necessary, we print some information
                 if (verbosity)
@@ -283,7 +285,7 @@ namespace Statistics {
                 vectHits[i] = new float[numResiduesAlig[i]];
                 utils::initlVect(vectHits[i], numResiduesAlig[i], 0);
 
-                for (j = 0, pairRes = 0, hits = 0; j < numResiduesAlig[i]; j++, pairRes = 0, hits = 0) {
+                for (int j = 0, pairRes = 0, hits = 0; j < numResiduesAlig[i]; j++, pairRes = 0, hits = 0) {
 
 
                     // Get back each column from the current selected
@@ -353,7 +355,7 @@ namespace Statistics {
 
             // The method returns a vector with the consistency
             // value for each column in the selected alignment
-            if ((columnsValue != nullptr) && (!appearErrors)) {
+            if (columnsValue != nullptr) {
                 utils::initlVect(columnsValue, numResiduesAlig[alignmentIndex], -1);
                 for (i = 0; i < numResiduesAlig[alignmentIndex]; i++)
                     columnsValue[i] = vectHits[alignmentIndex][i];
@@ -361,7 +363,7 @@ namespace Statistics {
         }
 
         // Deallocate memory
-        for (i = 0; ((i < numAlignments) && (!appearErrors)); i++)
+        for (i = 0; i < numAlignments; i++)
             delete[] vectHits[i];
 
         delete[] vectHits;
