@@ -10,8 +10,7 @@ It is strutured to work with 3 calls:
 - trimAlManager::perform() : \n
     To perform the logic requested by passed arguments.
 
-
-Main class of trimAl: It parses arguments and performs the algorithm requested on them.
+See @ref main
 */
 
 /**

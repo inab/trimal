@@ -1,4 +1,4 @@
-/*! \page trimAl Data Flow
+/*! \page dataflow Data Flow
 
 \section ResTrim Residue Trimming
     This step allows to trim the alignment by removing columns.\n

@@ -1,4 +1,4 @@
-/*! \page trimAl Data Flow
+/*! \page dataflow Data Flow
 
 \section output Output
     This step does not perform any trimming, but is used to report the information obtained to the user.

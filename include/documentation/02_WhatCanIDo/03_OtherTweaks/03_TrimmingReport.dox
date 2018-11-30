@@ -8,7 +8,7 @@
 @endhtmlonly
 
 <div name="htmlout" style="display:none; width: -moz-fit-content">
-@htmlinclude 03_SVG_out.html
+@htmlinclude 03_HTML_out.html
 </div>
 
 @htmlonly

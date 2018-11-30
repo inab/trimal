@@ -30,7 +30,7 @@ The simplest way to compile this program is:
 
 This program is free software: you can redistribute it and/or modify it under the terms of the <b>GNU General Public License</b> as published by the Free Software Foundation, the last available version.
 
-\subsection basic_usage_r Basic Usage
+\section basic_usage_r Basic Usage
 
 	readal -in <inputfiles> -out <pattern> -format [formats] [options].
 
@@ -53,7 +53,7 @@ This program is free software: you can redistribute it and/or modify it under th
 	-shortNames          Shortens the names so they fit on certain formats
 	-keepHeaders         Keeps the headers of the original format if it had any
 
-\subsection legacy_opt_r Legacy Options
+\section legacy_opt_r Legacy Options
 Take in mind that this arguments may be discontinued any time.
 
 	-onlyseqs            Generate output with only residues from input file
@@ -75,7 +75,7 @@ Take in mind that this arguments may be discontinued any time.
 	-phylip3.2           Output file in PHYLIP3.2 format
 	-phylip3.2_m10       Output file in PHYLIP3.2 format. Sequences name up to 10 characters.
 
-\subsection examples_r Examples of use
+\section examples_r Examples of use
 
 	readal -in ./dataset/AA1.fas -out ./dataset/[in].output.[extension] -formats clustal
 	  -> Will produce ./dataset/AA1.output.clw

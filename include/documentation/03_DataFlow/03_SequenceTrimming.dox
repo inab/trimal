@@ -1,4 +1,4 @@
-/*! \page trimAl Data Flow
+/*! \page dataflow Data Flow
 
 \section SeqTrim Sequence Trimming
     This steps allows to trim the alignment by removing sequences.\n

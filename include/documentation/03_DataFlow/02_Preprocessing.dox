@@ -1,4 +1,4 @@
-/*! \page trimAl Data Flow
+/*! \page dataflow Data Flow
 
 \section Preprocessing Preprocessing
     This step allows to obtain an alignment from different sources instead of providing one with the '-in' argument:\n
