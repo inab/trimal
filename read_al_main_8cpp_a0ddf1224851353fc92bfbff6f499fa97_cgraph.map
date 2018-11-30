@@ -1,0 +1,22 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title=" " alt="" coords="5,216,56,243"/>
+<area shape="rect" id="node2" href="$read_al_main_8cpp.html#a3562411154041b009ea0e17e0014ad8b" title=" " alt="" coords="162,5,282,32"/>
+<area shape="rect" id="node3" href="$class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="125,56,319,83"/>
+<area shape="rect" id="node5" href="$class_format_manager.html#a70bde367b5bb05bcc6c200f6981a3eaa" title="Function to obtain the format name of a given file." alt="" coords="104,157,340,184"/>
+<area shape="rect" id="node7" href="$class_format_manager.html#a8e4018869bcf89ebee07b1356c2e36f6" title="Function that loads an alignment given a file path. It automatically detects the format of the file." alt="" coords="121,107,323,133"/>
+<area shape="rect" id="node9" href="$class_format_manager.html#a3dfaafe1cfe8904405e0453f4062485e" title="Function that takes multiple files, loads them and saves in a cumulus of formats, using an outPattern..." alt="" coords="123,209,321,250"/>
+<area shape="rect" id="node13" href="$read_al_main_8cpp.html#a2a0e843767aeea4f433a28b9c54f573a" title=" " alt="" coords="195,448,249,475"/>
+<area shape="rect" id="node16" href="$read_al_main_8cpp.html#a332d5917e1a0aa11a7f05bba786aeb33" title=" " alt="" coords="163,499,281,525"/>
+<area shape="rect" id="node17" href="$class_alignment.html#a98c8963cf4276e71829f9725e0d26020" title="Print information about sequences number, average sequence length, maximum and minimum sequences leng..." alt="" coords="125,347,319,373"/>
+<area shape="rect" id="node20" href="$class_format_manager.html#ac2c4667aceae0c08c24e51b2216ccc44" title="Function to save an alignment to a file. It searches among the available_states one that can write th..." alt="" coords="119,275,325,301"/>
+<area shape="rect" id="node4" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type." alt="" coords="408,33,584,60"/>
+<area shape="rect" id="node6" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="415,150,577,191"/>
+<area shape="rect" id="node8" href="$class_base_format_handler.html#a9bc237244e07e621a6089d55a3e96417" title="Function to load a file in the current format and return an alignment object." alt="" coords="423,85,569,126"/>
+<area shape="rect" id="node10" href="$namespaceutils.html#a40640e1942f00797e9fe8284e8fbdb14" title="Maximum of two numbers method." alt="" coords="457,317,535,344"/>
+<area shape="rect" id="node11" href="$namespaceutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" title="Function that replaces a substring with another substring in a string. It makes a copy of the origina..." alt="" coords="428,267,564,293"/>
+<area shape="rect" id="node12" href="$namespaceutils.html#a6000246220e801bf6b1e6a553d7af13a" title="Function that replaces a substring with another substring in a string. It does not make a copy of the..." alt="" coords="406,216,586,243"/>
+<area shape="rect" id="node14" href="$class_format_manager.html#a97119fa57eee51f9220ccd34b1958b87" title="Function to obtain all format names available by this object that can load an alignment." alt="" coords="388,470,604,511"/>
+<area shape="rect" id="node15" href="$class_format_manager.html#a2ea1526f2ec660341149098a34b06b1a" title="Function to obtain all format names available by this object that can save an alignment." alt="" coords="407,535,585,577"/>
+<area shape="rect" id="node18" href="$namespaceutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f" title="Minimum of two numbers method." alt="" coords="459,368,533,395"/>
+<area shape="rect" id="node19" href="$class_alignment.html#a214f498da34cb67cf45caf9569e03173" title="isAligned getter." alt="" coords="415,419,577,445"/>
+</map>

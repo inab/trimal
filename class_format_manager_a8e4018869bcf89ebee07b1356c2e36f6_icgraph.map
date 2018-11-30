@@ -1,0 +1,11 @@
+<map id="FormatManager::loadAlignment" name="FormatManager::loadAlignment">
+<area shape="rect" id="node1" title="Function that loads an alignment given a file path. It automatically detects the format of the file." alt="" coords="872,125,1075,151"/>
+<area shape="rect" id="node2" href="$classtrim_al_manager.html#ae49bc2cb7f90419296da65a23df39c8d" title="Method to parse the backtranslation argument." alt="" coords="405,5,547,47"/>
+<area shape="rect" id="node5" href="$classtrim_al_manager.html#a63dad1ad106b0fa09351cd5981b37aeb" title="Method to parse the force select argument." alt="" coords="405,71,547,112"/>
+<area shape="rect" id="node6" href="$classtrim_al_manager.html#a9580aa82de8aba6794647a36c0416a33" title="Method to parse the input file argument." alt="" coords="639,125,824,151"/>
+<area shape="rect" id="node7" href="$read_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="706,175,757,202"/>
+<area shape="rect" id="node8" href="$classstatistics_1_1_consistency.html#a2e281b6a138074a23ebf261731e3aa27" title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue..." alt="" coords="653,227,809,268"/>
+<area shape="rect" id="node3" href="$classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" title="Method to parse arguments into usable structure in trimal." alt="" coords="104,107,313,134"/>
+<area shape="rect" id="node4" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,107,56,134"/>
+<area shape="rect" id="node9" href="$classtrim_al_manager.html#a12b7cef964ef258fe7621da44867c51f" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation..." alt="" coords="361,209,591,235"/>
+</map>

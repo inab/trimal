@@ -1,0 +1,17 @@
+<map id="statistics::Similarity::isSimMatrixDef" name="statistics::Similarity::isSimMatrixDef">
+<area shape="rect" id="node1" title="Returns if a similarity matrix is being used or not." alt="" coords="1500,125,1637,166"/>
+<area shape="rect" id="node2" href="$classstatistics_1_1_manager.html#a92505ca5aedc5b45c4300a0e8a7d1e17" title="Method to handle similarity stat calculation It checks if the similarity submodule has been created,..." alt="" coords="1261,125,1452,166"/>
+<area shape="rect" id="node3" href="$class_cleaner.html#a4718e31c0183b5a98751d77479faacf0" title="Method to trim an alignment based on the similarity and gaps distribution values. ." alt="" coords="1065,5,1171,32"/>
+<area shape="rect" id="node9" href="$class_cleaner.html#a6727a235afa29f08a50716f28fa5c8fc" title="Method to clean an alignment. It carries out strict and strictplus. The method:" alt="" coords="1023,107,1213,133"/>
+<area shape="rect" id="node11" href="$class_cleaner.html#a9cdbd6ebf78a284dd065b31319795b0c" title="Method to trim an alignment based on the similarity distribution values." alt="" coords="1027,56,1209,83"/>
+<area shape="rect" id="node12" href="$classstatistics_1_1_manager.html#a080c687f8f355900511485eeec32a659" title="Wrapper to Statistics::Similarity::printConservationAcl() It calls to calculateConservationStats() to..." alt="" coords="1025,288,1211,344"/>
+<area shape="rect" id="node14" href="$classstatistics_1_1_manager.html#aa20cfb477826035386ea988e3706b09a" title="Wrapper to Statistics::Similarity::printGapsTotal() It calls to calculateConservationStats() to make ..." alt="" coords="1025,208,1211,264"/>
+<area shape="rect" id="node15" href="$classtrim_al_manager.html#a63d5bec0938516a2129ccb04276b93d9" title=" " alt="" coords="556,150,691,191"/>
+<area shape="rect" id="node4" href="$classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" title="Method to trim the alignment using non automatic methods:" alt="" coords="758,41,961,82"/>
+<area shape="rect" id="node5" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from." alt="" coords="551,79,696,121"/>
+<area shape="rect" id="node6" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed." alt="" coords="104,152,263,179"/>
+<area shape="rect" id="node8" href="$classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" title=" " alt="" coords="311,127,503,153"/>
+<area shape="rect" id="node7" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,152,56,179"/>
+<area shape="rect" id="node10" href="$classtrim_al_manager.html#a69082911b30a1bd12395bb235bc18a34" title="Method to trim the alignment using automatic or semi&#45;automatic methods:" alt="" coords="744,107,975,133"/>
+<area shape="rect" id="node13" href="$classtrim_al_manager.html#afc48b86f5ae35b9a5e721b65c58bf610" title="Method to print statistics requested." alt="" coords="790,221,929,262"/>
+</map>

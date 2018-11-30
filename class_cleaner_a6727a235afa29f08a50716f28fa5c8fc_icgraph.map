@@ -1,0 +1,8 @@
+<map id="Cleaner::cleanCombMethods" name="Cleaner::cleanCombMethods">
+<area shape="rect" id="node1" title="Method to clean an alignment. It carries out strict and strictplus. The method:" alt="" coords="1023,13,1213,39"/>
+<area shape="rect" id="node2" href="$classtrim_al_manager.html#a69082911b30a1bd12395bb235bc18a34" title="Method to trim the alignment using automatic or semi&#45;automatic methods:" alt="" coords="744,13,975,39"/>
+<area shape="rect" id="node3" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from." alt="" coords="551,5,696,47"/>
+<area shape="rect" id="node4" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed." alt="" coords="104,13,263,39"/>
+<area shape="rect" id="node6" href="$classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" title=" " alt="" coords="311,38,503,65"/>
+<area shape="rect" id="node5" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
+</map>

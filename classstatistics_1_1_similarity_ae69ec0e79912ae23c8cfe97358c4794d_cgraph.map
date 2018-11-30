@@ -1,0 +1,16 @@
+<map id="statistics::Similarity::calculateVectors" name="statistics::Similarity::calculateVectors">
+<area shape="rect" id="node1" title="Method to calculate the similarity values of a alignment matrix." alt="" coords="5,156,143,197"/>
+<area shape="rect" id="node2" href="$classstatistics_1_1_manager.html#a1969a416d3020d25daa56de6c5e305db" title="Method to handle gap stat calculation It checks if the gaps submodule has been created,..." alt="" coords="207,123,345,164"/>
+<area shape="rect" id="node8" href="$classstatistics_1_1_similarity.html#a75bd235b3207235eefa7b52dff063c76" title="Computes the matrix identity between alignment&#39;s columns." alt="" coords="195,5,357,47"/>
+<area shape="rect" id="node9" href="$class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="413,17,606,43"/>
+<area shape="rect" id="node11" href="$classsimilarity_matrix.html#aef258a851d1a443a39597060420d8908" title="Method to get the similarity distance between two residues, A and B Characters provided must be both ..." alt="" coords="415,254,603,281"/>
+<area shape="rect" id="node12" href="$classstatistics_1_1_gaps.html#ab5b60db326475f8adc68b130e22b3963" title=" " alt="" coords="191,188,361,229"/>
+<area shape="rect" id="node14" href="$namespaceutils.html#a6286fde6f4dd58ef0cfa9d55341b72f8" title=" " alt="" coords="226,305,326,331"/>
+<area shape="rect" id="node3" href="$classstatistics_1_1_gaps.html#aee36b772767467cdba2061df2305e85d" title=" " alt="" coords="409,137,609,163"/>
+<area shape="rect" id="node7" href="$classstatistics_1_1_gaps.html#aa3526494d5100e062daa4afba755d0b1" title=" " alt="" coords="421,71,598,112"/>
+<area shape="rect" id="node4" href="$namespaceutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization." alt="" coords="695,162,796,189"/>
+<area shape="rect" id="node5" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="664,217,827,259"/>
+<area shape="rect" id="node6" href="$namespaceutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method." alt="" coords="695,111,796,138"/>
+<area shape="rect" id="node10" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type." alt="" coords="657,17,833,43"/>
+<area shape="rect" id="node13" href="$classstatistics_1_1_gaps.html#ad812a924cf5e3f900aad3ed4a9664300" title=" " alt="" coords="421,188,598,229"/>
+</map>

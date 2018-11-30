@@ -1,0 +1,5 @@
+<map id="trimAlManager::check_output_format" name="trimAlManager::check_output_format">
+<area shape="rect" id="node1" title="Method to check if an output format has been given. If no output format has been given,..." alt="" coords="5,5,155,47"/>
+<area shape="rect" id="node2" href="$class_format_manager.html#a70bde367b5bb05bcc6c200f6981a3eaa" title="Function to obtain the format name of a given file." alt="" coords="203,13,439,39"/>
+<area shape="rect" id="node3" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="487,5,649,47"/>
+</map>

@@ -1,4 +1,6 @@
 <map id="trimAlManager::check_automated_methods_incompatibilities" name="trimAlManager::check_automated_methods_incompatibilities">
-<area shape="rect" id="node2" href="$classtrim_al_manager.html#a16d2da3f90cfe965bea5f1da1360e17a" title="Method to check argument incompatibilities. Take in mind that an incompatibility is between two argum..." alt="" coords="300,5,491,47"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="539,13,761,39"/>
+<area shape="rect" id="node1" title="Method to check incompatibilities related to automated trimming methods." alt="" coords="613,5,860,47"/>
+<area shape="rect" id="node2" href="$classtrim_al_manager.html#a16d2da3f90cfe965bea5f1da1360e17a" title="Method to check argument incompatibilities. Take in mind that an incompatibility is between two argum..." alt="" coords="375,5,565,47"/>
+<area shape="rect" id="node3" href="$classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="104,13,327,39"/>
+<area shape="rect" id="node4" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
 </map>

@@ -1,3 +1,26 @@
+/*
+@ @licstart  The following is the entire license notice for the
+JavaScript code in this file.
+
+Copyright (C) 1997-2017 by Dimitri van Heesch
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+@licend  The above is the entire license notice
+for the JavaScript code in this file
+*/
 var NAVTREE =
 [
   [ "trimAl", "index.html", [
@@ -10,75 +33,60 @@ var NAVTREE =
       [ "Understanding the code", "index.html#trimAl_code_sec", null ],
       [ "Acknowledgments", "index.html#Acknowledgments", null ]
     ] ],
-    [ "Data Flow", "trim_al.html", [
-      [ "Data Flow", "trim_al.html#introduction_flow", null ],
-      [ "Preprocessing", "trim_al.html#Preprocessing", null ],
-      [ "Sequence Trimming", "trim_al.html#SeqTrim", null ],
-      [ "Residue Trimming", "trim_al.html#ResTrim", null ],
-      [ "Post Process", "trim_al.html#PostProcess", null ],
-      [ "Output", "trim_al.html#output", null ]
+    [ "readAl Main Page", "read_al.html", [
+      [ "Introduction", "read_al.html#introduction_sec_r", null ],
+      [ "Installation", "read_al.html#installation_sec_r", null ],
+      [ "Usage", "read_al.html#usage_sec_r", null ],
+      [ "Basic Usage", "read_al.html#basic_usage_r", null ],
+      [ "Legacy Options", "read_al.html#legacy_opt_r", null ],
+      [ "Examples of use", "read_al.html#examples_r", null ]
     ] ],
-    [ "readAl Main Page", "readal_pag.html", [
-      [ "Introduction", "readal_pag.html#introduction_sec_r", null ],
-      [ "Installation", "readal_pag.html#installation_sec_r", null ],
-      [ "Usage", "readal_pag.html#usage_sec_r", [
-        [ "BASIC USAGE", "readal_pag.html#basic_usage_r", null ],
-        [ "LEGACY OPTIONS", "readal_pag.html#legacy_opt_r", null ],
-        [ "EXAMPLES OF USE", "readal_pag.html#examples_r", null ]
-      ] ]
-    ] ],
-    [ "What can I do?", "whatcanido.html", [
-      [ "How to use", "whatcanido.html#WhatIntroduction", [
-        [ "One Multiple Sequence Alignment.", "whatcanido.html#OneMSA", null ],
-        [ "More than one Sequence Alignment.", "whatcanido.html#CompareSet", null ],
-        [ "Heuristic Trimming", "whatcanido.html#Heuristic", null ],
-        [ "Automatic Trimming", "whatcanido.html#Automatic", null ],
-        [ "Manual Trimming", "whatcanido.html#Manual", null ],
-        [ "Manual Scrapping", "whatcanido.html#Scrap", null ],
-        [ "Clustering", "whatcanido.html#Clustering", null ]
+    [ "What can I do with trimAl?", "whatcanido.html", [
+      [ "Trimming Methods", "whatcanido.html#TrimmingMethods", [
+        [ "Meta Automated Methods", "whatcanido.html#MetaAutomated", null ],
+        [ "Automated Statistical Methods", "whatcanido.html#AutomatedS", null ],
+        [ "Manual Threshold Methods", "whatcanido.html#ManualThresholds", null ],
+        [ "Manual Overlap Threshold Methods", "whatcanido.html#Overlap", null ],
+        [ "Manual Methods", "whatcanido.html#Manual", null ],
+        [ "Automated Methods", "whatcanido.html#Automated-gap", null ]
       ] ],
-      [ "Further Tweaks", "whatcanido.html#FurtherTweaks", [
-        [ "Further Tweaks: Terminal Only", "whatcanido.html#TerminalOnly", null ],
-        [ "Further Tweaks: Custom Similarity Matrix", "whatcanido.html#CustomMatrix", null ],
-        [ "Further Tweaks: Block", "whatcanido.html#Block", null ],
-        [ "Further Tweaks: Complementary Alignment", "whatcanido.html#Complementary", null ]
+      [ "Trimming Tweaks", "whatcanido.html#TrimmingTweaks", [
+        [ "Custom Matrix", "whatcanido.html#CustomMatrix", null ],
+        [ "Complementary", "whatcanido.html#Complementary", null ],
+        [ "Terminal Only", "whatcanido.html#TerminalOnly", null ],
+        [ "Block", "whatcanido.html#Block", null ],
+        [ "Clusters", "whatcanido.html#Clusters", null ],
+        [ "Max Identity", "whatcanido.html#MaxIdentity", null ],
+        [ "Compareset", "whatcanido.html#Compareset", null ],
+        [ "Minimum Alignment Conservation Threshold", "whatcanido.html#Conserve", null ]
       ] ],
-      [ "Output Tweaks", "whatcanido.html#OutputTweaks", [
-        [ "Output Tweaks: Output to file", "whatcanido.html#Out", null ],
-        [ "Output Tweaks: Multiple Formats", "whatcanido.html#Formats", null ]
-      ] ],
-      [ "Reporting Tweaks", "whatcanido.html#ReportingTweaks", [
-        [ "Reporting Tweaks: Column Numbering", "whatcanido.html#ColNum", null ],
-        [ "Reporting Tweaks: Stats", "whatcanido.html#Stats", null ],
-        [ "Reporting Tweaks: HTML and SVG Reporting", "whatcanido.html#HTMLSVG", null ]
+      [ "Other Tweaks", "whatcanido.html#otherTweaks", [
+        [ "Column Numbering", "whatcanido.html#ColNumbering", null ],
+        [ "TrimmingReport", "whatcanido.html#TrimmingReport", null ],
+        [ "Backstranslation", "whatcanido.html#Backstrans", null ]
       ] ]
     ] ],
-    [ "Todo List", "todo.html", null ],
-    [ "Classes", "annotated.html", [
-      [ "Class List", "annotated.html", "annotated_dup" ],
-      [ "Class Index", "classes.html", null ],
-      [ "Class Members", "functions.html", [
-        [ "All", "functions.html", "functions_dup" ],
-        [ "Functions", "functions_func.html", "functions_func" ],
-        [ "Variables", "functions_vars.html", null ]
-      ] ]
+    [ "Data Flow", "dataflow.html", [
+      [ "Preprocessing", "dataflow.html#Preprocessing", null ],
+      [ "Sequence Trimming", "dataflow.html#SeqTrim", null ],
+      [ "Residue Trimming", "dataflow.html#ResTrim", null ],
+      [ "Post Process", "dataflow.html#PostProcess", null ],
+      [ "Output", "dataflow.html#output", null ]
     ] ],
-    [ "Files", null, [
-      [ "File List", "files.html", "files" ],
-      [ "File Members", "globals.html", [
-        [ "All", "globals.html", null ],
-        [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ]
-      ] ]
+    [ "Documentation", null, [
+      [ "Namespaces", "namespaces.html", "namespaces" ],
+      [ "Classes", "annotated.html", "annotated" ],
+      [ "Files", "files.html", "files" ]
     ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-".html",
-"classstatistics_consistency.html#a81cae78705f7525b5cbe66390ea0c7c4",
-"classutils.html#afbd5c408c723a242c2d536e6638b6ff7"
+"3_810_82_2_compiler_id_c_2_c_make_c_compiler_id_8c.html",
+"classreporting_1_1report_wrapper.html#acb21eabb6708fd07fae8a5702fc2af64",
+"classtrim_al_manager.html#aafe4a10c083c5035211661e39071ab27",
+"reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faeb5e16bb2081da4d5c534060df5005aa"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

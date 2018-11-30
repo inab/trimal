@@ -1,4 +1,5 @@
 <map id="trimAlManager::check_backtranslations" name="trimAlManager::check_backtranslations">
-<area shape="rect" id="node2" href="$classnew_alignment.html#ab865e218a05742c00d604f4a71ce9e10" title="isAligned getter. " alt="" coords="203,5,389,32"/>
-<area shape="rect" id="node3" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="219,57,373,98"/>
+<area shape="rect" id="node1" title="Method to check backtranslation needs." alt="" coords="5,27,155,69"/>
+<area shape="rect" id="node2" href="$class_alignment.html#a214f498da34cb67cf45caf9569e03173" title="isAligned getter." alt="" coords="203,5,365,32"/>
+<area shape="rect" id="node3" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="203,57,365,98"/>
 </map>

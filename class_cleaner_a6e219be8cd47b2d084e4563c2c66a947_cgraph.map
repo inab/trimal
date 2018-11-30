@@ -1,0 +1,6 @@
+<map id="Cleaner::selectMethod" name="Cleaner::selectMethod">
+<area shape="rect" id="node1" title="Method that selects the best cleaning method based on statistics of the alignment." alt="" coords="5,5,159,32"/>
+<area shape="rect" id="node2" href="$class_cleaner.html#a65d829578be97c192561a129435b3c58" title="Method to calculate identities between the sequences from the alignment. See Alignment::identities." alt="" coords="207,5,400,32"/>
+<area shape="rect" id="node3" href="$class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="448,5,641,32"/>
+<area shape="rect" id="node4" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type." alt="" coords="689,5,865,32"/>
+</map>

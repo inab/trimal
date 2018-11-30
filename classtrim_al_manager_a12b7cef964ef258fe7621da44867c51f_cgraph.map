@@ -1,0 +1,22 @@
+<map id="trimAlManager::performCompareset" name="trimAlManager::performCompareset">
+<area shape="rect" id="node1" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation..." alt="" coords="5,224,235,251"/>
+<area shape="rect" id="node2" href="$classstatistics_1_1_consistency.html#a2e281b6a138074a23ebf261731e3aa27" title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue..." alt="" coords="283,217,439,258"/>
+<area shape="rect" id="node3" href="$namespaceutils.html#ae9637f7928b61ba73fd10daf132bc593" title="String comparing method." alt="" coords="553,5,657,32"/>
+<area shape="rect" id="node4" href="$class_format_manager.html#a8e4018869bcf89ebee07b1356c2e36f6" title="Function that loads an alignment given a file path. It automatically detects the format of the file." alt="" coords="503,56,706,83"/>
+<area shape="rect" id="node6" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="789,99,951,141"/>
+<area shape="rect" id="node7" href="$class_alignment.html#abe1ee0139489feb6a5df99361e8dc0a7" title="Residues number getter. It counts gaps as residue." alt="" coords="781,536,959,563"/>
+<area shape="rect" id="node8" href="$class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="508,553,701,580"/>
+<area shape="rect" id="node10" href="$classstatistics_1_1_consistency.html#a35c4f5aab5ad2e8d4722f07b17b9dbd2" title="Method to compare a set of alignments to select the most consistent one respect the others...." alt="" coords="527,275,683,317"/>
+<area shape="rect" id="node18" href="$classstatistics_1_1_consistency.html#a12d0b624abec361767bd3a6001998f02" title="Method to obtain the consistency values vector for a given alignment against a set of alignments with..." alt="" coords="527,341,683,382"/>
+<area shape="rect" id="node19" href="$classstatistics_1_1_consistency.html#a6fe619f559c7271eedd869581684f479" title="Applies a new window to the alignment." alt="" coords="527,158,683,199"/>
+<area shape="rect" id="node20" href="$class_format_manager.html#a70bde367b5bb05bcc6c200f6981a3eaa" title="Function to obtain the format name of a given file." alt="" coords="487,224,723,251"/>
+<area shape="rect" id="node5" href="$class_base_format_handler.html#a9bc237244e07e621a6089d55a3e96417" title="Function to load a file in the current format and return an alignment object." alt="" coords="797,34,943,75"/>
+<area shape="rect" id="node9" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type." alt="" coords="782,587,958,613"/>
+<area shape="rect" id="node11" href="$namespaceutils.html#a40640e1942f00797e9fe8284e8fbdb14" title="Maximum of two numbers method." alt="" coords="831,165,909,192"/>
+<area shape="rect" id="node12" href="$class_alignment.html#a66fdd6d16ef1ccb5e8da24c6e20feca7" title="Number of sequences getter." alt="" coords="779,368,961,395"/>
+<area shape="rect" id="node13" href="$class_alignment.html#ab44caa194f61bbbabf7572f3a70cf2fc" title="Getter for the sequences names." alt="" coords="785,419,955,445"/>
+<area shape="rect" id="node14" href="$class_alignment.html#a436ad8aea24b90789806a981e66da83f" title="Method to map two sets of sequences, own and external. The method accepts a vector of names,..." alt="" coords="771,470,969,511"/>
+<area shape="rect" id="node15" href="$classsequences_matrix.html#a8b3882d2dcc73938707486c189908abf" title="Method that reorders the stored sequences with a given order list." alt="" coords="781,216,959,243"/>
+<area shape="rect" id="node16" href="$namespaceutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization." alt="" coords="819,267,921,293"/>
+<area shape="rect" id="node17" href="$classsequences_matrix.html#a2954781bf8e8fd338714246fd10bae88" title="Method to get a column out of the matrix." alt="" coords="774,317,966,344"/>
+</map>
