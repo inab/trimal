@@ -1,10 +1,10 @@
 #include "InternalBenchmarker.h"
-#include "../include/reportsystem.h"
+#include "reportsystem.h"
 
 
-__internalReport::__reportSystem debug = __internalReport::__reportSystem();
+reporting::reportManager debug = reporting::reportManager();
 
-const std::map<InfoCode, const char *> __internalReport::__reportSystem::InfoMessages =
+const std::map<InfoCode, const char *> reporting::reportManager::InfoMessages =
         {
                 {InfoCode::CuttingSequence,
                         "Cutting sequence \"[tag]\" at first appearance of stop codon \"[tag]\""
@@ -16,7 +16,7 @@ const std::map<InfoCode, const char *> __internalReport::__reportSystem::InfoMes
                                 " when using -compareset option"},
         };
 
-const std::map<WarningCode, const char *> __internalReport::__reportSystem::WarningMessages =
+const std::map<WarningCode, const char *> reporting::reportManager::WarningMessages =
         {
                 {WarningCode::RemovingOnlyGapsSequence,
                         "Removing sequence '[tag]' composed only by gaps"},
@@ -45,7 +45,7 @@ const std::map<WarningCode, const char *> __internalReport::__reportSystem::Warn
 
         };
 
-const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorMessages =
+const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages =
         {
                 {ErrorCode::AlignmentNotLoaded,
                         "Alignment not loaded: \" [tag] \" Check the file's content"},
@@ -78,10 +78,10 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
                         "The consistency threshold value should be a positive real number between 0 and 1"},
 
                 {ErrorCode::ConservationThresholdOutOfRange,
-                        "The conservation threshold value should be between 0 and 100"},
+                        "The similarity threshold value should be between 0 and 100"},
 
                 {ErrorCode::ConservationThresholdNotRecognized,
-                        "The conservation threshold value should be a positive real number between 0 and 100"},
+                        "The similarity threshold value should be a positive real number between 0 and 100"},
 
                 {ErrorCode::ResidueOverlapOutOfRange,
                         "The residue overlap value should be between 0 and 100"},
@@ -340,10 +340,10 @@ const std::map<ErrorCode, const char *> __internalReport::__reportSystem::ErrorM
 
         };
 
-void __internalReport::__reportSystem::PrintCodesAndMessages() {
+void reporting::reportManager::PrintCodesAndMessages() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void __internalReport::__reportSystem::PrintCodesAndMessages() ");
+    StartTiming("void reporting::reportManager::PrintCodesAndMessages() ");
     switch (Level) {
         case VerboseLevel::NONE:
             std::cout << "[VerboseLevel] None" << std::endl;
@@ -372,10 +372,10 @@ void __internalReport::__reportSystem::PrintCodesAndMessages() {
     }
 }
 
-void __internalReport::__reportSystem::report(ErrorCode message, std::string *vars) {
+void reporting::reportManager::report(ErrorCode message, std::string *vars) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void __internalReport::__reportSystem::report(ErrorCode message, std::string *vars) ");
+    StartTiming("void reporting::reportManager::report(ErrorCode message, std::string *vars) ");
     if (Level > VerboseLevel::ERROR) {
         if (vars != nullptr)
             delete[] vars;
@@ -401,10 +401,10 @@ void __internalReport::__reportSystem::report(ErrorCode message, std::string *va
     }
 }
 
-void __internalReport::__reportSystem::report(ErrorCode message, char *vars) {
+void reporting::reportManager::report(ErrorCode message, char *vars) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void __internalReport::__reportSystem::report(ErrorCode message, char *vars) ");
+    StartTiming("void reporting::reportManager::report(ErrorCode message, char *vars) ");
     if (Level > VerboseLevel::ERROR) return;
 
     if (vars == nullptr) {
@@ -426,10 +426,10 @@ void __internalReport::__reportSystem::report(ErrorCode message, char *vars) {
 
 }
 
-void __internalReport::__reportSystem::report(WarningCode message, std::string *vars) {
+void reporting::reportManager::report(WarningCode message, std::string *vars) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void __internalReport::__reportSystem::report(WarningCode message, std::string *vars) ");
+    StartTiming("void reporting::reportManager::report(WarningCode message, std::string *vars) ");
     if (Level > VerboseLevel::WARNING) {
         if (vars != nullptr)
             delete[] vars;
@@ -455,10 +455,10 @@ void __internalReport::__reportSystem::report(WarningCode message, std::string *
     }
 }
 
-void __internalReport::__reportSystem::report(WarningCode message, char *vars) {
+void reporting::reportManager::report(WarningCode message, char *vars) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void __internalReport::__reportSystem::report(WarningCode message, char *vars) ");
+    StartTiming("void reporting::reportManager::report(WarningCode message, char *vars) ");
     if (Level > VerboseLevel::WARNING) return;
 
     if (vars == nullptr) {
@@ -480,10 +480,10 @@ void __internalReport::__reportSystem::report(WarningCode message, char *vars) {
 
 }
 
-void __internalReport::__reportSystem::report(InfoCode message, std::string *vars) {
+void reporting::reportManager::report(InfoCode message, std::string *vars) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void __internalReport::__reportSystem::report(InfoCode message, std::string *vars) ");
+    StartTiming("void reporting::reportManager::report(InfoCode message, std::string *vars) ");
     if (Level > VerboseLevel::INFO) {
         if (vars != nullptr)
             delete[] vars;
@@ -509,10 +509,10 @@ void __internalReport::__reportSystem::report(InfoCode message, std::string *var
     }
 }
 
-void __internalReport::__reportSystem::report(InfoCode message, char *vars) {
+void reporting::reportManager::report(InfoCode message, char *vars) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void __internalReport::__reportSystem::report(InfoCode message, char *vars) ");
+    StartTiming("void reporting::reportManager::report(InfoCode message, char *vars) ");
     if (Level > VerboseLevel::INFO) return;
 
     if (vars == nullptr) {

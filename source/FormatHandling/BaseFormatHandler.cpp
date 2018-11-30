@@ -1,9 +1,9 @@
-#include "../../include/FormatHandling/FormatManager.h"
-#include "../../include/FormatHandling/BaseFormatHandler.h"
-#include "../../include/FormatHandling/formats_header.h"
+#include "FormatHandling/FormatManager.h"
+#include "FormatHandling/BaseFormatHandler.h"
+#include "FormatHandling/formats_header.h"
 #include "InternalBenchmarker.h"
 #include "Alignment.h"
-#include "../../include/utils.h"
+#include "utils.h"
 
 FormatManager::~FormatManager()
 {
@@ -95,7 +95,7 @@ bool FormatManager::saveAlignment(std::string outPattern, std::vector< std::stri
             {
                 if (state->RecognizeOutputFormat( outFormats->at(0) ))
                 {
-                    return state->SaveAlignment(alignment, &std::cout, &filename);
+                    return state->SaveAlignment(alignment, &std::cout);
                 }
             }
             debug.report(ErrorCode::OutputFormatNotRecognized, &outFormats->at(0)[0]);
@@ -125,7 +125,7 @@ bool FormatManager::saveAlignment(std::string outPattern, std::vector< std::stri
                     std::ofstream outFileHandler;
                     outFileHandler.open(filename);
                     
-                    return state->SaveAlignment(alignment, &outFileHandler, &alignment->filename);
+                    return state->SaveAlignment(alignment, &outFileHandler);
                 }
             }
             debug.report(ErrorCode::OutputFormatNotRecognized, &outFormats->at(0)[0]);
@@ -163,7 +163,7 @@ bool FormatManager::saveAlignment(std::string outPattern, std::vector< std::stri
                 filename_2 = utils::ReplaceString(filename, "[extension]", state->extension);
                 utils::ReplaceStringInPlace(filename_2, "[format]", state->name);
                 outFileHandler.open(filename_2);
-                if(!state -> SaveAlignment(alignment, &outFileHandler, &alignment->filename))
+                if(!state -> SaveAlignment(alignment, &outFileHandler))
                 {
                     debug.report(ErrorCode::AlignmentNotSaved, &state->name[0]);
                     isCorrect = false;
@@ -271,9 +271,9 @@ void FormatManager::loadAndSaveMultipleAlignments(
 
                 outFileHandler.open(filename);
                 if (this->hasOutputFile)
-                    state -> SaveAlignment(alignment, &outFileHandler, &inFile);
+                    state -> SaveAlignment(alignment, &outFileHandler);
                 else
-                    state -> SaveAlignment(alignment, &std::cout, &inFile);
+                    state -> SaveAlignment(alignment, &std::cout);
                 outFileHandler.close();
             }
         }

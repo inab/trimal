@@ -29,21 +29,19 @@
 
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-#include "Statistics/Conservation.h"
+#include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
-#include "Statistics/Manager.h"
-#include "Statistics/Gaps.h"
-#include "../include/sequencesMatrix.h"
-#include "../include/similarityMatrix.h"
 #include "InternalBenchmarker.h"
-#include "../include/reportsystem.h"
+#include "Statistics/Manager.h"
+#include "similarityMatrix.h"
+#include "Statistics/Gaps.h"
+#include "sequencesMatrix.h"
+#include "reportsystem.h"
 #include "Alignment.h"
-#include "../include/defines.h"
-#include "../include/Cleaner.h"
-#include "../include/values.h"
-#include "../include/utils.h"
-
-using namespace std;
+#include "defines.h"
+#include "Cleaner.h"
+#include "values.h"
+#include "utils.h"
 
 Alignment::Alignment() {
     // Create a timer that will report times upon its destruction
@@ -52,7 +50,7 @@ Alignment::Alignment() {
 
     // Submodules
     Cleaning = new Cleaner(this);
-    Statistics = new Statistics::Manager(this);
+    Statistics = new statistics::Manager(this);
 
     // Sizes
     originalNumberOfResidues = 0;
@@ -112,17 +110,19 @@ Alignment::Alignment(Alignment &originalAlignment) {
         // Copy save(Sequences|Residues) vector to keep information of previous
         //  trimming steps
         saveSequences = new int[originalNumberOfSequences];
-        std::copy(  originalAlignment.saveSequences, 
-                    originalAlignment.saveSequences + originalAlignment.originalNumberOfSequences,
-                    saveSequences);
+        if (originalAlignment.saveSequences != nullptr)
+            std::copy(  originalAlignment.saveSequences,
+                        originalAlignment.saveSequences + originalAlignment.originalNumberOfSequences,
+                        saveSequences);
         saveResidues = new int[originalNumberOfResidues];
-        std::copy(  originalAlignment.saveResidues, 
-                    originalAlignment.saveResidues + originalAlignment.originalNumberOfResidues,
-                    saveResidues);
+        if (originalAlignment.saveResidues != nullptr)
+            std::copy(  originalAlignment.saveResidues,
+                        originalAlignment.saveResidues + originalAlignment.originalNumberOfResidues,
+                        saveResidues);
 
         // Submodules
         this->Cleaning = new Cleaner(this, originalAlignment.Cleaning);
-        this->Statistics = new Statistics::Manager(this, originalAlignment.Statistics);
+        this->Statistics = new statistics::Manager(this, originalAlignment.Statistics);
 
         // Increase the number of elements using the shared information.
         this->SeqRef = originalAlignment.SeqRef;
@@ -134,51 +134,35 @@ Alignment::Alignment(Alignment &originalAlignment) {
 Alignment::~Alignment() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("Alignment::Alignmentid) ");
+    StartTiming("Alignment::~Alignment) ");
 
     delete[] saveResidues;
-    // saveResidues = nullptr;
 
     delete[] saveSequences;
-    // saveSequences = nullptr;
 
     if (identities != nullptr) {
         for (int i = 0; i < numberOfSequences; i++)
             delete[] identities[i];
         delete[] identities;
     }
-    // identities = nullptr;
-
 
     delete SequencesMatrix;
-    // SequencesMatrix = nullptr;
-
-    // numberOfSequences = 0;
-    // numberOfResidues = 0;
-
-    // isAligned = false;
 
     delete Cleaning;
-    // Cleaning = nullptr;
 
     delete Statistics;
-    // Statistics = nullptr;
 
     if (--(*SeqRef) == 0) {
         delete SeqRef;
 
         delete[] sequences;
-        // sequences = nullptr;
 
         delete[] seqsName;
-        // seqsName = nullptr;
 
         delete[] seqsInfo;
-        // seqsInfo = nullptr;
 
     } else if (*SeqRef < 0) {
         delete SeqRef;
-        // SeqRef = nullptr;
     }
 }
 
@@ -187,7 +171,7 @@ Alignment *Alignment::getTranslationCDS(Alignment *ProtAlig) {
     //	which means the end of the current scope.
     StartTiming("Alignment *Alignment::getTranslationCDS(Alignment *ProtAlig) ");
 
-    int x, y, counter, *mappedSeqs;
+    int x, y, counter = 0, *mappedSeqs;
     Alignment *newAlig = new Alignment();
 
     // Map the selected protein sequences to the input
@@ -206,6 +190,7 @@ Alignment *Alignment::getTranslationCDS(Alignment *ProtAlig) {
     newAlig->sequences = new std::string[ProtAlig->numberOfSequences];
     newAlig->seqsInfo = new std::string[ProtAlig->numberOfSequences];
     newAlig->seqsName = new std::string[ProtAlig->numberOfSequences];
+    newAlig->SeqRef = new int(1);
 
     for (x = 0; x < ProtAlig->originalNumberOfSequences; x++) {
 
@@ -236,8 +221,25 @@ Alignment *Alignment::getTranslationCDS(Alignment *ProtAlig) {
         current.shrink_to_fit();
     }
 
-    newAlig->numberOfSequences = ProtAlig->numberOfSequences;
-    newAlig->originalNumberOfSequences = ProtAlig->numberOfSequences;
+    newAlig->saveSequences = new int[ProtAlig->numberOfSequences];
+    std::copy(
+            ProtAlig->saveSequences,
+            ProtAlig->saveSequences + ProtAlig->originalNumberOfSequences,
+            newAlig->saveSequences);
+
+    newAlig->saveResidues = new int[ProtAlig->numberOfResidues * 3];
+    for (int i = 0; i < counter; i++)
+    {
+        newAlig->saveResidues[i] = i;
+    }
+
+    newAlig->numberOfSequences          = ProtAlig->numberOfSequences;
+    newAlig->originalNumberOfSequences  = ProtAlig->numberOfSequences;
+
+    newAlig->numberOfResidues           = counter;
+    newAlig->originalNumberOfResidues   = counter;
+
+    newAlig->SeqRef = new int(1);
 
     delete[] mappedSeqs;
 
@@ -473,7 +475,7 @@ int Alignment::getAlignmentType() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int Alignment::getAlignmentType(void) ");
-    if (dataType == 0)
+    if (dataType == SequenceTypes::NotDefined)
         dataType = utils::checkAlignmentType(numberOfSequences, numberOfResidues, sequences);
     return dataType;
 }
@@ -1143,10 +1145,10 @@ void Alignment::printColumnsIdentity_DescriptiveStats(void) {
 }
  */
 
-bool Alignment::alignmentSummaryHTML(Alignment &_trimmedAlignment, char *destFile) {
+bool Alignment::alignmentSummaryHTML(Alignment &trimmedAlig, char *destFile) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("bool Alignment::alignmentSummaryHTML(Alignment &_trimmedAlignment, char *destFile, float *consValues) ");
+    StartTiming("bool Alignment::alignmentSummaryHTML(Alignment &trimmedAlig, char *destFile, float *consValues) ");
 
     // Generate an HTML file with a visual summary about which sequences/columns
     // have been selected and which have not
@@ -1181,16 +1183,16 @@ bool Alignment::alignmentSummaryHTML(Alignment &_trimmedAlignment, char *destFil
 
     // Recover some stats about different scores from current alignment
     gapsValues = nullptr;
-    if (_trimmedAlignment.Statistics->gaps != nullptr)
-        gapsValues = _trimmedAlignment.Statistics->gaps->getGapsWindow();
+    if (trimmedAlig.Statistics->gaps != nullptr)
+        gapsValues = trimmedAlig.Statistics->gaps->getGapsWindow();
 
     float *simValues = nullptr;
-    if (_trimmedAlignment.Statistics->conservation != nullptr)
-        simValues = _trimmedAlignment.Statistics->conservation->getMdkWindowedVector();
+    if (trimmedAlig.Statistics->similarity != nullptr)
+        simValues = trimmedAlig.Statistics->similarity->getMdkWindowedVector();
 
     float *consValues = nullptr;
-    if (_trimmedAlignment.Statistics->consistency != nullptr)
-        consValues = _trimmedAlignment.Statistics->consistency->getValues();
+    if (trimmedAlig.Statistics->consistency != nullptr)
+        consValues = trimmedAlig.Statistics->consistency->getValues();
 
     // Print HTML header into output file
     file << "<!DOCTYPE html>" << endl << "<html><head>" << endl << "    <meta "
@@ -1228,11 +1230,11 @@ bool Alignment::alignmentSummaryHTML(Alignment &_trimmedAlignment, char *destFil
          << "    </style>\n  </head>\n\n" << "  <body>\n" << "  <pre>" << endl;
 
     // Show information about how many sequences/residues have been selected
-    file << "    <span class=sel>Selected Sequences: " << setw(5) << right << _trimmedAlignment.numberOfSequences
-         << " /Selected Residues: " << setw(7) << right << _trimmedAlignment.numberOfResidues << "</span>"
+    file << "    <span class=sel>Selected Sequences: " << setw(5) << right << trimmedAlig.numberOfSequences
+         << " /Selected Residues: " << setw(7) << right << trimmedAlig.numberOfResidues << "</span>"
          << endl << "    <span class=nsel>Deleted Sequences:  " << setw(5) << right
-         << numberOfSequences - _trimmedAlignment.numberOfSequences << " /Deleted Residues:  " << setw(7) << right
-         << numberOfResidues - _trimmedAlignment.numberOfResidues << "</span>" << endl;
+         << numberOfSequences - trimmedAlig.numberOfSequences << " /Deleted Residues:  " << setw(7) << right
+         << numberOfResidues - trimmedAlig.numberOfResidues << "</span>" << endl;
 
     // Print headers for different scores derived from input alignment/s 
     if (gapsValues != nullptr)
@@ -1282,7 +1284,7 @@ bool Alignment::alignmentSummaryHTML(Alignment &_trimmedAlignment, char *destFil
 
         // Print sequences name
         for (i = 0; i < originalNumberOfSequences; i++) {
-            file << "    <span class=" << ((_trimmedAlignment.saveSequences[i] != -1) ? "sel>" : "nsel>") << seqsName[i]
+            file << "    <span class=" << ((trimmedAlig.saveSequences[i] != -1) ? "sel>" : "nsel>") << seqsName[i]
                  << "</span>" << setw(minHTML - 4 - seqsName[i].size()) << right << "";
 
             // Print residues corresponding to current sequences block
@@ -1303,7 +1305,7 @@ bool Alignment::alignmentSummaryHTML(Alignment &_trimmedAlignment, char *destFil
 
         file << endl << setw(minHTML) << left << "    Selected Cols:      ";
         for (k = j; ((k < originalNumberOfResidues) && (k < (j + HTMLBLOCKS))); k++)
-            file << "<span class=" << (_trimmedAlignment.saveResidues[k] != -1 ? "sel" : "nsel") << "> </span>";
+            file << "<span class=" << (trimmedAlig.saveResidues[k] != -1 ? "sel" : "nsel") << "> </span>";
         file << endl;
 
         // If there is not any score to print, skip this part of the function
@@ -1407,10 +1409,10 @@ bool Alignment::alignmentSummaryHTML(Alignment &_trimmedAlignment, char *destFil
     return true;
 }
 
-bool Alignment::alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile, int blocks) {
+bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, int blocks) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("bool Alignment::alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile, float *consValues, int blocks) ");
+    StartTiming("bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, float *consValues, int blocks) ");
 
     int i, j, k, counter = 0;
 
@@ -1420,8 +1422,8 @@ bool Alignment::alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile
         gapsValues = Statistics->gaps->getGapsWindow();
 
     float *simValues = nullptr;
-    if (Statistics->conservation != nullptr)
-        simValues = Statistics->conservation->getMdkWindowedVector();
+    if (Statistics->similarity != nullptr)
+        simValues = Statistics->similarity->getMdkWindowedVector();
 
     float *consValues = nullptr;
     if (Statistics->consistency != nullptr)
@@ -1497,7 +1499,7 @@ bool Alignment::alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile
                    + bottomMargin;
 
     float width = sequencesNamesLength * fontSize
-                  + blocks * fontSize * 0.75F
+                  + std::min(blocks, trimmedAlig.originalNumberOfResidues) * fontSize * 0.75F
                   + leftMargin
                   + nameBlocksMargin
                   + rightMargin;
@@ -1555,13 +1557,12 @@ bool Alignment::alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile
 
     // BEGIN Header
 
-    strtok(&filename[0], " ");
-    std::string fname = strtok(nullptr, " ");
+
 
     file << "<rect \
                 style=\"fill:none;stroke:lightgrey\" \
                 height=\"" << fontSize * 6.5F << "\" \
-                width=\"" << fontSize * std::max(30.5F, fname.length() * 0.75F + 1.F) << "px\" \
+                width=\"" << fontSize * std::max(30.5F, filename.length() * 0.75F + 1.F) << "px\" \
                 x =\"" << leftMargin + nameBlocksMargin - fontSize * 0.5F << "px\"\
                 y =\"" << currentHeight - fontSize * 0.5F << "\"/>" << endl;
 
@@ -1574,15 +1575,15 @@ bool Alignment::alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile
                 kerning=\"0\" \
                 text-anchor=\"start\" \
                 lengthAdjust=\"spacingAndGlyphs\"\
-                textLength=\"" << fname.size() * 0.75F * fontSize << "\" \
+                textLength=\"" << filename.size() * 0.75F * fontSize << "\" \
                 style=\"font-weight:100\" \
                 xml:space=\"preserve\" >"
 
-         << fname
+         << filename
 
          << "</text>" << endl;
     currentHeight += fontSize * 2;
-    fname = "Selected Sequences \t" + std::to_string(_trimmedAlignment.numberOfSequences) + " / " + std::to_string(originalNumberOfSequences);
+    filename = "Selected Sequences \t" + std::to_string(trimmedAlig.numberOfSequences) + " / " + std::to_string(originalNumberOfSequences);
     file << "<text \
                 font-family = \"monospace\" \
                 font-size=\"" << fontSize << "px\" \
@@ -1592,15 +1593,15 @@ bool Alignment::alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile
                 kerning=\"0\" \
                 text-anchor=\"start\" \
                 lengthAdjust=\"spacingAndGlyphs\"\
-                textLength=\"" << std::min((float) fname.size() * 0.65F, (float) sequencesNamesLength) * fontSize << "\" \
+                textLength=\"" << std::min((float) filename.size() * 0.65F, (float) sequencesNamesLength) * fontSize << "\" \
                 style=\"font-weight:100\" \
                 xml:space=\"preserve\" >"
 
-         << fname
+         << filename
 
          << "</text>" << endl;
     currentHeight += fontSize * 2;
-    fname = "Selected Residues \t\t" + std::to_string(_trimmedAlignment.numberOfResidues) + " / " + std::to_string(originalNumberOfResidues);
+    filename = "Selected Residues \t\t" + std::to_string(trimmedAlig.numberOfResidues) + " / " + std::to_string(originalNumberOfResidues);
     file << "<text \
                 font-family = \"monospace\" \
                 font-size=\"" << fontSize << "px\" \
@@ -1610,11 +1611,11 @@ bool Alignment::alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile
                 kerning=\"0\" \
                 text-anchor=\"start\" \
                 lengthAdjust=\"spacingAndGlyphs\"\
-                textLength=\"" << std::min((float) fname.size() * 0.65F, (float) sequencesNamesLength) * fontSize << "\" \
+                textLength=\"" << std::min((float) filename.size() * 0.65F, (float) sequencesNamesLength) * fontSize << "\" \
                 style=\"font-weight:100\" \
                 xml:space=\"preserve\" >"
 
-         << fname
+         << filename
 
          << "</text>" << endl;
     currentHeight += fontSize * 3;
@@ -1797,7 +1798,7 @@ bool Alignment::alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile
                  << sequences[i].substr(j, blocks)
 
                  << "</text>" << endl;
-            if (_trimmedAlignment.saveSequences[i] == -1) {
+            if (trimmedAlig.saveSequences[i] == -1) {
                 file << "<line x1=\"" << leftMargin + nameBlocksMargin + sequencesNamesLength * fontSize << "\"" <<
                      " x2=\"" << leftMargin + nameBlocksMargin + sequencesNamesLength * fontSize + std::min(blocks, originalNumberOfResidues - j) * fontSize * 0.75F << "\"" <<
                      " y1=\"" << (currentHeight + fontSize / 2) << "\"" <<
@@ -1831,10 +1832,10 @@ bool Alignment::alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile
              << "\" " <<
              " y =\"" << currentHeight << "\" />" << endl;
 
-        bool rejected = _trimmedAlignment.saveResidues[j] == -1;
+        bool rejected = trimmedAlig.saveResidues[j] == -1;
         lastPos = j;
         for (k = j + 1; k < originalNumberOfResidues && (k - j) < blocks; k++) {
-            if ((_trimmedAlignment.saveResidues[k] == -1) != rejected) {
+            if ((trimmedAlig.saveResidues[k] == -1) != rejected) {
                 file << "<rect " <<
                      " style=\"fill:url(#" << (rejected ? "rejected" : "selected") << ");stroke:black\"" <<
                      " height=\"" << fontSize * 5 << "\" " <<

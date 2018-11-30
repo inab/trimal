@@ -25,16 +25,16 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "Statistics/Consistency.h"
-#include "Statistics/Manager.h"
-#include "../../include/sequencesMatrix.h"
-#include "../../include/trimalManager.h"
-#include "Alignment.h"
-#include "../../include/reportsystem.h"
 #include "InternalBenchmarker.h"
-#include "../../include/defines.h"
-#include "../../include/utils.h"
+#include "Statistics/Manager.h"
+#include "sequencesMatrix.h"
+#include "trimalManager.h"
+#include "reportsystem.h"
+#include "Alignment.h"
+#include "defines.h"
+#include "utils.h"
 
-namespace Statistics {
+namespace statistics {
     
 #define LONG 80
 
@@ -55,8 +55,10 @@ namespace Statistics {
 
         compareAlignmentsArray = new Alignment *[numFiles];
         char **filesToCompare = new char *[numFiles];
+        for (i = 0; i < numFiles; i++) filesToCompare[i] = nullptr;
 
-        int prevType;
+
+        int prevType = SequenceTypes::NotDefined;
 
         char c;
 
@@ -102,7 +104,7 @@ namespace Statistics {
                         maxResidues = compareAlignmentsArray[i]->getNumAminos();
 
                     // Check if alignment type is the same as last one.
-                    if (prevType == -1)
+                    if (prevType == SequenceTypes::NotDefined)
                         prevType = compareAlignmentsArray[i]->getAlignmentType();
                     else if (compareAlignmentsArray[i]->getAlignmentType() != prevType) {
                         debug.report(ErrorCode::AlignmentTypesNotMatching);
@@ -115,7 +117,13 @@ namespace Statistics {
         // If the analysis couldn't be performed, stop the program.
         if (appearErrors) {
             debug.report(ErrorCode::ComparesetFailedAlignmentMissing);
+            for (int x = 0; x < numFiles; x++)
+            {
+                delete [] filesToCompare[x];
+                delete compareAlignmentsArray[x];
+            }
             delete[] compareAlignmentsArray;
+            delete[] filesToCompare;
             delete[] values;
             delete[] line;
             exit(ErrorCode::ComparesetFailedAlignmentMissing);
@@ -136,6 +144,12 @@ namespace Statistics {
 
                 // If no alignment could be selected, stop the program
                 if (referFile == -1) {
+                    for (int x = 0; x < numFiles; x++)
+                    {
+                        delete [] filesToCompare[x];
+                        delete compareAlignmentsArray[x];
+                    }
+                    delete[] filesToCompare;
                     delete[] compareAlignmentsArray;
                     delete[] values;
                     delete[] line;
@@ -159,6 +173,12 @@ namespace Statistics {
 
                 // If forcing comparison failed, exit the program
                 if (appearErrors) {
+                    for (int x = 0; x < numFiles; x++)
+                    {
+                        delete [] filesToCompare[x];
+                        delete compareAlignmentsArray[x];
+                    }
+                    delete[] filesToCompare;
                     delete[] compareAlignmentsArray;
                     delete[] values;
                     delete[] line;
@@ -169,8 +189,9 @@ namespace Statistics {
             // Store the cross reference between alignment
             //  and this, it's consistency stat
             manager.origAlig->Statistics->consistency = this;
-            _alignment = manager.origAlig;
-            residues = _alignment->originalNumberOfResidues;
+            manager.CS = nullptr;
+            alig = manager.origAlig;
+            residues = alig->originalNumberOfResidues;
 
 
             // Apply window sizes
@@ -180,6 +201,12 @@ namespace Statistics {
                 appearErrors += !applyWindow(manager.consistencyWindow);
 
             if (appearErrors) {
+                for (int x = 0; x < numFiles; x++)
+                {
+                    delete [] filesToCompare[x];
+                    delete compareAlignmentsArray[x];
+                }
+                delete[] filesToCompare;
                 delete[] compareAlignmentsArray;
                 delete[] values;
                 delete[] line;
@@ -194,7 +221,12 @@ namespace Statistics {
                                 forceFile == nullptr ? filesToCompare[referFile] : forceFile)
                 );
             }
-
+            for (int x = 0; x < numFiles; x++)
+            {
+                delete [] filesToCompare[x];
+                delete compareAlignmentsArray[x];
+            }
+            delete[] filesToCompare;
             delete[] compareAlignmentsArray;
             delete[] line;
         }
@@ -221,7 +253,7 @@ namespace Statistics {
                     "bool verbosity) ");
 
         int *numResiduesAlig, *correspNames, *columnSeqMatrix, *columnSeqMatrixAux;
-        int i, k, l, m, numSeqs, pairRes, hits, alignmentIndex = 0;
+        int i, k, l, j, m, numSeqs, pairRes, hits, alignmentIndex = 0;
         float max = 0, value = 0, **vectHits;
         bool appearErrors = false;
         string *names;
@@ -260,7 +292,7 @@ namespace Statistics {
 
         if (!appearErrors) {
 
-            float max = 0;
+            max = 0;
 
             // Changes the order in sequences number matrix
             // according to the order in the selected alignment
@@ -285,7 +317,7 @@ namespace Statistics {
                 vectHits[i] = new float[numResiduesAlig[i]];
                 utils::initlVect(vectHits[i], numResiduesAlig[i], 0);
 
-                for (int j = 0, pairRes = 0, hits = 0; j < numResiduesAlig[i]; j++, pairRes = 0, hits = 0) {
+                for (j = 0, pairRes = 0, hits = 0; j < numResiduesAlig[i]; j++, pairRes = 0, hits = 0) {
 
 
                     // Get back each column from the current selected
@@ -348,7 +380,7 @@ namespace Statistics {
             }
 
             // Prints the alignment that have been selected
-            if ((verbosity) && (!appearErrors)) {
+            if (verbosity) {
                 cout << "\t\t\t\t\t--------------" << endl;
                 cout << endl << "File Selected:\t" << fileNames[alignmentIndex] << endl << "Value:\t\t" << max << endl << endl;
             }
@@ -438,6 +470,9 @@ namespace Statistics {
             selected->getSequenceNameOrder(names, correspNames);
             vectAlignments[i]->SequencesMatrix->setOrder(correspNames);
         }
+        
+        if (selected->SequencesMatrix == nullptr) 
+            selected->SequencesMatrix = new sequencesMatrix(selected);
         // Do the same analysis for each column
         for (i = 0, pairRes = 0, hit = 0;
              i < numResidues && !appearErrors;
@@ -487,27 +522,27 @@ namespace Statistics {
     }
 
 // This method applies a specific windows size to a selected alignment 
-    bool Consistency::applyWindow(int _halfWindow) {
+    bool Consistency::applyWindow(int halfW) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("bool Consistency::applyWindow(int columns, int halfWindowApplied, float *columnsValue) ");
 
-        if (_halfWindow > residues / 4) {
+        if (halfW > residues / 4) {
             debug.report(ErrorCode::ConsistencyWindowTooBig);
             exit(-1);
         }
 
         // If the current half window is the same as the last one, don't do anything
-        if (halfWindow == _halfWindow) return true;
+        if (halfWindow == halfW) return true;
 
         // Save the requested half window. This is useful when making a copy of the
         // alignment, as the window values are not valid anymore but don't want to
         // calculate them if not needed anymore
-        halfWindow = _halfWindow;
+        halfWindow = halfW;
 
         // If the half window requested is 0 or a negative number
         // we simply delete the window values.
-        if (_halfWindow < 1) {
+        if (halfW < 1) {
             delete[] values_windowed;
             values_windowed = nullptr;
             return true;
@@ -545,7 +580,7 @@ namespace Statistics {
     bool Consistency::isWindowDefined() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("bool Conservation::isWindowDefined(void) ");
+        StartTiming("bool Similarity::isWindowDefined(void) ");
 
         return (halfWindow != -1);
     }
@@ -553,7 +588,7 @@ namespace Statistics {
     float *Consistency::getValues() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("float *Conservation::getMdkWindowedVector(void) ");
+        StartTiming("float *Similarity::getMdkWindowedVector(void) ");
 
         // If a window is defined
         if (isWindowDefined()) {
@@ -568,17 +603,17 @@ namespace Statistics {
     }
 
 // Print the consistency value for each column from the selected alignment 
-    void Consistency::printStatisticsFileColumns(Alignment &_alignment,
+    void Consistency::printStatisticsFileColumns(Alignment &alig,
                                                            float *compareVect) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("void Consistency::printStatisticsFileColumns("
-                    "Alignment &_alignment, "
+                    "Alignment &alig, "
                     "float *values) ");
 
         int size = 20;
 
-        std::string fname = _alignment.filename.substr(6, _alignment.filename.size() - 7);
+        std::string fname = alig.filename.substr(6, alig.filename.size() - 7);
 
         cout
                 << std::setw(fname.length() + 7)
@@ -596,11 +631,11 @@ namespace Statistics {
 
         cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << endl;
 
-        fname = " Conservation per Column";
+        fname = " Similarity per Column";
 
         cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
 
-        cout << std::setw(_alignment.filename.substr(6, _alignment.filename.size() - 7).length() + 7)
+        cout << std::setw(alig.filename.substr(6, alig.filename.size() - 7).length() + 7)
              << std::setfill('-')
              << std::left << ""
              << std::setfill(' ')
@@ -619,7 +654,7 @@ namespace Statistics {
 
         // Print the consistency values for each column from
         // the selected alignment
-        for (int i = 0; i < _alignment.numberOfResidues; i++)
+        for (int i = 0; i < alig.numberOfResidues; i++)
             cout << setw(size) << std::left << i + 1
                  << setw(size) << std::left << compareVect[i]
                  << endl;
@@ -628,19 +663,19 @@ namespace Statistics {
 
 // Print the consistency values accumulative distribution for the selected
 // alignment
-    void Consistency::printStatisticsFileAcl(Alignment &_alignment,
+    void Consistency::printStatisticsFileAcl(Alignment &alig,
                                                        float *compareVect) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("void Consistency::printStatisticsFileAcl("
-                    "Alignment &_alignment, "
+                    "Alignment &alig, "
                     "float *values) ");
 
         int size = 20;
         float refer, *vectAux;
         int i, num;
 
-        std::string fname = _alignment.filename.substr(6, _alignment.filename.size() - 7);
+        std::string fname = alig.filename.substr(6, alig.filename.size() - 7);
 
         cout
                 << std::setw(fname.length() + 7)
@@ -658,11 +693,11 @@ namespace Statistics {
 
         cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << endl;
 
-        fname = " Conservation Total";
+        fname = " Similarity Total";
 
         cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
 
-        cout << std::setw(_alignment.filename.substr(6, _alignment.filename.size() - 7).length() + 7)
+        cout << std::setw(alig.filename.substr(6, alig.filename.size() - 7).length() + 7)
              << std::setfill('-')
              << std::left << ""
              << std::setfill(' ')
@@ -674,9 +709,9 @@ namespace Statistics {
 
         // Allocate dinamic memory to copy the input vector
         // and sort it
-        vectAux = new float[_alignment.numberOfResidues];
-        utils::copyVect(compareVect, vectAux, _alignment.numberOfResidues);
-        utils::quicksort(vectAux, 0, _alignment.numberOfResidues - 1);
+        vectAux = new float[alig.numberOfResidues];
+        utils::copyVect(compareVect, vectAux, alig.numberOfResidues);
+        utils::quicksort(vectAux, 0, alig.numberOfResidues - 1);
 
         // Set the output precision and print the header
         std::stringstream firstLine;
@@ -724,7 +759,7 @@ namespace Statistics {
         refer = vectAux[0];
         num = 1;
         // Print the accumulative distribution
-        for (i = 1; i < _alignment.numberOfResidues; i++) {
+        for (i = 1; i < alig.numberOfResidues; i++) {
 
             // When the method detects a new consistency value
             // print the previous value as well as its frequency
@@ -737,7 +772,7 @@ namespace Statistics {
 
                 //
                 cout << std::setw(size) << std::left
-                     << std::setw(size - 6) << std::right << ((float) num / _alignment.numberOfResidues * 100.0F)
+                     << std::setw(size - 6) << std::right << ((float) num / alig.numberOfResidues * 100.0F)
                      << std::setw(6) << std::left << " ";
 
                 //
@@ -745,7 +780,7 @@ namespace Statistics {
 
                 //
                 cout << std::setw(size) << std::left
-                     << std::setw(size - 6) << std::right << ((float) i / _alignment.numberOfResidues * 100.0F)
+                     << std::setw(size - 6) << std::right << ((float) i / alig.numberOfResidues * 100.0F)
                      << std::setw(6) << std::left << " ";
 
                 //
@@ -765,13 +800,13 @@ namespace Statistics {
         cout << std::setw(size) << std::left << num;
 
         cout << std::setw(size) << std::left
-             << std::setw(size - 6) << std::right << ((float) num / _alignment.numberOfResidues * 100.0F)
+             << std::setw(size - 6) << std::right << ((float) num / alig.numberOfResidues * 100.0F)
              << std::setw(6) << std::left << " ";
 
         cout << std::setw(size) << std::left << i;
 
         cout << std::setw(size) << std::left
-             << std::setw(size - 6) << std::right << ((float) i / _alignment.numberOfResidues * 100.0F)
+             << std::setw(size - 6) << std::right << ((float) i / alig.numberOfResidues * 100.0F)
              << std::setw(6) << std::left << " ";
 
         cout << std::setw(size) << std::left << refer;
@@ -787,12 +822,13 @@ namespace Statistics {
             delete[] values;
             delete[] values_windowed;
         }
-        _alignment = nullptr;
+        alig = nullptr;
+        delete refCounter;
     }
 
     Consistency::Consistency(Alignment *pAlignment,
                                                  Consistency *pConsistency) {
-        _alignment = pAlignment;
+        alig = pAlignment;
         values = pConsistency->values;
         values_windowed = pConsistency->values_windowed;
 

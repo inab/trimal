@@ -1,8 +1,8 @@
-#include "../../include/FormatHandling/phylip_paml_state.h"
+#include "FormatHandling/phylip_paml_state.h"
 
-#include "../../include/FormatHandling/FormatManager.h"
-#include "../../include/defines.h"
-#include "../../include/utils.h"
+#include "FormatHandling/FormatManager.h"
+#include "defines.h"
+#include "utils.h"
 
 int phylip_paml_state::CheckAlignment(std::istream* origin)
 {
@@ -14,7 +14,7 @@ Alignment* phylip_paml_state::LoadAlignment(std::string& filename)
     return nullptr;
 }
 
-bool phylip_paml_state::SaveAlignment(Alignment* alignment, std::ostream* output, std::string* FileName)
+bool phylip_paml_state::SaveAlignment(Alignment* alignment, std::ostream* output)
 {
     /* Generate output alignment in PHYLIP format compatible with PAML program */
 

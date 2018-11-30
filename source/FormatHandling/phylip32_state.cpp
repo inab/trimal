@@ -1,8 +1,8 @@
-#include "../../include/FormatHandling/phylip32_state.h"
+#include "FormatHandling/phylip32_state.h"
 
-#include "../../include/FormatHandling/FormatManager.h"
-#include "../../include/defines.h"
-#include "../../include/utils.h"
+#include "FormatHandling/FormatManager.h"
+#include "defines.h"
+#include "utils.h"
 
 int phylip32_state::CheckAlignment(std::istream* origin)
 {
@@ -101,7 +101,7 @@ int phylip32_state::CheckAlignment(std::istream* origin)
 Alignment* phylip32_state::LoadAlignment(std::string& filename)
 {
     /* PHYLIP 3.2 (Interleaved) file format parser */
-    Alignment* _alignment = new Alignment();
+    Alignment* alig = new Alignment();
     
     int i, blocksFirstLine, firstLine = true;
     char *str, *line = nullptr;
@@ -113,9 +113,9 @@ Alignment* phylip32_state::LoadAlignment(std::string& filename)
         return nullptr;
 
     /* Store the file name for futher format conversion*/
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(filename);
-    _alignment->filename.append(";");
+    // alig->filename.append("!Title ");
+    alig->filename.append(filename);
+    alig->filename.append(";");
 
     /* Read first valid line in a safer way */
     do {
@@ -129,21 +129,21 @@ Alignment* phylip32_state::LoadAlignment(std::string& filename)
     /* Get the sequences and residues numbers. If there is any mistake,
      * return a FALSE value to warn about the possible error */
     str = strtok(line, DELIMITERS);
-    _alignment->numberOfSequences = 0;
+    alig->numberOfSequences = 0;
     if(str != nullptr)
-        _alignment->numberOfSequences = atoi(str);
+        alig->numberOfSequences = atoi(str);
 
     str = strtok(nullptr, DELIMITERS);
-    _alignment->numberOfResidues = 0;
+    alig->numberOfResidues = 0;
     if(str != nullptr)
-        _alignment->numberOfResidues = atoi(str);
+        alig->numberOfResidues = atoi(str);
 
-    if((_alignment->numberOfSequences == 0) || (_alignment->numberOfResidues == 0))
+    if((alig->numberOfSequences == 0) || (alig->numberOfResidues == 0))
         return nullptr;
 
     /* Reserve memory according to the input parameters */
-    _alignment->sequences  = new std::string[_alignment->numberOfSequences];
-    _alignment->seqsName   = new std::string[_alignment->numberOfSequences];
+    alig->sequences  = new std::string[alig->numberOfSequences];
+    alig->seqsName   = new std::string[alig->numberOfSequences];
 
     /* Point to the first sequence in the alignment. Since the alignment could not
      * have blank lines to separate the different sequences. Store the blocks size
@@ -165,14 +165,14 @@ Alignment* phylip32_state::LoadAlignment(std::string& filename)
          * the first sequence line is divided. It could help to identify the
          * different sequences from the input file */
         if(firstLine) {
-            _alignment->seqsName[i].append(str, strlen(str));
+            alig->seqsName[i].append(str, strlen(str));
             str = strtok(nullptr, OTHDELIMITERS);
             firstLine = 1;
         }
 
         /* Sequence fragment */
         while(str != nullptr) {
-            _alignment->sequences[i].append(str, strlen(str));
+            alig->sequences[i].append(str, strlen(str));
             str = strtok(nullptr, OTHDELIMITERS);
             /* Count the blocks number for the sequences first line */
             if (firstLine)
@@ -188,10 +188,10 @@ Alignment* phylip32_state::LoadAlignment(std::string& filename)
          * for the current sequence. Finally, move the sequence pointer to the
          * previous one. */
         if ((firstLine ) && (firstLine != blocksFirstLine)) {
-            _alignment->sequences[i-1].append(_alignment->seqsName[i]);
-            _alignment->seqsName[i].clear();
-            _alignment->sequences[i-1].append(_alignment->sequences[i]);
-            _alignment->sequences[i].clear();
+            alig->sequences[i-1].append(alig->seqsName[i]);
+            alig->seqsName[i].clear();
+            alig->sequences[i-1].append(alig->sequences[i]);
+            alig->sequences[i].clear();
             i --;
         }
 
@@ -199,7 +199,7 @@ Alignment* phylip32_state::LoadAlignment(std::string& filename)
         /* There are many ways to detect a new sequence. */
         /* One of them -experimental- is just to detect if the residues number for
          * the current entry is equal to the residues number for the whole align */
-        if ((int) _alignment->sequences[i].size() == _alignment->numberOfResidues) {
+        if ((int) alig->sequences[i].size() == alig->numberOfResidues) {
             firstLine = true;
             i++;
         }
@@ -210,13 +210,13 @@ Alignment* phylip32_state::LoadAlignment(std::string& filename)
     delete [] line;
 
     /* Check the matrix's content */
-    _alignment->fillMatrices(true);
-    _alignment->originalNumberOfSequences = _alignment-> numberOfSequences;
-    _alignment->originalNumberOfResidues = _alignment->numberOfResidues;
-    return _alignment; 
+    alig->fillMatrices(true);
+    alig->originalNumberOfSequences = alig-> numberOfSequences;
+    alig->originalNumberOfResidues = alig->numberOfResidues;
+    return alig; 
 }
 
-bool phylip32_state::SaveAlignment(Alignment* alignment, std::ostream* output, std::string* FileName)
+bool phylip32_state::SaveAlignment(Alignment* alignment, std::ostream* output)
 {
     /* Generate output alignment in PHYLIP 3.2 format (interleaved) */
 

@@ -1,8 +1,8 @@
-#include "../../include/FormatHandling/phylip40_state.h"
+#include "FormatHandling/phylip40_state.h"
 
-#include "../../include/FormatHandling/FormatManager.h"
-#include "../../include/defines.h"
-#include "../../include/utils.h"
+#include "FormatHandling/FormatManager.h"
+#include "defines.h"
+#include "utils.h"
 
 int phylip40_state::CheckAlignment(std::istream* origin)
 {
@@ -100,7 +100,7 @@ int phylip40_state::CheckAlignment(std::istream* origin)
 Alignment* phylip40_state::LoadAlignment(std::string& filename)
 {
     /* PHYLIP/PHYLIP 4 (Sequential) file format parser */
-    Alignment * _alignment = new Alignment();
+    Alignment * alig = new Alignment();
     char *str, *line = nullptr;
     std::ifstream file;
     int i;
@@ -111,9 +111,9 @@ Alignment* phylip40_state::LoadAlignment(std::string& filename)
         return nullptr;
 
     /* Store some data about filename for possible uses in other formats */
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(filename);
-    _alignment->filename.append(";");
+    // alig->filename.append("!Title ");
+    alig->filename.append(filename);
+    alig->filename.append(";");
 
     /* Read first valid line in a safer way */
     do {
@@ -126,27 +126,27 @@ Alignment* phylip40_state::LoadAlignment(std::string& filename)
 
     /* Read the input sequences and residues for each sequence numbers */
     str = strtok(line, DELIMITERS);
-    _alignment->numberOfSequences = 0;
+    alig->numberOfSequences = 0;
     if(str != nullptr)
-        _alignment->numberOfSequences = atoi(str);
+        alig->numberOfSequences = atoi(str);
 
     str = strtok(nullptr, DELIMITERS);
-    _alignment->numberOfResidues = 0;
+    alig->numberOfResidues = 0;
     if(str != nullptr)
-        _alignment->numberOfResidues = atoi(str);
+        alig->numberOfResidues = atoi(str);
 
     /* If something is wrong about the sequences or/and residues number,
      * return an error to warn about that */
-    if((_alignment->numberOfSequences == 0) || (_alignment->numberOfResidues == 0))
+    if((alig->numberOfSequences == 0) || (alig->numberOfResidues == 0))
         return nullptr;
 
     /* Allocate memory  for the input data */
-    _alignment->sequences  = new std::string[_alignment->numberOfSequences];
-    _alignment->seqsName   = new std::string[_alignment->numberOfSequences];
+    alig->sequences  = new std::string[alig->numberOfSequences];
+    alig->seqsName   = new std::string[alig->numberOfSequences];
 
     /* Read the lines block containing the sequences name + first fragment */
     i = 0;
-    while((i < _alignment->numberOfSequences) && (!file.eof())){
+    while((i < alig->numberOfSequences) && (!file.eof())){
 
         /* Read lines in a safer way. Destroy previous stored information */
         delete [] line;
@@ -158,12 +158,12 @@ Alignment* phylip40_state::LoadAlignment(std::string& filename)
 
         /* First token: Sequence name */
         str = strtok(line, DELIMITERS);
-        _alignment->seqsName[i].append(str, strlen(str));
+        alig->seqsName[i].append(str, strlen(str));
 
         /* Trim the rest of the line from blank spaces, tabs, etc and store it */
         str = strtok(nullptr, DELIMITERS);
         while(str != nullptr) {
-            _alignment->sequences[i].append(str, strlen(str));
+            alig->sequences[i].append(str, strlen(str));
             str = strtok(nullptr, DELIMITERS);
         }
         i++;
@@ -174,7 +174,7 @@ Alignment* phylip40_state::LoadAlignment(std::string& filename)
 
         /* Try to get for each sequences its corresponding residues */
         i = 0;
-        while((i < _alignment->numberOfSequences) && (!file.eof())) {
+        while((i < alig->numberOfSequences) && (!file.eof())) {
             /* Read lines in a safer way. Destroy previous stored information */
             delete [] line;
 
@@ -187,7 +187,7 @@ Alignment* phylip40_state::LoadAlignment(std::string& filename)
              * to previous stored sequence */
             str = strtok(line, DELIMITERS);
             while(str != nullptr) {
-                _alignment->sequences[i].append(str, strlen(str));
+                alig->sequences[i].append(str, strlen(str));
                 str = strtok(nullptr, DELIMITERS);
             }
             i++;
@@ -199,13 +199,13 @@ Alignment* phylip40_state::LoadAlignment(std::string& filename)
     delete [] line;
 
     /* Check the matrix's content */
-    _alignment->fillMatrices(true);
-    _alignment->originalNumberOfSequences = _alignment-> numberOfSequences;
-    _alignment->originalNumberOfResidues = _alignment->numberOfResidues;
-    return _alignment;
+    alig->fillMatrices(true);
+    alig->originalNumberOfSequences = alig-> numberOfSequences;
+    alig->originalNumberOfResidues = alig->numberOfResidues;
+    return alig;
 }
 
-bool phylip40_state::SaveAlignment(Alignment* alignment, std::ostream* output, std::string* FileName)
+bool phylip40_state::SaveAlignment(Alignment* alignment, std::ostream* output)
 {
   
     

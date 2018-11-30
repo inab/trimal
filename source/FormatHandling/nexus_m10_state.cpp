@@ -1,8 +1,8 @@
-#include "../../include/FormatHandling/nexus_m10_state.h"
+#include "FormatHandling/nexus_m10_state.h"
 
-#include "../../include/FormatHandling/FormatManager.h"
-#include "../../include/defines.h"
-#include "../../include/utils.h"
+#include "FormatHandling/FormatManager.h"
+#include "defines.h"
+#include "utils.h"
 
 int nexus_m10_state::CheckAlignment(std::istream *origin) {
     return 0;
@@ -12,7 +12,7 @@ Alignment *nexus_m10_state::LoadAlignment(std::string& filename) {
     return nullptr;
 }
 
-bool nexus_m10_state::SaveAlignment(Alignment *alignment, std::ostream *output, std::string *FileName) {
+bool nexus_m10_state::SaveAlignment(Alignment *alignment, std::ostream *output) {
     /* Generate output alignment in NEXUS format setting only alignment block */
 
     int i, j, k, l, maxLongName = 0;

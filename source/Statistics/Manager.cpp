@@ -2,14 +2,14 @@
 // Created by bioinfo on 5/06/17.
 //
 
-#include "Statistics/Conservation.h"
+#include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
+#include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
 #include "Statistics/Gaps.h"
 #include "Alignment.h"
-#include "InternalBenchmarker.h"
 
-namespace Statistics {
+namespace statistics {
     bool Manager::calculateConservationStats(void) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
@@ -23,27 +23,27 @@ namespace Statistics {
 
         // It the similarity statistics object has not been
         // created we create it
-        if (conservation == nullptr) {
-            conservation = new Conservation(_alignment);
-            conservation->setSimilarityMatrix(_similarityMatrix);
-            conservation->applyWindow(shWindow);
+        if (similarity == nullptr) {
+            similarity = new Similarity(alig);
+            similarity->setSimilarityMatrix(_similarityMatrix);
+            similarity->applyWindow(shWindow);
         }
 
         // Ask for the similarity matrix
-        if (!conservation->isSimMatrixDef())
+        if (!similarity->isSimMatrixDef())
             return false;
 
         // Compute the similarity statistics from the input
         // Alignment
-        if (!conservation->calculateVectors(true))
+        if (!similarity->calculateVectors(true))
             return false;
 
         // Ask to know if it is necessary to apply any window
         // method. If it's necessary, we apply it
-        if (_alignment->Statistics->conservation->isDefinedWindow())
+        if (alig->Statistics->similarity->isDefinedWindow())
             return true;
         else
-            return _alignment->Statistics->conservation->applyWindow(shWindow);
+            return alig->Statistics->similarity->applyWindow(shWindow);
     }
 
 
@@ -56,7 +56,7 @@ namespace Statistics {
         // created */
         if (calculateConservationStats())
             /* then prints the information */
-            _alignment->Statistics->conservation->printConservationColumns();
+            alig->Statistics->similarity->printConservationColumns();
 
     }
 
@@ -70,7 +70,7 @@ namespace Statistics {
         // created
         if (calculateConservationStats())
             // then prints the information
-            _alignment->Statistics->conservation->printConservationAcl();
+            alig->Statistics->similarity->printConservationAcl();
 
     }
 
@@ -82,12 +82,12 @@ namespace Statistics {
         _similarityMatrix = sm;
 
         // If scons object is not created, we create them
-        if (_alignment->Statistics->conservation == nullptr)
-            _alignment->Statistics->conservation = new Conservation(_alignment);
+        if (alig->Statistics->similarity == nullptr)
+            alig->Statistics->similarity = new Similarity(alig);
 
         // Associate the matrix to the similarity statistics object
         // If it's OK, we return true
-        return _alignment->Statistics->conservation->setSimilarityMatrix(sm);
+        return alig->Statistics->similarity->setSimilarityMatrix(sm);
 
 
     }
@@ -101,7 +101,7 @@ namespace Statistics {
         // Check if there is computed the gaps statistics
         if (calculateGapStats())
             // then prints the information
-            _alignment->Statistics->gaps->printGapsColumns();
+            alig->Statistics->gaps->printGapsColumns();
 
     }
 
@@ -114,7 +114,7 @@ namespace Statistics {
         // Check it there is computed the gaps statistics
         if (calculateGapStats())
             // then prints the information
-            _alignment->Statistics->gaps->printGapsAcl();
+            alig->Statistics->gaps->printGapsAcl();
 
     }
 
@@ -126,9 +126,9 @@ namespace Statistics {
 
         std::cout << "#ColumnsMap\t";
         // Print the saveResidues relathionship
-        for (i = 0; i < _alignment->numberOfResidues - 1; i++)
-            std::cout << _alignment->saveResidues[i] << ", ";
-        std::cout << _alignment->saveResidues[i] << std::endl;
+        for (i = 0; i < alig->originalNumberOfResidues - 1; i++)
+            std::cout << alig->saveResidues[i] << ", ";
+        std::cout << alig->saveResidues[i] << std::endl;
 
     }
 
@@ -138,13 +138,13 @@ namespace Statistics {
         StartTiming("bool Manager::calculateGapStats(void) ");
 
         // If Alignment matrix is not created, return false
-        if (_alignment->sequences == nullptr)
+        if (alig->sequences == nullptr)
             return false;
 
         // If sgaps object is not created, we create them
         // and calculate the statistics
         if (gaps == nullptr) {
-            gaps = new Gaps(_alignment);
+            gaps = new Gaps(alig);
         }
         gaps->CalculateVectors();
         return gaps->applyWindow(ghWindow);
@@ -154,7 +154,7 @@ namespace Statistics {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("Manager::Manager(Alignment *parent) ");
-        _alignment = parent;
+        alig = parent;
 
         ghWindow = 0;
         shWindow = 0;
@@ -164,15 +164,15 @@ namespace Statistics {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("Manager::Manager(Alignment *parent, Manager *mold) ");
-        _alignment = parent;
+        alig = parent;
 
         _similarityMatrix = mold->_similarityMatrix;
 
         ghWindow = mold->ghWindow;
         shWindow = mold->shWindow;
 
-        if (mold->conservation)
-            conservation = new Conservation(parent, mold->conservation);
+        if (mold->similarity)
+            similarity = new Similarity(parent, mold->similarity);
 
         if (mold->consistency)
             consistency = new Consistency(parent, mold->consistency);
@@ -185,8 +185,8 @@ namespace Statistics {
         delete gaps;
         gaps = nullptr;
 
-        delete conservation;
-        conservation = nullptr;
+        delete similarity;
+        similarity = nullptr;
 
         delete consistency;
         consistency = nullptr;

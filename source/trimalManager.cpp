@@ -1,16 +1,16 @@
-#include "Statistics/Conservation.h"
+#include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
-#include "Statistics/Manager.h"
-#include "../include/similarityMatrix.h"
-#include "../include/trimalManager.h"
-#include "../include/reportsystem.h"
-#include "Alignment.h"
 #include "InternalBenchmarker.h"
-#include "../include/VCFHandler.h"
-#include "../include/Cleaner.h"
-#include "../include/defines.h"
-#include "../include/values.h"
-#include "../include/utils.h"
+#include "Statistics/Manager.h"
+#include "similarityMatrix.h"
+#include "trimalManager.h"
+#include "reportsystem.h"
+#include "Alignment.h"
+#include "VCFHandler.h"
+#include "Cleaner.h"
+#include "defines.h"
+#include "values.h"
+#include "utils.h"
 
 // Macros defined on this file will be defined
 //  before the method that uses them.
@@ -83,7 +83,6 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
         checkArgument(consistency_threshold_argument)
 
         checkArgument(conservation_threshold_argument)
-        checkArgument(select_cols_argument)
 
         checkArgument(no_gaps_argument)
         checkArgument(no_all_gaps_argument)
@@ -100,6 +99,7 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
         checkArgument(sequence_overlap_argument)
 
         checkArgument(seqs_select_argument)
+        checkArgument(select_cols_argument)
 
         checkArgument(max_identity_argument)
         checkArgument(clusters_argument)
@@ -131,9 +131,11 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
         break;
     }
 
+    performCompareset();
+
     // Check if we've provided multiple correct arguments
     // but no input file is provided.
-    if (infile == nullptr && compareset == -1) {
+    if (infile == nullptr && compareset == nullptr) {
         debug.report(ErrorCode::NoInputFile);
         exit(0);
     }
@@ -349,7 +351,7 @@ inline bool trimAlManager::matrix_argument(const int *argc, char *argv[], int *i
 }
 
 inline bool trimAlManager::compareset_argument(const int *argc, char *argv[], int *i) {
-    if (!strcmp(argv[*i], "-compareset") && ((*i) + 1 != *argc) && (compareset == -1)) {
+    if (!strcmp(argv[*i], "-compareset") && ((*i) + 1 != *argc) && (compareset == nullptr)) {
         // Check if file can be opened
         compare.open(argv[++*i], std::ifstream::in);
         if (!compare) {
@@ -357,7 +359,7 @@ inline bool trimAlManager::compareset_argument(const int *argc, char *argv[], in
             appearErrors = true;
         }
         compare.close();
-        compareset = *i;
+        compareset = argv[*i];
         return true;
     }
     return false;
@@ -814,7 +816,7 @@ inline bool trimAlManager::check_inFile_incompatibilities() {
             appearErrors = true;
             i++;
         }
-        if (compareset != -1) {
+        if (compareset != nullptr) {
             debug.report(ErrorCode::IncompatibleArguments, new std::string[2]{"-in", "-compareset"});
             appearErrors = true;
         }
@@ -856,7 +858,12 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {
 }
 
 inline bool trimAlManager::check_thresholds_incompatibilities() {
-    if ((gapThreshold != -1) || (similarityThreshold != -1) || (consistencyThreshold != -1)) {
+    if ((gapThreshold != -1)            || 
+        (similarityThreshold != -1)     || 
+        (consistencyThreshold != -1)    || 
+        (conservationThreshold != -1)
+        ) 
+    {
 
         if (automatedMethodCount) {
             debug.report(ErrorCode::CombinationAmongTrimmingMethods);
@@ -944,12 +951,11 @@ inline bool trimAlManager::check_arguments_needs(char *argv[]) {
     check_output_relevance();
     check_output_file_with_statistics();
     check_automated_manual_incompatibilities();
-    check_multiple_files_comparison(argv);
     check_block_size();
     check_backtranslations();
     check_coding_sequences_type();
     check_and_prepare_coding_sequence();
-    check_backtranslation_infile_names_corresponde();
+    check_backtranslation_infile_names_correspondence();
     check_compareset_window_argument();
     check_output_format();
     return appearErrors;
@@ -965,9 +971,11 @@ inline bool trimAlManager::check_codon_behaviour_incompatibility() {
 }
 
 inline bool trimAlManager::check_combinations_among_thresholds_incompatibility() 
-// TODO is this ok?
 {
-    if ((consistencyThreshold != -1) && (conservationThreshold != -1) && (!appearErrors)) {
+    if ((consistencyThreshold != -1) 
+        && (conservationThreshold != -1) 
+        && (!appearErrors)) 
+    {
         if ((gapThreshold != -1) || (similarityThreshold != -1)) {
             debug.report(ErrorCode::CombinationAmongThresholdsMethods);
             appearErrors = true;
@@ -1004,7 +1012,7 @@ inline bool trimAlManager::check_automated_manual_incompatibilities() {
 
 inline bool trimAlManager::check_force_selection() {
     if (!appearErrors) {
-        if ((compareset == -1) && (forceFile != nullptr)) {
+        if ((compareset == nullptr) && (forceFile != nullptr)) {
             debug.report(ErrorCode::ForceFileWithoutCompareDataset);
             appearErrors = true;
             return true;
@@ -1014,7 +1022,7 @@ inline bool trimAlManager::check_force_selection() {
 }
 
 inline bool trimAlManager::check_input_file_with_coding_sequences_argument() {
-    if ((!appearErrors) && (infile == nullptr) && (compareset == -1) && (forceFile == nullptr) && (backtransFile != nullptr)) {
+    if ((!appearErrors) && (infile == nullptr) && (compareset == nullptr) && (forceFile == nullptr) && (backtransFile != nullptr)) {
         debug.report(ErrorCode::BacktranslationWithoutMainAlignment);
         appearErrors = true;
         return true;
@@ -1029,7 +1037,7 @@ inline bool trimAlManager::check_file_aligned() {
             // Are we requesting an automated method ? or...
                 (automatedMethodCount || 
             // Are we requesting any manual threshold method ? or...
-                (gapThreshold != -1) || (conservationThreshold != -1) || (similarityThreshold != -1) || 
+                (gapThreshold != -1) || (consistencyThreshold != -1) || (similarityThreshold != -1) || 
             // Are we selecting columns or sequences ? or...
                 (selectCols) || (selectSeqs) || 
             // Are we using max overlap between sequences ? or...
@@ -1058,7 +1066,7 @@ inline bool trimAlManager::check_similarity_matrix() {
         }
 
         // TODO this is an incompatibility.
-        if ((gapWindow != -1) || ((compareset == -1) && (consistencyWindow != -1))) {
+        if ((gapWindow != -1) || ((compareset == nullptr) && (consistencyWindow != -1))) {
             debug.report(ErrorCode::SimilarityMatrixNotCompatibleWindow);
             appearErrors = true;
             return true;
@@ -1197,16 +1205,6 @@ inline bool trimAlManager::check_output_file_with_statistics() {
     return false;
 }
 
-inline bool trimAlManager::check_multiple_files_comparison(char *argv[]) {
-
-    // TODO: This is a perform action.
-    if ((compareset != -1) && (!appearErrors)) {
-        Statistics::Consistency *CS = new Statistics::Consistency();
-        CS->perform(argv[compareset], formatManager, *this, forceFile);
-    }
-    return appearErrors;
-}
-
 inline bool trimAlManager::check_block_size() {
     if ((!appearErrors) && (origAlig->getNumAminos() < (blockSize / 4))) {
         debug.report(ErrorCode::BlocksizeTooBig, new std::string[1]{std::to_string(origAlig->getNumAminos() / 4)});
@@ -1281,7 +1279,7 @@ inline bool trimAlManager::check_and_prepare_coding_sequence() {
     return false;
 }
 
-inline bool trimAlManager::check_backtranslation_infile_names_corresponde() {
+inline bool trimAlManager::check_backtranslation_infile_names_correspondence() {
     //NOTE Maybe we don't need to copy the names and lengths to two new arrays 
     // as we could pass the original names and lengths to the check checkCorrespondence function, 
     // which doesn't modify the pointers passed to them
@@ -1305,7 +1303,7 @@ inline bool trimAlManager::check_backtranslation_infile_names_corresponde() {
 }
 
 inline void trimAlManager::check_compareset_window_argument() {
-    if ((!appearErrors) && (windowSize != -1) && (compareset != -1))
+    if ((!appearErrors) && (windowSize != -1) && (compareset != nullptr))
         debug.report(InfoCode::WindowSizeCompareset);
 }
 
@@ -1325,7 +1323,7 @@ int trimAlManager::perform() {
     if (appearErrors) 
     return -1;
 
-    // If conservation threshold is -1, it hasn't been specified, and we
+    // If similarity threshold is -1, it hasn't been specified, and we
     // use 0 as default value, which makes no effect
     if (conservationThreshold == -1)
         conservationThreshold = 0;
@@ -1345,6 +1343,9 @@ int trimAlManager::perform() {
 
     if (!create_or_use_similarity_matrix())
         return -2;
+
+    if (svgStatsOutFile != nullptr)
+        svg_stats_out();
 
     print_statistics();
 
@@ -1417,13 +1418,26 @@ inline int trimAlManager::perform_VCF()
 inline void trimAlManager::save_alignment()
 {
     if ((outfile != nullptr) && (!appearErrors)) {
+        debug << "Saving to file";
         std::string outFileString = std::string(outfile);
         if (!formatManager.saveAlignment(outFileString, &oformats, singleAlig)) {
             appearErrors = true;
         }
 
     } else if ((stats >= 0) && (!appearErrors))
+    {
+        debug << "Printing to terminal";
         formatManager.saveAlignment("", &oformats, singleAlig);
+    }
+}
+
+inline bool trimAlManager::performCompareset() {
+
+    if ((compareset != nullptr) && (!appearErrors)) {
+        CS = new statistics::Consistency();
+        CS->perform(compareset, formatManager, *this, forceFile);
+    }
+    return appearErrors;
 }
 
 inline void trimAlManager::output_reports()
@@ -1478,11 +1492,11 @@ inline void trimAlManager::print_statistics() {
         stats++;
     }
 
-    if (compareset != -1) {
+    if (compareset != nullptr) {
         if (sfc)
-            Statistics::Consistency::printStatisticsFileColumns(*origAlig, origAlig->Statistics->consistency->getValues());
+            statistics::Consistency::printStatisticsFileColumns(*origAlig, origAlig->Statistics->consistency->getValues());
         if (sft)
-            Statistics::Consistency::printStatisticsFileAcl(*origAlig, origAlig->Statistics->consistency->getValues());
+            statistics::Consistency::printStatisticsFileAcl(*origAlig, origAlig->Statistics->consistency->getValues());
     }
 }
 
@@ -1517,7 +1531,7 @@ inline void trimAlManager::svg_stats_out()
 
     if (origAlig->Statistics->calculateConservationStats()) {
         color = "blue";
-        linename = "conservation";
+        linename = "similarity";
         float x = 0;
         float y = 1.F;
         utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
@@ -1527,11 +1541,11 @@ inline void trimAlManager::svg_stats_out()
         // Allocate memory 
         vectAux = new float[origAlig->numberOfResidues];
 
-        // Select the conservation's value source and copy that vector in a auxiliar vector 
-        if (origAlig->Statistics->conservation->MDK_Window != nullptr)
-            utils::copyVect(origAlig->Statistics->conservation->MDK_Window, vectAux, origAlig->numberOfResidues);
+        // Select the similarity's value source and copy that vector in a auxiliar vector 
+        if (origAlig->Statistics->similarity->MDK_Window != nullptr)
+            utils::copyVect(origAlig->Statistics->similarity->MDK_Window, vectAux, origAlig->numberOfResidues);
         else
-            utils::copyVect(origAlig->Statistics->conservation->MDK, vectAux, origAlig->numberOfResidues);
+            utils::copyVect(origAlig->Statistics->similarity->MDK, vectAux, origAlig->numberOfResidues);
 
         // Sort the auxiliar vector. 
         utils::quicksort(vectAux, 0, origAlig->numberOfResidues - 1);
@@ -1541,7 +1555,7 @@ inline void trimAlManager::svg_stats_out()
         acm = 0;
         num = 1;
 
-        // Count the columns with the same conservation's value and compute this information to shows the accunulative
+        // Count the columns with the same similarity's value and compute this information to shows the accunulative
         // statistics in the alignment. 
         for (i = origAlig->numberOfResidues - 2; i >= 0; i--) {
             acm++;
@@ -1642,7 +1656,8 @@ inline void trimAlManager::postprocess_alignment() {
     // Backtranslate
     if (backtransFile != nullptr) {
         tempAlig = backtranslationAlig->getTranslationCDS(singleAlig);
-        delete singleAlig;
+        if (singleAlig != origAlig)
+            delete singleAlig;
         singleAlig = tempAlig;
         tempAlig = nullptr;
     }
@@ -1695,8 +1710,8 @@ inline void trimAlManager::CleanSequences() {
         delete singleAlig->Statistics->gaps;
         singleAlig->Statistics->gaps = nullptr;
 
-        delete singleAlig->Statistics->conservation;
-        singleAlig->Statistics->conservation = nullptr;
+        delete singleAlig->Statistics->similarity;
+        singleAlig->Statistics->similarity = nullptr;
 
     } else {
         singleAlig = origAlig;
@@ -1844,8 +1859,10 @@ inline void trimAlManager::delete_variables() {
 
     if (singleAlig == origAlig)
         singleAlig = nullptr;
+
     delete singleAlig;
     singleAlig = nullptr;
+
     delete origAlig;
     origAlig = nullptr;
 
@@ -1857,6 +1874,7 @@ inline void trimAlManager::delete_variables() {
 
     delete[] delColumns;
     delColumns = nullptr;
+
     delete[] delSequences;
     delSequences = nullptr;
 
@@ -1875,15 +1893,18 @@ inline void trimAlManager::delete_variables() {
     delete[] matrixFile;
     matrixFile = nullptr;
 
-    delete forceFile;
+    delete [] forceFile;
     forceFile = nullptr;
-    delete backtransFile;
+    delete [] backtransFile;
     backtransFile = nullptr;
     delete backtranslationAlig;
     backtranslationAlig = nullptr;
 
     delete vcfs;
     vcfs = nullptr;
+
+    delete CS;
+    CS = nullptr;
 }
 
 inline void trimAlManager::menu() {

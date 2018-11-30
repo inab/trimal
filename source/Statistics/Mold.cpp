@@ -24,22 +24,24 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "Statistics/Mold.h"
-#include "Alignment.h"
-#include "../../include/reportsystem.h"
 #include "InternalBenchmarker.h"
-#include "../../include/utils.h"
-namespace Statistics {
+#include "Statistics/Mold.h"
+#include "reportsystem.h"
+#include "Alignment.h"
+#include "utils.h"
+
+
+namespace statistics {
     const std::string Mold::statName = "Gaps"; // NOLINT
 
     Mold::Mold(Alignment *parentAlignment, Mold *mold) {
-        _alignment = parentAlignment;
+        alig = parentAlignment;
         refCounter = mold->refCounter;
         refCounter++;
     }
 
     Mold::Mold(Alignment *parentAlignment) {
-        _alignment = parentAlignment;
+        alig = parentAlignment;
         refCounter = new int(1);
     }
 
@@ -49,26 +51,26 @@ namespace Statistics {
             delete refCounter;
         }
         delete[] valuesWindow;
-        _alignment = nullptr;
+        alig = nullptr;
     }
 
-    bool Mold::applyWindow(int _halfWindow) {
+    bool Mold::applyWindow(int halfW) {
         // Calculate the values array if it has not been calculated previously
         if (values == nullptr)
             calculate();
 
         // Check is the half window value passed is in the valid range
-        if (_halfWindow > residues / 4) {
+        if (halfW > residues / 4) {
             debug.report(ErrorCode::WindowTooBig);
             return false;
         }
 
         // If the current half window is the same as the last one, don't do anything
-        if (halfWindowApplied == _halfWindow) return true;
+        if (halfWindowApplied == halfW) return true;
 
         // If the half window requested is 0 or a negative number
         // we simply delete the window values.
-        if (_halfWindow < 1) {
+        if (halfW < 1) {
             if (halfWindowApplied > 0)
                 delete[] valuesWindow;
 
@@ -90,7 +92,7 @@ namespace Statistics {
 
         // First loop: While index is lower than the window value,
         // We apply a window as big as the index
-        for (i = 1; i < _halfWindow + 1; i++) {
+        for (i = 1; i < halfW + 1; i++) {
 
             // Increase the window size by 2, one residue on each side.
             currentWindowSize += 2;
@@ -107,13 +109,13 @@ namespace Statistics {
         // Second loop: Apply requested window size until
         // i + windowsize > array size
         {
-            float window = 2 * _halfWindow + 1;
+            float window = 2 * halfW + 1;
 
-            for (; i != residues - _halfWindow; i++) {
+            for (; i != residues - halfW; i++) {
 
                 valuesWindow[i] = values[i];
 
-                for (j = 1; j < _halfWindow + 1; j++) {
+                for (j = 1; j < halfW + 1; j++) {
                     valuesWindow[i] += values[i + j];
                     valuesWindow[i] += values[i - j];
                 }
@@ -147,7 +149,7 @@ namespace Statistics {
         valuesWindow[residues - 1] = values[residues - 1];
 
         // New window has been applied
-        halfWindowApplied = _halfWindow;
+        halfWindowApplied = halfW;
 
         return true;
     }
@@ -166,7 +168,7 @@ namespace Statistics {
 
         int i, size = 20;
 
-        std::string &filename = _alignment->filename;
+        std::string &filename = alig->filename;
 
         std::cout << std::fixed << std::setw(filename.length())
                   << std::setfill(' ') << std::left << "\n"
@@ -205,10 +207,10 @@ namespace Statistics {
         float *reportValues;
 
         // If vector is defined,
-        // we use it to print the conservation's values.
+        // we use it to print the similarity's values.
         reportValues = getVector();
 
-        for (i = 0; i < _alignment->originalNumberOfResidues; i++)
+        for (i = 0; i < alig->originalNumberOfResidues; i++)
             std::cout << std::setw(size) << std::left << i
                       << std::setw(2) << std::right << reportValues[i] << "\n";
     }
@@ -219,15 +221,15 @@ namespace Statistics {
         int size = std::max(20, (int) statName.length() + 4);
 
         // Allocate memory
-        vectAux = new float[_alignment->originalNumberOfResidues];
+        vectAux = new float[alig->originalNumberOfResidues];
 
         // Copy the current vector (windowed or not) to a new array
-        utils::copyVect(getVector(), vectAux, _alignment->originalNumberOfResidues);
+        utils::copyVect(getVector(), vectAux, alig->originalNumberOfResidues);
 
         // Sort the copied vector
-        utils::quicksort(vectAux, 0, _alignment->originalNumberOfResidues - 1);
+        utils::quicksort(vectAux, 0, alig->originalNumberOfResidues - 1);
 
-        std::string &filename = _alignment->filename;
+        std::string &filename = alig->filename;
 
         std::cout << std::fixed << std::setw(filename.length())
                   << std::setfill(' ') << std::left << "\n"
@@ -299,13 +301,13 @@ namespace Statistics {
 
 
         // Initialize temporal values
-        refer = vectAux[_alignment->originalNumberOfResidues - 1];
+        refer = vectAux[alig->originalNumberOfResidues - 1];
         acm = 0;
         num = 1;
 
         // Count the columns with the same value and compute this information
         // to show the accumulative stat in the alignment.
-        for (i = _alignment->originalNumberOfResidues - 2; i > -1; i--) {
+        for (i = alig->originalNumberOfResidues - 2; i > -1; i--) {
             acm++;
 
             if (refer != vectAux[i]) {
@@ -314,13 +316,13 @@ namespace Statistics {
                         << std::setw(size) << std::left << num
 
                         << std::setw(size) << std::left
-                        << std::setw(size - 6) << std::right << ((float) num / _alignment->originalNumberOfResidues * 100.0F)
+                        << std::setw(size - 6) << std::right << ((float) num / alig->originalNumberOfResidues * 100.0F)
                         << std::setw(6) << std::right << " "
 
                         << std::setw(size) << std::left << acm
 
                         << std::setw(size) << std::left
-                        << std::setw(size - 6) << std::right << ((float) acm / _alignment->originalNumberOfResidues * 100.0F)
+                        << std::setw(size - 6) << std::right << ((float) acm / alig->originalNumberOfResidues * 100.0F)
                         << std::setw(6) << std::right << " "
 
                         << std::setw(size) << std::left << refer;
@@ -328,11 +330,11 @@ namespace Statistics {
                 if (calculateRelative) {
                     std::cout
                             << std::setw(size) << std::left
-                            << std::setw(size - 6) << std::right << (vectAux[i] * 100.0F) / _alignment->originalNumberOfResidues
+                            << std::setw(size - 6) << std::right << (vectAux[i] * 100.0F) / alig->originalNumberOfResidues
                             << std::setw(6) << std::right << " "
 
                             << std::setw(size) << std::left
-                            << std::setw(size - 6) << std::right << 1.0F - (vectAux[i] / _alignment->originalNumberOfResidues)
+                            << std::setw(size - 6) << std::right << 1.0F - (vectAux[i] / alig->originalNumberOfResidues)
                             << std::setw(6) << std::right << " ";
                 }
 
@@ -348,13 +350,13 @@ namespace Statistics {
                 << std::setw(size) << std::left << num
 
                 << std::setw(size) << std::left
-                << std::setw(size - 6) << std::right << ((float) num / _alignment->originalNumberOfResidues * 100.0F)
+                << std::setw(size - 6) << std::right << ((float) num / alig->originalNumberOfResidues * 100.0F)
                 << std::setw(6) << std::right << " "
 
                 << std::setw(size) << std::left << acm
 
                 << std::setw(size) << std::left
-                << std::setw(size - 6) << std::right << ((float) acm / _alignment->originalNumberOfResidues * 100.0F)
+                << std::setw(size - 6) << std::right << ((float) acm / alig->originalNumberOfResidues * 100.0F)
                 << std::setw(6) << std::right << " "
 
                 << std::setw(size) << std::left << refer;
@@ -362,11 +364,11 @@ namespace Statistics {
         if (calculateRelative) {
             std::cout
                     << std::setw(size) << std::left
-                    << std::setw(size - 6) << std::right << (vectAux[i] * 100.0F) / _alignment->originalNumberOfResidues
+                    << std::setw(size - 6) << std::right << (vectAux[i] * 100.0F) / alig->originalNumberOfResidues
                     << std::setw(6) << std::right << " "
 
                     << std::setw(size) << std::left
-                    << std::setw(size - 6) << std::right << 1.0F - (vectAux[i] / _alignment->originalNumberOfResidues)
+                    << std::setw(size - 6) << std::right << 1.0F - (vectAux[i] / alig->originalNumberOfResidues)
                     << std::setw(6) << std::right << " ";
         }
 

@@ -41,10 +41,10 @@
 #include <string>
 #include <cmath>
 
-#include "../include/TimerFactory.h"
-#include "../include/reportsystem.h"
-#include "../include/defines.h"
-#include "../include/values.h"
+#include "InternalBenchmarker.h"
+#include "reportsystem.h"
+#include "defines.h"
+#include "values.h"
 
 /**
  \brief Utilities class.
@@ -1117,7 +1117,7 @@ namespace utils {
      This function should work faster than it's sister
        utils::GetGapStep(int * gapValue, int sequenNumber),
        as it uses a precomputed (by the user)
-       inverseSequenNumber (1F / newAlignment::sequenNumber),
+       inverseSequenNumber (1F / Alignment::sequenNumber),
        instead of calculating it over again each time the function
        is called (which is equal to number of residues). \n
      This comes with a precision cost that shouldn't be a problem.
@@ -1393,7 +1393,7 @@ namespace utils {
                 << "text-anchor=\"middle\" "
                 << "xml:space=\"preserve\" "
                 << "font-size=\"" << fontSize * 2 << "\">"
-                << "Statistics"
+                << "statistics"
                 << "</text>" << "\n";
 
             file << "<line "

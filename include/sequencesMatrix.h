@@ -170,7 +170,7 @@ private:
     /**
      * \brief Pointer to the alignment this object is related to.
      */
-    Alignment *_alignment;
+    Alignment *alig;
 };
 
 #endif

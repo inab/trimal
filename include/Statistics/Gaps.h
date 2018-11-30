@@ -33,7 +33,7 @@
 // Forward declaration
 class Alignment;
 
-namespace Statistics {
+namespace statistics {
 
     /// \brief Class to handle gaps statistics
     class Gaps {
@@ -41,7 +41,7 @@ namespace Statistics {
 
         Gaps(Alignment *pAlignment, Gaps *pGaps);
 
-        Alignment *_alignment;
+        Alignment *alig;
 
         int maxGaps = -1;
         int halfWindow = -1;

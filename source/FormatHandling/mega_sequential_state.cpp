@@ -1,8 +1,8 @@
-#include "../../include/FormatHandling/mega_sequential_state.h"
+#include "FormatHandling/mega_sequential_state.h"
 
-#include "../../include/FormatHandling/FormatManager.h"
-#include "../../include/defines.h"
-#include "../../include/utils.h"
+#include "FormatHandling/FormatManager.h"
+#include "defines.h"
+#include "utils.h"
 
 int mega_sequential_state::CheckAlignment(std::istream* origin)
 {
@@ -20,7 +20,10 @@ int mega_sequential_state::CheckAlignment(std::istream* origin)
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
+    {
+        delete [] line;
         return 0;
+    }
 
     /* Otherwise, split line */
     firstWord = strtok(line, OTHDELIMITERS);
@@ -44,6 +47,7 @@ int mega_sequential_state::CheckAlignment(std::istream* origin)
                 blocks++;
         } while((c != '\n') && (!origin->eof()));
 
+        delete [] line;
         /* MEGA Sequential (22) or Interleaved (21) */
         return (!blocks) ? 1 : 0;
     }
@@ -53,7 +57,7 @@ int mega_sequential_state::CheckAlignment(std::istream* origin)
 
 Alignment* mega_sequential_state::LoadAlignment(std::string& filename)
 {
-    Alignment * _alignment = new Alignment();
+    Alignment * alig = new Alignment();
    /* MEGA sequential file format parser */
 
     char *frag = nullptr, *str = nullptr, *line = nullptr;
@@ -68,9 +72,9 @@ Alignment* mega_sequential_state::LoadAlignment(std::string& filename)
     /* Filename is stored as a title for MEGA input alignment.
      * If it is detected later a label "TITLE" in input file, this information
      * will be replaced for that one */
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(filename);
-    _alignment->filename.append(";");
+    // alig->filename.append("!Title ");
+    alig->filename.append(filename);
+    alig->filename.append(";");
 
     /* Skip first valid line */
     do {
@@ -114,15 +118,15 @@ Alignment* mega_sequential_state::LoadAlignment(std::string& filename)
         /* If TITLE label is found, replace previously stored information with
          * this info */
         if(!strcmp(str, "TITLE")) {
-             _alignment->filename.clear();
+             alig->filename.clear();
             if(strncmp(line, "!", 1))
-                 _alignment->filename += "!";
-             _alignment->filename += line;
+                 alig->filename += "!";
+             alig->filename += line;
         }
 
             /* If FORMAT label is found, try to get some details from input file */
         else if(!strcmp(str, "FORMAT"))
-            _alignment -> alignmentInfo.append(line, strlen(line));
+            alig -> alignmentInfo.append(line, strlen(line));
     }
 
     /* Deallocate local memory */
@@ -139,7 +143,7 @@ Alignment* mega_sequential_state::LoadAlignment(std::string& filename)
 
         /* If current line starts by a # means that it is a sequence name */
         if (!strncmp(line, "#", 1))
-            _alignment->numberOfSequences++;
+            alig->numberOfSequences++;
 
         /* Destroy previously allocated memory */
         delete [] line;
@@ -154,8 +158,8 @@ Alignment* mega_sequential_state::LoadAlignment(std::string& filename)
     file.seekg(0);
 
     /* Allocate memory */
-    _alignment->seqsName  = new std::string[_alignment->numberOfSequences];
-    _alignment->sequences = new std::string[_alignment->numberOfSequences];
+    alig->seqsName  = new std::string[alig->numberOfSequences];
+    alig->sequences = new std::string[alig->numberOfSequences];
 
     /* Skip first line */
     line = utils::readLine(file);
@@ -216,13 +220,13 @@ Alignment* mega_sequential_state::LoadAlignment(std::string& filename)
         /* Sequence Name */
         if (!strncmp(line, "#", 1)) {
             i += 1;
-            _alignment->seqsName[i].append(str, strlen(str));
+            alig->seqsName[i].append(str, strlen(str));
             str = strtok(nullptr, " #\n");
         }
 
         /* Sequence itself */
         while(str != nullptr) {
-            _alignment->sequences[i].append(str, strlen(str));
+            alig->sequences[i].append(str, strlen(str));
             str = strtok(nullptr, " \n");
         }
 
@@ -242,13 +246,13 @@ Alignment* mega_sequential_state::LoadAlignment(std::string& filename)
     delete [] line;
 
     /* Check the matrix's content */
-    _alignment->fillMatrices(true);
-    _alignment->originalNumberOfSequences = _alignment-> numberOfSequences;
-    _alignment->originalNumberOfResidues = _alignment->numberOfResidues;
-    return _alignment;
+    alig->fillMatrices(true);
+    alig->originalNumberOfSequences = alig-> numberOfSequences;
+    alig->originalNumberOfResidues = alig->numberOfResidues;
+    return alig;
 }
 
-bool mega_sequential_state::SaveAlignment(Alignment* alignment, std::ostream* output, std::string* FileName)
+bool mega_sequential_state::SaveAlignment(Alignment* alignment, std::ostream* output)
 {
     /* Generate output alignment in MEGA format */
 

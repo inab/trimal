@@ -1,0 +1,13 @@
+/*! \page whatcanido What can I do?
+
+\subsection AutomatedS Automated Statistical Methods
+
+Automated Statistical methods will search for optimum statistic thresholds to clean your %alignment using statistics distribution.\n
+
+| Method     | Description                                                 | Example of use                                                |
+|------------|-------------------------------------------------------------|---------------------------------------------------------------|
+| Strict     | Uses Gaps and Similarity statistics to clean the alignment. | bin/trimal -in dataset/example.007.AA.fasta -strict           |
+| Strictplus | Uses Gaps and Similarity statistics to clean the alignment. | bin/trimal -in dataset/example.007.AA.fasta -strictplus       |
+| Gappyout   | Uses Gaps statistic to clean the alignment.                 | bin/trimal -in dataset/example.007.AA.fasta -gappyout         |
+
+*/

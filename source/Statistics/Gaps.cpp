@@ -23,38 +23,38 @@
 
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
-#include "Statistics/Gaps.h"
-#include "Alignment.h"
-#include "../../include/reportsystem.h"
 #include "InternalBenchmarker.h"
-#include "../../include/defines.h"
-#include "../../include/utils.h"
+#include "Statistics/Gaps.h"
+#include "reportsystem.h"
+#include "Alignment.h"
+#include "defines.h"
+#include "utils.h"
 
-namespace Statistics {
+namespace statistics {
 
     Gaps::Gaps(Alignment *parent) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("Gaps::Gaps(Alignment *parent) ");
 
-        _alignment = parent;
+        alig = parent;
 
         maxGaps = 0;
         halfWindow = 0;
 
         // Memory allocation for the vectors and its initialization
-        gapsInColumn = new int[_alignment->originalNumberOfResidues];
-        utils::initlVect(gapsInColumn, _alignment->originalNumberOfResidues, 0);
+        gapsInColumn = new int[alig->originalNumberOfResidues];
+        utils::initlVect(gapsInColumn, alig->originalNumberOfResidues, 0);
 
-        numColumnsWithGaps = new int[_alignment->originalNumberOfSequences + 1];
-        utils::initlVect(numColumnsWithGaps, _alignment->originalNumberOfSequences + 1, 0);
+        numColumnsWithGaps = new int[alig->originalNumberOfSequences + 1];
+        utils::initlVect(numColumnsWithGaps, alig->originalNumberOfSequences + 1, 0);
 
         refCounter = new int(1);
     }
 
     Gaps::Gaps(Alignment *pAlignment,
                                    Gaps *pGaps) {
-        _alignment = pAlignment;
+        alig = pAlignment;
 
         maxGaps = 0;
 
@@ -87,12 +87,12 @@ namespace Statistics {
         }
     }
 
-    bool Gaps::applyWindow(int _halfWindow) {
+    bool Gaps::applyWindow(int halfW) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("bool Gaps::applyWindow(int _halfWindow) ");
+        StartTiming("bool Gaps::applyWindow(int halfW) ");
 
-        if (_halfWindow > _alignment->originalNumberOfResidues / 4) {
+        if (halfW > alig->originalNumberOfResidues / 4) {
             debug.report(ErrorCode::GapWindowTooBig);
             return false;
         }
@@ -100,11 +100,11 @@ namespace Statistics {
         // Save the requested half window. This is useful when making a copy of the
         // alignment, as the window values are not valid anymore but don't want to
         // calculate them if not needed anymore
-        halfWindow = _halfWindow;
+        halfWindow = halfW;
 
         // If the half window requested is 0 or a negative number
         // we simply delete the window values.
-        if (_halfWindow < 1) {
+        if (halfW < 1) {
 
             delete[] gapsWindow;
             gapsWindow = nullptr;
@@ -114,25 +114,25 @@ namespace Statistics {
         int i, j, window;
 
         if (gapsWindow == nullptr)
-            gapsWindow = new int[_alignment->originalNumberOfResidues];
+            gapsWindow = new int[alig->originalNumberOfResidues];
 
         // Initialize to 0 the vector that will store the number of gaps of each column
         // and the vector that will store window processing results
-        utils::initlVect(numColumnsWithGaps, _alignment->originalNumberOfSequences + 1, 0);
+        utils::initlVect(numColumnsWithGaps, alig->originalNumberOfSequences + 1, 0);
 
         // Initialize maximum gaps number per column value and store the mediumWinSize value in the object.
         maxGaps = 0;
         window = (2 * halfWindow + 1);
 
         // We calculate some statistics for every column in the alignment,and the maximum gaps' number value
-        for (i = 0; i < _alignment->originalNumberOfResidues; i++) {
+        for (i = 0; i < alig->originalNumberOfResidues; i++) {
             gapsWindow[i] = 0;
             // Sum the total number of gaps for the considered window
             for (j = i - halfWindow, gapsWindow[i] = 0; j <= i + halfWindow; j++) {
                 if (j < 0)
                     gapsWindow[i] += gapsInColumn[-j];
-                else if (j >= _alignment->originalNumberOfResidues)
-                    gapsWindow[i] += gapsInColumn[((2 * _alignment->originalNumberOfResidues - j) - 2)];
+                else if (j >= alig->originalNumberOfResidues)
+                    gapsWindow[i] += gapsInColumn[((2 * alig->originalNumberOfResidues - j) - 2)];
                 else
                     gapsWindow[i] += gapsInColumn[j];
             }
@@ -152,7 +152,7 @@ namespace Statistics {
     bool Gaps::isDefinedWindow() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("bool Conservation::isDefinedWindow(void) ");
+        StartTiming("bool Similarity::isDefinedWindow(void) ");
 
         return (halfWindow > 0);
     }
@@ -191,16 +191,16 @@ namespace Statistics {
 
         // Calculate the gap number represented by the gaps threshold. This gap number
         // represents the maximum gap number in any column in the output alignment
-        cuttingPoint_gapThreshold = (double) _alignment->numberOfSequences * gapThreshold;
+        cuttingPoint_gapThreshold = (double) alig->numberOfSequences * gapThreshold;
 
         // Compute the minimum columns number to be kept from the input alignment
-        cuttingPoint_MinimumConserv = utils::roundInt(((double) (_alignment->originalNumberOfResidues * minInputAlignment) / 100.0));
-        if (cuttingPoint_MinimumConserv > _alignment->originalNumberOfResidues)
-            cuttingPoint_MinimumConserv = _alignment->originalNumberOfResidues;
+        cuttingPoint_MinimumConserv = utils::roundInt(((double) (alig->originalNumberOfResidues * minInputAlignment) / 100.0));
+        if (cuttingPoint_MinimumConserv > alig->originalNumberOfResidues)
+            cuttingPoint_MinimumConserv = alig->originalNumberOfResidues;
 
         // We look at the number of gaps which allows us to keep the minimum columns
         // number from the input alignment
-        for (i = 0, acum = 0; i < _alignment->originalNumberOfSequences; i++) {
+        for (i = 0, acum = 0; i < alig->originalNumberOfSequences; i++) {
             acum += numColumnsWithGaps[i];
             if (acum >= cuttingPoint_MinimumConserv)
                 break;
@@ -259,16 +259,16 @@ namespace Statistics {
             if (act >= maxIter) break;
 
             // Calculate the first slope between the earlier previus and previus points.
-            firstSlopeVector[prev] = ((float) (prev - pprev) / _alignment->originalNumberOfSequences);
-            firstSlopeVector[prev] /= ((float) numColumnsWithGaps[prev] / _alignment->originalNumberOfResidues);
+            firstSlopeVector[prev] = ((float) (prev - pprev) / alig->originalNumberOfSequences);
+            firstSlopeVector[prev] /= ((float) numColumnsWithGaps[prev] / alig->originalNumberOfResidues);
 
             // Calculate the first slope between the previus and current points.
-            firstSlopeVector[act] = ((float) (act - prev) / _alignment->originalNumberOfSequences);
-            firstSlopeVector[act] /= ((float) numColumnsWithGaps[act] / _alignment->originalNumberOfResidues);
+            firstSlopeVector[act] = ((float) (act - prev) / alig->originalNumberOfSequences);
+            firstSlopeVector[act] /= ((float) numColumnsWithGaps[act] / alig->originalNumberOfResidues);
 
             // Calculate the second slope between the earlier previus and current points.
-            secondSlopeVector[act] = ((float) (act - pprev) / _alignment->originalNumberOfSequences);
-            secondSlopeVector[act] /= ((float) (numColumnsWithGaps[act] + numColumnsWithGaps[prev]) / _alignment->originalNumberOfResidues);
+            secondSlopeVector[act] = ((float) (act - pprev) / alig->originalNumberOfSequences);
+            secondSlopeVector[act] /= ((float) (numColumnsWithGaps[act] + numColumnsWithGaps[prev]) / alig->originalNumberOfResidues);
 
             // If the ratio between ...
             if ((secondSlopeVector[pprev] != -1.0) || (firstSlopeVector[pprev] != -1.0)) {
@@ -356,8 +356,8 @@ namespace Statistics {
                 break;
 
             // Calculate the second slope between the earlier previous and current points.
-            secondSlopeVector[act] = ((float) (act - pprev) / _alignment->numberOfSequences);
-            secondSlopeVector[act] /= ((float) (numColumnsWithGaps[act] + numColumnsWithGaps[prev]) / _alignment->originalNumberOfResidues);
+            secondSlopeVector[act] = ((float) (act - pprev) / alig->numberOfSequences);
+            secondSlopeVector[act] /= ((float) (numColumnsWithGaps[act] + numColumnsWithGaps[prev]) / alig->originalNumberOfResidues);
 
             // If the ratio between second slope current and second slope earlier previous points.
             if (secondSlopeVector[pprev] != -1.0) {
@@ -392,17 +392,17 @@ namespace Statistics {
         int *vectAux;
 
         // We allocate a local vector to recovery information on it
-        vectAux = new int[_alignment->originalNumberOfResidues];
+        vectAux = new int[alig->originalNumberOfResidues];
 
         // We decide about the information's source then we get the information.
         if (halfWindow == 0)
-            utils::copyVect(gapsInColumn, vectAux, _alignment->originalNumberOfResidues);
+            utils::copyVect(gapsInColumn, vectAux, alig->originalNumberOfResidues);
         else
-            utils::copyVect(gapsWindow, vectAux, _alignment->originalNumberOfResidues);
+            utils::copyVect(gapsWindow, vectAux, alig->originalNumberOfResidues);
 
         int size = 20;
 
-        std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
+        std::string fname = alig->filename.substr(6, alig->filename.size() - 7);
 
         std::cout
                 << std::setw(fname.length() + 7)
@@ -424,7 +424,7 @@ namespace Statistics {
 
         std::cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << "\n";
 
-        std::cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
+        std::cout << std::setw(alig->filename.substr(6, alig->filename.size() - 7).length() + 7)
                   << std::setfill('-')
                   << std::left << ""
                   << std::setfill(' ')
@@ -446,13 +446,13 @@ namespace Statistics {
         std::cout.precision(10);
 
         // Show the information that have been requered
-        for (int i = 0; i < _alignment->originalNumberOfResidues; i++)
+        for (int i = 0; i < alig->originalNumberOfResidues; i++)
             std::cout << std::setw(size) << std::setfill(' ') << std::left << i
                       << std::setw(size) << std::setfill(' ') << std::left
                       << std::setw(size - 6) << std::setfill(' ') << std::right
-                      << (vectAux[i] * 100.0) / _alignment->originalNumberOfSequences
+                      << (vectAux[i] * 100.0) / alig->originalNumberOfSequences
                       << std::setw(size) << std::setfill(' ') << std::right
-                      << 1.F - (float(vectAux[i]) / _alignment->originalNumberOfSequences) << "\n";
+                      << 1.F - (float(vectAux[i]) / alig->originalNumberOfSequences) << "\n";
 
         // Finally, we deallocate the local memory
         delete[] vectAux;
@@ -469,7 +469,7 @@ namespace Statistics {
         int acm, i;
         int size = 20;
 
-        std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
+        std::string fname = alig->filename.substr(6, alig->filename.size() - 7);
 
         std::cout
                 << std::setw(fname.length() + 7)
@@ -491,7 +491,7 @@ namespace Statistics {
 
         std::cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << "\n";
 
-        std::cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
+        std::cout << std::setw(alig->filename.substr(6, alig->filename.size() - 7).length() + 7)
                   << std::setfill('-')
                   << std::left << ""
                   << std::setfill(' ')
@@ -561,7 +561,7 @@ namespace Statistics {
 
                 // Percentage of alignment
                 std::cout << std::setw(size) << std::left
-                          << std::setw(size - 6) << std::right << (numColumnsWithGaps[i] * 100.0F) / _alignment->originalNumberOfResidues
+                          << std::setw(size - 6) << std::right << (numColumnsWithGaps[i] * 100.0F) / alig->originalNumberOfResidues
                           << std::setw(6) << std::left << " ";
 
                 // Accumulative residues
@@ -569,17 +569,17 @@ namespace Statistics {
 
                 // Accumulative percent of alignment
                 std::cout << std::setw(size) << std::left
-                          << std::setw(size - 6) << std::right << (acm * 100.0F) / _alignment->originalNumberOfResidues
+                          << std::setw(size - 6) << std::right << (acm * 100.0F) / alig->originalNumberOfResidues
                           << std::setw(6) << std::left << " ";
 
                 // Number of gaps per column
                 std::cout << std::setw(size) << std::left << i;
 
                 // Percentage of gaps per column
-                std::cout << std::setw(size) << std::left << (i * 1.0F) / _alignment->originalNumberOfSequences;
+                std::cout << std::setw(size) << std::left << (i * 1.0F) / alig->originalNumberOfSequences;
 
                 // Gaps score per column
-                std::cout << std::setw(size) << std::left << 1.F - (((float) i) / _alignment->originalNumberOfSequences);
+                std::cout << std::setw(size) << std::left << 1.F - (((float) i) / alig->originalNumberOfSequences);
 
                 // End line
                 std::cout << "\n";
@@ -590,11 +590,11 @@ namespace Statistics {
     void Gaps::CalculateVectors() {
         int i, j;
         // Count the gaps and indeterminations of each columns
-        for (i = 0; i < _alignment->originalNumberOfResidues; i++) {
+        for (i = 0; i < alig->originalNumberOfResidues; i++) {
             gapsInColumn[i] = 0;
-            for (j = 0; j < _alignment->originalNumberOfSequences; j++) {
-                if (_alignment->saveSequences[j] == -1) continue;
-                if (_alignment->sequences[j][i] == '-')
+            for (j = 0; j < alig->originalNumberOfSequences; j++) {
+                if (alig->saveSequences[j] == -1) continue;
+                if (alig->sequences[j][i] == '-')
                     gapsInColumn[i]++;
             }
 

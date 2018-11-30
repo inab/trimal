@@ -2,7 +2,7 @@
 #define READWRITES_H
 
 #include "Alignment.h"
-#include "../../include/reportsystem.h"
+#include "reportsystem.h"
 
 #include <iomanip>
 
@@ -66,12 +66,10 @@ public:
      \brief Function to save a \link Alignment \endlink to a file.
      \param alignment Alignment to save.
      \param output File Handler where to save the formatted alignment;
-     \param FileName File Name of the File Handler.
      \return    <b> True </b>if file could be saved.\n
                 <b> False </b> otherwise.
-     \todo Remove the File Name Argument as it's stored on the alignment itself.
      */
-    virtual bool SaveAlignment(Alignment *alignment, std::ostream *output, std::string *FileName) = 0;
+    virtual bool SaveAlignment(Alignment *alignment, std::ostream *output) = 0;
 
     /**
      \brief Function that recognizes acronyms of the format.

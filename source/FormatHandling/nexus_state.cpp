@@ -1,8 +1,8 @@
-#include "../../include/FormatHandling/nexus_state.h"
+#include "FormatHandling/nexus_state.h"
 
-#include "../../include/FormatHandling/FormatManager.h"
-#include "../../include/defines.h"
-#include "../../include/utils.h"
+#include "FormatHandling/FormatManager.h"
+#include "defines.h"
+#include "utils.h"
 
 int nexus_state::CheckAlignment(std::istream* origin)
 {
@@ -17,23 +17,28 @@ int nexus_state::CheckAlignment(std::istream* origin)
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
+    {
+        delete [] line;
         return false;
+    }
 
     /* Otherwise, split line */
     firstWord = strtok(line, OTHDELIMITERS);
 
     /* Clustal Format */
     if((!strcmp(firstWord, "#NEXUS")) || (!strcmp(firstWord, "#nexus")))
+    {
+        delete[] line;
         return 1;
+    }
 
     delete[] line;
- 
     return 0;
 }
 
 Alignment* nexus_state::LoadAlignment(std::string& filename)
 {
-    Alignment* _alignment = new Alignment();
+    Alignment* alig = new Alignment();
     /* NEXUS file format parser */
     char *frag = nullptr, *str = nullptr, *line = nullptr;
     int i, pos, state, firstBlock;
@@ -46,9 +51,9 @@ Alignment* nexus_state::LoadAlignment(std::string& filename)
 
     /* Store input file name for posterior uses in other formats */
     /* We store the file name */
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(filename);
-    _alignment->filename.append(";");
+    // alig->filename.append("!Title ");
+    alig->filename.append(filename);
+    alig->filename.append(";");
 
     state = false;
     do {
@@ -82,8 +87,8 @@ Alignment* nexus_state::LoadAlignment(std::string& filename)
         else if(!strcmp(str, "FORMAT")) {
             str = strtok(nullptr, DELIMITERS);
             while(str != nullptr) {
-                _alignment-> alignmentInfo.append(str, strlen(str));
-                _alignment-> alignmentInfo.append(" ", strlen(" "));
+                alig-> alignmentInfo.append(str, strlen(str));
+                alig-> alignmentInfo.append(" ", strlen(" "));
                 str = strtok(nullptr, DELIMITERS);
             }
         }
@@ -93,19 +98,19 @@ Alignment* nexus_state::LoadAlignment(std::string& filename)
             str = strtok(nullptr, DELIMITERS);
             frag = strtok(nullptr, DELIMITERS);
             str = strtok(str, "=;");
-            _alignment->numberOfSequences = atoi(strtok(nullptr, "=;"));
+            alig->numberOfSequences = atoi(strtok(nullptr, "=;"));
             frag = strtok(frag, "=;");
-            _alignment->numberOfResidues = atoi(strtok(nullptr, "=;"));
+            alig->numberOfResidues = atoi(strtok(nullptr, "=;"));
         }
     } while(!file.eof());
 
     /* Check all parameters */
-    if(strcmp(str, "MATRIX") || (_alignment->numberOfSequences == 0) || (_alignment->numberOfResidues == 0))
+    if(strcmp(str, "MATRIX") || (alig->numberOfSequences == 0) || (alig->numberOfResidues == 0))
         return nullptr;
 
     /* Allocate memory for the input alignment */
-    _alignment->seqsName  = new std::string[_alignment->numberOfSequences];
-    _alignment->sequences = new std::string[_alignment->numberOfSequences];
+    alig->seqsName  = new std::string[alig->numberOfSequences];
+    alig->sequences = new std::string[alig->numberOfSequences];
 
     pos = 0;
     state = false;
@@ -145,19 +150,19 @@ Alignment* nexus_state::LoadAlignment(std::string& filename)
 
         /* Store the sequence name, only from the first block */
         if(firstBlock)
-            _alignment->seqsName[pos].append(str, strlen(str));
+            alig->seqsName[pos].append(str, strlen(str));
 
         /* Store rest of line as part of sequence */
         str = strtok(nullptr, OTH2DELIMITERS);
         while(str != nullptr) {
-            _alignment->sequences[pos].append(str, strlen(str));
+            alig->sequences[pos].append(str, strlen(str));
             str = strtok(nullptr, OTH2DELIMITERS);
         }
 
         /* Move sequences pointer to next one. It if it is last one, move it to
          * the beginning and set the first block to false for avoiding to rewrite
          * sequences name */
-        pos = (pos + 1) % _alignment->numberOfSequences;
+        pos = (pos + 1) % alig->numberOfSequences;
         if (not pos)
             firstBlock = false;
     }
@@ -169,13 +174,13 @@ Alignment* nexus_state::LoadAlignment(std::string& filename)
     file.close();
 
     /* Check the matrix's content */
-    _alignment->fillMatrices(true);
-    _alignment->originalNumberOfSequences = _alignment-> numberOfSequences;
-    _alignment->originalNumberOfResidues =_alignment->numberOfResidues;
-    return _alignment;
+    alig->fillMatrices(true);
+    alig->originalNumberOfSequences = alig-> numberOfSequences;
+    alig->originalNumberOfResidues =alig->numberOfResidues;
+    return alig;
 }
 
-bool nexus_state::SaveAlignment(Alignment* alignment, std::ostream* output, std::string* FileName)
+bool nexus_state::SaveAlignment(Alignment* alignment, std::ostream* output)
 {
     /* Generate output alignment in NEXUS format setting only alignment block */
 

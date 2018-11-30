@@ -24,9 +24,9 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "../include/trimalManager.h"
 #include "InternalBenchmarker.h"
-#include "../include/reportsystem.h"
+#include "trimalManager.h"
+#include "reportsystem.h"
 
 int main(int argc, char *argv[]) {
 

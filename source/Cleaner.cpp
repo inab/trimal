@@ -1,15 +1,15 @@
 
-#include "Statistics/Conservation.h"
+#include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
+#include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
 #include "Statistics/Gaps.h"
-#include "InternalBenchmarker.h"
+#include "reportsystem.h"
 #include "Alignment.h"
-#include "../include/reportsystem.h"
-#include "../include/defines.h"
-#include "../include/Cleaner.h"
-#include "../include/values.h"
-#include "../include/utils.h"
+#include "defines.h"
+#include "Cleaner.h"
+#include "values.h"
+#include "utils.h"
 
 int Cleaner::selectMethod() {
     // Create a timer that will report times upon its destruction
@@ -20,7 +20,7 @@ int Cleaner::selectMethod() {
     int i, j;
 
     // Ask for the sequence identities assesment
-    if (_alignment->identities == nullptr)
+    if (alig->identities == nullptr)
         calculateSeqIdentity();
 
     // Once we have the identities among all possible
@@ -28,19 +28,19 @@ int Cleaner::selectMethod() {
     // compute the average identity as well as the
     // average identity for each sequence with its most
     // similar one
-    for (i = 0; i < _alignment->numberOfSequences; i++) {
-        for (j = 0, mx = 0, avg = 0; j < _alignment->numberOfSequences; j++) {
+    for (i = 0; i < alig->numberOfSequences; i++) {
+        for (j = 0, mx = 0, avg = 0; j < alig->numberOfSequences; j++) {
             if (i != j) {
-                mx = mx < _alignment->identities[i][j] ? _alignment->identities[i][j] : mx;
-                avg += _alignment->identities[i][j];
+                mx = mx < alig->identities[i][j] ? alig->identities[i][j] : mx;
+                avg += alig->identities[i][j];
             }
         }
-        avgSeq += avg / (_alignment->numberOfSequences - 1);
+        avgSeq += avg / (alig->numberOfSequences - 1);
         maxSeq += mx;
     }
 
-    avgSeq = avgSeq / _alignment->numberOfSequences;
-    maxSeq = maxSeq / _alignment->numberOfSequences;
+    avgSeq = avgSeq / alig->numberOfSequences;
+    maxSeq = maxSeq / alig->numberOfSequences;
     // With the different parameters, we decide wich one
     // is the best automated method, based on a previous
     // simulated data benchmarks, to trim the alig
@@ -51,7 +51,7 @@ int Cleaner::selectMethod() {
         // the best automated method, always based on our
         // benchmarks, to trim the input alignment
     else {
-        if (_alignment->numberOfSequences <= 20) return GAPPYOUT;
+        if (alig->numberOfSequences <= 20) return GAPPYOUT;
         else {
             if ((maxSeq >= 0.5) && (maxSeq <= 0.65)) return GAPPYOUT;
             else return STRICT;
@@ -68,15 +68,15 @@ Alignment *Cleaner::cleanByCutValueOverpass(
     //	which means the end of the current scope.
     StartTiming("Alignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const int *gInCol, bool complementary) ");
     int i, j, k, jn, oth, block = 0, *vectAux, residues;
-    Alignment *newAlig = new Alignment(*_alignment);
+    Alignment *newAlig = new Alignment(*alig);
 
     // Select the columns with a gaps value
     // less or equal than the cut point.
     //
     // We also take advantage of the bucle
     // to recalculate the number of residues kept
-    for (i = 0, residues = 0; i < _alignment->originalNumberOfResidues; i++) {
-        if (_alignment->saveResidues[i] == -1)
+    for (i = 0, residues = 0; i < alig->originalNumberOfResidues; i++) {
+        if (alig->saveResidues[i] == -1)
             continue;
 
         block++;
@@ -86,7 +86,7 @@ Alignment *Cleaner::cleanByCutValueOverpass(
         else
             newAlig->saveResidues[i] = -1;
     }
-    _alignment->numberOfResidues = block;
+    alig->numberOfResidues = block;
 
     // Compute, the number of columns necessary
     // to achieve the minimum number of columns
@@ -101,15 +101,15 @@ Alignment *Cleaner::cleanByCutValueOverpass(
         vectAux = new int[block];
         // Fill the array with the previously kept values
         int ii = 0;
-        for (i = 0; i < _alignment->originalNumberOfResidues; i++) {
-            if (_alignment->saveResidues[i] == -1) continue;
+        for (i = 0; i < alig->originalNumberOfResidues; i++) {
+            if (alig->saveResidues[i] == -1) continue;
             vectAux[ii++] = gInCol[i];
         }
 
         // Sort a copy of the array,
         // and take the value of the column that marks the % baseline
-        utils::quicksort(vectAux, 0, _alignment->numberOfResidues - 1);
-        cut = vectAux[(int) ((float) (_alignment->numberOfResidues - 1) * (baseLine) / 100.0)];
+        utils::quicksort(vectAux, 0, alig->numberOfResidues - 1);
+        cut = vectAux[(int) ((float) (alig->numberOfResidues - 1) * (baseLine) / 100.0)];
 
         delete[] vectAux;
 
@@ -117,9 +117,9 @@ Alignment *Cleaner::cleanByCutValueOverpass(
         // This can't be obtained directly
         // as some parts may have been previously trimmed
         for (int halfBlock = block / 2;
-             midPoint < _alignment->originalNumberOfResidues;
+             midPoint < alig->originalNumberOfResidues;
              midPoint++) {
-            if (_alignment->saveResidues[midPoint] == -1) continue;
+            if (alig->saveResidues[midPoint] == -1) continue;
             if (counter >= halfBlock) break;
             counter++;
         }
@@ -129,14 +129,14 @@ Alignment *Cleaner::cleanByCutValueOverpass(
             // We start in the alignment center residue,
             // then we move on right and left side at the same time.
             for (i = midPoint, j = i + 1;
-                 (i > 0 || j < _alignment->originalNumberOfResidues - 1)
+                 (i > 0 || j < alig->originalNumberOfResidues - 1)
                  && oth > 0;
                  i--, j++) {
                 // Left side
                 {
                     // Left side. Here, we compute the block's size.
                     for (block = 0, jn = i; jn >= 0 && oth > 0; jn--) {
-                        if (_alignment->saveResidues[jn] == -1) continue;
+                        if (alig->saveResidues[jn] == -1) continue;
                         else if (newAlig->saveResidues[jn] == -1) {
                             break;
                         } else block++;
@@ -147,7 +147,7 @@ Alignment *Cleaner::cleanByCutValueOverpass(
                     // saved previously.
                     if (block >= k) {
                         for (; jn >= 0 && oth > 0 && newAlig->saveResidues[jn] == -1; jn--) {
-                            if (_alignment->saveResidues[jn] == -1) continue;
+                            if (alig->saveResidues[jn] == -1) continue;
                             if (gInCol[jn] <= cut) {
                                 newAlig->saveResidues[jn] = jn;
                                 oth--;
@@ -160,8 +160,8 @@ Alignment *Cleaner::cleanByCutValueOverpass(
                 // Right side
                 {
                     // Right side. Here, we compute the block's size.
-                    for (block = 0, jn = j; jn < _alignment->originalNumberOfResidues && oth > 0; jn++) {
-                        if (_alignment->saveResidues[jn] == -1) continue;
+                    for (block = 0, jn = j; jn < alig->originalNumberOfResidues && oth > 0; jn++) {
+                        if (alig->saveResidues[jn] == -1) continue;
                         else if (newAlig->saveResidues[jn] == -1) {
                             break;
                         } else block++;
@@ -171,11 +171,11 @@ Alignment *Cleaner::cleanByCutValueOverpass(
                     // size then we save all columns that have not been
                     // saved previously.
                     if (block >= k) {
-                        for (; jn < _alignment->originalNumberOfResidues
+                        for (; jn < alig->originalNumberOfResidues
                                && oth > 0
                                && newAlig->saveResidues[jn] == -1;
                                jn++) {
-                            if (_alignment->saveResidues[jn] == -1) continue;
+                            if (alig->saveResidues[jn] == -1) continue;
                             if (gInCol[jn] <= cut) {
                                 newAlig->saveResidues[jn] = jn;
                                 oth--;
@@ -189,7 +189,7 @@ Alignment *Cleaner::cleanByCutValueOverpass(
         }
     }
 
-    newAlig->Cleaning->removeSmallerBlocks(blockSize, *_alignment);
+    newAlig->Cleaning->removeSmallerBlocks(blockSize, *alig);
 
     // Check for any additional column/sequence to be removed
     // Compute new sequences and columns numbers
@@ -209,15 +209,15 @@ Alignment *Cleaner::cleanByCutValueFallBehind(
     //	which means the end of the current scope.
     StartTiming("Alignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, const float *ValueVect, bool complementary) ");
     int i, j, k, jn, oth, block = 0, residues;
-    Alignment *newAlig = new Alignment(*_alignment);
+    Alignment *newAlig = new Alignment(*alig);
 
     // Select the columns with a gaps value
     // less or equal than the cut point.
     //
     // We also take advantage of the bucle
     // to recalculate the number of residues kept
-    for (i = 0, residues = 0; i < _alignment->originalNumberOfResidues; i++) {
-        if (_alignment->saveResidues[i] == -1)
+    for (i = 0, residues = 0; i < alig->originalNumberOfResidues; i++) {
+        if (alig->saveResidues[i] == -1)
             continue;
 
         block++;
@@ -227,7 +227,7 @@ Alignment *Cleaner::cleanByCutValueFallBehind(
         else
             newAlig->saveResidues[i] = -1;
     }
-    _alignment->numberOfResidues = block;
+    alig->numberOfResidues = block;
 
     // Compute, the number of columns necessary
     // to achieve the minimum number of columns
@@ -239,9 +239,9 @@ Alignment *Cleaner::cleanByCutValueFallBehind(
     if (oth > 0) {
         int midPoint = 0, counter = 0;
         for (int halfBlock = block / 2;
-             midPoint < _alignment->originalNumberOfResidues;
+             midPoint < alig->originalNumberOfResidues;
              midPoint++) {
-            if (_alignment->saveResidues[midPoint] == -1) continue;
+            if (alig->saveResidues[midPoint] == -1) continue;
             if (counter >= halfBlock) break;
             counter++;
         }
@@ -252,7 +252,7 @@ Alignment *Cleaner::cleanByCutValueFallBehind(
             // We start in the alignment center residue,
             // then we move on right and left side at the same time.
             for (i = midPoint, j = i + 1;
-                 (i > 0 || j < _alignment->originalNumberOfResidues - 1)
+                 (i > 0 || j < alig->originalNumberOfResidues - 1)
                  && oth > 0;
                  i--, j++) {
                 // Left side
@@ -261,7 +261,7 @@ Alignment *Cleaner::cleanByCutValueFallBehind(
                     for (block = 0, jn = i;
                          jn >= 0 && oth > 0;
                          jn--) {
-                        if (_alignment->saveResidues[jn] == -1) continue;
+                        if (alig->saveResidues[jn] == -1) continue;
                         else if (newAlig->saveResidues[jn] == -1) {
                             break;
                         } else block++;
@@ -272,7 +272,7 @@ Alignment *Cleaner::cleanByCutValueFallBehind(
                     // saved previously.
                     if (block >= k) {
                         for (; jn >= 0 && oth > 0 && newAlig->saveResidues[jn] == -1; jn--) {
-                            if (_alignment->saveResidues[jn] == -1) continue;
+                            if (alig->saveResidues[jn] == -1) continue;
                             if (ValueVect[jn] == cut) {
                                 newAlig->saveResidues[jn] = jn;
                                 oth--;
@@ -286,9 +286,9 @@ Alignment *Cleaner::cleanByCutValueFallBehind(
                 {
                     // Right side. Here, we compute the block's size.
                     for (block = 0, jn = j;
-                         jn < _alignment->originalNumberOfResidues && oth > 0;
+                         jn < alig->originalNumberOfResidues && oth > 0;
                          jn++) {
-                        if (_alignment->saveResidues[jn] == -1) continue;
+                        if (alig->saveResidues[jn] == -1) continue;
                         else if (newAlig->saveResidues[jn] == -1) {
                             break;
                         } else block++;
@@ -298,11 +298,11 @@ Alignment *Cleaner::cleanByCutValueFallBehind(
                     // size then we save all columns that have not been
                     // saved previously.
                     if (block >= k) {
-                        for (; jn < _alignment->originalNumberOfResidues
+                        for (; jn < alig->originalNumberOfResidues
                                && oth > 0
                                && newAlig->saveResidues[jn] == -1;
                                jn++) {
-                            if (_alignment->saveResidues[jn] == -1) continue;
+                            if (alig->saveResidues[jn] == -1) continue;
                             if (ValueVect[jn] == cut) {
                                 newAlig->saveResidues[jn] = jn;
                                 oth--;
@@ -316,7 +316,7 @@ Alignment *Cleaner::cleanByCutValueFallBehind(
         }
     }
 
-    newAlig->Cleaning->removeSmallerBlocks(blockSize, *_alignment);
+    newAlig->Cleaning->removeSmallerBlocks(blockSize, *alig);
 
     // Check for any additional column/sequence to be removed
     // Compute new sequences and columns numbers
@@ -338,14 +338,14 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
     StartTiming("Alignment *Cleaner::cleanByCutValueOverpassOrEquals(double cutGaps, const int *gInCol, float baseLine, float cutCons, const float *MDK_Win, bool complementary) ");
 
     int i, j, k, jn, resCounter, remainingResidues, block;
-    Alignment *newAlig = new Alignment(*_alignment);
+    Alignment *newAlig = new Alignment(*alig);
 
     // Remove the residues using both statistics
     // We also profit the bucle and count the number of residues in the previous alignment
     for (i = 0, resCounter = 0, block = 0;
-         i < _alignment->originalNumberOfResidues;
+         i < alig->originalNumberOfResidues;
          i++) {
-        if (_alignment->saveResidues[i] == -1)
+        if (alig->saveResidues[i] == -1)
             continue;
         if (MDK_Win[i] > cutCons && gInCol[i] <= cutGaps)
             resCounter++;
@@ -357,7 +357,7 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
     }
 //    debug << "\n";
 
-    _alignment->numberOfResidues = block;
+    alig->numberOfResidues = block;
 
     remainingResidues = utils::roundInt((((baseLine / 100.0) - (float) resCounter / block)) * block);
 
@@ -371,27 +371,27 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
 
         // Fill the temporary vectors
         int ii = 0;
-        for (i = 0; i < _alignment->originalNumberOfResidues; i++) {
-            if (_alignment->saveResidues[i] == -1) continue;
+        for (i = 0; i < alig->originalNumberOfResidues; i++) {
+            if (alig->saveResidues[i] == -1) continue;
             vectAuxCons[ii] = MDK_Win[i];
             vectAuxGaps[ii++] = gInCol[i];
         }
 
         // Sort them
         utils::quicksort(vectAuxCons, 0, block - 1);
-        float blCons = vectAuxCons[(int) ((float) (_alignment->numberOfResidues - 1) * (100.0 - baseLine) / 100.0)];
+        float blCons = vectAuxCons[(int) ((float) (alig->numberOfResidues - 1) * (100.0 - baseLine) / 100.0)];
         delete[] vectAuxCons;
 
         utils::quicksort(vectAuxGaps, 0, block - 1);
-        float blGaps = vectAuxGaps[(int) ((float) (_alignment->numberOfResidues - 1) * (baseLine) / 100.0)];
+        float blGaps = vectAuxGaps[(int) ((float) (alig->numberOfResidues - 1) * (baseLine) / 100.0)];
         delete[] vectAuxGaps;
 
         // Calculate the midpoint of the alignment
         int midPoint = 0, counter = 0;
         for (int halfBlock = block / 2;
-             midPoint < _alignment->originalNumberOfResidues;
+             midPoint < alig->originalNumberOfResidues;
              midPoint++) {
-            if (_alignment->saveResidues[midPoint] == -1) continue;
+            if (alig->saveResidues[midPoint] == -1) continue;
             if (counter >= halfBlock) break;
             counter++;
         }
@@ -416,7 +416,7 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
                          jn >= 0 && remainingResidues > 0;
                          jn--)
                     {
-                        if (_alignment->saveResidues[jn] == -1) continue;
+                        if (alig->saveResidues[jn] == -1) continue;
                         else if (newAlig->saveResidues[jn] == -1) {
                             break;
                         } else block++;
@@ -431,7 +431,7 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
                         for (; jn >= 0 && remainingResidues > 0 &&
                                        newAlig->saveResidues[jn] == -1;
                                jn--) {
-                            if (_alignment->saveResidues[jn] == -1) continue;
+                            if (alig->saveResidues[jn] == -1) continue;
                             if (MDK_Win[jn] >= blCons || gInCol[jn] <= blGaps) {
                                 newAlig->saveResidues[jn] = jn;
                                 remainingResidues--;
@@ -447,9 +447,9 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
 //                    debug << "[NEW] j " << j << " ";
                     // Right side. Here, we compute the block's size.
                     for (block = 0, jn = j;
-                         jn < _alignment->originalNumberOfResidues && remainingResidues > 0;
+                         jn < alig->originalNumberOfResidues && remainingResidues > 0;
                          jn++) {
-                        if (_alignment->saveResidues[jn] == -1) continue;
+                        if (alig->saveResidues[jn] == -1) continue;
                         else if (newAlig->saveResidues[jn] == -1) {
                             break;
                         } else block++;
@@ -460,11 +460,11 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
                     // size then we save all columns that have not been
                     // saved previously.
                     if (block >= k) {
-                        for (; jn < _alignment->originalNumberOfResidues &&
+                        for (; jn < alig->originalNumberOfResidues &&
                                        remainingResidues > 0 &&
                                        newAlig->saveResidues[jn] == -1;
                                jn++) {
-                            if (_alignment->saveResidues[jn] == -1) continue;
+                            if (alig->saveResidues[jn] == -1) continue;
                             if (MDK_Win[jn] >= blCons || gInCol[jn] <= blGaps) {
                                 newAlig->saveResidues[jn] = jn;
                                 remainingResidues--;
@@ -481,7 +481,7 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
     }
 
 
-    newAlig->Cleaning->removeSmallerBlocks(blockSize, *_alignment);
+    newAlig->Cleaning->removeSmallerBlocks(blockSize, *alig);
 
     // Check for any additional column/sequence to be removed
     // Compute new sequences and columns numbers
@@ -496,11 +496,11 @@ Alignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, con
     StartTiming("Alignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, const float *MDK_W, bool complementary, bool variable) ");
 
     int i, x, pos, counter, lenBlock;
-    Alignment *newAlig = new Alignment(*_alignment);
+    Alignment *newAlig = new Alignment(*alig);
 
 
     // Reject columns with gaps number greater than the gap threshold.
-    for (i = 0; i < _alignment->originalNumberOfResidues; i++) {
+    for (i = 0; i < alig->originalNumberOfResidues; i++) {
         if (gInCol[i] > gapCut || MDK_W[i] < simCut)
             newAlig->saveResidues[i] = -1;
     }
@@ -513,9 +513,9 @@ Alignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, con
         std::deque<int> positionResidueBuffer = std::deque<int>(); // Here we store the position of the residues of the previous deque.
         
         int num;
-        // We're going to add the first 5 newAlig residues. That means, they are not rejected on the original _alignment.
-        for (i = 0, num = 0; i < _alignment->originalNumberOfResidues && num < 5; i++) {
-            if (_alignment->saveResidues[i] == -1) continue;
+        // We're going to add the first 5 newAlig residues. That means, they are not rejected on the original alig.
+        for (i = 0, num = 0; i < alig->originalNumberOfResidues && num < 5; i++) {
+            if (alig->saveResidues[i] == -1) continue;
             else {
                 rejectResiduesBuffer.push_back(newAlig->saveResidues[i] == -1);
                 positionResidueBuffer.push_back(i);
@@ -587,8 +587,8 @@ Alignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, con
 
         // Move the window until it arrives to the end of the alignment.
         if (num == 5)
-            for (; i < _alignment->originalNumberOfResidues; i++) {
-                if (_alignment->saveResidues[i] == -1) continue;
+            for (; i < alig->originalNumberOfResidues; i++) {
+                if (alig->saveResidues[i] == -1) continue;
                     // If we find a new newAlig residue...
                 else {
                     // We add one new value to each buffer and remove the oldest value from it, effectively moving the window.
@@ -648,7 +648,7 @@ Alignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, con
     if (!variable)
         lenBlock = 5;
     else {
-        lenBlock = utils::roundInt(_alignment->numberOfResidues * 0.01F);
+        lenBlock = utils::roundInt(alig->numberOfResidues * 0.01F);
         lenBlock = lenBlock > 3 ? (lenBlock < 12 ? lenBlock : 12) : 3;
     }
 
@@ -659,7 +659,7 @@ Alignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, con
 
     for (i = 0, pos = 0, counter = 0; i < newAlig->originalNumberOfResidues; i++) {
 
-        if (_alignment->saveResidues[i] == -1) {
+        if (alig->saveResidues[i] == -1) {
             pos++;
             continue;
         }
@@ -696,12 +696,12 @@ Alignment *Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, boo
     //	which means the end of the current scope.
     StartTiming("Alignment *Cleaner::cleanOverlapSeq(float minimumOverlap, float *overlapSeq, bool complementary) ");
 
-    Alignment *newAlig = new Alignment(*_alignment);
+    Alignment *newAlig = new Alignment(*alig);
     int i;
 
     // Keep only those sequences with an overlap value equal or greater than
     // the minimum overlap value set by the user.
-    for (i = 0; i < _alignment->originalNumberOfSequences; i++) {
+    for (i = 0; i < alig->originalNumberOfSequences; i++) {
         if (overlapSeq[i] < minimumOverlap)
             newAlig->saveSequences[i] = -1;
     }
@@ -722,15 +722,15 @@ Alignment *Cleaner::cleanGaps(float baseLine, float gapsPct, bool complementary)
     double cut;
 
     // If gaps statistics are not calculated, we calculate them
-    if (!_alignment->Statistics->calculateGapStats()) return nullptr;
+    if (!alig->Statistics->calculateGapStats()) return nullptr;
 
     // Obtain the cut point using the given parameters
-    cut = _alignment->Statistics->gaps->calcCutPoint(baseLine, gapsPct);
+    cut = alig->Statistics->gaps->calcCutPoint(baseLine, gapsPct);
 
     // Once we have the cut value proposed, we call the
     // appropiate method to clean the Alignment and, then,
     // generate the new Alignment.
-    ret = cleanByCutValueOverpass(cut, baseLine, _alignment->Statistics->gaps->getGapsWindow(), complementary);
+    ret = cleanByCutValueOverpass(cut, baseLine, alig->Statistics->gaps->getGapsWindow(), complementary);
 
     // Return a reference of the new Alignment
     return ret;
@@ -745,17 +745,17 @@ Alignment *Cleaner::cleanConservation(float baseLine, float conservationPct, boo
     Alignment *ret;
     float cut;
 
-    // If conservation's statistics are not calculated,
+    // If similarity's statistics are not calculated,
     // we calculate them
-    if (!_alignment->Statistics->calculateConservationStats())
+    if (!alig->Statistics->calculateConservationStats())
         return nullptr;
     // Calculate the cut point using the given parameters
-    cut = (float) _alignment->Statistics->conservation->calcCutPoint(baseLine, conservationPct);
+    cut = (float) alig->Statistics->similarity->calcCutPoint(baseLine, conservationPct);
 
     // Once we have the cut value, we call the appropiate
     // method to clean the Alignment and, then, generate
     // the new Alignment
-    ret = cleanByCutValueFallBehind(cut, baseLine, _alignment->Statistics->conservation->getMdkWindowedVector(), complementary);
+    ret = cleanByCutValueFallBehind(cut, baseLine, alig->Statistics->similarity->getMdkWindowedVector(), complementary);
     // Return a reference of the new Alignment
     return ret;
 
@@ -772,26 +772,26 @@ Alignment *Cleaner::clean(float baseLine, float GapsPct, float conservationPct, 
 
     // If gaps statistics are not calculated, we calculate
     // them
-    if (!_alignment->Statistics->calculateGapStats())
+    if (!alig->Statistics->calculateGapStats())
         return nullptr;
 
-    // If conservation's statistics are not calculated,
+    // If similarity's statistics are not calculated,
     // we calculate them
-    if (!_alignment->Statistics->calculateConservationStats())
+    if (!alig->Statistics->calculateConservationStats())
         return nullptr;
 
     // Calculate the two cut points using the parameters
-    cutGaps = _alignment->Statistics->gaps->calcCutPoint(baseLine, GapsPct);
-    cutCons = _alignment->Statistics->conservation->calcCutPoint(baseLine, conservationPct);
+    cutGaps = alig->Statistics->gaps->calcCutPoint(baseLine, GapsPct);
+    cutCons = alig->Statistics->similarity->calcCutPoint(baseLine, conservationPct);
 
     // Clean the alingment using the two cut values, the
     // gapsWindow and MDK_Windows vectors and the baseline
     // value
     ret = cleanByCutValueOverpassOrEquals(cutGaps,
-                                          _alignment->Statistics->gaps->getGapsWindow(),
+                                          alig->Statistics->gaps->getGapsWindow(),
                                           baseLine,
                                           cutCons,
-                                          _alignment->Statistics->conservation->getMdkWindowedVector(),
+                                          alig->Statistics->similarity->getMdkWindowedVector(),
                                           complementary);
     // Return a reference of the clean Alignment object
     return ret;
@@ -809,13 +809,13 @@ Alignment *Cleaner::cleanCompareFile(const float cutpoint,
     float cut, *vectAux;
 
     // Allocate memory 
-    vectAux = new float[_alignment->originalNumberOfResidues];
+    vectAux = new float[alig->originalNumberOfResidues];
 
     // Sort a copy of the vectValues vector, and take the
     // value at 100% - baseline position.
-    utils::copyVect(vectValues, vectAux, _alignment->originalNumberOfResidues);
-    utils::quicksort(vectAux, 0, _alignment->originalNumberOfResidues - 1);
-    cut = vectAux[(int) ((float) (_alignment->originalNumberOfResidues - 1) * (100.0 - baseLine) / 100.0)];
+    utils::copyVect(vectValues, vectAux, alig->originalNumberOfResidues);
+    utils::quicksort(vectAux, 0, alig->originalNumberOfResidues - 1);
+    cut = vectAux[(int) ((float) (alig->originalNumberOfResidues - 1) * (100.0 - baseLine) / 100.0)];
 
     // We have to decide which is the smallest value
     // between the cutpoint value and the value from
@@ -840,8 +840,8 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
     int i, j, k, seqValue, ovrlap, hit;
     char indet;
 
-    float floatOverlap = overlap * float(_alignment->originalNumberOfSequences - 1);
-    ovrlap = int(overlap * (_alignment->originalNumberOfSequences - 1));
+    float floatOverlap = overlap * float(alig->originalNumberOfSequences - 1);
+    ovrlap = int(overlap * (alig->originalNumberOfSequences - 1));
 
     if (floatOverlap > float(ovrlap))
         ovrlap++;
@@ -850,47 +850,47 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
         return false;
     // Depending on the kind of Alignment, we have
     // different indetermination symbol
-    if (_alignment->getAlignmentType() & SequenceTypes::AA)
+    if (alig->getAlignmentType() & SequenceTypes::AA)
         indet = 'X';
     else
         indet = 'N';
     // For each Alignment's sequence, computes its overlap
-    for (i = 0, seqValue = 0; i < _alignment->originalNumberOfSequences; i++, seqValue = 0) {
+    for (i = 0, seqValue = 0; i < alig->originalNumberOfSequences; i++, seqValue = 0) {
         // For each Alignment's column, computes the overlap
         // between the selected sequence and the other ones
-        for (j = 0; j < _alignment->originalNumberOfResidues; j++) {
+        for (j = 0; j < alig->originalNumberOfResidues; j++) {
 
             // For sequences are before the sequence selected
             for (k = 0, hit = 0; k < i; k++) {
                 // If the element of sequence selected is the same
                 // that the element of sequence considered, computes
                 // a hit
-                if (_alignment->sequences[i][j] == _alignment->sequences[k][j])
+                if (alig->sequences[i][j] == alig->sequences[k][j])
                     hit++;
 
                     // If the element of sequence selected isn't a 'X' nor
                     // 'N' (indetermination) or a '-' (gap) and the element
                     // of sequence considered isn't a  a 'X' nor 'N'
                     // (indetermination) or a '-' (gap), computes a hit
-                else if ((_alignment->sequences[i][j] != indet) && (_alignment->sequences[i][j] != '-')
-                         && (_alignment->sequences[k][j] != indet) && (_alignment->sequences[k][j] != '-'))
+                else if ((alig->sequences[i][j] != indet) && (alig->sequences[i][j] != '-')
+                         && (alig->sequences[k][j] != indet) && (alig->sequences[k][j] != '-'))
                     hit++;
             }
 
             // For sequences are after the sequence selected
-            for (k = (i + 1); k < _alignment->originalNumberOfSequences; k++) {
+            for (k = (i + 1); k < alig->originalNumberOfSequences; k++) {
                 // If the element of sequence selected is the same
                 // that the element of sequence considered, computes
                 // a hit 
-                if (_alignment->sequences[i][j] == _alignment->sequences[k][j])
+                if (alig->sequences[i][j] == alig->sequences[k][j])
                     hit++;
 
                     // If the element of sequence selected isn't a 'X' nor
                     // 'N' (indetermination) or a '-' (gap) and the element
                     // of sequence considered isn't a  a 'X' nor 'N'
                     // (indetermination) or a '-' (gap), computes a hit
-                else if ((_alignment->sequences[i][j] != indet) && (_alignment->sequences[i][j] != '-')
-                         && (_alignment->sequences[k][j] != indet) && (_alignment->sequences[k][j] != '-'))
+                else if ((alig->sequences[i][j] != indet) && (alig->sequences[i][j] != '-')
+                         && (alig->sequences[k][j] != indet) && (alig->sequences[k][j] != '-'))
                     hit++;
             }
             // Finally, if the hit's number divided by number of
@@ -903,7 +903,7 @@ bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
         // For each Alignment's sequence, computes its spurious's
         // or overlap's value as the column's hits -for that
         // sequence- divided by column's number.
-        spuriousVector[i] = ((float) seqValue / _alignment->originalNumberOfResidues);
+        spuriousVector[i] = ((float) seqValue / alig->originalNumberOfResidues);
     }
 
     // If there is not problem in the method, return true
@@ -919,7 +919,7 @@ Alignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, 
     float *overlapVector;
     Alignment *newAlig;
 
-    overlapVector = new float[_alignment->originalNumberOfSequences];
+    overlapVector = new float[alig->originalNumberOfSequences];
 
     // Compute the overlap's vector using the overlap column's value
     if (!calculateSpuriousVector(overlapColumn, overlapVector))
@@ -944,14 +944,14 @@ Alignment *Cleaner::clean2ndSlope(bool complementarity) {
     int cut;
 
     //  If gaps statistics are not calculated, we calculate them 
-    if (!_alignment->Statistics->calculateGapStats())
+    if (!alig->Statistics->calculateGapStats())
         return nullptr;
 
     // We get the cut point using a automatic method for this purpose.
-    cut = _alignment->Statistics->gaps->calcCutPoint2ndSlope();
+    cut = alig->Statistics->gaps->calcCutPoint2ndSlope();
 
     // Using the cut point calculates in last steps, weclean the Alignment and generate a new Alignment
-    ret = cleanByCutValueOverpass(cut, 0, _alignment->Statistics->gaps->getGapsWindow(), complementarity);
+    ret = cleanByCutValueOverpass(cut, 0, alig->Statistics->gaps->getGapsWindow(), complementarity);
 
     // Returns the new Alignment.
     return ret;
@@ -966,22 +966,22 @@ Alignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
     int i, j, acm, gapCut, *positions, *gaps;
     double inic, fin, vlr;
 
-    // If conservation's statistics are not calculated, we calculate them
-    if (!_alignment->Statistics->calculateConservationStats())
+    // If similarity's statistics are not calculated, we calculate them
+    if (!alig->Statistics->calculateConservationStats())
         return nullptr;
 
     // Computes the gap cut point using a automatic method and at the same time, we get the gaps values from the Alignment.
-    gapCut = _alignment->Statistics->gaps->calcCutPoint2ndSlope();
-    gaps = _alignment->Statistics->gaps->getGapsWindow();
+    gapCut = alig->Statistics->gaps->calcCutPoint2ndSlope();
+    gaps = alig->Statistics->gaps->getGapsWindow();
 
-    simil = _alignment->Statistics->conservation->getMdkWindowedVector();
+    simil = alig->Statistics->similarity->getMdkWindowedVector();
 
     // Allocate local memory and initializate it to -1
-    positions = new int[_alignment->originalNumberOfResidues];
-    utils::initlVect(positions, _alignment->originalNumberOfResidues, -1);
+    positions = new int[alig->originalNumberOfResidues];
+    utils::initlVect(positions, alig->originalNumberOfResidues, -1);
     // The method only selects columns with gaps number less or equal than the gap's cut point. Counts the number of columns that have been selected
-    for (i = 0, acm = 0; i < _alignment->originalNumberOfResidues; i++) {
-        if (_alignment->saveResidues[i] == -1) continue;
+    for (i = 0, acm = 0; i < alig->originalNumberOfResidues; i++) {
+        if (alig->saveResidues[i] == -1) continue;
         if (gaps[i] <= gapCut) {
             positions[i] = i;
             acm++;
@@ -989,11 +989,11 @@ Alignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
     }
     // Allocate local memory and save the similaritys values for the columns that have been selected
     vectAux = new float[acm];
-    for (i = 0, j = 0; i < _alignment->originalNumberOfResidues; i++)
+    for (i = 0, j = 0; i < alig->originalNumberOfResidues; i++)
         if (positions[i] != -1)
             vectAux[j++] = simil[i];
 
-    // Sort the conservation's value vector.
+    // Sort the similarity's value vector.
     utils::quicksort(vectAux, 0, acm - 1);
 
     // ...and search for the vector points at the 20 and 80% of length.
@@ -1014,8 +1014,8 @@ Alignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
     simCut = (float) pow(10, vlr);
 
     // Clean the Alignment and generate a new Alignment object using the gaps cut and the similaritys cut values
-    Alignment *ret = cleanStrict(gapCut, _alignment->Statistics->gaps->getGapsWindow(),
-                                    simCut, _alignment->Statistics->conservation->getMdkWindowedVector(),
+    Alignment *ret = cleanStrict(gapCut, alig->Statistics->gaps->getGapsWindow(),
+                                    simCut, alig->Statistics->similarity->getMdkWindowedVector(),
                                     complementarity, variable);
 
     // Deallocate local memory
@@ -1034,11 +1034,11 @@ Alignment *Cleaner::cleanNoAllGaps(bool complementarity) {
     Alignment *ret;
 
     // If gaps statistics are not calculated, we calculate them
-    if (!_alignment->Statistics->calculateGapStats())
+    if (!alig->Statistics->calculateGapStats())
         return nullptr;
 
     // We want to conserve the columns with gaps' number less or equal than sequences' number - 1 
-    ret = cleanByCutValueOverpass((_alignment->originalNumberOfSequences - 1), 0, _alignment->Statistics->gaps->getGapsWindow(), complementarity);
+    ret = cleanByCutValueOverpass((alig->originalNumberOfSequences - 1), 0, alig->Statistics->gaps->getGapsWindow(), complementarity);
 
     // Returns the new Alignment.
     return ret;
@@ -1058,55 +1058,55 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     // Otherwise, if the users wants the maximum number of
     // clusters means that each sequence have to be in their
     // own cluster 
-    if (clusterNumber == _alignment->numberOfSequences) return 1;
+    if (clusterNumber == alig->numberOfSequences) return 1;
     else if (clusterNumber == 1) return 0;
 
     // Ask for the sequence identities assessment
-    if (_alignment->identities == nullptr)
+    if (alig->identities == nullptr)
         calculateSeqIdentity();
 
     // Compute the maximum, the minimum and the average
     // identity values from the sequences
-    for (i = 0, gMax = 0, gMin = 1, startingPoint = 0; i < _alignment->originalNumberOfSequences; i++) {
-        if (_alignment->saveSequences[i] == -1) continue;
+    for (i = 0, gMax = 0, gMin = 1, startingPoint = 0; i < alig->originalNumberOfSequences; i++) {
+        if (alig->saveSequences[i] == -1) continue;
 
         for (j = 0, max = 0, avg = 0, min = 1; j < i; j++) {
-            if (_alignment->saveSequences[j] == -1) continue;
+            if (alig->saveSequences[j] == -1) continue;
 
-            max = std::max(max, _alignment->identities[i][j]);
-            min = std::min(min, _alignment->identities[i][j]);
-            avg += _alignment->identities[i][j];
+            max = std::max(max, alig->identities[i][j]);
+            min = std::min(min, alig->identities[i][j]);
+            avg += alig->identities[i][j];
         }
 
-        for (j = i + 1; j < _alignment->numberOfSequences; j++) {
-            if (_alignment->saveSequences[j] == -1) continue;
+        for (j = i + 1; j < alig->numberOfSequences; j++) {
+            if (alig->saveSequences[j] == -1) continue;
 
-            max = std::max(max, _alignment->identities[i][j]);
-            min = std::min(min, _alignment->identities[i][j]);
-            avg += _alignment->identities[i][j];
+            max = std::max(max, alig->identities[i][j]);
+            min = std::min(min, alig->identities[i][j]);
+            avg += alig->identities[i][j];
         }
 
-        startingPoint += avg / (_alignment->numberOfSequences - 1);
+        startingPoint += avg / (alig->numberOfSequences - 1);
         gMax = std::max(gMax, max);
         gMin = std::min(gMin, min);
 
     }
     // Take the starting point as the average value
-    startingPoint /= _alignment->numberOfSequences;
+    startingPoint /= alig->numberOfSequences;
 
     // Compute and sort the sequence length
-    seqs = new int *[_alignment->numberOfSequences];
-    for (i = 0; i < _alignment->numberOfSequences; i++) {
+    seqs = new int *[alig->numberOfSequences];
+    for (i = 0; i < alig->numberOfSequences; i++) {
         seqs[i] = new int[2];
-        seqs[i][0] = utils::removeCharacter('-', _alignment->sequences[i]).size();
+        seqs[i][0] = utils::removeCharacter('-', alig->sequences[i]).size();
         seqs[i][1] = i;
     }
-    utils::quicksort(seqs, 0, _alignment->numberOfSequences - 1);
+    utils::quicksort(seqs, 0, alig->numberOfSequences - 1);
 
     // Create the data structure to store the different
     // clusters for a given thresholds
-    cluster = new int[_alignment->numberOfSequences];
-    cluster[0] = seqs[_alignment->numberOfSequences - 1][1];
+    cluster = new int[alig->numberOfSequences];
+    cluster[0] = seqs[alig->numberOfSequences - 1][1];
 
     // Look for the optimal identity value to get the
     // number of cluster set by the user. To do that, the
@@ -1120,10 +1120,10 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     do {
         clusterNum = 1;
         // Start the search
-        for (i = _alignment->numberOfSequences - 2; i >= 0; i--) {
+        for (i = alig->numberOfSequences - 2; i >= 0; i--) {
 
             for (j = 0; j < clusterNum; j++)
-                if (_alignment->identities[seqs[i][1]][cluster[j]] > startingPoint)
+                if (alig->identities[seqs[i][1]][cluster[j]] > startingPoint)
                     break;
 
             if (j == clusterNum) {
@@ -1164,7 +1164,7 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     } while (true);
 
     // Deallocate dinamic memory
-    for (i = 0; i < _alignment->numberOfSequences; i++) delete[] seqs[i];
+    for (i = 0; i < alig->numberOfSequences; i++) delete[] seqs[i];
     delete[] seqs;
     delete[] cluster;
 
@@ -1194,7 +1194,7 @@ Alignment *Cleaner::getClustering(float identityThreshold) {
     StartTiming("Alignment *Cleaner::getClustering(float identityThreshold) ");
 
     int i, j, *clustering;
-    Alignment *newAlig = new Alignment(*_alignment);
+    Alignment *newAlig = new Alignment(*alig);
 
     // Get the representative member for each cluster
     // given a maximum identity threshold
@@ -1202,8 +1202,8 @@ Alignment *Cleaner::getClustering(float identityThreshold) {
 
     // Put all sequences to be deleted and get back those
     // sequences that are representative for each cluster
-    for (i = 0; i < _alignment->originalNumberOfSequences; i++) {
-        if (_alignment->saveSequences[i] == -1) continue;
+    for (i = 0; i < alig->originalNumberOfSequences; i++) {
+        if (alig->saveSequences[i] == -1) continue;
         newAlig->saveSequences[i] = -1;
     }
     for (i = 1; i <= clustering[0]; i++) {
@@ -1223,7 +1223,7 @@ Alignment *Cleaner::removeColumns(int *columns, int init, int size, bool complem
     StartTiming("Alignment *Cleaner::removeColumns(int *columns, int init, int size, bool complementary) ");
 
     std::string *matrixAux, *newSeqsName;
-    Alignment *newAlig = new Alignment(*_alignment);
+    Alignment *newAlig = new Alignment(*alig);
     int i, j;
 
     // Delete those range columns defines in the columns vector
@@ -1243,7 +1243,7 @@ Alignment *Cleaner::removeColumns(int *columns, int init, int size, bool complem
 Alignment *Cleaner::removeSequences(int *seqs, int init, int size,
                                        bool complementary) {
 
-    Alignment *newAlig = new Alignment(*_alignment);
+    Alignment *newAlig = new Alignment(*alig);
     int i, j;
 
     // Delete those range of sequences defines by the seqs vector
@@ -1271,18 +1271,18 @@ bool Cleaner::removeOnlyTerminal() {
     if ((left_boundary == -1) and (right_boundary == -1)) {
         const int *gInCol;
         // Get alignments gaps stats and copy it
-        if (!_alignment->Statistics->calculateGapStats()) {
+        if (!alig->Statistics->calculateGapStats()) {
             std::cerr << "\nWARNING: Impossible to apply 'terminal-only' method"
                  << "\n\n";
             return false;
         }
-        gInCol = _alignment->Statistics->gaps->getGapsWindow();
+        gInCol = alig->Statistics->gaps->getGapsWindow();
 
         // Identify left and right borders. First and last columns with no gaps
-        for (i = 0; i < _alignment->originalNumberOfResidues && gInCol[i] != 0; i++);
+        for (i = 0; i < alig->originalNumberOfResidues && gInCol[i] != 0; i++);
         left_boundary = i;
 
-        for (i = _alignment->originalNumberOfResidues - 1; i > -1 && gInCol[i] != 0; i--);
+        for (i = alig->originalNumberOfResidues - 1; i > -1 && gInCol[i] != 0; i--);
         right_boundary = i;
     } else if (left_boundary >= right_boundary) {
         debug.report(ErrorCode::LeftBoundaryBiggerThanRightBoundary,
@@ -1299,8 +1299,8 @@ bool Cleaner::removeOnlyTerminal() {
     // then retrieved all columns in-between both boundaries. Columns out of these
     // limits will remain selected or not depending on the algorithm applied
     for (i = left_boundary; i < right_boundary; i++)
-        _alignment->saveResidues[i] = i;
-    _alignment->updateSequencesAndResiduesNums();
+        alig->saveResidues[i] = i;
+    alig->updateSequencesAndResiduesNums();
     return true;
 }
 
@@ -1318,9 +1318,9 @@ void Cleaner::removeSmallerBlocks(int blockSize, Alignment &original) {
     // Traverse the Alignment looking for blocks greater than BLOCKSIZE, everytime
     // than a column hasn't been selected, check whether the current block is big
     // enough to be kept or it should be removed from the final Alignment
-    for (i = 0, pos = 0, block = 0; i < _alignment->numberOfResidues; i++) {
+    for (i = 0, pos = 0, block = 0; i < alig->numberOfResidues; i++) {
         if (original.saveResidues[i] != -1) continue;
-        if (_alignment->saveResidues[i] != -1) block++;
+        if (alig->saveResidues[i] != -1) block++;
         else {
             // Remove columns from blocks smaller than input blocks size
             if (block < blockSize)
@@ -1333,7 +1333,7 @@ void Cleaner::removeSmallerBlocks(int blockSize, Alignment &original) {
                     }
                     else 
                     {
-                        _alignment->saveResidues[j] = -1;
+                        alig->saveResidues[j] = -1;
                     }
                 }
             }
@@ -1354,7 +1354,7 @@ void Cleaner::removeSmallerBlocks(int blockSize, Alignment &original) {
             } 
             else
             {
-                _alignment->saveResidues[j] = -1;
+                alig->saveResidues[j] = -1;
             } 
         }
     }
@@ -1368,62 +1368,62 @@ void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) {
 
     // Start checking the sequences.
     if (seqs) {
-        for (i = 0, counter = 0; i < _alignment->originalNumberOfSequences; i++) {
+        for (i = 0, counter = 0; i < alig->originalNumberOfSequences; i++) {
             // Forget about sequences that are already rejected
-            if (_alignment->saveSequences[i] == -1)
+            if (alig->saveSequences[i] == -1)
                 continue;
 
             // Iterate over all residues
-            for (j = 0; j < _alignment->sequences[i].length(); j++) {
+            for (j = 0; j < alig->sequences[i].length(); j++) {
                 // Forget about residues that are already rejected
-                if (_alignment->saveResidues[j] == -1)
+                if (alig->saveResidues[j] == -1)
                     continue;
                 // Stop if one non-gap residue is found on the sequence
-                if (_alignment->sequences[i][j] != '-')
+                if (alig->sequences[i][j] != '-')
                     break;
             }
 
             // If we haven't early-stopped due to finding a non-gap
                     // residue, j == sequenceLength
-            if (j == _alignment->sequences[i].length()) {
+            if (j == alig->sequences[i].length()) {
                 if (keepSequences) {
                     debug.report(WarningCode::KeepingOnlyGapsSequence,
-                                 new std::string[1]{_alignment->seqsName[i]});
+                                 new std::string[1]{alig->seqsName[i]});
                     counter++;
                 } else {
                     debug.report(WarningCode::RemovingOnlyGapsSequence,
-                                 new std::string[1]{_alignment->seqsName[i]});
-                    _alignment->saveSequences[i] = -1;
+                                 new std::string[1]{alig->seqsName[i]});
+                    alig->saveSequences[i] = -1;
                 }
             } else counter++;
         }
-        _alignment->numberOfSequences = counter;
+        alig->numberOfSequences = counter;
     }
 
     if (cols) {
         // Iterate over the residues
-        for (j = 0, counter = 0; j < _alignment->originalNumberOfResidues; j++) {
+        for (j = 0, counter = 0; j < alig->originalNumberOfResidues; j++) {
             // Forget about already discarded residues;
-            if (_alignment->saveResidues[j] == -1)
+            if (alig->saveResidues[j] == -1)
                 continue;
 
             // Check the residue position on each sequence.
-            for (i = 0; i < _alignment->originalNumberOfSequences; i++) {
+            for (i = 0; i < alig->originalNumberOfSequences; i++) {
                 // Forget about sequences that are already rejected
-                if (_alignment->saveSequences[i] == -1)
+                if (alig->saveSequences[i] == -1)
                     continue;
                 // Stop if a non gap residue is found on the column
-                if (_alignment->sequences[i][j] != '-')
+                if (alig->sequences[i][j] != '-')
                     break;
             }
 
             // If we didn't early-stop due to finding a non-gap
                     // residue, j == numberOfSequences
-            if (i == _alignment->originalNumberOfSequences) {
-                _alignment->saveResidues[j] = -1;
+            if (i == alig->originalNumberOfSequences) {
+                alig->saveResidues[j] = -1;
             } else counter++;
         }
-        _alignment->numberOfResidues = counter;
+        alig->numberOfResidues = counter;
     }
 }
 
@@ -1436,42 +1436,42 @@ void Cleaner::calculateSeqIdentity() {
     char indet;
 
     // Depending on alignment type, indetermination symbol will be one or other
-    indet = (_alignment->getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
+    indet = (alig->getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
 
     // Create identities matrix to store identities scores
-    _alignment->identities = new float *[_alignment->originalNumberOfSequences];
+    alig->identities = new float *[alig->originalNumberOfSequences];
 
     // For each seq, compute its identity score against the others in the MSA
-    for (i = 0; i < _alignment->originalNumberOfSequences; i++) {
-        if (_alignment->saveSequences[i] == -1) continue;
-        _alignment->identities[i] = new float[_alignment->originalNumberOfSequences];
+    for (i = 0; i < alig->originalNumberOfSequences; i++) {
+        if (alig->saveSequences[i] == -1) continue;
+        alig->identities[i] = new float[alig->originalNumberOfSequences];
 
         // It's a symmetric matrix, copy values that have been already computed
         for (j = 0; j < i; j++) {
-            if (_alignment->saveSequences[j] == -1) continue;
-            _alignment->identities[i][j] = _alignment->identities[j][i];
+            if (alig->saveSequences[j] == -1) continue;
+            alig->identities[i][j] = alig->identities[j][i];
         }
-        _alignment->identities[i][i] = 0;
+        alig->identities[i][i] = 0;
 
         // Compute identity scores for the current sequence against the rest
-        for (j = i + 1; j < _alignment->originalNumberOfSequences; j++) {
-            if (_alignment->saveSequences[j] == -1) continue;
-            for (k = 0, hit = 0, dst = 0; k < _alignment->numberOfResidues; k++) {
-                if (_alignment->saveResidues[k] == -1) continue;
+        for (j = i + 1; j < alig->originalNumberOfSequences; j++) {
+            if (alig->saveSequences[j] == -1) continue;
+            for (k = 0, hit = 0, dst = 0; k < alig->numberOfResidues; k++) {
+                if (alig->saveResidues[k] == -1) continue;
                 // If one of the two positions is a valid residue,
                 // count it for the common length
-                if (((_alignment->sequences[i][k] != indet) && (_alignment->sequences[i][k] != '-')) ||
-                    ((_alignment->sequences[j][k] != indet) && (_alignment->sequences[j][k] != '-'))) {
+                if (((alig->sequences[i][k] != indet) && (alig->sequences[i][k] != '-')) ||
+                    ((alig->sequences[j][k] != indet) && (alig->sequences[j][k] != '-'))) {
                     dst++;
                     // If both positions are the same, count a hit
-                    if (_alignment->sequences[i][k] == _alignment->sequences[j][k])
+                    if (alig->sequences[i][k] == alig->sequences[j][k])
                         hit++;
                 }
             }
 
             // Identity score between two sequences is the ratio of identical residues
             // by the total length (common and no-common residues) among them
-            _alignment->identities[i][j] = (float) hit / dst;
+            alig->identities[i][j] = (float) hit / dst;
         }
     }
 }
@@ -1485,35 +1485,35 @@ void Cleaner::calculateRelaxedSeqIdentity() {
 
     int i, j, k, hit;
 
-    float inverseResidNumber = 1.F / _alignment->originalNumberOfResidues;
+    float inverseResidNumber = 1.F / alig->originalNumberOfResidues;
 
     // Create identities matrix to store identities scores
-    _alignment->identities = new float *[_alignment->originalNumberOfSequences];
+    alig->identities = new float *[alig->originalNumberOfSequences];
 
     // For each seq, compute its identity score against the others in the MSA
-    for (i = 0; i < _alignment->originalNumberOfSequences; i++) {
-        if (_alignment->saveSequences[i] == -1) continue;
-        _alignment->identities[i] = new float[_alignment->originalNumberOfSequences];
+    for (i = 0; i < alig->originalNumberOfSequences; i++) {
+        if (alig->saveSequences[i] == -1) continue;
+        alig->identities[i] = new float[alig->originalNumberOfSequences];
 
         // It's a symmetric matrix, copy values that have been already computed
         for (j = 0; j < i; j++) {
-            if (_alignment->saveSequences[j] == -1) continue;
-            _alignment->identities[i][j] = _alignment->identities[j][i];
+            if (alig->saveSequences[j] == -1) continue;
+            alig->identities[i][j] = alig->identities[j][i];
         }
-        _alignment->identities[i][i] = 0;
+        alig->identities[i][i] = 0;
 
         // Compute identity score between the selected sequence and the others
-        for (j = i + 1; j < _alignment->originalNumberOfSequences; j++) {
-            if (_alignment->saveSequences[j] == -1) continue;
-            for (k = 0, hit = 0; k < _alignment->originalNumberOfResidues; k++) {
-                if (_alignment->saveResidues[k] == -1) continue;
+        for (j = i + 1; j < alig->originalNumberOfSequences; j++) {
+            if (alig->saveSequences[j] == -1) continue;
+            for (k = 0, hit = 0; k < alig->originalNumberOfResidues; k++) {
+                if (alig->saveResidues[k] == -1) continue;
                 // If both positions are the same, count a hit
-                if (_alignment->sequences[i][k] == _alignment->sequences[j][k])
+                if (alig->sequences[i][k] == alig->sequences[j][k])
                     hit++;
             }
             // Raw identity score is computed as the ratio of identical residues between
             // alignment length 
-            _alignment->identities[i][j] = hit * inverseResidNumber;
+            alig->identities[i][j] = hit * inverseResidNumber;
         }
     }
 }
@@ -1529,31 +1529,31 @@ int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
     float max;
 
     // Ask for the sequence identities assesment
-    if (_alignment->identities == nullptr)
-        _alignment->Cleaning->calculateSeqIdentity();
+    if (alig->identities == nullptr)
+        alig->Cleaning->calculateSeqIdentity();
 
-    seqs = new int *[_alignment->originalNumberOfSequences];
-    for (i = 0; i < _alignment->originalNumberOfSequences; i++) {
-        if (_alignment->saveSequences[i] == -1) continue;
+    seqs = new int *[alig->originalNumberOfSequences];
+    for (i = 0; i < alig->originalNumberOfSequences; i++) {
+        if (alig->saveSequences[i] == -1) continue;
         seqs[i] = new int[2];
-        seqs[i][0] = utils::removeCharacter('-', _alignment->sequences[i]).size();
+        seqs[i][0] = utils::removeCharacter('-', alig->sequences[i]).size();
         seqs[i][1] = i;
     }
 
-    utils::quicksort(seqs, 0, _alignment->originalNumberOfSequences - 1);
+    utils::quicksort(seqs, 0, alig->originalNumberOfSequences - 1);
 
-    cluster = new int[_alignment->originalNumberOfSequences];
-    cluster[0] = seqs[_alignment->originalNumberOfSequences - 1][1];
+    cluster = new int[alig->originalNumberOfSequences];
+    cluster[0] = seqs[alig->originalNumberOfSequences - 1][1];
     clusterNum = 1;
 
 
-    for (i = _alignment->originalNumberOfSequences - 2; i >= 0; i--) {
-        if (_alignment->saveSequences[i] == -1) continue;
+    for (i = alig->originalNumberOfSequences - 2; i >= 0; i--) {
+        if (alig->saveSequences[i] == -1) continue;
 
         for (j = 0, max = 0, pos = -1; j < clusterNum; j++) {
-            if (_alignment->identities[seqs[i][1]][cluster[j]] > maximumIdent) {
-                if (_alignment->identities[seqs[i][1]][cluster[j]] > max) {
-                    max = _alignment->identities[seqs[i][1]][cluster[j]];
+            if (alig->identities[seqs[i][1]][cluster[j]] > maximumIdent) {
+                if (alig->identities[seqs[i][1]][cluster[j]] > max) {
+                    max = alig->identities[seqs[i][1]][cluster[j]];
                     pos = j;
                 }
             }
@@ -1571,7 +1571,7 @@ int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
         repres[i + 1] = cluster[i];
 
     // Deallocate dinamic memory
-    for (i = 0; i < _alignment->originalNumberOfSequences; i++)
+    for (i = 0; i < alig->originalNumberOfSequences; i++)
         delete[] seqs[i];
 
     delete[] cluster;
@@ -1589,12 +1589,12 @@ void Cleaner::computeComplementaryAlig(bool residues, bool sequences) {
     int i;
 
     if (residues)
-        for (i = 0; i < _alignment->originalNumberOfResidues; i++)
-            _alignment->saveResidues[i] = (_alignment->saveResidues[i] == -1) ? i : -1;
+        for (i = 0; i < alig->originalNumberOfResidues; i++)
+            alig->saveResidues[i] = (alig->saveResidues[i] == -1) ? i : -1;
 
     if (sequences)
-        for (i = 0; i < _alignment->originalNumberOfSequences; i++)
-            _alignment->saveSequences[i] = (_alignment->saveSequences[i] == -1) ? i : -1;
+        for (i = 0; i < alig->originalNumberOfSequences; i++)
+            alig->saveSequences[i] = (alig->saveSequences[i] == -1) ? i : -1;
 }
 
 
@@ -1602,7 +1602,7 @@ Cleaner::Cleaner(Alignment *parent) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("Cleaner::Cleaner(Alignment *parent) ");
-    _alignment = parent;
+    alig = parent;
 
     terminalGapOnly = false;
     keepSequences = false;
@@ -1617,7 +1617,7 @@ Cleaner::Cleaner(Alignment *parent, Cleaner *mold) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("Cleaner::Cleaner(Alignment *parent, Cleaner *mold) ");
-    _alignment = parent;
+    alig = parent;
 
     terminalGapOnly = mold->terminalGapOnly;
     keepSequences = mold->keepSequences;

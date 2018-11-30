@@ -1,7 +1,7 @@
 #ifndef VCF_STATISH_H
 #define VCF_STATISH_H
 
-#include "../include/reportsystem.h"
+#include "reportsystem.h"
 #include "Alignment.h"
 
 #include <algorithm>

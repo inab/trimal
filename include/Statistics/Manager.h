@@ -4,7 +4,7 @@
 
 #ifndef TRIMAL_STATISTICSMANAGER_H
 #define TRIMAL_STATISTICSMANAGER_H
-#include "../../include/similarityMatrix.h"
+#include "similarityMatrix.h"
 
 // Forward declarations
 class Alignment;
@@ -12,11 +12,11 @@ class Alignment;
 
 
 /// Namespace containing all classes related to statistics handling
-namespace Statistics {
+namespace statistics {
 // Forward declarations
     class Gaps;
 
-    class Conservation;
+    class Similarity;
 
     class Consistency;
 
@@ -33,16 +33,16 @@ namespace Statistics {
          * */
         Gaps *gaps = nullptr;
         /**
-         * \brief Conservation submodule
+         * \brief Similarity submodule
          * */
-        Conservation *conservation = nullptr;
+        Similarity *similarity = nullptr;
         /**
          * \brief Consistency submodule
          * */
         Consistency *consistency = nullptr;
 
         /**
-         * \brief SimilarityMatrix used by Conservation
+         * \brief SimilarityMatrix used by Similarity
          * */
         similarityMatrix *_similarityMatrix = nullptr;
 
@@ -79,19 +79,19 @@ namespace Statistics {
         void printStatisticsGapsTotal();
 
         /**
-         * \brief Method to handle conservation stat calculation\n
-         * It checks if the #conservation submodule has been created, otherwise, creates it
+         * \brief Method to handle similarity stat calculation\n
+         * It checks if the #similarity submodule has been created, otherwise, creates it
          * */
         bool calculateConservationStats();
 
         /**
-         * \brief Wrapper to Statistics::Conservation::printConservationAcl()\n
+         * \brief Wrapper to Statistics::Similarity::printConservationAcl()\n
          * It calls to calculateConservationStats() to make sure the information is available before reporting the requested values
          * */
         void printStatisticsConservationColumns();
 
         /**
-         * \brief Wrapper to Statistics::Conservation::printGapsTotal()\n
+         * \brief Wrapper to Statistics::Similarity::printGapsTotal()\n
          * It calls to calculateConservationStats() to make sure the information is available before reporting the requested values
          * */
         void printStatisticsConservationTotal();
@@ -107,7 +107,7 @@ namespace Statistics {
         /// This gives us more control over the statistics classes, hinting that they shouldn't be created outside the scope of a newAlignmet.
         friend class ::Alignment;
 
-        Alignment *_alignment;
+        Alignment *alig;
 
         explicit Manager(Alignment *parent);
 

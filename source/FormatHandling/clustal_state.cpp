@@ -1,8 +1,8 @@
-#include "../../include/FormatHandling/clustal_state.h"
+#include "FormatHandling/clustal_state.h"
 
-#include "../../include/FormatHandling/FormatManager.h"
-#include "../../include/defines.h"
-#include "../../include/utils.h"
+#include "FormatHandling/FormatManager.h"
+#include "defines.h"
+#include "utils.h"
 
 int clustal_state::CheckAlignment(std::istream* origin)
 {
@@ -13,19 +13,26 @@ int clustal_state::CheckAlignment(std::istream* origin)
     
     /* Read first valid line in a safer way */
     do {
+        delete[] line;
         line = utils::readLine(*origin);
     } while ((line == nullptr) && (!origin->eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
+    {
+        delete [] line;
         return false;
+    }
 
     /* Otherwise, split line */
     firstWord = strtok(line, OTHDELIMITERS);
 
     /* Clustal Format */
     if((!strcmp(firstWord, "CLUSTAL")) || (!strcmp(firstWord, "clustal")))
+    {
+        delete [] line;
         return 1;
+    }
 
     delete[] line;
     
@@ -42,12 +49,13 @@ Alignment* clustal_state::LoadAlignment(std::string& filename)
     
     /* Store some details about input file to be used in posterior format
      * conversions */
-    alignment->filename.append("!Title ");
+    // alignment->filename.append("!Title ");
     alignment->filename.append(filename);
     alignment->filename.append(";");
 
     /* The first valid line corresponding to CLUSTAL label is ignored */
     do {
+        delete [] line;
         line = utils::readLine(file);
     } while ((line == nullptr) && (!file.eof()));
 
@@ -99,6 +107,8 @@ Alignment* clustal_state::LoadAlignment(std::string& filename)
         line = utils::readLine(file);
     }
 
+    delete [] line;
+
     /* Finish to preprocess the input file. */
     file.clear();
     file.seekg(0);
@@ -136,7 +146,7 @@ Alignment* clustal_state::LoadAlignment(std::string& filename)
 
         if (line == nullptr) {
             /* Sometimes, clustalw files does not have any marker after first block
-             * to indicate conservation between its columns residues. In that cases,
+             * to indicate similarity between its columns residues. In that cases,
              * mark the end of first block */
             if (i == 0)
                 firstBlock = false;
@@ -200,7 +210,7 @@ Alignment* clustal_state::LoadAlignment(std::string& filename)
     return alignment; 
 }
 
-bool clustal_state::SaveAlignment(Alignment* alignment, std::ostream* output, std::string* FileName)
+bool clustal_state::SaveAlignment(Alignment* alignment, std::ostream* output)
 {
     /* Generate output alignment in CLUSTAL format */
 
@@ -224,6 +234,11 @@ bool clustal_state::SaveAlignment(Alignment* alignment, std::ostream* output, st
         tmpMatrix[i] = (!Machine->reverse) ?
                        alignment->sequences[i] :
                        utils::getReverse(alignment->sequences[i]);
+
+    // Compute maximum sequences name length
+    for (i = 0; (i < alignment->originalNumberOfSequences); i++)
+        if (alignment->saveSequences[i] != -1)
+            maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
 
     /* Print alignment header */
     if(!alignment->alignmentInfo.empty() && alignment->alignmentInfo.substr(0,7) == "CLUSTAL")

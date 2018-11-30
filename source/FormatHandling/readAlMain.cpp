@@ -1,7 +1,7 @@
-#include "../../include/FormatHandling/FormatManager.h"
+#include "FormatHandling/FormatManager.h"
 #include "Alignment.h"
-#include "../../include/defines.h"
-#include "../../include/values.h"
+#include "defines.h"
+#include "values.h"
 
 #include <iostream>
 #include <cstring>

@@ -28,10 +28,10 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "InternalBenchmarker.h"
-#include "../include/reportsystem.h"
-#include "../include/defines.h"
-#include "../include/values.h"
-#include "../include/utils.h"
+#include "reportsystem.h"
+#include "defines.h"
+#include "values.h"
+#include "utils.h"
 
 namespace utils {
 
@@ -350,7 +350,6 @@ namespace utils {
         // as well because remove tabs and blank spaces at lines beginning/ending
 
         int state;
-        char c = ' ';
         std::string nline;
         char *line = nullptr;
 
@@ -379,7 +378,7 @@ namespace utils {
         }
 
         // If there is nothing to return, give back a nullptr pointer ...
-        if (nline.size() == 0)
+        if (nline.empty())
             return nullptr;
 
         // Otherwise, initialize the appropiate data structure,
@@ -737,7 +736,7 @@ namespace utils {
 
         for (i = 0; i < (int) data.size(); i++) {
             for (j = 0; j < (int) pattern.size(); j++) {
-                if (toupper(data[i]) == toupper(pattern[j])) {
+                if (utils::toUpper(data[i]) == utils::toUpper(pattern[j])) {
                     count++;
                     break;
                 }
@@ -1047,7 +1046,7 @@ namespace utils {
                 << "text-anchor=\"middle\" "
                 << "xml:space=\"preserve\" "
                 << "font-size=\"" << fontSize * 2 << "\">"
-                << "Statistics"
+                << "statistics"
                 << "</text>" << "\n";
 
             file << "<line "

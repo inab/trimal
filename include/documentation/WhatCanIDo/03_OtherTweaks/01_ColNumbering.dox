@@ -1,0 +1,39 @@
+/*! \page whatcanido What can I do?
+
+\subsection ColNumbering Column Numbering
+
+@htmlonly
+<button onclick="myFunction('colnumbering')" class="btn btn-danger"><b> Example of use </b></button>
+@endhtmlonly
+
+<div name="colnumbering" style="display:none; width: -moz-fit-content">
+<b> %Alignment </b> + "-gt 0 -colnumbering"
+\verbatim 
+ 6 42
+Sp6          ---ASGAILT-LGIYLFTLCAVISVSWYLAWLGLEINMMAII
+Sp17         FAYTAPDLL-LIGFLLKTVA-TFGDTWFQLWQGLDLNKMPVF
+Sp10         -----DPAVL-FVIMLGTIT-KFSSEWFFAWLGLEINMMVII
+Sp8          ---GLGKVIV-YGIVLGTKSDQFSVVWLFPWNGLQIHMMGII
+Sp26         AAAAAAALLTYLGLFLGTDYENFAAAAANAWLGLEINMMAQI
+Sp33         -----PTILNIAGLHMETDI-NFSLAWFQAWGGLEINKQAIL
+\endverbatim
+\verbatim 
+#ColumnsMap     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41
+\endverbatim
+
+<b> %Alignment </b> + "-gt 1 -colnumbering"
+\verbatim 
+ 6 34
+Sp6          GAILLGIYLFTLCVISVSWYLAWLGLEINMMAII
+Sp17         PDLLIGFLLKTVATFGDTWFQLWQGLDLNKMPVF
+Sp10         DPAVFVIMLGTITKFSSEWFFAWLGLEINMMVII
+Sp8          GKVIYGIVLGTKSQFSVVWLFPWNGLQIHMMGII
+Sp26         AALLLGLFLGTDYNFAAAAANAWLGLEINMMAQI
+Sp33         PTILAGLHMETDINFSLAWFQAWGGLEINKQAIL
+\endverbatim
+\verbatim 
+#ColumnsMap     -1, -1, -1, -1, -1, 5, 6, 7, 8, -1, -1, 11, 12, 13, 14, 15, 16, 17, 18, 19, -1, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41
+\endverbatim
+
+</div>
+*/

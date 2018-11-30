@@ -1,8 +1,8 @@
-#include "../../include/FormatHandling/pir_state.h"
+#include "FormatHandling/pir_state.h"
 
-#include "../../include/FormatHandling/FormatManager.h"
-#include "../../include/defines.h"
-#include "../../include/utils.h"
+#include "FormatHandling/FormatManager.h"
+#include "defines.h"
+#include "utils.h"
 
 int pir_state::CheckAlignment(std::istream *origin) {
     char *line;
@@ -12,7 +12,10 @@ int pir_state::CheckAlignment(std::istream *origin) {
     if (strlen(line) > 4) {
         if (line[0] == '>')
             if (line[3] == ';')
+            {
+                delete [] line;
                 return 2;
+            }
     }
     delete[] line;
     return 0;
@@ -21,7 +24,7 @@ int pir_state::CheckAlignment(std::istream *origin) {
 Alignment *pir_state::LoadAlignment(std::string& filename) {
     /* NBRF/PIR file format parser */
 
-    Alignment *_alignment = new Alignment();
+    Alignment *alig = new Alignment();
 
     bool seqIdLine, seqLines;
     char *str, *line = nullptr;
@@ -34,12 +37,12 @@ Alignment *pir_state::LoadAlignment(std::string& filename) {
         return nullptr;
 
     /* Store input file name for posterior uses in other formats */
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(filename);
-    _alignment->filename.append(";");
+    // alig->filename.append("!Title ");
+    alig->filename.append(filename);
+    alig->filename.append(";");
 
     /* Compute how many sequences are in the input alignment */
-    _alignment->numberOfSequences = 0;
+    alig->numberOfSequences = 0;
     while (!file.eof()) {
 
         /* Deallocate previously used dinamic memory */
@@ -58,7 +61,7 @@ Alignment *pir_state::LoadAlignment(std::string& filename) {
 
         /* If a sequence name flag is detected, increase sequences counter */
         if (str[0] == '>')
-            _alignment->numberOfSequences++;
+            alig->numberOfSequences++;
     }
 
     /* Finish to preprocess the input file. */
@@ -66,9 +69,9 @@ Alignment *pir_state::LoadAlignment(std::string& filename) {
     file.seekg(0);
 
     /* Allocate memory for the input alignmet */
-    _alignment->sequences = new std::string[_alignment->numberOfSequences];
-    _alignment->seqsName = new std::string[_alignment->numberOfSequences];
-    _alignment->seqsInfo = new std::string[_alignment->numberOfSequences];
+    alig->sequences = new std::string[alig->numberOfSequences];
+    alig->seqsName = new std::string[alig->numberOfSequences];
+    alig->seqsInfo = new std::string[alig->numberOfSequences];
 
     /* Initialize some local variables */
     seqIdLine = true;
@@ -96,18 +99,18 @@ Alignment *pir_state::LoadAlignment(std::string& filename) {
 
             /* Store information about sequence datatype */
             str = strtok(line, ">;");
-//             _alignment->seqsInfo[i].append(str, strlen(str));
+//             alig->seqsInfo[i].append(str, strlen(str));
 
             /* and the sequence identifier itself */
             str = strtok(nullptr, ">;");
-            _alignment->seqsName[i].append(str, strlen(str));
+            alig->seqsName[i].append(str, strlen(str));
         }
 
             /* Line just after sequence Id line contains a textual description of
              * the sequence. */
         else if ((!seqIdLine) && (!seqLines)) {
             seqLines = true;
-            _alignment->seqsInfo[i].append(line, strlen(line));
+            alig->seqsInfo[i].append(line, strlen(line));
         }
 
             /* Sequence lines itself */
@@ -124,9 +127,9 @@ Alignment *pir_state::LoadAlignment(std::string& filename) {
             str = strtok(line, OTHDELIMITERS);
             while (str != nullptr) {
                 if (str[strlen(str) - 1] == '*')
-                    _alignment->sequences[i].append(str, strlen(str) - 1);
+                    alig->sequences[i].append(str, strlen(str) - 1);
                 else
-                    _alignment->sequences[i].append(str, strlen(str));
+                    alig->sequences[i].append(str, strlen(str));
                 str = strtok(nullptr, OTHDELIMITERS);
             }
         }
@@ -138,15 +141,15 @@ Alignment *pir_state::LoadAlignment(std::string& filename) {
     delete[] line;
 
     /* Check the matrix's content */
-    _alignment->fillMatrices(true);
-    _alignment->originalNumberOfSequences = _alignment->numberOfSequences;
-    _alignment->originalNumberOfResidues = _alignment->numberOfResidues;
+    alig->fillMatrices(true);
+    alig->originalNumberOfSequences = alig->numberOfSequences;
+    alig->originalNumberOfResidues = alig->numberOfResidues;
 
 
-    return _alignment;
+    return alig;
 }
 
-bool pir_state::SaveAlignment(Alignment *alignment, std::ostream *output, std::string *FileName) {
+bool pir_state::SaveAlignment(Alignment *alignment, std::ostream *output) {
 
     /* Generate output alignment in NBRF/PIR format. Sequences can be unaligned */
 

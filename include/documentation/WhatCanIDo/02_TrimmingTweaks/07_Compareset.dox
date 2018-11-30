@@ -1,0 +1,84 @@
+/*! \page whatcanido What can I do?
+
+\subsection Compareset
+
+@htmlonly
+<button onclick="myFunction('compareset')" class="btn btn-danger"><b> Example of use </b></button>
+@endhtmlonly
+
+<div name="compareset" style="display:none; width: -moz-fit-content">
+<b> alignments_comparison </b>
+\verbatim 
+example.001.AA.phy
+example.002.AA.phy
+example.003.AA.phy
+\endverbatim
+
+<b> %Alignment example.001.AA.phy </b>
+\verbatim 
+ 6 60
+Sp8          ----------GLGKV---IVY-GIVLGTKS-DQFSNWVVWL-----FPWNGLQIHMMGII
+Sp17         --------FAYTAPD---LLLIGFLLKTVA-T-FG--DTWF-----QLWQGLDLNKMPVF
+Sp10         ----------DPAVL----FV--IMLGTIT-K-FS--SEWF-----FAWLGLEINMMVII
+Sp26         AAAAAAAA----ALL---TYL-GLFLGTDY-----EN---FAAAAANAWLGLEINMMAQI
+Sp33         -----------PTIL---NIA-GLHMETDI-N-FS--LAWF-----QAWGGLEINKQAIL
+Sp6          ----------ASGAI---LTL-GIYLFTLC-AVIS--VSWY-----LAWLGLEINMMAII
+\endverbatim
+
+<b> %Alignment example.002.AA.phy </b>
+\verbatim 
+ 6 46
+Sp8          -----GLGKVIV-YGIVLGTKSDQFSNWVVWLFPWNGLQIHMMGII
+Sp17         --FAYTAPDLLL-IGFLLKTV-ATFG--DTWFQLWQGLDLNKMPVF
+Sp10         ------DPAVL--FVIMLGTI-TKFS--SEWFFAWLGLEINMMVII
+Sp26         AAAAAAAAALLTYLGLFLGTDYENFA--AAAANAWLGLEINMMAQI
+Sp33         -------PTILNIAGLHMETD-INFS--LAWFQAWGGLEINKQAIL
+Sp6          -----ASGAILT-LGIYLFTLCAVIS--VSWYLAWLGLEINMMAII
+\endverbatim
+
+<b> %Alignment example.003.AA.phy </b>
+\verbatim 
+ 6 47
+Sp8          -----GLGKVIV-YGIV-LGTKSDQFSNWVVWLFPWNGLQIHMMGII
+Sp10         -------DPAVL-FVIM-LGTIT-KFS--SEWFFAWLGLEINMMVII
+Sp26         AAAAAAAAALLTYLGL-FLGTDYENFA--AAAANAWLGLEINMMAQI
+Sp6          -----ASGAILT-LGIY-LFTLCAVIS--VSWYLAWLGLEINMMAII
+Sp17         --FAYTAPDLL-LIGFL-LKTVA-TFG--DTWFQLWQGLDLNKMPVF
+Sp33         -------PTILNIAGLHME-TDI-NFS--LAWFQAWGGLEINKQAIL
+\endverbatim
+
+<b> alignments_comparison </b> + "-compareset" = <b> %Alignment example.002.AA.phy </b>
+\verbatim 
+ 6 46
+Sp8          -----GLGKVIV-YGIVLGTKSDQFSNWVVWLFPWNGLQIHMMGII
+Sp17         --FAYTAPDLLL-IGFLLKTV-ATFG--DTWFQLWQGLDLNKMPVF
+Sp10         ------DPAVL--FVIMLGTI-TKFS--SEWFFAWLGLEINMMVII
+Sp26         AAAAAAAAALLTYLGLFLGTDYENFA--AAAANAWLGLEINMMAQI
+Sp33         -------PTILNIAGLHMETD-INFS--LAWFQAWGGLEINKQAIL
+Sp6          -----ASGAILT-LGIYLFTLCAVIS--VSWYLAWLGLEINMMAII
+\endverbatim
+
+<b> alignments_comparison </b> + "-compareset -forceselect example.003.AA.phy" = <b> %Alignment example.003.AA.phy </b>
+\verbatim 
+ 6 47
+Sp8          -----GLGKVIV-YGIV-LGTKSDQFSNWVVWLFPWNGLQIHMMGII
+Sp10         -------DPAVL-FVIM-LGTIT-KFS--SEWFFAWLGLEINMMVII
+Sp26         AAAAAAAAALLTYLGL-FLGTDYENFA--AAAANAWLGLEINMMAQI
+Sp6          -----ASGAILT-LGIY-LFTLCAVIS--VSWYLAWLGLEINMMAII
+Sp17         --FAYTAPDLL-LIGFL-LKTVA-TFG--DTWFQLWQGLDLNKMPVF
+Sp33         -------PTILNIAGLHME-TDI-NFS--LAWFQAWGGLEINKQAIL
+\endverbatim
+
+<b> alignments_comparison </b> + "-compareset -forceselect example.003.AA.phy -ct 0.8"
+\verbatim 
+ 6 27
+Sp8          GIVLGTKQFSVVWFPWNGLQIHMMGII
+Sp17         GFLLKTV-FGDTWQLWQGLDLNKMPVF
+Sp10         -IMLGTI-FSSEWFAWLGLEINMMVII
+Sp26         GLFLGTD------NAWLGLEINMMAQI
+Sp33         GLHMETD-FSLAWQAWGGLEINKQAIL
+Sp6          GIYLFTLVISVSWLAWLGLEINMMAII
+\endverbatim
+</div>
+
+**/

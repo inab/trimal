@@ -16,7 +16,7 @@ It contains methods and variables related to trimming.
 /** 
 \var Alignment::Statistics
 \brief Statistics submodule.\n
-It contains methods and variables related to Statistics calculation and reporting.
+It contains methods and variables related to statistics calculation and reporting.
 */
     
 /**
@@ -295,19 +295,19 @@ It will also remove or split stop codons depending on the flags passed.
 */
 
 /**
-\fn Alignment::alignmentSummaryHTML(Alignment & _trimmedAlignment, char *destFile, float *consValues)
+\fn Alignment::alignmentSummaryHTML(Alignment & trimmedAlig, char *destFile, float *consValues)
 \brief Method to report the trimming results in HTML.\n
 Outputs an HTML file that shows visually what has been done to the alignment (removed sequences or residues) and the stats used to do so.
-\param _trimmedAlignment Trimmed alignment to compare with.
+\param trimmedAlig Trimmed alignment to compare with.
 \param destFile Filename where to save the results.
 \return \b True if correct.
 \n      \b False if file couldn't be open or alignment is not aligned.
 */
 
 /**
-\fn Alignment::alignmentSummarySVG(Alignment & _trimmedAlignment, char *destFile, float *consValues, int blocks)
+\fn Alignment::alignmentSummarySVG(Alignment & trimmedAlig, char *destFile, float *consValues, int blocks)
 \brief Method to report the trimming results in SVG.\n
-Outputs a SVG file that shows visually what has been done to the alignment (removed sequences or residues) and the stats used to do so.\param _trimmedAlignment Trimmed alignment obtained from the object calling this function.
+Outputs a SVG file that shows visually what has been done to the alignment (removed sequences or residues) and the stats used to do so.\param trimmedAlig Trimmed alignment obtained from the object calling this function.
 \param destFile Filename where to save the results.
 \param blocks Size in residues to report. 120 by default.
 \return \b True if everything went ok. \n \b False if file couldn't be open or alignment is not aligned.

@@ -228,27 +228,30 @@ enum InfoCode {
     __MAXINFO
 };
 
-namespace __internalReport {
+/// \brief Internal classes to handle reporting to user in several ways.\n
+/// The reporting system is made so a developer that wants to use the system
+///     doesn't need to enter to the namespace, but use the global variable #debug
+namespace reporting {
 
 /**
- \brief Internal class used by __internalReport::__reportSystem \n
+ \brief Internal class used by reporting::reportManager \n
  This class serves as a proxy for message reporting. \n
  It will only output to std::cout if
-  __internalReport::__reporter::CanReport it's true
+  reporting::reportWrapper::CanReport it's true
  */
-class __reporter {
+class reportWrapper {
     /// \brief Variable that specifies if the object is able to output to cout or not.
     bool CanReport;
     
     public:
     
     /// \brief Constructor
-    explicit __reporter(bool CanReport) : CanReport{CanReport} { }
+    explicit reportWrapper(bool CanReport) : CanReport{CanReport} { }
     
     /// \brief Overloaded operator that allows to use this object as
     /// it was an iostream, as cout.
     template <typename T>
-    __reporter &operator<<(const T &a) {
+    reportWrapper &operator<<(const T &a) {
         if (CanReport)
             std::cout<<a;
         return *this;
@@ -256,7 +259,7 @@ class __reporter {
     
     /// \brief Overloaded operator that allows to use this object as
     /// it was an iostream, as cout.
-    __reporter &operator<<(std::ostream& (*pf) (std::ostream&)) {
+    reportWrapper &operator<<(std::ostream& (*pf) (std::ostream&)) {
         if (CanReport)
             std::cout<<pf;
         return *this;
@@ -267,7 +270,7 @@ class __reporter {
  \brief Class that allows us to centralize all the reporting messages that
   should be used to inform the user of Errors, Warnings and Info.\n
  The object can also be used as a substitute to cout for temporal messages using
-  the << overloaded operator or the \link __reportSystem::log log \endlink method,
+  the << overloaded operator or the \link reportManager::log log \endlink method,
   and the messages will be behind the IsDebug variable,
   which should be set to false in Release.\n
  This allows us to protect the user from receiving Debug/Developing messages
@@ -275,20 +278,20 @@ class __reporter {
  \warning <b> THIS CLASS SHOULDN'T BE USED DIRECTLY </b> \n
  Use instanced global variable \link debug debug \endlink instead.
  */
-class __reportSystem
+class reportManager
 {
 private:
     
     /** \brief Object that will be returned by
-         \link __internalReport::__reportSystem::log log \endlink
+         \link reporting::reportManager::log log \endlink
          if it allows to output the message
      */
-    __reporter canReport = __reporter(true);
+    reportWrapper canReport = reportWrapper(true);
     /** \brief Object that will be returned by
-     *   \link __internalReport::__reportSystem::log log \endlink
+     *   \link reporting::reportManager::log log \endlink
      *   if it doesn't allow to output the message
      * */
-    __reporter cantReport = __reporter(false);
+    reportWrapper cantReport = reportWrapper(false);
 
     static const std::map<InfoCode, const char *>       InfoMessages ;
     static const std::map<WarningCode, const char *>    WarningMessages ;
@@ -318,7 +321,7 @@ public:
     /**
      \brief Method to report an Error. \n
      It will be displayed if
-      \link __internalReport::__reportSystem::Level Level \endlink
+      \link reporting::reportManager::Level Level \endlink
       is equal or higher to VerboseLevel::ERROR
      \param message
       Code to report.
@@ -333,7 +336,7 @@ public:
     /**
      \brief Method to report an Error.\n
      It will be displayed if
-      \link __internalReport::__reportSystem::Level Level \endlink
+      \link reporting::reportManager::Level Level \endlink
       is equal or higher to VerboseLevel::ERROR
      \param message
       Code to report.
@@ -347,7 +350,7 @@ public:
     /**
      \brief Method to report a Warning. \n
      It will be displayed if
-      \link __internalReport::__reportSystem::Level Level \endlink
+      \link reporting::reportManager::Level Level \endlink
       is equal or higher to VerboseLevel::WARNING
      \param message
       Code to report.
@@ -361,7 +364,7 @@ public:
     /**
      \brief Method to report a Warning.\n
      It will be displayed if
-      \link __internalReport::__reportSystem::Level Level \endlink
+      \link reporting::reportManager::Level Level \endlink
       is equal or higher to VerboseLevel::WARNING
      \param message
       Code to report.
@@ -375,7 +378,7 @@ public:
     /**
      \brief Method to report an Info message. \n
      It will be displayed if
-      \link __internalReport::__reportSystem::Level Level \endlink
+      \link reporting::reportManager::Level Level \endlink
       is equal or higher to VerboseLevel::INFO
      \param message
       Code to report.
@@ -389,7 +392,7 @@ public:
     /**
      \brief Method to report an Info message.\n
      It will be displayed if
-      \link __internalReport::__reportSystem::Level Level \endlink
+      \link reporting::reportManager::Level Level \endlink
       is equal or higher to VerboseLevel::WARNING
      \param message
       Code to report.
@@ -403,19 +406,19 @@ public:
 
     /**
      \brief Method to output a message behind two checks:
-      \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
+      \link reporting::reportManager::IsDebug IsDebug \endlink
       and VerboseLevel passed.\n
-     If \link __internalReport::__reportSystem::IsDebug IsDebug \endlink is false,
+     If \link reporting::reportManager::IsDebug IsDebug \endlink is false,
       it will ignore the message returning the
-      \link __internalReport::__reportSystem::cantReport cantReport \endlink,
+      \link reporting::reportManager::cantReport cantReport \endlink,
       otherwise, VerboseLevel level will be checked.
      \param level
       Level to use for this message.\n
-     If \link __internalReport::__reportSystem::Level Level \endlink is higher
+     If \link reporting::reportManager::Level Level \endlink is higher
       than this argument, message will be ignored,
       otherwise, message will be outputted to cout.
      */
-    __reporter log(VerboseLevel level)
+    reportWrapper log(VerboseLevel level)
     {
         if (!IsDebug) return cantReport;
         
@@ -427,13 +430,13 @@ public:
     
     /**
      \brief Overloaded operator that allows us to debug some messages behind
-      \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
+      \link reporting::reportManager::IsDebug IsDebug \endlink
      \param a
       Message to be outputed if
-      \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
+      \link reporting::reportManager::IsDebug IsDebug \endlink
      */
     template <typename T>
-    __reportSystem &operator<<(const T &a) {
+    reportManager &operator<<(const T &a) {
         if (IsDebug)
             std::cout<<a;
         return *this;
@@ -441,11 +444,11 @@ public:
 
     /**
      \brief Overloaded operator that allows us to debug some messages behind
-      \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
+      \link reporting::reportManager::IsDebug IsDebug \endlink
      \param pf
       Object that overloads the '<<' operator
      */
-    __reportSystem &operator<<(std::ostream& (*pf) (std::ostream&)) {
+    reportManager &operator<<(std::ostream& (*pf) (std::ostream&)) {
         if (IsDebug)
             std::cout<<pf;
         return *this;
@@ -457,12 +460,12 @@ public:
 /** \brief <b> This instance is the one that should be used</b> \n
  * It's use is similar to a singleton, without the need to obtain
  *  the instance every time it's needed.\n
- * Instead, it's a global instance of the __internalReport::__reportSystem \n
+ * Instead, it's a global instance of the reporting::reportManager \n
  * This allows us to have the '<<' operator overloaded,
  *  as it can't be statically overloaded.
-    \relates __internalReport::__reportSystem
+    \relates reporting::reportManager
  */
-extern __internalReport::__reportSystem debug;
+extern reporting::reportManager debug;
 
 #endif // VERBOSEMANAGER_H
 

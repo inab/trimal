@@ -18,7 +18,7 @@ public:
 
     Alignment *LoadAlignment(std::string& filename) override;
 
-    bool SaveAlignment(Alignment *alignment, std::ostream *output, std::string *FileName) override;
+    bool SaveAlignment(Alignment *alignment, std::ostream *output) override;
 
     bool RecognizeOutputFormat(std::string& FormatName) override;
 

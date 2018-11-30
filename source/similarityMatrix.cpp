@@ -32,18 +32,15 @@
 #define LINE_LENGTH 256
 #define REFER 65
 
-#include "../include/defines.h"
+#include "defines.h"
 
 #endif
 
-#include "../include/similarityMatrix.h"
-#include "../include/reportsystem.h"
 #include "InternalBenchmarker.h"
-#include "../include/defines.h"
-#include "../include/values.h"
-#include "../include/utils.h"
-
-using namespace std;
+#include "similarityMatrix.h"
+#include "reportsystem.h"
+#include "values.h"
+#include "utils.h"
 
 similarityMatrix::similarityMatrix() {
 	 // Create a timer that will report times upon its destruction
@@ -123,7 +120,7 @@ bool similarityMatrix::loadSimMatrix(char *filename) {
     int i, j, k;
     float sum;
     bool firstColumn = true;
-    ifstream file;
+    std::ifstream file;
 
     // We try to open the file, if we can't open the file
     // we return false.
@@ -420,8 +417,8 @@ void similarityMatrix::printMatrix() {
 
     for (int i = 0; i < numPositions; i++) {
         for (int j = 0; j < numPositions; j++)
-            cerr << setw(8) << setprecision(4) << right << simMat[i][j];
-        cerr << endl;
+            std::cerr << std::setw(8) << std::setprecision(4) << std::right << simMat[i][j];
+        std::cerr << std::endl;
     }
 }
 

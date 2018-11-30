@@ -1,0 +1,336 @@
+/**
+\var bool trimAlManager::appearErrors
+\brief Flag to trace errors.
+*/
+
+/**
+\var bool trimAlManager::getComplementary
+\brief Flag to return the complementary alignment.
+*/
+
+/**
+\var bool trimAlManager::columnNumbering
+\brief Flag to return column numbering in report.
+*/
+
+/**
+\var bool trimAlManager::nogaps
+\brief Flag to use the nogaps option
+*/
+
+/**
+\var bool trimAlManager::noallgaps
+\brief Flag to use the noallgaps option
+*/
+
+/**
+\var bool trimAlManager::gappyout
+\brief Flag to use the gappyout trimming method
+*/
+
+/**
+\var bool trimAlManager::strict
+\brief Flag to use the strict trimming method
+*/
+
+/**
+\var bool trimAlManager::strictplus
+\brief Flag to use the strictplus trimming method
+*/
+
+/**
+\var bool trimAlManager::automated1
+\brief Flag to use the automated1 trimming method
+*/
+
+/**
+\var bool trimAlManager::sgc
+\brief Flag to show the Gaps Scores per column
+*/
+
+/**
+\var bool trimAlManager::sgt
+\brief Flag to show the Accumulated Gaps Scores
+*/
+
+/**
+\var bool trimAlManager::ssc
+\brief Flag to show the Similarity Scores per column
+*/
+
+/**
+\var bool trimAlManager::sst
+\brief Flag to show the Accumulated Similarity Scores
+*/
+
+/**
+\var bool trimAlManager::sfc
+\brief Flag to show the Sum of Pairs scores per column
+*/
+
+/**
+\var bool trimAlManager::sft
+\brief Flag to show the Accumulated Sum of Pairs 
+*/
+
+/**
+\var bool trimAlManager::sident
+\brief Flag to show identity scores in the alignment
+*/
+
+/**
+\var bool trimAlManager::soverlap
+\brief Flag to show overlap scores in the alignment
+*/
+
+/**
+\var bool trimAlManager::selectSeqs
+\brief Flag to select sequences manually from the alignment
+*/
+
+/**
+\var bool trimAlManager::selectCols
+\brief Flag to select columns manually from the alignment
+*/
+
+/**
+\var bool trimAlManager::splitByStopCodon
+\brief Flag to use the SplitByCodonStop option
+*/
+
+/**
+\var bool trimAlManager::terminalOnly
+\brief Flag to use the Terminal Only option
+*/
+
+/**
+\var bool trimAlManager::keepSeqs
+\brief Flag to keep sequences in the alignment
+*/
+
+/**
+\var bool trimAlManager::ignoreStopCodon
+\brief Flag to use the Ignore Stop Codon option
+*/
+
+/**
+\var float trimAlManager::conservationThreshold
+\brief Similarity Threshold to use while trimming
+*/
+
+/**
+\var float trimAlManager::gapThreshold
+\brief Gap Threshold to use while trimming
+*/
+
+/**
+\var float trimAlManager::similarityThreshold
+\brief Similarity Threshold to use while trimming
+*/
+
+/**
+\var float trimAlManager::consistencyThreshold
+\brief Consistency Threshold to use while trimming
+*/
+
+/**
+\var float trimAlManager::residuesOverlap
+\brief Residues Overlap to use while trimming
+*/
+
+/**
+\var float trimAlManager::sequenceOverlap
+\brief Sequence Overlap to use while trimming
+*/
+
+/**
+\var float trimAlManager::maxIdentity
+\brief Max Identity to use while trimming
+*/
+
+/**
+\var int trimAlManager::stats
+\brief Stats Flag to use in reporting. For each stat requested, this flag is decreased by one
+*/
+
+/**
+\var int trimAlManager::compareset
+\brief Pointer to the argument that contains the compareset file.
+*/
+
+/**
+\var int trimAlManager::windowSize
+\brief Window Size to use while trimming
+*/
+
+/**
+\var int trimAlManager::gapWindow
+\brief Gap Window Size to use while trimming
+*/
+
+/**
+\var int trimAlManager::similarityWindow
+\brief Similarity Window to use while trimming
+*/
+
+/**
+\var int trimAlManager::consistencyWindow
+\brief Consistency Window to use while trimming
+*/
+
+/**
+\var int trimAlManager::blockSize
+\brief Block Size to use while trimming
+*/
+
+/**
+\var int trimAlManager::clusters
+\brief Number of most representative sequences we are going to use
+*/
+
+/**
+\var int trimAlManager::argumentLength
+\brief Temp variable to use when there is a need to copy an argument to a char array
+*/
+
+/**
+\var int trimAlManager::i
+\brief Argument Iterator Variable
+*/
+
+/**
+\var int trimAlManager::automatedMethodCount
+\brief Integer counter of the automatic methods. \n 
+If the counter is bigger than 0, we are using an automatic method.\n 
+If the counter is bigger than 1, we are trying to use multiple automatic methods.
+*/
+
+/**
+\var int trimAlManager::alternative_matrix
+\brief Int that represents which alternative matrix to use, where '-1' means no alternative matrix, and '1' means degenerated_nt_identity
+*/
+
+/**
+\var int trimAlManager::delColumns
+\brief Vector that contains the column indexes the user specified to be removed
+*/
+
+/**
+\var int trimAlManager::delSequences
+\brief Vector that contains the sequence indexes the user specified to be removed
+*/
+
+/**
+\var int trimAlManager::sequencesLengths
+\brief Vector that contains the sequences lengths of each sequence in the backtranslation option. 
+\note This can be moved to trimAlManager::check_backtranslation_infile_names_correspondence() function or even deleted, as we don't really need to copy them in order to compare them with origAlig names.
+*/
+
+/**
+\var string trimAlManager::sequencesNames
+\brief Temporal variable to use in backtranslation option to compare with infile.
+\note This variable may be deleted, as we don't need to copy the sequences names to compare them.
+*/
+
+/**
+\var ifstream trimAlManager::compare
+\brief Temporal variable to open files in trimAlManager::check_multiple_files_comparison function.
+\note This could be moved there
+*/
+
+/**
+\var similarityMatrix trimAlManager::similMatrix
+\brief Temporal Similarity Matrix
+*/
+
+/**
+\var Alignment trimAlManager::origAlig
+\brief Main alignment used/loaded on trimAl in combination with singleAlig.
+*/
+
+/**
+\var Alignment trimAlManager::singleAlig
+\brief Alignment obtained by making modifications to singleAlig or backtranslationAlig.
+*/
+
+/**
+\var Alignment trimAlManager::tempAlig
+\brief Temporal alignment that allows us to make some changes to trimAlManager::singleAlig, destroy it and set trimAlManager::singleAlig to this. 
+*/
+
+/**
+\var Alignment trimAlManager::compareAlignmentsArray
+\brief Alignment Vector used on trimAlManager::check_multiple_files_comparison to compare them. 
+\note This variable could be moved there.
+*/
+
+/**
+\var Alignment trimAlManager::backtranslationAlig
+\brief Alignment used on the backtranslation functionality.
+*/
+
+/**
+\var char trimAlManager::c
+\brief Temporal char variable
+*/
+
+/**
+\var char trimAlManager::forceFile
+\brief Forcefile to use in combination with multiple files comparison, to compare them against this.
+*/
+
+/**
+\var char trimAlManager::infile
+\brief File to load the alignment when only one alignment has trimming interest.
+*/
+
+/**
+\var char trimAlManager::backtransFile
+\brief File to load the alignment containing the backtranslation information.
+*/
+
+/**
+\var char trimAlManager::outfile
+\brief File to output the trimmed alignment. This can contain tags which will be traduced to some variables:\n[in] will be changed with the original filename. \n[format] will be changed with the output format name specified.\n[extension] will be changed to the correct format extension.
+*/
+
+/**
+\var char trimAlManager::htmlOutFile
+\brief File to output the html report.
+*/
+
+/**
+\var char trimAlManager::svgOutFile
+\brief File to output the svg report.
+*/
+
+/**
+\var char trimAlManager::svgStatsOutFile
+\brief File to output the svg graph showing the stats along the alignment.
+*/
+
+/**
+\var char trimAlManager::matrixFile
+\brief File that contains a user defined similarity matrix.
+*/
+
+/**
+\var char trimAlManager::filesToCompare
+\brief Vector containing the files to compare in trimAlManager::check_multiple_files_comparison function.
+\note This variable could be moved there.
+*/
+
+/**
+\var char trimAlManager::line
+\brief Temporal variable to read lines from a file.
+*/
+
+/**
+\var std::vector<std::string> trimAlManager::oformats
+\brief Formats names we are going to output our trimmed alignment.
+*/
+
+/**
+\var FormatManager trimAlManager::formatManager
+\brief Read Write Machine that allows to manage formats easily.
+*/

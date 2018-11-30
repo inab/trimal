@@ -24,10 +24,10 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "../include/sequencesMatrix.h"
 #include "InternalBenchmarker.h"
+#include "sequencesMatrix.h"
 #include "Alignment.h"
-#include "../include/utils.h"
+#include "utils.h"
 
 sequencesMatrix::sequencesMatrix(void) {
 	 // Create a timer that will report times upon its destruction
@@ -46,13 +46,13 @@ sequencesMatrix::sequencesMatrix(Alignment *parent) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
 	StartTiming("sequencesMatrix::sequencesMatrix(Alignment *parent) ");
-    _alignment = parent;
+    alig = parent;
     int i, j, k;
 
-    seqsNumber = _alignment->originalNumberOfSequences;
-    resNumber = _alignment->originalNumberOfResidues;
+    seqsNumber = alig->originalNumberOfSequences;
+    resNumber = alig->originalNumberOfResidues;
 
-    seqsName = _alignment->seqsName;
+    seqsName = alig->seqsName;
 
     matrix = new int *[seqsNumber];
     for (i = 0; i < seqsNumber; i++) {
@@ -63,7 +63,7 @@ sequencesMatrix::sequencesMatrix(Alignment *parent) {
     // Determinate the sequence for each alignment specie
     for (i = 0, k = 1; i < seqsNumber; i++, k = 1) {
         for (j = 0; j < resNumber; j++) {
-            if (_alignment->sequences[i][j] != '-') {
+            if (alig->sequences[i][j] != '-') {
                 matrix[i][j] = k;
                 k++;
             }
@@ -120,7 +120,7 @@ sequencesMatrix &sequencesMatrix::operator=(const sequencesMatrix &old) {
         for (i = 0; i < seqsNumber; i++) {
             matrix[i] = new int[resNumber];
             for (j = 0; j < resNumber; j++)
-                matrix[i][j] = matrix[i][j];
+                matrix[i][j] = old.matrix[i][j];
         }
 
     }
@@ -135,7 +135,7 @@ sequencesMatrix::~sequencesMatrix() {
 
     if (matrix != nullptr) {
         for (i = 0; i < seqsNumber; i++)
-            delete matrix[i];
+            delete [] matrix[i];
         delete[] matrix;
     }
 

@@ -1,8 +1,8 @@
-#include "../../include/FormatHandling/fasta_state.h"
+#include "FormatHandling/fasta_state.h"
 
-#include "../../include/FormatHandling/FormatManager.h"
-#include "../../include/defines.h"
-#include "../../include/utils.h"
+#include "FormatHandling/FormatManager.h"
+#include "defines.h"
+#include "utils.h"
 
 int fasta_state::CheckAlignment(std::istream* origin)
 {
@@ -17,7 +17,7 @@ int fasta_state::CheckAlignment(std::istream* origin)
 Alignment* fasta_state::LoadAlignment(std::string& filename)
 {
     /* FASTA file format parser */
-    Alignment* _alignment = new Alignment();
+    Alignment* alig = new Alignment();
     char *str, *line = nullptr;
     std::ifstream file;
     int i;
@@ -28,12 +28,12 @@ Alignment* fasta_state::LoadAlignment(std::string& filename)
         return nullptr;
 
     /* Store input file name for posterior uses in other formats */
-    _alignment->filename.append("!Title ");
-    _alignment->filename.append(filename);
-    _alignment->filename.append(";");
+    // alig->filename.append("!Title ");
+    alig->filename.append(filename);
+    alig->filename.append(";");
 
     /* Compute how many sequences are in the input alignment */
-    _alignment->numberOfSequences = 0;
+    alig->numberOfSequences = 0;
     while(!file.eof()) {
 
         /* Deallocate previously used dinamic memory */
@@ -51,7 +51,7 @@ Alignment* fasta_state::LoadAlignment(std::string& filename)
 
         /* If a sequence name flag is detected, increase sequences counter */
         if(str[0] == '>')
-            _alignment->numberOfSequences++;
+            alig->numberOfSequences++;
     }
 
     /* Finish to preprocess the input file. */
@@ -59,11 +59,11 @@ Alignment* fasta_state::LoadAlignment(std::string& filename)
     file.seekg(0);
 
     /* Allocate memory for the input alignmet */
-    _alignment->seqsName  = new std::string[_alignment->numberOfSequences];
-    _alignment->sequences = new std::string[_alignment->numberOfSequences];
-    _alignment->seqsInfo  = nullptr;//new std::string[_alignment->numberOfSequences];
+    alig->seqsName  = new std::string[alig->numberOfSequences];
+    alig->sequences = new std::string[alig->numberOfSequences];
+    alig->seqsInfo  = nullptr;//new std::string[alig->numberOfSequences];
 
-    for(i = -1; (i < _alignment->numberOfSequences) && (!file.eof()); ) {
+    for(i = -1; (i < alig->numberOfSequences) && (!file.eof()); ) {
 
         /* Deallocate previously used dinamic memory */
         delete [] line;
@@ -76,7 +76,7 @@ Alignment* fasta_state::LoadAlignment(std::string& filename)
         /* Store original header fom input sequences including non-standard
          * characters */
 //         if (line[0] == '>')
-//             _alignment->seqsInfo[i+1].append(&line[1], strlen(line) - 1);
+//             alig->seqsInfo[i+1].append(&line[1], strlen(line) - 1);
 
         /* Cut the current line and check whether there are valid characters */
         str = strtok(line, OTHDELIMITERS);
@@ -90,13 +90,13 @@ Alignment* fasta_state::LoadAlignment(std::string& filename)
             do {
                 str = str + 1;
             } while(strlen(str) == 0);
-            _alignment->seqsName[++i].append(str, strlen(str));
+            alig->seqsName[++i].append(str, strlen(str));
             continue;
         }
 
         /* Sequence */
         while(str != nullptr) {
-            _alignment->sequences[i].append(str, strlen(str));
+            alig->sequences[i].append(str, strlen(str));
             str = strtok(nullptr, DELIMITERS);
         }
     }
@@ -109,15 +109,14 @@ Alignment* fasta_state::LoadAlignment(std::string& filename)
         delete [] line;
         
     /* Check the matrix's content */
-    _alignment->fillMatrices(false);
-    _alignment->originalNumberOfSequences = _alignment-> numberOfSequences;
-    _alignment->originalNumberOfResidues = _alignment->numberOfResidues;
-    return _alignment; 
+    alig->fillMatrices(false);
+    alig->originalNumberOfSequences = alig-> numberOfSequences;
+    alig->originalNumberOfResidues = alig->numberOfResidues;
+    return alig; 
 }
 
 bool fasta_state::SaveAlignment(Alignment* alignment,
-                                std::ostream* output,
-                                std::string* FileName)
+                                std::ostream* output)
 {
     /* Generate output alignment in FASTA format. Sequences can be unaligned. */
 

@@ -35,23 +35,23 @@
 // Forward declaration
 class Alignment;
 
-namespace Statistics {
+namespace statistics {
 
-    /** \brief Class to serve as a mold to multiple statistics. <b> Currently not in use </b>
-     * This would help to maintain coherence and to ease the understanding of each of the stats. 
-     * As the number of statistics grows, this standarization will become more valuable.
+    /** \brief <b> Currently not in use </b>\n Class to serve as a mold to multiple stats.\n
+     * This would help to maintain coherence and to ease the understanding of each of the stats. \n
+     * As the number of stats grows, this standarization will become more valuable.\n
     */
     class Mold {
     public:
 
-        Alignment *_alignment;
+        Alignment *alig;
 
         int
                 residues = -1,
                 sequences = -1,
                 halfWindowApplied = -1;
 
-        /* Conservation vectors */
+        /* Similarity vectors */
         float *values = nullptr;
         float *valuesWindow = nullptr;
 
@@ -69,7 +69,7 @@ namespace Statistics {
 
         virtual bool calculate() { return false; };
 
-        virtual bool applyWindow(int _halfWindow);
+        virtual bool applyWindow(int halfW);
 
         virtual bool isDefinedWindow();
 

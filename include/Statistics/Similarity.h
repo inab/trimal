@@ -29,7 +29,7 @@
 #define STATISTICS_CONSERVATION2_H
 
 #include "Gaps.h"
-#include "../../include/similarityMatrix.h"
+#include "similarityMatrix.h"
 
 #include <iostream>
 #include <sstream>
@@ -39,26 +39,26 @@
 // Forward declaration
 class Alignment;
 
-namespace Statistics {
+namespace statistics {
 
 
     /**
-     * \brief Class to handle the calculation relative to conservation.\n
+     * \brief Class to handle the calculation relative to similarity.\n
      * This class is narrowly connected to similarityMatrix, as the latter contains the information
-     *      to calculate the conservation of the alignment.
+     *      to calculate the similarity of the alignment.
     */
-    class Conservation {
+    class Similarity {
     public:
 
-        Conservation(Alignment *parentAlignment, Conservation *mold);
+        Similarity(Alignment *parentAlignment, Similarity *mold);
 
-        Alignment * _alignment;
+        Alignment * alig;
 
-        /** \brief Half Window used on the calculation of the conservation */
+        /** \brief Half Window used on the calculation of the similarity */
         int halfWindow          = -1;
 
-        /* Conservation vectors */
-        /** \brief Raw conservation values */
+        /* Similarity vectors */
+        /** \brief Raw similarity values */
         float *MDK                  = nullptr;
         /** \brief Windowed convervation values */
         float *MDK_Window           = nullptr;
@@ -66,7 +66,7 @@ namespace Statistics {
         /** \brief Identity weight matrix between alignment rows */
         float **matrixIdentity      = nullptr;
 
-        /** \brief Similarity matrix used to conservation calculations */
+        /** \brief Similarity matrix used to similarity calculations */
         similarityMatrix *simMatrix = nullptr;
 
         /** \brief Counter of how many other instances share the same information */
@@ -77,23 +77,23 @@ namespace Statistics {
         void calculateMatrixIdentity();
 
         /** \brief Constructor without any parameters */
-        explicit Conservation(Alignment * parentAlignment);
+        explicit Similarity(Alignment * parentAlignment);
 
         /** \brief Destructor */
-        ~Conservation();
+        ~Similarity();
 
         /**
-            \brief Method to calculate the conservation values of a alignment matrix.
+            \brief Method to calculate the similarity values of a alignment matrix.
             \param cutByGap Wheter to cut by gap or not
         */
         bool calculateVectors(bool cutByGap = true);
 
         /**
             \brief Allows us compute the conservationWindow's values.
-            \param _halfWindow Half window size to apply.
+            \param halfW Half window size to apply.
             \return \b False if there is a previously computed vector for this window size or half window size is greater than 1/4 of the alignment length.
         */
-        bool applyWindow(int _halfWindow);
+        bool applyWindow(int halfW);
 
         /**
             \brief Returns if a windows size value has been defined or not.
@@ -103,7 +103,7 @@ namespace Statistics {
 
         /**
             \brief This methods returns a pointer to conservationWindow's vector
-            \return Conservation window vector.
+            \return Similarity window vector.
         */
         float *getMdkWindowedVector();
 
@@ -121,14 +121,14 @@ namespace Statistics {
         bool isSimMatrixDef();
 
         /**
-            \brief Computes and selects the cut point values based on conservation's values.
+            \brief Computes and selects the cut point values based on similarity's values.
             \todo This description seems a little vague.
             \param baseLine Percentage of columns desired.
-            \param conservationPct Percentage of conservation desired.
+            \param conservationPct Percentage of similarity desired.
         */
         double calcCutPoint(float baseLine, float conservationPct);
 
-        /** \brief Prints the conservation's value for each alignment's column. */
+        /** \brief Prints the similarity's value for each alignment's column. */
         void printConservationColumns();
 
         /** \brief Computes and prints the accumulative statistics associated to the alignment. */

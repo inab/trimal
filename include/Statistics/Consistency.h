@@ -29,8 +29,8 @@
 #define COMPAREFILES_H
 
 
-#include "../../include/FormatHandling/FormatManager.h"
-#include "../../include/trimalManager.h"
+#include "FormatHandling/FormatManager.h"
+#include "trimalManager.h"
 
 #include <iostream>
 #include <cstring>
@@ -42,7 +42,7 @@
 // Forward declaration
 class Alignment;
 
-namespace Statistics {
+namespace statistics {
 
 
     /**
@@ -76,24 +76,24 @@ namespace Statistics {
 
         /**
          * \brief Print the consistency value for each column from the selected alignment.
-         * \param _alignment Alignment used to obtain the accumulated consistency value
+         * \param alig Alignment used to obtain the accumulated consistency value
          * \param compareVect Vector containing the consistency value for each column.
         */
-        static void printStatisticsFileColumns(Alignment &_alignment, float *compareVect);
+        static void printStatisticsFileColumns(Alignment &alig, float *compareVect);
 
         /**
          * \brief Print the accumulated consistency value from the selected alignment.
-         * \param _alignment Alignment used to obtain the accumulated consistency value
+         * \param alig Alignment used to obtain the accumulated consistency value
          * \param compareVect Vector containing the consistency value for each column.
         */
-        static void printStatisticsFileAcl(Alignment &_alignment, float *compareVect);
+        static void printStatisticsFileAcl(Alignment &alig, float *compareVect);
 
         /**
          * \brief Applies a new window to the alignment.
-         * \param _halfWindow Half size of window to apply.
+         * \param halfW Half size of window to apply.
          * \return \b True if correct \b Exits if false
         */
-        bool applyWindow(int _halfWindow);
+        bool applyWindow(int halfW);
 
         /**
          * \brief Copy constructor
@@ -122,7 +122,7 @@ namespace Statistics {
     private:
 
         /** \brief Original alignment for which the stat was calculated */
-        Alignment *_alignment = nullptr;
+        Alignment *alig = nullptr;
 
         /** \brief Array of alignments to compare */
         Alignment **compareAlignmentsArray = nullptr;

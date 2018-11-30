@@ -347,13 +347,12 @@ namespace utils {
     /**
      \brief Method to check for a pattern in a string.\n
             The method will check, character by character of the first string if
-             there is some equality for each character in the pattern.
+             there is some equality for each character in the pattern.\n
             When done, it will calculate the fraction of characters
              present in the pattern and compare to the threshold argument.
      \param data string that will be compared against a pattern
      \param pattern string that contains the pattern.
      \param threshold minimum ratio of hits to consider the pattern valid
-     \todo Give a good description for this function.
      */
      bool lookForPattern(const std::string& data,
                                const std::string& pattern,
@@ -438,7 +437,7 @@ namespace utils {
 
 inline char utils::toUpper(char c) 
 {
-    return std::toupper(c);
+    // return std::toupper(c);
     if (c >= 'a' and c <= 'z')
         return c & (~(1<<5));
     return c;

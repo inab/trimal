@@ -38,12 +38,12 @@
 #include <cmath>
 #include <ctime>
 
-#include "../include/defines.h"
+#include "defines.h"
 
 // Forward declarations
 class sequencesMatrix;
 class Cleaner;
-namespace Statistics {
+namespace statistics {
     class Manager;
 }
 
@@ -56,7 +56,7 @@ public:
 
     Cleaner *Cleaning = nullptr;
 
-    Statistics::Manager *Statistics = nullptr;
+    statistics::Manager *Statistics = nullptr;
 
     sequencesMatrix *SequencesMatrix = nullptr;
 
@@ -142,9 +142,9 @@ public:
 
     bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, Alignment *proteinAlignment);
 
-    bool alignmentSummaryHTML(Alignment &_trimmedAlignment, char *destFile);
+    bool alignmentSummaryHTML(Alignment &trimmedAlig, char *destFile);
 
-    bool alignmentSummarySVG(Alignment &_trimmedAlignment, char *destFile, int blocks);
+    bool alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, int blocks);
 
     void updateSequencesAndResiduesNums(bool countSequences = true, bool countResidues = true);
 };

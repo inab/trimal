@@ -116,7 +116,7 @@ public:
     \param MDK_Win
       Vector that contains similarity value for each column.
     \param cutCons
-      Minimum conservation value to keep a column in the alignment.
+      Minimum similarity value to keep a column in the alignment.
     \param complementary
       Whether or not to return the complementary version of the trimmed alignment.
     \return Pointer to the cleaned alignment.
@@ -452,7 +452,7 @@ private:
      /**
       \brief Pointer to the alignment that contains this object
       */
-    Alignment *_alignment;
+    Alignment *alig;
 
      /**
       \brief Class Constructor - Called by \link Alignment \endlink

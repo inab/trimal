@@ -3,7 +3,7 @@
 \section introduction_sec Introduction
 
 This is \b trimAl's information page. 
-You can also find information related to \link readal_pag readAl \endlink, a MSA format conversor.\n
+You can also find information related to \link readAl readAl \endlink, a MSA format conversor.\n
 \b trimAl is a tool for the automated removal of 
 spurious sequences or poorly aligned regions from a multiple sequence alignment.\n\n
 

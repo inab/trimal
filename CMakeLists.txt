@@ -19,7 +19,7 @@ set(CMAKE_CXX_STANDARD 11)
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
 # Specify the level of optimization used
-ADD_DEFINITIONS(-O2)
+#ADD_DEFINITIONS(-O2)
 
 
 
@@ -36,7 +36,7 @@ set(preview
         source/Statistics/Mold.cpp
         source/Statistics/Gaps.cpp
         source/Statistics/Manager.cpp
-        source/Statistics/Conservation.cpp
+        source/Statistics/Similarity.cpp
         source/Statistics/Consistency.cpp
 
         source/Cleaner.cpp

@@ -1,8 +1,8 @@
-#include "../../include/FormatHandling/htmlreport_state.h"
+#include "FormatHandling/htmlreport_state.h"
 
-#include "../../include/FormatHandling/FormatManager.h"
-#include "../../include/defines.h"
-#include "../../include/utils.h"
+#include "FormatHandling/FormatManager.h"
+#include "defines.h"
+#include "utils.h"
 
 int htmlreport_state::CheckAlignment(std::istream* origin)
 {
@@ -14,7 +14,7 @@ Alignment* htmlreport_state::LoadAlignment(std::string& filename)
     return nullptr;
 }
 
-bool htmlreport_state::SaveAlignment(Alignment* alignment, std::ostream* output, std::string* FileName)
+bool htmlreport_state::SaveAlignment(Alignment* alignment, std::ostream* output)
 {
     int i, j, kj, upper, k = 0, maxLongName = 0;
     std::string tmpColumn;

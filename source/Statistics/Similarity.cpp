@@ -24,25 +24,25 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#include "Statistics/Conservation.h"
-#include "Statistics/Manager.h"
-#include "Alignment.h"
-#include "../../include/reportsystem.h"
+#include "Statistics/Similarity.h"
 #include "InternalBenchmarker.h"
-#include "../../include/defines.h"
-#include "../../include/utils.h"
+#include "Statistics/Manager.h"
+#include "reportsystem.h"
+#include "Alignment.h"
+#include "defines.h"
+#include "utils.h"
 
-namespace Statistics {
+namespace statistics {
 
-    Conservation::Conservation(Alignment *parentAlignment) {
+    Similarity::Similarity(Alignment *parentAlignment) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("Conservation::Conservation(Alignment *parentAlignment) ");
+        StartTiming("Similarity::Similarity(Alignment *parentAlignment) ");
 
-        _alignment = parentAlignment;
+        alig = parentAlignment;
 
-        MDK = new float[_alignment->originalNumberOfResidues];
-        utils::initlVect(MDK, _alignment->originalNumberOfResidues, 0);
+        MDK = new float[alig->originalNumberOfResidues];
+        utils::initlVect(MDK, alig->originalNumberOfResidues, 0);
 
         // Initialize the similarity matrix to nullptr.
         simMatrix = nullptr;
@@ -50,13 +50,13 @@ namespace Statistics {
         refCounter = new int(1);
     }
 
-    Conservation::Conservation(Alignment *parentAlignment,
-                                                   Conservation *mold) {
+    Similarity::Similarity(Alignment *parentAlignment,
+                                                   Similarity *mold) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("Conservation::Conservation(Alignment *parentAlignment) ");
+        StartTiming("Similarity::Similarity(Alignment *parentAlignment) ");
 
-        _alignment = parentAlignment;
+        alig = parentAlignment;
 
         halfWindow = 0;
 
@@ -69,10 +69,10 @@ namespace Statistics {
         (*refCounter)++;
     }
 
-    Conservation::~Conservation() {
+    Similarity::~Similarity() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("Conservation::Conservation");
+        StartTiming("Similarity::Similarity");
         // Deallocate common variables only in case there is no module that has a
         // reference to them
         if (refCounter == nullptr || --(*refCounter) < 1) {
@@ -82,7 +82,7 @@ namespace Statistics {
             MDK_Window = nullptr;
 
             if (matrixIdentity != nullptr)
-                for (int i = 0; i < _alignment->numberOfSequences; i++)
+                for (int i = 0; i < alig->numberOfSequences; i++)
                     delete[] matrixIdentity[i];
             delete[] matrixIdentity;
             matrixIdentity = nullptr;
@@ -91,10 +91,10 @@ namespace Statistics {
         }
     }
 
-    void Conservation::calculateMatrixIdentity() {
+    void Similarity::calculateMatrixIdentity() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("void Conservation::calculateMatrixIdentity() ");
+        StartTiming("void Similarity::calculateMatrixIdentity() ");
 
         // We don't want to calculate the matrix identity
         // if it has been previously calculated
@@ -103,39 +103,33 @@ namespace Statistics {
 
         // Allocate temporal variables
         char indet;
-        int i, j, k, sum, length;
+        int i, j, k;
+        int sum, length;
 
         // Allocate memory for the matrix identity
-        matrixIdentity = new float *[_alignment->originalNumberOfSequences];
-        for (i = 0; i < _alignment->originalNumberOfSequences; i++) {
-            if (_alignment->saveSequences[i] == -1)
-                matrixIdentity[i] = nullptr;
-            else {
-                matrixIdentity[i] = new float[_alignment->originalNumberOfSequences];
-                utils::initlVect(matrixIdentity[i], _alignment->originalNumberOfSequences , 0);
-            }
+        matrixIdentity = new float *[alig->originalNumberOfSequences];
+        for (i = 0; i < alig->originalNumberOfSequences; i++) {
+            matrixIdentity[i] = new float[alig->originalNumberOfSequences];
         }
 
         // Depending on alignment type, indetermination symbol will be one or other
-        indet = _alignment->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
+        indet = alig->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
         // For each sequences' pair
-        for (i = 0; i < _alignment->originalNumberOfSequences; i++) {
-            if (_alignment->saveSequences[i] == -1) continue;
-            for (j = i + 1; j < _alignment->originalNumberOfSequences; j++) {
-                if (_alignment->saveSequences[j] == -1) continue;
+        for (i = 0; i < alig->originalNumberOfSequences; i++) {
+            for (j = i + 1; j < alig->originalNumberOfSequences; j++) {
                 // For each position in the alignment of that pair than we are processing
-                for (k = 0, sum = 0, length = 0; k < _alignment->originalNumberOfResidues; k++) {
+                for (k = 0, sum = 0, length = 0; k < alig->originalNumberOfResidues; k++) {
                     // If we find a element that is not a gap or an X aminoacid in the first sequence of the pair
-                    if ((_alignment->sequences[i][k] != '-') &&
-                        (_alignment->sequences[i][k] != indet)) {
+                    if ((alig->sequences[i][k] != '-') &&
+                        (alig->sequences[i][k] != indet)) {
 
                         // If we also find a valid element in the second sequence
-                        if ((_alignment->sequences[j][k] != '-') &&
-                            (_alignment->sequences[j][k] != indet))
+                        if ((alig->sequences[j][k] != '-') &&
+                            (alig->sequences[j][k] != indet))
                         {
                             // If the two valid elements are the same increase the sum
-                            if (_alignment->sequences[j][k] == _alignment->sequences[i][k])
+                            if (alig->sequences[j][k] == alig->sequences[i][k])
                                 sum++;
                         }
                         // Increase the length of the sequence free of gaps and X elements
@@ -143,26 +137,26 @@ namespace Statistics {
                     }
                     // If the first processed element is invalid and in the second we find a valid element increase the length of
                     // the sequence free of gaps and X elements
-                    else if ((_alignment->sequences[j][k] != '-') &&
-                             (_alignment->sequences[j][k] != indet))
+                    else if ((alig->sequences[j][k] != '-') &&
+                             (alig->sequences[j][k] != indet))
                     {
                         length++;
                     }
                 }
 
                 // Calculate the value of matrix idn for columns j and i
-                matrixIdentity[j][i] = (100.0F - ((float) sum / length) * 100.0F);
+                matrixIdentity[j][i] = (1.0F - ((float)sum / length) );
                 matrixIdentity[i][j] = matrixIdentity[j][i];
             }
         }
     }
 
-    bool Conservation::calculateVectors(bool cutByGap) {
+    bool Similarity::calculateVectors(bool cutByGap) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("bool Conservation::calculateVectors(int *gaps) ");
+        StartTiming("bool Similarity::calculateVectors(int *gaps) ");
 
-        // A conservation matrix must be defined. If not, return false
+        // A similarity matrix must be defined. If not, return false
         if (simMatrix == nullptr)
             return false;
 
@@ -177,9 +171,9 @@ namespace Statistics {
         // in case the gaps value for that column is bigger or equal to 0.8F
         if (cutByGap)
         {
-            if (_alignment->Statistics->gaps == nullptr)
-                _alignment->Statistics->calculateGapStats();
-            gaps = _alignment->Statistics->gaps->getGapsWindow();
+            if (alig->Statistics->gaps == nullptr)
+                alig->Statistics->calculateGapStats();
+            gaps = alig->Statistics->gaps->getGapsWindow();
         }
 
         // Initialize the variables used
@@ -187,7 +181,7 @@ namespace Statistics {
         float num, den;
 
         // Depending on alignment type, indetermination symbol will be one or other
-        char indet = _alignment->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
+        char indet = alig->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
         // Q temporal value
         float Q;
@@ -195,18 +189,18 @@ namespace Statistics {
         char chA, chB;
 
         // Calculate the maximum number of gaps a column can have to calculate it's
-        //      conservation
-        float gapThreshold = 0.8F * _alignment->numberOfResidues;
+        //      similarity
+        float gapThreshold = 0.8F * alig->numberOfResidues;
 
         // For each column calculate the Q value and the MD value using an equation
-        for (i = 0; i < _alignment->originalNumberOfResidues; i++) {
+        for (i = 0; i < alig->originalNumberOfResidues; i++) {
             // Set MDK for columns with gaps values bigger or equal to 0.8F
             if (cutByGap && gaps[i] >= gapThreshold) {
                 MDK[i] = 0.F;
                 continue;
             }
             // For each AAs/Nucleotides' pair in the column we compute its distance
-            for (j = 0, num = 0, den = 0; j < _alignment->originalNumberOfSequences; j++) {
+            for (j = 0, num = 0, den = 0; j < alig->originalNumberOfSequences; j++) {
 
 
                 // Calculate the upper value of the residue,
@@ -215,14 +209,14 @@ namespace Statistics {
                 //      as this is done before entering the loop
                 // Doing this before checking if the element is indeterminate or gap
                 //      allows to check if the indetermination is not capitalized
-                chA = utils::toUpper(_alignment->sequences[j][i]);
+                chA = utils::toUpper(alig->sequences[j][i]);
 
                 // We don't compute the distance if the first element is
                 // a indeterminate (XN) or a gap (-) element.
                 if ((chA == '-') || (chA == indet))
                     continue;
 
-                for (k = j + 1; k < _alignment->originalNumberOfSequences; k++) {
+                for (k = j + 1; k < alig->originalNumberOfSequences; k++) {
                     // We calculate the upper value of the residue,
                     //      to use in simMatrix->getDistance
                     // This is equally faster as if it was done inside the method
@@ -230,7 +224,7 @@ namespace Statistics {
                     //      the given chars.
                     // Doing this before checking if the element is indeterminate or gap
                     //      allows to check if the indetermination is not capitalized
-                    chB = utils::toUpper(_alignment->sequences[k][i]);
+                    chB = utils::toUpper(alig->sequences[k][i]);
 
                     // We don't compute the distance if the second element is
                     //      a indeterminate (XN) or a gap (-) element
@@ -244,12 +238,9 @@ namespace Statistics {
                 }
             }
 
-            // If we are processing a column with only one AA/nucleotide,
-            //      the denominator is 0 and we don't execute the division
-            //      and we set the Q[i] value to 0.
-            // As we already know the value of exp(-0) = 1, we use it directly.
+            // If we are processing a column with only one AA/nucleotide, MDK = 0
             if (den == 0)
-                MDK[i] = 1;
+                MDK[i] = 0;
             else
             {
                 Q = num / den;
@@ -266,7 +257,7 @@ namespace Statistics {
             }
         }
 
-        for (i = 0; i < _alignment->originalNumberOfSequences; i++)
+        for (i = 0; i < alig->originalNumberOfSequences; i++)
             delete[] matrixIdentity[i];
         delete[] matrixIdentity;
         matrixIdentity = nullptr;
@@ -274,32 +265,32 @@ namespace Statistics {
         return true;
     }
 
-    bool Conservation::applyWindow(int _halfWindow) {
+    bool Similarity::applyWindow(int halfW) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("bool Conservation::applyWindow(int _halfWindow) ");
+        StartTiming("bool Similarity::applyWindow(int halfW) ");
 
         // Calculate the MDK array if it has not been calculated previously
         if (MDK == nullptr)
-            calculateVectors();
+            calculateVectors(true);
 
         // Check is the half window value passed is in the valid range
-        if (_halfWindow > _alignment->originalNumberOfResidues / 4) {
+        if (halfW > alig->originalNumberOfResidues / 4) {
             debug.report(ErrorCode::SimilarityWindowTooBig);
             return false;
         }
 
         // If the current half window is the same as the last one, don't do anything
-        if (halfWindow == _halfWindow) return true;
+        if (halfWindow == halfW) return true;
 
         // Save the requested half window. This is useful when making a copy of the
         // alignment, as the window values are not valid anymore but don't want to
         // calculate them if not needed anymore
-        halfWindow = _halfWindow;
+        halfWindow = halfW;
 
         // If the half window requested is 0 or a negative number
         // we simply delete the window values.
-        if (_halfWindow < 1) {
+        if (halfW < 1) {
             delete[] MDK_Window;
 
             MDK_Window = nullptr;
@@ -311,18 +302,18 @@ namespace Statistics {
 
         // Initialize the MDK window array if it's null
         if (MDK_Window == nullptr)
-            MDK_Window = new float[_alignment->originalNumberOfResidues + 1];
+            MDK_Window = new float[alig->originalNumberOfResidues + 1];
 
         window = 2 * halfWindow + 1;
 
         // Do the average window calculations
-        for (i = 0; i < _alignment->originalNumberOfResidues; i++) {
+        for (i = 0; i < alig->originalNumberOfResidues; i++) {
             MDK_Window[i] = 0.F;
             for (j = i - halfWindow; j <= i + halfWindow; j++) {
                 if (j < 0)
                     MDK_Window[i] += MDK[-j];
-                else if (j >= _alignment->originalNumberOfResidues)
-                    MDK_Window[i] += MDK[((2 * _alignment->originalNumberOfResidues - j) - 2)];
+                else if (j >= alig->originalNumberOfResidues)
+                    MDK_Window[i] += MDK[((2 * alig->originalNumberOfResidues - j) - 2)];
                 else
                     MDK_Window[i] += MDK[j];
             }
@@ -333,18 +324,18 @@ namespace Statistics {
         return true;
     }
 
-    bool Conservation::isDefinedWindow() {
+    bool Similarity::isDefinedWindow() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("bool Conservation::isDefinedWindow(void) ");
+        StartTiming("bool Similarity::isDefinedWindow(void) ");
 
         return (halfWindow > 0);
     }
 
-    float *Conservation::getMdkWindowedVector() {
+    float *Similarity::getMdkWindowedVector() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("float *Conservation::getMdkWindowedVector(void) ");
+        StartTiming("float *Similarity::getMdkWindowedVector(void) ");
 
         // If a window is defined
         if (isDefinedWindow()) {
@@ -358,10 +349,10 @@ namespace Statistics {
         else return MDK;
     }
 
-    bool Conservation::setSimilarityMatrix(similarityMatrix *sm) {
+    bool Similarity::setSimilarityMatrix(similarityMatrix *sm) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("bool Conservation::setSimilarityMatrix(similarityMatrix *sm) ");
+        StartTiming("bool Similarity::setSimilarityMatrix(similarityMatrix *sm) ");
 
         // Checks if a similarity matrix is already being used.
         if (sm == nullptr)
@@ -376,19 +367,19 @@ namespace Statistics {
         return true;
     }
 
-    bool Conservation::isSimMatrixDef() {
+    bool Similarity::isSimMatrixDef() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("bool Conservation::isSimMatrixDef(void) ");
+        StartTiming("bool Similarity::isSimMatrixDef(void) ");
 
         return simMatrix != nullptr;
     }
 
-    double Conservation::calcCutPoint(float baseLine, float conservationPct) {
+    double Similarity::calcCutPoint(float baseLine, float conservationPct) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("double Conservation::calcCutPoint(float baseLine, float conservationPct) ");
-        // It computes the cutting point based on alignment's conservation values -
+        StartTiming("double Similarity::calcCutPoint(float baseLine, float conservationPct) ");
+        // It computes the cutting point based on alignment's similarity values -
         // the so-called 'similarity'. It also takes into account the minimum percentage
         // from the input alignment to be kept. Depending on those two values, the
         // method will select a different cutting-point.
@@ -397,15 +388,15 @@ namespace Statistics {
         int i, highestPos;
         float *vectAux;
 
-        vectAux = new float[_alignment->originalNumberOfResidues];
+        vectAux = new float[alig->originalNumberOfResidues];
 
         // Sort a copy of the vector containing the similarity values after applying
         // any windows methods. Take the columns value that it lower than the minimum
         // similarity threshold set by the user
-        utils::copyVect(getMdkWindowedVector(), vectAux, _alignment->originalNumberOfResidues);
-        utils::quicksort(vectAux, 0, _alignment->originalNumberOfResidues - 1);
+        utils::copyVect(getMdkWindowedVector(), vectAux, alig->originalNumberOfResidues);
+        utils::quicksort(vectAux, 0, alig->originalNumberOfResidues - 1);
 
-        for (i = _alignment->originalNumberOfResidues - 1; i >= 0; i--)
+        for (i = alig->originalNumberOfResidues - 1; i >= 0; i--)
             if (vectAux[i] < conservationPct)
                 break;
         cuttingPoint_SimilThreshold = vectAux[i];
@@ -414,8 +405,8 @@ namespace Statistics {
         // vector containing the similarity values - it is not reporting an overflow
         // situation but giving back a 0 when it should be a number equal (or closer)
         // to 1.
-        highestPos = (int) ((double) (_alignment->originalNumberOfResidues - 1) * (100.0 - baseLine) / 100.0);
-        highestPos = highestPos < (_alignment->originalNumberOfResidues - 1) ? highestPos : _alignment->originalNumberOfResidues - 1;
+        highestPos = (int) ((double) (alig->originalNumberOfResidues - 1) * (100.0 - baseLine) / 100.0);
+        highestPos = highestPos < (alig->originalNumberOfResidues - 1) ? highestPos : alig->originalNumberOfResidues - 1;
         cuttingPoint_MinimumConserv = vectAux[highestPos];
 
         delete[] vectAux;
@@ -426,14 +417,14 @@ namespace Statistics {
                 cuttingPoint_MinimumConserv : cuttingPoint_SimilThreshold);
     }
 
-    void Conservation::printConservationColumns() {
+    void Similarity::printConservationColumns() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("void Conservation::printConservationColumns(void) ");
+        StartTiming("void Similarity::printConservationColumns(void) ");
 
         int i, size = 20;
 
-        std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
+        std::string fname = alig->filename.substr(6, alig->filename.size() - 7);
 
 
         std::cout << std::fixed
@@ -456,7 +447,7 @@ namespace Statistics {
 
         std::cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << std::endl;
 
-        std::cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
+        std::cout << std::setw(alig->filename.substr(6, alig->filename.size() - 7).length() + 7)
              << std::setfill('-')
              << std::left << ""
              << std::setfill(' ')
@@ -475,37 +466,37 @@ namespace Statistics {
 
         float *values;
 
-        // If MDK_Window vector is defined, we use it to print the conservation's values.
+        // If MDK_Window vector is defined, we use it to print the similarity's values.
         if (MDK_Window != nullptr)
             values = MDK_Window;
-            // In others cases, we uses the MDK vector to print the conservation's vlaues.
+            // In others cases, we uses the MDK vector to print the similarity's vlaues.
         else
             values = MDK;
 
-        for (i = 0; i < _alignment->originalNumberOfResidues; i++)
+        for (i = 0; i < alig->originalNumberOfResidues; i++)
             std::cout << std::setw(size) << std::left << i << values[i] << std::endl;
     }
 
-    void Conservation::printConservationAcl() {
+    void Similarity::printConservationAcl() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("void Conservation::printConservationAcl(void) ");
+        StartTiming("void Similarity::printConservationAcl(void) ");
 
         float refer, *vectAux;
         int i, num, acm;
         int size = 20;
         // Allocate memory
-        vectAux = new float[_alignment->originalNumberOfResidues];
+        vectAux = new float[alig->originalNumberOfResidues];
 
-        // Select the conservation's value source and copy that vector in a auxiliar vector
-        if (MDK_Window != nullptr) utils::copyVect(MDK_Window, vectAux, _alignment->originalNumberOfResidues);
-        else utils::copyVect(MDK, vectAux, _alignment->originalNumberOfResidues);
+        // Select the similarity's value source and copy that vector in a auxiliar vector
+        if (MDK_Window != nullptr) utils::copyVect(MDK_Window, vectAux, alig->originalNumberOfResidues);
+        else utils::copyVect(MDK, vectAux, alig->originalNumberOfResidues);
 
         // Sort the auxiliar vector.
-        utils::quicksort(vectAux, 0, _alignment->originalNumberOfResidues - 1);
+        utils::quicksort(vectAux, 0, alig->originalNumberOfResidues - 1);
 
         // Print filename
-        std::string fname = _alignment->filename.substr(6, _alignment->filename.size() - 7);
+        std::string fname = alig->filename.substr(6, alig->filename.size() - 7);
 
         std::cout << std::fixed
              << std::setw(fname.length() + 7)
@@ -527,7 +518,7 @@ namespace Statistics {
 
         std::cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << std::endl;
 
-        std::cout << std::setw(_alignment->filename.substr(6, _alignment->filename.size() - 7).length() + 7)
+        std::cout << std::setw(alig->filename.substr(6, alig->filename.size() - 7).length() + 7)
              << std::setfill('-')
              << std::left << ""
              << std::setfill(' ')
@@ -573,13 +564,13 @@ namespace Statistics {
 
 
         // Initializate some values
-        refer = vectAux[_alignment->originalNumberOfResidues - 1];
+        refer = vectAux[alig->originalNumberOfResidues - 1];
         acm = 0;
         num = 1;
 
-        // Count the columns with the same conservation's value and compute this information to shows the accumulative
+        // Count the columns with the same similarity's value and compute this information to shows the accumulative
         // statistics in the alignment.
-        for (i = _alignment->originalNumberOfResidues - 2; i >= 0; i--) {
+        for (i = alig->originalNumberOfResidues - 2; i >= 0; i--) {
             acm++;
 
             if (refer != vectAux[i]) {
@@ -588,13 +579,13 @@ namespace Statistics {
                         << std::setw(size) << std::left << num
 
                         << std::setw(size) << std::left
-                        << std::setw(size - 6) << std::right << ((float) num / _alignment->originalNumberOfResidues * 100.0F)
+                        << std::setw(size - 6) << std::right << ((float) num / alig->originalNumberOfResidues * 100.0F)
                         << std::setw(6) << std::right << " "
 
                         << std::setw(size) << std::left << acm
 
                         << std::setw(size) << std::left
-                        << std::setw(size - 6) << std::right << ((float) acm / _alignment->originalNumberOfResidues * 100.0F)
+                        << std::setw(size - 6) << std::right << ((float) acm / alig->originalNumberOfResidues * 100.0F)
                         << std::setw(6) << std::right << " "
 
                         << std::setw(size) << std::left << refer
@@ -610,13 +601,13 @@ namespace Statistics {
                 << std::setw(size) << std::left << num
 
                 << std::setw(size) << std::left
-                << std::setw(size - 6) << std::right << ((float) num / _alignment->originalNumberOfResidues * 100.0F)
+                << std::setw(size - 6) << std::right << ((float) num / alig->originalNumberOfResidues * 100.0F)
                 << std::setw(6) << std::right << " "
 
                 << std::setw(size) << std::left << acm
 
                 << std::setw(size) << std::left
-                << std::setw(size - 6) << std::right << ((float) acm / _alignment->originalNumberOfResidues * 100.0F)
+                << std::setw(size - 6) << std::right << ((float) acm / alig->originalNumberOfResidues * 100.0F)
                 << std::setw(6) << std::right << " "
 
                 << std::setw(size) << std::left << refer
