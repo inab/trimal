@@ -1,0 +1,62 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection Complementary Complementary
+
+To extend the capability of trimAl, it is possible to obtain the complementary %alignment.\n
+This means, flipping the values of residues to keep/reject. \n\n
+
+@htmlonly
+<button onclick="myFunction('complementary')" class="btn btn-danger"><b>Example of use</b></button>
+@endhtmlonly
+
+<div name="complementary" style="display:none; width: -moz-fit-content">
+<b> %Alignment </b> 
+\verbatim
+>Sp8
+FPWNGLQIHMMGIII---------------------------------------------------------------------------
+>Sp17
+FPWNGLQIHMMGIIIIIIIIIIIIIIIIII------------------------------------------------------------
+>Sp10
+FPWNGLQIHMMGIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII---------------------------------------------
+>Sp26
+FPWNGLQIHMMGIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII------------------------------
+>Sp33
+FPWNGLQIHMMGIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII---------------
+>Sp6
+FPWNGLQIHMMGIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+\endverbatim
+
+<b> %Alignment </b> + "-gt 0.8"
+\verbatim
+>Sp8
+FPWNGLQIHMMGIII---------------
+>Sp17
+FPWNGLQIHMMGIIIIIIIIIIIIIIIIII
+>Sp10
+FPWNGLQIHMMGIIIIIIIIIIIIIIIIII
+>Sp26
+FPWNGLQIHMMGIIIIIIIIIIIIIIIIII
+>Sp33
+FPWNGLQIHMMGIIIIIIIIIIIIIIIIII
+>Sp6
+FPWNGLQIHMMGIIIIIIIIIIIIIIIIII
+\endverbatim
+
+<b> %Alignment </b> + "-gt 0.8 -complementary"
+\verbatim
+>Sp8
+------------------------------------------------------------
+>Sp17
+------------------------------------------------------------
+>Sp10
+IIIIIIIIIIIIIII---------------------------------------------
+>Sp26
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIII------------------------------
+>Sp33
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII---------------
+>Sp6
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+\endverbatim
+</div>
+
+**/

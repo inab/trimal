@@ -1418,7 +1418,6 @@ inline int trimAlManager::perform_VCF()
 inline void trimAlManager::save_alignment()
 {
     if ((outfile != nullptr) && (!appearErrors)) {
-        debug << "Saving to file";
         std::string outFileString = std::string(outfile);
         if (!formatManager.saveAlignment(outFileString, &oformats, singleAlig)) {
             appearErrors = true;
@@ -1426,7 +1425,6 @@ inline void trimAlManager::save_alignment()
 
     } else if ((stats >= 0) && (!appearErrors))
     {
-        debug << "Printing to terminal";
         formatManager.saveAlignment("", &oformats, singleAlig);
     }
 }

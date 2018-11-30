@@ -1,0 +1,12 @@
+<map id="Cleaner::cleanCompareFile" name="Cleaner::cleanCompareFile">
+<area shape="rect" id="node1" title="Method to trim an alignment based on consistency values obtained from a dataset of alignments...." alt="" coords="5,155,185,182"/>
+<area shape="rect" id="node2" href="$class_cleaner.html#a0e1e26d09055de52208ac74adf93b760" title="Method to clean an alignment. &#160;It removes sequences that fall behind a certain threshold...." alt="" coords="233,64,409,105"/>
+<area shape="rect" id="node7" href="$namespaceutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying." alt="" coords="267,130,376,157"/>
+<area shape="rect" id="node8" href="$namespaceutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f" title="Minimum of two numbers method." alt="" coords="284,181,359,207"/>
+<area shape="rect" id="node9" href="$namespaceutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method." alt="" coords="268,231,375,258"/>
+<area shape="rect" id="node3" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps." alt="" coords="461,5,656,47"/>
+<area shape="rect" id="node5" href="$class_cleaner.html#a5620f6a511bc0ac844c71b2de3ae1fdb" title="Method to remove blocks of columns with no rejected residue smaller than a given size." alt="" coords="457,71,660,98"/>
+<area shape="rect" id="node6" href="$namespaceutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method." alt="" coords="508,122,609,149"/>
+<area shape="rect" id="node4" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="708,5,871,47"/>
+<area shape="rect" id="node10" href="$namespaceutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method." alt="" coords="516,231,601,258"/>
+</map>

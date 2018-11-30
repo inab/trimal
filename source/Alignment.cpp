@@ -1517,22 +1517,22 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, int 
     file << "<script type=\"text/ecmascript\"> \n\
                 <![CDATA[ \n\
                 function onMouseOverLabel(evt) { \n\
-                    var Line = document.childNodes[0].getElementById(evt.target.id.replace(\"Label\", \"Line\")); \n\
+                    var Line = document.getElementById(evt.target.id.replace(\"Label\", \"Line\")); \n\
                     Line.setAttribute(\"style\", \"fill:none;stroke:black;stroke-width:3\"); \n\
                     evt.target.setAttribute(\"font-size\", 17); \n\
                 } \n\
                 function onMouseOutLabel(evt) { \n\
-                    var Line = document.childNodes[0].getElementById(evt.target.id.replace(\"Label\", \"Line\")); \n\
+                    var Line = document.getElementById(evt.target.id.replace(\"Label\", \"Line\")); \n\
                     Line.setAttribute(\"style\", \"fill:none;stroke:black;stroke-width:1\"); \n\
                     evt.target.setAttribute(\"font-size\", 15); \n\
                 } \n\
                 function onMouseOverLine(evt) { \n\
-                    var Label = document.childNodes[0].getElementById(evt.target.id.replace(\"Line\", \"Label\")); \n\
+                    var Label = document.getElementById(evt.target.id.replace(\"Line\", \"Label\")); \n\
                     evt.target.setAttribute(\"style\", \"fill:none;stroke:black;stroke-width:3\"); \n\
                     Label.setAttribute(\"font-size\", 17); \n\
                 } \n\
                 function onMouseOutLine(evt) { \n\
-                    var Label = document.childNodes[0].getElementById(evt.target.id.replace(\"Line\", \"Label\")); \n\
+                    var Label = document.getElementById(evt.target.id.replace(\"Line\", \"Label\")); \n\
                     evt.target.setAttribute(\"style\", \"fill:none;stroke:black;stroke-width:1\"); \n\
                     Label.setAttribute(\"font-size\", 15); \n\
                 } \n\
@@ -1542,7 +1542,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, int 
     // BEGIN Patterns
 
     // Selected Block
-    file << "<pattern id=\"selected\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
+    file << "<pattern id=\"selected_pattern\" patternUnits=\"userSpaceOnUse\" width=\"10\" height=\"10\"> " << endl;
     file << "<rect width=\"10\" height=\"10\" fill=\"green\" opacity=\"0.5\"/>";
     file << "<path d=\"M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2\" stroke=\"white\" stroke-width=\"1\"/>";
     file << "</pattern> " << endl;
@@ -1837,7 +1837,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, int 
         for (k = j + 1; k < originalNumberOfResidues && (k - j) < blocks; k++) {
             if ((trimmedAlig.saveResidues[k] == -1) != rejected) {
                 file << "<rect " <<
-                     " style=\"fill:url(#" << (rejected ? "rejected" : "selected") << ");stroke:black\"" <<
+                     " style=\"fill:url(#" << (rejected ? "rejected" : "selected_pattern") << ");stroke:black\"" <<
                      " height=\"" << fontSize * 5 << "\" " <<
                      " width=\"" << fontSize * 0.75F * (k - lastPos) << "px\" " <<
                      " opacity=\"0.5\"" <<
@@ -1853,7 +1853,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, int 
             }
         }
         file << "<rect " <<
-             " style=\"fill:url(#" << (rejected ? "rejected" : "selected") << ");stroke:black\"" <<
+             " style=\"fill:url(#" << (rejected ? "rejected" : "selected_pattern") << ");stroke:black\"" <<
              " height=\"" << fontSize * 5 << "\" " <<
              " width=\"" << fontSize * 0.75F * (k - lastPos) << "px\" " <<
              " opacity=\"0.5\""

@@ -1,0 +1,6 @@
+<map id="Cleaner::removeColumns" name="Cleaner::removeColumns">
+<area shape="rect" id="node1" title="Method to remove columns, expressed as ranges." alt="" coords="5,46,176,73"/>
+<area shape="rect" id="node2" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps." alt="" coords="224,5,419,47"/>
+<area shape="rect" id="node4" href="$class_alignment.html#ae04b9e10e25daafb2b4592e19e63cecd" title="Updates the sequence number and residue number based on saveResidues and saveSequences." alt="" coords="225,71,417,112"/>
+<area shape="rect" id="node3" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="467,5,629,47"/>
+</map>

@@ -352,10 +352,8 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
         else
             newAlig->saveResidues[i] = -1;
 
-//        debug << newAlig->saveResidues[i] << " ";
         block++;
     }
-//    debug << "\n";
 
     alig->numberOfResidues = block;
 
@@ -410,7 +408,6 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
                  i--, j++) {
 
                 {
-//                    debug << "[NEW] i " << i << " ";
                     // Left side. Here, we compute the block's size.
                     for (block = 0, jn = i;
                          jn >= 0 && remainingResidues > 0;
@@ -421,7 +418,6 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
                             break;
                         } else block++;
                     }
-                    debug << jn << "\n";
 
                     // if block's size is greater or equal than the fixed
                     // size then we save all columns that have not been
@@ -435,7 +431,6 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
                             if (MDK_Win[jn] >= blCons || gInCol[jn] <= blGaps) {
                                 newAlig->saveResidues[jn] = jn;
                                 remainingResidues--;
-//                                debug << "[NEW] Recovered " << jn << "\n";
                             } else
                                 break;
                         }
@@ -444,7 +439,6 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
                 }
 
                 {
-//                    debug << "[NEW] j " << j << " ";
                     // Right side. Here, we compute the block's size.
                     for (block = 0, jn = j;
                          jn < alig->originalNumberOfResidues && remainingResidues > 0;
@@ -454,7 +448,6 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
                             break;
                         } else block++;
                     }
-                    debug << jn << "\n";
 
                     // if block's size is greater or equal than the fixed
                     // size then we save all columns that have not been
@@ -468,7 +461,6 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
                             if (MDK_Win[jn] >= blCons || gInCol[jn] <= blGaps) {
                                 newAlig->saveResidues[jn] = jn;
                                 remainingResidues--;
-//                                debug << "[NEW] Recovered " << jn << "\n";
                             } else
                                 break;
                         }

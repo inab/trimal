@@ -1,0 +1,7 @@
+<map id="Cleaner::cleanByCutValueFallBehind" name="Cleaner::cleanByCutValueFallBehind">
+<area shape="rect" id="node1" title="Method to clean an alignment. &#160;It removes sequences that fall behind a certain threshold...." alt="" coords="5,64,181,105"/>
+<area shape="rect" id="node2" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps." alt="" coords="233,5,428,47"/>
+<area shape="rect" id="node4" href="$class_cleaner.html#a5620f6a511bc0ac844c71b2de3ae1fdb" title="Method to remove blocks of columns with no rejected residue smaller than a given size." alt="" coords="229,71,432,98"/>
+<area shape="rect" id="node5" href="$namespaceutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method." alt="" coords="280,122,381,149"/>
+<area shape="rect" id="node3" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="480,5,643,47"/>
+</map>

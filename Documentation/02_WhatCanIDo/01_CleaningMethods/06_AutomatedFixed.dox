@@ -1,0 +1,52 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection Automated-gap Automated Methods
+
+Automated methods will remove columns based on raw gaps values.\n
+
+| Method    | Description                                      | Example of use                                                |
+|---------- |--------------------------------------------------|---------------------------------------------------------------|
+| NoGaps    | Removes any column containing at least, one gap  | bin/trimal -in dataset/example.007.AA.fasta -nogaps           |
+| NoAllGaps | Removes columns containing only gaps             | bin/trimal -in dataset/example.007.AA.fasta -noallgaps        |
+
+@htmlonly
+<button onclick="myFunction('automated-gap')" class="btn btn-danger"><b>Example of use</b></button>
+@endhtmlonly
+
+<div name="automated-gap" style="display:none; width: -moz-fit-content">
+<b> %Alignment </b> 
+\verbatim
+ 6 43
+Sp6          ---ASGAILT-L-GIYLFTLCAVISVSWYLAWLGLEINMMAII
+Sp17         FAYTAPDLL-LI-GFLLKTVA-TFGDTWFQLWQGLDLNKMPVF
+Sp10         -----DPAVL-F-VIMLGTIT-KFSSEWFFAWLGLEINMMVII
+Sp8          ---GLGKVIV-Y-GIVLGTKSDQFSVVWLFPWNGLQIHMMGII
+Sp26         AAAAAAALLTYL-GLFLGTDYENFAAAAANAWLGLEINMMAQI
+Sp33         -----PTILNIA-GLHMETDI-NFSLAWFQAWGGLEINKQAIL
+\endverbatim
+
+<b> %Alignment </b> + "-noallgaps"
+\verbatim
+ 6 42
+Sp6          ---ASGAILT-LGIYLFTLCAVISVSWYLAWLGLEINMMAII
+Sp17         FAYTAPDLL-LIGFLLKTVA-TFGDTWFQLWQGLDLNKMPVF
+Sp10         -----DPAVL-FVIMLGTIT-KFSSEWFFAWLGLEINMMVII
+Sp8          ---GLGKVIV-YGIVLGTKSDQFSVVWLFPWNGLQIHMMGII
+Sp26         AAAAAAALLTYLGLFLGTDYENFAAAAANAWLGLEINMMAQI
+Sp33         -----PTILNIAGLHMETDI-NFSLAWFQAWGGLEINKQAIL
+\endverbatim
+
+<b> %Alignment </b> + "-nogaps"
+\verbatim
+ 6 34
+Sp6          GAILLGIYLFTLCVISVSWYLAWLGLEINMMAII
+Sp17         PDLLIGFLLKTVATFGDTWFQLWQGLDLNKMPVF
+Sp10         DPAVFVIMLGTITKFSSEWFFAWLGLEINMMVII
+Sp8          GKVIYGIVLGTKSQFSVVWLFPWNGLQIHMMGII
+Sp26         AALLLGLFLGTDYNFAAAAANAWLGLEINMMAQI
+Sp33         PTILAGLHMETDINFSLAWFQAWGGLEINKQAIL
+\endverbatim
+</div>
+
+
+*/

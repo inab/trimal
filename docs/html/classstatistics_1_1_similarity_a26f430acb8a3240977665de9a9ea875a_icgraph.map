@@ -1,0 +1,10 @@
+<map id="statistics::Similarity::calcCutPoint" name="statistics::Similarity::calcCutPoint">
+<area shape="rect" id="node1" title="Computes and selects the cut point values based on similarity&#39;s values." alt="" coords="1225,23,1363,65"/>
+<area shape="rect" id="node2" href="$class_cleaner.html#a4718e31c0183b5a98751d77479faacf0" title="Method to trim an alignment based on the similarity and gaps distribution values. ." alt="" coords="1033,5,1139,32"/>
+<area shape="rect" id="node8" href="$class_cleaner.html#a9cdbd6ebf78a284dd065b31319795b0c" title="Method to trim an alignment based on the similarity distribution values." alt="" coords="995,56,1177,83"/>
+<area shape="rect" id="node3" href="$classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" title="Method to trim the alignment using non automatic methods:" alt="" coords="744,23,947,65"/>
+<area shape="rect" id="node4" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from." alt="" coords="551,23,696,65"/>
+<area shape="rect" id="node5" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed." alt="" coords="104,31,263,57"/>
+<area shape="rect" id="node7" href="$classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" title=" " alt="" coords="311,56,503,83"/>
+<area shape="rect" id="node6" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,56,57"/>
+</map>

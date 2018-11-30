@@ -1,0 +1,17 @@
+<map id="trimAlManager::create_or_use_similarity_matrix" name="trimAlManager::create_or_use_similarity_matrix">
+<area shape="rect" id="node1" title="Method to create, load and use a similarity matrix, depending on alignment residue nature,..." alt="" coords="5,235,176,276"/>
+<area shape="rect" id="node2" href="$classsimilarity_matrix.html#abe971a39212e0525ebdf44ea0e7277ec" title="Method to load alternative similarity matrices also included on the suite. Currently,..." alt="" coords="231,5,410,47"/>
+<area shape="rect" id="node5" href="$classsimilarity_matrix.html#a27816b8b2e132283436e04ceefc68c65" title="Method to load the default AA similarity matrix." alt="" coords="242,71,399,112"/>
+<area shape="rect" id="node6" href="$classsimilarity_matrix.html#abc9fb436b0ed9ad33068b28f8027e31f" title="Method to load the default DEG NT similarity matrix." alt="" coords="234,136,407,177"/>
+<area shape="rect" id="node7" href="$classsimilarity_matrix.html#a4867c060ed36fd7b7d46a0f04c9bcc22" title="Method to load the default NT similarity matrix." alt="" coords="242,201,399,243"/>
+<area shape="rect" id="node8" href="$class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="224,333,417,359"/>
+<area shape="rect" id="node10" href="$classsimilarity_matrix.html#a2d8cda71ce6839f88ef1c600fe456185" title="Method to load a custom matrix." alt="" coords="238,267,403,308"/>
+<area shape="rect" id="node13" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="239,384,402,425"/>
+<area shape="rect" id="node14" href="$classstatistics_1_1_manager.html#abe227502738f56029822a2387fcd38bb" title="Method to set a similarity matrix." alt="" coords="251,449,390,491"/>
+<area shape="rect" id="node3" href="$classsimilarity_matrix.html#a08e4e5790d95848f049ed00579c0e377" title="Method to allocate memory for the similiarity matrix." alt="" coords="471,136,636,177"/>
+<area shape="rect" id="node4" href="$classsimilarity_matrix.html#acc8f6dbae19b4332929ef6a240524975" title="Method to deallocate memory allocated on the similarityMatrix::memoryAllocation method...." alt="" coords="689,165,855,207"/>
+<area shape="rect" id="node9" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type." alt="" coords="465,354,641,381"/>
+<area shape="rect" id="node11" href="$namespaceutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization." alt="" coords="503,253,604,279"/>
+<area shape="rect" id="node12" href="$namespaceutils.html#a2b86d1a439de68860f2366f99d507349" title="Removing spaces method." alt="" coords="483,303,624,330"/>
+<area shape="rect" id="node15" href="$classstatistics_1_1_similarity.html#a95126bfd6b0ed22c828a6ab780096a12" title="Stores a valid similarity matrix point to use." alt="" coords="484,449,623,491"/>
+</map>

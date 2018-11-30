@@ -1,0 +1,8 @@
+<map id="utils::compare" name="utils::compare">
+<area shape="rect" id="node1" title="String comparing method." alt="" coords="892,35,996,61"/>
+<area shape="rect" id="node2" href="$classsequences_matrix.html#a57c263430e37513be76683d8931dcd48" title="Method to obtain a sequence based on its name." alt="" coords="639,5,844,32"/>
+<area shape="rect" id="node3" href="$classstatistics_1_1_consistency.html#a2e281b6a138074a23ebf261731e3aa27" title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue..." alt="" coords="663,57,819,98"/>
+<area shape="rect" id="node4" href="$classtrim_al_manager.html#a12b7cef964ef258fe7621da44867c51f" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation..." alt="" coords="361,64,591,91"/>
+<area shape="rect" id="node5" href="$classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" title="Method to parse arguments into usable structure in trimal." alt="" coords="104,64,313,91"/>
+<area shape="rect" id="node6" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,64,56,91"/>
+</map>

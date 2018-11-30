@@ -1,0 +1,6 @@
+<map id="trimAlManager::menu" name="trimAlManager::menu">
+<area shape="rect" id="node1" title="Method to show the menu of the program." alt="" coords="5,78,152,105"/>
+<area shape="rect" id="node2" href="$class_format_manager.html#a97119fa57eee51f9220ccd34b1958b87" title="Function to obtain all format names available by this object that can load an alignment." alt="" coords="200,5,416,47"/>
+<area shape="rect" id="node3" href="$class_format_manager.html#a2ea1526f2ec660341149098a34b06b1a" title="Function to obtain all format names available by this object that can save an alignment." alt="" coords="219,71,397,112"/>
+<area shape="rect" id="node4" href="$namespaceutils.html#a6000246220e801bf6b1e6a553d7af13a" title="Function that replaces a substring with another substring in a string. It does not make a copy of the..." alt="" coords="218,137,398,163"/>
+</map>

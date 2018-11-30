@@ -1,0 +1,12 @@
+<map id="statistics::Consistency::isWindowDefined" name="statistics::Consistency::isWindowDefined">
+<area shape="rect" id="node1" title="Method to check wether or not a window has been applied." alt="" coords="1232,78,1388,119"/>
+<area shape="rect" id="node2" href="$classstatistics_1_1_consistency.html#ad3a0a265cb9460cd4633b027fe2437c9" title="Stat Getter &#160;." alt="" coords="1028,78,1184,119"/>
+<area shape="rect" id="node3" href="$class_alignment.html#a4e80b4d399ffdbe2ed2cfab91975f348" title="Method to report the trimming results in HTML. Outputs an HTML file that shows visually what has been..." alt="" coords="744,5,980,32"/>
+<area shape="rect" id="node4" href="$class_alignment.html#a2fcaadf2c0799bc668050f7735860364" title="Method to report the trimming results in SVG. Outputs a SVG file that shows visually what has been do..." alt="" coords="748,56,976,83"/>
+<area shape="rect" id="node5" href="$classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" title="Method to trim the alignment using non automatic methods:" alt="" coords="761,107,963,149"/>
+<area shape="rect" id="node10" href="$classtrim_al_manager.html#afc48b86f5ae35b9a5e721b65c58bf610" title="Method to print statistics requested." alt="" coords="554,170,693,211"/>
+<area shape="rect" id="node6" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from." alt="" coords="551,105,696,146"/>
+<area shape="rect" id="node7" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed." alt="" coords="104,127,263,153"/>
+<area shape="rect" id="node9" href="$classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" title=" " alt="" coords="311,127,503,153"/>
+<area shape="rect" id="node8" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,127,56,153"/>
+</map>
