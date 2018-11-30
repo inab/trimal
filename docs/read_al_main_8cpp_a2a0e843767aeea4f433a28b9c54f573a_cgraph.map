@@ -1,5 +1,0 @@
-<map id="menu" name="menu">
-<area shape="rect" id="node1" title=" " alt="" coords="5,46,60,73"/>
-<area shape="rect" id="node2" href="$class_format_manager.html#a97119fa57eee51f9220ccd34b1958b87" title="Function to obtain all format names available by this object that can load an alignment." alt="" coords="108,5,324,47"/>
-<area shape="rect" id="node3" href="$class_format_manager.html#a2ea1526f2ec660341149098a34b06b1a" title="Function to obtain all format names available by this object that can save an alignment." alt="" coords="127,71,305,112"/>
-</map>

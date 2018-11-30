@@ -1,5 +1,0 @@
-<map id="Cleaner::calculateSeqIdentity" name="Cleaner::calculateSeqIdentity">
-<area shape="rect" id="node1" title="Method to calculate identities between the sequences from the alignment. See Alignment::identities." alt="" coords="5,5,199,32"/>
-<area shape="rect" id="node2" href="$class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="247,5,440,32"/>
-<area shape="rect" id="node3" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type." alt="" coords="488,5,664,32"/>
-</map>

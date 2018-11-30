@@ -1,5 +1,0 @@
-<map id="similarityMatrix::defaultNTDegeneratedSimMatrix" name="similarityMatrix::defaultNTDegeneratedSimMatrix">
-<area shape="rect" id="node1" title="Method to load the default DEG NT similarity matrix." alt="" coords="5,5,179,47"/>
-<area shape="rect" id="node2" href="$classsimilarity_matrix.html#a08e4e5790d95848f049ed00579c0e377" title="Method to allocate memory for the similiarity matrix." alt="" coords="227,5,392,47"/>
-<area shape="rect" id="node3" href="$classsimilarity_matrix.html#acc8f6dbae19b4332929ef6a240524975" title="Method to deallocate memory allocated on the similarityMatrix::memoryAllocation method...." alt="" coords="440,5,605,47"/>
-</map>

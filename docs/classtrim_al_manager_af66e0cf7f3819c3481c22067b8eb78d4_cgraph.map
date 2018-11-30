@@ -1,4 +1,0 @@
-<map id="trimAlManager::check_similarity_matrix" name="trimAlManager::check_similarity_matrix">
-<area shape="rect" id="node1" title="Method to check if given a similarity matrix, there is a need to use it." alt="" coords="5,5,155,47"/>
-<area shape="rect" id="node2" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="203,5,365,47"/>
-</map>

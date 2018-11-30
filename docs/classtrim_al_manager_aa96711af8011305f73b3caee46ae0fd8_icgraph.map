@@ -1,6 +1,0 @@
-<map id="trimAlManager::check_combinations_among_thresholds_incompatibility" name="trimAlManager::check_combinations_among_thresholds_incompatibility">
-<area shape="rect" id="node1" title="As some thresholds are incompatible between them, we check their incompatibilities." alt="" coords="613,5,832,61"/>
-<area shape="rect" id="node2" href="$classtrim_al_manager.html#a16d2da3f90cfe965bea5f1da1360e17a" title="Method to check argument incompatibilities. Take in mind that an incompatibility is between two argum..." alt="" coords="375,13,565,54"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="104,20,327,47"/>
-<area shape="rect" id="node4" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,20,56,47"/>
-</map>

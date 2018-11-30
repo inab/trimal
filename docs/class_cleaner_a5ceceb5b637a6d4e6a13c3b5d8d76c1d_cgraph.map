@@ -1,9 +1,0 @@
-<map id="Cleaner::cleanSpuriousSeq" name="Cleaner::cleanSpuriousSeq">
-<area shape="rect" id="node1" title="Method to remove sequences missaligned with the rest of sequences in the alignment...." alt="" coords="5,42,185,69"/>
-<area shape="rect" id="node2" href="$class_cleaner.html#ab2db8eacfbe545c68fc287c43309e439" title="Method to compute the overlap values. &#160;See Alignment::overlaps." alt="" coords="233,5,412,47"/>
-<area shape="rect" id="node5" href="$class_cleaner.html#abe5d03c820a6bee7935b719b9fc7be60" title="Method to trim an alignment based on a minimum sequence overlap threshold. &#160;The method selects a comb..." alt="" coords="235,71,410,98"/>
-<area shape="rect" id="node3" href="$class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="461,13,654,39"/>
-<area shape="rect" id="node4" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type." alt="" coords="703,13,879,39"/>
-<area shape="rect" id="node6" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps." alt="" coords="460,64,655,105"/>
-<area shape="rect" id="node7" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="709,64,872,105"/>
-</map>

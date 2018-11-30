@@ -1,5 +1,0 @@
-<map id="utils::determineColor" name="utils::determineColor">
-<area shape="rect" id="node1" title="Checks the color that has to be used on the output report." alt="" coords="289,31,432,57"/>
-<area shape="rect" id="node2" href="$class_alignment.html#a4e80b4d399ffdbe2ed2cfab91975f348" title="Method to report the trimming results in HTML. Outputs an HTML file that shows visually what has been..." alt="" coords="5,5,241,32"/>
-<area shape="rect" id="node3" href="$class_alignment.html#a2fcaadf2c0799bc668050f7735860364" title="Method to report the trimming results in SVG. Outputs a SVG file that shows visually what has been do..." alt="" coords="9,56,237,83"/>
-</map>

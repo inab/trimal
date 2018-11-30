@@ -1,9 +1,0 @@
-<map id="Cleaner::cleanByCutValueOverpass" name="Cleaner::cleanByCutValueOverpass">
-<area shape="rect" id="node1" title="Method to clean an alignment. &#160;It removes sequences that overpass or equals a certain threshold...." alt="" coords="5,86,181,127"/>
-<area shape="rect" id="node2" href="$namespaceutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method." alt="" coords="277,5,384,32"/>
-<area shape="rect" id="node4" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps." alt="" coords="233,57,428,98"/>
-<area shape="rect" id="node6" href="$class_cleaner.html#a5620f6a511bc0ac844c71b2de3ae1fdb" title="Method to remove blocks of columns with no rejected residue smaller than a given size." alt="" coords="229,123,432,149"/>
-<area shape="rect" id="node7" href="$namespaceutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method." alt="" coords="280,173,381,200"/>
-<area shape="rect" id="node3" href="$namespaceutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method." alt="" coords="519,5,604,32"/>
-<area shape="rect" id="node5" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="480,57,643,98"/>
-</map>
