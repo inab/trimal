@@ -32,8 +32,8 @@
 <area shape="rect" id="node23" href="$classstatistics_1_1_similarity.html#a75bd235b3207235eefa7b52dff063c76" title="Computes the matrix identity between alignment&#39;s columns." alt="" coords="1126,283,1287,324"/>
 <area shape="rect" id="node24" href="$classstatistics_1_1_gaps.html#ab5b60db326475f8adc68b130e22b3963" title=" " alt="" coords="1121,400,1292,441"/>
 <area shape="rect" id="node26" href="$namespaceutils.html#a6286fde6f4dd58ef0cfa9d55341b72f8" title=" " alt="" coords="1157,466,1257,493"/>
-<area shape="rect" id="node27" href="$classsimilarity_matrix.html#aef258a851d1a443a39597060420d8908" title="Method to get the similarity distance between two residues, A and B Characters provided must be both ..." alt="" coords="1346,349,1534,375"/>
-<area shape="rect" id="node25" href="$classstatistics_1_1_gaps.html#ad812a924cf5e3f900aad3ed4a9664300" title=" " alt="" coords="1351,400,1529,441"/>
+<area shape="rect" id="node27" href="$classstatistics_1_1similarity_matrix.html#a2a17eb464ec28ba83edbcbe271e7ff62" title="Method to get the similarity distance between two residues, A and B Characters provided must be both ..." alt="" coords="1355,341,1525,383"/>
+<area shape="rect" id="node25" href="$classstatistics_1_1_gaps.html#ad812a924cf5e3f900aad3ed4a9664300" title=" " alt="" coords="1351,407,1529,448"/>
 <area shape="rect" id="node32" href="$classstatistics_1_1_similarity.html#a4d938119ee92ead82bcd4d43c335c7b1" title="Computes and prints the accumulative statistics associated to the alignment." alt="" coords="457,600,607,641"/>
 <area shape="rect" id="node33" href="$namespaceutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying." alt="" coords="693,731,803,758"/>
 <area shape="rect" id="node34" href="$namespaceutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method." alt="" coords="695,681,801,707"/>

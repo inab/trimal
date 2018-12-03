@@ -1,6 +1,0 @@
-<map id="statisticsConservation::calculateVectors" name="statisticsConservation::calculateVectors">
-<area shape="rect" id="node2" href="$classstatistics_conservation.html#a9fe3502be02c8d6591a6de2d5f81c337" title="Computes the matrix identity between alignment&#39;s columns. " alt="" coords="205,5,367,47"/>
-<area shape="rect" id="node4" href="$classnew_alignment.html#a670d5ef1ced9ed6041c3f6afdbd2cc02" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="415,67,632,94"/>
-<area shape="rect" id="node3" href="$classutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization. " alt="" coords="473,13,574,39"/>
-<area shape="rect" id="node5" href="$classutils.html#a1f1dcbfa7276e54acec72bdbae1b1255" title="Checks an alignment type. " alt="" coords="680,67,856,94"/>
-</map>

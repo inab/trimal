@@ -16,13 +16,13 @@
 <area shape="rect" id="node22" href="$classstatistics_1_1_similarity.html#a4446bf070a858952dac45f5705d16780" title="Returns if a windows size value has been defined or not." alt="" coords="483,223,621,265"/>
 <area shape="rect" id="node7" href="$classstatistics_1_1_gaps.html#aa3526494d5100e062daa4afba755d0b1" title=" " alt="" coords="1085,379,1262,421"/>
 <area shape="rect" id="node8" href="$classstatistics_1_1_gaps.html#aee36b772767467cdba2061df2305e85d" title=" " alt="" coords="1073,445,1273,472"/>
-<area shape="rect" id="node9" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="1328,379,1491,421"/>
-<area shape="rect" id="node10" href="$namespaceutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method." alt="" coords="1359,507,1460,533"/>
+<area shape="rect" id="node9" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="1328,378,1491,419"/>
+<area shape="rect" id="node10" href="$namespaceutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method." alt="" coords="1359,505,1460,532"/>
 <area shape="rect" id="node14" href="$classstatistics_1_1_similarity.html#a75bd235b3207235eefa7b52dff063c76" title="Computes the matrix identity between alignment&#39;s columns." alt="" coords="859,314,1021,355"/>
-<area shape="rect" id="node15" href="$class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="1077,245,1270,272"/>
+<area shape="rect" id="node15" href="$class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="1077,237,1270,264"/>
 <area shape="rect" id="node19" href="$namespaceutils.html#a6286fde6f4dd58ef0cfa9d55341b72f8" title=" " alt="" coords="890,263,990,289"/>
-<area shape="rect" id="node20" href="$classsimilarity_matrix.html#aef258a851d1a443a39597060420d8908" title="Method to get the similarity distance between two residues, A and B Characters provided must be both ..." alt="" coords="1079,328,1267,355"/>
-<area shape="rect" id="node16" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type." alt="" coords="1321,245,1497,272"/>
+<area shape="rect" id="node20" href="$classstatistics_1_1similarity_matrix.html#a2a17eb464ec28ba83edbcbe271e7ff62" title="Method to get the similarity distance between two residues, A and B Characters provided must be both ..." alt="" coords="1088,314,1259,355"/>
+<area shape="rect" id="node16" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type." alt="" coords="1321,237,1497,264"/>
 <area shape="rect" id="node18" href="$classstatistics_1_1_gaps.html#ad812a924cf5e3f900aad3ed4a9664300" title=" " alt="" coords="1085,497,1262,538"/>
 <area shape="rect" id="node24" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps." alt="" coords="1076,562,1271,603"/>
 <area shape="rect" id="node27" href="$namespaceutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method." alt="" coords="509,624,595,651"/>

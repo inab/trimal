@@ -1,9 +1,0 @@
-<map id="newAlignment::updateSequencesAndResiduesNums" name="newAlignment::updateSequencesAndResiduesNums">
-<area shape="rect" id="node2" href="$class_cleaner.html#a3d1c1309bd1f0908ef8c8ef0415fb4cb" title="Method to remove columns, expressed as ranges. " alt="" coords="275,17,446,43"/>
-<area shape="rect" id="node6" href="$class_cleaner.html#ab7f5b746b97697181f4cd06063cbb49a" title="Method to detect right and left borders. Borders are the first column found with no gaps..." alt="" coords="509,71,704,98"/>
-<area shape="rect" id="node7" href="$class_cleaner.html#af27e657bf4874a21b26d9a8217c1e643" title="Method to remove sequences, expressed as ranges. " alt="" coords="269,122,452,149"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" title="Method to trim the alignment using non automatic methods: " alt="" coords="505,5,708,47"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from. " alt="" coords="761,64,907,105"/>
-<area shape="rect" id="node5" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="955,71,1113,98"/>
-<area shape="rect" id="node8" href="$classtrim_al_manager.html#a10536f715945a1a45f1df33f7cedc81e" title="Method to trim or reduce the number of sequences in an alignment. It performs one or none of the foll..." alt="" coords="500,122,713,149"/>
-</map>

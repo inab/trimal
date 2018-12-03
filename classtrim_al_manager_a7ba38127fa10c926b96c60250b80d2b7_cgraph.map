@@ -1,8 +1,8 @@
 <map id="trimAlManager::save_alignment" name="trimAlManager::save_alignment">
-<area shape="rect" id="node1" title=" " alt="" coords="5,74,148,115"/>
-<area shape="rect" id="node2" href="$class_format_manager.html#ac2c4667aceae0c08c24e51b2216ccc44" title="Function to save an alignment to a file. It searches among the available_states one that can write th..." alt="" coords="196,81,403,108"/>
-<area shape="rect" id="node3" href="$namespaceutils.html#a40640e1942f00797e9fe8284e8fbdb14" title="Maximum of two numbers method." alt="" coords="501,5,580,32"/>
-<area shape="rect" id="node4" href="$namespaceutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" title="Function that replaces a substring with another substring in a string. It makes a copy of the origina..." alt="" coords="473,56,609,83"/>
-<area shape="rect" id="node5" href="$namespaceutils.html#a6000246220e801bf6b1e6a553d7af13a" title="Function that replaces a substring with another substring in a string. It does not make a copy of the..." alt="" coords="451,107,631,133"/>
-<area shape="rect" id="node6" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="459,158,622,199"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,89,148,131"/>
+<area shape="rect" id="node2" href="$class_format_handling_1_1_format_manager.html#a2987b0f448390cf5cb7a287117896c64" title="Function to save an alignment to a file. It searches among the available_states one that can write th..." alt="" coords="196,89,409,131"/>
+<area shape="rect" id="node3" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="466,5,629,47"/>
+<area shape="rect" id="node4" href="$namespaceutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" title="Function that replaces a substring with another substring in a string. It makes a copy of the origina..." alt="" coords="479,71,615,98"/>
+<area shape="rect" id="node5" href="$namespaceutils.html#a40640e1942f00797e9fe8284e8fbdb14" title="Maximum of two numbers method." alt="" coords="508,122,587,149"/>
+<area shape="rect" id="node6" href="$namespaceutils.html#a6000246220e801bf6b1e6a553d7af13a" title="Function that replaces a substring with another substring in a string. It does not make a copy of the..." alt="" coords="457,173,637,199"/>
 </map>

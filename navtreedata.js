@@ -73,20 +73,14 @@ var NAVTREE =
       [ "Post Process", "dataflow.html#PostProcess", null ],
       [ "Output", "dataflow.html#output", null ]
     ] ],
-    [ "Documentation", null, [
-      [ "Namespaces", "namespaces.html", "namespaces" ],
-      [ "Classes", "annotated.html", "annotated" ],
-      [ "Files", "files.html", "files" ]
-    ] ]
+    [ "Classes", "annotated.html", "annotated" ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"3_810_82_2_compiler_id_c_2_c_make_c_compiler_id_8c.html",
-"classreporting_1_1report_wrapper.html#acb21eabb6708fd07fae8a5702fc2af64",
-"classtrim_al_manager.html#aafe4a10c083c5035211661e39071ab27",
-"reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faeb5e16bb2081da4d5c534060df5005aa"
+"annotated.html",
+"classstatistics_1_1_similarity.html#a95126bfd6b0ed22c828a6ab780096a12"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

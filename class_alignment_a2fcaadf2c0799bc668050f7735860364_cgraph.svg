@@ -161,68 +161,68 @@
 <g id="node6" class="node">
 <title>Node41</title>
 <g id="a_node6"><a xlink:href="classstatistics_1_1_gaps.html#ad812a924cf5e3f900aad3ed4a9664300" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="850.5,-371 850.5,-401 983.5,-401 983.5,-371 850.5,-371"/>
-<text text-anchor="start" x="858.5" y="-389" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Gaps::isDefined</text>
-<text text-anchor="middle" x="917" y="-378" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Window</text>
+<polygon fill="#ffffff" stroke="#000000" points="850.5,-373 850.5,-403 983.5,-403 983.5,-373 850.5,-373"/>
+<text text-anchor="start" x="858.5" y="-391" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Gaps::isDefined</text>
+<text text-anchor="middle" x="917" y="-380" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Window</text>
 </a>
 </g>
 </g>
 <!-- Node40&#45;&gt;Node41 -->
 <g id="edge5" class="edge">
 <title>Node40&#45;&gt;Node41</title>
-<path fill="none" stroke="#191970" d="M806.1698,-386C817.2233,-386 828.8127,-386 840.1593,-386"/>
-<polygon fill="#191970" stroke="#191970" points="840.4891,-389.5001 850.4891,-386 840.489,-382.5001 840.4891,-389.5001"/>
+<path fill="none" stroke="#191970" d="M806.1698,-386.7334C817.2233,-386.8597 828.8127,-386.9921 840.1593,-387.1218"/>
+<polygon fill="#191970" stroke="#191970" points="840.4497,-390.6253 850.4891,-387.2399 840.5297,-383.6257 840.4497,-390.6253"/>
 </g>
 <!-- Node42 -->
 <g id="node7" class="node">
 <title>Node42</title>
 <g id="a_node7"><a xlink:href="classstatistics_1_1_gaps.html#aee36b772767467cdba2061df2305e85d" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="842,-329.5 842,-348.5 992,-348.5 992,-329.5 842,-329.5"/>
-<text text-anchor="middle" x="917" y="-336.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Gaps::applyWindow</text>
+<polygon fill="#ffffff" stroke="#000000" points="842,-334.5 842,-353.5 992,-353.5 992,-334.5 842,-334.5"/>
+<text text-anchor="middle" x="917" y="-341.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Gaps::applyWindow</text>
 </a>
 </g>
 </g>
 <!-- Node40&#45;&gt;Node42 -->
 <g id="edge6" class="edge">
 <title>Node40&#45;&gt;Node42</title>
-<path fill="none" stroke="#191970" d="M797.8522,-370.9997C821.7272,-364.5876 849.2352,-357.1997 871.8006,-351.1393"/>
-<polygon fill="#191970" stroke="#191970" points="872.716,-354.5175 881.4659,-348.5434 870.9003,-347.7571 872.716,-354.5175"/>
+<path fill="none" stroke="#191970" d="M804.6847,-370.9557C825.3134,-366.0048 847.9482,-360.5724 867.4593,-355.8898"/>
+<polygon fill="#191970" stroke="#191970" points="868.4434,-359.2531 877.3505,-353.5159 866.8097,-352.4463 868.4434,-359.2531"/>
 </g>
 <!-- Node42&#45;&gt;Node43 -->
 <g id="edge7" class="edge">
 <title>Node42&#45;&gt;Node43</title>
-<path fill="none" stroke="#191970" d="M977.3383,-329.3305C982.6531,-326.8679 987.6547,-323.805 992,-320 1024.4114,-291.6187 1003.7253,-265.5912 1028,-230 1038.3434,-214.8346 1052.982,-200.605 1065.8457,-189.6125"/>
-<polygon fill="#191970" stroke="#191970" points="1068.1072,-192.2841 1073.5715,-183.2071 1063.6394,-186.8953 1068.1072,-192.2841"/>
+<path fill="none" stroke="#191970" d="M976.9358,-334.4655C982.3949,-331.9811 987.5384,-328.8761 992,-325 1023.9,-297.286 1004.9925,-272.4448 1028,-237 1039.2417,-219.6813 1055.168,-202.8813 1068.5592,-190.195"/>
+<polygon fill="#191970" stroke="#191970" points="1071.1287,-192.5861 1076.0963,-183.228 1066.3771,-187.4457 1071.1287,-192.5861"/>
 </g>
 <!-- Node44 -->
 <g id="node9" class="node">
 <title>Node44</title>
 <g id="a_node9"><a xlink:href="namespaceutils.html#aac322cd1761fddedec8a5792e358eb32" target="_top" xlink:title="Vector initialization.">
-<polygon fill="#ffffff" stroke="#000000" points="1056,-310.5 1056,-329.5 1132,-329.5 1132,-310.5 1056,-310.5"/>
-<text text-anchor="middle" x="1094" y="-317.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::initlVect</text>
+<polygon fill="#ffffff" stroke="#000000" points="1056,-315.5 1056,-334.5 1132,-334.5 1132,-315.5 1056,-315.5"/>
+<text text-anchor="middle" x="1094" y="-322.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::initlVect</text>
 </a>
 </g>
 </g>
 <!-- Node42&#45;&gt;Node44 -->
 <g id="edge8" class="edge">
 <title>Node42&#45;&gt;Node44</title>
-<path fill="none" stroke="#191970" d="M992.0639,-330.9423C1010.3223,-328.9824 1029.3618,-326.9386 1045.9757,-325.1551"/>
-<polygon fill="#191970" stroke="#191970" points="1046.4088,-328.6289 1055.9781,-324.0814 1045.6616,-321.6688 1046.4088,-328.6289"/>
+<path fill="none" stroke="#191970" d="M992.0639,-335.9423C1010.3223,-333.9824 1029.3618,-331.9386 1045.9757,-330.1551"/>
+<polygon fill="#191970" stroke="#191970" points="1046.4088,-333.6289 1055.9781,-329.0814 1045.6616,-326.6688 1046.4088,-333.6289"/>
 </g>
 <!-- Node45 -->
 <g id="node10" class="node">
 <title>Node45</title>
 <g id="a_node10"><a xlink:href="namespaceutils.html#ad50731aeb3c8f79ed8372516210dfc9d" target="_top" xlink:title="Round double to integer method.">
-<polygon fill="#ffffff" stroke="#000000" points="1056,-348.5 1056,-367.5 1132,-367.5 1132,-348.5 1056,-348.5"/>
-<text text-anchor="middle" x="1094" y="-355.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::roundInt</text>
+<polygon fill="#ffffff" stroke="#000000" points="1056,-353.5 1056,-372.5 1132,-372.5 1132,-353.5 1056,-353.5"/>
+<text text-anchor="middle" x="1094" y="-360.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::roundInt</text>
 </a>
 </g>
 </g>
 <!-- Node42&#45;&gt;Node45 -->
 <g id="edge9" class="edge">
 <title>Node42&#45;&gt;Node45</title>
-<path fill="none" stroke="#191970" d="M992.0639,-347.0577C1010.3223,-349.0176 1029.3618,-351.0614 1045.9757,-352.8449"/>
-<polygon fill="#191970" stroke="#191970" points="1045.6616,-356.3312 1055.9781,-353.9186 1046.4088,-349.3711 1045.6616,-356.3312"/>
+<path fill="none" stroke="#191970" d="M992.0639,-352.0577C1010.3223,-354.0176 1029.3618,-356.0614 1045.9757,-357.8449"/>
+<polygon fill="#191970" stroke="#191970" points="1045.6616,-361.3312 1055.9781,-358.9186 1046.4088,-354.3711 1045.6616,-361.3312"/>
 </g>
 <!-- Node47 -->
 <g id="node12" class="node">
@@ -310,16 +310,16 @@
 <g id="node16" class="node">
 <title>Node51</title>
 <g id="a_node16"><a xlink:href="class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" target="_top" xlink:title="Alignment type getter. &#160;&#160;See SequenceTypes.">
-<polygon fill="#ffffff" stroke="#000000" points="844.5,-239.5 844.5,-258.5 989.5,-258.5 989.5,-239.5 844.5,-239.5"/>
-<text text-anchor="middle" x="917" y="-246.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::getAlignmentType</text>
+<polygon fill="#ffffff" stroke="#000000" points="844.5,-246.5 844.5,-265.5 989.5,-265.5 989.5,-246.5 844.5,-246.5"/>
+<text text-anchor="middle" x="917" y="-253.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::getAlignmentType</text>
 </a>
 </g>
 </g>
 <!-- Node49&#45;&gt;Node51 -->
 <g id="edge21" class="edge">
 <title>Node49&#45;&gt;Node51</title>
-<path fill="none" stroke="#191970" d="M635.1309,-273.0421C648.9502,-269.5468 663.9532,-266.2049 678,-264 729.5483,-255.9087 787.9979,-252.1458 834.1918,-250.4119"/>
-<polygon fill="#191970" stroke="#191970" points="834.5829,-253.9005 844.4542,-250.0524 834.3377,-246.9048 834.5829,-253.9005"/>
+<path fill="none" stroke="#191970" d="M634.5962,-272.8888C648.5514,-269.3488 663.7549,-266.0232 678,-264 729.5885,-256.673 788.0389,-254.6074 834.2231,-254.4055"/>
+<polygon fill="#191970" stroke="#191970" points="834.4884,-257.9052 844.4831,-254.3901 834.4778,-250.9052 834.4884,-257.9052"/>
 </g>
 <!-- Node53 -->
 <g id="node18" class="node">
@@ -340,66 +340,67 @@
 <!-- Node55 -->
 <g id="node20" class="node">
 <title>Node55</title>
-<g id="a_node20"><a xlink:href="classsimilarity_matrix.html#aef258a851d1a443a39597060420d8908" target="_top" xlink:title="Method to get the similarity distance between two residues, A and B Characters provided must be both ...">
-<polygon fill="#ffffff" stroke="#000000" points="846.5,-196.5 846.5,-215.5 987.5,-215.5 987.5,-196.5 846.5,-196.5"/>
-<text text-anchor="middle" x="917" y="-203.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">similarityMatrix::getDistance</text>
+<g id="a_node20"><a xlink:href="classstatistics_1_1similarity_matrix.html#a2a17eb464ec28ba83edbcbe271e7ff62" target="_top" xlink:title="Method to get the similarity distance between two residues, A and B Characters provided must be both ...">
+<polygon fill="#ffffff" stroke="#000000" points="853,-197 853,-227 981,-227 981,-197 853,-197"/>
+<text text-anchor="start" x="861" y="-215" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
+<text text-anchor="middle" x="917" y="-204" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::getDistance</text>
 </a>
 </g>
 </g>
 <!-- Node49&#45;&gt;Node55 -->
 <g id="edge23" class="edge">
 <title>Node49&#45;&gt;Node55</title>
-<path fill="none" stroke="#191970" d="M613.4503,-272.8058C631.6984,-264.1088 655.7193,-253.6397 678,-247 729.6832,-231.5982 789.4865,-221.3442 836.3424,-214.9427"/>
-<polygon fill="#191970" stroke="#191970" points="836.99,-218.3874 846.4391,-213.5952 836.064,-211.4489 836.99,-218.3874"/>
+<path fill="none" stroke="#191970" d="M615.6759,-272.9637C633.6672,-265.0939 656.6971,-255.8958 678,-250 732.2475,-234.9864 795.1713,-225.2798 842.8338,-219.4373"/>
+<polygon fill="#191970" stroke="#191970" points="843.251,-222.9125 852.7642,-218.2488 842.419,-215.9621 843.251,-222.9125"/>
 </g>
 <!-- Node50&#45;&gt;Node51 -->
 <g id="edge15" class="edge">
 <title>Node50&#45;&gt;Node51</title>
-<path fill="none" stroke="#191970" d="M802.7154,-274.4691C822.807,-269.9916 844.9838,-265.0493 864.4134,-260.7193"/>
-<polygon fill="#191970" stroke="#191970" points="865.2985,-264.108 874.2977,-258.5165 863.7758,-257.2756 865.2985,-264.108"/>
+<path fill="none" stroke="#191970" d="M802.7154,-276.8978C819.4745,-273.8332 837.6844,-270.5034 854.5405,-267.4212"/>
+<polygon fill="#191970" stroke="#191970" points="855.6285,-270.7803 864.8358,-265.5386 854.3693,-263.8945 855.6285,-270.7803"/>
 </g>
 <!-- Node52 -->
 <g id="node17" class="node">
 <title>Node52</title>
 <g id="a_node17"><a xlink:href="namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" target="_top" xlink:title="Checks an alignment type.">
-<polygon fill="#ffffff" stroke="#000000" points="1028,-239.5 1028,-258.5 1160,-258.5 1160,-239.5 1028,-239.5"/>
-<text text-anchor="middle" x="1094" y="-246.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::checkAlignmentType</text>
+<polygon fill="#ffffff" stroke="#000000" points="1028,-246.5 1028,-265.5 1160,-265.5 1160,-246.5 1028,-246.5"/>
+<text text-anchor="middle" x="1094" y="-253.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::checkAlignmentType</text>
 </a>
 </g>
 </g>
 <!-- Node51&#45;&gt;Node52 -->
 <g id="edge16" class="edge">
 <title>Node51&#45;&gt;Node52</title>
-<path fill="none" stroke="#191970" d="M989.5034,-249C998.8282,-249 1008.3981,-249 1017.7802,-249"/>
-<polygon fill="#191970" stroke="#191970" points="1017.8666,-252.5001 1027.8666,-249 1017.8665,-245.5001 1017.8666,-252.5001"/>
+<path fill="none" stroke="#191970" d="M989.5034,-256C998.8282,-256 1008.3981,-256 1017.7802,-256"/>
+<polygon fill="#191970" stroke="#191970" points="1017.8666,-259.5001 1027.8666,-256 1017.8665,-252.5001 1017.8666,-259.5001"/>
 </g>
 <!-- Node53&#45;&gt;Node42 -->
 <g id="edge19" class="edge">
 <title>Node53&#45;&gt;Node42</title>
-<path fill="none" stroke="#191970" d="M793.5593,-337.5892C805.4924,-337.7256 818.5051,-337.8743 831.4604,-338.0224"/>
-<polygon fill="#191970" stroke="#191970" points="831.7769,-341.5262 841.8163,-338.1408 831.857,-334.5266 831.7769,-341.5262"/>
+<path fill="none" stroke="#191970" d="M793.5593,-339.0624C805.4924,-339.5397 818.5051,-340.0602 831.4604,-340.5784"/>
+<polygon fill="#191970" stroke="#191970" points="831.6843,-344.0901 841.8163,-340.9927 831.9642,-337.0957 831.6843,-344.0901"/>
 </g>
 <!-- Node54 -->
 <g id="node19" class="node">
 <title>Node54</title>
 <g id="a_node19"><a xlink:href="classstatistics_1_1_gaps.html#aa3526494d5100e062daa4afba755d0b1" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="850.5,-280 850.5,-310 983.5,-310 983.5,-280 850.5,-280"/>
-<text text-anchor="start" x="858.5" y="-298" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Gaps::Calculate</text>
-<text text-anchor="middle" x="917" y="-287" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Vectors</text>
+<polygon fill="#ffffff" stroke="#000000" points="850.5,-285 850.5,-315 983.5,-315 983.5,-285 850.5,-285"/>
+<text text-anchor="start" x="858.5" y="-303" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Gaps::Calculate</text>
+<text text-anchor="middle" x="917" y="-292" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Vectors</text>
 </a>
 </g>
 </g>
 <!-- Node53&#45;&gt;Node54 -->
 <g id="edge18" class="edge">
 <title>Node53&#45;&gt;Node54</title>
-<path fill="none" stroke="#191970" d="M793.5593,-324.6258C809.4883,-320.8028 827.3407,-316.5182 844.4127,-312.4209"/>
-<polygon fill="#191970" stroke="#191970" points="845.4468,-315.7722 854.3539,-310.0351 843.8132,-308.9655 845.4468,-315.7722"/>
+<path fill="none" stroke="#191970" d="M793.5593,-326.0989C808.254,-322.992 824.5856,-319.539 840.4314,-316.1888"/>
+<polygon fill="#191970" stroke="#191970" points="841.1562,-319.613 850.2159,-314.1201 839.7081,-312.7644 841.1562,-319.613"/>
 </g>
 <!-- Node55&#45;&gt;Node43 -->
 <g id="edge24" class="edge">
 <title>Node55&#45;&gt;Node43</title>
-<path fill="none" stroke="#191970" d="M961.6646,-196.411C980.2347,-192.4242 1002.2498,-187.6978 1022.9405,-183.2557"/>
-<polygon fill="#191970" stroke="#191970" points="1023.928,-186.6235 1032.9705,-181.1024 1022.4586,-179.7795 1023.928,-186.6235"/>
+<path fill="none" stroke="#191970" d="M977.4183,-196.9808C992.2879,-193.2844 1008.3374,-189.2947 1023.6319,-185.4926"/>
+<polygon fill="#191970" stroke="#191970" points="1024.6934,-188.8354 1033.5537,-183.0262 1023.0046,-182.0421 1024.6934,-188.8354"/>
 </g>
 <!-- Node57 -->
 <g id="node22" class="node">

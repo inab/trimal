@@ -1,4 +1,0 @@
-<map id="similarityMatrix::memoryAllocation" name="similarityMatrix::memoryAllocation">
-<area shape="rect" id="node1" title="Method to allocate memory for the similiarity matrix." alt="" coords="5,5,171,47"/>
-<area shape="rect" id="node2" href="$classsimilarity_matrix.html#acc8f6dbae19b4332929ef6a240524975" title="Method to deallocate memory allocated on the similarityMatrix::memoryAllocation method...." alt="" coords="219,5,384,47"/>
-</map>

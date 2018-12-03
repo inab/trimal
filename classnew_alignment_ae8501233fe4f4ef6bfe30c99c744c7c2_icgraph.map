@@ -1,5 +1,0 @@
-<map id="newAlignment::checkCorrespondence" name="newAlignment::checkCorrespondence">
-<area shape="rect" id="node2" href="$classtrim_al_manager.html#ad96c97918919040f8986ba8c26a1f728" title="Method to check if the origAlig and backtranslationAlig are compatible in names to make the backtrans..." alt="" coords="296,5,447,61"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="495,13,644,54"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="692,20,915,47"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="statisticsConsistency::compareAndChoose" name="statisticsConsistency::compareAndChoose">
-<area shape="rect" id="node2" href="$classsequences_matrix.html#a2954781bf8e8fd338714246fd10bae88" title="Method to get a column out of the matrix. " alt="" coords="208,5,400,32"/>
-<area shape="rect" id="node3" href="$classnew_alignment.html#acfd820148c267a3d698a39758ecf190d" title="Number of sequences getter. " alt="" coords="201,56,407,83"/>
-<area shape="rect" id="node4" href="$classnew_alignment.html#ac3d5c9670904bba45707746640aac382" title="Method to map two sets of sequences, own and external. The method accepts a vector of names..." alt="" coords="210,107,398,149"/>
-<area shape="rect" id="node5" href="$classnew_alignment.html#a0db3e76f82a71c7a2fe5b9279f8fa310" title="Getter for the sequences names. " alt="" coords="207,173,401,200"/>
-<area shape="rect" id="node6" href="$classutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization. " alt="" coords="253,224,355,251"/>
-<area shape="rect" id="node7" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="227,275,381,317"/>
-<area shape="rect" id="node8" href="$classsequences_matrix.html#a8b3882d2dcc73938707486c189908abf" title="Method that reorders the stored sequences with a given order list. " alt="" coords="215,341,393,368"/>
-</map>

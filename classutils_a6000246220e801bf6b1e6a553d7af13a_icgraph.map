@@ -1,8 +1,0 @@
-<map id="utils::ReplaceStringInPlace" name="utils::ReplaceStringInPlace">
-<area shape="rect" id="node2" href="$class_read_write_m_s.html#ab019d93e740d838c7e64415630ca5ad5" title="Function that takes multiple files, loads them and saves in a cumulus of formats, using an outPattern..." alt="" coords="238,5,427,47"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#a09d07645fa0057989875f2b2d25ec4d7" title="Method to show the menu of the program. " alt="" coords="259,71,406,98"/>
-<area shape="rect" id="node6" href="$class_read_write_m_s.html#a96e81b9c1bb49a746bc923b0ecf9b0d0" title="Function to save an alignment to a file. It searches among the available_states one that can write th..." alt="" coords="233,126,432,153"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" title="Method to parse arguments into usable structure in trimal. " alt="" coords="687,42,896,69"/>
-<area shape="rect" id="node5" href="$classtrim_al_manager.html#aa972a9eca4e513eb6f5b2f0d8b608093" title="Method to parse information arguments as help and menu. " alt="" coords="490,64,629,105"/>
-<area shape="rect" id="node7" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="480,130,639,157"/>
-</map>

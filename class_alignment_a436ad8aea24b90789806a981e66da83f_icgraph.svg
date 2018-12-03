@@ -54,7 +54,7 @@
 <!-- Node166 -->
 <g id="node3" class="node">
 <title>Node166</title>
-<g id="a_node3"><a xlink:href="classstatistics_1_1_consistency.html#a2e281b6a138074a23ebf261731e3aa27" target="_top" xlink:title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue...">
+<g id="a_node3"><a xlink:href="classstatistics_1_1_consistency.html#ae8679e43ec228926ac2844af133cc2d5" target="_top" xlink:title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue...">
 <polygon fill="#ffffff" stroke="#000000" points="475,-24.5 475,-54.5 592,-54.5 592,-24.5 475,-24.5"/>
 <text text-anchor="start" x="483" y="-42.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Consistency</text>
 <text text-anchor="middle" x="533.5" y="-31.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::perform</text>

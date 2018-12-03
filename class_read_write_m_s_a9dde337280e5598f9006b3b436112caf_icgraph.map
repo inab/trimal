@@ -1,6 +1,0 @@
-<map id="ReadWriteMS::loadAlignment" name="ReadWriteMS::loadAlignment">
-<area shape="rect" id="node2" href="$classtrim_al_manager.html#a2d1aa7e2da1a826b04e55f35fa81e4ad" title="Method to parse the backtranslation argument. " alt="" coords="269,5,412,47"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#ae9cb92b21f85e72d58f80362374cfa4a" title="Method to parse the force select argument. " alt="" coords="269,71,412,112"/>
-<area shape="rect" id="node5" href="$classtrim_al_manager.html#aa79dcf0006a8b31d27a15a33f64e14e8" title="Method to parse the input file argument. " alt="" coords="248,137,433,163"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" title="Method to parse arguments into usable structure in trimal. " alt="" coords="481,78,691,105"/>
-</map>

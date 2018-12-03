@@ -1,8 +1,0 @@
-<map id="FormatManager::saveAlignment" name="FormatManager::saveAlignment">
-<area shape="rect" id="node1" title="Function to save an alignment to a file. It searches among the available_states one that can write th..." alt="" coords="551,56,757,83"/>
-<area shape="rect" id="node2" href="$read_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="381,5,432,32"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" title=" " alt="" coords="311,56,503,83"/>
-<area shape="rect" id="node6" href="$classtrim_al_manager.html#a7ba38127fa10c926b96c60250b80d2b7" title=" " alt="" coords="335,107,478,149"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed." alt="" coords="104,85,263,112"/>
-<area shape="rect" id="node5" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,85,56,112"/>
-</map>

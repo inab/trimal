@@ -130,26 +130,26 @@
 <!-- Node133 -->
 <g id="node41" class="node">
 <title>Node133</title>
-<g id="a_node41"><a xlink:href="classsimilarity_matrix.html#a2d8cda71ce6839f88ef1c600fe456185" target="_top" xlink:title="Method to load a custom matrix.">
-<polygon fill="#ffffff" stroke="#000000" points="1412,-1100.5 1412,-1130.5 1536,-1130.5 1536,-1100.5 1412,-1100.5"/>
-<text text-anchor="start" x="1420" y="-1118.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">similarityMatrix::loadSim</text>
-<text text-anchor="middle" x="1474" y="-1107.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Matrix</text>
+<g id="a_node41"><a xlink:href="classstatistics_1_1similarity_matrix.html#a8d3f892581b552e6e5321ce1ff073624" target="_top" xlink:title="Method to load a custom matrix.">
+<polygon fill="#ffffff" stroke="#000000" points="1410,-1100.5 1410,-1130.5 1538,-1130.5 1538,-1100.5 1410,-1100.5"/>
+<text text-anchor="start" x="1418" y="-1118.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
+<text text-anchor="middle" x="1474" y="-1107.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::loadSimMatrix</text>
 </a>
 </g>
 </g>
 <!-- Node93&#45;&gt;Node133 -->
 <g id="edge79" class="edge">
 <title>Node93&#45;&gt;Node133</title>
-<path fill="none" stroke="#191970" d="M2163.203,-245.2169C2146.9242,-351.831 2054.0309,-862.2887 1742,-1071.5 1680.7105,-1112.5936 1594.1995,-1119.8876 1536.2094,-1119.3497"/>
+<path fill="none" stroke="#191970" d="M2163.203,-245.2169C2146.9242,-351.831 2054.0309,-862.2887 1742,-1071.5 1681.3958,-1112.134 1596.1311,-1119.7202 1538.1654,-1119.3648"/>
 <polygon fill="#191970" stroke="#191970" points="2166.6829,-245.61 2164.6843,-235.2054 2159.7583,-244.5854 2166.6829,-245.61"/>
 </g>
 <!-- Node135 -->
 <g id="node43" class="node">
 <title>Node135</title>
-<g id="a_node43"><a xlink:href="classsequences_matrix.html#ac1733195f349e6e343aee2e3b502ab66" target="_top" xlink:title="Automatic constructor.">
-<polygon fill="#ffffff" stroke="#000000" points="1945,-49.5 1945,-79.5 2089,-79.5 2089,-49.5 1945,-49.5"/>
-<text text-anchor="start" x="1953" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">sequencesMatrix::sequences</text>
-<text text-anchor="middle" x="2017" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Matrix</text>
+<g id="a_node43"><a xlink:href="class_alignment_1_1sequences_matrix.html#aa7b4a3137d01e6d40b8a2332806b5373" target="_top" xlink:title="Automatic constructor.">
+<polygon fill="#ffffff" stroke="#000000" points="1947,-49.5 1947,-79.5 2087,-79.5 2087,-49.5 1947,-49.5"/>
+<text text-anchor="start" x="1955" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::sequencesMatrix</text>
+<text text-anchor="middle" x="2017" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::sequencesMatrix</text>
 </a>
 </g>
 </g>
@@ -853,7 +853,7 @@
 <!-- Node128 -->
 <g id="node36" class="node">
 <title>Node128</title>
-<g id="a_node36"><a xlink:href="classstatistics_1_1_consistency.html#a2e281b6a138074a23ebf261731e3aa27" target="_top" xlink:title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue...">
+<g id="a_node36"><a xlink:href="classstatistics_1_1_consistency.html#ae8679e43ec228926ac2844af133cc2d5" target="_top" xlink:title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue...">
 <polygon fill="#ffffff" stroke="#000000" points="1783.5,-186.5 1783.5,-216.5 1900.5,-216.5 1900.5,-186.5 1783.5,-186.5"/>
 <text text-anchor="start" x="1791.5" y="-204.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Consistency</text>
 <text text-anchor="middle" x="1842" y="-193.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::perform</text>
@@ -921,8 +921,8 @@
 <!-- Node133&#45;&gt;Node134 -->
 <g id="edge80" class="edge">
 <title>Node133&#45;&gt;Node134</title>
-<path fill="none" stroke="#191970" d="M1401.6887,-1114.6144C1323.1213,-1113.7296 1193.8983,-1112.5 1082.5,-1112.5 1082.5,-1112.5 1082.5,-1112.5 871.5,-1112.5 712.3589,-1112.5 554.9737,-972.6602 506.592,-925.6828"/>
-<polygon fill="#191970" stroke="#191970" points="1401.9195,-1118.1171 1411.9587,-1114.7313 1401.9993,-1111.1176 1401.9195,-1118.1171"/>
+<path fill="none" stroke="#191970" d="M1399.6126,-1114.591C1320.8589,-1113.7081 1192.9226,-1112.5 1082.5,-1112.5 1082.5,-1112.5 1082.5,-1112.5 871.5,-1112.5 712.3589,-1112.5 554.9737,-972.6602 506.592,-925.6828"/>
+<polygon fill="#191970" stroke="#191970" points="1399.8777,-1118.0942 1409.9167,-1114.7079 1399.9571,-1111.0946 1399.8777,-1118.0942"/>
 </g>
 <!-- Node134&#45;&gt;Node100 -->
 <g id="edge81" class="edge">

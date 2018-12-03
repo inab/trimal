@@ -132,7 +132,7 @@
 <!-- Node178 -->
 <g id="node7" class="node">
 <title>Node178</title>
-<g id="a_node7"><a xlink:href="classstatistics_1_1_consistency.html#a2e281b6a138074a23ebf261731e3aa27" target="_top" xlink:title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue...">
+<g id="a_node7"><a xlink:href="classstatistics_1_1_consistency.html#ae8679e43ec228926ac2844af133cc2d5" target="_top" xlink:title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue...">
 <polygon fill="#ffffff" stroke="#000000" points="504.5,-35.5 504.5,-65.5 621.5,-65.5 621.5,-35.5 504.5,-35.5"/>
 <text text-anchor="start" x="512.5" y="-53.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Consistency</text>
 <text text-anchor="middle" x="563" y="-42.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::perform</text>

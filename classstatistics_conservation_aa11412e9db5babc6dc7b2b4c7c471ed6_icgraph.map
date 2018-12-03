@@ -1,7 +1,0 @@
-<map id="statisticsConservation::calcCutPoint" name="statisticsConservation::calcCutPoint">
-<area shape="rect" id="node2" href="$class_cleaner.html#a1ac5ba504932526d77575365557a4d64" title="Method to trim an alignment based on the similarity and gaps distribution values. ..." alt="" coords="243,5,350,32"/>
-<area shape="rect" id="node6" href="$class_cleaner.html#a694d53fdd5d1ac9455858e48537af3d0" title="Method to trim an alignment based on the similarity distribution values. " alt="" coords="205,56,388,83"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" title="Method to trim the alignment using non automatic methods: " alt="" coords="436,23,639,65"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from. " alt="" coords="687,23,832,65"/>
-<area shape="rect" id="node5" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="880,31,1039,57"/>
-</map>

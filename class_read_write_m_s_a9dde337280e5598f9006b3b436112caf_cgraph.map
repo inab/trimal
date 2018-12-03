@@ -1,4 +1,0 @@
-<map id="ReadWriteMS::loadAlignment" name="ReadWriteMS::loadAlignment">
-<area shape="rect" id="node2" href="$class_read_write_base_state.html#ac6d87d2b73337cb4afa1499bf218f4ab" title="Function to load a file in the current format and return an alignment object. " alt="" coords="253,5,398,47"/>
-<area shape="rect" id="node3" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="248,71,403,112"/>
-</map>

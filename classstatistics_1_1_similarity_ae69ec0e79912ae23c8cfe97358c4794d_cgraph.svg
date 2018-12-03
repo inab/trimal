@@ -69,17 +69,18 @@
 <!-- Node104 -->
 <g id="node11" class="node">
 <title>Node104</title>
-<g id="a_node11"><a xlink:href="classsimilarity_matrix.html#aef258a851d1a443a39597060420d8908" target="_top" xlink:title="Method to get the similarity distance between two residues, A and B Characters provided must be both ...">
-<polygon fill="#ffffff" stroke="#000000" points="307.5,-38.5 307.5,-57.5 448.5,-57.5 448.5,-38.5 307.5,-38.5"/>
-<text text-anchor="middle" x="378" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">similarityMatrix::getDistance</text>
+<g id="a_node11"><a xlink:href="classstatistics_1_1similarity_matrix.html#a2a17eb464ec28ba83edbcbe271e7ff62" target="_top" xlink:title="Method to get the similarity distance between two residues, A and B Characters provided must be both ...">
+<polygon fill="#ffffff" stroke="#000000" points="314,-28 314,-58 442,-58 442,-28 314,-28"/>
+<text text-anchor="start" x="322" y="-46" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
+<text text-anchor="middle" x="378" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::getDistance</text>
 </a>
 </g>
 </g>
 <!-- Node94&#45;&gt;Node104 -->
 <g id="edge11" class="edge">
 <title>Node94&#45;&gt;Node104</title>
-<path fill="none" stroke="#191970" d="M72.2616,-100.9608C89.2951,-89.4913 114.5111,-74.4389 139,-67 190.1114,-51.474 250.04,-46.7397 297.1011,-45.879"/>
-<polygon fill="#191970" stroke="#191970" points="297.2896,-49.377 307.244,-45.7494 297.2001,-42.3775 297.2896,-49.377"/>
+<path fill="none" stroke="#191970" d="M72.6535,-100.8658C89.7051,-89.5034 114.7557,-74.6403 139,-67 192.5633,-50.1202 255.912,-44.3582 303.9277,-42.6881"/>
+<polygon fill="#191970" stroke="#191970" points="304.0402,-46.1864 313.932,-42.3913 303.8326,-39.1895 304.0402,-46.1864"/>
 </g>
 <!-- Node105 -->
 <g id="node12" class="node">
@@ -162,17 +163,17 @@
 <g id="node5" class="node">
 <title>Node98</title>
 <g id="a_node5"><a xlink:href="classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR.">
-<polygon fill="#ffffff" stroke="#000000" points="494,-55 494,-85 616,-85 616,-55 494,-55"/>
-<text text-anchor="start" x="502" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">reporting::reportManager</text>
-<text text-anchor="middle" x="555" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::report</text>
+<polygon fill="#ffffff" stroke="#000000" points="494,-53 494,-83 616,-83 616,-53 494,-53"/>
+<text text-anchor="start" x="502" y="-71" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">reporting::reportManager</text>
+<text text-anchor="middle" x="555" y="-60" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::report</text>
 </a>
 </g>
 </g>
 <!-- Node96&#45;&gt;Node98 -->
 <g id="edge4" class="edge">
 <title>Node96&#45;&gt;Node98</title>
-<path fill="none" stroke="#191970" d="M419.7388,-126.4776C430.7007,-123.542 442.4144,-120.0101 453,-116 469.7284,-109.6628 472.7582,-105.4968 489,-98 495.5264,-94.9876 502.4669,-91.9094 509.3026,-88.9484"/>
-<polygon fill="#191970" stroke="#191970" points="510.6987,-92.158 518.5103,-85.0005 507.9402,-85.7244 510.6987,-92.158"/>
+<path fill="none" stroke="#191970" d="M419.7388,-126.4776C430.7007,-123.542 442.4144,-120.0101 453,-116 469.7284,-109.6628 472.8547,-105.7025 489,-98 496.4301,-94.4553 504.3718,-90.7636 512.0787,-87.2314"/>
+<polygon fill="#191970" stroke="#191970" points="513.6649,-90.3548 521.3127,-83.0225 510.7617,-83.9853 513.6649,-90.3548"/>
 </g>
 <!-- Node99 -->
 <g id="node6" class="node">
@@ -213,8 +214,8 @@
 <!-- Node104&#45;&gt;Node98 -->
 <g id="edge12" class="edge">
 <title>Node104&#45;&gt;Node98</title>
-<path fill="none" stroke="#191970" d="M448.7182,-56.7898C460.2619,-58.2246 472.2266,-59.7118 483.7823,-61.1481"/>
-<polygon fill="#191970" stroke="#191970" points="483.4558,-64.6344 493.8112,-62.3946 484.3193,-57.6878 483.4558,-64.6344"/>
+<path fill="none" stroke="#191970" d="M442.1513,-52.0609C455.6852,-53.9725 470.0429,-56.0004 483.8181,-57.9461"/>
+<polygon fill="#191970" stroke="#191970" points="483.3342,-61.4124 493.7254,-59.3454 484.3132,-54.4812 483.3342,-61.4124"/>
 </g>
 <!-- Node105&#45;&gt;Node96 -->
 <g id="edge14" class="edge">

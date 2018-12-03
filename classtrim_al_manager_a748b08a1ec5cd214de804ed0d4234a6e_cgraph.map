@@ -40,5 +40,5 @@
 <area shape="rect" id="node25" href="$namespaceutils.html#ac0a8721fef543bec18cec5c90c16faff" title="Removes a determined char from the string." alt="" coords="1045,56,1199,83"/>
 <area shape="rect" id="node27" href="$class_alignment.html#a214f498da34cb67cf45caf9569e03173" title="isAligned getter." alt="" coords="773,1356,935,1383"/>
 <area shape="rect" id="node29" href="$class_alignment.html#abe1ee0139489feb6a5df99361e8dc0a7" title="Residues number getter. It counts gaps as residue." alt="" coords="765,1524,943,1551"/>
-<area shape="rect" id="node38" href="$class_format_manager.html#a70bde367b5bb05bcc6c200f6981a3eaa" title="Function to obtain the format name of a given file." alt="" coords="736,1625,972,1652"/>
+<area shape="rect" id="node38" href="$class_format_handling_1_1_format_manager.html#ac691b15ee0b0e6a22a22f82569672745" title="Function to obtain the format name of a given file." alt="" coords="747,1626,961,1667"/>
 </map>

@@ -1,7 +1,0 @@
-<map id="Cleaner::cleanByCutValueFallBehind" name="Cleaner::cleanByCutValueFallBehind">
-<area shape="rect" id="node2" href="$class_cleaner.html#ae2328fe8c189e2827b46e5dfb8e3deb3" title="Method to trim an alignment based on consistency values obtained from a dataset of alignments..." alt="" coords="231,5,411,32"/>
-<area shape="rect" id="node6" href="$class_cleaner.html#a694d53fdd5d1ac9455858e48537af3d0" title="Method to trim an alignment based on the similarity distribution values. " alt="" coords="229,56,412,83"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" title="Method to trim the alignment using non automatic methods: " alt="" coords="460,23,663,65"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from. " alt="" coords="711,23,856,65"/>
-<area shape="rect" id="node5" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="904,31,1063,57"/>
-</map>

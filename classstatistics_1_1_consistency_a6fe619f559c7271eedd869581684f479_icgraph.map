@@ -1,7 +1,7 @@
 <map id="statistics::Consistency::applyWindow" name="statistics::Consistency::applyWindow">
 <area shape="rect" id="node1" title="Applies a new window to the alignment." alt="" coords="1367,158,1523,199"/>
 <area shape="rect" id="node2" href="$classstatistics_1_1_consistency.html#ad3a0a265cb9460cd4633b027fe2437c9" title="Stat Getter &#160;." alt="" coords="1163,99,1319,141"/>
-<area shape="rect" id="node11" href="$classstatistics_1_1_consistency.html#a2e281b6a138074a23ebf261731e3aa27" title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue..." alt="" coords="1163,190,1319,231"/>
+<area shape="rect" id="node11" href="$classstatistics_1_1_consistency.html#ae8679e43ec228926ac2844af133cc2d5" title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue..." alt="" coords="1163,190,1319,231"/>
 <area shape="rect" id="node3" href="$class_alignment.html#a4e80b4d399ffdbe2ed2cfab91975f348" title="Method to report the trimming results in HTML. Outputs an HTML file that shows visually what has been..." alt="" coords="879,5,1115,32"/>
 <area shape="rect" id="node4" href="$class_alignment.html#a2fcaadf2c0799bc668050f7735860364" title="Method to report the trimming results in SVG. Outputs a SVG file that shows visually what has been do..." alt="" coords="883,56,1111,83"/>
 <area shape="rect" id="node5" href="$classtrim_al_manager.html#afc48b86f5ae35b9a5e721b65c58bf610" title="Method to print statistics requested." alt="" coords="388,89,527,130"/>

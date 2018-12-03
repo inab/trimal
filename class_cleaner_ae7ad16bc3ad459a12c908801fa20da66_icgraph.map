@@ -1,6 +1,0 @@
-<map id="Cleaner::cleanByCutValueOverpassOrEquals" name="Cleaner::cleanByCutValueOverpassOrEquals">
-<area shape="rect" id="node2" href="$class_cleaner.html#a1ac5ba504932526d77575365557a4d64" title="Method to trim an alignment based on the similarity and gaps distribution values. ..." alt="" coords="229,13,336,39"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" title="Method to trim the alignment using non automatic methods: " alt="" coords="384,5,587,47"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" title="Core Method of the program. This is where almost all cleaning methods are called from. " alt="" coords="635,5,780,47"/>
-<area shape="rect" id="node5" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="828,13,987,39"/>
-</map>

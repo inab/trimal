@@ -1,5 +1,6 @@
 var class_alignment =
 [
+    [ "sequencesMatrix", "class_alignment_1_1sequences_matrix.html", "class_alignment_1_1sequences_matrix" ],
     [ "Alignment", "class_alignment.html#a091e21f0cfb741cb5cdc3535c6cc287f", null ],
     [ "Alignment", "class_alignment.html#aeeee94970a445f32aa79646c249befef", null ],
     [ "~Alignment", "class_alignment.html#a8787573a5060136c2a51f40cf229e356", null ],

@@ -1,4 +1,0 @@
-<map id="trimAlManager::check_backtranslation_infile_names_corresponde" name="trimAlManager::check_backtranslation_infile_names_corresponde">
-<area shape="rect" id="node2" href="$classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult..." alt="" coords="204,13,353,54"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in..." alt="" coords="401,20,624,47"/>
-</map>

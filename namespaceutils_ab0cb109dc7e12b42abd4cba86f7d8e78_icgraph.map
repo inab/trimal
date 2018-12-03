@@ -1,10 +1,10 @@
 <map id="utils::ReplaceString" name="utils::ReplaceString">
-<area shape="rect" id="node1" title="Function that replaces a substring with another substring in a string. It makes a copy of the origina..." alt="" coords="805,42,941,69"/>
-<area shape="rect" id="node2" href="$class_format_manager.html#a3dfaafe1cfe8904405e0453f4062485e" title="Function that takes multiple files, loads them and saves in a cumulus of formats, using an outPattern..." alt="" coords="555,5,753,47"/>
-<area shape="rect" id="node4" href="$class_format_manager.html#ac2c4667aceae0c08c24e51b2216ccc44" title="Function to save an alignment to a file. It searches among the available_states one that can write th..." alt="" coords="551,71,757,98"/>
-<area shape="rect" id="node3" href="$read_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="381,14,432,41"/>
-<area shape="rect" id="node5" href="$classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" title=" " alt="" coords="311,69,503,95"/>
-<area shape="rect" id="node8" href="$classtrim_al_manager.html#a7ba38127fa10c926b96c60250b80d2b7" title=" " alt="" coords="335,120,478,161"/>
-<area shape="rect" id="node6" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed." alt="" coords="104,98,263,125"/>
-<area shape="rect" id="node7" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,98,56,125"/>
+<area shape="rect" id="node1" title="Function that replaces a substring with another substring in a string. It makes a copy of the origina..." alt="" coords="816,46,952,73"/>
+<area shape="rect" id="node2" href="$class_format_handling_1_1_format_manager.html#aac5df1a01a25e54aa856ef68085bd72a" title="Function that takes multiple files, loads them and saves in a cumulus of formats, using an outPattern..." alt="" coords="551,5,768,47"/>
+<area shape="rect" id="node4" href="$class_format_handling_1_1_format_manager.html#a2987b0f448390cf5cb7a287117896c64" title="Function to save an alignment to a file. It searches among the available_states one that can write th..." alt="" coords="553,71,766,112"/>
+<area shape="rect" id="node3" href="$read_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="381,17,432,43"/>
+<area shape="rect" id="node5" href="$classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" title=" " alt="" coords="311,74,503,101"/>
+<area shape="rect" id="node8" href="$classtrim_al_manager.html#a7ba38127fa10c926b96c60250b80d2b7" title=" " alt="" coords="335,125,478,167"/>
+<area shape="rect" id="node6" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed." alt="" coords="104,103,263,130"/>
+<area shape="rect" id="node7" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,103,56,130"/>
 </map>

@@ -7,8 +7,8 @@
 <area shape="rect" id="node35" href="$classstatistics_1_1_consistency.html#a35c4f5aab5ad2e8d4722f07b17b9dbd2" title="Method to compare a set of alignments to select the most consistent one respect the others...." alt="" coords="2617,1159,2773,1200"/>
 <area shape="rect" id="node39" href="$classstatistics_1_1_consistency.html#a12d0b624abec361767bd3a6001998f02" title="Method to obtain the consistency values vector for a given alignment against a set of alignments with..." alt="" coords="2617,1224,2773,1265"/>
 <area shape="rect" id="node40" href="$classstatistics_1_1_gaps.html#a2f1d71bafa5e44e5f2c96771cf2a26ed" title=" " alt="" coords="2618,1355,2771,1382"/>
-<area shape="rect" id="node41" href="$classsimilarity_matrix.html#a2d8cda71ce6839f88ef1c600fe456185" title="Method to load a custom matrix." alt="" coords="1888,5,2053,47"/>
-<area shape="rect" id="node43" href="$classsequences_matrix.html#ac1733195f349e6e343aee2e3b502ab66" title="Automatic constructor." alt="" coords="2599,1407,2791,1448"/>
+<area shape="rect" id="node41" href="$classstatistics_1_1similarity_matrix.html#a8d3f892581b552e6e5321ce1ff073624" title="Method to load a custom matrix." alt="" coords="1885,5,2056,47"/>
+<area shape="rect" id="node43" href="$class_alignment_1_1sequences_matrix.html#aa7b4a3137d01e6d40b8a2332806b5373" title="Automatic constructor." alt="" coords="2601,1407,2788,1448"/>
 <area shape="rect" id="node44" href="$classstatistics_1_1_similarity.html#ada0548f0ac960fbbb3a3192f83c42189" title="Constructor without any parameters." alt="" coords="2626,1472,2763,1513"/>
 <area shape="rect" id="node3" href="$classstatistics_1_1_manager.html#a1969a416d3020d25daa56de6c5e305db" title="Method to handle gap stat calculation It checks if the gaps submodule has been created,..." alt="" coords="2393,461,2530,503"/>
 <area shape="rect" id="node32" href="$classstatistics_1_1_gaps.html#ab5b60db326475f8adc68b130e22b3963" title=" " alt="" coords="2376,847,2547,888"/>
@@ -39,7 +39,7 @@
 <area shape="rect" id="node23" href="$classstatistics_1_1_similarity.html#a26f430acb8a3240977665de9a9ea875a" title="Computes and selects the cut point values based on similarity&#39;s values." alt="" coords="1380,687,1517,728"/>
 <area shape="rect" id="node27" href="$classtrim_al_manager.html#a10536f715945a1a45f1df33f7cedc81e" title="Method to trim or reduce the number of sequences in an alignment. It performs one or none of the foll..." alt="" coords="1864,1107,2077,1134"/>
 <area shape="rect" id="node31" href="$classtrim_al_manager.html#a8ed19b851162fa24a1da66f7e54099e3" title=" " alt="" coords="568,497,753,539"/>
-<area shape="rect" id="node36" href="$classstatistics_1_1_consistency.html#a2e281b6a138074a23ebf261731e3aa27" title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue..." alt="" coords="2383,1224,2539,1265"/>
+<area shape="rect" id="node36" href="$classstatistics_1_1_consistency.html#ae8679e43ec228926ac2844af133cc2d5" title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue..." alt="" coords="2383,1224,2539,1265"/>
 <area shape="rect" id="node37" href="$classtrim_al_manager.html#a12b7cef964ef258fe7621da44867c51f" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation..." alt="" coords="1856,1259,2085,1286"/>
 <area shape="rect" id="node38" href="$classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" title="Method to parse arguments into usable structure in trimal." alt="" coords="311,1051,520,1078"/>
 <area shape="rect" id="node42" href="$classtrim_al_manager.html#a3e8b2b5b4e1a44c498c47448840b6c69" title="Method to create, load and use a similarity matrix, depending on alignment residue nature,..." alt="" coords="575,279,746,320"/>

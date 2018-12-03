@@ -1,0 +1,21 @@
+<map id="statistics::Consistency::perform" name="statistics::Consistency::perform">
+<area shape="rect" id="node1" title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue..." alt="" coords="5,250,161,291"/>
+<area shape="rect" id="node2" href="$classstatistics_1_1_consistency.html#a6fe619f559c7271eedd869581684f479" title="Applies a new window to the alignment." alt="" coords="238,54,394,95"/>
+<area shape="rect" id="node3" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR." alt="" coords="489,24,651,66"/>
+<area shape="rect" id="node4" href="$namespaceutils.html#ae9637f7928b61ba73fd10daf132bc593" title="String comparing method." alt="" coords="264,432,368,458"/>
+<area shape="rect" id="node5" href="$classstatistics_1_1_consistency.html#a35c4f5aab5ad2e8d4722f07b17b9dbd2" title="Method to compare a set of alignments to select the most consistent one respect the others...." alt="" coords="238,250,394,291"/>
+<area shape="rect" id="node13" href="$classstatistics_1_1_consistency.html#a12d0b624abec361767bd3a6001998f02" title="Method to obtain the consistency values vector for a given alignment against a set of alignments with..." alt="" coords="238,315,394,356"/>
+<area shape="rect" id="node14" href="$class_alignment.html#abe1ee0139489feb6a5df99361e8dc0a7" title="Residues number getter. It counts gaps as residue." alt="" coords="481,557,659,584"/>
+<area shape="rect" id="node15" href="$class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="219,545,413,572"/>
+<area shape="rect" id="node17" href="$class_format_handling_1_1_format_manager.html#ac691b15ee0b0e6a22a22f82569672745" title="Function to obtain the format name of a given file." alt="" coords="209,119,423,160"/>
+<area shape="rect" id="node18" href="$class_format_handling_1_1_format_manager.html#ae02b932789b35289dc506e8ed0297695" title="Function that loads an alignment given a file path. It automatically detects the format of the file." alt="" coords="209,184,423,226"/>
+<area shape="rect" id="node6" href="$class_alignment_1_1sequences_matrix.html#ade52c6977160c699b42c8a44735397e8" title="Method to get a column out of the matrix." alt="" coords="477,374,663,415"/>
+<area shape="rect" id="node7" href="$class_alignment.html#a66fdd6d16ef1ccb5e8da24c6e20feca7" title="Number of sequences getter." alt="" coords="479,440,661,466"/>
+<area shape="rect" id="node8" href="$class_alignment.html#a436ad8aea24b90789806a981e66da83f" title="Method to map two sets of sequences, own and external. The method accepts a vector of names,..." alt="" coords="471,491,669,532"/>
+<area shape="rect" id="node9" href="$class_alignment.html#ab44caa194f61bbbabf7572f3a70cf2fc" title="Getter for the sequences names." alt="" coords="485,206,655,233"/>
+<area shape="rect" id="node10" href="$namespaceutils.html#aac322cd1761fddedec8a5792e358eb32" title="Vector initialization." alt="" coords="519,257,621,284"/>
+<area shape="rect" id="node11" href="$namespaceutils.html#a40640e1942f00797e9fe8284e8fbdb14" title="Maximum of two numbers method." alt="" coords="531,156,609,182"/>
+<area shape="rect" id="node12" href="$class_alignment_1_1sequences_matrix.html#a1cc36c365ace94585d966db0404e5081" title="Method that reorders the stored sequences with a given order list." alt="" coords="477,308,663,350"/>
+<area shape="rect" id="node16" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type." alt="" coords="482,608,658,634"/>
+<area shape="rect" id="node19" href="$class_format_handling_1_1_base_format_handler.html#acb1e7d713993916bb7b7b8c8ebebb922" title="Function to load a file in the current format and return an alignment object." alt="" coords="473,90,667,131"/>
+</map>

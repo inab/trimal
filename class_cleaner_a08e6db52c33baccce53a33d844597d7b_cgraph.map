@@ -1,9 +1,0 @@
-<map id="Cleaner::cleanNoAllGaps" name="Cleaner::cleanNoAllGaps">
-<area shape="rect" id="node2" href="$class_cleaner.html#a66bda5807c06cfaf1609e4c1f5955671" title="Method to clean an alignment. &#160;It removes sequences that overpass or equals a certain threshold..." alt="" coords="223,86,399,127"/>
-<area shape="rect" id="node3" href="$classutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="495,5,601,32"/>
-<area shape="rect" id="node5" href="$class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f" title="Method that identifies and removes columns and sequences composed only by gaps. " alt="" coords="451,57,645,98"/>
-<area shape="rect" id="node7" href="$class_cleaner.html#ae6d263df982b8e0a605f49e52a5a48d9" title="Method to remove column blocks smaller than a given size. " alt="" coords="447,123,649,149"/>
-<area shape="rect" id="node8" href="$classutils.html#ad50731aeb3c8f79ed8372516210dfc9d" title="Round double to integer method. " alt="" coords="497,173,599,200"/>
-<area shape="rect" id="node4" href="$classutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="732,5,817,32"/>
-<area shape="rect" id="node6" href="$class____internal_report_1_1____report_system.html#acd358cbc59625c6e2f47e0b5f825400d" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="697,57,852,98"/>
-</map>

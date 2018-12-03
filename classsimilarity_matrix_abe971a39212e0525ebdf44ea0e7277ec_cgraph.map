@@ -1,5 +1,0 @@
-<map id="similarityMatrix::alternativeSimilarityMatrices" name="similarityMatrix::alternativeSimilarityMatrices">
-<area shape="rect" id="node1" title="Method to load alternative similarity matrices also included on the suite. Currently,..." alt="" coords="5,5,184,47"/>
-<area shape="rect" id="node2" href="$classsimilarity_matrix.html#a08e4e5790d95848f049ed00579c0e377" title="Method to allocate memory for the similiarity matrix." alt="" coords="232,5,397,47"/>
-<area shape="rect" id="node3" href="$classsimilarity_matrix.html#acc8f6dbae19b4332929ef6a240524975" title="Method to deallocate memory allocated on the similarityMatrix::memoryAllocation method...." alt="" coords="445,5,611,47"/>
-</map>
