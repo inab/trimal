@@ -1913,7 +1913,7 @@ inline void trimAlManager::menu() {
     // Simple idiom to allow including a text file into a char array at compile time
     // Explanation: https://stackoverflow.com/a/25021520
     std::string menu = {
-        #include "menu.txt"
+        #include "RawText/menu.txt"
     };
 
     utils::ReplaceStringInPlace(menu, "[iformat]", formatManager.getInputFormatsAvailable());
@@ -1934,7 +1934,7 @@ inline void trimAlManager::examples() {
     // Simple idiom to allow including a text file into a char array at compile time
     // Explanation: https://stackoverflow.com/a/25021520
     std::string examples = {
-        #include "examples.txt"
+        #include "RawText/examples.txt"
     };
 
     std::cout << examples;

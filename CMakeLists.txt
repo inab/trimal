@@ -42,7 +42,7 @@ set(preview
         source/Cleaner.cpp
         source/FormatHandling/BaseFormatHandler.cpp
 
-        source/similarityMatrix.cpp
+        source/Statistics/similarityMatrix.cpp
         source/Alignment/sequencesMatrix.cpp
 
         source/utils.cpp
