@@ -1,7 +1,7 @@
 #ifndef READWRITES_H
 #define READWRITES_H
 
-#include "Alignment.h"
+#include "Alignment/Alignment.h"
 #include "reportsystem.h"
 
 #include <iomanip>

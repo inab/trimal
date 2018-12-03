@@ -7,7 +7,7 @@
 #include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
 #include "Statistics/Gaps.h"
-#include "Alignment.h"
+#include "Alignment/Alignment.h"
 
 namespace statistics {
     bool Manager::calculateConservationStats(void) {

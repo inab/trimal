@@ -2,7 +2,7 @@
 #include "FormatHandling/BaseFormatHandler.h"
 #include "FormatHandling/formats_header.h"
 #include "InternalBenchmarker.h"
-#include "Alignment.h"
+#include "Alignment/Alignment.h"
 #include "utils.h"
 
 

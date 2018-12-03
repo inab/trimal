@@ -31,7 +31,7 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
 # Create a list of all common source files
 set(preview
         source/trimalManager.cpp
-        source/Alignment.cpp
+        source/Alignment/Alignment.cpp
 
         source/Statistics/Mold.cpp
         source/Statistics/Gaps.cpp
@@ -43,7 +43,7 @@ set(preview
         source/FormatHandling/BaseFormatHandler.cpp
 
         source/similarityMatrix.cpp
-        source/sequencesMatrix.cpp
+        source/Alignment/sequencesMatrix.cpp
 
         source/utils.cpp
 

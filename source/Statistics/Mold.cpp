@@ -27,7 +27,7 @@
 #include "InternalBenchmarker.h"
 #include "Statistics/Mold.h"
 #include "reportsystem.h"
-#include "Alignment.h"
+#include "Alignment/Alignment.h"
 #include "utils.h"
 
 

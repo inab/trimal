@@ -1,5 +1,5 @@
 #include "FormatHandling/FormatManager.h"
-#include "Alignment.h"
+#include "Alignment/Alignment.h"
 #include "defines.h"
 #include "values.h"
 

@@ -2,7 +2,7 @@
 #define VCF_STATISH_H
 
 #include "reportsystem.h"
-#include "Alignment.h"
+#include "Alignment/Alignment.h"
 
 #include <algorithm>
 #include <cstring>

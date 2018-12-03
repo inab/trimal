@@ -24,13 +24,13 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
+#include "Alignment/sequencesMatrix.h"
 #include "Statistics/Consistency.h"
+#include "Alignment/Alignment.h"
 #include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
-#include "sequencesMatrix.h"
 #include "trimalManager.h"
 #include "reportsystem.h"
-#include "Alignment.h"
 #include "defines.h"
 #include "utils.h"
 
@@ -97,7 +97,7 @@ namespace statistics {
 
                 } else {
                     compareAlignmentsArray[i]->SequencesMatrix
-                            = new sequencesMatrix(compareAlignmentsArray[i]);
+                            = new Alignment::sequencesMatrix(compareAlignmentsArray[i]);
 
                     // Store maximum number of aminoacids
                     if (compareAlignmentsArray[i]->getNumAminos() > maxResidues)
@@ -472,7 +472,7 @@ namespace statistics {
         }
         
         if (selected->SequencesMatrix == nullptr) 
-            selected->SequencesMatrix = new sequencesMatrix(selected);
+            selected->SequencesMatrix = new Alignment::sequencesMatrix(selected);
         // Do the same analysis for each column
         for (i = 0, pairRes = 0, hit = 0;
              i < numResidues && !appearErrors;

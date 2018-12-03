@@ -5,7 +5,7 @@
 #include "Statistics/Manager.h"
 #include "Statistics/Gaps.h"
 #include "reportsystem.h"
-#include "Alignment.h"
+#include "Alignment/Alignment.h"
 #include "defines.h"
 #include "Cleaner.h"
 #include "values.h"

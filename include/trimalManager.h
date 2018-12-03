@@ -7,7 +7,7 @@
 
 
 #include "FormatHandling/FormatManager.h"
-#include "Alignment.h"
+#include "Alignment/Alignment.h"
 
 #include <stdlib.h>
 #include <string.h>

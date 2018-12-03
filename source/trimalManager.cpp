@@ -5,7 +5,7 @@
 #include "similarityMatrix.h"
 #include "trimalManager.h"
 #include "reportsystem.h"
-#include "Alignment.h"
+#include "Alignment/Alignment.h"
 #include "VCFHandler.h"
 #include "Cleaner.h"
 #include "defines.h"
