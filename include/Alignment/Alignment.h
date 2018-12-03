@@ -41,7 +41,6 @@
 #include "defines.h"
 
 // Forward declarations
-class sequencesMatrix;
 class Cleaner;
 namespace statistics {
     class Manager;
@@ -53,6 +52,8 @@ class Alignment {
 
 public:
 // BEGIN of Submodules
+
+    class sequencesMatrix;
 
     Cleaner *Cleaning = nullptr;
 

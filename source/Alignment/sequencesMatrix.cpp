@@ -25,14 +25,14 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #include "InternalBenchmarker.h"
-#include "sequencesMatrix.h"
-#include "Alignment.h"
+#include "Alignment/sequencesMatrix.h"
+#include "Alignment/Alignment.h"
 #include "utils.h"
 
-sequencesMatrix::sequencesMatrix(void) {
+Alignment::sequencesMatrix::sequencesMatrix(void) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("sequencesMatrix::sequencesMatrix(void) ");
+	StartTiming("Alignment::sequencesMatrix::sequencesMatrix(void) ");
 
     resNumber = 0;
     seqsNumber = 0;
@@ -42,10 +42,10 @@ sequencesMatrix::sequencesMatrix(void) {
 
 }
 
-sequencesMatrix::sequencesMatrix(Alignment *parent) {
+Alignment::sequencesMatrix::sequencesMatrix(Alignment *parent) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("sequencesMatrix::sequencesMatrix(Alignment *parent) ");
+	StartTiming("Alignment::sequencesMatrix::sequencesMatrix(Alignment *parent) ");
     alig = parent;
     int i, j, k;
 
@@ -73,10 +73,10 @@ sequencesMatrix::sequencesMatrix(Alignment *parent) {
 }
 
 
-sequencesMatrix::sequencesMatrix(string *alignmentMatrix, string *alignmentSeqsName, int sequences, int residues) {
+Alignment::sequencesMatrix::sequencesMatrix(string *alignmentMatrix, string *alignmentSeqsName, int sequences, int residues) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("sequencesMatrix::sequencesMatrix(string *alignmentMatrix, string *alignmentSeqsName, int sequences, int residues) ");
+	StartTiming("Alignment::sequencesMatrix::sequencesMatrix(string *alignmentMatrix, string *alignmentSeqsName, int sequences, int residues) ");
     int i, j, k;
 
     seqsNumber = sequences;
@@ -104,7 +104,7 @@ sequencesMatrix::sequencesMatrix(string *alignmentMatrix, string *alignmentSeqsN
     }
 }
 
-sequencesMatrix &sequencesMatrix::operator=(const sequencesMatrix &old) {
+Alignment::sequencesMatrix &Alignment::sequencesMatrix::operator=(const sequencesMatrix &old) {
     int i, j;
 
     if (this != &old) {
@@ -127,10 +127,10 @@ sequencesMatrix &sequencesMatrix::operator=(const sequencesMatrix &old) {
     return *this;
 }
 
-sequencesMatrix::~sequencesMatrix() {
+Alignment::sequencesMatrix::~sequencesMatrix() {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("sequencesMatrix::~sequencesMatrix(void) ");
+	StartTiming("Alignment::sequencesMatrix::~sequencesMatrix(void) ");
     int i;
 
     if (matrix != nullptr) {
@@ -146,10 +146,10 @@ sequencesMatrix::~sequencesMatrix() {
     seqsName = nullptr;
 }
 
-void sequencesMatrix::printMatrix(void) {
+void Alignment::sequencesMatrix::printMatrix(void) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("void sequencesMatrix::printMatrix(void) ");
+	StartTiming("void Alignment::sequencesMatrix::printMatrix(void) ");
     int i, j, k;
 
     for (i = 0; i < resNumber; i += 20) {
@@ -163,10 +163,10 @@ void sequencesMatrix::printMatrix(void) {
     }
 }
 
-void sequencesMatrix::getColumn(int column, int *columnSeqMatrix) {
+void Alignment::sequencesMatrix::getColumn(int column, int *columnSeqMatrix) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("void sequencesMatrix::getColumn(int column, int *columnSeqMatrix) ");
+	StartTiming("void Alignment::sequencesMatrix::getColumn(int column, int *columnSeqMatrix) ");
     int i;
 
     if (column < resNumber)
@@ -179,10 +179,10 @@ void sequencesMatrix::getColumn(int column, int *columnSeqMatrix) {
 
 }
 
-void sequencesMatrix::getColumn(int value, int row, int *columnSeqMatrix) {
+void Alignment::sequencesMatrix::getColumn(int value, int row, int *columnSeqMatrix) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("void sequencesMatrix::getColumn(int value, int row, int *columnSeqMatrix) ");
+	StartTiming("void Alignment::sequencesMatrix::getColumn(int value, int row, int *columnSeqMatrix) ");
     int i, j;
 
     for (i = 0; i < resNumber; i++)
@@ -197,10 +197,10 @@ void sequencesMatrix::getColumn(int value, int row, int *columnSeqMatrix) {
             columnSeqMatrix[j] = -1;
 }
 
-void sequencesMatrix::setOrder(int *order) {
+void Alignment::sequencesMatrix::setOrder(int *order) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("void sequencesMatrix::setOrder(int *order) ");
+	StartTiming("void Alignment::sequencesMatrix::setOrder(int *order) ");
     int i, j, **resg;
 
     resg = new int *[seqsNumber];
@@ -219,10 +219,10 @@ void sequencesMatrix::setOrder(int *order) {
     delete[] resg;
 }
 
-bool sequencesMatrix::getSequence(string seqName, int *sequence) {
+bool Alignment::sequencesMatrix::getSequence(string seqName, int *sequence) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("bool sequencesMatrix::getSequence(string seqName, int *sequence) ");
+	StartTiming("bool Alignment::sequencesMatrix::getSequence(string seqName, int *sequence) ");
     int i, pos;
 
     for (pos = 0; pos < seqsNumber; pos++)
@@ -238,17 +238,17 @@ bool sequencesMatrix::getSequence(string seqName, int *sequence) {
     return true;
 }
 
-int sequencesMatrix::getSeqNumber(void) {
+int Alignment::sequencesMatrix::getSeqNumber(void) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("int sequencesMatrix::getSeqNumber(void) ");
+	StartTiming("int Alignment::sequencesMatrix::getSeqNumber(void) ");
     return seqsNumber;
 }
 
-int sequencesMatrix::getResidNumber(void) {
+int Alignment::sequencesMatrix::getResidNumber(void) {
 	 // Create a timer that will report times upon its destruction
 	 //	which means the end of the current scope.
-	StartTiming("int sequencesMatrix::getResidNumber(void) ");
+	StartTiming("int Alignment::sequencesMatrix::getResidNumber(void) ");
     return resNumber;
 }
 

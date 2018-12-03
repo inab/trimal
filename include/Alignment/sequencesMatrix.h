@@ -30,11 +30,13 @@
 #include <iostream>
 #include <iomanip>
 
+#include "Alignment/Alignment.h"
+
 using namespace std;
 
-class Alignment;
+// class Alignment;
 
-/** \brief Class that represents a sequences matrix
+/** \brief Internal Alignment Class that represents a sequences matrix
  *
  * A Sequence matrix is a 2D matrix that represents
  *  MSA without any gaps included.\n
@@ -47,7 +49,7 @@ class Alignment;
  * - Statistics::Consistency::compareAndChoose
  * - Statistics::Consistency::forceComparison
  */
-class sequencesMatrix {
+class Alignment::sequencesMatrix {
     /**
      * \brief Number of residues per sequence.
      */
