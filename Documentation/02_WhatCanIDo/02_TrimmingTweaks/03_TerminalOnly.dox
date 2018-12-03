@@ -10,12 +10,7 @@ Considering the Central Block as the best alignment section of an alignment, \n
 due to be the one being built with no gaps, \n 
 we can trim the alignment keeping this Central Block untouched.\n\n
 
-@htmlonly
-<button onclick="myFunction('TerminalOnly')" class="btn btn-danger"><b>Example of use</b></button>
-@endhtmlonly
-
-<div name="TerminalOnly" style="display:none; width: -moz-fit-content">
-<b> %Alignment </b>
+@buttonWithExpandableDiv{ terminalonly, Example of use,
 \verbatim
 >Csa004271
 ---------------------------------MYMAMGHFFDRDDVALKNISEYFKECS
@@ -134,7 +129,7 @@ ESHYLNEQVEAIKKLGDYITNLSRMDAQNNKMAEYLFDKHTLG---
 RGGRIFLQDVKKPERDEWG--SGLEAMQCALQLEKNVNQALLDLHKVASDHKDPHMCDFL
 ETHYLNEQVESIKKIGDHITNLTRMDAHTNKMAEYLFDKHTLG---
 \endverbatim
-</div>
+}
 
 
 **/

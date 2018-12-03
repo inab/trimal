@@ -2,16 +2,12 @@
 
 \subsection MaxIdentity Max Identity
 
-Max Identity allows us to remove sequences with an indentity\n 
+Max Identity allows us to remove sequences with an identity\n 
 bigger than a user-provided threshold. \n 
 
 This removes the sequences that are too similar.
 
-@htmlonly
-<button onclick="myFunction('maxidentity')" class="btn btn-danger"><b> Example of use </b></button>
-@endhtmlonly
-
-<div name="maxidentity" style="display:none; width: -moz-fit-content">
+@buttonWithExpandableDiv{ max-identity, Example of use,
 <b> %Alignment </b>
 \verbatim
 >Sp6
@@ -48,7 +44,6 @@ AAAAAAALLTYLGLFLGTDYENFAAAAANAWLGLEINMMAQI
 -----PTILNIAGLHMETDI-NFSLAWFQAWGGLEINKQAIL
 \endverbatim
 
-
-</div>
+}
 
 **/

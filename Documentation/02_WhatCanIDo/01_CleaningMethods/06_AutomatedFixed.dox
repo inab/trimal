@@ -9,11 +9,8 @@ Automated methods will remove columns based on raw gaps values.\n
 | NoGaps    | Removes any column containing at least, one gap  | bin/trimal -in dataset/example.007.AA.fasta -nogaps           |
 | NoAllGaps | Removes columns containing only gaps             | bin/trimal -in dataset/example.007.AA.fasta -noallgaps        |
 
-@htmlonly
-<button onclick="myFunction('automated-gap')" class="btn btn-danger"><b>Example of use</b></button>
-@endhtmlonly
+@buttonWithExpandableDiv{ automated-gap, Example of use,
 
-<div name="automated-gap" style="display:none; width: -moz-fit-content">
 <b> %Alignment </b> 
 \verbatim
  6 43
@@ -46,7 +43,7 @@ Sp8          GKVIYGIVLGTKSQFSVVWLFPWNGLQIHMMGII
 Sp26         AALLLGLFLGTDYNFAAAAANAWLGLEINMMAQI
 Sp33         PTILAGLHMETDINFSLAWFQAWGGLEINKQAIL
 \endverbatim
-</div>
+}
 
 
 */

@@ -15,19 +15,7 @@ and it will be highlighted.
 The SVG contains a legend of the background on the residues, \n
 and also includes the path of the input alignment.
 
-@htmlonly
-<button onclick="myFunction('htmlout')" class="btn btn-danger"><b>HTML output reporting</b></button>
-@endhtmlonly
+@buttonWithExpandableDiv{ html-out, HTML Output Report, @htmlinclude 03_HTML_out.html }
 
-<div name="htmlout" style="display:none; width: -moz-fit-content">
-@htmlinclude 03_HTML_out.html
-</div>
-
-@htmlonly
-<button onclick="myFunction('svgout')" class="btn btn-danger"><b>SVG output reporting</b></button>
-@endhtmlonly
-
-<div name="svgout" style="display:none; width: -moz-fit-content">
-@htmlinclude 03_SVG_out.html
-</div>
+@buttonWithExpandableDiv{ complementary, SVG Output Report, @htmlinclude 03_SVG_out.html }
 */

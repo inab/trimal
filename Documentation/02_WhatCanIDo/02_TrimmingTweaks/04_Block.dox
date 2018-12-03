@@ -8,11 +8,7 @@ the specified number of residues.\n
 
 This allows us to remove columns that obtained good scores by random chance.
 
-@htmlonly
-<button onclick="myFunction('block_arg')" class="btn btn-danger"><b> Example of use </b></button>
-@endhtmlonly
-
-<div name="block_arg" style="display:none; width: -moz-fit-content">
+@buttonWithExpandableDiv{ block, Example of use,
 <b> %Alignment </b>
 \verbatim
 >Sp6
@@ -61,7 +57,6 @@ FAAAAANAWLGLEINMMAQI
 FSLAWFQAWGGLEINKQAIL
 \endverbatim
 
-
-</div>
+}
 
 **/

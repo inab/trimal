@@ -2090,7 +2090,7 @@ SEARCH_INCLUDES        = YES
 # preprocessor.
 # This tag requires that the tag SEARCH_INCLUDES is set to YES.
 
-INCLUDE_PATH           = 
+INCLUDE_PATH           = ../../include/RawText
 
 # You can use the INCLUDE_FILE_PATTERNS tag to specify one or more wildcard
 # patterns (like *.h and *.hpp) to filter out the header-files in the
@@ -2501,3 +2501,18 @@ GENERATE_LEGEND        = YES
 # This tag requires that the tag HAVE_DOT is set to YES.
 
 DOT_CLEANUP            = YES
+
+
+
+
+
+
+
+
+
+# ALIASES
+ALIASES += buttonexpand{2}="@htmlonly<button onclick=\"myFunction('\1')\" class=\"btn btn-danger\"><b>\2</b></button>@endhtmlonly"
+ALIASES += divexpandableStart{1}="<div name=\"\1\" style=\"display:none; width: -moz-fit-content\">"
+ALIASES += divexpandableEnd="</div>"
+ALIASES += divexpandable{2}="@divexpandableStart{\1} \2 @divexpandableEnd"
+ALIASES += buttonWithExpandableDiv{3}="@buttonexpand{\1, \2} @divexpandable{\1, \3}"

@@ -5,11 +5,9 @@
 Outputs the relationship between residues in the output and input alignment.\n 
 It will output a -1 if the residue was removed, and the original residue position otherwise.
 
-@htmlonly
-<button onclick="myFunction('colnumbering')" class="btn btn-danger"><b> Example of use </b></button>
-@endhtmlonly
+@buttonexpand{ col-numbering, Example of use}
+@divexpandableStart{ col-numbering }
 
-<div name="colnumbering" style="display:none; width: -moz-fit-content">
 <b> %Alignment </b> + "-gt 0 -colnumbering"
 \verbatim 
  6 42
@@ -38,5 +36,6 @@ Sp33         PTILAGLHMETDINFSLAWFQAWGGLEINKQAIL
 #ColumnsMap     -1, -1, -1, -1, -1, 5, 6, 7, 8, -1, -1, 11, 12, 13, 14, 15, 16, 17, 18, 19, -1, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41
 \endverbatim
 
-</div>
+@divexpandableEnd
+
 */

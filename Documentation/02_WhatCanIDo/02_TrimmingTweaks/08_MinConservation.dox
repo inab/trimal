@@ -15,11 +15,7 @@ which is supposed to be better aligned than the terminal ends, and \n
 starts recovering residues in both directions until the desired \n 
 Minimum %Alignment Conservation Threshold has been achieved.
 
-@htmlonly
-<button onclick="myFunction('cons')" class="btn btn-danger"><b> Example of use </b></button>
-@endhtmlonly
-
-<div name="cons" style="display:none; width: -moz-fit-content">
+@buttonWithExpandableDiv{ min-cons, Example of use,
 <b> %Alignment </b>
 \verbatim 
 >CRAB_ANAPL
@@ -134,6 +130,6 @@ QIEEAA----KK
 MDIAIQHPLRRPLFPFPSRIFDNFGEHDPDLFPSFSMLSPYWMAARDTVGQEERLVIVGP
 RVSRVAPQQKKK
 \endverbatim
-</div>
+}
 
 **/

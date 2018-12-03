@@ -10,11 +10,7 @@ among the set. \n
 While Compareset will select the most consistent alignment, it is possible to force it to \n 
 select an specific alignment by using the -forceselect argument.
 
-@htmlonly
-<button onclick="myFunction('compareset')" class="btn btn-danger"><b> Example of use </b></button>
-@endhtmlonly
-
-<div name="compareset" style="display:none; width: -moz-fit-content">
+@buttonWithExpandableDiv{ compareset, Example of use,
 <b> alignments_comparison </b>
 \verbatim 
 example.001.AA.phy
@@ -87,6 +83,6 @@ Sp26         GLFLGTD------NAWLGLEINMMAQI
 Sp33         GLHMETD-FSLAWQAWGGLEINKQAIL
 Sp6          GIYLFTLVISVSWLAWLGLEINMMAII
 \endverbatim
-</div>
+}
 
 **/
