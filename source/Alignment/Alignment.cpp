@@ -33,7 +33,7 @@
 #include "Statistics/Consistency.h"
 #include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
-#include "similarityMatrix.h"
+#include "Statistics/similarityMatrix.h"
 #include "Statistics/Gaps.h"
 #include "Alignment/sequencesMatrix.h"
 #include "reportsystem.h"

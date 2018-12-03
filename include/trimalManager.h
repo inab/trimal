@@ -23,6 +23,7 @@ class similarityMatrix;
 namespace statistics
 {
     class Consistency;
+    class similarityMatrix;
 }
 
 class trimAlManager
@@ -92,7 +93,7 @@ public:
 
     /* Others variables */
     std::ifstream compare;
-    similarityMatrix *similMatrix   = nullptr;
+    statistics::similarityMatrix *similMatrix   = nullptr;
     
     Alignment
         *origAlig                   = nullptr,

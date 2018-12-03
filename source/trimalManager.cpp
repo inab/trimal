@@ -1,11 +1,11 @@
-#include "Statistics/Similarity.h"
+#include "Statistics/similarityMatrix.h"
 #include "Statistics/Consistency.h"
+#include "Statistics/Similarity.h"
 #include "InternalBenchmarker.h"
+#include "Alignment/Alignment.h"
 #include "Statistics/Manager.h"
-#include "similarityMatrix.h"
 #include "trimalManager.h"
 #include "reportsystem.h"
-#include "Alignment/Alignment.h"
 #include "VCFHandler.h"
 #include "Cleaner.h"
 #include "defines.h"
@@ -1583,7 +1583,7 @@ inline bool trimAlManager::create_or_use_similarity_matrix() {
     //	which means the end of the current scope.
     StartTiming("inline bool trimAlManager::create_or_use_similarity_matrix() ");
     if ((strict) || (strictplus) || (automated1) || (similarityThreshold != -1.0) || (ssc == 1) || (sst == 1)) {
-        similMatrix = new similarityMatrix();
+        similMatrix = new statistics::similarityMatrix();
 
     // Load Matrix
         if (matrixFile != nullptr)
