@@ -7,7 +7,7 @@
 #include <cstring>
 #include <iomanip>
 
-int parseArguments(int argc, char *argv[], FormatManager* machine, std::vector<std::string>* inFiles, std::vector<std::string>* outFormats, std::string* outPattern)
+int parseArguments(int argc, char *argv[], FormatHandling::FormatManager* machine, std::vector<std::string>* inFiles, std::vector<std::string>* outFormats, std::string* outPattern)
 {
     if (argc == 1) return -1;
     for(int i = 1; i < argc; i++ )
@@ -186,7 +186,7 @@ int parseArguments(int argc, char *argv[], FormatManager* machine, std::vector<s
     return 0;
 }
 
-int checkArguments(FormatManager* machine, std::vector<std::string>* inFiles, std::vector<std::string>* outFormats, std::string* outPattern)
+int checkArguments(FormatHandling::FormatManager* machine, std::vector<std::string>* inFiles, std::vector<std::string>* outFormats, std::string* outPattern)
 {
     int returnValue = 0;
     if (inFiles->size() == 0)
@@ -236,7 +236,7 @@ void menu()
 //     << "\t--version            Show readAl version.\n\n"
 
     << "\t-in <inputfiles>      Input files in several formats. Separated by spaces.\n"
-    << "\t                      Available formats are: " << FormatManager().getInputFormatsAvailable() << "\n" 
+    << "\t                      Available formats are: " << FormatHandling::FormatManager().getInputFormatsAvailable() << "\n" 
     << "\t-out <pattern>        Output file name pattern (default STDOUT).\n"
     << "\t                      It will replace optional the tags [in]        -> Original filename without extension.\n"
     << "\t                                                        [format]    -> Output's format name\n"
@@ -244,7 +244,7 @@ void menu()
     << "\n"
     
     << "\t-formats             Formats you want the output to be converted to.\n"
-    << "\t                     Available formats are: " << FormatManager().getOutputFormatsAvailable() << "\n" 
+    << "\t                     Available formats are: " << FormatHandling::FormatManager().getOutputFormatsAvailable() << "\n" 
     << "\t                     Being the HTML format not a format itself, but a colored report of the alignment files.\n\n"
     << "\t-format              Print information about input file format "
     << "and if sequences are aligned or not.\n"
@@ -325,7 +325,7 @@ void menu()
 
 int main(int argc, char *argv[])
 {
-    FormatManager MachineState = FormatManager();
+    FormatHandling::FormatManager MachineState = FormatHandling::FormatManager();
     
     std::vector<std::string> outFormats = std::vector<std::string>();
     std::vector<std::string> inFiles  = std::vector<std::string>();

@@ -72,7 +72,7 @@ namespace statistics {
          *      It also stores the current instance of statisticsConsistency into the consistent alignment.
          *      This allows us to use this information to trim, or represent it on the HTML/SVG reports.
         */
-        void perform(char *comparesetFilePath, FormatManager &formatManager, trimAlManager &manager, char *forceFile);
+        void perform(char *comparesetFilePath, FormatHandling::FormatManager &formatManager, trimAlManager &manager, char *forceFile);
 
         /**
          * \brief Print the consistency value for each column from the selected alignment.

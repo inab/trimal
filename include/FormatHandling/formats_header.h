@@ -25,6 +25,7 @@
 
 #include "FormatHandling/FormatManager.h"
 
+namespace FormatHandling {
 FormatManager::FormatManager()
 {
 	addState(new clustal_state(this));
@@ -43,3 +44,4 @@ FormatManager::FormatManager()
 	addState(new phylip_paml_state(this));
 	addState(new pir_state(this));
 };
+}

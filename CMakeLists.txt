@@ -138,6 +138,7 @@ file(APPEND include/FormatHandling/formats_header.h
 "
 #include \"FormatHandling/FormatManager.h\"
 
+namespace FormatHandling {
 FormatManager::FormatManager()
 {
 ")
@@ -150,6 +151,6 @@ foreach(header_path ${stateheaders})
 endforeach()
 
 # Finish constructor method
-file(APPEND include/FormatHandling/formats_header.h "};")
+file(APPEND include/FormatHandling/formats_header.h "};\n}")
 
 # End header Creation

@@ -4,6 +4,7 @@
 #include "defines.h"
 #include "utils.h"
 
+namespace FormatHandling {
 int clustal_state::CheckAlignment(std::istream* origin)
 {
     origin->seekg(0);
@@ -283,3 +284,4 @@ bool clustal_state::RecognizeOutputFormat(std::string& FormatName)
     return FormatName == "clustal";
 }
 
+}

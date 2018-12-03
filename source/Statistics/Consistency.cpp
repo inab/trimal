@@ -40,7 +40,7 @@ namespace statistics {
 
 
     void Consistency::perform(char *comparesetFilePath,
-                                        FormatManager &formatManager,
+                                        FormatHandling::FormatManager &formatManager,
                                         trimAlManager &manager,
                                         char *forceFile) {
 

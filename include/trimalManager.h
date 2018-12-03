@@ -244,7 +244,7 @@ private: // General, private, methods
 
 
 private:
-    FormatManager formatManager;
+    FormatHandling::FormatManager formatManager;
 };
 
 

@@ -2,7 +2,7 @@
 #define CLUSTALSTATE_H
 
 #include "BaseFormatHandler.h"
-
+namespace FormatHandling {
 class clustal_state : public BaseFormatHandler {
 public:
 
@@ -23,5 +23,6 @@ public:
     bool RecognizeOutputFormat(std::string& FormatName) override;
 
 };
+}
 
 #endif // CLUSTALSTATE_H

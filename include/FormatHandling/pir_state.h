@@ -3,6 +3,7 @@
 
 #include "BaseFormatHandler.h"
 
+namespace FormatHandling {
 class pir_state : public BaseFormatHandler {
 public:
 
@@ -23,5 +24,6 @@ public:
     bool RecognizeOutputFormat(std::string& FormatName) override;
 
 };
+}
 
 #endif // PIRSTATE_H

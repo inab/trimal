@@ -5,6 +5,8 @@
 #include "Alignment.h"
 #include "utils.h"
 
+
+namespace FormatHandling {
 FormatManager::~FormatManager()
 {
     for(BaseFormatHandler* child : available_states) {
@@ -12,7 +14,7 @@ FormatManager::~FormatManager()
     }
 }
 
-void FormatManager::addState(BaseFormatHandler* newState)
+void FormatManager::addState(FormatHandling::BaseFormatHandler* newState)
 {
     this -> available_states.push_back(newState);
 }
@@ -376,4 +378,5 @@ std::vector<Alignment*> FormatManager::splitAlignmentKeeping(Alignment& alignmen
     }
 
     return splitted;
+}
 }

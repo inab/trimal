@@ -4,6 +4,7 @@
 #include "defines.h"
 #include "utils.h"
 
+namespace FormatHandling {
 int mega_sequential_state::CheckAlignment(std::istream* origin)
 {
     origin->seekg(0);
@@ -330,4 +331,5 @@ bool mega_sequential_state::RecognizeOutputFormat(std::string& FormatName)
 {
     if (BaseFormatHandler::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "mega";
+}
 }

@@ -4,6 +4,7 @@
 #include "defines.h"
 #include "utils.h"
 
+namespace FormatHandling {
 int pir_state::CheckAlignment(std::istream *origin) {
     char *line;
     origin->seekg(0);
@@ -221,3 +222,4 @@ bool pir_state::RecognizeOutputFormat(std::string& FormatName) {
            FormatName == "PIR" || FormatName == "NBRF";
 }
 
+}

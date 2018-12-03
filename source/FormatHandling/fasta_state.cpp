@@ -4,6 +4,7 @@
 #include "defines.h"
 #include "utils.h"
 
+namespace FormatHandling {
 int fasta_state::CheckAlignment(std::istream* origin)
 {
     char c;
@@ -197,4 +198,5 @@ bool fasta_state::RecognizeOutputFormat(std::string& FormatName)
 {
     if (BaseFormatHandler::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "fasta";
+}
 }

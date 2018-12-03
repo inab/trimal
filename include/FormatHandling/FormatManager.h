@@ -12,6 +12,16 @@
 #include <array>
 
 class Alignment;
+
+/**
+ * \brief Namespace that encapsulates all logic referent to Load, Save and Recognize \n 
+ * Multiple Sequence Alignments formats.\n
+ * \n
+ * It contains the \link FormatManager Format Manager \endlink ,\nclass that serves as a wrapper for \link BaseFormatHandler Base Format Handler \endlink and its subclasses. \n
+ * It also contains the \link BaseFormatHandler Base Format Handler \endlink and all it's formats.
+ */
+namespace FormatHandling {
+
 class BaseFormatHandler;
 
 /**
@@ -44,7 +54,7 @@ To be able to be automatically recognized, the new state should:\n
        -# Name must end with '_state'\n
        -# Be placed on ReadWriteMS folder\n
      */
-    std::vector<BaseFormatHandler*> available_states;
+    std::vector<FormatHandling::BaseFormatHandler*> available_states;
     /**
      \brief Function that adds a newState to the
              \link FormatManager::available_states \endlink vector.\n
@@ -134,6 +144,6 @@ public:
              so the original alignment can be deleted after being splitted*/
     std::vector<Alignment*> splitAlignmentKeeping(Alignment& alignment);
 };
-
+}
 
 #endif // READWRITEMS_H

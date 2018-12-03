@@ -4,6 +4,7 @@
 #include "defines.h"
 #include "utils.h"
 
+namespace FormatHandling {
 int htmlreport_state::CheckAlignment(std::istream* origin)
 {
     return 0;
@@ -101,4 +102,5 @@ bool htmlreport_state::RecognizeOutputFormat(std::string& FormatName)
     return FormatName == "html" ||
            FormatName == "HTML" ||
            FormatName == "htmlreport";
+}
 }

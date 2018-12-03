@@ -4,6 +4,7 @@
 #include "defines.h"
 #include "utils.h"
 
+namespace FormatHandling {
 int mega_interleaved_state::CheckAlignment(std::istream* origin)
 {
     origin->seekg(0);
@@ -245,4 +246,5 @@ bool mega_interleaved_state::SaveAlignment(Alignment* alignment, std::ostream* o
 bool mega_interleaved_state::RecognizeOutputFormat(std::string& FormatName)
 {
     return false;
+}
 }

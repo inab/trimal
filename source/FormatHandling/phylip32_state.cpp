@@ -4,6 +4,7 @@
 #include "defines.h"
 #include "utils.h"
 
+namespace FormatHandling {
 int phylip32_state::CheckAlignment(std::istream* origin)
 {
     origin->seekg(0);
@@ -293,3 +294,4 @@ bool phylip32_state::RecognizeOutputFormat(std::string& FormatName)
     return FormatName == "phylip32";
 }
 
+}

@@ -4,6 +4,7 @@
 #include "defines.h"
 #include "utils.h"
 
+namespace FormatHandling {
 int fasta_m10_state::CheckAlignment(std::istream* origin)
 {
     return 0;
@@ -97,4 +98,5 @@ bool fasta_m10_state::RecognizeOutputFormat(std::string& FormatName)
 {
     if (BaseFormatHandler::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "fasta_m10";
+}
 }

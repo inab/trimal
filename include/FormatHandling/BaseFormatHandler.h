@@ -6,6 +6,7 @@
 
 #include <iomanip>
 
+namespace FormatHandling {
 class FormatManager;
 
 /**
@@ -91,7 +92,8 @@ protected:
      \brief Pointer to the \link FormatManager \endlink
      that contains and manages this state
      */
-    FormatManager *Machine;
+    FormatHandling::FormatManager *Machine;
 };
+}
 
 #endif // READWRITES_H

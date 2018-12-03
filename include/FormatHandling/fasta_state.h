@@ -3,6 +3,7 @@
 
 #include "BaseFormatHandler.h"
 
+namespace FormatHandling {
 class fasta_state : public BaseFormatHandler {
 public:
 
@@ -23,5 +24,5 @@ public:
     bool RecognizeOutputFormat(std::string& FormatName) override;
 
 };
-
+}
 #endif // FASTASTATE_H
