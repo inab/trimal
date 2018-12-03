@@ -87,8 +87,6 @@
     <memberdef>
       <inlineclasses title=""/>
       <typedefs title=""/>
-      <sequences title=""/>
-      <dictionaries title=""/>
       <enums title=""/>
       <functions title=""/>
       <variables title=""/>
@@ -112,8 +110,6 @@
       <constantgroups visible="yes" title=""/>
       <defines title=""/>
       <typedefs title=""/>
-      <sequences title=""/>
-      <dictionaries title=""/>
       <enums title=""/>
       <functions title=""/>
       <variables title=""/>
@@ -124,8 +120,6 @@
       <inlineclasses title=""/>
       <defines title=""/>
       <typedefs title=""/>
-      <sequences title=""/>
-      <dictionaries title=""/>
       <enums title=""/>
       <functions title=""/>
       <variables title=""/>
@@ -145,8 +139,6 @@
       <classes visible="yes" title=""/>
       <defines title=""/>
       <typedefs title=""/>
-      <sequences title=""/>
-      <dictionaries title=""/>
       <enums title=""/>
       <enumvalues title=""/>
       <functions title=""/>
@@ -166,8 +158,6 @@
       <inlineclasses title=""/>
       <defines title=""/>
       <typedefs title=""/>
-      <sequences title=""/>
-      <dictionaries title=""/>
       <enums title=""/>
       <enumvalues title=""/>
       <functions title=""/>

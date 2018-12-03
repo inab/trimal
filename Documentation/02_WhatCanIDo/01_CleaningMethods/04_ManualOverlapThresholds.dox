@@ -5,12 +5,12 @@
 Manual Overlap method allow the user to provide a minimum threshold for similarity to keep a sequence or residue/column. \n
 Both arguments, sequence and residue overlap, are mutually dependent, so, if any is set, the other one must be set, too.
 
-| Overlap Level | Command line argument     |
-|---------------|---------------------------|
-| Sequence      | -seqoverlap <n> [0-100]   | 
-| Residue       | -resoverlap <n> [0-1]     |
+| Overlap Level | Command line argument      |
+|---------------|----------------------------|
+| Sequence      | -seqoverlap \<n> [0-100]   | 
+| Residue       | -resoverlap \<n> [0-1]     |
 
-<b>Example of use</b>\n
+<b>Example of use</b> \n
 As sequence and residue arguments are mutually dependent, the example is provided combined:
 \verbatim 
  

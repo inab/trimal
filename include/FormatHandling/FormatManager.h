@@ -17,7 +17,7 @@ class Alignment;
  * \brief Namespace that encapsulates all logic referent to Load, Save and Recognize \n 
  * Multiple Sequence Alignments formats.\n
  * \n
- * It contains the \link FormatManager Format Manager \endlink ,\nclass that serves as a wrapper for \link BaseFormatHandler Base Format Handler \endlink and its subclasses. \n
+ * It contains the \link FormatManager Format Manager \endlink ,\n class that serves as a wrapper for \link BaseFormatHandler Base Format Handler \endlink and its subclasses. \n
  * It also contains the \link BaseFormatHandler Base Format Handler \endlink and all it's formats.
  */
 namespace FormatHandling {
