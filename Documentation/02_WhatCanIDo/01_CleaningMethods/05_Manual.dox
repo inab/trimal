@@ -16,7 +16,8 @@ Manual methods allow the user to provide a pattern to remove residues or sequenc
 <div name="manual-pattern" style="display:none; width: -moz-fit-content">
 
 
-The user must provide a pattern to the arguments. This pattern is a set of comma separated values:
+The user must provide a pattern after the argument.\n 
+This pattern is a set of comma separated values:
 \verbatim
  
  bin/trimal -in dataset/example.007.AA.fasta -selectseqs { 0,1,2,3,4 } 
