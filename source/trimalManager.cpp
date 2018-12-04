@@ -844,7 +844,7 @@ inline bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {
 
         if (selectSeqs)
 
-            for (int i = 0; i < delSequences[0]; i++)
+            for (int i = 0; i <= delSequences[0]; i++)
             {
                 if (delSequences[i] >= origAlig->getNumSpecies()) {
                     debug.report(ErrorCode::SelectOnlyAccepts,
@@ -1765,7 +1765,7 @@ inline void trimAlManager::CleanResiduesNonAuto() {
     StartTiming("inline void trimAlManager::CleanResiduesNonAuto() ");
 
     if (delColumns != nullptr) {
-        for (int i = 0 ; i < delColumns[0]; i++)
+        for (int i = 0 ; i <= delColumns[0]; i++)
         {
             if (delColumns[i] >= singleAlig->getNumAminos()) {
                 debug.report(
