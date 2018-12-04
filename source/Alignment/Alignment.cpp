@@ -176,7 +176,7 @@ Alignment *Alignment::getTranslationCDS(Alignment *ProtAlig) {
 
     // Map the selected protein sequences to the input
     // coding sequences
-    mappedSeqs = new int[ProtAlig->numberOfSequences];
+    mappedSeqs = new int[ProtAlig->originalNumberOfSequences];
 
     for (x = 0; x < ProtAlig->originalNumberOfSequences; x++) {
         for (y = 0; y < originalNumberOfSequences; y++) {
@@ -187,9 +187,9 @@ Alignment *Alignment::getTranslationCDS(Alignment *ProtAlig) {
         }
     }
 
-    newAlig->sequences = new std::string[ProtAlig->numberOfSequences];
-    newAlig->seqsInfo = new std::string[ProtAlig->numberOfSequences];
-    newAlig->seqsName = new std::string[ProtAlig->numberOfSequences];
+    newAlig->sequences = new std::string[ProtAlig->originalNumberOfSequences];
+    newAlig->seqsInfo = new std::string[ProtAlig->originalNumberOfSequences];
+    newAlig->seqsName = new std::string[ProtAlig->originalNumberOfSequences];
     newAlig->SeqRef = new int(1);
 
     for (x = 0; x < ProtAlig->originalNumberOfSequences; x++) {
