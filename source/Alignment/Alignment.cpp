@@ -190,17 +190,15 @@ Alignment *Alignment::getTranslationCDS(Alignment *ProtAlig) {
     newAlig->sequences = new std::string[ProtAlig->originalNumberOfSequences];
     newAlig->seqsInfo = new std::string[ProtAlig->originalNumberOfSequences];
     newAlig->seqsName = new std::string[ProtAlig->originalNumberOfSequences];
-    newAlig->SeqRef = new int(1);
 
     for (x = 0; x < ProtAlig->originalNumberOfSequences; x++) {
 
-        newAlig->sequences[x] = *new std::string[ProtAlig->sequences[x].size()];
+        newAlig->sequences[x] = std::string();
         std::string &current = newAlig->sequences[x];
 
         if (ProtAlig->seqsInfo != nullptr)
-            newAlig->seqsInfo[x] = *new std::string(ProtAlig->seqsInfo[x]);
-        newAlig->seqsName[x] = *new std::string(ProtAlig->seqsName[x]);
-
+            newAlig->seqsInfo[x] = std::string(ProtAlig->seqsInfo[x]);
+        newAlig->seqsName[x] = std::string(ProtAlig->seqsName[x]);
 
         for (y = 0, counter = 0; y < ProtAlig->sequences[x].size(); y++) {
             if (ProtAlig->saveResidues[y] == -1) {
@@ -221,25 +219,23 @@ Alignment *Alignment::getTranslationCDS(Alignment *ProtAlig) {
         current.shrink_to_fit();
     }
 
-    newAlig->saveSequences = new int[ProtAlig->numberOfSequences];
+    newAlig->saveSequences = new int[ProtAlig->originalNumberOfSequences];
     std::copy(
             ProtAlig->saveSequences,
             ProtAlig->saveSequences + ProtAlig->originalNumberOfSequences,
             newAlig->saveSequences);
 
-    newAlig->saveResidues = new int[ProtAlig->numberOfResidues * 3];
+    newAlig->saveResidues = new int[ProtAlig->originalNumberOfResidues * 3];
     for (int i = 0; i < counter; i++)
     {
         newAlig->saveResidues[i] = i;
     }
 
     newAlig->numberOfSequences          = ProtAlig->numberOfSequences;
-    newAlig->originalNumberOfSequences  = ProtAlig->numberOfSequences;
+    newAlig->originalNumberOfSequences  = ProtAlig->originalNumberOfSequences;
 
     newAlig->numberOfResidues           = counter;
-    newAlig->originalNumberOfResidues   = counter;
-
-    newAlig->SeqRef = new int(1);
+    newAlig->originalNumberOfResidues   = ProtAlig->originalNumberOfResidues * 3;
 
     delete[] mappedSeqs;
 
@@ -524,6 +520,13 @@ void Alignment::fillNewDataStructure(string *newMatrix, string *newNames) {
     }
 }
 */
+
+#define deletePrepareCodingVariables() { \
+delete [] protSeqsNames; protSeqsNames = nullptr; \
+delete [] protSequences; protSequences = nullptr; \
+delete [] protSeqsLengths; protSeqsLengths = nullptr; \
+}
+
 bool Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, Alignment *proteinAlig) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
@@ -570,6 +573,7 @@ bool Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, 
             if (!warning)
                 cerr << endl;
             debug.report(ErrorCode::SequenceContainsGap, new std::string[1]{seqsName[i]});
+            deletePrepareCodingVariables()
             return false;
         }
 
@@ -621,6 +625,7 @@ bool Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, 
                     // Otherwise, warn about it and return an error
                 else {
                     debug.report(ErrorCode::SequenceHasStopCodon, new std::string[5]{seqsName[i], "TGA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
+                    deletePrepareCodingVariables()
                     return false;
                 }
             }
@@ -655,6 +660,7 @@ bool Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, 
                     // Otherwise, warn about it and return an error
                 else {
                     debug.report(ErrorCode::SequenceHasStopCodon, new std::string[5]{seqsName[i], "TAA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
+                    deletePrepareCodingVariables()
                     return false;
                 }
             }
@@ -689,6 +695,7 @@ bool Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, 
                     // Otherwise, warn about it and return an error
                 else {
                     debug.report(ErrorCode::SequenceHasStopCodon, new std::string[5]{seqsName[i], "TAG", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
+                    deletePrepareCodingVariables()
                     return false;
                 }
             }
@@ -696,6 +703,7 @@ bool Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, 
         } while (found != string::npos);
     }
 
+    deletePrepareCodingVariables()
     // If everything was return an OK to informat about it.
     return true;
 }

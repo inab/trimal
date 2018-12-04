@@ -1296,10 +1296,12 @@ inline bool trimAlManager::check_backtranslation_infile_names_correspondence() {
                 3
         )) {
             appearErrors = true;
-            return true;
         }
     }
-    return false;
+    delete [] sequencesNames;
+    delete [] sequencesLengths;
+
+    return appearErrors;
 }
 
 inline void trimAlManager::check_compareset_window_argument() {
@@ -1855,8 +1857,13 @@ inline void trimAlManager::delete_variables() {
     //	which means the end of the current scope.
     StartTiming("inline void trimAlManager::delete_variables() ");
 
+    if (tempAlig == origAlig || tempAlig == singleAlig)
+        tempAlig = nullptr;
     if (singleAlig == origAlig)
         singleAlig = nullptr;
+
+    delete tempAlig;
+    tempAlig = nullptr;
 
     delete singleAlig;
     singleAlig = nullptr;
