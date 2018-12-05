@@ -463,20 +463,55 @@ inline bool trimAlManager::conservation_threshold_argument(const int *argc, char
     return false;
 }
 
-inline bool trimAlManager::select_cols_argument(const int *argc, char *argv[], int *i) {
+inline bool trimAlManager::select_cols_argument(const int *argc, char *argv[], int *i)
+{
 
-    if (!strcmp(argv[*i], "-selectcols") &&
-        !selectCols &&
-        (*i + 3) < *argc &&
-        !strcmp(argv[++(*i)], "{") &&
-        !strcmp(argv[(*i) + 2], "}")) {
-        if ((delColumns = utils::readNumbers(argv[++(*i)])) == nullptr) {
-            debug.report(ErrorCode::SelectColsNotRecognized);
-            appearErrors = true;
-        } else selectCols = true;
-        (*i)++;
+    if (!strcmp(argv[*i], "-selectcols") && !selectCols) {
+        if ((*i + 3) < *argc && !strcmp(argv[++(*i)], "{") && !strcmp(argv[(*i) + 2], "}"))
+        {
+            if ((delColumns = utils::readNumbers(argv[++(*i)])) == nullptr) {
+                debug.report(ErrorCode::SelectColsNotRecognized);
+                appearErrors = true;
+            } else selectCols = true;
+            (*i)++;
 
-        return true;
+            return true;
+        }
+        else
+        {
+            (*i)++;
+            size_t pos;
+            bool left = false, right = false;
+            if (argv[(*i)][0] == '{')
+            {
+                argv[(*i)]++;
+                left = true;
+            }
+            if (argv[(*i)][strlen(argv[(*i)]) - 1 ] == '}')
+            {
+                right = true;
+                pos = strlen(argv[(*i)]) - 1;
+                argv[(*i)][pos] = '\0';
+            }
+
+            if ((delColumns = utils::readNumbers(argv[(*i)])) == nullptr) {
+                debug.report(ErrorCode::SelectColsNotRecognized);
+                appearErrors = true;
+            } else selectCols = true;
+
+            if (right)
+            {
+                pos = strlen(argv[(*i)]);
+                argv[(*i)][pos] = '}';
+            }
+            if (left)
+            {
+                argv[(*i)]--;
+            }
+
+            (*i)++;
+            return true;
+        }
     }
     return false;
 }
@@ -580,13 +615,51 @@ inline bool trimAlManager::sequence_overlap_argument(const int *argc, char *argv
 }
 
 inline bool trimAlManager::seqs_select_argument(const int *argc, char *argv[], int *i) {
-    if ((!strcmp(argv[*i], "-selectseqs")) && !selectSeqs && ((*i + 3) < *argc) && (!strcmp(argv[++*i], "{")) && (!strcmp(argv[*i + 2], "}"))) {
-        if ((delSequences = utils::readNumbers(argv[++*i])) == nullptr) {
-            debug.report(ErrorCode::SelectSeqsNotRecognized);
-            appearErrors = true;
-        } else selectSeqs = true;
-        (*i)++;
-        return true;
+    if (!strcmp(argv[*i], "-selectseqs") && !selectSeqs)
+    {
+        if ((*i + 3) < *argc && (!strcmp(argv[++*i], "{")) && (!strcmp(argv[*i + 2], "}"))) {
+            if ((delSequences = utils::readNumbers(argv[++*i])) == nullptr) {
+                debug.report(ErrorCode::SelectSeqsNotRecognized);
+                appearErrors = true;
+            } else selectSeqs = true;
+            (*i)++;
+            return true;
+        }
+        else
+        {
+            (*i)++;
+            size_t pos;
+            bool left = false, right = false;
+            if (argv[(*i)][0] == '{')
+            {
+                argv[(*i)]++;
+                left = true;
+            }
+            if (argv[(*i)][strlen(argv[(*i)]) - 1 ] == '}')
+            {
+                right = true;
+                pos = strlen(argv[(*i)]) - 1;
+                argv[(*i)][pos] = '\0';
+            }
+
+            if ((delSequences = utils::readNumbers(argv[(*i)])) == nullptr) {
+                debug.report(ErrorCode::SelectColsNotRecognized);
+                appearErrors = true;
+            } else selectCols = true;
+
+            if (right)
+            {
+                pos = strlen(argv[(*i)]);
+                argv[(*i)][pos] = '}';
+            }
+            if (left)
+            {
+                argv[(*i)]--;
+            }
+
+            (*i)++;
+            return true;
+        }
     }
     return false;
 }
