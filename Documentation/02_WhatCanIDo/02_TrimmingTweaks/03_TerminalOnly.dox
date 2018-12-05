@@ -11,6 +11,7 @@ due to be the one being built with no gaps, \n
 we can trim the alignment keeping this Central Block untouched.\n\n
 
 @buttonWithExpandableDiv{ terminalonly, Example of use,
+\boldVerbatim{ > trimal -in alignment.fasta }
 \verbatim
 >Csa004271
 ---------------------------------MYMAMGHFFDRDDVALKNISEYFKECS
@@ -58,8 +59,9 @@ HEEKEHADKLLSFQNKRGGRIFLQDVKKPERDEWG--SGLEAMQCALQLEKNVNQALLDL
 HKVASDHKDPHMCDFLETHYLNEQVESIKKIGDHITNLTRMDAHTNKMAEYLFDKHTLGS
 KS---
 \endverbatim
+\n
 
-<b> %Alignment </b> + "-gt 0.9"
+\boldVerbatim{ > trimal -in alignment.fasta -gt 0.9 }
 \verbatim
 >Csa004271
 -----------------YMFRDDALFSEEEAKNRGGPNFAALLVNLLLHDPDFELEQVKD
@@ -89,8 +91,9 @@ NLELFDKH---
 ---SQRQNDEAANNEAYYMFRDDALFSEEEAKNRGGP--AALLVNLLLHDPDFELEQVKD
 NLELFDKH---
 \endverbatim
+\n
 
-<b> %Alignment </b> + "-gt 0.9 -terminalony"
+\boldVerbatim{ > trimal -in alignment.fasta -gt 0.9 -terminalonly }
 \verbatim
 >Csa004271
 -----------------MYMAMGHFFDRDDVALKNISEYFKECSEEEREHANKMIEFHNK

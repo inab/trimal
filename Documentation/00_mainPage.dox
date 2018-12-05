@@ -1,11 +1,11 @@
 /*! \mainpage trimAl Main Page
 
 @htmlonly
-<a class="badge-align" href="https://www.codacy.com/app/vicfernrod/trimal?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Vicfero/trimal&amp;utm_campaign=Badge_Grade">
+<a class="badge-align" href="https://www.codacy.com/app/vicfernrod/trimal?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Vicfero/trimal&amp;utm_campaign=Badge_Grade" target="_blank" >
     <img src="https://api.codacy.com/project/badge/Grade/ba6b9c6a765b4383988cb14a847d9127"/>
 </a>
 
-<a class="badge-align" href="https://github.com/Vicfero/trimal">
+<a class="badge-align" href="https://github.com/scapella/trimal" target="_blank" >
     <img src="https://img.shields.io/badge/ -Github-lightgrey.svg?logo=github&logoColor=white"/>
 </a>
 @endhtmlonly
@@ -68,6 +68,9 @@ The simplest way to compile this package is:
 <a href= "http://trimal.cgenomics.org/_media/otherbenchs.b.pdf">    - Other benchmarks </a> \n
     
 \section usage_sec Usage
+
+For a more detailed description and use of each argument, please, refer to \link whatcanido What Can I Do With trimAl? \endlink
+
 \verbatim
 trimAl 1.4.rev22 build[2015-05-21].
 2009-2015. Salvador Capella-Gutierrez and Toni Gabaldón.

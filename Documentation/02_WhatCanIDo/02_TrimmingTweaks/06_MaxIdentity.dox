@@ -8,7 +8,7 @@ bigger than a user-provided threshold. \n
 This removes the sequences that are too similar.
 
 @buttonWithExpandableDiv{ max-identity, Example of use,
-<b> %Alignment </b>
+\boldVerbatim{ > trimal -in alignment.fasta }
 \verbatim
 >Sp6
 ---ASGAILT-LGIYLFTLCAVISVSWYLAWLGLEINMMAII
@@ -24,7 +24,7 @@ AAAAAAALLTYLGLFLGTDYENFAAAAANAWLGLEINMMAQI
 -----PTILNIAGLHMETDI-NFSLAWFQAWGGLEINKQAIL
 \endverbatim
 
-<b> %Alignment </b> + "-maxidentity 0.3"
+\boldVerbatim{ > trimal -in alignment.fasta -maxidentity 0.3 }
 \verbatim
 >Sp8
 ---GLGKVIV-YGIVLGTKSDQFSVVWLFPWNGLQIHMMGII
@@ -32,7 +32,7 @@ AAAAAAALLTYLGLFLGTDYENFAAAAANAWLGLEINMMAQI
 AAAAAAALLTYLGLFLGTDYENFAAAAANAWLGLEINMMAQI
 \endverbatim
 
-<b> %Alignment </b> + "-maxidentity 0.4"
+\boldVerbatim{ > trimal -in alignment.fasta -maxidentity 0.4 }
 \verbatim
 >Sp17
 FAYTAPDLL-LIGFLLKTVA-TFGDTWFQLWQGLDLNKMPVF

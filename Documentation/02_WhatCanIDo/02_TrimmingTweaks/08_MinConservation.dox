@@ -16,7 +16,7 @@ starts recovering residues in both directions until the desired \n
 Minimum %Alignment Conservation Threshold has been achieved.
 
 @buttonWithExpandableDiv{ min-cons, Example of use,
-<b> %Alignment </b>
+\boldVerbatim{ > trimal -in alignment.fasta }
 \verbatim 
 >CRAB_ANAPL
 MDITIHNPLIRRPLFSWLAPSRIFDQIFGEHLQESELLPASPSLSPFLMRSPIFRMPSWL
@@ -55,8 +55,9 @@ MDIAIQHPWLRRPLFPSSIFPSRIFDQNFGEHFDPDLFPSFSSMLSPFYWRMGAPMARMP
 SWAQTGLSELRLDKDKFAIHLDVKHFTPEELRVKILGDFIEVQAQHEERQDEHGYVSREF
 HRKYKVPAGVDPLVITCSLSADGVLTITGPRKVADVPERSVPISRDEKPAVAG
 \endverbatim
+\n
 
-<b> %Alignment </b> + "-st 0.8"
+\boldVerbatim{ > trimal -in alignment.fasta -st 0.8 }
 \verbatim 
 >CRAB_ANAPL
 MDIIPRRPFLS--
@@ -77,8 +78,9 @@ MDIIPRRPFLS-K
 >CRAB_SQUAC
 MDIIPRRPFLSKK
 \endverbatim
+\n
 
-<b> %Alignment </b> + "-st 0.8 -cons 10"
+\boldVerbatim{ > trimal -in alignment.fasta -st 0.8 -cons 10 }
 \verbatim 
 >CRAB_ANAPL
 MDIIPIRRPFELSLE---
@@ -99,8 +101,9 @@ MDIIPIRRPFELSLE-KK
 >CRAB_SQUAC
 MDIIPLRRPFDLSMQKKK
 \endverbatim
+\n
 
-<b> %Alignment </b> + "-st 0.8 -cons 40"
+\boldVerbatim{ > trimal -in alignment.fasta -st 0.8 -cons 40 }
 \verbatim 
 >CRAB_ANAPL
 MDITIHNPIRRPLFSPSRIFDQFGEHLESELLPASSLSPFMRPFPKKELVEQDETSSVKQ

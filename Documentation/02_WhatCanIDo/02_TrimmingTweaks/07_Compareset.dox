@@ -10,15 +10,18 @@ among the set. \n
 While Compareset will select the most consistent alignment, it is possible to force it to \n 
 select an specific alignment by using the -forceselect argument.
 
+When an output file is provided, a summary of the compareset results is provided.
+
 @buttonWithExpandableDiv{ compareset, Example of use,
-<b> alignments_comparison </b>
+\boldVerbatim{ > cat alignments_comparison }
 \verbatim 
 example.001.AA.phy
 example.002.AA.phy
 example.003.AA.phy
 \endverbatim
+\n 
 
-<b> %Alignment example.001.AA.phy </b>
+\boldVerbatim{ > trimal -in alignment.001.phy }
 \verbatim 
  6 60
 Sp8          ----------GLGKV---IVY-GIVLGTKS-DQFSNWVVWL-----FPWNGLQIHMMGII
@@ -28,8 +31,9 @@ Sp26         AAAAAAAA----ALL---TYL-GLFLGTDY-----EN---FAAAAANAWLGLEINMMAQI
 Sp33         -----------PTIL---NIA-GLHMETDI-N-FS--LAWF-----QAWGGLEINKQAIL
 Sp6          ----------ASGAI---LTL-GIYLFTLC-AVIS--VSWY-----LAWLGLEINMMAII
 \endverbatim
+\n
 
-<b> %Alignment example.002.AA.phy </b>
+\boldVerbatim{ > trimal -in alignment.002.phy }
 \verbatim 
  6 46
 Sp8          -----GLGKVIV-YGIVLGTKSDQFSNWVVWLFPWNGLQIHMMGII
@@ -39,8 +43,9 @@ Sp26         AAAAAAAAALLTYLGLFLGTDYENFA--AAAANAWLGLEINMMAQI
 Sp33         -------PTILNIAGLHMETD-INFS--LAWFQAWGGLEINKQAIL
 Sp6          -----ASGAILT-LGIYLFTLCAVIS--VSWYLAWLGLEINMMAII
 \endverbatim
+\n
 
-<b> %Alignment example.003.AA.phy </b>
+\boldVerbatim{ > trimal -in alignment.003.phy }
 \verbatim 
  6 47
 Sp8          -----GLGKVIV-YGIV-LGTKSDQFSNWVVWLFPWNGLQIHMMGII
@@ -50,8 +55,12 @@ Sp6          -----ASGAILT-LGIY-LFTLCAVIS--VSWYLAWLGLEINMMAII
 Sp17         --FAYTAPDLL-LIGFL-LKTVA-TFG--DTWFQLWQGLDLNKMPVF
 Sp33         -------PTILNIAGLHME-TDI-NFS--LAWFQAWGGLEINKQAIL
 \endverbatim
+\n
 
-<b> alignments_comparison </b> + "-compareset" = <b> %Alignment example.002.AA.phy </b>
+\boldVerbatim{ 
+> trimal -compareset alignments_comparison 
+    result = example.002.AA.phy 
+    }
 \verbatim 
  6 46
 Sp8          -----GLGKVIV-YGIVLGTKSDQFSNWVVWLFPWNGLQIHMMGII
@@ -61,8 +70,12 @@ Sp26         AAAAAAAAALLTYLGLFLGTDYENFA--AAAANAWLGLEINMMAQI
 Sp33         -------PTILNIAGLHMETD-INFS--LAWFQAWGGLEINKQAIL
 Sp6          -----ASGAILT-LGIYLFTLCAVIS--VSWYLAWLGLEINMMAII
 \endverbatim
+\n
 
-<b> alignments_comparison </b> + "-compareset -forceselect example.003.AA.phy" = <b> %Alignment example.003.AA.phy </b>
+\boldVerbatim{ 
+> trimal -compareset alignments_comparison -forceselect example.003.AA.phy
+    result = example.003.AA.phy 
+    }
 \verbatim 
  6 47
 Sp8          -----GLGKVIV-YGIV-LGTKSDQFSNWVVWLFPWNGLQIHMMGII
@@ -72,16 +85,34 @@ Sp6          -----ASGAILT-LGIY-LFTLCAVIS--VSWYLAWLGLEINMMAII
 Sp17         --FAYTAPDLL-LIGFL-LKTVA-TFG--DTWFQLWQGLDLNKMPVF
 Sp33         -------PTILNIAGLHME-TDI-NFS--LAWFQAWGGLEINKQAIL
 \endverbatim
+\n
 
-<b> alignments_comparison </b> + "-compareset -forceselect example.003.AA.phy -ct 0.8"
+\boldVerbatim{ > trimal -compareset alignments_comparison -forceselect example.003.AA.phy -ct 0.8 }
 \verbatim 
- 6 27
-Sp8          GIVLGTKQFSVVWFPWNGLQIHMMGII
-Sp17         GFLLKTV-FGDTWQLWQGLDLNKMPVF
-Sp10         -IMLGTI-FSSEWFAWLGLEINMMVII
-Sp26         GLFLGTD------NAWLGLEINMMAQI
-Sp33         GLHMETD-FSLAWQAWGGLEINKQAIL
-Sp6          GIYLFTLVISVSWLAWLGLEINMMAII
+ 6 26
+Sp8          GIVGTKFSVVWLFPWNGLQIHMMGII
+Sp10         VIMGTIFSSEWFFAWLGLEINMMVII
+Sp26         GL-GTDFAAAAANAWLGLEINMMAQI
+Sp6          GIYFTLISVSWYLAWLGLEINMMAII
+Sp17         GFLKTVFGDTWFQLWQGLDLNKMPVF
+Sp33         GLH-TDFSLAWFQAWGGLEINKQAIL
+\endverbatim
+\n
+
+\boldVerbatim{ > trimal -compareset alignments_comparison -forceselect example.003.AA.phy -out selected.fasta }
+\verbatim
+File:           example.001.AA.phy
+Values:         Sequences: 6    Residues: 60    Pond. Hits:  29.9167    %Consistency: 0.498611
+
+File:           example.002.AA.phy
+Values:         Sequences: 6    Residues: 46    Pond. Hits:  33.6333    %Consistency: 0.731159
+
+File:           example.003.AA.phy
+Values:         Sequences: 6    Residues: 47    Pond. Hits:  33.1667    %Consistency: 0.705674
+                                        --------------
+
+File Selected:  example.002.AA.phy
+Value:          0.731159
 \endverbatim
 }
 

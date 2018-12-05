@@ -6,7 +6,7 @@ To extend the capability of trimAl, it is possible to obtain the complementary %
 This means, flipping the values of residues to keep/reject. \n\n
 
 @buttonWithExpandableDiv{ complementary, Example of use,
-<b> %Alignment </b> 
+\boldVerbatim{ > trimal -in alignment.fasta }
 \verbatim
 >Sp8
 FPWNGLQIHMMGIII---------------------------------------------------------------------------
@@ -21,8 +21,9 @@ FPWNGLQIHMMGIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII-----
 >Sp6
 FPWNGLQIHMMGIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 \endverbatim
+\n
 
-<b> %Alignment </b> + "-gt 0.8"
+\boldVerbatim{ > trimal -in alignment.fasta -gt 0.8 }
 \verbatim
 >Sp8
 FPWNGLQIHMMGIII---------------
@@ -37,8 +38,9 @@ FPWNGLQIHMMGIIIIIIIIIIIIIIIIII
 >Sp6
 FPWNGLQIHMMGIIIIIIIIIIIIIIIIII
 \endverbatim
+\n
 
-<b> %Alignment </b> + "-gt 0.8 -complementary"
+\boldVerbatim{ > trimal -in alignment.fasta -gt 0.8 -complementary }
 \verbatim
 >Sp8
 ------------------------------------------------------------

@@ -9,7 +9,7 @@ Manual methods allow the user to provide a pattern to remove residues or sequenc
 | Sequences  | -selectseqs { pattern }         | bin/trimal -in dataset/example.007.AA.fasta -selectseqs { 0,4 } |
 | Residues   | -selectcols { pattern }         | bin/trimal -in dataset/example.007.AA.fasta -selectcols { 1-4 } |
 
-@buttonexpand{ manual-t, Example of use}
+@buttonexpand{ manual-t , Example of use}
 @divexpandableStart{ manual-t }
 
 The user must provide a pattern after the argument.\n 

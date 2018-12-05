@@ -861,7 +861,8 @@ FILE_PATTERNS          = *.c \
                          *.ucf \
                          *.qsf \
                          *.documentation \
-                         *.dox
+                         *.dox \
+                         *.fasta
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
 # be searched for input files as well.
@@ -909,7 +910,7 @@ EXCLUDE_PATTERNS       = *Catch* \
 # Note that the wildcards are matched against the file with absolute path, so to
 # exclude all test directories use the pattern */test/*
 
-EXCLUDE_SYMBOLS        = 
+EXCLUDE_SYMBOLS        = ngs::*
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include
@@ -922,7 +923,7 @@ EXAMPLE_PATH           = ../
 # *.h) to filter out the source-files in the directories. If left blank all
 # files are included.
 
-EXAMPLE_PATTERNS       = *
+EXAMPLE_PATTERNS       = 
 
 # If the EXAMPLE_RECURSIVE tag is set to YES then subdirectories will be
 # searched for input files to be used with the \include or \dontinclude commands
@@ -2516,3 +2517,7 @@ ALIASES += divexpandableStart{1}="<div name=\"\1\" style=\"display:none; width: 
 ALIASES += divexpandableEnd="</div>"
 ALIASES += divexpandable{2}="@divexpandableStart{\1} \2 @divexpandableEnd"
 ALIASES += buttonWithExpandableDiv{3}="@buttonexpand{\1, \2} @divexpandable{\1, \3}"
+
+ALIASES += boldVerbatim{1}="<b>@verbatim \1 @endverbatim</b>"
+
+ALIASES += namedDiv{1}="<div id="\1"> </div>"

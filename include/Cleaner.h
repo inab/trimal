@@ -15,7 +15,7 @@ class Alignment;
  /**
  \brief Submodule contained by \link Alignment Alignment \endlink.
  \par "Complementary parameter"
-  All cleaning methods contains a boolean flag called<b> 'complementary' </b>.\n
+  Cleaning methods may contain a boolean flag argument called<b> 'complementary' </b>.\n
   If set to<i> true</i>, the function will return a new alignment that contains
   the sequences and residues that method would<i> reject</i>.\n
   Otherwise it returns the cleaned version of

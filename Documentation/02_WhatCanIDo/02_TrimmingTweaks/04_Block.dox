@@ -9,7 +9,7 @@ the specified number of residues.\n
 This allows us to remove columns that obtained good scores by random chance.
 
 @buttonWithExpandableDiv{ block, Example of use,
-<b> %Alignment </b>
+\boldVerbatim{ > trimal -in alignment.fasta }
 \verbatim
 >Sp6
 ---ASGAILT-LGIYLFTLCAVISVSWYLAWLGLEINMMAII
@@ -24,8 +24,9 @@ AAAAAAALLTYLGLFLGTDYENFAAAAANAWLGLEINMMAQI
 >Sp33
 -----PTILNIAGLHMETDI-NFSLAWFQAWGGLEINKQAIL
 \endverbatim
+\n
 
-<b> %Alignment </b> + "-strict -block 2"
+\boldVerbatim{ > trimal -in alignment.fasta -strict -block 2 }
 \verbatim
 >Sp6
 ILGIYLISVSWYLAWLGLEINMMAII
@@ -40,8 +41,9 @@ LLGLFLFAAAAANAWLGLEINMMAQI
 >Sp33
 ILGLHMFSLAWFQAWGGLEINKQAIL
 \endverbatim
+\n
 
-<b> %Alignment </b> + "-strict -block 6"
+\boldVerbatim{ > trimal -in alignment.fasta -strict -block 6 }
 \verbatim
 >Sp6
 ISVSWYLAWLGLEINMMAII
@@ -56,6 +58,7 @@ FAAAAANAWLGLEINMMAQI
 >Sp33
 FSLAWFQAWGGLEINKQAIL
 \endverbatim
+\n
 
 }
 

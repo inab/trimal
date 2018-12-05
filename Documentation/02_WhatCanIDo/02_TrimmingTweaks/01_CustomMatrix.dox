@@ -8,6 +8,7 @@ While trimAl contains matrices for each sequence type, the user can provide thei
 Examples of these matrices can be found on the dataset folder:\n 
 
 @buttonWithExpandableDiv{ blossum62, Blossum62,
+\boldVerbatim{ matrix.BLOSUM62 }
 \verbatim 
 a R N D C Q E G H I L k M F P S T W Y V
 A +4 -1 -2 -2 +0 -1 -1 +0 -2 -1 -1 -1 -1 -2 -1 +1 +0 -3 -2 +0
@@ -34,6 +35,7 @@ V +0 -3 -3 -3 -1 -2 -2 -3 -3 +3 +1 -2 +1 -1 -2 -2 +0 -3 -1 +4
 }
 
 @buttonWithExpandableDiv{ deg-dna, Degenerated_DNA,
+\boldVerbatim{ matrix.Degenerated_DNA }
 \verbatim
 A C D G K M S R T W Y
 A 1 0 0 0 0 0 0 0 0 0 0

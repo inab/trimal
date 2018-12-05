@@ -15,7 +15,7 @@ and it will be highlighted.
 The SVG contains a legend of the background on the residues, \n
 and also includes the path of the input alignment.
 
-@buttonWithExpandableDiv{ html-out, HTML Output Report, @htmlinclude 03_HTML_out.html }
+@buttonWithExpandableDiv{htmlout, HTML Output Report, @htmlinclude 03_HTML_out.html }
 
-@buttonWithExpandableDiv{ complementary, SVG Output Report, @htmlinclude 03_SVG_out.html }
+@buttonWithExpandableDiv{svgout, SVG Output Report, @htmlinclude 03_SVG_out.html }
 */
