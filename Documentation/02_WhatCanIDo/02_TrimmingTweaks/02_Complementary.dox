@@ -5,56 +5,8 @@
 To extend the capability of trimAl, it is possible to obtain the complementary %alignment.\n
 This means, flipping the values of residues to keep/reject. \n\n
 
-@buttonWithExpandableDiv{ complementary, Example of use,
-\boldVerbatim{ > trimal -in alignment.fasta }
-\verbatim
->Sp8
-FPWNGLQIHMMGIII---------------------------------------------------------------------------
->Sp17
-FPWNGLQIHMMGIIIIIIIIIIIIIIIIII------------------------------------------------------------
->Sp10
-FPWNGLQIHMMGIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII---------------------------------------------
->Sp26
-FPWNGLQIHMMGIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII------------------------------
->Sp33
-FPWNGLQIHMMGIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII---------------
->Sp6
-FPWNGLQIHMMGIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-\endverbatim
-\n
+@buttonWithExpandableDiv{gt05nc,Without Complementary,@htmlinclude 02_gt05.svg}
 
-\boldVerbatim{ > trimal -in alignment.fasta -gt 0.8 }
-\verbatim
->Sp8
-FPWNGLQIHMMGIII---------------
->Sp17
-FPWNGLQIHMMGIIIIIIIIIIIIIIIIII
->Sp10
-FPWNGLQIHMMGIIIIIIIIIIIIIIIIII
->Sp26
-FPWNGLQIHMMGIIIIIIIIIIIIIIIIII
->Sp33
-FPWNGLQIHMMGIIIIIIIIIIIIIIIIII
->Sp6
-FPWNGLQIHMMGIIIIIIIIIIIIIIIIII
-\endverbatim
-\n
-
-\boldVerbatim{ > trimal -in alignment.fasta -gt 0.8 -complementary }
-\verbatim
->Sp8
-------------------------------------------------------------
->Sp17
-------------------------------------------------------------
->Sp10
-IIIIIIIIIIIIIII---------------------------------------------
->Sp26
-IIIIIIIIIIIIIIIIIIIIIIIIIIIIII------------------------------
->Sp33
-IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII---------------
->Sp6
-IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-\endverbatim
-}
+@buttonWithExpandableDiv{gt05c,With Complementary,@htmlinclude 02_gt05C.svg}
 
 **/

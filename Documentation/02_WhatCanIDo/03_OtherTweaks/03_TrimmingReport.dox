@@ -1,6 +1,6 @@
 /*! \page whatcanido What can I do with trimAl?
 
-\subsection TrimmingReport
+\subsection Trimming Report
 @htmlinclude 03_ResizeReports.html
 
 trimAl is able to output a trimming report in two formats: HTML and SVG. \n

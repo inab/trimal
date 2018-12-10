@@ -2,20 +2,17 @@
 
 \subsection Overlap Manual Overlap Threshold Methods
 
-Manual Overlap method allow the user to provide a minimum threshold for similarity to keep a sequence or residue/column. \n
-Both arguments, sequence and residue overlap, are mutually dependent, so, if any is set, the other one must be set, too.
+Manual overlap allows to remove sequences based on two values: Sequence Overlap and Residue Overlap. \n
+- Sequence overlap indicates the minimum percentage of kept residues to keep a sequence. \n
+- Residue overlap indicates the minimum percentage of overlap (same residue on same position on the rest of sequences) to keep a residue. \n
+
 
 | Overlap Level | Command line argument      |
 |---------------|----------------------------|
 | Sequence      | -seqoverlap \<n> [0-100]   | 
 | Residue       | -resoverlap \<n> [0-1]     |
 
-<b>Example of use</b> \n
-As sequence and residue arguments are mutually dependent, the example is provided combined:
-\verbatim 
- 
- bin/trimal -in dataset/example.007.AA.fasta -resoverlap 10 -seqoverlap 0.5 
- 
-\endverbatim
+@buttonWithExpandableDiv{Overlap_s90r01,Sequence Overlap 90 - Residue Overlap 0.1,@htmlinclude 04_s90r01.svg }
+@buttonWithExpandableDiv{Overlap_s955r0875,Sequence Overlap 95.5 - Residue Overlap 0.875,@htmlinclude 04_s955r0875.svg }
 
 */

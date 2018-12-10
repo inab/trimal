@@ -12,108 +12,35 @@ select an specific alignment by using the -forceselect argument.
 
 When an output file is provided, a summary of the compareset results is provided.
 
+
 @buttonWithExpandableDiv{ compareset, Example of use,
 \boldVerbatim{ > cat alignments_comparison }
 \verbatim 
-example.001.AA.phy
-example.002.AA.phy
-example.003.AA.phy
+dataset/example.010.a.AA.fasta
+dataset/example.010.b.AA.fasta
+dataset/example.010.c.AA.fasta
 \endverbatim
 \n 
 
-\boldVerbatim{ > trimal -in alignment.001.phy }
-\verbatim 
- 6 60
-Sp8          ----------GLGKV---IVY-GIVLGTKS-DQFSNWVVWL-----FPWNGLQIHMMGII
-Sp17         --------FAYTAPD---LLLIGFLLKTVA-T-FG--DTWF-----QLWQGLDLNKMPVF
-Sp10         ----------DPAVL----FV--IMLGTIT-K-FS--SEWF-----FAWLGLEINMMVII
-Sp26         AAAAAAAA----ALL---TYL-GLFLGTDY-----EN---FAAAAANAWLGLEINMMAQI
-Sp33         -----------PTIL---NIA-GLHMETDI-N-FS--LAWF-----QAWGGLEINKQAIL
-Sp6          ----------ASGAI---LTL-GIYLFTLC-AVIS--VSWY-----LAWLGLEINMMAII
-\endverbatim
-\n
-
-\boldVerbatim{ > trimal -in alignment.002.phy }
-\verbatim 
- 6 46
-Sp8          -----GLGKVIV-YGIVLGTKSDQFSNWVVWLFPWNGLQIHMMGII
-Sp17         --FAYTAPDLLL-IGFLLKTV-ATFG--DTWFQLWQGLDLNKMPVF
-Sp10         ------DPAVL--FVIMLGTI-TKFS--SEWFFAWLGLEINMMVII
-Sp26         AAAAAAAAALLTYLGLFLGTDYENFA--AAAANAWLGLEINMMAQI
-Sp33         -------PTILNIAGLHMETD-INFS--LAWFQAWGGLEINKQAIL
-Sp6          -----ASGAILT-LGIYLFTLCAVIS--VSWYLAWLGLEINMMAII
-\endverbatim
-\n
-
-\boldVerbatim{ > trimal -in alignment.003.phy }
-\verbatim 
- 6 47
-Sp8          -----GLGKVIV-YGIV-LGTKSDQFSNWVVWLFPWNGLQIHMMGII
-Sp10         -------DPAVL-FVIM-LGTIT-KFS--SEWFFAWLGLEINMMVII
-Sp26         AAAAAAAAALLTYLGL-FLGTDYENFA--AAAANAWLGLEINMMAQI
-Sp6          -----ASGAILT-LGIY-LFTLCAVIS--VSWYLAWLGLEINMMAII
-Sp17         --FAYTAPDLL-LIGFL-LKTVA-TFG--DTWFQLWQGLDLNKMPVF
-Sp33         -------PTILNIAGLHME-TDI-NFS--LAWFQAWGGLEINKQAIL
-\endverbatim
-\n
-
-\boldVerbatim{ 
-> trimal -compareset alignments_comparison 
-    result = example.002.AA.phy 
-    }
-\verbatim 
- 6 46
-Sp8          -----GLGKVIV-YGIVLGTKSDQFSNWVVWLFPWNGLQIHMMGII
-Sp17         --FAYTAPDLLL-IGFLLKTV-ATFG--DTWFQLWQGLDLNKMPVF
-Sp10         ------DPAVL--FVIMLGTI-TKFS--SEWFFAWLGLEINMMVII
-Sp26         AAAAAAAAALLTYLGLFLGTDYENFA--AAAANAWLGLEINMMAQI
-Sp33         -------PTILNIAGLHMETD-INFS--LAWFQAWGGLEINKQAIL
-Sp6          -----ASGAILT-LGIYLFTLCAVIS--VSWYLAWLGLEINMMAII
-\endverbatim
-\n
-
-\boldVerbatim{ 
-> trimal -compareset alignments_comparison -forceselect example.003.AA.phy
-    result = example.003.AA.phy 
-    }
-\verbatim 
- 6 47
-Sp8          -----GLGKVIV-YGIV-LGTKSDQFSNWVVWLFPWNGLQIHMMGII
-Sp10         -------DPAVL-FVIM-LGTIT-KFS--SEWFFAWLGLEINMMVII
-Sp26         AAAAAAAAALLTYLGL-FLGTDYENFA--AAAANAWLGLEINMMAQI
-Sp6          -----ASGAILT-LGIY-LFTLCAVIS--VSWYLAWLGLEINMMAII
-Sp17         --FAYTAPDLL-LIGFL-LKTVA-TFG--DTWFQLWQGLDLNKMPVF
-Sp33         -------PTILNIAGLHME-TDI-NFS--LAWFQAWGGLEINKQAIL
-\endverbatim
-\n
-
-\boldVerbatim{ > trimal -compareset alignments_comparison -forceselect example.003.AA.phy -ct 0.8 }
-\verbatim 
- 6 26
-Sp8          GIVGTKFSVVWLFPWNGLQIHMMGII
-Sp10         VIMGTIFSSEWFFAWLGLEINMMVII
-Sp26         GL-GTDFAAAAANAWLGLEINMMAQI
-Sp6          GIYFTLISVSWYLAWLGLEINMMAII
-Sp17         GFLKTVFGDTWFQLWQGLDLNKMPVF
-Sp33         GLH-TDFSLAWFQAWGGLEINKQAIL
-\endverbatim
-\n
-
-\boldVerbatim{ > trimal -compareset alignments_comparison -forceselect example.003.AA.phy -out selected.fasta }
+\boldVerbatim{ Summary chart }
 \verbatim
-File:           example.001.AA.phy
-Values:         Sequences: 6    Residues: 60    Pond. Hits:  29.9167    %Consistency: 0.498611
+File:           dataset/example.010.a.AA.fasta
+Values:         Sequences: 8    Residues: 187   Pond. Hits:  133.881    %Consistency: 0.715941
 
-File:           example.002.AA.phy
-Values:         Sequences: 6    Residues: 46    Pond. Hits:  33.6333    %Consistency: 0.731159
+File:           dataset/example.010.b.AA.fasta
+Values:         Sequences: 8    Residues: 188   Pond. Hits:   120.27    %Consistency: 0.639735
 
-File:           example.003.AA.phy
-Values:         Sequences: 6    Residues: 47    Pond. Hits:  33.1667    %Consistency: 0.705674
+File:           dataset/example.010.c.AA.fasta
+Values:         Sequences: 8    Residues: 188   Pond. Hits:  122.744    %Consistency: 0.652893
                                         --------------
 
-File Selected:  example.002.AA.phy
-Value:          0.731159
+File Selected:  dataset/example.010.a.AA.fasta
+Value:          0.715941
+
 \endverbatim
+
+@htmlinclude 07_compare.svg
+
 }
 
 **/

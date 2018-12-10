@@ -8,58 +8,8 @@ the specified number of residues.\n
 
 This allows us to remove columns that obtained good scores by random chance.
 
-@buttonWithExpandableDiv{ block, Example of use,
-\boldVerbatim{ > trimal -in alignment.fasta }
-\verbatim
->Sp6
----ASGAILT-LGIYLFTLCAVISVSWYLAWLGLEINMMAII
->Sp17
-FAYTAPDLL-LIGFLLKTVA-TFGDTWFQLWQGLDLNKMPVF
->Sp10
------DPAVL-FVIMLGTIT-KFSSEWFFAWLGLEINMMVII
->Sp8
----GLGKVIV-YGIVLGTKSDQFSVVWLFPWNGLQIHMMGII
->Sp26
-AAAAAAALLTYLGLFLGTDYENFAAAAANAWLGLEINMMAQI
->Sp33
------PTILNIAGLHMETDI-NFSLAWFQAWGGLEINKQAIL
-\endverbatim
-\n
-
-\boldVerbatim{ > trimal -in alignment.fasta -strict -block 2 }
-\verbatim
->Sp6
-ILGIYLISVSWYLAWLGLEINMMAII
->Sp17
-LLGFLLFGDTWFQLWQGLDLNKMPVF
->Sp10
-AVVIMLFSSEWFFAWLGLEINMMVII
->Sp8
-VIGIVLFSVVWLFPWNGLQIHMMGII
->Sp26
-LLGLFLFAAAAANAWLGLEINMMAQI
->Sp33
-ILGLHMFSLAWFQAWGGLEINKQAIL
-\endverbatim
-\n
-
-\boldVerbatim{ > trimal -in alignment.fasta -strict -block 6 }
-\verbatim
->Sp6
-ISVSWYLAWLGLEINMMAII
->Sp17
-FGDTWFQLWQGLDLNKMPVF
->Sp10
-FSSEWFFAWLGLEINMMVII
->Sp8
-FSVVWLFPWNGLQIHMMGII
->Sp26
-FAAAAANAWLGLEINMMAQI
->Sp33
-FSLAWFQAWGGLEINKQAIL
-\endverbatim
-\n
-
-}
+@buttonWithExpandableDiv{b1,Strict Block 1,@htmlinclude 04_b1.svg}
+@buttonWithExpandableDiv{b2,Strict Block 2,@htmlinclude 04_b2.svg}
+@buttonWithExpandableDiv{b4,Strict Block 4,@htmlinclude 04_b4.svg}
 
 **/
