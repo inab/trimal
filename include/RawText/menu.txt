@@ -109,7 +109,7 @@ Common options (for a complete list please see the User Guide or visit http://tr
 
     -v <n> / --verbose <n>  Specify the verbose level of the program.
                                 Available options: error / 3, warning / 2, info / 1, none / 0
-                                Default value: error / 3
+                                Default value: info / 1
 
     -vcf <inputfile, ...>   Specify one or more VCF files to produce MSAs using the input file (-in <n>) as reference genome
 
