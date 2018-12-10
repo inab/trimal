@@ -611,8 +611,8 @@ bool Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, 
 
                 // If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
                 // such as 'B'/'X' is present, skip current stop codon
-                if ((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
-                        (aminoAcid == 'B'))
+                if ((aminoAcid == 'U') || (aminoAcid == 'O') ||
+                    (aminoAcid == 'X') || (aminoAcid == 'B'))
                     continue;
 
                     // If split_by_stop_codon flag is activated then cut input CDS sequence
@@ -646,8 +646,8 @@ bool Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, 
                 // Check if there is any wildcard/indet characters such as 'X' or 'B'
                 // If a rare amino-acids such as 'U'/'O' or a wildcard/indet character
                 // such as 'B'/'X' is present, skip current stop codon
-                if ((aminoAcid == 'U') || (aminoAcid == 'O') || (aminoAcid == 'X') || \
-                        (aminoAcid == 'B'))
+                if ((aminoAcid == 'U') || (aminoAcid == 'O') ||
+                    (aminoAcid == 'X') || (aminoAcid == 'B'))
                     continue;
 
                     // If split_by_stop_codon flag is activated then cut input CDS sequence
@@ -1498,7 +1498,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, int 
             rightMargin = 5, topMargin = 5,
             bottomMargin = 10, interBlocksMargin = 20;
 
-    float height = ((originalNumberOfSequences + 3 + (gapsValues != nullptr || simValues != nullptr ? 7 : 0) /* Col numbering occupies 3 rows. Stats 5 */)
+    float height = ((originalNumberOfSequences + 3 + 7) // ((gapsValues != nullptr || simValues != nullptr) ? 7 : 0) /* Col numbering occupies 3 rows. Stats 5 */)
                     * fontSize + interBlocksMargin)                 // Height of a block + interblock
                    * std::ceil((float) originalNumberOfResidues / blocks)  // Number of blocks
                    - interBlocksMargin // Number of interblocks is number of blocks  - 1
