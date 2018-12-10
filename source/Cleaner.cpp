@@ -1214,7 +1214,6 @@ Alignment *Cleaner::removeColumns(int *columns, int init, int size, bool complem
     //	which means the end of the current scope.
     StartTiming("Alignment *Cleaner::removeColumns(int *columns, int init, int size, bool complementary) ");
 
-    std::string *matrixAux, *newSeqsName;
     Alignment *newAlig = new Alignment(*alig);
     int i, j;
 
@@ -1581,12 +1580,18 @@ void Cleaner::computeComplementaryAlig(bool residues, bool sequences) {
     int i;
 
     if (residues)
+    {
         for (i = 0; i < alig->originalNumberOfResidues; i++)
             alig->saveResidues[i] = (alig->saveResidues[i] == -1) ? i : -1;
+        alig->numberOfResidues = alig->originalNumberOfResidues - alig->numberOfResidues;
+    }
 
     if (sequences)
+    {
         for (i = 0; i < alig->originalNumberOfSequences; i++)
             alig->saveSequences[i] = (alig->saveSequences[i] == -1) ? i : -1;
+        alig->numberOfSequences = alig->originalNumberOfSequences - alig->numberOfSequences;
+    }
 }
 
 
