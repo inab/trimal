@@ -21,8 +21,8 @@
     <link href="CustomExtra.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         function myFunction(ID) {
-            var divs = document.getElementsByName(ID);
-            for (var x of divs) {
+            const divs = document.getElementsByName(ID);
+            for (let x of divs) {
                 if (x.style.display === "none") {
                     x.style.display = "block";
                 } else {
@@ -87,25 +87,9 @@ $(document).ready(function(){initNavTree('_v_c_f_handler_8h.html','');});
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacengs"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs.html">ngs</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespacengs_1_1_i_u_p_a_c"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs_1_1_i_u_p_a_c.html">ngs::IUPAC</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespacengs_1_1____internal"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs_1_1____internal.html">ngs::__internal</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a102a09d8741aa544b6354ced312a2a1d"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs_1_1_i_u_p_a_c.html#a102a09d8741aa544b6354ced312a2a1d">ngs::IUPAC::getTagFromCharArray</a> (char *array, char separator)</td></tr>
-<tr class="separator:a102a09d8741aa544b6354ced312a2a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac33770374cfa395b9280f707406e73d6"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs_1_1_i_u_p_a_c.html#ac33770374cfa395b9280f707406e73d6">ngs::IUPAC::getCharFromTag</a> (int tag)</td></tr>
-<tr class="separator:ac33770374cfa395b9280f707406e73d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabe2c203fcc773dbadd9064d91df547d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs_1_1____internal.html#aabe2c203fcc773dbadd9064d91df547d">ngs::__internal::printApeek</a> (std::vector&lt; <a class="el" href="class_alignment.html">Alignment</a> *&gt; &amp;sources)</td></tr>
-<tr class="separator:aabe2c203fcc773dbadd9064d91df547d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a277f4eca63365e30aa0985b84eb19a05"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs_1_1____internal.html#a277f4eca63365e30aa0985b84eb19a05">ngs::__internal::extendAlignments</a> (std::vector&lt; <a class="el" href="class_alignment.html">Alignment</a> *&gt; &amp;sources, std::vector&lt; std::string &gt; &amp;contigs, std::vector&lt; std::string &gt; &amp;donors)</td></tr>
-<tr class="separator:a277f4eca63365e30aa0985b84eb19a05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a450c661e168dfcc436e071e3e18558"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs_1_1____internal.html#a1a450c661e168dfcc436e071e3e18558">ngs::__internal::applyVariantCallingFiles</a> (std::vector&lt; <a class="el" href="class_alignment.html">Alignment</a> *&gt; &amp;sources, std::vector&lt; std::string &gt; &amp;filenames, std::vector&lt; std::string &gt; &amp;contigs, std::vector&lt; std::vector&lt; int &gt;&gt; &amp;donorsPositions, float minQuality, float minCoverage, bool ignoreFilter, const char *const replacementChar)</td></tr>
-<tr class="separator:a1a450c661e168dfcc436e071e3e18558"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45f56cf53dc8050c6ac06bb9093de542"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs_1_1____internal.html#a45f56cf53dc8050c6ac06bb9093de542">ngs::__internal::obtainContigsAndDonors</a> (std::vector&lt; std::string &gt; &amp;filenames, std::vector&lt; std::string &gt; &amp;donors, std::vector&lt; std::string &gt; &amp;contigs, std::vector&lt; std::vector&lt; int &gt;&gt; &amp;donorsPositions)</td></tr>
-<tr class="separator:a45f56cf53dc8050c6ac06bb9093de542"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5bc1f6bdf56a4c4981639d5ed0ee77f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs.html#af5bc1f6bdf56a4c4981639d5ed0ee77f">ngs::readVCF</a> (std::vector&lt; <a class="el" href="class_alignment.html">Alignment</a> *&gt; sources, std::vector&lt; std::string &gt; filenames, float minQuality, float minCoverage, bool ignoreFilter, const char *const replacementChar)</td></tr>
 <tr class="separator:af5bc1f6bdf56a4c4981639d5ed0ee77f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>

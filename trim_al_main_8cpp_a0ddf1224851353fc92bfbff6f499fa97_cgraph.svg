@@ -48,18 +48,18 @@
 <path fill="none" stroke="#191970" d="M38.2578,-1079.5C51.3651,-1079.5 69.5888,-1079.5 87.8496,-1079.5"/>
 <polygon fill="#191970" stroke="#191970" points="87.9661,-1083.0001 97.966,-1079.5 87.966,-1076.0001 87.9661,-1083.0001"/>
 </g>
-<!-- Node177 -->
+<!-- Node172 -->
 <g id="node50" class="node">
-<title>Node177</title>
+<title>Node172</title>
 <g id="a_node50"><a xlink:href="classtrim_al_manager.html#a748b08a1ec5cd214de804ed0d4234a6e" target="_top" xlink:title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in...">
 <polygon fill="#ffffff" stroke="#ff0000" points="74,-1032 74,-1051 241,-1051 241,-1032 74,-1032"/>
 <text text-anchor="middle" x="157.5" y="-1039" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::processArguments</text>
 </a>
 </g>
 </g>
-<!-- Node0&#45;&gt;Node177 -->
+<!-- Node0&#45;&gt;Node172 -->
 <g id="edge72" class="edge">
-<title>Node0&#45;&gt;Node177</title>
+<title>Node0&#45;&gt;Node172</title>
 <path fill="none" stroke="#191970" d="M38.1812,-1072.2985C48.6742,-1068.5052 61.9547,-1063.9399 74,-1060.5 82.8186,-1057.9816 92.2356,-1055.5736 101.4506,-1053.3691"/>
 <polygon fill="#191970" stroke="#191970" points="102.3908,-1056.7439 111.3327,-1051.0613 100.7988,-1049.9273 102.3908,-1056.7439"/>
 </g>

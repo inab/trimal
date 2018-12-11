@@ -81,9 +81,9 @@
 <path fill="none" stroke="#191970" d="M119.0259,-360C127.3389,-360 136.0003,-360 144.6419,-360"/>
 <polygon fill="#191970" stroke="#191970" points="144.7553,-363.5001 154.7553,-360 144.7553,-356.5001 144.7553,-363.5001"/>
 </g>
-<!-- Node755 -->
+<!-- Node750 -->
 <g id="node27" class="node">
-<title>Node755</title>
+<title>Node750</title>
 <g id="a_node27"><a xlink:href="class_cleaner.html#a1f4cdd8e06a4c461534a694ffa4ec1a2" target="_top" xlink:title="Setter method to Terminal Only Flag.">
 <polygon fill="#ffffff" stroke="#000000" points="356.5,-245 356.5,-275 483.5,-275 483.5,-245 356.5,-245"/>
 <text text-anchor="start" x="364.5" y="-263" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::setTrimTerminal</text>
@@ -91,30 +91,30 @@
 </a>
 </g>
 </g>
-<!-- Node673&#45;&gt;Node755 -->
+<!-- Node673&#45;&gt;Node750 -->
 <g id="edge76" class="edge">
-<title>Node673&#45;&gt;Node755</title>
+<title>Node673&#45;&gt;Node750</title>
 <path fill="none" stroke="#191970" d="M78.0921,-350.4976C97.0292,-341.138 127.4451,-326.9757 155,-318 218.3136,-297.3762 292.5246,-281.8415 346.2833,-272.0654"/>
 <polygon fill="#191970" stroke="#191970" points="347.1897,-275.4588 356.4142,-270.2472 345.9531,-268.5689 347.1897,-275.4588"/>
 </g>
-<!-- Node756 -->
+<!-- Node751 -->
 <g id="node28" class="node">
-<title>Node756</title>
+<title>Node751</title>
 <g id="a_node28"><a xlink:href="class_alignment.html#aae49d1100f4e41e60c840b1fcb9afebc" target="_top" xlink:title="Keep Sequences setter.">
 <polygon fill="#ffffff" stroke="#000000" points="335,-206.5 335,-225.5 505,-225.5 505,-206.5 335,-206.5"/>
 <text text-anchor="middle" x="420" y="-213.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::setKeepSequencesFlag</text>
 </a>
 </g>
 </g>
-<!-- Node673&#45;&gt;Node756 -->
+<!-- Node673&#45;&gt;Node751 -->
 <g id="edge75" class="edge">
-<title>Node673&#45;&gt;Node756</title>
+<title>Node673&#45;&gt;Node751</title>
 <path fill="none" stroke="#191970" d="M67.6537,-350.4956C82.961,-333.2827 117.8241,-296.9773 155,-278 207.8785,-251.007 272.6901,-235.5752 324.9816,-226.8586"/>
 <polygon fill="#191970" stroke="#191970" points="325.6137,-230.302 334.9295,-225.2556 324.5,-223.3911 325.6137,-230.302"/>
 </g>
-<!-- Node757 -->
+<!-- Node752 -->
 <g id="node29" class="node">
-<title>Node757</title>
+<title>Node752</title>
 <g id="a_node29"><a xlink:href="classtrim_al_manager.html#a9fe53f593792efe2eafd54ec6e506bf3" target="_top" xlink:title="Method to set correct window sizes depending on values for them given by the user.">
 <polygon fill="#ffffff" stroke="#000000" points="370.5,-157 370.5,-187 469.5,-187 469.5,-157 370.5,-157"/>
 <text text-anchor="start" x="378.5" y="-175" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::set</text>
@@ -122,30 +122,30 @@
 </a>
 </g>
 </g>
-<!-- Node673&#45;&gt;Node757 -->
+<!-- Node673&#45;&gt;Node752 -->
 <g id="edge73" class="edge">
-<title>Node673&#45;&gt;Node757</title>
+<title>Node673&#45;&gt;Node752</title>
 <path fill="none" stroke="#191970" d="M63.6006,-350.2179C74.4857,-325.5322 106.6239,-260.4438 155,-229 188.308,-207.3502 292.943,-189.4648 360.337,-179.795"/>
 <polygon fill="#191970" stroke="#191970" points="360.9953,-183.2368 370.4068,-178.3713 360.0153,-176.3057 360.9953,-183.2368"/>
 </g>
-<!-- Node759 -->
+<!-- Node754 -->
 <g id="node31" class="node">
-<title>Node759</title>
+<title>Node754</title>
 <g id="a_node31"><a xlink:href="class_alignment.html#a9417badb9b55adafa3b6f457e4d03aac" target="_top" xlink:title="BlockSize Setter.">
 <polygon fill="#ffffff" stroke="#000000" points="358,-118.5 358,-137.5 482,-137.5 482,-118.5 358,-118.5"/>
 <text text-anchor="middle" x="420" y="-125.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::setBlockSize</text>
 </a>
 </g>
 </g>
-<!-- Node673&#45;&gt;Node759 -->
+<!-- Node673&#45;&gt;Node754 -->
 <g id="edge74" class="edge">
-<title>Node673&#45;&gt;Node759</title>
+<title>Node673&#45;&gt;Node754</title>
 <path fill="none" stroke="#191970" d="M61.8342,-350.2884C69.4944,-320.6273 96.7818,-230.594 155,-187 171.0575,-174.9761 282.9515,-152.8522 356.1162,-139.3789"/>
 <polygon fill="#191970" stroke="#191970" points="356.9635,-142.782 366.169,-137.5371 355.702,-135.8966 356.9635,-142.782"/>
 </g>
-<!-- Node760 -->
+<!-- Node755 -->
 <g id="node32" class="node">
-<title>Node760</title>
+<title>Node755</title>
 <g id="a_node32"><a xlink:href="classtrim_al_manager.html#a63d5bec0938516a2129ccb04276b93d9" target="_top" xlink:title=" ">
 <polygon fill="#ffffff" stroke="#000000" points="777,-687 777,-717 878,-717 878,-687 777,-687"/>
 <text text-anchor="start" x="785" y="-705" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::svg</text>
@@ -153,15 +153,15 @@
 </a>
 </g>
 </g>
-<!-- Node673&#45;&gt;Node760 -->
+<!-- Node673&#45;&gt;Node755 -->
 <g id="edge77" class="edge">
-<title>Node673&#45;&gt;Node760</title>
+<title>Node673&#45;&gt;Node755</title>
 <path fill="none" stroke="#191970" d="M60.4563,-369.6315C64.7096,-408.1239 84.9056,-553.2087 155,-644 213.4571,-719.7178 248.8466,-720.4307 335,-762 491.4951,-837.5095 578.3064,-930.575 720,-830 759.5443,-801.9312 721.7121,-761.2921 756,-727 759.478,-723.5216 763.4662,-720.5259 767.7412,-717.9462"/>
 <polygon fill="#191970" stroke="#191970" points="769.5882,-720.9308 776.8475,-713.2137 766.3602,-714.7195 769.5882,-720.9308"/>
 </g>
-<!-- Node762 -->
+<!-- Node757 -->
 <g id="node35" class="node">
-<title>Node762</title>
+<title>Node757</title>
 <g id="a_node35"><a xlink:href="classtrim_al_manager.html#a8ed19b851162fa24a1da66f7e54099e3" target="_top" xlink:title=" ">
 <polygon fill="#ffffff" stroke="#000000" points="350.5,-480 350.5,-510 489.5,-510 489.5,-480 350.5,-480"/>
 <text text-anchor="start" x="358.5" y="-498" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::postprocess</text>
@@ -169,15 +169,15 @@
 </a>
 </g>
 </g>
-<!-- Node673&#45;&gt;Node762 -->
+<!-- Node673&#45;&gt;Node757 -->
 <g id="edge53" class="edge">
-<title>Node673&#45;&gt;Node762</title>
+<title>Node673&#45;&gt;Node757</title>
 <path fill="none" stroke="#191970" d="M66.3439,-369.7606C80.4554,-389.0496 114.8499,-431.9174 155,-452 212.7845,-480.9031 285.691,-491.1128 340.3994,-494.399"/>
 <polygon fill="#191970" stroke="#191970" points="340.222,-497.8944 350.3951,-494.9349 340.5969,-490.9044 340.222,-497.8944"/>
 </g>
-<!-- Node770 -->
+<!-- Node765 -->
 <g id="node40" class="node">
-<title>Node770</title>
+<title>Node765</title>
 <g id="a_node40"><a xlink:href="classtrim_al_manager.html#afc48b86f5ae35b9a5e721b65c58bf610" target="_top" xlink:title="Method to print statistics requested.">
 <polygon fill="#ffffff" stroke="#000000" points="578.5,-922 578.5,-952 682.5,-952 682.5,-922 578.5,-922"/>
 <text text-anchor="start" x="586.5" y="-940" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::print</text>
@@ -185,15 +185,15 @@
 </a>
 </g>
 </g>
-<!-- Node673&#45;&gt;Node770 -->
+<!-- Node673&#45;&gt;Node765 -->
 <g id="edge54" class="edge">
-<title>Node673&#45;&gt;Node770</title>
+<title>Node673&#45;&gt;Node765</title>
 <path fill="none" stroke="#191970" d="M59.8717,-369.7075C62.5152,-433.3859 80.5704,-791.0043 155,-863 266.6119,-970.9622 466.8075,-961.1624 568.1211,-947.69"/>
 <polygon fill="#191970" stroke="#191970" points="568.7769,-951.1327 578.202,-946.2936 567.8163,-944.1989 568.7769,-951.1327"/>
 </g>
-<!-- Node784 -->
+<!-- Node779 -->
 <g id="node49" class="node">
-<title>Node784</title>
+<title>Node779</title>
 <g id="a_node49"><a xlink:href="classstatistics_1_1_manager.html#a2c5ff9ff22652a5ff3c9e09410ce059e" target="_top" xlink:title="Method to print the vector containing the keep/reject (Alignment::saveResidues) values of the associa...">
 <polygon fill="#ffffff" stroke="#000000" points="170.5,-111 170.5,-141 283.5,-141 283.5,-111 170.5,-111"/>
 <text text-anchor="start" x="178.5" y="-129" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Manager</text>
@@ -201,15 +201,15 @@
 </a>
 </g>
 </g>
-<!-- Node673&#45;&gt;Node784 -->
+<!-- Node673&#45;&gt;Node779 -->
 <g id="edge70" class="edge">
-<title>Node673&#45;&gt;Node784</title>
+<title>Node673&#45;&gt;Node779</title>
 <path fill="none" stroke="#191970" d="M61.3919,-350.4535C68.1919,-318.5176 94.2833,-214.158 155,-156 158.9728,-152.1946 163.4979,-148.8415 168.2999,-145.8929"/>
 <polygon fill="#191970" stroke="#191970" points="170.1043,-148.8951 177.1832,-141.0122 166.7335,-142.7601 170.1043,-148.8951"/>
 </g>
-<!-- Node785 -->
+<!-- Node780 -->
 <g id="node50" class="node">
-<title>Node785</title>
+<title>Node780</title>
 <g id="a_node50"><a xlink:href="classtrim_al_manager.html#a7ba38127fa10c926b96c60250b80d2b7" target="_top" xlink:title=" ">
 <polygon fill="#ffffff" stroke="#000000" points="173.5,-413 173.5,-443 280.5,-443 280.5,-413 173.5,-413"/>
 <text text-anchor="start" x="181.5" y="-431" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::save</text>
@@ -217,9 +217,9 @@
 </a>
 </g>
 </g>
-<!-- Node673&#45;&gt;Node785 -->
+<!-- Node673&#45;&gt;Node780 -->
 <g id="edge71" class="edge">
-<title>Node673&#45;&gt;Node785</title>
+<title>Node673&#45;&gt;Node780</title>
 <path fill="none" stroke="#191970" d="M83.1434,-369.5985C108.3145,-379.8172 148.7958,-396.2514 180.4131,-409.0871"/>
 <polygon fill="#191970" stroke="#191970" points="179.3319,-412.4255 189.914,-412.9442 181.965,-405.9396 179.3319,-412.4255"/>
 </g>
@@ -587,7 +587,7 @@
 <g id="node26" class="node">
 <title>Node749</title>
 <g id="a_node26"><a xlink:href="namespacengs.html#af5bc1f6bdf56a4c4981639d5ed0ee77f" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#ff0000" points="381.5,-343.5 381.5,-362.5 458.5,-362.5 458.5,-343.5 381.5,-343.5"/>
+<polygon fill="#ffffff" stroke="#000000" points="381.5,-343.5 381.5,-362.5 458.5,-362.5 458.5,-343.5 381.5,-343.5"/>
 <text text-anchor="middle" x="420" y="-350.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">ngs::readVCF</text>
 </a>
 </g>
@@ -598,45 +598,45 @@
 <path fill="none" stroke="#191970" d="M299.1405,-357.3835C323.2647,-356.5085 349.5622,-355.5547 371.4481,-354.7609"/>
 <polygon fill="#191970" stroke="#191970" points="371.6218,-358.257 381.4883,-354.3968 371.368,-351.2616 371.6218,-358.257"/>
 </g>
-<!-- Node747&#45;&gt;Node755 -->
+<!-- Node747&#45;&gt;Node750 -->
 <g id="edge32" class="edge">
-<title>Node747&#45;&gt;Node755</title>
+<title>Node747&#45;&gt;Node750</title>
 <path fill="none" stroke="#191970" d="M237.871,-350.4281C256.504,-334.4843 296.2868,-302.4244 335,-284 339.0824,-282.0571 343.3519,-280.2434 347.7113,-278.5549"/>
 <polygon fill="#191970" stroke="#191970" points="349.1522,-281.7555 357.3607,-275.0569 346.7665,-275.1746 349.1522,-281.7555"/>
 </g>
-<!-- Node747&#45;&gt;Node756 -->
+<!-- Node747&#45;&gt;Node751 -->
 <g id="edge33" class="edge">
-<title>Node747&#45;&gt;Node756</title>
+<title>Node747&#45;&gt;Node751</title>
 <path fill="none" stroke="#191970" d="M232.343,-350.3403C246.0215,-326.5774 284.7909,-265.0336 335,-235 338.6497,-232.8169 342.5234,-230.8841 346.5279,-229.173"/>
 <polygon fill="#191970" stroke="#191970" points="347.9476,-232.3781 356.0649,-225.5694 345.4733,-225.83 347.9476,-232.3781"/>
 </g>
-<!-- Node747&#45;&gt;Node757 -->
+<!-- Node747&#45;&gt;Node752 -->
 <g id="edge34" class="edge">
-<title>Node747&#45;&gt;Node757</title>
+<title>Node747&#45;&gt;Node752</title>
 <path fill="none" stroke="#191970" d="M230.6523,-350.2034C241.713,-321.8988 277.6437,-239.3346 335,-197 342.6238,-191.3729 351.5003,-187.0063 360.5852,-183.6195"/>
 <polygon fill="#191970" stroke="#191970" points="361.7167,-186.9317 370.0843,-180.4329 359.4904,-180.2951 361.7167,-186.9317"/>
 </g>
-<!-- Node747&#45;&gt;Node759 -->
+<!-- Node747&#45;&gt;Node754 -->
 <g id="edge36" class="edge">
-<title>Node747&#45;&gt;Node759</title>
+<title>Node747&#45;&gt;Node754</title>
 <path fill="none" stroke="#191970" d="M230.5724,-350.4664C244.8667,-312.8018 298.909,-175.0522 335,-147 339.0741,-143.8333 343.5725,-141.1733 348.3095,-138.9411"/>
 <polygon fill="#191970" stroke="#191970" points="349.7081,-142.1509 357.6647,-135.155 347.082,-135.6621 349.7081,-142.1509"/>
 </g>
-<!-- Node747&#45;&gt;Node760 -->
+<!-- Node747&#45;&gt;Node755 -->
 <g id="edge38" class="edge">
-<title>Node747&#45;&gt;Node760</title>
+<title>Node747&#45;&gt;Node755</title>
 <path fill="none" stroke="#191970" d="M252.2507,-369.5429C267.7741,-376.6048 286.9357,-387.6676 299,-403 332.3806,-445.423 304.1328,-474.7147 335,-519 400.9784,-613.6595 433.4516,-635.2039 541,-677 614.9079,-705.7225 707.3756,-708.4296 766.9322,-706.3453"/>
 <polygon fill="#191970" stroke="#191970" points="767.0783,-709.8424 776.9281,-705.9396 766.7943,-702.8481 767.0783,-709.8424"/>
 </g>
-<!-- Node747&#45;&gt;Node762 -->
+<!-- Node747&#45;&gt;Node757 -->
 <g id="edge45" class="edge">
-<title>Node747&#45;&gt;Node762</title>
+<title>Node747&#45;&gt;Node757</title>
 <path fill="none" stroke="#191970" d="M249.609,-369.5672C264.9926,-376.9494 285.0177,-388.3691 299,-403 322.3553,-427.4386 308.7553,-448.6944 335,-470 337.0899,-471.6966 339.2913,-473.278 341.5791,-474.7522"/>
 <polygon fill="#191970" stroke="#191970" points="340.3469,-478.0745 350.7793,-479.9225 343.7763,-471.9721 340.3469,-478.0745"/>
 </g>
-<!-- Node767 -->
+<!-- Node762 -->
 <g id="node39" class="node">
-<title>Node767</title>
+<title>Node762</title>
 <g id="a_node39"><a xlink:href="class_format_handling_1_1_format_manager.html#a2987b0f448390cf5cb7a287117896c64" target="_top" xlink:title="Function to save an alignment to a file. It searches among the available_states one that can write th...">
 <polygon fill="#ffffff" stroke="#ff0000" points="340,-431 340,-461 500,-461 500,-431 340,-431"/>
 <text text-anchor="start" x="348" y="-449" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">FormatHandling::FormatManager</text>
@@ -644,57 +644,57 @@
 </a>
 </g>
 </g>
-<!-- Node747&#45;&gt;Node767 -->
+<!-- Node747&#45;&gt;Node762 -->
 <g id="edge51" class="edge">
-<title>Node747&#45;&gt;Node767</title>
+<title>Node747&#45;&gt;Node762</title>
 <path fill="none" stroke="#191970" d="M243.0805,-369.6833C268.4227,-384.8402 316.6541,-413.2414 335,-421 340.6713,-423.3984 346.6474,-425.6581 352.6942,-427.7637"/>
 <polygon fill="#191970" stroke="#191970" points="351.6273,-431.0974 362.221,-430.9436 353.8436,-424.4575 351.6273,-431.0974"/>
 </g>
-<!-- Node758 -->
+<!-- Node753 -->
 <g id="node30" class="node">
-<title>Node758</title>
+<title>Node753</title>
 <g id="a_node30"><a xlink:href="class_alignment.html#ae303acbd8acd9cb43894ef1cdfd2d72c" target="_top" xlink:title="Windows setter.">
 <polygon fill="#ffffff" stroke="#000000" points="560.5,-.5 560.5,-19.5 700.5,-19.5 700.5,-.5 560.5,-.5"/>
 <text text-anchor="middle" x="630.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::setWindowsSize</text>
 </a>
 </g>
 </g>
-<!-- Node757&#45;&gt;Node758 -->
+<!-- Node752&#45;&gt;Node753 -->
 <g id="edge35" class="edge">
-<title>Node757&#45;&gt;Node758</title>
+<title>Node752&#45;&gt;Node753</title>
 <path fill="none" stroke="#191970" d="M469.7877,-166.0089C482.6266,-162.3181 495.4898,-156.415 505,-147 543.9659,-108.4243 500.5807,-66.05 541,-29 544.1616,-26.102 547.6518,-23.6039 551.3662,-21.4537"/>
 <polygon fill="#191970" stroke="#191970" points="552.9432,-24.5787 560.3908,-17.0432 549.8695,-18.2896 552.9432,-24.5787"/>
 </g>
-<!-- Node760&#45;&gt;Node680 -->
+<!-- Node755&#45;&gt;Node680 -->
 <g id="edge40" class="edge">
-<title>Node760&#45;&gt;Node680</title>
+<title>Node755&#45;&gt;Node680</title>
 <path fill="none" stroke="#191970" d="M878.0343,-703.189C938.7018,-704.6165 1040.414,-707.0097 1105.6985,-708.5458"/>
 <polygon fill="#191970" stroke="#191970" points="1105.772,-712.0484 1115.8516,-708.7847 1105.9367,-705.0504 1105.772,-712.0484"/>
 </g>
-<!-- Node760&#45;&gt;Node693 -->
+<!-- Node755&#45;&gt;Node693 -->
 <g id="edge41" class="edge">
-<title>Node760&#45;&gt;Node693</title>
+<title>Node755&#45;&gt;Node693</title>
 <path fill="none" stroke="#191970" d="M876.6858,-717.029C898.9093,-723.8195 925.345,-731.8971 948.6158,-739.0076"/>
 <polygon fill="#191970" stroke="#191970" points="947.7874,-742.4142 958.3737,-741.9892 949.8329,-735.7197 947.7874,-742.4142"/>
 </g>
-<!-- Node760&#45;&gt;Node686 -->
+<!-- Node755&#45;&gt;Node686 -->
 <g id="edge43" class="edge">
-<title>Node760&#45;&gt;Node686</title>
+<title>Node755&#45;&gt;Node686</title>
 <path fill="none" stroke="#191970" d="M878.0935,-715.0215C885.5248,-718.2233 892.7649,-722.1651 899,-727 921.7943,-744.6754 912.1677,-763.3737 935,-781 941.7417,-786.2045 949.641,-790.369 957.6985,-793.6883"/>
 <polygon fill="#191970" stroke="#191970" points="956.5771,-797.0054 967.17,-797.2082 959.0156,-790.4438 956.5771,-797.0054"/>
 </g>
-<!-- Node761 -->
+<!-- Node756 -->
 <g id="node33" class="node">
-<title>Node761</title>
+<title>Node756</title>
 <g id="a_node33"><a xlink:href="namespaceutils.html#afbd5c408c723a242c2d536e6638b6ff7" target="_top" xlink:title=" ">
 <polygon fill="#ffffff" stroke="#ff0000" points="961.5,-662.5 961.5,-681.5 1053.5,-681.5 1053.5,-662.5 961.5,-662.5"/>
 <text text-anchor="middle" x="1007.5" y="-669.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::streamSVG</text>
 </a>
 </g>
 </g>
-<!-- Node760&#45;&gt;Node761 -->
+<!-- Node755&#45;&gt;Node756 -->
 <g id="edge39" class="edge">
-<title>Node760&#45;&gt;Node761</title>
+<title>Node755&#45;&gt;Node756</title>
 <path fill="none" stroke="#191970" d="M878.119,-693.5635C900.8545,-689.7743 927.7663,-685.2889 951.1415,-681.3931"/>
 <polygon fill="#191970" stroke="#191970" points="951.973,-684.8029 961.2615,-679.7064 950.8222,-677.8981 951.973,-684.8029"/>
 </g>
@@ -707,84 +707,84 @@
 </a>
 </g>
 </g>
-<!-- Node760&#45;&gt;Node714 -->
+<!-- Node755&#45;&gt;Node714 -->
 <g id="edge42" class="edge">
-<title>Node760&#45;&gt;Node714</title>
+<title>Node755&#45;&gt;Node714</title>
 <path fill="none" stroke="#191970" d="M878.0739,-713.2929C885.7679,-716.7226 893.0962,-721.188 899,-727 932.067,-759.5525 906.9068,-788.0696 935,-825 946.7269,-840.4158 964.2958,-853.1786 979.2014,-862.2019"/>
 <polygon fill="#191970" stroke="#191970" points="977.6534,-865.3498 988.0621,-867.3273 981.1584,-859.2905 977.6534,-865.3498"/>
 </g>
-<!-- Node763 -->
+<!-- Node758 -->
 <g id="node36" class="node">
-<title>Node763</title>
+<title>Node758</title>
 <g id="a_node36"><a xlink:href="class_cleaner.html#ab7f5b746b97697181f4cd06063cbb49a" target="_top" xlink:title="Method to detect right and left borders. Borders are the first column found with no gaps....">
 <polygon fill="#ffffff" stroke="#ff0000" points="557.5,-447.5 557.5,-466.5 703.5,-466.5 703.5,-447.5 557.5,-447.5"/>
 <text text-anchor="middle" x="630.5" y="-454.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::removeOnlyTerminal</text>
 </a>
 </g>
 </g>
-<!-- Node762&#45;&gt;Node763 -->
+<!-- Node757&#45;&gt;Node758 -->
 <g id="edge46" class="edge">
-<title>Node762&#45;&gt;Node763</title>
+<title>Node757&#45;&gt;Node758</title>
 <path fill="none" stroke="#191970" d="M489.509,-482.4521C514.7695,-477.892 543.147,-472.7692 567.7854,-468.3214"/>
 <polygon fill="#191970" stroke="#191970" points="568.5194,-471.7456 577.7385,-466.5246 567.2757,-464.8569 568.5194,-471.7456"/>
 </g>
-<!-- Node764 -->
+<!-- Node759 -->
 <g id="node37" class="node">
-<title>Node764</title>
+<title>Node759</title>
 <g id="a_node37"><a xlink:href="class_cleaner.html#a24bd28e4191afc9471adff329bee1466" target="_top" xlink:title="Method for computing the complementary alignment. &#160;Complementary alignment is an alignment containing...">
 <polygon fill="#ffffff" stroke="#000000" points="541,-523.5 541,-542.5 720,-542.5 720,-523.5 541,-523.5"/>
 <text text-anchor="middle" x="630.5" y="-530.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::computeComplementaryAlig</text>
 </a>
 </g>
 </g>
-<!-- Node762&#45;&gt;Node764 -->
+<!-- Node757&#45;&gt;Node759 -->
 <g id="edge49" class="edge">
-<title>Node762&#45;&gt;Node764</title>
+<title>Node757&#45;&gt;Node759</title>
 <path fill="none" stroke="#191970" d="M489.509,-507.5479C514.7695,-512.108 543.147,-517.2308 567.7854,-521.6786"/>
 <polygon fill="#191970" stroke="#191970" points="567.2757,-525.1431 577.7385,-523.4754 568.5194,-518.2544 567.2757,-525.1431"/>
 </g>
-<!-- Node765 -->
+<!-- Node760 -->
 <g id="node38" class="node">
-<title>Node765</title>
+<title>Node760</title>
 <g id="a_node38"><a xlink:href="class_alignment.html#a1aa0a16c3a78bfc26990d9f795679841" target="_top" xlink:title="Method to back translate a protein alignment using the sequences present on the current alignment....">
 <polygon fill="#ffffff" stroke="#ff0000" points="556,-485.5 556,-504.5 705,-504.5 705,-485.5 556,-485.5"/>
 <text text-anchor="middle" x="630.5" y="-492.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::getTranslationCDS</text>
 </a>
 </g>
 </g>
-<!-- Node762&#45;&gt;Node765 -->
+<!-- Node757&#45;&gt;Node760 -->
 <g id="edge50" class="edge">
-<title>Node762&#45;&gt;Node765</title>
+<title>Node757&#45;&gt;Node760</title>
 <path fill="none" stroke="#191970" d="M489.509,-495C507.5778,-495 527.2413,-495 545.9905,-495"/>
 <polygon fill="#191970" stroke="#191970" points="545.9963,-498.5001 555.9963,-495 545.9963,-491.5001 545.9963,-498.5001"/>
 </g>
-<!-- Node763&#45;&gt;Node680 -->
+<!-- Node758&#45;&gt;Node680 -->
 <g id="edge47" class="edge">
-<title>Node763&#45;&gt;Node680</title>
+<title>Node758&#45;&gt;Node680</title>
 <path fill="none" stroke="#191970" d="M703.8369,-455.917C800.796,-458.3297 971.9545,-476.4091 1080,-567 1118.8412,-599.5665 1145.3301,-654.0023 1158.2976,-685.4816"/>
 <polygon fill="#191970" stroke="#191970" points="1155.0744,-686.8479 1162.0313,-694.8386 1161.5759,-684.2536 1155.0744,-686.8479"/>
 </g>
-<!-- Node763&#45;&gt;Node683 -->
+<!-- Node758&#45;&gt;Node683 -->
 <g id="edge48" class="edge">
-<title>Node763&#45;&gt;Node683</title>
+<title>Node758&#45;&gt;Node683</title>
 <path fill="none" stroke="#191970" d="M683.4565,-466.5276C695.5769,-469.1805 708.3255,-472.3526 720,-476 742.4048,-482.9997 766.5806,-492.8971 786.3208,-501.6282"/>
 <polygon fill="#191970" stroke="#191970" points="785.0713,-504.9036 795.6279,-505.8028 787.9361,-498.5167 785.0713,-504.9036"/>
 </g>
-<!-- Node767&#45;&gt;Node683 -->
+<!-- Node762&#45;&gt;Node683 -->
 <g id="edge52" class="edge">
-<title>Node767&#45;&gt;Node683</title>
+<title>Node762&#45;&gt;Node683</title>
 <path fill="none" stroke="#191970" d="M488.1539,-430.968C550.3171,-420.3053 643.8134,-412.0109 720,-438 754.8269,-449.8803 787.1423,-478.1214 807.0655,-498.3605"/>
 <polygon fill="#191970" stroke="#191970" points="804.6282,-500.8758 814.0738,-505.6747 809.6825,-496.0328 804.6282,-500.8758"/>
 </g>
-<!-- Node770&#45;&gt;Node721 -->
+<!-- Node765&#45;&gt;Node721 -->
 <g id="edge66" class="edge">
-<title>Node770&#45;&gt;Node721</title>
+<title>Node765&#45;&gt;Node721</title>
 <path fill="none" stroke="#191970" d="M647.4209,-921.6944C667.7634,-902.3367 701.4727,-867.0375 720,-830 751.2525,-767.5238 708.9468,-728.6333 756,-677 757.3891,-675.4757 758.8779,-674.0481 760.4488,-672.7111"/>
 <polygon fill="#191970" stroke="#191970" points="762.7478,-675.373 768.9075,-666.7527 758.7166,-669.6502 762.7478,-675.373"/>
 </g>
-<!-- Node771 -->
+<!-- Node766 -->
 <g id="node41" class="node">
-<title>Node771</title>
+<title>Node766</title>
 <g id="a_node41"><a xlink:href="classstatistics_1_1_manager.html#a48e846c0c59f08e43e5483a8eaa2e586" target="_top" xlink:title="Wrapper to Statistics::Gaps::printGapsColumns() It calls to calculateGapStats() to make sure the info...">
 <polygon fill="#ffffff" stroke="#ff0000" points="935,-936 935,-966 1080,-966 1080,-936 935,-936"/>
 <text text-anchor="start" x="943" y="-954" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Manager</text>
@@ -792,15 +792,15 @@
 </a>
 </g>
 </g>
-<!-- Node770&#45;&gt;Node771 -->
+<!-- Node765&#45;&gt;Node766 -->
 <g id="edge55" class="edge">
-<title>Node770&#45;&gt;Node771</title>
+<title>Node765&#45;&gt;Node766</title>
 <path fill="none" stroke="#191970" d="M671.9855,-952.0642C696.139,-960.0309 727.3812,-968.9764 756,-973 818.9366,-981.8483 835.7621,-979.3466 899,-973 910.579,-971.8379 922.7501,-969.9949 934.5856,-967.858"/>
 <polygon fill="#191970" stroke="#191970" points="935.2496,-971.2946 944.428,-966.0025 933.9526,-964.4158 935.2496,-971.2946"/>
 </g>
-<!-- Node773 -->
+<!-- Node768 -->
 <g id="node42" class="node">
-<title>Node773</title>
+<title>Node768</title>
 <g id="a_node42"><a xlink:href="classstatistics_1_1_manager.html#ab93622daa40044bfb03ae1e1e1eabb89" target="_top" xlink:title="Wrapper to Statistics::Gaps::printGapsAcl() It calls to calculateGapStats() to make sure the informat...">
 <polygon fill="#ffffff" stroke="#ff0000" points="943.5,-1000 943.5,-1030 1071.5,-1030 1071.5,-1000 943.5,-1000"/>
 <text text-anchor="start" x="951.5" y="-1018" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Manager</text>
@@ -808,15 +808,15 @@
 </a>
 </g>
 </g>
-<!-- Node770&#45;&gt;Node773 -->
+<!-- Node765&#45;&gt;Node768 -->
 <g id="edge57" class="edge">
-<title>Node770&#45;&gt;Node773</title>
+<title>Node765&#45;&gt;Node768</title>
 <path fill="none" stroke="#191970" d="M659.5484,-952.2325C684.442,-964.5542 721.6199,-981.2457 756,-990 814.3784,-1004.8651 882.4752,-1010.9763 933.0762,-1013.4476"/>
 <polygon fill="#191970" stroke="#191970" points="933.1287,-1016.9535 943.2765,-1013.9083 933.4446,-1009.9606 933.1287,-1016.9535"/>
 </g>
-<!-- Node775 -->
+<!-- Node770 -->
 <g id="node43" class="node">
-<title>Node775</title>
+<title>Node770</title>
 <g id="a_node43"><a xlink:href="classstatistics_1_1_manager.html#a080c687f8f355900511485eeec32a659" target="_top" xlink:title="Wrapper to Statistics::Similarity::printConservationAcl() It calls to calculateConservationStats() to...">
 <polygon fill="#ffffff" stroke="#ff0000" points="757.5,-834.5 757.5,-875.5 897.5,-875.5 897.5,-834.5 757.5,-834.5"/>
 <text text-anchor="start" x="765.5" y="-863.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Manager</text>
@@ -825,15 +825,15 @@
 </a>
 </g>
 </g>
-<!-- Node770&#45;&gt;Node775 -->
+<!-- Node765&#45;&gt;Node770 -->
 <g id="edge59" class="edge">
-<title>Node770&#45;&gt;Node775</title>
+<title>Node765&#45;&gt;Node770</title>
 <path fill="none" stroke="#191970" d="M666.6328,-921.9599C695.1427,-910.0929 735.4945,-893.2967 768.651,-879.4955"/>
 <polygon fill="#191970" stroke="#191970" points="770.3541,-882.5778 778.2412,-875.5036 767.6641,-876.1153 770.3541,-882.5778"/>
 </g>
-<!-- Node777 -->
+<!-- Node772 -->
 <g id="node44" class="node">
-<title>Node777</title>
+<title>Node772</title>
 <g id="a_node44"><a xlink:href="classstatistics_1_1_manager.html#aa20cfb477826035386ea988e3706b09a" target="_top" xlink:title="Wrapper to Statistics::Similarity::printGapsTotal() It calls to calculateConservationStats() to make ...">
 <polygon fill="#ffffff" stroke="#ff0000" points="757.5,-736.5 757.5,-777.5 897.5,-777.5 897.5,-736.5 757.5,-736.5"/>
 <text text-anchor="start" x="765.5" y="-765.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Manager</text>
@@ -842,45 +842,45 @@
 </a>
 </g>
 </g>
-<!-- Node770&#45;&gt;Node777 -->
+<!-- Node765&#45;&gt;Node772 -->
 <g id="edge61" class="edge">
-<title>Node770&#45;&gt;Node777</title>
+<title>Node765&#45;&gt;Node772</title>
 <path fill="none" stroke="#191970" d="M653.8841,-921.9924C673.5273,-908.4571 701.3068,-887.029 720,-863 742.9494,-833.4998 728.9822,-812.8259 756,-787 757.2711,-785.785 758.5987,-784.6158 759.9736,-783.491"/>
 <polygon fill="#191970" stroke="#191970" points="762.2122,-786.1928 768.303,-777.5237 758.1355,-780.5024 762.2122,-786.1928"/>
 </g>
-<!-- Node779 -->
+<!-- Node774 -->
 <g id="node45" class="node">
-<title>Node779</title>
+<title>Node774</title>
 <g id="a_node45"><a xlink:href="class_alignment.html#a10bcb1fde7d422ca310dcd1f25f48738" target="_top" xlink:title="Method to print different identity values computed from the alignment. In this method we assess the i...">
 <polygon fill="#ffffff" stroke="#ff0000" points="760.5,-1058.5 760.5,-1077.5 894.5,-1077.5 894.5,-1058.5 760.5,-1058.5"/>
 <text text-anchor="middle" x="827.5" y="-1065.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::printSeqIdentity</text>
 </a>
 </g>
 </g>
-<!-- Node770&#45;&gt;Node779 -->
+<!-- Node765&#45;&gt;Node774 -->
 <g id="edge63" class="edge">
-<title>Node770&#45;&gt;Node779</title>
+<title>Node765&#45;&gt;Node774</title>
 <path fill="none" stroke="#191970" d="M644.5279,-952.2201C666.3482,-975.0825 710.6464,-1018.3372 756,-1044 763.7003,-1048.3571 772.3169,-1052.0862 780.8297,-1055.2152"/>
 <polygon fill="#191970" stroke="#191970" points="779.7476,-1058.5442 790.3423,-1058.4944 782.029,-1051.9264 779.7476,-1058.5442"/>
 </g>
-<!-- Node780 -->
+<!-- Node775 -->
 <g id="node46" class="node">
-<title>Node780</title>
+<title>Node775</title>
 <g id="a_node46"><a xlink:href="class_alignment.html#afa57312b9d013f83e8d679a8ead6be7b" target="_top" xlink:title="Prints the overlap between sequences.">
 <polygon fill="#ffffff" stroke="#ff0000" points="759.5,-944.5 759.5,-963.5 895.5,-963.5 895.5,-944.5 759.5,-944.5"/>
 <text text-anchor="middle" x="827.5" y="-951.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::printSeqOverlap</text>
 </a>
 </g>
 </g>
-<!-- Node770&#45;&gt;Node780 -->
+<!-- Node765&#45;&gt;Node775 -->
 <g id="edge64" class="edge">
-<title>Node770&#45;&gt;Node780</title>
+<title>Node765&#45;&gt;Node775</title>
 <path fill="none" stroke="#191970" d="M682.5171,-941.4888C702.8812,-943.2461 726.6846,-945.3002 749.0483,-947.2301"/>
 <polygon fill="#191970" stroke="#191970" points="748.9408,-950.7337 759.2047,-948.1065 749.5427,-943.7596 748.9408,-950.7337"/>
 </g>
-<!-- Node782 -->
+<!-- Node777 -->
 <g id="node47" class="node">
-<title>Node782</title>
+<title>Node777</title>
 <g id="a_node47"><a xlink:href="classstatistics_1_1_consistency.html#a641c9cc5f44f7cdc0a48dad576c07fb1" target="_top" xlink:title="Print the consistency value for each column from the selected alignment.">
 <polygon fill="#ffffff" stroke="#000000" points="759,-1097 759,-1127 896,-1127 896,-1097 759,-1097"/>
 <text text-anchor="start" x="767" y="-1115" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Consistency</text>
@@ -888,15 +888,15 @@
 </a>
 </g>
 </g>
-<!-- Node770&#45;&gt;Node782 -->
+<!-- Node765&#45;&gt;Node777 -->
 <g id="edge65" class="edge">
-<title>Node770&#45;&gt;Node782</title>
+<title>Node765&#45;&gt;Node777</title>
 <path fill="none" stroke="#191970" d="M639.2064,-952.0748C657.2341,-982.0152 701.55,-1049.3293 756,-1087 758.8438,-1088.9675 761.8578,-1090.7945 764.9771,-1092.4893"/>
 <polygon fill="#191970" stroke="#191970" points="763.4742,-1095.6505 773.9925,-1096.9217 766.5627,-1089.3686 763.4742,-1095.6505"/>
 </g>
-<!-- Node783 -->
+<!-- Node778 -->
 <g id="node48" class="node">
-<title>Node783</title>
+<title>Node778</title>
 <g id="a_node48"><a xlink:href="classstatistics_1_1_consistency.html#a24521eba253b76ddc60c719c9769613a" target="_top" xlink:title="Print the accumulated consistency value from the selected alignment.">
 <polygon fill="#ffffff" stroke="#000000" points="769,-895 769,-925 886,-925 886,-895 769,-895"/>
 <text text-anchor="start" x="777" y="-913" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Consistency</text>
@@ -904,51 +904,51 @@
 </a>
 </g>
 </g>
-<!-- Node770&#45;&gt;Node783 -->
+<!-- Node765&#45;&gt;Node778 -->
 <g id="edge67" class="edge">
-<title>Node770&#45;&gt;Node783</title>
+<title>Node765&#45;&gt;Node778</title>
 <path fill="none" stroke="#191970" d="M682.5171,-929.8708C705.8616,-926.6713 733.7257,-922.8523 758.7595,-919.4213"/>
 <polygon fill="#191970" stroke="#191970" points="759.4943,-922.8534 768.9264,-918.0279 758.5437,-915.9182 759.4943,-922.8534"/>
 </g>
-<!-- Node771&#45;&gt;Node680 -->
+<!-- Node766&#45;&gt;Node680 -->
 <g id="edge56" class="edge">
-<title>Node771&#45;&gt;Node680</title>
+<title>Node766&#45;&gt;Node680</title>
 <path fill="none" stroke="#191970" d="M1033.1589,-935.9702C1048.2947,-926.1083 1066.974,-912.0832 1080,-896 1120.9577,-845.4296 1147.9631,-772.5265 1160.1112,-734.7668"/>
 <polygon fill="#191970" stroke="#191970" points="1163.4911,-735.6855 1163.1428,-725.0964 1156.8116,-733.5914 1163.4911,-735.6855"/>
 </g>
-<!-- Node773&#45;&gt;Node680 -->
+<!-- Node768&#45;&gt;Node680 -->
 <g id="edge58" class="edge">
-<title>Node773&#45;&gt;Node680</title>
+<title>Node768&#45;&gt;Node680</title>
 <path fill="none" stroke="#191970" d="M1047.1085,-999.906C1059.0451,-993.7261 1071.2778,-985.5085 1080,-975 1140.5398,-902.0614 1159.6512,-785.8323 1165.2976,-735.0813"/>
 <polygon fill="#191970" stroke="#191970" points="1168.7919,-735.3161 1166.3341,-725.0103 1161.8287,-734.5994 1168.7919,-735.3161"/>
 </g>
-<!-- Node775&#45;&gt;Node693 -->
+<!-- Node770&#45;&gt;Node693 -->
 <g id="edge60" class="edge">
-<title>Node775&#45;&gt;Node693</title>
+<title>Node770&#45;&gt;Node693</title>
 <path fill="none" stroke="#191970" d="M882.9934,-834.4752C888.5765,-831.6052 894.017,-828.4446 899,-825 918.1371,-811.771 915.8303,-800.1817 935,-787 940.656,-783.1108 946.8944,-779.5903 953.2667,-776.444"/>
 <polygon fill="#191970" stroke="#191970" points="955.0415,-779.4794 962.6466,-772.1029 952.1014,-773.1267 955.0415,-779.4794"/>
 </g>
-<!-- Node777&#45;&gt;Node693 -->
+<!-- Node772&#45;&gt;Node693 -->
 <g id="edge62" class="edge">
-<title>Node777&#45;&gt;Node693</title>
+<title>Node772&#45;&gt;Node693</title>
 <path fill="none" stroke="#191970" d="M897.6081,-757C906.8146,-757 916.3135,-757 925.6927,-757"/>
 <polygon fill="#191970" stroke="#191970" points="925.8037,-760.5001 935.8036,-757 925.8036,-753.5001 925.8037,-760.5001"/>
 </g>
-<!-- Node783&#45;&gt;Node686 -->
+<!-- Node778&#45;&gt;Node686 -->
 <g id="edge69" class="edge">
-<title>Node783&#45;&gt;Node686</title>
+<title>Node778&#45;&gt;Node686</title>
 <path fill="none" stroke="#191970" d="M877.1952,-894.8576C884.666,-891.9469 892.1541,-888.6509 899,-885 916.6473,-875.5887 918.8731,-869.8289 935,-858 951.8595,-845.6337 971.0965,-831.851 985.5164,-821.5839"/>
 <polygon fill="#191970" stroke="#191970" points="987.6855,-824.3362 993.808,-815.6895 983.6296,-818.6309 987.6855,-824.3362"/>
 </g>
-<!-- Node783&#45;&gt;Node714 -->
+<!-- Node778&#45;&gt;Node714 -->
 <g id="edge68" class="edge">
-<title>Node783&#45;&gt;Node714</title>
+<title>Node778&#45;&gt;Node714</title>
 <path fill="none" stroke="#191970" d="M886.4387,-899.1946C909.0095,-895.0566 934.5509,-890.374 956.3361,-886.3801"/>
 <polygon fill="#191970" stroke="#191970" points="957.1722,-889.7852 966.3771,-884.5392 955.9099,-882.8999 957.1722,-889.7852"/>
 </g>
-<!-- Node785&#45;&gt;Node767 -->
+<!-- Node780&#45;&gt;Node762 -->
 <g id="edge72" class="edge">
-<title>Node785&#45;&gt;Node767</title>
+<title>Node780&#45;&gt;Node762</title>
 <path fill="none" stroke="#191970" d="M280.505,-432.9901C295.7482,-434.4118 312.7906,-436.0012 329.5861,-437.5676"/>
 <polygon fill="#191970" stroke="#191970" points="329.7117,-441.0944 339.9936,-438.5383 330.3618,-434.1247 329.7117,-441.0944"/>
 </g>

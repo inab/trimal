@@ -9,18 +9,18 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 496)">
 <title>trimAlManager::performCompareset</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-496 710,-496 710,4 -4,4"/>
-<!-- Node886 -->
+<!-- Node876 -->
 <g id="node1" class="node">
-<title>Node886</title>
+<title>Node876</title>
 <g id="a_node1"><a xlink:title="Method to check if multiple files comparison has been set correctly. It also perform some calculation...">
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-291.5 0,-310.5 172,-310.5 172,-291.5 0,-291.5"/>
 <text text-anchor="middle" x="86" y="-298.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::performCompareset</text>
 </a>
 </g>
 </g>
-<!-- Node887 -->
+<!-- Node877 -->
 <g id="node2" class="node">
-<title>Node887</title>
+<title>Node877</title>
 <g id="a_node2"><a xlink:href="classstatistics_1_1_consistency.html#ae8679e43ec228926ac2844af133cc2d5" target="_top" xlink:title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue...">
 <polygon fill="#ffffff" stroke="#000000" points="208,-286 208,-316 325,-316 325,-286 208,-286"/>
 <text text-anchor="start" x="216" y="-304" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Consistency</text>
@@ -28,30 +28,30 @@
 </a>
 </g>
 </g>
-<!-- Node886&#45;&gt;Node887 -->
+<!-- Node876&#45;&gt;Node877 -->
 <g id="edge1" class="edge">
-<title>Node886&#45;&gt;Node887</title>
+<title>Node876&#45;&gt;Node877</title>
 <path fill="none" stroke="#191970" d="M172.0209,-301C180.671,-301 189.3731,-301 197.8083,-301"/>
 <polygon fill="#191970" stroke="#191970" points="197.9436,-304.5001 207.9436,-301 197.9435,-297.5001 197.9436,-304.5001"/>
 </g>
-<!-- Node888 -->
+<!-- Node878 -->
 <g id="node3" class="node">
-<title>Node888</title>
+<title>Node878</title>
 <g id="a_node3"><a xlink:href="namespaceutils.html#ae9637f7928b61ba73fd10daf132bc593" target="_top" xlink:title="String comparing method.">
 <polygon fill="#ffffff" stroke="#000000" points="402,-472.5 402,-491.5 480,-491.5 480,-472.5 402,-472.5"/>
 <text text-anchor="middle" x="441" y="-479.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::compare</text>
 </a>
 </g>
 </g>
-<!-- Node887&#45;&gt;Node888 -->
+<!-- Node877&#45;&gt;Node878 -->
 <g id="edge2" class="edge">
-<title>Node887&#45;&gt;Node888</title>
+<title>Node877&#45;&gt;Node878</title>
 <path fill="none" stroke="#191970" d="M270.8791,-316.2662C281.0024,-348.693 309.2104,-424.6051 361,-463 369.9554,-469.6392 380.8917,-473.9959 391.7669,-476.8448"/>
 <polygon fill="#191970" stroke="#191970" points="391.156,-480.2946 401.6786,-479.0595 392.6825,-473.463 391.156,-480.2946"/>
 </g>
-<!-- Node889 -->
+<!-- Node879 -->
 <g id="node4" class="node">
-<title>Node889</title>
+<title>Node879</title>
 <g id="a_node4"><a xlink:href="class_format_handling_1_1_format_manager.html#ae02b932789b35289dc506e8ed0297695" target="_top" xlink:title="Function that loads an alignment given a file path. It automatically detects the format of the file.">
 <polygon fill="#ffffff" stroke="#000000" points="361,-423 361,-453 521,-453 521,-423 361,-423"/>
 <text text-anchor="start" x="369" y="-441" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">FormatHandling::FormatManager</text>
@@ -59,15 +59,15 @@
 </a>
 </g>
 </g>
-<!-- Node887&#45;&gt;Node889 -->
+<!-- Node877&#45;&gt;Node879 -->
 <g id="edge3" class="edge">
-<title>Node887&#45;&gt;Node889</title>
+<title>Node877&#45;&gt;Node879</title>
 <path fill="none" stroke="#191970" d="M276.311,-316.2401C291.7592,-339.1285 323.8498,-382.4169 361,-408 366.8793,-412.0487 373.3753,-415.6354 380.0484,-418.7907"/>
 <polygon fill="#191970" stroke="#191970" points="378.654,-422.001 389.2165,-422.8289 381.4757,-415.5949 378.654,-422.001"/>
 </g>
-<!-- Node890 -->
+<!-- Node880 -->
 <g id="node5" class="node">
-<title>Node890</title>
+<title>Node880</title>
 <g id="a_node5"><a xlink:href="classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR.">
 <polygon fill="#ffffff" stroke="#000000" points="570.5,-379 570.5,-409 692.5,-409 692.5,-379 570.5,-379"/>
 <text text-anchor="start" x="578.5" y="-397" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">reporting::reportManager</text>
@@ -75,45 +75,45 @@
 </a>
 </g>
 </g>
-<!-- Node887&#45;&gt;Node890 -->
+<!-- Node877&#45;&gt;Node880 -->
 <g id="edge6" class="edge">
-<title>Node887&#45;&gt;Node890</title>
+<title>Node877&#45;&gt;Node880</title>
 <path fill="none" stroke="#191970" d="M280.1351,-316.1367C297.1136,-333.8224 327.9375,-362.2816 361,-375 425.2178,-399.7032 504.277,-402.3926 560.3002,-400.1523"/>
 <polygon fill="#191970" stroke="#191970" points="560.6567,-403.6396 570.4841,-399.6808 560.3329,-396.6471 560.6567,-403.6396"/>
 </g>
-<!-- Node892 -->
+<!-- Node882 -->
 <g id="node7" class="node">
-<title>Node892</title>
+<title>Node882</title>
 <g id="a_node7"><a xlink:href="class_alignment.html#abe1ee0139489feb6a5df99361e8dc0a7" target="_top" xlink:title="Residues number getter. It counts gaps as residue.">
 <polygon fill="#ffffff" stroke="#000000" points="564.5,-38.5 564.5,-57.5 698.5,-57.5 698.5,-38.5 564.5,-38.5"/>
 <text text-anchor="middle" x="631.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::getNumAminos</text>
 </a>
 </g>
 </g>
-<!-- Node887&#45;&gt;Node892 -->
+<!-- Node877&#45;&gt;Node882 -->
 <g id="edge7" class="edge">
-<title>Node887&#45;&gt;Node892</title>
+<title>Node877&#45;&gt;Node882</title>
 <path fill="none" stroke="#191970" d="M275.3959,-285.9553C290.5443,-261.2789 323.3867,-211.6875 361,-179 436.7295,-113.188 463.9925,-104.6268 557,-67 563.1521,-64.5111 569.7246,-62.2723 576.3222,-60.2804"/>
 <polygon fill="#191970" stroke="#191970" points="577.2999,-63.6412 585.9603,-57.5381 575.3842,-56.9084 577.2999,-63.6412"/>
 </g>
-<!-- Node893 -->
+<!-- Node883 -->
 <g id="node8" class="node">
-<title>Node893</title>
+<title>Node883</title>
 <g id="a_node8"><a xlink:href="class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" target="_top" xlink:title="Alignment type getter. &#160;&#160;See SequenceTypes.">
 <polygon fill="#ffffff" stroke="#000000" points="368.5,-28.5 368.5,-47.5 513.5,-47.5 513.5,-28.5 368.5,-28.5"/>
 <text text-anchor="middle" x="441" y="-35.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::getAlignmentType</text>
 </a>
 </g>
 </g>
-<!-- Node887&#45;&gt;Node893 -->
+<!-- Node877&#45;&gt;Node883 -->
 <g id="edge8" class="edge">
-<title>Node887&#45;&gt;Node893</title>
+<title>Node877&#45;&gt;Node883</title>
 <path fill="none" stroke="#191970" d="M272.3763,-285.7728C285.408,-253.0453 318.933,-174.3251 361,-117 378.6651,-92.9275 403.783,-69.4166 421.1398,-54.3911"/>
 <polygon fill="#191970" stroke="#191970" points="423.6203,-56.8762 428.9703,-47.7313 419.0852,-51.5439 423.6203,-56.8762"/>
 </g>
-<!-- Node895 -->
+<!-- Node885 -->
 <g id="node10" class="node">
-<title>Node895</title>
+<title>Node885</title>
 <g id="a_node10"><a xlink:href="classstatistics_1_1_consistency.html#a35c4f5aab5ad2e8d4722f07b17b9dbd2" target="_top" xlink:title="Method to compare a set of alignments to select the most consistent one respect the others....">
 <polygon fill="#ffffff" stroke="#000000" points="382.5,-237 382.5,-267 499.5,-267 499.5,-237 382.5,-237"/>
 <text text-anchor="start" x="390.5" y="-255" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Consistency</text>
@@ -121,15 +121,15 @@
 </a>
 </g>
 </g>
-<!-- Node887&#45;&gt;Node895 -->
+<!-- Node877&#45;&gt;Node885 -->
 <g id="edge10" class="edge">
-<title>Node887&#45;&gt;Node895</title>
+<title>Node877&#45;&gt;Node885</title>
 <path fill="none" stroke="#191970" d="M320.2796,-285.8986C338.4435,-280.7981 358.8885,-275.0571 377.7188,-269.7695"/>
 <polygon fill="#191970" stroke="#191970" points="378.7166,-273.1248 387.398,-267.0516 376.8241,-266.3854 378.7166,-273.1248"/>
 </g>
-<!-- Node903 -->
+<!-- Node893 -->
 <g id="node18" class="node">
-<title>Node903</title>
+<title>Node893</title>
 <g id="a_node18"><a xlink:href="classstatistics_1_1_consistency.html#a12d0b624abec361767bd3a6001998f02" target="_top" xlink:title="Method to obtain the consistency values vector for a given alignment against a set of alignments with...">
 <polygon fill="#ffffff" stroke="#000000" points="382.5,-188 382.5,-218 499.5,-218 499.5,-188 382.5,-188"/>
 <text text-anchor="start" x="390.5" y="-206" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Consistency</text>
@@ -137,15 +137,15 @@
 </a>
 </g>
 </g>
-<!-- Node887&#45;&gt;Node903 -->
+<!-- Node877&#45;&gt;Node893 -->
 <g id="edge19" class="edge">
-<title>Node887&#45;&gt;Node903</title>
+<title>Node877&#45;&gt;Node893</title>
 <path fill="none" stroke="#191970" d="M282.3337,-285.8768C300.1757,-269.5623 330.6638,-243.8053 361,-228 365.2908,-225.7644 369.8166,-223.6879 374.444,-221.7667"/>
 <polygon fill="#191970" stroke="#191970" points="375.9867,-224.9223 384.042,-218.0403 373.4532,-218.3969 375.9867,-224.9223"/>
 </g>
-<!-- Node904 -->
+<!-- Node894 -->
 <g id="node19" class="node">
-<title>Node904</title>
+<title>Node894</title>
 <g id="a_node19"><a xlink:href="classstatistics_1_1_consistency.html#a6fe619f559c7271eedd869581684f479" target="_top" xlink:title="Applies a new window to the alignment.">
 <polygon fill="#ffffff" stroke="#000000" points="382.5,-335 382.5,-365 499.5,-365 499.5,-335 382.5,-335"/>
 <text text-anchor="start" x="390.5" y="-353" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Consistency</text>
@@ -153,15 +153,15 @@
 </a>
 </g>
 </g>
-<!-- Node887&#45;&gt;Node904 -->
+<!-- Node877&#45;&gt;Node894 -->
 <g id="edge28" class="edge">
-<title>Node887&#45;&gt;Node904</title>
+<title>Node877&#45;&gt;Node894</title>
 <path fill="none" stroke="#191970" d="M320.2796,-316.1014C338.4435,-321.2019 358.8885,-326.9429 377.7188,-332.2305"/>
 <polygon fill="#191970" stroke="#191970" points="376.8241,-335.6146 387.398,-334.9484 378.7166,-328.8752 376.8241,-335.6146"/>
 </g>
-<!-- Node905 -->
+<!-- Node895 -->
 <g id="node20" class="node">
-<title>Node905</title>
+<title>Node895</title>
 <g id="a_node20"><a xlink:href="class_format_handling_1_1_format_manager.html#ac691b15ee0b0e6a22a22f82569672745" target="_top" xlink:title="Function to obtain the format name of a given file.">
 <polygon fill="#ffffff" stroke="#000000" points="361,-286 361,-316 521,-316 521,-286 361,-286"/>
 <text text-anchor="start" x="369" y="-304" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">FormatHandling::FormatManager</text>
@@ -169,21 +169,21 @@
 </a>
 </g>
 </g>
-<!-- Node887&#45;&gt;Node905 -->
+<!-- Node877&#45;&gt;Node895 -->
 <g id="edge30" class="edge">
-<title>Node887&#45;&gt;Node905</title>
+<title>Node877&#45;&gt;Node895</title>
 <path fill="none" stroke="#191970" d="M325.0914,-301C333.3465,-301 341.9867,-301 350.6676,-301"/>
 <polygon fill="#191970" stroke="#191970" points="350.8563,-304.5001 360.8563,-301 350.8563,-297.5001 350.8563,-304.5001"/>
 </g>
-<!-- Node889&#45;&gt;Node890 -->
+<!-- Node879&#45;&gt;Node880 -->
 <g id="edge4" class="edge">
-<title>Node889&#45;&gt;Node890</title>
+<title>Node879&#45;&gt;Node880</title>
 <path fill="none" stroke="#191970" d="M506.0265,-422.9808C523.5787,-418.9267 542.6586,-414.5198 560.5187,-410.3946"/>
 <polygon fill="#191970" stroke="#191970" points="561.3423,-413.7966 570.2981,-408.1359 559.7669,-406.9762 561.3423,-413.7966"/>
 </g>
-<!-- Node891 -->
+<!-- Node881 -->
 <g id="node6" class="node">
-<title>Node891</title>
+<title>Node881</title>
 <g id="a_node6"><a xlink:href="class_format_handling_1_1_base_format_handler.html#acb1e7d713993916bb7b7b8c8ebebb922" target="_top" xlink:title="Function to load a file in the current format and return an alignment object.">
 <polygon fill="#ffffff" stroke="#000000" points="559,-428 559,-458 704,-458 704,-428 559,-428"/>
 <text text-anchor="start" x="567" y="-446" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">FormatHandling::BaseFormat</text>
@@ -191,81 +191,81 @@
 </a>
 </g>
 </g>
-<!-- Node889&#45;&gt;Node891 -->
+<!-- Node879&#45;&gt;Node881 -->
 <g id="edge5" class="edge">
-<title>Node889&#45;&gt;Node891</title>
+<title>Node879&#45;&gt;Node881</title>
 <path fill="none" stroke="#191970" d="M521.237,-440.106C530.3243,-440.3445 539.5985,-440.5879 548.7176,-440.8272"/>
 <polygon fill="#191970" stroke="#191970" points="548.8408,-444.3316 558.9292,-441.0953 549.0246,-437.334 548.8408,-444.3316"/>
 </g>
-<!-- Node894 -->
+<!-- Node884 -->
 <g id="node9" class="node">
-<title>Node894</title>
+<title>Node884</title>
 <g id="a_node9"><a xlink:href="namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" target="_top" xlink:title="Checks an alignment type.">
 <polygon fill="#ffffff" stroke="#000000" points="565.5,-.5 565.5,-19.5 697.5,-19.5 697.5,-.5 565.5,-.5"/>
 <text text-anchor="middle" x="631.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::checkAlignmentType</text>
 </a>
 </g>
 </g>
-<!-- Node893&#45;&gt;Node894 -->
+<!-- Node883&#45;&gt;Node884 -->
 <g id="edge9" class="edge">
-<title>Node893&#45;&gt;Node894</title>
+<title>Node883&#45;&gt;Node884</title>
 <path fill="none" stroke="#191970" d="M505.7604,-28.4814C522.0175,-26.0919 539.5993,-23.5077 556.3171,-21.0505"/>
 <polygon fill="#191970" stroke="#191970" points="557.2104,-24.4569 566.5951,-19.5398 556.1924,-17.5313 557.2104,-24.4569"/>
 </g>
-<!-- Node895&#45;&gt;Node890 -->
+<!-- Node885&#45;&gt;Node880 -->
 <g id="edge13" class="edge">
-<title>Node895&#45;&gt;Node890</title>
+<title>Node885&#45;&gt;Node880</title>
 <path fill="none" stroke="#191970" d="M499.8701,-263.581C507.6019,-266.9677 514.9332,-271.3442 521,-277 553.1165,-306.9404 525.1978,-338.7259 557,-369 558.6459,-370.5668 560.393,-372.0355 562.2211,-373.4123"/>
 <polygon fill="#191970" stroke="#191970" points="560.3932,-376.3982 570.6935,-378.8792 564.1885,-370.5164 560.3932,-376.3982"/>
 </g>
-<!-- Node896 -->
+<!-- Node886 -->
 <g id="node11" class="node">
-<title>Node896</title>
+<title>Node886</title>
 <g id="a_node11"><a xlink:href="namespaceutils.html#a40640e1942f00797e9fe8284e8fbdb14" target="_top" xlink:title="Maximum of two numbers method.">
 <polygon fill="#ffffff" stroke="#000000" points="602,-340.5 602,-359.5 661,-359.5 661,-340.5 602,-340.5"/>
 <text text-anchor="middle" x="631.5" y="-347.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::max</text>
 </a>
 </g>
 </g>
-<!-- Node895&#45;&gt;Node896 -->
+<!-- Node885&#45;&gt;Node886 -->
 <g id="edge11" class="edge">
-<title>Node895&#45;&gt;Node896</title>
+<title>Node885&#45;&gt;Node886</title>
 <path fill="none" stroke="#191970" d="M499.662,-265.1611C507.2484,-268.3122 514.5943,-272.2023 521,-277 544.087,-294.2914 533.4615,-314.3285 557,-331 567.2119,-338.2327 579.9356,-342.7161 591.9619,-345.4939"/>
 <polygon fill="#191970" stroke="#191970" points="591.3399,-348.9386 601.8295,-347.449 592.7004,-342.0721 591.3399,-348.9386"/>
 </g>
-<!-- Node897 -->
+<!-- Node887 -->
 <g id="node12" class="node">
-<title>Node897</title>
+<title>Node887</title>
 <g id="a_node12"><a xlink:href="class_alignment.html#a66fdd6d16ef1ccb5e8da24c6e20feca7" target="_top" xlink:title="Number of sequences getter.">
 <polygon fill="#ffffff" stroke="#000000" points="563.5,-164.5 563.5,-183.5 699.5,-183.5 699.5,-164.5 563.5,-164.5"/>
 <text text-anchor="middle" x="631.5" y="-171.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::getNumSpecies</text>
 </a>
 </g>
 </g>
-<!-- Node895&#45;&gt;Node897 -->
+<!-- Node885&#45;&gt;Node887 -->
 <g id="edge12" class="edge">
-<title>Node895&#45;&gt;Node897</title>
+<title>Node885&#45;&gt;Node887</title>
 <path fill="none" stroke="#191970" d="M499.5818,-237.9157C507.019,-235.1286 514.3465,-231.8463 521,-228 540.0533,-216.9857 537.788,-204.7352 557,-194 561.8224,-191.3054 567.025,-188.9598 572.3601,-186.9209"/>
 <polygon fill="#191970" stroke="#191970" points="573.7437,-190.146 582.0528,-183.5727 571.4581,-183.5296 573.7437,-190.146"/>
 </g>
-<!-- Node898 -->
+<!-- Node888 -->
 <g id="node13" class="node">
-<title>Node898</title>
+<title>Node888</title>
 <g id="a_node13"><a xlink:href="class_alignment.html#ab44caa194f61bbbabf7572f3a70cf2fc" target="_top" xlink:title="Getter for the sequences names.">
 <polygon fill="#ffffff" stroke="#000000" points="567.5,-126.5 567.5,-145.5 695.5,-145.5 695.5,-126.5 567.5,-126.5"/>
 <text text-anchor="middle" x="631.5" y="-133.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::getSequences</text>
 </a>
 </g>
 </g>
-<!-- Node895&#45;&gt;Node898 -->
+<!-- Node885&#45;&gt;Node888 -->
 <g id="edge14" class="edge">
-<title>Node895&#45;&gt;Node898</title>
+<title>Node885&#45;&gt;Node888</title>
 <path fill="none" stroke="#191970" d="M499.838,-240.5448C507.4844,-237.3421 514.8,-233.2439 521,-228 548.6205,-204.6387 528.898,-177.7798 557,-155 559.0868,-153.3084 561.3059,-151.7654 563.6236,-150.358"/>
 <polygon fill="#191970" stroke="#191970" points="565.6699,-153.2428 572.9808,-145.5747 562.4837,-147.01 565.6699,-153.2428"/>
 </g>
-<!-- Node899 -->
+<!-- Node889 -->
 <g id="node14" class="node">
-<title>Node899</title>
+<title>Node889</title>
 <g id="a_node14"><a xlink:href="class_alignment.html#a436ad8aea24b90789806a981e66da83f" target="_top" xlink:title="Method to map two sets of sequences, own and external. The method accepts a vector of names,...">
 <polygon fill="#ffffff" stroke="#000000" points="557,-77 557,-107 706,-107 706,-77 557,-77"/>
 <text text-anchor="start" x="565" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::getSequenceName</text>
@@ -273,15 +273,15 @@
 </a>
 </g>
 </g>
-<!-- Node895&#45;&gt;Node899 -->
+<!-- Node885&#45;&gt;Node889 -->
 <g id="edge15" class="edge">
-<title>Node895&#45;&gt;Node899</title>
+<title>Node885&#45;&gt;Node889</title>
 <path fill="none" stroke="#191970" d="M499.7513,-241.6911C507.593,-238.3286 514.9875,-233.8807 521,-228 558.0769,-191.7359 520.5137,-153.8582 557,-117 558.4397,-115.5456 559.9664,-114.1759 561.5651,-112.8858"/>
 <polygon fill="#191970" stroke="#191970" points="563.7959,-115.601 570.0876,-107.0766 559.8533,-109.8169 563.7959,-115.601"/>
 </g>
-<!-- Node900 -->
+<!-- Node890 -->
 <g id="node15" class="node">
-<title>Node900</title>
+<title>Node890</title>
 <g id="a_node15"><a xlink:href="class_alignment_1_1sequences_matrix.html#a1cc36c365ace94585d966db0404e5081" target="_top" xlink:title="Method that reorders the stored sequences with a given order list.">
 <polygon fill="#ffffff" stroke="#000000" points="561.5,-291 561.5,-321 701.5,-321 701.5,-291 561.5,-291"/>
 <text text-anchor="start" x="569.5" y="-309" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::sequencesMatrix</text>
@@ -289,30 +289,30 @@
 </a>
 </g>
 </g>
-<!-- Node895&#45;&gt;Node900 -->
+<!-- Node885&#45;&gt;Node890 -->
 <g id="edge16" class="edge">
-<title>Node895&#45;&gt;Node900</title>
+<title>Node885&#45;&gt;Node890</title>
 <path fill="none" stroke="#191970" d="M494.0649,-267.042C517.1908,-273.5974 544.4743,-281.3313 568.6113,-288.1733"/>
 <polygon fill="#191970" stroke="#191970" points="567.8142,-291.5852 578.3896,-290.9451 569.7232,-284.8505 567.8142,-291.5852"/>
 </g>
-<!-- Node901 -->
+<!-- Node891 -->
 <g id="node16" class="node">
-<title>Node901</title>
+<title>Node891</title>
 <g id="a_node16"><a xlink:href="namespaceutils.html#aac322cd1761fddedec8a5792e358eb32" target="_top" xlink:title="Vector initialization.">
 <polygon fill="#ffffff" stroke="#000000" points="593.5,-252.5 593.5,-271.5 669.5,-271.5 669.5,-252.5 593.5,-252.5"/>
 <text text-anchor="middle" x="631.5" y="-259.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::initlVect</text>
 </a>
 </g>
 </g>
-<!-- Node895&#45;&gt;Node901 -->
+<!-- Node885&#45;&gt;Node891 -->
 <g id="edge17" class="edge">
-<title>Node895&#45;&gt;Node901</title>
+<title>Node885&#45;&gt;Node891</title>
 <path fill="none" stroke="#191970" d="M499.7107,-255.0819C526.5184,-256.4892 557.8774,-258.1353 583.2792,-259.4687"/>
 <polygon fill="#191970" stroke="#191970" points="583.242,-262.9715 593.4118,-260.0006 583.6091,-255.9811 583.242,-262.9715"/>
 </g>
-<!-- Node902 -->
+<!-- Node892 -->
 <g id="node17" class="node">
-<title>Node902</title>
+<title>Node892</title>
 <g id="a_node17"><a xlink:href="class_alignment_1_1sequences_matrix.html#ade52c6977160c699b42c8a44735397e8" target="_top" xlink:title="Method to get a column out of the matrix.">
 <polygon fill="#ffffff" stroke="#000000" points="561.5,-203 561.5,-233 701.5,-233 701.5,-203 561.5,-203"/>
 <text text-anchor="start" x="569.5" y="-221" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::sequencesMatrix</text>
@@ -320,69 +320,69 @@
 </a>
 </g>
 </g>
-<!-- Node895&#45;&gt;Node902 -->
+<!-- Node885&#45;&gt;Node892 -->
 <g id="edge18" class="edge">
-<title>Node895&#45;&gt;Node902</title>
+<title>Node885&#45;&gt;Node892</title>
 <path fill="none" stroke="#191970" d="M499.7107,-241.5214C515.9776,-238.6182 533.9205,-235.4158 551.1912,-232.3333"/>
 <polygon fill="#191970" stroke="#191970" points="552.035,-235.7381 561.2645,-230.5355 550.8051,-228.847 552.035,-235.7381"/>
 </g>
-<!-- Node903&#45;&gt;Node890 -->
+<!-- Node893&#45;&gt;Node880 -->
 <g id="edge23" class="edge">
-<title>Node903&#45;&gt;Node890</title>
+<title>Node893&#45;&gt;Node880</title>
 <path fill="none" stroke="#191970" d="M499.7151,-213.5621C507.658,-217.0851 515.092,-221.7709 521,-228 565.5079,-274.9272 512.9844,-321.6108 557,-369 558.5465,-370.665 560.2071,-372.2192 561.9604,-373.6699"/>
 <polygon fill="#191970" stroke="#191970" points="559.9692,-376.5483 570.1757,-379.3907 563.9695,-370.8038 559.9692,-376.5483"/>
 </g>
-<!-- Node903&#45;&gt;Node892 -->
+<!-- Node893&#45;&gt;Node882 -->
 <g id="edge20" class="edge">
-<title>Node903&#45;&gt;Node892</title>
+<title>Node893&#45;&gt;Node882</title>
 <path fill="none" stroke="#191970" d="M468.6243,-187.9057C485.4857,-177.5931 506.5128,-162.6267 521,-145 545.2431,-115.5034 527.6518,-91.4226 557,-67 559.02,-65.3191 561.1698,-63.7843 563.4177,-62.3831"/>
 <polygon fill="#191970" stroke="#191970" points="565.2771,-65.3601 572.5063,-57.6148 562.0249,-59.1615 565.2771,-65.3601"/>
 </g>
-<!-- Node903&#45;&gt;Node897 -->
+<!-- Node893&#45;&gt;Node887 -->
 <g id="edge21" class="edge">
-<title>Node903&#45;&gt;Node897</title>
+<title>Node893&#45;&gt;Node887</title>
 <path fill="none" stroke="#191970" d="M499.7107,-194.0624C518.4229,-191.2138 539.3527,-188.0277 558.9261,-185.048"/>
 <polygon fill="#191970" stroke="#191970" points="559.6598,-188.4767 569.0191,-183.5115 558.6062,-181.5564 559.6598,-188.4767"/>
 </g>
-<!-- Node903&#45;&gt;Node898 -->
+<!-- Node893&#45;&gt;Node888 -->
 <g id="edge24" class="edge">
-<title>Node903&#45;&gt;Node898</title>
+<title>Node893&#45;&gt;Node888</title>
 <path fill="none" stroke="#191970" d="M474.0256,-187.8559C496.981,-177.6973 528.4595,-164.4905 557,-155 564.3919,-152.542 572.2852,-150.2173 580.0672,-148.0928"/>
 <polygon fill="#191970" stroke="#191970" points="581.046,-151.4544 589.8188,-145.514 579.2563,-144.687 581.046,-151.4544"/>
 </g>
-<!-- Node903&#45;&gt;Node899 -->
+<!-- Node893&#45;&gt;Node889 -->
 <g id="edge25" class="edge">
-<title>Node903&#45;&gt;Node899</title>
+<title>Node893&#45;&gt;Node889</title>
 <path fill="none" stroke="#191970" d="M462.1968,-187.9279C478.404,-176.3324 501.2474,-159.8353 521,-145 537.2076,-132.8272 539.1383,-126.5824 557,-117 561.0311,-114.8374 565.2844,-112.8124 569.6325,-110.926"/>
 <polygon fill="#191970" stroke="#191970" points="571.3052,-114.0244 579.2531,-107.0185 568.671,-107.5389 571.3052,-114.0244"/>
 </g>
-<!-- Node903&#45;&gt;Node900 -->
+<!-- Node893&#45;&gt;Node890 -->
 <g id="edge26" class="edge">
-<title>Node903&#45;&gt;Node900</title>
+<title>Node893&#45;&gt;Node890</title>
 <path fill="none" stroke="#191970" d="M499.6237,-216.2125C507.2159,-219.3558 514.5736,-223.2301 521,-228 543.8655,-244.9715 534.3129,-263.7907 557,-281 559.4745,-282.877 562.0981,-284.6179 564.8246,-286.2321"/>
 <polygon fill="#191970" stroke="#191970" points="563.3468,-289.4093 573.8265,-290.9672 566.6056,-283.2141 563.3468,-289.4093"/>
 </g>
-<!-- Node903&#45;&gt;Node901 -->
+<!-- Node893&#45;&gt;Node891 -->
 <g id="edge22" class="edge">
-<title>Node903&#45;&gt;Node901</title>
+<title>Node893&#45;&gt;Node891</title>
 <path fill="none" stroke="#191970" d="M491.5935,-218.0369C501.4033,-221.1701 511.5644,-224.5681 521,-228 537.2894,-233.9246 540.5589,-237.5105 557,-243 565.463,-245.8257 574.5858,-248.4712 583.4467,-250.8379"/>
 <polygon fill="#191970" stroke="#191970" points="582.7326,-254.2683 593.2906,-253.3862 584.4869,-247.4917 582.7326,-254.2683"/>
 </g>
-<!-- Node903&#45;&gt;Node902 -->
+<!-- Node893&#45;&gt;Node892 -->
 <g id="edge27" class="edge">
-<title>Node903&#45;&gt;Node902</title>
+<title>Node893&#45;&gt;Node892</title>
 <path fill="none" stroke="#191970" d="M499.7107,-207.6229C515.9776,-208.9038 533.9205,-210.3166 551.1912,-211.6765"/>
 <polygon fill="#191970" stroke="#191970" points="551.0206,-215.1738 561.2645,-212.4696 551.5701,-208.1954 551.0206,-215.1738"/>
 </g>
-<!-- Node904&#45;&gt;Node890 -->
+<!-- Node894&#45;&gt;Node880 -->
 <g id="edge29" class="edge">
-<title>Node904&#45;&gt;Node890</title>
+<title>Node894&#45;&gt;Node880</title>
 <path fill="none" stroke="#191970" d="M499.7107,-363.5605C518.8828,-367.9887 540.3829,-372.9546 560.3668,-377.5703"/>
 <polygon fill="#191970" stroke="#191970" points="559.8161,-381.0352 570.3473,-379.8755 561.3915,-374.2147 559.8161,-381.0352"/>
 </g>
-<!-- Node905&#45;&gt;Node890 -->
+<!-- Node895&#45;&gt;Node880 -->
 <g id="edge31" class="edge">
-<title>Node905&#45;&gt;Node890</title>
+<title>Node895&#45;&gt;Node880</title>
 <path fill="none" stroke="#191970" d="M502.1101,-316.0161C508.7458,-318.8222 515.1897,-322.1237 521,-326 541.734,-339.8325 536.4115,-354.9519 557,-369 559.9054,-370.9824 562.9812,-372.8191 566.1636,-374.5193"/>
 <polygon fill="#191970" stroke="#191970" points="564.834,-377.7639 575.3615,-378.9571 567.8759,-371.4594 564.834,-377.7639"/>
 </g>

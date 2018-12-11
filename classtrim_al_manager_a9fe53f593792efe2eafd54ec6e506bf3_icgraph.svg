@@ -9,9 +9,9 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 48.5)">
 <title>trimAlManager::set_window_size</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-48.5 512,-48.5 512,4 -4,4"/>
-<!-- Node1050 -->
+<!-- Node1040 -->
 <g id="node1" class="node">
-<title>Node1050</title>
+<title>Node1040</title>
 <g id="a_node1"><a xlink:title="Method to set correct window sizes depending on values for them given by the user.">
 <polygon fill="#bfbfbf" stroke="#000000" points="409,-14 409,-44 508,-44 508,-14 409,-14"/>
 <text text-anchor="start" x="417" y="-32" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::set</text>
@@ -19,54 +19,54 @@
 </a>
 </g>
 </g>
-<!-- Node1051 -->
+<!-- Node1041 -->
 <g id="node2" class="node">
-<title>Node1051</title>
+<title>Node1041</title>
 <g id="a_node2"><a xlink:href="classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" target="_top" xlink:title="Method to perform the analysis if all checks have passed.">
 <polygon fill="#ffffff" stroke="#000000" points="74,-19.5 74,-38.5 193,-38.5 193,-19.5 74,-19.5"/>
 <text text-anchor="middle" x="133.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform</text>
 </a>
 </g>
 </g>
-<!-- Node1050&#45;&gt;Node1051 -->
+<!-- Node1040&#45;&gt;Node1041 -->
 <g id="edge1" class="edge">
-<title>Node1050&#45;&gt;Node1051</title>
+<title>Node1040&#45;&gt;Node1041</title>
 <path fill="none" stroke="#191970" d="M398.585,-29C340.0789,-29 251.5571,-29 193.144,-29"/>
 <polygon fill="#191970" stroke="#191970" points="398.7858,-32.5001 408.7857,-29 398.7857,-25.5001 398.7858,-32.5001"/>
 </g>
-<!-- Node1053 -->
+<!-- Node1043 -->
 <g id="node4" class="node">
-<title>Node1053</title>
+<title>Node1043</title>
 <g id="a_node4"><a xlink:href="classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" target="_top" xlink:title=" ">
 <polygon fill="#ffffff" stroke="#000000" points="229,-.5 229,-19.5 373,-19.5 373,-.5 229,-.5"/>
 <text text-anchor="middle" x="301" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform_VCF</text>
 </a>
 </g>
 </g>
-<!-- Node1050&#45;&gt;Node1053 -->
+<!-- Node1040&#45;&gt;Node1043 -->
 <g id="edge3" class="edge">
-<title>Node1050&#45;&gt;Node1053</title>
+<title>Node1040&#45;&gt;Node1043</title>
 <path fill="none" stroke="#191970" d="M398.6941,-21.7853C390.3749,-20.7817 381.7558,-19.742 373.239,-18.7145"/>
 <polygon fill="#191970" stroke="#191970" points="398.3188,-25.2653 408.666,-22.9883 399.1572,-18.3157 398.3188,-25.2653"/>
 </g>
-<!-- Node1052 -->
+<!-- Node1042 -->
 <g id="node3" class="node">
-<title>Node1052</title>
+<title>Node1042</title>
 <g id="a_node3"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title=" ">
 <polygon fill="#ffffff" stroke="#000000" points="0,-19.5 0,-38.5 38,-38.5 38,-19.5 0,-19.5"/>
 <text text-anchor="middle" x="19" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node1051&#45;&gt;Node1052 -->
+<!-- Node1041&#45;&gt;Node1042 -->
 <g id="edge2" class="edge">
-<title>Node1051&#45;&gt;Node1052</title>
+<title>Node1041&#45;&gt;Node1042</title>
 <path fill="none" stroke="#191970" d="M63.6802,-29C54.3823,-29 45.5497,-29 38.2303,-29"/>
 <polygon fill="#191970" stroke="#191970" points="63.9025,-32.5001 73.9024,-29 63.9024,-25.5001 63.9025,-32.5001"/>
 </g>
-<!-- Node1053&#45;&gt;Node1051 -->
+<!-- Node1043&#45;&gt;Node1041 -->
 <g id="edge4" class="edge">
-<title>Node1053&#45;&gt;Node1051</title>
+<title>Node1043&#45;&gt;Node1041</title>
 <path fill="none" stroke="#191970" d="M218.8378,-19.3199C210.1593,-20.3043 201.4581,-21.2913 193.107,-22.2386"/>
 <polygon fill="#191970" stroke="#191970" points="219.4511,-22.7729 228.9928,-18.168 218.662,-15.8175 219.4511,-22.7729"/>
 </g>

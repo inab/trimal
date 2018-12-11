@@ -9,9 +9,9 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 262.5)">
 <title>trimAlManager::postprocess_alignment</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-262.5 882,-262.5 882,4 -4,4"/>
-<!-- Node909 -->
+<!-- Node899 -->
 <g id="node1" class="node">
-<title>Node909</title>
+<title>Node899</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-195.5 0,-225.5 139,-225.5 139,-195.5 0,-195.5"/>
 <text text-anchor="start" x="8" y="-213.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::postprocess</text>
@@ -19,69 +19,69 @@
 </a>
 </g>
 </g>
-<!-- Node910 -->
+<!-- Node900 -->
 <g id="node2" class="node">
-<title>Node910</title>
+<title>Node900</title>
 <g id="a_node2"><a xlink:href="class_cleaner.html#a24bd28e4191afc9471adff329bee1466" target="_top" xlink:title="Method for computing the complementary alignment. &#160;Complementary alignment is an alignment containing...">
 <polygon fill="#ffffff" stroke="#000000" points="175,-239 175,-258 354,-258 354,-239 175,-239"/>
 <text text-anchor="middle" x="264.5" y="-246" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::computeComplementaryAlig</text>
 </a>
 </g>
 </g>
-<!-- Node909&#45;&gt;Node910 -->
+<!-- Node899&#45;&gt;Node900 -->
 <g id="edge1" class="edge">
-<title>Node909&#45;&gt;Node910</title>
+<title>Node899&#45;&gt;Node900</title>
 <path fill="none" stroke="#191970" d="M139.0736,-224.0579C160.7867,-228.2892 184.5179,-232.9137 205.438,-236.9905"/>
 <polygon fill="#191970" stroke="#191970" points="204.9761,-240.4662 215.4609,-238.9437 206.3151,-233.5955 204.9761,-240.4662"/>
 </g>
-<!-- Node911 -->
+<!-- Node901 -->
 <g id="node3" class="node">
-<title>Node911</title>
+<title>Node901</title>
 <g id="a_node3"><a xlink:href="class_alignment.html#a1aa0a16c3a78bfc26990d9f795679841" target="_top" xlink:title="Method to back translate a protein alignment using the sequences present on the current alignment....">
 <polygon fill="#ffffff" stroke="#000000" points="190,-201 190,-220 339,-220 339,-201 190,-201"/>
 <text text-anchor="middle" x="264.5" y="-208" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::getTranslationCDS</text>
 </a>
 </g>
 </g>
-<!-- Node909&#45;&gt;Node911 -->
+<!-- Node899&#45;&gt;Node901 -->
 <g id="edge2" class="edge">
-<title>Node909&#45;&gt;Node911</title>
+<title>Node899&#45;&gt;Node901</title>
 <path fill="none" stroke="#191970" d="M139.0736,-210.5C152.2348,-210.5 166.1374,-210.5 179.706,-210.5"/>
 <polygon fill="#191970" stroke="#191970" points="179.9991,-214.0001 189.9991,-210.5 179.9991,-207.0001 179.9991,-214.0001"/>
 </g>
-<!-- Node913 -->
+<!-- Node903 -->
 <g id="node5" class="node">
-<title>Node913</title>
+<title>Node903</title>
 <g id="a_node5"><a xlink:href="class_cleaner.html#ab7f5b746b97697181f4cd06063cbb49a" target="_top" xlink:title="Method to detect right and left borders. Borders are the first column found with no gaps....">
 <polygon fill="#ffffff" stroke="#000000" points="191.5,-138 191.5,-157 337.5,-157 337.5,-138 191.5,-138"/>
 <text text-anchor="middle" x="264.5" y="-145" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::removeOnlyTerminal</text>
 </a>
 </g>
 </g>
-<!-- Node909&#45;&gt;Node913 -->
+<!-- Node899&#45;&gt;Node903 -->
 <g id="edge4" class="edge">
-<title>Node909&#45;&gt;Node913</title>
+<title>Node899&#45;&gt;Node903</title>
 <path fill="none" stroke="#191970" d="M116.2074,-195.4099C149.4536,-184.6688 193.6316,-170.3959 225.0995,-160.2294"/>
 <polygon fill="#191970" stroke="#191970" points="226.4001,-163.4874 234.8398,-157.0825 224.2481,-156.8264 226.4001,-163.4874"/>
 </g>
-<!-- Node912 -->
+<!-- Node902 -->
 <g id="node4" class="node">
-<title>Node912</title>
+<title>Node902</title>
 <g id="a_node4"><a xlink:href="class_alignment.html#a091e21f0cfb741cb5cdc3535c6cc287f" target="_top" xlink:title="Constructor.">
 <polygon fill="#ffffff" stroke="#000000" points="407,-226 407,-245 517,-245 517,-226 407,-226"/>
 <text text-anchor="middle" x="462" y="-233" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::Alignment</text>
 </a>
 </g>
 </g>
-<!-- Node911&#45;&gt;Node912 -->
+<!-- Node901&#45;&gt;Node902 -->
 <g id="edge3" class="edge">
-<title>Node911&#45;&gt;Node912</title>
+<title>Node901&#45;&gt;Node902</title>
 <path fill="none" stroke="#191970" d="M339.1663,-219.9514C358.1528,-222.3548 378.4043,-224.9183 396.8738,-227.2562"/>
 <polygon fill="#191970" stroke="#191970" points="396.5715,-230.7458 406.9319,-228.5294 397.4506,-223.8012 396.5715,-230.7458"/>
 </g>
-<!-- Node914 -->
+<!-- Node904 -->
 <g id="node6" class="node">
-<title>Node914</title>
+<title>Node904</title>
 <g id="a_node6"><a xlink:href="classstatistics_1_1_manager.html#a1969a416d3020d25daa56de6c5e305db" target="_top" xlink:title="Method to handle gap stat calculation It checks if the gaps submodule has been created,...">
 <polygon fill="#ffffff" stroke="#000000" points="410.5,-88.5 410.5,-118.5 513.5,-118.5 513.5,-88.5 410.5,-88.5"/>
 <text text-anchor="start" x="418.5" y="-106.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Manager</text>
@@ -89,15 +89,15 @@
 </a>
 </g>
 </g>
-<!-- Node913&#45;&gt;Node914 -->
+<!-- Node903&#45;&gt;Node904 -->
 <g id="edge5" class="edge">
-<title>Node913&#45;&gt;Node914</title>
+<title>Node903&#45;&gt;Node904</title>
 <path fill="none" stroke="#191970" d="M307.3546,-137.9527C334.5692,-131.8896 370.2291,-123.9452 400.4468,-117.2131"/>
 <polygon fill="#191970" stroke="#191970" points="401.4662,-120.5719 410.4658,-114.981 399.944,-113.7394 401.4662,-120.5719"/>
 </g>
-<!-- Node917 -->
+<!-- Node907 -->
 <g id="node9" class="node">
-<title>Node917</title>
+<title>Node907</title>
 <g id="a_node9"><a xlink:href="classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR.">
 <polygon fill="#ffffff" stroke="#000000" points="756,-110.5 756,-140.5 878,-140.5 878,-110.5 756,-110.5"/>
 <text text-anchor="start" x="764" y="-128.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">reporting::reportManager</text>
@@ -105,15 +105,15 @@
 </a>
 </g>
 </g>
-<!-- Node913&#45;&gt;Node917 -->
+<!-- Node903&#45;&gt;Node907 -->
 <g id="edge14" class="edge">
-<title>Node913&#45;&gt;Node917</title>
+<title>Node903&#45;&gt;Node907</title>
 <path fill="none" stroke="#191970" d="M337.5826,-144.5899C443.8765,-140.3574 639.9139,-132.5514 745.3785,-128.3519"/>
 <polygon fill="#191970" stroke="#191970" points="745.7535,-131.8398 755.6063,-127.9446 745.4749,-124.8454 745.7535,-131.8398"/>
 </g>
-<!-- Node920 -->
+<!-- Node910 -->
 <g id="node12" class="node">
-<title>Node920</title>
+<title>Node910</title>
 <g id="a_node12"><a xlink:href="classstatistics_1_1_gaps.html#ab5b60db326475f8adc68b130e22b3963" target="_top" xlink:title=" ">
 <polygon fill="#ffffff" stroke="#000000" points="398,-39.5 398,-69.5 526,-69.5 526,-39.5 398,-39.5"/>
 <text text-anchor="start" x="406" y="-57.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Gaps::getGaps</text>
@@ -121,15 +121,15 @@
 </a>
 </g>
 </g>
-<!-- Node913&#45;&gt;Node920 -->
+<!-- Node903&#45;&gt;Node910 -->
 <g id="edge11" class="edge">
-<title>Node913&#45;&gt;Node920</title>
+<title>Node903&#45;&gt;Node910</title>
 <path fill="none" stroke="#191970" d="M279.8862,-137.8459C303.1027,-123.5575 348.7657,-96.5307 390,-78.5 394.3008,-76.6194 398.7989,-74.7974 403.3562,-73.0541"/>
 <polygon fill="#191970" stroke="#191970" points="404.5762,-76.3347 412.7492,-69.5929 402.1558,-69.7664 404.5762,-76.3347"/>
 </g>
-<!-- Node922 -->
+<!-- Node912 -->
 <g id="node14" class="node">
-<title>Node922</title>
+<title>Node912</title>
 <g id="a_node14"><a xlink:href="class_alignment.html#ae04b9e10e25daafb2b4592e19e63cecd" target="_top" xlink:title="Updates the sequence number and residue number based on saveResidues and saveSequences.">
 <polygon fill="#ffffff" stroke="#000000" points="390,-176.5 390,-206.5 534,-206.5 534,-176.5 390,-176.5"/>
 <text text-anchor="start" x="398" y="-194.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::updateSequences</text>
@@ -137,15 +137,15 @@
 </a>
 </g>
 </g>
-<!-- Node913&#45;&gt;Node922 -->
+<!-- Node903&#45;&gt;Node912 -->
 <g id="edge15" class="edge">
-<title>Node913&#45;&gt;Node922</title>
+<title>Node903&#45;&gt;Node912</title>
 <path fill="none" stroke="#191970" d="M307.3546,-157.0473C329.8885,-162.0676 358.2126,-168.3777 384.4429,-174.2215"/>
 <polygon fill="#191970" stroke="#191970" points="383.8552,-177.6763 394.3771,-176.4346 385.3775,-170.8438 383.8552,-177.6763"/>
 </g>
-<!-- Node915 -->
+<!-- Node905 -->
 <g id="node7" class="node">
-<title>Node915</title>
+<title>Node905</title>
 <g id="a_node7"><a xlink:href="classstatistics_1_1_gaps.html#aa3526494d5100e062daa4afba755d0b1" target="_top" xlink:title=" ">
 <polygon fill="#ffffff" stroke="#000000" points="578.5,-88.5 578.5,-118.5 711.5,-118.5 711.5,-88.5 578.5,-88.5"/>
 <text text-anchor="start" x="586.5" y="-106.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Gaps::Calculate</text>
@@ -153,72 +153,72 @@
 </a>
 </g>
 </g>
-<!-- Node914&#45;&gt;Node915 -->
+<!-- Node904&#45;&gt;Node905 -->
 <g id="edge6" class="edge">
-<title>Node914&#45;&gt;Node915</title>
+<title>Node904&#45;&gt;Node905</title>
 <path fill="none" stroke="#191970" d="M513.951,-103.5C530.8019,-103.5 549.869,-103.5 568.1369,-103.5"/>
 <polygon fill="#191970" stroke="#191970" points="568.1844,-107.0001 578.1844,-103.5 568.1843,-100.0001 568.1844,-107.0001"/>
 </g>
-<!-- Node916 -->
+<!-- Node906 -->
 <g id="node8" class="node">
-<title>Node916</title>
+<title>Node906</title>
 <g id="a_node8"><a xlink:href="classstatistics_1_1_gaps.html#aee36b772767467cdba2061df2305e85d" target="_top" xlink:title=" ">
 <polygon fill="#ffffff" stroke="#000000" points="570,-50 570,-69 720,-69 720,-50 570,-50"/>
 <text text-anchor="middle" x="645" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Gaps::applyWindow</text>
 </a>
 </g>
 </g>
-<!-- Node914&#45;&gt;Node916 -->
+<!-- Node904&#45;&gt;Node906 -->
 <g id="edge7" class="edge">
-<title>Node914&#45;&gt;Node916</title>
+<title>Node904&#45;&gt;Node906</title>
 <path fill="none" stroke="#191970" d="M513.951,-91.0091C539.6047,-84.8409 570.3945,-77.4379 595.6817,-71.3579"/>
 <polygon fill="#191970" stroke="#191970" points="596.5314,-74.7535 605.4361,-69.0126 594.895,-67.9474 596.5314,-74.7535"/>
 </g>
-<!-- Node916&#45;&gt;Node917 -->
+<!-- Node906&#45;&gt;Node907 -->
 <g id="edge8" class="edge">
-<title>Node916&#45;&gt;Node917</title>
+<title>Node906&#45;&gt;Node907</title>
 <path fill="none" stroke="#191970" d="M689.9613,-69.0397C699.9896,-71.6762 710.4709,-74.8383 720,-78.5 736.8878,-84.9894 739.7727,-89.5011 756,-97.5 761.7616,-100.34 767.8703,-103.2553 773.9095,-106.0817"/>
 <polygon fill="#191970" stroke="#191970" points="772.7379,-109.3963 783.2826,-110.4263 775.6818,-103.0454 772.7379,-109.3963"/>
 </g>
-<!-- Node918 -->
+<!-- Node908 -->
 <g id="node10" class="node">
-<title>Node918</title>
+<title>Node908</title>
 <g id="a_node10"><a xlink:href="namespaceutils.html#aac322cd1761fddedec8a5792e358eb32" target="_top" xlink:title="Vector initialization.">
 <polygon fill="#ffffff" stroke="#000000" points="779,-31 779,-50 855,-50 855,-31 779,-31"/>
 <text text-anchor="middle" x="817" y="-38" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::initlVect</text>
 </a>
 </g>
 </g>
-<!-- Node916&#45;&gt;Node918 -->
+<!-- Node906&#45;&gt;Node908 -->
 <g id="edge9" class="edge">
-<title>Node916&#45;&gt;Node918</title>
+<title>Node906&#45;&gt;Node908</title>
 <path fill="none" stroke="#191970" d="M720.1915,-51.194C736.6435,-49.3766 753.6317,-47.5 768.696,-45.8359"/>
 <polygon fill="#191970" stroke="#191970" points="769.2324,-49.298 778.7876,-44.7211 768.4637,-42.3404 769.2324,-49.298"/>
 </g>
-<!-- Node919 -->
+<!-- Node909 -->
 <g id="node11" class="node">
-<title>Node919</title>
+<title>Node909</title>
 <g id="a_node11"><a xlink:href="namespaceutils.html#ad50731aeb3c8f79ed8372516210dfc9d" target="_top" xlink:title="Round double to integer method.">
 <polygon fill="#ffffff" stroke="#000000" points="779,-69 779,-88 855,-88 855,-69 779,-69"/>
 <text text-anchor="middle" x="817" y="-76" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::roundInt</text>
 </a>
 </g>
 </g>
-<!-- Node916&#45;&gt;Node919 -->
+<!-- Node906&#45;&gt;Node909 -->
 <g id="edge10" class="edge">
-<title>Node916&#45;&gt;Node919</title>
+<title>Node906&#45;&gt;Node909</title>
 <path fill="none" stroke="#191970" d="M720.1915,-67.806C736.6435,-69.6234 753.6317,-71.5 768.696,-73.1641"/>
 <polygon fill="#191970" stroke="#191970" points="768.4637,-76.6596 778.7876,-74.2789 769.2324,-69.702 768.4637,-76.6596"/>
 </g>
-<!-- Node920&#45;&gt;Node916 -->
+<!-- Node910&#45;&gt;Node906 -->
 <g id="edge13" class="edge">
-<title>Node920&#45;&gt;Node916</title>
+<title>Node910&#45;&gt;Node906</title>
 <path fill="none" stroke="#191970" d="M526.0045,-56.2488C536.8156,-56.5441 548.1913,-56.855 559.4464,-57.1625"/>
 <polygon fill="#191970" stroke="#191970" points="559.6374,-60.6689 569.7293,-57.4434 559.8286,-53.6715 559.6374,-60.6689"/>
 </g>
-<!-- Node921 -->
+<!-- Node911 -->
 <g id="node13" class="node">
-<title>Node921</title>
+<title>Node911</title>
 <g id="a_node13"><a xlink:href="classstatistics_1_1_gaps.html#ad812a924cf5e3f900aad3ed4a9664300" target="_top" xlink:title=" ">
 <polygon fill="#ffffff" stroke="#000000" points="578.5,-.5 578.5,-30.5 711.5,-30.5 711.5,-.5 578.5,-.5"/>
 <text text-anchor="start" x="586.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Gaps::isDefined</text>
@@ -226,9 +226,9 @@
 </a>
 </g>
 </g>
-<!-- Node920&#45;&gt;Node921 -->
+<!-- Node910&#45;&gt;Node911 -->
 <g id="edge12" class="edge">
-<title>Node920&#45;&gt;Node921</title>
+<title>Node910&#45;&gt;Node911</title>
 <path fill="none" stroke="#191970" d="M526.0045,-40.8597C539.6066,-37.9609 554.1023,-34.8716 568.1273,-31.8827"/>
 <polygon fill="#191970" stroke="#191970" points="569.1862,-35.2357 578.237,-29.7282 567.7271,-28.3895 569.1862,-35.2357"/>
 </g>

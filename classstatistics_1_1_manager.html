@@ -21,8 +21,8 @@
     <link href="CustomExtra.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         function myFunction(ID) {
-            var divs = document.getElementsByName(ID);
-            for (var x of divs) {
+            const divs = document.getElementsByName(ID);
+            for (let x of divs) {
                 if (x.style.display === "none") {
                     x.style.display = "block";
                 } else {
@@ -289,7 +289,7 @@ It checks if the <a class="el" href="classstatistics_1_1_manager.html#ae7f5f8881
 
 <p class="reference">References <a class="el" href="_manager_8h_source.html#l00047">_similarityMatrix</a>, <a class="el" href="_manager_8h_source.html#l00110">alig</a>, <a class="el" href="_similarity_8cpp_source.html#l00268">statistics::Similarity::applyWindow()</a>, <a class="el" href="_manager_8cpp_source.html#l00135">calculateGapStats()</a>, <a class="el" href="_similarity_8cpp_source.html#l00154">statistics::Similarity::calculateVectors()</a>, <a class="el" href="_similarity_8cpp_source.html#l00327">statistics::Similarity::isDefinedWindow()</a>, <a class="el" href="_similarity_8cpp_source.html#l00370">statistics::Similarity::isSimMatrixDef()</a>, <a class="el" href="_similarity_8cpp_source.html#l00352">statistics::Similarity::setSimilarityMatrix()</a>, <a class="el" href="_manager_8h_source.html#l00056">shWindow</a>, <a class="el" href="_manager_8h_source.html#l00038">similarity</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00756">Cleaner::clean()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00952">Cleaner::cleanCombMethods()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00732">Cleaner::cleanConservation()</a>, <a class="el" href="_manager_8cpp_source.html#l00050">printStatisticsConservationColumns()</a>, <a class="el" href="_manager_8cpp_source.html#l00063">printStatisticsConservationTotal()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01501">trimAlManager::svg_stats_out()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00756">Cleaner::clean()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00952">Cleaner::cleanCombMethods()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00732">Cleaner::cleanConservation()</a>, <a class="el" href="_manager_8cpp_source.html#l00050">printStatisticsConservationColumns()</a>, <a class="el" href="_manager_8cpp_source.html#l00063">printStatisticsConservationTotal()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01503">trimAlManager::svg_stats_out()</a>.</p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -329,7 +329,7 @@ It checks if the <a class="el" href="classstatistics_1_1_manager.html#a5d6c74aab
 
 <p class="reference">References <a class="el" href="_manager_8h_source.html#l00110">alig</a>, <a class="el" href="_gaps_8cpp_source.html#l00090">statistics::Gaps::applyWindow()</a>, <a class="el" href="_gaps_8cpp_source.html#l00590">statistics::Gaps::CalculateVectors()</a>, <a class="el" href="_manager_8h_source.html#l00034">gaps</a>, <a class="el" href="_manager_8h_source.html#l00052">ghWindow</a>, <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_manager_8cpp_source.html#l00013">calculateConservationStats()</a>, <a class="el" href="_similarity_8cpp_source.html#l00154">statistics::Similarity::calculateVectors()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00756">Cleaner::clean()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00929">Cleaner::clean2ndSlope()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00708">Cleaner::cleanGaps()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01021">Cleaner::cleanNoAllGaps()</a>, <a class="el" href="_manager_8cpp_source.html#l00095">printStatisticsGapsColumns()</a>, <a class="el" href="_manager_8cpp_source.html#l00108">printStatisticsGapsTotal()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01256">Cleaner::removeOnlyTerminal()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01501">trimAlManager::svg_stats_out()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_manager_8cpp_source.html#l00013">calculateConservationStats()</a>, <a class="el" href="_similarity_8cpp_source.html#l00154">statistics::Similarity::calculateVectors()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00756">Cleaner::clean()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00929">Cleaner::clean2ndSlope()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00708">Cleaner::cleanGaps()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01021">Cleaner::cleanNoAllGaps()</a>, <a class="el" href="_manager_8cpp_source.html#l00095">printStatisticsGapsColumns()</a>, <a class="el" href="_manager_8cpp_source.html#l00108">printStatisticsGapsTotal()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01255">Cleaner::removeOnlyTerminal()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01503">trimAlManager::svg_stats_out()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
@@ -356,7 +356,6 @@ It checks if the <a class="el" href="classstatistics_1_1_manager.html#a5d6c74aab
         <tr>
           <td class="memname">void statistics::Manager::printCorrespondence </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -370,7 +369,7 @@ If <b>-1</b> , the residue would be rejected, otherwise, it prints the position 
 
 <p class="reference">References <a class="el" href="_manager_8h_source.html#l00110">alig</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01316">trimAlManager::perform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01318">trimAlManager::perform()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
@@ -404,7 +403,7 @@ It calls to <a class="el" href="classstatistics_1_1_manager.html#a92505ca5aedc5b
 
 <p class="reference">References <a class="el" href="_manager_8h_source.html#l00110">alig</a>, <a class="el" href="_manager_8cpp_source.html#l00013">calculateConservationStats()</a>, <a class="el" href="_similarity_8cpp_source.html#l00420">statistics::Similarity::printConservationColumns()</a>, <a class="el" href="_manager_8h_source.html#l00038">similarity</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01458">trimAlManager::print_statistics()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01460">trimAlManager::print_statistics()</a>.</p>
 <div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
@@ -445,7 +444,7 @@ It calls to <a class="el" href="classstatistics_1_1_manager.html#a92505ca5aedc5b
 
 <p class="reference">References <a class="el" href="_manager_8h_source.html#l00110">alig</a>, <a class="el" href="_manager_8cpp_source.html#l00013">calculateConservationStats()</a>, <a class="el" href="_similarity_8cpp_source.html#l00480">statistics::Similarity::printConservationAcl()</a>, <a class="el" href="_manager_8h_source.html#l00038">similarity</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01458">trimAlManager::print_statistics()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01460">trimAlManager::print_statistics()</a>.</p>
 <div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
@@ -486,7 +485,7 @@ It calls to <a class="el" href="classstatistics_1_1_manager.html#a1969a416d3020d
 
 <p class="reference">References <a class="el" href="_manager_8h_source.html#l00110">alig</a>, <a class="el" href="_manager_8cpp_source.html#l00135">calculateGapStats()</a>, <a class="el" href="_manager_8h_source.html#l00034">gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00384">statistics::Gaps::printGapsColumns()</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01458">trimAlManager::print_statistics()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01460">trimAlManager::print_statistics()</a>.</p>
 <div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-9-summary" class="dynsummary" style="display:block;">
@@ -527,7 +526,7 @@ It calls to <a class="el" href="classstatistics_1_1_manager.html#a1969a416d3020d
 
 <p class="reference">References <a class="el" href="_manager_8h_source.html#l00110">alig</a>, <a class="el" href="_manager_8cpp_source.html#l00135">calculateGapStats()</a>, <a class="el" href="_manager_8h_source.html#l00034">gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00461">statistics::Gaps::printGapsAcl()</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01458">trimAlManager::print_statistics()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01460">trimAlManager::print_statistics()</a>.</p>
 <div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-11-summary" class="dynsummary" style="display:block;">
@@ -567,7 +566,7 @@ It calls to <a class="el" href="classstatistics_1_1_manager.html#a1969a416d3020d
 
 <p class="reference">References <a class="el" href="_manager_8h_source.html#l00047">_similarityMatrix</a>, <a class="el" href="_manager_8h_source.html#l00110">alig</a>, <a class="el" href="_similarity_8cpp_source.html#l00352">statistics::Similarity::setSimilarityMatrix()</a>, <a class="el" href="_manager_8h_source.html#l00038">similarity</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01581">trimAlManager::create_or_use_similarity_matrix()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01583">trimAlManager::create_or_use_similarity_matrix()</a>.</p>
 <div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-13-summary" class="dynsummary" style="display:block;">
@@ -675,7 +674,7 @@ This gives us more control over the statistics classes, hinting that they should
 
 <p class="definition">Definition at line <a class="el" href="_manager_8h_source.html#l00042">42</a> of file <a class="el" href="_manager_8h_source.html">Manager.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l01148">Alignment::alignmentSummaryHTML()</a>, <a class="el" href="_alignment_8cpp_source.html#l01412">Alignment::alignmentSummarySVG()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01756">trimAlManager::CleanResiduesNonAuto()</a>, <a class="el" href="_manager_8cpp_source.html#l00163">Manager()</a>, <a class="el" href="_consistency_8cpp_source.html#l00042">statistics::Consistency::perform()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01458">trimAlManager::print_statistics()</a>, and <a class="el" href="_manager_8cpp_source.html#l00184">~Manager()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l01156">Alignment::alignmentSummaryHTML()</a>, <a class="el" href="_alignment_8cpp_source.html#l01420">Alignment::alignmentSummarySVG()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01758">trimAlManager::CleanResiduesNonAuto()</a>, <a class="el" href="_manager_8cpp_source.html#l00163">Manager()</a>, <a class="el" href="_consistency_8cpp_source.html#l00042">statistics::Consistency::perform()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01460">trimAlManager::print_statistics()</a>, and <a class="el" href="_manager_8cpp_source.html#l00184">~Manager()</a>.</p>
 
 </div>
 </div>
@@ -695,7 +694,7 @@ This gives us more control over the statistics classes, hinting that they should
 
 <p class="definition">Definition at line <a class="el" href="_manager_8h_source.html#l00034">34</a> of file <a class="el" href="_manager_8h_source.html">Manager.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l01148">Alignment::alignmentSummaryHTML()</a>, <a class="el" href="_alignment_8cpp_source.html#l01412">Alignment::alignmentSummarySVG()</a>, <a class="el" href="_manager_8cpp_source.html#l00135">calculateGapStats()</a>, <a class="el" href="_similarity_8cpp_source.html#l00154">statistics::Similarity::calculateVectors()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00756">Cleaner::clean()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00929">Cleaner::clean2ndSlope()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00952">Cleaner::cleanCombMethods()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00708">Cleaner::cleanGaps()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01021">Cleaner::cleanNoAllGaps()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01665">trimAlManager::CleanSequences()</a>, <a class="el" href="_manager_8cpp_source.html#l00163">Manager()</a>, <a class="el" href="_manager_8cpp_source.html#l00095">printStatisticsGapsColumns()</a>, <a class="el" href="_manager_8cpp_source.html#l00108">printStatisticsGapsTotal()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01256">Cleaner::removeOnlyTerminal()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01501">trimAlManager::svg_stats_out()</a>, and <a class="el" href="_manager_8cpp_source.html#l00184">~Manager()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l01156">Alignment::alignmentSummaryHTML()</a>, <a class="el" href="_alignment_8cpp_source.html#l01420">Alignment::alignmentSummarySVG()</a>, <a class="el" href="_manager_8cpp_source.html#l00135">calculateGapStats()</a>, <a class="el" href="_similarity_8cpp_source.html#l00154">statistics::Similarity::calculateVectors()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00756">Cleaner::clean()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00929">Cleaner::clean2ndSlope()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00952">Cleaner::cleanCombMethods()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00708">Cleaner::cleanGaps()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01021">Cleaner::cleanNoAllGaps()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01667">trimAlManager::CleanSequences()</a>, <a class="el" href="_manager_8cpp_source.html#l00163">Manager()</a>, <a class="el" href="_manager_8cpp_source.html#l00095">printStatisticsGapsColumns()</a>, <a class="el" href="_manager_8cpp_source.html#l00108">printStatisticsGapsTotal()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01255">Cleaner::removeOnlyTerminal()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01503">trimAlManager::svg_stats_out()</a>, and <a class="el" href="_manager_8cpp_source.html#l00184">~Manager()</a>.</p>
 
 </div>
 </div>
@@ -715,7 +714,7 @@ This gives us more control over the statistics classes, hinting that they should
 
 <p class="definition">Definition at line <a class="el" href="_manager_8h_source.html#l00052">52</a> of file <a class="el" href="_manager_8h_source.html">Manager.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_manager_8cpp_source.html#l00135">calculateGapStats()</a>, <a class="el" href="_manager_8cpp_source.html#l00153">Manager()</a>, and <a class="el" href="_alignment_8cpp_source.html#l00264">Alignment::setWindowsSize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_manager_8cpp_source.html#l00135">calculateGapStats()</a>, <a class="el" href="_manager_8cpp_source.html#l00153">Manager()</a>, and <a class="el" href="_alignment_8cpp_source.html#l00260">Alignment::setWindowsSize()</a>.</p>
 
 </div>
 </div>
@@ -735,7 +734,7 @@ This gives us more control over the statistics classes, hinting that they should
 
 <p class="definition">Definition at line <a class="el" href="_manager_8h_source.html#l00056">56</a> of file <a class="el" href="_manager_8h_source.html">Manager.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_manager_8cpp_source.html#l00013">calculateConservationStats()</a>, <a class="el" href="_manager_8cpp_source.html#l00153">Manager()</a>, and <a class="el" href="_alignment_8cpp_source.html#l00264">Alignment::setWindowsSize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_manager_8cpp_source.html#l00013">calculateConservationStats()</a>, <a class="el" href="_manager_8cpp_source.html#l00153">Manager()</a>, and <a class="el" href="_alignment_8cpp_source.html#l00260">Alignment::setWindowsSize()</a>.</p>
 
 </div>
 </div>
@@ -755,7 +754,7 @@ This gives us more control over the statistics classes, hinting that they should
 
 <p class="definition">Definition at line <a class="el" href="_manager_8h_source.html#l00038">38</a> of file <a class="el" href="_manager_8h_source.html">Manager.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l01148">Alignment::alignmentSummaryHTML()</a>, <a class="el" href="_alignment_8cpp_source.html#l01412">Alignment::alignmentSummarySVG()</a>, <a class="el" href="_manager_8cpp_source.html#l00013">calculateConservationStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00756">Cleaner::clean()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00952">Cleaner::cleanCombMethods()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00732">Cleaner::cleanConservation()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01665">trimAlManager::CleanSequences()</a>, <a class="el" href="_manager_8cpp_source.html#l00163">Manager()</a>, <a class="el" href="_manager_8cpp_source.html#l00050">printStatisticsConservationColumns()</a>, <a class="el" href="_manager_8cpp_source.html#l00063">printStatisticsConservationTotal()</a>, <a class="el" href="_manager_8cpp_source.html#l00077">setSimilarityMatrix()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01501">trimAlManager::svg_stats_out()</a>, and <a class="el" href="_manager_8cpp_source.html#l00184">~Manager()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l01156">Alignment::alignmentSummaryHTML()</a>, <a class="el" href="_alignment_8cpp_source.html#l01420">Alignment::alignmentSummarySVG()</a>, <a class="el" href="_manager_8cpp_source.html#l00013">calculateConservationStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00756">Cleaner::clean()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00952">Cleaner::cleanCombMethods()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00732">Cleaner::cleanConservation()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01667">trimAlManager::CleanSequences()</a>, <a class="el" href="_manager_8cpp_source.html#l00163">Manager()</a>, <a class="el" href="_manager_8cpp_source.html#l00050">printStatisticsConservationColumns()</a>, <a class="el" href="_manager_8cpp_source.html#l00063">printStatisticsConservationTotal()</a>, <a class="el" href="_manager_8cpp_source.html#l00077">setSimilarityMatrix()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01503">trimAlManager::svg_stats_out()</a>, and <a class="el" href="_manager_8cpp_source.html#l00184">~Manager()</a>.</p>
 
 </div>
 </div>

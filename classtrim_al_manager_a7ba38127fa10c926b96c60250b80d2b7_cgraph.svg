@@ -9,9 +9,9 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 149.5)">
 <title>trimAlManager::save_alignment</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-149.5 478,-149.5 478,4 -4,4"/>
-<!-- Node1021 -->
+<!-- Node1011 -->
 <g id="node1" class="node">
-<title>Node1021</title>
+<title>Node1011</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-52 0,-82 107,-82 107,-52 0,-52"/>
 <text text-anchor="start" x="8" y="-70" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::save</text>
@@ -19,9 +19,9 @@
 </a>
 </g>
 </g>
-<!-- Node1022 -->
+<!-- Node1012 -->
 <g id="node2" class="node">
-<title>Node1022</title>
+<title>Node1012</title>
 <g id="a_node2"><a xlink:href="class_format_handling_1_1_format_manager.html#a2987b0f448390cf5cb7a287117896c64" target="_top" xlink:title="Function to save an alignment to a file. It searches among the available_states one that can write th...">
 <polygon fill="#ffffff" stroke="#000000" points="143,-52 143,-82 303,-82 303,-52 143,-52"/>
 <text text-anchor="start" x="151" y="-70" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">FormatHandling::FormatManager</text>
@@ -29,15 +29,15 @@
 </a>
 </g>
 </g>
-<!-- Node1021&#45;&gt;Node1022 -->
+<!-- Node1011&#45;&gt;Node1012 -->
 <g id="edge1" class="edge">
-<title>Node1021&#45;&gt;Node1022</title>
+<title>Node1011&#45;&gt;Node1012</title>
 <path fill="none" stroke="#191970" d="M107.1309,-67C115.287,-67 123.8897,-67 132.5722,-67"/>
 <polygon fill="#191970" stroke="#191970" points="132.7794,-70.5001 142.7794,-67 132.7794,-63.5001 132.7794,-70.5001"/>
 </g>
-<!-- Node1023 -->
+<!-- Node1013 -->
 <g id="node3" class="node">
-<title>Node1023</title>
+<title>Node1013</title>
 <g id="a_node3"><a xlink:href="classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR.">
 <polygon fill="#ffffff" stroke="#000000" points="345.5,-115 345.5,-145 467.5,-145 467.5,-115 345.5,-115"/>
 <text text-anchor="start" x="353.5" y="-133" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">reporting::reportManager</text>
@@ -45,54 +45,54 @@
 </a>
 </g>
 </g>
-<!-- Node1022&#45;&gt;Node1023 -->
+<!-- Node1012&#45;&gt;Node1013 -->
 <g id="edge2" class="edge">
-<title>Node1022&#45;&gt;Node1023</title>
+<title>Node1012&#45;&gt;Node1013</title>
 <path fill="none" stroke="#191970" d="M266.9528,-82.0901C292.7328,-90.941 325.4977,-102.19 352.7998,-111.5634"/>
 <polygon fill="#191970" stroke="#191970" points="351.9935,-114.9871 362.5882,-114.924 354.2666,-108.3664 351.9935,-114.9871"/>
 </g>
-<!-- Node1024 -->
+<!-- Node1014 -->
 <g id="node4" class="node">
-<title>Node1024</title>
+<title>Node1014</title>
 <g id="a_node4"><a xlink:href="namespaceutils.html#ab0cb109dc7e12b42abd4cba86f7d8e78" target="_top" xlink:title="Function that replaces a substring with another substring in a string. It makes a copy of the origina...">
 <polygon fill="#ffffff" stroke="#000000" points="355.5,-76.5 355.5,-95.5 457.5,-95.5 457.5,-76.5 355.5,-76.5"/>
 <text text-anchor="middle" x="406.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::ReplaceString</text>
 </a>
 </g>
 </g>
-<!-- Node1022&#45;&gt;Node1024 -->
+<!-- Node1012&#45;&gt;Node1014 -->
 <g id="edge3" class="edge">
-<title>Node1022&#45;&gt;Node1024</title>
+<title>Node1012&#45;&gt;Node1014</title>
 <path fill="none" stroke="#191970" d="M303.2188,-75.306C317.3593,-76.7702 331.871,-78.2727 345.3817,-79.6717"/>
 <polygon fill="#191970" stroke="#191970" points="345.1882,-83.1703 355.4955,-80.7189 345.9092,-76.2075 345.1882,-83.1703"/>
 </g>
-<!-- Node1025 -->
+<!-- Node1015 -->
 <g id="node5" class="node">
-<title>Node1025</title>
+<title>Node1015</title>
 <g id="a_node5"><a xlink:href="namespaceutils.html#a40640e1942f00797e9fe8284e8fbdb14" target="_top" xlink:title="Maximum of two numbers method.">
 <polygon fill="#ffffff" stroke="#000000" points="377,-38.5 377,-57.5 436,-57.5 436,-38.5 377,-38.5"/>
 <text text-anchor="middle" x="406.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::max</text>
 </a>
 </g>
 </g>
-<!-- Node1022&#45;&gt;Node1025 -->
+<!-- Node1012&#45;&gt;Node1015 -->
 <g id="edge4" class="edge">
-<title>Node1022&#45;&gt;Node1025</title>
+<title>Node1012&#45;&gt;Node1015</title>
 <path fill="none" stroke="#191970" d="M303.2188,-58.694C325.2492,-56.4129 348.1808,-54.0385 366.824,-52.1081"/>
 <polygon fill="#191970" stroke="#191970" points="367.3994,-55.5674 376.9857,-51.056 366.6784,-48.6046 367.3994,-55.5674"/>
 </g>
-<!-- Node1026 -->
+<!-- Node1016 -->
 <g id="node6" class="node">
-<title>Node1026</title>
+<title>Node1016</title>
 <g id="a_node6"><a xlink:href="namespaceutils.html#a6000246220e801bf6b1e6a553d7af13a" target="_top" xlink:title="Function that replaces a substring with another substring in a string. It does not make a copy of the...">
 <polygon fill="#ffffff" stroke="#000000" points="339,-.5 339,-19.5 474,-19.5 474,-.5 339,-.5"/>
 <text text-anchor="middle" x="406.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::ReplaceStringInPlace</text>
 </a>
 </g>
 </g>
-<!-- Node1022&#45;&gt;Node1026 -->
+<!-- Node1012&#45;&gt;Node1016 -->
 <g id="edge5" class="edge">
-<title>Node1022&#45;&gt;Node1026</title>
+<title>Node1012&#45;&gt;Node1016</title>
 <path fill="none" stroke="#191970" d="M267.4791,-51.9425C289.0117,-44.7779 315.2799,-36.2201 339,-29 346.2882,-26.7816 354.0466,-24.5124 361.6099,-22.3498"/>
 <polygon fill="#191970" stroke="#191970" points="362.7165,-25.6742 371.3843,-19.5816 360.8089,-18.9391 362.7165,-25.6742"/>
 </g>

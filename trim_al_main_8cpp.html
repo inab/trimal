@@ -21,8 +21,8 @@
     <link href="CustomExtra.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         function myFunction(ID) {
-            var divs = document.getElementsByName(ID);
-            for (var x of divs) {
+            const divs = document.getElementsByName(ID);
+            for (let x of divs) {
                 if (x.style.display === "none") {
                     x.style.display = "block";
                 } else {
@@ -112,7 +112,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="trim_al_main_8cpp_source.html#l00031">31</a> of file <a class="el" href="trim_al_main_8cpp_source.html">trimAlMain.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="reportsystem_8h_source.html#l00468">reporting::reportManager::debug</a>, <a class="el" href="reportsystem_8h_source.html#l00309">reporting::reportManager::IsDebug</a>, <a class="el" href="trimal_manager_8cpp_source.html#l00036">trimAlManager::parseArguments()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01316">trimAlManager::perform()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l00794">trimAlManager::processArguments()</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
+<p class="reference">References <a class="el" href="reportsystem_8h_source.html#l00468">reporting::reportManager::debug</a>, <a class="el" href="reportsystem_8h_source.html#l00309">reporting::reportManager::IsDebug</a>, <a class="el" href="trimal_manager_8cpp_source.html#l00036">trimAlManager::parseArguments()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01318">trimAlManager::perform()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l00794">trimAlManager::processArguments()</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">

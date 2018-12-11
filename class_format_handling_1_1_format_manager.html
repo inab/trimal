@@ -21,8 +21,8 @@
     <link href="CustomExtra.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         function myFunction(ID) {
-            var divs = document.getElementsByName(ID);
-            for (var x of divs) {
+            const divs = document.getElementsByName(ID);
+            for (let x of divs) {
                 if (x.style.display === "none") {
                     x.style.display = "block";
                 } else {
@@ -279,7 +279,7 @@ Private Attributes</h2></td></tr>
 
 <p class="reference">References <a class="el" href="_format_manager_8h_source.html#l00057">available_states</a>, <a class="el" href="reportsystem_8h_source.html#l00167">CantOpenFile</a>, <a class="el" href="reportsystem_8cpp_source.html#l00005">debug</a>, <a class="el" href="reportsystem_8h_source.html#l00169">FileIsEmpty</a>, <a class="el" href="_base_format_handler_8h_source.html#l00037">FormatHandling::BaseFormatHandler::name</a>, and <a class="el" href="reportsystem_8cpp_source.html#l00375">reporting::reportManager::report()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01310">trimAlManager::check_output_format()</a>, <a class="el" href="read_al_main_8cpp_source.html#l00326">main()</a>, and <a class="el" href="_consistency_8cpp_source.html#l00042">statistics::Consistency::perform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01312">trimAlManager::check_output_format()</a>, <a class="el" href="read_al_main_8cpp_source.html#l00326">main()</a>, and <a class="el" href="_consistency_8cpp_source.html#l00042">statistics::Consistency::perform()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
@@ -318,7 +318,7 @@ Private Attributes</h2></td></tr>
 
 <p class="reference">References <a class="el" href="_format_manager_8h_source.html#l00057">available_states</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l00194">trimAlManager::help_arguments()</a>, <a class="el" href="read_al_main_8cpp_source.html#l00216">menu()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01908">trimAlManager::menu()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l00194">trimAlManager::help_arguments()</a>, <a class="el" href="read_al_main_8cpp_source.html#l00216">menu()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01915">trimAlManager::menu()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
@@ -350,7 +350,7 @@ Private Attributes</h2></td></tr>
 
 <p class="reference">References <a class="el" href="_format_manager_8h_source.html#l00057">available_states</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l00194">trimAlManager::help_arguments()</a>, <a class="el" href="read_al_main_8cpp_source.html#l00216">menu()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01908">trimAlManager::menu()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l00194">trimAlManager::help_arguments()</a>, <a class="el" href="read_al_main_8cpp_source.html#l00216">menu()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01915">trimAlManager::menu()</a>.</p>
 <div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
@@ -534,7 +534,7 @@ Private Attributes</h2></td></tr>
 
 <p class="reference">References <a class="el" href="reportsystem_8h_source.html#l00196">AlignmentIsEmpty</a>, <a class="el" href="reportsystem_8h_source.html#l00177">AlignmentNotSaved</a>, <a class="el" href="_format_manager_8h_source.html#l00057">available_states</a>, <a class="el" href="reportsystem_8cpp_source.html#l00005">debug</a>, <a class="el" href="_alignment_8h_source.html#l00084">Alignment::filename</a>, <a class="el" href="reportsystem_8h_source.html#l00125">ImpossibleToGenerate</a>, <a class="el" href="utils_8cpp_source.html#l00078">utils::max()</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="reportsystem_8h_source.html#l00175">OnlyOneFormatOnConsoleOutput</a>, <a class="el" href="reportsystem_8h_source.html#l00173">OutputFormatNotRecognized</a>, <a class="el" href="utils_8cpp_source.html#l00759">utils::ReplaceString()</a>, <a class="el" href="utils_8cpp_source.html#l00749">utils::ReplaceStringInPlace()</a>, <a class="el" href="reportsystem_8cpp_source.html#l00375">reporting::reportManager::report()</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="read_al_main_8cpp_source.html#l00326">main()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01371">trimAlManager::perform_VCF()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01418">trimAlManager::save_alignment()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="read_al_main_8cpp_source.html#l00326">main()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01373">trimAlManager::perform_VCF()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01420">trimAlManager::save_alignment()</a>.</p>
 <div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-10-summary" class="dynsummary" style="display:block;">
@@ -575,7 +575,7 @@ Private Attributes</h2></td></tr>
 
 <p class="reference">References <a class="el" href="_alignment_8h_source.html#l00084">Alignment::filename</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00080">Alignment::seqsName</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01371">trimAlManager::perform_VCF()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01373">trimAlManager::perform_VCF()</a>.</p>
 <div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-12-summary" class="dynsummary" style="display:block;">

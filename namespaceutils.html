@@ -21,8 +21,8 @@
     <link href="CustomExtra.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         function myFunction(ID) {
-            var divs = document.getElementsByName(ID);
-            for (var x of divs) {
+            const divs = document.getElementsByName(ID);
+            for (let x of divs) {
                 if (x.style.display === "none") {
                     x.style.display = "block";
                 } else {
@@ -259,7 +259,7 @@ This comes with a precision cost that shouldn't be a problem.  <a href="#ae1e05e
 
 <p class="reference">References <a class="el" href="defines_8h_source.html#l00096">AA</a>, <a class="el" href="defines_8h_source.html#l00100">DEG</a>, <a class="el" href="defines_8h_source.html#l00088">DNA</a>, <a class="el" href="defines_8h_source.html#l00084">NotDefined</a>, and <a class="el" href="defines_8h_source.html#l00092">RNA</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l00474">Alignment::getAlignmentType()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l00470">Alignment::getAlignmentType()</a>.</p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -393,7 +393,7 @@ This comes with a precision cost that shouldn't be a problem.  <a href="#ae1e05e
 
 <p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00049">49</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_similarity_8cpp_source.html#l00378">statistics::Similarity::calcCutPoint()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00792">Cleaner::cleanCompareFile()</a>, <a class="el" href="_mold_8cpp_source.html#l00218">statistics::Mold::printAccumulative()</a>, <a class="el" href="_similarity_8cpp_source.html#l00480">statistics::Similarity::printConservationAcl()</a>, <a class="el" href="_gaps_8cpp_source.html#l00384">statistics::Gaps::printGapsColumns()</a>, <a class="el" href="_consistency_8cpp_source.html#l00666">statistics::Consistency::printStatisticsFileAcl()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01501">trimAlManager::svg_stats_out()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_similarity_8cpp_source.html#l00378">statistics::Similarity::calcCutPoint()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00792">Cleaner::cleanCompareFile()</a>, <a class="el" href="_mold_8cpp_source.html#l00218">statistics::Mold::printAccumulative()</a>, <a class="el" href="_similarity_8cpp_source.html#l00480">statistics::Similarity::printConservationAcl()</a>, <a class="el" href="_gaps_8cpp_source.html#l00384">statistics::Gaps::printGapsColumns()</a>, <a class="el" href="_consistency_8cpp_source.html#l00666">statistics::Consistency::printStatisticsFileAcl()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01503">trimAlManager::svg_stats_out()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
@@ -491,7 +491,7 @@ This comes with a precision cost that shouldn't be a problem.  <a href="#ae1e05e
 
 <p class="reference">References <a class="el" href="utils_8cpp_source.html#l00732">lookForPattern()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l01148">Alignment::alignmentSummaryHTML()</a>, and <a class="el" href="_alignment_8cpp_source.html#l01412">Alignment::alignmentSummarySVG()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l01156">Alignment::alignmentSummaryHTML()</a>, and <a class="el" href="_alignment_8cpp_source.html#l01420">Alignment::alignmentSummarySVG()</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
@@ -925,7 +925,7 @@ This comes with a precision cost that shouldn't be a problem. </p>
 
 <p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00078">78</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l01148">Alignment::alignmentSummaryHTML()</a>, <a class="el" href="_alignment_8cpp_source.html#l01412">Alignment::alignmentSummarySVG()</a>, <a class="el" href="_gaps_8cpp_source.html#l00178">statistics::Gaps::calcCutPoint()</a>, <a class="el" href="_gaps_8cpp_source.html#l00313">statistics::Gaps::calcCutPoint2ndSlope()</a>, <a class="el" href="_gaps_8cpp_source.html#l00223">statistics::Gaps::calcCutPointMixSlope()</a>, <a class="el" href="_alignment_8cpp_source.html#l01056">Alignment::calculateColIdentity()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01513">Cleaner::calculateRepresentativeSeq()</a>, <a class="el" href="_consistency_8cpp_source.html#l00241">statistics::Consistency::compareAndChoose()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">Cleaner::getCutPointClusters()</a>, <a class="el" href="_base_format_handler_8cpp_source.html#l00183">FormatHandling::FormatManager::loadAndSaveMultipleAlignments()</a>, <a class="el" href="_mold_8cpp_source.html#l00218">statistics::Mold::printAccumulative()</a>, <a class="el" href="_alignment_8cpp_source.html#l00850">Alignment::printAlignmentInfo()</a>, <a class="el" href="_mold_8cpp_source.html#l00167">statistics::Mold::printByColumn()</a>, <a class="el" href="_alignment_8cpp_source.html#l00894">Alignment::printSeqIdentity()</a>, <a class="el" href="_alignment_8cpp_source.html#l00983">Alignment::printSeqOverlap()</a>, and <a class="el" href="_base_format_handler_8cpp_source.html#l00065">FormatHandling::FormatManager::saveAlignment()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l01156">Alignment::alignmentSummaryHTML()</a>, <a class="el" href="_alignment_8cpp_source.html#l01420">Alignment::alignmentSummarySVG()</a>, <a class="el" href="_gaps_8cpp_source.html#l00178">statistics::Gaps::calcCutPoint()</a>, <a class="el" href="_gaps_8cpp_source.html#l00313">statistics::Gaps::calcCutPoint2ndSlope()</a>, <a class="el" href="_gaps_8cpp_source.html#l00223">statistics::Gaps::calcCutPointMixSlope()</a>, <a class="el" href="_alignment_8cpp_source.html#l01064">Alignment::calculateColIdentity()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01512">Cleaner::calculateRepresentativeSeq()</a>, <a class="el" href="_consistency_8cpp_source.html#l00241">statistics::Consistency::compareAndChoose()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">Cleaner::getCutPointClusters()</a>, <a class="el" href="_base_format_handler_8cpp_source.html#l00183">FormatHandling::FormatManager::loadAndSaveMultipleAlignments()</a>, <a class="el" href="_mold_8cpp_source.html#l00218">statistics::Mold::printAccumulative()</a>, <a class="el" href="_alignment_8cpp_source.html#l00858">Alignment::printAlignmentInfo()</a>, <a class="el" href="_mold_8cpp_source.html#l00167">statistics::Mold::printByColumn()</a>, <a class="el" href="_alignment_8cpp_source.html#l00902">Alignment::printSeqIdentity()</a>, <a class="el" href="_alignment_8cpp_source.html#l00991">Alignment::printSeqOverlap()</a>, and <a class="el" href="_base_format_handler_8cpp_source.html#l00065">FormatHandling::FormatManager::saveAlignment()</a>.</p>
 <div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-9-summary" class="dynsummary" style="display:block;">
@@ -1057,7 +1057,7 @@ This comes with a precision cost that shouldn't be a problem. </p>
 
 <p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00096">96</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l01412">Alignment::alignmentSummarySVG()</a>, <a class="el" href="_alignment_8cpp_source.html#l00703">Alignment::checkCorrespondence()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00792">Cleaner::cleanCompareFile()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">Cleaner::getCutPointClusters()</a>, <a class="el" href="_alignment_8cpp_source.html#l00850">Alignment::printAlignmentInfo()</a>, and <a class="el" href="utils_8cpp_source.html#l00896">streamSVG()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l01420">Alignment::alignmentSummarySVG()</a>, <a class="el" href="_alignment_8cpp_source.html#l00711">Alignment::checkCorrespondence()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00792">Cleaner::cleanCompareFile()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">Cleaner::getCutPointClusters()</a>, <a class="el" href="_alignment_8cpp_source.html#l00858">Alignment::printAlignmentInfo()</a>, and <a class="el" href="utils_8cpp_source.html#l00896">streamSVG()</a>.</p>
 <div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-10-summary" class="dynsummary" style="display:block;">
@@ -1197,7 +1197,7 @@ This comes with a precision cost that shouldn't be a problem. </p>
 
 <p class="reference">References <a class="el" href="utils_8cpp_source.html#l00191">swap()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_similarity_8cpp_source.html#l00378">statistics::Similarity::calcCutPoint()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01513">Cleaner::calculateRepresentativeSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">Cleaner::cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">Cleaner::cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00952">Cleaner::cleanCombMethods()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00792">Cleaner::cleanCompareFile()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">Cleaner::getCutPointClusters()</a>, <a class="el" href="_mold_8cpp_source.html#l00218">statistics::Mold::printAccumulative()</a>, <a class="el" href="_similarity_8cpp_source.html#l00480">statistics::Similarity::printConservationAcl()</a>, <a class="el" href="_consistency_8cpp_source.html#l00666">statistics::Consistency::printStatisticsFileAcl()</a>, <a class="el" href="utils_8cpp_source.html#l00203">quicksort()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01501">trimAlManager::svg_stats_out()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_similarity_8cpp_source.html#l00378">statistics::Similarity::calcCutPoint()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01512">Cleaner::calculateRepresentativeSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">Cleaner::cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">Cleaner::cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00952">Cleaner::cleanCombMethods()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00792">Cleaner::cleanCompareFile()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">Cleaner::getCutPointClusters()</a>, <a class="el" href="_mold_8cpp_source.html#l00218">statistics::Mold::printAccumulative()</a>, <a class="el" href="_similarity_8cpp_source.html#l00480">statistics::Similarity::printConservationAcl()</a>, <a class="el" href="_consistency_8cpp_source.html#l00666">statistics::Consistency::printStatisticsFileAcl()</a>, <a class="el" href="utils_8cpp_source.html#l00203">quicksort()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01503">trimAlManager::svg_stats_out()</a>.</p>
 <div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-11-summary" class="dynsummary" style="display:block;">
@@ -1472,7 +1472,7 @@ It is useful as well because removes tabs and blank spaces at lines at beginning
 
 <p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00484">484</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01513">Cleaner::calculateRepresentativeSeq()</a>, <a class="el" href="_alignment_8cpp_source.html#l00703">Alignment::checkCorrespondence()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">Cleaner::getCutPointClusters()</a>, and <a class="el" href="_alignment_8cpp_source.html#l00429">Alignment::getSequences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01512">Cleaner::calculateRepresentativeSeq()</a>, <a class="el" href="_alignment_8cpp_source.html#l00711">Alignment::checkCorrespondence()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">Cleaner::getCutPointClusters()</a>, and <a class="el" href="_alignment_8cpp_source.html#l00425">Alignment::getSequences()</a>.</p>
 <div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-16-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-16-summary" class="dynsummary" style="display:block;">
@@ -1631,7 +1631,7 @@ It is useful as well because removes tabs and blank spaces at lines at beginning
 
 <p class="definition">Definition at line <a class="el" href="utils_8cpp_source.html#l00749">749</a> of file <a class="el" href="utils_8cpp_source.html">utils.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_base_format_handler_8cpp_source.html#l00183">FormatHandling::FormatManager::loadAndSaveMultipleAlignments()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01908">trimAlManager::menu()</a>, and <a class="el" href="_base_format_handler_8cpp_source.html#l00065">FormatHandling::FormatManager::saveAlignment()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_base_format_handler_8cpp_source.html#l00183">FormatHandling::FormatManager::loadAndSaveMultipleAlignments()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01915">trimAlManager::menu()</a>, and <a class="el" href="_base_format_handler_8cpp_source.html#l00065">FormatHandling::FormatManager::saveAlignment()</a>.</p>
 <div id="dynsection-19" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-19-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-19-summary" class="dynsummary" style="display:block;">
@@ -1801,7 +1801,7 @@ It is useful as well because removes tabs and blank spaces at lines at beginning
 
 <p class="reference">References <a class="el" href="utils_8cpp_source.html#l00096">min()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01501">trimAlManager::svg_stats_out()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01503">trimAlManager::svg_stats_out()</a>.</p>
 <div id="dynsection-21" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-21-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-21-summary" class="dynsummary" style="display:block;">

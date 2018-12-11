@@ -9,18 +9,18 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1376.7217)">
 <title>trimAlManager::processArguments</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1376.7217 1082,-1376.7217 1082,4 -4,4"/>
-<!-- Node971 -->
+<!-- Node961 -->
 <g id="node1" class="node">
-<title>Node971</title>
+<title>Node961</title>
 <g id="a_node1"><a xlink:title="Method to process the information obtained by trimAlManager::parseArguments It checks for argument in...">
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-446.2217 0,-465.2217 167,-465.2217 167,-446.2217 0,-446.2217"/>
 <text text-anchor="middle" x="83.5" y="-453.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::processArguments</text>
 </a>
 </g>
 </g>
-<!-- Node972 -->
+<!-- Node962 -->
 <g id="node2" class="node">
-<title>Node972</title>
+<title>Node962</title>
 <g id="a_node2"><a xlink:href="classtrim_al_manager.html#a16d2da3f90cfe965bea5f1da1360e17a" target="_top" xlink:title="Method to check argument incompatibilities. Take in mind that an incompatibility is between two argum...">
 <polygon fill="#ffffff" stroke="#000000" points="358,-852.7217 358,-882.7217 501,-882.7217 501,-852.7217 358,-852.7217"/>
 <text text-anchor="start" x="366" y="-870.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -28,15 +28,15 @@
 </a>
 </g>
 </g>
-<!-- Node971&#45;&gt;Node972 -->
+<!-- Node961&#45;&gt;Node962 -->
 <g id="edge1" class="edge">
-<title>Node971&#45;&gt;Node972</title>
+<title>Node961&#45;&gt;Node962</title>
 <path fill="none" stroke="#191970" d="M91.7116,-465.4996C135.8477,-518.0548 345.3085,-767.4705 410.253,-844.8033"/>
 <polygon fill="#191970" stroke="#191970" points="407.6503,-847.1465 416.7616,-852.5534 413.0107,-842.6447 407.6503,-847.1465"/>
 </g>
-<!-- Node985 -->
+<!-- Node975 -->
 <g id="node15" class="node">
-<title>Node985</title>
+<title>Node975</title>
 <g id="a_node15"><a xlink:href="classtrim_al_manager.html#a3f325b806727751394adb829d97b35f1" target="_top" xlink:title="Method that checks dependencies between arguments. Take in mind that dependencies may be between mult...">
 <polygon fill="#ffffff" stroke="#000000" points="203,-418.7217 203,-448.7217 315,-448.7217 315,-418.7217 203,-418.7217"/>
 <text text-anchor="start" x="211" y="-436.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -44,15 +44,15 @@
 </a>
 </g>
 </g>
-<!-- Node971&#45;&gt;Node985 -->
+<!-- Node961&#45;&gt;Node975 -->
 <g id="edge24" class="edge">
-<title>Node971&#45;&gt;Node985</title>
+<title>Node961&#45;&gt;Node975</title>
 <path fill="none" stroke="#191970" d="M159.4561,-446.2001C170.4779,-444.8184 181.7526,-443.4051 192.5674,-442.0494"/>
 <polygon fill="#191970" stroke="#191970" points="193.2851,-445.4869 202.772,-440.7702 192.4143,-438.5413 193.2851,-445.4869"/>
 </g>
-<!-- Node973 -->
+<!-- Node963 -->
 <g id="node3" class="node">
-<title>Node973</title>
+<title>Node963</title>
 <g id="a_node3"><a xlink:href="classtrim_al_manager.html#a240651e152a2258badf642ed10a982f1" target="_top" xlink:title="Method to check incompatibilities related to automated trimming methods.">
 <polygon fill="#ffffff" stroke="#000000" points="544,-803.7217 544,-833.7217 729,-833.7217 729,-803.7217 544,-803.7217"/>
 <text text-anchor="start" x="552" y="-821.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -60,15 +60,15 @@
 </a>
 </g>
 </g>
-<!-- Node972&#45;&gt;Node973 -->
+<!-- Node962&#45;&gt;Node963 -->
 <g id="edge2" class="edge">
-<title>Node972&#45;&gt;Node973</title>
+<title>Node962&#45;&gt;Node963</title>
 <path fill="none" stroke="#191970" d="M493.0136,-852.687C515.1679,-847.4428 540.2107,-841.5148 563.1018,-836.0961"/>
 <polygon fill="#191970" stroke="#191970" points="564.1817,-839.4373 573.1065,-833.7278 562.5692,-832.6255 564.1817,-839.4373"/>
 </g>
-<!-- Node975 -->
+<!-- Node965 -->
 <g id="node5" class="node">
-<title>Node975</title>
+<title>Node965</title>
 <g id="a_node5"><a xlink:href="classtrim_al_manager.html#a197d0ef570aee1edc074b19f4134060e" target="_top" xlink:title="Method to check clusters incompatibilities.">
 <polygon fill="#ffffff" stroke="#000000" points="571,-1048.7217 571,-1078.7217 702,-1078.7217 702,-1048.7217 571,-1048.7217"/>
 <text text-anchor="start" x="579" y="-1066.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -76,15 +76,15 @@
 </a>
 </g>
 </g>
-<!-- Node972&#45;&gt;Node975 -->
+<!-- Node962&#45;&gt;Node965 -->
 <g id="edge4" class="edge">
-<title>Node972&#45;&gt;Node975</title>
+<title>Node962&#45;&gt;Node965</title>
 <path fill="none" stroke="#191970" d="M438.6395,-882.7409C463.0309,-922.6308 528.8402,-1028.9295 544,-1039.7217 549.2331,-1043.4471 554.9992,-1046.5946 561.0174,-1049.2538"/>
 <polygon fill="#191970" stroke="#191970" points="560.0546,-1052.6362 570.6416,-1053.0435 562.6193,-1046.123 560.0546,-1052.6362"/>
 </g>
-<!-- Node977 -->
+<!-- Node967 -->
 <g id="node7" class="node">
-<title>Node977</title>
+<title>Node967</title>
 <g id="a_node7"><a xlink:href="classtrim_al_manager.html#a3563c4066ac0340d27cc72508bf8949b" target="_top" xlink:title="Method to check incompatibilities related to how the algorithm should treat stop codons.">
 <polygon fill="#ffffff" stroke="#000000" points="555,-754.7217 555,-784.7217 718,-784.7217 718,-754.7217 555,-754.7217"/>
 <text text-anchor="start" x="563" y="-772.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -92,15 +92,15 @@
 </a>
 </g>
 </g>
-<!-- Node972&#45;&gt;Node977 -->
+<!-- Node962&#45;&gt;Node967 -->
 <g id="edge7" class="edge">
-<title>Node972&#45;&gt;Node977</title>
+<title>Node962&#45;&gt;Node967</title>
 <path fill="none" stroke="#191970" d="M448.6662,-852.5721C470.5621,-835.9449 508.0263,-809.5202 544,-793.7217 548.6283,-791.689 553.4652,-789.8003 558.3955,-788.0499"/>
 <polygon fill="#191970" stroke="#191970" points="559.5866,-791.3423 567.9616,-784.8531 557.3678,-784.7032 559.5866,-791.3423"/>
 </g>
-<!-- Node978 -->
+<!-- Node968 -->
 <g id="node8" class="node">
-<title>Node978</title>
+<title>Node968</title>
 <g id="a_node8"><a xlink:href="classtrim_al_manager.html#aa96711af8011305f73b3caee46ae0fd8" target="_top" xlink:title="As some thresholds are incompatible between them, we check their incompatibilities.">
 <polygon fill="#ffffff" stroke="#000000" points="554.5,-694.2217 554.5,-735.2217 718.5,-735.2217 718.5,-694.2217 554.5,-694.2217"/>
 <text text-anchor="start" x="562.5" y="-723.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -109,15 +109,15 @@
 </a>
 </g>
 </g>
-<!-- Node972&#45;&gt;Node978 -->
+<!-- Node962&#45;&gt;Node968 -->
 <g id="edge9" class="edge">
-<title>Node972&#45;&gt;Node978</title>
+<title>Node962&#45;&gt;Node968</title>
 <path fill="none" stroke="#191970" d="M439.6539,-852.5362C457.6772,-826.7163 497.7464,-774.1992 544,-744.7217 546.6205,-743.0516 549.3424,-741.4666 552.1375,-739.9631"/>
 <polygon fill="#191970" stroke="#191970" points="553.872,-743.0098 561.2788,-735.4341 550.7644,-736.7374 553.872,-743.0098"/>
 </g>
-<!-- Node979 -->
+<!-- Node969 -->
 <g id="node9" class="node">
-<title>Node979</title>
+<title>Node969</title>
 <g id="a_node9"><a xlink:href="classtrim_al_manager.html#a603ce4f4aefaf60dc1d8db83490d44ac" target="_top" xlink:title="Method to check the inFile argument incompatibilities.">
 <polygon fill="#ffffff" stroke="#000000" points="576.5,-644.7217 576.5,-674.7217 696.5,-674.7217 696.5,-644.7217 576.5,-644.7217"/>
 <text text-anchor="start" x="584.5" y="-662.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -125,15 +125,15 @@
 </a>
 </g>
 </g>
-<!-- Node972&#45;&gt;Node979 -->
+<!-- Node962&#45;&gt;Node969 -->
 <g id="edge11" class="edge">
-<title>Node972&#45;&gt;Node979</title>
+<title>Node962&#45;&gt;Node969</title>
 <path fill="none" stroke="#191970" d="M434.6097,-852.4851C447.2308,-817.2437 483.331,-729.6885 544,-684.7217 550.8201,-679.6667 558.5968,-675.6337 566.6777,-672.416"/>
 <polygon fill="#191970" stroke="#191970" points="568.019,-675.6537 576.2646,-669.0009 565.6699,-669.0596 568.019,-675.6537"/>
 </g>
-<!-- Node980 -->
+<!-- Node970 -->
 <g id="node10" class="node">
-<title>Node980</title>
+<title>Node970</title>
 <g id="a_node10"><a xlink:href="classtrim_al_manager.html#ab5b035ec7491b19958cf6f2e222e4b01" target="_top" xlink:title="Method to check max identity incompatibilities.">
 <polygon fill="#ffffff" stroke="#000000" points="560.5,-999.7217 560.5,-1029.7217 712.5,-1029.7217 712.5,-999.7217 560.5,-999.7217"/>
 <text text-anchor="start" x="568.5" y="-1017.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -141,15 +141,15 @@
 </a>
 </g>
 </g>
-<!-- Node972&#45;&gt;Node980 -->
+<!-- Node962&#45;&gt;Node970 -->
 <g id="edge13" class="edge">
-<title>Node972&#45;&gt;Node980</title>
+<title>Node962&#45;&gt;Node970</title>
 <path fill="none" stroke="#191970" d="M439.5331,-883.0242C457.374,-908.9972 497.1757,-961.6199 544,-989.7217 547.6105,-991.8885 551.4113,-993.8713 555.3296,-995.6851"/>
 <polygon fill="#191970" stroke="#191970" points="554.0768,-998.9553 564.6509,-999.6183 556.7981,-992.5059 554.0768,-998.9553"/>
 </g>
-<!-- Node981 -->
+<!-- Node971 -->
 <g id="node11" class="node">
-<title>Node981</title>
+<title>Node971</title>
 <g id="a_node11"><a xlink:href="classtrim_al_manager.html#a0e099828be74d3ca0068b951d6578407" target="_top" xlink:title="Method to check incompatibilities with select cols and select seqs arguments.">
 <polygon fill="#ffffff" stroke="#000000" points="577,-1098.2217 577,-1139.2217 696,-1139.2217 696,-1098.2217 577,-1098.2217"/>
 <text text-anchor="start" x="585" y="-1127.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -158,15 +158,15 @@
 </a>
 </g>
 </g>
-<!-- Node972&#45;&gt;Node981 -->
+<!-- Node962&#45;&gt;Node971 -->
 <g id="edge15" class="edge">
-<title>Node972&#45;&gt;Node981</title>
+<title>Node962&#45;&gt;Node971</title>
 <path fill="none" stroke="#191970" d="M440.4359,-883.0641C456.6311,-906.2392 487.3027,-951.9153 508,-993.7217 528.033,-1034.1864 511.3062,-1057.5796 544,-1088.7217 550.7329,-1095.135 558.8504,-1100.1774 567.445,-1104.1419"/>
 <polygon fill="#191970" stroke="#191970" points="566.3357,-1107.4699 576.9155,-1108.0345 568.9969,-1100.9955 566.3357,-1107.4699"/>
 </g>
-<!-- Node982 -->
+<!-- Node972 -->
 <g id="node12" class="node">
-<title>Node982</title>
+<title>Node972</title>
 <g id="a_node12"><a xlink:href="classtrim_al_manager.html#a10cf2679904a3707519d3ddac171ce06" target="_top" xlink:title="Method to check statistics incompatibilities.">
 <polygon fill="#ffffff" stroke="#000000" points="577,-950.7217 577,-980.7217 696,-980.7217 696,-950.7217 577,-950.7217"/>
 <text text-anchor="start" x="585" y="-968.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -174,15 +174,15 @@
 </a>
 </g>
 </g>
-<!-- Node972&#45;&gt;Node982 -->
+<!-- Node962&#45;&gt;Node972 -->
 <g id="edge18" class="edge">
-<title>Node972&#45;&gt;Node982</title>
+<title>Node962&#45;&gt;Node972</title>
 <path fill="none" stroke="#191970" d="M449.129,-882.8807C471.1359,-899.2265 508.4154,-925.0108 544,-940.7217 551.3569,-943.9698 559.234,-946.8827 567.1723,-949.4712"/>
 <polygon fill="#191970" stroke="#191970" points="566.2671,-952.8548 576.8549,-952.4683 568.337,-946.1678 566.2671,-952.8548"/>
 </g>
-<!-- Node983 -->
+<!-- Node973 -->
 <g id="node13" class="node">
-<title>Node983</title>
+<title>Node973</title>
 <g id="a_node13"><a xlink:href="classtrim_al_manager.html#aa6149bd13ebbf5e0c4b9c81919304796" target="_top" xlink:title="Method to check incompatibilities with manual thresholds.">
 <polygon fill="#ffffff" stroke="#000000" points="565.5,-901.7217 565.5,-931.7217 707.5,-931.7217 707.5,-901.7217 565.5,-901.7217"/>
 <text text-anchor="start" x="573.5" y="-919.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -190,15 +190,15 @@
 </a>
 </g>
 </g>
-<!-- Node972&#45;&gt;Node983 -->
+<!-- Node962&#45;&gt;Node973 -->
 <g id="edge20" class="edge">
-<title>Node972&#45;&gt;Node983</title>
+<title>Node962&#45;&gt;Node973</title>
 <path fill="none" stroke="#191970" d="M493.0136,-882.7563C515.1679,-888.0005 540.2107,-893.9285 563.1018,-899.3472"/>
 <polygon fill="#191970" stroke="#191970" points="562.5692,-902.8178 573.1065,-901.7155 564.1817,-896.006 562.5692,-902.8178"/>
 </g>
-<!-- Node984 -->
+<!-- Node974 -->
 <g id="node14" class="node">
-<title>Node984</title>
+<title>Node974</title>
 <g id="a_node14"><a xlink:href="classtrim_al_manager.html#a2cc3ed142e9da213332ada3a2b39dea0" target="_top" xlink:title="Method to check windows incompatibilities.">
 <polygon fill="#ffffff" stroke="#000000" points="569,-852.7217 569,-882.7217 704,-882.7217 704,-852.7217 569,-852.7217"/>
 <text text-anchor="start" x="577" y="-870.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -206,15 +206,15 @@
 </a>
 </g>
 </g>
-<!-- Node972&#45;&gt;Node984 -->
+<!-- Node962&#45;&gt;Node974 -->
 <g id="edge22" class="edge">
-<title>Node972&#45;&gt;Node984</title>
+<title>Node962&#45;&gt;Node974</title>
 <path fill="none" stroke="#191970" d="M501.0275,-867.7217C519.6503,-867.7217 539.8044,-867.7217 558.7326,-867.7217"/>
 <polygon fill="#191970" stroke="#191970" points="558.8033,-871.2218 568.8033,-867.7217 558.8032,-864.2218 558.8033,-871.2218"/>
 </g>
-<!-- Node974 -->
+<!-- Node964 -->
 <g id="node4" class="node">
-<title>Node974</title>
+<title>Node964</title>
 <g id="a_node4"><a xlink:href="classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR.">
 <polygon fill="#ffffff" stroke="#000000" points="776.5,-600.7217 776.5,-630.7217 898.5,-630.7217 898.5,-600.7217 776.5,-600.7217"/>
 <text text-anchor="start" x="784.5" y="-618.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">reporting::reportManager</text>
@@ -222,90 +222,90 @@
 </a>
 </g>
 </g>
-<!-- Node973&#45;&gt;Node974 -->
+<!-- Node963&#45;&gt;Node964 -->
 <g id="edge3" class="edge">
-<title>Node973&#45;&gt;Node974</title>
+<title>Node963&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M712.0274,-803.6783C718.0554,-800.9026 723.8105,-797.6152 729,-793.7217 782.4148,-753.6462 815.1957,-678.8722 829.3386,-640.2358"/>
 <polygon fill="#191970" stroke="#191970" points="832.6432,-641.3891 832.685,-630.7943 826.0453,-639.0505 832.6432,-641.3891"/>
 </g>
-<!-- Node975&#45;&gt;Node974 -->
+<!-- Node965&#45;&gt;Node964 -->
 <g id="edge6" class="edge">
-<title>Node975&#45;&gt;Node974</title>
+<title>Node965&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M702.3701,-1055.99C712.2727,-1052.3377 721.6215,-1047.1248 729,-1039.7217 786.4935,-982.0357 823.7815,-723.6356 834.3873,-641.1301"/>
 <polygon fill="#191970" stroke="#191970" points="837.8715,-641.4751 835.6539,-631.115 830.9268,-640.5968 837.8715,-641.4751"/>
 </g>
-<!-- Node976 -->
+<!-- Node966 -->
 <g id="node6" class="node">
-<title>Node976</title>
+<title>Node966</title>
 <g id="a_node6"><a xlink:href="class_alignment.html#a66fdd6d16ef1ccb5e8da24c6e20feca7" target="_top" xlink:title="Number of sequences getter.">
 <polygon fill="#ffffff" stroke="#000000" points="769.5,-1117.2217 769.5,-1136.2217 905.5,-1136.2217 905.5,-1117.2217 769.5,-1117.2217"/>
 <text text-anchor="middle" x="837.5" y="-1124.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::getNumSpecies</text>
 </a>
 </g>
 </g>
-<!-- Node975&#45;&gt;Node976 -->
+<!-- Node965&#45;&gt;Node966 -->
 <g id="edge5" class="edge">
-<title>Node975&#45;&gt;Node976</title>
+<title>Node965&#45;&gt;Node966</title>
 <path fill="none" stroke="#191970" d="M694.9119,-1078.8149C706.2621,-1081.9431 718.0358,-1085.325 729,-1088.7217 753.6874,-1096.3698 781.1607,-1106.0034 802.285,-1113.657"/>
 <polygon fill="#191970" stroke="#191970" points="801.2134,-1116.9916 811.8073,-1117.1286 803.6111,-1110.4151 801.2134,-1116.9916"/>
 </g>
-<!-- Node977&#45;&gt;Node974 -->
+<!-- Node967&#45;&gt;Node964 -->
 <g id="edge8" class="edge">
-<title>Node977&#45;&gt;Node974</title>
+<title>Node967&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M709.5222,-754.589C716.3543,-751.8276 722.969,-748.5681 729,-744.7217 771.3014,-717.743 805.6068,-669.0423 823.6537,-639.8146"/>
 <polygon fill="#191970" stroke="#191970" points="826.7651,-641.4326 828.9313,-631.0616 820.7704,-637.8181 826.7651,-641.4326"/>
 </g>
-<!-- Node978&#45;&gt;Node974 -->
+<!-- Node968&#45;&gt;Node964 -->
 <g id="edge10" class="edge">
-<title>Node978&#45;&gt;Node974</title>
+<title>Node968&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M703.9325,-694.21C712.4936,-690.9998 721.0377,-687.4858 729,-683.7217 757.2626,-670.3607 787.2147,-651.1596 808.472,-636.5662"/>
 <polygon fill="#191970" stroke="#191970" points="810.521,-639.4045 816.736,-630.824 806.5266,-633.656 810.521,-639.4045"/>
 </g>
-<!-- Node979&#45;&gt;Node974 -->
+<!-- Node969&#45;&gt;Node964 -->
 <g id="edge12" class="edge">
-<title>Node979&#45;&gt;Node974</title>
+<title>Node969&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M696.5344,-646.5798C718.5017,-641.771 743.5656,-636.2844 766.4071,-631.2843"/>
 <polygon fill="#191970" stroke="#191970" points="767.3641,-634.6578 776.3843,-629.1002 765.8672,-627.8197 767.3641,-634.6578"/>
 </g>
-<!-- Node980&#45;&gt;Node974 -->
+<!-- Node970&#45;&gt;Node964 -->
 <g id="edge14" class="edge">
-<title>Node980&#45;&gt;Node974</title>
+<title>Node970&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M712.7898,-1001.3181C718.7291,-998.1986 724.2518,-994.3833 729,-989.7217 780.0401,-939.6118 820.8304,-716.8336 833.4458,-641.0543"/>
 <polygon fill="#191970" stroke="#191970" points="836.9337,-641.4134 835.1006,-630.9784 830.0262,-640.279 836.9337,-641.4134"/>
 </g>
-<!-- Node981&#45;&gt;Node974 -->
+<!-- Node971&#45;&gt;Node964 -->
 <g id="edge17" class="edge">
-<title>Node981&#45;&gt;Node974</title>
+<title>Node971&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M696.0537,-1109.2942C708.3558,-1104.8441 720.2218,-1098.3097 729,-1088.7217 790.6512,-1021.3825 825.6802,-729.0457 834.9761,-640.9433"/>
 <polygon fill="#191970" stroke="#191970" points="838.4785,-641.1008 836.0277,-630.7933 831.5157,-640.3793 838.4785,-641.1008"/>
 </g>
-<!-- Node981&#45;&gt;Node976 -->
+<!-- Node971&#45;&gt;Node966 -->
 <g id="edge16" class="edge">
-<title>Node981&#45;&gt;Node976</title>
+<title>Node971&#45;&gt;Node966</title>
 <path fill="none" stroke="#191970" d="M696.2624,-1121.1003C715.9531,-1121.884 738.1553,-1122.7676 759.0248,-1123.5983"/>
 <polygon fill="#191970" stroke="#191970" points="759.0147,-1127.1005 769.146,-1124.0011 759.2931,-1120.1061 759.0147,-1127.1005"/>
 </g>
-<!-- Node982&#45;&gt;Node974 -->
+<!-- Node972&#45;&gt;Node964 -->
 <g id="edge19" class="edge">
-<title>Node982&#45;&gt;Node974</title>
+<title>Node972&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M696.2239,-958.7412C708.2276,-954.9739 719.9247,-949.2832 729,-940.7217 774.0764,-898.1973 817.6498,-709.6118 832.308,-640.8861"/>
 <polygon fill="#191970" stroke="#191970" points="835.7696,-641.4329 834.4081,-630.9259 828.9202,-639.9886 835.7696,-641.4329"/>
 </g>
-<!-- Node983&#45;&gt;Node974 -->
+<!-- Node973&#45;&gt;Node964 -->
 <g id="edge21" class="edge">
-<title>Node983&#45;&gt;Node974</title>
+<title>Node973&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M707.7535,-904.9863C715.4973,-901.6032 722.8025,-897.269 729,-891.7217 805.0871,-823.6161 828.403,-695.3746 835.0464,-641.0573"/>
 <polygon fill="#191970" stroke="#191970" points="838.5459,-641.2578 836.1938,-630.9274 831.5904,-640.4699 838.5459,-641.2578"/>
 </g>
-<!-- Node984&#45;&gt;Node974 -->
+<!-- Node974&#45;&gt;Node964 -->
 <g id="edge23" class="edge">
-<title>Node984&#45;&gt;Node974</title>
+<title>Node974&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M704.0766,-856.8882C713.0866,-853.3951 721.7139,-848.7898 729,-842.7217 793.6127,-788.9099 822.4042,-687.6681 832.7115,-640.7569"/>
 <polygon fill="#191970" stroke="#191970" points="836.1659,-641.337 834.7919,-630.8316 829.3148,-639.9009 836.1659,-641.337"/>
 </g>
-<!-- Node986 -->
+<!-- Node976 -->
 <g id="node16" class="node">
-<title>Node986</title>
+<title>Node976</title>
 <g id="a_node16"><a xlink:href="classtrim_al_manager.html#a55f0bbc922fb6854118da00a5bfa0c1b" target="_top" xlink:title="Method to check and prepare the coding sequence.">
 <polygon fill="#ffffff" stroke="#000000" points="351.5,-1139.7217 351.5,-1169.7217 507.5,-1169.7217 507.5,-1139.7217 351.5,-1139.7217"/>
 <text text-anchor="start" x="359.5" y="-1157.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -313,15 +313,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node986 -->
+<!-- Node975&#45;&gt;Node976 -->
 <g id="edge25" class="edge">
-<title>Node985&#45;&gt;Node986</title>
+<title>Node975&#45;&gt;Node976</title>
 <path fill="none" stroke="#191970" d="M259.2921,-448.7745C261.0371,-517.0659 272.8985,-803.8487 351,-1021.7217 365.811,-1063.0386 393.7786,-1105.8985 412.0206,-1131.4338"/>
 <polygon fill="#191970" stroke="#191970" points="409.3231,-1133.6757 418.0299,-1139.7124 414.988,-1129.5637 409.3231,-1133.6757"/>
 </g>
-<!-- Node991 -->
+<!-- Node981 -->
 <g id="node21" class="node">
-<title>Node991</title>
+<title>Node981</title>
 <g id="a_node21"><a xlink:href="classtrim_al_manager.html#a27f1472f092b9c3a33a779ef538d11e1" target="_top" xlink:title="Check if only one method, either automatic or manual has been asked.">
 <polygon fill="#ffffff" stroke="#000000" points="547,-252.7217 547,-282.7217 726,-282.7217 726,-252.7217 547,-252.7217"/>
 <text text-anchor="start" x="555" y="-270.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -329,15 +329,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node991 -->
+<!-- Node975&#45;&gt;Node981 -->
 <g id="edge32" class="edge">
-<title>Node985&#45;&gt;Node991</title>
+<title>Node975&#45;&gt;Node981</title>
 <path fill="none" stroke="#191970" d="M263.4465,-418.2735C273.3325,-387.0884 300.3573,-317.0109 351,-286.7217 406.1986,-253.7076 478.5927,-249.2281 536.6688,-252.8646"/>
 <polygon fill="#191970" stroke="#191970" points="536.7433,-256.3788 546.968,-253.6029 537.2439,-249.3967 536.7433,-256.3788"/>
 </g>
-<!-- Node992 -->
+<!-- Node982 -->
 <g id="node22" class="node">
-<title>Node992</title>
+<title>Node982</title>
 <g id="a_node22"><a xlink:href="classtrim_al_manager.html#a8873f972344b34acf6441c1f46338082" target="_top" xlink:title="Method to check if the origAlig and backtranslationAlig are compatible in names to make the backtrans...">
 <polygon fill="#ffffff" stroke="#000000" points="367,-1241.2217 367,-1282.2217 492,-1282.2217 492,-1241.2217 367,-1241.2217"/>
 <text text-anchor="start" x="375" y="-1270.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -346,15 +346,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node992 -->
+<!-- Node975&#45;&gt;Node982 -->
 <g id="edge34" class="edge">
-<title>Node985&#45;&gt;Node992</title>
+<title>Node975&#45;&gt;Node982</title>
 <path fill="none" stroke="#191970" d="M259.5748,-448.858C263.3205,-542.4795 286.1626,-1043.1167 351,-1179.7217 361.0218,-1200.8364 378.6049,-1219.9858 394.5929,-1234.4594"/>
 <polygon fill="#191970" stroke="#191970" points="392.442,-1237.228 402.2733,-1241.1772 397.0505,-1231.9591 392.442,-1237.228"/>
 </g>
-<!-- Node996 -->
+<!-- Node986 -->
 <g id="node26" class="node">
-<title>Node996</title>
+<title>Node986</title>
 <g id="a_node26"><a xlink:href="classtrim_al_manager.html#ac2c6938833505b9ded4c84636dee2663" target="_top" xlink:title="Method to check backtranslation needs.">
 <polygon fill="#ffffff" stroke="#000000" points="373.5,-296.7217 373.5,-326.7217 485.5,-326.7217 485.5,-296.7217 373.5,-296.7217"/>
 <text text-anchor="start" x="381.5" y="-314.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -362,15 +362,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node996 -->
+<!-- Node975&#45;&gt;Node986 -->
 <g id="edge41" class="edge">
-<title>Node985&#45;&gt;Node996</title>
+<title>Node975&#45;&gt;Node986</title>
 <path fill="none" stroke="#191970" d="M269.3381,-418.4489C284.6882,-396.915 315.5384,-357.7983 351,-335.7217 355.0945,-333.1726 359.4784,-330.8781 364.0036,-328.8153"/>
 <polygon fill="#191970" stroke="#191970" points="365.5475,-331.9642 373.4431,-324.8995 362.8652,-325.4984 365.5475,-331.9642"/>
 </g>
-<!-- Node998 -->
+<!-- Node988 -->
 <g id="node28" class="node">
-<title>Node998</title>
+<title>Node988</title>
 <g id="a_node28"><a xlink:href="classtrim_al_manager.html#a1b39cb8f30d914ee709305bf9fc12a2a" target="_top" xlink:title="Method to check if the block size is bigger than allowed depending on size of alignment.">
 <polygon fill="#ffffff" stroke="#000000" points="373.5,-208.7217 373.5,-238.7217 485.5,-238.7217 485.5,-208.7217 373.5,-208.7217"/>
 <text text-anchor="start" x="381.5" y="-226.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -378,15 +378,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node998 -->
+<!-- Node975&#45;&gt;Node988 -->
 <g id="edge44" class="edge">
-<title>Node985&#45;&gt;Node998</title>
+<title>Node975&#45;&gt;Node988</title>
 <path fill="none" stroke="#191970" d="M262.7149,-418.6383C271.8651,-384.5192 298.6435,-300.734 351,-253.7217 355.2066,-249.9445 359.9383,-246.6234 364.9397,-243.7069"/>
 <polygon fill="#191970" stroke="#191970" points="366.9341,-246.614 374.1786,-238.883 363.6942,-240.4089 366.9341,-246.614"/>
 </g>
-<!-- Node1000 -->
+<!-- Node990 -->
 <g id="node30" class="node">
-<title>Node1000</title>
+<title>Node990</title>
 <g id="a_node30"><a xlink:href="classtrim_al_manager.html#ad3e1ebff95c17424f4159e9adb8548ae" target="_top" xlink:title="Method to check the type of sequences present in the backtranslationAlig.">
 <polygon fill="#ffffff" stroke="#000000" points="573,-1158.7217 573,-1188.7217 700,-1188.7217 700,-1158.7217 573,-1158.7217"/>
 <text text-anchor="start" x="581" y="-1176.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -394,15 +394,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node1000 -->
+<!-- Node975&#45;&gt;Node990 -->
 <g id="edge47" class="edge">
-<title>Node985&#45;&gt;Node1000</title>
+<title>Node975&#45;&gt;Node990</title>
 <path fill="none" stroke="#191970" d="M259.6388,-449.0903C262.6102,-508.6858 278.2191,-729.2599 351,-891.7217 409.4001,-1022.0826 425.7291,-1068.6184 544,-1148.7217 549.9656,-1152.7621 556.5604,-1156.151 563.4008,-1158.9931"/>
 <polygon fill="#191970" stroke="#191970" points="562.2525,-1162.3005 572.8446,-1162.5396 564.7135,-1155.7473 562.2525,-1162.3005"/>
 </g>
-<!-- Node1001 -->
+<!-- Node991 -->
 <g id="node31" class="node">
-<title>Node1001</title>
+<title>Node991</title>
 <g id="a_node31"><a xlink:href="classtrim_al_manager.html#ab06dfadf8538ec6782a704b11e6d150a" target="_top" xlink:title="Method to check if column numbering makes sense based on the functionality asked.">
 <polygon fill="#ffffff" stroke="#000000" points="373.5,-651.7217 373.5,-681.7217 485.5,-681.7217 485.5,-651.7217 373.5,-651.7217"/>
 <text text-anchor="start" x="381.5" y="-669.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -410,15 +410,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node1001 -->
+<!-- Node975&#45;&gt;Node991 -->
 <g id="edge50" class="edge">
-<title>Node985&#45;&gt;Node1001</title>
+<title>Node975&#45;&gt;Node991</title>
 <path fill="none" stroke="#191970" d="M261.3259,-448.7612C268.0005,-486.8017 290.7535,-587.6608 351,-641.7217 354.8922,-645.2143 359.2739,-648.2192 363.9259,-650.8045"/>
 <polygon fill="#191970" stroke="#191970" points="362.6224,-654.0621 373.1473,-655.2768 365.677,-647.7638 362.6224,-654.0621"/>
 </g>
-<!-- Node1002 -->
+<!-- Node992 -->
 <g id="node32" class="node">
-<title>Node1002</title>
+<title>Node992</title>
 <g id="a_node32"><a xlink:href="classtrim_al_manager.html#ab6003417954bc032c4f82892d0f38a16" target="_top" xlink:title="Method to check and warn if windowsize and compareset has been given.">
 <polygon fill="#ffffff" stroke="#000000" points="351,-602.7217 351,-632.7217 508,-632.7217 508,-602.7217 351,-602.7217"/>
 <text text-anchor="start" x="359" y="-620.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -426,15 +426,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node1002 -->
+<!-- Node975&#45;&gt;Node992 -->
 <g id="edge52" class="edge">
-<title>Node985&#45;&gt;Node1002</title>
+<title>Node975&#45;&gt;Node992</title>
 <path fill="none" stroke="#191970" d="M263.6059,-448.8912C273.9521,-480.4171 302.04,-553.3492 351,-592.7217 353.2466,-594.5283 355.6261,-596.2055 358.1036,-597.7623"/>
 <polygon fill="#191970" stroke="#191970" points="356.4098,-600.8251 366.854,-602.6053 359.7995,-594.7006 356.4098,-600.8251"/>
 </g>
-<!-- Node1003 -->
+<!-- Node993 -->
 <g id="node33" class="node">
-<title>Node1003</title>
+<title>Node993</title>
 <g id="a_node33"><a xlink:href="classtrim_al_manager.html#a3beec34d7074f4a67ccaf4e8bb875122" target="_top" xlink:title="Method to check if an alignment needs to be aligned depending on the methods that have been asked to ...">
 <polygon fill="#ffffff" stroke="#000000" points="373.5,-345.7217 373.5,-375.7217 485.5,-375.7217 485.5,-345.7217 373.5,-345.7217"/>
 <text text-anchor="start" x="381.5" y="-363.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -442,15 +442,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node1003 -->
+<!-- Node975&#45;&gt;Node993 -->
 <g id="edge54" class="edge">
-<title>Node985&#45;&gt;Node1003</title>
+<title>Node975&#45;&gt;Node993</title>
 <path fill="none" stroke="#191970" d="M284.1347,-418.6339C302.2763,-408.17 327.5969,-394.4252 351,-384.7217 355.733,-382.7592 360.685,-380.8746 365.701,-379.0847"/>
 <polygon fill="#191970" stroke="#191970" points="367.0613,-382.3184 375.3853,-375.7637 364.7906,-375.6969 367.0613,-382.3184"/>
 </g>
-<!-- Node1004 -->
+<!-- Node994 -->
 <g id="node34" class="node">
-<title>Node1004</title>
+<title>Node994</title>
 <g id="a_node34"><a xlink:href="classtrim_al_manager.html#abb94df3621dbe1859675bb385d3d5b7d" target="_top" xlink:title="Method to check dependency of force select argument.">
 <polygon fill="#ffffff" stroke="#000000" points="373.5,-553.7217 373.5,-583.7217 485.5,-583.7217 485.5,-553.7217 373.5,-553.7217"/>
 <text text-anchor="start" x="381.5" y="-571.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -458,15 +458,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node1004 -->
+<!-- Node975&#45;&gt;Node994 -->
 <g id="edge57" class="edge">
-<title>Node985&#45;&gt;Node1004</title>
+<title>Node975&#45;&gt;Node994</title>
 <path fill="none" stroke="#191970" d="M267.7135,-448.8711C282.08,-472.5318 312.9686,-518.1862 351,-543.7217 355.0188,-546.42 359.347,-548.8418 363.8325,-551.0131"/>
 <polygon fill="#191970" stroke="#191970" points="362.6482,-554.3154 373.212,-555.1263 365.4595,-547.9048 362.6482,-554.3154"/>
 </g>
-<!-- Node1005 -->
+<!-- Node995 -->
 <g id="node35" class="node">
-<title>Node1005</title>
+<title>Node995</title>
 <g id="a_node35"><a xlink:href="classtrim_al_manager.html#a640fb579367d6ea2e45265cacf57a3ef" target="_top" xlink:title="Method to check dependency between custom coding sequence file and infile arguments.">
 <polygon fill="#ffffff" stroke="#000000" points="370.5,-493.2217 370.5,-534.2217 488.5,-534.2217 488.5,-493.2217 370.5,-493.2217"/>
 <text text-anchor="start" x="378.5" y="-522.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -475,15 +475,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node1005 -->
+<!-- Node975&#45;&gt;Node995 -->
 <g id="edge59" class="edge">
-<title>Node985&#45;&gt;Node1005</title>
+<title>Node975&#45;&gt;Node995</title>
 <path fill="none" stroke="#191970" d="M285.5667,-448.9022C303.7278,-459.0225 328.4934,-472.3246 351,-482.7217 355.7014,-484.8935 360.6009,-487.0565 365.5542,-489.1718"/>
 <polygon fill="#191970" stroke="#191970" points="364.5322,-492.5382 375.1082,-493.1704 367.2348,-486.0809 364.5322,-492.5382"/>
 </g>
-<!-- Node1006 -->
+<!-- Node996 -->
 <g id="node36" class="node">
-<title>Node1006</title>
+<title>Node996</title>
 <g id="a_node36"><a xlink:href="classtrim_al_manager.html#a4783de3644b5e5c6cb7f611f835c5ac2" target="_top" xlink:title="Method to check if there is an output file to allow statistics to be given on terminal.">
 <polygon fill="#ffffff" stroke="#000000" points="362,-443.7217 362,-473.7217 497,-473.7217 497,-443.7217 362,-443.7217"/>
 <text text-anchor="start" x="370" y="-461.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -491,15 +491,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node1006 -->
+<!-- Node975&#45;&gt;Node996 -->
 <g id="edge61" class="edge">
-<title>Node985&#45;&gt;Node1006</title>
+<title>Node975&#45;&gt;Node996</title>
 <path fill="none" stroke="#191970" d="M315.3006,-441.9769C326.9707,-443.688 339.462,-445.5196 351.7442,-447.3205"/>
 <polygon fill="#191970" stroke="#191970" points="351.5875,-450.8349 361.9895,-448.8228 352.6031,-443.909 351.5875,-450.8349"/>
 </g>
-<!-- Node1007 -->
+<!-- Node997 -->
 <g id="node37" class="node">
-<title>Node1007</title>
+<title>Node997</title>
 <g id="a_node37"><a xlink:href="classtrim_al_manager.html#af7c3b97a17c2f5750f9481cc60c17616" target="_top" xlink:title="Method to check if an output format has been given. If no output format has been given,...">
 <polygon fill="#ffffff" stroke="#000000" points="373.5,-159.7217 373.5,-189.7217 485.5,-189.7217 485.5,-159.7217 373.5,-159.7217"/>
 <text text-anchor="start" x="381.5" y="-177.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -507,15 +507,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node1007 -->
+<!-- Node975&#45;&gt;Node997 -->
 <g id="edge63" class="edge">
-<title>Node985&#45;&gt;Node1007</title>
+<title>Node975&#45;&gt;Node997</title>
 <path fill="none" stroke="#191970" d="M260.4391,-418.5664C265.1948,-377.0825 284.1444,-260.6526 351,-198.7217 354.8862,-195.1217 359.299,-192.0611 364.0034,-189.4593"/>
 <polygon fill="#191970" stroke="#191970" points="365.8304,-192.4656 373.348,-184.9999 362.8155,-186.1481 365.8304,-192.4656"/>
 </g>
-<!-- Node1009 -->
+<!-- Node999 -->
 <g id="node39" class="node">
-<title>Node1009</title>
+<title>Node999</title>
 <g id="a_node39"><a xlink:href="classtrim_al_manager.html#af5b7eb54478c5ea21410381d52052e14" target="_top" xlink:title="Method to check if, being asked to give an HTML report, it makes logic, depending on the functionalit...">
 <polygon fill="#ffffff" stroke="#000000" points="373.5,-110.7217 373.5,-140.7217 485.5,-140.7217 485.5,-110.7217 373.5,-110.7217"/>
 <text text-anchor="start" x="381.5" y="-128.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -523,15 +523,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node1009 -->
+<!-- Node975&#45;&gt;Node999 -->
 <g id="edge66" class="edge">
-<title>Node985&#45;&gt;Node1009</title>
+<title>Node975&#45;&gt;Node999</title>
 <path fill="none" stroke="#191970" d="M261.9636,-418.7017C272.6808,-365.7962 310.9089,-189.154 351,-149.7217 354.9371,-145.8493 359.4809,-142.5993 364.3575,-139.872"/>
 <polygon fill="#191970" stroke="#191970" points="365.9408,-142.9944 373.4357,-135.5059 362.9068,-136.686 365.9408,-142.9944"/>
 </g>
-<!-- Node1010 -->
+<!-- Node1000 -->
 <g id="node40" class="node">
-<title>Node1010</title>
+<title>Node1000</title>
 <g id="a_node40"><a xlink:href="classtrim_al_manager.html#abbaa9a8505b45e825e55d6d163878d06" target="_top" xlink:title="Method to check if both output patterns (alignment output and html report output) are the same,...">
 <polygon fill="#ffffff" stroke="#000000" points="373.5,-61.7217 373.5,-91.7217 485.5,-91.7217 485.5,-61.7217 373.5,-61.7217"/>
 <text text-anchor="start" x="381.5" y="-79.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -539,15 +539,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node1010 -->
+<!-- Node975&#45;&gt;Node1000 -->
 <g id="edge68" class="edge">
-<title>Node985&#45;&gt;Node1010</title>
+<title>Node975&#45;&gt;Node1000</title>
 <path fill="none" stroke="#191970" d="M261.2165,-418.6232C270.1141,-359.9485 304.9855,-148.0029 351,-100.7217 354.8515,-96.7641 359.3356,-93.4548 364.1726,-90.6881"/>
 <polygon fill="#191970" stroke="#191970" points="365.7556,-93.8101 373.1998,-86.2713 362.6791,-87.5224 365.7556,-93.8101"/>
 </g>
-<!-- Node1011 -->
+<!-- Node1001 -->
 <g id="node41" class="node">
-<title>Node1011</title>
+<title>Node1001</title>
 <g id="a_node41"><a xlink:href="classtrim_al_manager.html#ab8cd1b2685c225bec9421f055536d853" target="_top" xlink:title="Method to check if both of them (residue overlap and sequence overlap) have been defined by the user ...">
 <polygon fill="#ffffff" stroke="#000000" points="368.5,-1.2217 368.5,-42.2217 490.5,-42.2217 490.5,-1.2217 368.5,-1.2217"/>
 <text text-anchor="start" x="376.5" y="-30.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -556,15 +556,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node1011 -->
+<!-- Node975&#45;&gt;Node1001 -->
 <g id="edge70" class="edge">
-<title>Node985&#45;&gt;Node1011</title>
+<title>Node975&#45;&gt;Node1001</title>
 <path fill="none" stroke="#191970" d="M260.7921,-418.3066C268.5367,-354.0982 301.0122,-108.5956 351,-51.7217 353.6337,-48.7252 356.6003,-46.0265 359.7988,-43.5963"/>
 <polygon fill="#191970" stroke="#191970" points="361.7371,-46.5107 368.169,-38.0916 357.8908,-40.6621 361.7371,-46.5107"/>
 </g>
-<!-- Node1012 -->
+<!-- Node1002 -->
 <g id="node42" class="node">
-<title>Node1012</title>
+<title>Node1002</title>
 <g id="a_node42"><a xlink:href="classtrim_al_manager.html#af66e0cf7f3819c3481c22067b8eb78d4" target="_top" xlink:title="Method to check if given a similarity matrix, there is a need to use it.">
 <polygon fill="#ffffff" stroke="#000000" points="373.5,-394.7217 373.5,-424.7217 485.5,-424.7217 485.5,-394.7217 373.5,-394.7217"/>
 <text text-anchor="start" x="381.5" y="-412.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
@@ -572,15 +572,15 @@
 </a>
 </g>
 </g>
-<!-- Node985&#45;&gt;Node1012 -->
+<!-- Node975&#45;&gt;Node1002 -->
 <g id="edge72" class="edge">
-<title>Node985&#45;&gt;Node1012</title>
+<title>Node975&#45;&gt;Node1002</title>
 <path fill="none" stroke="#191970" d="M315.3006,-425.7967C330.5778,-423.6462 347.2624,-421.2976 363.0429,-419.0763"/>
 <polygon fill="#191970" stroke="#191970" points="363.844,-422.4982 373.2585,-417.6384 362.8682,-415.5665 363.844,-422.4982"/>
 </g>
-<!-- Node987 -->
+<!-- Node977 -->
 <g id="node17" class="node">
-<title>Node987</title>
+<title>Node977</title>
 <g id="a_node17"><a xlink:href="class_alignment.html#ace8babb0afc1392df8dabf93fdbce18f" target="_top" xlink:title="Method to check if the CDS file is correct. Based on nature of residues: DNA/RNA (Most of the residue...">
 <polygon fill="#ffffff" stroke="#000000" points="572,-1246.7217 572,-1276.7217 701,-1276.7217 701,-1246.7217 572,-1246.7217"/>
 <text text-anchor="start" x="580" y="-1264.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::prepareCoding</text>
@@ -588,237 +588,237 @@
 </a>
 </g>
 </g>
-<!-- Node986&#45;&gt;Node987 -->
+<!-- Node976&#45;&gt;Node977 -->
 <g id="edge26" class="edge">
-<title>Node986&#45;&gt;Node987</title>
+<title>Node976&#45;&gt;Node977</title>
 <path fill="none" stroke="#191970" d="M458.719,-1169.8252C495.3194,-1188.7443 558.1133,-1221.2029 598.4383,-1242.0473"/>
 <polygon fill="#191970" stroke="#191970" points="596.9391,-1245.2122 607.4296,-1246.6949 600.1534,-1238.9938 596.9391,-1245.2122"/>
 </g>
-<!-- Node987&#45;&gt;Node974 -->
+<!-- Node977&#45;&gt;Node964 -->
 <g id="edge31" class="edge">
-<title>Node987&#45;&gt;Node974</title>
+<title>Node977&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M671.171,-1246.5727C691.1887,-1236.0314 715.0843,-1220.034 729,-1198.7217 791.0515,-1103.688 826.7005,-739.894 835.3975,-640.7833"/>
 <polygon fill="#191970" stroke="#191970" points="838.8878,-641.0454 836.2619,-630.7811 831.9138,-640.4426 838.8878,-641.0454"/>
 </g>
-<!-- Node987&#45;&gt;Node976 -->
+<!-- Node977&#45;&gt;Node966 -->
 <g id="edge29" class="edge">
-<title>Node987&#45;&gt;Node976</title>
+<title>Node977&#45;&gt;Node966</title>
 <path fill="none" stroke="#191970" d="M701.3142,-1246.6513C711.1162,-1242.7297 720.7084,-1237.8294 729,-1231.7217 751.3386,-1215.2668 745.6333,-1200.589 765,-1180.7217 779.5156,-1165.8308 798.4271,-1151.8884 813.2956,-1141.9017"/>
 <polygon fill="#191970" stroke="#191970" points="815.5131,-1144.6329 821.9553,-1136.2217 811.6739,-1138.7797 815.5131,-1144.6329"/>
 </g>
-<!-- Node988 -->
+<!-- Node978 -->
 <g id="node18" class="node">
-<title>Node988</title>
+<title>Node978</title>
 <g id="a_node18"><a xlink:href="class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" target="_top" xlink:title="Alignment type getter. &#160;&#160;See SequenceTypes.">
 <polygon fill="#ffffff" stroke="#000000" points="765,-1190.2217 765,-1209.2217 910,-1209.2217 910,-1190.2217 765,-1190.2217"/>
 <text text-anchor="middle" x="837.5" y="-1197.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::getAlignmentType</text>
 </a>
 </g>
 </g>
-<!-- Node987&#45;&gt;Node988 -->
+<!-- Node977&#45;&gt;Node978 -->
 <g id="edge27" class="edge">
-<title>Node987&#45;&gt;Node988</title>
+<title>Node977&#45;&gt;Node978</title>
 <path fill="none" stroke="#191970" d="M685.1565,-1246.7132C719.3765,-1236.1578 764.6394,-1222.1961 796.9162,-1212.24"/>
 <polygon fill="#191970" stroke="#191970" points="797.9655,-1215.5792 806.4896,-1209.2871 795.9022,-1208.8902 797.9655,-1215.5792"/>
 </g>
-<!-- Node990 -->
+<!-- Node980 -->
 <g id="node20" class="node">
-<title>Node990</title>
+<title>Node980</title>
 <g id="a_node20"><a xlink:href="class_alignment.html#ab44caa194f61bbbabf7572f3a70cf2fc" target="_top" xlink:title="Getter for the sequences names.">
 <polygon fill="#ffffff" stroke="#000000" points="773.5,-1255.2217 773.5,-1274.2217 901.5,-1274.2217 901.5,-1255.2217 773.5,-1255.2217"/>
 <text text-anchor="middle" x="837.5" y="-1262.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::getSequences</text>
 </a>
 </g>
 </g>
-<!-- Node987&#45;&gt;Node990 -->
+<!-- Node977&#45;&gt;Node980 -->
 <g id="edge30" class="edge">
-<title>Node987&#45;&gt;Node990</title>
+<title>Node977&#45;&gt;Node980</title>
 <path fill="none" stroke="#191970" d="M701.2041,-1262.6874C720.9375,-1262.9819 742.7889,-1263.3081 763.11,-1263.6114"/>
 <polygon fill="#191970" stroke="#191970" points="763.2099,-1267.1131 773.2611,-1263.7629 763.3145,-1260.1139 763.2099,-1267.1131"/>
 </g>
-<!-- Node989 -->
+<!-- Node979 -->
 <g id="node19" class="node">
-<title>Node989</title>
+<title>Node979</title>
 <g id="a_node19"><a xlink:href="namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" target="_top" xlink:title="Checks an alignment type.">
 <polygon fill="#ffffff" stroke="#000000" points="946,-1190.2217 946,-1209.2217 1078,-1209.2217 1078,-1190.2217 946,-1190.2217"/>
 <text text-anchor="middle" x="1012" y="-1197.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::checkAlignmentType</text>
 </a>
 </g>
 </g>
-<!-- Node988&#45;&gt;Node989 -->
+<!-- Node978&#45;&gt;Node979 -->
 <g id="edge28" class="edge">
-<title>Node988&#45;&gt;Node989</title>
+<title>Node978&#45;&gt;Node979</title>
 <path fill="none" stroke="#191970" d="M910.2401,-1199.7217C918.6172,-1199.7217 927.1779,-1199.7217 935.6016,-1199.7217"/>
 <polygon fill="#191970" stroke="#191970" points="935.7871,-1203.2218 945.787,-1199.7217 935.787,-1196.2218 935.7871,-1203.2218"/>
 </g>
-<!-- Node991&#45;&gt;Node974 -->
+<!-- Node981&#45;&gt;Node964 -->
 <g id="edge33" class="edge">
-<title>Node991&#45;&gt;Node974</title>
+<title>Node981&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M707.1857,-282.7756C715.2152,-286.6659 722.7454,-291.5614 729,-297.7217 813.1184,-380.572 832.0467,-531.1963 836.2853,-590.6358"/>
 <polygon fill="#191970" stroke="#191970" points="832.7935,-590.8774 836.9182,-600.6364 839.7795,-590.4353 832.7935,-590.8774"/>
 </g>
-<!-- Node992&#45;&gt;Node976 -->
+<!-- Node982&#45;&gt;Node966 -->
 <g id="edge39" class="edge">
-<title>Node992&#45;&gt;Node976</title>
+<title>Node982&#45;&gt;Node966</title>
 <path fill="none" stroke="#191970" d="M492.1047,-1248.5903C579.7004,-1230.2119 728.3089,-1199.0111 729,-1198.7217 762.937,-1184.5091 797.5759,-1159.2675 818.3079,-1142.7644"/>
 <polygon fill="#191970" stroke="#191970" points="820.7364,-1145.3013 826.2991,-1136.2842 816.3274,-1139.8643 820.7364,-1145.3013"/>
 </g>
-<!-- Node992&#45;&gt;Node990 -->
+<!-- Node982&#45;&gt;Node980 -->
 <g id="edge40" class="edge">
-<title>Node992&#45;&gt;Node990</title>
+<title>Node982&#45;&gt;Node980</title>
 <path fill="none" stroke="#191970" d="M492.0945,-1277.9301C508.8383,-1281.5663 527.0073,-1284.8882 544,-1286.7217 625.7477,-1295.5422 647.1888,-1294.9323 729,-1286.7217 749.2633,-1284.688 771.3398,-1280.569 790.2574,-1276.4393"/>
 <polygon fill="#191970" stroke="#191970" points="791.1323,-1279.83 800.1222,-1274.2236 789.5982,-1273.0002 791.1323,-1279.83"/>
 </g>
-<!-- Node993 -->
+<!-- Node983 -->
 <g id="node23" class="node">
-<title>Node993</title>
+<title>Node983</title>
 <g id="a_node23"><a xlink:href="class_alignment.html#a34d8f8630fbf51e06897a31bba175b37" target="_top" xlink:title="Function to check CDS file. .">
 <polygon fill="#ffffff" stroke="#000000" points="554.5,-1334.2217 554.5,-1353.2217 718.5,-1353.2217 718.5,-1334.2217 554.5,-1334.2217"/>
 <text text-anchor="middle" x="636.5" y="-1341.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::checkCorrespondence</text>
 </a>
 </g>
 </g>
-<!-- Node992&#45;&gt;Node993 -->
+<!-- Node982&#45;&gt;Node983 -->
 <g id="edge35" class="edge">
-<title>Node992&#45;&gt;Node993</title>
+<title>Node982&#45;&gt;Node983</title>
 <path fill="none" stroke="#191970" d="M465.207,-1282.3204C487.3516,-1294.4552 516.6942,-1309.401 544,-1319.7217 556.0007,-1324.2575 569.1914,-1328.243 581.7582,-1331.5966"/>
 <polygon fill="#191970" stroke="#191970" points="581.1111,-1335.0441 591.668,-1334.1492 582.8572,-1328.2654 581.1111,-1335.0441"/>
 </g>
-<!-- Node993&#45;&gt;Node974 -->
+<!-- Node983&#45;&gt;Node964 -->
 <g id="edge38" class="edge">
-<title>Node993&#45;&gt;Node974</title>
+<title>Node983&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M664.1446,-1334.0569C685.3742,-1325.1446 713.586,-1309.7716 729,-1286.7217 738.2535,-1272.8841 815.5291,-761.8669 833.6897,-641.1088"/>
 <polygon fill="#191970" stroke="#191970" points="837.1887,-641.3763 835.2139,-630.9671 830.2665,-640.3359 837.1887,-641.3763"/>
 </g>
-<!-- Node994 -->
+<!-- Node984 -->
 <g id="node24" class="node">
-<title>Node994</title>
+<title>Node984</title>
 <g id="a_node24"><a xlink:href="namespaceutils.html#ab04f5770187b0a8c36c3c8ca55f1e67f" target="_top" xlink:title="Minimum of two numbers method.">
 <polygon fill="#ffffff" stroke="#000000" points="809.5,-1353.2217 809.5,-1372.2217 865.5,-1372.2217 865.5,-1353.2217 809.5,-1353.2217"/>
 <text text-anchor="middle" x="837.5" y="-1360.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::min</text>
 </a>
 </g>
 </g>
-<!-- Node993&#45;&gt;Node994 -->
+<!-- Node983&#45;&gt;Node984 -->
 <g id="edge36" class="edge">
-<title>Node993&#45;&gt;Node994</title>
+<title>Node983&#45;&gt;Node984</title>
 <path fill="none" stroke="#191970" d="M718.5443,-1351.4771C746.5965,-1354.1288 776.6354,-1356.9683 799.5091,-1359.1305"/>
 <polygon fill="#191970" stroke="#191970" points="799.1966,-1362.6165 809.4816,-1360.0732 799.8554,-1355.6475 799.1966,-1362.6165"/>
 </g>
-<!-- Node995 -->
+<!-- Node985 -->
 <g id="node25" class="node">
-<title>Node995</title>
+<title>Node985</title>
 <g id="a_node25"><a xlink:href="namespaceutils.html#ac0a8721fef543bec18cec5c90c16faff" target="_top" xlink:title="Removes a determined char from the string.">
 <polygon fill="#ffffff" stroke="#000000" points="779.5,-1315.2217 779.5,-1334.2217 895.5,-1334.2217 895.5,-1315.2217 779.5,-1315.2217"/>
 <text text-anchor="middle" x="837.5" y="-1322.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">utils::removeCharacter</text>
 </a>
 </g>
 </g>
-<!-- Node993&#45;&gt;Node995 -->
+<!-- Node983&#45;&gt;Node985 -->
 <g id="edge37" class="edge">
-<title>Node993&#45;&gt;Node995</title>
+<title>Node983&#45;&gt;Node985</title>
 <path fill="none" stroke="#191970" d="M718.5443,-1335.9662C735.4445,-1334.3687 753.0658,-1332.703 769.4069,-1331.1583"/>
 <polygon fill="#191970" stroke="#191970" points="769.7721,-1334.6395 779.3983,-1330.2139 769.1133,-1327.6706 769.7721,-1334.6395"/>
 </g>
-<!-- Node996&#45;&gt;Node974 -->
+<!-- Node986&#45;&gt;Node964 -->
 <g id="edge43" class="edge">
-<title>Node996&#45;&gt;Node974</title>
+<title>Node986&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M485.5734,-308.2759C561.4585,-304.7703 691.6742,-303.2088 729,-330.7217 772.8116,-363.0153 816.2362,-527.2735 831.6351,-590.6917"/>
 <polygon fill="#191970" stroke="#191970" points="828.2853,-591.7325 834.0208,-600.6406 835.0924,-590.1001 828.2853,-591.7325"/>
 </g>
-<!-- Node997 -->
+<!-- Node987 -->
 <g id="node27" class="node">
-<title>Node997</title>
+<title>Node987</title>
 <g id="a_node27"><a xlink:href="class_alignment.html#a214f498da34cb67cf45caf9569e03173" target="_top" xlink:title="isAligned getter.">
 <polygon fill="#ffffff" stroke="#000000" points="575.5,-340.2217 575.5,-359.2217 697.5,-359.2217 697.5,-340.2217 575.5,-340.2217"/>
 <text text-anchor="middle" x="636.5" y="-347.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::isFileAligned</text>
 </a>
 </g>
 </g>
-<!-- Node996&#45;&gt;Node997 -->
+<!-- Node986&#45;&gt;Node987 -->
 <g id="edge42" class="edge">
-<title>Node996&#45;&gt;Node997</title>
+<title>Node986&#45;&gt;Node987</title>
 <path fill="none" stroke="#191970" d="M485.5172,-322.005C513.0299,-327.0556 546.2577,-333.1554 574.5293,-338.3454"/>
 <polygon fill="#191970" stroke="#191970" points="574.2336,-341.8495 584.7012,-340.2127 575.4976,-334.9646 574.2336,-341.8495"/>
 </g>
-<!-- Node998&#45;&gt;Node974 -->
+<!-- Node988&#45;&gt;Node964 -->
 <g id="edge46" class="edge">
-<title>Node998&#45;&gt;Node974</title>
+<title>Node988&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M485.7378,-211.6244C561.8182,-196.6644 692.2645,-176.4255 729,-204.7217 791.6675,-252.9924 825.464,-508.6298 834.7977,-590.4857"/>
 <polygon fill="#191970" stroke="#191970" points="831.3194,-590.8759 835.9073,-600.4258 838.2762,-590.0992 831.3194,-590.8759"/>
 </g>
-<!-- Node999 -->
+<!-- Node989 -->
 <g id="node29" class="node">
-<title>Node999</title>
+<title>Node989</title>
 <g id="a_node29"><a xlink:href="class_alignment.html#abe1ee0139489feb6a5df99361e8dc0a7" target="_top" xlink:title="Residues number getter. It counts gaps as residue.">
 <polygon fill="#ffffff" stroke="#000000" points="569.5,-214.2217 569.5,-233.2217 703.5,-233.2217 703.5,-214.2217 569.5,-214.2217"/>
 <text text-anchor="middle" x="636.5" y="-221.2217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::getNumAminos</text>
 </a>
 </g>
 </g>
-<!-- Node998&#45;&gt;Node999 -->
+<!-- Node988&#45;&gt;Node989 -->
 <g id="edge45" class="edge">
-<title>Node998&#45;&gt;Node999</title>
+<title>Node988&#45;&gt;Node989</title>
 <path fill="none" stroke="#191970" d="M485.5172,-223.7217C508.147,-223.7217 534.6432,-223.7217 559.0678,-223.7217"/>
 <polygon fill="#191970" stroke="#191970" points="559.3914,-227.2218 569.3913,-223.7217 559.3913,-220.2218 559.3914,-227.2218"/>
 </g>
-<!-- Node1000&#45;&gt;Node974 -->
+<!-- Node990&#45;&gt;Node964 -->
 <g id="edge49" class="edge">
-<title>Node1000&#45;&gt;Node974</title>
+<title>Node990&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M700.3613,-1166.4197C711.102,-1162.5987 721.2577,-1156.9689 729,-1148.7217 799.7975,-1073.3065 828.8812,-736.6325 835.7981,-641.0813"/>
 <polygon fill="#191970" stroke="#191970" points="839.3041,-641.1183 836.5166,-630.8968 832.3214,-640.6256 839.3041,-641.1183"/>
 </g>
-<!-- Node1000&#45;&gt;Node988 -->
+<!-- Node990&#45;&gt;Node978 -->
 <g id="edge48" class="edge">
-<title>Node1000&#45;&gt;Node988</title>
+<title>Node990&#45;&gt;Node978</title>
 <path fill="none" stroke="#191970" d="M700.0977,-1181.9482C717.4682,-1184.1952 736.5468,-1186.663 754.8142,-1189.026"/>
 <polygon fill="#191970" stroke="#191970" points="754.497,-1192.514 764.8634,-1190.3259 755.395,-1185.5719 754.497,-1192.514"/>
 </g>
-<!-- Node1001&#45;&gt;Node974 -->
+<!-- Node991&#45;&gt;Node964 -->
 <g id="edge51" class="edge">
-<title>Node1001&#45;&gt;Node974</title>
+<title>Node991&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M474.969,-651.6683C495.7823,-645.3878 520.9055,-638.6523 544,-634.7217 619.184,-621.9254 706.5444,-617.5932 766.2805,-616.2044"/>
 <polygon fill="#191970" stroke="#191970" points="766.4389,-619.7019 776.3629,-615.9918 766.2913,-612.7034 766.4389,-619.7019"/>
 </g>
-<!-- Node1002&#45;&gt;Node974 -->
+<!-- Node992&#45;&gt;Node964 -->
 <g id="edge53" class="edge">
-<title>Node1002&#45;&gt;Node974</title>
+<title>Node992&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M508.1893,-605.2625C520.158,-603.7921 532.3865,-602.5292 544,-601.7217 626.0242,-596.0184 646.947,-596.4498 729,-601.7217 740.9943,-602.4923 753.6885,-603.7374 766.0038,-605.1753"/>
 <polygon fill="#191970" stroke="#191970" points="765.8859,-608.6867 776.2359,-606.4223 766.7328,-601.7382 765.8859,-608.6867"/>
 </g>
-<!-- Node1003&#45;&gt;Node974 -->
+<!-- Node993&#45;&gt;Node964 -->
 <g id="edge56" class="edge">
-<title>Node1003&#45;&gt;Node974</title>
+<title>Node993&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M485.69,-363.9875C561.3803,-369.3706 691.0008,-382.3581 729,-409.7217 791.2727,-454.5647 820.8539,-546.188 831.9838,-590.5466"/>
 <polygon fill="#191970" stroke="#191970" points="828.6353,-591.5927 834.3686,-600.5023 835.4428,-589.9621 828.6353,-591.5927"/>
 </g>
-<!-- Node1003&#45;&gt;Node997 -->
+<!-- Node993&#45;&gt;Node987 -->
 <g id="edge55" class="edge">
-<title>Node1003&#45;&gt;Node997</title>
+<title>Node993&#45;&gt;Node987</title>
 <path fill="none" stroke="#191970" d="M485.5172,-357.7449C510.0402,-356.4417 539.1039,-354.8973 565.1512,-353.5131"/>
 <polygon fill="#191970" stroke="#191970" points="565.5468,-356.9972 575.3469,-352.9713 565.1752,-350.007 565.5468,-356.9972"/>
 </g>
-<!-- Node1004&#45;&gt;Node974 -->
+<!-- Node994&#45;&gt;Node964 -->
 <g id="edge58" class="edge">
-<title>Node1004&#45;&gt;Node974</title>
+<title>Node994&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M485.747,-571.4526C546.1032,-574.8406 644.6738,-581.6949 729,-593.7217 741.1613,-595.4561 754.0132,-597.6958 766.4527,-600.0804"/>
 <polygon fill="#191970" stroke="#191970" points="765.8327,-603.5254 776.3196,-602.0169 767.1809,-596.6564 765.8327,-603.5254"/>
 </g>
-<!-- Node1005&#45;&gt;Node974 -->
+<!-- Node995&#45;&gt;Node964 -->
 <g id="edge60" class="edge">
-<title>Node1005&#45;&gt;Node974</title>
+<title>Node995&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M488.564,-521.698C549.5637,-530.7373 647.122,-547.4418 729,-571.7217 751.4416,-578.3764 775.648,-587.9474 795.4905,-596.4645"/>
 <polygon fill="#191970" stroke="#191970" points="794.2883,-599.7584 804.854,-600.5435 797.084,-593.3409 794.2883,-599.7584"/>
 </g>
-<!-- Node1006&#45;&gt;Node974 -->
+<!-- Node996&#45;&gt;Node964 -->
 <g id="edge62" class="edge">
-<title>Node1006&#45;&gt;Node974</title>
+<title>Node996&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M497.3006,-465.0823C560.0235,-473.0165 654.5274,-490.2757 729,-526.7217 763.1516,-543.435 795.9867,-572.8464 816.4185,-593.2626"/>
 <polygon fill="#191970" stroke="#191970" points="814.1171,-595.9145 823.6188,-600.6016 819.1139,-591.0122 814.1171,-595.9145"/>
 </g>
-<!-- Node1008 -->
+<!-- Node998 -->
 <g id="node38" class="node">
-<title>Node1008</title>
+<title>Node998</title>
 <g id="a_node38"><a xlink:href="class_format_handling_1_1_format_manager.html#ac691b15ee0b0e6a22a22f82569672745" target="_top" xlink:title="Function to obtain the format name of a given file.">
 <polygon fill="#ffffff" stroke="#000000" points="556.5,-126.7217 556.5,-156.7217 716.5,-156.7217 716.5,-126.7217 556.5,-126.7217"/>
 <text text-anchor="start" x="564.5" y="-144.7217" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">FormatHandling::FormatManager</text>
@@ -826,39 +826,39 @@
 </a>
 </g>
 </g>
-<!-- Node1007&#45;&gt;Node1008 -->
+<!-- Node997&#45;&gt;Node998 -->
 <g id="edge64" class="edge">
-<title>Node1007&#45;&gt;Node1008</title>
+<title>Node997&#45;&gt;Node998</title>
 <path fill="none" stroke="#191970" d="M485.5172,-165.7914C504.2444,-162.8059 525.6195,-159.3983 546.2771,-156.105"/>
 <polygon fill="#191970" stroke="#191970" points="547.0215,-159.5306 556.3457,-154.4999 545.9194,-152.6179 547.0215,-159.5306"/>
 </g>
-<!-- Node1008&#45;&gt;Node974 -->
+<!-- Node998&#45;&gt;Node964 -->
 <g id="edge65" class="edge">
-<title>Node1008&#45;&gt;Node974</title>
+<title>Node998&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M709.0891,-156.9552C716.5076,-160.8196 723.3707,-165.6599 729,-171.7217 787.1963,-234.3888 824.3126,-506.3039 834.5885,-590.6652"/>
 <polygon fill="#191970" stroke="#191970" points="831.1193,-591.1317 835.7846,-600.6441 838.0696,-590.2986 831.1193,-591.1317"/>
 </g>
-<!-- Node1009&#45;&gt;Node974 -->
+<!-- Node999&#45;&gt;Node964 -->
 <g id="edge67" class="edge">
-<title>Node1009&#45;&gt;Node974</title>
+<title>Node999&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M485.6081,-115.6848C561.8698,-103.4133 692.9014,-87.6287 729,-116.7217 804.37,-177.4647 830.105,-497.6714 836.0419,-590.4873"/>
 <polygon fill="#191970" stroke="#191970" points="832.5595,-590.8813 836.6698,-600.6463 839.5461,-590.4495 832.5595,-590.8813"/>
 </g>
-<!-- Node1010&#45;&gt;Node974 -->
+<!-- Node1000&#45;&gt;Node964 -->
 <g id="edge69" class="edge">
-<title>Node1010&#45;&gt;Node974</title>
+<title>Node1000&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M485.5558,-62.2964C552.0092,-48.8472 662.1459,-38.5935 729,-96.7217 805.0917,-162.8817 830.4084,-495.8883 836.1285,-590.5741"/>
 <polygon fill="#191970" stroke="#191970" points="832.6409,-590.8899 836.7177,-600.6689 839.629,-590.4819 832.6409,-590.8899"/>
 </g>
-<!-- Node1011&#45;&gt;Node974 -->
+<!-- Node1001&#45;&gt;Node964 -->
 <g id="edge71" class="edge">
-<title>Node1011&#45;&gt;Node974</title>
+<title>Node1001&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M490.7031,-7.8184C557.8982,3.5307 664.7572,9.4467 729,-48.7217 810.993,-122.9619 832.2552,-490.6915 836.5579,-590.6213"/>
 <polygon fill="#191970" stroke="#191970" points="833.0644,-590.8534 836.9726,-600.7011 840.0585,-590.5656 833.0644,-590.8534"/>
 </g>
-<!-- Node1012&#45;&gt;Node974 -->
+<!-- Node1002&#45;&gt;Node964 -->
 <g id="edge73" class="edge">
-<title>Node1012&#45;&gt;Node974</title>
+<title>Node1002&#45;&gt;Node964</title>
 <path fill="none" stroke="#191970" d="M485.5334,-408.9743C549.2511,-410.6481 654.1267,-421.2849 729,-468.7217 776.5553,-498.8508 810.3216,-557.8582 826.5612,-591.2209"/>
 <polygon fill="#191970" stroke="#191970" points="823.4151,-592.7551 830.8545,-600.2987 829.7431,-589.7624 823.4151,-592.7551"/>
 </g>

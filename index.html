@@ -21,8 +21,8 @@
     <link href="CustomExtra.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         function myFunction(ID) {
-            var divs = document.getElementsByName(ID);
-            for (var x of divs) {
+            const divs = document.getElementsByName(ID);
+            for (let x of divs) {
                 if (x.style.display === "none") {
                     x.style.display = "block";
                 } else {
@@ -71,11 +71,11 @@ $(document).ready(function(){initNavTree('index.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p> 
-<a class="badge-align" href="https://www.codacy.com/app/vicfernrod/trimal?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Vicfero/trimal&amp;utm_campaign=Badge_Grade">
+<a class="badge-align" href="https://www.codacy.com/app/vicfernrod/trimal?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Vicfero/trimal&amp;utm_campaign=Badge_Grade" target="_blank" >
     <img src="https://api.codacy.com/project/badge/Grade/ba6b9c6a765b4383988cb14a847d9127"/>
 </a>
 
-<a class="badge-align" href="https://github.com/scapella/trimal">
+<a class="badge-align" href="https://github.com/scapella/trimal" target="_blank" >
     <img src="https://img.shields.io/badge/ -Github-lightgrey.svg?logo=github&logoColor=white"/>
 </a>
 </p>
@@ -121,6 +121,7 @@ Publications</h1>
 </p>
 <h1><a class="anchor" id="usage_sec"></a>
 Usage</h1>
+<p>For a more detailed description and use of each argument, please, refer to <a class="el" href="whatcanido.html">What Can I Do With trimAl? </a></p>
 <pre class="fragment">trimAl 1.4.rev22 build[2015-05-21].
 2009-2015. Salvador Capella-Gutierrez and Toni Gabaldón.
 

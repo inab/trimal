@@ -1,7 +1,6 @@
 var annotated =
 [
     [ "FormatHandling", "namespace_format_handling.html", "namespace_format_handling" ],
-    [ "ngs", "namespacengs.html", null ],
     [ "reporting", "namespacereporting.html", "namespacereporting" ],
     [ "statistics", "namespacestatistics.html", "namespacestatistics" ],
     [ "Alignment", "class_alignment.html", "class_alignment" ],

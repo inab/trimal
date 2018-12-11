@@ -21,8 +21,8 @@
     <link href="CustomExtra.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         function myFunction(ID) {
-            var divs = document.getElementsByName(ID);
-            for (var x of divs) {
+            const divs = document.getElementsByName(ID);
+            for (let x of divs) {
                 if (x.style.display === "none") {
                     x.style.display = "block";
                 } else {
@@ -242,7 +242,7 @@ Friends</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Submodule contained by <a class="el" href="class_alignment.html">Alignment </a>. </p>
-<dl class="section user"><dt>Complementary parameter</dt><dd>All cleaning methods contains a boolean flag called<b> 'complementary' </b>.<br />
+<dl class="section user"><dt>Complementary parameter</dt><dd>Cleaning methods may contain a boolean flag argument called<b> 'complementary' </b>.<br />
  If set to<em> true</em>, the function will return a new alignment that contains the sequences and residues that method would<em> reject</em>.<br />
  Otherwise it returns the cleaned version of the original alignment this object belongs to. <br />
 <br />
@@ -277,7 +277,7 @@ Friends</h2></td></tr>
 
 <p>Class Constructor - Called by <a class="el" href="class_alignment.html">Alignment</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01593">1593</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01598">1598</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_cleaner_8h_source.html#l00038">keepSequences</a>, <a class="el" href="_cleaner_8h_source.html#l00046">left_boundary</a>, <a class="el" href="_cleaner_8h_source.html#l00050">right_boundary</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_cleaner_8h_source.html#l00034">terminalGapOnly</a>.</p>
 
@@ -319,7 +319,7 @@ Friends</h2></td></tr>
 
 <p>Copy Constructor - Called by <a class="el" href="class_alignment.html">Alignment</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01608">1608</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01613">1613</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_cleaner_8h_source.html#l00038">keepSequences</a>, <a class="el" href="_cleaner_8h_source.html#l00046">left_boundary</a>, <a class="el" href="_cleaner_8h_source.html#l00050">right_boundary</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_cleaner_8h_source.html#l00034">terminalGapOnly</a>.</p>
 
@@ -346,7 +346,7 @@ Friends</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>Not In Use </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Designed for reducing comparisons for huge alignments. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01471">1471</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01470">1470</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
@@ -388,9 +388,9 @@ The first item in the vector contains it's size. </dd></dl>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01513">1513</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01512">1512</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l01422">calculateSeqIdentity()</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="utils_8cpp_source.html#l00078">utils::max()</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>, <a class="el" href="utils_8cpp_source.html#l00484">utils::removeCharacter()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l01421">calculateSeqIdentity()</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="utils_8cpp_source.html#l00078">utils::max()</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>, <a class="el" href="utils_8cpp_source.html#l00484">utils::removeCharacter()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01183">getClustering()</a>.</p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -428,11 +428,11 @@ The first item in the vector contains it's size. </dd></dl>
 <p>Method to calculate identities between the sequences from the alignment.<br />
 See <a class="el" href="class_alignment.html#aeb3c72eeb5d2954ad68369d48f8c16e6" title="2D Matrix that represents how much each sequence resembles other sequences in the same MSA">Alignment::identities</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01422">1422</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01421">1421</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="defines_8h_source.html#l00096">AA</a>, <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00474">Alignment::getAlignmentType()</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
+<p class="reference">References <a class="el" href="defines_8h_source.html#l00096">AA</a>, <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00470">Alignment::getAlignmentType()</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01513">calculateRepresentativeSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">getCutPointClusters()</a>, <a class="el" href="_alignment_8cpp_source.html#l00894">Alignment::printSeqIdentity()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l00014">selectMethod()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01512">calculateRepresentativeSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">getCutPointClusters()</a>, <a class="el" href="_alignment_8cpp_source.html#l00902">Alignment::printSeqIdentity()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l00014">selectMethod()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
@@ -491,7 +491,7 @@ This should happen only if you pass a null pointer instead of a spuriousVector. 
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00827">827</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="defines_8h_source.html#l00096">AA</a>, <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00474">Alignment::getAlignmentType()</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
+<p class="reference">References <a class="el" href="defines_8h_source.html#l00096">AA</a>, <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00470">Alignment::getAlignmentType()</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00906">cleanSpuriousSeq()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -567,7 +567,7 @@ This should happen only if you pass a null pointer instead of a spuriousVector. 
 
 <p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_gaps_8cpp_source.html#l00178">statistics::Gaps::calcCutPoint()</a>, <a class="el" href="_similarity_8cpp_source.html#l00378">statistics::Similarity::calcCutPoint()</a>, <a class="el" href="_manager_8cpp_source.html#l00013">statistics::Manager::calculateConservationStats()</a>, <a class="el" href="_manager_8cpp_source.html#l00135">statistics::Manager::calculateGapStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_manager_8h_source.html#l00034">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00160">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_similarity_8cpp_source.html#l00335">statistics::Similarity::getMdkWindowedVector()</a>, <a class="el" href="_manager_8h_source.html#l00038">statistics::Manager::similarity</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01756">trimAlManager::CleanResiduesNonAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01758">trimAlManager::CleanResiduesNonAuto()</a>.</p>
 <div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
@@ -616,7 +616,7 @@ When found, the first residue is taken as the cutpoint for the sequences. </p>
 
 <p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_gaps_8cpp_source.html#l00313">statistics::Gaps::calcCutPoint2ndSlope()</a>, <a class="el" href="_manager_8cpp_source.html#l00135">statistics::Manager::calculateGapStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_manager_8h_source.html#l00034">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00160">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01719">trimAlManager::CleanResiduesAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01721">trimAlManager::CleanResiduesAuto()</a>.</p>
 <div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-8-summary" class="dynsummary" style="display:block;">
@@ -689,7 +689,7 @@ To achieve this, the method starts in the middle of the sequence and, alternatin
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00203">203</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_cleaner_8cpp_source.html#l01355">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01299">removeSmallerBlocks()</a>, <a class="el" href="utils_8cpp_source.html#l00066">utils::roundInt()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01298">removeSmallerBlocks()</a>, <a class="el" href="utils_8cpp_source.html#l00066">utils::roundInt()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00792">cleanCompareFile()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l00732">cleanConservation()</a>.</p>
 <div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -765,7 +765,7 @@ To achieve this, the method starts in the middle of the sequence and, alternatin
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00062">62</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01355">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01299">removeSmallerBlocks()</a>, <a class="el" href="utils_8cpp_source.html#l00066">utils::roundInt()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01298">removeSmallerBlocks()</a>, <a class="el" href="utils_8cpp_source.html#l00066">utils::roundInt()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00929">clean2ndSlope()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00708">cleanGaps()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01021">cleanNoAllGaps()</a>.</p>
 <div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -854,7 +854,7 @@ To achieve this, the method starts in the middle of the sequence and, alternatin
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00329">329</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01355">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01299">removeSmallerBlocks()</a>, <a class="el" href="utils_8cpp_source.html#l00066">utils::roundInt()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01298">removeSmallerBlocks()</a>, <a class="el" href="utils_8cpp_source.html#l00066">utils::roundInt()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00756">clean()</a>.</p>
 <div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -920,7 +920,7 @@ The method: </p>
 
 <p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_gaps_8cpp_source.html#l00313">statistics::Gaps::calcCutPoint2ndSlope()</a>, <a class="el" href="_manager_8cpp_source.html#l00013">statistics::Manager::calculateConservationStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00485">cleanStrict()</a>, <a class="el" href="_manager_8h_source.html#l00034">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00160">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_similarity_8cpp_source.html#l00335">statistics::Similarity::getMdkWindowedVector()</a>, <a class="el" href="utils_8cpp_source.html#l00038">utils::initlVect()</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_manager_8h_source.html#l00038">statistics::Manager::similarity</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01719">trimAlManager::CleanResiduesAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01721">trimAlManager::CleanResiduesAuto()</a>.</p>
 <div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-16-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-16-summary" class="dynsummary" style="display:block;">
@@ -993,7 +993,7 @@ The method: </p>
 
 <p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="utils_8cpp_source.html#l00049">utils::copyVect()</a>, <a class="el" href="utils_8cpp_source.html#l00096">utils::min()</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01756">trimAlManager::CleanResiduesNonAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01758">trimAlManager::CleanResiduesNonAuto()</a>.</p>
 <div id="dynsection-18" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-18-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-18-summary" class="dynsummary" style="display:block;">
@@ -1058,7 +1058,7 @@ The method: </p>
 
 <p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_similarity_8cpp_source.html#l00378">statistics::Similarity::calcCutPoint()</a>, <a class="el" href="_manager_8cpp_source.html#l00013">statistics::Manager::calculateConservationStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_similarity_8cpp_source.html#l00335">statistics::Similarity::getMdkWindowedVector()</a>, <a class="el" href="_manager_8h_source.html#l00038">statistics::Manager::similarity</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01756">trimAlManager::CleanResiduesNonAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01758">trimAlManager::CleanResiduesNonAuto()</a>.</p>
 <div id="dynsection-20" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-20-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-20-summary" class="dynsummary" style="display:block;">
@@ -1123,7 +1123,7 @@ The method: </p>
 
 <p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_gaps_8cpp_source.html#l00178">statistics::Gaps::calcCutPoint()</a>, <a class="el" href="_manager_8cpp_source.html#l00135">statistics::Manager::calculateGapStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_manager_8h_source.html#l00034">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00160">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01719">trimAlManager::CleanResiduesAuto()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01756">trimAlManager::CleanResiduesNonAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01721">trimAlManager::CleanResiduesAuto()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01758">trimAlManager::CleanResiduesNonAuto()</a>.</p>
 <div id="dynsection-22" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-22-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-22-summary" class="dynsummary" style="display:block;">
@@ -1171,7 +1171,7 @@ This method is specially useful when we remove missaligned sequences from a give
 
 <p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_manager_8cpp_source.html#l00135">statistics::Manager::calculateGapStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_manager_8h_source.html#l00034">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00160">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01719">trimAlManager::CleanResiduesAuto()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01665">trimAlManager::CleanSequences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01721">trimAlManager::CleanResiduesAuto()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01667">trimAlManager::CleanSequences()</a>.</p>
 <div id="dynsection-24" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-24-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-24-summary" class="dynsummary" style="display:block;">
@@ -1236,7 +1236,7 @@ This method is specially useful when we remove missaligned sequences from a give
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00686">686</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_cleaner_8cpp_source.html#l01355">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00906">cleanSpuriousSeq()</a>.</p>
 <div id="dynsection-26" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -1305,7 +1305,7 @@ After calculating the number of hits for the sequence, it removes the sequence i
 
 <p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l00827">calculateSpuriousVector()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00686">cleanOverlapSeq()</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01665">trimAlManager::CleanSequences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01667">trimAlManager::CleanSequences()</a>.</p>
 <div id="dynsection-28" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-28-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-28-summary" class="dynsummary" style="display:block;">
@@ -1392,7 +1392,7 @@ Column blocks that don't have a minimum size set by the method itself, will be r
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00485">485</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_cleaner_8cpp_source.html#l01355">removeAllGapsSeqsAndCols()</a>, <a class="el" href="utils_8cpp_source.html#l00066">utils::roundInt()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="utils_8cpp_source.html#l00066">utils::roundInt()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00952">cleanCombMethods()</a>.</p>
 <div id="dynsection-30" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -1449,11 +1449,11 @@ It inverses the saveResidues / saveSequences tags. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01577">1577</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01576">1576</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01641">trimAlManager::postprocess_alignment()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01643">trimAlManager::postprocess_alignment()</a>.</p>
 <div id="dynsection-32" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-32-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-32-summary" class="dynsummary" style="display:block;">
@@ -1491,9 +1491,9 @@ It inverses the saveResidues / saveSequences tags. </p>
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01183">1183</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_cleaner_8cpp_source.html#l01513">calculateRepresentativeSeq()</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_cleaner_8cpp_source.html#l01512">calculateRepresentativeSeq()</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01665">trimAlManager::CleanSequences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01667">trimAlManager::CleanSequences()</a>.</p>
 <div id="dynsection-33" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-33-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-33-summary" class="dynsummary" style="display:block;">
@@ -1539,9 +1539,9 @@ It inverses the saveResidues / saveSequences tags. </p>
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01040">1040</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l01422">calculateSeqIdentity()</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="utils_8cpp_source.html#l00078">utils::max()</a>, <a class="el" href="utils_8cpp_source.html#l00096">utils::min()</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>, <a class="el" href="utils_8cpp_source.html#l00484">utils::removeCharacter()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l01421">calculateSeqIdentity()</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="utils_8cpp_source.html#l00078">utils::max()</a>, <a class="el" href="utils_8cpp_source.html#l00096">utils::min()</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>, <a class="el" href="utils_8cpp_source.html#l00484">utils::removeCharacter()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01665">trimAlManager::CleanSequences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01667">trimAlManager::CleanSequences()</a>.</p>
 <div id="dynsection-35" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-35-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-35-summary" class="dynsummary" style="display:block;">
@@ -1587,11 +1587,11 @@ It inverses the saveResidues / saveSequences tags. </p>
 
 <p>Method that identifies and removes columns and sequences composed only by gaps. </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01355">1355</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01354">1354</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="reportsystem_8cpp_source.html#l00005">debug</a>, <a class="el" href="reportsystem_8h_source.html#l00206">KeepingOnlyGapsSequence</a>, <a class="el" href="_cleaner_8h_source.html#l00038">keepSequences</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="reportsystem_8h_source.html#l00204">RemovingOnlyGapsSequence</a>, <a class="el" href="reportsystem_8cpp_source.html#l00375">reporting::reportManager::report()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, <a class="el" href="_alignment_8h_source.html#l00080">Alignment::seqsName</a>, <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00686">cleanOverlapSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00485">cleanStrict()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01212">removeColumns()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01235">removeSequences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00686">cleanOverlapSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00485">cleanStrict()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01212">removeColumns()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01234">removeSequences()</a>.</p>
 <div id="dynsection-37" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-37-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-37-summary" class="dynsummary" style="display:block;">
@@ -1660,9 +1660,9 @@ It inverses the saveResidues / saveSequences tags. </p>
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01212">1212</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_cleaner_8cpp_source.html#l01355">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8cpp_source.html#l02047">Alignment::updateSequencesAndResiduesNums()</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_alignment_8cpp_source.html#l02060">Alignment::updateSequencesAndResiduesNums()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01756">trimAlManager::CleanResiduesNonAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01758">trimAlManager::CleanResiduesNonAuto()</a>.</p>
 <div id="dynsection-39" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-39-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-39-summary" class="dynsummary" style="display:block;">
@@ -1700,11 +1700,11 @@ Everything between the borders are kept in the trimmed alignments. </p>
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if everything went ok. <br />
  <b> False </b>if it was not possible to calculate the gap stats. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01256">1256</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01255">1255</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_manager_8cpp_source.html#l00135">statistics::Manager::calculateGapStats()</a>, <a class="el" href="reportsystem_8cpp_source.html#l00005">debug</a>, <a class="el" href="_manager_8h_source.html#l00034">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00160">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_cleaner_8h_source.html#l00046">left_boundary</a>, <a class="el" href="reportsystem_8h_source.html#l00133">LeftBoundaryBiggerThanRightBoundary</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="reportsystem_8cpp_source.html#l00375">reporting::reportManager::report()</a>, <a class="el" href="_cleaner_8h_source.html#l00050">right_boundary</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>, and <a class="el" href="_alignment_8cpp_source.html#l02047">Alignment::updateSequencesAndResiduesNums()</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_manager_8cpp_source.html#l00135">statistics::Manager::calculateGapStats()</a>, <a class="el" href="reportsystem_8cpp_source.html#l00005">debug</a>, <a class="el" href="_manager_8h_source.html#l00034">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00160">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_cleaner_8h_source.html#l00046">left_boundary</a>, <a class="el" href="reportsystem_8h_source.html#l00133">LeftBoundaryBiggerThanRightBoundary</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="reportsystem_8cpp_source.html#l00375">reporting::reportManager::report()</a>, <a class="el" href="_cleaner_8h_source.html#l00050">right_boundary</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>, and <a class="el" href="_alignment_8cpp_source.html#l02060">Alignment::updateSequencesAndResiduesNums()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01641">trimAlManager::postprocess_alignment()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01643">trimAlManager::postprocess_alignment()</a>.</p>
 <div id="dynsection-41" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-41-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-41-summary" class="dynsummary" style="display:block;">
@@ -1771,11 +1771,11 @@ Everything between the borders are kept in the trimmed alignments. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01235">1235</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01234">1234</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_cleaner_8cpp_source.html#l01355">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_alignment_8cpp_source.html#l02047">Alignment::updateSequencesAndResiduesNums()</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00450">Alignment</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_alignment_8cpp_source.html#l02060">Alignment::updateSequencesAndResiduesNums()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01665">trimAlManager::CleanSequences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01667">trimAlManager::CleanSequences()</a>.</p>
 <div id="dynsection-43" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-43-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-43-summary" class="dynsummary" style="display:block;">
@@ -1828,7 +1828,7 @@ Everything between the borders are kept in the trimmed alignments. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01299">1299</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01298">1298</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>.</p>
 
@@ -1862,9 +1862,9 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00014">14</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l01422">calculateSeqIdentity()</a>, <a class="el" href="defines_8h_source.html#l00046">GAPPYOUT</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="defines_8h_source.html#l00047">STRICT</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l01421">calculateSeqIdentity()</a>, <a class="el" href="defines_8h_source.html#l00046">GAPPYOUT</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="defines_8h_source.html#l00047">STRICT</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01719">trimAlManager::CleanResiduesAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01721">trimAlManager::CleanResiduesAuto()</a>.</p>
 <div id="dynsection-46" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-46-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-46-summary" class="dynsummary" style="display:block;">
@@ -1941,7 +1941,7 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p class="reference">References <a class="el" href="_internal_benchmarker_8h_source.html#l00115">StartTiming</a>, and <a class="el" href="_cleaner_8h_source.html#l00034">terminalGapOnly</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01316">trimAlManager::perform()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01371">trimAlManager::perform_VCF()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01318">trimAlManager::perform()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01373">trimAlManager::perform_VCF()</a>.</p>
 <div id="dynsection-48" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-48-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-48-summary" class="dynsummary" style="display:block;">
@@ -1975,7 +1975,7 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00450">450</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00686">cleanOverlapSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00485">cleanStrict()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01183">getClustering()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01212">removeColumns()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01235">removeSequences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00686">cleanOverlapSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00485">cleanStrict()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01183">getClustering()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01212">removeColumns()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01234">removeSequences()</a>.</p>
 
 </div>
 </div>
@@ -2004,7 +2004,7 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00455">455</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01471">calculateRelaxedSeqIdentity()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01513">calculateRepresentativeSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01422">calculateSeqIdentity()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00827">calculateSpuriousVector()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00756">clean()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00929">clean2ndSlope()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00952">cleanCombMethods()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00792">cleanCompareFile()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00732">cleanConservation()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01593">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00708">cleanGaps()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01021">cleanNoAllGaps()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00686">cleanOverlapSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00906">cleanSpuriousSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00485">cleanStrict()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01577">computeComplementaryAlig()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01183">getClustering()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">getCutPointClusters()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01355">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01212">removeColumns()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01256">removeOnlyTerminal()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01235">removeSequences()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01299">removeSmallerBlocks()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l00014">selectMethod()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01470">calculateRelaxedSeqIdentity()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01512">calculateRepresentativeSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01421">calculateSeqIdentity()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00827">calculateSpuriousVector()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00756">clean()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00929">clean2ndSlope()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00952">cleanCombMethods()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00792">cleanCompareFile()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00732">cleanConservation()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01598">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00708">cleanGaps()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01021">cleanNoAllGaps()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00686">cleanOverlapSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00906">cleanSpuriousSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00485">cleanStrict()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01576">computeComplementaryAlig()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01183">getClustering()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">getCutPointClusters()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01212">removeColumns()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01255">removeOnlyTerminal()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01234">removeSequences()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01298">removeSmallerBlocks()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l00014">selectMethod()</a>.</p>
 
 </div>
 </div>
@@ -2024,7 +2024,7 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00042">42</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01593">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00485">cleanStrict()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01299">removeSmallerBlocks()</a>, and <a class="el" href="_alignment_8cpp_source.html#l00272">Alignment::setBlockSize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01598">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00485">cleanStrict()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01298">removeSmallerBlocks()</a>, and <a class="el" href="_alignment_8cpp_source.html#l00268">Alignment::setBlockSize()</a>.</p>
 
 </div>
 </div>
@@ -2044,7 +2044,7 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00038">38</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01593">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01355">removeAllGapsSeqsAndCols()</a>, and <a class="el" href="_alignment_8cpp_source.html#l00279">Alignment::setKeepSequencesFlag()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01598">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, and <a class="el" href="_alignment_8cpp_source.html#l00275">Alignment::setKeepSequencesFlag()</a>.</p>
 
 </div>
 </div>
@@ -2064,7 +2064,7 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00046">46</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01593">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01256">removeOnlyTerminal()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01173">setBoundaries()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01598">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01255">removeOnlyTerminal()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01173">setBoundaries()</a>.</p>
 
 </div>
 </div>
@@ -2084,7 +2084,7 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00050">50</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01593">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01256">removeOnlyTerminal()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01173">setBoundaries()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01598">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01255">removeOnlyTerminal()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01173">setBoundaries()</a>.</p>
 
 </div>
 </div>
@@ -2104,7 +2104,7 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00034">34</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01593">Cleaner()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01166">setTrimTerminalGapsFlag()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01598">Cleaner()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01166">setTrimTerminalGapsFlag()</a>.</p>
 
 </div>
 </div>

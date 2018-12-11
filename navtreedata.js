@@ -62,7 +62,7 @@ var NAVTREE =
       ] ],
       [ "Other Tweaks", "whatcanido.html#otherTweaks", [
         [ "Column Numbering", "whatcanido.html#ColNumbering", null ],
-        [ "TrimmingReport", "whatcanido.html#TrimmingReport", null ],
+        [ "Report", "whatcanido.html#Trimming", null ],
         [ "Backstranslation", "whatcanido.html#Backstrans", null ]
       ] ]
     ] ],
