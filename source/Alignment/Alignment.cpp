@@ -1458,6 +1458,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, int 
 
     // Allocate some local memory
     char *tmpColumn = new char[originalNumberOfSequences + 1];
+    tmpColumn[originalNumberOfSequences] = '\0';
 
     // Compute HTML blank spaces
     j = 0;
@@ -1682,12 +1683,14 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, int 
                 kerning=\"0\" \
                 text-anchor=\"start\" \
                 lengthAdjust=\"spacingAndGlyphs\"\
-                textLength=\"" << std::min((int) blocks, originalNumberOfResidues - j) * fontSize * 0.75F << "\" \
+                textLength=\"" << blocks * fontSize * 0.75F << "\" \
                 style=\"font-weight:100\" \
                 xml:space=\"preserve\" >";
         for (k = j; k < originalNumberOfResidues && (k - j) < blocks; k += 10) {
             file << std::left << std::setw(10) << std::setfill(' ') << k;
         }
+        for (;(k - j) < blocks; k+= 10)
+            file << std::left << std::setw(10) << std::setfill(' ') << " ";
 
         file << "</text>" << endl;
 
@@ -1705,12 +1708,14 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, int 
                 kerning=\"0\" \
                 text-anchor=\"start\" \
                 lengthAdjust=\"spacingAndGlyphs\"\
-                textLength=\"" << std::min((int) blocks, originalNumberOfResidues - j) * fontSize * 0.75F << "\" \
+                textLength=\"" << blocks * fontSize * 0.75F << "\" \
                 style=\"font-weight:100\" \
                 xml:space=\"preserve\" >";
         for (k = j; k < originalNumberOfResidues && (k - j) < blocks; k += 10) {
             file << std::left << std::setw(10) << std::setfill(' ') << "|";
         }
+        for (;(k - j) < blocks; k+= 10)
+            file << std::left << std::setw(10) << std::setfill(' ') << " ";
 
         file << "</text>" << endl;
 
