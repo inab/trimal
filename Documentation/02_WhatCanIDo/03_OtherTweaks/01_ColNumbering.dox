@@ -10,20 +10,14 @@ It will output a -1 if the residue was removed, and the original residue positio
 
 @htmlinclude 01_colnumbering.svg
 
-\verbatim
-#ColumnsMap     -1, -1, -1, -1, -1, -1, 6, 7, -1, 9, 10, 11, -1, -1, -1, 15, -1, 17, 18, 19, -1, 21, -1, -1, -1, 25,
-                -1, 27, -1, -1, 30, -1, 32, -1, 34, -1, 36, 37, -1, -1, -1, 41, -1, 43, 44, 45, -1, 47, 48, -1, -1,
-                -1, -1, -1, -1, 55, -1, -1, -1, 59, -1, 61, 62, -1, 64, -1, 66, -1, 68, -1, -1, -1, -1, 73, 74, -1,
-                76, 77, 78, -1, 80, -1, 82, 83, 84, -1, -1, 87, 88, -1, -1, 91, -1, 93, -1, -1, -1, -1, -1, -1, -1,
-                101, -1, -1, -1, 105, 106, -1, 108, -1, 110, -1, 112, 113, 114, -1, 116, 117, -1, 119, 120, -1, -1,
-                -1, -1, -1, -1, -1, 128, 129, 130, -1, 132, 133, 134, -1, 136, -1, -1, -1, 140, -1, 142, 143, 144,
-                -1, -1, -1, 148, -1, -1, -1, 152, -1, -1, -1, 156, 157, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-                169, 170, 171, 172, 173, 174, 175, -1, 177, -1, -1, -1, -1, -1, -1, -1
-\endverbatim
-\verbatim 
-The previous ColumnsMap has been splitted into 7 lines to ease human reading.
-The program behaviour is to output all the ColumnsMap in one line. 
-\endverbatim
+
+@htmlonly <pre class="fragment" style="    white-space: pre-wrap;       /* Since CSS 2.1 */
+                                           white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+                                           white-space: -pre-wrap;      /* Opera 4-6 */
+                                           white-space: -o-pre-wrap;    /* Opera 7 */
+                                           word-wrap: break-word;       /* Internet Explorer 5.5+ */"> @endhtmlonly
+@htmlinclude 01_colnumbering.html
+@htmlonly </pre> @endhtmlonly
 
 @divexpandableEnd
 

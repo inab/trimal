@@ -17,5 +17,5 @@ and also includes the path of the input alignment.
 
 @buttonWithExpandableDiv{htmlout, HTML Output Report, @htmlinclude 03_HTML_out.html }
 
-@buttonWithExpandableDiv{svgout, SVG Output Report, @htmlinclude 03_SVG_out.html }
+@buttonWithExpandableDiv{svgout, SVG Output Report, @htmlinclude 03_SVG_out.svg }
 */

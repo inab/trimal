@@ -12,8 +12,8 @@ It also allows the user to obtain the raw values for each statistic, per column 
 | Consistency       | -ct \<n> [0 - 1]       | -cw \<n> [0 - 1/4*N]      | -sfc                                | -sft                                   | bin/trimal -compareset data -ct 0.5 -cw 2                        |
 *N = Number of residues in the input alignment
 
-@buttonWithExpandableDiv{GT,Gaps Threshold,@htmlinclude 03_gt05.svg }
-@buttonWithExpandableDiv{ST,Sim Threshold,@htmlinclude 03_st05.svg }
-@buttonWithExpandableDiv{ST-GT,Gaps and Sim Thresholds,@htmlinclude 03_st05gt1.svg }
+@buttonWithExpandableDiv{GT,Gaps (0.5) Threshold,@htmlinclude 03_gt05.svg }
+@buttonWithExpandableDiv{ST,Sim (0.5) Threshold,@htmlinclude 03_st05.svg }
+@buttonWithExpandableDiv{ST-GT,Gaps (1) and Sim (0.5) Thresholds,@htmlinclude 03_st05gt1.svg }
 
 */
