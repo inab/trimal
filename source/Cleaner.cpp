@@ -509,8 +509,8 @@ Alignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, con
         for (i = 0, num = 0; i < alig->originalNumberOfResidues && num < 5; i++) {
             if (alig->saveResidues[i] == -1) continue;
             else {
-                rejectResiduesBuffer.push_back(newAlig->saveResidues[i] == -1);
-                positionResidueBuffer.push_back(i);
+                rejectResiduesBuffer.emplace_back(newAlig->saveResidues[i] == -1);
+                positionResidueBuffer.emplace_back(i);
                 num++;
             }
         }
@@ -585,10 +585,10 @@ Alignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, con
                 else {
                     // We add one new value to each buffer and remove the oldest value from it, effectively moving the window.
                     rejectResiduesBuffer.pop_front();
-                    rejectResiduesBuffer.push_back(newAlig->saveResidues[i] == -1);
+                    rejectResiduesBuffer.emplace_back(newAlig->saveResidues[i] == -1);
 
                     positionResidueBuffer.pop_front();
-                    positionResidueBuffer.push_back(i);
+                    positionResidueBuffer.emplace_back(i);
 
                     // If the new middle-point residue was going to be rejected...
                     if (rejectResiduesBuffer[2]) {

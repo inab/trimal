@@ -224,7 +224,7 @@ inline bool trimAlManager::in_argument(const int *argc, char *argv[], int *i) {
 }
 
 inline bool trimAlManager::vcf_argument(const int *argc, char *argv[], int *i) {
-    if (!strcmp(argv[*i], "-vcf") && ((*i) + 1 != *argc) && (infile == nullptr)) {
+    if (!strcmp(argv[*i], "-vcf") && ((*i) + 1 != *argc)) {
         vcfs = new std::vector<std::string>();
         while (((*i) + 1 != *argc)) {
             ++*i;
@@ -1401,6 +1401,8 @@ inline int trimAlManager::perform_VCF()
         if (svgStatsOutFile != nullptr)
             svg_stats_out();
 
+        origAlig->fillMatrices(true);
+
         // print_statistics();
 
         clean_alignment();
@@ -1413,6 +1415,7 @@ inline int trimAlManager::perform_VCF()
                 appearErrors = true;
             }
         }
+        else formatManager.saveAlignment("", &oformats, singleAlig);
     }
     return 0;
 }

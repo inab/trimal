@@ -16,7 +16,7 @@ FormatManager::~FormatManager()
 
 void FormatManager::addState(FormatHandling::BaseFormatHandler* newState)
 {
-    this -> available_states.push_back(newState);
+    this -> available_states.emplace_back(newState);
 }
 
 Alignment* FormatManager::loadAlignment(std::string inFile)
@@ -89,7 +89,7 @@ bool FormatManager::saveAlignment(std::string outPattern, std::vector< std::stri
     {
         if (outFormats->empty())
         {
-            outFormats->push_back("fasta");
+            outFormats->emplace_back("fasta");
         }
         if (outFormats->size() == 1)
         {
@@ -113,7 +113,7 @@ bool FormatManager::saveAlignment(std::string outPattern, std::vector< std::stri
     {
         if (outFormats->empty())
         {
-            outFormats->push_back("fasta");
+            outFormats->emplace_back("fasta");
         }
         if (outFormats->size() == 1)
         {
@@ -146,7 +146,7 @@ bool FormatManager::saveAlignment(std::string outPattern, std::vector< std::stri
                     {
                         if (state->RecognizeOutputFormat(outFormat))
                         {
-                            outStates.push_back(state);
+                            outStates.emplace_back(state);
                             recognized = true;
                         }
                     }
@@ -197,7 +197,7 @@ void FormatManager::loadAndSaveMultipleAlignments(
             {
                 if (state->RecognizeOutputFormat(outFormat))
                 {
-                    outStates.push_back(state);
+                    outStates.emplace_back(state);
                     recognized = true;
                     break;
                 }

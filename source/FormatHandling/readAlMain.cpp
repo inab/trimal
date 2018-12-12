@@ -41,7 +41,7 @@ int parseArguments(int argc, char *argv[], FormatHandling::FormatManager* machin
                 }
                 else
                 {
-                    inFiles->push_back(argv[i]);
+                    inFiles->emplace_back(argv[i]);
                 }
             }
         }
@@ -84,7 +84,7 @@ int parseArguments(int argc, char *argv[], FormatHandling::FormatManager* machin
                 }
                 else
                 {
-                    outFormats->push_back(argv[i]);
+                    outFormats->emplace_back(argv[i]);
                 }
             }
         }
@@ -101,50 +101,50 @@ int parseArguments(int argc, char *argv[], FormatHandling::FormatManager* machin
         //Compatibility with legacy options:
 
         else if (!strcmp(argv[i], "-html"))
-            outFormats->push_back("html");
+            outFormats->emplace_back("html");
         
         else if (!strcmp(argv[i], "-nbrf"))
-            outFormats->push_back("nbrf");
+            outFormats->emplace_back("nbrf");
         
         else if (!strcmp(argv[i], "-mega"))
-            outFormats->push_back("mega");
+            outFormats->emplace_back("mega");
         
         else if (!strcmp(argv[i], "-nexus"))
-            outFormats->push_back("nexus");
+            outFormats->emplace_back("nexus");
         
         else if (!strcmp(argv[i], "-clustal"))
-            outFormats->push_back("clustal");
+            outFormats->emplace_back("clustal");
         
         else if (!strcmp(argv[i], "-fasta") || !strcmp(argv[i], "-onlyseqs"))
-            outFormats->push_back("fasta");
+            outFormats->emplace_back("fasta");
         
         else if (!strcmp(argv[i], "-fasta_m10"))
         {
-            outFormats->push_back("fasta");
+            outFormats->emplace_back("fasta");
         }
         
         else if (!strcmp(argv[i], "-phylip"))
-            outFormats->push_back("phylip40");
+            outFormats->emplace_back("phylip40");
         
         else if (!strcmp(argv[i], "-phylip_m10"))
         {
-            outFormats->push_back("phylip40_m10");
+            outFormats->emplace_back("phylip40_m10");
         }
         
         else if (!strcmp(argv[i], "-phylip_paml"))
-            outFormats->push_back("phylippaml");
+            outFormats->emplace_back("phylippaml");
         
         else if (!strcmp(argv[i], "-phylip_paml_m10"))
         {
-            outFormats->push_back("phylippaml_m10");
+            outFormats->emplace_back("phylippaml_m10");
         }
         
         else if (!strcmp(argv[i], "-phylip3.2"))
-            outFormats->push_back("phylip32");
+            outFormats->emplace_back("phylip32");
         
         else if (!strcmp(argv[i], "-phylip3.2_m10"))
         {
-            outFormats->push_back("phylip32_m10");
+            outFormats->emplace_back("phylip32_m10");
         }
         else if (!strcmp(argv[i], "-format"))
         {

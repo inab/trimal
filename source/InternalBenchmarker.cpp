@@ -9,7 +9,7 @@
         // Create a new timer
         BenchmarkSnapshot timer = BenchmarkSnapshot(std::move(name), this);
         // Store its pointer in the current queue
-        _pool.push_back(&timer);
+        _pool.emplace_back(&timer);
         // Return the timer
         return timer; // NOLINT
     }
@@ -75,7 +75,7 @@
             name(std::move(name)),
             timerFactory(timerFactory) {
         start = std::chrono::high_resolution_clock::now();
-        timerFactory->levels.push_back(timerFactory->lastLevel + 1);
+        timerFactory->levels.emplace_back(timerFactory->lastLevel + 1);
         timerFactory->lastLevel = 0;
         if (!timerFactory->_pool.empty() && timerFactory->lastName == this->name) {
             timerFactory->out->seekp(timerFactory->cursorPos);
