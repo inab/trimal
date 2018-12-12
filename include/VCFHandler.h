@@ -104,15 +104,15 @@ namespace ngs {
             {
                 // Check if all contigs have a reference alignment.
                 bool checkIn = true;
-                for ( int x = 0; x < contigs.size(); x++ ) {
+                for (auto &contig : contigs) {
                     int i;
                     for ( i = 0; i < sources.size(); i++ ) {
-                        if ( !strcmp ( &contigs[x][0], &sources[i]->seqsName[0][0] ) )
+                        if ( !strcmp ( &contig[0], &sources[i]->seqsName[0][0] ) )
                             break;
                     }
 
                     if ( i == sources.size() ) {
-                        debug.report ( ErrorCode::NoReferenceSequenceForContig, &contigs[x][0] );
+                        debug.report ( ErrorCode::NoReferenceSequenceForContig, &contig[0] );
                         checkIn = false;
                     }
                 }
@@ -134,7 +134,7 @@ namespace ngs {
                         nA -> seqsName[0] = nam;
 
                         for ( int i = 1; i < donors.size() + 1; i++ ) {
-                            nA->sequences[i] = seq.c_str();
+                            nA->sequences[i] = seq;
                             nA->seqsName[i] = donors[i - 1];
                         }
 
@@ -240,7 +240,7 @@ namespace ngs {
                         delete [] format;
 
                         counter = 0;
-                        if ( /*filter && quality > minQuality && strlen(ref) == 1 && strlen(alt) == 1*/ true ) {
+                        if ( quality > minQuality && strlen(ref) == 1 && strlen(alt) == 1 ) {
                             bool canPass = true;
                             if ( !ignoreFilter && !filter ) {
                                 canPass = false;
@@ -293,7 +293,7 @@ namespace ngs {
                                                     std::toupper ( sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] ) == std::toupper ( ref[0] ) ) {
                                                 int curval = 0;
                                                 if ( strlen ( alt ) > 1 ) {
-                                                    int curval = ngs::IUPAC::getTagFromCharArray ( alt, ',' );
+                                                    curval = ngs::IUPAC::getTagFromCharArray ( alt, ',' );
                                                     if ( curval != -1 ) {
                                                         sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = ngs::IUPAC::getCharFromTag ( curval );
                                                     }
@@ -347,7 +347,7 @@ namespace ngs {
             // Obtain contigs and donors from all VCF files.
             for ( int C = 0; C < filenames.size(); C++ ) {
                 std::string& filename = filenames[C];
-                donorsPositions.push_back ( std::vector<int>() );
+                donorsPositions.emplace_back ( std::vector<int>() );
 
                 std::ifstream infile;
                 infile.open ( filename );
@@ -383,7 +383,7 @@ namespace ngs {
 
                                 // If not, add it to the vector.
                                 if ( U == contigs.size() ) {
-                                    contigs.push_back ( fname );
+                                    contigs.emplace_back ( fname );
                                 }
 
 
@@ -412,13 +412,13 @@ namespace ngs {
 
                                 // If not present, we add it
                                 if ( U == donors.size() ) {
-                                    donorsPositions[C].push_back ( U );
-                                    donors.push_back ( fname );
+                                    donorsPositions[C].emplace_back ( U );
+                                    donors.emplace_back ( fname );
                                 }
 
                                 // If already present, warn the user.
                                 else {
-                                    donorsPositions[C].push_back ( U );
+                                    donorsPositions[C].emplace_back ( U );
                                     debug.report ( WarningCode::DonorAlreadyAdded, &fname[0] );
                                 }
 
