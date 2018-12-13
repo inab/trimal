@@ -11,7 +11,7 @@ int mega_interleaved_state::CheckAlignment(std::istream* origin)
     origin->clear();
     
     char c, *firstWord = nullptr, *line = nullptr;
-    int format = 0, blocks = 0;
+    int blocks = 0;
     std::string nline;
     
     /* Read first valid line in a safer way */

@@ -83,8 +83,7 @@ Alignment *pir_state::LoadAlignment(std::string& filename) {
     while (!file.eof()) {
 
         /* Deallocate local memory */
-        if (line != nullptr)
-            delete[] line;
+        delete[] line;
 
         /* Read lines in a safe way */
         line = utils::readLine(file);
@@ -98,9 +97,8 @@ Alignment *pir_state::LoadAlignment(std::string& filename) {
             seqIdLine = false;
             i += 1;
 
-            /* Store information about sequence datatype */
-            str = strtok(line, ">;");
-//             alig->seqsInfo[i].append(str, strlen(str));
+            /* Skip information about sequence datatype - Better to check */
+            strtok(line, ">;");
 
             /* and the sequence identifier itself */
             str = strtok(nullptr, ">;");
