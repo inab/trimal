@@ -1033,8 +1033,7 @@ inline bool trimAlManager::check_input_file_with_coding_sequences_argument() {
 inline bool trimAlManager::check_file_aligned() {
     if ((!appearErrors) && (infile != nullptr)) {
 
-        if (
-            // Are we requesting an automated method ? or...
+        if (// Are we requesting an automated method ? or...
                 (automatedMethodCount || 
             // Are we requesting any manual threshold method ? or...
                 (gapThreshold != -1) || (consistencyThreshold != -1) || (similarityThreshold != -1) || 
@@ -1047,7 +1046,10 @@ inline bool trimAlManager::check_file_aligned() {
             &&
             // Then we need the alignment to be aligned; 
             //  If not, we should report the error
-            (!origAlig->isFileAligned())) 
+            (!origAlig->isFileAligned())
+            &&
+            // We are not doing VCF)
+            (vcfs == nullptr))
         {
             debug.report(ErrorCode::NotAligned, new std::string[1]{infile});
             appearErrors = true;
@@ -1323,7 +1325,7 @@ int trimAlManager::perform() {
     // We don't perform any manipulation in previous steps an error has
     // been detected
     if (appearErrors) 
-    return -1;
+        return -1;
 
     // If similarity threshold is -1, it hasn't been specified, and we
     // use 0 as default value, which makes no effect
@@ -1409,13 +1411,9 @@ inline int trimAlManager::perform_VCF()
 
         postprocess_alignment();
 
-        if ((outfile != nullptr) && (!appearErrors)) {
-            std::string outFileString = std::string(outfile);
-            if (!formatManager.saveAlignment(outFileString, &oformats, origAlig)) {
-                appearErrors = true;
-            }
-        }
-        else formatManager.saveAlignment("", &oformats, singleAlig);
+        output_reports();
+
+        save_alignment();
     }
     return 0;
 }
@@ -1446,18 +1444,33 @@ inline bool trimAlManager::performCompareset() {
 inline void trimAlManager::output_reports()
 {
     if ((svgOutFile != nullptr) && (!appearErrors))
-        if (!origAlig->
-                alignmentSummarySVG(*singleAlig, svgOutFile, 0)) {
+    {
+        size_t start = origAlig->filename.find_last_of('/');
+        if (start == std::string::npos) start = 0;
+        size_t end = origAlig->filename.find_last_of('.');
+        if (end == std::string::npos) end = origAlig->filename.size();
+        std::string filename = utils::ReplaceString(svgOutFile, "[in]", origAlig->filename.substr(start, end-start));
+        utils::ReplaceStringInPlace(filename, "[extension]", "svg");
+        if (!origAlig->alignmentSummarySVG(*singleAlig, filename.c_str(), 0)) {
             debug.report(ErrorCode::ImpossibleToGenerate, new std::string[1]{"the SVG output file"});
             appearErrors = true;
         }
+    }
+
 
     if ((htmlOutFile != nullptr) && (!appearErrors))
-        if (!origAlig->
-                alignmentSummaryHTML(*singleAlig, htmlOutFile)) {
+    {
+        size_t start = origAlig->filename.find_last_of('/');
+        if (start == std::string::npos) start = 0;
+        size_t end = origAlig->filename.find_last_of('.');
+        if (end == std::string::npos) end = 0;
+        std::string filename = utils::ReplaceString(svgOutFile, "[in]", origAlig->filename.substr(start, end-start));
+        utils::ReplaceStringInPlace(filename, "[extension]", "svg");
+        if (!origAlig->alignmentSummaryHTML(*singleAlig, filename.c_str())) {
             debug.report(ErrorCode::ImpossibleToGenerate, new std::string[1]{"the HTML output file"});
             appearErrors = true;
         }
+    }
 }
 
 inline void trimAlManager::print_statistics() {

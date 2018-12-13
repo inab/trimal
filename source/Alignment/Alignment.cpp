@@ -1153,7 +1153,7 @@ void Alignment::printColumnsIdentity_DescriptiveStats(void) {
 }
  */
 
-bool Alignment::alignmentSummaryHTML(Alignment &trimmedAlig, char *destFile) {
+bool Alignment::alignmentSummaryHTML(Alignment &trimmedAlig, const char *destFile) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool Alignment::alignmentSummaryHTML(Alignment &trimmedAlig, char *destFile, float *consValues) ");
@@ -1417,7 +1417,7 @@ bool Alignment::alignmentSummaryHTML(Alignment &trimmedAlig, char *destFile) {
     return true;
 }
 
-bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, int blocks) {
+bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *destFile, int blocks) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, float *consValues, int blocks) ");

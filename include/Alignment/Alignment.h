@@ -143,9 +143,9 @@ public:
 
     bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, Alignment *proteinAlignment);
 
-    bool alignmentSummaryHTML(Alignment &trimmedAlig, char *destFile);
+    bool alignmentSummaryHTML(Alignment &trimmedAlig, const char *destFile);
 
-    bool alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, int blocks);
+    bool alignmentSummarySVG(Alignment &trimmedAlig, const char *destFile, int blocks);
 
     void updateSequencesAndResiduesNums(bool countSequences = true, bool countResidues = true);
 };
