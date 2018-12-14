@@ -312,7 +312,7 @@ namespace ngs {
                                             }
                                         }
                                         counter ++;
-                                        tmp = std::strtok ( nullptr, "\t" );
+//                                        tmp = std::strtok ( nullptr, "\t" );
                                     }
                                 }
                             } else {

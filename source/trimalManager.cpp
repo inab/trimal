@@ -1325,18 +1325,61 @@ int trimAlManager::perform() {
     // We don't perform any manipulation in previous steps an error has
     // been detected
     if (appearErrors) 
-        return -1;
+        return 1;
 
     // If similarity threshold is -1, it hasn't been specified, and we
     // use 0 as default value, which makes no effect
     if (conservationThreshold == -1)
         conservationThreshold = 0;
 
+    // In case we are not doing VCF transformations, the perform
+    //      should be applied normally and once.
+    if (vcfs == nullptr)
+        return innerPerform();
+
     // In case we are doing VCF transformations, the perform should
     // be applied in all the collection.
-    if (vcfs != nullptr)
-        return perform_VCF();
+    else
+    {
+        int returnval = 0;
+        auto XX = formatManager.splitAlignmentKeeping(*origAlig);
+        char replacement = '-';
+        ngs::readVCF(
+                /* Dataset          */ XX,
+                /* VCF Collection   */ *vcfs,
+                /* min Quality      */ 0,
+                /* min Coverage     */ 30,
+                /* ignore Filters   */ false,
+                /* replacement char */ &replacement
+        );
 
+        delete origAlig;
+
+        for (Alignment* &i : XX) {
+            origAlig = i;
+            origAlig->fillMatrices(true);
+            returnval = std::max(innerPerform(), returnval);
+
+            if (tempAlig != origAlig &&
+                tempAlig != singleAlig)
+            {
+                delete tempAlig;
+                tempAlig = nullptr;
+            }
+            if (singleAlig != origAlig)
+            {
+                delete singleAlig;
+                singleAlig = nullptr;
+            }
+            delete origAlig;
+            origAlig = nullptr;
+        }
+        origAlig = nullptr;
+        return returnval;
+    }
+}
+
+inline int trimAlManager::innerPerform() {
     origAlig->Cleaning->setTrimTerminalGapsFlag(terminalOnly);
     origAlig->setKeepSequencesFlag(keepSeqs);
 
@@ -1346,7 +1389,7 @@ int trimAlManager::perform() {
         origAlig->setBlockSize(blockSize);
 
     if (!create_or_use_similarity_matrix())
-        return -2;
+        return 2;
 
     if (svgStatsOutFile != nullptr)
         svg_stats_out();
@@ -1370,6 +1413,7 @@ int trimAlManager::perform() {
         singleAlig->Statistics->printCorrespondence();
 
     return 0;
+
 }
 
 inline int trimAlManager::perform_VCF()
@@ -1464,7 +1508,7 @@ inline void trimAlManager::output_reports()
         if (start == std::string::npos) start = 0;
         size_t end = origAlig->filename.find_last_of('.');
         if (end == std::string::npos) end = 0;
-        std::string filename = utils::ReplaceString(svgOutFile, "[in]", origAlig->filename.substr(start, end-start));
+        std::string filename = utils::ReplaceString(htmlOutFile, "[in]", origAlig->filename.substr(start, end-start));
         utils::ReplaceStringInPlace(filename, "[extension]", "svg");
         if (!origAlig->alignmentSummaryHTML(*singleAlig, filename.c_str())) {
             debug.report(ErrorCode::ImpossibleToGenerate, new std::string[1]{"the HTML output file"});

@@ -9,7 +9,7 @@
 
 int parseArguments(int argc, char *argv[], FormatHandling::FormatManager* machine, std::vector<std::string>* inFiles, std::vector<std::string>* outFormats, std::string* outPattern)
 {
-    if (argc == 1) return -1;
+    if (argc == 1) return 1;
     for(int i = 1; i < argc; i++ )
     {
         if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help"))
@@ -332,7 +332,7 @@ int main(int argc, char *argv[])
     std::string outPattern;
     
     int result = parseArguments(argc, argv, &MachineState, &inFiles, &outFormats, &outPattern);
-    if (result == -1) 
+    if (result == 1)
     {
         menu();
         return 0;

@@ -221,6 +221,7 @@ public:
     void delete_variables();
 
 private: // General, private, methods
+    int innerPerform();
     bool performCompareset();
 
     void output_reports();
