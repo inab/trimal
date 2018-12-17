@@ -109,11 +109,11 @@ namespace statistics {
         /**
          * \brief Method to get the similarity distance between two residues, A and B\n
          * Characters provided must be both uppercase, please, refer to utils::toUpper
-         * \param A First residue to compare
-         * \param B Second residue to compare
+         * \param a First residue to compare
+         * \param b Second residue to compare
          * \return Distance between A and B based on the similarity matrix loaded.
         */
-        float getDistance(char &A, char &B);
+        float getDistance(char a, char b);
 
         /**
          * \brief Method to print the loaded matrix.

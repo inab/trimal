@@ -424,7 +424,7 @@ namespace statistics {
         }
     }
 
-    float similarityMatrix::getDistance(char &a, char &b) {
+    float similarityMatrix::getDistance(char a, char b) {
         // Create a timer that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("float similarityMatrix::getDistance(char a, char b) ");
@@ -433,25 +433,25 @@ namespace statistics {
         // Search the first character position
         if ((a >= 'A') && (a <= 'Z')) numa = vhash[a - 'A'];
         else {
-            debug.report(ErrorCode::IncorrectSymbol, new std::string[1]{std::to_string(a)});
+            debug.report(ErrorCode::IncorrectSymbol, new std::string[1]{std::string(1, a)});
             return -1;
         }
 
         // Search the second character position
         if ((b >= 'A') && (b <= 'Z')) numb = vhash[b - 'A'];
         else {
-            debug.report(ErrorCode::IncorrectSymbol, new std::string[1]{std::to_string(b)});
+            debug.report(ErrorCode::IncorrectSymbol, new std::string[1]{std::string(1, b)});
             return -1;
         }
 
         // We check if the two character positions are valid positions
         if (numa == -1) {
-            debug.report(ErrorCode::UndefinedSymbol, new std::string[1]{std::to_string(a)});
+            debug.report(ErrorCode::UndefinedSymbol, new std::string[1]{std::string(1, a)});
             return -1;
         }
 
         if (numb == -1) {
-            debug.report(ErrorCode::UndefinedSymbol, new std::string[1]{std::to_string(b)});
+            debug.report(ErrorCode::UndefinedSymbol, new std::string[1]{std::string(1, b)});
             return -1;
         }
 
