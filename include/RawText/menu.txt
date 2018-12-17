@@ -22,9 +22,25 @@ Common options (for a complete list please see the User Guide or visit http://tr
     -in <inputfile>          Input file in several formats.
                                  Available input formats: [iformat]
     -out <outputfile>        Output alignment to file. (default stdout). (default input format)
-                                 It will replace optional the tags [in]        -> Original filename without extension.
-                                                                   [format]    -> Output's format name
-                                                                   [extension] -> Output's extension
+
+                                 Following tags will be replaced on filename:
+                                       [in]        -> Original filename without extension.
+                                       [format]    -> Output's format name
+                                       [extension] -> Output's extension
+
+                                 Note: Format and extension may be the same depending on format.
+
+                                 Examples:
+                                            trimal -in ali1.fasta -out [in].clean.[extension]
+                                                -> ali1.clean.fasta
+
+                                            trimal -in alignment2.fasta -out [in].clean.[extension] -clustal
+                                                -> file1.alignment2.clw
+
+                                            trimal -in file1.fasta -out alig.[format].[extension] -clustal fasta pir
+                                                -> alig.clustal.clw
+                                                -> alig.pir.pir
+                                                -> alig.fasta.fasta
 
 
     -compareset <inputfile>  Input list of paths for the files containing the alignments to compare.
@@ -42,21 +58,6 @@ Common options (for a complete list please see the User Guide or visit http://tr
 
     -keepheader              Keep original sequence header including non-alphanumeric characters.
                                 Only available for input FASTA format files. (future versions will extend this feature)
-
-    -nbrf                    Output file in NBRF/PIR format
-    -mega                    Output file in MEGA format
-    -nexus                   Output file in NEXUS format
-    -clustal                 Output file in CLUSTAL format
-
-    -fasta                   Output file in FASTA format
-    -fasta_m10               Output file in FASTA format. Sequences name length up to 10 characters.
-
-    -phylip                  Output file in PHYLIP/PHYLIP4 format
-    -phylip_m10              Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters.
-    -phylip_paml             Output file in PHYLIP format compatible with PAML
-    -phylip_paml_m10         Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters.
-    -phylip3.2               Output file in PHYLIP3.2 format
-    -phylip3.2_m10           Output file in PHYLIP3.2 format. Sequences name length up to 10 characters.
 
     -complementary           Get the complementary alignment.
     -colnumbering            Get the relationship between the columns in the old and new alignment.
@@ -120,4 +121,24 @@ Common options (for a complete list please see the User Guide or visit http://tr
     --alternative_matrix degenerated_nt_identity
                             Specify the degenerated nt identity matrix as the similarity matrix to use.
                                 If a matrix is not specified, the best suited among a set will be selected.
+
+Legacy Options
+    These options are included for back-compatibility with older versions of trimAl.
+    New formats will not be added to this list of output format arguments.
+    The new formats argument "-formats <format1, format2, etc>" should be used instead.
+
+    -nbrf                    Output file in NBRF/PIR format
+    -mega                    Output file in MEGA format
+    -nexus                   Output file in NEXUS format
+    -clustal                 Output file in CLUSTAL format
+
+    -fasta                   Output file in FASTA format
+    -fasta_m10               Output file in FASTA format. Sequences name length up to 10 characters.
+
+    -phylip                  Output file in PHYLIP/PHYLIP4 format
+    -phylip_m10              Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters.
+    -phylip_paml             Output file in PHYLIP format compatible with PAML
+    -phylip_paml_m10         Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters.
+    -phylip3.2               Output file in PHYLIP3.2 format
+    -phylip3.2_m10           Output file in PHYLIP3.2 format. Sequences name length up to 10 characters.
 )"

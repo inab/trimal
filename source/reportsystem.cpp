@@ -338,6 +338,10 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
                 {ErrorCode::AlignmentTypeIsUnknown,
                         "Couldn't perform the trimming step, alignment type unkwnown. "},
 
+                {ErrorCode::MultipleOutputFormatsSameName,
+                        "Multiple formats have been requested, but output pattern does not contain tags \"[extension]\" or \"[format]\".\n"
+                        "            Output files will be overwritten. Please, provide an output pattern containing tags to prevent overwritting."}
+
         };
 
 void reporting::reportManager::PrintCodesAndMessages() {

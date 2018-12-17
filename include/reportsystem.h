@@ -195,7 +195,11 @@ enum ErrorCode {
 
     AlignmentIsEmpty                                    = 94,
 
-    AlignmentTypeIsUnknown                             = 95,
+    AlignmentTypeIsUnknown                              = 95,
+
+    MultipleOutputFormatsSameName                       = 96,
+
+
 
     __MAXERROR,
 };

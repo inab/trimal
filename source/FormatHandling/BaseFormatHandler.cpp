@@ -135,6 +135,14 @@ bool FormatManager::saveAlignment(std::string outPattern, std::vector< std::stri
         }
         else 
         {
+            ulong tag = filename.find("[extension]");
+            if (tag == std::string::npos)
+                tag = filename.find("[format]");
+            if (tag == std::string::npos)
+                debug.report(ErrorCode::MultipleOutputFormatsSameName);
+
+
+
             // Tranform the list of std::string states to a BaseFormatHandler list.
             bool recognized;
             std::vector<BaseFormatHandler*> outStates = std::vector<BaseFormatHandler*>();
