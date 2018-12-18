@@ -84,7 +84,7 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
                         "The similarity threshold value should be a positive real number between 0 and 100"},
 
                 {ErrorCode::ResidueOverlapOutOfRange,
-                        "The residue overlap value should be between 0 and 100"},
+                        "The residue overlap value should be between 0 and 1"},
 
                 {ErrorCode::ResidueOverlapNotRecognized,
                         "The residue overlap value should be a positive real number between 0 and 100"},
