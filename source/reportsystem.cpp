@@ -24,23 +24,28 @@ const std::map<WarningCode, const char *> reporting::reportManager::WarningMessa
                 {WarningCode::KeepingOnlyGapsSequence,
                         "Keeping sequence '[tag]' composed only by gaps"},
 
-                {WarningCode::SequenceWillBeCutted,
-                        "Sequence \"[tag]\" will be cutted at position [tag] (length:[tag])"},
+                {WarningCode::SequenceWillBeCut,
+                        "Sequence \"[tag]\" will be cut at position [tag] (length:[tag])"},
 
                 {WarningCode::IncludingIndeterminationSymbols,
-                        "Sequence \"[tag]\" has some indetermination symbols 'X' at the end of sequence. They will be included in the final Alignment."},
+                        "Sequence \"[tag]\" has some indetermination symbols 'X' "
+                        "at the end of sequence. They will be included in the final Alignment."},
 
                 {WarningCode::LessNucleotidesThanExpected,
-                        "Sequence \"[tag]\" has less nucleotides ([tag]) than expected ([tag]). It will be added N's to complete the sequence"},
+                        "Sequence \"[tag]\" has less nucleotides ([tag]) than expected ([tag])."
+                        " It will be added N's to complete the sequence"},
 
                 {WarningCode::HeaderWillBeCut,
-                        "Original sequence header will be cutted by 10 characters"},
+                        "Original sequence header will be cut by 10 characters"},
 
                 {WarningCode::DonorAlreadyAdded,
-                        "The donor \"[tag]\" is present on more than one VCF. The SNP's of all entries will be merged in one single sequence."},
+                        "The donor \"[tag]\" is present on more than one VCF. "
+                        "The SNP's of all entries will be merged in one single sequence."},
 
                 {WarningCode::ReferenceNucleotideNotCorresponding,
-                        "The sequence \"[tag]\" at position \"[tag]\" does not correspond with reference allele in file \"[tag]\". Found \"[tag]\". Expected \"[tag]\""
+                        "The sequence \"[tag]\" at position \"[tag]\" does not correspond "
+                        "with reference allele in file \"[tag]\". "
+                        "Found \"[tag]\". Expected \"[tag]\""
                 }
 
         };
