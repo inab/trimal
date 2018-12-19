@@ -209,7 +209,7 @@ enum WarningCode {
 
     KeepingOnlyGapsSequence                       = 2,
 
-    SequenceWillBeCutted                        = 3,
+    SequenceWillBeCut                        = 3,
 
     IncludingIndeterminationSymbols             = 4,
 

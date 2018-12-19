@@ -746,7 +746,7 @@ bool Alignment::checkCorrespondence(string *names, int *lengths, int totalInputS
                     if (!warnings)
                         cerr << endl;
                     warnings = true;
-                    debug.report(WarningCode::SequenceWillBeCutted, new std::string[3]{seqsName[i], std::to_string(seqLength), std::to_string(lengths[j])});
+                    debug.report(WarningCode::SequenceWillBeCut, new std::string[3]{seqsName[i], std::to_string(seqLength), std::to_string(lengths[j])});
                     break;
                 }
 
