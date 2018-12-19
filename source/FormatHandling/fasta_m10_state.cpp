@@ -1,7 +1,6 @@
 #include "FormatHandling/fasta_m10_state.h"
 
 #include "FormatHandling/FormatManager.h"
-#include "defines.h"
 #include "utils.h"
 
 namespace FormatHandling {
@@ -49,8 +48,7 @@ bool fasta_m10_state::SaveAlignment(Alignment* alignment, std::ostream* output)
 
     if (maxLongName > PHYLIPDISTANCE) {
         maxLongName = PHYLIPDISTANCE;
-        if (!Machine->keepHeader)
-            debug.report(WarningCode::HeaderWillBeCut);
+        debug.report(WarningCode::HeaderWillBeCut, new std::string[1]{std::string(name)});
     }
     /* Print alignment. First, sequences name id and then the sequences itself */
     for(i = 0; i < alignment->originalNumberOfSequences; i++) {
@@ -79,7 +77,7 @@ bool fasta_m10_state::SaveAlignment(Alignment* alignment, std::ostream* output)
                 (*output) << tmpMatrix[i][j];
                 k++;
                 lastcharIsnewline = false;
-                if (!lastcharIsnewline && (k % 60 == 0 || j == alignment->sequences[i].length() -1 ))
+                if ((k % 60 == 0 || j == alignment->sequences[i].length() - 1))
                 {
                     (*output) << "\n";
                     lastcharIsnewline = true;

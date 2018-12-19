@@ -36,7 +36,7 @@ const std::map<WarningCode, const char *> reporting::reportManager::WarningMessa
                         " It will be added N's to complete the sequence"},
 
                 {WarningCode::HeaderWillBeCut,
-                        "Original sequence header will be cut by 10 characters"},
+                        "Original sequence header will be cut by 10 characters on format [tag]"},
 
                 {WarningCode::DonorAlreadyAdded,
                         "The donor \"[tag]\" is present on more than one VCF. "
@@ -386,7 +386,6 @@ void reporting::reportManager::report(ErrorCode message, std::string *vars) {
     //	which means the end of the current scope.
     StartTiming("void reporting::reportManager::report(ErrorCode message, std::string *vars) ");
     if (Level > VerboseLevel::ERROR) {
-        if (vars != nullptr)
             delete[] vars;
     } else {
         if (vars == nullptr) {
@@ -440,7 +439,6 @@ void reporting::reportManager::report(WarningCode message, std::string *vars) {
     //	which means the end of the current scope.
     StartTiming("void reporting::reportManager::report(WarningCode message, std::string *vars) ");
     if (Level > VerboseLevel::WARNING) {
-        if (vars != nullptr)
             delete[] vars;
     } else {
         if (vars == nullptr) {
@@ -494,7 +492,6 @@ void reporting::reportManager::report(InfoCode message, std::string *vars) {
     //	which means the end of the current scope.
     StartTiming("void reporting::reportManager::report(InfoCode message, std::string *vars) ");
     if (Level > VerboseLevel::INFO) {
-        if (vars != nullptr)
             delete[] vars;
     } else {
         if (vars == nullptr) {

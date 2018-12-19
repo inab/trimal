@@ -1,7 +1,6 @@
 #include "FormatHandling/nexus_m10_state.h"
 
 #include "FormatHandling/FormatManager.h"
-#include "defines.h"
 #include "utils.h"
 
 namespace FormatHandling {
@@ -42,7 +41,11 @@ bool nexus_m10_state::SaveAlignment(Alignment *alignment, std::ostream *output) 
         if (alignment->saveSequences[i] != -1)
             maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
 
-    maxLongName = std::min(maxLongName, PHYLIPDISTANCE);
+    if (maxLongName > PHYLIPDISTANCE) {
+        maxLongName = PHYLIPDISTANCE;
+        debug.report(WarningCode::HeaderWillBeCut, new std::string[1]{std::string(name)});
+    }
+
     // Compute output file datatype
     alignment->getAlignmentType();
 

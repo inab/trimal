@@ -1,7 +1,6 @@
 #include "FormatHandling/phylip_paml_m10_state.h"
 
 #include "FormatHandling/FormatManager.h"
-#include "defines.h"
 #include "utils.h"
 
 namespace FormatHandling {
@@ -46,7 +45,10 @@ bool phylip_paml_m10_state::SaveAlignment(Alignment* alignment, std::ostream* ou
     for(i = 0; (i < alignment->numberOfSequences); i++)
         maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
 
-    maxLongName = std::min(maxLongName, PHYLIPDISTANCE);
+    if (maxLongName > PHYLIPDISTANCE) {
+        maxLongName = PHYLIPDISTANCE;
+        debug.report(WarningCode::HeaderWillBeCut, new std::string[1]{std::string(name)});
+    }
     /* Generating output alignment */
     /* First Line: Sequences Number & Residued Number */
     *output << " " << alignment->numberOfSequences << " " << alignment->numberOfResidues << "\n";
