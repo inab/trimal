@@ -6,11 +6,9 @@
 #include "Statistics/Consistency.h"
 #include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
-#include "Statistics/Gaps.h"
-#include "Alignment/Alignment.h"
 
 namespace statistics {
-    bool Manager::calculateConservationStats(void) {
+    bool Manager::calculateConservationStats() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("bool Manager::calculateConservationStats(void) ");
@@ -47,7 +45,7 @@ namespace statistics {
     }
 
 
-    void Manager::printStatisticsConservationColumns(void) {
+    void Manager::printStatisticsConservationColumns() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("void Manager::printStatisticsConservationColumns(void) ");
@@ -60,7 +58,7 @@ namespace statistics {
 
     }
 
-    void Manager::printStatisticsConservationTotal(void) {
+    void Manager::printStatisticsConservationTotal() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("void Manager::printStatisticsConservationTotal(void) ");
@@ -92,7 +90,7 @@ namespace statistics {
 
     }
 
-    void Manager::printStatisticsGapsColumns(void) {
+    void Manager::printStatisticsGapsColumns() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("void Manager::printStatisticsGapsColumns(void) ");
@@ -105,7 +103,7 @@ namespace statistics {
 
     }
 
-    void Manager::printStatisticsGapsTotal(void) {
+    void Manager::printStatisticsGapsTotal() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("void Manager::printStatisticsGapsTotal(void) ");
@@ -118,17 +116,25 @@ namespace statistics {
 
     }
 
-    void Manager::printCorrespondence(void) {
+    void Manager::printCorrespondence() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("void Manager::printCorrespondence(void) ");
         int i;
 
         std::cout << "#ColumnsMap\t";
-        // Print the saveResidues relathionship
-        for (i = 0; i < alig->originalNumberOfResidues - 1; i++)
-            std::cout << alig->saveResidues[i] << ", ";
-        std::cout << alig->saveResidues[i] << std::endl;
+
+        // Print the first residue
+        for (i = 0; i < alig->originalNumberOfResidues - 1; i++) {
+            if (alig->saveResidues[i] == -1) continue;
+            std::cout << alig->saveResidues[i];
+            break;
+        }
+        // Print the rest of the residues, using the separator ", "
+        for (; i < alig->originalNumberOfResidues; i++) {
+            if (alig->saveResidues[i] == -1) continue;
+            std::cout << ", " << alig->saveResidues[i];
+        }
 
     }
 
