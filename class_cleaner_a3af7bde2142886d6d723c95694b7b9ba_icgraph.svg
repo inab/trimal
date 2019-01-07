@@ -9,117 +9,123 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 62)">
 <title>Cleaner::cleanNoAllGaps</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-62 894,-62 894,4 -4,4"/>
-<!-- Node270 -->
+<!-- Node397 -->
 <g id="node1" class="node">
-<title>Node270</title>
-<g id="a_node1"><a xlink:title="Method to remove columns composed only by gaps This method is specially useful when we remove missali...">
-<polygon fill="#bfbfbf" stroke="#000000" points="763,-19.5 763,-38.5 890,-38.5 890,-19.5 763,-19.5"/>
-<text text-anchor="middle" x="826.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::cleanNoAllGaps</text>
-</a>
+<title>Node397</title>
+<polygon fill="#bfbfbf" stroke="#000000" points="0,-19.5 0,-38.5 127,-38.5 127,-19.5 0,-19.5"/>
+<text text-anchor="middle" x="63.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::cleanNoAllGaps</text>
 </g>
-</g>
-<!-- Node271 -->
+<!-- Node398 -->
 <g id="node2" class="node">
-<title>Node271</title>
-<g id="a_node2"><a xlink:href="classtrim_al_manager.html#a69082911b30a1bd12395bb235bc18a34" target="_top" xlink:title="Method to trim the alignment using automatic or semi&#45;automatic methods:">
-<polygon fill="#ffffff" stroke="#000000" points="554,-38.5 554,-57.5 727,-57.5 727,-38.5 554,-38.5"/>
-<text text-anchor="middle" x="640.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::CleanResiduesAuto</text>
+<title>Node398</title>
+<g id="a_node2"><a xlink:href="classtrim_al_manager.html#a69082911b30a1bd12395bb235bc18a34" target="_top" xlink:title="Method to trim the alignment using automatic or semi&#45;automatic methods: ">
+<polygon fill="#ffffff" stroke="#000000" points="163,-38.5 163,-57.5 336,-57.5 336,-38.5 163,-38.5"/>
+<text text-anchor="middle" x="249.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::CleanResiduesAuto</text>
 </a>
 </g>
 </g>
-<!-- Node270&#45;&gt;Node271 -->
+<!-- Node397&#45;&gt;Node398 -->
 <g id="edge1" class="edge">
-<title>Node270&#45;&gt;Node271</title>
-<path fill="none" stroke="#191970" d="M752.6631,-36.5425C744.2901,-37.3978 735.7005,-38.2752 727.1819,-39.1454"/>
-<polygon fill="#191970" stroke="#191970" points="753.1571,-40.0103 762.7496,-35.5121 752.4456,-33.0466 753.1571,-40.0103"/>
+<title>Node397&#45;&gt;Node398</title>
+<path fill="none" stroke="#191970" d="M137.3369,-36.5425C145.7099,-37.3978 154.2995,-38.2752 162.8181,-39.1454"/>
+<polygon fill="#191970" stroke="#191970" points="137.5544,-33.0466 127.2504,-35.5121 136.8429,-40.0103 137.5544,-33.0466"/>
 </g>
-<!-- Node276 -->
-<g id="node7" class="node">
-<title>Node276</title>
-<g id="a_node7"><a xlink:href="classtrim_al_manager.html#a10536f715945a1a45f1df33f7cedc81e" target="_top" xlink:title="Method to trim or reduce the number of sequences in an alignment. It performs one or none of the foll...">
-<polygon fill="#ffffff" stroke="#000000" points="560.5,-.5 560.5,-19.5 720.5,-19.5 720.5,-.5 560.5,-.5"/>
-<text text-anchor="middle" x="640.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::CleanSequences</text>
+<!-- Node404 -->
+<g id="node8" class="node">
+<title>Node404</title>
+<g id="a_node8"><a xlink:href="classtrim_al_manager.html#a10536f715945a1a45f1df33f7cedc81e" target="_top" xlink:title="Method to trim or reduce the number of sequences in an alignment. It performs one or none of the foll...">
+<polygon fill="#ffffff" stroke="#000000" points="169.5,-.5 169.5,-19.5 329.5,-19.5 329.5,-.5 169.5,-.5"/>
+<text text-anchor="middle" x="249.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::CleanSequences</text>
 </a>
 </g>
 </g>
-<!-- Node270&#45;&gt;Node276 -->
+<!-- Node397&#45;&gt;Node404 -->
 <g id="edge7" class="edge">
-<title>Node270&#45;&gt;Node276</title>
-<path fill="none" stroke="#191970" d="M752.7492,-21.4663C742.1884,-20.3875 731.2812,-19.2734 720.6053,-18.1828"/>
-<polygon fill="#191970" stroke="#191970" points="752.4456,-24.9534 762.7496,-22.4879 753.1571,-17.9897 752.4456,-24.9534"/>
+<title>Node397&#45;&gt;Node404</title>
+<path fill="none" stroke="#191970" d="M137.2508,-21.4663C147.8116,-20.3875 158.7188,-19.2734 169.3947,-18.1828"/>
+<polygon fill="#191970" stroke="#191970" points="136.8429,-17.9897 127.2504,-22.4879 137.5544,-24.9534 136.8429,-17.9897"/>
 </g>
-<!-- Node272 -->
+<!-- Node399 -->
 <g id="node3" class="node">
-<title>Node272</title>
-<g id="a_node3"><a xlink:href="classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" target="_top" xlink:title="Core Method of the program. This is where almost all cleaning methods are called from.">
-<polygon fill="#ffffff" stroke="#000000" points="409,-14 409,-44 518,-44 518,-14 409,-14"/>
-<text text-anchor="start" x="417" y="-32" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::clean</text>
-<text text-anchor="middle" x="463.5" y="-21" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_alignment</text>
+<title>Node399</title>
+<g id="a_node3"><a xlink:href="classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" target="_top" xlink:title="Core Method of the program. This is where almost all cleaning methods are called from. ">
+<polygon fill="#ffffff" stroke="#000000" points="372,-14 372,-44 481,-44 481,-14 372,-14"/>
+<text text-anchor="start" x="380" y="-32" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::clean</text>
+<text text-anchor="middle" x="426.5" y="-21" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_alignment</text>
 </a>
 </g>
 </g>
-<!-- Node271&#45;&gt;Node272 -->
+<!-- Node398&#45;&gt;Node399 -->
 <g id="edge2" class="edge">
-<title>Node271&#45;&gt;Node272</title>
-<path fill="none" stroke="#191970" d="M543.6253,-37.601C534.9704,-36.672 526.4233,-35.7545 518.3191,-34.8845"/>
-<polygon fill="#191970" stroke="#191970" points="543.4984,-41.1074 553.8148,-38.6948 544.2455,-34.1474 543.4984,-41.1074"/>
+<title>Node398&#45;&gt;Node399</title>
+<path fill="none" stroke="#191970" d="M346.3747,-37.601C355.0296,-36.672 363.5767,-35.7545 371.6809,-34.8845"/>
+<polygon fill="#191970" stroke="#191970" points="345.7545,-34.1474 336.1852,-38.6948 346.5016,-41.1074 345.7545,-34.1474"/>
 </g>
-<!-- Node273 -->
+<!-- Node400 -->
 <g id="node4" class="node">
-<title>Node273</title>
-<g id="a_node4"><a xlink:href="classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" target="_top" xlink:title="Method to perform the analysis if all checks have passed.">
-<polygon fill="#ffffff" stroke="#000000" points="74,-19.5 74,-38.5 193,-38.5 193,-19.5 74,-19.5"/>
-<text text-anchor="middle" x="133.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform</text>
+<title>Node400</title>
+<g id="a_node4"><a xlink:href="classtrim_al_manager.html#a7c641a1feff33d401b4ea5c82e989289" target="_top" xlink:title="trimAlManager::innerPerform">
+<polygon fill="#ffffff" stroke="#000000" points="518.5,-38.5 518.5,-57.5 659.5,-57.5 659.5,-38.5 518.5,-38.5"/>
+<text text-anchor="middle" x="589" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::innerPerform</text>
 </a>
 </g>
 </g>
-<!-- Node272&#45;&gt;Node273 -->
+<!-- Node399&#45;&gt;Node400 -->
 <g id="edge3" class="edge">
-<title>Node272&#45;&gt;Node273</title>
-<path fill="none" stroke="#191970" d="M398.5755,-29C338.9161,-29 251.2051,-29 193.243,-29"/>
-<polygon fill="#191970" stroke="#191970" points="398.6368,-32.5001 408.6368,-29 398.6367,-25.5001 398.6368,-32.5001"/>
+<title>Node399&#45;&gt;Node400</title>
+<path fill="none" stroke="#191970" d="M491.0655,-36.5492C500.0547,-37.6002 509.3286,-38.6846 518.4212,-39.7477"/>
+<polygon fill="#191970" stroke="#191970" points="491.401,-33.0647 481.0622,-35.3796 490.588,-40.0173 491.401,-33.0647"/>
 </g>
-<!-- Node275 -->
-<g id="node6" class="node">
-<title>Node275</title>
-<g id="a_node6"><a xlink:href="classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="229,-.5 229,-19.5 373,-19.5 373,-.5 229,-.5"/>
-<text text-anchor="middle" x="301" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform_VCF</text>
+<!-- Node403 -->
+<g id="node7" class="node">
+<title>Node403</title>
+<g id="a_node7"><a xlink:href="classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" target="_top" xlink:title="trimAlManager::perform_VCF">
+<polygon fill="#ffffff" stroke="#000000" points="517,-.5 517,-19.5 661,-19.5 661,-.5 517,-.5"/>
+<text text-anchor="middle" x="589" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform_VCF</text>
 </a>
 </g>
 </g>
-<!-- Node272&#45;&gt;Node275 -->
-<g id="edge5" class="edge">
-<title>Node272&#45;&gt;Node275</title>
-<path fill="none" stroke="#191970" d="M398.7672,-21.4312C390.3063,-20.442 381.5959,-19.4235 373.0243,-18.4213"/>
-<polygon fill="#191970" stroke="#191970" points="398.599,-24.9353 408.9378,-22.6204 399.412,-17.9827 398.599,-24.9353"/>
-</g>
-<!-- Node274 -->
-<g id="node5" class="node">
-<title>Node274</title>
-<g id="a_node5"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="0,-19.5 0,-38.5 38,-38.5 38,-19.5 0,-19.5"/>
-<text text-anchor="middle" x="19" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
-</a>
-</g>
-</g>
-<!-- Node273&#45;&gt;Node274 -->
-<g id="edge4" class="edge">
-<title>Node273&#45;&gt;Node274</title>
-<path fill="none" stroke="#191970" d="M63.6802,-29C54.3823,-29 45.5497,-29 38.2303,-29"/>
-<polygon fill="#191970" stroke="#191970" points="63.9025,-32.5001 73.9024,-29 63.9024,-25.5001 63.9025,-32.5001"/>
-</g>
-<!-- Node275&#45;&gt;Node273 -->
+<!-- Node399&#45;&gt;Node403 -->
 <g id="edge6" class="edge">
-<title>Node275&#45;&gt;Node273</title>
-<path fill="none" stroke="#191970" d="M218.8378,-19.3199C210.1593,-20.3043 201.4581,-21.2913 193.107,-22.2386"/>
-<polygon fill="#191970" stroke="#191970" points="219.4511,-22.7729 228.9928,-18.168 218.662,-15.8175 219.4511,-22.7729"/>
+<title>Node399&#45;&gt;Node403</title>
+<path fill="none" stroke="#191970" d="M491.2328,-21.4312C499.6937,-20.442 508.4041,-19.4235 516.9757,-18.4213"/>
+<polygon fill="#191970" stroke="#191970" points="490.588,-17.9827 481.0622,-22.6204 491.401,-24.9353 490.588,-17.9827"/>
 </g>
-<!-- Node276&#45;&gt;Node272 -->
+<!-- Node401 -->
+<g id="node5" class="node">
+<title>Node401</title>
+<g id="a_node5"><a xlink:href="classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" target="_top" xlink:title="Method to perform the analysis if all checks have passed. ">
+<polygon fill="#ffffff" stroke="#000000" points="697,-38.5 697,-57.5 816,-57.5 816,-38.5 697,-38.5"/>
+<text text-anchor="middle" x="756.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform</text>
+</a>
+</g>
+</g>
+<!-- Node400&#45;&gt;Node401 -->
+<g id="edge4" class="edge">
+<title>Node400&#45;&gt;Node401</title>
+<path fill="none" stroke="#191970" d="M669.8102,-48C678.9363,-48 688.1089,-48 696.8939,-48"/>
+<polygon fill="#191970" stroke="#191970" points="669.5497,-44.5001 659.5496,-48 669.5496,-51.5001 669.5497,-44.5001"/>
+</g>
+<!-- Node402 -->
+<g id="node6" class="node">
+<title>Node402</title>
+<g id="a_node6"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
+<polygon fill="#ffffff" stroke="#000000" points="852,-38.5 852,-57.5 890,-57.5 890,-38.5 852,-38.5"/>
+<text text-anchor="middle" x="871" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
+</a>
+</g>
+</g>
+<!-- Node401&#45;&gt;Node402 -->
+<g id="edge5" class="edge">
+<title>Node401&#45;&gt;Node402</title>
+<path fill="none" stroke="#191970" d="M826.3198,-48C835.6177,-48 844.4503,-48 851.7697,-48"/>
+<polygon fill="#191970" stroke="#191970" points="826.0976,-44.5001 816.0976,-48 826.0975,-51.5001 826.0976,-44.5001"/>
+</g>
+<!-- Node404&#45;&gt;Node399 -->
 <g id="edge8" class="edge">
-<title>Node276&#45;&gt;Node272</title>
-<path fill="none" stroke="#191970" d="M550.2247,-19.6906C539.259,-20.8677 528.3297,-22.0409 518.1105,-23.1379"/>
-<polygon fill="#191970" stroke="#191970" points="550.7168,-23.1579 560.2861,-18.6105 549.9696,-16.1979 550.7168,-23.1579"/>
+<title>Node404&#45;&gt;Node399</title>
+<path fill="none" stroke="#191970" d="M339.7753,-19.6906C350.741,-20.8677 361.6703,-22.0409 371.8895,-23.1379"/>
+<polygon fill="#191970" stroke="#191970" points="340.0304,-16.1979 329.7139,-18.6105 339.2832,-23.1579 340.0304,-16.1979"/>
 </g>
 </g>
 </svg>

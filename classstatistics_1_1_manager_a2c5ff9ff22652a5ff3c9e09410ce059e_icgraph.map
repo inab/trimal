@@ -1,5 +1,5 @@
 <map id="statistics::Manager::printCorrespondence" name="statistics::Manager::printCorrespondence">
-<area shape="rect" id="node1" title="Method to print the vector containing the keep/reject (Alignment::saveResidues) values of the associa..." alt="" coords="311,5,461,47"/>
-<area shape="rect" id="node2" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed." alt="" coords="104,13,263,39"/>
-<area shape="rect" id="node3" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
+<area shape="rect" id="node2" href="$classtrim_al_manager.html#a7c641a1feff33d401b4ea5c82e989289" title="trimAlManager::innerPerform" alt="" coords="204,13,392,39"/>
+<area shape="rect" id="node3" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="440,13,599,39"/>
+<area shape="rect" id="node4" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="647,13,697,39"/>
 </map>

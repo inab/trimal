@@ -9,563 +9,624 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 650)">
 <title>statistics::Gaps::getGapsWindow</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-650 1851,-650 1851,4 -4,4"/>
-<!-- Node106 -->
+<!-- Node173 -->
 <g id="node1" class="node">
-<title>Node106</title>
-<g id="a_node1"><a xlink:title=" ">
-<polygon fill="#bfbfbf" stroke="#000000" points="1719,-147 1719,-177 1847,-177 1847,-147 1719,-147"/>
-<text text-anchor="start" x="1727" y="-165" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Gaps::getGaps</text>
-<text text-anchor="middle" x="1783" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Window</text>
-</a>
+<title>Node173</title>
+<polygon fill="#bfbfbf" stroke="#000000" points="0,-166 0,-196 128,-196 128,-166 0,-166"/>
+<text text-anchor="start" x="8" y="-184" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Gaps::getGaps</text>
+<text text-anchor="middle" x="64" y="-173" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Window</text>
 </g>
-</g>
-<!-- Node107 -->
+<!-- Node174 -->
 <g id="node2" class="node">
-<title>Node107</title>
-<g id="a_node2"><a xlink:href="class_alignment.html#a4e80b4d399ffdbe2ed2cfab91975f348" target="_top" xlink:title="Method to report the trimming results in HTML. Outputs an HTML file that shows visually what has been...">
-<polygon fill="#ffffff" stroke="#000000" points="989,-430.5 989,-449.5 1166,-449.5 1166,-430.5 989,-430.5"/>
-<text text-anchor="middle" x="1077.5" y="-437.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::alignmentSummaryHTML</text>
+<title>Node174</title>
+<g id="a_node2"><a xlink:href="class_alignment.html#a3754dfadea173918f5e85b9eb4c3ad8a" target="_top" xlink:title="Method to report the trimming results in HTML. Outputs an HTML file that shows visually what has been...">
+<polygon fill="#ffffff" stroke="#000000" points="681,-588.5 681,-607.5 858,-607.5 858,-588.5 681,-588.5"/>
+<text text-anchor="middle" x="769.5" y="-595.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::alignmentSummaryHTML</text>
 </a>
 </g>
 </g>
-<!-- Node106&#45;&gt;Node107 -->
+<!-- Node173&#45;&gt;Node174 -->
 <g id="edge1" class="edge">
-<title>Node106&#45;&gt;Node107</title>
-<path fill="none" stroke="#191970" d="M1778.2994,-187.1023C1765.4129,-253.0948 1727.5047,-428.8643 1683,-465 1516.5226,-600.1719 1410.5882,-552.7707 1202,-503 1158.6443,-492.655 1113.2955,-464.635 1091.2163,-449.6921"/>
-<polygon fill="#191970" stroke="#191970" points="1781.7628,-187.6258 1780.2157,-177.1446 1774.8889,-186.3029 1781.7628,-187.6258"/>
+<title>Node173&#45;&gt;Node174</title>
+<path fill="none" stroke="#191970" d="M72.954,-205.8409C87.4153,-243.2672 118.9196,-314.754 164,-362 308.1862,-513.113 560.4764,-569.0863 689.1206,-588.4967"/>
+<polygon fill="#191970" stroke="#191970" points="76.135,-204.3569 69.33,-196.2364 69.5857,-206.8281 76.135,-204.3569"/>
 </g>
-<!-- Node108 -->
-<g id="node3" class="node">
-<title>Node108</title>
-<g id="a_node3"><a xlink:href="class_alignment.html#a2fcaadf2c0799bc668050f7735860364" target="_top" xlink:title="Method to report the trimming results in SVG. Outputs a SVG file that shows visually what has been do...">
-<polygon fill="#ffffff" stroke="#000000" points="992,-152.5 992,-171.5 1163,-171.5 1163,-152.5 992,-152.5"/>
-<text text-anchor="middle" x="1077.5" y="-159.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::alignmentSummarySVG</text>
-</a>
-</g>
-</g>
-<!-- Node106&#45;&gt;Node108 -->
-<g id="edge2" class="edge">
-<title>Node106&#45;&gt;Node108</title>
-<path fill="none" stroke="#191970" d="M1708.8255,-162C1576.9842,-162 1302.6126,-162 1163.035,-162"/>
-<polygon fill="#191970" stroke="#191970" points="1708.8346,-165.5001 1718.8346,-162 1708.8346,-158.5001 1708.8346,-165.5001"/>
-</g>
-<!-- Node109 -->
-<g id="node4" class="node">
-<title>Node109</title>
-<g id="a_node4"><a xlink:href="classstatistics_1_1_similarity.html#ae69ec0e79912ae23c8cfe97358c4794d" target="_top" xlink:title="Method to calculate the similarity values of a alignment matrix.">
-<polygon fill="#ffffff" stroke="#000000" points="1558.5,-425 1558.5,-455 1661.5,-455 1661.5,-425 1558.5,-425"/>
-<text text-anchor="start" x="1566.5" y="-443" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Similarity</text>
-<text text-anchor="middle" x="1610" y="-432" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::calculateVectors</text>
-</a>
-</g>
-</g>
-<!-- Node106&#45;&gt;Node109 -->
-<g id="edge3" class="edge">
-<title>Node106&#45;&gt;Node109</title>
-<path fill="none" stroke="#191970" d="M1779.4522,-187.1183C1771.2499,-236.2856 1746.572,-346.0049 1683,-410 1676.9163,-416.1242 1669.4059,-421.051 1661.5394,-424.9988"/>
-<polygon fill="#191970" stroke="#191970" points="1782.9398,-187.4709 1781.0402,-177.0477 1776.0252,-186.3805 1782.9398,-187.4709"/>
-</g>
-<!-- Node117 -->
-<g id="node12" class="node">
-<title>Node117</title>
-<g id="a_node12"><a xlink:href="class_cleaner.html#a4718e31c0183b5a98751d77479faacf0" target="_top" xlink:title="Method to trim an alignment based on the similarity and gaps distribution values. .">
-<polygon fill="#ffffff" stroke="#000000" points="826.5,-354.5 826.5,-373.5 906.5,-373.5 906.5,-354.5 826.5,-354.5"/>
-<text text-anchor="middle" x="866.5" y="-361.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::clean</text>
-</a>
-</g>
-</g>
-<!-- Node106&#45;&gt;Node117 -->
-<g id="edge36" class="edge">
-<title>Node106&#45;&gt;Node117</title>
-<path fill="none" stroke="#191970" d="M1729.1298,-180.4308C1714.2,-185.5075 1697.9799,-190.9938 1683,-196 1533.0372,-246.1162 1498.5202,-269.1575 1345,-307 1266.6792,-326.3059 1246.0054,-326.7046 1166,-337 1073.572,-348.894 964.427,-357.3283 906.814,-361.3449"/>
-<polygon fill="#191970" stroke="#191970" points="1730.3901,-183.6991 1738.7286,-177.163 1728.1341,-177.0726 1730.3901,-183.6991"/>
-</g>
-<!-- Node118 -->
-<g id="node13" class="node">
-<title>Node118</title>
-<g id="a_node13"><a xlink:href="class_cleaner.html#a6727a235afa29f08a50716f28fa5c8fc" target="_top" xlink:title="Method to clean an alignment. It carries out strict and strictplus. The method:">
-<polygon fill="#ffffff" stroke="#000000" points="1006,-190.5 1006,-209.5 1149,-209.5 1149,-190.5 1006,-190.5"/>
-<text text-anchor="middle" x="1077.5" y="-197.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::cleanCombMethods</text>
-</a>
-</g>
-</g>
-<!-- Node106&#45;&gt;Node118 -->
-<g id="edge39" class="edge">
-<title>Node106&#45;&gt;Node118</title>
-<path fill="none" stroke="#191970" d="M1708.7165,-173.2344C1700.0607,-174.2957 1691.3456,-175.2523 1683,-176 1490.7207,-193.2272 1262.9873,-198.0887 1149.4192,-199.4606"/>
-<polygon fill="#191970" stroke="#191970" points="1709.3473,-176.6824 1718.8248,-171.9466 1708.4626,-169.7386 1709.3473,-176.6824"/>
-</g>
-<!-- Node127 -->
-<g id="node22" class="node">
-<title>Node127</title>
-<g id="a_node22"><a xlink:href="class_cleaner.html#aa57106470d2104a925b9396b8a9f33b3" target="_top" xlink:title="Method that carries the gappyout approach. This methods calculates the slope in gaps distribution on ...">
-<polygon fill="#ffffff" stroke="#000000" points="1381,-76.5 1381,-95.5 1501,-95.5 1501,-76.5 1381,-76.5"/>
-<text text-anchor="middle" x="1441" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::clean2ndSlope</text>
-</a>
-</g>
-</g>
-<!-- Node106&#45;&gt;Node127 -->
-<g id="edge37" class="edge">
-<title>Node106&#45;&gt;Node127</title>
-<path fill="none" stroke="#191970" d="M1751.6673,-141.7485C1732.5901,-130.4466 1707.2869,-117.226 1683,-110 1622.8055,-92.0906 1550.8585,-86.8909 1501.1398,-85.6775"/>
-<polygon fill="#191970" stroke="#191970" points="1749.8682,-144.7507 1760.2339,-146.9424 1753.4973,-138.7649 1749.8682,-144.7507"/>
-</g>
-<!-- Node128 -->
-<g id="node23" class="node">
-<title>Node128</title>
-<g id="a_node23"><a xlink:href="class_cleaner.html#af7c9e1a177424168fa4214aca9ebd8e2" target="_top" xlink:title="Method to trim an alignment based on the gap distribution values. Column blocks that don&#39;t have a min...">
-<polygon fill="#ffffff" stroke="#000000" points="1026,-114.5 1026,-133.5 1129,-133.5 1129,-114.5 1026,-114.5"/>
-<text text-anchor="middle" x="1077.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::cleanGaps</text>
-</a>
-</g>
-</g>
-<!-- Node106&#45;&gt;Node128 -->
-<g id="edge40" class="edge">
-<title>Node106&#45;&gt;Node128</title>
-<path fill="none" stroke="#191970" d="M1708.8007,-158.0034C1565.3222,-150.2753 1253.1081,-133.4587 1129.445,-126.7979"/>
-<polygon fill="#191970" stroke="#191970" points="1708.6608,-161.5009 1718.8346,-158.5439 1709.0374,-154.511 1708.6608,-161.5009"/>
-</g>
-<!-- Node129 -->
-<g id="node24" class="node">
-<title>Node129</title>
-<g id="a_node24"><a xlink:href="class_cleaner.html#a3af7bde2142886d6d723c95694b7b9ba" target="_top" xlink:title="Method to remove columns composed only by gaps This method is specially useful when we remove missali...">
-<polygon fill="#ffffff" stroke="#000000" points="1014,-38.5 1014,-57.5 1141,-57.5 1141,-38.5 1014,-38.5"/>
-<text text-anchor="middle" x="1077.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::cleanNoAllGaps</text>
-</a>
-</g>
-</g>
-<!-- Node106&#45;&gt;Node129 -->
-<g id="edge43" class="edge">
-<title>Node106&#45;&gt;Node129</title>
-<path fill="none" stroke="#191970" d="M1761.7406,-139.4048C1742.9476,-121.0323 1713.8002,-96.2228 1683,-84 1497.5146,-10.3915 1254.8527,-26.032 1141.2984,-39.1247"/>
-<polygon fill="#191970" stroke="#191970" points="1759.5986,-142.214 1769.1354,-146.8292 1764.5582,-137.2741 1759.5986,-142.214"/>
-</g>
-<!-- Node131 -->
-<g id="node26" class="node">
-<title>Node131</title>
-<g id="a_node26"><a xlink:href="class_cleaner.html#ab7f5b746b97697181f4cd06063cbb49a" target="_top" xlink:title="Method to detect right and left borders. Borders are the first column found with no gaps....">
-<polygon fill="#ffffff" stroke="#000000" points="1537,-.5 1537,-19.5 1683,-19.5 1683,-.5 1537,-.5"/>
-<text text-anchor="middle" x="1610" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::removeOnlyTerminal</text>
-</a>
-</g>
-</g>
-<!-- Node106&#45;&gt;Node131 -->
-<g id="edge47" class="edge">
-<title>Node106&#45;&gt;Node131</title>
-<path fill="none" stroke="#191970" d="M1769.9481,-137.6031C1753.3783,-108.8572 1722.1768,-61.5341 1683,-34 1674.1589,-27.7864 1663.6044,-23.1021 1653.3057,-19.6014"/>
-<polygon fill="#191970" stroke="#191970" points="1767.0455,-139.5822 1774.9969,-146.5841 1773.1474,-136.152 1767.0455,-139.5822"/>
-</g>
-<!-- Node110 -->
-<g id="node5" class="node">
-<title>Node110</title>
-<g id="a_node5"><a xlink:href="classstatistics_1_1_manager.html#a92505ca5aedc5b45c4300a0e8a7d1e17" target="_top" xlink:title="Method to handle similarity stat calculation It checks if the similarity submodule has been created,...">
-<polygon fill="#ffffff" stroke="#000000" points="1202,-463 1202,-493 1345,-493 1345,-463 1202,-463"/>
-<text text-anchor="start" x="1210" y="-481" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Manager</text>
-<text text-anchor="middle" x="1273.5" y="-470" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::calculateConservationStats</text>
-</a>
-</g>
-</g>
-<!-- Node109&#45;&gt;Node110 -->
-<g id="edge4" class="edge">
-<title>Node109&#45;&gt;Node110</title>
-<path fill="none" stroke="#191970" d="M1548.5442,-455.997C1533.1169,-459.4862 1516.5312,-462.7912 1501,-465 1449.1039,-472.3805 1389.9841,-475.6036 1345.0205,-476.9956"/>
-<polygon fill="#191970" stroke="#191970" points="1549.543,-459.3583 1558.4922,-453.6872 1547.9597,-452.5397 1549.543,-459.3583"/>
-</g>
-<!-- Node124 -->
-<g id="node19" class="node">
-<title>Node124</title>
-<g id="a_node19"><a xlink:href="classstatistics_1_1_similarity.html#adcb5627b9704850e85433fc40c19db17" target="_top" xlink:title="Allows us compute the conservationWindow&#39;s values.">
-<polygon fill="#ffffff" stroke="#000000" points="1389.5,-425 1389.5,-455 1492.5,-455 1492.5,-425 1389.5,-425"/>
-<text text-anchor="start" x="1397.5" y="-443" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Similarity</text>
-<text text-anchor="middle" x="1441" y="-432" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::applyWindow</text>
-</a>
-</g>
-</g>
-<!-- Node109&#45;&gt;Node124 -->
-<g id="edge25" class="edge">
-<title>Node109&#45;&gt;Node124</title>
-<path fill="none" stroke="#191970" d="M1548.1309,-440C1529.8872,-440 1510.1241,-440 1492.5987,-440"/>
-<polygon fill="#191970" stroke="#191970" points="1548.3762,-443.5001 1558.3761,-440 1548.3761,-436.5001 1548.3762,-443.5001"/>
-</g>
-<!-- Node111 -->
-<g id="node6" class="node">
-<title>Node111</title>
-<g id="a_node6"><a xlink:href="class_cleaner.html#a9cdbd6ebf78a284dd065b31319795b0c" target="_top" xlink:title="Method to trim an alignment based on the similarity distribution values.">
-<polygon fill="#ffffff" stroke="#000000" points="798,-250.5 798,-269.5 935,-269.5 935,-250.5 798,-250.5"/>
-<text text-anchor="middle" x="866.5" y="-257.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::cleanConservation</text>
-</a>
-</g>
-</g>
-<!-- Node110&#45;&gt;Node111 -->
-<g id="edge5" class="edge">
-<title>Node110&#45;&gt;Node111</title>
-<path fill="none" stroke="#191970" d="M1236.1684,-458.0042C1151.1955,-412.4905 945.9442,-302.5524 884.2987,-269.5335"/>
-<polygon fill="#191970" stroke="#191970" points="1234.736,-461.2074 1245.2037,-462.8437 1238.0411,-455.0368 1234.736,-461.2074"/>
-</g>
-<!-- Node110&#45;&gt;Node117 -->
-<g id="edge12" class="edge">
-<title>Node110&#45;&gt;Node117</title>
-<path fill="none" stroke="#191970" d="M1191.5051,-484.9822C1133.1626,-487.0083 1053.9336,-483.6755 989,-459 939.1873,-440.0706 893.1484,-393.5931 874.844,-373.5046"/>
-<polygon fill="#191970" stroke="#191970" points="1191.9316,-488.4678 1201.7804,-484.5627 1191.646,-481.4736 1191.9316,-488.4678"/>
-</g>
-<!-- Node110&#45;&gt;Node118 -->
-<g id="edge14" class="edge">
-<title>Node110&#45;&gt;Node118</title>
-<path fill="none" stroke="#191970" d="M1266.1657,-453.0107C1252.379,-409.3842 1219.1123,-318.2417 1166,-258 1146.9265,-236.3663 1117.9618,-219.4531 1098.4118,-209.6071"/>
-<polygon fill="#191970" stroke="#191970" points="1262.8892,-454.2631 1269.1789,-462.789 1269.5788,-452.2017 1262.8892,-454.2631"/>
-</g>
-<!-- Node120 -->
-<g id="node15" class="node">
-<title>Node120</title>
-<g id="a_node15"><a xlink:href="classstatistics_1_1_manager.html#a080c687f8f355900511485eeec32a659" target="_top" xlink:title="Wrapper to Statistics::Similarity::printConservationAcl() It calls to calculateConservationStats() to...">
-<polygon fill="#ffffff" stroke="#000000" points="1007.5,-544.5 1007.5,-585.5 1147.5,-585.5 1147.5,-544.5 1007.5,-544.5"/>
-<text text-anchor="start" x="1015.5" y="-573.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Manager</text>
-<text text-anchor="start" x="1015.5" y="-562.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::printStatisticsConservation</text>
-<text text-anchor="middle" x="1077.5" y="-551.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Columns</text>
-</a>
-</g>
-</g>
-<!-- Node110&#45;&gt;Node120 -->
-<g id="edge17" class="edge">
-<title>Node110&#45;&gt;Node120</title>
-<path fill="none" stroke="#191970" d="M1234.4385,-497.7549C1214.1842,-507.7784 1188.9441,-519.9302 1166,-530 1154.9555,-534.8473 1143.0135,-539.7761 1131.5839,-544.3458"/>
-<polygon fill="#191970" stroke="#191970" points="1236.2626,-500.7567 1243.6575,-493.1695 1233.1451,-494.4892 1236.2626,-500.7567"/>
-</g>
-<!-- Node122 -->
-<g id="node17" class="node">
-<title>Node122</title>
-<g id="a_node17"><a xlink:href="classstatistics_1_1_manager.html#aa20cfb477826035386ea988e3706b09a" target="_top" xlink:title="Wrapper to Statistics::Similarity::printGapsTotal() It calls to calculateConservationStats() to make ...">
-<polygon fill="#ffffff" stroke="#000000" points="1007.5,-604.5 1007.5,-645.5 1147.5,-645.5 1147.5,-604.5 1007.5,-604.5"/>
-<text text-anchor="start" x="1015.5" y="-633.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Manager</text>
-<text text-anchor="start" x="1015.5" y="-622.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::printStatisticsConservation</text>
-<text text-anchor="middle" x="1077.5" y="-611.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Total</text>
-</a>
-</g>
-</g>
-<!-- Node110&#45;&gt;Node122 -->
-<g id="edge20" class="edge">
-<title>Node110&#45;&gt;Node122</title>
-<path fill="none" stroke="#191970" d="M1257.5893,-501.4239C1238.6318,-527.6752 1204.6271,-569.8438 1166,-595 1160.2903,-598.7185 1154.072,-602.0243 1147.6656,-604.9529"/>
-<polygon fill="#191970" stroke="#191970" points="1260.5048,-503.3631 1263.4265,-493.1791 1254.7916,-499.3183 1260.5048,-503.3631"/>
-</g>
-<!-- Node123 -->
-<g id="node18" class="node">
-<title>Node123</title>
-<g id="a_node18"><a xlink:href="classtrim_al_manager.html#a63d5bec0938516a2129ccb04276b93d9" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="428,-252 428,-282 529,-282 529,-252 428,-252"/>
-<text text-anchor="start" x="436" y="-270" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::svg</text>
-<text text-anchor="middle" x="478.5" y="-259" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_stats_out</text>
-</a>
-</g>
-</g>
-<!-- Node110&#45;&gt;Node123 -->
-<g id="edge22" class="edge">
-<title>Node110&#45;&gt;Node123</title>
-<path fill="none" stroke="#191970" d="M1191.88,-490.1275C1134.5342,-496.2679 1056.3478,-499.8361 989,-486 791.0924,-445.3414 575.2159,-324.5625 503.3216,-282.0273"/>
-<polygon fill="#191970" stroke="#191970" points="1192.4287,-493.588 1201.9771,-488.9968 1191.6497,-486.6315 1192.4287,-493.588"/>
-</g>
-<!-- Node112 -->
-<g id="node7" class="node">
-<title>Node112</title>
-<g id="a_node7"><a xlink:href="classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" target="_top" xlink:title="Method to trim the alignment using non automatic methods:">
-<polygon fill="#ffffff" stroke="#000000" points="588,-207 588,-237 740,-237 740,-207 588,-207"/>
-<text text-anchor="start" x="596" y="-225" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::CleanResidues</text>
-<text text-anchor="middle" x="664" y="-214" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">NonAuto</text>
-</a>
-</g>
-</g>
-<!-- Node111&#45;&gt;Node112 -->
-<g id="edge6" class="edge">
-<title>Node111&#45;&gt;Node112</title>
-<path fill="none" stroke="#191970" d="M805.7703,-248.6038C785.142,-244.7328 761.8264,-240.3575 740.1492,-236.2897"/>
-<polygon fill="#191970" stroke="#191970" points="805.1881,-252.0556 815.6621,-250.46 806.4792,-245.1757 805.1881,-252.0556"/>
-</g>
-<!-- Node113 -->
+<!-- Node180 -->
 <g id="node8" class="node">
-<title>Node113</title>
-<g id="a_node8"><a xlink:href="classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" target="_top" xlink:title="Core Method of the program. This is where almost all cleaning methods are called from.">
-<polygon fill="#ffffff" stroke="#000000" points="424,-181 424,-211 533,-211 533,-181 424,-181"/>
-<text text-anchor="start" x="432" y="-199" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::clean</text>
-<text text-anchor="middle" x="478.5" y="-188" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_alignment</text>
+<title>Node180</title>
+<g id="a_node8"><a xlink:href="class_alignment.html#ac4196c026e0f482eaccf9976f82f72e3" target="_top" xlink:title="Method to report the trimming results in SVG. Outputs a SVG file that shows visually what has been do...">
+<polygon fill="#ffffff" stroke="#000000" points="684,-550.5 684,-569.5 855,-569.5 855,-550.5 684,-550.5"/>
+<text text-anchor="middle" x="769.5" y="-557.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::alignmentSummarySVG</text>
 </a>
 </g>
 </g>
-<!-- Node112&#45;&gt;Node113 -->
+<!-- Node173&#45;&gt;Node180 -->
 <g id="edge7" class="edge">
-<title>Node112&#45;&gt;Node113</title>
-<path fill="none" stroke="#191970" d="M577.8208,-209.921C562.6378,-207.7929 547.2188,-205.6317 533.2022,-203.6672"/>
-<polygon fill="#191970" stroke="#191970" points="577.358,-213.3902 587.747,-211.3122 578.3297,-206.458 577.358,-213.3902"/>
+<title>Node173&#45;&gt;Node180</title>
+<path fill="none" stroke="#191970" d="M82.2434,-204.2181C101.1956,-227.4877 132.445,-263.557 164,-290 300.459,-404.3526 336.9718,-438.1923 502,-505 560.4506,-528.6623 630.369,-542.5832 684.0629,-550.4979"/>
+<polygon fill="#191970" stroke="#191970" points="84.8376,-201.8592 75.8395,-196.2658 79.3855,-206.2496 84.8376,-201.8592"/>
 </g>
-<!-- Node114 -->
+<!-- Node181 -->
 <g id="node9" class="node">
-<title>Node114</title>
-<g id="a_node9"><a xlink:href="classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" target="_top" xlink:title="Method to perform the analysis if all checks have passed.">
-<polygon fill="#ffffff" stroke="#000000" points="74,-219.5 74,-238.5 193,-238.5 193,-219.5 74,-219.5"/>
-<text text-anchor="middle" x="133.5" y="-226.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform</text>
+<title>Node181</title>
+<g id="a_node9"><a xlink:href="classstatistics_1_1_similarity.html#ae69ec0e79912ae23c8cfe97358c4794d" target="_top" xlink:title="Method to calculate the similarity values of a alignment matrix. ">
+<polygon fill="#ffffff" stroke="#000000" points="185.5,-250 185.5,-280 288.5,-280 288.5,-250 185.5,-250"/>
+<text text-anchor="start" x="193.5" y="-268" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Similarity</text>
+<text text-anchor="middle" x="237" y="-257" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::calculateVectors</text>
 </a>
 </g>
 </g>
-<!-- Node113&#45;&gt;Node114 -->
-<g id="edge8" class="edge">
-<title>Node113&#45;&gt;Node114</title>
-<path fill="none" stroke="#191970" d="M413.6646,-197.1469C363.1714,-198.6408 291.4107,-202.0804 229,-210 211.0557,-212.277 191.4281,-215.9699 174.6591,-219.4972"/>
-<polygon fill="#191970" stroke="#191970" points="413.889,-200.6421 423.7877,-196.865 413.6941,-193.6448 413.889,-200.6421"/>
-</g>
-<!-- Node116 -->
-<g id="node11" class="node">
-<title>Node116</title>
-<g id="a_node11"><a xlink:href="classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="229,-219.5 229,-238.5 373,-238.5 373,-219.5 229,-219.5"/>
-<text text-anchor="middle" x="301" y="-226.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform_VCF</text>
-</a>
-</g>
-</g>
-<!-- Node113&#45;&gt;Node116 -->
-<g id="edge10" class="edge">
-<title>Node113&#45;&gt;Node116</title>
-<path fill="none" stroke="#191970" d="M413.7032,-208.0467C393.442,-211.8136 371.3805,-215.9152 352.1915,-219.4827"/>
-<polygon fill="#191970" stroke="#191970" points="414.604,-211.4393 423.7958,-206.1704 413.3245,-204.5572 414.604,-211.4393"/>
-</g>
-<!-- Node115 -->
-<g id="node10" class="node">
-<title>Node115</title>
-<g id="a_node10"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="0,-219.5 0,-238.5 38,-238.5 38,-219.5 0,-219.5"/>
-<text text-anchor="middle" x="19" y="-226.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
-</a>
-</g>
-</g>
-<!-- Node114&#45;&gt;Node115 -->
+<!-- Node173&#45;&gt;Node181 -->
 <g id="edge9" class="edge">
-<title>Node114&#45;&gt;Node115</title>
-<path fill="none" stroke="#191970" d="M63.6802,-229C54.3823,-229 45.5497,-229 38.2303,-229"/>
-<polygon fill="#191970" stroke="#191970" points="63.9025,-232.5001 73.9024,-229 63.9024,-225.5001 63.9025,-232.5001"/>
+<title>Node173&#45;&gt;Node181</title>
+<path fill="none" stroke="#191970" d="M104.1766,-200.5077C135.2335,-215.5873 177.5909,-236.154 206.0477,-249.9711"/>
+<polygon fill="#191970" stroke="#191970" points="105.4534,-197.2369 94.9289,-196.0175 102.3958,-203.5339 105.4534,-197.2369"/>
 </g>
-<!-- Node116&#45;&gt;Node114 -->
-<g id="edge11" class="edge">
-<title>Node116&#45;&gt;Node114</title>
-<path fill="none" stroke="#191970" d="M218.8378,-229C210.1593,-229 201.4581,-229 193.107,-229"/>
-<polygon fill="#191970" stroke="#191970" points="218.9929,-232.5001 228.9928,-229 218.9928,-225.5001 218.9929,-232.5001"/>
-</g>
-<!-- Node117&#45;&gt;Node112 -->
-<g id="edge13" class="edge">
-<title>Node117&#45;&gt;Node112</title>
-<path fill="none" stroke="#191970" d="M844.3259,-348.4507C805.1495,-320.9789 724.1826,-264.2021 685.495,-237.0731"/>
-<polygon fill="#191970" stroke="#191970" points="842.7019,-351.5867 852.899,-354.4625 846.7209,-345.8554 842.7019,-351.5867"/>
-</g>
-<!-- Node119 -->
+<!-- Node186 -->
 <g id="node14" class="node">
-<title>Node119</title>
-<g id="a_node14"><a xlink:href="classtrim_al_manager.html#a69082911b30a1bd12395bb235bc18a34" target="_top" xlink:title="Method to trim the alignment using automatic or semi&#45;automatic methods:">
-<polygon fill="#ffffff" stroke="#000000" points="780,-114.5 780,-133.5 953,-133.5 953,-114.5 780,-114.5"/>
-<text text-anchor="middle" x="866.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::CleanResiduesAuto</text>
+<title>Node186</title>
+<g id="a_node14"><a xlink:href="class_cleaner.html#a4718e31c0183b5a98751d77479faacf0" target="_top" xlink:title="Method to trim an alignment based on the similarity and gaps distribution values. ...">
+<polygon fill="#ffffff" stroke="#000000" points="940.5,-267.5 940.5,-286.5 1020.5,-286.5 1020.5,-267.5 940.5,-267.5"/>
+<text text-anchor="middle" x="980.5" y="-274.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::clean</text>
 </a>
 </g>
 </g>
-<!-- Node118&#45;&gt;Node119 -->
-<g id="edge15" class="edge">
-<title>Node118&#45;&gt;Node119</title>
-<path fill="none" stroke="#191970" d="M1013.7947,-188.1224C1005.3767,-186.03 996.9247,-183.6569 989,-181 950.0796,-167.9511 907.1264,-146.1064 883.8415,-133.5891"/>
-<polygon fill="#191970" stroke="#191970" points="1013.0902,-191.5523 1023.6275,-190.4501 1014.7027,-184.7406 1013.0902,-191.5523"/>
-</g>
-<!-- Node119&#45;&gt;Node113 -->
-<g id="edge16" class="edge">
-<title>Node119&#45;&gt;Node113</title>
-<path fill="none" stroke="#191970" d="M804.7455,-135.4596C729.7975,-149.3675 604.5956,-172.6008 533.0526,-185.8768"/>
-<polygon fill="#191970" stroke="#191970" points="805.7831,-138.8269 814.9766,-133.561 804.5058,-131.9444 805.7831,-138.8269"/>
-</g>
-<!-- Node121 -->
-<g id="node16" class="node">
-<title>Node121</title>
-<g id="a_node16"><a xlink:href="classtrim_al_manager.html#afc48b86f5ae35b9a5e721b65c58bf610" target="_top" xlink:title="Method to print statistics requested.">
-<polygon fill="#ffffff" stroke="#000000" points="814.5,-550 814.5,-580 918.5,-580 918.5,-550 814.5,-550"/>
-<text text-anchor="start" x="822.5" y="-568" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::print</text>
-<text text-anchor="middle" x="866.5" y="-557" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_statistics</text>
-</a>
-</g>
-</g>
-<!-- Node120&#45;&gt;Node121 -->
-<g id="edge18" class="edge">
-<title>Node120&#45;&gt;Node121</title>
-<path fill="none" stroke="#191970" d="M996.935,-565C970.7278,-565 942.343,-565 918.7653,-565"/>
-<polygon fill="#191970" stroke="#191970" points="997.2401,-568.5001 1007.2401,-565 997.24,-561.5001 997.2401,-568.5001"/>
-</g>
-<!-- Node121&#45;&gt;Node114 -->
-<g id="edge19" class="edge">
-<title>Node121&#45;&gt;Node114</title>
-<path fill="none" stroke="#191970" d="M824.192,-545.6064C686.6203,-482.5449 255.0499,-284.7173 154.5592,-238.6533"/>
-<polygon fill="#191970" stroke="#191970" points="823.0316,-548.9247 833.5805,-549.91 825.9485,-542.5613 823.0316,-548.9247"/>
-</g>
-<!-- Node122&#45;&gt;Node121 -->
-<g id="edge21" class="edge">
-<title>Node122&#45;&gt;Node121</title>
-<path fill="none" stroke="#191970" d="M997.2828,-602.1894C970.9791,-594.7097 942.4474,-586.5964 918.7653,-579.8622"/>
-<polygon fill="#191970" stroke="#191970" points="996.664,-605.6522 1007.2401,-605.0209 998.5787,-598.9191 996.664,-605.6522"/>
-</g>
-<!-- Node123&#45;&gt;Node114 -->
-<g id="edge23" class="edge">
-<title>Node123&#45;&gt;Node114</title>
-<path fill="none" stroke="#191970" d="M417.5308,-264.4097C366.8816,-261.7664 293.0215,-256.7739 229,-248 211.4143,-245.59 192.1886,-241.9606 175.6266,-238.5175"/>
-<polygon fill="#191970" stroke="#191970" points="417.4933,-267.9122 427.6577,-264.923 417.8477,-260.9212 417.4933,-267.9122"/>
-</g>
-<!-- Node123&#45;&gt;Node116 -->
-<g id="edge24" class="edge">
-<title>Node123&#45;&gt;Node116</title>
-<path fill="none" stroke="#191970" d="M417.6902,-253.9816C394.0092,-248.9118 367.3727,-243.2094 345.5339,-238.534"/>
-<polygon fill="#191970" stroke="#191970" points="417.1245,-257.4397 427.6356,-256.1107 418.5899,-250.5948 417.1245,-257.4397"/>
-</g>
-<!-- Node124&#45;&gt;Node110 -->
-<g id="edge26" class="edge">
-<title>Node124&#45;&gt;Node110</title>
-<path fill="none" stroke="#191970" d="M1379.2521,-454.0085C1366.3956,-456.9252 1352.7945,-460.0108 1339.7822,-462.9628"/>
-<polygon fill="#191970" stroke="#191970" points="1380.3999,-457.3371 1389.3777,-451.7113 1378.8512,-450.5106 1380.3999,-457.3371"/>
-</g>
-<!-- Node125 -->
-<g id="node20" class="node">
-<title>Node125</title>
-<g id="a_node20"><a xlink:href="classstatistics_1_1_similarity.html#a1b65c85328f09fa0637365d11fb386b4" target="_top" xlink:title="This methods returns a pointer to conservationWindow&#39;s vector.">
-<polygon fill="#ffffff" stroke="#000000" points="1209,-267 1209,-297 1338,-297 1338,-267 1209,-267"/>
-<text text-anchor="start" x="1217" y="-285" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Similarity</text>
-<text text-anchor="middle" x="1273.5" y="-274" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::getMdkWindowedVector</text>
-</a>
-</g>
-</g>
-<!-- Node124&#45;&gt;Node125 -->
-<g id="edge27" class="edge">
-<title>Node124&#45;&gt;Node125</title>
-<path fill="none" stroke="#191970" d="M1417.6488,-417.9732C1383.1925,-385.4712 1319.5966,-325.4821 1289.7581,-297.336"/>
-<polygon fill="#191970" stroke="#191970" points="1415.2634,-420.5345 1424.9394,-424.8503 1420.0667,-415.4425 1415.2634,-420.5345"/>
-</g>
-<!-- Node125&#45;&gt;Node107 -->
-<g id="edge28" class="edge">
-<title>Node125&#45;&gt;Node107</title>
-<path fill="none" stroke="#191970" d="M1250.3185,-304.149C1229.003,-324.1605 1196.2182,-354.0582 1166,-378 1141.0031,-397.805 1110.1786,-418.6472 1092.2893,-430.4154"/>
-<polygon fill="#191970" stroke="#191970" points="1252.7555,-306.6617 1257.6266,-297.253 1247.9514,-301.5704 1252.7555,-306.6617"/>
-</g>
-<!-- Node125&#45;&gt;Node108 -->
-<g id="edge29" class="edge">
-<title>Node125&#45;&gt;Node108</title>
-<path fill="none" stroke="#191970" d="M1255.5577,-258.9795C1236.0698,-235.6321 1202.7637,-200.2732 1166,-181 1158.6234,-177.1329 1150.5079,-174.0526 1142.2757,-171.5991"/>
-<polygon fill="#191970" stroke="#191970" points="1253.0581,-261.4522 1262.0931,-266.9857 1258.4808,-257.0257 1253.0581,-261.4522"/>
-</g>
-<!-- Node125&#45;&gt;Node111 -->
-<g id="edge30" class="edge">
-<title>Node125&#45;&gt;Node111</title>
-<path fill="none" stroke="#191970" d="M1206.8602,-264.7405C1193.4219,-261.9352 1179.329,-259.4698 1166,-258 1087.1813,-249.3086 995.9864,-251.6819 935.1303,-255.0216"/>
-<polygon fill="#191970" stroke="#191970" points="1206.4702,-268.2374 1216.9854,-266.9411 1207.9569,-261.3971 1206.4702,-268.2374"/>
-</g>
-<!-- Node125&#45;&gt;Node117 -->
-<g id="edge31" class="edge">
-<title>Node125&#45;&gt;Node117</title>
-<path fill="none" stroke="#191970" d="M1200.694,-299.351C1189.1059,-301.9916 1177.2373,-304.625 1166,-307 1073.5622,-326.5365 964.4211,-346.541 906.8113,-356.8626"/>
-<polygon fill="#191970" stroke="#191970" points="1201.8192,-302.6838 1210.7824,-297.035 1200.2528,-295.8613 1201.8192,-302.6838"/>
-</g>
-<!-- Node125&#45;&gt;Node118 -->
-<g id="edge32" class="edge">
-<title>Node125&#45;&gt;Node118</title>
-<path fill="none" stroke="#191970" d="M1240.7592,-261.7758C1219.9371,-249.5667 1192.0777,-234.4096 1166,-224 1151.5106,-218.2162 1135.1454,-213.3435 1120.4638,-209.532"/>
-<polygon fill="#191970" stroke="#191970" points="1239.1275,-264.8775 1249.5122,-266.9773 1242.7036,-258.8598 1239.1275,-264.8775"/>
-</g>
-<!-- Node126 -->
-<g id="node21" class="node">
-<title>Node126</title>
-<g id="a_node21"><a xlink:href="classstatistics_1_1_similarity.html#a26f430acb8a3240977665de9a9ea875a" target="_top" xlink:title="Computes and selects the cut point values based on similarity&#39;s values.">
-<polygon fill="#ffffff" stroke="#000000" points="1026,-267 1026,-297 1129,-297 1129,-267 1026,-267"/>
-<text text-anchor="start" x="1034" y="-285" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Similarity</text>
-<text text-anchor="middle" x="1077.5" y="-274" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::calcCutPoint</text>
-</a>
-</g>
-</g>
-<!-- Node125&#45;&gt;Node126 -->
-<g id="edge33" class="edge">
-<title>Node125&#45;&gt;Node126</title>
-<path fill="none" stroke="#191970" d="M1198.6182,-282C1175.4183,-282 1150.3852,-282 1129.1328,-282"/>
-<polygon fill="#191970" stroke="#191970" points="1198.7791,-285.5001 1208.7791,-282 1198.779,-278.5001 1198.7791,-285.5001"/>
-</g>
-<!-- Node126&#45;&gt;Node111 -->
-<g id="edge34" class="edge">
-<title>Node126&#45;&gt;Node111</title>
-<path fill="none" stroke="#191970" d="M1015.6849,-275.5548C990.4035,-272.9188 961.0572,-269.859 935.115,-267.1542"/>
-<polygon fill="#191970" stroke="#191970" points="1015.5745,-279.0622 1025.8836,-276.6182 1016.3005,-272.0999 1015.5745,-279.0622"/>
-</g>
-<!-- Node126&#45;&gt;Node117 -->
-<g id="edge35" class="edge">
-<title>Node126&#45;&gt;Node117</title>
-<path fill="none" stroke="#191970" d="M1029.3604,-300.7083C986.2849,-317.4485 924.879,-341.3124 891.1109,-354.4356"/>
-<polygon fill="#191970" stroke="#191970" points="1030.7463,-303.9248 1038.7993,-297.0401 1028.2106,-297.4001 1030.7463,-303.9248"/>
-</g>
-<!-- Node127&#45;&gt;Node119 -->
-<g id="edge38" class="edge">
-<title>Node127&#45;&gt;Node119</title>
-<path fill="none" stroke="#191970" d="M1370.65,-86.5238C1281.6041,-87.7454 1123.5867,-91.7758 989,-105 966.0822,-107.2519 940.9218,-110.9406 919.3971,-114.4716"/>
-<polygon fill="#191970" stroke="#191970" points="1370.943,-90.0204 1380.8969,-86.3915 1370.8526,-83.0209 1370.943,-90.0204"/>
-</g>
-<!-- Node128&#45;&gt;Node112 -->
-<g id="edge42" class="edge">
-<title>Node128&#45;&gt;Node112</title>
-<path fill="none" stroke="#191970" d="M1022.0593,-135.6625C1011.0914,-138.0374 999.6728,-140.5576 989,-143 896.1703,-164.2431 788.8986,-190.6901 723.7859,-206.9553"/>
-<polygon fill="#191970" stroke="#191970" points="1022.9314,-139.055 1031.9708,-133.5288 1021.4581,-132.2118 1022.9314,-139.055"/>
-</g>
-<!-- Node128&#45;&gt;Node119 -->
+<!-- Node173&#45;&gt;Node186 -->
 <g id="edge41" class="edge">
-<title>Node128&#45;&gt;Node119</title>
-<path fill="none" stroke="#191970" d="M1015.6292,-124C996.1404,-124 974.2404,-124 953.3483,-124"/>
-<polygon fill="#191970" stroke="#191970" points="1015.8836,-127.5001 1025.8836,-124 1015.8836,-120.5001 1015.8836,-127.5001"/>
+<title>Node173&#45;&gt;Node186</title>
+<path fill="none" stroke="#191970" d="M138.593,-181C336.1688,-181 858,-181 858,-181 861.2725,-182.1295 937.8571,-243.0101 968.2414,-267.2224"/>
+<polygon fill="#191970" stroke="#191970" points="138.3038,-177.5001 128.3038,-181 138.3038,-184.5001 138.3038,-177.5001"/>
 </g>
-<!-- Node129&#45;&gt;Node119 -->
+<!-- Node187 -->
+<g id="node15" class="node">
+<title>Node187</title>
+<g id="a_node15"><a xlink:href="class_cleaner.html#a6727a235afa29f08a50716f28fa5c8fc" target="_top" xlink:title="Method to clean an alignment. It carries out strict and strictplus. The method: ">
+<polygon fill="#ffffff" stroke="#000000" points="698,-190.5 698,-209.5 841,-209.5 841,-190.5 698,-190.5"/>
+<text text-anchor="middle" x="769.5" y="-197.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::cleanCombMethods</text>
+</a>
+</g>
+</g>
+<!-- Node173&#45;&gt;Node187 -->
 <g id="edge44" class="edge">
-<title>Node129&#45;&gt;Node119</title>
-<path fill="none" stroke="#191970" d="M1027.5496,-60.2663C1014.8705,-63.7288 1001.3458,-67.7281 989,-72 952.1006,-84.7681 910.5337,-103.3402 886.5428,-114.4888"/>
-<polygon fill="#191970" stroke="#191970" points="1028.7397,-63.5712 1037.4981,-57.6096 1026.9337,-56.8082 1028.7397,-63.5712"/>
+<title>Node173&#45;&gt;Node187</title>
+<path fill="none" stroke="#191970" d="M109.8797,-162.4591C126.6223,-156.6069 145.8933,-150.9104 164,-148 377.2908,-113.7163 636.7305,-167.5369 732.0593,-190.4602"/>
+<polygon fill="#191970" stroke="#191970" points="108.559,-159.2148 100.342,-165.903 110.9363,-165.7987 108.559,-159.2148"/>
 </g>
-<!-- Node130 -->
+<!-- Node194 -->
+<g id="node22" class="node">
+<title>Node194</title>
+<g id="a_node22"><a xlink:href="class_alignment.html#a724218d5e7d168974d9abcafcde632a1" target="_top" xlink:title="Alignment::statSVG">
+<polygon fill="#ffffff" stroke="#000000" points="717.5,-626.5 717.5,-645.5 821.5,-645.5 821.5,-626.5 717.5,-626.5"/>
+<text text-anchor="middle" x="769.5" y="-633.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Alignment::statSVG</text>
+</a>
+</g>
+</g>
+<!-- Node173&#45;&gt;Node194 -->
+<g id="edge56" class="edge">
+<title>Node173&#45;&gt;Node194</title>
+<path fill="none" stroke="#191970" d="M68.3053,-206.1521C77.7277,-254.4719 104.2897,-361.3819 164,-428 312.7451,-593.9532 599.913,-627.545 717.436,-634.3102"/>
+<polygon fill="#191970" stroke="#191970" points="71.7301,-205.4249 66.4547,-196.2369 64.849,-206.7094 71.7301,-205.4249"/>
+</g>
+<!-- Node197 -->
 <g id="node25" class="node">
-<title>Node130</title>
-<g id="a_node25"><a xlink:href="classtrim_al_manager.html#a10536f715945a1a45f1df33f7cedc81e" target="_top" xlink:title="Method to trim or reduce the number of sequences in an alignment. It performs one or none of the foll...">
-<polygon fill="#ffffff" stroke="#000000" points="584,-106.5 584,-125.5 744,-125.5 744,-106.5 584,-106.5"/>
-<text text-anchor="middle" x="664" y="-113.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::CleanSequences</text>
+<title>Node197</title>
+<g id="a_node25"><a xlink:href="class_cleaner.html#aa57106470d2104a925b9396b8a9f33b3" target="_top" xlink:title="Method that carries the gappyout approach. This methods calculates the slope in gaps distribution on ...">
+<polygon fill="#ffffff" stroke="#000000" points="346,-76.5 346,-95.5 466,-95.5 466,-76.5 346,-76.5"/>
+<text text-anchor="middle" x="406" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::clean2ndSlope</text>
 </a>
 </g>
 </g>
-<!-- Node129&#45;&gt;Node130 -->
+<!-- Node173&#45;&gt;Node197 -->
+<g id="edge42" class="edge">
+<title>Node173&#45;&gt;Node197</title>
+<path fill="none" stroke="#191970" d="M87.3476,-159.0168C106.4058,-142.4942 134.8611,-120.9057 164,-110 223.1143,-87.8755 295.7161,-83.4068 345.8922,-83.5178"/>
+<polygon fill="#191970" stroke="#191970" points="84.9303,-156.4827 79.7806,-165.7418 89.5804,-161.715 84.9303,-156.4827"/>
+</g>
+<!-- Node198 -->
+<g id="node26" class="node">
+<title>Node198</title>
+<g id="a_node26"><a xlink:href="class_cleaner.html#af7c9e1a177424168fa4214aca9ebd8e2" target="_top" xlink:title="Method to trim an alignment based on the gap distribution values. Column blocks that don&#39;t have a min...">
+<polygon fill="#ffffff" stroke="#000000" points="718,-114.5 718,-133.5 821,-133.5 821,-114.5 718,-114.5"/>
+<text text-anchor="middle" x="769.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::cleanGaps</text>
+</a>
+</g>
+</g>
+<!-- Node173&#45;&gt;Node198 -->
 <g id="edge45" class="edge">
-<title>Node129&#45;&gt;Node130</title>
-<path fill="none" stroke="#191970" d="M1009.5727,-59.1706C929.3827,-72.3579 797.4043,-94.0617 721.8716,-106.483"/>
-<polygon fill="#191970" stroke="#191970" points="1010.2697,-62.6031 1019.5692,-57.5267 1009.1338,-55.6959 1010.2697,-62.6031"/>
+<title>Node173&#45;&gt;Node198</title>
+<path fill="none" stroke="#191970" d="M138.1993,-175.0052C281.6778,-163.413 593.8919,-138.188 717.555,-128.1968"/>
+<polygon fill="#191970" stroke="#191970" points="137.851,-171.5218 128.1654,-175.8158 138.4148,-178.4991 137.851,-171.5218"/>
 </g>
-<!-- Node130&#45;&gt;Node113 -->
-<g id="edge46" class="edge">
-<title>Node130&#45;&gt;Node113</title>
-<path fill="none" stroke="#191970" d="M636.4102,-130.0148C613.1201,-141.6187 578.7495,-158.2154 548,-171 539.8302,-174.3967 531.0155,-177.7786 522.497,-180.9068"/>
-<polygon fill="#191970" stroke="#191970" points="637.9953,-133.1354 645.3673,-125.5259 634.859,-126.8773 637.9953,-133.1354"/>
-</g>
-<!-- Node132 -->
+<!-- Node199 -->
 <g id="node27" class="node">
-<title>Node132</title>
-<g id="a_node27"><a xlink:href="classtrim_al_manager.html#a8ed19b851162fa24a1da66f7e54099e3" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="409,-132 409,-162 548,-162 548,-132 409,-132"/>
-<text text-anchor="start" x="417" y="-150" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::postprocess</text>
-<text text-anchor="middle" x="478.5" y="-139" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_alignment</text>
+<title>Node199</title>
+<g id="a_node27"><a xlink:href="class_cleaner.html#a3af7bde2142886d6d723c95694b7b9ba" target="_top" xlink:title="Method to remove columns composed only by gaps This method is specially useful when we remove missali...">
+<polygon fill="#ffffff" stroke="#000000" points="706,-38.5 706,-57.5 833,-57.5 833,-38.5 706,-38.5"/>
+<text text-anchor="middle" x="769.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::cleanNoAllGaps</text>
 </a>
 </g>
 </g>
-<!-- Node131&#45;&gt;Node132 -->
+<!-- Node173&#45;&gt;Node199 -->
 <g id="edge48" class="edge">
-<title>Node131&#45;&gt;Node132</title>
-<path fill="none" stroke="#191970" d="M1526.5709,-10C1458.478,-10 1359.7687,-10 1273.5,-10 1273.5,-10 1273.5,-10 866.5,-10 721.4831,-10 562.4797,-96.1455 502.8581,-131.8152"/>
-<polygon fill="#191970" stroke="#191970" points="1526.8096,-13.5001 1536.8096,-10 1526.8096,-6.5001 1526.8096,-13.5001"/>
+<title>Node173&#45;&gt;Node199</title>
+<path fill="none" stroke="#191970" d="M79.6131,-157.6107C97.0477,-133.6843 127.6445,-97.7211 164,-81 258.9287,-37.339 570.6889,-41.546 705.9483,-45.6386"/>
+<polygon fill="#191970" stroke="#191970" points="76.7206,-155.6391 73.799,-165.8231 82.4338,-159.6838 76.7206,-155.6391"/>
 </g>
-<!-- Node132&#45;&gt;Node114 -->
+<!-- Node201 -->
+<g id="node29" class="node">
+<title>Node201</title>
+<g id="a_node29"><a xlink:href="class_cleaner.html#ab7f5b746b97697181f4cd06063cbb49a" target="_top" xlink:title="Method to detect right and left borders. Borders are the first column found with no gaps...">
+<polygon fill="#ffffff" stroke="#000000" points="164,-.5 164,-19.5 310,-19.5 310,-.5 164,-.5"/>
+<text text-anchor="middle" x="237" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::removeOnlyTerminal</text>
+</a>
+</g>
+</g>
+<!-- Node173&#45;&gt;Node201 -->
+<g id="edge52" class="edge">
+<title>Node173&#45;&gt;Node201</title>
+<path fill="none" stroke="#191970" d="M74.5289,-156.3767C89.6797,-123.7854 120.653,-66.6482 164,-34 172.3121,-27.7395 182.3359,-23.066 192.2567,-19.5935"/>
+<polygon fill="#191970" stroke="#191970" points="71.2675,-155.0948 70.3388,-165.6489 77.6464,-157.9775 71.2675,-155.0948"/>
+</g>
+<!-- Node175 -->
+<g id="node3" class="node">
+<title>Node175</title>
+<g id="a_node3"><a xlink:href="classtrim_al_manager.html#a1da8f8b677f19ed8f7e08a663d97bb92" target="_top" xlink:title="trimAlManager::output\l_reports">
+<polygon fill="#ffffff" stroke="#000000" points="1126.5,-449 1126.5,-479 1239.5,-479 1239.5,-449 1126.5,-449"/>
+<text text-anchor="start" x="1134.5" y="-467" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::output</text>
+<text text-anchor="middle" x="1183" y="-456" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_reports</text>
+</a>
+</g>
+</g>
+<!-- Node174&#45;&gt;Node175 -->
+<g id="edge2" class="edge">
+<title>Node174&#45;&gt;Node175</title>
+<path fill="none" stroke="#191970" d="M826.0307,-586.2678C836.6712,-583.9451 847.691,-581.4617 858,-579 951.4248,-556.691 977.3564,-558.4949 1067,-524 1099.5876,-511.4603 1134.946,-492.2948 1157.9489,-479.013"/>
+<polygon fill="#191970" stroke="#191970" points="825.0157,-582.9063 815.9807,-588.4397 826.4944,-589.7484 825.0157,-582.9063"/>
+</g>
+<!-- Node176 -->
+<g id="node4" class="node">
+<title>Node176</title>
+<g id="a_node4"><a xlink:href="classtrim_al_manager.html#a7c641a1feff33d401b4ea5c82e989289" target="_top" xlink:title="trimAlManager::innerPerform">
+<polygon fill="#ffffff" stroke="#000000" points="1475.5,-311.5 1475.5,-330.5 1616.5,-330.5 1616.5,-311.5 1475.5,-311.5"/>
+<text text-anchor="middle" x="1546" y="-318.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::innerPerform</text>
+</a>
+</g>
+</g>
+<!-- Node175&#45;&gt;Node176 -->
+<g id="edge3" class="edge">
+<title>Node175&#45;&gt;Node176</title>
+<path fill="none" stroke="#191970" d="M1209.199,-442.6192C1231.7719,-425.1526 1265.8626,-400.9834 1299,-386 1360.8176,-358.0487 1436.9705,-340.2904 1488.2428,-330.5253"/>
+<polygon fill="#191970" stroke="#191970" points="1206.8391,-440.0222 1201.1376,-448.9521 1211.1634,-445.5268 1206.8391,-440.0222"/>
+</g>
+<!-- Node179 -->
+<g id="node7" class="node">
+<title>Node179</title>
+<g id="a_node7"><a xlink:href="classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" target="_top" xlink:title="trimAlManager::perform_VCF">
+<polygon fill="#ffffff" stroke="#000000" points="1474,-368.5 1474,-387.5 1618,-387.5 1618,-368.5 1474,-368.5"/>
+<text text-anchor="middle" x="1546" y="-375.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform_VCF</text>
+</a>
+</g>
+</g>
+<!-- Node175&#45;&gt;Node179 -->
+<g id="edge6" class="edge">
+<title>Node175&#45;&gt;Node179</title>
+<path fill="none" stroke="#191970" d="M1224.1045,-444.6662C1245.9352,-435.089 1273.4662,-424.0881 1299,-417 1356.7272,-400.9751 1423.9926,-390.8941 1473.738,-385.0054"/>
+<polygon fill="#191970" stroke="#191970" points="1222.5216,-441.5397 1214.8122,-448.8072 1225.371,-447.9336 1222.5216,-441.5397"/>
+</g>
+<!-- Node177 -->
+<g id="node5" class="node">
+<title>Node177</title>
+<g id="a_node5"><a xlink:href="classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" target="_top" xlink:title="Method to perform the analysis if all checks have passed. ">
+<polygon fill="#ffffff" stroke="#000000" points="1654,-311.5 1654,-330.5 1773,-330.5 1773,-311.5 1654,-311.5"/>
+<text text-anchor="middle" x="1713.5" y="-318.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform</text>
+</a>
+</g>
+</g>
+<!-- Node176&#45;&gt;Node177 -->
+<g id="edge4" class="edge">
+<title>Node176&#45;&gt;Node177</title>
+<path fill="none" stroke="#191970" d="M1626.8102,-321C1635.9363,-321 1645.1089,-321 1653.8939,-321"/>
+<polygon fill="#191970" stroke="#191970" points="1626.5497,-317.5001 1616.5496,-321 1626.5496,-324.5001 1626.5497,-317.5001"/>
+</g>
+<!-- Node178 -->
+<g id="node6" class="node">
+<title>Node178</title>
+<g id="a_node6"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
+<polygon fill="#ffffff" stroke="#000000" points="1809,-311.5 1809,-330.5 1847,-330.5 1847,-311.5 1809,-311.5"/>
+<text text-anchor="middle" x="1828" y="-318.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
+</a>
+</g>
+</g>
+<!-- Node177&#45;&gt;Node178 -->
+<g id="edge5" class="edge">
+<title>Node177&#45;&gt;Node178</title>
+<path fill="none" stroke="#191970" d="M1783.3198,-321C1792.6177,-321 1801.4503,-321 1808.7697,-321"/>
+<polygon fill="#191970" stroke="#191970" points="1783.0976,-317.5001 1773.0976,-321 1783.0975,-324.5001 1783.0976,-317.5001"/>
+</g>
+<!-- Node180&#45;&gt;Node175 -->
+<g id="edge8" class="edge">
+<title>Node180&#45;&gt;Node175</title>
+<path fill="none" stroke="#191970" d="M820.6893,-548.1157C898.36,-530.0833 1045.4688,-495.9299 1126.2905,-477.1659"/>
+<polygon fill="#191970" stroke="#191970" points="819.6091,-544.7733 810.6597,-550.4442 821.1922,-551.5919 819.6091,-544.7733"/>
+</g>
+<!-- Node182 -->
+<g id="node10" class="node">
+<title>Node182</title>
+<g id="a_node10"><a xlink:href="classstatistics_1_1_manager.html#a92505ca5aedc5b45c4300a0e8a7d1e17" target="_top" xlink:title="Method to handle similarity stat calculation It checks if the similarity submodule has been created...">
+<polygon fill="#ffffff" stroke="#000000" points="502,-272 502,-302 645,-302 645,-272 502,-272"/>
+<text text-anchor="start" x="510" y="-290" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Manager</text>
+<text text-anchor="middle" x="573.5" y="-279" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::calculateConservationStats</text>
+</a>
+</g>
+</g>
+<!-- Node181&#45;&gt;Node182 -->
+<g id="edge10" class="edge">
+<title>Node181&#45;&gt;Node182</title>
+<path fill="none" stroke="#191970" d="M298.8619,-269.0445C356.2413,-272.7959 441.6131,-278.3774 501.9142,-282.3198"/>
+<polygon fill="#191970" stroke="#191970" points="299.0477,-265.5492 288.8407,-268.3893 298.591,-272.5343 299.0477,-265.5492"/>
+</g>
+<!-- Node192 -->
+<g id="node20" class="node">
+<title>Node192</title>
+<g id="a_node20"><a xlink:href="classstatistics_1_1_similarity.html#adcb5627b9704850e85433fc40c19db17" target="_top" xlink:title="Allows us compute the conservationWindow&#39;s values. ">
+<polygon fill="#ffffff" stroke="#000000" points="354.5,-294 354.5,-324 457.5,-324 457.5,-294 354.5,-294"/>
+<text text-anchor="start" x="362.5" y="-312" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Similarity</text>
+<text text-anchor="middle" x="406" y="-301" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::applyWindow</text>
+</a>
+</g>
+</g>
+<!-- Node181&#45;&gt;Node192 -->
+<g id="edge26" class="edge">
+<title>Node181&#45;&gt;Node192</title>
+<path fill="none" stroke="#191970" d="M298.3604,-280.9755C316.7449,-285.762 336.7128,-290.9607 354.4013,-295.566"/>
+<polygon fill="#191970" stroke="#191970" points="299.1831,-277.5731 288.6239,-278.4405 297.4194,-284.3473 299.1831,-277.5731"/>
+</g>
+<!-- Node183 -->
+<g id="node11" class="node">
+<title>Node183</title>
+<g id="a_node11"><a xlink:href="class_cleaner.html#a9cdbd6ebf78a284dd065b31319795b0c" target="_top" xlink:title="Method to trim an alignment based on the similarity distribution values. ">
+<polygon fill="#ffffff" stroke="#000000" points="912,-394.5 912,-413.5 1049,-413.5 1049,-394.5 912,-394.5"/>
+<text text-anchor="middle" x="980.5" y="-401.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Cleaner::cleanConservation</text>
+</a>
+</g>
+</g>
+<!-- Node182&#45;&gt;Node183 -->
+<g id="edge11" class="edge">
+<title>Node182&#45;&gt;Node183</title>
+<path fill="none" stroke="#191970" d="M593.1457,-310.054C612.9245,-331.4925 645.5177,-362.2709 681,-377 755.4969,-407.9244 849.1609,-411.3563 911.7227,-409.2164"/>
+<polygon fill="#191970" stroke="#191970" points="595.5034,-307.4416 586.2134,-302.3478 590.2992,-312.1231 595.5034,-307.4416"/>
+</g>
+<!-- Node182&#45;&gt;Node186 -->
+<g id="edge16" class="edge">
+<title>Node182&#45;&gt;Node186</title>
+<path fill="none" stroke="#191970" d="M626.6892,-269.0729C643.8213,-264.1344 663.0266,-259.4609 681,-257 758.9395,-246.3286 779.5907,-250.6413 858,-257 885.7072,-259.2469 916.5961,-264.3078 940.4247,-268.7762"/>
+<polygon fill="#191970" stroke="#191970" points="625.4526,-265.7891 616.8666,-271.9965 627.4496,-272.4983 625.4526,-265.7891"/>
+</g>
+<!-- Node182&#45;&gt;Node187 -->
+<g id="edge18" class="edge">
+<title>Node182&#45;&gt;Node187</title>
+<path fill="none" stroke="#191970" d="M603.7051,-266.3641C624.6505,-252.8018 653.5995,-235.5027 681,-224 694.9447,-218.1461 710.7271,-213.3318 725.0631,-209.5917"/>
+<polygon fill="#191970" stroke="#191970" points="601.6833,-263.5046 595.2464,-271.9199 605.5262,-269.3554 601.6833,-263.5046"/>
+</g>
+<!-- Node189 -->
+<g id="node17" class="node">
+<title>Node189</title>
+<g id="a_node17"><a xlink:href="classstatistics_1_1_manager.html#a080c687f8f355900511485eeec32a659" target="_top" xlink:title="Wrapper to Statistics::Similarity::printConservationAcl() It calls to calculateConservationStats() to...">
+<polygon fill="#ffffff" stroke="#000000" points="699.5,-266.5 699.5,-307.5 839.5,-307.5 839.5,-266.5 699.5,-266.5"/>
+<text text-anchor="start" x="707.5" y="-295.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Manager</text>
+<text text-anchor="start" x="707.5" y="-284.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::printStatisticsConservation</text>
+<text text-anchor="middle" x="769.5" y="-273.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Columns</text>
+</a>
+</g>
+</g>
+<!-- Node182&#45;&gt;Node189 -->
+<g id="edge21" class="edge">
+<title>Node182&#45;&gt;Node189</title>
+<path fill="none" stroke="#191970" d="M655.1718,-287C669.8717,-287 685.0759,-287 699.4109,-287"/>
+<polygon fill="#191970" stroke="#191970" points="655.0925,-283.5001 645.0925,-287 655.0924,-290.5001 655.0925,-283.5001"/>
+</g>
+<!-- Node191 -->
+<g id="node19" class="node">
+<title>Node191</title>
+<g id="a_node19"><a xlink:href="classstatistics_1_1_manager.html#aa20cfb477826035386ea988e3706b09a" target="_top" xlink:title="Wrapper to Statistics::Similarity::printGapsTotal() It calls to calculateConservationStats() to make ...">
+<polygon fill="#ffffff" stroke="#000000" points="699.5,-326.5 699.5,-367.5 839.5,-367.5 839.5,-326.5 699.5,-326.5"/>
+<text text-anchor="start" x="707.5" y="-355.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Manager</text>
+<text text-anchor="start" x="707.5" y="-344.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::printStatisticsConservation</text>
+<text text-anchor="middle" x="769.5" y="-333.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">Total</text>
+</a>
+</g>
+</g>
+<!-- Node182&#45;&gt;Node191 -->
+<g id="edge24" class="edge">
+<title>Node182&#45;&gt;Node191</title>
+<path fill="none" stroke="#191970" d="M632.2929,-304.9978C654.4007,-311.7655 679.696,-319.509 702.4961,-326.4886"/>
+<polygon fill="#191970" stroke="#191970" points="633.2926,-301.6436 622.7061,-302.0631 631.2436,-308.337 633.2926,-301.6436"/>
+</g>
+<!-- Node184 -->
+<g id="node12" class="node">
+<title>Node184</title>
+<g id="a_node12"><a xlink:href="classtrim_al_manager.html#aebfd21b0435302f0e4fc45a068d1b6ee" target="_top" xlink:title="Method to trim the alignment using non automatic methods: ">
+<polygon fill="#ffffff" stroke="#000000" points="1107,-262 1107,-292 1259,-292 1259,-262 1107,-262"/>
+<text text-anchor="start" x="1115" y="-280" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::CleanResidues</text>
+<text text-anchor="middle" x="1183" y="-269" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">NonAuto</text>
+</a>
+</g>
+</g>
+<!-- Node183&#45;&gt;Node184 -->
+<g id="edge12" class="edge">
+<title>Node183&#45;&gt;Node184</title>
+<path fill="none" stroke="#191970" d="M1004.3112,-389.0666C1043.2299,-364.6583 1120.0318,-316.4912 1159.0441,-292.0242"/>
+<polygon fill="#191970" stroke="#191970" points="1002.3326,-386.1761 995.7204,-394.4544 1006.0518,-392.1063 1002.3326,-386.1761"/>
+</g>
+<!-- Node185 -->
+<g id="node13" class="node">
+<title>Node185</title>
+<g id="a_node13"><a xlink:href="classtrim_al_manager.html#adc529dd893ed4e9df6f3ddbd58776068" target="_top" xlink:title="Core Method of the program. This is where almost all cleaning methods are called from. ">
+<polygon fill="#ffffff" stroke="#000000" points="1314,-262 1314,-292 1423,-292 1423,-262 1314,-262"/>
+<text text-anchor="start" x="1322" y="-280" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::clean</text>
+<text text-anchor="middle" x="1368.5" y="-269" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_alignment</text>
+</a>
+</g>
+</g>
+<!-- Node184&#45;&gt;Node185 -->
+<g id="edge13" class="edge">
+<title>Node184&#45;&gt;Node185</title>
+<path fill="none" stroke="#191970" d="M1269.6131,-277C1284.6558,-277 1299.9147,-277 1313.7978,-277"/>
+<polygon fill="#191970" stroke="#191970" points="1269.253,-273.5001 1259.253,-277 1269.253,-280.5001 1269.253,-273.5001"/>
+</g>
+<!-- Node185&#45;&gt;Node176 -->
+<g id="edge14" class="edge">
+<title>Node185&#45;&gt;Node176</title>
+<path fill="none" stroke="#191970" d="M1432.9897,-292.9862C1457.9829,-299.1817 1485.7566,-306.0664 1507.5159,-311.4603"/>
+<polygon fill="#191970" stroke="#191970" points="1433.7526,-289.5694 1423.2042,-290.5605 1432.0683,-296.3638 1433.7526,-289.5694"/>
+</g>
+<!-- Node185&#45;&gt;Node179 -->
+<g id="edge15" class="edge">
+<title>Node185&#45;&gt;Node179</title>
+<path fill="none" stroke="#191970" d="M1401.7177,-297.4468C1422.361,-310.0008 1449.5373,-326.2531 1474,-340 1491.8667,-350.0402 1512.5925,-360.8978 1527.2067,-368.4257"/>
+<polygon fill="#191970" stroke="#191970" points="1403.3721,-294.3563 1393.0124,-292.1366 1399.7268,-300.3322 1403.3721,-294.3563"/>
+</g>
+<!-- Node186&#45;&gt;Node184 -->
+<g id="edge17" class="edge">
+<title>Node186&#45;&gt;Node184</title>
+<path fill="none" stroke="#191970" d="M1030.6718,-277C1053.5718,-277 1081.1948,-277 1106.5945,-277"/>
+<polygon fill="#191970" stroke="#191970" points="1030.5075,-273.5001 1020.5075,-277 1030.5074,-280.5001 1030.5075,-273.5001"/>
+</g>
+<!-- Node188 -->
+<g id="node16" class="node">
+<title>Node188</title>
+<g id="a_node16"><a xlink:href="classtrim_al_manager.html#a69082911b30a1bd12395bb235bc18a34" target="_top" xlink:title="Method to trim the alignment using automatic or semi&#45;automatic methods: ">
+<polygon fill="#ffffff" stroke="#000000" points="894,-114.5 894,-133.5 1067,-133.5 1067,-114.5 894,-114.5"/>
+<text text-anchor="middle" x="980.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::CleanResiduesAuto</text>
+</a>
+</g>
+</g>
+<!-- Node187&#45;&gt;Node188 -->
+<g id="edge19" class="edge">
+<title>Node187&#45;&gt;Node188</title>
+<path fill="none" stroke="#191970" d="M805.8278,-186.9151C847.9993,-171.7254 916.5388,-147.0381 953.9937,-133.5473"/>
+<polygon fill="#191970" stroke="#191970" points="804.4455,-183.6928 796.2233,-190.3745 806.8177,-190.2786 804.4455,-183.6928"/>
+</g>
+<!-- Node188&#45;&gt;Node185 -->
+<g id="edge20" class="edge">
+<title>Node188&#45;&gt;Node185</title>
+<path fill="none" stroke="#191970" d="M1012.3485,-137.5448C1069.4361,-161.6784 1193.1217,-213.3083 1299,-253 1307.0084,-256.0022 1315.5854,-259.0769 1323.8849,-261.9804"/>
+<polygon fill="#191970" stroke="#191970" points="1013.699,-134.3158 1003.1258,-133.64 1010.9698,-140.7619 1013.699,-134.3158"/>
+</g>
+<!-- Node190 -->
+<g id="node18" class="node">
+<title>Node190</title>
+<g id="a_node18"><a xlink:href="classtrim_al_manager.html#afc48b86f5ae35b9a5e721b65c58bf610" target="_top" xlink:title="Method to print statistics requested. ">
+<polygon fill="#ffffff" stroke="#000000" points="928.5,-306 928.5,-336 1032.5,-336 1032.5,-306 928.5,-306"/>
+<text text-anchor="start" x="936.5" y="-324" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::print</text>
+<text text-anchor="middle" x="980.5" y="-313" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_statistics</text>
+</a>
+</g>
+</g>
+<!-- Node189&#45;&gt;Node190 -->
+<g id="edge22" class="edge">
+<title>Node189&#45;&gt;Node190</title>
+<path fill="none" stroke="#191970" d="M849.7172,-299.926C876.0209,-304.1645 904.5526,-308.762 928.2347,-312.5781"/>
+<polygon fill="#191970" stroke="#191970" points="850.1894,-296.457 839.7599,-298.3215 849.0758,-303.3679 850.1894,-296.457"/>
+</g>
+<!-- Node190&#45;&gt;Node176 -->
+<g id="edge23" class="edge">
+<title>Node190&#45;&gt;Node176</title>
+<path fill="none" stroke="#191970" d="M1042.9112,-321C1148.949,-321 1363.6052,-321 1475.1302,-321"/>
+<polygon fill="#191970" stroke="#191970" points="1042.6873,-317.5001 1032.6873,-321 1042.6872,-324.5001 1042.6873,-317.5001"/>
+</g>
+<!-- Node191&#45;&gt;Node190 -->
+<g id="edge25" class="edge">
+<title>Node191&#45;&gt;Node190</title>
+<path fill="none" stroke="#191970" d="M849.7172,-337.1154C876.0209,-333.8742 904.5526,-330.3584 928.2347,-327.4403"/>
+<polygon fill="#191970" stroke="#191970" points="849.2568,-333.6456 839.7599,-338.3424 850.113,-340.593 849.2568,-333.6456"/>
+</g>
+<!-- Node192&#45;&gt;Node182 -->
+<g id="edge27" class="edge">
+<title>Node192&#45;&gt;Node182</title>
+<path fill="none" stroke="#191970" d="M467.6284,-300.9055C478.7215,-299.4485 490.3724,-297.9183 501.7237,-296.4273"/>
+<polygon fill="#191970" stroke="#191970" points="467.0813,-297.4472 457.6223,-302.2198 467.9929,-304.3876 467.0813,-297.4472"/>
+</g>
+<!-- Node193 -->
+<g id="node21" class="node">
+<title>Node193</title>
+<g id="a_node21"><a xlink:href="classstatistics_1_1_similarity.html#a1b65c85328f09fa0637365d11fb386b4" target="_top" xlink:title="This methods returns a pointer to conservationWindow&#39;s vector. ">
+<polygon fill="#ffffff" stroke="#000000" points="509,-465 509,-495 638,-495 638,-465 509,-465"/>
+<text text-anchor="start" x="517" y="-483" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Similarity</text>
+<text text-anchor="middle" x="573.5" y="-472" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::getMdkWindowedVector</text>
+</a>
+</g>
+</g>
+<!-- Node192&#45;&gt;Node193 -->
+<g id="edge28" class="edge">
+<title>Node192&#45;&gt;Node193</title>
+<path fill="none" stroke="#191970" d="M428.15,-331.6128C462.7642,-366.9503 528.7809,-434.3465 558.428,-464.6131"/>
+<polygon fill="#191970" stroke="#191970" points="430.3625,-328.8698 420.8645,-324.1751 425.3618,-333.7681 430.3625,-328.8698"/>
+</g>
+<!-- Node193&#45;&gt;Node174 -->
+<g id="edge29" class="edge">
+<title>Node193&#45;&gt;Node174</title>
+<path fill="none" stroke="#191970" d="M591.8649,-502.934C611.4766,-525.8141 644.6817,-560.1906 681,-579 688.5353,-582.9026 696.8294,-586.0042 705.227,-588.469"/>
+<polygon fill="#191970" stroke="#191970" points="594.3815,-500.488 585.2739,-495.0748 589.0179,-504.9861 594.3815,-500.488"/>
+</g>
+<!-- Node193&#45;&gt;Node180 -->
+<g id="edge34" class="edge">
+<title>Node193&#45;&gt;Node180</title>
+<path fill="none" stroke="#191970" d="M609.9205,-500.0443C635.3081,-513.8093 667.0348,-530.5427 681,-536 695.6793,-541.7364 712.2404,-546.6253 727.0325,-550.4643"/>
+<polygon fill="#191970" stroke="#191970" points="611.3551,-496.8403 600.8986,-495.1337 608.0085,-502.9886 611.3551,-496.8403"/>
+</g>
+<!-- Node193&#45;&gt;Node183 -->
+<g id="edge35" class="edge">
+<title>Node193&#45;&gt;Node183</title>
+<path fill="none" stroke="#191970" d="M629.4041,-497.7464C688.0761,-513.3691 782.1478,-529.8189 858,-503 909.5607,-484.7698 955.3259,-434.5995 972.8809,-413.5223"/>
+<polygon fill="#191970" stroke="#191970" points="630.1569,-494.3236 619.5872,-495.0518 628.3041,-501.074 630.1569,-494.3236"/>
+</g>
+<!-- Node193&#45;&gt;Node186 -->
+<g id="edge36" class="edge">
+<title>Node193&#45;&gt;Node186</title>
+<path fill="none" stroke="#191970" d="M640.4534,-462.2994C713.9256,-441.768 825.7438,-406.9086 858,-377 886.5907,-350.4902 863.8694,-321.7456 894,-297 906.8642,-286.4349 924.2694,-281.2245 940.0946,-278.7312"/>
+<polygon fill="#191970" stroke="#191970" points="639.5008,-458.9314 630.7998,-464.9764 641.3714,-465.6768 639.5008,-458.9314"/>
+</g>
+<!-- Node193&#45;&gt;Node187 -->
+<g id="edge37" class="edge">
+<title>Node193&#45;&gt;Node187</title>
+<path fill="none" stroke="#191970" d="M583.2731,-455.6109C604.0161,-404.6255 652.8459,-288.8489 681,-257 699.8825,-235.6395 728.6153,-219.1459 748.1816,-209.5195"/>
+<polygon fill="#191970" stroke="#191970" points="580.0208,-454.3174 579.5134,-464.9001 586.5095,-456.9437 580.0208,-454.3174"/>
+</g>
+<!-- Node193&#45;&gt;Node194 -->
+<g id="edge30" class="edge">
+<title>Node193&#45;&gt;Node194</title>
+<path fill="none" stroke="#191970" d="M585.5272,-504.0971C602.4077,-535.2962 636.155,-588.9796 681,-617 691.7949,-623.745 704.6187,-628.1238 717.1067,-630.9585"/>
+<polygon fill="#191970" stroke="#191970" points="588.5929,-502.4069 580.8364,-495.1898 582.3992,-505.6687 588.5929,-502.4069"/>
+</g>
+<!-- Node196 -->
+<g id="node24" class="node">
+<title>Node196</title>
+<g id="a_node24"><a xlink:href="classstatistics_1_1_similarity.html#a26f430acb8a3240977665de9a9ea875a" target="_top" xlink:title="Computes and selects the cut point values based on similarity&#39;s values. ">
+<polygon fill="#ffffff" stroke="#000000" points="718,-463 718,-493 821,-493 821,-463 718,-463"/>
+<text text-anchor="start" x="726" y="-481" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Similarity</text>
+<text text-anchor="middle" x="769.5" y="-470" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::calcCutPoint</text>
+</a>
+</g>
+</g>
+<!-- Node193&#45;&gt;Node196 -->
+<g id="edge38" class="edge">
+<title>Node193&#45;&gt;Node196</title>
+<path fill="none" stroke="#191970" d="M648.3818,-479.2359C671.5817,-478.9992 696.6148,-478.7437 717.8672,-478.5269"/>
+<polygon fill="#191970" stroke="#191970" points="648.1847,-475.7376 638.2209,-479.3396 648.2562,-482.7373 648.1847,-475.7376"/>
+</g>
+<!-- Node195 -->
+<g id="node23" class="node">
+<title>Node195</title>
+<g id="a_node23"><a xlink:href="classtrim_al_manager.html#a63d5bec0938516a2129ccb04276b93d9" target="_top" xlink:title="trimAlManager::svg\l_stats_out">
+<polygon fill="#ffffff" stroke="#000000" points="1318,-426 1318,-456 1419,-456 1419,-426 1318,-426"/>
+<text text-anchor="start" x="1326" y="-444" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::svg</text>
+<text text-anchor="middle" x="1368.5" y="-433" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_stats_out</text>
+</a>
+</g>
+</g>
+<!-- Node194&#45;&gt;Node195 -->
+<g id="edge31" class="edge">
+<title>Node194&#45;&gt;Node195</title>
+<path fill="none" stroke="#191970" d="M826.4075,-624.2641C836.935,-621.9565 847.8178,-619.4795 858,-617 1041.416,-572.3355 1088.2037,-560.2923 1263,-489 1288.1538,-478.7408 1316.1169,-465.9535 1336.9312,-456.1574"/>
+<polygon fill="#191970" stroke="#191970" points="825.4899,-620.8816 816.4574,-626.4191 826.9717,-627.723 825.4899,-620.8816"/>
+</g>
+<!-- Node195&#45;&gt;Node176 -->
+<g id="edge32" class="edge">
+<title>Node195&#45;&gt;Node176</title>
+<path fill="none" stroke="#191970" d="M1393.8265,-419.2713C1414.637,-401.9275 1445.2651,-377.5469 1474,-359 1490.7442,-348.1925 1510.8855,-337.7625 1525.6023,-330.5726"/>
+<polygon fill="#191970" stroke="#191970" points="1391.4898,-416.6632 1386.0855,-425.7761 1395.9931,-422.0224 1391.4898,-416.6632"/>
+</g>
+<!-- Node195&#45;&gt;Node179 -->
+<g id="edge33" class="edge">
+<title>Node195&#45;&gt;Node179</title>
+<path fill="none" stroke="#191970" d="M1420.7463,-422.4562C1452.9832,-411.0144 1493.0019,-396.8106 1519.0016,-387.5825"/>
+<polygon fill="#191970" stroke="#191970" points="1419.269,-419.2666 1411.0157,-425.9099 1421.6104,-425.8634 1419.269,-419.2666"/>
+</g>
+<!-- Node196&#45;&gt;Node183 -->
+<g id="edge39" class="edge">
+<title>Node196&#45;&gt;Node183</title>
+<path fill="none" stroke="#191970" d="M824.2422,-459.615C835.4234,-455.8116 847.1009,-451.8043 858,-448 891.283,-436.3825 929.4913,-422.585 954.2628,-413.5783"/>
+<polygon fill="#191970" stroke="#191970" points="822.9212,-456.3671 814.576,-462.8947 825.1704,-462.996 822.9212,-456.3671"/>
+</g>
+<!-- Node196&#45;&gt;Node186 -->
+<g id="edge40" class="edge">
+<title>Node196&#45;&gt;Node186</title>
+<path fill="none" stroke="#191970" d="M830.8457,-466.2986C841.0207,-461.9837 850.6377,-456.0791 858,-448 904.4698,-397.0053 845.0492,-345.6181 894,-297 906.1391,-284.9434 924.0136,-279.5821 940.3677,-277.3766"/>
+<polygon fill="#191970" stroke="#191970" points="829.5351,-463.0519 821.3932,-469.8312 831.9857,-469.609 829.5351,-463.0519"/>
+</g>
+<!-- Node197&#45;&gt;Node188 -->
+<g id="edge43" class="edge">
+<title>Node197&#45;&gt;Node188</title>
+<path fill="none" stroke="#191970" d="M476.35,-86.5238C565.3959,-87.7454 723.4133,-91.7758 858,-105 880.9178,-107.2519 906.0782,-110.9406 927.6029,-114.4716"/>
+<polygon fill="#191970" stroke="#191970" points="476.1474,-83.0209 466.1031,-86.3915 476.057,-90.0204 476.1474,-83.0209"/>
+</g>
+<!-- Node198&#45;&gt;Node184 -->
+<g id="edge47" class="edge">
+<title>Node198&#45;&gt;Node184</title>
+<path fill="none" stroke="#191970" d="M818.2686,-136.1654C831.2671,-139.6957 845.2413,-143.753 858,-148 965.9974,-183.9492 1090.139,-236.4394 1148.8418,-261.956"/>
+<polygon fill="#191970" stroke="#191970" points="819.1194,-132.77 808.5551,-133.574 817.3149,-139.5334 819.1194,-132.77"/>
+</g>
+<!-- Node198&#45;&gt;Node188 -->
+<g id="edge46" class="edge">
+<title>Node198&#45;&gt;Node188</title>
+<path fill="none" stroke="#191970" d="M831.3708,-124C850.8596,-124 872.7596,-124 893.6517,-124"/>
+<polygon fill="#191970" stroke="#191970" points="831.1164,-120.5001 821.1164,-124 831.1164,-127.5001 831.1164,-120.5001"/>
+</g>
+<!-- Node199&#45;&gt;Node188 -->
 <g id="edge49" class="edge">
-<title>Node132&#45;&gt;Node114</title>
-<path fill="none" stroke="#191970" d="M398.775,-159.1611C349.4411,-167.468 285.0402,-179.7288 229,-195 204.0392,-201.8019 176.2554,-212.003 157.1209,-219.4567"/>
-<polygon fill="#191970" stroke="#191970" points="399.4596,-162.5954 408.7492,-157.5009 398.3102,-155.6904 399.4596,-162.5954"/>
+<title>Node199&#45;&gt;Node188</title>
+<path fill="none" stroke="#191970" d="M819.4504,-60.2663C832.1295,-63.7288 845.6542,-67.7281 858,-72 894.8994,-84.7681 936.4663,-103.3402 960.4572,-114.4888"/>
+<polygon fill="#191970" stroke="#191970" points="820.0663,-56.8082 809.5019,-57.6096 818.2603,-63.5712 820.0663,-56.8082"/>
 </g>
-<!-- Node132&#45;&gt;Node116 -->
+<!-- Node200 -->
+<g id="node28" class="node">
+<title>Node200</title>
+<g id="a_node28"><a xlink:href="classtrim_al_manager.html#a10536f715945a1a45f1df33f7cedc81e" target="_top" xlink:title="Method to trim or reduce the number of sequences in an alignment. It performs one or none of the foll...">
+<polygon fill="#ffffff" stroke="#000000" points="1103,-84.5 1103,-103.5 1263,-103.5 1263,-84.5 1103,-84.5"/>
+<text text-anchor="middle" x="1183" y="-91.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::CleanSequences</text>
+</a>
+</g>
+</g>
+<!-- Node199&#45;&gt;Node200 -->
 <g id="edge50" class="edge">
-<title>Node132&#45;&gt;Node116</title>
-<path fill="none" stroke="#191970" d="M421.791,-165.7323C417.4303,-167.4311 413.1238,-169.1946 409,-171 375.2717,-185.7666 337.8078,-207.0627 317.0603,-219.3196"/>
-<polygon fill="#191970" stroke="#191970" points="423.2477,-168.9238 431.3738,-162.1255 420.7818,-162.3725 423.2477,-168.9238"/>
+<title>Node199&#45;&gt;Node200</title>
+<path fill="none" stroke="#191970" d="M843.2437,-56.2037C916.2645,-64.3269 1027.7479,-76.7289 1102.9054,-85.0898"/>
+<polygon fill="#191970" stroke="#191970" points="843.5289,-52.7139 833.2032,-55.0867 842.7549,-59.671 843.5289,-52.7139"/>
+</g>
+<!-- Node200&#45;&gt;Node185 -->
+<g id="edge51" class="edge">
+<title>Node200&#45;&gt;Node185</title>
+<path fill="none" stroke="#191970" d="M1200.1099,-110.9651C1217.2708,-128.5233 1243.8327,-157.2241 1263,-185 1282.4222,-213.1453 1273.0268,-230.7565 1299,-253 1303.46,-256.8195 1308.5611,-260.0413 1313.929,-262.7568"/>
+<polygon fill="#191970" stroke="#191970" points="1202.4683,-108.3724 1192.947,-103.7252 1197.4921,-113.2956 1202.4683,-108.3724"/>
+</g>
+<!-- Node202 -->
+<g id="node30" class="node">
+<title>Node202</title>
+<g id="a_node30"><a xlink:href="classtrim_al_manager.html#a8ed19b851162fa24a1da66f7e54099e3" target="_top" xlink:title="trimAlManager::postprocess\l_alignment">
+<polygon fill="#ffffff" stroke="#000000" points="1299,-213 1299,-243 1438,-243 1438,-213 1299,-213"/>
+<text text-anchor="start" x="1307" y="-231" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::postprocess</text>
+<text text-anchor="middle" x="1368.5" y="-220" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_alignment</text>
+</a>
+</g>
+</g>
+<!-- Node201&#45;&gt;Node202 -->
+<g id="edge53" class="edge">
+<title>Node201&#45;&gt;Node202</title>
+<path fill="none" stroke="#191970" d="M320.4291,-10C388.522,-10 487.2313,-10 573.5,-10 573.5,-10 573.5,-10 980.5,-10 1109.3362,-10 1156.4229,-2.6115 1263,-75 1315.3138,-110.5322 1349.3642,-181.3415 1362.4517,-212.5815"/>
+<polygon fill="#191970" stroke="#191970" points="320.1904,-6.5001 310.1904,-10 320.1904,-13.5001 320.1904,-6.5001"/>
+</g>
+<!-- Node202&#45;&gt;Node176 -->
+<g id="edge54" class="edge">
+<title>Node202&#45;&gt;Node176</title>
+<path fill="none" stroke="#191970" d="M1424.3322,-246.8658C1429.0091,-248.8125 1433.6201,-250.8647 1438,-253 1474.0485,-270.5742 1513.1106,-297.2901 1532.9045,-311.4356"/>
+<polygon fill="#191970" stroke="#191970" points="1425.2777,-243.475 1414.6924,-243.0251 1422.6868,-249.9778 1425.2777,-243.475"/>
+</g>
+<!-- Node202&#45;&gt;Node179 -->
+<g id="edge55" class="edge">
+<title>Node202&#45;&gt;Node179</title>
+<path fill="none" stroke="#191970" d="M1432.7261,-248.5445C1434.5759,-249.9347 1436.3416,-251.4178 1438,-253 1468.2775,-281.8857 1445.822,-309.0628 1474,-340 1485.8017,-352.9573 1503.0631,-362.2777 1517.7262,-368.4445"/>
+<polygon fill="#191970" stroke="#191970" points="1434.4513,-245.4927 1424.1477,-243.0256 1430.6639,-251.3797 1434.4513,-245.4927"/>
 </g>
 </g>
 </svg>

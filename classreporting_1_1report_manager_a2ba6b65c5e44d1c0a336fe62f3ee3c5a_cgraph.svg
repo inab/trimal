@@ -12,17 +12,14 @@
 <!-- Node6 -->
 <g id="node1" class="node">
 <title>Node6</title>
-<g id="a_node1"><a xlink:title="Method to print all Info, Warning and Error codes and their respective message. This method is useful...">
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-.5 0,-30.5 134,-30.5 134,-.5 0,-.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">reporting::reportManager</text>
 <text text-anchor="middle" x="67" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::PrintCodesAndMessages</text>
-</a>
-</g>
 </g>
 <!-- Node7 -->
 <g id="node2" class="node">
 <title>Node7</title>
-<g id="a_node2"><a xlink:href="classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR.">
+<g id="a_node2"><a xlink:href="classreporting_1_1report_manager.html#a916ee4d499edcd1b3b38398face3df3d" target="_top" xlink:title="Method to report an Info message. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel:...">
 <polygon fill="#ffffff" stroke="#000000" points="170,-.5 170,-30.5 292,-30.5 292,-.5 170,-.5"/>
 <text text-anchor="start" x="178" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">reporting::reportManager</text>
 <text text-anchor="middle" x="231" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::report</text>

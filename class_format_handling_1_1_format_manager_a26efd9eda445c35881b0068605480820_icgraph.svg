@@ -9,118 +9,115 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 105)">
 <title>FormatHandling::FormatManager::getInputFormatsAvailable</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-105 717,-105 717,4 -4,4"/>
-<!-- Node20 -->
+<!-- Node25 -->
 <g id="node1" class="node">
-<title>Node20</title>
-<g id="a_node1"><a xlink:title="Function to obtain all format names available by this object that can load an alignment.">
-<polygon fill="#bfbfbf" stroke="#000000" points="553,-33 553,-63 713,-63 713,-33 553,-33"/>
-<text text-anchor="start" x="561" y="-51" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">FormatHandling::FormatManager</text>
-<text text-anchor="middle" x="633" y="-40" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::getInputFormatsAvailable</text>
-</a>
-</g>
-</g>
-<!-- Node21 -->
-<g id="node2" class="node">
-<title>Node21</title>
-<g id="a_node2"><a xlink:href="classtrim_al_manager.html#ac00c17dd71558993a44020e3ec7c2b16" target="_top" xlink:title="Method to parse information arguments as help and menu.">
-<polygon fill="#ffffff" stroke="#000000" points="267,-32 267,-62 371,-62 371,-32 267,-32"/>
-<text text-anchor="start" x="275" y="-50" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::help</text>
-<text text-anchor="middle" x="319" y="-39" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_arguments</text>
-</a>
-</g>
-</g>
-<!-- Node20&#45;&gt;Node21 -->
-<g id="edge1" class="edge">
-<title>Node20&#45;&gt;Node21</title>
-<path fill="none" stroke="#191970" d="M542.7463,-47.7126C487.1892,-47.5356 417.93,-47.3151 371.3052,-47.1666"/>
-<polygon fill="#191970" stroke="#191970" points="542.941,-51.2131 552.9521,-47.7451 542.9633,-44.2131 542.941,-51.2131"/>
-</g>
-<!-- Node24 -->
-<g id="node5" class="node">
-<title>Node24</title>
-<g id="a_node5"><a xlink:href="read_al_main_8cpp.html#a2a0e843767aeea4f433a28b9c54f573a" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="441.5,-79.5 441.5,-98.5 482.5,-98.5 482.5,-79.5 441.5,-79.5"/>
-<text text-anchor="middle" x="462" y="-86.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">menu</text>
-</a>
-</g>
-</g>
-<!-- Node20&#45;&gt;Node24 -->
-<g id="edge4" class="edge">
-<title>Node20&#45;&gt;Node24</title>
-<path fill="none" stroke="#191970" d="M560.4032,-65.4062C532.1463,-72.1813 501.9648,-79.4178 482.5894,-84.0634"/>
-<polygon fill="#191970" stroke="#191970" points="561.3886,-68.7693 570.2969,-63.0341 559.7564,-61.9622 561.3886,-68.7693"/>
+<title>Node25</title>
+<polygon fill="#bfbfbf" stroke="#000000" points="0,-33 0,-63 160,-63 160,-33 0,-33"/>
+<text text-anchor="start" x="8" y="-51" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">FormatHandling::FormatManager</text>
+<text text-anchor="middle" x="80" y="-40" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::getInputFormatsAvailable</text>
 </g>
 <!-- Node26 -->
-<g id="node7" class="node">
+<g id="node2" class="node">
 <title>Node26</title>
-<g id="a_node7"><a xlink:href="classtrim_al_manager.html#a09d07645fa0057989875f2b2d25ec4d7" target="_top" xlink:title="Method to show the menu of the program.">
-<polygon fill="#ffffff" stroke="#000000" points="407,-.5 407,-19.5 517,-19.5 517,-.5 407,-.5"/>
-<text text-anchor="middle" x="462" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::menu</text>
+<g id="a_node2"><a xlink:href="classtrim_al_manager.html#ac00c17dd71558993a44020e3ec7c2b16" target="_top" xlink:title="Method to parse information arguments as help and menu. ">
+<polygon fill="#ffffff" stroke="#000000" points="342,-32 342,-62 446,-62 446,-32 342,-32"/>
+<text text-anchor="start" x="350" y="-50" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::help</text>
+<text text-anchor="middle" x="394" y="-39" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_arguments</text>
 </a>
 </g>
 </g>
-<!-- Node20&#45;&gt;Node26 -->
+<!-- Node25&#45;&gt;Node26 -->
+<g id="edge1" class="edge">
+<title>Node25&#45;&gt;Node26</title>
+<path fill="none" stroke="#191970" d="M170.2537,-47.7126C225.8108,-47.5356 295.07,-47.3151 341.6948,-47.1666"/>
+<polygon fill="#191970" stroke="#191970" points="170.0367,-44.2131 160.0479,-47.7451 170.059,-51.2131 170.0367,-44.2131"/>
+</g>
+<!-- Node29 -->
+<g id="node5" class="node">
+<title>Node29</title>
+<g id="a_node5"><a xlink:href="read_al_main_8cpp.html#a2a0e843767aeea4f433a28b9c54f573a" target="_top" xlink:title="menu">
+<polygon fill="#ffffff" stroke="#000000" points="230.5,-79.5 230.5,-98.5 271.5,-98.5 271.5,-79.5 230.5,-79.5"/>
+<text text-anchor="middle" x="251" y="-86.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">menu</text>
+</a>
+</g>
+</g>
+<!-- Node25&#45;&gt;Node29 -->
+<g id="edge4" class="edge">
+<title>Node25&#45;&gt;Node29</title>
+<path fill="none" stroke="#191970" d="M152.5968,-65.4062C180.8537,-72.1813 211.0352,-79.4178 230.4106,-84.0634"/>
+<polygon fill="#191970" stroke="#191970" points="153.2436,-61.9622 142.7031,-63.0341 151.6114,-68.7693 153.2436,-61.9622"/>
+</g>
+<!-- Node31 -->
+<g id="node7" class="node">
+<title>Node31</title>
+<g id="a_node7"><a xlink:href="classtrim_al_manager.html#a09d07645fa0057989875f2b2d25ec4d7" target="_top" xlink:title="Method to show the menu of the program. ">
+<polygon fill="#ffffff" stroke="#000000" points="196,-.5 196,-19.5 306,-19.5 306,-.5 196,-.5"/>
+<text text-anchor="middle" x="251" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::menu</text>
+</a>
+</g>
+</g>
+<!-- Node25&#45;&gt;Node31 -->
 <g id="edge6" class="edge">
-<title>Node20&#45;&gt;Node26</title>
-<path fill="none" stroke="#191970" d="M555.2601,-30.7245C537.8889,-26.8642 520.0869,-22.9082 504.7542,-19.5009"/>
-<polygon fill="#191970" stroke="#191970" points="554.8951,-34.2287 565.4163,-32.9814 556.4137,-27.3954 554.8951,-34.2287"/>
+<title>Node25&#45;&gt;Node31</title>
+<path fill="none" stroke="#191970" d="M157.7399,-30.7245C175.1111,-26.8642 192.9131,-22.9082 208.2458,-19.5009"/>
+<polygon fill="#191970" stroke="#191970" points="156.5863,-27.3954 147.5837,-32.9814 158.1049,-34.2287 156.5863,-27.3954"/>
 </g>
-<!-- Node22 -->
+<!-- Node27 -->
 <g id="node3" class="node">
-<title>Node22</title>
-<g id="a_node3"><a xlink:href="classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal.">
-<polygon fill="#ffffff" stroke="#000000" points="74,-15.5 74,-34.5 231,-34.5 231,-15.5 74,-15.5"/>
-<text text-anchor="middle" x="152.5" y="-22.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::parseArguments</text>
+<title>Node27</title>
+<g id="a_node3"><a xlink:href="classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
+<polygon fill="#ffffff" stroke="#000000" points="482,-15.5 482,-34.5 639,-34.5 639,-15.5 482,-15.5"/>
+<text text-anchor="middle" x="560.5" y="-22.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::parseArguments</text>
 </a>
 </g>
 </g>
-<!-- Node21&#45;&gt;Node22 -->
+<!-- Node26&#45;&gt;Node27 -->
 <g id="edge2" class="edge">
-<title>Node21&#45;&gt;Node22</title>
-<path fill="none" stroke="#191970" d="M256.5547,-38.749C246.1537,-37.3747 235.2897,-35.9392 224.6706,-34.5361"/>
-<polygon fill="#191970" stroke="#191970" points="256.4028,-42.2592 266.7752,-40.0994 257.3199,-35.3196 256.4028,-42.2592"/>
+<title>Node26&#45;&gt;Node27</title>
+<path fill="none" stroke="#191970" d="M456.4453,-38.749C466.8463,-37.3747 477.7103,-35.9392 488.3294,-34.5361"/>
+<polygon fill="#191970" stroke="#191970" points="455.6801,-35.3196 446.2248,-40.0994 456.5972,-42.2592 455.6801,-35.3196"/>
 </g>
-<!-- Node23 -->
+<!-- Node28 -->
 <g id="node4" class="node">
-<title>Node23</title>
-<g id="a_node4"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="0,-15.5 0,-34.5 38,-34.5 38,-15.5 0,-15.5"/>
-<text text-anchor="middle" x="19" y="-22.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
+<title>Node28</title>
+<g id="a_node4"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
+<polygon fill="#ffffff" stroke="#000000" points="675,-15.5 675,-34.5 713,-34.5 713,-15.5 675,-15.5"/>
+<text text-anchor="middle" x="694" y="-22.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node22&#45;&gt;Node23 -->
+<!-- Node27&#45;&gt;Node28 -->
 <g id="edge3" class="edge">
-<title>Node22&#45;&gt;Node23</title>
-<path fill="none" stroke="#191970" d="M63.4234,-25C54.1647,-25 45.5538,-25 38.4254,-25"/>
-<polygon fill="#191970" stroke="#191970" points="63.6848,-28.5001 73.6848,-25 63.6847,-21.5001 63.6848,-28.5001"/>
+<title>Node27&#45;&gt;Node28</title>
+<path fill="none" stroke="#191970" d="M649.5766,-25C658.8353,-25 667.4462,-25 674.5746,-25"/>
+<polygon fill="#191970" stroke="#191970" points="649.3153,-21.5001 639.3152,-25 649.3152,-28.5001 649.3153,-21.5001"/>
 </g>
-<!-- Node25 -->
+<!-- Node30 -->
 <g id="node6" class="node">
-<title>Node25</title>
-<g id="a_node6"><a xlink:href="read_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="300,-81.5 300,-100.5 338,-100.5 338,-81.5 300,-81.5"/>
-<text text-anchor="middle" x="319" y="-88.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
+<title>Node30</title>
+<g id="a_node6"><a xlink:href="read_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
+<polygon fill="#ffffff" stroke="#000000" points="375,-81.5 375,-100.5 413,-100.5 413,-81.5 375,-81.5"/>
+<text text-anchor="middle" x="394" y="-88.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node24&#45;&gt;Node25 -->
+<!-- Node29&#45;&gt;Node30 -->
 <g id="edge5" class="edge">
-<title>Node24&#45;&gt;Node25</title>
-<path fill="none" stroke="#191970" d="M431.0979,-89.4322C402.9598,-89.8257 362.2753,-90.3948 338.4414,-90.7281"/>
-<polygon fill="#191970" stroke="#191970" points="431.2565,-92.9304 441.2066,-89.2908 431.1586,-85.9311 431.2565,-92.9304"/>
+<title>Node29&#45;&gt;Node30</title>
+<path fill="none" stroke="#191970" d="M281.9021,-89.4322C310.0402,-89.8257 350.7247,-90.3948 374.5586,-90.7281"/>
+<polygon fill="#191970" stroke="#191970" points="281.8414,-85.9311 271.7934,-89.2908 281.7435,-92.9304 281.8414,-85.9311"/>
 </g>
-<!-- Node26&#45;&gt;Node21 -->
+<!-- Node31&#45;&gt;Node26 -->
 <g id="edge7" class="edge">
-<title>Node26&#45;&gt;Node21</title>
-<path fill="none" stroke="#191970" d="M415.1915,-22.1113C401.0757,-25.7636 385.4963,-29.7947 371.0609,-33.5297"/>
-<polygon fill="#191970" stroke="#191970" points="416.3695,-25.4218 425.1739,-19.5284 414.616,-18.645 416.3695,-25.4218"/>
+<title>Node31&#45;&gt;Node26</title>
+<path fill="none" stroke="#191970" d="M297.8085,-22.1113C311.9243,-25.7636 327.5037,-29.7947 341.9391,-33.5297"/>
+<polygon fill="#191970" stroke="#191970" points="298.384,-18.645 287.8261,-19.5284 296.6305,-25.4218 298.384,-18.645"/>
 </g>
-<!-- Node26&#45;&gt;Node22 -->
+<!-- Node31&#45;&gt;Node27 -->
 <g id="edge8" class="edge">
-<title>Node26&#45;&gt;Node22</title>
-<path fill="none" stroke="#191970" d="M396.6424,-13.1676C348.3497,-15.5081 282.381,-18.7053 231.1909,-21.1862"/>
-<polygon fill="#191970" stroke="#191970" points="396.8488,-16.6618 406.6676,-12.6817 396.5099,-9.67 396.8488,-16.6618"/>
+<title>Node31&#45;&gt;Node27</title>
+<path fill="none" stroke="#191970" d="M316.3576,-13.1676C364.6503,-15.5081 430.619,-18.7053 481.8091,-21.1862"/>
+<polygon fill="#191970" stroke="#191970" points="316.4901,-9.67 306.3324,-12.6817 316.1512,-16.6618 316.4901,-9.67"/>
 </g>
 </g>
 </svg>

@@ -1,6 +1,5 @@
 <map id="statistics::Consistency::printStatisticsFileAcl" name="statistics::Consistency::printStatisticsFileAcl">
-<area shape="rect" id="node1" title="Print the accumulated consistency value from the selected alignment." alt="" coords="5,23,161,65"/>
-<area shape="rect" id="node2" href="$namespaceutils.html#a42f272221edf7752ffda49e4212ef653" title="Integer vector copying." alt="" coords="209,5,319,32"/>
-<area shape="rect" id="node3" href="$namespaceutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method." alt="" coords="211,56,317,83"/>
-<area shape="rect" id="node4" href="$namespaceutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method." alt="" coords="367,56,452,83"/>
+<area shape="rect" id="node2" href="$namespaceutils.html#a13e9bd8b05840270eda57450710273c2" title="Float vector copying. " alt="" coords="209,5,319,32"/>
+<area shape="rect" id="node3" href="$namespaceutils.html#a73f038c379c13d23e3220afaa14f9983" title="Quicksort sorting method. " alt="" coords="211,80,317,107"/>
+<area shape="rect" id="node4" href="$namespaceutils.html#a3377ecde55631d1bbc4956e5923b7469" title="Swapping elements method. " alt="" coords="367,80,452,107"/>
 </map>

@@ -9,45 +9,42 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 35)">
 <title>trimAlManager::similarity_threshold_argument</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-35 396,-35 396,4 -4,4"/>
-<!-- Node1047 -->
+<!-- Node1374 -->
 <g id="node1" class="node">
-<title>Node1047</title>
-<g id="a_node1"><a xlink:title="Method to parse the similarity threshold argument.">
-<polygon fill="#bfbfbf" stroke="#000000" points="267,-.5 267,-30.5 392,-30.5 392,-.5 267,-.5"/>
-<text text-anchor="start" x="275" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::similarity</text>
-<text text-anchor="middle" x="329.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_threshold_argument</text>
-</a>
+<title>Node1374</title>
+<polygon fill="#bfbfbf" stroke="#000000" points="0,-.5 0,-30.5 125,-30.5 125,-.5 0,-.5"/>
+<text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::similarity</text>
+<text text-anchor="middle" x="62.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_threshold_argument</text>
 </g>
-</g>
-<!-- Node1048 -->
+<!-- Node1375 -->
 <g id="node2" class="node">
-<title>Node1048</title>
-<g id="a_node2"><a xlink:href="classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal.">
-<polygon fill="#ffffff" stroke="#000000" points="74,-6 74,-25 231,-25 231,-6 74,-6"/>
-<text text-anchor="middle" x="152.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::parseArguments</text>
+<title>Node1375</title>
+<g id="a_node2"><a xlink:href="classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
+<polygon fill="#ffffff" stroke="#000000" points="161,-6 161,-25 318,-25 318,-6 161,-6"/>
+<text text-anchor="middle" x="239.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::parseArguments</text>
 </a>
 </g>
 </g>
-<!-- Node1047&#45;&gt;Node1048 -->
+<!-- Node1374&#45;&gt;Node1375 -->
 <g id="edge1" class="edge">
-<title>Node1047&#45;&gt;Node1048</title>
-<path fill="none" stroke="#191970" d="M256.5532,-15.5C248.2242,-15.5 239.7054,-15.5 231.3046,-15.5"/>
-<polygon fill="#191970" stroke="#191970" points="256.5981,-19.0001 266.598,-15.5 256.598,-12.0001 256.5981,-19.0001"/>
+<title>Node1374&#45;&gt;Node1375</title>
+<path fill="none" stroke="#191970" d="M135.4468,-15.5C143.7758,-15.5 152.2946,-15.5 160.6954,-15.5"/>
+<polygon fill="#191970" stroke="#191970" points="135.402,-12.0001 125.402,-15.5 135.4019,-19.0001 135.402,-12.0001"/>
 </g>
-<!-- Node1049 -->
+<!-- Node1376 -->
 <g id="node3" class="node">
-<title>Node1049</title>
-<g id="a_node3"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="0,-6 0,-25 38,-25 38,-6 0,-6"/>
-<text text-anchor="middle" x="19" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
+<title>Node1376</title>
+<g id="a_node3"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
+<polygon fill="#ffffff" stroke="#000000" points="354,-6 354,-25 392,-25 392,-6 354,-6"/>
+<text text-anchor="middle" x="373" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node1048&#45;&gt;Node1049 -->
+<!-- Node1375&#45;&gt;Node1376 -->
 <g id="edge2" class="edge">
-<title>Node1048&#45;&gt;Node1049</title>
-<path fill="none" stroke="#191970" d="M63.4234,-15.5C54.1647,-15.5 45.5538,-15.5 38.4254,-15.5"/>
-<polygon fill="#191970" stroke="#191970" points="63.6848,-19.0001 73.6848,-15.5 63.6847,-12.0001 63.6848,-19.0001"/>
+<title>Node1375&#45;&gt;Node1376</title>
+<path fill="none" stroke="#191970" d="M328.5766,-15.5C337.8353,-15.5 346.4462,-15.5 353.5746,-15.5"/>
+<polygon fill="#191970" stroke="#191970" points="328.3153,-12.0001 318.3152,-15.5 328.3152,-19.0001 328.3153,-12.0001"/>
 </g>
 </g>
 </svg>

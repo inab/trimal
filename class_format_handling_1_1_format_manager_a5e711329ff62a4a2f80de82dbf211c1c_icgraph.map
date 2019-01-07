@@ -1,4 +1,5 @@
 <map id="FormatHandling::FormatManager::addState" name="FormatHandling::FormatManager::addState">
-<area shape="rect" id="node1" title="Function that adds a newState to the FormatManager::available_states vector. &#160;This should be called o..." alt="" coords="267,5,480,47"/>
-<area shape="rect" id="node2" href="$class_format_handling_1_1_format_manager.html#aece519995c108c0cc400d61360389834" title=" " alt="" coords="5,5,219,47"/>
+<area shape="rect" id="node2" href="$class_format_handling_1_1_format_manager.html#aece519995c108c0cc400d61360389834" title="FormatHandling::FormatManager\l::FormatManager" alt="" coords="267,5,480,47"/>
+<area shape="rect" id="node3" href="$read_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="631,13,681,39"/>
+<area shape="rect" id="node4" href="$read_al_main_8cpp.html#a2a0e843767aeea4f433a28b9c54f573a" title="menu" alt="" coords="528,38,583,65"/>
 </map>

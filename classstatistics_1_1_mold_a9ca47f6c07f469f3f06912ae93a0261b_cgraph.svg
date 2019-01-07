@@ -12,16 +12,13 @@
 <!-- Node6 -->
 <g id="node1" class="node">
 <title>Node6</title>
-<g id="a_node1"><a xlink:title=" ">
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-28 0,-47 148,-47 148,-28 0,-28"/>
 <text text-anchor="middle" x="74" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Mold::applyWindow</text>
-</a>
-</g>
 </g>
 <!-- Node7 -->
 <g id="node2" class="node">
 <title>Node7</title>
-<g id="a_node2"><a xlink:href="classstatistics_1_1_mold.html#a45baed5f3a6e460f0e248739b1bc4078" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="classstatistics_1_1_mold.html#a45baed5f3a6e460f0e248739b1bc4078" target="_top" xlink:title="statistics::Mold::calculate">
 <polygon fill="#ffffff" stroke="#000000" points="184,-50 184,-69 312,-69 312,-50 184,-50"/>
 <text text-anchor="middle" x="248" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Mold::calculate</text>
 </a>
@@ -36,7 +33,7 @@
 <!-- Node8 -->
 <g id="node3" class="node">
 <title>Node8</title>
-<g id="a_node3"><a xlink:href="classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR.">
+<g id="a_node3"><a xlink:href="classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
 <polygon fill="#ffffff" stroke="#000000" points="187,-.5 187,-30.5 309,-30.5 309,-.5 187,-.5"/>
 <text text-anchor="start" x="195" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">reporting::reportManager</text>
 <text text-anchor="middle" x="248" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::report</text>

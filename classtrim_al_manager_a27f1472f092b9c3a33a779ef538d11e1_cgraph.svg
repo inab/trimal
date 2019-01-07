@@ -9,29 +9,26 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 35)">
 <title>trimAlManager::check_automated_manual_incompatibilities</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-35 341,-35 341,4 -4,4"/>
-<!-- Node82 -->
+<!-- Node91 -->
 <g id="node1" class="node">
-<title>Node82</title>
-<g id="a_node1"><a xlink:title="Check if only one method, either automatic or manual has been asked.">
+<title>Node91</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-.5 0,-30.5 179,-30.5 179,-.5 0,-.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
 <text text-anchor="middle" x="89.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_automated_manual_incompatibilities</text>
-</a>
 </g>
-</g>
-<!-- Node83 -->
+<!-- Node92 -->
 <g id="node2" class="node">
-<title>Node83</title>
-<g id="a_node2"><a xlink:href="classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR.">
+<title>Node92</title>
+<g id="a_node2"><a xlink:href="classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
 <polygon fill="#ffffff" stroke="#000000" points="215,-.5 215,-30.5 337,-30.5 337,-.5 215,-.5"/>
 <text text-anchor="start" x="223" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">reporting::reportManager</text>
 <text text-anchor="middle" x="276" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::report</text>
 </a>
 </g>
 </g>
-<!-- Node82&#45;&gt;Node83 -->
+<!-- Node91&#45;&gt;Node92 -->
 <g id="edge1" class="edge">
-<title>Node82&#45;&gt;Node83</title>
+<title>Node91&#45;&gt;Node92</title>
 <path fill="none" stroke="#191970" d="M179.1992,-15.5C187.7574,-15.5 196.3555,-15.5 204.7046,-15.5"/>
 <polygon fill="#191970" stroke="#191970" points="204.7458,-19.0001 214.7458,-15.5 204.7457,-12.0001 204.7458,-19.0001"/>
 </g>

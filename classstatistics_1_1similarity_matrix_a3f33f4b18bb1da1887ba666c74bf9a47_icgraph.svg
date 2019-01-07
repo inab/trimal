@@ -9,224 +9,230 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 231)">
 <title>statistics::similarityMatrix::memoryDeletion</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-231 1070,-231 1070,4 -4,4"/>
-<!-- Node83 -->
+<!-- Node97 -->
 <g id="node1" class="node">
-<title>Node83</title>
-<g id="a_node1"><a xlink:title="Method to deallocate memory allocated on the similarityMatrix::memoryAllocation method....">
-<polygon fill="#bfbfbf" stroke="#000000" points="938,-111.5 938,-141.5 1066,-141.5 1066,-111.5 938,-111.5"/>
-<text text-anchor="start" x="946" y="-129.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
-<text text-anchor="middle" x="1002" y="-118.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::memoryDeletion</text>
-</a>
+<title>Node97</title>
+<polygon fill="#bfbfbf" stroke="#000000" points="0,-111.5 0,-141.5 128,-141.5 128,-111.5 0,-111.5"/>
+<text text-anchor="start" x="8" y="-129.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
+<text text-anchor="middle" x="64" y="-118.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::memoryDeletion</text>
 </g>
-</g>
-<!-- Node84 -->
+<!-- Node98 -->
 <g id="node2" class="node">
-<title>Node84</title>
-<g id="a_node2"><a xlink:href="classstatistics_1_1similarity_matrix.html#a8d3f892581b552e6e5321ce1ff073624" target="_top" xlink:title="Method to load a custom matrix.">
-<polygon fill="#ffffff" stroke="#000000" points="591.5,-196.5 591.5,-226.5 719.5,-226.5 719.5,-196.5 591.5,-196.5"/>
-<text text-anchor="start" x="599.5" y="-214.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
-<text text-anchor="middle" x="655.5" y="-203.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::loadSimMatrix</text>
+<title>Node98</title>
+<g id="a_node2"><a xlink:href="classstatistics_1_1similarity_matrix.html#a8d3f892581b552e6e5321ce1ff073624" target="_top" xlink:title="Method to load a custom matrix. ">
+<polygon fill="#ffffff" stroke="#000000" points="346.5,-196.5 346.5,-226.5 474.5,-226.5 474.5,-196.5 346.5,-196.5"/>
+<text text-anchor="start" x="354.5" y="-214.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
+<text text-anchor="middle" x="410.5" y="-203.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::loadSimMatrix</text>
 </a>
 </g>
 </g>
-<!-- Node83&#45;&gt;Node84 -->
+<!-- Node97&#45;&gt;Node98 -->
 <g id="edge1" class="edge">
-<title>Node83&#45;&gt;Node84</title>
-<path fill="none" stroke="#191970" d="M932.0101,-144.0562C921.9421,-146.5646 911.708,-149.105 902,-151.5 839.3528,-166.9551 767.6815,-184.3707 717.8307,-196.4415"/>
-<polygon fill="#191970" stroke="#191970" points="933.1414,-147.3813 941.9971,-141.5651 931.4473,-140.5894 933.1414,-147.3813"/>
+<title>Node97&#45;&gt;Node98</title>
+<path fill="none" stroke="#191970" d="M133.9899,-144.0562C144.0579,-146.5646 154.292,-149.105 164,-151.5 226.6472,-166.9551 298.3185,-184.3707 348.1693,-196.4415"/>
+<polygon fill="#191970" stroke="#191970" points="134.5527,-140.5894 124.0029,-141.5651 132.8586,-147.3813 134.5527,-140.5894"/>
 </g>
-<!-- Node89 -->
-<g id="node7" class="node">
-<title>Node89</title>
-<g id="a_node7"><a xlink:href="classstatistics_1_1similarity_matrix.html#a46d6657734fa07a8c7ee3bbee8145c2c" target="_top" xlink:title="Method to allocate memory for the similiarity matrix.">
-<polygon fill="#ffffff" stroke="#000000" points="774,-111.5 774,-141.5 902,-141.5 902,-111.5 774,-111.5"/>
-<text text-anchor="start" x="782" y="-129.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
-<text text-anchor="middle" x="838" y="-118.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::memoryAllocation</text>
-</a>
-</g>
-</g>
-<!-- Node83&#45;&gt;Node89 -->
-<g id="edge7" class="edge">
-<title>Node83&#45;&gt;Node89</title>
-<path fill="none" stroke="#191970" d="M927.4359,-126.5C918.9963,-126.5 910.4508,-126.5 902.1609,-126.5"/>
-<polygon fill="#191970" stroke="#191970" points="927.6536,-130.0001 937.6536,-126.5 927.6535,-123.0001 927.6536,-130.0001"/>
-</g>
-<!-- Node94 -->
-<g id="node12" class="node">
-<title>Node94</title>
-<g id="a_node12"><a xlink:href="classstatistics_1_1similarity_matrix.html#a5b05a2eb7b14bbf6cd71b8f739158f1b" target="_top" xlink:title="Destructor.">
-<polygon fill="#ffffff" stroke="#000000" points="774,-62.5 774,-92.5 902,-92.5 902,-62.5 774,-62.5"/>
-<text text-anchor="start" x="782" y="-80.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
-<text text-anchor="middle" x="838" y="-69.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::~similarityMatrix</text>
-</a>
-</g>
-</g>
-<!-- Node83&#45;&gt;Node94 -->
-<g id="edge17" class="edge">
-<title>Node83&#45;&gt;Node94</title>
-<path fill="none" stroke="#191970" d="M941.8657,-108.533C924.294,-103.283 905.2771,-97.6011 888.3767,-92.5516"/>
-<polygon fill="#191970" stroke="#191970" points="940.8729,-111.8892 951.4564,-111.3986 942.8769,-105.1822 940.8729,-111.8892"/>
-</g>
-<!-- Node85 -->
-<g id="node3" class="node">
-<title>Node85</title>
-<g id="a_node3"><a xlink:href="classtrim_al_manager.html#a3e8b2b5b4e1a44c498c47448840b6c69" target="_top" xlink:title="Method to create, load and use a similarity matrix, depending on alignment residue nature,...">
-<polygon fill="#ffffff" stroke="#000000" points="409,-98.5 409,-128.5 537,-128.5 537,-98.5 409,-98.5"/>
-<text text-anchor="start" x="417" y="-116.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::create</text>
-<text text-anchor="middle" x="473" y="-105.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_or_use_similarity_matrix</text>
-</a>
-</g>
-</g>
-<!-- Node84&#45;&gt;Node85 -->
-<g id="edge2" class="edge">
-<title>Node84&#45;&gt;Node85</title>
-<path fill="none" stroke="#191970" d="M584.945,-192.8309C580.8452,-191.1757 576.8342,-189.4001 573,-187.5 540.8759,-171.5808 508.3656,-145.192 489.4773,-128.6048"/>
-<polygon fill="#191970" stroke="#191970" points="584.0394,-196.2296 594.6314,-196.4763 586.505,-189.6782 584.0394,-196.2296"/>
-</g>
-<!-- Node86 -->
-<g id="node4" class="node">
-<title>Node86</title>
-<g id="a_node4"><a xlink:href="classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" target="_top" xlink:title="Method to perform the analysis if all checks have passed.">
-<polygon fill="#ffffff" stroke="#000000" points="74,-104 74,-123 193,-123 193,-104 74,-104"/>
-<text text-anchor="middle" x="133.5" y="-111" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform</text>
-</a>
-</g>
-</g>
-<!-- Node85&#45;&gt;Node86 -->
-<g id="edge3" class="edge">
-<title>Node85&#45;&gt;Node86</title>
-<path fill="none" stroke="#191970" d="M398.6854,-113.5C337.0194,-113.5 250.4621,-113.5 193.2259,-113.5"/>
-<polygon fill="#191970" stroke="#191970" points="398.7436,-117.0001 408.7435,-113.5 398.7435,-110.0001 398.7436,-117.0001"/>
-</g>
-<!-- Node88 -->
-<g id="node6" class="node">
-<title>Node88</title>
-<g id="a_node6"><a xlink:href="classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="229,-85 229,-104 373,-104 373,-85 229,-85"/>
-<text text-anchor="middle" x="301" y="-92" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform_VCF</text>
-</a>
-</g>
-</g>
-<!-- Node85&#45;&gt;Node88 -->
-<g id="edge5" class="edge">
-<title>Node85&#45;&gt;Node88</title>
-<path fill="none" stroke="#191970" d="M399.0059,-105.3262C390.4509,-104.3812 381.7343,-103.4183 373.2037,-102.476"/>
-<polygon fill="#191970" stroke="#191970" points="398.6297,-108.8059 408.9535,-106.4251 399.3983,-101.8482 398.6297,-108.8059"/>
-</g>
-<!-- Node87 -->
-<g id="node5" class="node">
-<title>Node87</title>
-<g id="a_node5"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="0,-104 0,-123 38,-123 38,-104 0,-104"/>
-<text text-anchor="middle" x="19" y="-111" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
-</a>
-</g>
-</g>
-<!-- Node86&#45;&gt;Node87 -->
-<g id="edge4" class="edge">
-<title>Node86&#45;&gt;Node87</title>
-<path fill="none" stroke="#191970" d="M63.6802,-113.5C54.3823,-113.5 45.5497,-113.5 38.2303,-113.5"/>
-<polygon fill="#191970" stroke="#191970" points="63.9025,-117.0001 73.9024,-113.5 63.9024,-110.0001 63.9025,-117.0001"/>
-</g>
-<!-- Node88&#45;&gt;Node86 -->
-<g id="edge6" class="edge">
-<title>Node88&#45;&gt;Node86</title>
-<path fill="none" stroke="#191970" d="M218.8378,-103.8199C210.1593,-104.8043 201.4581,-105.7913 193.107,-106.7386"/>
-<polygon fill="#191970" stroke="#191970" points="219.4511,-107.2729 228.9928,-102.668 218.662,-100.3175 219.4511,-107.2729"/>
-</g>
-<!-- Node89&#45;&gt;Node84 -->
-<g id="edge16" class="edge">
-<title>Node89&#45;&gt;Node84</title>
-<path fill="none" stroke="#191970" d="M808.6797,-147.2441C789.3249,-160.2046 763.0099,-176.4685 738,-187.5 730.4936,-190.811 722.4046,-193.8071 714.3298,-196.4707"/>
-<polygon fill="#191970" stroke="#191970" points="810.7504,-150.0687 817.053,-141.5525 806.8152,-144.2795 810.7504,-150.0687"/>
-</g>
-<!-- Node90 -->
+<!-- Node104 -->
 <g id="node8" class="node">
-<title>Node90</title>
-<g id="a_node8"><a xlink:href="classstatistics_1_1similarity_matrix.html#a2788d7d1bb700b9e59d654fb24f6172c" target="_top" xlink:title="Method to load alternative similarity matrices also included on the suite. Currently,...">
-<polygon fill="#ffffff" stroke="#000000" points="582.5,-147.5 582.5,-177.5 728.5,-177.5 728.5,-147.5 582.5,-147.5"/>
-<text text-anchor="start" x="590.5" y="-165.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
-<text text-anchor="middle" x="655.5" y="-154.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::alternativeSimilarityMatrices</text>
+<title>Node104</title>
+<g id="a_node8"><a xlink:href="classstatistics_1_1similarity_matrix.html#a46d6657734fa07a8c7ee3bbee8145c2c" target="_top" xlink:title="Method to allocate memory for the similiarity matrix. ">
+<polygon fill="#ffffff" stroke="#000000" points="164,-111.5 164,-141.5 292,-141.5 292,-111.5 164,-111.5"/>
+<text text-anchor="start" x="172" y="-129.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
+<text text-anchor="middle" x="228" y="-118.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::memoryAllocation</text>
 </a>
 </g>
 </g>
-<!-- Node89&#45;&gt;Node90 -->
-<g id="edge8" class="edge">
-<title>Node89&#45;&gt;Node90</title>
-<path fill="none" stroke="#191970" d="M763.864,-141.1241C752.2939,-143.4064 740.3431,-145.7638 728.7921,-148.0424"/>
-<polygon fill="#191970" stroke="#191970" points="764.7804,-144.5109 773.9139,-139.1416 763.4256,-137.6432 764.7804,-144.5109"/>
+<!-- Node97&#45;&gt;Node104 -->
+<g id="edge7" class="edge">
+<title>Node97&#45;&gt;Node104</title>
+<path fill="none" stroke="#191970" d="M138.5641,-126.5C147.0037,-126.5 155.5492,-126.5 163.8391,-126.5"/>
+<polygon fill="#191970" stroke="#191970" points="138.3465,-123.0001 128.3464,-126.5 138.3464,-130.0001 138.3465,-123.0001"/>
 </g>
-<!-- Node91 -->
+<!-- Node109 -->
+<g id="node13" class="node">
+<title>Node109</title>
+<g id="a_node13"><a xlink:href="classstatistics_1_1similarity_matrix.html#a5b05a2eb7b14bbf6cd71b8f739158f1b" target="_top" xlink:title="Destructor. ">
+<polygon fill="#ffffff" stroke="#000000" points="164,-62.5 164,-92.5 292,-92.5 292,-62.5 164,-62.5"/>
+<text text-anchor="start" x="172" y="-80.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
+<text text-anchor="middle" x="228" y="-69.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::~similarityMatrix</text>
+</a>
+</g>
+</g>
+<!-- Node97&#45;&gt;Node109 -->
+<g id="edge17" class="edge">
+<title>Node97&#45;&gt;Node109</title>
+<path fill="none" stroke="#191970" d="M124.1343,-108.533C141.706,-103.283 160.7229,-97.6011 177.6233,-92.5516"/>
+<polygon fill="#191970" stroke="#191970" points="123.1231,-105.1822 114.5436,-111.3986 125.1271,-111.8892 123.1231,-105.1822"/>
+</g>
+<!-- Node99 -->
+<g id="node3" class="node">
+<title>Node99</title>
+<g id="a_node3"><a xlink:href="classtrim_al_manager.html#a3e8b2b5b4e1a44c498c47448840b6c69" target="_top" xlink:title="Method to create, load and use a similarity matrix, depending on alignment residue nature...">
+<polygon fill="#ffffff" stroke="#000000" points="529,-98.5 529,-128.5 657,-128.5 657,-98.5 529,-98.5"/>
+<text text-anchor="start" x="537" y="-116.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::create</text>
+<text text-anchor="middle" x="593" y="-105.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_or_use_similarity_matrix</text>
+</a>
+</g>
+</g>
+<!-- Node98&#45;&gt;Node99 -->
+<g id="edge2" class="edge">
+<title>Node98&#45;&gt;Node99</title>
+<path fill="none" stroke="#191970" d="M481.055,-192.8309C485.1548,-191.1757 489.1658,-189.4001 493,-187.5 525.1241,-171.5808 557.6344,-145.192 576.5227,-128.6048"/>
+<polygon fill="#191970" stroke="#191970" points="479.495,-189.6782 471.3686,-196.4763 481.9606,-196.2296 479.495,-189.6782"/>
+</g>
+<!-- Node100 -->
+<g id="node4" class="node">
+<title>Node100</title>
+<g id="a_node4"><a xlink:href="classtrim_al_manager.html#a7c641a1feff33d401b4ea5c82e989289" target="_top" xlink:title="trimAlManager::innerPerform">
+<polygon fill="#ffffff" stroke="#000000" points="694.5,-123 694.5,-142 835.5,-142 835.5,-123 694.5,-123"/>
+<text text-anchor="middle" x="765" y="-130" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::innerPerform</text>
+</a>
+</g>
+</g>
+<!-- Node99&#45;&gt;Node100 -->
+<g id="edge3" class="edge">
+<title>Node99&#45;&gt;Node100</title>
+<path fill="none" stroke="#191970" d="M667.1153,-121.6872C676.1193,-122.6818 685.3004,-123.696 694.2537,-124.685"/>
+<polygon fill="#191970" stroke="#191970" points="667.3703,-118.1941 657.0465,-120.5749 666.6017,-125.1518 667.3703,-118.1941"/>
+</g>
+<!-- Node103 -->
+<g id="node7" class="node">
+<title>Node103</title>
+<g id="a_node7"><a xlink:href="classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" target="_top" xlink:title="trimAlManager::perform_VCF">
+<polygon fill="#ffffff" stroke="#000000" points="693,-85 693,-104 837,-104 837,-85 693,-85"/>
+<text text-anchor="middle" x="765" y="-92" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform_VCF</text>
+</a>
+</g>
+</g>
+<!-- Node99&#45;&gt;Node103 -->
+<g id="edge6" class="edge">
+<title>Node99&#45;&gt;Node103</title>
+<path fill="none" stroke="#191970" d="M666.9941,-105.3262C675.5491,-104.3812 684.2657,-103.4183 692.7963,-102.476"/>
+<polygon fill="#191970" stroke="#191970" points="666.6017,-101.8482 657.0465,-106.4251 667.3703,-108.8059 666.6017,-101.8482"/>
+</g>
+<!-- Node101 -->
+<g id="node5" class="node">
+<title>Node101</title>
+<g id="a_node5"><a xlink:href="classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" target="_top" xlink:title="Method to perform the analysis if all checks have passed. ">
+<polygon fill="#ffffff" stroke="#000000" points="873,-123 873,-142 992,-142 992,-123 873,-123"/>
+<text text-anchor="middle" x="932.5" y="-130" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::perform</text>
+</a>
+</g>
+</g>
+<!-- Node100&#45;&gt;Node101 -->
+<g id="edge4" class="edge">
+<title>Node100&#45;&gt;Node101</title>
+<path fill="none" stroke="#191970" d="M845.8102,-132.5C854.9363,-132.5 864.1089,-132.5 872.8939,-132.5"/>
+<polygon fill="#191970" stroke="#191970" points="845.5497,-129.0001 835.5496,-132.5 845.5496,-136.0001 845.5497,-129.0001"/>
+</g>
+<!-- Node102 -->
+<g id="node6" class="node">
+<title>Node102</title>
+<g id="a_node6"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
+<polygon fill="#ffffff" stroke="#000000" points="1028,-123 1028,-142 1066,-142 1066,-123 1028,-123"/>
+<text text-anchor="middle" x="1047" y="-130" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
+</a>
+</g>
+</g>
+<!-- Node101&#45;&gt;Node102 -->
+<g id="edge5" class="edge">
+<title>Node101&#45;&gt;Node102</title>
+<path fill="none" stroke="#191970" d="M1002.3198,-132.5C1011.6177,-132.5 1020.4503,-132.5 1027.7697,-132.5"/>
+<polygon fill="#191970" stroke="#191970" points="1002.0976,-129.0001 992.0976,-132.5 1002.0975,-136.0001 1002.0976,-129.0001"/>
+</g>
+<!-- Node104&#45;&gt;Node98 -->
+<g id="edge16" class="edge">
+<title>Node104&#45;&gt;Node98</title>
+<path fill="none" stroke="#191970" d="M257.3203,-147.2441C276.6751,-160.2046 302.9901,-176.4685 328,-187.5 335.5064,-190.811 343.5954,-193.8071 351.6702,-196.4707"/>
+<polygon fill="#191970" stroke="#191970" points="259.1848,-144.2795 248.947,-141.5525 255.2496,-150.0687 259.1848,-144.2795"/>
+</g>
+<!-- Node105 -->
 <g id="node9" class="node">
-<title>Node91</title>
-<g id="a_node9"><a xlink:href="classstatistics_1_1similarity_matrix.html#a6d239debb5982c5cef97308403f658b7" target="_top" xlink:title="Method to load the default AA similarity matrix.">
-<polygon fill="#ffffff" stroke="#000000" points="591.5,-98.5 591.5,-128.5 719.5,-128.5 719.5,-98.5 591.5,-98.5"/>
-<text text-anchor="start" x="599.5" y="-116.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
-<text text-anchor="middle" x="655.5" y="-105.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::defaultAASimMatrix</text>
+<title>Node105</title>
+<g id="a_node9"><a xlink:href="classstatistics_1_1similarity_matrix.html#a2788d7d1bb700b9e59d654fb24f6172c" target="_top" xlink:title="Method to load alternative similarity matrices also included on the suite. Currently, only one type of alternative matrix is available: &#160;matrix_code: 1 datatype SequenceTypes::AA. ">
+<polygon fill="#ffffff" stroke="#000000" points="337.5,-147.5 337.5,-177.5 483.5,-177.5 483.5,-147.5 337.5,-147.5"/>
+<text text-anchor="start" x="345.5" y="-165.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
+<text text-anchor="middle" x="410.5" y="-154.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::alternativeSimilarityMatrices</text>
 </a>
 </g>
 </g>
-<!-- Node89&#45;&gt;Node91 -->
-<g id="edge10" class="edge">
-<title>Node89&#45;&gt;Node91</title>
-<path fill="none" stroke="#191970" d="M763.8985,-121.2215C749.2628,-120.179 734.0166,-119.093 719.7399,-118.076"/>
-<polygon fill="#191970" stroke="#191970" points="763.6905,-124.7155 773.9139,-121.935 764.1879,-117.7332 763.6905,-124.7155"/>
+<!-- Node104&#45;&gt;Node105 -->
+<g id="edge8" class="edge">
+<title>Node104&#45;&gt;Node105</title>
+<path fill="none" stroke="#191970" d="M302.136,-141.1241C313.7061,-143.4064 325.6569,-145.7638 337.2079,-148.0424"/>
+<polygon fill="#191970" stroke="#191970" points="302.5744,-137.6432 292.0861,-139.1416 301.2196,-144.5109 302.5744,-137.6432"/>
 </g>
-<!-- Node92 -->
+<!-- Node106 -->
 <g id="node10" class="node">
-<title>Node92</title>
-<g id="a_node10"><a xlink:href="classstatistics_1_1similarity_matrix.html#abcee67b7f79ef0975ca006647198f5d7" target="_top" xlink:title="Method to load the default DEG NT similarity matrix.">
-<polygon fill="#ffffff" stroke="#000000" points="573,-49.5 573,-79.5 738,-79.5 738,-49.5 573,-49.5"/>
-<text text-anchor="start" x="581" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
-<text text-anchor="middle" x="655.5" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::defaultNTDegeneratedSimMatrix</text>
+<title>Node106</title>
+<g id="a_node10"><a xlink:href="classstatistics_1_1similarity_matrix.html#a6d239debb5982c5cef97308403f658b7" target="_top" xlink:title="Method to load the default AA similarity matrix. ">
+<polygon fill="#ffffff" stroke="#000000" points="346.5,-98.5 346.5,-128.5 474.5,-128.5 474.5,-98.5 346.5,-98.5"/>
+<text text-anchor="start" x="354.5" y="-116.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
+<text text-anchor="middle" x="410.5" y="-105.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::defaultAASimMatrix</text>
 </a>
 </g>
 </g>
-<!-- Node89&#45;&gt;Node92 -->
-<g id="edge12" class="edge">
-<title>Node89&#45;&gt;Node92</title>
-<path fill="none" stroke="#191970" d="M788.1919,-107.921C765.845,-99.6133 743.2968,-91.2807 738,-89.5 728.0698,-86.1617 717.4019,-82.7799 707.142,-79.6278"/>
-<polygon fill="#191970" stroke="#191970" points="787.1131,-111.2539 797.7059,-111.4607 789.554,-104.6933 787.1131,-111.2539"/>
+<!-- Node104&#45;&gt;Node106 -->
+<g id="edge10" class="edge">
+<title>Node104&#45;&gt;Node106</title>
+<path fill="none" stroke="#191970" d="M302.1015,-121.2215C316.7372,-120.179 331.9834,-119.093 346.2601,-118.076"/>
+<polygon fill="#191970" stroke="#191970" points="301.8121,-117.7332 292.0861,-121.935 302.3095,-124.7155 301.8121,-117.7332"/>
 </g>
-<!-- Node93 -->
+<!-- Node107 -->
 <g id="node11" class="node">
-<title>Node93</title>
-<g id="a_node11"><a xlink:href="classstatistics_1_1similarity_matrix.html#a72f692ab289725eef0702bfd7e93a38a" target="_top" xlink:title="Method to load the default NT similarity matrix.">
-<polygon fill="#ffffff" stroke="#000000" points="591.5,-.5 591.5,-30.5 719.5,-30.5 719.5,-.5 591.5,-.5"/>
-<text text-anchor="start" x="599.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
-<text text-anchor="middle" x="655.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::defaultNTSimMatrix</text>
+<title>Node107</title>
+<g id="a_node11"><a xlink:href="classstatistics_1_1similarity_matrix.html#abcee67b7f79ef0975ca006647198f5d7" target="_top" xlink:title="Method to load the default DEG NT similarity matrix. ">
+<polygon fill="#ffffff" stroke="#000000" points="328,-49.5 328,-79.5 493,-79.5 493,-49.5 328,-49.5"/>
+<text text-anchor="start" x="336" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
+<text text-anchor="middle" x="410.5" y="-56.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::defaultNTDegeneratedSimMatrix</text>
 </a>
 </g>
 </g>
-<!-- Node89&#45;&gt;Node93 -->
+<!-- Node104&#45;&gt;Node107 -->
+<g id="edge12" class="edge">
+<title>Node104&#45;&gt;Node107</title>
+<path fill="none" stroke="#191970" d="M277.8081,-107.921C300.155,-99.6133 322.7032,-91.2807 328,-89.5 337.9302,-86.1617 348.5981,-82.7799 358.858,-79.6278"/>
+<polygon fill="#191970" stroke="#191970" points="276.446,-104.6933 268.2941,-111.4607 278.8869,-111.2539 276.446,-104.6933"/>
+</g>
+<!-- Node108 -->
+<g id="node12" class="node">
+<title>Node108</title>
+<g id="a_node12"><a xlink:href="classstatistics_1_1similarity_matrix.html#a72f692ab289725eef0702bfd7e93a38a" target="_top" xlink:title="Method to load the default NT similarity matrix. ">
+<polygon fill="#ffffff" stroke="#000000" points="346.5,-.5 346.5,-30.5 474.5,-30.5 474.5,-.5 346.5,-.5"/>
+<text text-anchor="start" x="354.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::similarityMatrix</text>
+<text text-anchor="middle" x="410.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::defaultNTSimMatrix</text>
+</a>
+</g>
+</g>
+<!-- Node104&#45;&gt;Node108 -->
 <g id="edge14" class="edge">
-<title>Node89&#45;&gt;Node93</title>
-<path fill="none" stroke="#191970" d="M778.2738,-105.8314C776.7953,-104.7731 775.3667,-103.6634 774,-102.5 749.4432,-81.5964 763.33,-59.4597 738,-39.5 732.4933,-35.1608 726.2279,-31.606 719.6678,-28.6937"/>
-<polygon fill="#191970" stroke="#191970" points="776.8548,-109.0687 787.2019,-111.3463 780.5335,-103.1133 776.8548,-109.0687"/>
+<title>Node104&#45;&gt;Node108</title>
+<path fill="none" stroke="#191970" d="M287.7262,-105.8314C289.2047,-104.7731 290.6333,-103.6634 292,-102.5 316.5568,-81.5964 302.67,-59.4597 328,-39.5 333.5067,-35.1608 339.7721,-31.606 346.3322,-28.6937"/>
+<polygon fill="#191970" stroke="#191970" points="285.4665,-103.1133 278.7981,-111.3463 289.1452,-109.0687 285.4665,-103.1133"/>
 </g>
-<!-- Node90&#45;&gt;Node85 -->
+<!-- Node105&#45;&gt;Node99 -->
 <g id="edge9" class="edge">
-<title>Node90&#45;&gt;Node85</title>
-<path fill="none" stroke="#191970" d="M589.396,-144.7515C569.6166,-139.4409 548.1275,-133.6712 529.0594,-128.5516"/>
-<polygon fill="#191970" stroke="#191970" points="588.6893,-148.1857 599.2548,-147.3986 590.5045,-141.4251 588.6893,-148.1857"/>
+<title>Node105&#45;&gt;Node99</title>
+<path fill="none" stroke="#191970" d="M476.604,-144.7515C496.3834,-139.4409 517.8725,-133.6712 536.9406,-128.5516"/>
+<polygon fill="#191970" stroke="#191970" points="475.4955,-141.4251 466.7452,-147.3986 477.3107,-148.1857 475.4955,-141.4251"/>
 </g>
-<!-- Node91&#45;&gt;Node85 -->
+<!-- Node106&#45;&gt;Node99 -->
 <g id="edge11" class="edge">
-<title>Node91&#45;&gt;Node85</title>
-<path fill="none" stroke="#191970" d="M581.3985,-113.5C566.7628,-113.5 551.5166,-113.5 537.2399,-113.5"/>
-<polygon fill="#191970" stroke="#191970" points="581.414,-117.0001 591.4139,-113.5 581.4139,-110.0001 581.414,-117.0001"/>
+<title>Node106&#45;&gt;Node99</title>
+<path fill="none" stroke="#191970" d="M484.6015,-113.5C499.2372,-113.5 514.4834,-113.5 528.7601,-113.5"/>
+<polygon fill="#191970" stroke="#191970" points="484.5861,-110.0001 474.5861,-113.5 484.586,-117.0001 484.5861,-110.0001"/>
 </g>
-<!-- Node92&#45;&gt;Node85 -->
+<!-- Node107&#45;&gt;Node99 -->
 <g id="edge13" class="edge">
-<title>Node92&#45;&gt;Node85</title>
-<path fill="none" stroke="#191970" d="M589.396,-82.2485C569.6166,-87.5591 548.1275,-93.3288 529.0594,-98.4484"/>
-<polygon fill="#191970" stroke="#191970" points="590.5045,-85.5749 599.2548,-79.6014 588.6893,-78.8143 590.5045,-85.5749"/>
+<title>Node107&#45;&gt;Node99</title>
+<path fill="none" stroke="#191970" d="M476.604,-82.2485C496.3834,-87.5591 517.8725,-93.3288 536.9406,-98.4484"/>
+<polygon fill="#191970" stroke="#191970" points="477.3107,-78.8143 466.7452,-79.6014 475.4955,-85.5749 477.3107,-78.8143"/>
 </g>
-<!-- Node93&#45;&gt;Node85 -->
+<!-- Node108&#45;&gt;Node99 -->
 <g id="edge15" class="edge">
-<title>Node93&#45;&gt;Node85</title>
-<path fill="none" stroke="#191970" d="M584.945,-34.1691C580.8452,-35.8243 576.8342,-37.5999 573,-39.5 540.8759,-55.4192 508.3656,-81.808 489.4773,-98.3952"/>
-<polygon fill="#191970" stroke="#191970" points="586.505,-37.3218 594.6314,-30.5237 584.0394,-30.7704 586.505,-37.3218"/>
+<title>Node108&#45;&gt;Node99</title>
+<path fill="none" stroke="#191970" d="M481.055,-34.1691C485.1548,-35.8243 489.1658,-37.5999 493,-39.5 525.1241,-55.4192 557.6344,-81.808 576.5227,-98.3952"/>
+<polygon fill="#191970" stroke="#191970" points="481.9606,-30.7704 471.3686,-30.5237 479.495,-37.3218 481.9606,-30.7704"/>
 </g>
 </g>
 </svg>

@@ -6,7 +6,7 @@ var classstatistics_1_1similarity_matrix =
     [ "defaultAASimMatrix", "classstatistics_1_1similarity_matrix.html#a6d239debb5982c5cef97308403f658b7", null ],
     [ "defaultNTDegeneratedSimMatrix", "classstatistics_1_1similarity_matrix.html#abcee67b7f79ef0975ca006647198f5d7", null ],
     [ "defaultNTSimMatrix", "classstatistics_1_1similarity_matrix.html#a72f692ab289725eef0702bfd7e93a38a", null ],
-    [ "getDistance", "classstatistics_1_1similarity_matrix.html#a2a17eb464ec28ba83edbcbe271e7ff62", null ],
+    [ "getDistance", "classstatistics_1_1similarity_matrix.html#a0cdb3ed14678b442824e84e6385e8f84", null ],
     [ "loadSimMatrix", "classstatistics_1_1similarity_matrix.html#a8d3f892581b552e6e5321ce1ff073624", null ],
     [ "memoryAllocation", "classstatistics_1_1similarity_matrix.html#a46d6657734fa07a8c7ee3bbee8145c2c", null ],
     [ "memoryDeletion", "classstatistics_1_1similarity_matrix.html#a3f33f4b18bb1da1887ba666c74bf9a47", null ],

@@ -12,16 +12,13 @@
 <!-- Node2 -->
 <g id="node1" class="node">
 <title>Node2</title>
-<g id="a_node1"><a xlink:title=" ">
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-6 0,-25 155,-25 155,-6 0,-6"/>
 <text text-anchor="middle" x="77.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::~trimAlManager</text>
-</a>
-</g>
 </g>
 <!-- Node3 -->
 <g id="node2" class="node">
 <title>Node3</title>
-<g id="a_node2"><a xlink:href="classtrim_al_manager.html#a6678747256ac394eb8b4c648d403dcc8" target="_top" xlink:title="Method to delete all variables that need to be deallocated.">
+<g id="a_node2"><a xlink:href="classtrim_al_manager.html#a6678747256ac394eb8b4c648d403dcc8" target="_top" xlink:title="Method to delete all variables that need to be deallocated. ">
 <polygon fill="#ffffff" stroke="#000000" points="191,-.5 191,-30.5 303,-30.5 303,-.5 191,-.5"/>
 <text text-anchor="start" x="199" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::delete</text>
 <text text-anchor="middle" x="247" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_variables</text>

@@ -1,7 +1,6 @@
 <map id="statistics::Consistency::compareAndChoose" name="statistics::Consistency::compareAndChoose">
-<area shape="rect" id="node1" title="Method to compare a set of alignments to select the most consistent one respect the others...." alt="" coords="843,5,999,47"/>
-<area shape="rect" id="node2" href="$classstatistics_1_1_consistency.html#ae8679e43ec228926ac2844af133cc2d5" title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue..." alt="" coords="639,5,795,47"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#a12b7cef964ef258fe7621da44867c51f" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation..." alt="" coords="361,13,591,39"/>
-<area shape="rect" id="node4" href="$classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" title="Method to parse arguments into usable structure in trimal." alt="" coords="104,13,313,39"/>
-<area shape="rect" id="node5" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,56,39"/>
+<area shape="rect" id="node2" href="$classstatistics_1_1_consistency.html#ae8679e43ec228926ac2844af133cc2d5" title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue..." alt="" coords="209,5,365,47"/>
+<area shape="rect" id="node3" href="$classtrim_al_manager.html#a12b7cef964ef258fe7621da44867c51f" title="Method to check if multiple files comparison has been set correctly. It also perform some calculation..." alt="" coords="413,13,643,39"/>
+<area shape="rect" id="node4" href="$classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" title="Method to parse arguments into usable structure in trimal. " alt="" coords="691,13,900,39"/>
+<area shape="rect" id="node5" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="948,13,999,39"/>
 </map>

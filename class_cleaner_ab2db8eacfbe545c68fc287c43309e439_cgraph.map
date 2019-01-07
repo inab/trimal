@@ -1,5 +1,5 @@
 <map id="Cleaner::calculateSpuriousVector" name="Cleaner::calculateSpuriousVector">
-<area shape="rect" id="node1" title="Method to compute the overlap values. &#160;See Alignment::overlaps." alt="" coords="5,5,184,47"/>
-<area shape="rect" id="node2" href="$class_alignment.html#a1bc7622776f3935f6cb9d3c895e43a29" title="Alignment type getter. &#160;&#160;See SequenceTypes." alt="" coords="232,13,425,39"/>
-<area shape="rect" id="node3" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type." alt="" coords="473,13,649,39"/>
+<area shape="rect" id="node2" href="$class_alignment.html#ab2487799d9a7d593d7fbe1b8da9593f5" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="232,13,425,39"/>
+<area shape="rect" id="node3" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type. " alt="" coords="473,13,649,39"/>
+<area shape="rect" id="node4" href="$namespaceutils.html#a6286fde6f4dd58ef0cfa9d55341b72f8" title="utils::toUpper" alt="" coords="697,13,797,39"/>
 </map>

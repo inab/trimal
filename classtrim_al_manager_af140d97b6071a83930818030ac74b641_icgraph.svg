@@ -9,29 +9,26 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>trimAlManager::parseArguments</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-24 235,-24 235,4 -4,4"/>
-<!-- Node671 -->
+<!-- Node915 -->
 <g id="node1" class="node">
-<title>Node671</title>
-<g id="a_node1"><a xlink:title="Method to parse arguments into usable structure in trimal.">
-<polygon fill="#bfbfbf" stroke="#000000" points="74,-.5 74,-19.5 231,-19.5 231,-.5 74,-.5"/>
-<text text-anchor="middle" x="152.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::parseArguments</text>
-</a>
+<title>Node915</title>
+<polygon fill="#bfbfbf" stroke="#000000" points="0,-.5 0,-19.5 157,-19.5 157,-.5 0,-.5"/>
+<text text-anchor="middle" x="78.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::parseArguments</text>
 </g>
-</g>
-<!-- Node672 -->
+<!-- Node916 -->
 <g id="node2" class="node">
-<title>Node672</title>
-<g id="a_node2"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title=" ">
-<polygon fill="#ffffff" stroke="#000000" points="0,-.5 0,-19.5 38,-19.5 38,-.5 0,-.5"/>
-<text text-anchor="middle" x="19" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
+<title>Node916</title>
+<g id="a_node2"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
+<polygon fill="#ffffff" stroke="#000000" points="193,-.5 193,-19.5 231,-19.5 231,-.5 193,-.5"/>
+<text text-anchor="middle" x="212" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node671&#45;&gt;Node672 -->
+<!-- Node915&#45;&gt;Node916 -->
 <g id="edge1" class="edge">
-<title>Node671&#45;&gt;Node672</title>
-<path fill="none" stroke="#191970" d="M63.4234,-10C54.1647,-10 45.5538,-10 38.4254,-10"/>
-<polygon fill="#191970" stroke="#191970" points="63.6848,-13.5001 73.6848,-10 63.6847,-6.5001 63.6848,-13.5001"/>
+<title>Node915&#45;&gt;Node916</title>
+<path fill="none" stroke="#191970" d="M167.5766,-10C176.8353,-10 185.4462,-10 192.5746,-10"/>
+<polygon fill="#191970" stroke="#191970" points="167.3153,-6.5001 157.3152,-10 167.3152,-13.5001 167.3153,-6.5001"/>
 </g>
 </g>
 </svg>
