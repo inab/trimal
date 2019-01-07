@@ -1391,9 +1391,6 @@ inline int trimAlManager::innerPerform() {
     if (!create_or_use_similarity_matrix())
         return 2;
 
-    if (svgStatsOutFile != nullptr)
-        svg_stats_out();
-
     print_statistics();
 
     clean_alignment();
@@ -1408,6 +1405,9 @@ inline int trimAlManager::innerPerform() {
     output_reports();
 
     save_alignment();
+
+    if (svgStatsOutFile != nullptr)
+        svg_stats_out();
 
     if ((columnNumbering) && (!appearErrors))
         singleAlig->Statistics->printCorrespondence();
@@ -1562,82 +1562,8 @@ inline void trimAlManager::print_statistics() {
 
 inline void trimAlManager::svg_stats_out()
 {
-    std::string title = infile;
-    std::string filename = svgStatsOutFile;
-    std::string linename = "";
-    std::string color = "";
 
-    utils::streamSVG(nullptr, nullptr, 0, nullptr, nullptr, &title, &filename);
-
-    if (origAlig->Statistics->calculateGapStats()) {
-        float acm = 0.0F;
-        float x = 0;
-        float y = 1.F;
-        color = "red";
-        linename = "gaps";
-        utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
-
-        for (i = 0, acm = 0; i <= origAlig->Statistics->gaps->maxGaps; i++) {
-            // If the columns' number with this gaps' number is not equal to zero, we will count the columns. 
-            if (origAlig->Statistics->gaps->numColumnsWithGaps[i] != 0) {
-                // Compute and prints the accumulative values for the gaps in the alignment. 
-                acm += origAlig->Statistics->gaps->numColumnsWithGaps[i];
-                x = acm / origAlig->numberOfResidues;
-                y = 1.F - ((i * 1.0F) / origAlig->numberOfSequences);
-                utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
-            }
-        }
-    }
-
-    if (origAlig->Statistics->calculateConservationStats()) {
-        color = "blue";
-        linename = "similarity";
-        float x = 0;
-        float y = 1.F;
-        utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
-        float refer, *vectAux;
-        int i, num, acm;
-
-        // Allocate memory 
-        vectAux = new float[origAlig->numberOfResidues];
-
-        // Select the similarity's value source and copy that vector in a auxiliar vector 
-        if (origAlig->Statistics->similarity->MDK_Window != nullptr)
-            utils::copyVect(origAlig->Statistics->similarity->MDK_Window, vectAux, origAlig->numberOfResidues);
-        else
-            utils::copyVect(origAlig->Statistics->similarity->MDK, vectAux, origAlig->numberOfResidues);
-
-        // Sort the auxiliar vector. 
-        utils::quicksort(vectAux, 0, origAlig->numberOfResidues - 1);
-
-        // Initializate some values 
-        refer = vectAux[origAlig->numberOfResidues - 1];
-        acm = 0;
-        num = 1;
-
-        // Count the columns with the same similarity's value and compute this information to shows the accunulative
-        // statistics in the alignment. 
-        for (i = origAlig->numberOfResidues - 2; i >= 0; i--) {
-            acm++;
-
-            if (refer != vectAux[i]) {
-                x = ((float) acm / origAlig->numberOfResidues);
-                y = refer;
-                utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
-                refer = vectAux[i];
-                num = 1;
-            } else num++;
-        }
-        acm++;
-        x = ((float) acm / origAlig->numberOfResidues);
-        y = refer;
-        utils::streamSVG(&x, &y, 0, &linename, &color, nullptr, nullptr);
-
-        // Deallocate the reserved memory. 
-        delete[] vectAux;
-    }
-
-    utils::streamSVG(nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr);
+    origAlig->statSVG(svgStatsOutFile);
 }
 
 inline bool trimAlManager::create_or_use_similarity_matrix() {
@@ -1952,6 +1878,8 @@ inline void trimAlManager::delete_variables() {
     htmlOutFile = nullptr;
     delete[] svgOutFile;
     svgOutFile = nullptr;
+    delete[] svgStatsOutFile;
+    svgStatsOutFile = nullptr;
 
     delete[] infile;
     infile = nullptr;
@@ -1970,6 +1898,7 @@ inline void trimAlManager::delete_variables() {
 
     delete CS;
     CS = nullptr;
+
 }
 
 inline void trimAlManager::menu() {

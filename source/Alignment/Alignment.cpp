@@ -33,14 +33,9 @@
 #include "Statistics/Consistency.h"
 #include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
-#include "Statistics/similarityMatrix.h"
-#include "Statistics/Gaps.h"
 #include "Alignment/sequencesMatrix.h"
 #include "reportsystem.h"
-#include "Alignment/Alignment.h"
-#include "defines.h"
 #include "Cleaner.h"
-#include "values.h"
 #include "utils.h"
 
 Alignment::Alignment() {
@@ -90,35 +85,35 @@ Alignment::Alignment(Alignment &originalAlignment) {
     StartTiming("Alignment::Alignment(Alignment &originalAlignment) ");
 
     if (this != &originalAlignment) {
-        filename                = originalAlignment.filename;
-        alignmentInfo                = originalAlignment.alignmentInfo;
-        dataType                = originalAlignment.dataType;
-        isAligned               = originalAlignment.isAligned;
+        filename = originalAlignment.filename;
+        alignmentInfo = originalAlignment.alignmentInfo;
+        dataType = originalAlignment.dataType;
+        isAligned = originalAlignment.isAligned;
 
-        seqsName                = originalAlignment.seqsName;
-        seqsInfo                = originalAlignment.seqsInfo;
-        sequences               = originalAlignment.sequences;
+        seqsName = originalAlignment.seqsName;
+        seqsInfo = originalAlignment.seqsInfo;
+        sequences = originalAlignment.sequences;
 
-        numberOfResidues             = originalAlignment.numberOfResidues;
-        numberOfSequences            = originalAlignment.numberOfSequences;
-        originalNumberOfResidues     = originalAlignment.originalNumberOfResidues;
-        originalNumberOfSequences    = originalAlignment.originalNumberOfSequences;
+        numberOfResidues = originalAlignment.numberOfResidues;
+        numberOfSequences = originalAlignment.numberOfSequences;
+        originalNumberOfResidues = originalAlignment.originalNumberOfResidues;
+        originalNumberOfSequences = originalAlignment.originalNumberOfSequences;
 
-        identities              = nullptr;
-        SequencesMatrix         = nullptr;
+        identities = nullptr;
+        SequencesMatrix = nullptr;
 
         // Copy save(Sequences|Residues) vector to keep information of previous
         //  trimming steps
         saveSequences = new int[originalNumberOfSequences];
         if (originalAlignment.saveSequences != nullptr)
-            std::copy(  originalAlignment.saveSequences,
-                        originalAlignment.saveSequences + originalAlignment.originalNumberOfSequences,
-                        saveSequences);
+            std::copy(originalAlignment.saveSequences,
+                      originalAlignment.saveSequences + originalAlignment.originalNumberOfSequences,
+                      saveSequences);
         saveResidues = new int[originalNumberOfResidues];
         if (originalAlignment.saveResidues != nullptr)
-            std::copy(  originalAlignment.saveResidues,
-                        originalAlignment.saveResidues + originalAlignment.originalNumberOfResidues,
-                        saveResidues);
+            std::copy(originalAlignment.saveResidues,
+                      originalAlignment.saveResidues + originalAlignment.originalNumberOfResidues,
+                      saveResidues);
 
         // Submodules
         this->Cleaning = new Cleaner(this, originalAlignment.Cleaning);
@@ -226,16 +221,15 @@ Alignment *Alignment::getTranslationCDS(Alignment *ProtAlig) {
             newAlig->saveSequences);
 
     newAlig->saveResidues = new int[ProtAlig->originalNumberOfResidues * 3];
-    for (int i = 0; i < counter; i++)
-    {
+    for (int i = 0; i < counter; i++) {
         newAlig->saveResidues[i] = i;
     }
 
-    newAlig->numberOfSequences          = ProtAlig->numberOfSequences;
-    newAlig->originalNumberOfSequences  = ProtAlig->originalNumberOfSequences;
+    newAlig->numberOfSequences = ProtAlig->numberOfSequences;
+    newAlig->originalNumberOfSequences = ProtAlig->originalNumberOfSequences;
 
-    newAlig->numberOfResidues           = counter;
-    newAlig->originalNumberOfResidues   = ProtAlig->originalNumberOfResidues * 3;
+    newAlig->numberOfResidues = counter;
+    newAlig->originalNumberOfResidues = ProtAlig->originalNumberOfResidues * 3;
 
     delete[] mappedSeqs;
 
@@ -497,6 +491,7 @@ bool Alignment::isFileAligned() {
     StartTiming("bool Alignment::isFileAligned(void) ");
     return isAligned;
 }
+
 /*
 void Alignment::fillNewDataStructure(string *newMatrix, string *newNames) {
     // Create a timer that will report times upon its destruction
@@ -521,13 +516,16 @@ void Alignment::fillNewDataStructure(string *newMatrix, string *newNames) {
 }
 */
 
-#define deletePrepareCodingVariables() { \
-delete [] protSeqsNames; protSeqsNames = nullptr; \
-delete [] protSequences; protSequences = nullptr; \
-delete [] protSeqsLengths; protSeqsLengths = nullptr; \
-}
+
 
 bool Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, Alignment *proteinAlig) {
+
+#define deletePrepareCodingVariables() { \
+        delete [] protSeqsNames; protSeqsNames = nullptr; \
+        delete [] protSequences; protSequences = nullptr; \
+        delete [] protSeqsLengths; protSeqsLengths = nullptr; \
+    }
+
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, Alignment *proteinAlig) ");
@@ -1111,6 +1109,7 @@ void Alignment::calculateColIdentity(float *ColumnIdentities) {
             ColumnIdentities[i] = float(max) / columnLen;
     }
 }
+
 /*
 void Alignment::printColumnsIdentity_DescriptiveStats(void) {
     // Create a timer that will report times upon its destruction
@@ -1153,7 +1152,7 @@ void Alignment::printColumnsIdentity_DescriptiveStats(void) {
 }
  */
 
-bool Alignment::alignmentSummaryHTML(Alignment &trimmedAlig, const char *destFile) {
+bool Alignment::alignmentSummaryHTML(const Alignment &trimmedAlig, const char *const destFile) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool Alignment::alignmentSummaryHTML(Alignment &trimmedAlig, char *destFile, float *consValues) ");
@@ -1417,7 +1416,284 @@ bool Alignment::alignmentSummaryHTML(Alignment &trimmedAlig, const char *destFil
     return true;
 }
 
-bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *destFile, int blocks) {
+bool Alignment::statSVG(const char *const destFile) {
+
+    // Init SVG size variables
+    int
+        whiteboxWidth = 1300,
+        whiteboxHeight = 650,
+
+        grayboxWidth = 1500,
+        grayboxHeight = 900;
+
+    // Init ratios and relative sizes
+    float
+        legendRatio = 0.175F,
+
+        widthRatio = 0.5F,
+        heightRatio = 0.75F,
+
+        whiteboxDeltaHeight
+        = whiteboxHeight * 0.05F,
+
+        fontSize = whiteboxHeight * 0.02F;
+
+    // Init chart sizes and origins
+    float
+        originX,
+        originY,
+        chartWidth,
+        chartHeight;
+
+    originX = (grayboxWidth - whiteboxWidth) * widthRatio + (whiteboxDeltaHeight * 0.5F);
+    originY = (grayboxHeight - whiteboxHeight) * heightRatio + (whiteboxHeight - whiteboxDeltaHeight * 0.5F);
+    chartWidth = (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight);
+    chartHeight = -(whiteboxHeight - whiteboxDeltaHeight);
+
+    // Open the file;
+    ofstream file;
+    file.open(destFile);
+    if (!file) {
+        return false;
+    }
+
+    // svg header
+    file << "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" "
+         << "height=\"" << grayboxHeight << "\" "
+         << "width=\"" << grayboxWidth << "\">" << "\n";
+
+    // White box
+    file << "<rect "
+         << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio << "\" "
+         << "width=\"" << whiteboxWidth * (1.F - legendRatio) << "\" "
+         << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
+         << "height=\"" << whiteboxHeight << "\" "
+         << "style=\"fill:white; stroke:black; stroke-width:2\" "
+         << "/>" << "\n";
+
+    // Header text
+    file << "<text text-anchor=\"middle\" "
+         << "x=\"" << grayboxWidth * 0.5F << "\" "
+         << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio * 0.75F << "\" "
+         << "font-size=\"" << (grayboxHeight - whiteboxHeight) * heightRatio * 10.F / filename.size() << "\" "
+         << ">"
+         << filename
+         << "</text>" << "\n";
+    {
+        float   halfDeltaHeight = (whiteboxDeltaHeight * 0.5F),
+
+                x1 = (grayboxWidth - whiteboxWidth) * widthRatio,
+                x2 = (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio),
+                y1 = (grayboxHeight - whiteboxHeight) * heightRatio + halfDeltaHeight,
+                y2 = (grayboxHeight - whiteboxHeight) * heightRatio + halfDeltaHeight,
+
+                x3 = (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * 0.1F;
+        for (int xx = 0; xx < 11; xx++) {
+            // Vertical lines
+            file << "<line "
+                 << "x1=\"" << x1 << "\" "
+                 << "y1=\"" << y1 + (whiteboxHeight - whiteboxDeltaHeight) * (xx * 0.1F) << "\" "
+                 << "x2=\"" << x2 << "\" "
+                 << "y2=\"" << y2 + (whiteboxHeight - whiteboxDeltaHeight) * (xx * 0.1F) << "\" "
+                 << "style=\"stroke:black;stroke-width:1\" "
+                 << "stroke-dasharray=\"1, 1\" "
+                 << "opacity=\"0.5\"/>" << "\n";
+
+            // Labels
+            file << "<text "
+                 << "x=\"" << x1 * 0.95F << "\" "
+                 << "y=\"" << y2 + (whiteboxHeight - whiteboxDeltaHeight) * (xx * 0.1F) + (0.25F * fontSize)  << "\" "
+                 << "text-anchor=\"end\" "
+                 << "xml:space=\"preserve\" "
+                 << "font-size=\"" << fontSize << "\">"
+                 << (10 - xx) / 10.F
+                 << "</text>" << "\n";
+
+            // Horizontal lines
+            file << "<line "
+                 << "x1=\"" << x1 + halfDeltaHeight + x3 * xx  << "\" "
+                 << "y1=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
+                 << "x2=\"" << x1 + halfDeltaHeight + x3 * xx  << "\" "
+                 << "y2=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + whiteboxHeight << "\" "
+                 << "style=\"stroke:black;stroke-width:1\" "
+                 << "stroke-dasharray=\"1, 1\" "
+                 << "opacity=\"0.5\"/>" << "\n";
+
+            // Labels
+            file << "<text "
+                 << "x=\"" << x1 + (whiteboxWidth * (1.F - legendRatio) - whiteboxDeltaHeight) * (xx * 0.1F) + (whiteboxDeltaHeight * 0.5F) << "\" "
+                 << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + whiteboxHeight + fontSize * 1.5F << "\" "
+                 << "text-anchor=\"middle\" "
+                 << "xml:space=\"preserve\" "
+                 << "font-size=\"" << fontSize << "\">"
+                 << xx * 10 << " %"
+                 << "</text>" << "\n";
+        }
+
+        // Print Lines
+        int statsAddedCounter = 0;
+        {
+            float deltaHeigth = whiteboxHeight / (float) (2 + 1);
+            deltaHeigth = std::min(whiteboxHeight * 0.12F, deltaHeigth);
+            float height = whiteboxWidth * legendRatio * 0.1F;
+
+            // Lambda method that accepts an array of values to order and plot,
+            //      the name of the stat, and the color of the lines and dots.
+            //
+            // The method does not perform a copy of the values to re-order them
+            //      and thus, this has to be performed before the call.
+            //
+            // This allows to transform the values and to prevent multiple
+            //      allocations and deallocations of big arrays.
+            //
+            // The values on the array should be normalized prior to the call,
+            //      otherwise, the chart can appear deformed.
+            //
+            // It is a lambda due to the fact it uses most of the variables
+            //      that are internal to this method: sizes and ratios.
+            auto addStat = [&] (float * values,
+                                const string & name,
+                                const string & color) -> void {
+
+                // Sort the provided array
+                utils::quicksort(values, 0, originalNumberOfResidues - 1);
+
+                // Legend
+                {
+                    // Color box
+                    file << "<rect "
+                         << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.1F << "\" "
+                         << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * (statsAddedCounter + 1) + deltaHeigth * 0.5F - height * 0.5F - fontSize * 0.25F << "\" "
+                         << "width=\"" << height << "\" "
+                         << "height=\"" << height << "\" "
+                         << "style=\"fill:" << color << "; stroke:black; stroke-width:2\" "
+                         << "fill-opacity=\"0.75\" "
+                         << "/>" << "\n";
+
+                    // Stat name
+                    file << "<text "
+                         << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.5F << "\" "
+                         << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * (statsAddedCounter + 1) + deltaHeigth * 0.5F << "\" "
+                         << "text-anchor=\"middle\" "
+                         << "xml:space=\"preserve\" "
+                         << "font-size=\"" << fontSize << "\">"
+                         << name
+                         << "</text>" << "\n";
+                }
+
+                // Start a polyline
+                file << "<polyline stroke-linecap=\"round\" "
+                     << "style=\"fill:none;stroke:" << color << ";stroke-width:0.8\" opacity=\"0.8\" points=\"";
+
+                // Add each value individually
+                for (int X = 0; X < numberOfResidues; X++)
+                {
+                    file << originX + ((float)X / numberOfResidues) * chartWidth << ",\t"
+                         << originY + values[X] * chartHeight << " \n";
+                }
+                // Finish the polyline
+                file << "\"/>" << "\n";
+
+                // Add a dot for each value
+                for (int X = 0; X < numberOfResidues; X++)
+                {
+                    file << "<circle cx=\""
+                    << originX + ((float)X / numberOfResidues) * chartWidth
+                    << "\" cy=\""
+                    << (originY + values[X] * chartHeight)
+                    << "\" r=\"2\" stroke=\"black\" stroke-width=\"0.1\" fill=\""
+                    << color
+                    << "\" />\n";
+                }
+
+                // Increase the number of stats added.
+                statsAddedCounter ++;
+            };
+
+
+            // Create a vector to contain all the values for each column, for each stat.
+            //      This allows to prevent multiple allocations for the copy of each stat.
+            float * vectAux = new float[numberOfResidues];
+
+            // Add the gap stat if calculated.
+            if (Statistics->gaps != nullptr)
+            {
+                // Copy each value, and normalize using the original number of sequences.
+                //      This is needed due to gapWindow being the total number of gaps per column.
+                for (int i = 0; i < originalNumberOfResidues; i++)
+                    vectAux[i] = Statistics->gaps->getGapsWindow()[i] / (float)originalNumberOfSequences;
+
+                // Add the stat.
+                addStat(vectAux, "Gaps", "Red");
+            }
+
+            // Add the similarity stat if calculated
+            if (Statistics->similarity != nullptr)
+            {
+                // Make a copy of the values, to allow reordering without modification.
+                for (int i = 0; i < originalNumberOfResidues; i++)
+                    vectAux[i] = Statistics->similarity->getMdkWindowedVector()[i];
+
+                addStat(vectAux, "Similarity", "Blue");
+            }
+
+            // Add the consistency stat if calculated
+            if (Statistics->consistency != nullptr)
+            {
+                // Make a copy of the values, to allow reordering without modification.
+                for (int i = 0; i < originalNumberOfResidues; i++)
+                    vectAux[i] = Statistics->consistency->getValues()[i];
+
+                addStat(vectAux, "Consistency", "Green");
+            }
+
+            // Delete the temporal values array
+            delete [] vectAux;
+
+        }
+
+        // Legend
+        {
+            float deltaHeigth = whiteboxHeight / (float) (statsAddedCounter + 1);
+            deltaHeigth = std::min(whiteboxHeight * 0.12F, deltaHeigth);
+
+            // Legend box
+            file << "<rect "
+                 << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + 6 << "\" "
+                 << "width=\"" << whiteboxWidth * legendRatio << "\" "
+                 << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio << "\" "
+                 << "height=\"" << deltaHeigth * (statsAddedCounter + 1) << "\" "
+                 << "style=\"fill:white; stroke:black; stroke-width:2\" "
+                 << "fill-opacity=\"0.25\" "
+                 << "/>" << "\n";
+
+            file << "<text "
+                 << "x=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 0.5F << "\" "
+                 << "y=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0 + deltaHeigth * 0.5F << "\" "
+                 << "text-anchor=\"middle\" "
+                 << "xml:space=\"preserve\" "
+                 << "font-size=\"" << fontSize * 2 << "\">"
+                 << "statistics"
+                 << "</text>" << "\n";
+
+            file << "<line "
+                 << "x1=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + 12 << "\" "
+                 << "x2=\"" << (grayboxWidth - whiteboxWidth) * widthRatio + whiteboxWidth * (1.F - legendRatio) + whiteboxWidth * legendRatio * 1.F << "\" "
+                 << "y1=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0.3F + deltaHeigth * 0.5F << "\" "
+                 << "y2=\"" << (grayboxHeight - whiteboxHeight) * heightRatio + deltaHeigth * 0.3F + deltaHeigth * 0.5F << "\" "
+                 << "style=\"stroke:black;stroke-width:2\" />" << "\n";
+        }
+
+    }
+
+
+    file << "</svg>";
+    file.close();
+
+    return true;
+}
+
+bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *const destFile, int blocks) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, char *destFile, float *consValues, int blocks) ");
@@ -1451,8 +1727,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *destFile
     // Open the file;
     ofstream file;
     file.open(destFile);
-    if (!file)
-    {
+    if (!file) {
         return false;
     }
 
@@ -1468,7 +1743,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *destFile
     int sequencesNamesLength = utils::max(25, j);
 
     // Init Colors
-    std::map<char, string> mappedColors = std::map<char, string> {
+    std::map<char, string> mappedColors = std::map<char, string>{
             {'o', "orange"},
             {'y', "yellow"},
             {'b', "royalblue"},
@@ -1480,7 +1755,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *destFile
             {'c', "aqua"}
     };
 
-    std::map<char, string> mappedColorsMeaning = std::map<char, string> {
+    std::map<char, string> mappedColorsMeaning = std::map<char, string>{
             {'o', "Glycines"},
             {'y', "Prolines"},
             {'b', "Hidrophobic"},
@@ -1689,7 +1964,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *destFile
         for (k = j; k < originalNumberOfResidues && (k - j) < blocks; k += 10) {
             file << std::left << std::setw(10) << std::setfill(' ') << k;
         }
-        for (;(k - j) < blocks; k+= 10)
+        for (; (k - j) < blocks; k += 10)
             file << std::left << std::setw(10) << std::setfill(' ') << " ";
 
         file << "</text>" << endl;
@@ -1714,7 +1989,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *destFile
         for (k = j; k < originalNumberOfResidues && (k - j) < blocks; k += 10) {
             file << std::left << std::setw(10) << std::setfill(' ') << "|";
         }
-        for (;(k - j) < blocks; k+= 10)
+        for (; (k - j) < blocks; k += 10)
             file << std::left << std::setw(10) << std::setfill(' ') << " ";
 
         file << "</text>" << endl;
@@ -1817,13 +2092,13 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *destFile
                      " y1=\"" << (currentHeight + fontSize / 2) << "\"" <<
                      " y2=\"" << (currentHeight + fontSize / 2) << "\"" <<
                      " style=\"stroke:rgb(0,0,0);stroke-width:2\""
-                             "/>" << endl;
+                     "/>" << endl;
                 file << "<line x1=\"" << leftMargin << "\"" <<
                      " x2=\"" << leftMargin + std::min((float) seqsName[i].size() * 0.75F, (float) sequencesNamesLength) * fontSize << "\"" <<
                      " y1=\"" << (currentHeight + fontSize / 2) << "\"" <<
                      " y2=\"" << (currentHeight + fontSize / 2) << "\"" <<
                      " style=\"stroke:rgb(0,0,0);stroke-width:2\""
-                             "/>" << endl;
+                     "/>" << endl;
             }
             currentHeight += fontSize;
         }
@@ -1870,7 +2145,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *destFile
              " height=\"" << fontSize * 5 << "\" " <<
              " width=\"" << fontSize * 0.75F * (k - lastPos) << "px\" " <<
              " opacity=\"0.5\""
-                     " x =\"" <<
+             " x =\"" <<
 
              leftMargin + nameBlocksMargin + sequencesNamesLength * fontSize + fontSize * 0.75F * (lastPos - j)
 

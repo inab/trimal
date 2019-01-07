@@ -428,10 +428,10 @@ namespace utils {
      char toUpper(char c);
 
 
-     void streamSVG(float *x, float *y,
-                          int num, std::string *lineName,
-                          std::string *lineColor, std::string *chartTitle,
-                          std::string *filename);
+//     void streamSVG(float *x, float *y,
+//                          int num, std::string *lineName,
+//                          std::string *lineColor, std::string *chartTitle,
+//                          std::string *filename);
 
 };
 

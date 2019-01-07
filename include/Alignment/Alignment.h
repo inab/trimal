@@ -143,7 +143,9 @@ public:
 
     bool prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, Alignment *proteinAlignment);
 
-    bool alignmentSummaryHTML(Alignment &trimmedAlig, const char *destFile);
+    bool alignmentSummaryHTML(const Alignment &trimmedAlig, const char * const destFile);
+
+    bool statSVG(const char *const destFile);
 
     bool alignmentSummarySVG(Alignment &trimmedAlig, const char *destFile, int blocks);
 
