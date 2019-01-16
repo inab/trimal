@@ -1,3 +1,4 @@
+#include "FormatHandling/BaseFormatHandler.h"
 #include "Statistics/similarityMatrix.h"
 #include "Statistics/Consistency.h"
 #include "Statistics/Similarity.h"
@@ -1341,7 +1342,7 @@ int trimAlManager::perform() {
     // be applied in all the collection.
     else
     {
-        int returnval = 0;
+        int returnValue = 0;
         auto XX = formatManager.splitAlignmentKeeping(*origAlig);
         char replacement = '-';
         ngs::readVCF(
@@ -1353,29 +1354,102 @@ int trimAlManager::perform() {
                 /* replacement char */ &replacement
         );
 
+        // If no output filename has been provided,
+        //      or the filename does not contain the [contig] tag,
+        //      the sequence names should contain the name of the contig
+        //      to prevent repeated sequences names.
+        if (outfile == nullptr || std::string(outfile).find("[contig]") == std::string::npos)
+        {
+            // On each alignment, add the prefix to each non-reference sequence -> [1:]
+            for (Alignment* &i : XX)
+            {
+                for (int x = 1; x < i->originalNumberOfSequences; x++)
+                    i->seqsName[x] = i->seqsName[0] + "." + i->seqsName[x];
+            }
+
+            // We check if outfile is not null because checking
+            //      if it contains the contig tag
+            //      it needs to be converted to string
+            //      and it needs to check if outfile is not null previously
+            // As this two conditions have previously checked,
+            //      if outfile is not null, it doesn't contain the tag either.
+            if (outfile != nullptr)
+            {
+                // Set the mode of opening files of the manager to append.
+                formatManager.openmode = std::ofstream::out | std::ofstream::app;
+
+                // Store the output filename
+                std::string fname = formatManager.replaceINtag(*origAlig, outfile);
+
+                // Iterate over all formats requested
+                for (const std::string & token : oformats) {
+
+                    // Get the handler for each format handler
+                    auto * handler = formatManager.getFormatFromToken(token);
+                    if (handler != nullptr)
+                    {
+                        // Open the destination file to
+                        std::string newName =
+                                utils::ReplaceString(
+                                        fname, "[format]", handler->name);
+                        utils::ReplaceStringInPlace(
+                                newName, "[extension]", handler->extension);
+                        std::ofstream tmp(newName);
+                    }
+                }
+            }
+        }
+
+        // To allow users to use [in] and [contig] tags, we should recover the original filename.
+        std::string originalName = origAlig->filename;
+
+        // We can get rid of the original alignment.
         delete origAlig;
+        origAlig = nullptr;
+
+        // Save the original filename pattern containing the tags
+        std::string originalOutFile = outfile == nullptr ? "" : outfile;
+
+        // Free the outfile array. It will be replenished before it's use.
+        delete [] outfile;
 
         for (Alignment* &i : XX) {
-            origAlig = i;
-            origAlig->fillMatrices(true);
-            returnval = std::max(innerPerform(), returnval);
 
+            // If original filename wasn't empty,
+            //      reset it and apply the [contig] tag
+            std::string newOutFile =
+                    utils::ReplaceString(
+                            originalOutFile, "[contig]", i->filename);
+
+            if (!originalOutFile.empty())
+            {
+                outfile = &newOutFile[0];
+                i->filename = originalName;
+            }
+
+            // To use innerPerform, alignment must be stored on origAlig
+            origAlig = i;
+            returnValue = std::max(innerPerform(), returnValue);
+
+            // Delete and nullify tempAlig
             if (tempAlig != origAlig &&
                 tempAlig != singleAlig)
-            {
                 delete tempAlig;
-                tempAlig = nullptr;
-            }
+            tempAlig = nullptr;
+
+            // Delete and nullify singleAlig
             if (singleAlig != origAlig)
-            {
                 delete singleAlig;
-                singleAlig = nullptr;
-            }
+            singleAlig = nullptr;
+
+            // Delete and nullify origAlig
             delete origAlig;
             origAlig = nullptr;
+
         }
+        outfile = nullptr;
         origAlig = nullptr;
-        return returnval;
+        return returnValue;
     }
 }
 
@@ -1416,63 +1490,27 @@ inline int trimAlManager::innerPerform() {
 
 }
 
-inline int trimAlManager::perform_VCF()
-{
-    auto XX = formatManager.splitAlignmentKeeping(*origAlig);
-    char replacement = '-';
-    ngs::readVCF(
-            /* Dataset          */ XX,
-            /* VCF Collection   */ *vcfs,
-            /* min Quality      */ 0,
-            /* min Coverage     */ 30,
-            /* ignore Filters   */ false,
-            /* replacement char */ &replacement
-    );
-
-    for (Alignment* &i : XX) {
-        delete origAlig;
-        origAlig = i;
-
-        origAlig->Cleaning->setTrimTerminalGapsFlag(terminalOnly);
-        origAlig->setKeepSequencesFlag(keepSeqs);
-
-        set_window_size();
-
-        if (blockSize != -1)
-            origAlig->setBlockSize(blockSize);
-
-        if (!create_or_use_similarity_matrix())
-            return -2;
-        
-        if (svgStatsOutFile != nullptr)
-            svg_stats_out();
-
-        origAlig->fillMatrices(true);
-
-        // print_statistics();
-
-        clean_alignment();
-
-        postprocess_alignment();
-
-        output_reports();
-
-        save_alignment();
-    }
-    return 0;
-}
-
 inline void trimAlManager::save_alignment()
 {
     if ((outfile != nullptr) && (!appearErrors)) {
         std::string outFileString = std::string(outfile);
-        if (!formatManager.saveAlignment(outFileString, &oformats, singleAlig)) {
-            appearErrors = true;
-        }
+        if (singleAlig != nullptr)
+        {
+            if (!formatManager.saveAlignment(outFileString, oformats, *singleAlig)) {
+                appearErrors = true;
+            }
+        } else debug.report(
+                ErrorCode::SomethingWentWrong_reportToDeveloper,
+                "Trying to save a nullptr alignment on save_alignment");
 
     } else if ((stats >= 0) && (!appearErrors))
     {
-        formatManager.saveAlignment("", &oformats, singleAlig);
+        std::string emptyString;
+        if (singleAlig != nullptr)
+            formatManager.saveAlignment(emptyString, oformats, *singleAlig);
+        else debug.report(
+                ErrorCode::SomethingWentWrong_reportToDeveloper,
+                "Trying to save a nullptr alignment on save_alignment");
     }
 }
 

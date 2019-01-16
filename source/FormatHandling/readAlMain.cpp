@@ -381,14 +381,14 @@ int main(int argc, char *argv[])
                 std::cout << "\n";
                 
                 if (!outFormats.empty())
-                    MachineState.saveAlignment(outPattern, &outFormats, alignment);
+                    MachineState.saveAlignment(outPattern, outFormats, *alignment);
                 
                 delete alignment;
             }
         }
     }
-    else if (!outFormats.empty())
-        MachineState.loadAndSaveMultipleAlignments(&inFiles, &outPattern, &outFormats);
+//    else if (!outFormats.empty())
+//        MachineState.loadAndSaveMultipleAlignments(&inFiles, &outPattern, &outFormats);
     else
         std::cerr << "ERROR: An option has to be chosen\n";
 }

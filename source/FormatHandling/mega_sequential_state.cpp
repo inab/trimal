@@ -56,7 +56,7 @@ int mega_sequential_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* mega_sequential_state::LoadAlignment(std::string& filename)
+Alignment* mega_sequential_state::LoadAlignment(const std::string &filename)
 {
     Alignment * alig = new Alignment();
    /* MEGA sequential file format parser */
@@ -253,7 +253,7 @@ Alignment* mega_sequential_state::LoadAlignment(std::string& filename)
     return alig;
 }
 
-bool mega_sequential_state::SaveAlignment(Alignment* alignment, std::ostream* output)
+bool mega_sequential_state::SaveAlignment(const Alignment &alignment, std::ostream *output)
 {
     /* Generate output alignment in MEGA format */
 
@@ -262,51 +262,51 @@ bool mega_sequential_state::SaveAlignment(Alignment* alignment, std::ostream* ou
 
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
-    if (!alignment->isAligned || !alignment->saveResidues || !alignment->saveSequences) {
+    if (!alignment.isAligned || !alignment.saveResidues || !alignment.saveSequences) {
         debug.report(ErrorCode::UnalignedAlignmentToAlignedFormat, new std::string[1] { this->name });
         return false;
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new std::string[alignment->originalNumberOfSequences];
+    tmpMatrix = new std::string[alignment.originalNumberOfSequences];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->originalNumberOfSequences; i++)
+    for(i = 0; i < alignment.originalNumberOfSequences; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
-                       alignment->sequences[i] :
-                       utils::getReverse(alignment->sequences[i]);
+                       alignment.sequences[i] :
+                       utils::getReverse(alignment.sequences[i]);
 
     /* Compute output file datatype */
-    alignment->getAlignmentType();
+    alignment.getAlignmentType();
 
     /* Print output alignment header */
-    *output << "#MEGA\n" << alignment->filename << "\n";
+    *output << "#MEGA\n" << alignment.filename << "\n";
 
     /* Print alignment datatype */
-    if (alignment->getAlignmentType() & SequenceTypes::DNA)
+    if (alignment.getAlignmentType() & SequenceTypes::DNA)
         *output << "!Format DataType=DNA ";
-    else if (alignment->getAlignmentType() & SequenceTypes::RNA)
+    else if (alignment.getAlignmentType() & SequenceTypes::RNA)
         *output << "!Format DataType=RNA ";
-    else if (alignment->getAlignmentType() & SequenceTypes::AA)
+    else if (alignment.getAlignmentType() & SequenceTypes::AA)
         *output << "!Format DataType=protein ";
 
     /* Print number of sequences and alignment length */
-    *output << "NSeqs=" << alignment->numberOfSequences << " Nsites=" << alignment->numberOfResidues
+    *output << "NSeqs=" << alignment.numberOfSequences << " Nsites=" << alignment.numberOfResidues
          << " indel=- CodeTable=Standard;\n";
 
     /* Print sequences name and sequences divided into blocks of 50 residues */
-    for(i = 0; i < alignment->originalNumberOfSequences; i++) {
-        if (alignment->saveSequences[i] != -1)
+    for(i = 0; i < alignment.originalNumberOfSequences; i++) {
+        if (alignment.saveSequences[i] != -1)
         {
-            *output << "\n#" << alignment->seqsName[i] << "\n";
+            *output << "\n#" << alignment.seqsName[i] << "\n";
             
-            for(j = 0, l = 0; j < alignment->sequences[i].length(); j ++) 
+            for(j = 0, l = 0; j < alignment.sequences[i].length(); j ++) 
             {
-                if (alignment->saveResidues[j] != -1)
+                if (alignment.saveResidues[j] != -1)
                 {
-                    *output << alignment->sequences[i][j];
+                    *output << alignment.sequences[i][j];
                     if (++l % 10 == 0) *output << " ";
                     if (l == 50)
                     {
@@ -327,7 +327,7 @@ bool mega_sequential_state::SaveAlignment(Alignment* alignment, std::ostream* ou
     return true;
 }
 
-bool mega_sequential_state::RecognizeOutputFormat(std::string& FormatName)
+bool mega_sequential_state::RecognizeOutputFormat(const std::string &FormatName)
 {
     if (BaseFormatHandler::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "mega";

@@ -18,6 +18,20 @@ set(CMAKE_CXX_STANDARD 11)
 # Specify bin folder to output the compiled programs
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
+set(default_build_type "Release")
+
+# Extracted from https://blog.kitware.com/cmake-and-the-default-build-type/
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    message(STATUS "Setting build type to '${default_build_type}' as none was specified.")
+    set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE
+            STRING "Choose the type of build." FORCE)
+    # Set the possible values of build type for cmake-gui
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
+            "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+else()
+    message(STATUS "Setting build type to '${CMAKE_BUILD_TYPE}'.")
+endif()
+
 # Specify the level of optimization used
 #ADD_DEFINITIONS(-O2)
 
@@ -30,6 +44,7 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 # Create a list of all common source files
 set(preview
+        source/VCFHandler.cpp
         source/trimalManager.cpp
         source/Alignment/Alignment.cpp
 

@@ -345,7 +345,13 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
 
                 {ErrorCode::MultipleOutputFormatsSameName,
                         "Multiple formats have been requested, but output pattern does not contain tags \"[extension]\" or \"[format]\".\n"
-                        "            Output files will be overwritten. Please, provide an output pattern containing tags to prevent overwritting."}
+                        "            Output files will be overwritten. Please, provide an output pattern containing tags to prevent overwritting."},
+
+                {ErrorCode::MultipleInputs,
+                        "Multiple input files have been provided (Ej: \"-in X Y\"). This is not supported"},
+
+                {ErrorCode::SomethingWentWrong_reportToDeveloper,
+                        "Something went wrong. Please, report to the developer with this message: \"[tag]\""}
 
         };
 
@@ -409,7 +415,7 @@ void reporting::reportManager::report(ErrorCode message, std::string *vars) {
     }
 }
 
-void reporting::reportManager::report(ErrorCode message, char *vars) {
+void reporting::reportManager::report(ErrorCode message, const char *vars) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void reporting::reportManager::report(ErrorCode message, char *vars) ");
@@ -462,7 +468,7 @@ void reporting::reportManager::report(WarningCode message, std::string *vars) {
     }
 }
 
-void reporting::reportManager::report(WarningCode message, char *vars) {
+void reporting::reportManager::report(WarningCode message, const char *vars) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void reporting::reportManager::report(WarningCode message, char *vars) ");
@@ -515,7 +521,7 @@ void reporting::reportManager::report(InfoCode message, std::string *vars) {
     }
 }
 
-void reporting::reportManager::report(InfoCode message, char *vars) {
+void reporting::reportManager::report(InfoCode message, const char *vars) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("void reporting::reportManager::report(InfoCode message, char *vars) ");

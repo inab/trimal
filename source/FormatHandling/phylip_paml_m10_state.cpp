@@ -9,12 +9,12 @@ int phylip_paml_m10_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* phylip_paml_m10_state::LoadAlignment(std::string& filename)
+Alignment* phylip_paml_m10_state::LoadAlignment(const std::string &filename)
 {
     return nullptr;
 }
 
-bool phylip_paml_m10_state::SaveAlignment(Alignment* alignment, std::ostream* output)
+bool phylip_paml_m10_state::SaveAlignment(const Alignment &alignment, std::ostream *output)
 {
     /* Generate output alignment in PHYLIP format compatible with PAML program */
 
@@ -23,27 +23,27 @@ bool phylip_paml_m10_state::SaveAlignment(Alignment* alignment, std::ostream* ou
 
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
-    if (!alignment->isAligned) {
+    if (!alignment.isAligned) {
         debug.report(ErrorCode::UnalignedAlignmentToAlignedFormat, new std::string[1] { this->name });
         return false;
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new std::string[alignment->numberOfSequences];
+    tmpMatrix = new std::string[alignment.numberOfSequences];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->numberOfSequences; i++)
+    for(i = 0; i < alignment.numberOfSequences; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
-                       alignment->sequences[i] :
-                       utils::getReverse(alignment->sequences[i]);
+                       alignment.sequences[i] :
+                       utils::getReverse(alignment.sequences[i]);
 
     /* Depending on if short name flag is activated (limits sequence name up to
      * 10 characters) or not, get maximum sequence name length */
     maxLongName = PHYLIPDISTANCE;
-    for(i = 0; (i < alignment->numberOfSequences); i++)
-        maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
+    for(i = 0; (i < alignment.numberOfSequences); i++)
+        maxLongName = utils::max(maxLongName, alignment.seqsName[i].size());
 
     if (maxLongName > PHYLIPDISTANCE) {
         maxLongName = PHYLIPDISTANCE;
@@ -51,13 +51,13 @@ bool phylip_paml_m10_state::SaveAlignment(Alignment* alignment, std::ostream* ou
     }
     /* Generating output alignment */
     /* First Line: Sequences Number & Residued Number */
-    *output << " " << alignment->numberOfSequences << " " << alignment->numberOfResidues << "\n";
+    *output << " " << alignment.numberOfSequences << " " << alignment.numberOfResidues << "\n";
 
     /* Print alignment */
     /* Print sequences name follow by the sequence itself in the same line */
-    for(i = 0; i < alignment->numberOfSequences; i++)
-        *output << std::setw(maxLongName + 3) << std::left << alignment->seqsName[i].substr(0, maxLongName)
-             << alignment->sequences[i] << "\n";
+    for(i = 0; i < alignment.numberOfSequences; i++)
+        *output << std::setw(maxLongName + 3) << std::left << alignment.seqsName[i].substr(0, maxLongName)
+             << alignment.sequences[i] << "\n";
     *output << "\n";
 
     /* Deallocate local memory */
@@ -66,7 +66,7 @@ bool phylip_paml_m10_state::SaveAlignment(Alignment* alignment, std::ostream* ou
     return true;
 }
 
-bool phylip_paml_m10_state::RecognizeOutputFormat(std::string& FormatName)
+bool phylip_paml_m10_state::RecognizeOutputFormat(const std::string &FormatName)
 {
     if (BaseFormatHandler::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "phylippaml_m10";

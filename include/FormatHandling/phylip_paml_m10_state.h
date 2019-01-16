@@ -17,11 +17,11 @@ public:
 
     int CheckAlignment(std::istream *origin) override;
 
-    Alignment *LoadAlignment(std::string& filename) override;
+    Alignment *LoadAlignment(const std::string &filename) override;
 
-    bool SaveAlignment(Alignment *alignment, std::ostream *output) override;
+    bool SaveAlignment(const Alignment &alignment, std::ostream *output) override;
 
-    bool RecognizeOutputFormat(std::string& FormatName) override;
+    bool RecognizeOutputFormat(const std::string &FormatName) override;
 
 };
 }

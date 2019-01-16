@@ -11,457 +11,242 @@
 #include <vector>
 
 namespace ngs {
-    
-    namespace IUPAC
-    {
-        static int getTagFromCharArray ( char * array, char separator ) {
-            int c, maxlen, curval = 0;
-            for ( c = 0, maxlen = strlen ( array ); c < maxlen; c++ ) {
-                switch ( array[c] ) {
-                case 'A':
-                    curval |= 1 << 0;
-                    break; // = 1
-                case 'C':
-                    curval |= 1 << 1;
-                    break; // = 2
-                case 'T':
-                    curval |= 1 << 2;
-                    break; // = 4
-                case 'G':
-                    curval |= 1 << 3;
-                    break; // = 8
-                default:
-                    break;
-                }
-                if ( ++c < maxlen && c == separator )
-                    continue;
-            }
-            if ( c == maxlen + 1 )
-                return curval;
-            return -1;
-        }
 
-        static char getCharFromTag ( int tag ) {
-            switch ( tag ) {
+    namespace IUPAC {
 
-            // One Base
-            // case 1://A = 1
-            // case 2://C = 2
-            // case 4://T = 4
-            // case 8://G = 8
+        /**
+         * Method to obtain a tag from a sequence of residues in the format
+         * "CSCSCSCSC...C" where C is a character and S the separator
+         * @param array sequence of chars to convert
+         * @param separator separator of the chars in the sequence
+         * @return -1 if errored, tag if correct
+         */
+        inline int getTagFromCharArray(
+                const char *const array,
+                const char separator);
 
-            // Two Bases
-            case 3:
-                return 'M';// aMine AC
-            case 5:
-                return 'W'; // Weak AT
-            case 9:
-                return 'R'; // puRine AG
-            case 6:
-                return 'Y';// pYrimidine CT
-            case 10:
-                return 'S';// Strong CG
-            case 12:
-                return 'K';// Keto TG
-
-            // Three Bases
-            case 14:
-                return 'B';// CTG not A
-            case 13:
-                return 'D';// ATG not C
-            case 11:
-                return 'V';// ACG not T
-            case 7:
-                return 'H';// ACT not G
-
-            // All Four Bases
-            default:
-            case 15:
-                return 'N';// ACTG
-            }
-        }
+        /**
+         * Method to obtain a letter from a IUPAC tag
+         * @param tag int representing the tag to convert
+         * @return the char represented by the tag
+         */
+        inline char getCharFromTag(
+                const int tag);
 
     }
-    
-    namespace __internal
-    {
-        static void printApeek ( std::vector<Alignment *> & sources ) {
-            for ( Alignment * A : sources ) {
-                std::cout << A->seqsName[0] << std::endl;
 
-                for ( int X = 0; X < A->numberOfSequences; X++ ) {
-                    std::cout << "\t>" << A->seqsName[X] << std::endl;
-                    std::cout << "\t" << A->sequences[X].substr ( 0, 50 ) << std::endl;
-                }
-            }
-        }
+    namespace __internal {
 
-        static void extendAlignments (
-            std::vector<Alignment*>  & sources,
-            std::vector<std::string>    & contigs,
-            std::vector<std::string>    & donors ) {
-            // Extend the files.
+        struct vcfFeature {
+        public:
+            int position;
+            float quality;
+            char * ref    = nullptr,
+                    * alt    = nullptr,
+                    * contig = nullptr;
+            bool filter;
+            float readDepthIndex;
+
+            std::vector<std::string> donorsInfo {};
+
+            vcfFeature() : position(0), quality(0.0F), filter(false), readDepthIndex(0)
             {
-                // Check if all contigs have a reference alignment.
-                bool checkIn = true;
-                for (auto &contig : contigs) {
-                    int i;
-                    for ( i = 0; i < sources.size(); i++ ) {
-                        if ( !strcmp ( &contig[0], &sources[i]->seqsName[0][0] ) )
-                            break;
-                    }
-
-                    if ( i == sources.size() ) {
-                        debug.report ( ErrorCode::NoReferenceSequenceForContig, &contig[0] );
-                        checkIn = false;
-                    }
-                }
-
-                // Extend the reference files with new sequences from donors.
-                if ( checkIn ) {
-                    for ( Alignment * nA : sources ) {
-
-                        std::string * oldSequences  = nA->sequences;
-                        std::string * oldNames      = nA->seqsName;
-
-                        std::string seq = nA->sequences[0];
-                        std::string nam = nA->seqsName[0];
-
-                        nA -> sequences = new std::string[donors.size() + nA->originalNumberOfSequences];
-                        nA -> sequences[0] = seq;
-
-                        nA -> seqsName = new std::string[donors.size() + nA->originalNumberOfSequences];
-                        nA -> seqsName[0] = nam;
-
-                        for ( int i = 1; i < donors.size() + 1; i++ ) {
-                            nA->sequences[i] = seq;
-                            nA->seqsName[i] = donors[i - 1];
-                        }
-
-                        for ( int i = 0; i < nA->originalNumberOfSequences - 1; i++ ) {
-                            int pos = i + donors.size() + 1;
-                            nA->sequences[pos] = oldSequences[i + 1];
-                            nA->seqsName[pos] = oldNames[i + 1];
-                        }
-
-                        nA->originalNumberOfSequences = donors.size() + nA->originalNumberOfSequences;
-                        nA->numberOfSequences = nA->originalNumberOfSequences;
-
-                        delete [] oldSequences;
-                        delete [] oldNames;
-
-                    }
-                }
-            }
-        }
-
-        static void applyVariantCallingFiles (
-            std::vector<Alignment*>      & sources ,
-            std::vector<std::string>        & filenames,
-            std::vector<std::string>        & contigs,
-            std::vector<std::vector<int>>   & donorsPositions,
-            float minQuality,
-            float minCoverage,
-            bool ignoreFilter,
-            const char * const replacementChar ) {
-            char * line = new char [4096];
-            for ( int C = 0; C < filenames.size(); C++ ) {
-                std::ifstream infile;
-                infile.open ( filenames[C] );
-                if ( !infile.is_open() ) {
-                    debug.report ( ErrorCode::CantOpenFile, &filenames[C][0] );
-                }
-
-                std::vector<std::string> donorsInfo = std::vector<std::string> ( donorsPositions[C].size() );
-
-                while ( infile.getline ( line, 4096, '\n' ) ) {
-                    if ( line[0] == '#' ) continue;
-                    {
-                        char * tmp;
-
-                        // Contig
-                        tmp = std::strtok ( line, "\t" );
-                        char * contig = new char[strlen ( tmp ) + 1];
-                        std::memmove ( contig, tmp, strlen ( tmp ) + 1 );
-
-                        // Position
-                        tmp = std::strtok ( nullptr, "\t" );
-                        int position = atoi ( tmp );
-
-                        // ID
-                        std::strtok ( nullptr, "\t" );
-                        // Ref
-                        tmp = std::strtok ( nullptr, "\t" );
-                        char * ref = new char[strlen ( tmp ) + 1];
-                        std::memmove ( ref, tmp, strlen ( tmp ) + 1 );
-
-                        // Alt
-                        tmp = std::strtok ( nullptr, "\t" );
-                        char * alt = new char[strlen ( tmp ) + 1];
-                        std::memmove ( alt, tmp, strlen ( tmp ) + 1 );
-
-                        // Quality
-                        tmp = std::strtok ( nullptr, "\t" );
-                        float quality = atof ( tmp );
-
-                        // Filter
-                        tmp = std::strtok ( nullptr, "\t" );
-                        bool filter = std::strcmp ( tmp, "PASS" ) ? false : true;
-
-                        // Info
-                        tmp = std::strtok ( nullptr, "\t" );
-
-                        // Format
-                        tmp = std::strtok ( nullptr, "\t" );
-                        char * format = new char[strlen ( tmp ) + 1];
-                        std::memmove ( format, tmp, strlen ( tmp ) + 1 );
-
-                        // Donors
-                        int counter = 0;
-                        tmp = std::strtok ( nullptr, "\t" );
-                        while ( tmp != nullptr ) {
-                            donorsInfo[counter++] = tmp;
-                            tmp = std::strtok ( nullptr, "\t" );
-                        }
-
-                        // Format -> Read Depth Index
-                        counter = 0;
-                        tmp = std::strtok ( format, ":" );
-                        int readDepthIndex = -1;
-                        while ( tmp != nullptr ) {
-                            if ( strlen ( tmp ) > 1 && tmp[0] == 'D' && tmp[1] == 'P' ) {
-                                readDepthIndex = counter;
-                                break;
-                            }
-                            tmp = std::strtok ( nullptr, ":" );
-                            counter++;
-                        }
-
-                        delete [] format;
-
-                        counter = 0;
-                        if ( quality > minQuality && strlen(ref) == 1 && strlen(alt) == 1 ) {
-                            bool canPass = true;
-                            if ( !ignoreFilter && !filter ) {
-                                canPass = false;
-                            }
-
-                            if ( quality < minQuality ) {
-                                canPass = false;
-                            }
-
-                            if ( strlen ( ref ) != 1 ) {
-                                canPass = false;
-                            }
-
-                            if ( canPass ) {
-
-                                int i;
-                                for ( i = 0; i < contigs.size(); i++ ) {
-                                    if ( contigs[i] == contig )
-                                        break;
-                                }
-
-                                if ( i == contigs.size() ) {
-                                    std::cout << "Contig not Found" << std::endl;
-                                }
-
-                                else if ( sources[i]->sequences[donorsPositions[C][counter] + 1].size() <= position - 1 ) {
-                                    debug.report ( ErrorCode::SNPoutOfBounds, new std::string[3] {
-                                                       std::to_string ( position ),
-                                                       filenames[C],
-                                                       std::to_string ( sources[i]->sequences[donorsPositions[C][counter] + 1].size() )
-                                                   } );
-                                }
-
-                                else {
-                                    counter = 0;
-                                    for ( std::string& s : donorsInfo ) {
-                                        if ( s != "0" ) {
-                                            char * tmp = std::strtok ( &s[0], ":" );
-                                            for ( int V = 0; V < readDepthIndex; V++ )
-                                                tmp = std::strtok ( nullptr, ":" );
-                                            int readDepth = std::stoi ( tmp );
-
-                                            if ( readDepth < minCoverage ) {
-                                                if ( replacementChar )
-                                                    sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = *replacementChar;
-                                                break;
-                                            }
-
-                                            if ( sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] == ref[0] ||
-                                                    std::toupper ( sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] ) == std::toupper ( ref[0] ) ) {
-                                                int curval = 0;
-                                                if ( strlen ( alt ) > 1 ) {
-                                                    curval = ngs::IUPAC::getTagFromCharArray ( alt, ',' );
-                                                    if ( curval != -1 ) {
-                                                        sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = ngs::IUPAC::getCharFromTag ( curval );
-                                                    }
-                                                } else {
-                                                    sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = alt[0];
-                                                }
-                                            } else {
-                                                debug.report ( WarningCode::ReferenceNucleotideNotCorresponding,
-                                                               new std::string[5] {
-                                                                   sources[i]->seqsName[0],
-                                                                   std::to_string ( position ),
-                                                                   filenames[C],
-                                                                   std::string ( 1, sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] ),
-                                                                   ref
-                                                               } );
-                                            }
-                                        }
-                                        counter ++;
-//                                        tmp = std::strtok ( nullptr, "\t" );
-                                    }
-                                }
-                            } else {
-                                int i;
-                                for ( i = 0; i < contigs.size(); i++ ) {
-                                    if ( contigs[i] == contig )
-                                        break;
-                                }
-
-                                if ( i == contigs.size() ) {
-                                    std::cout << "Contig not Found" << std::endl;
-                                }
-
-                                if ( replacementChar )
-                                    sources[i]->sequences[donorsPositions[C][counter] + 1][position - 1] = *replacementChar;
-                            }
-                        }
-                        delete [] contig;
-                        delete [] ref;
-                        delete [] alt;
-                    }
-                }
-            }
-        }
-
-        static void obtainContigsAndDonors (
-            std::vector<std::string> & filenames,
-            std::vector<std::string> & donors,
-            std::vector<std::string> & contigs,
-            std::vector<std::vector<int>> & donorsPositions ) {
-            char * line = new char [4096];
-            // Obtain contigs and donors from all VCF files.
-            for ( int C = 0; C < filenames.size(); C++ ) {
-                std::string& filename = filenames[C];
-                donorsPositions.emplace_back ( std::vector<int>() );
-
-                std::ifstream infile;
-                infile.open ( filename );
-
-                if ( !infile.is_open() ) {
-                    debug.report ( ErrorCode::CantOpenFile, &filename[0] );
-                }
-
-                // Read file to get all the donors and contigs present on the VCF
-                while ( infile.getline ( line, 4096, '\n' ) ) {
-                    if ( line[0] == '#' ) {
-                        if ( line[1] == '#' ) {
-                            // Remove first two characters;
-                            memmove ( line, line+2, strlen ( line+2 ) + 2 );
-                            // Print result
-                            char * field_name = std::strtok ( line, "=" );
-
-                            // We only want the contig fields
-                            if ( !strcmp ( field_name, "contig" ) ) {
-                                std::strtok ( nullptr, "=" );
-                                char * field_info = std::strtok ( nullptr, "," );
-                                char * fname = new char [std::strlen ( field_info ) + 1];
-                                memmove ( fname, field_info, strlen ( field_info ) );
-                                fname[std::strlen ( field_info )] = '\0';
-
-                                int U;
-                                // Check if the contig has already been added.
-                                for ( U = 0; U < contigs.size(); U++ ) {
-                                    if ( contigs[U] == fname ) {
-                                        break;
-                                    }
-                                }
-
-                                // If not, add it to the vector.
-                                if ( U == contigs.size() ) {
-                                    contigs.emplace_back ( fname );
-                                }
-
-
-                                delete[] fname;
-                            }
-                        }
-
-                        else {
-                            // We only want to parse the FORMAT line, which contains the donors.
-                            std::strtok ( strstr ( line, "FORMAT" ), "\t" );
-
-                            char * token = std::strtok ( nullptr, "\t" );
-                            while ( token != nullptr ) {
-                                char * fname = new char [std::strlen ( token ) + 1];
-                                memmove ( fname, token, strlen ( token ) );
-                                fname[std::strlen ( token )] = '\0';
-
-                                int U;
-
-                                // Check every other donor already added.
-                                for ( U = 0; U < donors.size(); U++ ) {
-                                    if ( donors[U] == fname ) {
-                                        break;
-                                    }
-                                }
-
-                                // If not present, we add it
-                                if ( U == donors.size() ) {
-                                    donorsPositions[C].emplace_back ( U );
-                                    donors.emplace_back ( fname );
-                                }
-
-                                // If already present, warn the user.
-                                else {
-                                    donorsPositions[C].emplace_back ( U );
-                                    debug.report ( WarningCode::DonorAlreadyAdded, &fname[0] );
-                                }
-
-                                token = std::strtok ( nullptr, "\t" );
-                                delete[] fname;
-                            }
-                            break;
-                        }
-                    }
-                }
-
-                infile.close();
+                ref = nullptr;
+                alt = nullptr;
+                contig = nullptr;
             }
 
-            delete [] line;
-        }
+            void reset()
+            {
+                delete [] ref;
+                ref = nullptr;
 
+                delete [] alt;
+                alt = nullptr;
 
+                delete [] contig;
+                contig = nullptr;
+
+                donorsInfo.clear();
+            }
+
+            ~vcfFeature()
+            {
+                reset();
+            }
+        };
+
+        void printApeek(std::vector<Alignment *> &sources);
+
+        /**
+         * Method to check if there is an alignment for each contig extracted
+         * @param sources Alignments obtain through splitting reference alignment
+         * @param contigs Contigs extracted from VCFS
+         * @return \i True if all contigs have a reference /n\i False otherwise
+         */
+        inline bool checkContigsWithReference(
+                const std::vector<Alignment *> &sources,
+                const std::vector<std::string> &contigs);
+
+        /**
+         * Method to increase the number of sequences on each splitted reference
+         * Each alignment should contain only one sequence -> the reference one
+         * The method will make a copy of the reference sequence and put the
+         * donor name on it for each donor present on donors
+         * @param sources Alignments to increase their sequences
+         * @param donors Donor names
+         */
+        inline void increaseSequencesInAlignment(
+                const std::vector<Alignment *> &sources,
+                const std::vector<std::string> &donors);
+
+        /**
+         * Method to check if there is an alignment for each contig
+         * and make a copy of their reference sequence for each donor.
+         * @param sources Alignments to check and increase in number of sequences
+         * @param contigs Contigs found in VCF. Used to check if there is an
+         * alignment for each of them
+         * @param donors Donor names, each of them will have a sequence on each
+         * of the alignments in sources
+         */
+        inline void extendAlignments(
+                const std::vector<Alignment *> &sources,
+                const std::vector<std::string> &contigs,
+                const std::vector<std::string> &donors);
+
+        /**
+         * Method to extract a variant from a char array
+         * @param line char array containing information to form a variant
+         * @param tmpVariant variant reference to store results
+         * @return \i True if done \n\i False if line does starts by '#'
+         */
+        inline bool extractFeature(
+                const char *const line,
+                vcfFeature &tmpVariant);
+
+        /**
+         * Filter a variant based on multiple filters:
+         * Size of reference if different than 1
+         * Size of alternative is different than 1
+         * Quality of variant is lesser than minQuality
+         * Filter field present on the VCF if ignoreFilter is false
+         * @param tmpVariant Variant to filter
+         * @param minQuality Min quality of variant to be kept
+         * @param ignoreFilter Ignore filter field on VCF
+         * @return \i True if variant is valid \n\i False otherwise
+         */
+        inline bool filterFeature(
+                const vcfFeature &tmpVariant,
+                const float minQuality,
+                const bool ignoreFilter);
+
+        /**
+         * Method to apply a non-filtered-out variant to a set of sources
+         * It will filter-out the variant for each donor, based on its coverage
+         * @param tmpVariant VCF Feature
+         * @param seqPos Sequence position
+         * @param minCoverage Coverage to apply a feature
+         * @param replacementChar Char to apply when a feature has been filtered out
+         * @param sources Alignments to apply the variants
+         * @param contigs Contigs
+         * @param filename
+         */
+        inline void applyUnfilteredFeature(
+                const vcfFeature &tmpVariant,
+                const int seqPos,
+                const float minCoverage,
+                const char *const replacementChar,
+                const std::vector<Alignment *> &sources,
+                const std::vector<std::string> &contigs,
+                const std::string &filename);
+
+        /**
+         *
+         * @param tmpVariant
+         * @param seqPos
+         * @param replacementChar
+         * @param sources
+         * @param contigs
+         */
+        inline void applyFilteredFeature(
+                const vcfFeature &tmpVariant,
+                const int seqPos,
+                const char *const replacementChar,
+                const std::vector<Alignment *> &sources,
+                const std::vector<std::string> &contigs);
+
+        /**
+         *
+         * @param sources
+         * @param filenames
+         * @param contigs
+         * @param donorsPositions
+         * @param minQuality
+         * @param minCoverage
+         * @param ignoreFilter
+         * @param replacementChar
+         */
+        inline void applyVariantCallingFiles(
+                const std::vector<Alignment *> &sources,
+                const std::vector<std::string> &filenames,
+                const std::vector<std::string> &contigs,
+                const std::vector<std::vector<int>> &donorsPositions,
+                const float minQuality,
+                const float minCoverage,
+                const bool ignoreFilter,
+                const char *const replacementChar);
+
+        /**
+         *
+         * @param line
+         * @param contigs
+         */
+        inline void extractContigsFromLine(
+                char *const line,
+                std::vector<std::string> &contigs);
+        /**
+         *
+         * @param line
+         * @param C
+         * @param donors
+         * @param donorsPositions
+         */
+        inline void extractDonorsFromLine(
+                char *const line,
+                int C,
+                std::vector<std::string> &donors,
+                std::vector<std::vector<int>> &donorsPositions);
+        /**
+         *
+         * @param filenames
+         * @param donors
+         * @param contigs
+         * @param donorsPositions
+         */
+        inline void obtainContigsAndDonors(
+                const std::vector<std::string> &filenames,
+                std::vector<std::string> &donors,
+                std::vector<std::string> &contigs,
+                std::vector<std::vector<int>> &donorsPositions);
     }
 
-    static void readVCF(
-            std::vector<Alignment *> sources,
-            std::vector<std::string> filenames,
-            float minQuality,
-            float minCoverage,
-            bool ignoreFilter,
-            const char *const replacementChar) {
-
-        // All donors present in the vcf files.
-        std::vector<std::string> donors = std::vector<std::string>();
-        // Contigs present on the VCF files. Each entry must be present in the sources vector.
-        std::vector<std::string> contigs = std::vector<std::string>();
-        // Position on the reference files of each donor.
-        std::vector<std::vector<int>> donorsPositions = std::vector<std::vector<int>>();
-
-        ngs::__internal::obtainContigsAndDonors ( filenames, donors, contigs, donorsPositions );
-
-        ngs::__internal::extendAlignments ( sources, contigs, donors );
-
-        ngs::__internal::applyVariantCallingFiles (
-                sources , filenames, contigs, donorsPositions,
-                minQuality, minCoverage, ignoreFilter, replacementChar );
-    }
+    /**
+     *
+     * @param sources
+     * @param filenames
+     * @param minQuality
+     * @param minCoverage
+     * @param ignoreFilter
+     * @param replacementChar
+     */
+    void readVCF(
+            const std::vector<Alignment *> &sources,
+            const std::vector<std::string> &filenames,
+            const float minQuality,
+            const float minCoverage,
+            const bool ignoreFilter,
+            const char *const replacementChar);
 }
+
 
 #endif // VCF_STATISH_H

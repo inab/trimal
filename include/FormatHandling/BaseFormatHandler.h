@@ -61,7 +61,7 @@ public:
      \return    <b> Alignment</b> loaded with the information of the file. \n
                 <b> nullptr</b> if there was any error.
      */
-    virtual Alignment *LoadAlignment(std::string& filename) = 0;
+    virtual Alignment *LoadAlignment(const std::string &filename) = 0;
 
     /**
      \brief Function to save a \link Alignment \endlink to a file.
@@ -70,7 +70,7 @@ public:
      \return    <b> True </b>if file could be saved.\n
                 <b> False </b> otherwise.
      */
-    virtual bool SaveAlignment(Alignment *alignment, std::ostream *output) = 0;
+    virtual bool SaveAlignment(const Alignment &alignment, std::ostream *output) = 0;
 
     /**
      \brief Function that recognizes acronyms of the format.
@@ -78,14 +78,14 @@ public:
      \return <b>True</b> if recognized\n
              <b>False</b> otherwise.
      */
-    virtual bool RecognizeOutputFormat(std::string& FormatName) {
+    virtual bool RecognizeOutputFormat(const std::string &FormatName) {
         return (name == FormatName);
     }
 
     /**
      \brief Class Destructor
      */
-    virtual ~BaseFormatHandler() {};
+    virtual ~BaseFormatHandler() = default;
 
 protected:
     /**

@@ -226,7 +226,7 @@ private: // General, private, methods
 
     void output_reports();
     void save_alignment();
-    int perform_VCF();
+
     void svg_stats_out();
     void print_statistics();
     bool create_or_use_similarity_matrix();

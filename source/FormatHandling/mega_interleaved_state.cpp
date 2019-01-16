@@ -57,7 +57,7 @@ int mega_interleaved_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* mega_interleaved_state::LoadAlignment(std::string& filename)
+Alignment* mega_interleaved_state::LoadAlignment(const std::string &filename)
 {
     Alignment * alig = new Alignment();
    /* MEGA interleaved file format parser */
@@ -114,16 +114,18 @@ Alignment* mega_interleaved_state::LoadAlignment(std::string& filename)
 
         /* If TITLE label is found, replace previously stored information with
          * this info */
+        std::string newFilename {filename};
         if(!strcmp(str, "TITLE")) {
-            filename.clear();
+            newFilename.clear();
             if(strncmp(line, "!", 1))
-                filename += "!";
-            filename += line;
+                newFilename += "!";
+            newFilename += line;
         }
-
             /* If FORMAT label is found, try to get some details from input file */
         else if(!strcmp(str, "FORMAT"))
              alig->alignmentInfo.append(line, strlen(line));
+
+        alig->filename = newFilename;
 
         /* Destroy previously allocated memory */
         delete [] frag;
@@ -238,12 +240,12 @@ Alignment* mega_interleaved_state::LoadAlignment(std::string& filename)
     return alig;
 }
 
-bool mega_interleaved_state::SaveAlignment(Alignment* alignment, std::ostream* output)
+bool mega_interleaved_state::SaveAlignment(const Alignment &alignment, std::ostream *output)
 {
     return false;
 }
 
-bool mega_interleaved_state::RecognizeOutputFormat(std::string& FormatName)
+bool mega_interleaved_state::RecognizeOutputFormat(const std::string &FormatName)
 {
     return false;
 }

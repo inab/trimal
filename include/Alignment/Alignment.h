@@ -127,7 +127,7 @@ public:
 
     void printSeqOverlap();
 
-    int getAlignmentType();
+    int getAlignmentType() const;
 
     bool isFileAligned();
 

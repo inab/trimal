@@ -15,7 +15,7 @@ int fasta_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* fasta_state::LoadAlignment(std::string& filename)
+Alignment* fasta_state::LoadAlignment(const std::string &filename)
 {
     /* FASTA file format parser */
     Alignment* alig = new Alignment();
@@ -116,8 +116,8 @@ Alignment* fasta_state::LoadAlignment(std::string& filename)
     return alig; 
 }
 
-bool fasta_state::SaveAlignment(Alignment* alignment,
-                                std::ostream* output)
+bool fasta_state::SaveAlignment(const Alignment &alignment,
+                                std::ostream *output)
 {
     /* Generate output alignment in FASTA format. Sequences can be unaligned. */
 
@@ -126,49 +126,49 @@ bool fasta_state::SaveAlignment(Alignment* alignment,
     bool lastcharIsnewline = false;
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new std::string[alignment->originalNumberOfSequences];
+    tmpMatrix = new std::string[alignment.originalNumberOfSequences];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->originalNumberOfSequences; i++)
+    for(i = 0; i < alignment.originalNumberOfSequences; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
-                       alignment->sequences[i] :
-                       utils::getReverse(alignment->sequences[i]);
+                       alignment.sequences[i] :
+                       utils::getReverse(alignment.sequences[i]);
 
     /* Depending on if short name flag is activated (limits sequence name up to
      * 10 characters) or not, get maximum sequence name length. Consider those
      * cases when the user has asked to keep original sequence header */
     maxLongName = 0;
-    for(i = 0; i < alignment->originalNumberOfSequences; i++)
+    for(i = 0; i < alignment.originalNumberOfSequences; i++)
     {
-        if (alignment->saveSequences && alignment->saveSequences[i] == -1)
+        if (alignment.saveSequences && alignment.saveSequences[i] == -1)
             continue;
         if (!Machine->keepHeader)
-            maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
-        else if (alignment->seqsInfo != nullptr)
-            maxLongName = utils::max(maxLongName, alignment->seqsInfo[i].size());
+            maxLongName = utils::max(maxLongName, alignment.seqsName[i].size());
+        else if (alignment.seqsInfo != nullptr)
+            maxLongName = utils::max(maxLongName, alignment.seqsInfo[i].size());
     }
 
     /* Print alignment. First, sequences name id and then the sequences itself */
-    for(i = 0; i < alignment->originalNumberOfSequences; i++) {
+    for(i = 0; i < alignment.originalNumberOfSequences; i++) {
         
-        if (alignment->saveSequences != nullptr &&
-            alignment->saveSequences[i] == -1)
+        if (alignment.saveSequences != nullptr &&
+            alignment.saveSequences[i] == -1)
             continue;
         
         if (!Machine->keepHeader)
-            (*output) << ">" << alignment->seqsName[i].substr(0, maxLongName) << "\n";
+            (*output) << ">" << alignment.seqsName[i].substr(0, maxLongName) << "\n";
         
-        else if (alignment->seqsInfo != nullptr)
-            (*output) << ">" << alignment->seqsInfo[i].substr(0, maxLongName) << "\n";
+        else if (alignment.seqsInfo != nullptr)
+            (*output) << ">" << alignment.seqsInfo[i].substr(0, maxLongName) << "\n";
         
         
-        for (j = 0, k = 0; j < alignment->sequences[i].length(); j++)
+        for (j = 0, k = 0; j < alignment.sequences[i].length(); j++)
         {
-            if (alignment->saveResidues != nullptr && alignment->saveResidues[j] == -1) 
+            if (alignment.saveResidues != nullptr && alignment.saveResidues[j] == -1) 
             {
-                if (!lastcharIsnewline && j == alignment->sequences[i].length() -1 ) 
+                if (!lastcharIsnewline && j == alignment.sequences[i].length() -1 ) 
                 {
                     (*output) << "\n";
                     lastcharIsnewline = true;
@@ -179,7 +179,7 @@ bool fasta_state::SaveAlignment(Alignment* alignment,
                 (*output) << tmpMatrix[i][j];
                 k++;
                 lastcharIsnewline = false;
-                if (k % 60 == 0 || j == alignment->sequences[i].length() -1 )
+                if (k % 60 == 0 || j == alignment.sequences[i].length() -1 )
                 {
                     (*output) << "\n";
                     lastcharIsnewline = true;
@@ -194,7 +194,7 @@ bool fasta_state::SaveAlignment(Alignment* alignment,
     return true;
 }
 
-bool fasta_state::RecognizeOutputFormat(std::string& FormatName)
+bool fasta_state::RecognizeOutputFormat(const std::string &FormatName)
 {
     if (BaseFormatHandler::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "fasta";

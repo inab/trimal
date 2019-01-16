@@ -98,7 +98,7 @@ int phylip40_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* phylip40_state::LoadAlignment(std::string& filename)
+Alignment* phylip40_state::LoadAlignment(const std::string &filename)
 {
     /* PHYLIP/PHYLIP 4 (Sequential) file format parser */
     Alignment * alig = new Alignment();
@@ -206,7 +206,7 @@ Alignment* phylip40_state::LoadAlignment(std::string& filename)
     return alig;
 }
 
-bool phylip40_state::SaveAlignment(Alignment* alignment, std::ostream* output)
+bool phylip40_state::SaveAlignment(const Alignment &alignment, std::ostream *output)
 {
   
     
@@ -217,61 +217,61 @@ bool phylip40_state::SaveAlignment(Alignment* alignment, std::ostream* output)
 
     /* Check whether sequences in the alignment are aligned or not.
      * Warn about it if there are not aligned. */
-    if (!alignment->isAligned) {
+    if (!alignment.isAligned) {
         debug.report(ErrorCode::UnalignedAlignmentToAlignedFormat, new std::string[1] { this->name });
         return false;
     }
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new std::string[alignment->originalNumberOfSequences];
+    tmpMatrix = new std::string[alignment.originalNumberOfSequences];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for(i = 0; i < alignment->originalNumberOfSequences; i++)
+    for(i = 0; i < alignment.originalNumberOfSequences; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
-                       alignment->sequences[i] :
-                       utils::getReverse(alignment->sequences[i]);
+                       alignment.sequences[i] :
+                       utils::getReverse(alignment.sequences[i]);
 
     /* Depending on if short name flag is activated (limits sequence name up to
      * 10 characters) or not, get maximum sequence name length */
     maxLongName = PHYLIPDISTANCE;
-    for(i = 0; (i < alignment->originalNumberOfSequences); i++)
-        maxLongName = utils::max(maxLongName, alignment->seqsName[i].size());
+    for(i = 0; (i < alignment.originalNumberOfSequences); i++)
+        maxLongName = utils::max(maxLongName, alignment.seqsName[i].size());
 
     /* Generating output alignment */
     /* First Line: Sequences Number & Residued Number */
-    (*output) << " " << alignment->numberOfSequences << " " << alignment->numberOfResidues;
+    (*output) << " " << alignment.numberOfSequences << " " << alignment.numberOfResidues;
 
     /* First Block: Sequences Names & First 60 residues */
-    for(i = 0; i < alignment->originalNumberOfSequences; i++)
+    for(i = 0; i < alignment.originalNumberOfSequences; i++)
     {
-        if (alignment->saveSequences[i] == -1) continue;
-        (*output) << "\n" << std::setw(maxLongName + 3) << std::left << alignment->seqsName[i].substr(0, maxLongName);
+        if (alignment.saveSequences[i] == -1) continue;
+        (*output) << "\n" << std::setw(maxLongName + 3) << std::left << alignment.seqsName[i].substr(0, maxLongName);
             
-        for (k = 0, l = 0; k < alignment->originalNumberOfResidues && l < 60; k++)
+        for (k = 0, l = 0; k < alignment.originalNumberOfResidues && l < 60; k++)
         {
-            if (alignment->saveResidues[k] == -1) continue;
-            *output << alignment->sequences[i][k];
+            if (alignment.saveResidues[k] == -1) continue;
+            *output << alignment.sequences[i][k];
             l++;
         }
     }
 
-    for (i = k; i < alignment->originalNumberOfResidues; i=k)
+    for (i = k; i < alignment.originalNumberOfResidues; i=k)
     {
-        if (alignment->saveResidues[i] == -1) {
+        if (alignment.saveResidues[i] == -1) {
             k++;
             continue;
         }
         *output << "\n";
-        for (j = 0; j < alignment->originalNumberOfSequences; j++)
+        for (j = 0; j < alignment.originalNumberOfSequences; j++)
         {
-            if (alignment->saveSequences[j] == -1) continue;
+            if (alignment.saveSequences[j] == -1) continue;
             *output << "\n";
-            for (k = i, l = 0; k < alignment->originalNumberOfResidues && l < 60; k++)
+            for (k = i, l = 0; k < alignment.originalNumberOfResidues && l < 60; k++)
             {
-                if (alignment->saveResidues[k] == -1) continue;
-                *output << alignment->sequences[j][k];
+                if (alignment.saveResidues[k] == -1) continue;
+                *output << alignment.sequences[j][k];
                 l++;
             }
             
@@ -286,7 +286,7 @@ bool phylip40_state::SaveAlignment(Alignment* alignment, std::ostream* output)
     return true;
 }
 
-bool phylip40_state::RecognizeOutputFormat(std::string& FormatName)
+bool phylip40_state::RecognizeOutputFormat(const std::string &FormatName)
 {
     if (BaseFormatHandler::RecognizeOutputFormat(FormatName)) return true;
     return FormatName == "phylip" || FormatName == "phylip40";

@@ -1,3 +1,6 @@
+
+#include <FormatHandling/FormatManager.h>
+
 #include "FormatHandling/FormatManager.h"
 #include "FormatHandling/BaseFormatHandler.h"
 #include "FormatHandling/formats_header.h"
@@ -7,247 +10,254 @@
 
 
 namespace FormatHandling {
-FormatManager::~FormatManager()
-{
-    for(BaseFormatHandler* child : available_states) {
-        delete child;
-    }
-}
 
-void FormatManager::addState(FormatHandling::BaseFormatHandler* newState)
-{
-    this -> available_states.emplace_back(newState);
-}
-
-Alignment* FormatManager::loadAlignment(std::string inFile)
-{
-    // Check input file.
-    std::ifstream inFileHandler;
-    inFileHandler.open(inFile);
-    if (!inFileHandler.is_open())
+    FormatManager::~FormatManager()
     {
-        debug.report(ErrorCode::CantOpenFile, &inFile[0]);
-        return nullptr;
-    }
-    else if (inFileHandler.peek() == std::ifstream::traits_type::eof())
-    {
-        debug.report(ErrorCode::FileIsEmpty, &inFile[0]);
-        return nullptr;
-    }
-
-    BaseFormatHandler* inState = nullptr;
-    int format_value = 0;
-    int temp_value = 0;
-
-    for(BaseFormatHandler* state : available_states)
-    {
-        temp_value = state -> CheckAlignment(&inFileHandler);
-
-        if (temp_value > format_value)
-        {
-            format_value = temp_value;
-            inState = state;
+        for(BaseFormatHandler* child : available_states) {
+            delete child;
         }
     }
 
-    if (inState == nullptr)
+    void FormatManager::addState(FormatHandling::BaseFormatHandler* newState)
     {
-        debug.report(ErrorCode::AlignmentFormatNotRecognized, &inFile[0]);
-        inFileHandler.close();
-        return nullptr;
+        this -> available_states.emplace_back(newState);
     }
 
-    Alignment* alignment = inState->LoadAlignment(inFile);
-    inFileHandler.close();
-    return alignment;
-}
+    Alignment* FormatManager::loadAlignment(const std::string &inFile)
+    {
+        auto inState = getFormatFromFile(inFile);
 
-bool FormatManager::saveAlignment(std::string outPattern, std::vector< std::string >* outFormats, Alignment* alignment)
-{
-    StartTiming("bool FormatManager::saveAlignment()");
-    if (alignment->numberOfResidues == 0 || alignment->numberOfSequences == 0)
-    {
-        debug.report(ErrorCode::AlignmentIsEmpty);
-        return false;
-    }
-    std::string filename;
-    unsigned long start;
-    unsigned long end;
-    if (alignment->filename.empty())
-    {
-        filename = utils::ReplaceString(outPattern, "[in]", "NoInputFileName");
-    }
-    else
-    {
-        start = std::max((int)alignment->filename.find_last_of('/'), 0);
-        end = alignment->filename.find_last_of('.');
-        filename = utils::ReplaceString(outPattern, "[in]", alignment->filename.substr(start, end-start));
-    }
-
-    
-    if (outPattern.empty())
-    {
-        if (outFormats->empty())
+        if (inState == nullptr)
         {
-            outFormats->emplace_back("fasta");
+            debug.report(ErrorCode::AlignmentFormatNotRecognized, &inFile[0]);
+            return nullptr;
         }
-        if (outFormats->size() == 1)
+
+        return inState->LoadAlignment(inFile);
+    }
+
+    std::string FormatManager::replaceINtag(
+            const Alignment & alignment,
+            const std::string & outPattern)
+    {
+        // Replace the [in] tag with correspondent information.
+        unsigned long start, end;
+        // Although an alignment file should have a filename
+        //      we make a guard to prevent issues.
+        if (alignment.filename.empty())
         {
-            for(BaseFormatHandler* state : available_states)
-            {
-                if (state->RecognizeOutputFormat( outFormats->at(0) ))
-                {
-                    return state->SaveAlignment(alignment, &std::cout);
-                }
-            }
-            debug.report(ErrorCode::OutputFormatNotRecognized, &outFormats->at(0)[0]);
-            return false;
+            return utils::ReplaceString(outPattern, "[in]", "NoInputFileName");
         }
+            // If the alignment contains a filename
+            //      we replace the tag with it's name
         else
         {
-            debug.report(ErrorCode::OnlyOneFormatOnConsoleOutput);
-            return false;
+            start = std::max((int)alignment.filename.find_last_of('/') + 1, 0);
+            end = alignment.filename.find_last_of('.');
+            return utils::ReplaceString(outPattern, "[in]", alignment.filename.substr(start, end-start));
         }
     }
-    else
+
+    bool FormatManager::saveAlignment(
+            const std::string &outPattern,
+            const std::vector<std::string> &outFormats,
+            const Alignment &alignment)
     {
-        if (outFormats->empty())
+        const std::vector<const Alignment*>tmpVector{ &alignment };
+        return saveAlignments(outPattern, outFormats, tmpVector);
+    }
+
+    bool FormatManager::saveAlignments(
+            const std::string &outPattern,
+            const std::vector<std::string> &outFormats,
+            const std::vector<const Alignment *> &alignmentVector)
+    {
+        StartTiming("bool FormatManager::saveAlignment()");
+
+        bool returnValue = true;
+
+        std::vector<FormatHandling::BaseFormatHandler*> formats{};
+
+        for(const std::string & outFormat : outFormats)
         {
-            outFormats->emplace_back("fasta");
-        }
-        if (outFormats->size() == 1)
-        {
-            for(BaseFormatHandler* state : available_states)
+            // Get the format desired
+            BaseFormatHandler* state = getFormatFromToken(outFormat);
+            if (state == nullptr)
             {
-                if (state->RecognizeOutputFormat( outFormats->at(0) ))
-                {
-                    utils::ReplaceStringInPlace(filename, "[extension]", state->extension);
-                    utils::ReplaceStringInPlace(filename, "[format]", state->name);
-                    
-                    std::ofstream outFileHandler;
-                    outFileHandler.open(filename);
-                    
-                    return state->SaveAlignment(alignment, &outFileHandler);
-                }
+                debug.report(ErrorCode::OutputFormatNotRecognized, &outFormats.at(0)[0]);
+                returnValue = false;
+                continue;
             }
-            debug.report(ErrorCode::OutputFormatNotRecognized, &outFormats->at(0)[0]);
-            return false;
+            formats.emplace_back(state);
         }
-        else 
+
+
+        // Check if any format has been requested.
+        //      If not, the default is fasta.
+        if (formats.empty())
+            formats.emplace_back(getFormatFromToken("fasta"));
+
+
+        // If we are outputting to terminal
+        if (outPattern.empty())
         {
-            ulong tag = filename.find("[extension]");
-            if (tag == std::string::npos)
-                tag = filename.find("[format]");
-            if (tag == std::string::npos)
-                debug.report(ErrorCode::MultipleOutputFormatsSameName);
-
-
-
-            // Tranform the list of std::string states to a BaseFormatHandler list.
-            bool recognized;
-            std::vector<BaseFormatHandler*> outStates = std::vector<BaseFormatHandler*>();
+            if (formats.size() != 1)
             {
-                for (std::string outFormat : *outFormats)
-                {
-                    recognized = false;
-                    for(BaseFormatHandler* state : available_states)
-                    {
-                        if (state->RecognizeOutputFormat(outFormat))
-                        {
-                            outStates.emplace_back(state);
-                            recognized = true;
-                        }
-                    }
-                    if (!recognized)
-                    {
-                        debug.report(ErrorCode::OutputFormatNotRecognized, &outFormat[0]);
-                        return false; 
-                    }
-                }
+                // Report an error if more than one alignment is requested on terminal
+                // debug.report(ErrorCode::OnlyOneFormatOnConsoleOutput);
+                return false;
             }
-            std::ofstream outFileHandler;
-            bool isCorrect = true;
-            std::string filename_2;
-            for (BaseFormatHandler * state : outStates)
+            if (formats.size() != 1)
             {
-                filename_2 = utils::ReplaceString(filename, "[extension]", state->extension);
-                utils::ReplaceStringInPlace(filename_2, "[format]", state->name);
-                outFileHandler.open(filename_2);
-                if(!state -> SaveAlignment(alignment, &outFileHandler))
+                // Report an error if more than one format is requested on terminal
+                debug.report(ErrorCode::OnlyOneFormatOnConsoleOutput);
+                return false;
+            }
+
+            return formats[0]->SaveAlignment(*alignmentVector[0], &std::cout);
+        }
+
+        // Iterate over all alignments
+        for (const Alignment * alignment : alignmentVector)
+        {
+            // Check if is possible to save the alignment
+            if (alignment->numberOfResidues  == 0 ||
+                alignment->numberOfSequences == 0)
+            {
+                debug.report(ErrorCode::AlignmentIsEmpty);
+                returnValue = false;
+                continue;
+            }
+
+            // Retrieve the IN parameter
+            std::string filename = replaceINtag(*alignment, outPattern);
+
+            for(FormatHandling::BaseFormatHandler * state : formats)
+            {
+                // Replace the [extension] and [format] tokens
+                std::string finalFilename =
+                        utils::ReplaceString(filename, "[extension]", state->extension);
+                utils::ReplaceStringInPlace(finalFilename, "[format]", state->name);
+
+                // Open the file handler
+                std::ofstream outFileHandler(finalFilename, openmode);
+
+                // Save the alignment
+                if (!state->SaveAlignment(*alignment, &outFileHandler))
                 {
                     debug.report(ErrorCode::AlignmentNotSaved, &state->name[0]);
-                    isCorrect = false;
-                }
-                
-                outFileHandler.close();
-            }
-            if (!isCorrect)
-                debug.report(ErrorCode::ImpossibleToGenerate, new std::string[1]{"the output file"});
-            return isCorrect;
-        }
-    }
-}
-
-void FormatManager::loadAndSaveMultipleAlignments(
-    std::vector< std::string >* inFiles,
-    std::string* outPattern,
-    std::vector< std::string >* outFormats)
-{
-
-    // Get all the output format states needed.
-    std::vector<BaseFormatHandler*> outStates = std::vector<BaseFormatHandler*>();
-    {
-        bool recognized;
-        for (std::string outFormat : *outFormats)
-        {
-            recognized = false;
-            for(BaseFormatHandler* state : available_states)
-            {
-                if (state->RecognizeOutputFormat(outFormat))
-                {
-                    outStates.emplace_back(state);
-                    recognized = true;
-                    break;
+                    returnValue = false;
                 }
             }
-
-            if (!recognized)
-            {
-                debug.report(ErrorCode::OutputFormatNotRecognized, &outFormat[0]);
-                return;
-            }
         }
+
+        return returnValue;
     }
 
-    // Process input files one by one.
-    BaseFormatHandler* inState = nullptr;
-    std::ifstream inFileHandler;
-    int format_value = 0;
-    int temp_value = 0;
-
-    for (std::string inFile : *inFiles)
+    void FormatManager::loadAndSaveMultipleAlignments(
+            const std::vector<std::string> &inFiles,
+            const std::string &outPattern,
+            const std::vector<std::string> &outFormats)
     {
-        // Open file.
-        inFileHandler.open(inFile);
-        if (!inFileHandler.is_open())
+        // Store all the alignments
+        std::vector<const Alignment *> alignments {};
+        // Iterate over all of them
+        for(const std::string & inFile : inFiles)
         {
-            debug.report(ErrorCode::CantOpenFile, &inFile[0]);
-            return;
+            Alignment * alignment = loadAlignment(inFile);
+            if (alignment == nullptr) continue;
+            alignments.emplace_back(alignment);
         }
-        else if (inFileHandler.peek() == std::ifstream::traits_type::eof())
+        // Save them
+        saveAlignments(outPattern, outFormats, alignments);
+    }
+
+    std::string FormatManager::getFileFormatName(const std::string &inFile)
+    {
+        FormatHandling::BaseFormatHandler * format = getFormatFromFile(inFile);
+        return format == nullptr ? "Unknown" : format->name;
+    }
+
+    std::string FormatManager::getInputFormatsAvailable()
+    {
+        std::stringstream ss("");
+        for (BaseFormatHandler* state : available_states)
+            if (state->canLoad)
+                ss << state->name << ", " ;
+        ss.seekp(-2, std::ios_base::end);
+        ss << "  ";
+        return ss.str();
+    }
+
+    std::string FormatManager::getOutputFormatsAvailable()
+    {
+        std::stringstream ss("");
+        for (BaseFormatHandler* state : available_states)
+            if (state->canSave)
+                ss << state->name << ", " ;
+        ss.seekp(-2, std::ios_base::end);
+        ss << "  ";
+        return ss.str();
+    }
+
+    std::vector<Alignment*> FormatManager::splitAlignmentKeeping(
+            const Alignment &alignment)
+    {
+        std::vector<Alignment *> splitted =
+                std::vector<Alignment *>(alignment.originalNumberOfSequences);
+
+        for (int i = 0; i < alignment.originalNumberOfSequences; i++)
         {
-            debug.report(ErrorCode::FileIsEmpty, &inFile[0]);
-            return;
+            Alignment * tempAlignment = new Alignment();
+            tempAlignment->sequences = new std::string[1]{alignment.sequences[i]};
+            tempAlignment->seqsName = new std::string[1]{ alignment.seqsName[i] };
+            tempAlignment->numberOfSequences
+                    = tempAlignment->originalNumberOfSequences
+                    = 1;
+            tempAlignment->numberOfResidues
+                    = tempAlignment->originalNumberOfResidues
+                    = (int) tempAlignment->sequences[0].size();
+            tempAlignment->filename = tempAlignment->seqsName[0];
+            splitted[i] = tempAlignment;
         }
 
-        inState = nullptr;
-        format_value = 0;
+        return splitted;
+    }
 
-        // Get format State that can handle this alignment.
+    FormatHandling::BaseFormatHandler * FormatManager::getFormatFromToken(
+            const std::string &token)
+    {
+        // Search for a format able to recognize the token
+        for(BaseFormatHandler* state : available_states)
+            if (state->RecognizeOutputFormat( token ))
+                return state;
+
+        return nullptr;
+    }
+
+    FormatHandling::BaseFormatHandler * FormatManager::getFormatFromFile(
+            const std::string &filename)
+    {
+        // Open the file
+        std::ifstream * input = getNonEmptyFile(filename);
+
+        if (input == nullptr)
+            return nullptr;
+
+        // Temporal value
+        BaseFormatHandler* inState = nullptr;
+
+        // Compare variables
+        int format_value = 0, temp_value = 0;
+
+        // Iterate over all available states
         for(BaseFormatHandler* state : available_states)
         {
-            temp_value = state -> CheckAlignment(&inFileHandler);
+            // Store the score that state produces
+            temp_value = state -> CheckAlignment(input);
 
+            // If the score is better than last maximum, this format
+            //      is better at recognizing the input file
             if (temp_value > format_value)
             {
                 format_value = temp_value;
@@ -255,136 +265,37 @@ void FormatManager::loadAndSaveMultipleAlignments(
             }
         }
 
-        // Check if there is a format State to handle the alignment.
+        // We don't need the input open anymore. Destructor deletes it
+        delete input;
+
+        // Check if any input recognized the format
         if (inState == nullptr)
         {
-            debug.report(ErrorCode::AlignmentFormatNotRecognized, &inFile[0]);
-            inFileHandler.close();
-            return;
+            debug.report(ErrorCode::AlignmentFormatNotRecognized, &filename[0]);
+            return nullptr;
         }
 
-        // Load alignment one by one and store it on each of the formats specified.
-        Alignment* alignment = inState->LoadAlignment(inFile);
-        unsigned long start;
-        unsigned long end;
-        inFileHandler.close();
+        // Return the recognized format
+        return inState;
+    }
+
+    std::ifstream * FormatManager::getNonEmptyFile(
+            const std::string &filename)
+    {
+        auto inFileHandler = new std::ifstream(filename);
+        // Input file must exist
+        if (!inFileHandler->is_open())
         {
-            std::string filename;
-            std::ofstream outFileHandler;
-            for (BaseFormatHandler * state : outStates)
-            {
-                start = std::max((int)inFile.find_last_of('/'), 0);
-                end = inFile.find_last_of('.');
-                filename = utils::ReplaceString(*outPattern, "[in]", inFile.substr(start, end-start));
-                utils::ReplaceStringInPlace(filename, "[extension]", state->extension);
-                utils::ReplaceStringInPlace(filename, "[format]", state->name);
-
-                outFileHandler.open(filename);
-                if (this->hasOutputFile)
-                    state -> SaveAlignment(alignment, &outFileHandler);
-                else
-                    state -> SaveAlignment(alignment, &std::cout);
-                outFileHandler.close();
-            }
+            debug.report(ErrorCode::CantOpenFile, &filename[0]);
+            return nullptr;
         }
-
-        delete alignment;
-    }
-}
-
-std::string FormatManager::getFileFormatName(std::string inFile)
-{
-    std::ifstream inFileHandler;
-
-    // Open file.
-    inFileHandler.open(inFile);
-    if (!inFileHandler.is_open())
-    {
-        debug.report(ErrorCode::CantOpenFile, &inFile[0]);
-        return "Unknown";
-    }
-    else if (inFileHandler.peek() == std::ifstream::traits_type::eof())
-    {
-        debug.report(ErrorCode::FileIsEmpty, &inFile[0]);
-        return "None";
-    }
-
-    BaseFormatHandler* inState = nullptr;
-    int format_value = 0;
-    int temp_value = 0;
-
-    // Get format State that can handle this alignment.
-    for(BaseFormatHandler* state : available_states)
-    {
-        temp_value = state -> CheckAlignment(&inFileHandler);
-
-        if (temp_value > format_value)
+        // Input file cannot be empty
+        if (inFileHandler->peek() == std::ifstream::traits_type::eof())
         {
-            format_value = temp_value;
-            inState = state;
+            debug.report(ErrorCode::FileIsEmpty, &filename[0]);
+            return nullptr;
         }
+
+        return inFileHandler;
     }
-
-    // Check if there is a format State to handle the alignment.
-    if (inState == nullptr)
-    {
-        inFileHandler.close();
-        return "Unknown";
-    }
-
-    return inState->name;
-}
-
-std::string FormatManager::getInputFormatsAvailable()
-{
-    std::stringstream ss("");
-
-    for (BaseFormatHandler* state : available_states)
-    {
-        if (state->canLoad)
-            ss << state->name << ", " ;
-    }
-    ss.seekp(-2, std::ios_base::end);
-    ss << "  ";
-
-    return ss.str();
-
-}
-
-std::string FormatManager::getOutputFormatsAvailable()
-{
-    std::stringstream ss("");
-
-    for (BaseFormatHandler* state : available_states)
-    {
-        if (state->canSave)
-            ss << state->name << ", " ;
-    }
-    ss.seekp(-2, std::ios_base::end);
-    ss << "  ";
-
-    return ss.str();
-
-}
-
-std::vector<Alignment*> FormatManager::splitAlignmentKeeping(Alignment& alignment)
-{
-    std::vector<Alignment *> splitted = std::vector<Alignment *>(alignment.originalNumberOfSequences);
-
-    for (int i = 0; i < alignment.originalNumberOfSequences; i++)
-    {
-        Alignment * tempAlignment = new Alignment();
-        tempAlignment->sequences = new std::string[1];
-        tempAlignment->sequences[0] = std::string(alignment.sequences[i]);
-        tempAlignment->seqsName = new std::string[1] { alignment.seqsName[i] };
-        tempAlignment->numberOfSequences = 1;
-        tempAlignment->originalNumberOfSequences = 1;
-        tempAlignment->numberOfResidues = tempAlignment->sequences[0].size();
-        tempAlignment->originalNumberOfResidues = tempAlignment->numberOfResidues;
-        tempAlignment->filename = tempAlignment->seqsName[0];
-        splitted[i] = tempAlignment;
-    }
-
-    return splitted;
-}
 }

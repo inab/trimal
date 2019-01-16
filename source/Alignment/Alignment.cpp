@@ -461,12 +461,14 @@ bool Alignment::getSequenceNameOrder(string *names, int *orderVector) {
 
 }
 
-int Alignment::getAlignmentType() {
+int Alignment::getAlignmentType() const {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("int Alignment::getAlignmentType(void) ");
     if (dataType == SequenceTypes::NotDefined)
-        dataType = utils::checkAlignmentType(numberOfSequences, numberOfResidues, sequences);
+        // Dropping constness,
+        //      as the datatype is not a "modification" of the alignment
+        const_cast<Alignment*>(this)->dataType = utils::checkAlignmentType(numberOfSequences, numberOfResidues, sequences);
     return dataType;
 }
 /*

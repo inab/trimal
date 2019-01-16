@@ -198,6 +198,11 @@ enum ErrorCode {
     AlignmentTypeIsUnknown                              = 95,
 
     MultipleOutputFormatsSameName                       = 96,
+    MultipleInputs                                      = 97, // Not in use
+
+
+
+    SomethingWentWrong_reportToDeveloper                = 100,
 
 
 
@@ -350,7 +355,7 @@ public:
      <b> The method wont take care of destroying the array </b>\n
       This allows to reuse the parameter passed.
      */
-    void report(ErrorCode message, char * vars);
+    void report(ErrorCode message, const char *vars);
     /**
      \brief Method to report a Warning. \n
      It will be displayed if
@@ -378,7 +383,7 @@ public:
      <b> The method wont take care of destroying the array </b>\n
       This allows to reuse the parameter passed.
      */
-    void report(WarningCode message, char * vars);
+    void report(WarningCode message, const char *vars);
     /**
      \brief Method to report an Info message. \n
      It will be displayed if
@@ -406,7 +411,7 @@ public:
      <b> The method wont take care of destroying the array </b>\n
       This allows to reuse the parameter passed.
      */
-    void report(InfoCode message, char * vars);
+    void report(InfoCode message, const char *vars);
 
     /**
      \brief Method to output a message behind two checks:

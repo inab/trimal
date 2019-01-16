@@ -22,7 +22,7 @@ int pir_state::CheckAlignment(std::istream *origin) {
     return 0;
 }
 
-Alignment *pir_state::LoadAlignment(std::string& filename) {
+Alignment *pir_state::LoadAlignment(const std::string &filename) {
     /* NBRF/PIR file format parser */
 
     Alignment *alig = new Alignment();
@@ -148,7 +148,7 @@ Alignment *pir_state::LoadAlignment(std::string& filename) {
     return alig;
 }
 
-bool pir_state::SaveAlignment(Alignment *alignment, std::ostream *output) {
+bool pir_state::SaveAlignment(const Alignment &alignment, std::ostream *output) {
 
     /* Generate output alignment in NBRF/PIR format. Sequences can be unaligned */
 
@@ -156,49 +156,49 @@ bool pir_state::SaveAlignment(Alignment *alignment, std::ostream *output) {
     std::string alg_datatype, *tmpMatrix;
 
     /* Allocate local memory for generating output alignment */
-    tmpMatrix = new std::string[alignment->originalNumberOfSequences];
+    tmpMatrix = new std::string[alignment.originalNumberOfSequences];
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for (i = 0; i < alignment->originalNumberOfSequences; i++)
+    for (i = 0; i < alignment.originalNumberOfSequences; i++)
         tmpMatrix[i] = (!Machine->reverse) ?
-                       alignment->sequences[i] :
-                       utils::getReverse(alignment->sequences[i]);
+                       alignment.sequences[i] :
+                       utils::getReverse(alignment.sequences[i]);
 
     /* Compute output file datatype */
-    alignment->getAlignmentType();
-    if (alignment->getAlignmentType() & SequenceTypes::DNA)
+    alignment.getAlignmentType();
+    if (alignment.getAlignmentType() & SequenceTypes::DNA)
         alg_datatype = "DL";
-    else if (alignment->getAlignmentType() & SequenceTypes::RNA)
+    else if (alignment.getAlignmentType() & SequenceTypes::RNA)
         alg_datatype = "RL";
-    else if (alignment->getAlignmentType() & SequenceTypes::AA)
+    else if (alignment.getAlignmentType() & SequenceTypes::AA)
         alg_datatype = "P1";
 
 
 
 
     /* Print alignment */
-    for (i = 0; i < alignment->originalNumberOfSequences; i++) {
-        if (alignment->saveSequences && alignment->saveSequences[i] == -1) continue;
+    for (i = 0; i < alignment.originalNumberOfSequences; i++) {
+        if (alignment.saveSequences && alignment.saveSequences[i] == -1) continue;
 
         /* Print sequence datatype and its name */
-        if ((alignment->seqsInfo != nullptr) /*&& (iformat == oformat)*/)
-            (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i]
-                      << "\n" << alignment->seqsInfo[i] << "\n";
+        if ((alignment.seqsInfo != nullptr) /*&& (iformat == oformat)*/)
+            (*output) << ">" << alg_datatype << ";" << alignment.seqsName[i]
+                      << "\n" << alignment.seqsInfo[i] << "\n";
         else
-            (*output) << ">" << alg_datatype << ";" << alignment->seqsName[i] << "\n"
-                      << alignment->seqsName[i] << " " << alignment->sequences[i].length() << " bases\n";
+            (*output) << ">" << alg_datatype << ";" << alignment.seqsName[i] << "\n"
+                      << alignment.seqsName[i] << " " << alignment.sequences[i].length() << " bases\n";
 
-        for (j = 0, k = 0, l = 0; j < alignment->sequences[i].length(); j++) {
-            if (alignment->saveResidues != nullptr && alignment->saveResidues[j] == -1) {
+        for (j = 0, k = 0, l = 0; j < alignment.sequences[i].length(); j++) {
+            if (alignment.saveResidues != nullptr && alignment.saveResidues[j] == -1) {
 //                 if (j == alignment->sequences[i].length() -1 ) 
 //                     (*output) << "\n";
             } else {
                 if (k % 10 == 0) (*output) << " ";
                 (*output) << tmpMatrix[i][j];
                 k++;
-                if (j == alignment->sequences[i].length() - 1);
+                if (j == alignment.sequences[i].length() - 1);
                 else if (k % 50 == 0) (*output) << "\n";
             }
         }
@@ -213,7 +213,7 @@ bool pir_state::SaveAlignment(Alignment *alignment, std::ostream *output) {
     return true;
 }
 
-bool pir_state::RecognizeOutputFormat(std::string& FormatName) {
+bool pir_state::RecognizeOutputFormat(const std::string &FormatName) {
     if (BaseFormatHandler::RecognizeOutputFormat(FormatName))
         return true;
     return FormatName == "pir" || FormatName == "nbrf" ||

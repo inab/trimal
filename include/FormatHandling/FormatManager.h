@@ -91,7 +91,12 @@ public:
     \return <b>Pointer to the alignment</b> if it could be loaded.\n
             <b>Null</b> if not.
         */
-    Alignment* loadAlignment(std::string inFile);
+    Alignment* loadAlignment(
+            const std::string &inFile);
+
+    std::string replaceINtag(
+            const Alignment & alignment,
+            const std::string & outPattern);
 
     /**
     \brief Function to save an alignment to a file.
@@ -100,13 +105,29 @@ public:
     \param outPattern File path to save the alignment.
     \param outFormats Format in which save the alignment.
     \param alignment Alignment
+    */
+    bool saveAlignment(
+            const std::string &outPattern,
+            const std::vector<std::string> &outFormats,
+            const Alignment &alignment);
+
+        /**
+    \brief Function to save an alignment to a file.
+        It searches among the available_states one that can write the alignment
+         in the specified format.
+    \param outPattern File path to save the alignment.
+    \param outFormats Format in which save the alignment.
+    \param alignmentVector Alignment
             */
-    bool saveAlignment(std::string outPattern, std::vector< std::string >* outFormats, Alignment* alignment);
+    bool saveAlignments(
+                const std::string &outPattern,
+                const std::vector<std::string> &outFormats,
+                const std::vector<const Alignment *> &alignmentVector);
     
     /**
      \brief Function that takes multiple files,
              loads them and saves in a cumulus of formats, using an outPattern.
-     \param inFile Vector of files to load, reformat and save.
+     \param inFiles Vector of files to load, reformat and save.
      \param outPattern Path and name of the new files.\n
                The function changes some optional tokens on the original string to obtain multiple versions: \n
                 - <b> [in] </b>        Token that is changed with the original filename without extension.\n
@@ -117,13 +138,17 @@ public:
         Otherwise, the system would overwrite the same file over and over.
      \param outFormats Output formats that original files should reformat to. 
      */
-    void loadAndSaveMultipleAlignments(std::vector< std::string >* inFile, std::string* outPattern, std::vector< std::string >* outFormats);
+    void loadAndSaveMultipleAlignments(
+            const std::vector<std::string> &inFiles,
+            const std::string &outPattern,
+            const std::vector<std::string> &outFormats);
     
     /**
      \brief Function to obtain the format name of a given file.
      \param inFile File path of the file which we want to obtain it's format.
      */
-    std::string getFileFormatName(std::string inFile);
+    std::string getFileFormatName(
+            const std::string &inFile);
     
     /**
      \brief Function to obtain all format names available
@@ -142,7 +167,20 @@ public:
              each one with a sequence from the original.\n
             This function does a deep copy of each sequence,
              so the original alignment can be deleted after being splitted*/
-    std::vector<Alignment*> splitAlignmentKeeping(Alignment& alignment);
+    std::vector<Alignment*> splitAlignmentKeeping(
+            const Alignment &alignment);
+
+
+    FormatHandling::BaseFormatHandler * getFormatFromToken(
+            const std::string &token);
+
+    std::ifstream * getNonEmptyFile(
+            const std::string &filename);
+
+    FormatHandling::BaseFormatHandler * getFormatFromFile(
+            const std::string &filename);
+
+    std::ios_base::openmode openmode = std::ofstream::out;
 };
 }
 
