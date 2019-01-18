@@ -26,6 +26,8 @@ enum VerboseLevel {
 
 enum ErrorCode {
 
+    SomethingWentWrong_reportToDeveloper                = 0,
+
     AlignmentNotLoaded                                  = 1,
 
     NoFormatsSpecified                                  = 2,
@@ -200,21 +202,30 @@ enum ErrorCode {
     MultipleOutputFormatsSameName                       = 96,
     MultipleInputs                                      = 97, // Not in use
 
+    ReferenceNucleotideNotCorresponding                 = 98,
+
+    OverwrittingSNP                                     = 99,
 
 
-    SomethingWentWrong_reportToDeveloper                = 100,
+    MoreDonorsOnLineThanPresented                       = 100,
 
+    MinQualityLesserThan0                               = 101,
+    MinQualityNotRecognized                             = 102,
 
+    MinCoverageLesserThan0                              = 103,
+    MinCoverageNotRecognized                            = 104,
+
+    OnlyValidWithVCF                                    = 105,
 
     __MAXERROR,
 };
 
 enum WarningCode {
-    RemovingOnlyGapsSequence                      = 1,
+    RemovingOnlyGapsSequence                    = 1,
 
-    KeepingOnlyGapsSequence                       = 2,
+    KeepingOnlyGapsSequence                     = 2,
 
-    SequenceWillBeCut                        = 3,
+    SequenceWillBeCut                           = 3,
 
     IncludingIndeterminationSymbols             = 4,
 
@@ -223,8 +234,9 @@ enum WarningCode {
     HeaderWillBeCut                             = 6,
     
     DonorAlreadyAdded                           = 7,
-    
-    ReferenceNucleotideNotCorresponding         = 8,
+
+    SNPAlreadApplied                            = 8,
+
 
     __MAXWARNING
 };
@@ -233,6 +245,8 @@ enum InfoCode {
     CuttingSequence                             = 1,
 
     WindowSizeCompareset                        = 2,
+
+    AddingSNP                                   = 3,
 
     __MAXINFO
 };

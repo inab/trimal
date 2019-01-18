@@ -342,9 +342,8 @@ namespace ngs {
                     {
                         if (donorID >= donorsPositions[vcfIndex].size())
                         {
-                            debug.log(VerboseLevel::ERROR)
-                                << "There are more donors on the line than presented "
-                                << filenames[vcfIndex] << "\n\t" << line << "\n";
+                            debug.report(ErrorCode::MoreDonorsOnLineThanPresented,
+                                    new std::string[1]{ filenames[vcfIndex]} );
                             continue;
                         }
                         // Get the sequence position.
@@ -375,7 +374,7 @@ namespace ngs {
 
                             // Filter out by read depth
                             if (readDepth < minCoverage) {
-                                // If provided, change the character by the replacementchar
+                                // If provided, change the character by the replacement-char
                                 //      as we don't know if the character is equal to the
                                 //      reference or the provided SNP
                                 if (replacementChar)
@@ -383,45 +382,60 @@ namespace ngs {
                                 break;
                             }
 
-                            auto reportSNP = [&](std::string message, VerboseLevel level){
-                                debug.log(level)
-                                        << "[" << filenames[vcfIndex] << "] " << message
-                                        << "\n" << contigs[contigIndex] << " - " << feature.position
-                                        << "\tOri/Ref/Alt\t" << referenceSequenceChar
-                                        << "/" << donorSequenceChar
-                                        << "/" << feature.alt[0]
-//                                        << "\n\t" << line
-                                        << "\n";
-                            };
-
                             // Check if the reference character is the same as expected in the sequence to apply
                             if (donorSequenceChar == std::tolower(feature.ref[0]) ||
                                 donorSequenceChar == std::toupper(feature.ref[0]))
                             {
-                                reportSNP("Adding SNP", VerboseLevel::INFO);
+                                debug.report(InfoCode::AddingSNP,
+                                     new std::string[5]
+                                     {
+                                             contigs[contigIndex],
+                                             alig->seqsName[seqPos],
+                                             std::to_string(feature.position),
+                                             std::string(1, feature.ref[0]),
+                                             std::string(1, feature.alt[0])
+                                     });
                                 donorSequenceChar = feature.alt[0];
                             }
                             // Check if the alternative sequence is the same in the sequence to apply
                             else if (donorSequenceChar == feature.alt[0])
                             {
-                                reportSNP("SNP already added", VerboseLevel::INFO);
+                                debug.report(WarningCode::SNPAlreadApplied,
+                                     new std::string[5]
+                                         {
+                                                 contigs[contigIndex],
+                                                 alig->seqsName[seqPos],
+                                                 std::to_string(feature.position),
+                                                 std::string(1, feature.ref[0]),
+                                                 std::string(1, feature.alt[0])
+                                         });
                             }
                             // Check if reference character is the same as expected in the reference sequence
                             else if (referenceSequenceChar == std::tolower(feature.ref[0]) ||
                                      referenceSequenceChar == std::toupper(feature.ref[0]))
                             {
-                                reportSNP("Overwriting SNP", VerboseLevel::WARNING);
+                                debug.report(ErrorCode::OverwrittingSNP,
+                                    new std::string[6]
+                                    {
+                                        contigs[contigIndex],
+                                        alig->seqsName[seqPos],
+                                        std::to_string(feature.position),
+                                        std::string(1, referenceSequenceChar),
+                                        std::string(1, donorSequenceChar),
+                                        std::string(1, feature.alt[0])
+                                    });
                                 donorSequenceChar = feature.alt[0];
                             }
                             else {
-                                debug.report(WarningCode::ReferenceNucleotideNotCorresponding,
-                                             new std::string[5]{
-                                                     sources[contigIndex]->seqsName[0],
-                                                     std::to_string(feature.position),
-                                                     filenames[vcfIndex],
-                                                     std::string(1, donorSequenceChar),
-                                                     feature.ref
-                                             });
+                                debug.report(ErrorCode::ReferenceNucleotideNotCorresponding,
+                                     new std::string[5]
+                                     {
+                                        contigs[contigIndex],
+                                        alig->seqsName[donorID],
+                                        std::to_string(feature.position),
+                                        std::string(1, feature.ref[0]),
+                                        std::string(1, referenceSequenceChar)
+                                     });
                             }
                         }
 
@@ -555,13 +569,13 @@ namespace ngs {
 
         {
 
-            debug.log(VerboseLevel::INFO)
-                << "[VCF]"
-                   "\n MinQuality:       " << minQuality <<
-                   "\n MinCoverage:      " << minCoverage <<
-                   "\n Ignore Filter:    " << (ignoreFilter? "True":"False") <<
-                   "\n Replacement Char: " << (replacementChar == nullptr ? "None":replacementChar) <<
-                   "\n";
+//            debug.log(VerboseLevel::INFO)
+//                << "[VCF]"
+//                   "\n MinQuality:       " << minQuality <<
+//                   "\n MinCoverage:      " << minCoverage <<
+//                   "\n Ignore Filter:    " << (ignoreFilter? "True":"False") <<
+//                   "\n Replacement Char: " << (replacementChar == nullptr ? "None":replacementChar) <<
+//                   "\n";
             using namespace ngs::__internal;
 
             obtainContigsAndDonors(filenames, donors, contigs, donorsPositions);

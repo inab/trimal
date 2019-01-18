@@ -14,6 +14,9 @@ const std::map<InfoCode, const char *> reporting::reportManager::InfoMessages =
                         "Window size (-w) is provided. "
                                 "It's recommended to use specific consistency window size (-cw)"
                                 " when using -compareset option"},
+                {InfoCode ::AddingSNP,
+                        "Applying SNP to \"[tag]\":\"[tag]\" at position [tag] \"[tag]\"->\"[tag]\""
+                }
         };
 
 const std::map<WarningCode, const char *> reporting::reportManager::WarningMessages =
@@ -40,14 +43,10 @@ const std::map<WarningCode, const char *> reporting::reportManager::WarningMessa
 
                 {WarningCode::DonorAlreadyAdded,
                         "The donor \"[tag]\" is present on more than one VCF. "
-                        "The SNP's of all entries will be merged in one single sequence."},
+                        "Overlaping SNPs will be overwritten."},
 
-                {WarningCode::ReferenceNucleotideNotCorresponding,
-                        "The sequence \"[tag]\" at position \"[tag]\" does not correspond "
-                        "with reference allele in file \"[tag]\". "
-                        "Found \"[tag]\". Expected \"[tag]\""
-                }
-
+                {WarningCode::SNPAlreadApplied,
+                            "SNP already applied to \"[tag]\":\"[tag]\" at position [tag] \"[tag]\"->\"[tag]\""}
         };
 
 const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages =
@@ -338,7 +337,7 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
                         "Window size (-w) provided is too big, please specify a window lesser than 1/4 of residues"},
 
                 {ErrorCode::AlignmentIsEmpty,
-                        "Couldn't output any alignment as it doesn't contain any sequence"},
+                        "Couldn't output any alignment as it doesn't contain any sequence."},
 
                 {ErrorCode::AlignmentTypeIsUnknown,
                         "Couldn't perform the trimming step, alignment type unkwnown. "},
@@ -348,10 +347,39 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
                         "            Output files will be overwritten. Please, provide an output pattern containing tags to prevent overwritting."},
 
                 {ErrorCode::MultipleInputs,
-                        "Multiple input files have been provided (Ej: \"-in X Y\"). This is not supported"},
+                        "Multiple input files have been provided (Ej: \"-in X Y\"). This is not supported."},
 
                 {ErrorCode::SomethingWentWrong_reportToDeveloper,
-                        "Something went wrong. Please, report to the developer with this message: \"[tag]\""}
+                        "Something went wrong. Please, report to the developer with this message: \"[tag]\""},
+
+                {ErrorCode::ReferenceNucleotideNotCorresponding,
+                         "Failed to apply SNP to \"[tag]\":\"[tag]\" at position \"[tag]\".\n"
+                         "\tCharacter expected at reference: \"[tag]\"\n"
+                         "\tCharacter at reference:          \"[tag]\""},
+
+                {ErrorCode::OverwrittingSNP,
+                        "Overwriting SNP to \"[tag]\":\"[tag]\" at position \"[tag]\".\n"
+                        "\tCharacter found at reference:      \"[tag]\"\n"
+                        "\tCharacter found at destination:    \"[tag]\"\n"
+                        "\tCharacter applied to destination:  \"[tag]\""},
+
+                {ErrorCode::MoreDonorsOnLineThanPresented,
+                        "There are more donors on the line than present on header. Please check your VCF: \"[tag]\""},
+
+                {ErrorCode::MinQualityLesserThan0,
+                        "Min Quality should be equal or greater than 0."},
+
+                {ErrorCode::MinQualityNotRecognized,
+                        "Min Quality provided not recognized"},
+
+                {ErrorCode::MinCoverageLesserThan0,
+                        "Min Coverage should be equal or greater than 0."},
+
+                {ErrorCode::MinCoverageNotRecognized,
+                        "Min Coverage provided not recognized"},
+
+                {ErrorCode::OnlyValidWithVCF,
+                        "[tag] only valid in combination with -vcf argument."},
 
         };
 

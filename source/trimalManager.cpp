@@ -845,11 +845,11 @@ inline bool trimAlManager::min_quality_argument(const int *argc, char *argv[], i
         if (utils::isNumber(argv[*i + 1])) {
             minQuality = atof(argv[++*i]);
             if (minQuality < 0) {
-                debug.log(VerboseLevel::ERROR) << "Min quality should be greater or equal to 0";
+                debug.report(ErrorCode::MinQualityLesserThan0);
                 appearErrors = true;
             }
         } else {
-            debug.log(VerboseLevel::ERROR) << "Min quality value not recognized";
+            debug.report(ErrorCode::MinQualityNotRecognized);
             appearErrors = true;
         }
         return true;
@@ -862,11 +862,11 @@ inline bool trimAlManager::min_coverage_argument(const int *argc, char *argv[], 
         if (utils::isNumber(argv[*i + 1])) {
             minCoverage = atof(argv[++*i]);
             if (minCoverage < 0) {
-                debug.log(VerboseLevel::ERROR) << "Min coverage should be greater or equal to 0";
+                debug.report(ErrorCode::MinCoverageLesserThan0);
                 appearErrors = true;
             }
         } else {
-            debug.log(VerboseLevel::ERROR) << "Min coverage value not recognized";
+            debug.report(ErrorCode::MinCoverageNotRecognized);
             appearErrors = true;
         }
         return true;
@@ -1076,19 +1076,19 @@ inline bool trimAlManager::check_vcf_incompatibility()
         if (minQuality != -1)
         {
             appearErrors = true;
-            debug.log(VerboseLevel::ERROR) << "MinQuality argument only valid with VCF\n";
+            debug.report(ErrorCode::OnlyValidWithVCF, "MinQuality");
         }
 
         if (minCoverage != -1)
         {
             appearErrors = true;
-            debug.log(VerboseLevel::ERROR) << "MinCoverage argument only valid with VCF\n";
+            debug.report(ErrorCode::OnlyValidWithVCF, "MinCoverage");
         }
 
         if (ignoreFilter)
         {
             appearErrors = true;
-            debug.log(VerboseLevel::ERROR) << "IgnoreFilter argument only valid with VCF\n";
+            debug.report(ErrorCode::OnlyValidWithVCF, "IgnoreFilter");
         }
     }
     return returnValue;
