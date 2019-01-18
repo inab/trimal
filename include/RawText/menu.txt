@@ -21,6 +21,11 @@ Common options (for a complete list please see the User Guide or visit http://tr
 
     -in <inputfile>          Input file in several formats.
                                  Available input formats: [iformat]
+
+    -formats <format1, ...>  Specify one or more formats to save the resulting MSA. Separated by spaces
+                                Combinations with specific format arguments (-fasta, -nexus, etc) is allowed.
+                                Available output formats: [oformat]
+
     -out <outputfile>        Output path pattern. (default stdout).
 
                                  Following tags will be replaced if present on filename:
@@ -139,9 +144,12 @@ Common options (for a complete list please see the User Guide or visit http://tr
                                     or it doesn't contain the tag "[contig]",
                                     the sequences names will have the name of their contig prepended.
 
-    -formats <format1, ...>  Specify one or more formats to save the resulting MSA. Separated by spaces
-                                Combinations with specific format arguments (-fasta, -nexus, etc) is allowed.
-                                Available output formats: [oformat]
+    -minquality <n>          Specify the min quality of a SNP in VCF to apply it. Only valid in combination with -vcf.
+
+    -mincoverage <n>         Specify the min coverage of a SNP in VCF to apply it. Only valid in combination with -vcf.
+
+    -ignoreFilter            Ignore vcf-filtered variants in VCF. Only valid in combination with -vcf.
+                                Still applies min-quality and min-coverage when provided
 
     --alternative_matrix degenerated_nt_identity
                              Specify the degenerated nt identity matrix as the similarity matrix to use.

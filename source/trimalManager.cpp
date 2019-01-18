@@ -59,67 +59,105 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
         help_arguments(&argc, argv, &i);
 
         // Check arguments. Makes use of the 
-        //  macro checkArgument (start of the file)
+        //  macro checkArgument (defined before the method)
         //  to make code more understandable.
         //
         // Argument passed to checkArgument is,
         //  indeed, a method with signature:
         //  x_argument(&argc, argv, &i)
-        checkArgument(in_argument)
-        checkArgument(vcf_argument)
-        checkArgument(out_argument)
-        checkArgument(html_out_argument)
-        checkArgument(timetracker_out_argument)
-        checkArgument(svg_out_argument)
-        checkArgument(svg_stats_argument)
-        checkArgument(out_format_arguments)
-        checkArgument(matrix_argument)
 
-        checkArgument(compareset_argument)
-        checkArgument(force_select_argument)
-        checkArgument(back_trans_argument)
+        // In-Out
+        {
+            // Alignment in-out
+            checkArgument(in_argument)
+            checkArgument(out_argument)
+            checkArgument(out_format_arguments)
 
-        checkArgument(gap_threshold_argument)
-        checkArgument(similarity_threshold_argument)
-        checkArgument(consistency_threshold_argument)
+            // Trimming Reports
+            checkArgument(html_out_argument)
+            checkArgument(svg_out_argument)
 
-        checkArgument(conservation_threshold_argument)
+            // Compare set
+            checkArgument(compareset_argument)
+            checkArgument(force_select_argument)
 
-        checkArgument(no_gaps_argument)
-        checkArgument(no_all_gaps_argument)
+            // Back translation
+            checkArgument(back_trans_argument)
 
-        checkArgument(keep_seqs_argument)
-        checkArgument(keep_header_argument)
+            // Stats report
+            checkArgument(stats_arguments)
+            checkArgument(svg_stats_argument)
 
-        checkArgument(gappy_out_argument)
-        checkArgument(strict_argument)
-        checkArgument(strict_plus_argument)
-        checkArgument(automated1_argument)
+            // Time Tracker out
+            checkArgument(timetracker_out_argument)
 
-        checkArgument(residue_overlap_argument)
-        checkArgument(sequence_overlap_argument)
+            // Custom Matrix argument
+            checkArgument(matrix_argument)
 
-        checkArgument(seqs_select_argument)
-        checkArgument(select_cols_argument)
+            // Column Numbering
+            checkArgument(col_numbering_argument)
+        }
 
-        checkArgument(max_identity_argument)
-        checkArgument(clusters_argument)
+        // Stats
+        {
+            // Thresholds
+            checkArgument(gap_threshold_argument)
+            checkArgument(similarity_threshold_argument)
+            checkArgument(consistency_threshold_argument)
+            checkArgument(conservation_threshold_argument)
 
-        checkArgument(terminal_only_argument)
+            // Windows
+            checkArgument(window_argument)
+            checkArgument(gap_window_argument)
+            checkArgument(similarity_window_argument)
+            checkArgument(consistency_window_argument)
+        }
 
-        checkArgument(window_argument)
-        checkArgument(gap_window_argument)
-        checkArgument(similarity_window_argument)
-        checkArgument(consistency_window_argument)
+        // Trimming methods
+        {
+            // Gaps based
+            checkArgument(no_gaps_argument)
+            checkArgument(no_all_gaps_argument)
+            // Automated
+            checkArgument(gappy_out_argument)
+            checkArgument(strict_argument)
+            checkArgument(strict_plus_argument)
+            checkArgument(automated1_argument)
+            // Overlap
+            checkArgument(residue_overlap_argument)
+            checkArgument(sequence_overlap_argument)
+            // Manual
+            checkArgument(seqs_select_argument)
+            checkArgument(select_cols_argument)
 
-        checkArgument(block_argument)
-        checkArgument(stats_arguments)
 
-        checkArgument(complementary_argument)
+            checkArgument(max_identity_argument)
+            checkArgument(clusters_argument)
+        }
 
-        checkArgument(col_numbering_argument);
-        checkArgument(split_by_stop_codon_argument)
-        checkArgument(ignore_stop_codon_argument)
+        // Modifiers
+        {
+            checkArgument(keep_seqs_argument)
+            checkArgument(keep_header_argument)
+
+            // Back translation Modifiers
+            checkArgument(ignore_stop_codon_argument)
+            checkArgument(split_by_stop_codon_argument)
+
+            checkArgument(block_argument)
+
+            checkArgument(complementary_argument)
+
+            checkArgument(terminal_only_argument)
+        }
+
+        // VCF
+        {
+            checkArgument(vcf_argument)
+            checkArgument(ignore_filter_argument)
+            checkArgument(min_quality_argument)
+            checkArgument(min_coverage_argument)
+        }
 
         // Skip the verbosity option, as it was checked before the loop
         if (!strcmp(argv[i], "--verbosity") || !strcmp(argv[i], "-v")) {
@@ -160,6 +198,8 @@ inline bool trimAlManager::check_arguments_incompatibilities() {
     check_stats_incompatibilities();
     check_codon_behaviour_incompatibility();
     check_combinations_among_thresholds_incompatibility();
+
+    check_vcf_incompatibility();
 
     return appearErrors;
 }
@@ -205,8 +245,8 @@ inline void trimAlManager::help_arguments(const int *argc, char *argv[], int *i)
     }
 
     if (!strcmp(argv[*i], "-lf") || !strcmp(argv[*i], "--listformats")) {
-        std::cout << "Input Formats:  " << formatManager.getInputFormatsAvailable() << "\n";
-        std::cout << "Output Formats: " << formatManager.getOutputFormatsAvailable() << "\n";
+        std::cout << "Input Formats:  \t" << formatManager.getInputFormatsAvailable() << "\n\n";
+        std::cout << "Output Formats: \t" << formatManager.getOutputFormatsAvailable() << "\n";
         exit(0);
     }
 }
@@ -792,6 +832,48 @@ inline bool trimAlManager::ignore_stop_codon_argument(const int *argc, char *arg
     return false;
 }
 
+inline bool trimAlManager::ignore_filter_argument(const int *argc, char *argv[], int *i) {
+    if ((!strcmp(argv[*i], "-ignorefilter")) && !ignoreFilter) {
+        ignoreFilter = true;
+        return true;
+    }
+    return false;
+}
+
+inline bool trimAlManager::min_quality_argument(const int *argc, char *argv[], int *i) {
+    if (!strcmp(argv[*i], "-minquality") && ((*i) + 1 != *argc) && (minQuality == -1)) {
+        if (utils::isNumber(argv[*i + 1])) {
+            minQuality = atof(argv[++*i]);
+            if (minQuality < 0) {
+                debug.log(VerboseLevel::ERROR) << "Min quality should be greater or equal to 0";
+                appearErrors = true;
+            }
+        } else {
+            debug.log(VerboseLevel::ERROR) << "Min quality value not recognized";
+            appearErrors = true;
+        }
+        return true;
+    }
+    return false;
+}
+
+inline bool trimAlManager::min_coverage_argument(const int *argc, char *argv[], int *i) {
+    if (!strcmp(argv[*i], "-mincoverage") && ((*i) + 1 != *argc) && (minCoverage == -1)) {
+        if (utils::isNumber(argv[*i + 1])) {
+            minCoverage = atof(argv[++*i]);
+            if (minCoverage < 0) {
+                debug.log(VerboseLevel::ERROR) << "Min coverage should be greater or equal to 0";
+                appearErrors = true;
+            }
+        } else {
+            debug.log(VerboseLevel::ERROR) << "Min coverage value not recognized";
+            appearErrors = true;
+        }
+        return true;
+    }
+    return false;
+}
+
 bool trimAlManager::processArguments(char *argv[]) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
@@ -985,6 +1067,33 @@ inline bool trimAlManager::check_combinations_among_thresholds_incompatibility()
     }
     return false;
 }
+
+inline bool trimAlManager::check_vcf_incompatibility()
+{
+    bool returnValue = false;
+    if (vcfs == nullptr)
+    {
+        if (minQuality != -1)
+        {
+            appearErrors = true;
+            debug.log(VerboseLevel::ERROR) << "MinQuality argument only valid with VCF\n";
+        }
+
+        if (minCoverage != -1)
+        {
+            appearErrors = true;
+            debug.log(VerboseLevel::ERROR) << "MinCoverage argument only valid with VCF\n";
+        }
+
+        if (ignoreFilter)
+        {
+            appearErrors = true;
+            debug.log(VerboseLevel::ERROR) << "IgnoreFilter argument only valid with VCF\n";
+        }
+    }
+    return returnValue;
+}
+
 
 inline bool trimAlManager::check_automated_manual_incompatibilities() {
     if ((getComplementary) && (!appearErrors))
@@ -1348,9 +1457,9 @@ int trimAlManager::perform() {
         ngs::readVCF(
                 /* Dataset          */ XX,
                 /* VCF Collection   */ *vcfs,
-                /* min Quality      */ 0,
-                /* min Coverage     */ 30,
-                /* ignore Filters   */ false,
+                /* min Quality      */ minQuality,
+                /* min Coverage     */ minCoverage,
+                /* ignore Filters   */ ignoreFilter,
                 /* replacement char */ &replacement
         );
 

@@ -56,7 +56,8 @@ public:
         splitByStopCodon    = false,
         terminalOnly        = false, 
         keepSeqs            = false,
-        ignoreStopCodon     = false;
+        ignoreStopCodon     = false,
+        ignoreFilter        = false;
 
     float 
         conservationThreshold   = -1,
@@ -65,7 +66,9 @@ public:
         consistencyThreshold    = -1,
         residuesOverlap         = -1,
         sequenceOverlap         = -1,
-        maxIdentity             = -1;
+        maxIdentity             = -1,
+        minCoverage             = -1,
+        minQuality              = -1;
     
     int
         i                       = 1,
@@ -180,6 +183,9 @@ private: // Parse Arguments Methods
         bool col_numbering_argument         (const int* argc, char* argv[], int* currentArg);
         bool split_by_stop_codon_argument   (const int* argc, char* argv[], int* currentArg);
         bool ignore_stop_codon_argument     (const int* argc, char* argv[], int* currentArg);
+        bool ignore_filter_argument         (const int* argc, char* argv[], int* currentArg);
+        bool min_quality_argument           (const int* argc, char* argv[], int* currentArg);
+        bool min_coverage_argument          (const int* argc, char* argv[], int* currentArg);
 
 public:
     bool processArguments(char* argv[]);
@@ -196,6 +202,7 @@ private: // Process Arguments Methods
         bool check_codon_behaviour_incompatibility();
         bool check_combinations_among_thresholds_incompatibility();
         bool check_automated_manual_incompatibilities();
+        bool check_vcf_incompatibility();
 
     bool check_arguments_needs(char* argv[]);
 

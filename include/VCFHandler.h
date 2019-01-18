@@ -16,7 +16,9 @@ namespace ngs {
 
         /**
          * Method to obtain a tag from a sequence of residues in the format
-         * "CSCSCSCSC...C" where C is a character and S the separator
+         * "CSCSCSCSC...C" where C is a character and S the separator.
+         * It will error if more than one character is present between the separators. Ej: CSCCS
+         * A = 1; C = 2; T = 3; G = 4;
          * @param array sequence of chars to convert
          * @param separator separator of the chars in the sequence
          * @return -1 if errored, tag if correct
@@ -117,12 +119,12 @@ namespace ngs {
         /**
          * Method to extract a variant from a char array
          * @param line char array containing information to form a variant
-         * @param tmpVariant variant reference to store results
+         * @param feature variant reference to store results
          * @return \i True if done \n\i False if line does starts by '#'
          */
         inline bool extractFeature(
                 const char *const line,
-                vcfFeature &tmpVariant);
+                vcfFeature &feature);
 
         /**
          * Filter a variant based on multiple filters:
@@ -135,45 +137,42 @@ namespace ngs {
          * @param ignoreFilter Ignore filter field on VCF
          * @return \i True if variant is valid \n\i False otherwise
          */
-        inline bool filterFeature(
-                const vcfFeature &tmpVariant,
-                const float minQuality,
-                const bool ignoreFilter);
+        inline bool filterFeature(const vcfFeature &tmpVariant, const float minQuality);
 
-        /**
-         * Method to apply a non-filtered-out variant to a set of sources
-         * It will filter-out the variant for each donor, based on its coverage
-         * @param tmpVariant VCF Feature
-         * @param seqPos Sequence position
-         * @param minCoverage Coverage to apply a feature
-         * @param replacementChar Char to apply when a feature has been filtered out
-         * @param sources Alignments to apply the variants
-         * @param contigs Contigs
-         * @param filename
-         */
-        inline void applyUnfilteredFeature(
-                const vcfFeature &tmpVariant,
-                const int seqPos,
-                const float minCoverage,
-                const char *const replacementChar,
-                const std::vector<Alignment *> &sources,
-                const std::vector<std::string> &contigs,
-                const std::string &filename);
-
-        /**
-         *
-         * @param tmpVariant
-         * @param seqPos
-         * @param replacementChar
-         * @param sources
-         * @param contigs
-         */
-        inline void applyFilteredFeature(
-                const vcfFeature &tmpVariant,
-                const int seqPos,
-                const char *const replacementChar,
-                const std::vector<Alignment *> &sources,
-                const std::vector<std::string> &contigs);
+//        /**
+//         * Method to apply a non-filtered-out variant to a set of sources
+//         * It will filter-out the variant for each donor, based on its coverage
+//         * @param tmpVariant VCF Feature
+//         * @param seqPos Sequence position
+//         * @param minCoverage Coverage to apply a feature
+//         * @param replacementChar Char to apply when a feature has been filtered out
+//         * @param sources Alignments to apply the variants
+//         * @param contigs Contigs
+//         * @param filename
+//         */
+//        inline void applyUnfilteredFeature(
+//                const vcfFeature &tmpVariant,
+//                const int seqPos,
+//                const float minCoverage,
+//                const char *const replacementChar,
+//                const std::vector<Alignment *> &sources,
+//                const std::vector<std::string> &contigs,
+//                const std::string &filename);
+//
+//        /**
+//         *
+//         * @param tmpVariant
+//         * @param seqPos
+//         * @param replacementChar
+//         * @param sources
+//         * @param contigs
+//         */
+//        inline void applyFilteredFeature(
+//                const vcfFeature &tmpVariant,
+//                const int seqPos,
+//                const char *const replacementChar,
+//                const std::vector<Alignment *> &sources,
+//                const std::vector<std::string> &contigs);
 
         /**
          *
