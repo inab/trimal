@@ -387,8 +387,8 @@ int main(int argc, char *argv[])
             }
         }
     }
-//    else if (!outFormats.empty())
-//        MachineState.loadAndSaveMultipleAlignments(&inFiles, &outPattern, &outFormats);
+    else if (!outFormats.empty() || MachineState.reverse)
+        MachineState.loadAndSaveMultipleAlignments(inFiles, outPattern, outFormats);
     else
         std::cerr << "ERROR: An option has to be chosen\n";
 }

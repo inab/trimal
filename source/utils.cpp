@@ -471,13 +471,13 @@ namespace utils {
         return line;
     }
 
-    std::string getReverse(std::string toReverse) {
+    std::string getReverse(const std::string &toReverse) {
 
         std::string line(toReverse.size(), ' ');
-        size_t i;
+        long i, x;
 
-        for (i = toReverse.size() - 1; i >= 0; i--)
-            line += toReverse[i];
+        for (i = toReverse.size() - 1, x = 0; i >= 0; i--, x++)
+            line[x] = toReverse[i];
         return line;
     }
 

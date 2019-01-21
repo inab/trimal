@@ -293,7 +293,7 @@ namespace utils {
      \param toReverse String to get a reversed copy.
      \return Reversed string of toReverse.
      */
-     std::string getReverse(std::string toReverse);
+     std::string getReverse(const std::string &toReverse);
 
     /**
      \brief Removes a determined char from the string
