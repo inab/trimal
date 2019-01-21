@@ -155,16 +155,17 @@ bool pir_state::SaveAlignment(const Alignment &alignment, std::ostream *output) 
     int i, j, k, l;
     std::string alg_datatype, *tmpMatrix;
 
-    /* Allocate local memory for generating output alignment */
-    tmpMatrix = new std::string[alignment.originalNumberOfSequences];
-
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
      * copy it into local memory */
-    for (i = 0; i < alignment.originalNumberOfSequences; i++)
-        tmpMatrix[i] = (!Machine->reverse) ?
-                       alignment.sequences[i] :
-                       utils::getReverse(alignment.sequences[i]);
+    if (Machine->reverse)
+    {
+        /* Allocate local memory for generating output alignment */
+        tmpMatrix = new std::string[alignment.originalNumberOfSequences];
+        for(i = 0; i < alignment.originalNumberOfSequences; i++)
+            tmpMatrix[i] = utils::getReverse(alignment.sequences[i]);
+    }
+    else tmpMatrix = alignment.sequences;
 
     /* Compute output file datatype */
     alignment.getAlignmentType();
@@ -208,7 +209,8 @@ bool pir_state::SaveAlignment(const Alignment &alignment, std::ostream *output) 
     }
 
     /* Deallocate local memory */
-    delete[] tmpMatrix;
+    if (Machine->reverse)
+        delete [] tmpMatrix;
 
     return true;
 }
