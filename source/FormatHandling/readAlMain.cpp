@@ -383,8 +383,8 @@ int main(int argc, char *argv[])
                 if (!outFormats.empty())
                     MachineState.saveAlignment(outPattern, outFormats, *alignment);
                 
-                delete alignment;
             }
+            delete alignment;
         }
     }
     else if (!outFormats.empty() || MachineState.reverse)

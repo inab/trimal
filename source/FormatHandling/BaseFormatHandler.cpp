@@ -61,16 +61,16 @@ namespace FormatHandling {
     bool FormatManager::saveAlignment(
             const std::string &outPattern,
             const std::vector<std::string> &outFormats,
-            const Alignment &alignment)
+            Alignment &alignment)
     {
-        const std::vector<const Alignment*>tmpVector{ &alignment };
+        const std::vector<Alignment*>tmpVector{ &alignment };
         return saveAlignments(outPattern, outFormats, tmpVector);
     }
 
     bool FormatManager::saveAlignments(
             const std::string &outPattern,
             const std::vector<std::string> &outFormats,
-            const std::vector<const Alignment *> &alignmentVector)
+            const std::vector<Alignment *> &alignmentVector)
     {
         StartTiming("bool FormatManager::saveAlignment()");
 
@@ -160,7 +160,7 @@ namespace FormatHandling {
             const std::vector<std::string> &outFormats)
     {
         // Store all the alignments
-        std::vector<const Alignment *> alignments {};
+        std::vector<Alignment *> alignments {};
         // Iterate over all of them
         for(const std::string & inFile : inFiles)
         {
@@ -170,6 +170,12 @@ namespace FormatHandling {
         }
         // Save them
         saveAlignments(outPattern, outFormats, alignments);
+
+        for(Alignment * alignment : alignments)
+        {
+            delete alignment;
+            alignment = nullptr;
+        }
     }
 
     std::string FormatManager::getFileFormatName(const std::string &inFile)

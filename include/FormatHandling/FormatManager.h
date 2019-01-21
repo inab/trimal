@@ -109,7 +109,7 @@ public:
     bool saveAlignment(
             const std::string &outPattern,
             const std::vector<std::string> &outFormats,
-            const Alignment &alignment);
+            Alignment &alignment);
 
         /**
     \brief Function to save an alignment to a file.
@@ -122,7 +122,7 @@ public:
     bool saveAlignments(
                 const std::string &outPattern,
                 const std::vector<std::string> &outFormats,
-                const std::vector<const Alignment *> &alignmentVector);
+                const std::vector<Alignment *> &alignmentVector);
     
     /**
      \brief Function that takes multiple files,
