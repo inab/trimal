@@ -12,7 +12,7 @@
 
 namespace ngs {
 
-    typedef std::vector<Alignment *> SourcesVector;
+    typedef std::vector<Alignment *> AlignmentVector;
     typedef std::vector<std::string> StringVector;
 
     namespace IUPAC {
@@ -53,13 +53,14 @@ namespace ngs {
 
         struct vcfFeature {
         public:
+            bool filter;
             int position;
             float quality;
-            char * ref    = nullptr,
-                    * alt    = nullptr,
-                    * contig = nullptr;
-            bool filter;
             float readDepthIndex;
+            char
+                * ref    = nullptr,
+                * alt    = nullptr,
+                * contig = nullptr;
 
             StringVector donorsInfo {};
 
@@ -90,7 +91,7 @@ namespace ngs {
             }
         };
 
-        void printApeek(SourcesVector &sources);
+        void printApeek(AlignmentVector &sources);
 
         /**
          * Method to check if there is an alignment for each contig extracted
@@ -99,7 +100,7 @@ namespace ngs {
          * @return \i True if all contigs have a reference /n\i False otherwise
          */
         inline bool checkContigsWithReference(
-                const SourcesVector &sources,
+                const AlignmentVector &sources,
                 const StringVector &contigs);
 
         /**
@@ -111,7 +112,7 @@ namespace ngs {
          * @param [in] donors Donor names
          */
         inline void increaseSequencesInAlignment(
-                const SourcesVector &sources,
+                const AlignmentVector &sources,
                 const StringVector &donors);
 
         /**
@@ -149,7 +150,7 @@ namespace ngs {
          * @param [in] replacementChar Replacement char used when a SNP is not reliable
          */
         inline void applyVariantCallingFiles(
-                const SourcesVector &sources,
+                const AlignmentVector &sources,
                 const StringVector &filenames,
                 const StringVector &contigs,
                 const std::vector<std::vector<int>> &donorsPositions,
@@ -203,7 +204,7 @@ namespace ngs {
      * @param [in] replacementChar Replacement char to apply when VCF-feature doesn't pass the filter.
      */
     void readVCF(
-            const SourcesVector &sources,
+            const AlignmentVector &sources,
             const StringVector &filenames,
             const float minQuality,
             const float minCoverage,

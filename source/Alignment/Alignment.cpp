@@ -786,7 +786,7 @@ bool Alignment::checkCorrespondence(string *names, int *lengths, int totalInputS
     return true;
 }
 
-bool Alignment::fillMatrices(bool aligned) {
+bool Alignment::fillMatrices(bool aligned, bool checkInvalidChars) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("bool Alignment::fillMatrices(bool aligned) ");
@@ -797,12 +797,13 @@ bool Alignment::fillMatrices(bool aligned) {
     // Initialize some variables
 
     // Check whether there are any unknow/no allowed character in the sequences
-    for (i = 0; i < numberOfSequences; i++)
-        for (j = 0; j < sequences[i].length(); j++)
-            if ((!isalpha(sequences[i][j])) && (!ispunct(sequences[i][j]))) {
-                debug.report(ErrorCode::UnknownCharacter, new std::string[2]{seqsName[i], std::to_string(sequences[i][j])});
-                return false;
-            }
+    if (checkInvalidChars)
+        for (i = 0; i < numberOfSequences; i++)
+            for (j = 0; j < sequences[i].length(); j++)
+                if ((!isalpha(sequences[i][j])) && (!ispunct(sequences[i][j]))) {
+                    debug.report(ErrorCode::UnknownCharacter, new std::string[2]{seqsName[i], std::to_string(sequences[i][j])});
+                    return false;
+                }
 
     // Check whether all sequences have same size or not
     for (i = 1; i < numberOfSequences; i++) {
@@ -827,7 +828,11 @@ bool Alignment::fillMatrices(bool aligned) {
     for (i = 0; (i < numberOfSequences) and (aligned); i++) {
         if (sequences[i].length() != numberOfResidues) {
             debug.report(ErrorCode::SequencesNotSameSize,
-                         new std::string[3]{seqsName[i], std::to_string(sequences[i].length()), std::to_string(numberOfResidues)});
+                    new std::string[3]{
+                seqsName[i],
+                std::to_string(sequences[i].length()),
+                std::to_string(numberOfResidues)
+            });
             return false;
         }
     }

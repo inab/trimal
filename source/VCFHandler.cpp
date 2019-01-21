@@ -4,8 +4,6 @@ namespace ngs {
 
     namespace IUPAC {
 
-
-
         int getTagFromCharArray(const char *const array, const char separator) {
             size_t c, maxlen;
             int curval = 0;
@@ -87,7 +85,7 @@ namespace ngs {
 
     namespace __internal {
 
-         void printApeek(SourcesVector &sources) {
+         void printApeek(AlignmentVector &sources) {
             for (Alignment *A : sources) {
                 std::cout << A->seqsName[0] << std::endl;
 
@@ -99,7 +97,7 @@ namespace ngs {
         }
 
         inline bool checkContigsWithReference(
-                const SourcesVector &sources,
+                const AlignmentVector &sources,
                 const StringVector &contigs)
         {
             bool checkIn = true;
@@ -119,7 +117,7 @@ namespace ngs {
         }
 
         inline  void increaseSequencesInAlignment(
-                const SourcesVector &sources,
+                const AlignmentVector &sources,
                 const StringVector &donors)
         {
             for (Alignment *nA : sources) {
@@ -143,7 +141,7 @@ namespace ngs {
                 nA -> originalNumberOfSequences = donors.size() + 1;
                 nA -> numberOfSequences = donors.size() + 1;
 
-                nA->fillMatrices(true);
+                nA->fillMatrices(true, false);
             }
         }
 
@@ -257,7 +255,7 @@ namespace ngs {
         }
 
         inline  void applyVariantCallingFiles(
-                const SourcesVector &sources,
+                const AlignmentVector &sources,
                 const StringVector &filenames,
                 const StringVector &contigs,
                 const std::vector<std::vector<int>> &donorsPositions,
@@ -543,7 +541,7 @@ namespace ngs {
     }
 
      void readVCF(
-             const SourcesVector &sources,
+             const AlignmentVector &sources,
              const StringVector &filenames,
              const float minQuality,
              const float minCoverage,
