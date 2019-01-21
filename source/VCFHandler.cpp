@@ -4,6 +4,8 @@ namespace ngs {
 
     namespace IUPAC {
 
+
+
         int getTagFromCharArray(const char *const array, const char separator) {
             size_t c, maxlen;
             int curval = 0;
@@ -72,9 +74,11 @@ namespace ngs {
                     return 'H';// ACT not G
 
                     // All Four Bases
-                default:
                 case 15:
                     return 'N';// ACTG
+
+                default:
+                    return '-';
             }
         }
 
@@ -83,7 +87,7 @@ namespace ngs {
 
     namespace __internal {
 
-         void printApeek(std::vector<Alignment *> &sources) {
+         void printApeek(SourcesVector &sources) {
             for (Alignment *A : sources) {
                 std::cout << A->seqsName[0] << std::endl;
 
@@ -95,8 +99,8 @@ namespace ngs {
         }
 
         inline bool checkContigsWithReference(
-                const std::vector<Alignment *> &sources,
-                const std::vector<std::string> &contigs)
+                const SourcesVector &sources,
+                const StringVector &contigs)
         {
             bool checkIn = true;
             for (const std::string & contig : contigs) {
@@ -115,8 +119,8 @@ namespace ngs {
         }
 
         inline  void increaseSequencesInAlignment(
-                const std::vector<Alignment *> &sources,
-                const std::vector<std::string> &donors)
+                const SourcesVector &sources,
+                const StringVector &donors)
         {
             for (Alignment *nA : sources) {
 
@@ -141,20 +145,6 @@ namespace ngs {
 
                 nA->fillMatrices(true);
             }
-        }
-
-        inline  void extendAlignments(
-                const std::vector<Alignment *> &sources,
-                const std::vector<std::string> &contigs,
-                const std::vector<std::string> &donors)
-        {
-            // Check if all contigs have a reference alignment.
-            bool checkIn = checkContigsWithReference(sources, contigs);
-
-            // Extend the reference files with new sequences from donors.
-            if (checkIn)
-                increaseSequencesInAlignment(sources, donors);
-
         }
 
         inline  bool extractFeature(
@@ -267,9 +257,9 @@ namespace ngs {
         }
 
         inline  void applyVariantCallingFiles(
-                const std::vector<Alignment *> &sources,
-                const std::vector<std::string> &filenames,
-                const std::vector<std::string> &contigs,
+                const SourcesVector &sources,
+                const StringVector &filenames,
+                const StringVector &contigs,
                 const std::vector<std::vector<int>> &donorsPositions,
                 const float minQuality,
                 const float minCoverage,
@@ -415,15 +405,16 @@ namespace ngs {
                                      referenceSequenceChar == std::toupper(feature.ref[0]))
                             {
                                 debug.report(ErrorCode::OverwrittingSNP,
-                                    new std::string[6]
-                                    {
-                                        contigs[contigIndex],
-                                        alig->seqsName[seqPos],
-                                        std::to_string(feature.position),
-                                        std::string(1, referenceSequenceChar),
-                                        std::string(1, donorSequenceChar),
-                                        std::string(1, feature.alt[0])
-                                    });
+                                     new std::string[7]
+                                         {
+                                                 contigs[contigIndex],
+                                                 alig->seqsName[seqPos],
+                                                 std::to_string(feature.position),
+                                                 std::string(1, referenceSequenceChar),
+                                                 std::string(1, feature.alt[0]),
+                                                 std::string(1, referenceSequenceChar),
+                                                 std::string(1, donorSequenceChar),
+                                         });
                                 donorSequenceChar = feature.alt[0];
                             }
                             else {
@@ -448,7 +439,7 @@ namespace ngs {
 
         inline  void extractContigsFromLine(
                 char *const line,
-                std::vector<std::string> &contigs)
+                StringVector &contigs)
         {
             // Remove first two characters;
             memmove(line, line + 2, strlen(line + 2) + 2);
@@ -477,11 +468,10 @@ namespace ngs {
             }
         }
 
-        inline  void extractDonorsFromLine(
+        inline void extractDonorsFromLine(
                 char *const line,
-                int C,
-                std::vector<std::string> &donors,
-                std::vector<std::vector<int>> &donorsPositions)
+                std::vector<int> &currentDonorPosition,
+                StringVector &donors)
         {
             // We only want to parse the FORMAT line, which contains the donors.
             std::strtok(strstr(line, "FORMAT"), "\t");
@@ -512,7 +502,7 @@ namespace ngs {
                 }
 
                 // We sum 1 as the position 0 is for reference
-                donorsPositions[C].emplace_back(U + 1);
+                currentDonorPosition.emplace_back(U + 1);
 
                 token = std::strtok(nullptr, "\t");
                 delete[] fname;
@@ -520,9 +510,9 @@ namespace ngs {
         }
 
         inline  void obtainContigsAndDonors(
-                const std::vector<std::string> &filenames,
-                std::vector<std::string> &donors,
-                std::vector<std::string> &contigs,
+                const StringVector &filenames,
+                StringVector &donors,
+                StringVector &contigs,
                 std::vector<std::vector<int>> &donorsPositions)
         {
             const int bufSize = 4096;
@@ -545,7 +535,7 @@ namespace ngs {
                     if (strncmp("##contig", line, 8) == 0)
                             extractContigsFromLine(line, contigs);
                     else if (strncmp("#CHROM", line, 6) == 0)
-                        extractDonorsFromLine(line, C, donors, donorsPositions);
+                        extractDonorsFromLine(line, donorsPositions[C], donors);
                 }
             }
             delete[] line;
@@ -553,17 +543,17 @@ namespace ngs {
     }
 
      void readVCF(
-             const std::vector<Alignment *> &sources,
-             const std::vector<std::string> &filenames,
+             const SourcesVector &sources,
+             const StringVector &filenames,
              const float minQuality,
              const float minCoverage,
              const bool ignoreFilter,
              const char *const replacementChar)
     {
         // All donors present in the vcf files.
-        std::vector<std::string> donors = std::vector<std::string>();
+        StringVector donors = StringVector();
         // Contigs present on the VCF files. Each entry must be present in the sources vector.
-        std::vector<std::string> contigs = std::vector<std::string>();
+        StringVector contigs = StringVector();
         // Position on the reference files of each donor.
         std::vector<std::vector<int>> donorsPositions = std::vector<std::vector<int>>();
 

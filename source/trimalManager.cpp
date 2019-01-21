@@ -1497,7 +1497,7 @@ int trimAlManager::perform() {
                     auto * handler = formatManager.getFormatFromToken(token);
                     if (handler != nullptr)
                     {
-                        // Open the destination file to
+                        // Open the destination file to empty it
                         std::string newName =
                                 utils::ReplaceString(
                                         fname, "[format]", handler->name);
