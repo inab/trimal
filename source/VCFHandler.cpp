@@ -4,9 +4,17 @@ namespace ngs {
 
     namespace IUPAC {
 
-        int getTagFromCharArray(const char *const array, const char separator) {
+        int getTagFromCharArray(
+                const char *const array,
+                const char separator)
+        {
+            if (array[1] != separator)
+                return -1;
+            // Loop variables
             size_t c, maxlen;
+            // Current tag value
             int curval = 0;
+            // Iterate over the sequence, bit-adding the tag
             for (c = 0, maxlen = strlen(array); c < maxlen; c++) {
                 switch (array[c]) {
                     case 'A':
@@ -25,16 +33,22 @@ namespace ngs {
                         break;
                 }
 
+                // Check if we haven't arrived to end of sequence
                 if (++c < maxlen)
                 {
-                    if (c == separator)
+                    // check the next element in array is the separator char
+                    if (array[c] == separator)
                         continue;
+                    // Otherwise, it's not a well-formed sequence to convert
                     else
-                        break;
+                        return -1;
                 }
             }
-            if (c == maxlen + 1)
+            // If we have arrived to the end of the sequence
+            //      it was well formed and parsed.
+            if (c == maxlen)
                 return curval;
+            // Otherwise, we have early stopped.
             return -1;
         }
 
@@ -100,19 +114,29 @@ namespace ngs {
                 const AlignmentVector &sources,
                 const StringVector &contigs)
         {
+            // Store the result value, as we want to report all errors
+            //      and thus, not skipping on first error
             bool checkIn = true;
+            // Iterate over the list of contigs
             for (const std::string & contig : contigs) {
                 int i;
+                // Iterate all over the sources
                 for (i = 0; i < sources.size(); i++) {
+                    // And early skip on first coincidence
                     if (!strcmp(&contig[0], &sources[i]->seqsName[0][0]))
                         break;
                 }
-
+                // If we haven't early skipped, then, contig doesn't have
+                //      an alignment assigned, and thus, there is no
+                //      sequence on the original alignment that correspond
+                //      to the contig.
                 if (i == sources.size()) {
                     debug.report(ErrorCode::NoReferenceSequenceForContig, &contig[0]);
                     checkIn = false;
                 }
             }
+            // Return the result value, which is false in case any contig
+            //      doesn't have a reference sequence on the original alignment
             return checkIn;
         }
 
@@ -122,32 +146,44 @@ namespace ngs {
         {
             for (Alignment *nA : sources) {
 
+                // Store the original information: Reference sequence and name
                 std::string seq = nA->sequences[0];
                 std::string nam = nA->seqsName[0];
 
+                // Delete the original sequences
                 delete[] nA->sequences;
+                // Create a new sequences array
                 nA->sequences = new std::string[donors.size() + 1];
+                // Add the reference sequence to the new sequences array
                 nA->sequences[0] = seq;
 
+                // Delete the original sequence names
                 delete[] nA->seqsName;
+                // Create a new sequences names array
                 nA->seqsName = new std::string[donors.size() + 1];
+                // Add the reference sequence name to the new names array
                 nA->seqsName[0] = nam;
 
+                // For each donor, add a copy of
+                //      the reference sequence and the donor name
                 for (int i = 1; i < donors.size() + 1; i++) {
-                    nA->sequences[i] = std::string(seq);
+                    nA->sequences[i] = seq;
                     nA->seqsName[i] = donors[i - 1];
                 }
 
-                nA -> originalNumberOfSequences = donors.size() + 1;
-                nA -> numberOfSequences = donors.size() + 1;
+                // Set the number of sequences to the number of donors + reference
+                nA -> originalNumberOfSequences =
+                nA -> numberOfSequences         = donors.size() + 1;
 
+                // Initialize the alignment
                 nA->fillMatrices(true, false);
             }
         }
 
         inline  bool extractFeature(
                 const char *const line,
-                vcfFeature &feature) {
+                vcfFeature &feature)
+        {
             if (line[0] == '#')
                 return false;
 
@@ -273,7 +309,7 @@ namespace ngs {
 
                 // Open the VCF file
                 std::ifstream infile(filenames[vcfIndex]);
-                if (!infile.is_open()) {
+                if (!infile.good()) {
                     debug.report(ErrorCode::CantOpenFile, &filenames[vcfIndex][0]);
                     continue;
                 }
@@ -328,6 +364,7 @@ namespace ngs {
                     // Iterate over all donors
                     for (int donorID = 0; donorID < feature.donorsInfo.size(); donorID++)
                     {
+                        // Sanity check to prevent OutOfBounds
                         if (donorID >= donorsPositions[vcfIndex].size())
                         {
                             debug.report(ErrorCode::MoreDonorsOnLineThanPresented,
@@ -336,6 +373,7 @@ namespace ngs {
                         }
                         // Get the sequence position.
                         const int seqPos = donorsPositions[vcfIndex][donorID];
+
                         // Get the character & reference for further use
                         char & donorSequenceChar =
                                 alig->sequences[seqPos][feature.position];
@@ -351,7 +389,11 @@ namespace ngs {
                             continue;
                         }
 
+                        // Get the string that informs the user whether
+                        //      a feature should be applied to a donor
                         const std::string & referenceString = feature.donorsInfo[donorID];
+
+                        // Only apply if the string is valid - different to 0
                         if (referenceString != "0") {
                             std::string donorInfo{referenceString};
                             // Extract the read depth
@@ -519,19 +561,24 @@ namespace ngs {
             // Obtain contigs and donors from all VCF files.
             for (int C = 0; C < filenames.size(); C++) {
 
+                // Add a new vector<int>, which holds the sequence index
+                //      for all donors present on this VCF
                 donorsPositions.emplace_back(std::vector<int>());
 
+                // Open the VCF file
                 std::ifstream infile(filenames[C]); // Deleted with RAII
 
-                if (!infile.is_open()) {
+                if (!infile.good()) {
                     debug.report(ErrorCode::CantOpenFile, &filenames[C][0]);
                     continue;
                 }
 
                 // Read file to get all the donors and contigs present on the VCF
                 while (infile.getline(line, bufSize, '\n')) {
+                    // Extract contigs
                     if (strncmp("##contig", line, 8) == 0)
                             extractContigsFromLine(line, contigs);
+                    // Extract donors
                     else if (strncmp("#CHROM", line, 6) == 0)
                         extractDonorsFromLine(line, donorsPositions[C], donors);
                 }
@@ -553,19 +600,16 @@ namespace ngs {
         // Contigs present on the VCF files. Each entry must be present in the sources vector.
         StringVector contigs = StringVector();
         // Position on the reference files of each donor.
+        //  Donors positions is a vector, of vectors, of ints.
+        //  The first level refers to the VCF index in filenames
+        //  The second level refers to the donor index in the VCF
+        //  The value obtained is the sequence index of that donor in an alignment.
         std::vector<std::vector<int>> donorsPositions = std::vector<std::vector<int>>();
 
         {
-
-//            debug.log(VerboseLevel::INFO)
-//                << "[VCF]"
-//                   "\n MinQuality:       " << minQuality <<
-//                   "\n MinCoverage:      " << minCoverage <<
-//                   "\n Ignore Filter:    " << (ignoreFilter? "True":"False") <<
-//                   "\n Replacement Char: " << (replacementChar == nullptr ? "None":replacementChar) <<
-//                   "\n";
             using namespace ngs::__internal;
 
+            // Get a list of donors, contigs and a map, called donorsPositions
             obtainContigsAndDonors(filenames, donors, contigs, donorsPositions);
 
             // Check if all contigs have a reference alignment.
@@ -574,8 +618,6 @@ namespace ngs {
 
             // Extend the reference files with new sequences from donors.
             increaseSequencesInAlignment(sources, donors);
-
-//            extendAlignments(sources, contigs, donors);
 
             applyVariantCallingFiles(
                     sources, filenames, contigs, donorsPositions,
