@@ -63,6 +63,10 @@ set(preview
         source/utils.cpp
 
         source/reportsystem.cpp
+        source/reportMessages/errorMessages.cpp
+        source/reportMessages/infoMessages.cpp
+        source/reportMessages/warningMessages.cpp
+
         source/InternalBenchmarker.cpp)
 
 # Create a list of all format states source files
