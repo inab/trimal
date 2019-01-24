@@ -498,14 +498,18 @@ namespace utils {
     int checkAlignmentType(int seqNumber, int residNumber, std::string * sequences) {
         // All codes from RNA - DNA - AA and DEG for both versions
 
-        auto check = [](const std::string& pattern, int& counter, const char& character) -> void {
-            size_t pos(0);
-            while ((pos = pattern.find(character, pos)) != std::string::npos )
+        static const auto check =
+            [](const std::string& pattern,
+               int& counter,
+               const char& character) -> void
             {
-                pos++;
-                counter++;
-            }
-        };
+                size_t pos(0);
+                while ((pos = pattern.find(character, pos)) != std::string::npos )
+                {
+                    pos++;
+                    counter++;
+                }
+            };
 
         // Inosinic Acid is a nucleotide, but it's not part of DNA or RNA
         static const std::string COMMON = "ACG";
@@ -619,7 +623,7 @@ namespace utils {
             return SequenceTypes::NotDefined;
     }
 
-    int *readNumbers(std::string line) {
+    int *readNumbers(const std::string &line) {
 
         int i, nElems = 0;
         static int *numbers;

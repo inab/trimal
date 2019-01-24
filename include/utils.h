@@ -319,7 +319,7 @@ namespace utils {
      \param line Line to convert to array of ints
      \return Pointer to an array of numbers that contains line
      */
-     int *readNumbers(std::string line);
+     int *readNumbers(const std::string &line);
 
     /**
      \brief Quicksort sorting method.
