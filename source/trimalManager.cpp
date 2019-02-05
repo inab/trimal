@@ -2059,12 +2059,19 @@ inline void trimAlManager::menu() {
         #include "RawText/menu.txt"
     };
 
-    utils::ReplaceStringInPlace(menu, "[iformat]", formatManager.getInputFormatsAvailable());
-    utils::ReplaceStringInPlace(menu, "[oformat]", formatManager.getOutputFormatsAvailable());
-    utils::ReplaceStringInPlace(menu, "[version]", VERSION);
+    utils::ReplaceStringInPlace(menu, "[iformat]",  formatManager.getInputFormatsAvailable());
+    utils::ReplaceStringInPlace(menu, "[oformat]",  formatManager.getOutputFormatsAvailable());
+    utils::ReplaceStringInPlace(menu, "[version]",  VERSION);
     utils::ReplaceStringInPlace(menu, "[revision]", REVISION);
-    utils::ReplaceStringInPlace(menu, "[build]", BUILD);
-    utils::ReplaceStringInPlace(menu, "[authors]", AUTHORS);
+    utils::ReplaceStringInPlace(menu, "[build]",    BUILD);
+    utils::ReplaceStringInPlace(menu, "[authors]",  AUTHORS);
+
+    using namespace utils::TerminalColors;
+
+    utils::ReplaceStringInPlace(menu, "[b][u]", colors[BOLD] + colors[UNDERLINE]);
+    utils::ReplaceStringInPlace(menu, "[b]",    colors[BOLD]);
+    utils::ReplaceStringInPlace(menu, "[u]",    colors[UNDERLINE]);
+    utils::ReplaceStringInPlace(menu, "[r]",    colors[RESET]);
 
     std::cout << menu;
 }
@@ -2079,6 +2086,13 @@ inline void trimAlManager::examples() {
     std::string examples = {
         #include "RawText/examples.txt"
     };
+
+    using namespace utils::TerminalColors;
+
+    utils::ReplaceStringInPlace(examples, "[b][u]", colors[BOLD] + colors[UNDERLINE]);
+    utils::ReplaceStringInPlace(examples, "[b]",    colors[BOLD]);
+    utils::ReplaceStringInPlace(examples, "[u]",    colors[UNDERLINE]);
+    utils::ReplaceStringInPlace(examples, "[r]",    colors[RESET]);
 
     std::cout << examples;
 }

@@ -433,6 +433,18 @@ namespace utils {
 //                          std::string *lineColor, std::string *chartTitle,
 //                          std::string *filename);
 
+
+     namespace TerminalColors {
+         enum terminalColor
+         { RESET, BLACK, RED,
+           GREEN, YELLOW, BLUE,
+           MAGENTA, CYAN, WHITE,
+           BOLD, UNDERLINE };
+
+         extern std::map<terminalColor, const std::string> colors;
+     }
+
+
 };
 
 inline char utils::toUpper(char c) 
