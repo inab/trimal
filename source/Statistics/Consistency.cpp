@@ -613,7 +613,7 @@ namespace statistics {
 
         int size = 20;
 
-        std::string fname = alig.filename.substr(6, alig.filename.size() - 7);
+        std::string fname = alig.filename;
 
         cout
                 << std::setw(fname.length() + 7)
@@ -635,7 +635,7 @@ namespace statistics {
 
         cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
 
-        cout << std::setw(alig.filename.substr(6, alig.filename.size() - 7).length() + 7)
+        cout << std::setw(alig.filename.size())
              << std::setfill('-')
              << std::left << ""
              << std::setfill(' ')
@@ -661,21 +661,21 @@ namespace statistics {
 
     }
 
-// Print the consistency values accumulative distribution for the selected
-// alignment
-    void Consistency::printStatisticsFileAcl(Alignment &alig,
-                                                       float *compareVect) {
+    // Print the consistency values accumulative distribution for the selected
+    // alignment
+    void Consistency::printStatisticsFileAcl(
+            Alignment &alig, float *compareVect) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("void Consistency::printStatisticsFileAcl("
                     "Alignment &alig, "
-                    "float *values) ");
+                    "float *compareVect) ");
 
         int size = 20;
         float refer, *vectAux;
         int i, num;
 
-        std::string fname = alig.filename.substr(6, alig.filename.size() - 7);
+        std::string fname = alig.filename;
 
         cout
                 << std::setw(fname.length() + 7)
@@ -697,7 +697,7 @@ namespace statistics {
 
         cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << endl;
 
-        cout << std::setw(alig.filename.substr(6, alig.filename.size() - 7).length() + 7)
+        cout << std::setw(alig.filename.size())
              << std::setfill('-')
              << std::left << ""
              << std::setfill(' ')

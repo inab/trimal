@@ -55,14 +55,15 @@ namespace statistics {
     }
 
     bool Mold::applyWindow(int halfW) {
-        // Calculate the values array if it has not been calculated previously
-        if (values == nullptr)
-            calculate();
-
         // Check is the half window value passed is in the valid range
         if (halfW > residues / 4) {
             debug.report(ErrorCode::WindowTooBig);
             return false;
+        }
+
+        // Calculate the values array if it has not been calculated previously
+        if (values == nullptr) {
+            calculate();
         }
 
         // If the current half window is the same as the last one, don't do anything
