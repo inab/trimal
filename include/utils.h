@@ -40,6 +40,7 @@
 #include <cstdio>
 #include <string>
 #include <cmath>
+#include <map>
 #include <sys/stat.h>
 
 /**
