@@ -7,23 +7,13 @@ set(CMAKE_CXX_STANDARD 11)
 # Specify bin folder to output the compiled programs
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
-# Script that sets Release type to default and prints information on configuration
-include("./scripts/CMake/BuildTypeWrapper.cmake")
-
-# Script to handle static and dynamic compilation.
-#   Static compilation is useful if compiling for containers without SO
-include("./scripts/CMake/staticCompilationWrapper.cmake")
-
-# Script to create intermediate OBJLib objects to include in targets
-include("./scripts/CMake/OBJ-LIB-creator.cmake")
-
 # Add the executables to the project.
 add_executable(trimal
         source/trimAlMain.cpp               # Main
         source/trimalManager.cpp            # trimAl Manager
 
         source/VCFHandler.cpp               # VCF only present on trimAl
-                                            # No need to transform to OBJLib
+        # No need to transform to OBJLib
         $<TARGET_OBJECTS:CoreOBJLib>
         $<TARGET_OBJECTS:FormatsOBJLib>
         $<TARGET_OBJECTS:FormatHandlerOBJLib>
@@ -47,6 +37,16 @@ add_executable(readal
 target_link_libraries(trimal m)
 target_link_libraries(readal m)
 
+# Script that sets Release type to default and prints information on configuration
+include("./scripts/CMake/BuildTypeWrapper.cmake")
+
+# Script to handle static and dynamic compilation.
+#   Static compilation is useful if compiling for containers without SO
+include("./scripts/CMake/staticCompilationWrapper.cmake")
+
+# Script to create intermediate OBJLib objects to include in targets
+include("./scripts/CMake/OBJ-LIB-creator.cmake")
+
 # Script to configure the overwrite policy of the format manager:
 #   - Overwrite and warn.
 #   - Dont overwrite unless needed. If needed, overwrite original.
@@ -56,3 +56,4 @@ include("./scripts/CMake/FormatHandlerOverwritePolicy.cmake")
 # Script to create the Format Handler constructor, which incorporates
 #   all found stats to the internal pool of the handler
 include("./scripts/CMake/FormatHandlerHeaderCreator.cmake")
+

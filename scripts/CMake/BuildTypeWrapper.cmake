@@ -14,3 +14,8 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 else()
     message(STATUS "Setting build type to '${CMAKE_BUILD_TYPE}'.")
 endif()
+
+string(TOLOWER "${CMAKE_BUILD_TYPE}" lower_build_type)
+if("${lower_build_type}" STREQUAL "debug")
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wdouble-promotion -Wnull-dereference -Wimplicit-fallthrough=3")
+endif()

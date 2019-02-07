@@ -40,6 +40,7 @@
 #include <cstdio>
 #include <string>
 #include <cmath>
+#include <map>
 #include <sys/stat.h>
 
 /**
@@ -460,13 +461,6 @@ namespace utils {
      }
 };
 
-inline char utils::toUpper(char c) 
-{
-    // return std::toupper(c);
-    if (c >= 'a' and c <= 'z')
-        return (char) (c & (~(1<<5)));
-    return c;
-}
 
 
 #endif

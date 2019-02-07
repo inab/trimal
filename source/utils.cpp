@@ -27,6 +27,8 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
+#include <utils.h>
+
 #include "InternalBenchmarker.h"
 #include "reportsystem.h"
 #include "defines.h"
@@ -953,6 +955,12 @@ namespace utils {
     bool fileExists(std::string &&path) {
         struct stat buffer;
         return (stat (path.c_str(), &buffer) == 0);
+    }
+
+    char toUpper(char c) {
+        if (c >= 'a' and c <= 'z')
+            return (char) (c & (~(1<<5)));
+        return c;
     }
 
     namespace TerminalColors {
