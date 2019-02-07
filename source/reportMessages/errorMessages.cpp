@@ -331,4 +331,9 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
 
     {ErrorCode::OnlyValidWithVCF,
             "[tag] only valid in combination with -vcf argument."},
+
+    {ErrorCode::TriedRenamingOutputPreventOverride,
+            "[[tag]] Tried to prevent overriding file [tag] but found no luck adding suffixes.\n"
+            "Overwritting file [tag]"
+            "You should check your output folder."},
 };

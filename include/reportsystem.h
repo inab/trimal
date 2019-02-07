@@ -217,6 +217,9 @@ enum ErrorCode {
 
     OnlyValidWithVCF                                    = 105,
 
+    TriedRenamingOutputPreventOverride                  = 106,
+
+
     __MAXERROR,
 };
 
@@ -236,6 +239,10 @@ enum WarningCode {
     DonorAlreadyAdded                           = 7,
 
     SNPAlreadApplied                            = 8,
+
+    OverwrittingFile                            = 9,
+
+    RenamingOutputPreventOverride               = 10,
 
 
     __MAXWARNING

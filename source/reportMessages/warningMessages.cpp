@@ -27,5 +27,11 @@ const std::map<WarningCode, const char *> reporting::reportManager::WarningMessa
             "Overlaping SNPs will be overwritten."},
 
     {WarningCode::SNPAlreadApplied,
-                "SNP already applied to \"[tag]\":\"[tag]\" at position [tag] \"[tag]\"->\"[tag]\""}
+            "SNP already applied to \"[tag]\":\"[tag]\" at position [tag] \"[tag]\"->\"[tag]\""},
+
+    {WarningCode::OverwrittingFile,
+            "[[tag]] Overwritting file [tag]."},
+
+    {WarningCode::RenamingOutputPreventOverride,
+            "[[tag]] -> To prevent overriding file [tag] a suffix has been added. Final filename: [tag]"}
 };

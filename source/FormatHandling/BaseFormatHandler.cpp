@@ -1,6 +1,6 @@
+#include <limits>
 
 #include <FormatHandling/FormatManager.h>
-
 #include "FormatHandling/FormatManager.h"
 #include "FormatHandling/BaseFormatHandler.h"
 #include "FormatHandling/formats_header.h"
@@ -103,12 +103,6 @@ namespace FormatHandling {
         {
             if (formats.size() != 1)
             {
-                // Report an error if more than one alignment is requested on terminal
-                // debug.report(ErrorCode::OnlyOneFormatOnConsoleOutput);
-                return false;
-            }
-            if (formats.size() != 1)
-            {
                 // Report an error if more than one format is requested on terminal
                 debug.report(ErrorCode::OnlyOneFormatOnConsoleOutput);
                 return false;
@@ -138,7 +132,37 @@ namespace FormatHandling {
                 std::string finalFilename =
                         utils::ReplaceString(filename, "[extension]", state->extension);
                 utils::ReplaceStringInPlace(finalFilename, "[format]", state->name);
-
+// Macro passed as compile time. See FormatHandlerOverwritePolicy.cmake
+#if FormatHandlerOverwrites
+                if (utils::fileExists(finalFilename))
+                {
+                    debug.report(OverwrittingFile, new std::string[2]{state->name, finalFilename} );
+                }
+#else
+                uint i;
+                for (i = 0; i < std::numeric_limits<uint>::max(); i++)
+                {
+                    if (!utils::fileExists(finalFilename + "." + std::to_string(i)))
+                    {
+                        debug.report(RenamingOutputPreventOverride,
+                                     new std::string[3]{state->name, finalFilename, finalFilename + "." + std::to_string(i)} );
+                        finalFilename += "." + std::to_string(i);
+                        break;
+                    }
+                }
+                if (i == std::numeric_limits<uint>::max())
+                {
+// Macro passed as compile time. See FormatHandlerOverwritePolicy.cmake
+#if FormatHandlerOverwritesOriginal
+                    debug.report(TriedRenamingOutputPreventOverride,
+                            new std::string[3]{state->name, finalFilename, finalFilename} );
+#else
+                    debug.report(TriedRenamingOutputPreventOverride,
+                            new std::string[3]{state->name, finalFilename, finalFilename + "." + std::to_string(i)} );
+                    finalFilename += "." + std::to_string(i);
+#endif
+                }
+#endif
                 // Open the file handler
                 std::ofstream outFileHandler(finalFilename, openmode);
 

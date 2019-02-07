@@ -943,6 +943,18 @@ namespace utils {
         return 1;
     }
 
+    bool fileExists(std::string &path) {
+        struct stat buffer;
+        return (stat (path.c_str(), &buffer) == 0);
+
+        
+    }
+
+    bool fileExists(std::string &&path) {
+        struct stat buffer;
+        return (stat (path.c_str(), &buffer) == 0);
+    }
+
     namespace TerminalColors {
         std::map<terminalColor, const std::string> colors = {
                 {TerminalColors::RESET,        "\033[0m"},
