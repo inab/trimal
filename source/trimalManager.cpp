@@ -555,7 +555,7 @@ inline bool trimAlManager::keep_header_argument(const int *argc, char *argv[], i
 }
 
 inline bool trimAlManager::gappy_out_argument(const int *argc, char *argv[], int *i) {
-    if (!strcmp(argv[*i], "-gappyout") && (!strict)) {
+    if (!strcmp(argv[*i], "-gappyout") && (!gappyout)) {
         gappyout = true;
         return true;
     }
