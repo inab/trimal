@@ -966,10 +966,10 @@ inline bool trimAlManager::check_thresholds_incompatibilities() {
 
 inline bool trimAlManager::check_automated_methods_incompatibilities() {
     if (automatedMethodCount) {
-        if ((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1)) {
-            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
-            appearErrors = true;
-        }
+//        if ((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1)) {
+//            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
+//            appearErrors = true;
+//        }
 
         if (automatedMethodCount > 1) {
             debug.report(ErrorCode::CombinationAmongTrimmingMethods);
