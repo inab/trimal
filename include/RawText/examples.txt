@@ -28,7 +28,7 @@ R"(
 [r]   trimal -in <inputfile> -out <outputfile> -automated1
 
 [b]6) Use residues and sequences overlap thresholds to delete some sequences from the
-   alignemnt. (see User Guide for details).
+   alignment. (see User Guide for details).
 
 [r]   trimal -in <inputfile> -out <outputfile> -resoverlap 0.8 -seqoverlap 75
 
@@ -41,7 +41,7 @@ R"(
 
 [r]   trimal -in <inputfile> -out <outputfile> -selectcols { 0,2,3,10,45-60,68,70-78 } -complementary
 
-[b]9) Selection of sequences to be deleted from the alignment. Start in 0
+[b]9) Selection of sequences to be deleted from the alignment. Start from 0
 
 [r]   trimal -in <inputfile> -out <outputfile> -selectseqs { 2,4,8-12 }
 
