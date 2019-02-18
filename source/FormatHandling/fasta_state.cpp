@@ -123,7 +123,7 @@ bool fasta_state::SaveAlignment(const Alignment &alignment,
 
     int i, j, k, maxLongName;
     std::string *tmpMatrix;
-    bool lastcharIsnewline = false;
+    bool lastcharIsnewline = true;
 
     /* Depending on alignment orientation: forward or reverse. Copy directly
      * sequence information or get firstly the reversed sequences and then
