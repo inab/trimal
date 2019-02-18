@@ -1310,7 +1310,6 @@ void Cleaner::removeSmallerBlocks(int blockSize, Alignment &original) {
     // than a column hasn't been selected, check whether the current block is big
     // enough to be kept or it should be removed from the final Alignment
     for (i = 0, pos = 0, block = 0; i < alig->numberOfResidues; i++) {
-        if (original.saveResidues[i] != -1) continue;
         if (alig->saveResidues[i] != -1) block++;
         else {
             // Remove columns from blocks smaller than input blocks size
@@ -1318,14 +1317,7 @@ void Cleaner::removeSmallerBlocks(int blockSize, Alignment &original) {
             {
                 for (j = pos; j <= i; j++)
                 {
-                    if (original.saveResidues[j] == -1) 
-                    {
-                        continue;
-                    }
-                    else 
-                    {
-                        alig->saveResidues[j] = -1;
-                    }
+                    alig->saveResidues[j] = -1;
                 }
             }
             pos = i + 1;
@@ -1339,14 +1331,7 @@ void Cleaner::removeSmallerBlocks(int blockSize, Alignment &original) {
     {
         for (j = pos; j <= i; j++)
         {
-            if (original.saveResidues[j] == -1)
-            {
-                continue;
-            } 
-            else
-            {
-                alig->saveResidues[j] = -1;
-            } 
+            alig->saveResidues[j] = -1;
         }
     }
 }
