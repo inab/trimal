@@ -131,7 +131,7 @@ namespace statistics {
             break;
         }
         // Print the rest of the residues, using the separator ", "
-        for (; i < alig->originalNumberOfResidues; i++) {
+        for (i++; i < alig->originalNumberOfResidues; i++) {
             if (alig->saveResidues[i] == -1) continue;
             std::cout << ", " << alig->saveResidues[i];
         }
