@@ -3,10 +3,10 @@
 const std::map<WarningCode, const char *> reporting::reportManager::WarningMessages =
 {
     {WarningCode::RemovingOnlyGapsSequence,
-            "Removing sequence '[tag]' composed only by gaps"},
+            "Removing sequence '[tag]' composed only by gaps after trimming"},
 
     {WarningCode::KeepingOnlyGapsSequence,
-            "Keeping sequence '[tag]' composed only by gaps"},
+            "Keeping sequence '[tag]' composed only by gaps after trimming"},
 
     {WarningCode::SequenceWillBeCut,
             "Sequence \"[tag]\" will be cut at position [tag] (length:[tag])"},
