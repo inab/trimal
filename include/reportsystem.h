@@ -219,6 +219,8 @@ enum ErrorCode {
 
     TriedRenamingOutputPreventOverride                  = 106,
 
+    MoreThanOneAutomatedMethod                          = 107,
+
 
     __MAXERROR,
 };

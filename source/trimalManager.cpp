@@ -181,6 +181,7 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
 }
 
 inline bool trimAlManager::check_arguments_incompatibilities() {
+    StartTiming("bool trimAlManager::check_arguments_incompatibilities()");
     // The incompatibilities are checked only once,
     // so there are arguments with no function to check it's incompatibilities although they have.
     // These are checked within other functions.
@@ -948,8 +949,27 @@ inline bool trimAlManager::check_thresholds_incompatibilities() {
         ) 
     {
 
+
         if (automatedMethodCount) {
-            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
+
+            const char *autom;
+            if (strict)         autom = "-strict";
+            if (strictplus)     autom = "-strictplus";
+            if (gappyout)       autom = "-gappyout";
+            if (nogaps)         autom = "-nogaps";
+            if (noallgaps)      autom = "-noallgaps";
+            if (automated1)     autom = "-automated1";
+
+
+            if (gapThreshold != -1)
+                debug.report(ErrorCode::CombinationAmongTrimmingMethods,  new std::string[2]{autom,"-gt"});
+            if (similarityThreshold != -1)
+                debug.report(ErrorCode::CombinationAmongTrimmingMethods,  new std::string[2]{autom,"-st"});
+            if (consistencyThreshold != -1)
+                debug.report(ErrorCode::CombinationAmongTrimmingMethods,  new std::string[2]{autom,"-ct"});
+            if (conservationThreshold != -1)
+                debug.report(ErrorCode::CombinationAmongTrimmingMethods,  new std::string[2]{autom,"-cons"});
+
             appearErrors = true;
         }
 
@@ -966,13 +986,31 @@ inline bool trimAlManager::check_thresholds_incompatibilities() {
 
 inline bool trimAlManager::check_automated_methods_incompatibilities() {
     if (automatedMethodCount) {
-        if ((windowSize != -1) || (gapWindow != -1) || (similarityWindow != -1)) {
-            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
+
+        const char *autom;
+        if (strict)         autom = "-strict";
+        if (strictplus)     autom = "-strictplus";
+        if (gappyout)       autom = "-gappyout";
+        if (nogaps)         autom = "-nogaps";
+        if (noallgaps)      autom = "-noallgaps";
+        if (automated1)     autom = "-automated1";
+
+
+        if ((windowSize != -1)) {
+            debug.report(ErrorCode::CombinationAmongTrimmingMethods, new std::string[2]{autom, "-w"});
+            appearErrors = true;
+        }
+        if ((gapWindow != -1)) {
+            debug.report(ErrorCode::CombinationAmongTrimmingMethods, new std::string[2]{autom,"-gw"});
+            appearErrors = true;
+        }
+        if ((similarityWindow != -1)) {
+            debug.report(ErrorCode::CombinationAmongTrimmingMethods, new std::string[2]{autom,"-sw"});
             appearErrors = true;
         }
 
         if (automatedMethodCount > 1) {
-            debug.report(ErrorCode::CombinationAmongTrimmingMethods);
+            debug.report(ErrorCode::MoreThanOneAutomatedMethod);
             appearErrors = true;
         }
     }
@@ -1024,6 +1062,7 @@ inline bool trimAlManager::check_stats_incompatibilities() {
 }
 
 inline bool trimAlManager::check_arguments_needs(char *argv[]) {
+    StartTiming("bool trimAlManager::check_arguments_needs(char *argv[])");
     check_force_selection();
     check_input_file_with_coding_sequences_argument();
     check_file_aligned();
