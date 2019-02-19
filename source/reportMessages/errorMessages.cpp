@@ -336,4 +336,15 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
             "[[tag]] Tried to prevent overriding file [tag] but found no luck adding suffixes.\n"
             "Overwritting file [tag]"
             "You should check your output folder."},
+
+    {ErrorCode::AbsoluteAndRelativeGapThreshold,
+            "Combination among absolute (-gat) and relative (-gt) gap thresholds is not allowed."},
+    {ErrorCode::AbsoluteGapThresholdLessThanZero,
+            "The absolute gap window value should be greater or equal to 0"},
+    {ErrorCode::AbsoluteGapThresholdBiggerThanNumberOfSequences,
+            "The absolute gap window value should be lesser than the number of sequences.\n"
+            "\tNumber of sequences: \"[tag]\".\n"
+            "\tAbsolute Gap Threshold provided: \"[tag]\"."},
+    {ErrorCode::AbsoluteGapThresholdNotRecognized,
+            "Absolute gap (-gat) not recognized"}
 };

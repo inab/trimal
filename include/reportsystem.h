@@ -219,6 +219,11 @@ enum ErrorCode {
 
     TriedRenamingOutputPreventOverride                  = 106,
 
+    AbsoluteAndRelativeGapThreshold                     = 107,
+    AbsoluteGapThresholdLessThanZero                    = 108,
+    AbsoluteGapThresholdBiggerThanNumberOfSequences     = 109,
+    AbsoluteGapThresholdNotRecognized                   = 110,
+
 
     __MAXERROR,
 };

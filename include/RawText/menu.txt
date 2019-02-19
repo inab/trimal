@@ -198,6 +198,11 @@ For a complete list please see the User Guide or visit http://trimal.cgenomics.o
         [b]-gt -gapthreshold <n>[r]
             1 - (fraction of gaps in the column).
             Range: [0 - 1]
+            Not compatible with -gat
+        [b]-gat -gapabsolutethreshold <n>[r]
+            Max number of gaps allowed on a column to keep it.
+            Range: [0 - (number of sequences - 1)]
+            Not compatible with -gt
         [b]-st -simthreshold <n>[r]
             Minimum average similarity required.
             Range: [0 - 1]
