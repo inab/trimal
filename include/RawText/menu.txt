@@ -123,7 +123,14 @@ For a complete list please see the User Guide or visit http://trimal.cgenomics.o
         Keep sequences even if they are composed only by gaps.
 
     [b]-complementary[r]
-        Get the complementary alignment.
+        Get the complementary alignment in residues.
+        Reverses the effect of residue trimming:
+            All residues that were to be removed are kept and vice versa.
+    [b]-complementaryseq[r]
+        Get the complementary alignment in sequences.
+        Reverses the effect of sequence trimming:
+            All sequences that were to be removed are kept and vice versa.
+            
     [b]-terminalonly[r]
         Only columns out of internal boundaries
         (first and last column without gaps) are

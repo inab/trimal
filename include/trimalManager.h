@@ -36,6 +36,7 @@ public:
         appearErrors        = false,
 
         getComplementary    = false, 
+        getComplementarySeq = false,
         columnNumbering     = false,
         nogaps              = false, 
         noallgaps           = false,

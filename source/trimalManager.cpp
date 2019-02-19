@@ -806,6 +806,10 @@ inline bool trimAlManager::complementary_argument(const int *argc, char *argv[],
         getComplementary = true;
         return true;
     }
+    if ((!strcmp(argv[*i], "-complementaryseq")) && !getComplementarySeq) {
+        getComplementarySeq = true;
+        return true;
+    }
     return false;
 }
 
@@ -1824,6 +1828,10 @@ inline void trimAlManager::postprocess_alignment() {
     // Complementary
     if (getComplementary)
         singleAlig->Cleaning->computeComplementaryAlig(true, false);
+
+    // ComplementarySeq
+    if (getComplementarySeq)
+        singleAlig->Cleaning->computeComplementaryAlig(false, true);
 
     // Backtranslate
     if (backtransFile != nullptr) {
