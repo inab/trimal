@@ -437,15 +437,44 @@ inline bool trimAlManager::back_trans_argument(const int *argc, char *argv[], in
 }
 
 inline bool trimAlManager::gap_threshold_argument(const int *argc, char *argv[], int *i) {
-    if ((!strcmp(argv[*i], "-gapthreshold") || !strcmp(argv[*i], "-gt")) && ((*i) + 1 != *argc) && (gapThreshold == -1)) {
+
+    if ((!strcmp(argv[*i], "-gapthreshold") || !strcmp(argv[*i], "-gt"))
+        && ((*i) + 1 != *argc) && (gapThreshold == -1)) {
+
+        if (gapAbsoluteThreshold != -1) {
+            debug.report(ErrorCode::AbsoluteAndRelativeGapThreshold);
+            appearErrors = true;
+        }
+
         if (utils::isNumber(argv[++*i])) {
-            gapThreshold = 1. - atof(argv[*i]);
+            gapThreshold = 1.0F - (float)atof(argv[*i]);
             if ((gapThreshold < 0) || (gapThreshold > 1)) {
                 debug.report(ErrorCode::GapThresholdOutOfRange);
                 appearErrors = true;
             }
         } else {
             debug.report(ErrorCode::GapThresholdNotRecognized);
+            appearErrors = true;
+        }
+        return true;
+    }
+
+    if ((!strcmp(argv[*i], "-gapabsolutethreshold") || !strcmp(argv[*i], "-gat"))
+        && ((*i) + 1 != *argc) && (gapAbsoluteThreshold == -1)) {
+
+        if (gapThreshold != -1) {
+            debug.report(ErrorCode::AbsoluteAndRelativeGapThreshold);
+            appearErrors = true;
+        }
+
+        if (utils::isNumber(argv[++*i])) {
+            gapAbsoluteThreshold = atoi(argv[*i]);
+            if (gapAbsoluteThreshold < 0) {
+                debug.report(ErrorCode::AbsoluteGapThresholdLessThanZero);
+                appearErrors = true;
+            }
+        } else {
+            debug.report(ErrorCode::AbsoluteGapThresholdNotRecognized);
             appearErrors = true;
         }
         return true;
@@ -1067,6 +1096,9 @@ inline bool trimAlManager::check_stats_incompatibilities() {
 
 inline bool trimAlManager::check_arguments_needs(char *argv[]) {
     StartTiming("bool trimAlManager::check_arguments_needs(char *argv[])");
+
+    check_absolute_gap_theshold();
+
     check_force_selection();
     check_input_file_with_coding_sequences_argument();
     check_file_aligned();
@@ -1160,6 +1192,27 @@ inline bool trimAlManager::check_automated_manual_incompatibilities() {
             appearErrors = true;
             return true;
         }
+    return false;
+}
+
+inline bool trimAlManager::check_absolute_gap_theshold() {
+    if (!appearErrors) {
+        if (gapAbsoluteThreshold != -1)
+        {
+            gapThreshold = ((float)gapAbsoluteThreshold) / origAlig->originalNumberOfSequences;
+            if (gapThreshold >= 1.0F) {
+                appearErrors = true;
+                debug.report(
+                        ErrorCode::AbsoluteGapThresholdBiggerThanNumberOfSequences,
+                        new std::string[2] {
+                    std::to_string(origAlig->originalNumberOfSequences),
+                    std::to_string(gapAbsoluteThreshold)
+                    });
+                gapThreshold = -1;
+                return true;
+            }
+        }
+    }
     return false;
 }
 

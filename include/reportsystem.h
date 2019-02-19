@@ -219,7 +219,12 @@ enum ErrorCode {
 
     TriedRenamingOutputPreventOverride                  = 106,
 
-    MoreThanOneAutomatedMethod                          = 107,
+    AbsoluteAndRelativeGapThreshold                     = 107,
+    AbsoluteGapThresholdLessThanZero                    = 108,
+    AbsoluteGapThresholdBiggerThanNumberOfSequences     = 109,
+    AbsoluteGapThresholdNotRecognized                   = 110,
+
+    MoreThanOneAutomatedMethod                          = 111,
 
 
     __MAXERROR,

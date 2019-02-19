@@ -83,6 +83,7 @@ public:
         ,
         automatedMethodCount    = -1,
         alternative_matrix      = -1,
+        gapAbsoluteThreshold    = -1,
         
         *delColumns         = nullptr,
         *delSequences       = nullptr,
@@ -206,6 +207,8 @@ private: // Process Arguments Methods
         bool check_vcf_incompatibility();
 
     bool check_arguments_needs(char* argv[]);
+
+        bool check_absolute_gap_theshold();
 
         bool check_force_selection();
         bool check_input_file_with_coding_sequences_argument();
