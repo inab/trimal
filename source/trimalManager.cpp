@@ -129,8 +129,9 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
             // Manual
             checkArgument(seqs_select_argument)
             checkArgument(select_cols_argument)
-
-
+            // Duplicates
+            checkArgument(remove_duplicates_argument)
+            // Identity
             checkArgument(max_identity_argument)
             checkArgument(clusters_argument)
         }
@@ -149,6 +150,7 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
             checkArgument(complementary_argument)
 
             checkArgument(terminal_only_argument)
+
         }
 
         // VCF
@@ -559,6 +561,14 @@ inline bool trimAlManager::no_gaps_argument(const int *argc, char *argv[], int *
     return false;
 }
 
+inline bool trimAlManager::remove_duplicates_argument(const int *argc, char *argv[], int *i) {
+    if (!strcmp(argv[*i], "-noduplicateseqs") && (!removeDuplicates)) {
+        removeDuplicates = true;
+        return true;
+    }
+    return false;
+}
+
 inline bool trimAlManager::no_all_gaps_argument(const int *argc, char *argv[], int *i) {
     if (!strcmp(argv[*i], "-noallgaps") && (!noallgaps)) {
         noallgaps = true;
@@ -913,7 +923,7 @@ bool trimAlManager::processArguments(char *argv[]) {
         //  that have been requested.
         // We can use this information to prevent performing more than one method,
         //  and using as a bool, to check if any automatic method has been used.
-        automatedMethodCount = nogaps + noallgaps + gappyout + strict + strictplus + automated1;
+        automatedMethodCount = nogaps + noallgaps + gappyout + strict + strictplus + automated1 + removeDuplicates;
 
         check_arguments_incompatibilities();
         check_arguments_needs(argv);
@@ -1882,7 +1892,10 @@ inline void trimAlManager::CleanSequences() {
                 sequenceOverlap / 100.0F,
                 /* getComplementary*/ false
         );
+    } else if (removeDuplicates) {
+        origAlig->Cleaning->removeDuplicates();
     }
+
 
     // We'll use singleAlig as input for the next cleaning step.
     // If tempAlig is not null it means that we've performed a sequence trim

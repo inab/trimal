@@ -260,6 +260,9 @@ enum InfoCode {
 
     AddingSNP                                   = 3,
 
+    RemovingDuplicateSequences                  = 4,
+
+
     __MAXINFO
 };
 

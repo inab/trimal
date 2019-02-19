@@ -147,6 +147,10 @@ For a complete list please see the User Guide or visit http://trimal.cgenomics.o
     [b]-noallgaps[r]
         Remove columns composed only by gaps.
 
+    [b]-noduplicateseqs[r]
+        Removes sequences that are equal on the alignment.
+        It will keep the latest sequence in the alignment.
+
     [b]-gappyout[r]
         Use automated selection on "gappyout" mode.
         This method only uses information based on gaps' distribution.
@@ -167,6 +171,7 @@ For a complete list please see the User Guide or visit http://trimal.cgenomics.o
     [b]-maxidentity <n>[r]
         Get the representatives sequences for a given identity threshold.
         Range: [0 - 1].
+
 
     [b][u]Overlap Trimming[r]
     Overlap is defined as having a gap in both positions,
