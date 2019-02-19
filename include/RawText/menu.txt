@@ -176,11 +176,12 @@ For a complete list please see the User Guide or visit http://trimal.cgenomics.o
         in the alignment and filled with gaps.
     Both arguments must be provided jointly.
 
-    Ex:   ATTGTAGT-----ATTTGTTTAATT
-          ATCGGGGT-----ATTTGTGTAATT
-          ACTGTAGTCCCCC------------    <--- This sequence may be removed.
-          ACTGTAGT-----ATTTGAATAATT
-          ATTTTAGT-----TTAAGTGTAAGG
+        Ex: Sp8 may be removed from the alignment depending on the thresholds.
+
+        Sp8    -----GLG-----------TKSD---NNNNNNNNNNNNNNNNWV-----------------
+        Sp17   --FAYTAPDLLL-IGFLLKTV-ATFG-----------------DTWFQLWQGLDLNKMPVF
+        Sp10   ------DPAVL--FVIMLGTI-TKFS-----------------SEWFFAWLGLEINMMVII
+        Sp26   AAAAAAAAALLTYLGLFLGTDYENFA-----------------AAAANAWLGLEINMMAQI
 
     [b]-resoverlap <n>[r]
         Minimum overlap of a positions with other positions in the column
