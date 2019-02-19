@@ -58,7 +58,8 @@ public:
         terminalOnly        = false, 
         keepSeqs            = false,
         ignoreStopCodon     = false,
-        ignoreFilter        = false;
+        ignoreFilter        = false,
+        removeDuplicates    = false;
 
     float 
         conservationThreshold   = -1,
@@ -162,6 +163,7 @@ private: // Parse Arguments Methods
         bool conservation_threshold_argument(const int* argc, char* argv[], int* currentArg);
         bool select_cols_argument           (const int* argc, char* argv[], int* currentArg);
         bool no_gaps_argument               (const int* argc, char* argv[], int* currentArg);
+        bool remove_duplicates_argument     (const int* argc, char* argv[], int* currentArg);
         bool no_all_gaps_argument           (const int* argc, char* argv[], int* currentArg);
         bool keep_seqs_argument             (const int* argc, char* argv[], int* currentArg);
         bool keep_header_argument           (const int* argc, char* argv[], int* currentArg);

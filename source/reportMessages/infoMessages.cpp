@@ -12,5 +12,8 @@ const std::map<InfoCode, const char *> reporting::reportManager::InfoMessages =
                     " when using -compareset option"},
     {InfoCode ::AddingSNP,
             "Applying SNP to \"[tag]\":\"[tag]\" at position [tag] \"[tag]\"->\"[tag]\""
-    }
+    },
+
+    {InfoCode::RemovingDuplicateSequences,
+                "Removing sequence \"[tag]\" as it is a duplicate of \"[tag]\"."}
 };

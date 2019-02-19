@@ -445,6 +445,11 @@ public:
       */
     void computeComplementaryAlig(bool residues, bool sequences);
 
+    /***
+     * \brief Method to remove duplicate sequences. It will keep the latest ones.
+     */
+    void removeDuplicates();
+
 private:
 
     friend class Alignment;

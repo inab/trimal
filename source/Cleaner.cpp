@@ -1579,6 +1579,28 @@ void Cleaner::computeComplementaryAlig(bool residues, bool sequences) {
     }
 }
 
+void Cleaner::removeDuplicates() {
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("void Cleaner::removeDuplicates()");
+    for (int i = 0; i < alig->originalNumberOfSequences; i++)
+    {
+        for (int x = i + 1; x < alig->originalNumberOfSequences; x++)
+        {
+            if (alig->sequences[i] == alig->sequences[x])
+            {
+                alig->saveSequences[i] = -1;
+                debug.report(InfoCode::RemovingDuplicateSequences,
+                        new std::string[2] {
+                    alig->seqsName[i],
+                    alig->seqsName[x]
+                });
+                break;
+            }
+        }
+    }
+}
+
 
 Cleaner::Cleaner(Alignment *parent) {
     // Create a timer that will report times upon its destruction
