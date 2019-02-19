@@ -120,7 +120,7 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
             "Only one method to chose sequences can be applied: (-selectseqs || -clusters || -maxIdentity"},
 
     {ErrorCode::CombinationAmongTrimmingMethods,
-            "Only one trimming method can be used at the same time, either automatic or manual"},
+            "Only one trimming method can be used at the same time, either automatic or manual. Manual argument: \"[tag]\" + \"[tag]\""},
 
     {ErrorCode::AutomathicMethodAndBlock,
             "Combination between automatic methods and -block options is not allowed"},
@@ -336,7 +336,6 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
             "[[tag]] Tried to prevent overriding file [tag] but found no luck adding suffixes.\n"
             "Overwritting file [tag]"
             "You should check your output folder."},
-
     {ErrorCode::AbsoluteAndRelativeGapThreshold,
             "Combination among absolute (-gat) and relative (-gt) gap thresholds is not allowed."},
     {ErrorCode::AbsoluteGapThresholdLessThanZero,
@@ -346,5 +345,9 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
             "\tNumber of sequences: \"[tag]\".\n"
             "\tAbsolute Gap Threshold provided: \"[tag]\"."},
     {ErrorCode::AbsoluteGapThresholdNotRecognized,
-            "Absolute gap (-gat) not recognized"}
+            "Absolute gap (-gat) not recognized"},
+
+    {ErrorCode::MoreThanOneAutomatedMethod,
+            "More than one automated method has been requested."},
+
 };
