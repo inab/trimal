@@ -182,6 +182,8 @@ void trimAlManager::parseArguments(int argc, char *argv[]) {
     }
 }
 
+#undef checkArgument
+
 inline bool trimAlManager::check_arguments_incompatibilities() {
     StartTiming("bool trimAlManager::check_arguments_incompatibilities()");
     // The incompatibilities are checked only once,
@@ -375,6 +377,8 @@ inline bool trimAlManager::out_format_arguments(const int *argc, char *argv[], i
 
     return false;
 }
+
+#undef LegacyFormatArgumentWrapper
 
 inline bool trimAlManager::matrix_argument(const int *argc, char *argv[], int *i) {
     if (!strcmp(argv[*i], "-matrix") && ((*i) + 1 != *argc) && (matrixFile == nullptr)) {
@@ -839,6 +843,8 @@ inline bool trimAlManager::stats_arguments(const int *argc, char *argv[], int *i
     //  return True or False, depeding if a stat argument has been recognized.
     return false;
 }
+
+#undef stat_check
 
 inline bool trimAlManager::complementary_argument(const int *argc, char *argv[], int *i) {
     if ((!strcmp(argv[*i], "-complementary")) && !getComplementary) {
