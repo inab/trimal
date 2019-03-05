@@ -33,6 +33,25 @@ add_executable(readal
         $<TARGET_OBJECTS:UtilsOBJLib>
         $<TARGET_OBJECTS:InternalBenchmarkOBJLib>)
 
+# Add the executables to the project.
+add_executable(test
+        source/testMain.cpp
+        tests/catch.hpp
+        source/trimalManager.cpp            # trimAl Manager
+
+        source/VCFHandler.cpp               # VCF only present on trimAl
+        # No need to transform to OBJLib
+        $<TARGET_OBJECTS:CoreOBJLib>
+        $<TARGET_OBJECTS:FormatsOBJLib>
+        $<TARGET_OBJECTS:FormatHandlerOBJLib>
+        $<TARGET_OBJECTS:ReportSystemOBJLib>
+        $<TARGET_OBJECTS:StatisticOBJLib>
+        $<TARGET_OBJECTS:UtilsOBJLib>
+        $<TARGET_OBJECTS:InternalBenchmarkOBJLib>
+        $<TARGET_OBJECTS:CatchOBJLib>
+        $<TARGET_OBJECTS:TestsOBJLib>
+        )
+
 # Link the mathematical library to the targets
 target_link_libraries(trimal m)
 target_link_libraries(readal m)

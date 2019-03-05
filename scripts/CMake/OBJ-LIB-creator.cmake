@@ -27,6 +27,9 @@ set(reportSystemFiles
 FILE (GLOB FormatHandlerFiles
         source/FormatHandling/*_state.cpp)
 
+FILE (GLOB tests
+        tests/*.cpp
+        tests/*/*.cpp)
 
 # Create object libraries - This allows the system to reuse the same code for all targets
 # They are splitted so they can be recompiled modularly an reduce recompilation time on change
@@ -46,4 +49,9 @@ add_library(ReportSystemOBJLib      OBJECT ${reportSystemFiles})
 add_library(UtilsOBJLib             OBJECT source/utils.cpp)
 # Internal Benchmarker
 add_library(InternalBenchmarkOBJLib OBJECT source/InternalBenchmarker.cpp)
+
+# Catch
+add_library(CatchOBJLib             OBJECT tests/catch.hpp)
+# Tests
+add_library(TestsOBJLib             OBJECT ${tests})
 
