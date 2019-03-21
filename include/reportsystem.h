@@ -1,195 +1,236 @@
 #ifndef VERBOSEMANAGER_H
 #define VERBOSEMANAGER_H
 
-#include <string>
-#include <map>
-#include <array>
-#include <vector>
 #include <iostream>
+#include <cstring>
+#include <iomanip>
+#include <vector>
+#include <array>
+#include <map>
+
 
 /** 
  * \brief VerboseLevel used to report messages. 
  */
 enum VerboseLevel {
-    /// 0 = No output messages
-    NONE        = 0,
+
     /// 1 = Info, warning and error messages
     INFO        = 1,
     /// 2 = Error and warning messages
     WARNING    = 2,
     /// 3 = Only error messages
     ERROR      = 3,
+    /// 4 = No output messages
+    NONE        = 4,
 };
 
 enum ErrorCode {
 
-    AlignmentNotLoaded                          = 1,
+    SomethingWentWrong_reportToDeveloper                = 0,
 
-    NoFormatsSpecified                          = 2,
+    AlignmentNotLoaded                                  = 1,
 
-    AlternativeMatrixNotRecognized              = 3,
+    NoFormatsSpecified                                  = 2,
 
-    ReferenceFileNotLoaded                      = 4,
+    AlternativeMatrixNotRecognized                      = 3,
 
-    GapThresholdOutOfRange                      = 5,
-    GapThresholdNotRecognized                   = 6,
+    ReferenceFileNotLoaded                              = 4,
 
-    SimilarityThresholdOutOfRange               = 7,
-    SimilarityThresholdNotRecognized            = 8,
+    GapThresholdOutOfRange                              = 5,
+    GapThresholdNotRecognized                           = 6,
 
-    ConsistencyThresholdOutOfRange              = 9,
-    ConsistencyThresholdNotRecognized           = 10,
+    SimilarityThresholdOutOfRange                       = 7,
+    SimilarityThresholdNotRecognized                    = 8,
 
-    ConservationThresholdOutOfRange             = 11,
-    ConservationThresholdNotRecognized          = 12,
+    ConsistencyThresholdOutOfRange                      = 9,
+    ConsistencyThresholdNotRecognized                   = 10,
 
-    ResidueOverlapOutOfRange                    = 13,
-    ResidueOverlapNotRecognized                 = 14,
+    ConservationThresholdOutOfRange                     = 11,
+    ConservationThresholdNotRecognized                  = 12,
 
-    SequencesOverlapOutOfRange                  = 15,
-    SequencesOverlapNotRecognized               = 16,
+    ResidueOverlapOutOfRange                            = 13,
+    ResidueOverlapNotRecognized                         = 14,
 
-    MaxIdentityOutOfRange                       = 17,
-    MaxIdentityNotRecognized                    = 18,
+    SequencesOverlapOutOfRange                          = 15,
+    SequencesOverlapNotRecognized                       = 16,
 
-    ClustersValueOutOfRange                     = 19,
-    ClustersValueNotRecognized                  = 20,
+    MaxIdentityOutOfRange                               = 17,
+    MaxIdentityNotRecognized                            = 18,
 
-    WindowValueOutOfRange                       = 21,
-    WindowValueNotRecognized                    = 22,
+    ClustersValueOutOfRange                             = 19,
+    ClustersValueNotRecognized                          = 20,
 
-    SelectSeqsNotRecognized                     = 23,
-    SelectColsNotRecognized                     = 24,
+    WindowValueOutOfRange                               = 21,
+    WindowValueNotRecognized                            = 22,
 
-    GapWindowValueOutOfRange                    = 25,
-    GapWindowValueNotRecognized                 = 26,
+    SelectSeqsNotRecognized                             = 23,
+    SelectColsNotRecognized                             = 24,
 
-    SimilarityWindowValueOutOfRange             = 27,
-    SimilarityWindowValueNotRecognized          = 28,
+    GapWindowValueOutOfRange                            = 25,
+    GapWindowValueNotRecognized                         = 26,
 
-    ConsistencyWindowValueOutOfRange            = 27,
-    ConsistencyWindowValueNotRecognized         = 28,
+    SimilarityWindowValueOutOfRange                     = 27,
+    SimilarityWindowValueNotRecognized                  = 28,
 
-    BlockSizeOutOfRange                         = 29,
-    BlockSizeNotRecognized                      = 30,
+    ConsistencyWindowValueOutOfRange                    = 27,
+    ConsistencyWindowValueNotRecognized                 = 28,
 
-    InFileComparisonStatistics                  = 31,
+    BlockSizeOutOfRange                                 = 29,
+    BlockSizeNotRecognized                              = 30,
 
-    IncompatibleArguments                       = 32,
+    InFileComparisonStatistics                          = 31,
 
-    SelectSeqsResAndThresholdIncompatibilities  = 33,
+    IncompatibleArguments                               = 32,
+
+    SelectSeqsResAndThresholdIncompatibilities          = 33,
     SelectSeqsResAndAutomathedMethodsIncompatibilities  = 34,
-    SelectSeqsResAndWindowIncompatibilities     = 35,
-    SelectSeqsResAndOverlapIncompatibilites     = 36,
+    SelectSeqsResAndWindowIncompatibilities             = 35,
+    SelectSeqsResAndOverlapIncompatibilites             = 36,
 
-    OnlyOneSequencesSelectionMethodAllowed      = 37,
+    OnlyOneSequencesSelectionMethodAllowed              = 37,
 
-    CombinationAmongTrimmingMethods             = 38,
-    AutomathicMethodAndBlock                    = 39,
+    CombinationAmongTrimmingMethods                     = 38,
+    AutomathicMethodAndBlock                            = 39,
 
-    WindowAndArgumentIncompatibilities          = 40,
-    CombinationAmongThresholdsMethods           = 41,
-    GeneralAndSpecificWindows                   = 42,
-    StatisticsArgumentIncompatibilities         = 43,
+    WindowAndArgumentIncompatibilities                  = 40,
+    CombinationAmongThresholdsMethods                   = 41,
+    GeneralAndSpecificWindows                           = 42,
+    StatisticsArgumentIncompatibilities                 = 43,
 
-    TrimmingMethodNeeded                        = 44,
-    ForceFileWithoutCompareDataset              = 45,
+    TrimmingMethodNeeded                                = 44,
+    ForceFileWithoutCompareDataset                      = 45,
 
-    BacktranslationWithoutMainAlignment         = 46,
+    BacktranslationWithoutMainAlignment                 = 46,
 
-    NotAligned                                  = 47,
+    NotAligned                                          = 47,
 
-    MatrixGivenWithNoMethodToUseIt              = 48,
+    MatrixGivenWithNoMethodToUseIt                      = 48,
 
-    SameNameOutput                              = 49,
+    SameNameOutput                                      = 49,
 
-    SequenceAndResiduesOverlapMutuallyNeeded    = 50,
+    SequenceAndResiduesOverlapMutuallyNeeded            = 50,
 
-    OutFileNeededWhenPrintingStatistics         = 51,
+    OutFileNeededWhenPrintingStatistics                 = 51,
 
-    AlignmentTypesNotMatching                   = 52,
+    AlignmentTypesNotMatching                           = 52,
 
-    BlocksizeTooBig                             = 53,
+    BlocksizeTooBig                                     = 53,
 
-    ParemeterOnlyOnBacktranslation              = 54,
+    ParemeterOnlyOnBacktranslation                      = 54,
 
-    ProteinAlignmentMustBeAligned               = 55,
+    ProteinAlignmentMustBeAligned                       = 55,
 
-    BacktransAlignIsDNA                         = 56,
+    BacktransAlignIsDNA                                 = 56,
 
 
 
-    ImpossibleToGenerate                        = 57,
+    ImpossibleToGenerate                                = 57,
 
-    ImpossibleToProcessMatrix                   = 58,
+    ImpossibleToProcessMatrix                           = 58,
 
-    SelectOnlyAccepts                           = 59,
+    SelectOnlyAccepts                                   = 59,
 
-    MoreClustersThanSequences                   = 60,
+    MoreClustersThanSequences                           = 60,
 
-    LeftBoundaryBiggerThanRightBoundary         = 61,
+    LeftBoundaryBiggerThanRightBoundary                 = 61,
 
-    DifferentNumberOfSequencesInCompareset      = 62,
+    DifferentNumberOfSequencesInCompareset              = 62,
 
-    DifferentSeqsNamesInCompareset              = 63,
+    DifferentSeqsNamesInCompareset                      = 63,
 
-    CDScontainsProteinSequences                 = 64,
+    CDScontainsProteinSequences                         = 64,
 
-    SequenceContainsGap                         = 65,
+    SequenceContainsGap                                 = 65,
 
-    SequenceNotMultipleOfThree                  = 66,
+    SequenceNotMultipleOfThree                          = 66,
 
-    SequenceHasStopCodon                        = 67,
+    SequenceHasStopCodon                                = 67,
 
-    SequenceNotPresentInCDS                     = 68,
+    SequenceNotPresentInCDS                             = 68,
 
-    UnknownCharacter                            = 69,
+    UnknownCharacter                                    = 69,
 
-    SequencesNotSameSize                        = 70,
+    SequencesNotSameSize                                = 70,
 
-    IncorrectSymbol                             = 71,
+    IncorrectSymbol                                     = 71,
 
-    UndefinedSymbol                             = 72,
+    UndefinedSymbol                                     = 72,
 
-    ParameterNotFoundOrRepeated                 = 73,
+    ParameterNotFoundOrRepeated                         = 73,
 
-    SimilarityMatrixNotCompatibleWindow         = 74,
+    SimilarityMatrixNotCompatibleWindow                 = 74,
 
-    PossibleMissmatch                           = 75,
+    PossibleMissmatch                                   = 75,
 
-    BracketsMissmatchFound                      = 76,
+    BracketsMissmatchFound                              = 76,
 
-    UnalignedAlignmentToAlignedFormat           = 77,
+    UnalignedAlignmentToAlignedFormat                   = 77,
     
-    CantOpenFile                                = 78,
+    CantOpenFile                                        = 78,
     
-    FileIsEmpty                                 = 79,
+    FileIsEmpty                                         = 79,
     
-    AlignmentFormatNotRecognized                = 80,
+    AlignmentFormatNotRecognized                        = 80,
     
-    OutputFormatNotRecognized                   = 81,
+    OutputFormatNotRecognized                           = 81,
     
-    OnlyOneFormatOnConsoleOutput                = 82,
+    OnlyOneFormatOnConsoleOutput                        = 82,
     
-    AlignmentNotSaved                           = 83,
+    AlignmentNotSaved                                   = 83,
     
-    VerboseLevelNotRecognized                   = 84,
+    VerboseLevelNotRecognized                           = 84,
     
-    NeedToSpecifyVerboseLevel                   = 85,
+    NeedToSpecifyVerboseLevel                           = 85,
     
-    NoReferenceSequenceForContig                = 86,
+    NoReferenceSequenceForContig                        = 86,
     
-    SNPoutOfBounds                              = 87,
+    SNPoutOfBounds                                      = 87,
 
-    __MAXERROR
+    NoInputFile                                         = 88,
 
+    ComparesetFailedAlignmentMissing                    = 89,
+
+    GapWindowTooBig                                     = 90,
+    SimilarityWindowTooBig                              = 91,
+    ConsistencyWindowTooBig                             = 92,
+    WindowTooBig                                        = 93,
+
+    AlignmentIsEmpty                                    = 94,
+
+    AlignmentTypeIsUnknown                              = 95,
+
+    MultipleOutputFormatsSameName                       = 96,
+    MultipleInputs                                      = 97, // Not in use
+
+    ReferenceNucleotideNotCorresponding                 = 98,
+
+    OverwrittingSNP                                     = 99,
+
+
+    MoreDonorsOnLineThanPresented                       = 100,
+
+    MinQualityLesserThan0                               = 101,
+    MinQualityNotRecognized                             = 102,
+
+    MinCoverageLesserThan0                              = 103,
+    MinCoverageNotRecognized                            = 104,
+
+    OnlyValidWithVCF                                    = 105,
+
+    TriedRenamingOutputPreventOverride                  = 106,
+
+    MoreThanOneAutomatedMethod                          = 107,
+
+
+    __MAXERROR,
 };
+
 enum WarningCode {
-    RemovingOnlyGapsColumn                      = 1,
+    RemovingOnlyGapsSequence                    = 1,
 
-    KeepingOnlyGapsColumn                       = 2,
+    KeepingOnlyGapsSequence                     = 2,
 
-    SequenceWillBeCutted                        = 3,
+    SequenceWillBeCut                           = 3,
 
     IncludingIndeterminationSymbols             = 4,
 
@@ -198,8 +239,13 @@ enum WarningCode {
     HeaderWillBeCut                             = 6,
     
     DonorAlreadyAdded                           = 7,
-    
-    ReferenceNucleotideNotCorresponding         = 8,
+
+    SNPAlreadApplied                            = 8,
+
+    OverwrittingFile                            = 9,
+
+    RenamingOutputPreventOverride               = 10,
+
 
     __MAXWARNING
 };
@@ -209,34 +255,43 @@ enum InfoCode {
 
     WindowSizeCompareset                        = 2,
 
+    AddingSNP                                   = 3,
+
     __MAXINFO
 };
 
-namespace __internalReport {
+/// \brief Internal classes to handle reporting to user in several ways.\n
+/// The reporting system is made so a developer that wants to use the system
+///     doesn't need to enter to the namespace, but use the global variable #debug
+namespace reporting {
 
 /**
- \brief Internal class used by __internalReport::__reportSystem::log \n
-This class is able to produce output depending on it's internal value __internalReport::__reporter::CanReport
+ \brief Internal class used by reporting::reportManager \n
+ This class serves as a proxy for message reporting. \n
+ It will only output to std::cout if
+  reporting::reportWrapper::CanReport it's true
  */
-class __reporter {
+class reportWrapper {
     /// \brief Variable that specifies if the object is able to output to cout or not.
     bool CanReport;
     
     public:
     
     /// \brief Constructor
-    __reporter(bool CanReport) : CanReport{CanReport} { }
+    explicit reportWrapper(bool CanReport) : CanReport{CanReport} { }
     
-    /// \brief Overloaded operator that allows to use this object as it was an iostream, as cout.
+    /// \brief Overloaded operator that allows to use this object as
+    /// it was an iostream, as cout.
     template <typename T>
-    __reporter &operator<<(const T &a) {
+    reportWrapper &operator<<(const T &a) {
         if (CanReport)
             std::cout<<a;
         return *this;
     }
     
-    /// \brief Overloaded operator that allows to use this object as it was an iostream, as cout.
-    __reporter &operator<<(std::ostream& (*pf) (std::ostream&)) {
+    /// \brief Overloaded operator that allows to use this object as
+    /// it was an iostream, as cout.
+    reportWrapper &operator<<(std::ostream& (*pf) (std::ostream&)) {
         if (CanReport)
             std::cout<<pf;
         return *this;
@@ -244,89 +299,158 @@ class __reporter {
 };
 
 /**
- \brief Class that allows us to centralize all the Debug that should be used to inform the user of Errors, Warnings and Info.\n
- The object can also be used as a substitute to cout for temporal messages using the << overloaded operator or the \link __reportSystem::log log \endlink method, 
- and they will be behind the  IsDebug variable, which should be set to false in Release.\n
- This allows us to protect the user from receiving Debug/Developing messages that shouldn't bother them, in case any of them is not removed by error. \n
- <b> THIS CLASS SHOULDNT BE USED DIRECTLY </b> Use instanced global variable \link debug debug \endlink instead.
+ \brief Class that allows us to centralize all the reporting messages that
+  should be used to inform the user of Errors, Warnings and Info.\n
+ The object can also be used as a substitute to cout for temporal messages using
+  the << overloaded operator or the \link reportManager::log log \endlink method,
+  and the messages will be behind the IsDebug variable,
+  which should be set to false in Release.\n
+ This allows us to protect the user from receiving Debug/Developing messages
+  that shouldn't bother them, in case any of them is not removed by error.
+ \warning <b> THIS CLASS SHOULDN'T BE USED DIRECTLY </b> \n
+ Use instanced global variable \link debug debug \endlink instead.
  */
-class __reportSystem
+class reportManager
 {
 private:
     
-    /// \brief Object that will be returned by \link __internalReport::__reportSystem::log log \endlink if it should allow to output the message
-    __reporter canReport = __reporter(true);
-    /// \brief Object that will be returned by \link __internalReport::__reportSystem::log log \endlink if it shouldn't allow to output the message
-    __reporter cantReport = __reporter(false);
+    /** \brief Object that will be returned by
+         \link reporting::reportManager::log log \endlink
+         if it allows to output the message
+     */
+    reportWrapper canReport = reportWrapper(true);
+    /** \brief Object that will be returned by
+     *   \link reporting::reportManager::log log \endlink
+     *   if it doesn't allow to output the message
+     * */
+    reportWrapper cantReport = reportWrapper(false);
 
     static const std::map<InfoCode, const char *>       InfoMessages ;
     static const std::map<WarningCode, const char *>    WarningMessages ;
     static const std::map<ErrorCode, const char *>      ErrorMessages ;
     
 public:
-    /** \brief Level of Verbosity.\n The report system won't output messages that are lower than the current level */
-    VerboseLevel Level;
+    /** \brief Level of Verbosity.\n
+     *   The report system won't output messages
+     *    that are lower than the current level */
+    VerboseLevel Level = VerboseLevel::INFO;
     
-    /// \brief Protection variable. This variable should be set to true in Development Environments, and false on Release.
+    /** \brief Protection variable.
+      This variable should be set to true while in development,
+      and false on Release. */
     bool IsDebug = false;
 
     /**
-     \brief Method to print all Info, Warning and Error codes and their respective message.\n
-            This method is usefull to check wheter all codes have a message linked to them.
-            It will use the current VerboseLevel of the object, which defaults to ERROR level.
+     \brief Method to print all Info, Warning and Error codes
+      and their respective message.\n
+     This method is useful to check whether all codes
+      have a message linked to them.
+     It will use the current VerboseLevel of the object,
+      which defaults to ERROR level.
      */
     void PrintCodesAndMessages();
 
     /**
-     \brief Method to report an Error. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::ERROR
-     \param message Code to report.
-     \param vars Array of strings that will replace the '[tags]' in the message. The number of elements in the array must be the same as [tag] aparitions on the message.\n
-     <b> The method will take care of destroying the pointer </b>
+     \brief Method to report an Error. \n
+     It will be displayed if
+      \link reporting::reportManager::Level Level \endlink
+      is equal or higher to VerboseLevel::ERROR
+     \param message
+      Code to report.
+     \param vars
+      Array of strings that will replace the '[tags]' in the message.\n
+      The number of elements in the array must be the same as
+      [tag] occurrences on the message.\n
+     <b> The method will take care of destroying the array </b>
      */
-    void report(ErrorCode message, std::string * vars = NULL);
+    void report(ErrorCode message, std::string * vars = nullptr);
 
     /**
-     \brief Method to report an Error. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::ERROR
-     \param message Code to report.
-     \param vars Array of chars that will replace the first aparition of '[tags]' in the message. \n
-     <b> The method wont take care of destroying the pointer </b> This allows to reuse the parameter passed.
+     \brief Method to report an Error.\n
+     It will be displayed if
+      \link reporting::reportManager::Level Level \endlink
+      is equal or higher to VerboseLevel::ERROR
+     \param message
+      Code to report.
+     \param vars
+      Array of chars that will replace the first occurrence of
+      '[tags]' in the message. \n
+     <b> The method wont take care of destroying the array </b>\n
+      This allows to reuse the parameter passed.
      */
-    void report(ErrorCode message, char * vars);
+    void report(ErrorCode message, const char *vars);
     /**
-    \brief Method to report a Warning. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::WARNING
-    \param message Code to report.
-    \param vars Array of strings that will replace the '[tags]' in the message. The number of elements in the array must be the same as [tag] aparitions on the message.\n
-    <b> The method will take care of destroying the pointer </b>
-    */
-    void report(WarningCode message, std::string * vars = NULL);
-    /**
-     \brief Method to report a Warning. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::WARNING
-     \param message Code to report.
-     \param vars Array of chars that will replace the first aparition of '[tags]' in the message. \n
-     <b> The method wont take care of destroying the pointer </b> This allows to reuse the parameter passed.
+     \brief Method to report a Warning. \n
+     It will be displayed if
+      \link reporting::reportManager::Level Level \endlink
+      is equal or higher to VerboseLevel::WARNING
+     \param message
+      Code to report.
+     \param vars
+      Array of strings that will replace the '[tags]' in the message.\n
+      The number of elements in the array must be the same as
+      [tag] occurrences on the message.\n
+     <b> The method will take care of destroying the array </b>
      */
-    void report(WarningCode message, char * vars);
+    void report(WarningCode message, std::string * vars = nullptr);
     /**
-    \brief Method to report a Info message. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::INFO
-    \param message Code to report.
-    \param vars Array of strings that will replace the '[tags]' in the message. The number of elements in the array must be the same as [tag] aparitions on the message.\n
-    <b> The method will take care of destroying the pointer </b>
-    */
-    void report(InfoCode message, std::string * vars = NULL);
-    /**
-     \brief Method to report a Info message. It will be displayed if \link __internalReport::__reportSystem::Level Level \endlink is equal or higher to VerboseLevel::INFO
-     \param message Code to report.
-     \param vars Array of chars that will replace the first aparition of '[tags]' in the message. \n
-     <b> The method wont take care of destroying the pointer </b> This allows to reuse the parameter passed.
+     \brief Method to report a Warning.\n
+     It will be displayed if
+      \link reporting::reportManager::Level Level \endlink
+      is equal or higher to VerboseLevel::WARNING
+     \param message
+      Code to report.
+     \param vars
+      Array of chars that will replace the first occurrence of
+      '[tags]' in the message. \n
+     <b> The method wont take care of destroying the array </b>\n
+      This allows to reuse the parameter passed.
      */
-    void report(InfoCode message, char * vars);
+    void report(WarningCode message, const char *vars);
+    /**
+     \brief Method to report an Info message. \n
+     It will be displayed if
+      \link reporting::reportManager::Level Level \endlink
+      is equal or higher to VerboseLevel::INFO
+     \param message
+      Code to report.
+     \param vars
+      Array of strings that will replace the '[tags]' in the message.\n
+      The number of elements in the array must be the same as
+      [tag] occurrences on the message.\n
+     <b> The method will take care of destroying the array </b>
+     */
+    void report(InfoCode message, std::string * vars = nullptr);
+    /**
+     \brief Method to report an Info message.\n
+     It will be displayed if
+      \link reporting::reportManager::Level Level \endlink
+      is equal or higher to VerboseLevel::WARNING
+     \param message
+      Code to report.
+     \param vars
+      Array of chars that will replace the first occurrence of
+      '[tags]' in the message. \n
+     <b> The method wont take care of destroying the array </b>\n
+      This allows to reuse the parameter passed.
+     */
+    void report(InfoCode message, const char *vars);
 
     /**
-     \brief Method to output a message behind two walls: \link __internalReport::__reportSystem::IsDebug IsDebug \endlink and VerboseLevel passed.\n
-     If \link __internalReport::__reportSystem::IsDebug IsDebug \endlink is false, it will ignore the message returning the \link __internalReport::__reportSystem::cantReport cantReport \endlink, otherwise, VerboseLevel level will be checked.
-     \param level Level to use for this message. If \link __internalReport::__reportSystem::Level Level \endlink is higher than this argument, message will be ignored, otherwise, message will be outputted to cout.
+     \brief Method to output a message behind two checks:
+      \link reporting::reportManager::IsDebug IsDebug \endlink
+      and VerboseLevel passed.\n
+     If \link reporting::reportManager::IsDebug IsDebug \endlink is false,
+      it will ignore the message returning the
+      \link reporting::reportManager::cantReport cantReport \endlink,
+      otherwise, VerboseLevel level will be checked.
+     \param level
+      Level to use for this message.\n
+     If \link reporting::reportManager::Level Level \endlink is higher
+      than this argument, message will be ignored,
+      otherwise, message will be outputted to cout.
      */
-    __reporter log(VerboseLevel level)
+    reportWrapper log(VerboseLevel level)
     {
         if (!IsDebug) return cantReport;
         
@@ -337,21 +461,26 @@ public:
     }
     
     /**
-     \brief Overloaded operator that allows us to debug some messages behind \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
-     \param a Message to be outputed if \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
+     \brief Overloaded operator that allows us to debug some messages behind
+      \link reporting::reportManager::IsDebug IsDebug \endlink
+     \param a
+      Message to be outputed if
+      \link reporting::reportManager::IsDebug IsDebug \endlink
      */
     template <typename T>
-    __reportSystem &operator<<(const T &a) {
+    reportManager &operator<<(const T &a) {
         if (IsDebug)
             std::cout<<a;
         return *this;
     }
 
-        /**
-     \brief Overloaded operator that allows us to debug some messages behind \link __internalReport::__reportSystem::IsDebug IsDebug \endlink
-     \param pf Object that overloads the '<<' operator
+    /**
+     \brief Overloaded operator that allows us to debug some messages behind
+      \link reporting::reportManager::IsDebug IsDebug \endlink
+     \param pf
+      Object that overloads the '<<' operator
      */
-    __reportSystem &operator<<(std::ostream& (*pf) (std::ostream&)) {
+    reportManager &operator<<(std::ostream& (*pf) (std::ostream&)) {
         if (IsDebug)
             std::cout<<pf;
         return *this;
@@ -360,13 +489,15 @@ public:
 };
 
 }
-/** \brief <b> This object is the one that should be used</b> \n
- * It's use is similar to a singleton, without the need to obtain the instance everytime it's needed.\n
- * Instead, it's a global instance of the __internalReport::__reportSystem \n \n
- * This allows us to have the '<<' operator overloaded, as it can't be statically overloaded.
-    \relates __internalReport::__reportSystem
+/** \brief <b> This instance is the one that should be used</b> \n
+ * It's use is similar to a singleton, without the need to obtain
+ *  the instance every time it's needed.\n
+ * Instead, it's a global instance of the reporting::reportManager \n
+ * This allows us to have the '<<' operator overloaded,
+ *  as it can't be statically overloaded.
+    \relates reporting::reportManager
  */
-extern __internalReport::__reportSystem debug;
+extern reporting::reportManager debug;
 
 #endif // VERBOSEMANAGER_H
 

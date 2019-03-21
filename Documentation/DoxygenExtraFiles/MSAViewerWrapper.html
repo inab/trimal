@@ -1,0 +1,16 @@
+<script>
+   
+     function anon(divname, fasta)
+     {
+          var m = msa({
+               el: document.getElementById(divname),
+               seqs: msa.io.fasta.parse(fasta),
+          });
+          
+          m.g.zoomer.set("alignmentHeight", m.seqs.length * 15 + 15);
+          
+          m.render();
+     };
+     
+</script>
+

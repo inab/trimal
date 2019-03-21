@@ -33,8 +33,8 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
 #define BUILD "2015-05-21"
-#define VERSION 1.4
-#define REVISION 22
+#define VERSION "1.4"
+#define REVISION "22"
 #define AUTHORS "2009-2015. Salvador Capella-Gutierrez and Toni Gabaldón."
 
 // #define DNAType 1
@@ -66,26 +66,38 @@ To obtain a composed alignment type you can bitwise OR the tags: ComposedTag = S
 You can Fuzzy and Exact check both simple and composed tags\n\n
  
 To \b FUZZY check an alignment type you can: \n
-    _alignment -> getAlignmentType() & SequenceTypes::DNA\n
-        <i> This will return true if the _alignment type is DNA, ignoring the rest of tags.</i>\n\n
-    _alignment -> getAlignmentType() & (SequenceTypes::DNA | SequenceTypes::DEG)\n
-        <i> This will return true if the _alignment type is DNA Deg, ignoring the rest of tags.</i>\n\n
+    alig -> getAlignmentType() & SequenceTypes::DNA\n
+        <i> This will return true if the alig type is DNA, ignoring the rest of tags.</i>\n\n
+    alig -> getAlignmentType() & (SequenceTypes::DNA | SequenceTypes::DEG)\n
+        <i> This will return true if the alig type is DNA Deg, ignoring the rest of tags.</i>\n\n
     
 To \b EXACT check an alignment type you can: \n
-    _alignment -> getAlignmentType() == SequenceTypes::DNA \n
-        <i> This will return true if the _alignment type is only DNA. DNA Deg would result in false</i>.\n\n
-    _alignment -> getAlignmentType() == (SequenceTypes::DNA | SequenceTypes::DEG) \n
-        <i> This will return true if the _alignment is type DNA Deg, additional tags (like SequenceTypes::DNA | SequenceTypes::RNA | SequenceTypes::DEG) would resut in false.</i>\n\n
+    alig -> getAlignmentType() == SequenceTypes::DNA \n
+        <i> This will return true if the alig type is only DNA. DNA Deg would result in false</i>.\n\n
+    alig -> getAlignmentType() == (SequenceTypes::DNA | SequenceTypes::DEG) \n
+        <i> This will return true if the alig is type DNA Deg, additional tags (like SequenceTypes::DNA | SequenceTypes::RNA | SequenceTypes::DEG) would resut in false.</i>\n\n
 */
 enum SequenceTypes
 {
+    // Not Defined Tag = 0
+    /// = 0
     NotDefined = 0,
     
-    DNA = 1 << 1, ///< DNA Tag = 2
-    RNA = 1 << 2, ///< RNA Tag = 4
-    AA  = 1 << 3, ///< AA Tag = 8
+    // DNA Tag = 2
+    /// 1 << 1 = 2
+    DNA = 1 << 1,
+
+    // RNA Tag = 4
+    /// 1 << 2 = 4
+    RNA = 1 << 2, 
     
-    DEG = 1 << 4 ///< Degraded Tag = 16
+    // AA Tag = 8
+    /// 1 << 3 = 8
+    AA  = 1 << 3,
+    
+    // Degraded Tag = 16
+    /// 1 << 4 = 16
+    DEG = 1 << 4 
 };
 
 #endif

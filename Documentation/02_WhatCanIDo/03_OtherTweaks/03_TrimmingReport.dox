@@ -1,0 +1,21 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection Trimming Report
+@htmlinclude 03_ResizeReports.html
+
+trimAl is able to output a trimming report in two formats: HTML and SVG. \n
+There is no recommended format, but SVG is scalable and takes 10% of time to load on a browser than HTML. \n 
+
+You can check this functionality if you resize the page: \n 
+HTML will stay with a fixed size, while SVG will shrink.
+
+The SVG created by trimAl are interactable, so you can go over a stat name or line in the graph \n 
+and it will be highlighted.
+
+The SVG contains a legend of the background on the residues, \n
+and also includes the path of the input alignment.
+
+@buttonWithExpandableDiv{htmlout, HTML Output Report, @htmlinclude 03_HTML_out.html }
+
+@buttonWithExpandableDiv{svgout, SVG Output Report, @htmlinclude 03_SVG_out.svg }
+*/

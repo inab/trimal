@@ -1,0 +1,30 @@
+/*! \page dataflow Data Flow
+
+\section ResTrim Residue Trimming
+This step allows to trim the alignment by removing columns.\n
+- <b> Automated Methods</b> (Based on Gaps)
+    - \b Gappyout: Searches a threshold based on gaps distribution.\n
+    Removes residues that overpass this threshold.
+    - \b NoGaps: Removes all columns that contains gaps.
+    - \b NoAllGaps: Removes all columns that only contain gaps.\n
+    Although the input file usually does not contain only gaps columns,\n
+        removing sequences could lead to this 'all gaps' columns.
+    - <b>Automated Methods</b> (Based on Similarity)
+        - \b Strict: Searches a threshold based on gaps and similarity distribution.\n
+        - \b StrictPlus: Searches a threshold based on gaps and similarity distribution.\n
+- <b>Meta Automated Methods</b>\n
+These methods use heuristics to select the best method among a set to clean an alignment based on certain properties:
+    - \b Automated1: Decides between Gappyout and Strict methods.
+- <b>Semi Automated Methods</b>\n
+These methods allow to provide different statistics thresholds to trim the alignment based on them.\n
+    - <b> Consistency Threshold: </b> Trim the alignment removing columns with a consistency ratio inferior to threshold provided\n
+    When a consistency threshold is provided, the trimming is done before others.\n
+    \note Only one of the following will be used depending on the thresholds provided:
+    - <b> Gap Threshold: </b> Trim the alignment removing columns with a gap ratio superior to the threshold provided
+    - <b> Similarity Threshold: </b> Trim the alignment removing columns with a similarity ratio inferior to threshold provided
+    - <b> Similarity and Gap Thresholds: </b> Trim the alignment removing columns with a gap ratio superior to gap threshold or similarity ratio inferior to similarity threshold.
+
+
+\image html resTrim.svg
+
+*/

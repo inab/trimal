@@ -1,0 +1,29 @@
+#ifndef MEGASSTATE_H
+#define MEGASSTATE_H
+
+#include "BaseFormatHandler.h"
+
+namespace FormatHandling {
+class mega_sequential_state : public BaseFormatHandler {
+public:
+
+    explicit mega_sequential_state(FormatManager *MachineState) {
+        Machine = MachineState;
+        name = "mega_sequential";
+        extension = "mega";
+        canLoad = true;
+        canSave = true;
+    };
+
+    int CheckAlignment(std::istream *origin) override;
+
+    Alignment *LoadAlignment(const std::string &filename) override;
+
+    bool SaveAlignment(const Alignment &alignment, std::ostream *output) override;
+
+    bool RecognizeOutputFormat(const std::string &FormatName) override;
+
+};
+}
+
+#endif // MEGASSTATE_H

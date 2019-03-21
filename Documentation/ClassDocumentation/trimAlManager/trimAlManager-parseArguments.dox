@@ -1,0 +1,245 @@
+/**
+\name Argument Parsing methods
+\param [in] argc Number of arguments in argv
+\param [in] *argv[] Arguments passed to the program
+\param [in,out] *currentArg Current argument being evaluated.\n
+It is passed as a pointer to allow methods to consume several argc
+\return \b True if current argument (*currentArg) corresponds to the argument being checked. \n\b False otherwise.
+
+\par Access Level
+All methods are inline-private except parseArguments(int argc, char *argv[])
+
+\par Special Cases:
+- parseArguments(int argc, char *argv[]) \n
+    Is the only public method in the group.\n 
+    Calls the rest of methods in the group.
+- help_arguments(const int* argc, char* argv[], int* currentArg) \n
+    Is the only private method that doesn't accept *currentArg.\n
+    This is due it iterates over all values of argv before checking the rest of arguments.
+ */
+//@{
+
+/**
+\fn void trimAlManager::parseArguments(int argc, char *argv[])
+\brief Method to parse arguments into usable structure in trimal
+*/
+
+/**
+\fn bool trimAlManager::verbosity_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the verbosity argument.\n
+This check is done before any other check.\n
+This is due to trimAl not performing any action if any help argument has been provided.\n
+*/
+
+/**
+\fn void trimAlManager::help_arguments(int* argc, char* argv[], int* currentArg)
+\brief Method to parse information arguments as help and menu
+*/
+
+/**
+\fn void trimAlManager::vcf_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse vcf argument
+*/
+
+/**
+\fn void trimAlManager::timetracker_out_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse InternalBenchmarker output argument.\n
+Need to be checked before any other argument.
+*/
+
+/**
+\fn bool trimAlManager::in_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the input file argument
+*/
+
+/**
+\fn bool trimAlManager::out_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the output file pattern
+*/
+
+/**
+\fn bool trimAlManager::html_out_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the html output file
+*/
+
+/**
+\fn bool trimAlManager::svg_out_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the svg output file
+*/
+
+/**
+\fn bool trimAlManager::svg_stats_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the svg stats output file
+*/
+
+/**
+\fn bool trimAlManager::out_format_arguments(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the output formats as -fasta -clustal or -formats [...]
+*/
+
+/**
+\fn bool trimAlManager::matrix_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the custom matrix argument.
+*/
+
+/**
+\fn bool trimAlManager::compareset_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the comparset argument.
+*/
+
+/**
+\fn bool trimAlManager::force_select_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the force select argument
+*/
+
+/**
+\fn bool trimAlManager::back_trans_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the backtranslation argument
+*/
+
+/**
+\fn bool trimAlManager::gap_threshold_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the gap threshold argument
+*/
+
+/**
+\fn bool trimAlManager::similarity_threshold_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the similarity threshold argument
+*/
+
+/**
+\fn bool trimAlManager::consistency_threshold_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the consistency threshold argument
+*/
+
+/**
+\fn bool trimAlManager::conservation_threshold_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the similarity threshold argument
+*/
+
+/**
+\fn bool trimAlManager::select_cols_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the select columns argument
+*/
+
+/**
+\fn bool trimAlManager::no_gaps_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the nogaps argument
+*/
+
+/**
+\fn bool trimAlManager::no_all_gaps_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the noallgaps argument
+*/
+
+/**
+\fn bool trimAlManager::keep_seqs_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the keepSeqs argument
+*/
+
+/**
+\fn bool trimAlManager::keep_header_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the keepHeader argument
+*/
+
+/**
+\fn bool trimAlManager::gappy_out_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the gappyout argument
+*/
+
+/**
+\fn bool trimAlManager::strict_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the strict argument
+*/
+
+/**
+\fn bool trimAlManager::strict_plus_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the strictplus argument
+*/
+
+/**
+\fn bool trimAlManager::automated1_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the automated1 argument
+*/
+
+/**
+\fn bool trimAlManager::residue_overlap_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the residue overlap argument
+*/
+
+/**
+\fn bool trimAlManager::sequence_overlap_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the sequence overlap argument
+*/
+
+/**
+\fn bool trimAlManager::seqs_select_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse que select sequences argument.
+*/
+
+/**
+\fn bool trimAlManager::max_identity_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the max identity argument
+*/
+
+/**
+\fn bool trimAlManager::clusters_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the clusters argument
+*/
+
+/**
+\fn bool trimAlManager::terminal_only_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the terminal only argument
+*/
+
+/**
+\fn bool trimAlManager::window_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the Window argument
+*/
+
+/**
+\fn bool trimAlManager::gap_window_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the Gap Window argument
+*/
+
+/**
+\fn bool trimAlManager::similarity_window_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the Similarity Window argument
+*/
+
+/**
+\fn bool trimAlManager::consistency_window_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the Consistency Window argument
+*/
+
+/**
+\fn bool trimAlManager::block_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the Block Size argument
+*/
+
+/**
+\fn bool trimAlManager::stats_arguments(int* argc, char* argv[], int* currentArg)
+\brief Method to parse stats arguments
+*/
+
+/**
+\fn bool trimAlManager::complementary_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the complementary argument
+*/
+
+/**
+\fn bool trimAlManager::col_numbering_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse the column numbering argument
+*/
+
+/**
+\fn bool trimAlManager::split_by_stop_codon_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse split by stop codon argument.
+*/
+
+/**
+\fn bool trimAlManager::ignore_stop_codon_argument(int* argc, char* argv[], int* currentArg)
+\brief Method to parse ignore by stop codon argument.
+*/
+
+//@}

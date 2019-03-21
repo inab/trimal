@@ -10,6 +10,7 @@
 *.json
 *.css
 *.tcl
+.idea*
 
 *Makefile*
 *Cache*
@@ -24,3 +25,4 @@ dev_files
 CTestTestfile.cmake
 cmake_install.cmake
 
+source/Catch/test_generated_alignment.cpp

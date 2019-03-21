@@ -1,0 +1,100 @@
+
+/*! \page readAl readAl Main Page
+
+\section introduction_sec_r Introduction
+
+One of the main problems that the researchers have to face during their studies is the <i>conversion among the various formats</i> required by different programs. \n
+Nowadays there around <i>20 different Multiple Sequence %Alignment (MSAs) formats and subformats</i>. \n\n
+
+Here we present \b readAl, a tool for format alignment conversion among the most representative formats. \n
+
+\b readAl has been implemented in <i>C++ programming language</i>. \n
+This program is part of the \b trimAl package and is used internally by \b trimAl to convert among different formats.\n
+
+\section installation_sec_r Installation
+
+The simplest way to compile this program is:
+
+    1.- Move to the project folder
+    
+    2.- Configure the project: 
+        > cmake .
+    
+    3.- Compile the project: 
+        > make
+        > make readal (if you only want readal to be compiled)
+    
+    4.- Move or copy binaries folder './bin/' to 'usr/local/bin' or 'usr/bin'
+    
+\section usage_sec_r Usage 
+
+This program is free software: you can redistribute it and/or modify it under the terms of the <b>GNU General Public License</b> as published by the Free Software Foundation, the last available version.
+
+\section basic_usage_r Basic Usage
+
+	readal -in <inputfiles> -out <pattern> -format [formats] [options].
+
+	-h                    Show this information.
+	-in <inputfiles>      Input files in several formats. Separated by spaces.
+	-out <pattern>        Output file name (default STDOUT).
+	                      It will replace the tags [in]        -> Original filename without extension.
+	                                               [format]    -> Output's format name
+	                                               [extension] -> Output's extension
+
+	-formats             Formats you want the output to be converted to.
+	                     Available formats are CLUSTAL, FASTA, PIR, PHYLIP32, PHYLIP40, PHYLIP_PAML, NEXUS, MEGAI, MEGAS, HTML. 
+	                     Being the HTML format not a format itself, but a colored report of the alignment files.
+
+	-format              Print information about input file format and if sequences are aligned or not.
+	-type                Print information about biological sequences datatype (e.g. nucleotides:dna, nucleotides:rna, aminoacids, etc)
+	-info                Print information about sequences number, average sequence length, max & min sequence length
+	-reverse             Output the reverse of sequences in input file.
+
+	-shortNames          Shortens the names so they fit on certain formats
+	-keepHeaders         Keeps the headers of the original format if it had any
+
+\section legacy_opt_r Legacy Options
+Take in mind that this arguments may be discontinued any time.
+
+	-onlyseqs            Generate output with only residues from input file
+
+	-html                Output residues colored according their physicochemical properties. HTML file.
+
+	-nbrf                Output file in NBRF/PIR format
+	-mega                Output file in MEGA format
+	-nexus               Output file in NEXUS format
+	-clustal             Output file in CLUSTAL format
+
+	-fasta               Output file in FASTA format
+	-fasta_m10           Output file in FASTA format. Sequences name up to 10 characters.
+
+	-phylip              Output file in PHYLIP/PHYLIP4 format
+	-phylip_m10          Output file in PHYLIP/PHYLIP4 format. Sequences name up to 10 characters.
+	-phylip_paml         Output file in PHYLIP format compatible with PAML
+	-phylip_paml_m10     Output file in PHYLIP format compatible with PAML. Sequences name up to 10 characters.
+	-phylip3.2           Output file in PHYLIP3.2 format
+	-phylip3.2_m10       Output file in PHYLIP3.2 format. Sequences name up to 10 characters.
+
+\section examples_r Examples of use
+
+	readal -in ./dataset/AA1.fas -out ./dataset/[in].output.[extension] -formats clustal
+	  -> Will produce ./dataset/AA1.output.clw
+
+	readal -in ./dataset/example1.clw -out ./dataset/[in].[format].[extension] -formats fasta phylip32 phylip40
+	  -> Will produce ./dataset/example1.FASTA.fasta ./dataset/example1.PHYLIP32.phy ./dataset/example1.PHYLIP40.phy
+
+	readal -in ./dataset/example1.clw -out ./dataset/[in]/[format].[extension] -formats fasta phylip32 phylip40
+	  -> Will produce ./dataset/example1/FASTA.fasta ./dataset/example1/PHYLIP32.phy ./dataset/example1/PHYLIP40.phy
+	     ONLY if ./dataset/example1/ already exists.
+
+	readal -in ./dataset/AA1.fas ./dataset/AA2.fas -out ./dataset/[in].output.[extension] -formats clustal pir
+	  -> Will produce ./dataset/AA1.output.clw ./dataset/AA2.output.clw ./dataset/AA1.output.pir ./dataset/AA2.output.pir
+
+	readal -in ./dataset/AA1.fas -format -type -info
+	  -> Will produce terminal output giving information about AA1.fas alignment file
+
+	readal -in ./dataset/AA1.fas ./dataset/AA2.fas -out ./dataset/[in].output.[extension] -formats html
+	  -> Will produce ./dataset/AA1.output.html ./dataset/AA2.output.html
+	     Those files are not indeed reformats of the original alignments, but an HTML colored report of the alignment file.
+
+*/

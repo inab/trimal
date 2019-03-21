@@ -1,0 +1,18 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection AutomatedS Automated Statistical Methods
+
+Automated Statistical methods will search for optimum statistic thresholds to clean your %alignment using statistics distribution.\n
+
+
+| Method     | Description                                                                                                                             | Example of use                                                |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|
+| Strict     | Uses Gaps and Similarity statistics to clean the alignment.                                                                             | bin/trimal -in dataset/example.007.AA.fasta -strict           |
+| Strictplus | Uses Gaps and Similarity statistics to clean the alignment.\n <i> Optimized for Neighbour Joining phylogenetic tree reconstruction </i> | bin/trimal -in dataset/example.007.AA.fasta -strictplus       |
+| Gappyout   | Uses Gaps statistic to clean the alignment.                                                                                             | bin/trimal -in dataset/example.007.AA.fasta -gappyout         |
+
+
+@buttonWithExpandableDiv{Strict,Strict,@htmlinclude 02_Strict.svg}
+@buttonWithExpandableDiv{StrictPlus,StrictPlus,@htmlinclude 02_StrictPlus.svg}
+@buttonWithExpandableDiv{Gappyout,Gappyout,@htmlinclude 02_Gappyout.svg}
+*/

@@ -1,0 +1,20 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection Clusters Clusters
+
+It is possible to apply a clusterization of the sequences, \n
+to keep only the most representative sequences of the variability \n
+of the whole alignment. \n 
+
+It will output a alignment with the most representative sequence\n 
+for each cluster. \n 
+
+The user must provide the number of clusters to create, which is the \n 
+same as the number of sequences present on the final %alignment;
+
+@buttonWithExpandableDiv{clusters2,Clusters 2,@htmlinclude 05_clusters2.svg}
+@buttonWithExpandableDiv{clusters4,Clusters 4,@htmlinclude 05_clusters4.svg}
+@buttonWithExpandableDiv{clusters6,Clusters 6,@htmlinclude 05_clusters6.svg}
+
+
+**/

@@ -1,0 +1,51 @@
+R"(
+[b][u]Some Examples:[r]
+
+[b]1) Removes all positions in the alignment with gaps in 10% or more of
+   the sequences, unless this leaves less than 60% of original alignment.
+   In such case, print the 60% best (with less gaps) positions.
+
+[r]   trimal -in <inputfile> -out <outputfile> -gt 0.9 -cons 60
+
+[b]2) As above but, the gap score is averaged over a window starting
+   3 positions before and ending 3 positions after each column.
+
+[r]   trimal -in <inputfile> -out <outputfile> -gt 0.9 -cons 60 -w 3
+
+[b]3) Use an automatic method to decide optimal thresholds, based in the gap scores
+   from input alignment. (see User Guide for details).
+
+[r]   trimal -in <inputfile> -out <outputfile> -gappyout
+
+[b]4) Use automatic methods to decide optimal thresholds, based on the combination
+   of gap and similarity scores. (see User Guide for details).
+
+[r]   trimal -in <inputfile> -out <outputfile> -strictplus
+
+[b]5) Use an heuristic to decide the optimal method for trimming the alignment.
+   (see User Guide for details).
+
+[r]   trimal -in <inputfile> -out <outputfile> -automated1
+
+[b]6) Use residues and sequences overlap thresholds to delete some sequences from the
+   alignment. (see User Guide for details).
+
+[r]   trimal -in <inputfile> -out <outputfile> -resoverlap 0.8 -seqoverlap 75
+
+[b]7) Selection of columns to be deleted from the alignment. The selection can
+   be a column number or a column number interval. Start from 0
+
+[r]   trimal -in <inputfile> -out <outputfile> -selectcols { 0,2,3,10,45-60,68,70-78 }
+
+[b]8) Get the complementary alignment from the alignment previously trimmed.
+
+[r]   trimal -in <inputfile> -out <outputfile> -selectcols { 0,2,3,10,45-60,68,70-78 } -complementary
+
+[b]9) Selection of sequences to be deleted from the alignment. Start from 0
+
+[r]   trimal -in <inputfile> -out <outputfile> -selectseqs { 2,4,8-12 }
+
+[b]10) Select the 5 most representative sequences from the alignment
+
+[r]   trimal -in <inputfile> -out <outputfile> -clusters 5
+)"

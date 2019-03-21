@@ -1,0 +1,46 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection Compareset
+
+Compareset allows the user to provide multipe MSA and to obtain Consistency scores. \n 
+These scores can be used to select the most consistent alignment in the set provided \n 
+or to use them as a trimming statistics to remove columns that are not consistent enough \n 
+among the set. \n 
+
+While Compareset will select the most consistent alignment, it is possible to force it to \n 
+select an specific alignment by using the -forceselect argument.
+
+When an output file is provided, a summary of the compareset results is provided.
+
+
+@buttonWithExpandableDiv{ compareset, Example of use,
+\boldVerbatim{ > cat alignments_comparison }
+\verbatim 
+dataset/example.010.a.AA.fasta
+dataset/example.010.b.AA.fasta
+dataset/example.010.c.AA.fasta
+\endverbatim
+\n 
+
+\boldVerbatim{ Summary chart }
+\verbatim
+File:           dataset/example.010.a.AA.fasta
+Values:         Sequences: 8    Residues: 187   Pond. Hits:  133.881    %Consistency: 0.715941
+
+File:           dataset/example.010.b.AA.fasta
+Values:         Sequences: 8    Residues: 188   Pond. Hits:   120.27    %Consistency: 0.639735
+
+File:           dataset/example.010.c.AA.fasta
+Values:         Sequences: 8    Residues: 188   Pond. Hits:  122.744    %Consistency: 0.652893
+                                        --------------
+
+File Selected:  dataset/example.010.a.AA.fasta
+Value:          0.715941
+
+\endverbatim
+
+@htmlinclude 07_compare.svg
+
+}
+
+**/
