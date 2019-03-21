@@ -7,8 +7,10 @@
 
 //#define TimingReport true
 
-#define BenchmarkTimes false
+#define BenchmarkTimes true
 #define BenchmarkMemory false
+/// Macro only valid if compiling with GCC
+#define BenchmarkingExtendedNames true
 
 #define TimingReport BenchmarkTimes || BenchmarkMemory
 
@@ -29,8 +31,31 @@
 
 typedef std::chrono::time_point<std::chrono::high_resolution_clock> time_point;
 
+#define GCC_COMPILER (defined(__GNUC__) && !defined(__clang__))
+
+// Detect if we are using GCC
+#if GCC_COMPILER
+// If using GCC, check if the developer wants extended names
+#if BenchmarkingExtendedNames
+// Helping macros to allow the use of location-dependent macros within macros
+#define S1(x) #x
+#define S2(x) S1(x)
+// Macro that summarizes the extended names
+#define LOCATION std::string(__PRETTY_FUNCTION__) + " :: " + std::string(__FILE__) + ":" + std::string(S2(__LINE__))
+
+// In case we use GCC, we ignore the name provided.
+#define StartTiming(name) auto macroCustomTimer = timerFactory.getTimer(LOCATION)
+#else
+// In case we don't want extended names, we use the pretty_function name
+#define StartTiming(name) auto macroCustomTimer = timerFactory.getTimer(__FILE__)
+#endif
+
+#else
 #define StartTiming(name) auto macroCustomTimer = timerFactory.getTimer(name)
+#endif
+
 #define SetTimingOfstream(_filename) timerFactory.SetOutput(_filename)
+
 
 
 // Forward Declaration
