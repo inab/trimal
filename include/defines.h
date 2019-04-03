@@ -32,16 +32,10 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#define BUILD "2015-05-21"
-#define VERSION "1.4"
-#define REVISION "22"
+#define BUILD "2018-04-03"
+#define VERSION "2"
+#define REVISION "0"
 #define AUTHORS "2009-2015. Salvador Capella-Gutierrez and Toni Gabaldón."
-
-// #define DNAType 1
-// #define RNAType 2
-// #define AAType  3
-// #define DNADeg  4
-// #define RNADeg  5
 
 #define GAPPYOUT 1
 #define STRICT   2
@@ -81,23 +75,23 @@ enum SequenceTypes
 {
     // Not Defined Tag = 0
     /// = 0
-    NotDefined = 0,
+    NotDefined = 0u,
     
     // DNA Tag = 2
     /// 1 << 1 = 2
-    DNA = 1 << 1,
+    DNA = 1u << 1u,
 
     // RNA Tag = 4
     /// 1 << 2 = 4
-    RNA = 1 << 2, 
+    RNA = 1u << 2u,
     
     // AA Tag = 8
     /// 1 << 3 = 8
-    AA  = 1 << 3,
+    AA  = 1u << 3u,
     
     // Degraded Tag = 16
     /// 1 << 4 = 16
-    DEG = 1 << 4 
+    DEG = 1u << 4u
 };
 
 #endif
