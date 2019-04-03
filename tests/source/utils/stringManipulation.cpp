@@ -1,4 +1,4 @@
-#include "../catch.hpp"
+#include "../../catch.hpp"
 #include "utils.h"
 
 TEST_CASE("stringManipulation", "[utils]") {
@@ -121,6 +121,7 @@ TEST_CASE("stringManipulation", "[utils]") {
         std::unique_ptr<int[]> ptr;
         GIVEN("Empty string") {
             std::string str;
+            CAPTURE(str);
             REQUIRE(str.empty());
             ptr.reset(utils::readNumbers(str));
             {
@@ -131,6 +132,7 @@ TEST_CASE("stringManipulation", "[utils]") {
 
         GIVEN("String with number") {
             std::string str("1");
+            CAPTURE(str);
             REQUIRE(!str.empty());
             ptr.reset(utils::readNumbers(str));
             {
@@ -142,6 +144,7 @@ TEST_CASE("stringManipulation", "[utils]") {
 
         GIVEN("String with number list") {
             std::string str("1, 2, 3, 4");
+            CAPTURE(str);
             REQUIRE(!str.empty());
             ptr.reset(utils::readNumbers(str));
 
@@ -158,6 +161,7 @@ TEST_CASE("stringManipulation", "[utils]") {
 
         GIVEN("String with broken number list") {
             std::string str("1, 2, 3, ");
+            CAPTURE(str);
             REQUIRE(!str.empty());
             ptr.reset(utils::readNumbers(str));
 
@@ -179,6 +183,7 @@ TEST_CASE("stringManipulation", "[utils]") {
 
         GIVEN("String with range") {
             std::string str("1-4");
+            CAPTURE(str);
             REQUIRE(!str.empty());
             ptr.reset(utils::readNumbers(str));
 
@@ -189,6 +194,7 @@ TEST_CASE("stringManipulation", "[utils]") {
 
         GIVEN("String with broken range") {
             std::string str("1-");
+            CAPTURE(str);
             REQUIRE(!str.empty());
             ptr.reset(utils::readNumbers(str));
 
@@ -197,6 +203,7 @@ TEST_CASE("stringManipulation", "[utils]") {
 
         GIVEN("String with ranges and numbers") {
             std::string str("1-4, 10, 20-30");
+            CAPTURE(str);
             REQUIRE(!str.empty());
             ptr.reset(utils::readNumbers(str));
 

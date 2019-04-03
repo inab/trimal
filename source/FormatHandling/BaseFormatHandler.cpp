@@ -277,7 +277,10 @@ namespace FormatHandling {
         std::ifstream * input = getNonEmptyFile(filename);
 
         if (input == nullptr)
+        {
+            delete input;
             return nullptr;
+        }
 
         // Temporal value
         BaseFormatHandler* inState = nullptr;
@@ -322,14 +325,17 @@ namespace FormatHandling {
         if (!inFileHandler->is_open())
         {
             debug.report(ErrorCode::CantOpenFile, &filename[0]);
+            delete inFileHandler;
             return nullptr;
         }
         // Input file cannot be empty
         if (inFileHandler->peek() == std::ifstream::traits_type::eof())
         {
             debug.report(ErrorCode::FileIsEmpty, &filename[0]);
+            delete inFileHandler;
             return nullptr;
         }
+
 
         return inFileHandler;
     }

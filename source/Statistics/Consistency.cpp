@@ -39,17 +39,17 @@ namespace statistics {
 #define LONG 80
 
 
-    void Consistency::perform(char *comparesetFilePath,
-                                        FormatHandling::FormatManager &formatManager,
-                                        trimAlManager &manager,
-                                        char *forceFile) {
+    bool Consistency::perform(char *comparesetFilePath,
+                              FormatHandling::FormatManager &formatManager,
+                              trimAlManager &manager,
+                              char *forceFile) {
 
-        char *line = new char[1024];
+        std::unique_ptr<char[]> line(new char[1024]);
 
         // Open the file that contains the paths of the files.
         std::ifstream compare;
         compare.open(comparesetFilePath, std::ifstream::in);
-        while (compare.getline(line, 1024)) numFiles++;
+        while (compare.getline(line.get(), 1024)) numFiles++;
         compare.close();
         compare.open(comparesetFilePath);
 
@@ -68,8 +68,6 @@ namespace statistics {
         // Check if they: are aligned and the type is the same
         // Store the maximum number of amino acids present on all alignments
         for (i = 0; i < numFiles; i++) {
-
-
             // Search for end of line.
             for (nline.clear(), compare.read(&c, 1);
                  (c != '\n') && ((!compare.eof()));
@@ -125,8 +123,7 @@ namespace statistics {
             delete[] compareAlignmentsArray;
             delete[] filesToCompare;
             delete[] values;
-            delete[] line;
-            exit(ErrorCode::ComparesetFailedAlignmentMissing);
+            return appearErrors;
         } else {
             int referFile = -1;
             // If no alignment is forced to be selected, select one of them
@@ -152,8 +149,8 @@ namespace statistics {
                     delete[] filesToCompare;
                     delete[] compareAlignmentsArray;
                     delete[] values;
-                    delete[] line;
-                    exit(-1);
+                    manager.appearErrors = true;
+                    return true;
                 }
 
                 // Specify the selected alignment as origAlig
@@ -181,8 +178,8 @@ namespace statistics {
                     delete[] filesToCompare;
                     delete[] compareAlignmentsArray;
                     delete[] values;
-                    delete[] line;
-                    exit(-1);
+                    manager.appearErrors = true;
+                    return true;
                 }
             }
 
@@ -209,8 +206,8 @@ namespace statistics {
                 delete[] filesToCompare;
                 delete[] compareAlignmentsArray;
                 delete[] values;
-                delete[] line;
-                exit(-1);
+                manager.appearErrors = true;
+                return appearErrors;
             }
 
             // If no output format is provided
@@ -228,8 +225,8 @@ namespace statistics {
             }
             delete[] filesToCompare;
             delete[] compareAlignmentsArray;
-            delete[] line;
         }
+        return appearErrors;
     }
 
 
@@ -529,7 +526,7 @@ namespace statistics {
 
         if (halfW > residues / 4) {
             debug.report(ErrorCode::ConsistencyWindowTooBig);
-            exit(-1);
+            return false;
         }
 
         // If the current half window is the same as the last one, don't do anything

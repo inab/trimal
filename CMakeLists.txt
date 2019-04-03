@@ -35,7 +35,7 @@ add_executable(readal
 
 # Add the executables to the project.
 add_executable(test
-        source/testMain.cpp
+        tests/testMain.cpp
         tests/catch.hpp
         source/trimalManager.cpp            # trimAl Manager
 
@@ -55,6 +55,8 @@ add_executable(test
 # Link the mathematical library to the targets
 target_link_libraries(trimal m)
 target_link_libraries(readal m)
+
+target_link_libraries(test stdc++fs)
 
 # Script that sets Release type to default and prints information on configuration
 include("./scripts/CMake/BuildTypeWrapper.cmake")

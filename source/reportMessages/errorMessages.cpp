@@ -129,7 +129,7 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
             "Combination between general and specific windows is not allowed"},
 
     {ErrorCode::CombinationAmongThresholdsMethods,
-            "Combination among thresholds are not allowed"},
+            "Combination of -ct + -cons + either -gt or -st is not allowed"},
 
     {ErrorCode::GeneralAndSpecificWindows,
             "General window (-w) is not compatible with specific window options: (-cw, -gw, -sw)"},
@@ -336,9 +336,6 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
             "[[tag]] Tried to prevent overriding file [tag] but found no luck adding suffixes.\n"
             "Overwritting file [tag]"
             "You should check your output folder."},
-    {ErrorCode::MoreThanOneAutomatedMethod,
-            "More than one automated method has been requested."},
-
     {ErrorCode::AbsoluteAndRelativeGapThreshold,
             "Combination among absolute (-gat) and relative (-gt) gap thresholds is not allowed."},
     {ErrorCode::AbsoluteGapThresholdLessThanZero,
@@ -348,5 +345,15 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
             "\tNumber of sequences: \"[tag]\".\n"
             "\tAbsolute Gap Threshold provided: \"[tag]\"."},
     {ErrorCode::AbsoluteGapThresholdNotRecognized,
-            "Absolute gap (-gat) not recognized"}
+            "Absolute gap (-gat) not recognized"},
+
+    {ErrorCode::MoreThanOneAutomatedMethod,
+            "More than one automated method has been requested."},
+
+    {ErrorCode::ForceSelectAndInArgumentsProvided,
+            "Arguments -in <x> and -forceselect <x> are incompatible"},
+
+    {ErrorCode::ComparesetAndInArgumentsProvided,
+            "Arguments -in <x> and -compareset <x> are incompatible"},
+
 };

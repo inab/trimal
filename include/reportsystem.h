@@ -227,6 +227,10 @@ enum ErrorCode {
     MoreThanOneAutomatedMethod                          = 111,
 
 
+    ForceSelectAndInArgumentsProvided                   = 108,
+    ComparesetAndInArgumentsProvided                   = 109,
+
+
     __MAXERROR,
 };
 
@@ -493,7 +497,6 @@ public:
             std::cout<<pf;
         return *this;
     }
-
 };
 
 }

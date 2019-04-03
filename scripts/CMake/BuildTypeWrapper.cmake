@@ -17,5 +17,5 @@ endif()
 
 string(TOLOWER "${CMAKE_BUILD_TYPE}" lower_build_type)
 if("${lower_build_type}" STREQUAL "debug")
-    set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wdouble-promotion -Wnull-dereference -Wimplicit-fallthrough=3")
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wdouble-promotion -Wnull-dereference -Wimplicit-fallthrough=3 -Winline")
 endif()
