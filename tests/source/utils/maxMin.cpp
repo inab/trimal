@@ -1,7 +1,7 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "cert-flp30-c"
 
-#include "../catch.hpp"
+#include "../../catch.hpp"
 #include "utils.h"
 
 TEST_CASE("maxmin", "[utils]") {

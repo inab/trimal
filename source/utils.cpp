@@ -61,19 +61,19 @@ namespace utils {
 
     int roundToInf(double number) {
 
-    //    return std::floor(number);
+        //    return std::floor(number);
         return ((int) number);
     }
 
     int roundInt(double number) {
 
-    //    return std::round(number);
+        //    return std::round(number);
         return ((int) ((double) number + 0.5));
     }
 
     int roundToSup(double number) {
 
-    //    return std::ceil(number);
+        //    return std::ceil(number);
         return ((int) ((double) number + 1.0));
     }
 
@@ -201,9 +201,8 @@ namespace utils {
     }
 
 
-
     void quicksort(int *vect, int ini, int fin) {
-    // NOTE Introspective sort seems better - JMaria
+        // NOTE Introspective sort seems better - JMaria
         int i, j, elem_div;
 
         if ((ini >= fin) || (fin < 0))
@@ -245,7 +244,7 @@ namespace utils {
     }
 
     void quicksort(int **vect, int ini, int fin) {
-    // NOTE Introspective sort seems better - JMaria
+        // NOTE Introspective sort seems better - JMaria
         float elem_div;
         int i, j;
 
@@ -318,8 +317,8 @@ namespace utils {
 
         /* Store first line found. For -Windows & MacOS compatibility- carriage return
         * is considered as well as a new line character */
-    //    for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
-    //        nline.resize(nline.size() + 1, c);
+        //    for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
+        //        nline.resize(nline.size() + 1, c);
         getline(file, nline);
 
         // Remove blank spaces & tabs from the beginning of the line
@@ -362,8 +361,8 @@ namespace utils {
 
         /* Store first line found. For -Windows & MacOS compatibility- carriage return
         * is considered as well as a new line character */
-    //    for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
-    //        nline.resize(nline.size() + 1, c);
+        //    for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
+        //        nline.resize(nline.size() + 1, c);
         getline(file, nline);
         /* Remove blank spaces & tabs from the beginning of the line */
 
@@ -497,21 +496,19 @@ namespace utils {
     }
 
 
-    int checkAlignmentType(int seqNumber, int residNumber, std::string * sequences) {
+    int checkAlignmentType(int seqNumber, int residNumber, std::string *sequences) {
         // All codes from RNA - DNA - AA and DEG for both versions
 
         static const auto check =
-            [](const std::string& pattern,
-               int& counter,
-               const char& character) -> void
-            {
-                size_t pos(0);
-                while ((pos = pattern.find(character, pos)) != std::string::npos )
-                {
-                    pos++;
-                    counter++;
-                }
-            };
+                [](const std::string &pattern,
+                   int &counter,
+                   const char &character) -> void {
+                    size_t pos(0);
+                    while ((pos = pattern.find(character, pos)) != std::string::npos) {
+                        pos++;
+                        counter++;
+                    }
+                };
 
         // Inosinic Acid is a nucleotide, but it's not part of DNA or RNA
         static const std::string COMMON = "ACG";
@@ -536,20 +533,19 @@ namespace utils {
                 check(DEG_AA, deg_aa, c);
 
                 size_t pos(0);
-                while ((pos = COMMON.find(c, pos)) != std::string::npos )
-                {
+                while ((pos = COMMON.find(c, pos)) != std::string::npos) {
                     pos++;
-                    aa++; rna++; dna++;
+                    aa++;
+                    rna++;
+                    dna++;
                 }
             }
         }
 
-        if (aa > dna && aa > rna)
-        {
+        if (aa > dna && aa > rna) {
             return SequenceTypes::AA | (deg_aa > 0 ? SequenceTypes::DEG : SequenceTypes::NotDefined);
         }
-        if (dna > rna)
-        {
+        if (dna > rna) {
             return SequenceTypes::DNA | (deg_nn > 0 ? SequenceTypes::DEG : SequenceTypes::NotDefined);
         }
         return SequenceTypes::RNA | (deg_nn > 0 ? SequenceTypes::DEG : SequenceTypes::NotDefined);
@@ -658,9 +654,15 @@ namespace utils {
             }
 
             if (numbers[i - 2] < 0)
+            {
+                delete [] numbers;
                 return nullptr;
+            }
             if (numbers[i - 1] < numbers[i - 2])
+            {
+                delete [] numbers;
                 return nullptr;
+            }
             if (comma == (int) std::string::npos)
                 break;
 
@@ -670,7 +672,7 @@ namespace utils {
     }
 
 
-    char determineColor(char res, const std::string& column) {
+    char determineColor(char res, const std::string &column) {
 
         if (toupper(res) == 'G')
             return 'o';
@@ -788,7 +790,7 @@ namespace utils {
     }
 
 
-    bool lookForPattern(const std::string& data, const std::string& pattern, const float threshold) {
+    bool lookForPattern(const std::string &data, const std::string &pattern, const float threshold) {
 
         float count = 0;
         int i, j;
@@ -806,8 +808,8 @@ namespace utils {
     }
 
     void ReplaceStringInPlace(std::string &subject,
-                                    const std::string &search,
-                                    const std::string &replace) {
+                              const std::string &search,
+                              const std::string &replace) {
         size_t pos = 0;
         while ((pos = subject.find(search, pos)) != std::string::npos) {
             subject.replace(pos, search.length(), replace);
@@ -816,8 +818,8 @@ namespace utils {
     }
 
     std::string ReplaceString(std::string subject,
-                                    const std::string &search,
-                                    const std::string &replace) {
+                              const std::string &search,
+                              const std::string &replace) {
         size_t pos = 0;
         while ((pos = subject.find(search, pos)) != std::string::npos) {
             subject.replace(pos, search.length(), replace);
@@ -825,8 +827,6 @@ namespace utils {
         }
         return subject;
     }
-
-
 
 
     int GetGapStep(int *gapValue, int sequenNumber) {
@@ -947,35 +947,33 @@ namespace utils {
 
     bool fileExists(std::string &path) {
         struct stat buffer;
-        return (stat (path.c_str(), &buffer) == 0);
-
-        
+        return (stat(path.c_str(), &buffer) == 0);
     }
 
     bool fileExists(std::string &&path) {
         struct stat buffer;
-        return (stat (path.c_str(), &buffer) == 0);
+        return (stat(path.c_str(), &buffer) == 0);
     }
 
     char toUpper(char c) {
         if (c >= 'a' and c <= 'z')
-            return (char) (c & (~(1<<5)));
+            return (char) (c & (~(1 << 5)));
         return c;
     }
 
     namespace TerminalColors {
         std::map<terminalColor, const std::string> colors = {
-                {TerminalColors::RESET,        "\033[0m"},
-                {TerminalColors::BLACK,        "\033[30m"},         /* Black      */
-                {TerminalColors::RED,          "\033[31m"},         /* Red        */
-                {TerminalColors::GREEN,        "\033[32m"},         /* Green      */
-                {TerminalColors::YELLOW,       "\033[33m"},         /* Yellow     */
-                {TerminalColors::BLUE,         "\033[34m"},         /* Blue       */
-                {TerminalColors::MAGENTA,      "\033[35m"},         /* Magenta    */
-                {TerminalColors::CYAN,         "\033[36m"},         /* Cyan       */
-                {TerminalColors::WHITE,        "\033[37m"},         /* White      */
-                {TerminalColors::BOLD,         "\033[1m"},          /* Bold Black */
-                {TerminalColors::UNDERLINE,    "\033[4m"}           /* Underline  */
+                {TerminalColors::RESET,     "\033[0m"},
+                {TerminalColors::BLACK,     "\033[30m"},         /* Black      */
+                {TerminalColors::RED,       "\033[31m"},         /* Red        */
+                {TerminalColors::GREEN,     "\033[32m"},         /* Green      */
+                {TerminalColors::YELLOW,    "\033[33m"},         /* Yellow     */
+                {TerminalColors::BLUE,      "\033[34m"},         /* Blue       */
+                {TerminalColors::MAGENTA,   "\033[35m"},         /* Magenta    */
+                {TerminalColors::CYAN,      "\033[36m"},         /* Cyan       */
+                {TerminalColors::WHITE,     "\033[37m"},         /* White      */
+                {TerminalColors::BOLD,      "\033[1m"},          /* Bold Black */
+                {TerminalColors::UNDERLINE, "\033[4m"}           /* Underline  */
 
         };
     }

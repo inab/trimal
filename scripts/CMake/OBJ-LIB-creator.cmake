@@ -27,9 +27,10 @@ set(reportSystemFiles
 FILE (GLOB FormatHandlerFiles
         source/FormatHandling/*_state.cpp)
 
-FILE (GLOB tests
-        tests/*.cpp
-        tests/*/*.cpp)
+FILE (GLOB_RECURSE tests
+        tests/testingUtils/*.cpp
+        tests/source/*.cpp
+        )
 
 # Create object libraries - This allows the system to reuse the same code for all targets
 # They are splitted so they can be recompiled modularly an reduce recompilation time on change

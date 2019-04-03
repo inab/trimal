@@ -1,4 +1,4 @@
-#include "../catch.hpp"
+#include "../../catch.hpp"
 #include "utils.h"
 #include "random"
 

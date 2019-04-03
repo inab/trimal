@@ -37,6 +37,14 @@
 #include "reportsystem.h"
 #include "Cleaner.h"
 #include "utils.h"
+#include "Statistics/Similarity.h"
+#include "Statistics/Consistency.h"
+#include "InternalBenchmarker.h"
+#include "Statistics/Manager.h"
+#include "Alignment/sequencesMatrix.h"
+#include "reportsystem.h"
+#include "Cleaner.h"
+#include "utils.h"
 
 Alignment::Alignment() {
     // Create a timer that will report times upon its destruction
@@ -615,14 +623,14 @@ bool Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignStopCodon, 
                     (aminoAcid == 'X') || (aminoAcid == 'B'))
                     continue;
 
-                    // If split_by_stop_codon flag is activated then cut input CDS sequence
-                    // up to first appearance of a stop codon
+                // If split_by_stop_codon flag is activated then cut input CDS sequence
+                // up to first appearance of a stop codon
                 else if (splitByStopCodon) {
                     warning = true;
                     debug.report(InfoCode::CuttingSequence, new std::string[5]{seqsName[i], "TGA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
                     sequences[i].resize(found);
                 }
-                    // Otherwise, warn about it and return an error
+                // Otherwise, warn about it and return an error
                 else {
                     debug.report(ErrorCode::SequenceHasStopCodon, new std::string[5]{seqsName[i], "TGA", std::to_string(aminoAcid), std::to_string(found + 1), std::to_string(sequences[i].length())});
                     deletePrepareCodingVariables()

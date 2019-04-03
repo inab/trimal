@@ -2,7 +2,7 @@
 // Created by vfernandez on 05/03/19.
 //
 
-#include "../catch.hpp"
+#include "../../catch.hpp"
 #include "utils.h"
 
 TEST_CASE("sandbox","[.][sandbox][utils]")

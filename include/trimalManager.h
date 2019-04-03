@@ -16,6 +16,14 @@
 #include <cstring>
 #include <iosfwd>
 #include <string>
+#include <functional>
+
+//#include "../tests/catch.hpp";
+
+namespace Catch
+{
+    struct SectionInfo;
+}
 
 
 // Forward declatarion
@@ -29,9 +37,11 @@ namespace statistics
 class trimAlManager
 {
 public:
+
+    friend struct Catch::SectionInfo;
+
     std::vector<std::string> * vcfs = nullptr;
-    
-    
+
     bool 
         appearErrors        = false,
 
@@ -136,56 +146,66 @@ public:
 public:
     trimAlManager();
     ~trimAlManager();
-    void parseArguments(int argc, char *argv[]);
+    int parseArguments(int argc, char **argv);
+
+    enum argumentReport {
+        NotRecognized   = 0,
+        Recognized      = 1,
+        Errored         = 2,
+        Final           = 3
+    };
+
 private: // Parse Arguments Methods
+
+
         void verbosity_argument             (const int* argc, char* argv[]);
         
-        void help_arguments                 (const int *argc, char* argv[], int *currentArg);
+        argumentReport help_arguments(const int *argc, char **argv, int *currentArg);
 
-        bool in_argument                    (const int* argc, char* argv[], int* currentArg);
-        bool vcf_argument                   (const int* argc, char* argv[], int* currentArg);
-        bool out_argument                   (const int* argc, char* argv[], int* currentArg);
-        bool html_out_argument              (const int* argc, char* argv[], int* currentArg);
-        bool timetracker_out_argument       (const int* argc, char* argv[], int* currentArg);
-        bool svg_out_argument               (const int* argc, char* argv[], int* currentArg);
-        bool svg_stats_argument             (const int* argc, char* argv[], int* currentArg);
-        bool out_format_arguments           (const int* argc, char* argv[], int* currentArg);
-        bool matrix_argument                (const int* argc, char* argv[], int* currentArg);
-        bool compareset_argument            (const int* argc, char* argv[], int* currentArg);
-        bool force_select_argument          (const int* argc, char* argv[], int* currentArg);
-        bool back_trans_argument            (const int* argc, char* argv[], int* currentArg);
-        bool gap_threshold_argument         (const int* argc, char* argv[], int* currentArg);
-        bool similarity_threshold_argument  (const int* argc, char* argv[], int* currentArg);
-        bool consistency_threshold_argument (const int* argc, char* argv[], int* currentArg);
-        bool conservation_threshold_argument(const int* argc, char* argv[], int* currentArg);
-        bool select_cols_argument           (const int* argc, char* argv[], int* currentArg);
-        bool no_gaps_argument               (const int* argc, char* argv[], int* currentArg);
-        bool no_all_gaps_argument           (const int* argc, char* argv[], int* currentArg);
-        bool keep_seqs_argument             (const int* argc, char* argv[], int* currentArg);
-        bool keep_header_argument           (const int* argc, char* argv[], int* currentArg);
-        bool gappy_out_argument             (const int* argc, char* argv[], int* currentArg);
-        bool strict_argument                (const int* argc, char* argv[], int* currentArg);
-        bool strict_plus_argument           (const int* argc, char* argv[], int* currentArg);
-        bool automated1_argument            (const int* argc, char* argv[], int* currentArg);
-        bool residue_overlap_argument       (const int* argc, char* argv[], int* currentArg);
-        bool sequence_overlap_argument      (const int* argc, char* argv[], int* currentArg);
-        bool seqs_select_argument           (const int* argc, char* argv[], int* currentArg);
-        bool max_identity_argument          (const int* argc, char* argv[], int* currentArg);
-        bool clusters_argument              (const int* argc, char* argv[], int* currentArg);
-        bool terminal_only_argument         (const int* argc, char* argv[], int* currentArg);
-        bool window_argument                (const int* argc, char* argv[], int* currentArg);
-        bool gap_window_argument            (const int* argc, char* argv[], int* currentArg);
-        bool similarity_window_argument     (const int* argc, char* argv[], int* currentArg);
-        bool consistency_window_argument    (const int* argc, char* argv[], int* currentArg);
-        bool block_argument                 (const int* argc, char* argv[], int* currentArg);
-        bool stats_arguments                (const int* argc, char* argv[], int* currentArg);
-        bool complementary_argument         (const int* argc, char* argv[], int* currentArg);
-        bool col_numbering_argument         (const int* argc, char* argv[], int* currentArg);
-        bool split_by_stop_codon_argument   (const int* argc, char* argv[], int* currentArg);
-        bool ignore_stop_codon_argument     (const int* argc, char* argv[], int* currentArg);
-        bool ignore_filter_argument         (const int* argc, char* argv[], int* currentArg);
-        bool min_quality_argument           (const int* argc, char* argv[], int* currentArg);
-        bool min_coverage_argument          (const int* argc, char* argv[], int* currentArg);
+        argumentReport in_argument                    (const int* argc, char* argv[], int* currentArg);
+        argumentReport vcf_argument                   (const int* argc, char* argv[], int* currentArg);
+        argumentReport out_argument                   (const int* argc, char* argv[], int* currentArg);
+        argumentReport html_out_argument              (const int* argc, char* argv[], int* currentArg);
+        argumentReport timetracker_out_argument       (const int* argc, char* argv[], int* currentArg);
+        argumentReport svg_out_argument               (const int* argc, char* argv[], int* currentArg);
+        argumentReport svg_stats_argument             (const int* argc, char* argv[], int* currentArg);
+        argumentReport out_format_arguments           (const int* argc, char* argv[], int* currentArg);
+        argumentReport matrix_argument                (const int* argc, char* argv[], int* currentArg);
+        argumentReport compareset_argument            (const int* argc, char* argv[], int* currentArg);
+        argumentReport force_select_argument          (const int* argc, char* argv[], int* currentArg);
+        argumentReport back_trans_argument            (const int* argc, char* argv[], int* currentArg);
+        argumentReport gap_threshold_argument         (const int* argc, char* argv[], int* currentArg);
+        argumentReport similarity_threshold_argument  (const int* argc, char* argv[], int* currentArg);
+        argumentReport consistency_threshold_argument (const int* argc, char* argv[], int* currentArg);
+        argumentReport conservation_threshold_argument(const int* argc, char* argv[], int* currentArg);
+        argumentReport select_cols_argument           (const int* argc, char* argv[], int* currentArg);
+        argumentReport no_gaps_argument               (const int* argc, char* argv[], int* currentArg);
+        argumentReport no_all_gaps_argument           (const int* argc, char* argv[], int* currentArg);
+        argumentReport keep_seqs_argument             (const int* argc, char* argv[], int* currentArg);
+        argumentReport keep_header_argument           (const int* argc, char* argv[], int* currentArg);
+        argumentReport gappy_out_argument             (const int* argc, char* argv[], int* currentArg);
+        argumentReport strict_argument                (const int* argc, char* argv[], int* currentArg);
+        argumentReport strict_plus_argument           (const int* argc, char* argv[], int* currentArg);
+        argumentReport automated1_argument            (const int* argc, char* argv[], int* currentArg);
+        argumentReport residue_overlap_argument       (const int* argc, char* argv[], int* currentArg);
+        argumentReport sequence_overlap_argument      (const int* argc, char* argv[], int* currentArg);
+        argumentReport seqs_select_argument           (const int* argc, char* argv[], int* currentArg);
+        argumentReport max_identity_argument          (const int* argc, char* argv[], int* currentArg);
+        argumentReport clusters_argument              (const int* argc, char* argv[], int* currentArg);
+        argumentReport terminal_only_argument         (const int* argc, char* argv[], int* currentArg);
+        argumentReport window_argument                (const int* argc, char* argv[], int* currentArg);
+        argumentReport gap_window_argument            (const int* argc, char* argv[], int* currentArg);
+        argumentReport similarity_window_argument     (const int* argc, char* argv[], int* currentArg);
+        argumentReport consistency_window_argument    (const int* argc, char* argv[], int* currentArg);
+        argumentReport block_argument                 (const int* argc, char* argv[], int* currentArg);
+        argumentReport stats_arguments                (const int* argc, char* argv[], int* currentArg);
+        argumentReport complementary_argument         (const int* argc, char* argv[], int* currentArg);
+        argumentReport col_numbering_argument         (const int* argc, char* argv[], int* currentArg);
+        argumentReport split_by_stop_codon_argument   (const int* argc, char* argv[], int* currentArg);
+        argumentReport ignore_stop_codon_argument     (const int* argc, char* argv[], int* currentArg);
+        argumentReport ignore_filter_argument         (const int* argc, char* argv[], int* currentArg);
+        argumentReport min_quality_argument           (const int* argc, char* argv[], int* currentArg);
+        argumentReport min_coverage_argument          (const int* argc, char* argv[], int* currentArg);
 
 public:
     bool processArguments(char* argv[]);
@@ -222,6 +242,7 @@ private: // Process Arguments Methods
         bool check_backtranslation_infile_names_correspondence();
         void check_compareset_window_argument();
         void check_output_format();
+        void check_thresholds_dependencies();
 
 public:
     int perform();
@@ -254,7 +275,36 @@ private: // General, private, methods
 
 private:
     FormatHandling::FormatManager formatManager;
+public:
+    FormatHandling::FormatManager& getFormatManager();
+
+
+public:
+
+    // Used for testing to allow exposing private methods and variables
+    // Each implementation of access_by contains different methods and variables.
+    // This structs can access all private methods of trimAlManager
+    //
+    // Original implementation: https://softwareengineering.stackexchange.com/a/257721
+    template <uint T> struct access_by;
+    template <uint T> friend struct access_by;
+
+// Defines to simplify the creation and usage of access_by structs
+
+// Takes one argument, a const char * that will be used as UUID
+// This const char * is converted to a hash using a hasher (hasher.h) in compile time
+// Then, the struct must be defined. In the method definitions of the struct,
+//      we can access the private methods and variables of trimAlManager
+#define trimAlManagerPrivateExposerCreator(TOKEN) template <> struct trimAlManager::access_by< TOKEN""_hash>
+
+// Allows the easy access to access_by structs.
+// This structs can access all private methods of trimAlManager
+// It allows to create an instance of the struct: trimAlManagerPrivateExposerCaller(X)().call()
+// It also allows to access the struct statically: trimAlManagerPrivateExposerCaller(X)::call()
+#define trimAlManagerPrivateExposerCaller(TOKEN) trimAlManager::access_by<TOKEN""_hash>
+
 };
+
 
 
 

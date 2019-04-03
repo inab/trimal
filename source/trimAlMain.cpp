@@ -51,7 +51,10 @@ int main(int argc, char *argv[]) {
         // Create trimAl Manager
         trimAlManager trimAl;
 
-        trimAl.parseArguments(argc, argv);
+        returnValue = trimAl.parseArguments(argc, argv);
+
+        if (returnValue == trimAlManager::Final | returnValue == trimAlManager::Errored)
+            exit(0);
 
         // Process them: Incompatibilities and co-dependencies
         trimAl.processArguments(argv);

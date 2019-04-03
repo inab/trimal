@@ -129,7 +129,7 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
             "Combination between general and specific windows is not allowed"},
 
     {ErrorCode::CombinationAmongThresholdsMethods,
-            "Combination among thresholds are not allowed"},
+            "Combination of -ct + -cons + either -gt or -st is not allowed"},
 
     {ErrorCode::GeneralAndSpecificWindows,
             "General window (-w) is not compatible with specific window options: (-cw, -gw, -sw)"},
@@ -338,4 +338,10 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
             "You should check your output folder."},
     {ErrorCode::MoreThanOneAutomatedMethod,
             "More than one automated method has been requested."},
+
+    {ErrorCode::ForceSelectAndInArgumentsProvided,
+            "Arguments -in <x> and -forceselect <x> are incompatible"},
+
+    {ErrorCode::ComparesetAndInArgumentsProvided,
+            "Arguments -in <x> and -compareset <x> are incompatible"},
 };
