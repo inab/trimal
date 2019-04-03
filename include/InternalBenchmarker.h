@@ -47,7 +47,7 @@ typedef std::chrono::time_point<std::chrono::high_resolution_clock> time_point;
 #define StartTiming(name) auto macroCustomTimer = timerFactory.getTimer(LOCATION)
 #else
 // In case we don't want extended names, we use the pretty_function name
-#define StartTiming(name) auto macroCustomTimer = timerFactory.getTimer(__FILE__)
+#define StartTiming(name) auto macroCustomTimer = timerFactory.getTimer(__PRETTY_FUNCTION__)
 #endif
 
 #else
