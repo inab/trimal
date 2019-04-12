@@ -51,6 +51,7 @@ add_executable(test
         $<TARGET_OBJECTS:CatchOBJLib>
         $<TARGET_OBJECTS:TestsOBJLib>
         )
+SET_TARGET_PROPERTIES(test PROPERTIES EXCLUDE_FROM_ALL True)
 
 # Link the mathematical library to the targets
 target_link_libraries(trimal m)

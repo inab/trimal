@@ -55,4 +55,6 @@ add_library(InternalBenchmarkOBJLib OBJECT source/InternalBenchmarker.cpp)
 add_library(CatchOBJLib             OBJECT tests/catch.hpp)
 # Tests
 add_library(TestsOBJLib             OBJECT ${tests})
+SET_TARGET_PROPERTIES(CatchOBJLib PROPERTIES EXCLUDE_FROM_ALL True)
+SET_TARGET_PROPERTIES(TestsOBJLib PROPERTIES EXCLUDE_FROM_ALL True)
 
