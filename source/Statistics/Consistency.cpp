@@ -1,28 +1,31 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+/* *****************************************************************************
 
-    trimAl v1.4: a tool for automated alignment trimming in large-scale
+    trimAl v2.0: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
-              [scapella, tgabaldon]@crg.es
+    readAl v2.0: a tool for automated alignment conversion among different
+                 formats.
 
-    This file is part of trimAl.
+    2009-2019
+        Fernandez-Rodriguez V.  (victor.fernandez@bsc.es)
+        Capella-Gutierrez S.    (salvador.capella@bsc.es)
+        Gabaldon, T.            (tgabaldon@crg.es)
 
-    trimAl is free software: you can redistribute it and/or modify
+    This file is part of trimAl/readAl.
+
+    trimAl/readAl are free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, the last available version.
 
-    trimAl is distributed in the hope that it will be useful,
+    trimAl/readAl are distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with trimAl. If not, see <http://www.gnu.org/licenses/>.
+    along with trimAl/readAl. If not, see <http://www.gnu.org/licenses/>.
 
-***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
-***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+***************************************************************************** */
 
 #include "Alignment/sequencesMatrix.h"
 #include "Statistics/Consistency.h"

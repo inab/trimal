@@ -1,17 +1,15 @@
-/* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
-   ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
+/* *****************************************************************************
 
-    trimAl v1.4: a tool for automated Alignment trimming in large-scale
+    trimAl v2.0: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    readAl v1.4: a tool for automated Alignment conversion among different
+    readAl v2.0: a tool for automated alignment conversion among different
                  formats.
 
-    statAl v1.4: a tool for getting stats about multiple sequence newAlignments.
-
-
-    2009-2012 Capella-Gutierrez S. and Gabaldon, T.
-              [scapella, tgabaldon]@crg.es
+    2009-2019
+        Fernandez-Rodriguez V.  (victor.fernandez@bsc.es)
+        Capella-Gutierrez S.    (salvador.capella@bsc.es)
+        Gabaldon, T.            (tgabaldon@crg.es)
 
     This file is part of trimAl/readAl.
 
@@ -27,8 +25,7 @@
     You should have received a copy of the GNU General Public License
     along with trimAl/readAl. If not, see <http://www.gnu.org/licenses/>.
 
-***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
-***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+***************************************************************************** */
 #include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
 #include "InternalBenchmarker.h"
