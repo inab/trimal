@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
   ## Set a counter to control how many attempts are done for generating the
   ## random alignment
-  max = 0
+  max_attempts = 0
   while True:
 
     while len(selected_seqs) < args.numb_sequences:
@@ -122,12 +122,11 @@ if __name__ == "__main__":
       len(selected_cols) == args.numb_residues:
       break
 
-    max += 1
-    if max == args.attempts:
+    max_attempts += 1
+    if max_attempts == args.attempts:
       sys.exit(("ERROR: Impossible to generate random alignment after '%s' "
         + "attempts. Check configuration") % (args.attempts))
-      
-
+  
   ## Produce the output aligment.
   n = 1
   ofile = open(args.outFile, "w") if args.outFile else sys.stdout
