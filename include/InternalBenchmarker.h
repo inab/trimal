@@ -32,7 +32,7 @@
 
 //#define TimingReport true
 
-#define BenchmarkTimes true
+#define BenchmarkTimes false
 #define BenchmarkMemory false
 /// Macro only valid if compiling with GCC
 #define BenchmarkingExtendedNames true
