@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.13.3)
 
 
 # Create a header that includes all the ReadWrite States headers

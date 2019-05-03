@@ -716,52 +716,6 @@ namespace utils {
                     else if (lookForPattern(column, "c", 0.85)) return 'p';
                     else return 'w';
 
-<<<<<<< HEAD
-char* utils::readLine(ifstream &file) {
-  /* Read a new line from current input stream. This function is better than
-   * standard one since cares of operative system compability. It is useful
-   * as well because remove tabs and blank spaces at lines beginning/ending */
-
-  int state;
-  char c = ' ';
-  string nline;
-  static char *line = NULL;
-
-  /* Check it the end of the file has been reached or not */
-  if(file.eof())
-    return NULL;
-
-  /* Store first line found. For -Windows & MacOS compatibility- carriage return
-   * is considered as well as a new line character */
-      for( ; (c != '\n') && ((!file.eof())); file.read(&c, 1))
-        if ((c != '\r'))
-            nline.resize(nline.size() + 1, c);
-
-  /* Remove blank spaces & tabs from the beginning of the line */
-  state = nline.find(" ", 0);
-  while(state != (int) string::npos && state == 0) {
-    nline.erase(state, 1);
-    state = nline.find(" ", state);
-  }
-
-  state = nline.find("\t", 0);
-  while(state != (int) string::npos && state == 0) {
-    nline.erase(state, 1);
-    state = nline.find("\t", state);
-  }
-
-  /* If there is nothing to return, give back a NULL pointer ... */
-  if(nline.size() == 0)
-    return NULL;
-
-  /* Otherwise, initialize the appropiate data structure,
-   * dump the data and return it */
-  line = new char[nline.size() + 1];
-  strcpy(line, nline.c_str());
-  return line;
-}
-=======
->>>>>>> 399d205f053b12b1e6daae8f5f694eb0aa615266
 
 
                     // (K, R): {60%, kr}{85%, q}
