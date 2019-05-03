@@ -1,0 +1,14 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection MaxIdentity Max Identity
+
+Max Identity allows us to remove sequences with an identity\n 
+bigger than a user-provided threshold. \n 
+
+This removes the sequences that are too similar.
+
+@buttonWithExpandableDiv{identity2,Max Identity 0.2,@htmlinclude 06_identity2.svg}
+@buttonWithExpandableDiv{identity8,Max Identity 0.8,@htmlinclude 06_identity8.svg}
+
+
+**/

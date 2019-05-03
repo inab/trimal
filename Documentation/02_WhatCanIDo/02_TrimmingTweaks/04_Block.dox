@@ -1,0 +1,15 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection Block Block
+
+Block argument allows to clean the alignment using different methods, \n
+and later keep only residues that fall inside a keep-residues block of \n
+the specified number of residues.\n
+
+This allows us to remove columns that obtained good scores by random chance.
+
+@buttonWithExpandableDiv{b1,Strict Block 1,@htmlinclude 04_b1.svg}
+@buttonWithExpandableDiv{b2,Strict Block 2,@htmlinclude 04_b2.svg}
+@buttonWithExpandableDiv{b4,Strict Block 4,@htmlinclude 04_b4.svg}
+
+**/

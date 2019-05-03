@@ -1,0 +1,12 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection MetaAutomated Meta Automated Methods
+	
+Meta Automated methods analyze your alignment to decide between automated statistical methods.\n 
+Currently, only Automated1 is available, and it will analyze your MSA and select between Strict and Gappyout\n
+
+| Method     | Description                                                                                                         | Example of use                                                |
+|------------|---------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|
+| Automated1 | Chooses between Strict and Gappyout \n <i> Optimized for Maximum Likelihood phylogenetic tree reconstruction </i>   | bin/trimal -in dataset/example.007.AA.fasta -automated1       |
+
+*/

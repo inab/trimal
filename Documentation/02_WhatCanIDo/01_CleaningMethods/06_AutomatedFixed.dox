@@ -1,0 +1,16 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection Automated-gap Automated Methods
+
+Automated methods will remove columns based on raw gaps values.\n
+
+| Method    | Description                                      | Example of use                                                |
+|---------- |--------------------------------------------------|---------------------------------------------------------------|
+| NoGaps    | Removes any column containing at least, one gap  | bin/trimal -in dataset/example.007.AA.fasta -nogaps           |
+| NoAllGaps | Removes columns containing only gaps             | bin/trimal -in dataset/example.007.AA.fasta -noallgaps        |
+
+@buttonWithExpandableDiv{nogaps,No Gaps,@htmlinclude 06_nogaps.svg }
+@buttonWithExpandableDiv{noallgaps,No All Gaps,@htmlinclude 06_noallgaps.svg }
+
+
+*/

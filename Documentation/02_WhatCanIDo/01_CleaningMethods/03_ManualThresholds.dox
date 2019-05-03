@@ -1,0 +1,19 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection ManualThresholds Manual Threshold Methods
+
+Manual Threshold methods allow the user to provide thresholds and windows for each statistic available.\n
+It also allows the user to obtain the raw values for each statistic, per column and accumulative.\n
+
+| Statistic \n Name | Threshold \n Argument  | Window \n Argument        | Statistic \n Per Colum \n Argument  | Statistic \n Accumulative \n Argument  | Example \n of use                                                |
+|-------------------|------------------------|---------------------------|-------------------------------------|----------------------------------------|------------------------------------------------------------------|
+| Gaps              | -gt \<n> [0 - 1]       | -gw \<n> [0 - 1/4*N]      | -sgc                                | -sgt                                   | bin/trimal -in dataset/example.007.AA.fasta -gt 0.5 -gw 2        |
+| Similarity        | -st \<n> [0 - 1]       | -sw \<n> [0 - 1/4*N]      | -ssc                                | -sst                                   | bin/trimal -in dataset/example.007.AA.fasta -st 0.5 -sw 2        |
+| Consistency       | -ct \<n> [0 - 1]       | -cw \<n> [0 - 1/4*N]      | -sfc                                | -sft                                   | bin/trimal -compareset data -ct 0.5 -cw 2                        |
+*N = Number of residues in the input alignment
+
+@buttonWithExpandableDiv{GT,Gaps (0.5) Threshold,@htmlinclude 03_gt05.svg }
+@buttonWithExpandableDiv{ST,Sim (0.5) Threshold,@htmlinclude 03_st05.svg }
+@buttonWithExpandableDiv{ST-GT,Gaps (1) and Sim (0.5) Thresholds,@htmlinclude 03_st05gt1.svg }
+
+*/

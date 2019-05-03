@@ -1,0 +1,23 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection Conserve Minimum Alignment Conservation Threshold
+
+It is possible, depending on the MSA provided and the trimming methods selected \n 
+to trim the MSA in a excessively aggresive way. \n 
+
+This may lead to a MSA with few or no residues.
+
+To solve this issue, one of the solutions proposed is to conserve \n 
+a minimum percentage of the alignment.
+
+To do so, the alignment will start on the center of the alignment,\n 
+which is supposed to be better aligned than the terminal ends, and \n 
+starts recovering residues in both directions until the desired \n 
+Minimum %Alignment Conservation Threshold has been achieved.
+
+@buttonWithExpandableDiv{alig00,Sim Threshold 0.99 Cons 0,@htmlinclude 08_aligconserv0.svg}
+@buttonWithExpandableDiv{alig40,Sim Threshold 0.99 Cons 40,@htmlinclude 08_aligconserv40.svg}
+@buttonWithExpandableDiv{alig60,Sim Threshold 0.99 Cons 60,@htmlinclude 08_aligconserv60.svg}
+@buttonWithExpandableDiv{alig80,Sim Threshold 0.99 Cons 80,@htmlinclude 08_aligconserv80.svg}
+
+**/

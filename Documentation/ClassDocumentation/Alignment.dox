@@ -1,0 +1,321 @@
+/**
+\class Alignment
+\brief Class containing an alignment\n
+ This class stores the alignment sequences with it's names, residues and extra information.\n
+ It contains multiple methods regarding the sequences.\n
+ It also contains submodules that provide methods for<b> Calculating statistics</b>,
+ <b> Trim the alignment</b> and<b> Printing sequences information</b>.
+ */
+ 
+/**
+\var Alignment::Cleaning
+\brief Trimming submodule.\n
+It contains methods and variables related to trimming.
+*/
+    
+/** 
+\var Alignment::Statistics
+\brief Statistics submodule.\n
+It contains methods and variables related to statistics calculation and reporting.
+*/
+    
+/**
+\var Alignment::SequencesMatrix
+\brief SequencesMatrix submodule\n
+ This helper module stores the sequences without gaps.
+ Useful when comparing MSA
+*/
+
+/**
+\var Alignment::numberOfSequences
+\brief Number of sequences present on the alignment.
+*/
+
+/**
+\var Alignment::numberOfResidues
+\brief Number of residues present on the alignment if it is aligned.
+*/
+
+/**
+\var Alignment::isAligned
+\brief Flag that indicates if all sequences on the alignment have the same length (Including gaps).
+*/
+
+/**
+\var Alignment::dataType
+\brief Flag variable that represents the type of the alignment.
+*/
+
+/**
+\var Alignment::sequences
+\brief Vector containing the sequences.
+*/
+
+/**
+\var Alignment::seqsName
+\brief String vector containing the sequences names.
+*/
+
+/**
+\var Alignment::seqsInfo
+\brief Vector containing extra information about each sequence.
+*/
+
+/**
+\var Alignment::filename
+\brief Filename where this alignment was loaded from.
+*/
+
+/**
+\var Alignment::alignmentInfo
+\brief String containing information of the alignment as a whole.
+*/
+
+/**
+\var Alignment::identities
+\brief 2D Matrix that represents how much each sequence resembles other sequences in the same MSA
+
+ Identity score between two sequences is the ratio of identical residues
+ by the total length (common and no-common residues) among them.
+*/
+    
+/**
+\var Alignment::saveResidues
+\brief Vector containing which residues will be kept/removed.\n
+-1 Indicates a 'removed/toRemove'. Otherwise residue/column will be kept
+*/
+    
+/**
+\var Alignment::saveSequences
+\brief Vector containing which sequences will be kept/removed.\n
+-1 Indicates a 'removed/toRemove'. Otherwise sequence will be kept
+*/
+
+/**
+\var Alignment::SeqRef
+\brief Pointer to keep a count of how many alignments depend on the same shared-sequences.\n
+ Increased on each trim step, and automatically reduced on each alignment destroy.\n
+ If it arrives to 0, the last alignment being destroyed will also take care of releasing memory for shared information.
+*/
+
+/**
+\var Alignment::originalNumberOfSequences
+\brief Number of sequences the alignment had when it was loaded.
+*/
+
+/**
+\var Alignment::originalNumberOfResidues
+\brief Number of residues the alignment had when it was loaded.
+*/
+
+/**
+\var Alignment::overlaps
+\brief Matrix that stores the overlap between sequences of an alignment.
+ See Alignment::calculateSeqOverlap
+*/
+
+/**
+\fn Alignment::fillMatrices(bool aligned)
+\brief Method to initialize matrices and check if the sequences have been correctly loaded and are free of errors\n
+It checks if sequences contain unknown characters,
+sets the isAligned flag and initializes 'saveResidues' and 'saveSequences',
+depending on the sizes of the sequences (whether or not they have the same length).
+\param aligned Flag to make the method check if the alignment is aligned or not.
+\note Even with the aligned flag set to false, if the alignment is aligned it will initialize the variables 'saveResidues' and 'saveSequences', allowing the alignment to be trimmed.
+\return 
+    \b True if the alignment information was ok. \n
+    \b False if there was a problem.\n
+This could happen if the sequences contain any unknown character or if aligned flag is set up to true and the sequences have variable sizes.
+*/
+
+
+/** 
+\fn Alignment::Alignment(void)
+\brief Constructor
+*/
+
+/**
+\fn Alignment::Alignment(Alignment&)
+\brief Copy Constructor. \n
+    The copy constructor does not make a copy of all structures present on the original alignment.\n
+    Instead, all alignments that share a common origin, share some information, and also, a counter (Alignment::SeqRef)
+        of how many alignments share the same information.\n
+    This allows us to keep the information on memory while any alignment is using it.\n
+    When an alignment is destroyed, the counter is substracted by 1, and, if it is 0 after the substraction,
+        the shared data is destroyed.
+*/
+
+/** 
+\fn Alignment::~Alignment(void)
+\brief Destructor.
+    The destructor takes care of removing the non-shared information of each alignment when is destroyed.\n
+    It also substracts 1 from the shared counter Alignment::SeqRef.\n
+    When Alignment::SeqRef arrives to 0, the shared data is destroyed, including Alignment::SeqRef.
+*/
+
+/**
+\fn Alignment::getNumSpecies(void)
+\brief Number of sequences getter.
+\return Number of sequences in the alignment.
+*/
+
+/**
+\fn Alignment::getSequences(std::string * names)
+\brief Getter for the sequences names.
+\param[out] names Vector of sequences names to fill.
+*/
+
+/**
+\fn Alignment::getSequences(std::string * names, int * lenghts)
+\brief Getter for the sequences names and its lenghts.
+\param[out] names Vector of sequences names to fill.
+\param[out] lenghts Vector of lenghts to fill.
+*/
+
+/**
+\fn Alignment::getSequences(std::string * names, std::string *sequences, int *lenghts)
+\brief Getter for the sequences, its names and lenghts.
+\param[out] names Vector of sequences names to fill.
+\param[out] sequences Vector of sequences to fill.
+\param[out] lenghts Vector of lenghts to fill.
+*/
+
+/**
+\fn Alignment::getSequenceNameOrder(string * names, int * orderVector)
+\brief Method to map two sets of sequences, own and external.\n
+The method accepts a vector of names, and test them against the alignment own sequences' names.\n
+If the sequence is present, its index will be stored in orderVector.\n
+\param names Vector of sequences names to map.
+\param[out] orderVector Vector of orders to fill.
+\return \b True if both sets have the same sequences.\n \b False otherwise.
+*/
+
+/**
+\fn Alignment::getNumAminos(void)
+\brief Residues number getter. It counts gaps as residue.
+\return Number of residues in the alignment.
+*/
+
+/**
+\fn Alignment::setWindowsSize(int ghWindow, int shWindow)
+\brief Windows setter
+\param ghWindow Half the Gap Window.
+\param shWindow Half the Similarity Window.
+*/
+
+/**
+\fn Alignment::setBlockSize(int blockSize)
+\brief BlockSize Setter.
+\param blockSize New value.
+*/
+
+/**
+\fn Alignment::calculateSeqOverlap()
+\brief Calculates overlap between sequences.
+*/
+
+/**
+\fn Alignment::printSeqOverlap(void)
+\brief Prints the overlap between sequences.
+*/
+
+/**
+\fn Alignment::printSeqIdentity(void)
+\brief Method to print different identity values computed from the alignment.\n
+In this method we assess the identity values matrix, as well as different average values. \n
+Moreover, the method computes which one is the most similar sequence.
+*/
+
+/**
+\fn Alignment::getAlignmentType(void)
+\brief Alignment type getter.
+\n See \link SequenceTypes \endlink
+\return Int representing the alignment type.\n
+*/
+
+/** 
+\fn Alignment::isFileAligned(void)
+\brief isAligned getter.
+\return Whether the alignment is aligned or not.
+*/
+
+/**
+\fn Alignment::getTranslationCDS(Alignment * proteinAlignment)
+\brief Method to back translate a protein alignment using the sequences present on the current alignment.
+\n Current alignment should contain the original sequences which were translated to protein sequences, <b> without any gap.</b>
+\note It's recommended to translate from dna to protein and then, align the protein sequences.
+\param proteinAlignment Protein Alignment to use as origin.
+\return Pointer to new alignment.
+*/
+
+/**
+\fn Alignment::checkCorrespondence(string * names, int * lenghts, int totalInputSequences, int multiple)
+\brief Function to check CDS file.\n
+- It checks if sequences of input alignment are all present on the CDS file.
+- If nucleotide sequence is larger than protein sequence length * 3, warns about it and cuts the nucleotide sequence
+- If sequence has indetermination symbols, it warns about it.
+- If nucleotide sequence is smaller than protein sequence * 3, it adds some 'N' at the end of the nucleotide sequence.
+\param names Vector containing the names to check.
+\param lenghts Vector containing the length of each sequence.
+\param totalInputSequences Number of sequences present.
+\param multiple Multiplies the length of each sequence by this number.
+\return \b True if all went right.\n \b False if there is a sequence in the alignment but not in the names vector.
+*/
+
+/**
+\fn Alignment::calculateColIdentity(float * columnIdentity)
+\brief Method that calculates the columns identity value.\n
+This is, the frequency of the most present element in the column, being residue, indetermination and gap allowed.
+\param[out] columnIdentity Vector to fill with identities for each column.
+*/
+
+/**
+\fn Alignment::setKeepSequencesFlag(bool newFlagValue)
+\brief Keep Sequences setter.
+\param newFlagValue New flag value
+*/
+
+/**
+\fn Alignment::printAlignmentInfo(ostream & output)
+\brief Print information about sequences number, average sequence length, maximum and minimum sequences length, etc 
+\param output Output stream.
+*/
+
+/**
+\fn Alignment::prepareCodingSequence(bool splitByStopCodon, bool ignoreStopCodon, Alignment * proteinAlignment)
+\brief Method to check if the CDS file is correct.\n
+Based on nature of residues: DNA/RNA (Most of the residues)\n
+There is no gaps on the whole dataset.\n
+Each sequence is a multiple of 3.\n
+\n
+It will also remove or split stop codons depending on the flags passed.
+\param splitByStopCodon Flag that informs the method to split sequences if it finds any stop codon.
+\param ignoreStopCodon Flag that informs the method to stop reading sequence if it finds any stop codon.
+\param proteinAlignment Alignment containing protein sequences which names contains all names in the current alignment.
+*/
+
+/**
+\fn Alignment::alignmentSummaryHTML(Alignment & trimmedAlig, char *destFile, float *consValues)
+\brief Method to report the trimming results in HTML.\n
+Outputs an HTML file that shows visually what has been done to the alignment (removed sequences or residues) and the stats used to do so.
+\param trimmedAlig Trimmed alignment to compare with.
+\param destFile Filename where to save the results.
+\return \b True if correct.
+\n      \b False if file couldn't be open or alignment is not aligned.
+*/
+
+/**
+\fn Alignment::alignmentSummarySVG(Alignment & trimmedAlig, char *destFile, float *consValues, int blocks)
+\brief Method to report the trimming results in SVG.\n
+Outputs a SVG file that shows visually what has been done to the alignment (removed sequences or residues) and the stats used to do so.\param trimmedAlig Trimmed alignment obtained from the object calling this function.
+\param destFile Filename where to save the results.
+\param blocks Size in residues to report. 120 by default.
+\return \b True if everything went ok. \n \b False if file couldn't be open or alignment is not aligned.
+*/
+
+/**
+\fn Alignment::updateSequencesAndResiduesNums(bool countSequences, bool countResidues)
+\brief Updates the sequence number and residue number based on saveResidues and saveSequences
+\param countSequences Whether to count sequences
+\param countResidues Whether to count residues
+*/

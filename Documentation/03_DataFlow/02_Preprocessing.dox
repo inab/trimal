@@ -1,0 +1,18 @@
+/*! \page dataflow Data Flow
+
+\section Preprocessing Preprocessing
+This step allows to obtain an alignment from different sources instead of providing one with the '-in' argument:\n
+- \b NGS: Allows to load a VCF file containing mutations for a REF file.\n
+When both are provided, a MSA can be built and used in later steps. \b WIP
+- \b CompareSet: Performs a consistency analysis to a set of alignments.\n
+The most consistent alignment among the set is selected.\n
+
+\note <i> You can force to select an alignment despite it's consistency using -forceselect.\n
+This functionality allows to clean the alignment using consistency stats, while using the manually selected alignment as input </i>
+
+\warning If no preprocessing is used, then an alignment must be provided (using -in argument).
+
+
+\image html preprocess.svg
+
+*/

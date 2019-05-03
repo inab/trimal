@@ -1,0 +1,56 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection CustomMatrix Custom Matrix
+
+Similarity values are obtained using a reference matrix\n
+While trimAl contains matrices for each sequence type, the user can provide their own matrices.\n\n
+
+Examples of these matrices can be found on the dataset folder:\n 
+
+@buttonWithExpandableDiv{ blossum62, Blossum62,
+\boldVerbatim{ matrix.BLOSUM62 }
+\verbatim 
+a R N D C Q E G H I L k M F P S T W Y V
+A +4 -1 -2 -2 +0 -1 -1 +0 -2 -1 -1 -1 -1 -2 -1 +1 +0 -3 -2 +0
+R -1 +5 +0 -2 -3 +1 +0 -2 +0 -3 -2 +2 -1 -3 -2 -1 -1 -3 -2 -3
+N -2 +0 +6 +1 -3 +0 +0 +0 +1 -3 -3 +0 -2 -3 -2 +1 +0 -4 -2 -3
+D -2 -2 +1 +6 -3 +0 +2 -1 -1 -3 -4 -1 -3 -3 -1 +0 -1 -4 -3 -3
+C +0 -3 -3 -3 +9 -3 -4 -3 -3 -1 -1 -3 -1 -2 -3 -1 -1 -2 -2 -1
+Q -1 +1 +0 +0 -3 +5 +2 -2 +0 -3 -2 +1 +0 -3 -1 +0 -1 -2 -1 -2
+E -1 +0 +0 +2 -4 +2 +5 -2 +0 -3 -3 +1 -2 -3 -1 +0 -1 -3 -2 -2
+G +0 -2 +0 -1 -3 -2 -2 +6 -2 -4 -4 -2 -3 -3 -2 +0 -2 -2 -3 -3
+H -2 +0 +1 -1 -3 +0 +0 -2 +8 -3 -3 -1 -2 -1 -2 -1 -2 -2 +2 -3
+I -1 -3 -3 -3 -1 -3 -3 -4 -3 +4 +2 -3 +1 +0 -3 -2 -1 -3 -1 +3
+L -1 -2 -3 -4 -1 -2 -3 -4 -3 +2 +4 -2 +2 +0 -3 -2 -1 -2 -1 +1
+K -1 +2 +0 -1 -3 +1 +1 -2 -1 -3 -2 +5 -1 -3 -1 +0 -1 -3 -2 -2
+M -1 -1 -2 -3 -1 +0 -2 -3 -2 +1 +2 -1 +5 +0 -2 -1 -1 -1 -1 +1
+F -2 -3 -3 -3 -2 -3 -3 -3 -1 +0 +0 -3 +0 +6 -4 -2 -2 +1 +3 -1
+P -1 -2 -2 -1 -3 -1 -1 -2 -2 -3 -3 -1 -2 -4 +7 -1 -1 -4 -3 -2
+S +1 -1 +1 +0 -1 +0 +0 +0 -1 -2 -2 +0 -1 -2 -1 +4 +1 -3 -2 -2
+T +0 -1 +0 -1 -1 -1 -1 -2 -2 -1 -1 -1 -1 -2 -1 +1 +5 -2 -2 +0
+W -3 -3 -4 -4 -2 -2 -3 -2 -2 -3 -2 -3 -1 +1 -4 -3 -2 +1 +2 -3
+Y -2 -2 -2 -3 -2 -1 -2 -3 +2 -1 -1 -2 -1 +3 -3 -2 -2 +2 +7 -1
+V +0 -3 -3 -3 -1 -2 -2 -3 -3 +3 +1 -2 +1 -1 -2 -2 +0 -3 -1 +4
+\endverbatim
+}
+
+@buttonWithExpandableDiv{ deg-dna, Degenerated_DNA,
+\boldVerbatim{ matrix.Degenerated_DNA }
+\verbatim
+A C D G K M S R T W Y
+A 1 0 0 0 0 0 0 0 0 0 0
+C 0 1 0 0 0 0 0 0 0 0 0
+D 0 0 1 0 0 0 0 0 0 0 0
+G 0 0 0 1 0 0 0 0 0 0 0
+K 0 0 0 0 1 0 0 0 0 0 0
+M 0 0 0 0 0 1 0 0 0 0 0
+S 0 0 0 0 0 0 1 0 0 0 0
+R 0 0 0 0 0 0 0 1 0 0 0
+T 0 0 0 0 0 0 0 0 1 0 0
+W 0 0 0 0 0 0 0 0 0 1 0
+Y 0 0 0 0 0 0 0 0 0 0 1
+\endverbatim
+}
+
+
+**/

@@ -1,0 +1,8 @@
+FROM scratch
+
+#COPY bin/new_trimal /trimal 
+COPY bin/readalMS /readal 
+#COPY bin/statal /statal
+#COPY bin/launcher /main 
+
+ENTRYPOINT ["/readal"]

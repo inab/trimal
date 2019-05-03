@@ -1,0 +1,95 @@
+/**
+\class trimAlManager 
+\brief Main class of trimAl. \n
+It is strutured to work with 3 calls:
+
+- trimAlManager::parseArguments(int argc, char \*argv[]) : \n
+    To parse the arguments passed to the program.
+- trimAlManager::processArguments(char* argv[]) : \n
+    To check if every argument passed in compatible with the rest, and also, if it has all it's dependencies fulfilled.
+- trimAlManager::perform() : \n
+    To perform the logic requested by passed arguments.
+
+See @ref main
+*/
+
+/**
+\fn int trimAlManager::perform()
+\brief Method to perform the analysis if all checks have passed.
+
+\return \b  0 if all went ok. \n \b -1 if parsing arguments went wrong on previously steps\n \b -2 if there was a problem with the similarity matrix.
+*/
+
+/**
+\fn void trimAlManager::print_statistics()
+\brief Method to print statistics requested.
+
+*/
+
+/**
+\fn bool trimAlManager::create_or_use_similarity_matrix()
+\brief Method to create, load and use a similarity matrix, depending on alignment residue nature, if the user gave a specific similarity matrix, etc.
+
+\return 
+*/
+
+/**
+\fn void trimAlManager::clean_alignment()
+\brief Core Method of the program. This is where almost all cleaning methods are called from.
+
+*/
+
+/**
+\fn void trimAlManager::set_window_size()
+\brief Method to set correct window sizes depending on values for them given by the user.
+
+*/
+
+/**
+\fn void trimAlManager::delete_variables()
+\brief Method to delete all variables that need to be deallocated.
+
+*/
+
+/**
+\fn void trimAlManager::menu()
+\brief Method to show the menu of the program.
+
+*/
+
+/**
+\fn void trimAlManager::examples()
+\brief Method to show the examples information about the program.
+
+*/
+
+/**
+\fn void trimAlManager::CleanSequences()
+\brief Method to trim or reduce the number of sequences in an alignment.
+It performs one or none of the following methods:
+- Clusters
+- MaxIdentity
+- Delete Sequences
+- Sequence Overlap
+
+When one method is applied, NoAllGaps is also applied,
+as these methods rely on it
+*/
+
+/**
+\fn void trimAlManager::CleanResiduesAuto()
+\brief Method to trim the alignment using automatic or semi-automatic methods:
+- Automatic1
+- NoGaps
+- NoAllGaps
+- Gappyout
+- Strict
+- Strictplus
+*/
+
+/**
+\fn void trimAlManager::CleanResiduesNonAuto()
+\brief Method to trim the alignment using non automatic methods:
+- Delete columns
+- Manual thresholds: Gap, Similarity and/or Consistency
+*/
