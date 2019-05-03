@@ -1,0 +1,15 @@
+/*! \page dataflow Data Flow
+
+\section SeqTrim Sequence Trimming
+This steps allows to trim the alignment by removing sequences.\n
+Only one method is allowed.\n
+- \b Cluster: Performs a clustering among the MSA.\n
+The most representative sequences are selected.
+- \b MaxIdentity: Performs an identity analysis.\n
+    It keeps only the sequences with a minimum identity (provided by the user) among the sequences in the set.
+- \b SelectSeqs: Manually removes sequences from the alignment.
+
+
+\image html seqTrim.svg
+
+*/

@@ -1,0 +1,19 @@
+/*! \page dataflow Data Flow
+
+\section PostProcess Post Process
+This step performs post processing on the resulting alignment.\n
+These steps are sequential and optional, so you can perform any combination of them, or not perform any post process.\n
+
+- <b> Only Terminal </b> Recover all residues that are outside terminal ends.\n
+Preserve the center of the alignment, preserving columns until a column with at least one gap is found.\n
+This is done for both ends independently, so their sizes don't need to match.
+
+- <b> Complementary </b> Inverse the residue selection, keeping all originally removed residues and removing all originally kept residues.
+
+- <b> Backtranslate </b> If provided an AA alignment it's possible to also provide a non-aligned MSA that contains the original DNA sequences.\n
+This step will translate the trimmed AA alignment into a DNA alignment, using the original sequences provided. This yields to better results than trimming directly with DNA.
+
+
+\image html postProcess.svg
+
+*/

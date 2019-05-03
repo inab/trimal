@@ -1,0 +1,339 @@
+R"=====(
+[b][u]trimAl [version].rev[revision] build [build]
+[authors][r][b]
+trimAl webpage: http://trimal.cgenomics.org
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, the last available version.
+
+[u]Please cite:[r][b]
+
+    trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses.
+    Salvador Capella-Gutierrez; Jose M. Silla-Martinez; Toni Gabaldon.
+    Bioinformatics 2009, 25:1972-1973.[r]
+
+
+[b][u]Basic usage[r]
+    trimal -in <inputfile> -out <outputfile> -(other options).
+
+
+[b][u]Common options:[r]
+For a complete list please see the User Guide or visit http://trimal.cgenomics.org
+
+[b][u]Help Options[r]
+    [b]--help[r]
+        Print this information and show some examples.
+    [b]--version[r]
+        Print the trimAl version.
+    [b]-v <n> / --verbose <n>[r]
+        Specify the verbose level of the program.
+        Available options: error / 3, warning / 2, info / 1, none / 0
+        Default value: info / 1
+
+[b][u]Input-Output Options[r]
+    [b]-in <inputfile>[r]
+        Input file in several formats.
+        Available input formats: [iformat]
+
+    [b]-formats <format1, ...>[r]
+        Specify one or more formats to save the resulting MSA. Separated by spaces
+        Combinations with specific format arguments (-fasta, -nexus, etc) is allowed.
+        Available output formats: [oformat]
+
+    [b]-out <outputfile>[r]
+        Output path pattern. (default stdout).
+
+         Following tags will be replaced if present on filename:
+               [in]        -> Original filename without extension.
+               [format]    -> Output's format name.
+               [extension] -> Output's extension.
+               [contig]    -> Contig name. Only applied if using VCF.
+
+         This allows to store on several formats, without overriding the same file,
+            as each format would replace the corresponding tags.
+         It also allows to store the original filename of the input alignment into
+            the result, allowing to reuse the same pattern for all inputs.
+         In the case of the tag [contig] allows to store a MSA for each contig found.
+
+         This can be used to store alignments in different folders, depending on the
+            format, the input alignment, etc.
+         Take in mind trimAl DOES NOT create new folders.
+
+         Note: Format and extension may be the same depending on format.
+
+         Examples:
+            trimal -in ./ali1.fasta -out [in].clean.[extension]
+                -> ./ali1.clean.fasta
+
+            trimal -in ./alignment2.fasta -out [in].clean.[extension] -clustal
+                -> ./file1.alignment2.clw
+
+            trimal -in ./file1.fasta -out alig.[format].[extension] -formats clustal fasta pir
+                -> ./alig.clustal.clw
+                -> ./alig.pir.pir
+                -> ./alig.fasta.fasta
+
+            trimal -in file1.fasta -out ./[in]/trimmed.[format] -formats fasta
+                -> ./file1/trimmed.fasta (ONLY if folder file1 already exists)
+
+    [b]-lf / --listformats[r]
+        List available formats to load from and save to.
+
+[b][u]Report Output[r]
+    [b]-htmlout <outputfile>[r]
+        Get a summary of trimal's work in an HTML file.
+    [b]-svgout <outputfile>[r]
+        Get a summary of trimal's work in a SVG file.
+    [b]-sgvstats <outputfile>[r]
+        Get a summary of trimal's calculated stats in a SVG file.
+
+    [b]-colnumbering[r]
+        Get the relationship between the columns in the old and new alignment.
+
+[b][u]Compare Set Options[r]
+    [b]-compareset <inputfile>[r]
+        Input list of paths for the files containing the alignments to compare.
+    [b]-forceselect <inputfile>[r]
+        Force selection of the given input file in the files comparison method.
+
+[b][u]Backtranslation Options[r]
+    [b]-backtrans <inputfile>[r]
+        Use a Coding Sequences file to get a backtranslation for a given AA alignment
+    [b]-ignorestopcodon[r]
+        Ignore stop codons in the input coding sequences
+    [b]-splitbystopcodon[r]
+        Split input coding sequences up to first stop codon appearance
+
+[b][u]Trimming Parameters[r]
+    [b]--alternative_matrix degenerated_nt_identity[r]
+        Specify the degenerated nt identity matrix as the similarity matrix to use.
+        If a matrix is not specified, the best suited among a set will be selected.
+    [b]-matrix <inpufile>[r]
+        Input file for user-defined similarity matrix (default is Blosum62).
+    [b]-block <n>[r]
+        Minimum column block size to be kept in the trimmed alignment.
+        Available with manual and automatic (gappyout) methods
+
+    [b]-keepheader[r]
+        Keep original sequence header including non-alphanumeric characters.
+        Only available for input FASTA format files.
+        (future versions will extend this feature)
+    [b]-keepseqs[r]
+        Keep sequences even if they are composed only by gaps.
+
+    [b]-complementary[r]
+        Get the complementary alignment in residues.
+        Reverses the effect of residue trimming:
+            All residues that were to be removed are kept and vice versa.
+    [b]-complementaryseq[r]
+        Get the complementary alignment in sequences.
+        Reverses the effect of sequence trimming:
+            All sequences that were to be removed are kept and vice versa.
+            
+    [b]-terminalonly[r]
+        Only columns out of internal boundaries
+        (first and last column without gaps) are
+        candidates to be trimmed depending on the applied method
+
+[b][u]Trimming Methods[r]
+
+    [b][u]Manual Selection[r]
+
+    [b]-selectcols { n,l,m-k }[r]
+        Selection of columns to be removed from the alignment.
+        Range: [0 - (Number of Columns - 1)]. (see User Guide).
+    [b]-selectseqs { n,l,m-k }[r]
+        Selection of sequences to be removed from the alignment.
+        Range: [0 - (Number of Sequences - 1)]. (see User Guide).
+
+    [b][u]Automated[r]
+
+    [b]-nogaps[r]
+        Remove all positions with gaps in the alignment.
+    [b]-noallgaps[r]
+        Remove columns composed only by gaps.
+
+    [b]-noduplicateseqs[r]
+        Removes sequences that are equal on the alignment.
+        It will keep the latest sequence in the alignment.
+
+    [b]-gappyout[r]
+        Use automated selection on "gappyout" mode.
+        This method only uses information based on gaps' distribution.
+    [b]-strict[r]
+        Use automated selection on "strict" mode.
+    [b]-strictplus[r]
+        Use automated selection on "strictplus" mode.
+        Optimized for Neighbour Joining phylogenetic tree reconstruction.
+
+    [b]-automated1[r]
+        Use a heuristic selection of the automatic method
+            based on similarity statistics. (see User Guide).
+        Optimized for Maximum Likelihood phylogenetic tree reconstruction.
+
+    [b]-clusters <n>[r]
+        Get the most Nth representatives sequences from a given alignment.
+        Range: [1 - (Number of sequences)]
+    [b]-maxidentity <n>[r]
+        Get the representatives sequences for a given identity threshold.
+        Range: [0 - 1].
+
+
+    [b][u]Overlap Trimming[r]
+    Overlap is defined as having a gap in both positions,
+        an indetermination in both positions, or a residue in both positions.
+    It's main purpose is to remove sequences which share only a reduced region,
+        whereas the other regions are not shared with the rest of sequences
+        in the alignment and filled with gaps.
+    Both arguments must be provided jointly.
+
+        Ex: Sp8 may be removed from the alignment depending on the thresholds.
+
+        Sp8    -----GLG-----------TKSD---NNNNNNNNNNNNNNNNWV-----------------
+        Sp17   --FAYTAPDLLL-IGFLLKTV-ATFG-----------------DTWFQLWQGLDLNKMPVF
+        Sp10   ------DPAVL--FVIMLGTI-TKFS-----------------SEWFFAWLGLEINMMVII
+        Sp26   AAAAAAAAALLTYLGLFLGTDYENFA-----------------AAAANAWLGLEINMMAQI
+
+    [b]-resoverlap <n>[r]
+        Minimum overlap of a positions with other positions in the column
+            to be considered a "good position".
+        Range: [0 - 1]. (see User Guide).
+    [b]-seqoverlap <n>[r]
+        Minimum percentage of "good positions" that a sequence must have
+            in order to be conserved.
+        Range: [0 - 100](see User Guide).
+
+
+
+    [b][u]Manual Trimming - Thresholds[r]
+
+        [b]-gt -gapthreshold <n>[r]
+            1 - (fraction of gaps in the column).
+            Range: [0 - 1]
+            Not compatible with -gat
+        [b]-gat -gapabsolutethreshold <n>[r]
+            Max number of gaps allowed on a column to keep it.
+            Range: [0 - (number of sequences - 1)]
+            Not compatible with -gt
+        [b]-st -simthreshold <n>[r]
+            Minimum average similarity required.
+            Range: [0 - 1]
+        [b]-ct -conthreshold <n>[r]
+            Minimum consistency value required.
+            Range: [0 - 1]
+        [b]-cons <n>[r]
+            Minimum percentage of positions
+                in the original alignment to conserve.
+            Range: [0 - 100]
+
+[b][u]Half Windows[r]
+Half window size, score of position i is the average of the window (i - n) to (i + n).
+Only compatible with manual methods.
+
+    [b]-w <n>[r]
+        (half) General window size, applied to all stats.
+            Not compatible with specific sizes.
+    [b]-gw <n>[r]
+        (half) Window size applied to Gaps.
+    [b]-sw <n>[r]
+        (half) Window size applied to Similarity.
+    [b]-cw <n>[r]
+        (half) Window size applied to Consistency.
+
+[b][u]Statistics Output[r]
+Statistics to be calculated and outputted by trimAl
+
+    [b]-sgc[r]
+        Print gap scores for each column in the input alignment.
+    [b]-sgt[r]
+        Print accumulated gap scores for the input alignment.
+    [b]-ssc[r]
+        Print similarity scores for each column in the input alignment.
+    [b]-sst[r]
+        Print accumulated similarity scores for the input alignment.
+    [b]-sfc[r]
+        Print sum-of-pairs scores for each column from the selected alignment
+    [b]-sft[r]
+        Print accumulated sum-of-pairs scores for the selected alignment
+    [b]-sident[r]
+        Print identity scores for all sequences in the input alignment.
+        (see User Guide).
+    [b]-soverlap[r]
+        Print overlap scores matrix for all sequences in the input alignment.
+        (see User Guide).
+
+[b][u]NGS Support - VCF SNP MSA creator[r]
+Suport for VCF files. Providing a reference genome,
+    and one or more VCF, multiple MSA are created.
+One MSA for each contig present on the whole VCF-dataset.
+Each MSA contains the reference sequence
+    and a sequence for each donor, with their SNP applied.
+
+    [b]-vcf <inputfile, ...>[r]
+        Specify one or more VCF files to produce MSAs
+            using the input file (-in <n>) as reference genome.
+        It will produce a MSA for each sequence on the original alignment.
+        Each MSA will contain the same number of sequences:
+            Number of donors + 1 (reference).
+
+        If output file is given, it is recommended to use
+            the tag "[contig]" in the filename.
+            (See [b]-out[r] explanation)
+        Otherwise, the alignments will be stacked
+            one upon another on the same file.
+        This is valid on formats like fasta or pir,
+            but will yield a non-valid file for other formats, such as clustal.
+
+        If no output file pattern is given (-out <outputfile>)
+            or it doesn't contain the tag "[contig]",
+            the sequences names will have the name of their contig prepended.
+
+    [b]-minquality <n>[r]
+        Specify the min quality of a SNP in VCF to apply it.
+        Only valid in combination with -vcf.
+
+    [b]-mincoverage <n>[r]
+        Specify the min coverage of a SNP in VCF to apply it.
+        Only valid in combination with -vcf.
+
+    [b]-ignoreFilter[r]
+        Ignore vcf-filtered variants in VCF.
+        Only valid in combination with -vcf.
+        Still applies min-quality and min-coverage when provided.
+
+[b][u]Legacy Options[r]
+These options are included for back-compatibility with older versions of trimAl.
+New formats will not be added to this list of output format arguments.
+The new formats argument "-formats <format1, format2, etc>" should be used instead.
+
+    [b]-nbrf[r]
+        Output file in NBRF/PIR format
+    [b]-mega[r]
+        Output file in MEGA format
+    [b]-nexus[r]
+        Output file in NEXUS format
+    [b]-clustal[r]
+        Output file in CLUSTAL format
+    [b]-fasta[r]
+        Output file in FASTA format
+    [b]-fasta_m10[r]
+        Output file in FASTA format.
+        Sequences name length up to 10 characters.
+    [b]-phylip[r]
+        Output file in PHYLIP/PHYLIP4 format
+    [b]-phylip_m10[r]
+        Output file in PHYLIP/PHYLIP4 format.
+        Sequences name length up to 10 characters.
+    [b]-phylip_paml[r]
+        Output file in PHYLIP format compatible with PAML
+    [b]-phylip_paml_m10[r]
+        Output file in PHYLIP format compatible with PAML.
+        Sequences name length up to 10 characters.
+    [b]-phylip3.2[r]
+        Output file in PHYLIP3.2 format
+    [b]-phylip3.2_m10[r]
+        Output file in PHYLIP3.2 format.
+        Sequences name length up to 10 characters.
+
+)====="

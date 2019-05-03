@@ -1,0 +1,18 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection TerminalOnly Terminal Only
+
+Terminal Only option allows you to only trim the alignment outside the central block.\n 
+Central Block is defined as the block which contains \n 
+the center of the alignments and doesn't contain any gap inside.\n
+
+Considering the Central Block as the best alignment section of an alignment, \n 
+due to be the one being built with no gaps, \n 
+we can trim the alignment keeping this Central Block untouched.\n\n
+
+
+@buttonWithExpandableDiv{noterminal,Without Terminal Only,@htmlinclude 03_noterminal.svg}
+
+@buttonWithExpandableDiv{terminal,With Terminal Only,@htmlinclude 03_terminal.svg}
+
+**/

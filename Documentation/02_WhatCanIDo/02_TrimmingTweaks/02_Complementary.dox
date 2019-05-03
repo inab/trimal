@@ -1,0 +1,12 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection Complementary Complementary
+
+To extend the capability of trimAl, it is possible to obtain the complementary %alignment.\n
+This means, flipping the values of residues to keep/reject. \n\n
+
+@buttonWithExpandableDiv{gt05nc,Without Complementary,@htmlinclude 02_gt05.svg}
+
+@buttonWithExpandableDiv{gt05c,With Complementary,@htmlinclude 02_gt05C.svg}
+
+**/

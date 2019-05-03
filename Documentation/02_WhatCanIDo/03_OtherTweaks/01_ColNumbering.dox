@@ -1,0 +1,24 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection ColNumbering Column Numbering
+
+Outputs the relationship between residues in the output and input alignment.\n 
+It will output a -1 if the residue was removed, and the original residue position otherwise.
+
+@buttonexpand{coln,Example}
+@divexpandableStart{coln}
+
+@htmlinclude 01_colnumbering.svg
+
+
+@htmlonly <pre class="fragment" style="    white-space: pre-wrap;       /* Since CSS 2.1 */
+                                           white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+                                           white-space: -pre-wrap;      /* Opera 4-6 */
+                                           white-space: -o-pre-wrap;    /* Opera 7 */
+                                           word-wrap: break-word;       /* Internet Explorer 5.5+ */"> @endhtmlonly
+@htmlinclude 01_colnumbering.html
+@htmlonly </pre> @endhtmlonly
+
+@divexpandableEnd
+
+*/

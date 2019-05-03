@@ -1,0 +1,232 @@
+/** \name Process Arguments Methods */
+//@{
+    
+/**
+\fn bool trimAlManager::processArguments(char* argv[])
+\brief Method to process the information obtained by trimAlManager::parseArguments\n
+It checks for argument incompatibilities and arguments dependencies.
+
+\param argv Arguments passed to the program
+\return \b True if all checks have passed \n \b False otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_arguments_incompatibilities()
+\brief Method to check argument incompatibilities.\n
+Take in mind that an incompatibility is between two arguments, but only one method will check this incompatibility. If you are searching for the method that checks incompatibility between X and Y, this check may be done on check_X_incompatibilities or check_Y_incompatibilities.
+
+\return \b True if all incompatibilities checks have passed.\n \b False otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_inFile_incompatibilities()
+\brief Method to check the inFile argument incompatibilities
+
+\return \b True if incompatibilities check has passed\n \b False otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_select_cols_and_seqs_incompatibilities()
+\brief Method to check incompatibilities with select cols and select seqs arguments.
+
+\return \b True if incompatibilities check has passed\n \b False otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_thresholds_incompatibilities()
+\brief Method to check incompatibilities with manual thresholds 
+
+\return \b True if incompatibilities check has passed\n \b False otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_automated_methods_incompatibilities()
+\brief Method to check incompatibilities related to automated trimming methods
+
+\return \b True if incompatibilities check has passed\n \b False otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_max_identity_incompatibilities()
+\brief Method to check max identity incompatibilities
+
+\return \b True if incompatibilities check has passed\n \b False otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_clusters_incompatibilities()
+\brief Method to check clusters incompatibilities
+
+\return \b True if incompatibilities check has passed\n \b False otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_windows_incompatibilities()
+\brief Method to check windows incompatibilities
+
+\return \b True if incompatibilities check has passed\n \b False otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_stats_incompatibilities()
+\brief Method to check statistics incompatibilities
+
+\return \b True if incompatibilities check has passed\n \b False otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_combinations_among_thresholds_incompatibility()
+\brief As some thresholds are incompatible between them, we check their incompatibilities.
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_automated_manual_incompatibilities()
+\brief Check if only one method, either automatic or manual has been asked.
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_codon_behaviour_incompatibility()
+\brief Method to check incompatibilities related to how the algorithm should treat stop codons
+
+\return \b True if incompatibilities check has passed\n \b False otherwise 
+*/
+
+/**
+\fn bool trimAlManager::check_arguments_needs(char* argv[])
+\brief Method that checks dependencies between arguments.\n
+Take in mind that dependencies may be between multiple arguments, so, if there is a dependency between arguments X, Y and Z, this dependency check may be on check_X, check_Y or check_Z.\n At the same time, is possible to find a function that checks this dependency specifically: check_X_with_Y_and_Z
+
+\param argv Arguments passed to the program
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_force_selection()
+\brief Method to check dependency of force select argument
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_input_file_with_coding_sequences_argument()
+\brief Method to check dependency between custom coding sequence file and infile arguments
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_file_aligned()
+\brief Method to check if an alignment needs to be aligned depending on the methods that have been asked to perform and, if so, checks if alignment is aligned.
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_similarity_matrix()
+\brief Method to check if given a similarity matrix, there is a need to use it.
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_outputs_coincidence()
+\brief Method to check if both output patterns (alignment output and html report output) are the same, which would mean one of them would overwrite the other.
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_col_numbering()
+\brief Method to check if column numbering makes sense based on the functionality asked
+
+\return \b False if dependencies check has passed\n \b True otherwise 
+*/
+
+/**
+\fn bool trimAlManager::check_residue_and_sequence_overlap()
+\brief Method to check if both of them (residue overlap and sequence overlap) have been defined by the user as they have a dependency on each other.
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_output_relevance()
+\brief Method to check if, being asked to give an HTML report, it makes logic, depending on the functionality asked
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_output_relevance()
+\brief Method to check if output is coherent. \n For example, it doesn't make sense to output an HTML if there is no trimming.
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_output_file_with_statistics()
+\brief Method to check if there is an output file to allow statistics to be given on terminal.
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::performCompareset()
+\brief Method to check if multiple files comparison has been set correctly.\n
+It also perform some calculations needed on comparfiles behaviour.
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_block_size()
+\brief Method to check if the block size is bigger than allowed depending on size of alignment.
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_backtranslations()
+\brief Method to check backtranslation needs 
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_coding_sequences_type()
+\brief Method to check the type of sequences present in the backtranslationAlig
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_and_prepare_coding_sequence()
+\brief Method to check and prepare the coding sequence.
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn bool trimAlManager::check_backtranslation_infile_names_correspondence()
+\brief Method to check if the origAlig and backtranslationAlig are compatible in names to make the backtranslation behaviour
+
+\return \b False if dependencies check has passed\n \b True otherwise
+*/
+
+/**
+\fn void trimAlManager::check_compareset_window_argument()
+\brief Method to check and warn if windowsize and compareset has been given
+
+*/
+
+/**
+\fn void trimAlManager::check_output_format()
+\brief Method to check if an output format has been given. If no output format has been given, it will use the inFile format.
+
+*/
+
+//@}

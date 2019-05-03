@@ -1,0 +1,67 @@
+/*! \page whatcanido What can I do with trimAl?
+
+\subsection Manual Manual Methods
+
+Manual methods allow the user to provide a pattern to remove residues or sequences.\n
+
+| Method     | Command line argument           | Example of use                                                  |
+|------------|---------------------------------|-----------------------------------------------------------------|
+| Sequences  | -selectseqs { pattern }         | bin/trimal -in dataset/example.007.AA.fasta -selectseqs { 0,4 } |
+| Residues   | -selectcols { pattern }         | bin/trimal -in dataset/example.007.AA.fasta -selectcols { 1-4 } |
+
+@buttonexpand{ manual-t , Example of use}
+@divexpandableStart{ manual-t }
+
+The user must provide a pattern after the argument.\n 
+This pattern is a set of comma separated values:
+\verbatim
+ 
+ bin/trimal -in dataset/example.010.AA.fasta -selectseqs { 0,1,2 } 
+ 
+\endverbatim
+
+    This would delete sequences 0, 1, and 2
+
+Instead of providing raw position IDs, the user can also provide ranges, by separating start and end with a hyphen:
+\verbatim
+ 
+ bin/trimal -in dataset/example.010.AA.fasta -selectseqs { 0-2 }
+ 
+\endverbatim
+
+    This would delete sequences 0, 1, and 2
+
+
+@htmlinclude 05_sselect0-2.svg
+
+Combination of both separators are allowed:
+\verbatim
+ 
+ bin/trimal -in dataset/example.010.AA.fasta -selectcols { 0,4-6,12,16-18 }
+ 
+\endverbatim
+
+    This would delete sequences 0, 4, 5, 6, 12, 16, 17 and 18
+
+Meaning the call above is synonymous to the following:
+\verbatim
+ 
+ bin/trimal -in dataset/example.010.AA.fasta -selectcols { 0,4,5,6,12,16,17,18 }
+ 
+\endverbatim
+
+    This would delete columns 0, 4, 5, 6, 12, 16, 17 and 18
+
+@htmlinclude 05_rselect0-4-6-12-16-18.svg
+
+\verbatim
+
+    Combination of both are also allowed:
+
+\endverbatim
+
+@htmlinclude 05_rselect0-4-6-12-16-18_sselect0-2.svg
+
+@divexpandableEnd
+
+*/

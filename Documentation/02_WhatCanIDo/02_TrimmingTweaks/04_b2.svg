@@ -1,0 +1,361 @@
+<svg xmlns="http://www.w3.org/2000/svg"             xmlns:xlink="http://www.w3.org/1999/xlink"             version="1.1"             viewbox="0 0 1750 845">
+<script type="text/ecmascript"> 
+                <![CDATA[ 
+                function onMouseOverLabel_blo2(evt) { 
+                    var Line_blo2 = document.getElementById(evt.target.id.replace("Label_blo2", "Line_blo2")); 
+                    Line_blo2.setAttribute("style", "fill:none;stroke:black;stroke-width:3"); 
+                    evt.target.setAttribute("font-size", 17); 
+                } 
+                function onMouseOutLabel_blo2(evt) { 
+                    var Line_blo2 = document.getElementById(evt.target.id.replace("Label_blo2", "Line_blo2")); 
+                    Line_blo2.setAttribute("style", "fill:none;stroke:black;stroke-width:1"); 
+                    evt.target.setAttribute("font-size", 15); 
+                } 
+                function onMouseOverLine_blo2(evt) { 
+                    var Label_blo2 = document.getElementById(evt.target.id.replace("Line_blo2", "Label_blo2")); 
+                    evt.target.setAttribute("style", "fill:none;stroke:black;stroke-width:3"); 
+                    Label_blo2.setAttribute("font-size", 17); 
+                } 
+                function onMouseOutLine_blo2(evt) { 
+                    var Label_blo2 = document.getElementById(evt.target.id.replace("Line_blo2", "Label_blo2")); 
+                    evt.target.setAttribute("style", "fill:none;stroke:black;stroke-width:1"); 
+                    Label_blo2.setAttribute("font-size", 15); 
+                } 
+                ]]> 
+ </script>
+<pattern id="selected_blo2_pattern" patternUnits="userSpaceOnUse" width="10" height="10"> 
+<rect width="10" height="10" fill="green" opacity="0.5"/><path d="M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2" stroke="white" stroke-width="1"/></pattern> 
+<pattern id="rejected_blo2" patternUnits="userSpaceOnUse" width="10" height="10"> 
+<rect width="10" height="10" fill="red" opacity="0.5"/><path d="M2,-2 l-1,1 M10,-10 l0,10 M2,-2 l9,11" stroke="white" stroke-width="1"/></pattern> 
+<rect                 style="fill:none;stroke:lightgrey"                 height="97.5"                 width="457.5px"                 x ="12.5px"                y ="12.5"/>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="20"                 y="27"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="360"                 style="font-weight:100"                 xml:space="preserve" >../dataset/example.010.AA.fasta;</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="20"                 y="57"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="243.75"                 style="font-weight:100"                 xml:space="preserve" >Selected Sequences 	9 / 9</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="20"                 y="87"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="282.75"                 style="font-weight:100"                 xml:space="preserve" >Selected Residues 		147 / 185</text>
+<rect                 style="fill:none;stroke:lightgrey"                 height="97.5"                 width="457.5px"                 x ="12.5px"                y ="117.5"/>
+<rect                     style="fill:royalblue;stroke:black;stroke-width:1px"                     height="15"                     width="15px"                     x ="20px"                    y ="125"/>
+<text                 font-family = "monospace"                 font-size="11.25px"                 dy=".35em"                 x ="50"                 y ="132.5"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="82.5"                 style="font-weight:100"                 xml:space="preserve" >Hidrophobic</text>
+<rect                     style="fill:aqua;stroke:black;stroke-width:1px"                     height="15"                     width="15px"                     x ="170px"                    y ="125"/>
+<text                 font-family = "monospace"                 font-size="11.25px"                 dy=".35em"                 x ="200"                 y ="132.5"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="60"                 style="font-weight:100"                 xml:space="preserve" >Aromatic</text>
+<rect                     style="fill:lime;stroke:black;stroke-width:1px"                     height="15"                     width="15px"                     x ="320px"                    y ="125"/>
+<text                 font-family = "monospace"                 font-size="11.25px"                 dy=".35em"                 x ="350"                 y ="132.5"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="37.5"                 style="font-weight:100"                 xml:space="preserve" >Polar</text>
+<rect                     style="fill:magenta;stroke:black;stroke-width:1px"                     height="15"                     width="15px"                     x ="20px"                    y ="158"/>
+<text                 font-family = "monospace"                 font-size="11.25px"                 dy=".35em"                 x ="50"                 y ="165.5"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="112.5"                 style="font-weight:100"                 xml:space="preserve" >Negative Charge</text>
+<rect                     style="fill:orange;stroke:black;stroke-width:1px"                     height="15"                     width="15px"                     x ="170px"                    y ="158"/>
+<text                 font-family = "monospace"                 font-size="11.25px"                 dy=".35em"                 x ="200"                 y ="165.5"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="60"                 style="font-weight:100"                 xml:space="preserve" >Glycines</text>
+<rect                     style="fill:darkviolet;stroke:black;stroke-width:1px"                     height="15"                     width="15px"                     x ="320px"                    y ="158"/>
+<text                 font-family = "monospace"                 font-size="11.25px"                 dy=".35em"                 x ="350"                 y ="165.5"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="60"                 style="font-weight:100"                 xml:space="preserve" >Prolines</text>
+<rect                     style="fill:red;stroke:black;stroke-width:1px"                     height="15"                     width="15px"                     x ="20px"                    y ="191"/>
+<text                 font-family = "monospace"                 font-size="11.25px"                 dy=".35em"                 x ="50"                 y ="198.5"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="112.5"                 style="font-weight:100"                 xml:space="preserve" >Positive Charge</text>
+<rect                     style="fill:lightgrey;stroke:black;stroke-width:1px"                     height="15"                     width="15px"                     x ="170px"                    y ="191"/>
+<text                 font-family = "monospace"                 font-size="11.25px"                 dy=".35em"                 x ="200"                 y ="198.5"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="82.5"                 style="font-weight:100"                 xml:space="preserve" >Unconserved</text>
+<rect                     style="fill:yellow;stroke:black;stroke-width:1px"                     height="15"                     width="15px"                     x ="320px"                    y ="191"/>
+<text                 font-family = "monospace"                 font-size="11.25px"                 dy=".35em"                 x ="350"                 y ="198.5"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="60"                 style="font-weight:100"                 xml:space="preserve" >Prolines</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="237"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="1350"                 style="font-weight:100"                 xml:space="preserve" >0         10        20        30        40        50        60        70        80        90        100       110       </text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="252"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="1350"                 style="font-weight:100"                 xml:space="preserve" >|         |         |         |         |         |         |         |         |         |         |         |         </text>
+<line x1="395" x2="1745" y1="252" y2="252" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<rect  style="fill:yellow"  height="15"  width="11.25px"  x ="451.25"  y ="335" />
+<rect  style="fill:lime"  height="120"  width="11.25px"  x ="462.5"  y ="290" />
+<rect  style="fill:lime"  height="120"  width="11.25px"  x ="473.75"  y ="290" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="485"  y ="290" />
+<rect  style="fill:red"  height="120"  width="11.25px"  x ="496.25"  y ="290" />
+<rect  style="fill:lime"  height="120"  width="11.25px"  x ="507.5"  y ="290" />
+<rect  style="fill:lime"  height="120"  width="11.25px"  x ="518.75"  y ="290" />
+<rect  style="fill:aqua"  height="15"  width="11.25px"  x ="530"  y ="290" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="530"  y ="305" />
+<rect  style="fill:aqua"  height="90"  width="11.25px"  x ="530"  y ="320" />
+<rect  style="fill:aqua"  height="45"  width="11.25px"  x ="541.25"  y ="305" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="541.25"  y ="350" />
+<rect  style="fill:aqua"  height="45"  width="11.25px"  x ="541.25"  y ="365" />
+<rect  style="fill:magenta"  height="120"  width="11.25px"  x ="563.75"  y ="290" />
+<rect  style="fill:royalblue"  height="30"  width="11.25px"  x ="575"  y ="290" />
+<rect  style="fill:royalblue"  height="75"  width="11.25px"  x ="575"  y ="335" />
+<rect  style="fill:magenta"  height="120"  width="11.25px"  x ="586.25"  y ="290" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="597.5"  y ="290" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="608.75"  y ="290" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="620"  y ="290" />
+<rect  style="fill:lime"  height="120"  width="11.25px"  x ="631.25"  y ="290" />
+<rect  style="fill:red"  height="120"  width="11.25px"  x ="642.5"  y ="290" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="665"  y ="290" />
+<rect  style="fill:lime"  height="120"  width="11.25px"  x ="676.25"  y ="290" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="687.5"  y ="290" />
+<rect  style="fill:magenta"  height="120"  width="11.25px"  x ="698.75"  y ="290" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="710"  y ="290" />
+<rect  style="fill:aqua"  height="75"  width="11.25px"  x ="721.25"  y ="290" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="721.25"  y ="365" />
+<rect  style="fill:aqua"  height="15"  width="11.25px"  x ="721.25"  y ="380" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="721.25"  y ="395" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="732.5"  y ="290" />
+<rect  style="fill:lime"  height="60"  width="11.25px"  x ="743.75"  y ="290" />
+<rect  style="fill:orange"  height="15"  width="11.25px"  x ="743.75"  y ="350" />
+<rect  style="fill:lime"  height="45"  width="11.25px"  x ="743.75"  y ="365" />
+<rect  style="fill:aqua"  height="120"  width="11.25px"  x ="755"  y ="290" />
+<rect  style="fill:lime"  height="15"  width="11.25px"  x ="766.25"  y ="290" />
+<rect  style="fill:lime"  height="60"  width="11.25px"  x ="766.25"  y ="350" />
+<rect  style="fill:aqua"  height="135"  width="11.25px"  x ="777.5"  y ="275" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="800"  y ="275" />
+<rect  style="fill:lime"  height="120"  width="11.25px"  x ="800"  y ="290" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="811.25"  y ="275" />
+<rect  style="fill:orange"  height="15"  width="11.25px"  x ="822.5"  y ="275" />
+<rect  style="fill:aqua"  height="60"  width="11.25px"  x ="833.75"  y ="275" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="833.75"  y ="335" />
+<rect  style="fill:aqua"  height="15"  width="11.25px"  x ="833.75"  y ="350" />
+<rect  style="fill:royalblue"  height="45"  width="11.25px"  x ="833.75"  y ="365" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="845"  y ="275" />
+<rect  style="fill:aqua"  height="90"  width="11.25px"  x ="845"  y ="290" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="845"  y ="380" />
+<rect  style="fill:aqua"  height="15"  width="11.25px"  x ="845"  y ="395" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="856.25"  y ="275" />
+<rect  style="fill:magenta"  height="75"  width="11.25px"  x ="867.5"  y ="275" />
+<rect  style="fill:magenta"  height="15"  width="11.25px"  x ="867.5"  y ="395" />
+<rect  style="fill:red"  height="135"  width="11.25px"  x ="878.75"  y ="275" />
+<rect  style="fill:magenta"  height="135"  width="11.25px"  x ="890"  y ="275" />
+<rect  style="fill:magenta"  height="135"  width="11.25px"  x ="901.25"  y ="275" />
+<rect  style="fill:royalblue"  height="30"  width="11.25px"  x ="912.5"  y ="275" />
+<rect  style="fill:royalblue"  height="90"  width="11.25px"  x ="912.5"  y ="320" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="923.75"  y ="275" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="935"  y ="275" />
+<rect  style="fill:aqua"  height="30"  width="11.25px"  x ="946.25"  y ="290" />
+<rect  style="fill:yellow"  height="60"  width="11.25px"  x ="946.25"  y ="350" />
+<rect  style="fill:orange"  height="60"  width="11.25px"  x ="957.5"  y ="350" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="968.75"  y ="275" />
+<rect  style="fill:royalblue"  height="75"  width="11.25px"  x ="980"  y ="290" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="980"  y ="380" />
+<rect  style="fill:aqua"  height="15"  width="11.25px"  x ="1002.5"  y ="275" />
+<rect  style="fill:royalblue"  height="30"  width="11.25px"  x ="1002.5"  y ="290" />
+<rect  style="fill:aqua"  height="30"  width="11.25px"  x ="1002.5"  y ="320" />
+<rect  style="fill:royalblue"  height="60"  width="11.25px"  x ="1002.5"  y ="350" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1013.75"  y ="275" />
+<rect  style="fill:red"  height="45"  width="11.25px"  x ="1025"  y ="275" />
+<rect  style="fill:red"  height="60"  width="11.25px"  x ="1025"  y ="350" />
+<rect  style="fill:magenta"  height="30"  width="11.25px"  x ="1036.25"  y ="275" />
+<rect  style="fill:magenta"  height="45"  width="11.25px"  x ="1036.25"  y ="365" />
+<rect  style="fill:lime"  height="135"  width="11.25px"  x ="1058.75"  y ="275" />
+<rect  style="fill:magenta"  height="135"  width="11.25px"  x ="1081.25"  y ="275" />
+<rect  style="fill:magenta"  height="135"  width="11.25px"  x ="1092.5"  y ="275" />
+<rect  style="fill:red"  height="135"  width="11.25px"  x ="1103.75"  y ="275" />
+<rect  style="fill:magenta"  height="135"  width="11.25px"  x ="1115"  y ="275" />
+<rect  style="fill:aqua"  height="15"  width="11.25px"  x ="1126.25"  y ="275" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="1126.25"  y ="290" />
+<rect  style="fill:aqua"  height="105"  width="11.25px"  x ="1126.25"  y ="305" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1137.5"  y ="275" />
+<rect  style="fill:magenta"  height="120"  width="11.25px"  x ="1148.75"  y ="290" />
+<rect  style="fill:red"  height="135"  width="11.25px"  x ="1160"  y ="275" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1171.25"  y ="275" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1182.5"  y ="275" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1205"  y ="275" />
+<rect  style="fill:lime"  height="120"  width="11.25px"  x ="1216.25"  y ="290" />
+<rect  style="fill:lime"  height="135"  width="11.25px"  x ="1227.5"  y ="275" />
+<rect  style="fill:red"  height="30"  width="11.25px"  x ="1238.75"  y ="275" />
+<rect  style="fill:lime"  height="45"  width="11.25px"  x ="1238.75"  y ="305" />
+<rect  style="fill:red"  height="60"  width="11.25px"  x ="1238.75"  y ="350" />
+<rect  style="fill:red"  height="135"  width="11.25px"  x ="1250"  y ="275" />
+<rect  style="fill:orange"  height="135"  width="11.25px"  x ="1261.25"  y ="275" />
+<rect  style="fill:orange"  height="135"  width="11.25px"  x ="1272.5"  y ="275" />
+<rect  style="fill:red"  height="75"  width="11.25px"  x ="1283.75"  y ="290" />
+<rect  style="fill:red"  height="30"  width="11.25px"  x ="1283.75"  y ="380" />
+<rect  style="fill:lime"  height="15"  width="11.25px"  x ="1295"  y ="275" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="1295"  y ="290" />
+<rect  style="fill:lime"  height="15"  width="11.25px"  x ="1306.25"  y ="275" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="1306.25"  y ="290" />
+<rect  style="fill:aqua"  height="15"  width="11.25px"  x ="1317.5"  y ="275" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="1317.5"  y ="290" />
+<rect  style="fill:lime"  height="120"  width="11.25px"  x ="1328.75"  y ="290" />
+<rect  style="fill:yellow"  height="15"  width="11.25px"  x ="1340"  y ="275" />
+<rect  style="fill:magenta"  height="120"  width="11.25px"  x ="1340"  y ="290" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1351.25"  y ="275" />
+<rect  style="fill:red"  height="135"  width="11.25px"  x ="1362.5"  y ="275" />
+<rect  style="fill:red"  height="120"  width="11.25px"  x ="1373.75"  y ="290" />
+<rect  style="fill:yellow"  height="135"  width="11.25px"  x ="1385"  y ="275" />
+<rect  style="fill:orange"  height="15"  width="11.25px"  x ="1396.25"  y ="275" />
+<rect  style="fill:magenta"  height="120"  width="11.25px"  x ="1396.25"  y ="290" />
+<rect  style="fill:red"  height="30"  width="11.25px"  x ="1407.5"  y ="290" />
+<rect  style="fill:red"  height="75"  width="11.25px"  x ="1407.5"  y ="335" />
+<rect  style="fill:magenta"  height="120"  width="11.25px"  x ="1418.75"  y ="290" />
+<rect  style="fill:magenta"  height="75"  width="11.25px"  x ="1430"  y ="275" />
+<rect  style="fill:magenta"  height="45"  width="11.25px"  x ="1430"  y ="365" />
+<rect  style="fill:yellow"  height="15"  width="11.25px"  x ="1441.25"  y ="275" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="1441.25"  y ="290" />
+<rect  style="fill:orange"  height="30"  width="11.25px"  x ="1452.5"  y ="290" />
+<rect  style="fill:orange"  height="60"  width="11.25px"  x ="1452.5"  y ="350" />
+<rect  style="fill:lime"  height="60"  width="11.25px"  x ="1486.25"  y ="290" />
+<rect  style="fill:lime"  height="45"  width="11.25px"  x ="1486.25"  y ="365" />
+<rect  style="fill:orange"  height="105"  width="11.25px"  x ="1497.5"  y ="305" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1508.75"  y ="275" />
+<rect  style="fill:magenta"  height="30"  width="11.25px"  x ="1520"  y ="290" />
+<rect  style="fill:magenta"  height="45"  width="11.25px"  x ="1520"  y ="365" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1531.25"  y ="275" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1542.5"  y ="275" />
+<rect  style="fill:lime"  height="15"  width="11.25px"  x ="1553.75"  y ="290" />
+<rect  style="fill:magenta"  height="45"  width="11.25px"  x ="1553.75"  y ="305" />
+<rect  style="fill:lime"  height="60"  width="11.25px"  x ="1553.75"  y ="350" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="1565"  y ="275" />
+<rect  style="fill:lime"  height="15"  width="11.25px"  x ="1565"  y ="290" />
+<rect  style="fill:royalblue"  height="105"  width="11.25px"  x ="1565"  y ="305" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1576.25"  y ="275" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1587.5"  y ="275" />
+<rect  style="fill:lime"  height="15"  width="11.25px"  x ="1598.75"  y ="305" />
+<rect  style="fill:lime"  height="60"  width="11.25px"  x ="1598.75"  y ="350" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1610"  y ="275" />
+<rect  style="fill:magenta"  height="90"  width="11.25px"  x ="1621.25"  y ="275" />
+<rect  style="fill:magenta"  height="30"  width="11.25px"  x ="1621.25"  y ="380" />
+<rect  style="fill:red"  height="120"  width="11.25px"  x ="1632.5"  y ="290" />
+<rect  style="fill:lime"  height="15"  width="11.25px"  x ="1643.75"  y ="275" />
+<rect  style="fill:lime"  height="15"  width="11.25px"  x ="1643.75"  y ="320" />
+<rect  style="fill:lime"  height="30"  width="11.25px"  x ="1643.75"  y ="350" />
+<rect  style="fill:lime"  height="15"  width="11.25px"  x ="1643.75"  y ="395" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1655"  y ="275" />
+<rect  style="fill:lime"  height="135"  width="11.25px"  x ="1666.25"  y ="275" />
+<rect  style="fill:red"  height="15"  width="11.25px"  x ="1677.5"  y ="275" />
+<rect  style="fill:lime"  height="120"  width="11.25px"  x ="1677.5"  y ="290" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1700"  y ="275" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1711.25"  y ="275" />
+<rect  style="fill:magenta"  height="120"  width="11.25px"  x ="1722.5"  y ="290" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="1733.75"  y ="275" />
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="282"                 kerning="0"                 text-anchor="start"                 textLength="101.25"                 style="font-weight:100">Csa004271</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="282"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="1350"                 style="font-weight:100">---------------------------------MYMAMGHFFDRDDVALKNISEYFKECSEEEREHANKMIEFHNKRGGTTTYFPIKAPGSFDPANFNTIKAMNCALALEVNVNKSLLAL</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="297"                 kerning="0"                 text-anchor="start"                 textLength="90"                 style="font-weight:100">Xtr21234</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="297"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="1350"                 style="font-weight:100">----MISQVRQNYSHDCEAAVNRMVNLEMYASYTYLSMSHYFDRDDVALHHVAEFFKEQSKEERECAEKLMKCQNKRGGRIVLQDIKKPERDEWG--STLDAMQTALDLEKHVNQALLDL</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="312"                 kerning="0"                 text-anchor="start"                 textLength="45"                 style="font-weight:100">LcaH</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="312"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="1350"                 style="font-weight:100">----MSSQVRQNFHQDCEAAINRQINLELYASYVYLSMAYYFDRDDQALHNFAKFFRHQSHEEREHAEKLMKLQNQRGGRIFLQDVRKPDRDEWG--SGVEALECALQLEKSVNQSLLDL</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="327"                 kerning="0"                 text-anchor="start"                 textLength="101.25"                 style="font-weight:100">Hsa167996</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="327"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="1350"                 style="font-weight:100">MTTASTSQVRQNYHQDSEAAINRQINLELYASYVYLSMSYYFDRDDVALKNFAKYFLHQSHEEREHAEKLMKLQNQRGGRIFLQDIKKPDCDDWE--SGLNAMECALHLEKNVNQSLLEL</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="342"                 kerning="0"                 text-anchor="start"                 textLength="101.25"                 style="font-weight:100">Mmu024661</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="342"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="1350"                 style="font-weight:100">MTTASPSQVRQNYHQDAEAAINRQINLELYASYVYLSMSCYFDRDDVALKNFAKYFLHQSHEEREHAEKLMKLQNQRGGRIFLQDIKKPDRDDWE--SGLNAMECALHLEKSVNQSLLEL</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="357"                 kerning="0"                 text-anchor="start"                 textLength="90"                 style="font-weight:100">Dre37936</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="357"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="1350"                 style="font-weight:100">---METSQIRQNYVRDCEAAINKMINLELYAGYTYTSMAHYFKRDDVALPGFAKFFKKNSEEEREHAEKFMEFQNKRGGRIVLQDIKKPDRDVWG--NGLIAMQCALQLEKNVNQALLDL</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="372"                 kerning="0"                 text-anchor="start"                 textLength="45"                 style="font-weight:100">LcaM</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="372"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="1350"                 style="font-weight:100">----MESQVRQNYHRDCEAAVNRMVNMEMFASYTYTSMAFYFSRDDVALPGFSHFFKENSDEEREHAEKLLSFQNKRGGHIFLQDIKKPERDEWG--SGLEAMQCALQLKKNVNQALLDL</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="387"                 kerning="0"                 text-anchor="start"                 textLength="90"                 style="font-weight:100">Tru14292</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="387"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="1350"                 style="font-weight:100">----MESQVRQNYHRDCEAAINKMINMELYASYTYTSMAFFFSRDDVALPGFAHFFKENSDEEREHAEKLLSFQNKRGGRIFLQDIKKPERDEWG--SGLEAMQCALQLEKKVNQALLDL</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="402"                 kerning="0"                 text-anchor="start"                 textLength="90"                 style="font-weight:100">Ola20972</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="402"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="1350"                 style="font-weight:100">----MESQVRQNYHRDCEAAINRMVNMELFASYTYTSMAFYFDRDDVALPGFSHFFKENSHEEKEHADKLLSFQNKRGGRIFLQDVKKPERDEWG--SGLEAMQCALQLEKNVNQALLDL</text>
+<rect  style="fill:none;stroke:black" height="75"  width="1350px"  x ="395"  y ="425" />
+<rect  style="fill:url(#rejected_blo2);stroke:black" height="75"  width="67.5px"  opacity="0.5" x ="395"  y ="425" />
+<rect  style="fill:url(#selected_blo2_pattern);stroke:black" height="75"  width="90px"  opacity="0.5" x ="462.5"  y ="425" />
+<rect  style="fill:url(#rejected_blo2);stroke:black" height="75"  width="11.25px"  opacity="0.5" x ="552.5"  y ="425" />
+<rect  style="fill:url(#selected_blo2_pattern);stroke:black" height="75"  width="461.25px"  opacity="0.5" x ="563.75"  y ="425" />
+<rect  style="fill:url(#rejected_blo2);stroke:black" height="75"  width="33.75px"  opacity="0.5" x ="1025"  y ="425" />
+<rect  style="fill:url(#selected_blo2_pattern);stroke:black" height="75"  width="337.5px"  opacity="0.5" x ="1058.75"  y ="425" />
+<rect  style="fill:url(#rejected_blo2);stroke:black" height="75"  width="112.5px"  opacity="0.5" x ="1396.25"  y ="425" />
+<rect  style="fill:url(#selected_blo2_pattern);stroke:black" height="75"  width="236.25px"  opacity="0.5" x ="1508.75"  y ="425" />
+<text                         font-family = "monospace"                         font-size="15px"                         dy=".35em"                         x ="380"                         y="425"                         kerning="0"                         text-anchor="end"                         lengthAdjust="spacingAndGlyphs"                        style="font-weight:100"                         xml:space="preserve" >1</text>
+<text                         font-family = "monospace"                         font-size="15px"                         dy=".35em"                         x ="380"                         y="500"                         kerning="0"                         text-anchor="end"                         lengthAdjust="spacingAndGlyphs"                        style="font-weight:100"                         xml:space="preserve" >0</text>
+<polyline                         style="fill:none;stroke:black;stroke-width:1"                         stroke-dasharray="10,4"                         id ="GapsLine_blo20"                         onmouseover="onMouseOverLine_blo2(evt)"                         onmouseout="onMouseOutLine_blo2(evt)"                         points="400.625,448.333 411.875,448.333 423.125,448.333 434.375,455 445.625,488.333 456.875,488.333 468.125,488.333 479.375,488.333 490.625,488.333 501.875,488.333 513.125,488.333 524.375,488.333 535.625,488.333 546.875,488.333 558.125,488.333 569.375,488.333 580.625,488.333 591.875,488.333 603.125,488.333 614.375,488.333 625.625,488.333 636.875,488.333 648.125,488.333 659.375,488.333 670.625,488.333 681.875,488.333 693.125,488.333 704.375,488.333 715.625,488.333 726.875,488.333 738.125,488.333 749.375,488.333 760.625,488.333 771.875,495 783.125,495 794.375,495 805.625,495 816.875,495 828.125,495 839.375,495 850.625,495 861.875,495 873.125,495 884.375,495 895.625,495 906.875,495 918.125,495 929.375,495 940.625,495 951.875,495 963.125,495 974.375,495 985.625,495 996.875,495 1008.12,495 1019.38,495 1030.62,495 1041.88,495 1053.12,495 1064.38,495 1075.62,495 1086.88,495 1098.12,495 1109.38,495 1120.62,495 1131.88,495 1143.12,495 1154.38,495 1165.62,495 1176.88,495 1188.12,495 1199.38,495 1210.62,495 1221.88,495 1233.12,495 1244.38,495 1255.62,495 1266.88,495 1278.12,495 1289.38,495 1300.62,495 1311.88,495 1323.12,495 1334.38,495 1345.62,495 1356.88,495 1368.12,495 1379.38,495 1390.62,495 1401.88,495 1413.12,495 1424.38,495 1435.62,495 1446.88,495 1458.12,495 1469.38,441.667 1480.62,441.667 1491.88,495 1503.12,495 1514.38,495 1525.62,495 1536.88,495 1548.12,495 1559.38,495 1570.62,495 1581.88,495 1593.12,495 1604.38,495 1615.62,495 1626.88,495 1638.12,495 1649.38,495 1660.62,495 1671.88,495 1683.12,495 1694.38,495 1705.62,495 1716.88,495 1728.12,495 1739.38,495 "/>
+<text                         font-family = "monospace"                         font-size="15px"                         dy=".35em"                         x ="5"                         y="432"                         kerning="0"                         text-anchor="start"                         id ="GapsLabel_blo20"                         onmouseover="onMouseOverLabel_blo2(evt)"                         onmouseout="onMouseOutLabel_blo2(evt)"                         textLength="123.75"                         style="font-weight:bold">Gaps Values</text>
+<line x1="5" x2="128.75" y1="443.75" y2="443.75" style="stroke:rgb(0,0,0);stroke-width:1" stroke-dasharray="10,4" id ="GapsSubLine_blo20"/>
+<polyline                 style="fill:none;stroke:black;stroke-width:1"                 stroke-dasharray="5,1"                 id ="SimLine_blo20"                 onmouseover="onMouseOverLine_blo2(evt)"                 onmouseout="onMouseOutLine_blo2(evt)"                 points="400.625,435 411.875,435 423.125,435 434.375,494.994 445.625,494.985 456.875,494.999 468.125,435 479.375,435 490.625,469.038 501.875,435 513.125,435 524.375,435 535.625,484.413 546.875,494.965 558.125,494.937 569.375,435 580.625,494.927 591.875,435 603.125,435 614.375,435 625.625,481.636 636.875,435 648.125,487.226 659.375,494.978 670.625,485.9 681.875,435 693.125,492.34 704.375,435 715.625,489.535 726.875,491.829 738.125,435 749.375,490.139 760.625,435 771.875,494.966 783.125,435 794.375,494.973 805.625,490.135 816.875,435 828.125,494.903 839.375,494.999 850.625,492.562 861.875,435 873.125,494.646 884.375,435 895.625,435 906.875,435 918.125,492.145 929.375,435 940.625,435 951.875,494.997 963.125,494.986 974.375,494.841 985.625,493.383 996.875,494.984 1008.12,493.996 1019.38,435 1030.62,494.935 1041.88,494.958 1053.12,494.999 1064.38,435 1075.62,494.993 1086.88,435 1098.12,435 1109.38,471.292 1120.62,435 1131.88,494.282 1143.12,435 1154.38,494.222 1165.62,435 1176.88,493.729 1188.12,494.204 1199.38,494.907 1210.62,494.98 1221.88,494.143 1233.12,435 1244.38,493.021 1255.62,435 1266.88,435 1278.12,435 1289.38,494.836 1300.62,494.323 1311.88,494.988 1323.12,494.588 1334.38,494.898 1345.62,494.355 1356.88,476.31 1368.12,473.257 1379.38,493.901 1390.62,435 1401.88,494.963 1413.12,494.925 1424.38,494.946 1435.62,494.924 1446.88,494.979 1458.12,494.982 1469.38,495 1480.62,495 1491.88,493.728 1503.12,494.913 1514.38,489.658 1525.62,494.994 1536.88,435 1548.12,474.955 1559.38,494.808 1570.62,492.399 1581.88,435 1593.12,435 1604.38,494.995 1615.62,435 1626.88,479.381 1638.12,494.77 1649.38,494.88 1660.62,435 1671.88,435 1683.12,489.516 1694.38,494.071 1705.62,435 1716.88,435 1728.12,494.939 1739.38,435 "/><text                         font-family = "monospace"                         font-size="15px"                         dy=".35em"                         x ="5"                         y="462.5"                         kerning="0"                         text-anchor="start"                         id ="SimLabel_blo20"                         onmouseover="onMouseOverLabel_blo2(evt)"                         onmouseout="onMouseOutLabel_blo2(evt)"                         textLength="112.5"                         style="font-weight:bold">Sim Values</text>
+<line x1="5" x2="117.5" y1="473.75" y2="473.75" style="stroke:rgb(0,0,0);stroke-width:1" stroke-dasharray="5,1" id ="SimSubLine_blo20"/>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="542"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="1350"                 style="font-weight:100"                 xml:space="preserve" >120       130       140       150       160       170       180                                                         </text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="557"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                textLength="1350"                 style="font-weight:100"                 xml:space="preserve" >|         |         |         |         |         |         |                                                           </text>
+<line x1="395" x2="1126.25" y1="557" y2="557" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<rect  style="fill:aqua"  height="135"  width="11.25px"  x ="395"  y ="580" />
+<rect  style="fill:red"  height="105"  width="11.25px"  x ="406.25"  y ="610" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="417.5"  y ="595" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="428.75"  y ="595" />
+<rect  style="fill:lime"  height="135"  width="11.25px"  x ="440"  y ="580" />
+<rect  style="fill:magenta"  height="120"  width="11.25px"  x ="451.25"  y ="595" />
+<rect  style="fill:aqua"  height="15"  width="11.25px"  x ="462.5"  y ="610" />
+<rect  style="fill:aqua"  height="45"  width="11.25px"  x ="462.5"  y ="670" />
+<rect  style="fill:orange"  height="15"  width="11.25px"  x ="473.75"  y ="580" />
+<rect  style="fill:orange"  height="30"  width="11.25px"  x ="473.75"  y ="655" />
+<rect  style="fill:magenta"  height="135"  width="11.25px"  x ="485"  y ="580" />
+<rect  style="fill:yellow"  height="135"  width="11.25px"  x ="496.25"  y ="580" />
+<rect  style="fill:aqua"  height="120"  width="11.25px"  x ="507.5"  y ="595" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="518.75"  y ="580" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="530"  y ="595" />
+<rect  style="fill:magenta"  height="135"  width="11.25px"  x ="541.25"  y ="580" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="552.5"  y ="580" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="563.75"  y ="580" />
+<rect  style="fill:magenta"  height="135"  width="11.25px"  x ="575"  y ="580" />
+<rect  style="fill:lime"  height="120"  width="11.25px"  x ="586.25"  y ="595" />
+<rect  style="fill:aqua"  height="105"  width="11.25px"  x ="597.5"  y ="610" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="608.75"  y ="580" />
+<rect  style="fill:aqua"  height="120"  width="11.25px"  x ="608.75"  y ="595" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="620"  y ="580" />
+<rect  style="fill:magenta"  height="30"  width="11.25px"  x ="631.25"  y ="595" />
+<rect  style="fill:lime"  height="15"  width="11.25px"  x ="631.25"  y ="625" />
+<rect  style="fill:lime"  height="60"  width="11.25px"  x ="631.25"  y ="655" />
+<rect  style="fill:magenta"  height="135"  width="11.25px"  x ="642.5"  y ="580" />
+<rect  style="fill:lime"  height="135"  width="11.25px"  x ="653.75"  y ="580" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="665"  y ="580" />
+<rect  style="fill:magenta"  height="15"  width="11.25px"  x ="676.25"  y ="580" />
+<rect  style="fill:magenta"  height="60"  width="11.25px"  x ="676.25"  y ="655" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="687.5"  y ="580" />
+<rect  style="fill:aqua"  height="15"  width="11.25px"  x ="687.5"  y ="595" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="687.5"  y ="625" />
+<rect  style="fill:royalblue"  height="45"  width="11.25px"  x ="687.5"  y ="655" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="698.75"  y ="580" />
+<rect  style="fill:red"  height="135"  width="11.25px"  x ="710"  y ="580" />
+<rect  style="fill:red"  height="30"  width="11.25px"  x ="721.25"  y ="580" />
+<rect  style="fill:red"  height="60"  width="11.25px"  x ="721.25"  y ="655" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="732.5"  y ="580" />
+<rect  style="fill:orange"  height="15"  width="11.25px"  x ="743.75"  y ="595" />
+<rect  style="fill:orange"  height="90"  width="11.25px"  x ="743.75"  y ="625" />
+<rect  style="fill:magenta"  height="135"  width="11.25px"  x ="755"  y ="580" />
+<rect  style="fill:aqua"  height="30"  width="11.25px"  x ="766.25"  y ="580" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="766.25"  y ="610" />
+<rect  style="fill:aqua"  height="90"  width="11.25px"  x ="766.25"  y ="625" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="777.5"  y ="580" />
+<rect  style="fill:lime"  height="135"  width="11.25px"  x ="788.75"  y ="580" />
+<rect  style="fill:lime"  height="135"  width="11.25px"  x ="800"  y ="580" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="811.25"  y ="580" />
+<rect  style="fill:red"  height="120"  width="11.25px"  x ="833.75"  y ="595" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="845"  y ="580" />
+<rect  style="fill:orange"  height="75"  width="11.25px"  x ="856.25"  y ="580" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="867.5"  y ="595" />
+<rect  style="fill:yellow"  height="60"  width="11.25px"  x ="878.75"  y ="595" />
+<rect  style="fill:orange"  height="15"  width="11.25px"  x ="878.75"  y ="655" />
+<rect  style="fill:aqua"  height="15"  width="11.25px"  x ="878.75"  y ="700" />
+<rect  style="fill:lime"  height="30"  width="11.25px"  x ="901.25"  y ="595" />
+<rect  style="fill:lime"  height="60"  width="11.25px"  x ="901.25"  y ="655" />
+<rect  style="fill:orange"  height="75"  width="11.25px"  x ="912.5"  y ="580" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="923.75"  y ="580" />
+<rect  style="fill:orange"  height="30"  width="11.25px"  x ="935"  y ="580" />
+<rect  style="fill:royalblue"  height="105"  width="11.25px"  x ="935"  y ="610" />
+<rect  style="fill:magenta"  height="135"  width="11.25px"  x ="946.25"  y ="580" />
+<rect  style="fill:royalblue"  height="15"  width="11.25px"  x ="957.5"  y ="580" />
+<rect  style="fill:aqua"  height="120"  width="11.25px"  x ="957.5"  y ="595" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="968.75"  y ="580" />
+<rect  style="fill:royalblue"  height="135"  width="11.25px"  x ="980"  y ="580" />
+<rect  style="fill:magenta"  height="135"  width="11.25px"  x ="991.25"  y ="580" />
+<rect  style="fill:red"  height="135"  width="11.25px"  x ="1002.5"  y ="580" />
+<rect  style="fill:aqua"  height="135"  width="11.25px"  x ="1013.75"  y ="580" />
+<rect  style="fill:lime"  height="120"  width="11.25px"  x ="1025"  y ="595" />
+<rect  style="fill:royalblue"  height="120"  width="11.25px"  x ="1036.25"  y ="595" />
+<rect  style="fill:orange"  height="45"  width="11.25px"  x ="1047.5"  y ="610" />
+<rect  style="fill:orange"  height="45"  width="11.25px"  x ="1047.5"  y ="670" />
+<rect  style="fill:orange"  height="15"  width="11.25px"  x ="1058.75"  y ="670" />
+<rect  style="fill:orange"  height="15"  width="11.25px"  x ="1070"  y ="640" />
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="587"                 kerning="0"                 text-anchor="start"                 textLength="101.25"                 style="font-weight:100">Csa004271</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="587"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="731.25"                 style="font-weight:100">HE--TANGDPEFQDFIEANFLHEQVDAIKKLKDYITNLKLVG---TGLGEFLFDKHFKSS-----</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="602"                 kerning="0"                 text-anchor="start"                 textLength="90"                 style="font-weight:100">Xtr21234</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="602"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="731.25"                 style="font-weight:100">HNLATERKDPHICDFLESEHLDEQVKHMKKFGDHITNLKRLGVPQNGMGEYLFDKHSLS------</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="617"                 kerning="0"                 text-anchor="start"                 textLength="45"                 style="font-weight:100">LcaH</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="617"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="731.25"                 style="font-weight:100">HKLCSDHNDPHLCDFIETHYLDEQVKSIKELADWVTNLRRMGAPQNGMAEYLFDKHTLGKES--S</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="632"                 kerning="0"                 text-anchor="start"                 textLength="101.25"                 style="font-weight:100">Hsa167996</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="632"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="731.25"                 style="font-weight:100">HKLATDKNDPHLCDFIETHYLNEQVKAIKELGDHVTNLRKMGAPESGLAEYLFDKHTLGDSDNES</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="647"                 kerning="0"                 text-anchor="start"                 textLength="101.25"                 style="font-weight:100">Mmu024661</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="647"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="731.25"                 style="font-weight:100">HKLATDKNDPHLCDFIETYYLSEQVKSIKELGDHVTNLRKMGAPEAGMAEYLFDKHTLGHGD-ES</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="662"                 kerning="0"                 text-anchor="start"                 textLength="90"                 style="font-weight:100">Dre37936</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="662"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="731.25"                 style="font-weight:100">HKLATEMGDPHLCDFLETHYLNEQVEAIKKLGDHITNLSKMDAGNNRMAEYLFDKHTLDS-----</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="677"                 kerning="0"                 text-anchor="start"                 textLength="45"                 style="font-weight:100">LcaM</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="677"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="731.25"                 style="font-weight:100">HKLASDHGDPHLCDFLETHYLNEQVEAIKKLGDYISNLSRMDAQKNKMAEYLFDKHSLGGKS---</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="692"                 kerning="0"                 text-anchor="start"                 textLength="90"                 style="font-weight:100">Tru14292</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="692"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="731.25"                 style="font-weight:100">HKLASDHVDPHLCDFLESHYLNEQVEAIKKLGDYITNLSRMDAQNNKMAEYLFDKHTLGSKS---</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="5"                 y="707"                 kerning="0"                 text-anchor="start"                 textLength="90"                 style="font-weight:100">Ola20972</text>
+<text                 font-family = "monospace"                 font-size="15px"                 dy=".35em"                 x ="395"                 y="707"                 kerning="0"                 text-anchor="start"                 lengthAdjust="spacingAndGlyphs"                 textLength="731.25"                 style="font-weight:100">HKVASDHKDPHMCDFLETHYLNEQVESIKKIGDHITNLTRMDAHTNKMAEYLFDKHTLGSKS---</text>
+<rect  style="fill:none;stroke:black" height="75"  width="731.25px"  x ="395"  y ="730" />
+<rect  style="fill:url(#selected_blo2_pattern);stroke:black" height="75"  width="56.25px"  opacity="0.5" x ="395"  y ="730" />
+<rect  style="fill:url(#rejected_blo2);stroke:black" height="75"  width="33.75px"  opacity="0.5" x ="451.25"  y ="730" />
+<rect  style="fill:url(#selected_blo2_pattern);stroke:black" height="75"  width="348.75px"  opacity="0.5" x ="485"  y ="730" />
+<rect  style="fill:url(#rejected_blo2);stroke:black" height="75"  width="90px"  opacity="0.5" x ="833.75"  y ="730" />
+<rect  style="fill:url(#selected_blo2_pattern);stroke:black" height="75"  width="123.75px"  opacity="0.5" x ="923.75"  y ="730" />
+<rect  style="fill:url(#rejected_blo2);stroke:black" height="75"  width="78.75px"  opacity="0.5" x ="1047.5"  y ="730" />
+<text                         font-family = "monospace"                         font-size="15px"                         dy=".35em"                         x ="380"                         y="730"                         kerning="0"                         text-anchor="end"                         lengthAdjust="spacingAndGlyphs"                        style="font-weight:100"                         xml:space="preserve" >1</text>
+<text                         font-family = "monospace"                         font-size="15px"                         dy=".35em"                         x ="380"                         y="805"                         kerning="0"                         text-anchor="end"                         lengthAdjust="spacingAndGlyphs"                        style="font-weight:100"                         xml:space="preserve" >0</text>
+<polyline                         style="fill:none;stroke:black;stroke-width:1"                         stroke-dasharray="10,4"                         id ="GapsLine_blo21"                         onmouseover="onMouseOverLine_blo2(evt)"                         onmouseout="onMouseOutLine_blo2(evt)"                         points="400.625,800 411.875,800 423.125,793.333 434.375,793.333 445.625,800 456.875,800 468.125,800 479.375,800 490.625,800 501.875,800 513.125,800 524.375,800 535.625,800 546.875,800 558.125,800 569.375,800 580.625,800 591.875,800 603.125,800 614.375,800 625.625,800 636.875,800 648.125,800 659.375,800 670.625,800 681.875,800 693.125,800 704.375,800 715.625,800 726.875,800 738.125,800 749.375,800 760.625,800 771.875,800 783.125,800 794.375,800 805.625,800 816.875,800 828.125,800 839.375,800 850.625,800 861.875,800 873.125,793.333 884.375,793.333 895.625,793.333 906.875,800 918.125,800 929.375,800 940.625,800 951.875,800 963.125,800 974.375,800 985.625,800 996.875,800 1008.12,800 1019.38,800 1030.62,800 1041.88,800 1053.12,800 1064.38,793.333 1075.62,780 1086.88,780 1098.12,746.667 1109.38,753.333 1120.62,760 "/>
+<text                         font-family = "monospace"                         font-size="15px"                         dy=".35em"                         x ="5"                         y="737"                         kerning="0"                         text-anchor="start"                         id ="GapsLabel_blo21"                         onmouseover="onMouseOverLabel_blo2(evt)"                         onmouseout="onMouseOutLabel_blo2(evt)"                         textLength="123.75"                         style="font-weight:bold">Gaps Values</text>
+<line x1="5" x2="128.75" y1="748.75" y2="748.75" style="stroke:rgb(0,0,0);stroke-width:1" stroke-dasharray="10,4" id ="GapsSubLine_blo21"/>
+<polyline                 style="fill:none;stroke:black;stroke-width:1"                 stroke-dasharray="5,1"                 id ="SimLine_blo21"                 onmouseover="onMouseOverLine_blo2(evt)"                 onmouseout="onMouseOutLine_blo2(evt)"                 points="400.625,740 411.875,799.356 423.125,782.444 434.375,797.026 445.625,798.625 456.875,799.931 468.125,799.998 479.375,799.997 490.625,740 501.875,740 513.125,799.289 524.375,799.734 535.625,799.936 546.875,740 558.125,740 569.375,795.955 580.625,740 591.875,799.307 603.125,799.982 614.375,799.655 625.625,740 636.875,799.976 648.125,740 659.375,740 670.625,740 681.875,799.892 693.125,799.814 704.375,789.529 715.625,740 726.875,798.74 738.125,797.207 749.375,799.901 760.625,740 771.875,799.987 783.125,790.2 794.375,782.777 805.625,740 816.875,740 828.125,799.95 839.375,799.963 850.625,798.351 861.875,799.942 873.125,796.488 884.375,799.998 895.625,799.977 906.875,799.938 918.125,799.979 929.375,795.662 940.625,799.751 951.875,740 963.125,795.66 974.375,740 985.625,740 996.875,740 1008.12,740 1019.38,740 1030.62,799.965 1041.88,799.79 1053.12,799.924 1064.38,799.982 1075.62,799.992 1086.88,799.886 1098.12,800 1109.38,740 1120.62,740 "/><text                         font-family = "monospace"                         font-size="15px"                         dy=".35em"                         x ="5"                         y="767.5"                         kerning="0"                         text-anchor="start"                         id ="SimLabel_blo21"                         onmouseover="onMouseOverLabel_blo2(evt)"                         onmouseout="onMouseOutLabel_blo2(evt)"                         textLength="112.5"                         style="font-weight:bold">Sim Values</text>
+<line x1="5" x2="117.5" y1="778.75" y2="778.75" style="stroke:rgb(0,0,0);stroke-width:1" stroke-dasharray="5,1" id ="SimSubLine_blo21"/>
+</svg>

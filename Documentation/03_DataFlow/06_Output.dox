@@ -1,0 +1,24 @@
+/*! \page dataflow Data Flow
+
+\section output Output
+This step does not perform any trimming, but is used to report the information obtained to the user.
+
+- <b> SVG Output </b>  -- Obtain a report in SVG Format, where the original alignment is showed in a manner similar to html output format.\n
+This report includes all the statistics used in the trimming steps and also, points out what residues and sequences are kept or removed.\n
+- <b> HTML Output </b>  -- Obtain a report in HTML Format, including the statistics and kept/removed sequences / residues.\n
+- <b> Output %Alignment </b>  allows to output the aligment. Two options are available:
+    Only one can be selected:
+    - <b> STDOUT (default) </b> -- The alignment will be printed on the terminal or STDOUT.
+        - Some messages (as errors and warnings) will be displayed on STDOUT too, which may difficult obtaining the MSA.
+        - This prevents the stats from being exported, as they are displayed on STDOUT too.
+        - Only one format can be selected from the set.
+    - <b> FILE (recommended) </b> -- It is possible to write to a file the resulting MSA.
+        - Multiple formats are allowed, using an output pattern.
+        - Stats can be requested.
+- <b> Print Stats </b> -- Print the requested stats if available. \n
+    You can request statistics that haven't been used on trimming the alignment, nor included on the reports.\n
+    \note For this purposes it may be handful to take a look on statAl (WIP)
+
+
+\image html output.svg
+*/
