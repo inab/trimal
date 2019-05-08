@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=9"/>
     <meta name="generator" content="Doxygen 1.8.13"/>
-    <title>trimAl: /home/vfernandez/git/trimAl/include/utils.h File Reference</title>
+    <title>trimAl: /home/vfernandez/git/MyFork/include/utils.h File Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -65,7 +65,9 @@ $(document).ready(function(){initNavTree('utils_8h.html','');});
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">utils.h File Reference</div>  </div>
 </div><!--header-->
@@ -80,6 +82,8 @@ $(document).ready(function(){initNavTree('utils_8h.html','');});
 <code>#include &lt;cstdio&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
 </div>
 <p><a href="utils_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -88,6 +92,36 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceutils"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html">utils</a></td></tr>
 <tr class="memdesc:namespaceutils"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utilities class. This class contains shared methods to be used in multiple parts of the code. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceutils_1_1_terminal_colors"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils_1_1_terminal_colors.html">utils::TerminalColors</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a639387a02ae98ec1af1812f4283426b2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils_1_1_terminal_colors.html#a639387a02ae98ec1af1812f4283426b2">utils::TerminalColors::terminalColor</a> { <br />
+&#160;&#160;<a class="el" href="namespaceutils_1_1_terminal_colors.html#a639387a02ae98ec1af1812f4283426b2acf091a0b41de16c85a1903dcf10b028e">utils::TerminalColors::RESET</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespaceutils_1_1_terminal_colors.html#a639387a02ae98ec1af1812f4283426b2a24654abe40b9ea34c5dd1a795e3b4798">utils::TerminalColors::BLACK</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespaceutils_1_1_terminal_colors.html#a639387a02ae98ec1af1812f4283426b2a58a91d02ca4b5921986d4f81bd2c9e9f">utils::TerminalColors::RED</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespaceutils_1_1_terminal_colors.html#a639387a02ae98ec1af1812f4283426b2a90c2871031cb67d87fd8551c246056d0">utils::TerminalColors::GREEN</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespaceutils_1_1_terminal_colors.html#a639387a02ae98ec1af1812f4283426b2aaa7e2d95f0b3b1011e497fbbbc15208f">utils::TerminalColors::YELLOW</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespaceutils_1_1_terminal_colors.html#a639387a02ae98ec1af1812f4283426b2ae37be2d9300510fb0212ec85e209dbf9">utils::TerminalColors::BLUE</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespaceutils_1_1_terminal_colors.html#a639387a02ae98ec1af1812f4283426b2afebee6b9da7d35d010449e56585c257c">utils::TerminalColors::MAGENTA</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespaceutils_1_1_terminal_colors.html#a639387a02ae98ec1af1812f4283426b2a1c65e06bb6a416e6fc9822a3e86b47c7">utils::TerminalColors::CYAN</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespaceutils_1_1_terminal_colors.html#a639387a02ae98ec1af1812f4283426b2a426a799227bf482d9a17396dbdb08379">utils::TerminalColors::WHITE</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespaceutils_1_1_terminal_colors.html#a639387a02ae98ec1af1812f4283426b2a086e80d2be46fb5df1f5b9943532b5d2">utils::TerminalColors::BOLD</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespaceutils_1_1_terminal_colors.html#a639387a02ae98ec1af1812f4283426b2adf549bca2953cda20daaef8939c0ccf7">utils::TerminalColors::UNDERLINE</a>
+<br />
+ }</td></tr>
+<tr class="separator:a639387a02ae98ec1af1812f4283426b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -171,18 +205,18 @@ It is useful as well because removes tabs and blank spaces at lines at beginning
  It warns as well when a mismatch for these flags is found. <br />
 .  <a href="namespaceutils.html#a520af4938de4615819825624578e68dc">More...</a><br /></td></tr>
 <tr class="separator:a520af4938de4615819825624578e68dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27780a7938039c7d46385f51fd2623fe"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a27780a7938039c7d46385f51fd2623fe">utils::getReverse</a> (std::string toReverse)</td></tr>
-<tr class="memdesc:a27780a7938039c7d46385f51fd2623fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses a string.  <a href="namespaceutils.html#a27780a7938039c7d46385f51fd2623fe">More...</a><br /></td></tr>
-<tr class="separator:a27780a7938039c7d46385f51fd2623fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8559d35a236860a85e3b213e411814b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#ad8559d35a236860a85e3b213e411814b">utils::getReverse</a> (const std::string &amp;toReverse)</td></tr>
+<tr class="memdesc:ad8559d35a236860a85e3b213e411814b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses a string.  <a href="namespaceutils.html#ad8559d35a236860a85e3b213e411814b">More...</a><br /></td></tr>
+<tr class="separator:ad8559d35a236860a85e3b213e411814b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0a8721fef543bec18cec5c90c16faff"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#ac0a8721fef543bec18cec5c90c16faff">utils::removeCharacter</a> (char c, std::string line)</td></tr>
 <tr class="memdesc:ac0a8721fef543bec18cec5c90c16faff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a determined char from the string.  <a href="namespaceutils.html#ac0a8721fef543bec18cec5c90c16faff">More...</a><br /></td></tr>
 <tr class="separator:ac0a8721fef543bec18cec5c90c16faff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab52f9515717f06cafd6ab7fe2ebdcef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef">utils::checkAlignmentType</a> (int seqNumber, int residNumber, std::string *sequences)</td></tr>
 <tr class="memdesc:aab52f9515717f06cafd6ab7fe2ebdcef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks an alignment type.  <a href="namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef">More...</a><br /></td></tr>
 <tr class="separator:aab52f9515717f06cafd6ab7fe2ebdcef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af845113d9e4154d2391447082665193a"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#af845113d9e4154d2391447082665193a">utils::readNumbers</a> (std::string line)</td></tr>
-<tr class="memdesc:af845113d9e4154d2391447082665193a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a line and converts it to an array of number.  <a href="namespaceutils.html#af845113d9e4154d2391447082665193a">More...</a><br /></td></tr>
-<tr class="separator:af845113d9e4154d2391447082665193a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03a83387ebfcea2bab4f78421c7021b4"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a03a83387ebfcea2bab4f78421c7021b4">utils::readNumbers</a> (const std::string &amp;line)</td></tr>
+<tr class="memdesc:a03a83387ebfcea2bab4f78421c7021b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a line and converts it to an array of number.  <a href="namespaceutils.html#a03a83387ebfcea2bab4f78421c7021b4">More...</a><br /></td></tr>
+<tr class="separator:a03a83387ebfcea2bab4f78421c7021b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36809b7400f2e78685173f8bbcfe0a39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a36809b7400f2e78685173f8bbcfe0a39">utils::quicksort</a> (int **vect, int ini, int fin)</td></tr>
 <tr class="memdesc:a36809b7400f2e78685173f8bbcfe0a39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quicksort sorting method.  <a href="namespaceutils.html#a36809b7400f2e78685173f8bbcfe0a39">More...</a><br /></td></tr>
 <tr class="separator:a36809b7400f2e78685173f8bbcfe0a39"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -217,8 +251,19 @@ This comes with a precision cost that shouldn't be a problem.  <a href="namespac
 <tr class="memitem:a4804aa8e934b5b255c11403d2d1eeaa5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a4804aa8e934b5b255c11403d2d1eeaa5">utils::GetConsStep</a> (float *consValue)</td></tr>
 <tr class="memdesc:a4804aa8e934b5b255c11403d2d1eeaa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that gives the consistency classification of a column of values.  <a href="namespaceutils.html#a4804aa8e934b5b255c11403d2d1eeaa5">More...</a><br /></td></tr>
 <tr class="separator:a4804aa8e934b5b255c11403d2d1eeaa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a820453f5a493ef048e224c6379d40e87"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a820453f5a493ef048e224c6379d40e87">utils::fileExists</a> (std::string &amp;path)</td></tr>
+<tr class="memdesc:a820453f5a493ef048e224c6379d40e87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to check the existance of a file.  <a href="namespaceutils.html#a820453f5a493ef048e224c6379d40e87">More...</a><br /></td></tr>
+<tr class="separator:a820453f5a493ef048e224c6379d40e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad13c1bc858488be55a200a4e94f8f1d1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#ad13c1bc858488be55a200a4e94f8f1d1">utils::fileExists</a> (std::string &amp;&amp;path)</td></tr>
+<tr class="memdesc:ad13c1bc858488be55a200a4e94f8f1d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to check the existance of a file. Works exactly as <a class="el" href="namespaceutils.html#a820453f5a493ef048e224c6379d40e87" title="Method to check the existance of a file. ">fileExists(std::string &amp; path)</a>, but accepts r-value reference.  <a href="namespaceutils.html#ad13c1bc858488be55a200a4e94f8f1d1">More...</a><br /></td></tr>
+<tr class="separator:ad13c1bc858488be55a200a4e94f8f1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6286fde6f4dd58ef0cfa9d55341b72f8"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a6286fde6f4dd58ef0cfa9d55341b72f8">utils::toUpper</a> (char c)</td></tr>
 <tr class="separator:a6286fde6f4dd58ef0cfa9d55341b72f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a2bb58e7a7fa8c9779e29816885184fe9"><td class="memItemLeft" align="right" valign="top">std::map&lt; terminalColor, const std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils_1_1_terminal_colors.html#a2bb58e7a7fa8c9779e29816885184fe9">utils::TerminalColors::colors</a></td></tr>
+<tr class="separator:a2bb58e7a7fa8c9779e29816885184fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

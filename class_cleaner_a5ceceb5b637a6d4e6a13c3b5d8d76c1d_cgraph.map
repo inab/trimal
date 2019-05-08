@@ -1,7 +1,7 @@
 <map id="Cleaner::cleanSpuriousSeq" name="Cleaner::cleanSpuriousSeq">
 <area shape="rect" id="node2" href="$class_cleaner.html#ab2db8eacfbe545c68fc287c43309e439" title="Method to compute the overlap values. &#160;See Alignment::overlaps. " alt="" coords="233,38,412,79"/>
 <area shape="rect" id="node6" href="$class_cleaner.html#abe5d03c820a6bee7935b719b9fc7be60" title="Method to trim an alignment based on a minimum sequence overlap threshold. &#160;The method selects a comb..." alt="" coords="235,116,410,143"/>
-<area shape="rect" id="node3" href="$class_alignment.html#ab2487799d9a7d593d7fbe1b8da9593f5" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="461,20,654,47"/>
+<area shape="rect" id="node3" href="$class_alignment.html#a3f8f2eafd37c9b5bc275b9889a2de96a" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="461,20,654,47"/>
 <area shape="rect" id="node4" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type. " alt="" coords="703,9,879,36"/>
 <area shape="rect" id="node5" href="$namespaceutils.html#a6286fde6f4dd58ef0cfa9d55341b72f8" title="utils::toUpper" alt="" coords="955,5,1055,32"/>
 <area shape="rect" id="node7" href="$class_alignment.html#aeeee94970a445f32aa79646c249befef" title="Copy Constructor. &#160;&#160;The copy constructor does not make a copy of all structures present on the origin..." alt="" coords="484,116,631,143"/>

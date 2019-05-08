@@ -19,7 +19,7 @@
 <!-- Node7 -->
 <g id="node2" class="node">
 <title>Node7</title>
-<g id="a_node2"><a xlink:href="classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
+<g id="a_node2"><a xlink:href="classtrim_al_manager.html#af3b0625b6bcc6df5978e63530a5956e6" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
 <polygon fill="#ffffff" stroke="#000000" points="173,-6 173,-25 330,-25 330,-6 173,-6"/>
 <text text-anchor="middle" x="251.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::parseArguments</text>
 </a>

@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=9"/>
     <meta name="generator" content="Doxygen 1.8.13"/>
-    <title>trimAl: /home/vfernandez/git/trimAl/source/trimalManager.cpp File Reference</title>
+    <title>trimAl: /home/vfernandez/git/MyFork/source/trimalManager.cpp File Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -69,13 +69,14 @@ $(document).ready(function(){initNavTree('trimal_manager_8cpp.html','');});
 <div class="title">trimalManager.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="similarity_matrix_8h_source.html">Statistics/similarityMatrix.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="trimal_manager_8h_source.html">trimalManager.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="_base_format_handler_8h_source.html">FormatHandling/BaseFormatHandler.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="similarity_matrix_8h_source.html">Statistics/similarityMatrix.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_consistency_8h_source.html">Statistics/Consistency.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_similarity_8h_source.html">Statistics/Similarity.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_internal_benchmarker_8h_source.html">InternalBenchmarker.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_alignment_8h_source.html">Alignment/Alignment.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_manager_8h_source.html">Statistics/Manager.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="trimal_manager_8h_source.html">trimalManager.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_v_c_f_handler_8h_source.html">VCFHandler.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>&quot;</code><br />
@@ -89,7 +90,7 @@ $(document).ready(function(){initNavTree('trimal_manager_8cpp.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aa74ba17ff70a5e129e30cab9744a95e2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trimal_manager_8cpp.html#aa74ba17ff70a5e129e30cab9744a95e2">checkArgument</a>(argument)&#160;&#160;&#160;if (argument(&amp;argc, argv, &amp;i)) continue;</td></tr>
+<tr class="memitem:aa74ba17ff70a5e129e30cab9744a95e2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trimal_manager_8cpp.html#aa74ba17ff70a5e129e30cab9744a95e2">checkArgument</a>(argument)</td></tr>
 <tr class="separator:aa74ba17ff70a5e129e30cab9744a95e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afae584b9a627911ca2b1c300049889f0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trimal_manager_8cpp.html#afae584b9a627911ca2b1c300049889f0">LegacyFormatArgumentWrapper</a>(arg,  format)</td></tr>
 <tr class="separator:afae584b9a627911ca2b1c300049889f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -108,12 +109,12 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">argument</td><td>)</td>
-          <td>&#160;&#160;&#160;if (argument(&amp;argc, argv, &amp;i)) continue;</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="trimal_manager_8cpp_source.html#l00034">34</a> of file <a class="el" href="trimal_manager_8cpp_source.html">trimalManager.cpp</a>.</p>
+<b>Value:</b><div class="fragment"><div class="line">{ \</div><div class="line">    auto x = argument(&amp;argc, argv, &amp;i); \</div><div class="line">    if (x == Recognized) <span class="keywordflow">continue</span>; \</div><div class="line">    if (x == Errored) <span class="keywordflow">return</span> x;\</div><div class="line">    if (x == Final) <span class="keywordflow">return</span> x;\</div><div class="line">}</div></div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="trimal_manager_8cpp_source.html#l00067">67</a> of file <a class="el" href="trimal_manager_8cpp_source.html">trimalManager.cpp</a>.</p>
 
 </div>
 </div>
@@ -142,8 +143,8 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (!strcmp(argv[*i], arg)) { \</div><div class="line">        oformats.emplace_back(format); \</div><div class="line">        return <span class="keyword">true</span>; \</div><div class="line">    }</div></div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="trimal_manager_8cpp_source.html#l00293">293</a> of file <a class="el" href="trimal_manager_8cpp_source.html">trimalManager.cpp</a>.</p>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (!strcmp(argv[*i], arg)) { \</div><div class="line">        oformats.emplace_back(format); \</div><div class="line">        return Recognized; \</div><div class="line">    }</div></div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="trimal_manager_8cpp_source.html#l00389">389</a> of file <a class="el" href="trimal_manager_8cpp_source.html">trimalManager.cpp</a>.</p>
 
 </div>
 </div>
@@ -162,8 +163,8 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (!strcmp(argv[*i], <span class="stringliteral">&quot;-&quot;</span> #stat )) { \</div><div class="line">        if (!stat) { \</div><div class="line">            stat = <span class="keyword">true</span>; \</div><div class="line">            stats--; \</div><div class="line">            return <span class="keyword">true</span>; \</div><div class="line">        } <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="keyword">false</span>; \</div><div class="line">    }</div></div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="trimal_manager_8cpp_source.html#l00734">734</a> of file <a class="el" href="trimal_manager_8cpp_source.html">trimalManager.cpp</a>.</p>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (!strcmp(argv[*i], <span class="stringliteral">&quot;-&quot;</span> #stat )) { \</div><div class="line">        if (!stat) { \</div><div class="line">            stat = <span class="keyword">true</span>; \</div><div class="line">            stats--; \</div><div class="line">            return Recognized; \</div><div class="line">        } <span class="keywordflow">else</span> <span class="keywordflow">return</span> NotRecognized; \</div><div class="line">    }</div></div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="trimal_manager_8cpp_source.html#l00896">896</a> of file <a class="el" href="trimal_manager_8cpp_source.html">trimalManager.cpp</a>.</p>
 
 </div>
 </div>

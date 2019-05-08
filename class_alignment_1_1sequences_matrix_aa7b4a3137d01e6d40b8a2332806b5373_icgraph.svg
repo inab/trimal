@@ -35,7 +35,7 @@
 <!-- Node9 -->
 <g id="node3" class="node">
 <title>Node9</title>
-<g id="a_node3"><a xlink:href="classstatistics_1_1_consistency.html#ae8679e43ec228926ac2844af133cc2d5" target="_top" xlink:title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue...">
+<g id="a_node3"><a xlink:href="classstatistics_1_1_consistency.html#a8f7ddf54c5be583916b983ede82d5b88" target="_top" xlink:title="Method to compare a set of MSA, all containing the same sequences and residues. The number of residue...">
 <polygon fill="#ffffff" stroke="#000000" points="329,-.5 329,-30.5 446,-30.5 446,-.5 329,-.5"/>
 <text text-anchor="start" x="337" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">statistics::Consistency</text>
 <text text-anchor="middle" x="387.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">::perform</text>
@@ -72,7 +72,7 @@
 <!-- Node11 -->
 <g id="node5" class="node">
 <title>Node11</title>
-<g id="a_node5"><a xlink:href="classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
+<g id="a_node5"><a xlink:href="classtrim_al_manager.html#af3b0625b6bcc6df5978e63530a5956e6" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
 <polygon fill="#ffffff" stroke="#000000" points="690,-6 690,-25 847,-25 847,-6 690,-6"/>
 <text text-anchor="middle" x="768.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::parseArguments</text>
 </a>

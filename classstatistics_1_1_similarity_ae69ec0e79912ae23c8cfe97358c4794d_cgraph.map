@@ -1,7 +1,7 @@
 <map id="statistics::Similarity::calculateVectors" name="statistics::Similarity::calculateVectors">
 <area shape="rect" id="node2" href="$classstatistics_1_1_manager.html#a1969a416d3020d25daa56de6c5e305db" title="Method to handle gap stat calculation It checks if the gaps submodule has been created, otherwise, creates it. " alt="" coords="207,121,345,163"/>
 <area shape="rect" id="node9" href="$classstatistics_1_1_similarity.html#a75bd235b3207235eefa7b52dff063c76" title="Computes the matrix identity between alignment&#39;s columns. " alt="" coords="195,252,357,293"/>
-<area shape="rect" id="node10" href="$class_alignment.html#ab2487799d9a7d593d7fbe1b8da9593f5" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="413,318,606,345"/>
+<area shape="rect" id="node10" href="$class_alignment.html#a3f8f2eafd37c9b5bc275b9889a2de96a" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="413,318,606,345"/>
 <area shape="rect" id="node12" href="$namespaceutils.html#a6286fde6f4dd58ef0cfa9d55341b72f8" title="utils::toUpper" alt="" coords="881,343,981,370"/>
 <area shape="rect" id="node13" href="$classstatistics_1_1similarity_matrix.html#a0cdb3ed14678b442824e84e6385e8f84" title="Method to get the similarity distance between two residues, A and B Characters provided must be both ..." alt="" coords="191,187,361,228"/>
 <area shape="rect" id="node14" href="$classstatistics_1_1_gaps.html#ab5b60db326475f8adc68b130e22b3963" title="statistics::Gaps::getGaps\lWindow" alt="" coords="191,56,361,97"/>

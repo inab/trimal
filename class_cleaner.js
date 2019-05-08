@@ -24,6 +24,7 @@ var class_cleaner =
     [ "getCutPointClusters", "class_cleaner.html#a60955e2ae3faa3ccf84780a52fb1a08a", null ],
     [ "removeAllGapsSeqsAndCols", "class_cleaner.html#ada8ad076dd037f00ae3f4fd17762641f", null ],
     [ "removeColumns", "class_cleaner.html#ac8e92eb8ae8a5caf021801e56cdb9faf", null ],
+    [ "removeDuplicates", "class_cleaner.html#a0f7c2dbf2042f87df31f6845c4fc3b6c", null ],
     [ "removeOnlyTerminal", "class_cleaner.html#ab7f5b746b97697181f4cd06063cbb49a", null ],
     [ "removeSequences", "class_cleaner.html#a932af26c56652410dc2a30c553376c0b", null ],
     [ "removeSmallerBlocks", "class_cleaner.html#a5620f6a511bc0ac844c71b2de3ae1fdb", null ],

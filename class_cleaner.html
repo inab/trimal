@@ -198,6 +198,8 @@ Clusters are calculated following this flow:  <a href="#a631cf3e2e55c00a995f0f4a
  Complementary alignment is an alignment containing all sequences and columns that the original alignment would reject.<br />
 It inverses the saveResidues / saveSequences tags.  <a href="#a24bd28e4191afc9471adff329bee1466">More...</a><br /></td></tr>
 <tr class="separator:a24bd28e4191afc9471adff329bee1466"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f7c2dbf2042f87df31f6845c4fc3b6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cleaner.html#a0f7c2dbf2042f87df31f6845c4fc3b6c">removeDuplicates</a> ()</td></tr>
+<tr class="separator:a0f7c2dbf2042f87df31f6845c4fc3b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -246,7 +248,7 @@ Friends</h2></td></tr>
  The use of this flag - complementary - is <b>not recommended.</b><br />
  Complementarity is now performed when ALL methods have been applied. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00027">27</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00052">52</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3d3f55edb6c9e43890b68c8fcb50a22a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3d3f55edb6c9e43890b68c8fcb50a22a">&#9670;&nbsp;</a></span>Cleaner() <span class="overload">[1/2]</span></h2>
@@ -274,17 +276,18 @@ Friends</h2></td></tr>
 
 <p>Class Constructor - Called by <a class="el" href="class_alignment.html">Alignment</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01598">1598</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01633">1633</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_cleaner_8h_source.html#l00038">keepSequences</a>, <a class="el" href="_cleaner_8h_source.html#l00046">left_boundary</a>, <a class="el" href="_cleaner_8h_source.html#l00050">right_boundary</a>, and <a class="el" href="_cleaner_8h_source.html#l00034">terminalGapOnly</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00067">blockSize</a>, <a class="el" href="_cleaner_8h_source.html#l00063">keepSequences</a>, <a class="el" href="_cleaner_8h_source.html#l00071">left_boundary</a>, <a class="el" href="_cleaner_8h_source.html#l00075">right_boundary</a>, and <a class="el" href="_cleaner_8h_source.html#l00059">terminalGapOnly</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l00041">Alignment::Alignment()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00046">Alignment::Alignment()</a>.</p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a3d3f55edb6c9e43890b68c8fcb50a22a_icgraph.svg" width="1379" height="130"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a3d3f55edb6c9e43890b68c8fcb50a22a_icgraph.svg" width="1375" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -325,17 +328,18 @@ Friends</h2></td></tr>
 
 <p>Copy Constructor - Called by <a class="el" href="class_alignment.html">Alignment</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01613">1613</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01648">1648</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_cleaner_8h_source.html#l00038">keepSequences</a>, <a class="el" href="_cleaner_8h_source.html#l00046">left_boundary</a>, <a class="el" href="_cleaner_8h_source.html#l00050">right_boundary</a>, and <a class="el" href="_cleaner_8h_source.html#l00034">terminalGapOnly</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_cleaner_8h_source.html#l00067">blockSize</a>, <a class="el" href="_cleaner_8h_source.html#l00063">keepSequences</a>, <a class="el" href="_cleaner_8h_source.html#l00071">left_boundary</a>, <a class="el" href="_cleaner_8h_source.html#l00075">right_boundary</a>, and <a class="el" href="_cleaner_8h_source.html#l00059">terminalGapOnly</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l00082">Alignment::Alignment()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00087">Alignment::Alignment()</a>.</p>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_afe42cb635ddd6bd968ae57e378deaac8_icgraph.svg" width="1876" height="611"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_afe42cb635ddd6bd968ae57e378deaac8_icgraph.svg" width="1872" height="611"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -361,9 +365,9 @@ Friends</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>Not In Use </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Designed for reducing comparisons for huge alignments. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01470">1470</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01483">1483</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
 
 </div>
 </div>
@@ -403,24 +407,26 @@ The first item in the vector contains it's size. </dd></dl>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01512">1512</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01525">1525</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l01421">calculateSeqIdentity()</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="utils_8cpp_source.html#l00245">utils::quicksort()</a>, <a class="el" href="utils_8cpp_source.html#l00484">utils::removeCharacter()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l01434">calculateSeqIdentity()</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="utils_8cpp_source.html#l00246">utils::quicksort()</a>, <a class="el" href="utils_8cpp_source.html#l00485">utils::removeCharacter()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01183">getClustering()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01211">getClustering()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a631cf3e2e55c00a995f0f4a51bfe7a2d_cgraph.svg" width="1104" height="163"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a631cf3e2e55c00a995f0f4a51bfe7a2d_cgraph.svg" width="1104" height="163"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a631cf3e2e55c00a995f0f4a51bfe7a2d_icgraph.svg" width="1450" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a631cf3e2e55c00a995f0f4a51bfe7a2d_icgraph.svg" width="1446" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -443,24 +449,26 @@ The first item in the vector contains it's size. </dd></dl>
 <p>Method to calculate identities between the sequences from the alignment.<br />
 See <a class="el" href="class_alignment.html#aeb3c72eeb5d2954ad68369d48f8c16e6" title="2D Matrix that represents how much each sequence resembles other sequences in the same MSA ...">Alignment::identities</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01421">1421</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01434">1434</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="defines_8h_source.html#l00096">AA</a>, <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00464">Alignment::getAlignmentType()</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
+<p class="reference">References <a class="el" href="defines_8h_source.html#l00088">AA</a>, <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00469">Alignment::getAlignmentType()</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01512">calculateRepresentativeSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">getCutPointClusters()</a>, <a class="el" href="_alignment_8cpp_source.html#l00900">Alignment::printSeqIdentity()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l00014">selectMethod()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01525">calculateRepresentativeSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01068">getCutPointClusters()</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00912">Alignment::printSeqIdentity()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l00042">selectMethod()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a65d829578be97c192561a129435b3c58_cgraph.svg" width="818" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a65d829578be97c192561a129435b3c58_cgraph.svg" width="818" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a65d829578be97c192561a129435b3c58_icgraph.svg" width="1735" height="195"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a65d829578be97c192561a129435b3c58_icgraph.svg" width="1731" height="190"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -504,24 +512,26 @@ See <a class="el" href="class_alignment.html#aeb3c72eeb5d2954ad68369d48f8c16e6" 
  <b> False </b> otherwise.<br />
 This should happen only if you pass a null pointer instead of a spuriousVector. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00827">827</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00855">855</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="defines_8h_source.html#l00096">AA</a>, <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00464">Alignment::getAlignmentType()</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
+<p class="reference">References <a class="el" href="defines_8h_source.html#l00088">AA</a>, <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00469">Alignment::getAlignmentType()</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00906">cleanSpuriousSeq()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00934">cleanSpuriousSeq()</a>.</p>
 <div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ab2db8eacfbe545c68fc287c43309e439_cgraph.svg" width="803" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ab2db8eacfbe545c68fc287c43309e439_cgraph.svg" width="803" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ab2db8eacfbe545c68fc287c43309e439_icgraph.svg" width="1418" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ab2db8eacfbe545c68fc287c43309e439_icgraph.svg" width="1414" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -578,24 +588,26 @@ This should happen only if you pass a null pointer instead of a spuriousVector. 
 <dl class="section user"><dt>Take in mind</dt><dd>If baseLine is too strict, the other two will be relaxed to obtain the minimum percentage desired. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00756">756</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00784">784</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_gaps_8cpp_source.html#l00178">statistics::Gaps::calcCutPoint()</a>, <a class="el" href="_similarity_8cpp_source.html#l00378">statistics::Similarity::calcCutPoint()</a>, <a class="el" href="_manager_8cpp_source.html#l00011">statistics::Manager::calculateConservationStats()</a>, <a class="el" href="_manager_8cpp_source.html#l00141">statistics::Manager::calculateGapStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_manager_8h_source.html#l00034">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00160">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_similarity_8cpp_source.html#l00335">statistics::Similarity::getMdkWindowedVector()</a>, <a class="el" href="_manager_8h_source.html#l00038">statistics::Manager::similarity</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_gaps_8cpp_source.html#l00181">statistics::Gaps::calcCutPoint()</a>, <a class="el" href="_similarity_8cpp_source.html#l00381">statistics::Similarity::calcCutPoint()</a>, <a class="el" href="_manager_8cpp_source.html#l00036">statistics::Manager::calculateConservationStats()</a>, <a class="el" href="_manager_8cpp_source.html#l00166">statistics::Manager::calculateGapStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00357">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_manager_8h_source.html#l00059">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00163">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_similarity_8cpp_source.html#l00338">statistics::Similarity::getMdkWindowedVector()</a>, <a class="el" href="_manager_8h_source.html#l00063">statistics::Manager::similarity</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01744">trimAlManager::CleanResiduesNonAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02145">trimAlManager::CleanResiduesNonAuto()</a>.</p>
 <div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-8-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a4718e31c0183b5a98751d77479faacf0_cgraph.svg" width="1846" height="904"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a4718e31c0183b5a98751d77479faacf0_cgraph.svg" width="1846" height="904"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-9-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a4718e31c0183b5a98751d77479faacf0_icgraph.svg" width="1107" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a4718e31c0183b5a98751d77479faacf0_icgraph.svg" width="1103" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -627,24 +639,26 @@ When found, the first residue is taken as the cutpoint for the sequences. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00929">929</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00957">957</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_gaps_8cpp_source.html#l00313">statistics::Gaps::calcCutPoint2ndSlope()</a>, <a class="el" href="_manager_8cpp_source.html#l00141">statistics::Manager::calculateGapStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_manager_8h_source.html#l00034">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00160">statistics::Gaps::getGapsWindow()</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_gaps_8cpp_source.html#l00316">statistics::Gaps::calcCutPoint2ndSlope()</a>, <a class="el" href="_manager_8cpp_source.html#l00166">statistics::Manager::calculateGapStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00090">cleanByCutValueOverpass()</a>, <a class="el" href="_manager_8h_source.html#l00059">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00163">statistics::Gaps::getGapsWindow()</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01707">trimAlManager::CleanResiduesAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02108">trimAlManager::CleanResiduesAuto()</a>.</p>
 <div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-10-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_aa57106470d2104a925b9396b8a9f33b3_cgraph.svg" width="1060" height="566"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_aa57106470d2104a925b9396b8a9f33b3_cgraph.svg" width="1060" height="566"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-11-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_aa57106470d2104a925b9396b8a9f33b3_icgraph.svg" width="1188" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_aa57106470d2104a925b9396b8a9f33b3_icgraph.svg" width="1184" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -702,24 +716,26 @@ To achieve this, the method starts in the middle of the sequence and, alternatin
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00203">203</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00231">231</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00082">Alignment::Alignment()</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01298">removeSmallerBlocks()</a>, <a class="el" href="utils_8cpp_source.html#l00066">utils::roundInt()</a>, and <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00087">Alignment::Alignment()</a>, <a class="el" href="_cleaner_8h_source.html#l00067">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_cleaner_8cpp_source.html#l01367">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01326">removeSmallerBlocks()</a>, <a class="el" href="utils_8cpp_source.html#l00068">utils::roundInt()</a>, and <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00792">cleanCompareFile()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l00732">cleanConservation()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00820">cleanCompareFile()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l00760">cleanConservation()</a>.</p>
 <div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-12-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a0e1e26d09055de52208ac74adf93b760_cgraph.svg" width="852" height="283"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a0e1e26d09055de52208ac74adf93b760_cgraph.svg" width="852" height="283"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-13-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-13-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a0e1e26d09055de52208ac74adf93b760_icgraph.svg" width="1407" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a0e1e26d09055de52208ac74adf93b760_icgraph.svg" width="1403" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -778,24 +794,26 @@ To achieve this, the method starts in the middle of the sequence and, alternatin
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00062">62</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00090">90</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00082">Alignment::Alignment()</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="utils_8cpp_source.html#l00203">utils::quicksort()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01298">removeSmallerBlocks()</a>, <a class="el" href="utils_8cpp_source.html#l00066">utils::roundInt()</a>, and <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00087">Alignment::Alignment()</a>, <a class="el" href="_cleaner_8h_source.html#l00067">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="utils_8cpp_source.html#l00204">utils::quicksort()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01367">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01326">removeSmallerBlocks()</a>, <a class="el" href="utils_8cpp_source.html#l00068">utils::roundInt()</a>, and <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00929">clean2ndSlope()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00708">cleanGaps()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01021">cleanNoAllGaps()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00957">clean2ndSlope()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00736">cleanGaps()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01049">cleanNoAllGaps()</a>.</p>
 <div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-14-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-14-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a13ae2074afb38708bc5cee9489d8ab6f_cgraph.svg" width="852" height="346"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a13ae2074afb38708bc5cee9489d8ab6f_cgraph.svg" width="852" height="346"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-15-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-15-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a13ae2074afb38708bc5cee9489d8ab6f_icgraph.svg" width="1422" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a13ae2074afb38708bc5cee9489d8ab6f_icgraph.svg" width="1418" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -867,24 +885,26 @@ To achieve this, the method starts in the middle of the sequence and, alternatin
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00329">329</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00357">357</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00082">Alignment::Alignment()</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01298">removeSmallerBlocks()</a>, <a class="el" href="utils_8cpp_source.html#l00066">utils::roundInt()</a>, and <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00087">Alignment::Alignment()</a>, <a class="el" href="_cleaner_8h_source.html#l00067">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="utils_8cpp_source.html#l00159">utils::quicksort()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01367">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01326">removeSmallerBlocks()</a>, <a class="el" href="utils_8cpp_source.html#l00068">utils::roundInt()</a>, and <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00756">clean()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00784">clean()</a>.</p>
 <div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-16-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-16-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-16-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a5afcae6b995a229b59785e4690b25a0f_cgraph.svg" width="852" height="346"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a5afcae6b995a229b59785e4690b25a0f_cgraph.svg" width="852" height="346"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-17" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-17-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-17-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-17-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a5afcae6b995a229b59785e4690b25a0f_icgraph.svg" width="1331" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a5afcae6b995a229b59785e4690b25a0f_icgraph.svg" width="1327" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -931,24 +951,26 @@ The method: </p>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00952">952</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00980">980</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_gaps_8cpp_source.html#l00313">statistics::Gaps::calcCutPoint2ndSlope()</a>, <a class="el" href="_manager_8cpp_source.html#l00011">statistics::Manager::calculateConservationStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00485">cleanStrict()</a>, <a class="el" href="_manager_8h_source.html#l00034">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00160">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_similarity_8cpp_source.html#l00335">statistics::Similarity::getMdkWindowedVector()</a>, <a class="el" href="utils_8cpp_source.html#l00038">utils::initlVect()</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_manager_8h_source.html#l00038">statistics::Manager::similarity</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_gaps_8cpp_source.html#l00316">statistics::Gaps::calcCutPoint2ndSlope()</a>, <a class="el" href="_manager_8cpp_source.html#l00036">statistics::Manager::calculateConservationStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00513">cleanStrict()</a>, <a class="el" href="_manager_8h_source.html#l00059">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00163">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_similarity_8cpp_source.html#l00338">statistics::Similarity::getMdkWindowedVector()</a>, <a class="el" href="utils_8cpp_source.html#l00040">utils::initlVect()</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="utils_8cpp_source.html#l00159">utils::quicksort()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_manager_8h_source.html#l00063">statistics::Manager::similarity</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01707">trimAlManager::CleanResiduesAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02108">trimAlManager::CleanResiduesAuto()</a>.</p>
 <div id="dynsection-18" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-18-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-18-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-18-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a6727a235afa29f08a50716f28fa5c8fc_cgraph.svg" width="1732" height="875"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a6727a235afa29f08a50716f28fa5c8fc_cgraph.svg" width="1732" height="875"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-19" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-19-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-19-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-19-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a6727a235afa29f08a50716f28fa5c8fc_icgraph.svg" width="1219" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a6727a235afa29f08a50716f28fa5c8fc_icgraph.svg" width="1215" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1004,24 +1026,26 @@ The method: </p>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00792">792</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00820">820</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="utils_8cpp_source.html#l00055">utils::copyVect()</a>, <a class="el" href="utils_8cpp_source.html#l00102">utils::min()</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, and <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l00231">cleanByCutValueFallBehind()</a>, <a class="el" href="utils_8cpp_source.html#l00057">utils::copyVect()</a>, <a class="el" href="utils_8cpp_source.html#l00104">utils::min()</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, and <a class="el" href="utils_8cpp_source.html#l00159">utils::quicksort()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01744">trimAlManager::CleanResiduesNonAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02145">trimAlManager::CleanResiduesNonAuto()</a>.</p>
 <div id="dynsection-20" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-20-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-20-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-20-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a385f785ecf54bd5e0b07e61325483973_cgraph.svg" width="1080" height="387"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a385f785ecf54bd5e0b07e61325483973_cgraph.svg" width="1080" height="387"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-21" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-21-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-21-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-21-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a385f785ecf54bd5e0b07e61325483973_icgraph.svg" width="1180" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a385f785ecf54bd5e0b07e61325483973_icgraph.svg" width="1176" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1069,24 +1093,26 @@ The method: </p>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00732">732</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00760">760</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_similarity_8cpp_source.html#l00378">statistics::Similarity::calcCutPoint()</a>, <a class="el" href="_manager_8cpp_source.html#l00011">statistics::Manager::calculateConservationStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_similarity_8cpp_source.html#l00335">statistics::Similarity::getMdkWindowedVector()</a>, <a class="el" href="_manager_8h_source.html#l00038">statistics::Manager::similarity</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_similarity_8cpp_source.html#l00381">statistics::Similarity::calcCutPoint()</a>, <a class="el" href="_manager_8cpp_source.html#l00036">statistics::Manager::calculateConservationStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00231">cleanByCutValueFallBehind()</a>, <a class="el" href="_similarity_8cpp_source.html#l00338">statistics::Similarity::getMdkWindowedVector()</a>, <a class="el" href="_manager_8h_source.html#l00063">statistics::Manager::similarity</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01744">trimAlManager::CleanResiduesNonAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02145">trimAlManager::CleanResiduesNonAuto()</a>.</p>
 <div id="dynsection-22" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-22-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-22-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-22-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a9cdbd6ebf78a284dd065b31319795b0c_cgraph.svg" width="1922" height="703"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a9cdbd6ebf78a284dd065b31319795b0c_cgraph.svg" width="1922" height="703"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-23" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-23-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-23-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-23-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a9cdbd6ebf78a284dd065b31319795b0c_icgraph.svg" width="1183" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a9cdbd6ebf78a284dd065b31319795b0c_icgraph.svg" width="1179" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1134,24 +1160,26 @@ The method: </p>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00708">708</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00736">736</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_gaps_8cpp_source.html#l00178">statistics::Gaps::calcCutPoint()</a>, <a class="el" href="_manager_8cpp_source.html#l00141">statistics::Manager::calculateGapStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_manager_8h_source.html#l00034">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00160">statistics::Gaps::getGapsWindow()</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_gaps_8cpp_source.html#l00181">statistics::Gaps::calcCutPoint()</a>, <a class="el" href="_manager_8cpp_source.html#l00166">statistics::Manager::calculateGapStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00090">cleanByCutValueOverpass()</a>, <a class="el" href="_manager_8h_source.html#l00059">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00163">statistics::Gaps::getGapsWindow()</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01707">trimAlManager::CleanResiduesAuto()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01744">trimAlManager::CleanResiduesNonAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02108">trimAlManager::CleanResiduesAuto()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l02145">trimAlManager::CleanResiduesNonAuto()</a>.</p>
 <div id="dynsection-24" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-24-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-24-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-24-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_af7c9e1a177424168fa4214aca9ebd8e2_cgraph.svg" width="1038" height="734"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_af7c9e1a177424168fa4214aca9ebd8e2_cgraph.svg" width="1038" height="734"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-25" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-25-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-25-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-25-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_af7c9e1a177424168fa4214aca9ebd8e2_icgraph.svg" width="1166" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_af7c9e1a177424168fa4214aca9ebd8e2_icgraph.svg" width="1162" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1182,24 +1210,26 @@ This method is specially useful when we remove missaligned sequences from a give
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01021">1021</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01049">1049</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_manager_8cpp_source.html#l00141">statistics::Manager::calculateGapStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_manager_8h_source.html#l00034">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00160">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_manager_8cpp_source.html#l00166">statistics::Manager::calculateGapStats()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00090">cleanByCutValueOverpass()</a>, <a class="el" href="_manager_8h_source.html#l00059">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00163">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01707">trimAlManager::CleanResiduesAuto()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01653">trimAlManager::CleanSequences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02108">trimAlManager::CleanResiduesAuto()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l02051">trimAlManager::CleanSequences()</a>.</p>
 <div id="dynsection-26" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-26-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-26-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-26-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a3af7bde2142886d6d723c95694b7b9ba_cgraph.svg" width="1070" height="515"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a3af7bde2142886d6d723c95694b7b9ba_cgraph.svg" width="1070" height="515"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-27" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-27-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-27-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-27-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a3af7bde2142886d6d723c95694b7b9ba_icgraph.svg" width="1198" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a3af7bde2142886d6d723c95694b7b9ba_icgraph.svg" width="1194" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1249,24 +1279,26 @@ This method is specially useful when we remove missaligned sequences from a give
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00686">686</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00714">714</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00082">Alignment::Alignment()</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, and <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00087">Alignment::Alignment()</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_cleaner_8cpp_source.html#l01367">removeAllGapsSeqsAndCols()</a>, and <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00906">cleanSpuriousSeq()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00934">cleanSpuriousSeq()</a>.</p>
 <div id="dynsection-28" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-28-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-28-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-28-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_abe5d03c820a6bee7935b719b9fc7be60_cgraph.svg" width="843" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_abe5d03c820a6bee7935b719b9fc7be60_cgraph.svg" width="843" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-29" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-29-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-29-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-29-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_abe5d03c820a6bee7935b719b9fc7be60_icgraph.svg" width="1414" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_abe5d03c820a6bee7935b719b9fc7be60_icgraph.svg" width="1410" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1316,24 +1348,26 @@ After calculating the number of hits for the sequence, it removes the sequence i
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. \ </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00906">906</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00934">934</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l00827">calculateSpuriousVector()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00686">cleanOverlapSeq()</a>, and <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l00855">calculateSpuriousVector()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00714">cleanOverlapSeq()</a>, and <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01653">trimAlManager::CleanSequences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02051">trimAlManager::CleanSequences()</a>.</p>
 <div id="dynsection-30" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-30-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-30-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-30-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a5ceceb5b637a6d4e6a13c3b5d8d76c1d_cgraph.svg" width="1088" height="231"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a5ceceb5b637a6d4e6a13c3b5d8d76c1d_cgraph.svg" width="1088" height="231"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-31" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-31-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-31-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-31-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a5ceceb5b637a6d4e6a13c3b5d8d76c1d_icgraph.svg" width="1191" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a5ceceb5b637a6d4e6a13c3b5d8d76c1d_icgraph.svg" width="1187" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1405,24 +1439,26 @@ Column blocks that don't have a minimum size set by the method itself, will be r
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the cleaned alignment. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00485">485</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00513">513</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00082">Alignment::Alignment()</a>, <a class="el" href="_cleaner_8h_source.html#l00042">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="utils_8cpp_source.html#l00066">utils::roundInt()</a>, and <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00087">Alignment::Alignment()</a>, <a class="el" href="_cleaner_8h_source.html#l00067">blockSize</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_cleaner_8cpp_source.html#l01367">removeAllGapsSeqsAndCols()</a>, <a class="el" href="utils_8cpp_source.html#l00068">utils::roundInt()</a>, and <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00952">cleanCombMethods()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00980">cleanCombMethods()</a>.</p>
 <div id="dynsection-32" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-32-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-32-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-32-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_afcc9a3a0759ebdaaa6fa07c0d1702a99_cgraph.svg" width="806" height="232"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_afcc9a3a0759ebdaaa6fa07c0d1702a99_cgraph.svg" width="806" height="232"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-33" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-33-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-33-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-33-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_afcc9a3a0759ebdaaa6fa07c0d1702a99_icgraph.svg" width="1404" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_afcc9a3a0759ebdaaa6fa07c0d1702a99_icgraph.svg" width="1400" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1464,17 +1500,18 @@ It inverses the saveResidues / saveSequences tags. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01576">1576</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01589">1589</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01629">trimAlManager::postprocess_alignment()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02023">trimAlManager::postprocess_alignment()</a>.</p>
 <div id="dynsection-34" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-34-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-34-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-34-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a24bd28e4191afc9471adff329bee1466_icgraph.svg" width="1028" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a24bd28e4191afc9471adff329bee1466_icgraph.svg" width="1024" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1504,24 +1541,26 @@ It inverses the saveResidues / saveSequences tags. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01183">1183</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01211">1211</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00082">Alignment::Alignment()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01512">calculateRepresentativeSeq()</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00087">Alignment::Alignment()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01525">calculateRepresentativeSeq()</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01653">trimAlManager::CleanSequences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02051">trimAlManager::CleanSequences()</a>.</p>
 <div id="dynsection-35" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-35-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-35-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-35-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a4fd1d8eb883d1a7b271d6d4e1b1df71b_cgraph.svg" width="1304" height="334"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a4fd1d8eb883d1a7b271d6d4e1b1df71b_cgraph.svg" width="1304" height="334"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-36" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-36-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-36-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-36-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a4fd1d8eb883d1a7b271d6d4e1b1df71b_icgraph.svg" width="1163" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a4fd1d8eb883d1a7b271d6d4e1b1df71b_icgraph.svg" width="1159" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1552,24 +1591,26 @@ It inverses the saveResidues / saveSequences tags. </p>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>CutPoint to obtain clusterNumber sequences. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01040">1040</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01068">1068</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l01421">calculateSeqIdentity()</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="utils_8cpp_source.html#l00245">utils::quicksort()</a>, <a class="el" href="utils_8cpp_source.html#l00484">utils::removeCharacter()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l01434">calculateSeqIdentity()</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="utils_8cpp_source.html#l00246">utils::quicksort()</a>, <a class="el" href="utils_8cpp_source.html#l00485">utils::removeCharacter()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01653">trimAlManager::CleanSequences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02051">trimAlManager::CleanSequences()</a>.</p>
 <div id="dynsection-37" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-37-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-37-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-37-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a60955e2ae3faa3ccf84780a52fb1a08a_cgraph.svg" width="1059" height="163"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a60955e2ae3faa3ccf84780a52fb1a08a_cgraph.svg" width="1059" height="163"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-38" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-38-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-38-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-38-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a60955e2ae3faa3ccf84780a52fb1a08a_icgraph.svg" width="1204" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a60955e2ae3faa3ccf84780a52fb1a08a_icgraph.svg" width="1200" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1602,24 +1643,26 @@ It inverses the saveResidues / saveSequences tags. </p>
 
 <p>Method that identifies and removes columns and sequences composed only by gaps. </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01354">1354</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01367">1367</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="reportsystem_8cpp_source.html#l00005">debug</a>, <a class="el" href="reportsystem_8h_source.html#l00210">KeepingOnlyGapsSequence</a>, <a class="el" href="_cleaner_8h_source.html#l00038">keepSequences</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="reportsystem_8h_source.html#l00208">RemovingOnlyGapsSequence</a>, <a class="el" href="reportsystem_8cpp_source.html#l00437">reporting::reportManager::report()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, <a class="el" href="_alignment_8h_source.html#l00080">Alignment::seqsName</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="reportsystem_8cpp_source.html#l00033">debug</a>, <a class="el" href="reportsystem_8h_source.html#l00269">KeepingOnlyGapsSequence</a>, <a class="el" href="_cleaner_8h_source.html#l00063">keepSequences</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="reportsystem_8h_source.html#l00267">RemovingOnlyGapsSequence</a>, <a class="el" href="reportsystem_8cpp_source.html#l00120">reporting::reportManager::report()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, <a class="el" href="_alignment_8h_source.html#l00080">Alignment::seqsName</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00686">cleanOverlapSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00485">cleanStrict()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01212">removeColumns()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01234">removeSequences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00231">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00090">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00357">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00714">cleanOverlapSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00513">cleanStrict()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01240">removeColumns()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01262">removeSequences()</a>.</p>
 <div id="dynsection-39" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-39-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-39-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-39-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ada8ad076dd037f00ae3f4fd17762641f_cgraph.svg" width="416" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ada8ad076dd037f00ae3f4fd17762641f_cgraph.svg" width="416" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-40" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-40-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-40-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-40-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ada8ad076dd037f00ae3f4fd17762641f_icgraph.svg" width="1692" height="483"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ada8ad076dd037f00ae3f4fd17762641f_icgraph.svg" width="1688" height="483"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1673,24 +1716,65 @@ It inverses the saveResidues / saveSequences tags. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01212">1212</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01240">1240</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00082">Alignment::Alignment()</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_alignment_8cpp_source.html#l02335">Alignment::updateSequencesAndResiduesNums()</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00087">Alignment::Alignment()</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_cleaner_8cpp_source.html#l01367">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, and <a class="el" href="_alignment_2_alignment_8cpp_source.html#l02347">Alignment::updateSequencesAndResiduesNums()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01744">trimAlManager::CleanResiduesNonAuto()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02145">trimAlManager::CleanResiduesNonAuto()</a>.</p>
 <div id="dynsection-41" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-41-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-41-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-41-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ac8e92eb8ae8a5caf021801e56cdb9faf_cgraph.svg" width="839" height="246"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ac8e92eb8ae8a5caf021801e56cdb9faf_cgraph.svg" width="839" height="246"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-42" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-42-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-42-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-42-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ac8e92eb8ae8a5caf021801e56cdb9faf_icgraph.svg" width="1171" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ac8e92eb8ae8a5caf021801e56cdb9faf_icgraph.svg" width="1167" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a0f7c2dbf2042f87df31f6845c4fc3b6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f7c2dbf2042f87df31f6845c4fc3b6c">&#9670;&nbsp;</a></span>removeDuplicates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Cleaner::removeDuplicates </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01610">1610</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="reportsystem_8cpp_source.html#l00033">debug</a>, <a class="el" href="_alignment_8h_source.html#l00068">Alignment::originalNumberOfSequences</a>, <a class="el" href="reportsystem_8h_source.html#l00298">RemovingDuplicateSequences</a>, <a class="el" href="reportsystem_8cpp_source.html#l00173">reporting::reportManager::report()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, <a class="el" href="_alignment_8h_source.html#l00080">Alignment::seqsName</a>, and <a class="el" href="_alignment_8h_source.html#l00078">Alignment::sequences</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02051">trimAlManager::CleanSequences()</a>.</p>
+<div id="dynsection-43" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-43-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-43-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-43-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a0f7c2dbf2042f87df31f6845c4fc3b6c_cgraph.svg" width="402" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div id="dynsection-44" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-44-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-44-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-44-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a0f7c2dbf2042f87df31f6845c4fc3b6c_icgraph.svg" width="1187" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1715,24 +1799,26 @@ Everything between the borders are kept in the trimmed alignments. </p>
 <dl class="section return"><dt>Returns</dt><dd><b>True</b> if everything went ok. <br />
  <b> False </b>if it was not possible to calculate the gap stats. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01255">1255</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01283">1283</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_manager_8cpp_source.html#l00141">statistics::Manager::calculateGapStats()</a>, <a class="el" href="reportsystem_8cpp_source.html#l00005">debug</a>, <a class="el" href="_manager_8h_source.html#l00034">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00160">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_cleaner_8h_source.html#l00046">left_boundary</a>, <a class="el" href="reportsystem_8h_source.html#l00133">LeftBoundaryBiggerThanRightBoundary</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="reportsystem_8cpp_source.html#l00384">reporting::reportManager::report()</a>, <a class="el" href="_cleaner_8h_source.html#l00050">right_boundary</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>, and <a class="el" href="_alignment_8cpp_source.html#l02335">Alignment::updateSequencesAndResiduesNums()</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_manager_8cpp_source.html#l00166">statistics::Manager::calculateGapStats()</a>, <a class="el" href="reportsystem_8cpp_source.html#l00033">debug</a>, <a class="el" href="_manager_8h_source.html#l00059">statistics::Manager::gaps</a>, <a class="el" href="_gaps_8cpp_source.html#l00163">statistics::Gaps::getGapsWindow()</a>, <a class="el" href="_cleaner_8h_source.html#l00071">left_boundary</a>, <a class="el" href="reportsystem_8h_source.html#l00164">LeftBoundaryBiggerThanRightBoundary</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="reportsystem_8cpp_source.html#l00067">reporting::reportManager::report()</a>, <a class="el" href="_cleaner_8h_source.html#l00075">right_boundary</a>, <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>, <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>, and <a class="el" href="_alignment_2_alignment_8cpp_source.html#l02347">Alignment::updateSequencesAndResiduesNums()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01629">trimAlManager::postprocess_alignment()</a>.</p>
-<div id="dynsection-43" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-43-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-43-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02023">trimAlManager::postprocess_alignment()</a>.</p>
+<div id="dynsection-45" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-45-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-45-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-43-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ab7f5b746b97697181f4cd06063cbb49a_cgraph.svg" width="904" height="338"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-45-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ab7f5b746b97697181f4cd06063cbb49a_cgraph.svg" width="904" height="338"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
-<div id="dynsection-44" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-44-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-44-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-44-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ab7f5b746b97697181f4cd06063cbb49a_icgraph.svg" width="984" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-46" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-46-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-46-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-46-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_ab7f5b746b97697181f4cd06063cbb49a_icgraph.svg" width="980" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1786,24 +1872,26 @@ Everything between the borders are kept in the trimmed alignments. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01234">1234</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01262">1262</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00082">Alignment::Alignment()</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_alignment_8cpp_source.html#l02335">Alignment::updateSequencesAndResiduesNums()</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00087">Alignment::Alignment()</a>, <a class="el" href="_alignment_8h_source.html#l00058">Alignment::Cleaning</a>, <a class="el" href="_cleaner_8cpp_source.html#l01367">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_alignment_8h_source.html#l00096">Alignment::saveSequences</a>, and <a class="el" href="_alignment_2_alignment_8cpp_source.html#l02347">Alignment::updateSequencesAndResiduesNums()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01653">trimAlManager::CleanSequences()</a>.</p>
-<div id="dynsection-45" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-45-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-45-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02051">trimAlManager::CleanSequences()</a>.</p>
+<div id="dynsection-47" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-47-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-47-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-45-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a932af26c56652410dc2a30c553376c0b_cgraph.svg" width="851" height="246"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-47-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a932af26c56652410dc2a30c553376c0b_cgraph.svg" width="851" height="246"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
-<div id="dynsection-46" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-46-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-46-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-46-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a932af26c56652410dc2a30c553376c0b_icgraph.svg" width="1194" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-48" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-48-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-48-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-48-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a932af26c56652410dc2a30c553376c0b_icgraph.svg" width="1190" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1843,17 +1931,18 @@ Everything between the borders are kept in the trimmed alignments. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01298">1298</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01326">1326</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, and <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, and <a class="el" href="_alignment_8h_source.html#l00095">Alignment::saveResidues</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>.</p>
-<div id="dynsection-47" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-47-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-47-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00231">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00090">cleanByCutValueOverpass()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l00357">cleanByCutValueOverpassOrEquals()</a>.</p>
+<div id="dynsection-49" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-49-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-49-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-47-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a5620f6a511bc0ac844c71b2de3ae1fdb_icgraph.svg" width="1686" height="291"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-49-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a5620f6a511bc0ac844c71b2de3ae1fdb_icgraph.svg" width="1682" height="291"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1875,24 +1964,26 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p>Method that selects the best cleaning method based on statistics of the alignment. </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00014">14</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l00042">42</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00455">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l01421">calculateSeqIdentity()</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, and <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00485">alig</a>, <a class="el" href="_cleaner_8cpp_source.html#l01434">calculateSeqIdentity()</a>, <a class="el" href="_alignment_8h_source.html#l00089">Alignment::identities</a>, and <a class="el" href="_alignment_8h_source.html#l00070">Alignment::numberOfSequences</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01707">trimAlManager::CleanResiduesAuto()</a>.</p>
-<div id="dynsection-48" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-48-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-48-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l02108">trimAlManager::CleanResiduesAuto()</a>.</p>
+<div id="dynsection-50" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-50-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-50-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-48-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a6e219be8cd47b2d084e4563c2c66a947_cgraph.svg" width="1019" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-50-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a6e219be8cd47b2d084e4563c2c66a947_cgraph.svg" width="1019" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
-<div id="dynsection-49" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-49-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-49-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-49-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a6e219be8cd47b2d084e4563c2c66a947_icgraph.svg" width="1182" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-51" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-51-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-51-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-51-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a6e219be8cd47b2d084e4563c2c66a947_icgraph.svg" width="1178" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1922,9 +2013,9 @@ Everything between the borders are kept in the trimmed alignments. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01173">1173</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01201">1201</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00046">left_boundary</a>, and <a class="el" href="_cleaner_8h_source.html#l00050">right_boundary</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00071">left_boundary</a>, and <a class="el" href="_cleaner_8h_source.html#l00075">right_boundary</a>.</p>
 
 </div>
 </div>
@@ -1952,17 +2043,18 @@ Everything between the borders are kept in the trimmed alignments. </p>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01166">1166</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8cpp_source.html#l01194">1194</a> of file <a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00034">terminalGapOnly</a>.</p>
+<p class="reference">References <a class="el" href="_cleaner_8h_source.html#l00059">terminalGapOnly</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01382">trimAlManager::innerPerform()</a>, and <a class="el" href="trimal_manager_8cpp_source.html#l01419">trimAlManager::perform_VCF()</a>.</p>
-<div id="dynsection-50" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-50-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-50-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01803">trimAlManager::innerPerform()</a>.</p>
+<div id="dynsection-52" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-52-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-52-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-50-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a1f4cdd8e06a4c461534a694ffa4ec1a2_icgraph.svg" width="726" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-52-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_cleaner_a1f4cdd8e06a4c461534a694ffa4ec1a2_icgraph.svg" width="722" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -1988,7 +2080,7 @@ Everything between the borders are kept in the trimmed alignments. </p>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00450">450</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00480">480</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
 </div>
 </div>
@@ -2015,9 +2107,9 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p>Pointer to the alignment that contains this object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00455">455</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00485">485</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01470">calculateRelaxedSeqIdentity()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01512">calculateRepresentativeSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01421">calculateSeqIdentity()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00827">calculateSpuriousVector()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00756">clean()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00929">clean2ndSlope()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00952">cleanCombMethods()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00792">cleanCompareFile()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00732">cleanConservation()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01598">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00708">cleanGaps()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01021">cleanNoAllGaps()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00686">cleanOverlapSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00906">cleanSpuriousSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00485">cleanStrict()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01576">computeComplementaryAlig()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01183">getClustering()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01040">getCutPointClusters()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01212">removeColumns()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01255">removeOnlyTerminal()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01234">removeSequences()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01298">removeSmallerBlocks()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l00014">selectMethod()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01483">calculateRelaxedSeqIdentity()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01525">calculateRepresentativeSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01434">calculateSeqIdentity()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00855">calculateSpuriousVector()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00784">clean()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00957">clean2ndSlope()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00231">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00090">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00357">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00980">cleanCombMethods()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00820">cleanCompareFile()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00760">cleanConservation()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01633">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00736">cleanGaps()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01049">cleanNoAllGaps()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00714">cleanOverlapSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00934">cleanSpuriousSeq()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00513">cleanStrict()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01589">computeComplementaryAlig()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01211">getClustering()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01068">getCutPointClusters()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01367">removeAllGapsSeqsAndCols()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01240">removeColumns()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01610">removeDuplicates()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01283">removeOnlyTerminal()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01262">removeSequences()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01326">removeSmallerBlocks()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l00042">selectMethod()</a>.</p>
 
 </div>
 </div>
@@ -2035,9 +2127,9 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p>Block size to use on the cleaning methods. </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00042">42</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00067">67</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00203">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00062">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00329">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01598">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00485">cleanStrict()</a>, and <a class="el" href="_alignment_8cpp_source.html#l00262">Alignment::setBlockSize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l00231">cleanByCutValueFallBehind()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00090">cleanByCutValueOverpass()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00357">cleanByCutValueOverpassOrEquals()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01633">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l00513">cleanStrict()</a>, and <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00267">Alignment::setBlockSize()</a>.</p>
 
 </div>
 </div>
@@ -2055,9 +2147,9 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p>Flag for keeping sequences even when they are composed only by gaps. </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00038">38</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00063">63</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01598">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01354">removeAllGapsSeqsAndCols()</a>, and <a class="el" href="_alignment_8cpp_source.html#l00269">Alignment::setKeepSequencesFlag()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01633">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01367">removeAllGapsSeqsAndCols()</a>, and <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00274">Alignment::setKeepSequencesFlag()</a>.</p>
 
 </div>
 </div>
@@ -2075,9 +2167,9 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p>left boundary of the alignment </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00046">46</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00071">71</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01598">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01255">removeOnlyTerminal()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01173">setBoundaries()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01633">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01283">removeOnlyTerminal()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01201">setBoundaries()</a>.</p>
 
 </div>
 </div>
@@ -2095,9 +2187,9 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p>right boundary of the alignment </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00050">50</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00075">75</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01598">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01255">removeOnlyTerminal()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01173">setBoundaries()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01633">Cleaner()</a>, <a class="el" href="_cleaner_8cpp_source.html#l01283">removeOnlyTerminal()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01201">setBoundaries()</a>.</p>
 
 </div>
 </div>
@@ -2115,15 +2207,15 @@ Everything between the borders are kept in the trimmed alignments. </p>
 
 <p>Flag for trimming only on the terminal positions. </p>
 
-<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00034">34</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_cleaner_8h_source.html#l00059">59</a> of file <a class="el" href="_cleaner_8h_source.html">Cleaner.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01598">Cleaner()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01166">setTrimTerminalGapsFlag()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_cleaner_8cpp_source.html#l01633">Cleaner()</a>, and <a class="el" href="_cleaner_8cpp_source.html#l01194">setTrimTerminalGapsFlag()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/vfernandez/git/trimAl/include/<a class="el" href="_cleaner_8h_source.html">Cleaner.h</a></li>
-<li>/home/vfernandez/git/trimAl/source/<a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a></li>
+<li>/home/vfernandez/git/MyFork/include/<a class="el" href="_cleaner_8h_source.html">Cleaner.h</a></li>
+<li>/home/vfernandez/git/MyFork/source/<a class="el" href="_cleaner_8cpp_source.html">Cleaner.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

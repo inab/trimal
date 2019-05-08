@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=9"/>
     <meta name="generator" content="Doxygen 1.8.13"/>
-    <title>trimAl: /home/vfernandez/git/trimAl/include/reportsystem.h File Reference</title>
+    <title>trimAl: /home/vfernandez/git/MyFork/include/reportsystem.h File Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -115,6 +115,8 @@ Enumerations</h2></td></tr>
 </td></tr>
 <tr class="separator:a0822d01c051e2b76c48c9ae19b07a471"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59e56af19e754a6aa26a612ebf91d05f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05f">ErrorCode</a> { <br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa7a0515efee45d6f8a1defe05b8901f5c">SomethingWentWrong_reportToDeveloper</a> = 0, 
+<br />
 &#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faef2443fff64589a6c1b94a95d8363cc8">AlignmentNotLoaded</a> = 1, 
 <br />
 &#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa8d33a1e74113ede7ecb2813fa4629579">NoFormatsSpecified</a> = 2, 
@@ -311,6 +313,40 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa0c88e40dc6518a263ab8aeb6f69f0778">MultipleOutputFormatsSameName</a> = 96, 
 <br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa1ecf1764073169c1b4e78c6969b12112">MultipleInputs</a> = 97, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fac1ccd1c7a1c36eb0a7d97e1469f3da5d">ReferenceNucleotideNotCorresponding</a> = 98, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad691876005af6eb25eadf28d8c8071d4">OverwrittingSNP</a> = 99, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fae5ab1c331cad7ffea864b8e75db18cc6">MoreDonorsOnLineThanPresented</a> = 100, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa44a4e26e23ad2fa888f9c823c1930478">MinQualityLesserThan0</a> = 101, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa72dacd89f015627bcfaa69743e8c4f4f">MinQualityNotRecognized</a> = 102, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa85271a7774e04b73820b1cada966bf30">MinCoverageLesserThan0</a> = 103, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fab68ea5679290b0886a2c90bbd7f0f1c1">MinCoverageNotRecognized</a> = 104, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faf95ad78ccb21093d0175fc36027d212d">OnlyValidWithVCF</a> = 105, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa3219f82cb6bf3f90f1d8d38bd54fbeaf">TriedRenamingOutputPreventOverride</a> = 106, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa523951a624d37183fa5e0d3a6b17bf5e">AbsoluteAndRelativeGapThreshold</a> = 107, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05faf1526985e4ed37b02b4e72e13498324e">AbsoluteGapThresholdLessThanZero</a> = 108, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fab553895fb4268b6009c8e9b2db6faa12">AbsoluteGapThresholdBiggerThanNumberOfSequences</a> = 109, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa0763bf171ac43ba21792f929458e628d">AbsoluteGapThresholdNotRecognized</a> = 110, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa4cfcc4b8071230fa545886cf652dcfc0">MoreThanOneAutomatedMethod</a> = 111, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa860bd843ef98be9032b2935ba7091b29">ForceSelectAndInArgumentsProvided</a> = 108, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fa37527e2efd833f5d784385bc15053b64">ComparesetAndInArgumentsProvided</a> = 109, 
+<br />
 &#160;&#160;<a class="el" href="reportsystem_8h.html#a59e56af19e754a6aa26a612ebf91d05fad478ecc3d437135f059fe4c0453e5efc">__MAXERROR</a>
 <br />
  }</td></tr>
@@ -330,7 +366,11 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a99252fa48d69f9b2c3292ec84398c978">DonorAlreadyAdded</a> = 7, 
 <br />
-&#160;&#160;<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65ac1ccd1c7a1c36eb0a7d97e1469f3da5d">ReferenceNucleotideNotCorresponding</a> = 8, 
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a04af78bfbf9bd672ba5b47d6baf15d47">SNPAlreadApplied</a> = 8, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65aae1a40b105eaed703d1dab2096f1de6a">OverwrittingFile</a> = 9, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65aa8c5315e818cc93a3a2094801d8570d9">RenamingOutputPreventOverride</a> = 10, 
 <br />
 &#160;&#160;<a class="el" href="reportsystem_8h.html#a1be246973c0b17c33e6e5f99bcc2dc65a3a8e0672ec02531643c74adda48f7ce7">__MAXWARNING</a>
 <br />
@@ -340,6 +380,10 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="reportsystem_8h.html#a0829d185720916db5a931df28f0064bfa22225703b83b4d977cf0a9523cd0e955">CuttingSequence</a> = 1, 
 <br />
 &#160;&#160;<a class="el" href="reportsystem_8h.html#a0829d185720916db5a931df28f0064bfaa9df6ce8350cedbad88f22af506ffcab">WindowSizeCompareset</a> = 2, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a0829d185720916db5a931df28f0064bfafb8c20a09f064bf69d255bb01cb88786">AddingSNP</a> = 3, 
+<br />
+&#160;&#160;<a class="el" href="reportsystem_8h.html#a0829d185720916db5a931df28f0064bfab0849813772a3b01e9217b9e349baa4b">RemovingDuplicateSequences</a> = 4, 
 <br />
 &#160;&#160;<a class="el" href="reportsystem_8h.html#a0829d185720916db5a931df28f0064bfa5a23043db9e94656d5403c7bd0b0f2fa">__MAXINFO</a>
 <br />
@@ -359,7 +403,8 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faef2443fff64589a6c1b94a95d8363cc8"></a>AlignmentNotLoaded&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa7a0515efee45d6f8a1defe05b8901f5c"></a>SomethingWentWrong_reportToDeveloper&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faef2443fff64589a6c1b94a95d8363cc8"></a>AlignmentNotLoaded&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa8d33a1e74113ede7ecb2813fa4629579"></a>NoFormatsSpecified&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa1fec780513046c768de63d658ac6bc4c"></a>AlternativeMatrixNotRecognized&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa910f51553b4f4ef7cdeb5d9b30f711d7"></a>ReferenceFileNotLoaded&#160;</td><td class="fielddoc"></td></tr>
@@ -457,10 +502,27 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa3ec6a93590637152f3a53186bf0c28e2"></a>AlignmentIsEmpty&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa24689202543c46e5b6cf0d818ca687e1"></a>AlignmentTypeIsUnknown&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa0c88e40dc6518a263ab8aeb6f69f0778"></a>MultipleOutputFormatsSameName&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa1ecf1764073169c1b4e78c6969b12112"></a>MultipleInputs&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fac1ccd1c7a1c36eb0a7d97e1469f3da5d"></a>ReferenceNucleotideNotCorresponding&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fad691876005af6eb25eadf28d8c8071d4"></a>OverwrittingSNP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fae5ab1c331cad7ffea864b8e75db18cc6"></a>MoreDonorsOnLineThanPresented&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa44a4e26e23ad2fa888f9c823c1930478"></a>MinQualityLesserThan0&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa72dacd89f015627bcfaa69743e8c4f4f"></a>MinQualityNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa85271a7774e04b73820b1cada966bf30"></a>MinCoverageLesserThan0&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fab68ea5679290b0886a2c90bbd7f0f1c1"></a>MinCoverageNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faf95ad78ccb21093d0175fc36027d212d"></a>OnlyValidWithVCF&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa3219f82cb6bf3f90f1d8d38bd54fbeaf"></a>TriedRenamingOutputPreventOverride&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa523951a624d37183fa5e0d3a6b17bf5e"></a>AbsoluteAndRelativeGapThreshold&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05faf1526985e4ed37b02b4e72e13498324e"></a>AbsoluteGapThresholdLessThanZero&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fab553895fb4268b6009c8e9b2db6faa12"></a>AbsoluteGapThresholdBiggerThanNumberOfSequences&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa0763bf171ac43ba21792f929458e628d"></a>AbsoluteGapThresholdNotRecognized&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa4cfcc4b8071230fa545886cf652dcfc0"></a>MoreThanOneAutomatedMethod&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa860bd843ef98be9032b2935ba7091b29"></a>ForceSelectAndInArgumentsProvided&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fa37527e2efd833f5d784385bc15053b64"></a>ComparesetAndInArgumentsProvided&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a59e56af19e754a6aa26a612ebf91d05fad478ecc3d437135f059fe4c0453e5efc"></a>__MAXERROR&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="reportsystem_8h_source.html#l00027">27</a> of file <a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reportsystem_8h_source.html#l00056">56</a> of file <a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>.</p>
 
 </div>
 </div>
@@ -478,10 +540,12 @@ Enumerations</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0829d185720916db5a931df28f0064bfa22225703b83b4d977cf0a9523cd0e955"></a>CuttingSequence&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a0829d185720916db5a931df28f0064bfaa9df6ce8350cedbad88f22af506ffcab"></a>WindowSizeCompareset&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0829d185720916db5a931df28f0064bfafb8c20a09f064bf69d255bb01cb88786"></a>AddingSNP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0829d185720916db5a931df28f0064bfab0849813772a3b01e9217b9e349baa4b"></a>RemovingDuplicateSequences&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a0829d185720916db5a931df28f0064bfa5a23043db9e94656d5403c7bd0b0f2fa"></a>__MAXINFO&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="reportsystem_8h_source.html#l00227">227</a> of file <a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reportsystem_8h_source.html#l00291">291</a> of file <a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>.</p>
 
 </div>
 </div>
@@ -509,7 +573,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="reportsystem_8h_source.html#l00015">15</a> of file <a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reportsystem_8h_source.html#l00044">44</a> of file <a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>.</p>
 
 </div>
 </div>
@@ -532,11 +596,13 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65a4fbe16f7f958d68dfb2dc901fb5d5139"></a>LessNucleotidesThanExpected&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65a6323bd54dc90d34a725f24310fe0c0a8"></a>HeaderWillBeCut&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65a99252fa48d69f9b2c3292ec84398c978"></a>DonorAlreadyAdded&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65ac1ccd1c7a1c36eb0a7d97e1469f3da5d"></a>ReferenceNucleotideNotCorresponding&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65a04af78bfbf9bd672ba5b47d6baf15d47"></a>SNPAlreadApplied&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65aae1a40b105eaed703d1dab2096f1de6a"></a>OverwrittingFile&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65aa8c5315e818cc93a3a2094801d8570d9"></a>RenamingOutputPreventOverride&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1be246973c0b17c33e6e5f99bcc2dc65a3a8e0672ec02531643c74adda48f7ce7"></a>__MAXWARNING&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="reportsystem_8h_source.html#l00207">207</a> of file <a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="reportsystem_8h_source.html#l00266">266</a> of file <a class="el" href="reportsystem_8h_source.html">reportsystem.h</a>.</p>
 
 </div>
 </div>

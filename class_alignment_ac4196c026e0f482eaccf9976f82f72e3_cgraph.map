@@ -15,7 +15,7 @@
 <area shape="rect" id="node13" href="$classstatistics_1_1_similarity.html#adcb5627b9704850e85433fc40c19db17" title="Allows us compute the conservationWindow&#39;s values. " alt="" coords="511,298,648,339"/>
 <area shape="rect" id="node14" href="$classstatistics_1_1_similarity.html#ae69ec0e79912ae23c8cfe97358c4794d" title="Method to calculate the similarity values of a alignment matrix. " alt="" coords="715,210,852,251"/>
 <area shape="rect" id="node15" href="$classstatistics_1_1_similarity.html#a75bd235b3207235eefa7b52dff063c76" title="Computes the matrix identity between alignment&#39;s columns. " alt="" coords="914,145,1075,186"/>
-<area shape="rect" id="node16" href="$class_alignment.html#ab2487799d9a7d593d7fbe1b8da9593f5" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="1131,93,1325,120"/>
+<area shape="rect" id="node16" href="$class_alignment.html#a3f8f2eafd37c9b5bc275b9889a2de96a" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="1131,93,1325,120"/>
 <area shape="rect" id="node18" href="$classstatistics_1_1_manager.html#a1969a416d3020d25daa56de6c5e305db" title="Method to handle gap stat calculation It checks if the gaps submodule has been created, otherwise, creates it. " alt="" coords="926,210,1063,251"/>
 <area shape="rect" id="node21" href="$classstatistics_1_1similarity_matrix.html#a0cdb3ed14678b442824e84e6385e8f84" title="Method to get the similarity distance between two residues, A and B Characters provided must be both ..." alt="" coords="909,286,1080,327"/>
 <area shape="rect" id="node17" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type. " alt="" coords="1376,93,1552,120"/>

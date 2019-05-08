@@ -13,7 +13,7 @@
 <area shape="rect" id="node5" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="1617,337,1780,379"/>
 <area shape="rect" id="node7" href="$class_cleaner.html#a65d829578be97c192561a129435b3c58" title="Method to calculate identities between the sequences from the alignment. See Alignment::identities. " alt="" coords="865,130,1059,157"/>
 <area shape="rect" id="node11" href="$namespaceutils.html#a40640e1942f00797e9fe8284e8fbdb14" title="Maximum of two numbers method. " alt="" coords="493,173,571,199"/>
-<area shape="rect" id="node8" href="$class_alignment.html#ab2487799d9a7d593d7fbe1b8da9593f5" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="1366,290,1559,317"/>
+<area shape="rect" id="node8" href="$class_alignment.html#a3f8f2eafd37c9b5bc275b9889a2de96a" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="1366,290,1559,317"/>
 <area shape="rect" id="node9" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type. " alt="" coords="1611,407,1787,434"/>
 <area shape="rect" id="node10" href="$namespaceutils.html#a6286fde6f4dd58ef0cfa9d55341b72f8" title="utils::toUpper" alt="" coords="1835,437,1935,463"/>
 <area shape="rect" id="node13" href="$class_alignment.html#ab4d73aec4e1ec82bee55321791a1c6dc" title="Calculates overlap between sequences. " alt="" coords="1107,181,1315,207"/>

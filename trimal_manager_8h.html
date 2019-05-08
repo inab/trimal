@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=9"/>
     <meta name="generator" content="Doxygen 1.8.13"/>
-    <title>trimAl: /home/vfernandez/git/trimAl/include/trimalManager.h File Reference</title>
+    <title>trimAl: /home/vfernandez/git/MyFork/include/trimalManager.h File Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -65,7 +65,8 @@ $(document).ready(function(){initNavTree('trimal_manager_8h.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">trimalManager.h File Reference</div>  </div>
 </div><!--header-->
@@ -79,6 +80,7 @@ $(document).ready(function(){initNavTree('trimal_manager_8h.html','');});
 <code>#include &lt;cstring&gt;</code><br />
 <code>#include &lt;iosfwd&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
 </div>
 <p><a href="trimal_manager_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -88,13 +90,65 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main class of trimAl. <br />
 It is strutured to work with 3 calls:  <a href="classtrim_al_manager.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtrim_al_manager_1_1access__by.html">trimAlManager::access_by&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
+<tr class="memitem:namespace_catch"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_catch.html">Catch</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespacestatistics"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestatistics.html">statistics</a></td></tr>
 <tr class="memdesc:namespacestatistics"><td class="mdescLeft">&#160;</td><td class="mdescRight">Namespace containing all classes related to statistics handling. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aff2bec04c5273cac8f5457d7042ecafc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trimal_manager_8h.html#aff2bec04c5273cac8f5457d7042ecafc">trimAlManagerPrivateExposerCreator</a>(TOKEN)&#160;&#160;&#160;template &lt;&gt; struct <a class="el" href="structtrim_al_manager_1_1access__by.html">trimAlManager::access_by</a>&lt; TOKEN&quot;&quot;_hash&gt;</td></tr>
+<tr class="separator:aff2bec04c5273cac8f5457d7042ecafc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e6d07d50c57548ab2419b89e52808c5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trimal_manager_8h.html#a0e6d07d50c57548ab2419b89e52808c5">trimAlManagerPrivateExposerCaller</a>(TOKEN)&#160;&#160;&#160;<a class="el" href="structtrim_al_manager_1_1access__by.html">trimAlManager::access_by</a>&lt;TOKEN&quot;&quot;_hash&gt;</td></tr>
+<tr class="separator:a0e6d07d50c57548ab2419b89e52808c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a0e6d07d50c57548ab2419b89e52808c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e6d07d50c57548ab2419b89e52808c5">&#9670;&nbsp;</a></span>trimAlManagerPrivateExposerCaller</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define trimAlManagerPrivateExposerCaller</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TOKEN</td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="structtrim_al_manager_1_1access__by.html">trimAlManager::access_by</a>&lt;TOKEN&quot;&quot;_hash&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="trimal_manager_8h_source.html#l00333">333</a> of file <a class="el" href="trimal_manager_8h_source.html">trimalManager.h</a>.</p>
+
+</div>
+</div>
+<a id="aff2bec04c5273cac8f5457d7042ecafc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff2bec04c5273cac8f5457d7042ecafc">&#9670;&nbsp;</a></span>trimAlManagerPrivateExposerCreator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define trimAlManagerPrivateExposerCreator</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TOKEN</td><td>)</td>
+          <td>&#160;&#160;&#160;template &lt;&gt; struct <a class="el" href="structtrim_al_manager_1_1access__by.html">trimAlManager::access_by</a>&lt; TOKEN&quot;&quot;_hash&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="trimal_manager_8h_source.html#l00327">327</a> of file <a class="el" href="trimal_manager_8h_source.html">trimalManager.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

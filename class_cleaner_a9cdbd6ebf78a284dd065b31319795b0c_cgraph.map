@@ -10,7 +10,7 @@
 <area shape="rect" id="node7" href="$classstatistics_1_1_similarity.html#ae69ec0e79912ae23c8cfe97358c4794d" title="Method to calculate the similarity values of a alignment matrix. " alt="" coords="931,247,1068,289"/>
 <area shape="rect" id="node17" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="1599,247,1761,289"/>
 <area shape="rect" id="node8" href="$classstatistics_1_1_similarity.html#a75bd235b3207235eefa7b52dff063c76" title="Computes the matrix identity between alignment&#39;s columns. " alt="" coords="1130,130,1291,171"/>
-<area shape="rect" id="node9" href="$class_alignment.html#ab2487799d9a7d593d7fbe1b8da9593f5" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="1347,196,1541,223"/>
+<area shape="rect" id="node9" href="$class_alignment.html#a3f8f2eafd37c9b5bc275b9889a2de96a" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="1347,196,1541,223"/>
 <area shape="rect" id="node11" href="$namespaceutils.html#a6286fde6f4dd58ef0cfa9d55341b72f8" title="utils::toUpper" alt="" coords="1816,255,1916,281"/>
 <area shape="rect" id="node12" href="$classstatistics_1_1_manager.html#a1969a416d3020d25daa56de6c5e305db" title="Method to handle gap stat calculation It checks if the gaps submodule has been created, otherwise, creates it. " alt="" coords="1142,430,1279,471"/>
 <area shape="rect" id="node19" href="$classstatistics_1_1_gaps.html#ab5b60db326475f8adc68b130e22b3963" title="statistics::Gaps::getGaps\lWindow" alt="" coords="1125,365,1296,406"/>

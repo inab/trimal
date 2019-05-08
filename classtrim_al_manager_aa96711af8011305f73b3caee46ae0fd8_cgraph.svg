@@ -9,17 +9,17 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 46)">
 <title>trimAlManager::check_combinations_among_thresholds_incompatibility</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-46 326,-46 326,4 -4,4"/>
-<!-- Node156 -->
+<!-- Node170 -->
 <g id="node1" class="node">
-<title>Node156</title>
+<title>Node170</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-.5 0,-41.5 164,-41.5 164,-.5 0,-.5"/>
 <text text-anchor="start" x="8" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::check</text>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_combinations_among_thresholds</text>
 <text text-anchor="middle" x="82" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_incompatibility</text>
 </g>
-<!-- Node157 -->
+<!-- Node171 -->
 <g id="node2" class="node">
-<title>Node157</title>
+<title>Node171</title>
 <g id="a_node2"><a xlink:href="classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" target="_top" xlink:title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR...">
 <polygon fill="#ffffff" stroke="#000000" points="200,-6 200,-36 322,-36 322,-6 200,-6"/>
 <text text-anchor="start" x="208" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">reporting::reportManager</text>
@@ -27,9 +27,9 @@
 </a>
 </g>
 </g>
-<!-- Node156&#45;&gt;Node157 -->
+<!-- Node170&#45;&gt;Node171 -->
 <g id="edge1" class="edge">
-<title>Node156&#45;&gt;Node157</title>
+<title>Node170&#45;&gt;Node171</title>
 <path fill="none" stroke="#191970" d="M164.1655,-21C172.725,-21 181.3746,-21 189.7983,-21"/>
 <polygon fill="#191970" stroke="#191970" points="189.9401,-24.5001 199.94,-21 189.94,-17.5001 189.9401,-24.5001"/>
 </g>

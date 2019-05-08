@@ -8,7 +8,7 @@ var classstatistics_1_1_consistency =
     [ "forceComparison", "classstatistics_1_1_consistency.html#a12d0b624abec361767bd3a6001998f02", null ],
     [ "getValues", "classstatistics_1_1_consistency.html#ad3a0a265cb9460cd4633b027fe2437c9", null ],
     [ "isWindowDefined", "classstatistics_1_1_consistency.html#af2c3e79d22ab32c549e3e41cd56afe72", null ],
-    [ "perform", "classstatistics_1_1_consistency.html#ae8679e43ec228926ac2844af133cc2d5", null ],
+    [ "perform", "classstatistics_1_1_consistency.html#a8f7ddf54c5be583916b983ede82d5b88", null ],
     [ "printStatisticsFileAcl", "classstatistics_1_1_consistency.html#a24521eba253b76ddc60c719c9769613a", null ],
     [ "printStatisticsFileColumns", "classstatistics_1_1_consistency.html#a641c9cc5f44f7cdc0a48dad576c07fb1", null ],
     [ "alig", "classstatistics_1_1_consistency.html#aa89b153b391a4b67b6947be1c8c4ffa5", null ],

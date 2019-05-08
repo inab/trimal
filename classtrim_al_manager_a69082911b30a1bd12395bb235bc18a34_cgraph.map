@@ -38,7 +38,7 @@
 <area shape="rect" id="node37" href="$classstatistics_1_1_similarity.html#a88b1061ad8e64c1a63a4aa00db7424e3" title="Returns if a similarity matrix is being used or not. " alt="" coords="776,466,913,507"/>
 <area shape="rect" id="node38" href="$classstatistics_1_1_similarity.html#a4446bf070a858952dac45f5705d16780" title="Returns if a windows size value has been defined or not. " alt="" coords="776,596,913,638"/>
 <area shape="rect" id="node32" href="$classstatistics_1_1_similarity.html#a75bd235b3207235eefa7b52dff063c76" title="Computes the matrix identity between alignment&#39;s columns. " alt="" coords="1225,115,1386,156"/>
-<area shape="rect" id="node33" href="$class_alignment.html#ab2487799d9a7d593d7fbe1b8da9593f5" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="1446,64,1639,90"/>
+<area shape="rect" id="node33" href="$class_alignment.html#a3f8f2eafd37c9b5bc275b9889a2de96a" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="1446,64,1639,90"/>
 <area shape="rect" id="node35" href="$namespaceutils.html#a6286fde6f4dd58ef0cfa9d55341b72f8" title="utils::toUpper" alt="" coords="1944,38,2044,65"/>
 <area shape="rect" id="node36" href="$classstatistics_1_1similarity_matrix.html#a0cdb3ed14678b442824e84e6385e8f84" title="Method to get the similarity distance between two residues, A and B Characters provided must be both ..." alt="" coords="1220,180,1391,222"/>
 <area shape="rect" id="node34" href="$namespaceutils.html#aab52f9515717f06cafd6ab7fe2ebdcef" title="Checks an alignment type. " alt="" coords="1692,64,1868,90"/>

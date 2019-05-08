@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=9"/>
     <meta name="generator" content="Doxygen 1.8.13"/>
-    <title>trimAl: /home/vfernandez/git/trimAl/include/VCFHandler.h File Reference</title>
+    <title>trimAl: /home/vfernandez/git/MyFork/include/VCFHandler.h File Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -65,6 +65,7 @@ $(document).ready(function(){initNavTree('_v_c_f_handler_8h.html','');});
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">VCFHandler.h File Reference</div>  </div>
@@ -85,10 +86,17 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespacengs"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs.html">ngs</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a47b5600d0d9b0f83f02af1b79ba19eb0"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; <a class="el" href="class_alignment.html">Alignment</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs.html#a47b5600d0d9b0f83f02af1b79ba19eb0">ngs::AlignmentVector</a></td></tr>
+<tr class="separator:a47b5600d0d9b0f83f02af1b79ba19eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28e28bc632ac5f563c66d0f343ba6753"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs.html#a28e28bc632ac5f563c66d0f343ba6753">ngs::StringVector</a></td></tr>
+<tr class="separator:a28e28bc632ac5f563c66d0f343ba6753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af5bc1f6bdf56a4c4981639d5ed0ee77f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs.html#af5bc1f6bdf56a4c4981639d5ed0ee77f">ngs::readVCF</a> (std::vector&lt; <a class="el" href="class_alignment.html">Alignment</a> *&gt; sources, std::vector&lt; std::string &gt; filenames, float minQuality, float minCoverage, bool ignoreFilter, const char *const replacementChar)</td></tr>
-<tr class="separator:af5bc1f6bdf56a4c4981639d5ed0ee77f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecd219408445ad9c1bb3c00adb2c57e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacengs.html#aecd219408445ad9c1bb3c00adb2c57e9">ngs::readVCF</a> (const AlignmentVector &amp;sources, const StringVector &amp;filenames, const float minQuality, const float minCoverage, const bool ignoreFilter, const char *const replacementChar)</td></tr>
+<tr class="separator:aecd219408445ad9c1bb3c00adb2c57e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

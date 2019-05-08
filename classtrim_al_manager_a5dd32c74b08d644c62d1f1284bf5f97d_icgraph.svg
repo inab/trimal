@@ -9,40 +9,40 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 35)">
 <title>trimAlManager::no_gaps_argument</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-35 393,-35 393,4 -4,4"/>
-<!-- Node787 -->
+<!-- Node843 -->
 <g id="node1" class="node">
-<title>Node787</title>
+<title>Node843</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-.5 0,-30.5 122,-30.5 122,-.5 0,-.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::no_gaps</text>
 <text text-anchor="middle" x="61" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">_argument</text>
 </g>
-<!-- Node788 -->
+<!-- Node844 -->
 <g id="node2" class="node">
-<title>Node788</title>
-<g id="a_node2"><a xlink:href="classtrim_al_manager.html#af140d97b6071a83930818030ac74b641" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
+<title>Node844</title>
+<g id="a_node2"><a xlink:href="classtrim_al_manager.html#af3b0625b6bcc6df5978e63530a5956e6" target="_top" xlink:title="Method to parse arguments into usable structure in trimal. ">
 <polygon fill="#ffffff" stroke="#000000" points="158,-6 158,-25 315,-25 315,-6 158,-6"/>
 <text text-anchor="middle" x="236.5" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">trimAlManager::parseArguments</text>
 </a>
 </g>
 </g>
-<!-- Node787&#45;&gt;Node788 -->
+<!-- Node843&#45;&gt;Node844 -->
 <g id="edge1" class="edge">
-<title>Node787&#45;&gt;Node788</title>
+<title>Node843&#45;&gt;Node844</title>
 <path fill="none" stroke="#191970" d="M132.4692,-15.5C140.8403,-15.5 149.4162,-15.5 157.8777,-15.5"/>
 <polygon fill="#191970" stroke="#191970" points="132.3814,-12.0001 122.3814,-15.5 132.3813,-19.0001 132.3814,-12.0001"/>
 </g>
-<!-- Node789 -->
+<!-- Node845 -->
 <g id="node3" class="node">
-<title>Node789</title>
+<title>Node845</title>
 <g id="a_node3"><a xlink:href="trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
 <polygon fill="#ffffff" stroke="#000000" points="351,-6 351,-25 389,-25 389,-6 351,-6"/>
 <text text-anchor="middle" x="370" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node788&#45;&gt;Node789 -->
+<!-- Node844&#45;&gt;Node845 -->
 <g id="edge2" class="edge">
-<title>Node788&#45;&gt;Node789</title>
+<title>Node844&#45;&gt;Node845</title>
 <path fill="none" stroke="#191970" d="M325.5766,-15.5C334.8353,-15.5 343.4462,-15.5 350.5746,-15.5"/>
 <polygon fill="#191970" stroke="#191970" points="325.3153,-12.0001 315.3152,-15.5 325.3152,-19.0001 325.3153,-12.0001"/>
 </g>

@@ -8,7 +8,7 @@
 <area shape="rect" id="node21" href="$classstatistics_1_1_similarity.html#ada0548f0ac960fbbb3a3192f83c42189" title="Constructor without any parameters. " alt="" coords="245,499,382,540"/>
 <area shape="rect" id="node13" href="$classreporting_1_1report_manager.html#a6d122e673144584e0869bd33b8a5c1c6" title="Method to report an Error. &#160;It will be displayed if Level &#160;is equal or higher to VerboseLevel::ERROR..." alt="" coords="1089,75,1252,116"/>
 <area shape="rect" id="node4" href="$classstatistics_1_1_similarity.html#a75bd235b3207235eefa7b52dff063c76" title="Computes the matrix identity between alignment&#39;s columns. " alt="" coords="621,189,782,231"/>
-<area shape="rect" id="node5" href="$class_alignment.html#ab2487799d9a7d593d7fbe1b8da9593f5" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="838,141,1031,167"/>
+<area shape="rect" id="node5" href="$class_alignment.html#a3f8f2eafd37c9b5bc275b9889a2de96a" title="Alignment type getter. &#160;&#160;See SequenceTypes. " alt="" coords="838,141,1031,167"/>
 <area shape="rect" id="node7" href="$namespaceutils.html#a6286fde6f4dd58ef0cfa9d55341b72f8" title="utils::toUpper" alt="" coords="1307,61,1407,87"/>
 <area shape="rect" id="node15" href="$classstatistics_1_1_gaps.html#ab5b60db326475f8adc68b130e22b3963" title="statistics::Gaps::getGaps\lWindow" alt="" coords="616,255,787,296"/>
 <area shape="rect" id="node17" href="$classstatistics_1_1similarity_matrix.html#a0cdb3ed14678b442824e84e6385e8f84" title="Method to get the similarity distance between two residues, A and B Characters provided must be both ..." alt="" coords="616,72,787,113"/>

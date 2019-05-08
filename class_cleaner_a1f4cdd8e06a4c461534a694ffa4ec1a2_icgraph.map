@@ -1,6 +1,5 @@
 <map id="Cleaner::setTrimTerminalGapsFlag" name="Cleaner::setTrimTerminalGapsFlag">
-<area shape="rect" id="node2" href="$classtrim_al_manager.html#a7c641a1feff33d401b4ea5c82e989289" title="trimAlManager::innerPerform" alt="" coords="225,5,413,32"/>
-<area shape="rect" id="node5" href="$classtrim_al_manager.html#ac5795f93b3a2b51bf5d8dddd63b89f73" title="trimAlManager::perform_VCF" alt="" coords="223,56,415,83"/>
-<area shape="rect" id="node3" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="463,5,621,32"/>
-<area shape="rect" id="node4" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="669,5,720,32"/>
+<area shape="rect" id="node2" href="$classtrim_al_manager.html#a7c641a1feff33d401b4ea5c82e989289" title="trimAlManager::innerPerform" alt="" coords="223,13,411,39"/>
+<area shape="rect" id="node3" href="$classtrim_al_manager.html#abe8d2841455c644dc9c7d1294b82b00f" title="Method to perform the analysis if all checks have passed. " alt="" coords="459,13,617,39"/>
+<area shape="rect" id="node4" href="$trim_al_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="665,13,716,39"/>
 </map>

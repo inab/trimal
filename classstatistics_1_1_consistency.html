@@ -85,11 +85,11 @@ After selecting an alignment (most consistent or manually selected), it is possi
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae8679e43ec228926ac2844af133cc2d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstatistics_1_1_consistency.html#ae8679e43ec228926ac2844af133cc2d5">perform</a> (char *comparesetFilePath, <a class="el" href="class_format_handling_1_1_format_manager.html">FormatHandling::FormatManager</a> &amp;formatManager, <a class="el" href="classtrim_al_manager.html">trimAlManager</a> &amp;manager, char *forceFile)</td></tr>
-<tr class="memdesc:ae8679e43ec228926ac2844af133cc2d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to compare a set of MSA, all containing the same sequences and residues.<br />
+<tr class="memitem:a8f7ddf54c5be583916b983ede82d5b88"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstatistics_1_1_consistency.html#a8f7ddf54c5be583916b983ede82d5b88">perform</a> (char *comparesetFilePath, <a class="el" href="class_format_handling_1_1_format_manager.html">FormatHandling::FormatManager</a> &amp;formatManager, <a class="el" href="classtrim_al_manager.html">trimAlManager</a> &amp;manager, char *forceFile)</td></tr>
+<tr class="memdesc:a8f7ddf54c5be583916b983ede82d5b88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to compare a set of MSA, all containing the same sequences and residues.<br />
 The number of residues must be the same, but gaps are not taken into account.<br />
-This is due to the same sequence being aligned in different ways, which changes the gap patterns.  <a href="#ae8679e43ec228926ac2844af133cc2d5">More...</a><br /></td></tr>
-<tr class="separator:ae8679e43ec228926ac2844af133cc2d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+This is due to the same sequence being aligned in different ways, which changes the gap patterns.  <a href="#a8f7ddf54c5be583916b983ede82d5b88">More...</a><br /></td></tr>
+<tr class="separator:a8f7ddf54c5be583916b983ede82d5b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fe619f559c7271eedd869581684f479"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstatistics_1_1_consistency.html#a6fe619f559c7271eedd869581684f479">applyWindow</a> (int halfW)</td></tr>
 <tr class="memdesc:a6fe619f559c7271eedd869581684f479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies a new window to the alignment.  <a href="#a6fe619f559c7271eedd869581684f479">More...</a><br /></td></tr>
 <tr class="separator:a6fe619f559c7271eedd869581684f479"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -174,7 +174,7 @@ Using this statistics, the class is able to select the most consistent alignment
 It is possible to forcefully select an alignment, but to calculate the statistics for latter use.<br />
 After selecting an alignment (most consistent or manually selected), it is possible to use this statistic to trim the alignment, removing columns that are not consistent enough with the other alignments. </p>
 
-<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00056">56</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00058">58</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae39d2aae825d263ac8c3198782b824d2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae39d2aae825d263ac8c3198782b824d2">&#9670;&nbsp;</a></span>Consistency() <span class="overload">[1/2]</span></h2>
@@ -206,15 +206,16 @@ After selecting an alignment (most consistent or manually selected), it is possi
 
 <p class="definition">Definition at line <a class="el" href="_consistency_8cpp_source.html#l00829">829</a> of file <a class="el" href="_consistency_8cpp_source.html">Consistency.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_consistency_8h_source.html#l00125">alig</a>, <a class="el" href="_consistency_8h_source.html#l00149">refCounter</a>, <a class="el" href="_consistency_8h_source.html#l00131">values</a>, and <a class="el" href="_consistency_8h_source.html#l00134">values_windowed</a>.</p>
+<p class="reference">References <a class="el" href="_consistency_8h_source.html#l00127">alig</a>, <a class="el" href="_consistency_8h_source.html#l00151">refCounter</a>, <a class="el" href="_consistency_8h_source.html#l00133">values</a>, and <a class="el" href="_consistency_8h_source.html#l00136">values_windowed</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_manager_8cpp_source.html#l00169">statistics::Manager::Manager()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_manager_8cpp_source.html#l00194">statistics::Manager::Manager()</a>.</p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_ae39d2aae825d263ac8c3198782b824d2_icgraph.svg" width="2094" height="611"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_ae39d2aae825d263ac8c3198782b824d2_icgraph.svg" width="2090" height="611"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -238,15 +239,16 @@ After selecting an alignment (most consistent or manually selected), it is possi
 
 <p class="definition">Definition at line <a class="el" href="_consistency_8cpp_source.html#l00839">839</a> of file <a class="el" href="_consistency_8cpp_source.html">Consistency.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_consistency_8h_source.html#l00149">refCounter</a>.</p>
+<p class="reference">References <a class="el" href="_consistency_8h_source.html#l00151">refCounter</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01479">trimAlManager::performCompareset()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01864">trimAlManager::performCompareset()</a>.</p>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a754c5c0b4ea3b3a20f80a6357f595f16_icgraph.svg" width="800" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a754c5c0b4ea3b3a20f80a6357f595f16_icgraph.svg" width="800" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -270,7 +272,7 @@ After selecting an alignment (most consistent or manually selected), it is possi
 
 <p class="definition">Definition at line <a class="el" href="_consistency_8cpp_source.html#l00820">820</a> of file <a class="el" href="_consistency_8cpp_source.html">Consistency.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_consistency_8h_source.html#l00125">alig</a>, <a class="el" href="_consistency_8h_source.html#l00149">refCounter</a>, <a class="el" href="_consistency_8h_source.html#l00131">values</a>, and <a class="el" href="_consistency_8h_source.html#l00134">values_windowed</a>.</p>
+<p class="reference">References <a class="el" href="_consistency_8h_source.html#l00127">alig</a>, <a class="el" href="_consistency_8h_source.html#l00151">refCounter</a>, <a class="el" href="_consistency_8h_source.html#l00133">values</a>, and <a class="el" href="_consistency_8h_source.html#l00136">values_windowed</a>.</p>
 
 </div>
 </div>
@@ -302,22 +304,24 @@ After selecting an alignment (most consistent or manually selected), it is possi
 
 <p class="definition">Definition at line <a class="el" href="_consistency_8cpp_source.html#l00525">525</a> of file <a class="el" href="_consistency_8cpp_source.html">Consistency.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="reportsystem_8h_source.html#l00193">ConsistencyWindowTooBig</a>, <a class="el" href="reportsystem_8cpp_source.html#l00005">debug</a>, <a class="el" href="_consistency_8h_source.html#l00144">halfWindow</a>, <a class="el" href="reportsystem_8cpp_source.html#l00384">reporting::reportManager::report()</a>, <a class="el" href="_consistency_8h_source.html#l00146">residues</a>, <a class="el" href="_consistency_8h_source.html#l00131">values</a>, and <a class="el" href="_consistency_8h_source.html#l00134">values_windowed</a>.</p>
+<p class="reference">References <a class="el" href="reportsystem_8h_source.html#l00224">ConsistencyWindowTooBig</a>, <a class="el" href="reportsystem_8cpp_source.html#l00033">debug</a>, <a class="el" href="_consistency_8h_source.html#l00146">halfWindow</a>, <a class="el" href="reportsystem_8cpp_source.html#l00067">reporting::reportManager::report()</a>, <a class="el" href="_consistency_8h_source.html#l00148">residues</a>, <a class="el" href="_consistency_8h_source.html#l00133">values</a>, and <a class="el" href="_consistency_8h_source.html#l00136">values_windowed</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00588">getValues()</a>, and <a class="el" href="_consistency_8cpp_source.html#l00042">perform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00588">getValues()</a>, and <a class="el" href="_consistency_8cpp_source.html#l00045">perform()</a>.</p>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a6fe619f559c7271eedd869581684f479_cgraph.svg" width="378" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a6fe619f559c7271eedd869581684f479_cgraph.svg" width="378" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a6fe619f559c7271eedd869581684f479_icgraph.svg" width="1487" height="292"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a6fe619f559c7271eedd869581684f479_icgraph.svg" width="1495" height="312"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -391,22 +395,24 @@ To compute the consistency values we use the proportion of residue pairs per col
 
 <p class="definition">Definition at line <a class="el" href="_consistency_8cpp_source.html#l00241">241</a> of file <a class="el" href="_consistency_8cpp_source.html">Consistency.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="reportsystem_8cpp_source.html#l00005">debug</a>, <a class="el" href="reportsystem_8h_source.html#l00135">DifferentNumberOfSequencesInCompareset</a>, <a class="el" href="reportsystem_8h_source.html#l00137">DifferentSeqsNamesInCompareset</a>, <a class="el" href="sequences_matrix_8cpp_source.html#l00166">Alignment::sequencesMatrix::getColumn()</a>, <a class="el" href="_alignment_8cpp_source.html#l00247">Alignment::getNumAminos()</a>, <a class="el" href="_alignment_8cpp_source.html#l00240">Alignment::getNumSpecies()</a>, <a class="el" href="_alignment_8cpp_source.html#l00440">Alignment::getSequenceNameOrder()</a>, <a class="el" href="_alignment_8cpp_source.html#l00411">Alignment::getSequences()</a>, <a class="el" href="utils_8cpp_source.html#l00044">utils::initlVect()</a>, <a class="el" href="reportsystem_8cpp_source.html#l00384">reporting::reportManager::report()</a>, <a class="el" href="_alignment_8h_source.html#l00062">Alignment::SequencesMatrix</a>, and <a class="el" href="sequences_matrix_8cpp_source.html#l00200">Alignment::sequencesMatrix::setOrder()</a>.</p>
+<p class="reference">References <a class="el" href="reportsystem_8cpp_source.html#l00033">debug</a>, <a class="el" href="reportsystem_8h_source.html#l00166">DifferentNumberOfSequencesInCompareset</a>, <a class="el" href="reportsystem_8h_source.html#l00168">DifferentSeqsNamesInCompareset</a>, <a class="el" href="sequences_matrix_8cpp_source.html#l00169">Alignment::sequencesMatrix::getColumn()</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00252">Alignment::getNumAminos()</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00245">Alignment::getNumSpecies()</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00445">Alignment::getSequenceNameOrder()</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00416">Alignment::getSequences()</a>, <a class="el" href="utils_8cpp_source.html#l00046">utils::initlVect()</a>, <a class="el" href="reportsystem_8cpp_source.html#l00067">reporting::reportManager::report()</a>, <a class="el" href="_alignment_8h_source.html#l00062">Alignment::SequencesMatrix</a>, and <a class="el" href="sequences_matrix_8cpp_source.html#l00203">Alignment::sequencesMatrix::setOrder()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00042">perform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00045">perform()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a35c4f5aab5ad2e8d4722f07b17b9dbd2_cgraph.svg" width="414" height="454"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a35c4f5aab5ad2e8d4722f07b17b9dbd2_cgraph.svg" width="414" height="454"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a35c4f5aab5ad2e8d4722f07b17b9dbd2_icgraph.svg" width="1004" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a35c4f5aab5ad2e8d4722f07b17b9dbd2_icgraph.svg" width="1004" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -471,22 +477,24 @@ To compute the consistency values we use the proportion of residue pairs per col
 
 <p class="definition">Definition at line <a class="el" href="_consistency_8cpp_source.html#l00416">416</a> of file <a class="el" href="_consistency_8cpp_source.html">Consistency.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="reportsystem_8cpp_source.html#l00005">debug</a>, <a class="el" href="reportsystem_8h_source.html#l00135">DifferentNumberOfSequencesInCompareset</a>, <a class="el" href="reportsystem_8h_source.html#l00137">DifferentSeqsNamesInCompareset</a>, <a class="el" href="sequences_matrix_8cpp_source.html#l00166">Alignment::sequencesMatrix::getColumn()</a>, <a class="el" href="_alignment_8cpp_source.html#l00247">Alignment::getNumAminos()</a>, <a class="el" href="_alignment_8cpp_source.html#l00240">Alignment::getNumSpecies()</a>, <a class="el" href="_alignment_8cpp_source.html#l00440">Alignment::getSequenceNameOrder()</a>, <a class="el" href="_alignment_8cpp_source.html#l00411">Alignment::getSequences()</a>, <a class="el" href="utils_8cpp_source.html#l00044">utils::initlVect()</a>, <a class="el" href="reportsystem_8cpp_source.html#l00384">reporting::reportManager::report()</a>, <a class="el" href="_alignment_8h_source.html#l00062">Alignment::SequencesMatrix</a>, <a class="el" href="sequences_matrix_8cpp_source.html#l00045">Alignment::sequencesMatrix::sequencesMatrix()</a>, and <a class="el" href="sequences_matrix_8cpp_source.html#l00200">Alignment::sequencesMatrix::setOrder()</a>.</p>
+<p class="reference">References <a class="el" href="reportsystem_8cpp_source.html#l00033">debug</a>, <a class="el" href="reportsystem_8h_source.html#l00166">DifferentNumberOfSequencesInCompareset</a>, <a class="el" href="reportsystem_8h_source.html#l00168">DifferentSeqsNamesInCompareset</a>, <a class="el" href="sequences_matrix_8cpp_source.html#l00169">Alignment::sequencesMatrix::getColumn()</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00252">Alignment::getNumAminos()</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00245">Alignment::getNumSpecies()</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00445">Alignment::getSequenceNameOrder()</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00416">Alignment::getSequences()</a>, <a class="el" href="utils_8cpp_source.html#l00046">utils::initlVect()</a>, <a class="el" href="reportsystem_8cpp_source.html#l00067">reporting::reportManager::report()</a>, <a class="el" href="_alignment_8h_source.html#l00062">Alignment::SequencesMatrix</a>, <a class="el" href="sequences_matrix_8cpp_source.html#l00048">Alignment::sequencesMatrix::sequencesMatrix()</a>, and <a class="el" href="sequences_matrix_8cpp_source.html#l00203">Alignment::sequencesMatrix::setOrder()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00042">perform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00045">perform()</a>.</p>
 <div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a12d0b624abec361767bd3a6001998f02_cgraph.svg" width="563" height="519"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a12d0b624abec361767bd3a6001998f02_cgraph.svg" width="563" height="519"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a12d0b624abec361767bd3a6001998f02_icgraph.svg" width="1004" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a12d0b624abec361767bd3a6001998f02_icgraph.svg" width="1004" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -512,22 +520,24 @@ To compute the consistency values we use the proportion of residue pairs per col
 
 <p class="definition">Definition at line <a class="el" href="_consistency_8cpp_source.html#l00588">588</a> of file <a class="el" href="_consistency_8cpp_source.html">Consistency.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_consistency_8cpp_source.html#l00525">applyWindow()</a>, <a class="el" href="_consistency_8h_source.html#l00144">halfWindow</a>, <a class="el" href="_consistency_8cpp_source.html#l00580">isWindowDefined()</a>, <a class="el" href="_consistency_8h_source.html#l00131">values</a>, and <a class="el" href="_consistency_8h_source.html#l00134">values_windowed</a>.</p>
+<p class="reference">References <a class="el" href="_consistency_8cpp_source.html#l00525">applyWindow()</a>, <a class="el" href="_consistency_8h_source.html#l00146">halfWindow</a>, <a class="el" href="_consistency_8cpp_source.html#l00580">isWindowDefined()</a>, <a class="el" href="_consistency_8h_source.html#l00133">values</a>, and <a class="el" href="_consistency_8h_source.html#l00136">values_windowed</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_alignment_8cpp_source.html#l01155">Alignment::alignmentSummaryHTML()</a>, <a class="el" href="_alignment_8cpp_source.html#l01696">Alignment::alignmentSummarySVG()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01744">trimAlManager::CleanResiduesNonAuto()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01520">trimAlManager::print_statistics()</a>, and <a class="el" href="_alignment_8cpp_source.html#l01419">Alignment::statSVG()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_alignment_2_alignment_8cpp_source.html#l01167">Alignment::alignmentSummaryHTML()</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l01708">Alignment::alignmentSummarySVG()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l02145">trimAlManager::CleanResiduesNonAuto()</a>, <a class="el" href="trimal_manager_8cpp_source.html#l01915">trimAlManager::print_statistics()</a>, and <a class="el" href="_alignment_2_alignment_8cpp_source.html#l01431">Alignment::statSVG()</a>.</p>
 <div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-8-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_ad3a0a265cb9460cd4633b027fe2437c9_cgraph.svg" width="582" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_ad3a0a265cb9460cd4633b027fe2437c9_cgraph.svg" width="582" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-9-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_ad3a0a265cb9460cd4633b027fe2437c9_icgraph.svg" width="1195" height="279"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_ad3a0a265cb9460cd4633b027fe2437c9_icgraph.svg" width="1191" height="279"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -560,7 +570,7 @@ To compute the consistency values we use the proportion of residue pairs per col
 
 <p class="definition">Definition at line <a class="el" href="_consistency_8cpp_source.html#l00580">580</a> of file <a class="el" href="_consistency_8cpp_source.html">Consistency.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_consistency_8h_source.html#l00144">halfWindow</a>.</p>
+<p class="reference">References <a class="el" href="_consistency_8h_source.html#l00146">halfWindow</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00588">getValues()</a>.</p>
 <div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -568,19 +578,20 @@ To compute the consistency values we use the proportion of residue pairs per col
 <div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-10-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_af2c3e79d22ab32c549e3e41cd56afe72_icgraph.svg" width="1399" height="279"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_af2c3e79d22ab32c549e3e41cd56afe72_icgraph.svg" width="1395" height="279"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
 </div>
-<a id="ae8679e43ec228926ac2844af133cc2d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8679e43ec228926ac2844af133cc2d5">&#9670;&nbsp;</a></span>perform()</h2>
+<a id="a8f7ddf54c5be583916b983ede82d5b88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f7ddf54c5be583916b983ede82d5b88">&#9670;&nbsp;</a></span>perform()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void statistics::Consistency::perform </td>
+          <td class="memname">bool statistics::Consistency::perform </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>comparesetFilePath</em>, </td>
@@ -626,24 +637,26 @@ This is due to the same sequence being aligned in different ways, which changes 
 </dl>
 <dl class="section note"><dt>Note</dt><dd>The method does not return anything, as the alignment is stored on <a class="el" href="classtrim_al_manager.html#a3b3875a62df271d857302dfe666ddf2d" title="Main alignment used/loaded on trimAl in combination with singleAlig. ">trimAlManager::origAlig</a> It also stores the current instance of statisticsConsistency into the consistent alignment. This allows us to use this information to trim, or represent it on the HTML/SVG reports. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_consistency_8cpp_source.html#l00042">42</a> of file <a class="el" href="_consistency_8cpp_source.html">Consistency.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_consistency_8cpp_source.html#l00045">45</a> of file <a class="el" href="_consistency_8cpp_source.html">Consistency.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_consistency_8h_source.html#l00125">alig</a>, <a class="el" href="_alignment_8cpp_source.html#l00082">Alignment::Alignment()</a>, <a class="el" href="reportsystem_8h_source.html#l00113">AlignmentTypesNotMatching</a>, <a class="el" href="_consistency_8h_source.html#l00152">appearErrors</a>, <a class="el" href="_consistency_8cpp_source.html#l00525">applyWindow()</a>, <a class="el" href="_consistency_8h_source.html#l00128">compareAlignmentsArray</a>, <a class="el" href="_consistency_8cpp_source.html#l00241">compareAndChoose()</a>, <a class="el" href="reportsystem_8h_source.html#l00189">ComparesetFailedAlignmentMissing</a>, <a class="el" href="_manager_8h_source.html#l00042">statistics::Manager::consistency</a>, <a class="el" href="trimal_manager_8h_source.html#l00076">trimAlManager::consistencyWindow</a>, <a class="el" href="trimal_manager_8h_source.html#l00131">trimAlManager::CS</a>, <a class="el" href="reportsystem_8cpp_source.html#l00005">debug</a>, <a class="el" href="_consistency_8cpp_source.html#l00416">forceComparison()</a>, <a class="el" href="_alignment_8cpp_source.html#l00464">Alignment::getAlignmentType()</a>, <a class="el" href="_base_format_handler_8cpp_source.html#l00295">FormatHandling::FormatManager::getFileFormatName()</a>, <a class="el" href="_alignment_8cpp_source.html#l00247">Alignment::getNumAminos()</a>, <a class="el" href="_consistency_8h_source.html#l00140">i</a>, <a class="el" href="_alignment_8cpp_source.html#l00488">Alignment::isFileAligned()</a>, <a class="el" href="_base_format_handler_8cpp_source.html#l00022">FormatHandling::FormatManager::loadAlignment()</a>, <a class="el" href="_consistency_8h_source.html#l00142">maxResidues</a>, <a class="el" href="reportsystem_8h_source.html#l00103">NotAligned</a>, <a class="el" href="defines_8h_source.html#l00084">NotDefined</a>, <a class="el" href="_consistency_8h_source.html#l00138">numFiles</a>, <a class="el" href="trimal_manager_8h_source.html#l00126">trimAlManager::oformats</a>, <a class="el" href="trimal_manager_8h_source.html#l00099">trimAlManager::origAlig</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="trimal_manager_8h_source.html#l00113">trimAlManager::outfile</a>, <a class="el" href="reportsystem_8cpp_source.html#l00384">reporting::reportManager::report()</a>, <a class="el" href="_consistency_8h_source.html#l00146">residues</a>, <a class="el" href="_alignment_8h_source.html#l00062">Alignment::SequencesMatrix</a>, <a class="el" href="sequences_matrix_8cpp_source.html#l00045">Alignment::sequencesMatrix::sequencesMatrix()</a>, <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>, <a class="el" href="trimal_manager_8h_source.html#l00072">trimAlManager::stats</a>, <a class="el" href="_consistency_8h_source.html#l00131">values</a>, and <a class="el" href="trimal_manager_8h_source.html#l00073">trimAlManager::windowSize</a>.</p>
+<p class="reference">References <a class="el" href="_consistency_8h_source.html#l00127">alig</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00087">Alignment::Alignment()</a>, <a class="el" href="reportsystem_8h_source.html#l00144">AlignmentTypesNotMatching</a>, <a class="el" href="trimal_manager_8h_source.html#l00071">trimAlManager::appearErrors</a>, <a class="el" href="_consistency_8h_source.html#l00154">appearErrors</a>, <a class="el" href="_consistency_8cpp_source.html#l00525">applyWindow()</a>, <a class="el" href="_consistency_8h_source.html#l00130">compareAlignmentsArray</a>, <a class="el" href="_consistency_8cpp_source.html#l00241">compareAndChoose()</a>, <a class="el" href="reportsystem_8h_source.html#l00220">ComparesetFailedAlignmentMissing</a>, <a class="el" href="_manager_8h_source.html#l00067">statistics::Manager::consistency</a>, <a class="el" href="trimal_manager_8h_source.html#l00116">trimAlManager::consistencyWindow</a>, <a class="el" href="trimal_manager_8h_source.html#l00172">trimAlManager::CS</a>, <a class="el" href="reportsystem_8cpp_source.html#l00033">debug</a>, <a class="el" href="_consistency_8cpp_source.html#l00416">forceComparison()</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00469">Alignment::getAlignmentType()</a>, <a class="el" href="_base_format_handler_8cpp_source.html#l00239">FormatHandling::FormatManager::getFileFormatName()</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00252">Alignment::getNumAminos()</a>, <a class="el" href="_consistency_8h_source.html#l00142">i</a>, <a class="el" href="_alignment_2_alignment_8cpp_source.html#l00495">Alignment::isFileAligned()</a>, <a class="el" href="_base_format_handler_8cpp_source.html#l00055">FormatHandling::FormatManager::loadAlignment()</a>, <a class="el" href="_consistency_8h_source.html#l00144">maxResidues</a>, <a class="el" href="reportsystem_8h_source.html#l00134">NotAligned</a>, <a class="el" href="defines_8h_source.html#l00076">NotDefined</a>, <a class="el" href="_consistency_8h_source.html#l00140">numFiles</a>, <a class="el" href="trimal_manager_8h_source.html#l00167">trimAlManager::oformats</a>, <a class="el" href="trimal_manager_8h_source.html#l00140">trimAlManager::origAlig</a>, <a class="el" href="_alignment_8h_source.html#l00072">Alignment::originalNumberOfResidues</a>, <a class="el" href="trimal_manager_8h_source.html#l00154">trimAlManager::outfile</a>, <a class="el" href="reportsystem_8cpp_source.html#l00067">reporting::reportManager::report()</a>, <a class="el" href="_consistency_8h_source.html#l00148">residues</a>, <a class="el" href="_alignment_8h_source.html#l00062">Alignment::SequencesMatrix</a>, <a class="el" href="sequences_matrix_8cpp_source.html#l00048">Alignment::sequencesMatrix::sequencesMatrix()</a>, <a class="el" href="_alignment_8h_source.html#l00060">Alignment::Statistics</a>, <a class="el" href="trimal_manager_8h_source.html#l00112">trimAlManager::stats</a>, <a class="el" href="_consistency_8h_source.html#l00133">values</a>, and <a class="el" href="trimal_manager_8h_source.html#l00113">trimAlManager::windowSize</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01479">trimAlManager::performCompareset()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01864">trimAlManager::performCompareset()</a>.</p>
 <div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-11-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_ae8679e43ec228926ac2844af133cc2d5_cgraph.svg" width="879" height="950"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a8f7ddf54c5be583916b983ede82d5b88_cgraph.svg" width="1162" height="951"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-12-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_ae8679e43ec228926ac2844af133cc2d5_icgraph.svg" width="800" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a8f7ddf54c5be583916b983ede82d5b88_icgraph.svg" width="800" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -693,22 +706,24 @@ This is due to the same sequence being aligned in different ways, which changes 
 
 <p class="definition">Definition at line <a class="el" href="_consistency_8cpp_source.html#l00666">666</a> of file <a class="el" href="_consistency_8cpp_source.html">Consistency.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="utils_8cpp_source.html#l00055">utils::copyVect()</a>, <a class="el" href="_alignment_8h_source.html#l00084">Alignment::filename</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, and <a class="el" href="utils_8cpp_source.html#l00157">utils::quicksort()</a>.</p>
+<p class="reference">References <a class="el" href="utils_8cpp_source.html#l00057">utils::copyVect()</a>, <a class="el" href="_alignment_8h_source.html#l00084">Alignment::filename</a>, <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>, and <a class="el" href="utils_8cpp_source.html#l00159">utils::quicksort()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01520">trimAlManager::print_statistics()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01915">trimAlManager::print_statistics()</a>.</p>
 <div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-13-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-13-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a24521eba253b76ddc60c719c9769613a_cgraph.svg" width="458" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a24521eba253b76ddc60c719c9769613a_cgraph.svg" width="458" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-14-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-14-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a24521eba253b76ddc60c719c9769613a_icgraph.svg" width="895" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a24521eba253b76ddc60c719c9769613a_icgraph.svg" width="895" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -760,13 +775,14 @@ This is due to the same sequence being aligned in different ways, which changes 
 
 <p class="reference">References <a class="el" href="_alignment_8h_source.html#l00084">Alignment::filename</a>, and <a class="el" href="_alignment_8h_source.html#l00074">Alignment::numberOfResidues</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01520">trimAlManager::print_statistics()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="trimal_manager_8cpp_source.html#l01915">trimAlManager::print_statistics()</a>.</p>
 <div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-15-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-15-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a641c9cc5f44f7cdc0a48dad576c07fb1_icgraph.svg" width="922" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classstatistics_1_1_consistency_a641c9cc5f44f7cdc0a48dad576c07fb1_icgraph.svg" width="922" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -794,9 +810,9 @@ This is due to the same sequence being aligned in different ways, which changes 
 
 <p>Original alignment for which the stat was calculated. </p>
 
-<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00125">125</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00127">127</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00829">Consistency()</a>, <a class="el" href="_consistency_8cpp_source.html#l00042">perform()</a>, and <a class="el" href="_consistency_8cpp_source.html#l00820">~Consistency()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00829">Consistency()</a>, <a class="el" href="_consistency_8cpp_source.html#l00045">perform()</a>, and <a class="el" href="_consistency_8cpp_source.html#l00820">~Consistency()</a>.</p>
 
 </div>
 </div>
@@ -822,9 +838,9 @@ This is due to the same sequence being aligned in different ways, which changes 
 
 <p>Intermediate variable to keep track of the progress status. </p>
 
-<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00152">152</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00154">154</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00042">perform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00045">perform()</a>.</p>
 
 </div>
 </div>
@@ -850,9 +866,9 @@ This is due to the same sequence being aligned in different ways, which changes 
 
 <p>Array of alignments to compare. </p>
 
-<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00128">128</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00130">130</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00042">perform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00045">perform()</a>.</p>
 
 </div>
 </div>
@@ -878,7 +894,7 @@ This is due to the same sequence being aligned in different ways, which changes 
 
 <p>Variable to store the type of the alignment from the last alignment. </p>
 
-<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00144">144</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00146">146</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00525">applyWindow()</a>, <a class="el" href="_consistency_8cpp_source.html#l00588">getValues()</a>, and <a class="el" href="_consistency_8cpp_source.html#l00580">isWindowDefined()</a>.</p>
 
@@ -906,9 +922,9 @@ This is due to the same sequence being aligned in different ways, which changes 
 
 <p>Temporary variable used on loops. </p>
 
-<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00140">140</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00142">142</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00042">perform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00045">perform()</a>.</p>
 
 </div>
 </div>
@@ -934,9 +950,9 @@ This is due to the same sequence being aligned in different ways, which changes 
 
 <p>Maximum number of residues on the whole dataset. </p>
 
-<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00142">142</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00144">144</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00042">perform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00045">perform()</a>.</p>
 
 </div>
 </div>
@@ -962,9 +978,9 @@ This is due to the same sequence being aligned in different ways, which changes 
 
 <p>Number of files to compare. </p>
 
-<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00138">138</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00140">140</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00042">perform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00045">perform()</a>.</p>
 
 </div>
 </div>
@@ -990,7 +1006,7 @@ This is due to the same sequence being aligned in different ways, which changes 
 
 <p>Counter of how many statisticsConsistency share the same MDK values. </p>
 
-<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00149">149</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00151">151</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00829">Consistency()</a>, and <a class="el" href="_consistency_8cpp_source.html#l00820">~Consistency()</a>.</p>
 
@@ -1018,9 +1034,9 @@ This is due to the same sequence being aligned in different ways, which changes 
 
 <p>Number of residues of the selected alignment. </p>
 
-<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00146">146</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00148">148</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00525">applyWindow()</a>, and <a class="el" href="_consistency_8cpp_source.html#l00042">perform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00525">applyWindow()</a>, and <a class="el" href="_consistency_8cpp_source.html#l00045">perform()</a>.</p>
 
 </div>
 </div>
@@ -1046,9 +1062,9 @@ This is due to the same sequence being aligned in different ways, which changes 
 
 <p>Raw consistency values. </p>
 
-<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00131">131</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00133">133</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00525">applyWindow()</a>, <a class="el" href="_consistency_8cpp_source.html#l00829">Consistency()</a>, <a class="el" href="_consistency_8cpp_source.html#l00588">getValues()</a>, <a class="el" href="_consistency_8cpp_source.html#l00042">perform()</a>, and <a class="el" href="_consistency_8cpp_source.html#l00820">~Consistency()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00525">applyWindow()</a>, <a class="el" href="_consistency_8cpp_source.html#l00829">Consistency()</a>, <a class="el" href="_consistency_8cpp_source.html#l00588">getValues()</a>, <a class="el" href="_consistency_8cpp_source.html#l00045">perform()</a>, and <a class="el" href="_consistency_8cpp_source.html#l00820">~Consistency()</a>.</p>
 
 </div>
 </div>
@@ -1074,15 +1090,15 @@ This is due to the same sequence being aligned in different ways, which changes 
 
 <p>Windowed consistency values. </p>
 
-<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00134">134</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_consistency_8h_source.html#l00136">136</a> of file <a class="el" href="_consistency_8h_source.html">Consistency.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_consistency_8cpp_source.html#l00525">applyWindow()</a>, <a class="el" href="_consistency_8cpp_source.html#l00829">Consistency()</a>, <a class="el" href="_consistency_8cpp_source.html#l00588">getValues()</a>, and <a class="el" href="_consistency_8cpp_source.html#l00820">~Consistency()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/vfernandez/git/trimAl/include/Statistics/<a class="el" href="_consistency_8h_source.html">Consistency.h</a></li>
-<li>/home/vfernandez/git/trimAl/source/Statistics/<a class="el" href="_consistency_8cpp_source.html">Consistency.cpp</a></li>
+<li>/home/vfernandez/git/MyFork/include/Statistics/<a class="el" href="_consistency_8h_source.html">Consistency.h</a></li>
+<li>/home/vfernandez/git/MyFork/source/Statistics/<a class="el" href="_consistency_8cpp_source.html">Consistency.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
