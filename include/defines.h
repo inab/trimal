@@ -33,7 +33,7 @@
 #define BUILD "2019-05-08"
 #define VERSION "2"
 #define REVISION "0"
-#define AUTHORS "2009-2019. Víctor Fernández-Rodríguez, Salvador Capella-Gutierrez and Toni Gabaldón."
+#define AUTHORS "2009-2019. Victor Fernández-Rodríguez, Toni Gabaldón, and Salvador Capella-Gutierrez"
 
 #define GAPPYOUT 1
 #define STRICT   2
