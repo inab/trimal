@@ -176,8 +176,8 @@ namespace statistics {
         // and calculate the statistics
         if (gaps == nullptr) {
             gaps = new Gaps(alig);
+            gaps->CalculateVectors();
         }
-        gaps->CalculateVectors();
         return gaps->applyWindow(ghWindow);
     }
 
