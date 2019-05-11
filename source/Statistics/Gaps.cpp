@@ -384,7 +384,7 @@ namespace statistics {
         return max;
     }
 
-    void Gaps::printGapsColumns() {
+    void Gaps::printGapsColumns() const {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("void Gaps::printGapsColumns(void) ");
@@ -461,7 +461,7 @@ namespace statistics {
         delete[] vectAux;
     }
 
-    void Gaps::printGapsAcl() {
+    void Gaps::printGapsAcl() const {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
         StartTiming("void Gaps::printGapsAcl(void) ");

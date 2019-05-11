@@ -81,11 +81,11 @@ namespace statistics {
 
         // This methods print the gaps' percentage
         // of each column in the alignment.
-        void printGapsColumns();
+        void printGapsColumns() const;
 
         // This methods prints the statistics
         // for the alignment relates to gaps.
-        void printGapsAcl();
+        void printGapsAcl() const;
 
         bool isDefinedWindow();
 
