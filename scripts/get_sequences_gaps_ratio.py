@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
 #
-# 'get_sequneces_gaps.py'
+# 'get_sequences_gaps.py'
 #
-#   Script implemented to obtain the sequences index for those seuqneces 
+#   Script implemented to obtain the sequences index for those sequences 
 #   exceding a minimum gaps' ratio threshold.
 #
 #   [2020] S. Capella-Gutierrez - salvador.capella@bsc.es
