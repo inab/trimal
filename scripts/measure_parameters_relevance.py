@@ -72,19 +72,21 @@ def main():
   '''
 
   
-  # First we'll try with just number of sequences and number of blocks and random output value
   num_sequences = pd.read_table("test_working_files/number_sequences.txt", header=None, names=["num_sequences"])
   num_blocks = pd.read_table("test_working_files/blocks_outputs.txt", header=None, names=["num_blocks"])
   num_columns = pd.read_table("test_working_files/number_columns.txt", header=None, names=["num_columns"])
-  num_ungapped_columns = pd.read_table("test_working_files/gap_stats.txt", header=None, names=["num_ungapped_columns"])
+  avg_seq_identity = pd.read_table("test_working_files/avg_seq_identity.txt", header=None, names=["avg_seq_identity"])
+  avg_seq_overlap = pd.read_table("test_working_files/avg_seq_overlap.txt", header=None, names=["avg_seq_overlap"])
+  num_identical_columns = pd.read_table("test_working_files/number_identical_columns.txt", header=None, names=["num_identical_columns"])
 
-  df = pd.concat([num_sequences, num_blocks, num_columns, num_ungapped_columns], axis=1)
+  df = pd.concat([num_sequences, num_blocks, num_columns, avg_seq_identity, avg_seq_overlap,
+    num_identical_columns], axis=1)
   df["score"] = [random.random() for i in range(df.shape[0])]
 
 
   print(df.head())
   print(df.info())
-  print(df.corr())
+  print(df.corr().to_string())
 
   #run_model(df)
 
@@ -95,7 +97,7 @@ def run_model(df):
             columns=df.columns, index=df.index) 
 
   model = LinearRegression()
-  X = df[['num_sequences', 'num_blocks', 'num_columns']]
+  X = df[['num_sequences', 'num_blocks', 'num_columns', 'avg_seq_identity', 'avg_seq_overlap', 'num_identical_columns']]
   y = df['score']
   X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True, train_size=0.3)
   model.fit(X_train, y_train)

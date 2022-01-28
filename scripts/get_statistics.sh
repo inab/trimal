@@ -1,28 +1,66 @@
 #!/bin/bash
 
-
+start_time=$(date +%s.%N)
 scripts="/home/nicolas/Desktop/BSC/trimal/scripts/"
 dataset="/home/nicolas/Desktop/BSC/trimal/dataset/"
 test_working_files="/home/nicolas/Desktop/BSC/test_working_files"
 cd $test_working_files
+
+task(){
+    start_file_time=$(date +%s.%N)
+    file=$1
+    #echo $file
+    filename="${file##*/}"
+    trimal -in $file -sgc > temporal_out_$filename.txt
+    if [ -s temporal_out_$filename.txt ]; then
+        python3 $scripts/set_manual_boundaries.py -i temporal_out_$filename.txt --inner_blocks --total_blocks --min_gapscore_allowed 1 > blocks_outputs_$filename.txt &
+        grep ">" $file | wc -l > number_sequences_$filename.txt &
+        trimal -in $file -sgc | tail -n 1 | grep -E "^\s*[[:digit:]]{1,}" -o | awk '{print $1 + 1}' > number_columns_$filename.txt &
+        trimal -in $file -sst | grep '[[:digit:]]' | awk 'NR==1' | awk '{if ($5 == 1) {print $1} else {print 0}}' > number_identical_columns_$filename.txt &
+        #{
+            #trimal -in $file -sst -sident -soverlap > temporal_sst_sident_soverlap_$filename.txt;
+            #grep '^[[:digit:]]*\s' temporal_sst_sident_soverlap_$filename.txt | awk '{sum+=$1;} END{print sum}' > number_columns_$filename.txt;
+            #grep '^[[:digit:]]*\s' temporal_sst_sident_soverlap_$filename.txt | awk 'NR==1' | awk '{if ($5 == 1) {print $1} else {print 0}}' > number_identical_columns_$filename.txt;
+            #grep "## AverageIdentity" temporal_sst_sident_soverlap_$filename.txt | awk '{print $3}' > avg_seq_identity_$filename.txt;
+            #grep "## AverageOverlap" temporal_sst_sident_soverlap_$filename.txt | awk '{print $3}' > avg_seq_overlap_$filename.txt;
+            #rm temporal_sst_sident_soverlap_$filename.txt;
+        #}
+        trimal -in $file -sident | grep "## AverageIdentity" | awk '{print $3}' > avg_seq_identity_$filename.txt &
+        trimal -in $file -soverlap | grep "## AverageOverlap" | awk '{print $3}' > avg_seq_overlap_$filename.txt &
+    fi
+    wait
+    end_file_time=$(date +%s.%N)
+    file_time=$(echo "$end_file_time - $start_file_time" | bc)
+    echo "$file took $file_time  seconds"
+}
+
+for file in $dataset*.fasta;
+do
+    task "$file" &
+done
+wait
+
+
 > blocks_outputs.txt
 > number_sequences.txt
 > number_columns.txt
-> gap_stats.txt
+> avg_seq_identity.txt
+> avg_seq_overlap.txt
+> number_identical_columns.txt
+
 for file in $dataset*.fasta;
 do
-    echo $file
-    trimal -in $file -sgc > temporal_out.txt
-    if [ -s temporal_out.txt ]; then
-        python3 $scripts/set_manual_boundaries.py -i temporal_out.txt --inner_blocks --total_blocks --min_gapscore_allowed 1 >> blocks_outputs.txt
-        grep ">" $file | wc -l >> number_sequences.txt
-        trimal -in $file -sgc | tail -n 1 | grep -E "^\s*[[:digit:]]{1,}" -o | awk '{print $1 + 1}' >> number_columns.txt
-        trimal -in $file -sgt > temporal_out.txt
-        gap_score=$(grep -E "[[:digit:]]" temporal_out.txt -m 1 -o | tail -n 1)
-        if [ $gap_score == 1 ]; then
-            grep -E "[[:digit:]]{1,}" temporal_out.txt -m 1 -o | head -n 1 >> gap_stats.txt
-        else
-            echo 0 >> gap_stats.txt
-        fi
-    fi
+    filename="${file##*/}"
+    cat blocks_outputs_$filename.txt >> blocks_outputs.txt && rm blocks_outputs_$filename.txt
+    cat number_sequences_$filename.txt >> number_sequences.txt && rm number_sequences_$filename.txt
+    cat number_columns_$filename.txt >> number_columns.txt && rm number_columns_$filename.txt
+    cat avg_seq_identity_$filename.txt >> avg_seq_identity.txt && rm avg_seq_identity_$filename.txt
+    cat avg_seq_overlap_$filename.txt >> avg_seq_overlap.txt && rm avg_seq_overlap_$filename.txt
+    cat number_identical_columns_$filename.txt >> number_identical_columns.txt && rm number_identical_columns_$filename.txt
+    rm temporal_out_$filename.txt
 done
+
+
+end_time=$(date +%s.%N)
+diff=$(echo "$end_time - $start_time" | bc)
+echo $diff
