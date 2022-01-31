@@ -41,22 +41,18 @@ void alignment::calculateSeqIdentity(void) {
 
   /* Create identities matrix to store identities scores */
   identities = new float*[sequenNumber];
-  
+
   #pragma omp parallel for
   for(i = 0; i < sequenNumber; i++)
     identities[i] = new float[sequenNumber];
-
-  #pragma omp parallel for
-  /* For each seq, compute its identity score against the others in the MSA */
-  for(i = 0; i < sequenNumber; i++) {
     identities[i][i] = 0;
 
-    #pragma omp parallel for private(dst, hit)
+  #pragma omp parallel for private(j, dst, hit)
+  /* For each seq, compute its identity score against the others in the MSA */
+  for(i = 0; i < sequenNumber; i++) {
     /* Compute identity scores for the current sequence against the rest */
     for(j = i + 1; j < sequenNumber; j++) {
-
       hit = 0, dst = 0;
-      #pragma omp parallel for
       for(k = 0; k < residNumber; k++) {
       /* If one of the two positions is a valid residue,
        * count it for the common length */
