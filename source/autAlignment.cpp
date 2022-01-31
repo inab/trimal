@@ -41,7 +41,7 @@ void alignment::calculateSeqIdentity(void) {
 
   /* Create identities matrix to store identities scores */
   identities = new float*[sequenNumber];
-  cout << "start parallel\n";
+  
   #pragma omp parallel for
   for(i = 0; i < sequenNumber; i++)
     identities[i] = new float[sequenNumber];
