@@ -25,6 +25,7 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 #include "alignment.h"
 #include "defines.h"
+#include "omp.h"
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This function computes the identities values between the sequences from
@@ -41,15 +42,14 @@ void alignment::calculateSeqIdentity(void) {
   /* Create identities matrix to store identities scores */
   identities = new float*[sequenNumber];
 
-  /* For each seq, compute its identity score against the others in the MSA */
-  for(i = 0; i < sequenNumber; i++) {
+  #pragma omp parallel for
+  for(i = 0; i < sequenNumber; i++)
     identities[i] = new float[sequenNumber];
-
-    /* It's a symmetric matrix, copy values that have been already computed */
-    for(j = 0; j < i; j++)
-      identities[i][j] = identities[j][i];
     identities[i][i] = 0;
 
+  #pragma omp parallel for
+  /* For each seq, compute its identity score against the others in the MSA */
+  for(i = 0; i < sequenNumber; i++) {
     /* Compute identity scores for the current sequence against the rest */
     for(j = i + 1; j < sequenNumber; j++) {
       for(k = 0, hit = 0, dst = 0; k < residNumber; k++) {
@@ -67,6 +67,7 @@ void alignment::calculateSeqIdentity(void) {
       /* Identity score between two sequences is the ratio of identical residues
        * by the total length (common and no-common residues) among them */
       identities[i][j] = (float) hit/dst;
+      identities[j][i] = identities[i][j];
     }
   }
 }
@@ -83,11 +84,13 @@ void alignment::calculateSeqOverlap(void) {
 
   /* Create overlap matrix to store overlap scores */
   overlaps = new float*[sequenNumber];
+  
+  #pragma omp parallel for
+  for(i = 0; i < sequenNumber; i++) overlaps[i] = new float[sequenNumber];
 
+  #pragma omp parallel for collapse(2)
   /* For each seq, compute its overlap score against the others in the MSA */
   for(i = 0; i < sequenNumber; i++) {
-    overlaps[i] = new float[sequenNumber];
-
     for(j = 0; j < sequenNumber; j++) {
       for(k = 0, shared = 0, referenceLength = 0; k < residNumber; k++) {
         /* If there a valid residue for the reference sequence, then see if

@@ -8,7 +8,7 @@ CODE3 = statAl.cpp
 NAME3 = statal
 
 CC    = g++
-FLAGS = -Wall -O2
+FLAGS = -Wall -O2 -fopenmp
 LIBM  = -lm
 DUGB  =
 
