@@ -1,9 +1,9 @@
 #!/bin/bash
 
 start_time=$(date +%s.%N)
-scripts="/home/nicolas/Desktop/BSC/trimal/scripts/"
-dataset="/home/nicolas/Desktop/BSC/trimal/dataset/"
-test_working_files="/home/nicolas/Desktop/BSC/test_working_files"
+scripts="/trimal/scripts/"
+dataset="/trimal/dataset/"
+test_working_files="test_working_files"
 cd $test_working_files
 
 task(){
