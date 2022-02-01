@@ -16,7 +16,6 @@ task(){
         python3 $scripts/set_manual_boundaries.py -i temporal_out_$filename.txt --inner_blocks --total_blocks --min_gapscore_allowed 1 > blocks_outputs_$filename.txt &
         grep ">" $file | wc -l > number_sequences_$filename.txt &
         trimal -in $file -sgc | tail -n 1 | grep -E "^\s*[[:digit:]]{1,}" -o | awk '{print $1 + 1}' > number_columns_$filename.txt &
-        trimal -in $file -sst | grep '[[:digit:]]' | awk 'NR==1' | awk '{if ($5 == 1) {print $1} else {print 0}}' > number_identical_columns_$filename.txt &
         #{
             #trimal -in $file -sst -sident -soverlap > temporal_sst_sident_soverlap_$filename.txt;
             #grep '^[[:digit:]]*\s' temporal_sst_sident_soverlap_$filename.txt | awk '{sum+=$1;} END{print sum}' > number_columns_$filename.txt;
@@ -44,7 +43,6 @@ wait
 > number_sequences.txt
 > number_columns.txt
 > avg_seq_identity.txt
-> number_identical_columns.txt
 
 for file in $dataset*.fasta;
 do
@@ -53,7 +51,6 @@ do
     cat number_sequences_$filename.txt >> number_sequences.txt && rm number_sequences_$filename.txt
     cat number_columns_$filename.txt >> number_columns.txt && rm number_columns_$filename.txt
     cat avg_seq_identity_$filename.txt >> avg_seq_identity.txt && rm avg_seq_identity_$filename.txt
-    cat number_identical_columns_$filename.txt >> number_identical_columns.txt && rm number_identical_columns_$filename.txt
     rm temporal_out_$filename.txt
 done
 
