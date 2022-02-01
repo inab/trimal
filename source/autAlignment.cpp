@@ -84,11 +84,13 @@ void alignment::calculateSeqOverlap(void) {
 
   /* Create overlap matrix to store overlap scores */
   overlaps = new float*[sequenNumber];
+  
+  #pragma omp parallel for
+  for(i = 0; i < sequenNumber; i++) overlaps[i] = new float[sequenNumber];
 
+  #pragma omp parallel for collapse(2)
   /* For each seq, compute its overlap score against the others in the MSA */
   for(i = 0; i < sequenNumber; i++) {
-    overlaps[i] = new float[sequenNumber];
-
     for(j = 0; j < sequenNumber; j++) {
       for(k = 0, shared = 0, referenceLength = 0; k < residNumber; k++) {
         /* If there a valid residue for the reference sequence, then see if
