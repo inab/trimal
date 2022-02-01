@@ -26,7 +26,6 @@ task(){
             #rm temporal_sst_sident_soverlap_$filename.txt;
         #}
         trimal -in $file -sident | grep "## AverageIdentity" | awk '{print $3}' > avg_seq_identity_$filename.txt &
-        trimal -in $file -soverlap | grep "## AverageOverlap" | awk '{print $3}' > avg_seq_overlap_$filename.txt &
     fi
     wait
     end_file_time=$(date +%s.%N)
@@ -45,7 +44,6 @@ wait
 > number_sequences.txt
 > number_columns.txt
 > avg_seq_identity.txt
-> avg_seq_overlap.txt
 > number_identical_columns.txt
 
 for file in $dataset*.fasta;
@@ -55,7 +53,6 @@ do
     cat number_sequences_$filename.txt >> number_sequences.txt && rm number_sequences_$filename.txt
     cat number_columns_$filename.txt >> number_columns.txt && rm number_columns_$filename.txt
     cat avg_seq_identity_$filename.txt >> avg_seq_identity.txt && rm avg_seq_identity_$filename.txt
-    cat avg_seq_overlap_$filename.txt >> avg_seq_overlap.txt && rm avg_seq_overlap_$filename.txt
     cat number_identical_columns_$filename.txt >> number_identical_columns.txt && rm number_identical_columns_$filename.txt
     rm temporal_out_$filename.txt
 done
