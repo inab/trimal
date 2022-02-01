@@ -38,6 +38,12 @@ def main():
   print(df.info())
   print(df.corr().to_string())
 
+  with open('table.html', 'w') as file:
+    file.write(df.to_html())
+
+  with open('table.csv', 'w') as file:
+    file.write(df.to_csv())
+
   #run_model(df)
 
 
