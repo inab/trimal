@@ -43,6 +43,7 @@ statisticsGaps::statisticsGaps(string *alignmentMatrix, int species, int aminos,
   columns =      aminos;
   maxGaps =      0;
   halfWindow =   0;
+  totalGaps =    0;
   dataType = dataType_;
 
   if(dataType == AAType)
@@ -66,8 +67,10 @@ statisticsGaps::statisticsGaps(string *alignmentMatrix, int species, int aminos,
   /* Count the gaps and indeterminations of each columns */
   for(i = 0; i < columns; i++) {
     for(j = 0; j < columnLength; j++) {
-      if(alignmentMatrix[j][i] == '-')
+      if(alignmentMatrix[j][i] == '-') {
         gapsInColumn[i]++;
+        totalGaps++;
+      }
       else if(alignmentMatrix[j][i] == indet)
         aminosXInColumn[i]++;
     }
@@ -97,6 +100,7 @@ statisticsGaps::statisticsGaps(void) {
   columns = 	  0;
   columnLength  = 0;
   maxGaps = 	  0;
+  totalGaps =    0;
   halfWindow = 	  0;
   dataType =      0;
 }
@@ -461,4 +465,10 @@ void statisticsGaps::printGapsAcl(void) {
            << "\t\t" << i << "\t\t" << setw(10) << (i * 1.0)/columnLength << "\t"<< setw(10) << 1 - ((i * 1.0)/columnLength) << endl;
     }
   }
+
+  cout << "+-------------------------------+-----------------------------"
+       << "----------+--------------------------------------------------+" << endl;
+  
+  cout << endl << "## AverageGaps\t" << float(totalGaps)/(columns * columnLength);
+  cout << endl << "#> AverageGaps\tAverage gaps of the alignment" << endl;
 }

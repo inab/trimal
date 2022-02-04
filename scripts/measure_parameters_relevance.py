@@ -29,13 +29,19 @@ def main():
   num_sequences = pd.read_table("test_working_files/number_sequences.txt", header=None, names=["num_sequences"])
   num_blocks = pd.read_table("test_working_files/blocks_outputs.txt", header=None, names=["num_blocks"])
   num_columns = pd.read_table("test_working_files/number_columns.txt", header=None, names=["num_columns"])
-  avg_seq_identity = pd.read_table("test_working_files/avg_seq_identity.txt", header=None, names=["avg_seq_identity"])
+  avg_gaps = pd.read_table("test_working_files/avg_gaps.txt", header=None, names=["avg_gaps"])
+  problem_num = pd.read_table("test_working_files/problem_num.txt", header=None, names=["problem_num"], dtype="string")
+  msa_tools = pd.read_table("test_working_files/MSA_tools.txt", header=None, names=["msa_tools"], dtype="string")
+  msa_filter_tools = pd.read_table("test_working_files/MSA_filter_tools.txt", header=None, names=["msa_filter_tools"], dtype="string")
+  #avg_seq_identity = pd.read_table("test_working_files/avg_seq_identity.txt", header=None, names=["avg_seq_identity"])
 
-  df = pd.concat([num_sequences, num_blocks, num_columns, avg_seq_identity], axis=1)
-
+  df = pd.concat([num_sequences, num_blocks, num_columns, avg_gaps, problem_num, msa_tools, msa_filter_tools], axis=1)
+  df["has_block"] = df["num_blocks"] > 0
 
   print(df.head())
   print(df.info())
+
+  '''
   print(df.corr().to_string())
 
   with open('table.html', 'w') as file:
@@ -43,6 +49,7 @@ def main():
 
   with open('table.csv', 'w') as file:
     file.write(df.to_csv())
+  '''
 
   #run_model(df)
 
@@ -53,7 +60,7 @@ def run_model(df):
             columns=df.columns, index=df.index) 
 
   model = LinearRegression()
-  X = df[['num_sequences', 'num_blocks', 'num_columns', 'avg_seq_identity']]
+  X = df[['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps']]
   y = df['score']
   X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True, train_size=0.3)
   model.fit(X_train, y_train)

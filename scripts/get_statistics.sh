@@ -1,21 +1,24 @@
 #!/bin/bash
 
 start_time=$(date +%s.%N)
-scripts="/trimal/scripts/"
-dataset="/trimal/dataset/"
+scripts="../trimal/scripts"
+dataset="/home/shared/dessimoz/02.Data/SpeciesTreeDiscordanceTest.Enriched/AA/Fungi"
 test_working_files="test_working_files"
+trimal_local="../trimal/source/trimal"
+if [ ! -d "$test_working_files" ]; then
+    mkdir $test_working_files
+fi
 cd $test_working_files
 
 task(){
     start_file_time=$(date +%s.%N)
     file=$1
-    #echo $file
     filename="${file##*/}"
-    trimal -in $file -sgc > temporal_out_$filename.txt
+    $trimal_local -in $file -sgc > temporal_out_$filename.txt
     if [ -s temporal_out_$filename.txt ]; then
         python3 $scripts/set_manual_boundaries.py -i temporal_out_$filename.txt --inner_blocks --total_blocks --min_gapscore_allowed 1 > blocks_outputs_$filename.txt &
         grep ">" $file | wc -l > number_sequences_$filename.txt &
-        trimal -in $file -sgc | tail -n 1 | grep -E "^\s*[[:digit:]]{1,}" -o | awk '{print $1 + 1}' > number_columns_$filename.txt &
+        $trimal_local -in $file -sgc | tail -n 1 | grep -E "^\s*[[:digit:]]{1,}" -o | awk '{print $1 + 1}' > number_columns_$filename.txt &
         #{
             #trimal -in $file -sst -sident -soverlap > temporal_sst_sident_soverlap_$filename.txt;
             #grep '^[[:digit:]]*\s' temporal_sst_sident_soverlap_$filename.txt | awk '{sum+=$1;} END{print sum}' > number_columns_$filename.txt;
@@ -24,17 +27,23 @@ task(){
             #grep "## AverageOverlap" temporal_sst_sident_soverlap_$filename.txt | awk '{print $3}' > avg_seq_overlap_$filename.txt;
             #rm temporal_sst_sident_soverlap_$filename.txt;
         #}
-        trimal -in $file -sident | grep "## AverageIdentity" | awk '{print $3}' > avg_seq_identity_$filename.txt &
+        $trimal_local -in $file -sgt | grep "## AverageGaps" | awk '{print $3}' > avg_gaps_$filename.txt &
+        #$trimal_local -in $file -sident | grep "## AverageIdentity" | awk '{print $3}' > avg_seq_identity_$filename.txt &
     fi
     wait
     end_file_time=$(date +%s.%N)
     file_time=$(echo "$end_file_time - $start_file_time" | bc)
-    echo "$file took $file_time  seconds"
+    filename="${file##*/}"
+    #echo "$filename took $file_time  seconds"
 }
 
-for file in $dataset*.fasta;
+
+for problem in $dataset/problem000*;
 do
-    task "$file" &
+    for file in $problem/*.fa;
+    do
+        task "$file" &
+    done
 done
 wait
 
@@ -42,16 +51,31 @@ wait
 > blocks_outputs.txt
 > number_sequences.txt
 > number_columns.txt
-> avg_seq_identity.txt
+> avg_gaps.txt
+> problem_num.txt
+> MSA_tools.txt
+> MSA_filter_tools.txt
 
-for file in $dataset*.fasta;
+for problem in $dataset/problem000*;
 do
-    filename="${file##*/}"
-    cat blocks_outputs_$filename.txt >> blocks_outputs.txt && rm blocks_outputs_$filename.txt
-    cat number_sequences_$filename.txt >> number_sequences.txt && rm number_sequences_$filename.txt
-    cat number_columns_$filename.txt >> number_columns.txt && rm number_columns_$filename.txt
-    cat avg_seq_identity_$filename.txt >> avg_seq_identity.txt && rm avg_seq_identity_$filename.txt
-    rm temporal_out_$filename.txt
+    for file in $problem/*.fa;
+    do
+        filename="${file##*/}"
+        if [ -s temporal_out_$filename.txt ]; then
+            echo $problem | awk -F '/' '{print $(NF)}' >> problem_num.txt
+            MSA_tool=$(echo $filename | awk -F '.' '{print $2}')
+            if  [[ $MSA_tool == Guidance* ]]; then
+                MSA_tool=$(echo $MSA_tool | awk -F 'Guidance' '{print $2}')
+            fi
+            echo $MSA_tool >> MSA_tools.txt
+            echo $filename | awk -F '.' '{if (NF == 4) print $3; else print "";}' >> MSA_filter_tools.txt
+            cat blocks_outputs_$filename.txt >> blocks_outputs.txt && rm blocks_outputs_$filename.txt
+            cat number_sequences_$filename.txt >> number_sequences.txt && rm number_sequences_$filename.txt
+            cat number_columns_$filename.txt >> number_columns.txt && rm number_columns_$filename.txt
+            cat avg_gaps_$filename.txt >> avg_gaps.txt && rm avg_gaps_$filename.txt
+        fi
+        rm temporal_out_$filename.txt
+    done
 done
 
 

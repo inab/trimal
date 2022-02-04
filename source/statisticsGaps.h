@@ -43,6 +43,7 @@ class statisticsGaps {
   int columns;
   int columnLength;
   int maxGaps;
+  int totalGaps;
   int halfWindow;
   int dataType;
 
