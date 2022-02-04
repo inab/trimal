@@ -27,6 +27,8 @@
 #include "defines.h"
 #include "omp.h"
 
+const int minParallelSize = 20;
+
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This function computes the identities values between the sequences from
  * the alignment */
@@ -42,16 +44,17 @@ void alignment::calculateSeqIdentity(void) {
   /* Create identities matrix to store identities scores */
   identities = new float*[sequenNumber];
 
-  #pragma omp parallel for
-  for(i = 0; i < sequenNumber; i++)
+  #pragma omp parallel for if(sequenNumber>minParallelSize)
+  for(i = 0; i < sequenNumber; i++) {
     identities[i] = new float[sequenNumber];
     identities[i][i] = 0;
+  }
 
-  #pragma omp parallel for
+  #pragma omp parallel for private(j, k, hit, dst) if(sequenNumber>minParallelSize)
   /* For each seq, compute its identity score against the others in the MSA */
   for(i = 0; i < sequenNumber; i++) {
     /* Compute identity scores for the current sequence against the rest */
-    for(j = i + 1; j < sequenNumber; j++) {
+    for(j = 0; j < sequenNumber; j++) {
       for(k = 0, hit = 0, dst = 0; k < residNumber; k++) {
       /* If one of the two positions is a valid residue,
        * count it for the common length */
@@ -85,10 +88,10 @@ void alignment::calculateSeqOverlap(void) {
   /* Create overlap matrix to store overlap scores */
   overlaps = new float*[sequenNumber];
   
-  #pragma omp parallel for
+  #pragma omp parallel for if(sequenNumber>minParallelSize)
   for(i = 0; i < sequenNumber; i++) overlaps[i] = new float[sequenNumber];
 
-  #pragma omp parallel for collapse(2)
+  #pragma omp parallel for collapse(2) private(k, shared, referenceLength) if(sequenNumber>minParallelSize)
   /* For each seq, compute its overlap score against the others in the MSA */
   for(i = 0; i < sequenNumber; i++) {
     for(j = 0; j < sequenNumber; j++) {
