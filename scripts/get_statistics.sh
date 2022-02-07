@@ -2,7 +2,7 @@
 
 start_time=$(date +%s.%N)
 scripts="../trimal/scripts"
-dataset="/home/shared/dessimoz/02.Data/SpeciesTreeDiscordanceTest.Enriched/AA/Fungi"
+dataset="/home/shared/dessimoz/02.Data/SpeciesTreeDiscordanceTest.Enriched/AA"
 test_working_files="test_working_files"
 trimal_local="../trimal/source/trimal"
 if [ ! -d "$test_working_files" ]; then
@@ -13,7 +13,7 @@ cd $test_working_files
 task(){
     start_file_time=$(date +%s.%N)
     file=$1
-    filename="${file##*/}"
+    filename=$(echo $file | awk -F '/' '{print $(NF-2)"_"$(NF-1)"_"$NF}')
     $trimal_local -in $file -sgc > temporal_out_$filename.txt
     if [ -s temporal_out_$filename.txt ]; then
         python3 $scripts/set_manual_boundaries.py -i temporal_out_$filename.txt --inner_blocks --total_blocks --min_gapscore_allowed 1 > blocks_outputs_$filename.txt &
@@ -37,12 +37,14 @@ task(){
     #echo "$filename took $file_time  seconds"
 }
 
-
-for problem in $dataset/problem000*;
+for taxon in $dataset/*
 do
-    for file in $problem/*.fa;
+    for problem in $taxon/problem000*
     do
-        task "$file" &
+        for file in $problem/*.fa
+        do
+            task "$file" &
+        done
     done
 done
 wait
@@ -52,29 +54,34 @@ wait
 > number_sequences.txt
 > number_columns.txt
 > avg_gaps.txt
+> taxon.txt
 > problem_num.txt
 > MSA_tools.txt
 > MSA_filter_tools.txt
 
-for problem in $dataset/problem000*;
+for taxon in $dataset/*
 do
-    for file in $problem/*.fa;
+    for problem in $taxon/problem*
     do
-        filename="${file##*/}"
-        if [ -s temporal_out_$filename.txt ]; then
-            echo $problem | awk -F '/' '{print $(NF)}' >> problem_num.txt
-            MSA_tool=$(echo $filename | awk -F '.' '{print $2}')
-            if  [[ $MSA_tool == Guidance* ]]; then
-                MSA_tool=$(echo $MSA_tool | awk -F 'Guidance' '{print $2}')
+        for file in $problem/*.fa
+        do
+            filename=$(echo $file | awk -F '/' '{print $(NF-2)"_"$(NF-1)"_"$NF}')
+            if [ -s temporal_out_$filename.txt ]; then
+                echo $taxon | awk -F '/' '{print $(NF)}' >> taxon.txt 
+                echo $problem | awk -F '/' '{print $(NF)}' >> problem_num.txt
+                MSA_tool=$(echo $filename | awk -F '.' '{print $2}')
+                if  [[ $MSA_tool == Guidance* ]]; then
+                    MSA_tool=$(echo $MSA_tool | awk -F 'Guidance' '{print $2}')
+                fi
+                echo $MSA_tool >> MSA_tools.txt
+                echo $filename | awk -F '.' '{if (NF == 4) print $3; else print "None";}' >> MSA_filter_tools.txt
+                cat blocks_outputs_$filename.txt >> blocks_outputs.txt && rm blocks_outputs_$filename.txt
+                cat number_sequences_$filename.txt >> number_sequences.txt && rm number_sequences_$filename.txt
+                cat number_columns_$filename.txt >> number_columns.txt && rm number_columns_$filename.txt
+                cat avg_gaps_$filename.txt >> avg_gaps.txt && rm avg_gaps_$filename.txt
             fi
-            echo $MSA_tool >> MSA_tools.txt
-            echo $filename | awk -F '.' '{if (NF == 4) print $3; else print "";}' >> MSA_filter_tools.txt
-            cat blocks_outputs_$filename.txt >> blocks_outputs.txt && rm blocks_outputs_$filename.txt
-            cat number_sequences_$filename.txt >> number_sequences.txt && rm number_sequences_$filename.txt
-            cat number_columns_$filename.txt >> number_columns.txt && rm number_columns_$filename.txt
-            cat avg_gaps_$filename.txt >> avg_gaps.txt && rm avg_gaps_$filename.txt
-        fi
-        rm temporal_out_$filename.txt
+            rm temporal_out_$filename.txt
+        done
     done
 done
 

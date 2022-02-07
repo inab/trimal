@@ -26,20 +26,25 @@ from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.preprocessing import MinMaxScaler
 
 def main():
-  num_sequences = pd.read_table("test_working_files/number_sequences.txt", header=None, names=["num_sequences"])
+  num_sequences = pd.read_table("test_working_files/number_sequences.txt", header=None, names=["num_sequences"], dtype="int")
   num_blocks = pd.read_table("test_working_files/blocks_outputs.txt", header=None, names=["num_blocks"])
   num_columns = pd.read_table("test_working_files/number_columns.txt", header=None, names=["num_columns"])
   avg_gaps = pd.read_table("test_working_files/avg_gaps.txt", header=None, names=["avg_gaps"])
+  taxon = pd.read_table("test_working_files/taxon.txt", header=None, names=["taxon"], dtype="string")
   problem_num = pd.read_table("test_working_files/problem_num.txt", header=None, names=["problem_num"], dtype="string")
   msa_tools = pd.read_table("test_working_files/MSA_tools.txt", header=None, names=["msa_tools"], dtype="string")
   msa_filter_tools = pd.read_table("test_working_files/MSA_filter_tools.txt", header=None, names=["msa_filter_tools"], dtype="string")
   #avg_seq_identity = pd.read_table("test_working_files/avg_seq_identity.txt", header=None, names=["avg_seq_identity"])
 
-  df = pd.concat([num_sequences, num_blocks, num_columns, avg_gaps, problem_num, msa_tools, msa_filter_tools], axis=1)
+  df = pd.concat([num_sequences, num_blocks, num_columns, avg_gaps, taxon, problem_num, msa_tools, msa_filter_tools], axis=1)
   df["has_block"] = df["num_blocks"] > 0
 
   print(df.head())
+  print(df.tail())
   print(df.info())
+
+  with open('table.csv', 'w') as file:
+    file.write(df.to_csv())
 
   '''
   print(df.corr().to_string())
