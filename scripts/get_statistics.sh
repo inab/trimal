@@ -39,7 +39,7 @@ task(){
 
 for taxon in $dataset/*
 do
-    for problem in $taxon/problem000*
+    for problem in $taxon/problem
     do
         for file in $problem/*.fa
         do
@@ -66,6 +66,7 @@ do
         for file in $problem/*.fa
         do
             filename=$(echo $file | awk -F '/' '{print $(NF-2)"_"$(NF-1)"_"$NF}')
+            echo $filename
             if [ -s temporal_out_$filename.txt ]; then
                 echo $taxon | awk -F '/' '{print $(NF)}' >> taxon.txt 
                 echo $problem | awk -F '/' '{print $(NF)}' >> problem_num.txt
