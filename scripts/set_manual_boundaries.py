@@ -77,11 +77,18 @@ def main():
   if args.maxBlocks < 1:
     sys.exit("ERROR: --max_blocks should at least 1")
 
-  compute_blocks(args)
+  npos=0
+  left=0
+  right=-1
+  blockNum=0
+
+  while compute_blocks(args, npos, left, right, blockNum) == 1:
+    left += 1
+    right -= 1
 
 ### ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ****
 
-def compute_blocks(args, npos=0, left=0, right=-1, blockNum=0):
+def compute_blocks(args, npos, left, right, blockNum):
   putative = [0, 0, False, 0, 0]
   boundaries = [-1, -1, -1, -1, -1, -1]
   for line in open(args.inFile, "r"):
@@ -231,11 +238,13 @@ def compute_blocks(args, npos=0, left=0, right=-1, blockNum=0):
           + "%.4f%% of the alignment\n") % (blockNum, positionsDiff + 1, ratioDiff))
       if args.innerBlocks:
         if positionsDiff > 2 and blockNum < args.maxBlocks:
-          compute_blocks(args, npos, left + 1, right - 1, blockNum)
+          return 1
         elif args.totalBlocks:
           print_total_blocks(blockNum)
       elif args.totalBlocks:
         print_total_blocks(blockNum)
+
+  return 0
 
 def no_gaps_output(oneLine, left, right, left_ratio, right_ratio):
   if not oneLine:
