@@ -24,6 +24,11 @@ import os
 import sys
 import argparse
 
+npos = 0
+blockNum = 0
+left = 0
+right = -1
+
 def main():
 
   parser = argparse.ArgumentParser()
@@ -77,18 +82,19 @@ def main():
   if args.maxBlocks < 1:
     sys.exit("ERROR: --max_blocks should at least 1")
 
-  npos=0
-  left=0
-  right=-1
-  blockNum=0
-
-  while compute_blocks(args, npos, left, right, blockNum) == 1:
+  global left
+  global right
+  while compute_blocks(args) == 1:
     left += 1
     right -= 1
 
 ### ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ****
 
-def compute_blocks(args, npos, left, right, blockNum):
+def compute_blocks(args):
+  global npos
+  global blockNum
+  global left
+  global right
   putative = [0, 0, False, 0, 0]
   boundaries = [-1, -1, -1, -1, -1, -1]
   for line in open(args.inFile, "r"):
