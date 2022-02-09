@@ -14,8 +14,8 @@ task(){
     start_file_time=$(date +%s.%N)
     file=$1
     filename=$(echo $file | awk -F '/' '{print $(NF-2)"_"$(NF-1)"_"$NF}')
-    $trimal_local -in $file -sgc > temporal_out_$filename.txt
-    if [ -s temporal_out_$filename.txt ]; then
+    if [[ $filename != *".seqs."* ]]; then
+        $trimal_local -in $file -sgc > temporal_out_$filename.txt
         python3 $scripts/set_manual_boundaries.py -i temporal_out_$filename.txt --inner_blocks --total_blocks --min_gapscore_allowed 1 > blocks_outputs_$filename.txt &
         grep ">" $file | wc -l > number_sequences_$filename.txt &
         $trimal_local -in $file -sgc | tail -n 1 | grep -E "^\s*[[:digit:]]{1,}" -o | awk '{print $1 + 1}' > number_columns_$filename.txt &
@@ -28,7 +28,7 @@ task(){
             #rm temporal_sst_sident_soverlap_$filename.txt;
         #}
         $trimal_local -in $file -sgt | grep "## AverageGaps" | awk '{print $3}' > avg_gaps_$filename.txt &
-        #$trimal_local -in $file -sident | grep "## AverageIdentity" | awk '{print $3}' > avg_seq_identity_$filename.txt &
+        $trimal_local -in $file -sident | grep "## AverageIdentity" | awk '{print $3}' > avg_seq_identity_$filename.txt &
     fi
     wait
     end_file_time=$(date +%s.%N)
@@ -56,10 +56,12 @@ wait
 > number_sequences.txt
 > number_columns.txt
 > avg_gaps.txt
+> avg_seq_identity.txt
 > taxon.txt
 > problem_num.txt
 > MSA_tools.txt
 > MSA_filter_tools.txt
+> log.txt
 
 for taxon in $dataset/*
 do
@@ -68,7 +70,6 @@ do
         for file in $problem/*.fa
         do
             filename=$(echo $file | awk -F '/' '{print $(NF-2)"_"$(NF-1)"_"$NF}')
-            echo $filename
             if [ -s temporal_out_$filename.txt ]; then
                 echo $taxon | awk -F '/' '{print $(NF)}' >> taxon.txt 
                 echo $problem | awk -F '/' '{print $(NF)}' >> problem_num.txt
@@ -82,8 +83,20 @@ do
                 cat number_sequences_$filename.txt >> number_sequences.txt && rm number_sequences_$filename.txt
                 cat number_columns_$filename.txt >> number_columns.txt && rm number_columns_$filename.txt
                 cat avg_gaps_$filename.txt >> avg_gaps.txt && rm avg_gaps_$filename.txt
+                cat avg_seq_identity_$filename.txt >> avg_seq_identity.txt && rm avg_seq_identity_$filename.txt
+                rm temporal_out_$filename.txt
+            elif [[ $filename == *".seqs."* ]]; then
+                echo $taxon | awk -F '/' '{print $(NF)}' >> taxon.txt 
+                echo $problem | awk -F '/' '{print $(NF)}' >> problem_num.txt
+                echo "Original" >> MSA_tools.txt
+                echo "Original" >> MSA_filter_tools.txt
+                echo -1 >> blocks_outputs.txt
+                grep ">" $file | wc -l >> number_sequences.txt
+                echo -1 >> number_columns.txt
+                echo -1 >> avg_gaps.txt
+                echo -1 >> avg_seq_identity.txt
             fi
-            rm temporal_out_$filename.txt
+            echo "Finsished with $filename" >> log.txt
         done
     done
 done
@@ -91,4 +104,5 @@ done
 
 end_time=$(date +%s.%N)
 diff=$(echo "$end_time - $start_time" | bc)
+echo $diff >> log.txt
 echo $diff
