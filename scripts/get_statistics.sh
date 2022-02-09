@@ -37,12 +37,14 @@ task(){
     #echo "$filename took $file_time  seconds"
 }
 
+N=5
 for taxon in $dataset/*
 do
-    for problem in $taxon/problem
+    for problem in $taxon/problem*
     do
         for file in $problem/*.fa
         do
+            ((i=i%N)); ((i++==0)) && wait
             task "$file" &
         done
     done
