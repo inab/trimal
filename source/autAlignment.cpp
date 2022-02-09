@@ -27,7 +27,7 @@
 #include "defines.h"
 #include "omp.h"
 
-const int minParallelSize = 20;
+const int minParallelSize = 50;
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 /* This function computes the identities values between the sequences from
@@ -44,13 +44,13 @@ void alignment::calculateSeqIdentity(void) {
   /* Create identities matrix to store identities scores */
   identities = new float*[sequenNumber];
 
-  #pragma omp parallel for if(sequenNumber>minParallelSize)
+  #pragma omp parallel for num_threads(4) if(sequenNumber>minParallelSize)
   for(i = 0; i < sequenNumber; i++) {
     identities[i] = new float[sequenNumber];
     identities[i][i] = 0;
   }
 
-  #pragma omp parallel for private(j, k, hit, dst) if(sequenNumber>minParallelSize)
+  #pragma omp parallel for num_threads(4) private(j, k, hit, dst) if(sequenNumber>minParallelSize)
   /* For each seq, compute its identity score against the others in the MSA */
   for(i = 0; i < sequenNumber; i++) {
     /* Compute identity scores for the current sequence against the rest */
@@ -88,10 +88,10 @@ void alignment::calculateSeqOverlap(void) {
   /* Create overlap matrix to store overlap scores */
   overlaps = new float*[sequenNumber];
   
-  #pragma omp parallel for if(sequenNumber>minParallelSize)
+  #pragma omp parallel for num_threads(4) if(sequenNumber>minParallelSize)
   for(i = 0; i < sequenNumber; i++) overlaps[i] = new float[sequenNumber];
 
-  #pragma omp parallel for collapse(2) private(k, shared, referenceLength) if(sequenNumber>minParallelSize)
+  #pragma omp parallel for num_threads(4) collapse(2) private(k, shared, referenceLength) if(sequenNumber>minParallelSize)
   /* For each seq, compute its overlap score against the others in the MSA */
   for(i = 0; i < sequenNumber; i++) {
     for(j = 0; j < sequenNumber; j++) {
@@ -225,6 +225,7 @@ void alignment::printSeqIdentity(void) {
   /* For each sequence, we look for its most similar one */
   maxs = new float*[sequenNumber];
 
+  #pragma omp parallel for private(k, mx, avg, pos) reduction(+: avgSeq, maxAvgSeq) num_threads(4) if(sequenNumber>minParallelSize)
   for(i = 0; i < sequenNumber; i++) {
     maxs[i] = new float[2];
 
