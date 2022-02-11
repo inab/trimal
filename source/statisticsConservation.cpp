@@ -129,7 +129,7 @@ void statisticsConservation::calculateMatrixIdentity(string *alignmentMatrix) {
   /* Depending on alignment type, indetermination symbol will be one or other */
   indet = (dataType == AAType) ? 'X' : 'N';
 
-  #pragma omp parallel for private(j, k, sum, length) if(sequences>minParallelSize)
+  #pragma omp parallel for num_threads(4) private(j, k, sum, length) if(sequences>minParallelSize)
   /* For each sequences' pair */
   for(i = 0; i < sequences; i++) {
     for(j = i + 1; j < sequences; j++) {
@@ -184,7 +184,7 @@ bool statisticsConservation::calculateVectors(string *alignmentMatrix, int *gaps
   if(simMatrix == NULL)
     return false;
 
-  #pragma omp parallel for private(j, num, den, k) if(columns>minParallelSize)
+  #pragma omp parallel for num_threads(4) private(j, num, den, k) if(columns>minParallelSize)
   /* For each column calculate the Q value and the MD value using an equation */
   for(i = 0; i < columns; i++) {
     /* For each AAs/Nucleotides' pair in the column we compute its distance */
