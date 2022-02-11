@@ -33,7 +33,6 @@ task(){
     if [[ $filename != *".seqs."* ]]; then
         $trimal_local -in $file -sgc > temporal_out_$filename.txt
         python3 $scripts/set_manual_boundaries.py -i temporal_out_$filename.txt --inner_blocks --total_blocks --min_gapscore_allowed 1 > blocks_outputs_$filename.txt &
-        grep ">" $file | wc -l > number_sequences_$filename.txt &
         $trimal_local -in $file -sgc | tail -n 1 | grep -E "^\s*[[:digit:]]{1,}" -o | awk '{print $1 + 1}' > number_columns_$filename.txt &
         #{
             #trimal -in $file -sst -sident -soverlap > temporal_sst_sident_soverlap_$filename.txt;
