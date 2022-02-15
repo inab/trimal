@@ -28,17 +28,20 @@ from sklearn.preprocessing import MinMaxScaler
 def main():
   num_sequences = pd.read_table("test_working_files/number_sequences.txt", header=None, names=["num_sequences"], dtype="int")
   num_blocks = pd.read_table("test_working_files/blocks_outputs.txt", header=None, names=["num_blocks"], dtype="int")
-  num_columns = pd.read_table("test_working_files/number_columns.txt", header=None, names=["num_columns"])
-  avg_gaps = pd.read_table("test_working_files/avg_gaps.txt", header=None, names=["avg_gaps"])
+  num_columns = pd.read_table("test_working_files/number_columns.txt", header=None, names=["num_columns"], dtype="int")
+  min_columns = pd.read_table("test_working_files/min_columns.txt", header=None, names=["min_columns"])
+  max_columns = pd.read_table("test_working_files/max_columns.txt", header=None, names=["max_columns"])
+  avg_gaps = pd.read_table("test_working_files/avg_gaps.txt", header=None, names=["avg_gaps"], dtype="float")
   avg_seq_identity = pd.read_table("test_working_files/avg_seq_identity.txt", header=None, names=["avg_seq_identity"])
   RF_distance = pd.read_table("test_working_files/RF_distance.txt", header=None, names=["RF_distance"])
   residue_type = pd.read_table("test_working_files/residue_type.txt", header=None, names=["residue_type"], dtype="string")
   taxon = pd.read_table("test_working_files/taxon.txt", header=None, names=["taxon"], dtype="string")
   problem_num = pd.read_table("test_working_files/problem_num.txt", header=None, names=["problem_num"], dtype="string")
+  error = pd.read_table("test_working_files/error_problem.txt", header=None, names=["error"], dtype="string")
   msa_tools = pd.read_table("test_working_files/MSA_tools.txt", header=None, names=["msa_tools"], dtype="string")
   msa_filter_tools = pd.read_table("test_working_files/MSA_filter_tools.txt", header=None, names=["msa_filter_tools"], dtype="string")
 
-  df = pd.concat([num_sequences, num_blocks, num_columns, avg_seq_identity, avg_gaps, RF_distance, residue_type, taxon, problem_num, msa_tools, msa_filter_tools], axis=1)
+  df = pd.concat([num_sequences, num_blocks, num_columns, min_columns, max_columns, avg_seq_identity, avg_gaps, RF_distance, residue_type, taxon, problem_num, error, msa_tools, msa_filter_tools], axis=1)
   df["has_block"] = df["num_blocks"] > 0
 
   print(df.head())
