@@ -34,6 +34,7 @@
 #include "Alignment/Alignment.h"
 #include "defines.h"
 #include "utils.h"
+#include "omp.h"
 
 namespace statistics {
 
@@ -111,6 +112,7 @@ namespace statistics {
 
         // Allocate memory for the matrix identity
         matrixIdentity = new float *[alig->originalNumberOfSequences];
+        #pragma omp parallel for num_threads(NUMTHREADS) if(alig->originalNumberOfSequences>MINPARALLELSIZE)
         for (i = 0; i < alig->originalNumberOfSequences; i++) {
             matrixIdentity[i] = new float[alig->originalNumberOfSequences];
         }
@@ -119,6 +121,7 @@ namespace statistics {
         indet = alig->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
         // For each sequences' pair
+        #pragma omp parallel for num_threads(NUMTHREADS) private(j, k, sum, length) if(alig->originalNumberOfSequences>MINPARALLELSIZE)
         for (i = 0; i < alig->originalNumberOfSequences; i++) {
             for (j = i + 1; j < alig->originalNumberOfSequences; j++) {
                 // For each position in the alignment of that pair than we are processing

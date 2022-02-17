@@ -38,6 +38,7 @@
 #include "Cleaner.h"
 #include "values.h"
 #include "utils.h"
+#include "omp.h"
 
 int Cleaner::selectMethod() {
     // Create a timer that will report times upon its destruction
@@ -1445,17 +1446,17 @@ void Cleaner::calculateSeqIdentity() {
     // Create identities matrix to store identities scores
     alig->identities = new float *[alig->originalNumberOfSequences];
 
+    #pragma omp parallel for num_threads(NUMTHREADS) if(alig->originalNumberOfSequences>MINPARALLELSIZE)
+    for(i = 0; i < alig->originalNumberOfSequences; i++) {
+        if (alig->saveSequences[i] == -1) continue;
+        alig->identities[i] = new float[alig->originalNumberOfSequences];
+        alig->identities[i][i] = 0;
+    }
+
+    #pragma omp parallel for num_threads(NUMTHREADS) private(j, k, hit, dst) if(alig->originalNumberOfSequences>MINPARALLELSIZE)
     // For each seq, compute its identity score against the others in the MSA
     for (i = 0; i < alig->originalNumberOfSequences; i++) {
         if (alig->saveSequences[i] == -1) continue;
-        alig->identities[i] = new float[alig->originalNumberOfSequences];
-
-        // It's a symmetric matrix, copy values that have been already computed
-        for (j = 0; j < i; j++) {
-            if (alig->saveSequences[j] == -1) continue;
-            alig->identities[i][j] = alig->identities[j][i];
-        }
-        alig->identities[i][i] = 0;
 
         // Compute identity scores for the current sequence against the rest
         for (j = i + 1; j < alig->originalNumberOfSequences; j++) {
@@ -1476,6 +1477,8 @@ void Cleaner::calculateSeqIdentity() {
             // Identity score between two sequences is the ratio of identical residues
             // by the total length (common and no-common residues) among them
             alig->identities[i][j] = (float) hit / dst;
+            if (alig->saveSequences[j] == -1) continue;
+            alig->identities[j][i] = alig->identities[i][j];
         }
     }
 }
