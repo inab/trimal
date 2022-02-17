@@ -23,7 +23,11 @@
 import os
 import sys
 import argparse
-from string import strip
+
+npos = 0
+blockNum = 0
+left = 0
+right = -1
 
 def main():
 
@@ -42,7 +46,7 @@ def main():
     = False, action = "store_true", help = "Get the best possible boundaries")
 
   parser.add_argument("--discard_nogaps_columns", dest = "discardNoGaps",
-    default = False, action = "store_true", help = "Discard those columns with"
+    default = False, action = "store_true", help = "Discard those columns with "
     + "no gaps - otherwise, those columns will be preferentially selected as "
     + "boundaries - this parameter will be ignored if this column are the first"
     + "/last one to pass the input gap_score threshold")
@@ -50,6 +54,19 @@ def main():
   parser.add_argument("--one_line", dest = "oneLine", default = False, action =
     "store_true", help = "Generate output in just one line which will be used "
       + "directly by trimAl")
+
+  parser.add_argument("--inner_blocks", dest = "innerBlocks", default = False,
+    action = "store_true", help = "Compute inner blocks")
+
+  parser.add_argument("--min_block_size", dest = "minBlockSize", type = float,
+    default = 0, help = "Set minimum block size in percentage of the "
+    + "alignment covered (1 = 100%")
+
+  parser.add_argument("--max_blocks", dest = "maxBlocks", type = int,
+    default = 1000, help = "Set maximum blocks to compute")
+
+  parser.add_argument("--total_blocks", dest = "totalBlocks", default = False, action =
+    "store_true", help = "Print only total number of blocks")
 
   args = parser.parse_args()
 
@@ -59,20 +76,47 @@ def main():
   if args.minGapBoundaries < 0 or args.minGapBoundaries > 1:
     sys.exit("ERROR: --min_gapscore_allow should be defined in the range [0,1]")
 
-  npos = 0
+  if args.minBlockSize < 0 or args.minBlockSize > 1:
+    sys.exit("ERROR: --min_block_size should be defined in the range [0,1]")
+
+  if args.maxBlocks < 1:
+    sys.exit("ERROR: --max_blocks should at least 1")
+
+  global left
+  global right
+  while compute_blocks(args) == 1:
+    left += 1
+    right -= 1
+
+### ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ****
+
+def compute_blocks(args):
+  global npos
+  global blockNum
+  global left
+  global right
   putative = [0, 0, False, 0, 0]
   boundaries = [-1, -1, -1, -1, -1, -1]
-  for line in open(args.inFile, "rU"):
+  for line in open(args.inFile, "r"):
     ## Discard any line containing text
     if line[0] in ["#", "|", "+"]:
       continue
 
-    f = [chunk for chunk in map(strip, line.split("\t")) if chunk]
+    f = [chunk for chunk in map(str.strip, line.split("\t")) if chunk]
     if not f:
       continue
-    npos += 1
+    
+    # Only count positions for the first block
+    if blockNum == 0:
+      npos += 1
     pos = int(f[0])
     gap_score = float(f[2])
+
+    if pos < left:
+      continue
+
+    if right != -1 and pos > right:
+      break
 
     ## This function is intended to find columns - with at least one gap - which
     ## will be used as left and right boundaries for trimAl
@@ -128,20 +172,17 @@ def main():
           putative[2] = True
 
   output = ""
+  left_ratio = right_ratio = 0 
   ## Generate output, if any
 
   ## First try to get the best column possible - unless the user has set-up
   ## specifically to discard them
   if boundaries[2] != boundaries[5] and not args.discardNoGaps:
-    if not args.oneLine:
-      ratio = float(boundaries[2])/npos
-      output  = ("## %-30s\t1.0000\t") % ("NO Gaps Left Boundary")
-      output += ("pos\t%d\t%%alig\t%.4f") % (boundaries[2], ratio)
-      ratio = float(boundaries[5])/npos
-      output += ("\n## %-30s\t1.0000\t") % ("NO Gaps Right Boundary")
-      output += ("pos\t%d\t%%alig\t%.4f") % (boundaries[5], ratio)
-    else:
-      output = ("%d,%d") % (boundaries[2], boundaries[5])
+    left = boundaries[2]
+    right = boundaries[5]
+    left_ratio = float(left)/npos
+    right_ratio = float(right)/npos
+    output = no_gaps_output(args.oneLine, left, right, left_ratio, right_ratio)
 
   elif not output and boundaries[0] != boundaries[3]:
 
@@ -159,40 +200,105 @@ def main():
       right = boundaries[5]
       right_score = 1.0
 
-    if not args.oneLine:
-      ratio_l = float(left)/npos
-      ratio_r = float(right)/npos
-      
-      output =  ("## %-30s\t") % ("Best Gaps_Score Left Boundary")
-      output += ("%.4f\tpos\t%d\t%%alig\t%.4f\n") % (left_score, left, ratio_l)
-      output += ("## %-30s\t") % ("Best Gaps_Score Right Boundary")
-      output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (right_score, right, ratio_r)
-    else:
-      output = ("%d,%d") % (left, right)
+    left_ratio = float(left)/npos
+    right_ratio = float(right)/npos
+    output = best_gap_score_output(args.oneLine, left, right, left_score,
+      right_score, left_ratio, right_ratio)
 
   ## If there is no output, and the user has set-up "--get_best_boundaries"
   elif not output and args.bestBoundaries:
-    left = putatitve[0]
+    left = putative[0]
     left_score = putative[1]
 
     right = putative[3]
     right_score = putative[4]
 
-    if not args.oneLine:
-      ratio_l = float(left)/npos
-      ratio_r = float(right)/npos
-      
-      output =  ("## %-30s\t") % ("Best_found Gaps_Score Left Boundary")
-      output += ("%.4f\tpos\t%d\t%%alig\t%.4f\n") % (left_score, left, ratio_l)
-      output += ("## %-30s\t") % ("Best_found Gaps_Score Right Boundary")
-      output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (right_score, right, ratio_r)
-    else:
-      output = ("%d,%d") % (left, right)
+    left_ratio = float(left)/npos
+    right_ratio = float(right)/npos
+    output = best_found_gap_score_output(args.oneLine, left, right, left_score,
+      right_score, left_ratio, right_ratio)
 
   ## Generate a warning for those cases where no boundaries have been found
   if not output:
-    output = "WARNING: OUTPUT NOT AVAILABLE"
-  print output
-### ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ****
+    if args.totalBlocks:
+      print_total_blocks(blockNum)
+    else:
+      print("WARNING: OUTPUT NOT AVAILABLE")
+  else:
+    # Ratio is defined with respect to the original alignment
+    ratioDiff = right_ratio - left_ratio
+    if ratioDiff < args.minBlockSize:
+      if blockNum == 0:
+        print(("WARNING: OUTPUT NOT AVAILABLE. THE BLOCK SIZE COVERS LESS THAN "
+          + "THE %.4f%% OF THE ALIGNMENT") % (args.minBlockSize))
+      if args.totalBlocks:
+        print_total_blocks(blockNum)
+    else:
+      if not args.totalBlocks:
+        print(output)
+      blockNum += 1
+      positionsDiff = right - left
+      
+      if not args.totalBlocks:
+        print(("## Block %d contains %d column(s) and "
+          + "%.4f%% of the alignment\n") % (blockNum, positionsDiff + 1, ratioDiff))
+      if args.innerBlocks:
+        if positionsDiff > 2 and blockNum < args.maxBlocks:
+          return 1
+        elif args.totalBlocks:
+          print_total_blocks(blockNum)
+      elif args.totalBlocks:
+        print_total_blocks(blockNum)
+
+  return 0
+
+def no_gaps_output(oneLine, left, right, left_ratio, right_ratio):
+  if not oneLine:
+    output = ("## %-30s\t1.0000\t") % ("NO Gaps Left Boundary")
+    output += ("pos\t%d\t%%alig\t%.4f") % (left, left_ratio)
+    output += ("\n## %-30s\t1.0000\t") % ("NO Gaps Right Boundary")
+    output += ("pos\t%d\t%%alig\t%.4f") % (right, right_ratio)
+  else:
+    output = ("%d,%d") % (left, right)
+  
+  return output
+
+def best_gap_score_output(oneLine, left, right, left_score, right_score,
+  left_ratio, right_ratio):
+  if not oneLine:
+    output = ("## %-30s\t") % ("Best Gaps_Score Left Boundary")
+    output += ("%.4f\tpos\t%d\t%%alig\t%.4f\n") % (left_score, left, left_ratio)
+    output += ("## %-30s\t") % ("Best Gaps_Score Right Boundary")
+    output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (right_score, right,
+       right_ratio)
+  else:
+    output = ("%d,%d") % (left, right)
+  
+  return output
+
+def best_found_gap_score_output(oneLine, left, right, left_score, right_score,
+  left_ratio, right_ratio):
+  if not oneLine:
+    output = ("## %-30s\t") % ("Best_found Gaps_Score Left Boundary")
+    output += ("%.4f\tpos\t%d\t%%alig\t%.4f\n") % (left_score, left, left_ratio)
+    output += ("## %-30s\t") % ("Best_found Gaps_Score Right Boundary")
+    output += ("%.4f\tpos\t%d\t%%alig\t%.4f") % (right_score, right,
+      right_ratio)
+  else:
+    output = ("%d,%d") % (left, right)
+  
+  return output
+
+def print_total_blocks(total_blocks):
+  print(total_blocks)
+  '''
+    if total_blocks == 0:
+    print("There are no blocks")
+  elif total_blocks == 1:
+    print(("There is %d block") % (total_blocks))
+  else:
+    print(("There are %d blocks") % (total_blocks))
+  '''
+
 if __name__ == "__main__":
   sys.exit(main())
