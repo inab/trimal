@@ -1453,8 +1453,8 @@ void Cleaner::calculateSeqIdentity() {
         alig->identities[i][i] = 0;
     }
 
-    #pragma omp parallel for num_threads(NUMTHREADS) private(j, k, hit, dst) if(alig->originalNumberOfSequences>MINPARALLELSIZE)
     // For each seq, compute its identity score against the others in the MSA
+    #pragma omp parallel for num_threads(NUMTHREADS) private(j, k, hit, dst) if(alig->originalNumberOfSequences>MINPARALLELSIZE)
     for (i = 0; i < alig->originalNumberOfSequences; i++) {
         if (alig->saveSequences[i] == -1) continue;
 
