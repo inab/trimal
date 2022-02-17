@@ -44,6 +44,7 @@ namespace statistics {
 
         maxGaps = 0;
         halfWindow = 0;
+        totalGaps = 0;
 
         // Memory allocation for the vectors and its initialization
         gapsInColumn = new int[alig->originalNumberOfResidues];
@@ -60,6 +61,7 @@ namespace statistics {
         alig = pAlignment;
 
         maxGaps = 0;
+        totalGaps = 0;
 
         // Pointer initialization
         gapsInColumn = pGaps->gapsInColumn;
@@ -588,6 +590,19 @@ namespace statistics {
                 std::cout << "\n";
             }
         }
+
+        std::cout << std::setw(alig->filename.size())
+                  << std::setfill('-')
+                  << std::left << ""
+                  << std::setfill(' ')
+                  << "\n";
+
+        std::cout << "\n"
+                  << std::fixed
+                  << std::setfill(' ');
+
+        std::cout << "## AverageGaps\t" << float(totalGaps)/(alig->originalNumberOfResidues * alig->originalNumberOfSequences) << "\n";
+        std::cout << "#> AverageGaps\tAverage gaps of the alignment" << "\n";
     }
 
     void Gaps::CalculateVectors() {
@@ -597,8 +612,10 @@ namespace statistics {
             gapsInColumn[i] = 0;
             for (j = 0; j < alig->originalNumberOfSequences; j++) {
                 if (alig->saveSequences[j] == -1) continue;
-                if (alig->sequences[j][i] == '-')
+                if (alig->sequences[j][i] == '-') {
                     gapsInColumn[i]++;
+                    totalGaps++;
+                }
             }
 
             // Increase the number of colums with the number of gaps of the last processed column
