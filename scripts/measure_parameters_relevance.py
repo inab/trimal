@@ -28,6 +28,8 @@ from sklearn.preprocessing import MinMaxScaler
 def main():
   num_sequences = pd.read_table("test_working_files/number_sequences.txt", header=None, names=["num_sequences"], dtype="int")
   num_blocks = pd.read_table("test_working_files/blocks_outputs.txt", header=None, names=["num_blocks"], dtype="int")
+  left_block_column = pd.read_table("test_working_files/left_block_column.txt", header=None, names=["left_block_column"], dtype="int")
+  right_block_column = pd.read_table("test_working_files/right_block_column.txt", header=None, names=["right_block_column"], dtype="int")
   num_columns = pd.read_table("test_working_files/number_columns.txt", header=None, names=["num_columns"], dtype="int")
   min_columns = pd.read_table("test_working_files/min_columns.txt", header=None, names=["min_columns"])
   max_columns = pd.read_table("test_working_files/max_columns.txt", header=None, names=["max_columns"])
@@ -41,7 +43,7 @@ def main():
   msa_tools = pd.read_table("test_working_files/MSA_tools.txt", header=None, names=["msa_tools"], dtype="string")
   msa_filter_tools = pd.read_table("test_working_files/MSA_filter_tools.txt", header=None, names=["msa_filter_tools"], dtype="string")
 
-  df = pd.concat([num_sequences, num_blocks, num_columns, min_columns, max_columns, avg_seq_identity, avg_gaps, RF_distance, residue_type, taxon, problem_num, error, msa_tools, msa_filter_tools], axis=1)
+  df = pd.concat([num_sequences, num_blocks, left_block_column, right_block_column, num_columns, min_columns, max_columns, avg_seq_identity, avg_gaps, RF_distance, residue_type, taxon, problem_num, error, msa_tools, msa_filter_tools], axis=1)
   df["has_block"] = df["num_blocks"] > 0
 
   print(df.head())

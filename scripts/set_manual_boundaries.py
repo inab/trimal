@@ -23,11 +23,14 @@
 import os
 import sys
 import argparse
+import re
 
 npos = 0
 blockNum = 0
 left = 0
 right = -1
+main_left = -1
+main_right = -1
 
 def main():
 
@@ -68,6 +71,9 @@ def main():
   parser.add_argument("--total_blocks", dest = "totalBlocks", default = False, action =
     "store_true", help = "Print only total number of blocks")
 
+  parser.add_argument("--block_coordinates", dest = "blockCoordinates", default = False, action =
+    "store_true", help = "Print coordinates of main block")
+
   args = parser.parse_args()
 
   if not os.path.isfile(args.inFile):
@@ -95,14 +101,16 @@ def compute_blocks(args):
   global blockNum
   global left
   global right
+  global main_left
+  global main_right
   putative = [0, 0, False, 0, 0]
   boundaries = [-1, -1, -1, -1, -1, -1]
   for line in open(args.inFile, "r"):
     ## Discard any line containing text
-    if line[0] in ["#", "|", "+"]:
+    if not re.search('[0-9]', line[0]):
       continue
 
-    f = [chunk for chunk in map(str.strip, line.split("\t")) if chunk]
+    f = [chunk for chunk in map(str.strip, line.split(" ")) if chunk]
     if not f:
       continue
     
@@ -236,6 +244,9 @@ def compute_blocks(args):
     else:
       if not args.totalBlocks:
         print(output)
+      if blockNum == 0:
+        main_left = left
+        main_right = right
       blockNum += 1
       positionsDiff = right - left
       
@@ -249,6 +260,9 @@ def compute_blocks(args):
           print_total_blocks(blockNum)
       elif args.totalBlocks:
         print_total_blocks(blockNum)
+    if args.blockCoordinates:
+      print("## Left column ", main_left)
+      print("## Right column ", main_right)
 
   return 0
 
@@ -290,15 +304,7 @@ def best_found_gap_score_output(oneLine, left, right, left_score, right_score,
   return output
 
 def print_total_blocks(total_blocks):
-  print(total_blocks)
-  '''
-    if total_blocks == 0:
-    print("There are no blocks")
-  elif total_blocks == 1:
-    print(("There is %d block") % (total_blocks))
-  else:
-    print(("There are %d blocks") % (total_blocks))
-  '''
+  print("## Blocks ", total_blocks)
 
 if __name__ == "__main__":
   sys.exit(main())
