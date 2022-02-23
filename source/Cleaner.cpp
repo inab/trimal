@@ -1474,9 +1474,20 @@ void Cleaner::calculateSeqIdentity() {
                 }
             }
 
-            // Identity score between two sequences is the ratio of identical residues
-            // by the total length (common and no-common residues) among them
-            alig->identities[i][j] = (float) hit / dst;
+            if (dst == 0) {
+                debug.report(ErrorCode::NoResidueSequences,
+                    new std::string[2]
+                        {
+                            alig->seqsName[i],
+                            alig->seqsName[j]
+                        });
+                alig->identities[i][j] = 0;
+            } else {
+                // Identity score between two sequences is the ratio of identical residues
+                // by the total length (common and no-common residues) among them
+                alig->identities[i][j] = (float) hit / dst;
+            }
+            
             if (alig->saveSequences[j] == -1) continue;
             alig->identities[j][i] = alig->identities[i][j];
         }
