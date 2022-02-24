@@ -76,55 +76,55 @@ task(){
 write_results() {
     file="filenames_to_write.txt"
     while read -r filename; do
-	echo "writing $filename" >> log.txt &
-	residue_taxon_problem=$(echo $filename | awk -F '.' '{print $1}')
-        if [[ $filename == *.fa_err ]]; then
-            echo "True" >> error_problem.txt &
-	    cat number_sequences_"$residue_taxon_problem"_err.txt >> number_sequences.txt &
-	else
-	    echo "False" >> error_problem.txt &
-	    cat number_sequences_$residue_taxon_problem.txt >> number_sequences.txt &
-	fi
-	echo $filename | awk -F '_' '{print $1}' >> residue_type.txt &
-	echo $filename | awk -F '_' '{print $2}' >> taxon.txt &
-	echo $filename | awk -F '.' '{print $1}' | grep -o '[0-9]\+' >> problem_num.txt &
-	if [[ $filename != *".seqs."* ]]; then
-	    MSA_tool=$(echo $filename | awk -F '.' '{print $2}')
-	    if [[ $MSA_tool == Guidance* ]]; then
-	    	echo $MSA_tool | awk -F 'Guidance' '{print $2}' >> MSA_tools.txt &
-		echo 'Guidance' >> MSA_filter_tools.txt &
-	    else
-		echo $MSA_tool >> MSA_tools.txt &
-		echo $filename | awk -F '.' '{if (NF == 4) print $3; else print "None";}' >> MSA_filter_tools.txt &
-	    fi
-	    (cat blocks_outputs_$filename.txt >> blocks_outputs.txt && rm blocks_outputs_$filename.txt) &
-	    (cat left_block_column_$filename.txt >> left_block_column.txt && rm left_block_column_$filename.txt) &
-	    (cat right_block_column_$filename.txt >> right_block_column.txt && rm right_block_column_$filename.txt) &
-	    (cat number_columns_$filename.txt >> min_columns.txt; cat number_columns_$filename.txt >> max_columns.txt;
-	    cat number_columns_$filename.txt >> number_columns.txt && rm number_columns_$filename.txt) &
-	    (cat avg_gaps_$filename.txt >> avg_gaps.txt && rm avg_gaps_$filename.txt) &
-	    (cat avg_seq_identity_$filename.txt >> avg_seq_identity.txt && rm avg_seq_identity_$filename.txt) &
-	    if [ -s RF_distance_$filename.txt ]; then
-	    	cat RF_distance_$filename.txt >> RF_distance.txt && rm RF_distance_$filename.txt
-	    else
-		echo -1 >> RF_distance.txt &
-	    fi
-	    rm temporal_out_$filename.txt &
-	else
-	    echo "Original" >> MSA_tools.txt &
-	    echo "Original" >> MSA_filter_tools.txt &
-	    (cat min_columns_$filename.txt >> min_columns.txt && rm min_columns_$filename.txt) &
-	    (cat max_columns_$filename.txt >> max_columns.txt && rm max_columns_$filename.txt) &
-	    echo -1 >> blocks_outputs.txt &
-	    echo -1 >> left_block_column.txt &
-	    echo -1 >> right_block_column.txt &
-	    echo -1 >> number_columns.txt &
-	    echo -1 >> avg_gaps.txt &
-	    echo -1 >> avg_seq_identity.txt &
-	    echo -1 >> RF_distance.txt &
-	fi
-	echo "Finished with $filename" >> log_writing.txt &
-	wait
+		echo "writing $filename" >> log.txt &
+		residue_taxon_problem=$(echo $filename | awk -F '.' '{print $1}')
+		if [[ $filename == *.fa_err ]]; then
+			echo "True" >> error_problem.txt &
+			cat number_sequences_"$residue_taxon_problem"_err.txt >> number_sequences.txt &
+		else
+			echo "False" >> error_problem.txt &
+			cat number_sequences_$residue_taxon_problem.txt >> number_sequences.txt &
+		fi
+		echo $filename | awk -F '_' '{print $1}' >> residue_type.txt &
+		echo $filename | awk -F '_' '{print $2}' >> taxon.txt &
+		echo $filename | awk -F '.' '{print $1}' | grep -o '[0-9]\+' >> problem_num.txt &
+		if [[ $filename != *".seqs."* ]]; then
+			MSA_tool=$(echo $filename | awk -F '.' '{print $2}')
+			if [[ $MSA_tool == Guidance* ]]; then
+				echo $MSA_tool | awk -F 'Guidance' '{print $2}' >> MSA_tools.txt &
+				echo 'Guidance' >> MSA_filter_tools.txt &
+			else
+				echo $MSA_tool >> MSA_tools.txt &
+				echo $filename | awk -F '.' '{if (NF == 4) print $3; else print "None";}' >> MSA_filter_tools.txt &
+			fi
+			(cat blocks_outputs_$filename.txt >> blocks_outputs.txt && rm blocks_outputs_$filename.txt) &
+			(cat left_block_column_$filename.txt >> left_block_column.txt && rm left_block_column_$filename.txt) &
+			(cat right_block_column_$filename.txt >> right_block_column.txt && rm right_block_column_$filename.txt) &
+			(cat number_columns_$filename.txt >> min_columns.txt; cat number_columns_$filename.txt >> max_columns.txt;
+			cat number_columns_$filename.txt >> number_columns.txt && rm number_columns_$filename.txt) &
+			(cat avg_gaps_$filename.txt >> avg_gaps.txt && rm avg_gaps_$filename.txt) &
+			(cat avg_seq_identity_$filename.txt >> avg_seq_identity.txt && rm avg_seq_identity_$filename.txt) &
+			if [ -s RF_distance_$filename.txt ]; then
+				cat RF_distance_$filename.txt >> RF_distance.txt && rm RF_distance_$filename.txt
+			else
+				echo -1 >> RF_distance.txt &
+			fi
+			rm temporal_out_$filename.txt &
+		else
+			echo "Original" >> MSA_tools.txt &
+			echo "Original" >> MSA_filter_tools.txt &
+			(cat min_columns_$filename.txt >> min_columns.txt && rm min_columns_$filename.txt) &
+			(cat max_columns_$filename.txt >> max_columns.txt && rm max_columns_$filename.txt) &
+			echo -1 >> blocks_outputs.txt &
+			echo -1 >> left_block_column.txt &
+			echo -1 >> right_block_column.txt &
+			echo -1 >> number_columns.txt &
+			echo -1 >> avg_gaps.txt &
+			echo -1 >> avg_seq_identity.txt &
+			echo -1 >> RF_distance.txt &
+		fi
+		echo "Finished with $filename" >> log_writing.txt &
+		wait
     done < $file
     > filenames_to_write.txt
 }
