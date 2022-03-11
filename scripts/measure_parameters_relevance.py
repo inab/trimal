@@ -18,8 +18,10 @@
 #   more details on <http://www.gnu.org/licenses/>
 #
 
+import argparse
 import sys
 import os
+import numpy as np
 import pandas as pd
 import pydotplus
 
@@ -29,11 +31,22 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, explained_variance_score, mean_squared_error, r2_score
 from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
 from sklearn.tree import DecisionTreeRegressor, DecisionTreeClassifier, export_graphviz
+from joblib import Parallel, delayed
+
+df = pd.DataFrame()
 
 
 def main():
-  if os.path.exists("table.csv"):
-    df = pd.read_csv("table.csv", index_col=0)
+  parser = argparse.ArgumentParser()
+
+  parser.add_argument("--compare_prank", dest = "comparePrank", default
+  = False, action = "store_true", help = "Compare filtered results with Prank's")
+
+  args = parser.parse_args()
+
+  global df
+  if os.path.exists("table_new.csv"):
+    df = pd.read_csv("table_new.csv", index_col=0)
   else:
     num_sequences = pd.read_table("test_working_files/number_sequences.txt", header=None, names=["num_sequences"], dtype="int")
     num_blocks = pd.read_table("test_working_files/blocks_outputs.txt", header=None, names=["num_blocks"], dtype="int")
@@ -55,9 +68,19 @@ def main():
     df = pd.concat([num_sequences, num_blocks, left_block_column, right_block_column, num_columns, min_columns, max_columns, avg_seq_identity, avg_gaps, RF_distance, residue_type, taxon, problem_num, error, msa_tools, msa_filter_tools], axis=1)
     df["has_block"] = df["num_blocks"] > 0
   
-  df["main_block_size"] = df["right_block_column"] - df["left_block_column"]
-  df[df["main_block_size"] < 0] = 0
-
+  if 'main_block_size' not in df.columns:
+    df["main_block_size"] = df["right_block_column"] - df["left_block_column"]
+    df.loc[df["main_block_size"] < 0, "main_block_size"] = 0
+  if args.comparePrank:
+    df["removed_columns"] = -1
+    df["blocks_diff"] = np.NaN
+    df["avg_gaps_diff"] = np.NaN
+    df["avg_seq_identity_diff"] = np.NaN
+    df["RF_distance_diff"] = np.NaN
+    Parallel(n_jobs=8, require='sharedmem')(delayed(add_comparisons_with_prank)(problem) for problem in range(1, 1000))
+    df["perc_conserved_columns"] = -1
+    df.loc[(df['removed_columns'] != -1), 'perc_conserved_columns'] = df.loc[(df['removed_columns'] != -1), 'num_columns'] / (df.loc[(df['removed_columns'] != -1), 'num_columns'] + df.loc[(df['removed_columns'] != -1), 'removed_columns'])
+  
   print(df.head())
   print(df.tail())
   print(df.info())
@@ -74,9 +97,48 @@ def main():
   if not os.path.exists("table.csv"):
     with open('table.csv', 'w') as file:
       file.write(df.to_csv())
+
+  if not os.path.exists("table_new.csv"):
+    with open('table_new.csv', 'w') as file:
+      file.write(df.to_csv())
   
 
   run_decision_tree_classifier(df)
+
+
+def add_comparisons_with_prank(problem):
+  msa_filter_tools_unique = set(df["msa_filter_tools"])
+  df_prank = df[df['msa_tools'] == 'Prank']
+  df_problem = df_prank[df_prank['problem_num'] == problem]
+  for residue in ['AA', 'DNA']:
+    df_residue = df_problem[df_problem['residue_type'] == residue]
+    for taxa in ['Bacteria', 'Eukaryotes', 'Fungi']:
+      df_taxa = df_residue[df_residue['taxon'] == taxa]
+      prank_columns = df_taxa.loc[(df_taxa['msa_filter_tools'] == 'None'), ['num_columns']]
+      prank_blocks = df_taxa.loc[(df_taxa['msa_filter_tools'] == 'None'), ['num_blocks']]
+      prank_avg_gaps = df_taxa.loc[(df_taxa['msa_filter_tools'] == 'None'), ['avg_gaps']]
+      prank_avg_seq_identity = df_taxa.loc[(df_taxa['msa_filter_tools'] == 'None'), ['avg_seq_identity']]
+      prank_avg_RF_distance = df_taxa.loc[(df_taxa['msa_filter_tools'] == 'None'), ['RF_distance']]
+      if prank_columns.values.size > 0:
+        for filter_tool in msa_filter_tools_unique:
+          if filter_tool != 'None' and filter_tool != 'Original' and filter_tool == 'BMGE100':
+            filter_tool_columns = df_taxa.loc[((df_taxa['msa_filter_tools'] == filter_tool)), ['num_columns']]
+            filter_tool_blocks = df_taxa.loc[((df_taxa['msa_filter_tools'] == filter_tool)), ['num_blocks']]
+            filter_tool_avg_gaps = df_taxa.loc[((df_taxa['msa_filter_tools'] == filter_tool)), ['avg_gaps']]
+            filter_tool_avg_seq_identity = df_taxa.loc[((df_taxa['msa_filter_tools'] == filter_tool)), ['avg_seq_identity']]
+            filter_tool_RF_distance = df_taxa.loc[((df_taxa['msa_filter_tools'] == filter_tool)), ['RF_distance']]
+            if filter_tool_columns.values.size > 0:
+              df.loc[((df['msa_tools'] == 'Prank') & (df['taxon'] == taxa) & (df['residue_type'] == residue) & (df['msa_filter_tools'] == filter_tool) &
+                (df['problem_num'] == problem)), ['removed_columns']] = prank_columns.values[0][0] - filter_tool_columns.values[0][0]
+              df.loc[((df['msa_tools'] == 'Prank') & (df['taxon'] == taxa) & (df['residue_type'] == residue) & (df['msa_filter_tools'] == filter_tool) &
+                (df['problem_num'] == problem)), ['blocks_diff']] = prank_blocks.values[0][0] - filter_tool_blocks.values[0][0]
+              df.loc[((df['msa_tools'] == 'Prank') & (df['taxon'] == taxa) & (df['residue_type'] == residue) & (df['msa_filter_tools'] == filter_tool) &
+                (df['problem_num'] == problem)), ['avg_gaps_diff']] = prank_avg_gaps.values[0][0] - filter_tool_avg_gaps.values[0][0]
+              df.loc[((df['msa_tools'] == 'Prank') & (df['taxon'] == taxa) & (df['residue_type'] == residue) & (df['msa_filter_tools'] == filter_tool) &
+                (df['problem_num'] == problem)), ['avg_seq_identity_diff']] = prank_avg_seq_identity.values[0][0] - filter_tool_avg_seq_identity.values[0][0]
+              df.loc[((df['msa_tools'] == 'Prank') & (df['taxon'] == taxa) & (df['residue_type'] == residue) & (df['msa_filter_tools'] == filter_tool) &
+                (df['problem_num'] == problem)), ['RF_distance_diff']] = prank_avg_RF_distance.values[0][0] - filter_tool_RF_distance.values[0][0]
+              print('Processed problem ' + str(problem) + '-' + residue + '-' + taxa + '-' + filter_tool)
 
 
 def run_regression(df):
@@ -137,19 +199,19 @@ def run_decision_tree_regressor(df):
 
 def run_decision_tree_classifier(df):
   #scaler = MinMaxScaler()
-  df_model = df[['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'RF_distance', 'has_block', 'main_block_size']]
-  df_model = df_model[(df['msa_tools'] != 'Original') & (df['RF_distance'] != -1)]
-  df_model['RF_distance'] = df_model['RF_distance'] > 4
+  df_model = df[['problem_num', 'num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'RF_distance', 'has_block', 'main_block_size', 'blocks_diff', 'avg_gaps_diff', 'RF_distance_diff']]
+  df_model = df_model[(df['msa_tools'] == 'Prank') & (df['msa_filter_tools'] != 'None') & (df['RF_distance'] != -1) & (df['msa_filter_tools'] != 'BMGE100') & (df['problem_num'] != 999)]
+  df_model['RF_distance_diff'] = df_model['RF_distance_diff'] < 0
   df_model['is_AA'] = df['residue_type'] == "AA"
 
-  df_model_features = df_model[['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'has_block', 'main_block_size', 'is_AA']]
+  df_model_features = df_model[['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'has_block', 'main_block_size', 'is_AA', 'blocks_diff', 'avg_gaps_diff']]
   print(df_model_features.describe())
   print(df_model_features.info())
   #print(df_model.corr().to_string())
 
-  model = DecisionTreeClassifier(max_depth=3)
+  model = DecisionTreeClassifier(max_depth=4)
   X = df_model_features
-  y = df_model['RF_distance']
+  y = df_model['RF_distance_diff']
   X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True, train_size=0.7)
   model.fit(X_train, y_train)
 
