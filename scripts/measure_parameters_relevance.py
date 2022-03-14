@@ -192,8 +192,9 @@ def run_decision_tree_classifier(df, diff=False):
   predictions = model.predict(X_test)
 
   print("Accuracy:", accuracy_score(y_test, predictions))
+  class_names = ['worsen/equal', 'improve'] if diff else ['different', 'similar']
 
-  dot_data = export_graphviz(model, filled=True, rounded=True, special_characters=True, feature_names = df_model[features].columns, class_names=['Bad', 'Good'])
+  dot_data = export_graphviz(model, filled=True, rounded=True, special_characters=True, proportion=True, precision=2, feature_names=df_model[features].columns, class_names=class_names)
   graph = pydotplus.graph_from_dot_data(dot_data)
   graph.write_png('tree.png')
 
