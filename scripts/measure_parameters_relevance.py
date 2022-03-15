@@ -41,31 +41,32 @@ def main():
 
   parser.add_argument("--compare_prank", dest = "comparePrank", default = False, action = "store_true", help = "Compare filtered results with Prank's")
   parser.add_argument("--recalculate", dest = "recalculate", default = False, action = "store_true", help = "Recalculate values")
+  parser.add_argument("--max_depth", dest = "maxDepth", default = 2, type = int, help = "Tree max depth")
 
   args = parser.parse_args()
 
   global df
   if os.path.exists("table_new.csv") and not args.recalculate:
-    df = pd.read_csv("table_new.csv", index_col=0)
+    df = pd.read_csv("table_new.csv", index_col = 0)
   else:
-    num_sequences = pd.read_table("test_working_files/number_sequences.txt", header=None, names=["num_sequences"], dtype="int")
-    num_blocks = pd.read_table("test_working_files/blocks_outputs.txt", header=None, names=["num_blocks"], dtype="int")
-    left_block_column = pd.read_table("test_working_files/left_block_column.txt", header=None, names=["left_block_column"], dtype="int")
-    right_block_column = pd.read_table("test_working_files/right_block_column.txt", header=None, names=["right_block_column"], dtype="int")
-    num_columns = pd.read_table("test_working_files/number_columns.txt", header=None, names=["num_columns"], dtype="int")
-    min_columns = pd.read_table("test_working_files/min_columns.txt", header=None, names=["min_columns"])
-    max_columns = pd.read_table("test_working_files/max_columns.txt", header=None, names=["max_columns"])
-    avg_gaps = pd.read_table("test_working_files/avg_gaps.txt", header=None, names=["avg_gaps"], dtype="float")
-    avg_seq_identity = pd.read_table("test_working_files/avg_seq_identity.txt", header=None, names=["avg_seq_identity"])
-    RF_distance = pd.read_table("test_working_files/RF_distance.txt", header=None, names=["RF_distance"])
-    residue_type = pd.read_table("test_working_files/residue_type.txt", header=None, names=["residue_type"], dtype="string")
-    taxon = pd.read_table("test_working_files/taxon.txt", header=None, names=["taxon"], dtype="string")
-    problem_num = pd.read_table("test_working_files/problem_num.txt", header=None, names=["problem_num"], dtype="int")
-    error = pd.read_table("test_working_files/error_problem.txt", header=None, names=["error"], dtype="string")
-    msa_tools = pd.read_table("test_working_files/MSA_tools.txt", header=None, names=["msa_tools"], dtype="string")
-    msa_filter_tools = pd.read_table("test_working_files/MSA_filter_tools.txt", header=None, names=["msa_filter_tools"], dtype="string")
+    num_sequences = pd.read_table("test_working_files/number_sequences.txt", header = None, names=["num_sequences"], dtype="int")
+    num_blocks = pd.read_table("test_working_files/blocks_outputs.txt", header = None, names=["num_blocks"], dtype="int")
+    left_block_column = pd.read_table("test_working_files/left_block_column.txt", header = None, names=["left_block_column"], dtype="int")
+    right_block_column = pd.read_table("test_working_files/right_block_column.txt", header = None, names=["right_block_column"], dtype="int")
+    num_columns = pd.read_table("test_working_files/number_columns.txt", header = None, names=["num_columns"], dtype="int")
+    min_columns = pd.read_table("test_working_files/min_columns.txt", header = None, names=["min_columns"])
+    max_columns = pd.read_table("test_working_files/max_columns.txt", header = None, names=["max_columns"])
+    avg_gaps = pd.read_table("test_working_files/avg_gaps.txt", header = None, names=["avg_gaps"], dtype="float")
+    avg_seq_identity = pd.read_table("test_working_files/avg_seq_identity.txt", header = None, names=["avg_seq_identity"])
+    RF_distance = pd.read_table("test_working_files/RF_distance.txt", header = None, names=["RF_distance"])
+    residue_type = pd.read_table("test_working_files/residue_type.txt", header = None, names=["residue_type"], dtype="string")
+    taxon = pd.read_table("test_working_files/taxon.txt", header = None, names=["taxon"], dtype="string")
+    problem_num = pd.read_table("test_working_files/problem_num.txt", header = None, names=["problem_num"], dtype="int")
+    error = pd.read_table("test_working_files/error_problem.txt", header = None, names=["error"], dtype="string")
+    msa_tools = pd.read_table("test_working_files/MSA_tools.txt", header = None, names=["msa_tools"], dtype="string")
+    msa_filter_tools = pd.read_table("test_working_files/MSA_filter_tools.txt", header = None, names=["msa_filter_tools"], dtype="string")
 
-    df = pd.concat([num_sequences, num_blocks, left_block_column, right_block_column, num_columns, min_columns, max_columns, avg_seq_identity, avg_gaps, RF_distance, residue_type, taxon, problem_num, error, msa_tools, msa_filter_tools], axis=1)
+    df = pd.concat([num_sequences, num_blocks, left_block_column, right_block_column, num_columns, min_columns, max_columns, avg_seq_identity, avg_gaps, RF_distance, residue_type, taxon, problem_num, error, msa_tools, msa_filter_tools], axis = 1)
     df["has_block"] = df["num_blocks"] > 0
   
   if 'main_block_size' not in df.columns or args.recalculate:
@@ -77,7 +78,7 @@ def main():
     df["avg_gaps_diff"] = np.NaN
     df["avg_seq_identity_diff"] = np.NaN
     df["RF_distance_diff"] = np.NaN
-    Parallel(n_jobs=8, require='sharedmem')(delayed(add_comparisons_with_prank)(problem) for problem in range(1, 1000))
+    Parallel(n_jobs = 8, require='sharedmem')(delayed(add_comparisons_with_prank)(problem) for problem in range(1, 1000))
     df["perc_conserved_columns"] = -1
     df.loc[(df['removed_columns'] != -1), 'perc_conserved_columns'] = df.loc[(df['removed_columns'] != -1), 'num_columns'] / (df.loc[(df['removed_columns'] != -1), 'num_columns'] + df.loc[(df['removed_columns'] != -1), 'removed_columns'])
   
@@ -99,7 +100,7 @@ def main():
       file.write(df.to_csv())
   
 
-  run_decision_tree_classifier(df, diff=args.comparePrank)
+  run_decision_tree_classifier(df, args.maxDepth, diff = args.comparePrank)
 
 
 def add_comparisons_with_prank(problem):
@@ -143,19 +144,19 @@ def run_regression(df):
   df_model = df_model[(df['msa_tools'] != 'Original') & (df['RF_distance'] != -1)]
   df_model['is_AA'] = df['residue_type'] == "AA"
   df_model = pd.DataFrame(scaler.fit_transform(df_model),
-            columns=df_model.columns, index=df_model.index)
+            columns = df_model.columns, index = df_model.index)
   
   print(df_model.corr().to_string())
 
   model = LinearRegression()
   X = df_model[['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'has_block', 'main_block_size', 'is_AA']]
   y = df_model['RF_distance']
-  X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True, train_size=0.7)
+  X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle = True, train_size = 0.7)
   model.fit(X_train, y_train)
 
   predictions = model.predict(X_test)
   r2 = r2_score(y_test, predictions)
-  rmse = mean_squared_error(y_test, predictions, squared=False)
+  rmse = mean_squared_error(y_test, predictions, squared = False)
 
   print("Explained variance:", explained_variance_score(y_test, predictions))
   print("r2 score:", r2_score(y_test, predictions))
@@ -165,11 +166,11 @@ def run_regression(df):
   print(model.intercept_)
 
 
-def run_decision_tree_classifier(df, diff=False):
+def run_decision_tree_classifier(df, max_depth, diff = False):
   features = ['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'has_block', 'main_block_size']
   class_feature = 'RF_distance_diff' if diff else 'RF_distance'
   if diff:
-    features += ['blocks_diff', 'avg_gaps_diff', 'perc_conserved_columns', 'removed_columns']
+    features += ['blocks_diff', 'avg_gaps_diff', 'avg_seq_identity_diff', 'perc_conserved_columns', 'removed_columns']
   df_model = df.loc[:, (features + [class_feature])]
   df_model['is_AA'] = df['residue_type'] == "AA"
   features.append('is_AA')
@@ -183,10 +184,10 @@ def run_decision_tree_classifier(df, diff=False):
   print(df_model[features].describe())
   print(df_model[features].info())
 
-  model = DecisionTreeClassifier(max_depth=4)
+  model = DecisionTreeClassifier(max_depth = max_depth)
   X = df_model[features]
   y = df_model[class_feature]
-  X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True, train_size=0.75)
+  X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle = True, train_size = 0.75)
   model.fit(X_train, y_train)
 
   predictions = model.predict(X_test)
@@ -194,9 +195,10 @@ def run_decision_tree_classifier(df, diff=False):
   print("Accuracy:", accuracy_score(y_test, predictions))
   class_names = ['worsen/equal', 'improve'] if diff else ['different', 'similar']
 
-  dot_data = export_graphviz(model, filled=True, rounded=True, special_characters=True, proportion=True, precision=2, feature_names=df_model[features].columns, class_names=class_names)
+  dot_data = export_graphviz(model, filled = True, rounded = True, special_characters = True, proportion = True, precision = 2, feature_names = df_model[features].columns, class_names = class_names)
   graph = pydotplus.graph_from_dot_data(dot_data)
-  graph.write_png('tree.png')
+  tree_filename = "tree_diff_" + str(max_depth) + ".png" if diff else "tree_" + str(max_depth) + ".png"
+  graph.write_png(tree_filename)
 
 
 if __name__ == "__main__":
