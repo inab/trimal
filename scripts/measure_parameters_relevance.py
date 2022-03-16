@@ -25,13 +25,13 @@ import numpy as np
 import pandas as pd
 import pydotplus
 
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, explained_variance_score, mean_squared_error, r2_score
 from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
-from sklearn.tree import DecisionTreeRegressor, DecisionTreeClassifier, export_graphviz
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
 from joblib import Parallel, delayed
+
 
 df = pd.DataFrame()
 
@@ -46,8 +46,10 @@ def main():
   args = parser.parse_args()
 
   global df
-  if os.path.exists("table_new.csv") and not args.recalculate:
-    df = pd.read_csv("table_new.csv", index_col = 0)
+  if args.comparePrank and os.path.exists("table_diff.csv") and not args.recalculate:
+    df = pd.read_csv("table_diff.csv", index_col = 0)
+  elif os.path.exists("table.csv") and not args.recalculate:
+    df = pd.read_csv("table.csv", index_col = 0)
   else:
     num_sequences = pd.read_table("test_working_files/number_sequences.txt", header = None, names=["num_sequences"], dtype="int")
     num_blocks = pd.read_table("test_working_files/blocks_outputs.txt", header = None, names=["num_blocks"], dtype="int")
@@ -82,9 +84,6 @@ def main():
     df["perc_conserved_columns"] = -1
     df.loc[(df['removed_columns'] != -1), 'perc_conserved_columns'] = df.loc[(df['removed_columns'] != -1), 'num_columns'] / (df.loc[(df['removed_columns'] != -1), 'num_columns'] + df.loc[(df['removed_columns'] != -1), 'removed_columns'])
   
-  #print(df.head())
-  #print(df.tail())
-  #print(df.info())
 
   '''
   with open('table.html', 'w') as file:
@@ -95,8 +94,8 @@ def main():
     with open('table.csv', 'w') as file:
       file.write(df.to_csv())
 
-  if not os.path.exists("table_new.csv") or args.comparePrank:
-    with open('table_new.csv', 'w') as file:
+  if not os.path.exists("table_diff.csv") or args.comparePrank:
+    with open('table_diff.csv', 'w') as file:
       file.write(df.to_csv())
   
 
@@ -167,7 +166,7 @@ def run_regression(df):
 
 
 def run_decision_tree_classifier(df, max_depth, diff = False):
-  features = ['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'has_block', 'main_block_size']
+  features = ['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'has_block', 'main_block_size', 'msa_filter_tools']
   class_feature = 'RF_distance_diff' if diff else 'RF_distance'
   if diff:
     features += ['blocks_diff', 'avg_gaps_diff', 'avg_seq_identity_diff', 'perc_conserved_columns', 'removed_columns']
@@ -176,11 +175,20 @@ def run_decision_tree_classifier(df, max_depth, diff = False):
   features.append('is_AA')
   df_model = df_model[(df['msa_tools'] == 'Prank') & (df['msa_filter_tools'] != 'None') & (df['RF_distance'] != -1)]
   if diff:
-    df_model['RF_distance_diff'] = df_model['RF_distance_diff'] < 0
+    df_model.loc[(df_model['RF_distance_diff'] > 0), 'RF_distance_diff'] = 2
+    df_model.loc[(df_model['RF_distance_diff'] < 0), 'RF_distance_diff'] = 1
   else:
-    df_model['RF_distance'] = df_model['RF_distance'] > 4
+    df_model['RF_distance'] = df_model['RF_distance'] <= 4
   
+  enc = OneHotEncoder()
+  enc_df = pd.DataFrame(enc.fit_transform(df_model[['msa_filter_tools']]).toarray())
+  enc_df.columns = enc.get_feature_names_out()
+  df_model = df_model.reset_index(drop=True)
+  df_model = df_model.join(enc_df)
+  features.remove('msa_filter_tools')
+  features += enc.get_feature_names_out().tolist()
 
+  print(df_model[features].head())
   print(df_model[features].describe())
   print(df_model[features].info())
 
@@ -193,7 +201,7 @@ def run_decision_tree_classifier(df, max_depth, diff = False):
   predictions = model.predict(X_test)
 
   print("Accuracy:", accuracy_score(y_test, predictions))
-  class_names = ['worsen/equal', 'improve'] if diff else ['different', 'similar']
+  class_names = ['equal', 'worse', 'better'] if diff else ['different', 'similar']
 
   dot_data = export_graphviz(model, filled = True, rounded = True, special_characters = True, proportion = True, precision = 2, feature_names = df_model[features].columns, class_names = class_names)
   graph = pydotplus.graph_from_dot_data(dot_data)
