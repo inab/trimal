@@ -42,13 +42,12 @@ def main():
   parser.add_argument("--compare_prank", dest = "comparePrank", default = False, action = "store_true", help = "Compare filtered results with Prank's")
   parser.add_argument("--recalculate", dest = "recalculate", default = False, action = "store_true", help = "Recalculate values")
   parser.add_argument("--max_depth", dest = "maxDepth", default = 2, type = int, help = "Tree max depth")
+  parser.add_argument("--ratio", dest = "ratio", default = False,  action = "store_true", help = "Add ratio parameters to the model")
 
   args = parser.parse_args()
 
   global df
-  if args.comparePrank and os.path.exists("table_diff.csv") and not args.recalculate:
-    df = pd.read_csv("table_diff.csv", index_col = 0)
-  elif os.path.exists("table.csv") and not args.recalculate:
+  if os.path.exists("table.csv") and not args.recalculate:
     df = pd.read_csv("table.csv", index_col = 0)
   else:
     num_sequences = pd.read_table("test_working_files/number_sequences.txt", header = None, names=["num_sequences"], dtype="int")
@@ -71,35 +70,34 @@ def main():
     df = pd.concat([num_sequences, num_blocks, left_block_column, right_block_column, num_columns, min_columns, max_columns, avg_seq_identity, avg_gaps, RF_distance, residue_type, taxon, problem_num, error, msa_tools, msa_filter_tools], axis = 1)
     df["has_block"] = df["num_blocks"] > 0
   
-  if 'main_block_size' not in df.columns or args.recalculate:
+  if args.recalculate:
     df["main_block_size"] = df["right_block_column"] - df["left_block_column"]
     df.loc[df["main_block_size"] < 0, "main_block_size"] = 0
+    df["columns/sequence"] = df["num_columns"] / df["num_sequences"]
+    df["blocks/columns"] = df["num_blocks"] / df["num_columns"]
+    df["perc_main_block_size"] = df["main_block_size"] / df["num_columns"]
   if args.comparePrank and args.recalculate:
     df["removed_columns"] = -1
+    df["perc_conserved_columns"] = -1
     df["blocks_diff"] = np.NaN
     df["avg_gaps_diff"] = np.NaN
+    df["avg_gaps_diff_weighted"] = np.NaN
     df["avg_seq_identity_diff"] = np.NaN
     df["RF_distance_diff"] = np.NaN
     Parallel(n_jobs = 8, require='sharedmem')(delayed(add_comparisons_with_prank)(problem) for problem in range(1, 1000))
-    df["perc_conserved_columns"] = -1
-    df.loc[(df['removed_columns'] != -1), 'perc_conserved_columns'] = df.loc[(df['removed_columns'] != -1), 'num_columns'] / (df.loc[(df['removed_columns'] != -1), 'num_columns'] + df.loc[(df['removed_columns'] != -1), 'removed_columns'])
-  
 
   '''
   with open('table.html', 'w') as file:
     file.write(df.to_html())
 
   '''
+
   if not os.path.exists("table.csv"):
     with open('table.csv', 'w') as file:
       file.write(df.to_csv())
-
-  if not os.path.exists("table_diff.csv") or args.comparePrank:
-    with open('table_diff.csv', 'w') as file:
-      file.write(df.to_csv())
   
 
-  run_decision_tree_classifier(df, args.maxDepth, diff = args.comparePrank)
+  run_decision_tree_classifier(df, args.maxDepth, diff = args.comparePrank, ratio =  args.ratio)
 
 
 def add_comparisons_with_prank(problem):
@@ -127,9 +125,14 @@ def add_comparisons_with_prank(problem):
               df.loc[((df['msa_tools'] == 'Prank') & (df['taxon'] == taxa) & (df['residue_type'] == residue) & (df['msa_filter_tools'] == filter_tool) &
                 (df['problem_num'] == problem)), ['removed_columns']] = prank_columns.values[0][0] - filter_tool_columns.values[0][0]
               df.loc[((df['msa_tools'] == 'Prank') & (df['taxon'] == taxa) & (df['residue_type'] == residue) & (df['msa_filter_tools'] == filter_tool) &
+                (df['problem_num'] == problem)), ['perc_conserved_columns']] = filter_tool_columns.values[0][0] / prank_columns.values[0][0]
+              df.loc[((df['msa_tools'] == 'Prank') & (df['taxon'] == taxa) & (df['residue_type'] == residue) & (df['msa_filter_tools'] == filter_tool) &
                 (df['problem_num'] == problem)), ['blocks_diff']] = prank_blocks.values[0][0] - filter_tool_blocks.values[0][0]
               df.loc[((df['msa_tools'] == 'Prank') & (df['taxon'] == taxa) & (df['residue_type'] == residue) & (df['msa_filter_tools'] == filter_tool) &
                 (df['problem_num'] == problem)), ['avg_gaps_diff']] = prank_avg_gaps.values[0][0] - filter_tool_avg_gaps.values[0][0]
+              df.loc[((df['msa_tools'] == 'Prank') & (df['taxon'] == taxa) & (df['residue_type'] == residue) & (df['msa_filter_tools'] == filter_tool) &
+                (df['problem_num'] == problem)), ['avg_gaps_diff_weighted']] = (prank_avg_gaps.values[0][0] - filter_tool_avg_gaps.values[0][0]) \
+                * (filter_tool_columns.values[0][0] / prank_columns.values[0][0])
               df.loc[((df['msa_tools'] == 'Prank') & (df['taxon'] == taxa) & (df['residue_type'] == residue) & (df['msa_filter_tools'] == filter_tool) &
                 (df['problem_num'] == problem)), ['avg_seq_identity_diff']] = prank_avg_seq_identity.values[0][0] - filter_tool_avg_seq_identity.values[0][0]
               df.loc[((df['msa_tools'] == 'Prank') & (df['taxon'] == taxa) & (df['residue_type'] == residue) & (df['msa_filter_tools'] == filter_tool) &
@@ -165,11 +168,13 @@ def run_regression(df):
   print(model.intercept_)
 
 
-def run_decision_tree_classifier(df, max_depth, diff = False):
+def run_decision_tree_classifier(df, max_depth, diff, ratio):
   features = ['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'has_block', 'main_block_size', 'msa_filter_tools']
   class_feature = 'RF_distance_diff' if diff else 'RF_distance'
   if diff:
-    features += ['blocks_diff', 'avg_gaps_diff', 'avg_seq_identity_diff', 'perc_conserved_columns', 'removed_columns']
+    features += ['blocks_diff', 'avg_gaps_diff_weighted', 'avg_seq_identity_diff', 'perc_conserved_columns', 'removed_columns']
+  if ratio:
+    features += ['columns/sequence', 'blocks/columns', 'perc_main_block_size']
   df_model = df.loc[:, (features + [class_feature])]
   df_model['is_AA'] = df['residue_type'] == "AA"
   features.append('is_AA')
@@ -205,7 +210,12 @@ def run_decision_tree_classifier(df, max_depth, diff = False):
 
   dot_data = export_graphviz(model, filled = True, rounded = True, special_characters = True, proportion = True, precision = 2, feature_names = df_model[features].columns, class_names = class_names)
   graph = pydotplus.graph_from_dot_data(dot_data)
-  tree_filename = "tree_diff_" + str(max_depth) + ".png" if diff else "tree_" + str(max_depth) + ".png"
+  tree_filename_prex = "tree_"
+  if diff:
+    tree_filename_prex += "diff_"
+  if ratio:
+    tree_filename_prex += "ratio_"
+  tree_filename = tree_filename_prex + str(max_depth) + ".png"
   graph.write_png(tree_filename)
 
 
