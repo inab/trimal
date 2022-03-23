@@ -801,17 +801,26 @@ bool Alignment::fillMatrices(bool aligned, bool checkInvalidChars) {
     // Function to determine if a set of sequences, that can be aligned or not,
     // have been correctly load and are free of errors.
     int i, j;
+    bool hasAnyResidue;
 
     // Initialize some variables
 
+    char indet = (getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
     // Check whether there are any unknow/no allowed character in the sequences
-    if (checkInvalidChars)
-        for (i = 0; i < numberOfSequences; i++)
-            for (j = 0; j < sequences[i].length(); j++)
-                if ((!isalpha(sequences[i][j])) && (!ispunct(sequences[i][j]))) {
-                    debug.report(ErrorCode::UnknownCharacter, new std::string[2]{seqsName[i], std::to_string(sequences[i][j])});
-                    return false;
-                }
+    for (i = 0; i < numberOfSequences; i++) {
+        hasAnyResidue = false;
+        for (j = 0; j < sequences[i].length(); j++) {
+            if (checkInvalidChars && (!isalpha(sequences[i][j])) && (!ispunct(sequences[i][j]))) {
+                debug.report(ErrorCode::UnknownCharacter, new std::string[2]{seqsName[i], std::to_string(sequences[i][j])});
+                return false;
+            } else if (!hasAnyResidue && (sequences[i][j] != indet) && (sequences[i][j] != '-')) {
+                hasAnyResidue = true;
+            }
+        }
+        
+        if (!hasAnyResidue)
+            debug.report(WarningCode::NoResidueSequence, new std::string[1]{seqsName[i]});
+    }
 
     // Check whether all sequences have same size or not
     for (i = 1; i < numberOfSequences; i++) {

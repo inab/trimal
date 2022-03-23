@@ -259,8 +259,6 @@ enum ErrorCode {
     ForceSelectAndInArgumentsProvided                   = 112,
     ComparesetAndInArgumentsProvided                    = 113,
 
-    NoResidueSequences                                  = 114,
-
 
     __MAXERROR,
 };
@@ -285,6 +283,8 @@ enum WarningCode {
     OverwrittingFile                            = 9,
 
     RenamingOutputPreventOverride               = 10,
+
+    NoResidueSequence                           = 11,
 
 
     __MAXWARNING
