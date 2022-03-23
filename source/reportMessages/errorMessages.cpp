@@ -385,4 +385,7 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
     {ErrorCode::ComparesetAndInArgumentsProvided,
             "Arguments -in <x> and -compareset <x> are incompatible"},
 
+    {ErrorCode::NoResidueSequences,
+            "Sequences [tag] and [tag] have no residues"},
+
 };
