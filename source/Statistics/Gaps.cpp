@@ -552,6 +552,9 @@ namespace statistics {
 
         std::cout.precision(10);
 
+        float gappyColumns50 = 0;
+        float gappyColumns80 = 0;
+
         // Count for each gaps' number the columns' number with that gaps' number.
         for (i = 0, acm = 0; i <= maxGaps; i++) {
 
@@ -581,13 +584,19 @@ namespace statistics {
                 std::cout << std::setw(size) << std::left << i;
 
                 // Percentage of gaps per column
-                std::cout << std::setw(size) << std::left << (i * 1.0F) / alig->originalNumberOfSequences;
+                float percGapsColumn = (i * 1.0F) / alig->originalNumberOfSequences;
+                std::cout << std::setw(size) << std::left << percGapsColumn;
 
                 // Gaps score per column
                 std::cout << std::setw(size) << std::left << 1.F - (((float) i) / alig->originalNumberOfSequences);
 
                 // End line
                 std::cout << "\n";
+
+                if (percGapsColumn >= 0.5)
+                    gappyColumns50 += numColumnsWithGaps[i];
+                    if (percGapsColumn >= 0.8)
+                        gappyColumns80 += numColumnsWithGaps[i];
             }
         }
 
@@ -601,8 +610,17 @@ namespace statistics {
                   << std::fixed
                   << std::setfill(' ');
 
-        std::cout << "## AverageGaps\t" << float(totalGaps)/(alig->originalNumberOfResidues * alig->originalNumberOfSequences) << "\n";
+        std::cout << "## AverageGaps\t" << float(totalGaps) / (alig->originalNumberOfResidues * alig->originalNumberOfSequences) << "\n";
         std::cout << "#> AverageGaps\tAverage gaps of the alignment" << "\n";
+
+        std::cout << "\n"
+            << std::fixed
+            << std::setfill(' ');
+
+        std::cout << "## PercentageGappyColumns50\t" << gappyColumns50 / (alig->originalNumberOfResidues) << "\n";
+        std::cout << "#> PercentageGappyColumns50\tPercentage of columns with 50% or more gaps" << "\n";
+        std::cout << "## PercentageGappyColumns80\t" << gappyColumns80 / (alig->originalNumberOfResidues) << "\n";
+        std::cout << "#> PercentageGappyColumns80\tPercentage of columns with 80% or more gaps" << "\n";
     }
 
     void Gaps::CalculateVectors() {
