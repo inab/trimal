@@ -27,7 +27,7 @@ import pydotplus
 
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, explained_variance_score, mean_squared_error, r2_score
+from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
 from joblib import Parallel, delayed
@@ -43,12 +43,15 @@ def main():
   parser.add_argument("--recalculate", dest = "recalculate", default = False, action = "store_true", help = "Recalculate values")
   parser.add_argument("--max_depth", dest = "maxDepth", default = 2, type = int, help = "Tree max depth")
   parser.add_argument("--ratio", dest = "ratio", default = False,  action = "store_true", help = "Add ratio parameters to the model")
+  parser.add_argument("-t", "--type", dest = "residueType", required = True, type = str, choices = ["AA", "DNA"], help = "Residue type")
+  parser.add_argument("--taxon", dest = "taxon", required = False, type = str, choices = ["Bacteria", "Eukaryotes", "Fungi"], help = "Taxon")
 
   args = parser.parse_args()
 
+  table_filename = "table_%s.csv" % args.residueType
   global df
-  if os.path.exists("table.csv") and not args.recalculate:
-    df = pd.read_csv("table.csv", index_col = 0)
+  if os.path.exists(table_filename) and not args.recalculate:
+    df = pd.read_csv(table_filename, index_col = 0)
   else:
     num_sequences = pd.read_table("test_working_files/number_sequences.txt", header = None, names=["num_sequences"], dtype="int")
     num_blocks = pd.read_table("test_working_files/blocks_outputs.txt", header = None, names=["num_blocks"], dtype="int")
@@ -84,6 +87,7 @@ def main():
     df["avg_gaps_diff_weighted"] = np.NaN
     df["avg_seq_identity_diff"] = np.NaN
     df["RF_distance_diff"] = np.NaN
+    #df["avg_seq_identity_diff_weighted"] = df["avg_seq_identity"] * df["perc_conserved_columns"]
     Parallel(n_jobs = 8, require='sharedmem')(delayed(add_comparisons_with_prank)(problem) for problem in range(1, 1000))
 
   '''
@@ -92,12 +96,12 @@ def main():
 
   '''
 
-  if not os.path.exists("table.csv"):
-    with open('table.csv', 'w') as file:
-      file.write(df.to_csv())
-  
+  if not os.path.exists(table_filename) or args.recalculate:
+    with open(table_filename, 'w') as file:
+      file.write(df[df["residue_type"] == args.residueType].to_csv())
 
-  run_decision_tree_classifier(df, args.maxDepth, diff = args.comparePrank, ratio =  args.ratio)
+
+  run_decision_tree_classifier(df, args.maxDepth, diff = args.comparePrank, ratio =  args.ratio, residue_type = args.residueType, taxon = args.taxon)
 
 
 def add_comparisons_with_prank(problem):
@@ -140,45 +144,17 @@ def add_comparisons_with_prank(problem):
               print('Processed problem ' + str(problem) + '-' + residue + '-' + taxa + '-' + filter_tool)
 
 
-def run_regression(df):
-  scaler = MinMaxScaler()
-  df_model = df[['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'RF_distance', 'has_block', 'main_block_size']]
-  df_model = df_model[(df['msa_tools'] != 'Original') & (df['RF_distance'] != -1)]
-  df_model['is_AA'] = df['residue_type'] == "AA"
-  df_model = pd.DataFrame(scaler.fit_transform(df_model),
-            columns = df_model.columns, index = df_model.index)
-  
-  print(df_model.corr().to_string())
-
-  model = LinearRegression()
-  X = df_model[['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'has_block', 'main_block_size', 'is_AA']]
-  y = df_model['RF_distance']
-  X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle = True, train_size = 0.7)
-  model.fit(X_train, y_train)
-
-  predictions = model.predict(X_test)
-  r2 = r2_score(y_test, predictions)
-  rmse = mean_squared_error(y_test, predictions, squared = False)
-
-  print("Explained variance:", explained_variance_score(y_test, predictions))
-  print("r2 score:", r2_score(y_test, predictions))
-  print('The r2 is: ', r2)
-  print('The rmse is: ', rmse)
-  print(model.coef_)
-  print(model.intercept_)
-
-
-def run_decision_tree_classifier(df, max_depth, diff, ratio):
+def run_decision_tree_classifier(df, max_depth, diff, ratio, residue_type, taxon):
   features = ['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'has_block', 'main_block_size', 'msa_filter_tools']
   class_feature = 'RF_distance_diff' if diff else 'RF_distance'
   if diff:
-    features += ['blocks_diff', 'avg_gaps_diff_weighted', 'avg_seq_identity_diff', 'perc_conserved_columns', 'removed_columns']
+    features += ['blocks_diff', 'avg_gaps_diff_weighted', 'avg_seq_identity_diff_weighted', 'perc_conserved_columns', 'removed_columns']
   if ratio:
     features += ['columns/sequence', 'blocks/columns', 'perc_main_block_size']
   df_model = df.loc[:, (features + [class_feature])]
-  df_model['is_AA'] = df['residue_type'] == "AA"
-  features.append('is_AA')
-  df_model = df_model[(df['msa_tools'] == 'Prank') & (df['msa_filter_tools'] != 'None') & (df['RF_distance'] != -1)]
+  if taxon:
+    df_model = df_model[df["taxon"] == taxon]
+  df_model = df_model.loc[(df['msa_tools'] == 'Prank') & (df['msa_filter_tools'] != 'None') & (df['RF_distance'] != -1), :]
   if diff:
     df_model.loc[(df_model['RF_distance_diff'] > 0), 'RF_distance_diff'] = 2
     df_model.loc[(df_model['RF_distance_diff'] < 0), 'RF_distance_diff'] = 1
@@ -208,9 +184,12 @@ def run_decision_tree_classifier(df, max_depth, diff, ratio):
   print("Accuracy:", accuracy_score(y_test, predictions))
   class_names = ['equal', 'worse', 'better'] if diff else ['different', 'similar']
 
-  dot_data = export_graphviz(model, filled = True, rounded = True, special_characters = True, proportion = True, precision = 2, feature_names = df_model[features].columns, class_names = class_names)
+  dot_data = export_graphviz(model, filled = True, rounded = True, special_characters = True, proportion = True, precision = 2,
+    feature_names = df_model[features].columns, class_names = class_names)
   graph = pydotplus.graph_from_dot_data(dot_data)
-  tree_filename_prex = "tree_"
+  tree_filename_prex = "tree_%s_" % residue_type
+  if taxon:
+    tree_filename_prex += "%s_" % taxon
   if diff:
     tree_filename_prex += "diff_"
   if ratio:
