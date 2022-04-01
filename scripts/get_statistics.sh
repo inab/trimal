@@ -10,16 +10,22 @@ if [ ! -d "$test_working_files" ]; then
 fi
 cd $test_working_files
 
-> blocks_outputs.txt
+> number_blocks.txt
 > left_block_column.txt
 > right_block_column.txt
+> blocks_diff.txt
 > number_sequences.txt
 > number_columns.txt
 > max_columns.txt
 > min_columns.txt
+> removed_columns.txt
+> percent_conserved_columns.txt
 > avg_gaps.txt
 > avg_gaps_diff.txt
+> avg_gaps_diff_weighted.txt
 > avg_seq_identity.txt
+> avg_seq_identity_diff.txt
+> avg_seq_identity_diff_weighted.txt
 > gappy_columns_50.txt
 > gappy_columns_80.txt
 > RF_distance.txt
@@ -47,11 +53,11 @@ task(){
         fi
         if [[ $filename != *".seqs."* ]]; then
             $trimal_local -in $file -sgc > temp_out_$filename.txt
-            (python3 $scripts/set_manual_boundaries.py -i temp_out_$filename.txt --inner_blocks --total_blocks --min_gapscore_allowed 1 > temp_blocks_outputs_$filename.txt && 
-			grep '## Blocks' temp_blocks_outputs_$filename.txt | awk '{print $3}' > blocks_outputs_$filename.txt &&
-			grep '## Left column' temp_blocks_outputs_$filename.txt | awk '{print $4}' > left_block_column_$filename.txt &&
-			grep '## Right column' temp_blocks_outputs_$filename.txt | awk '{print $4}' > right_block_column_$filename.txt &&
-			rm temp_blocks_outputs_$filename.txt) &
+            (python3 $scripts/set_manual_boundaries.py -i temp_out_$filename.txt --inner_blocks --total_blocks --min_gapscore_allowed 1 > temp_number_blocks_$filename.txt && 
+			grep "## Blocks" temp_number_blocks_$filename.txt | awk '{print $3}' > number_blocks_$filename.txt &&
+			grep "## Left column" temp_number_blocks_$filename.txt | awk '{print $4}' > left_block_column_$filename.txt &&
+			grep "## Right column" temp_number_blocks_$filename.txt | awk '{print $4}' > right_block_column_$filename.txt &&
+			rm temp_number_blocks_$filename.txt) &
             tail -n 1 temp_out_$filename.txt | grep -E "^\s*[[:digit:]]{1,}" -o | awk '{print $1 + 1}' > number_columns_$filename.txt &
 			($trimal_local -in $file -sgt > temp_out_sgt_$filename.txt &&
 			grep "## AverageGaps" temp_out_sgt_$filename.txt | awk '{print $3}' > avg_gaps_$filename.txt &&
@@ -109,38 +115,62 @@ write_results() {
 				echo $MSA_filter_tool >> MSA_filter_tools.txt &
 			fi
 			avg_gaps_diff=-1
+			avg_gaps_diff_weighted=-1
+			avg_seq_identity_diff=-1
+			avg_seq_identity_diff_weighted=-1
+			removed_columns=-1
+			percent_conserved_columns=-1
+			blocks_diff=-1
 			if [[ $MSA_filter_tool != "None" ]]; then
 				if [[ $MSA_filter_tool == "Guidance" ]]; then
 					if [[ $MSA_tool == "ClustalW" ]]; then
 						avg_gaps_MSA_tool_file="avg_gaps_$residue_taxon_problem."$MSA_tool"2.fa.txt"
+						avg_seq_identity_MSA_tool_file="avg_seq_identity_$residue_taxon_problem."$MSA_tool"2.fa.txt"
+						number_columns_MSA_tool_file="number_columns_$residue_taxon_problem."$MSA_tool"2.fa.txt"
+						number_blocks_MSA_tool_file="number_blocks_$residue_taxon_problem."$MSA_tool"2.fa.txt"
 					else
 						avg_gaps_MSA_tool_file="avg_gaps_$residue_taxon_problem.$MSA_tool.fa.txt"
+						avg_seq_identity_tool_file="avg_seq_identity_$residue_taxon_problem.$MSA_tool.fa.txt"
+						number_columns_MSA_tool_file="number_columns_$residue_taxon_problem.$MSA_tool.fa.txt"
+						number_blocks_MSA_tool_file="number_blocks_$residue_taxon_problem.$MSA_tool.fa.txt"
 					fi
-
-					echo $filename
-					#echo "avg_gaps_MSA_tool=$avg_gaps_MSA_tool"
-					avg_gaps_MSA_tool=$(cat "$avg_gaps_MSA_tool_file")
-					avg_gaps_MSA_filter_tool=$(cat avg_gaps_$filename.txt)
-
 				else
-					avg_gaps_MSA_filter_tool=$(cat avg_gaps_$filename.txt)
-					avg_gaps_MSA_tool_file=$(echo $filename | awk -F '.' '{print $(NF-3)"."$(NF-2)"."$NF}')
-					avg_gaps_MSA_tool_file="avg_gaps_$avg_gaps_MSA_tool_file.txt"
-					echo $filename
-					#echo "avg_gaps_MSA_tool=$avg_gaps_MSA_tool"
-					avg_gaps_MSA_tool=$(cat "$avg_gaps_MSA_tool_file")
-					avg_gaps_MSA_filter_tool=$(cat avg_gaps_$filename.txt)
+					file_suffix=$(echo $filename | awk -F '.' '{print $(NF-3)"."$(NF-2)"."$NF}')
+					avg_gaps_MSA_tool_file="avg_gaps_$file_suffix.txt"
+					avg_seq_identity_MSA_tool_file="avg_seq_identity_$file_suffix.txt"
+					number_columns_MSA_tool_file="number_columns_$file_suffix.txt"
+					number_blocks_MSA_tool_file="number_blocks_$file_suffix.txt"
 				fi
+				avg_gaps_MSA_filter_tool=$(cat avg_gaps_$filename.txt)
+				avg_gaps_MSA_tool=$(cat $avg_gaps_MSA_tool_file)
 				avg_gaps_diff=$(echo "$avg_gaps_MSA_tool - $avg_gaps_MSA_filter_tool" | bc)
+				avg_seq_identity_MSA_filter_tool=$(cat avg_seq_identity_$filename.txt)
+				avg_seq_identity_MSA_tool=$(cat $avg_seq_identity_MSA_tool_file)
+				avg_seq_identity_diff=$(echo "$avg_seq_identity_MSA_tool - $avg_seq_identity_MSA_filter_tool" | bc)
+				number_columns_filter_tool=$(cat number_columns_$filename.txt)
+				number_columns_tool=$(cat $number_columns_MSA_tool_file)
+				removed_columns=$(echo "$number_columns_tool - $number_columns_filter_tool" | bc)
+				percent_conserved_columns=$(echo "$number_columns_filter_tool / $number_columns_tool" | bc -l)
+				number_blocks_filter_tool=$(cat number_blocks_$filename.txt)
+				number_blocks_tool=$(cat $number_blocks_MSA_tool_file)
+				blocks_diff=$(echo "$number_blocks_tool - $number_blocks_filter_tool" | bc)
+				avg_gaps_diff_weighted=$(echo "$avg_gaps_diff * $percent_conserved_columns" | bc -l)
+				avg_seq_identity_diff_weighted=$(echo "$avg_seq_identity_diff * $percent_conserved_columns" | bc -l)
 			fi
 			(echo $avg_gaps_diff >> avg_gaps_diff.txt) &
-			(cat blocks_outputs_$filename.txt >> blocks_outputs.txt && rm blocks_outputs_$filename.txt) &
+			(echo $avg_seq_identity_diff >> avg_seq_identity_diff.txt) &
+			(echo $avg_gaps_diff_weighted >> avg_gaps_diff_weighted.txt) &
+			(echo $avg_seq_identity_diff_weighted >> avg_seq_identity_diff_weighted.txt) &
+			(echo $removed_columns >> removed_columns.txt) &
+			(echo $percent_conserved_columns >> percent_conserved_columns.txt) &
+			(echo $blocks_diff >> blocks_diff.txt) &
+			(cat number_blocks_$filename.txt >> number_blocks.txt) &
 			(cat left_block_column_$filename.txt >> left_block_column.txt && rm left_block_column_$filename.txt) &
 			(cat right_block_column_$filename.txt >> right_block_column.txt && rm right_block_column_$filename.txt) &
 			(cat number_columns_$filename.txt >> min_columns.txt; cat number_columns_$filename.txt >> max_columns.txt;
-			cat number_columns_$filename.txt >> number_columns.txt && rm number_columns_$filename.txt) &
+			cat number_columns_$filename.txt >> number_columns.txt) &
 			(cat avg_gaps_$filename.txt >> avg_gaps.txt) &
-			(cat avg_seq_identity_$filename.txt >> avg_seq_identity.txt && rm avg_seq_identity_$filename.txt) &
+			(cat avg_seq_identity_$filename.txt >> avg_seq_identity.txt) &
 			(cat gappy_columns_50_$filename.txt >> gappy_columns_50.txt && rm gappy_columns_50_$filename.txt) &
 			(cat gappy_columns_80_$filename.txt >> gappy_columns_80.txt && rm gappy_columns_80_$filename.txt) &
 			if [ -s RF_distance_$filename.txt ]; then
@@ -154,13 +184,19 @@ write_results() {
 			echo "Original" >> MSA_filter_tools.txt &
 			(cat min_columns_$filename.txt >> min_columns.txt && rm min_columns_$filename.txt) &
 			(cat max_columns_$filename.txt >> max_columns.txt && rm max_columns_$filename.txt) &
-			echo -1 >> blocks_outputs.txt &
+			echo -1 >> number_blocks.txt &
 			echo -1 >> left_block_column.txt &
 			echo -1 >> right_block_column.txt &
+			echo -1 >> blocks_diff.txt &
 			echo -1 >> number_columns.txt &
+			echo -1 >> removed_columns.txt &
+			echo -1 >> percent_conserved_columns.txt &
 			echo -1 >> avg_gaps.txt &
 			echo -1 >> avg_gaps_diff.txt &
+			echo -1 >> avg_gaps_diff_weighted.txt &
 			echo -1 >> avg_seq_identity.txt &
+			echo -1 >> avg_seq_identity_diff.txt &
+			echo -1 >> avg_seq_identity_diff_weighted.txt &
 			echo -1 >> RF_distance.txt &
 			echo -1 >> gappy_columns_50.txt &
 			echo -1 >> gappy_columns_80.txt &
@@ -169,6 +205,9 @@ write_results() {
 		wait
     done < $file
 	rm avg_gaps_*problem*.txt
+	rm avg_seq_identity_*problem*.txt
+	rm number_columns_*.txt
+	rm number_blocks_*.txt
     > filenames_to_write.txt
 }
 
@@ -185,14 +224,14 @@ do
                 problem_name=$(basename $problem | awk -F '_' '{print $1}')
 				residue_taxon_problem=$(echo $problem | awk -F '/' '{print $(NF-2)"_"$(NF-1)"_"$NF}')
                 if [[ $problem == *"problem"*"_err" ]]; then
-                    num_seq=$(grep ">" "$problem/$problem_name.seqs.fa_err" | wc -l)
+                    num_seq=$(grep -c ">" "$problem/$problem_name.seqs.fa_err")
                     echo $num_seq > number_sequences_$residue_taxon_problem.txt
 		    		for file in $problem/*.fa_err
                     do
                         task "$file"  &
                     done
                 else
-                    num_seq=$(grep ">" "$problem/$problem_name.seqs.fa" | wc -l)
+                    num_seq=$(grep -c ">" "$problem/$problem_name.seqs.fa")
 		    		echo $num_seq > number_sequences_$residue_taxon_problem.txt
                     for file in $problem/*.fa
                     do
