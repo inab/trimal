@@ -93,6 +93,10 @@ def main():
   while compute_blocks(args) == 1:
     left += 1
     right -= 1
+  
+  if args.blockCoordinates:
+    print("## Left column ", main_left)
+    print("## Right column ", main_right)
 
 ### ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ****
 
@@ -260,9 +264,6 @@ def compute_blocks(args):
           print_total_blocks(blockNum)
       elif args.totalBlocks:
         print_total_blocks(blockNum)
-    if args.blockCoordinates:
-      print("## Left column ", main_left)
-      print("## Right column ", main_right)
 
   return 0
 
