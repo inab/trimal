@@ -52,6 +52,7 @@ def main():
 
   df["size (megabytes)"] = df["size (bytes)"] * 10**(-6)
   df["total_residues (millions)"] = df["total_residues"] * 10**(-6)
+  df["max_resident_set_size (gbytes)"] = df["max_resident_set_size (kbytes)"] * 10**(-6)
   plt.plot("user_time (s)", "total_residues (millions)", data = df, linestyle="none", marker="o")
   plt.xlabel("Time (s)")
   plt.ylabel("Residues (millions)")
