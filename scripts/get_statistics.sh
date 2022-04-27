@@ -4,7 +4,7 @@ res_type=$1
 start_time=$(date +%s.%N)
 scripts="../trimal/scripts"
 dataset="../dessimoz/02.Data/SpeciesTreeDiscordanceTest.Enriched"
-alignment_statistics="alignment_statistics_$res_type"
+alignment_statistics="alignment_statistics_all_tools_$res_type"
 trimal_local="../trimal/bin/trimal"
 readal_local="../trimal/bin/readal"
 problems_to_ignore="../all_gaps_indets_alignments_unique_$res_type.txt"
@@ -19,6 +19,7 @@ cd $alignment_statistics
 > blocks_diff.txt
 > number_sequences.txt
 > number_columns.txt
+> number_columns_MSA.txt
 > max_columns.txt
 > min_columns.txt
 > removed_columns.txt
@@ -169,11 +170,13 @@ write_results() {
 				blocks_diff=$(echo "$number_blocks_tool - $number_blocks_filter_tool" | bc)
 				RF_distance_filter_tool=$(cat RF_distance_$filename.txt)
 				RF_distance_tool=$(cat $RF_distance_MSA_tool_file)
-				echo "$RF_distance_tool - $RF_distance_filter_tool for $filename"
 				RF_distance_diff=$(echo "$RF_distance_tool - $RF_distance_filter_tool" | bc)
 				avg_gaps_diff_weighted=$(echo "$avg_gaps_diff * $percent_conserved_columns" | bc -l)
 				avg_seq_identity_diff_weighted=$(echo "$avg_seq_identity_diff * $percent_conserved_columns" | bc -l)
+			else
+				number_columns_tool=$(cat number_columns_$filename.txt || echo -1)
 			fi
+			(echo $number_columns_tool >> number_columns_MSA.txt) &
 			(echo $avg_gaps_diff >> avg_gaps_diff.txt) &
 			(echo $avg_seq_identity_diff >> avg_seq_identity_diff.txt) &
 			(echo $avg_gaps_diff_weighted >> avg_gaps_diff_weighted.txt) &
@@ -203,12 +206,15 @@ write_results() {
 			echo -1 >> right_block_column.txt &
 			echo -1 >> blocks_diff.txt &
 			echo -1 >> number_columns.txt &
+			echo -1 >> number_columns_MSA.txt &
 			echo -1 >> removed_columns.txt &
 			echo -1 >> percent_conserved_columns.txt &
 			echo -1 >> avg_gaps.txt &
 			echo -1 >> avg_gaps_diff.txt &
+			echo -1 >> avg_gaps_diff_weighted.txt &
 			echo -1 >> avg_seq_identity.txt &
 			echo -1 >> avg_seq_identity_diff.txt &
+			echo -1 >> avg_seq_identity_diff_weighted.txt &
 			echo -1 >> RF_distance.txt &
             echo -1 >> RF_distance_diff.txt &
 			echo -1 >> gappy_columns_50.txt &
@@ -220,7 +226,7 @@ write_results() {
     done < $file
 	rm avg_gaps_*problem*.txt
 	rm avg_seq_identity_*problem*.txt
-	rm number_columns_*.txt
+	rm number_columns_*problem*.txt
 	rm number_blocks_*.txt
 	rm RF_distance_*problem*.txt
     > filenames_to_write.txt
@@ -235,7 +241,7 @@ do
         for taxon in $residue_type/*
         do
 	    	residue_taxon_problem=""
-            for problem in $taxon/problem0001*
+            for problem in $taxon/problem*
             do
                 problem_name=$(basename $problem | awk -F '_' '{print $1}')
 				residue_taxon_problem=$(echo $problem | awk -F '/' '{print $(NF-2)"_"$(NF-1)"_"$NF}')
@@ -249,9 +255,7 @@ do
 						echo $num_seq > number_sequences_$residue_taxon_problem.txt
 						for file in $problem/*.fa
 						do
-							if [[ $file == *"ClustalW"* || $file == *"Mafft"* || $file == *"T-Coffee"* ]]; then
-								task "$file"  &
-							fi
+							task "$file"  &
 						done
 					fi
 				else
@@ -260,7 +264,7 @@ do
 				fi
 
 				((counter++))
-				if [ $counter -eq 10 ]; then
+				if [ $counter -eq 2 ]; then
 					wait
 					counter=0
 					write_results
