@@ -46,15 +46,18 @@ def main():
   MSA_filter_tools_best = []
 
   for MSA_filter_tool in MSA_filter_tools:
+    break
     #RF_diff_mean = df.loc[(df['MSA_filter_tool'] == MSA_filter_tool), 'RF_distance_diff'].mean()
     #RF_diff_median = df.loc[(df['MSA_filter_tool'] == MSA_filter_tool), 'RF_distance_diff'].median()
     #RF_diff_std = df.loc[(df['MSA_filter_tool'] == MSA_filter_tool), 'RF_distance_diff'].std()
     #print("Mean, median and std RF_diff for %s are %.2f, %.2f and %.2f" % (MSA_filter_tool, RF_diff_mean, RF_diff_median, RF_diff_std))
-    if (sum(df['RF_change'] == "unchanged") + sum(df['RF_change'] == "better")) > 0.8:
+    if (sum((df['MSA_filter_tool'] == MSA_filter_tool) & (df['RF_change'] == "unchanged")) +\
+       sum((df['MSA_filter_tool'] == MSA_filter_tool) & (df['RF_change'] == "better"))) /\
+         sum(df['MSA_filter_tool'] == MSA_filter_tool) > 0.85:
       MSA_filter_tools_best.append(MSA_filter_tool)
   
-  df_best_filter_tools = df.loc[df["MSA_filter_tool"].isin(MSA_filter_tools_best), ["MSA_filter_tool", "RF_distance_diff", "RF_change"]]
-  df_best_filter_tools_automated2 = df_best_filter_tools.loc[df_best_filter_tools["MSA_filter_tool"].str.contains("automated2") , ["MSA_filter_tool", "RF_distance_diff", "RF_change"]]
+  #df_best_filter_tools = df.loc[df["MSA_filter_tool"].isin(MSA_filter_tools_best), ["MSA_filter_tool", "RF_distance_diff", "RF_change"]]
+  df_best_filter_tools_automated2 = df.loc[df["MSA_filter_tool"].str.contains("automated2") , ["MSA_filter_tool", "RF_distance_diff", "RF_change"]]
 
   #boxplot = sns.boxplot(x=df_best_filter_tools["MSA_filter_tool"], y=df_best_filter_tools["RF_distance_diff"])
   #boxplot.set_xticklabels(boxplot.get_xticklabels(),rotation=90)
@@ -79,7 +82,7 @@ def main():
 
   fig, ax = plt.subplots(figsize=(8,10))
   #df_best_filter_tools.groupby(['MSA_filter_tool', 'RF_change']).size().unstack().plot(ax=ax, kind='bar', stacked=True, sort_columns=True)
-  df_best_filter_tools.groupby(['MSA_filter_tool'])['RF_change'].value_counts(normalize=True).mul(100).unstack()\
+  df_best_filter_tools_automated2.groupby(['MSA_filter_tool'])['RF_change'].value_counts(normalize=True).mul(100).unstack()\
     .plot(ax=ax, kind='bar', stacked=True, sort_columns=True, color=['darkgreen', 'darkorange', 'darkred'])
 
   #his1 = sns.histplot(data=data, x="MSA_filter_tool", hue="RF_change", multiple="stack", stat="percent")
