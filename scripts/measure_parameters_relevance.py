@@ -21,7 +21,6 @@
 import argparse
 import sys
 import os
-import numpy as np
 import pandas as pd
 import pydotplus
 
@@ -37,6 +36,7 @@ df = pd.DataFrame()
 def main():
   parser = argparse.ArgumentParser()
 
+  parser.add_argument("--tree", dest = "tree", default = False, action = "store_true", help = "Build decision tree")
   parser.add_argument("--compare", dest = "compare", default = False, action = "store_true", help = "Compare filtered results with original MSA")
   parser.add_argument("--recalculate", dest = "recalculate", default = False, action = "store_true", help = "Recalculate values")
   parser.add_argument("--max_depth", dest = "maxDepth", default = 2, type = int, help = "Tree max depth")
@@ -44,19 +44,19 @@ def main():
   parser.add_argument("-t", "--type", dest = "residueType", required = True, type = str, choices = ["AA", "DNA"], help = "Residue type")
   parser.add_argument("--taxon", dest = "taxon", required = False, type = str, choices = ["Bacteria", "Eukaryotes", "Fungi"], help = "Taxon")
   parser.add_argument("--msa_tool", dest = "msaTool", required = False, type = str, choices = ["ClustalW", "ClustalW2", "Mafft", "Prank", "T-Coffee"], help = "MSA tool")
-  parser.add_argument("-c", "--criterion", dest = "criterion", required = True, type = str, choices = ["gini", "entropy"], help = "The function to measure the quality of a split")
+  parser.add_argument("-c", "--criterion", dest = "criterion", required = False, default = "gini", type = str, choices = ["gini", "entropy"], help = "The function to measure the quality of a split")
   parser.add_argument("--min_columns", dest = "minColumns", required = False, type = int,  help = "Minimin number of columns of the MSA alignment (unfiltered)")
   parser.add_argument("--min_seqs", dest = "minSeqs", required = False, type = int,  help = "Minimin number of sequences of the alignment")
 
 
   args = parser.parse_args()
 
-  table_filename = "table_all_tools_%s.csv" % args.residueType
+  table_filename = "table_all_tools_%s_fixed.csv" % args.residueType
   global df
   if os.path.exists(table_filename) and not args.recalculate:
     df = pd.read_csv(table_filename, index_col = 0)
   else:
-    data_folder = "alignment_statistics_all_tools_%s" % args.residueType
+    data_folder = "alignment_statistics_%s" % args.residueType
     num_sequences = pd.read_table("%s/number_sequences.txt" % data_folder, header = None, names=["num_sequences"], dtype="int")
     num_blocks = pd.read_table("%s/number_blocks.txt" % data_folder, header = None, names=["num_blocks"], dtype="int")
     left_block_column = pd.read_table("%s/left_block_column.txt" % data_folder, header = None, names=["left_block_column"], dtype="int")
@@ -108,18 +108,19 @@ def main():
       file.write(df[df["residue_type"] == args.residueType].to_csv())
 
 
-  run_decision_tree_classifier(df, args.maxDepth, diff = args.compare, ratio =  args.ratio, residue_type = args.residueType, taxon = args.taxon,
-   tool = args.msaTool, criterion = args.criterion, min_columns = args.minColumns, min_seqs = args.minSeqs)
-
+  if args.tree:
+    run_decision_tree_classifier(df, args.maxDepth, diff = args.compare, ratio =  args.ratio, residue_type = args.residueType, taxon = args.taxon,
+    tool = args.msaTool, criterion = args.criterion, min_columns = args.minColumns, min_seqs = args.minSeqs)
 
 
 def run_decision_tree_classifier(df, max_depth, diff, ratio, residue_type, taxon, tool, criterion, min_columns, min_seqs):
-  features = ['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'has_block', 'main_block_size', 'msa_columns']
+  features = ['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'has_block', 'main_block_size', 'msa_columns', 'perc_main_block_size', 'avg_gaps_diff_weighted', \
+    "avg_seq_identity_diff_weighted"]
   class_feature = 'RF_distance_diff' if diff else 'RF_distance'
   if diff:
-    features += ['blocks_diff', 'avg_gaps_diff_weighted', 'avg_seq_identity_diff_weighted', 'percent_conserved_columns', 'removed_columns']
+    features += [ 'percent_conserved_columns', 'removed_columns']
   if ratio:
-    features += ['columns/sequence', 'blocks/columns', 'perc_main_block_size']
+    features += ['columns/sequence', 'blocks/columns']
   df_model = df.copy()
   if taxon:
     df_model = df_model[df_model["taxon"] == taxon]
@@ -166,11 +167,13 @@ def run_decision_tree_classifier(df, max_depth, diff, ratio, residue_type, taxon
   y = df_model[class_feature]
   X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle = True, train_size = 0.8)
   model.fit(X_train, y_train)
+  print(len(X_train))
+  print(len(X_test))
 
   predictions = model.predict(X_test)
 
   print("Accuracy:", accuracy_score(y_test, predictions))
-  class_names = ['worse', 'equal', 'better'] if diff else ['different', 'similar']
+  class_names = ['worse', 'unchanged', 'better'] if diff else ['different', 'similar']
 
   dot_data = export_graphviz(model, filled = True, rounded = True, special_characters = True, proportion = True, precision = 2,
     feature_names = df_model[features].columns, class_names = class_names)

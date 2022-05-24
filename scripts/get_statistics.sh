@@ -184,7 +184,11 @@ write_results() {
 			(echo $removed_columns >> removed_columns.txt) &
 			(echo $percent_conserved_columns >> percent_conserved_columns.txt) &
 			(echo $blocks_diff >> blocks_diff.txt) &
-            (echo $RF_distance_diff >> RF_distance_diff.txt) &
+			if [[ -z $RF_distance_diff ]]; then
+				(echo -100 >> RF_distance_diff.txt) &
+			else
+				(echo $RF_distance_diff >> RF_distance_diff.txt) &
+			fi
 			((cat number_blocks_$filename.txt || echo -1) >> number_blocks.txt) &
 			((cat left_block_column_$filename.txt || echo -1) >> left_block_column.txt && rm left_block_column_$filename.txt) &
 			((cat right_block_column_$filename.txt || echo -1) >> right_block_column.txt && rm right_block_column_$filename.txt) &
@@ -224,11 +228,15 @@ write_results() {
         echo "Finished with $filename"
         echo "Finished with $filename" >> log.txt
     done < $file
-	rm avg_gaps_*problem*.txt
-	rm avg_seq_identity_*problem*.txt
-	rm number_columns_*problem*.txt
-	rm number_blocks_*.txt
-	rm RF_distance_*problem*.txt
+	# skip if no file written
+	if [ -s filenames_to_write.txt ]; then
+		rm avg_gaps_*problem*.txt
+		rm avg_seq_identity_*problem*.txt
+		rm number_columns_*problem*.txt
+		rm number_blocks_*.txt
+		rm RF_distance_*problem*.txt
+    fi
+
     > filenames_to_write.txt
 }
 
@@ -238,15 +246,19 @@ line_number=1
 for residue_type in $dataset/$res_type*
 do
     if [ -d $residue_type ]; then
-        for taxon in $residue_type/*
+        for taxon in $residue_type/Fun*
         do
 	    	residue_taxon_problem=""
-            for problem in $taxon/problem*
+            for problem in $taxon/problem093*
             do
                 problem_name=$(basename $problem | awk -F '_' '{print $1}')
 				residue_taxon_problem=$(echo $problem | awk -F '/' '{print $(NF-2)"_"$(NF-1)"_"$NF}')
-				residue_taxon_problem_to_ignore=$(sed "${line_number}q;d" $problems_to_ignore)
-				if [[ $residue_taxon_problem != $residue_taxon_problem_to_ignore ]]; then
+				#residue_taxon_problem_to_ignore=$(sed "${line_number}q;d" $problems_to_ignore)
+
+				if grep -Fxq $residue_taxon_problem $problems_to_ignore; then
+					((line_number++))
+					echo "Ignored $residue_taxon_problem" >> log.txt
+				else
 					if [[ $problem == *"problem"*"_err" ]]; then
 						num_seq=$(grep -c ">" "$problem/$problem_name.seqs.fa_err")
 						echo $num_seq > number_sequences_$residue_taxon_problem.txt
@@ -258,12 +270,9 @@ do
 							task "$file"  &
 						done
 					fi
-				else
-					((line_number++))
-					echo "Ignored $residue_taxon_problem" >> log.txt
+					((counter++))
 				fi
-
-				((counter++))
+				
 				if [ $counter -eq 2 ]; then
 					wait
 					counter=0

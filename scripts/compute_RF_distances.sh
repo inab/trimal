@@ -10,7 +10,7 @@ task() {
     folder_path=$(dirname $file)
     tree_file="$file.treefile"
     number_sequences=$(grep -c ">" $file)
-    number_columns=$(while read line; do echo $line; [ -z $line ] && break; done <<<  "$(awk -F '>' '{print $1}' ${file} | tail -n +2)" | paste -sd '' | wc -c)
+    number_columns=$(while read line; do echo $line; [ -z $line ] && break; done <<<  "$(awk -F '>' '{print $1}' ${file} | tail -n +2)" | paste -sd '' | wc -c || echo -1)
     ref_tree=$(find $folder_path -name *.reference.nwk)
     RF_distance=$(ete3 compare -t $tree_file -r $ref_tree --unrooted > temp_RF_distance_$filename.txt &&
             awk 'FNR == 3 {print $9}' temp_RF_distance_$filename.txt || 
@@ -47,11 +47,11 @@ task() {
 
             tree_file="$folder_path/$MSA_tool_filename.treefile"
 
-            if [ -s RF_distances_temp/temp_RF_distance_$MSA_tool_filename.txt ]; then
-                RF_distance_tool=$(awk 'FNR == 3 {print $9}' RF_distances_temp/temp_RF_distance_$MSA_tool_filename.txt)
+            if [ -s RF_distances_temp_${taxon}/temp_RF_distance_$MSA_tool_filename.txt ]; then
+                RF_distance_tool=$(awk 'FNR == 3 {print $9}' RF_distances_temp_${taxon}/temp_RF_distance_$MSA_tool_filename.txt)
             else
-                RF_distance_tool=$(ete3 compare -t $tree_file -r $ref_tree --unrooted > RF_distances_temp/temp_RF_distance_$MSA_tool_filename.txt &&
-                awk 'FNR == 3 {print $9}' RF_distances_temp/temp_RF_distance_$MSA_tool_filename.txt || 
+                RF_distance_tool=$(ete3 compare -t $tree_file -r $ref_tree --unrooted > RF_distances_temp_${taxon}/temp_RF_distance_$MSA_tool_filename.txt &&
+                awk 'FNR == 3 {print $9}' RF_distances_temp_${taxon}/temp_RF_distance_$MSA_tool_filename.txt || 
                 echo -1)
             fi
 
