@@ -41,7 +41,7 @@
 
 
 namespace statistics {
-/** 
+/**
  * \brief Class that contains information of similarity matrices.\n
  * These are used to calculate the similarity between residues on the same column.
  * <br>
@@ -49,6 +49,7 @@ namespace statistics {
  */
     class similarityMatrix {
 
+    public:
         int *vhash;
         float **simMat;
         float **distMat;
