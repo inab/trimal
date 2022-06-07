@@ -203,6 +203,7 @@ namespace statistics {
         float Q;
         // Temporal chars that will contain the residues to compare by pair.
         char chA, chB;
+        int numA, numB;
 
         // Calculate the maximum number of gaps a column can have to calculate it's
         //      similarity
@@ -215,9 +216,30 @@ namespace statistics {
                 MDK[i] = 0.F;
                 continue;
             }
+
+            // Fill the column buffer with the current column and check
+            // characters are well-defined with respect to the similarity matrix
+            for (j = 0; j < alig->originalNumberOfSequences; j++) {
+                column[j] = chA = utils::toUpper(alig->sequences[j][i]);
+                if ((chA == indet) || (chA == '-')) {
+                    colgap[j] = 1;
+                } else {
+                    colgap[j] = 0;
+                    if ((chA < 'A') || (chA > 'Z')) {
+                        debug.report(ErrorCode::IncorrectSymbol, new std::string[1]{std::string(1, chA)});
+                        return false;
+                    } else if (simMatrix->vhash[chA - 'A'] == -1) {
+                        debug.report(ErrorCode::UndefinedSymbol, new std::string[1]{std::string(1, chA)});
+                        return false;
+                    }
+                }
+            }
+
             // For each AAs/Nucleotides' pair in the column we compute its distance
             for (j = 0, num = 0, den = 0; j < alig->originalNumberOfSequences; j++) {
-
+                // We don't compute the distance if the first element is
+                // a indeterminate (XN) or a gap (-) element.
+                if (colgap[j]) continue;
 
                 // Calculate the upper value of the residue,
                 //      to use in simMatrix->getDistance
@@ -225,14 +247,14 @@ namespace statistics {
                 //      as this is done before entering the loop
                 // Doing this before checking if the element is indeterminate or gap
                 //      allows to check if the indetermination is not capitalized
-                chA = utils::toUpper(alig->sequences[j][i]);
-
-                // We don't compute the distance if the first element is
-                // a indeterminate (XN) or a gap (-) element.
-                if ((chA == '-') || (chA == indet))
-                    continue;
+                chA = column[j];
+                numA = simMatrix->vhash[chA - 'A'];
 
                 for (k = j + 1; k < alig->originalNumberOfSequences; k++) {
+                    // We don't compute the distance if the second element is
+                    //      a indeterminate (XN) or a gap (-) element
+                    if (colgap[k]) continue;
+
                     // We calculate the upper value of the residue,
                     //      to use in simMatrix->getDistance
                     // This is equally faster as if it was done inside the method
@@ -240,16 +262,12 @@ namespace statistics {
                     //      the given chars.
                     // Doing this before checking if the element is indeterminate or gap
                     //      allows to check if the indetermination is not capitalized
-                    chB = utils::toUpper(alig->sequences[k][i]);
-
-                    // We don't compute the distance if the second element is
-                    //      a indeterminate (XN) or a gap (-) element
-                    if ((chB == '-') || (chB == indet))
-                        continue;
+                    chB = column[k];
+                    numB = simMatrix->vhash[chB - 'A'];
 
                     // We use the identity value for the two pairs and
                     //      its distance based on similarity matrix's value.
-                    num += matrixIdentity[j][k] * simMatrix->getDistance(chA, chB);
+                    num += matrixIdentity[j][k] * simMatrix->distMat[numA][numB];
                     den += matrixIdentity[j][k];
                 }
             }
