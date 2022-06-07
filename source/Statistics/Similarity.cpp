@@ -36,6 +36,8 @@
 #include "utils.h"
 #include "omp.h"
 
+#include <vector>
+
 namespace statistics {
 
     Similarity::Similarity(Alignment *parentAlignment) {
@@ -52,6 +54,10 @@ namespace statistics {
         simMatrix = nullptr;
 
         refCounter = new int(1);
+
+        // Initialize temporary vectors
+        column = std::string(alig->originalNumberOfSequences, 0);
+        colgap = std::vector<char>(alig->originalNumberOfSequences, 0);
     }
 
     Similarity::Similarity(Alignment *parentAlignment,
@@ -71,6 +77,10 @@ namespace statistics {
 
         refCounter = mold->refCounter;
         (*refCounter)++;
+
+        // copy temporary vectors
+        column = std::string(mold->column);
+        colgap = std::vector<char>(mold->colgap);
     }
 
     Similarity::~Similarity() {
@@ -625,4 +635,3 @@ namespace statistics {
     }
 
 }
-

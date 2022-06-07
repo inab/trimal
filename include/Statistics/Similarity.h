@@ -37,6 +37,7 @@
 #include <sstream>
 #include <iomanip>
 #include <math.h>
+#include <vector>
 
 // Forward declaration
 class Alignment;
@@ -73,6 +74,12 @@ namespace statistics {
 
         /** \brief Counter of how many other instances share the same information */
         int * refCounter;
+
+        /** \brief Temporary buffer to store a column from the parent alignment. */
+        std::string column;
+
+        /** \brief Temporary buffer to store which column characters are gaps or indeterminate. */
+        std::vector<char> colgap;
 
     public:
         /** \brief Computes the matrix identity between alignment's columns. */
