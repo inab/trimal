@@ -209,6 +209,10 @@ namespace statistics {
         //      similarity
         float gapThreshold = 0.8F * alig->numberOfResidues;
 
+        // Cache pointers to matrix rows to avoid dereferencing in inner loops
+        float* identityRow;
+        float* distRow;
+
         // For each column calculate the Q value and the MD value using an equation
         for (i = 0; i < alig->originalNumberOfResidues; i++) {
             // Set MDK for columns with gaps values bigger or equal to 0.8F
@@ -250,6 +254,10 @@ namespace statistics {
                 chA = column[j];
                 numA = simMatrix->vhash[chA - 'A'];
 
+                // Store address of matrix rows
+                distRow = simMatrix->distMat[numA];
+                identityRow = matrixIdentity[j];
+
                 for (k = j + 1; k < alig->originalNumberOfSequences; k++) {
                     // We don't compute the distance if the second element is
                     //      a indeterminate (XN) or a gap (-) element
@@ -267,8 +275,8 @@ namespace statistics {
 
                     // We use the identity value for the two pairs and
                     //      its distance based on similarity matrix's value.
-                    num += matrixIdentity[j][k] * simMatrix->distMat[numA][numB];
-                    den += matrixIdentity[j][k];
+                    num += identityRow[k] * distRow[numB];
+                    den += identityRow[k];
                 }
             }
 
