@@ -40,9 +40,11 @@
 #include "Statistics/Manager.h"
 #include "Alignment/sequencesMatrix.h"
 #include "reportsystem.h"
-#include "Cleaner.h"
-#include "utils.h"
 #include "omp.h"
+
+#ifdef HAVE_SSE2
+#include "Platform/sse2/SSE2Cleaner.h"
+#endif
 
 Alignment::Alignment() {
     // Create a timer that will report times upon its destruction
@@ -50,7 +52,11 @@ Alignment::Alignment() {
     StartTiming("Alignment::Alignment(void) ");
 
     // Submodules
+#ifdef HAVE_SSE2
+    Cleaning = new SSE2Cleaner(this);
+#else
     Cleaning = new Cleaner(this);
+#endif
     Statistics = new statistics::Manager(this);
 
     // Sizes
@@ -122,7 +128,11 @@ Alignment::Alignment(Alignment &originalAlignment) {
                       saveResidues);
 
         // Submodules
+#ifdef HAVE_SSE2
+        this->Cleaning = new SSE2Cleaner(this);
+#else
         this->Cleaning = new Cleaner(this, originalAlignment.Cleaning);
+#endif
         this->Statistics = new statistics::Manager(this, originalAlignment.Statistics);
 
         // Increase the number of elements using the shared information.
