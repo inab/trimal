@@ -35,10 +35,8 @@ void SSE2Cleaner::calculateSeqIdentity() {
   //	which means the end of the current scope.
   StartTiming("void SSE2Cleaner::calculateSeqIdentity(void) ");
 
-  // allocate aligned memory for faster SIMD loads
-  uint8_t* skipResidues = ALIGNED_ALLOC(alig->originalNumberOfResidues, uint8_t);
-
   // create a bitmask for residues to skip
+  uint8_t* skipResidues = ALIGNED_ALLOC(alig->originalNumberOfResidues, uint8_t);
   for(int i = 0; i < alig->originalNumberOfResidues; i++) {
       skipResidues[i] = alig->saveResidues[i] == -1 ? 0xFF : 0;
   }
@@ -63,6 +61,7 @@ void SSE2Cleaner::calculateSeqIdentity() {
   }
 
   // For each seq, compute its identity score against the others in the MSA
+  #pragma omp parallel for num_threads(NUMTHREADS) private(j, k, l) if(alig->originalNumberOfSequences>MINPARALLELSIZE)
   for (i = 0; i < alig->originalNumberOfSequences; i++) {
       if (alig->saveSequences[i] == -1) continue;
 
