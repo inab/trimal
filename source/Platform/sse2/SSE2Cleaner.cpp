@@ -22,32 +22,29 @@ static inline uint32_t _mm_hsum_epi8(__m128i a) {
     return _mm_extract_epi16(vsum, 0) + _mm_extract_epi16(vsum, 4);
 }
 
-SSE2Cleaner::SSE2Cleaner(Alignment* parent): Cleaner(parent) {
-    // allocate aligned memory for faster SIMD loads
-    hits_unaligned         = (uint32_t*)      malloc(sizeof(uint32_t) * alig->originalNumberOfResidues + 0xF);
-    hits_u8_unaligned      = (uint8_t*)       malloc(sizeof(uint8_t)  * alig->originalNumberOfResidues + 0xF);
-    skipResidues_unaligned = (unsigned char*) malloc(sizeof(char)     * alig->originalNumberOfResidues + 0xF);
+SSE2Cleaner::SSE2Cleaner(Alignment* parent): Cleaner(parent) {}
 
-    hits         = (uint32_t*)      (((uintptr_t) hits_unaligned         + 15) & (~0xF));
-    hits_u8      = (uint8_t*)       (((uintptr_t) hits_u8_unaligned      + 15) & (~0xF));
-    skipResidues = (unsigned char*) (((uintptr_t) skipResidues_unaligned + 15) & (~0xF));
-
-    // create an index for residues to skip
-    for(int i = 0; i < alig->originalNumberOfResidues; i++) {
-        skipResidues[i] = alig->saveResidues[i] == -1 ? 0xFF : 0;
-    }
-}
-
-SSE2Cleaner::~SSE2Cleaner() {
-    free(hits_u8_unaligned);
-    free(hits_unaligned);
-    free(skipResidues_unaligned);
-}
+SSE2Cleaner::SSE2Cleaner(Alignment* parent, Cleaner* mold): Cleaner(parent, mold) {}
 
 void SSE2Cleaner::calculateSeqIdentity() {
   // Create a timer that will report times upon its destruction
   //	which means the end of the current scope.
   StartTiming("void SSE2Cleaner::calculateSeqIdentity(void) ");
+
+
+
+  // allocate aligned memory for faster SIMD loads
+  hits_unaligned         = (uint32_t*)      malloc(sizeof(uint32_t) * alig->originalNumberOfResidues + 0xF);
+  hits_u8_unaligned      = (uint8_t*)       malloc(sizeof(uint8_t)  * alig->originalNumberOfResidues + 0xF);
+  skipResidues_unaligned = (unsigned char*) malloc(sizeof(char)     * alig->originalNumberOfResidues + 0xF);
+  hits         = (uint32_t*)      (((uintptr_t) hits_unaligned         + 15) & (~0xF));
+  hits_u8      = (uint8_t*)       (((uintptr_t) hits_u8_unaligned      + 15) & (~0xF));
+  skipResidues = (unsigned char*) (((uintptr_t) skipResidues_unaligned + 15) & (~0xF));
+
+  // create a bitmask for residues to skip
+  for(int i = 0; i < alig->originalNumberOfResidues; i++) {
+      skipResidues[i] = alig->saveResidues[i] == -1 ? 0xFF : 0;
+  }
 
   // declare indices
   int i, j, k, l;
@@ -167,6 +164,11 @@ void SSE2Cleaner::calculateSeqIdentity() {
           alig->identities[j][i] = alig->identities[i][j];
       }
   }
+  
+  // free SIMD buffers
+  free(hits_u8_unaligned);
+  free(hits_unaligned);
+  free(skipResidues_unaligned);
 }
 
 bool SSE2Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {

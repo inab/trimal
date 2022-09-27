@@ -271,7 +271,7 @@ public:
                 <b> False </b> otherwise.\n
       This should happen only if you pass a null pointer instead of a spuriousVector.
 */
-    bool calculateSpuriousVector(float overlap, float *spuriousVector);
+    virtual bool calculateSpuriousVector(float overlap, float *spuriousVector);
 
      /**
       \brief Method to remove sequences missaligned
@@ -432,7 +432,7 @@ public:
       \brief Method that makes a raw approximation of sequence identity computation.\n
       \note Designed for reducing comparisons for huge alignments.
       */
-    virtual void calculateRelaxedSeqIdentity();
+    void calculateRelaxedSeqIdentity();
 
      /**
         \brief Method to assign sequences to clusters.\n

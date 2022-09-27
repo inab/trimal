@@ -17,9 +17,9 @@ private:
     uint32_t* hits_unaligned;
 public:
     SSE2Cleaner(Alignment* parent);
-    ~SSE2Cleaner();
+    SSE2Cleaner(Alignment* parent, Cleaner* mold);
     void calculateSeqIdentity() override;
-    bool calculateSpuriousVector(float overlap, float *spuriousVector);
+    bool calculateSpuriousVector(float overlap, float *spuriousVector) override;
 };
 
 #endif

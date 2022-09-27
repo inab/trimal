@@ -129,7 +129,7 @@ Alignment::Alignment(Alignment &originalAlignment) {
 
         // Submodules
 #ifdef HAVE_SSE2
-        this->Cleaning = new SSE2Cleaner(this);
+        this->Cleaning = new SSE2Cleaner(this, originalAlignment.Cleaning);
 #else
         this->Cleaning = new Cleaner(this, originalAlignment.Cleaning);
 #endif
