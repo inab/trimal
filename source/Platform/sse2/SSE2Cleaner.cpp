@@ -14,8 +14,12 @@
 
 #include "Platform/sse2/SSE2Cleaner.h"
 
-#define NLANES_8  sizeof(__m128i) / sizeof(uint8_t)   // number of 8-bit lanes in __m128i
-#define NLANES_32 sizeof(__m128i) / sizeof(uint32_t)  // number of 32-bit lanes in __m128i
+#define NLANES_8   sizeof(__m128i) / sizeof(uint8_t)   // number of 8-bit lanes in __m128i
+#define NLANES_32  sizeof(__m128i) / sizeof(uint32_t)  // number of 32-bit lanes in __m128i
+
+#define ALLOC_MASK           (sizeof(__m128i) - 1)
+#define ALLOC_SIZE(N, T)     ((N * sizeof(T) + ALLOC_MASK) & (~ALLOC_MASK))
+#define ALIGNED_ALLOC(N, T)  (static_cast<T*>(aligned_alloc(sizeof(__m128i), ALLOC_SIZE(N, T))))
 
 static inline uint32_t _mm_hsum_epi8(__m128i a) {
     __m128i vsum = _mm_sad_epu8(a, _mm_setzero_si128());
@@ -31,15 +35,8 @@ void SSE2Cleaner::calculateSeqIdentity() {
   //	which means the end of the current scope.
   StartTiming("void SSE2Cleaner::calculateSeqIdentity(void) ");
 
-
-
   // allocate aligned memory for faster SIMD loads
-  hits_unaligned         = (uint32_t*)      malloc(sizeof(uint32_t) * alig->originalNumberOfResidues + 0xF);
-  hits_u8_unaligned      = (uint8_t*)       malloc(sizeof(uint8_t)  * alig->originalNumberOfResidues + 0xF);
-  skipResidues_unaligned = (unsigned char*) malloc(sizeof(char)     * alig->originalNumberOfResidues + 0xF);
-  hits         = (uint32_t*)      (((uintptr_t) hits_unaligned         + 15) & (~0xF));
-  hits_u8      = (uint8_t*)       (((uintptr_t) hits_u8_unaligned      + 15) & (~0xF));
-  skipResidues = (unsigned char*) (((uintptr_t) skipResidues_unaligned + 15) & (~0xF));
+  uint8_t* skipResidues = ALIGNED_ALLOC(alig->originalNumberOfResidues, uint8_t);
 
   // create a bitmask for residues to skip
   for(int i = 0; i < alig->originalNumberOfResidues; i++) {
@@ -89,9 +86,9 @@ void SSE2Cleaner::calculateSeqIdentity() {
           int hit = 0;
           int dst = 0;
 
-          // run with unrolled loops of UCHAR_MAX iterations first
-          for (k = 0; ((int) (k + NLANES_8*UCHAR_MAX)) < alig->originalNumberOfResidues;) {
-              for (l = 0; l < UCHAR_MAX; l++, k += NLANES_8) {
+          // run with unrolled loops of UINT8_MAX iterations first
+          for (k = 0; ((int) (k + NLANES_8*UINT8_MAX)) < alig->originalNumberOfResidues;) {
+              for (l = 0; l < UINT8_MAX; l++, k += NLANES_8) {
                   // load data for the sequences
                   seqi = _mm_loadu_si128( (const __m128i*) (&datai[k]));
                   seqj = _mm_loadu_si128( (const __m128i*) (&dataj[k]));
@@ -166,9 +163,7 @@ void SSE2Cleaner::calculateSeqIdentity() {
   }
   
   // free SIMD buffers
-  free(hits_u8_unaligned);
-  free(hits_unaligned);
-  free(skipResidues_unaligned);
+  free(skipResidues);
 }
 
 bool SSE2Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
@@ -179,6 +174,10 @@ bool SSE2Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) 
     // abort if there is not output vector to write to
     if (spuriousVector == nullptr)
         return false;
+
+    // allocate aligned memory for faster SIMD loads of partial column sums
+    uint32_t* hits    = ALIGNED_ALLOC(alig->originalNumberOfResidues, uint32_t);
+    uint8_t*  hits_u8 = ALIGNED_ALLOC(alig->originalNumberOfResidues, uint8_t);
 
     // compute number of sequences from overlap threshold
     uint32_t  ovrlap  = uint32_t(ceil(overlap * float(alig->originalNumberOfSequences - 1)));
@@ -246,10 +245,10 @@ bool SSE2Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) 
                 hits_u8[k] += ((nongapi && nongapj) || (datai[k] == dataj[k]));
             }
 
-            // we can process up to UCHAR_MAX sequences, otherwise hits_u8[k]
-            // may overflow, so every UCHAR_MAX iterations we transfer the
+            // we can process up to UINT8_MAX sequences, otherwise hits_u8[k]
+            // may overflow, so every UINT8_MAX iterations we transfer the
             // partial hit counts from `hits_u8` to `hits`
-            if ((j % UCHAR_MAX) == 0) {
+            if ((j % UINT8_MAX) == 0) {
                 for (k = 0; k < alig->originalNumberOfResidues; k++) hits[k] += hits_u8[k];
                 memset(hits_u8, 0, alig->originalNumberOfResidues*sizeof(uint8_t));
             }
@@ -268,6 +267,10 @@ bool SSE2Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) 
         // above overlap threshold
         spuriousVector[i] = ((float) seqValue / alig->originalNumberOfResidues);
     }
+
+    // free temporary memory
+    free(hits);
+    free(hits_u8);
 
     // If there is not problem in the method, return true
     return true;
