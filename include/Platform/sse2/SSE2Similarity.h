@@ -39,14 +39,9 @@
 
 namespace statistics {
     class SSE2Similarity: public Similarity {
-    // private:
-    //     std::vector<char> ascii_vhash;
-    //     std::vector<char> colgap;
-    //     std::string column;
     public:
         SSE2Similarity(Alignment* parentAlignment);
         void calculateMatrixIdentity() override;
-        bool calculateVectors(bool cutByGap) override;
     };
 }
 

@@ -56,9 +56,7 @@ namespace statistics {
 
         /// Allows Similarity to access the internal state, e.g. to cache 
         /// the rows of the distance matrix.
-#ifdef HAVE_SSE2
-        friend class SSE2Similarity;
-#endif
+        friend class Similarity;
 
     private:
         /**

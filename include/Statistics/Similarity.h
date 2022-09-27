@@ -88,7 +88,7 @@ namespace statistics {
             \brief Method to calculate the similarity values of a alignment matrix.
             \param cutByGap Wheter to cut by gap or not
         */
-        virtual bool calculateVectors(bool cutByGap = true);
+        bool calculateVectors(bool cutByGap = true);
 
         /**
             \brief Allows us compute the conservationWindow's values.
