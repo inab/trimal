@@ -1,3 +1,5 @@
+#ifdef HAVE_SSE2
+
 #include <immintrin.h>
 #include <climits>
 #include <cstdint>
@@ -268,3 +270,5 @@ bool SSECleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
     // If there is not problem in the method, return true
     return true;
 }
+
+#endif

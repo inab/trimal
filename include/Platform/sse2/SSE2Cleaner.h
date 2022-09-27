@@ -1,6 +1,8 @@
 #ifndef TRIMAL_SSE2CLEANER_H
 #define TRIMAL_SSE2CLEANER_H
 
+#ifdef HAVE_SSE2
+
 #include "Cleaner.h"
 
 class SSECleaner: public Cleaner {
@@ -20,4 +22,5 @@ public:
     bool calculateSpuriousVector(float overlap, float *spuriousVector);
 };
 
+#endif
 #endif

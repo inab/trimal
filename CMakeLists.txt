@@ -7,31 +7,34 @@ set(CMAKE_CXX_STANDARD 11)
 # Specify bin folder to output the compiled programs
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
+# Detect x86 platform
+option(X86 "X86" OFF)
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(AMD64|x86|X86|x86_64)")
+  set(X86 ON)
+endif()
+
+# Set common files for all executables
+set(TRIMAL_OBJECTS
+    $<TARGET_OBJECTS:CoreOBJLib>
+    $<TARGET_OBJECTS:FormatsOBJLib>
+    $<TARGET_OBJECTS:FormatHandlerOBJLib>
+    $<TARGET_OBJECTS:ReportSystemOBJLib>
+    $<TARGET_OBJECTS:StatisticOBJLib>
+    $<TARGET_OBJECTS:UtilsOBJLib>
+    $<TARGET_OBJECTS:InternalBenchmarkOBJLib>
+    $<TARGET_OBJECTS:SSE2OBJLib>)
+
 # Add the executables to the project.
 add_executable(trimal
         source/trimAlMain.cpp               # Main
         source/trimalManager.cpp            # trimAl Manager
 
         source/VCFHandler.cpp               # VCF only present on trimAl
-        # No need to transform to OBJLib
-        $<TARGET_OBJECTS:CoreOBJLib>
-        $<TARGET_OBJECTS:FormatsOBJLib>
-        $<TARGET_OBJECTS:FormatHandlerOBJLib>
-        $<TARGET_OBJECTS:ReportSystemOBJLib>
-        $<TARGET_OBJECTS:StatisticOBJLib>
-        $<TARGET_OBJECTS:UtilsOBJLib>
-        $<TARGET_OBJECTS:InternalBenchmarkOBJLib>)
+        ${TRIMAL_OBJECTS})
 
 add_executable(readal
         source/FormatHandling/readAlMain.cpp        # Main
-
-        $<TARGET_OBJECTS:CoreOBJLib>
-        $<TARGET_OBJECTS:FormatsOBJLib>
-        $<TARGET_OBJECTS:FormatHandlerOBJLib>
-        $<TARGET_OBJECTS:ReportSystemOBJLib>
-        $<TARGET_OBJECTS:StatisticOBJLib>
-        $<TARGET_OBJECTS:UtilsOBJLib>
-        $<TARGET_OBJECTS:InternalBenchmarkOBJLib>)
+        ${TRIMAL_OBJECTS})
 
 # Add the executables to the project.
 add_executable(test
@@ -41,16 +44,9 @@ add_executable(test
 
         source/VCFHandler.cpp               # VCF only present on trimAl
         # No need to transform to OBJLib
-        $<TARGET_OBJECTS:CoreOBJLib>
-        $<TARGET_OBJECTS:FormatsOBJLib>
-        $<TARGET_OBJECTS:FormatHandlerOBJLib>
-        $<TARGET_OBJECTS:ReportSystemOBJLib>
-        $<TARGET_OBJECTS:StatisticOBJLib>
-        $<TARGET_OBJECTS:UtilsOBJLib>
-        $<TARGET_OBJECTS:InternalBenchmarkOBJLib>
+        ${TRIMAL_OBJECTS}
         $<TARGET_OBJECTS:CatchOBJLib>
-        $<TARGET_OBJECTS:TestsOBJLib>
-        )
+        $<TARGET_OBJECTS:TestsOBJLib>)
 SET_TARGET_PROPERTIES(test PROPERTIES EXCLUDE_FROM_ALL True)
 
 # Link the mathematical library to the targets
@@ -61,6 +57,9 @@ target_link_libraries(test stdc++fs)
 
 # Script that sets Release type to default and prints information on configuration
 include("./scripts/CMake/BuildTypeWrapper.cmake")
+
+# Script to detect SSE2 support for the current compiler
+include("./scripts/CMake/FindSSE2.cmake")
 
 # Script to handle static and dynamic compilation.
 #   Static compilation is useful if compiling for containers without SO
@@ -78,4 +77,3 @@ include("./scripts/CMake/FormatHandlerOverwritePolicy.cmake")
 # Script to create the Format Handler constructor, which incorporates
 #   all found stats to the internal pool of the handler
 include("./scripts/CMake/FormatHandlerHeaderCreator.cmake")
-

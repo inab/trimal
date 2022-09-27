@@ -24,6 +24,9 @@ set(reportSystemFiles
         source/reportMessages/errorMessages.cpp
         source/reportMessages/warningMessages.cpp)
 
+FILE (GLOB SSE2Files
+        source/Platform/sse2/*.cpp)
+
 FILE (GLOB FormatHandlerFiles
         source/FormatHandling/*_state.cpp)
 
@@ -58,3 +61,9 @@ add_library(TestsOBJLib             OBJECT ${tests})
 SET_TARGET_PROPERTIES(CatchOBJLib PROPERTIES EXCLUDE_FROM_ALL True)
 SET_TARGET_PROPERTIES(TestsOBJLib PROPERTIES EXCLUDE_FROM_ALL True)
 
+# SSE2 Code
+add_library(SSE2OBJLib OBJECT ${SSE2Files})
+if (HAVE_SSE2)
+  message(STATUS "Build platform-specific code for SSE2 CPU extensions.")
+  add_compile_definitions(HAVE_SSE2=1)
+endif()
