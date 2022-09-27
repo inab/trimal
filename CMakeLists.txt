@@ -21,8 +21,10 @@ set(TRIMAL_OBJECTS
     $<TARGET_OBJECTS:ReportSystemOBJLib>
     $<TARGET_OBJECTS:StatisticOBJLib>
     $<TARGET_OBJECTS:UtilsOBJLib>
-    $<TARGET_OBJECTS:InternalBenchmarkOBJLib>
-    $<TARGET_OBJECTS:SSE2OBJLib>)
+    $<TARGET_OBJECTS:InternalBenchmarkOBJLib>)
+if(HAVE_SSE2)
+  list(APPEND TRIMAL_OBJECTS $<TARGET_OBJECTS:SSE2OBJLib>)
+endif()
 
 # Add the executables to the project.
 add_executable(trimal
