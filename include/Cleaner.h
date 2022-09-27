@@ -425,14 +425,14 @@ public:
       \brief Method to calculate identities between the sequences from the alignment.\n
       See Alignment::identities
       */
-    void calculateSeqIdentity();
+    virtual void calculateSeqIdentity();
 
      /**
       \warning Not In Use
       \brief Method that makes a raw approximation of sequence identity computation.\n
       \note Designed for reducing comparisons for huge alignments.
       */
-    void calculateRelaxedSeqIdentity();
+    virtual void calculateRelaxedSeqIdentity();
 
      /**
         \brief Method to assign sequences to clusters.\n
@@ -475,7 +475,7 @@ public:
      */
     void removeDuplicates();
 
-private:
+protected:
 
     friend class Alignment;
 

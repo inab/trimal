@@ -22,7 +22,7 @@ static inline uint32_t _mm_hsum_epi8(__m128i a) {
     return _mm_extract_epi16(vsum, 0) + _mm_extract_epi16(vsum, 4);
 }
 
-SSECleaner::SSECleaner(Alignment* parent): Cleaner(parent) {
+SSE2Cleaner::SSE2Cleaner(Alignment* parent): Cleaner(parent) {
     // allocate aligned memory for faster SIMD loads
     hits_unaligned         = (uint32_t*)      malloc(sizeof(uint32_t) * alig->originalNumberOfResidues + 0xF);
     hits_u8_unaligned      = (uint8_t*)       malloc(sizeof(uint8_t)  * alig->originalNumberOfResidues + 0xF);
@@ -38,16 +38,16 @@ SSECleaner::SSECleaner(Alignment* parent): Cleaner(parent) {
     }
 }
 
-SSECleaner::~SSECleaner() {
+SSE2Cleaner::~SSE2Cleaner() {
     free(hits_u8_unaligned);
     free(hits_unaligned);
     free(skipResidues_unaligned);
 }
 
-void SSECleaner::calculateSeqIdentity() {
+void SSE2Cleaner::calculateSeqIdentity() {
   // Create a timer that will report times upon its destruction
   //	which means the end of the current scope.
-  StartTiming("void SSECleaner::calculateSeqIdentity(void) ");
+  StartTiming("void SSE2Cleaner::calculateSeqIdentity(void) ");
 
   // declare indices
   int i, j, k, l;
@@ -169,10 +169,10 @@ void SSECleaner::calculateSeqIdentity() {
   }
 }
 
-bool SSECleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
+bool SSE2Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("bool SSECleaner::calculateSpuriousVector(float overlap, float *spuriousVector) ");
+    StartTiming("bool SSE2Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) ");
 
     // abort if there is not output vector to write to
     if (spuriousVector == nullptr)

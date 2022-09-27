@@ -5,7 +5,7 @@
 
 #include "Cleaner.h"
 
-class SSECleaner: public Cleaner {
+class SSE2Cleaner: public Cleaner {
 private:
     // SIMD index for which residues can be skipped in `skipResidues`
     unsigned char* skipResidues;
@@ -16,8 +16,8 @@ private:
     uint32_t* hits;
     uint32_t* hits_unaligned;
 public:
-    SSECleaner(Alignment* parent);
-    ~SSECleaner();
+    SSE2Cleaner(Alignment* parent);
+    ~SSE2Cleaner();
     void calculateSeqIdentity() override;
     bool calculateSpuriousVector(float overlap, float *spuriousVector);
 };
