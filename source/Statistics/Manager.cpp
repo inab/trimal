@@ -32,6 +32,10 @@
 #include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
 
+#ifdef HAVE_SSE2
+#include "Platform/sse2/SSE2Similarity.h"
+#endif
+
 namespace statistics {
     bool Manager::calculateConservationStats() {
         // Create a timerLevel that will report times upon its destruction
@@ -47,7 +51,11 @@ namespace statistics {
         // It the similarity statistics object has not been
         // created we create it
         if (similarity == nullptr) {
+#ifdef HAVE_SSE2
+            similarity = new SSE2Similarity(alig);
+#else
             similarity = new Similarity(alig);
+#endif
             similarity->setSimilarityMatrix(_similarityMatrix);
             similarity->applyWindow(shWindow);
         }
@@ -105,8 +113,13 @@ namespace statistics {
         _similarityMatrix = sm;
 
         // If scons object is not created, we create them
-        if (alig->Statistics->similarity == nullptr)
+        if (alig->Statistics->similarity == nullptr) {
+#ifdef HAVE_SSE2
+            alig->Statistics->similarity = new SSE2Similarity(alig);
+#else
             alig->Statistics->similarity = new Similarity(alig);
+#endif
+        }
 
         // Associate the matrix to the similarity statistics object
         // If it's OK, we return true

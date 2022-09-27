@@ -54,6 +54,12 @@ namespace statistics {
         float **distMat;
         int numPositions;
 
+        /// Allows Similarity to access the internal state, e.g. to cache 
+        /// the rows of the distance matrix.
+#ifdef HAVE_SSE2
+        friend class SSE2Similarity;
+#endif
+
     private:
         /**
          * \brief Method to allocate memory for the similiarity matrix

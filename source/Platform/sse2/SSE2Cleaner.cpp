@@ -37,8 +37,6 @@
 #include <cstdint>
 
 #include "Alignment/Alignment.h"
-#include "Statistics/Manager.h"
-#include "Statistics/Similarity.h"
 #include "InternalBenchmarker.h"
 #include "reportsystem.h"
 #include "defines.h"
