@@ -82,7 +82,7 @@ void SSE2Similarity::calculateMatrixIdentity() {
     }
 
     // Depending on alignment type, indetermination symbol will be one or other
-    char indet = alig->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
+    const char indet = alig->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
     // prepare constant SIMD vectors
     const __m128i allindet = _mm_set1_epi8(indet);
@@ -90,6 +90,7 @@ void SSE2Similarity::calculateMatrixIdentity() {
     const __m128i ONES     = _mm_set1_epi8(1);
 
     // For each sequences' pair, compare identity
+    // #pragma omp parallel for num_threads(NUMTHREADS) private(j, k, l) if(alig->originalNumberOfSequences>MINPARALLELSIZE)
     for (i = 0; i < alig->originalNumberOfSequences; i++) {
         for (j = i + 1; j < alig->originalNumberOfSequences; j++) {
 
@@ -203,20 +204,9 @@ bool SSE2Similarity::calculateVectors(bool cutByGap) {
 
     // Initialize the variables used
     int i, j, k;
-    float num, den;
 
     // Depending on alignment type, indetermination symbol will be one or other
     char indet = alig->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
-
-    // Q temporal value
-    float Q;
-    // Temporal chars that will contain the residues to compare by pair.
-    char chA, chB;
-    int numA, numB;
-
-    // Cache pointer to rows of distance and identity matrices
-    float* distRow;
-    float* identityRow;
 
     // Calculate the maximum number of gaps a column can have to calculate it's
     //      similarity
@@ -224,6 +214,20 @@ bool SSE2Similarity::calculateVectors(bool cutByGap) {
 
     // For each column calculate the Q value and the MD value using an equation
     for (i = 0; i < alig->originalNumberOfResidues; i++) {
+
+        // numerator and denominator of the fractions
+        float num, den;
+        // Q temporal value
+        float Q;
+
+        // temporary chars that will contain the residues to compare by pair.
+        char chA, chB;
+        int numA, numB;
+
+        // Cache pointer to rows of distance and identity matrices
+        float* distRow;
+        float* identityRow;
+
         // Set MDK for columns with gaps values bigger or equal to 0.8F
         if (cutByGap && (gaps[i] >= gapThreshold)) {
             MDK[i] = 0.F;
