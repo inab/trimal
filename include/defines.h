@@ -45,6 +45,9 @@
 #define HTMLBLOCKS 120
 #define PHYLIPDISTANCE 10
 
+#define MINPARALLELSIZE 50
+#define NUMTHREADS 8
+
  /**
 \file defines.h
 \enum SequenceTypes

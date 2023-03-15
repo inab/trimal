@@ -256,8 +256,10 @@ enum ErrorCode {
     MoreThanOneAutomatedMethod                          = 111,
 
 
-    ForceSelectAndInArgumentsProvided                   = 108,
-    ComparesetAndInArgumentsProvided                   = 109,
+    ForceSelectAndInArgumentsProvided                   = 112,
+    ComparesetAndInArgumentsProvided                    = 113,
+
+    NoResidueSequences                                  = 114,
 
 
     __MAXERROR,

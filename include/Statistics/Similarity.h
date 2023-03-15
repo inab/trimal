@@ -76,7 +76,7 @@ namespace statistics {
 
     public:
         /** \brief Computes the matrix identity between alignment's columns. */
-        void calculateMatrixIdentity();
+        virtual void calculateMatrixIdentity();
 
         /** \brief Constructor without any parameters */
         explicit Similarity(Alignment * parentAlignment);
@@ -114,7 +114,7 @@ namespace statistics {
             \param sm Similarity matrix pointer to associate.
             \return \b True if sm is valid, \b False if it's null
         */
-        bool setSimilarityMatrix(similarityMatrix * sm);
+        virtual bool setSimilarityMatrix(similarityMatrix * sm);
 
         /**
             \brief Returns if a similarity matrix is being used or not.

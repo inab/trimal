@@ -40,8 +40,11 @@
 #include "Statistics/Manager.h"
 #include "Alignment/sequencesMatrix.h"
 #include "reportsystem.h"
-#include "Cleaner.h"
-#include "utils.h"
+#include "omp.h"
+
+#ifdef HAVE_SSE2
+#include "Platform/sse2/SSE2Cleaner.h"
+#endif
 
 Alignment::Alignment() {
     // Create a timer that will report times upon its destruction
@@ -49,7 +52,11 @@ Alignment::Alignment() {
     StartTiming("Alignment::Alignment(void) ");
 
     // Submodules
+#ifdef HAVE_SSE2
+    Cleaning = new SSE2Cleaner(this);
+#else
     Cleaning = new Cleaner(this);
+#endif
     Statistics = new statistics::Manager(this);
 
     // Sizes
@@ -121,7 +128,11 @@ Alignment::Alignment(Alignment &originalAlignment) {
                       saveResidues);
 
         // Submodules
+#ifdef HAVE_SSE2
+        this->Cleaning = new SSE2Cleaner(this, originalAlignment.Cleaning);
+#else
         this->Cleaning = new Cleaner(this, originalAlignment.Cleaning);
+#endif
         this->Statistics = new statistics::Manager(this, originalAlignment.Statistics);
 
         // Increase the number of elements using the shared information.
@@ -391,10 +402,12 @@ void Alignment::calculateSeqOverlap() {
     // Create overlap matrix to store overlap scores
     overlaps = new float *[numberOfSequences];
 
+    #pragma omp parallel for num_threads(NUMTHREADS) if(numberOfSequences>MINPARALLELSIZE)
+    for(i = 0; i < numberOfSequences; i++) overlaps[i] = new float[numberOfSequences];
+
+    #pragma omp parallel for num_threads(NUMTHREADS) collapse(2) private(k, shared, referenceLength) if(numberOfSequences>MINPARALLELSIZE)
     // For each seq, compute its overlap score against the others in the MSA
     for (i = 0; i < numberOfSequences; i++) {
-        overlaps[i] = new float[numberOfSequences];
-
         for (j = 0; j < numberOfSequences; j++) {
             for (k = 0, shared = 0, referenceLength = 0; k < numberOfResidues; k++) {
                 // If there a valid residue for the reference sequence, then see if
@@ -924,6 +937,7 @@ void Alignment::printSeqIdentity() {
     // For each sequence, we look for its most similar one
     maxs = new float *[originalNumberOfSequences];
 
+    #pragma omp parallel for private(k, mx, avg, pos) reduction(+: avgSeq, maxAvgSeq) num_threads(NUMTHREADS) if(originalNumberOfSequences>MINPARALLELSIZE)
     for (i = 0; i < originalNumberOfSequences; i++) {
         maxs[i] = new float[2];
 

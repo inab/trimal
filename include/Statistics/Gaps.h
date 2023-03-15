@@ -48,6 +48,7 @@ namespace statistics {
 
         int maxGaps = -1;
         int halfWindow = -1;
+        int totalGaps = -1;
 
         int *gapsInColumn = nullptr;
         int *numColumnsWithGaps = nullptr;
