@@ -27,13 +27,12 @@ compute_seqs_stats() {
 compute_sum_of_pairs_stats() {
     file=$1
     original_num_seqs=$(grep -c ">" $file)
-    original_num_cols=$(while read line; do echo $line; [ -z $line ] && break; done <<<  "$(awk -F '>' '{print $1}' ${file} | tail -n +2)" | paste -sd '' | wc -c)
+    original_num_cols=$(awk '/^>/{l=0; next}{l+=length($0)}END{print l}' ${file})
     ref=$(basename $file | awk -F '.' '{print $1}')
     ref_alignment_name="$dataset_ref_alignments/$ref"
     python3 $filter_reference_sequences_script -i $file -r $ref_alignment_name.ref
     $trimal_local -in ${file}_filtered_refs -noallgaps > "${file}_no_all_gaps_cols"
     clean_num_seqs=$(grep -c ">" ${file}_no_all_gaps_cols)
-    #clean_num_cols=$(while read line; do echo $line; [ -z $line ] && break; done <<<  "$(awk -F '>' '{print $1}' ${file}_no_all_gaps_cols | tail -n +2)" | paste -sd '' | wc -c)
 
     filename=$(echo $file | awk -F '/' '{print $NF}')
     ref=$(basename $file | awk -F '.' '{print $1}')
@@ -141,6 +140,45 @@ compute_sum_of_pairs_stats() {
         trimmed_alignment_SoP_strictplus=0
     fi
 
+    
+    trimmed_column_positions_automated2=$($trimal_local -in ${file}_no_all_gaps_cols -automated2 -colnumbering | grep "#ColumnsMap" | awk '{print substr($0,13)}')
+    if [ -n "$trimmed_column_positions_automated2" ]; then
+        > SoP_by_column_${filename}_trimmed_automated2.txt
+        # -colnumbering returns columns starting by 0 and -sfc starting by 1
+        for column_position in ${trimmed_column_positions_automated2//,/};
+        do
+            col_pos=$((column_position + 1))
+            sed "${col_pos}q;d" SoP_by_column_$filename.txt >> SoP_by_column_${filename}_trimmed_automated2.txt
+        done
+
+        trimmed_alignment_size_automated2=$(wc --line < SoP_by_column_${filename}_trimmed_automated2.txt)
+        if [[ $(echo "$trimmed_alignment_size_automated2 % 2" | bc) == '0' ]]; then
+            median_pos_first=$(echo "$trimmed_alignment_size_automated2 / 2" | bc)
+            median_pos_second=$(echo "$median_pos_first + 1" | bc)
+            median_first=$(sed "${median_pos_first}q;d" SoP_by_column_${filename}_trimmed_automated2.txt)
+            median_second=$(sed "${median_pos_second}q;d" SoP_by_column_${filename}_trimmed_automated2.txt)
+            median_alignment_automated2=$(echo "($median_first + $median_second) / 2" | bc)
+        else
+            median_pos=$(echo "$trimmed_alignment_size_automated2 / 2 + 1" | bc)
+            median_alignment_automated2=$(sed "${median_pos}q;d" SoP_by_column_${filename}_trimmed_automated2.txt)
+        fi
+
+        min_SoP_trimmed_alignment_automated2=$(sort SoP_by_column_${filename}_trimmed_automated2.txt | head -n 1)
+        max_SoP_trimmed_alignment_automated2=$(sort SoP_by_column_${filename}_trimmed_automated2.txt | tail -n 1)
+        SoP_by_column_trimmed_sum=$(paste -sd+ SoP_by_column_${filename}_trimmed_automated2.txt | bc)
+        trimmed_alignment_SoP_automated2=$(echo "$SoP_by_column_trimmed_sum / $trimmed_alignment_size_automated2" | bc -l)
+        std_alignment_SoP_automated2=$(awk -v avg_SoP=$trimmed_alignment_SoP_automated2 -v size=$trimmed_alignment_size_automated2 '{n += ($1 - avg_SoP) ** 2}; END{print sqrt(n/size)}'\
+        SoP_by_column_${filename}_trimmed_automated2.txt)
+        rm SoP_by_column_${filename}_trimmed_automated2.txt 
+    else
+        trimmed_alignment_size_automated2=0
+        median_alignment_automated2=0
+        min_SoP_trimmed_alignment_automated2=0
+        max_SoP_trimmed_alignment_automated2=0
+        std_alignment_SoP_automated2=0
+        trimmed_alignment_SoP_automated2=0
+    fi
+
     rm ${file}_filtered_refs
     rm ${file}_no_all_gaps_cols
     rm SoP_output_${filename}.txt
@@ -151,57 +189,80 @@ compute_sum_of_pairs_stats() {
     "$min_SoP_trimmed_alignment_gappyout,$max_SoP_trimmed_alignment_gappyout,$median_alignment_gappyout,"\
     "$std_alignment_SoP_gappyout,$trimmed_alignment_SoP_gappyout,$trimmed_alignment_size_strictplus,"\
     "$min_SoP_trimmed_alignment_strictplus,$max_SoP_trimmed_alignment_strictplus,$median_alignment_strictplus,"\
-    "$std_alignment_SoP_strictplus,$trimmed_alignment_SoP_strictplus"
+    "$std_alignment_SoP_strictplus,$trimmed_alignment_SoP_strictplus,$trimmed_alignment_size_automated2,"\
+    "$min_SoP_trimmed_alignment_automated2,$max_SoP_trimmed_alignment_automated2,$median_alignment_automated2,"\
+    "$std_alignment_SoP_automated2,$trimmed_alignment_SoP_automated2"
+
+
+
 }
 
-compute_sum_of_pairs() {
+compute_sum_of_pairs_automated3() {
     file=$1
+    ref=$(basename $file | awk -F '.' '{print $1}')
+    ref_alignment_name="$dataset_ref_alignments/$ref"
+    python3 $filter_reference_sequences_script -i $file -r $ref_alignment_name.ref
+    $trimal_local -in ${file}_filtered_refs -noallgaps > "${file}_no_all_gaps_cols"
+
     filename=$(echo $file | awk -F '/' '{print $NF}')
     ref=$(basename $file | awk -F '.' '{print $1}')
     ref_alignment_name="$dataset_ref_alignments/$ref"
-    #echo "trimming $filename"
+    if [ ! -s ref_alignment_SoP_$ref.txt ]; then
+        echo $ref_alignment_name.ref > ref_alignment_SoP_$ref.txt
+    fi
 
-    # write ref alignment in set_alignments_SoP.txt
-    echo $ref_alignment_name.ref > ref_alignment_SoP_$ref.txt
-    $trimal_local -sfc -compareset ref_alignment_SoP_$ref.txt -forceselect $file > SoP_output_$filename.txt
-    original_num_cols=$(cat SoP_output_$filename.txt | tail -n 1 | awk '{print $1}')
+    $trimal_local -sfc -compareset ref_alignment_SoP_$ref.txt -forceselect ${file}_no_all_gaps_cols > SoP_output_${filename}.txt
     tail -n +9 SoP_output_${filename}.txt | awk '{print $2}' > SoP_by_column_${filename}.txt
-    SoP_by_column_sum=$(paste -sd+ SoP_by_column_${filename}.txt | bc)
-    clean_alignment_size=$(wc --line < SoP_by_column_${filename}.txt)
-    alignment_SoP=$(echo "$SoP_by_column_sum / $clean_alignment_size" | bc -l)
 
-    trimmed_column_positions_gappyout=$($trimal_local -in $file -gappyout -colnumbering | grep "#ColumnsMap" | awk '{print substr($0,13)}')
-    > SoP_by_column_${filename}_trimmed_gappyout.txt
-    # -colnumbering returns columns starting by 0 and -sfc starting by 1
-    for column_position in ${trimmed_column_positions_gappyout//,/};
-    do
-        col_pos=$((column_position + 1))
-        sed "${col_pos}q;d" SoP_by_column_$filename.txt >> SoP_by_column_${filename}_trimmed_gappyout.txt
-    done
+    
+    trimmed_column_positions_automated3=$($trimal_local -in ${file}_no_all_gaps_cols -automated3 -colnumbering | grep "#ColumnsMap" | awk '{print substr($0,13)}')
+    if [ -n "$trimmed_column_positions_automated3" ]; then
+        > SoP_by_column_${filename}_trimmed_automated3.txt
+        # -colnumbering returns columns starting by 0 and -sfc starting by 1
+        for column_position in ${trimmed_column_positions_automated3//,/};
+        do
+            col_pos=$((column_position + 1))
+            sed "${col_pos}q;d" SoP_by_column_$filename.txt >> SoP_by_column_${filename}_trimmed_automated3.txt
+        done
+
+        trimmed_alignment_size_automated3=$(wc --line < SoP_by_column_${filename}_trimmed_automated3.txt)
+        if [[ $(echo "$trimmed_alignment_size_automated3 % 2" | bc) == '0' ]]; then
+            median_pos_first=$(echo "$trimmed_alignment_size_automated3 / 2" | bc)
+            median_pos_second=$(echo "$median_pos_first + 1" | bc)
+            median_first=$(sed "${median_pos_first}q;d" SoP_by_column_${filename}_trimmed_automated3.txt)
+            median_second=$(sed "${median_pos_second}q;d" SoP_by_column_${filename}_trimmed_automated3.txt)
+            median_alignment_automated3=$(echo "($median_first + $median_second) / 2" | bc)
+        else
+            median_pos=$(echo "$trimmed_alignment_size_automated3 / 2 + 1" | bc)
+            median_alignment_automated3=$(sed "${median_pos}q;d" SoP_by_column_${filename}_trimmed_automated3.txt)
+        fi
+
+        min_SoP_trimmed_alignment_automated3=$(sort SoP_by_column_${filename}_trimmed_automated3.txt | head -n 1)
+        max_SoP_trimmed_alignment_automated3=$(sort SoP_by_column_${filename}_trimmed_automated3.txt | tail -n 1)
+        SoP_by_column_trimmed_sum=$(paste -sd+ SoP_by_column_${filename}_trimmed_automated3.txt | bc)
+        trimmed_alignment_SoP_automated3=$(echo "$SoP_by_column_trimmed_sum / $trimmed_alignment_size_automated3" | bc -l)
+        std_alignment_SoP_automated3=$(awk -v avg_SoP=$trimmed_alignment_SoP_automated3 -v size=$trimmed_alignment_size_automated3 '{n += ($1 - avg_SoP) ** 2}; END{print sqrt(n/size)}'\
+        SoP_by_column_${filename}_trimmed_automated3.txt)
+        rm SoP_by_column_${filename}_trimmed_automated3.txt 
+    else
+        trimmed_alignment_size_automated3=0
+        median_alignment_automated3=0
+        min_SoP_trimmed_alignment_automated3=0
+        max_SoP_trimmed_alignment_automated3=0
+        std_alignment_SoP_automated3=0
+        trimmed_alignment_SoP_automated3=0
+    fi
+
+    rm ${file}_filtered_refs
+    rm ${file}_no_all_gaps_cols
+    rm SoP_output_${filename}.txt
+    rm SoP_by_column_${filename}.txt
 
 
-    SoP_by_column_trimmed_sum=$(paste -sd+ SoP_by_column_${filename}_trimmed_gappyout.txt | bc)
-    trimmed_alignment_size_gappyout=$(wc --line < SoP_by_column_${filename}_trimmed_gappyout.txt)
-    trimmed_alignment_SoP_gappyout=$(echo "$SoP_by_column_trimmed_sum / $trimmed_alignment_size_gappyout" | bc -l)
 
-    trimmed_column_positions_strictplus=$($trimal_local -in $file -strictplus -colnumbering | grep "#ColumnsMap" | awk '{print substr($0,13)}')
-    > SoP_by_column_${filename}_trimmed_strictplus.txt
-    # -colnumbering returns columns starting by 0 and -sfc starting by 1
-    for column_position in ${trimmed_column_positions_strictplus//,/};
-    do
-        col_pos=$((column_position + 1))
-        sed "${col_pos}q;d" SoP_by_column_$filename.txt >> SoP_by_column_${filename}_trimmed_strictplus.txt
-    done
-
-
-    SoP_by_column_trimmed_sum=$(paste -sd+ SoP_by_column_${filename}_trimmed_strictplus.txt | bc)
-    trimmed_alignment_size_strictplus=$(wc --line < SoP_by_column_${filename}_trimmed_strictplus.txt)
-    trimmed_alignment_SoP_strictplus=$(echo "$SoP_by_column_trimmed_sum / $trimmed_alignment_size_strictplus" | bc -l)
-
-    echo "$filename; clean_alignment_columns=$clean_alignment_size; clean_msa_alignment_SoP=$alignment_SoP; trimmed_alignment_SoP_gappyout=$trimmed_alignment_SoP_gappyout;"\
-    "trimmed_alignment_SoP_strictplus=$trimmed_alignment_SoP_strictplus"
-
-    echo $filename >> alignments.txt
+    echo "$filename,$trimmed_alignment_size_automated3,"\
+    "$min_SoP_trimmed_alignment_automated3,$max_SoP_trimmed_alignment_automated3,$median_alignment_automated3,"\
+    "$std_alignment_SoP_automated3,$trimmed_alignment_SoP_automated3"
 }
 
 remove_all_gaps_columns() {

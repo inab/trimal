@@ -9,8 +9,12 @@ task() {
     filename=$(echo $file | awk -F '/' '{print $(NF-3)"_"$(NF-2)"_"$NF}')
     folder_path=$(dirname $file)
     tree_file="$file.treefile"
+    #if [ ! -s "$tree_file" ]; then
+    #    iqtree -nt 2 -quiet -redo -mredo -cptime 240 -mem 4G -cmin 4 -cmax 10 -s $file -bb 1000 -mset GTR
+    #fi
+
     number_sequences=$(grep -c ">" $file)
-    number_columns=$(while read line; do echo $line; [ -z $line ] && break; done <<<  "$(awk -F '>' '{print $1}' ${file} | tail -n +2)" | paste -sd '' | wc -c || echo -1)
+    number_columns=$(awk '/^>/{l=0; next}{l+=length($0)}END{print l}' $file)
     ref_tree=$(find $folder_path -name *.reference.nwk)
     RF_distance=$(ete3 compare -t $tree_file -r $ref_tree --unrooted > temp_RF_distance_$filename.txt &&
             awk 'FNR == 3 {print $9}' temp_RF_distance_$filename.txt || 
@@ -68,12 +72,19 @@ task() {
         RF_distance_diff=-1
     fi
 
-    echo "$taxon,$problem_num,$number_sequences,$number_columns,$MSA_tool,$MSA_filter_tool,$RF_distance,$RF_distance_diff"
+    if (( $(echo "$RF_distance_diff == 0" | bc -l) )) ; then
+        RF_distance_change="unchanged"
+    elif (( $(echo "$RF_distance_diff < 0" | bc -l) )); then
+        RF_distance_change="worse"
+    elif (( $(echo "$RF_distance_diff > 0" | bc -l) )); then
+        RF_distance_change="better"
+    else
+        RF_distance_change="error"
+    fi
+
+    echo "$taxon,$problem_num,$number_sequences,$number_columns,$MSA_tool,$MSA_filter_tool,$RF_distance,$RF_distance_diff,$RF_distance_change"
 
     #rm temp_RF_distance_$MSA_tool_filename.txt
-    end_file_time=$(date +%s.%N)
-    file_time=$(echo "$end_file_time - $start_file_time" | bc)
-    #echo "$filename processed in $file_time seconds"
 }
 
 

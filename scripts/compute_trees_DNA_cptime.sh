@@ -1,16 +1,19 @@
 #!/bin/bash
-res_type=$1
-problem_nums=$2
-taxon_name=$3
+problem_nums=$1
+taxon_name=$2
 start_time=$(date +%s.%N)
 dataset="dessimoz/02.Data/SpeciesTreeDiscordanceTest.Enriched"
-problems_to_ignore="all_gaps_indets_alignments_unique_$res_type.txt"
-grep "${taxon_name}_problem$problem_nums" $problems_to_ignore > "all_gaps_indets_alignments_unique_${res_type}_${taxon_name}_${problem_nums}.txt"
-problems_to_ignore="all_gaps_indets_alignments_unique_${res_type}_${taxon_name}_${problem_nums}.txt"
+problems_to_ignore="all_gaps_indets_alignments_unique_DNA.txt"
+grep "${taxon_name}_problem$problem_nums" $problems_to_ignore > "all_gaps_indets_alignments_unique_DNA_${taxon_name}_${problem_nums}.txt"
+problems_to_ignore="all_gaps_indets_alignments_unique_DNA_${taxon_name}_${problem_nums}.txt"
 
 counter=0
 line_number=1
-for residue_type in $dataset/$res_type*
+
+task() {
+ 
+}
+for residue_type in $dataset/DNA*
 do
     if [ -d $residue_type ]; then
         for taxon in $residue_type/$taxon_name*
@@ -22,8 +25,8 @@ do
                 if [[ $residue_taxon_problem != $residue_taxon_problem_to_ignore ]]; then
                     for alignment in $problem/*.fa
                     do
-                        if [[ $alignment == *"automated2"* ]]; then
-                            iqtree -nt 2 -quiet -redo -mredo -cptime 240 -mem 4G -cmin 4 -cmax 10 -s $alignment -bb 1000 -mset WAG,LG,JTT &
+                        if [[ $alignment == *"Prank"* || $alignment == *"ClustalW"* || $alignment == *"Mafft"* || $alignment == *"T-Coffee"* ]]; then
+                            iqtree -nt 2 -quiet -redo -mredo -cptime 240 -mem 4G -cmin 4 -cmax 10 -s $alignment -bb 1000 -mset GTR &
                             echo $alignment
                         fi
                     done
@@ -40,7 +43,4 @@ do
     fi
 done
 
-wait
-
-end_time=$(date +%s.%N)
-echo "$end_time - $start_time" | bc
+iqtree -nt 2 -quiet -redo -mredo -cptime 240 -mem 4G -cmin 4 -cmax 10 -s $file -bb 1000 -mset GTR

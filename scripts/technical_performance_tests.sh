@@ -1,12 +1,13 @@
 #!/bin/bash
 
 file=$1
+rep=$2
 
 start_time=$(date +%s.%N)
-trimal_local="trimal/bin/trimal"
+trimal_local="../trimal/bin/trimal"
 time_command="/usr/bin/time"
 
-methods=("None" "strict" "strictplus" "gappyout")
+methods=("None" "gappyout" "automated2")
 
 parse_results() {
     method=$1
@@ -45,19 +46,23 @@ write_results() {
 
 test_performance() {
     file=$1
+    repetition=$2
     filename=$(echo $file | awk -F '/' '{print $NF}')
     alignment_size=$(stat --printf="%s\n" $file)
     alignment_seqs=$(echo $filename | awk -F '.' '{print $(NF-2)}')
-    alignment_cols=$(echo $filename | awk -F '.' '{print $(NF-1)}')
+    alignment_cols=$(echo $filename | awk -F '.' '{print $(NF-1)}') # change for cedric dataset
 
     for method in ${methods[@]}
     do
         if [[ $method == "None" ]]; then
-            exec_times_filename="exec_times_$filename.txt"
+            exec_times_filename="exec_times_${filename}_${rep}.txt"
             { $time_command -v $trimal_local -in $file >/dev/null ; } 2> $exec_times_filename
+            trimmed_alignment_cols=$alignment_cols
         else
-            exec_times_filename="exec_times_${method}_$filename.txt"
-            { $time_command -v $trimal_local -in $file -$method >/dev/null ; } 2> $exec_times_filename
+            exec_times_filename="exec_times_${method}_${filename}_${rep}.txt"
+            { $time_command -v $trimal_local -in $file -$method > ${file}_${method}_${rep} ; } 2> $exec_times_filename
+            trimmed_alignment_cols=$(awk '/^>/{l=0; next}{l+=length($0)}END{print l}' ${file}_${method}_${rep})
+            rm ${file}_${method}_${rep}
         fi
 
         user_time=$(grep "User time" $exec_times_filename  | awk -F ':' '{print $NF}')
@@ -65,10 +70,13 @@ test_performance() {
         percent_cpu=$(grep "Percent of CPU" $exec_times_filename  | awk -F ':' '{print $NF}' | awk -F '%' '{print $(NF-1)}')
         max_resident_set_size=$(grep "Maximum resident" $exec_times_filename  | awk -F ':' '{print $NF}')
         exit_status=$(grep "Exit status" $exec_times_filename | awk -F ':' '{print $NF}')
+        rm $exec_times_filename
 
-        echo "$file,$method,$alignment_size,$alignment_seqs,$alignment_cols,$user_time,$system_time,$percent_cpu,$max_resident_set_size,$exit_status"
+        echo "$file,$repetition,$method,$alignment_size,$alignment_seqs,$alignment_cols,$trimmed_alignment_cols,$user_time,$system_time,$percent_cpu,$max_resident_set_size,$exit_status"
     done
 }
 
-# TODO: Repeat 100 times
-test_performance $file
+
+test_performance $file $rep
+
+
