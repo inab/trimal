@@ -7,7 +7,7 @@ import scipy.stats as stats
 
 
 def main():
-    df_phylomedb = pd.read_csv("/home/nicolas/Downloads/results_for_trimal.tsv", sep='\t')
+    df_phylomedb = pd.read_csv("results_for_trimal.tsv", sep='\t')
     df_dessimoz = pd.read_csv("table_all_tools_AA_fixed.csv", index_col = 0)
     #print(df.head())
     df_dessimoz.loc[(df_dessimoz['msa_filter_tools'] != "None"), 'alignment_type'] = "clean"
