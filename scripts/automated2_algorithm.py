@@ -28,7 +28,7 @@ def main():
   min_percentage_columns_to_conserve = args.minPercentageColumns
 
   if args.algorithm == "gaps":
-    p1 = subprocess.Popen(["../trimal/bin/trimal", "-in", args.inFile, "-sgc"], stdout = subprocess.PIPE)
+    p1 = subprocess.Popen(["trimal/bin/trimal", "-in", args.inFile, "-sgc"], stdout = subprocess.PIPE)
     p2 = subprocess.Popen(["tail", "-n", "+8"], stdin = p1.stdout, stdout = subprocess.PIPE)
     result = subprocess.run(["awk", "{print $3}"], stdin = p2.stdout, stdout = subprocess.PIPE)
     gaps_scores_strings = result.stdout.decode("utf-8").strip().split('\n')
@@ -42,11 +42,11 @@ def main():
 
     columns_to_remove = alignment_length - columns_to_conserve
     #filename = os.path.splitext(os.path.basename(args.inFile))[0] + "_trimAl_automated2.fa"
-    subprocess.run(["../trimal/bin/trimal", "-in", args.inFile, "-selectcols", "{",
+    subprocess.run(["trimal/bin/trimal", "-in", args.inFile, "-selectcols", "{",
         ','.join(str(e) for e in sorted_indeces_gap_scores[0:columns_to_remove]), "}"])
   
   elif args.algorithm == "similarity":
-    p1 = subprocess.Popen(["../trimal/bin/trimal", "-in", args.inFile, "-ssc"], stdout = subprocess.PIPE)
+    p1 = subprocess.Popen(["trimal/bin/trimal", "-in", args.inFile, "-ssc"], stdout = subprocess.PIPE)
     p2 = subprocess.Popen(["tail", "-n", "+9"], stdin = p1.stdout, stdout = subprocess.PIPE)
     result = subprocess.run(["awk", "{print $2}"], stdin = p2.stdout, stdout = subprocess.PIPE)
     similarity_scores_strings = result.stdout.decode("utf-8").strip().split('\n')
@@ -59,16 +59,16 @@ def main():
       else min(min_columns_to_conserve, alignment_length)
     
     columns_to_remove = alignment_length - columns_to_conserve
-    subprocess.run(["../trimal/bin/trimal", "-in", args.inFile, "-selectcols", "{",
+    subprocess.run(["trimal/bin/trimal", "-in", args.inFile, "-selectcols", "{",
         ','.join(str(e) for e in sorted_indeces_similarity_scores[0:columns_to_remove]), "}"])
 
   elif args.algorithm == "combined":
-    p1 = subprocess.Popen(["../trimal/bin/trimal", "-in", args.inFile, "-sgc"], stdout = subprocess.PIPE)
+    p1 = subprocess.Popen(["trimal/bin/trimal", "-in", args.inFile, "-sgc"], stdout = subprocess.PIPE)
     p2 = subprocess.Popen(["tail", "-n", "+8"], stdin = p1.stdout, stdout = subprocess.PIPE)
     result = subprocess.run(["awk", "{print $3}"], stdin = p2.stdout, stdout = subprocess.PIPE)
     gaps_scores_strings = result.stdout.decode("utf-8").strip().split('\n')
     gaps_scores = [float(score) for score in gaps_scores_strings]
-    p1 = subprocess.Popen(["../trimal/bin/trimal", "-in", args.inFile, "-ssc"], stdout = subprocess.PIPE)
+    p1 = subprocess.Popen(["trimal/bin/trimal", "-in", args.inFile, "-ssc"], stdout = subprocess.PIPE)
     p2 = subprocess.Popen(["tail", "-n", "+9"], stdin = p1.stdout, stdout = subprocess.PIPE)
     result = subprocess.run(["awk", "{print $2}"], stdin = p2.stdout, stdout = subprocess.PIPE)
     similarity_scores_strings = result.stdout.decode("utf-8").strip().split('\n')
@@ -83,7 +83,7 @@ def main():
       else min(min_columns_to_conserve, alignment_length)
     
     columns_to_remove = alignment_length - columns_to_conserve
-    subprocess.run(["../trimal/bin/trimal", "-in", args.inFile, "-selectcols", "{",
+    subprocess.run(["trimal/bin/trimal", "-in", args.inFile, "-selectcols", "{",
         ','.join(str(e) for e in sorted_indeces_combined_scores[0:columns_to_remove]), "}"])
 
 

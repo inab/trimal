@@ -28,11 +28,12 @@ def main():
     parser.add_argument("-i", "--in", dest = "inFile", required = True, type = \
         str, help = "Input alignment")
 
-    parser.add_argument("--all_gaps_indets", dest = "allGapsIndets", required = False, \
-        action = "store_true", default = False, help = "Residue type")
-
     parser.add_argument("-t", "--type", dest = "residueType", required = True, type = \
         str, choices = ["AA", "DNA"], help = "Residue type")
+
+    parser.add_argument("--all_gaps_indets", dest = "allGapsIndets", required = False, \
+        action = "store_true", default = False, help = "Check if alignment has any "
+        "sequence with only gaps and/or indets")
 
     args = parser.parse_args()
 
