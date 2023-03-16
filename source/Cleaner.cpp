@@ -370,7 +370,7 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
     Alignment *newAlig = new Alignment(*alig);
 
     // Remove the residues using both statistics
-    // We also profit the bucle and count the number of residues in the previous alignment
+    // We also profit the loop and count the number of residues in the previous alignment
     for (i = 0, resCounter = 0, block = 0;
          i < alig->originalNumberOfResidues;
          i++) {
@@ -509,6 +509,79 @@ Alignment *Cleaner::cleanByCutValueOverpassOrEquals(
     newAlig->Cleaning->removeAllGapsSeqsAndCols(true, true);
 
     return newAlig;
+}
+
+Alignment *Cleaner::cleanByCutOrdered(
+        double cut,
+        const int *gInCol,
+        bool complementary,
+        bool isAutomated2) {
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("Alignment *Cleaner::cleanByCutOrdered(double cut, const int *gInCol, bool complementary) ");
+    int i, block = 0, residues;
+    Alignment *newAlig = new Alignment(*alig);
+
+    int columnsToConserve = (MINPERCENTAGECOLUMNS * alig->originalNumberOfResidues) >= MINCOLUMNS
+            ? (MINPERCENTAGECOLUMNS * alig->originalNumberOfResidues)
+            : utils::min(MINCOLUMNS, alig->originalNumberOfResidues);
+
+    // Select the columns with a gaps value
+    // less or equal than the cut point.
+    //
+    // We also take advantage of the bucle
+    // to recalculate the number of residues kept
+    if (isAutomated2) {
+        for (i = 0, residues = 0; i < alig->originalNumberOfResidues; i++) {
+            if (alig->saveResidues[i] == -1)
+                continue;
+
+            block++;
+
+            if (gInCol[i] < cut) // TO CHANGE? We are cutting at a certain value. Should we cut at a certain col number even if we keep and remove cols with same gaps?
+                residues++;
+        }
+
+        for (i = 0; i < alig->originalNumberOfResidues; i++) {
+            if (alig->saveResidues[i] == -1)
+                continue;
+            //std::cout << "There are " << residues << " residues and " << columnsToConserve << " columnsToConserve" << std::endl;
+
+            if (gInCol[i] <= cut) // TO CHANGE? We are cutting at a certain value. Should we cut at a certain col number even if we keep and remove cols with same gaps?
+                if (gInCol[i] == cut)
+                    if (residues < columnsToConserve)
+                        residues++;
+                    else
+                        newAlig->saveResidues[i] = -1;
+            else
+                newAlig->saveResidues[i] = -1;
+        }
+    } else {
+        for (i = 0, residues = 0; i < alig->originalNumberOfResidues; i++) {
+            if (alig->saveResidues[i] == -1)
+                continue;
+
+            block++;
+
+            if (gInCol[i] <= cut) // TO CHANGE? We are cutting at a certain value. Should we cut at a certain col number even if we keep and remove cols with same gaps?
+                residues++;
+            else
+                newAlig->saveResidues[i] = -1;
+        }
+    }
+
+
+    alig->numberOfResidues = block;
+
+    newAlig->Cleaning->removeSmallerBlocks(blockSize, *alig);
+
+    // Check for any additional column/sequence to be removed
+    // Compute new sequences and columns numbers
+    newAlig->Cleaning->removeAllGapsSeqsAndCols();
+
+    // Return the new alignment reference
+    return newAlig;
+
 }
 
 Alignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, const float *MDK_W, bool complementary, bool variable) {
@@ -1044,6 +1117,53 @@ Alignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
     delete[] positions;
 
     // Return a reference of the new Alignment
+    return ret;
+}
+
+Alignment *Cleaner::cleanAutomated2(bool complementarity) {
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("Alignment *Cleaner::cleanAutomated2(bool complementarity) ");
+
+    Alignment *ret;
+
+    int cutPosition;
+
+    //  If gaps statistics are not calculated, we calculate them 
+    if (!alig->Statistics->calculateGapStats())
+        return nullptr;
+
+    // We get the cut point position using a automatic method for this purpose.
+    cutPosition = alig->Statistics->gaps->calcCutPointOrdered(-1);
+
+    // Using the cut point position calculates in last steps, weclean the Alignment and generate a new Alignment
+    ret = cleanByCutOrdered(cutPosition, alig->Statistics->gaps->getGapsWindow(), complementarity, true);
+
+    // Returns the new Alignment.
+    return ret;
+}
+
+Alignment *Cleaner::cleanAutomated3(bool complementarity) {
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("Alignment *Cleaner::cleanAutomated3(bool complementarity) ");
+
+    Alignment *ret;
+
+    int cut, cutPosition;
+
+    //  If gaps statistics are not calculated, we calculate them 
+    if (!alig->Statistics->calculateGapStats())
+        return nullptr;
+
+    // We get the cut point using a automatic method for this purpose.
+    cut = alig->Statistics->gaps->calcCutPoint2ndSlope();
+    cutPosition =  alig->Statistics->gaps->calcCutPointOrdered(cut);
+
+    // Using the cut point calculates in last steps, weclean the Alignment and generate a new Alignment
+    ret = cleanByCutOrdered(cutPosition, alig->Statistics->gaps->getGapsWindow(), complementarity, false);
+
+    // Returns the new Alignment.
     return ret;
 }
 

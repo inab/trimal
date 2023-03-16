@@ -38,6 +38,8 @@ namespace trimAlManagerTestIncludes
                 {"-strictplus", manager.strictplus},
                 {"-gappyout",   manager.gappyout},
                 {"-automated1", manager.automated1},
+                {"-automated2", manager.automated2},
+                {"-automated3", manager.automated3},
                 {"-nogaps",     manager.nogaps},
                 {"-noallgaps",  manager.noallgaps},
         };

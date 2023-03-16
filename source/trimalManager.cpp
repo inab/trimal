@@ -160,6 +160,8 @@ int trimAlManager::parseArguments(int argc, char **argv) {
             checkArgument(strict_argument)
             checkArgument(strict_plus_argument)
             checkArgument(automated1_argument)
+            checkArgument(automated2_argument)
+            checkArgument(automated3_argument)
             // Overlap
             checkArgument(residue_overlap_argument)
             checkArgument(sequence_overlap_argument)
@@ -702,6 +704,22 @@ int trimAlManager::parseArguments(int argc, char **argv) {
     return NotRecognized;
 }
 
+/**inline**/ trimAlManager::argumentReport trimAlManager::automated2_argument(const int *argc, char *argv[], int *i) {
+    if ((!strcmp(argv[*i], "-automated2")) && (!automated2)) {
+        automated2 = true;
+        return Recognized;
+    }
+    return NotRecognized;
+}
+
+/**inline**/ trimAlManager::argumentReport trimAlManager::automated3_argument(const int *argc, char *argv[], int *i) {
+    if ((!strcmp(argv[*i], "-automated3")) && (!automated3)) {
+        automated3 = true;
+        return Recognized;
+    }
+    return NotRecognized;
+}
+
 /**inline**/ trimAlManager::argumentReport trimAlManager::residue_overlap_argument(const int *argc, char *argv[], int *i) {
     if ((!strcmp(argv[*i], "-resoverlap")) && ((*i) + 1 != *argc) && (residuesOverlap == -1)) {
         if (utils::isNumber(argv[++*i])) {
@@ -1014,7 +1032,9 @@ bool trimAlManager::processArguments(char *argv[]) {
         automatedMethodCount =
                 nogaps      + noallgaps +
                 gappyout    + strict    +
-                strictplus  + automated1 + removeDuplicates;
+                strictplus  + automated1 +
+                automated2  + automated3 +
+                removeDuplicates;
 
         check_arguments_incompatibilities();
         check_arguments_needs(argv);
@@ -1100,6 +1120,8 @@ bool trimAlManager::processArguments(char *argv[]) {
             if (nogaps)         autom = "-nogaps";
             if (noallgaps)      autom = "-noallgaps";
             if (automated1)     autom = "-automated1";
+            if (automated2)     autom = "-automated2";
+            if (automated3)     autom = "-automated3";
 
 
             if (gapThreshold != -1)
@@ -1135,6 +1157,8 @@ bool trimAlManager::processArguments(char *argv[]) {
         if (nogaps)         autom = "-nogaps";
         if (noallgaps)      autom = "-noallgaps";
         if (automated1)     autom = "-automated1";
+        if (automated2)     autom = "-automated2";
+        if (automated3)     autom = "-automated3";
 
 
         if ((windowSize != -1)) {
@@ -1377,7 +1401,7 @@ inline bool trimAlManager::check_absolute_gap_theshold() {
 
 /**inline**/ bool trimAlManager::check_similarity_matrix() {
     if ((matrixFile != nullptr || alternative_matrix != -1) && (!appearErrors)) {
-        if ((!strict) && (!strictplus) && (!automated1) && (similarityThreshold == -1) && (!ssc) && (!sst)) {
+        if ((!strict) && (!strictplus) && (!automated1) && (!automated2)  && (!automated3) && (similarityThreshold == -1) && (!ssc) && (!sst)) {
             debug.report(ErrorCode::MatrixGivenWithNoMethodToUseIt);
             appearErrors = true;
             return true;
@@ -1964,7 +1988,7 @@ int trimAlManager::perform() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("/**inline**/ bool trimAlManager::create_or_use_similarity_matrix() ");
-    if ((strict) || (strictplus) || (automated1) || (similarityThreshold != -1.0) || (ssc == 1) || (sst == 1)) {
+    if ((strict) || (strictplus) || (automated1) || (automated2) || (automated3) || (similarityThreshold != -1.0) || (ssc == 1) || (sst == 1)) {
         similMatrix = new statistics::similarityMatrix();
 
     // Load Matrix
@@ -2129,6 +2153,10 @@ int trimAlManager::perform() {
         tempAlig = singleAlig->Cleaning->cleanCombMethods(/* getComplementary*/ false, false);
     } else if (strictplus) {
         tempAlig = singleAlig->Cleaning->cleanCombMethods(/* getComplementary*/ false, true);
+    } else if (automated2) {
+        tempAlig = singleAlig->Cleaning->cleanAutomated2(/* getComplementary*/ false);
+    } else if (automated3) {
+        tempAlig = singleAlig->Cleaning->cleanAutomated3(/* getComplementary*/ false);
     }
 
     // Move the new formed alignment to the variable singleAlig
@@ -2152,7 +2180,7 @@ int trimAlManager::perform() {
     StartTiming("/**inline**/ void trimAlManager::CleanResiduesNonAuto() ");
 
     if (delColumns != nullptr) {
-        for (int i = 0 ; i <= delColumns[0]; i++)
+        for (int i = 1 ; i <= delColumns[0]; i++)
         {
             if (delColumns[i] >= singleAlig->getNumAminos()) {
                 debug.report(

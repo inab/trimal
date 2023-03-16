@@ -386,6 +386,45 @@ namespace statistics {
         return max;
     }
 
+    int Gaps::calcCutPointOrdered(int cut) {
+        // Create a timerLevel that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("int Gaps::calcCutPointOrdered(int cut) ");
+
+        int *orderedGapsInColumn = new int[alig->originalNumberOfResidues];
+        int i;
+        int cutPos = 0;
+
+        int columnsToConserve = (MINPERCENTAGECOLUMNS * alig->originalNumberOfResidues) >= MINCOLUMNS
+            ? (MINPERCENTAGECOLUMNS * alig->originalNumberOfResidues)
+            : utils::min(MINCOLUMNS, alig->originalNumberOfResidues);
+
+        // Sort a copy of the array,
+        // and take the value of the column that marks the % baseline
+        utils::copyVect(gapsInColumn, orderedGapsInColumn, alig->originalNumberOfResidues);
+        utils::quicksort(orderedGapsInColumn, 0, alig->originalNumberOfResidues - 1);
+
+        if (cut == -1) {
+            cutPos = columnsToConserve;
+        } else {
+            for (i = 0; i < alig->originalNumberOfResidues; i++) {
+                if (alig->saveResidues[i] == -1)
+                    continue;
+
+                if (gapsInColumn[i] <= cut)
+                    cutPos++;
+            }
+
+            if (cutPos < columnsToConserve) {
+                cutPos = columnsToConserve;
+            }
+        }
+        
+
+        // Finally, we return the selected cut point.
+        return orderedGapsInColumn[cutPos-1];
+    }
+
     void Gaps::printGapsColumns() const {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.

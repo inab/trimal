@@ -48,6 +48,9 @@
 #define MINPARALLELSIZE 50
 #define NUMTHREADS 8
 
+#define MINPERCENTAGECOLUMNS 0.45
+#define MINCOLUMNS 250
+
  /**
 \file defines.h
 \enum SequenceTypes

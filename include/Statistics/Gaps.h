@@ -80,6 +80,8 @@ namespace statistics {
         // using the second slope approach.
         int calcCutPoint2ndSlope();
 
+        int calcCutPointOrdered(int);
+
         // This methods print the gaps' percentage
         // of each column in the alignment.
         void printGapsColumns() const;

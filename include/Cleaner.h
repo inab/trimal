@@ -150,6 +150,7 @@ public:
             double cutGaps, const int *gInCol, float baseLine,
             float cutCons, const float *MDK_Win, bool complementary);
 
+    Alignment *cleanByCutOrdered(double cut,const int *gInCol, bool complementary, bool isAutomated2);
      /**
      \brief Method to clean an alignment. It carries out strict and strictplus.\n
      It removes sequences that<b> overpass </b>the gap threshold but
@@ -321,6 +322,23 @@ public:
       using the parameters calculated in this function.
      */
     Alignment *cleanCombMethods(bool complementary, bool variable);
+
+    /**
+      \brief Method that carries the automated2 approach.\n
+      This methods ...\n
+      \param complementary
+       Whether or not to return the complementary version of the trimmed alignment.
+      */
+    Alignment *cleanAutomated2(bool complementary);
+  
+
+    /**
+      \brief Method that carries the automated3 approach.\n
+      This methods ...\n
+      \param complementary
+       Whether or not to return the complementary version of the trimmed alignment.
+      */
+    Alignment *cleanAutomated3(bool complementary);
 
      /**
       \brief Method to remove columns composed only by gaps\n
