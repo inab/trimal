@@ -6,7 +6,7 @@
 #   Script implemented to work with trimAl to analyze technical performance
 #   statistics.
 #
-#   [2022] Nicolás Díaz Roussel - ndiazrou@bsc.es
+#   [2022] Nicolás Díaz Roussel - nicolas.diazroussel@bsc.es
 #
 #   this script is free software: you can redistribute it and/or modify it under
 #   the terms of the GNU General Public License as published by the Free
