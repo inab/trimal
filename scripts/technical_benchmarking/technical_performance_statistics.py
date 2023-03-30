@@ -18,81 +18,122 @@
 #   more details on <http://www.gnu.org/licenses/>
 #
 
+import argparse
+import os
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
 
-def main():
-
-  '''
-  alignment_names = pd.read_table("technical_performance_results/alignment_filenames.txt", header = None, names=["alignment"], dtype="string")
-  num_sequences = pd.read_table("technical_performance_results/alignment_seqs.txt", header = None, names=["num_sequences"], dtype="int")
-  num_columns = pd.read_table("technical_performance_results/alignment_cols.txt", header = None, names=["num_columns"], dtype="int")
-  file_size = pd.read_table("technical_performance_results/alignment_sizes.txt", header = None, names=["size (bytes)"], dtype="int")
-  max_resident_set_size = pd.read_table("technical_performance_results/max_resident_set_size.txt", header = None, names=["max_resident_set_size (kbytes)"], dtype="int")
-  percent_cpu = pd.read_table("technical_performance_results/percent_cpu.txt", header = None, names=["percent_cpu"], dtype="int")
-  system_time = pd.read_table("technical_performance_results/system_times.txt", header = None, names=["system_time (s)"], dtype="float")
-  user_time = pd.read_table("technical_performance_results/user_times.txt", header = None, names=["user_time (s)"], dtype="float")
-  exit_status = pd.read_table("technical_performance_results/exit_status.txt", header = None, names=["exit_status"], dtype="int")
-
-  df_none = df.loc[df['method'] == 'None', :]
-  sns.lineplot(y=df_none["alignment_size"] * 10**(-6), x=df_none["user_time"], marker="o")
-  plt.xlabel("Time (s)")
-  plt.ylabel("Size (megabytes)")
-  plt.title("Input/output of MSA with trimAl")
-  plt.xscale('log')
-  plt.yscale('log')
-  plt.show()
-
-    for file in pd.unique(df["file"]):
-    for repetition in pd.unique(df.loc[df["file"] == file, "repetition"]):
-      df.loc[(df["file"] == file) & (df['repetition'] == repetition), "R/W_memory"] = df.loc[(df['file'] == file) & (df['method'] == "None") & (df['repetition'] == repetition), "max_resident_set_size"].values[0]
-      print(file + "; " + str(repetition) + "; " + str(df.loc[(df["file"] == file) & (df['repetition'] == repetition), "R/W_memory"].values))
-
-  '''
-
-  #df = pd.read_csv("tech_bench_greasy_chunk1_from_5GB_to_20GB_23589053.csv")
-  #df = pd.read_csv("tech_bench_greasy_chunk1_from_5GB_to_20GB_clean.csv")
-  df = pd.read_csv("tech_bench_greasy_chunk1_up_to_20GB.csv")
-
-  #df["size (megabytes)"] = df["size (bytes)"] * 10**(-6)
-  #df["total_residues (millions)"] = df["total_residues"] * 10**(-6)
-  #df["max_resident_set_size (gbytes)"] = df["max_resident_set_size (kbytes)"] * 10**(-6)
-  print(df.head())
-  print(df.describe())
-
-  # keep the msas with more sequences instead of less sequences and more columns
-
-  df.set_index(["file", "method", "repetition"])
-
-  # max_resident_set_size is originally in kilobytes!!
-  #df["percentage_mem_usage"] = df["max_resident_set_size"] / df["R/W_memory"]
-
-  #df = df.loc[df["alignment_seqs"] >= df["alignment_cols"], :]
-  #df = df.loc[df["file"].str.contains("example.004"), :]
-  
-  #df = df.loc[df["method"] == 'automated2', :]
-  df["alignment_res"] = df["alignment_seqs"] * df["alignment_cols"]
-  #df = df.loc[df["alignment_res"] < 5*10**8, :]
-  #df["alignment_size"] = df["alignment_size"].astype("category")
-  #order_sizes = np.sort(pd.unique(df["alignment_size"]))[::-1]
-  #print(order_sizes)
-  
-  # añadir hue file para strict
-  # para que no salgan disntintos tamaños con distintas columnas habría que escoger sólo una cantidad de colimnas por tamaño o de secuencias
-  #ax = sns.pointplot(data=df, y="alignment_res", x="user_time", join=False, orient='h', hue="method")
-
-
-  ax = sns.lineplot(data=df, y="alignment_size", x="user_time", hue="method", style="method", markers=False, dashes=False)
+def lineplot(df, show_plot):
+  ax = sns.lineplot(data=df, y="alignment_size_mb", x="user_time", hue="method", style="method", markers=False, dashes=False)
 
   ax.get_legend().set_title('')
   plt.xlabel("Time (s)")
-  plt.ylabel("Size (bytes)")
+  plt.ylabel("Size (MB)")
   plt.title("Trimming of MSA with trimAl")
   plt.xscale('log')
   plt.yscale('log')
+  if show_plot:
+    plt.show()
+  return
+
+def main():
+
+  parser = argparse.ArgumentParser()
+
+  parser.add_argument("-i", "--in", dest = "inFile", required = True, type = \
+    str, help = "Input dataset")
+  
+  parser.add_argument("-p", "--plot", dest = "plot", required =  True, \
+    type = str, choices = ["lineplot", "boxplot", "stripplot"],help = "Set plot type")
+  
+  parser.add_argument("-t", "--type", dest = "type", required =  False, \
+    type = str, choices = ["time", "memory"],help = "Plot all plots of a variable")
+  
+  parser.add_argument("-x", "--x_axis", dest = "x_axis", required =  False, \
+    type = str,help = "Set x axis variable")
+  
+  parser.add_argument("-y", "--y_axis", dest = "y_axis", required =  False, \
+    type = str,help = "Set y axis variable")
+  
+  parser.add_argument("--show", dest = "show_plot", default = False,
+    action = "store_true", help = "Show plot interactively")
+  
+  parser.add_argument("--save", dest = "save_plot", default = False,
+    action = "store_true", help = "Save plot")
+
+  args = parser.parse_args()
+
+  if not os.path.isfile(args.inFile):
+    sys.exit(("ERROR: Check input alignment file '%s'") % (args.inFile))
+
+  if not args.type and (not args.x_axis or not args.y_axis):
+    sys.exit()
+    
+  df = pd.read_csv(args.inFile)
+  df["alignment_res"] = df["alignment_seqs"] * df["alignment_cols"]
+  df.set_index(["file", "method", "repetition"])
+  
+  df["alignment_res_millions"] = df["alignment_res"] * 10**(-6)
+  df["alignment_size_mb"] = df["alignment_size"] * 10**(-6) # max_resident_set_size is in bytes
+  df["max_resident_set_size_gb"] = df["max_resident_set_size"] * 10**(-6) # max_resident_set_size is in KB
+
+
+  if args.plot == "lineplot":
+    lineplot(df, args.show_plot)
+
+  if args.plot == "stripplot":
+
+    df = df[df["method"]=="strictplus"]
+    alignment_res_ordered = np.sort(df["alignment_res"].unique())[::-1]
+    print(alignment_res_ordered.shape)
+
+    
+    # sequence effect on time with respect to the same amount of residues
+    ax = sns.stripplot(data=df, y="alignment_res", x="user_time", hue="alignment_seqs", orient="h", order=list(alignment_res_ordered))
+
+    ax.get_legend().set_title('Sequences')
+    plt.xlabel("Time (s)")
+    plt.ylabel("Residues")
+    #plt.title("Trimming of MSA with trimAl")
+    plt.xscale('log')
+    #plt.yscale('log')
+    #for plots in ax.axes.flatten():
+      #plots.yaxis.set_major_formatter(FuncFormatter(lambda x, p: format(int(x), ',')))
+      #plots.yaxis.set_major_formatter(ScalarFormatter(useMathText=True))
+      #plots.yaxis.get_major_formatter().set_scientific(True)
+    #plt.ticklabel_format(style='plain', axis='y')
+    #ax.yaxis.set_major_formatter(mtick.StrMethodFormatter('{x:.0e}'))
+    #ax.yaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
+    print(alignment_res_ordered)
+    ax.set_yticklabels(["{:,.0f}".format(label) for label in alignment_res_ordered])
+    print(ax.yaxis)
+    plt.show()
+
+  return
+
+  ax = sns.stripplot(data=df, y="alignment_res", x="user_time", hue="alignment_cols", orient="h", order=list(alignment_res_ordered))
+
+  ax.get_legend().set_title('Columns')
+  plt.xlabel("Time (s)")
+  plt.ylabel("Residues")
+  plt.xscale('log')
+  print(alignment_res_ordered)
+  ax.set_yticklabels(["{:,.0f}".format(label) for label in alignment_res_ordered])
+  print(ax.yaxis)
+  plt.show()
+
+
+  ax = sns.boxplot(data=df, y="alignment_cols", x="user_time", hue="method", orient="h")
+
+  ax.get_legend().set_title('')
+  plt.xlabel("Time (s)")
+  plt.ylabel("Columns")
+  plt.title("Trimming of MSA with trimAl")
+  plt.xscale('log')
+  #plt.yscale('log')
   plt.show()
 
   ax = sns.lineplot(data=df, y="alignment_seqs", x="user_time", hue="method", style="method", markers=False, dashes=False)
