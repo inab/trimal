@@ -67,6 +67,14 @@ def generate_plot(plot_type, df, x_axis, y_axis, hue, log_x, log_y, title, show_
   if show_plot: plt.show()
 
 
+def generate_time_plots():
+   return
+
+
+def generate_memory_plots():
+   return
+
+
 def main():
     parser = argparse.ArgumentParser()
 
@@ -105,6 +113,15 @@ def main():
     parser.add_argument("--title", dest="title",
                         required=False, type=str, help="Set plot title")
     
+    parser.add_argument("--filter_by_method", dest="method",
+                        required=False, type=str, help="Set method to filter by")
+    
+    parser.add_argument("--filter_by_min_sequences", dest="min_sequences",
+                        required=False, type=str, help="Set minimum sequences filter")
+    
+    parser.add_argument("--filter_by_min_columns", dest="min_columns",
+                        required=False, type=str, help="Set minimum columns filter")
+    
     parser.add_argument("--show", dest="show_plot", default=False,
                         action="store_true", help="Show plot interactively")
 
@@ -120,6 +137,11 @@ def main():
         sys.exit("ERROR: all_of or axis variables should be specified")
 
     df = pd.read_csv(args.inFile)
+
+    if args.method: df = df[df["method"] == args.method]
+    if args.min_sequences: df = df[df["alignment_seqs"] >= args.min_sequences]
+    if args.min_columns: df = df[df["alignment_cols"] >= args.min_columns]
+
     df["alignment_res"] = df["alignment_seqs"] * df["alignment_cols"]
     df["alignment_res_millions"] = df["alignment_res"] * 10**(-6)
     df["alignment_size_mb"] = df["alignment_size"] * \
@@ -130,27 +152,6 @@ def main():
 
     generate_plot(args.plot, df, args.x_axis, args.y_axis, args.hue, args.log_x, args.log_y, args.title, args.show_plot)
     return
-    
-    if args.plot == "lineplot":
-        lineplot(df, args.x_axis, args.y_axis, args.hue, args.log_x, args.logs_y, args.title, args.show_plot)
-    elif args.plot == "stripplot":
-        stripplot(df, args.x_axis, args.y_axis, args.hue, args.log_x, args.logs_y, args.title, args.show_plot)
-
-    
-
-    # df = df[df["method"] == "strictplus"]
-    ax = sns.stripplot(data=df, y="alignment_res", x="user_time",
-                       hue="alignment_cols", orient="h", order=list(alignment_res_ordered))
-
-    ax.get_legend().set_title('Columns')
-    plt.xlabel("Time (s)")
-    plt.ylabel("Residues")
-    plt.xscale('log')
-    print(alignment_res_ordered)
-    ax.set_yticklabels(["{:,.0f}".format(label)
-                       for label in alignment_res_ordered])
-    print(ax.yaxis)
-    plt.show()
 
     ax = sns.boxplot(data=df, y="alignment_cols",
                      x="user_time", hue="method", orient="h")
