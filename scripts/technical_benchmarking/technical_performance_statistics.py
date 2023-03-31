@@ -58,6 +58,11 @@ def generate_plot(plot_type, df, x_axis, y_axis, hue, log_x, log_y, title, show_
                         hue=hue, orient="h")
   elif plot_type == "lineplot":
     ax = sns.lineplot(data=df, x=x_axis, y=y_axis, hue=hue)
+    # may add style and markers and dashes
+  elif plot_type == "violinplot":
+    ax = sns.violinplot(data=df, x=x_axis, y=y_axis, hue=hue) 
+  elif plot_type == "boxplot":
+    ax = sns.boxplot(data=df, x=x_axis, y=y_axis, hue=hue) 
 
   ax.get_legend().set_title(title)
   plt.xlabel(variable_labels[x_axis])
@@ -82,7 +87,7 @@ def main():
                         required=True, type=str, help="Input dataset")
 
     parser.add_argument("-p", "--plot", dest="plot", required=True,
-                        type=str, choices=["lineplot", "boxplot", "stripplot"], help="Set plot type")
+                        type=str, choices=["lineplot", "boxplot", "stripplot", "violinplot"], help="Set plot type")
 
     parser.add_argument("--all_of", dest="all_of", required=False,
                         type=str, choices=["time", "memory"], help="Generate all plots of a variable")
@@ -153,59 +158,6 @@ def main():
     generate_plot(args.plot, df, args.x_axis, args.y_axis, args.hue, args.log_x, args.log_y, args.title, args.show_plot)
     return
 
-    ax = sns.boxplot(data=df, y="alignment_cols",
-                     x="user_time", hue="method", orient="h")
-
-    ax.get_legend().set_title('')
-    plt.xlabel("Time (s)")
-    plt.ylabel("Columns")
-    plt.title("Trimming of MSA with trimAl")
-    plt.xscale('log')
-    # plt.yscale('log')
-    plt.show()
-
-    ax = sns.lineplot(data=df, y="alignment_seqs", x="user_time",
-                      hue="method", style="method", markers=False, dashes=False)
-
-    ax.get_legend().set_title('')
-    plt.xlabel("Time (s)")
-    plt.ylabel("Sequences")
-    plt.title("Trimming of MSA with trimAl")
-    plt.xscale('log')
-    plt.yscale('log')
-    plt.show()
-
-    ax = sns.lineplot(data=df, y="user_time", x="alignment_res",
-                      hue="method", style="method", markers=False, dashes=False)
-
-    ax.get_legend().set_title('')
-    plt.ylabel("Time (s)")
-    plt.xlabel("Residues")
-    plt.title("Trimming of MSA with trimAl")
-    plt.xscale('log')
-    plt.yscale('log')
-    plt.show()
-
-    ax = sns.lineplot(data=df, y="alignment_size", x="percentage_mem_usage",
-                      hue="method", style="method", markers=False, dashes=False)
-    plt.xlabel("Percentage memory")
-    plt.ylabel("Size (bytes)")
-    plt.title("Trimming of MSA with trimAl")
-
-    ax.get_legend().set_title('')
-    plt.xscale('log')
-    plt.yscale('log')
-    plt.show()
-
-    ax = sns.violinplot(data=df, y="percentage_mem_usage",
-                        x="method", hue="method")
-    plt.xlabel("Method")
-    plt.ylabel("Percentage memory")
-    plt.title("Trimming of MSA with trimAl")
-    ax.get_legend().set_title('')
-    plt.show()
-
-    return
     df.loc[:, "perc_conserved_alignment"] = df.loc[:,
                                                    "trimmed_alignment_cols"] / df.loc[:, "alignment_cols"]
     df_clean = df.loc[(df["perc_conserved_alignment"] <= 1),
