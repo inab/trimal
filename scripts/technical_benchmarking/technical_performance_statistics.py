@@ -58,7 +58,6 @@ def generate_plot(plot_type, df, x_axis, y_axis, hue, log_x, log_y, title, show_
                         hue=hue, orient="h")
   elif plot_type == "lineplot":
     ax = sns.lineplot(data=df, x=x_axis, y=y_axis, hue=hue)
-    # may add style and markers and dashes
   elif plot_type == "violinplot":
     ax = sns.violinplot(data=df, x=x_axis, y=y_axis, hue=hue) 
   elif plot_type == "boxplot":
@@ -155,34 +154,8 @@ def main():
         10**(-6)  # max_resident_set_size is in KB
     df.set_index(["file", "method", "repetition"])
 
-    generate_plot(args.plot, df, args.x_axis, args.y_axis, args.hue, args.log_x, args.log_y, args.title, args.show_plot)
-    return
-
-    df.loc[:, "perc_conserved_alignment"] = df.loc[:,
-                                                   "trimmed_alignment_cols"] / df.loc[:, "alignment_cols"]
-    df_clean = df.loc[(df["perc_conserved_alignment"] <= 1),
-                      :]  # ver qué pasa en estos casos
-    df_clean = df_clean.loc[df_clean["method"] != "None", :]
-    # print(df.loc[df["method"] == "None", "perc_conserved_alignment"])
-    ax = sns.lineplot(y=df_clean["perc_conserved_alignment"], x=df_clean["user_time"],
-                      hue=df_clean["method"], style=df_clean["method"], markers=False, dashes=False)
-    plt.xlabel("Time (s)")
-    plt.ylabel("% of conserved columns")
-    plt.title("Trimming of MSA with trimAl")
-
-    ax.get_legend().set_title('')
-    # plt.xscale('log')
-    plt.show()
-
-    ax = sns.scatterplot(y=df_clean["perc_conserved_alignment"],
-                         x=df_clean["user_time"], hue=df_clean["method"], style=df_clean["method"])
-    plt.xlabel("Time (s)")
-    plt.ylabel("% of conserved columns")
-    plt.title("Trimming of MSA with trimAl")
-
-    ax.get_legend().set_title('')
-    # plt.xscale('log')
-    plt.show()
+    generate_plot(args.plot, df, args.x_axis, args.y_axis, args.hue, args.log_x, args.log_y,
+                   args.title, args.show_plot)
 
 
 if __name__ == "__main__":
