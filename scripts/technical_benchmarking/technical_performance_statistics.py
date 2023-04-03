@@ -45,30 +45,31 @@ variable_labels = {
 }
 
 
-def generate_plot(plot_type, df, x_axis, y_axis, hue, log_x, log_y, title, show_plot):
+def generate_plot(plot_type, df, x_axis, y_axis, hue, log_x, log_y, title, show_plot, save_plot):
   if plot_type == "stripplot":
     if y_axis == "alignment_res":
       alignment_res_ordered = np.sort(df["alignment_res"].unique())[::-1]
-      ax = sns.stripplot(data=df, x=x_axis, y=y_axis,
+      tech_plot = sns.stripplot(data=df, x=x_axis, y=y_axis,
                       hue=hue, orient="h", order=list(alignment_res_ordered))
-      ax.set_yticklabels(["{:,.0f}".format(label)
+      tech_plot.set_yticklabels(["{:,.0f}".format(label)
                       for label in alignment_res_ordered])
     else:
-      ax = sns.stripplot(data=df, x=x_axis, y=y_axis,
+      tech_plot = sns.stripplot(data=df, x=x_axis, y=y_axis,
                         hue=hue, orient="h")
   elif plot_type == "lineplot":
-    ax = sns.lineplot(data=df, x=x_axis, y=y_axis, hue=hue)
+    tech_plot = sns.lineplot(data=df, x=x_axis, y=y_axis, hue=hue)
   elif plot_type == "violinplot":
-    ax = sns.violinplot(data=df, x=x_axis, y=y_axis, hue=hue) 
+    tech_plot = sns.violinplot(data=df, x=x_axis, y=y_axis, hue=hue) 
   elif plot_type == "boxplot":
-    ax = sns.boxplot(data=df, x=x_axis, y=y_axis, hue=hue) 
+    tech_plot = sns.boxplot(data=df, x=x_axis, y=y_axis, hue=hue) 
 
-  ax.get_legend().set_title(title)
+  tech_plot.get_legend().set_title(title)
   plt.xlabel(variable_labels[x_axis])
   plt.ylabel(variable_labels[y_axis])
   if log_x: plt.xscale('log')
   if log_y: plt.yscale('log')
   if show_plot: plt.show()
+  if save_plot: tech_plot.get_figure().savefig(f'{plot_type}_{x_axis}_{y_axis}_{hue}', dpi = 400)
 
 
 def generate_time_plots():
@@ -155,7 +156,7 @@ def main():
     df.set_index(["file", "method", "repetition"])
 
     generate_plot(args.plot, df, args.x_axis, args.y_axis, args.hue, args.log_x, args.log_y,
-                   args.title, args.show_plot)
+                   args.title, args.show_plot, args.save_plot)
 
 
 if __name__ == "__main__":
