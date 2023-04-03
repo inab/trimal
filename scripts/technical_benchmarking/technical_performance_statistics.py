@@ -62,10 +62,12 @@ def generate_plot(plot_type, df, x_axis, y_axis, hue, log_x, log_y, title, show_
     tech_plot = sns.violinplot(data=df, x=x_axis, y=y_axis, hue=hue) 
   elif plot_type == "boxplot":
     tech_plot = sns.boxplot(data=df, x=x_axis, y=y_axis, hue=hue) 
+  elif plot_type == "histplot":
+    tech_plot = sns.histplot(data=df, x=x_axis, hue=hue, multiple="stack") 
 
   tech_plot.get_legend().set_title(title)
   plt.xlabel(variable_labels[x_axis])
-  plt.ylabel(variable_labels[y_axis])
+  if y_axis: plt.ylabel(variable_labels[y_axis])
   if log_x: plt.xscale('log')
   if log_y: plt.yscale('log')
   if show_plot: plt.show()
@@ -87,7 +89,7 @@ def main():
                         required=True, type=str, help="Input dataset")
 
     parser.add_argument("-p", "--plot", dest="plot", required=True,
-                        type=str, choices=["lineplot", "boxplot", "stripplot", "violinplot"], help="Set plot type")
+                        type=str, choices=["lineplot", "boxplot", "stripplot", "violinplot", "histplot"], help="Set plot type")
 
     parser.add_argument("--all_of", dest="all_of", required=False,
                         type=str, choices=["time", "memory"], help="Generate all plots of a variable")
@@ -138,7 +140,7 @@ def main():
     if not os.path.isfile(args.inFile):
         sys.exit(("ERROR: Check input alignment file '%s'") % (args.inFile))
 
-    if not args.all_of and (not args.x_axis or not args.y_axis):
+    if not args.all_of and not args.x_axis and not args.y_axis:
         sys.exit("ERROR: all_of or axis variables should be specified")
 
     df = pd.read_csv(args.inFile)
