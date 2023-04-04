@@ -1557,53 +1557,52 @@ void Cleaner::calculateSeqIdentity() {
     //	which means the end of the current scope.
     StartTiming("void Cleaner::calculateSeqIdentity(void) ");
 
-    int i, j, k, hit, dst;
+    int sequenceFirstIndex, sequenceSecondIndex, residueIndex, hit, commonLength;
     char indet;
 
     // Depending on alignment type, indetermination symbol will be one or other
     indet = (alig->getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
 
-    // Create identities matrix to store identities scores
+    // Create identity matrix to store identity scores
     alig->identities = new float *[alig->originalNumberOfSequences];
 
     #pragma omp parallel for num_threads(NUMTHREADS) if(alig->originalNumberOfSequences>MINPARALLELSIZE)
-    for(i = 0; i < alig->originalNumberOfSequences; i++) {
-        if (alig->saveSequences[i] == -1) continue;
-        alig->identities[i] = new float[alig->originalNumberOfSequences];
-        alig->identities[i][i] = 0;
+    for(sequenceFirstIndex = 0; sequenceFirstIndex < alig->originalNumberOfSequences; sequenceFirstIndex++) {
+        if (alig->saveSequences[sequenceFirstIndex] == -1) continue;
+        alig->identities[sequenceFirstIndex] = new float[alig->originalNumberOfSequences];
+        alig->identities[sequenceFirstIndex][sequenceFirstIndex] = 0;
     }
 
     // For each seq, compute its identity score against the others in the MSA
-    #pragma omp parallel for num_threads(NUMTHREADS) private(j, k, hit, dst) if(alig->originalNumberOfSequences>MINPARALLELSIZE)
-    for (i = 0; i < alig->originalNumberOfSequences; i++) {
-        if (alig->saveSequences[i] == -1) continue;
+    #pragma omp parallel for num_threads(NUMTHREADS) private(sequenceSecondIndex, residueIndex, hit, commonLength) if(alig->originalNumberOfSequences>MINPARALLELSIZE)
+    for (sequenceFirstIndex = 0; sequenceFirstIndex < alig->originalNumberOfSequences; sequenceFirstIndex++) {
+        if (alig->saveSequences[sequenceFirstIndex] == -1) continue;
 
         // Compute identity scores for the current sequence against the rest
-        for (j = i + 1; j < alig->originalNumberOfSequences; j++) {
-            if (alig->saveSequences[j] == -1) continue;
-            for (k = 0, hit = 0, dst = 0; k < alig->numberOfResidues; k++) {
-                if (alig->saveResidues[k] == -1) continue;
+        for (sequenceSecondIndex = sequenceFirstIndex + 1; sequenceSecondIndex < alig->originalNumberOfSequences; sequenceSecondIndex++) {
+            if (alig->saveSequences[sequenceSecondIndex] == -1) continue;
+            for (residueIndex = 0, hit = 0, commonLength = 0; residueIndex < alig->numberOfResidues; residueIndex++) {
+                if (alig->saveResidues[residueIndex] == -1) continue;
                 // If one of the two positions is a valid residue,
                 // count it for the common length
-                if (((alig->sequences[i][k] != indet) && (alig->sequences[i][k] != '-')) ||
-                    ((alig->sequences[j][k] != indet) && (alig->sequences[j][k] != '-'))) {
-                    dst++;
+                if (((alig->sequences[sequenceFirstIndex][residueIndex] != indet) && (alig->sequences[sequenceFirstIndex][residueIndex] != '-')) ||
+                    ((alig->sequences[sequenceSecondIndex][residueIndex] != indet) && (alig->sequences[sequenceSecondIndex][residueIndex] != '-'))) {
+                    commonLength++;
                     // If both positions are the same, count a hit
-                    if (alig->sequences[i][k] == alig->sequences[j][k])
+                    if (alig->sequences[sequenceFirstIndex][residueIndex] == alig->sequences[sequenceSecondIndex][residueIndex])
                         hit++;
                 }
             }
 
-            if (dst == 0) {
-                alig->identities[i][j] = 0;
+            if (commonLength == 0) {
+                alig->identities[sequenceFirstIndex][sequenceSecondIndex] = 0;
             } else {
                 // Identity score between two sequences is the ratio of identical residues
                 // by the total length (common and no-common residues) among them
-                alig->identities[i][j] = (float) hit / dst;
+                alig->identities[sequenceFirstIndex][sequenceSecondIndex] = (float) hit / commonLength;
             }
             
-            if (alig->saveSequences[j] == -1) continue;
-            alig->identities[j][i] = alig->identities[i][j];
+            alig->identities[sequenceSecondIndex][sequenceFirstIndex] = alig->identities[sequenceFirstIndex][sequenceSecondIndex];
         }
     }
 }
