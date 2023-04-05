@@ -195,21 +195,16 @@ Alignment *Cleaner::cleanByCutValueOverpass(
                         }
                     }
                 }
-                
+
                 residueRightIndex = residueIndex;
             }
         }
     }
 
     newAlig->Cleaning->removeSmallerBlocks(blockSize, *alig);
-
-    // Check for any additional column/sequence to be removed
-    // Compute new sequences and columns numbers
     newAlig->Cleaning->removeAllGapsSeqsAndCols();
 
-    // Return the new alignment reference
     return newAlig;
-
 }
 
 Alignment *Cleaner::cleanByCutValueFallBehind(
