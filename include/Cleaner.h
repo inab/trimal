@@ -87,19 +87,19 @@ public:
       to achieve the given percentage desired to keep. \n
      To achieve this, the method starts in the middle of the sequence and, 
       alternating sides, adds column one by one.\n
-     \param cut
+     \param maxGaps
       Cut value to use.
       If a column has a value lower or equal to the cut value, it is removed.
      \param baseLine
       Percent of sequences to keep
-     \param gInCol
+     \param gapsInColumn
       Vector that contains the values that will be tested for each column.
      \param complementary
       Whether or not to return the complementary version of the trimmed alignment.
      \return Pointer to the cleaned alignment.
      */
-    Alignment *cleanByCutValueOverpass(double cut, float baseLine,
-                                          const int *gInCol, bool complementary);
+    Alignment *cleanByCutValueOverpass(double maxGaps, float baseLine,
+                                          const int *gapsInColumn, bool complementary);
 
      /**
      \brief Method to clean an alignment. \n

@@ -95,99 +95,84 @@ Alignment *Cleaner::cleanByCutValueOverpass(
         bool complementary) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("Alignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const int *gInCol, bool complementary) ");
-    int residueIndex, minBlockSize, numberColumnsToRecover, numberKeptResidues = 0, *keptResiduesGaps, numberResiduesToKeep;
+    StartTiming("Alignment *Cleaner::cleanByCutValueOverpass(double maxGaps, float baseLine, const int *gapsInColumn, bool complementary) ");
+    int residueIndex, numberColumnsToRecover, *keptResiduesGaps, newNumberKeptResidues;
+    int oldNumberKeptResidues = newNumberKeptResidues = 0;
     Alignment *newAlig = new Alignment(*alig);
 
-    // Select the columns with a gap value
-    // less or equal than the cut point.
-    //
-    // We also take advantage of the loop
-    // to recalculate the number of residues kept
-    for (residueIndex = 0, numberResiduesToKeep = 0; residueIndex < alig->originalNumberOfResidues; residueIndex++) {
+    for (residueIndex = 0; residueIndex < alig->originalNumberOfResidues; residueIndex++) {
         if (alig->saveResidues[residueIndex] == -1) continue;
-        if (gapsInColumn[residueIndex] <= maxGaps)
-            numberResiduesToKeep++;
-        else
+
+        if (gapsInColumn[residueIndex] <= maxGaps) {
+            newNumberKeptResidues++;
+        } else {
             newAlig->saveResidues[residueIndex] = -1;
-        numberKeptResidues++;
+        }
+        
+        oldNumberKeptResidues++;
     }
 
-    alig->numberOfResidues = numberKeptResidues;
+    alig->numberOfResidues = oldNumberKeptResidues;
 
-    // Compute the number of columns to be added needed
-    // to reach the minimum number of columns
-    // fixed by coverage parameter
     float minCoverageRatio = baseLine / 100.0;
-    float currentCoverageRatio = (float) numberResiduesToKeep / numberKeptResidues;
-    numberColumnsToRecover = utils::roundInt((minCoverageRatio - currentCoverageRatio) * numberKeptResidues);
-
+    float currentCoverageRatio = (float) newNumberKeptResidues / oldNumberKeptResidues;
+    numberColumnsToRecover = utils::roundInt((minCoverageRatio - currentCoverageRatio) * oldNumberKeptResidues);
     
     if (numberColumnsToRecover > 0) {
-        keptResiduesGaps = new int[numberKeptResidues];
-        // Fill the array with the amount of gaps of previously kept residues
-        int keptResiduesGapsIndex = 0;
-        for (residueIndex = 0; residueIndex < alig->originalNumberOfResidues; residueIndex++) {
+        keptResiduesGaps = new int[oldNumberKeptResidues];
+        int keptResiduesGapsIndex;
+        for (keptResiduesGapsIndex = residueIndex = 0; residueIndex < alig->originalNumberOfResidues; residueIndex++) {
             if (alig->saveResidues[residueIndex] == -1) continue;
             keptResiduesGaps[keptResiduesGapsIndex++] = gapsInColumn[residueIndex];
         }
 
-        // Sort the array and take the gaps value of
-        // the column that marks the % baseline
-        utils::quicksort(keptResiduesGaps, 0, numberKeptResidues - 1);
-        int baselinePosition = (int) ((float) (numberKeptResidues - 1) * minCoverageRatio);
+        utils::quicksort(keptResiduesGaps, 0, oldNumberKeptResidues - 1);
+        int baselinePosition = (int) ((float) (oldNumberKeptResidues - 1) * minCoverageRatio);
         maxGaps = keptResiduesGaps[baselinePosition];
 
         delete[] keptResiduesGaps;
 
-        // Retrieve the residue that marks the midpoint of the alignment
-        // This can't be obtained directly
-        // as some parts may have been previously trimmed
-        int midPoint = 0;
-        int halfNumberKeptResidues = numberKeptResidues / 2;
-        for (int keptResiduesCounter = 0; midPoint < alig->originalNumberOfResidues; midPoint++) {
-            if (alig->saveResidues[midPoint] == -1) continue;
+        int keptResiduesMidPoint = 0;
+        int halfNumberKeptResidues = oldNumberKeptResidues / 2;
+        for (int keptResiduesCounter = 0; keptResiduesMidPoint < alig->originalNumberOfResidues; keptResiduesMidPoint++) {
+            if (alig->saveResidues[keptResiduesMidPoint] == -1) continue;
             if (keptResiduesCounter >= halfNumberKeptResidues) break;
             keptResiduesCounter++;
         }
 
         const float blockRatio = 0.005;
-        for (minBlockSize = utils::roundInt(blockRatio * numberKeptResidues);
-             minBlockSize >= 0 && numberColumnsToRecover > 0;
-             minBlockSize--) {
-            // We start in the alignment center residue,
-            // then we move on right and left side at the same time.
-            for (int residueLeftIndex = midPoint, residueRightIndex = midPoint + 1;
+        for (int minConservedBlockSize = utils::roundInt(blockRatio * oldNumberKeptResidues);
+             minConservedBlockSize >= 0 && numberColumnsToRecover > 0;
+             minConservedBlockSize--) {
+            for (int residueLeftIndex = keptResiduesMidPoint, residueRightIndex = keptResiduesMidPoint + 1;
                  (residueLeftIndex > 0 || residueRightIndex < alig->originalNumberOfResidues - 1)
                  && numberColumnsToRecover > 0;
                  residueLeftIndex--, residueRightIndex++) {
-                int conservedBlockSize;
+                    
                 // Left side
-                // Here, we compute the block's size.
+                int conservedBlockSize;
                 for (conservedBlockSize = 0, residueIndex = residueLeftIndex; residueIndex >= 0; residueIndex--) {
                     if (alig->saveResidues[residueIndex] == -1) continue;
                     if (newAlig->saveResidues[residueIndex] == -1) break;
                     conservedBlockSize++;
                 }
 
-                // if block's size is greater or equal than the fixed
-                // size then we save all columns that have not been
-                // saved previously.
-                if (conservedBlockSize >= minBlockSize) {
+                if (conservedBlockSize >= minConservedBlockSize) {
                     for (; residueIndex >= 0 && numberColumnsToRecover > 0 && newAlig->saveResidues[residueIndex] == -1;
                         residueIndex--) {
                         if (alig->saveResidues[residueIndex] == -1) continue;
                         if (gapsInColumn[residueIndex] <= maxGaps) {
                             newAlig->saveResidues[residueIndex] = residueIndex;
                             numberColumnsToRecover--;
-                        } else
+                        } else {
                             break;
+                        }
                     }
                 }
+
                 residueLeftIndex = residueIndex;
-                
+
                 // Right side
-                // Here, we compute the block's size.
                 for (conservedBlockSize = 0, residueIndex = residueRightIndex;
                     residueIndex < alig->originalNumberOfResidues && numberColumnsToRecover > 0;
                     residueIndex++) {
@@ -196,10 +181,7 @@ Alignment *Cleaner::cleanByCutValueOverpass(
                     conservedBlockSize++;
                 }
 
-                // if block's size is greater or equal than the fixed
-                // size then we save all columns that have not been
-                // saved previously.
-                if (conservedBlockSize >= minBlockSize) {
+                if (conservedBlockSize >= minConservedBlockSize) {
                     for (; residueIndex < alig->originalNumberOfResidues
                             && numberColumnsToRecover > 0
                             && newAlig->saveResidues[residueIndex] == -1;
@@ -213,6 +195,7 @@ Alignment *Cleaner::cleanByCutValueOverpass(
                         }
                     }
                 }
+                
                 residueRightIndex = residueIndex;
             }
         }
