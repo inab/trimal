@@ -96,7 +96,7 @@ Alignment *Cleaner::cleanByCutValueOverpass(
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
     StartTiming("Alignment *Cleaner::cleanByCutValueOverpass(double cut, float baseLine, const int *gInCol, bool complementary) ");
-    int residueIndex, j, minBlockSize, jn, numberColumnsToRecover, numberKeptResidues = 0, *keptResiduesGaps, numberResiduesToKeep;
+    int residueIndex, minBlockSize, numberColumnsToRecover, numberKeptResidues = 0, *keptResiduesGaps, numberResiduesToKeep;
     Alignment *newAlig = new Alignment(*alig);
 
     // Select the columns with a gap value
@@ -157,64 +157,63 @@ Alignment *Cleaner::cleanByCutValueOverpass(
              minBlockSize--) {
             // We start in the alignment center residue,
             // then we move on right and left side at the same time.
-            for (residueIndex = midPoint, j = residueIndex + 1;
-                 (residueIndex > 0 || j < alig->originalNumberOfResidues - 1)
+            for (int residueLeftIndex = midPoint, residueRightIndex = midPoint + 1;
+                 (residueLeftIndex > 0 || residueRightIndex < alig->originalNumberOfResidues - 1)
                  && numberColumnsToRecover > 0;
-                 residueIndex--, j++) {
-                int block;
+                 residueLeftIndex--, residueRightIndex++) {
+                int conservedBlockSize;
                 // Left side
-                {
-                    // Left side. Here, we compute the block's size.
-                    for (block = 0, jn = residueIndex; jn >= 0 && numberColumnsToRecover > 0; jn--) {
-                        if (alig->saveResidues[jn] == -1) continue;
-                        else if (newAlig->saveResidues[jn] == -1) {
-                            break;
-                        } else block++;
-                    }
-
-                    // if block's size is greater or equal than the fixed
-                    // size then we save all columns that have not been
-                    // saved previously.
-                    if (block >= minBlockSize) {
-                        for (; jn >= 0 && numberColumnsToRecover > 0 && newAlig->saveResidues[jn] == -1; jn--) {
-                            if (alig->saveResidues[jn] == -1) continue;
-                            if (gapsInColumn[jn] <= maxGaps) {
-                                newAlig->saveResidues[jn] = jn;
-                                numberColumnsToRecover--;
-                            } else
-                                break;
-                        }
-                    }
-                    residueIndex = jn;
+                // Here, we compute the block's size.
+                for (conservedBlockSize = 0, residueIndex = residueLeftIndex; residueIndex >= 0; residueIndex--) {
+                    if (alig->saveResidues[residueIndex] == -1) continue;
+                    if (newAlig->saveResidues[residueIndex] == -1) break;
+                    conservedBlockSize++;
                 }
+
+                // if block's size is greater or equal than the fixed
+                // size then we save all columns that have not been
+                // saved previously.
+                if (conservedBlockSize >= minBlockSize) {
+                    for (; residueIndex >= 0 && numberColumnsToRecover > 0 && newAlig->saveResidues[residueIndex] == -1;
+                        residueIndex--) {
+                        if (alig->saveResidues[residueIndex] == -1) continue;
+                        if (gapsInColumn[residueIndex] <= maxGaps) {
+                            newAlig->saveResidues[residueIndex] = residueIndex;
+                            numberColumnsToRecover--;
+                        } else
+                            break;
+                    }
+                }
+                residueLeftIndex = residueIndex;
+                
                 // Right side
-                {
-                    // Right side. Here, we compute the block's size.
-                    for (block = 0, jn = j; jn < alig->originalNumberOfResidues && numberColumnsToRecover > 0; jn++) {
-                        if (alig->saveResidues[jn] == -1) continue;
-                        else if (newAlig->saveResidues[jn] == -1) {
-                            break;
-                        } else block++;
-                    }
+                // Here, we compute the block's size.
+                for (conservedBlockSize = 0, residueIndex = residueRightIndex;
+                    residueIndex < alig->originalNumberOfResidues && numberColumnsToRecover > 0;
+                    residueIndex++) {
+                    if (alig->saveResidues[residueIndex] == -1) continue;
+                    if (newAlig->saveResidues[residueIndex] == -1) break;
+                    conservedBlockSize++;
+                }
 
-                    // if block's size is greater or equal than the fixed
-                    // size then we save all columns that have not been
-                    // saved previously.
-                    if (block >= minBlockSize) {
-                        for (; jn < alig->originalNumberOfResidues
-                               && numberColumnsToRecover > 0
-                               && newAlig->saveResidues[jn] == -1;
-                               jn++) {
-                            if (alig->saveResidues[jn] == -1) continue;
-                            if (gapsInColumn[jn] <= maxGaps) {
-                                newAlig->saveResidues[jn] = jn;
-                                numberColumnsToRecover--;
-                            } else
-                                break;
+                // if block's size is greater or equal than the fixed
+                // size then we save all columns that have not been
+                // saved previously.
+                if (conservedBlockSize >= minBlockSize) {
+                    for (; residueIndex < alig->originalNumberOfResidues
+                            && numberColumnsToRecover > 0
+                            && newAlig->saveResidues[residueIndex] == -1;
+                            residueIndex++) {
+                        if (alig->saveResidues[residueIndex] == -1) continue;
+                        if (gapsInColumn[residueIndex] <= maxGaps) {
+                            newAlig->saveResidues[residueIndex] = residueIndex;
+                            numberColumnsToRecover--;
+                        } else {
+                            break;
                         }
                     }
-                    j = jn;
                 }
+                residueRightIndex = residueIndex;
             }
         }
     }
