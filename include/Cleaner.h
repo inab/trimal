@@ -109,18 +109,18 @@ public:
       to achieve the given percentage desired to keep. \n
      To achieve this, the method starts in the middle of the sequence and,
       alternating sides, adds column one by one.
-     \param cut
+     \param minGaps
       Gap cut value to use.
      \param baseLine
       Percent of sequences to keep
-     \param ValueVect
+     \param gapsInColumn
       Vector that contains the gaps present on each column.
      \param complementary
       Whether or not to return the complementary version of the trimmed alignment.
      \return Pointer to the cleaned alignment.
      */
-    Alignment *cleanByCutValueFallBehind(float cut, float baseLine,
-                                            const float *ValueVect,
+    Alignment *cleanByCutValueFallBehind(float minGaps, float baseLine,
+                                            const float *gapsInColumn,
                                             bool complementary);
 
      /**
