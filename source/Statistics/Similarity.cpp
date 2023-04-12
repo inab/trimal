@@ -488,7 +488,7 @@ namespace statistics {
         //	which means the end of the current scope.
         StartTiming("void Similarity::printConservationAcl(void) ");
 
-        float refer, *vectAux;
+        float refer, *vectAux, avgSimilarity;
         int i, num, acm;
         int size = 20;
         // Allocate memory
@@ -573,6 +573,7 @@ namespace statistics {
         refer = vectAux[alig->originalNumberOfResidues - 1];
         acm = 0;
         num = 1;
+        avgSimilarity = 0;
 
         // Count the columns with the same similarity's value and compute this information to shows the accumulative
         // statistics in the alignment.
@@ -597,6 +598,8 @@ namespace statistics {
                         << std::setw(size) << std::left << refer
 
                         << std::endl;
+
+                avgSimilarity += refer * (float) num / alig->originalNumberOfResidues;
                 refer = vectAux[i];
                 num = 1;
             } else num++;
@@ -619,6 +622,22 @@ namespace statistics {
                 << std::setw(size) << std::left << refer
 
                 << std::endl;
+        
+        std::cout << std::setw(alig->filename.size())
+                  << std::setfill('-')
+                  << std::left << ""
+                  << std::setfill(' ')
+                  << "\n";
+
+        std::cout << "\n"
+                  << std::fixed
+                  << std::setfill(' ');
+
+        avgSimilarity += refer * (float) num / alig->originalNumberOfResidues;
+
+        
+        std::cout << "## AverageSimilarity\t" << float(avgSimilarity) << "\n";
+        std::cout << "#> AverageSimilarity\tAverage similarity of the alignment" << "\n";
 
         // Deallocate the reserved memory.
         delete[] vectAux;
