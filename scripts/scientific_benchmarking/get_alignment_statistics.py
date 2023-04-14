@@ -125,6 +125,7 @@ def generate_statistics(msa_filepath, residue_type, taxon, ref_tree_filepath):
 
     msa = AlignIO.read(msa_filepath, format="fasta")
     number_columns = msa.get_alignment_length()
+    number_sequences = len(msa)
 
     temp_trimal_sgt_filename = f'temp_trimal_sgt_{msa_id}.txt'
     with open(temp_trimal_sgt_filename, "w") as temp_trimal_sgt_output:
@@ -138,7 +139,7 @@ def generate_statistics(msa_filepath, residue_type, taxon, ref_tree_filepath):
 
     temp_trimal_sident_filename = f'temp_trimal_sident_{msa_id}.txt'
     with open(temp_trimal_sident_filename, "w") as temp_trimal_sident_output:
-        subprocess.run([trimal_bin, "-in", msa_filepath, "-sgt"],
+        subprocess.run([trimal_bin, "-in", msa_filepath, "-sident"],
                        stdout=temp_trimal_sident_output)
     avg_seq_identity = -1
     with open(temp_trimal_sident_filename, "r") as temp_trimal_sident_output:
@@ -154,14 +155,21 @@ def generate_statistics(msa_filepath, residue_type, taxon, ref_tree_filepath):
     t2 = Tree(ref_tree_filepath)
     try:
         rf_distance, max_parts, common_attrs, edges1, edges2, discard_t1, discard_t2 = t1.robinson_foulds(
-            "t2", unrooted_trees=True)
+            t2, unrooted_trees=True)
     except:
         # write error into log
         print()
+    
+    print(f'{residue_type},{taxon},{problem_num},{msa_tool},{msa_filter_tool},{number_columns},{number_sequences},{number_blocks},{left_block_column},{right_block_column}',
+          f'{avg_gaps},{avg_seq_identity},{rf_distance}')
 
-    print(f'{residue_type},{taxon},{problem_num},{msa_tool},{msa_filter_tool},{number_blocks},{left_block_column},{right_block_column}',
-          f'{number_columns},{avg_gaps},{avg_seq_identity},{rf_distance}')
+
+def generate_comparison_statistics():
+    # "$columns_raw_MSA,$removed_columns,$percent_conserved_columns,$avg_gaps_diff_weighted,$avg_seq_identity_diff_weighted,$RF_distance_diff"
+    print()
 
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
