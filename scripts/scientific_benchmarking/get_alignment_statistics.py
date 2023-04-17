@@ -65,19 +65,15 @@ def main():
         if not os.path.isfile(args.ref_tree) or ref_tree_file_extension != ".nwk":
             sys.exit(("ERROR: Check input reference tree file '%s'") %
                      (args.ref_tree))
-        if not args.residueType:
-            sys.exit(("ERROR: Set residue type [-t] [--type]"))
-        if not args.taxon:
-            sys.exit(("ERROR: Set taxon [--taxon]"))
 
-        generate_statistics(args.inFile, args.residueType,
-                            args.taxon, args.ref_tree)
-    elif args.single:
+    if args.single:
         if args.single == "all_gaps_indets_sequence":
             print(are_all_gaps_indets(args.inFile, args.residueType))
     else:
-        print("Pass reference tree, residue type and taxon to calculate their statistics or --single"
-              + " to get only a particular value")
+        if not args.taxon:
+            sys.exit(("ERROR: Set taxon [--taxon]"))
+        generate_statistics(args.inFile, args.residueType,
+                            args.taxon, args.ref_tree)
 
 
 def are_all_gaps_indets(file, residue_type):
@@ -136,6 +132,7 @@ def generate_statistics(msa_filepath, residue_type, taxon, ref_tree_filepath):
         for line in temp_trimal_sgt_output.readlines():
             if "## AverageGaps" in line:
                 avg_gaps = line.split()[-1]
+                break
 
     temp_trimal_sident_filename = f'temp_trimal_sident_{msa_id}.txt'
     with open(temp_trimal_sident_filename, "w") as temp_trimal_sident_output:
@@ -146,19 +143,21 @@ def generate_statistics(msa_filepath, residue_type, taxon, ref_tree_filepath):
         for line in temp_trimal_sident_output.readlines():
             if "## AverageIdentity" in line:
                 avg_seq_identity = line.split()[-1]
+                break
 
     subprocess.run(["rm", temp_trimal_sgc_filename, temp_number_blocks_filename,
                     temp_trimal_sgt_filename, temp_trimal_sident_filename])
 
     rf_distance = -1
-    t1 = Tree(f'{msa_filepath}.treefile')
-    t2 = Tree(ref_tree_filepath)
-    try:
-        rf_distance, max_parts, common_attrs, edges1, edges2, discard_t1, discard_t2 = t1.robinson_foulds(
-            t2, unrooted_trees=True)
-    except:
-        # write error into log
-        print()
+    if ref_tree_filepath:
+        t1 = Tree(f'{msa_filepath}.treefile')
+        t2 = Tree(ref_tree_filepath)
+        try:
+            rf_distance, max_parts, common_attrs, edges1, edges2, discard_t1, discard_t2 = t1.robinson_foulds(
+                t2, unrooted_trees=True)
+        except:
+            # write error into log
+            print()
     
     print(f'{residue_type},{taxon},{problem_num},{msa_tool},{msa_filter_tool},{number_columns},{number_sequences},{number_blocks},{left_block_column},{right_block_column}',
           f'{avg_gaps},{avg_seq_identity},{rf_distance}')
