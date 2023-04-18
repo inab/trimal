@@ -96,9 +96,6 @@ def generate_statistics(fixed_format, msa_filepath, residue_type, taxon, ref_tre
     trimal_bin = f'{trimal_dir}/bin/trimal'
     msa_basename = os.path.basename(msa_filepath)
     msa_id = f'{residue_type}_{taxon}_{msa_basename}'
-    problem_num = msa_basename.split('.')[0][-4:] if fixed_format else -1
-    msa_tool = msa_basename.split('.')[1] if fixed_format else "unknown"
-    msa_filter_tool = msa_basename.split('.')[2] if fixed_format else "unknown"
 
     temp_trimal_sgc_filename = f'temp_trimal_sgc_{msa_id}.txt'
     with open(temp_trimal_sgc_filename, "w") as temp_trimal_sgc_output:
@@ -147,8 +144,8 @@ def generate_statistics(fixed_format, msa_filepath, residue_type, taxon, ref_tre
 
     subprocess.run(["rm", temp_trimal_sgc_filename])
 
-    rf_distance = -1
     if ref_tree_filepath:
+        rf_distance = -1
         t1 = Tree(f'{msa_filepath}.treefile')
         t2 = Tree(ref_tree_filepath)
         try:
@@ -158,11 +155,25 @@ def generate_statistics(fixed_format, msa_filepath, residue_type, taxon, ref_tre
             # write error into log
             print()
 
-        print(f'{residue_type},{taxon},{problem_num},{msa_tool},{msa_filter_tool},{number_columns},{number_sequences},{number_blocks},{left_block_column},{right_block_column}',
-              f'{avg_gaps},{avg_seq_identity},{rf_distance}')
+        if fixed_format:
+            problem_num = msa_basename.split('.')[0][-4:]
+            msa_tool = msa_basename.split('.')[1]
+            msa_filter_tool = msa_basename.split('.')[2]
+            print(f'{residue_type},{taxon},{problem_num},{msa_tool},{msa_filter_tool},{number_columns},{number_sequences},{number_blocks},{left_block_column},{right_block_column}',
+                f'{avg_gaps},{avg_seq_identity},{rf_distance}')
+        else:
+             print(f'{residue_type},{taxon},{number_columns},{number_sequences},{number_blocks},{left_block_column},{right_block_column}',
+                f'{avg_gaps},{avg_seq_identity},{rf_distance}')
     else:
-        print(f'{residue_type},{taxon},{problem_num},{msa_tool},{msa_filter_tool},{number_columns},{number_sequences},{number_blocks},{left_block_column},{right_block_column}',
-              f'{avg_gaps},{avg_seq_identity}')
+        if fixed_format:
+            problem_num = msa_basename.split('.')[0][-4:]
+            msa_tool = msa_basename.split('.')[1]
+            msa_filter_tool = msa_basename.split('.')[2]
+            print(f'{residue_type},{taxon},{problem_num},{msa_tool},{msa_filter_tool},{number_columns},{number_sequences},{number_blocks},{left_block_column},{right_block_column}',
+                f'{avg_gaps},{avg_seq_identity}')
+        else:
+             print(f'{residue_type},{taxon},{number_columns},{number_sequences},{number_blocks},{left_block_column},{right_block_column}',
+                f'{avg_gaps},{avg_seq_identity}')
 
 
 def generate_comparison_statistics():
