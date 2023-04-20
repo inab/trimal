@@ -65,14 +65,14 @@ namespace statistics {
         /**
         \brief Method to calculate identities between the sequences from the alignment.\n
         */
-        void calculateSeqIdentity();
+        virtual void calculateSeqIdentity();
 
         /**
         \warning Not In Use
         \brief Method that makes a raw approximation of sequence identity computation.\n
         \note Designed for reducing comparisons for huge alignments.
         */
-        void calculateRelaxedSeqIdentity();
+        virtual void calculateRelaxedSeqIdentity();
     };
 }
 
