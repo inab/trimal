@@ -22,7 +22,7 @@ void AddQuality(
         args.push_back("-minquality");
         test_arguments(
                 args, manager,
-                true, trimAlManager::argumentReport::Errored,
+                true, trimAlManager::argumentReport::Wrong,
                 true, true);
         GIVEN("Quality value")
         {
@@ -55,7 +55,7 @@ void AddCoverage(
         args.push_back("-mincoverage");
         test_arguments(
                 args, manager,
-                true, trimAlManager::argumentReport::Errored,
+                true, trimAlManager::argumentReport::Wrong,
                 true, true);
         GIVEN("Coverage value")
         {
@@ -118,7 +118,7 @@ void AddVCF(
         args.push_back("-vcf");
         test_arguments(
                 args, manager,
-                true, trimAlManager::argumentReport::Errored,
+                true, trimAlManager::argumentReport::Wrong,
                 true, true);
         GIVEN("VCF file")
         {
@@ -171,11 +171,11 @@ TEST_CASE("VCF Arguments", "[manager][arguments][vcf][ngs]") {
     {
         GIVEN("No VCF")
         {
-            applyCalls(models, args, manager, trimAlManager::argumentReport::Errored, true);
+            applyCalls(models, args, manager, trimAlManager::argumentReport::Wrong, true);
         }
 
-        AddVCF(args, manager, trimAlManager::argumentReport::Errored, true,
-               [&](){ applyCalls(models, args, manager, trimAlManager::argumentReport::Errored, true); });
+        AddVCF(args, manager, trimAlManager::argumentReport::Wrong, true,
+               [&](){ applyCalls(models, args, manager, trimAlManager::argumentReport::Wrong, true); });
     }
 
     GIVEN("Input")

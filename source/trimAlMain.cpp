@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
 
         returnValue = trimAl.parseArguments(argc, argv);
 
-        if (returnValue == trimAlManager::Final | returnValue == trimAlManager::Errored)
+        if (returnValue == trimAlManager::Final | returnValue == trimAlManager::Wrong)
             exit(0);
 
         // Process them: Incompatibilities and co-dependencies

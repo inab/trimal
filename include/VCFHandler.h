@@ -56,7 +56,7 @@ namespace ngs {
          * <b> Values: </b>A = \i 1; C = \i 2; T = \i 4; G = \i 8;
          * @param [in] array Sequence of chars to convert
          * @param [in] separator Separator of the chars in the sequence
-         * @return <b>tag</b> if correct\n<b>-1</b> if errored
+         * @return <b>tag</b> if correct\n<b>-1</b> if wrong
          */
         inline int getTagFromCharArray(
                 const char *const array,

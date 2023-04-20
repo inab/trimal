@@ -22,7 +22,7 @@ TEST_CASE("Reporting argument parse", "[manager][arguments]") {
                         test_arguments(
                                 {"", method.argument, "./tmp"},
                                 manager,
-                                true, trimAlManager::argumentReport::Errored,
+                                true, trimAlManager::argumentReport::Wrong,
                                 true, true);
                     }
                     WHEN("Trimming method is provided") {
@@ -31,7 +31,7 @@ TEST_CASE("Reporting argument parse", "[manager][arguments]") {
                                  "-strict",
                                  method.argument, "./tmp"},
                                 manager,
-                                true, trimAlManager::argumentReport::Errored,
+                                true, trimAlManager::argumentReport::Wrong,
                                 false, true);
                     }
                 }
@@ -42,7 +42,7 @@ TEST_CASE("Reporting argument parse", "[manager][arguments]") {
                                 {"",
                                  method.argument},
                                 manager,
-                                true, trimAlManager::argumentReport::Errored,
+                                true, trimAlManager::argumentReport::Wrong,
                                 true, true);
                     }
                     WHEN("Trimming method is provided") {
@@ -51,7 +51,7 @@ TEST_CASE("Reporting argument parse", "[manager][arguments]") {
                                  "-strict",
                                  method.argument},
                                 manager,
-                                true, trimAlManager::argumentReport::Errored,
+                                true, trimAlManager::argumentReport::Wrong,
                                 true, true);
                     }
                 }
@@ -93,7 +93,7 @@ TEST_CASE("Reporting argument parse", "[manager][arguments]") {
                                  "-in", alignmentPath,
                                  method.argument},
                                 manager,
-                                true, trimAlManager::argumentReport::Errored,
+                                true, trimAlManager::argumentReport::Wrong,
                                 true, true);
                     }
                     WHEN("Trimming method is provided") {
@@ -103,7 +103,7 @@ TEST_CASE("Reporting argument parse", "[manager][arguments]") {
                                  "-strict",
                                  method.argument},
                                 manager,
-                                true, trimAlManager::argumentReport::Errored,
+                                true, trimAlManager::argumentReport::Wrong,
                                 true, true);
                     }
                 }

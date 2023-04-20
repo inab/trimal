@@ -42,7 +42,7 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
         test_arguments(
                 args,
                 manager,
-                true, trimAlManager::argumentReport::Errored,
+                true, trimAlManager::argumentReport::Wrong,
                 true, true);
 
         AND_GIVEN("Correct value input")
@@ -51,7 +51,7 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
             test_arguments(
                     args,
                     manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
 
             GIVEN("Input file")
@@ -135,7 +135,7 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
         test_arguments(
                 args,
                 manager,
-                true, trimAlManager::argumentReport::Errored,
+                true, trimAlManager::argumentReport::Wrong,
                 true, true);
 
         AND_GIVEN("Correct value input")
@@ -144,7 +144,7 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
             test_arguments(
                     args,
                     manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
 
             GIVEN("Input file")

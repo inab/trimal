@@ -35,14 +35,14 @@ inline void applyCons(
         args.push_back("-cons");
         WHEN("No cons value is provided") {
             test_arguments(args, manager,
-                           true, trimAlManager::argumentReport::Errored,
+                           true, trimAlManager::argumentReport::Wrong,
                            true, true);
         }
         WHEN("Cons value provided") {
             GIVEN("-10 as cons value") {
                 args.push_back("-10");
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Errored,
+                               true, trimAlManager::argumentReport::Wrong,
                                true, true);
             }
 
@@ -67,7 +67,7 @@ inline void applyCons(
             GIVEN("110 as cons value") {
                 args.push_back("110");
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Errored,
+                               true, trimAlManager::argumentReport::Wrong,
                                true, true);
             }
         }
@@ -100,21 +100,21 @@ inline void applyWindow(
         args.push_back(currentCase.windowArgument);
         WHEN(currentCase.name << " window value is not provided") {
             test_arguments(args, manager,
-                           true, trimAlManager::argumentReport::Errored, true, true);
+                           true, trimAlManager::argumentReport::Wrong, true, true);
 
-            applyCons(args, manager, trimAlManager::argumentReport::Errored, true);
+            applyCons(args, manager, trimAlManager::argumentReport::Wrong, true);
 
             if (currentCase != generalCase) {
                 applyWindow(
                         generalCase, args, manager,
-                        trimAlManager::argumentReport::Errored, true);
+                        trimAlManager::argumentReport::Wrong, true);
             }
         }
         WHEN(currentCase.name << " window value is provided") {
             for (auto &value : std::vector<reportChecker>
                     {
-                            {"-1",   trimAlManager::argumentReport::Errored, true},
-                            {"-0.1", trimAlManager::argumentReport::Errored, true},
+                            {"-1",   trimAlManager::argumentReport::Wrong, true},
+                            {"-0.1", trimAlManager::argumentReport::Wrong, true},
                             {"1",    expectedReport,                         expectedHasErrors},
                             {"5",    expectedReport,                         expectedHasErrors},
                     }) {
@@ -188,31 +188,31 @@ inline void performSimpleThreshold(
 
         GIVEN("No " << currentCase.name << " Threshold Value") {
             test_arguments(args, manager,
-                           true, trimAlManager::argumentReport::Errored, true, true);
+                           true, trimAlManager::argumentReport::Wrong, true, true);
 
             applyWindow(
                     currentCase, args, manager,
-                    trimAlManager::argumentReport::Errored, true);
+                    trimAlManager::argumentReport::Wrong, true);
 
             applyCons(args, manager,
-                      trimAlManager::argumentReport::Errored, true);
+                      trimAlManager::argumentReport::Wrong, true);
 
             for (const thresholdCase &otherCase: allCases) {
                 if (otherCase == currentCase) continue;
                 applyWindow(
                         otherCase, args, manager,
-                        trimAlManager::argumentReport::Errored, true);
+                        trimAlManager::argumentReport::Wrong, true);
             }
         }
         GIVEN(currentCase.name << " Threshold Value") {
             for (auto &value : std::vector<reportChecker>
                     {
-                            {"-1.0", trimAlManager::argumentReport::Errored, true},
-                            {"-0.1", trimAlManager::argumentReport::Errored, true},
+                            {"-1.0", trimAlManager::argumentReport::Wrong, true},
+                            {"-0.1", trimAlManager::argumentReport::Wrong, true},
                             {"0.0",  expectedReportOnOK,                     expectedErrorsOnOk},
                             {"0.5",  expectedReportOnOK,                     expectedErrorsOnOk},
                             {"1.0",  expectedReportOnOK,                     expectedErrorsOnOk},
-                            {"1.1",  trimAlManager::argumentReport::Errored, true},
+                            {"1.1",  trimAlManager::argumentReport::Wrong, true},
                     }) {
                 WHEN(currentCase.name << " threshold value is " << value.argumentValue) {
                     args.push_back(value.argumentValue);
@@ -307,28 +307,28 @@ inline void performCombination(
             GIVEN("No " << currentCase.name << " Threshold Value") {
                 // Passing {} as allCases prevents it from applying 'other cases windows'
                 // This is part of the combination test and thus, must be skipped
-                // Otherwise it will expect Errored on cases
+                // Otherwise it will expect Wrong on cases
                 //  where it should expect Recognized
                 performSimpleThreshold(
                         otherCase, {},
                         args, manager,
-                        trimAlManager::argumentReport::Errored, true);
+                        trimAlManager::argumentReport::Wrong, true);
             }
             GIVEN(currentCase.name << " Threshold Value") {
                 for (auto &value : std::vector<reportChecker>
                         {
-                                {"-1.0", trimAlManager::argumentReport::Errored,    true},
-                                {"-0.1", trimAlManager::argumentReport::Errored,    true},
+                                {"-1.0", trimAlManager::argumentReport::Wrong,    true},
+                                {"-0.1", trimAlManager::argumentReport::Wrong,    true},
                                 {"0.0",  trimAlManager::argumentReport::Recognized, false},
                                 {"0.5",  trimAlManager::argumentReport::Recognized, false},
                                 {"1.0",  trimAlManager::argumentReport::Recognized, false},
-                                {"1.1",  trimAlManager::argumentReport::Errored,    true},
+                                {"1.1",  trimAlManager::argumentReport::Wrong,    true},
                         }) {
                     WHEN(currentCase.name << " threshold value is " << value.argumentValue) {
                         args.push_back(value.argumentValue);
                         // Passing {} as allCases prevents it from applying 'other cases windows'
                         // This is part of the combination test and thus, must be skipped
-                        // Otherwise it will expect Errored on cases where it should be Recognized
+                        // Otherwise it will expect Wrong on cases where it should be Recognized
                         performSimpleThreshold(
                                 otherCase, {},
                                 args, manager,

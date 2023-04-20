@@ -17,8 +17,8 @@ std::ostream &operator<<(std::ostream &os, const trimAlManager::argumentReport &
         case trimAlManager::Recognized:
             os << "Recognized";
             break;
-        case trimAlManager::Errored:
-            os << "Errored";
+        case trimAlManager::Wrong:
+            os << "Wrong";
             break;
         case trimAlManager::Final:
             os << "Final";
@@ -39,8 +39,8 @@ const std::string catch2Utils::trimAlManager::getMessageFor(::trimAlManager::arg
 
     switch(val)
     {
-        case ::trimAlManager::argumentReport::Errored:
-            return parseArgumentsMessages.at(parseArgumentsErrored);
+        case ::trimAlManager::argumentReport::Wrong:
+            return parseArgumentsMessages.at(parseArgumentsWrong);
         case ::trimAlManager::argumentReport::Recognized:
             return parseArgumentsMessages.at(parseArgumentsCorrect);
         case ::trimAlManager::argumentReport::Final:
@@ -99,7 +99,7 @@ void catch2Utils::trimAlManager::test_arguments(
             if (processArguments) {
                 // Get the correct Section Name
                 AND_THEN(getMessageFor( expectingProcessArgumentsError ?
-                        processArgumentsErrored : processArgumentsNonErrored)) {
+                        processArgumentsWrong : processArgumentsNonWrong)) {
                     bool hasErrors;
                     output = catch2Utils::capturingLambda([&]() -> void {
                         hasErrors = manager.processArguments(

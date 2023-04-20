@@ -33,7 +33,7 @@ TEST_CASE("Input argument parse", "[manager][arguments][in][input]") {
                      "-in", alignmentPath,
                      "-in", alignmentPath},
                     manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
         }
     }
@@ -43,7 +43,7 @@ TEST_CASE("Input argument parse", "[manager][arguments][in][input]") {
         test_arguments(
                 {"", "-in", "../dataset/example..010.AA.fasta"},
                 manager,
-                true, trimAlManager::argumentReport::Errored,
+                true, trimAlManager::argumentReport::Wrong,
                 true, true);
 
         AND_WHEN("Input argument is passed two times")
@@ -53,7 +53,7 @@ TEST_CASE("Input argument parse", "[manager][arguments][in][input]") {
                      "-in", "../dataset/example..010.AA.fasta",
                      "-in", "../dataset/example..010.AA.fasta"},
                     manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
         }
     }
@@ -64,7 +64,7 @@ TEST_CASE("Input argument parse", "[manager][arguments][in][input]") {
         test_arguments(
                 {"", "-in", "../dataset/"},
                 manager,
-                true, trimAlManager::argumentReport::Errored,
+                true, trimAlManager::argumentReport::Wrong,
                 true, true);
         AND_WHEN("Input argument is passed two times")
         {
@@ -73,7 +73,7 @@ TEST_CASE("Input argument parse", "[manager][arguments][in][input]") {
                      "-in", "../dataset/",
                      "-in", "../dataset/"},
                     manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
         }
     }

@@ -181,7 +181,7 @@ public:
     enum argumentReport {
         NotRecognized   = 0,
         Recognized      = 1,
-        Errored         = 2,
+        Wrong           = 2,
         Final           = 3
     };
 

@@ -68,7 +68,7 @@ TEST_CASE("Format argument parse", "[manager][arguments][formats]") {
                     {"", "-in", "../dataset/example.093.DNA.fasta",
                      "-formats"},
                     manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
         }
 
@@ -78,7 +78,7 @@ TEST_CASE("Format argument parse", "[manager][arguments][formats]") {
                     {"", "-in", "../dataset/example.093.DNA.fasta",
                      "-formats", "thisisnoformat"},
                     manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
         }
     }

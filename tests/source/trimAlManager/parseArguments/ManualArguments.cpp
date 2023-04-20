@@ -225,7 +225,7 @@ TEST_CASE("Select (cols|seqs) argument parse", "[manager][arguments][manual][sel
                 test_arguments(
                         {"",entry.argument, "{", "0", "}"},
                         manager,
-                        true, trimAlManager::argumentReport::Errored,
+                        true, trimAlManager::argumentReport::Wrong,
                         false, true);
             }
         }
@@ -254,14 +254,14 @@ TEST_CASE("Cluster method argument parse", "[manager][arguments][manual][cluster
             test_arguments(
                     {"", "-clusters"},
                     manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
 
         GIVEN("-1 clusters")
             test_arguments(
                     {"", "-clusters", std::to_string(-1).c_str()},
                     manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
 
         for (int i = 0; i < 2; i++)
@@ -269,7 +269,7 @@ TEST_CASE("Cluster method argument parse", "[manager][arguments][manual][cluster
                 test_arguments(
                         {"", "-clusters", std::to_string(i).c_str()},
                         manager,
-                        true, trimAlManager::argumentReport::Errored,
+                        true, trimAlManager::argumentReport::Wrong,
                         false, true);
     }
 
@@ -281,7 +281,7 @@ TEST_CASE("Cluster method argument parse", "[manager][arguments][manual][cluster
                      "-in", alignmentPath,
                      "-clusters"},
                     manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
 
         GIVEN("-1/" << alig->numberOfSequences << " clusters")
@@ -290,7 +290,7 @@ TEST_CASE("Cluster method argument parse", "[manager][arguments][manual][cluster
                      "-in", alignmentPath,
                      "-clusters", "-1"},
                     manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
 
         GIVEN("0/" << alig->numberOfSequences << " clusters")
@@ -299,7 +299,7 @@ TEST_CASE("Cluster method argument parse", "[manager][arguments][manual][cluster
                      "-in", alignmentPath,
                      "-clusters", "0"},
                     manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
 
         for (int i = 1; i <= alig->numberOfSequences; i++)
@@ -341,7 +341,7 @@ TEST_CASE("MaxIdentity", "[manager][arguments][manual][maxidentity]")
                     {"", "-in", alignmentPath,
                      "-maxidentity"},
                     manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
         }
 
@@ -349,8 +349,8 @@ TEST_CASE("MaxIdentity", "[manager][arguments][manual][maxidentity]")
         {
             for (auto & value : std::vector<std::tuple<const char *, trimAlManager::argumentReport, bool>>
             {
-                    {"-1",      trimAlManager::argumentReport::Errored,     true},
-                    {"-0.1",    trimAlManager::argumentReport::Errored,     true},
+                    {"-1",      trimAlManager::argumentReport::Wrong,     true},
+                    {"-0.1",    trimAlManager::argumentReport::Wrong,     true},
                     {"0",       trimAlManager::argumentReport::Recognized,  false},
                     {"0.5",     trimAlManager::argumentReport::Recognized,  false},
                     {"1",       trimAlManager::argumentReport::Recognized,  false},

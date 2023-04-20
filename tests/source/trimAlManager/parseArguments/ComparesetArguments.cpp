@@ -29,13 +29,13 @@ void addInput(
 //        {
 //            args.push_back("../dataset/");
 //            test_arguments(args, manager,
-//                    true, trimAlManager::argumentReport::Errored,
+//                    true, trimAlManager::argumentReport::Wrong,
 //                    true, true);
 //        }
 //        WHEN("When input is not provided")
 //        {
 //            test_arguments(args, manager,
-//                    true, trimAlManager::argumentReport::Errored,
+//                    true, trimAlManager::argumentReport::Wrong,
 //                    true, true);
 //        }
     }
@@ -57,9 +57,9 @@ TEST_CASE("Compareset argument parse", "[manager][arguments][compareset]") {
 
         GIVEN("No forceselect") {
             test_arguments(args, manager,
-                    true, trimAlManager::argumentReport::Errored,
+                    true, trimAlManager::argumentReport::Wrong,
                     true, true);
-            addInput(args, manager, trimAlManager::argumentReport::Errored);
+            addInput(args, manager, trimAlManager::argumentReport::Wrong);
         }
 
         GIVEN("Forceselect")
@@ -68,24 +68,24 @@ TEST_CASE("Compareset argument parse", "[manager][arguments][compareset]") {
             GIVEN("Forceselect as alignment") {
                 args.push_back("../dataset/example.004.AA.fasta");
                 test_arguments(args, manager,
-                        true, trimAlManager::argumentReport::Errored,
+                        true, trimAlManager::argumentReport::Wrong,
                         true, true);
-                addInput(args, manager, trimAlManager::argumentReport::Errored);
+                addInput(args, manager, trimAlManager::argumentReport::Wrong);
             }
 
             GIVEN("Forceselect as folder") {
                 args.push_back("../dataset/");
                 test_arguments(args, manager,
-                        true, trimAlManager::argumentReport::Errored,
+                        true, trimAlManager::argumentReport::Wrong,
                         true, true);
-                addInput(args, manager, trimAlManager::argumentReport::Errored);
+                addInput(args, manager, trimAlManager::argumentReport::Wrong);
             }
 
             GIVEN("Forceselect as empty") {
                 test_arguments(args, manager,
-                        true, trimAlManager::argumentReport::Errored,
+                        true, trimAlManager::argumentReport::Wrong,
                         true, true);
-                addInput(args, manager, trimAlManager::argumentReport::Errored);
+                addInput(args, manager, trimAlManager::argumentReport::Wrong);
             }
         }
 
@@ -149,25 +149,25 @@ TEST_CASE("Compareset argument parse", "[manager][arguments][compareset]") {
                     //  several line breaks
                     args.push_back("../dataset/example.004.AA.fasta");
                     test_arguments(args, manager,
-                                   true, trimAlManager::argumentReport::Errored,
+                                   true, trimAlManager::argumentReport::Wrong,
                                    true, true);
-                    addInput(args, manager, trimAlManager::argumentReport::Errored);
+                    addInput(args, manager, trimAlManager::argumentReport::Wrong);
                 }
             }
 
             GIVEN("Forceselect as folder") {
                 args.push_back("../dataset/");
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Errored,
+                               true, trimAlManager::argumentReport::Wrong,
                                true, true);
-                addInput(args, manager, trimAlManager::argumentReport::Errored);
+                addInput(args, manager, trimAlManager::argumentReport::Wrong);
             }
 
             GIVEN("Forceselect as empty") {
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Errored,
+                               true, trimAlManager::argumentReport::Wrong,
                                true, true);
-                addInput(args, manager, trimAlManager::argumentReport::Errored);
+                addInput(args, manager, trimAlManager::argumentReport::Wrong);
             }
         }
 
@@ -176,7 +176,7 @@ TEST_CASE("Compareset argument parse", "[manager][arguments][compareset]") {
     WHEN("Compareset is a folder") {
         args.push_back("../dataset");
         test_arguments(args, manager,
-                false, trimAlManager::argumentReport::Errored,
+                false, trimAlManager::argumentReport::Wrong,
                 true, true);
 
         GIVEN("Forceselect")
@@ -185,23 +185,23 @@ TEST_CASE("Compareset argument parse", "[manager][arguments][compareset]") {
             GIVEN("Forceselect as alignment") {
                 args.push_back("../dataset/example.004.AA.fasta");
                 test_arguments(args, manager,
-                        true, trimAlManager::argumentReport::Errored,
+                        true, trimAlManager::argumentReport::Wrong,
                         true, true);
-                addInput(args, manager, trimAlManager::argumentReport::Errored);
+                addInput(args, manager, trimAlManager::argumentReport::Wrong);
             }
 
             GIVEN("Forceselect as folder") {
                 args.push_back("../dataset/");
                 test_arguments(args, manager,
-                        true, trimAlManager::argumentReport::Errored,
+                        true, trimAlManager::argumentReport::Wrong,
                         true, true);
-                addInput(args, manager, trimAlManager::argumentReport::Errored);
+                addInput(args, manager, trimAlManager::argumentReport::Wrong);
             }
             GIVEN("Forceselect as empty") {
                 test_arguments(args, manager,
-                        true, trimAlManager::argumentReport::Errored,
+                        true, trimAlManager::argumentReport::Wrong,
                         true, true);
-                addInput(args, manager, trimAlManager::argumentReport::Errored);
+                addInput(args, manager, trimAlManager::argumentReport::Wrong);
             }
         }
     }

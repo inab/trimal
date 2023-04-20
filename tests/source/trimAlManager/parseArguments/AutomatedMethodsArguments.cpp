@@ -18,7 +18,7 @@ TEST_CASE("Automated method argument parse", "[manager][arguments][automated]") 
                 test_arguments(
                         {"", method.argument},
                         manager,
-                        true, trimAlManager::argumentReport::Errored,
+                        true, trimAlManager::argumentReport::Wrong,
                         false, true);
             }
             AND_GIVEN("Correct input") {
@@ -63,7 +63,7 @@ TEST_CASE("Automated method argument parse", "[manager][arguments][automated]") 
                         test_arguments(
                                 {"", method1.argument, method2.argument},
                                 manager,
-                                true, trimAlManager::argumentReport::Errored,
+                                true, trimAlManager::argumentReport::Wrong,
                                 true, true);
                     }
                 }

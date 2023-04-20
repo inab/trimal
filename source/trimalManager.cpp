@@ -67,7 +67,7 @@ trimAlManager::~trimAlManager() {
 #define checkArgument(argument) { \
     auto x = argument(&argc, argv, &i); \
     if (x == Recognized) continue; \
-    if (x == Errored) return x;\
+    if (x == Wrong) return x;\
     if (x == Final) return x;\
 }
 
@@ -218,9 +218,9 @@ int trimAlManager::parseArguments(int argc, char **argv) {
     if (infile == nullptr && compareset == nullptr) {
         this->appearErrors = true;
         debug.report(ErrorCode::NoInputFile);
-        return Errored;
+        return Wrong;
     }
-    return this->appearErrors ? Errored : Recognized;
+    return this->appearErrors ? Wrong : Recognized;
 }
 
 #undef checkArgument
@@ -308,7 +308,7 @@ int trimAlManager::parseArguments(int argc, char **argv) {
         if (forceFile != nullptr)
         {
             debug.report(ForceSelectAndInArgumentsProvided);
-            return Errored;
+            return Wrong;
         }
         argumentLength = strlen(argv[++*i]);
         infile = new char[argumentLength + 1];
@@ -402,7 +402,7 @@ int trimAlManager::parseArguments(int argc, char **argv) {
         if ((*i + 1) == *argc) {
             debug.report(ErrorCode::NoFormatsSpecified);
             appearErrors = true;
-            return Errored;
+            return Wrong;
         }
         while (++(*i) != *argc && argv[*i][0] != '-')
         {
@@ -410,7 +410,7 @@ int trimAlManager::parseArguments(int argc, char **argv) {
             {
                 debug.report(ErrorCode::OutputFormatNotRecognized, argv[*i]);
                 appearErrors = true;
-                return Errored;
+                return Wrong;
             } else oformats.emplace_back(argv[*i]);
         }
         (*i)--;
@@ -485,7 +485,7 @@ int trimAlManager::parseArguments(int argc, char **argv) {
         if (infile != nullptr)
         {
             debug.report(ForceSelectAndInArgumentsProvided);
-            return Errored;
+            return Wrong;
         }
         argumentLength = strlen(argv[++*i]);
         forceFile = new char[argumentLength + 1];
@@ -1606,7 +1606,7 @@ inline bool trimAlManager::check_absolute_gap_theshold() {
     if ((!appearErrors) && 
         // If we are going to do a back translation
             (backtransFile != nullptr) &&
-        // Perform it and save if it has errored.
+        // Perform it and save if it has wrong.
             (!backtranslationAlig->prepareCodingSequence(
                 splitByStopCodon,
                 ignoreStopCodon,

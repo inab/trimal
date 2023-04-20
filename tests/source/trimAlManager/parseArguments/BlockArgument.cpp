@@ -18,7 +18,7 @@ TEST_CASE("Block", "[manager][arguments][block]") {
     {
         args.push_back("-block");
         test_arguments(args, manager,
-                       true, trimAlManager::argumentReport::Errored,
+                       true, trimAlManager::argumentReport::Wrong,
                        true, true);
         AND_GIVEN("Block argument value")
         {
@@ -27,7 +27,7 @@ TEST_CASE("Block", "[manager][arguments][block]") {
             };
 
             std::vector<std::tuple<int, trimAlManager::argumentReport ,bool>> values {
-                    {0, trimAlManager::argumentReport::Errored, true},
+                    {0, trimAlManager::argumentReport::Wrong, true},
                     {1, trimAlManager::argumentReport::Recognized, false},
                     {alig->numberOfResidues * 2, trimAlManager::argumentReport::Recognized, true},
                     {alig->numberOfResidues / 4, trimAlManager::argumentReport::Recognized, false}
@@ -42,7 +42,7 @@ TEST_CASE("Block", "[manager][arguments][block]") {
                     args.push_back(arr.get());
 
                     test_arguments(args, manager,
-                                   true, trimAlManager::argumentReport::Errored,
+                                   true, trimAlManager::argumentReport::Wrong,
                                    true, true);
                     AND_GIVEN("Input")
                     {
@@ -74,7 +74,7 @@ TEST_CASE("Block", "[manager][arguments][block]") {
             {
                 args.push_back("ATCG");
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Errored,
+                               true, trimAlManager::argumentReport::Wrong,
                                true, true);
                 AND_GIVEN("Input")
                 {
@@ -82,7 +82,7 @@ TEST_CASE("Block", "[manager][arguments][block]") {
                     args.push_back(alignmentPath);
                     test_arguments(
                             args, manager,
-                            true, trimAlManager::argumentReport::Errored,
+                            true, trimAlManager::argumentReport::Wrong,
                             true, true);
                 }
             }

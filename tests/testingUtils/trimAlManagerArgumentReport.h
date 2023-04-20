@@ -17,22 +17,22 @@ namespace catch2Utils
     {
         enum parseArgumentsEnum
         {
-            parseArgumentsErrored = 0,
+            parseArgumentsWrong = 0,
             parseArgumentsCorrect = 1,
             parseArgumentsFinal   = 2,
 
-            processArgumentsErrored = 3,
-            processArgumentsNonErrored = 4
+            processArgumentsWrong = 3,
+            processArgumentsNonWrong = 4
         };
 
         const std::map<parseArgumentsEnum , const std::string> parseArgumentsMessages
         {
-            {parseArgumentsErrored,             "ParseArguments returns Errored"},
+            {parseArgumentsWrong,             "ParseArguments returns Wrong"},
             {parseArgumentsCorrect,             "ParseArguments returns Correct"},
             {parseArgumentsFinal,               "ParseArguments returns Final"},
 
-            {processArgumentsErrored,           "ProcessArguments returns errored"},
-            {processArgumentsNonErrored,        "ProcessArguments returns non-errored"}
+            {processArgumentsWrong,           "ProcessArguments returns wrong"},
+            {processArgumentsNonWrong,        "ProcessArguments returns non-wrong"}
         };
 
         const std::string getMessageFor(parseArgumentsEnum val);

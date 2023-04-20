@@ -31,7 +31,7 @@ void applyAutomatedMethod(
             method.reference = true;
             WHEN("Applying " << method.argument)
             {
-                THEN("Performs returns non-errored")
+                THEN("Performs returns non-wrong")
                 {
                     testPerform(manager, expectedReturn);
                 }
@@ -53,7 +53,7 @@ void applyStat(
             arg.reference = true;
             WHEN("Requesting " << &arg.argument[1])
             {
-                THEN("Performs returns non-errored")
+                THEN("Performs returns non-wrong")
                 {
                     testPerform(manager, expectedReturn);
                 }
@@ -75,10 +75,10 @@ TEST_CASE("Perform", "[manager][perform]") {
         manager.origAlig = manager.getFormatManager().loadAlignment(alignmentPath);
         testPerform(manager, 0);
 
-        WHEN("Previous steps have errored")
+        WHEN("Previous steps have wrong")
         {
             manager.appearErrors = true;
-            THEN("Perform returns errored")
+            THEN("Perform returns wrong")
             {
                 testPerform(manager, 1);
             }

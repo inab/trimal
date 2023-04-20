@@ -157,14 +157,14 @@ TEST_CASE("Backtranslation argument parse", "[manager][arguments][backtranslatio
                     "-backtrans", "../dataset/"};
 
             test_arguments(args, manager,
-                           true, trimAlManager::argumentReport::Errored,
+                           true, trimAlManager::argumentReport::Wrong,
                            true, true);
 
             GIVEN("IgnoreStopCodon argument")
             {
                 args.push_back("-ignorestopcodon");
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Errored,
+                               true, trimAlManager::argumentReport::Wrong,
                                true, true);
             }
 
@@ -172,7 +172,7 @@ TEST_CASE("Backtranslation argument parse", "[manager][arguments][backtranslatio
             {
                 args.push_back("-splitbystopcodon");
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Errored,
+                               true, trimAlManager::argumentReport::Wrong,
                                true, true);
             }
 
@@ -181,7 +181,7 @@ TEST_CASE("Backtranslation argument parse", "[manager][arguments][backtranslatio
                 args.push_back("-ignorestopcodon");
                 args.push_back("-splitbystopcodon");
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Errored,
+                               true, trimAlManager::argumentReport::Wrong,
                                true, true);
             }
         }
@@ -193,14 +193,14 @@ TEST_CASE("Backtranslation argument parse", "[manager][arguments][backtranslatio
                     "-backtrans"};
 
             test_arguments(args, manager,
-                           true, trimAlManager::argumentReport::Errored,
+                           true, trimAlManager::argumentReport::Wrong,
                            true, true);
 
             GIVEN("IgnoreStopCodon argument")
             {
                 args.push_back("-ignorestopcodon");
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Errored,
+                               true, trimAlManager::argumentReport::Wrong,
                                true, true);
             }
 
@@ -208,7 +208,7 @@ TEST_CASE("Backtranslation argument parse", "[manager][arguments][backtranslatio
             {
                 args.push_back("-splitbystopcodon");
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Errored,
+                               true, trimAlManager::argumentReport::Wrong,
                                true, true);
             }
 
@@ -217,7 +217,7 @@ TEST_CASE("Backtranslation argument parse", "[manager][arguments][backtranslatio
                 args.push_back("-ignorestopcodon");
                 args.push_back("-splitbystopcodon");
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Errored,
+                               true, trimAlManager::argumentReport::Wrong,
                                true, true);
             }
         }
