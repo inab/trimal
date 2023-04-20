@@ -49,6 +49,7 @@ namespace statistics {
  */
     class similarityMatrix {
 
+    private:
         int *vhash;
         float **simMat;
         float **distMat;
@@ -122,6 +123,16 @@ namespace statistics {
          * \brief Method to print the loaded matrix.
         */
         void printMatrix();
+
+        /**
+         * \brief Get the index of a letter inside the distance matrix.
+        */
+        const int getLetterIndex(char letter) { return this->vhash[letter - 'A']; }
+
+        /**
+         * \brief Get a read-only view over the matrix content.
+        */
+        const float** getDistanceMatrix() { return const_cast<const float**>(this->distMat); }
     };
 }
 #endif
