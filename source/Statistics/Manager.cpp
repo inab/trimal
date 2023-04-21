@@ -29,8 +29,9 @@
 
 #include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
-#include "InternalBenchmarker.h"
+#include "Statistics/Identity.h"
 #include "Statistics/Manager.h"
+#include "InternalBenchmarker.h"
 
 namespace statistics {
     bool Manager::calculateConservationStats() {
@@ -181,6 +182,24 @@ namespace statistics {
         return gaps->applyWindow(ghWindow);
     }
 
+    bool Manager::calculateSeqIdentity() {
+        // Create a timerLevel that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("bool Manager::calculateSeqIdentity(void) ");
+
+        // If Alignment matrix is not created, return false
+        if (alig->sequences == nullptr)
+            return false;
+
+        // If sgaps object is not created, we create them
+        // and calculate the statistics
+        if (identity == nullptr) {
+            identity = new Identity(alig);
+            identity->calculateSeqIdentity();
+        }
+        return true;
+    }
+
     Manager::Manager(Alignment *parent) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
@@ -210,6 +229,9 @@ namespace statistics {
 
         if (mold->gaps)
             gaps = new Gaps(parent, mold->gaps);
+
+        if (mold->identity)
+            identity = new Identity(parent, mold->identity);
     }
 
     Manager::~Manager() {
@@ -221,5 +243,8 @@ namespace statistics {
 
         delete consistency;
         consistency = nullptr;
+
+        delete identity;
+        identity = nullptr;
     }
 }

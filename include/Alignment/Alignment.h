@@ -85,9 +85,6 @@ public:
 
     std::string alignmentInfo;
 
-    /* Sequence Identities */
-    float **identities = nullptr;
-
     /* Sequence Overlaps */
     float **overlaps = nullptr;
 

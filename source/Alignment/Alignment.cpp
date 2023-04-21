@@ -27,14 +27,7 @@
 
 ***************************************************************************** */
 #include "Statistics/Similarity.h"
-#include "Statistics/Consistency.h"
-#include "InternalBenchmarker.h"
-#include "Statistics/Manager.h"
-#include "Alignment/sequencesMatrix.h"
-#include "reportsystem.h"
-#include "Cleaner.h"
-#include "utils.h"
-#include "Statistics/Similarity.h"
+#include "Statistics/Identity.h"
 #include "Statistics/Consistency.h"
 #include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
@@ -75,7 +68,6 @@ Alignment::Alignment() {
 
     // Information computed from Alignment
     SequencesMatrix = nullptr;
-    identities = nullptr;
 
     // Pointer that helps to keep a count on how many items use the same information
     //  Upon destruction of the object, the counter is decreased, and, 
@@ -104,7 +96,6 @@ Alignment::Alignment(Alignment &originalAlignment) {
         originalNumberOfResidues = originalAlignment.originalNumberOfResidues;
         originalNumberOfSequences = originalAlignment.originalNumberOfSequences;
 
-        identities = nullptr;
         SequencesMatrix = nullptr;
 
         // Copy save(Sequences|Residues) vector to keep information of previous
@@ -139,12 +130,6 @@ Alignment::~Alignment() {
     delete[] saveResidues;
 
     delete[] saveSequences;
-
-    if (identities != nullptr) {
-        for (int i = 0; i < numberOfSequences; i++)
-            delete[] identities[i];
-        delete[] identities;
-    }
 
     delete SequencesMatrix;
 
@@ -922,8 +907,8 @@ void Alignment::printSeqIdentity() {
     float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
 
     // Ask for the sequence identities assesment
-    if (identities == nullptr)
-        Cleaning->calculateSeqIdentity();
+    Statistics->calculateSeqIdentity();
+    float** identities = Statistics->identity->identities;
 
     // For each sequence, we look for its most similar one
     maxs = new float *[originalNumberOfSequences];

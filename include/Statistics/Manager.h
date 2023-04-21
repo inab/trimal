@@ -45,6 +45,8 @@ namespace statistics {
 
     class Consistency;
 
+    class Identity;
+
     /**
      * \brief Class to handle the interaction with Alignment and statistics objects.\n
      * It serves as a wrapper or intermediate between the alignment and each specific stat.\n
@@ -65,6 +67,10 @@ namespace statistics {
          * \brief Consistency submodule
          * */
         Consistency *consistency = nullptr;
+        /**
+         * \brief Consistency submodule
+         * */
+        Identity *identity = nullptr;
 
         /**
          * \brief SimilarityMatrix used by Similarity
@@ -90,6 +96,12 @@ namespace statistics {
          * It checks if the #gaps submodule has been created, otherwise, creates it
          * */
         bool calculateGapStats();
+
+        /**
+         * \brief Method to handle alignment identity calculation\n
+         * It checks if the #identity submodule has been created, otherwise, creates it
+         * */
+        bool calculateSeqIdentity();
 
         /**
          * \brief Wrapper to Statistics::Gaps::printGapsColumns()\n
