@@ -303,6 +303,14 @@ namespace utils {
      \param line String to remove c from.
      \return New string without c character
      */
+    int countCharacter(char c, const std::string &line);
+
+    /**
+     \brief Count the number of occurences of a determined char in the string
+     \param c Character to count
+     \param line String to count c in.
+     \return Number of occurences of c character
+     */
      std::string removeCharacter(char c, std::string line);
 
     /**

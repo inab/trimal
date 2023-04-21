@@ -482,6 +482,19 @@ namespace utils {
         return line;
     }
 
+    int countCharacter(char c, const std::string &line) {
+        size_t pos;
+        int n = 0;
+
+        pos = line.find(c, 0);
+        while (pos != (int) std::string::npos) {
+            n++;
+            pos = line.find(c, pos + 1);
+        }
+
+        return n;
+    }
+
     std::string removeCharacter(char c, std::string line) {
 
         size_t pos;
