@@ -442,6 +442,10 @@ void Alignment::getSequences(string *Names, string *Sequences, int *lengths) {
     }
 }
 
+int Alignment::getSequenceLength(size_t index) {
+    return sequences[index].size() - utils::countCharacter('-', sequences[index]);
+}
+
 bool Alignment::getSequenceNameOrder(string *names, int *orderVector) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
