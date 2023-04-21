@@ -31,6 +31,7 @@
 #include "Statistics/Consistency.h"
 #include "Statistics/Identity.h"
 #include "Statistics/Manager.h"
+#include "Statistics/Overlap.h"
 #include "InternalBenchmarker.h"
 
 namespace statistics {
@@ -200,6 +201,24 @@ namespace statistics {
         return true;
     }
 
+    bool Manager::calculateSeqOverlap() {
+        // Create a timerLevel that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("bool Manager::calculateSeqOverlap(void) ");
+
+        // If Alignment matrix is not created, return false
+        if (alig->sequences == nullptr)
+            return false;
+
+        // If sgaps object is not created, we create them
+        // and calculate the statistics
+        if (overlap == nullptr) {
+            overlap = new Overlap(alig);
+            overlap->calculateSeqOverlap();
+        }
+        return true;
+    }
+
     Manager::Manager(Alignment *parent) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
@@ -232,6 +251,9 @@ namespace statistics {
 
         if (mold->identity)
             identity = new Identity(parent, mold->identity);
+
+        if (mold->overlap)
+            overlap = new Overlap(parent, mold->overlap);
     }
 
     Manager::~Manager() {
@@ -246,5 +268,8 @@ namespace statistics {
 
         delete identity;
         identity = nullptr;
+
+        delete overlap;
+        overlap = nullptr;
     }
 }

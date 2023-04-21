@@ -17,6 +17,7 @@ set(statisticFiles
         source/Statistics/Manager.cpp
         source/Statistics/Similarity.cpp
         source/Statistics/Identity.cpp
+        source/Statistics/Overlap.cpp
         source/Statistics/Consistency.cpp)
 
 set(reportSystemFiles

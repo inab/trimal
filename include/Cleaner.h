@@ -261,19 +261,6 @@ public:
     Alignment *cleanCompareFile(float cutpoint, float baseLine, float *vectValues, bool complementary);
 
      /**
-      \brief Method to compute the overlap values.\n
-        See Alignment::overlaps
-      \param overlap
-       Overlap threshold.
-      \param[out] spuriousVector
-       Pointer to the spuriousVector to fill.
-      \return   <b> True </b> if the calculation went ok.\n
-                <b> False </b> otherwise.\n
-      This should happen only if you pass a null pointer instead of a spuriousVector.
-*/
-    bool calculateSpuriousVector(float overlap, float *spuriousVector);
-
-     /**
       \brief Method to remove sequences missaligned
        with the rest of sequences in the alignment.\n
        For each residue in the sequence, it tests it's similarity.

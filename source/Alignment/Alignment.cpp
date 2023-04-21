@@ -29,8 +29,9 @@
 #include "Statistics/Similarity.h"
 #include "Statistics/Identity.h"
 #include "Statistics/Consistency.h"
-#include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
+#include "Statistics/Overlap.h"
+#include "InternalBenchmarker.h"
 #include "Alignment/sequencesMatrix.h"
 #include "reportsystem.h"
 #include "Cleaner.h"
@@ -359,7 +360,7 @@ void Alignment::calculateRelaxedSeqIdentity() {
     }
 }
 */
-
+/*
 void Alignment::calculateSeqOverlap() {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
@@ -397,6 +398,7 @@ void Alignment::calculateSeqOverlap() {
         }
     }
 }
+*/
 
 void Alignment::getSequences(string *Names) {
     // Create a timer that will report times upon its destruction
@@ -995,8 +997,8 @@ void Alignment::printSeqOverlap() {
     float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
 
     // Ask for the sequence identities assessment
-    if (overlaps == nullptr)
-        calculateSeqOverlap();
+    Statistics->calculateSeqOverlap();
+    int** overlaps = Statistics->overlap->overlaps;
 
     // For each sequence, we look for its most similar one 
     maxs = new float *[numberOfSequences];

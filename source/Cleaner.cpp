@@ -27,14 +27,15 @@
 
 ***************************************************************************** */
 
+#include "Alignment/Alignment.h"
 #include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
-#include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
 #include "Statistics/Gaps.h"
 #include "Statistics/Identity.h"
+#include "Statistics/Overlap.h"
+#include "InternalBenchmarker.h"
 #include "reportsystem.h"
-#include "Alignment/Alignment.h"
 #include "defines.h"
 #include "Cleaner.h"
 #include "values.h"
@@ -853,84 +854,6 @@ Alignment *Cleaner::cleanCompareFile(const float cutpoint,
     return ret;
 }
 
-bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
-    // Create a timer that will report times upon its destruction
-    //	which means the end of the current scope.
-    StartTiming("bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) ");
-
-    int i, j, k, seqValue, ovrlap, hit;
-    char indet;
-
-    float floatOverlap = overlap * float(alig->originalNumberOfSequences - 1);
-    ovrlap = int(overlap * (alig->originalNumberOfSequences - 1));
-
-    if (floatOverlap > float(ovrlap))
-        ovrlap++;
-
-    if (spuriousVector == nullptr)
-        return false;
-    // Depending on the kind of Alignment, we have
-    // different indetermination symbol
-    if (alig->getAlignmentType() & SequenceTypes::AA)
-        indet = 'X';
-    else
-        indet = 'N';
-    // For each Alignment's sequence, computes its overlap
-    for (i = 0, seqValue = 0; i < alig->originalNumberOfSequences; i++, seqValue = 0) {
-        // For each Alignment's column, computes the overlap
-        // between the selected sequence and the other ones
-        for (j = 0; j < alig->originalNumberOfResidues; j++) {
-
-            // For sequences are before the sequence selected
-            for (k = 0, hit = 0; k < i; k++) {
-                // If the element of sequence selected is the same
-                // that the element of sequence considered, computes
-                // a hit
-                if (alig->sequences[i][j] == alig->sequences[k][j])
-                    hit++;
-
-                    // If the element of sequence selected isn't a 'X' nor
-                    // 'N' (indetermination) or a '-' (gap) and the element
-                    // of sequence considered isn't a  a 'X' nor 'N'
-                    // (indetermination) or a '-' (gap), computes a hit
-                else if ((alig->sequences[i][j] != indet) && (alig->sequences[i][j] != '-')
-                         && (alig->sequences[k][j] != indet) && (alig->sequences[k][j] != '-'))
-                    hit++;
-            }
-
-            // For sequences are after the sequence selected
-            for (k = (i + 1); k < alig->originalNumberOfSequences; k++) {
-                // If the element of sequence selected is the same
-                // that the element of sequence considered, computes
-                // a hit 
-                if (alig->sequences[i][j] == alig->sequences[k][j])
-                    hit++;
-
-                    // If the element of sequence selected isn't a 'X' nor
-                    // 'N' (indetermination) or a '-' (gap) and the element
-                    // of sequence considered isn't a  a 'X' nor 'N'
-                    // (indetermination) or a '-' (gap), computes a hit
-                else if ((alig->sequences[i][j] != indet) && (alig->sequences[i][j] != '-')
-                         && (alig->sequences[k][j] != indet) && (alig->sequences[k][j] != '-'))
-                    hit++;
-            }
-            // Finally, if the hit's number divided by number of
-            // sequences minus one is greater or equal than
-            // overlap's value, compute a sequence hit
-            if (hit >= ovrlap)
-                seqValue++;
-        }
-
-        // For each Alignment's sequence, computes its spurious's
-        // or overlap's value as the column's hits -for that
-        // sequence- divided by column's number.
-        spuriousVector[i] = ((float) seqValue / alig->originalNumberOfResidues);
-    }
-
-    // If there is not problem in the method, return true
-    return true;
-}
-
 Alignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, bool complementary) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
@@ -942,7 +865,8 @@ Alignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, 
     overlapVector = new float[alig->originalNumberOfSequences];
 
     // Compute the overlap's vector using the overlap column's value
-    if (!calculateSpuriousVector(overlapColumn, overlapVector))
+    alig->Statistics->calculateSeqOverlap();
+    if (!alig->Statistics->overlap->calculateSpuriousVector(overlapColumn, overlapVector))
         return nullptr;
 
     // Select and remove the sequences with a overlap less than threshold's overlap and create a new alignment

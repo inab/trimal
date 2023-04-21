@@ -40,12 +40,10 @@ class Alignment;
 namespace statistics {
 // Forward declarations
     class Gaps;
-
     class Similarity;
-
     class Consistency;
-
     class Identity;
+    class Overlap;
 
     /**
      * \brief Class to handle the interaction with Alignment and statistics objects.\n
@@ -71,6 +69,10 @@ namespace statistics {
          * \brief Consistency submodule
          * */
         Identity *identity = nullptr;
+        /**
+         * \brief Overlap submodule
+         */
+        Overlap *overlap = nullptr;
 
         /**
          * \brief SimilarityMatrix used by Similarity
@@ -120,6 +122,12 @@ namespace statistics {
          * It checks if the #similarity submodule has been created, otherwise, creates it
          * */
         bool calculateConservationStats();
+
+        /**
+         * \brief Method to handle overlap stat calculation\n
+         * It checks if the #overlap submodule has been created, otherwise, creates it
+         * */
+        bool calculateSeqOverlap();
 
         /**
          * \brief Wrapper to Statistics::Similarity::printConservationAcl()\n
