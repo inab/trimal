@@ -426,7 +426,7 @@ void Alignment::getSequences(string *Names, int *lenghts) {
     //	which means the end of the current scope.
     StartTiming("void Alignment::getSequences(string *Names, int *lengths) ");
     for (int i = 0; i < numberOfSequences; i++) {
-        lenghts[i] = (int) utils::removeCharacter('-', sequences[i]).length();
+        lenghts[i] = getSequenceLength(i);
         Names[i] = seqsName[i];
     }
 }
