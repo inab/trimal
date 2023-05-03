@@ -22,16 +22,16 @@ void AddQuality(
         args.push_back("-minquality");
         test_arguments(
                 args, manager,
-                true, trimAlManager::argumentReport::Wrong,
-                true, true);
+                trimAlManager::argumentReport::Wrong,
+                true);
         GIVEN("Quality value")
         {
             float qualityValue = 0.5F;
             args.push_back("0.5");
             test_arguments(
                     args, manager,
-                    true, expectedReport,
-                    true, expectedErrors,
+                    expectedReport,
+                    expectedErrors,
                     [&manager, qualityValue, expectedErrors, expectedReport](){
                         if (!expectedErrors && expectedReport != trimAlManager::argumentReport::Recognized)
                         THEN("Value is set correctly in the manager")
@@ -55,16 +55,16 @@ void AddCoverage(
         args.push_back("-mincoverage");
         test_arguments(
                 args, manager,
-                true, trimAlManager::argumentReport::Wrong,
-                true, true);
+                trimAlManager::argumentReport::Wrong,
+                true);
         GIVEN("Coverage value")
         {
             float coverageValue = 0.5F;
             args.push_back("0.5");
             test_arguments(
                     args, manager,
-                    true, expectedReport,
-                    true, expectedErrors,
+                    expectedReport,
+                    expectedErrors,
                     [&manager, coverageValue, expectedErrors, expectedReport](){
                         if (!expectedErrors && expectedReport != trimAlManager::argumentReport::Recognized)
                         THEN("Value is set correctly in the manager")
@@ -88,8 +88,8 @@ void AddIgnoreFilter(
         args.push_back("-ignorefilter");
         test_arguments(
                 args, manager,
-                true, expectedReport,
-                true, expectedErrors,
+                expectedReport,
+                expectedErrors,
                 [&manager, expectedErrors, expectedReport](){
                     if (!expectedErrors && expectedReport != trimAlManager::argumentReport::Recognized)
                         THEN("Value is set correctly in the manager")
@@ -118,16 +118,16 @@ void AddVCF(
         args.push_back("-vcf");
         test_arguments(
                 args, manager,
-                true, trimAlManager::argumentReport::Wrong,
-                true, true);
+                trimAlManager::argumentReport::Wrong,
+                true);
         GIVEN("VCF file")
         {
-            const char * vcfFile = "/home/vfernandez/Dropbox/VCF/B1012M.bam.flt.vcf";
+            const char * vcfFile = "../dataset/GCA_000247815.2_current_ids.vcf";
             args.push_back(vcfFile);
             test_arguments(
                     args, manager,
-                    true, expectedReport,
-                    true, expectedErrors,
+                    expectedReport,
+                    expectedErrors,
                     [&manager, &vcfFile, expectedErrors, expectedReport](){
                         if (!expectedErrors && expectedReport != trimAlManager::argumentReport::Recognized)
                             THEN("Value is set correctly in the manager")
@@ -181,7 +181,7 @@ TEST_CASE("VCF Arguments", "[manager][arguments][vcf][ngs]") {
     GIVEN("Input")
     {
         args.push_back("-in");
-        args.push_back("/home/vfernandez/git/PreTFM/NGS_trimAl/dataset/ngs/CANGA_REF.fasta");
+        args.push_back("../dataset/example.091.AA.strNOG.ENOG411BWBU.fasta");
 
         GIVEN("No VCF")
             applyCalls(models, args, manager, trimAlManager::argumentReport::Recognized, true);

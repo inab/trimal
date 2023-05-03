@@ -18,8 +18,8 @@ TEST_CASE("Block", "[manager][arguments][block]") {
     {
         args.push_back("-block");
         test_arguments(args, manager,
-                       true, trimAlManager::argumentReport::Wrong,
-                       true, true);
+                       trimAlManager::argumentReport::Wrong,
+                       true);
         AND_GIVEN("Block argument value")
         {
             std::unique_ptr<Alignment> alig {
@@ -42,8 +42,8 @@ TEST_CASE("Block", "[manager][arguments][block]") {
                     args.push_back(arr.get());
 
                     test_arguments(args, manager,
-                                   true, trimAlManager::argumentReport::Wrong,
-                                   true, true);
+                                   trimAlManager::argumentReport::Wrong,
+                                   true);
                     AND_GIVEN("Input")
                     {
                         args.push_back("-in");
@@ -53,8 +53,8 @@ TEST_CASE("Block", "[manager][arguments][block]") {
                                 std::get<1>(value) == trimAlManager::argumentReport::Recognized) {
                             test_arguments(
                                     args, manager,
-                                    true, std::get<1>(value),
-                                    true, std::get<2>(value),
+                                    std::get<1>(value),
+                                    std::get<2>(value),
                                     [&manager, &value]() {
                                         THEN("Blocksize is stored correctly") {
                                             CHECK(manager.blockSize == std::get<0>(value));
@@ -63,8 +63,8 @@ TEST_CASE("Block", "[manager][arguments][block]") {
                         } else {
                             test_arguments(
                                     args, manager,
-                                    true, std::get<1>(value),
-                                    true, std::get<2>(value));
+                                    std::get<1>(value),
+                                    std::get<2>(value));
                         }
                     }
                 }
@@ -74,16 +74,16 @@ TEST_CASE("Block", "[manager][arguments][block]") {
             {
                 args.push_back("ATCG");
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Wrong,
-                               true, true);
+                               trimAlManager::argumentReport::Wrong,
+                               true);
                 AND_GIVEN("Input")
                 {
                     args.push_back("-in");
                     args.push_back(alignmentPath);
                     test_arguments(
                             args, manager,
-                            true, trimAlManager::argumentReport::Wrong,
-                            true, true);
+                            trimAlManager::argumentReport::Wrong,
+                            true);
                 }
             }
         }

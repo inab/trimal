@@ -119,21 +119,41 @@ namespace utils {
         if (tam == 0) return false;
         int i, flt = 1, expn = 1, sgn = 1;
 
-        for (i = 0; i < tam; i++) {
-            if (num[i] == '.' && flt)
-                flt = 0;
+        if (num[0] == '.') {
+            flt = 0;
+        } else if (num[0] > '9' || num[0] < '0') {
+            return false;
+        }
 
-            else if (((num[i] == 'e') || (num[i] == 'E')) && expn)
-                expn = 0;
-
-            else if (((num[i] == '+') || (num[i] == '-')) && sgn) {
-                if (!expn) sgn = 0;
-            } else if (num[i] > '9' || num[i] < '0')
+        for (i = 1; i < tam; i++) {
+            if (num[i] == '.') {
+                if (flt) {
+                    flt = 0;
+                } else {
+                    return false;
+                }
+            } else if (((num[i] == 'e') || (num[i] == 'E'))) {
+                if (expn) {
+                    expn = 0;
+                } else {
+                    return false;
+                }
+            } else if (((num[i] == '+') || (num[i] == '-'))) {
+                if (sgn) {
+                    if ((num[i-1] == 'e') || (num[i-1] == 'E')) {
+                        sgn = 0;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else if (num[i] > '9' || num[i] < '0') {
                 return false;
+            }
         }
 
         return true;
-
     }
 
     bool compare(char *a, char *b) {
@@ -363,7 +383,11 @@ namespace utils {
         * is considered as well as a new line character */
         //    for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
         //        nline.resize(nline.size() + 1, c);
-        getline(file, nline);
+        getline(file, nline, '\n');
+         if (nline.back() == '\r') {
+            nline.pop_back(); // Remove the extra '\r' character.
+        }
+
         /* Remove blank spaces & tabs from the beginning of the line */
 
         state = nline.find(' ', 0);
@@ -624,15 +648,30 @@ namespace utils {
     int *readNumbers(const std::string &line) {
 
         int i, nElems = 0;
-        static int *numbers;
+        static int *numbers; // array with ranges of numbers (number is repeated if no range indicated)
 
-        size_t comma, separ, init;
+        size_t comma, separ, init, line_size;
+        init = 0;
 
-        comma = size_t(-1);
-        while ((comma = line.find(',', comma + 1)) != (int) std::string::npos)
-            nElems += 2;
-        nElems += 2;
+        if (line.empty()) return nullptr;
 
+        do {
+            comma = line.find(',', init);
+            separ = line.find('-', init);
+
+            if (((separ < comma) || (comma == (int) std::string::npos)) && (separ != (int) std::string::npos)) {
+                nElems += 2;
+                init = comma + 1;
+            } else if ((separ > comma) || (separ == (int) std::string::npos)) {
+                nElems += 2;
+                init = comma + 1;
+            }
+        } while(comma != (int) std::string::npos);
+
+        if (nElems == 0) {
+            return nullptr;
+        }
+        
         numbers = new int[nElems + 1];
         numbers[0] = nElems;
 
@@ -643,26 +682,37 @@ namespace utils {
             comma = line.find(',', init);
             separ = line.find('-', init);
 
+            if (init == 0 && comma == separ) {
+                numbers[i++] = atoi(line.substr(init, line.size() - init).c_str());
+                numbers[i++] = atoi(line.substr(init, line.size() - init).c_str());
+                break;
+            }
+
             if (((separ < comma) || (comma == (int) std::string::npos)) && (separ != (int) std::string::npos)) {
                 numbers[i++] = atoi(line.substr(init, separ - init).c_str());
                 numbers[i++] = atoi(line.substr(separ + 1, comma - separ - 1).c_str());
+                if ((numbers[i - 1] == 0 && line.substr(init, comma - init) != "0") ||
+                (numbers[i - 2] == 0 && line.substr(init, comma - init) != "0")) {
+                    delete [] numbers;
+                    return nullptr;
+                }
                 init = comma + 1;
             } else if ((separ > comma) || (separ == (int) std::string::npos)) {
                 numbers[i++] = atoi(line.substr(init, comma - init).c_str());
                 numbers[i++] = atoi(line.substr(init, comma - init).c_str());
+                if ((numbers[i - 1] == 0 && line.substr(init, comma - init) != "0") ||
+                (numbers[i - 2] == 0 && line.substr(init, comma - init) != "0")) {
+                    delete [] numbers;
+                    return nullptr;
+                }
                 init = comma + 1;
             }
 
-            if (numbers[i - 2] < 0)
-            {
+            if (numbers[i - 2] < 0 || numbers[i - 1] < numbers[i - 2]) {
                 delete [] numbers;
                 return nullptr;
             }
-            if (numbers[i - 1] < numbers[i - 2])
-            {
-                delete [] numbers;
-                return nullptr;
-            }
+
             if (comma == (int) std::string::npos)
                 break;
 

@@ -385,4 +385,7 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
     {ErrorCode::ComparesetAndInArgumentsProvided,
             "Arguments -in <x> and -compareset <x> are incompatible"},
 
+    {ErrorCode::ForceSelectInputNotPresentInCompareset,
+            "The suite should not allow to input an external alignment (not present in the compareset file)."},
+
 };

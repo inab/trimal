@@ -16,8 +16,8 @@ TEST_CASE("Input argument parse", "[manager][arguments][in][input]") {
         test_arguments(
                 {"", "-in", alignmentPath},
                 manager,
-                true, trimAlManager::argumentReport::Recognized,
-                true, false,
+                trimAlManager::argumentReport::Recognized,
+                false,
                 [&manager](){
                     THEN("The variables in the manager are set correctly")
                     {
@@ -33,8 +33,8 @@ TEST_CASE("Input argument parse", "[manager][arguments][in][input]") {
                      "-in", alignmentPath,
                      "-in", alignmentPath},
                     manager,
-                    true, trimAlManager::argumentReport::Wrong,
-                    true, true);
+                    trimAlManager::argumentReport::Wrong,
+                    true);
         }
     }
 
@@ -43,8 +43,8 @@ TEST_CASE("Input argument parse", "[manager][arguments][in][input]") {
         test_arguments(
                 {"", "-in", "../dataset/example..010.AA.fasta"},
                 manager,
-                true, trimAlManager::argumentReport::Wrong,
-                true, true);
+                trimAlManager::argumentReport::Wrong,
+                true);
 
         AND_WHEN("Input argument is passed two times")
         {
@@ -53,8 +53,8 @@ TEST_CASE("Input argument parse", "[manager][arguments][in][input]") {
                      "-in", "../dataset/example..010.AA.fasta",
                      "-in", "../dataset/example..010.AA.fasta"},
                     manager,
-                    true, trimAlManager::argumentReport::Wrong,
-                    true, true);
+                    trimAlManager::argumentReport::Wrong,
+                    true);
         }
     }
 
@@ -64,8 +64,8 @@ TEST_CASE("Input argument parse", "[manager][arguments][in][input]") {
         test_arguments(
                 {"", "-in", "../dataset/"},
                 manager,
-                true, trimAlManager::argumentReport::Wrong,
-                true, true);
+                trimAlManager::argumentReport::Wrong,
+                true);
         AND_WHEN("Input argument is passed two times")
         {
             test_arguments(
@@ -73,8 +73,8 @@ TEST_CASE("Input argument parse", "[manager][arguments][in][input]") {
                      "-in", "../dataset/",
                      "-in", "../dataset/"},
                     manager,
-                    true, trimAlManager::argumentReport::Wrong,
-                    true, true);
+                    trimAlManager::argumentReport::Wrong,
+                    true);
         }
     }
 

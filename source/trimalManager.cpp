@@ -28,8 +28,6 @@
 ***************************************************************************** */
 
 
-#include <trimalManager.h>
-
 #include "FormatHandling/BaseFormatHandler.h"
 #include "Statistics/similarityMatrix.h"
 #include "Statistics/Consistency.h"
@@ -44,6 +42,10 @@
 #include "defines.h"
 #include "values.h"
 #include "utils.h"
+
+#ifdef _WIN32
+    #include <Windows.h>
+#endif
 
 // Macros defined on this file will be defined
 //  before the method that uses them.
@@ -465,10 +467,22 @@ int trimAlManager::parseArguments(int argc, char **argv) {
     if (!strcmp(argv[*i], "-compareset") && ((*i) + 1 != *argc) && (compareset == nullptr)) {
         // Check if file can be opened
         compare.open(argv[++*i], std::ifstream::in);
-        if (!compare) {
-            debug.report(ErrorCode::ReferenceFileNotLoaded, argv[*i]);
-            appearErrors = true;
-        }
+        #ifdef _WIN32
+            WIN32_FILE_ATTRIBUTE_DATA fileInfo;
+            if (!compare.is_open() || !GetFileAttributesEx(argv[*i].c_str(), GetFileExInfoStandard, &fileInfo) || fileInfo.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+                debug.report(ErrorCode::ReferenceFileNotLoaded, argv[*i]);
+                appearErrors = true;
+                return Wrong;
+            }
+        #else
+            struct stat path_stat;
+            if (!compare.is_open() || stat(argv[*i], &path_stat) != 0 || !S_ISREG(path_stat.st_mode)) {
+                debug.report(ErrorCode::ReferenceFileNotLoaded, argv[*i]);
+                appearErrors = true;
+                return Wrong;
+            }
+        #endif
+        
         compare.close();
         compareset = argv[*i];
         return Recognized;
@@ -490,6 +504,45 @@ int trimAlManager::parseArguments(int argc, char **argv) {
         argumentLength = strlen(argv[++*i]);
         forceFile = new char[argumentLength + 1];
         strcpy(forceFile, argv[*i]);
+
+        std::unique_ptr<char[]> line(new char[1024]);
+        int j, numFiles = 0;
+
+        // Open the file that contains the paths of the files.
+        std::ifstream compare;
+        compare.open(compareset, std::ifstream::in);
+        while (compare.getline(line.get(), 1024)) numFiles++;
+        compare.close();
+        compare.open(compareset);
+
+        compareAlignmentsArray = new Alignment *[numFiles];
+
+        char c;
+        bool forceFileIsPresent = false;
+
+        std::string nline;
+
+        // Load all the alignments to compare
+        // Check if they: are aligned and the type is the same
+        // Store the maximum number of amino acids present on all alignments
+        for (j = 0; j < numFiles; j++) {
+            // Search for end of line.
+            for (nline.clear(), compare.read(&c, 1);
+                (c != '\n') && ((!compare.eof()));
+                compare.read(&c, 1)) {
+                nline += c;
+            }
+            
+            if (!strcmp(nline.c_str(), forceFile)) {
+                forceFileIsPresent = true;
+                break;
+            }
+        }
+
+        if (!forceFileIsPresent) {
+            debug.report(ForceSelectInputNotPresentInCompareset);
+            return Wrong;
+        } 
 
         if ((origAlig = formatManager.loadAlignment(forceFile)) == nullptr) {
             debug.report(ErrorCode::AlignmentNotLoaded, forceFile);
@@ -1059,6 +1112,10 @@ bool trimAlManager::processArguments(char *argv[]) {
         }
     }
     return appearErrors;
+}
+
+bool trimAlManager::getTestRes() {
+    return compareset != nullptr;
 }
 
 /**inline**/ bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {

@@ -258,6 +258,7 @@ enum ErrorCode {
 
     ForceSelectAndInArgumentsProvided                   = 112,
     ComparesetAndInArgumentsProvided                    = 113,
+    ForceSelectInputNotPresentInCompareset              = 114,
 
 
     __MAXERROR,

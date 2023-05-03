@@ -18,16 +18,16 @@ TEST_CASE("Automated method argument parse", "[manager][arguments][automated]") 
                 test_arguments(
                         {"", method.argument},
                         manager,
-                        true, trimAlManager::argumentReport::Wrong,
-                        false, true);
+                        trimAlManager::argumentReport::Wrong,
+                        true);
             }
             AND_GIVEN("Correct input") {
                 test_arguments(
                         {"",  method.argument,
                          "-in", alignmentPath},
                         manager,
-                        true, trimAlManager::argumentReport::Recognized,
-                        true, false,
+                        trimAlManager::argumentReport::Recognized,
+                        false,
                         [&method, &automatedMethods](){
                             THEN("The variable in the manager is set correctly")
                             {
@@ -56,15 +56,15 @@ TEST_CASE("Automated method argument parse", "[manager][arguments][automated]") 
                                 {"", "-in", alignmentPath,
                                  method1.argument, method2.argument},
                                 manager,
-                                true, trimAlManager::argumentReport::Recognized,
-                                true, true);
+                                trimAlManager::argumentReport::Recognized,
+                                true);
                     }
                     AND_GIVEN("No Input") {
                         test_arguments(
                                 {"", method1.argument, method2.argument},
                                 manager,
-                                true, trimAlManager::argumentReport::Wrong,
-                                true, true);
+                                trimAlManager::argumentReport::Wrong,
+                                true);
                     }
                 }
             }

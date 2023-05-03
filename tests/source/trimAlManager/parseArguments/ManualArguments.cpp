@@ -75,8 +75,8 @@ TEST_CASE("Select (cols|seqs) argument parse", "[manager][arguments][manual][sel
                                          "-in", alignmentPath,
                                          entry.argument, "{", std::to_string(i).c_str(), "}"},
                                         manager,
-                                        true, trimAlManager::argumentReport::Recognized,
-                                        true, false,
+                                        trimAlManager::argumentReport::Recognized,
+                                        false,
                                         [&entry, i](){
                                             THEN("Values are set correctly")
                                             {
@@ -111,8 +111,8 @@ TEST_CASE("Select (cols|seqs) argument parse", "[manager][arguments][manual][sel
                                                  (std::to_string(i) + "," + std::to_string(x)).c_str(),
                                                  "}"},
                                                 manager,
-                                                true, trimAlManager::argumentReport::Recognized,
-                                                true, false,
+                                                trimAlManager::argumentReport::Recognized,
+                                                false,
                                                 [&entry, i, x](){
                                                     THEN("Values are set correctly")
                                                     {
@@ -148,8 +148,8 @@ TEST_CASE("Select (cols|seqs) argument parse", "[manager][arguments][manual][sel
                                                  (std::to_string(i) + "-" + std::to_string(x)).c_str(),
                                                  "}"},
                                                 manager,
-                                                true, trimAlManager::argumentReport::Recognized,
-                                                true, false,
+                                                trimAlManager::argumentReport::Recognized,
+                                                false,
                                                 [&entry, i, x](){
                                                     THEN("Values are set correctly")
                                                     {
@@ -184,8 +184,8 @@ TEST_CASE("Select (cols|seqs) argument parse", "[manager][arguments][manual][sel
                                          "-in", alignmentPath,
                                          entry.argument, "{", str.c_str() ,"}"},
                                         manager,
-                                        true, trimAlManager::argumentReport::Recognized,
-                                        true, false,
+                                        trimAlManager::argumentReport::Recognized,
+                                        false,
                                         [&entry, &positions](){
                                             THEN("Values are set correctly")
                                             {
@@ -216,8 +216,8 @@ TEST_CASE("Select (cols|seqs) argument parse", "[manager][arguments][manual][sel
                              "-in", alignmentPath,
                              entry.argument, "{", "20000000", "}"},
                             manager,
-                            true, trimAlManager::argumentReport::Recognized,
-                            true, true);
+                            trimAlManager::argumentReport::Recognized,
+                            true);
                 }
             }
             AND_GIVEN("No Input")
@@ -225,8 +225,8 @@ TEST_CASE("Select (cols|seqs) argument parse", "[manager][arguments][manual][sel
                 test_arguments(
                         {"",entry.argument, "{", "0", "}"},
                         manager,
-                        true, trimAlManager::argumentReport::Wrong,
-                        false, true);
+                        trimAlManager::argumentReport::Wrong,
+                        true);
             }
         }
     }
@@ -254,23 +254,23 @@ TEST_CASE("Cluster method argument parse", "[manager][arguments][manual][cluster
             test_arguments(
                     {"", "-clusters"},
                     manager,
-                    true, trimAlManager::argumentReport::Wrong,
-                    true, true);
+                    trimAlManager::argumentReport::Wrong,
+                    true);
 
         GIVEN("-1 clusters")
             test_arguments(
                     {"", "-clusters", std::to_string(-1).c_str()},
                     manager,
-                    true, trimAlManager::argumentReport::Wrong,
-                    true, true);
+                    trimAlManager::argumentReport::Wrong,
+                    true);
 
         for (int i = 0; i < 2; i++)
             GIVEN(std::to_string(i) << " clusters")
                 test_arguments(
                         {"", "-clusters", std::to_string(i).c_str()},
                         manager,
-                        true, trimAlManager::argumentReport::Wrong,
-                        false, true);
+                        trimAlManager::argumentReport::Wrong,
+                        true);
     }
 
     GIVEN("Alignment as Input")
@@ -281,8 +281,8 @@ TEST_CASE("Cluster method argument parse", "[manager][arguments][manual][cluster
                      "-in", alignmentPath,
                      "-clusters"},
                     manager,
-                    true, trimAlManager::argumentReport::Wrong,
-                    true, true);
+                    trimAlManager::argumentReport::Wrong,
+                    true);
 
         GIVEN("-1/" << alig->numberOfSequences << " clusters")
             test_arguments(
@@ -290,8 +290,8 @@ TEST_CASE("Cluster method argument parse", "[manager][arguments][manual][cluster
                      "-in", alignmentPath,
                      "-clusters", "-1"},
                     manager,
-                    true, trimAlManager::argumentReport::Wrong,
-                    true, true);
+                    trimAlManager::argumentReport::Wrong,
+                    true);
 
         GIVEN("0/" << alig->numberOfSequences << " clusters")
             test_arguments(
@@ -299,8 +299,8 @@ TEST_CASE("Cluster method argument parse", "[manager][arguments][manual][cluster
                      "-in", alignmentPath,
                      "-clusters", "0"},
                     manager,
-                    true, trimAlManager::argumentReport::Wrong,
-                    true, true);
+                    trimAlManager::argumentReport::Wrong,
+                    true);
 
         for (int i = 1; i <= alig->numberOfSequences; i++)
             GIVEN(std::to_string(i) << "/" << alig->numberOfSequences << " clusters")
@@ -309,8 +309,8 @@ TEST_CASE("Cluster method argument parse", "[manager][arguments][manual][cluster
                          "-in", alignmentPath,
                          "-clusters", std::to_string(i).c_str()},
                         manager,
-                        true, trimAlManager::argumentReport::Recognized,
-                        true, false,
+                        trimAlManager::argumentReport::Recognized,
+                        false,
                         [&manager, i](){
                           THEN("Clusters is set correctly in the manager")
                           {
@@ -323,8 +323,8 @@ TEST_CASE("Cluster method argument parse", "[manager][arguments][manual][cluster
                     {"", "-in", alignmentPath,
                      "-clusters", std::to_string(alig->numberOfSequences + 1).c_str()},
                     manager,
-                    true, trimAlManager::argumentReport::Recognized,
-                    true, true);
+                    trimAlManager::argumentReport::Recognized,
+                    true);
     }
 }
 
@@ -341,8 +341,8 @@ TEST_CASE("MaxIdentity", "[manager][arguments][manual][maxidentity]")
                     {"", "-in", alignmentPath,
                      "-maxidentity"},
                     manager,
-                    true, trimAlManager::argumentReport::Wrong,
-                    true, true);
+                    trimAlManager::argumentReport::Wrong,
+                    true);
         }
 
         GIVEN("Value for max identity")
@@ -362,8 +362,8 @@ TEST_CASE("MaxIdentity", "[manager][arguments][manual][maxidentity]")
                             {"", "-in", alignmentPath,
                              "-maxidentity", std::get<0>(value)},
                             manager,
-                            true, std::get<1>(value),
-                            true, std::get<2>(value),
+                            std::get<1>(value),
+                            std::get<2>(value),
                                     [&manager, &value](){
                                 if (std::get<2>(value) || std::get<1>(value) != trimAlManager::argumentReport::Recognized)
                                     return;
@@ -392,8 +392,8 @@ void iterateCombinations(
     {
         test_arguments(
                 args, manager,
-                        true, expectedReport,
-                        true, expectedError,
+                        expectedReport,
+                        expectedError,
             // Check the value has been set correctly
             [&booleanModifiersApplied](){
                 THEN("The variable in the manager is set correctly")

@@ -38,15 +38,13 @@ namespace catch2Utils
         const std::string getMessageFor(parseArgumentsEnum val);
         const std::string getMessageFor(::trimAlManager::argumentReport argument);
 
-        typedef std::tuple<bool,::trimAlManager::argumentReport, bool, bool> testArgumentsConfig;
+        typedef std::tuple<::trimAlManager::argumentReport, bool> testArgumentsConfig;
         typedef std::function<void(void)> testArgumentsCallback;
 
         void test_arguments(
                 std::vector<const char *> args,
                 ::trimAlManager &manager,
-                bool parseArguments,
                 ::trimAlManager::argumentReport expectedParseArgumentsResult,
-                bool processArguments,
                 bool expectingProcessArgumentsError,
                 const testArgumentsCallback& callback = {});
 

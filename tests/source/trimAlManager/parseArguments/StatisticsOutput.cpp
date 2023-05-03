@@ -43,7 +43,7 @@ void perform(
     if (performCallback)
         test_arguments(
             argumentPrefix, manager,
-            true, trimAlManager::argumentReport::Recognized, true, false,
+            trimAlManager::argumentReport::Recognized, false,
             [&argumentsToCheck]()
             {
                 THEN("Variables are set correctly in the manager")

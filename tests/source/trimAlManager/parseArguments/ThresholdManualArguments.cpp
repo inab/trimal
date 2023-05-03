@@ -35,23 +35,23 @@ inline void applyCons(
         args.push_back("-cons");
         WHEN("No cons value is provided") {
             test_arguments(args, manager,
-                           true, trimAlManager::argumentReport::Wrong,
-                           true, true);
+                           trimAlManager::argumentReport::Wrong,
+                           true);
         }
         WHEN("Cons value provided") {
             GIVEN("-10 as cons value") {
                 args.push_back("-10");
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Wrong,
-                               true, true);
+                               trimAlManager::argumentReport::Wrong,
+                               true);
             }
 
             for (const char *i : {"0", "50", "100"}) {
                 GIVEN(i << " as cons value") {
                     args.push_back(i);
                     test_arguments(args, manager,
-                                   true, expectedReport,
-                                   true, expectedHasErrors,
+                                   expectedReport,
+                                   expectedHasErrors,
                                    [&]() {
                                        if (expectedHasErrors || expectedReport != trimAlManager::argumentReport::Recognized)
                                            return;
@@ -67,8 +67,8 @@ inline void applyCons(
             GIVEN("110 as cons value") {
                 args.push_back("110");
                 test_arguments(args, manager,
-                               true, trimAlManager::argumentReport::Wrong,
-                               true, true);
+                               trimAlManager::argumentReport::Wrong,
+                               true);
             }
         }
     }
@@ -100,7 +100,7 @@ inline void applyWindow(
         args.push_back(currentCase.windowArgument);
         WHEN(currentCase.name << " window value is not provided") {
             test_arguments(args, manager,
-                           true, trimAlManager::argumentReport::Wrong, true, true);
+                           trimAlManager::argumentReport::Wrong, true);
 
             applyCons(args, manager, trimAlManager::argumentReport::Wrong, true);
 
@@ -123,8 +123,8 @@ inline void applyWindow(
 
                     test_arguments(
                             args, manager,
-                            true, value.expectedReport,
-                            true, value.expectedReturn,
+                            value.expectedReport,
+                            value.expectedReturn,
                             [&]() {
                                 if (value.expectedReturn || value.expectedReport != trimAlManager::argumentReport::Recognized)
                                     return;
@@ -188,7 +188,7 @@ inline void performSimpleThreshold(
 
         GIVEN("No " << currentCase.name << " Threshold Value") {
             test_arguments(args, manager,
-                           true, trimAlManager::argumentReport::Wrong, true, true);
+                           trimAlManager::argumentReport::Wrong, true);
 
             applyWindow(
                     currentCase, args, manager,
@@ -217,7 +217,7 @@ inline void performSimpleThreshold(
                 WHEN(currentCase.name << " threshold value is " << value.argumentValue) {
                     args.push_back(value.argumentValue);
                     test_arguments(args, manager,
-                                   true, value.expectedReport, true, value.expectedReturn,
+                                   value.expectedReport, value.expectedReturn,
                                    [&]() {
                                        if (value.expectedReturn || value.expectedReport != trimAlManager::argumentReport::Recognized)
                                            return;

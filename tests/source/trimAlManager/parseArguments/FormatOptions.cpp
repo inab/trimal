@@ -19,8 +19,8 @@ TEST_CASE("Format argument parse", "[manager][arguments][formats]") {
             GIVEN(legacy_format) test_arguments(
                 {"", "-in", "../dataset/example.093.DNA.fasta", legacy_format},
                 manager,
-                true, trimAlManager::argumentReport::Recognized,
-                true, false);
+                trimAlManager::argumentReport::Recognized,
+                false);
 
             for(const char* legacy_format2 : legacyFormats)
             {
@@ -31,8 +31,8 @@ TEST_CASE("Format argument parse", "[manager][arguments][formats]") {
                         {"", "-in", "../dataset/example.093.DNA.fasta",
                          legacy_format, legacy_format2},
                         manager,
-                        true, trimAlManager::argumentReport::Recognized,
-                        true, false);
+                        trimAlManager::argumentReport::Recognized,
+                        false);
             }
         }
     }
@@ -45,8 +45,8 @@ TEST_CASE("Format argument parse", "[manager][arguments][formats]") {
                         {"", "-in", "../dataset/example.093.DNA.fasta",
                          "-formats", format},
                         manager,
-                        true, trimAlManager::argumentReport::Recognized,
-                        true, false);
+                        trimAlManager::argumentReport::Recognized,
+                        false);
 
             for(const char* format2 : nonLegacyFormats)
             {
@@ -57,8 +57,8 @@ TEST_CASE("Format argument parse", "[manager][arguments][formats]") {
                             {"", "-in", "../dataset/example.093.DNA.fasta",
                              "-formats", format, format2},
                             manager,
-                            true, trimAlManager::argumentReport::Recognized,
-                            true, false);
+                            trimAlManager::argumentReport::Recognized,
+                            false);
             }
         }
 
@@ -68,8 +68,8 @@ TEST_CASE("Format argument parse", "[manager][arguments][formats]") {
                     {"", "-in", "../dataset/example.093.DNA.fasta",
                      "-formats"},
                     manager,
-                    true, trimAlManager::argumentReport::Wrong,
-                    true, true);
+                    trimAlManager::argumentReport::Wrong,
+                    true);
         }
 
         GIVEN("Incorrect Format")
@@ -78,8 +78,8 @@ TEST_CASE("Format argument parse", "[manager][arguments][formats]") {
                     {"", "-in", "../dataset/example.093.DNA.fasta",
                      "-formats", "thisisnoformat"},
                     manager,
-                    true, trimAlManager::argumentReport::Wrong,
-                    true, true);
+                    trimAlManager::argumentReport::Wrong,
+                    true);
         }
     }
 
@@ -94,8 +94,8 @@ TEST_CASE("Format argument parse", "[manager][arguments][formats]") {
                             {"", "-in", "../dataset/example.093.DNA.fasta",
                              "-formats", legacyFormat, "-formats", nonLegacyFormat},
                             manager,
-                            true, trimAlManager::argumentReport::Recognized,
-                            true, false);
+                            trimAlManager::argumentReport::Recognized,
+                            false);
             }
         }
 
@@ -108,8 +108,8 @@ TEST_CASE("Format argument parse", "[manager][arguments][formats]") {
                             {"", "-in", "../dataset/example.093.DNA.fasta",
                              "-formats", nonLegacyFormat, legacyFormat},
                             manager,
-                            true, trimAlManager::argumentReport::Recognized,
-                            true, false);
+                            trimAlManager::argumentReport::Recognized,
+                            false);
             }
         }
     }

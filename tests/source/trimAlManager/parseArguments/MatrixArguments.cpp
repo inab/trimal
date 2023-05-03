@@ -42,8 +42,8 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
         test_arguments(
                 args,
                 manager,
-                true, trimAlManager::argumentReport::Wrong,
-                true, true);
+                trimAlManager::argumentReport::Wrong,
+                true);
 
         AND_GIVEN("Correct value input")
         {
@@ -51,8 +51,8 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
             test_arguments(
                     args,
                     manager,
-                    true, trimAlManager::argumentReport::Wrong,
-                    true, true);
+                    trimAlManager::argumentReport::Wrong,
+                    true);
 
             GIVEN("Input file")
             {
@@ -61,8 +61,8 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
                 test_arguments(
                         args,
                         manager,
-                        true, trimAlManager::argumentReport::Recognized,
-                        true, true);
+                        trimAlManager::argumentReport::Recognized,
+                        true);
 
                 GIVEN("Similarity trimming method")
                 {
@@ -70,8 +70,8 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
                     test_arguments(
                             args,
                             manager,
-                            true, trimAlManager::argumentReport::Recognized,
-                            true, false,
+                            trimAlManager::argumentReport::Recognized,
+                            false,
                             [&manager](){
                                 THEN("Variable matrixFile is set correctly")
                                 {
@@ -101,8 +101,8 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
                     test_arguments(
                             args,
                             manager,
-                            true, trimAlManager::argumentReport::Recognized,
-                            true, true,
+                            trimAlManager::argumentReport::Recognized,
+                            true,
                             [&manager](){
                                 THEN("Variable matrixFile is set correctly")
                                 {
@@ -135,8 +135,8 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
         test_arguments(
                 args,
                 manager,
-                true, trimAlManager::argumentReport::Wrong,
-                true, true);
+                trimAlManager::argumentReport::Wrong,
+                true);
 
         AND_GIVEN("Correct value input")
         {
@@ -144,8 +144,8 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
             test_arguments(
                     args,
                     manager,
-                    true, trimAlManager::argumentReport::Wrong,
-                    true, true);
+                    trimAlManager::argumentReport::Wrong,
+                    true);
 
             GIVEN("Input file")
             {
@@ -154,8 +154,8 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
                 test_arguments(
                         args,
                         manager,
-                        true, trimAlManager::argumentReport::Recognized,
-                        true, true);
+                        trimAlManager::argumentReport::Recognized,
+                        true);
 
                 GIVEN("Similarity trimming method")
                 {
@@ -163,8 +163,8 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
                     test_arguments(
                             args,
                             manager,
-                            true, trimAlManager::argumentReport::Recognized,
-                            true, false,
+                            trimAlManager::argumentReport::Recognized,
+                            false,
                             [&manager](){
                                 THEN("Variable matrixFile is null")
                                 {
@@ -193,8 +193,8 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
                     test_arguments(
                             args,
                             manager,
-                            true, trimAlManager::argumentReport::Recognized,
-                            true, true,
+                            trimAlManager::argumentReport::Recognized,
+                            true,
                             [&manager](){
                                 THEN("Variable matrixFile is null")
                                 {
