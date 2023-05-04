@@ -516,15 +516,10 @@ int trimAlManager::parseArguments(int argc, char **argv) {
         compare.open(compareset);
 
         compareAlignmentsArray = new Alignment *[numFiles];
-
         char c;
         bool forceFileIsPresent = false;
-
         std::string nline;
 
-        // Load all the alignments to compare
-        // Check if they: are aligned and the type is the same
-        // Store the maximum number of amino acids present on all alignments
         for (j = 0; j < numFiles; j++) {
             // Search for end of line.
             for (nline.clear(), compare.read(&c, 1);
