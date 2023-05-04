@@ -1114,10 +1114,6 @@ bool trimAlManager::processArguments(char *argv[]) {
     return appearErrors;
 }
 
-bool trimAlManager::getTestRes() {
-    return compareset != nullptr;
-}
-
 /**inline**/ bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {
     if (selectCols || selectSeqs) {
         if ((clusters != -1) || (maxIdentity != -1)) {
