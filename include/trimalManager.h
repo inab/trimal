@@ -240,7 +240,6 @@ private: // Parse Arguments Methods
 
 public:
     bool processArguments(char* argv[]);
-    bool getTestRes();
 private: // Process Arguments Methods
     bool check_arguments_incompatibilities();
         bool check_inFile_incompatibilities();
