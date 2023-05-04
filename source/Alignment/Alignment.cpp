@@ -426,7 +426,7 @@ void Alignment::getSequences(string *Names, int *lenghts) {
     //	which means the end of the current scope.
     StartTiming("void Alignment::getSequences(string *Names, int *lengths) ");
     for (int i = 0; i < numberOfSequences; i++) {
-        lenghts[i] = (int) utils::removeCharacter('-', sequences[i]).length();
+        lenghts[i] = getSequenceLength(i);
         Names[i] = seqsName[i];
     }
 }
@@ -440,6 +440,10 @@ void Alignment::getSequences(string *Names, string *Sequences, int *lengths) {
         Sequences[i] = utils::removeCharacter('-', sequences[i]);
         lengths[i] = (int) Sequences[i].length();
     }
+}
+
+int Alignment::getSequenceLength(size_t index) {
+    return sequences[index].size() - utils::countCharacter('-', sequences[index]);
 }
 
 bool Alignment::getSequenceNameOrder(string *names, int *orderVector) {

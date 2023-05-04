@@ -296,6 +296,14 @@ namespace utils {
      \return Reversed string of toReverse.
      */
      std::string getReverse(const std::string &toReverse);
+    
+    /**
+     \brief Count the number of occurences of a determined char in the string.
+     \param c Character to count.
+     \param line String to count c in.
+     \return Number of occurences of c character.
+     */
+    int countCharacter(char c, const std::string &line);
 
     /**
      \brief Removes a determined char from the string

@@ -115,6 +115,11 @@ public:
 
     bool getSequenceNameOrder(std::string *names, int *orderVector);
 
+    /**
+     * \brief Get the length of a sequence without gap characters
+     */
+    int getSequenceLength(size_t index);
+
     int getNumAminos();
 
     void setWindowsSize(int ghWindow, int shWindow);

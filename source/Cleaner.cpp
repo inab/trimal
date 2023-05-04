@@ -1118,7 +1118,7 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     seqs = new int *[alig->numberOfSequences];
     for (i = 0; i < alig->numberOfSequences; i++) {
         seqs[i] = new int[2];
-        seqs[i][0] = utils::removeCharacter('-', alig->sequences[i]).size();
+        seqs[i][0] = alig->getSequenceLength(i);
         seqs[i][1] = i;
     }
     utils::quicksort(seqs, 0, alig->numberOfSequences - 1);
@@ -1540,7 +1540,7 @@ int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
     for (i = 0; i < alig->originalNumberOfSequences; i++) {
         if (alig->saveSequences[i] == -1) continue;
         seqs[i] = new int[2];
-        seqs[i][0] = utils::removeCharacter('-', alig->sequences[i]).size();
+        seqs[i][0] = alig->getSequenceLength(i);
         seqs[i][1] = i;
     }
 

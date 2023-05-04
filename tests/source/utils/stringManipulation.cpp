@@ -117,6 +117,32 @@ TEST_CASE("stringManipulation", "[utils]") {
         }
     }
 
+    WHEN("Counting character in a line") {
+        GIVEN("ABCDEF - 'A'") {
+            std::string str("ABCDEF");
+            CAPTURE(str);
+            CHECK(utils::countCharacter('A', str) == 1);
+        }
+
+        GIVEN("ABCDEF - 'H'") {
+            std::string str("ABCDEF");
+            CAPTURE(str);
+            CHECK(utils::countCharacter('H', str) == 0);
+        }
+
+        GIVEN("ABABBABB - 'A'") {
+            std::string str("ABABBABB");
+            CAPTURE(str);
+            CHECK(utils::countCharacter('A', str) == 3);
+        }
+
+        GIVEN("ABABBABB - 'B'") {
+            std::string str("ABABBABB");
+            CAPTURE(str);
+            CHECK(utils::countCharacter('B', str) == 5);
+        }
+    }
+
     WHEN("Reading numbers") {
         std::unique_ptr<int[]> ptr;
         GIVEN("Empty string") {
