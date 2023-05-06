@@ -865,8 +865,7 @@ Alignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, 
     overlapVector = new float[alig->originalNumberOfSequences];
 
     // Compute the overlap's vector using the overlap column's value
-    alig->Statistics->calculateSeqOverlap();
-    if (!alig->Statistics->overlap->calculateSpuriousVector(overlapColumn, overlapVector))
+    if (!alig->Statistics->calculateSpuriousVector(overlapColumn, overlapVector))
         return nullptr;
 
     // Select and remove the sequences with a overlap less than threshold's overlap and create a new alignment
