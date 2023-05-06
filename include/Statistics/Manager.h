@@ -130,6 +130,12 @@ namespace statistics {
         bool calculateSeqOverlap();
 
         /**
+         * \brief Method to handle spurious vector calculation\n
+         * It checks if the #overlap submodule has been created, otherwise, creates it
+         * */
+        bool calculateSpuriousVector(float overlapColumn, float *spuriousVector);
+
+        /**
          * \brief Wrapper to Statistics::Similarity::printConservationAcl()\n
          * It calls to calculateConservationStats() to make sure the information is available before reporting the requested values
          * */

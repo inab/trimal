@@ -219,6 +219,24 @@ namespace statistics {
         return true;
     }
 
+    bool Manager::calculateSpuriousVector(float overlapColumn, float *spuriousVector) {
+        // Create a timerLevel that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("bool Manager::calculateSpuriousVector(float, float *) ");
+
+        // If Alignment matrix is not created, return false
+        if (alig->sequences == nullptr)
+            return false;
+
+        // If sgaps object is not created, we create them
+        // and calculate the statistics
+        if (overlap == nullptr) {
+            overlap = new Overlap(alig);
+        }
+
+        return overlap->calculateSpuriousVector(overlapColumn, spuriousVector);
+    }
+
     Manager::Manager(Alignment *parent) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
