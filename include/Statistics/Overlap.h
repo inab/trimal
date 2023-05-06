@@ -49,7 +49,7 @@ namespace statistics {
 
         Alignment *alig;
 
-        /** \brief Identity between sequences */
+        /** \brief Overlap between sequences */
         int **overlaps = nullptr;
 
         /** \brief Counter of how many other instances share the same information */
