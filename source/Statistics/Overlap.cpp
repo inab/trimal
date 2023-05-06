@@ -124,7 +124,8 @@ namespace statistics {
             return false; 
 
         // calculate overlap for each column of every sequence
-        calculateSeqOverlap();
+        if (overlaps == nullptr)
+            calculateSeqOverlap();
 
         for (i = 0, seqValue = 0; i < alig->originalNumberOfSequences; i++, seqValue = 0) {
             // For each Alignment's column, computes the overlap
