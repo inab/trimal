@@ -72,14 +72,56 @@ namespace statistics {
     void Overlap::calculateSeqOverlap() {
         // Create a timer that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("bool Overlap::calculateOverlap() ");
+        StartTiming("void Overlap::calculateSeqOverlap(void) ");
 
-        int i, j, k;
+        // Compute the overlap between sequences taken each of them as the reference
+        // to compute such scores. It will lead to a non-symmetric matrix.
+        int i, j, k, shared, referenceLength;
         char indet;
 
-        // Create identities matrix to store identities scores
-        overlaps = new int *[alig->originalNumberOfSequences];
+        // Depending on alignment type, indetermination symbol will be one or other
+        indet = alig->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
+        // Create overlap matrix to store overlap scores
+        overlaps = new float *[alig->numberOfSequences];
+
+        // For each seq, compute its overlap score against the others in the MSA
+        for (i = 0; i < alig->numberOfSequences; i++) {
+            overlaps[i] = new float[alig->numberOfSequences];
+
+            for (j = 0; j < alig->numberOfSequences; j++) {
+                for (k = 0, shared = 0, referenceLength = 0; k < alig->numberOfResidues; k++) {
+                    // If there a valid residue for the reference sequence, then see if
+                    // there is a valid residue for the other sequence.
+                    if ((alig->sequences[i][k] != indet) && (alig->sequences[i][k] != '-')) {
+                        referenceLength++;
+                        if ((alig->sequences[j][k] != indet) && (alig->sequences[j][k] != '-'))
+                            shared++;
+                    }
+                }
+                // Overlap score between two sequences is the ratio of shared valid
+                // residues divided by the sequence length taken as reference. The
+                // overlaps matrix, therefore, will be not symmetric.
+                overlaps[i][j] = (float) shared / referenceLength;
+            }
+        }
+    }
+
+    bool Overlap::calculateSpuriousVector(float overlap, float *spuriousVector) {
+        // Create a timer that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("bool Overlap::calculateSpuriousVector(float overlap, float *spuriousVector) ");
+
+        int i, j, k, seqValue, ovrlap, hit;
+        char indet;
+
+        float floatOverlap = overlap * float(alig->originalNumberOfSequences - 1);
+        ovrlap = int(overlap * (alig->originalNumberOfSequences - 1));
+        if (floatOverlap > float(ovrlap))
+            ovrlap++;
+
+        if (spuriousVector == nullptr)
+            return false;
         // Depending on the kind of Alignment, we have
         // different indetermination symbol
         if (alig->getAlignmentType() & SequenceTypes::AA)
@@ -87,51 +129,30 @@ namespace statistics {
         else
             indet = 'N';
         // For each Alignment's sequence, computes its overlap
-        for (i = 0; i < alig->originalNumberOfSequences; i++) {
-            overlaps[i] = new int [alig->originalNumberOfResidues];
-
+        for (i = 0, seqValue = 0; i < alig->originalNumberOfSequences; i++, seqValue = 0) {
             // For each Alignment's column, computes the overlap
             // between the selected sequence and the other ones
             for (j = 0; j < alig->originalNumberOfResidues; j++) {
-                for (k = 0; k < i; k++) {
-                    // Don't compare a sequence to itself
+                for (k = 0, hit = 0; k < alig->originalNumberOfSequences; k++) {
+                    // Do not compare a sequence to itself
                     if (k == i) continue;
                     // If the element of sequence selected is the same
                     // that the element of sequence considered, computes
                     // a hit
                     if (alig->sequences[i][j] == alig->sequences[k][j])
-                        overlaps[i][j]++;
+                        hit++;
                         // If the element of sequence selected isn't a 'X' nor
                         // 'N' (indetermination) or a '-' (gap) and the element
                         // of sequence considered isn't a  a 'X' nor 'N'
                         // (indetermination) or a '-' (gap), computes a hit
                     else if ((alig->sequences[i][j] != indet) && (alig->sequences[i][j] != '-')
                             && (alig->sequences[k][j] != indet) && (alig->sequences[k][j] != '-'))
-                        overlaps[i][j]++;
+                        hit++;
                 }
-            }
-        }
-    }
-
-    bool Overlap::calculateSpuriousVector(float overlapColumn, float *spuriousVector) {
-        int i, j, ovrlap, seqValue;
-
-        float floatOverlap = overlapColumn * float(alig->originalNumberOfSequences - 1);
-        ovrlap = int(overlapColumn * (alig->originalNumberOfSequences - 1));
-        if (floatOverlap > float(ovrlap))
-            ovrlap++;
-        if (spuriousVector == nullptr)
-            return false; 
-
-        // calculate overlap for each column of every sequence
-        if (overlaps == nullptr)
-            calculateSeqOverlap();
-
-        for (i = 0, seqValue = 0; i < alig->originalNumberOfSequences; i++, seqValue = 0) {
-            // For each Alignment's column, computes the overlap
-            // between the selected sequence and the other ones
-            for (j = 0; j < alig->originalNumberOfResidues; j++) {
-                if (overlaps[i][j] >= ovrlap)
+                // Finally, if the hit's number divided by number of
+                // sequences minus one is greater or equal than
+                // overlap's value, compute a sequence hit
+                if (hit >= ovrlap)
                     seqValue++;
             }
 
@@ -141,6 +162,7 @@ namespace statistics {
             spuriousVector[i] = ((float) seqValue / alig->originalNumberOfResidues);
         }
 
+        // If there is not problem in the method, return true
         return true;
     }
 }

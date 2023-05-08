@@ -50,7 +50,7 @@ namespace statistics {
         Alignment *alig;
 
         /** \brief Overlap between sequences */
-        int **overlaps = nullptr;
+        float **overlaps = nullptr;
 
         /** \brief Counter of how many other instances share the same information */
         int * refCounter;

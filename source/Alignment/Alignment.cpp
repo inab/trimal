@@ -998,7 +998,7 @@ void Alignment::printSeqOverlap() {
 
     // Ask for the sequence identities assessment
     Statistics->calculateSeqOverlap();
-    int** overlaps = Statistics->overlap->overlaps;
+    float** overlaps = Statistics->overlap->overlaps;
 
     // For each sequence, we look for its most similar one 
     maxs = new float *[numberOfSequences];
