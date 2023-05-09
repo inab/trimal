@@ -59,7 +59,15 @@ namespace statistics {
         // It the similarity statistics object has not been
         // created we create it
         if (similarity == nullptr) {
+#if defined(HAVE_AVX2)
+            similarity = new AVX2Similarity(alig);
+#elif defined(HAVE_SSE2)
+            similarity = new SSE2Similarity(alig);
+#elif defined(HAVE_NEON)
+            similarity = new NEONSimilarity(alig);
+#else
             similarity = new Similarity(alig);
+#endif
             similarity->setSimilarityMatrix(_similarityMatrix);
             similarity->applyWindow(shWindow);
         }
