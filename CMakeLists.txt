@@ -24,6 +24,9 @@ endif()
 if (HAVE_AVX2)
     list(APPEND TRIMAL_OBJECTS $<TARGET_OBJECTS:AVX2OBJLib>)
 endif()
+if (HAVE_NEON)
+    list(APPEND TRIMAL_OBJECTS $<TARGET_OBJECTS:NEONOBJLib>)
+endif()
 
 # Add the executables to the project.
 add_executable(trimal
@@ -56,6 +59,8 @@ target_link_libraries(test stdc++fs)
 
 
 # Scripts to detect various SIMD support for the current compiler
+include("./scripts/CMake/FindAVX2.cmake")
+include("./scripts/CMake/FindNEON.cmake")
 include("./scripts/CMake/FindSSE2.cmake")
 
 # Script that sets Release type to default and prints information on configuration

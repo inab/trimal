@@ -34,11 +34,14 @@
 #include "Statistics/Overlap.h"
 #include "InternalBenchmarker.h"
 
-#if defined(HAVE_SSE2)
-#include "Platform/x86/SSE2.h"
-#endif
 #if defined(HAVE_AVX2)
 #include "Platform/x86/AVX2.h"
+#endif
+#if defined(HAVE_NEON)
+#include "Platform/Arm/NEON.h"
+#endif
+#if defined(HAVE_SSE2)
+#include "Platform/x86/SSE2.h"
 #endif
 
 namespace statistics {
@@ -119,6 +122,8 @@ namespace statistics {
             alig->Statistics->similarity = new AVX2Similarity(alig);
 #elif defined(HAVE_SSE2)
             alig->Statistics->similarity = new SSE2Similarity(alig);
+#elif defined(HAVE_NEON)
+            alig->Statistics->similarity = new NEONSimilarity(alig);
 #else
             alig->Statistics->similarity = new Similarity(alig);
 #endif
@@ -194,6 +199,8 @@ namespace statistics {
             gaps = new AVX2Gaps(alig);
 #elif defined(HAVE_SSE2)
             gaps = new SSE2Gaps(alig);
+#elif defined(HAVE_NEON)
+            gaps = new NEONGaps(alig);
 #else
             gaps = new Gaps(alig);
 #endif
@@ -236,6 +243,8 @@ namespace statistics {
             overlap = new AVX2Overlap(alig);
 #elif defined(HAVE_SSE2)
             overlap = new SSE2Overlap(alig);
+#elif defined(HAVE_NEON)
+            overlap = new NEONOverlap(alig);
 #else
             overlap = new Overlap(alig);
 #endif
@@ -260,6 +269,8 @@ namespace statistics {
             overlap = new AVX2Overlap(alig);
 #elif defined(HAVE_SSE2)
             overlap = new SSE2Overlap(alig);
+#elif defined(HAVE_NEON)
+            overlap = new NEONOverlap(alig);
 #else
             overlap = new Overlap(alig);
 #endif
@@ -294,6 +305,8 @@ namespace statistics {
             similarity = new AVX2Similarity(parent, mold->similarity);
 #elif defined(HAVE_SSE2)
             similarity = new SSE2Similarity(parent, mold->similarity);
+#elif defined(HAVE_NEON)
+            similarity = new NEONSimilarity(parent, mold->similarity);
 #else
             similarity = new Similarity(parent, mold->similarity);
 #endif
@@ -306,6 +319,8 @@ namespace statistics {
             gaps = new AVX2Gaps(parent, mold->gaps);
 #elif defined(HAVE_SSE2)
             gaps = new SSE2Gaps(parent, mold->gaps);
+#elif defined(HAVE_NEON)
+            gaps = new NEONGaps(parent, mold->gaps);
 #else
             gaps = new Gaps(parent, mold->gaps);
 #endif
@@ -315,6 +330,8 @@ namespace statistics {
             identity = new AVX2Identity(parent, mold->identity);
 #elif defined(HAVE_SSE2)
             identity = new SSE2Identity(parent, mold->identity);
+#elif defined(HAVE_NEON)
+            gaps = new NEONIdentity(parent, mold->identity);
 #else
             identity = new Identity(parent, mold->identity);
 #endif
@@ -324,6 +341,8 @@ namespace statistics {
         overlap = new AVX2Overlap(parent, mold->overlap);
 #elif defined(HAVE_SSE2)
         overlap = new SSE2Overlap(parent, mold->overlap);
+#elif defined(HAVE_NEON)
+        overlap = new NEOnOverlap(parent, mold->overlap);
 #else
         overlap = new Overlap(parent, mold->overlap);
 #endif

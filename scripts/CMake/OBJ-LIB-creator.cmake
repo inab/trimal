@@ -79,3 +79,13 @@ if (HAVE_AVX2)
     target_compile_options(AVX2OBJLib PRIVATE "${AVX2_C_FLAGS}")
   endif()
 endif()
+
+# NEON
+if (HAVE_NEON)
+  message(STATUS "Detected compiler support for AVX2 CPU extensions.")
+  add_compile_definitions(HAVE_NEON=1)
+  add_library(NEONOBJLib OBJECT source/Platform/Arm/NEON.cpp)
+  if(NOT NEON_C_FLAGS STREQUAL " ")
+    target_compile_options(NEONOBJLib PRIVATE "${NEON_C_FLAGS}")
+  endif()
+endif()
