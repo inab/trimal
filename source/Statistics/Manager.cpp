@@ -229,7 +229,15 @@ namespace statistics {
         // If sgaps object is not created, we create them
         // and calculate the statistics
         if (identity == nullptr) {
+#if defined(HAVE_AVX2)
+            identity = new AVX2Identity(alig);
+#elif defined(HAVE_SSE2)
+            identity = new SSE2Identity(alig);
+#elif defined(HAVE_NEON)
+            identity = new NEONIdentity(alig);
+#else
             identity = new Identity(alig);
+#endif
             identity->calculateSeqIdentity();
         }
         return true;
