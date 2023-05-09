@@ -29,8 +29,10 @@
 
 #include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
-#include "InternalBenchmarker.h"
+#include "Statistics/Identity.h"
 #include "Statistics/Manager.h"
+#include "Statistics/Overlap.h"
+#include "InternalBenchmarker.h"
 
 namespace statistics {
     bool Manager::calculateConservationStats() {
@@ -181,6 +183,60 @@ namespace statistics {
         return gaps->applyWindow(ghWindow);
     }
 
+    bool Manager::calculateSeqIdentity() {
+        // Create a timerLevel that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("bool Manager::calculateSeqIdentity(void) ");
+
+        // If Alignment matrix is not created, return false
+        if (alig->sequences == nullptr)
+            return false;
+
+        // If sgaps object is not created, we create them
+        // and calculate the statistics
+        if (identity == nullptr) {
+            identity = new Identity(alig);
+            identity->calculateSeqIdentity();
+        }
+        return true;
+    }
+
+    bool Manager::calculateSeqOverlap() {
+        // Create a timerLevel that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("bool Manager::calculateSeqOverlap(void) ");
+
+        // If Alignment matrix is not created, return false
+        if (alig->sequences == nullptr)
+            return false;
+
+        // If sgaps object is not created, we create them
+        // and calculate the statistics
+        if (overlap == nullptr) {
+            overlap = new Overlap(alig);
+            overlap->calculateSeqOverlap();
+        }
+        return true;
+    }
+
+    bool Manager::calculateSpuriousVector(float overlapColumn, float *spuriousVector) {
+        // Create a timerLevel that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("bool Manager::calculateSpuriousVector(float, float *) ");
+
+        // If Alignment matrix is not created, return false
+        if (alig->sequences == nullptr)
+            return false;
+
+        // If sgaps object is not created, we create them
+        // and calculate the statistics
+        if (overlap == nullptr) {
+            overlap = new Overlap(alig);
+        }
+
+        return overlap->calculateSpuriousVector(overlapColumn, spuriousVector);
+    }
+
     Manager::Manager(Alignment *parent) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
@@ -210,6 +266,12 @@ namespace statistics {
 
         if (mold->gaps)
             gaps = new Gaps(parent, mold->gaps);
+
+        if (mold->identity)
+            identity = new Identity(parent, mold->identity);
+
+        if (mold->overlap)
+            overlap = new Overlap(parent, mold->overlap);
     }
 
     Manager::~Manager() {
@@ -221,5 +283,11 @@ namespace statistics {
 
         delete consistency;
         consistency = nullptr;
+
+        delete identity;
+        identity = nullptr;
+
+        delete overlap;
+        overlap = nullptr;
     }
 }
