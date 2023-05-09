@@ -34,6 +34,10 @@
 #include "Statistics/Overlap.h"
 #include "InternalBenchmarker.h"
 
+#if defined(HAVE_SSE2)
+#include "Platform/x86/SSE2.h"
+#endif
+
 namespace statistics {
     bool Manager::calculateConservationStats() {
         // Create a timerLevel that will report times upon its destruction
@@ -108,7 +112,11 @@ namespace statistics {
 
         // If scons object is not created, we create them
         if (alig->Statistics->similarity == nullptr)
+#if defined(HAVE_SSE2)
+            alig->Statistics->similarity = new SSE2Similarity(alig);
+#else
             alig->Statistics->similarity = new Similarity(alig);
+#endif
 
         // Associate the matrix to the similarity statistics object
         // If it's OK, we return true
@@ -177,7 +185,11 @@ namespace statistics {
         // If sgaps object is not created, we create them
         // and calculate the statistics
         if (gaps == nullptr) {
+#if defined(HAVE_SSE2)
+            gaps = new SSE2Gaps(alig);
+#else
             gaps = new Gaps(alig);
+#endif
             gaps->CalculateVectors();
         }
         return gaps->applyWindow(ghWindow);
@@ -213,7 +225,11 @@ namespace statistics {
         // If sgaps object is not created, we create them
         // and calculate the statistics
         if (overlap == nullptr) {
+#if defined(HAVE_SSE2)
+            overlap = new SSE2Overlap(alig);
+#else
             overlap = new Overlap(alig);
+#endif
             overlap->calculateSeqOverlap();
         }
         return true;
@@ -231,7 +247,11 @@ namespace statistics {
         // If sgaps object is not created, we create them
         // and calculate the statistics
         if (overlap == nullptr) {
+#if defined(HAVE_SSE2)
+            overlap = new SSE2Overlap(alig);
+#else
             overlap = new Overlap(alig);
+#endif
         }
 
         return overlap->calculateSpuriousVector(overlapColumn, spuriousVector);
@@ -259,19 +279,36 @@ namespace statistics {
         shWindow = mold->shWindow;
 
         if (mold->similarity)
+#if defined(HAVE_SSE2)
+            similarity = new SSE2Similarity(parent, mold->similarity);
+#else
             similarity = new Similarity(parent, mold->similarity);
+#endif
 
         if (mold->consistency)
             consistency = new Consistency(parent, mold->consistency);
 
         if (mold->gaps)
+#if defined(HAVE_SSE2)
+            gaps = new SSE2Gaps(parent, mold->gaps);
+#else
             gaps = new Gaps(parent, mold->gaps);
+#endif
 
         if (mold->identity)
+#if defined(HAVE_SSE2)
+            identity = new SSE2Identity(parent, mold->identity);
+#else
             identity = new Identity(parent, mold->identity);
+#endif
 
         if (mold->overlap)
-            overlap = new Overlap(parent, mold->overlap);
+#if defined(HAVE_SSE2)
+        overlap = new SSE2Overlap(parent, mold->overlap);
+#else
+        overlap = new Overlap(parent, mold->overlap);
+#endif
+
     }
 
     Manager::~Manager() {
