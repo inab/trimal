@@ -331,7 +331,7 @@ namespace statistics {
 #elif defined(HAVE_SSE2)
             identity = new SSE2Identity(parent, mold->identity);
 #elif defined(HAVE_NEON)
-            gaps = new NEONIdentity(parent, mold->identity);
+            identity = new NEONIdentity(parent, mold->identity);
 #else
             identity = new Identity(parent, mold->identity);
 #endif
@@ -342,7 +342,7 @@ namespace statistics {
 #elif defined(HAVE_SSE2)
         overlap = new SSE2Overlap(parent, mold->overlap);
 #elif defined(HAVE_NEON)
-        overlap = new NEOnOverlap(parent, mold->overlap);
+        overlap = new NEONOverlap(parent, mold->overlap);
 #else
         overlap = new Overlap(parent, mold->overlap);
 #endif
