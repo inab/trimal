@@ -21,6 +21,9 @@ set(TRIMAL_OBJECTS
 if (HAVE_SSE2)
     list(APPEND TRIMAL_OBJECTS $<TARGET_OBJECTS:SSE2OBJLib>)
 endif()
+if (HAVE_AVX2)
+    list(APPEND TRIMAL_OBJECTS $<TARGET_OBJECTS:AVX2OBJLib>)
+endif()
 
 # Add the executables to the project.
 add_executable(trimal

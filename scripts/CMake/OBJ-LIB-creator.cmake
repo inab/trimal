@@ -69,3 +69,13 @@ if (HAVE_SSE2)
     target_compile_options(SSE2OBJLib PRIVATE "${SSE2_C_FLAGS}")
   endif()
 endif()
+
+# AVX2
+if (HAVE_AVX2)
+  message(STATUS "Detected compiler support for AVX2 CPU extensions.")
+  add_compile_definitions(HAVE_AVX2=1)
+  add_library(AVX2OBJLib OBJECT source/Platform/x86/AVX2.cpp)
+  if(NOT AVX2_C_FLAGS STREQUAL " ")
+    target_compile_options(AVX2OBJLib PRIVATE "${AVX2_C_FLAGS}")
+  endif()
+endif()
