@@ -60,3 +60,12 @@ add_library(TestsOBJLib             OBJECT ${tests})
 SET_TARGET_PROPERTIES(CatchOBJLib PROPERTIES EXCLUDE_FROM_ALL True)
 SET_TARGET_PROPERTIES(TestsOBJLib PROPERTIES EXCLUDE_FROM_ALL True)
 
+# SSE2
+if (HAVE_SSE2)
+  message(STATUS "Detected compiler support for SSE2 CPU extensions.")
+  add_compile_definitions(HAVE_SSE2=1)
+  add_library(SSE2OBJLib OBJECT source/Platform/x86/SSE2.cpp)
+  if(NOT SSE2_C_FLAGS STREQUAL " ")
+    target_compile_options(SSE2OBJLib PRIVATE "${SSE2_C_FLAGS}")
+  endif()
+endif()

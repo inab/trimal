@@ -128,12 +128,12 @@ void SSE2Gaps::CalculateVectors() {
 }
 
 void SSE2Identity::calculateSeqIdentity() {
-  StartTiming("void SSE2Cleaner::calculateSeqIdentity() ");
+  StartTiming("void SSE2Identity::calculateSeqIdentity() ");
   simd::calculateSeqIdentity<SSE2Vector>(*this);
 }
 
 bool SSE2Overlap::calculateSpuriousVector(float overlap, float *spuriousVector) {
-  StartTiming("bool SSE2Cleaner::calculateSpuriousVector(float overlap, float "
+  StartTiming("bool SSE2Overlap::calculateSpuriousVector(float overlap, float "
               "*spuriousVector) ");
   return simd::calculateSpuriousVector<SSE2Vector>(*this, overlap,
                                                   spuriousVector);
