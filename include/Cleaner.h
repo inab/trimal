@@ -471,7 +471,7 @@ private:
     /**
      \brief Destructor
      */
-    virtual ~Cleaner() {};
+    ~Cleaner() {};
 };
 
 
