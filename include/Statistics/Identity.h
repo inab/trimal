@@ -72,7 +72,7 @@ namespace statistics {
         \brief Method that makes a raw approximation of sequence identity computation.\n
         \note Designed for reducing comparisons for huge alignments.
         */
-        virtual void calculateRelaxedSeqIdentity();
+        void calculateRelaxedSeqIdentity();
     };
 }
 
