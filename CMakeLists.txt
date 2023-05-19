@@ -17,6 +17,11 @@ set(TRIMAL_OBJECTS
     $<TARGET_OBJECTS:UtilsOBJLib>
     $<TARGET_OBJECTS:InternalBenchmarkOBJLib>)
 
+# Scripts to detect various SIMD support for the current compiler
+include("./scripts/CMake/FindAVX2.cmake")
+include("./scripts/CMake/FindNEON.cmake")
+include("./scripts/CMake/FindSSE2.cmake")
+
 # Add SIMD code if compiler supports it
 if (HAVE_SSE2)
     list(APPEND TRIMAL_OBJECTS $<TARGET_OBJECTS:SSE2OBJLib>)
@@ -56,12 +61,6 @@ target_link_libraries(trimal m)
 target_link_libraries(readal m)
 
 target_link_libraries(test stdc++fs)
-
-
-# Scripts to detect various SIMD support for the current compiler
-include("./scripts/CMake/FindAVX2.cmake")
-include("./scripts/CMake/FindNEON.cmake")
-include("./scripts/CMake/FindSSE2.cmake")
 
 # Script that sets Release type to default and prints information on configuration
 include("./scripts/CMake/BuildTypeWrapper.cmake")

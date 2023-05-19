@@ -82,7 +82,7 @@ endif()
 
 # NEON
 if (HAVE_NEON)
-  message(STATUS "Detected compiler support for AVX2 CPU extensions.")
+  message(STATUS "Detected compiler support for NEON CPU extensions.")
   add_compile_definitions(HAVE_NEON=1)
   add_library(NEONOBJLib OBJECT source/Platform/Arm/NEON.cpp)
   if(NOT NEON_C_FLAGS STREQUAL " ")
