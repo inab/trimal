@@ -114,7 +114,7 @@ namespace statistics {
             \param sm Similarity matrix pointer to associate.
             \return \b True if sm is valid, \b False if it's null
         */
-        virtual bool setSimilarityMatrix(similarityMatrix * sm);
+        bool setSimilarityMatrix(similarityMatrix * sm);
 
         /**
             \brief Returns if a similarity matrix is being used or not.

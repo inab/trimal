@@ -60,7 +60,7 @@ namespace statistics {
         explicit Overlap(Alignment* parentAlignment);
 
         /** \brief Destructor */
-        ~Overlap();
+        virtual ~Overlap();
 
         /**
         \brief Method to calculate overlap between the sequences from the alignment.\n
