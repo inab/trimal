@@ -56,10 +56,10 @@ else()
     set(AVX2_C_FLAG_CANDIDATES
       #Empty, if compiler automatically accepts AVX2
       " "
-      #GNU, Intel
-      "-march=core-avx2"
       #clang
       "-mavx2"
+      #GNU, Intel
+      "-march=core-avx2"
     )
   endif()
 

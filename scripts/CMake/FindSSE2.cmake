@@ -52,10 +52,10 @@ else()
     set(SSE2_C_FLAG_CANDIDATES
       #Empty, if compiler automatically accepts SSE2
       " "
-      #GNU, Intel
-      "-march=core2"
       #clang
       "-msse2"
+      #GNU, Intel
+      "-march=core2"
     )
   endif()
 
