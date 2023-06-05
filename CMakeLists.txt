@@ -18,9 +18,15 @@ set(TRIMAL_OBJECTS
     $<TARGET_OBJECTS:InternalBenchmarkOBJLib>)
 
 # Scripts to detect various SIMD support for the current compiler
-include("./scripts/CMake/FindAVX2.cmake")
-include("./scripts/CMake/FindNEON.cmake")
-include("./scripts/CMake/FindSSE2.cmake")
+if (NOT DISABLE_AVX2)
+    include("./scripts/CMake/FindAVX2.cmake")
+endif()
+if (NOT DISABLE_NEON)
+    include("./scripts/CMake/FindNEON.cmake")
+endif()
+if (NOT DISABLE_SSE2)
+    include("./scripts/CMake/FindSSE2.cmake")
+endif()
 
 # Add SIMD code if compiler supports it
 if (HAVE_SSE2)
