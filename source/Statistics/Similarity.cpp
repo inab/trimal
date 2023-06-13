@@ -236,7 +236,12 @@ namespace statistics {
 
                     // We use the identity value for the two pairs and
                     //      its distance based on similarity matrix's value.
-                    num += matrixIdentity[j][k] * simMatrix->getDistance(chA, chB);
+                    float simDistance = simMatrix->getDistance(chA, chB);
+                    if (simDistance == -1) {
+                        return false;
+                    }
+
+                    num += matrixIdentity[j][k] * simDistance;
                     den += matrixIdentity[j][k];
                 }
             }
