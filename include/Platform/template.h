@@ -320,8 +320,6 @@ inline bool calculateSpuriousVector(statistics::Overlap &o, const float overlap,
   uint32_t ovrlap =
       uint32_t(ceil(overlap * float(alig->originalNumberOfSequences - 1)));
 
-
-
   // Depending on alignment type, indetermination symbol will be one or other
   char indet = (alig->getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
 
@@ -343,6 +341,7 @@ inline bool calculateSpuriousVector(statistics::Overlap &o, const float overlap,
     memset(&hits[0], 0, alig->originalNumberOfResidues * sizeof(uint32_t));
     memset(&hits_u8[0], 0, alig->originalNumberOfResidues * sizeof(uint8_t));
 
+    unsigned int processedSequences = 0;
     const uint8_t *datai =
         reinterpret_cast<const uint8_t *>(alig->sequences[i].data());
 
@@ -390,11 +389,12 @@ inline bool calculateSpuriousVector(statistics::Overlap &o, const float overlap,
       // we can process up to UCHAR_MAX sequences, otherwise hits_u8[k]
       // may overflow, so every UCHAR_MAX iterations we transfer the
       // partial hit counts from `hits_u8` to `hits`
-      if ((j % UCHAR_MAX) == 0) {
+      if ((processedSequences % UCHAR_MAX) == 0) {
         for (k = 0; k < alig->originalNumberOfResidues; k++)
           hits[k] += hits_u8[k];
         memset(hits_u8, 0, alig->originalNumberOfResidues * sizeof(uint8_t));
       }
+      processedSequences++;
     }
 
     // update counters after last loop
