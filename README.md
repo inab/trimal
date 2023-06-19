@@ -7,7 +7,11 @@ The simplest way to compile this package is:
 
   1. 'cd' to the repository folder.
 
-  2. Type 'cmake .' to create a custom makefile.
+  2. Type 'cmake .' to create a custom makefile. The CMake build will autodetect the best CPU features available. They can be individually disabled to build a version of the binary without SIMD (for testing):
+
+    cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 will build without SIMD
+    cmake . -DDISABLE_SSE2=0 -DDISABLE_AVX2=0 will build with SSE2 only
+    cmake . -DDISABLE_SSE2=0 -DDISABLE_AVX2=1 (or just cmake .) will build with AVX2 and SSE2 (and effectively use AVX2).
   
   3. Type 'make' to compile.
 
