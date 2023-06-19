@@ -76,19 +76,19 @@ namespace statistics {
 
     public:
         /** \brief Computes the matrix identity between alignment's columns. */
-        void calculateMatrixIdentity();
+        virtual void calculateMatrixIdentity();
 
         /** \brief Constructor without any parameters */
         explicit Similarity(Alignment * parentAlignment);
 
         /** \brief Destructor */
-        ~Similarity();
+        virtual ~Similarity();
 
         /**
             \brief Method to calculate the similarity values of a alignment matrix.
             \param cutByGap Wheter to cut by gap or not
         */
-        bool calculateVectors(bool cutByGap = true);
+        virtual bool calculateVectors(bool cutByGap = true);
 
         /**
             \brief Allows us compute the conservationWindow's values.

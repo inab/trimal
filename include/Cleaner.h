@@ -468,6 +468,10 @@ private:
      */
     Cleaner(Alignment *parent, Cleaner *mold);
 
+    /**
+     \brief Destructor
+     */
+    ~Cleaner() {};
 };
 
 

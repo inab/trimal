@@ -60,12 +60,12 @@ namespace statistics {
         explicit Overlap(Alignment* parentAlignment);
 
         /** \brief Destructor */
-        ~Overlap();
+        virtual ~Overlap();
 
         /**
         \brief Method to calculate overlap between the sequences from the alignment.\n
         */
-        void calculateSeqOverlap();
+        virtual void calculateSeqOverlap();
 
         /**
         \brief Method to compute the overlap values.\n
@@ -77,7 +77,7 @@ namespace statistics {
                     <b> False </b> otherwise.\n
         This should happen only if you pass a null pointer instead of a spuriousVector.
         */
-        bool calculateSpuriousVector(float overlapColumn, float *spuriousVector);
+        virtual bool calculateSpuriousVector(float overlapColumn, float *spuriousVector);
     };
 }
 

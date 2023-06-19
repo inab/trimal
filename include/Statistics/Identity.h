@@ -60,12 +60,12 @@ namespace statistics {
         explicit Identity(Alignment* parentAlignment);
 
         /** \brief Destructor */
-        ~Identity();
+        virtual ~Identity();
 
         /**
         \brief Method to calculate identities between the sequences from the alignment.\n
         */
-        void calculateSeqIdentity();
+        virtual void calculateSeqIdentity();
 
         /**
         \warning Not In Use
