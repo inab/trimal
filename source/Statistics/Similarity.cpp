@@ -30,6 +30,7 @@
 #include "Statistics/Similarity.h"
 #include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
+#include "Statistics/Identity.h"
 #include "reportsystem.h"
 #include "Alignment/Alignment.h"
 #include "defines.h"
@@ -83,74 +84,8 @@ namespace statistics {
             MDK = nullptr;
             delete[] MDK_Window;
             MDK_Window = nullptr;
-
-            if (matrixIdentity != nullptr)
-                for (int i = 0; i < alig->numberOfSequences; i++)
-                    delete[] matrixIdentity[i];
-            delete[] matrixIdentity;
-            matrixIdentity = nullptr;
             delete refCounter;
             refCounter = nullptr;
-        }
-    }
-
-    void Similarity::calculateMatrixIdentity() {
-        // Create a timerLevel that will report times upon its destruction
-        //	which means the end of the current scope.
-        StartTiming("void Similarity::calculateMatrixIdentity() ");
-
-        // We don't want to calculate the matrix identity
-        // if it has been previously calculated
-        if (matrixIdentity != nullptr)
-            return;
-
-        // Allocate temporal variables
-        char indet;
-        int i, j, k;
-        int sum, length;
-
-        // Allocate memory for the matrix identity
-        matrixIdentity = new float *[alig->originalNumberOfSequences];
-        for (i = 0; i < alig->originalNumberOfSequences; i++) {
-            matrixIdentity[i] = new float[alig->originalNumberOfSequences];
-        }
-
-        // Depending on alignment type, indetermination symbol will be one or other
-        indet = alig->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
-
-        // For each sequences' pair
-        for (i = 0; i < alig->originalNumberOfSequences; i++) {
-            for (j = i + 1; j < alig->originalNumberOfSequences; j++) {
-                // For each position in the alignment of that pair than we are processing
-                for (k = 0, sum = 0, length = 0; k < alig->originalNumberOfResidues; k++) {
-                    // If we find a element that is not a gap or an X aminoacid in the first sequence of the pair
-                    if ((alig->sequences[i][k] != '-') &&
-                        (alig->sequences[i][k] != indet)) {
-
-                        // If we also find a valid element in the second sequence
-                        if ((alig->sequences[j][k] != '-') &&
-                            (alig->sequences[j][k] != indet))
-                        {
-                            // If the two valid elements are the same increase the sum
-                            if (alig->sequences[j][k] == alig->sequences[i][k])
-                                sum++;
-                        }
-                        // Increase the length of the sequence free of gaps and X elements
-                        length++;
-                    }
-                    // If the first processed element is invalid and in the second we find a valid element increase the length of
-                    // the sequence free of gaps and X elements
-                    else if ((alig->sequences[j][k] != '-') &&
-                             (alig->sequences[j][k] != indet))
-                    {
-                        length++;
-                    }
-                }
-
-                // Calculate the value of matrix idn for columns j and i
-                matrixIdentity[j][i] = (1.0F - ((float)sum / length) );
-                matrixIdentity[i][j] = matrixIdentity[j][i];
-            }
         }
     }
 
@@ -163,9 +98,8 @@ namespace statistics {
         if (simMatrix == nullptr)
             return false;
 
-        // Calculate the matrix identity in case it's not done before
-        if (matrixIdentity == nullptr)
-            calculateMatrixIdentity();
+        alig->Statistics->calculateSeqIdentity();
+        float *identities = alig->Statistics->identity->identities;
 
         // Create the variable gaps, in case we want to cut by gaps
         int *gaps = nullptr;
@@ -180,7 +114,7 @@ namespace statistics {
         }
 
         // Initialize the variables used
-        int i, j, k;
+        int i, j, k, arrayIdentityPosition;
         float num, den;
 
         // Depending on alignment type, indetermination symbol will be one or other
@@ -203,6 +137,7 @@ namespace statistics {
                 continue;
             }
             // For each AAs/Nucleotides' pair in the column we compute its distance
+            arrayIdentityPosition = 0;
             for (j = 0, num = 0, den = 0; j < alig->originalNumberOfSequences; j++) {
 
 
@@ -216,9 +151,11 @@ namespace statistics {
 
                 // We don't compute the distance if the first element is
                 // a indeterminate (XN) or a gap (-) element.
-                if ((chA == '-') || (chA == indet))
-                    continue;
-
+                if ((chA == '-') || (chA == indet)) {
+                        arrayIdentityPosition += alig->originalNumberOfSequences - j - 1;
+                        continue;
+                }
+                
                 for (k = j + 1; k < alig->originalNumberOfSequences; k++) {
                     // We calculate the upper value of the residue,
                     //      to use in simMatrix->getDistance
@@ -231,8 +168,10 @@ namespace statistics {
 
                     // We don't compute the distance if the second element is
                     //      a indeterminate (XN) or a gap (-) element
-                    if ((chB == '-') || (chB == indet))
+                    if ((chB == '-') || (chB == indet)) {
+                        arrayIdentityPosition++;
                         continue;
+                    }
 
                     // We use the identity value for the two pairs and
                     //      its distance based on similarity matrix's value.
@@ -241,8 +180,9 @@ namespace statistics {
                         return false;
                     }
 
-                    num += matrixIdentity[j][k] * simDistance;
-                    den += matrixIdentity[j][k];
+                    num += (1.0F - identities[arrayIdentityPosition]) * simDistance;
+                    den += (1.0F - identities[arrayIdentityPosition]);
+                    arrayIdentityPosition++;
                 }
             }
 
@@ -264,11 +204,6 @@ namespace statistics {
                     MDK[i] = exp(-Q);
             }
         }
-
-        for (i = 0; i < alig->originalNumberOfSequences; i++)
-            delete[] matrixIdentity[i];
-        delete[] matrixIdentity;
-        matrixIdentity = nullptr;
 
         return true;
     }
