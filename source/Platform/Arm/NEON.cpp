@@ -111,11 +111,6 @@ public:
 
 namespace statistics {
 
-void NEONSimilarity::calculateMatrixIdentity() {
-  StartTiming("void NEONSimilarity::calculateMatrixIdentity() ");
-  simd::calculateMatrixIdentity<NEONVector>(*this);
-}
-
 bool NEONSimilarity::calculateVectors(bool cutByGap) {
   StartTiming("bool NEONSimilarity::calculateVectors(bool cutByGap) ");
   return simd::calculateSimilarityVectors<NEONVector>(*this, cutByGap);

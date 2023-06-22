@@ -62,26 +62,22 @@ namespace statistics {
         //	which means the end of the current scope.
         StartTiming("void Identity::calculateSeqIdentity(void) ");
 
-        int i, j, k, hit, dst;
+        int i, j, k, hit, dst, arrayIdentitySize, arrayIdentityPosition;
         char indet;
 
         // Depending on alignment type, indetermination symbol will be one or other
         indet = (alig->getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
 
         // Create identities matrix to store identities scores
-        identities = new float *[alig->originalNumberOfSequences];
+        arrayIdentitySize = (alig->originalNumberOfSequences * alig->originalNumberOfSequences + alig->originalNumberOfSequences) / 2;
+        identities = new float[arrayIdentitySize];
 
         // For each seq, compute its identity score against the others in the MSA
+        arrayIdentityPosition = 0;
         for (i = 0; i < alig->originalNumberOfSequences; i++) {
             if (alig->saveSequences[i] == -1) continue;
-            identities[i] = new float[alig->originalNumberOfSequences];
 
-            // It's a symmetric matrix, copy values that have been already computed
-            for (j = 0; j < i; j++) {
-                if (alig->saveSequences[j] == -1) continue;
-                identities[i][j] = identities[j][i];
-            }
-            identities[i][i] = 0;
+            // Check if this is necessary identities[i][i] = 0;
 
             // Compute identity scores for the current sequence against the rest
             for (j = i + 1; j < alig->originalNumberOfSequences; j++) {
@@ -101,58 +97,15 @@ namespace statistics {
 
                 // Identity score between two sequences is the ratio of identical residues
                 // by the total length (common and no-common residues) among them
-                identities[i][j] = (float) hit / dst;
+                identities[arrayIdentityPosition] = (float) hit / dst;
+                arrayIdentityPosition++;
             }
         }
     }
-
-    void Identity::calculateRelaxedSeqIdentity() {
-        // Create a timer that will report times upon its destruction
-        //	which means the end of the current scope.
-        StartTiming("void Identity::calculateRelaxedSeqIdentity(void) ");
-        // Raw approximation of sequence identity computation designed for reducing
-        // comparisons for huge alignemnts
-
-        int i, j, k, hit;
-
-        float inverseResidNumber = 1.F / alig->originalNumberOfResidues;
-
-        // Create identities matrix to store identities scores
-        identities = new float *[alig->originalNumberOfSequences];
-
-        // For each seq, compute its identity score against the others in the MSA
-        for (i = 0; i < alig->originalNumberOfSequences; i++) {
-            if (alig->saveSequences[i] == -1) continue;
-            identities[i] = new float[alig->originalNumberOfSequences];
-
-            // It's a symmetric matrix, copy values that have been already computed
-            for (j = 0; j < i; j++) {
-                if (alig->saveSequences[j] == -1) continue;
-                identities[i][j] = identities[j][i];
-            }
-            identities[i][i] = 0;
-
-            // Compute identity score between the selected sequence and the others
-            for (j = i + 1; j < alig->originalNumberOfSequences; j++) {
-                if (alig->saveSequences[j] == -1) continue;
-                for (k = 0, hit = 0; k < alig->originalNumberOfResidues; k++) {
-                    if (alig->saveResidues[k] == -1) continue;
-                    // If both positions are the same, count a hit
-                    if (alig->sequences[i][k] == alig->sequences[j][k])
-                        hit++;
-                }
-                // Raw identity score is computed as the ratio of identical residues between
-                // alignment length 
-                identities[i][j] = hit * inverseResidNumber;
-            }
-        }
-    }
-
+    
     Identity::~Identity() {
         if (refCounter == nullptr || --(*refCounter) < 1) {
             if (identities != nullptr) {
-                for (int i = 0; i < alig->numberOfSequences; i++)
-                    delete[] identities[i];
                 delete[] identities;
             }
             delete refCounter;

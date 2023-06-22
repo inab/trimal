@@ -45,7 +45,6 @@ public:
   SSE2Similarity(Alignment *parentAlignment) : Similarity(parentAlignment) {}
   SSE2Similarity(Alignment *parentAlignment, Similarity *parentSimilarity) :
     Similarity(parentAlignment, parentSimilarity) {}
-  void calculateMatrixIdentity() override;
   bool calculateVectors(bool cutByGap) override;
 };
 class SSE2Gaps : public Gaps {

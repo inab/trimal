@@ -263,142 +263,6 @@ void Alignment::setKeepSequencesFlag(bool flag) {
     StartTiming("void Alignment::setKeepSequencesFlag(bool flag) ");
     Cleaning->keepSequences = flag;
 }
-/*
-void Alignment::setKeepSeqsHeaderFlag(bool newFlagValue) {
-    // Create a timer that will report times upon its destruction
-    //	which means the end of the current scope.
-    StartTiming("void Alignment::setKeepSeqsHeaderFlag(bool flag) ");
-    Cleaning->keepSequences = newFlagValue;
-}
-*/
-/*
-int Alignment::getBlockSize() {
-    // Create a timer that will report times upon its destruction
-    //	which means the end of the current scope.
-    StartTiming("int Alignment::getBlockSize() ");
-    return Cleaning->blockSize;
-}
- */
-/*
-void Alignment::calculateSeqIdentity() {
-    // Create a timer that will report times upon its destruction
-    //	which means the end of the current scope.
-    StartTiming("void Alignment::calculateSeqIdentity(void) ");
-
-    int i, j, k, hit, dst;
-    char indet;
-
-    // Depending on alignment type, indetermination symbol will be one or other
-    indet = getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
-
-    // Create identities matrix to store identities scores
-    identities = new float *[numberOfSequences];
-
-    // For each seq, compute its identity score against the others in the MSA
-    for (i = 0; i < numberOfSequences; i++) {
-        identities[i] = new float[numberOfSequences];
-
-        // It's a symmetric matrix, copy values that have been already computed
-        for (j = 0; j < i; j++)
-            identities[i][j] = identities[j][i];
-        identities[i][i] = 0;
-
-        // Compute identity scores for the current sequence against the rest
-        for (j = i + 1; j < numberOfSequences; j++) {
-            for (k = 0, hit = 0, dst = 0; k < numberOfResidues; k++) {
-                // If one of the two positions is a valid residue,
-                // count it for the common length
-                if (((sequences[i][k] != indet) && (sequences[i][k] != '-')) ||
-                    ((sequences[j][k] != indet) && (sequences[j][k] != '-'))) {
-                    dst++;
-                    // If both positions are the same, count a hit
-                    if (sequences[i][k] == sequences[j][k])
-                        hit++;
-                }
-            }
-
-            // Identity score between two sequences is the ratio of identical residues
-            // by the total length (common and no-common residues) among them
-            identities[i][j] = (float) hit / dst;
-        }
-    }
-}
- */
-/*
-void Alignment::calculateRelaxedSeqIdentity() {
-    // Create a timer that will report times upon its destruction
-    //	which means the end of the current scope.
-    StartTiming("void Alignment::calculateRelaxedSeqIdentity(void) ");
-    // Raw approximation of sequence identity computation designed for reducing
-    // comparisons for huge alignemnts
-
-    int i, j, k, hit;
-
-    // Create identities matrix to store identities scores
-    identities = new float *[numberOfSequences];
-
-    // For each seq, compute its identity score against the others in the MSA
-    for (i = 0; i < numberOfSequences; i++) {
-        identities[i] = new float[numberOfSequences];
-
-        // It's a symmetric matrix, copy values that have been already computed
-        for (j = 0; j < i; j++)
-            identities[i][j] = identities[j][i];
-        identities[i][i] = 0;
-
-        // Compute identity score between the selected sequence and the others
-        for (j = i + 1; j < numberOfSequences; j++) {
-            for (k = 0, hit = 0; k < numberOfResidues; k++) {
-                // If both positions are the same, count a hit
-                if (sequences[i][k] == sequences[j][k])
-                    hit++;
-            }
-            // Raw identity score is computed as the ratio of identical residues between
-            // alignment length
-            identities[i][j] = (float) hit / numberOfResidues;
-        }
-    }
-}
-*/
-/*
-void Alignment::calculateSeqOverlap() {
-    // Create a timer that will report times upon its destruction
-    //	which means the end of the current scope.
-    StartTiming("void Alignment::calculateSeqOverlap(void) ");
-    // Compute the overlap between sequences taken each of them as the reference
-    // to compute such scores. It will lead to a non-symmetric matrix.
-
-    int i, j, k, shared, referenceLength;
-    char indet;
-
-    // Depending on alignment type, indetermination symbol will be one or other
-    indet = getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
-
-    // Create overlap matrix to store overlap scores
-    overlaps = new float *[numberOfSequences];
-
-    // For each seq, compute its overlap score against the others in the MSA
-    for (i = 0; i < numberOfSequences; i++) {
-        overlaps[i] = new float[numberOfSequences];
-
-        for (j = 0; j < numberOfSequences; j++) {
-            for (k = 0, shared = 0, referenceLength = 0; k < numberOfResidues; k++) {
-                // If there a valid residue for the reference sequence, then see if
-                // there is a valid residue for the other sequence.
-                if ((sequences[i][k] != indet) && (sequences[i][k] != '-')) {
-                    referenceLength++;
-                    if ((sequences[j][k] != indet) && (sequences[j][k] != '-'))
-                        shared++;
-                }
-            }
-            // Overlap score between two sequences is the ratio of shared valid
-            // residues divided by the sequence length taken as reference. The
-            // overlaps matrix, therefore, will be not symmetric.
-            overlaps[i][j] = (float) shared / referenceLength;
-        }
-    }
-}
-*/
 
 void Alignment::getSequences(string *Names) {
     // Create a timer that will report times upon its destruction
@@ -905,12 +769,12 @@ void Alignment::printSeqIdentity() {
     //	which means the end of the current scope.
     StartTiming("void Alignment::printSeqIdentity(void) ");
 
-    int i, j, k, pos, maxLongName;
+    int i, j, k, pos, maxLongName, minIndex, maxIndex, minIndexSquare, arrayPos;
     float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
 
     // Ask for the sequence identities assesment
     Statistics->calculateSeqIdentity();
-    float** identities = Statistics->identity->identities;
+    float* identities = Statistics->identity->identities;
 
     // For each sequence, we look for its most similar one
     maxs = new float *[originalNumberOfSequences];
@@ -921,9 +785,13 @@ void Alignment::printSeqIdentity() {
         // Get the most similar sequence to the current one in term of identity
         for (k = 0, mx = 0, avg = 0, pos = i; k < originalNumberOfSequences; k++) {
             if (i != k) {
-                avg += identities[i][k];
-                if (mx < identities[i][k]) {
-                    mx = identities[i][k];
+                minIndex = std::min(i, k);
+                maxIndex = std::max(i, k);
+                minIndexSquare = (minIndex + 1) * (minIndex + 1);
+                arrayPos = originalNumberOfSequences * minIndex - ((minIndexSquare + (minIndex + 1)) / 2) + maxIndex;
+                avg += identities[arrayPos];
+                if (mx < identities[arrayPos]) {
+                    mx = identities[arrayPos];
                     pos = k;
                 }
             }
@@ -963,11 +831,23 @@ void Alignment::printSeqIdentity() {
     cout << endl << endl << "## Identity sequences matrix";
     for (i = 0; i < numberOfSequences; i++) {
         cout << endl << setw(maxLongName + 2) << left << seqsName[i] << "\t";
-        for (j = 0; j < i; j++)
-            cout << setiosflags(ios::left) << setw(10) << identities[i][j] << "\t";
+        for (j = 0; j < i; j++) {
+            minIndex = std::min(i, j);
+            maxIndex = std::max(i, j);
+            minIndexSquare = (minIndex + 1) * (minIndex + 1);
+            arrayPos = originalNumberOfSequences * minIndex - ((minIndexSquare + (minIndex + 1)) / 2) + maxIndex;
+            cout << setiosflags(ios::left) << setw(10) << identities[arrayPos] << "\t";
+        }
+            
         cout << setiosflags(ios::left) << setw(10) << 1.00 << "\t";
-        for (j = i + 1; j < numberOfSequences; j++)
-            cout << setiosflags(ios::left) << setw(10) << identities[i][j] << "\t";
+        for (j = i + 1; j < numberOfSequences; j++) {
+            minIndex = std::min(i, j);
+            maxIndex = std::max(i, j);
+            minIndexSquare = (minIndex + 1) * (minIndex + 1);
+            arrayPos = originalNumberOfSequences * minIndex - ((minIndexSquare + (minIndex + 1)) / 2) + maxIndex;
+            cout << setiosflags(ios::left) << setw(10) << identities[arrayPos] << "\t";
+        }
+            
     }
     cout << endl;
 
