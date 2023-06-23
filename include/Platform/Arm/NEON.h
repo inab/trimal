@@ -45,6 +45,7 @@ public:
   NEONSimilarity(Alignment *parentAlignment) : Similarity(parentAlignment) {}
   NEONSimilarity(Alignment *parentAlignment, Similarity *parentSimilarity) :
     Similarity(parentAlignment, parentSimilarity) {}
+  void calculateMatrixIdentity() override;
   bool calculateVectors(bool cutByGap) override;
 };
 class NEONGaps : public Gaps {

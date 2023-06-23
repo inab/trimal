@@ -65,6 +65,9 @@ namespace statistics {
         /** \brief Windowed convervation values */
         float *MDK_Window           = nullptr;
 
+        /** \brief Identity weight matrix between alignment rows */
+        float **matrixIdentity      = nullptr;
+
         /** \brief Similarity matrix used to similarity calculations */
         similarityMatrix *simMatrix = nullptr;
 
@@ -72,6 +75,8 @@ namespace statistics {
         int * refCounter;
 
     public:
+        /** \brief Computes the matrix identity between alignment's columns. */
+        virtual void calculateMatrixIdentity();
 
         /** \brief Constructor without any parameters */
         explicit Similarity(Alignment * parentAlignment);

@@ -50,7 +50,7 @@ namespace statistics {
         Alignment *alig;
 
         /** \brief Identity between sequences */
-        float *identities = nullptr;
+        float **identities = nullptr;
 
         /** \brief Counter of how many other instances share the same information */
         int * refCounter;
@@ -66,6 +66,13 @@ namespace statistics {
         \brief Method to calculate identities between the sequences from the alignment.\n
         */
         virtual void calculateSeqIdentity();
+
+        /**
+        \warning Not In Use
+        \brief Method that makes a raw approximation of sequence identity computation.\n
+        \note Designed for reducing comparisons for huge alignments.
+        */
+        void calculateRelaxedSeqIdentity();
     };
 }
 

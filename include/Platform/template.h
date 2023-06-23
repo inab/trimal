@@ -67,6 +67,107 @@ T *aligned_array(size_t n) {
 }
 
 template <class Vector>
+inline void calculateMatrixIdentity(statistics::Similarity &s) {
+
+  // abort if identity matrix computation was already done
+  if (s.matrixIdentity != nullptr)
+    return;
+
+  // Allocate memory for the matrix identity
+  s.matrixIdentity = new float *[s.alig->originalNumberOfSequences];
+  for (int i = 0; i < s.alig->originalNumberOfSequences; i++) {
+    s.matrixIdentity[i] = new float[s.alig->originalNumberOfSequences];
+  }
+
+  // declare indices
+  int i, j, k, l;
+
+  // Depending on alignment type, indetermination symbol will be one or other
+  char indet = s.alig->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
+
+  // prepare constant SIMD vectors
+  const Vector ALLINDET = Vector::duplicate(indet);
+  const Vector ALLGAP = Vector::duplicate('-');
+  const Vector ONES = Vector::duplicate(1);
+
+  // For each sequences' pair, compare identity
+  for (i = 0; i < s.alig->originalNumberOfSequences; i++) {
+
+    const uint8_t *datai =
+        reinterpret_cast<const uint8_t *>(s.alig->sequences[i].data());
+
+    for (j = i + 1; j < s.alig->originalNumberOfSequences; j++) {
+
+      const uint8_t *dataj =
+          reinterpret_cast<const uint8_t *>(s.alig->sequences[j].data());
+
+      Vector len_acc = Vector();
+      Vector sum_acc = Vector();
+
+      uint32_t sum = 0;
+      uint32_t length = 0;
+
+      // run with unrolled loops of UCHAR_MAX iterations first
+      for (k = 0; ((int)(k + Vector::LANES * UCHAR_MAX)) <
+                  s.alig->originalNumberOfResidues;) {
+        // unroll the internal loop
+        for (l = 0; l < UCHAR_MAX; l++, k += Vector::LANES) {
+          // load data for the sequences
+          Vector seqi = Vector::loadu(&datai[k]);
+          Vector seqj = Vector::loadu(&dataj[k]);
+          // find which sequence characters are gap or indet
+          Vector gapsi = (seqi == ALLGAP) | (seqi == ALLINDET);
+          Vector gapsj = (seqj == ALLGAP) | (seqj == ALLINDET);
+          // find which sequence characters are equal
+          Vector eq = (seqi == seqj);
+          // update counters
+          sum_acc += eq & ONES.andnot(gapsi | gapsj);
+          len_acc += ONES.andnot(gapsi & gapsj);
+        }
+        // merge accumulators
+        sum += sum_acc.sum();
+        length += len_acc.sum();
+        sum_acc.clear();
+        len_acc.clear();
+      }
+
+      // run remaining iterations in SIMD while possible
+      for (; ((int)(k + Vector::LANES)) < s.alig->originalNumberOfResidues;
+           k += Vector::LANES) {
+        // load data for the sequences
+        Vector seqi = Vector::loadu(&datai[k]);
+        Vector seqj = Vector::loadu(&dataj[k]);
+        // find which sequence characters are gap or indet
+        Vector gapsi = (seqi == ALLGAP) | (seqi == ALLINDET);
+        Vector gapsj = (seqj == ALLGAP) | (seqj == ALLINDET);
+        // find which sequence characters are equal
+        Vector eq = (seqi == seqj);
+        // update counters
+        sum_acc += eq & ONES.andnot(gapsi | gapsj);
+        len_acc += ONES.andnot(gapsi & gapsj);
+      }
+
+      // // merge accumulators
+      sum += sum_acc.sum();
+      length += len_acc.sum();
+
+      // process the tail elements when there remain less than
+      // can be fitted in a SIMD vector
+      for (; k < s.alig->originalNumberOfResidues; k++) {
+        int gapi = (datai[k] == '-') || (datai[k] == indet);
+        int gapj = (dataj[k] == '-') || (dataj[k] == indet);
+        sum += (!gapi) && (!gapj) && (datai[k] == dataj[k]);
+        length += (!gapi) || (!gapj);
+      }
+
+      // Calculate the value of matrix idn for columns j and i
+      s.matrixIdentity[i][j] = s.matrixIdentity[j][i] =
+          (1.0F - ((float)sum / length));
+    }
+  }
+}
+
+template <class Vector>
 inline bool calculateSimilarityVectors(statistics::Similarity &s,
                                        bool cutByGap) {
   // A similarity matrix must be defined. If not, return false
@@ -76,8 +177,9 @@ inline bool calculateSimilarityVectors(statistics::Similarity &s,
   // Get the similarity matrix raw storage
   const float** distMat = s.simMatrix->getDistanceMatrix();
 
-  s.alig->Statistics->calculateSeqIdentity();
-  float *identities = s.alig->Statistics->identity->identities;
+  // Calculate the matrix identity in case it's not done before
+  if (s.matrixIdentity == nullptr)
+    s.calculateMatrixIdentity();
 
   // Create the variable gaps, in case we want to cut by gaps
   int *gaps = nullptr;
@@ -91,7 +193,7 @@ inline bool calculateSimilarityVectors(statistics::Similarity &s,
   }
 
   // Initialize the variables used
-  int i, j, k, arrayIdentityPosition;
+  int i, j, k;
   float num, den;
 
   // Depending on alignment type, indetermination symbol will be one or other
@@ -107,6 +209,7 @@ inline bool calculateSimilarityVectors(statistics::Similarity &s,
   float gapThreshold = 0.8F * s.alig->numberOfResidues;
 
   // Cache pointers to matrix rows to avoid dereferencing in inner loops
+  const float *identityRow;
   const float *distRow;
 
   // Create buffers to store column data
@@ -149,35 +252,30 @@ inline bool calculateSimilarityVectors(statistics::Similarity &s,
     }
 
     // For each AAs/Nucleotides' pair in the column we compute its distance
-    arrayIdentityPosition = 0;
     for (j = 0, num = 0, den = 0; j < s.alig->originalNumberOfSequences; j++) {
       // We don't compute the distance if the first element is
       // a indeterminate (XN) or a gap (-) element.
-      if (colgap[j]) {
-        arrayIdentityPosition += s.alig->originalNumberOfSequences - j - 1;
+      if (colgap[j])
         continue;
-      }
 
       // Get the index of the first residue
       // and cache pointers to matrix rows
       numA = colnum[j];
       distRow = distMat[numA];
+      identityRow = s.matrixIdentity[j];
 
       for (k = j + 1; k < s.alig->originalNumberOfSequences; k++) {
         // We don't compute the distance if the second element is
         //      a indeterminate (XN) or a gap (-) element
-        if (colgap[k]) {
-          arrayIdentityPosition++;
+        if (colgap[k])
           continue;
-        }
 
         // Get the index of the second residue and compute
         // fraction with identity value for the two pairs and
         // its distance based on similarity matrix's value.
         numB = colnum[k];
-        num += (1.0F - identities[arrayIdentityPosition]) * distRow[numB];
-        den += (1.0F - identities[arrayIdentityPosition]);
-        arrayIdentityPosition++;
+        num += identityRow[k] * distRow[numB];
+        den += identityRow[k];
       }
     }
 
@@ -198,6 +296,12 @@ inline bool calculateSimilarityVectors(statistics::Similarity &s,
         s.MDK[i] = exp(-Q);
     }
   }
+
+  // Free the identity matrix now that it's not useful anymore
+  for (int i = 0; i < s.alig->originalNumberOfSequences; i++)
+    delete[] s.matrixIdentity[i];
+  delete[] s.matrixIdentity;
+  s.matrixIdentity = nullptr;
 
   return true;
 }
@@ -318,12 +422,17 @@ inline bool calculateSpuriousVector(statistics::Overlap &o, const float overlap,
 
 template <class Vector> 
 inline void calculateSeqIdentity(statistics::Identity &id) {
-  int i, j, k, l, arrayIdentitySize, arrayIdentityPosition;
+  int i, j, k, l;
   const Alignment* alig = id.alig;
 
   // create identities matrix to store identities scores
-  arrayIdentitySize = (alig->originalNumberOfSequences * alig->originalNumberOfSequences + alig->originalNumberOfSequences) / 2;
-  id.identities = new float[arrayIdentitySize];
+  id.identities = new float *[alig->originalNumberOfSequences];
+  for (int i = 0; i < alig->originalNumberOfSequences; i++) {
+      if (alig->saveSequences[i] == -1)
+          continue;
+      id.identities[i] = new float[alig->originalNumberOfSequences];
+      id.identities[i][i] = 0;
+  }
 
   // Depending on alignment type, indetermination symbol will be one or other
   char indet = (alig->getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
@@ -342,7 +451,6 @@ inline void calculateSeqIdentity(statistics::Identity &id) {
   }
 
   // For each seq, compute its identity score against the others in the MSA
-  arrayIdentityPosition = 0;
   for (i = 0; i < alig->originalNumberOfSequences; i++) {
     if (alig->saveSequences[i] == -1)
       continue;
@@ -423,15 +531,15 @@ inline void calculateSeqIdentity(statistics::Identity &id) {
       }
 
       if (dst == 0) {
-        id.identities[arrayIdentityPosition] = 0;
+        id.identities[i][j] = 0;
       } else {
         // Identity score between two sequences is the ratio of identical
         // residues by the total length (common and no-common residues) among
         // them
-        id.identities[arrayIdentityPosition] = (float)hit / dst;
+        id.identities[i][j] = (float)hit / dst;
       }
 
-      arrayIdentityPosition++;
+      id.identities[j][i] = id.identities[i][j];
     }
   }
 

@@ -112,6 +112,11 @@ public:
 
 namespace statistics {
 
+void SSE2Similarity::calculateMatrixIdentity() {
+  StartTiming("void SSE2Similarity::calculateMatrixIdentity() ");
+  simd::calculateMatrixIdentity<SSE2Vector>(*this);
+}
+
 bool SSE2Similarity::calculateVectors(bool cutByGap) {
   StartTiming("bool SSE2Similarity::calculateVectors(bool cutByGap) ");
   return simd::calculateSimilarityVectors<SSE2Vector>(*this, cutByGap);

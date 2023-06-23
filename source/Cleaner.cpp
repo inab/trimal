@@ -47,11 +47,11 @@ int Cleaner::selectMethod() {
     StartTiming("int Cleaner::selectMethod(void) ");
 
     float mx, avg, maxSeq = 0, avgSeq = 0;
-    int i, j, minIndex, maxIndex, minIndexSquare, arrayPos;
+    int i, j;
 
     // Ask for the sequence identities assesment
     alig->Statistics->calculateSeqIdentity();
-    float *identities = alig->Statistics->identity->identities;
+    float **identities = alig->Statistics->identity->identities;
 
     // Once we have the identities among all possible
     // combinations between each pair of sequence. We
@@ -59,16 +59,10 @@ int Cleaner::selectMethod() {
     // average identity for each sequence with its most
     // similar one
     for (i = 0; i < alig->numberOfSequences; i++) {
-        if (alig->saveSequences[i] == -1) continue;
         for (j = 0, mx = 0, avg = 0; j < alig->numberOfSequences; j++) {
             if (i != j) {
-                if (alig->saveSequences[j] == -1) continue;
-                minIndex = std::min(i, j);
-                maxIndex = std::max(i, j);
-                minIndexSquare = (minIndex + 1) * (minIndex + 1);
-                arrayPos = alig->numberOfSequences * minIndex - ((minIndexSquare + (minIndex + 1)) / 2) + maxIndex;
-                mx = mx < identities[arrayPos] ? identities[arrayPos] : mx;
-                avg += identities[arrayPos];
+                mx = mx < identities[i][j] ? identities[i][j] : mx;
+                avg += identities[i][j];
             }
         }
         avgSeq += avg / (alig->numberOfSequences - 1);
@@ -1000,7 +994,7 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     StartTiming("float Cleaner::getCutPointClusters(int clusterNumber) ");
 
     float max, min, avg, gMax, gMin, startingPoint, prevValue = 0, iter = 0;
-    int i, j, clusterNum, *cluster, **seqs, arrayIdentityPosition, comparedSequences;
+    int i, j, clusterNum, *cluster, **seqs;
 
     // If the user wants only one cluster means that all
     // of sequences have to be in the same cluster.
@@ -1012,32 +1006,36 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
 
     // Ask for the sequence identities assessment
     alig->Statistics->calculateSeqIdentity();
-    float *identities = alig->Statistics->identity->identities;
+    float **identities = alig->Statistics->identity->identities;
 
     // Compute the maximum, the minimum and the average
     // identity values from the sequences
-    arrayIdentityPosition = 0;
     for (i = 0, gMax = 0, gMin = 1, startingPoint = 0; i < alig->originalNumberOfSequences; i++) {
-        comparedSequences = 0;
         if (alig->saveSequences[i] == -1) continue;
+
+        for (j = 0, max = 0, avg = 0, min = 1; j < i; j++) {
+            if (alig->saveSequences[j] == -1) continue;
+
+            max = std::max(max, identities[i][j]);
+            min = std::min(min, identities[i][j]);
+            avg += identities[i][j];
+        }
 
         for (j = i + 1; j < alig->numberOfSequences; j++) {
             if (alig->saveSequences[j] == -1) continue;
 
-            max = std::max(max, identities[arrayIdentityPosition]);
-            min = std::min(min, identities[arrayIdentityPosition]);
-            avg += identities[arrayIdentityPosition];
-            arrayIdentityPosition++;
-            comparedSequences++;
+            max = std::max(max, identities[i][j]);
+            min = std::min(min, identities[i][j]);
+            avg += identities[i][j];
         }
 
-        startingPoint += avg / comparedSequences;
+        startingPoint += avg / (alig->numberOfSequences - 1);
         gMax = std::max(gMax, max);
         gMin = std::min(gMin, min);
 
     }
     // Take the starting point as the average value
-    startingPoint /= arrayIdentityPosition;
+    startingPoint /= alig->numberOfSequences;
 
     // Compute and sort the sequence length
     seqs = new int *[alig->numberOfSequences];
@@ -1056,29 +1054,23 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     // Look for the optimal identity value to get the
     // number of cluster set by the user. To do that, the
     // method starts in the average identity value and moves
-    // to the right or left side of this value depending on
+    // to the right or lefe side of this value depending on
     // if this value is so strict or not. We set an flag to
     // avoid enter in an infinite loop, if we get the same
     // value for more than 10 consecutive point without get
     // the given cluster number means that it's impossible
     // to get this cut-off and we need to stop the search
-    int minIndex, maxIndex, minIndexSquare, arrayPos, seqLength, clusterLength;
     do {
         clusterNum = 1;
         // Start the search
         for (i = alig->numberOfSequences - 2; i >= 0; i--) {
-            seqLength = seqs[i][1];
+
             for (j = 0; j < clusterNum; j++)
-                clusterLength = cluster[j];
-                minIndex = std::min(seqLength, clusterLength);
-                maxIndex = std::max(seqLength, clusterLength);
-                minIndexSquare = (minIndex + 1) * (minIndex + 1);
-                arrayPos = alig->originalNumberOfSequences * minIndex - ((minIndexSquare + (minIndex + 1)) / 2) + maxIndex;
-                if (identities[arrayPos] > startingPoint)
+                if (identities[seqs[i][1]][cluster[j]] > startingPoint)
                     break;
 
             if (j == clusterNum) {
-                cluster[j] = seqLength;
+                cluster[j] = seqs[i][1];
                 clusterNum++;
             }
 
@@ -1374,7 +1366,7 @@ int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
 
     // Ask for the sequence identities assesment
     alig->Statistics->calculateSeqIdentity();
-    float *identities = alig->Statistics->identity->identities;
+    float **identities = alig->Statistics->identity->identities;
 
     seqs = new int *[alig->originalNumberOfSequences];
     for (i = 0; i < alig->originalNumberOfSequences; i++) {
@@ -1390,26 +1382,21 @@ int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
     cluster[0] = seqs[alig->originalNumberOfSequences - 1][1];
     clusterNum = 1;
 
-    int minIndex, maxIndex, minIndexSquare, arrayPos, seqLength, clusterLength;
+
     for (i = alig->originalNumberOfSequences - 2; i >= 0; i--) {
         if (alig->saveSequences[i] == -1) continue;
-        seqLength = seqs[i][1];
-        clusterLength = cluster[j];
+
         for (j = 0, max = 0, pos = -1; j < clusterNum; j++) {
-            minIndex = std::min(seqLength, cluster[j]);
-            maxIndex = std::max(seqLength, cluster[j]);
-            minIndexSquare = (minIndex + 1) * (minIndex + 1);
-            arrayPos = alig->originalNumberOfSequences * minIndex - ((minIndexSquare + (minIndex + 1)) / 2) + maxIndex;
-            if (identities[arrayPos] > maximumIdent) {
-                if (identities[arrayPos] > max) {
-                    max = identities[arrayPos];
+            if (identities[seqs[i][1]][cluster[j]] > maximumIdent) {
+                if (identities[seqs[i][1]][cluster[j]] > max) {
+                    max = identities[seqs[i][1]][cluster[j]];
                     pos = j;
                 }
             }
         }
 
         if (pos == -1) {
-            cluster[j] = seqLength;
+            cluster[j] = seqs[i][1];
             clusterNum++;
         }
     }

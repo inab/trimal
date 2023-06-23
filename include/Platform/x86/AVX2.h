@@ -45,6 +45,7 @@ public:
   AVX2Similarity(Alignment *parentAlignment) : Similarity(parentAlignment) {}
   AVX2Similarity(Alignment *parentAlignment, Similarity *parentSimilarity) :
     Similarity(parentAlignment, parentSimilarity) {}
+  void calculateMatrixIdentity() override;
   bool calculateVectors(bool cutByGap) override;
 };
 class AVX2Gaps : public Gaps {

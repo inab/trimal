@@ -200,7 +200,7 @@ namespace statistics {
         if (alig->sequences == nullptr)
             return false;
 
-        // If gaps object is not created, we create them
+        // If sgaps object is not created, we create them
         // and calculate the statistics
         if (gaps == nullptr) {
 #if defined(HAVE_AVX2)
@@ -226,7 +226,7 @@ namespace statistics {
         if (alig->sequences == nullptr)
             return false;
 
-        // If identity object is not created, we create them
+        // If sgaps object is not created, we create them
         // and calculate the statistics
         if (identity == nullptr) {
 #if defined(HAVE_AVX2)
@@ -252,7 +252,7 @@ namespace statistics {
         if (alig->sequences == nullptr)
             return false;
 
-        // If overlap object is not created, we create them
+        // If sgaps object is not created, we create them
         // and calculate the statistics
         if (overlap == nullptr) {
 #if defined(HAVE_AVX2)
@@ -278,7 +278,7 @@ namespace statistics {
         if (alig->sequences == nullptr)
             return false;
 
-        // If overlap object is not created, we create them
+        // If sgaps object is not created, we create them
         // and calculate the statistics
         if (overlap == nullptr) {
 #if defined(HAVE_AVX2)
