@@ -33,7 +33,7 @@ jobs:
             --volume "${PWD}:/trimal" 
           install: |
             apt-get update -q -y
-            apt-get install -q -y make g++ file
+            apt-get install -q -y cmake make g++ file
           run: |
             cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal
       - name: Build trimal for Linux aarch64 and SSE2
@@ -47,7 +47,7 @@ jobs:
             --volume "${PWD}:/trimal" 
           install: |
             apt-get update -q -y
-            apt-get install -q -y make g++ file
+            apt-get install -q -y cmake make g++ file
           run: |
             cmake . -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal
       - name: Build trimal for Linux aarch64 and AVX2
@@ -61,6 +61,6 @@ jobs:
             --volume "${PWD}:/trimal" 
           install: |
             apt-get update -q -y
-            apt-get install -q -y make g++ file
+            apt-get install -q -y cmake make g++ file
           run: |
             cmake . -DDISABLE_SSE2=1 && make && file bin/trimal && file bin/readal
