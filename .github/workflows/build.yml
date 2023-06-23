@@ -1,0 +1,66 @@
+on: [ push, pull_request ]
+
+name: Build 
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        arch: [x86_64, aarch64]
+        cpu_instr: [non_SIMD, SSE2, AVX2]
+        
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build trimal for Linux x86_64
+        if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'non_SIMD' 
+        run: cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal
+      - name: Build trimal for Linux x86_64 and SSE2
+        if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'SSE2' 
+        run: cmake . -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal
+      - name: Build trimal for Linux x86_64 and AVX2
+        if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'AVX2' 
+        run: cmake . -DDISABLE_SSE2=1 && make && file bin/trimal && file bin/readal
+
+      - name: Build trimal for Linux aarch64
+        if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'non_SIMD'
+        uses: uraimo/run-on-arch-action@v2
+        with:
+          arch: ${{ matrix.arch }}
+          distro: ubuntu20.04
+          githubToken: ${{ github.token }}
+          dockerRunArgs: |
+            --volume "${PWD}:/trimal" 
+          install: |
+            apt-get update -q -y
+            apt-get install -q -y make g++ file
+          run: |
+            cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal
+      - name: Build trimal for Linux aarch64 and SSE2
+        if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'SSE2'
+        uses: uraimo/run-on-arch-action@v2
+        with:
+          arch: ${{ matrix.arch }}
+          distro: ubuntu20.04
+          githubToken: ${{ github.token }}
+          dockerRunArgs: |
+            --volume "${PWD}:/trimal" 
+          install: |
+            apt-get update -q -y
+            apt-get install -q -y make g++ file
+          run: |
+            cmake . -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal
+      - name: Build trimal for Linux aarch64 and AVX2
+        if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'AVX2'
+        uses: uraimo/run-on-arch-action@v2
+        with:
+          arch: ${{ matrix.arch }}
+          distro: ubuntu20.04
+          githubToken: ${{ github.token }}
+          dockerRunArgs: |
+            --volume "${PWD}:/trimal" 
+          install: |
+            apt-get update -q -y
+            apt-get install -q -y make g++ file
+          run: |
+            cmake . -DDISABLE_SSE2=1 && make && file bin/trimal && file bin/readal
