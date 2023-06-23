@@ -113,11 +113,6 @@ public:
 
 namespace statistics {
 
-void AVX2Similarity::calculateMatrixIdentity() {
-  StartTiming("void AVX2Similarity::calculateMatrixIdentity() ");
-  simd::calculateMatrixIdentity<AVX2Vector>(*this);
-}
-
 bool AVX2Similarity::calculateVectors(bool cutByGap) {
   StartTiming("bool AVX2Similarity::calculateVectors(bool cutByGap) ");
   return simd::calculateSimilarityVectors<AVX2Vector>(*this, cutByGap);
