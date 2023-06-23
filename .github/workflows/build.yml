@@ -36,34 +36,6 @@ jobs:
             apt-get install -q -y cmake make g++ file
           run: |
             cmake . -DDISABLE_NEON=1 -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal
-      - name: Build trimal for Linux aarch64 and SSE2
-        if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'SSE2'
-        uses: uraimo/run-on-arch-action@v2
-        with:
-          arch: ${{ matrix.arch }}
-          distro: ubuntu20.04
-          githubToken: ${{ github.token }}
-          dockerRunArgs: |
-            --volume "${PWD}:/trimal" 
-          install: |
-            apt-get update -q -y
-            apt-get install -q -y cmake make g++ file
-          run: |
-            cmake . -DDISABLE_NEON=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal
-      - name: Build trimal for Linux aarch64 and AVX2
-        if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'AVX2'
-        uses: uraimo/run-on-arch-action@v2
-        with:
-          arch: ${{ matrix.arch }}
-          distro: ubuntu20.04
-          githubToken: ${{ github.token }}
-          dockerRunArgs: |
-            --volume "${PWD}:/trimal" 
-          install: |
-            apt-get update -q -y
-            apt-get install -q -y cmake make g++ file
-          run: |
-            cmake . -DDISABLE_NEON=1 -DDISABLE_SSE2=1 && make && file bin/trimal && file bin/readal
       - name: Build trimal for Linux aarch64 and NEON
         if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'NEON'
         uses: uraimo/run-on-arch-action@v2
