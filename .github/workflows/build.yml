@@ -14,13 +14,16 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build trimal for Linux x86_64
         if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'non_SIMD' 
-        run: cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal
+        run: cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
+          ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
       - name: Build trimal for Linux x86_64 and SSE2
         if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'SSE2' 
-        run: cmake . -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal
+        run: cmake . -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
+          ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
       - name: Build trimal for Linux x86_64 and AVX2
         if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'AVX2' 
-        run: cmake . -DDISABLE_SSE2=1 && make && file bin/trimal && file bin/readal
+        run: cmake . -DDISABLE_SSE2=1 && make && file bin/trimal && file bin/readal &&
+          ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
       - name: Build trimal for Linux aarch64
         if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'non_SIMD'
@@ -35,7 +38,8 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y cmake make g++ file
           run: |
-            cmake . -DDISABLE_NEON=1 -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal
+            cmake . -DDISABLE_NEON=1 -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
+            ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
       - name: Build trimal for Linux aarch64 and NEON
         if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'NEON'
         uses: uraimo/run-on-arch-action@v2
@@ -49,4 +53,5 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y cmake make g++ file
           run: |
-            cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal
+            cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
+            ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
