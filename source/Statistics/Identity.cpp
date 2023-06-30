@@ -77,8 +77,6 @@ namespace statistics {
         for (i = 0; i < alig->originalNumberOfSequences; i++) {
             if (alig->saveSequences[i] == -1) continue;
 
-            // Check if this is necessary identities[i][i] = 0;
-
             // Compute identity scores for the current sequence against the rest
             for (j = i + 1; j < alig->originalNumberOfSequences; j++) {
                 if (alig->saveSequences[j] == -1) continue;
