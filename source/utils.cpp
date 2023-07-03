@@ -422,8 +422,9 @@ char* utils::readLine(ifstream &file) {
 
   /* Store first line found. For -Windows & MacOS compatibility- carriage return
    * is considered as well as a new line character */
-  for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
-    nline.resize(nline.size() + 1, c);
+      for( ; (c != '\n') && ((!file.eof())); file.read(&c, 1))
+        if ((c != '\r'))
+            nline.resize(nline.size() + 1, c);
 
   /* Remove blank spaces & tabs from the beginning of the line */
   state = nline.find(" ", 0);

@@ -1663,33 +1663,48 @@ int main(int argc, char *argv[]){
   /* -------------------------------------------------------------------- */
   if((selectCols) || (selectSeqs)) {
 
-    /* -------------------------------------------------------------------- */
+    /* Columns and/or sequences to be removed might be disordered. Therefore,
+     * we cannot assume the last element of the vectors are the highest ones.
+     * We check every single element to make sure they are inbetween the
+     * established boundaries e.g. max number of sequences and/or columns.
+     */
+    
     if(delColumns != NULL) {
-    num = delColumns[0];
-      if(delColumns[num] >= origAlig -> getNumAminos()) {
-        cerr << endl << "ERROR: This option only accepts integer numbers between 0 and the number of columns - 1." << endl << endl;
-        appearErrors = true;
-      }
-      else
-        singleAlig = origAlig -> removeColumns(delColumns, 1, num, complementary);
-    }
-    /* -------------------------------------------------------------------- */
+      num = origAlig -> getNumAminos();
 
-    /* -------------------------------------------------------------------- */
+      for(i = 1; i < delColumns[0] + 1; i++) 
+        if(delColumns[i] >= num) {
+          cerr << endl << "ERROR: This option only accepts integer numbers "
+              "between 0 and the number of columns - 1." << endl << endl;
+          appearErrors = true;
+          break;
+        }
+
+      if (!appearErrors)
+        singleAlig = origAlig -> removeColumns(delColumns, 1, delColumns[0], \
+          complementary);
+
+    }
+
     if(delSequences != NULL) {
-      num = delSequences[0];
-      if(delSequences[num] >= origAlig -> getNumSpecies()) {
-        cerr << endl << "ERROR: This option only accepts integer numbers between 0 and the number of sequences - 1." << endl << endl;
-        appearErrors = true;
-      }
-      else {
-        intermediateAlig = origAlig -> removeSequences(delSequences, 1, num, complementary);
+      num = origAlig -> getNumSpecies();
+
+      for(i = 1; i < delSequences[0] + 1; i++) 
+        if(delSequences[i] >= num) {
+          cerr << endl << "ERROR: This option only accepts integer numbers "
+              "between 0 and the number of sequences - 1." << endl << endl;
+          appearErrors = true;
+          break;
+        }
+        
+      if (!appearErrors) {
+        intermediateAlig = origAlig -> removeSequences(delSequences, 1, \
+          delSequences[0], complementary);
         singleAlig = intermediateAlig -> cleanNoAllGaps(false);
         
         delete intermediateAlig;
       }
     }
-    /* -------------------------------------------------------------------- */
   }
   /* -------------------------------------------------------------------- */
 

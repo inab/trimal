@@ -1,0 +1,4 @@
+*.o
+source/readal
+source/statal
+source/trimal

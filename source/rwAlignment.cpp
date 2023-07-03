@@ -1296,7 +1296,7 @@ bool alignment::loadNBRF_PirAlignment(char *alignmentFile) {
   /* NBRF/PIR file format parser */
 
   bool seqIdLine, seqLines;
-  char *str, *line = NULL;
+  char *str, *line = NULL; 
   ifstream file;
   int i;
 
@@ -1398,6 +1398,11 @@ bool alignment::loadNBRF_PirAlignment(char *alignmentFile) {
         sequences[i].append(str, strlen(str));
         str = strtok(NULL, OTHDELIMITERS);
       }
+
+      /* In case the end symbol '*' has been detected, remove it */
+      if(sequences[i][sequences[i].size() - 1] == '*')
+        sequences[i].erase(sequences[i].size()-1);
+
     }
   }
   /* Close the input file */
@@ -1834,8 +1839,14 @@ void alignment::alignmentNBRF_PirToFile(ostream &file) {
     for(j = 0; j < residuesNumber[i]; j += 50) {
       for(k = j; (k < residuesNumber[i]) && (k < (j + 50)); k += 10)
         file << " " << tmpMatrix[i].substr(k, 10);
-      if((j + 50) >= residNumber)
+
+      if(k >= residuesNumber[i]) {
+        if((residuesNumber[i] % 50) == 0)
+          file << endl << " ";
+        else if((residuesNumber[i] % 10) == 0)
+          file << " ";
         file << "*";
+      }
       file << endl;
     }
     file << endl;
