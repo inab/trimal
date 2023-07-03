@@ -28,5 +28,6 @@ jobs:
           install: |
             apt-get update -q -y
             apt-get install -q -y make g++ file
-            run: cd /trimal/source && make all && file trimal && file readal && file statal &&
-              cd .. && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+          run: |
+            cd /trimal/source && make all && file trimal && file readal && file statal &&
+            cd .. && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
