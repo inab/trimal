@@ -40,10 +40,10 @@ class Alignment;
 namespace statistics {
 // Forward declarations
     class Gaps;
-
     class Similarity;
-
     class Consistency;
+    class Identity;
+    class Overlap;
 
     /**
      * \brief Class to handle the interaction with Alignment and statistics objects.\n
@@ -65,6 +65,14 @@ namespace statistics {
          * \brief Consistency submodule
          * */
         Consistency *consistency = nullptr;
+        /**
+         * \brief Consistency submodule
+         * */
+        Identity *identity = nullptr;
+        /**
+         * \brief Overlap submodule
+         */
+        Overlap *overlap = nullptr;
 
         /**
          * \brief SimilarityMatrix used by Similarity
@@ -92,6 +100,12 @@ namespace statistics {
         bool calculateGapStats();
 
         /**
+         * \brief Method to handle alignment identity calculation\n
+         * It checks if the #identity submodule has been created, otherwise, creates it
+         * */
+        bool calculateSeqIdentity();
+
+        /**
          * \brief Wrapper to Statistics::Gaps::printGapsColumns()\n
          * It calls to calculateGapStats() to make sure the information is available before reporting the requested values
          * */
@@ -108,6 +122,18 @@ namespace statistics {
          * It checks if the #similarity submodule has been created, otherwise, creates it
          * */
         bool calculateConservationStats();
+
+        /**
+         * \brief Method to handle overlap stat calculation\n
+         * It checks if the #overlap submodule has been created, otherwise, creates it
+         * */
+        bool calculateSeqOverlap();
+
+        /**
+         * \brief Method to handle spurious vector calculation\n
+         * It checks if the #overlap submodule has been created, otherwise, creates it
+         * */
+        bool calculateSpuriousVector(float overlapColumn, float *spuriousVector);
 
         /**
          * \brief Wrapper to Statistics::Similarity::printConservationAcl()\n

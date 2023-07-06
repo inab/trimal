@@ -506,6 +506,30 @@ namespace utils {
         return line;
     }
 
+    int countCharacter(char c, const std::string &line) {
+        size_t len = line.size();
+        size_t start = 0;
+        size_t end = len;
+        int n;
+
+        const char* ptr = nullptr;
+        const char* data = line.data();
+
+        for (n = 0; start < end;) {
+            ptr = reinterpret_cast<const char*>(memchr(data + start, c, end - start));
+            if (ptr == nullptr) {
+                start = end;
+            } else {
+                std::ptrdiff_t diff = ptr - data;
+                start = diff + 1;
+                n++;
+            }
+        }
+
+        return n;
+    }
+
+
     std::string removeCharacter(char c, std::string line) {
 
         size_t pos;

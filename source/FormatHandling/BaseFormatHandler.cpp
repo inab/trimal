@@ -168,7 +168,7 @@ namespace FormatHandling {
                     debug.report(OverwrittingFile, new std::string[2]{state->name, finalFilename} );
                 }
 #else
-                if((openmode & std::ofstream::app) == 0)
+                if((openmode & std::ofstream::app) == 0 && utils::fileExists(finalFilename))
                 {
 
                     uint i;

@@ -16,6 +16,8 @@ set(statisticFiles
         source/Statistics/Gaps.cpp
         source/Statistics/Manager.cpp
         source/Statistics/Similarity.cpp
+        source/Statistics/Identity.cpp
+        source/Statistics/Overlap.cpp
         source/Statistics/Consistency.cpp)
 
 set(reportSystemFiles
@@ -58,3 +60,32 @@ add_library(TestsOBJLib             OBJECT ${tests})
 SET_TARGET_PROPERTIES(CatchOBJLib PROPERTIES EXCLUDE_FROM_ALL True)
 SET_TARGET_PROPERTIES(TestsOBJLib PROPERTIES EXCLUDE_FROM_ALL True)
 
+# SSE2
+if (HAVE_SSE2)
+  message(STATUS "Detected compiler support for SSE2 CPU extensions.")
+  add_compile_definitions(HAVE_SSE2=1)
+  add_library(SSE2OBJLib OBJECT source/Platform/x86/SSE2.cpp)
+  if(NOT SSE2_C_FLAGS STREQUAL " ")
+    target_compile_options(SSE2OBJLib PRIVATE "${SSE2_C_FLAGS}")
+  endif()
+endif()
+
+# AVX2
+if (HAVE_AVX2)
+  message(STATUS "Detected compiler support for AVX2 CPU extensions.")
+  add_compile_definitions(HAVE_AVX2=1)
+  add_library(AVX2OBJLib OBJECT source/Platform/x86/AVX2.cpp)
+  if(NOT AVX2_C_FLAGS STREQUAL " ")
+    target_compile_options(AVX2OBJLib PRIVATE "${AVX2_C_FLAGS}")
+  endif()
+endif()
+
+# NEON
+if (HAVE_NEON)
+  message(STATUS "Detected compiler support for NEON CPU extensions.")
+  add_compile_definitions(HAVE_NEON=1)
+  add_library(NEONOBJLib OBJECT source/Platform/Arm/NEON.cpp)
+  if(NOT NEON_C_FLAGS STREQUAL " ")
+    target_compile_options(NEONOBJLib PRIVATE "${NEON_C_FLAGS}")
+  endif()
+endif()

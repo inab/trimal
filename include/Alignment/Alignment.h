@@ -85,12 +85,6 @@ public:
 
     std::string alignmentInfo;
 
-    /* Sequence Identities */
-    float **identities = nullptr;
-
-    /* Sequence Overlaps */
-    float **overlaps = nullptr;
-
     /* New Info */
     int *saveResidues = nullptr;
     int *saveSequences = nullptr;
@@ -114,6 +108,11 @@ public:
     void getSequences(std::string *names, std::string *sequences, int *lenghts);
 
     bool getSequenceNameOrder(std::string *names, int *orderVector);
+
+    /**
+     * \brief Get the length of a sequence without gap characters
+     */
+    int getSequenceLength(size_t index);
 
     int getNumAminos();
 

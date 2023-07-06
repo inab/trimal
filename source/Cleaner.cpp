@@ -27,13 +27,15 @@
 
 ***************************************************************************** */
 
+#include "Alignment/Alignment.h"
 #include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
-#include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
 #include "Statistics/Gaps.h"
+#include "Statistics/Identity.h"
+#include "Statistics/Overlap.h"
+#include "InternalBenchmarker.h"
 #include "reportsystem.h"
-#include "Alignment/Alignment.h"
 #include "defines.h"
 #include "Cleaner.h"
 #include "values.h"
@@ -46,11 +48,11 @@ int Cleaner::selectMethod() {
     StartTiming("int Cleaner::selectMethod(void) ");
 
     float mx, avg, maxSeq = 0, avgSeq = 0;
-    int i, j;
+    int i, j, minIndex, maxIndex, minIndexSquare, arrayPos;
 
     // Ask for the sequence identities assesment
-    if (alig->identities == nullptr)
-        calculateSeqIdentity();
+    alig->Statistics->calculateSeqIdentity();
+    float *identities = alig->Statistics->identity->identities;
 
     // Once we have the identities among all possible
     // combinations between each pair of sequence. We
@@ -58,10 +60,16 @@ int Cleaner::selectMethod() {
     // average identity for each sequence with its most
     // similar one
     for (i = 0; i < alig->numberOfSequences; i++) {
+        if (alig->saveSequences[i] == -1) continue;
         for (j = 0, mx = 0, avg = 0; j < alig->numberOfSequences; j++) {
             if (i != j) {
-                mx = mx < alig->identities[i][j] ? alig->identities[i][j] : mx;
-                avg += alig->identities[i][j];
+                if (alig->saveSequences[j] == -1) continue;
+                minIndex = std::min(i, j);
+                maxIndex = std::max(i, j);
+                minIndexSquare = (minIndex + 1) * (minIndex + 1);
+                arrayPos = alig->numberOfSequences * minIndex - ((minIndexSquare + (minIndex + 1)) / 2) + maxIndex;
+                mx = mx < identities[arrayPos] ? identities[arrayPos] : mx;
+                avg += identities[arrayPos];
             }
         }
         avgSeq += avg / (alig->numberOfSequences - 1);
@@ -884,85 +892,6 @@ Alignment *Cleaner::cleanCompareFile(const float cutpoint,
     return ret;
 }
 
-bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) {
-    // Create a timer that will report times upon its destruction
-    //	which means the end of the current scope.
-    StartTiming("bool Cleaner::calculateSpuriousVector(float overlap, float *spuriousVector) ");
-
-    int i, j, k, seqValue, ovrlap, hit;
-    char indet;
-
-    float floatOverlap = overlap * float(alig->originalNumberOfSequences - 1);
-    ovrlap = int(overlap * (alig->originalNumberOfSequences - 1));
-
-    if (floatOverlap > float(ovrlap))
-        ovrlap++;
-
-    if (spuriousVector == nullptr)
-        return false;
-    // Depending on the kind of Alignment, we have
-    // different indetermination symbol
-    if (alig->getAlignmentType() & SequenceTypes::AA)
-        indet = 'X';
-    else
-        indet = 'N';
-    // For each Alignment's sequence, computes its overlap
-    for (i = 0, seqValue = 0; i < alig->originalNumberOfSequences; i++, seqValue = 0) {
-        // For each Alignment's column, computes the overlap
-        // between the selected sequence and the other ones
-        for (j = 0; j < alig->originalNumberOfResidues; j++) {
-
-            // For sequences are before the sequence selected
-            for (k = 0, hit = 0; k < i; k++) {
-                // If the element of sequence selected is the same
-                // that the element of sequence considered, computes
-                // a hit
-                if (alig->sequences[i][j] == alig->sequences[k][j])
-                    hit++;
-
-                    // If the element of sequence selected isn't a 'X' nor
-                    // 'N' (indetermination) or a '-' (gap) and the element
-                    // of sequence considered isn't a  a 'X' nor 'N'
-                    // (indetermination) or a '-' (gap), computes a hit
-                else if ((alig->sequences[i][j] != indet) && (alig->sequences[i][j] != '-')
-                         && (alig->sequences[k][j] != indet) && (alig->sequences[k][j] != '-'))
-                    hit++;
-            }
-
-            // For sequences are after the sequence selected
-            for (k = (i + 1); k < alig->originalNumberOfSequences; k++) {
-                // If the element of sequence selected is the same
-                // that the element of sequence considered, computes
-                // a hit 
-                if (alig->sequences[i][j] == alig->sequences[k][j])
-                    hit++;
-
-                    // If the element of sequence selected isn't a 'X' nor
-                    // 'N' (indetermination) or a '-' (gap) and the element
-                    // of sequence considered isn't a  a 'X' nor 'N'
-                    // (indetermination) or a '-' (gap), computes a hit
-                else if ((alig->sequences[i][j] != indet) && (alig->sequences[i][j] != '-')
-                         && (alig->sequences[k][j] != indet) && (alig->sequences[k][j] != '-'))
-                    hit++;
-            }
-            // Finally, if the hit's number divided by number of
-            // sequences minus one is greater or equal than
-            // overlap's value, compute a sequence hit
-            if (hit >= ovrlap)
-                seqValue++;
-        }
-
-        // For each Alignment's sequence, computes its spurious's
-        // or overlap's value as the column's hits -for that
-        // sequence- divided by column's number.
-        spuriousVector[i] = ((float) seqValue / alig->originalNumberOfResidues);
-    }
-
-    // If there is not problem in the method, return true
-    return true;
-}
-
-
 Alignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, bool complementary) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
@@ -974,7 +903,7 @@ Alignment *Cleaner::cleanSpuriousSeq(float overlapColumn, float minimumOverlap, 
     overlapVector = new float[alig->originalNumberOfSequences];
 
     // Compute the overlap's vector using the overlap column's value
-    if (!calculateSpuriousVector(overlapColumn, overlapVector))
+    if (!alig->Statistics->calculateSpuriousVector(overlapColumn, overlapVector))
         return nullptr;
 
     // Select and remove the sequences with a overlap less than threshold's overlap and create a new alignment
@@ -1150,7 +1079,7 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     StartTiming("float Cleaner::getCutPointClusters(int clusterNumber) ");
 
     float max, min, avg, gMax, gMin, startingPoint, prevValue = 0, iter = 0;
-    int i, j, clusterNum, *cluster, **seqs;
+    int i, j, clusterNum, *cluster, **seqs, arrayIdentityPosition, comparedSequences;
 
     // If the user wants only one cluster means that all
     // of sequences have to be in the same cluster.
@@ -1161,43 +1090,39 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     else if (clusterNumber == 1) return 0;
 
     // Ask for the sequence identities assessment
-    if (alig->identities == nullptr)
-        calculateSeqIdentity();
+    alig->Statistics->calculateSeqIdentity();
+    float *identities = alig->Statistics->identity->identities;
 
     // Compute the maximum, the minimum and the average
     // identity values from the sequences
+    arrayIdentityPosition = 0;
     for (i = 0, gMax = 0, gMin = 1, startingPoint = 0; i < alig->originalNumberOfSequences; i++) {
+        comparedSequences = 0;
         if (alig->saveSequences[i] == -1) continue;
-
-        for (j = 0, max = 0, avg = 0, min = 1; j < i; j++) {
-            if (alig->saveSequences[j] == -1) continue;
-
-            max = std::max(max, alig->identities[i][j]);
-            min = std::min(min, alig->identities[i][j]);
-            avg += alig->identities[i][j];
-        }
 
         for (j = i + 1; j < alig->numberOfSequences; j++) {
             if (alig->saveSequences[j] == -1) continue;
 
-            max = std::max(max, alig->identities[i][j]);
-            min = std::min(min, alig->identities[i][j]);
-            avg += alig->identities[i][j];
+            max = std::max(max, identities[arrayIdentityPosition]);
+            min = std::min(min, identities[arrayIdentityPosition]);
+            avg += identities[arrayIdentityPosition];
+            arrayIdentityPosition++;
+            comparedSequences++;
         }
 
-        startingPoint += avg / (alig->numberOfSequences - 1);
+        startingPoint += avg / comparedSequences;
         gMax = std::max(gMax, max);
         gMin = std::min(gMin, min);
 
     }
     // Take the starting point as the average value
-    startingPoint /= alig->numberOfSequences;
+    startingPoint /= arrayIdentityPosition;
 
     // Compute and sort the sequence length
     seqs = new int *[alig->numberOfSequences];
     for (i = 0; i < alig->numberOfSequences; i++) {
         seqs[i] = new int[2];
-        seqs[i][0] = utils::removeCharacter('-', alig->sequences[i]).size();
+        seqs[i][0] = alig->getSequenceLength(i);
         seqs[i][1] = i;
     }
     utils::quicksort(seqs, 0, alig->numberOfSequences - 1);
@@ -1210,23 +1135,29 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     // Look for the optimal identity value to get the
     // number of cluster set by the user. To do that, the
     // method starts in the average identity value and moves
-    // to the right or lefe side of this value depending on
+    // to the right or left side of this value depending on
     // if this value is so strict or not. We set an flag to
     // avoid enter in an infinite loop, if we get the same
     // value for more than 10 consecutive point without get
     // the given cluster number means that it's impossible
     // to get this cut-off and we need to stop the search
+    int minIndex, maxIndex, minIndexSquare, arrayPos, seqLength, clusterLength;
     do {
         clusterNum = 1;
         // Start the search
         for (i = alig->numberOfSequences - 2; i >= 0; i--) {
-
+            seqLength = seqs[i][1];
             for (j = 0; j < clusterNum; j++)
-                if (alig->identities[seqs[i][1]][cluster[j]] > startingPoint)
+                clusterLength = cluster[j];
+                minIndex = std::min(seqLength, clusterLength);
+                maxIndex = std::max(seqLength, clusterLength);
+                minIndexSquare = (minIndex + 1) * (minIndex + 1);
+                arrayPos = alig->originalNumberOfSequences * minIndex - ((minIndexSquare + (minIndex + 1)) / 2) + maxIndex;
+                if (identities[arrayPos] > startingPoint)
                     break;
 
             if (j == clusterNum) {
-                cluster[j] = seqs[i][1];
+                cluster[j] = seqLength;
                 clusterNum++;
             }
 
@@ -1510,103 +1441,6 @@ void Cleaner::removeAllGapsSeqsAndCols(bool seqs, bool cols) {
     }
 }
 
-void Cleaner::calculateSeqIdentity() {
-    // Create a timer that will report times upon its destruction
-    //	which means the end of the current scope.
-    StartTiming("void Cleaner::calculateSeqIdentity(void) ");
-
-    int sequenceFirstIndex, sequenceSecondIndex, residueIndex, hit, commonLength;
-    char indet;
-
-    // Depending on alignment type, indetermination symbol will be one or other
-    indet = (alig->getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
-
-    // Create identity matrix to store identity scores
-    alig->identities = new float *[alig->originalNumberOfSequences];
-
-    #pragma omp parallel for num_threads(NUMTHREADS) if(alig->originalNumberOfSequences>MINPARALLELSIZE)
-    for(sequenceFirstIndex = 0; sequenceFirstIndex < alig->originalNumberOfSequences; sequenceFirstIndex++) {
-        if (alig->saveSequences[sequenceFirstIndex] == -1) continue;
-        alig->identities[sequenceFirstIndex] = new float[alig->originalNumberOfSequences];
-        alig->identities[sequenceFirstIndex][sequenceFirstIndex] = 0;
-    }
-
-    // For each seq, compute its identity score against the others in the MSA
-    #pragma omp parallel for num_threads(NUMTHREADS) private(sequenceSecondIndex, residueIndex, hit, commonLength) if(alig->originalNumberOfSequences>MINPARALLELSIZE)
-    for (sequenceFirstIndex = 0; sequenceFirstIndex < alig->originalNumberOfSequences; sequenceFirstIndex++) {
-        if (alig->saveSequences[sequenceFirstIndex] == -1) continue;
-
-        // Compute identity scores for the current sequence against the rest
-        for (sequenceSecondIndex = sequenceFirstIndex + 1; sequenceSecondIndex < alig->originalNumberOfSequences; sequenceSecondIndex++) {
-            if (alig->saveSequences[sequenceSecondIndex] == -1) continue;
-            for (residueIndex = 0, hit = 0, commonLength = 0; residueIndex < alig->numberOfResidues; residueIndex++) {
-                if (alig->saveResidues[residueIndex] == -1) continue;
-                // If one of the two positions is a valid residue,
-                // count it for the common length
-                if (((alig->sequences[sequenceFirstIndex][residueIndex] != indet) && (alig->sequences[sequenceFirstIndex][residueIndex] != '-')) ||
-                    ((alig->sequences[sequenceSecondIndex][residueIndex] != indet) && (alig->sequences[sequenceSecondIndex][residueIndex] != '-'))) {
-                    commonLength++;
-                    // If both positions are the same, count a hit
-                    if (alig->sequences[sequenceFirstIndex][residueIndex] == alig->sequences[sequenceSecondIndex][residueIndex])
-                        hit++;
-                }
-            }
-
-            if (commonLength == 0) {
-                alig->identities[sequenceFirstIndex][sequenceSecondIndex] = 0;
-            } else {
-                // Identity score between two sequences is the ratio of identical residues
-                // by the total length (common and no-common residues) among them
-                alig->identities[sequenceFirstIndex][sequenceSecondIndex] = (float) hit / commonLength;
-            }
-            
-            alig->identities[sequenceSecondIndex][sequenceFirstIndex] = alig->identities[sequenceFirstIndex][sequenceSecondIndex];
-        }
-    }
-}
-
-void Cleaner::calculateRelaxedSeqIdentity() {
-    // Create a timer that will report times upon its destruction
-    //	which means the end of the current scope.
-    StartTiming("void Cleaner::calculateRelaxedSeqIdentity(void) ");
-    // Raw approximation of sequence identity computation designed for reducing
-    // comparisons for huge alignemnts
-
-    int i, j, k, hit;
-
-    float inverseResidNumber = 1.F / alig->originalNumberOfResidues;
-
-    // Create identities matrix to store identities scores
-    alig->identities = new float *[alig->originalNumberOfSequences];
-
-    // For each seq, compute its identity score against the others in the MSA
-    for (i = 0; i < alig->originalNumberOfSequences; i++) {
-        if (alig->saveSequences[i] == -1) continue;
-        alig->identities[i] = new float[alig->originalNumberOfSequences];
-
-        // It's a symmetric matrix, copy values that have been already computed
-        for (j = 0; j < i; j++) {
-            if (alig->saveSequences[j] == -1) continue;
-            alig->identities[i][j] = alig->identities[j][i];
-        }
-        alig->identities[i][i] = 0;
-
-        // Compute identity score between the selected sequence and the others
-        for (j = i + 1; j < alig->originalNumberOfSequences; j++) {
-            if (alig->saveSequences[j] == -1) continue;
-            for (k = 0, hit = 0; k < alig->originalNumberOfResidues; k++) {
-                if (alig->saveResidues[k] == -1) continue;
-                // If both positions are the same, count a hit
-                if (alig->sequences[i][k] == alig->sequences[j][k])
-                    hit++;
-            }
-            // Raw identity score is computed as the ratio of identical residues between
-            // alignment length 
-            alig->identities[i][j] = hit * inverseResidNumber;
-        }
-    }
-}
-
 int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
@@ -1618,14 +1452,14 @@ int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
     float max;
 
     // Ask for the sequence identities assesment
-    if (alig->identities == nullptr)
-        alig->Cleaning->calculateSeqIdentity();
+    alig->Statistics->calculateSeqIdentity();
+    float *identities = alig->Statistics->identity->identities;
 
     seqs = new int *[alig->originalNumberOfSequences];
     for (i = 0; i < alig->originalNumberOfSequences; i++) {
         if (alig->saveSequences[i] == -1) continue;
         seqs[i] = new int[2];
-        seqs[i][0] = utils::removeCharacter('-', alig->sequences[i]).size();
+        seqs[i][0] = alig->getSequenceLength(i);
         seqs[i][1] = i;
     }
 
@@ -1635,21 +1469,26 @@ int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
     cluster[0] = seqs[alig->originalNumberOfSequences - 1][1];
     clusterNum = 1;
 
-
+    int minIndex, maxIndex, minIndexSquare, arrayPos, seqLength, clusterLength;
     for (i = alig->originalNumberOfSequences - 2; i >= 0; i--) {
         if (alig->saveSequences[i] == -1) continue;
-
+        seqLength = seqs[i][1];
+        clusterLength = cluster[j];
         for (j = 0, max = 0, pos = -1; j < clusterNum; j++) {
-            if (alig->identities[seqs[i][1]][cluster[j]] > maximumIdent) {
-                if (alig->identities[seqs[i][1]][cluster[j]] > max) {
-                    max = alig->identities[seqs[i][1]][cluster[j]];
+            minIndex = std::min(seqLength, cluster[j]);
+            maxIndex = std::max(seqLength, cluster[j]);
+            minIndexSquare = (minIndex + 1) * (minIndex + 1);
+            arrayPos = alig->originalNumberOfSequences * minIndex - ((minIndexSquare + (minIndex + 1)) / 2) + maxIndex;
+            if (identities[arrayPos] > maximumIdent) {
+                if (identities[arrayPos] > max) {
+                    max = identities[arrayPos];
                     pos = j;
                 }
             }
         }
 
         if (pos == -1) {
-            cluster[j] = seqs[i][1];
+            cluster[j] = seqLength;
             clusterNum++;
         }
     }

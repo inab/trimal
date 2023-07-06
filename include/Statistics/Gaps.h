@@ -61,7 +61,7 @@ namespace statistics {
         explicit Gaps(Alignment *parent);
 
         // Class destroyer.
-        ~Gaps();
+        virtual ~Gaps();
 
         // Methods allows us compute the gapWindows' values.
         bool applyWindow(int);
@@ -92,7 +92,7 @@ namespace statistics {
 
         bool isDefinedWindow();
 
-        void CalculateVectors();
+        virtual void CalculateVectors();
     };
 }
 #endif

@@ -29,8 +29,20 @@
 
 #include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
-#include "InternalBenchmarker.h"
+#include "Statistics/Identity.h"
 #include "Statistics/Manager.h"
+#include "Statistics/Overlap.h"
+#include "InternalBenchmarker.h"
+
+#if defined(HAVE_AVX2)
+#include "Platform/x86/AVX2.h"
+#endif
+#if defined(HAVE_NEON)
+#include "Platform/Arm/NEON.h"
+#endif
+#if defined(HAVE_SSE2)
+#include "Platform/x86/SSE2.h"
+#endif
 
 namespace statistics {
     bool Manager::calculateConservationStats() {
@@ -47,7 +59,15 @@ namespace statistics {
         // It the similarity statistics object has not been
         // created we create it
         if (similarity == nullptr) {
+#if defined(HAVE_AVX2)
+            similarity = new AVX2Similarity(alig);
+#elif defined(HAVE_SSE2)
+            similarity = new SSE2Similarity(alig);
+#elif defined(HAVE_NEON)
+            similarity = new NEONSimilarity(alig);
+#else
             similarity = new Similarity(alig);
+#endif
             similarity->setSimilarityMatrix(_similarityMatrix);
             similarity->applyWindow(shWindow);
         }
@@ -106,7 +126,15 @@ namespace statistics {
 
         // If scons object is not created, we create them
         if (alig->Statistics->similarity == nullptr)
+#if defined(HAVE_AVX2)
+            alig->Statistics->similarity = new AVX2Similarity(alig);
+#elif defined(HAVE_SSE2)
+            alig->Statistics->similarity = new SSE2Similarity(alig);
+#elif defined(HAVE_NEON)
+            alig->Statistics->similarity = new NEONSimilarity(alig);
+#else
             alig->Statistics->similarity = new Similarity(alig);
+#endif
 
         // Associate the matrix to the similarity statistics object
         // If it's OK, we return true
@@ -172,13 +200,99 @@ namespace statistics {
         if (alig->sequences == nullptr)
             return false;
 
-        // If sgaps object is not created, we create them
+        // If gaps object is not created, we create them
         // and calculate the statistics
         if (gaps == nullptr) {
+#if defined(HAVE_AVX2)
+            gaps = new AVX2Gaps(alig);
+#elif defined(HAVE_SSE2)
+            gaps = new SSE2Gaps(alig);
+#elif defined(HAVE_NEON)
+            gaps = new NEONGaps(alig);
+#else
             gaps = new Gaps(alig);
+#endif
             gaps->CalculateVectors();
         }
         return gaps->applyWindow(ghWindow);
+    }
+
+    bool Manager::calculateSeqIdentity() {
+        // Create a timerLevel that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("bool Manager::calculateSeqIdentity(void) ");
+
+        // If Alignment matrix is not created, return false
+        if (alig->sequences == nullptr)
+            return false;
+
+        // If identity object is not created, we create them
+        // and calculate the statistics
+        if (identity == nullptr) {
+#if defined(HAVE_AVX2)
+            identity = new AVX2Identity(alig);
+#elif defined(HAVE_SSE2)
+            identity = new SSE2Identity(alig);
+#elif defined(HAVE_NEON)
+            identity = new NEONIdentity(alig);
+#else
+            identity = new Identity(alig);
+#endif
+            identity->calculateSeqIdentity();
+        }
+        return true;
+    }
+
+    bool Manager::calculateSeqOverlap() {
+        // Create a timerLevel that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("bool Manager::calculateSeqOverlap(void) ");
+
+        // If Alignment matrix is not created, return false
+        if (alig->sequences == nullptr)
+            return false;
+
+        // If overlap object is not created, we create them
+        // and calculate the statistics
+        if (overlap == nullptr) {
+#if defined(HAVE_AVX2)
+            overlap = new AVX2Overlap(alig);
+#elif defined(HAVE_SSE2)
+            overlap = new SSE2Overlap(alig);
+#elif defined(HAVE_NEON)
+            overlap = new NEONOverlap(alig);
+#else
+            overlap = new Overlap(alig);
+#endif
+            overlap->calculateSeqOverlap();
+        }
+        return true;
+    }
+
+    bool Manager::calculateSpuriousVector(float overlapColumn, float *spuriousVector) {
+        // Create a timerLevel that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("bool Manager::calculateSpuriousVector(float, float *) ");
+
+        // If Alignment matrix is not created, return false
+        if (alig->sequences == nullptr)
+            return false;
+
+        // If overlap object is not created, we create them
+        // and calculate the statistics
+        if (overlap == nullptr) {
+#if defined(HAVE_AVX2)
+            overlap = new AVX2Overlap(alig);
+#elif defined(HAVE_SSE2)
+            overlap = new SSE2Overlap(alig);
+#elif defined(HAVE_NEON)
+            overlap = new NEONOverlap(alig);
+#else
+            overlap = new Overlap(alig);
+#endif
+        }
+
+        return overlap->calculateSpuriousVector(overlapColumn, spuriousVector);
     }
 
     Manager::Manager(Alignment *parent) {
@@ -203,13 +317,52 @@ namespace statistics {
         shWindow = mold->shWindow;
 
         if (mold->similarity)
+#if defined(HAVE_AVX2)
+            similarity = new AVX2Similarity(parent, mold->similarity);
+#elif defined(HAVE_SSE2)
+            similarity = new SSE2Similarity(parent, mold->similarity);
+#elif defined(HAVE_NEON)
+            similarity = new NEONSimilarity(parent, mold->similarity);
+#else
             similarity = new Similarity(parent, mold->similarity);
+#endif
 
         if (mold->consistency)
             consistency = new Consistency(parent, mold->consistency);
 
         if (mold->gaps)
+#if defined(HAVE_AVX2)
+            gaps = new AVX2Gaps(parent, mold->gaps);
+#elif defined(HAVE_SSE2)
+            gaps = new SSE2Gaps(parent, mold->gaps);
+#elif defined(HAVE_NEON)
+            gaps = new NEONGaps(parent, mold->gaps);
+#else
             gaps = new Gaps(parent, mold->gaps);
+#endif
+
+        if (mold->identity)
+#if defined(HAVE_AVX2)
+            identity = new AVX2Identity(parent, mold->identity);
+#elif defined(HAVE_SSE2)
+            identity = new SSE2Identity(parent, mold->identity);
+#elif defined(HAVE_NEON)
+            identity = new NEONIdentity(parent, mold->identity);
+#else
+            identity = new Identity(parent, mold->identity);
+#endif
+
+        if (mold->overlap)
+#if defined(HAVE_AVX2)
+        overlap = new AVX2Overlap(parent, mold->overlap);
+#elif defined(HAVE_SSE2)
+        overlap = new SSE2Overlap(parent, mold->overlap);
+#elif defined(HAVE_NEON)
+        overlap = new NEONOverlap(parent, mold->overlap);
+#else
+        overlap = new Overlap(parent, mold->overlap);
+#endif
+
     }
 
     Manager::~Manager() {
@@ -221,5 +374,11 @@ namespace statistics {
 
         delete consistency;
         consistency = nullptr;
+
+        delete identity;
+        identity = nullptr;
+
+        delete overlap;
+        overlap = nullptr;
     }
 }

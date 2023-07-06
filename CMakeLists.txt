@@ -7,31 +7,50 @@ set(CMAKE_CXX_STANDARD 11)
 # Specify bin folder to output the compiled programs
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
+# Set common files for all executables
+set(TRIMAL_OBJECTS
+    $<TARGET_OBJECTS:CoreOBJLib>
+    $<TARGET_OBJECTS:FormatsOBJLib>
+    $<TARGET_OBJECTS:FormatHandlerOBJLib>
+    $<TARGET_OBJECTS:ReportSystemOBJLib>
+    $<TARGET_OBJECTS:StatisticOBJLib>
+    $<TARGET_OBJECTS:UtilsOBJLib>
+    $<TARGET_OBJECTS:InternalBenchmarkOBJLib>)
+
+# Scripts to detect various SIMD support for the current compiler
+if (NOT DISABLE_AVX2)
+    include("./scripts/CMake/FindAVX2.cmake")
+endif()
+if (NOT DISABLE_NEON)
+    include("./scripts/CMake/FindNEON.cmake")
+endif()
+if (NOT DISABLE_SSE2)
+    include("./scripts/CMake/FindSSE2.cmake")
+endif()
+
+# Add SIMD code if compiler supports it
+if (HAVE_SSE2)
+    list(APPEND TRIMAL_OBJECTS $<TARGET_OBJECTS:SSE2OBJLib>)
+endif()
+if (HAVE_AVX2)
+    list(APPEND TRIMAL_OBJECTS $<TARGET_OBJECTS:AVX2OBJLib>)
+endif()
+if (HAVE_NEON)
+    list(APPEND TRIMAL_OBJECTS $<TARGET_OBJECTS:NEONOBJLib>)
+endif()
+
 # Add the executables to the project.
 add_executable(trimal
         source/trimAlMain.cpp               # Main
         source/trimalManager.cpp            # trimAl Manager
 
         source/VCFHandler.cpp               # VCF only present on trimAl
-        # No need to transform to OBJLib
-        $<TARGET_OBJECTS:CoreOBJLib>
-        $<TARGET_OBJECTS:FormatsOBJLib>
-        $<TARGET_OBJECTS:FormatHandlerOBJLib>
-        $<TARGET_OBJECTS:ReportSystemOBJLib>
-        $<TARGET_OBJECTS:StatisticOBJLib>
-        $<TARGET_OBJECTS:UtilsOBJLib>
-        $<TARGET_OBJECTS:InternalBenchmarkOBJLib>)
+        ${TRIMAL_OBJECTS})
 
 add_executable(readal
         source/FormatHandling/readAlMain.cpp        # Main
 
-        $<TARGET_OBJECTS:CoreOBJLib>
-        $<TARGET_OBJECTS:FormatsOBJLib>
-        $<TARGET_OBJECTS:FormatHandlerOBJLib>
-        $<TARGET_OBJECTS:ReportSystemOBJLib>
-        $<TARGET_OBJECTS:StatisticOBJLib>
-        $<TARGET_OBJECTS:UtilsOBJLib>
-        $<TARGET_OBJECTS:InternalBenchmarkOBJLib>)
+       ${TRIMAL_OBJECTS})
 
 # Add the executables to the project.
 add_executable(test
@@ -40,17 +59,7 @@ add_executable(test
         source/trimalManager.cpp            # trimAl Manager
 
         source/VCFHandler.cpp               # VCF only present on trimAl
-        # No need to transform to OBJLib
-        $<TARGET_OBJECTS:CoreOBJLib>
-        $<TARGET_OBJECTS:FormatsOBJLib>
-        $<TARGET_OBJECTS:FormatHandlerOBJLib>
-        $<TARGET_OBJECTS:ReportSystemOBJLib>
-        $<TARGET_OBJECTS:StatisticOBJLib>
-        $<TARGET_OBJECTS:UtilsOBJLib>
-        $<TARGET_OBJECTS:InternalBenchmarkOBJLib>
-        $<TARGET_OBJECTS:CatchOBJLib>
-        $<TARGET_OBJECTS:TestsOBJLib>
-        )
+        ${TRIMAL_OBJECTS})
 SET_TARGET_PROPERTIES(test PROPERTIES EXCLUDE_FROM_ALL True)
 
 # Link the mathematical library to the targets
