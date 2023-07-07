@@ -318,11 +318,12 @@ inline bool calculateSpuriousVector(statistics::Overlap &o, const float overlap,
 
 template <class Vector> 
 inline void calculateSeqIdentity(statistics::Identity &id) {
-  int i, j, k, l, arrayIdentitySize, arrayIdentityPosition;
+  int i, j, k, l, arrayIdentityPosition;
+  size_t arrayIdentitySize;
   const Alignment* alig = id.alig;
 
   // create identities matrix to store identities scores
-  arrayIdentitySize = (alig->originalNumberOfSequences * alig->originalNumberOfSequences + alig->originalNumberOfSequences) / 2;
+  arrayIdentitySize = ((float) alig->originalNumberOfSequences * alig->originalNumberOfSequences + alig->originalNumberOfSequences) / 2;
   id.identities = new float[arrayIdentitySize];
 
   // Depending on alignment type, indetermination symbol will be one or other
