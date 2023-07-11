@@ -1000,7 +1000,8 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     StartTiming("float Cleaner::getCutPointClusters(int clusterNumber) ");
 
     float max, min, avg, gMax, gMin, startingPoint, prevValue = 0, iter = 0;
-    int i, j, clusterNum, *cluster, **seqs, arrayIdentityPosition, comparedSequences;
+    int i, j, clusterNum, *cluster, **seqs, comparedSequences;
+    size_t arrayIdentityPosition;
 
     // If the user wants only one cluster means that all
     // of sequences have to be in the same cluster.

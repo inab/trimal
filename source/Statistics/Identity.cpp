@@ -62,9 +62,9 @@ namespace statistics {
         //	which means the end of the current scope.
         StartTiming("void Identity::calculateSeqIdentity(void) ");
 
-        int i, j, k, hit, dst, arrayIdentityPosition;
+        int i, j, k, hit, dst;
         char indet;
-        size_t arrayIdentitySize;
+        size_t arrayIdentitySize, arrayIdentityPosition;
 
         // Depending on alignment type, indetermination symbol will be one or other
         indet = (alig->getAlignmentType() & SequenceTypes::AA) ? 'X' : 'N';
@@ -72,7 +72,7 @@ namespace statistics {
         // Create identities matrix to store identities scores
         arrayIdentitySize = ((float) alig->originalNumberOfSequences * alig->originalNumberOfSequences + alig->originalNumberOfSequences) / 2;
         identities = new float[arrayIdentitySize];
-
+        
         // For each seq, compute its identity score against the others in the MSA
         arrayIdentityPosition = 0;
         for (i = 0; i < alig->originalNumberOfSequences; i++) {
