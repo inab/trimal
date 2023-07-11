@@ -91,8 +91,9 @@ inline bool calculateSimilarityVectors(statistics::Similarity &s,
   }
 
   // Initialize the variables used
-  int i, j, k, arrayIdentityPosition;
+  int i, j, k;
   float num, den;
+  size_t arrayIdentityPosition;
 
   // Depending on alignment type, indetermination symbol will be one or other
   char indet = s.alig->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
@@ -318,8 +319,8 @@ inline bool calculateSpuriousVector(statistics::Overlap &o, const float overlap,
 
 template <class Vector> 
 inline void calculateSeqIdentity(statistics::Identity &id) {
-  int i, j, k, l, arrayIdentityPosition;
-  size_t arrayIdentitySize;
+  int i, j, k, l;
+  size_t arrayIdentitySize, arrayIdentityPosition;
   const Alignment* alig = id.alig;
 
   // create identities matrix to store identities scores

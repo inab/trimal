@@ -115,8 +115,9 @@ namespace statistics {
         }
 
         // Initialize the variables used
-        int i, j, k, arrayIdentityPosition;
+        int i, j, k;
         float num, den;
+        size_t arrayIdentityPosition;
 
         // Depending on alignment type, indetermination symbol will be one or other
         char indet = alig->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
