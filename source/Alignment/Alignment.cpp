@@ -779,8 +779,9 @@ void Alignment::printSeqIdentity() {
     //	which means the end of the current scope.
     StartTiming("void Alignment::printSeqIdentity(void) ");
 
-    int i, j, k, pos, maxLongName, minIndex, maxIndex, minIndexSquare, arrayPos;
+    int i, j, k, pos, maxLongName;
     float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
+    size_t minIndex, maxIndex, arrayPos, minIndexSquare;
 
     // Ask for the sequence identities assesment
     Statistics->calculateSeqIdentity();
@@ -789,7 +790,6 @@ void Alignment::printSeqIdentity() {
     // For each sequence, we look for its most similar one
     maxs = new float *[originalNumberOfSequences];
 
-    #pragma omp parallel for private(k, mx, avg, pos) reduction(+: avgSeq, maxAvgSeq) num_threads(NUMTHREADS) if(originalNumberOfSequences>MINPARALLELSIZE)
     for (i = 0; i < originalNumberOfSequences; i++) {
         maxs[i] = new float[2];
 
