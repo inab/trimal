@@ -35,7 +35,8 @@ variable_labels = {
     "alignment_cols": "Columns",
     "alignment_res": "Residues",
     "alignment_res_millions": "Residues (millions)",
-    "trimmed_alignment_cols": "Trimmed columns",
+    "remaining_alignment_cols": "Remaining columns",
+    "perc_conserved_cols": "% conserved columns",
     "user_time": "Time (s)",
     "system_time": "System time (s)",
     "percent_cpu": "CPU (%)",
@@ -45,7 +46,7 @@ variable_labels = {
 }
 
 
-def generate_plot(plot_type, df, x_axis, y_axis, hue, log_x, log_y, title, show_plot, save_plot):
+def generate_plot(plot_type, df, x_axis, y_axis, hue, col, orient, style, size, log_x, log_y, title, show_plot, save_plot):
   if plot_type == "stripplot":
     if y_axis == "alignment_res":
       alignment_res_ordered = np.sort(df["alignment_res"].unique())[::-1]
@@ -56,16 +57,22 @@ def generate_plot(plot_type, df, x_axis, y_axis, hue, log_x, log_y, title, show_
     else:
       tech_plot = sns.stripplot(data=df, x=x_axis, y=y_axis,
                         hue=hue, orient="h")
+  elif plot_type == "scatterplot":
+    tech_plot = sns.scatterplot(data=df, x=x_axis, y=y_axis, hue=hue, style=style, size=size, sizes=(20, 2000), palette='viridis')
   elif plot_type == "lineplot":
-    tech_plot = sns.lineplot(data=df, x=x_axis, y=y_axis, hue=hue)
+    tech_plot = sns.lineplot(data=df, x=x_axis, y=y_axis, hue=hue, size=size, style=style)
+  elif plot_type == "lmplot":
+    tech_plot = sns.lmplot(data=df, x=x_axis, y=y_axis, hue=hue)
+  elif plot_type == "relplot":
+    tech_plot = sns.relplot(data=df, x=x_axis, y=y_axis, hue=hue, col=col, style=style, size=size, sizes=(20, 2000), palette='viridis')
   elif plot_type == "violinplot":
-    tech_plot = sns.violinplot(data=df, x=x_axis, y=y_axis, hue=hue) 
+    tech_plot = sns.violinplot(data=df, x=x_axis, y=y_axis, hue=hue, orient=orient) 
   elif plot_type == "boxplot":
     tech_plot = sns.boxplot(data=df, x=x_axis, y=y_axis, hue=hue) 
   elif plot_type == "histplot":
     tech_plot = sns.histplot(data=df, x=x_axis, hue=hue, multiple="stack") 
 
-  tech_plot.get_legend().set_title(title)
+  if plot_type != "relplot" and plot_type != "lmplot": tech_plot.get_legend().set_title(title)
   plt.xlabel(variable_labels[x_axis])
   if y_axis: plt.ylabel(variable_labels[y_axis])
   if log_x: plt.xscale('log')
@@ -87,9 +94,12 @@ def main():
 
     parser.add_argument("-i", "--in", dest="inFile",
                         required=True, type=str, help="Input dataset")
+    
+    parser.add_argument("--common_stats", dest="commom_stats_file",
+                        required=True, type=str, help="Input dataset of common stats")
 
     parser.add_argument("-p", "--plot", dest="plot", required=True,
-                        type=str, choices=["lineplot", "boxplot", "stripplot", "violinplot", "histplot"], help="Set plot type")
+                        type=str, choices=["lineplot", "lmplot", "scatterplot", "relplot", "boxplot", "stripplot", "violinplot", "histplot"], help="Set plot type")
 
     parser.add_argument("--all_of", dest="all_of", required=False,
                         type=str, choices=["time", "memory"], help="Generate all plots of a variable")
@@ -97,16 +107,16 @@ def main():
     parser.add_argument("-x", "--x_axis", dest="x_axis", required=False,
                         type=str, choices=["repetition", "method", "alignment_size", "alignment_seqs",
                                            "alignment_cols", "alignment_res", "alignment_res_millions",
-                                               "alignment_size_mb", "trimmed_alignment_cols",
+                                               "alignment_size_mb", "remaining_alignment_cols",
                                                "user_time", "system_time", "percent_cpu", "max_resident_set_size",
                                                "max_resident_set_size_gb", "exit_status"], help="Set x axis variable")
 
     parser.add_argument("-y", "--y_axis", dest="y_axis", required=False,
                         type=str, choices=["repetition", "method", "alignment_size", "alignment_seqs",
                                            "alignment_cols", "alignment_res", "alignment_res_millions",
-                                               "alignment_size_mb", "trimmed_alignment_cols", "user_time",
+                                               "alignment_size_mb", "remaining_alignment_cols", "user_time",
                                                "system_time", "percent_cpu", "max_resident_set_size", "max_resident_set_size_gb"
-                                               "exit_status"], help="Set y axis variable")
+                                               "exit_status", "perc_conserved_cols"], help="Set y axis variable")
 
     parser.add_argument("--log_x", dest="log_x", default=False,
                         action="store_true", help="Set logaritmic scale in x axis")
@@ -114,9 +124,21 @@ def main():
     parser.add_argument("--log_y", dest="log_y", default=False,
                         action="store_true", help="Set logaritmic scale in y axis")
 
-    parser.add_argument("--hue", dest="hue", required=True,
-                        type=str, choices=["method", "alignment_seqs", "alignment_cols"], help="Set hue variable")
+    parser.add_argument("--hue", dest="hue", required=False,
+                        type=str, choices=["method", "alignment_seqs", "alignment_cols", "user_time", "max_resident_set_size", "perc_conserved_cols"], help="Set hue variable")
     
+    parser.add_argument("--col", dest="col", required=False,
+                        type=str, choices=["method", "alignment_size"], help="Set col variable")
+    
+    parser.add_argument("--orient", dest="orient", required=False,
+                        type=str, choices=["h", "v"], help="Set plot orientation")
+    
+    parser.add_argument("--style", dest="style", required=False,
+                        type=str, choices=["method", "alignment_seqs", "alignment_cols", "user_time"], help="Set plot style")
+    
+    parser.add_argument("--size", dest="size", required=False,
+                        type=str, choices=["method", "alignment_seqs", "alignment_cols", "user_time", "max_resident_set_size", "perc_conserved_cols"], help="Set size parameter")
+
     parser.add_argument("--title", dest="title",
                         required=False, type=str, help="Set plot title")
     
@@ -124,10 +146,10 @@ def main():
                         required=False, type=str, help="Set method to filter by")
     
     parser.add_argument("--filter_by_min_sequences", dest="min_sequences",
-                        required=False, type=str, help="Set minimum sequences filter")
+                        required=False, type=np.int64, help="Set minimum sequences filter")
     
     parser.add_argument("--filter_by_min_columns", dest="min_columns",
-                        required=False, type=str, help="Set minimum columns filter")
+                        required=False, type=np.int64, help="Set minimum columns filter")
     
     parser.add_argument("--show", dest="show_plot", default=False,
                         action="store_true", help="Show plot interactively")
@@ -138,26 +160,36 @@ def main():
     args = parser.parse_args()
 
     if not os.path.isfile(args.inFile):
-        sys.exit(("ERROR: Check input alignment file '%s'") % (args.inFile))
-
+        sys.exit(("ERROR: Check input file '%s'") % (args.inFile))
+    if not os.path.isfile(args.commom_stats_file):
+       sys.exit(("ERROR: Check common stats file '%s'") % (args.commom_stats_file))
     if not args.all_of and not args.x_axis and not args.y_axis:
         sys.exit("ERROR: all_of or axis variables should be specified")
 
     df = pd.read_csv(args.inFile)
-
+    common_df = pd.read_csv(args.commom_stats_file)
+    df = pd.merge(df, common_df, how="inner", on="filename")
+    
+    
     if args.method: df = df[df["method"] == args.method]
     if args.min_sequences: df = df[df["alignment_seqs"] >= args.min_sequences]
     if args.min_columns: df = df[df["alignment_cols"] >= args.min_columns]
 
+    df.loc[df["remaining_alignment_cols"] > df["alignment_cols"], "remaining_alignment_cols"] = 0 # msas where all columns were removed
+
+    print(df.describe())
+    print(df)
+
     df["alignment_res"] = df["alignment_seqs"] * df["alignment_cols"]
+    df["perc_conserved_cols"] = df["remaining_alignment_cols"] / df["alignment_cols"]
     df["alignment_res_millions"] = df["alignment_res"] * 10**(-6)
     df["alignment_size_mb"] = df["alignment_size"] * \
         10**(-6)  # max_resident_set_size is in bytes
     df["max_resident_set_size_gb"] = df["max_resident_set_size"] * \
         10**(-6)  # max_resident_set_size is in KB
-    df.set_index(["file", "method", "repetition"])
+    df.set_index(["filename", "method", "repetition"])
 
-    generate_plot(args.plot, df, args.x_axis, args.y_axis, args.hue, args.log_x, args.log_y,
+    generate_plot(args.plot, df, args.x_axis, args.y_axis, args.hue, args.col, args.orient, args.style, args.size, args.log_x, args.log_y,
                    args.title, args.show_plot, args.save_plot)
 
 
