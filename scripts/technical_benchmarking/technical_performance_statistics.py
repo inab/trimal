@@ -125,16 +125,16 @@ def main():
                         action="store_true", help="Set logaritmic scale in y axis")
 
     parser.add_argument("--hue", dest="hue", required=False,
-                        type=str, choices=["method", "alignment_seqs", "alignment_cols", "user_time", "max_resident_set_size", "perc_conserved_cols"], help="Set hue variable")
+                        type=str, choices=["version", "method", "alignment_seqs", "alignment_cols", "user_time", "max_resident_set_size", "perc_conserved_cols"], help="Set hue variable")
     
     parser.add_argument("--col", dest="col", required=False,
-                        type=str, choices=["method", "alignment_size"], help="Set col variable")
+                        type=str, choices=["version", "method", "alignment_size"], help="Set col variable")
     
     parser.add_argument("--orient", dest="orient", required=False,
                         type=str, choices=["h", "v"], help="Set plot orientation")
     
     parser.add_argument("--style", dest="style", required=False,
-                        type=str, choices=["method", "alignment_seqs", "alignment_cols", "user_time"], help="Set plot style")
+                        type=str, choices=["version", "method", "alignment_seqs", "alignment_cols", "user_time"], help="Set plot style")
     
     parser.add_argument("--size", dest="size", required=False,
                         type=str, choices=["method", "alignment_seqs", "alignment_cols", "user_time", "max_resident_set_size", "perc_conserved_cols"], help="Set size parameter")
@@ -176,18 +176,45 @@ def main():
     if args.min_columns: df = df[df["alignment_cols"] >= args.min_columns]
 
     df.loc[df["remaining_alignment_cols"] > df["alignment_cols"], "remaining_alignment_cols"] = 0 # msas where all columns were removed
+    df.loc[df["remaining_alignment_cols"].isna(), "remaining_alignment_cols"] = -1 # msas where all columns were removed or there was an error
 
+    # We cannot consider these cases since we don't know if the execution ended
+    df = df.loc[df["remaining_alignment_cols"] > 0]
+
+    # clean msa's which are not the same after trimming with all versions 
+    # (for instance because version 1.4 kills the execution on unknown symbols while 2.0 just stops and returns
+    # the current trimmed msa)
+    '''
+    filenames = df["filename"].unique()
+    methods = df["method"].unique()
+    for filename in filenames:
+       for method in methods:
+          df_1 = df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "1.4")]
+          df_2 = df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "2.0")]
+          if len(df_1["remaining_alignment_cols"].values) == 0 or len(df_2["remaining_alignment_cols"].values) == 0:
+             df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "1.4")].index)
+             df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "2.0")].index)
+             continue
+          if df_1["remaining_alignment_cols"].values[0] != df_2["remaining_alignment_cols"].values[0]:
+             #print(filename + "; " + method + ": " + str(df_1["remaining_alignment_cols"].values[0]) + " vs " + str(df_2["remaining_alignment_cols"].values[0]))
+             df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "1.4")].index)
+             df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "2.0")].index)
+    '''
+    
     print(df.describe())
     print(df)
 
     df["alignment_res"] = df["alignment_seqs"] * df["alignment_cols"]
     df["perc_conserved_cols"] = df["remaining_alignment_cols"] / df["alignment_cols"]
+    df.loc[df["remaining_alignment_cols"] == -1, "perc_conserved_cols"] = 1
     df["alignment_res_millions"] = df["alignment_res"] * 10**(-6)
     df["alignment_size_mb"] = df["alignment_size"] * \
         10**(-6)  # max_resident_set_size is in bytes
     df["max_resident_set_size_gb"] = df["max_resident_set_size"] * \
         10**(-6)  # max_resident_set_size is in KB
-    df.set_index(["filename", "method", "repetition"])
+    df.set_index(["version", "filename", "method", "repetition"])
+
+    #df.to_csv(path_or_buf="trimal_tech_bench_homfam_clean.csv", index=False)
 
     generate_plot(args.plot, df, args.x_axis, args.y_axis, args.hue, args.col, args.orient, args.style, args.size, args.log_x, args.log_y,
                    args.title, args.show_plot, args.save_plot)
