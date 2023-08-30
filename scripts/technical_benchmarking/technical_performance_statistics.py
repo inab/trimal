@@ -46,7 +46,7 @@ variable_labels = {
 }
 
 
-def generate_plot(plot_type, df, x_axis, y_axis, hue, col, orient, style, size, log_x, log_y, title, show_plot, save_plot):
+def generate_plot(plot_type, df, x_axis, y_axis, hue, col, row, orient, style, size, log_x, log_y, title, show_plot, save_plot):
   if plot_type == "stripplot":
     if y_axis == "alignment_res":
       alignment_res_ordered = np.sort(df["alignment_res"].unique())[::-1]
@@ -58,13 +58,13 @@ def generate_plot(plot_type, df, x_axis, y_axis, hue, col, orient, style, size, 
       tech_plot = sns.stripplot(data=df, x=x_axis, y=y_axis,
                         hue=hue, orient="h")
   elif plot_type == "scatterplot":
-    tech_plot = sns.scatterplot(data=df, x=x_axis, y=y_axis, hue=hue, style=style, size=size, sizes=(20, 2000), palette='viridis')
+    tech_plot = sns.scatterplot(data=df, x=x_axis, y=y_axis, hue=hue, style=style, size=size, sizes=(20, 2000), palette=sns.color_palette("colorblind"))
   elif plot_type == "lineplot":
     tech_plot = sns.lineplot(data=df, x=x_axis, y=y_axis, hue=hue, size=size, style=style)
   elif plot_type == "lmplot":
     tech_plot = sns.lmplot(data=df, x=x_axis, y=y_axis, hue=hue)
   elif plot_type == "relplot":
-    tech_plot = sns.relplot(data=df, x=x_axis, y=y_axis, hue=hue, col=col, style=style, size=size, sizes=(20, 2000), palette='viridis')
+    tech_plot = sns.relplot(data=df, x=x_axis, y=y_axis, hue=hue, col=col, row=row, style=style, size=size, sizes=(20, 2000), palette="viridis")
   elif plot_type == "violinplot":
     tech_plot = sns.violinplot(data=df, x=x_axis, y=y_axis, hue=hue, orient=orient) 
   elif plot_type == "boxplot":
@@ -96,7 +96,7 @@ def main():
                         required=True, type=str, help="Input dataset")
     
     parser.add_argument("--common_stats", dest="commom_stats_file",
-                        required=True, type=str, help="Input dataset of common stats")
+                        required=False, type=str, help="Input dataset of common stats")
 
     parser.add_argument("-p", "--plot", dest="plot", required=True,
                         type=str, choices=["lineplot", "lmplot", "scatterplot", "relplot", "boxplot", "stripplot", "violinplot", "histplot"], help="Set plot type")
@@ -130,6 +130,9 @@ def main():
     parser.add_argument("--col", dest="col", required=False,
                         type=str, choices=["version", "method", "alignment_size"], help="Set col variable")
     
+    parser.add_argument("--row", dest="row", required=False,
+                        type=str, choices=["version", "method", "alignment_size"], help="Set row variable")
+    
     parser.add_argument("--orient", dest="orient", required=False,
                         type=str, choices=["h", "v"], help="Set plot orientation")
     
@@ -144,6 +147,9 @@ def main():
     
     parser.add_argument("--filter_by_method", dest="method",
                         required=False, type=str, help="Set method to filter by")
+    
+    parser.add_argument("--filter_by_version", dest="version",
+                        required=False, type=str, help="Set version to filter by")
     
     parser.add_argument("--filter_by_min_sequences", dest="min_sequences",
                         required=False, type=np.int64, help="Set minimum sequences filter")
@@ -161,17 +167,17 @@ def main():
 
     if not os.path.isfile(args.inFile):
         sys.exit(("ERROR: Check input file '%s'") % (args.inFile))
-    if not os.path.isfile(args.commom_stats_file):
-       sys.exit(("ERROR: Check common stats file '%s'") % (args.commom_stats_file))
     if not args.all_of and not args.x_axis and not args.y_axis:
         sys.exit("ERROR: all_of or axis variables should be specified")
 
     df = pd.read_csv(args.inFile)
-    common_df = pd.read_csv(args.commom_stats_file)
-    df = pd.merge(df, common_df, how="inner", on="filename")
+    if args.commom_stats_file:
+      common_df = pd.read_csv(args.commom_stats_file)
+      df = pd.merge(df, common_df, how="inner", on="filename")
     
     
     if args.method: df = df[df["method"] == args.method]
+    if args.version: df = df[df["version"] == args.version]
     if args.min_sequences: df = df[df["alignment_seqs"] >= args.min_sequences]
     if args.min_columns: df = df[df["alignment_cols"] >= args.min_columns]
 
@@ -181,9 +187,10 @@ def main():
     # We cannot consider these cases since we don't know if the execution ended
     df = df.loc[df["remaining_alignment_cols"] > 0]
 
-    # clean msa's which are not the same after trimming with all versions 
+    # clean msa's which are not the same after trimming with all versions
     # (for instance because version 1.4 kills the execution on unknown symbols while 2.0 just stops and returns
     # the current trimmed msa)
+    
     '''
     filenames = df["filename"].unique()
     methods = df["method"].unique()
@@ -191,15 +198,25 @@ def main():
        for method in methods:
           df_1 = df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "1.4")]
           df_2 = df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "2.0")]
-          if len(df_1["remaining_alignment_cols"].values) == 0 or len(df_2["remaining_alignment_cols"].values) == 0:
+          df_3 = df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "SSE2")]
+          df_4 = df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "AVX2")]
+          if len(df_1["remaining_alignment_cols"].values) == 0 or len(df_2["remaining_alignment_cols"].values) == 0 \
+            or len(df_3["remaining_alignment_cols"].values) == 0 or len(df_4["remaining_alignment_cols"].values) == 0:
              df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "1.4")].index)
              df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "2.0")].index)
+             df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "SSE2")].index)
+             df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "AVX2")].index)
              continue
-          if df_1["remaining_alignment_cols"].values[0] != df_2["remaining_alignment_cols"].values[0]:
+          if df_1["remaining_alignment_cols"].values[0] != df_2["remaining_alignment_cols"].values[0] or \
+              df_1["remaining_alignment_cols"].values[0] != df_3["remaining_alignment_cols"].values[0] or \
+                df_1["remaining_alignment_cols"].values[0] != df_4["remaining_alignment_cols"].values[0]:
              #print(filename + "; " + method + ": " + str(df_1["remaining_alignment_cols"].values[0]) + " vs " + str(df_2["remaining_alignment_cols"].values[0]))
              df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "1.4")].index)
              df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "2.0")].index)
+             df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "SSE2")].index)
+             df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "AVX2")].index)
     '''
+    
     
     print(df.describe())
     print(df)
@@ -216,7 +233,7 @@ def main():
 
     #df.to_csv(path_or_buf="trimal_tech_bench_homfam_clean.csv", index=False)
 
-    generate_plot(args.plot, df, args.x_axis, args.y_axis, args.hue, args.col, args.orient, args.style, args.size, args.log_x, args.log_y,
+    generate_plot(args.plot, df, args.x_axis, args.y_axis, args.hue, args.col, args.row, args.orient, args.style, args.size, args.log_x, args.log_y,
                    args.title, args.show_plot, args.save_plot)
 
 
