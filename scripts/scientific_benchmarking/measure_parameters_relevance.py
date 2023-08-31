@@ -42,7 +42,7 @@ from sklearn.pipeline import Pipeline
 from sklearn import svm
 from sklearn.decomposition import PCA
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.inspection import DecisionBoundaryDisplay
+from sklearn.inspection import DecisionBoundaryDisplay, permutation_importance
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV
 
@@ -92,9 +92,11 @@ def main():
     parser.add_argument("--sample", dest="sample_size", required=False,
                         type=int,  help="Sample size from the dataset")
     parser.add_argument("--shapley", dest="shapley_values", default=False,
-                        action="store_true",  help="Generate shapley values")
+                        action="store_true",  help="Compute shapley values")
     parser.add_argument("--mdi", dest="mdi", default=False,
-                        action="store_true",  help="Generate MDI values")
+                        action="store_true",  help="Compute MDI values")
+    parser.add_argument("--perm", dest="perm_imp", default=False,
+                        action="store_true",  help="Compute permutation importance values")
 
     args = parser.parse_args()
 
@@ -107,7 +109,7 @@ def main():
                      tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
     if args.svm:
         run_svm_classifier(diff=args.compare, taxon=args.taxon,
-                           tool=args.msa_tool, min_columns=args.min_columns, min_seqs=args.min_seqs, shapley_values=args.shapley_values, sample_size=args.sample_size)
+                           tool=args.msa_tool, min_columns=args.min_columns, min_seqs=args.min_seqs, perm_imp=args.perm_imp, sample_size=args.sample_size)
     if args.tree:
         run_decision_tree_classifier(args.max_depth, diff=args.compare, taxon=args.taxon,
                                      tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size)
@@ -214,9 +216,16 @@ def preprocess_data(diff, taxon, tool, min_columns, min_seqs, sample_size):
     return df_model
 
 
-def generate_shapley_values(model, X_test):
-    # use train or test values?
-    explainer = shap.Explainer(model) # KernelExplainer for svm ?
+def compute_permutation_importance(model, X_test, y_test, features):
+    perm_importance = permutation_importance(model, X_test, y_test, n_jobs=-1)
+    sorted_idx = perm_importance.importances_mean.argsort()
+    plt.barh(np.array(features)[sorted_idx], perm_importance.importances_mean[sorted_idx])
+    plt.xlabel("Permutation Importance")
+    plt.show()
+
+
+def compute_shapley_values(model, X_test):
+    explainer = shap.Explainer(model)
     shap_values = explainer.shap_values(X_test)
     shap.summary_plot(shap_values, X_test, class_names=[
                       "worse", "unchanged", "better"])
@@ -292,7 +301,7 @@ def run_random_forest_classifier(max_depth, diff, taxon, tool, criterion, min_co
     ConfusionMatrixDisplay.from_estimator(model, X_test, y_test)
     plt.show()
 
-    if shapley_values: generate_shapley_values(model, X_test)
+    if shapley_values: compute_shapley_values(model, X_test)
     if mdi:
         importances = model.feature_importances_
         std = np.std(
@@ -308,7 +317,7 @@ def run_random_forest_classifier(max_depth, diff, taxon, tool, criterion, min_co
         plt.show()
 
 
-def run_svm_classifier(diff, taxon, tool, min_columns, min_seqs, shapley_values, sample_size):
+def run_svm_classifier(diff, taxon, tool, min_columns, min_seqs, perm_imp, sample_size):
     df_model = preprocess_data(diff, taxon, tool, min_columns, min_seqs, sample_size)
     class_feature = 'RF_distance_diff' if diff else 'RF_distance'
     features = [colname for colname in df_model.columns if colname != class_feature]
@@ -332,8 +341,8 @@ def run_svm_classifier(diff, taxon, tool, min_columns, min_seqs, shapley_values,
     ConfusionMatrixDisplay.from_estimator(model, X_test, y_test)
     plt.show()
 
-    if shapley_values: generate_shapley_values(model['svm'], X_test)
-
+    if perm_imp: compute_permutation_importance(model, X_test, y_test, features)
+        
 
 def run_knn_classifier(df, max_depth, diff, ratio, residue_type, taxon, tool, criterion, min_columns, min_seqs):
     features = ['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'has_block', 'msa_columns', 'perc_main_block_size', 'avg_gaps_diff_weighted',
@@ -406,34 +415,6 @@ def run_knn_classifier(df, max_depth, diff, ratio, residue_type, taxon, tool, cr
     print(len(X_train))
     print(len(X_test))
 
-    '''
-  features = [ 'num_columns', 'percent_conserved_columns']
-  _, ax = plt.subplots()
-  cmap_light = ListedColormap(["orange", "cyan", "cornflowerblue"])
-  cmap_bold = ["darkorange", "c", "darkblue"]
-  DecisionBoundaryDisplay.from_estimator(
-        model,
-        X_train,
-        cmap=cmap_light,
-        ax=ax,
-        response_method="predict",
-        plot_method="pcolormesh",
-        xlabel="num_columns",
-        ylabel="percent_conserved_columns",
-        shading="auto",
-    )
-
-  sns.scatterplot(
-        x=X_train["num_columns"],
-        y=X_train["percent_conserved_columns"],
-        hue=y_train,
-        palette=cmap_bold,
-        alpha=1.0,
-        edgecolor="black",
-    )
-
-  plt.show()
-  '''
     
     model = Pipeline([('scale', StandardScaler()), ('knn', KNeighborsClassifier(n_neighbors=3, n_jobs=-1))])
     model.fit(X_train, y_train)
