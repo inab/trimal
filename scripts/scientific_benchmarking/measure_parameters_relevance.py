@@ -120,8 +120,8 @@ def main():
         log_regression(args.max_depth, diff=args.compare, ratio=args.ratio, taxon=args.taxon,
                        tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
     if args.knn:
-        run_knn_classifier(args.max_depth, diff=args.compare, ratio=args.ratio, taxon=args.taxon,
-                           tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
+        run_knn_classifier(diff=args.compare, taxon=args.taxon,
+                           tool=args.msa_tool, min_columns=args.min_columns, min_seqs=args.min_seqs, shapley_values=args.shapley_values, sample_size=args.sample_size)
     if args.nn:
         run_nn_classifier(args.max_depth, diff=args.compare, ratio=args.ratio, taxon=args.taxon,
                            tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
@@ -217,19 +217,24 @@ def preprocess_data(diff, taxon, tool, min_columns, min_seqs, sample_size):
 
 
 def compute_permutation_importance(model, X_test, y_test, features):
-    perm_importance = permutation_importance(model, X_test, y_test, n_jobs=-1)
+    perm_importance = permutation_importance(model, X_test, y_test, n_jobs=4)
     sorted_idx = perm_importance.importances_mean.argsort()
     plt.barh(np.array(features)[sorted_idx], perm_importance.importances_mean[sorted_idx])
     plt.xlabel("Permutation Importance")
     plt.show()
 
 
-def compute_shapley_values(model, X_test):
-    explainer = shap.Explainer(model)
+def compute_shapley_values(model,X_train, X_test, is_auto_explainer):
+    explainer = shap.Explainer(model) if is_auto_explainer else shap.KernelExplainer(model['knn'].predict_proba, shap.kmeans(X_train, 1000))
     shap_values = explainer.shap_values(X_test)
     shap.summary_plot(shap_values, X_test, class_names=[
                       "worse", "unchanged", "better"])
-    # shap.dependence_plot("num_columns", shap_values[0], X_test,interaction_index="percent_conserved_columns")
+    shap.summary_plot(shap_values[0], X_test)
+    shap.summary_plot(shap_values[1], X_test)
+    shap.summary_plot(shap_values[2], X_test)
+    shap.decision_plot(explainer.expected_value[0], shap_values[0], X_test.columns, ignore_warnings=True)
+    shap.decision_plot(explainer.expected_value[1], shap_values[1], X_test.columns, ignore_warnings=True)
+    shap.decision_plot(explainer.expected_value[2], shap_values[2], X_test.columns, ignore_warnings=True)
 
 
 def run_decision_tree_classifier(max_depth, diff, taxon, tool, criterion, min_columns, min_seqs, sample_size):
@@ -301,7 +306,7 @@ def run_random_forest_classifier(max_depth, diff, taxon, tool, criterion, min_co
     ConfusionMatrixDisplay.from_estimator(model, X_test, y_test)
     plt.show()
 
-    if shapley_values: compute_shapley_values(model, X_test)
+    if shapley_values: compute_shapley_values(model, X_train, X_test, is_auto_explainer=True)
     if mdi:
         importances = model.feature_importances_
         std = np.std(
@@ -344,67 +349,11 @@ def run_svm_classifier(diff, taxon, tool, min_columns, min_seqs, perm_imp, sampl
     if perm_imp: compute_permutation_importance(model, X_test, y_test, features)
         
 
-def run_knn_classifier(df, max_depth, diff, ratio, residue_type, taxon, tool, criterion, min_columns, min_seqs):
-    features = ['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'has_block', 'msa_columns', 'perc_main_block_size', 'avg_gaps_diff_weighted',
-                "avg_seq_identity_diff_weighted"]
+def run_knn_classifier(diff, taxon, tool, min_columns, min_seqs, shapley_values, sample_size):
+    df_model = preprocess_data(diff, taxon, tool, min_columns, min_seqs, sample_size)
     class_feature = 'RF_distance_diff' if diff else 'RF_distance'
-    if diff:
-        features += ['percent_conserved_columns']
-    if ratio:
-        features += ['columns/sequence', 'blocks/columns']
-    df_model = df.copy()
-    if taxon:
-        df_model = df_model[df_model["taxon"] == taxon]
-    if tool:
-        df_model = df_model.loc[(df_model['msa_tools'] == tool) & (
-            df_model['msa_filter_tools'] != 'None') & (df_model['RF_distance'] != -1), :]
-    else:
-        df_model = df_model.loc[(df_model['msa_tools'] != 'None') & (
-            df_model['msa_filter_tools'] != 'None') & (df_model['RF_distance'] != -1), :]
-    if min_columns:
-        df_model = df_model.loc[(df_model["msa_columns"] >= min_columns), :]
-    if min_seqs:
-        df_model = df_model.loc[(df_model["num_sequences"] >= min_seqs), :]
-    if diff:
-        df_model.loc[(df_model['RF_distance_diff'] > 0),
-                     'RF_distance_diff'] = 2
-        df_model.loc[(df_model['RF_distance_diff'] == 0),
-                     'RF_distance_diff'] = 1
-        df_model.loc[(df_model['RF_distance_diff'] < 0),
-                     'RF_distance_diff'] = 0
-        # df_model.loc[(df_model['RF_distance_diff'] == 1) & (df_model['RF_distance'] == 0), 'RF_distance_diff'] = 2
-        # df_model = df_model.drop(df_model[(df_model['RF_distance_diff'] == 1) & (df_model['RF_distance'] == 0)].index)
-    else:
-        df_model['RF_distance'] = df_model['RF_distance'] < 4
-
-    enc = OneHotEncoder()
-    enc_df = pd.DataFrame(enc.fit_transform(
-        df_model[['msa_filter_tools']]).toarray())
-    enc_df.columns = enc.get_feature_names_out()
-    df_model = df_model.reset_index(drop=True)
-    df_model = df_model.join(enc_df)
-    features += enc.get_feature_names_out().tolist()
-
-    if not tool:
-        enc = OneHotEncoder()
-        enc_df = pd.DataFrame(enc.fit_transform(
-            df_model[['msa_tools']]).toarray())
-        enc_df.columns = enc.get_feature_names_out()
-        df_model = df_model.reset_index(drop=True)
-        df_model = df_model.join(enc_df)
-        features += enc.get_feature_names_out().tolist()
-
-    print(df_model.info())
-    df_model = df_model.loc[:, (features + [class_feature])]
-    df_model = df_model.dropna()
-
-    print(df_model[features].head())
-    print(df_model[features].describe())
-    print(df_model[features].info())
-
-    print(df_model[class_feature].info())
-    # df_model = resample(df_model, n_samples=30000,
-     #                   stratify=df_model[class_feature])
+    features = [colname for colname in df_model.columns if colname != class_feature]
+    print(features)
 
     X = df_model[features]
     y = df_model[class_feature]
@@ -416,12 +365,16 @@ def run_knn_classifier(df, max_depth, diff, ratio, residue_type, taxon, tool, cr
     print(len(X_test))
 
     
-    model = Pipeline([('scale', StandardScaler()), ('knn', KNeighborsClassifier(n_neighbors=3, n_jobs=-1))])
+    model = Pipeline([('scale', StandardScaler()), ('knn', KNeighborsClassifier(n_neighbors=3, n_jobs=4))])
     model.fit(X_train, y_train)
 
     predictions = model.predict(X_test)
-
     print(classification_report(y_test, predictions))
+
+    ConfusionMatrixDisplay.from_estimator(model, X_test, y_test)
+    plt.show()
+
+    if shapley_values: compute_shapley_values(model,X_train, X_test, is_auto_explainer=False)
 
 
 def run_nn_classifier(df, max_depth, diff, ratio, residue_type, taxon, tool, criterion, min_columns, min_seqs):
@@ -511,9 +464,9 @@ def run_nn_classifier(df, max_depth, diff, ratio, residue_type, taxon, tool, cri
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
-    # model = make_pipeline(StandardScaler(), GridSearchCV(mlp, parameter_space, n_jobs=-1, cv=3, verbose=True))
+    # model = make_pipeline(StandardScaler(), GridSearchCV(mlp, parameter_space, n_jobs=4, cv=3, verbose=True))
 
-    # model = GridSearchCV(mlp, parameter_space, n_jobs=-1, cv=3, verbose=True)
+    # model = GridSearchCV(mlp, parameter_space, n_jobs=4, cv=3, verbose=True)
     model.fit(X_train_scaled, y_train)
 
     predictions = model.predict(X_test_scaled)
@@ -943,10 +896,10 @@ def explore_data(df, max_depth, diff, ratio, residue_type, taxon, tool, criterio
     print(df_model["taxon"].head())
 
 
-    #tsne = TSNE(n_components=2, random_state=42, n_jobs=-1)
+    #tsne = TSNE(n_components=2, random_state=42, n_jobs=4)
     #X_tsne = tsne.fit_transform(X)
     
-    tsne = TSNE(n_components=2, perplexity=5, n_jobs=-1, verbose=1)
+    tsne = TSNE(n_components=2, perplexity=5, n_jobs=4, verbose=1)
     X_tsne = tsne.fit_transform(X)
     print("tsne computed")
     print(tsne.kl_divergence_)
