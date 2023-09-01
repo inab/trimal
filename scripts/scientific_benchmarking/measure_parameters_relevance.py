@@ -73,14 +73,20 @@ def main():
                         action="store_true", help="Compare filtered results with original MSA")
     parser.add_argument("--recalculate", dest="recalculate",
                         default=False, action="store_true", help="Recalculate values")
+    parser.add_argument("--categorical_features", dest="categorical_features",
+                        default=False, action="store_true", help="Use categorical features")
     parser.add_argument("--max_depth", dest="max_depth",
                         default=2, type=int, help="Tree max depth")
     parser.add_argument("--ratio", dest="ratio", default=False,
                         action="store_true", help="Add ratio parameters to the model")
     parser.add_argument("--taxon", dest="taxon", required=False, type=str,
                         choices=["Bacteria", "Eukaryotes", "Fungi"], help="Taxon")
+    parser.add_argument("--blocks", dest="blocks", default=False,
+                        action="store_true", help="Has some block")
     parser.add_argument("--msa_tool", dest="msa_tool", required=False, type=str,
                         choices=["ClustalW", "ClustalW2", "Mafft", "Prank", "T-Coffee"], help="MSA tool")
+    parser.add_argument("--msa_filter_tool", dest="msa_filter_tool", required=False, type=str,
+                        choices=["trimAl"], help="MSA tool")
     parser.add_argument("-c", "--criterion", dest="criterion", required=False, default="gini",
                         type=str, choices=["gini", "entropy"], help="The function to measure the quality of a split")
     parser.add_argument("--min_columns", dest="min_columns", required=False, type=int,
@@ -100,118 +106,125 @@ def main():
 
     args = parser.parse_args()
 
-    #global df
-
-    # Repeat with four classes?
-
     if args.explore:
         explore_data(args.max_depth, diff=args.compare, ratio=args.ratio, taxon=args.taxon,
-                     tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
+                     tool=args.msa_tool, filter_tool=args.msa_filter_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
     if args.svm:
         run_svm_classifier(diff=args.compare, taxon=args.taxon,
-                           tool=args.msa_tool, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size, perm_imp=args.perm_imp)
+                           tool=args.msa_tool, filter_tool=args.msa_filter_tool, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size, perm_imp=args.perm_imp)
     if args.tree:
-        run_decision_tree_classifier(args.max_depth, diff=args.compare, taxon=args.taxon,
-                                     tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size)
+        run_decision_tree_classifier(blocks=args.blocks, use_categorical_features=args.categorical_features, max_depth=args.max_depth, diff=args.compare, taxon=args.taxon,
+                                     tool=args.msa_tool, filter_tool=args.msa_filter_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size)
     if args.forest:
         run_random_forest_classifier(args.max_depth, diff=args.compare, taxon=args.taxon,
-                                     tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size, shapley_values=args.shapley_values, mdi=args.mdi)
+                                     tool=args.msa_tool, filter_tool=args.msa_filter_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size, shapley_values=args.shapley_values, mdi=args.mdi)
     if args.regression:
-        log_regression(args.max_depth, diff=args.compare, ratio=args.ratio, taxon=args.taxon,
-                       tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
+        log_regression(diff=args.compare, taxon=args.taxon,
+                           tool=args.msa_tool, filter_tool=args.msa_filter_tool, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size)
     if args.knn:
         run_knn_classifier(diff=args.compare, taxon=args.taxon,
-                           tool=args.msa_tool, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size, shapley_values=args.shapley_values, perm_imp=args.perm_imp)
+                           tool=args.msa_tool, filter_tool=args.msa_filter_tool, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size, shapley_values=args.shapley_values, perm_imp=args.perm_imp)
     if args.nn:
         run_nn_classifier(args.max_depth, diff=args.compare, ratio=args.ratio, taxon=args.taxon,
-                           tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
+                           tool=args.msa_tool, filter_tool=args.msa_filter_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
 
 
-def preprocess_data(diff, taxon, tool, min_columns, min_seqs, sample_size):
+def preprocess_data(blocks, taxon, tool, filter_tool, min_columns, min_seqs, sample_size, use_categorical_features=False):
     
     table_filename = "AA_stats.csv"
     df = pd.read_csv(table_filename, index_col=0)
 
-    df["has_block"] = df["num_blocks"] > 0
     #df.loc[df["main_block_size"] < 0, "main_block_size"] = 0
     df["main_block_size"] = df["right_block_column"] - df["left_block_column"]
     df["perc_main_block_size"] = df["main_block_size"] / df["msa_columns"]
     df["right_block_column"] = df["right_block_column"] / df["msa_columns"]
     df.loc[df["right_block_column"] < 0, "right_block_column"] = -1
     df["left_block_column"] = df["left_block_column"] / df["msa_columns"]
-    df.loc[df["left_block_column"] < 0, "left_block_column"] = -1 # consider only msas with some block to see the influence of this variable (?)
+    df.loc[df["left_block_column"] < 0, "left_block_column"] = -1
+    df["blocks_diff_weighted"] = df["blocks_diff"] * df["percent_conserved_columns"]
 
     # clean dataset
     df = df.loc[(df['msa_tools'] != 'None') & (df['msa_filter_tools']
                                                != 'None') & ((df['RF_distance_diff'] % 2) == 0) &
                                                (df['error'] == False), :]
-    df = df.drop(["error", "min_columns", "max_columns"], axis=1)
 
-    # Keep only computed features which are relative to the msa size and remove those highly correlated
-    df = df.drop(["main_block_size", "right_block_column",
-                 "removed_columns", "gappy_columns_50"], axis=1)
-
-    # Impute some data or discard (e.g. left_block_column when it's -1)?
-
-    features = ['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'has_block', 'msa_columns', 'perc_main_block_size', 'avg_gaps_diff_weighted',
-                "avg_seq_identity_diff_weighted"]
-    class_feature = 'RF_distance_diff' if diff else 'RF_distance'
-    if diff:
-        features += ['percent_conserved_columns']
     df_model = df.copy()
     if taxon:
         df_model = df_model[df_model["taxon"] == taxon]
+        df_model = df_model.drop(["taxon"], axis=1)
     if tool:
         df_model = df_model.loc[(df_model['msa_tools'] == tool) & (
             df_model['msa_filter_tools'] != 'None') & (df_model['RF_distance'] != -1), :]
-    else:
+        df_model = df_model.drop(["msa_tools"], axis=1)
+    if filter_tool:
+        df_model = df_model.loc[(df_model['msa_tools'] != 'None') & (
+            df_model['msa_filter_tools'] == filter_tool) & (df_model['RF_distance'] != -1), :]
+        df_model = df_model.drop(["msa_filter_tools"], axis=1)
+    if tool == None and filter_tool == None:
         df_model = df_model.loc[(df_model['msa_tools'] != 'None') & (
             df_model['msa_filter_tools'] != 'None') & (df_model['RF_distance'] != -1), :]
     if min_columns:
         df_model = df_model.loc[(df_model["msa_columns"] >= min_columns), :]
     if min_seqs:
         df_model = df_model.loc[(df_model["num_sequences"] >= min_seqs), :]
-    if diff:
-        df_model.loc[(df_model['RF_distance_diff'] > 0),
-                     'RF_distance_diff'] = 2
-        df_model.loc[(df_model['RF_distance_diff'] == 0),
-                     'RF_distance_diff'] = 1
-        df_model.loc[(df_model['RF_distance_diff'] < 0),
-                     'RF_distance_diff'] = 0
-        # df_model.loc[(df_model['RF_distance_diff'] == 1) & (df_model['RF_distance'] == 0), 'RF_distance_diff'] = 2
-        # df_model = df_model.drop(df_model[(df_model['RF_distance_diff'] == 1) & (df_model['RF_distance'] == 0)].index)
+    if blocks:
+        df_model = df_model.loc[(df_model["num_blocks"] > 0), :]
+
+
+    # Keep only computed features which are relative to the msa size and remove those highly correlated
+    df_model = df_model.drop(["error", "min_columns", "max_columns", "residue_type", "RF_distance", "problem_num", "blocks_diff"], axis=1)
+    df_model = df_model.drop(["main_block_size", "right_block_column",
+                 "removed_columns", "gappy_columns_50"], axis=1)
+
+    df_model.loc[(df_model['RF_distance_diff'] > 0),
+                    'RF_distance_diff'] = 2
+    df_model.loc[(df_model['RF_distance_diff'] == 0),
+                    'RF_distance_diff'] = 1
+    df_model.loc[(df_model['RF_distance_diff'] < 0),
+                    'RF_distance_diff'] = 0
+    # df_model.loc[(df_model['RF_distance_diff'] == 1) & (df_model['RF_distance'] == 0), 'RF_distance_diff'] = 2
+    # df_model = df_model.drop(df_model[(df_model['RF_distance_diff'] == 1) & (df_model['RF_distance'] == 0)].index)
+ 
+    if use_categorical_features:
+        if taxon == None:
+            enc = OneHotEncoder()
+            enc_df = pd.DataFrame(enc.fit_transform(
+                df_model[['taxon']]).toarray())
+            enc_df.columns = enc.get_feature_names_out()
+            df_model = df_model.reset_index(drop=True)
+            df_model = df_model.join(enc_df)
+            df_model = df_model.drop(["taxon"], axis=1)
+
+        if filter_tool == None:
+            enc = OneHotEncoder()
+            enc_df = pd.DataFrame(enc.fit_transform(
+                df_model[['msa_filter_tools']]).toarray())
+            enc_df.columns = enc.get_feature_names_out()
+            df_model = df_model.reset_index(drop=True)
+            df_model = df_model.join(enc_df)
+            df_model = df_model.drop(["msa_filter_tools"], axis=1)
+
+        if tool == None:
+            enc = OneHotEncoder()
+            enc_df = pd.DataFrame(enc.fit_transform(
+                df_model[['msa_tools']]).toarray())
+            enc_df.columns = enc.get_feature_names_out()
+            df_model = df_model.reset_index(drop=True)
+            df_model = df_model.join(enc_df)
+            df_model = df_model.drop(["msa_tools"], axis=1)
+    
     else:
-        df_model['RF_distance'] = df_model['RF_distance'] < 4
+        df_model = df_model.select_dtypes(include=['number'])
 
-    # add parameter to ignore (for example for logistic regression?)
-    enc = OneHotEncoder()
-    enc_df = pd.DataFrame(enc.fit_transform(
-        df_model[['msa_filter_tools']]).toarray())
-    enc_df.columns = enc.get_feature_names_out()
-    df_model = df_model.reset_index(drop=True)
-    df_model = df_model.join(enc_df)
-    features += enc.get_feature_names_out().tolist()
-
-    # add parameter to ignore (for example for logistic regression?)
-    if not tool:
-        enc = OneHotEncoder()
-        enc_df = pd.DataFrame(enc.fit_transform(
-            df_model[['msa_tools']]).toarray())
-        enc_df.columns = enc.get_feature_names_out()
-        df_model = df_model.reset_index(drop=True)
-        df_model = df_model.join(enc_df)
-        features += enc.get_feature_names_out().tolist()
-
-    df_model = df_model.loc[:, (features + [class_feature])]
+    
+    class_feature = 'RF_distance_diff'
     df_model = df_model.dropna()
-
 
     if sample_size:
         df_model = resample(df_model, n_samples=sample_size, stratify=df_model[class_feature])
 
-    print(df_model[features].head())
-    print(df_model[features].describe())
-
+    print(df_model.head())
+    print(df_model.describe())
 
     return df_model
 
@@ -224,8 +237,9 @@ def compute_permutation_importance(model, X_test, y_test, features):
     plt.show()
 
 
-def compute_shapley_values(model,X_train, X_test, is_auto_explainer):
-    explainer = shap.Explainer(model) if is_auto_explainer else shap.KernelExplainer(model.predict_proba, shap.kmeans(X_train, 50))
+def compute_shapley_values(model, X_train, X_test, is_auto_explainer):
+    #explainer = shap.Explainer(model) if is_auto_explainer else shap.KernelExplainer(model.predict_proba, shap.kmeans(X_train, 50))
+    explainer = shap.explainers.Linear(model, X_train)
     shap_values = explainer.shap_values(X_test)
     shap.summary_plot(shap_values, X_test, class_names=[
                       "worse", "unchanged", "better"])
@@ -237,8 +251,8 @@ def compute_shapley_values(model,X_train, X_test, is_auto_explainer):
     shap.decision_plot(explainer.expected_value[2], shap_values[2], X_test.columns, ignore_warnings=True)
 
 
-def run_decision_tree_classifier(max_depth, diff, taxon, tool, criterion, min_columns, min_seqs, sample_size):
-    df_model = preprocess_data(diff, taxon, tool, min_columns, min_seqs, sample_size)
+def run_decision_tree_classifier(blocks, use_categorical_features, max_depth, diff, taxon, tool, filter_tool, criterion, min_columns, min_seqs, sample_size):
+    df_model = preprocess_data(blocks, taxon, tool, filter_tool, min_columns, min_seqs, sample_size, use_categorical_features)
     class_feature = 'RF_distance_diff' if diff else 'RF_distance'
     features = [colname for colname in df_model.columns if colname != class_feature]
     print(features)
@@ -281,8 +295,8 @@ def run_decision_tree_classifier(max_depth, diff, taxon, tool, criterion, min_co
     graph.write_png(tree_filename)
 
 
-def run_random_forest_classifier(max_depth, diff, taxon, tool, criterion, min_columns, min_seqs, sample_size, shapley_values, mdi):
-    df_model = preprocess_data(diff, taxon, tool, min_columns, min_seqs, sample_size)
+def run_random_forest_classifier(max_depth, diff, taxon, tool, filter_tool, criterion, min_columns, min_seqs, sample_size, shapley_values, mdi):
+    df_model = preprocess_data(diff, taxon, tool, filter_tool, min_columns, min_seqs, sample_size)
     class_feature = 'RF_distance_diff' if diff else 'RF_distance'
     features = [colname for colname in df_model.columns if colname != class_feature]
     print(features)
@@ -322,8 +336,8 @@ def run_random_forest_classifier(max_depth, diff, taxon, tool, criterion, min_co
         plt.show()
 
 
-def run_svm_classifier(diff, taxon, tool, min_columns, min_seqs, sample_size, perm_imp):
-    df_model = preprocess_data(diff, taxon, tool, min_columns, min_seqs, sample_size)
+def run_svm_classifier(diff, taxon, tool, filter_tool, min_columns, min_seqs, sample_size, perm_imp):
+    df_model = preprocess_data(diff, taxon, tool, filter_tool, min_columns, min_seqs, sample_size)
     class_feature = 'RF_distance_diff' if diff else 'RF_distance'
     features = [colname for colname in df_model.columns if colname != class_feature]
     print(features)
@@ -349,8 +363,8 @@ def run_svm_classifier(diff, taxon, tool, min_columns, min_seqs, sample_size, pe
     if perm_imp: compute_permutation_importance(model, X_test, y_test, features)
         
 
-def run_knn_classifier(diff, taxon, tool, min_columns, min_seqs, sample_size, shapley_values, perm_imp):
-    df_model = preprocess_data(diff, taxon, tool, min_columns, min_seqs, sample_size)
+def run_knn_classifier(diff, taxon, tool, filter_tool, min_columns, min_seqs, sample_size, shapley_values, perm_imp):
+    df_model = preprocess_data(diff, taxon, tool, filter_tool, min_columns, min_seqs, sample_size)
     class_feature = 'RF_distance_diff' if diff else 'RF_distance'
     features = [colname for colname in df_model.columns if colname != class_feature]
     print(features)
@@ -374,7 +388,7 @@ def run_knn_classifier(diff, taxon, tool, min_columns, min_seqs, sample_size, sh
     ConfusionMatrixDisplay.from_estimator(model, X_test, y_test)
     plt.show()
 
-    if shapley_values: compute_shapley_values(model['knn'], X_train, X_test, is_auto_explainer=False)
+    # if shapley_values: compute_shapley_values(model['knn'], X_train, X_test, is_auto_explainer=False)
     if perm_imp: compute_permutation_importance(model, X_test, y_test, features)
 
 
@@ -490,85 +504,32 @@ def run_nn_classifier(df, max_depth, diff, ratio, residue_type, taxon, tool, cri
     print(classification_report(y_test, predictions))
 
 
-def log_regression(df, max_depth, diff, ratio, residue_type, taxon, tool, criterion, min_columns, min_seqs):
-    features = ['num_sequences', 'msa_columns', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'perc_main_block_size', 'avg_gaps_diff_weighted',
-                "avg_seq_identity_diff_weighted"]
+def log_regression(diff, taxon, tool, filter_tool, min_columns, min_seqs, sample_size):
+    df_model = preprocess_data(diff, taxon, tool, filter_tool, min_columns, min_seqs, sample_size)
     class_feature = 'RF_distance_diff' if diff else 'RF_distance'
-    if diff:
-        features += ['percent_conserved_columns']
-    if ratio:
-        features += ['columns/sequence', 'blocks/columns']
-    df_model = df.copy()
-    if taxon:
-        df_model = df_model[df_model["taxon"] == taxon]
-    if tool:
-        df_model = df_model.loc[(df_model['msa_tools'] == tool) & (
-            df_model['msa_filter_tools'] != 'None') & (df_model['RF_distance'] != -1), :]
-    else:
-        df_model = df_model.loc[(df_model['msa_tools'] != 'None') & (
-            df_model['msa_filter_tools'] != 'None') & (df_model['RF_distance'] != -1), :]
-    if min_columns:
-        df_model = df_model.loc[(df_model["msa_columns"] >= min_columns), :]
-    if min_seqs:
-        df_model = df_model.loc[(df_model["num_sequences"] >= min_seqs), :]
-    if diff:
-        df_model.loc[(df_model['RF_distance_diff'] > 0),
-                     'RF_distance_diff'] = 2
-        df_model.loc[(df_model['RF_distance_diff'] == 0),
-                     'RF_distance_diff'] = 1
-        df_model.loc[(df_model['RF_distance_diff'] < 0),
-                     'RF_distance_diff'] = 0
-    else:
-        df_model['RF_distance'] = df_model['RF_distance'] < 4
-
-    '''
-  enc = OneHotEncoder()
-  enc_df = pd.DataFrame(enc.fit_transform(
-      df_model[['MSA_filter_tool']]).toarray())
-  enc_df.columns = enc.get_feature_names_out()
-  df_model = df_model.reset_index(drop=True)
-  df_model = df_model.join(enc_df)
-  features += enc.get_feature_names_out().tolist()
-
-  if not tool:
-    enc = OneHotEncoder()
-    enc_df = pd.DataFrame(enc.fit_transform(df_model[['MSA_tool']]).toarray())
-    enc_df.columns = enc.get_feature_names_out()
-    df_model = df_model.reset_index(drop=True)
-    df_model = df_model.join(enc_df)
-    features += enc.get_feature_names_out().tolist()
-
-  '''
-
-  # use pipeline or scale after split
-    df_model = df_model.dropna()
-    std_scaler = StandardScaler()
-    df_model = df_model.loc[:, (features + [class_feature])]
-    df_model.loc[:, features] = std_scaler.fit_transform(
-        df_model.loc[:, features])
-
-    print(df_model[features].head())
-    print(df_model[features].describe())
-    print(df_model[features].info())
-
-    print(df_model[class_feature].info())
+    features = [colname for colname in df_model.columns if colname != class_feature]
+    print(features)
 
     model = LogisticRegression(class_weight='balanced')
     X = df_model[features]
     y = df_model[class_feature]
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, shuffle=True, train_size=0.8)
-    model.fit(X_train, y_train)
-    print(len(X_train))
-    print(len(X_test))
+    
+    std_scaler = StandardScaler()
+    X_train_scaled = pd.DataFrame(std_scaler.fit_transform(X_train), columns=X_train.columns)
+    X_test_scaled = pd.DataFrame(std_scaler.transform(X_test), columns=X_test.columns)
+    
 
-    print(model.score(X_train, y_train))
+    model.fit(X_train_scaled, y_train)
+    print(len(X_train_scaled))
+    print(len(X_test_scaled))
 
     cdf = pd.concat([pd.DataFrame(X.columns), pd.DataFrame(
         np.transpose(model.coef_))], axis=1)
     print(cdf)
 
-    predictions = model.predict(X_test)
+    predictions = model.predict(X_test_scaled)
 
     mae = mean_absolute_error(y_test, predictions)
     mse = mean_squared_error(y_test, predictions)
@@ -581,6 +542,8 @@ def log_regression(df, max_depth, diff, ratio, residue_type, taxon, tool, criter
     print('MAE is {}'.format(mae))
     print('MSE is {}'.format(mse))
     print('R2 score is {}'.format(r2))
+
+    compute_shapley_values(model, X_train_scaled, X_test_scaled, is_auto_explainer=True)
 
 
 def explore_data(df, max_depth, diff, ratio, residue_type, taxon, tool, criterion, min_columns, min_seqs):
