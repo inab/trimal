@@ -106,6 +106,10 @@ def main():
 
     args = parser.parse_args()
 
+
+    correlation_matrix(blocks=args.blocks, taxon=args.taxon,
+                                     tool=args.msa_tool, filter_tool=args.msa_filter_tool, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size)
+
     if args.explore:
         explore_data(args.max_depth, diff=args.compare, ratio=args.ratio, taxon=args.taxon,
                      tool=args.msa_tool, filter_tool=args.msa_filter_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
@@ -129,7 +133,7 @@ def main():
                            tool=args.msa_tool, filter_tool=args.msa_filter_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
 
 
-def preprocess_data(blocks, taxon, tool, filter_tool, min_columns, min_seqs, sample_size, use_categorical_features=False):
+def preprocess_data(blocks, taxon, tool, filter_tool, min_columns, min_seqs, sample_size, use_categorical_features=False, explore=False):
     
     table_filename = "AA_stats.csv"
     df = pd.read_csv(table_filename, index_col=0)
@@ -171,10 +175,12 @@ def preprocess_data(blocks, taxon, tool, filter_tool, min_columns, min_seqs, sam
         df_model = df_model.loc[(df_model["num_blocks"] > 0), :]
 
 
+    df_model = df_model.drop(["error", "min_columns", "max_columns", "residue_type", "RF_distance", "problem_num"], axis=1)
+    if explore: return df_model
+
     # Keep only computed features which are relative to the msa size and remove those highly correlated
-    df_model = df_model.drop(["error", "min_columns", "max_columns", "residue_type", "RF_distance", "problem_num", "blocks_diff"], axis=1)
     df_model = df_model.drop(["main_block_size", "right_block_column",
-                 "removed_columns", "gappy_columns_50"], axis=1)
+                 "removed_columns", "gappy_columns_50", "blocks_diff"], axis=1)
 
     df_model.loc[(df_model['RF_distance_diff'] > 0),
                     'RF_distance_diff'] = 2
@@ -237,9 +243,13 @@ def compute_permutation_importance(model, X_test, y_test, features):
     plt.show()
 
 
-def compute_shapley_values(model, X_train, X_test, is_auto_explainer):
-    #explainer = shap.Explainer(model) if is_auto_explainer else shap.KernelExplainer(model.predict_proba, shap.kmeans(X_train, 50))
-    explainer = shap.explainers.Linear(model, X_train)
+def compute_shapley_values(model, model_type, X_train, X_test):
+    if model_type == "tree":
+     explainer = shap.Explainer(model)
+    elif model_type == "kernel":
+        shap.KernelExplainer(model.predict_proba, shap.kmeans(X_train, 50))
+    elif model_type == "linear":
+        explainer = shap.explainers.Linear(model, X_train)
     shap_values = explainer.shap_values(X_test)
     shap.summary_plot(shap_values, X_test, class_names=[
                       "worse", "unchanged", "better"])
@@ -320,7 +330,7 @@ def run_random_forest_classifier(max_depth, diff, taxon, tool, filter_tool, crit
     ConfusionMatrixDisplay.from_estimator(model, X_test, y_test)
     plt.show()
 
-    if shapley_values: compute_shapley_values(model, X_train, X_test, is_auto_explainer=True)
+    if shapley_values: compute_shapley_values(model, "tree", X_train, X_test)
     if mdi:
         importances = model.feature_importances_
         std = np.std(
@@ -388,7 +398,7 @@ def run_knn_classifier(diff, taxon, tool, filter_tool, min_columns, min_seqs, sa
     ConfusionMatrixDisplay.from_estimator(model, X_test, y_test)
     plt.show()
 
-    # if shapley_values: compute_shapley_values(model['knn'], X_train, X_test, is_auto_explainer=False)
+    # if shapley_values: compute_shapley_values(model['knn'], "kernel", X_train, X_test)
     if perm_imp: compute_permutation_importance(model, X_test, y_test, features)
 
 
@@ -543,17 +553,11 @@ def log_regression(diff, taxon, tool, filter_tool, min_columns, min_seqs, sample
     print('MSE is {}'.format(mse))
     print('R2 score is {}'.format(r2))
 
-    compute_shapley_values(model, X_train_scaled, X_test_scaled, is_auto_explainer=True)
+    compute_shapley_values(model, "linear", X_train_scaled, X_test_scaled)
 
 
-def explore_data(df, max_depth, diff, ratio, residue_type, taxon, tool, criterion, min_columns, min_seqs):
-
-# Correlation matrix
-    '''
-    print(df.head())
-    print(df.describe())
-    print(df.info())
-
+def correlation_matrix(blocks, taxon, tool, filter_tool, min_columns, min_seqs, sample_size):
+    df = preprocess_data(blocks, taxon, tool, filter_tool, min_columns, min_seqs, sample_size, explore=True)
     numerical_data = df.select_dtypes(include=['number'])
     print(numerical_data.info())
     corr_matrix = numerical_data.corr().round(2)
@@ -564,14 +568,14 @@ def explore_data(df, max_depth, diff, ratio, residue_type, taxon, tool, criterio
           print(
               f"Features '{numerical_data.columns[feature_a]}' and '{numerical_data.columns[feature_b]}' are highly correlated: {corr_matrix.iloc[feature_a, feature_b]}")
 
-
-
     sns.heatmap(corr_matrix, annot=True, vmax=1,
                 vmin=-1, center=0, cmap='vlag')
     plt.show()
-    '''
 
-    # RF change plots
+
+def generate_plots(df):
+    pass
+
     '''
     colors = {
         "worse": "darkred",
@@ -613,233 +617,100 @@ def explore_data(df, max_depth, diff, ratio, residue_type, taxon, tool, criterio
     plt.show()
     '''
 
+
+def generate_pca(df):
+    pass
     '''
-    balance data
-    df_int = df_model[df_model['RF_distance_diff'] == 0]
-    df_majority = df_model[df_model['RF_distance_diff'] == 1]
-    df_minority = df_model[df_model['RF_distance_diff'] == 2]
+    X = df_model[numerical_features]
+    y = df_model[class_feature]
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, shuffle = True, train_size = 0.8)
 
-    # Upsample minority class
-    df_minority_upsampled = resample(df_minority,
-                                    replace=True,     # sample with replacement
-                                    # to match majority class
-                                    n_samples=len(df_int),
-                                    random_state=1234) # reproducible results
+    sc = StandardScaler()
+    X_train = sc.fit_transform(X_train)
+    X_test = sc.transform(X_test)
 
-    # Combine majority class with upsampled minority class
-    df_upsampled = pd.concat([df_int, df_majority, df_minority_upsampled])
+    pca = PCA(n_components=4)
+    X_train = pca.fit_transform(X_train)
+    X_test = pca.transform(X_test)
 
-    # Display new class counts
-    df_upsampled.value_counts()
-    df_model = df_upsampled.copy()
+    print(pca.explained_variance_ratio_)
+    print(abs( pca.components_ ))
 
+    plt.xlim(-1,1)
+    plt.ylim(-1,1)
+    plt.xlabel("PC{}".format(1))
+    plt.ylabel("PC{}".format(2))
+    plt.grid()
+
+    score = X_train[:,0:2]
+    coeff = np.transpose(pca.components_[0:2, :])
+    labels=None
+    xs = score[:,0]
+    ys = score[:,1]
+    n = coeff.shape[0]
+    scalex = 1.0/(xs.max() - xs.min())
+    scaley = 1.0/(ys.max() - ys.min())
+    plt.scatter(xs * scalex,ys * scaley, c = y_train)
+    for i in range(n):
+        plt.arrow(0, 0, coeff[i,0], coeff[i,1],color = 'r',alpha = 0.5)
+        if labels is None:
+            plt.text(coeff[i,0]* 1.15, coeff[i,1] * 1.15, "Var"+ \
+                    str(i+1), color = 'g', ha = 'center', va = 'center')
+        else:
+            plt.text(coeff[i,0]* 1.15, coeff[i,1] * 1.15, labels[i],
+                    color = 'g', ha = 'center', va = 'center')
+
+
+    plt.show()
+
+    var = np.cumsum(np.round(pca.explained_variance_ratio_, decimals=3)*100)
+    print(var)
+    plt.ylabel('% Variance Explained')
+    plt.xlabel('# of Features')
+    plt.title('PCA Analysis')
+    plt.ylim(30,100.5)
+    plt.style.context('seaborn-whitegrid')
+    plt.plot(var)
+    plt.show()
+
+    import plotly.express as px
+
+    fig = px.scatter(x=X_train[:, 0], y=X_train[:, 1], color=y_train)
+    fig.update_layout(
+        title="PCA visualization of Custom Classification dataset",
+        xaxis_title="First Principal Component",
+        yaxis_title="Second Principal Component",
+    )
+    fig.show()
+
+    plt.figure(figsize=(16,10))
+    sns.scatterplot(
+        x=X_train[:, 0], y=X_train[:, 1],
+        hue=y_train,
+        palette=sns.color_palette("hls", 3),
+        legend="full"
+    )
+
+    plt.show()
+
+    from mpl_toolkits.mplot3d import Axes3D
+
+    fig = plt.figure(figsize=(9,9))
+    axes = Axes3D(fig)
+    axes.set_title('PCA Representation', size=14)
+    axes.set_xlabel('PC1')
+    axes.set_ylabel('PC2')
+    axes.set_zlabel('PC3')
+
+    axes.scatter(X_train[:, 0], X_train[:, 1], X_train[:, 2],
+                c=y_train, cmap = 'prism', s=10)
+    plt.show()
     '''
 
+def generate_tsne(df):
+    pass
     '''
-  features = ['num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'has_block', 'main_block_size', 'msa_columns', 'perc_main_block_size', 'avg_gaps_diff_weighted', \
-    "avg_seq_identity_diff_weighted"]
-  class_feature = 'RF_distance_diff' if diff else 'RF_distance'
-  if diff:
-    features += [ 'percent_conserved_columns']
-    # Ignore removed columns because is highly correlated with msa_columns and depends on the size of the msa
-  if ratio:
-    features += ['columns/sequence', 'blocks/columns']
-  df_model = df.copy()
-  if taxon:
-    df_model = df_model[df_model["taxon"] == taxon]
-  if tool:
-    df_model = df_model.loc[(df_model['msa_tools'] == tool) & (
-        df_model['msa_filter_tools'] != 'None') & (df_model['RF_distance'] != -1), :]
-  else:
-    df_model = df_model.loc[(df_model['msa_tools'] != 'None') & (
-        df_model['msa_filter_tools'] != 'None') & (df_model['RF_distance'] != -1), :]
-  if min_columns:
-    df_model = df_model.loc[(df_model["msa_columns"] >= min_columns), :]
-  if min_seqs:
-    df_model = df_model.loc[(df_model["num_sequences"] >= min_seqs), :]
-  if diff:
-    df_model.loc[(df_model['RF_distance_diff'] > 0), 'RF_distance_diff'] = 2
-    df_model.loc[(df_model['RF_distance_diff'] == 0), 'RF_distance_diff'] = 1
-    df_model.loc[(df_model['RF_distance_diff'] < 0), 'RF_distance_diff'] = 0
-    #df_model.loc[(df_model['RF_distance_diff'] == 1) & (df_model['RF_distance'] == 0), 'RF_distance_diff'] = 3
-  else:
-    df_model['RF_distance'] = df_model['RF_distance'] < 4
-
-  enc = OneHotEncoder()
-  enc_df = pd.DataFrame(enc.fit_transform(
-      df_model[['msa_filter_tools']]).toarray())
-  enc_df.columns = enc.get_feature_names_out()
-  df_model = df_model.reset_index(drop=True)
-  df_model = df_model.join(enc_df)
-  features += enc.get_feature_names_out().tolist()
-
-  if not tool:
-    enc = OneHotEncoder()
-    enc_df = pd.DataFrame(enc.fit_transform(df_model[['msa_tools']]).toarray())
-    enc_df.columns = enc.get_feature_names_out()
-    df_model = df_model.reset_index(drop=True)
-    df_model = df_model.join(enc_df)
-    features += enc.get_feature_names_out().tolist()
-
-  print(df_model.info())
-  df_model = df_model.loc[:, (features + [class_feature])]
-  df_model = df_model.dropna()
-
-  print(df_model[features].head())
-  print(df_model[features].describe())
-  print(df_model[features].info())
-
-  print(df_model[class_feature].info())
-  print(str(df_model))
-
-  numerical_features = ['num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'main_block_size', 'msa_columns', 'perc_main_block_size', 'avg_gaps_diff_weighted', \
-    "avg_seq_identity_diff_weighted"]
-
-  X = df_model[numerical_features]
-  y = df_model[class_feature]
-  X_train, X_test, y_train, y_test = train_test_split(
-      X, y, shuffle = True, train_size = 0.8)
-
-  sc = StandardScaler()
-  X_train = sc.fit_transform(X_train)
-  X_test = sc.transform(X_test)
-
-  pca = PCA(n_components=4)
-  X_train = pca.fit_transform(X_train)
-  X_test = pca.transform(X_test)
-
-  print(pca.explained_variance_ratio_)
-  print(abs( pca.components_ ))
-
-  plt.xlim(-1,1)
-  plt.ylim(-1,1)
-  plt.xlabel("PC{}".format(1))
-  plt.ylabel("PC{}".format(2))
-  plt.grid()
-
-  score = X_train[:,0:2]
-  coeff = np.transpose(pca.components_[0:2, :])
-  labels=None
-  xs = score[:,0]
-  ys = score[:,1]
-  n = coeff.shape[0]
-  scalex = 1.0/(xs.max() - xs.min())
-  scaley = 1.0/(ys.max() - ys.min())
-  plt.scatter(xs * scalex,ys * scaley, c = y_train)
-  for i in range(n):
-      plt.arrow(0, 0, coeff[i,0], coeff[i,1],color = 'r',alpha = 0.5)
-      if labels is None:
-          plt.text(coeff[i,0]* 1.15, coeff[i,1] * 1.15, "Var"+ \
-                   str(i+1), color = 'g', ha = 'center', va = 'center')
-      else:
-          plt.text(coeff[i,0]* 1.15, coeff[i,1] * 1.15, labels[i],
-                   color = 'g', ha = 'center', va = 'center')
-
-
-  plt.show()
-
-  var = np.cumsum(np.round(pca.explained_variance_ratio_, decimals=3)*100)
-  print(var)
-  plt.ylabel('% Variance Explained')
-  plt.xlabel('# of Features')
-  plt.title('PCA Analysis')
-  plt.ylim(30,100.5)
-  plt.style.context('seaborn-whitegrid')
-  plt.plot(var)
-  plt.show()
-
-  import plotly.express as px
-
-  fig = px.scatter(x=X_train[:, 0], y=X_train[:, 1], color=y_train)
-  fig.update_layout(
-      title="PCA visualization of Custom Classification dataset",
-      xaxis_title="First Principal Component",
-      yaxis_title="Second Principal Component",
-  )
-  fig.show()
-
-  plt.figure(figsize=(16,10))
-  sns.scatterplot(
-    x=X_train[:, 0], y=X_train[:, 1],
-    hue=y_train,
-    palette=sns.color_palette("hls", 3),
-    legend="full"
-  )
-
-  plt.show()
-
-  from mpl_toolkits.mplot3d import Axes3D
-
-  fig = plt.figure(figsize=(9,9))
-  axes = Axes3D(fig)
-  axes.set_title('PCA Representation', size=14)
-  axes.set_xlabel('PC1')
-  axes.set_ylabel('PC2')
-  axes.set_zlabel('PC3')
-
-  axes.scatter(X_train[:, 0], X_train[:, 1], X_train[:, 2],
-               c=y_train, cmap = 'prism', s=10)
-  plt.show()
-  '''
-
-    features = ['num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'has_block', 'msa_columns', 'perc_main_block_size', 'avg_gaps_diff_weighted',
-    "avg_seq_identity_diff_weighted", "RF_distance_diff"]
-    class_feature = 'RF_distance_diff' if diff else 'RF_distance'
-    class_feature = "taxon"
-    if diff:
-        features += [ 'percent_conserved_columns']
-        # Ignore removed columns because is highly correlated with msa_columns and depends on the size of the msa
-    if ratio:
-        features += ['columns/sequence', 'blocks/columns']
-    df_model = df.copy()
-    if taxon:
-        df_model = df_model[df_model["taxon"] == taxon]
-    if tool:
-        df_model = df_model.loc[(df_model['msa_tools'] == tool) & (df_model['msa_filter_tools'] != 'None') & (df_model['RF_distance'] != -1), :]
-    else:
-        df_model = df_model.loc[(df_model['msa_tools'] != 'None') & (df_model['msa_filter_tools'] != 'None') & (df_model['RF_distance'] != -1), :]
-    if min_columns:
-        df_model = df_model.loc[(df_model["msa_columns"] >= min_columns), :]
-    if min_seqs:
-        df_model = df_model.loc[(df_model["num_sequences"] >= min_seqs), :]
-    if diff:
-        df_model.loc[(df_model['RF_distance_diff'] > 0), 'RF_distance_diff'] = 2
-        df_model.loc[(df_model['RF_distance_diff'] == 0), 'RF_distance_diff'] = 1
-        df_model.loc[(df_model['RF_distance_diff'] < 0), 'RF_distance_diff'] = 0
-        #df_model.loc[(df_model['RF_distance_diff'] == 1) & (df_model['RF_distance'] == 0), 'RF_distance_diff'] = 3
-    else:
-        df_model['RF_distance'] = df_model['RF_distance'] < 4
-    
-    enc = OneHotEncoder()
-    enc_df = pd.DataFrame(enc.fit_transform(df_model[['msa_filter_tools']]).toarray())
-    enc_df.columns = enc.get_feature_names_out()
-    df_model = df_model.reset_index(drop=True)
-    df_model = df_model.join(enc_df)
-    features += enc.get_feature_names_out().tolist()
-
-    if not tool:
-        enc = OneHotEncoder()
-        enc_df = pd.DataFrame(enc.fit_transform(df_model[['msa_tools']]).toarray())
-        enc_df.columns = enc.get_feature_names_out()
-        df_model = df_model.reset_index(drop=True)
-        df_model = df_model.join(enc_df)
-        features += enc.get_feature_names_out().tolist()
-
-    print(df_model.info())
-    df_model = df_model.loc[:, (features + [class_feature])]
-    df_model = df_model.dropna()
-
-    print(df_model[features].head())
-    print(df_model[features].describe())
-    print(df_model[features].info())
-
-    print(df_model[class_feature].info())
-    print(str(df_model))
-
-    numerical_features = ['num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'msa_columns', 'perc_main_block_size', 'avg_gaps_diff_weighted', \
-        "avg_seq_identity_diff_weighted"]
-    
-
     df_model = resample(df_model, n_samples=100000,
         stratify=df_model[class_feature])
     
@@ -878,8 +749,7 @@ def explore_data(df, max_depth, diff, ratio, residue_type, taxon, tool, criterio
 
     return
 
-'''
-  perplexity = np.arange(115, 135, 5)
+    perplexity = np.arange(115, 135, 5)
   divergence = []
 
   for i in perplexity:
@@ -890,9 +760,11 @@ def explore_data(df, max_depth, diff, ratio, residue_type, taxon, tool, criterio
   fig.update_layout(xaxis_title="Perplexity Values", yaxis_title="Divergence")
   fig.update_traces(line_color="red", line_width=1)
   fig.show()
+    '''
 
-  
-
+def generate_umap(df):
+    pass
+    '''
   import umap
   
   reducer = umap.UMAP()
@@ -904,17 +776,13 @@ def explore_data(df, max_depth, diff, ratio, residue_type, taxon, tool, criterio
     c=[sns.color_palette()[x] for x in y_train])
   plt.gca().set_aspect('equal', 'datalim')
   plt.title('UMAP projection', fontsize=24)
-  plt.show()
-
-
-
-  explainer = shap.Explainer(model)
-  shap_values = explainer.shap_values(X_test)
-  shap.summary_plot(shap_values, X_test)
-  shap.dependence_plot("num_columns", shap_values[0], X_test,interaction_index="percent_conserved_columns")
-  
-    # from sklearn.manifold import TSNE
+  plt.show()  
     '''
+
+
+def explore_data(df):
+    correlation_matrix(df)
+
 
 
 if __name__ == "__main__":
