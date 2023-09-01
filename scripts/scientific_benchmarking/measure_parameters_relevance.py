@@ -109,7 +109,7 @@ def main():
                      tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
     if args.svm:
         run_svm_classifier(diff=args.compare, taxon=args.taxon,
-                           tool=args.msa_tool, min_columns=args.min_columns, min_seqs=args.min_seqs, perm_imp=args.perm_imp, sample_size=args.sample_size)
+                           tool=args.msa_tool, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size, perm_imp=args.perm_imp)
     if args.tree:
         run_decision_tree_classifier(args.max_depth, diff=args.compare, taxon=args.taxon,
                                      tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size)
@@ -121,7 +121,7 @@ def main():
                        tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
     if args.knn:
         run_knn_classifier(diff=args.compare, taxon=args.taxon,
-                           tool=args.msa_tool, min_columns=args.min_columns, min_seqs=args.min_seqs, shapley_values=args.shapley_values, sample_size=args.sample_size)
+                           tool=args.msa_tool, min_columns=args.min_columns, min_seqs=args.min_seqs, sample_size=args.sample_size, shapley_values=args.shapley_values, perm_imp=args.perm_imp)
     if args.nn:
         run_nn_classifier(args.max_depth, diff=args.compare, ratio=args.ratio, taxon=args.taxon,
                            tool=args.msa_tool, criterion=args.criterion, min_columns=args.min_columns, min_seqs=args.min_seqs)
@@ -217,7 +217,7 @@ def preprocess_data(diff, taxon, tool, min_columns, min_seqs, sample_size):
 
 
 def compute_permutation_importance(model, X_test, y_test, features):
-    perm_importance = permutation_importance(model, X_test, y_test, n_jobs=4)
+    perm_importance = permutation_importance(model, X_test, y_test, n_jobs=4, max_samples=5, n_repeats=10)
     sorted_idx = perm_importance.importances_mean.argsort()
     plt.barh(np.array(features)[sorted_idx], perm_importance.importances_mean[sorted_idx])
     plt.xlabel("Permutation Importance")
@@ -225,7 +225,7 @@ def compute_permutation_importance(model, X_test, y_test, features):
 
 
 def compute_shapley_values(model,X_train, X_test, is_auto_explainer):
-    explainer = shap.Explainer(model) if is_auto_explainer else shap.KernelExplainer(model['knn'].predict_proba, shap.kmeans(X_train, 1000))
+    explainer = shap.Explainer(model) if is_auto_explainer else shap.KernelExplainer(model.predict_proba, shap.kmeans(X_train, 50))
     shap_values = explainer.shap_values(X_test)
     shap.summary_plot(shap_values, X_test, class_names=[
                       "worse", "unchanged", "better"])
@@ -322,7 +322,7 @@ def run_random_forest_classifier(max_depth, diff, taxon, tool, criterion, min_co
         plt.show()
 
 
-def run_svm_classifier(diff, taxon, tool, min_columns, min_seqs, perm_imp, sample_size):
+def run_svm_classifier(diff, taxon, tool, min_columns, min_seqs, sample_size, perm_imp):
     df_model = preprocess_data(diff, taxon, tool, min_columns, min_seqs, sample_size)
     class_feature = 'RF_distance_diff' if diff else 'RF_distance'
     features = [colname for colname in df_model.columns if colname != class_feature]
@@ -337,7 +337,7 @@ def run_svm_classifier(diff, taxon, tool, min_columns, min_seqs, perm_imp, sampl
     print(len(X_test))
 
     model = Pipeline([('scale', StandardScaler()), ('svm', svm.SVC(
-        decision_function_shape='ovr', class_weight='balanced', cache_size=3500, verbose=True))])
+        decision_function_shape='ovr', class_weight='balanced', cache_size=3500, verbose=True, break_ties=True))])
     model.fit(X_train, y_train)
 
     predictions = model.predict(X_test)
@@ -349,7 +349,7 @@ def run_svm_classifier(diff, taxon, tool, min_columns, min_seqs, perm_imp, sampl
     if perm_imp: compute_permutation_importance(model, X_test, y_test, features)
         
 
-def run_knn_classifier(diff, taxon, tool, min_columns, min_seqs, shapley_values, sample_size):
+def run_knn_classifier(diff, taxon, tool, min_columns, min_seqs, sample_size, shapley_values, perm_imp):
     df_model = preprocess_data(diff, taxon, tool, min_columns, min_seqs, sample_size)
     class_feature = 'RF_distance_diff' if diff else 'RF_distance'
     features = [colname for colname in df_model.columns if colname != class_feature]
@@ -374,7 +374,8 @@ def run_knn_classifier(diff, taxon, tool, min_columns, min_seqs, shapley_values,
     ConfusionMatrixDisplay.from_estimator(model, X_test, y_test)
     plt.show()
 
-    if shapley_values: compute_shapley_values(model,X_train, X_test, is_auto_explainer=False)
+    if shapley_values: compute_shapley_values(model['knn'], X_train, X_test, is_auto_explainer=False)
+    if perm_imp: compute_permutation_importance(model, X_test, y_test, features)
 
 
 def run_nn_classifier(df, max_depth, diff, ratio, residue_type, taxon, tool, criterion, min_columns, min_seqs):
