@@ -129,8 +129,8 @@ def main():
         run_knn_classifier(args.blocks, args.taxon,
                            args.msa_tool, args.msa_filter_tool, args.min_columns, args.min_seqs, args.sample_size, args.shapley_values, args.perm_imp)
     if args.nn:
-        run_nn_classifier(args.max_depth, args.ratio, args.taxon,
-                          args.msa_tool, args.msa_filter_tool, args.criterion, args.min_columns, args.min_seqs)
+        run_nn_classifier(args.blocks, args.taxon,
+                           args.msa_tool, args.msa_filter_tool, args.min_columns, args.min_seqs, args.sample_size)
 
 
 def preprocess_data(blocks, taxon, tool, filter_tool, min_columns, min_seqs, sample_size, use_categorical_features=False, explore=False):
@@ -175,9 +175,6 @@ def preprocess_data(blocks, taxon, tool, filter_tool, min_columns, min_seqs, sam
     if blocks:
         df_model = df_model.loc[(df_model["num_blocks"] > 0), :]
 
-    df_model = df_model.drop(["error", "min_columns", "max_columns",
-                             "residue_type", "RF_distance", "problem_num"], axis=1)
-
     df_model.loc[(df_model['RF_distance_diff'] > 0),
                  'RF_distance_diff'] = 2
     df_model.loc[(df_model['RF_distance_diff'] == 0),
@@ -186,6 +183,9 @@ def preprocess_data(blocks, taxon, tool, filter_tool, min_columns, min_seqs, sam
                  'RF_distance_diff'] = 0
     # df_model.loc[(df_model['RF_distance_diff'] == 1) & (df_model['RF_distance'] == 0), 'RF_distance_diff'] = 2
     # df_model = df_model.drop(df_model[(df_model['RF_distance_diff'] == 1) & (df_model['RF_distance'] == 0)].index)
+
+    df_model = df_model.drop(["error", "min_columns", "max_columns",
+                             "residue_type", "RF_distance", "problem_num"], axis=1)
 
     if sample_size:
         class_feature = 'RF_distance_diff'
@@ -418,66 +418,13 @@ def run_knn_classifier(blocks, taxon, tool, filter_tool, min_columns, min_seqs, 
         compute_permutation_importance(model, X_test, y_test, features)
 
 
-def run_nn_classifier(df, max_depth, diff, ratio, residue_type, taxon, tool, criterion, min_columns, min_seqs):
-    features = ['num_sequences', 'num_blocks', 'num_columns', 'avg_gaps', 'avg_seq_identity', 'has_block', 'msa_columns', 'perc_main_block_size', 'avg_gaps_diff_weighted',
-                "avg_seq_identity_diff_weighted"]
+def run_nn_classifier(blocks, taxon, tool, filter_tool, min_columns, min_seqs, sample_size):
+    df_model = preprocess_data(
+        blocks, taxon, tool, filter_tool, min_columns, min_seqs, sample_size)
     class_feature = 'RF_distance_diff'
-    if diff:
-        features += ['percent_conserved_columns']
-    if ratio:
-        features += ['columns/sequence', 'blocks/columns']
-    df_model = df.copy()
-    if taxon:
-        df_model = df_model[df_model["taxon"] == taxon]
-    if tool:
-        df_model = df_model.loc[(df_model['msa_tools'] == tool) & (
-            df_model['msa_filter_tools'] != 'None') & (df_model['RF_distance'] != -1), :]
-    else:
-        df_model = df_model.loc[(df_model['msa_tools'] != 'None') & (
-            df_model['msa_filter_tools'] != 'None') & (df_model['RF_distance'] != -1), :]
-    if min_columns:
-        df_model = df_model.loc[(df_model["msa_columns"] >= min_columns), :]
-    if min_seqs:
-        df_model = df_model.loc[(df_model["num_sequences"] >= min_seqs), :]
-    if diff:
-        df_model.loc[(df_model['RF_distance_diff'] > 0),
-                     'RF_distance_diff'] = 2
-        df_model.loc[(df_model['RF_distance_diff'] == 0),
-                     'RF_distance_diff'] = 1
-        df_model.loc[(df_model['RF_distance_diff'] < 0),
-                     'RF_distance_diff'] = 0
-        # df_model.loc[(df_model['RF_distance_diff'] == 1) & (df_model['RF_distance'] == 0), 'RF_distance_diff'] = 2
-    else:
-        df_model['RF_distance'] = df_model['RF_distance'] < 4
-
-    enc = OneHotEncoder()
-    enc_df = pd.DataFrame(enc.fit_transform(
-        df_model[['msa_filter_tools']]).toarray())
-    enc_df.columns = enc.get_feature_names_out()
-    df_model = df_model.reset_index(drop=True)
-    df_model = df_model.join(enc_df)
-    features += enc.get_feature_names_out().tolist()
-
-    if not tool:
-        enc = OneHotEncoder()
-        enc_df = pd.DataFrame(enc.fit_transform(
-            df_model[['msa_tools']]).toarray())
-        enc_df.columns = enc.get_feature_names_out()
-        df_model = df_model.reset_index(drop=True)
-        df_model = df_model.join(enc_df)
-        features += enc.get_feature_names_out().tolist()
-
-    print(df_model.info())
-    df_model = df_model.loc[:, (features + [class_feature])]
-    df_model = df_model.dropna()
-
-    print(df_model[features].head())
-    print(df_model[features].describe())
-    print(df_model[features].info())
-
-    print(df_model[class_feature].info())
-    # df_model = resample(df_model, n_samples=30000,
-    #                   stratify=df_model[class_feature])
+    features = [
+        colname for colname in df_model.columns if colname != class_feature]
+    print(features)
 
     X = df_model[features]
     y = df_model[class_feature]
