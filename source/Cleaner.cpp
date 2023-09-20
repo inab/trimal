@@ -47,7 +47,8 @@ int Cleaner::selectMethod() {
     StartTiming("int Cleaner::selectMethod(void) ");
 
     float mx, avg, maxSeq = 0, avgSeq = 0;
-    int i, j, minIndex, maxIndex, minIndexSquare, arrayPos;
+    int i, j;
+    size_t minIndex, maxIndex, arrayPos, minIndexSquare;
 
     // Ask for the sequence identities assesment
     alig->Statistics->calculateSeqIdentity();
@@ -1063,7 +1064,8 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     // value for more than 10 consecutive point without get
     // the given cluster number means that it's impossible
     // to get this cut-off and we need to stop the search
-    int minIndex, maxIndex, minIndexSquare, arrayPos, seqLength, clusterLength;
+    int seqLength, clusterLength;
+    size_t minIndex, maxIndex, arrayPos, minIndexSquare;
     do {
         clusterNum = 1;
         // Start the search
@@ -1391,7 +1393,8 @@ int *Cleaner::calculateRepresentativeSeq(float maximumIdent) {
     cluster[0] = seqs[alig->originalNumberOfSequences - 1][1];
     clusterNum = 1;
 
-    int minIndex, maxIndex, minIndexSquare, arrayPos, seqLength, clusterLength;
+    int seqLength, clusterLength;
+    size_t minIndex, maxIndex, arrayPos, minIndexSquare;
     for (i = alig->originalNumberOfSequences - 2; i >= 0; i--) {
         if (alig->saveSequences[i] == -1) continue;
         seqLength = seqs[i][1];

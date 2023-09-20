@@ -769,8 +769,9 @@ void Alignment::printSeqIdentity() {
     //	which means the end of the current scope.
     StartTiming("void Alignment::printSeqIdentity(void) ");
 
-    int i, j, k, pos, maxLongName, minIndex, maxIndex, minIndexSquare, arrayPos;
+    int i, j, k, pos, maxLongName;
     float mx, avg, maxAvgSeq = 0, maxSeq = 0, avgSeq = 0, **maxs;
+    size_t minIndex, maxIndex, arrayPos, minIndexSquare;
 
     // Ask for the sequence identities assesment
     Statistics->calculateSeqIdentity();
