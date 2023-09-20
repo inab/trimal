@@ -94,9 +94,14 @@ namespace statistics {
                     }
                 }
 
-                // Identity score between two sequences is the ratio of identical residues
-                // by the total length (common and no-common residues) among them
-                identities[arrayIdentityPosition] = (float) hit / dst;
+                if (dst == 0) {
+                    identities[arrayIdentityPosition] = 0;
+                } else {
+                    // Identity score between two sequences is the ratio of identical residues
+                    // by the total length (common and no-common residues) among them
+                    identities[arrayIdentityPosition] = (float) hit / dst;
+                }
+
                 arrayIdentityPosition++;
             }
         }
