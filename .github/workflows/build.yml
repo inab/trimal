@@ -1,5 +1,18 @@
-on: [ push, pull_request ]
-
+on:
+  push:
+    paths:
+        - 'CMakeLists.txt'
+        - 'dataset/**'
+        - 'include/**'
+        - 'source/**'
+        - 'tests/**'
+  pull_request:
+    paths:
+      - 'CMakeLists.txt'
+      - 'dataset/**'
+      - 'include/**'
+      - 'source/**'
+      - 'tests/**'
 name: Build 
 
 jobs:
