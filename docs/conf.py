@@ -3,11 +3,9 @@
 # -- Project information
 
 project = 'trimAl'
-copyright = '2023, Nicolas'
-author = 'Nicolas'
 
-release = '0.1'
-version = '0.1.0'
+release = '2.0-rc'
+version = '2.0.0-rc'
 
 # -- General configuration
 
@@ -26,5 +24,3 @@ intersphinx_mapping = {
 intersphinx_disabled_domains = ['std']
 
 templates_path = ['_templates']
-
-html_extra_path = ['trimAl_Main_Page.html']
