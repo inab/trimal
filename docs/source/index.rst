@@ -2,7 +2,7 @@
 .. raw:: html
 
    <a href="https://github.com/inab/trimal">
-      <i class="fa fa-github"></i>
+      <i class="fa fa-github" style="text-decoration: none;"></i>
    </a>
    
    
