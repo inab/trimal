@@ -79,6 +79,32 @@ or move these files to '/usr/local/bin' or to '/usr/bin' using root privileges.
 
 
 
+Publications
+==================
+- `trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses <https://doi.org/10.1093/bioinformatics/btp348>`_
+- `trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses (pdf) <http://trimal.cgenomics.org/_media/trimal.2009.pdf>`_
+- `Supplementary material (pdf) <http://trimal.cgenomics.org/_media/supplmaterial.b.pdf>`_
+- `Other benchmarks (pdf) <http://trimal.cgenomics.org/_media/otherbenchs.b.pdf>`_
+
+
+Citing this tool
+==================
+trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses.
+    Salvador Capella-Gutierrez; Jose M. Silla-Martinez; Toni Gabaldon.
+    Bioinformatics 2009, 25:1972-1973.
+
+
+
+Contact
+==================
+If you have any doubt or problem feel free to open a `Github issue <https://github.com/inab/trimal/issues>`_ in the repository.
+
+- :email:`Nicolás Díaz Roussel <nicolas.diazroussel@bsc.es>`
+- :email:`Salvador Capella Gutierrez <salvador.capella@bsc.es>`
+
+
+
+
 
 Indices and tables
 ==================
