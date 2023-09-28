@@ -9,7 +9,8 @@
    :hidden:
    :maxdepth: 2
    
-   main
+   installation
+   usage
 
 
 Welcome to trimAl's documentation!

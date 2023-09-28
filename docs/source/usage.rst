@@ -1,60 +1,13 @@
-Installation and usage
+Usage
 ***********************
 
-Installation
-============
-
-Version 1.4
----------------------------
-The simplest way to compile this package is:
-
-  1. 'cd' to the directory containing the package's source code ('source').
-
-  2. Type 'make' to compile the package.
-
-  3. Optionally, run trimAl/readAl with the examples into the 'dataset' 
-     directory to check the correct installation.
-
-By default, 'make' compiles the source code of trimAl and readAl in the
-current directory. After that, you can either add to PATH the current
-directory or move these files to '/usr/local/bin' or to '/usr/bin' using
-root privileges.
-
-
-Version 2.0
----------------------------
-The simplest way to compile this package is:
-
-  1. 'cd' to the repository folder.
-
-  2. Type 'cmake .' to create a custom makefile. The CMake build will autodetect the best CPU features available. They can be individually disabled to build a version of the binary without SIMD (for testing)::
-
-      $ cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 -DDISABLE_NEON=1 will build without SIMD
-      $ cmake . -DDISABLE_AVX2=1 -DDISABLE_NEON=1 will build with SSE2 only
-      $ cmake . -DDISABLE_SSE2=1 -DDISABLE_NEON=1 will build with AVX2 only
-      $ cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 will build with NEON only
-      $ cmake . will build with AVX2, SSE2 and NEON (and effectively use AVX2)
-  
-  3. Type 'make' to compile.
-
-  4. Optionally, run trimAl/readAl with the examples into the 'dataset' 
-     directory to check the correct installation.
-
-By default, 'make' compiles the source code of trimAl and readAl in the
-bin directory. After that, you can either add to PATH the bin directory
-or move these files to '/usr/local/bin' or to '/usr/bin' using root privileges.
-
-Usage
-=============
 Basic usage
------------------
+=================
     $ trimal -in <inputfile> -out <outputfile> -(other options).
 
-Common options:
-For a complete list please see the User Guide or visit http://trimal.cgenomics.org
 
 Help Options
------------------
+=================
 .. option:: --help
 
     Print this information and show some examples.
@@ -70,7 +23,7 @@ Help Options
         Default value: info / 1
 
 Input-Output Options
---------------------
+====================
 .. option:: -in <inputfile>
 
         Input file in several formats.
@@ -127,7 +80,7 @@ Input-Output Options
 
 
 Report Output
---------------------
+====================
 .. option:: -htmlout <outputfile>
 
         Get a summary of trimal's work in an HTML file.
@@ -145,7 +98,7 @@ Report Output
         Get the relationship between the columns in the old and new alignment.
 
 Compare Set Options
---------------------
+====================
 .. option:: -compareset <inputfile>
 
         Input list of paths for the files containing the alignments to compare.
@@ -155,7 +108,7 @@ Compare Set Options
         Force selection of the given input file in the files comparison method.
 
 Backtranslation Options
--------------------------
+=========================
 .. option:: -backtrans <inputfile>
 
         Use a Coding Sequences file to get a backtranslation for a given AA alignment.
@@ -169,7 +122,7 @@ Backtranslation Options
         Split input coding sequences up to first stop codon appearance.
 
 Trimming Parameters
------------------------
+=======================
 .. option:: --alternative_matrix <degenerated_nt_identity>
 
         Specify the degenerated nt identity matrix as the similarity matrix to use.
@@ -211,10 +164,10 @@ Trimming Parameters
         candidates to be trimmed depending on the applied method.
 
 Trimming Methods
-------------------
+==================
 
 Manual Selection
-^^^^^^^^^^^^^^^^^^
+------------------
 
 .. option:: -selectcols { n,l,m-k }
 
@@ -227,7 +180,7 @@ Manual Selection
         Range: [0 - (Number of Sequences - 1)]. (see User Guide).
 
 Manual Trimming - Thresholds
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 .. option:: -gt -gapthreshold <n>
 
@@ -259,7 +212,7 @@ Manual Trimming - Thresholds
 
 
 Overlap Trimming
-^^^^^^^^^^^^^^^^^^
+------------------
 
     Overlap is defined as having a gap in both positions,
     an indetermination in both positions, or a residue in both positions.
@@ -270,10 +223,10 @@ Overlap Trimming
 
     Ex: Sp8 may be removed from the alignment depending on the thresholds.
 
-    Sp8    -----GLG-----------TKSD---NNNNNNNNNNNNNNNNWV-----------------
-    Sp17   --FAYTAPDLLL-IGFLLKTV-ATFG-----------------DTWFQLWQGLDLNKMPVF
-    Sp10   ------DPAVL--FVIMLGTI-TKFS-----------------SEWFFAWLGLEINMMVII
-    Sp26   AAAAAAAAALLTYLGLFLGTDYENFA-----------------AAAANAWLGLEINMMAQI
+    Sp8    =====GLG===========TKSD---NNNNNNNNNNNNNNNNWV=================
+    Sp17   --FAYTAPDLLL-IGFLLKTV-ATFG=================DTWFQLWQGLDLNKMPVF
+    Sp10   ======DPAVL--FVIMLGTI-TKFS=================SEWFFAWLGLEINMMVII
+    Sp26   AAAAAAAAALLTYLGLFLGTDYENFA=================AAAANAWLGLEINMMAQI
 
 .. option:: -resoverlap <n>
 
@@ -289,7 +242,7 @@ Overlap Trimming
 
 
 Automated
-^^^^^^^^^^^^
+------------
 
 .. option:: -nogaps
 
@@ -336,7 +289,7 @@ Automated
 
 
 Half Windows
-------------------
+==================
 
 Half window size, score of position i is the average of the window (i - n) to (i + n).
 Only compatible with manual methods.
@@ -359,7 +312,7 @@ Only compatible with manual methods.
         (half) Window size applied to Consistency.
 
 Statistics Output
-------------------
+==================
 
 Statistics to be calculated and outputted by trimAl
 
@@ -398,7 +351,7 @@ Statistics to be calculated and outputted by trimAl
         (see User Guide).
 
 NGS Support - VCF SNP MSA creator
-------------------------------------
+====================================
 Suport for VCF files. Providing a reference genome,
 and one or more VCF, multiple MSA are created.
 One MSA for each contig present on the whole VCF-dataset.
@@ -443,7 +396,7 @@ and a sequence for each donor, with their SNP applied.
 
 
 Legacy Options
----------------
+===============
 
 These options are included for back-compatibility with older versions of trimAl.
 New formats will not be added to this list of output format arguments.
@@ -503,7 +456,7 @@ The new formats argument "-formats <format1, format2, etc>" should be used inste
 
 
 Some Examples
-----------------------
+======================
 
 1. Removes all positions in the alignment with gaps in 10% or more of
    the sequences, unless this leaves less than 60% of original alignment.
