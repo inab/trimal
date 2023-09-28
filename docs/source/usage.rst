@@ -3,7 +3,9 @@ Usage
 
 Basic usage
 =================
-    $ trimal -in <inputfile> -out <outputfile> -(other options).
+    ::
+    
+    $ trimal -in <inputfile> -out <outputfile> -<trimming_method>
 
 
 Help Options
