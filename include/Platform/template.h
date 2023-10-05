@@ -461,7 +461,7 @@ inline void calculateGapVectors(statistics::Gaps &g) {
     // skip sequences not retained in alignment
     if (alig->saveSequences[j] == -1)
       continue;
-    // process the whole sequence, 16 lanes at a time
+    // process the whole sequence, LANES lanes at a time
     const uint8_t *data =
         reinterpret_cast<const uint8_t *>(alig->sequences[j].data());
     for (i = 0; ((int)(i + Vector::LANES)) < alig->originalNumberOfResidues;
