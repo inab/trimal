@@ -206,7 +206,7 @@ If the counter is bigger than 1, we are trying to use multiple automatic methods
 */
 
 /**
-\var int trimAlManager::alternative_matrix
+\var int trimAlManager::degenerated_nt_identity
 \brief Int that represents which alternative matrix to use, where '-1' means no alternative matrix, and '1' means degenerated_nt_identity
 */
 

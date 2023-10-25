@@ -125,10 +125,9 @@ Backtranslation Options
 
 Trimming Parameters
 =======================
-.. option:: --alternative_matrix <degenerated_nt_identity>
+.. option:: --degenerated_nt_identity
 
         Specify the degenerated nt identity matrix as the similarity matrix to use.
-        If a matrix is not specified, the best suited among a set will be selected.
 
 .. option:: -matrix <inputfile>
 

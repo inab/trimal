@@ -118,7 +118,7 @@ public:
         clusters                = -1
         ,
         automatedMethodCount    = -1,
-        alternative_matrix      = -1,
+        degenerated_nt_identity = -1,
         gapAbsoluteThreshold    = -1,
 
         *delColumns         = nullptr,
