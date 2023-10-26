@@ -101,14 +101,9 @@ namespace statistics {
         void defaultNTDegeneratedSimMatrix();
 
         /**
-         * \brief Method to load alternative similarity matrices also included on the suite.
-         * Currently, only one type of alternative matrix is available: \n
-         * \b matrix_code: 1 \b datatype SequenceTypes::AA
-         * \param matrix_code ID of the matrix
-         * \param datatype Numberical representation of the data type.
-         *  See #SequenceTypes
+         * \brief Method to load alternative DEG NT similarity matrix
         */
-        void alternativeSimilarityMatrices(int matrix_code, int datatype);
+        void alternativeNTDegeneratedSimMatrix();
 
         /**
          * \brief Method to get the similarity distance between two residues, A and B\n

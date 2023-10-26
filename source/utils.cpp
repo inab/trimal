@@ -549,7 +549,7 @@ namespace utils {
 
         static const auto check =
                 [](const std::string &pattern,
-                   int &counter,
+                   size_t &counter,
                    const char &character) -> void {
                     size_t pos(0);
                     while ((pos = pattern.find(character, pos)) != std::string::npos) {
@@ -568,7 +568,7 @@ namespace utils {
         static const std::string AA = "PVLIMFYWHKRQEDSTUO"; // Indetermination N not added // Removed ACG as is in common
         static const std::string DEG_AA = "BZ"; // Indetermination X not added
 
-        int rna = 0, dna = 0, deg_nn = 0, aa = 0, deg_aa = 0;
+        size_t rna = 0, dna = 0, deg_nn = 0, aa = 0, deg_aa = 0;
 
         for (int s = 0; s < seqNumber; s++) {
             for (char c : sequences[s]) {

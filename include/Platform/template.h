@@ -283,10 +283,10 @@ inline bool calculateSpuriousVector(statistics::Overlap &o, const float overlap,
         hits_u8[k] += ((nongapi && nongapj) || (datai[k] == dataj[k]));
       }
 
-      // we can process up to UCHAR_MAX sequences, otherwise hits_u8[k]
-      // may overflow, so every UCHAR_MAX iterations we transfer the
+      // we can process up to UINT8_MAX sequences, otherwise hits_u8[k]
+      // may overflow, so every UINT8_MAX iterations we transfer the
       // partial hit counts from `hits_u8` to `hits`
-      if ((processedSequences % UCHAR_MAX) == 0) {
+      if ((processedSequences % UINT8_MAX) == 0) {
         for (k = 0; k < alig->originalNumberOfResidues; k++)
           hits[k] += hits_u8[k];
         memset(hits_u8, 0, alig->originalNumberOfResidues * sizeof(uint8_t));
@@ -366,10 +366,10 @@ inline void calculateSeqIdentity(statistics::Identity &id) {
       int hit = 0;
       int dst = 0;
 
-      // run with unrolled loops of UCHAR_MAX iterations first
-      for (k = 0; ((int)(k + Vector::LANES * UCHAR_MAX)) <
+      // run with unrolled loops of UINT8_MAX iterations first
+      for (k = 0; ((int)(k + Vector::LANES * UINT8_MAX)) <
                   alig->originalNumberOfResidues;) {
-        for (l = 0; l < UCHAR_MAX; l++, k += Vector::LANES) {
+        for (l = 0; l < UINT8_MAX; l++, k += Vector::LANES) {
           // load data for the sequences
           Vector seqi = Vector::loadu(&datai[k]);
           Vector seqj = Vector::loadu(&dataj[k]);
@@ -461,7 +461,7 @@ inline void calculateGapVectors(statistics::Gaps &g) {
     // skip sequences not retained in alignment
     if (alig->saveSequences[j] == -1)
       continue;
-    // process the whole sequence, 16 lanes at a time
+    // process the whole sequence, LANES lanes at a time
     const uint8_t *data =
         reinterpret_cast<const uint8_t *>(alig->sequences[j].data());
     for (i = 0; ((int)(i + Vector::LANES)) < alig->originalNumberOfResidues;
@@ -475,10 +475,10 @@ inline void calculateGapVectors(statistics::Gaps &g) {
     for (; i < alig->originalNumberOfResidues; i++)
       if (data[i] == '-')
         gapsInColumn_u8[i]++;
-    // every UCHAR_MAX iterations the accumulator may overflow, so the
+    // every UINT8_MAX iterations the accumulator may overflow, so the
     // temporary counts are moved into the final counter array, and the
     // accumulator is reset
-    if (j % UCHAR_MAX == 0) {
+    if (j % UINT8_MAX == 0) {
       for (i = 0; i < alig->originalNumberOfResidues; i++)
         g.gapsInColumn[i] += gapsInColumn_u8[i];
       memset(gapsInColumn_u8, 0,

@@ -1,0 +1,72 @@
+
+.. raw:: html
+
+   <a href="https://github.com/inab/trimal">
+      <i class="fa fa-github" style="text-decoration: none;"></i>
+   </a>
+   
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+   
+   installation
+   usage
+
+
+Welcome to trimAl's documentation!
+
+This is currently under development. For now you can visit `old documentation <http://inab.github.io/trimal/index.html>`_ and our `Github repository <https://github.com/inab/trimal>`_.
+
+trimAl
+==================
+This is trimAl's information page. You can also find information related to readAl, a MSA format conversor.
+trimAl is a tool for the automated removal of spurious sequences or poorly aligned regions from a multiple sequence alignment.
+
+trimAl can consider several parameters, alone or in multiple combinations, in order to select the most-reliable positions in the alignment.
+These include the proportion of sequences with a gap, the level of residue similarity and, if several alignments for the same set of sequences are provided, the consistency level of columns among alignments.
+Moreover, trimAl allows to manually select a set of columns and sequences to be removed from the alignment.
+
+trimAl implements a series of automated algorithms that trim the alignment searching for optimum thresholds based on inherent characteristics of the input alignment, to be used so that the signal-to-noise ratio after alignment trimming phase is increased.
+
+Among trimAl's additional features, trimAl allows getting the complementary alignment (columns that were trimmed), to compute statistics from the alignment, to select the output file format , to get a summary of trimAl's trimming in HTML and SVG formats, and many other options. 
+
+
+
+Publications
+============
+- `trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses <https://doi.org/10.1093/bioinformatics/btp348>`_
+- `trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses (pdf) <http://trimal.cgenomics.org/_media/trimal.2009.pdf>`_
+- `Supplementary material (pdf) <http://trimal.cgenomics.org/_media/supplmaterial.b.pdf>`_
+- `Other benchmarks (pdf) <http://trimal.cgenomics.org/_media/otherbenchs.b.pdf>`_
+
+
+Citing this tool
+==================
+trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses.
+    Salvador Capella-Gutierrez; Jose M. Silla-Martinez; Toni Gabaldon.
+    Bioinformatics 2009, 25:1972-1973.
+
+
+License
+========
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, the last available version.
+
+Contact
+========
+If you have any doubt or problem feel free to open a `Github issue <https://github.com/inab/trimal/issues>`_ in the repository.
+
+- :email:`Nicolás Díaz Roussel <nicolas.diazroussel@bsc.es>`
+- :email:`Salvador Capella Gutierrez <salvador.capella@bsc.es>`
+
+
+
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

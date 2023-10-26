@@ -350,62 +350,31 @@ namespace statistics {
         }
     }
 
-    void similarityMatrix::alternativeSimilarityMatrices(int matrix_code, \
-        int datatype) {
-        int i, j, k;
+    void similarityMatrix::alternativeNTDegeneratedSimMatrix() {
         float sum;
 
-        // Allocate memory depending on the input datatype
-        switch (datatype) {
-            case SequenceTypes::AA:
-                memoryAllocation(20);
-                break;
-            case SequenceTypes::DNA:
-            case SequenceTypes::RNA:
-                memoryAllocation(5);
-                break;
-            case SequenceTypes::DNA | SequenceTypes::DEG:
-            case SequenceTypes::RNA | SequenceTypes::DEG:
-                memoryAllocation(15);
-                break;
+        memoryAllocation(15);
+        for (int i = 0; i < TAMABC; i++) {
+            vhash[i] = -1;
         }
 
-        for (i = 0; i < TAMABC; i++)
-            vhash[i] = -1;
-
         // We create the hashing vector taking into account the input datatype
-        for (i = 0; i < numPositions; i++) {
-            switch (datatype) {
-                case SequenceTypes::AA:
-                    vhash[listAASym[i] - 'A'] = i;
-                    break;
-                case SequenceTypes::DNA:
-                case SequenceTypes::RNA:
-                    vhash[listNTSym[i] - 'A'] = i;
-                    break;
-                case SequenceTypes::DNA | SequenceTypes::DEG:
-                case SequenceTypes::RNA | SequenceTypes::DEG:
-                    vhash[listNTDegenerateSym[i] - 'A'] = i;
-                    break;
-            }
+        for (int i = 0; i < numPositions; i++) {
+            vhash[listNTDegenerateSym[i] - 'A'] = i;
         }
 
         // Working similarity matrix is set depending on the pre loaded matrices
-        for (i = 0; i < numPositions; i++) {
-            for (j = 0; j < numPositions; j++) {
-                switch (matrix_code) {
-                    case 1:
-                        simMat[i][j] = alternative_1_NTDegeneratedMatrix[i][j];
-                        break;
-                }
+        for (int i = 0; i < numPositions; i++) {
+            for (int j = 0; j < numPositions; j++) {
+                simMat[i][j] = alternative_1_NTDegeneratedMatrix[i][j];
             }
         }
 
         // Calculate the distances between residues based on Euclidean distance
-        for (j = 0; j < numPositions; j++) {
-            for (i = 0; i < numPositions; i++) {
+        for (int j = 0; j < numPositions; j++) {
+            for (int i = 0; i < numPositions; i++) {
                 if ((i != j) && (distMat[i][j] == 0.0)) {
-                    for (k = 0, sum = 0; k < numPositions; k++)
+                    for (int k = 0, sum = 0; k < numPositions; k++)
                         sum += ((simMat[k][j] - simMat[k][i]) * (simMat[k][j] - simMat[k][i]));
                     sum = (float) sqrt(sum);
                     distMat[i][j] = sum;

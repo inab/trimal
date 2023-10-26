@@ -131,7 +131,7 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
 
     GIVEN("Alternative matrix argument")
     {
-        args.push_back("--alternative_matrix");
+        args.push_back("--degenerated_nt_identity");
         test_arguments(
                 args,
                 manager,
@@ -140,13 +140,6 @@ TEST_CASE("Matrix", "[manager][arguments][matrix]") {
 
         AND_GIVEN("Correct value input")
         {
-            args.push_back("degenerated_nt_identity");
-            test_arguments(
-                    args,
-                    manager,
-                    trimAlManager::argumentReport::Wrong,
-                    true);
-
             GIVEN("Input file")
             {
                 args.push_back("-in");

@@ -151,9 +151,8 @@ Common options (for a complete list please see the User Guide or visit http://tr
     -ignoreFilter            Ignore vcf-filtered variants in VCF. Only valid in combination with -vcf.
                                 Still applies min-quality and min-coverage when provided
 
-    --alternative_matrix degenerated_nt_identity
+    --degenerated_nt_identity
                              Specify the degenerated nt identity matrix as the similarity matrix to use.
-                                If a matrix is not specified, the best suited among a set will be selected.
 
 Legacy Options
     These options are included for back-compatibility with older versions of trimAl.

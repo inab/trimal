@@ -448,17 +448,9 @@ int trimAlManager::parseArguments(int argc, char **argv) {
         matrixFile = new char[argumentLength + 1];
         strcpy(matrixFile, argv[*i]);
         return Recognized;
-    } else if (!strcmp(argv[*i], "--alternative_matrix") && ((*i) + 1 != *argc) && (alternative_matrix == -1)) {
-        (*i)++;
-        if (!strcmp(argv[*i], "degenerated_nt_identity"))
-        {
-            alternative_matrix = 1;
-            return Recognized;
-        }
-        else {
-            debug.report(ErrorCode::AlternativeMatrixNotRecognized, argv[*i]);
-            appearErrors = true;
-        }
+    } else if (!strcmp(argv[*i], "--degenerated_nt_identity") && ((*i) + 1 != *argc) && (degenerated_nt_identity == -1)) {
+        degenerated_nt_identity = 1;
+        return Recognized;
     }
     return NotRecognized;
 }
@@ -1448,7 +1440,7 @@ inline bool trimAlManager::check_absolute_gap_theshold() {
 }
 
 /**inline**/ bool trimAlManager::check_similarity_matrix() {
-    if ((matrixFile != nullptr || alternative_matrix != -1) && (!appearErrors)) {
+    if ((matrixFile != nullptr || degenerated_nt_identity != -1) && (!appearErrors)) {
         if ((!strict) && (!strictplus) && (!automated1) && (!automated2)  && (!automated3) && (similarityThreshold == -1) && (!ssc) && (!sst)) {
             debug.report(ErrorCode::MatrixGivenWithNoMethodToUseIt);
             appearErrors = true;
@@ -2039,33 +2031,37 @@ int trimAlManager::perform() {
     if ((strict) || (strictplus) || (automated1) || (automated2) || (automated3) || (similarityThreshold != -1.0) || (ssc == 1) || (sst == 1)) {
         similMatrix = new statistics::similarityMatrix();
 
-    // Load Matrix
-        if (matrixFile != nullptr)
+        if (matrixFile != nullptr) {
             similMatrix->loadSimMatrix(matrixFile);
-
-    // Alternative Default Matrix
-        else if (alternative_matrix != -1) {
-            similMatrix->alternativeSimilarityMatrices(alternative_matrix, origAlig->getAlignmentType());
-        }
-
-    // Default Matrices
-        else {
+        } else if (degenerated_nt_identity != -1) {
             int alignDataType = origAlig->getAlignmentType();
-            if (alignDataType & SequenceTypes::AA)
+            if (alignDataType == (SequenceTypes::DNA | SequenceTypes::DEG) ||
+                alignDataType == (SequenceTypes::RNA | SequenceTypes::DEG)) {
+              debug.report(ErrorCode::ImpossibleToProcessMatrix);
+              return false;
+            }
+
+            similMatrix->alternativeNTDegeneratedSimMatrix();
+        } else {
+            int alignDataType = origAlig->getAlignmentType();
+            if (alignDataType == SequenceTypes::AA) {
                 similMatrix->defaultAASimMatrix();
-            else if ((alignDataType == SequenceTypes::DNA) || (alignDataType == SequenceTypes::RNA))
+            } else if (alignDataType == (SequenceTypes::AA | SequenceTypes::DEG)) {
+                similMatrix->defaultAASimMatrix();
+            } else if ((alignDataType == SequenceTypes::DNA) || (alignDataType == SequenceTypes::RNA)) {
                 similMatrix->defaultNTSimMatrix();
-            else if ((alignDataType == (SequenceTypes::DNA | SequenceTypes::DEG)) ||
-                     (alignDataType == (SequenceTypes::RNA | SequenceTypes::DEG)))
-                similMatrix->defaultNTDegeneratedSimMatrix();
+            } else if ((alignDataType == (SequenceTypes::DNA | SequenceTypes::DEG)) ||
+                     (alignDataType == (SequenceTypes::RNA | SequenceTypes::DEG))) {
+                        similMatrix->defaultNTDegeneratedSimMatrix();
+            }
         }
 
-    // Check if Matrix has been loaded
         if (!origAlig->Statistics->setSimilarityMatrix(similMatrix)) {
             debug.report(ErrorCode::ImpossibleToProcessMatrix);
             return false;
         }
     }
+
     return true;
 }
 
