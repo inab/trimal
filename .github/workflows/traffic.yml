@@ -1,6 +1,7 @@
+name: Traffic
 on:
   schedule:
-    - cron:  '37 17 1,15 * *'
+    - cron:  '47 17 1,15 * *'
 jobs:
   fetch_traffic:
     runs-on: ubuntu-latest
