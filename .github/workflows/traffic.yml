@@ -1,0 +1,13 @@
+name: Traffic
+on:
+  schedule:
+    - cron:  '57 16 1,15 * *'
+jobs:
+  fetch_traffic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch traffic data
+        run: |
+          curl --request GET \
+          --url https://api.github.com/repos/inab/trimal/traffic/views \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'
