@@ -1,7 +1,6 @@
 name: Traffic
-on:
-  schedule:
-    - cron:  '20 17 1,15 * *'
+on: workflow_dispatch
+
 jobs:
   fetch_traffic:
     runs-on: ubuntu-latest
