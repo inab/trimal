@@ -25,4 +25,4 @@ bin directory. After that, you can either add to PATH the bin directory
 or move these files to '/usr/local/bin' or to '/usr/bin' using root privileges.
 
 For more information, please, refer to the documentation:
-https://vicfero.github.io/trimal/
+https://trimal.readthedocs.io
