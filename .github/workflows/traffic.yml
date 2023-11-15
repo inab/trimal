@@ -1,7 +1,7 @@
 name: Traffic
 on:
   schedule:
-    - cron:  '59 16 1,15 * *'
+    - cron:  '20 17 1,15 * *'
 jobs:
   fetch_traffic:
     runs-on: ubuntu-latest
@@ -10,4 +10,5 @@ jobs:
         run: |
           curl --request GET \
           --url https://api.github.com/repos/inab/trimal/traffic/views \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'X-GitHub-Api-Version: 2022-11-28'
