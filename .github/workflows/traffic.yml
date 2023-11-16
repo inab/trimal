@@ -6,6 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Import GPG Key
+        run: |
+          echo "${{ secrets.USER_SIGNINGKEY }}" | gpg --batch --import
       - name: Fetch views data
         run: |
           curl --request GET \
