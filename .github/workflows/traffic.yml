@@ -5,6 +5,7 @@ jobs:
   fetch_traffic:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Fetch traffic data
         run: |
           curl --request GET \
