@@ -4,8 +4,6 @@ on: workflow_dispatch
 jobs:
   fetch_traffic:
     runs-on: ubuntu-latest
-    permissions:
-      actions: read
     steps:
       - name: Fetch traffic data
         run: |
