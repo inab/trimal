@@ -8,9 +8,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Set up GPG Key
         run: |
-          echo -e "${{ secrets.USER_SIGNINGKEY }}" > private-key.asc
+          echo -e "${{ secrets.GPG_PRIVATE_KEY }}" > private-key.asc
           gpg --batch --pinentry-mode loopback --import private-key.asc
-          gpg --list-secret-keys --keyid-format LONG
       - name: Fetch views data
         run: |
           curl --request GET \
@@ -22,7 +21,7 @@ jobs:
           git config --global user.email "nicolas.diazroussel@bsc.es"
           git config --global user.name "Nicolás Díaz Roussel"
           git config --global commit.gpgSign true
-          git config --global user.signingkey ${{ secrets.USER_SIGNINGKEY }}
+          git config --global user.signingkey ${{ secrets.GPG_PRIVATE_KEY_ID }}
           git add .
           git commit -S -m "Update traffic views data"
           git push origin trimAl
