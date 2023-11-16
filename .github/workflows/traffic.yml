@@ -15,7 +15,8 @@ jobs:
       - name: Commit and Push Changes
         run: |
           git config --global user.email "nicolas.diazroussel@bsc.es"
-          git config --global user.name "nicodr97"
+          git config --global user.name "Nicolás Díaz Roussel"
+          gig config --global user.signingkey=${{ secrets.USER_SIGNINGKEY }}
           git add .
           git commit -m "Update traffic views data"
           git push origin trimAl
