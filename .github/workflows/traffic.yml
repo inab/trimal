@@ -8,8 +8,17 @@ jobs:
       - uses: actions/checkout@v3
       - name: Fetch views data
         run: |
-          pwd &&
-          curl --request GET \
-          --url https://api.github.com/repos/${{ github.repository }}/traffic/views \
-          --header 'authorization: Bearer ${{ secrets.TRAFFIC_API }}' \
-          --header 'content-type: application/json' >> traffic/views.json && cat traffic/views.json
+          response=$(curl --write-out '%{http_code}' --request GET \
+            --url https://api.github.com/repos/${{ github.repository }}/traffic/views \
+            --header 'authorization: Bearer ${{ secrets.TRAFFIC_API }}' \
+            --header 'content-type: application/json')
+
+          if [ "$response" -eq 200 ]; then
+            curl --request GET \
+              --url https://api.github.com/repos/${{ github.repository }}/traffic/views \
+              --header 'authorization: Bearer ${{ secrets.TRAFFIC_API }}' \
+              --header 'content-type: application/json' >> $GITHUB_WORKSPACE/traffic/views.json
+          else
+            echo "Failed to fetch traffic data. HTTP status code: $response"
+            exit 1
+          fi
