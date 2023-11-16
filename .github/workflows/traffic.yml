@@ -5,9 +5,9 @@ jobs:
   fetch_traffic:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch traffic data
+      - name: Fetch views data
         run: |
           curl --request GET \
           --url https://api.github.com/repos/${{ github.repository }}/traffic/views \
           --header 'authorization: Bearer ${{ secrets.TRAFFIC_API }}' \
-          --header 'content-type: application/json' \
+          --header 'content-type: application/json' >> traffic/views.json
