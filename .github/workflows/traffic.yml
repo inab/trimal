@@ -13,7 +13,7 @@ jobs:
             --header 'authorization: Bearer ${{ secrets.TRAFFIC_API }}' \
             --header 'content-type: application/json')
 
-          if [ "$response" -eq 200 ]; then
+          if [ "$response" = "200" ]; then
             curl --request GET \
               --url https://api.github.com/repos/${{ github.repository }}/traffic/views \
               --header 'authorization: Bearer ${{ secrets.TRAFFIC_API }}' \
