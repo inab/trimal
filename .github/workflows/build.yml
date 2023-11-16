@@ -1,4 +1,14 @@
-on: [ push, pull_request ]
+on:
+  push:
+    paths:
+        - 'dataset/**'
+        - 'scripts/**'
+        - 'source/**'
+  pull_request:
+    paths:
+      - 'dataset/**'
+      - 'scripts/**'
+      - 'source/**'
 
 name: Build 
 
