@@ -6,9 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Import GPG Key
-        run: |
-          echo "${{ secrets.USER_SIGNINGKEY }}" | gpg --batch --import
       - name: Fetch views data
         run: |
           curl --request GET \
@@ -17,6 +14,7 @@ jobs:
               --header 'content-type: application/json' >> $GITHUB_WORKSPACE/traffic/views.json
       - name: Commit and Push Changes
         run: |
+          echo -n ${{ secrets.USER_SIGNINGKEY }} | gpg --import
           git config --global user.email "nicolas.diazroussel@bsc.es"
           git config --global user.name "Nicolás Díaz Roussel"
           git config --global user.signingkey ${{ secrets.USER_SIGNINGKEY }}
