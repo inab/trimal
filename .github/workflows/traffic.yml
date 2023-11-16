@@ -14,8 +14,8 @@ jobs:
               --header 'content-type: application/json' >> $GITHUB_WORKSPACE/traffic/views.json
       - name: Commit and Push Changes
         run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
+          git config --global user.email "nicolas.diazroussel@bsc.es"
+          git config --global user.name "Nicolás Díaz Roussel"
           git add .
           git commit -m "Update traffic views data"
           git push origin trimAl
