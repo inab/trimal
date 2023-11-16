@@ -6,6 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Set up GPG Key
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import
+          gpg --list-secret-keys --keyid-format LONG
       - name: Fetch views data
         run: |
           curl --request GET \
@@ -14,11 +18,10 @@ jobs:
               --header 'content-type: application/json' >> $GITHUB_WORKSPACE/traffic/views.json
       - name: Commit and Push Changes
         run: |
-          echo -n ${{ secrets.USER_SIGNINGKEY }} | gpg --import
           git config --global user.email "nicolas.diazroussel@bsc.es"
           git config --global user.name "Nicolás Díaz Roussel"
-          git config --global user.signingkey ${{ secrets.USER_SIGNINGKEY }}
           git config --global commit.gpgSign true
+          git config --global user.signingkey ${{ secrets.USER_SIGNINGKEY }}
           git add .
           git commit -S -m "Update traffic views data"
           git push origin trimAl
