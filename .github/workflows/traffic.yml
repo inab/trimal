@@ -16,7 +16,7 @@ jobs:
         run: |
           git config --global user.email "nicolas.diazroussel@bsc.es"
           git config --global user.name "Nicolás Díaz Roussel"
-          git config --global user.signingkey=${{ secrets.USER_SIGNINGKEY }}
+          git config --global user.signingkey ${{ secrets.USER_SIGNINGKEY }}
           git config --global commit.gpgSign true
           git add .
           git commit -m "Update traffic views data"
