@@ -8,7 +8,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Set up GPG Key
         run: |
-          echo "${{ secrets.USER_SIGNINGKEY }}" | gpg --import
+          echo -e "${{ secrets.USER_SIGNINGKEY }}" > private-key.asc
+          gpg --batch --pinentry-mode loopback --import private-key.asc
           gpg --list-secret-keys --keyid-format LONG
       - name: Fetch views data
         run: |
