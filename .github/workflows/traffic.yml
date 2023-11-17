@@ -6,23 +6,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up GPG Key
-        run: |
-          echo -e "${{ secrets.GPG_PRIVATE_KEY }}" > private-key.asc
-          gpg --batch --pinentry-mode loopback --import private-key.asc
       - name: Fetch views data
         run: |
           curl --request GET \
               --url https://api.github.com/repos/${{ github.repository }}/traffic/views \
               --header 'authorization: Bearer ${{ secrets.TRAFFIC_API }}' \
               --header 'content-type: application/json' >> $GITHUB_WORKSPACE/traffic/views.json
-      - name: Commit and Push Changes
-        run: |
-          git config --global user.email "nicolas.diazroussel@bsc.es"
-          git config --global user.name "Nicolás Díaz Roussel"
-          git config --global commit.gpgSign true
-          git config --global user.signingkey ${{ secrets.GPG_PRIVATE_KEY_ID }}
-          git config --global gpg.program gpg
-          git add .
-          git commit -S -m "Update traffic views data"
-          git push origin trimAl
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: Updated traffic views $(date +'%d-%m-%Y')
+          branch: create-pull-request/patch-constraints
+          delete-branch: true
+          commit-message: "Update traffic views data"
