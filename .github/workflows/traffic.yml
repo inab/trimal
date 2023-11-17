@@ -39,7 +39,7 @@ jobs:
           CURRENT_DATE: ${{ steps.set_date.outputs.date }}
         uses: peter-evans/create-pull-request@v5
         with:
-          title: Updated traffic data (${{ env.CURRENT_DATE }})
+          title: Update traffic data (${{ env.CURRENT_DATE }})
           branch: create-pull-request/patch-constraints
           delete-branch: true
           commit-message: "Update traffic data"
