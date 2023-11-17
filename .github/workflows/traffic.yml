@@ -4,8 +4,13 @@ on: workflow_dispatch
 jobs:
   fetch_traffic:
     runs-on: ubuntu-latest
+    env:
+      CURRENT_DATE: ${{ steps.set_date.outputs.date }}
     steps:
       - uses: actions/checkout@v3
+      - name: Set Date
+        id: set_date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Fetch views data
         run: |
           curl --request GET \
@@ -16,7 +21,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v5
         with:
-          title: "Updated traffic views $(date +'%d-%m-%Y')"
+          title: Updated traffic views (${{ env.CURRENT_DATE }})
           branch: create-pull-request/patch-constraints
           delete-branch: true
           commit-message: "Update traffic views data"
