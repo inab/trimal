@@ -18,7 +18,7 @@ jobs:
       - name: Create Pull Request
         id: cpr
         env:
-          CURRENT_DATE: ${{ steps.set_date.outputs.CURRENT_DATE }}
+          CURRENT_DATE: ${{ steps.set_date.outputs.date }}
         uses: peter-evans/create-pull-request@v5
         with:
           title: Updated traffic views (${{ env.CURRENT_DATE }})
