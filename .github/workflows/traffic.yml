@@ -16,7 +16,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v5
         with:
-          title: Updated traffic views $(date +'%d-%m-%Y')
+          title: "Updated traffic views $(date +'%d-%m-%Y')"
           branch: create-pull-request/patch-constraints
           delete-branch: true
           commit-message: "Update traffic views data"
