@@ -4,8 +4,6 @@ on: workflow_dispatch
 jobs:
   fetch_traffic:
     runs-on: ubuntu-latest
-    env:
-      CURRENT_DATE: ${{ steps.set_date.outputs.date }}
     steps:
       - uses: actions/checkout@v3
       - name: Set Date
