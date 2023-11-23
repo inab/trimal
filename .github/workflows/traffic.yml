@@ -47,7 +47,7 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           title: Update traffic data (${{ env.CURRENT_DATE }})
-          branch: create-pull-request/patch-constraints
+          branch: create-pull-request/patch-constraints-${{ env.CURRENT_DATE }}
           delete-branch: true
           commit-message: "Update traffic data"
           token: ${{ secrets.TRAFFIC_API }}
