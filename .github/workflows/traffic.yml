@@ -1,5 +1,8 @@
 name: Traffic
-on: workflow_dispatch
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '17 8 1/10 * *'
 
 jobs:
   fetch_traffic:
