@@ -33,6 +33,13 @@ jobs:
               --url https://api.github.com/repos/${{ github.repository }}/traffic/views \
               --header 'authorization: Bearer ${{ secrets.TRAFFIC_API }}' \
               --header 'content-type: application/json' >> $GITHUB_WORKSPACE/traffic/views.json
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
       - name: Create Pull Request
         id: cpr
         env:
@@ -43,3 +50,5 @@ jobs:
           branch: create-pull-request/patch-constraints
           delete-branch: true
           commit-message: "Update traffic data"
+          token: ${{ secrets.TRAFFIC_API }}
+          committer: GitHub Actions bot <nicolas.diazroussel@bsc.es>
