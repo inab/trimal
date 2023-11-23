@@ -1,1 +1,63 @@
 
+[
+  {
+    "path": "/inab/trimal",
+    "title": "inab/trimal: A tool for automated alignment trimming in large-scale phylogene...",
+    "count": 264,
+    "uniques": 144
+  },
+  {
+    "path": "/inab/trimal/blob/trimAl/.github/workflows/traffic.yml",
+    "title": "trimal/.github/workflows/traffic.yml at trimAl · inab/trimal",
+    "count": 158,
+    "uniques": 1
+  },
+  {
+    "path": "/inab/trimal/actions/workflows/traffic.yml",
+    "title": "Traffic · Workflow runs · inab/trimal",
+    "count": 120,
+    "uniques": 1
+  },
+  {
+    "path": "/inab/trimal/edit/trimAl/.github/workflows/traffic.yml",
+    "title": "Editing trimal/.github/workflows/traffic.yml at trimAl · inab/trimal",
+    "count": 95,
+    "uniques": 1
+  },
+  {
+    "path": "/inab/trimal/actions",
+    "title": "Workflow runs · inab/trimal",
+    "count": 78,
+    "uniques": 2
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/.github/workflows",
+    "title": "trimal/.github/workflows at trimAl · inab/trimal · GitHub",
+    "count": 68,
+    "uniques": 8
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/dataset",
+    "title": "trimal/dataset at trimAl · inab/trimal · GitHub",
+    "count": 51,
+    "uniques": 16
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/source",
+    "title": "trimal/source at trimAl · inab/trimal · GitHub",
+    "count": 50,
+    "uniques": 16
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/traffic",
+    "title": "trimal/traffic at trimAl · inab/trimal",
+    "count": 35,
+    "uniques": 2
+  },
+  {
+    "path": "/inab/trimal/blob/trimAl/.github/workflows/build.yml",
+    "title": "trimal/.github/workflows/build.yml at trimAl · inab/trimal · GitHub",
+    "count": 27,
+    "uniques": 2
+  }
+]
