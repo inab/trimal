@@ -1,2 +1,3 @@
 name: Trigger traffic workflow
+
 on: workflow_dispatch
