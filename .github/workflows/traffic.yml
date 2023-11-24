@@ -1,3 +1,10 @@
 name: Trigger traffic workflow
 
 on: workflow_dispatch
+
+jobs:
+  trigger-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log workflow triggering
+        run: echo "This workflow triggers the traffic workflow"
