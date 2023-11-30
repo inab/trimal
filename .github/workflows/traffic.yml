@@ -55,7 +55,7 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           title: Update traffic data (${{ env.CURRENT_DATE }})
-          branch: schedule-traffic-workflow
+          branch: create-pull-request/update-traffic-data
           base: trimAl
           commit-message: "Update traffic data"
           token: ${{ secrets.TRAFFIC_API }}
