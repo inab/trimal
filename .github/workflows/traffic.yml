@@ -56,6 +56,7 @@ jobs:
         with:
           title: Update traffic data (${{ env.CURRENT_DATE }})
           branch: create-pull-request/patch-constraints-${{ env.CURRENT_DATE }}
+          base: trimAl
           delete-branch: true
           commit-message: "Update traffic data"
           token: ${{ secrets.TRAFFIC_API }}
