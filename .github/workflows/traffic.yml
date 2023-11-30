@@ -57,7 +57,6 @@ jobs:
           title: Update traffic data (${{ env.CURRENT_DATE }})
           branch: schedule-traffic-workflow
           base: trimAl
-          delete-branch: true
           commit-message: "Update traffic data"
           token: ${{ secrets.TRAFFIC_API }}
           committer: GitHub Actions bot <${{ vars.CI_EMAIL }}>
