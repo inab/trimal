@@ -56,7 +56,7 @@ jobs:
         with:
           title: Update traffic data (${{ env.CURRENT_DATE }})
           branch: schedule-traffic-workflow
-          base: main
+          base: trimAl
           delete-branch: true
           commit-message: "Update traffic data"
           token: ${{ secrets.TRAFFIC_API }}
