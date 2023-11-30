@@ -49,6 +49,8 @@ jobs:
           author_email: ${{ vars.CI_EMAIL }}
           message: Update traffic data
       - name: Create Pull Request
+        env:
+            CURRENT_DATE: ${{ steps.set_date.outputs.date }}
         run: |
           curl -L \
             -X POST \
