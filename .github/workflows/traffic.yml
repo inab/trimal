@@ -1,4 +1,4 @@
-name: Trigger traffic workflow
+name: Traffic workflow
 
 on: workflow_dispatch
 
