@@ -58,5 +58,5 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.TRAFFIC_API }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/repos/${{ github.repository }}/pulls \
-            -d '{"title":"Update traffic data (${{ env.CURRENT_DATE }})","head":"schedule-traffic-workflow","base":"trimAl"}'
+            -d '{"title":"Update traffic data (${CURRENT_DATE})","head":"schedule-traffic-workflow","base":"trimAl"}'
 
