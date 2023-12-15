@@ -26,7 +26,7 @@ jobs:
           jq '.clones |= map({dailyUniques: .uniques, date: (.timestamp | split("T")[0]), count}) | del(.uniques) | .count = (.clones | map(.count) | add)' traffic_response.json > temp_traffic.json && rm traffic_response.json
           cat temp_traffic.json
           
-          jq --slurp '.[0].clones as $existing | .[1].clones as $new | .[0] | .clones = ((($existing + $new) | group_by(.timestamp) | map(.[0])) // []) | .count = (.clones | map(.count) | add)' "$clones_file" temp_traffic.json > temp_clones.json
+          jq --slurp '.[0].clones as $existing | .[1].clones as $new | .[0] | .clones = ((($existing + $new) | group_by(.date) | map(.[0])) // []) | .count = (.clones | map(.count) | add)' "$clones_file" temp_traffic.json > temp_clones.json
 
           cat temp_clones.json
           cat temp_clones.json > "$clones_file" && rm temp_clones.json temp_traffic.json
