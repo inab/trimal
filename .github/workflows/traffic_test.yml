@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with: 
-          ref: schedule-traffic-workflow
+          ref: trimAl
 
       - name: Fetch clones data
         run: |
