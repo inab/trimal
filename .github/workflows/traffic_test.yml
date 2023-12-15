@@ -27,5 +27,6 @@ jobs:
           
           jq --slurp '.[0].clones as $existing | .[1].clones as $new | .[0] | .clones = ((($existing + $new) | group_by(.timestamp) | map(.[0])) // []) | .count = (.clones | map(.count) | add)' "$clones_file" temp_traffic.json > temp_clones.json
 
+          cat temp_clones.json
           cat temp_clones.json > "$clones_file" && rm temp_clones.json temp_traffic.json
           cat "$clones_file"
