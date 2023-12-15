@@ -1,0 +1,29 @@
+name: Traffic workflow test
+
+on: workflow_dispatch
+
+jobs:
+  fetch_traffic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with: { ref: schedule-traffic-workflow }
+      - name: Fetch clones data
+        run: |
+          clones_file="$GITHUB_WORKSPACE/traffic/clones.json"
+          github_api_url="https://api.github.com/repos/${{ github.repository }}/traffic/clones"
+          github_token="${{ secrets.TRAFFIC_API }}"
+          current_date=$(date +"%Y-%m-%d")
+
+          traffic_content=$(curl --request GET \
+                             --url "$github_api_url" \
+                             --header "X-GitHub-Api-Version:2022-11-28" \
+                             --header "authorization: Bearer $github_token" \
+                             --header 'content-type: application/json')
+
+          jq --slurp '.[0].clones as $existing | .[1].clones as $new | .[0] \
+          | .clones = ((($existing + $new) | group_by(.timestamp) | map(.[0])) // []) \
+          | .count = (.clones | map(.count) | add)' "$clones_file" "$traffic_content" > temp_clones.json
+
+          cat temp_clones.json > "$clones_file" && rm temp_clones.json
+          cat $clones_file
