@@ -10,10 +10,10 @@ jobs:
         with: 
           ref: trimAl
 
-      - name: Fetch clones data
+      - name: Fetch views data
         run: |
-          clones_file="$GITHUB_WORKSPACE/traffic/clones.json"
-          github_api_url="https://api.github.com/repos/${{ github.repository }}/traffic/clones"
+          views_file="$GITHUB_WORKSPACE/traffic/views.json"
+          github_api_url="https://api.github.com/repos/${{ github.repository }}/traffic/views"
           github_token="${{ secrets.TRAFFIC_API }}"
 
           traffic_content=$(curl --request GET \
@@ -23,12 +23,7 @@ jobs:
                              --header 'content-type: application/json')
 
           echo "$traffic_content" > traffic_response.json
-          jq '.clones |= map({dailyUniques: .uniques, date: (.timestamp | split("T")[0]), count}) | del(.uniques) | .count = (.clones | map(.count) | add)' traffic_response.json > temp_traffic.json && rm traffic_response.json
+          jq '.views |= map({dailyUniques: .uniques, date: (.timestamp | split("T")[0]), count}) | del(.uniques) | .count = (.views | map(.count) | add)' traffic_response.json > temp_traffic.json && rm traffic_response.json
           cat temp_traffic.json
-          cat "$clones_file"
-          
-          jq --slurp '.[0].clones as $existing | .[1].clones as $new | .[0] | .clones = ((($existing + $new) | group_by(.date) | map(.[0])) // []) | .count = (.clones | map(.count) | add)' "$clones_file" temp_traffic.json > temp_clones.json
-
-          cat temp_clones.json
-          cat temp_clones.json > "$clones_file" && rm temp_clones.json temp_traffic.json
-          cat "$clones_file"
+          jq --slurp '.[0].views as $existing | .[1].views as $new | .[0] | .views = ((($existing + $new) | group_by(.date) | map(.[0])) // []) | .count = (.views | map(.count) | add)' "$views_file" temp_traffic.json > temp_views.json
+          cat temp_views.json > "$views_file" && rm temp_views.json temp_traffic.json
