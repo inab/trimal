@@ -15,7 +15,6 @@ jobs:
           clones_file="$GITHUB_WORKSPACE/traffic/clones.json"
           github_api_url="https://api.github.com/repos/${{ github.repository }}/traffic/clones"
           github_token="${{ secrets.TRAFFIC_API }}"
-          current_date=$(date +"%Y-%m-%d")
 
           traffic_content=$(curl --request GET \
                              --url "$github_api_url" \
@@ -24,6 +23,7 @@ jobs:
                              --header 'content-type: application/json')
 
           echo "$traffic_content" > temp_traffic.json
+          cat temp_traffic.json
           
           jq --slurp '.[0].clones as $existing | .[1].clones as $new | .[0] | .clones = ((($existing + $new) | group_by(.timestamp) | map(.[0])) // []) | .count = (.clones | map(.count) | add)' "$clones_file" temp_traffic.json > temp_clones.json
 
