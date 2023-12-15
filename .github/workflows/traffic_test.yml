@@ -21,6 +21,7 @@ jobs:
                              --header "authorization: Bearer $github_token" \
                              --header 'content-type: application/json')
 
+          sudo apt  install jq
           jq --slurp '.[0].clones as $existing | .[1].clones as $new | .[0] \
           | .clones = ((($existing + $new) | group_by(.timestamp) | map(.[0])) // []) \
           | .count = (.clones | map(.count) | add)' "$clones_file" "$traffic_content" > temp_clones.json
