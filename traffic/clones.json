@@ -1,163 +1,115 @@
-
 {
-  "count": 150,
-  "uniques": 95,
+  "count": 197,
   "clones": [
     {
-      "timestamp": "2023-11-16T00:00:00Z",
-      "count": 3,
-      "uniques": 3
+      "dailyUniques": 3,
+      "date": "2023-11-16",
+      "count": 3
     },
     {
-      "timestamp": "2023-11-17T00:00:00Z",
-      "count": 9,
-      "uniques": 5
+      "dailyUniques": 5,
+      "date": "2023-11-17",
+      "count": 9
     },
     {
-      "timestamp": "2023-11-18T00:00:00Z",
-      "count": 6,
-      "uniques": 5
+      "dailyUniques": 5,
+      "date": "2023-11-18",
+      "count": 6
     },
     {
-      "timestamp": "2023-11-19T00:00:00Z",
-      "count": 5,
-      "uniques": 3
+      "dailyUniques": 3,
+      "date": "2023-11-19",
+      "count": 5
     },
     {
-      "timestamp": "2023-11-20T00:00:00Z",
-      "count": 8,
-      "uniques": 8
+      "dailyUniques": 8,
+      "date": "2023-11-20",
+      "count": 8
     },
     {
-      "timestamp": "2023-11-21T00:00:00Z",
-      "count": 6,
-      "uniques": 6
+      "dailyUniques": 6,
+      "date": "2023-11-21",
+      "count": 6
     },
     {
-      "timestamp": "2023-11-22T00:00:00Z",
-      "count": 14,
-      "uniques": 13
+      "dailyUniques": 13,
+      "date": "2023-11-22",
+      "count": 14
     },
     {
-      "timestamp": "2023-11-23T00:00:00Z",
-      "count": 24,
-      "uniques": 16
+      "dailyUniques": 16,
+      "date": "2023-11-23",
+      "count": 24
     },
     {
-      "timestamp": "2023-11-24T00:00:00Z",
-      "count": 25,
-      "uniques": 14
+      "dailyUniques": 14,
+      "date": "2023-11-24",
+      "count": 25
     },
     {
-      "timestamp": "2023-11-25T00:00:00Z",
-      "count": 6,
-      "uniques": 6
+      "dailyUniques": 6,
+      "date": "2023-11-25",
+      "count": 6
     },
     {
-      "timestamp": "2023-11-26T00:00:00Z",
-      "count": 2,
-      "uniques": 2
+      "dailyUniques": 2,
+      "date": "2023-11-26",
+      "count": 2
     },
     {
-      "timestamp": "2023-11-27T00:00:00Z",
-      "count": 10,
-      "uniques": 9
+      "dailyUniques": 9,
+      "date": "2023-11-27",
+      "count": 10
     },
     {
-      "timestamp": "2023-11-28T00:00:00Z",
-      "count": 9,
-      "uniques": 9
+      "dailyUniques": 9,
+      "date": "2023-11-28",
+      "count": 9
     },
     {
-      "timestamp": "2023-11-29T00:00:00Z",
-      "count": 12,
-      "uniques": 8
+      "dailyUniques": 8,
+      "date": "2023-11-29",
+      "count": 12
     },
     {
-      "timestamp": "2023-11-30T00:00:00Z",
-      "count": 11,
-      "uniques": 6
-    }
-  ]
-}
-{
-  "count": 154,
-  "uniques": 93,
-  "clones": [
-    {
-      "timestamp": "2023-11-23T00:00:00Z",
-      "count": 20,
-      "uniques": 12
+      "dailyUniques": 6,
+      "date": "2023-11-30",
+      "count": 11
     },
     {
-      "timestamp": "2023-11-24T00:00:00Z",
-      "count": 25,
-      "uniques": 14
+      "dailyUniques": 8,
+      "date": "2023-12-01",
+      "count": 10
     },
     {
-      "timestamp": "2023-11-25T00:00:00Z",
-      "count": 6,
-      "uniques": 6
+      "dailyUniques": 6,
+      "date": "2023-12-02",
+      "count": 8
     },
     {
-      "timestamp": "2023-11-26T00:00:00Z",
-      "count": 2,
-      "uniques": 2
+      "dailyUniques": 3,
+      "date": "2023-12-03",
+      "count": 4
     },
     {
-      "timestamp": "2023-11-27T00:00:00Z",
-      "count": 10,
-      "uniques": 9
+      "dailyUniques": 6,
+      "date": "2023-12-04",
+      "count": 6
     },
     {
-      "timestamp": "2023-11-28T00:00:00Z",
-      "count": 9,
-      "uniques": 9
+      "dailyUniques": 8,
+      "date": "2023-12-05",
+      "count": 10
     },
     {
-      "timestamp": "2023-11-29T00:00:00Z",
-      "count": 12,
-      "uniques": 8
+      "dailyUniques": 8,
+      "date": "2023-12-06",
+      "count": 8
     },
     {
-      "timestamp": "2023-11-30T00:00:00Z",
-      "count": 23,
-      "uniques": 11
-    },
-    {
-      "timestamp": "2023-12-01T00:00:00Z",
-      "count": 10,
-      "uniques": 8
-    },
-    {
-      "timestamp": "2023-12-02T00:00:00Z",
-      "count": 8,
-      "uniques": 6
-    },
-    {
-      "timestamp": "2023-12-03T00:00:00Z",
-      "count": 4,
-      "uniques": 3
-    },
-    {
-      "timestamp": "2023-12-04T00:00:00Z",
-      "count": 6,
-      "uniques": 6
-    },
-    {
-      "timestamp": "2023-12-05T00:00:00Z",
-      "count": 10,
-      "uniques": 8
-    },
-    {
-      "timestamp": "2023-12-06T00:00:00Z",
-      "count": 8,
-      "uniques": 8
-    },
-    {
-      "timestamp": "2023-12-07T00:00:00Z",
-      "count": 1,
-      "uniques": 1
+      "dailyUniques": 1,
+      "date": "2023-12-07",
+      "count": 1
     }
   ]
 }
