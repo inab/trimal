@@ -27,3 +27,4 @@ jobs:
           cat temp_traffic.json
           jq --slurp '.[0].views as $existing | .[1].views as $new | .[0] | .views = ((($existing + $new) | group_by(.date) | map(.[0])) // []) | .count = (.views | map(.count) | add)' "$views_file" temp_traffic.json > temp_views.json
           cat temp_views.json > "$views_file" && rm temp_views.json temp_traffic.json
+          cat "$views_file"
