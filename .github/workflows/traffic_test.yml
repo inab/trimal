@@ -22,7 +22,8 @@ jobs:
                              --header "authorization: Bearer $github_token" \
                              --header 'content-type: application/json')
 
-          jq '.clones |= map({dailyUniques: .uniques, date: (.timestamp | split("T")[0]), count}) | del(.uniques) | .count = (.clones | map(.count) | add)' "$traffic_content" > temp_traffic.json
+          echo "$traffic_content" > traffic_response.json
+          jq '.clones |= map({dailyUniques: .uniques, date: (.timestamp | split("T")[0]), count}) | del(.uniques) | .count = (.clones | map(.count) | add)' traffic_response.json > temp_traffic.json && rm traffic_response.json
           cat temp_traffic.json
           
           jq --slurp '.[0].clones as $existing | .[1].clones as $new | .[0] | .clones = ((($existing + $new) | group_by(.timestamp) | map(.[0])) // []) | .count = (.clones | map(.count) | add)' "$clones_file" temp_traffic.json > temp_clones.json
