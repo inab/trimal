@@ -123,3 +123,65 @@
     "uniques": 1
   }
 ]
+[
+  {
+    "path": "/inab/trimal",
+    "title": "trimal/ at trimAl · inab/trimal",
+    "count": 345,
+    "uniques": 189
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/source",
+    "title": "trimal/source at trimAl · inab/trimal · GitHub",
+    "count": 49,
+    "uniques": 17
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/scripts",
+    "title": "trimal/scripts at trimAl · inab/trimal · GitHub",
+    "count": 40,
+    "uniques": 19
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/.github/workflows",
+    "title": "trimal/.github/workflows at trimAl · inab/trimal · GitHub",
+    "count": 35,
+    "uniques": 12
+  },
+  {
+    "path": "/inab/trimal/issues",
+    "title": "Issues · inab/trimal · GitHub",
+    "count": 32,
+    "uniques": 18
+  },
+  {
+    "path": "/inab/trimal/releases/tag/v1.4.1",
+    "title": "Release Stable release of trimAl v1.4.1 · inab/trimal · GitHub",
+    "count": 30,
+    "uniques": 24
+  },
+  {
+    "path": "/inab/trimal/blob/trimAl/README",
+    "title": "trimal/README at trimAl · inab/trimal · GitHub",
+    "count": 30,
+    "uniques": 11
+  },
+  {
+    "path": "/inab/trimal/actions/workflows/traffic_test.yml",
+    "title": "Traffic workflow test · Workflow runs · inab/trimal",
+    "count": 26,
+    "uniques": 1
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/traffic",
+    "title": "trimal/traffic at trimAl · inab/trimal · GitHub",
+    "count": 23,
+    "uniques": 5
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/dataset",
+    "title": "trimal/dataset at trimAl · inab/trimal · GitHub",
+    "count": 18,
+    "uniques": 8
+  }
+]

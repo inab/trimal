@@ -1,5 +1,5 @@
 {
-  "count": 1795,
+  "count": 2425,
   "views": [
     {
       "dailyUniques": 5,
@@ -109,6 +109,56 @@
     {
       "dailyUniques": 3,
       "date": "2023-12-07",
+      "count": 7
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2023-12-08",
+      "count": 62
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2023-12-09",
+      "count": 7
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2023-12-10",
+      "count": 137
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2023-12-11",
+      "count": 69
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2023-12-12",
+      "count": 44
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2023-12-13",
+      "count": 40
+    },
+    {
+      "dailyUniques": 25,
+      "date": "2023-12-14",
+      "count": 65
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2023-12-15",
+      "count": 182
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2023-12-16",
+      "count": 17
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2023-12-17",
       "count": 7
     }
   ]
