@@ -25,7 +25,7 @@ jobs:
           
           echo "$traffic_content" > paths_traffic_response.json
           current_date=$(date +"%Y-%m-%d")
-          jq --arg date "$current_date" '.[] |= . + {date: $date}' paths_traffic_response.json > temp_traffic.json && rm paths_traffic_response.json
+          jq --arg request_date "$current_date" '.[] |= . + {request_date: $request_date}' paths_traffic_response.json > temp_traffic.json && rm paths_traffic_response.json
           cat temp_traffic.json
           cat temp_views.json > "$paths_file" && rm temp_views.json temp_traffic.json
           cat "$paths_file"
@@ -43,7 +43,7 @@ jobs:
           
           echo "$traffic_content" > referrers_traffic_response.json
           current_date=$(date +"%Y-%m-%d")
-          jq --arg date "$current_date" '.[] |= . + {date: $date}' referrers_traffic_response.json > temp_traffic.json && rm referrers_traffic_response.json
+          jq --arg request_date "$current_date" '.[] |= . + {request_date: $request_date}' referrers_traffic_response.json > temp_traffic.json && rm referrers_traffic_response.json
           cat temp_traffic.json
           cat temp_views.json > "$referrers_file" && rm temp_views.json temp_traffic.json
           cat "$referrers_file"
