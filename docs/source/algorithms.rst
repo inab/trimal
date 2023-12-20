@@ -1,6 +1,34 @@
 Algorithms
 ***********************
 
+To implement various trimming algorithms and heuristics (covered in the next section), trimAl utilizes several scores.
+
+Gap Score
+========================
+The gap score for a column of size :math:`n` is calculated as the fraction of positions in the column without a gap. The formula is as follows:
+
+    .. math::
+
+        \text{gapScore} = \frac{\sum_{\text{i}=1}^{n} res_i \neq gap}{n}
+
+
+.. _identity_score:
+
+Identity Score
+========================
+The identity score for any pair of sequences in the MSA is the ratio of identical residues by the sequence length, skipping positions where both residues are gaps or unknown.
+
+    .. math::
+
+        \text{seqIdentity}[seq_i][seq_j] = \frac{\sum_{\text{k}=1}^{n} {res_{ik}} == {res_{jk}}}{\sum_{\text{k}=1}^{n} {res_{ik}} \neq (gap\ or\ unknown)\ OR\ res_{jk} \neq (gap\ or\ unknown)}
+
+    Here:
+
+    - :math:`seq_i` and :math:`seq_j` are the sequences to be compared.
+    - :math:`n` is the lenght of the MSA.
+    - :math:`res_{ik}` and :math:`res_{jk}` are the residues in position :math:`k` of sequences :math:`seq_i` and :math:`seq_j`.
+
+
 Residue Similarity Score
 ========================
 
@@ -19,17 +47,7 @@ The residue similarity score involves Mean Distance (MD) scores, inspired by Tho
     - :math:`res_i`, :math:`res_j`, and :math:`res_k` are residues at positions :math:`i`, :math:`j`, and :math:`k` of the alphabet (e.g., alanine, valine, and lysine).
     - :math:`n` is the number of residues of the alphabet.
 
-3. **Calculate sequence identity:** For each pair of sequences in the MSA, sequence identity is defined as the ratio of identical residues by the sequence length, skipping positions where both residues are gaps or unknown.
-
-    .. math::
-
-        \text{seqIdentity}[seq_i][seq_j] = \frac{\sum_{\text{k}=1}^{n} {res_{ik}} == {res_{jk}}}{\sum_{\text{k}=1}^{n} {res_{ik}} \neq (gap\ or\ unknown)\ OR\ res_{jk} \neq (gap\ or\ unknown)}
-
-    Here:
-
-    - :math:`seq_i` and :math:`seq_j` are the sequences to be compared.
-    - :math:`n` is the lenght of the MSA.
-    - :math:`res_{ik}` and :math:`res_{jk}` are the residues in position :math:`k` of sequences :math:`seq_i` and :math:`seq_j`.
+3. **Calculate sequence identity:** As explained in :ref:`Identity Score <identity_score>`.
 
 4. **Calculate Q value:** For each column of the MSA, :math:`Q` is defined as a weighted measure of the distances between all the residues of a column, taking into account some identity factor (:math:`1 - seqIdentity`) between the sequences of the compared residues.
 
