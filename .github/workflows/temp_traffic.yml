@@ -1,4 +1,5 @@
-name: Traffic workflow test
+# Workflow to get data of paths and referrers traffic until enough days are saved to interpolate daily traffic
+name: Temporal traffic workflow
 
 on: workflow_dispatch
 
@@ -10,10 +11,10 @@ jobs:
         with: 
           ref: trimAl
 
-      - name: Fetch views data
+      - name: Fetch paths data
         run: |
-          views_file="$GITHUB_WORKSPACE/traffic/views.json"
-          github_api_url="https://api.github.com/repos/${{ github.repository }}/traffic/views"
+          views_file="$GITHUB_WORKSPACE/traffic/paths.json"
+          github_api_url="https://api.github.com/repos/${{ github.repository }}/traffic/popular/paths"
           github_token="${{ secrets.TRAFFIC_API }}"
 
           traffic_content=$(curl --request GET \
@@ -21,10 +22,10 @@ jobs:
                              --header "X-GitHub-Api-Version:2022-11-28" \
                              --header "authorization: Bearer $github_token" \
                              --header 'content-type: application/json')
-
+          
           echo "$traffic_content" > traffic_response.json
-          jq '.views |= map({dailyUniques: .uniques, date: (.timestamp | split("T")[0]), count}) | del(.uniques) | .count = (.views | map(.count) | add)' traffic_response.json > temp_traffic.json && rm traffic_response.json
+          current_date=$(date +"%Y-%m-%d")
+          jq --arg date "$current_date" '.[] |= . + {date: $date}' traffic_response.json > temp_traffic.json && rm traffic_response.json
           cat temp_traffic.json
-          jq --slurp '.[0].views as $existing | .[1].views as $new | .[0] | .views = ((($existing + $new) | group_by(.date) | map(.[0])) // []) | .count = (.views | map(.count) | add)' "$views_file" temp_traffic.json > temp_views.json
           cat temp_views.json > "$views_file" && rm temp_views.json temp_traffic.json
           cat "$views_file"
