@@ -11,6 +11,7 @@
    
    installation
    usage
+   algorithms
 
 
 Welcome to trimAl's documentation!

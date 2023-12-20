@@ -32,4 +32,4 @@ html_title = 'trimAl'
 html_css_files = ["https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"]
 
 copybutton_prompt_text = "$ "
-html_extra_path=['googlef52b8b3434a2466e.html', 'draft.html']
+html_extra_path=['googlef52b8b3434a2466e.html']
