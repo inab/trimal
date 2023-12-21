@@ -3,7 +3,7 @@ name: Temporal traffic workflow
 
 on:
   schedule:
-    - cron:  '31 9 * * *'
+    - cron:  '58 9 * * *'
 
 jobs:
   fetch_traffic:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with: 
-          ref: trimAl
+          ref: schedule-traffic-workflow
 
       - name: Fetch paths data
         run: |
