@@ -1,8 +1,6 @@
 name: Traffic workflow
 
-on:
-  schedule:
-    - cron:  '8 8 * * *'
+on: workflow_dispatch
 
 jobs:
   fetch_traffic:
@@ -60,7 +58,8 @@ jobs:
           current_date=$(date +"%Y-%m-%d")
           jq --arg request_date "$current_date" '.[] |= . + {request_date: $request_date}' paths_traffic_response.json > temp_paths_traffic.json && rm paths_traffic_response.json
           cat temp_paths_traffic.json
-          cat temp_paths_traffic.json > "$paths_file" && rm temp_paths_traffic.json
+          cat "$paths_file" && echo ',' && cat temp_paths_traffic.json > temp_merged_paths_file.json
+          cat temp_merged_paths_file.json >> "$paths_file" && rm temp_paths_traffic.json temp_merged_paths_file.json
           cat "$paths_file"
       - name: Fetch referrers data
         run: |
@@ -78,7 +77,8 @@ jobs:
           current_date=$(date +"%Y-%m-%d")
           jq --arg request_date "$current_date" '.[] |= . + {request_date: $request_date}' referrers_traffic_response.json > temp_referrers_traffic.json && rm referrers_traffic_response.json
           cat temp_referrers_traffic.json
-          cat temp_referrers_traffic.json > "$referrers_file" && rm temp_referrers_traffic.json
+          cat "$referrers_file" && echo ',' && cat temp_referrers_traffic.json > temp_merged_referrers_file.json
+          cat temp_merged_referrers_file.json >> "$referrers_file" && rm temp_referrers_traffic.json temp_merged_referrers_file.json
           cat "$referrers_file"
       - name: Import GPG Key
         uses: crazy-max/ghaction-import-gpg@v6
