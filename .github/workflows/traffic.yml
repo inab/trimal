@@ -23,7 +23,7 @@ jobs:
           echo "$traffic_content" > clones_traffic_response.json
           jq '.clones |= map({dailyUniques: .uniques, date: (.timestamp | split("T")[0]), count}) | del(.uniques) | .count = (.clones | map(.count) | add)' clones_traffic_response.json > temp_clones_traffic.json && rm clones_traffic_response.json
           cat temp_clones_traffic.json
-          jq --slurp '.[0].clones as $existing | .[1].clones as $new | .[0] | .clones = ((($existing + $new) | group_by(.date) | map(if length > 1 then .[-1] else .[0] end)) // []) | .count = (.clones | map(.count) | add)' "$clones_file" temp_clones_traffic.json > temp_clones.json
+          jq --slurp '.[0].clones as $existing | .[1].clones as $new | .[0] | .clones = ((($existing + $new) | group_by(.date) | map(if length > 1 then if .[0].count < .[1].count then .[1] else .[0] end else .[0] end)) // []) | .count = (.clones | map(.count) | add)' "$clones_file" temp_clones_traffic.json > temp_clones.json
           cat temp_clones.json > "$clones_file" && rm temp_clones.json temp_clones_traffic.json
       - name: Fetch views data
         run: |
@@ -40,7 +40,7 @@ jobs:
           echo "$traffic_content" > views_traffic_response.json
           jq '.views |= map({dailyUniques: .uniques, date: (.timestamp | split("T")[0]), count}) | del(.uniques) | .count = (.views | map(.count) | add)' views_traffic_response.json > temp_views_traffic.json && rm views_traffic_response.json
           cat temp_views_traffic.json
-          jq --slurp '.[0].views as $existing | .[1].views as $new | .[0] | .views = ((($existing + $new) | group_by(.date) | map(if length > 1 then .[-1] else .[0] end)) // []) | .count = (.views | map(.count) | add)' "$views_file" temp_views_traffic.json > temp_views.json
+          jq --slurp '.[0].views as $existing | .[1].views as $new | .[0] | .views = ((($existing + $new) | group_by(.date) | map(if length > 1 then if .[0].count < .[1].count then .[1] else .[0] end else .[0] end)) // []) | .count = (.views | map(.count) | add)' "$views_file" temp_views_traffic.json > temp_views.json
           cat temp_views.json > "$views_file" && rm temp_views.json temp_views_traffic.json
       - name: Fetch paths data
         run: |
