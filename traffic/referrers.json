@@ -1,62 +1,62 @@
 [
   {
     "referrer": "trimal.cgenomics.org",
-    "count": 235,
-    "uniques": 71,
-    "request_date": "2023-12-21"
+    "count": 222,
+    "uniques": 66,
+    "request_date": "2023-12-22"
   },
   {
     "referrer": "Google",
-    "count": 116,
-    "uniques": 37,
-    "request_date": "2023-12-21"
+    "count": 114,
+    "uniques": 35,
+    "request_date": "2023-12-22"
   },
   {
     "referrer": "cn.bing.com",
-    "count": 31,
-    "uniques": 16,
-    "request_date": "2023-12-21"
+    "count": 27,
+    "uniques": 17,
+    "request_date": "2023-12-22"
   },
   {
     "referrer": "Bing",
-    "count": 22,
+    "count": 19,
     "uniques": 10,
-    "request_date": "2023-12-21"
+    "request_date": "2023-12-22"
   },
   {
     "referrer": "vicfero.github.io",
-    "count": 18,
-    "uniques": 6,
-    "request_date": "2023-12-21"
+    "count": 17,
+    "uniques": 5,
+    "request_date": "2023-12-22"
   },
   {
     "referrer": "github.com",
-    "count": 14,
-    "uniques": 9,
-    "request_date": "2023-12-21"
+    "count": 12,
+    "uniques": 7,
+    "request_date": "2023-12-22"
+  },
+  {
+    "referrer": "hatenablog-parts.com",
+    "count": 5,
+    "uniques": 3,
+    "request_date": "2023-12-22"
   },
   {
     "referrer": "jianshu.com",
     "count": 3,
     "uniques": 1,
-    "request_date": "2023-12-21"
+    "request_date": "2023-12-22"
   },
   {
     "referrer": "illumination-k.dev",
     "count": 2,
     "uniques": 2,
-    "request_date": "2023-12-21"
-  },
-  {
-    "referrer": "hatenablog-parts.com",
-    "count": 2,
-    "uniques": 1,
-    "request_date": "2023-12-21"
+    "request_date": "2023-12-22"
   },
   {
     "referrer": "merenlab.org",
-    "count": 1,
+    "count": 2,
     "uniques": 1,
-    "request_date": "2023-12-21"
+    "request_date": "2023-12-22"
   }
 ]
