@@ -184,3 +184,65 @@
     "request_date": "2023-12-23"
   }
 ]
+[
+  {
+    "referrer": "trimal.cgenomics.org",
+    "count": 164,
+    "uniques": 59,
+    "request_date": "2023-12-24"
+  },
+  {
+    "referrer": "Google",
+    "count": 86,
+    "uniques": 34,
+    "request_date": "2023-12-24"
+  },
+  {
+    "referrer": "cn.bing.com",
+    "count": 33,
+    "uniques": 20,
+    "request_date": "2023-12-24"
+  },
+  {
+    "referrer": "Bing",
+    "count": 14,
+    "uniques": 10,
+    "request_date": "2023-12-24"
+  },
+  {
+    "referrer": "merenlab.org",
+    "count": 14,
+    "uniques": 2,
+    "request_date": "2023-12-24"
+  },
+  {
+    "referrer": "github.com",
+    "count": 13,
+    "uniques": 8,
+    "request_date": "2023-12-24"
+  },
+  {
+    "referrer": "vicfero.github.io",
+    "count": 12,
+    "uniques": 5,
+    "request_date": "2023-12-24"
+  },
+  {
+    "referrer": "hatenablog-parts.com",
+    "count": 5,
+    "uniques": 3,
+    "request_date": "2023-12-24"
+  },
+  {
+    "referrer": "jianshu.com",
+    "count": 3,
+    "uniques": 1,
+    "request_date": "2023-12-24"
+  },
+  {
+    "referrer": "illumination-k.dev",
+    "count": 2,
+    "uniques": 2,
+    "request_date": "2023-12-24"
+  }
+]
