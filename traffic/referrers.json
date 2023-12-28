@@ -432,3 +432,65 @@
     "request_date": "2023-12-27"
   }
 ]
+[
+  {
+    "referrer": "trimal.cgenomics.org",
+    "count": 127,
+    "uniques": 41,
+    "request_date": "2023-12-28"
+  },
+  {
+    "referrer": "Google",
+    "count": 82,
+    "uniques": 33,
+    "request_date": "2023-12-28"
+  },
+  {
+    "referrer": "Bing",
+    "count": 33,
+    "uniques": 13,
+    "request_date": "2023-12-28"
+  },
+  {
+    "referrer": "cn.bing.com",
+    "count": 24,
+    "uniques": 16,
+    "request_date": "2023-12-28"
+  },
+  {
+    "referrer": "merenlab.org",
+    "count": 14,
+    "uniques": 2,
+    "request_date": "2023-12-28"
+  },
+  {
+    "referrer": "github.com",
+    "count": 9,
+    "uniques": 5,
+    "request_date": "2023-12-28"
+  },
+  {
+    "referrer": "hatenablog-parts.com",
+    "count": 7,
+    "uniques": 4,
+    "request_date": "2023-12-28"
+  },
+  {
+    "referrer": "vicfero.github.io",
+    "count": 5,
+    "uniques": 3,
+    "request_date": "2023-12-28"
+  },
+  {
+    "referrer": "jianshu.com",
+    "count": 4,
+    "uniques": 2,
+    "request_date": "2023-12-28"
+  },
+  {
+    "referrer": "researchgate.net",
+    "count": 2,
+    "uniques": 1,
+    "request_date": "2023-12-28"
+  }
+]
