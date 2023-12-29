@@ -574,3 +574,75 @@
     "request_date": "2023-12-28"
   }
 ]
+[
+  {
+    "path": "/inab/trimal",
+    "title": "GitHub - inab/trimal: A tool for automated alignment trimming in large-scale ...",
+    "count": 155,
+    "uniques": 98,
+    "request_date": "2023-12-29"
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/source",
+    "title": "trimal/source at trimAl · inab/trimal · GitHub",
+    "count": 33,
+    "uniques": 11,
+    "request_date": "2023-12-29"
+  },
+  {
+    "path": "/inab/trimal/issues",
+    "title": "Issues · inab/trimal · GitHub",
+    "count": 22,
+    "uniques": 14,
+    "request_date": "2023-12-29"
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/.github/workflows",
+    "title": "trimal/.github/workflows at trimAl · inab/trimal · GitHub",
+    "count": 22,
+    "uniques": 8,
+    "request_date": "2023-12-29"
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/scripts",
+    "title": "trimal/scripts at trimAl · inab/trimal · GitHub",
+    "count": 22,
+    "uniques": 7,
+    "request_date": "2023-12-29"
+  },
+  {
+    "path": "/inab/trimal/blob/trimAl/README",
+    "title": "trimal/README at trimAl · inab/trimal · GitHub",
+    "count": 18,
+    "uniques": 8,
+    "request_date": "2023-12-29"
+  },
+  {
+    "path": "/inab/trimal/pull/94",
+    "title": "Update traffic data by nicodr97 · Pull Request #94 · inab/trimal",
+    "count": 18,
+    "uniques": 1,
+    "request_date": "2023-12-29"
+  },
+  {
+    "path": "/inab/trimal/pulls",
+    "title": "Pull requests · inab/trimal · GitHub",
+    "count": 16,
+    "uniques": 5,
+    "request_date": "2023-12-29"
+  },
+  {
+    "path": "/inab/trimal/actions",
+    "title": "Workflow runs · inab/trimal · GitHub",
+    "count": 16,
+    "uniques": 3,
+    "request_date": "2023-12-29"
+  },
+  {
+    "path": "/inab/trimal/releases/tag/v1.4.1",
+    "title": "Release Stable release of trimAl v1.4.1 · inab/trimal · GitHub",
+    "count": 14,
+    "uniques": 13,
+    "request_date": "2023-12-29"
+  }
+]
