@@ -1,5 +1,5 @@
 {
-  "count": 383,
+  "count": 388,
   "clones": [
     {
       "dailyUniques": 3,
@@ -217,9 +217,14 @@
       "count": 9
     },
     {
-      "dailyUniques": 1,
+      "dailyUniques": 4,
       "date": "2023-12-29",
-      "count": 1
+      "count": 4
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2023-12-30",
+      "count": 2
     }
   ]
 }
