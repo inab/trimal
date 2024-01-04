@@ -62,7 +62,6 @@ jobs:
           jq 'group_by(.path) | map({ path: .[0].path, title: .[0].title, views: map({count, uniques, request_date}) })' temp_paths_traffic_response.json > temp_paths_traffic.json && rm temp_paths_traffic_response.json
           cat temp_paths_traffic.json
           jq -s 'flatten | group_by(.path) | map({path: .[0].path, title: .[0].title, views: [.[].views[]] | unique_by(.request_date) | group_by(.request_date) | map(add)}) | unique_by(.path)' "$paths_file" temp_paths_traffic.json > temp_merged_paths_file.json
-          
           cat temp_merged_paths_file.json > "$paths_file" && rm temp_merged_paths_file.json temp_paths_traffic.json
           cat "$paths_file"
       - name: Fetch referrers data
@@ -79,10 +78,11 @@ jobs:
           
           echo "$traffic_content" > referrers_traffic_response.json
           current_date=$(date +"%Y-%m-%d")
-          jq --arg request_date "$current_date" '.[] |= . + {request_date: $request_date}' referrers_traffic_response.json > temp_referrers_traffic.json && rm referrers_traffic_response.json
+          jq --arg request_date "$current_date" '.[] |= . + {request_date: $request_date}' referrers_traffic_response.json > temp_referrers_traffic_response.json && rm referrers_traffic_response.json
+          jq 'group_by(.referrer) | map({ referrer: .[0].referrer, views: map({count, uniques, request_date}) })' temp_referrers_traffic_response.json > temp_referrers_traffic.json && rm temp_referrers_traffic_response.json
           cat temp_referrers_traffic.json
-          cat "$referrers_file" && echo ',' && cat temp_referrers_traffic.json > temp_merged_referrers_file.json
-          cat temp_merged_referrers_file.json >> "$referrers_file" && rm temp_referrers_traffic.json temp_merged_referrers_file.json
+          jq -s 'flatten | group_by(.referrer) | map({referrer: .[0].referrer, views: [.[].views[]] | unique_by(.request_date) | group_by(.request_date) | map(add)}) | unique_by(.referrer)' "$referrers_file" temp_referrers_traffic.json > temp_merged_referrers_file.json
+          cat temp_merged_referrers_file.json > "$referrers_file" && rm temp_merged_referrers_file.json temp_referrers_traffic.json
           cat "$referrers_file"
       - name: Import GPG Key
         uses: crazy-max/ghaction-import-gpg@v6
