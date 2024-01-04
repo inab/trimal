@@ -1006,3 +1006,75 @@
     "request_date": "2024-01-03"
   }
 ]
+[
+  {
+    "path": "/inab/trimal",
+    "title": "inab/trimal: A tool for automated alignment trimming in large-scale phylogene...",
+    "count": 135,
+    "uniques": 86,
+    "request_date": "2024-01-04"
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/scripts",
+    "title": "trimal/scripts at trimAl · inab/trimal · GitHub",
+    "count": 29,
+    "uniques": 9,
+    "request_date": "2024-01-04"
+  },
+  {
+    "path": "/inab/trimal/issues",
+    "title": "Issues · inab/trimal · GitHub",
+    "count": 26,
+    "uniques": 17,
+    "request_date": "2024-01-04"
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/.github/workflows",
+    "title": "trimal/.github/workflows at trimAl · inab/trimal · GitHub",
+    "count": 20,
+    "uniques": 8,
+    "request_date": "2024-01-04"
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/source",
+    "title": "trimal/source at trimAl · inab/trimal · GitHub",
+    "count": 20,
+    "uniques": 8,
+    "request_date": "2024-01-04"
+  },
+  {
+    "path": "/inab/trimal/blob/trimAl/README",
+    "title": "trimal/README at trimAl · inab/trimal · GitHub",
+    "count": 18,
+    "uniques": 8,
+    "request_date": "2024-01-04"
+  },
+  {
+    "path": "/inab/trimal/releases/tag/v1.4.1",
+    "title": "Release Stable release of trimAl v1.4.1 · inab/trimal · GitHub",
+    "count": 17,
+    "uniques": 13,
+    "request_date": "2024-01-04"
+  },
+  {
+    "path": "/inab/trimal/issues/53",
+    "title": "trimAl doesn't recognise alignment · Issue #53 · inab/trimal · GitHub",
+    "count": 12,
+    "uniques": 10,
+    "request_date": "2024-01-04"
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/dataset",
+    "title": "trimal/dataset at trimAl · inab/trimal · GitHub",
+    "count": 12,
+    "uniques": 5,
+    "request_date": "2024-01-04"
+  },
+  {
+    "path": "/inab/trimal/pulls",
+    "title": "Pull requests · inab/trimal · GitHub",
+    "count": 9,
+    "uniques": 6,
+    "request_date": "2024-01-04"
+  }
+]
