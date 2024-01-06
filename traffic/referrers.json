@@ -81,6 +81,11 @@
         "count": 64,
         "uniques": 15,
         "request_date": "2024-01-05"
+      },
+      {
+        "count": 69,
+        "uniques": 17,
+        "request_date": "2024-01-06"
       }
     ]
   },
@@ -166,6 +171,21 @@
         "count": 72,
         "uniques": 30,
         "request_date": "2024-01-05"
+      },
+      {
+        "count": 82,
+        "uniques": 34,
+        "request_date": "2024-01-06"
+      }
+    ]
+  },
+  {
+    "referrer": "blog.genoglobe.com",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-06"
       }
     ]
   },
@@ -251,6 +271,11 @@
         "count": 37,
         "uniques": 15,
         "request_date": "2024-01-05"
+      },
+      {
+        "count": 34,
+        "uniques": 14,
+        "request_date": "2024-01-06"
       }
     ]
   },
@@ -336,6 +361,11 @@
         "count": 8,
         "uniques": 6,
         "request_date": "2024-01-05"
+      },
+      {
+        "count": 19,
+        "uniques": 6,
+        "request_date": "2024-01-06"
       }
     ]
   },
@@ -421,6 +451,11 @@
         "count": 5,
         "uniques": 3,
         "request_date": "2024-01-05"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-06"
       }
     ]
   },
@@ -496,6 +531,11 @@
         "count": 1,
         "uniques": 1,
         "request_date": "2024-01-05"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-01-06"
       }
     ]
   },
@@ -586,6 +626,11 @@
         "count": 13,
         "uniques": 2,
         "request_date": "2024-01-05"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-01-06"
       }
     ]
   },
@@ -726,6 +771,11 @@
         "count": 119,
         "uniques": 29,
         "request_date": "2024-01-05"
+      },
+      {
+        "count": 103,
+        "uniques": 32,
+        "request_date": "2024-01-06"
       }
     ]
   },
@@ -856,6 +906,11 @@
         "count": 6,
         "uniques": 3,
         "request_date": "2024-01-05"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2024-01-06"
       }
     ]
   }
