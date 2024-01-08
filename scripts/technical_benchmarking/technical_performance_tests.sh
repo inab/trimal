@@ -4,10 +4,10 @@ file=$1
 rep=$2
 
 start_time=$(date +%s.%N)
-trimal_local="../trimal/bin/trimal"
+trimal_local="trimal/source/trimal"
 time_command="/usr/bin/time"
 
-methods=("None" "gappyout" "automated2")
+methods=("None" "gappyout" "strict")
 
 parse_results() {
     method=$1
@@ -47,10 +47,19 @@ write_results() {
 test_performance() {
     file=$1
     repetition=$2
-    filename=$(echo $file | awk -F '/' '{print $NF}')
+    #filename=$(echo $file | awk -F '/' '{print $NF}')
+    #alignment_size=$(stat --printf="%s\n" $file)
+    #alignment_seqs=$(echo $filename | awk -F '.' '{print $(NF-2)}')
+    #alignment_cols=$(echo $filename | awk -F '.' '{print $(NF-1)}') # change for cedric dataset
+
+    filename=$(echo $file | awk -F '/' '{print $NF}' | awk -F .'' '{print $1}')
     alignment_size=$(stat --printf="%s\n" $file)
-    alignment_seqs=$(echo $filename | awk -F '.' '{print $(NF-2)}')
-    alignment_cols=$(echo $filename | awk -F '.' '{print $(NF-1)}') # change for cedric dataset
+    alignment_seqs=$(grep '>' -c $file)
+    alignment_cols=$(awk '/^>/{l=0; next}{l+=length($0)}END{print l}' $file)
+    version="1.4"
+
+    echo "$file,$repetition,$method,$alignment_size,$alignment_seqs,$alignment_cols"
+    return
 
     for method in ${methods[@]}
     do
@@ -72,7 +81,7 @@ test_performance() {
         exit_status=$(grep "Exit status" $exec_times_filename | awk -F ':' '{print $NF}')
         rm $exec_times_filename
 
-        echo "$file,$repetition,$method,$alignment_size,$alignment_seqs,$alignment_cols,$trimmed_alignment_cols,$user_time,$system_time,$percent_cpu,$max_resident_set_size,$exit_status"
+        echo "$file,$repetition,$method,$alignment_size,$alignment_seqs,$alignment_cols,$trimmed_alignment_cols,$user_time,$system_time,$percent_cpu,$max_resident_set_size,$exit_status,$version"
     done
 }
 

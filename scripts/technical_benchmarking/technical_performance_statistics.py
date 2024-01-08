@@ -35,7 +35,7 @@ variable_labels = {
     "alignment_cols": "Columns",
     "alignment_res": "Residues",
     "alignment_res_millions": "Residues (millions)",
-    "remaining_alignment_cols": "Remaining columns",
+    "trimmed_alignment_cols": "Remaining columns",
     "perc_conserved_cols": "% conserved columns",
     "user_time": "Time (s)",
     "system_time": "System time (s)",
@@ -60,21 +60,37 @@ def generate_plot(plot_type, df, x_axis, y_axis, hue, col, row, orient, style, s
   elif plot_type == "scatterplot":
     tech_plot = sns.scatterplot(data=df, x=x_axis, y=y_axis, hue=hue, style=style, size=size, sizes=(20, 2000), palette=sns.color_palette("colorblind"))
   elif plot_type == "lineplot":
-    tech_plot = sns.lineplot(data=df, x=x_axis, y=y_axis, hue=hue, size=size, style=style)
+    colorblind_palette = sns.color_palette("colorblind")
+    custom_palette = [colorblind_palette[0], colorblind_palette[1], colorblind_palette[4]]
+    tech_plot = sns.lineplot(data=df, x=x_axis, y=y_axis, hue=hue, size=size, style=style, ci=None, palette=custom_palette, linewidth=2.5)
   elif plot_type == "lmplot":
     tech_plot = sns.lmplot(data=df, x=x_axis, y=y_axis, hue=hue)
+  elif plot_type == "barplot":
+    bins = [0, 1000, 10000, 50000]
+    #df[y_axis] = df[y_axis] + 5
+    df[x_axis] = pd.cut(df[x_axis], bins=bins)
+    tech_plot = sns.barplot(data=df, x=x_axis, y=y_axis, hue=hue, ci=None)
   elif plot_type == "relplot":
     tech_plot = sns.relplot(data=df, x=x_axis, y=y_axis, hue=hue, col=col, row=row, style=style, size=size, sizes=(20, 2000), palette="viridis")
   elif plot_type == "violinplot":
+    df[x_axis] = pd.cut(df[x_axis], bins=3)
     tech_plot = sns.violinplot(data=df, x=x_axis, y=y_axis, hue=hue, orient=orient) 
   elif plot_type == "boxplot":
+    bins = [0, 5000, 10000, 15000]
+    df[x_axis] = pd.cut(df[x_axis], bins=bins)
     tech_plot = sns.boxplot(data=df, x=x_axis, y=y_axis, hue=hue) 
   elif plot_type == "histplot":
     tech_plot = sns.histplot(data=df, x=x_axis, hue=hue, multiple="stack") 
 
-  if plot_type != "relplot" and plot_type != "lmplot": tech_plot.get_legend().set_title(title)
-  plt.xlabel(variable_labels[x_axis])
-  if y_axis: plt.ylabel(variable_labels[y_axis])
+  print(df.describe())
+
+  #if plot_type != "relplot" and plot_type != "lmplot": tech_plot.get_legend().set_title(title)
+  plt.title('Execution time for trimAl strictplus', fontsize=16)
+  plt.legend(loc='upper left', fontsize=14)
+  plt.xticks(fontsize=14)
+  plt.yticks(fontsize=14)
+  plt.xlabel(variable_labels[x_axis], fontsize=14)
+  if y_axis: plt.ylabel(variable_labels[y_axis], fontsize=14)
   if log_x: plt.xscale('log')
   if log_y: plt.yscale('log')
   if show_plot: plt.show()
@@ -99,7 +115,7 @@ def main():
                         required=False, type=str, help="Input dataset of common stats")
 
     parser.add_argument("-p", "--plot", dest="plot", required=True,
-                        type=str, choices=["lineplot", "lmplot", "scatterplot", "relplot", "boxplot", "stripplot", "violinplot", "histplot"], help="Set plot type")
+                        type=str, choices=["lineplot", "lmplot", "scatterplot", "relplot", "boxplot", "stripplot", "violinplot", "histplot", "barplot"], help="Set plot type")
 
     parser.add_argument("--all_of", dest="all_of", required=False,
                         type=str, choices=["time", "memory"], help="Generate all plots of a variable")
@@ -107,15 +123,15 @@ def main():
     parser.add_argument("-x", "--x_axis", dest="x_axis", required=False,
                         type=str, choices=["repetition", "method", "alignment_size", "alignment_seqs",
                                            "alignment_cols", "alignment_res", "alignment_res_millions",
-                                               "alignment_size_mb", "remaining_alignment_cols",
+                                               "alignment_size_mb", "trimmed_alignment_cols",
                                                "user_time", "system_time", "percent_cpu", "max_resident_set_size",
                                                "max_resident_set_size_gb", "exit_status"], help="Set x axis variable")
 
     parser.add_argument("-y", "--y_axis", dest="y_axis", required=False,
                         type=str, choices=["repetition", "method", "alignment_size", "alignment_seqs",
                                            "alignment_cols", "alignment_res", "alignment_res_millions",
-                                               "alignment_size_mb", "remaining_alignment_cols", "user_time",
-                                               "system_time", "percent_cpu", "max_resident_set_size", "max_resident_set_size_gb"
+                                               "alignment_size_mb", "trimmed_alignment_cols", "user_time",
+                                               "system_time", "percent_cpu", "max_resident_set_size", "max_resident_set_size_gb",
                                                "exit_status", "perc_conserved_cols"], help="Set y axis variable")
 
     parser.add_argument("--log_x", dest="log_x", default=False,
@@ -181,11 +197,18 @@ def main():
     if args.min_sequences: df = df[df["alignment_seqs"] >= args.min_sequences]
     if args.min_columns: df = df[df["alignment_cols"] >= args.min_columns]
 
-    df.loc[df["remaining_alignment_cols"] > df["alignment_cols"], "remaining_alignment_cols"] = 0 # msas where all columns were removed
-    df.loc[df["remaining_alignment_cols"].isna(), "remaining_alignment_cols"] = -1 # msas where all columns were removed or there was an error
+    #df = df[df["method"] != "automated1"]
+    df = df[df["version"] != "SSE2"]
+    #df = df[df["version"] != "AVX2"]
+    df = df[df["alignment_seqs"] <= 50000]
+    #df = df[df["alignment_seqs"] >= 1000]
+
+    df.loc[df["trimmed_alignment_cols"] > df["alignment_cols"], "trimmed_alignment_cols"] = 0 # msas where all columns were removed
+    df.loc[df["trimmed_alignment_cols"].isna(), "trimmed_alignment_cols"] = -1 # msas where all columns were removed or there was an error
 
     # We cannot consider these cases since we don't know if the execution ended
-    df = df.loc[df["remaining_alignment_cols"] > 0]
+    df = df.loc[df["trimmed_alignment_cols"] > 0]
+    df = df.loc[df["trimmed_alignment_cols"] != df["alignment_cols"]]
 
     # clean msa's which are not the same after trimming with all versions
     # (for instance because version 1.4 kills the execution on unknown symbols while 2.0 just stops and returns
@@ -200,17 +223,17 @@ def main():
           df_2 = df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "2.0")]
           df_3 = df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "SSE2")]
           df_4 = df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "AVX2")]
-          if len(df_1["remaining_alignment_cols"].values) == 0 or len(df_2["remaining_alignment_cols"].values) == 0 \
-            or len(df_3["remaining_alignment_cols"].values) == 0 or len(df_4["remaining_alignment_cols"].values) == 0:
+          if len(df_1["trimmed_alignment_cols"].values) == 0 or len(df_2["trimmed_alignment_cols"].values) == 0 \
+            or len(df_3["trimmed_alignment_cols"].values) == 0 or len(df_4["trimmed_alignment_cols"].values) == 0:
              df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "1.4")].index)
              df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "2.0")].index)
              df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "SSE2")].index)
              df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "AVX2")].index)
              continue
-          if df_1["remaining_alignment_cols"].values[0] != df_2["remaining_alignment_cols"].values[0] or \
-              df_1["remaining_alignment_cols"].values[0] != df_3["remaining_alignment_cols"].values[0] or \
-                df_1["remaining_alignment_cols"].values[0] != df_4["remaining_alignment_cols"].values[0]:
-             #print(filename + "; " + method + ": " + str(df_1["remaining_alignment_cols"].values[0]) + " vs " + str(df_2["remaining_alignment_cols"].values[0]))
+          if df_1["trimmed_alignment_cols"].values[0] != df_2["trimmed_alignment_cols"].values[0] or \
+              df_1["trimmed_alignment_cols"].values[0] != df_3["trimmed_alignment_cols"].values[0] or \
+                df_1["trimmed_alignment_cols"].values[0] != df_4["trimmed_alignment_cols"].values[0]:
+             #print(filename + "; " + method + ": " + str(df_1["trimmed_alignment_cols"].values[0]) + " vs " + str(df_2["trimmed_alignment_cols"].values[0]))
              df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "1.4")].index)
              df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "2.0")].index)
              df = df.drop(df.loc[(df["filename"] == filename) & (df["method"] == method) & (df["version"] == "SSE2")].index)
@@ -219,14 +242,14 @@ def main():
     
     
     print(df.describe())
-    print(df)
+    #print(df)
 
     df["alignment_res"] = df["alignment_seqs"] * df["alignment_cols"]
-    df["perc_conserved_cols"] = df["remaining_alignment_cols"] / df["alignment_cols"]
-    df.loc[df["remaining_alignment_cols"] == -1, "perc_conserved_cols"] = 1
+    df["perc_conserved_cols"] = df["trimmed_alignment_cols"] / df["alignment_cols"]
+    df.loc[df["trimmed_alignment_cols"] == -1, "perc_conserved_cols"] = 1
     df["alignment_res_millions"] = df["alignment_res"] * 10**(-6)
-    df["alignment_size_mb"] = df["alignment_size"] * \
-        10**(-6)  # max_resident_set_size is in bytes
+    #df["alignment_size_mb"] = df["alignment_size"] * \
+    #    10**(-6)  # max_resident_set_size is in bytes
     df["max_resident_set_size_gb"] = df["max_resident_set_size"] * \
         10**(-6)  # max_resident_set_size is in KB
     df.set_index(["version", "filename", "method", "repetition"])
