@@ -76,6 +76,10 @@ float defaultNTDegeneratedMatrix[15][15] = {
 
 /* BLOSUM62 Similarity Matrix */
 float defaultAAMatrix[20][20] = {
+  /* A: Alanine      R: Arginine      N: Asparagine      D: Aspartate      C: Cysteine       Q: Glutamine      E: Glutamate  
+     G: Glycine      H: Histidine     I: Isoleucine      L: Leucine        K: Lysine         M: Methionine     F: Phenylalanine
+     P: Proline      S: Serine        T: Threonine       W: Tryptophan     Y: Tyrosine       V: Valine
+  */
   {  4, -1, -2, -2,  0, -1, -1,  0, -2, -1, -1, -1, -1, -2, -1,  1,  0, -3, -2,  0},
   { -1,  5,  0, -2, -3,  1,  0, -2,  0, -3, -2,  2, -1, -3, -2, -1, -1, -3, -2, -3},
   { -2,  0,  6,  1, -3,  0,  0,  0,  1, -3, -3,  0, -2, -3, -2,  1,  0, -4, -2, -3},
