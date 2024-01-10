@@ -326,9 +326,7 @@ int Alignment::getAlignmentType() const {
     //	which means the end of the current scope.
     StartTiming("int Alignment::getAlignmentType(void) ");
     if (dataType == SequenceTypes::NotDefined)
-        // Dropping constness,
-        //      as the datatype is not a "modification" of the alignment
-        const_cast<Alignment*>(this)->dataType = utils::checkAlignmentType(numberOfSequences, numberOfResidues, sequences);
+        dataType = utils::checkAlignmentType(numberOfSequences, sequences);
     return dataType;
 }
 /*

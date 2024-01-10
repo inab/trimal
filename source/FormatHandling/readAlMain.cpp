@@ -30,7 +30,7 @@
 #include "FormatHandling/FormatManager.h"
 #include "Alignment/Alignment.h"
 #include "defines.h"
-#include "values.h"
+#include "residueValues.h"
 
 #include <iostream>
 #include <cstring>

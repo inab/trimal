@@ -62,5 +62,8 @@ const std::map<WarningCode, const char *> reporting::reportManager::WarningMessa
             "[[tag]] Overwritting file [tag]."},
 
     {WarningCode::RenamingOutputPreventOverride,
-            "[[tag]] -> To prevent overriding file [tag] a suffix has been added. Final filename: [tag]"}
+            "[[tag]] -> To prevent overriding file [tag] a suffix has been added. Final filename: [tag]"},
+
+    {WarningCode::AmbiguousAlignmentType,
+            "Alignment type could not be established unambiguously: there are the same amount of [tag] and [tag] residues."},
 };

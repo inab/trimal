@@ -42,7 +42,7 @@
 #include "InternalBenchmarker.h"
 #include "Statistics/similarityMatrix.h"
 #include "reportsystem.h"
-#include "values.h"
+#include "residueValues.h"
 #include "utils.h"
 
 namespace statistics {
@@ -262,7 +262,7 @@ namespace statistics {
 
         // We create the hashing vector
         for (i = 0; i < numPositions; i++)
-            vhash[listAASym[i] - 'A'] = i;
+            vhash[aminoAcidResidues[i] - 'A'] = i;
 
         for (i = 0; i < numPositions; i++)
             for (j = 0; j < numPositions; j++)
@@ -296,7 +296,7 @@ namespace statistics {
 
         // We create the hashing vector
         for (i = 0; i < numPositions; i++)
-            vhash[listNTSym[i] - 'A'] = i;
+            vhash[nucleotideResidues[i] - 'A'] = i;
 
         for (i = 0; i < numPositions; i++)
             for (j = 0; j < numPositions; j++)
@@ -330,7 +330,7 @@ namespace statistics {
 
         // We create the hashing vector
         for (i = 0; i < numPositions; i++)
-            vhash[listNTDegenerateSym[i] - 'A'] = i;
+            vhash[degenerateNucleotideResidues[i] - 'A'] = i;
 
         for (i = 0; i < numPositions; i++)
             for (j = 0; j < numPositions; j++)
@@ -360,7 +360,7 @@ namespace statistics {
 
         // We create the hashing vector taking into account the input datatype
         for (int i = 0; i < numPositions; i++) {
-            vhash[listNTDegenerateSym[i] - 'A'] = i;
+            vhash[degenerateNucleotideResidues[i] - 'A'] = i;
         }
 
         // Working similarity matrix is set depending on the pre loaded matrices

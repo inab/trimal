@@ -48,7 +48,7 @@ namespace statistics {
 
 class Alignment {
 
-    int dataType = SequenceTypes::NotDefined;
+    mutable int dataType = SequenceTypes::NotDefined;
 
 public:
 // BEGIN of Submodules

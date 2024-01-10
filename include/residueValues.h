@@ -28,32 +28,36 @@
 ***************************************************************************** */
 #ifndef VALUES
 #define VALUES
-#ifdef SIMMatrix
+
+#include <string>
 
 /* Characters used for different alignments type */
-char listNTSym[6] = "ACGTU";
 
-char listAASym[21] = "ARNDCQEGHILKMFPSTWYV";
+const std::string nucleotideResidues = "ACGTU";
 
-char listNTDegenerateSym[16] = "ACGTURYKMSWBDHV";
+const std::string aminoAcidResidues = "ARNDCQEGHILKMFPSTWYV";
+
+const std::string degenerateNucleotideResidues = "ACGTURYKMSWBDHV";
 
 /* Characters used to indicate indeterminations */
-char ambiguousAA[6] = "BJXZ*";
+const std::string ambiguousAA = "BJXZ*";
 
 /* Pyrrolysine:    'O' > 'TAG'  */
 /* Selenocysteine: 'U' > 'TGA'  */
-char protein_alternative_aminoacids[3] = "UO";
+const std::string alternativeAminoAcidResidues = "UO";
 
+
+#ifdef SIMMatrix
 /* Default Identity Matrix for Canonical Nucleotides */
-float defaultNTMatrix[5][5] = {
+const std::array<std::array<float, 5>, 5> defaultNTMatrix = {{
   {1, 0, 0, 0, 0},
   {0, 1, 0, 0, 0},
   {0, 0, 1, 0, 0},
   {0, 0, 0, 1, 0},
   {0, 0, 0, 0, 1}
-};
+}};
 
-float defaultNTDegeneratedMatrix[15][15] = {
+const std::array<std::array<float, 15>, 15> defaultNTDegeneratedMatrix = {{
 /* A: adenosine (A)        C: cytidine   (C)            G: guanine (G)            T: thymidine  (T)           U: uridine    (U)
  * R: purine    (G | A)    Y: pyrimidine (C | T/u)      K: keto    (G | T/u)      M: amino      (A | C)       S: strong     (G | C)
  * W: weak      (A | T/u)  B: not A      (G | C | T/u)  D: not C   (G | A | T/u)  H: not G      (A | C | T/u) V: not T/u    (G | C | A) */
@@ -72,10 +76,10 @@ float defaultNTDegeneratedMatrix[15][15] = {
   { 1/6., 0.0,  1/6., 1/6., 1/6., 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1/6., 0.0,   0.0},
   { 1/6., 1/6., 0.0,  1/6., 1/6., 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1/6.,  0.0},
   { 1/6., 1/6., 1/6., 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1/6.}
-};
+}};
 
 /* BLOSUM62 Similarity Matrix */
-float defaultAAMatrix[20][20] = {
+const std::array<std::array<float, 20>, 20> defaultAAMatrix = {{
   /* A: Alanine      R: Arginine      N: Asparagine      D: Aspartate      C: Cysteine       Q: Glutamine      E: Glutamate  
      G: Glycine      H: Histidine     I: Isoleucine      L: Leucine        K: Lysine         M: Methionine     F: Phenylalanine
      P: Proline      S: Serine        T: Threonine       W: Tryptophan     Y: Tyrosine       V: Valine
@@ -100,13 +104,13 @@ float defaultAAMatrix[20][20] = {
   { -3, -3, -4, -4, -2, -2, -3, -2, -2, -3, -2, -3, -1,  1, -4, -3, -2, 11,  2, -3},
   { -2, -2, -2, -3, -2, -1, -2, -3,  2, -1, -1, -2, -1,  3, -3, -2, -2,  2,  7, -1},
   {  0, -3, -3, -3, -1, -2, -2, -3, -3,  3,  1, -2,  1, -1, -2, -2,  0, -3, -1,  4}
-};
+}};
 
 
 /* Alternative matrixes */
 
 // Nucleotides
-float alternative_1_NTDegeneratedMatrix[15][15] = {
+const std::array<std::array<float, 15>, 15> alternative_1_NTDegeneratedMatrix = {{
   { 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
   { 0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
   { 0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
@@ -122,10 +126,10 @@ float alternative_1_NTDegeneratedMatrix[15][15] = {
   { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0},
   { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0},
   { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1}
-};
+}};
 
 /* BLOSUM62 Similarity Matrix extended with ambiguous amino acids */
-float extendedAAMatrix[25][25] = {
+const std::array<std::array<float, 25>, 25> extendedAAMatrix = {{
   /* A: Alanine      R: Arginine      N: Asparagine      D: Aspartate      C: Cysteine       Q: Glutamine      E: Glutamate  
      G: Glycine      H: Histidine     I: Isoleucine      L: Leucine        K: Lysine         M: Methionine     F: Phenylalanine
      P: Proline      S: Serine        T: Threonine       W: Tryptophan     Y: Tyrosine       V: Valine         B: Aspartate or Asparagine
@@ -156,7 +160,7 @@ float extendedAAMatrix[25][25] = {
   { -1,  0,  0,  1, -3,  4,  4, -2,  0, -3, -3,  1, -1, -3, -1,  0, -1, -2, -2, -2,  0, -3,  4, -1, -4},
   { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -4},
   { -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4,  1}
-};
+}};
 
 #endif
 #endif

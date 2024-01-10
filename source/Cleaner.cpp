@@ -38,7 +38,7 @@
 #include "reportsystem.h"
 #include "defines.h"
 #include "Cleaner.h"
-#include "values.h"
+#include "residueValues.h"
 #include "utils.h"
 
 int Cleaner::selectMethod() {

@@ -314,15 +314,20 @@ namespace utils {
      std::string removeCharacter(char c, std::string line);
 
     /**
+     \brief Checks the presence of a character in a string
+     \param pattern String to check the character in.
+     \param character Character to check in pattern.
+     \return \b true if character is present in pattern, \b false if not.
+     */
+     bool checkPattern(const std::string &pattern, const char &character);
+
+    /**
      \brief Checks an alignment type
      \param seqNumber Number of sequences to check it's type.
-     \param residNumber Number of residues of the alignment.
      \param sequences Sequences pointer
      \return Integer that represents the alignment type.
      */
-     int checkAlignmentType(int seqNumber,
-                                  int residNumber,
-                                  std::string *sequences);
+     int checkAlignmentType(int seqNumber, const std::string *sequences);
 
     /**
      \brief Reads a line and converts it to an array of number

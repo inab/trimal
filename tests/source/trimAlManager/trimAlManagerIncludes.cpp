@@ -4,8 +4,17 @@
 
 namespace trimAlManagerTestIncludes
 {
-    const char * alignmentPath =
+    const char * const alignmentPath =
             "../dataset/example.004.AA.fasta";
+
+    const char * const aminoAcidAlignmentPath =
+            "../dataset/example.005.AA.fasta";
+
+    const char * const dnaAlignmentPath =
+            "../dataset/example.092.DNA.fasta";
+
+    const char * const rnaAlignmentPath =
+            "../dataset/example.096.RNA.fasta";
 
     namespace formats
     {

@@ -284,6 +284,8 @@ enum WarningCode {
 
     RenamingOutputPreventOverride               = 10,
 
+    AmbiguousAlignmentType                      = 11,
+
 
     __MAXWARNING
 };

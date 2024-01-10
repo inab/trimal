@@ -42,7 +42,7 @@
 #include "VCFHandler.h"
 #include "Cleaner.h"
 #include "defines.h"
-#include "values.h"
+#include "residueValues.h"
 #include "utils.h"
 
 // Macros defined on this file will be defined

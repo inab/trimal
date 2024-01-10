@@ -32,7 +32,7 @@
 #include "InternalBenchmarker.h"
 #include "reportsystem.h"
 #include "defines.h"
-#include "values.h"
+#include "residueValues.h"
 #include "utils.h"
 
 namespace utils {
@@ -519,130 +519,71 @@ namespace utils {
         return line;
     }
 
+    bool checkPattern(const std::string &pattern, const char &character) {
+        return pattern.find(character) != std::string::npos;
+    }
 
-    int checkAlignmentType(int seqNumber, int residNumber, std::string *sequences) {
-        // All codes from RNA - DNA - AA and DEG for both versions
+    int checkAlignmentType(int seqNumber, const std::string *sequences) {
+        static const std::string dnaResidues = "ACGT";
+        static const std::string rnaResidues = "ACGU";
 
-        static const auto check =
-                [](const std::string &pattern,
-                   size_t &counter,
-                   const char &character) -> void {
-                    size_t pos(0);
-                    while ((pos = pattern.find(character, pos)) != std::string::npos) {
-                        pos++;
-                        counter++;
-                    }
-                };
+        static const std::string gapSymbols = "-?.";
 
-        // Inosinic Acid is a nucleotide, but it's not part of DNA or RNA
-        static const std::string COMMON = "ACG";
-        static const std::string RNA = "U"; // Removed ACG as is in common
-        static const std::string DNA = "T"; // Removed ACG as is in common
-
-        static const std::string DEG_NN = "RYSWKMBDHV"; // Indetermination N not added
-
-        static const std::string AA = "PVLIMFYWHKRQEDSTUO"; // Indetermination N not added // Removed ACG as is in common
-        static const std::string DEG_AA = "BZ"; // Indetermination X not added
-
-        size_t rna = 0, dna = 0, deg_nn = 0, aa = 0, deg_aa = 0;
+        size_t rna = 0;
+        size_t dna = 0;
+        size_t deg_nn = 0;
+        size_t aa = 0;
+        size_t deg_aa = 0;
+        size_t alternativeAA = 0;
 
         for (int s = 0; s < seqNumber; s++) {
             for (char c : sequences[s]) {
-                if (c == '-' || c == '?' || c == '.') continue;
+                if (checkPattern(gapSymbols, c)) continue;
                 c = utils::toUpper(c);
-                check(RNA, rna, c);
-                check(DNA, dna, c);
-                check(DEG_NN, deg_nn, c);
-                check(AA, aa, c);
-                check(DEG_AA, deg_aa, c);
 
-                size_t pos(0);
-                while ((pos = COMMON.find(c, pos)) != std::string::npos) {
-                    pos++;
-                    aa++;
-                    rna++;
-                    dna++;
+                bool isRNA = checkPattern(rnaResidues, c);
+                bool isDNA = checkPattern(dnaResidues, c);
+                bool isDegNN = checkPattern(degenerateNucleotideResidues, c);
+                bool isAA = checkPattern(aminoAcidResidues, c);
+                bool isDegAA = checkPattern(ambiguousAA, c);
+                bool isAltAA = checkPattern(alternativeAminoAcidResidues, c);
+
+                if (!(isRNA || isDNA || isDegNN || isAA || isDegAA || isAltAA)) {
+                    return SequenceTypes::NotDefined;
                 }
+
+                if (isRNA) rna++;
+                if (isDNA) dna++;
+                if (isDegNN && !isDNA && !isRNA) deg_nn++;
+                if (isAA) aa++;
+                if (isDegAA) deg_aa++;
+                if (isAltAA) alternativeAA++;
             }
         }
 
-        if (aa > dna && aa > rna) {
-            return SequenceTypes::AA | (deg_aa > 0 ? SequenceTypes::DEG : SequenceTypes::NotDefined);
+        float dnaRatio = (float) (dna + deg_nn) / (float) seqNumber;
+        float rnaRatio = (float) (rna + deg_nn) / (float) seqNumber;
+        float aaRatio = (float) (aa + deg_aa) / (float) seqNumber;
+
+        if (aaRatio >= dnaRatio && aaRatio >= rnaRatio) {
+            if (aaRatio == dnaRatio) debug.report(WarningCode::AmbiguousAlignmentType, new std::string[2]{"AA", "DNA"});
+            if (aaRatio == rnaRatio) debug.report(WarningCode::AmbiguousAlignmentType, new std::string[2]{"AA", "RNA"});
+            return deg_aa > 0 
+                ? SequenceTypes::AA | SequenceTypes::DEG 
+                : SequenceTypes::AA;
         }
-        if (dna > rna) {
-            return SequenceTypes::DNA | (deg_nn > 0 ? SequenceTypes::DEG : SequenceTypes::NotDefined);
+
+        if (dnaRatio >= aaRatio && dnaRatio >= rnaRatio) {
+            if (aaRatio == dnaRatio) debug.report(WarningCode::AmbiguousAlignmentType, new std::string[2]{"DNA", "AA"});
+            if (dnaRatio == rnaRatio) debug.report(WarningCode::AmbiguousAlignmentType, new std::string[2]{"DNA", "RNA"});
+            return deg_nn > 0 
+                ? SequenceTypes::DNA | SequenceTypes::DEG 
+                : SequenceTypes::DNA;   
         }
-        return SequenceTypes::RNA | (deg_nn > 0 ? SequenceTypes::DEG : SequenceTypes::NotDefined);
 
-
-        int i, j, k, l, hitDNA, hitRNA, degenerate, gDNA, gRNA, extDNA, extRNA;
-        float ratioDNA, ratioRNA;
-        // Standard tables
-        static char listRNA[11] = "AGCUNagcun";
-        static char listDNA[11] = "AGCTNagctn";
-
-        // Degenerate Nucleotides codes
-        static char degeneratedCodes[21] = "MmRrWwSsYyKkVvHhDdBb";
-
-        // For each sequences, this method locks at the 100 letters (excluding gaps).
-        // The method is able to distinguish between pure DNA/RNA nucleotides or those
-        // containing degenerate Nucleotide letters
-        for (i = 0, gDNA = 0, gRNA = 0, extDNA = 0, extRNA = 0; i < seqNumber; i++) {
-
-            // Looks at the 100 letters (excluding gaps) while doesn's get the sequence's end
-            // When there are less than a 100 characters, break the loop before reaching that limit
-
-            residNumber = (int) sequences[i].size();
-            for (j = 0, k = 0, hitDNA = 0, hitRNA = 0, degenerate = 0; j < residNumber; j++)
-                if (sequences[i][j] != '-' && sequences[i][j] != '.' && sequences[i][j] != '?') {
-                    k++;
-
-                    /* Recognizes between DNA and RNA. */
-                    for (l = 0; l < (int) strlen(listDNA); l++)
-                        if (listDNA[l] == sequences[i][j])
-                            hitDNA++;
-
-                    for (l = 0; l < (int) strlen(listRNA); l++)
-                        if (listRNA[l] == sequences[i][j])
-                            hitRNA++;
-
-                    for (l = 0; l < (int) strlen(degeneratedCodes); l++)
-                        if (degeneratedCodes[l] == sequences[i][j])
-                            degenerate++;
-                }
-
-            // If input sequences have less than 95% of nucleotides, even when residues
-            // are treated with degenerated codes, consider the input file as containing
-            // amino-acidic sequences. 
-            ratioDNA = float(degenerate + hitDNA) / k;
-            ratioRNA = float(degenerate + hitRNA) / k;
-
-            if (ratioDNA < 0.95 && ratioRNA < 0.95)
-                return SequenceTypes::AA;
-
-                // Identify precisely if nucleotides sequences are DNA/RNA strict or
-                // any degenerate code has been used in the sequence
-            else if (hitRNA > hitDNA && degenerate == 0)
-                gRNA++;
-            else if (hitRNA > hitDNA && degenerate != 0)
-                extRNA++;
-            else if (hitRNA < hitDNA && degenerate == 0)
-                gDNA++;
-            else if (hitRNA < hitDNA && degenerate != 0)
-                extDNA++;
-        }
-        // Return the datatype with greater values, considering always degenerate
-        // codes 
-        if (extDNA != 0 && extDNA > extRNA)
-            return (SequenceTypes::DNA | SequenceTypes::DEG);
-        else if (extRNA != 0 && extDNA < extRNA)
-            return (SequenceTypes::RNA | SequenceTypes::DEG);
-        else if (gRNA > gDNA)
-            return SequenceTypes::RNA;
-        else if (gDNA >= gRNA)
-            return SequenceTypes::DNA;
-        else
-            return SequenceTypes::NotDefined;
+        return deg_nn > 0 
+                ? SequenceTypes::RNA | SequenceTypes::DEG 
+                : SequenceTypes::RNA;
     }
 
     int *readNumbers(const std::string &line) {
