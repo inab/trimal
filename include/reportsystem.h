@@ -284,7 +284,13 @@ enum WarningCode {
 
     RenamingOutputPreventOverride               = 10,
 
-    AmbiguousAlignmentType                      = 11,
+    IndeterminateAlignmentType                  = 11,
+
+    DegenerateNucleotides                       = 12,
+
+    AmbiguousResidues                           = 13,
+
+    AlternativeAminoAcids                       = 14,
 
 
     __MAXWARNING

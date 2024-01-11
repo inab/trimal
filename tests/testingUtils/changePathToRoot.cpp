@@ -20,7 +20,7 @@ namespace catch2Utils {
 
             if (std::experimental::filesystem::exists(curPath.append("bin"))) {
                 std::experimental::filesystem::current_path(curPath);
-                std::cout << "Current path: " << curPath;
+                std::cout << "Current path: " << curPath << std::endl;
                 std::flush(std::cout);
             } else {
                 std::cout << "Failed to stablish a correct path for testing the module";

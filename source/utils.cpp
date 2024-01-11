@@ -529,11 +529,11 @@ namespace utils {
 
         static const std::string gapSymbols = "-?.";
 
-        size_t rna = 0;
-        size_t dna = 0;
-        size_t deg_nn = 0;
-        size_t aa = 0;
-        size_t deg_aa = 0;
+        size_t rnaResiduesCount = 0;
+        size_t dnaResiduesCount = 0;
+        size_t degenerativeNucleotidesCount = 0;
+        size_t aminoAcidResiduesCount = 0;
+        size_t degenerativeAminoAcidResiduesCount = 0;
         size_t alternativeAA = 0;
 
         for (int s = 0; s < seqNumber; s++) {
@@ -552,38 +552,46 @@ namespace utils {
                     return SequenceTypes::NotDefined;
                 }
 
-                if (isRNA) rna++;
-                if (isDNA) dna++;
-                if (isDegNN && !isDNA && !isRNA) deg_nn++;
-                if (isAA) aa++;
-                if (isDegAA) deg_aa++;
+                if (isRNA) rnaResiduesCount++;
+                if (isDNA) dnaResiduesCount++;
+                if (isDegNN && !isDNA && !isRNA) degenerativeNucleotidesCount++;
+                if (isAA) aminoAcidResiduesCount++;
+                if (isDegAA) degenerativeAminoAcidResiduesCount++;
                 if (isAltAA) alternativeAA++;
             }
         }
 
-        float dnaRatio = (float) (dna + deg_nn) / (float) seqNumber;
-        float rnaRatio = (float) (rna + deg_nn) / (float) seqNumber;
-        float aaRatio = (float) (aa + deg_aa) / (float) seqNumber;
+        dnaResiduesCount += degenerativeNucleotidesCount;
+        rnaResiduesCount += degenerativeNucleotidesCount;
+        aminoAcidResiduesCount += (degenerativeAminoAcidResiduesCount + alternativeAA);
 
-        if (aaRatio >= dnaRatio && aaRatio >= rnaRatio) {
-            if (aaRatio == dnaRatio) debug.report(WarningCode::AmbiguousAlignmentType, new std::string[2]{"AA", "DNA"});
-            if (aaRatio == rnaRatio) debug.report(WarningCode::AmbiguousAlignmentType, new std::string[2]{"AA", "RNA"});
-            return deg_aa > 0 
+        if (aminoAcidResiduesCount > dnaResiduesCount && aminoAcidResiduesCount > rnaResiduesCount) {
+            if (alternativeAA > 0 ) debug.report(WarningCode::AlternativeAminoAcids);
+            return degenerativeAminoAcidResiduesCount > 0 
                 ? SequenceTypes::AA | SequenceTypes::DEG 
                 : SequenceTypes::AA;
         }
 
-        if (dnaRatio >= aaRatio && dnaRatio >= rnaRatio) {
-            if (aaRatio == dnaRatio) debug.report(WarningCode::AmbiguousAlignmentType, new std::string[2]{"DNA", "AA"});
-            if (dnaRatio == rnaRatio) debug.report(WarningCode::AmbiguousAlignmentType, new std::string[2]{"DNA", "RNA"});
-            return deg_nn > 0 
-                ? SequenceTypes::DNA | SequenceTypes::DEG 
-                : SequenceTypes::DNA;   
+        if (dnaResiduesCount >= aminoAcidResiduesCount && dnaResiduesCount >= rnaResiduesCount) {
+            if (aminoAcidResiduesCount == dnaResiduesCount) debug.report(WarningCode::IndeterminateAlignmentType, new std::string[3]{"DNA", "AA", "DNA"});
+            if (dnaResiduesCount == rnaResiduesCount) debug.report(WarningCode::IndeterminateAlignmentType, new std::string[3]{"DNA", "RNA", "DNA"});
+            if (degenerativeNucleotidesCount > 0) {
+                debug.report(WarningCode::DegenerateNucleotides);
+                return SequenceTypes::DNA | SequenceTypes::DEG;
+            }
+
+            return SequenceTypes::DNA;   
         }
 
-        return deg_nn > 0 
-                ? SequenceTypes::RNA | SequenceTypes::DEG 
-                : SequenceTypes::RNA;
+        if (rnaResiduesCount == aminoAcidResiduesCount) debug.report(WarningCode::IndeterminateAlignmentType, new std::string[3]{"RNA", "AA", "RNA"});
+        if (rnaResiduesCount == dnaResiduesCount) debug.report(WarningCode::IndeterminateAlignmentType, new std::string[3]{"RNA", "DNA", "RNA"});
+
+        if (degenerativeNucleotidesCount > 0) {
+            debug.report(WarningCode::DegenerateNucleotides);
+            return SequenceTypes::RNA | SequenceTypes::DEG;
+        }
+
+        return SequenceTypes::RNA;
     }
 
     int *readNumbers(const std::string &line) {

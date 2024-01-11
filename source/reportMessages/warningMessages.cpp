@@ -64,6 +64,13 @@ const std::map<WarningCode, const char *> reporting::reportManager::WarningMessa
     {WarningCode::RenamingOutputPreventOverride,
             "[[tag]] -> To prevent overriding file [tag] a suffix has been added. Final filename: [tag]"},
 
-    {WarningCode::AmbiguousAlignmentType,
-            "Alignment type could not be established unambiguously: there are the same amount of [tag] and [tag] residues."},
+    {WarningCode::IndeterminateAlignmentType,
+            "Alignment residues might be of different type: there are the same amount of [tag] and [tag] residues. "
+            "They will be considered as [tag]"},
+
+    {WarningCode::DegenerateNucleotides,
+            "Alignment contains degenerate nucleotides."},
+
+    {WarningCode::AlternativeAminoAcids,
+            "Alignment contains alternative amino acids."},
 };

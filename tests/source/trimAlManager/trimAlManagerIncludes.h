@@ -15,6 +15,10 @@ namespace trimAlManagerTestIncludes
     extern const char * const aminoAcidAlignmentPath;
     extern const char * const dnaAlignmentPath;
     extern const char * const rnaAlignmentPath;
+    extern const char * const ambiguousAminoAcidAlignmentPath;
+    extern const char * const degenerateDnaAlignmentPath;
+    extern const char * const degenerateRnaAlignmentPath;
+    extern const char * const alternativeAminoAcidAlignmentPath;
 
     namespace thresholds
     {

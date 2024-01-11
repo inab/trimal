@@ -16,6 +16,18 @@ namespace trimAlManagerTestIncludes
     const char * const rnaAlignmentPath =
             "../dataset/example.096.RNA.fasta";
 
+    const char * const ambiguousAminoAcidAlignmentPath =
+            "../dataset/example.097.ambiguous.AA.fasta";
+
+    const char * const degenerateDnaAlignmentPath =
+            "../dataset/example.098.deg.DNA.fasta";
+
+    const char * const degenerateRnaAlignmentPath =
+            "../dataset/example.099.deg.RNA.fasta";
+
+    const char * const alternativeAminoAcidAlignmentPath =
+            "../dataset/example.100.alt.AA.fasta";
+
     namespace formats
     {
         std::vector<const char *> legacyFormats {
