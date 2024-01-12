@@ -34,7 +34,7 @@ directory or move these files to '/usr/local/bin' or to '/usr/bin' using
 root privileges.
 
 
-Version 2.0 (beta)
+Version 2.0 (Release candidate)
 ==================
 The source code is available at the `Github repository 2.0_RC branch <https://github.com/inab/trimal/tree/2.0_RC>`_.
 You may clone it using git and then checkout the 2.0_RC branch::
