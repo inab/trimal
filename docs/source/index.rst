@@ -62,7 +62,13 @@ If you have any doubt or problem feel free to open a `Github issue <https://gith
 - :email:`Salvador Capella Gutierrez <salvador.capella@bsc.es>`
 
 
-
+Development team
+================
+- Nicolás Diaz Roussel
+- Salvador Capella Gutiérrez
+- Toni Gabaldón
+- Víctor Fernández Rodríguez (former)
+- Jose M. Silla Martínez (former)
 
 
 Indices and tables
