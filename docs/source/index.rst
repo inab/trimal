@@ -64,16 +64,9 @@ If you have any doubt or problem feel free to open a `Github issue <https://gith
 
 Development team
 ================
-- Nicolás Diaz Roussel
+- Nicolás Díaz Roussel
 - Salvador Capella Gutiérrez
 - Toni Gabaldón
 - Víctor Fernández Rodríguez (former)
 - Jose M. Silla Martínez (former)
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
