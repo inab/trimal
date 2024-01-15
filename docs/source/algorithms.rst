@@ -1,2 +1,2 @@
-Algorithms
+Trimming algorithms
 ***********************
