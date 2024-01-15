@@ -84,16 +84,4 @@ To calculate the column consistency score, it requires multiple alignments for t
     - :math:`matchedPairs[MSA_i][pos_j]` is the the count of matched pairs between the reference alignment and the :math:`i`-th alignment at position :math:`j`.
 
 
-Overlap Score
-========================
-Overlap score between two sequences is the ratio of shared valid residues divided by the sequence length taken as reference. A valid residue is any symbol other than a gap (-) or an indetermination.
-    
-        .. math::
-    
-            \text{overlapScore}[seq_i][seq_j] = \frac{\sum_{\text{k}=1}^{n} {res_{ik}} == {res_{jk}} \neq (gap\ or\ unknown)}{\sum_{\text{k}=1}^{n} {res_{ik}} \neq (gap\ or\ unknown)}
-    
-        Here:
-    
-        - :math:`seq_i` and :math:`seq_j` are the sequences to be compared.
-        - :math:`n` is the length of the MSA.
-        - :math:`res_{ik}` and :math:`res_{jk}` are the residues in position :math:`k` of sequences :math:`seq_i` and :math:`seq_j`.
+
