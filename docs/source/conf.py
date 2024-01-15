@@ -7,6 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'trimAl'
+copyright = '2024, trimAl team'
 author = 'trimAl team'
 release = '2.0-rc'
 version = release
