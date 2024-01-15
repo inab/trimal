@@ -11,6 +11,7 @@
    
    installation
    usage
+   scores
    algorithms
 
 
