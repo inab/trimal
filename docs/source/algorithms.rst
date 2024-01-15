@@ -67,4 +67,4 @@ The residue similarity score involves Mean Distance (MD) scores, inspired by Tho
 
         MD_{\text{k}} = e^{-Q_k}
 
-In trimAl v1.2, if the gap score for the column is equal to or less than 0.2, the :math:`MD` score is set to zero. This adjustment penalizes columns with numerous gaps, preventing those with few residues from receiving inflated scores. This penalty was introduced to address potential issues when trimming alignments based solely on similarity information.
+If the gap score for the column is equal to or less than 0.2, the :math:`MD` score is set to zero. This adjustment penalizes columns with numerous gaps, preventing those with few residues from receiving inflated scores. This penalty was introduced to address potential issues when trimming alignments based solely on similarity information.
