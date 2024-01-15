@@ -85,3 +85,6 @@ To calculate the column consistency score, it requires multiple alignments for t
 
 
 
+Window size
+========================
+This value determines the extent of columns on each side of a specified position that trimAl must take into account when calculating gap, similarity, or consistency scores for that position. If a window size is specified, trimAl calculates the average value across all the considered columns.
