@@ -9,7 +9,7 @@ The gap score for a column of size :math:`n` is calculated as the fraction of po
 
     .. math::
 
-        \text{gapScore} = \frac{\sum_{\text{i}=1}^{n} res_i \neq gap}{n}
+        gapScore = \frac{\sum_{i=1}^{n} res_i \neq gap}{n}
 
 
 .. _identity_score:
@@ -20,7 +20,7 @@ The identity score for any pair of sequences in the MSA is the ratio of identica
 
     .. math::
 
-        \text{seqIdentity}[seq_i][seq_j] = \frac{\sum_{\text{k}=1}^{n} {res_{ik}} == {res_{jk}}}{\sum_{\text{k}=1}^{n} {res_{ik}} \neq (gap\ or\ unknown)\ OR\ res_{jk} \neq (gap\ or\ unknown)}
+        seqIdentity[seq_i][seq_j] = \frac{\sum_{k=1}^{n} {res_{ik}} == {res_{jk}}}{\sum_{k=1}^{n} {res_{ik}} \neq (gap\ or\ unknown)\ OR\ res_{jk} \neq (gap\ or\ unknown)}
 
     Here:
 
@@ -40,7 +40,7 @@ The residue similarity score involves Mean Distance (MD) scores, inspired by Tho
 
     .. math::
 
-        \text{distMat}[res_i][res_j] = \sqrt{\sum_{\text{k}=1}^{n} (\text{subsMat}[res_k][res_i] - \text{subsMat}[res_k][res_j])^2}
+        distMat[res_i][res_j] = \sqrt{\sum_{k=1}^{n} (subsMat[res_k][res_i] - subsMat[res_k][res_j])^2}
 
     Here:
 
@@ -53,7 +53,7 @@ The residue similarity score involves Mean Distance (MD) scores, inspired by Tho
 
     .. math::
 
-        Q_{\text{k}} = \frac{\sum_{i=1}^{n} \sum_{j=1}^{n} \text{distMat}[res_{ik}][res_{jk}] \times \text{identityFactor}[seq_i][seq_j]}{\sum_{i=1}^{n} \sum_{j=1}^{n} \text{identityFactor}[seq_i][seq_j]}
+        Q_{k} = \frac{\sum_{i=1}^{n} \sum_{j=1}^{n} distMat[res_{ik}][res_{jk}] \times identityFactor[seq_i][seq_j]}{\sum_{i=1}^{n} \sum_{j=1}^{n} identityFactor[seq_i][seq_j]}
 
     Here:
 
@@ -65,7 +65,7 @@ The residue similarity score involves Mean Distance (MD) scores, inspired by Tho
 
     .. math::
 
-        MD_{\text{k}} = e^{-Q_k}
+        MD_{k} = e^{-Q_k}
 
 If the gap score for the column is equal to or less than 0.2, the :math:`MD` score is set to zero. This adjustment penalizes columns with numerous gaps, preventing those with few residues from receiving inflated scores. This penalty was introduced to address potential issues when trimming alignments based solely on similarity information.
 
