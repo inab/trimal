@@ -75,7 +75,7 @@ To calculate the column consistency score, it requires multiple alignments for t
 
     .. math::
 
-        CCS = \frac{\sum_{i=1}^{n}\sum_{j=1}^{m} matchedPairs[MSA_i][pos_j]}{n \cdot m}
+        consistencyScore = \frac{\sum_{i=1}^{n}\sum_{j=1}^{m} matchedPairs[MSA_i][pos_j]}{n \cdot m}
 
     Here:
 
