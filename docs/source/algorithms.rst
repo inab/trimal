@@ -68,3 +68,18 @@ The residue similarity score involves Mean Distance (MD) scores, inspired by Tho
         MD_{\text{k}} = e^{-Q_k}
 
 If the gap score for the column is equal to or less than 0.2, the :math:`MD` score is set to zero. This adjustment penalizes columns with numerous gaps, preventing those with few residues from receiving inflated scores. This penalty was introduced to address potential issues when trimming alignments based solely on similarity information.
+
+Consistency Score
+========================
+To calculate the column consistency score, it requires multiple alignments for the same set of sequences in the same order. Once you have selected a reference alignment, each aligned residue pair in the reference alignment is compared with the corresponding pairs in the other alignments. For every occurrence of a matched aligned residue pair in the other alignments, a score of 1 is added to the cumulative score. The final column consistency score is obtained by dividing the cumulative score by the total number of alignments considered and the total number of pairs in the reference alignment. This ensures that the final score ranges from 0 (indicating no aligned pair found in the other alignments) to 1 (implying all alignments share the same pairs, signifying full consistency).
+
+    .. math::
+
+        CCS = \frac{\sum_{i=1}^{n}\sum_{j=1}^{m} matchedPairs[MSA_i][pos_j]}{n \cdot m}
+
+    Here:
+
+    - :math:`n` is the number of alignments considered.
+    - :math:`m` is the number of pairs in the reference alignment.
+    - :math:`matchedPairs[MSA_i][pos_j]` is the the count of matched pairs between the reference alignment and the :math:`i`-th alignment at position :math:`j`.
+
