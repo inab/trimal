@@ -61,7 +61,7 @@ The residue similarity score involves Mean Distance (MD) scores, inspired by Tho
     - :math:`distMat[res_{ik}][res_{jk}]` is the distance between residues in position :math:`k` of sequences :math:`seq_i` and :math:`seq_j`.
     - :math:`identityFactor[seq_i][seq_j] = 1 - seqIdentity[seq_i][seq_j]`.
 
-4. **Calculate MD for one specific column:** Finally, the :math:`MD` for one specific column is the exponential function of - :math:`Q`.
+5. **Calculate MD for one specific column:** Finally, the :math:`MD` for one specific column is the exponential function of - :math:`Q`.
 
     .. math::
 
