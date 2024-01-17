@@ -137,6 +137,11 @@
         "count": 247,
         "uniques": 135,
         "request_date": "2024-01-16"
+      },
+      {
+        "count": 257,
+        "uniques": 137,
+        "request_date": "2024-01-17"
       }
     ]
   },
@@ -547,6 +552,22 @@
         "count": 30,
         "uniques": 18,
         "request_date": "2024-01-16"
+      },
+      {
+        "count": 32,
+        "uniques": 16,
+        "request_date": "2024-01-17"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/issues/25",
+    "title": "Error message on some alignments · Issue #25 · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 16,
+        "uniques": 12,
+        "request_date": "2024-01-17"
       }
     ]
   },
@@ -771,6 +792,11 @@
         "count": 19,
         "uniques": 8,
         "request_date": "2024-01-16"
+      },
+      {
+        "count": 20,
+        "uniques": 10,
+        "request_date": "2024-01-17"
       }
     ]
   },
@@ -892,6 +918,11 @@
         "count": 43,
         "uniques": 33,
         "request_date": "2024-01-16"
+      },
+      {
+        "count": 50,
+        "uniques": 38,
+        "request_date": "2024-01-17"
       }
     ]
   },
@@ -903,6 +934,11 @@
         "count": 14,
         "uniques": 4,
         "request_date": "2024-01-15"
+      },
+      {
+        "count": 18,
+        "uniques": 5,
+        "request_date": "2024-01-17"
       }
     ]
   },
@@ -919,6 +955,11 @@
         "count": 17,
         "uniques": 4,
         "request_date": "2024-01-16"
+      },
+      {
+        "count": 17,
+        "uniques": 4,
+        "request_date": "2024-01-17"
       }
     ]
   },
@@ -1060,6 +1101,11 @@
         "count": 45,
         "uniques": 12,
         "request_date": "2024-01-16"
+      },
+      {
+        "count": 45,
+        "uniques": 12,
+        "request_date": "2024-01-17"
       }
     ]
   },
@@ -1131,6 +1177,11 @@
         "count": 27,
         "uniques": 10,
         "request_date": "2024-01-16"
+      },
+      {
+        "count": 23,
+        "uniques": 9,
+        "request_date": "2024-01-17"
       }
     ]
   },
@@ -1408,6 +1459,11 @@
         "count": 34,
         "uniques": 14,
         "request_date": "2024-01-16"
+      },
+      {
+        "count": 41,
+        "uniques": 16,
+        "request_date": "2024-01-17"
       }
     ]
   },
