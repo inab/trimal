@@ -13,7 +13,6 @@ The gap score for a column of size :math:`n` is calculated as the fraction of po
 
 
 .. _identity_score:
-
 Identity Score
 ========================
 The identity score for any pair of sequences in the MSA is the ratio of identical residues by the sequence length, skipping positions where both residues are gaps or unknown.

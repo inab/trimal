@@ -13,6 +13,7 @@
    usage
    scores
    algorithms
+   benchmarking
 
 
 Welcome to trimAl's documentation!
