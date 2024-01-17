@@ -91,7 +91,7 @@ This process is equivalent to establishing upper and lower boundaries for the th
 
     .. math::
 
-        \text{SimThreshold} = P_{80} + 0.1 \times (P_{20} - P_{80})
+        \text{SimThreshold} = P_{80} + 0.1 \times (P_{20} - P_{80})^{10}
 
 This method of setting the similarity threshold has demonstrated optimal performance in our benchmarks. The lower and upper boundaries ensure that the 20% most conserved columns in the alignment are preserved, while the 20% most dissimilar columns are discarded.
 
