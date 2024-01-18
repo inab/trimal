@@ -1,125 +1,1572 @@
-
 [
   {
     "path": "/inab/trimal",
-    "title": "inab/trimal: A tool for automated alignment trimming in large-scale phylogene...",
-    "count": 276,
-    "uniques": 145
-  },
-  {
-    "path": "/inab/trimal/tree/trimAl/source",
-    "title": "trimal/source at trimAl · inab/trimal · GitHub",
-    "count": 72,
-    "uniques": 20
-  },
-  {
-    "path": "/inab/trimal/blob/trimAl/.github/workflows/traffic.yml",
-    "title": "trimal/.github/workflows/traffic.yml at trimAl · inab/trimal",
-    "count": 65,
-    "uniques": 3
-  },
-  {
-    "path": "/inab/trimal/tree/trimAl/.github/workflows",
-    "title": "trimal/.github/workflows at trimAl · inab/trimal · GitHub",
-    "count": 55,
-    "uniques": 11
+    "title": "GitHub - inab/trimal: A tool for automated alignment trimming in large-scale ...",
+    "views": [
+      {
+        "count": 271,
+        "uniques": 146,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 253,
+        "uniques": 138,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 264,
+        "uniques": 143,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 225,
+        "uniques": 135,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 210,
+        "uniques": 124,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 192,
+        "uniques": 118,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 184,
+        "uniques": 110,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 178,
+        "uniques": 104,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 155,
+        "uniques": 98,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 159,
+        "uniques": 99,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 158,
+        "uniques": 102,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 139,
+        "uniques": 91,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 137,
+        "uniques": 87,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 135,
+        "uniques": 86,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 135,
+        "uniques": 86,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 136,
+        "uniques": 86,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 158,
+        "uniques": 97,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 160,
+        "uniques": 94,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 163,
+        "uniques": 96,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 165,
+        "uniques": 97,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 177,
+        "uniques": 95,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 197,
+        "uniques": 106,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 214,
+        "uniques": 114,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 223,
+        "uniques": 119,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 236,
+        "uniques": 126,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 238,
+        "uniques": 131,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 247,
+        "uniques": 135,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 257,
+        "uniques": 137,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 264,
+        "uniques": 147,
+        "request_date": "2024-01-18"
+      }
+    ]
   },
   {
     "path": "/inab/trimal/actions",
     "title": "Workflow runs · inab/trimal · GitHub",
-    "count": 40,
-    "uniques": 3
+    "views": [
+      {
+        "count": 17,
+        "uniques": 2,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 19,
+        "uniques": 3,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 19,
+        "uniques": 3,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 18,
+        "uniques": 3,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 18,
+        "uniques": 3,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 18,
+        "uniques": 3,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 18,
+        "uniques": 3,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 16,
+        "uniques": 3,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 16,
+        "uniques": 3,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 16,
+        "uniques": 3,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 16,
+        "uniques": 3,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 16,
+        "uniques": 3,
+        "request_date": "2024-01-02"
+      }
+    ]
   },
   {
-    "path": "/inab/trimal/tree/trimAl/scripts",
-    "title": "trimal/scripts at trimAl · inab/trimal · GitHub",
-    "count": 38,
-    "uniques": 10
-  },
-  {
-    "path": "/inab/trimal/tree/trimAl/dataset",
-    "title": "trimal/dataset at trimAl · inab/trimal · GitHub",
-    "count": 37,
-    "uniques": 9
-  },
-  {
-    "path": "/inab/trimal/pulls",
-    "title": "Pull requests · inab/trimal",
-    "count": 37,
-    "uniques": 5
-  },
-  {
-    "path": "/inab/trimal/actions/workflows/traffic.yml",
-    "title": "Trigger traffic workflow · Workflow runs · inab/trimal",
-    "count": 31,
-    "uniques": 1
-  },
-  {
-    "path": "/inab/trimal/edit/trimAl/.github/workflows/traffic.yml",
-    "title": "Editing trimal/.github/workflows/traffic.yml at trimAl · inab/trimal",
-    "count": 30,
-    "uniques": 1
-  }
-]
-[
-  {
-    "path": "/inab/trimal",
-    "title": "trimal/ at trimAl · inab/trimal",
-    "count": 272,
-    "uniques": 160
+    "path": "/inab/trimal/actions/workflows/traffic_test.yml",
+    "title": "Traffic workflow test · Workflow runs · inab/trimal",
+    "views": [
+      {
+        "count": 26,
+        "uniques": 1,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 26,
+        "uniques": 1,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 26,
+        "uniques": 1,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 26,
+        "uniques": 1,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 26,
+        "uniques": 1,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 26,
+        "uniques": 1,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 26,
+        "uniques": 1,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 26,
+        "uniques": 1,
+        "request_date": "2023-12-28"
+      }
+    ]
   },
   {
     "path": "/inab/trimal/blob/trimAl/.github/workflows/traffic.yml",
-    "title": "trimal/.github/workflows/traffic.yml at trimAl · inab/trimal",
-    "count": 58,
-    "uniques": 2
+    "title": "trimal/.github/workflows/traffic.yml at trimAl · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 10,
+        "uniques": 3,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 14,
+        "uniques": 4,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 14,
+        "uniques": 4,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 14,
+        "uniques": 4,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 14,
+        "uniques": 4,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 14,
+        "uniques": 4,
+        "request_date": "2024-01-15"
+      }
+    ]
   },
   {
-    "path": "/inab/trimal/actions/workflows/traffic.yml",
-    "title": "Trigger traffic workflow · Workflow runs · inab/trimal",
-    "count": 56,
-    "uniques": 1
-  },
-  {
-    "path": "/inab/trimal/tree/trimAl/source",
-    "title": "trimal/source at trimAl · inab/trimal · GitHub",
-    "count": 53,
-    "uniques": 15
-  },
-  {
-    "path": "/inab/trimal/tree/trimAl/scripts",
-    "title": "trimal/scripts at trimAl · inab/trimal · GitHub",
-    "count": 43,
-    "uniques": 13
-  },
-  {
-    "path": "/inab/trimal/tree/trimAl/.github/workflows",
-    "title": "trimal/.github/workflows at trimAl · inab/trimal · GitHub",
-    "count": 38,
-    "uniques": 13
-  },
-  {
-    "path": "/inab/trimal/edit/trimAl/.github/workflows/traffic.yml",
-    "title": "Editing trimal/.github/workflows/traffic.yml at trimAl · inab/trimal",
-    "count": 36,
-    "uniques": 1
-  },
-  {
-    "path": "/inab/trimal/releases/tag/v1.4.1",
-    "title": "Release Stable release of trimAl v1.4.1 · inab/trimal · GitHub",
-    "count": 27,
-    "uniques": 22
+    "path": "/inab/trimal/blob/trimAl/README",
+    "title": "trimal/README at trimAl · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 24,
+        "uniques": 9,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 24,
+        "uniques": 9,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 24,
+        "uniques": 9,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 18,
+        "uniques": 7,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 18,
+        "uniques": 7,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 18,
+        "uniques": 7,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 18,
+        "uniques": 7,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 18,
+        "uniques": 8,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 20,
+        "uniques": 9,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 20,
+        "uniques": 9,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 20,
+        "uniques": 9,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 16,
+        "uniques": 7,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 14,
+        "uniques": 6,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 18,
+        "uniques": 8,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 20,
+        "uniques": 9,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 21,
+        "uniques": 9,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 21,
+        "uniques": 9,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 21,
+        "uniques": 9,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 23,
+        "uniques": 10,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 17,
+        "uniques": 8,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 13,
+        "uniques": 6,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 13,
+        "uniques": 6,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 15,
+        "uniques": 7,
+        "request_date": "2024-01-16"
+      }
+    ]
   },
   {
     "path": "/inab/trimal/blob/trimAl/dataset/matrix.degenerated_dna",
     "title": "File not found · GitHub",
-    "count": 27,
-    "uniques": 8
+    "views": [
+      {
+        "count": 20,
+        "uniques": 6,
+        "request_date": "2024-01-18"
+      }
+    ]
   },
   {
-    "path": "/inab/trimal/blob/schedule-traffic-workflow/.github/workflows/traffic.yml",
-    "title": "trimal/.github/workflows/traffic.yml at schedule-traffic-workflow · inab/trimal",
-    "count": 24,
-    "uniques": 1
+    "path": "/inab/trimal/issues",
+    "title": "Issues · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 26,
+        "uniques": 13,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 25,
+        "uniques": 12,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 26,
+        "uniques": 13,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 23,
+        "uniques": 12,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 18,
+        "uniques": 12,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 19,
+        "uniques": 13,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 19,
+        "uniques": 13,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 17,
+        "uniques": 12,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 22,
+        "uniques": 14,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 24,
+        "uniques": 14,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 23,
+        "uniques": 14,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 20,
+        "uniques": 12,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 20,
+        "uniques": 12,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 20,
+        "uniques": 12,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 26,
+        "uniques": 17,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 25,
+        "uniques": 16,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 23,
+        "uniques": 15,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 24,
+        "uniques": 15,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 22,
+        "uniques": 14,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 22,
+        "uniques": 12,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 29,
+        "uniques": 16,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 28,
+        "uniques": 15,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 27,
+        "uniques": 15,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 29,
+        "uniques": 17,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 30,
+        "uniques": 18,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 29,
+        "uniques": 17,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 30,
+        "uniques": 18,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 32,
+        "uniques": 16,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 35,
+        "uniques": 18,
+        "request_date": "2024-01-18"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/issues/25",
+    "title": "Error message on some alignments · Issue #25 · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 16,
+        "uniques": 12,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 20,
+        "uniques": 13,
+        "request_date": "2024-01-18"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/issues/53",
+    "title": "trimAl doesn't recognise alignment · Issue #53 · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 13,
+        "uniques": 11,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 12,
+        "uniques": 10,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 12,
+        "uniques": 8,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 12,
+        "uniques": 8,
+        "request_date": "2024-01-07"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/issues/93",
+    "title": "errors of \"Segmentation fault (core dumped)\" · Issue #93 · inab/trimal",
+    "views": [
+      {
+        "count": 15,
+        "uniques": 3,
+        "request_date": "2023-12-21"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/pull/94",
+    "title": "Update traffic data by nicodr97 · Pull Request #94 · inab/trimal",
+    "views": [
+      {
+        "count": 18,
+        "uniques": 1,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 18,
+        "uniques": 1,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 18,
+        "uniques": 1,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 18,
+        "uniques": 1,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 18,
+        "uniques": 1,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 18,
+        "uniques": 1,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 18,
+        "uniques": 1,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 18,
+        "uniques": 1,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 11,
+        "uniques": 1,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 13,
+        "uniques": 1,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 13,
+        "uniques": 1,
+        "request_date": "2024-01-13"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/pulls",
+    "title": "Pull requests · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 19,
+        "uniques": 5,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 16,
+        "uniques": 5,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 17,
+        "uniques": 6,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 17,
+        "uniques": 6,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 14,
+        "uniques": 6,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 15,
+        "uniques": 7,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 15,
+        "uniques": 7,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 9,
+        "uniques": 6,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 10,
+        "uniques": 5,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 12,
+        "uniques": 6,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 13,
+        "uniques": 7,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 13,
+        "uniques": 7,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 13,
+        "uniques": 6,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 17,
+        "uniques": 8,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 17,
+        "uniques": 8,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 18,
+        "uniques": 8,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 18,
+        "uniques": 8,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 18,
+        "uniques": 8,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 17,
+        "uniques": 7,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 19,
+        "uniques": 8,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 20,
+        "uniques": 10,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 16,
+        "uniques": 10,
+        "request_date": "2024-01-18"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/releases/tag/v1.4.1",
+    "title": "Release Stable release of trimAl v1.4.1 · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 20,
+        "uniques": 16,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 18,
+        "uniques": 16,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 18,
+        "uniques": 16,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 15,
+        "uniques": 14,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 14,
+        "uniques": 13,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 16,
+        "uniques": 15,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 18,
+        "uniques": 16,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 18,
+        "uniques": 16,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 20,
+        "uniques": 16,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 19,
+        "uniques": 15,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 17,
+        "uniques": 13,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 21,
+        "uniques": 17,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 22,
+        "uniques": 17,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 23,
+        "uniques": 18,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 24,
+        "uniques": 19,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 22,
+        "uniques": 17,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 26,
+        "uniques": 22,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 32,
+        "uniques": 23,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 34,
+        "uniques": 24,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 40,
+        "uniques": 28,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 41,
+        "uniques": 30,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 40,
+        "uniques": 30,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 43,
+        "uniques": 33,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 50,
+        "uniques": 38,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 46,
+        "uniques": 35,
+        "request_date": "2024-01-18"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/tree/2.0_RC",
+    "title": "inab/trimal at 2.0_RC",
+    "views": [
+      {
+        "count": 14,
+        "uniques": 4,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 18,
+        "uniques": 5,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 19,
+        "uniques": 5,
+        "request_date": "2024-01-18"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/.github",
+    "title": "trimal/.github at trimAl · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 11,
+        "uniques": 3,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 17,
+        "uniques": 4,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 17,
+        "uniques": 4,
+        "request_date": "2024-01-17"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/.github/workflows",
+    "title": "trimal/.github/workflows at trimAl · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 18,
+        "uniques": 6,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 18,
+        "uniques": 6,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 22,
+        "uniques": 6,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 22,
+        "uniques": 6,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 24,
+        "uniques": 7,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 16,
+        "uniques": 5,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 20,
+        "uniques": 7,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 20,
+        "uniques": 7,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 22,
+        "uniques": 8,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 22,
+        "uniques": 8,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 22,
+        "uniques": 8,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 22,
+        "uniques": 8,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 20,
+        "uniques": 7,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 20,
+        "uniques": 8,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 20,
+        "uniques": 8,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 30,
+        "uniques": 10,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 27,
+        "uniques": 9,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 28,
+        "uniques": 9,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 28,
+        "uniques": 9,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 24,
+        "uniques": 7,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 26,
+        "uniques": 8,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 28,
+        "uniques": 8,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 36,
+        "uniques": 11,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 38,
+        "uniques": 12,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 38,
+        "uniques": 12,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 38,
+        "uniques": 12,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 45,
+        "uniques": 12,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 45,
+        "uniques": 12,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 31,
+        "uniques": 10,
+        "request_date": "2024-01-18"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/dataset",
+    "title": "trimal/dataset at trimAl · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 12,
+        "uniques": 5,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 20,
+        "uniques": 8,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 20,
+        "uniques": 8,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 18,
+        "uniques": 7,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 18,
+        "uniques": 7,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 16,
+        "uniques": 6,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 19,
+        "uniques": 7,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 17,
+        "uniques": 6,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 19,
+        "uniques": 7,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 21,
+        "uniques": 8,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 21,
+        "uniques": 8,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 23,
+        "uniques": 9,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 27,
+        "uniques": 10,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 23,
+        "uniques": 9,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 15,
+        "uniques": 6,
+        "request_date": "2024-01-18"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/scripts",
+    "title": "trimal/scripts at trimAl · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 24,
+        "uniques": 12,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 24,
+        "uniques": 12,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 24,
+        "uniques": 12,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 23,
+        "uniques": 9,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 21,
+        "uniques": 8,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 19,
+        "uniques": 7,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 22,
+        "uniques": 8,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 22,
+        "uniques": 7,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 24,
+        "uniques": 8,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 24,
+        "uniques": 8,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 24,
+        "uniques": 8,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 29,
+        "uniques": 9,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 29,
+        "uniques": 9,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 29,
+        "uniques": 9,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 29,
+        "uniques": 9,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 22,
+        "uniques": 8,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 22,
+        "uniques": 8,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 22,
+        "uniques": 8,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 20,
+        "uniques": 7,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 17,
+        "uniques": 6,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 13,
+        "uniques": 5,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 13,
+        "uniques": 6,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 15,
+        "uniques": 7,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 15,
+        "uniques": 7,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 14,
+        "uniques": 7,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 16,
+        "uniques": 8,
+        "request_date": "2024-01-16"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/source",
+    "title": "trimal/source at trimAl · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 45,
+        "uniques": 15,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 40,
+        "uniques": 13,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 40,
+        "uniques": 13,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 31,
+        "uniques": 11,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 29,
+        "uniques": 10,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 27,
+        "uniques": 9,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 29,
+        "uniques": 10,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 31,
+        "uniques": 11,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 33,
+        "uniques": 11,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 32,
+        "uniques": 11,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 34,
+        "uniques": 12,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 25,
+        "uniques": 10,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 19,
+        "uniques": 8,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 19,
+        "uniques": 8,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 20,
+        "uniques": 8,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 20,
+        "uniques": 8,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 24,
+        "uniques": 9,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 24,
+        "uniques": 9,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 24,
+        "uniques": 9,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 22,
+        "uniques": 8,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 28,
+        "uniques": 10,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 28,
+        "uniques": 11,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 32,
+        "uniques": 13,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 32,
+        "uniques": 13,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 32,
+        "uniques": 13,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 32,
+        "uniques": 13,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 34,
+        "uniques": 14,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 41,
+        "uniques": 16,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 45,
+        "uniques": 17,
+        "request_date": "2024-01-18"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/traffic",
+    "title": "trimal/traffic at trimAl · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 23,
+        "uniques": 5,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 23,
+        "uniques": 5,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 23,
+        "uniques": 5,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 18,
+        "uniques": 3,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 18,
+        "uniques": 3,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 18,
+        "uniques": 3,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 18,
+        "uniques": 3,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 16,
+        "uniques": 3,
+        "request_date": "2023-12-28"
+      }
+    ]
   }
 ]

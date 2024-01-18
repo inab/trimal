@@ -1,105 +1,1527 @@
-
 [
   {
-    "referrer": "trimal.cgenomics.org",
-    "count": 229,
-    "uniques": 71
+    "referrer": "Bing",
+    "views": [
+      {
+        "count": 22,
+        "uniques": 10,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 19,
+        "uniques": 10,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 20,
+        "uniques": 11,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 14,
+        "uniques": 10,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 15,
+        "uniques": 11,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 21,
+        "uniques": 12,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 35,
+        "uniques": 13,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 33,
+        "uniques": 13,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 58,
+        "uniques": 14,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 60,
+        "uniques": 16,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 61,
+        "uniques": 17,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 60,
+        "uniques": 16,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 62,
+        "uniques": 16,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 64,
+        "uniques": 15,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 62,
+        "uniques": 14,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 64,
+        "uniques": 15,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 69,
+        "uniques": 17,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 69,
+        "uniques": 17,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 65,
+        "uniques": 17,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 51,
+        "uniques": 16,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 52,
+        "uniques": 16,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 27,
+        "uniques": 15,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 30,
+        "uniques": 15,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 29,
+        "uniques": 14,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 28,
+        "uniques": 13,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 26,
+        "uniques": 13,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 26,
+        "uniques": 14,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 26,
+        "uniques": 14,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 29,
+        "uniques": 14,
+        "request_date": "2024-01-18"
+      }
+    ]
   },
   {
     "referrer": "Google",
-    "count": 171,
-    "uniques": 47
+    "views": [
+      {
+        "count": 116,
+        "uniques": 37,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 114,
+        "uniques": 35,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 118,
+        "uniques": 37,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 86,
+        "uniques": 34,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 87,
+        "uniques": 34,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 97,
+        "uniques": 38,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 82,
+        "uniques": 32,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 82,
+        "uniques": 33,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 88,
+        "uniques": 33,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 89,
+        "uniques": 33,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 89,
+        "uniques": 33,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 62,
+        "uniques": 24,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 46,
+        "uniques": 22,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 47,
+        "uniques": 24,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 48,
+        "uniques": 26,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 72,
+        "uniques": 30,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 82,
+        "uniques": 34,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 78,
+        "uniques": 32,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 72,
+        "uniques": 29,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 75,
+        "uniques": 31,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 83,
+        "uniques": 32,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 90,
+        "uniques": 35,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 96,
+        "uniques": 37,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 106,
+        "uniques": 41,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 106,
+        "uniques": 41,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 108,
+        "uniques": 43,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 116,
+        "uniques": 43,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 127,
+        "uniques": 45,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 104,
+        "uniques": 43,
+        "request_date": "2024-01-18"
+      }
+    ]
   },
   {
-    "referrer": "Bing",
-    "count": 57,
-    "uniques": 12
+    "referrer": "blog.genoglobe.com",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-12"
+      }
+    ]
   },
   {
     "referrer": "cn.bing.com",
-    "count": 29,
-    "uniques": 19
+    "views": [
+      {
+        "count": 31,
+        "uniques": 16,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 27,
+        "uniques": 17,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 30,
+        "uniques": 19,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 33,
+        "uniques": 20,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 34,
+        "uniques": 20,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 32,
+        "uniques": 18,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 32,
+        "uniques": 18,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 24,
+        "uniques": 16,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 27,
+        "uniques": 19,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 29,
+        "uniques": 20,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 30,
+        "uniques": 20,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 29,
+        "uniques": 19,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 29,
+        "uniques": 19,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 22,
+        "uniques": 16,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 40,
+        "uniques": 18,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 37,
+        "uniques": 15,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 34,
+        "uniques": 14,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 32,
+        "uniques": 13,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 32,
+        "uniques": 13,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 33,
+        "uniques": 13,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 33,
+        "uniques": 13,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 30,
+        "uniques": 11,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 34,
+        "uniques": 10,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 34,
+        "uniques": 9,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 35,
+        "uniques": 10,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 36,
+        "uniques": 11,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 66,
+        "uniques": 12,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 45,
+        "uniques": 8,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 50,
+        "uniques": 11,
+        "request_date": "2024-01-18"
+      }
+    ]
   },
   {
     "referrer": "github.com",
-    "count": 23,
-    "uniques": 8
+    "views": [
+      {
+        "count": 14,
+        "uniques": 9,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 12,
+        "uniques": 7,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 13,
+        "uniques": 8,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 13,
+        "uniques": 8,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 12,
+        "uniques": 7,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 10,
+        "uniques": 6,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 10,
+        "uniques": 6,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 9,
+        "uniques": 5,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 10,
+        "uniques": 6,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 10,
+        "uniques": 6,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 12,
+        "uniques": 8,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 8,
+        "uniques": 7,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 8,
+        "uniques": 7,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 8,
+        "uniques": 6,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 19,
+        "uniques": 6,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 19,
+        "uniques": 6,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 19,
+        "uniques": 6,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 19,
+        "uniques": 6,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 19,
+        "uniques": 6,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 24,
+        "uniques": 7,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 24,
+        "uniques": 7,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 23,
+        "uniques": 6,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 22,
+        "uniques": 5,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 22,
+        "uniques": 5,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 23,
+        "uniques": 6,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 25,
+        "uniques": 8,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 25,
+        "uniques": 9,
+        "request_date": "2024-01-18"
+      }
+    ]
+  },
+  {
+    "referrer": "hatenablog-parts.com",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 7,
+        "uniques": 4,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 8,
+        "uniques": 5,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 8,
+        "uniques": 5,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 8,
+        "uniques": 5,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 8,
+        "uniques": 5,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 8,
+        "uniques": 5,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 8,
+        "uniques": 5,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-01-18"
+      }
+    ]
+  },
+  {
+    "referrer": "illumination-k.dev",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2023-12-24"
+      }
+    ]
   },
   {
     "referrer": "jianshu.com",
-    "count": 15,
-    "uniques": 3
+    "views": [
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-18"
+      }
+    ]
   },
   {
-    "referrer": "vicfero.github.io",
-    "count": 7,
-    "uniques": 2
-  },
-  {
-    "referrer": "DuckDuckGo",
-    "count": 1,
-    "uniques": 1
-  },
-  {
-    "referrer": "mail.google.com",
-    "count": 1,
-    "uniques": 1
-  },
-  {
-    "referrer": "toolshed.g2.bx.psu.edu",
-    "count": 1,
-    "uniques": 1
-  }
-]
-[
-  {
-    "referrer": "trimal.cgenomics.org",
-    "count": 282,
-    "uniques": 91
-  },
-  {
-    "referrer": "Google",
-    "count": 116,
-    "uniques": 49
-  },
-  {
-    "referrer": "cn.bing.com",
-    "count": 39,
-    "uniques": 26
-  },
-  {
-    "referrer": "github.com",
-    "count": 36,
-    "uniques": 10
-  },
-  {
-    "referrer": "Bing",
-    "count": 23,
-    "uniques": 12
-  },
-  {
-    "referrer": "vicfero.github.io",
-    "count": 3,
-    "uniques": 3
-  },
-  {
-    "referrer": "jianshu.com",
-    "count": 3,
-    "uniques": 2
+    "referrer": "kazumaxneo.hatenablog.com",
+    "views": [
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-18"
+      }
+    ]
   },
   {
     "referrer": "merenlab.org",
-    "count": 1,
-    "uniques": 1
+    "views": [
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 14,
+        "uniques": 2,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 14,
+        "uniques": 2,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 14,
+        "uniques": 2,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 14,
+        "uniques": 2,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 14,
+        "uniques": 2,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 15,
+        "uniques": 3,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 15,
+        "uniques": 3,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 15,
+        "uniques": 3,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 15,
+        "uniques": 3,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 14,
+        "uniques": 3,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 14,
+        "uniques": 3,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 13,
+        "uniques": 2,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 13,
+        "uniques": 2,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-01-10"
+      }
+    ]
   },
   {
-    "referrer": "toolshed.g2.bx.psu.edu",
-    "count": 1,
-    "uniques": 1
+    "referrer": "opsonlyoffice02.bsc.es",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-12"
+      }
+    ]
   },
   {
-    "referrer": "so.com",
-    "count": 1,
-    "uniques": 1
+    "referrer": "researchgate.net",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-03"
+      }
+    ]
+  },
+  {
+    "referrer": "spack.readthedocs.io",
+    "views": [
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-01-11"
+      }
+    ]
+  },
+  {
+    "referrer": "trimal.cgenomics.org",
+    "views": [
+      {
+        "count": 235,
+        "uniques": 71,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 222,
+        "uniques": 66,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 219,
+        "uniques": 64,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 164,
+        "uniques": 59,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 152,
+        "uniques": 52,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 126,
+        "uniques": 47,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 119,
+        "uniques": 44,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 127,
+        "uniques": 41,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 107,
+        "uniques": 33,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 101,
+        "uniques": 33,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 96,
+        "uniques": 33,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 90,
+        "uniques": 30,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 90,
+        "uniques": 26,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 89,
+        "uniques": 26,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 100,
+        "uniques": 27,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 119,
+        "uniques": 29,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 103,
+        "uniques": 32,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 108,
+        "uniques": 32,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 108,
+        "uniques": 32,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 111,
+        "uniques": 34,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 132,
+        "uniques": 35,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 157,
+        "uniques": 44,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 165,
+        "uniques": 49,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 177,
+        "uniques": 52,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 194,
+        "uniques": 55,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 185,
+        "uniques": 55,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 193,
+        "uniques": 56,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 217,
+        "uniques": 60,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 214,
+        "uniques": 68,
+        "request_date": "2024-01-18"
+      }
+    ]
+  },
+  {
+    "referrer": "trimal.readthedocs.io",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-18"
+      }
+    ]
+  },
+  {
+    "referrer": "vicfero.github.io",
+    "views": [
+      {
+        "count": 18,
+        "uniques": 6,
+        "request_date": "2023-12-21"
+      },
+      {
+        "count": 17,
+        "uniques": 5,
+        "request_date": "2023-12-22"
+      },
+      {
+        "count": 17,
+        "uniques": 5,
+        "request_date": "2023-12-23"
+      },
+      {
+        "count": 12,
+        "uniques": 5,
+        "request_date": "2023-12-24"
+      },
+      {
+        "count": 12,
+        "uniques": 5,
+        "request_date": "2023-12-25"
+      },
+      {
+        "count": 12,
+        "uniques": 5,
+        "request_date": "2023-12-26"
+      },
+      {
+        "count": 11,
+        "uniques": 5,
+        "request_date": "2023-12-27"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2023-12-28"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2023-12-29"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2023-12-30"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2023-12-31"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-01"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-02"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-03"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-04"
+      },
+      {
+        "count": 6,
+        "uniques": 3,
+        "request_date": "2024-01-05"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2024-01-06"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2024-01-07"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2024-01-08"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2024-01-09"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2024-01-10"
+      },
+      {
+        "count": 14,
+        "uniques": 5,
+        "request_date": "2024-01-11"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2024-01-12"
+      },
+      {
+        "count": 13,
+        "uniques": 5,
+        "request_date": "2024-01-13"
+      },
+      {
+        "count": 13,
+        "uniques": 5,
+        "request_date": "2024-01-14"
+      },
+      {
+        "count": 17,
+        "uniques": 6,
+        "request_date": "2024-01-15"
+      },
+      {
+        "count": 17,
+        "uniques": 6,
+        "request_date": "2024-01-16"
+      },
+      {
+        "count": 17,
+        "uniques": 6,
+        "request_date": "2024-01-17"
+      },
+      {
+        "count": 15,
+        "uniques": 5,
+        "request_date": "2024-01-18"
+      }
+    ]
   }
 ]
