@@ -114,13 +114,9 @@ From this similarity distribution, trimAl selects the values at percentiles 20 a
 
         P_{80} = \log(\text{Simvalue}_{80})
 
-        SimThreshold = \left( \frac{{P_{20} - P_{80}}}{10} + P_{80} \right)^{10}
+        SimThreshold = \left(P_{80} + \frac{{P_{20} - P_{80}}}{10} \right)^{10}
 
 This process is equivalent to establishing upper and lower boundaries for the threshold at percentiles 20 and 80, respectively, of the similarity score distribution in that alignment. The similarity threshold is calculated using the difference between these two boundaries, being at 1/10 to the lower boundary (similarity at P80).
-
-    .. math::
-
-        \text{SimThreshold} = P_{80} + 0.1 \times (P_{20} - P_{80})^{10}
 
 This method of setting the similarity threshold has demonstrated optimal performance in our benchmarks. The lower and upper boundaries ensure that the 20% most conserved columns in the alignment are preserved, while the 20% most dissimilar columns are discarded.
 
