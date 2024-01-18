@@ -15,11 +15,11 @@ The gap score for a column of size :math:`n` is calculated as the fraction of po
 .. _identity_score:
 Identity Score
 ========================
-The identity score for any pair of sequences in the MSA is the ratio of identical residues by the sequence length, skipping positions where both residues are gaps or unknown.
+The identity score for any pair of sequences in the MSA is the ratio of identical residues by the sequence length, skipping positions where both residues are gaps or indeterminations.
 
     .. math::
 
-        seqIdentity[seq_i][seq_j] = \frac{\sum_{k=1}^{n} {res_{ik}} == {res_{jk}}}{\sum_{k=1}^{n} {res_{ik}} \neq (gap\ or\ unknown)\ OR\ res_{jk} \neq (gap\ or\ unknown)}
+        seqIdentity[seq_i][seq_j] = \frac{\sum_{k=1}^{n} {res_{ik}} == {res_{jk}}}{\sum_{k=1}^{n} {res_{ik}} \neq (gap\ or\ indetermination)\ OR\ res_{jk} \neq (gap\ or\ indetermination)}
 
     Here:
 
@@ -82,6 +82,27 @@ To calculate the column consistency score, it requires multiple alignments for t
     - :math:`n` is the number of alignments considered.
     - :math:`m` is the number of pairs in the reference alignment.
     - :math:`matchedPairs[MSA_i][pos_j]` is the the count of matched pairs between the reference alignment and the :math:`i`-th alignment at position :math:`j`.
+
+
+Overlap Score
+========================
+The overlap score of a sequence is defined as the ratio of valid residues to the total number of residues in the sequence. The validity of a residue is determined through the following process:
+
+    1. Count the number of sequences in the multiple sequence alignment (MSA) that have the same residue as the reference sequence at a specific position. Include cases where both the reference residue and the considered residue are neither indeterminate nor gaps.
+    2. If the number of occurrences is greater than or equal to the residue overlap threshold, the residue is considered valid.
+
+
+    .. math::
+
+        {overlapScore_i} = \frac{validResidues_i}{n}
+
+    Here:
+
+    - :math:`i` is index of the sequence.
+    - :math:`n` is the lenght of the MSA.
+    - :math:`validResidues_i` is the number of valid residues in sequence :math:`i`.
+    
+        
 
 
 Window size
