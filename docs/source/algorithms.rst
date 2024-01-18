@@ -30,6 +30,35 @@ prioritizing the extension of longer and central blocks.
 When provided with a set of multiple sequence alignments, trimAl calculates a consistency score for each alignment in the set. Subsequently, the alignment with the highest score is selected. The chosen alignment can undergo various trimming methods, one of which involves removing columns that exhibit lower consistency across the other alignments. To achieve this, the user can utilize the *-ct* parameter to define the minimum values for the consistency score, within the range of 0 to 1. Any columns not meeting this specified value will be removed. Alternatively, the conservation score, as explained previously, can also be employed here. Moreover, it can be used in conjunction with gap and/or similarity methods.
 
 
+Overlap trimming
+------------------------
+trimAl can also remove poorly aligned or incomplete sequences considering the rest of
+sequences in the MSA. For that purpose, the user has to define two thresholds:
+First, the residue overlap threshold (-resoverlap) corresponds to the minimum residue
+overlap score for each residue.
+Second, the sequence overlap threshold (-seqoverlap) sets up the minimum percentage of
+the residues for each sequence that should pass the residue overlap threshold in order to
+maintain the sequence in the new alignment. Sequences that do not pass the sequence
+overlap threshold will be removed from the alignment. Finally, all columns that only have
+gaps in the new alignment will also be removed from the final alignment.
+
+trimAl can effectively eliminate poorly aligned or incomplete sequences while considering the entire multiple sequence alignment (MSA). To achieve this, users need to specify two thresholds:
+
+    1. **Residue Overlap Threshold (-resoverlap):** This threshold corresponds to the minimum residue overlap score required for each residue.
+
+    2. **Sequence Overlap Threshold (-seqoverlap):** This threshold establishes the minimum percentage of residues within each sequence that must surpass the residue overlap threshold to retain the sequence in the new alignment. Sequences failing to meet this criterion will be excluded from the final alignment.
+
+Additionally, columns exclusively filled with gaps in the new alignment will be systematically removed.
+
+.. _overlap-example-figure:
+.. figure:: _static/overlap_example.png
+    :name: overlap-example
+    :width: 500px
+    :align: center
+    :alt: Overlap example MSA
+
+    An example of an alignment trimmed with the overlap method. We have used the same alignment as in :numref:`gappyout-example-figure`. Conserved (grey) and trimmed (white) columns are indicated.
+
 Automated methods
 ========================
 
@@ -147,32 +176,3 @@ Making use of a decision tree (:numref:`gappyout-example-figure`) , this heurist
 
     A decision tree for the heuristic method automated1. trimAl uses strict (light blue) or gappyout (light grey) methods depending on 1) the average identity score (Avg. identity score) among the sequences in the alignment, 2) the number of sequences in the alignment and 3) the average identity score (max Identity Score) computed from the maximum identity score for each sequence in the alignment. We use light yellow color to highlight the decisions in the tree.
 
-
-Overlap trimming
-------------------------
-trimAl can also remove poorly aligned or incomplete sequences considering the rest of
-sequences in the MSA. For that purpose, the user has to define two thresholds:
-First, the residue overlap threshold (-resoverlap) corresponds to the minimum residue
-overlap score for each residue.
-Second, the sequence overlap threshold (-seqoverlap) sets up the minimum percentage of
-the residues for each sequence that should pass the residue overlap threshold in order to
-maintain the sequence in the new alignment. Sequences that do not pass the sequence
-overlap threshold will be removed from the alignment. Finally, all columns that only have
-gaps in the new alignment will also be removed from the final alignment.
-
-trimAl can effectively eliminate poorly aligned or incomplete sequences while considering the entire multiple sequence alignment (MSA). To achieve this, users need to specify two thresholds:
-
-    1. **Residue Overlap Threshold (-resoverlap):** This threshold corresponds to the minimum residue overlap score required for each residue.
-
-    2. **Sequence Overlap Threshold (-seqoverlap):** This threshold establishes the minimum percentage of residues within each sequence that must surpass the residue overlap threshold to retain the sequence in the new alignment. Sequences failing to meet this criterion will be excluded from the final alignment.
-
-Additionally, columns exclusively filled with gaps in the new alignment will be systematically removed.
-
-.. _overlap-example-figure:
-.. figure:: _static/overlap_example.png
-    :name: overlap-example
-    :width: 500px
-    :align: center
-    :alt: Overlap example MSA
-
-    An example of an alignment trimmed with the overlap method. We have used the same alignment as in :numref:`gappyout-example-figure`. Conserved (grey) and trimmed (white) columns are indicated.
