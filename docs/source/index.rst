@@ -39,15 +39,13 @@ Publications
 ============
 - `trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses <https://doi.org/10.1093/bioinformatics/btp348>`_
 - `trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses (pdf) <https://academic.oup.com/bioinformatics/article-pdf/25/15/1972/48994574/bioinformatics_25_15_1972.pdf>`_
-- `Supplementary material (pdf) <http://trimal.cgenomics.org/_media/supplmaterial.b.pdf>`_
-- `Other benchmarks (pdf) <http://trimal.cgenomics.org/_media/otherbenchs.b.pdf>`_
-
+- `Supplementary material (pdf) <_static/supplmaterial.b.pdf>`_
 
 Citing this tool
 ==================
-trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses.
-    Salvador Capella-Gutierrez; Jose M. Silla-Martinez; Toni Gabaldon.
-    Bioinformatics 2009, 25:1972-1973.
+::
+
+   Capella-Gutiérrez, S., Silla-Martínez, J. M., & Gabaldón, T. (2009). trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses. Bioinformatics (Oxford, England), 25(15), 1972–1973. https://doi.org/10.1093/bioinformatics/btp348
 
 
 License
