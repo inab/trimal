@@ -146,6 +146,11 @@
         "count": 29,
         "uniques": 14,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 26,
+        "uniques": 14,
+        "request_date": "2024-01-19"
       }
     ]
   },
@@ -296,6 +301,11 @@
         "count": 104,
         "uniques": 43,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 111,
+        "uniques": 40,
+        "request_date": "2024-01-19"
       }
     ]
   },
@@ -486,6 +496,21 @@
         "count": 50,
         "uniques": 11,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 56,
+        "uniques": 13,
+        "request_date": "2024-01-19"
+      }
+    ]
+  },
+  {
+    "referrer": "ecosia.org",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-19"
       }
     ]
   },
@@ -636,6 +661,11 @@
         "count": 25,
         "uniques": 9,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 15,
+        "uniques": 9,
+        "request_date": "2024-01-19"
       }
     ]
   },
@@ -776,6 +806,11 @@
         "count": 3,
         "uniques": 2,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-01-19"
       }
     ]
   },
@@ -951,6 +986,11 @@
         "count": 4,
         "uniques": 1,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-19"
       }
     ]
   },
@@ -1296,6 +1336,11 @@
         "count": 214,
         "uniques": 68,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 276,
+        "uniques": 73,
+        "request_date": "2024-01-19"
       }
     ]
   },
@@ -1371,6 +1416,11 @@
         "count": 3,
         "uniques": 1,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-19"
       }
     ]
   },
@@ -1521,6 +1571,11 @@
         "count": 15,
         "uniques": 5,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 9,
+        "uniques": 6,
+        "request_date": "2024-01-19"
       }
     ]
   }
