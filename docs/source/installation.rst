@@ -1,6 +1,39 @@
 Installation
 *************
 
+Version 1.4
+============
+The source code is available at the `Github repository <https://github.com/inab/trimal>`_.
+You may `download <https://github.com/inab/trimal/releases/tag/v1.4.1>`_ it or clone it using git::
+
+  $ git clone https://github.com/inab/trimal.git
+
+The simplest way to compile this package is:
+
+  1. Go to the directory containing the package's source code ('source').
+     ::
+
+     $ cd trimal/source
+
+  2. Compile the package.
+     ::
+
+     $ make
+
+  3. Optionally, run trimAl/readAl with the examples into the 'dataset' 
+     directory to check the correct installation. It should return the original MSA.
+     ::
+
+     $ cd ..
+     $ source/trimal -in dataset/example.004.AA.fasta
+
+
+By default, 'make' compiles the source code of trimAl and readAl in the
+current directory. After that, you can either add to PATH the current
+directory or move these files to '/usr/local/bin' or to '/usr/bin' using
+root privileges.
+
+
 Version 2.0 (Release candidate)
 ===============================
 The source code is available at the `Github repository 2.0_RC branch <https://github.com/inab/trimal/tree/2.0_RC>`_.
@@ -70,38 +103,6 @@ By default, 'make' compiles the source code of trimAl and readAl in the
 bin directory. After that, you can either add to PATH the bin directory
 or move these files to '/usr/local/bin' or to '/usr/bin' using root privileges.
 
-
-Version 1.4
-============
-The source code is available at the `Github repository <https://github.com/inab/trimal>`_.
-You may `download <https://github.com/inab/trimal/releases/tag/v1.4.1>`_ it or clone it using git::
-
-  $ git clone https://github.com/inab/trimal.git
-
-The simplest way to compile this package is:
-
-  1. Go to the directory containing the package's source code ('source').
-     ::
-
-     $ cd trimal/source
-
-  2. Compile the package.
-     ::
-
-     $ make
-
-  3. Optionally, run trimAl/readAl with the examples into the 'dataset' 
-     directory to check the correct installation. It should return the original MSA.
-     ::
-
-     $ cd ..
-     $ source/trimal -in dataset/example.004.AA.fasta
-
-
-By default, 'make' compiles the source code of trimAl and readAl in the
-current directory. After that, you can either add to PATH the current
-directory or move these files to '/usr/local/bin' or to '/usr/bin' using
-root privileges.
 
 
 Version 1.2
