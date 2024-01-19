@@ -1,6 +1,12 @@
 Benchmarking
 ***********************
 
+Version 1.2
+===============================
+
+Construction of the benchmark dataset
+-------------------------------------
+
 To assess the general applicability of trimAl and establish empirical heuristics for automatic parameter selection, we conducted a benchmark analysis.
 
 Three different sets were used for this benchmark. One of these sets had been previously employed [Talavera G, Castresana J., 2007] to evaluate the enhancement in phylogenetic performance post-alignment trimming. This set involved evolutionary simulations of protein sequences with various lengths (400 to 3200 positions) generated using ROSE [Stoye J et al, 1998]. The simulations were conducted along phylogenetic trees with 16 tips, featuring three different topologies exhibiting varying levels of symmetry. The branch lengths of these trees were multiplied by 0.5, 1, and 2, resulting in six distinct phylogenetic trees.
@@ -60,4 +66,37 @@ These reference trees were employed to generate corresponding sets of alignments
    +-----------------------+----------------+---------------------+-----+-----+------+------+------+
    | Total number of alignments                                   | 3000| 3000| 3000 | 3000 | 3000 |
    +-----------------------+----------------+---------------------+-----+-----+------+------+------+
+
+
+
+Phylogenetic analyses
+-------------------------------------
+To assess the improvement in phylogenetic reconstruction achieved by trimAl, we employed a standard phylogenetic analysis pipeline on each simulated sequence set. This pipeline included MUSCLE v3.7 for multiple sequence alignment [Edgar R.C., 2004] and trimming with Gblocks v0.91b [Castresana J., 2000] and trimAl. We applied Gblocks default parameters and trimAl's gappyout, strict, strictplus automated methods, and trimAl’s automated1 heuristic method. The trimAl strictplus method was chosen for neighbor-joining tree reconstruction, while the automated1 method was selected for maximum likelihood tree reconstruction, as these proved optimal for the given conditions. This phylogenetic reconstruction was done using PhyML v2.4 [Guindon S. and Gascuel O., 2003] and the following parameters:
+
+    1. **Datatype:** 1
+    2. **Format:** i
+    3. **Number of Data Sets:** 1
+    4. **Number of Bootstrap Data Sets to Generate:** 0
+    5. **Substitution Model Name:** JTT
+    6. **Proportion of Invariable Sites:** e
+    7. **Number of Relative Substitution Rate Categories:** 4
+    8. **Gamma Distribution Parameter:** e
+    9. **Starting Tree:** BIONJ
+    10. **Optimize Tree Topology:** y (ML) or n (NJ)
+    11. **Optimize Branch Lengths and Rate Parameters:** y (ML) or n (NJ)
+
+The accuracy of the resulting trees was measured by comparing them with the original trees using the Robinson Foulds distance via the Ktreedist v1.0 program [Soria-Carrasco V. et al, 2007].
+
+In total, 180 different conditions were tested, encompassing diverse scenarios of tree topology, reconstruction method, alignment length, number of sequences, and sequence divergence. A summary of the benchmark analyses performed with trimAl v1.2 is presented here for simplicity. Additional benchmark results from previous trimAl versions are available `here <_static/benchmarkings.pdf>`_ .
+
+
+Results
+-------------------------------------
+A summary of the results from this benchmark analysis is presented `here <_static/benchmarkings.pdf>`_. In all considered scenarios, the utilization of trimAl either improves the phylogenetic signal or maintains a similar signal-to-noise ratio compared to the original alignment. Conversely, the use of GBlocks may significantly reduce the phylogenetic signal-to-noise ratio in the trimmed alignments. This is particularly evident in the case of Maximum Likelihood (ML), where untrimmed alignments produce reasonable results, but the use of GBlocks may significantly diminish the phylogenetic signal.
+
+In the majority of scenarios (90%), trimAl produces better results compared to GBlocks. In a limited number of cases (10%), however, GBlocks outperforms trimAl, specifically when divergence is high (≥ 2.0), Neighbor Joining (NJ) is used for phylogenetic reconstruction, the number of sequences is high (≥ 32), and the alignment length is substantial (≥ 800 positions). For proteins of average size (roughly 400 residues in the human genome), trimAl performed better in all cases.
+
+The most significant improvements in phylogenetic signal through trimming are achieved when using Neighbor Joining (NJ) and highly divergent trees. When using ML for tree reconstruction, the improvement by trimming is only significant with a combination of moderate to high divergence (≥ 1.0) and a large number of sequences. Overall, these results indicate that trimming with the trimAl strict method would be advisable when NJ is chosen for phylogenetic reconstruction, whereas the trimAl automated1 method would be more appropriate when ML is selected as the tree reconstruction method.
+
+We also compared the results using the Ktree score, a measure that considers differences in branch lengths [Soria-Carrasco et al., 2007]. The results show, as expected, larger differences in branch lengths when using the NJ method for tree reconstruction. With few exceptions, alignments trimmed with trimAl exhibit more similarities to the reference tree compared to the tree reconstructed with the original alignment. The use of GBlocks can yield better results than trimAl in terms of Ktree scores when NJ is used on asymmetric trees. In the rest of the conditions, trimAl produces better results or is comparable to GBlocks. Importantly, the use of GBlocks on symmetric trees or with ML reconstruction will often result in significantly worse Ktree scores compared to the untrimmed alignment.
 

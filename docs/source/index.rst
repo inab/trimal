@@ -39,7 +39,7 @@ Publications
 ============
 - `trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses <https://doi.org/10.1093/bioinformatics/btp348>`_
 - `trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses (pdf) <https://academic.oup.com/bioinformatics/article-pdf/25/15/1972/48994574/bioinformatics_25_15_1972.pdf>`_
-- `Supplementary material (pdf) <_static/supplmaterial.b.pdf>`_
+- `Supplementary material (pdf) <_static/supplementary_material.pdf>`_
 
 Citing this tool
 ==================
