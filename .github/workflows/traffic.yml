@@ -1,8 +1,6 @@
 name: Traffic workflow
 
-on:
-  schedule:
-    - cron:  '8 8 * * *'
+on: workflow_dispatch
 
 jobs:
   fetch_traffic:
