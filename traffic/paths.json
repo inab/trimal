@@ -152,6 +152,11 @@
         "count": 263,
         "uniques": 146,
         "request_date": "2024-01-19"
+      },
+      {
+        "count": 284,
+        "uniques": 155,
+        "request_date": "2024-01-20"
       }
     ]
   },
@@ -441,6 +446,17 @@
     ]
   },
   {
+    "path": "/inab/trimal/branches",
+    "title": "Branches · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 24,
+        "uniques": 5,
+        "request_date": "2024-01-20"
+      }
+    ]
+  },
+  {
     "path": "/inab/trimal/issues",
     "title": "Issues · inab/trimal · GitHub",
     "views": [
@@ -593,6 +609,11 @@
         "count": 40,
         "uniques": 23,
         "request_date": "2024-01-19"
+      },
+      {
+        "count": 39,
+        "uniques": 23,
+        "request_date": "2024-01-20"
       }
     ]
   },
@@ -614,6 +635,11 @@
         "count": 22,
         "uniques": 14,
         "request_date": "2024-01-19"
+      },
+      {
+        "count": 22,
+        "uniques": 14,
+        "request_date": "2024-01-20"
       }
     ]
   },
@@ -848,6 +874,11 @@
         "count": 16,
         "uniques": 10,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 20,
+        "uniques": 9,
+        "request_date": "2024-01-20"
       }
     ]
   },
@@ -984,6 +1015,11 @@
         "count": 44,
         "uniques": 33,
         "request_date": "2024-01-19"
+      },
+      {
+        "count": 49,
+        "uniques": 35,
+        "request_date": "2024-01-20"
       }
     ]
   },
@@ -1010,6 +1046,11 @@
         "count": 22,
         "uniques": 7,
         "request_date": "2024-01-19"
+      },
+      {
+        "count": 23,
+        "uniques": 7,
+        "request_date": "2024-01-20"
       }
     ]
   },
@@ -1187,6 +1228,11 @@
         "count": 28,
         "uniques": 9,
         "request_date": "2024-01-19"
+      },
+      {
+        "count": 29,
+        "uniques": 8,
+        "request_date": "2024-01-20"
       }
     ]
   },
@@ -1414,6 +1460,11 @@
         "count": 21,
         "uniques": 9,
         "request_date": "2024-01-19"
+      },
+      {
+        "count": 25,
+        "uniques": 9,
+        "request_date": "2024-01-20"
       }
     ]
   },
@@ -1570,6 +1621,11 @@
         "count": 46,
         "uniques": 15,
         "request_date": "2024-01-19"
+      },
+      {
+        "count": 50,
+        "uniques": 15,
+        "request_date": "2024-01-20"
       }
     ]
   },
