@@ -171,6 +171,21 @@
         "count": 24,
         "uniques": 14,
         "request_date": "2024-01-23"
+      },
+      {
+        "count": 25,
+        "uniques": 16,
+        "request_date": "2024-01-24"
+      }
+    ]
+  },
+  {
+    "referrer": "DuckDuckGo",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-24"
       }
     ]
   },
@@ -346,6 +361,11 @@
         "count": 148,
         "uniques": 37,
         "request_date": "2024-01-23"
+      },
+      {
+        "count": 168,
+        "uniques": 38,
+        "request_date": "2024-01-24"
       }
     ]
   },
@@ -561,6 +581,11 @@
         "count": 56,
         "uniques": 14,
         "request_date": "2024-01-23"
+      },
+      {
+        "count": 56,
+        "uniques": 14,
+        "request_date": "2024-01-24"
       }
     ]
   },
@@ -591,6 +616,11 @@
         "count": 2,
         "uniques": 1,
         "request_date": "2024-01-23"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-24"
       }
     ]
   },
@@ -766,6 +796,11 @@
         "count": 16,
         "uniques": 10,
         "request_date": "2024-01-23"
+      },
+      {
+        "count": 10,
+        "uniques": 8,
+        "request_date": "2024-01-24"
       }
     ]
   },
@@ -931,6 +966,11 @@
         "count": 5,
         "uniques": 3,
         "request_date": "2024-01-23"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-01-24"
       }
     ]
   },
@@ -1501,6 +1541,11 @@
         "count": 278,
         "uniques": 79,
         "request_date": "2024-01-23"
+      },
+      {
+        "count": 277,
+        "uniques": 73,
+        "request_date": "2024-01-24"
       }
     ]
   },
@@ -1601,6 +1646,11 @@
         "count": 6,
         "uniques": 1,
         "request_date": "2024-01-23"
+      },
+      {
+        "count": 6,
+        "uniques": 1,
+        "request_date": "2024-01-24"
       }
     ]
   },
@@ -1776,6 +1826,11 @@
         "count": 14,
         "uniques": 9,
         "request_date": "2024-01-23"
+      },
+      {
+        "count": 13,
+        "uniques": 8,
+        "request_date": "2024-01-24"
       }
     ]
   }
