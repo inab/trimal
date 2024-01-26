@@ -27,6 +27,10 @@
 
 ***************************************************************************** */
 
+#include <iostream>
+
+#include "cpuinfo_x86.h"
+
 #include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
 #include "Statistics/Identity.h"
@@ -43,6 +47,8 @@
 #if defined(HAVE_SSE2)
 #include "Platform/x86/SSE2.h"
 #endif
+
+using namespace cpu_features;
 
 namespace statistics {
     bool Manager::calculateConservationStats() {
@@ -303,6 +309,45 @@ namespace statistics {
 
         ghWindow = 0;
         shWindow = 0;
+
+        static const X86Info info = GetX86Info();
+        static const X86Features features = info.features;
+
+#if defined(CPU_FEATURES_ARCH_X86_32)
+#if defined(HAVE_SSE2)
+        if (features.sse2 != 0) {
+            platform = ComputePlatform::SSE2;
+        }
+#endif
+#if defined(HAVE_AVX2)
+        if (features.avx2 != 0) {
+            platform = ComputePlatform::AVX2;
+        }
+#endif
+#endif
+
+#if defined(CPU_FEATURES_ARCH_X86_64)
+#if defined(HAVE_SSE2)
+        platform = ComputePlatform::SSE2;
+#endif
+#if defined(HAVE_AVX2)
+        if (features.avx2 != 0) {
+            platform = ComputePlatform::AVX2;
+        }
+#endif
+#endif
+
+#if defined(CPU_FEATURES_ARCH_AARCH64)
+#if defined(HAVE_NEON)
+        platform = ComputePlatform::NEON;
+#endif
+#endif
+
+#if defined(CPU_FEATURES_ARCH_ARM)
+#if defined(HAVE_NEON)
+        platform = ComputePlatform::NEON;
+#endif
+#endif
     }
 
     Manager::Manager(Alignment *parent, Manager *mold) {
@@ -315,6 +360,8 @@ namespace statistics {
 
         ghWindow = mold->ghWindow;
         shWindow = mold->shWindow;
+
+        kernel = mold->kernel;
 
         if (mold->similarity)
 #if defined(HAVE_AVX2)
