@@ -1,7 +1,7 @@
 Usage
 ***********************
 
-Here we show all the options that trimAl offers to the user. Some parameters are only available on v2. At the bottom there are some examples of how to use the tool.
+Here we show all the options that trimAl offers to the user. Some parameters are only available on v2. At the bottom there are some :ref:`examples <some-examples>` of how to use the tool.
 
 Basic usage
 =================
