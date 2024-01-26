@@ -463,7 +463,7 @@ and a sequence for each donor, with their SNP applied.
         Only valid in combination with -vcf.
         Still applies min-quality and min-coverage when provided.
 
-
+.. _some-examples:
 Some Examples
 ======================
 
