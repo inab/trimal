@@ -62,6 +62,12 @@ add_executable(test
         ${TRIMAL_OBJECTS})
 SET_TARGET_PROPERTIES(test PROPERTIES EXCLUDE_FROM_ALL True)
 
+# Add `cpu_features` for detecting supported SIMD at compile time
+add_subdirectory(vendor/cpu_features)
+include_directories(vendor/cpu_features/include)
+target_link_libraries(trimal cpu_features)
+target_link_libraries(readal cpu_features)
+
 # Link the mathematical library to the targets
 target_link_libraries(trimal m)
 target_link_libraries(readal m)
