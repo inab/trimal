@@ -44,5 +44,8 @@ const std::map<InfoCode, const char *> reporting::reportManager::InfoMessages =
     },
 
     {InfoCode::RemovingDuplicateSequences,
-                "Removing sequence \"[tag]\" as it is a duplicate of \"[tag]\"."}
+                "Removing sequence \"[tag]\" as it is a duplicate of \"[tag]\"."},
+
+    {InfoCode::UsingPlatform,
+                "Using \"[tag]\" CPU extensions to compute statistics."}
 };

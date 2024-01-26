@@ -36,6 +36,7 @@
 #include "Statistics/Identity.h"
 #include "Statistics/Manager.h"
 #include "Statistics/Overlap.h"
+#include "reportsystem.h"
 #include "InternalBenchmarker.h"
 
 #if defined(HAVE_AVX2)
@@ -414,6 +415,19 @@ namespace statistics {
         platform = ComputePlatform::NEON;
 #endif
 #endif
+
+        switch(platform) {
+            case ComputePlatform::AVX2:
+                debug.report(InfoCode::UsingPlatform, new std::string[1]{"AVX2"});
+                break;
+            case ComputePlatform::SSE2:
+                debug.report(InfoCode::UsingPlatform, new std::string[1]{"SSE2"});
+                break;
+            case ComputePlatform::NEON:
+                debug.report(InfoCode::UsingPlatform, new std::string[1]{"NEON"});
+                break;
+        }
+
     }
 
     Manager::Manager(Alignment *parent, Manager *mold) {
