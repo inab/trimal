@@ -294,8 +294,11 @@ Overlap Trimming
     Ex: Sp8 may be removed from the alignment depending on the thresholds.
 
     Sp8    =====GLG===========TKSD---NNNNNNNNNNNNNNNNWV=================
+
     Sp17   --FAYTAPDLLL-IGFLLKTV-ATFG=================DTWFQLWQGLDLNKMPVF
+
     Sp10   ======DPAVL--FVIMLGTI-TKFS=================SEWFFAWLGLEINMMVII
+    
     Sp26   AAAAAAAAALLTYLGLFLGTDYENFA=================AAAANAWLGLEINMMAQI
 
 .. option:: -resoverlap <n>
