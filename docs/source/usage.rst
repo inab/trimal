@@ -1,6 +1,8 @@
 Usage
 ***********************
 
+Here we show all the options that trimAl offers to the user. Some parameters are only available on v2. At the bottom there are some examples of how to use the tool.
+
 Basic usage
 =================
     ::
@@ -10,7 +12,7 @@ Basic usage
 
 Help Options
 =================
-.. option:: --help
+.. option:: -h
 
     Print this information and show some examples.
 
@@ -18,7 +20,7 @@ Help Options
 
     Print the trimAl version.
 
-.. option:: -v <level>, --verbose <level>
+.. option:: -v <level>, --verbose <level> (v2)
 
         Specify the verbose level of the program.
         Available options: error / 3, warning / 2, info / 1, none / 0
@@ -29,15 +31,19 @@ Input-Output Options
 .. option:: -in <inputfile>
 
         Input file in several formats.
-        Available input formats: clustal, fasta, mega_interleaved, mega_sequential, nexus, phylip32, phylip40, phylip_paml, pir
+        Available input formats: clustal, fasta, mega_interleaved (v2), mega_sequential (v2), nexus, phylip32, phylip40, phylip_paml (v2), pir
  
-.. option:: -formats <format1,...>
+.. option:: -formats <format1,...> (v2)
 
         Specify one or more formats to save the resulting MSA. Separated by spaces
         Combinations with specific format arguments (-fasta, -nexus, etc) is allowed.
         Available output formats: clustal, fasta_m10, fasta, html, mega_sequential, nexus_m10, nexus, phylip32_m10, phylip32, phylip40_m10, phylip40, phylip_paml_m10, phylip_paml, pir
- 
-.. option:: -out <outputfile>
+
+.. option:: -out <outputfile> (v1.4)
+        
+        Output alignment in the same input format (default stdout).
+
+.. option:: -out <outputfile> (v2)
 
         Output path pattern. (default stdout).
  
@@ -76,10 +82,68 @@ Input-Output Options
             trimal -in file1.fasta -out ./[in]/trimmed.[format] -formats fasta
                 -> ./file1/trimmed.fasta (ONLY if folder file1 already exists)
 
-.. option:: -lf, --listformats
+.. option:: -lf, --listformats (v2)
     
-        List available formats to load from and save to.
+        List available formats to load from and save to. 
 
+Legacy Output Options
+=====================
+
+These options are included in v2 for back-compatibility with older versions of trimAl.
+New formats will not be added to this list of output format arguments.
+The new formats argument "-formats <format1, format2, etc>" should be used instead.
+
+.. option:: -nbrf
+
+        Output file in NBRF/PIR format
+
+.. option:: -mega
+
+        Output file in MEGA format
+
+.. option:: -nexus
+
+        Output file in NEXUS format
+
+.. option:: -clustal
+
+        Output file in CLUSTAL format
+
+.. option:: -fasta
+
+        Output file in FASTA format
+
+.. option:: -fasta_m10
+
+        Output file in FASTA format.
+        Sequences name length up to 10 characters.
+        
+.. option:: -phylip
+
+        Output file in PHYLIP/PHYLIP4 format.
+
+.. option:: -phylip_m10
+
+        Output file in PHYLIP/PHYLIP4 format.
+        Sequences name length up to 10 characters.
+
+.. option:: -phylip_paml
+
+        Output file in PHYLIP format compatible with PAML.
+
+.. option:: -phylip_paml_m10
+
+        Output file in PHYLIP format compatible with PAML.
+        Sequences name length up to 10 characters.
+
+.. option:: -phylip3.2
+
+        Output file in PHYLIP3.2 format.
+
+.. option:: -phylip3.2_m10
+
+        Output file in PHYLIP3.2 format.
+        Sequences name length up to 10 characters.
 
 Report Output
 ====================
@@ -87,11 +151,11 @@ Report Output
 
         Get a summary of trimal's work in an HTML file.
 
-.. option:: -svgout <outputfile>
+.. option:: -svgout <outputfile> (v2)
 
         Get a summary of trimal's work in a SVG file.
 
-.. option:: -sgvstats <outputfile>
+.. option:: -sgvstats <outputfile> (v2)
 
         Get a summary of trimal's calculated stats in a SVG file.
 
@@ -125,9 +189,13 @@ Backtranslation Options
 
 Trimming Parameters
 =======================
-.. option:: --degenerated_nt_identity
+.. option:: --degenerated_nt_identity (v2)
 
         Specify the degenerated nt identity matrix as the similarity matrix to use.
+
+.. option:: --alternative_matrix <name> (v1.4)
+
+        Select an alternative similarity matrix already loaded. Only available 'degenerated_nt_identity'.
 
 .. option:: -matrix <inputfile>
 
@@ -152,7 +220,8 @@ Trimming Parameters
         Get the complementary alignment in residues.
         Reverses the effect of residue trimming:
         All residues that were to be removed are kept and vice versa.
-.. option:: -complementaryseq
+
+.. option:: -complementaryseq (v2)
 
         Get the complementary alignment in sequences.
         Reverses the effect of sequence trimming:
@@ -189,7 +258,7 @@ Manual Trimming - Thresholds
         Range: [0 - 1]
         Not compatible with -gat.
 
-.. option:: -gat -gapabsolutethreshold <n>
+.. option:: -gat -gapabsolutethreshold <n> (v2)
 
         Max number of gaps allowed on a column to keep it.
         Range: [0 - (number of sequences - 1)]
@@ -241,10 +310,6 @@ Overlap Trimming
         in order to be conserved.
         Range: [0 - 100](see User Guide).
 
-
-Automated
-------------
-
 .. option:: -nogaps
 
         Remove all positions with gaps in the alignment.
@@ -253,10 +318,13 @@ Automated
 
         Remove columns composed only by gaps.
 
-.. option:: -noduplicateseqs
+.. option:: -noduplicateseqs (v2)
 
         Removes sequences that are equal on the alignment.
         It will keep the latest sequence in the alignment.
+
+Automated
+------------
 
 .. option:: -gappyout
 
@@ -351,15 +419,15 @@ Statistics to be calculated and outputted by trimAl
         Print overlap scores matrix for all sequences in the input alignment.
         (see User Guide).
 
-NGS Support - VCF SNP MSA creator
-====================================
+NGS Support - VCF SNP MSA creator (v2)
+======================================
 Suport for VCF files. Providing a reference genome,
 and one or more VCF, multiple MSA are created.
 One MSA for each contig present on the whole VCF-dataset.
 Each MSA contains the reference sequence
 and a sequence for each donor, with their SNP applied.
  
-.. option:: -vcf <inputfile,...>
+.. option:: -vcf <inputfile,...> (v2)
 
         Specify one or more VCF files to produce MSAs
         using the input file (-in <n>) as reference genome.
@@ -379,81 +447,21 @@ and a sequence for each donor, with their SNP applied.
         or it doesn't contain the tag "[contig]",
         the sequences names will have the name of their contig prepended.
              
-.. option:: -minquality <n>
+.. option:: -minquality <n> (v2)
 
         Specify the min quality of a SNP in VCF to apply it.
         Only valid in combination with -vcf.
          
-.. option:: -mincoverage <n>
+.. option:: -mincoverage <n> (v2)
     
         Specify the min coverage of a SNP in VCF to apply it.
         Only valid in combination with -vcf.
          
-.. option:: -ignoreFilter
+.. option:: -ignoreFilter (v2)
 
         Ignore vcf-filtered variants in VCF.
         Only valid in combination with -vcf.
         Still applies min-quality and min-coverage when provided.
-
-
-Legacy Options
-===============
-
-These options are included for back-compatibility with older versions of trimAl.
-New formats will not be added to this list of output format arguments.
-The new formats argument "-formats <format1, format2, etc>" should be used instead.
-
-.. option:: -nbrf
-
-        Output file in NBRF/PIR format
-
-.. option:: -mega
-
-        Output file in MEGA format
-
-.. option:: -nexus
-
-        Output file in NEXUS format
-
-.. option:: -clustal
-
-        Output file in CLUSTAL format
-
-.. option:: -fasta
-
-        Output file in FASTA format
-
-.. option:: -fasta_m10
-
-        Output file in FASTA format.
-        Sequences name length up to 10 characters.
-        
-.. option:: -phylip
-
-        Output file in PHYLIP/PHYLIP4 format.
-
-.. option:: -phylip_m10
-
-        Output file in PHYLIP/PHYLIP4 format.
-        Sequences name length up to 10 characters.
-
-.. option:: -phylip_paml
-
-        Output file in PHYLIP format compatible with PAML.
-
-.. option:: -phylip_paml_m10
-
-        Output file in PHYLIP format compatible with PAML.
-        Sequences name length up to 10 characters.
-
-.. option:: -phylip3.2
-
-        Output file in PHYLIP3.2 format.
-
-.. option:: -phylip3.2_m10
-
-        Output file in PHYLIP3.2 format.
-        Sequences name length up to 10 characters.
 
 
 Some Examples

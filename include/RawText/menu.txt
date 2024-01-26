@@ -22,7 +22,7 @@ trimAl webpage: http://trimal.cgenomics.org
 For a complete list please see the User Guide or visit http://trimal.cgenomics.org
 
 [b][u]Help Options[r]
-    [b]--help[r]
+    [b]-h[r]
         Print this information and show some examples.
     [b]--version[r]
         Print the trimAl version.
@@ -79,6 +79,40 @@ For a complete list please see the User Guide or visit http://trimal.cgenomics.o
 
     [b]-lf / --listformats[r]
         List available formats to load from and save to.
+
+[b][u]Legacy Output Options[r]
+These options are included for back-compatibility with older versions of trimAl.
+New formats will not be added to this list of output format arguments.
+The new formats argument "-formats <format1, format2, etc>" should be used instead.
+
+    [b]-nbrf[r]
+        Output file in NBRF/PIR format
+    [b]-mega[r]
+        Output file in MEGA format
+    [b]-nexus[r]
+        Output file in NEXUS format
+    [b]-clustal[r]
+        Output file in CLUSTAL format
+    [b]-fasta[r]
+        Output file in FASTA format
+    [b]-fasta_m10[r]
+        Output file in FASTA format.
+        Sequences name length up to 10 characters.
+    [b]-phylip[r]
+        Output file in PHYLIP/PHYLIP4 format
+    [b]-phylip_m10[r]
+        Output file in PHYLIP/PHYLIP4 format.
+        Sequences name length up to 10 characters.
+    [b]-phylip_paml[r]
+        Output file in PHYLIP format compatible with PAML
+    [b]-phylip_paml_m10[r]
+        Output file in PHYLIP format compatible with PAML.
+        Sequences name length up to 10 characters.
+    [b]-phylip3.2[r]
+        Output file in PHYLIP3.2 format
+    [b]-phylip3.2_m10[r]
+        Output file in PHYLIP3.2 format.
+        Sequences name length up to 10 characters.
 
 [b][u]Report Output[r]
     [b]-htmlout <outputfile>[r]
@@ -146,8 +180,6 @@ For a complete list please see the User Guide or visit http://trimal.cgenomics.o
         Selection of sequences to be removed from the alignment.
         Range: [0 - (Number of Sequences - 1)]. (see User Guide).
 
-    [b][u]Automated[r]
-
     [b]-nogaps[r]
         Remove all positions with gaps in the alignment.
     [b]-noallgaps[r]
@@ -156,6 +188,8 @@ For a complete list please see the User Guide or visit http://trimal.cgenomics.o
     [b]-noduplicateseqs[r]
         Removes sequences that are equal on the alignment.
         It will keep the latest sequence in the alignment.
+
+    [b][u]Automated[r]
 
     [b]-gappyout[r]
         Use automated selection on "gappyout" mode.
@@ -300,39 +334,5 @@ Each MSA contains the reference sequence
         Ignore vcf-filtered variants in VCF.
         Only valid in combination with -vcf.
         Still applies min-quality and min-coverage when provided.
-
-[b][u]Legacy Options[r]
-These options are included for back-compatibility with older versions of trimAl.
-New formats will not be added to this list of output format arguments.
-The new formats argument "-formats <format1, format2, etc>" should be used instead.
-
-    [b]-nbrf[r]
-        Output file in NBRF/PIR format
-    [b]-mega[r]
-        Output file in MEGA format
-    [b]-nexus[r]
-        Output file in NEXUS format
-    [b]-clustal[r]
-        Output file in CLUSTAL format
-    [b]-fasta[r]
-        Output file in FASTA format
-    [b]-fasta_m10[r]
-        Output file in FASTA format.
-        Sequences name length up to 10 characters.
-    [b]-phylip[r]
-        Output file in PHYLIP/PHYLIP4 format
-    [b]-phylip_m10[r]
-        Output file in PHYLIP/PHYLIP4 format.
-        Sequences name length up to 10 characters.
-    [b]-phylip_paml[r]
-        Output file in PHYLIP format compatible with PAML
-    [b]-phylip_paml_m10[r]
-        Output file in PHYLIP format compatible with PAML.
-        Sequences name length up to 10 characters.
-    [b]-phylip3.2[r]
-        Output file in PHYLIP3.2 format
-    [b]-phylip3.2_m10[r]
-        Output file in PHYLIP3.2 format.
-        Sequences name length up to 10 characters.
 
 )====="
