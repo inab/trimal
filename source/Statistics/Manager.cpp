@@ -29,7 +29,13 @@
 
 #include <iostream>
 
+#if defined(__x86_64__) || defined(__i386__)
 #include "cpuinfo_x86.h"
+#elif defined(__arm__)
+#include "cpuinfo_arm.h"
+#elif defined(__aarch64__)
+#include "cpuinfo_aarch64.h"
+#endif
 
 #include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
@@ -373,8 +379,13 @@ namespace statistics {
         shWindow = 0;
 
         // Detect the best supported compute platform on the local machine.
+#if defined(CPU_FEATURES_ARCH_X86)
         static const X86Info info = GetX86Info();
         static const X86Features features = info.features;
+#elif defined(CPU_FEATURES_ARCH_ARM)
+        static const ArmInfo info = GetArmInfo();
+        static const ArmFeatures features = info.features;
+#endif
 
         // On x86, test whether SSE2 or AVX2 are supported.
 #ifdef CPU_FEATURES_ARCH_X86_32
