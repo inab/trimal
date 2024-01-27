@@ -25,6 +25,8 @@ jobs:
         
     steps:
       - uses: actions/checkout@v3
+        with:
+            submodules: true
       - name: Build trimal for Linux x86_64
         if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'non_SIMD' 
         run: cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
