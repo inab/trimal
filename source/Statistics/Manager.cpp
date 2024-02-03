@@ -423,7 +423,9 @@ namespace statistics {
         // On Aarch64, test whether NEON is supported.
 #ifdef CPU_FEATURES_ARCH_ARM
 #ifdef HAVE_NEON
-        platform = ComputePlatform::NEON;
+        if (features.neon != 0) {
+            platform = ComputePlatform::NEON;
+        }
 #endif
 #endif
 
