@@ -46,12 +46,26 @@ namespace statistics {
     class Overlap;
 
     /**
+     * \brief Enum to store the different supported compute kernels for the statistics.
+     */
+    enum ComputePlatform {
+        NONE,
+        SSE2,
+        AVX2,
+        NEON,
+    };
+
+    /**
      * \brief Class to handle the interaction with Alignment and statistics objects.\n
      * It serves as a wrapper or intermediate between the alignment and each specific stat.\n
      * It also encapsulates the similarityMatrix.
      */
     class Manager {
     public:
+        /**
+         * \brief
+         * */
+        ComputePlatform platform = ComputePlatform::NONE;
 
         /**
          * \brief Gaps submodule

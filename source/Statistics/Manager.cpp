@@ -27,11 +27,22 @@
 
 ***************************************************************************** */
 
+#include <iostream>
+
+#if defined(__x86_64__) || defined(__i386__)
+#include "cpuinfo_x86.h"
+#elif defined(__arm__)
+#include "cpuinfo_arm.h"
+#elif defined(__aarch64__)
+#include "cpuinfo_aarch64.h"
+#endif
+
 #include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
 #include "Statistics/Identity.h"
 #include "Statistics/Manager.h"
 #include "Statistics/Overlap.h"
+#include "reportsystem.h"
 #include "InternalBenchmarker.h"
 
 #if defined(HAVE_AVX2)
@@ -43,6 +54,8 @@
 #if defined(HAVE_SSE2)
 #include "Platform/x86/SSE2.h"
 #endif
+
+using namespace cpu_features;
 
 namespace statistics {
     bool Manager::calculateConservationStats() {
@@ -59,15 +72,26 @@ namespace statistics {
         // It the similarity statistics object has not been
         // created we create it
         if (similarity == nullptr) {
-#if defined(HAVE_AVX2)
-            similarity = new AVX2Similarity(alig);
-#elif defined(HAVE_SSE2)
-            similarity = new SSE2Similarity(alig);
-#elif defined(HAVE_NEON)
-            similarity = new NEONSimilarity(alig);
-#else
-            similarity = new Similarity(alig);
+            switch (platform) {
+#ifdef HAVE_AVX2
+            case ComputePlatform::AVX2:
+                similarity = new AVX2Similarity(alig);
+                break;
 #endif
+#ifdef HAVE_SSE2
+            case ComputePlatform::SSE2:
+                similarity = new SSE2Similarity(alig);
+                break;
+#endif
+#ifdef HAVE_NEON
+            case ComputePlatform::NEON:
+                similarity = new NEONSimilarity(alig);
+                break;
+#endif
+            default:
+                similarity = new Similarity(alig);
+            }
+
             similarity->setSimilarityMatrix(_similarityMatrix);
             similarity->applyWindow(shWindow);
         }
@@ -126,15 +150,25 @@ namespace statistics {
 
         // If scons object is not created, we create them
         if (alig->Statistics->similarity == nullptr)
-#if defined(HAVE_AVX2)
-            alig->Statistics->similarity = new AVX2Similarity(alig);
-#elif defined(HAVE_SSE2)
-            alig->Statistics->similarity = new SSE2Similarity(alig);
-#elif defined(HAVE_NEON)
-            alig->Statistics->similarity = new NEONSimilarity(alig);
-#else
-            alig->Statistics->similarity = new Similarity(alig);
+            switch (platform) {
+#ifdef HAVE_AVX2
+            case ComputePlatform::AVX2:
+                alig->Statistics->similarity = new AVX2Similarity(alig);
+                break;
 #endif
+#ifdef HAVE_SSE2
+            case ComputePlatform::SSE2:
+                alig->Statistics->similarity = new SSE2Similarity(alig);
+                break;
+#endif
+#ifdef HAVE_NEON
+            case ComputePlatform::NEON:
+                alig->Statistics->similarity = new NEONSimilarity(alig);
+                break;
+#endif
+            default:
+                alig->Statistics->similarity = new Similarity(alig);
+            }
 
         // Associate the matrix to the similarity statistics object
         // If it's OK, we return true
@@ -203,15 +237,25 @@ namespace statistics {
         // If gaps object is not created, we create them
         // and calculate the statistics
         if (gaps == nullptr) {
-#if defined(HAVE_AVX2)
-            gaps = new AVX2Gaps(alig);
-#elif defined(HAVE_SSE2)
-            gaps = new SSE2Gaps(alig);
-#elif defined(HAVE_NEON)
-            gaps = new NEONGaps(alig);
-#else
-            gaps = new Gaps(alig);
+            switch (platform) {
+#ifdef HAVE_AVX2
+            case ComputePlatform::AVX2:
+                gaps = new AVX2Gaps(alig);
+                break;
 #endif
+#ifdef HAVE_SSE2
+            case ComputePlatform::SSE2:
+                gaps = new SSE2Gaps(alig);
+                break;
+#endif
+#ifdef HAVE_NEON
+            case ComputePlatform::NEON:
+                gaps = new NEONGaps(alig);
+                break;
+#endif
+            default:
+                gaps = new Gaps(alig);
+            }
             gaps->CalculateVectors();
         }
         return gaps->applyWindow(ghWindow);
@@ -229,15 +273,25 @@ namespace statistics {
         // If identity object is not created, we create them
         // and calculate the statistics
         if (identity == nullptr) {
-#if defined(HAVE_AVX2)
-            identity = new AVX2Identity(alig);
-#elif defined(HAVE_SSE2)
-            identity = new SSE2Identity(alig);
-#elif defined(HAVE_NEON)
-            identity = new NEONIdentity(alig);
-#else
-            identity = new Identity(alig);
+            switch (platform) {
+#ifdef HAVE_AVX2
+            case ComputePlatform::AVX2:
+                identity = new AVX2Identity(alig);
+                break;
 #endif
+#ifdef HAVE_SSE2
+            case ComputePlatform::SSE2:
+                identity = new SSE2Identity(alig);
+                break;
+#endif
+#ifdef HAVE_NEON
+            case ComputePlatform::NEON:
+                identity = new NEONIdentity(alig);
+                break;
+#endif
+            default:
+                identity = new Identity(alig);
+            }
             identity->calculateSeqIdentity();
         }
         return true;
@@ -255,15 +309,25 @@ namespace statistics {
         // If overlap object is not created, we create them
         // and calculate the statistics
         if (overlap == nullptr) {
-#if defined(HAVE_AVX2)
-            overlap = new AVX2Overlap(alig);
-#elif defined(HAVE_SSE2)
-            overlap = new SSE2Overlap(alig);
-#elif defined(HAVE_NEON)
-            overlap = new NEONOverlap(alig);
-#else
-            overlap = new Overlap(alig);
+            switch (platform) {
+#ifdef HAVE_AVX2
+            case ComputePlatform::AVX2:
+                overlap = new AVX2Overlap(alig);
+                break;
 #endif
+#ifdef HAVE_SSE2
+            case ComputePlatform::SSE2:
+                overlap = new SSE2Overlap(alig);
+                break;
+#endif
+#ifdef HAVE_NEON
+            case ComputePlatform::NEON:
+                overlap = new NEONOverlap(alig);
+                break;
+#endif
+            default:
+                overlap = new Overlap(alig);
+            }
             overlap->calculateSeqOverlap();
         }
         return true;
@@ -281,15 +345,25 @@ namespace statistics {
         // If overlap object is not created, we create them
         // and calculate the statistics
         if (overlap == nullptr) {
-#if defined(HAVE_AVX2)
-            overlap = new AVX2Overlap(alig);
-#elif defined(HAVE_SSE2)
-            overlap = new SSE2Overlap(alig);
-#elif defined(HAVE_NEON)
-            overlap = new NEONOverlap(alig);
-#else
-            overlap = new Overlap(alig);
+            switch (platform) {
+#ifdef HAVE_AVX2
+            case ComputePlatform::AVX2:
+                overlap = new AVX2Overlap(alig);
+                break;
 #endif
+#ifdef HAVE_SSE2
+            case ComputePlatform::SSE2:
+                overlap = new SSE2Overlap(alig);
+                break;
+#endif
+#ifdef HAVE_NEON
+            case ComputePlatform::NEON:
+                overlap = new NEONOverlap(alig);
+                break;
+#endif
+            default:
+                overlap = new Overlap(alig);
+            }
         }
 
         return overlap->calculateSpuriousVector(overlapColumn, spuriousVector);
@@ -303,6 +377,70 @@ namespace statistics {
 
         ghWindow = 0;
         shWindow = 0;
+
+        // Detect the best supported compute platform on the local machine.
+#if defined(CPU_FEATURES_ARCH_X86)
+        static const X86Info info = GetX86Info();
+        static const X86Features features = info.features;
+#elif defined(CPU_FEATURES_ARCH_ARM)
+        static const ArmInfo info = GetArmInfo();
+        static const ArmFeatures features = info.features;
+#endif
+
+        // On x86, test whether SSE2 or AVX2 are supported.
+#ifdef CPU_FEATURES_ARCH_X86_32
+#ifdef HAVE_SSE2
+        if (features.sse2 != 0) {
+            platform = ComputePlatform::SSE2;
+        }
+#endif
+#ifdef HAVE_AVX2
+        if (features.avx2 != 0) {
+            platform = ComputePlatform::AVX2;
+        }
+#endif
+#endif
+
+        // On x86-64, SSE2 is always supported, test whether AVX2 is supported.
+#ifdef CPU_FEATURES_ARCH_X86_64
+#ifdef HAVE_SSE2
+        platform = ComputePlatform::SSE2;
+#endif
+#ifdef HAVE_AVX2
+        if (features.avx2 != 0) {
+            platform = ComputePlatform::AVX2;
+        }
+#endif
+#endif
+
+        // On Aarch64, NEON is always supported.
+#ifdef CPU_FEATURES_ARCH_AARCH64
+#ifdef HAVE_NEON
+        platform = ComputePlatform::NEON;
+#endif
+#endif
+
+        // On Aarch64, test whether NEON is supported.
+#ifdef CPU_FEATURES_ARCH_ARM
+#ifdef HAVE_NEON
+        if (features.neon != 0) {
+            platform = ComputePlatform::NEON;
+        }
+#endif
+#endif
+
+        switch(platform) {
+            case ComputePlatform::AVX2:
+                debug.report(InfoCode::UsingPlatform, new std::string[1]{"AVX2"});
+                break;
+            case ComputePlatform::SSE2:
+                debug.report(InfoCode::UsingPlatform, new std::string[1]{"SSE2"});
+                break;
+            case ComputePlatform::NEON:
+                debug.report(InfoCode::UsingPlatform, new std::string[1]{"NEON"});
+                break;
+        }
+
     }
 
     Manager::Manager(Alignment *parent, Manager *mold) {
@@ -316,53 +454,98 @@ namespace statistics {
         ghWindow = mold->ghWindow;
         shWindow = mold->shWindow;
 
-        if (mold->similarity)
-#if defined(HAVE_AVX2)
-            similarity = new AVX2Similarity(parent, mold->similarity);
-#elif defined(HAVE_SSE2)
-            similarity = new SSE2Similarity(parent, mold->similarity);
-#elif defined(HAVE_NEON)
-            similarity = new NEONSimilarity(parent, mold->similarity);
-#else
-            similarity = new Similarity(parent, mold->similarity);
+        platform = mold->platform;
+
+        if (mold->similarity) {
+
+            switch (platform) {
+#ifdef HAVE_AVX2
+            case(ComputePlatform::AVX2):
+                similarity = new AVX2Similarity(parent, mold->similarity);
+                break;
 #endif
+#ifdef HAVE_SSE2
+            case(ComputePlatform::SSE2):
+                similarity = new SSE2Similarity(parent, mold->similarity);
+                break;
+#endif
+#ifdef HAVE_NEON
+            case(ComputePlatform::NEON):
+                similarity = new NEONSimilarity(parent, mold->similarity);
+                break;
+#endif
+            default:
+                similarity = new Similarity(parent, mold->similarity);
+            }
+        }
 
         if (mold->consistency)
             consistency = new Consistency(parent, mold->consistency);
 
-        if (mold->gaps)
-#if defined(HAVE_AVX2)
-            gaps = new AVX2Gaps(parent, mold->gaps);
-#elif defined(HAVE_SSE2)
-            gaps = new SSE2Gaps(parent, mold->gaps);
-#elif defined(HAVE_NEON)
-            gaps = new NEONGaps(parent, mold->gaps);
-#else
-            gaps = new Gaps(parent, mold->gaps);
+        if (mold->gaps) {
+            switch (platform) {
+#ifdef HAVE_AVX2
+            case(ComputePlatform::AVX2):
+                gaps = new AVX2Gaps(parent, mold->gaps);
+                break;
 #endif
+#ifdef HAVE_SSE2
+            case(ComputePlatform::SSE2):
+                gaps = new SSE2Gaps(parent, mold->gaps);
+                break;
+#endif
+#ifdef HAVE_NEON
+            case(ComputePlatform::NEON):
+                gaps = new NEONGaps(parent, mold->gaps);
+                break;
+#endif
+            default:
+                gaps = new Gaps(parent, mold->gaps);
+            }
+        }
 
-        if (mold->identity)
-#if defined(HAVE_AVX2)
-            identity = new AVX2Identity(parent, mold->identity);
-#elif defined(HAVE_SSE2)
-            identity = new SSE2Identity(parent, mold->identity);
-#elif defined(HAVE_NEON)
-            identity = new NEONIdentity(parent, mold->identity);
-#else
-            identity = new Identity(parent, mold->identity);
+        if (mold->identity) {
+            switch (platform) {
+#ifdef HAVE_AVX2
+            case(ComputePlatform::AVX2):
+                identity = new AVX2Identity(parent, mold->identity);
+                break;
 #endif
+#ifdef HAVE_SSE2
+            case(ComputePlatform::SSE2):
+                identity = new SSE2Identity(parent, mold->identity);
+                break;
+#endif
+#ifdef HAVE_NEON
+            case(ComputePlatform::NEON):
+                identity = new NEONIdentity(parent, mold->identity);
+                break;
+#endif
+            default:
+                identity = new Identity(parent, mold->identity);                
+            }
+        }
 
         if (mold->overlap)
-#if defined(HAVE_AVX2)
-        overlap = new AVX2Overlap(parent, mold->overlap);
-#elif defined(HAVE_SSE2)
-        overlap = new SSE2Overlap(parent, mold->overlap);
-#elif defined(HAVE_NEON)
-        overlap = new NEONOverlap(parent, mold->overlap);
-#else
-        overlap = new Overlap(parent, mold->overlap);
+            switch (platform) {
+#ifdef HAVE_AVX2
+            case(ComputePlatform::AVX2):
+                overlap = new AVX2Overlap(parent, mold->overlap);
+                break;
 #endif
-
+#ifdef HAVE_SSE2
+            case(ComputePlatform::SSE2):
+                overlap = new SSE2Overlap(parent, mold->overlap);
+                break;
+#endif
+#ifdef HAVE_NEON
+            case(ComputePlatform::NEON):
+                overlap = new NEONOverlap(parent, mold->overlap);
+                break;
+#endif
+            default:
+                overlap = new Overlap(parent, mold->overlap);                
+            }
     }
 
     Manager::~Manager() {

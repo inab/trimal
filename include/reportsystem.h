@@ -305,6 +305,8 @@ enum InfoCode {
 
     RemovingDuplicateSequences                  = 4,
 
+    UsingPlatform                               = 5,
+
 
     __MAXINFO
 };
