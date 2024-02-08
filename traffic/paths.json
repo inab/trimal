@@ -247,6 +247,11 @@
         "count": 251,
         "uniques": 143,
         "request_date": "2024-02-07"
+      },
+      {
+        "count": 241,
+        "uniques": 142,
+        "request_date": "2024-02-08"
       }
     ]
   },
@@ -395,6 +400,17 @@
         "count": 14,
         "uniques": 4,
         "request_date": "2024-01-15"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/blob/trimAl/LICENSE",
+    "title": "trimal/LICENSE at trimAl · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 13,
+        "uniques": 6,
+        "request_date": "2024-02-08"
       }
     ]
   },
@@ -581,6 +597,11 @@
         "count": 35,
         "uniques": 14,
         "request_date": "2024-02-07"
+      },
+      {
+        "count": 28,
+        "uniques": 11,
+        "request_date": "2024-02-08"
       }
     ]
   },
@@ -944,6 +965,11 @@
         "count": 54,
         "uniques": 23,
         "request_date": "2024-02-07"
+      },
+      {
+        "count": 55,
+        "uniques": 22,
+        "request_date": "2024-02-08"
       }
     ]
   },
@@ -1329,6 +1355,11 @@
         "count": 18,
         "uniques": 5,
         "request_date": "2024-02-07"
+      },
+      {
+        "count": 22,
+        "uniques": 6,
+        "request_date": "2024-02-08"
       }
     ]
   },
@@ -1560,6 +1591,11 @@
         "count": 41,
         "uniques": 23,
         "request_date": "2024-02-07"
+      },
+      {
+        "count": 35,
+        "uniques": 23,
+        "request_date": "2024-02-08"
       }
     ]
   },
@@ -1873,6 +1909,11 @@
         "count": 21,
         "uniques": 7,
         "request_date": "2024-02-07"
+      },
+      {
+        "count": 21,
+        "uniques": 7,
+        "request_date": "2024-02-08"
       }
     ]
   },
@@ -2039,6 +2080,11 @@
         "count": 19,
         "uniques": 8,
         "request_date": "2024-02-07"
+      },
+      {
+        "count": 23,
+        "uniques": 10,
+        "request_date": "2024-02-08"
       }
     ]
   },
@@ -2275,6 +2321,11 @@
         "count": 33,
         "uniques": 14,
         "request_date": "2024-02-07"
+      },
+      {
+        "count": 37,
+        "uniques": 16,
+        "request_date": "2024-02-08"
       }
     ]
   },
@@ -2526,6 +2577,11 @@
         "count": 36,
         "uniques": 14,
         "request_date": "2024-02-07"
+      },
+      {
+        "count": 38,
+        "uniques": 15,
+        "request_date": "2024-02-08"
       }
     ]
   },
