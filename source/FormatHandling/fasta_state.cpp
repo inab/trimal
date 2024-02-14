@@ -44,23 +44,12 @@ int fasta_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* fasta_state::LoadAlignment(const std::string &filename)
+Alignment* fasta_state::LoadAlignment(std::istream &file)
 {
     /* FASTA file format parser */
     Alignment* alig = new Alignment();
     char *str, *line = nullptr;
-    std::ifstream file;
     int i;
-
-    /* Check the file and its content */
-    file.open(filename, std::ifstream::in);
-    if(!utils::checkFile(file))
-        return nullptr;
-
-    /* Store input file name for posterior uses in other formats */
-    // alig->filename.append("!Title ");
-    alig->filename.append(filename);
-    alig->filename.append(";");
 
     /* Compute how many sequences are in the input alignment */
     alig->numberOfSequences = 0;
@@ -130,9 +119,6 @@ Alignment* fasta_state::LoadAlignment(const std::string &filename)
             str = strtok(nullptr, DELIMITERS);
         }
     }
-
-    /* Close the input file */
-    file.close();
 
     /* Deallocate previously used dinamic memory */
     if (line != nullptr)

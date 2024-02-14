@@ -51,25 +51,14 @@ int pir_state::CheckAlignment(std::istream *origin) {
     return 0;
 }
 
-Alignment *pir_state::LoadAlignment(const std::string &filename) {
+Alignment *pir_state::LoadAlignment(std::istream &file) {
     /* NBRF/PIR file format parser */
 
     Alignment *alig = new Alignment();
 
     bool seqIdLine, seqLines;
     char *str, *line = nullptr;
-    std::ifstream file;
     int i;
-
-    /* Check the file and its content */
-    file.open(filename, std::ifstream::in);
-    if (!utils::checkFile(file))
-        return nullptr;
-
-    /* Store input file name for posterior uses in other formats */
-    // alig->filename.append("!Title ");
-    alig->filename.append(filename);
-    alig->filename.append(";");
 
     /* Compute how many sequences are in the input alignment */
     alig->numberOfSequences = 0;
@@ -162,8 +151,6 @@ Alignment *pir_state::LoadAlignment(const std::string &filename) {
             }
         }
     }
-    /* Close the input file */
-    file.close();
 
     /* Deallocate dinamic memory */
     delete[] line;

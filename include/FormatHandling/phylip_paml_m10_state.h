@@ -46,7 +46,7 @@ public:
 
     int CheckAlignment(std::istream *origin) override;
 
-    Alignment *LoadAlignment(const std::string &filename) override;
+    Alignment *LoadAlignment(std::istream& stream) override;
 
     bool SaveAlignment(const Alignment &alignment, std::ostream *output) override;
 

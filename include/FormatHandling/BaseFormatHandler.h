@@ -101,8 +101,14 @@ public:
 
         alignment = LoadAlignment(file);
         if (alignment != nullptr) {
-            alignment->filename.append(filename);
-            alignment->filename.append(";");
+            /* Alignment title may be set by the format handler, dependending on 
+             * the alignment format, so it should only be set here if there was
+             * none parsed already.
+             */
+            if (alignment->filename.empty()) {
+                alignment->filename.append(filename);
+                alignment->filename.append(";");
+            }
         }
 
         file.close();

@@ -128,24 +128,13 @@ int phylip32_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* phylip32_state::LoadAlignment(const std::string &filename)
+Alignment* phylip32_state::LoadAlignment(std::istream& file)
 {
     /* PHYLIP 3.2 (Interleaved) file format parser */
     Alignment* alig = new Alignment();
     
     int i, blocksFirstLine, firstLine = true;
     char *str, *line = nullptr;
-    std::ifstream file;
-
-    /* Check the file and its content */
-    file.open(filename, std::ifstream::in);
-    if(!utils::checkFile(file))
-        return nullptr;
-
-    /* Store the file name for futher format conversion*/
-    // alig->filename.append("!Title ");
-    alig->filename.append(filename);
-    alig->filename.append(";");
 
     /* Read first valid line in a safer way */
     do {
@@ -235,8 +224,7 @@ Alignment* phylip32_state::LoadAlignment(const std::string &filename)
         }
     } while(!file.eof());
 
-    /* Close the input file and delete dinamic memory */
-    file.close();
+    /* Delete dynamic memory */
     delete [] line;
 
     /* Check the matrix's content */

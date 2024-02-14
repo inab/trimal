@@ -85,26 +85,13 @@ int mega_sequential_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* mega_sequential_state::LoadAlignment(const std::string &filename)
+Alignment* mega_sequential_state::LoadAlignment(std::istream &file)
 {
     Alignment * alig = new Alignment();
    /* MEGA sequential file format parser */
 
     char *frag = nullptr, *str = nullptr, *line = nullptr;
-    std::ifstream file;
     int i;
-
-    /* Check the file and its content */
-    file.open(filename, std::ifstream::in);
-    if(!utils::checkFile(file))
-        return nullptr;
-
-    /* Filename is stored as a title for MEGA input alignment.
-     * If it is detected later a label "TITLE" in input file, this information
-     * will be replaced for that one */
-    // alig->filename.append("!Title ");
-    alig->filename.append(filename);
-    alig->filename.append(";");
 
     /* Skip first valid line */
     do {
@@ -268,9 +255,6 @@ Alignment* mega_sequential_state::LoadAlignment(const std::string &filename)
         /* Read a new line in a safe way */
         line = utils::readLine(file);
     }
-
-    /* Close input file */
-    file.close();
 
     /* Deallocate dynamic memory */
     delete [] line;

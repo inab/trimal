@@ -69,19 +69,11 @@ int clustal_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* clustal_state::LoadAlignment(const std::string &filename)
+Alignment* clustal_state::LoadAlignment(std::istream &file)
 {
     Alignment* alignment = new Alignment();
     int i, seqLength, pos, firstBlock;
     char *str, *line = nullptr;
-    std::ifstream file;
-    file.open(filename, std::ifstream::in);
-    
-    /* Store some details about input file to be used in posterior format
-     * conversions */
-    // alignment.filename.append("!Title ");
-    alignment->filename.append(filename);
-    alignment->filename.append(";");
 
     /* The first valid line corresponding to CLUSTAL label is ignored */
     do {
@@ -226,9 +218,6 @@ Alignment* clustal_state::LoadAlignment(const std::string &filename)
         /* Read current line and analyze it*/
         line = utils::readLine(file);
     }
-
-    /* Close the input file */
-    file.close();
 
     /* Deallocate dinamic memory */
     delete [] line;

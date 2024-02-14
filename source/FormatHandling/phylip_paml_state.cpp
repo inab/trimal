@@ -40,7 +40,7 @@ int phylip_paml_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* phylip_paml_state::LoadAlignment(const std::string &filename)
+Alignment* phylip_paml_state::LoadAlignment(std::istream &file)
 {
     return nullptr;
 }

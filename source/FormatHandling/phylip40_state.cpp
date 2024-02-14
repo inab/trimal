@@ -127,23 +127,12 @@ int phylip40_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* phylip40_state::LoadAlignment(const std::string &filename)
+Alignment* phylip40_state::LoadAlignment(std::istream &file)
 {
     /* PHYLIP/PHYLIP 4 (Sequential) file format parser */
     Alignment * alig = new Alignment();
     char *str, *line = nullptr;
-    std::ifstream file;
     int i;
-
-    /* Check the file and its content */
-    file.open(filename, std::ifstream::in);
-    if(!utils::checkFile(file))
-        return nullptr;
-
-    /* Store some data about filename for possible uses in other formats */
-    // alig->filename.append("!Title ");
-    alig->filename.append(filename);
-    alig->filename.append(";");
 
     /* Read first valid line in a safer way */
     do {
@@ -224,8 +213,7 @@ Alignment* phylip40_state::LoadAlignment(const std::string &filename)
         }
     }
 
-    /* Close the input file and delete dinamic memory */
-    file.close();
+    /* Delete dynamic memory */
     delete [] line;
 
     /* Check the matrix's content */

@@ -86,27 +86,14 @@ int mega_interleaved_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* mega_interleaved_state::LoadAlignment(const std::string &filename)
+Alignment* mega_interleaved_state::LoadAlignment(std::istream& file)
 {
     Alignment * alig = new Alignment();
    /* MEGA interleaved file format parser */
 
     char *frag = nullptr, *str = nullptr, *line = nullptr;
     int i, firstBlock = true;
-    std::ifstream file;
     
-    /* Check the file and its content */
-    file.open(filename, std::ifstream::in);
-    if(!utils::checkFile(file))
-        return nullptr;
-
-    /* Filename is stored as a title for MEGA input alignment.
-     * If it is detected later a label "TITLE" in input file, this information
-     * will be replaced for that one */
-    // alig->filename.append("!Title ");
-    alig->filename.append(filename);
-    alig->filename.append(";");
-
     /* Skip first valid line */
     do {
         line = utils::readLine(file);
@@ -143,18 +130,15 @@ Alignment* mega_interleaved_state::LoadAlignment(const std::string &filename)
 
         /* If TITLE label is found, replace previously stored information with
          * this info */
-        std::string newFilename {filename};
         if(!strcmp(str, "TITLE")) {
-            newFilename.clear();
+            alig->filename.clear();
             if(strncmp(line, "!", 1))
-                newFilename += "!";
-            newFilename += line;
+                alig->filename += "!";
+            alig->filename += line;
         }
             /* If FORMAT label is found, try to get some details from input file */
         else if(!strcmp(str, "FORMAT"))
              alig->alignmentInfo.append(line, strlen(line));
-
-        alig->filename = newFilename;
 
         /* Destroy previously allocated memory */
         delete [] frag;
@@ -255,9 +239,6 @@ Alignment* mega_interleaved_state::LoadAlignment(const std::string &filename)
         if (i == 0)
             firstBlock = false;
     }
-
-    /* Close input file */
-    file.close();
 
     /* Deallocate local memory */
     delete [] line;

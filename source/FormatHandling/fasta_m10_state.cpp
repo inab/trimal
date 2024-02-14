@@ -38,7 +38,7 @@ int fasta_m10_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* fasta_m10_state::LoadAlignment(const std::string &filename)
+Alignment* fasta_m10_state::LoadAlignment(std::istream &file)
 {
     return nullptr;
 }
