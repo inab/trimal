@@ -32,6 +32,7 @@
 
 #include "Alignment/Alignment.h"
 #include "reportsystem.h"
+#include "utils.h"
 
 #include <iomanip>
 
@@ -91,12 +92,21 @@ public:
                 <b> nullptr</b> if there was any error.
      */
     virtual Alignment *LoadAlignment(const std::string &filename) {
-        Alignment* ali;
+        Alignment* alignment;
         std::ifstream file;
+
         file.open(filename, std::ifstream::in);
-        ali = LoadAlignment(file);
+        if(!utils::checkFile(file))
+            return nullptr;
+
+        alignment = LoadAlignment(file);
+        if (alignment != nullptr) {
+            alignment->filename.append(filename);
+            alignment->filename.append(";");
+        }
+
         file.close();
-        return ali;
+        return alignment;
     }
 
     /**
@@ -105,7 +115,7 @@ public:
      \return    <b> Alignment</b> loaded with the information of the file. \n
                 <b> nullptr</b> if there was any error.
      */
-    virtual Alignment *LoadAlignment(std::istream& stream) = 0;
+    virtual Alignment *LoadAlignment(std::istream &file) = 0;
 
     /**
      \brief Function to save a \link Alignment \endlink to a file.
