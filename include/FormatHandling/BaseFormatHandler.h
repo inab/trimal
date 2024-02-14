@@ -90,7 +90,22 @@ public:
      \return    <b> Alignment</b> loaded with the information of the file. \n
                 <b> nullptr</b> if there was any error.
      */
-    virtual Alignment *LoadAlignment(const std::string &filename) = 0;
+    virtual Alignment *LoadAlignment(const std::string &filename) {
+        Alignment* ali;
+        std::ifstream file;
+        file.open(filename, std::ifstream::in);
+        ali = LoadAlignment(file);
+        file.close();
+        return ali;
+    }
+
+    /**
+     \brief Function to load a file in the current format and return an alignment object.
+     \param filename Filename of the file to load.
+     \return    <b> Alignment</b> loaded with the information of the file. \n
+                <b> nullptr</b> if there was any error.
+     */
+    virtual Alignment *LoadAlignment(std::istream& stream) = 0;
 
     /**
      \brief Function to save a \link Alignment \endlink to a file.
