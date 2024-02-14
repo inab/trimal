@@ -257,19 +257,6 @@ namespace utils {
     /**
      \brief Read a new line from current input stream.\n
      This function is better than standard one
-      since cares of operative system compatibility.\n
-     It is useful as well because removes tabs and blank spaces
-      at lines at beginning/ending.\n
-     \param file ifstream to read line from.
-     \return \n
-        Line that has been read or
-        nullptr if there is nothing to read.\n
-     */
-     char *readLine(std::ifstream &file);
-
-    /**
-     \brief Read a new line from current input stream.\n
-     This function is better than standard one
      since cares of operative system compatibility.\n
      It is useful as well because removes tabs
      and blank spaces at lines at beginning/ending.\n
