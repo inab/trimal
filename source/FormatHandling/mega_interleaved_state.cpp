@@ -41,17 +41,16 @@ int mega_interleaved_state::CheckAlignment(std::istream* origin)
     
     char c, *firstWord = nullptr, *line = nullptr;
     int blocks = 0;
-    std::string nline;
+    std::string buffer;
     
     /* Read first valid line in a safer way */
     do {
-        line = utils::readLine(*origin);
+        line = utils::readLine(*origin, buffer);
     } while ((line == nullptr) && (!origin->eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
     {
-        delete [] line;
         return 0;
     }
 
@@ -78,11 +77,10 @@ int mega_interleaved_state::CheckAlignment(std::istream* origin)
                 blocks++;
         } while((c != '\n') && (!origin->eof()));
 
-        delete [] line;
         /* MEGA Sequential (22) or Interleaved (21) */
         return (!blocks) ? 0 : 1;
     }
-    delete[] line;
+    // delete[] line;
     return 0;
 }
 
@@ -93,10 +91,11 @@ Alignment* mega_interleaved_state::LoadAlignment(std::istream& file)
 
     char *frag = nullptr, *str = nullptr, *line = nullptr;
     int i, firstBlock = true;
+    std::string buffer;
     
     /* Skip first valid line */
     do {
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
     } while ((line == nullptr) && (!file.eof()));
 
     /* If the file end is reached without a valid line, warn about it */
@@ -106,11 +105,8 @@ Alignment* mega_interleaved_state::LoadAlignment(std::istream& file)
     /* Try to get input alignment information */
     while(!file.eof()) {
 
-        /* Destroy previously allocated memory */
-        delete [] line;
-
         /* Read a new line in a safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
         if (line == nullptr)
             continue;
 
@@ -151,11 +147,8 @@ Alignment* mega_interleaved_state::LoadAlignment(std::istream& file)
         if(!strncmp(line, "#", 1))
             alig->numberOfSequences++;
 
-        /* Deallocate dynamic memory */
-        delete [] line;
-
         /* Read lines in a safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
 
         /* If a blank line is detected means first block of sequences is over */
         /* Then, break counting sequences loop */
@@ -172,16 +165,13 @@ Alignment* mega_interleaved_state::LoadAlignment(std::istream& file)
     alig->sequences = new std::string[alig->numberOfSequences];
 
     /* Skip first line */
-    line = utils::readLine(file);
+    line = utils::readLine(file, buffer);
 
     /* Skip lines until first # flag is reached */
     while(!file.eof()) {
 
-        /* Deallocate previously used dynamic memory */
-        delete [] line;
-
         /* Read line in a safer way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
 
         /* Determine whether a # flag has been found in current std::string */
         if (line != nullptr)
@@ -197,14 +187,14 @@ Alignment* mega_interleaved_state::LoadAlignment(std::istream& file)
 
         if (line == nullptr) {
             /* Read line in a safer way */
-            line = utils::readLine(file);
+            line = utils::readLine(file, buffer);
             continue;
         }
 
         if (!strncmp(line, "!", 1)) {
             /* Deallocate memory and read a new line */
-            delete [] line;
-            line = utils::readLine(file);
+            // delete [] line;
+            line = utils::readLine(file, buffer);
             continue;
         }
 
@@ -230,18 +220,13 @@ Alignment* mega_interleaved_state::LoadAlignment(std::istream& file)
         /* Deallocate previously used dynamic memory */
         delete [] frag;
 
-        delete [] line;
-
         /* Read line in a safer way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
 
         i = (i + 1) % alig->numberOfSequences;
         if (i == 0)
             firstBlock = false;
     }
-
-    /* Deallocate local memory */
-    delete [] line;
 
     /* Check the matrix's content */
     alig->fillMatrices(true);

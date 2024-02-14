@@ -41,17 +41,16 @@ int mega_sequential_state::CheckAlignment(std::istream* origin)
  
     char c, *firstWord = nullptr, *line = nullptr;
     int blocks = 0;
-    std::string nline;
+    std::string buffer;
 
     /* Read first valid line in a safer way */
     do {
-        line = utils::readLine(*origin);
+        line = utils::readLine(*origin, buffer);
     } while ((line == nullptr) && (!origin->eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
     {
-        delete [] line;
         return 0;
     }
 
@@ -77,11 +76,9 @@ int mega_sequential_state::CheckAlignment(std::istream* origin)
                 blocks++;
         } while((c != '\n') && (!origin->eof()));
 
-        delete [] line;
         /* MEGA Sequential (22) or Interleaved (21) */
         return (!blocks) ? 1 : 0;
     }
-    delete[] line;
     return 0;
 }
 
@@ -92,10 +89,11 @@ Alignment* mega_sequential_state::LoadAlignment(std::istream &file)
 
     char *frag = nullptr, *str = nullptr, *line = nullptr;
     int i;
+    std::string buffer;
 
     /* Skip first valid line */
     do {
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
     } while ((line == nullptr) && (!file.eof()));
 
     /* If the file end is reached without a valid line, warn about it */
@@ -105,12 +103,8 @@ Alignment* mega_sequential_state::LoadAlignment(std::istream &file)
     /* Try to get input alignment information */
     while(!file.eof()) {
 
-        /* Destroy previously allocated memory */
-        if (line != nullptr)
-            delete [] line;
-
         /* Read a new line in a safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
         if (line == nullptr)
             continue;
 
@@ -154,7 +148,7 @@ Alignment* mega_sequential_state::LoadAlignment(std::istream &file)
 
         /* Check whether input line is valid or not */
         if (line == nullptr) {
-            line = utils::readLine(file);
+            line = utils::readLine(file, buffer);
             continue;
         }
 
@@ -162,11 +156,8 @@ Alignment* mega_sequential_state::LoadAlignment(std::istream &file)
         if (!strncmp(line, "#", 1))
             alig->numberOfSequences++;
 
-        /* Destroy previously allocated memory */
-        delete [] line;
-
         /* Read a new line in a safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
 
     } while(!file.eof());
 
@@ -179,16 +170,13 @@ Alignment* mega_sequential_state::LoadAlignment(std::istream &file)
     alig->sequences = new std::string[alig->numberOfSequences];
 
     /* Skip first line */
-    line = utils::readLine(file);
+    line = utils::readLine(file, buffer);
 
     /* Skip lines until first sequence name is found */
     while(!file.eof()) {
 
-        /* Destroy previously allocated memory */
-        delete [] line;
-
         /* Read a new line in a safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
         if (line == nullptr)
             continue;
 
@@ -207,15 +195,14 @@ Alignment* mega_sequential_state::LoadAlignment(std::istream &file)
 
         /* Skip blank lines */
         if (line == nullptr) {
-            line = utils::readLine(file);
+            line = utils::readLine(file, buffer);
             continue;
         }
 
         /* Skip lines with comments */
         if (!strncmp(line, "!", 1)) {
-            /* Deallocate memory and read a new line */
-            delete [] line;
-            line = utils::readLine(file);
+            /* Read a new line */
+            line = utils::readLine(file, buffer);
             continue;
         }
 
@@ -224,10 +211,8 @@ Alignment* mega_sequential_state::LoadAlignment(std::istream &file)
 
         /* Skip lines with only comments */
         if (frag == nullptr) {
-
-            /* Deallocate memory and read a new line */
-            delete [] line;
-            line = utils::readLine(file);
+            /* Read a new line */
+            line = utils::readLine(file, buffer);
             continue;
         }
 
@@ -250,14 +235,9 @@ Alignment* mega_sequential_state::LoadAlignment(std::istream &file)
         /* Deallocate dynamic memory */
         delete [] frag;
 
-        delete [] line;
-
         /* Read a new line in a safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
     }
-
-    /* Deallocate dynamic memory */
-    delete [] line;
 
     /* Check the matrix's content */
     alig->fillMatrices(true);

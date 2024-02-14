@@ -50,16 +50,14 @@ Alignment* fasta_state::LoadAlignment(std::istream &file)
     Alignment* alig = new Alignment();
     char *str, *line = nullptr;
     int i;
+    std::string buffer;
 
     /* Compute how many sequences are in the input alignment */
     alig->numberOfSequences = 0;
     while(!file.eof()) {
 
-        /* Deallocate previously used dinamic memory */
-        delete [] line;
-
         /* Read lines in a safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
         if (line == nullptr)
             continue;
 
@@ -84,11 +82,8 @@ Alignment* fasta_state::LoadAlignment(std::istream &file)
 
     for(i = -1; (i < alig->numberOfSequences) && (!file.eof()); ) {
 
-        /* Deallocate previously used dinamic memory */
-        delete [] line;
-
         /* Read lines in a safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
         if (line == nullptr)
             continue;
 
@@ -120,10 +115,6 @@ Alignment* fasta_state::LoadAlignment(std::istream &file)
         }
     }
 
-    /* Deallocate previously used dinamic memory */
-    if (line != nullptr)
-        delete [] line;
-        
     /* Check the matrix's content */
     alig->fillMatrices(false);
     alig->originalNumberOfSequences = alig-> numberOfSequences;

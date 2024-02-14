@@ -265,7 +265,7 @@ namespace utils {
       nullptr if there is nothing to read.\n
       Line that has been read.
     */
-     char *readLine(std::istream &file);
+     char *readLine(std::istream &file, std::string &buffer);
 
     /**
      \brief Remove all content surrounded by ("") or ([]).\n

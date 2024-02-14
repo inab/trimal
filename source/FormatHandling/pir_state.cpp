@@ -36,18 +36,19 @@
 namespace FormatHandling {
 int pir_state::CheckAlignment(std::istream *origin) {
     char *line;
+    std::string buffer;
     origin->seekg(0);
-    line = utils::readLine(*origin);
+    line = utils::readLine(*origin, buffer);
     if (line == nullptr) return 0;
     if (strlen(line) > 4) {
         if (line[0] == '>')
             if (line[3] == ';')
             {
-                delete [] line;
+                // delete [] line;
                 return 2;
             }
     }
-    delete[] line;
+    // delete[] line;
     return 0;
 }
 
@@ -59,17 +60,18 @@ Alignment *pir_state::LoadAlignment(std::istream &file) {
     bool seqIdLine, seqLines;
     char *str, *line = nullptr;
     int i;
+    std::string buffer;
 
     /* Compute how many sequences are in the input alignment */
     alig->numberOfSequences = 0;
     while (!file.eof()) {
 
         /* Deallocate previously used dinamic memory */
-        if (line != nullptr)
-            delete[] line;
+        // if (line != nullptr)
+            // delete[] line;
 
         /* Read lines in a safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
         if (line == nullptr)
             continue;
 
@@ -101,10 +103,10 @@ Alignment *pir_state::LoadAlignment(std::istream &file) {
     while (!file.eof()) {
 
         /* Deallocate local memory */
-        delete[] line;
+        // delete[] line;
 
         /* Read lines in a safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
         if (line == nullptr)
             continue;
 
@@ -153,7 +155,7 @@ Alignment *pir_state::LoadAlignment(std::istream &file) {
     }
 
     /* Deallocate dinamic memory */
-    delete[] line;
+    // delete[] line;
 
     /* Check the matrix's content */
     alig->fillMatrices(true);

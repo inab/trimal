@@ -39,18 +39,16 @@ int clustal_state::CheckAlignment(std::istream* origin)
     origin->seekg(0);
     origin->clear();
     char *firstWord = nullptr, *line = nullptr;
-
+    std::string buffer;
     
     /* Read first valid line in a safer way */
     do {
-        delete[] line;
-        line = utils::readLine(*origin);
+        line = utils::readLine(*origin, buffer);
     } while ((line == nullptr) && (!origin->eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
     {
-        delete [] line;
         return false;
     }
 
@@ -60,11 +58,8 @@ int clustal_state::CheckAlignment(std::istream* origin)
     /* Clustal Format */
     if((!strcmp(firstWord, "CLUSTAL")) || (!strcmp(firstWord, "clustal")))
     {
-        delete [] line;
         return 1;
     }
-
-    delete[] line;
     
     return 0;
 }
@@ -74,11 +69,11 @@ Alignment* clustal_state::LoadAlignment(std::istream &file)
     Alignment* alignment = new Alignment();
     int i, seqLength, pos, firstBlock;
     char *str, *line = nullptr;
+    std::string buffer;
 
     /* The first valid line corresponding to CLUSTAL label is ignored */
     do {
-        delete [] line;
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
     } while ((line == nullptr) && (!file.eof()));
 
     /* If the file end is reached without a valid line, warn about it */
@@ -87,12 +82,8 @@ Alignment* clustal_state::LoadAlignment(std::istream &file)
 
     /* Ignore blank lines before first sequence block starts */
     while(!file.eof()) {
-
-        /* Deallocate previously used dynamic memory */
-        delete [] line;
-
         /* Read lines in safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
 
         if (line != nullptr)
             break;
@@ -122,14 +113,9 @@ Alignment* clustal_state::LoadAlignment(std::istream &file)
             break;
         alignment->numberOfSequences++;
 
-        /* Deallocate previously used dynamic memory */
-        delete [] line;
-
         /* Read lines in safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
     }
-
-    delete [] line;
 
     /* Finish to preprocess the input file. */
     file.clear();
@@ -140,7 +126,7 @@ Alignment* clustal_state::LoadAlignment(std::istream &file)
     alignment->sequences = new std::string[alignment->numberOfSequences];
 
     /* Read the title line and store it */
-    line = utils::readLine(file);
+    line = utils::readLine(file, buffer);
     if (line == nullptr)
         return nullptr;
     alignment->alignmentInfo.append(line, strlen(line));
@@ -148,11 +134,8 @@ Alignment* clustal_state::LoadAlignment(std::istream &file)
     /* Ignore blank lines before first sequence block starts */
     while(!file.eof()) {
 
-        /* Deallocate previously used dynamic memory */
-        delete [] line;
-
         /* Read lines in safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
 
         if (line != nullptr)
             break;
@@ -173,7 +156,7 @@ Alignment* clustal_state::LoadAlignment(std::istream &file)
             if (i == 0)
                 firstBlock = false;
             /* Read current line and analyze it*/
-            line = utils::readLine(file);
+            line = utils::readLine(file, buffer);
             continue;
         }
 
@@ -188,11 +171,8 @@ Alignment* clustal_state::LoadAlignment(std::istream &file)
         if (pos == seqLength) {
             firstBlock = false;
 
-            /* Deallocate dinamic memory if it has been used before */
-            delete [] line;
-
             /* Read current line and analyze it*/
-            line = utils::readLine(file);
+            line = utils::readLine(file, buffer);
 
             continue;
         }
@@ -212,15 +192,9 @@ Alignment* clustal_state::LoadAlignment(std::istream &file)
             i = (i + 1) % alignment->numberOfSequences;
         }
 
-        /* Deallocate dinamic memory if it has been used before */
-        delete [] line;
-
         /* Read current line and analyze it*/
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
     }
-
-    /* Deallocate dinamic memory */
-    delete [] line;
 
     /* Check the matrix's content */
     alignment->fillMatrices(true);

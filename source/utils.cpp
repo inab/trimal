@@ -301,48 +301,42 @@ namespace utils {
         return true;
     }
 
-    char *readLine(std::istream &file) {
+    char *readLine(std::istream &file, std::string &buffer) {
         // Read a new line from current input stream. This function is better than
         // standard one since cares of operative system compability. It is useful
         // as well because remove tabs and blank spaces at lines beginning/ending
 
         int state;
-        std::string nline;
         char *line = nullptr;
 
-        // Check it the end of the file has been reached or not
+        /* Check it the end of the file has been reached or not */
         if (file.eof())
             return nullptr;
 
+        /* Remove previous line from buffer, if any. */
+        buffer.clear();
 
-        /* Store first line found. For -Windows & MacOS compatibility- carriage return
-        * is considered as well as a new line character */
-        //    for( ; (c != '\n') && (c != '\r') && ((!file.eof())); file.read(&c, 1))
-        //        nline.resize(nline.size() + 1, c);
-        getline(file, nline);
+        /* Store next line into the buffer. */
+        getline(file, buffer);
+
         /* Remove blank spaces & tabs from the beginning of the line */
+        int begin = (int) buffer.find_first_not_of(" \t");
+        int end = (int) buffer.find_last_not_of(" \t");
+        int length = end - begin + 1;
 
-        state = nline.find(' ', 0);
-        while (state != (int) std::string::npos && state == 0) {
-            nline.erase(state, 1);
-            state = nline.find(' ', state);
+        /* If there is nothing to return, give back a nullptr pointer */
+        if (begin == (int) std::string::npos || length == 0)
+            return nullptr; 
+
+        /* Add the NUL-bytes sentinel to the end of the line. */
+        if (begin + length >= buffer.size()) {
+            buffer.push_back('\0');
+        } else {
+            buffer[begin + length] = 0;
         }
 
-        state = nline.find('\t', 0);
-        while (state != (int) std::string::npos && state == 0) {
-            nline.erase(state, 1);
-            state = nline.find('\t', state);
-        }
-
-        // If there is nothing to return, give back a nullptr pointer ...
-        if (nline.empty())
-            return nullptr;
-
-        // Otherwise, initialize the appropiate data structure,
-        // dump the data and return it
-        line = new char[nline.size() + 1];
-        strcpy(line, &nline[0]);
-        return line;
+        /* Return a view over a region of the buffer to avoid a copy. */
+        return &buffer[begin];
     }
 
     char *trimLine(std::string nline) {
