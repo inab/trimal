@@ -286,6 +286,11 @@
         "count": 28,
         "uniques": 7,
         "request_date": "2024-02-15"
+      },
+      {
+        "count": 27,
+        "uniques": 6,
+        "request_date": "2024-02-16"
       }
     ]
   },
@@ -626,6 +631,11 @@
         "count": 92,
         "uniques": 47,
         "request_date": "2024-02-15"
+      },
+      {
+        "count": 75,
+        "uniques": 40,
+        "request_date": "2024-02-16"
       }
     ]
   },
@@ -641,6 +651,11 @@
         "count": 2,
         "uniques": 1,
         "request_date": "2024-02-15"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-16"
       }
     ]
   },
@@ -971,6 +986,11 @@
         "count": 16,
         "uniques": 7,
         "request_date": "2024-02-15"
+      },
+      {
+        "count": 15,
+        "uniques": 6,
+        "request_date": "2024-02-16"
       }
     ]
   },
@@ -1031,6 +1051,16 @@
         "count": 2,
         "uniques": 1,
         "request_date": "2024-01-29"
+      }
+    ]
+  },
+  {
+    "referrer": "email.seznam.cz",
+    "views": [
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-16"
       }
     ]
   },
@@ -1321,6 +1351,11 @@
         "count": 20,
         "uniques": 10,
         "request_date": "2024-02-15"
+      },
+      {
+        "count": 20,
+        "uniques": 10,
+        "request_date": "2024-02-16"
       }
     ]
   },
@@ -1601,6 +1636,11 @@
         "count": 36,
         "uniques": 3,
         "request_date": "2024-02-15"
+      },
+      {
+        "count": 38,
+        "uniques": 4,
+        "request_date": "2024-02-16"
       }
     ]
   },
@@ -1786,6 +1826,11 @@
         "count": 1,
         "uniques": 1,
         "request_date": "2024-02-15"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-16"
       }
     ]
   },
@@ -2501,6 +2546,11 @@
         "count": 190,
         "uniques": 64,
         "request_date": "2024-02-15"
+      },
+      {
+        "count": 200,
+        "uniques": 65,
+        "request_date": "2024-02-16"
       }
     ]
   },
@@ -2936,6 +2986,11 @@
         "count": 6,
         "uniques": 4,
         "request_date": "2024-02-15"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-02-16"
       }
     ]
   }
