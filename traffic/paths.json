@@ -302,6 +302,11 @@
         "count": 225,
         "uniques": 139,
         "request_date": "2024-02-18"
+      },
+      {
+        "count": 217,
+        "uniques": 135,
+        "request_date": "2024-02-19"
       }
     ]
   },
@@ -819,6 +824,17 @@
     ]
   },
   {
+    "path": "/inab/trimal/commit/04745a39e00397aedeed229f55cd11d6fbbfde65",
+    "title": "Add trimmed MSAs and test them as part of the CI · inab/trimal@04745a3 · GitHub",
+    "views": [
+      {
+        "count": 11,
+        "uniques": 11,
+        "request_date": "2024-02-19"
+      }
+    ]
+  },
+  {
     "path": "/inab/trimal/issues",
     "title": "Issues · inab/trimal · GitHub",
     "views": [
@@ -1121,6 +1137,11 @@
         "count": 23,
         "uniques": 11,
         "request_date": "2024-02-18"
+      },
+      {
+        "count": 19,
+        "uniques": 8,
+        "request_date": "2024-02-19"
       }
     ]
   },
@@ -1262,6 +1283,11 @@
         "count": 13,
         "uniques": 7,
         "request_date": "2024-02-18"
+      },
+      {
+        "count": 13,
+        "uniques": 7,
+        "request_date": "2024-02-19"
       }
     ]
   },
@@ -1892,6 +1918,11 @@
         "count": 22,
         "uniques": 17,
         "request_date": "2024-02-18"
+      },
+      {
+        "count": 24,
+        "uniques": 18,
+        "request_date": "2024-02-19"
       }
     ]
   },
@@ -1984,6 +2015,11 @@
         "count": 12,
         "uniques": 7,
         "request_date": "2024-02-18"
+      },
+      {
+        "count": 12,
+        "uniques": 7,
+        "request_date": "2024-02-19"
       }
     ]
   },
@@ -2276,6 +2312,11 @@
         "count": 13,
         "uniques": 6,
         "request_date": "2024-02-18"
+      },
+      {
+        "count": 15,
+        "uniques": 7,
+        "request_date": "2024-02-19"
       }
     ]
   },
@@ -2497,6 +2538,11 @@
         "count": 18,
         "uniques": 7,
         "request_date": "2024-02-18"
+      },
+      {
+        "count": 15,
+        "uniques": 6,
+        "request_date": "2024-02-19"
       }
     ]
   },
@@ -2788,6 +2834,11 @@
         "count": 22,
         "uniques": 10,
         "request_date": "2024-02-18"
+      },
+      {
+        "count": 25,
+        "uniques": 11,
+        "request_date": "2024-02-19"
       }
     ]
   },
@@ -3094,6 +3145,11 @@
         "count": 32,
         "uniques": 13,
         "request_date": "2024-02-18"
+      },
+      {
+        "count": 36,
+        "uniques": 14,
+        "request_date": "2024-02-19"
       }
     ]
   },
