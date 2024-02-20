@@ -11,7 +11,7 @@ The simplest way to compile this package is:
     cmake . -DDISABLE_AVX2=1 -DDISABLE_NEON=1 will build with SSE2 only
     cmake . -DDISABLE_SSE2=1 -DDISABLE_NEON=1 will build with AVX2 only
     cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 will build with NEON only
-    cmake . will build with AVX2, SSE2 and NEON (and effectively use AVX2)
+    cmake . will build with AVX2, SSE2 and NEON (and effectively use AVX2 on x86 and NEON in arm)
   
   3. Type 'make' to compile.
 
