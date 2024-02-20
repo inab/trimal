@@ -43,6 +43,8 @@ jobs:
       - name: Build trimal for Linux aarch64
         if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'non_SIMD'
         uses: uraimo/run-on-arch-action@v2
+        # Emulate ARM architecture since it's not natively supported by GitHub. 
+        # Warning about image and host platforms not matching may be ignored (https://github.com/uraimo/run-on-arch-action/issues/127#issuecomment-1605691328)
         with:
           arch: ${{ matrix.arch }}
           distro: ubuntu20.04
@@ -58,6 +60,8 @@ jobs:
       - name: Build trimal for Linux aarch64 and NEON
         if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'NEON'
         uses: uraimo/run-on-arch-action@v2
+        # Emulate ARM architecture since it's not natively supported by GitHub. 
+        # Warning about image and host platforms not matching may be ignored (https://github.com/uraimo/run-on-arch-action/issues/127#issuecomment-1605691328)
         with:
           arch: ${{ matrix.arch }}
           distro: ubuntu20.04
