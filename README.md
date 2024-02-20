@@ -7,15 +7,29 @@ The simplest way to compile this package is:
 
   2. Type 'cmake .' to create a custom makefile. The CMake build will autodetect the best CPU features available. They can be individually disabled to build a version of the binary without SIMD (for testing):
 
-    cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 -DDISABLE_NEON=1 will build without SIMD
-    cmake . -DDISABLE_AVX2=1 -DDISABLE_NEON=1 will build with SSE2 only
-    cmake . -DDISABLE_SSE2=1 -DDISABLE_NEON=1 will build with AVX2 only
-    cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 will build with NEON only
-    cmake . will build with AVX2, SSE2 and NEON (and effectively use AVX2)
-  
+      2.1.  Build with AVX2, SSE2 and NEON (and effectively use AVX2 on x86 and NEON in arm)
+
+            cmake .
+     
+      2.2.  Build with SSE2 only
+     
+            cmake . -DDISABLE_AVX2=1 -DDISABLE_NEON=1
+    
+      2.3.  Build with AVX2 only
+
+            cmake . -DDISABLE_SSE2=1 -DDISABLE_NEON=1
+
+      2.4. Build with NEON only
+          
+            cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1
+
+      2.5. Build without SIMD
+    
+            cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 -DDISABLE_NEON=1
+      
   3. Type 'make' to compile.
 
-  3. Optionally, run trimAl/readAl with the examples into the 'dataset' 
+  4. Optionally, run trimAl/readAl with the examples into the 'dataset' 
      directory to check the correct installation.
 
 By default, 'make' compiles the source code of trimAl and readAl in the
