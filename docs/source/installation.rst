@@ -58,7 +58,7 @@ The simplest way to compile this package is:
 
   2. Create a custom makefile. The CMake build will autodetect the best CPU features available. They can be individually disabled:
      
-     2.1. Build with AVX2, SSE2 and NEON (and effectively use AVX2)
+     2.1. Build with AVX2, SSE2 and NEON (and effectively use AVX2 on x86 and NEON in arm)
 
      ::
 
