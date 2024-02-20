@@ -307,6 +307,8 @@ enum InfoCode {
 
     UsingPlatform                               = 5,
 
+    OnlyReadAndWrite                            = 6,
+
 
     __MAXINFO
 };

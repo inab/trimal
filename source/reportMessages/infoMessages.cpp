@@ -47,5 +47,8 @@ const std::map<InfoCode, const char *> reporting::reportManager::InfoMessages =
                 "Removing sequence \"[tag]\" as it is a duplicate of \"[tag]\"."},
 
     {InfoCode::UsingPlatform,
-                "Using \"[tag]\" CPU extensions to compute statistics."}
+                "Using \"[tag]\" CPU extensions to compute statistics."},
+
+    {InfoCode::OnlyReadAndWrite,
+                "No filtering or calculation performed. Output same MSA as input."}
 };

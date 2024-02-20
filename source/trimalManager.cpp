@@ -314,6 +314,11 @@ int trimAlManager::parseArguments(int argc, char **argv) {
         if ((origAlig = formatManager.loadAlignment(infile)) == nullptr) {
             appearErrors = true;
         }
+
+        if ((*i) + 1 == *argc) {
+            debug.report(InfoCode::OnlyReadAndWrite);
+        }
+
         return Recognized;
     }
     return NotRecognized;
