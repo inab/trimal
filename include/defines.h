@@ -30,10 +30,10 @@
 #ifndef DEFINES
 #define DEFINES
 
-#define BUILD "2019-05-08"
+#define BUILD "2019-02-20"
 #define VERSION "2"
 #define REVISION "RC"
-#define AUTHORS "2009-2019. Victor Fernández-Rodríguez, Toni Gabaldón, and Salvador Capella-Gutierrez"
+#define AUTHORS "2009-2024. Nicolás Díaz-Roussel, Victor Fernández-Rodríguez, Toni Gabaldón, and Salvador Capella-Gutierrez"
 
 #define GAPPYOUT 1
 #define STRICT   2
