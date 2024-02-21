@@ -111,7 +111,7 @@ public:
 #else
   inline uint16_t sum() const {
     __m256i sum256 = _mm256_sad_epu8(vector, _mm256_setzero_si256());
-    __m128i sum128 = _mm_add_epi64(_mm256_extractf128_si256(sum256, 1), _mm256_castsi256_si128(sum256));
+    __m128i sum128 = _mm_add_epi32(_mm256_extractf128_si256(sum256, 1), _mm256_castsi256_si128(sum256));
     return _mm_extract_epi32(sum128, 0) + _mm_extract_epi32(sum128, 1);
   }
 #endif
