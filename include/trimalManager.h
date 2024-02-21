@@ -315,8 +315,8 @@ public:
     // This structs can access all private methods of trimAlManager
     //
     // Original implementation: https://softwareengineering.stackexchange.com/a/257721
-    template <uint T> struct access_by;
-    template <uint T> friend struct access_by;
+    template <uint32_t T> struct access_by;
+    template <uint32_t T> friend struct access_by;
 
 // Defines to simplify the creation and usage of access_by structs
 

@@ -385,7 +385,7 @@ void iterateCombinations(
         const trimAlManager::argumentReport expectedReport,
         const bool expectedError,
         std::vector<argumentReference> booleanModifiersApplied = {},
-        const uint i = 0,
+        const uint32_t i = 0,
         const bool performRequested = false)
 {
     if (performRequested)

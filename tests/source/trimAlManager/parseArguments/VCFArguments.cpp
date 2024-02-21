@@ -147,7 +147,7 @@ void applyCalls(
         std::vector<const char *>& args,
         trimAlManager & manager,
         const trimAlManager::argumentReport expectedReport,
-        const bool expectedErrors, uint iterator = 0)
+        const bool expectedErrors, uint32_t iterator = 0)
 {
     if (iterator < models.size())
     {

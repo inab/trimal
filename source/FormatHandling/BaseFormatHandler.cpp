@@ -171,8 +171,8 @@ namespace FormatHandling {
                 if((openmode & std::ofstream::app) == 0 && utils::fileExists(finalFilename))
                 {
 
-                    uint i;
-                    for (i = 0; i < std::numeric_limits<uint>::max(); i++)
+                    uint32_t i;
+                    for (i = 0; i < std::numeric_limits<uint32_t>::max(); i++)
                     {
                         if (!utils::fileExists(finalFilename + "." + std::to_string(i)))
                         {
@@ -182,7 +182,7 @@ namespace FormatHandling {
                             break;
                         }
                     }
-                    if (i == std::numeric_limits<uint>::max())
+                    if (i == std::numeric_limits<uint32_t>::max())
                     {
 // Macro passed as compile time. See FormatHandlerOverwritePolicy.cmake
 #if FormatHandlerOverwritesOriginal
