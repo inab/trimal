@@ -111,8 +111,16 @@ public:
 #else
   inline uint16_t sum() const {
     __m256i sum256 = _mm256_sad_epu8(vector, _mm256_setzero_si256());
-    __m128i sum128 = _mm_add_epi64(_mm256_extractf128_si256(sum256, 1), _mm256_castsi256_si128(sum256));
-    return _mm_extract_epi32(sum128, 0) + _mm_extract_epi32(sum128, 1) + _mm_extract_epi32(sum128, 2) + _mm_extract_epi32(sum128, 3);
+    __m128i sum128 = _mm_add_epi32(_mm256_extractf128_si256(sum256, 1), _mm256_castsi256_si128(sum256));
+
+    // Sum the 32-bit elements in the lower 64 bits
+    sum128 = _mm_add_epi32(sum128, _mm_srli_si128(sum128, 8));
+
+    // Sum the 16-bit elements in the lower 32 bits
+    sum128 = _mm_add_epi16(_mm_unpacklo_epi32(sum128, _mm_setzero_si128()), _mm_unpackhi_epi32(sum128, _mm_setzero_si128()));
+
+    // Extract the result as a 16-bit integer
+    return static_cast<uint16_t>(_mm_extract_epi16(sum128, 0));
   }
 #endif
 
