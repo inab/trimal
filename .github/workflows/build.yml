@@ -6,6 +6,7 @@ on:
       - 'dataset/**'
       - 'include/**'
       - 'source/**'
+      - 'scripts/**'
       - 'tests/**'
   pull_request:
     paths:
@@ -13,6 +14,7 @@ on:
       - 'CMakeLists.txt'
       - 'dataset/**'
       - 'include/**'
+      - 'scripts/**'
       - 'source/**'
       - 'tests/**'
 name: Build 
