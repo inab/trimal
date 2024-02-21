@@ -36,7 +36,7 @@ jobs:
           arch: x86
           packages: >
             cmake
-            gcc
+            g++
             make
           shell-name: alpine-x86.sh
       - name: Build trimal for Linux x86
