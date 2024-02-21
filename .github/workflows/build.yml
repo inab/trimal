@@ -34,11 +34,13 @@ jobs:
         uses: jirutka/setup-alpine@v1
         with:
           arch: x86
-          packages: cmake
+          packages: >
+            cmake
+            make
           shell-name: alpine-x86.sh
       - name: Build trimal for Linux x86
         if: matrix.arch == 'x86' && matrix.cpu_instr == 'auto-selected' 
-        run: pwd && ls && cmake . && make && file bin/trimal && file bin/readal &&
+        run: cmake . && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh 
         shell: alpine-x86.sh {0}
       - name: Build trimal for Linux x86_64
