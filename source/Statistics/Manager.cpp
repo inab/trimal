@@ -420,7 +420,7 @@ namespace statistics {
 #endif
 #endif
 
-        // On Aarch64, test whether NEON is supported.
+        // On ARM, test whether NEON is supported.
 #ifdef CPU_FEATURES_ARCH_ARM
 #ifdef HAVE_NEON
         if (features.neon != 0) {
