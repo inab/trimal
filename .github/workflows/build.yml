@@ -36,7 +36,6 @@ jobs:
           arch: x86
           packages: cmake
           shell-name: alpine-x86.sh
-          volumes: /trimal:/trimal
       - name: Build trimal for Linux x86
         if: matrix.arch == 'x86' && matrix.cpu_instr == 'auto-selected' 
         run: pwd && ls && cmake . && make && file bin/trimal && file bin/readal &&
