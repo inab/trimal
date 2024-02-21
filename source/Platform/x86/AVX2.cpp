@@ -120,7 +120,7 @@ public:
     sum128 = _mm_add_epi16(_mm_unpacklo_epi32(sum128, _mm_setzero_si128()), _mm_unpackhi_epi32(sum128, _mm_setzero_si128()));
 
     // Extract the result as a 16-bit integer
-    return static_cast<uint16_t>(_mm_extract_epi16(sum128, 0));
+    return static_cast<uint16_t>(_mm_extract_epi16(sum128, 0) + _mm_extract_epi16(sum128, 4));
   }
 #endif
 
