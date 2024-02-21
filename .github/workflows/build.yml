@@ -1,7 +1,7 @@
 on:
   push:
     paths:
-      - '.github/workflows/**'
+      - '.github/workflows/build.yml'
       - 'CMakeLists.txt'
       - 'dataset/**'
       - 'include/**'
@@ -9,7 +9,7 @@ on:
       - 'tests/**'
   pull_request:
     paths:
-      - '.github/workflows/**'
+      - '.github/workflows/build.yml'
       - 'CMakeLists.txt'
       - 'dataset/**'
       - 'include/**'
@@ -22,13 +22,24 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        arch: [x86_64, aarch64]
+        arch: [x86]
         cpu_instr: [non-SIMD, SSE2, AVX2, NEON, auto-selected]
         
     steps:
       - uses: actions/checkout@v3
         with:
             submodules: true
+      - name: Setup Alpine Linux for x86
+        if: matrix.arch == 'x86' && matrix.cpu_instr == 'auto-selected'
+        uses: jirutka/setup-alpine@v1
+        with:
+          arch: x86
+          shell-name: alpine-x86.sh
+      - name: Build trimal for Linux x86
+        if: matrix.arch == 'x86' && matrix.cpu_instr == 'auto-selected' 
+        run: cmake . && make && file bin/trimal && file bin/readal &&
+          ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh 
+        shell: alpine-x86.sh {0}
       - name: Build trimal for Linux x86_64
         if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'non-SIMD' 
         run: cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
