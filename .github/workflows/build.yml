@@ -21,14 +21,14 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64, aarch64]
-        cpu_instr: [non_SIMD, SSE2, AVX2, NEON]
+        cpu_instr: [non-SIMD, SSE2, AVX2, NEON, auto-selected]
         
     steps:
       - uses: actions/checkout@v3
         with:
             submodules: true
       - name: Build trimal for Linux x86_64
-        if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'non_SIMD' 
+        if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'non-SIMD' 
         run: cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
       - name: Build trimal for Linux x86_64 and SSE2
@@ -39,9 +39,13 @@ jobs:
         if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'AVX2' 
         run: cmake . -DDISABLE_SSE2=1 && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+      - name: Build trimal for Linux x86_64 and auto-selected SIMD
+        if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'auto-selected' 
+        run: cmake . && make && file bin/trimal && file bin/readal &&
+          ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
       - name: Build trimal for Linux aarch64
-        if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'non_SIMD'
+        if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'non-SIMD'
         uses: uraimo/run-on-arch-action@v2
         # Emulate ARM architecture since it's not natively supported by GitHub. 
         # Warning about image and host platforms not matching may be ignored (https://github.com/uraimo/run-on-arch-action/issues/127#issuecomment-1605691328)
@@ -73,4 +77,21 @@ jobs:
             apt-get install -q -y cmake make g++ file
           run: |
             cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
+            ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+      - name: Build trimal for Linux aarch64 and auto-selected SIMD
+        if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'auto-selected'
+        uses: uraimo/run-on-arch-action@v2
+        # Emulate ARM architecture since it's not natively supported by GitHub. 
+        # Warning about image and host platforms not matching may be ignored (https://github.com/uraimo/run-on-arch-action/issues/127#issuecomment-1605691328)
+        with:
+          arch: ${{ matrix.arch }}
+          distro: ubuntu20.04
+          githubToken: ${{ github.token }}
+          dockerRunArgs: |
+            --volume "${PWD}:/trimal" 
+          install: |
+            apt-get update -q -y
+            apt-get install -q -y cmake make g++ file
+          run: |
+            cmake . && make && file bin/trimal && file bin/readal &&
             ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
