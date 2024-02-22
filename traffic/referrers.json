@@ -316,6 +316,11 @@
         "count": 15,
         "uniques": 4,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 15,
+        "uniques": 4,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -686,6 +691,11 @@
         "count": 86,
         "uniques": 38,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 92,
+        "uniques": 39,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -731,6 +741,11 @@
         "count": 2,
         "uniques": 1,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -1091,6 +1106,11 @@
         "count": 11,
         "uniques": 6,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 13,
+        "uniques": 7,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -1506,6 +1526,11 @@
         "count": 12,
         "uniques": 7,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 12,
+        "uniques": 7,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -1816,6 +1841,11 @@
         "count": 8,
         "uniques": 3,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 7,
+        "uniques": 3,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -2751,6 +2781,11 @@
         "count": 237,
         "uniques": 57,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 213,
+        "uniques": 62,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -3216,6 +3251,11 @@
         "count": 4,
         "uniques": 3,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-02-22"
       }
     ]
   }

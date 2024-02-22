@@ -317,6 +317,11 @@
         "count": 215,
         "uniques": 123,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 212,
+        "uniques": 126,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -383,6 +388,17 @@
         "count": 16,
         "uniques": 3,
         "request_date": "2024-01-02"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/actions/workflows/build.yml",
+    "title": "Build · Workflow runs · inab/trimal",
+    "views": [
+      {
+        "count": 27,
+        "uniques": 1,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -713,6 +729,11 @@
         "count": 18,
         "uniques": 6,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 20,
+        "uniques": 7,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -1183,6 +1204,11 @@
         "count": 17,
         "uniques": 5,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 15,
+        "uniques": 5,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -1979,6 +2005,11 @@
         "count": 26,
         "uniques": 17,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 24,
+        "uniques": 15,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -2086,6 +2117,11 @@
         "count": 14,
         "uniques": 8,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 13,
+        "uniques": 7,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -2393,6 +2429,11 @@
         "count": 29,
         "uniques": 11,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 27,
+        "uniques": 10,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -2629,6 +2670,11 @@
         "count": 13,
         "uniques": 5,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 13,
+        "uniques": 5,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -2935,6 +2981,11 @@
         "count": 27,
         "uniques": 11,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 27,
+        "uniques": 11,
+        "request_date": "2024-02-22"
       }
     ]
   },
@@ -3256,6 +3307,11 @@
         "count": 39,
         "uniques": 14,
         "request_date": "2024-02-21"
+      },
+      {
+        "count": 34,
+        "uniques": 12,
+        "request_date": "2024-02-22"
       }
     ]
   },
