@@ -134,10 +134,14 @@ public:
 
 #if (defined(_M_X64) || defined(__x86_64__))
     std::cout << "defined(_M_X64) || defined(__x86_64__) \n";
+#else
+    std::cout << " NOT defined(_M_X64) || defined(__x86_64__) \n";
 #endif
 
 #if !defined(CPU_FEATURES_ARCH_VM)
     std::cout << "!defined(CPU_FEATURES_ARCH_VM) \n";
+#else
+    std::cout << "NOT !defined(CPU_FEATURES_ARCH_VM) \n";
 #endif
      exit (1);
     return _mm_extract_epi32(sum128, 0) + _mm_extract_epi32(sum128, 2);
