@@ -102,12 +102,12 @@ public:
     return AVX2Vector(_mm256_andnot_si256(rhs.vector, vector));
   }
 
-#ifdef CPU_FEATURES_ARCH_X86_64
+#if (defined(_M_X64) || defined(__x86_64__)) && !defined(CPU_FEATURES_ARCH_VM)
   inline uint16_t sum() const {
     __m256i sum256 = _mm256_sad_epu8(vector, _mm256_setzero_si256());
     __m128i sum128 = _mm_add_epi64(_mm256_extractf128_si256(sum256, 1), _mm256_castsi256_si128(sum256));
-    /*
-        uint16_t res32 = _mm_extract_epi32(sum128, 0) + _mm_extract_epi32(sum128, 1);
+
+    uint16_t res32 = _mm_extract_epi32(sum128, 0) + _mm_extract_epi32(sum128, 1);
     uint16_t res32_2 = _mm_extract_epi32(sum128, 0) + _mm_extract_epi32(sum128, 2);
     uint16_t res64 = _mm_extract_epi64(sum128, 0) + _mm_extract_epi64(sum128, 1);
     if (res32 != res64) {
@@ -121,7 +121,6 @@ public:
       std::cout << "uint16_t res64 = " << res64 << "\n";
       exit (1);
     }
-    */
 
 
     return _mm_extract_epi64(sum128, 0) + _mm_extract_epi64(sum128, 1);
@@ -135,6 +134,7 @@ public:
 #if (defined(_M_X64) || defined(__x86_64__)) && !defined(CPU_FEATURES_ARCH_VM)
   #define CPU_FEATURES_ARCH_X86_64
 #endif
+
 
 
 #if (defined(_M_X64) || defined(__x86_64__))
