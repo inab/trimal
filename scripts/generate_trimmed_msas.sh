@@ -6,10 +6,6 @@ mkdir test_msas/automated1
 mkdir test_msas/nogaps
 mkdir test_msas/noallgaps
 
-./bin/trimal -in dataset/example.004.AA.fasta -strict -out test_msas/strict/example.014.AA.fasta
-
-exit 1
-
 ./bin/trimal -in dataset/example.004.AA.fasta -gappyout -out test_msas/gappyout/example.004.AA.fasta
 ./bin/trimal -in dataset/example.004.AA.fasta -strict -out test_msas/strict/example.004.AA.fasta
 ./bin/trimal -in dataset/example.004.AA.fasta -strictplus -out test_msas/strictplus/example.004.AA.fasta

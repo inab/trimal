@@ -44,6 +44,9 @@
 #include "defines.h"
 #include "reportsystem.h"
 #include "utils.h"
+#include "cpuinfo_x86.h"
+
+using namespace cpu_features;
 
 
 class AVX2Vector {
@@ -102,11 +105,10 @@ public:
     return AVX2Vector(_mm256_andnot_si256(rhs.vector, vector));
   }
 
-#if (defined(_M_X64) || defined(__x86_64__)) && !defined(CPU_FEATURES_ARCH_VM)
+#ifdef CPU_FEATURES_ARCH_X86_64
   inline uint16_t sum() const {
     __m256i sum256 = _mm256_sad_epu8(vector, _mm256_setzero_si256());
     __m128i sum128 = _mm_add_epi64(_mm256_extractf128_si256(sum256, 1), _mm256_castsi256_si128(sum256));
-
     uint16_t res32 = _mm_extract_epi32(sum128, 0) + _mm_extract_epi32(sum128, 1);
     uint16_t res32_2 = _mm_extract_epi32(sum128, 0) + _mm_extract_epi32(sum128, 2);
     uint16_t res64 = _mm_extract_epi64(sum128, 0) + _mm_extract_epi64(sum128, 1);
@@ -131,34 +133,7 @@ public:
     __m128i sum128 = _mm_add_epi64(_mm256_extractf128_si256(sum256, 1), _mm256_castsi256_si128(sum256));
      std::cout << "NOT CPU_FEATURES_ARCH_X86_64 \n";
 
-#if (defined(_M_X64) || defined(__x86_64__)) && !defined(CPU_FEATURES_ARCH_VM)
-  #define CPU_FEATURES_ARCH_X86_64
-#endif
-
-
-
-#if (defined(_M_X64) || defined(__x86_64__))
-    std::cout << "defined(_M_X64) || defined(__x86_64__) \n";
-#else
-    std::cout << " NOT defined(_M_X64) || defined(__x86_64__) \n";
-#endif
-
-#if !defined(CPU_FEATURES_ARCH_VM)
-    std::cout << "!defined(CPU_FEATURES_ARCH_VM) \n";
-#else
-    std::cout << "NOT !defined(CPU_FEATURES_ARCH_VM) \n";
-#endif
-
-#if (defined(_M_X64) || defined(__x86_64__)) && !defined(CPU_FEATURES_ARCH_VM)
-    std::cout << "BOTH ARE TRUE \n";
-#else
-    std::cout << " NOT BOTH ARE TRUE \n";
-#endif
-
-
-
-
-     exit (1);
+    exit (1);
     return _mm_extract_epi32(sum128, 0) + _mm_extract_epi32(sum128, 2);
   }
 #endif
