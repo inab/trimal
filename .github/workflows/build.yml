@@ -24,8 +24,8 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        arch: [x86_64]
-        cpu_instr: [AVX2]
+        arch: [x86, x86_64]
+        cpu_instr: [non-SIMD, SSE2, AVX2, NEON, auto-selected]
         
     steps:
       - uses: actions/checkout@v3
