@@ -6,6 +6,10 @@ mkdir test_msas/automated1
 mkdir test_msas/nogaps
 mkdir test_msas/noallgaps
 
+
+./bin/trimal -in dataset/example.014.AA.EggNOG.COG0591.fasta -strict -out test_msas/strict/example.014.AA.EggNOG.COG0591.fasta
+
+'
 ./bin/trimal -in dataset/example.004.AA.fasta -gappyout -out test_msas/gappyout/example.004.AA.fasta
 ./bin/trimal -in dataset/example.004.AA.fasta -strict -out test_msas/strict/example.004.AA.fasta
 ./bin/trimal -in dataset/example.004.AA.fasta -strictplus -out test_msas/strictplus/example.004.AA.fasta
@@ -510,3 +514,4 @@ mkdir test_msas/noallgaps
 ./bin/trimal -in dataset/example.091.AA.strNOG.ENOG411BWBU.fasta -automated1 -out test_msas/automated1/example.091.AA.strNOG.ENOG411BWBU.fasta
 ./bin/trimal -in dataset/example.091.AA.strNOG.ENOG411BWBU.fasta -nogaps -out test_msas/nogaps/example.091.AA.strNOG.ENOG411BWBU.fasta
 ./bin/trimal -in dataset/example.091.AA.strNOG.ENOG411BWBU.fasta -noallgaps -out test_msas/noallgaps/example.091.AA.strNOG.ENOG411BWBU.fasta
+'
