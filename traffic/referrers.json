@@ -326,6 +326,11 @@
         "count": 1,
         "uniques": 1,
         "request_date": "2024-02-23"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-24"
       }
     ]
   },
@@ -706,6 +711,11 @@
         "count": 94,
         "uniques": 39,
         "request_date": "2024-02-23"
+      },
+      {
+        "count": 88,
+        "uniques": 41,
+        "request_date": "2024-02-24"
       }
     ]
   },
@@ -761,6 +771,11 @@
         "count": 2,
         "uniques": 1,
         "request_date": "2024-02-23"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-24"
       }
     ]
   },
@@ -1131,6 +1146,11 @@
         "count": 22,
         "uniques": 13,
         "request_date": "2024-02-23"
+      },
+      {
+        "count": 19,
+        "uniques": 12,
+        "request_date": "2024-02-24"
       }
     ]
   },
@@ -1556,6 +1576,11 @@
         "count": 7,
         "uniques": 6,
         "request_date": "2024-02-23"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-02-24"
       }
     ]
   },
@@ -1876,6 +1901,11 @@
         "count": 7,
         "uniques": 3,
         "request_date": "2024-02-23"
+      },
+      {
+        "count": 7,
+        "uniques": 3,
+        "request_date": "2024-02-24"
       }
     ]
   },
@@ -2495,6 +2525,16 @@
     ]
   },
   {
+    "referrer": "toolshed.g2.bx.psu.edu",
+    "views": [
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-24"
+      }
+    ]
+  },
+  {
     "referrer": "trimal.cgenomics.org",
     "views": [
       {
@@ -2821,6 +2861,11 @@
         "count": 226,
         "uniques": 64,
         "request_date": "2024-02-23"
+      },
+      {
+        "count": 253,
+        "uniques": 66,
+        "request_date": "2024-02-24"
       }
     ]
   },
@@ -3296,6 +3341,11 @@
         "count": 4,
         "uniques": 3,
         "request_date": "2024-02-23"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-02-24"
       }
     ]
   }
