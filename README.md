@@ -1,6 +1,10 @@
 Basic Installation
 ==================
 
+After cloning, run this to clone the `cpu_features` submodule:
+
+    git submodule update --init
+
 The simplest way to compile this package is:
 
   1. 'cd' to the repository folder.
