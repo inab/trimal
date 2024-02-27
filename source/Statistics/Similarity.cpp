@@ -128,7 +128,7 @@ namespace statistics {
 
         // Calculate the maximum number of gaps a column can have to calculate it's
         //      similarity
-        float gapThreshold = 0.8F * alig->numberOfResidues;
+        float gapThreshold = 0.8F * alig->numberOfSequences;
 
         // For each column calculate the Q value and the MD value using an equation
         for (i = 0; i < alig->originalNumberOfResidues; i++) {
