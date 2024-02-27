@@ -44,11 +44,9 @@ int pir_state::CheckAlignment(std::istream *origin) {
         if (line[0] == '>')
             if (line[3] == ';')
             {
-                // delete [] line;
                 return 2;
             }
     }
-    // delete[] line;
     return 0;
 }
 
@@ -65,11 +63,6 @@ Alignment *pir_state::LoadAlignment(std::istream &file) {
     /* Compute how many sequences are in the input alignment */
     alig->numberOfSequences = 0;
     while (!file.eof()) {
-
-        /* Deallocate previously used dinamic memory */
-        // if (line != nullptr)
-            // delete[] line;
-
         /* Read lines in a safe way */
         line = utils::readLine(file, buffer);
         if (line == nullptr)
@@ -101,10 +94,6 @@ Alignment *pir_state::LoadAlignment(std::istream &file) {
 
     /* Read the entire input file */
     while (!file.eof()) {
-
-        /* Deallocate local memory */
-        // delete[] line;
-
         /* Read lines in a safe way */
         line = utils::readLine(file, buffer);
         if (line == nullptr)
@@ -153,9 +142,6 @@ Alignment *pir_state::LoadAlignment(std::istream &file) {
             }
         }
     }
-
-    /* Deallocate dinamic memory */
-    // delete[] line;
 
     /* Check the matrix's content */
     alig->fillMatrices(true);

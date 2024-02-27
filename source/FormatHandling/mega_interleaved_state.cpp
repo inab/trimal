@@ -80,7 +80,6 @@ int mega_interleaved_state::CheckAlignment(std::istream* origin)
         /* MEGA Sequential (22) or Interleaved (21) */
         return (!blocks) ? 0 : 1;
     }
-    // delete[] line;
     return 0;
 }
 
@@ -193,7 +192,6 @@ Alignment* mega_interleaved_state::LoadAlignment(std::istream& file)
 
         if (!strncmp(line, "!", 1)) {
             /* Deallocate memory and read a new line */
-            // delete [] line;
             line = utils::readLine(file, buffer);
             continue;
         }
