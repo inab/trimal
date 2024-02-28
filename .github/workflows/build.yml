@@ -87,12 +87,12 @@ jobs:
 
       - name: Build trimal for Linux armv7 (alpine)
         if: matrix.arch == 'armv7' && matrix.cpu_instr == 'non-SIMD' && matrix.os == 'alpine'
-        run: cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
+        run: cmake . -D_FILE_OFFSET_BITS=64 -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh 
         shell: alpine-armv7.sh {0}
       - name: Build trimal for Linux armv7 (alpine) and auto-selected SIMD (NEON)
         if: matrix.arch == 'armv7' && matrix.cpu_instr == 'auto-selected' && matrix.os == 'alpine'
-        run: cmake . && make && file bin/trimal && file bin/readal &&
+        run: cmake . -D_FILE_OFFSET_BITS=64 && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh 
         shell: alpine-armv7.sh {0}
 
@@ -111,7 +111,7 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y cmake make g++ file
           run: |
-            cmake . -DDISABLE_NEON=1 && make && file bin/trimal && file bin/readal &&
+            cmake . -D_FILE_OFFSET_BITS=64 -DDISABLE_NEON=1 && make && file bin/trimal && file bin/readal &&
             ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
       - name: Build trimal for Linux armv7 (ubuntu) and auto-selected SIMD (NEON)
@@ -129,7 +129,7 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y cmake make g++ file
           run: |
-            cmake . && make && file bin/trimal && file bin/readal &&
+            cmake . -D_FILE_OFFSET_BITS=64 && make && file bin/trimal && file bin/readal &&
             ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
       - name: Build trimal for Linux aarch64
