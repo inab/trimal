@@ -26,14 +26,13 @@ jobs:
       matrix:
         arch: [x86, x86_64, armv7, aarch64]
         cpu_instr: [non-SIMD, SSE2, auto-selected]
-        os: [ubuntu, alpine]
         
     steps:
       - uses: actions/checkout@v3
         with:
             submodules: true
       - name: Setup Alpine Linux for x86
-        if: matrix.arch == 'x86' && matrix.os == 'alpine'
+        if: matrix.arch == 'x86'
         uses: jirutka/setup-alpine@v1
         with:
           arch: x86
@@ -45,36 +44,36 @@ jobs:
           shell-name: alpine-x86.sh
 
       - name: Build trimal for Linux x86
-        if: matrix.arch == 'x86' && matrix.cpu_instr == 'non-SIMD' && matrix.os == 'alpine'
+        if: matrix.arch == 'x86' && matrix.cpu_instr == 'non-SIMD'
         run: cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh 
         shell: alpine-x86.sh {0}
       - name: Build trimal for Linux x86 and SSE2
-        if: matrix.arch == 'x86' && matrix.cpu_instr == 'SSE2' && matrix.os == 'alpine'
+        if: matrix.arch == 'x86' && matrix.cpu_instr == 'SSE2'
         run: cmake . -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh 
         shell: alpine-x86.sh {0}
       - name: Build trimal for Linux x86 and auto-selected SIMD (AVX2 if available)
-        if: matrix.arch == 'x86' && matrix.cpu_instr == 'auto-selected' && matrix.os == 'alpine'
+        if: matrix.arch == 'x86' && matrix.cpu_instr == 'auto-selected'
         run: cmake . && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh 
         shell: alpine-x86.sh {0}
 
       - name: Build trimal for Linux x86_64
-        if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'non-SIMD' && matrix.os == 'ubuntu'
+        if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'non-SIMD'
         run: cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
       - name: Build trimal for Linux x86_64 and SSE2
-        if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'SSE2' && matrix.os == 'ubuntu'
+        if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'SSE2'
         run: cmake . -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
       - name: Build trimal for Linux x86_64 and auto-selected SIMD (AVX2 if available)
-        if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'auto-selected' && matrix.os == 'ubuntu'
+        if: matrix.arch == 'x86_64' && matrix.cpu_instr == 'auto-selected'
         run: cmake . && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
       - name: Setup Alpine Linux for armv7
-        if: matrix.arch == 'armv7' && matrix.os == 'alpine'
+        if: matrix.arch == 'armv7'
         uses: jirutka/setup-alpine@v1
         with:
           arch: armv7
@@ -85,55 +84,19 @@ jobs:
             make
           shell-name: alpine-armv7.sh
 
-      - name: Build trimal for Linux armv7 (alpine)
-        if: matrix.arch == 'armv7' && matrix.cpu_instr == 'non-SIMD' && matrix.os == 'alpine'
-        run: cmake . -D_FILE_OFFSET_BITS=64 -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
+      - name: Build trimal for Linux armv7
+        if: matrix.arch == 'armv7' && matrix.cpu_instr == 'non-SIMD'
+        run: cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh 
         shell: alpine-armv7.sh {0}
-      - name: Build trimal for Linux armv7 (alpine) and auto-selected SIMD (NEON)
-        if: matrix.arch == 'armv7' && matrix.cpu_instr == 'auto-selected' && matrix.os == 'alpine'
-        run: cmake . -D_FILE_OFFSET_BITS=64 && make && file bin/trimal && file bin/readal &&
+      - name: Build trimal for Linux armv7 and auto-selected SIMD (NEON)
+        if: matrix.arch == 'armv7' && matrix.cpu_instr == 'auto-selected'
+        run: cmake . && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh 
         shell: alpine-armv7.sh {0}
-
-      - name: Build trimal for Linux armv7 (ubuntu)
-        if: matrix.arch == 'armv7' && matrix.cpu_instr == 'non-SIMD' && matrix.os == 'ubuntu'
-        uses: uraimo/run-on-arch-action@v2
-        # Emulate ARM architecture since it's not natively supported by GitHub. 
-        # Warning about image and host platforms not matching may be ignored (https://github.com/uraimo/run-on-arch-action/issues/127#issuecomment-1605691328)
-        with:
-          arch: ${{ matrix.arch }}
-          distro: ubuntu20.04
-          githubToken: ${{ github.token }}
-          dockerRunArgs: |
-            --volume "${PWD}:/trimal" 
-          install: |
-            apt-get update -q -y
-            apt-get install -q -y cmake make g++ file
-          run: |
-            cmake . -D_FILE_OFFSET_BITS=64 -DDISABLE_NEON=1 && make && file bin/trimal && file bin/readal &&
-            ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
-
-      - name: Build trimal for Linux armv7 (ubuntu) and auto-selected SIMD (NEON)
-        if: matrix.arch == 'armv7' && matrix.cpu_instr == 'auto-selected' && matrix.os == 'ubuntu'
-        uses: uraimo/run-on-arch-action@v2
-        # Emulate ARM architecture since it's not natively supported by GitHub. 
-        # Warning about image and host platforms not matching may be ignored (https://github.com/uraimo/run-on-arch-action/issues/127#issuecomment-1605691328)
-        with:
-          arch: ${{ matrix.arch }}
-          distro: ubuntu20.04
-          githubToken: ${{ github.token }}
-          dockerRunArgs: |
-            --volume "${PWD}:/trimal" 
-          install: |
-            apt-get update -q -y
-            apt-get install -q -y cmake make g++ file
-          run: |
-            cmake . -D_FILE_OFFSET_BITS=64 && make && file bin/trimal && file bin/readal &&
-            ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
       - name: Build trimal for Linux aarch64
-        if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'non-SIMD' && matrix.os == 'ubuntu'
+        if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'non-SIMD'
         uses: uraimo/run-on-arch-action@v2
         # Emulate ARM architecture since it's not natively supported by GitHub. 
         # Warning about image and host platforms not matching may be ignored (https://github.com/uraimo/run-on-arch-action/issues/127#issuecomment-1605691328)
@@ -150,7 +113,7 @@ jobs:
             cmake . -DDISABLE_NEON=1 && make && file bin/trimal && file bin/readal &&
             ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
       - name: Build trimal for Linux aarch64 and auto-selected SIMD (NEON)
-        if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'auto-selected' && matrix.os == 'ubuntu'
+        if: matrix.arch == 'aarch64' && matrix.cpu_instr == 'auto-selected'
         uses: uraimo/run-on-arch-action@v2
         # Emulate ARM architecture since it's not natively supported by GitHub. 
         # Warning about image and host platforms not matching may be ignored (https://github.com/uraimo/run-on-arch-action/issues/127#issuecomment-1605691328)
