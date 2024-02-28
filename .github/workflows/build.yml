@@ -33,7 +33,7 @@ jobs:
         with:
             submodules: true
       - name: Setup Alpine Linux for x86
-        if: matrix.arch == 'x86'
+        if: matrix.arch == 'x86' && matrix.os == 'alpine'
         uses: jirutka/setup-alpine@v1
         with:
           arch: x86
@@ -74,7 +74,7 @@ jobs:
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
       - name: Setup Alpine Linux for armv7
-        if: matrix.arch == 'armv7'
+        if: matrix.arch == 'armv7' && matrix.os == 'alpine'
         uses: jirutka/setup-alpine@v1
         with:
           arch: armv7
