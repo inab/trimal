@@ -39,7 +39,7 @@ int phylip32_m10_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* phylip32_m10_state::LoadAlignment(const std::string &filename)
+Alignment* phylip32_m10_state::LoadAlignment(std::istream &file)
 {
     return nullptr;
 }

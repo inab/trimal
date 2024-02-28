@@ -32,6 +32,7 @@
 
 #include "Alignment/Alignment.h"
 #include "reportsystem.h"
+#include "utils.h"
 
 #include <iomanip>
 
@@ -90,7 +91,37 @@ public:
      \return    <b> Alignment</b> loaded with the information of the file. \n
                 <b> nullptr</b> if there was any error.
      */
-    virtual Alignment *LoadAlignment(const std::string &filename) = 0;
+    virtual Alignment *LoadAlignment(const std::string &filename) {
+        Alignment* alignment;
+        std::ifstream file;
+
+        file.open(filename, std::ifstream::in);
+        if(!utils::checkFile(file))
+            return nullptr;
+
+        alignment = LoadAlignment(file);
+        if (alignment != nullptr) {
+            /* Alignment title may be set by the format handler, dependending on 
+             * the alignment format, so it should only be set here if there was
+             * none parsed already.
+             */
+            if (alignment->filename.empty()) {
+                alignment->filename.append(filename);
+                alignment->filename.append(";");
+            }
+        }
+
+        file.close();
+        return alignment;
+    }
+
+    /**
+     \brief Function to load a file in the current format and return an alignment object.
+     \param filename Filename of the file to load.
+     \return    <b> Alignment</b> loaded with the information of the file. \n
+                <b> nullptr</b> if there was any error.
+     */
+    virtual Alignment *LoadAlignment(std::istream &file) = 0;
 
     /**
      \brief Function to save a \link Alignment \endlink to a file.

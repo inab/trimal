@@ -40,11 +40,11 @@ int phylip40_state::CheckAlignment(std::istream* origin)
     origin->clear();
     char *firstWord = nullptr, *line = nullptr;
     int blocks = 0;
-    std::string nline;
+    std::string buffer;
     
     /* Read first valid line in a safer way */
     do {
-        line = utils::readLine(*origin);
+        line = utils::readLine(*origin, buffer);
     } while ((line == nullptr) && (!origin->eof()));
 
     /* If the file end is reached without a valid line, warn about it */
@@ -65,7 +65,6 @@ int phylip40_state::CheckAlignment(std::istream* origin)
         if(firstWord != nullptr)
             residNumber = atoi(firstWord);
         else {
-            delete [] line;
             return false;
         }
 
@@ -73,7 +72,6 @@ int phylip40_state::CheckAlignment(std::istream* origin)
          * it is impossible to determine exactly which phylip format is */
         if((sequenNumber == 1) && (residNumber != 0))
             {
-            delete [] line;
             return true;
         }
 
@@ -84,14 +82,12 @@ int phylip40_state::CheckAlignment(std::istream* origin)
 
             /* Read line in a safer way */
             do {
-                delete [] line;
-                line = utils::readLine(*origin);
+                line = utils::readLine(*origin, buffer);
             } while ((line == nullptr) && (!origin->eof()));
 
             /* If the file end is reached without a valid line, warn about it */
             if (origin->eof())
                 {
-                delete [] line;
                 return false;
             }
 
@@ -103,8 +99,7 @@ int phylip40_state::CheckAlignment(std::istream* origin)
 
             /* Read line in a safer way */
             do {
-                delete [] line;
-                line = utils::readLine(*origin);
+                line = utils::readLine(*origin, buffer);
             } while ((line == nullptr) && (!origin->eof()));
 
             firstWord = strtok(line, DELIMITERS);
@@ -112,8 +107,6 @@ int phylip40_state::CheckAlignment(std::istream* origin)
                 blocks--;
                 firstWord = strtok(nullptr, DELIMITERS);
             }
-            
-            delete [] line;
             
             /* If the file end is reached without a valid line, warn about it */
             if (origin->eof())
@@ -123,31 +116,20 @@ int phylip40_state::CheckAlignment(std::istream* origin)
             return (!blocks) ? 1 : 0;
         }
     }
-    delete[] line;
     return 0;
 }
 
-Alignment* phylip40_state::LoadAlignment(const std::string &filename)
+Alignment* phylip40_state::LoadAlignment(std::istream &file)
 {
     /* PHYLIP/PHYLIP 4 (Sequential) file format parser */
     Alignment * alig = new Alignment();
     char *str, *line = nullptr;
-    std::ifstream file;
     int i;
-
-    /* Check the file and its content */
-    file.open(filename, std::ifstream::in);
-    if(!utils::checkFile(file))
-        return nullptr;
-
-    /* Store some data about filename for possible uses in other formats */
-    // alig->filename.append("!Title ");
-    alig->filename.append(filename);
-    alig->filename.append(";");
+    std::string buffer;
 
     /* Read first valid line in a safer way */
     do {
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
     } while ((line == nullptr) && (!file.eof()));
 
     /* If the file end is reached without a valid line, warn about it */
@@ -178,9 +160,8 @@ Alignment* phylip40_state::LoadAlignment(const std::string &filename)
     i = 0;
     while((i < alig->numberOfSequences) && (!file.eof())){
 
-        /* Read lines in a safer way. Destroy previous stored information */
-        delete [] line;
-        line = utils::readLine(file);
+        /* Read lines in a safer way. */
+        line = utils::readLine(file, buffer);
 
         /* It the input line/s are blank lines, skip the loop iteration  */
         if(line == nullptr)
@@ -205,10 +186,8 @@ Alignment* phylip40_state::LoadAlignment(const std::string &filename)
         /* Try to get for each sequences its corresponding residues */
         i = 0;
         while((i < alig->numberOfSequences) && (!file.eof())) {
-            /* Read lines in a safer way. Destroy previous stored information */
-            delete [] line;
-
-            line = utils::readLine(file);
+            /* Read lines in a safer way. */
+            line = utils::readLine(file, buffer);
             /* It the input line/s are blank lines, skip the loop iteration  */
             if(line == nullptr)
                 continue;
@@ -223,10 +202,6 @@ Alignment* phylip40_state::LoadAlignment(const std::string &filename)
             i++;
         }
     }
-
-    /* Close the input file and delete dinamic memory */
-    file.close();
-    delete [] line;
 
     /* Check the matrix's content */
     alig->fillMatrices(true);

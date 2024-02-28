@@ -39,16 +39,16 @@ int nexus_state::CheckAlignment(std::istream* origin)
     origin->seekg(0);
     origin->clear();
     char *firstWord = nullptr, *line = nullptr;
+    std::string buffer;
     
     /* Read first valid line in a safer way */
     do {
-        line = utils::readLine(*origin);
+        line = utils::readLine(*origin, buffer);
     } while ((line == nullptr) && (!origin->eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
     {
-        delete [] line;
         return false;
     }
 
@@ -58,41 +58,25 @@ int nexus_state::CheckAlignment(std::istream* origin)
     /* Clustal Format */
     if((!strcmp(firstWord, "#NEXUS")) || (!strcmp(firstWord, "#nexus")))
     {
-        delete[] line;
         return 1;
     }
 
-    delete[] line;
     return 0;
 }
 
-Alignment* nexus_state::LoadAlignment(const std::string &filename)
+Alignment* nexus_state::LoadAlignment(std::istream& file)
 {
     Alignment* alig = new Alignment();
     /* NEXUS file format parser */
     char *frag = nullptr, *str = nullptr, *line = nullptr;
     int i, pos, state, firstBlock;
-    std::ifstream file;
-
-    /* Check the file and its content */
-    file.open(filename, std::ifstream::in);
-    if(!utils::checkFile(file))
-        return nullptr;
-
-    /* Store input file name for posterior uses in other formats */
-    /* We store the file name */
-    // alig->filename.append("!Title ");
-    alig->filename.append(filename);
-    alig->filename.append(";");
+    std::string buffer;
 
     state = false;
     do {
 
-        /* Destroy previous assigned memory */
-        delete [] line;
-
         /* Read line in a safer way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
         if (line == nullptr)
             continue;
 
@@ -147,11 +131,9 @@ Alignment* nexus_state::LoadAlignment(const std::string &filename)
     firstBlock = true;
 
     while(!file.eof()) {
-        /* Destroy previous assigned memory */
-        delete [] line;
 
         /* Read line in a safer way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
         if (line == nullptr)
             continue;
 
@@ -196,12 +178,6 @@ Alignment* nexus_state::LoadAlignment(const std::string &filename)
         if (not pos)
             firstBlock = false;
     }
-
-    /* Deallocate memory */
-    delete [] line;
-
-    /* Close the input file */
-    file.close();
 
     /* Check the matrix's content */
     alig->fillMatrices(true);

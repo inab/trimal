@@ -39,7 +39,7 @@ int htmlreport_state::CheckAlignment(std::istream* origin)
     return 0;
 }
 
-Alignment* htmlreport_state::LoadAlignment(const std::string &filename)
+Alignment* htmlreport_state::LoadAlignment(std::istream &file)
 {
     return nullptr;
 }

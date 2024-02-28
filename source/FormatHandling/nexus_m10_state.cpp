@@ -37,7 +37,7 @@ int nexus_m10_state::CheckAlignment(std::istream *origin) {
     return 0;
 }
 
-Alignment *nexus_m10_state::LoadAlignment(const std::string &filename) {
+Alignment *nexus_m10_state::LoadAlignment(std::istream &file) {
     return nullptr;
 }
 

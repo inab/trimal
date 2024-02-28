@@ -41,17 +41,16 @@ int mega_interleaved_state::CheckAlignment(std::istream* origin)
     
     char c, *firstWord = nullptr, *line = nullptr;
     int blocks = 0;
-    std::string nline;
+    std::string buffer;
     
     /* Read first valid line in a safer way */
     do {
-        line = utils::readLine(*origin);
+        line = utils::readLine(*origin, buffer);
     } while ((line == nullptr) && (!origin->eof()));
 
     /* If the file end is reached without a valid line, warn about it */
     if (origin->eof())
     {
-        delete [] line;
         return 0;
     }
 
@@ -78,38 +77,24 @@ int mega_interleaved_state::CheckAlignment(std::istream* origin)
                 blocks++;
         } while((c != '\n') && (!origin->eof()));
 
-        delete [] line;
         /* MEGA Sequential (22) or Interleaved (21) */
         return (!blocks) ? 0 : 1;
     }
-    delete[] line;
     return 0;
 }
 
-Alignment* mega_interleaved_state::LoadAlignment(const std::string &filename)
+Alignment* mega_interleaved_state::LoadAlignment(std::istream& file)
 {
     Alignment * alig = new Alignment();
    /* MEGA interleaved file format parser */
 
     char *frag = nullptr, *str = nullptr, *line = nullptr;
     int i, firstBlock = true;
-    std::ifstream file;
+    std::string buffer;
     
-    /* Check the file and its content */
-    file.open(filename, std::ifstream::in);
-    if(!utils::checkFile(file))
-        return nullptr;
-
-    /* Filename is stored as a title for MEGA input alignment.
-     * If it is detected later a label "TITLE" in input file, this information
-     * will be replaced for that one */
-    // alig->filename.append("!Title ");
-    alig->filename.append(filename);
-    alig->filename.append(";");
-
     /* Skip first valid line */
     do {
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
     } while ((line == nullptr) && (!file.eof()));
 
     /* If the file end is reached without a valid line, warn about it */
@@ -119,11 +104,8 @@ Alignment* mega_interleaved_state::LoadAlignment(const std::string &filename)
     /* Try to get input alignment information */
     while(!file.eof()) {
 
-        /* Destroy previously allocated memory */
-        delete [] line;
-
         /* Read a new line in a safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
         if (line == nullptr)
             continue;
 
@@ -143,18 +125,15 @@ Alignment* mega_interleaved_state::LoadAlignment(const std::string &filename)
 
         /* If TITLE label is found, replace previously stored information with
          * this info */
-        std::string newFilename {filename};
         if(!strcmp(str, "TITLE")) {
-            newFilename.clear();
+            alig->filename.clear();
             if(strncmp(line, "!", 1))
-                newFilename += "!";
-            newFilename += line;
+                alig->filename += "!";
+            alig->filename += line;
         }
             /* If FORMAT label is found, try to get some details from input file */
         else if(!strcmp(str, "FORMAT"))
              alig->alignmentInfo.append(line, strlen(line));
-
-        alig->filename = newFilename;
 
         /* Destroy previously allocated memory */
         delete [] frag;
@@ -167,11 +146,8 @@ Alignment* mega_interleaved_state::LoadAlignment(const std::string &filename)
         if(!strncmp(line, "#", 1))
             alig->numberOfSequences++;
 
-        /* Deallocate dynamic memory */
-        delete [] line;
-
         /* Read lines in a safe way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
 
         /* If a blank line is detected means first block of sequences is over */
         /* Then, break counting sequences loop */
@@ -188,16 +164,13 @@ Alignment* mega_interleaved_state::LoadAlignment(const std::string &filename)
     alig->sequences = new std::string[alig->numberOfSequences];
 
     /* Skip first line */
-    line = utils::readLine(file);
+    line = utils::readLine(file, buffer);
 
     /* Skip lines until first # flag is reached */
     while(!file.eof()) {
 
-        /* Deallocate previously used dynamic memory */
-        delete [] line;
-
         /* Read line in a safer way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
 
         /* Determine whether a # flag has been found in current std::string */
         if (line != nullptr)
@@ -213,14 +186,13 @@ Alignment* mega_interleaved_state::LoadAlignment(const std::string &filename)
 
         if (line == nullptr) {
             /* Read line in a safer way */
-            line = utils::readLine(file);
+            line = utils::readLine(file, buffer);
             continue;
         }
 
         if (!strncmp(line, "!", 1)) {
             /* Deallocate memory and read a new line */
-            delete [] line;
-            line = utils::readLine(file);
+            line = utils::readLine(file, buffer);
             continue;
         }
 
@@ -246,21 +218,13 @@ Alignment* mega_interleaved_state::LoadAlignment(const std::string &filename)
         /* Deallocate previously used dynamic memory */
         delete [] frag;
 
-        delete [] line;
-
         /* Read line in a safer way */
-        line = utils::readLine(file);
+        line = utils::readLine(file, buffer);
 
         i = (i + 1) % alig->numberOfSequences;
         if (i == 0)
             firstBlock = false;
     }
-
-    /* Close input file */
-    file.close();
-
-    /* Deallocate local memory */
-    delete [] line;
 
     /* Check the matrix's content */
     alig->fillMatrices(true);
