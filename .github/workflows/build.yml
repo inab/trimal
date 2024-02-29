@@ -86,7 +86,7 @@ jobs:
 
       - name: Build trimal for Linux armv7
         if: matrix.arch == 'armv7' && matrix.cpu_instr == 'non-SIMD'
-        run: cmake . -DDISABLE_SSE2=1 -DDISABLE_AVX2=1 && make && file bin/trimal && file bin/readal &&
+        run: cmake . -DDISABLE_NEON=1 && make && file bin/trimal && file bin/readal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh 
         shell: alpine-armv7.sh {0}
       - name: Build trimal for Linux armv7 and auto-selected SIMD (NEON)
