@@ -1,5 +1,15 @@
 [
   {
+    "referrer": "Baidu",
+    "views": [
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-03-05"
+      }
+    ]
+  },
+  {
     "referrer": "Bing",
     "views": [
       {
@@ -376,6 +386,11 @@
         "count": 23,
         "uniques": 11,
         "request_date": "2024-03-04"
+      },
+      {
+        "count": 24,
+        "uniques": 12,
+        "request_date": "2024-03-05"
       }
     ]
   },
@@ -806,6 +821,11 @@
         "count": 145,
         "uniques": 59,
         "request_date": "2024-03-04"
+      },
+      {
+        "count": 151,
+        "uniques": 62,
+        "request_date": "2024-03-05"
       }
     ]
   },
@@ -1291,6 +1311,11 @@
         "count": 44,
         "uniques": 24,
         "request_date": "2024-03-04"
+      },
+      {
+        "count": 44,
+        "uniques": 24,
+        "request_date": "2024-03-05"
       }
     ]
   },
@@ -1766,6 +1791,11 @@
         "count": 34,
         "uniques": 10,
         "request_date": "2024-03-04"
+      },
+      {
+        "count": 33,
+        "uniques": 9,
+        "request_date": "2024-03-05"
       }
     ]
   },
@@ -2131,6 +2161,11 @@
         "count": 3,
         "uniques": 2,
         "request_date": "2024-03-04"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-05"
       }
     ]
   },
@@ -2156,6 +2191,16 @@
         "count": 2,
         "uniques": 2,
         "request_date": "2023-12-24"
+      }
+    ]
+  },
+  {
+    "referrer": "it.search.yahoo.com",
+    "views": [
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-03-05"
       }
     ]
   },
@@ -2771,6 +2816,11 @@
         "count": 16,
         "uniques": 1,
         "request_date": "2024-03-04"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-03-05"
       }
     ]
   },
@@ -3221,6 +3271,11 @@
         "count": 260,
         "uniques": 75,
         "request_date": "2024-03-04"
+      },
+      {
+        "count": 308,
+        "uniques": 83,
+        "request_date": "2024-03-05"
       }
     ]
   },
@@ -3746,6 +3801,11 @@
         "count": 4,
         "uniques": 2,
         "request_date": "2024-03-04"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-03-05"
       }
     ]
   }
