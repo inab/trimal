@@ -522,6 +522,11 @@
         "count": 282,
         "uniques": 177,
         "request_date": "2024-04-02"
+      },
+      {
+        "count": 277,
+        "uniques": 174,
+        "request_date": "2024-04-03"
       }
     ]
   },
@@ -1214,6 +1219,11 @@
         "count": 23,
         "uniques": 11,
         "request_date": "2024-04-02"
+      },
+      {
+        "count": 27,
+        "uniques": 13,
+        "request_date": "2024-04-03"
       }
     ]
   },
@@ -1533,6 +1543,22 @@
         "count": 84,
         "uniques": 75,
         "request_date": "2024-04-02"
+      },
+      {
+        "count": 83,
+        "uniques": 74,
+        "request_date": "2024-04-03"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/commits/2.0_RC",
+    "title": "Commits · inab/trimal",
+    "views": [
+      {
+        "count": 14,
+        "uniques": 1,
+        "request_date": "2024-04-03"
       }
     ]
   },
@@ -2080,6 +2106,11 @@
         "count": 32,
         "uniques": 16,
         "request_date": "2024-04-02"
+      },
+      {
+        "count": 33,
+        "uniques": 15,
+        "request_date": "2024-04-03"
       }
     ]
   },
@@ -3112,6 +3143,11 @@
         "count": 64,
         "uniques": 39,
         "request_date": "2024-04-02"
+      },
+      {
+        "count": 67,
+        "uniques": 41,
+        "request_date": "2024-04-03"
       }
     ]
   },
@@ -3856,6 +3892,11 @@
         "count": 30,
         "uniques": 11,
         "request_date": "2024-04-02"
+      },
+      {
+        "count": 31,
+        "uniques": 11,
+        "request_date": "2024-04-03"
       }
     ]
   },
@@ -4277,6 +4318,11 @@
         "count": 26,
         "uniques": 7,
         "request_date": "2024-04-02"
+      },
+      {
+        "count": 22,
+        "uniques": 6,
+        "request_date": "2024-04-03"
       }
     ]
   },
@@ -4788,6 +4834,11 @@
         "count": 37,
         "uniques": 14,
         "request_date": "2024-04-02"
+      },
+      {
+        "count": 48,
+        "uniques": 17,
+        "request_date": "2024-04-03"
       }
     ]
   },
@@ -5314,6 +5365,11 @@
         "count": 31,
         "uniques": 13,
         "request_date": "2024-04-02"
+      },
+      {
+        "count": 33,
+        "uniques": 14,
+        "request_date": "2024-04-03"
       }
     ]
   },
