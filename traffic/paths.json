@@ -532,6 +532,11 @@
         "count": 276,
         "uniques": 170,
         "request_date": "2024-04-04"
+      },
+      {
+        "count": 288,
+        "uniques": 174,
+        "request_date": "2024-04-05"
       }
     ]
   },
@@ -1234,6 +1239,11 @@
         "count": 29,
         "uniques": 13,
         "request_date": "2024-04-04"
+      },
+      {
+        "count": 31,
+        "uniques": 14,
+        "request_date": "2024-04-05"
       }
     ]
   },
@@ -1563,6 +1573,11 @@
         "count": 76,
         "uniques": 71,
         "request_date": "2024-04-04"
+      },
+      {
+        "count": 70,
+        "uniques": 66,
+        "request_date": "2024-04-05"
       }
     ]
   },
@@ -2136,6 +2151,11 @@
         "count": 35,
         "uniques": 15,
         "request_date": "2024-04-04"
+      },
+      {
+        "count": 36,
+        "uniques": 16,
+        "request_date": "2024-04-05"
       }
     ]
   },
@@ -2666,6 +2686,17 @@
     ]
   },
   {
+    "path": "/inab/trimal/releases",
+    "title": "Releases · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 14,
+        "uniques": 9,
+        "request_date": "2024-04-05"
+      }
+    ]
+  },
+  {
     "path": "/inab/trimal/releases/tag/v1.4.1",
     "title": "Release Stable release of trimAl v1.4.1 · inab/trimal · GitHub",
     "views": [
@@ -3178,6 +3209,11 @@
         "count": 65,
         "uniques": 41,
         "request_date": "2024-04-04"
+      },
+      {
+        "count": 72,
+        "uniques": 41,
+        "request_date": "2024-04-05"
       }
     ]
   },
@@ -3932,6 +3968,11 @@
         "count": 37,
         "uniques": 14,
         "request_date": "2024-04-04"
+      },
+      {
+        "count": 40,
+        "uniques": 15,
+        "request_date": "2024-04-05"
       }
     ]
   },
@@ -4363,6 +4404,11 @@
         "count": 44,
         "uniques": 11,
         "request_date": "2024-04-04"
+      },
+      {
+        "count": 52,
+        "uniques": 13,
+        "request_date": "2024-04-05"
       }
     ]
   },
@@ -4884,6 +4930,11 @@
         "count": 53,
         "uniques": 19,
         "request_date": "2024-04-04"
+      },
+      {
+        "count": 57,
+        "uniques": 21,
+        "request_date": "2024-04-05"
       }
     ]
   },
@@ -5420,6 +5471,11 @@
         "count": 43,
         "uniques": 17,
         "request_date": "2024-04-04"
+      },
+      {
+        "count": 52,
+        "uniques": 19,
+        "request_date": "2024-04-05"
       }
     ]
   },
