@@ -606,6 +606,11 @@
         "count": 30,
         "uniques": 10,
         "request_date": "2024-04-16"
+      },
+      {
+        "count": 37,
+        "uniques": 12,
+        "request_date": "2024-04-17"
       }
     ]
   },
@@ -1371,6 +1376,11 @@
         "count": 95,
         "uniques": 55,
         "request_date": "2024-04-16"
+      },
+      {
+        "count": 103,
+        "uniques": 54,
+        "request_date": "2024-04-17"
       }
     ]
   },
@@ -1466,6 +1476,11 @@
         "count": 21,
         "uniques": 1,
         "request_date": "2024-04-16"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-17"
       }
     ]
   },
@@ -1591,6 +1606,11 @@
         "count": 3,
         "uniques": 1,
         "request_date": "2024-04-16"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-17"
       }
     ]
   },
@@ -2256,6 +2276,11 @@
         "count": 41,
         "uniques": 22,
         "request_date": "2024-04-16"
+      },
+      {
+        "count": 38,
+        "uniques": 24,
+        "request_date": "2024-04-17"
       }
     ]
   },
@@ -2951,6 +2976,11 @@
         "count": 11,
         "uniques": 5,
         "request_date": "2024-04-16"
+      },
+      {
+        "count": 12,
+        "uniques": 5,
+        "request_date": "2024-04-17"
       }
     ]
   },
@@ -4400,6 +4430,16 @@
     ]
   },
   {
+    "referrer": "stem.elearning.unipd.it",
+    "views": [
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-17"
+      }
+    ]
+  },
+  {
     "referrer": "toolshed.g2.bx.psu.edu",
     "views": [
       {
@@ -5046,6 +5086,11 @@
         "count": 206,
         "uniques": 73,
         "request_date": "2024-04-16"
+      },
+      {
+        "count": 203,
+        "uniques": 76,
+        "request_date": "2024-04-17"
       }
     ]
   },
@@ -5286,6 +5331,11 @@
         "count": 2,
         "uniques": 2,
         "request_date": "2024-04-16"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2024-04-17"
       }
     ]
   },
@@ -5881,6 +5931,11 @@
         "count": 12,
         "uniques": 9,
         "request_date": "2024-04-16"
+      },
+      {
+        "count": 10,
+        "uniques": 7,
+        "request_date": "2024-04-17"
       }
     ]
   },
