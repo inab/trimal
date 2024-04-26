@@ -651,6 +651,11 @@
         "count": 14,
         "uniques": 7,
         "request_date": "2024-04-25"
+      },
+      {
+        "count": 18,
+        "uniques": 10,
+        "request_date": "2024-04-26"
       }
     ]
   },
@@ -836,6 +841,11 @@
         "count": 33,
         "uniques": 1,
         "request_date": "2024-04-25"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-04-26"
       }
     ]
   },
@@ -1476,6 +1486,11 @@
         "count": 130,
         "uniques": 54,
         "request_date": "2024-04-25"
+      },
+      {
+        "count": 146,
+        "uniques": 61,
+        "request_date": "2024-04-26"
       }
     ]
   },
@@ -2461,6 +2476,11 @@
         "count": 51,
         "uniques": 26,
         "request_date": "2024-04-25"
+      },
+      {
+        "count": 56,
+        "uniques": 29,
+        "request_date": "2024-04-26"
       }
     ]
   },
@@ -3201,6 +3221,11 @@
         "count": 26,
         "uniques": 9,
         "request_date": "2024-04-25"
+      },
+      {
+        "count": 26,
+        "uniques": 9,
+        "request_date": "2024-04-26"
       }
     ]
   },
@@ -3706,6 +3731,11 @@
         "count": 3,
         "uniques": 1,
         "request_date": "2024-04-15"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-26"
       }
     ]
   },
@@ -4716,6 +4746,11 @@
         "count": 8,
         "uniques": 1,
         "request_date": "2024-04-25"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-26"
       }
     ]
   },
@@ -5411,6 +5446,11 @@
         "count": 270,
         "uniques": 87,
         "request_date": "2024-04-25"
+      },
+      {
+        "count": 249,
+        "uniques": 88,
+        "request_date": "2024-04-26"
       }
     ]
   },
@@ -6336,6 +6376,11 @@
         "count": 9,
         "uniques": 7,
         "request_date": "2024-04-25"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2024-04-26"
       }
     ]
   },
@@ -6391,6 +6436,16 @@
         "count": 3,
         "uniques": 2,
         "request_date": "2024-04-03"
+      }
+    ]
+  },
+  {
+    "referrer": "yandex.ru",
+    "views": [
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-04-26"
       }
     ]
   }
