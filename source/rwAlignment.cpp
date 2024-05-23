@@ -1,14 +1,16 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.4: a tool for automated alignment trimming in large-scale
+    trimAl v1.5.0: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
     readAl v1.4: a tool for automated alignment conversion among different
                  formats.
 
-    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
-              [scapella, tgabaldon]@crg.es
+    2009-2020
+        Fernandez-Rodriguez V.  (victor.fernandez@bsc.es)
+        Capella-Gutierrez S.    (salvador.capella@bsc.es)
+        Gabaldon, T.            (tgabaldon@bsc.es)
 
     This file is part of trimAl/readAl.
 
@@ -1920,7 +1922,7 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
   /* Print HTML header into output file */
   file << "<!DOCTYPE html>" << endl << "<html><head>" << endl << "    <meta "
     << "http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />"
-    << endl << "    <title>trimAl v1.4 Summary</title>" << endl
+    << endl << "    <title>trimAl v1.5.0 Summary</title>" << endl
     << "    <style type=\"text/css\" media=\"all\">" << endl
 
     << "    #b  { background-color: #3366ff; }\n"

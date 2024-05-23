@@ -1,7 +1,7 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.4: a tool for automated alignment trimming in large-scale
+    trimAl v1.5.0: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
     readAl v1.4: a tool for automated alignment conversion among different
@@ -10,8 +10,10 @@
     statAl v1.4: a tool for getting stats about multiple sequence alignments.
 
 
-    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
-              [scapella, tgabaldon]@crg.es
+    2009-2020
+        Fernandez-Rodriguez V.  (victor.fernandez@bsc.es)
+        Capella-Gutierrez S.    (salvador.capella@bsc.es)
+        Gabaldon, T.            (tgabaldon@bsc.es)
 
     This file is part of trimAl/readAl.
 
