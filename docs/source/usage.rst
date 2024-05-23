@@ -271,28 +271,28 @@ Automated
         Range: [0 - 1].
 
 
-Half Windows
+Window frame
 ==================
 
-Half window size, score of position i is the average of the window (i - n) to (i + n).
+Window frame size, score of position i is the average of the window (i - n) to (i + n).
 Only compatible with manual methods.
 
 .. option:: -w <n>
 
-        (half) General window size, applied to all stats.
+        General window frame size, applied to all stats.
             Not compatible with specific sizes.
 
 .. option:: -gw <n>
 
-        (half) Window size applied to Gaps.
+        Window frame size applied to Gaps.
 
 .. option:: -sw <n>
 
-        (half) Window size applied to Similarity.
+        Window frame size applied to Similarity.
 
 .. option:: -cw <n>
 
-        (half) Window size applied to Consistency.
+        Window frame size applied to Consistency.
 
 Statistics Output
 ==================
