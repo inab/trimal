@@ -18,8 +18,6 @@
 
 Welcome to trimAl's documentation!
 
-This is currently under development. For now you can visit `old documentation <http://inab.github.io/trimal/index.html>`_ and our `Github repository <https://github.com/inab/trimal>`_.
-
 trimAl
 ==================
 This is trimAl's information page. You can also find information related to readAl, a MSA format conversor.
