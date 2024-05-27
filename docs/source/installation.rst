@@ -6,7 +6,7 @@ Installation
     due to bug fixes incorporated during the development.
 
 
-Version 1.5.0 (latest)
+Version 1.5.0
 ========================
 The binaries can be downloaded for `Linux <https://github.com/inab/trimal/releases/download/v1.4.1/trimAl_Linux_x86-64.zip>`_
 and `Windows <https://github.com/inab/trimal/releases/download/v1.4.1/trimAl_Windows_x86-64.zip>`_. You may also download
