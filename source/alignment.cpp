@@ -4,10 +4,10 @@
     trimAl v1.5.0: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    readAl v1.4: a tool for automated alignment conversion among different
+    readAl v1.5.0: a tool for automated alignment conversion among different
                  formats.
 
-    statAl v1.4: a tool for getting stats about multiple sequence alignments.
+    statAl v1.5.0: a tool for getting stats about multiple sequence alignments.
 
 
     2009-2020

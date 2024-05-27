@@ -1,7 +1,7 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    statAl v1.4: a tool for getting descriptive alignment features/scores.
+    statAl v1.5.0: a tool for getting descriptive alignment features/scores.
 
     2009-2020
         Fernandez-Rodriguez V.  (victor.fernandez@bsc.es)
