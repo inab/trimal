@@ -482,7 +482,7 @@ void show_menu(void) {
     << "statAl v" << VERSION << ".rev" << REVISION << " build[" << BUILD
     << "]. " << AUTHORS << endl << endl;
 
-  cout << "statAl webpage: https://trimal.readthedocs.io.org" << endl << endl;
+  cout << "statAl webpage: https://trimal.readthedocs.io" << endl << endl;
 
   cout << "This program is free software: you can redistribute it and/or modify"
     << "\nit under the terms of the GNU General Public License as published by "
