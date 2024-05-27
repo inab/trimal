@@ -1803,7 +1803,7 @@ void menu(void) {
   cout << "trimAl v" << VERSION << ".rev" << REVISION  << " build[" << BUILD
        << "]. " << AUTHORS << endl << endl;
 
-  cout << "trimAl webpage: http://trimal.cgenomics.org" << endl << endl;
+  cout << "trimAl webpage: https://trimal.readthedocs.io.org" << endl << endl;
 
   cout << "This program is free software: you can redistribute it and/or modify " << endl
        << "it under the terms of the GNU General Public License as published by " << endl
@@ -1817,7 +1817,7 @@ void menu(void) {
   cout << "Basic usage" << endl
        << "\ttrimal -in <inputfile> -out <outputfile> -(other options)." << endl << endl;
 
-  cout << "Common options (for a complete list please see the User Guide or visit http://trimal.cgenomics.org):" << endl << endl;
+  cout << "Common options (for a complete list please see the User Guide or visit https://trimal.readthedocs.io.org):" << endl << endl;
   cout << "    -h                          " << "Print this information and show some examples." << endl;
   cout << "    --version                   " << "Print the trimAl version." << endl << endl;
 

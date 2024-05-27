@@ -321,7 +321,7 @@ void menu(void) {
     << "readAl v" << VERSION << ".rev" << REVISION << " build[" << BUILD
     << "]. " << AUTHORS << endl << endl
 
-    << "readAl webpage: http://trimal.cgenomics.org" << endl << endl
+    << "readAl webpage: https://trimal.readthedocs.io.org" << endl << endl
 
     << "This program is free software: you can redistribute it and/or modify "
     << endl
