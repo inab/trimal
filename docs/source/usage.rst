@@ -1,6 +1,10 @@
 Usage
 ***********************
 
+.. warning::
+    There may be some dissimilarity in the final MSA after trimming using different versions,
+    due to bug fixes incorporated during the development.
+
 Here we show all the options that trimAl offers to the user. At the bottom there are some :ref:`examples <some-examples>` of how to use the tool.
 
 Basic usage
