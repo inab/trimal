@@ -196,6 +196,16 @@ Manual Trimming - Thresholds
         in the original alignment to conserve.
         Range: [0 - 100]
 
+.. option:: -clusters <n>
+
+        Get the most Nth representatives sequences from a given alignment.
+        Range: [1 - (Number of sequences)]
+
+.. option:: -maxidentity <n>
+
+        Get the representatives sequences for a given identity threshold.
+        Range: [0 - 1].
+
 
 Overlap Trimming
 ------------------
@@ -205,7 +215,7 @@ Overlap Trimming
     It's main purpose is to remove sequences which share only a reduced region,
     whereas the other regions are not shared with the rest of sequences
     in the alignment and filled with gaps.
-    Both arguments must be provided jointly.
+    Both overlap thresholds (-resoverlap and -seqoverlap) must be provided jointly.
 
     Ex: Sp8 may be removed from the alignment depending on the thresholds.
 
@@ -259,16 +269,6 @@ Automated
         Use a heuristic selection of the automatic method
         based on similarity statistics. (see User Guide).
         Optimized for Maximum Likelihood phylogenetic tree reconstruction.
-
-.. option:: -clusters <n>
-
-        Get the most Nth representatives sequences from a given alignment.
-        Range: [1 - (Number of sequences)]
-
-.. option:: -maxidentity <n>
-
-        Get the representatives sequences for a given identity threshold.
-        Range: [0 - 1].
 
 
 Window frame
