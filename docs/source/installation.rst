@@ -1,16 +1,12 @@
 Installation
 *************
 
-.. warning::
-    There may be some dissimilarity in the final MSA after trimming using different versions,
-    due to bug fixes incorporated during the development.
-
 
 Version 1.5.0
 ========================
-The binaries can be downloaded for `Linux <https://github.com/inab/trimal/releases/download/v1.4.1/trimAl_Linux_x86-64.zip>`_
-and `Windows <https://github.com/inab/trimal/releases/download/v1.4.1/trimAl_Windows_x86-64.zip>`_. You may also download
-the source code from `Github repository <https://github.com/inab/trimal/releases/tag/v1.4.1>`_ and then compile it yourself.
+The binaries can be downloaded for `Linux <https://github.com/inab/trimal/releases/download/v1.5.0/trimAl_Linux_x86-64.zip>`_,
+`MacOS <https://github.com/inab/trimal/releases/download/v1.5.0/trimAl_MacOS_x86-64.zip>`_ and `Windows <https://github.com/inab/trimal/releases/download/v1.5.0/trimAl_Windows_x86-64.zip>`_. You may also download
+the source code from `Github repository <https://github.com/inab/trimal/releases/tag/v1.5.0>`_ and then compile it yourself.
 The simplest way to compile this package is:
 
   1. Go to the directory containing the package's source code ('source').
