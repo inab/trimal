@@ -62,9 +62,8 @@ If you have any doubt or problem feel free to open a `Github issue <https://gith
 
 Development team
 ================
-- Nicolás Díaz Roussel
 - Salvador Capella Gutiérrez
 - Toni Gabaldón
-- Víctor Fernández Rodríguez (former)
+- Víctor Fernández Rodríguez
 - Jose M. Silla Martínez (former)
 
