@@ -867,6 +867,11 @@
         "count": 364,
         "uniques": 206,
         "request_date": "2024-06-10"
+      },
+      {
+        "count": 356,
+        "uniques": 197,
+        "request_date": "2024-06-11"
       }
     ]
   },
@@ -1904,6 +1909,11 @@
         "count": 56,
         "uniques": 20,
         "request_date": "2024-06-10"
+      },
+      {
+        "count": 57,
+        "uniques": 21,
+        "request_date": "2024-06-11"
       }
     ]
   },
@@ -3471,6 +3481,11 @@
         "count": 35,
         "uniques": 17,
         "request_date": "2024-06-10"
+      },
+      {
+        "count": 25,
+        "uniques": 15,
+        "request_date": "2024-06-11"
       }
     ]
   },
@@ -4283,6 +4298,11 @@
         "count": 29,
         "uniques": 12,
         "request_date": "2024-06-10"
+      },
+      {
+        "count": 28,
+        "uniques": 11,
+        "request_date": "2024-06-11"
       }
     ]
   },
@@ -5134,6 +5154,11 @@
         "count": 118,
         "uniques": 64,
         "request_date": "2024-06-10"
+      },
+      {
+        "count": 112,
+        "uniques": 60,
+        "request_date": "2024-06-11"
       }
     ]
   },
@@ -6283,6 +6308,11 @@
         "count": 26,
         "uniques": 13,
         "request_date": "2024-06-10"
+      },
+      {
+        "count": 26,
+        "uniques": 13,
+        "request_date": "2024-06-11"
       }
     ]
   },
@@ -7049,6 +7079,11 @@
         "count": 48,
         "uniques": 14,
         "request_date": "2024-06-10"
+      },
+      {
+        "count": 46,
+        "uniques": 13,
+        "request_date": "2024-06-11"
       }
     ]
   },
@@ -7905,6 +7940,11 @@
         "count": 35,
         "uniques": 14,
         "request_date": "2024-06-10"
+      },
+      {
+        "count": 39,
+        "uniques": 16,
+        "request_date": "2024-06-11"
       }
     ]
   },
@@ -8776,6 +8816,11 @@
         "count": 95,
         "uniques": 21,
         "request_date": "2024-06-10"
+      },
+      {
+        "count": 89,
+        "uniques": 21,
+        "request_date": "2024-06-11"
       }
     ]
   },
@@ -8832,6 +8877,17 @@
         "count": 20,
         "uniques": 4,
         "request_date": "2024-03-27"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/tree/v1.4.1",
+    "title": "inab/trimal at v1.4.1",
+    "views": [
+      {
+        "count": 15,
+        "uniques": 5,
+        "request_date": "2024-06-11"
       }
     ]
   }
