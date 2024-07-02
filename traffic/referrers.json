@@ -1,5 +1,115 @@
 [
   {
+    "referrer": "Baidu",
+    "views": [
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-03-05"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-03-06"
+      },
+      {
+        "count": 8,
+        "uniques": 3,
+        "request_date": "2024-04-29"
+      },
+      {
+        "count": 8,
+        "uniques": 3,
+        "request_date": "2024-04-30"
+      },
+      {
+        "count": 8,
+        "uniques": 3,
+        "request_date": "2024-05-01"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2024-05-02"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2024-05-03"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2024-05-04"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2024-05-05"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2024-05-06"
+      },
+      {
+        "count": 10,
+        "uniques": 3,
+        "request_date": "2024-05-07"
+      },
+      {
+        "count": 10,
+        "uniques": 3,
+        "request_date": "2024-05-08"
+      },
+      {
+        "count": 10,
+        "uniques": 3,
+        "request_date": "2024-05-09"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-05-10"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-05-11"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-06-27"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-06-28"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-06-29"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-06-30"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-07-01"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-07-02"
+      }
+    ]
+  },
+  {
     "referrer": "Bing",
     "views": [
       {
@@ -146,6 +256,1231 @@
         "count": 29,
         "uniques": 14,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 26,
+        "uniques": 14,
+        "request_date": "2024-01-19"
+      },
+      {
+        "count": 25,
+        "uniques": 14,
+        "request_date": "2024-01-20"
+      },
+      {
+        "count": 24,
+        "uniques": 13,
+        "request_date": "2024-01-21"
+      },
+      {
+        "count": 24,
+        "uniques": 13,
+        "request_date": "2024-01-22"
+      },
+      {
+        "count": 24,
+        "uniques": 14,
+        "request_date": "2024-01-23"
+      },
+      {
+        "count": 25,
+        "uniques": 16,
+        "request_date": "2024-01-24"
+      },
+      {
+        "count": 23,
+        "uniques": 16,
+        "request_date": "2024-01-25"
+      },
+      {
+        "count": 26,
+        "uniques": 18,
+        "request_date": "2024-01-26"
+      },
+      {
+        "count": 27,
+        "uniques": 19,
+        "request_date": "2024-01-27"
+      },
+      {
+        "count": 26,
+        "uniques": 18,
+        "request_date": "2024-01-28"
+      },
+      {
+        "count": 22,
+        "uniques": 16,
+        "request_date": "2024-01-29"
+      },
+      {
+        "count": 21,
+        "uniques": 15,
+        "request_date": "2024-01-30"
+      },
+      {
+        "count": 15,
+        "uniques": 13,
+        "request_date": "2024-01-31"
+      },
+      {
+        "count": 13,
+        "uniques": 11,
+        "request_date": "2024-02-01"
+      },
+      {
+        "count": 14,
+        "uniques": 12,
+        "request_date": "2024-02-02"
+      },
+      {
+        "count": 14,
+        "uniques": 12,
+        "request_date": "2024-02-03"
+      },
+      {
+        "count": 14,
+        "uniques": 12,
+        "request_date": "2024-02-04"
+      },
+      {
+        "count": 12,
+        "uniques": 10,
+        "request_date": "2024-02-05"
+      },
+      {
+        "count": 9,
+        "uniques": 7,
+        "request_date": "2024-02-06"
+      },
+      {
+        "count": 15,
+        "uniques": 7,
+        "request_date": "2024-02-07"
+      },
+      {
+        "count": 16,
+        "uniques": 5,
+        "request_date": "2024-02-08"
+      },
+      {
+        "count": 15,
+        "uniques": 4,
+        "request_date": "2024-02-09"
+      },
+      {
+        "count": 29,
+        "uniques": 7,
+        "request_date": "2024-02-10"
+      },
+      {
+        "count": 29,
+        "uniques": 7,
+        "request_date": "2024-02-11"
+      },
+      {
+        "count": 29,
+        "uniques": 7,
+        "request_date": "2024-02-12"
+      },
+      {
+        "count": 29,
+        "uniques": 7,
+        "request_date": "2024-02-13"
+      },
+      {
+        "count": 29,
+        "uniques": 7,
+        "request_date": "2024-02-14"
+      },
+      {
+        "count": 28,
+        "uniques": 7,
+        "request_date": "2024-02-15"
+      },
+      {
+        "count": 27,
+        "uniques": 6,
+        "request_date": "2024-02-16"
+      },
+      {
+        "count": 27,
+        "uniques": 6,
+        "request_date": "2024-02-17"
+      },
+      {
+        "count": 27,
+        "uniques": 6,
+        "request_date": "2024-02-18"
+      },
+      {
+        "count": 27,
+        "uniques": 6,
+        "request_date": "2024-02-19"
+      },
+      {
+        "count": 18,
+        "uniques": 4,
+        "request_date": "2024-02-20"
+      },
+      {
+        "count": 15,
+        "uniques": 4,
+        "request_date": "2024-02-21"
+      },
+      {
+        "count": 15,
+        "uniques": 4,
+        "request_date": "2024-02-22"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-23"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-24"
+      },
+      {
+        "count": 11,
+        "uniques": 4,
+        "request_date": "2024-02-25"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2024-02-26"
+      },
+      {
+        "count": 14,
+        "uniques": 5,
+        "request_date": "2024-02-27"
+      },
+      {
+        "count": 20,
+        "uniques": 8,
+        "request_date": "2024-02-28"
+      },
+      {
+        "count": 23,
+        "uniques": 11,
+        "request_date": "2024-02-29"
+      },
+      {
+        "count": 23,
+        "uniques": 11,
+        "request_date": "2024-03-01"
+      },
+      {
+        "count": 23,
+        "uniques": 11,
+        "request_date": "2024-03-02"
+      },
+      {
+        "count": 23,
+        "uniques": 11,
+        "request_date": "2024-03-03"
+      },
+      {
+        "count": 23,
+        "uniques": 11,
+        "request_date": "2024-03-04"
+      },
+      {
+        "count": 24,
+        "uniques": 12,
+        "request_date": "2024-03-05"
+      },
+      {
+        "count": 24,
+        "uniques": 12,
+        "request_date": "2024-03-06"
+      },
+      {
+        "count": 24,
+        "uniques": 12,
+        "request_date": "2024-03-07"
+      },
+      {
+        "count": 24,
+        "uniques": 12,
+        "request_date": "2024-03-08"
+      },
+      {
+        "count": 16,
+        "uniques": 11,
+        "request_date": "2024-03-09"
+      },
+      {
+        "count": 14,
+        "uniques": 10,
+        "request_date": "2024-03-10"
+      },
+      {
+        "count": 13,
+        "uniques": 9,
+        "request_date": "2024-03-11"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-03-12"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-13"
+      },
+      {
+        "count": 6,
+        "uniques": 5,
+        "request_date": "2024-03-14"
+      },
+      {
+        "count": 8,
+        "uniques": 7,
+        "request_date": "2024-03-15"
+      },
+      {
+        "count": 8,
+        "uniques": 7,
+        "request_date": "2024-03-16"
+      },
+      {
+        "count": 9,
+        "uniques": 8,
+        "request_date": "2024-03-17"
+      },
+      {
+        "count": 8,
+        "uniques": 7,
+        "request_date": "2024-03-18"
+      },
+      {
+        "count": 9,
+        "uniques": 8,
+        "request_date": "2024-03-19"
+      },
+      {
+        "count": 9,
+        "uniques": 8,
+        "request_date": "2024-03-20"
+      },
+      {
+        "count": 10,
+        "uniques": 9,
+        "request_date": "2024-03-21"
+      },
+      {
+        "count": 8,
+        "uniques": 8,
+        "request_date": "2024-03-22"
+      },
+      {
+        "count": 8,
+        "uniques": 8,
+        "request_date": "2024-03-23"
+      },
+      {
+        "count": 9,
+        "uniques": 9,
+        "request_date": "2024-03-24"
+      },
+      {
+        "count": 13,
+        "uniques": 11,
+        "request_date": "2024-03-25"
+      },
+      {
+        "count": 16,
+        "uniques": 12,
+        "request_date": "2024-03-26"
+      },
+      {
+        "count": 15,
+        "uniques": 11,
+        "request_date": "2024-03-27"
+      },
+      {
+        "count": 37,
+        "uniques": 12,
+        "request_date": "2024-03-28"
+      },
+      {
+        "count": 43,
+        "uniques": 13,
+        "request_date": "2024-03-29"
+      },
+      {
+        "count": 42,
+        "uniques": 12,
+        "request_date": "2024-03-30"
+      },
+      {
+        "count": 41,
+        "uniques": 11,
+        "request_date": "2024-03-31"
+      },
+      {
+        "count": 43,
+        "uniques": 11,
+        "request_date": "2024-04-01"
+      },
+      {
+        "count": 50,
+        "uniques": 14,
+        "request_date": "2024-04-02"
+      },
+      {
+        "count": 61,
+        "uniques": 16,
+        "request_date": "2024-04-03"
+      },
+      {
+        "count": 63,
+        "uniques": 17,
+        "request_date": "2024-04-04"
+      },
+      {
+        "count": 68,
+        "uniques": 18,
+        "request_date": "2024-04-05"
+      },
+      {
+        "count": 68,
+        "uniques": 18,
+        "request_date": "2024-04-06"
+      },
+      {
+        "count": 65,
+        "uniques": 17,
+        "request_date": "2024-04-07"
+      },
+      {
+        "count": 67,
+        "uniques": 17,
+        "request_date": "2024-04-08"
+      },
+      {
+        "count": 75,
+        "uniques": 20,
+        "request_date": "2024-04-09"
+      },
+      {
+        "count": 51,
+        "uniques": 18,
+        "request_date": "2024-04-10"
+      },
+      {
+        "count": 46,
+        "uniques": 17,
+        "request_date": "2024-04-11"
+      },
+      {
+        "count": 52,
+        "uniques": 17,
+        "request_date": "2024-04-12"
+      },
+      {
+        "count": 52,
+        "uniques": 17,
+        "request_date": "2024-04-13"
+      },
+      {
+        "count": 49,
+        "uniques": 16,
+        "request_date": "2024-04-14"
+      },
+      {
+        "count": 42,
+        "uniques": 13,
+        "request_date": "2024-04-15"
+      },
+      {
+        "count": 30,
+        "uniques": 10,
+        "request_date": "2024-04-16"
+      },
+      {
+        "count": 37,
+        "uniques": 12,
+        "request_date": "2024-04-17"
+      },
+      {
+        "count": 32,
+        "uniques": 11,
+        "request_date": "2024-04-18"
+      },
+      {
+        "count": 33,
+        "uniques": 11,
+        "request_date": "2024-04-19"
+      },
+      {
+        "count": 33,
+        "uniques": 12,
+        "request_date": "2024-04-20"
+      },
+      {
+        "count": 29,
+        "uniques": 11,
+        "request_date": "2024-04-21"
+      },
+      {
+        "count": 20,
+        "uniques": 8,
+        "request_date": "2024-04-22"
+      },
+      {
+        "count": 21,
+        "uniques": 9,
+        "request_date": "2024-04-23"
+      },
+      {
+        "count": 20,
+        "uniques": 9,
+        "request_date": "2024-04-24"
+      },
+      {
+        "count": 14,
+        "uniques": 7,
+        "request_date": "2024-04-25"
+      },
+      {
+        "count": 18,
+        "uniques": 10,
+        "request_date": "2024-04-26"
+      },
+      {
+        "count": 18,
+        "uniques": 10,
+        "request_date": "2024-04-27"
+      },
+      {
+        "count": 19,
+        "uniques": 11,
+        "request_date": "2024-04-28"
+      },
+      {
+        "count": 20,
+        "uniques": 12,
+        "request_date": "2024-04-29"
+      },
+      {
+        "count": 11,
+        "uniques": 9,
+        "request_date": "2024-04-30"
+      },
+      {
+        "count": 11,
+        "uniques": 9,
+        "request_date": "2024-05-01"
+      },
+      {
+        "count": 10,
+        "uniques": 9,
+        "request_date": "2024-05-02"
+      },
+      {
+        "count": 18,
+        "uniques": 10,
+        "request_date": "2024-05-03"
+      },
+      {
+        "count": 18,
+        "uniques": 10,
+        "request_date": "2024-05-04"
+      },
+      {
+        "count": 18,
+        "uniques": 10,
+        "request_date": "2024-05-05"
+      },
+      {
+        "count": 17,
+        "uniques": 9,
+        "request_date": "2024-05-06"
+      },
+      {
+        "count": 17,
+        "uniques": 9,
+        "request_date": "2024-05-07"
+      },
+      {
+        "count": 17,
+        "uniques": 9,
+        "request_date": "2024-05-08"
+      },
+      {
+        "count": 15,
+        "uniques": 8,
+        "request_date": "2024-05-09"
+      },
+      {
+        "count": 21,
+        "uniques": 10,
+        "request_date": "2024-05-10"
+      },
+      {
+        "count": 24,
+        "uniques": 13,
+        "request_date": "2024-05-11"
+      },
+      {
+        "count": 23,
+        "uniques": 12,
+        "request_date": "2024-05-12"
+      },
+      {
+        "count": 25,
+        "uniques": 14,
+        "request_date": "2024-05-13"
+      },
+      {
+        "count": 39,
+        "uniques": 16,
+        "request_date": "2024-05-14"
+      },
+      {
+        "count": 39,
+        "uniques": 16,
+        "request_date": "2024-05-15"
+      },
+      {
+        "count": 49,
+        "uniques": 14,
+        "request_date": "2024-05-16"
+      },
+      {
+        "count": 54,
+        "uniques": 16,
+        "request_date": "2024-05-17"
+      },
+      {
+        "count": 57,
+        "uniques": 17,
+        "request_date": "2024-05-18"
+      },
+      {
+        "count": 57,
+        "uniques": 17,
+        "request_date": "2024-05-19"
+      },
+      {
+        "count": 57,
+        "uniques": 17,
+        "request_date": "2024-05-20"
+      },
+      {
+        "count": 67,
+        "uniques": 18,
+        "request_date": "2024-05-21"
+      },
+      {
+        "count": 72,
+        "uniques": 17,
+        "request_date": "2024-05-22"
+      },
+      {
+        "count": 71,
+        "uniques": 16,
+        "request_date": "2024-05-23"
+      },
+      {
+        "count": 69,
+        "uniques": 15,
+        "request_date": "2024-05-24"
+      },
+      {
+        "count": 70,
+        "uniques": 16,
+        "request_date": "2024-05-25"
+      },
+      {
+        "count": 68,
+        "uniques": 14,
+        "request_date": "2024-05-26"
+      },
+      {
+        "count": 54,
+        "uniques": 12,
+        "request_date": "2024-05-27"
+      },
+      {
+        "count": 54,
+        "uniques": 12,
+        "request_date": "2024-05-28"
+      },
+      {
+        "count": 40,
+        "uniques": 13,
+        "request_date": "2024-05-29"
+      },
+      {
+        "count": 36,
+        "uniques": 13,
+        "request_date": "2024-05-30"
+      },
+      {
+        "count": 42,
+        "uniques": 13,
+        "request_date": "2024-05-31"
+      },
+      {
+        "count": 43,
+        "uniques": 13,
+        "request_date": "2024-06-01"
+      },
+      {
+        "count": 45,
+        "uniques": 14,
+        "request_date": "2024-06-02"
+      },
+      {
+        "count": 35,
+        "uniques": 13,
+        "request_date": "2024-06-03"
+      },
+      {
+        "count": 45,
+        "uniques": 13,
+        "request_date": "2024-06-04"
+      },
+      {
+        "count": 44,
+        "uniques": 14,
+        "request_date": "2024-06-05"
+      },
+      {
+        "count": 45,
+        "uniques": 15,
+        "request_date": "2024-06-06"
+      },
+      {
+        "count": 49,
+        "uniques": 16,
+        "request_date": "2024-06-07"
+      },
+      {
+        "count": 57,
+        "uniques": 17,
+        "request_date": "2024-06-08"
+      },
+      {
+        "count": 58,
+        "uniques": 18,
+        "request_date": "2024-06-09"
+      },
+      {
+        "count": 59,
+        "uniques": 19,
+        "request_date": "2024-06-10"
+      },
+      {
+        "count": 58,
+        "uniques": 19,
+        "request_date": "2024-06-11"
+      },
+      {
+        "count": 62,
+        "uniques": 20,
+        "request_date": "2024-06-12"
+      },
+      {
+        "count": 54,
+        "uniques": 19,
+        "request_date": "2024-06-13"
+      },
+      {
+        "count": 58,
+        "uniques": 20,
+        "request_date": "2024-06-14"
+      },
+      {
+        "count": 57,
+        "uniques": 20,
+        "request_date": "2024-06-15"
+      },
+      {
+        "count": 57,
+        "uniques": 20,
+        "request_date": "2024-06-16"
+      },
+      {
+        "count": 40,
+        "uniques": 19,
+        "request_date": "2024-06-17"
+      },
+      {
+        "count": 41,
+        "uniques": 18,
+        "request_date": "2024-06-18"
+      },
+      {
+        "count": 43,
+        "uniques": 17,
+        "request_date": "2024-06-19"
+      },
+      {
+        "count": 38,
+        "uniques": 15,
+        "request_date": "2024-06-20"
+      },
+      {
+        "count": 34,
+        "uniques": 16,
+        "request_date": "2024-06-21"
+      },
+      {
+        "count": 33,
+        "uniques": 15,
+        "request_date": "2024-06-22"
+      },
+      {
+        "count": 38,
+        "uniques": 15,
+        "request_date": "2024-06-23"
+      },
+      {
+        "count": 37,
+        "uniques": 15,
+        "request_date": "2024-06-24"
+      },
+      {
+        "count": 37,
+        "uniques": 17,
+        "request_date": "2024-06-25"
+      },
+      {
+        "count": 38,
+        "uniques": 18,
+        "request_date": "2024-06-26"
+      },
+      {
+        "count": 46,
+        "uniques": 20,
+        "request_date": "2024-06-27"
+      },
+      {
+        "count": 46,
+        "uniques": 20,
+        "request_date": "2024-06-28"
+      },
+      {
+        "count": 53,
+        "uniques": 23,
+        "request_date": "2024-06-29"
+      },
+      {
+        "count": 54,
+        "uniques": 24,
+        "request_date": "2024-06-30"
+      },
+      {
+        "count": 50,
+        "uniques": 24,
+        "request_date": "2024-07-01"
+      },
+      {
+        "count": 60,
+        "uniques": 24,
+        "request_date": "2024-07-02"
+      }
+    ]
+  },
+  {
+    "referrer": "DuckDuckGo",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-24"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-25"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-26"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-27"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-28"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-29"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-30"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-31"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-02"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-03-07"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-03-08"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-03-09"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-03-10"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-03-11"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-12"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-15"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-16"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-17"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-18"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-19"
+      },
+      {
+        "count": 38,
+        "uniques": 2,
+        "request_date": "2024-03-21"
+      },
+      {
+        "count": 38,
+        "uniques": 2,
+        "request_date": "2024-03-22"
+      },
+      {
+        "count": 38,
+        "uniques": 2,
+        "request_date": "2024-03-23"
+      },
+      {
+        "count": 38,
+        "uniques": 2,
+        "request_date": "2024-03-24"
+      },
+      {
+        "count": 36,
+        "uniques": 1,
+        "request_date": "2024-03-25"
+      },
+      {
+        "count": 36,
+        "uniques": 1,
+        "request_date": "2024-03-26"
+      },
+      {
+        "count": 37,
+        "uniques": 2,
+        "request_date": "2024-03-27"
+      },
+      {
+        "count": 37,
+        "uniques": 2,
+        "request_date": "2024-03-28"
+      },
+      {
+        "count": 37,
+        "uniques": 2,
+        "request_date": "2024-03-29"
+      },
+      {
+        "count": 37,
+        "uniques": 2,
+        "request_date": "2024-03-30"
+      },
+      {
+        "count": 37,
+        "uniques": 2,
+        "request_date": "2024-03-31"
+      },
+      {
+        "count": 37,
+        "uniques": 2,
+        "request_date": "2024-04-01"
+      },
+      {
+        "count": 37,
+        "uniques": 2,
+        "request_date": "2024-04-02"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-04-23"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-04-24"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-04-25"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-04-26"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-04-27"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-04-28"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-04-29"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-04-30"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-05-01"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-05-02"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-05-03"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-05-04"
+      },
+      {
+        "count": 33,
+        "uniques": 1,
+        "request_date": "2024-05-05"
+      },
+      {
+        "count": 14,
+        "uniques": 2,
+        "request_date": "2024-05-22"
+      },
+      {
+        "count": 14,
+        "uniques": 2,
+        "request_date": "2024-05-24"
+      },
+      {
+        "count": 14,
+        "uniques": 2,
+        "request_date": "2024-05-25"
+      },
+      {
+        "count": 14,
+        "uniques": 2,
+        "request_date": "2024-05-26"
+      },
+      {
+        "count": 14,
+        "uniques": 2,
+        "request_date": "2024-05-27"
+      },
+      {
+        "count": 14,
+        "uniques": 2,
+        "request_date": "2024-05-28"
+      },
+      {
+        "count": 14,
+        "uniques": 2,
+        "request_date": "2024-05-29"
+      },
+      {
+        "count": 21,
+        "uniques": 4,
+        "request_date": "2024-05-30"
+      },
+      {
+        "count": 21,
+        "uniques": 4,
+        "request_date": "2024-05-31"
+      },
+      {
+        "count": 20,
+        "uniques": 3,
+        "request_date": "2024-06-01"
+      },
+      {
+        "count": 20,
+        "uniques": 3,
+        "request_date": "2024-06-02"
+      },
+      {
+        "count": 20,
+        "uniques": 3,
+        "request_date": "2024-06-03"
+      },
+      {
+        "count": 7,
+        "uniques": 2,
+        "request_date": "2024-06-06"
+      },
+      {
+        "count": 7,
+        "uniques": 2,
+        "request_date": "2024-06-07"
+      },
+      {
+        "count": 7,
+        "uniques": 2,
+        "request_date": "2024-06-08"
+      },
+      {
+        "count": 7,
+        "uniques": 2,
+        "request_date": "2024-06-09"
+      },
+      {
+        "count": 7,
+        "uniques": 2,
+        "request_date": "2024-06-10"
+      },
+      {
+        "count": 10,
+        "uniques": 3,
+        "request_date": "2024-06-11"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2024-06-18"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2024-06-19"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2024-06-20"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2024-06-21"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2024-06-22"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2024-06-23"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2024-06-24"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2024-06-25"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2024-06-26"
+      },
+      {
+        "count": 5,
+        "uniques": 5,
+        "request_date": "2024-06-27"
+      },
+      {
+        "count": 5,
+        "uniques": 5,
+        "request_date": "2024-06-28"
+      },
+      {
+        "count": 5,
+        "uniques": 5,
+        "request_date": "2024-06-29"
+      },
+      {
+        "count": 5,
+        "uniques": 5,
+        "request_date": "2024-06-30"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-07-02"
       }
     ]
   },
@@ -296,6 +1631,1066 @@
         "count": 104,
         "uniques": 43,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 111,
+        "uniques": 40,
+        "request_date": "2024-01-19"
+      },
+      {
+        "count": 125,
+        "uniques": 42,
+        "request_date": "2024-01-20"
+      },
+      {
+        "count": 160,
+        "uniques": 42,
+        "request_date": "2024-01-21"
+      },
+      {
+        "count": 159,
+        "uniques": 40,
+        "request_date": "2024-01-22"
+      },
+      {
+        "count": 148,
+        "uniques": 37,
+        "request_date": "2024-01-23"
+      },
+      {
+        "count": 168,
+        "uniques": 38,
+        "request_date": "2024-01-24"
+      },
+      {
+        "count": 176,
+        "uniques": 40,
+        "request_date": "2024-01-25"
+      },
+      {
+        "count": 185,
+        "uniques": 40,
+        "request_date": "2024-01-26"
+      },
+      {
+        "count": 213,
+        "uniques": 47,
+        "request_date": "2024-01-27"
+      },
+      {
+        "count": 211,
+        "uniques": 46,
+        "request_date": "2024-01-28"
+      },
+      {
+        "count": 203,
+        "uniques": 46,
+        "request_date": "2024-01-29"
+      },
+      {
+        "count": 208,
+        "uniques": 43,
+        "request_date": "2024-01-30"
+      },
+      {
+        "count": 212,
+        "uniques": 46,
+        "request_date": "2024-01-31"
+      },
+      {
+        "count": 203,
+        "uniques": 47,
+        "request_date": "2024-02-01"
+      },
+      {
+        "count": 203,
+        "uniques": 47,
+        "request_date": "2024-02-02"
+      },
+      {
+        "count": 181,
+        "uniques": 54,
+        "request_date": "2024-02-03"
+      },
+      {
+        "count": 181,
+        "uniques": 53,
+        "request_date": "2024-02-04"
+      },
+      {
+        "count": 182,
+        "uniques": 54,
+        "request_date": "2024-02-05"
+      },
+      {
+        "count": 155,
+        "uniques": 52,
+        "request_date": "2024-02-06"
+      },
+      {
+        "count": 144,
+        "uniques": 49,
+        "request_date": "2024-02-07"
+      },
+      {
+        "count": 131,
+        "uniques": 49,
+        "request_date": "2024-02-08"
+      },
+      {
+        "count": 112,
+        "uniques": 50,
+        "request_date": "2024-02-09"
+      },
+      {
+        "count": 121,
+        "uniques": 52,
+        "request_date": "2024-02-10"
+      },
+      {
+        "count": 131,
+        "uniques": 51,
+        "request_date": "2024-02-11"
+      },
+      {
+        "count": 108,
+        "uniques": 48,
+        "request_date": "2024-02-12"
+      },
+      {
+        "count": 108,
+        "uniques": 50,
+        "request_date": "2024-02-13"
+      },
+      {
+        "count": 106,
+        "uniques": 51,
+        "request_date": "2024-02-14"
+      },
+      {
+        "count": 92,
+        "uniques": 47,
+        "request_date": "2024-02-15"
+      },
+      {
+        "count": 75,
+        "uniques": 40,
+        "request_date": "2024-02-16"
+      },
+      {
+        "count": 79,
+        "uniques": 42,
+        "request_date": "2024-02-17"
+      },
+      {
+        "count": 80,
+        "uniques": 41,
+        "request_date": "2024-02-18"
+      },
+      {
+        "count": 91,
+        "uniques": 40,
+        "request_date": "2024-02-19"
+      },
+      {
+        "count": 86,
+        "uniques": 38,
+        "request_date": "2024-02-20"
+      },
+      {
+        "count": 86,
+        "uniques": 38,
+        "request_date": "2024-02-21"
+      },
+      {
+        "count": 92,
+        "uniques": 39,
+        "request_date": "2024-02-22"
+      },
+      {
+        "count": 94,
+        "uniques": 39,
+        "request_date": "2024-02-23"
+      },
+      {
+        "count": 88,
+        "uniques": 41,
+        "request_date": "2024-02-24"
+      },
+      {
+        "count": 97,
+        "uniques": 44,
+        "request_date": "2024-02-25"
+      },
+      {
+        "count": 89,
+        "uniques": 37,
+        "request_date": "2024-02-26"
+      },
+      {
+        "count": 91,
+        "uniques": 37,
+        "request_date": "2024-02-27"
+      },
+      {
+        "count": 98,
+        "uniques": 40,
+        "request_date": "2024-02-28"
+      },
+      {
+        "count": 128,
+        "uniques": 50,
+        "request_date": "2024-02-29"
+      },
+      {
+        "count": 151,
+        "uniques": 55,
+        "request_date": "2024-03-01"
+      },
+      {
+        "count": 157,
+        "uniques": 58,
+        "request_date": "2024-03-02"
+      },
+      {
+        "count": 144,
+        "uniques": 58,
+        "request_date": "2024-03-03"
+      },
+      {
+        "count": 145,
+        "uniques": 59,
+        "request_date": "2024-03-04"
+      },
+      {
+        "count": 151,
+        "uniques": 62,
+        "request_date": "2024-03-05"
+      },
+      {
+        "count": 152,
+        "uniques": 60,
+        "request_date": "2024-03-06"
+      },
+      {
+        "count": 152,
+        "uniques": 59,
+        "request_date": "2024-03-07"
+      },
+      {
+        "count": 152,
+        "uniques": 60,
+        "request_date": "2024-03-08"
+      },
+      {
+        "count": 148,
+        "uniques": 60,
+        "request_date": "2024-03-09"
+      },
+      {
+        "count": 147,
+        "uniques": 59,
+        "request_date": "2024-03-10"
+      },
+      {
+        "count": 143,
+        "uniques": 58,
+        "request_date": "2024-03-11"
+      },
+      {
+        "count": 176,
+        "uniques": 61,
+        "request_date": "2024-03-12"
+      },
+      {
+        "count": 165,
+        "uniques": 58,
+        "request_date": "2024-03-13"
+      },
+      {
+        "count": 154,
+        "uniques": 55,
+        "request_date": "2024-03-14"
+      },
+      {
+        "count": 152,
+        "uniques": 57,
+        "request_date": "2024-03-15"
+      },
+      {
+        "count": 162,
+        "uniques": 61,
+        "request_date": "2024-03-16"
+      },
+      {
+        "count": 171,
+        "uniques": 61,
+        "request_date": "2024-03-17"
+      },
+      {
+        "count": 160,
+        "uniques": 57,
+        "request_date": "2024-03-18"
+      },
+      {
+        "count": 159,
+        "uniques": 60,
+        "request_date": "2024-03-19"
+      },
+      {
+        "count": 151,
+        "uniques": 58,
+        "request_date": "2024-03-20"
+      },
+      {
+        "count": 155,
+        "uniques": 62,
+        "request_date": "2024-03-21"
+      },
+      {
+        "count": 153,
+        "uniques": 61,
+        "request_date": "2024-03-22"
+      },
+      {
+        "count": 158,
+        "uniques": 63,
+        "request_date": "2024-03-23"
+      },
+      {
+        "count": 155,
+        "uniques": 62,
+        "request_date": "2024-03-24"
+      },
+      {
+        "count": 123,
+        "uniques": 60,
+        "request_date": "2024-03-25"
+      },
+      {
+        "count": 109,
+        "uniques": 53,
+        "request_date": "2024-03-26"
+      },
+      {
+        "count": 101,
+        "uniques": 52,
+        "request_date": "2024-03-27"
+      },
+      {
+        "count": 99,
+        "uniques": 53,
+        "request_date": "2024-03-28"
+      },
+      {
+        "count": 86,
+        "uniques": 49,
+        "request_date": "2024-03-29"
+      },
+      {
+        "count": 82,
+        "uniques": 52,
+        "request_date": "2024-03-30"
+      },
+      {
+        "count": 85,
+        "uniques": 52,
+        "request_date": "2024-03-31"
+      },
+      {
+        "count": 73,
+        "uniques": 44,
+        "request_date": "2024-04-01"
+      },
+      {
+        "count": 80,
+        "uniques": 45,
+        "request_date": "2024-04-02"
+      },
+      {
+        "count": 93,
+        "uniques": 48,
+        "request_date": "2024-04-03"
+      },
+      {
+        "count": 97,
+        "uniques": 48,
+        "request_date": "2024-04-04"
+      },
+      {
+        "count": 103,
+        "uniques": 51,
+        "request_date": "2024-04-05"
+      },
+      {
+        "count": 106,
+        "uniques": 52,
+        "request_date": "2024-04-06"
+      },
+      {
+        "count": 96,
+        "uniques": 48,
+        "request_date": "2024-04-07"
+      },
+      {
+        "count": 96,
+        "uniques": 48,
+        "request_date": "2024-04-08"
+      },
+      {
+        "count": 98,
+        "uniques": 48,
+        "request_date": "2024-04-09"
+      },
+      {
+        "count": 100,
+        "uniques": 48,
+        "request_date": "2024-04-10"
+      },
+      {
+        "count": 118,
+        "uniques": 55,
+        "request_date": "2024-04-11"
+      },
+      {
+        "count": 121,
+        "uniques": 57,
+        "request_date": "2024-04-12"
+      },
+      {
+        "count": 127,
+        "uniques": 61,
+        "request_date": "2024-04-13"
+      },
+      {
+        "count": 126,
+        "uniques": 62,
+        "request_date": "2024-04-14"
+      },
+      {
+        "count": 115,
+        "uniques": 58,
+        "request_date": "2024-04-15"
+      },
+      {
+        "count": 95,
+        "uniques": 55,
+        "request_date": "2024-04-16"
+      },
+      {
+        "count": 103,
+        "uniques": 54,
+        "request_date": "2024-04-17"
+      },
+      {
+        "count": 109,
+        "uniques": 56,
+        "request_date": "2024-04-18"
+      },
+      {
+        "count": 107,
+        "uniques": 55,
+        "request_date": "2024-04-19"
+      },
+      {
+        "count": 131,
+        "uniques": 62,
+        "request_date": "2024-04-20"
+      },
+      {
+        "count": 126,
+        "uniques": 58,
+        "request_date": "2024-04-21"
+      },
+      {
+        "count": 135,
+        "uniques": 56,
+        "request_date": "2024-04-22"
+      },
+      {
+        "count": 134,
+        "uniques": 56,
+        "request_date": "2024-04-23"
+      },
+      {
+        "count": 121,
+        "uniques": 52,
+        "request_date": "2024-04-24"
+      },
+      {
+        "count": 130,
+        "uniques": 54,
+        "request_date": "2024-04-25"
+      },
+      {
+        "count": 146,
+        "uniques": 61,
+        "request_date": "2024-04-26"
+      },
+      {
+        "count": 154,
+        "uniques": 65,
+        "request_date": "2024-04-27"
+      },
+      {
+        "count": 160,
+        "uniques": 68,
+        "request_date": "2024-04-28"
+      },
+      {
+        "count": 176,
+        "uniques": 70,
+        "request_date": "2024-04-29"
+      },
+      {
+        "count": 194,
+        "uniques": 74,
+        "request_date": "2024-04-30"
+      },
+      {
+        "count": 207,
+        "uniques": 80,
+        "request_date": "2024-05-01"
+      },
+      {
+        "count": 218,
+        "uniques": 84,
+        "request_date": "2024-05-02"
+      },
+      {
+        "count": 215,
+        "uniques": 87,
+        "request_date": "2024-05-03"
+      },
+      {
+        "count": 255,
+        "uniques": 98,
+        "request_date": "2024-05-04"
+      },
+      {
+        "count": 238,
+        "uniques": 96,
+        "request_date": "2024-05-05"
+      },
+      {
+        "count": 258,
+        "uniques": 96,
+        "request_date": "2024-05-06"
+      },
+      {
+        "count": 273,
+        "uniques": 102,
+        "request_date": "2024-05-07"
+      },
+      {
+        "count": 276,
+        "uniques": 102,
+        "request_date": "2024-05-08"
+      },
+      {
+        "count": 269,
+        "uniques": 98,
+        "request_date": "2024-05-09"
+      },
+      {
+        "count": 279,
+        "uniques": 98,
+        "request_date": "2024-05-10"
+      },
+      {
+        "count": 292,
+        "uniques": 100,
+        "request_date": "2024-05-11"
+      },
+      {
+        "count": 272,
+        "uniques": 95,
+        "request_date": "2024-05-12"
+      },
+      {
+        "count": 239,
+        "uniques": 89,
+        "request_date": "2024-05-13"
+      },
+      {
+        "count": 288,
+        "uniques": 83,
+        "request_date": "2024-05-14"
+      },
+      {
+        "count": 290,
+        "uniques": 79,
+        "request_date": "2024-05-15"
+      },
+      {
+        "count": 286,
+        "uniques": 77,
+        "request_date": "2024-05-16"
+      },
+      {
+        "count": 257,
+        "uniques": 69,
+        "request_date": "2024-05-17"
+      },
+      {
+        "count": 263,
+        "uniques": 76,
+        "request_date": "2024-05-18"
+      },
+      {
+        "count": 243,
+        "uniques": 75,
+        "request_date": "2024-05-19"
+      },
+      {
+        "count": 247,
+        "uniques": 68,
+        "request_date": "2024-05-20"
+      },
+      {
+        "count": 228,
+        "uniques": 60,
+        "request_date": "2024-05-21"
+      },
+      {
+        "count": 227,
+        "uniques": 59,
+        "request_date": "2024-05-22"
+      },
+      {
+        "count": 235,
+        "uniques": 67,
+        "request_date": "2024-05-23"
+      },
+      {
+        "count": 258,
+        "uniques": 72,
+        "request_date": "2024-05-24"
+      },
+      {
+        "count": 273,
+        "uniques": 80,
+        "request_date": "2024-05-25"
+      },
+      {
+        "count": 272,
+        "uniques": 79,
+        "request_date": "2024-05-26"
+      },
+      {
+        "count": 194,
+        "uniques": 76,
+        "request_date": "2024-05-27"
+      },
+      {
+        "count": 193,
+        "uniques": 77,
+        "request_date": "2024-05-28"
+      },
+      {
+        "count": 216,
+        "uniques": 78,
+        "request_date": "2024-05-29"
+      },
+      {
+        "count": 220,
+        "uniques": 78,
+        "request_date": "2024-05-30"
+      },
+      {
+        "count": 219,
+        "uniques": 76,
+        "request_date": "2024-05-31"
+      },
+      {
+        "count": 228,
+        "uniques": 82,
+        "request_date": "2024-06-01"
+      },
+      {
+        "count": 234,
+        "uniques": 82,
+        "request_date": "2024-06-02"
+      },
+      {
+        "count": 235,
+        "uniques": 83,
+        "request_date": "2024-06-03"
+      },
+      {
+        "count": 227,
+        "uniques": 79,
+        "request_date": "2024-06-04"
+      },
+      {
+        "count": 212,
+        "uniques": 73,
+        "request_date": "2024-06-05"
+      },
+      {
+        "count": 193,
+        "uniques": 69,
+        "request_date": "2024-06-06"
+      },
+      {
+        "count": 197,
+        "uniques": 67,
+        "request_date": "2024-06-07"
+      },
+      {
+        "count": 225,
+        "uniques": 77,
+        "request_date": "2024-06-08"
+      },
+      {
+        "count": 224,
+        "uniques": 76,
+        "request_date": "2024-06-09"
+      },
+      {
+        "count": 212,
+        "uniques": 74,
+        "request_date": "2024-06-10"
+      },
+      {
+        "count": 182,
+        "uniques": 71,
+        "request_date": "2024-06-11"
+      },
+      {
+        "count": 188,
+        "uniques": 74,
+        "request_date": "2024-06-12"
+      },
+      {
+        "count": 212,
+        "uniques": 77,
+        "request_date": "2024-06-13"
+      },
+      {
+        "count": 205,
+        "uniques": 75,
+        "request_date": "2024-06-14"
+      },
+      {
+        "count": 201,
+        "uniques": 81,
+        "request_date": "2024-06-15"
+      },
+      {
+        "count": 201,
+        "uniques": 80,
+        "request_date": "2024-06-16"
+      },
+      {
+        "count": 194,
+        "uniques": 79,
+        "request_date": "2024-06-17"
+      },
+      {
+        "count": 201,
+        "uniques": 81,
+        "request_date": "2024-06-18"
+      },
+      {
+        "count": 219,
+        "uniques": 82,
+        "request_date": "2024-06-19"
+      },
+      {
+        "count": 229,
+        "uniques": 79,
+        "request_date": "2024-06-20"
+      },
+      {
+        "count": 211,
+        "uniques": 74,
+        "request_date": "2024-06-21"
+      },
+      {
+        "count": 218,
+        "uniques": 79,
+        "request_date": "2024-06-22"
+      },
+      {
+        "count": 217,
+        "uniques": 79,
+        "request_date": "2024-06-23"
+      },
+      {
+        "count": 260,
+        "uniques": 79,
+        "request_date": "2024-06-24"
+      },
+      {
+        "count": 263,
+        "uniques": 78,
+        "request_date": "2024-06-25"
+      },
+      {
+        "count": 263,
+        "uniques": 75,
+        "request_date": "2024-06-26"
+      },
+      {
+        "count": 268,
+        "uniques": 73,
+        "request_date": "2024-06-27"
+      },
+      {
+        "count": 247,
+        "uniques": 69,
+        "request_date": "2024-06-28"
+      },
+      {
+        "count": 268,
+        "uniques": 73,
+        "request_date": "2024-06-29"
+      },
+      {
+        "count": 270,
+        "uniques": 75,
+        "request_date": "2024-06-30"
+      },
+      {
+        "count": 254,
+        "uniques": 71,
+        "request_date": "2024-07-01"
+      },
+      {
+        "count": 225,
+        "uniques": 71,
+        "request_date": "2024-07-02"
+      }
+    ]
+  },
+  {
+    "referrer": "Yahoo",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-14"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-15"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-16"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-17"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-18"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-19"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-20"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-21"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-22"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-23"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-24"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-25"
+      }
+    ]
+  },
+  {
+    "referrer": "bio.tools",
+    "views": [
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-05-11"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-05-12"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-05-13"
+      },
+      {
+        "count": 7,
+        "uniques": 3,
+        "request_date": "2024-05-14"
+      },
+      {
+        "count": 7,
+        "uniques": 3,
+        "request_date": "2024-05-15"
+      },
+      {
+        "count": 10,
+        "uniques": 4,
+        "request_date": "2024-05-16"
+      },
+      {
+        "count": 10,
+        "uniques": 4,
+        "request_date": "2024-05-17"
+      },
+      {
+        "count": 10,
+        "uniques": 4,
+        "request_date": "2024-05-18"
+      },
+      {
+        "count": 10,
+        "uniques": 4,
+        "request_date": "2024-05-19"
+      },
+      {
+        "count": 10,
+        "uniques": 4,
+        "request_date": "2024-05-20"
+      },
+      {
+        "count": 14,
+        "uniques": 5,
+        "request_date": "2024-05-23"
+      },
+      {
+        "count": 12,
+        "uniques": 3,
+        "request_date": "2024-05-28"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-05-29"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-05-30"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-05-31"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-06-01"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-06-04"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-07-01"
+      }
+    ]
+  },
+  {
+    "referrer": "biostars.org",
+    "views": [
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-12"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-13"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-14"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-15"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-16"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-17"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-18"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-19"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-20"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-21"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-22"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-23"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-04-24"
       }
     ]
   },
@@ -336,6 +2731,176 @@
         "count": 2,
         "uniques": 1,
         "request_date": "2024-01-12"
+      }
+    ]
+  },
+  {
+    "referrer": "chat.openai.com",
+    "views": [
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-04-01"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-04-02"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-04-03"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-04-04"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-04-05"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-04-06"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-04-07"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-04-08"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-04-09"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-04-10"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-04-11"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-04-12"
+      },
+      {
+        "count": 8,
+        "uniques": 2,
+        "request_date": "2024-04-13"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-14"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-15"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-16"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-17"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-21"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-22"
+      }
+    ]
+  },
+  {
+    "referrer": "cica.es",
+    "views": [
+      {
+        "count": 9,
+        "uniques": 1,
+        "request_date": "2024-03-12"
+      },
+      {
+        "count": 9,
+        "uniques": 1,
+        "request_date": "2024-03-13"
+      },
+      {
+        "count": 9,
+        "uniques": 1,
+        "request_date": "2024-03-14"
+      },
+      {
+        "count": 9,
+        "uniques": 1,
+        "request_date": "2024-03-15"
+      },
+      {
+        "count": 10,
+        "uniques": 2,
+        "request_date": "2024-03-16"
+      },
+      {
+        "count": 10,
+        "uniques": 2,
+        "request_date": "2024-03-17"
+      },
+      {
+        "count": 10,
+        "uniques": 2,
+        "request_date": "2024-03-18"
+      },
+      {
+        "count": 10,
+        "uniques": 2,
+        "request_date": "2024-03-19"
+      },
+      {
+        "count": 10,
+        "uniques": 2,
+        "request_date": "2024-03-20"
+      },
+      {
+        "count": 10,
+        "uniques": 2,
+        "request_date": "2024-03-21"
+      },
+      {
+        "count": 10,
+        "uniques": 2,
+        "request_date": "2024-03-22"
+      },
+      {
+        "count": 10,
+        "uniques": 2,
+        "request_date": "2024-03-23"
+      },
+      {
+        "count": 10,
+        "uniques": 2,
+        "request_date": "2024-03-24"
       }
     ]
   },
@@ -486,6 +3051,1061 @@
         "count": 50,
         "uniques": 11,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 56,
+        "uniques": 13,
+        "request_date": "2024-01-19"
+      },
+      {
+        "count": 57,
+        "uniques": 14,
+        "request_date": "2024-01-20"
+      },
+      {
+        "count": 57,
+        "uniques": 14,
+        "request_date": "2024-01-21"
+      },
+      {
+        "count": 56,
+        "uniques": 14,
+        "request_date": "2024-01-22"
+      },
+      {
+        "count": 56,
+        "uniques": 14,
+        "request_date": "2024-01-23"
+      },
+      {
+        "count": 56,
+        "uniques": 14,
+        "request_date": "2024-01-24"
+      },
+      {
+        "count": 54,
+        "uniques": 15,
+        "request_date": "2024-01-25"
+      },
+      {
+        "count": 51,
+        "uniques": 14,
+        "request_date": "2024-01-26"
+      },
+      {
+        "count": 50,
+        "uniques": 13,
+        "request_date": "2024-01-27"
+      },
+      {
+        "count": 49,
+        "uniques": 12,
+        "request_date": "2024-01-28"
+      },
+      {
+        "count": 19,
+        "uniques": 11,
+        "request_date": "2024-01-29"
+      },
+      {
+        "count": 18,
+        "uniques": 10,
+        "request_date": "2024-01-30"
+      },
+      {
+        "count": 13,
+        "uniques": 7,
+        "request_date": "2024-01-31"
+      },
+      {
+        "count": 7,
+        "uniques": 5,
+        "request_date": "2024-02-01"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2024-02-02"
+      },
+      {
+        "count": 8,
+        "uniques": 6,
+        "request_date": "2024-02-03"
+      },
+      {
+        "count": 12,
+        "uniques": 6,
+        "request_date": "2024-02-04"
+      },
+      {
+        "count": 12,
+        "uniques": 6,
+        "request_date": "2024-02-05"
+      },
+      {
+        "count": 12,
+        "uniques": 6,
+        "request_date": "2024-02-06"
+      },
+      {
+        "count": 8,
+        "uniques": 4,
+        "request_date": "2024-02-07"
+      },
+      {
+        "count": 8,
+        "uniques": 4,
+        "request_date": "2024-02-08"
+      },
+      {
+        "count": 8,
+        "uniques": 4,
+        "request_date": "2024-02-09"
+      },
+      {
+        "count": 8,
+        "uniques": 4,
+        "request_date": "2024-02-10"
+      },
+      {
+        "count": 11,
+        "uniques": 5,
+        "request_date": "2024-02-11"
+      },
+      {
+        "count": 11,
+        "uniques": 5,
+        "request_date": "2024-02-12"
+      },
+      {
+        "count": 12,
+        "uniques": 5,
+        "request_date": "2024-02-13"
+      },
+      {
+        "count": 13,
+        "uniques": 5,
+        "request_date": "2024-02-14"
+      },
+      {
+        "count": 16,
+        "uniques": 7,
+        "request_date": "2024-02-15"
+      },
+      {
+        "count": 15,
+        "uniques": 6,
+        "request_date": "2024-02-16"
+      },
+      {
+        "count": 10,
+        "uniques": 5,
+        "request_date": "2024-02-17"
+      },
+      {
+        "count": 11,
+        "uniques": 6,
+        "request_date": "2024-02-18"
+      },
+      {
+        "count": 11,
+        "uniques": 6,
+        "request_date": "2024-02-19"
+      },
+      {
+        "count": 11,
+        "uniques": 6,
+        "request_date": "2024-02-20"
+      },
+      {
+        "count": 11,
+        "uniques": 6,
+        "request_date": "2024-02-21"
+      },
+      {
+        "count": 13,
+        "uniques": 7,
+        "request_date": "2024-02-22"
+      },
+      {
+        "count": 22,
+        "uniques": 13,
+        "request_date": "2024-02-23"
+      },
+      {
+        "count": 19,
+        "uniques": 12,
+        "request_date": "2024-02-24"
+      },
+      {
+        "count": 23,
+        "uniques": 14,
+        "request_date": "2024-02-25"
+      },
+      {
+        "count": 23,
+        "uniques": 16,
+        "request_date": "2024-02-26"
+      },
+      {
+        "count": 34,
+        "uniques": 20,
+        "request_date": "2024-02-27"
+      },
+      {
+        "count": 41,
+        "uniques": 21,
+        "request_date": "2024-02-28"
+      },
+      {
+        "count": 40,
+        "uniques": 20,
+        "request_date": "2024-02-29"
+      },
+      {
+        "count": 42,
+        "uniques": 22,
+        "request_date": "2024-03-01"
+      },
+      {
+        "count": 43,
+        "uniques": 23,
+        "request_date": "2024-03-02"
+      },
+      {
+        "count": 44,
+        "uniques": 24,
+        "request_date": "2024-03-03"
+      },
+      {
+        "count": 44,
+        "uniques": 24,
+        "request_date": "2024-03-04"
+      },
+      {
+        "count": 44,
+        "uniques": 24,
+        "request_date": "2024-03-05"
+      },
+      {
+        "count": 50,
+        "uniques": 26,
+        "request_date": "2024-03-06"
+      },
+      {
+        "count": 41,
+        "uniques": 20,
+        "request_date": "2024-03-07"
+      },
+      {
+        "count": 43,
+        "uniques": 22,
+        "request_date": "2024-03-08"
+      },
+      {
+        "count": 40,
+        "uniques": 21,
+        "request_date": "2024-03-09"
+      },
+      {
+        "count": 38,
+        "uniques": 19,
+        "request_date": "2024-03-10"
+      },
+      {
+        "count": 26,
+        "uniques": 16,
+        "request_date": "2024-03-11"
+      },
+      {
+        "count": 22,
+        "uniques": 12,
+        "request_date": "2024-03-12"
+      },
+      {
+        "count": 24,
+        "uniques": 13,
+        "request_date": "2024-03-13"
+      },
+      {
+        "count": 41,
+        "uniques": 15,
+        "request_date": "2024-03-14"
+      },
+      {
+        "count": 47,
+        "uniques": 18,
+        "request_date": "2024-03-15"
+      },
+      {
+        "count": 49,
+        "uniques": 20,
+        "request_date": "2024-03-16"
+      },
+      {
+        "count": 53,
+        "uniques": 21,
+        "request_date": "2024-03-17"
+      },
+      {
+        "count": 65,
+        "uniques": 22,
+        "request_date": "2024-03-18"
+      },
+      {
+        "count": 62,
+        "uniques": 21,
+        "request_date": "2024-03-19"
+      },
+      {
+        "count": 64,
+        "uniques": 22,
+        "request_date": "2024-03-20"
+      },
+      {
+        "count": 75,
+        "uniques": 24,
+        "request_date": "2024-03-21"
+      },
+      {
+        "count": 81,
+        "uniques": 27,
+        "request_date": "2024-03-22"
+      },
+      {
+        "count": 86,
+        "uniques": 29,
+        "request_date": "2024-03-23"
+      },
+      {
+        "count": 87,
+        "uniques": 30,
+        "request_date": "2024-03-24"
+      },
+      {
+        "count": 81,
+        "uniques": 30,
+        "request_date": "2024-03-25"
+      },
+      {
+        "count": 79,
+        "uniques": 29,
+        "request_date": "2024-03-26"
+      },
+      {
+        "count": 84,
+        "uniques": 29,
+        "request_date": "2024-03-27"
+      },
+      {
+        "count": 77,
+        "uniques": 24,
+        "request_date": "2024-03-28"
+      },
+      {
+        "count": 74,
+        "uniques": 21,
+        "request_date": "2024-03-29"
+      },
+      {
+        "count": 73,
+        "uniques": 22,
+        "request_date": "2024-03-30"
+      },
+      {
+        "count": 63,
+        "uniques": 22,
+        "request_date": "2024-03-31"
+      },
+      {
+        "count": 69,
+        "uniques": 24,
+        "request_date": "2024-04-01"
+      },
+      {
+        "count": 68,
+        "uniques": 23,
+        "request_date": "2024-04-02"
+      },
+      {
+        "count": 64,
+        "uniques": 24,
+        "request_date": "2024-04-03"
+      },
+      {
+        "count": 63,
+        "uniques": 19,
+        "request_date": "2024-04-04"
+      },
+      {
+        "count": 58,
+        "uniques": 17,
+        "request_date": "2024-04-05"
+      },
+      {
+        "count": 58,
+        "uniques": 17,
+        "request_date": "2024-04-06"
+      },
+      {
+        "count": 61,
+        "uniques": 18,
+        "request_date": "2024-04-07"
+      },
+      {
+        "count": 67,
+        "uniques": 21,
+        "request_date": "2024-04-08"
+      },
+      {
+        "count": 46,
+        "uniques": 19,
+        "request_date": "2024-04-09"
+      },
+      {
+        "count": 49,
+        "uniques": 20,
+        "request_date": "2024-04-10"
+      },
+      {
+        "count": 53,
+        "uniques": 23,
+        "request_date": "2024-04-11"
+      },
+      {
+        "count": 52,
+        "uniques": 23,
+        "request_date": "2024-04-12"
+      },
+      {
+        "count": 50,
+        "uniques": 22,
+        "request_date": "2024-04-13"
+      },
+      {
+        "count": 40,
+        "uniques": 20,
+        "request_date": "2024-04-14"
+      },
+      {
+        "count": 40,
+        "uniques": 20,
+        "request_date": "2024-04-15"
+      },
+      {
+        "count": 41,
+        "uniques": 22,
+        "request_date": "2024-04-16"
+      },
+      {
+        "count": 38,
+        "uniques": 24,
+        "request_date": "2024-04-17"
+      },
+      {
+        "count": 44,
+        "uniques": 28,
+        "request_date": "2024-04-18"
+      },
+      {
+        "count": 45,
+        "uniques": 28,
+        "request_date": "2024-04-19"
+      },
+      {
+        "count": 43,
+        "uniques": 28,
+        "request_date": "2024-04-20"
+      },
+      {
+        "count": 54,
+        "uniques": 28,
+        "request_date": "2024-04-21"
+      },
+      {
+        "count": 51,
+        "uniques": 25,
+        "request_date": "2024-04-22"
+      },
+      {
+        "count": 48,
+        "uniques": 24,
+        "request_date": "2024-04-23"
+      },
+      {
+        "count": 48,
+        "uniques": 25,
+        "request_date": "2024-04-24"
+      },
+      {
+        "count": 51,
+        "uniques": 26,
+        "request_date": "2024-04-25"
+      },
+      {
+        "count": 56,
+        "uniques": 29,
+        "request_date": "2024-04-26"
+      },
+      {
+        "count": 68,
+        "uniques": 32,
+        "request_date": "2024-04-27"
+      },
+      {
+        "count": 69,
+        "uniques": 33,
+        "request_date": "2024-04-28"
+      },
+      {
+        "count": 67,
+        "uniques": 35,
+        "request_date": "2024-04-29"
+      },
+      {
+        "count": 68,
+        "uniques": 36,
+        "request_date": "2024-04-30"
+      },
+      {
+        "count": 63,
+        "uniques": 33,
+        "request_date": "2024-05-01"
+      },
+      {
+        "count": 61,
+        "uniques": 32,
+        "request_date": "2024-05-02"
+      },
+      {
+        "count": 60,
+        "uniques": 31,
+        "request_date": "2024-05-03"
+      },
+      {
+        "count": 45,
+        "uniques": 30,
+        "request_date": "2024-05-04"
+      },
+      {
+        "count": 49,
+        "uniques": 32,
+        "request_date": "2024-05-05"
+      },
+      {
+        "count": 48,
+        "uniques": 31,
+        "request_date": "2024-05-06"
+      },
+      {
+        "count": 48,
+        "uniques": 31,
+        "request_date": "2024-05-07"
+      },
+      {
+        "count": 45,
+        "uniques": 29,
+        "request_date": "2024-05-08"
+      },
+      {
+        "count": 49,
+        "uniques": 31,
+        "request_date": "2024-05-09"
+      },
+      {
+        "count": 40,
+        "uniques": 29,
+        "request_date": "2024-05-10"
+      },
+      {
+        "count": 40,
+        "uniques": 28,
+        "request_date": "2024-05-11"
+      },
+      {
+        "count": 41,
+        "uniques": 25,
+        "request_date": "2024-05-12"
+      },
+      {
+        "count": 37,
+        "uniques": 22,
+        "request_date": "2024-05-13"
+      },
+      {
+        "count": 49,
+        "uniques": 25,
+        "request_date": "2024-05-14"
+      },
+      {
+        "count": 49,
+        "uniques": 25,
+        "request_date": "2024-05-15"
+      },
+      {
+        "count": 53,
+        "uniques": 27,
+        "request_date": "2024-05-16"
+      },
+      {
+        "count": 52,
+        "uniques": 27,
+        "request_date": "2024-05-17"
+      },
+      {
+        "count": 54,
+        "uniques": 30,
+        "request_date": "2024-05-18"
+      },
+      {
+        "count": 55,
+        "uniques": 31,
+        "request_date": "2024-05-19"
+      },
+      {
+        "count": 56,
+        "uniques": 31,
+        "request_date": "2024-05-20"
+      },
+      {
+        "count": 54,
+        "uniques": 30,
+        "request_date": "2024-05-21"
+      },
+      {
+        "count": 50,
+        "uniques": 27,
+        "request_date": "2024-05-22"
+      },
+      {
+        "count": 51,
+        "uniques": 27,
+        "request_date": "2024-05-23"
+      },
+      {
+        "count": 55,
+        "uniques": 29,
+        "request_date": "2024-05-24"
+      },
+      {
+        "count": 49,
+        "uniques": 27,
+        "request_date": "2024-05-25"
+      },
+      {
+        "count": 71,
+        "uniques": 29,
+        "request_date": "2024-05-26"
+      },
+      {
+        "count": 58,
+        "uniques": 25,
+        "request_date": "2024-05-27"
+      },
+      {
+        "count": 58,
+        "uniques": 25,
+        "request_date": "2024-05-28"
+      },
+      {
+        "count": 57,
+        "uniques": 26,
+        "request_date": "2024-05-29"
+      },
+      {
+        "count": 59,
+        "uniques": 27,
+        "request_date": "2024-05-30"
+      },
+      {
+        "count": 56,
+        "uniques": 24,
+        "request_date": "2024-05-31"
+      },
+      {
+        "count": 56,
+        "uniques": 23,
+        "request_date": "2024-06-01"
+      },
+      {
+        "count": 51,
+        "uniques": 20,
+        "request_date": "2024-06-02"
+      },
+      {
+        "count": 51,
+        "uniques": 20,
+        "request_date": "2024-06-03"
+      },
+      {
+        "count": 47,
+        "uniques": 19,
+        "request_date": "2024-06-04"
+      },
+      {
+        "count": 46,
+        "uniques": 19,
+        "request_date": "2024-06-05"
+      },
+      {
+        "count": 44,
+        "uniques": 18,
+        "request_date": "2024-06-06"
+      },
+      {
+        "count": 42,
+        "uniques": 19,
+        "request_date": "2024-06-07"
+      },
+      {
+        "count": 21,
+        "uniques": 16,
+        "request_date": "2024-06-08"
+      },
+      {
+        "count": 21,
+        "uniques": 16,
+        "request_date": "2024-06-09"
+      },
+      {
+        "count": 21,
+        "uniques": 16,
+        "request_date": "2024-06-10"
+      },
+      {
+        "count": 18,
+        "uniques": 14,
+        "request_date": "2024-06-11"
+      },
+      {
+        "count": 17,
+        "uniques": 13,
+        "request_date": "2024-06-12"
+      },
+      {
+        "count": 14,
+        "uniques": 12,
+        "request_date": "2024-06-13"
+      },
+      {
+        "count": 16,
+        "uniques": 13,
+        "request_date": "2024-06-14"
+      },
+      {
+        "count": 20,
+        "uniques": 15,
+        "request_date": "2024-06-15"
+      },
+      {
+        "count": 20,
+        "uniques": 15,
+        "request_date": "2024-06-16"
+      },
+      {
+        "count": 19,
+        "uniques": 14,
+        "request_date": "2024-06-17"
+      },
+      {
+        "count": 15,
+        "uniques": 11,
+        "request_date": "2024-06-18"
+      },
+      {
+        "count": 11,
+        "uniques": 8,
+        "request_date": "2024-06-19"
+      },
+      {
+        "count": 10,
+        "uniques": 7,
+        "request_date": "2024-06-20"
+      },
+      {
+        "count": 15,
+        "uniques": 7,
+        "request_date": "2024-06-21"
+      },
+      {
+        "count": 19,
+        "uniques": 10,
+        "request_date": "2024-06-22"
+      },
+      {
+        "count": 20,
+        "uniques": 11,
+        "request_date": "2024-06-23"
+      },
+      {
+        "count": 20,
+        "uniques": 11,
+        "request_date": "2024-06-24"
+      },
+      {
+        "count": 19,
+        "uniques": 10,
+        "request_date": "2024-06-25"
+      },
+      {
+        "count": 25,
+        "uniques": 12,
+        "request_date": "2024-06-26"
+      },
+      {
+        "count": 23,
+        "uniques": 11,
+        "request_date": "2024-06-27"
+      },
+      {
+        "count": 20,
+        "uniques": 10,
+        "request_date": "2024-06-28"
+      },
+      {
+        "count": 20,
+        "uniques": 10,
+        "request_date": "2024-06-29"
+      },
+      {
+        "count": 20,
+        "uniques": 10,
+        "request_date": "2024-06-30"
+      },
+      {
+        "count": 20,
+        "uniques": 10,
+        "request_date": "2024-07-01"
+      },
+      {
+        "count": 26,
+        "uniques": 12,
+        "request_date": "2024-07-02"
+      }
+    ]
+  },
+  {
+    "referrer": "documents.migale.inrae.fr",
+    "views": [
+      {
+        "count": 7,
+        "uniques": 1,
+        "request_date": "2024-05-06"
+      },
+      {
+        "count": 7,
+        "uniques": 1,
+        "request_date": "2024-05-07"
+      },
+      {
+        "count": 7,
+        "uniques": 1,
+        "request_date": "2024-05-08"
+      },
+      {
+        "count": 7,
+        "uniques": 1,
+        "request_date": "2024-05-09"
+      },
+      {
+        "count": 7,
+        "uniques": 1,
+        "request_date": "2024-05-10"
+      },
+      {
+        "count": 7,
+        "uniques": 1,
+        "request_date": "2024-05-11"
+      },
+      {
+        "count": 7,
+        "uniques": 1,
+        "request_date": "2024-05-12"
+      },
+      {
+        "count": 7,
+        "uniques": 1,
+        "request_date": "2024-05-13"
+      },
+      {
+        "count": 7,
+        "uniques": 1,
+        "request_date": "2024-05-14"
+      }
+    ]
+  },
+  {
+    "referrer": "ecosia.org",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-19"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-20"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-21"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-22"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-23"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-24"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-25"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-26"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-27"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-28"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-29"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-04-11"
+      },
+      {
+        "count": 9,
+        "uniques": 4,
+        "request_date": "2024-06-02"
+      },
+      {
+        "count": 9,
+        "uniques": 4,
+        "request_date": "2024-06-03"
+      },
+      {
+        "count": 9,
+        "uniques": 4,
+        "request_date": "2024-06-04"
+      },
+      {
+        "count": 8,
+        "uniques": 3,
+        "request_date": "2024-06-05"
+      },
+      {
+        "count": 8,
+        "uniques": 3,
+        "request_date": "2024-06-06"
+      },
+      {
+        "count": 8,
+        "uniques": 3,
+        "request_date": "2024-06-07"
+      },
+      {
+        "count": 9,
+        "uniques": 4,
+        "request_date": "2024-06-08"
+      },
+      {
+        "count": 9,
+        "uniques": 4,
+        "request_date": "2024-06-09"
+      },
+      {
+        "count": 9,
+        "uniques": 4,
+        "request_date": "2024-06-10"
+      },
+      {
+        "count": 9,
+        "uniques": 4,
+        "request_date": "2024-06-11"
+      },
+      {
+        "count": 9,
+        "uniques": 4,
+        "request_date": "2024-06-12"
+      },
+      {
+        "count": 9,
+        "uniques": 4,
+        "request_date": "2024-06-13"
+      },
+      {
+        "count": 8,
+        "uniques": 3,
+        "request_date": "2024-06-14"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2024-06-16"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2024-06-17"
+      }
+    ]
+  },
+  {
+    "referrer": "email.seznam.cz",
+    "views": [
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-16"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-17"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-18"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-19"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-20"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-21"
       }
     ]
   },
@@ -636,6 +4256,816 @@
         "count": 25,
         "uniques": 9,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 15,
+        "uniques": 9,
+        "request_date": "2024-01-19"
+      },
+      {
+        "count": 15,
+        "uniques": 9,
+        "request_date": "2024-01-20"
+      },
+      {
+        "count": 15,
+        "uniques": 9,
+        "request_date": "2024-01-21"
+      },
+      {
+        "count": 15,
+        "uniques": 9,
+        "request_date": "2024-01-22"
+      },
+      {
+        "count": 16,
+        "uniques": 10,
+        "request_date": "2024-01-23"
+      },
+      {
+        "count": 10,
+        "uniques": 8,
+        "request_date": "2024-01-24"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2024-01-25"
+      },
+      {
+        "count": 13,
+        "uniques": 9,
+        "request_date": "2024-01-26"
+      },
+      {
+        "count": 12,
+        "uniques": 8,
+        "request_date": "2024-01-27"
+      },
+      {
+        "count": 12,
+        "uniques": 8,
+        "request_date": "2024-01-28"
+      },
+      {
+        "count": 11,
+        "uniques": 7,
+        "request_date": "2024-01-29"
+      },
+      {
+        "count": 10,
+        "uniques": 6,
+        "request_date": "2024-01-30"
+      },
+      {
+        "count": 12,
+        "uniques": 5,
+        "request_date": "2024-01-31"
+      },
+      {
+        "count": 10,
+        "uniques": 4,
+        "request_date": "2024-02-01"
+      },
+      {
+        "count": 12,
+        "uniques": 6,
+        "request_date": "2024-02-02"
+      },
+      {
+        "count": 12,
+        "uniques": 6,
+        "request_date": "2024-02-03"
+      },
+      {
+        "count": 12,
+        "uniques": 6,
+        "request_date": "2024-02-04"
+      },
+      {
+        "count": 11,
+        "uniques": 6,
+        "request_date": "2024-02-05"
+      },
+      {
+        "count": 22,
+        "uniques": 10,
+        "request_date": "2024-02-06"
+      },
+      {
+        "count": 20,
+        "uniques": 9,
+        "request_date": "2024-02-07"
+      },
+      {
+        "count": 18,
+        "uniques": 9,
+        "request_date": "2024-02-08"
+      },
+      {
+        "count": 19,
+        "uniques": 10,
+        "request_date": "2024-02-09"
+      },
+      {
+        "count": 24,
+        "uniques": 11,
+        "request_date": "2024-02-10"
+      },
+      {
+        "count": 24,
+        "uniques": 11,
+        "request_date": "2024-02-11"
+      },
+      {
+        "count": 23,
+        "uniques": 10,
+        "request_date": "2024-02-12"
+      },
+      {
+        "count": 19,
+        "uniques": 9,
+        "request_date": "2024-02-13"
+      },
+      {
+        "count": 21,
+        "uniques": 11,
+        "request_date": "2024-02-14"
+      },
+      {
+        "count": 20,
+        "uniques": 10,
+        "request_date": "2024-02-15"
+      },
+      {
+        "count": 20,
+        "uniques": 10,
+        "request_date": "2024-02-16"
+      },
+      {
+        "count": 22,
+        "uniques": 10,
+        "request_date": "2024-02-17"
+      },
+      {
+        "count": 22,
+        "uniques": 10,
+        "request_date": "2024-02-18"
+      },
+      {
+        "count": 11,
+        "uniques": 6,
+        "request_date": "2024-02-19"
+      },
+      {
+        "count": 11,
+        "uniques": 6,
+        "request_date": "2024-02-20"
+      },
+      {
+        "count": 12,
+        "uniques": 7,
+        "request_date": "2024-02-21"
+      },
+      {
+        "count": 12,
+        "uniques": 7,
+        "request_date": "2024-02-22"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-02-23"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-02-24"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-02-25"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-02-26"
+      },
+      {
+        "count": 23,
+        "uniques": 6,
+        "request_date": "2024-02-27"
+      },
+      {
+        "count": 22,
+        "uniques": 5,
+        "request_date": "2024-02-28"
+      },
+      {
+        "count": 31,
+        "uniques": 10,
+        "request_date": "2024-02-29"
+      },
+      {
+        "count": 32,
+        "uniques": 9,
+        "request_date": "2024-03-01"
+      },
+      {
+        "count": 32,
+        "uniques": 9,
+        "request_date": "2024-03-02"
+      },
+      {
+        "count": 34,
+        "uniques": 10,
+        "request_date": "2024-03-03"
+      },
+      {
+        "count": 34,
+        "uniques": 10,
+        "request_date": "2024-03-04"
+      },
+      {
+        "count": 33,
+        "uniques": 9,
+        "request_date": "2024-03-05"
+      },
+      {
+        "count": 32,
+        "uniques": 8,
+        "request_date": "2024-03-06"
+      },
+      {
+        "count": 37,
+        "uniques": 10,
+        "request_date": "2024-03-07"
+      },
+      {
+        "count": 47,
+        "uniques": 11,
+        "request_date": "2024-03-08"
+      },
+      {
+        "count": 48,
+        "uniques": 11,
+        "request_date": "2024-03-09"
+      },
+      {
+        "count": 48,
+        "uniques": 11,
+        "request_date": "2024-03-10"
+      },
+      {
+        "count": 35,
+        "uniques": 10,
+        "request_date": "2024-03-11"
+      },
+      {
+        "count": 39,
+        "uniques": 11,
+        "request_date": "2024-03-12"
+      },
+      {
+        "count": 30,
+        "uniques": 7,
+        "request_date": "2024-03-13"
+      },
+      {
+        "count": 30,
+        "uniques": 7,
+        "request_date": "2024-03-14"
+      },
+      {
+        "count": 30,
+        "uniques": 7,
+        "request_date": "2024-03-15"
+      },
+      {
+        "count": 28,
+        "uniques": 6,
+        "request_date": "2024-03-16"
+      },
+      {
+        "count": 29,
+        "uniques": 7,
+        "request_date": "2024-03-17"
+      },
+      {
+        "count": 29,
+        "uniques": 7,
+        "request_date": "2024-03-18"
+      },
+      {
+        "count": 29,
+        "uniques": 7,
+        "request_date": "2024-03-19"
+      },
+      {
+        "count": 25,
+        "uniques": 7,
+        "request_date": "2024-03-20"
+      },
+      {
+        "count": 17,
+        "uniques": 8,
+        "request_date": "2024-03-21"
+      },
+      {
+        "count": 16,
+        "uniques": 8,
+        "request_date": "2024-03-22"
+      },
+      {
+        "count": 21,
+        "uniques": 8,
+        "request_date": "2024-03-23"
+      },
+      {
+        "count": 16,
+        "uniques": 7,
+        "request_date": "2024-03-24"
+      },
+      {
+        "count": 12,
+        "uniques": 6,
+        "request_date": "2024-03-25"
+      },
+      {
+        "count": 12,
+        "uniques": 6,
+        "request_date": "2024-03-26"
+      },
+      {
+        "count": 9,
+        "uniques": 5,
+        "request_date": "2024-03-27"
+      },
+      {
+        "count": 9,
+        "uniques": 5,
+        "request_date": "2024-03-28"
+      },
+      {
+        "count": 9,
+        "uniques": 5,
+        "request_date": "2024-03-29"
+      },
+      {
+        "count": 8,
+        "uniques": 4,
+        "request_date": "2024-03-30"
+      },
+      {
+        "count": 9,
+        "uniques": 5,
+        "request_date": "2024-03-31"
+      },
+      {
+        "count": 9,
+        "uniques": 5,
+        "request_date": "2024-04-01"
+      },
+      {
+        "count": 21,
+        "uniques": 6,
+        "request_date": "2024-04-02"
+      },
+      {
+        "count": 20,
+        "uniques": 5,
+        "request_date": "2024-04-03"
+      },
+      {
+        "count": 23,
+        "uniques": 7,
+        "request_date": "2024-04-04"
+      },
+      {
+        "count": 24,
+        "uniques": 8,
+        "request_date": "2024-04-05"
+      },
+      {
+        "count": 25,
+        "uniques": 8,
+        "request_date": "2024-04-06"
+      },
+      {
+        "count": 25,
+        "uniques": 8,
+        "request_date": "2024-04-07"
+      },
+      {
+        "count": 25,
+        "uniques": 8,
+        "request_date": "2024-04-08"
+      },
+      {
+        "count": 25,
+        "uniques": 8,
+        "request_date": "2024-04-09"
+      },
+      {
+        "count": 25,
+        "uniques": 8,
+        "request_date": "2024-04-10"
+      },
+      {
+        "count": 25,
+        "uniques": 8,
+        "request_date": "2024-04-11"
+      },
+      {
+        "count": 26,
+        "uniques": 9,
+        "request_date": "2024-04-12"
+      },
+      {
+        "count": 25,
+        "uniques": 8,
+        "request_date": "2024-04-13"
+      },
+      {
+        "count": 25,
+        "uniques": 8,
+        "request_date": "2024-04-14"
+      },
+      {
+        "count": 12,
+        "uniques": 6,
+        "request_date": "2024-04-15"
+      },
+      {
+        "count": 11,
+        "uniques": 5,
+        "request_date": "2024-04-16"
+      },
+      {
+        "count": 12,
+        "uniques": 5,
+        "request_date": "2024-04-17"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2024-04-18"
+      },
+      {
+        "count": 9,
+        "uniques": 6,
+        "request_date": "2024-04-19"
+      },
+      {
+        "count": 9,
+        "uniques": 6,
+        "request_date": "2024-04-20"
+      },
+      {
+        "count": 9,
+        "uniques": 6,
+        "request_date": "2024-04-21"
+      },
+      {
+        "count": 9,
+        "uniques": 6,
+        "request_date": "2024-04-22"
+      },
+      {
+        "count": 9,
+        "uniques": 6,
+        "request_date": "2024-04-23"
+      },
+      {
+        "count": 11,
+        "uniques": 8,
+        "request_date": "2024-04-24"
+      },
+      {
+        "count": 26,
+        "uniques": 9,
+        "request_date": "2024-04-25"
+      },
+      {
+        "count": 26,
+        "uniques": 9,
+        "request_date": "2024-04-26"
+      },
+      {
+        "count": 27,
+        "uniques": 10,
+        "request_date": "2024-04-27"
+      },
+      {
+        "count": 41,
+        "uniques": 11,
+        "request_date": "2024-04-28"
+      },
+      {
+        "count": 42,
+        "uniques": 12,
+        "request_date": "2024-04-29"
+      },
+      {
+        "count": 39,
+        "uniques": 10,
+        "request_date": "2024-04-30"
+      },
+      {
+        "count": 39,
+        "uniques": 10,
+        "request_date": "2024-05-01"
+      },
+      {
+        "count": 35,
+        "uniques": 7,
+        "request_date": "2024-05-02"
+      },
+      {
+        "count": 35,
+        "uniques": 7,
+        "request_date": "2024-05-03"
+      },
+      {
+        "count": 35,
+        "uniques": 7,
+        "request_date": "2024-05-04"
+      },
+      {
+        "count": 35,
+        "uniques": 7,
+        "request_date": "2024-05-05"
+      },
+      {
+        "count": 37,
+        "uniques": 8,
+        "request_date": "2024-05-06"
+      },
+      {
+        "count": 36,
+        "uniques": 7,
+        "request_date": "2024-05-07"
+      },
+      {
+        "count": 20,
+        "uniques": 5,
+        "request_date": "2024-05-08"
+      },
+      {
+        "count": 20,
+        "uniques": 5,
+        "request_date": "2024-05-09"
+      },
+      {
+        "count": 19,
+        "uniques": 5,
+        "request_date": "2024-05-10"
+      },
+      {
+        "count": 8,
+        "uniques": 5,
+        "request_date": "2024-05-11"
+      },
+      {
+        "count": 7,
+        "uniques": 4,
+        "request_date": "2024-05-12"
+      },
+      {
+        "count": 6,
+        "uniques": 3,
+        "request_date": "2024-05-13"
+      },
+      {
+        "count": 6,
+        "uniques": 3,
+        "request_date": "2024-05-14"
+      },
+      {
+        "count": 8,
+        "uniques": 5,
+        "request_date": "2024-05-15"
+      },
+      {
+        "count": 8,
+        "uniques": 5,
+        "request_date": "2024-05-16"
+      },
+      {
+        "count": 13,
+        "uniques": 6,
+        "request_date": "2024-05-21"
+      },
+      {
+        "count": 13,
+        "uniques": 6,
+        "request_date": "2024-05-22"
+      },
+      {
+        "count": 15,
+        "uniques": 7,
+        "request_date": "2024-05-23"
+      },
+      {
+        "count": 15,
+        "uniques": 8,
+        "request_date": "2024-05-24"
+      },
+      {
+        "count": 15,
+        "uniques": 8,
+        "request_date": "2024-05-25"
+      },
+      {
+        "count": 15,
+        "uniques": 8,
+        "request_date": "2024-05-26"
+      },
+      {
+        "count": 15,
+        "uniques": 8,
+        "request_date": "2024-05-27"
+      },
+      {
+        "count": 13,
+        "uniques": 6,
+        "request_date": "2024-05-28"
+      },
+      {
+        "count": 13,
+        "uniques": 6,
+        "request_date": "2024-05-29"
+      },
+      {
+        "count": 16,
+        "uniques": 8,
+        "request_date": "2024-05-30"
+      },
+      {
+        "count": 15,
+        "uniques": 7,
+        "request_date": "2024-05-31"
+      },
+      {
+        "count": 18,
+        "uniques": 8,
+        "request_date": "2024-06-01"
+      },
+      {
+        "count": 39,
+        "uniques": 10,
+        "request_date": "2024-06-02"
+      },
+      {
+        "count": 32,
+        "uniques": 8,
+        "request_date": "2024-06-03"
+      },
+      {
+        "count": 47,
+        "uniques": 9,
+        "request_date": "2024-06-04"
+      },
+      {
+        "count": 47,
+        "uniques": 9,
+        "request_date": "2024-06-05"
+      },
+      {
+        "count": 45,
+        "uniques": 8,
+        "request_date": "2024-06-06"
+      },
+      {
+        "count": 46,
+        "uniques": 9,
+        "request_date": "2024-06-07"
+      },
+      {
+        "count": 65,
+        "uniques": 12,
+        "request_date": "2024-06-08"
+      },
+      {
+        "count": 65,
+        "uniques": 12,
+        "request_date": "2024-06-09"
+      },
+      {
+        "count": 65,
+        "uniques": 12,
+        "request_date": "2024-06-10"
+      },
+      {
+        "count": 66,
+        "uniques": 13,
+        "request_date": "2024-06-11"
+      },
+      {
+        "count": 63,
+        "uniques": 12,
+        "request_date": "2024-06-12"
+      },
+      {
+        "count": 63,
+        "uniques": 12,
+        "request_date": "2024-06-13"
+      },
+      {
+        "count": 71,
+        "uniques": 14,
+        "request_date": "2024-06-14"
+      },
+      {
+        "count": 50,
+        "uniques": 12,
+        "request_date": "2024-06-15"
+      },
+      {
+        "count": 50,
+        "uniques": 12,
+        "request_date": "2024-06-16"
+      },
+      {
+        "count": 35,
+        "uniques": 10,
+        "request_date": "2024-06-17"
+      },
+      {
+        "count": 35,
+        "uniques": 8,
+        "request_date": "2024-06-18"
+      },
+      {
+        "count": 36,
+        "uniques": 9,
+        "request_date": "2024-06-19"
+      },
+      {
+        "count": 35,
+        "uniques": 8,
+        "request_date": "2024-06-20"
+      },
+      {
+        "count": 16,
+        "uniques": 6,
+        "request_date": "2024-06-21"
+      },
+      {
+        "count": 16,
+        "uniques": 6,
+        "request_date": "2024-06-22"
+      },
+      {
+        "count": 16,
+        "uniques": 6,
+        "request_date": "2024-06-23"
+      },
+      {
+        "count": 15,
+        "uniques": 5,
+        "request_date": "2024-06-24"
+      },
+      {
+        "count": 16,
+        "uniques": 6,
+        "request_date": "2024-06-25"
+      },
+      {
+        "count": 18,
+        "uniques": 7,
+        "request_date": "2024-06-26"
+      },
+      {
+        "count": 8,
+        "uniques": 6,
+        "request_date": "2024-06-27"
+      },
+      {
+        "count": 8,
+        "uniques": 6,
+        "request_date": "2024-06-28"
+      },
+      {
+        "count": 9,
+        "uniques": 7,
+        "request_date": "2024-06-29"
+      },
+      {
+        "count": 9,
+        "uniques": 7,
+        "request_date": "2024-06-30"
+      },
+      {
+        "count": 10,
+        "uniques": 7,
+        "request_date": "2024-07-01"
+      },
+      {
+        "count": 11,
+        "uniques": 7,
+        "request_date": "2024-07-02"
       }
     ]
   },
@@ -776,6 +5206,631 @@
         "count": 3,
         "uniques": 2,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-01-19"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-20"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-21"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-22"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-01-23"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-01-24"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-25"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-01-26"
+      },
+      {
+        "count": 29,
+        "uniques": 3,
+        "request_date": "2024-01-27"
+      },
+      {
+        "count": 29,
+        "uniques": 3,
+        "request_date": "2024-01-28"
+      },
+      {
+        "count": 29,
+        "uniques": 3,
+        "request_date": "2024-01-29"
+      },
+      {
+        "count": 36,
+        "uniques": 4,
+        "request_date": "2024-01-30"
+      },
+      {
+        "count": 36,
+        "uniques": 4,
+        "request_date": "2024-01-31"
+      },
+      {
+        "count": 36,
+        "uniques": 4,
+        "request_date": "2024-02-01"
+      },
+      {
+        "count": 34,
+        "uniques": 3,
+        "request_date": "2024-02-02"
+      },
+      {
+        "count": 34,
+        "uniques": 3,
+        "request_date": "2024-02-03"
+      },
+      {
+        "count": 34,
+        "uniques": 3,
+        "request_date": "2024-02-04"
+      },
+      {
+        "count": 34,
+        "uniques": 3,
+        "request_date": "2024-02-05"
+      },
+      {
+        "count": 34,
+        "uniques": 3,
+        "request_date": "2024-02-06"
+      },
+      {
+        "count": 34,
+        "uniques": 3,
+        "request_date": "2024-02-07"
+      },
+      {
+        "count": 64,
+        "uniques": 4,
+        "request_date": "2024-02-08"
+      },
+      {
+        "count": 38,
+        "uniques": 3,
+        "request_date": "2024-02-09"
+      },
+      {
+        "count": 38,
+        "uniques": 3,
+        "request_date": "2024-02-10"
+      },
+      {
+        "count": 38,
+        "uniques": 3,
+        "request_date": "2024-02-11"
+      },
+      {
+        "count": 35,
+        "uniques": 3,
+        "request_date": "2024-02-12"
+      },
+      {
+        "count": 35,
+        "uniques": 3,
+        "request_date": "2024-02-13"
+      },
+      {
+        "count": 36,
+        "uniques": 3,
+        "request_date": "2024-02-14"
+      },
+      {
+        "count": 36,
+        "uniques": 3,
+        "request_date": "2024-02-15"
+      },
+      {
+        "count": 38,
+        "uniques": 4,
+        "request_date": "2024-02-16"
+      },
+      {
+        "count": 38,
+        "uniques": 4,
+        "request_date": "2024-02-17"
+      },
+      {
+        "count": 38,
+        "uniques": 4,
+        "request_date": "2024-02-18"
+      },
+      {
+        "count": 38,
+        "uniques": 4,
+        "request_date": "2024-02-19"
+      },
+      {
+        "count": 38,
+        "uniques": 4,
+        "request_date": "2024-02-20"
+      },
+      {
+        "count": 8,
+        "uniques": 3,
+        "request_date": "2024-02-21"
+      },
+      {
+        "count": 7,
+        "uniques": 3,
+        "request_date": "2024-02-22"
+      },
+      {
+        "count": 7,
+        "uniques": 3,
+        "request_date": "2024-02-23"
+      },
+      {
+        "count": 7,
+        "uniques": 3,
+        "request_date": "2024-02-24"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-02-25"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-02-26"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-27"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-28"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-03-01"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-03-02"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-03-03"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-03-04"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-05"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-06"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-07"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-08"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-09"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-10"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-11"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-12"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-13"
+      },
+      {
+        "count": 5,
+        "uniques": 4,
+        "request_date": "2024-03-14"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2024-03-20"
+      },
+      {
+        "count": 4,
+        "uniques": 4,
+        "request_date": "2024-03-24"
+      },
+      {
+        "count": 4,
+        "uniques": 4,
+        "request_date": "2024-03-25"
+      },
+      {
+        "count": 4,
+        "uniques": 4,
+        "request_date": "2024-03-26"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-03-27"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-04-03"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-04-04"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-04-05"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-04-06"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-04-07"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-04-08"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-04-09"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-04-10"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-04-11"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-12"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-13"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-14"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-15"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-26"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-27"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-28"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-29"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-30"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-05-01"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-05-02"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-05-03"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-05-04"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-05-05"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-05-06"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-05-07"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-05-08"
+      },
+      {
+        "count": 27,
+        "uniques": 4,
+        "request_date": "2024-05-14"
+      },
+      {
+        "count": 27,
+        "uniques": 4,
+        "request_date": "2024-05-15"
+      },
+      {
+        "count": 28,
+        "uniques": 5,
+        "request_date": "2024-05-16"
+      },
+      {
+        "count": 28,
+        "uniques": 5,
+        "request_date": "2024-05-17"
+      },
+      {
+        "count": 28,
+        "uniques": 5,
+        "request_date": "2024-05-18"
+      },
+      {
+        "count": 28,
+        "uniques": 5,
+        "request_date": "2024-05-19"
+      },
+      {
+        "count": 28,
+        "uniques": 5,
+        "request_date": "2024-05-20"
+      },
+      {
+        "count": 28,
+        "uniques": 5,
+        "request_date": "2024-05-21"
+      },
+      {
+        "count": 37,
+        "uniques": 6,
+        "request_date": "2024-05-22"
+      },
+      {
+        "count": 32,
+        "uniques": 5,
+        "request_date": "2024-05-23"
+      },
+      {
+        "count": 36,
+        "uniques": 7,
+        "request_date": "2024-05-24"
+      },
+      {
+        "count": 36,
+        "uniques": 7,
+        "request_date": "2024-05-25"
+      },
+      {
+        "count": 36,
+        "uniques": 7,
+        "request_date": "2024-05-26"
+      },
+      {
+        "count": 14,
+        "uniques": 4,
+        "request_date": "2024-05-27"
+      },
+      {
+        "count": 17,
+        "uniques": 5,
+        "request_date": "2024-05-28"
+      },
+      {
+        "count": 16,
+        "uniques": 4,
+        "request_date": "2024-05-29"
+      },
+      {
+        "count": 16,
+        "uniques": 4,
+        "request_date": "2024-05-30"
+      },
+      {
+        "count": 16,
+        "uniques": 4,
+        "request_date": "2024-05-31"
+      },
+      {
+        "count": 16,
+        "uniques": 4,
+        "request_date": "2024-06-01"
+      },
+      {
+        "count": 16,
+        "uniques": 4,
+        "request_date": "2024-06-02"
+      },
+      {
+        "count": 16,
+        "uniques": 4,
+        "request_date": "2024-06-03"
+      },
+      {
+        "count": 7,
+        "uniques": 3,
+        "request_date": "2024-06-05"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-06-15"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-06-17"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-06-18"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-06-19"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-06-20"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-06-21"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-06-22"
+      },
+      {
+        "count": 8,
+        "uniques": 3,
+        "request_date": "2024-06-23"
+      },
+      {
+        "count": 8,
+        "uniques": 3,
+        "request_date": "2024-06-24"
+      },
+      {
+        "count": 8,
+        "uniques": 3,
+        "request_date": "2024-06-25"
+      },
+      {
+        "count": 10,
+        "uniques": 3,
+        "request_date": "2024-06-26"
+      },
+      {
+        "count": 10,
+        "uniques": 3,
+        "request_date": "2024-06-27"
+      },
+      {
+        "count": 10,
+        "uniques": 3,
+        "request_date": "2024-06-28"
+      },
+      {
+        "count": 10,
+        "uniques": 3,
+        "request_date": "2024-06-29"
+      },
+      {
+        "count": 10,
+        "uniques": 3,
+        "request_date": "2024-06-30"
+      },
+      {
+        "count": 9,
+        "uniques": 3,
+        "request_date": "2024-07-01"
+      },
+      {
+        "count": 11,
+        "uniques": 3,
+        "request_date": "2024-07-02"
       }
     ]
   },
@@ -801,6 +5856,46 @@
         "count": 2,
         "uniques": 2,
         "request_date": "2023-12-24"
+      }
+    ]
+  },
+  {
+    "referrer": "it.search.yahoo.com",
+    "views": [
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-03-05"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-03-06"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-03-07"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-03-08"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-03-09"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-03-10"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-03-11"
       }
     ]
   },
@@ -901,6 +5996,126 @@
         "count": 2,
         "uniques": 1,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-02-04"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-02-05"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-02-06"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-02-07"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-02-08"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-02-09"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-02-10"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-02-11"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-02-12"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-02-13"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-14"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-15"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-16"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-03-02"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-03-03"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-03-04"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-04-18"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-04-19"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-04-20"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-04-25"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-05-09"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-05-10"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-05-12"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-05-13"
       }
     ]
   },
@@ -951,6 +6166,181 @@
         "count": 4,
         "uniques": 1,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-19"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-20"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-21"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-22"
+      },
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2024-01-23"
+      }
+    ]
+  },
+  {
+    "referrer": "m.baidu.com",
+    "views": [
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-27"
+      },
+      {
+        "count": 5,
+        "uniques": 4,
+        "request_date": "2024-03-28"
+      },
+      {
+        "count": 8,
+        "uniques": 7,
+        "request_date": "2024-03-29"
+      },
+      {
+        "count": 8,
+        "uniques": 7,
+        "request_date": "2024-03-30"
+      },
+      {
+        "count": 8,
+        "uniques": 7,
+        "request_date": "2024-03-31"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-04-01"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-04-02"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-04-03"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-04-04"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-04-05"
+      },
+      {
+        "count": 5,
+        "uniques": 5,
+        "request_date": "2024-04-06"
+      },
+      {
+        "count": 5,
+        "uniques": 5,
+        "request_date": "2024-04-07"
+      },
+      {
+        "count": 5,
+        "uniques": 5,
+        "request_date": "2024-04-08"
+      },
+      {
+        "count": 4,
+        "uniques": 4,
+        "request_date": "2024-04-09"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2024-04-10"
+      }
+    ]
+  },
+  {
+    "referrer": "malaysia.search.yahoo.com",
+    "views": [
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-02-03"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-02-04"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-02-05"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-02-06"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-02-07"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-02-08"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-02-09"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-02-10"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-02-11"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-02-12"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-02-13"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-02-14"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-02-15"
       }
     ]
   },
@@ -1056,6 +6446,126 @@
         "count": 2,
         "uniques": 2,
         "request_date": "2024-01-10"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-01-31"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-02-01"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-02-02"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-02-03"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-02-04"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-02-05"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-02-06"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-02-07"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-02-08"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-02-09"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-02-10"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-02-11"
+      },
+      {
+        "count": 9,
+        "uniques": 2,
+        "request_date": "2024-02-12"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-13"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-14"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-03-15"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-03-16"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-03-17"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-03-18"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-03-19"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-03-20"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-03-21"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-22"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-23"
       }
     ]
   },
@@ -1076,6 +6586,71 @@
         "count": 2,
         "uniques": 1,
         "request_date": "2024-01-12"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-06-04"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-06-05"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-06-06"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-06-07"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-06-08"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-06-09"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-06-10"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-06-11"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-06-12"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-06-13"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-06-14"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-06-15"
+      },
+      {
+        "count": 15,
+        "uniques": 1,
+        "request_date": "2024-06-16"
       }
     ]
   },
@@ -1131,6 +6706,246 @@
         "count": 2,
         "uniques": 1,
         "request_date": "2024-01-03"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-01"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-02"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-03"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-13"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-02-29"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-03-01"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-03-02"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-03-03"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-03-04"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-03-05"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-03-06"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-03-07"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-03-08"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-03-09"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-03-10"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-03-11"
+      },
+      {
+        "count": 16,
+        "uniques": 1,
+        "request_date": "2024-03-12"
+      }
+    ]
+  },
+  {
+    "referrer": "rt.bsc.es",
+    "views": [
+      {
+        "count": 22,
+        "uniques": 1,
+        "request_date": "2024-04-04"
+      },
+      {
+        "count": 22,
+        "uniques": 1,
+        "request_date": "2024-04-05"
+      },
+      {
+        "count": 22,
+        "uniques": 1,
+        "request_date": "2024-04-06"
+      },
+      {
+        "count": 22,
+        "uniques": 1,
+        "request_date": "2024-04-07"
+      },
+      {
+        "count": 22,
+        "uniques": 1,
+        "request_date": "2024-04-08"
+      },
+      {
+        "count": 22,
+        "uniques": 1,
+        "request_date": "2024-04-09"
+      },
+      {
+        "count": 22,
+        "uniques": 1,
+        "request_date": "2024-04-10"
+      },
+      {
+        "count": 22,
+        "uniques": 1,
+        "request_date": "2024-04-11"
+      },
+      {
+        "count": 22,
+        "uniques": 1,
+        "request_date": "2024-04-12"
+      },
+      {
+        "count": 22,
+        "uniques": 1,
+        "request_date": "2024-04-13"
+      },
+      {
+        "count": 22,
+        "uniques": 1,
+        "request_date": "2024-04-14"
+      },
+      {
+        "count": 22,
+        "uniques": 1,
+        "request_date": "2024-04-15"
+      },
+      {
+        "count": 22,
+        "uniques": 1,
+        "request_date": "2024-04-16"
+      }
+    ]
+  },
+  {
+    "referrer": "search.brave.com",
+    "views": [
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-06-12"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-06-13"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-06-14"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-06-15"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-06-16"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-06-17"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-06-18"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-06-19"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-06-20"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-06-21"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-06-22"
+      },
+      {
+        "count": 5,
+        "uniques": 1,
+        "request_date": "2024-06-23"
+      }
+    ]
+  },
+  {
+    "referrer": "so.com",
+    "views": [
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-06-24"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-06-25"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-06-26"
       }
     ]
   },
@@ -1146,6 +6961,231 @@
         "count": 1,
         "uniques": 1,
         "request_date": "2024-01-11"
+      }
+    ]
+  },
+  {
+    "referrer": "statics.teams.cdn.office.net",
+    "views": [
+      {
+        "count": 11,
+        "uniques": 1,
+        "request_date": "2024-05-17"
+      },
+      {
+        "count": 11,
+        "uniques": 1,
+        "request_date": "2024-05-18"
+      },
+      {
+        "count": 11,
+        "uniques": 1,
+        "request_date": "2024-05-19"
+      },
+      {
+        "count": 11,
+        "uniques": 1,
+        "request_date": "2024-05-20"
+      },
+      {
+        "count": 11,
+        "uniques": 1,
+        "request_date": "2024-05-21"
+      }
+    ]
+  },
+  {
+    "referrer": "stem.elearning.unipd.it",
+    "views": [
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-17"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-04-18"
+      },
+      {
+        "count": 6,
+        "uniques": 1,
+        "request_date": "2024-04-19"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-20"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-21"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-22"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-23"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-24"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-25"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-26"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-27"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-28"
+      },
+      {
+        "count": 8,
+        "uniques": 1,
+        "request_date": "2024-04-29"
+      }
+    ]
+  },
+  {
+    "referrer": "support.nesi.org.nz",
+    "views": [
+      {
+        "count": 55,
+        "uniques": 1,
+        "request_date": "2024-05-15"
+      },
+      {
+        "count": 55,
+        "uniques": 1,
+        "request_date": "2024-05-16"
+      },
+      {
+        "count": 55,
+        "uniques": 1,
+        "request_date": "2024-05-17"
+      },
+      {
+        "count": 55,
+        "uniques": 1,
+        "request_date": "2024-05-18"
+      },
+      {
+        "count": 55,
+        "uniques": 1,
+        "request_date": "2024-05-19"
+      },
+      {
+        "count": 55,
+        "uniques": 1,
+        "request_date": "2024-05-20"
+      },
+      {
+        "count": 55,
+        "uniques": 1,
+        "request_date": "2024-05-21"
+      },
+      {
+        "count": 55,
+        "uniques": 1,
+        "request_date": "2024-05-22"
+      },
+      {
+        "count": 55,
+        "uniques": 1,
+        "request_date": "2024-05-23"
+      },
+      {
+        "count": 55,
+        "uniques": 1,
+        "request_date": "2024-05-24"
+      },
+      {
+        "count": 55,
+        "uniques": 1,
+        "request_date": "2024-05-25"
+      },
+      {
+        "count": 55,
+        "uniques": 1,
+        "request_date": "2024-05-26"
+      },
+      {
+        "count": 55,
+        "uniques": 1,
+        "request_date": "2024-05-27"
+      }
+    ]
+  },
+  {
+    "referrer": "toolshed.g2.bx.psu.edu",
+    "views": [
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-24"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-25"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-26"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-27"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-28"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-02-29"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-03-01"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-03-02"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-03-03"
+      },
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2024-03-04"
       }
     ]
   },
@@ -1296,6 +7336,836 @@
         "count": 214,
         "uniques": 68,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 276,
+        "uniques": 73,
+        "request_date": "2024-01-19"
+      },
+      {
+        "count": 292,
+        "uniques": 79,
+        "request_date": "2024-01-20"
+      },
+      {
+        "count": 307,
+        "uniques": 81,
+        "request_date": "2024-01-21"
+      },
+      {
+        "count": 303,
+        "uniques": 80,
+        "request_date": "2024-01-22"
+      },
+      {
+        "count": 278,
+        "uniques": 79,
+        "request_date": "2024-01-23"
+      },
+      {
+        "count": 277,
+        "uniques": 73,
+        "request_date": "2024-01-24"
+      },
+      {
+        "count": 276,
+        "uniques": 72,
+        "request_date": "2024-01-25"
+      },
+      {
+        "count": 273,
+        "uniques": 70,
+        "request_date": "2024-01-26"
+      },
+      {
+        "count": 334,
+        "uniques": 75,
+        "request_date": "2024-01-27"
+      },
+      {
+        "count": 339,
+        "uniques": 76,
+        "request_date": "2024-01-28"
+      },
+      {
+        "count": 332,
+        "uniques": 76,
+        "request_date": "2024-01-29"
+      },
+      {
+        "count": 305,
+        "uniques": 70,
+        "request_date": "2024-01-30"
+      },
+      {
+        "count": 318,
+        "uniques": 65,
+        "request_date": "2024-01-31"
+      },
+      {
+        "count": 263,
+        "uniques": 64,
+        "request_date": "2024-02-01"
+      },
+      {
+        "count": 271,
+        "uniques": 64,
+        "request_date": "2024-02-02"
+      },
+      {
+        "count": 261,
+        "uniques": 66,
+        "request_date": "2024-02-03"
+      },
+      {
+        "count": 262,
+        "uniques": 67,
+        "request_date": "2024-02-04"
+      },
+      {
+        "count": 266,
+        "uniques": 65,
+        "request_date": "2024-02-05"
+      },
+      {
+        "count": 245,
+        "uniques": 64,
+        "request_date": "2024-02-06"
+      },
+      {
+        "count": 243,
+        "uniques": 67,
+        "request_date": "2024-02-07"
+      },
+      {
+        "count": 237,
+        "uniques": 67,
+        "request_date": "2024-02-08"
+      },
+      {
+        "count": 197,
+        "uniques": 64,
+        "request_date": "2024-02-09"
+      },
+      {
+        "count": 196,
+        "uniques": 65,
+        "request_date": "2024-02-10"
+      },
+      {
+        "count": 206,
+        "uniques": 69,
+        "request_date": "2024-02-11"
+      },
+      {
+        "count": 204,
+        "uniques": 70,
+        "request_date": "2024-02-12"
+      },
+      {
+        "count": 183,
+        "uniques": 71,
+        "request_date": "2024-02-13"
+      },
+      {
+        "count": 173,
+        "uniques": 65,
+        "request_date": "2024-02-14"
+      },
+      {
+        "count": 190,
+        "uniques": 64,
+        "request_date": "2024-02-15"
+      },
+      {
+        "count": 200,
+        "uniques": 65,
+        "request_date": "2024-02-16"
+      },
+      {
+        "count": 200,
+        "uniques": 65,
+        "request_date": "2024-02-17"
+      },
+      {
+        "count": 190,
+        "uniques": 65,
+        "request_date": "2024-02-18"
+      },
+      {
+        "count": 195,
+        "uniques": 62,
+        "request_date": "2024-02-19"
+      },
+      {
+        "count": 221,
+        "uniques": 58,
+        "request_date": "2024-02-20"
+      },
+      {
+        "count": 237,
+        "uniques": 57,
+        "request_date": "2024-02-21"
+      },
+      {
+        "count": 213,
+        "uniques": 62,
+        "request_date": "2024-02-22"
+      },
+      {
+        "count": 226,
+        "uniques": 64,
+        "request_date": "2024-02-23"
+      },
+      {
+        "count": 253,
+        "uniques": 66,
+        "request_date": "2024-02-24"
+      },
+      {
+        "count": 254,
+        "uniques": 67,
+        "request_date": "2024-02-25"
+      },
+      {
+        "count": 246,
+        "uniques": 61,
+        "request_date": "2024-02-26"
+      },
+      {
+        "count": 323,
+        "uniques": 67,
+        "request_date": "2024-02-27"
+      },
+      {
+        "count": 296,
+        "uniques": 65,
+        "request_date": "2024-02-28"
+      },
+      {
+        "count": 296,
+        "uniques": 69,
+        "request_date": "2024-02-29"
+      },
+      {
+        "count": 302,
+        "uniques": 71,
+        "request_date": "2024-03-01"
+      },
+      {
+        "count": 301,
+        "uniques": 74,
+        "request_date": "2024-03-02"
+      },
+      {
+        "count": 298,
+        "uniques": 77,
+        "request_date": "2024-03-03"
+      },
+      {
+        "count": 260,
+        "uniques": 75,
+        "request_date": "2024-03-04"
+      },
+      {
+        "count": 308,
+        "uniques": 83,
+        "request_date": "2024-03-05"
+      },
+      {
+        "count": 322,
+        "uniques": 82,
+        "request_date": "2024-03-06"
+      },
+      {
+        "count": 328,
+        "uniques": 82,
+        "request_date": "2024-03-07"
+      },
+      {
+        "count": 315,
+        "uniques": 81,
+        "request_date": "2024-03-08"
+      },
+      {
+        "count": 316,
+        "uniques": 79,
+        "request_date": "2024-03-09"
+      },
+      {
+        "count": 338,
+        "uniques": 83,
+        "request_date": "2024-03-10"
+      },
+      {
+        "count": 262,
+        "uniques": 78,
+        "request_date": "2024-03-11"
+      },
+      {
+        "count": 255,
+        "uniques": 77,
+        "request_date": "2024-03-12"
+      },
+      {
+        "count": 285,
+        "uniques": 75,
+        "request_date": "2024-03-13"
+      },
+      {
+        "count": 282,
+        "uniques": 76,
+        "request_date": "2024-03-14"
+      },
+      {
+        "count": 320,
+        "uniques": 76,
+        "request_date": "2024-03-15"
+      },
+      {
+        "count": 318,
+        "uniques": 71,
+        "request_date": "2024-03-16"
+      },
+      {
+        "count": 323,
+        "uniques": 74,
+        "request_date": "2024-03-17"
+      },
+      {
+        "count": 255,
+        "uniques": 66,
+        "request_date": "2024-03-18"
+      },
+      {
+        "count": 276,
+        "uniques": 66,
+        "request_date": "2024-03-19"
+      },
+      {
+        "count": 263,
+        "uniques": 64,
+        "request_date": "2024-03-20"
+      },
+      {
+        "count": 249,
+        "uniques": 62,
+        "request_date": "2024-03-21"
+      },
+      {
+        "count": 249,
+        "uniques": 68,
+        "request_date": "2024-03-22"
+      },
+      {
+        "count": 234,
+        "uniques": 69,
+        "request_date": "2024-03-23"
+      },
+      {
+        "count": 240,
+        "uniques": 71,
+        "request_date": "2024-03-24"
+      },
+      {
+        "count": 240,
+        "uniques": 73,
+        "request_date": "2024-03-25"
+      },
+      {
+        "count": 235,
+        "uniques": 77,
+        "request_date": "2024-03-26"
+      },
+      {
+        "count": 264,
+        "uniques": 82,
+        "request_date": "2024-03-27"
+      },
+      {
+        "count": 301,
+        "uniques": 83,
+        "request_date": "2024-03-28"
+      },
+      {
+        "count": 297,
+        "uniques": 87,
+        "request_date": "2024-03-29"
+      },
+      {
+        "count": 306,
+        "uniques": 89,
+        "request_date": "2024-03-30"
+      },
+      {
+        "count": 309,
+        "uniques": 90,
+        "request_date": "2024-03-31"
+      },
+      {
+        "count": 262,
+        "uniques": 85,
+        "request_date": "2024-04-01"
+      },
+      {
+        "count": 268,
+        "uniques": 87,
+        "request_date": "2024-04-02"
+      },
+      {
+        "count": 317,
+        "uniques": 89,
+        "request_date": "2024-04-03"
+      },
+      {
+        "count": 321,
+        "uniques": 84,
+        "request_date": "2024-04-04"
+      },
+      {
+        "count": 344,
+        "uniques": 85,
+        "request_date": "2024-04-05"
+      },
+      {
+        "count": 336,
+        "uniques": 85,
+        "request_date": "2024-04-06"
+      },
+      {
+        "count": 326,
+        "uniques": 81,
+        "request_date": "2024-04-07"
+      },
+      {
+        "count": 297,
+        "uniques": 75,
+        "request_date": "2024-04-08"
+      },
+      {
+        "count": 278,
+        "uniques": 74,
+        "request_date": "2024-04-09"
+      },
+      {
+        "count": 206,
+        "uniques": 68,
+        "request_date": "2024-04-10"
+      },
+      {
+        "count": 208,
+        "uniques": 68,
+        "request_date": "2024-04-11"
+      },
+      {
+        "count": 215,
+        "uniques": 74,
+        "request_date": "2024-04-12"
+      },
+      {
+        "count": 247,
+        "uniques": 74,
+        "request_date": "2024-04-13"
+      },
+      {
+        "count": 251,
+        "uniques": 74,
+        "request_date": "2024-04-14"
+      },
+      {
+        "count": 237,
+        "uniques": 70,
+        "request_date": "2024-04-15"
+      },
+      {
+        "count": 206,
+        "uniques": 73,
+        "request_date": "2024-04-16"
+      },
+      {
+        "count": 203,
+        "uniques": 76,
+        "request_date": "2024-04-17"
+      },
+      {
+        "count": 192,
+        "uniques": 79,
+        "request_date": "2024-04-18"
+      },
+      {
+        "count": 213,
+        "uniques": 82,
+        "request_date": "2024-04-19"
+      },
+      {
+        "count": 242,
+        "uniques": 90,
+        "request_date": "2024-04-20"
+      },
+      {
+        "count": 251,
+        "uniques": 91,
+        "request_date": "2024-04-21"
+      },
+      {
+        "count": 265,
+        "uniques": 89,
+        "request_date": "2024-04-22"
+      },
+      {
+        "count": 261,
+        "uniques": 89,
+        "request_date": "2024-04-23"
+      },
+      {
+        "count": 282,
+        "uniques": 93,
+        "request_date": "2024-04-24"
+      },
+      {
+        "count": 270,
+        "uniques": 87,
+        "request_date": "2024-04-25"
+      },
+      {
+        "count": 249,
+        "uniques": 88,
+        "request_date": "2024-04-26"
+      },
+      {
+        "count": 241,
+        "uniques": 85,
+        "request_date": "2024-04-27"
+      },
+      {
+        "count": 238,
+        "uniques": 82,
+        "request_date": "2024-04-28"
+      },
+      {
+        "count": 208,
+        "uniques": 71,
+        "request_date": "2024-04-29"
+      },
+      {
+        "count": 198,
+        "uniques": 65,
+        "request_date": "2024-04-30"
+      },
+      {
+        "count": 178,
+        "uniques": 56,
+        "request_date": "2024-05-01"
+      },
+      {
+        "count": 157,
+        "uniques": 48,
+        "request_date": "2024-05-02"
+      },
+      {
+        "count": 153,
+        "uniques": 48,
+        "request_date": "2024-05-03"
+      },
+      {
+        "count": 153,
+        "uniques": 52,
+        "request_date": "2024-05-04"
+      },
+      {
+        "count": 121,
+        "uniques": 47,
+        "request_date": "2024-05-05"
+      },
+      {
+        "count": 118,
+        "uniques": 44,
+        "request_date": "2024-05-06"
+      },
+      {
+        "count": 91,
+        "uniques": 36,
+        "request_date": "2024-05-07"
+      },
+      {
+        "count": 125,
+        "uniques": 37,
+        "request_date": "2024-05-08"
+      },
+      {
+        "count": 136,
+        "uniques": 35,
+        "request_date": "2024-05-09"
+      },
+      {
+        "count": 162,
+        "uniques": 44,
+        "request_date": "2024-05-10"
+      },
+      {
+        "count": 175,
+        "uniques": 48,
+        "request_date": "2024-05-11"
+      },
+      {
+        "count": 194,
+        "uniques": 52,
+        "request_date": "2024-05-12"
+      },
+      {
+        "count": 196,
+        "uniques": 54,
+        "request_date": "2024-05-13"
+      },
+      {
+        "count": 263,
+        "uniques": 69,
+        "request_date": "2024-05-14"
+      },
+      {
+        "count": 333,
+        "uniques": 79,
+        "request_date": "2024-05-15"
+      },
+      {
+        "count": 327,
+        "uniques": 77,
+        "request_date": "2024-05-16"
+      },
+      {
+        "count": 319,
+        "uniques": 73,
+        "request_date": "2024-05-17"
+      },
+      {
+        "count": 338,
+        "uniques": 82,
+        "request_date": "2024-05-18"
+      },
+      {
+        "count": 336,
+        "uniques": 82,
+        "request_date": "2024-05-19"
+      },
+      {
+        "count": 335,
+        "uniques": 81,
+        "request_date": "2024-05-20"
+      },
+      {
+        "count": 298,
+        "uniques": 82,
+        "request_date": "2024-05-21"
+      },
+      {
+        "count": 292,
+        "uniques": 81,
+        "request_date": "2024-05-22"
+      },
+      {
+        "count": 291,
+        "uniques": 81,
+        "request_date": "2024-05-23"
+      },
+      {
+        "count": 292,
+        "uniques": 84,
+        "request_date": "2024-05-24"
+      },
+      {
+        "count": 296,
+        "uniques": 92,
+        "request_date": "2024-05-25"
+      },
+      {
+        "count": 296,
+        "uniques": 93,
+        "request_date": "2024-05-26"
+      },
+      {
+        "count": 303,
+        "uniques": 84,
+        "request_date": "2024-05-27"
+      },
+      {
+        "count": 250,
+        "uniques": 87,
+        "request_date": "2024-05-28"
+      },
+      {
+        "count": 238,
+        "uniques": 86,
+        "request_date": "2024-05-29"
+      },
+      {
+        "count": 259,
+        "uniques": 91,
+        "request_date": "2024-05-30"
+      },
+      {
+        "count": 256,
+        "uniques": 90,
+        "request_date": "2024-05-31"
+      },
+      {
+        "count": 266,
+        "uniques": 92,
+        "request_date": "2024-06-01"
+      },
+      {
+        "count": 272,
+        "uniques": 95,
+        "request_date": "2024-06-02"
+      },
+      {
+        "count": 288,
+        "uniques": 91,
+        "request_date": "2024-06-03"
+      },
+      {
+        "count": 278,
+        "uniques": 90,
+        "request_date": "2024-06-04"
+      },
+      {
+        "count": 267,
+        "uniques": 85,
+        "request_date": "2024-06-05"
+      },
+      {
+        "count": 278,
+        "uniques": 81,
+        "request_date": "2024-06-06"
+      },
+      {
+        "count": 280,
+        "uniques": 77,
+        "request_date": "2024-06-07"
+      },
+      {
+        "count": 339,
+        "uniques": 85,
+        "request_date": "2024-06-08"
+      },
+      {
+        "count": 266,
+        "uniques": 82,
+        "request_date": "2024-06-09"
+      },
+      {
+        "count": 246,
+        "uniques": 71,
+        "request_date": "2024-06-10"
+      },
+      {
+        "count": 240,
+        "uniques": 69,
+        "request_date": "2024-06-11"
+      },
+      {
+        "count": 239,
+        "uniques": 67,
+        "request_date": "2024-06-12"
+      },
+      {
+        "count": 293,
+        "uniques": 67,
+        "request_date": "2024-06-13"
+      },
+      {
+        "count": 304,
+        "uniques": 71,
+        "request_date": "2024-06-14"
+      },
+      {
+        "count": 304,
+        "uniques": 70,
+        "request_date": "2024-06-15"
+      },
+      {
+        "count": 292,
+        "uniques": 72,
+        "request_date": "2024-06-16"
+      },
+      {
+        "count": 281,
+        "uniques": 70,
+        "request_date": "2024-06-17"
+      },
+      {
+        "count": 294,
+        "uniques": 73,
+        "request_date": "2024-06-18"
+      },
+      {
+        "count": 280,
+        "uniques": 73,
+        "request_date": "2024-06-19"
+      },
+      {
+        "count": 261,
+        "uniques": 73,
+        "request_date": "2024-06-20"
+      },
+      {
+        "count": 226,
+        "uniques": 70,
+        "request_date": "2024-06-21"
+      },
+      {
+        "count": 240,
+        "uniques": 75,
+        "request_date": "2024-06-22"
+      },
+      {
+        "count": 240,
+        "uniques": 75,
+        "request_date": "2024-06-23"
+      },
+      {
+        "count": 243,
+        "uniques": 75,
+        "request_date": "2024-06-24"
+      },
+      {
+        "count": 221,
+        "uniques": 70,
+        "request_date": "2024-06-25"
+      },
+      {
+        "count": 154,
+        "uniques": 66,
+        "request_date": "2024-06-26"
+      },
+      {
+        "count": 166,
+        "uniques": 64,
+        "request_date": "2024-06-27"
+      },
+      {
+        "count": 188,
+        "uniques": 69,
+        "request_date": "2024-06-28"
+      },
+      {
+        "count": 180,
+        "uniques": 67,
+        "request_date": "2024-06-29"
+      },
+      {
+        "count": 185,
+        "uniques": 68,
+        "request_date": "2024-06-30"
+      },
+      {
+        "count": 167,
+        "uniques": 62,
+        "request_date": "2024-07-01"
+      },
+      {
+        "count": 162,
+        "uniques": 61,
+        "request_date": "2024-07-02"
       }
     ]
   },
@@ -1371,6 +8241,521 @@
         "count": 3,
         "uniques": 1,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-19"
+      },
+      {
+        "count": 6,
+        "uniques": 1,
+        "request_date": "2024-01-20"
+      },
+      {
+        "count": 6,
+        "uniques": 1,
+        "request_date": "2024-01-21"
+      },
+      {
+        "count": 6,
+        "uniques": 1,
+        "request_date": "2024-01-22"
+      },
+      {
+        "count": 6,
+        "uniques": 1,
+        "request_date": "2024-01-23"
+      },
+      {
+        "count": 6,
+        "uniques": 1,
+        "request_date": "2024-01-24"
+      },
+      {
+        "count": 6,
+        "uniques": 1,
+        "request_date": "2024-01-25"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-26"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-27"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-28"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-29"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-30"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-01-31"
+      },
+      {
+        "count": 3,
+        "uniques": 1,
+        "request_date": "2024-02-01"
+      },
+      {
+        "count": 7,
+        "uniques": 1,
+        "request_date": "2024-03-13"
+      },
+      {
+        "count": 11,
+        "uniques": 3,
+        "request_date": "2024-03-14"
+      },
+      {
+        "count": 11,
+        "uniques": 3,
+        "request_date": "2024-03-15"
+      },
+      {
+        "count": 11,
+        "uniques": 3,
+        "request_date": "2024-03-16"
+      },
+      {
+        "count": 11,
+        "uniques": 3,
+        "request_date": "2024-03-17"
+      },
+      {
+        "count": 11,
+        "uniques": 3,
+        "request_date": "2024-03-18"
+      },
+      {
+        "count": 11,
+        "uniques": 3,
+        "request_date": "2024-03-19"
+      },
+      {
+        "count": 12,
+        "uniques": 4,
+        "request_date": "2024-03-20"
+      },
+      {
+        "count": 12,
+        "uniques": 4,
+        "request_date": "2024-03-21"
+      },
+      {
+        "count": 12,
+        "uniques": 4,
+        "request_date": "2024-03-22"
+      },
+      {
+        "count": 12,
+        "uniques": 4,
+        "request_date": "2024-03-23"
+      },
+      {
+        "count": 12,
+        "uniques": 4,
+        "request_date": "2024-03-24"
+      },
+      {
+        "count": 12,
+        "uniques": 4,
+        "request_date": "2024-03-25"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-03-26"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-28"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-29"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-30"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-03-31"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-04-16"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2024-04-17"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2024-04-18"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2024-04-19"
+      },
+      {
+        "count": 4,
+        "uniques": 4,
+        "request_date": "2024-04-20"
+      },
+      {
+        "count": 4,
+        "uniques": 4,
+        "request_date": "2024-04-21"
+      },
+      {
+        "count": 5,
+        "uniques": 5,
+        "request_date": "2024-04-22"
+      },
+      {
+        "count": 5,
+        "uniques": 5,
+        "request_date": "2024-04-23"
+      },
+      {
+        "count": 5,
+        "uniques": 5,
+        "request_date": "2024-04-24"
+      },
+      {
+        "count": 4,
+        "uniques": 4,
+        "request_date": "2024-04-25"
+      },
+      {
+        "count": 18,
+        "uniques": 6,
+        "request_date": "2024-05-03"
+      },
+      {
+        "count": 23,
+        "uniques": 8,
+        "request_date": "2024-05-04"
+      },
+      {
+        "count": 22,
+        "uniques": 7,
+        "request_date": "2024-05-05"
+      },
+      {
+        "count": 22,
+        "uniques": 7,
+        "request_date": "2024-05-06"
+      },
+      {
+        "count": 22,
+        "uniques": 7,
+        "request_date": "2024-05-07"
+      },
+      {
+        "count": 57,
+        "uniques": 10,
+        "request_date": "2024-05-08"
+      },
+      {
+        "count": 58,
+        "uniques": 11,
+        "request_date": "2024-05-09"
+      },
+      {
+        "count": 59,
+        "uniques": 12,
+        "request_date": "2024-05-10"
+      },
+      {
+        "count": 66,
+        "uniques": 14,
+        "request_date": "2024-05-11"
+      },
+      {
+        "count": 67,
+        "uniques": 14,
+        "request_date": "2024-05-12"
+      },
+      {
+        "count": 67,
+        "uniques": 14,
+        "request_date": "2024-05-13"
+      },
+      {
+        "count": 69,
+        "uniques": 15,
+        "request_date": "2024-05-14"
+      },
+      {
+        "count": 69,
+        "uniques": 15,
+        "request_date": "2024-05-15"
+      },
+      {
+        "count": 57,
+        "uniques": 15,
+        "request_date": "2024-05-16"
+      },
+      {
+        "count": 56,
+        "uniques": 15,
+        "request_date": "2024-05-17"
+      },
+      {
+        "count": 59,
+        "uniques": 17,
+        "request_date": "2024-05-18"
+      },
+      {
+        "count": 59,
+        "uniques": 17,
+        "request_date": "2024-05-19"
+      },
+      {
+        "count": 59,
+        "uniques": 17,
+        "request_date": "2024-05-20"
+      },
+      {
+        "count": 24,
+        "uniques": 14,
+        "request_date": "2024-05-21"
+      },
+      {
+        "count": 30,
+        "uniques": 14,
+        "request_date": "2024-05-22"
+      },
+      {
+        "count": 38,
+        "uniques": 17,
+        "request_date": "2024-05-23"
+      },
+      {
+        "count": 41,
+        "uniques": 19,
+        "request_date": "2024-05-24"
+      },
+      {
+        "count": 39,
+        "uniques": 17,
+        "request_date": "2024-05-25"
+      },
+      {
+        "count": 40,
+        "uniques": 18,
+        "request_date": "2024-05-26"
+      },
+      {
+        "count": 43,
+        "uniques": 18,
+        "request_date": "2024-05-27"
+      },
+      {
+        "count": 43,
+        "uniques": 18,
+        "request_date": "2024-05-28"
+      },
+      {
+        "count": 42,
+        "uniques": 17,
+        "request_date": "2024-05-29"
+      },
+      {
+        "count": 39,
+        "uniques": 16,
+        "request_date": "2024-05-30"
+      },
+      {
+        "count": 37,
+        "uniques": 15,
+        "request_date": "2024-05-31"
+      },
+      {
+        "count": 43,
+        "uniques": 19,
+        "request_date": "2024-06-01"
+      },
+      {
+        "count": 61,
+        "uniques": 26,
+        "request_date": "2024-06-02"
+      },
+      {
+        "count": 72,
+        "uniques": 28,
+        "request_date": "2024-06-03"
+      },
+      {
+        "count": 65,
+        "uniques": 27,
+        "request_date": "2024-06-04"
+      },
+      {
+        "count": 58,
+        "uniques": 25,
+        "request_date": "2024-06-05"
+      },
+      {
+        "count": 51,
+        "uniques": 25,
+        "request_date": "2024-06-06"
+      },
+      {
+        "count": 52,
+        "uniques": 26,
+        "request_date": "2024-06-07"
+      },
+      {
+        "count": 54,
+        "uniques": 27,
+        "request_date": "2024-06-08"
+      },
+      {
+        "count": 49,
+        "uniques": 26,
+        "request_date": "2024-06-09"
+      },
+      {
+        "count": 49,
+        "uniques": 26,
+        "request_date": "2024-06-10"
+      },
+      {
+        "count": 50,
+        "uniques": 27,
+        "request_date": "2024-06-11"
+      },
+      {
+        "count": 57,
+        "uniques": 28,
+        "request_date": "2024-06-12"
+      },
+      {
+        "count": 61,
+        "uniques": 30,
+        "request_date": "2024-06-13"
+      },
+      {
+        "count": 59,
+        "uniques": 29,
+        "request_date": "2024-06-14"
+      },
+      {
+        "count": 43,
+        "uniques": 24,
+        "request_date": "2024-06-15"
+      },
+      {
+        "count": 33,
+        "uniques": 23,
+        "request_date": "2024-06-16"
+      },
+      {
+        "count": 33,
+        "uniques": 23,
+        "request_date": "2024-06-17"
+      },
+      {
+        "count": 39,
+        "uniques": 25,
+        "request_date": "2024-06-18"
+      },
+      {
+        "count": 39,
+        "uniques": 24,
+        "request_date": "2024-06-19"
+      },
+      {
+        "count": 41,
+        "uniques": 24,
+        "request_date": "2024-06-20"
+      },
+      {
+        "count": 42,
+        "uniques": 25,
+        "request_date": "2024-06-21"
+      },
+      {
+        "count": 42,
+        "uniques": 25,
+        "request_date": "2024-06-22"
+      },
+      {
+        "count": 43,
+        "uniques": 26,
+        "request_date": "2024-06-23"
+      },
+      {
+        "count": 43,
+        "uniques": 25,
+        "request_date": "2024-06-24"
+      },
+      {
+        "count": 36,
+        "uniques": 24,
+        "request_date": "2024-06-25"
+      },
+      {
+        "count": 32,
+        "uniques": 22,
+        "request_date": "2024-06-26"
+      },
+      {
+        "count": 34,
+        "uniques": 22,
+        "request_date": "2024-06-27"
+      },
+      {
+        "count": 33,
+        "uniques": 21,
+        "request_date": "2024-06-28"
+      },
+      {
+        "count": 37,
+        "uniques": 22,
+        "request_date": "2024-06-29"
+      },
+      {
+        "count": 36,
+        "uniques": 21,
+        "request_date": "2024-06-30"
+      },
+      {
+        "count": 30,
+        "uniques": 20,
+        "request_date": "2024-07-01"
+      },
+      {
+        "count": 33,
+        "uniques": 20,
+        "request_date": "2024-07-02"
       }
     ]
   },
@@ -1521,6 +8906,926 @@
         "count": 15,
         "uniques": 5,
         "request_date": "2024-01-18"
+      },
+      {
+        "count": 9,
+        "uniques": 6,
+        "request_date": "2024-01-19"
+      },
+      {
+        "count": 10,
+        "uniques": 7,
+        "request_date": "2024-01-20"
+      },
+      {
+        "count": 11,
+        "uniques": 8,
+        "request_date": "2024-01-21"
+      },
+      {
+        "count": 14,
+        "uniques": 9,
+        "request_date": "2024-01-22"
+      },
+      {
+        "count": 14,
+        "uniques": 9,
+        "request_date": "2024-01-23"
+      },
+      {
+        "count": 13,
+        "uniques": 8,
+        "request_date": "2024-01-24"
+      },
+      {
+        "count": 13,
+        "uniques": 8,
+        "request_date": "2024-01-25"
+      },
+      {
+        "count": 16,
+        "uniques": 8,
+        "request_date": "2024-01-26"
+      },
+      {
+        "count": 20,
+        "uniques": 10,
+        "request_date": "2024-01-27"
+      },
+      {
+        "count": 16,
+        "uniques": 9,
+        "request_date": "2024-01-28"
+      },
+      {
+        "count": 16,
+        "uniques": 9,
+        "request_date": "2024-01-29"
+      },
+      {
+        "count": 16,
+        "uniques": 9,
+        "request_date": "2024-01-30"
+      },
+      {
+        "count": 20,
+        "uniques": 12,
+        "request_date": "2024-01-31"
+      },
+      {
+        "count": 18,
+        "uniques": 10,
+        "request_date": "2024-02-01"
+      },
+      {
+        "count": 17,
+        "uniques": 9,
+        "request_date": "2024-02-02"
+      },
+      {
+        "count": 17,
+        "uniques": 9,
+        "request_date": "2024-02-03"
+      },
+      {
+        "count": 14,
+        "uniques": 8,
+        "request_date": "2024-02-04"
+      },
+      {
+        "count": 17,
+        "uniques": 9,
+        "request_date": "2024-02-05"
+      },
+      {
+        "count": 17,
+        "uniques": 9,
+        "request_date": "2024-02-06"
+      },
+      {
+        "count": 17,
+        "uniques": 9,
+        "request_date": "2024-02-07"
+      },
+      {
+        "count": 12,
+        "uniques": 7,
+        "request_date": "2024-02-08"
+      },
+      {
+        "count": 8,
+        "uniques": 5,
+        "request_date": "2024-02-09"
+      },
+      {
+        "count": 8,
+        "uniques": 5,
+        "request_date": "2024-02-10"
+      },
+      {
+        "count": 9,
+        "uniques": 6,
+        "request_date": "2024-02-11"
+      },
+      {
+        "count": 9,
+        "uniques": 6,
+        "request_date": "2024-02-12"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2024-02-13"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2024-02-14"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2024-02-15"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-02-16"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-02-17"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-02-18"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-02-19"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-02-20"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-02-21"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-02-22"
+      },
+      {
+        "count": 4,
+        "uniques": 3,
+        "request_date": "2024-02-23"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-02-24"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-02-25"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-26"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-27"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-28"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-02-29"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-03-01"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-03-02"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-03"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-04"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-03-05"
+      },
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-03-06"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-07"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-03-08"
+      },
+      {
+        "count": 21,
+        "uniques": 6,
+        "request_date": "2024-03-09"
+      },
+      {
+        "count": 21,
+        "uniques": 6,
+        "request_date": "2024-03-10"
+      },
+      {
+        "count": 21,
+        "uniques": 6,
+        "request_date": "2024-03-11"
+      },
+      {
+        "count": 21,
+        "uniques": 6,
+        "request_date": "2024-03-12"
+      },
+      {
+        "count": 23,
+        "uniques": 7,
+        "request_date": "2024-03-13"
+      },
+      {
+        "count": 28,
+        "uniques": 9,
+        "request_date": "2024-03-14"
+      },
+      {
+        "count": 28,
+        "uniques": 9,
+        "request_date": "2024-03-15"
+      },
+      {
+        "count": 29,
+        "uniques": 10,
+        "request_date": "2024-03-16"
+      },
+      {
+        "count": 29,
+        "uniques": 10,
+        "request_date": "2024-03-17"
+      },
+      {
+        "count": 29,
+        "uniques": 10,
+        "request_date": "2024-03-18"
+      },
+      {
+        "count": 30,
+        "uniques": 11,
+        "request_date": "2024-03-19"
+      },
+      {
+        "count": 29,
+        "uniques": 11,
+        "request_date": "2024-03-20"
+      },
+      {
+        "count": 39,
+        "uniques": 11,
+        "request_date": "2024-03-21"
+      },
+      {
+        "count": 24,
+        "uniques": 8,
+        "request_date": "2024-03-22"
+      },
+      {
+        "count": 24,
+        "uniques": 8,
+        "request_date": "2024-03-23"
+      },
+      {
+        "count": 24,
+        "uniques": 8,
+        "request_date": "2024-03-24"
+      },
+      {
+        "count": 25,
+        "uniques": 9,
+        "request_date": "2024-03-25"
+      },
+      {
+        "count": 23,
+        "uniques": 8,
+        "request_date": "2024-03-26"
+      },
+      {
+        "count": 19,
+        "uniques": 7,
+        "request_date": "2024-03-27"
+      },
+      {
+        "count": 19,
+        "uniques": 7,
+        "request_date": "2024-03-28"
+      },
+      {
+        "count": 18,
+        "uniques": 7,
+        "request_date": "2024-03-29"
+      },
+      {
+        "count": 19,
+        "uniques": 8,
+        "request_date": "2024-03-30"
+      },
+      {
+        "count": 19,
+        "uniques": 8,
+        "request_date": "2024-03-31"
+      },
+      {
+        "count": 18,
+        "uniques": 7,
+        "request_date": "2024-04-01"
+      },
+      {
+        "count": 17,
+        "uniques": 6,
+        "request_date": "2024-04-02"
+      },
+      {
+        "count": 6,
+        "uniques": 5,
+        "request_date": "2024-04-03"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-04-04"
+      },
+      {
+        "count": 8,
+        "uniques": 7,
+        "request_date": "2024-04-05"
+      },
+      {
+        "count": 8,
+        "uniques": 7,
+        "request_date": "2024-04-06"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-04-07"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2024-04-08"
+      },
+      {
+        "count": 6,
+        "uniques": 5,
+        "request_date": "2024-04-09"
+      },
+      {
+        "count": 6,
+        "uniques": 5,
+        "request_date": "2024-04-10"
+      },
+      {
+        "count": 4,
+        "uniques": 4,
+        "request_date": "2024-04-11"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2024-04-12"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2024-04-13"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2024-04-14"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2024-04-15"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2024-04-16"
+      },
+      {
+        "count": 10,
+        "uniques": 7,
+        "request_date": "2024-04-17"
+      },
+      {
+        "count": 9,
+        "uniques": 6,
+        "request_date": "2024-04-18"
+      },
+      {
+        "count": 11,
+        "uniques": 8,
+        "request_date": "2024-04-19"
+      },
+      {
+        "count": 13,
+        "uniques": 10,
+        "request_date": "2024-04-20"
+      },
+      {
+        "count": 15,
+        "uniques": 12,
+        "request_date": "2024-04-21"
+      },
+      {
+        "count": 17,
+        "uniques": 13,
+        "request_date": "2024-04-22"
+      },
+      {
+        "count": 18,
+        "uniques": 13,
+        "request_date": "2024-04-23"
+      },
+      {
+        "count": 18,
+        "uniques": 13,
+        "request_date": "2024-04-24"
+      },
+      {
+        "count": 9,
+        "uniques": 7,
+        "request_date": "2024-04-25"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2024-04-26"
+      },
+      {
+        "count": 14,
+        "uniques": 10,
+        "request_date": "2024-04-27"
+      },
+      {
+        "count": 22,
+        "uniques": 12,
+        "request_date": "2024-04-28"
+      },
+      {
+        "count": 25,
+        "uniques": 14,
+        "request_date": "2024-04-29"
+      },
+      {
+        "count": 25,
+        "uniques": 14,
+        "request_date": "2024-04-30"
+      },
+      {
+        "count": 26,
+        "uniques": 15,
+        "request_date": "2024-05-01"
+      },
+      {
+        "count": 45,
+        "uniques": 14,
+        "request_date": "2024-05-02"
+      },
+      {
+        "count": 46,
+        "uniques": 15,
+        "request_date": "2024-05-03"
+      },
+      {
+        "count": 44,
+        "uniques": 14,
+        "request_date": "2024-05-04"
+      },
+      {
+        "count": 42,
+        "uniques": 13,
+        "request_date": "2024-05-05"
+      },
+      {
+        "count": 43,
+        "uniques": 14,
+        "request_date": "2024-05-06"
+      },
+      {
+        "count": 46,
+        "uniques": 15,
+        "request_date": "2024-05-07"
+      },
+      {
+        "count": 67,
+        "uniques": 19,
+        "request_date": "2024-05-08"
+      },
+      {
+        "count": 68,
+        "uniques": 19,
+        "request_date": "2024-05-09"
+      },
+      {
+        "count": 72,
+        "uniques": 20,
+        "request_date": "2024-05-10"
+      },
+      {
+        "count": 66,
+        "uniques": 20,
+        "request_date": "2024-05-11"
+      },
+      {
+        "count": 66,
+        "uniques": 19,
+        "request_date": "2024-05-12"
+      },
+      {
+        "count": 71,
+        "uniques": 22,
+        "request_date": "2024-05-13"
+      },
+      {
+        "count": 93,
+        "uniques": 25,
+        "request_date": "2024-05-14"
+      },
+      {
+        "count": 81,
+        "uniques": 30,
+        "request_date": "2024-05-15"
+      },
+      {
+        "count": 139,
+        "uniques": 35,
+        "request_date": "2024-05-16"
+      },
+      {
+        "count": 147,
+        "uniques": 39,
+        "request_date": "2024-05-17"
+      },
+      {
+        "count": 150,
+        "uniques": 41,
+        "request_date": "2024-05-18"
+      },
+      {
+        "count": 151,
+        "uniques": 40,
+        "request_date": "2024-05-19"
+      },
+      {
+        "count": 148,
+        "uniques": 39,
+        "request_date": "2024-05-20"
+      },
+      {
+        "count": 154,
+        "uniques": 40,
+        "request_date": "2024-05-21"
+      },
+      {
+        "count": 152,
+        "uniques": 38,
+        "request_date": "2024-05-22"
+      },
+      {
+        "count": 157,
+        "uniques": 40,
+        "request_date": "2024-05-23"
+      },
+      {
+        "count": 171,
+        "uniques": 41,
+        "request_date": "2024-05-24"
+      },
+      {
+        "count": 171,
+        "uniques": 42,
+        "request_date": "2024-05-25"
+      },
+      {
+        "count": 167,
+        "uniques": 40,
+        "request_date": "2024-05-26"
+      },
+      {
+        "count": 144,
+        "uniques": 36,
+        "request_date": "2024-05-27"
+      },
+      {
+        "count": 138,
+        "uniques": 33,
+        "request_date": "2024-05-28"
+      },
+      {
+        "count": 104,
+        "uniques": 30,
+        "request_date": "2024-05-29"
+      },
+      {
+        "count": 110,
+        "uniques": 33,
+        "request_date": "2024-05-30"
+      },
+      {
+        "count": 114,
+        "uniques": 33,
+        "request_date": "2024-05-31"
+      },
+      {
+        "count": 125,
+        "uniques": 34,
+        "request_date": "2024-06-01"
+      },
+      {
+        "count": 197,
+        "uniques": 39,
+        "request_date": "2024-06-02"
+      },
+      {
+        "count": 181,
+        "uniques": 39,
+        "request_date": "2024-06-03"
+      },
+      {
+        "count": 188,
+        "uniques": 43,
+        "request_date": "2024-06-04"
+      },
+      {
+        "count": 179,
+        "uniques": 43,
+        "request_date": "2024-06-05"
+      },
+      {
+        "count": 169,
+        "uniques": 41,
+        "request_date": "2024-06-06"
+      },
+      {
+        "count": 175,
+        "uniques": 40,
+        "request_date": "2024-06-07"
+      },
+      {
+        "count": 180,
+        "uniques": 44,
+        "request_date": "2024-06-08"
+      },
+      {
+        "count": 180,
+        "uniques": 44,
+        "request_date": "2024-06-09"
+      },
+      {
+        "count": 177,
+        "uniques": 41,
+        "request_date": "2024-06-10"
+      },
+      {
+        "count": 157,
+        "uniques": 39,
+        "request_date": "2024-06-11"
+      },
+      {
+        "count": 153,
+        "uniques": 37,
+        "request_date": "2024-06-12"
+      },
+      {
+        "count": 151,
+        "uniques": 39,
+        "request_date": "2024-06-13"
+      },
+      {
+        "count": 141,
+        "uniques": 37,
+        "request_date": "2024-06-14"
+      },
+      {
+        "count": 79,
+        "uniques": 36,
+        "request_date": "2024-06-15"
+      },
+      {
+        "count": 71,
+        "uniques": 33,
+        "request_date": "2024-06-16"
+      },
+      {
+        "count": 74,
+        "uniques": 28,
+        "request_date": "2024-06-17"
+      },
+      {
+        "count": 83,
+        "uniques": 29,
+        "request_date": "2024-06-18"
+      },
+      {
+        "count": 109,
+        "uniques": 34,
+        "request_date": "2024-06-19"
+      },
+      {
+        "count": 104,
+        "uniques": 36,
+        "request_date": "2024-06-20"
+      },
+      {
+        "count": 109,
+        "uniques": 36,
+        "request_date": "2024-06-21"
+      },
+      {
+        "count": 110,
+        "uniques": 37,
+        "request_date": "2024-06-22"
+      },
+      {
+        "count": 110,
+        "uniques": 37,
+        "request_date": "2024-06-23"
+      },
+      {
+        "count": 104,
+        "uniques": 36,
+        "request_date": "2024-06-24"
+      },
+      {
+        "count": 97,
+        "uniques": 37,
+        "request_date": "2024-06-25"
+      },
+      {
+        "count": 96,
+        "uniques": 36,
+        "request_date": "2024-06-26"
+      },
+      {
+        "count": 93,
+        "uniques": 35,
+        "request_date": "2024-06-27"
+      },
+      {
+        "count": 91,
+        "uniques": 35,
+        "request_date": "2024-06-28"
+      },
+      {
+        "count": 92,
+        "uniques": 37,
+        "request_date": "2024-06-29"
+      },
+      {
+        "count": 80,
+        "uniques": 36,
+        "request_date": "2024-06-30"
+      },
+      {
+        "count": 71,
+        "uniques": 36,
+        "request_date": "2024-07-01"
+      },
+      {
+        "count": 42,
+        "uniques": 30,
+        "request_date": "2024-07-02"
+      }
+    ]
+  },
+  {
+    "referrer": "yandex.by",
+    "views": [
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-25"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-26"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-27"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-28"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-03-29"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-03-30"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-03-31"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-04-01"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2024-04-02"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2024-04-03"
+      }
+    ]
+  },
+  {
+    "referrer": "yandex.ru",
+    "views": [
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-04-26"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-04-27"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-04-28"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-04-30"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-05-01"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-05-02"
       }
     ]
   }
