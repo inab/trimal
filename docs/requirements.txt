@@ -1,0 +1,3 @@
+sphinxcontrib-email
+sphinx_copybutton
+sphinx-rtd-theme

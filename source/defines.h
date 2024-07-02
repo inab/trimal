@@ -1,16 +1,18 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.4: a tool for automated alignment trimming in large-scale
+    trimAl v1.5.0: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    readAl v1.4: a tool for automated alignment conversion among different
+    readAl v1.5.0: a tool for automated alignment conversion among different
                  formats.
 
-    statAl v1.4: a tool for getting descriptive alignment features/scores.
+    statAl v1.5.0: a tool for getting descriptive alignment features/scores.
 
-    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
-              [scapella, tgabaldon]@crg.es
+    2009-2020
+        Fernandez-Rodriguez V.  (victor.fernandez@bsc.es)
+        Capella-Gutierrez S.    (salvador.capella@bsc.es)
+        Gabaldon, T.            (tgabaldon@bsc.es)
 
     This file is part of trimAl/readAl.
 
@@ -29,10 +31,10 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#define BUILD "2015-05-21"
-#define VERSION 1.4
-#define REVISION 22
-#define AUTHORS "2009-2015. Salvador Capella-Gutierrez and Toni Gabaldón."
+#define BUILD "2024-05-27"
+#define VERSION 1.5
+#define REVISION 0
+#define AUTHORS "2009-2020. Victor Fernández-Rodríguez, Toni Gabaldón, and Salvador Capella-Gutiérrez"
 
 #define DNAType 1
 #define RNAType 2

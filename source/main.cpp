@@ -1,11 +1,13 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.4: a tool for automated alignment trimming in large-scale
+    trimAl v1.5.0: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
-              [scapella, tgabaldon]@crg.es
+    2009-2020
+        Fernandez-Rodriguez V.  (victor.fernandez@bsc.es)
+        Capella-Gutierrez S.    (salvador.capella@bsc.es)
+        Gabaldon, T.            (tgabaldon@bsc.es)
 
     This file is part of trimAl.
 
@@ -1801,7 +1803,7 @@ void menu(void) {
   cout << "trimAl v" << VERSION << ".rev" << REVISION  << " build[" << BUILD
        << "]. " << AUTHORS << endl << endl;
 
-  cout << "trimAl webpage: http://trimal.cgenomics.org" << endl << endl;
+  cout << "trimAl webpage: https://trimal.readthedocs.io" << endl << endl;
 
   cout << "This program is free software: you can redistribute it and/or modify " << endl
        << "it under the terms of the GNU General Public License as published by " << endl
@@ -1815,7 +1817,7 @@ void menu(void) {
   cout << "Basic usage" << endl
        << "\ttrimal -in <inputfile> -out <outputfile> -(other options)." << endl << endl;
 
-  cout << "Common options (for a complete list please see the User Guide or visit http://trimal.cgenomics.org):" << endl << endl;
+  cout << "Common options (for a complete list please see the User Guide or visit https://trimal.readthedocs.io):" << endl << endl;
   cout << "    -h                          " << "Print this information and show some examples." << endl;
   cout << "    --version                   " << "Print the trimAl version." << endl << endl;
 

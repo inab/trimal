@@ -1,10 +1,12 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    statAl v1.4: a tool for getting descriptive alignment features/scores.
+    statAl v1.5.0: a tool for getting descriptive alignment features/scores.
 
-    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
-              [scapella, tgabaldon]@crg.es
+    2009-2020
+        Fernandez-Rodriguez V.  (victor.fernandez@bsc.es)
+        Capella-Gutierrez S.    (salvador.capella@bsc.es)
+        Gabaldon, T.            (tgabaldon@bsc.es)
 
     This file is part of statAl.
 
@@ -480,7 +482,7 @@ void show_menu(void) {
     << "statAl v" << VERSION << ".rev" << REVISION << " build[" << BUILD
     << "]. " << AUTHORS << endl << endl;
 
-  cout << "statAl/trimAl webpage: http://trimal.cgenomics.org" << endl << endl;
+  cout << "statAl webpage: https://trimal.readthedocs.io" << endl << endl;
 
   cout << "This program is free software: you can redistribute it and/or modify"
     << "\nit under the terms of the GNU General Public License as published by "

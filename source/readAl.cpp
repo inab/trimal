@@ -1,11 +1,13 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    readAl v1.4: a tool for automated alignment conversion among different
+    readAl v1.5.0: a tool for automated alignment conversion among different
                  formats.
 
-    2009-2015 Capella-Gutierrez S. and Gabaldon, T.
-              [scapella, tgabaldon]@crg.es
+    2009-2020
+        Fernandez-Rodriguez V.  (victor.fernandez@bsc.es)
+        Capella-Gutierrez S.    (salvador.capella@bsc.es)
+        Gabaldon, T.            (tgabaldon@bsc.es)
 
     This file is part of readAl.
 
@@ -319,7 +321,7 @@ void menu(void) {
     << "readAl v" << VERSION << ".rev" << REVISION << " build[" << BUILD
     << "]. " << AUTHORS << endl << endl
 
-    << "readAl webpage: http://trimal.cgenomics.org" << endl << endl
+    << "readAl webpage: https://trimal.readthedocs.io" << endl << endl
 
     << "This program is free software: you can redistribute it and/or modify "
     << endl
