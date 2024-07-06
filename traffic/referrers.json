@@ -1116,6 +1116,11 @@
         "count": 83,
         "uniques": 29,
         "request_date": "2024-07-05"
+      },
+      {
+        "count": 80,
+        "uniques": 28,
+        "request_date": "2024-07-06"
       }
     ]
   },
@@ -1526,6 +1531,11 @@
         "count": 3,
         "uniques": 3,
         "request_date": "2024-07-05"
+      },
+      {
+        "count": 4,
+        "uniques": 4,
+        "request_date": "2024-07-06"
       }
     ]
   },
@@ -2521,6 +2531,11 @@
         "count": 251,
         "uniques": 73,
         "request_date": "2024-07-05"
+      },
+      {
+        "count": 251,
+        "uniques": 73,
+        "request_date": "2024-07-06"
       }
     ]
   },
@@ -3956,6 +3971,11 @@
         "count": 20,
         "uniques": 12,
         "request_date": "2024-07-05"
+      },
+      {
+        "count": 19,
+        "uniques": 11,
+        "request_date": "2024-07-06"
       }
     ]
   },
@@ -5156,6 +5176,11 @@
         "count": 26,
         "uniques": 11,
         "request_date": "2024-07-05"
+      },
+      {
+        "count": 31,
+        "uniques": 14,
+        "request_date": "2024-07-06"
       }
     ]
   },
@@ -5936,6 +5961,11 @@
         "count": 8,
         "uniques": 3,
         "request_date": "2024-07-05"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2024-07-06"
       }
     ]
   },
@@ -6756,6 +6786,16 @@
         "count": 15,
         "uniques": 1,
         "request_date": "2024-06-16"
+      }
+    ]
+  },
+  {
+    "referrer": "pyhmmer.readthedocs.io",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2024-07-06"
       }
     ]
   },
@@ -8286,6 +8326,11 @@
         "count": 243,
         "uniques": 61,
         "request_date": "2024-07-05"
+      },
+      {
+        "count": 249,
+        "uniques": 64,
+        "request_date": "2024-07-06"
       }
     ]
   },
@@ -8891,6 +8936,11 @@
         "count": 34,
         "uniques": 23,
         "request_date": "2024-07-05"
+      },
+      {
+        "count": 34,
+        "uniques": 22,
+        "request_date": "2024-07-06"
       }
     ]
   },
@@ -9886,6 +9936,11 @@
         "count": 60,
         "uniques": 32,
         "request_date": "2024-07-05"
+      },
+      {
+        "count": 78,
+        "uniques": 34,
+        "request_date": "2024-07-06"
       }
     ]
   },
