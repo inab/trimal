@@ -13,7 +13,7 @@ on:
 name: Build 
 
 jobs:
-  build_and_test:
+  build_and_test_linux:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -41,3 +41,27 @@ jobs:
           run: |
             cd /trimal/source && make all && file trimal && file readal && file statal &&
             cd .. && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+  build_and_test_windows:
+      runs-on: windows-2022
+      steps:
+      #- uses: actions/checkout@v4
+      - name: Download Release Binaries
+        run: |
+          curl -L -o trimal.zip https://github.com/inab/trimal/releases/download/v1.5.0/trimAl_Windows_x86-64.zip
+
+      - name: Unzip Binaries
+        run: |
+          powershell -Command "Expand-Archive -Path trimal.zip -DestinationPath ."
+
+      - name: Verify Binaries
+        run: |
+          # Use PowerShell or native Windows commands to verify binaries
+          Get-Command .\trimAl_Windows_x86-64\trimal.exe
+          Get-Command .\trimAl_Windows_x86-64\readal.exe
+          Get-Command .\trimAl_Windows_x86-64\statal.exe
+
+      - name: Run Tests on Binaries
+        run: |
+          .\trimAl_Windows_x86-64\trimal.exe --help
+          .\trimAl_Windows_x86-64\readal.exe --help
+          .\trimAl_Windows_x86-64\statal.exe --help
