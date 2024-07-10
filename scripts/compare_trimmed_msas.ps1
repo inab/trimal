@@ -19,7 +19,17 @@ foreach ($method in $methods) {
             exit 1
         }
 
-        $result = Compare-Object (Get-Content $test_file) (Get-Content $reference_file) -SyncWindow 0
+        $test_content = Get-Content $test_file
+        $reference_content = Get-Content $reference_file
+
+        # Check if both files are empty
+        if ($test_content.Count -eq 0 -and $reference_content.Count -eq 0) {
+            Write-Output "Both $test_file and $reference_file are empty and considered equal."
+            continue
+        }
+
+        # Compare contents
+        $result = Compare-Object $test_content $reference_content -SyncWindow 0
         if ($result) {
             Write-Output "Files $test_file and $reference_file differ."
             exit 1
