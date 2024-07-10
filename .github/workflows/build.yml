@@ -52,14 +52,21 @@ jobs:
       - name: Unzip Binaries
         run: |
           powershell -Command "Expand-Archive -Path trimal.zip -DestinationPath ."
-
+      - name: List Directory Contents
+        run: |
+          dir .\trimAl_Windows_x86-64\
+          
       - name: Verify Binaries
         run: |
           # Use PowerShell or native Windows commands to verify binaries
           Get-Command .\trimAl_Windows_x86-64\trimal.exe
           Get-Command .\trimAl_Windows_x86-64\readal.exe
           Get-Command .\trimAl_Windows_x86-64\statal.exe
-
+          
+      - name: Check Binary Dependencies
+        run: |
+          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\bin\Hostx64\x64\dumpbin.exe" /DEPENDENTS .\trimAl_Windows_x86-64\trimal.exe
+          
       - name: Run Tests on Binaries
         continue-on-error: true
         run: |
