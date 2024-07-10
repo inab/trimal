@@ -6,13 +6,26 @@ foreach ($method in $methods) {
     $files = Get-ChildItem -Path "test_msas\$method" -Filter *.fasta
     foreach ($file in $files) {
         $msa_filename = $file.Name
-        $result = Compare-Object (Get-Content "$file") (Get-Content "dataset\trimmed_msas\$method\$msa_filename") -SyncWindow 0
+        $test_file = "$file"
+        $reference_file = "dataset\trimmed_msas\$method\$msa_filename"
+
+        if (-Not (Test-Path $reference_file)) {
+            Write-Output "Reference file $reference_file does not exist."
+            exit 1
+        }
+
+        if (-Not (Test-Path $test_file)) {
+            Write-Output "Test file $test_file does not exist."
+            exit 1
+        }
+
+        $result = Compare-Object (Get-Content $test_file) (Get-Content $reference_file) -SyncWindow 0
         if ($result) {
-            Write-Output "Files $file and dataset\trimmed_msas\$method\$msa_filename differ."
+            Write-Output "Files $test_file and $reference_file differ."
             exit 1
         }
         else {
-            Write-Output "Compared $file and dataset\trimmed_msas\$method\$msa_filename"
+            Write-Output "Compared $test_file and $reference_file"
         }
     }
 }
