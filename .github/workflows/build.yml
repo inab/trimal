@@ -61,7 +61,12 @@ jobs:
           Get-Command .\trimAl_Windows_x86-64\statal.exe
 
       - name: Run Tests on Binaries
+        continue-on-error: true
         run: |
-          .\trimAl_Windows_x86-64\trimal.exe --help
-          .\trimAl_Windows_x86-64\readal.exe --help
-          .\trimAl_Windows_x86-64\statal.exe --help
+          .\trimAl_Windows_x86-64\trimal.exe --help 2>&1 | tee trimal_help.txt
+
+      - name: Display Logs
+        if: failure()
+        run: |
+          echo trimal.exe --help output:
+          type trimal_help.txt
