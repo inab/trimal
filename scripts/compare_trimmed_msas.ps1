@@ -6,8 +6,8 @@ foreach ($method in $methods) {
     $files = Get-ChildItem -Path "test_msas\$method" -Filter *.fasta
     foreach ($file in $files) {
         $msa_filename = $file.Name
-        $test_file = "$file"
-        $reference_file = "dataset\trimmed_msas\$method\$msa_filename"
+        $test_file = $file.FullName
+        $reference_file = Join-Path -Path "dataset\trimmed_msas\$method" -ChildPath $msa_filename
 
         if (-Not (Test-Path $reference_file)) {
             Write-Output "Reference file $reference_file does not exist."
