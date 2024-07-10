@@ -35,4 +35,4 @@ jobs:
           
       - name: Run Tests on Binaries
         run: |
-          .\trimal.exe --help
+          .\trimal.exe
