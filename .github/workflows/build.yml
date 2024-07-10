@@ -26,6 +26,7 @@ jobs:
           powershell -Command "Expand-Archive -Path trimal.zip -DestinationPath ."
       - name: List Directory Contents
         run: |
+          dir .\
           dir .\trimAl_Windows_x86-64\
           
       - name: Verify Binaries
