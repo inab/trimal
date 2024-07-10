@@ -27,15 +27,12 @@ jobs:
       - name: List Directory Contents
         run: |
           dir .\
-          dir .\trimAl_Windows_x86-64\
           
       - name: Verify Binaries
         run: |
           # Use PowerShell or native Windows commands to verify binaries
-          Get-Command .\trimAl_Windows_x86-64\trimal.exe
-          Get-Command .\trimAl_Windows_x86-64\readal.exe
-          Get-Command .\trimAl_Windows_x86-64\statal.exe
+          Get-Command .\trimal.exe
           
       - name: Run Tests on Binaries
         run: |
-          .\trimAl_Windows_x86-64\trimal.exe --help
+          .\trimal.exe --help
