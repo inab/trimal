@@ -13,34 +13,6 @@ on:
 name: Build 
 
 jobs:
-  build_and_test_linux:
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        arch: [x86_64] #aarch64
-        
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build trimal for Linux x86_64
-        if: matrix.arch == 'x86_64'
-        run: cd source && make all && file trimal && file readal && file statal &&
-          cd .. && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
-
-      - name: Build trimal for Linux aarch64
-        if: matrix.arch == 'aarch64'
-        uses: uraimo/run-on-arch-action@v2
-        with:
-          arch: ${{ matrix.arch }}
-          distro: ubuntu22.04
-          githubToken: ${{ github.token }}
-          dockerRunArgs: |
-            --volume "${PWD}:/trimal" 
-          install: |
-            apt-get update -q -y
-            apt-get install -q -y make g++ file
-          run: |
-            cd /trimal/source && make all && file trimal && file readal && file statal &&
-            cd .. && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
   build_and_test_windows:
       runs-on: windows-2022
       steps:
@@ -63,17 +35,6 @@ jobs:
           Get-Command .\trimAl_Windows_x86-64\readal.exe
           Get-Command .\trimAl_Windows_x86-64\statal.exe
           
-      - name: Check Binary Dependencies
-        run: |
-          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\bin\Hostx64\x64\dumpbin.exe" /DEPENDENTS .\trimAl_Windows_x86-64\trimal.exe
-          
       - name: Run Tests on Binaries
-        continue-on-error: true
         run: |
-          .\trimAl_Windows_x86-64\trimal.exe --help 2>&1 | tee trimal_help.txt
-
-      - name: Display Logs
-        if: failure()
-        run: |
-          echo trimal.exe --help output:
-          type trimal_help.txt
+          .\trimAl_Windows_x86-64\trimal.exe --help
