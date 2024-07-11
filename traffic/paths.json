@@ -1017,6 +1017,11 @@
         "count": 346,
         "uniques": 190,
         "request_date": "2024-07-10"
+      },
+      {
+        "count": 332,
+        "uniques": 179,
+        "request_date": "2024-07-11"
       }
     ]
   },
@@ -1230,6 +1235,17 @@
         "count": 26,
         "uniques": 1,
         "request_date": "2023-12-28"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/blob/add-windows-compilation-workflow-test/.github/workflows/build.yml",
+    "title": "trimal/.github/workflows/build.yml at add-windows-compilation-workflow-test ·...",
+    "views": [
+      {
+        "count": 30,
+        "uniques": 1,
+        "request_date": "2024-07-11"
       }
     ]
   },
@@ -2255,6 +2271,11 @@
         "count": 57,
         "uniques": 20,
         "request_date": "2024-07-10"
+      },
+      {
+        "count": 53,
+        "uniques": 18,
+        "request_date": "2024-07-11"
       }
     ]
   },
@@ -3962,6 +3983,22 @@
         "count": 42,
         "uniques": 18,
         "request_date": "2024-07-10"
+      },
+      {
+        "count": 46,
+        "uniques": 19,
+        "request_date": "2024-07-11"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/issues/101",
+    "title": "Issue with trimAl on Windows: · Issue #101 · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 37,
+        "uniques": 8,
+        "request_date": "2024-07-11"
       }
     ]
   },
@@ -5891,6 +5928,11 @@
         "count": 53,
         "uniques": 30,
         "request_date": "2024-07-10"
+      },
+      {
+        "count": 55,
+        "uniques": 30,
+        "request_date": "2024-07-11"
       }
     ]
   },
@@ -7340,6 +7382,11 @@
         "count": 54,
         "uniques": 15,
         "request_date": "2024-07-10"
+      },
+      {
+        "count": 54,
+        "uniques": 15,
+        "request_date": "2024-07-11"
       }
     ]
   },
@@ -8256,6 +8303,11 @@
         "count": 36,
         "uniques": 15,
         "request_date": "2024-07-10"
+      },
+      {
+        "count": 33,
+        "uniques": 14,
+        "request_date": "2024-07-11"
       }
     ]
   },
@@ -9262,6 +9314,11 @@
         "count": 49,
         "uniques": 18,
         "request_date": "2024-07-10"
+      },
+      {
+        "count": 46,
+        "uniques": 17,
+        "request_date": "2024-07-11"
       }
     ]
   },
@@ -10283,6 +10340,11 @@
         "count": 68,
         "uniques": 23,
         "request_date": "2024-07-10"
+      },
+      {
+        "count": 68,
+        "uniques": 23,
+        "request_date": "2024-07-11"
       }
     ]
   },
