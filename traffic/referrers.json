@@ -1146,6 +1146,11 @@
         "count": 83,
         "uniques": 19,
         "request_date": "2024-07-11"
+      },
+      {
+        "count": 78,
+        "uniques": 17,
+        "request_date": "2024-07-12"
       }
     ]
   },
@@ -1586,6 +1591,11 @@
         "count": 4,
         "uniques": 4,
         "request_date": "2024-07-11"
+      },
+      {
+        "count": 4,
+        "uniques": 4,
+        "request_date": "2024-07-12"
       }
     ]
   },
@@ -2611,6 +2621,11 @@
         "count": 192,
         "uniques": 69,
         "request_date": "2024-07-11"
+      },
+      {
+        "count": 207,
+        "uniques": 74,
+        "request_date": "2024-07-12"
       }
     ]
   },
@@ -4086,6 +4101,11 @@
         "count": 33,
         "uniques": 12,
         "request_date": "2024-07-11"
+      },
+      {
+        "count": 35,
+        "uniques": 14,
+        "request_date": "2024-07-12"
       }
     ]
   },
@@ -5321,6 +5341,11 @@
         "count": 32,
         "uniques": 13,
         "request_date": "2024-07-11"
+      },
+      {
+        "count": 37,
+        "uniques": 12,
+        "request_date": "2024-07-12"
       }
     ]
   },
@@ -6131,6 +6156,11 @@
         "count": 4,
         "uniques": 2,
         "request_date": "2024-07-11"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2024-07-12"
       }
     ]
   },
@@ -8536,6 +8566,11 @@
         "count": 243,
         "uniques": 56,
         "request_date": "2024-07-11"
+      },
+      {
+        "count": 239,
+        "uniques": 54,
+        "request_date": "2024-07-12"
       }
     ]
   },
@@ -9171,6 +9206,11 @@
         "count": 47,
         "uniques": 24,
         "request_date": "2024-07-11"
+      },
+      {
+        "count": 42,
+        "uniques": 22,
+        "request_date": "2024-07-12"
       }
     ]
   },
@@ -10196,6 +10236,21 @@
         "count": 86,
         "uniques": 26,
         "request_date": "2024-07-11"
+      },
+      {
+        "count": 86,
+        "uniques": 24,
+        "request_date": "2024-07-12"
+      }
+    ]
+  },
+  {
+    "referrer": "www-app.igb.illinois.edu",
+    "views": [
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-07-12"
       }
     ]
   },
