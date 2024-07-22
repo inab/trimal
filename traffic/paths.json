@@ -1072,6 +1072,11 @@
         "count": 307,
         "uniques": 186,
         "request_date": "2024-07-21"
+      },
+      {
+        "count": 288,
+        "uniques": 175,
+        "request_date": "2024-07-22"
       }
     ]
   },
@@ -1341,6 +1346,11 @@
         "count": 30,
         "uniques": 1,
         "request_date": "2024-07-21"
+      },
+      {
+        "count": 30,
+        "uniques": 1,
+        "request_date": "2024-07-22"
       }
     ]
   },
@@ -2421,6 +2431,11 @@
         "count": 45,
         "uniques": 16,
         "request_date": "2024-07-21"
+      },
+      {
+        "count": 47,
+        "uniques": 15,
+        "request_date": "2024-07-22"
       }
     ]
   },
@@ -4183,6 +4198,11 @@
         "count": 47,
         "uniques": 24,
         "request_date": "2024-07-21"
+      },
+      {
+        "count": 40,
+        "uniques": 21,
+        "request_date": "2024-07-22"
       }
     ]
   },
@@ -6228,6 +6248,11 @@
         "count": 54,
         "uniques": 36,
         "request_date": "2024-07-21"
+      },
+      {
+        "count": 55,
+        "uniques": 37,
+        "request_date": "2024-07-22"
       }
     ]
   },
@@ -6314,6 +6339,17 @@
         "count": 34,
         "uniques": 2,
         "request_date": "2024-03-04"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/tree/add-windows-compilation-workflow-test/scripts",
+    "title": "trimal/scripts at add-windows-compilation-workflow-test · inab/trimal",
+    "views": [
+      {
+        "count": 26,
+        "uniques": 1,
+        "request_date": "2024-07-22"
       }
     ]
   },
@@ -7732,6 +7768,11 @@
         "count": 31,
         "uniques": 12,
         "request_date": "2024-07-21"
+      },
+      {
+        "count": 24,
+        "uniques": 11,
+        "request_date": "2024-07-22"
       }
     ]
   },
@@ -8698,6 +8739,11 @@
         "count": 31,
         "uniques": 12,
         "request_date": "2024-07-21"
+      },
+      {
+        "count": 29,
+        "uniques": 11,
+        "request_date": "2024-07-22"
       }
     ]
   },
@@ -9775,6 +9821,11 @@
         "count": 60,
         "uniques": 15,
         "request_date": "2024-07-21"
+      },
+      {
+        "count": 60,
+        "uniques": 15,
+        "request_date": "2024-07-22"
       }
     ]
   },
@@ -10851,6 +10902,11 @@
         "count": 60,
         "uniques": 21,
         "request_date": "2024-07-21"
+      },
+      {
+        "count": 61,
+        "uniques": 20,
+        "request_date": "2024-07-22"
       }
     ]
   },
