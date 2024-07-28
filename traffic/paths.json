@@ -1102,6 +1102,11 @@
         "count": 301,
         "uniques": 190,
         "request_date": "2024-07-27"
+      },
+      {
+        "count": 300,
+        "uniques": 189,
+        "request_date": "2024-07-28"
       }
     ]
   },
@@ -2491,6 +2496,11 @@
         "count": 74,
         "uniques": 20,
         "request_date": "2024-07-27"
+      },
+      {
+        "count": 74,
+        "uniques": 20,
+        "request_date": "2024-07-28"
       }
     ]
   },
@@ -4283,6 +4293,11 @@
         "count": 30,
         "uniques": 19,
         "request_date": "2024-07-27"
+      },
+      {
+        "count": 32,
+        "uniques": 19,
+        "request_date": "2024-07-28"
       }
     ]
   },
@@ -6383,6 +6398,11 @@
         "count": 75,
         "uniques": 45,
         "request_date": "2024-07-27"
+      },
+      {
+        "count": 76,
+        "uniques": 47,
+        "request_date": "2024-07-28"
       }
     ]
   },
@@ -7923,6 +7943,11 @@
         "count": 27,
         "uniques": 10,
         "request_date": "2024-07-27"
+      },
+      {
+        "count": 27,
+        "uniques": 10,
+        "request_date": "2024-07-28"
       }
     ]
   },
@@ -8919,6 +8944,11 @@
         "count": 32,
         "uniques": 11,
         "request_date": "2024-07-27"
+      },
+      {
+        "count": 32,
+        "uniques": 11,
+        "request_date": "2024-07-28"
       }
     ]
   },
@@ -8960,6 +8990,22 @@
         "count": 36,
         "uniques": 11,
         "request_date": "2024-07-27"
+      },
+      {
+        "count": 36,
+        "uniques": 11,
+        "request_date": "2024-07-28"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/docs/source",
+    "title": "trimal/docs/source at trimAl · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 23,
+        "uniques": 9,
+        "request_date": "2024-07-28"
       }
     ]
   },
@@ -10051,6 +10097,11 @@
         "count": 56,
         "uniques": 13,
         "request_date": "2024-07-27"
+      },
+      {
+        "count": 52,
+        "uniques": 12,
+        "request_date": "2024-07-28"
       }
     ]
   },
@@ -11157,6 +11208,11 @@
         "count": 70,
         "uniques": 19,
         "request_date": "2024-07-27"
+      },
+      {
+        "count": 70,
+        "uniques": 19,
+        "request_date": "2024-07-28"
       }
     ]
   },
