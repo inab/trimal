@@ -1276,6 +1276,11 @@
         "count": 37,
         "uniques": 13,
         "request_date": "2024-08-06"
+      },
+      {
+        "count": 29,
+        "uniques": 11,
+        "request_date": "2024-08-07"
       }
     ]
   },
@@ -2966,6 +2971,11 @@
         "count": 155,
         "uniques": 74,
         "request_date": "2024-08-06"
+      },
+      {
+        "count": 168,
+        "uniques": 81,
+        "request_date": "2024-08-07"
       }
     ]
   },
@@ -3226,6 +3236,11 @@
         "count": 21,
         "uniques": 2,
         "request_date": "2024-08-06"
+      },
+      {
+        "count": 20,
+        "uniques": 1,
+        "request_date": "2024-08-07"
       }
     ]
   },
@@ -4671,6 +4686,11 @@
         "count": 26,
         "uniques": 10,
         "request_date": "2024-08-06"
+      },
+      {
+        "count": 26,
+        "uniques": 10,
+        "request_date": "2024-08-07"
       }
     ]
   },
@@ -6046,6 +6066,11 @@
         "count": 26,
         "uniques": 7,
         "request_date": "2024-08-06"
+      },
+      {
+        "count": 36,
+        "uniques": 7,
+        "request_date": "2024-08-07"
       }
     ]
   },
@@ -6881,6 +6906,11 @@
         "count": 2,
         "uniques": 2,
         "request_date": "2024-07-31"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-08-07"
       }
     ]
   },
@@ -9421,6 +9451,11 @@
         "count": 109,
         "uniques": 43,
         "request_date": "2024-08-06"
+      },
+      {
+        "count": 104,
+        "uniques": 40,
+        "request_date": "2024-08-07"
       }
     ]
   },
@@ -10186,6 +10221,11 @@
         "count": 41,
         "uniques": 16,
         "request_date": "2024-08-06"
+      },
+      {
+        "count": 40,
+        "uniques": 16,
+        "request_date": "2024-08-07"
       }
     ]
   },
@@ -11341,6 +11381,11 @@
         "count": 49,
         "uniques": 20,
         "request_date": "2024-08-06"
+      },
+      {
+        "count": 49,
+        "uniques": 21,
+        "request_date": "2024-08-07"
       }
     ]
   },
@@ -11446,6 +11491,11 @@
         "count": 42,
         "uniques": 1,
         "request_date": "2024-08-06"
+      },
+      {
+        "count": 42,
+        "uniques": 1,
+        "request_date": "2024-08-07"
       }
     ]
   },
