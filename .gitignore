@@ -19,6 +19,7 @@ build
 CMakeFiles
 Testing
 dev_files
+test_msas
 
 CTestTestfile.cmake
 cmake_install.cmake
