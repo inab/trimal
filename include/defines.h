@@ -45,6 +45,9 @@
 #define HTMLBLOCKS 120
 #define PHYLIPDISTANCE 10
 
+#define MINPERCENTAGECOLUMNS 0.45
+#define MINCOLUMNS 250
+
  /**
 \file defines.h
 \enum SequenceTypes

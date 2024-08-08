@@ -1,4 +1,4 @@
-methods="gappyout strict strictplus automated1 nogaps noallgaps"
+methods="gappyout strict strictplus automated1 automated2 nogaps noallgaps"
 for method in $methods
 do
     for msa in test_msas/$method/*.fasta

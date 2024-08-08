@@ -79,6 +79,7 @@ public:
         strict              = false,
         strictplus          = false, 
         automated1          = false,
+        automated2          = false,
         sgc                 = false, 
         sgt                 = false, 
         ssc                 = false, 
@@ -213,6 +214,7 @@ private: // Parse Arguments Methods
         argumentReport strict_argument                (const int* argc, char* argv[], int* currentArg);
         argumentReport strict_plus_argument           (const int* argc, char* argv[], int* currentArg);
         argumentReport automated1_argument            (const int* argc, char* argv[], int* currentArg);
+        argumentReport automated2_argument            (const int* argc, char* argv[], int* currentArg);
         argumentReport residue_overlap_argument       (const int* argc, char* argv[], int* currentArg);
         argumentReport sequence_overlap_argument      (const int* argc, char* argv[], int* currentArg);
         argumentReport seqs_select_argument           (const int* argc, char* argv[], int* currentArg);

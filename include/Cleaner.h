@@ -96,10 +96,12 @@ public:
       Vector that contains the values that will be tested for each column.
      \param complementary
       Whether or not to return the complementary version of the trimmed alignment.
+     \param automated2
+      Whether or not to apply the automated2 threshold.
      \return Pointer to the cleaned alignment.
      */
     Alignment *cleanByCutValueOverpass(double cut, float baseLine,
-                                          const int *gInCol, bool complementary);
+                                          const int *gInCol, bool complementary, bool automated2);
 
      /**
      \brief Method to clean an alignment. \n
@@ -308,6 +310,14 @@ public:
       using the parameters calculated in this function.
      */
     Alignment *cleanCombMethods(bool complementary, bool variable);
+
+     /**
+      \brief Method that carries the gappyout approach and adds columns until
+       a minimum is reached.\n
+      \param complementary
+       Whether or not to return the complementary version of the trimmed alignment.
+      */
+    Alignment *cleanAutomated2(bool complementary);
 
      /**
       \brief Method to remove columns composed only by gaps\n

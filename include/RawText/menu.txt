@@ -204,7 +204,9 @@ The new formats argument "-formats <format1, format2, etc>" should be used inste
         Use a heuristic selection of the automatic method
             based on similarity statistics. (see User Guide).
         Optimized for Maximum Likelihood phylogenetic tree reconstruction.
-
+    [b]automated2[r]
+        Use automated selection on "gappyout" mode and keep a minimum amount of columns (45% of the MSA or 250 columns).
+        This method only uses information based on gaps' distribution.
     [b]-clusters <n>[r]
         Get the most Nth representatives sequences from a given alignment.
         Range: [1 - (Number of sequences)]

@@ -160,6 +160,7 @@ int trimAlManager::parseArguments(int argc, char **argv) {
             checkArgument(strict_argument)
             checkArgument(strict_plus_argument)
             checkArgument(automated1_argument)
+            checkArgument(automated2_argument)
             // Overlap
             checkArgument(residue_overlap_argument)
             checkArgument(sequence_overlap_argument)
@@ -699,6 +700,14 @@ int trimAlManager::parseArguments(int argc, char **argv) {
     return NotRecognized;
 }
 
+/**inline**/ trimAlManager::argumentReport trimAlManager::automated2_argument(const int *argc, char *argv[], int *i) {
+    if ((!strcmp(argv[*i], "-automated2")) && (!automated2)) {
+        automated2 = true;
+        return Recognized;
+    }
+    return NotRecognized;
+}
+
 /**inline**/ trimAlManager::argumentReport trimAlManager::residue_overlap_argument(const int *argc, char *argv[], int *i) {
     if ((!strcmp(argv[*i], "-resoverlap")) && ((*i) + 1 != *argc) && (residuesOverlap == -1)) {
         if (utils::isNumber(argv[++*i])) {
@@ -1011,7 +1020,8 @@ bool trimAlManager::processArguments(char *argv[]) {
         automatedMethodCount =
                 nogaps      + noallgaps +
                 gappyout    + strict    +
-                strictplus  + automated1 + removeDuplicates;
+                strictplus  + automated1 +
+                automated2  + removeDuplicates;
 
         check_arguments_incompatibilities();
         check_arguments_needs(argv);
@@ -1097,6 +1107,7 @@ bool trimAlManager::processArguments(char *argv[]) {
             if (nogaps)         autom = "-nogaps";
             if (noallgaps)      autom = "-noallgaps";
             if (automated1)     autom = "-automated1";
+            if (automated2)     autom = "-automated2";
 
 
             if (gapThreshold != -1)
@@ -1132,6 +1143,7 @@ bool trimAlManager::processArguments(char *argv[]) {
         if (nogaps)         autom = "-nogaps";
         if (noallgaps)      autom = "-noallgaps";
         if (automated1)     autom = "-automated1";
+        if (automated2)     autom = "-automated2";
 
 
         if ((windowSize != -1)) {
@@ -2130,6 +2142,8 @@ int trimAlManager::perform() {
         tempAlig = singleAlig->Cleaning->cleanCombMethods(/* getComplementary*/ false, false);
     } else if (strictplus) {
         tempAlig = singleAlig->Cleaning->cleanCombMethods(/* getComplementary*/ false, true);
+    } else if (automated2) {
+        tempAlig = singleAlig->Cleaning->cleanAutomated2(/* getComplementary*/ false);
     }
 
     // Move the new formed alignment to the variable singleAlig

@@ -137,7 +137,7 @@ const std::map<ErrorCode, const char *> reporting::reportManager::ErrorMessages 
             "Options -selectCols and -selectSeqs are not allowed in combination with threshold options: (-gt || -st || -ct || -cons)"},
 
     {ErrorCode::SelectSeqsResAndAutomathedMethodsIncompatibilities,
-            "Options -selectCols and -selectSeqs are not allowed in combination with automated trimming options: (-nogaps || -noallgaps || -gappyout || -strict || -strictplus || -automated1)."},
+            "Options -selectCols and -selectSeqs are not allowed in combination with automated trimming options: (-nogaps || -noallgaps || -gappyout || -strict || -strictplus || -automated1 || -automated2)."},
 
     {ErrorCode::SelectSeqsResAndWindowIncompatibilities,
             "Options -selectCols and -selectSeqs are not allowed in combination with window options: (-w || -sw || -gw || -wc)"},
