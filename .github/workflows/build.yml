@@ -62,6 +62,8 @@ jobs:
             file statal.exe
             cd ..
             bash scripts/generate_trimmed_msas.sh
+            echo "test_msas/gappyout/example.004.AA.fasta"
             cat test_msas/gappyout/example.004.AA.fasta
+            echo "dataset/trimmed_msas/gappyout/example.004.AA.fasta"
             cat dataset/trimmed_msas/gappyout/example.004.AA.fasta
             bash scripts/compare_trimmed_msas.sh
