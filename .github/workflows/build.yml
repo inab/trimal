@@ -13,37 +13,10 @@ on:
 name: Build 
 
 jobs:
-  download_and_test_windows:
-      runs-on: windows-2022
-      steps:
-      - uses: actions/checkout@v4
-      - name: Download Release Binaries
-        run: |
-          curl -L -o trimal.zip https://github.com/inab/trimal/releases/download/v1.5.0/trimAl_Windows_x86-64.zip
-
-      - name: Unzip Binaries
-        run: |
-          powershell -Command "Expand-Archive -Path trimal.zip -DestinationPath ."
-      - name: List Directory Contents
-        run: |
-          dir .\
-          
-      - name: Verify Binaries
-        run: |
-          # Use PowerShell or native Windows commands to verify binaries
-          Get-Command .\trimal.exe
-          
-      - name: Run generate_trimmed_msas.ps1
-        run: |
-          powershell -ExecutionPolicy Bypass -File .\scripts\generate_trimmed_msas.ps1
-
-      - name: Run compare_trimmed_msas.ps1
-        run: |
-          powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
   build_and_test_windows:
       runs-on: windows-2022
       steps:
-        - uses: actions/checkout@v3
+        - uses: actions/checkout@v4
         - name: Set up MSYS2
           uses: msys2/setup-msys2@v2
           with:
@@ -61,7 +34,7 @@ jobs:
             file readal.exe
             file statal.exe
             cd ..
-            bash scripts/generate_trimmed_msas.sh
+            bash scripts/generate_trimmed_msas_Windows.sh
             echo "test_msas/gappyout/example.004.AA.fasta"
             cat test_msas/gappyout/example.004.AA.fasta
             echo "dataset/trimmed_msas/gappyout/example.004.AA.fasta"
