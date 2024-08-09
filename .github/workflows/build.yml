@@ -61,5 +61,5 @@ jobs:
             file readal.exe
             file statal.exe
             cd ..
-            ./scripts/generate_trimmed_msas.sh
-            ./scripts/compare_trimmed_msas.sh
+            bash scripts/generate_trimmed_msas.sh
+            bash scripts/compare_trimmed_msas.sh
