@@ -13,7 +13,7 @@ on:
 name: Build 
 
 jobs:
-  build_and_test_windows:
+  download_and_test_windows:
       runs-on: windows-2022
       steps:
       - uses: actions/checkout@v4
@@ -40,3 +40,26 @@ jobs:
       - name: Run compare_trimmed_msas.ps1
         run: |
           powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
+  build_and_test_windows:
+      runs-on: windows-2022
+      steps:
+        - uses: actions/checkout@v3
+        - name: Set up MSYS2
+          uses: msys2/setup-msys2@v2
+          with:
+            msystem: MINGW64
+            update: true
+            install: >-
+              make
+              mingw-w64-x86_64-gcc
+              file
+        - name: Build trimal for Windows x86_64
+          run: |
+            cd source
+            make -f makefile.Windows
+            file trimal.exe
+            file readal.exe
+            file statal.exe
+            cd ..
+            ./scripts/generate_trimmed_msas.sh
+            ./scripts/compare_trimmed_msas.sh
