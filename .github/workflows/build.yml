@@ -13,6 +13,30 @@ on:
 name: Build 
 
 jobs:
+  download_and_test_windows:
+      runs-on: windows-2022
+      steps:
+      - uses: actions/checkout@v4
+      - name: Download Release Binaries
+        run: |
+          curl -L -o trimal.zip https://github.com/inab/trimal/releases/download/v1.5.0/trimAl_Windows_x86-64.zip
+
+      - name: Unzip Binaries
+        run: |
+          powershell -Command "Expand-Archive -Path trimal.zip -DestinationPath ."
+        
+      - name: Verify Binaries
+        run: |
+          Move-Item -Path .\trimal.exe -Destination .\source\
+          Get-Command .\source\trimal.exe
+          
+      - name: Run generate_trimmed_msas.ps1
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\scripts\generate_trimmed_msas.ps1
+
+      - name: Run compare_trimmed_msas.ps1
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
   build_and_test_windows:
       runs-on: windows-2022
       steps:
