@@ -23,11 +23,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Download Release Binaries
         run: |
-          curl -L -o trimal.zip https://github.com/inab/trimal/releases/download/v1.5.0/trimAl_Linux_x86-64.zip
+          curl -L -o trimal.zip https://github.com/inab/trimal/releases/download/v1.5.0/trimAl_Linux_x86-64.zip &&
+          unzip trimal.zip && mv trimal/* source/
       - name: Test trimal for Linux x86_64
         if: matrix.arch == 'x86_64'
-        run: unzip trimAl_Linux_x86-64.zip && mv trimAl_Linux_x86-64/* source/ && file source/trimal &&
-          file source/readal && file source/statal && ./scripts/generate_trimmed_msas.sh &&
+        run: file source/trimal && file source/readal && file source/statal && ./scripts/generate_trimmed_msas.sh &&
           ./scripts/compare_trimmed_msas.sh
 
       - name: Build trimal for Linux aarch64
@@ -43,9 +43,7 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y file
           run: |
-            curl -L -o trimal.zip https://github.com/inab/trimal/releases/download/v1.5.0/trimAl_Linux_x86-64.zip &&
-            unzip trimAl_Linux_x86-64.zip && mv trimAl_Linux_x86-64/* source/ && file source/trimal &&
-            file source/readal && file source/statal && ./scripts/generate_trimmed_msas.sh &&
+            file source/trimal && file source/readal && file source/statal && ./scripts/generate_trimmed_msas.sh &&
             ./scripts/compare_trimmed_msas.sh
   build_and_test_ubuntu:
     runs-on: ubuntu-20.04
