@@ -33,8 +33,10 @@ jobs:
             file trimal.exe
             file readal.exe
             file statal.exe
-            cd ..
-            mkdir test_msas
-            mkdir test_msas/gappyout
-            ./source/trimal.exe -in dataset/example.004.AA.fasta -gappyout > test_msas/gappyout/example.004.AA.fasta
-            cat test_msas/gappyout/example.004.AA.fasta
+        - name: Run generate_trimmed_msas.ps1
+          run: |
+            powershell -ExecutionPolicy Bypass -File .\scripts\generate_trimmed_msas.ps1
+  
+        - name: Run compare_trimmed_msas.ps1
+          run: |
+            powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
