@@ -24,7 +24,7 @@ jobs:
       - name: Download Release Binaries
         run: |
           curl -L -o trimal.zip https://github.com/inab/trimal/releases/download/v1.5.0/trimAl_Linux_x86-64.zip &&
-          unzip trimal.zip && mv trimal/* source/
+          unzip trimal.zip && mv trimAl_Linux_x86-64/* source/
       - name: Test trimal for Linux x86_64
         if: matrix.arch == 'x86_64'
         run: file source/trimal && file source/readal && file source/statal && ./scripts/generate_trimmed_msas.sh &&
