@@ -34,4 +34,5 @@ jobs:
             file readal.exe
             file statal.exe
             cd ..
-            ./source/trimal.exe -in dataset/example.004.AA.fasta -gappyout
+            ./source/trimal.exe -in dataset/example.004.AA.fasta -gappyout > test_msas/gappyout/example.004.AA.fasta
+            cat test_msas/gappyout/example.004.AA.fasta
