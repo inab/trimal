@@ -1182,6 +1182,11 @@
         "count": 251,
         "uniques": 164,
         "request_date": "2024-08-12"
+      },
+      {
+        "count": 246,
+        "uniques": 163,
+        "request_date": "2024-08-13"
       }
     ]
   },
@@ -1349,6 +1354,11 @@
         "count": 24,
         "uniques": 2,
         "request_date": "2024-03-11"
+      },
+      {
+        "count": 21,
+        "uniques": 1,
+        "request_date": "2024-08-13"
       }
     ]
   },
@@ -1476,6 +1486,11 @@
         "count": 18,
         "uniques": 1,
         "request_date": "2024-08-12"
+      },
+      {
+        "count": 42,
+        "uniques": 1,
+        "request_date": "2024-08-13"
       }
     ]
   },
@@ -1487,6 +1502,11 @@
         "count": 15,
         "uniques": 1,
         "request_date": "2024-08-10"
+      },
+      {
+        "count": 39,
+        "uniques": 1,
+        "request_date": "2024-08-13"
       }
     ]
   },
@@ -2677,6 +2697,11 @@
         "count": 28,
         "uniques": 12,
         "request_date": "2024-08-12"
+      },
+      {
+        "count": 36,
+        "uniques": 14,
+        "request_date": "2024-08-13"
       }
     ]
   },
@@ -3438,6 +3463,28 @@
         "count": 49,
         "uniques": 1,
         "request_date": "2024-05-30"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/edit/add-windows-compilation-workflow-test/.github/workflows/build.yml",
+    "title": "Editing trimal/.github/workflows/build.yml at add-windows-compilation-workflo...",
+    "views": [
+      {
+        "count": 32,
+        "uniques": 1,
+        "request_date": "2024-08-13"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/edit/add-windows-compilation-workflow-test/scripts/dummy-file.txt",
+    "title": "Editing trimal/scripts/dummy-file.txt at add-windows-compilation-workflow-tes...",
+    "views": [
+      {
+        "count": 34,
+        "uniques": 1,
+        "request_date": "2024-08-13"
       }
     ]
   },
@@ -6794,6 +6841,11 @@
         "count": 53,
         "uniques": 43,
         "request_date": "2024-08-12"
+      },
+      {
+        "count": 49,
+        "uniques": 41,
+        "request_date": "2024-08-13"
       }
     ]
   },
@@ -6891,6 +6943,11 @@
         "count": 26,
         "uniques": 1,
         "request_date": "2024-07-22"
+      },
+      {
+        "count": 28,
+        "uniques": 1,
+        "request_date": "2024-08-13"
       }
     ]
   },
@@ -11969,6 +12026,11 @@
         "count": 49,
         "uniques": 19,
         "request_date": "2024-08-12"
+      },
+      {
+        "count": 45,
+        "uniques": 17,
+        "request_date": "2024-08-13"
       }
     ]
   },
