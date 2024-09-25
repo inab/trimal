@@ -1050,11 +1050,6 @@ bool trimAlManager::processArguments(char *argv[]) {
 
 /**inline**/ bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {
     if (selectCols || selectSeqs) {
-        if ((clusters != -1) || (maxIdentity != -1)) {
-            debug.report(ErrorCode::OnlyOneSequencesSelectionMethodAllowed);
-            appearErrors = true;
-        }
-
         if (selectCols)
         {
             if (blockSize != -1) {
@@ -1074,7 +1069,11 @@ bool trimAlManager::processArguments(char *argv[]) {
             }
         }
 
-        if (selectSeqs)
+        if (selectSeqs) {
+            if ((clusters != -1) || (maxIdentity != -1)) {
+                debug.report(ErrorCode::OnlyOneSequencesSelectionMethodAllowed);
+                appearErrors = true;
+            }
 
             for (int i = 1; i <= delSequences[0]; i++)
             {
@@ -1085,6 +1084,7 @@ bool trimAlManager::processArguments(char *argv[]) {
                     break;
                 }
             }
+        }
     }
     return appearErrors;
 }
