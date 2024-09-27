@@ -13,14 +13,26 @@ on:
 name: Build 
 
 jobs:
-  build_and_test:
+  download_and_test_ubuntu:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download Release Binaries
+        run: |
+          curl -L -o trimal.zip https://github.com/inab/trimal/releases/download/v1.5.0/trimAl_Linux_x86-64.zip &&
+          unzip trimal.zip && mv trimAl_Linux_x86-64/* source/
+      - name: Test trimal for Linux x86_64
+        run: file source/trimal && file source/readal && file source/statal && ./scripts/generate_trimmed_msas.sh &&
+          ./scripts/compare_trimmed_msas.sh
+          
+  build_and_test_ubuntu:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
         arch: [x86_64, aarch64]
         
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build trimal for Linux x86_64
         if: matrix.arch == 'x86_64'
         run: cd source && make all && file trimal && file readal && file statal &&
@@ -41,3 +53,56 @@ jobs:
           run: |
             cd /trimal/source && make all && file trimal && file readal && file statal &&
             cd .. && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+            
+  download_and_test_windows:
+      runs-on: windows-2022
+      steps:
+      - uses: actions/checkout@v4
+      - name: Download Release Binaries
+        run: |
+          curl -L -o trimal.zip https://github.com/inab/trimal/releases/download/v1.5.0/trimAl_Windows_x86-64.zip
+
+      - name: Unzip Binaries
+        run: |
+          powershell -Command "Expand-Archive -Path trimal.zip -DestinationPath ."
+        
+      - name: Verify Binaries
+        run: |
+          Move-Item -Path .\trimal.exe -Destination .\source\
+          Get-Command .\source\trimal.exe
+          
+      - name: Run generate_trimmed_msas.ps1
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\scripts\generate_trimmed_msas.ps1
+
+      - name: Run compare_trimmed_msas.ps1
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
+          
+  build_and_test_windows:
+      runs-on: windows-2022
+      steps:
+        - uses: actions/checkout@v4
+        - name: Set up MSYS2
+          uses: msys2/setup-msys2@v2
+          with:
+            msystem: MINGW64
+            update: true
+            install: >-
+              make
+              mingw-w64-x86_64-gcc
+              file
+        - name: Build trimal for Windows x86_64
+          run: |
+            cd source
+            make -f makefile.Windows
+            file trimal.exe
+            file readal.exe
+            file statal.exe
+        - name: Run generate_trimmed_msas.ps1
+          run: |
+            powershell -ExecutionPolicy Bypass -File .\scripts\generate_trimmed_msas.ps1
+  
+        - name: Run compare_trimmed_msas.ps1
+          run: |
+            powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
