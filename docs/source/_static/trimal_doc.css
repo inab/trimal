@@ -3,3 +3,15 @@
 .wy-nav-content {
     max-width: 1200px;
 }
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+table td {
+    text-align: center;
+}
