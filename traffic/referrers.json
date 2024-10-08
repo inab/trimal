@@ -1586,6 +1586,11 @@
         "count": 49,
         "uniques": 17,
         "request_date": "2024-10-07"
+      },
+      {
+        "count": 34,
+        "uniques": 17,
+        "request_date": "2024-10-08"
       }
     ]
   },
@@ -2281,6 +2286,11 @@
         "count": 6,
         "uniques": 4,
         "request_date": "2024-10-07"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2024-10-08"
       }
     ]
   },
@@ -3746,6 +3756,11 @@
         "count": 148,
         "uniques": 72,
         "request_date": "2024-10-07"
+      },
+      {
+        "count": 136,
+        "uniques": 70,
+        "request_date": "2024-10-08"
       }
     ]
   },
@@ -4066,6 +4081,16 @@
         "count": 3,
         "uniques": 2,
         "request_date": "2024-10-01"
+      }
+    ]
+  },
+  {
+    "referrer": "bioconda.github.io",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2024-10-08"
       }
     ]
   },
@@ -4441,6 +4466,11 @@
         "count": 3,
         "uniques": 2,
         "request_date": "2024-09-27"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2024-10-08"
       }
     ]
   },
@@ -5976,6 +6006,11 @@
         "count": 47,
         "uniques": 22,
         "request_date": "2024-10-07"
+      },
+      {
+        "count": 43,
+        "uniques": 21,
+        "request_date": "2024-10-08"
       }
     ]
   },
@@ -7686,6 +7721,11 @@
         "count": 22,
         "uniques": 10,
         "request_date": "2024-10-07"
+      },
+      {
+        "count": 21,
+        "uniques": 9,
+        "request_date": "2024-10-08"
       }
     ]
   },
@@ -11881,6 +11921,11 @@
         "count": 156,
         "uniques": 71,
         "request_date": "2024-10-07"
+      },
+      {
+        "count": 150,
+        "uniques": 76,
+        "request_date": "2024-10-08"
       }
     ]
   },
@@ -12956,6 +13001,11 @@
         "count": 28,
         "uniques": 17,
         "request_date": "2024-10-07"
+      },
+      {
+        "count": 26,
+        "uniques": 16,
+        "request_date": "2024-10-08"
       }
     ]
   },
@@ -14421,6 +14471,11 @@
         "count": 109,
         "uniques": 19,
         "request_date": "2024-10-07"
+      },
+      {
+        "count": 69,
+        "uniques": 23,
+        "request_date": "2024-10-08"
       }
     ]
   },
