@@ -821,9 +821,9 @@ namespace statistics {
         if (--(*refCounter) == 0) {
             delete[] values;
             delete[] values_windowed;
+            delete refCounter;
         }
         alig = nullptr;
-        delete refCounter;
     }
 
     Consistency::Consistency(Alignment *pAlignment,
