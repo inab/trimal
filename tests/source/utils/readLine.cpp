@@ -9,7 +9,8 @@ TEST_CASE("readLine", "[utils]") {
     GIVEN("Simple line")
     {
         ss << "HELLO";
-        a.reset(utils::readLine(ss));
+        std::string buffer;
+        a.reset(utils::readLine(ss, buffer));
         std::string str(a.get());
 
         REQUIRE(str == "HELLO");
@@ -19,11 +20,12 @@ TEST_CASE("readLine", "[utils]") {
     {
         ss << "HELLO\nBYE";
 
-        a.reset(utils::readLine(ss));
+        std::string buffer;
+        a.reset(utils::readLine(ss, buffer));
         std::string str(a.get());
         REQUIRE(str == "HELLO");
 
-        a.reset(utils::readLine(ss));
+        a.reset(utils::readLine(ss, buffer));
         str = std::string(a.get());
         REQUIRE(str == "BYE");
     }
@@ -32,11 +34,12 @@ TEST_CASE("readLine", "[utils]") {
     {
         ss << "   HELLO\n   BYE";
 
-        a.reset(utils::readLine(ss));
+        std::string buffer;
+        a.reset(utils::readLine(ss, buffer));
         std::string str(a.get());
         REQUIRE(str == "HELLO");
 
-        a.reset(utils::readLine(ss));
+        a.reset(utils::readLine(ss, buffer));
         str = std::string(a.get());
         REQUIRE(str == "BYE");
     }
@@ -45,11 +48,12 @@ TEST_CASE("readLine", "[utils]") {
     {
         ss << "HELLO\r\nBYE";
 
-        a.reset(utils::readLine(ss));
+        std::string buffer;
+        a.reset(utils::readLine(ss, buffer));
         std::string str(a.get());
         REQUIRE(str == "HELLO");
 
-        a.reset(utils::readLine(ss));
+        a.reset(utils::readLine(ss, buffer));
         str = std::string(a.get());
         REQUIRE(str == "BYE");
     }
@@ -58,11 +62,12 @@ TEST_CASE("readLine", "[utils]") {
     {
         ss << "   HELLO\r\n   BYE";
 
-        a.reset(utils::readLine(ss));
+        std::string buffer;
+        a.reset(utils::readLine(ss, buffer));
         std::string str(a.get());
         REQUIRE(str == "HELLO");
 
-        a.reset(utils::readLine(ss));
+        a.reset(utils::readLine(ss, buffer));
         str = std::string(a.get());
         REQUIRE(str == "BYE");
     }
