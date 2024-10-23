@@ -1050,21 +1050,34 @@ bool trimAlManager::processArguments(char *argv[]) {
 
 /**inline**/ bool trimAlManager::check_select_cols_and_seqs_incompatibilities() {
     if (selectCols || selectSeqs) {
-        if ((clusters != -1) || (maxIdentity != -1)) {
-            debug.report(ErrorCode::OnlyOneSequencesSelectionMethodAllowed);
+        if (gapThreshold != -1 || gapAbsoluteThreshold != -1 || similarityThreshold != -1 || consistencyThreshold != -1 || conservationThreshold != -1) {
+            debug.report(ErrorCode::SelectSeqsResAndThresholdIncompatibilities);
             appearErrors = true;
         }
 
-        if (selectCols)
-        {
+        if (nogaps || noallgaps || gappyout || strict|| strictplus || automated1 || automated2) {
+            debug.report(ErrorCode::SelectSeqsResAndAutomathedMethodsIncompatibilities);
+            appearErrors = true;
+        }
+
+        if (windowSize != -1 || consistencyWindow != -1 || gapWindow != -1 || similarityWindow != -1) {
+            debug.report(ErrorCode::SelectSeqsResAndWindowIncompatibilities);
+            appearErrors = true;
+        }
+
+        if (residuesOverlap != -1 || sequenceOverlap != -1) {
+            debug.report(ErrorCode::SelectSeqsResAndOverlapIncompatibilites);
+            appearErrors = true;
+        }
+
+        if (selectCols) {
             if (blockSize != -1) {
                 debug.report(ErrorCode::IncompatibleArguments,
                              new std::string[2]{"-selectcols", "-block"});
                 appearErrors = true;
             }
 
-            for (int i = 1; i <= delColumns[0]; i++)
-            {
+            for (int i = 1; i <= delColumns[0]; i++) {
                 if (delColumns[i] >= origAlig->numberOfResidues) {
                     debug.report(ErrorCode::SelectOnlyAccepts,
                                  new std::string[2]{"-selectcols", "columns"});
@@ -1074,10 +1087,13 @@ bool trimAlManager::processArguments(char *argv[]) {
             }
         }
 
-        if (selectSeqs)
+        if (selectSeqs) {
+            if ((clusters != -1) || (maxIdentity != -1)) {
+                debug.report(ErrorCode::OnlyOneSequencesSelectionMethodAllowed);
+                appearErrors = true;
+            }
 
-            for (int i = 1; i <= delSequences[0]; i++)
-            {
+            for (int i = 1; i <= delSequences[0]; i++) {
                 if (delSequences[i] >= origAlig->numberOfSequences) {
                     debug.report(ErrorCode::SelectOnlyAccepts,
                                  new std::string[2]{"-selectseqs", "sequences"});
@@ -1085,7 +1101,10 @@ bool trimAlManager::processArguments(char *argv[]) {
                     break;
                 }
             }
+
+        }
     }
+
     return appearErrors;
 }
 
