@@ -1812,6 +1812,11 @@
         "count": 337,
         "uniques": 226,
         "request_date": "2024-12-23"
+      },
+      {
+        "count": 298,
+        "uniques": 200,
+        "request_date": "2024-12-24"
       }
     ]
   },
@@ -4052,6 +4057,11 @@
         "count": 16,
         "uniques": 14,
         "request_date": "2024-12-23"
+      },
+      {
+        "count": 13,
+        "uniques": 12,
+        "request_date": "2024-12-24"
       }
     ]
   },
@@ -4846,6 +4856,11 @@
         "count": 18,
         "uniques": 16,
         "request_date": "2024-12-23"
+      },
+      {
+        "count": 18,
+        "uniques": 16,
+        "request_date": "2024-12-24"
       }
     ]
   },
@@ -6831,6 +6846,11 @@
         "count": 24,
         "uniques": 15,
         "request_date": "2024-12-23"
+      },
+      {
+        "count": 19,
+        "uniques": 13,
+        "request_date": "2024-12-24"
       }
     ]
   },
@@ -7303,6 +7323,17 @@
         "count": 11,
         "uniques": 2,
         "request_date": "2024-10-08"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/pull/106",
+    "title": "add trimal badges by bgruening · Pull Request #106 · inab/trimal",
+    "views": [
+      {
+        "count": 16,
+        "uniques": 4,
+        "request_date": "2024-12-24"
       }
     ]
   },
@@ -8356,6 +8387,11 @@
         "count": 30,
         "uniques": 24,
         "request_date": "2024-12-23"
+      },
+      {
+        "count": 27,
+        "uniques": 21,
+        "request_date": "2024-12-24"
       }
     ]
   },
@@ -10178,6 +10214,11 @@
         "count": 77,
         "uniques": 57,
         "request_date": "2024-12-23"
+      },
+      {
+        "count": 70,
+        "uniques": 51,
+        "request_date": "2024-12-24"
       }
     ]
   },
@@ -12698,6 +12739,11 @@
         "count": 20,
         "uniques": 17,
         "request_date": "2024-12-23"
+      },
+      {
+        "count": 19,
+        "uniques": 16,
+        "request_date": "2024-12-24"
       }
     ]
   },
@@ -16477,6 +16523,11 @@
         "count": 17,
         "uniques": 12,
         "request_date": "2024-12-23"
+      },
+      {
+        "count": 18,
+        "uniques": 13,
+        "request_date": "2024-12-24"
       }
     ]
   },
@@ -18293,6 +18344,11 @@
         "count": 26,
         "uniques": 15,
         "request_date": "2024-12-23"
+      },
+      {
+        "count": 26,
+        "uniques": 16,
+        "request_date": "2024-12-24"
       }
     ]
   },
