@@ -2011,6 +2011,11 @@
         "count": 30,
         "uniques": 9,
         "request_date": "2025-01-01"
+      },
+      {
+        "count": 28,
+        "uniques": 8,
+        "request_date": "2025-01-02"
       }
     ]
   },
@@ -4656,6 +4661,11 @@
         "count": 126,
         "uniques": 42,
         "request_date": "2025-01-01"
+      },
+      {
+        "count": 73,
+        "uniques": 31,
+        "request_date": "2025-01-02"
       }
     ]
   },
@@ -5056,6 +5066,11 @@
         "count": 13,
         "uniques": 2,
         "request_date": "2025-01-01"
+      },
+      {
+        "count": 13,
+        "uniques": 2,
+        "request_date": "2025-01-02"
       }
     ]
   },
@@ -7661,6 +7676,11 @@
         "count": 49,
         "uniques": 26,
         "request_date": "2025-01-01"
+      },
+      {
+        "count": 40,
+        "uniques": 25,
+        "request_date": "2025-01-02"
       }
     ]
   },
@@ -9841,6 +9861,11 @@
         "count": 31,
         "uniques": 12,
         "request_date": "2025-01-01"
+      },
+      {
+        "count": 18,
+        "uniques": 10,
+        "request_date": "2025-01-02"
       }
     ]
   },
@@ -11271,6 +11296,21 @@
         "count": 8,
         "uniques": 5,
         "request_date": "2025-01-01"
+      },
+      {
+        "count": 5,
+        "uniques": 3,
+        "request_date": "2025-01-02"
+      }
+    ]
+  },
+  {
+    "referrer": "hpc.nih.gov",
+    "views": [
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2025-01-02"
       }
     ]
   },
@@ -15056,6 +15096,11 @@
         "count": 79,
         "uniques": 39,
         "request_date": "2025-01-01"
+      },
+      {
+        "count": 77,
+        "uniques": 37,
+        "request_date": "2025-01-02"
       }
     ]
   },
@@ -16526,6 +16571,11 @@
         "count": 36,
         "uniques": 10,
         "request_date": "2025-01-01"
+      },
+      {
+        "count": 19,
+        "uniques": 8,
+        "request_date": "2025-01-02"
       }
     ]
   },
@@ -18386,6 +18436,11 @@
         "count": 31,
         "uniques": 17,
         "request_date": "2025-01-01"
+      },
+      {
+        "count": 30,
+        "uniques": 16,
+        "request_date": "2025-01-02"
       }
     ]
   },
