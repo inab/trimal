@@ -1867,6 +1867,11 @@
         "count": 219,
         "uniques": 149,
         "request_date": "2025-01-03"
+      },
+      {
+        "count": 220,
+        "uniques": 147,
+        "request_date": "2025-01-04"
       }
     ]
   },
@@ -4148,6 +4153,11 @@
         "count": 18,
         "uniques": 14,
         "request_date": "2025-01-03"
+      },
+      {
+        "count": 20,
+        "uniques": 15,
+        "request_date": "2025-01-04"
       }
     ]
   },
@@ -4983,6 +4993,17 @@
         "count": 14,
         "uniques": 1,
         "request_date": "2024-04-04"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/commits/schedule-traffic-workflow",
+    "title": "Commits · inab/trimal",
+    "views": [
+      {
+        "count": 11,
+        "uniques": 1,
+        "request_date": "2025-01-04"
       }
     ]
   },
@@ -6992,6 +7013,11 @@
         "count": 9,
         "uniques": 9,
         "request_date": "2025-01-03"
+      },
+      {
+        "count": 13,
+        "uniques": 11,
+        "request_date": "2025-01-04"
       }
     ]
   },
@@ -8628,6 +8654,11 @@
         "count": 24,
         "uniques": 15,
         "request_date": "2025-01-03"
+      },
+      {
+        "count": 24,
+        "uniques": 15,
+        "request_date": "2025-01-04"
       }
     ]
   },
@@ -10505,6 +10536,11 @@
         "count": 35,
         "uniques": 26,
         "request_date": "2025-01-03"
+      },
+      {
+        "count": 34,
+        "uniques": 26,
+        "request_date": "2025-01-04"
       }
     ]
   },
@@ -11378,6 +11414,11 @@
         "count": 8,
         "uniques": 7,
         "request_date": "2025-01-03"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2025-01-04"
       }
     ]
   },
@@ -13115,6 +13156,11 @@
         "count": 16,
         "uniques": 14,
         "request_date": "2025-01-03"
+      },
+      {
+        "count": 17,
+        "uniques": 15,
+        "request_date": "2025-01-04"
       }
     ]
   },
@@ -16984,6 +17030,11 @@
         "count": 9,
         "uniques": 8,
         "request_date": "2025-01-03"
+      },
+      {
+        "count": 9,
+        "uniques": 8,
+        "request_date": "2025-01-04"
       }
     ]
   },
@@ -18855,6 +18906,11 @@
         "count": 17,
         "uniques": 14,
         "request_date": "2025-01-03"
+      },
+      {
+        "count": 22,
+        "uniques": 16,
+        "request_date": "2025-01-04"
       }
     ]
   },
