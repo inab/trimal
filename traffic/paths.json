@@ -1877,6 +1877,11 @@
         "count": 227,
         "uniques": 152,
         "request_date": "2025-01-05"
+      },
+      {
+        "count": 230,
+        "uniques": 154,
+        "request_date": "2025-01-06"
       }
     ]
   },
@@ -4168,6 +4173,11 @@
         "count": 24,
         "uniques": 18,
         "request_date": "2025-01-05"
+      },
+      {
+        "count": 25,
+        "uniques": 18,
+        "request_date": "2025-01-06"
       }
     ]
   },
@@ -5019,6 +5029,11 @@
         "count": 11,
         "uniques": 1,
         "request_date": "2025-01-05"
+      },
+      {
+        "count": 11,
+        "uniques": 1,
+        "request_date": "2025-01-06"
       }
     ]
   },
@@ -7038,6 +7053,11 @@
         "count": 15,
         "uniques": 13,
         "request_date": "2025-01-05"
+      },
+      {
+        "count": 14,
+        "uniques": 12,
+        "request_date": "2025-01-06"
       }
     ]
   },
@@ -8684,6 +8704,11 @@
         "count": 25,
         "uniques": 15,
         "request_date": "2025-01-05"
+      },
+      {
+        "count": 25,
+        "uniques": 15,
+        "request_date": "2025-01-06"
       }
     ]
   },
@@ -10571,6 +10596,11 @@
         "count": 35,
         "uniques": 27,
         "request_date": "2025-01-05"
+      },
+      {
+        "count": 34,
+        "uniques": 26,
+        "request_date": "2025-01-06"
       }
     ]
   },
@@ -11454,6 +11484,11 @@
         "count": 12,
         "uniques": 9,
         "request_date": "2025-01-05"
+      },
+      {
+        "count": 14,
+        "uniques": 10,
+        "request_date": "2025-01-06"
       }
     ]
   },
@@ -13201,6 +13236,11 @@
         "count": 18,
         "uniques": 16,
         "request_date": "2025-01-05"
+      },
+      {
+        "count": 17,
+        "uniques": 15,
+        "request_date": "2025-01-06"
       }
     ]
   },
@@ -17080,6 +17120,11 @@
         "count": 9,
         "uniques": 8,
         "request_date": "2025-01-04"
+      },
+      {
+        "count": 9,
+        "uniques": 8,
+        "request_date": "2025-01-06"
       }
     ]
   },
@@ -18961,6 +19006,11 @@
         "count": 25,
         "uniques": 18,
         "request_date": "2025-01-05"
+      },
+      {
+        "count": 26,
+        "uniques": 19,
+        "request_date": "2025-01-06"
       }
     ]
   },
