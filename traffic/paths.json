@@ -1922,6 +1922,11 @@
         "count": 269,
         "uniques": 185,
         "request_date": "2025-01-14"
+      },
+      {
+        "count": 297,
+        "uniques": 194,
+        "request_date": "2025-01-15"
       }
     ]
   },
@@ -4258,6 +4263,11 @@
         "count": 19,
         "uniques": 14,
         "request_date": "2025-01-14"
+      },
+      {
+        "count": 20,
+        "uniques": 15,
+        "request_date": "2025-01-15"
       }
     ]
   },
@@ -5154,6 +5164,11 @@
         "count": 11,
         "uniques": 1,
         "request_date": "2025-01-14"
+      },
+      {
+        "count": 11,
+        "uniques": 1,
+        "request_date": "2025-01-15"
       }
     ]
   },
@@ -7218,6 +7233,11 @@
         "count": 28,
         "uniques": 17,
         "request_date": "2025-01-14"
+      },
+      {
+        "count": 32,
+        "uniques": 20,
+        "request_date": "2025-01-15"
       }
     ]
   },
@@ -8924,6 +8944,11 @@
         "count": 19,
         "uniques": 16,
         "request_date": "2025-01-14"
+      },
+      {
+        "count": 23,
+        "uniques": 18,
+        "request_date": "2025-01-15"
       }
     ]
   },
@@ -10856,6 +10881,11 @@
         "count": 55,
         "uniques": 41,
         "request_date": "2025-01-14"
+      },
+      {
+        "count": 69,
+        "uniques": 46,
+        "request_date": "2025-01-15"
       }
     ]
   },
@@ -13576,6 +13606,11 @@
         "count": 13,
         "uniques": 12,
         "request_date": "2025-01-14"
+      },
+      {
+        "count": 13,
+        "uniques": 12,
+        "request_date": "2025-01-15"
       }
     ]
   },
@@ -15703,6 +15738,11 @@
         "count": 12,
         "uniques": 9,
         "request_date": "2025-01-14"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2025-01-15"
       }
     ]
   },
@@ -19411,6 +19451,11 @@
         "count": 21,
         "uniques": 15,
         "request_date": "2025-01-14"
+      },
+      {
+        "count": 23,
+        "uniques": 15,
+        "request_date": "2025-01-15"
       }
     ]
   },
@@ -19478,6 +19523,17 @@
         "count": 15,
         "uniques": 5,
         "request_date": "2024-06-11"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/tree/v1.5.0",
+    "title": "inab/trimal at v1.5.0",
+    "views": [
+      {
+        "count": 9,
+        "uniques": 5,
+        "request_date": "2025-01-15"
       }
     ]
   }
