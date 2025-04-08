@@ -2556,6 +2556,11 @@
         "count": 27,
         "uniques": 10,
         "request_date": "2025-04-07"
+      },
+      {
+        "count": 27,
+        "uniques": 10,
+        "request_date": "2025-04-08"
       }
     ]
   },
@@ -5746,6 +5751,11 @@
         "count": 175,
         "uniques": 92,
         "request_date": "2025-04-07"
+      },
+      {
+        "count": 167,
+        "uniques": 83,
+        "request_date": "2025-04-08"
       }
     ]
   },
@@ -6136,6 +6146,11 @@
         "count": 19,
         "uniques": 1,
         "request_date": "2025-04-07"
+      },
+      {
+        "count": 20,
+        "uniques": 2,
+        "request_date": "2025-04-08"
       }
     ]
   },
@@ -7401,6 +7416,11 @@
         "count": 45,
         "uniques": 8,
         "request_date": "2025-04-07"
+      },
+      {
+        "count": 44,
+        "uniques": 7,
+        "request_date": "2025-04-08"
       }
     ]
   },
@@ -9811,6 +9831,11 @@
         "count": 42,
         "uniques": 22,
         "request_date": "2025-04-07"
+      },
+      {
+        "count": 44,
+        "uniques": 20,
+        "request_date": "2025-04-08"
       }
     ]
   },
@@ -12591,6 +12616,11 @@
         "count": 16,
         "uniques": 6,
         "request_date": "2025-04-07"
+      },
+      {
+        "count": 16,
+        "uniques": 6,
+        "request_date": "2025-04-08"
       }
     ]
   },
@@ -18836,6 +18866,11 @@
         "count": 182,
         "uniques": 81,
         "request_date": "2025-04-07"
+      },
+      {
+        "count": 168,
+        "uniques": 74,
+        "request_date": "2025-04-08"
       }
     ]
   },
@@ -20786,6 +20821,11 @@
         "count": 33,
         "uniques": 23,
         "request_date": "2025-04-07"
+      },
+      {
+        "count": 34,
+        "uniques": 22,
+        "request_date": "2025-04-08"
       }
     ]
   },
@@ -23196,6 +23236,11 @@
         "count": 90,
         "uniques": 32,
         "request_date": "2025-04-07"
+      },
+      {
+        "count": 99,
+        "uniques": 32,
+        "request_date": "2025-04-08"
       }
     ]
   },
@@ -23496,6 +23541,16 @@
         "count": 7,
         "uniques": 4,
         "request_date": "2025-02-25"
+      }
+    ]
+  },
+  {
+    "referrer": "yuanbao.tencent.com",
+    "views": [
+      {
+        "count": 13,
+        "uniques": 1,
+        "request_date": "2025-04-08"
       }
     ]
   }
