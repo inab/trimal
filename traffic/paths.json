@@ -2367,6 +2367,11 @@
         "count": 363,
         "uniques": 237,
         "request_date": "2025-04-13"
+      },
+      {
+        "count": 348,
+        "uniques": 224,
+        "request_date": "2025-04-14"
       }
     ]
   },
@@ -5148,6 +5153,11 @@
         "count": 29,
         "uniques": 19,
         "request_date": "2025-04-13"
+      },
+      {
+        "count": 26,
+        "uniques": 16,
+        "request_date": "2025-04-14"
       }
     ]
   },
@@ -8584,6 +8594,11 @@
         "count": 30,
         "uniques": 15,
         "request_date": "2025-04-13"
+      },
+      {
+        "count": 31,
+        "uniques": 16,
+        "request_date": "2025-04-14"
       }
     ]
   },
@@ -8723,6 +8738,17 @@
         "count": 19,
         "uniques": 7,
         "request_date": "2025-04-06"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/issues/110",
+    "title": "terminalonly issue · Issue #110 · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 11,
+        "uniques": 7,
+        "request_date": "2025-04-14"
       }
     ]
   },
@@ -9646,6 +9672,11 @@
         "count": 15,
         "uniques": 8,
         "request_date": "2025-04-13"
+      },
+      {
+        "count": 15,
+        "uniques": 8,
+        "request_date": "2025-04-14"
       }
     ]
   },
@@ -10982,6 +11013,11 @@
         "count": 18,
         "uniques": 15,
         "request_date": "2025-04-13"
+      },
+      {
+        "count": 15,
+        "uniques": 14,
+        "request_date": "2025-04-14"
       }
     ]
   },
@@ -13359,6 +13395,11 @@
         "count": 74,
         "uniques": 56,
         "request_date": "2025-04-13"
+      },
+      {
+        "count": 70,
+        "uniques": 52,
+        "request_date": "2025-04-14"
       }
     ]
   },
@@ -16769,6 +16810,11 @@
         "count": 17,
         "uniques": 15,
         "request_date": "2025-04-13"
+      },
+      {
+        "count": 16,
+        "uniques": 14,
+        "request_date": "2025-04-14"
       }
     ]
   },
@@ -21498,6 +21544,11 @@
         "count": 11,
         "uniques": 8,
         "request_date": "2025-04-13"
+      },
+      {
+        "count": 11,
+        "uniques": 8,
+        "request_date": "2025-04-14"
       }
     ]
   },
@@ -23869,6 +23920,11 @@
         "count": 29,
         "uniques": 21,
         "request_date": "2025-04-13"
+      },
+      {
+        "count": 24,
+        "uniques": 17,
+        "request_date": "2025-04-14"
       }
     ]
   },
