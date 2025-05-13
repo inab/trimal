@@ -2512,6 +2512,11 @@
         "count": 276,
         "uniques": 174,
         "request_date": "2025-05-12"
+      },
+      {
+        "count": 277,
+        "uniques": 177,
+        "request_date": "2025-05-13"
       }
     ]
   },
@@ -5438,6 +5443,11 @@
         "count": 19,
         "uniques": 11,
         "request_date": "2025-05-12"
+      },
+      {
+        "count": 20,
+        "uniques": 12,
+        "request_date": "2025-05-13"
       }
     ]
   },
@@ -9019,6 +9029,11 @@
         "count": 35,
         "uniques": 21,
         "request_date": "2025-05-12"
+      },
+      {
+        "count": 36,
+        "uniques": 21,
+        "request_date": "2025-05-13"
       }
     ]
   },
@@ -9555,6 +9570,22 @@
         "count": 17,
         "uniques": 9,
         "request_date": "2025-05-12"
+      },
+      {
+        "count": 17,
+        "uniques": 9,
+        "request_date": "2025-05-13"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/issues/28",
+    "title": "Problem with \"n\" · Issue #28 · inab/trimal",
+    "views": [
+      {
+        "count": 16,
+        "uniques": 6,
+        "request_date": "2025-05-13"
       }
     ]
   },
@@ -11608,6 +11639,11 @@
         "count": 29,
         "uniques": 19,
         "request_date": "2025-05-12"
+      },
+      {
+        "count": 31,
+        "uniques": 22,
+        "request_date": "2025-05-13"
       }
     ]
   },
@@ -14130,6 +14166,11 @@
         "count": 73,
         "uniques": 56,
         "request_date": "2025-05-12"
+      },
+      {
+        "count": 69,
+        "uniques": 53,
+        "request_date": "2025-05-13"
       }
     ]
   },
@@ -15488,6 +15529,11 @@
         "count": 11,
         "uniques": 6,
         "request_date": "2025-05-12"
+      },
+      {
+        "count": 11,
+        "uniques": 6,
+        "request_date": "2025-05-13"
       }
     ]
   },
@@ -17705,6 +17751,11 @@
         "count": 14,
         "uniques": 11,
         "request_date": "2025-05-12"
+      },
+      {
+        "count": 13,
+        "uniques": 10,
+        "request_date": "2025-05-13"
       }
     ]
   },
@@ -19646,6 +19697,11 @@
         "count": 11,
         "uniques": 9,
         "request_date": "2025-05-12"
+      },
+      {
+        "count": 10,
+        "uniques": 8,
+        "request_date": "2025-05-13"
       }
     ]
   },
