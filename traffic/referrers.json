@@ -2786,6 +2786,11 @@
         "count": 28,
         "uniques": 16,
         "request_date": "2025-05-23"
+      },
+      {
+        "count": 27,
+        "uniques": 15,
+        "request_date": "2025-05-24"
       }
     ]
   },
@@ -3691,6 +3696,11 @@
         "count": 6,
         "uniques": 3,
         "request_date": "2025-05-23"
+      },
+      {
+        "count": 6,
+        "uniques": 3,
+        "request_date": "2025-05-24"
       }
     ]
   },
@@ -6261,6 +6271,11 @@
         "count": 137,
         "uniques": 85,
         "request_date": "2025-05-23"
+      },
+      {
+        "count": 146,
+        "uniques": 87,
+        "request_date": "2025-05-24"
       }
     ]
   },
@@ -10931,6 +10946,11 @@
         "count": 38,
         "uniques": 16,
         "request_date": "2025-05-23"
+      },
+      {
+        "count": 38,
+        "uniques": 16,
+        "request_date": "2025-05-24"
       }
     ]
   },
@@ -14011,6 +14031,11 @@
         "count": 38,
         "uniques": 13,
         "request_date": "2025-05-23"
+      },
+      {
+        "count": 41,
+        "uniques": 14,
+        "request_date": "2025-05-24"
       }
     ]
   },
@@ -15826,6 +15851,11 @@
         "count": 28,
         "uniques": 2,
         "request_date": "2025-05-23"
+      },
+      {
+        "count": 30,
+        "uniques": 3,
+        "request_date": "2025-05-24"
       }
     ]
   },
@@ -16391,6 +16421,16 @@
         "count": 7,
         "uniques": 2,
         "request_date": "2024-10-29"
+      }
+    ]
+  },
+  {
+    "referrer": "jira.astrazeneca.com",
+    "views": [
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2025-05-24"
       }
     ]
   },
@@ -20611,6 +20651,11 @@
         "count": 198,
         "uniques": 85,
         "request_date": "2025-05-23"
+      },
+      {
+        "count": 205,
+        "uniques": 86,
+        "request_date": "2025-05-24"
       }
     ]
   },
@@ -22791,6 +22836,11 @@
         "count": 57,
         "uniques": 30,
         "request_date": "2025-05-23"
+      },
+      {
+        "count": 66,
+        "uniques": 32,
+        "request_date": "2025-05-24"
       }
     ]
   },
@@ -25431,6 +25481,11 @@
         "count": 84,
         "uniques": 45,
         "request_date": "2025-05-23"
+      },
+      {
+        "count": 83,
+        "uniques": 44,
+        "request_date": "2025-05-24"
       }
     ]
   },
