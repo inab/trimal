@@ -40,7 +40,7 @@ jobs:
 
       - name: Build trimal for Linux aarch64
         if: matrix.arch == 'aarch64'
-        uses: uraimo/run-on-arch-action@v2
+        uses: uraimo/run-on-arch-action@v3
         with:
           arch: ${{ matrix.arch }}
           distro: ubuntu20.04
