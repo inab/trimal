@@ -1,11 +1,13 @@
 on:
   push:
     paths:
+        - '.github/workflows/build.yml'
         - 'dataset/**'
         - 'scripts/**'
         - 'source/**'
   pull_request:
     paths:
+      - '.github/workflows/build.yml'
       - 'dataset/**'
       - 'scripts/**'
       - 'source/**'
