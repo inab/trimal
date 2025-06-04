@@ -1,7 +1,6 @@
 on:
   push:
     paths:
-        - '.github/workflows/build.yml'
         - 'dataset/**'
         - 'scripts/**'
         - 'source/**'
@@ -16,7 +15,6 @@ name: Build
 
 jobs:
   download_and_test_ubuntu:
-    if: false
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -29,7 +27,6 @@ jobs:
           ./scripts/compare_trimmed_msas.sh
           
   build_and_test_ubuntu:
-    if: false
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -82,7 +79,6 @@ jobs:
           cd .. && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   download_and_test_windows:
-      if: false
       runs-on: windows-2022
       steps:
       - uses: actions/checkout@v4
@@ -108,7 +104,6 @@ jobs:
           powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
           
   build_and_test_windows:
-      if: false
       runs-on: windows-2022
       steps:
         - uses: actions/checkout@v4
