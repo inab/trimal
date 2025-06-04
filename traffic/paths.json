@@ -2617,6 +2617,11 @@
         "count": 428,
         "uniques": 256,
         "request_date": "2025-06-03"
+      },
+      {
+        "count": 416,
+        "uniques": 247,
+        "request_date": "2025-06-04"
       }
     ]
   },
@@ -5648,6 +5653,11 @@
         "count": 42,
         "uniques": 23,
         "request_date": "2025-06-03"
+      },
+      {
+        "count": 42,
+        "uniques": 23,
+        "request_date": "2025-06-04"
       }
     ]
   },
@@ -9369,6 +9379,11 @@
         "count": 54,
         "uniques": 21,
         "request_date": "2025-06-03"
+      },
+      {
+        "count": 61,
+        "uniques": 23,
+        "request_date": "2025-06-04"
       }
     ]
   },
@@ -10321,6 +10336,17 @@
         "count": 15,
         "uniques": 4,
         "request_date": "2024-12-31"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/pull/111",
+    "title": "GitHub Actions: Upgrade uraimo/run-on-arch-action by cclauss · Pull Request #...",
+    "views": [
+      {
+        "count": 19,
+        "uniques": 3,
+        "request_date": "2025-06-04"
       }
     ]
   },
@@ -12219,6 +12245,11 @@
         "count": 24,
         "uniques": 20,
         "request_date": "2025-06-03"
+      },
+      {
+        "count": 27,
+        "uniques": 22,
+        "request_date": "2025-06-04"
       }
     ]
   },
@@ -14846,6 +14877,11 @@
         "count": 103,
         "uniques": 73,
         "request_date": "2025-06-03"
+      },
+      {
+        "count": 96,
+        "uniques": 72,
+        "request_date": "2025-06-04"
       }
     ]
   },
@@ -16229,6 +16265,11 @@
         "count": 11,
         "uniques": 8,
         "request_date": "2025-06-03"
+      },
+      {
+        "count": 14,
+        "uniques": 10,
+        "request_date": "2025-06-04"
       }
     ]
   },
@@ -18551,6 +18592,11 @@
         "count": 18,
         "uniques": 16,
         "request_date": "2025-06-03"
+      },
+      {
+        "count": 20,
+        "uniques": 17,
+        "request_date": "2025-06-04"
       }
     ]
   },
@@ -20562,6 +20608,11 @@
         "count": 16,
         "uniques": 7,
         "request_date": "2025-06-03"
+      },
+      {
+        "count": 15,
+        "uniques": 6,
+        "request_date": "2025-06-04"
       }
     ]
   },
@@ -26381,6 +26432,11 @@
         "count": 23,
         "uniques": 17,
         "request_date": "2025-06-03"
+      },
+      {
+        "count": 22,
+        "uniques": 15,
+        "request_date": "2025-06-04"
       }
     ]
   },
