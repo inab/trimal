@@ -65,7 +65,7 @@ Automated methods
 .. _gappyout_method:
 Gappyout method
 ------------------------
-This method relies on the gap distribution within the multiple sequence alignment (MSA). This method relies on the gap distribution within the Multiple Sequence Alignment (MSA). Initially, the method calculates gap scores for all columns and arranges them based on this score, generating a plot depicting potential gap score thresholds versus the percentage of the alignment below each threshold (see :numref:`gappyout-figure`). In the subsequent step, for every set of three consecutive points on this plot, trimAl computes the slopes between the first and third point, represented by blue lines. Following a comparison of all slopes, trimAl identifies the point with the maximal variation between consecutive slopes, indicated by a vertical red line in :numref:`gappyout-figure`.
+This method relies on the gap distribution within the multiple sequence alignment (MSA). Initially, the method calculates gap scores for all columns and arranges them based on this score, generating a plot depicting potential gap score thresholds versus the percentage of the alignment below each threshold (see :numref:`gappyout-figure`). In the subsequent step, for every set of three consecutive points on this plot, trimAl computes the slopes between the first and third point, represented by blue lines. Following a comparison of all slopes, trimAl identifies the point with the maximal variation between consecutive slopes, indicated by a vertical red line in :numref:`gappyout-figure`.
 
 
 .. _gappyout-figure:
