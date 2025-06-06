@@ -1,6 +1,7 @@
 on:
   push:
     paths:
+        - '.github/workflows/build.yml'
         - 'dataset/**'
         - 'scripts/**'
         - 'source/**'
