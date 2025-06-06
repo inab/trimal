@@ -1,11 +1,15 @@
 on:
   push:
+    branches:
+      - trimAl
     paths:
-        - '.github/workflows/build.yml'
-        - 'dataset/**'
-        - 'scripts/**'
-        - 'source/**'
+      - '.github/workflows/build.yml'
+      - 'dataset/**'
+      - 'scripts/**'
+      - 'source/**'
   pull_request:
+    branches:
+      - trimAl
     paths:
       - '.github/workflows/build.yml'
       - 'dataset/**'
