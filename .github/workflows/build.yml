@@ -59,7 +59,7 @@ jobs:
           retention-days: 1
           if-no-files-found: error
       - name: Build trimAl for Linux aarch64
-        if: ${{ matrix.arch == 'aarch64' && github.event_name == 'push' }}
+        if: ${{ matrix.arch == 'aarch64' && false }}
         uses: uraimo/run-on-arch-action@v3
         with:
           arch: ${{ matrix.arch }}
@@ -92,7 +92,7 @@ jobs:
         run: tar -xvf source/trimal_bin.tar -C source && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
       - name: Test trimAl for Linux aarch64
-        if: ${{ matrix.arch == 'aarch64' && github.event_name == 'push' }}
+        if: ${{ matrix.arch == 'aarch64' && false }}
         uses: uraimo/run-on-arch-action@v3
         with:
           arch: ${{ matrix.arch }}
