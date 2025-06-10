@@ -50,7 +50,8 @@ jobs:
       - name: Build trimAl for Linux x86_64
         if: matrix.arch == 'x86_64'
         run: cd source && make all && file trimal && file readal && file statal && tar -cvf trimal_bin.tar trimal
-      - name: Upload build binaries
+      - name: Upload build binaries for Linux x86_64
+        if: matrix.arch == 'x86_64'
         uses: actions/upload-artifact@v4
         with:
           name: trimal
@@ -82,7 +83,8 @@ jobs:
         arch: [x86_64, aarch64]
     steps:
       - uses: actions/checkout@v4
-      - name: Download build binaries
+      - name: Download build binaries for Linux x86_64
+        if: matrix.arch == 'x86_64'
         uses: actions/download-artifact@v4
         with:
           name: trimal
