@@ -19,11 +19,11 @@ on:
 name: Build 
 
 jobs:
-  download_binaries_ubuntu:
+  check_release_binaries_ubuntu:
     #if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-22.04
     steps:
-      - name: Download release binaries
+      - name: Check release binaries
         run: |
           curl -L -o trimal.zip https://github.com/inab/trimal/releases/latest/download/trimAl_Linux_x86-64.zip &&
           unzip trimal.zip && cd trimAl_Linux_x86-64 && file trimal && file readal && file statal
@@ -31,7 +31,7 @@ jobs:
   test_binaries_ubuntu:
     #if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-22.04
-    needs: download_binaries_ubuntu
+    needs: check_release_binaries_ubuntu
     steps:
       - uses: actions/checkout@v4
       - name: Test trimAl for Linux x86_64
@@ -78,6 +78,7 @@ jobs:
   test_ubuntu:
     #if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-22.04
+    needs: build_ubuntu
     strategy:
       matrix:
         arch: [x86_64, aarch64]
