@@ -46,7 +46,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: trimal
-          path: source/trimal
+          path: source/trimal.zip
       - name: Test trimAl for Linux x86_64
         run: unzip source/trimal.zip && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
           
