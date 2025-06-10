@@ -31,9 +31,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: trimal
-          path: trimal
+          path: trimAl_Linux_x86-64/trimal
           overwrite: true
           retention-days: 1
+          if-no-files-found: error
           
   test_binaries_ubuntu:
     #if: ${{ github.event_name == 'push' }}
