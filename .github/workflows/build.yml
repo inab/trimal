@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: trimal
-          path: source/trimal
+          path: trimAl_Linux_x86/trimal
           overwrite: true
           retention-days: 1
           
