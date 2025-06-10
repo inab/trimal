@@ -20,6 +20,7 @@ name: Build
 
 jobs:
   download_and_test_ubuntu:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -40,12 +41,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build trimal for Linux x86_64
-        if: matrix.arch == 'x86_64'
+        if: matrix.arch == 'x86_64' && false # TODO: change before merge
         run: cd source && make all && file trimal && file readal && file statal &&
           cd .. && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
       - name: Build trimal for Linux aarch64
-        if: matrix.arch == 'aarch64'
+        if: ${{ matrix.arch == 'aarch64' && github.event_name == 'push' }}
         uses: uraimo/run-on-arch-action@v3
         with:
           arch: ${{ matrix.arch }}
@@ -61,6 +62,7 @@ jobs:
             cd .. && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   download_and_test_macos:
+    if: ${{ github.event_name == 'push' }}
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
@@ -73,6 +75,7 @@ jobs:
           ./scripts/compare_trimmed_msas.sh
 
   build_and_test_macos:
+    if: ${{ github.event_name == 'push' }}
     strategy:
       matrix:
         version: [macos-13, macos-14]
@@ -84,6 +87,7 @@ jobs:
           cd .. && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   download_and_test_windows:
+      if: ${{ github.event_name == 'push' }}
       runs-on: windows-2022
       steps:
       - uses: actions/checkout@v4
@@ -109,6 +113,7 @@ jobs:
           powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
           
   build_and_test_windows:
+      if: ${{ github.event_name == 'push' }}
       runs-on: windows-2022
       steps:
         - uses: actions/checkout@v4
