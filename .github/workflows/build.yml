@@ -161,6 +161,7 @@ jobs:
       matrix:
         version: [macos-13, macos-14]
     runs-on: ${{ matrix.version }}
+    needs: build_macos
     steps:
       - uses: actions/checkout@v4
       - name: Download build binaries for ${{ matrix.version }}
@@ -227,6 +228,7 @@ jobs:
 
   test_windows:
     runs-on: windows-2022
+    needs: build_windows
     steps:
       - uses: actions/checkout@v4
       - name: Download build binaries for Windows
