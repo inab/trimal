@@ -27,14 +27,6 @@ jobs:
         run: |
           curl -L -o trimal.zip https://github.com/inab/trimal/releases/latest/download/trimAl_Linux_x86-64.zip &&
           unzip trimal.zip && cd trimAl_Linux_x86-64 && file trimal && file readal && file statal
-      - name: Upload release binaries
-        uses: actions/upload-artifact@v4
-        with:
-          name: trimal
-          path: trimAl_Linux_x86-64/trimal
-          overwrite: true
-          retention-days: 1
-          if-no-files-found: error
           
   test_binaries_ubuntu:
     #if: ${{ github.event_name == 'push' }}
@@ -42,16 +34,12 @@ jobs:
     needs: download_binaries_ubuntu
     steps:
       - uses: actions/checkout@v4
-      - name: Download executable file
-        uses: actions/download-artifact@v4
-        with:
-          name: trimal
-          path: source
       - name: Test trimAl for Linux x86_64
-        run: ls source && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+        run: curl -L -o trimal.zip https://github.com/inab/trimal/releases/latest/download/trimAl_Linux_x86-64.zip &&
+          unzip trimal.zip && mv trimAl_Linux_x86-64/* source/ && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
           
-  build_and_test_ubuntu:
-    if: false # TODO: change before merge
+  build_ubuntu:
+    #if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -61,10 +49,49 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build trimAl for Linux x86_64
         if: matrix.arch == 'x86_64'
-        run: cd source && make all && file trimal && file readal && file statal &&
-          cd .. && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
-
+        run: cd source && make all && file trimal && file readal && file statal && tar -cvf trimal_bin.tar trimal
+      - name: Upload build binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: trimal
+          path: source/trimal_bin.tar
+          overwrite: true
+          retention-days: 1
+          if-no-files-found: error
       - name: Build trimAl for Linux aarch64
+        if: ${{ matrix.arch == 'aarch64' && github.event_name == 'push' }}
+        uses: uraimo/run-on-arch-action@v3
+        with:
+          arch: ${{ matrix.arch }}
+          distro: ubuntu22.04
+          githubToken: ${{ github.token }}
+          dockerRunArgs: |
+            --volume "${PWD}:/trimal" 
+          install: |
+            apt-get update -q -y
+            apt-get install -q -y make g++ file
+          run: |
+            cd /trimal/source && make all && file trimal && file readal && file statal &&
+            cd .. && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+
+  test_ubuntu:
+    #if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        arch: [x86_64, aarch64]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download build binaries
+        uses: actions/download-artifact@v4
+        with:
+          name: trimal
+          path: source
+      - name: Test trimAl for Linux x86_64
+        if: matrix.arch == 'x86_64'
+        run: tar -xvf source/trimal_bin.tar -C source && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+
+      - name: Test trimAl for Linux aarch64
         if: ${{ matrix.arch == 'aarch64' && github.event_name == 'push' }}
         uses: uraimo/run-on-arch-action@v3
         with:
