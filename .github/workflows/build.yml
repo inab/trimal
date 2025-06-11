@@ -54,11 +54,11 @@ jobs:
           if-no-files-found: error
 
   build_ubuntu_aarch64:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - name: Build trimAl for Linux aarch64
-        if: github.event.pull_request.draft == false
         uses: uraimo/run-on-arch-action@v3
         with:
           arch: aarch64
@@ -72,7 +72,6 @@ jobs:
           run: |
             cd /trimal/source && make all && file trimal && file readal && file statal && tar -cvf trimal_bin.tar trimal
       - name: Upload build binaries for Linux aarch64
-        if: github.event.pull_request.draft == false
         uses: actions/upload-artifact@v4
         with:
           name: trimal_linux_aarch64
@@ -92,22 +91,20 @@ jobs:
           name: trimal_linux_x86_64
           path: source
       - name: Test trimAl for Linux x86_64
-        if: github.event.pull_request.draft == false
         run: tar -xvf source/trimal_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
-  test_ubuntu:
+  test_ubuntu_aarch64:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-22.04
     needs: build_ubuntu_aarch64
     steps:
       - uses: actions/checkout@v4
       - name: Download build binaries for Linux aarch64
-        if: github.event.pull_request.draft == false
         uses: actions/download-artifact@v4
         with:
           name: trimal_linux_aarch64
           path: source
       - name: Test trimAl for Linux aarch64
-        if: github.event.pull_request.draft == false
         uses: uraimo/run-on-arch-action@v3
         with:
           arch: aarch64
