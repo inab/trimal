@@ -54,7 +54,7 @@ jobs:
           if-no-files-found: error
 
   build_ubuntu_aarch64:
-    if: github.event.pull_request.draft == false
+    if: github.event.pull_request.draft == false && github.event.review.state == 'approved'
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -94,7 +94,7 @@ jobs:
         run: tar -xvf source/trimal_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   test_ubuntu_aarch64:
-    if: github.event.pull_request.draft == false
+    if: github.event.pull_request.draft == false && github.event.review.state == 'approved'
     runs-on: ubuntu-22.04
     needs: build_ubuntu_aarch64
     steps:
