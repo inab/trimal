@@ -89,21 +89,15 @@ jobs:
         arch: [x86_64, aarch64]
     steps:
       - uses: actions/checkout@v4
-      - name: Download build binaries for Linux x86_64
-        if: matrix.arch == 'x86_64'
+      - name: Download build binaries for Linux ${{ matrix.arch }}
+        if: github.event.pull_request.draft == false || matrix.arch == 'x86_64'
         uses: actions/download-artifact@v4
         with:
-          name: trimal_linux_x86_64
+          name: trimal_linux_${{ matrix.arch }}
           path: source
       - name: Test trimAl for Linux x86_64
         if: matrix.arch == 'x86_64' && github.event.pull_request.draft == false
         run: tar -xvf source/trimal_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
-      - name: Download build binaries for Linux aarch64
-        if: matrix.arch == 'aarch64'
-        uses: actions/download-artifact@v4
-        with:
-          name: trimal_linux_aarch64
-          path: source
       - name: Test trimAl for Linux aarch64
         if: matrix.arch == 'aarch64' && github.event.pull_request.draft == false
         uses: uraimo/run-on-arch-action@v3
