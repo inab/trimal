@@ -20,7 +20,7 @@ name: Build
 
 jobs:
   check_release_binaries_ubuntu:
-    #if: ${{ github.event_name == 'push' }}
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-22.04
     steps:
       - name: Download release binaries for Linux_x86-64
@@ -29,7 +29,7 @@ jobs:
         run: unzip trimal_linux.zip && cd trimAl_Linux_x86-64 && file trimal && file readal && file statal
           
   test_binaries_ubuntu:
-    #if: ${{ github.event_name == 'push' }}
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-22.04
     needs: check_release_binaries_ubuntu
     steps:
@@ -39,7 +39,6 @@ jobs:
           unzip trimal_linux.zip && mv trimAl_Linux_x86-64/* source/ && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
           
   build_ubuntu:
-    #if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -59,7 +58,7 @@ jobs:
           retention-days: 1
           if-no-files-found: error
       - name: Build trimAl for Linux aarch64
-        if: matrix.arch == 'aarch64'
+        if: matrix.arch == 'aarch64' && github.event.pull_request.draft == false
         uses: uraimo/run-on-arch-action@v3
         with:
           arch: ${{ matrix.arch }}
@@ -73,7 +72,7 @@ jobs:
           run: |
             cd /trimal/source && make all && file trimal && file readal && file statal && tar -cvf trimal_bin.tar trimal
       - name: Upload build binaries for Linux aarch64
-        if: matrix.arch == 'aarch64'
+        if: matrix.arch == 'aarch64' && github.event.pull_request.draft == false
         uses: actions/upload-artifact@v4
         with:
           name: trimal_linux_aarch64
@@ -83,7 +82,6 @@ jobs:
           if-no-files-found: error
 
   test_ubuntu:
-    #if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-22.04
     needs: build_ubuntu
     strategy:
@@ -98,7 +96,7 @@ jobs:
           name: trimal_linux_x86_64
           path: source
       - name: Test trimAl for Linux x86_64
-        if: matrix.arch == 'x86_64'
+        if: matrix.arch == 'x86_64' && github.event.pull_request.draft == false
         run: tar -xvf source/trimal_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
       - name: Download build binaries for Linux aarch64
         if: matrix.arch == 'aarch64'
@@ -107,7 +105,7 @@ jobs:
           name: trimal_linux_aarch64
           path: source
       - name: Test trimAl for Linux aarch64
-        if: matrix.arch == 'aarch64'
+        if: matrix.arch == 'aarch64' && github.event.pull_request.draft == false
         uses: uraimo/run-on-arch-action@v3
         with:
           arch: ${{ matrix.arch }}
@@ -118,6 +116,7 @@ jobs:
           run: tar -xvf source/trimal_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   check_release_binaries_macos:
+    if: github.event.pull_request.draft == false
     runs-on: macos-13
     steps:
       - name: Download release binaries for MacOS x86_64
@@ -126,7 +125,7 @@ jobs:
         run: unzip trimal_macos.zip && cd trimAl_MacOS_x86-64 && file trimal && file readal && file statal
           
   test_binaries_macos:
-    #if: ${{ github.event_name == 'push' }}
+    if: github.event.pull_request.draft == false
     runs-on: macos-13
     needs: check_release_binaries_macos
     steps:
@@ -137,6 +136,7 @@ jobs:
           unzip trimal_macos.zip && mv trimAl_MacOS_x86-64/* source/ && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   build_macos:
+    if: github.event.pull_request.draft == false
     strategy:
       matrix:
         version: [macos-13, macos-14]
@@ -155,6 +155,7 @@ jobs:
           if-no-files-found: error
   
   test_macos:
+    if: github.event.pull_request.draft == false
     strategy:
       matrix:
         version: [macos-13, macos-14]
@@ -173,6 +174,7 @@ jobs:
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   check_release_binaries_windows:
+    if: github.event.pull_request.draft == false
     runs-on: windows-2022
     steps:
       - name: Download release binaries for Windows_x86-64
@@ -184,6 +186,7 @@ jobs:
           Get-Command .\trimal.exe
 
   test_binaries_windows:
+    if: github.event.pull_request.draft == false
     runs-on: windows-2022
     needs: check_release_binaries_windows
     steps:
@@ -199,6 +202,7 @@ jobs:
           powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
 
   build_windows:
+    if: github.event.pull_request.draft == false
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
@@ -229,6 +233,7 @@ jobs:
           if-no-files-found: error
 
   test_windows:
+    if: github.event.pull_request.draft == false
     runs-on: windows-2022
     needs: build_windows
     steps:
