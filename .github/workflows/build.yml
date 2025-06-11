@@ -23,10 +23,10 @@ jobs:
     #if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-22.04
     steps:
-      - name: Check release binaries
-        run: |
-          curl -L -o trimal_linux.zip https://github.com/inab/trimal/releases/latest/download/trimAl_Linux_x86-64.zip &&
-          unzip trimal_linux.zip && cd trimAl_Linux_x86-64 && file trimal && file readal && file statal
+      - name: Download release binaries for Linux_x86-64
+        run: curl -L -o trimal_linux.zip https://github.com/inab/trimal/releases/latest/download/trimAl_Linux_x86-64.zip
+      - name: Check release binaries for Linux_x86-64
+        run: unzip trimal_linux.zip && cd trimAl_Linux_x86-64 && file trimal && file readal && file statal
           
   test_binaries_ubuntu:
     #if: ${{ github.event_name == 'push' }}
@@ -120,13 +120,10 @@ jobs:
   check_release_binaries_macos:
     runs-on: macos-13
     steps:
-      - uses: actions/checkout@v4
-      - name: Download Release Binaries
-        run: |
-          curl -L -o trimal_macos.zip https://github.com/inab/trimal/releases/latest/download/trimAl_MacOS_x86-64.zip &&
-          unzip trimal_macos.zip && mv trimAl_MacOS_x86-64/* source/
-      - name: Test trimal for MacOS x86_64
-        run: file source/trimal && file source/readal && file source/statal
+      - name: Download release binaries for MacOS x86_64
+        run: curl -L -o trimal_macos.zip https://github.com/inab/trimal/releases/latest/download/trimAl_MacOS_x86-64.zip
+      - name: Check release binaries for MacOS x86_64
+        run: unzip trimal_macos.zip && cd trimAl_MacOS_x86-64 && file trimal && file readal && file statal
           
   test_binaries_macos:
     #if: ${{ github.event_name == 'push' }}
@@ -178,14 +175,13 @@ jobs:
   check_release_binaries_windows:
     runs-on: windows-2022
     steps:
-      - name: Download Release Binaries
+      - name: Download release binaries for Windows_x86-64
         run: |
           curl -L -o trimal_windows.zip https://github.com/inab/trimal/releases/latest/download/trimAl_Windows_x86-64.zip
-          powershell -Command "Expand-Archive -Path trimal_windows.zip -DestinationPath ."
-          Move-Item -Path .\trimal.exe -Destination .\source\
-      - name: Check release binaries
+      - name: Check release binaries for Windows_x86-64
         run: |
-          Get-Command .\source\trimal.exe
+          powershell -Command "Expand-Archive -Path trimal_windows.zip -DestinationPath ."
+          Get-Command .\trimal.exe
 
   test_binaries_windows:
     runs-on: windows-2022
