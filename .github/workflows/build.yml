@@ -16,6 +16,15 @@ on:
       - 'dataset/**'
       - 'scripts/**'
       - 'source/**'
+  pull_request_review:
+    branches:
+      - trimAl
+    types: [submitted]
+    paths:
+      - '.github/workflows/build.yml'
+      - 'dataset/**'
+      - 'scripts/**'
+      - 'source/**'
 
 name: Build 
 
