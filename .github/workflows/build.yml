@@ -178,11 +178,13 @@ jobs:
   check_release_binaries_windows:
     runs-on: windows-2022
     steps:
-      - name: Check release binaries
+      - name: Download Release Binaries
         run: |
           curl -L -o trimal.zip https://github.com/inab/trimal/releases/latest/download/trimAl_Windows_x86-64.zip
           powershell -Command "Expand-Archive -Path trimal.zip -DestinationPath ."
           Move-Item -Path .\trimal.exe -Destination .\source\
+      - name: Check release binaries
+        run: |
           Get-Command .\source\trimal.exe
 
   test_binaries_windows:
@@ -197,7 +199,6 @@ jobs:
           Move-Item -Path .\trimal.exe -Destination .\source\
       - name: Test trimAl for Windows
         run: |
-          Get-Command .\source\trimal.exe
           powershell -ExecutionPolicy Bypass -File .\scripts\generate_trimmed_msas.ps1
           powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
 
