@@ -2871,6 +2871,11 @@
         "count": 36,
         "uniques": 16,
         "request_date": "2025-06-10"
+      },
+      {
+        "count": 33,
+        "uniques": 14,
+        "request_date": "2025-06-11"
       }
     ]
   },
@@ -6516,6 +6521,11 @@
         "count": 182,
         "uniques": 90,
         "request_date": "2025-06-10"
+      },
+      {
+        "count": 180,
+        "uniques": 86,
+        "request_date": "2025-06-11"
       }
     ]
   },
@@ -8621,6 +8631,11 @@
         "count": 3,
         "uniques": 2,
         "request_date": "2025-06-10"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2025-06-11"
       }
     ]
   },
@@ -11346,6 +11361,11 @@
         "count": 7,
         "uniques": 6,
         "request_date": "2025-06-10"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2025-06-11"
       }
     ]
   },
@@ -14511,6 +14531,11 @@
         "count": 35,
         "uniques": 9,
         "request_date": "2025-06-10"
+      },
+      {
+        "count": 41,
+        "uniques": 10,
+        "request_date": "2025-06-11"
       }
     ]
   },
@@ -16411,6 +16436,11 @@
         "count": 13,
         "uniques": 4,
         "request_date": "2025-06-10"
+      },
+      {
+        "count": 13,
+        "uniques": 4,
+        "request_date": "2025-06-11"
       }
     ]
   },
@@ -21296,6 +21326,11 @@
         "count": 160,
         "uniques": 70,
         "request_date": "2025-06-10"
+      },
+      {
+        "count": 124,
+        "uniques": 60,
+        "request_date": "2025-06-11"
       }
     ]
   },
@@ -23561,6 +23596,21 @@
         "count": 39,
         "uniques": 23,
         "request_date": "2025-06-10"
+      },
+      {
+        "count": 28,
+        "uniques": 20,
+        "request_date": "2025-06-11"
+      }
+    ]
+  },
+  {
+    "referrer": "usegalaxy.fr",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2025-06-11"
       }
     ]
   },
@@ -26286,6 +26336,11 @@
         "count": 64,
         "uniques": 31,
         "request_date": "2025-06-10"
+      },
+      {
+        "count": 76,
+        "uniques": 34,
+        "request_date": "2025-06-11"
       }
     ]
   },
