@@ -10,6 +10,7 @@ on:
   pull_request:
     branches:
       - trimAl
+    types: [ready_for_review]
     paths:
       - '.github/workflows/build.yml'
       - 'dataset/**'
