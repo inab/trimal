@@ -2862,6 +2862,11 @@
         "count": 280,
         "uniques": 176,
         "request_date": "2025-07-22"
+      },
+      {
+        "count": 277,
+        "uniques": 176,
+        "request_date": "2025-07-23"
       }
     ]
   },
@@ -6273,6 +6278,11 @@
         "count": 15,
         "uniques": 13,
         "request_date": "2025-07-22"
+      },
+      {
+        "count": 21,
+        "uniques": 15,
+        "request_date": "2025-07-23"
       }
     ]
   },
@@ -6440,6 +6450,17 @@
         "count": 11,
         "uniques": 8,
         "request_date": "2025-05-21"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/blob/trimAl/docs/source/installation.rst",
+    "title": "trimal/docs/source/installation.rst at trimAl · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 11,
+        "uniques": 4,
+        "request_date": "2025-07-23"
       }
     ]
   },
@@ -10290,6 +10311,11 @@
         "count": 16,
         "uniques": 12,
         "request_date": "2025-07-22"
+      },
+      {
+        "count": 12,
+        "uniques": 11,
+        "request_date": "2025-07-23"
       }
     ]
   },
@@ -13678,6 +13704,11 @@
         "count": 20,
         "uniques": 17,
         "request_date": "2025-07-22"
+      },
+      {
+        "count": 25,
+        "uniques": 21,
+        "request_date": "2025-07-23"
       }
     ]
   },
@@ -16550,6 +16581,11 @@
         "count": 66,
         "uniques": 47,
         "request_date": "2025-07-22"
+      },
+      {
+        "count": 58,
+        "uniques": 45,
+        "request_date": "2025-07-23"
       }
     ]
   },
@@ -22566,6 +22602,11 @@
         "count": 14,
         "uniques": 9,
         "request_date": "2025-07-22"
+      },
+      {
+        "count": 13,
+        "uniques": 8,
+        "request_date": "2025-07-23"
       }
     ]
   },
@@ -23722,6 +23763,11 @@
         "count": 11,
         "uniques": 9,
         "request_date": "2025-07-21"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2025-07-23"
       }
     ]
   },
@@ -26049,6 +26095,11 @@
         "count": 15,
         "uniques": 13,
         "request_date": "2025-07-22"
+      },
+      {
+        "count": 15,
+        "uniques": 13,
+        "request_date": "2025-07-23"
       }
     ]
   },
@@ -28855,6 +28906,11 @@
         "count": 11,
         "uniques": 10,
         "request_date": "2025-07-22"
+      },
+      {
+        "count": 16,
+        "uniques": 12,
+        "request_date": "2025-07-23"
       }
     ]
   },
