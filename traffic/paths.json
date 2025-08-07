@@ -2937,6 +2937,11 @@
         "count": 213,
         "uniques": 159,
         "request_date": "2025-08-06"
+      },
+      {
+        "count": 224,
+        "uniques": 163,
+        "request_date": "2025-08-07"
       }
     ]
   },
@@ -6423,6 +6428,11 @@
         "count": 9,
         "uniques": 9,
         "request_date": "2025-08-06"
+      },
+      {
+        "count": 16,
+        "uniques": 13,
+        "request_date": "2025-08-07"
       }
     ]
   },
@@ -10583,6 +10593,11 @@
         "count": 10,
         "uniques": 8,
         "request_date": "2025-08-06"
+      },
+      {
+        "count": 8,
+        "uniques": 7,
+        "request_date": "2025-08-07"
       }
     ]
   },
@@ -11244,6 +11259,11 @@
         "count": 9,
         "uniques": 6,
         "request_date": "2025-08-06"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2025-08-07"
       }
     ]
   },
@@ -14056,6 +14076,11 @@
         "count": 18,
         "uniques": 15,
         "request_date": "2025-08-06"
+      },
+      {
+        "count": 18,
+        "uniques": 15,
+        "request_date": "2025-08-07"
       }
     ]
   },
@@ -17003,6 +17028,11 @@
         "count": 54,
         "uniques": 41,
         "request_date": "2025-08-06"
+      },
+      {
+        "count": 54,
+        "uniques": 41,
+        "request_date": "2025-08-07"
       }
     ]
   },
@@ -18526,6 +18556,11 @@
         "count": 12,
         "uniques": 5,
         "request_date": "2025-08-06"
+      },
+      {
+        "count": 10,
+        "uniques": 5,
+        "request_date": "2025-08-07"
       }
     ]
   },
@@ -23159,6 +23194,22 @@
         "count": 7,
         "uniques": 5,
         "request_date": "2025-08-05"
+      },
+      {
+        "count": 11,
+        "uniques": 5,
+        "request_date": "2025-08-07"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/tree/trimAl/dataset/trimmed_msas",
+    "title": "trimal/dataset/trimmed_msas at trimAl · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 7,
+        "uniques": 3,
+        "request_date": "2025-08-07"
       }
     ]
   },
@@ -24380,6 +24431,11 @@
         "count": 12,
         "uniques": 10,
         "request_date": "2025-08-04"
+      },
+      {
+        "count": 6,
+        "uniques": 6,
+        "request_date": "2025-08-07"
       }
     ]
   },
