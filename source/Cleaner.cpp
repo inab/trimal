@@ -1047,11 +1047,11 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     // Compute the maximum, the minimum and the average
     // identity values from the sequences
     arrayIdentityPosition = 0;
-    for (i = 0, gMax = 0, gMin = 1, startingPoint = 0, avg = 0; i < alig->originalNumberOfSequences; i++) {
+    for (i = 0, gMax = 0, gMin = 1, startingPoint = 0; i < alig->originalNumberOfSequences; i++) {
         comparedSequences = 0;
         if (alig->saveSequences[i] == -1) continue;
 
-        for (j = i + 1, min = 1, max = 0; j < alig->numberOfSequences; j++) {
+        for (j = i + 1, avg = 0, min = 1, max = 0; j < alig->numberOfSequences; j++) {
             if (alig->saveSequences[j] == -1) continue;
 
             max = std::max(max, identities[arrayIdentityPosition]);
@@ -1100,7 +1100,7 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
         // Start the search
         for (i = alig->numberOfSequences - 2; i >= 0; i--) {
             seqLength = seqs[i][1];
-            for (j = 0; j < clusterNum; j++)
+            for (j = 0; j < clusterNum; j++) {
                 clusterLength = cluster[j];
                 minIndex = std::min(seqLength, clusterLength);
                 maxIndex = std::max(seqLength, clusterLength);
@@ -1108,6 +1108,7 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
                 arrayPos = alig->originalNumberOfSequences * minIndex - ((minIndexSquare + (minIndex + 1)) / 2) + maxIndex;
                 if (identities[arrayPos] > startingPoint)
                     break;
+            }
 
             if (j == clusterNum) {
                 cluster[j] = seqLength;
