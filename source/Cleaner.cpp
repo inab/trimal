@@ -27,6 +27,8 @@
 
 ***************************************************************************** */
 
+#include <cassert>
+
 #include "Alignment/Alignment.h"
 #include "Statistics/Similarity.h"
 #include "Statistics/Consistency.h"
@@ -1045,7 +1047,7 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
     // Compute the maximum, the minimum and the average
     // identity values from the sequences
     arrayIdentityPosition = 0;
-    for (i = 0, gMax = 0, gMin = 1, startingPoint = 0; i < alig->originalNumberOfSequences; i++) {
+    for (i = 0, gMax = 0, gMin = 1, startingPoint = 0, avg = 0; i < alig->originalNumberOfSequences; i++) {
         comparedSequences = 0;
         if (alig->saveSequences[i] == -1) continue;
 
@@ -1059,13 +1061,15 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
             comparedSequences++;
         }
 
-        startingPoint += avg / comparedSequences;
-        gMax = std::max(gMax, max);
-        gMin = std::min(gMin, min);
-
+        if (comparedSequences > 0) {
+            startingPoint += avg / comparedSequences;
+            gMax = std::max(gMax, max);
+            gMin = std::min(gMin, min);
+        }
     }
     // Take the starting point as the average value
-    startingPoint /= arrayIdentityPosition;
+    if (arrayIdentityPosition > 0)
+        startingPoint /= arrayIdentityPosition;
 
     // Compute and sort the sequence length
     seqs = new int *[alig->numberOfSequences];
