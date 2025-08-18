@@ -39,6 +39,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <cstdint>
 #include <iosfwd>
 #include <string>
 #include <functional>

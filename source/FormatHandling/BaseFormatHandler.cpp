@@ -28,6 +28,7 @@
 ***************************************************************************** */
 
 #include <limits>
+#include <cstdint>
 
 #include <FormatHandling/FormatManager.h>
 #include "FormatHandling/FormatManager.h"
