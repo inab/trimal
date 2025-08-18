@@ -1051,7 +1051,7 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
         comparedSequences = 0;
         if (alig->saveSequences[i] == -1) continue;
 
-        for (j = i + 1; j < alig->numberOfSequences; j++) {
+        for (j = i + 1, min = 1, max = 0; j < alig->numberOfSequences; j++) {
             if (alig->saveSequences[j] == -1) continue;
 
             max = std::max(max, identities[arrayIdentityPosition]);
@@ -1068,8 +1068,7 @@ float Cleaner::getCutPointClusters(int clusterNumber) {
         }
     }
     // Take the starting point as the average value
-    if (arrayIdentityPosition > 0)
-        startingPoint /= arrayIdentityPosition;
+    if (arrayIdentityPosition > 0) startingPoint /= arrayIdentityPosition;
 
     // Compute and sort the sequence length
     seqs = new int *[alig->numberOfSequences];
