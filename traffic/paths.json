@@ -3012,6 +3012,11 @@
         "count": 109,
         "uniques": 81,
         "request_date": "2025-08-21"
+      },
+      {
+        "count": 76,
+        "uniques": 59,
+        "request_date": "2025-08-22"
       }
     ]
   },
@@ -6573,6 +6578,11 @@
         "count": 8,
         "uniques": 7,
         "request_date": "2025-08-21"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2025-08-22"
       }
     ]
   },
@@ -7561,6 +7571,11 @@
         "count": 12,
         "uniques": 12,
         "request_date": "2024-12-28"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2025-08-22"
       }
     ]
   },
@@ -10808,6 +10823,11 @@
         "count": 7,
         "uniques": 3,
         "request_date": "2025-08-21"
+      },
+      {
+        "count": 7,
+        "uniques": 3,
+        "request_date": "2025-08-22"
       }
     ]
   },
@@ -11579,6 +11599,17 @@
     ]
   },
   {
+    "path": "/inab/trimal/issues/38",
+    "title": "Compilation problem (mac os 10.13, Kernel Version: Darwin 17.0.0) · Issue #38...",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2025-08-22"
+      }
+    ]
+  },
+  {
     "path": "/inab/trimal/issues/53",
     "title": "trimAl doesn't recognise alignment · Issue #53 · inab/trimal · GitHub",
     "views": [
@@ -11798,6 +11829,17 @@
         "count": 15,
         "uniques": 3,
         "request_date": "2023-12-21"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/projects",
+    "title": "Projects · trimal · GitHub",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2025-08-22"
       }
     ]
   },
@@ -14381,6 +14423,11 @@
         "count": 16,
         "uniques": 12,
         "request_date": "2025-08-21"
+      },
+      {
+        "count": 14,
+        "uniques": 11,
+        "request_date": "2025-08-22"
       }
     ]
   },
@@ -17403,6 +17450,11 @@
         "count": 33,
         "uniques": 30,
         "request_date": "2025-08-21"
+      },
+      {
+        "count": 26,
+        "uniques": 23,
+        "request_date": "2025-08-22"
       }
     ]
   },
@@ -30374,6 +30426,11 @@
         "count": 7,
         "uniques": 6,
         "request_date": "2025-08-21"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2025-08-22"
       }
     ]
   },
@@ -30462,6 +30519,11 @@
         "count": 5,
         "uniques": 4,
         "request_date": "2025-08-20"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2025-08-22"
       }
     ]
   }
