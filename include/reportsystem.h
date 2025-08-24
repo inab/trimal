@@ -309,6 +309,14 @@ enum InfoCode {
 
     OnlyReadAndWrite                            = 6,
 
+    GapThreshold                                = 7,
+
+    SimilarityThreshold                         = 8,
+
+    ColumnsToKeep                               = 9,
+
+    BlockSize                                   = 10,
+
 
     __MAXINFO
 };

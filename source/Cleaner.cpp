@@ -110,6 +110,9 @@ Alignment *Cleaner::cleanByCutValueOverpass(
     int residueIndex, numberColumnsToRecover, *keptResiduesGaps;
     int oldNumberKeptResidues = 0, newNumberKeptResidues = 0;
     Alignment *newAlig = new Alignment(*alig);
+    
+    double maxGapThreshold = ((double) maxGaps / alig->originalNumberOfSequences) * 100.0;
+    debug.report(InfoCode::GapThreshold, new std::string[2]{std::to_string((int) maxGaps), std::to_string(maxGapThreshold)});
 
     // Select the columns with a gaps value
     // less or equal than the cut point.
@@ -127,6 +130,11 @@ Alignment *Cleaner::cleanByCutValueOverpass(
         
         oldNumberKeptResidues++;
     }
+
+    double percentageColumnsOriginal = ((double) oldNumberKeptResidues / alig->originalNumberOfResidues) * 100.0;
+    debug.report(InfoCode::ColumnsToKeep, new std::string[3]{"before gappyout method", std::to_string(oldNumberKeptResidues), std::to_string(percentageColumnsOriginal)});
+    percentageColumnsOriginal = ((double) newNumberKeptResidues / alig->originalNumberOfResidues) * 100.0;
+    debug.report(InfoCode::ColumnsToKeep, new std::string[3]{"after gappyout method clean based on gaps", std::to_string(newNumberKeptResidues), std::to_string(percentageColumnsOriginal)});
 
     alig->numberOfResidues = oldNumberKeptResidues;
     float minCoverageRatio;
@@ -194,6 +202,7 @@ Alignment *Cleaner::cleanByCutValueOverpass(
                         if (gapsInColumn[residueIndex] <= maxGaps) {
                             newAlig->saveResidues[residueIndex] = residueIndex;
                             numberColumnsToRecover--;
+                            newNumberKeptResidues++;
                         } else {
                             break;
                         }
@@ -220,6 +229,7 @@ Alignment *Cleaner::cleanByCutValueOverpass(
                         if (gapsInColumn[residueIndex] <= maxGaps) {
                             newAlig->saveResidues[residueIndex] = residueIndex;
                             numberColumnsToRecover--;
+                            newNumberKeptResidues++;
                         } else {
                             break;
                         }
@@ -231,15 +241,19 @@ Alignment *Cleaner::cleanByCutValueOverpass(
         }
     }
 
+    percentageColumnsOriginal = ((double) newNumberKeptResidues / alig->originalNumberOfResidues) * 100.0;
+    debug.report(InfoCode::ColumnsToKeep, new std::string[3]{"after gappyout method column recovering based on minimum coverage", std::to_string(newNumberKeptResidues), std::to_string(percentageColumnsOriginal)});
+
     newAlig->Cleaning->removeSmallerBlocks(blockSize, *alig);
 
     // Check for any additional column/sequence to be removed
     // Compute new sequences and columns numbers
     newAlig->Cleaning->removeAllGapsSeqsAndCols();
 
+
+
     // Return the new alignment reference
     return newAlig;
-
 }
 
 Alignment *Cleaner::cleanByCutValueFallBehind(
@@ -252,6 +266,8 @@ Alignment *Cleaner::cleanByCutValueFallBehind(
     StartTiming("Alignment *Cleaner::cleanByCutValueFallBehind(float cut, float baseLine, const float *ValueVect, bool complementary) ");
     int i, j, k, jn, oth, block = 0, residues;
     Alignment *newAlig = new Alignment(*alig);
+
+    debug.report(InfoCode::SimilarityThreshold, new std::string[1]{std::to_string(cut)});
 
     // Select the columns with a gaps value
     // less or equal than the cut point.
@@ -532,12 +548,30 @@ Alignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, con
     int i, x, pos, counter, lenBlock;
     Alignment *newAlig = new Alignment(*alig);
 
+    double maxGapThreshold = ((double) gapCut / alig->originalNumberOfSequences) * 100.0;
+    debug.report(InfoCode::GapThreshold, new std::string[2]{std::to_string(gapCut), std::to_string(maxGapThreshold)});
+    debug.report(InfoCode::SimilarityThreshold, new std::string[1]{std::to_string(simCut)});
 
     // Reject columns with gaps number greater than the gap threshold.
-    for (i = 0; i < alig->originalNumberOfResidues; i++) {
-        if (gInCol[i] > gapCut || MDK_W[i] < simCut)
-            newAlig->saveResidues[i] = -1;
+    int residueIndex = 0;
+    int oldNumberKeptResidues = 0;
+    int newNumberKeptResidues = 0;
+    for (residueIndex = 0; residueIndex < alig->originalNumberOfResidues; residueIndex++) {
+        if (alig->saveResidues[residueIndex] == -1) continue;
+
+        if (gInCol[residueIndex] > gapCut || MDK_W[residueIndex] < simCut) {
+            newAlig->saveResidues[residueIndex] = -1;
+        } else {
+            newNumberKeptResidues++;
+        }
+
+        oldNumberKeptResidues++;
     }
+
+    double percentageColumnsOriginal = ((double) oldNumberKeptResidues / alig->originalNumberOfResidues) * 100.0;
+    debug.report(InfoCode::ColumnsToKeep, new std::string[3]{"before strict method", std::to_string(oldNumberKeptResidues), std::to_string(percentageColumnsOriginal)});
+    percentageColumnsOriginal = ((double) newNumberKeptResidues / alig->originalNumberOfResidues) * 100.0;
+    debug.report(InfoCode::ColumnsToKeep, new std::string[3]{"after strict method clean based on gaps and similarity", std::to_string(newNumberKeptResidues), std::to_string(percentageColumnsOriginal)});
 
     // Rescue residues based on their neighbouring residues. We are going to rescue those residues that would be rejected but have at least, 3 non-rejected residues.
     {
@@ -559,68 +593,88 @@ Alignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, con
 
         // Special case: Position 0 of newAlig
         if (num > 2) {
-            if (rejectResiduesBuffer[0])
-                newAlig->saveResidues[positionResidueBuffer[0]] =
-                        // Compare the sum of the booleans to 0. If any of the neighbours is rejected, we don't have 3 non-rejected residues.
-                        (rejectResiduesBuffer[1] +
-                         rejectResiduesBuffer[2]) > 0 ? -1 : positionResidueBuffer[0];
+            if (rejectResiduesBuffer[0]) {
+                // If any of the neighbours is rejected, we don't have 3 non-rejected residues.
+                int numNeighboursRejected = rejectResiduesBuffer[1] + rejectResiduesBuffer[2];
+                bool allNeighboursKept = numNeighboursRejected == 0;
+                if (allNeighboursKept) {
+                    newAlig->saveResidues[positionResidueBuffer[0]] = positionResidueBuffer[0];
+                    newNumberKeptResidues++;
+                }
+            }
         }
         // Special case: Position 1
         {
             // Special case: Position 1 of newAlig in case the alignment has more than 3 residues.
             if (num > 3) {
-                if (rejectResiduesBuffer[1])
-                    newAlig->saveResidues[positionResidueBuffer[1]] =
-                            // Compare the sum of the booleans to 0. If any of the neighbours is rejected, we don't have 3 non-rejected residues.
-                            (rejectResiduesBuffer[0] +
-                             rejectResiduesBuffer[2] +
-                             rejectResiduesBuffer[3]) > 0 ? -1 : positionResidueBuffer[1];
+                if (rejectResiduesBuffer[1]) {
+                    int numNeighboursRejected = rejectResiduesBuffer[0] + rejectResiduesBuffer[2] + rejectResiduesBuffer[3];
+                    bool allNeighboursKept = numNeighboursRejected == 0;
+                    if (allNeighboursKept) {
+                        newAlig->saveResidues[positionResidueBuffer[1]] = positionResidueBuffer[1];
+                        newNumberKeptResidues++;
+                    }
+                }
             }
-                // Special case: Position 1 of newAlig in case the alignment has 3 residues.
+
+            // Special case: Position 1 of newAlig in case the alignment has 3 residues.
             else if (num > 2) {
-                if (rejectResiduesBuffer[1])
-                    newAlig->saveResidues[positionResidueBuffer[1]] =
-                            // Compare the sum of the booleans to 0. If any of the neighbours is rejected, we don't have 3 non-rejected residues.
-                            (rejectResiduesBuffer[0] +
-                             rejectResiduesBuffer[2]) > 0 ? -1 : positionResidueBuffer[1];
+                if (rejectResiduesBuffer[1]) {
+                    int numNeighboursRejected = rejectResiduesBuffer[0] + rejectResiduesBuffer[2];
+                    bool allNeighboursKept = numNeighboursRejected == 0;
+                    if (allNeighboursKept) {
+                        newAlig->saveResidues[positionResidueBuffer[1]] = positionResidueBuffer[1];
+                        newNumberKeptResidues++;
+                    }
+                }
             }
         }
+
         // Special case: Position 2
         {
             // Special case: Position 2 of newAlig in case the alignment has more than 4 residues.
             if (num > 4) {
-                if (rejectResiduesBuffer[2])
-                    newAlig->saveResidues[positionResidueBuffer[2]] =
-                            // Compare the sum of the booleans to 0. As we have 4 neighbours to compare and only need 3 of them to be non-rejected,
-                            //      we can have 1 rejected residue on the neighbouring.
-                            (rejectResiduesBuffer[0] +
-                             rejectResiduesBuffer[1] +
-                             rejectResiduesBuffer[3] +
-                             rejectResiduesBuffer[4]) > 1 ? -1 : positionResidueBuffer[2];
+                if (rejectResiduesBuffer[2]) {
+                    // As we have 4 neighbours to compare and only need 3 of them to be non-rejected,
+                    //      we can have 1 rejected residue on the neighbouring.
+                    int numNeighboursRejected = rejectResiduesBuffer[0] + rejectResiduesBuffer[1] + rejectResiduesBuffer[3] + rejectResiduesBuffer[4];
+                    bool threeOrMoreNeighboursKept = numNeighboursRejected <= 1;
+                    if (threeOrMoreNeighboursKept) {
+                        newAlig->saveResidues[positionResidueBuffer[2]] = positionResidueBuffer[2];
+                        newNumberKeptResidues++;
+                    }
+                }
             }
-                // Special case: Position 2 of newAlig in case the alignment has 4 residues
+
+            // Special case: Position 2 of newAlig in case the alignment has 4 residues
             else if (num > 3) {
-                if (rejectResiduesBuffer[2])
-                    newAlig->saveResidues[positionResidueBuffer[2]] =
-                            // Compare the sum of the booleans to 0. As we have 4 neighbours to compare and only need 3 of them to be non-rejected,
-                            //      we can have 1 rejected residue on the neighbouring.
-                            (rejectResiduesBuffer[0] +
-                             rejectResiduesBuffer[1] +
-                             rejectResiduesBuffer[3]) > 0 ? -1 : positionResidueBuffer[2];
+                if (rejectResiduesBuffer[2]) {
+                    // As we have 4 neighbours to compare and only need 3 of them to be non-rejected,
+                    //      we can have 1 rejected residue on the neighbouring.
+                    int numNeighboursRejected = rejectResiduesBuffer[0] + rejectResiduesBuffer[1] + rejectResiduesBuffer[3];
+                    bool allNeighboursKept = numNeighboursRejected == 0;
+                    if (allNeighboursKept) {
+                        newAlig->saveResidues[positionResidueBuffer[2]] = positionResidueBuffer[2];
+                        newNumberKeptResidues++;
+                    }
+                }
             }
-                // Special case: Position 2 of newAlig in case the alignment has 3 residues
+
+            // Special case: Position 2 of newAlig in case the alignment has 3 residues
             else if (num > 2) {
-                if (rejectResiduesBuffer[2])
-                    newAlig->saveResidues[positionResidueBuffer[2]] =
-                            // Compare the sum of the booleans to 0. As we have 4 neighbours to compare and only need 3 of them to be non-rejected,
-                            //      we can have 1 rejected residue on the neighbouring.
-                            (rejectResiduesBuffer[0] +
-                             rejectResiduesBuffer[1]) > 0 ? -1 : positionResidueBuffer[2];
+                if (rejectResiduesBuffer[2]) {
+                    int numNeighboursRejected = rejectResiduesBuffer[0] + rejectResiduesBuffer[1];
+                    bool allNeighboursKept = numNeighboursRejected == 0;
+                    if (allNeighboursKept) {
+                        newAlig->saveResidues[positionResidueBuffer[2]] = positionResidueBuffer[2];
+                        newNumberKeptResidues++;
+                    }
+                }
             }
         }
 
         // Move the window until it arrives to the end of the alignment.
-        if (num == 5)
+        if (num == 5) {
             for (; i < alig->originalNumberOfResidues; i++) {
                 if (alig->saveResidues[i] == -1) continue;
                     // If we find a new newAlig residue...
@@ -637,45 +691,64 @@ Alignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, con
                         // Take a look at the neighbours of the new middle-point, positionResidueBuffer[2].
                         // As we stored the rejectResiduesBuffer as booleans, we can add them and compare the result.
                         // If the result is bigger than 1, means that we have rejected at least 2 neighbouring residues, thus, we cannot rescue this residue.
-                        newAlig->saveResidues[positionResidueBuffer[2]] =
-                                (rejectResiduesBuffer[0] +
-                                 rejectResiduesBuffer[1] +
-                                 rejectResiduesBuffer[3] +
-                                 rejectResiduesBuffer[4]) > 1 ? -1 : positionResidueBuffer[2];
+                        int numNeighboursRejected = rejectResiduesBuffer[0] + rejectResiduesBuffer[1] + rejectResiduesBuffer[3] + rejectResiduesBuffer[4];
+                        bool threeOrMoreNeighboursKept = numNeighboursRejected <= 1;
+                        if (threeOrMoreNeighboursKept) {
+                            newAlig->saveResidues[positionResidueBuffer[2]] = positionResidueBuffer[2];
+                            newNumberKeptResidues++;
+                        }
                     }
                 }
             }
+        }
 
         // Special case: Position -1 of newAlig
         {
             if (num > 4) {
-                if (rejectResiduesBuffer[3])
-                    newAlig->saveResidues[positionResidueBuffer[3]] =
-                            (rejectResiduesBuffer[1] +
-                             rejectResiduesBuffer[2] +
-                             rejectResiduesBuffer[4]) > 0 ? -1 : positionResidueBuffer[3];
+                if (rejectResiduesBuffer[3]) {
+                    int numNeighboursRejected = rejectResiduesBuffer[1] + rejectResiduesBuffer[2] + rejectResiduesBuffer[4];
+                    bool allNeighboursKept = numNeighboursRejected == 0;
+                    if (allNeighboursKept) {
+                        newAlig->saveResidues[positionResidueBuffer[3]] = positionResidueBuffer[3];
+                        newNumberKeptResidues++;
+                    }
+                }
             } else if (num > 3) {
-                if (rejectResiduesBuffer[2])
-                    newAlig->saveResidues[positionResidueBuffer[2]] =
-                            (rejectResiduesBuffer[0] +
-                             rejectResiduesBuffer[1] +
-                             rejectResiduesBuffer[3]) > 0 ? -1 : positionResidueBuffer[2];
+                if (rejectResiduesBuffer[2]) {
+                    int numNeighboursRejected = rejectResiduesBuffer[0] + rejectResiduesBuffer[1] + rejectResiduesBuffer[3];
+                    bool allNeighboursKept = numNeighboursRejected == 0;
+                    if (allNeighboursKept) {
+                        newAlig->saveResidues[positionResidueBuffer[2]] = positionResidueBuffer[2];
+                        newNumberKeptResidues++;
+                    }
+                }
             }
         }
+
         // Special case: Position -2 of newAlig
         if (num > 4) {
-            if (rejectResiduesBuffer[4])
-                newAlig->saveResidues[positionResidueBuffer[4]] =
-                        (rejectResiduesBuffer[2] +
-                         rejectResiduesBuffer[3]) > 0 ? -1 : positionResidueBuffer[4];
+            if (rejectResiduesBuffer[4]) {
+                int numNeighboursRejected = rejectResiduesBuffer[2] + rejectResiduesBuffer[3];
+                bool allNeighboursKept = numNeighboursRejected == 0;
+                if (allNeighboursKept) {
+                    newAlig->saveResidues[positionResidueBuffer[4]] = positionResidueBuffer[4];
+                    newNumberKeptResidues++;
+                }
+            }
         } else if (num > 3) {
-            if (rejectResiduesBuffer[3])
-                newAlig->saveResidues[positionResidueBuffer[4]] =
-                        (rejectResiduesBuffer[1] +
-                         rejectResiduesBuffer[2]) > 0 ? -1 : positionResidueBuffer[3];
+            if (rejectResiduesBuffer[3]) {
+                int numNeighboursRejected = rejectResiduesBuffer[1] + rejectResiduesBuffer[2];
+                bool allNeighboursKept = numNeighboursRejected == 0;
+                if (allNeighboursKept) {
+                    newAlig->saveResidues[positionResidueBuffer[3]] = positionResidueBuffer[3];
+                    newNumberKeptResidues++;
+                }
+            }
         }
     }
 
+    percentageColumnsOriginal = ((double) newNumberKeptResidues / alig->originalNumberOfResidues) * 100.0;
+    debug.report(InfoCode::ColumnsToKeep, new std::string[3]{"after strict method recovered neighbours", std::to_string(newNumberKeptResidues), std::to_string(percentageColumnsOriginal)});
 
     // Select blocks size based on user input. It can be set either to 5 or to a
     // variable number between 3 and 12 depending on alignment's length (1% alig)
@@ -721,6 +794,10 @@ Alignment *Cleaner::cleanStrict(int gapCut, const int *gInCol, float simCut, con
     // Check for any additional column/sequence to be removed
     // Compute new sequences and columns numbers
     newAlig->Cleaning->removeAllGapsSeqsAndCols();
+
+    percentageColumnsOriginal = ((double) newAlig->numberOfResidues / alig->originalNumberOfResidues) * 100.0;
+    debug.report(InfoCode::BlockSize, new std::string[1]{std::to_string(blockSize)});
+    debug.report(InfoCode::ColumnsToKeep, new std::string[3]{"after strict method filtered by block size", std::to_string(newAlig->numberOfResidues), std::to_string(percentageColumnsOriginal)});
 
     return newAlig;
 }
