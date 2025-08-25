@@ -3027,6 +3027,11 @@
         "count": 58,
         "uniques": 45,
         "request_date": "2025-08-24"
+      },
+      {
+        "count": 36,
+        "uniques": 29,
+        "request_date": "2025-08-25"
       }
     ]
   },
@@ -3400,6 +3405,17 @@
         "count": 26,
         "uniques": 1,
         "request_date": "2023-12-28"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/activity",
+    "title": "Activity · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 1,
+        "uniques": 1,
+        "request_date": "2025-08-25"
       }
     ]
   },
@@ -7606,6 +7622,22 @@
         "count": 2,
         "uniques": 2,
         "request_date": "2025-08-24"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2025-08-25"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/commit/ea0bfbd633e1937ed5a25c5a9372581911108f33",
+    "title": "Run workflow only on main branch · inab/trimal@ea0bfbd · GitHub",
+    "views": [
+      {
+        "count": 2,
+        "uniques": 1,
+        "request_date": "2025-08-25"
       }
     ]
   },
@@ -10868,6 +10900,11 @@
         "count": 7,
         "uniques": 3,
         "request_date": "2025-08-24"
+      },
+      {
+        "count": 6,
+        "uniques": 2,
+        "request_date": "2025-08-25"
       }
     ]
   },
@@ -11656,6 +11693,11 @@
         "count": 2,
         "uniques": 2,
         "request_date": "2025-08-24"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2025-08-25"
       }
     ]
   },
@@ -14493,6 +14535,11 @@
         "count": 12,
         "uniques": 9,
         "request_date": "2025-08-24"
+      },
+      {
+        "count": 8,
+        "uniques": 8,
+        "request_date": "2025-08-25"
       }
     ]
   },
@@ -17530,6 +17577,11 @@
         "count": 22,
         "uniques": 19,
         "request_date": "2025-08-24"
+      },
+      {
+        "count": 17,
+        "uniques": 14,
+        "request_date": "2025-08-25"
       }
     ]
   },
@@ -30521,6 +30573,11 @@
         "count": 2,
         "uniques": 2,
         "request_date": "2025-08-24"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2025-08-25"
       }
     ]
   },
@@ -30624,6 +30681,11 @@
         "count": 3,
         "uniques": 3,
         "request_date": "2025-08-24"
+      },
+      {
+        "count": 2,
+        "uniques": 2,
+        "request_date": "2025-08-25"
       }
     ]
   }
