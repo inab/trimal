@@ -404,6 +404,14 @@ Statistics to be calculated and outputted by trimAl
 
         Print accumulated similarity scores for the input alignment.
 
+.. option:: -sec
+
+        Print entropy scores for each column in the input alignment.
+
+.. option:: -set
+
+        Print accumulated entropy scores for the input alignment.
+
 .. option:: -sfc
 
         Print sum-of-pairs scores for each column from the selected alignment.

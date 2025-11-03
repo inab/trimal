@@ -77,6 +77,8 @@ namespace trimAlManagerTestIncludes
                 {"-sgt",        manager.sgt},     // Gap accumulated
                 {"-ssc",        manager.ssc},     // Similarity per column
                 {"-sst",        manager.sst},     // Similarity accumulated
+                {"-sec",        manager.sec},     // Entropy per column
+                {"-set",        manager.set},     // Entropy accumulated
                 {"-sident",     manager.sident},  // Identity scores
                 {"-soverlap",   manager.soverlap} // Overlap score matrix
             };
@@ -86,6 +88,8 @@ namespace trimAlManagerTestIncludes
                 {"-sgt",        manager.sgt},      // Gap accumulated
                 {"-ssc",        manager.ssc},      // Similarity per column
                 {"-sst",        manager.sst},      // Similarity accumulated
+                {"-sec",        manager.sec},      // Entropy per column
+                {"-set",        manager.set},      // Entropy accumulated
                 {"-sident",     manager.sident},   // Identity scores
                 {"-soverlap",   manager.soverlap}, // Overlap score matrix
                 {"-sfc",        manager.sfc},      // Consistency per column
