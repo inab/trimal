@@ -34,6 +34,7 @@
 #include "Statistics/Gaps.h"
 #include "Statistics/Identity.h"
 #include "Statistics/Overlap.h"
+#include "Statistics/Entropy.h"
 #include "InternalBenchmarker.h"
 #include "reportsystem.h"
 #include "defines.h"
@@ -1047,6 +1048,76 @@ Alignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) {
     Alignment *ret = cleanStrict(gapCut, alig->Statistics->gaps->getGapsWindow(),
                                     simCut, alig->Statistics->similarity->getMdkWindowedVector(),
                                     complementarity, variable);
+
+    // Deallocate local memory
+    delete[] vectAux;
+    delete[] positions;
+
+    // Return a reference of the new Alignment
+    return ret;
+}
+
+Alignment *Cleaner::cleanCombMethodsE(bool complementarity, bool variable) {
+    // Create a timer that will report times upon its destruction
+    //	which means the end of the current scope.
+    StartTiming("Alignment *Cleaner::cleanCombMethods(bool complementarity, bool variable) ");
+
+    float simCut, first20Point, last80Point, *entropy, *vectAux;
+    int i, j, acm, gapCut, *positions, *gaps;
+    double inic, fin, vlr;
+
+    // If similarity's statistics are not calculated, we calculate them
+    if (!alig->Statistics->calculateEntropyStats())
+        return nullptr;
+
+    // Computes the gap cut point using a automatic method and at the same time, we get the gaps values from the Alignment.
+    gapCut = alig->Statistics->gaps->calcCutPoint2ndSlope();
+    gaps = alig->Statistics->gaps->getGapsWindow();
+
+    entropy = alig->Statistics->entropy->getValues();
+
+    // Allocate local memory and initializate it to -1
+    positions = new int[alig->originalNumberOfResidues];
+    utils::initlVect(positions, alig->originalNumberOfResidues, -1);
+    // The method only selects columns with gaps number less or equal than the gap's cut point.
+    // Counts the number of columns that have been selected
+    for (i = 0, acm = 0; i < alig->originalNumberOfResidues; i++) {
+        if (alig->saveResidues[i] == -1) continue;
+        if (gaps[i] <= gapCut) {
+            positions[i] = i;
+            acm++;
+        }
+    }
+    // Allocate local memory and save the entropy values for the columns that have been selected
+    vectAux = new float[acm];
+    for (i = 0, j = 0; i < alig->originalNumberOfResidues; i++)
+        if (positions[i] != -1)
+            vectAux[j++] = entropy[i];
+
+    // Sort the similarity's value vector.
+    utils::quicksort(vectAux, 0, acm - 1);
+
+    // ...and search for the vector points at the 20 and 80% of length.
+    first20Point = 0;
+    last80Point = 0;
+
+    for (i = acm - 1, j = 1; i >= 0; i--, j++) {
+        if ((((float) j / acm) * 100.0) <= 20.0)
+            first20Point = vectAux[i];
+        if ((((float) j / acm) * 100.0) <= 80.0)
+            last80Point = vectAux[i];
+    }
+
+    // Computes the logaritmic's values for those points. Finally the method computes the similarity cut point using these values.
+    inic = log10(first20Point);
+    fin = log10(last80Point);
+    vlr = ((inic - fin) / 10) + fin;
+    simCut = (float) pow(10, vlr);
+
+    // Clean the Alignment and generate a new Alignment object using the gaps cut and the similaritys cut values
+    Alignment *ret = cleanStrict(gapCut, alig->Statistics->gaps->getGapsWindow(),
+                                 simCut, alig->Statistics->entropy->getValues(),
+                                 complementarity, variable);
 
     // Deallocate local memory
     delete[] vectAux;

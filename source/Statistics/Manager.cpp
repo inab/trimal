@@ -42,6 +42,7 @@
 #include "Statistics/Identity.h"
 #include "Statistics/Manager.h"
 #include "Statistics/Overlap.h"
+#include "Statistics/Entropy.h"
 #include "reportsystem.h"
 #include "InternalBenchmarker.h"
 
@@ -139,6 +140,26 @@ namespace statistics {
             // then prints the information
             alig->Statistics->similarity->printConservationAcl();
 
+    }
+
+    void Manager::printStatisticsEntropyColumns() {
+        // Create a timerLevel that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("void Manager::printStatisticsConservationColumns(void) ");
+
+        if (calculateEntropyStats()) {
+            alig->Statistics->entropy->printConservationColumns();
+        }
+    }
+
+    void Manager::printStatisticsEntropyTotal() {
+        // Create a timerLevel that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("void Manager::printStatisticsConservationTotal(void) ");
+
+        if (calculateEntropyStats()) {
+            alig->Statistics->entropy->printConservationAcl();
+        }
     }
 
     bool Manager::setSimilarityMatrix(similarityMatrix *sm) {
@@ -259,6 +280,33 @@ namespace statistics {
             gaps->CalculateVectors();
         }
         return gaps->applyWindow(ghWindow);
+    }
+
+    bool Manager::calculateEntropyStats() {
+        // Create a timerLevel that will report times upon its destruction
+        //	which means the end of the current scope.
+        StartTiming("bool Manager::calculateGapStats(void) ");
+
+        if (!calculateGapStats()) {
+            return false;
+        }
+
+        if (entropy == nullptr) {
+            entropy = new Entropy(alig);
+            entropy->applyWindow(ghWindow);
+        }
+
+        if (!entropy->calculateVectors(false)) {
+            return false;
+        }
+
+        // Ask to know if it is necessary to apply any window
+        // method. If it's necessary, we apply it
+        if (alig->Statistics->entropy->isDefinedWindow()) {
+            return true;
+        } else {
+            return alig->Statistics->entropy->applyWindow(ehWindow);
+        }
     }
 
     bool Manager::calculateSeqIdentity() {
@@ -546,6 +594,28 @@ namespace statistics {
             default:
                 overlap = new Overlap(parent, mold->overlap);                
             }
+
+        if (mold->entropy) {
+            switch (platform) {
+#ifdef HAVE_AVX2
+            case(ComputePlatform::AVX2):
+                entropy = new AVX2Entropy(parent, mold->entropy);
+                break;
+#endif
+#ifdef HAVE_SSE2
+            case(ComputePlatform::SSE2):
+                entropy = new SSE2Entropy(parent, mold->entropy);
+                break;
+#endif
+#ifdef HAVE_NEON
+            case(ComputePlatform::NEON):
+                entropy = new NEONEntropy(parent, mold->entropy);
+                break;
+#endif
+            default:
+                entropy = new Entropy(parent, mold->entropy);
+            }
+        }
     }
 
     Manager::~Manager() {

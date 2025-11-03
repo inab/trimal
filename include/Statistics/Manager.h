@@ -44,6 +44,7 @@ namespace statistics {
     class Consistency;
     class Identity;
     class Overlap;
+    class Entropy;
 
     /**
      * \brief Enum to store the different supported compute kernels for the statistics.
@@ -89,6 +90,11 @@ namespace statistics {
         Overlap *overlap = nullptr;
 
         /**
+         * \brief Entropy submodule
+         */
+        Entropy *entropy = nullptr;
+
+        /**
          * \brief SimilarityMatrix used by Similarity
          * */
         similarityMatrix *_similarityMatrix = nullptr;
@@ -101,6 +107,11 @@ namespace statistics {
          * \brief Similarity window
          * */
         int shWindow;
+
+        /**
+         * \brief Entropy window
+         * */
+        int ehWindow;
 
         /**
          * \brief Method to set a similarity matrix
@@ -130,6 +141,24 @@ namespace statistics {
          * It calls to calculateGapStats() to make sure the information is available before reporting the requested values
          * */
         void printStatisticsGapsTotal();
+
+        /**
+         * \brief Method to handle gap stat calculation\n
+         * It checks if the #gaps submodule has been created, otherwise, creates it
+         * */
+        bool calculateEntropyStats();
+
+        /**
+         * \brief Wrapper to Statistics::Gaps::printGapsColumns()\n
+         * It calls to calculateGapStats() to make sure the information is available before reporting the requested values
+         * */
+        void printStatisticsEntropyColumns();
+
+        /**
+         * \brief Wrapper to Statistics::Gaps::printGapsAcl()\n
+         * It calls to calculateGapStats() to make sure the information is available before reporting the requested values
+         * */
+        void printStatisticsEntropyTotal();
 
         /**
          * \brief Method to handle similarity stat calculation\n

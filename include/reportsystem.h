@@ -257,7 +257,9 @@ enum ErrorCode {
 
 
     ForceSelectAndInArgumentsProvided                   = 108,
-    ComparesetAndInArgumentsProvided                   = 109,
+    ComparesetAndInArgumentsProvided                    = 109,
+
+    EntropyWindowTooBig                                 = 110,
 
 
     __MAXERROR,

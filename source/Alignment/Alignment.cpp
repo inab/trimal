@@ -242,12 +242,13 @@ int Alignment::getNumAminos(void) {
     return numberOfResidues;
 }
 
-void Alignment::setWindowsSize(int ghWindow_, int shWindow_) {
+void Alignment::setWindowsSize(int ghWindow_, int shWindow_, int ehWindow_) {
     // Create a timer that will report times upon its destruction
     //	which means the end of the current scope.
-    StartTiming("void Alignment::setWindowsSize(int ghWindow_, int shWindow_) ");
+    StartTiming("void Alignment::setWindowsSize(int ghWindow_, int shWindow_, int ehWindow_) ");
     Statistics->ghWindow = ghWindow_;
     Statistics->shWindow = shWindow_;
+    Statistics->ehWindow = ehWindow_;
 }
 
 void Alignment::setBlockSize(int blockSize_) {
@@ -1529,6 +1530,15 @@ bool Alignment::statSVG(const char *const destFile) {
                 addStat(vectAux, "Consistency", "Green");
             }
 
+            if (Statistics->entropy != nullptr)
+            {
+                // Make a copy of the values, to allow reordering without modification.
+                for (int i = 0; i < originalNumberOfResidues; i++)
+                    vectAux[i] = Statistics->entropy->getValues()[i];
+
+                addStat(vectAux, "Entropy", "Orange");
+            }
+
             // Delete the temporal values array
             delete [] vectAux;
 
@@ -1594,6 +1604,10 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *const de
     float *consValues = nullptr;
     if (Statistics->consistency != nullptr)
         consValues = Statistics->consistency->getValues();
+
+    float *entropyValues = nullptr;
+    if (Statistics->entropy != nullptr)
+        consValues = Statistics->entropy->getValues();
 
     // Check if alignment is aligned;
     if (!isAligned) {
@@ -1749,7 +1763,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *const de
 
          << "</text>" << endl;
     currentHeight += fontSize * 2;
-    filename = "Selected Sequences \t" + std::to_string(trimmedAlig.numberOfSequences) + " / " + std::to_string(originalNumberOfSequences);
+    std::string helper = "Selected Sequences \t" + std::to_string(trimmedAlig.numberOfSequences) + " / " + std::to_string(originalNumberOfSequences);
     file << "<text \
                 font-family = \"monospace\" \
                 font-size=\"" << fontSize << "px\" \
@@ -1763,11 +1777,11 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *const de
                 style=\"font-weight:100\" \
                 xml:space=\"preserve\" >"
 
-         << filename
+         << helper
 
          << "</text>" << endl;
     currentHeight += fontSize * 2;
-    filename = "Selected Residues \t\t" + std::to_string(trimmedAlig.numberOfResidues) + " / " + std::to_string(originalNumberOfResidues);
+    helper = "Selected Residues \t\t" + std::to_string(trimmedAlig.numberOfResidues) + " / " + std::to_string(originalNumberOfResidues);
     file << "<text \
                 font-family = \"monospace\" \
                 font-size=\"" << fontSize << "px\" \
@@ -1777,11 +1791,11 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *const de
                 kerning=\"0\" \
                 text-anchor=\"start\" \
                 lengthAdjust=\"spacingAndGlyphs\"\
-                textLength=\"" << std::min((float) filename.size() * 0.65F, (float) sequencesNamesLength) * fontSize << "\" \
+                textLength=\"" << std::min((float) helper.size() * 0.65F, (float) sequencesNamesLength) * fontSize << "\" \
                 style=\"font-weight:100\" \
                 xml:space=\"preserve\" >"
 
-         << filename
+         << helper
 
          << "</text>" << endl;
     currentHeight += fontSize * 3;
@@ -2036,7 +2050,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *const de
         // END
 
         // BEGIN Stats report
-        if (gapsValues || simValues || consValues) {
+        if (gapsValues || simValues || consValues || entropyValues) {
             file << "<text \
                         font-family = \"monospace\" \
                         font-size=\"" << fontSize << "px\" \
@@ -2069,6 +2083,7 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *const de
 
                  << "</text>" << endl;
         }
+
         if (gapsValues) {
             file << "<polyline \
                         style=\"fill:none;stroke:black;stroke-width:1\" \
@@ -2200,6 +2215,51 @@ bool Alignment::alignmentSummarySVG(Alignment &trimmedAlig, const char *const de
                  << " id =\"ConsSubLine" << counter << "\""
                  << "/>" << endl;
         }
+
+        if (entropyValues) {
+            file << "<polyline \
+                style=\"fill:none;stroke:black;stroke-width:1\" \
+                stroke-dasharray=\"2,2\" \
+                id =\"ConsLine" << counter << "\" \
+                onmouseover=\"onMouseOverLine(evt)\" \
+                onmouseout=\"onMouseOutLine(evt)\" \
+                points=\"";
+
+            for (i = 0; i < blocks && (i + j) < originalNumberOfResidues; i++) {
+                file << leftMargin + nameBlocksMargin + (sequencesNamesLength) * fontSize + (i + 0.5F) * 0.75F * fontSize << ","
+                     << currentHeight + 10 + ((1.F - entropyValues[i + j]) * fontSize * 4) << " ";
+            }
+
+            file << "\"/>";
+
+            file << "<text \
+                        font-family = \"monospace\" \
+                        font-size=\"" << fontSize << "px\" \
+                        dy=\".35em\" \
+                        x =\"" << leftMargin << "\" \
+                        y=\"" << (currentHeight + 4.5F * fontSize) << "\" \
+                        kerning=\"0\" \
+                        text-anchor=\"start\" \
+                        id =\"ConsLabel" << counter << "\" \
+                        onmouseover=\"onMouseOverLabel(evt)\" \
+                        onmouseout=\"onMouseOutLabel(evt)\" \
+                        textLength=\"" << std::min(10 * 0.75F, (float) sequencesNamesLength) * fontSize << "\" \
+                        style=\"font-weight:bold\"" << ">"
+
+                 << "Entropy Values"
+
+                 << "</text>" << endl;
+
+            file << "<line x1=\"" << leftMargin
+                 << "\" x2=\"" << leftMargin + std::min(10 * 0.75F, (float) sequencesNamesLength) * fontSize
+                 << "\" y1=\"" << currentHeight + fontSize * 5.25F
+                 << "\" y2=\"" << currentHeight + fontSize * 5.25F
+                 << "\" style=\"stroke:rgb(0,0,0);stroke-width:1\""
+                 << " stroke-dasharray=\"2,2\""
+                 << " id =\"ConsSubLine" << counter << "\""
+                 << "/>" << endl;
+        }
+
         counter++;
         currentHeight += 6 * fontSize;
 

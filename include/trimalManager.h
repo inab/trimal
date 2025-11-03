@@ -77,13 +77,16 @@ public:
         noallgaps           = false,
         gappyout            = false, 
         strict              = false,
-        strictplus          = false, 
+        strictplus          = false,
+        strictE             = false, 
         automated1          = false,
         automated2          = false,
         sgc                 = false, 
         sgt                 = false, 
         ssc                 = false, 
         sst                 = false,
+        sec                 = false,
+        set                 = false,
         sfc                 = false, 
         sft                 = false, 
         sident              = false, 
@@ -114,7 +117,8 @@ public:
         windowSize              = -1, 
         gapWindow               = -1, 
         similarityWindow        = -1,
-        consistencyWindow       = -1, 
+        consistencyWindow       = -1,
+        entropyWindow           = -1,
         blockSize               = -1, 
         clusters                = -1
         ,
@@ -213,6 +217,7 @@ private: // Parse Arguments Methods
         argumentReport gappy_out_argument             (const int* argc, char* argv[], int* currentArg);
         argumentReport strict_argument                (const int* argc, char* argv[], int* currentArg);
         argumentReport strict_plus_argument           (const int* argc, char* argv[], int* currentArg);
+        argumentReport strictE_argument               (const int* argc, char* argv[], int* currentArg);
         argumentReport automated1_argument            (const int* argc, char* argv[], int* currentArg);
         argumentReport automated2_argument            (const int* argc, char* argv[], int* currentArg);
         argumentReport residue_overlap_argument       (const int* argc, char* argv[], int* currentArg);

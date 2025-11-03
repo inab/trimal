@@ -135,6 +135,11 @@ void AVX2Gaps::CalculateVectors() {
   simd::calculateGapVectors<AVX2Vector>(*this);
 }
 
+void AVX2Entropy::calculateEntropyVectors(bool cutByGap) {
+  StartTiming("bool AVX2Entropy::calculateVectors(bool cutByGap) ");
+  return simd::calculateEntropyVectors<AVX2Vector>(*this, cutByGap);
+}
+
 void AVX2Identity::calculateSeqIdentity() {
   StartTiming("void AVX2Identity::calculateSeqIdentity() ");
   simd::calculateSeqIdentity<AVX2Vector>(*this);

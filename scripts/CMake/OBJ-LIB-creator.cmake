@@ -18,7 +18,8 @@ set(statisticFiles
         source/Statistics/Similarity.cpp
         source/Statistics/Identity.cpp
         source/Statistics/Overlap.cpp
-        source/Statistics/Consistency.cpp)
+        source/Statistics/Consistency.cpp
+        source/Statistics/Entropy.cpp)
 
 set(reportSystemFiles
         source/reportsystem.cpp

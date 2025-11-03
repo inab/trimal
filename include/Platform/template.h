@@ -500,6 +500,73 @@ inline void calculateGapVectors(statistics::Gaps &g) {
       g.maxGaps = g.gapsInColumn[i];
   }
 }
+
+template <class Vector> 
+inline bool calculateEntropyVectors(statistics::Entropy &e, bool cutByGap) {
+
+  std::map<char, float> residueCounter {};
+  const Vector ALLGAP = Vector::duplicate('-');
+  int residueIndex, sequenceIndex;
+  char indet = e.alig->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
+  float maxEntropyDivisor;
+  int N = 0;
+  switch (e.alig->getAlignmentType()) {
+      case DNA: [[fallthrough]];
+      case RNA:
+          N = 4;  break; // 4 Elements
+      case (DNA | DEG): [[fallthrough]];
+      case (RNA | DEG):
+          N = 14; break; // 4 Elements + 6 Pairs + 4 Triplets
+      case AA:
+          N = 22; break; // 22 Elements
+      case (AA | DEG):
+          N = 24; break; // 24 Elements
+      default:
+          debug.log(VerboseLevel::ERROR)
+              << "Contact with developer: Entropy::calculateVectors\n";
+          break;
+  }
+
+  maxEntropyDivisor = 1.0F / log2(1.0F / N);
+  float sequenNumberDivisor = 1.0F / e.alig->originalNumberOfSequences;
+  char currentResidue;
+  // this->alig->Statistics->calculateGapStats(); To be deleted if not considering gap stats
+
+  for (residueIndex = 0; residueIndex < e.alig->originalNumberOfResidues; residueIndex++)
+  {
+      residueCounter.clear();
+      for (sequenceIndex = 0; sequenceIndex < e.alig->originalNumberOfSequences; sequenceIndex++)
+      {
+          currentResidue = e.alig->sequences[sequenceIndex][residueIndex];
+          currentResidue = utils::toUpper(currentResidue);
+
+          if (residueCounter.count(currentResidue) == 0) {
+              residueCounter[currentResidue] = 1;
+          } else {
+              residueCounter[currentResidue]++;
+          }
+      }
+
+      // residueCounter[indet] = 1; ??
+      // residueCounter['-'] = 1; ??
+
+      e.EntropyValues[residueIndex] = 0;
+      float residueFrequency;
+      for (auto & residueCount : residueCounter) {
+          // Divide the raw count by the number of sequences to obtain the freq
+          residueFrequency = residueCount.second * sequenNumberDivisor;
+          // Add the entropy for each element
+          e.EntropyValues[residueIndex] += residueFrequency * log2(residueFrequency);
+      }
+      // Although Shannon entropy is the negative value of the sum of (x*log2(x))
+      // We remove the negative values
+      //  by multiplying with maxEntropyDivisor, which is also negative.
+      e.EntropyValues[residueIndex] *= maxEntropyDivisor;
+  }
+
+  return true;
+}
+
 } // namespace simd
 
 #endif

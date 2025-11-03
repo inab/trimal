@@ -37,6 +37,7 @@
 #include "Statistics/Gaps.h"
 #include "Statistics/Overlap.h"
 #include "Statistics/Similarity.h"
+#include "Statistics/Entropy.h"
 
 namespace statistics {
 
@@ -67,6 +68,13 @@ public:
   AVX2Identity(Alignment *parent) : Identity(parent) {}
   AVX2Identity(Alignment *parent, Identity *parentIdentity) : Identity(parent, parentIdentity) {}
   void calculateSeqIdentity() override;
+};
+
+class AVX2Entropy : public Entropy {
+public:
+  AVX2Entropy(Alignment *parent) : Entropy(parent) {}
+  AVX2Entropy(Alignment *parent, Entropy *parentEntropy) : Entropy(parent, parentEntropy) {}
+  bool calculateEntropyVectors(bool cutByGap) override;
 };
 
 } // namespace statistics

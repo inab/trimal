@@ -311,6 +311,22 @@ public:
      */
     Alignment *cleanCombMethods(bool complementary, bool variable);
 
+    /**
+    \brief Method to clean an alignment. It carries out strictE.\n
+    The method:
+      - Computes entropy values and similarity cut point of the alignment.
+      - Calls the cleanStrict method with these values and returns its output.
+    \param complementary
+     Whether or not to return the complementary version of the trimmed alignment.
+    \param variable Whether to use a variable block length.
+    If false, block will be size 5.
+    Else, it will use 1% of the alignment length, with a minimum of 3 and maximum of 12.
+    This value will be overwritten if blockSize (of this object) is bigger than 0.
+    \return Pointer to the cleaned alignment returned by cleanStrict
+     using the parameters calculated in this function.
+    */
+    Alignment *cleanCombMethodsE(bool complementary, bool variable);
+
      /**
       \brief Method that carries the gappyout approach and adds columns until
        a minimum is reached.\n

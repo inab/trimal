@@ -27,200 +27,152 @@
 
 ***************************************************************************** */
 
-#include "Statistics/Similarity.h"
+#include "Statistics/Entropy.h"
 #include "InternalBenchmarker.h"
 #include "Statistics/Manager.h"
-#include "Statistics/Identity.h"
 #include "reportsystem.h"
 #include "Alignment/Alignment.h"
 #include "defines.h"
 #include "utils.h"
+#include "math.h"
 
 namespace statistics {
 
-    Similarity::Similarity(Alignment *parentAlignment) {
+    Entropy::Entropy(Alignment *parentAlignment) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("Similarity::Similarity(Alignment *parentAlignment) ");
+        StartTiming("Entropy::Entropy(Alignment *parentAlignment) ");
 
         alig = parentAlignment;
 
-        MDK = new float[alig->originalNumberOfResidues];
-        utils::initlVect(MDK, alig->originalNumberOfResidues, 0);
-
-        // Initialize the similarity matrix to nullptr.
-        simMatrix = nullptr;
+        EntropyValues = new float[alig->originalNumberOfResidues];
+        utils::initlVect(EntropyValues, alig->originalNumberOfResidues, 0);
 
         refCounter = new int(1);
     }
 
-    Similarity::Similarity(Alignment *parentAlignment,
-                                                   Similarity *mold) {
+    Entropy::Entropy(Alignment *parentAlignment,
+                           Entropy *mold) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("Similarity::Similarity(Alignment *parentAlignment) ");
+        StartTiming("Entropy::Entropy(Alignment *parentAlignment) ");
 
         alig = parentAlignment;
 
         halfWindow = 0;
 
-        MDK = mold->MDK;
-        MDK_Window = mold->MDK_Window;
-
-        simMatrix = mold->simMatrix;
+        EntropyValues = mold->EntropyValues;
+        EntropyValues_Window = mold->EntropyValues_Window;
 
         refCounter = mold->refCounter;
         (*refCounter)++;
     }
 
-    Similarity::~Similarity() {
+    Entropy::~Entropy() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("Similarity::Similarity");
+        StartTiming("Entropy::Entropy");
         // Deallocate common variables only in case there is no module that has a
         // reference to them
         if (refCounter == nullptr || --(*refCounter) < 1) {
-            delete[] MDK;
-            MDK = nullptr;
-            delete[] MDK_Window;
-            MDK_Window = nullptr;
+            delete[] EntropyValues;
+            EntropyValues = nullptr;
+            delete[] EntropyValues_Window;
+            EntropyValues_Window = nullptr;
             delete refCounter;
             refCounter = nullptr;
         }
     }
 
-    bool Similarity::calculateVectors(bool cutByGap) {
+
+    bool Entropy::calculateVectors([[maybe_unused]] bool cutByGap = false) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("bool Similarity::calculateVectors(bool cutByGap) ");
+        StartTiming("bool Entropy::calculateVectors(bool cutByGap) ");
 
-        // A similarity matrix must be defined. If not, return false
-        if (simMatrix == nullptr)
-            return false;
-
-        alig->Statistics->calculateSeqIdentity();
-        float *identities = alig->Statistics->identity->identities;
-
-        // Create the variable gaps, in case we want to cut by gaps
-        int *gaps = nullptr;
-
-        // Retrieve the gaps values in case we want to set to 0 the similarity value
-        // in case the gaps value for that column is bigger or equal to 0.8F
-        if (cutByGap)
-        {
-            if (alig->Statistics->gaps == nullptr)
-                alig->Statistics->calculateGapStats();
-            gaps = alig->Statistics->gaps->getGapsWindow();
-        }
+        std::map<char, float> residueCounter {};
 
         // Initialize the variables used
-        int i, j, k;
-        float num, den;
-        size_t arrayIdentityPosition;
+        int residueIndex, sequenceIndex;
 
         // Depending on alignment type, indetermination symbol will be one or other
         char indet = alig->getAlignmentType() & SequenceTypes::AA ? 'X' : 'N';
 
-        // Q temporal value
-        float Q;
-        // Temporal chars that will contain the residues to compare by pair.
-        char chA, chB;
+        // Calculate the max entropy value for the current dataType, to normalize data
+        float maxEntropyDivisor;
+        int N = 0;
+        switch (alig->getAlignmentType())
+        {
+            case DNA: [[fallthrough]];
+            case RNA:
+                N = 4;  break; // 4 Elements
+            case (DNA | DEG): [[fallthrough]];
+            case (RNA | DEG):
+                N = 14; break; // 4 Elements + 6 Pairs + 4 Triplets
+            case AA:
+                N = 22; break; // 22 Elements
+            case (AA | DEG):
+                N = 24; break; // 24 Elements
+            default:
+                debug.log(VerboseLevel::ERROR)
+                    << "Contact with developer: Entropy::calculateVectors\n";
+                break;
+        }
+        // Max entropy is obtained when all entries have the same proportion: 1/N
+        // Max Shannon entropy = 1.0F/N * -log2(1.0F/N) * N -> log2(1.0F/N)
+        // We make 1F/log2(1.0F/N) so we can use it as multiplier and not divisor.
+        //      This makes the calculation faster
+        maxEntropyDivisor = 1.0F / log2(1.0F / N);
 
-        // Calculate the maximum number of gaps a column can have to calculate it's
-        //      similarity
-        float gapThreshold = 0.8F * alig->numberOfSequences;
+        float sequenNumberDivisor = 1.0F / alig->originalNumberOfSequences;
+        char currentResidue;
+        // this->alig->Statistics->calculateGapStats(); To be deleted if not considering gap stats
 
-        // For each column calculate the Q value and the MD value using an equation
-        for (i = 0; i < alig->originalNumberOfResidues; i++) {
-            // Set MDK for columns with gaps values bigger or equal to 0.8F
-            if (cutByGap && gaps[i] >= gapThreshold) {
-                MDK[i] = 0.F;
-                continue;
-            }
-            // For each AAs/Nucleotides' pair in the column we compute its distance
-            arrayIdentityPosition = 0;
-            for (j = 0, num = 0, den = 0; j < alig->originalNumberOfSequences; j++) {
-
-
-                // Calculate the upper value of the residue,
-                //      to use in simMatrix->getDistance
-                // This is faster than calculating the upper on that method
-                //      as this is done before entering the loop
-                // Doing this before checking if the element is indeterminate or gap
-                //      allows to check if the indetermination is not capitalized
-                chA = utils::toUpper(alig->sequences[j][i]);
-
-                // We don't compute the distance if the first element is
-                // a indeterminate (XN) or a gap (-) element.
-                if ((chA == '-') || (chA == indet)) {
-                        arrayIdentityPosition += alig->originalNumberOfSequences - j - 1;
-                        continue;
-                }
-                
-                for (k = j + 1; k < alig->originalNumberOfSequences; k++) {
-                    // We calculate the upper value of the residue,
-                    //      to use in simMatrix->getDistance
-                    // This is equally faster as if it was done inside the method
-                    //      but to prevent errors, the method doesn't 'upper'
-                    //      the given chars.
-                    // Doing this before checking if the element is indeterminate or gap
-                    //      allows to check if the indetermination is not capitalized
-                    chB = utils::toUpper(alig->sequences[k][i]);
-
-                    // We don't compute the distance if the second element is
-                    //      a indeterminate (XN) or a gap (-) element
-                    if ((chB == '-') || (chB == indet)) {
-                        arrayIdentityPosition++;
-                        continue;
-                    }
-
-                    // We use the identity value for the two pairs and
-                    //      its distance based on similarity matrix's value.
-                    float simDistance = simMatrix->getDistance(chA, chB);
-                    if (simDistance == -1) {
-                        return false;
-                    }
-
-                    num += (1.0F - identities[arrayIdentityPosition]) * simDistance;
-                    den += (1.0F - identities[arrayIdentityPosition]);
-                    arrayIdentityPosition++;
-                }
-            }
-
-            // If we are processing a column with only one AA/nucleotide, MDK = 0
-            if (den == 0)
-                MDK[i] = 0;
-            else
+        for (residueIndex = 0; residueIndex < alig->originalNumberOfResidues; residueIndex++)
+        {
+            residueCounter.clear();
+            for (sequenceIndex = 0; sequenceIndex < alig->originalNumberOfSequences; sequenceIndex++)
             {
-                Q = num / den;
-                // If the MDK value is more than 1, we normalized this value to 1.
-                //      Only numbers higher than 0 yield exponents higher than 1
-                //      Using this we can test if the result is going to be higher than 1.
-                //      And thus, prevent calculating the exp.
-                // Take in mind that the Q is negative, so we must test if Q is LESSER
-                //      than one, not bigger.
-                if (Q < 0)
-                    MDK[i] = 1.F;
-                else
-                    MDK[i] = exp(-Q);
+                currentResidue = alig->sequences[sequenceIndex][residueIndex];
+                currentResidue = utils::toUpper(currentResidue);
+
+                if (residueCounter.count(currentResidue) == 0) {
+                    residueCounter[currentResidue] = 1;
+                } else {
+                    residueCounter[currentResidue]++;
+                }
             }
+
+            // residueCounter[indet] = 1; ??
+            // residueCounter['-'] = 1; ??
+
+            EntropyValues[residueIndex] = 0;
+            float residueFrequency;
+            for (auto & residueCount : residueCounter) {
+                // Divide the raw count by the number of sequences to obtain the freq
+                residueFrequency = residueCount.second * sequenNumberDivisor;
+                // Add the entropy for each element
+                EntropyValues[residueIndex] += residueFrequency * log2(residueFrequency);
+            }
+            // Although Shannon entropy is the negative value of the sum of (x*log2(x))
+            // We remove the negative values
+            //  by multiplying with maxEntropyDivisor, which is also negative.
+            EntropyValues[residueIndex] *= maxEntropyDivisor;
         }
 
         return true;
     }
 
-    bool Similarity::applyWindow(int halfW) {
+    bool Entropy::applyWindow(int halfW) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("bool Similarity::applyWindow(int halfW) ");
+        StartTiming("bool Entropy::applyWindow(int halfW) ");
 
-        // Calculate the MDK array if it has not been calculated previously
-        if (MDK == nullptr)
-            calculateVectors(true);
+        if (EntropyValues == nullptr)
+            calculateVectors(false);
 
-        // Check is the half window value passed is in the valid range
         if (halfW > alig->originalNumberOfResidues / 4) {
-            debug.report(ErrorCode::SimilarityWindowTooBig);
+            debug.report(ErrorCode::EntropyWindowTooBig);
             return false;
         }
 
@@ -235,9 +187,9 @@ namespace statistics {
         // If the half window requested is 0 or a negative number
         // we simply delete the window values.
         if (halfW < 1) {
-            delete[] MDK_Window;
+            delete[] EntropyValues_Window;
 
-            MDK_Window = nullptr;
+            EntropyValues_Window = nullptr;
             return true;
         }
 
@@ -245,86 +197,60 @@ namespace statistics {
         int i, j, window;
 
         // Initialize the MDK window array if it's null
-        if (MDK_Window == nullptr)
-            MDK_Window = new float[alig->originalNumberOfResidues + 1];
+        if (EntropyValues_Window == nullptr)
+            EntropyValues_Window = new float[alig->originalNumberOfResidues + 1];
 
         window = 2 * halfWindow + 1;
 
         // Do the average window calculations
         for (i = 0; i < alig->originalNumberOfResidues; i++) {
-            MDK_Window[i] = 0.F;
+            EntropyValues_Window[i] = 0.F;
             for (j = i - halfWindow; j <= i + halfWindow; j++) {
                 if (j < 0)
-                    MDK_Window[i] += MDK[-j];
+                    EntropyValues_Window[i] += EntropyValues[-j];
                 else if (j >= alig->originalNumberOfResidues)
-                    MDK_Window[i] += MDK[((2 * alig->originalNumberOfResidues - j) - 2)];
+                    EntropyValues_Window[i] += EntropyValues[((2 * alig->originalNumberOfResidues - j) - 2)];
                 else
-                    MDK_Window[i] += MDK[j];
+                    EntropyValues_Window[i] += EntropyValues[j];
             }
 
             // Calculate the average value, by dividing the values
-            MDK_Window[i] = MDK_Window[i] / (float) window;
+            EntropyValues_Window[i] = EntropyValues_Window[i] / (float) window;
         }
         return true;
     }
 
-    bool Similarity::isDefinedWindow() {
+    bool Entropy::isDefinedWindow() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("bool Similarity::isDefinedWindow(void) ");
+        StartTiming("bool Entropy::isDefinedWindow(void) ");
 
         return (halfWindow > 0);
     }
 
-    float *Similarity::getMdkWindowedVector() {
+    float *Entropy::getValues() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("float *Similarity::getMdkWindowedVector(void) ");
+        StartTiming("float *Entropy::getMdkWindowedVector(void) ");
 
         // If a window is defined
         if (isDefinedWindow()) {
             // Check if the window has been applied
-            if (MDK_Window == nullptr)
+            if (EntropyValues_Window == nullptr)
                 applyWindow(halfWindow);
             // Return the windowed value
-            return MDK_Window;
+            return EntropyValues_Window;
         }
             // Return the original values
-        else return MDK;
+        else return EntropyValues;
     }
 
-    bool Similarity::setSimilarityMatrix(similarityMatrix *sm) {
+    double Entropy::calcCutPoint(float baseLine, float conservationPct) {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("bool Similarity::setSimilarityMatrix(similarityMatrix *sm) ");
-
-        // Checks if a similarity matrix is already being used.
-        if (sm == nullptr)
-            return false;
-
-        if (simMatrix == sm)
-            return true;
-
-        delete simMatrix;
-
-        simMatrix = sm;
-        return true;
-    }
-
-    bool Similarity::isSimMatrixDef() {
-        // Create a timerLevel that will report times upon its destruction
-        //	which means the end of the current scope.
-        StartTiming("bool Similarity::isSimMatrixDef(void) ");
-
-        return simMatrix != nullptr;
-    }
-
-    double Similarity::calcCutPoint(float baseLine, float conservationPct) {
-        // Create a timerLevel that will report times upon its destruction
-        //	which means the end of the current scope.
-        StartTiming("double Similarity::calcCutPoint(float baseLine, float conservationPct) ");
-        // It computes the cutting point based on alignment's similarity values -
-        // the so-called 'similarity'. It also takes into account the minimum percentage
+        StartTiming("double Entropy::calcCutPoint(float baseLine, float conservationPct) ");
+        // It computes the cutting point based on alignment's Entropy values -
+        // the so-called 'Entropy'. It also takes into account the minimum percentage
         // from the input alignment to be kept. Depending on those two values, the
         // method will select a different cutting-point.
 
@@ -334,10 +260,10 @@ namespace statistics {
 
         vectAux = new float[alig->originalNumberOfResidues];
 
-        // Sort a copy of the vector containing the similarity values after applying
+        // Sort a copy of the vector containing the Entropy values after applying
         // any windows methods. Take the columns value that it lower than the minimum
-        // similarity threshold set by the user
-        utils::copyVect(getMdkWindowedVector(), vectAux, alig->originalNumberOfResidues);
+        // Entropy threshold set by the user
+        utils::copyVect(getValues(), vectAux, alig->originalNumberOfResidues);
         utils::quicksort(vectAux, 0, alig->originalNumberOfResidues - 1);
 
         for (i = alig->originalNumberOfResidues - 1; i >= 0; i--)
@@ -346,7 +272,7 @@ namespace statistics {
         cuttingPoint_SimilThreshold = vectAux[i];
 
         // It is possible that due to number casting, we get a number out of the
-        // vector containing the similarity values - it is not reporting an overflow
+        // vector containing the Entropy values - it is not reporting an overflow
         // situation but giving back a 0 when it should be a number equal (or closer)
         // to 1.
         highestPos = (int) ((double) (alig->originalNumberOfResidues - 1) * (100.0 - baseLine) / 100.0);
@@ -361,10 +287,10 @@ namespace statistics {
                 cuttingPoint_MinimumConserv : cuttingPoint_SimilThreshold);
     }
 
-    void Similarity::printConservationColumns() {
+    void Entropy::printConservationColumns() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("void Similarity::printConservationColumns(void) ");
+        StartTiming("void Entropy::printConservationColumns(void) ");
 
         int i, size = 20;
 
@@ -372,9 +298,9 @@ namespace statistics {
 
 
         std::cout << std::fixed
-             << std::setw(fname.length() + 7)
-             << std::setfill(' ')
-             << std::left << "" << std::endl;
+                  << std::setw(fname.length() + 7)
+                  << std::setfill(' ')
+                  << std::left << "" << std::endl;
 
         std::cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
 
@@ -387,44 +313,44 @@ namespace statistics {
 
         std::cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << std::endl;
 
-        fname = " Similarity per Column";
+        fname = " Entropy per Column";
 
         std::cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << std::endl;
 
-        std::cout << std::setw(alig->filename.size())
-             << std::setfill('-')
-             << std::left << ""
-             << std::setfill(' ')
-             << std::endl;
+        std::cout << std::setw(alig->filename.substr(6, alig->filename.size() - 7).length() + 7)
+                  << std::setfill('-')
+                  << std::left << ""
+                  << std::setfill(' ')
+                  << std::endl;
 
         std::cout << "\33[0;33;1m"
-             << std::setw(size) << std::left << " Residue" << std::left << " Similarity" << std::endl
-             << std::setw(size) << std::left << " Number" << std::left << " Value" << std::endl
-             << std::setfill('-')
-             << "\33[0;m"
-             << std::setw(size) << std::right << "  "
-             << std::setw(size) << std::right << "  " << std::endl
-             << std::setfill(' ');
+                  << std::setw(size) << std::left << " Residue" << std::left << " Entropy" << std::endl
+                  << std::setw(size) << std::left << " Number" << std::left << " Value" << std::endl
+                  << std::setfill('-')
+                  << "\33[0;m"
+                  << std::setw(size) << std::right << "  "
+                  << std::setw(size) << std::right << "  " << std::endl
+                  << std::setfill(' ');
 
         std::cout.precision(10);
 
         float *values;
 
-        // If MDK_Window vector is defined, we use it to print the similarity's values.
-        if (MDK_Window != nullptr)
-            values = MDK_Window;
-            // In others cases, we uses the MDK vector to print the similarity's vlaues.
+        // If MDK_Window vector is defined, we use it to print the Entropy's values.
+        if (EntropyValues_Window != nullptr)
+            values = EntropyValues_Window;
+            // In others cases, we uses the MDK vector to print the Entropy's vlaues.
         else
-            values = MDK;
+            values = EntropyValues;
 
         for (i = 0; i < alig->originalNumberOfResidues; i++)
             std::cout << std::setw(size) << std::left << i << values[i] << std::endl;
     }
 
-    void Similarity::printConservationAcl() {
+    void Entropy::printConservationAcl() {
         // Create a timerLevel that will report times upon its destruction
         //	which means the end of the current scope.
-        StartTiming("void Similarity::printConservationAcl(void) ");
+        StartTiming("void Entropy::printConservationAcl(void) ");
 
         float refer, *vectAux;
         int i, num, acm;
@@ -432,9 +358,9 @@ namespace statistics {
         // Allocate memory
         vectAux = new float[alig->originalNumberOfResidues];
 
-        // Select the similarity's value source and copy that vector in a auxiliar vector
-        if (MDK_Window != nullptr) utils::copyVect(MDK_Window, vectAux, alig->originalNumberOfResidues);
-        else utils::copyVect(MDK, vectAux, alig->originalNumberOfResidues);
+        // Select the Entropy's value source and copy that vector in a auxiliar vector
+        if (EntropyValues_Window != nullptr) utils::copyVect(EntropyValues_Window, vectAux, alig->originalNumberOfResidues);
+        else utils::copyVect(EntropyValues, vectAux, alig->originalNumberOfResidues);
 
         // Sort the auxiliar vector.
         utils::quicksort(vectAux, 0, alig->originalNumberOfResidues - 1);
@@ -443,9 +369,9 @@ namespace statistics {
         std::string fname = alig->filename;
 
         std::cout << std::fixed
-             << std::setw(fname.length() + 7)
-             << std::setfill(' ')
-             << std::left << "" << std::endl;
+                  << std::setw(fname.length() + 7)
+                  << std::setfill(' ')
+                  << std::left << "" << std::endl;
 
         std::cout << "#\33[0;31m File :\33[0;1m" << fname << "\33[0m";
 
@@ -458,15 +384,15 @@ namespace statistics {
 
         std::cout << "#\33[0;36m BlockSize : \33[0;1m" << fname << "\33[0m" << std::endl;
 
-        fname = " Similarity Total";
+        fname = " Entropy Total";
 
         std::cout << "#\33[0;32m Statistic :\33[0;1m" << fname << "\33[0m" << std::endl;
 
-        std::cout << std::setw(alig->filename.size())
-             << std::setfill('-')
-             << std::left << ""
-             << std::setfill(' ')
-             << std::endl;
+        std::cout << std::setw(alig->filename.substr(6, alig->filename.size() - 7).length() + 7)
+                  << std::setfill('-')
+                  << std::left << ""
+                  << std::setfill(' ')
+                  << std::endl;
 
 
         std::stringstream firstLine;
@@ -490,15 +416,15 @@ namespace statistics {
         thirdLine << std::setw(size) << std::left << " of alignment";
 
         firstLine << std::setw(size) << std::left << " ";
-        secondLine << std::setw(size) << std::left << " Similarity";
+        secondLine << std::setw(size) << std::left << " Entropy";
         thirdLine << std::setw(size) << std::left << " Value";
 
         std::cout << "\33[0;33;1m"
-             << firstLine.rdbuf() << std::endl
-             << secondLine.rdbuf() << std::endl
-             << thirdLine.rdbuf() << std::endl
-             << "\33[0;m"
-             << std::setfill('-');
+                  << firstLine.rdbuf() << std::endl
+                  << secondLine.rdbuf() << std::endl
+                  << thirdLine.rdbuf() << std::endl
+                  << "\33[0;m"
+                  << std::setfill('-');
 
         for (i = 0; i < 5; i++)
             std::cout << std::setw(size) << std::right << "   ";
@@ -512,7 +438,7 @@ namespace statistics {
         acm = 0;
         num = 1;
 
-        // Count the columns with the same similarity's value and compute this information to shows the accumulative
+        // Count the columns with the same Entropy's value and compute this information to shows the accumulative
         // statistics in the alignment.
         for (i = alig->originalNumberOfResidues - 2; i >= 0; i--) {
             acm++;
@@ -563,4 +489,3 @@ namespace statistics {
     }
 
 }
-

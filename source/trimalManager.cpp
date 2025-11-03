@@ -692,6 +692,14 @@ int trimAlManager::parseArguments(int argc, char **argv) {
     return NotRecognized;
 }
 
+/**inline**/ trimAlManager::argumentReport trimAlManager::strictE_argument(const int *argc, char *argv[], int *i) {
+    if (!strcmp(argv[*i], "-strictE") && (!strictE)) {
+        strictE = true;
+        return Recognized;
+    }
+    return NotRecognized;
+}
+
 /**inline**/ trimAlManager::argumentReport trimAlManager::automated1_argument(const int *argc, char *argv[], int *i) {
     if ((!strcmp(argv[*i], "-automated1")) && (!automated1)) {
         automated1 = true;
@@ -913,6 +921,8 @@ int trimAlManager::parseArguments(int argc, char **argv) {
     stat_check(sgt)
     stat_check(ssc)
     stat_check(sst)
+    stat_check(sec)
+    stat_check(set)
 
     stat_check(sident)
     stat_check(soverlap)
@@ -1018,10 +1028,11 @@ bool trimAlManager::processArguments(char *argv[]) {
         // We can use this information to prevent performing more than one method,
         //  and using as a bool, to check if any automatic method has been used.
         automatedMethodCount =
-                nogaps      + noallgaps +
-                gappyout    + strict    +
-                strictplus  + automated1 +
-                automated2  + removeDuplicates;
+                nogaps      + noallgaps  +
+                gappyout    + strict     +
+                strictplus  + strictE    +
+                automated1  + automated2 +
+                removeDuplicates;
 
         check_arguments_incompatibilities();
         check_arguments_needs(argv);
@@ -1946,6 +1957,16 @@ int trimAlManager::perform() {
         stats++;
     }
 
+    if (sec) {
+        origAlig->Statistics->printStatisticsEntropyColumns();
+        stats++;
+    }
+
+    if (set) {
+        origAlig->Statistics->printStatisticsEntropyTotal();
+        stats++;
+    }
+
     if (sident) {
         origAlig->printSeqIdentity();
         stats++;
@@ -2142,6 +2163,8 @@ int trimAlManager::perform() {
         tempAlig = singleAlig->Cleaning->cleanCombMethods(/* getComplementary*/ false, false);
     } else if (strictplus) {
         tempAlig = singleAlig->Cleaning->cleanCombMethods(/* getComplementary*/ false, true);
+    } else if (strictE) {
+        tempAlig = singleAlig->Cleaning->cleanCombMethodsE(/* getComplementary*/ false);
     } else if (automated2) {
         tempAlig = singleAlig->Cleaning->cleanAutomated2(/* getComplementary*/ false);
     }
@@ -2245,13 +2268,16 @@ int trimAlManager::perform() {
     if (windowSize != -1) {
         gapWindow = windowSize;
         similarityWindow = windowSize;
+        entropyWindow = windowSize;
     } else {
         if (gapWindow == -1)
             gapWindow = 0;
         if (similarityWindow == -1)
             similarityWindow = 0;
+        if (entropyWindow == -1)
+            entropyWindow = 0;
     }
-    origAlig->setWindowsSize(gapWindow, similarityWindow);
+    origAlig->setWindowsSize(gapWindow, similarityWindow, entropyWindow);
 }
 
 /**inline**/ void trimAlManager::delete_variables() {
