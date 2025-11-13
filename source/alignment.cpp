@@ -1481,7 +1481,7 @@ float alignment::getCutPointClusters(int clusterNumber) {
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 alignment *alignment::getClustering(float identityThreshold) {
 
-  string *matrixAux, *newSeqsName;
+  string *matrixAux, *newSeqsName, *newSeqsInfo;
   int i, j, *clustering;
   alignment *newAlig;
 
@@ -1505,13 +1505,16 @@ alignment *alignment::getClustering(float identityThreshold) {
   /* We allocate memory to save the sequences selected */
   matrixAux = new string[clustering[0]];
   newSeqsName = new string[clustering[0]];
+  newSeqsInfo = new string[clustering[0]];
 
   /* Copy to new structures the information that have
    * been selected previously. */
   for(i = 0, j = 0; i < sequenNumber; i++)
     if(saveSequences[i] != -1) {
        newSeqsName[j] = seqsName[i];
+       newSeqsInfo[j] = seqsInfo[i];
        matrixAux[j] = sequences[i];
+       // TO BE ADDED SEQSINFO?
        j++;
     }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -1519,7 +1522,7 @@ alignment *alignment::getClustering(float identityThreshold) {
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
   /* When we have all parameters, we create the new
    * alignment */
-  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
+  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, newSeqsInfo,
     clustering[0], residNumber, iformat, oformat, shortNames, dataType, isAligned,
     reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber, residuesNumber,
@@ -2072,7 +2075,7 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine,
   const int *gInCol, bool complementary) {
 
   int i, j, k, jn, oth, pos, block, *vectAux;
-  string *matrixAux, *newSeqsName;
+  string *matrixAux, *newSeqsName, *newSeqsInfo;
   alignment *newAlig;
   newValues counter;
 
@@ -2207,12 +2210,13 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine,
   /* Allocate memory  for selected sequences/columns */
   matrixAux = new string[counter.sequences];
   newSeqsName = new string[counter.sequences];
+  newSeqsInfo = new string[counter.sequences];
 
   /* Fill local allocated memory with previously selected data */
-  fillNewDataStructure(matrixAux, newSeqsName);
+  fillNewDataStructure(matrixAux, newSeqsName, newSeqsInfo);
 
   /* When we have all parameters, we create the new alignment */
-  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
+  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, newSeqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
     isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber,
@@ -2238,7 +2242,7 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine,
   const float *ValueVect, bool complementary) {
 
   int i, j, k, jn, oth, pos, block;
-  string *matrixAux, *newSeqsName;
+  string *matrixAux, *newSeqsName, *newSeqsInfo;
   alignment *newAlig;
   newValues counter;
 
@@ -2360,12 +2364,13 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine,
   /* Allocate memory  for selected sequences/columns */
   matrixAux = new string[counter.sequences];
   newSeqsName = new string[counter.sequences];
+  newSeqsInfo = new string[counter.sequences];
 
   /* Fill local allocated memory with previously selected data */
-  fillNewDataStructure(matrixAux, newSeqsName);
+  fillNewDataStructure(matrixAux, newSeqsName, newSeqsInfo);
 
   /* When we have all parameters, we create the new alignment */
-  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
+  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, newSeqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
     isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber,
@@ -2395,7 +2400,7 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol,
   float baseLine, float cutCons, const float *MDK_Win, bool complementary) {
 
   int i, j, k, oth, pos, block, jn, blGaps, *vectAuxGaps;
-  string *matrixAux, *newSeqsName;
+  string *matrixAux, *newSeqsName, *newSeqsInfo;
   float blCons, *vectAuxCons;
   alignment *newAlig;
   newValues counter;
@@ -2554,12 +2559,13 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol,
   /* Allocate memory  for selected sequences/columns */
   matrixAux = new string[counter.sequences];
   newSeqsName = new string[counter.sequences];
+  newSeqsInfo = new string[counter.sequences];
 
   /* Fill local allocated memory with previously selected data */
-  fillNewDataStructure(matrixAux, newSeqsName);
+  fillNewDataStructure(matrixAux, newSeqsName, newSeqsInfo);
 
   /* When we have all parameters, we create the new alignment */
-  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
+  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, newSeqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
     isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber,
@@ -2738,7 +2744,7 @@ alignment *alignment::cleanStrict(int gapCut, const int *gInCol, float simCut,
 alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
   bool complementary) {
 
-  string *matrixAux, *newSeqsName;
+  string *matrixAux, *newSeqsName, *newSeqsInfo;
   alignment *newAlig;
   newValues counter;
   int i;
@@ -2761,12 +2767,13 @@ alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
   /* Allocate memory  for selected sequences/columns */
   matrixAux = new string[counter.sequences];
   newSeqsName = new string[counter.sequences];
+  newSeqsInfo = new string[counter.sequences];
 
   /* Fill local allocated memory with previously selected data */
-  fillNewDataStructure(matrixAux, newSeqsName);
+  fillNewDataStructure(matrixAux, newSeqsName, newSeqsInfo);
 
   /* When we have all parameters, we create the new alignment */
-  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
+  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, newSeqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
     isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber,
@@ -2786,7 +2793,7 @@ alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
 alignment *alignment::removeColumns(int *columns, int init, int size,
   bool complementary) {
 
-  string *matrixAux, *newSeqsName;
+  string *matrixAux, *newSeqsName, *newSeqsInfo;
   alignment *newAlig;
   newValues counter;
   int i, j;
@@ -2808,12 +2815,13 @@ alignment *alignment::removeColumns(int *columns, int init, int size,
   /* Allocate memory  for selected sequences/columns */
   matrixAux = new string[counter.sequences];
   newSeqsName = new string[counter.sequences];
+  newSeqsInfo = new string[counter.sequences];
 
   /* Fill local allocated memory with previously selected data */
-  fillNewDataStructure(matrixAux, newSeqsName);
+  fillNewDataStructure(matrixAux, newSeqsName, newSeqsInfo);
 
   /* When we have all parameters, we create the new alignment */
-  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
+  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, newSeqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
     isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber,
@@ -2834,7 +2842,7 @@ alignment *alignment::removeColumns(int *columns, int init, int size,
 alignment *alignment::removeSequences(int *seqs, int init, int size,
   bool complementary) {
 
-  string *matrixAux, *newSeqsName;
+  string *matrixAux, *newSeqsName, *newSeqsInfo;
   alignment *newAlig;
   newValues counter;
   int i, j;
@@ -2856,12 +2864,13 @@ alignment *alignment::removeSequences(int *seqs, int init, int size,
   /* Allocate memory  for selected sequences/columns */
   matrixAux = new string[counter.sequences];
   newSeqsName = new string[counter.sequences];
+  newSeqsInfo = new string[counter.sequences];
 
   /* Fill local allocated memory with previously selected data */
-  fillNewDataStructure(matrixAux, newSeqsName);
+  fillNewDataStructure(matrixAux, newSeqsName, newSeqsInfo);
 
   /* When we have all parameters, we create the new alignment */
-  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, seqsInfo,
+  newAlig = new alignment(filename, aligInfo, matrixAux, newSeqsName, newSeqsInfo,
     counter.sequences, counter.residues, iformat, oformat, shortNames, dataType,
     isAligned, reverse, terminalGapOnly, left_boundary, right_boundary,
     keepSequences, keepHeader, sequenNumber, residNumber,
@@ -3042,7 +3051,7 @@ newValues alignment::removeCols_SeqsAllGaps(void) {
 
 /* Function for copying to previously allocated memory those data selected
  * for being in the final alignment */
-void alignment::fillNewDataStructure(string *newMatrix, string *newNames) {
+void alignment::fillNewDataStructure(string *newMatrix, string *newNames, string *newInfos) {
   int i, j, k;
 
   /* Copy only those sequences/columns selected */
@@ -3051,6 +3060,7 @@ void alignment::fillNewDataStructure(string *newMatrix, string *newNames) {
       continue;
 
     newNames[j] = seqsName[i];
+    newInfos[j] = seqsInfo[i];
     for(k = 0; k < residNumber; k++) {
       if(saveResidues[k] == -1)
         continue;
