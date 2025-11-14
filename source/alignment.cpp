@@ -1514,7 +1514,6 @@ alignment *alignment::getClustering(float identityThreshold) {
        newSeqsName[j] = seqsName[i];
        newSeqsInfo[j] = seqsInfo[i];
        matrixAux[j] = sequences[i];
-       // TO BE ADDED SEQSINFO?
        j++;
     }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
