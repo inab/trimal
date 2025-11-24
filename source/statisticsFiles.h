@@ -1,7 +1,7 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.5.0: a tool for automated alignment trimming in large-scale
+    trimAl v1.5.1: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
     2009-2020
