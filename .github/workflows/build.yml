@@ -19,14 +19,14 @@ on:
   pull_request_review:
     branches:
       - trimAl
+      - '*_release'
+      - '*_RC'
     types: [submitted]
     paths:
       - '.github/workflows/build.yml'
       - 'dataset/**'
       - 'scripts/**'
       - 'source/**'
-  release:
-    types: [published]
 
 name: Build 
 
