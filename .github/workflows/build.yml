@@ -53,12 +53,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build trimAl for Linux x86_64
-        run: cd source && make all && file trimal && file readal && file statal && tar -cvf trimal_bin.tar trimal
+        run: cd source && make all && file trimal && file readal && file statal
       - name: Upload build binaries for Linux x86_64
         uses: actions/upload-artifact@v4
         with:
           name: trimal_linux_x86_64
-          path: source/trimal_bin.tar
+          path: source
           overwrite: true
           retention-days: 1
           if-no-files-found: error
@@ -80,12 +80,12 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y make g++ file
           run: |
-            cd /trimal/source && make all && file trimal && file readal && file statal && tar -cvf trimal_bin.tar trimal
+            cd /trimal/source && make all && file trimal && file readal && file statal
       - name: Upload build binaries for Linux aarch64
         uses: actions/upload-artifact@v4
         with:
           name: trimal_linux_aarch64
-          path: source/trimal_bin.tar
+          path: source
           overwrite: true
           retention-days: 1
           if-no-files-found: error
@@ -150,12 +150,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build trimAl for ${{ matrix.version }}
-        run: cd source && make all && file trimal && file readal && file statal && tar -cvf trimal_bin.tar trimal
+        run: cd source && make all && file trimal && file readal && file statal
       - name: Upload build binaries for ${{ matrix.version }}
         uses: actions/upload-artifact@v4
         with:
           name: trimal_${{ matrix.version }}
-          path: source/trimal_bin.tar
+          path: source
           overwrite: true
           retention-days: 1
           if-no-files-found: error
@@ -224,12 +224,11 @@ jobs:
           file trimal.exe
           file readal.exe
           file statal.exe
-          tar -cvf trimal_bin.tar trimal.exe
       - name: Upload build binaries for Windows
         uses: actions/upload-artifact@v4
         with:
           name: trimal_windows
-          path: source/trimal_bin.tar
+          path: source
           overwrite: true
           retention-days: 1
           if-no-files-found: error
