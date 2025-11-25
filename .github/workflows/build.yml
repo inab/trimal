@@ -84,7 +84,7 @@ jobs:
           name: trimal_linux_x86_64
           path: source
       - name: Test trimAl for Linux x86_64
-        run: tar -xvf source/trimal_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+        run: source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   test_ubuntu_aarch64:
     if: ${{ github.event_name == 'release' }}
@@ -105,7 +105,7 @@ jobs:
           githubToken: ${{ github.token }}
           dockerRunArgs: |
             --volume "${PWD}:/trimal" 
-          run: tar -xvf source/trimal_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+          run: source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   build_macos:
     strategy:
@@ -184,6 +184,5 @@ jobs:
           path: source
       - name: Test trimAl for Windows
         run: |
-          tar -xvf source/trimal_bin.tar -C source
           powershell -ExecutionPolicy Bypass -File .\scripts\generate_trimmed_msas.ps1
           powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
