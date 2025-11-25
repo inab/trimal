@@ -26,8 +26,6 @@ on:
       - 'scripts/**'
       - 'source/**'
   release:
-    branches:
-      - trimAl
     types: [published]
 
 name: Build 
