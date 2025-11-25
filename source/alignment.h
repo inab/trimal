@@ -526,7 +526,7 @@ class alignment {
 
   void removeCols_SeqsAllGaps(newValues *);
 
-  void fillNewDataStructure(string *, string *);
+  void fillNewDataStructure(string *, string *, string *);
   void fillNewDataStructure(newValues *);
 
   // New Code: February/2012
