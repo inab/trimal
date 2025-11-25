@@ -10,6 +10,8 @@ on:
   pull_request:
     branches:
       - trimAl
+      - '*_release'
+      - '*_RC'
     types: [ready_for_review]
     paths:
       - '.github/workflows/build.yml'
@@ -19,8 +21,6 @@ on:
   pull_request_review:
     branches:
       - trimAl
-      - '*_release'
-      - '*_RC'
     types: [submitted]
     paths:
       - '.github/workflows/build.yml'
