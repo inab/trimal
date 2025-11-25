@@ -28,7 +28,7 @@ on:
   release:
     branches:
       - trimAl
-    types: [created]
+    types: [published]
 
 name: Build 
 
