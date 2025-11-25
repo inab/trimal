@@ -175,6 +175,6 @@ jobs:
           path: source
       - name: Test trimAl for Windows
         run: |
-          tar -xvf source/source_bin.tar -C source --strip-components=1
+          tar -xvf source/source_bin.tar -C source
           powershell -ExecutionPolicy Bypass -File .\scripts\generate_trimmed_msas.ps1
           powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
