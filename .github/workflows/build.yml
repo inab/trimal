@@ -36,7 +36,7 @@ jobs:
           if-no-files-found: error
 
   build_ubuntu_aarch64:
-    if: endsWith(github.ref_name, 'release')
+    if: endsWith(github.head_ref, 'release')
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -76,7 +76,7 @@ jobs:
         run: source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   test_ubuntu_aarch64:
-    if: endsWith(github.ref_name, 'release')
+    if: endsWith(github.head_ref, 'release')
     runs-on: ubuntu-22.04
     needs: build_ubuntu_aarch64
     steps:
