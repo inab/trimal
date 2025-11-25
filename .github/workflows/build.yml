@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build trimAl for Linux x86_64
-        run: cd source && make all && file trimal && file readal && file statal && cd .. && tar -cvf source_bin.tar source
+        run: cd source && make all && file trimal && file readal && file statal && cd .. && tar -cvf source_bin.tar -C source trimal readal statal
       - name: Upload build binaries for Linux x86_64
         uses: actions/upload-artifact@v4
         with:
@@ -52,7 +52,7 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y make g++ file
           run: |
-            cd /trimal/source && make all && file trimal && file readal && file statal && cd .. && tar -cvf source_bin.tar source
+            cd /trimal/source && make all && file trimal && file readal && file statal && cd .. && tar -cvf source_bin.tar -C source trimal readal statal
       - name: Upload build binaries for Linux aarch64
         uses: actions/upload-artifact@v4
         with:
@@ -73,7 +73,7 @@ jobs:
           name: trimal_linux_x86_64
           path: source
       - name: Test trimAl for Linux x86_64
-        run: tar -xvf source/source_bin.tar -C source --strip-components=1 && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+        run: tar -xvf source/source_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   test_ubuntu_aarch64:
     if: endsWith(github.head_ref, 'release')
@@ -94,7 +94,7 @@ jobs:
           githubToken: ${{ github.token }}
           dockerRunArgs: |
             --volume "${PWD}:/trimal" 
-          run: tar -xvf source/source_bin.tar -C source --strip-components=1 && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+          run: tar -xvf source/source_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   build_macos:
     strategy:
@@ -104,7 +104,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build trimAl for ${{ matrix.version }}
-        run: cd source && make all && file trimal && file readal && file statal && cd .. && tar -cvf source_bin.tar source
+        run: cd source && make all && file trimal && file readal && file statal && cd .. && tar -cvf source_bin.tar -C source trimal readal statal
       - name: Upload build binaries for ${{ matrix.version }}
         uses: actions/upload-artifact@v4
         with:
@@ -129,7 +129,7 @@ jobs:
           path: source
       - name: Test trimAl for ${{ matrix.version }}
         run: |
-          tar -xvf source/source_bin.tar -C source --strip-components=1 && source/trimal &&
+          tar -xvf source/source_bin.tar -C source && source/trimal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   build_windows:
@@ -153,7 +153,7 @@ jobs:
           file readal.exe
           file statal.exe
           cd ..
-          tar -cvf source_bin.tar source
+          tar -cvf source_bin.tar -C source trimal readal statal
       - name: Upload build binaries for Windows
         uses: actions/upload-artifact@v4
         with:
