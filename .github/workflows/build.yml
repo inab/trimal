@@ -64,7 +64,7 @@ jobs:
           if-no-files-found: error
 
   build_ubuntu_aarch64:
-    if: github.event.review.state == 'approved'
+    if: github.event.review.state == 'approved' || ${{ github.event_name == 'release' }}
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
