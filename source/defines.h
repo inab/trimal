@@ -1,13 +1,13 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.5.0: a tool for automated alignment trimming in large-scale
+    trimAl v1.5.1: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    readAl v1.5.0: a tool for automated alignment conversion among different
+    readAl v1.5.1: a tool for automated alignment conversion among different
                  formats.
 
-    statAl v1.5.0: a tool for getting descriptive alignment features/scores.
+    statAl v1.5.1: a tool for getting descriptive alignment features/scores.
 
     2009-2020
         Fernandez-Rodriguez V.  (victor.fernandez@bsc.es)
@@ -31,9 +31,9 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#define BUILD "2024-05-27"
+#define BUILD "2025-11-25"
 #define VERSION 1.5
-#define REVISION 0
+#define REVISION 1
 #define AUTHORS "2009-2020. Victor Fernández-Rodríguez, Toni Gabaldón, and Salvador Capella-Gutiérrez"
 
 #define DNAType 1

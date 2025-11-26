@@ -16,55 +16,27 @@ on:
       - 'dataset/**'
       - 'scripts/**'
       - 'source/**'
-  pull_request_review:
-    branches:
-      - trimAl
-    types: [submitted]
-    paths:
-      - '.github/workflows/build.yml'
-      - 'dataset/**'
-      - 'scripts/**'
-      - 'source/**'
-  release:
-    types: [published]
 
 name: Build 
 
 jobs:
-  check_release_binaries_ubuntu:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Download release binaries for Linux_x86-64
-        run: curl -L -o trimal_linux.zip https://github.com/inab/trimal/releases/latest/download/trimAl_Linux_x86-64.zip
-      - name: Check release binaries for Linux_x86-64
-        run: unzip trimal_linux.zip && cd trimAl_Linux_x86-64 && file trimal && file readal && file statal
-          
-  test_binaries_ubuntu:
-    runs-on: ubuntu-22.04
-    needs: check_release_binaries_ubuntu
-    steps:
-      - uses: actions/checkout@v4
-      - name: Test trimAl for Linux x86_64
-        run: curl -L -o trimal_linux.zip https://github.com/inab/trimal/releases/latest/download/trimAl_Linux_x86-64.zip &&
-          unzip trimal_linux.zip && mv trimAl_Linux_x86-64/* source/ && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
-          
   build_ubuntu_x86_64:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - name: Build trimAl for Linux x86_64
-        run: cd source && make all && file trimal && file readal && file statal && tar -cvf trimal_bin.tar trimal
+        run: cd source && make all && file trimal && file readal && file statal && cd .. && tar -cvf source_bin.tar -C source trimal readal statal
       - name: Upload build binaries for Linux x86_64
         uses: actions/upload-artifact@v4
         with:
           name: trimal_linux_x86_64
-          path: source/trimal_bin.tar
+          path: source_bin.tar
           overwrite: true
           retention-days: 1
           if-no-files-found: error
 
   build_ubuntu_aarch64:
-    if: github.event.review.state == 'approved'
+    if: endsWith(github.head_ref, 'release')
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -80,12 +52,12 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y make g++ file
           run: |
-            cd /trimal/source && make all && file trimal && file readal && file statal && tar -cvf trimal_bin.tar trimal
+            cd /trimal/source && make all && file trimal && file readal && file statal && cd .. && tar -cvf source_bin.tar -C source trimal readal statal
       - name: Upload build binaries for Linux aarch64
         uses: actions/upload-artifact@v4
         with:
           name: trimal_linux_aarch64
-          path: source/trimal_bin.tar
+          path: source_bin.tar
           overwrite: true
           retention-days: 1
           if-no-files-found: error
@@ -101,10 +73,10 @@ jobs:
           name: trimal_linux_x86_64
           path: source
       - name: Test trimAl for Linux x86_64
-        run: tar -xvf source/trimal_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+        run: tar -xvf source/source_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   test_ubuntu_aarch64:
-    if: ${{ github.event_name == 'release' }}
+    if: endsWith(github.head_ref, 'release')
     runs-on: ubuntu-22.04
     needs: build_ubuntu_aarch64
     steps:
@@ -122,25 +94,7 @@ jobs:
           githubToken: ${{ github.token }}
           dockerRunArgs: |
             --volume "${PWD}:/trimal" 
-          run: tar -xvf source/trimal_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
-
-  check_release_binaries_macos:
-    runs-on: macos-15-intel
-    steps:
-      - name: Download release binaries for MacOS x86_64
-        run: curl -L -o trimal_macos.zip https://github.com/inab/trimal/releases/latest/download/trimAl_MacOS_x86-64.zip
-      - name: Check release binaries for MacOS x86_64
-        run: unzip trimal_macos.zip && cd trimAl_MacOS_x86-64 && file trimal && file readal && file statal
-          
-  test_binaries_macos:
-    runs-on: macos-15-intel
-    needs: check_release_binaries_macos
-    steps:
-      - uses: actions/checkout@v4
-      - name: Test trimAl for MacOS
-        run: |
-          curl -L -o trimal_macos.zip https://github.com/inab/trimal/releases/latest/download/trimAl_MacOS_x86-64.zip &&
-          unzip trimal_macos.zip && mv trimAl_MacOS_x86-64/* source/ && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
+          run: tar -xvf source/source_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   build_macos:
     strategy:
@@ -150,12 +104,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build trimAl for ${{ matrix.version }}
-        run: cd source && make all && file trimal && file readal && file statal && tar -cvf trimal_bin.tar trimal
+        run: cd source && make all && file trimal && file readal && file statal && cd .. && tar -cvf source_bin.tar -C source trimal readal statal
       - name: Upload build binaries for ${{ matrix.version }}
         uses: actions/upload-artifact@v4
         with:
           name: trimal_${{ matrix.version }}
-          path: source/trimal_bin.tar
+          path: source_bin.tar
           overwrite: true
           retention-days: 1
           if-no-files-found: error
@@ -175,34 +129,8 @@ jobs:
           path: source
       - name: Test trimAl for ${{ matrix.version }}
         run: |
-          tar -xvf source/trimal_bin.tar -C source && source/trimal &&
+          tar -xvf source/source_bin.tar -C source && source/trimal &&
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
-
-  check_release_binaries_windows:
-    runs-on: windows-2022
-    steps:
-      - name: Download release binaries for Windows_x86-64
-        run: |
-          curl -L -o trimal_windows.zip https://github.com/inab/trimal/releases/latest/download/trimAl_Windows_x86-64.zip
-      - name: Check release binaries for Windows_x86-64
-        run: |
-          powershell -Command "Expand-Archive -Path trimal_windows.zip -DestinationPath ."
-          Get-Command .\trimal.exe
-
-  test_binaries_windows:
-    runs-on: windows-2022
-    needs: check_release_binaries_windows
-    steps:
-      - uses: actions/checkout@v4
-      - name: Download Release Binaries
-        run: |
-          curl -L -o trimal_windows.zip https://github.com/inab/trimal/releases/latest/download/trimAl_Windows_x86-64.zip
-          powershell -Command "Expand-Archive -Path trimal_windows.zip -DestinationPath ."
-          Move-Item -Path .\trimal.exe -Destination .\source\
-      - name: Test trimAl for Windows
-        run: |
-          powershell -ExecutionPolicy Bypass -File .\scripts\generate_trimmed_msas.ps1
-          powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
 
   build_windows:
     runs-on: windows-2022
@@ -224,12 +152,13 @@ jobs:
           file trimal.exe
           file readal.exe
           file statal.exe
-          tar -cvf trimal_bin.tar trimal.exe
+          cd ..
+          tar -cvf source_bin.tar -C source trimal.exe readal.exe statal.exe
       - name: Upload build binaries for Windows
         uses: actions/upload-artifact@v4
         with:
           name: trimal_windows
-          path: source/trimal_bin.tar
+          path: source_bin.tar
           overwrite: true
           retention-days: 1
           if-no-files-found: error
@@ -246,6 +175,6 @@ jobs:
           path: source
       - name: Test trimAl for Windows
         run: |
-          tar -xvf source/trimal_bin.tar -C source
+          tar -xvf source/source_bin.tar -C source
           powershell -ExecutionPolicy Bypass -File .\scripts\generate_trimmed_msas.ps1
           powershell -ExecutionPolicy Bypass -File .\scripts\compare_trimmed_msas.ps1
