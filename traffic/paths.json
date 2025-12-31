@@ -3097,6 +3097,11 @@
         "count": 19,
         "uniques": 13,
         "request_date": "2025-09-10"
+      },
+      {
+        "count": 204,
+        "uniques": 156,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -6744,6 +6749,11 @@
         "count": 2,
         "uniques": 2,
         "request_date": "2025-08-24"
+      },
+      {
+        "count": 15,
+        "uniques": 10,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -11100,6 +11110,11 @@
         "count": 6,
         "uniques": 2,
         "request_date": "2025-08-26"
+      },
+      {
+        "count": 26,
+        "uniques": 16,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -12760,6 +12775,11 @@
         "count": 9,
         "uniques": 3,
         "request_date": "2025-07-08"
+      },
+      {
+        "count": 17,
+        "uniques": 10,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -14761,6 +14781,11 @@
         "count": 8,
         "uniques": 8,
         "request_date": "2025-08-25"
+      },
+      {
+        "count": 28,
+        "uniques": 24,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -17868,6 +17893,22 @@
         "count": 4,
         "uniques": 3,
         "request_date": "2025-09-10"
+      },
+      {
+        "count": 25,
+        "uniques": 22,
+        "request_date": "2025-12-31"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/releases/tag/v1.5.1",
+    "title": "Release Stable release of trimAl v1.5.1 · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 38,
+        "uniques": 35,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -19451,6 +19492,11 @@
         "count": 4,
         "uniques": 3,
         "request_date": "2025-08-21"
+      },
+      {
+        "count": 15,
+        "uniques": 7,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -21948,6 +21994,11 @@
         "count": 1,
         "uniques": 1,
         "request_date": "2025-09-10"
+      },
+      {
+        "count": 14,
+        "uniques": 9,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -31049,6 +31100,11 @@
         "count": 2,
         "uniques": 2,
         "request_date": "2025-08-26"
+      },
+      {
+        "count": 25,
+        "uniques": 11,
+        "request_date": "2025-12-31"
       }
     ]
   },

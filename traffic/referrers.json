@@ -3366,6 +3366,11 @@
         "count": 2,
         "uniques": 1,
         "request_date": "2025-09-07"
+      },
+      {
+        "count": 44,
+        "uniques": 23,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -7596,6 +7601,11 @@
         "count": 6,
         "uniques": 6,
         "request_date": "2025-09-07"
+      },
+      {
+        "count": 148,
+        "uniques": 70,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -7686,6 +7696,16 @@
         "count": 5,
         "uniques": 1,
         "request_date": "2024-11-11"
+      }
+    ]
+  },
+  {
+    "referrer": "apps.bear.bham.ac.uk",
+    "views": [
+      {
+        "count": 11,
+        "uniques": 1,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -10166,6 +10186,11 @@
         "count": 1,
         "uniques": 1,
         "request_date": "2025-08-25"
+      },
+      {
+        "count": 5,
+        "uniques": 4,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -16911,6 +16936,11 @@
         "count": 13,
         "uniques": 7,
         "request_date": "2025-08-29"
+      },
+      {
+        "count": 6,
+        "uniques": 3,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -19116,6 +19146,11 @@
         "count": 1,
         "uniques": 1,
         "request_date": "2025-09-07"
+      },
+      {
+        "count": 11,
+        "uniques": 4,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -20091,6 +20126,16 @@
         "count": 3,
         "uniques": 2,
         "request_date": "2025-07-06"
+      }
+    ]
+  },
+  {
+    "referrer": "link.zhihu.com",
+    "views": [
+      {
+        "count": 24,
+        "uniques": 17,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -24671,6 +24716,11 @@
         "count": 5,
         "uniques": 4,
         "request_date": "2025-09-07"
+      },
+      {
+        "count": 9,
+        "uniques": 5,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -27361,6 +27411,11 @@
         "count": 1,
         "uniques": 1,
         "request_date": "2025-09-07"
+      },
+      {
+        "count": 30,
+        "uniques": 17,
+        "request_date": "2025-12-31"
       }
     ]
   },
@@ -30506,6 +30561,11 @@
         "count": 3,
         "uniques": 3,
         "request_date": "2025-08-29"
+      },
+      {
+        "count": 95,
+        "uniques": 14,
+        "request_date": "2025-12-31"
       }
     ]
   },
