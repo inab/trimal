@@ -3177,6 +3177,11 @@
         "count": 262,
         "uniques": 182,
         "request_date": "2026-01-15"
+      },
+      {
+        "count": 281,
+        "uniques": 188,
+        "request_date": "2026-01-16"
       }
     ]
   },
@@ -6904,6 +6909,11 @@
         "count": 19,
         "uniques": 15,
         "request_date": "2026-01-15"
+      },
+      {
+        "count": 22,
+        "uniques": 16,
+        "request_date": "2026-01-16"
       }
     ]
   },
@@ -8276,6 +8286,11 @@
         "count": 20,
         "uniques": 1,
         "request_date": "2026-01-15"
+      },
+      {
+        "count": 20,
+        "uniques": 1,
+        "request_date": "2026-01-16"
       }
     ]
   },
@@ -11395,6 +11410,11 @@
         "count": 37,
         "uniques": 23,
         "request_date": "2026-01-15"
+      },
+      {
+        "count": 41,
+        "uniques": 23,
+        "request_date": "2026-01-16"
       }
     ]
   },
@@ -11502,6 +11522,11 @@
         "count": 10,
         "uniques": 4,
         "request_date": "2026-01-15"
+      },
+      {
+        "count": 11,
+        "uniques": 5,
+        "request_date": "2026-01-16"
       }
     ]
   },
@@ -13206,6 +13231,11 @@
         "count": 12,
         "uniques": 8,
         "request_date": "2026-01-15"
+      },
+      {
+        "count": 12,
+        "uniques": 7,
+        "request_date": "2026-01-16"
       }
     ]
   },
@@ -15287,6 +15317,11 @@
         "count": 53,
         "uniques": 42,
         "request_date": "2026-01-15"
+      },
+      {
+        "count": 57,
+        "uniques": 44,
+        "request_date": "2026-01-16"
       }
     ]
   },
@@ -18474,6 +18509,11 @@
         "count": 21,
         "uniques": 20,
         "request_date": "2026-01-15"
+      },
+      {
+        "count": 23,
+        "uniques": 22,
+        "request_date": "2026-01-16"
       }
     ]
   },
@@ -18560,6 +18600,22 @@
         "count": 70,
         "uniques": 46,
         "request_date": "2026-01-15"
+      },
+      {
+        "count": 79,
+        "uniques": 52,
+        "request_date": "2026-01-16"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/tags",
+    "title": "Tags · inab/trimal · GitHub",
+    "views": [
+      {
+        "count": 8,
+        "uniques": 8,
+        "request_date": "2026-01-16"
       }
     ]
   },
