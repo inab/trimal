@@ -3551,6 +3551,11 @@
         "count": 88,
         "uniques": 38,
         "request_date": "2026-01-26"
+      },
+      {
+        "count": 87,
+        "uniques": 35,
+        "request_date": "2026-01-27"
       }
     ]
   },
@@ -7921,6 +7926,11 @@
         "count": 229,
         "uniques": 108,
         "request_date": "2026-01-26"
+      },
+      {
+        "count": 270,
+        "uniques": 105,
+        "request_date": "2026-01-27"
       }
     ]
   },
@@ -10781,6 +10791,11 @@
         "count": 20,
         "uniques": 10,
         "request_date": "2026-01-26"
+      },
+      {
+        "count": 18,
+        "uniques": 9,
+        "request_date": "2026-01-27"
       }
     ]
   },
@@ -17636,6 +17651,11 @@
         "count": 13,
         "uniques": 3,
         "request_date": "2026-01-16"
+      },
+      {
+        "count": 4,
+        "uniques": 2,
+        "request_date": "2026-01-27"
       }
     ]
   },
@@ -21096,6 +21116,11 @@
         "count": 15,
         "uniques": 15,
         "request_date": "2026-01-26"
+      },
+      {
+        "count": 16,
+        "uniques": 15,
+        "request_date": "2026-01-27"
       }
     ]
   },
@@ -25711,6 +25736,11 @@
         "count": 17,
         "uniques": 8,
         "request_date": "2026-01-26"
+      },
+      {
+        "count": 20,
+        "uniques": 10,
+        "request_date": "2026-01-27"
       }
     ]
   },
@@ -28536,6 +28566,11 @@
         "count": 70,
         "uniques": 43,
         "request_date": "2026-01-26"
+      },
+      {
+        "count": 65,
+        "uniques": 39,
+        "request_date": "2026-01-27"
       }
     ]
   },
@@ -31816,6 +31851,11 @@
         "count": 18,
         "uniques": 10,
         "request_date": "2026-01-26"
+      },
+      {
+        "count": 24,
+        "uniques": 12,
+        "request_date": "2026-01-27"
       }
     ]
   },
@@ -31826,6 +31866,16 @@
         "count": 3,
         "uniques": 1,
         "request_date": "2025-04-22"
+      }
+    ]
+  },
+  {
+    "referrer": "wiki.lisc.univie.ac.at",
+    "views": [
+      {
+        "count": 4,
+        "uniques": 1,
+        "request_date": "2026-01-27"
       }
     ]
   },
@@ -32176,6 +32226,11 @@
         "count": 11,
         "uniques": 1,
         "request_date": "2026-01-26"
+      },
+      {
+        "count": 11,
+        "uniques": 1,
+        "request_date": "2026-01-27"
       }
     ]
   },
