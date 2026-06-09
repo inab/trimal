@@ -97,6 +97,7 @@ jobs:
           run: tar -xvf source/source_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   build_macos:
+    if: endsWith(github.head_ref, 'release')
     strategy:
       matrix:
         version: [macos-14, macos-15-intel]
@@ -115,6 +116,7 @@ jobs:
           if-no-files-found: error
   
   test_macos:
+    if: endsWith(github.head_ref, 'release')
     strategy:
       matrix:
         version: [macos-14, macos-15-intel]
@@ -133,6 +135,7 @@ jobs:
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   build_windows:
+    if: endsWith(github.head_ref, 'release')
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
@@ -164,6 +167,7 @@ jobs:
           if-no-files-found: error
 
   test_windows:
+    if: endsWith(github.head_ref, 'release')
     runs-on: windows-2022
     needs: build_windows
     steps:
