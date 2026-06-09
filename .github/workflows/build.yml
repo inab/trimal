@@ -21,7 +21,7 @@ name: Build
 
 jobs:
   build_ubuntu_x86_64:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - name: Build trimAl for Linux x86_64
@@ -37,7 +37,7 @@ jobs:
 
   build_ubuntu_aarch64:
     if: endsWith(github.head_ref, 'release')
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - name: Build trimAl for Linux aarch64
@@ -63,7 +63,7 @@ jobs:
           if-no-files-found: error
 
   test_ubuntu_x86_64:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: build_ubuntu_x86_64
     steps:
       - uses: actions/checkout@v4
@@ -77,7 +77,7 @@ jobs:
 
   test_ubuntu_aarch64:
     if: endsWith(github.head_ref, 'release')
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: build_ubuntu_aarch64
     steps:
       - uses: actions/checkout@v4
