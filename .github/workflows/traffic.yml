@@ -8,7 +8,7 @@ jobs:
   fetch_traffic:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with: { ref: schedule-traffic-workflow }
       - name: Fetch clones data
         run: |
@@ -85,14 +85,14 @@ jobs:
           cat temp_merged_referrers_file.json > "$referrers_file" && rm temp_merged_referrers_file.json temp_referrers_traffic.json
           cat "$referrers_file"
       - name: Import GPG Key
-        uses: crazy-max/ghaction-import-gpg@v6
+        uses: crazy-max/ghaction-import-gpg@v7
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
           git_user_signingkey: true
           git_commit_gpgsign: true
       - name: Commit changes
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v10
         with:
           author_name: GitHub Actions bot
           author_email: ${{ vars.CI_EMAIL }}
