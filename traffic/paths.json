@@ -3912,6 +3912,11 @@
         "count": 203,
         "uniques": 145,
         "request_date": "2026-06-12"
+      },
+      {
+        "count": 208,
+        "uniques": 150,
+        "request_date": "2026-06-13"
       }
     ]
   },
@@ -9813,6 +9818,11 @@
         "count": 5,
         "uniques": 5,
         "request_date": "2026-06-12"
+      },
+      {
+        "count": 5,
+        "uniques": 5,
+        "request_date": "2026-06-13"
       }
     ]
   },
@@ -13667,6 +13677,11 @@
         "count": 24,
         "uniques": 14,
         "request_date": "2026-06-12"
+      },
+      {
+        "count": 23,
+        "uniques": 14,
+        "request_date": "2026-06-13"
       }
     ]
   },
@@ -15165,6 +15180,17 @@
     ]
   },
   {
+    "path": "/inab/trimal/issues/63",
+    "title": "/issues/63",
+    "views": [
+      {
+        "count": 5,
+        "uniques": 4,
+        "request_date": "2026-06-13"
+      }
+    ]
+  },
+  {
     "path": "/inab/trimal/issues/93",
     "title": "errors of \"Segmentation fault (core dumped)\" · Issue #93 · inab/trimal",
     "views": [
@@ -16135,6 +16161,11 @@
         "count": 9,
         "uniques": 4,
         "request_date": "2026-06-12"
+      },
+      {
+        "count": 10,
+        "uniques": 4,
+        "request_date": "2026-06-13"
       }
     ]
   },
@@ -18951,6 +18982,11 @@
         "count": 38,
         "uniques": 31,
         "request_date": "2026-06-12"
+      },
+      {
+        "count": 38,
+        "uniques": 29,
+        "request_date": "2026-06-13"
       }
     ]
   },
@@ -22848,6 +22884,11 @@
         "count": 17,
         "uniques": 16,
         "request_date": "2026-06-12"
+      },
+      {
+        "count": 17,
+        "uniques": 16,
+        "request_date": "2026-06-13"
       }
     ]
   },
@@ -23669,6 +23710,11 @@
         "count": 45,
         "uniques": 35,
         "request_date": "2026-06-12"
+      },
+      {
+        "count": 42,
+        "uniques": 33,
+        "request_date": "2026-06-13"
       }
     ]
   },
@@ -25763,6 +25809,11 @@
         "count": 7,
         "uniques": 4,
         "request_date": "2026-06-12"
+      },
+      {
+        "count": 8,
+        "uniques": 5,
+        "request_date": "2026-06-13"
       }
     ]
   },
@@ -39241,6 +39292,11 @@
         "count": 11,
         "uniques": 9,
         "request_date": "2026-06-12"
+      },
+      {
+        "count": 11,
+        "uniques": 9,
+        "request_date": "2026-06-13"
       }
     ]
   },
