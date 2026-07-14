@@ -9,8 +9,9 @@
 
     statAl v1.5.2: a tool for getting descriptive alignment features/scores.
 
-    2009-2020
+    2009-2026
         Fernandez-Rodriguez V.  (victor.fernandez@bsc.es)
+        Diaz-Roussel N.        (nicolas.diazroussel@bsc.es)
         Capella-Gutierrez S.    (salvador.capella@bsc.es)
         Gabaldon, T.            (tgabaldon@bsc.es)
 
@@ -31,10 +32,10 @@
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 
-#define BUILD "2025-11-25"
+#define BUILD "2026-07-14"
 #define VERSION 1.5
-#define REVISION 1
-#define AUTHORS "2009-2020. Victor Fernández-Rodríguez, Toni Gabaldón, and Salvador Capella-Gutiérrez"
+#define REVISION 2
+#define AUTHORS "2009-2026. Victor Fernández-Rodríguez, Toni Gabaldón, Nicolás Díaz-Roussel and Salvador Capella-Gutiérrez"
 
 #define DNAType 1
 #define RNAType 2
