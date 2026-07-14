@@ -1,10 +1,10 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.5.2: a tool for automated alignment trimming in large-scale
+    trimAl v1.5.1: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    readAl v1.5.2: a tool for automated alignment conversion among different
+    readAl v1.5.1: a tool for automated alignment conversion among different
                  formats.
 
     2009-2020
@@ -1922,7 +1922,7 @@ bool alignment::alignmentSummaryHTML(char *destFile, int residues, int seqs, \
   /* Print HTML header into output file */
   file << "<!DOCTYPE html>" << endl << "<html><head>" << endl << "    <meta "
     << "http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />"
-    << endl << "    <title>trimAl v1.5.2 Summary</title>" << endl
+    << endl << "    <title>trimAl v1.5.1 Summary</title>" << endl
     << "    <style type=\"text/css\" media=\"all\">" << endl
 
     << "    #b  { background-color: #3366ff; }\n"
@@ -2159,7 +2159,7 @@ bool alignment::alignmentColourHTML(ostream &file) {
   /* Print HTML header into output file */
   file << "<!DOCTYPE html>" << endl << "<html><head>" << endl << "    <meta "
     << "http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\" />"
-    << endl << "    <title>readAl v1.5.2</title>" << endl
+    << endl << "    <title>readAl v1.5.1</title>" << endl
     << "    <style type=\"text/css\">" << endl
     << "    #b  { background-color: #3366ff; }\n"
     << "    #r  { background-color: #cc0000; }\n"

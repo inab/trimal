@@ -1,13 +1,13 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.5.2: a tool for automated alignment trimming in large-scale
+    trimAl v1.5.1: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    readAl v1.5.2: a tool for automated alignment conversion among different
+    readAl v1.5.1: a tool for automated alignment conversion among different
                  formats.
 
-    statAl v1.5.2: a tool for getting stats about multiple sequence alignments.
+    statAl v1.5.1: a tool for getting stats about multiple sequence alignments.
 
 
     2009-2020
@@ -1505,16 +1505,14 @@ alignment *alignment::getClustering(float identityThreshold) {
   /* We allocate memory to save the sequences selected */
   matrixAux = new string[clustering[0]];
   newSeqsName = new string[clustering[0]];
-  newSeqsInfo = seqsInfo == NULL ? NULL : new string[clustering[0]];
+  newSeqsInfo = new string[clustering[0]];
 
   /* Copy to new structures the information that have
    * been selected previously. */
   for(i = 0, j = 0; i < sequenNumber; i++)
     if(saveSequences[i] != -1) {
        newSeqsName[j] = seqsName[i];
-       if (newSeqsInfo != NULL) {
-         newSeqsInfo[j] = seqsInfo[i];
-       }
+       newSeqsInfo[j] = seqsInfo[i];
        matrixAux[j] = sequences[i];
        j++;
     }
@@ -1535,9 +1533,6 @@ alignment *alignment::getClustering(float identityThreshold) {
   /* Deallocated auxiliar memory */
   delete [] matrixAux;
   delete [] newSeqsName;
-  if (newSeqsInfo != NULL) {
-    delete [] newSeqsInfo;
-  }
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
 
   /* ***** ***** ***** ***** ***** ***** ***** ***** */
@@ -2214,7 +2209,7 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine,
   /* Allocate memory  for selected sequences/columns */
   matrixAux = new string[counter.sequences];
   newSeqsName = new string[counter.sequences];
-  newSeqsInfo = seqsInfo == NULL ? NULL : new string[counter.sequences];
+  newSeqsInfo = new string[counter.sequences];
 
   /* Fill local allocated memory with previously selected data */
   fillNewDataStructure(matrixAux, newSeqsName, newSeqsInfo);
@@ -2230,9 +2225,6 @@ alignment *alignment::cleanByCutValue(double cut, float baseLine,
   /* Deallocate local memory */
   delete[] matrixAux;
   delete[] newSeqsName;
-  if (newSeqsInfo != NULL) {
-    delete[] newSeqsInfo;
-  }
 
   /* Return the new alignment reference */
   return newAlig;
@@ -2371,7 +2363,7 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine,
   /* Allocate memory  for selected sequences/columns */
   matrixAux = new string[counter.sequences];
   newSeqsName = new string[counter.sequences];
-  newSeqsInfo = seqsInfo == NULL ? NULL : new string[counter.sequences];
+  newSeqsInfo = new string[counter.sequences];
 
   /* Fill local allocated memory with previously selected data */
   fillNewDataStructure(matrixAux, newSeqsName, newSeqsInfo);
@@ -2387,9 +2379,6 @@ alignment *alignment::cleanByCutValue(float cut, float baseLine,
   /* Deallocate local memory */
   delete[] matrixAux;
   delete[] newSeqsName;
-  if (newSeqsInfo != NULL) {
-    delete[] newSeqsInfo;
-  }
 
   /* Return the new alignment reference */
   return newAlig;
@@ -2569,7 +2558,7 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol,
   /* Allocate memory  for selected sequences/columns */
   matrixAux = new string[counter.sequences];
   newSeqsName = new string[counter.sequences];
-  newSeqsInfo = seqsInfo == NULL ? NULL : new string[counter.sequences];
+  newSeqsInfo = new string[counter.sequences];
 
   /* Fill local allocated memory with previously selected data */
   fillNewDataStructure(matrixAux, newSeqsName, newSeqsInfo);
@@ -2585,9 +2574,6 @@ alignment *alignment::cleanByCutValue(double cutGaps, const int *gInCol,
   /* Deallocate local memory */
   delete[] matrixAux;
   delete[] newSeqsName;
-  if (newSeqsInfo != NULL) {
-    delete[] newSeqsInfo;
-  }
 
   /* Return the new alignment reference */
   return newAlig;
@@ -2780,7 +2766,7 @@ alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
   /* Allocate memory  for selected sequences/columns */
   matrixAux = new string[counter.sequences];
   newSeqsName = new string[counter.sequences];
-  newSeqsInfo = seqsInfo == NULL ? NULL : new string[counter.sequences];
+  newSeqsInfo = new string[counter.sequences];
 
   /* Fill local allocated memory with previously selected data */
   fillNewDataStructure(matrixAux, newSeqsName, newSeqsInfo);
@@ -2796,9 +2782,6 @@ alignment *alignment::cleanOverlapSeq(float minimumOverlap, float *overlapSeq,
   /* Deallocate local memory */
   delete [] matrixAux;
   delete [] newSeqsName;
-  if (newSeqsInfo != NULL) {
-    delete[] newSeqsInfo;
-  }
 
   /* Return the new alignment reference */
   return newAlig;
@@ -2831,7 +2814,7 @@ alignment *alignment::removeColumns(int *columns, int init, int size,
   /* Allocate memory  for selected sequences/columns */
   matrixAux = new string[counter.sequences];
   newSeqsName = new string[counter.sequences];
-  newSeqsInfo = seqsInfo == NULL ? NULL : new string[counter.sequences];
+  newSeqsInfo = new string[counter.sequences];
 
   /* Fill local allocated memory with previously selected data */
   fillNewDataStructure(matrixAux, newSeqsName, newSeqsInfo);
@@ -2847,9 +2830,6 @@ alignment *alignment::removeColumns(int *columns, int init, int size,
   /* Deallocate local memory */
   delete[] matrixAux;
   delete[] newSeqsName;
-  if (newSeqsInfo != NULL) {
-    delete[] newSeqsInfo;
-  }
 
   /* Return the new alignment reference */
   return newAlig;
@@ -2883,7 +2863,7 @@ alignment *alignment::removeSequences(int *seqs, int init, int size,
   /* Allocate memory  for selected sequences/columns */
   matrixAux = new string[counter.sequences];
   newSeqsName = new string[counter.sequences];
-  newSeqsInfo = seqsInfo == NULL ? NULL : new string[counter.sequences];
+  newSeqsInfo = new string[counter.sequences];
 
   /* Fill local allocated memory with previously selected data */
   fillNewDataStructure(matrixAux, newSeqsName, newSeqsInfo);
@@ -2899,9 +2879,6 @@ alignment *alignment::removeSequences(int *seqs, int init, int size,
   /* Free local memory */
   delete [] matrixAux;
   delete [] newSeqsName;
-  if (newSeqsInfo != NULL) {
-    delete[] newSeqsInfo;
-  }
 
   /* Return the new alignment reference */
   return newAlig;
@@ -3082,10 +3059,7 @@ void alignment::fillNewDataStructure(string *newMatrix, string *newNames, string
       continue;
 
     newNames[j] = seqsName[i];
-    if (newInfos != NULL) {
-      newInfos[j] = seqsInfo[i];
-    }
-
+    newInfos[j] = seqsInfo[i];
     for(k = 0; k < residNumber; k++) {
       if(saveResidues[k] == -1)
         continue;
