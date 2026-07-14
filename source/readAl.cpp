@@ -1,7 +1,7 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    readAl v1.5.1: a tool for automated alignment conversion among different
+    readAl v1.5.2: a tool for automated alignment conversion among different
                  formats.
 
     2009-2020

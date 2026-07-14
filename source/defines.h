@@ -1,13 +1,13 @@
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
    ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 
-    trimAl v1.5.1: a tool for automated alignment trimming in large-scale
+    trimAl v1.5.2: a tool for automated alignment trimming in large-scale
                  phylogenetics analyses.
 
-    readAl v1.5.1: a tool for automated alignment conversion among different
+    readAl v1.5.2: a tool for automated alignment conversion among different
                  formats.
 
-    statAl v1.5.1: a tool for getting descriptive alignment features/scores.
+    statAl v1.5.2: a tool for getting descriptive alignment features/scores.
 
     2009-2020
         Fernandez-Rodriguez V.  (victor.fernandez@bsc.es)

@@ -21,13 +21,13 @@ name: Build
 
 jobs:
   build_ubuntu_x86_64:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build trimAl for Linux x86_64
         run: cd source && make all && file trimal && file readal && file statal && cd .. && tar -cvf source_bin.tar -C source trimal readal statal
       - name: Upload build binaries for Linux x86_64
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: trimal_linux_x86_64
           path: source_bin.tar
@@ -37,9 +37,9 @@ jobs:
 
   build_ubuntu_aarch64:
     if: endsWith(github.head_ref, 'release')
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build trimAl for Linux aarch64
         uses: uraimo/run-on-arch-action@v3
         with:
@@ -54,7 +54,7 @@ jobs:
           run: |
             cd /trimal/source && make all && file trimal && file readal && file statal && cd .. && tar -cvf source_bin.tar -C source trimal readal statal
       - name: Upload build binaries for Linux aarch64
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: trimal_linux_aarch64
           path: source_bin.tar
@@ -63,10 +63,10 @@ jobs:
           if-no-files-found: error
 
   test_ubuntu_x86_64:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: build_ubuntu_x86_64
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Download build binaries for Linux x86_64
         uses: actions/download-artifact@v4
         with:
@@ -77,10 +77,10 @@ jobs:
 
   test_ubuntu_aarch64:
     if: endsWith(github.head_ref, 'release')
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: build_ubuntu_aarch64
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Download build binaries for Linux aarch64
         uses: actions/download-artifact@v4
         with:
@@ -97,12 +97,13 @@ jobs:
           run: tar -xvf source/source_bin.tar -C source && source/trimal && ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   build_macos:
+    if: endsWith(github.head_ref, 'release')
     strategy:
       matrix:
         version: [macos-14, macos-15-intel]
     runs-on: ${{ matrix.version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build trimAl for ${{ matrix.version }}
         run: cd source && make all && file trimal && file readal && file statal && cd .. && tar -cvf source_bin.tar -C source trimal readal statal
       - name: Upload build binaries for ${{ matrix.version }}
@@ -115,13 +116,14 @@ jobs:
           if-no-files-found: error
   
   test_macos:
+    if: endsWith(github.head_ref, 'release')
     strategy:
       matrix:
         version: [macos-14, macos-15-intel]
     runs-on: ${{ matrix.version }}
     needs: build_macos
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Download build binaries for ${{ matrix.version }}
         uses: actions/download-artifact@v4
         with:
@@ -133,9 +135,10 @@ jobs:
           ./scripts/generate_trimmed_msas.sh && ./scripts/compare_trimmed_msas.sh
 
   build_windows:
+    if: endsWith(github.head_ref, 'release')
     runs-on: windows-2022
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Set up MSYS2
         uses: msys2/setup-msys2@v2
         with:
@@ -164,10 +167,11 @@ jobs:
           if-no-files-found: error
 
   test_windows:
+    if: endsWith(github.head_ref, 'release')
     runs-on: windows-2022
     needs: build_windows
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Download build binaries for Windows
         uses: actions/download-artifact@v4
         with:
