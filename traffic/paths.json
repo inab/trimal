@@ -4187,6 +4187,11 @@
         "count": 138,
         "uniques": 108,
         "request_date": "2026-08-06"
+      },
+      {
+        "count": 139,
+        "uniques": 111,
+        "request_date": "2026-08-07"
       }
     ]
   },
@@ -8844,6 +8849,11 @@
         "count": 4,
         "uniques": 4,
         "request_date": "2026-08-06"
+      },
+      {
+        "count": 4,
+        "uniques": 4,
+        "request_date": "2026-08-07"
       }
     ]
   },
@@ -14618,6 +14628,11 @@
         "count": 15,
         "uniques": 8,
         "request_date": "2026-08-06"
+      },
+      {
+        "count": 12,
+        "uniques": 6,
+        "request_date": "2026-08-07"
       }
     ]
   },
@@ -16157,6 +16172,11 @@
         "count": 22,
         "uniques": 14,
         "request_date": "2024-03-18"
+      },
+      {
+        "count": 3,
+        "uniques": 3,
+        "request_date": "2026-08-07"
       }
     ]
   },
@@ -16168,6 +16188,17 @@
         "count": 5,
         "uniques": 4,
         "request_date": "2026-06-13"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/issues/74",
+    "title": "/issues/74",
+    "views": [
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2026-08-07"
       }
     ]
   },
@@ -20453,6 +20484,11 @@
         "count": 27,
         "uniques": 25,
         "request_date": "2026-08-06"
+      },
+      {
+        "count": 24,
+        "uniques": 22,
+        "request_date": "2026-08-07"
       }
     ]
   },
@@ -24625,6 +24661,11 @@
         "count": 11,
         "uniques": 9,
         "request_date": "2026-08-06"
+      },
+      {
+        "count": 12,
+        "uniques": 10,
+        "request_date": "2026-08-07"
       }
     ]
   },
@@ -25721,6 +25762,11 @@
         "count": 46,
         "uniques": 36,
         "request_date": "2026-08-06"
+      },
+      {
+        "count": 50,
+        "uniques": 39,
+        "request_date": "2026-08-07"
       }
     ]
   },
@@ -28050,6 +28096,11 @@
         "count": 6,
         "uniques": 4,
         "request_date": "2026-08-06"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2026-08-07"
       }
     ]
   },
@@ -31127,6 +31178,11 @@
         "count": 4,
         "uniques": 3,
         "request_date": "2026-08-06"
+      },
+      {
+        "count": 3,
+        "uniques": 2,
+        "request_date": "2026-08-07"
       }
     ]
   },
