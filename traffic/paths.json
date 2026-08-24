@@ -4272,6 +4272,11 @@
         "count": 166,
         "uniques": 121,
         "request_date": "2026-08-23"
+      },
+      {
+        "count": 169,
+        "uniques": 122,
+        "request_date": "2026-08-24"
       }
     ]
   },
@@ -4656,6 +4661,17 @@
         "count": 1,
         "uniques": 1,
         "request_date": "2025-08-25"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/blob/53f2afd7/source/statisticsGaps.cpp",
+    "title": "/blob/53f2afd7/source/statisticsGaps.cpp",
+    "views": [
+      {
+        "count": 4,
+        "uniques": 4,
+        "request_date": "2026-08-24"
       }
     ]
   },
@@ -9014,6 +9030,11 @@
         "count": 7,
         "uniques": 6,
         "request_date": "2026-08-23"
+      },
+      {
+        "count": 8,
+        "uniques": 7,
+        "request_date": "2026-08-24"
       }
     ]
   },
@@ -14963,6 +14984,11 @@
         "count": 13,
         "uniques": 11,
         "request_date": "2026-08-23"
+      },
+      {
+        "count": 13,
+        "uniques": 11,
+        "request_date": "2026-08-24"
       }
     ]
   },
@@ -20969,6 +20995,11 @@
         "count": 46,
         "uniques": 37,
         "request_date": "2026-08-23"
+      },
+      {
+        "count": 44,
+        "uniques": 35,
+        "request_date": "2026-08-24"
       }
     ]
   },
@@ -25226,6 +25257,11 @@
         "count": 15,
         "uniques": 12,
         "request_date": "2026-08-23"
+      },
+      {
+        "count": 15,
+        "uniques": 12,
+        "request_date": "2026-08-24"
       }
     ]
   },
@@ -26407,6 +26443,11 @@
         "count": 67,
         "uniques": 53,
         "request_date": "2026-08-23"
+      },
+      {
+        "count": 66,
+        "uniques": 52,
+        "request_date": "2026-08-24"
       }
     ]
   },
@@ -28821,6 +28862,11 @@
         "count": 13,
         "uniques": 10,
         "request_date": "2026-08-23"
+      },
+      {
+        "count": 13,
+        "uniques": 10,
+        "request_date": "2026-08-24"
       }
     ]
   },
@@ -34529,6 +34575,11 @@
         "count": 7,
         "uniques": 2,
         "request_date": "2026-08-06"
+      },
+      {
+        "count": 4,
+        "uniques": 4,
+        "request_date": "2026-08-24"
       }
     ]
   },
@@ -42859,6 +42910,11 @@
         "count": 6,
         "uniques": 5,
         "request_date": "2026-08-23"
+      },
+      {
+        "count": 7,
+        "uniques": 6,
+        "request_date": "2026-08-24"
       }
     ]
   },
