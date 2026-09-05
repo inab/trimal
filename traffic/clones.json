@@ -1,5 +1,5 @@
 {
-  "count": 3041,
+  "count": 21955,
   "clones": [
     {
       "dailyUniques": 3,
@@ -1147,9 +1147,3979 @@
       "count": 8
     },
     {
-      "dailyUniques": 1,
+      "dailyUniques": 6,
       "date": "2024-07-02",
+      "count": 14
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-07-03",
+      "count": 4
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-07-04",
+      "count": 3
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-07-05",
+      "count": 6
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-07-06",
+      "count": 3
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-07-07",
+      "count": 4
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-07-08",
+      "count": 8
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2024-07-09",
+      "count": 13
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2024-07-10",
+      "count": 27
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-07-11",
+      "count": 5
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-07-12",
+      "count": 4
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-07-13",
+      "count": 6
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-07-14",
+      "count": 3
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-07-15",
+      "count": 3
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-07-16",
+      "count": 6
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2024-07-17",
+      "count": 6
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-07-18",
+      "count": 5
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-07-19",
+      "count": 3
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-07-20",
+      "count": 5
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-07-21",
+      "count": 2
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-07-22",
+      "count": 9
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2024-07-23",
+      "count": 9
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2024-07-24",
+      "count": 8
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-07-25",
+      "count": 12
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-07-26",
+      "count": 7
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-07-27",
+      "count": 3
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-07-28",
+      "count": 2
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-07-29",
+      "count": 3
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-07-30",
+      "count": 3
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-07-31",
+      "count": 4
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2024-08-01",
+      "count": 7
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-08-02",
+      "count": 5
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-08-03",
+      "count": 5
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-08-04",
+      "count": 2
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2024-08-05",
+      "count": 7
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-08-06",
+      "count": 4
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-08-07",
+      "count": 3
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-08-08",
+      "count": 30
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2024-08-09",
+      "count": 18
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-08-10",
+      "count": 5
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2024-08-11",
+      "count": 7
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-08-12",
+      "count": 47
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-08-13",
+      "count": 7
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-08-14",
+      "count": 2
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-08-15",
+      "count": 7
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-08-16",
+      "count": 2
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-08-17",
+      "count": 4
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-08-18",
+      "count": 4
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-08-19",
+      "count": 2
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-08-20",
+      "count": 4
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-08-21",
+      "count": 4
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-08-22",
+      "count": 4
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-08-23",
+      "count": 3
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-08-24",
+      "count": 4
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-08-25",
+      "count": 5
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-08-26",
+      "count": 8
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-08-27",
+      "count": 4
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-08-28",
+      "count": 174
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-08-29",
+      "count": 6
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-08-30",
+      "count": 4
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-08-31",
+      "count": 3
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-09-01",
+      "count": 2
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-09-02",
+      "count": 5
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-09-03",
+      "count": 7
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-09-04",
+      "count": 2
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-09-05",
+      "count": 3
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-09-06",
+      "count": 7
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-09-07",
+      "count": 3
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-09-08",
+      "count": 2
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-09-09",
+      "count": 8
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-09-10",
+      "count": 2
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-09-11",
+      "count": 4
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-09-12",
+      "count": 2
+    },
+    {
+      "dailyUniques": 1,
+      "date": "2024-09-13",
       "count": 1
+    },
+    {
+      "dailyUniques": 1,
+      "date": "2024-09-14",
+      "count": 1
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-09-15",
+      "count": 2
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-09-16",
+      "count": 3
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-09-17",
+      "count": 7
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-09-18",
+      "count": 4
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2024-09-19",
+      "count": 7
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-09-20",
+      "count": 7
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-09-21",
+      "count": 6
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-09-22",
+      "count": 3
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2024-09-23",
+      "count": 6
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-09-24",
+      "count": 5
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-09-25",
+      "count": 21
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-09-26",
+      "count": 3
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-09-27",
+      "count": 21
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-09-28",
+      "count": 4
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-09-29",
+      "count": 4
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-09-30",
+      "count": 3
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-10-01",
+      "count": 6
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-10-02",
+      "count": 4
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-10-03",
+      "count": 3
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-10-04",
+      "count": 2
+    },
+    {
+      "dailyUniques": 1,
+      "date": "2024-10-05",
+      "count": 1
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-10-06",
+      "count": 2
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-10-07",
+      "count": 4
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-10-08",
+      "count": 4
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-10-09",
+      "count": 3
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-10-10",
+      "count": 7
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-10-11",
+      "count": 3
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-10-12",
+      "count": 8
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2024-10-13",
+      "count": 6
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-10-14",
+      "count": 4
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-10-15",
+      "count": 3
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-10-16",
+      "count": 5
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-10-17",
+      "count": 2
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-10-18",
+      "count": 4
+    },
+    {
+      "dailyUniques": 1,
+      "date": "2024-10-19",
+      "count": 1
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-10-20",
+      "count": 3
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-10-21",
+      "count": 4
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-10-22",
+      "count": 14
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2024-10-23",
+      "count": 19
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-10-24",
+      "count": 3
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-10-25",
+      "count": 8
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-10-26",
+      "count": 2
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-10-27",
+      "count": 4
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2024-10-28",
+      "count": 6
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-10-29",
+      "count": 2
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2024-10-30",
+      "count": 6
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-10-31",
+      "count": 2
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-11-01",
+      "count": 4
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-11-02",
+      "count": 4
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-11-03",
+      "count": 2
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-11-04",
+      "count": 5
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-11-05",
+      "count": 4
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-11-06",
+      "count": 4
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-11-07",
+      "count": 2
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-11-08",
+      "count": 2
+    },
+    {
+      "dailyUniques": 1,
+      "date": "2024-11-09",
+      "count": 1
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-11-10",
+      "count": 2
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-11-11",
+      "count": 4
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-11-12",
+      "count": 2
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-11-13",
+      "count": 4
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-11-14",
+      "count": 9
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-11-15",
+      "count": 3
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-11-16",
+      "count": 2
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-11-17",
+      "count": 2
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-11-18",
+      "count": 16
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-11-19",
+      "count": 5
+    },
+    {
+      "dailyUniques": 1,
+      "date": "2024-11-20",
+      "count": 1
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2024-11-21",
+      "count": 18
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-11-22",
+      "count": 15
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-11-23",
+      "count": 2
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-11-24",
+      "count": 2
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-11-25",
+      "count": 5
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-11-26",
+      "count": 9
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2024-11-27",
+      "count": 6
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2024-11-28",
+      "count": 11
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-11-29",
+      "count": 2
+    },
+    {
+      "dailyUniques": 1,
+      "date": "2024-11-30",
+      "count": 1
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-12-01",
+      "count": 3
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-12-02",
+      "count": 7
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-12-03",
+      "count": 2
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2024-12-04",
+      "count": 8
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-12-05",
+      "count": 4
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-12-06",
+      "count": 3
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-12-07",
+      "count": 2
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-12-08",
+      "count": 5
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-12-09",
+      "count": 4
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-12-10",
+      "count": 5
+    },
+    {
+      "dailyUniques": 1,
+      "date": "2024-12-11",
+      "count": 1
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-12-12",
+      "count": 5
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-12-13",
+      "count": 2
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-12-14",
+      "count": 3
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-12-15",
+      "count": 5
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2024-12-16",
+      "count": 9
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-12-17",
+      "count": 4
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-12-18",
+      "count": 5
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-12-19",
+      "count": 4
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-12-20",
+      "count": 15
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2024-12-21",
+      "count": 4
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-12-22",
+      "count": 2
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-12-23",
+      "count": 3
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-12-24",
+      "count": 5
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-12-25",
+      "count": 3
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2024-12-26",
+      "count": 5
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2024-12-27",
+      "count": 7
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-12-28",
+      "count": 3
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2024-12-29",
+      "count": 3
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2024-12-30",
+      "count": 2
+    },
+    {
+      "dailyUniques": 1,
+      "date": "2024-12-31",
+      "count": 1
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2025-01-01",
+      "count": 2
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2025-01-02",
+      "count": 3
+    },
+    {
+      "dailyUniques": 1,
+      "date": "2025-01-03",
+      "count": 2
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-01-04",
+      "count": 5
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2025-01-05",
+      "count": 3
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-01-06",
+      "count": 5
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-01-07",
+      "count": 4
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-01-08",
+      "count": 8
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-01-09",
+      "count": 5
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2025-01-10",
+      "count": 3
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2025-01-11",
+      "count": 3
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-01-12",
+      "count": 4
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-01-13",
+      "count": 4
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-01-14",
+      "count": 6
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-01-15",
+      "count": 5
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-01-16",
+      "count": 4
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-01-17",
+      "count": 5
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2025-01-18",
+      "count": 3
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2025-01-19",
+      "count": 3
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2025-01-20",
+      "count": 2
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-01-21",
+      "count": 4
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2025-01-22",
+      "count": 2
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-01-23",
+      "count": 5
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2025-01-24",
+      "count": 2
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2025-01-25",
+      "count": 3
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-01-26",
+      "count": 5
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2025-01-27",
+      "count": 3
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2025-01-28",
+      "count": 2
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2025-01-29",
+      "count": 3
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-01-30",
+      "count": 15
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-01-31",
+      "count": 8
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2025-02-01",
+      "count": 2
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2025-02-02",
+      "count": 3
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-02-03",
+      "count": 15
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-02-04",
+      "count": 5
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-02-05",
+      "count": 7
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-02-06",
+      "count": 11
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-02-07",
+      "count": 11
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-02-08",
+      "count": 8
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-02-09",
+      "count": 7
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-02-10",
+      "count": 9
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2025-02-11",
+      "count": 17
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-02-12",
+      "count": 10
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-02-13",
+      "count": 6
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-02-14",
+      "count": 11
+    },
+    {
+      "dailyUniques": 2,
+      "date": "2025-02-15",
+      "count": 2
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-02-16",
+      "count": 6
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-02-17",
+      "count": 11
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-02-18",
+      "count": 10
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-02-19",
+      "count": 8
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-02-20",
+      "count": 4
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-02-21",
+      "count": 8
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-02-22",
+      "count": 8
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-02-23",
+      "count": 5
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-02-24",
+      "count": 7
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2025-02-25",
+      "count": 4
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-02-26",
+      "count": 6
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-02-27",
+      "count": 262
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2025-02-28",
+      "count": 72
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-03-01",
+      "count": 10
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-03-02",
+      "count": 4
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-03-03",
+      "count": 12
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-03-04",
+      "count": 62
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-03-05",
+      "count": 59
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-03-06",
+      "count": 9
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-03-07",
+      "count": 8
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-03-08",
+      "count": 10
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-03-09",
+      "count": 13
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2025-03-10",
+      "count": 17
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-03-11",
+      "count": 21
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-03-12",
+      "count": 11
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-03-13",
+      "count": 12
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-03-14",
+      "count": 10
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-03-15",
+      "count": 9
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-03-16",
+      "count": 6
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-03-17",
+      "count": 13
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-03-18",
+      "count": 10
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-03-19",
+      "count": 13
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-03-20",
+      "count": 11
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-03-21",
+      "count": 20
+    },
+    {
+      "dailyUniques": 3,
+      "date": "2025-03-22",
+      "count": 3
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-03-23",
+      "count": 5
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-03-24",
+      "count": 17
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-03-25",
+      "count": 8
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-03-26",
+      "count": 9
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-03-27",
+      "count": 8
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-03-28",
+      "count": 11
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-03-29",
+      "count": 4
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-03-30",
+      "count": 9
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-03-31",
+      "count": 10
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2025-04-01",
+      "count": 28
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2025-04-02",
+      "count": 13
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-04-03",
+      "count": 20
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-04-04",
+      "count": 14
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-04-05",
+      "count": 17
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-04-06",
+      "count": 6
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-04-07",
+      "count": 9
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-04-08",
+      "count": 13
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-04-09",
+      "count": 14
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-04-10",
+      "count": 26
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-04-11",
+      "count": 13
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-04-12",
+      "count": 10
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-04-13",
+      "count": 7
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-04-14",
+      "count": 10
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2025-04-15",
+      "count": 23
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2025-04-16",
+      "count": 18
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2025-04-17",
+      "count": 20
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2025-04-18",
+      "count": 21
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-04-19",
+      "count": 8
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-04-20",
+      "count": 7
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-04-21",
+      "count": 9
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2025-04-22",
+      "count": 19
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-04-23",
+      "count": 10
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-04-24",
+      "count": 12
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-04-25",
+      "count": 11
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-04-26",
+      "count": 10
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-04-27",
+      "count": 7
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-04-28",
+      "count": 8
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-04-29",
+      "count": 7
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-04-30",
+      "count": 10
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-05-01",
+      "count": 12
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-05-02",
+      "count": 10
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-05-03",
+      "count": 4
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-05-04",
+      "count": 8
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-05-05",
+      "count": 10
+    },
+    {
+      "dailyUniques": 25,
+      "date": "2025-05-06",
+      "count": 736
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-05-07",
+      "count": 17
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2025-05-08",
+      "count": 18
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-05-09",
+      "count": 15
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-05-10",
+      "count": 12
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-05-11",
+      "count": 13
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-05-12",
+      "count": 9
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-05-13",
+      "count": 15
+    },
+    {
+      "dailyUniques": 29,
+      "date": "2025-05-14",
+      "count": 30
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2025-05-15",
+      "count": 20
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2025-05-16",
+      "count": 19
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-05-17",
+      "count": 14
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-05-18",
+      "count": 13
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2025-05-19",
+      "count": 23
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2025-05-20",
+      "count": 20
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-05-21",
+      "count": 18
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-05-22",
+      "count": 11
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2025-05-23",
+      "count": 23
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-05-24",
+      "count": 16
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-05-25",
+      "count": 11
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2025-05-26",
+      "count": 17
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2025-05-27",
+      "count": 23
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-05-28",
+      "count": 17
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-05-29",
+      "count": 17
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-05-30",
+      "count": 17
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-05-31",
+      "count": 14
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-06-01",
+      "count": 11
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-06-02",
+      "count": 18
+    },
+    {
+      "dailyUniques": 28,
+      "date": "2025-06-03",
+      "count": 62
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2025-06-04",
+      "count": 66
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2025-06-05",
+      "count": 33
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-06-06",
+      "count": 47
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-06-07",
+      "count": 37
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-06-08",
+      "count": 11
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2025-06-09",
+      "count": 20
+    },
+    {
+      "dailyUniques": 102,
+      "date": "2025-06-10",
+      "count": 265
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2025-06-11",
+      "count": 168
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2025-06-12",
+      "count": 29
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2025-06-13",
+      "count": 23
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-06-14",
+      "count": 16
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-06-15",
+      "count": 10
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2025-06-16",
+      "count": 32
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2025-06-17",
+      "count": 26
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-06-18",
+      "count": 18
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-06-19",
+      "count": 20
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-06-20",
+      "count": 13
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-06-21",
+      "count": 11
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-06-22",
+      "count": 8
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-06-23",
+      "count": 15
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2025-06-24",
+      "count": 22
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2025-06-25",
+      "count": 17
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-06-26",
+      "count": 18
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-06-27",
+      "count": 13
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-06-28",
+      "count": 15
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-06-29",
+      "count": 15
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-06-30",
+      "count": 15
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-07-01",
+      "count": 14
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-07-02",
+      "count": 14
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-07-03",
+      "count": 16
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-07-04",
+      "count": 17
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-07-05",
+      "count": 12
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-07-06",
+      "count": 12
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-07-07",
+      "count": 15
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2025-07-08",
+      "count": 26
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-07-09",
+      "count": 15
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2025-07-10",
+      "count": 26
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-07-11",
+      "count": 13
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-07-12",
+      "count": 10
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-07-13",
+      "count": 12
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-07-14",
+      "count": 18
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2025-07-15",
+      "count": 22
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-07-16",
+      "count": 15
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-07-17",
+      "count": 14
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-07-18",
+      "count": 11
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-07-19",
+      "count": 12
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-07-20",
+      "count": 16
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-07-21",
+      "count": 13
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-07-22",
+      "count": 21
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-07-23",
+      "count": 14
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-07-24",
+      "count": 12
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-07-25",
+      "count": 15
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-07-26",
+      "count": 12
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-07-27",
+      "count": 11
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-07-28",
+      "count": 20
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-07-29",
+      "count": 14
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-07-30",
+      "count": 12
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-07-31",
+      "count": 10
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-08-01",
+      "count": 14
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-08-02",
+      "count": 9
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-08-03",
+      "count": 12
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-08-04",
+      "count": 13
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-08-05",
+      "count": 13
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-08-06",
+      "count": 17
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-08-07",
+      "count": 8
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-08-08",
+      "count": 10
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-08-09",
+      "count": 8
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2025-08-10",
+      "count": 17
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-08-11",
+      "count": 15
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-08-12",
+      "count": 19
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-08-13",
+      "count": 18
+    },
+    {
+      "dailyUniques": 1,
+      "date": "2025-08-14",
+      "count": 1
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-08-15",
+      "count": 11
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-08-16",
+      "count": 12
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-08-17",
+      "count": 10
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2025-08-18",
+      "count": 22
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-08-19",
+      "count": 15
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2025-08-20",
+      "count": 48
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-08-21",
+      "count": 15
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-08-22",
+      "count": 12
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-08-23",
+      "count": 19
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-08-24",
+      "count": 16
+    },
+    {
+      "dailyUniques": 24,
+      "date": "2025-08-25",
+      "count": 28
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2025-08-26",
+      "count": 20
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-08-27",
+      "count": 10
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-08-28",
+      "count": 19
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-08-29",
+      "count": 12
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2025-08-30",
+      "count": 11
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-08-31",
+      "count": 10
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-09-01",
+      "count": 12
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-09-02",
+      "count": 13
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-09-03",
+      "count": 13
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-09-04",
+      "count": 18
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-09-05",
+      "count": 105
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-09-06",
+      "count": 8
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-09-07",
+      "count": 7
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-09-08",
+      "count": 162
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-09-09",
+      "count": 9
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-09-10",
+      "count": 11
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-09-11",
+      "count": 7
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-09-12",
+      "count": 10
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-09-13",
+      "count": 5
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-09-14",
+      "count": 7
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-09-15",
+      "count": 11
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-09-16",
+      "count": 6
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-09-17",
+      "count": 8
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-09-18",
+      "count": 11
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-09-19",
+      "count": 13
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-09-20",
+      "count": 14
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-09-21",
+      "count": 5
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-09-22",
+      "count": 13
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-09-23",
+      "count": 12
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-09-24",
+      "count": 14
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2025-09-25",
+      "count": 17
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-09-26",
+      "count": 7
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-09-27",
+      "count": 5
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-09-28",
+      "count": 12
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-09-29",
+      "count": 10
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2025-09-30",
+      "count": 20
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-10-01",
+      "count": 12
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-10-02",
+      "count": 8
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-10-03",
+      "count": 13
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-10-04",
+      "count": 9
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-10-05",
+      "count": 8
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-10-06",
+      "count": 10
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-10-07",
+      "count": 11
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-10-08",
+      "count": 8
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-10-09",
+      "count": 11
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-10-10",
+      "count": 9
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-10-11",
+      "count": 9
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-10-12",
+      "count": 11
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-10-13",
+      "count": 16
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2025-10-14",
+      "count": 25
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-10-15",
+      "count": 11
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2025-10-16",
+      "count": 35
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-10-17",
+      "count": 13
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-10-18",
+      "count": 8
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-10-19",
+      "count": 5
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-10-20",
+      "count": 9
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-10-21",
+      "count": 19
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2025-10-22",
+      "count": 18
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-10-23",
+      "count": 7
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-10-24",
+      "count": 13
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-10-25",
+      "count": 13
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-10-26",
+      "count": 18
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-10-27",
+      "count": 10
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2025-10-28",
+      "count": 26
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-10-29",
+      "count": 11
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-10-30",
+      "count": 16
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-10-31",
+      "count": 13
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-11-01",
+      "count": 9
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2025-11-02",
+      "count": 13
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-11-03",
+      "count": 32
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2025-11-04",
+      "count": 70
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2025-11-05",
+      "count": 37
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-11-06",
+      "count": 22
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-11-07",
+      "count": 15
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-11-08",
+      "count": 11
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-11-09",
+      "count": 11
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-11-10",
+      "count": 23
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2025-11-11",
+      "count": 22
+    },
+    {
+      "dailyUniques": 29,
+      "date": "2025-11-12",
+      "count": 35
+    },
+    {
+      "dailyUniques": 26,
+      "date": "2025-11-13",
+      "count": 41
+    },
+    {
+      "dailyUniques": 26,
+      "date": "2025-11-14",
+      "count": 35
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-11-15",
+      "count": 11
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-11-16",
+      "count": 8
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-11-17",
+      "count": 9
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-11-18",
+      "count": 15
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-11-19",
+      "count": 10
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2025-11-20",
+      "count": 13
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-11-21",
+      "count": 8
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-11-22",
+      "count": 7
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-11-23",
+      "count": 9
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2025-11-24",
+      "count": 20
+    },
+    {
+      "dailyUniques": 56,
+      "date": "2025-11-25",
+      "count": 359
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-11-26",
+      "count": 24
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2025-11-27",
+      "count": 27
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-11-28",
+      "count": 8
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-11-29",
+      "count": 13
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2025-11-30",
+      "count": 7
+    },
+    {
+      "dailyUniques": 26,
+      "date": "2025-12-01",
+      "count": 40
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-12-02",
+      "count": 19
+    },
+    {
+      "dailyUniques": 50,
+      "date": "2025-12-03",
+      "count": 82
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-12-04",
+      "count": 16
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-12-05",
+      "count": 17
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-12-06",
+      "count": 9
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-12-07",
+      "count": 10
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-12-08",
+      "count": 8
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-12-09",
+      "count": 12
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2025-12-10",
+      "count": 15
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-12-11",
+      "count": 12
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-12-12",
+      "count": 14
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2025-12-13",
+      "count": 13
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-12-14",
+      "count": 10
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2025-12-15",
+      "count": 18
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-12-16",
+      "count": 17
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-12-17",
+      "count": 10
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-12-18",
+      "count": 13
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2025-12-19",
+      "count": 14
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2025-12-20",
+      "count": 27
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-12-21",
+      "count": 8
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-12-22",
+      "count": 11
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2025-12-23",
+      "count": 22
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2025-12-24",
+      "count": 9
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-12-25",
+      "count": 11
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-12-26",
+      "count": 11
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2025-12-27",
+      "count": 11
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2025-12-28",
+      "count": 6
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2025-12-29",
+      "count": 9
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-12-30",
+      "count": 11
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2025-12-31",
+      "count": 10
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2026-01-01",
+      "count": 11
+    },
+    {
+      "dailyUniques": 5,
+      "date": "2026-01-02",
+      "count": 6
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2026-01-03",
+      "count": 7
+    },
+    {
+      "dailyUniques": 4,
+      "date": "2026-01-04",
+      "count": 4
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2026-01-05",
+      "count": 18
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2026-01-06",
+      "count": 11
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2026-01-07",
+      "count": 11
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-01-08",
+      "count": 18
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2026-01-09",
+      "count": 7
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2026-01-10",
+      "count": 10
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2026-01-11",
+      "count": 18
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2026-01-12",
+      "count": 20
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2026-01-13",
+      "count": 15
+    },
+    {
+      "dailyUniques": 7,
+      "date": "2026-01-14",
+      "count": 8
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-01-15",
+      "count": 24
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2026-01-16",
+      "count": 14
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2026-01-17",
+      "count": 13
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2026-01-18",
+      "count": 12
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2026-01-19",
+      "count": 20
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2026-01-20",
+      "count": 15
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2026-01-21",
+      "count": 13
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2026-01-22",
+      "count": 16
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2026-01-23",
+      "count": 30
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2026-01-24",
+      "count": 20
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2026-01-25",
+      "count": 26
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-01-26",
+      "count": 15
+    },
+    {
+      "dailyUniques": 24,
+      "date": "2026-01-27",
+      "count": 29
+    },
+    {
+      "dailyUniques": 31,
+      "date": "2026-01-28",
+      "count": 40
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-01-29",
+      "count": 23
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-01-30",
+      "count": 23
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-01-31",
+      "count": 24
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-02-01",
+      "count": 20
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-02-02",
+      "count": 22
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-02-03",
+      "count": 32
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-02-04",
+      "count": 22
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-02-05",
+      "count": 22
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2026-02-06",
+      "count": 18
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-02-07",
+      "count": 20
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2026-02-08",
+      "count": 19
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-02-09",
+      "count": 21
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-02-10",
+      "count": 24
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-02-11",
+      "count": 23
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2026-02-12",
+      "count": 15
+    },
+    {
+      "dailyUniques": 10,
+      "date": "2026-02-13",
+      "count": 15
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2026-02-14",
+      "count": 13
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2026-02-15",
+      "count": 27
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-02-16",
+      "count": 22
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2026-02-17",
+      "count": 18
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2026-02-18",
+      "count": 27
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2026-02-19",
+      "count": 19
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2026-02-20",
+      "count": 21
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-02-21",
+      "count": 27
+    },
+    {
+      "dailyUniques": 24,
+      "date": "2026-02-22",
+      "count": 32
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-02-23",
+      "count": 21
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2026-02-24",
+      "count": 24
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-02-25",
+      "count": 24
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2026-02-26",
+      "count": 29
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2026-02-27",
+      "count": 21
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-02-28",
+      "count": 20
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-03-01",
+      "count": 23
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2026-03-02",
+      "count": 27
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-03-03",
+      "count": 22
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2026-03-04",
+      "count": 32
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-03-05",
+      "count": 22
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2026-03-06",
+      "count": 56
+    },
+    {
+      "dailyUniques": 75,
+      "date": "2026-03-07",
+      "count": 143
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-03-08",
+      "count": 23
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2026-03-09",
+      "count": 28
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2026-03-10",
+      "count": 43
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-03-11",
+      "count": 19
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2026-03-12",
+      "count": 31
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-03-13",
+      "count": 25
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2026-03-14",
+      "count": 34
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2026-03-15",
+      "count": 17
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-03-16",
+      "count": 21
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-03-17",
+      "count": 22
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-03-18",
+      "count": 25
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-03-19",
+      "count": 22
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2026-03-20",
+      "count": 13
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2026-03-21",
+      "count": 19
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2026-03-22",
+      "count": 14
+    },
+    {
+      "dailyUniques": 22,
+      "date": "2026-03-23",
+      "count": 32
+    },
+    {
+      "dailyUniques": 22,
+      "date": "2026-03-24",
+      "count": 31
+    },
+    {
+      "dailyUniques": 22,
+      "date": "2026-03-25",
+      "count": 41
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2026-03-26",
+      "count": 17
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-03-27",
+      "count": 21
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-03-28",
+      "count": 22
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-03-29",
+      "count": 27
+    },
+    {
+      "dailyUniques": 24,
+      "date": "2026-03-30",
+      "count": 35
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-03-31",
+      "count": 22
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-04-01",
+      "count": 22
+    },
+    {
+      "dailyUniques": 22,
+      "date": "2026-04-02",
+      "count": 32
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-04-03",
+      "count": 21
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2026-04-04",
+      "count": 25
+    },
+    {
+      "dailyUniques": 6,
+      "date": "2026-04-05",
+      "count": 7
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-04-06",
+      "count": 23
+    },
+    {
+      "dailyUniques": 25,
+      "date": "2026-04-07",
+      "count": 34
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-04-08",
+      "count": 21
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2026-04-09",
+      "count": 26
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2026-04-10",
+      "count": 35
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-04-11",
+      "count": 23
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2026-04-12",
+      "count": 31
+    },
+    {
+      "dailyUniques": 26,
+      "date": "2026-04-13",
+      "count": 37
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2026-04-14",
+      "count": 33
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2026-04-15",
+      "count": 29
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-04-16",
+      "count": 25
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-04-17",
+      "count": 26
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-04-18",
+      "count": 27
+    },
+    {
+      "dailyUniques": 22,
+      "date": "2026-04-19",
+      "count": 31
+    },
+    {
+      "dailyUniques": 38,
+      "date": "2026-04-20",
+      "count": 52
+    },
+    {
+      "dailyUniques": 45,
+      "date": "2026-04-21",
+      "count": 62
+    },
+    {
+      "dailyUniques": 40,
+      "date": "2026-04-22",
+      "count": 62
+    },
+    {
+      "dailyUniques": 37,
+      "date": "2026-04-23",
+      "count": 61
+    },
+    {
+      "dailyUniques": 35,
+      "date": "2026-04-24",
+      "count": 61
+    },
+    {
+      "dailyUniques": 25,
+      "date": "2026-04-25",
+      "count": 37
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2026-04-26",
+      "count": 44
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-04-27",
+      "count": 34
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-04-28",
+      "count": 25
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-04-29",
+      "count": 25
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-04-30",
+      "count": 206
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-05-01",
+      "count": 195
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-05-02",
+      "count": 29
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2026-05-03",
+      "count": 35
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-05-04",
+      "count": 24
+    },
+    {
+      "dailyUniques": 22,
+      "date": "2026-05-05",
+      "count": 30
+    },
+    {
+      "dailyUniques": 25,
+      "date": "2026-05-06",
+      "count": 36
+    },
+    {
+      "dailyUniques": 26,
+      "date": "2026-05-07",
+      "count": 38
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-05-08",
+      "count": 20
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2026-05-09",
+      "count": 28
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2026-05-10",
+      "count": 28
+    },
+    {
+      "dailyUniques": 26,
+      "date": "2026-05-11",
+      "count": 39
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-05-12",
+      "count": 24
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-05-13",
+      "count": 25
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2026-05-14",
+      "count": 46
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2026-05-15",
+      "count": 10
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2026-05-16",
+      "count": 17
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2026-05-17",
+      "count": 18
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2026-05-18",
+      "count": 27
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2026-05-19",
+      "count": 26
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-05-20",
+      "count": 24
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-05-21",
+      "count": 22
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2026-05-22",
+      "count": 37
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2026-05-23",
+      "count": 31
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2026-05-24",
+      "count": 34
+    },
+    {
+      "dailyUniques": 78,
+      "date": "2026-05-25",
+      "count": 168
+    },
+    {
+      "dailyUniques": 225,
+      "date": "2026-05-26",
+      "count": 1226
+    },
+    {
+      "dailyUniques": 328,
+      "date": "2026-05-27",
+      "count": 1149
+    },
+    {
+      "dailyUniques": 177,
+      "date": "2026-05-28",
+      "count": 455
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-05-29",
+      "count": 25
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-05-30",
+      "count": 28
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-05-31",
+      "count": 24
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2026-06-01",
+      "count": 26
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-06-02",
+      "count": 64
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-06-03",
+      "count": 26
+    },
+    {
+      "dailyUniques": 25,
+      "date": "2026-06-04",
+      "count": 40
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-06-05",
+      "count": 32
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2026-06-06",
+      "count": 21
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-06-07",
+      "count": 28
+    },
+    {
+      "dailyUniques": 26,
+      "date": "2026-06-08",
+      "count": 47
+    },
+    {
+      "dailyUniques": 38,
+      "date": "2026-06-09",
+      "count": 82
+    },
+    {
+      "dailyUniques": 25,
+      "date": "2026-06-10",
+      "count": 55
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2026-06-11",
+      "count": 52
+    },
+    {
+      "dailyUniques": 24,
+      "date": "2026-06-12",
+      "count": 55
+    },
+    {
+      "dailyUniques": 22,
+      "date": "2026-06-13",
+      "count": 75
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-06-14",
+      "count": 60
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-06-15",
+      "count": 30
+    },
+    {
+      "dailyUniques": 25,
+      "date": "2026-06-16",
+      "count": 38
+    },
+    {
+      "dailyUniques": 24,
+      "date": "2026-06-17",
+      "count": 29
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2026-06-18",
+      "count": 33
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-06-19",
+      "count": 26
+    },
+    {
+      "dailyUniques": 26,
+      "date": "2026-06-20",
+      "count": 59
+    },
+    {
+      "dailyUniques": 49,
+      "date": "2026-06-21",
+      "count": 78
+    },
+    {
+      "dailyUniques": 29,
+      "date": "2026-06-22",
+      "count": 66
+    },
+    {
+      "dailyUniques": 25,
+      "date": "2026-06-23",
+      "count": 47
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-06-24",
+      "count": 20
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-06-25",
+      "count": 29
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2026-06-26",
+      "count": 12
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2026-06-27",
+      "count": 26
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-06-28",
+      "count": 26
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-06-29",
+      "count": 32
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-06-30",
+      "count": 25
+    },
+    {
+      "dailyUniques": 24,
+      "date": "2026-07-01",
+      "count": 34
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-07-02",
+      "count": 31
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-07-03",
+      "count": 17
+    },
+    {
+      "dailyUniques": 26,
+      "date": "2026-07-04",
+      "count": 39
+    },
+    {
+      "dailyUniques": 22,
+      "date": "2026-07-05",
+      "count": 25
+    },
+    {
+      "dailyUniques": 27,
+      "date": "2026-07-06",
+      "count": 32
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-07-07",
+      "count": 26
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-07-08",
+      "count": 15
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2026-07-09",
+      "count": 30
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-07-10",
+      "count": 18
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2026-07-11",
+      "count": 22
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2026-07-12",
+      "count": 22
+    },
+    {
+      "dailyUniques": 26,
+      "date": "2026-07-13",
+      "count": 39
+    },
+    {
+      "dailyUniques": 88,
+      "date": "2026-07-14",
+      "count": 146
+    },
+    {
+      "dailyUniques": 30,
+      "date": "2026-07-15",
+      "count": 41
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2026-07-16",
+      "count": 29
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2026-07-17",
+      "count": 27
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-07-18",
+      "count": 18
+    },
+    {
+      "dailyUniques": 8,
+      "date": "2026-07-19",
+      "count": 9
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2026-07-20",
+      "count": 24
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2026-07-21",
+      "count": 35
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2026-07-22",
+      "count": 24
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2026-07-23",
+      "count": 24
+    },
+    {
+      "dailyUniques": 47,
+      "date": "2026-07-24",
+      "count": 67
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2026-07-25",
+      "count": 41
+    },
+    {
+      "dailyUniques": 24,
+      "date": "2026-07-26",
+      "count": 33
+    },
+    {
+      "dailyUniques": 23,
+      "date": "2026-07-27",
+      "count": 33
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-07-28",
+      "count": 22
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-07-29",
+      "count": 24
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2026-07-30",
+      "count": 16
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2026-07-31",
+      "count": 26
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2026-08-01",
+      "count": 13
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-08-02",
+      "count": 21
+    },
+    {
+      "dailyUniques": 24,
+      "date": "2026-08-03",
+      "count": 30
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-08-04",
+      "count": 20
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2026-08-05",
+      "count": 29
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2026-08-06",
+      "count": 34
+    },
+    {
+      "dailyUniques": 20,
+      "date": "2026-08-07",
+      "count": 38
+    },
+    {
+      "dailyUniques": 24,
+      "date": "2026-08-08",
+      "count": 38
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2026-08-09",
+      "count": 17
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-08-10",
+      "count": 27
+    },
+    {
+      "dailyUniques": 14,
+      "date": "2026-08-11",
+      "count": 24
+    },
+    {
+      "dailyUniques": 9,
+      "date": "2026-08-12",
+      "count": 13
+    },
+    {
+      "dailyUniques": 21,
+      "date": "2026-08-13",
+      "count": 33
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-08-14",
+      "count": 21
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-08-15",
+      "count": 28
+    },
+    {
+      "dailyUniques": 13,
+      "date": "2026-08-16",
+      "count": 19
+    },
+    {
+      "dailyUniques": 19,
+      "date": "2026-08-17",
+      "count": 24
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-08-18",
+      "count": 22
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-08-19",
+      "count": 25
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-08-20",
+      "count": 28
+    },
+    {
+      "dailyUniques": 28,
+      "date": "2026-08-21",
+      "count": 29
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-08-22",
+      "count": 20
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-08-23",
+      "count": 17
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-08-24",
+      "count": 19
+    },
+    {
+      "dailyUniques": 43,
+      "date": "2026-08-25",
+      "count": 59
+    },
+    {
+      "dailyUniques": 24,
+      "date": "2026-08-26",
+      "count": 32
+    },
+    {
+      "dailyUniques": 15,
+      "date": "2026-08-27",
+      "count": 24
+    },
+    {
+      "dailyUniques": 16,
+      "date": "2026-08-28",
+      "count": 25
+    },
+    {
+      "dailyUniques": 12,
+      "date": "2026-08-29",
+      "count": 14
+    },
+    {
+      "dailyUniques": 11,
+      "date": "2026-08-30",
+      "count": 13
+    },
+    {
+      "dailyUniques": 104,
+      "date": "2026-08-31",
+      "count": 209
+    },
+    {
+      "dailyUniques": 47,
+      "date": "2026-09-01",
+      "count": 219
+    },
+    {
+      "dailyUniques": 40,
+      "date": "2026-09-02",
+      "count": 53
+    },
+    {
+      "dailyUniques": 18,
+      "date": "2026-09-03",
+      "count": 22
+    },
+    {
+      "dailyUniques": 17,
+      "date": "2026-09-04",
+      "count": 18
     }
   ]
 }
