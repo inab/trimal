@@ -4487,6 +4487,11 @@
         "count": 148,
         "uniques": 107,
         "request_date": "2026-10-05"
+      },
+      {
+        "count": 146,
+        "uniques": 107,
+        "request_date": "2026-10-06"
       }
     ]
   },
@@ -5298,6 +5303,11 @@
         "count": 6,
         "uniques": 4,
         "request_date": "2026-10-05"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2026-10-06"
       }
     ]
   },
@@ -9679,6 +9689,11 @@
         "count": 11,
         "uniques": 8,
         "request_date": "2026-10-05"
+      },
+      {
+        "count": 12,
+        "uniques": 9,
+        "request_date": "2026-10-06"
       }
     ]
   },
@@ -10814,6 +10829,17 @@
         "count": 2,
         "uniques": 2,
         "request_date": "2025-08-25"
+      }
+    ]
+  },
+  {
+    "path": "/inab/trimal/commit/5b5f730430843d39c579acdf8094969780c3c23e",
+    "title": "/commit/5b5f730430843d39c579acdf8094969780c3c23e",
+    "views": [
+      {
+        "count": 5,
+        "uniques": 4,
+        "request_date": "2026-10-06"
       }
     ]
   },
@@ -15928,6 +15954,11 @@
         "count": 14,
         "uniques": 11,
         "request_date": "2026-10-05"
+      },
+      {
+        "count": 15,
+        "uniques": 12,
+        "request_date": "2026-10-06"
       }
     ]
   },
@@ -18818,6 +18849,11 @@
         "count": 8,
         "uniques": 6,
         "request_date": "2026-10-05"
+      },
+      {
+        "count": 9,
+        "uniques": 7,
+        "request_date": "2026-10-06"
       }
     ]
   },
@@ -22220,6 +22256,11 @@
         "count": 40,
         "uniques": 32,
         "request_date": "2026-10-05"
+      },
+      {
+        "count": 40,
+        "uniques": 34,
+        "request_date": "2026-10-06"
       }
     ]
   },
@@ -28073,6 +28114,11 @@
         "count": 68,
         "uniques": 52,
         "request_date": "2026-10-05"
+      },
+      {
+        "count": 68,
+        "uniques": 50,
+        "request_date": "2026-10-06"
       }
     ]
   },
@@ -33754,6 +33800,11 @@
         "count": 9,
         "uniques": 7,
         "request_date": "2026-10-05"
+      },
+      {
+        "count": 9,
+        "uniques": 7,
+        "request_date": "2026-10-06"
       }
     ]
   },
@@ -45045,6 +45096,11 @@
         "count": 6,
         "uniques": 4,
         "request_date": "2026-10-05"
+      },
+      {
+        "count": 6,
+        "uniques": 4,
+        "request_date": "2026-10-06"
       }
     ]
   },
